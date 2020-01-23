@@ -3,68 +3,36 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>trial_screen_days</key>
+    <key>user_rules_format</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 DAGS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
+        <string>1 regel aktiveret</string>
         <key>other</key>
-        <string>%d DAGES GRATIS PRØVEPERIODE MED FULD ADGANG</string>
+        <string>%d regler aktiveret</string>
       </dict>
     </dict>
-    <key>trial_screen_weeks</key>
+    <key>safari_filters_format</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
       <dict>
         <key>NSStringFormatSpecTypeKey</key>
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 UGES GRATIS PRØVEPERIODE MED FULD ADGANG</string>
+        <string>1 filter aktiveret</string>
         <key>other</key>
-        <string>%d UGERS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
-      </dict>
-    </dict>
-    <key>trial_screen_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>1 MÅNEDS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
-        <key>other</key>
-        <string>%d MÅNEDERS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
-      </dict>
-    </dict>
-    <key>trial_screen_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>1 ÅRS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
-        <key>other</key>
-        <string>%d ÅRS GRATIS PRØVEPERIODE MED FULD ADGANG</string>
+        <string>%d filtre aktiveret</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -129,70 +97,6 @@
         <string>Start din gratis prøveperiode på et år.</string>
         <key>other</key>
         <string>Start din gratis prøveperiode på %d år.</string>
-      </dict>
-    </dict>
-    <key>trial_label_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Gratis prøveperiode på en dag</string>
-        <key>other</key>
-        <string>Gratis prøveperiode på %d dage</string>
-      </dict>
-    </dict>
-    <key>trial_label_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Gratis prøveperiode på en uge</string>
-        <key>other</key>
-        <string>Gratis prøveperiode på %d uger</string>
-      </dict>
-    </dict>
-    <key>trial_label_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Gratis prøveperiode på en måned</string>
-        <key>other</key>
-        <string>Gratis prøveperiode på %d måneder</string>
-      </dict>
-    </dict>
-    <key>trial_label_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Gratis prøveperiode på et år</string>
-        <key>other</key>
-        <string>Gratis prøveperiode på %d år</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

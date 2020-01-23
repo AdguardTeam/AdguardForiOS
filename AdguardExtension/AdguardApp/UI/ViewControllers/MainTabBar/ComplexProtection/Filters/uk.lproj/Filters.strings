@@ -31,17 +31,11 @@
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "Версія";
 
-/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Використовуйте власні фільтри тут";
-
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Фільтри";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "ДОДАТИ";
-
-/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Отримати Преміум";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "СКАСУВАТИ";
@@ -57,9 +51,6 @@
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Кількість правил:";
-
-/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
-"xS8-f2-3yC.text" = "Назва фільтру";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
 "zcB-eh-Ou4.placeholder" = "Введіть назву фільтру:";

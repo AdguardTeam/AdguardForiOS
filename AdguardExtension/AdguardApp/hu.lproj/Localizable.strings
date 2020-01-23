@@ -16,9 +16,6 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Nem lehetett betölteni a szűrőket a Safariba. Ezért a változások nem léptek életbe.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "A szűrőket nem sikerült betölteni a Safariba. Próbálja üríteni a szabályok és kivételek listáját, vagy módosítsa a felhasznált szűrőket.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NEM";
 
@@ -27,9 +24,6 @@
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Kivételek";
-
-/* (User Filter Screen) Title */
-"user_filter_title" = "Felhasználói szűrő";
 
 /* YES Button caption in alert */
 "common_action_yes" = "Igen";
@@ -73,10 +67,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Engedélyezett szűrők: %d/%d";
 
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "Szűrők frissítve %@";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard letiltja a szűrést a Safari webhelyen.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard engedélyezi a szűrést a Safari-ban csak ezeken a webhelyeken.";
@@ -84,26 +76,11 @@
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Szabály hozzáadása";
 
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Domain hozzáadása";
-
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Szabály:";
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domain:";
-
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Import";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Import";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Export";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Export";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Jelentse be a hibát a GitHub-on";
@@ -119,9 +96,6 @@
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "verzió %@";
-
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "frissítve %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibilis a „Personal VPN” alkalmazással";
@@ -157,9 +131,6 @@
 "safe_dns_description" = "DNS szolgáltatás a SafeDNS által";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "Titkosítás";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "Biztonság";
 
 /* Dns Feature Name */
@@ -173,9 +144,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Hirdetésszűrés";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "Nem hagyja, hogy harmadik felek kémkedjenek a böngészési tevékenységedben";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokkolja az ismert adathalász domaineket";
@@ -192,20 +160,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokkolja a hirdetéseket és a nyomkövető szervereket";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "Nincs kiválasztott szerver";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Engedélyezve  %1$d az összesből %2$d";
 
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "A vágólapra másolva";
-
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Probléma akadt a VPN beállításokkal, kérem vegye fel a kapcsolatot a támogatással.";
-
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "Most telepítettem azAdGuard hirdetés blokkolót iOS-re.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "Ha te is szeretnéd élvezni a hirdetésmentes böngészést, próbáld ki:";

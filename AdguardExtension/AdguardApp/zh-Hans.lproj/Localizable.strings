@@ -13,17 +13,11 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "无法转换过滤器规则。规则文本无效。";
 
-/* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "无法转换用户过滤规则。";
-
 /* Alert title. On error. */
 "common_error_title" = "错误";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "无法加载过滤器到 Safari。因此，无法应用您的最近更新。";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "无法加载过滤器到 Safari。请尝试清除您的规则和白名单，或更改使用的过滤器设置。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -34,14 +28,8 @@
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "白名单";
 
-/* (User Filter Screen) Title */
-"user_filter_title" = "用户过滤器";
-
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "在此输入您的自定义规则，以换行符分隔";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "在此输入由换行符分隔的域名，对于它们 AdGuard 将禁用 Safari 过滤。";
 
 /* YES Button caption in alert */
 "common_action_yes" = "是";
@@ -94,16 +82,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "已开启的过滤器：%d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "已禁用";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "过滤器已更新：%@";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "输入您的自定义规则于此<br>阅读此<a href=\"%@\">注意事项以获规则语法</a>。";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "在这里输入域名。AdGuard 将在 Safari 中禁用这些网站的过滤。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "在这里输入域名。AdGuard将仅在Safari中对这些网站进行过滤。";
@@ -113,9 +93,6 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "添加规则";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "添加域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -129,26 +106,11 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "域:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "导入";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "导入";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "导出";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "导出";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "报告错误拦截";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "在 GitHub 上报告错误";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "联系支持";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "导出日志";
@@ -168,9 +130,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "版本 %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "更新于 %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "分离隧道，与 “Personal VPN” 应用程序兼容";
 
@@ -179,9 +138,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全隧道（不显示 VPN 图标），与其他 VPN 应用程序不兼容，不太稳定";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "已禁用";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS 是又一种可以保护您的隐私免受各类计数器、跟踪系统与钓鱼网站侵害的替代方案";
@@ -208,9 +164,6 @@
 "safe_dns_description" = "由 SafeDNS 提供的 DNS 服务";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "加密";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "安全";
 
 /* Dns Feature Name */
@@ -224,9 +177,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "广告拦截";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "不允许第三方监视您的浏览活动性";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "拦截已知的网络钓鱼与其它危险域名";
@@ -243,14 +193,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "拦截广告和跟踪服务器";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "没有选择服务器";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已开启 %1$d / %2$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "复制至剪贴板";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "常规";
@@ -288,29 +232,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "请稍候...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "我刚安装了用于 iOS 的广告拦截程序 AdGuard。 ";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "如果您要享受无广告的网络世界，请检查：";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "主题";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "其它";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "高级";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "内容拦截器";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "过滤器：";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "常规设置";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 条规则正被使用";
@@ -329,9 +261,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "在您使用此动作扩展之前，%1$@ 必须先执行初始化配置。请启动主 %2$@ 应用以允许其执行此动作。";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "无法向支持团队发送消息。您尚未配置电子邮件帐户。";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "请注意，内容拦截器已禁用。 这意味着无论 AdGuard 设置如何，都不会过滤广告。 请在 Safari 设置中启用 AdGuard 内容拦截器以开始过滤。";

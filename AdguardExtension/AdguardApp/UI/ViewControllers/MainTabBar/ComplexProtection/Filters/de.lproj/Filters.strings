@@ -4,11 +4,20 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "Einen Filter hinzufügen";
 
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "Schutz in Safari";
+
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Name:";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
 "E3e-Mc-RhD.title" = "Filter";
+
+/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard funktioniert nicht auf den Webseiten aus dieser Liste";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
+"Lq2-mi-McV.text" = "Filter";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "Neuer benutzerdefinierter Filter";
@@ -16,11 +25,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "ABBRECHEN";
 
+/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "Dieses Modul blockiert Anzeigen und Tracker auf Webseiten in Safari";
+
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Anzahl Regeln: ";
+"RJU-32-r8h.text" = "Anzahl von Regeln: ";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "Aktualisiert";
+
+/* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
+"VCK-db-aeg.text" = "Benutzerregeln";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
 "Ve5-DF-RNB.text" = "Webseite";
@@ -31,8 +46,11 @@
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "Version";
 
-/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Verwenden Sie hier Ihre eigenen Filter";
+/* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Geben Sie hier Ihre eigenen Filter-Listen ein";
+
+/* Class = "UILabel"; text = "Safari Whitelist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "Safari Whitelist";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filter";
@@ -40,26 +58,20 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "HINZUFÜGEN";
 
-/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Premium erhalten";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ABBRECHEN";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
-"mXe-eu-cfH.normalTitle" = "Löschen";
+"mXe-eu-cfH.normalTitle" = "LÖSCHEN";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "Weiter";
+"nch-wu-mKC.normalTitle" = "WEITER";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
 "t8x-PU-hFK.text" = "Startseite: ";
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Anzahl von Regeln:";
-
-/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
-"xS8-f2-3yC.text" = "Name des Filters";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
 "zcB-eh-Ou4.placeholder" = "Filtername eingeben:";

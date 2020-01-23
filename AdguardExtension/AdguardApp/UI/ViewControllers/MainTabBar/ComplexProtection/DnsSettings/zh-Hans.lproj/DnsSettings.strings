@@ -1,14 +1,8 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
 "03E-rd-Slw.normalTitle" = "常规";
 
-/* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "选择服务器";
-
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "名称";
-
-/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "3b3-d2-03o"; */
-"3b3-d2-03o.text" = "不兼容其它 VPN 应用";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "设置自定义 DNS 设置";
@@ -16,65 +10,17 @@
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// 或 tls://";
 
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "6db-7F-O0d"; */
-"6db-7F-O0d.title" = "隧道模式";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "保存";
-
-/* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "6y8-H6-3Rj"; */
-"6y8-H6-3Rj.text" = "不兼容其它 VPN 应用，不稳定";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "保存并选择";
 
-/* Class = "UINavigationItem"; title = "DNS Privacy"; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "DNS 隐私";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
-"EkI-hK-XDG.text" = "地址";
-
-/* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
-"IVH-4P-uIk.text" = "域";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "Ina-3I-qVn"; */
-"Ina-3I-qVn.text" = "DNS 隐私";
-
-/* Class = "UILabel"; text = "Type"; ObjectID = "Itg-uX-XAd"; */
-"Itg-uX-XAd.text" = "类型";
-
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "选择此服务器";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "服务器";
-
-/* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
-"Mni-fx-xGW.text" = "时间";
-
-/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "OJU-gT-SmT"; */
-"OJU-gT-SmT.text" = "分离隧道";
-
-/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "SL2-Kq-gMW"; */
-"SL2-Kq-gMW.text" = "兼容 \"Personal VPN\" 应用程序";
-
-/* Class = "UILabel"; text = "DNS protocol can be exploited by ISPs and third parties to spy on your traffic or even hijack it. We protect your privacy by encrypting your DNS connections, just select any DNS server from the list."; ObjectID = "SMK-iz-f9G"; */
-"SMK-iz-f9G.text" = "ISP 和第三方可以利用 DNS 协议监视您的流量甚至劫持它。 我们通过加密您的 DNS 连接来保护您的隐私，只需从列表中选择任何 DNS 服务器即可。";
-
-/* Class = "UILabel"; text = "Responses"; ObjectID = "TQm-1H-bNl"; */
-"TQm-1H-bNl.text" = "响应";
-
-/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
-"TTc-NW-AJa.text" = "完全隧道";
-
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
-"VxP-fd-4kT.text" = "在分离隧道模式下，AdGuard 与所谓的 “Personal VPN” 应用程序兼容。作为权衡，在这种模式下，如果连接不良，可能会被系统绕过";
-
-/* Class = "UILabel"; text = "DNS Requests Log"; ObjectID = "WsR-6Z-pxB"; */
-"WsR-6Z-pxB.text" = "DNS 请求日志";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "取消";
@@ -88,9 +34,6 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "服务器";
 
-/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
-"d69-Gd-SZp.text" = "完全隧道（不显示 VPN 图标）";
-
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 服务器地址";
 
@@ -103,32 +46,17 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "Monitor all DNS requests on your device and manage them"; ObjectID = "hoU-PM-icY"; */
-"hoU-PM-icY.text" = "监控设备上的所有 DNS 请求并对其进行管理";
-
-/* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "DNS 请求日志";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "取消";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "名称";
 
-/* Class = "UIButton"; normalTitle = "Add custom DNS server"; ObjectID = "mBx-dq-oa2"; */
-"mBx-dq-oa2.normalTitle" = "添加自定义 DNS 服务器";
-
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "网站";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "删除";
-
-/* Class = "UILabel"; text = "Tunnel Mode"; ObjectID = "pPC-fU-UPD"; */
-"pPC-fU-UPD.text" = "隧道模式";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "服务器";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "服务器名称";
@@ -138,9 +66,3 @@
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "选择协议";
-
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
-"ve4-Qn-Yj6.title" = "DNS 请求详情";
-
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
-"xe9-vq-pF6.text" = "已用";

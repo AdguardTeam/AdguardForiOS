@@ -14,7 +14,7 @@
 "rule_converting_error" = "フィルタルールを変換できません。 ルールテキストが無効です。";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "ユーザーフィルタルールを変換できません。";
+"filter_rules_converting_error" = "このユーザールールSafariに追加できません。";
 
 /* Alert title. On error. */
 "common_error_title" = "エラー";
@@ -23,13 +23,31 @@
 "safari_filters_loading_error" = "フィルタをSafariに読み込ませることができません。 したがって、あなたの最近の変更は適用されませんでした。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "フィルタをSafariにロードすることができません。 ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりしてみて下さい。";
+"load_to_safari_error" = "フィルタをSafariに読み込みすることができません。ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりして解決するかをお試しください。";
 
 /* NO Button caption in alert */
 "common_action_no" = "いいえ";
 
 /* Main Controller. Inverted whitelist cell caption */
 "inverted_whitelist_title" = "逆ホワイトリスト";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "変更を適用中...";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "この情報は、ブロックされたDNSリクエスト数に基づいています。統計は、ドメインがブロックされなかった場合にユーザーによってダウンロードされる広告、トラッカー、およびその他の脅威を想定して計算した推定値です（※技術的に100％正確な数を測ることは不可能です）。";
+
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ KB";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ MB";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ GB";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free" = "無料お試し";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "ホワイトリスト";
@@ -40,9 +58,6 @@
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "ここでは独自のルールを改行で区切って入力してください。";
 
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "ここに改行で区切ってドメイン名を入力できます。入力されたドメイン名に対しAdGuardはSafariフィルタリングを無効にします。";
-
 /* YES Button caption in alert */
 "common_action_yes" = "はい";
 
@@ -50,10 +65,10 @@
 "protection_enabled_caption" = "保護は有効です。";
 
 /* (MainController) login status caption on main screen */
-"protection_partly_enabled_caption" = "コンテンツブロッカーの一部がオフ\nになっています。";
+"protection_partly_enabled_caption" = "端末の設定→Safari→コンテンツ\nブロッカーでAdGuardが一部オフ\nになっています。";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "保護は無効です。";
+"protection_disabled_caption" = "端末の設定→Safari→コンテンツ\nブロッカーでAdGuardがオフに\nなっています。";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "無料お試しスタート";
@@ -100,19 +115,23 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "有効なフィルタ　%d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "無効";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "最終フィルタアップデート: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "ここでは独自のルールを入力し追加できます。<br> ルール構文に関する通知は<a href=\"%@\">こちら</a>でご覧になれます。";
+"blacklist_text_format" = "ここでは独自のルールを入力し追加できます。<br>ルール構文に関する通知は<a href=\"%@\">こちら</a>でご覧になれます。";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "ドメイン名を入力して、そこでの広告ブロックを無効化。";
+"whitelist_text" = "他の設定にかかわらず、こちらで入力したドメインへのアクセスをAdGuardはブロックしません。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "ドメイン名を入力して、それだけで広告をブロック。";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "ここにドメイン名を入力できます。AdGuardはこちらに入力されたドメイン名をブロックしません。";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text_format" = "このブラックリストは<a href=\"%@\">AdGuard DNS構文</a>をサポートします。こちらに改行で区切って入力したルールに従って、AdGuardはドメインへのコネクションをブロックします。";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "アップデート中…";
@@ -129,23 +148,17 @@
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
 
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "お使いのWi-Fi名";
+
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "ルール";
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "ドメイン";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "インポート（読み込み）";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "インポート（読み込み）";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "エクスポート（書き出し）";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "エクスポート（書き出し）";
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Wi-Fi名：";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "不適切なブロックを報告する";
@@ -154,7 +167,7 @@
 "action_bug_report" = "GitHubでバグを報告";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "サポート・お問合せ";
+"action_contact_support" = "サポートチームに連絡する";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "ログをエクスポート";
@@ -174,9 +187,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "バージョン%@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "最終更新日時 %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel、「パーソナルVPN」アプリと互換性あり";
 
@@ -185,9 +195,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (VPNアイコンなし)、他のVPNアプリと互換性なし、安定度:低い";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "無効";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNSは、さまざまなカウンタ、分析システム、フィッシングWebサイトからあなたのプライバシーを保護するための代替手段です。";
@@ -214,9 +221,6 @@
 "safe_dns_description" = "SafeDNS提供のDNSサービス";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "暗号化";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "セキュリティ";
 
 /* Dns Feature Name */
@@ -230,9 +234,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "広告ブロック";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "第三者がブラウジング行為を詮索することを防ぎます";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "既知のフィッシングとその他の危険ドメインをブロック";
@@ -249,14 +250,11 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "広告と追跡サーバーをブロック";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "サーバーが選択されていません";
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "システムDNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "有効フィルタ数：%1$d/%2$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "クリップボードにコピー済み";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "標準";
@@ -283,7 +281,7 @@
 "purchase_description_format" = "【AdGuardサブスクリプションについて】<br><br>・支払いは購入の確認時にiTunesアカウントに請求されます。<br>・サブスクリプションは、現在のサブスクリプション期間が終了する少なくとも24時間前に自動更新がオフにされない限り、自動的に更新されます。<br>・サブスクリプション更新料金は、現在の期間の終了前の24時間以内に請求されます。サブスクリプション購入後、iTunesアカウント設定においてサブスクリプション管理が可能になり、自動更新もそちらで無効にすることができます。<br><br><a href=%1$@>プライバシーポリシー</a><br><br><a href=%2$@>利用規約</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>プライバシーポリシー</a> <br><br><a href=%2$@>利用規約</a>";
+"lifetime_purchase_description_format" = "<a href=%1$@>プライバシーポリシー</a>と<br><br><a href=%2$@>利用規約</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
@@ -300,20 +298,11 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "少々お待ちください...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "私は只今、iOS用の AdGuard 広告ブロッカーをインストールしましたよ。";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "私のように広告ナシでウェブサーフィンしたいのであれば、是非こちらをチェックしてみて下さい：";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "テーマ";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "その他";
-
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "詳細設定";
 
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "コンテンツブロッカー";
@@ -321,11 +310,17 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "フィルタ：";
 
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "一般設定";
-
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "先にVPNを有効にする必要があります";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "統計をリセット";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "注：すべての統計がクリアされます。";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "リセット";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "使用ルール数：%@";
@@ -347,9 +342,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "このアクション拡張機能を使用できる前に、%1$@は初期設定を実行する必要があります。それを許可するには、メイン%2$@アプリを起動してください。";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "Eメールアカウントが設定されていないため、サポートチームにメッセージを送信できません。";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "コンテンツブロッカーは無効になっています。広告はAdGuardの設定に関わらず、フィルタリングされません。 フィルタリングを開始するには、Safariの設定でAdGuardコンテンツブロッカーを有効にしてください。";
@@ -387,12 +379,6 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "一度限りのお支払いで、すべてのデバイスでAdGuardプレミアム機能をご利用できます！";
 
-/* (TrialController) alert text title if there is no internet */
-"no_internet" = "インターネット未接続";
-
-/* (TrialController) alert text message if there is no internet */
-"no_internet_message" = "無料お試しを始めるには、インターネットに接続してください。";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "メールアドレスもしくはパスワードが間違っています";
 
@@ -405,5 +391,230 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "2段階認証トークンが無効です";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "続行することで<a href=\"%@\">規約と条件</a>および<a href=\"%@\">エンドユーザー使用許諾契約書 (EULA)</a>に同意したことになります。";
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fiの除外";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "下記のWi-Fiネットワークに対し「システム全体でブロック」はオフになります。";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "除外項目を追加する";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "モバイル通信をフイルタルング";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Wi-Fiをフィルタリング";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "モバイル通信接続時の「システム全体でブロック」";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Wi-Fi接続時の「システム全体でブロック」";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "ホワイトリスト";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "ブラックリスト";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safariユーザールール";
+
+/* (ListOfRulesModel) title for export */
+"export" = "エクスポート";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "クリア";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "保存";
+
+/* (ListOfRulesModel) title for import */
+"import" = "インポート";
+
+/* "Disabled" title */
+"disabled" = "オフ";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "ホワイトリストから除去";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "ブラックリストから除去";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "ホワイトリストに追加";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "ブラックリストに追加";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "フィッシング詐欺や他の危険なドメインをブロック。※プレミアム版で利用可";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "サードパーティのフィルタを追加。※プレミアム版で使用可";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "オーディオ・ビデオプレイヤー";
+
+/*(LogCategory) comments category*/
+"comments" = "コメント";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "カスタマーインタラクション";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "アダルト系広告";
+
+/*(LogCategory) advertising category*/
+"advertising" = "広告";
+
+/*(LogCategory) essential category*/
+"essential" = "Essential";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "サイト分析ソフト";
+
+/*(LogCategory) social media category*/
+"social_media" = "SNS";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "その他";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "ホスティング";
+
+/*(LogCategory) unknown category*/
+"unknown" = "不明";
+
+/*(LogCategory) extensions category*/
+"extensions" = "拡張機能";
+
+/*(ListOfRules) Select title */
+"common_select" = "選択";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "編集";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "削除";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "すべて選択";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "ドメインを追加する";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "新しいルールを追加する";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "ユーザールール、「システム全体でブロック」、インターフェイスおよび認証設定を含むすべての設定がリセットされます。この操作を取り消すことはできません。設定をリセットしますか？";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24時間";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "今日";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7日間";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30日間";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "全期間";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "コンテンツブロッカーが更新中…";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "フィルターを読み込み中...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "ルールが変換中...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "新規カスタムフィルタ";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "新規DNSフィルタ";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "保護はオフです。";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "保護はオンです。";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "「Safariでブロック」と\n「システム全体でブロック」がON";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "「Safariでブロック」がON";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "すべてのブロック機能がオフです。";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "「システム全体でブロック」がON";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "リクエスト数 %1$d、ブロック済数 %2$d";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "この情報は、「WhoTrackMe.com」サービスからロードされました。";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "詳細";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "重複するフィルターを追加しようとしました。このフィルターは既にリストに登録されています。";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "変更は適用されませんでした。";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "ブロック済";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "処理済";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "ホワイトリストに追加済";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "ホワイトリストに追加済み";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "ブラックリストに追加済み";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "ホワイトリストから削除済み";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "ブラックリストから削除済み";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "%@<b>設定</b>アプリを開き";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "%@ <b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>コンテンツブロッカーの%@スイッチ</b>をすべてオンにしてください。";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "システムDNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "ご利用中のISP(インターネットサービスプロバイダー)提供のシステムデフォルトDNSサーバーを使用する";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "リクエストをブロック";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "リクエストをホワイトリストに追加する";

@@ -1,21 +1,17 @@
-
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
-"884-Hm-mb6.text" = "Safari protection";
+"884-Hm-mb6.text" = "Ochrana Safari";
 
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
 /* Class = "UILabel"; text = "System protection"; ObjectID = "cnF-td-Ba1"; */
-"cnF-td-Ba1.text" = "System protection";
+"cnF-td-Ba1.text" = "Ochrana systému";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
-"l1g-hs-4EK.text" = "free";
+"l1g-hs-4EK.text" = "zadarmo";
 
 /* Class = "UINavigationItem"; title = "Protection"; ObjectID = "mwP-h9-R34"; */
-"mwP-h9-R34.title" = "Protection";
+"mwP-h9-R34.title" = "Ochrana";
 
 /* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari";
-
-/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists in AdGuard settings"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists in AdGuard settings";
+"teo-vm-NRJ.text" = "Tento modul Vás chráni pred sledovaním celého systému. Šifruje Vaše DNS dopyty a blokuje sledovacie domény vo všetkých aplikáciách, nielen v prehliadači Safari";

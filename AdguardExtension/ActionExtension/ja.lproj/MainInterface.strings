@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
 "0yx-Eh-Ah4.text" = "このページで要素をブロック";
 
-/* Class = "UILabel"; text = "Contact support"; ObjectID = "Wrl-xu-3kv"; */
-"Wrl-xu-3kv.text" = "サポートに連絡";
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "サポートチームに連絡する";
 
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
 "Znm-Yl-fWN.text" = "すり抜け広告やページに表示したくない要素を削除するツールを使用するには、ここをタップしてください。";
@@ -14,4 +14,4 @@
 "fxW-Cr-iPW.normalTitle" = "閉じる";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
-"kuu-kI-Ott.text" = "このページでの問題・バグを報告する";
+"kuu-kI-Ott.text" = "このページに関する問題・バグを報告する";

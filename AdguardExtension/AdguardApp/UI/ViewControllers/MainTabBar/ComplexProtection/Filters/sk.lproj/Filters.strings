@@ -4,11 +4,23 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "Pridať filter";
 
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "Ochrana Safari";
+
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Meno:";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
 "E3e-Mc-RhD.title" = "Filtre";
+
+/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
+"Fwl-LI-5Fu.placeholder" = "https://example.com";
+
+/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard nie je aktívny na stránkach z tohto zoznamu";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
+"Lq2-mi-McV.text" = "Filtre";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "Nový vlastný filter";
@@ -16,11 +28,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "ZRUŠIŤ";
 
+/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "Tento modul blokuje reklamy a sledovanie na webových stránkach otvorených v prehliadači Safari";
+
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Počet pravidiel: ";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "Aktualizované";
+
+/* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
+"VCK-db-aeg.text" = "Používateľské pravidlá";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
 "Ve5-DF-RNB.text" = "Webová stránka";
@@ -31,17 +49,17 @@
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "Verzia";
 
-/* Class = "UILabel"; text = "Use your custom filters here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Použite svoje vlastné filtre";
+/* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Sem pridajte vlastné zoznamy filtrov";
+
+/* Class = "UILabel"; text = "Safari Whitelist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "Biela listina Safari";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filtre";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "PRIDAŤ";
-
-/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Získať verziu Premium";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ZRUŠIŤ";
@@ -52,11 +70,11 @@
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "Ďalej";
 
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "Domovská stránka: ";
+
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Počet pravidiel:";
 
-/* Class = "UILabel"; text = "Filter Name"; ObjectID = "xS8-f2-3yC"; */
-"xS8-f2-3yC.text" = "Meno filtra";
-
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Zadajte názov filtra:";
+"zcB-eh-Ou4.placeholder" = "Zadajte meno filtra:";

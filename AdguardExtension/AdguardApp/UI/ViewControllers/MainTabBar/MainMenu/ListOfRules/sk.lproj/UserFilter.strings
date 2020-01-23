@@ -1,13 +1,7 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "ZRUŠIŤ";
 
-/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
-"8G3-AL-tRu.title" = "Zrušiť";
-
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
-"9th-UM-Uaj.normalTitle" = "Zrušiť";
-
-/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
+/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
 "BfI-YN-iXe.text" = "Pravidlo bolo pridané do používateľského filtra";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
@@ -15,6 +9,9 @@
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Upraviť";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
+"HFf-Yp-hjB.normalTitle" = "Vybrať";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "ODSTRÁNIŤ";

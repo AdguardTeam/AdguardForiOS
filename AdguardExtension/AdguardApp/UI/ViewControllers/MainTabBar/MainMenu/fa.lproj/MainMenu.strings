@@ -1,5 +1,3 @@
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "62j-Ib-Td5"; Note = "Main Menu header"; */
-"62j-Ib-Td5.title" = "تنظيمات";
 
 /* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "تماس با پشتیبانی";
@@ -7,35 +5,14 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "AdGuard را دوباره بهترین کنید";
 
-/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
-"L2l-pO-K3q.text" = "عمومي";
-
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard چیست؟";
 
-/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "VQi-XH-gdb"; */
-"VQi-XH-gdb.normalTitle" = "دریافت پریمیوم";
-
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "تنظيمات";
-
-/* Class = "UILabel"; text = "User filter"; ObjectID = "bVe-ys-rO9"; Note = "(MainMenuController) user filter caption"; */
-"bVe-ys-rO9.text" = "فیلتر کاربر";
-
-/* Class = "UILabel"; text = "Filters"; ObjectID = "e0H-m9-qlc"; Note = "(Main Menu) filters caption"; */
-"e0H-m9-qlc.text" = "فیلترها";
-
-/* Class = "UILabel"; text = "The list of websites you trust"; ObjectID = "f0z-YA-nbz"; */
-"f0z-YA-nbz.text" = "لیست سایت های قابل اطمینان";
-
-/* Class = "UILabel"; text = "DNS privacy"; ObjectID = "lbr-3S-fZX"; */
-"lbr-3S-fZX.text" = "حریم خصوصی DNS";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "درباره";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "طاهر و غیره";
-
-/* Class = "UILabel"; text = "Add your own filtering rules"; ObjectID = "zO5-hl-j78"; */
-"zO5-hl-j78.text" = "محدودسازی دسترسی به سایت";

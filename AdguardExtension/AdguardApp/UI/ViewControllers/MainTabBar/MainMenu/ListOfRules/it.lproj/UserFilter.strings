@@ -1,14 +1,8 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "ANNULLA";
 
-/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
-"8G3-AL-tRu.title" = "Annulla";
-
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
-"9th-UM-Uaj.normalTitle" = "Annulla";
-
-/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "La regola è stata aggiunta al filtro utente:";
+/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "Questa regola è stata aggiunta alle regole utente.";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "SALVA";
@@ -16,23 +10,14 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Modifica";
 
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
-"HB0-zK-xj2.normalTitle" = "Salva";
-
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "RIMUOVI";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "ANNULLA";
 
-/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
-"cce-mi-paP.normalTitle" = "Cancella";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "AGGIUNGI";
-
-/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
-"lE1-GD-Qr5.normalTitle" = "Modifica";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Dominio:";

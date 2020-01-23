@@ -1,0 +1,98 @@
+/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
+"2s7-mz-LlB.title" = "Vynulovať";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "Nekompatibilné s inými VPN aplikáciami, nestabilné";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
+"Bjk-AC-5fy.text" = "Režim tunela";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
+"ChK-gV-7pc.title" = "Nastavenia";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "Nekompatibilné s inými VPN aplikáciami";
+
+/* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
+"FzS-e3-CK1.text" = "Tmavá";
+
+/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
+"GGp-kp-YJI.text" = "Delený tunel";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
+"JPH-xu-Z3J.text" = "Reštartovať keď sa zmení sieť";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
+"KSL-dU-yfA.text" = "Blokovače obsahu";
+
+/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
+"KVr-dC-Lo5.title" = "Režim tunela";
+
+/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
+"Ll9-il-kpC.title" = "Pokročilé nastavenia";
+
+/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Režim pre vývojárov";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
+"PV8-kf-b2c.text" = "Keď toto nastavenie je povolené, AdGuard bude ignorovať všeobecné kozmetické pravidlá. Toto zrýchli renderovanie stránok výmenou za zmenšenie kvality filtrácie";
+
+/* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
+"QEc-dY-TtB.text" = "Vynulovať štatistiku";
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "Systémom predvolené";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "Téma";
+
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
+"W6u-T8-UVZ.text" = "Použiť zjednodušené filtre";
+
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Automaticky aktualizovať len cez Wi-Fi";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
+"XFM-ii-xUV.text" = "Máte 6 blokovačov obsahu, každý z nich môže obsahovať až 50.000 pravidiel";
+
+/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
+"aIJ-gX-03k.text" = "Úplný tunel";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
+"aRS-WH-mRj.text" = "Zapnite túto možnosť ak máte problémy s internetovým pripojením, keď je spustený AdGuard";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
+"aoV-et-2ku.text" = "Zobraziť stavový riadok";
+
+/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
+"bVh-Of-Oxm.text" = "Invertovať bielu listinu";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
+"eIa-RB-Phv.text" = "Pokročilé nastavenia";
+
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "Plný tunel (bez ikony VPN)";
+
+/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
+"gxl-pG-zh1.text" = "Kompatibilné s aplikáciami \"Personal VPN\"";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
+"mdJ-Nh-wTi.text" = "Zobraziť lištu postupu aktualizácie filtra";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "Iné";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "Svetlá";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
+"q05-UZ-zAB.text" = "Odblokujte reklamy všade okrem stránky z tohto zoznamu";
+
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "Poskytuje ďalšie nastavenia pre pokročilých používateľov";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "Keď toto nastavenie bude aktivované, AdGuard bude používať pre aktualizáciu filtrov na pozadí len Wi-Fi";
+
+/* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
+"wYq-g0-5k6.text" = "Táto voľba vymaže všetky štatistické údaje, napríklad počet žiadostí atď.";

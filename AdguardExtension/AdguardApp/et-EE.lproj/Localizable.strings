@@ -14,16 +14,13 @@
 "rule_converting_error" = "Reeglit ei õnnestu konvertida.  Reegli tekst on vale.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Kasutaja reegleid ei õnnestu konvertida. Ühes reeglis on viga. Vaata üle reegel, mis jääb praeguse kursori positsiooni juurde.";
+"filter_rules_converting_error" = "Neid reegleid ei õnnestu Safarisse lisada";
 
 /* Alert title. On error. */
 "common_error_title" = "Viga";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtreid ei õnnestu Safarisse laadida. Selle tõttu ei rakendatud sinu muudatusi.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtreid ei õnnestu Safarisse laadida. Proovi oma reegleid ja valget listi puhastada. Lisaks vaata üle kasutatavad filtrid.";
 
 /* NO Button caption in alert */
 "common_action_no" = "EI";
@@ -35,13 +32,10 @@
 "whitelist_title" = "Valge list";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "Kasutaja filter";
+"user_filter_title" = "Kasutaja reeglid";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "Siia saad kohandatud reegleid lisada, eraldades need uue reaga";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "Siia saad sisestada domeenid (eraldi reale). Neid domeene AdGuard Safari filtri põhjal ei filtreeri.";
 
 /* YES Button caption in alert */
 "common_action_yes" = "JAh";
@@ -60,6 +54,9 @@
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "OSTA";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Unustasid parooli?";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium konto on aegunud";
@@ -97,16 +94,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "Lubatud filtrid: %d / %d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "Väljalülitatud";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "Uuendatud filtrid: %@";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Sisesta kohandatud reeglid siia<br>Loe seda <a href=\"%@\">märkust reeglite süntaksi kohta</a>.";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Sisesta domeeni nimed siia. AdGuard ei filtreeri Safaris nende lehekülgede sisu.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Sisesta domeeni nimed siia. AdGuard filtreerib Safaris ainult nende lehekülgede sisu.";
@@ -116,9 +105,6 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Lisa reegel";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Lisa domeen";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -132,26 +118,11 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domeen:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "Impordi";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "Impordi";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "Ekspordi";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "Ekspordi";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Teavita valest blokeeringust";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Vearaport";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontakteeru tehnilise toega";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Ekspordi logid";
@@ -171,9 +142,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versioon %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "uuendatud %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, ühildub “Personaalsete VPN” rakendustega";
 
@@ -182,9 +150,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (ilma VPN ikoonita), ei ühildu teiste VPN äppidega, ebastabiilsem";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "väljalülitatud";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokeerib reklaami, jälitajaid ja õngevõtmise veebilehti";
@@ -211,9 +176,6 @@
 "safe_dns_description" = "DNS teenus SafeDNS'ilt";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "Krüpteering";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "Turvalisus";
 
 /* Dns Feature Name */
@@ -227,9 +189,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Reklaami blokeerimine";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "Ei lase kolmandatel osapooltel sinu interneti sirvimise ajaloos tuhnida";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "Blokeerib õngevõtmist ja teisi ohtlikke veebilehti";
@@ -246,14 +205,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokeerib reklaame ja jälitajaid";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "Serverit pole valitud";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Sisselülitatud %1$d & %2$d -st";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "Kopeeritud lõikelauale";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Tavaline";
@@ -276,12 +229,6 @@
 /* login error message */
 "login_error_message" = "Sisselogimisel ilmnes viga";
 
-/* purchase secription format */
-"purchase_description_format" = "AdGuard Premium on tasuline, aasta kaupa makstav teenus, mille hind on $2.99/aasta (hind võib olenevalt regioonist erineda). Makse lisatakse pärast tellimuse kinnitamist iTunes kontole. Tellimust uuendatakse iga aasta automaatselt. Seda välja arvatud juhul, kui automaatne tellimuse pikendamine on vähemalt 24 tundi enne selle toimumist tühistatud. Makse toimub läbi iTunesi konto 24 tunni jooksul enne käimasoleva perioodi lõppu. Pärast ostu saab tellimust ning automaatset pikendust hallata läbi oma iTunes konto seadete.<br><br><a href=%1$@>Privaatsuspoliitika</a> <br><br><a href=%2$@>Kasutustingimused</a>";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>Privaatsuspoliitika</a> <br><br><a href=%2$@>Kasutustingimused</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
@@ -297,29 +244,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "Palun oota...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "Installisin just iOS'ile mõeldud AdGuardi reklaamiblokeerija.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "Kui tahad sama reklaamivabalt surfata, vaata seda:";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "Teema";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Muu";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "Edasijõudnule";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "Sisu blokeerijad";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtrid:";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "Üldised seaded";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Esmalt pead VPNi lubama";
@@ -344,9 +279,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Enne, kui seda lisa kasutada saad, peab %1$@ sooritama esmase konfigureerimise. Käivita %2$@ põhiline äpp ja lase see ära teha.";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "Tugiteenusele ei saa sõnumit saata, sest e-posti konto pole üles seatud.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Pane tähele, et Sisu blokeerija on väljas. See tähendab, et reklaame ei filtreerita (olenemata AdGuardi seadistustest). Filtreerimise võimaldamiseks lülita palun Safari seadetes AdGuardi Sisu blokeerija sisse.";
@@ -384,20 +316,14 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Maksa üks kord ja kasuta Adguard Premium funktsioone kõikides oma seadmetes!";
 
-/* (TrialController) alert text title if there is no internet */
-"no_internet" = "Puudub internet";
-
-/* (TrialController) alert text message if there is no internet */
-"no_internet_message" = "Tasuta prooviversiooni käivitamiseks on vajalik internetiühendus";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Vale e-post või parool";
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "Konto on blokeeritud";
 
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Konto on ajutiselt lukustatud";
+
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Vale 2FA kood";
-
-/* (LoginController) terms and eula text */
-"login_terms_string" = "Jätkates nõustud <a href=\"%@\">Tingimustega</a> ja <a href=\"%@\">EULA-ga</a>.";

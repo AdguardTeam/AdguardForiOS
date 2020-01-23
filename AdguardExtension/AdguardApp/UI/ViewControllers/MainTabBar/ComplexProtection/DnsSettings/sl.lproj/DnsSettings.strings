@@ -1,80 +1,62 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
 "03E-rd-Slw.normalTitle" = "Redni";
 
-/* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "Izberite strežnik";
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
+"0ZJ-BI-849.text" = "Nastavitve omrežja";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Ime";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "3b3-d2-03o"; */
-"3b3-d2-03o.text" = "Nezdružljiv z drugimi aplikacijami VPN";
-
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Nastavi nastavitve DNS po meri";
+
+/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
+"4rw-Lb-MJH.title" = "Strežnik DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// ali tls://";
 
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "6db-7F-O0d"; */
-"6db-7F-O0d.title" = "Tunelski način";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "SHRANI";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "6y8-H6-3Rj"; */
-"6y8-H6-3Rj.text" = "Nezdružljiv z drugimi aplikacijami VPN, nestabilen";
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "AdGuard ne bo onemogočil domen s tega seznama";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "AdGuard bo onemogočil domene s tega seznama";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "SHRANI IN IZBERI";
 
-/* Class = "UINavigationItem"; title = "DNS Privacy"; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "Zasebnost DNS";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-prek-HTTPS";
 
-/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
-"EkI-hK-XDG.text" = "Naslov";
+/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "DNS zahteva onemogočanje";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
-"IVH-4P-uIk.text" = "Domena";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "Ina-3I-qVn"; */
-"Ina-3I-qVn.text" = "Zasebnost DNS";
-
-/* Class = "UILabel"; text = "Type"; ObjectID = "Itg-uX-XAd"; */
-"Itg-uX-XAd.text" = "Vrsta";
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "Napredne nastavitve omrežja";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "IZBERI";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Strežnik";
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "Dodaj filter";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
-"Mni-fx-xGW.text" = "Čas";
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "Ta modul lahko onemogoča domene za sledenje in šifrira vaš DNS promet";
 
-/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "OJU-gT-SmT"; */
-"OJU-gT-SmT.text" = "Razdeli-Tunel";
+/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Zaščita sistema";
 
-/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "SL2-Kq-gMW"; */
-"SL2-Kq-gMW.text" = "Združljiv z aplikacijami 'Osebni VPN'";
+/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
+"VR9-fh-ogr.title" = "Nastavitve omrežja";
 
-/* Class = "UILabel"; text = "DNS protocol can be exploited by ISPs and third parties to spy on your traffic or even hijack it. We protect your privacy by encrypting your DNS connections, just select any DNS server from the list."; ObjectID = "SMK-iz-f9G"; */
-"SMK-iz-f9G.text" = "Protokol DNS lahko izkoristijo ponudniki internetnih storitev in tretje strani, da lahko vohunijo po vašem prometu ali ga celo ugrabio. Varujemo vašo zasebnost s šifriranjem vaših povezav DNS. S seznama izberite kateri koli DNS strežnik.";
+/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Sistemski seznam dovoljenih";
 
-/* Class = "UILabel"; text = "Responses"; ObjectID = "TQm-1H-bNl"; */
-"TQm-1H-bNl.text" = "Odzivi";
-
-/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
-"TTc-NW-AJa.text" = "Poln-Tunel";
-
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
-"VxP-fd-4kT.text" = "V načinu 'Razdeljen-Tunel' je AdGuard združljiv s tako imenovanimi aplikacijami 'Osebni VPN'. Kot kompromis, je lahko v tem načinu, sistem zaobiden v primeru slabe povezljivosti";
-
-/* Class = "UILabel"; text = "DNS Requests Log"; ObjectID = "WsR-6Z-pxB"; */
-"WsR-6Z-pxB.text" = "Dnevnik zahtev DNS";
+/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
+"ZCR-6u-jrf.text" = "Priporočeni ponudniki DNS";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "PREKLIČI";
@@ -88,8 +70,8 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Strežnik";
 
-/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
-"d69-Gd-SZp.text" = "Poln-Tunel (brez ikone VPN)";
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Dodaj strežnik DNS po meri";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Naslov DNS strežnika";
@@ -103,11 +85,8 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "Monitor all DNS requests on your device and manage them"; ObjectID = "hoU-PM-icY"; */
-"hoU-PM-icY.text" = "Spremljaj vse zahteve DNS v napravi in jih upravlja";
-
-/* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "Dnevnik zahtev DNS";
+/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Sistemski seznam nedovoljenih";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "PREKLIČI";
@@ -115,20 +94,17 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Ime";
 
-/* Class = "UIButton"; normalTitle = "Add custom DNS server"; ObjectID = "mBx-dq-oa2"; */
-"mBx-dq-oa2.normalTitle" = "Dodaj strežnik DNS po meri";
-
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Spletna stran";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "IZBRIŠI";
 
-/* Class = "UILabel"; text = "Tunnel Mode"; ObjectID = "pPC-fU-UPD"; */
-"pPC-fU-UPD.text" = "Tunelski način";
+/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "DNS zahteva onemogočanje";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "Strežnik";
+/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "Filtri";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Ime strežnika";
@@ -139,8 +115,8 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Izberi protokol";
 
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
-"ve4-Qn-Yj6.title" = "Podrobnosti o zahtevi za DNS";
+/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
+"w0g-Xg-HG0.title" = "Filtri DNS";
 
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
-"xe9-vq-pF6.text" = "Preteklo";
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "Filtri in izjeme";

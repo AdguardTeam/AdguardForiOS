@@ -1,17 +1,20 @@
-/* Class = "UILabel"; text = "License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
-"5Xe-d5-8tj.text" = "授權";
+/* Class = "UILabel"; text = "Manage License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
+"5Xe-d5-8tj.text" = "管理授權";
 
 /* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
 "8KQ-Ga-zhs.text" = "致謝";
 
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
+"CqW-k3-vqO.title" = "登入";
+
 /* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
 "KkR-EM-giI.text" = "論壇";
 
-/* Class = "UILabel"; text = "How to use"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "如何使用？";
+/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
+"NVi-wQ-2Pn.text" = "視訊導覽";
 
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
 "ncc-Hk-ota.title" = "關於";
 
-/* Class = "UILabel"; text = "Site"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "網站";
+/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "xMf-b0-Cfp"; */
+"xMf-b0-Cfp.text" = "開發者的網站";

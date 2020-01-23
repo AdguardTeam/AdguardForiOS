@@ -3,7 +3,47 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>trial_screen_days</key>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 pravidlo povoleno</string>
+        <key>few</key>
+        <string>%d pravidla povolena</string>
+        <key>many</key>
+        <string>%d pravidel povoleno</string>
+        <key>other</key>
+        <string>%d pravidel povoleno</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 filtr povolen</string>
+        <key>few</key>
+        <string>%d filtry povoleny</string>
+        <key>many</key>
+        <string>%d filtrů povoleno</string>
+        <key>other</key>
+        <string>%d filtrů povoleno</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@days@</string>
@@ -14,16 +54,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>JEDEN DEN ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>1 den úplného přístupu zdarma</string>
         <key>few</key>
-        <string>%d DNY ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d dny úplného přístupu zdarma</string>
         <key>many</key>
-        <string>%d DNŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d dnů úplného přístupu zdarma</string>
         <key>other</key>
-        <string>%d DNŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d dnů úplného přístupu zdarma</string>
       </dict>
     </dict>
-    <key>trial_screen_weeks</key>
+    <key>getPro_full_access_weeks</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@weeks@</string>
@@ -34,16 +74,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>JEDEN TÝDEN ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>1 týden úplného přístupu zdarma</string>
         <key>few</key>
-        <string>%d TÝDNY ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d týdny úplného přístupu zdarma</string>
         <key>many</key>
-        <string>%d TÝDNŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d týdnů úplného přístupu zdarma</string>
         <key>other</key>
-        <string>%d TÝDNŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d týdnů úplného přístupu zdarma</string>
       </dict>
     </dict>
-    <key>trial_screen_months</key>
+    <key>getPro_full_access_months</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@months@</string>
@@ -54,16 +94,16 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>JEDEN MĚSÍC ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>1 měsíc úplného přístupu zdarma</string>
         <key>few</key>
-        <string>%d MĚSÍCE ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d měsíce úplného přístupu zdarma</string>
         <key>many</key>
-        <string>%d MĚSÍCŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d měsíců úplného přístupu zdarma</string>
         <key>other</key>
-        <string>%d MĚSÍCŮ ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d měsíců úplného přístupu zdarma</string>
       </dict>
     </dict>
-    <key>trial_screen_years</key>
+    <key>getPro_full_access_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@years@</string>
@@ -74,13 +114,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>JEDEN ROK ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>1 rok úplného přístupu zdarma</string>
         <key>few</key>
-        <string>%d ROKY ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d roky úplného přístupu zdarma</string>
         <key>many</key>
-        <string>%d LET ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d let úplného přístupu zdarma</string>
         <key>other</key>
-        <string>%d LET ZKUŠEBNÍ DOBA ZDARMA</string>
+        <string>%d let úplného přístupu zdarma</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -161,86 +201,6 @@
         <string>Začněte Vaši první zkušební %d-roční dobu zdarma</string>
         <key>other</key>
         <string>Začněte Vaši první zkušební %d-roční dobu zdarma</string>
-      </dict>
-    </dict>
-    <key>trial_label_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Zkušební doba na 1 den</string>
-        <key>few</key>
-        <string>Zkušební doba na %d dny</string>
-        <key>many</key>
-        <string>Zkušební doba na %d dnů</string>
-        <key>other</key>
-        <string>Zkušební doba na %d dnů</string>
-      </dict>
-    </dict>
-    <key>trial_label_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Zkušební doba na 1 týden</string>
-        <key>few</key>
-        <string>Zkušební doba na %d týdny</string>
-        <key>many</key>
-        <string>Zkušební doba na %d týdnů</string>
-        <key>other</key>
-        <string>Zkušební doba na %d týdnů</string>
-      </dict>
-    </dict>
-    <key>trial_label_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Zkušební doba na 1 měsíc</string>
-        <key>few</key>
-        <string>Zkušební doba na %d měsíce</string>
-        <key>many</key>
-        <string>Zkušební doba na %d měsíců</string>
-        <key>other</key>
-        <string>Zkušební doba na %d měsíců</string>
-      </dict>
-    </dict>
-    <key>trial_label_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Zkušební doba na 1 rok</string>
-        <key>few</key>
-        <string>Zkušební doba na %d roky</string>
-        <key>many</key>
-        <string>Zkušební doba na %d let</string>
-        <key>other</key>
-        <string>Zkušební doba na %d let</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

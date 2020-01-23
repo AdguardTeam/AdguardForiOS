@@ -1,80 +1,65 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
 "03E-rd-Slw.normalTitle" = "Régulier";
 
-/* Class = "UINavigationItem"; title = "Choose Server"; ObjectID = "1tX-ii-cOK"; */
-"1tX-ii-cOK.title" = "Choix de serveur";
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
+"0ZJ-BI-849.text" = "Paramètres réseau";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Nom";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "3b3-d2-03o"; */
-"3b3-d2-03o.text" = "Incompatible avec d'autres applications VPN";
-
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Établir des paramètres personnels du DNS";
+
+/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
+"4rw-Lb-MJH.title" = "Serveur DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
 
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "6db-7F-O0d"; */
-"6db-7F-O0d.title" = "Mode tunnel";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "SAUVEGARDER";
 
-/* Class = "UILabel"; text = "Incompatible with other VPN apps,  unstable"; ObjectID = "6y8-H6-3Rj"; */
-"6y8-H6-3Rj.text" = "Incompatible avec d'autres applications VPN, instable";
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "AdGuard ne bloquera pas les domaines sur cette liste";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "AdGuard va bloquer les domaines sur cette liste";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "ENREGISTRER ET SÉLECTIONNER";
 
-/* Class = "UINavigationItem"; title = "DNS Privacy"; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "Confidentialité DNS";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UILabel"; text = "Address"; ObjectID = "EkI-hK-XDG"; */
-"EkI-hK-XDG.text" = "Adresse";
+/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "Blocage des requêtes DNS";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "IVH-4P-uIk"; */
-"IVH-4P-uIk.text" = "Domaine";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "Ina-3I-qVn"; */
-"Ina-3I-qVn.text" = "Confidentialité DNS";
-
-/* Class = "UILabel"; text = "Type"; ObjectID = "Itg-uX-XAd"; */
-"Itg-uX-XAd.text" = "Type";
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "Paramétrages avancés du réseau";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "SÉLECTIONNER";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Serveur";
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "Serveur DNS";
 
-/* Class = "UILabel"; text = "Time"; ObjectID = "Mni-fx-xGW"; */
-"Mni-fx-xGW.text" = "Temps";
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "Ajouter un filtre";
 
-/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "OJU-gT-SmT"; */
-"OJU-gT-SmT.text" = "Split-Tunnel";
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "Ce module peut bloquer les domaines de suivi et chiffrer votre trafic DNS";
 
-/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "SL2-Kq-gMW"; */
-"SL2-Kq-gMW.text" = "Compatible avec les applications «Personal VPN»";
+/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Protection niveau système";
 
-/* Class = "UILabel"; text = "DNS protocol can be exploited by ISPs and third parties to spy on your traffic or even hijack it. We protect your privacy by encrypting your DNS connections, just select any DNS server from the list."; ObjectID = "SMK-iz-f9G"; */
-"SMK-iz-f9G.text" = "Le protocole DNS peut être exploité par des FAI et des tiers pour espionner votre trafic ou même le pirater. Nous protégeons votre vie privée en cryptant vos connexions DNS. Il vous suffit de sélectionner un serveur DNS dans la liste.";
+/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
+"VR9-fh-ogr.title" = "Paramètres réseau";
 
-/* Class = "UILabel"; text = "Responses"; ObjectID = "TQm-1H-bNl"; */
-"TQm-1H-bNl.text" = "Réponses";
+/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Liste blanche du système";
 
-/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "TTc-NW-AJa"; */
-"TTc-NW-AJa.text" = "Full-Tunnel";
-
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "VxP-fd-4kT"; */
-"VxP-fd-4kT.text" = "En mode Split-Tunnel, AdGuard est compatible avec les applications dites «Personal VPN». Comme compromis, dans ce mode, il peut être ignoré par le système en cas de mauvaise connectivité";
-
-/* Class = "UILabel"; text = "DNS Requests Log"; ObjectID = "WsR-6Z-pxB"; */
-"WsR-6Z-pxB.text" = "Journal des requêtes DNS";
+/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
+"ZCR-6u-jrf.text" = "Fournisseurs de DNS recommandés";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ANNULER";
@@ -88,8 +73,8 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Serveur";
 
-/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "d69-Gd-SZp"; */
-"d69-Gd-SZp.text" = "Full-tunnel (sans icône VPN)";
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Ajouter un serveur DNS personnalisé";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Adresse du serveur DNS";
@@ -103,11 +88,11 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "Monitor all DNS requests on your device and manage them"; ObjectID = "hoU-PM-icY"; */
-"hoU-PM-icY.text" = "Suivez toutes les requêtes DNS sur votre appareil et gérez-les ici";
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Les serveurs DNS (Domain Name System) sont les équivalents Web des annuaires. Ils maintiennent un répertoire des noms de domaines et les traduisent en adresses IP";
 
-/* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "jdk-AZ-MK8"; */
-"jdk-AZ-MK8.title" = "Journal des requêtes DNS";
+/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Liste noire du système";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ANNULER";
@@ -115,23 +100,26 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Nom";
 
-/* Class = "UIButton"; normalTitle = "Add custom DNS server"; ObjectID = "mBx-dq-oa2"; */
-"mBx-dq-oa2.normalTitle" = "Ajouter un serveur DNS personnalisé";
-
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Site Web";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "SUPPRIMER";
 
-/* Class = "UILabel"; text = "Tunnel Mode"; ObjectID = "pPC-fU-UPD"; */
-"pPC-fU-UPD.text" = "Mode Tunnel";
+/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Blocage de requêtes DNS";
 
-/* Class = "UILabel"; text = "Server"; ObjectID = "pbu-cZ-0Vd"; */
-"pbu-cZ-0Vd.text" = "Serveur";
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "Filtres de sécurité, confidentialité DNS, filtres personnalisés, etc.";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "Filtres";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nom du serveur";
+
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Ce module peut bloquer les domaines de suivi et chiffrer votre trafic DNS";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Adresse du serveur DNS";
@@ -139,8 +127,8 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Sélectionnez le protocole";
 
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "ve4-Qn-Yj6"; */
-"ve4-Qn-Yj6.title" = "Détails de la requête DNS";
+/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
+"w0g-Xg-HG0.title" = "Filtres DNS";
 
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "xe9-vq-pF6"; */
-"xe9-vq-pF6.text" = "Durée";
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "Filtres et exceptions";

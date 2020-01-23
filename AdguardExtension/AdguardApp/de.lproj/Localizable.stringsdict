@@ -3,7 +3,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>trial_screen_days</key>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 Regel aktiviert</string>
+        <key>other</key>
+        <string>%d Regeln aktiviert</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 Filter aktiviert</string>
+        <key>other</key>
+        <string>%d Filter aktiviert</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@days@</string>
@@ -14,12 +46,12 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Eintägige kostenlose Testversion mit vollem Zugriff</string>
+        <string>Eintägiger kostenloser Vollzugang</string>
         <key>other</key>
-        <string>%d-tägige kostenlose Testversion mit vollem Zugriff</string>
+        <string>%d-tägiger kostenloser Vollzugang</string>
       </dict>
     </dict>
-    <key>trial_screen_weeks</key>
+    <key>getPro_full_access_weeks</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@weeks@</string>
@@ -30,12 +62,12 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Einwöchige kostenlose Testversion mit vollem Zugriff</string>
+        <string>Einwöchiger kostenloser Vollzugang</string>
         <key>other</key>
-        <string>%d-wöchige kostenlose Testversion mit vollem Zugriff</string>
+        <string>%d-wöchiger kostenloser Vollzugang</string>
       </dict>
     </dict>
-    <key>trial_screen_months</key>
+    <key>getPro_full_access_months</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@months@</string>
@@ -46,12 +78,12 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Einmonatige kostenlose Testversion mit vollem Zugriff</string>
+        <string>Einmonatiger kostenloser Vollzugang</string>
         <key>other</key>
-        <string>%d-monatige kostenlose Testversion mit vollem Zugriff</string>
+        <string>%d-monatiger kostenloser Vollzugang</string>
       </dict>
     </dict>
-    <key>trial_screen_years</key>
+    <key>getPro_full_access_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@years@</string>
@@ -62,9 +94,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Einjährige kostenlose Testversion mit vollem Zugriff</string>
+        <string>Einjähriger kostenloser Vollzugang</string>
         <key>other</key>
-        <string>%d-jährige kostenlose Testversion mit vollem Zugriff</string>
+        <string>%d-jähriger kostenloser Vollzugang</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -78,9 +110,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Starten Sie Ihre erste eintägige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste eintägige kostenlose Testversion</string>
         <key>other</key>
-        <string>Starten Sie Ihre erste %d-tägige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste %d-tägige kostenlose Testversion</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -94,9 +126,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Starten Sie Ihre erste einwöchige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste einwöchige kostenlose Testversion</string>
         <key>other</key>
-        <string>Starten Sie Ihre erste %d-wöchige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste %d-wöchige kostenlose Testversion</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -110,9 +142,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Starten Sie Ihre erste einmonatige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste einmonatige kostenlose Testversion</string>
         <key>other</key>
-        <string>Starten Sie Ihre erste %d-monatige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste %d-monatige kostenlose Testversion</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -126,73 +158,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Starten Sie Ihre erste einjährige kostenlose Testversion.</string>
+        <string>Starten Sie Ihre erste einjährige kostenlose Testversion</string>
         <key>other</key>
-        <string>Starten Sie Ihre erste %d-jährige kostenlose Testversion.</string>
-      </dict>
-    </dict>
-    <key>trial_label_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Kostenlose eintägige Testversion</string>
-        <key>other</key>
-        <string>Kostenlose %d-tägige Testversion</string>
-      </dict>
-    </dict>
-    <key>trial_label_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Kostenlose einwöchige Testversion</string>
-        <key>other</key>
-        <string>Kostenlose %d-wöchige Testversion</string>
-      </dict>
-    </dict>
-    <key>trial_label_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Kostenlose einmonatige Testversion</string>
-        <key>other</key>
-        <string>Kostenlose %d-monatige Testversion</string>
-      </dict>
-    </dict>
-    <key>trial_label_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Kostenlose einjährige Testversion</string>
-        <key>other</key>
-        <string>Kostenlose %d-jährige Testversion</string>
+        <string>Starten Sie Ihre erste %d-jährige kostenlose Testversion</string>
       </dict>
     </dict>
     <key>trial_period_days</key>
