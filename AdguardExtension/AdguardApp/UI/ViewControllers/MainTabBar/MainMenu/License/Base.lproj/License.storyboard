@@ -303,8 +303,8 @@
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set your own rules" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLH-Qd-Atk" userLabel="You have a license" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="23.5" width="494" height="17"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have a license activated" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLH-Qd-Atk" userLabel="You have a license" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="24" width="494" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
