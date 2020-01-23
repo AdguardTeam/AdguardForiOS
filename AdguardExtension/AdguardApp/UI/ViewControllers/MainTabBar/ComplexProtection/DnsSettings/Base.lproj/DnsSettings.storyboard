@@ -1182,7 +1182,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-tk-ohH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="16" width="366" height="54.5"/>
-                                            <string key="text">DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses</string>
+                                            <string key="text">DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
