@@ -433,9 +433,6 @@
 /* (ListOfRulesModel) title for import */
 "import" = "Import";
 
-/* "Enabled" title */
-"enabled" = "Enabled";
-
 /* "Disabled" title */
 "disabled" = "Disabled";
 
