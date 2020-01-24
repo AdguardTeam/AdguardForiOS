@@ -1249,8 +1249,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eze-yt-rB9" userLabel="GetProView">
                                 <rect key="frame" x="48" y="346" width="318" height="160"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-fQ-kgK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="318" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-fQ-kgK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1261,8 +1261,8 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ae4-WL-0pQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="318" height="68"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ae4-WL-0pQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="8" width="350" height="68"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1314,9 +1314,9 @@
                         <constraints>
                             <constraint firstItem="eze-yt-rB9" firstAttribute="centerX" secondItem="WKC-8f-gkR" secondAttribute="centerX" id="40G-nl-lqW"/>
                             <constraint firstItem="eze-yt-rB9" firstAttribute="centerY" secondItem="4yd-JI-m92" secondAttribute="centerY" id="4Q8-0e-ZB5"/>
-                            <constraint firstItem="WKC-8f-gkR" firstAttribute="trailing" secondItem="eze-yt-rB9" secondAttribute="trailing" constant="48" id="5BJ-7l-wdX"/>
+                            <constraint firstItem="WKC-8f-gkR" firstAttribute="trailing" secondItem="eze-yt-rB9" secondAttribute="trailing" constant="32" id="5BJ-7l-wdX"/>
                             <constraint firstItem="eze-yt-rB9" firstAttribute="width" secondItem="4yd-JI-m92" secondAttribute="width" multiplier="0.4" id="7Hp-lt-4gU"/>
-                            <constraint firstItem="eze-yt-rB9" firstAttribute="leading" secondItem="WKC-8f-gkR" secondAttribute="leading" constant="48" id="m7K-xb-Y2v"/>
+                            <constraint firstItem="eze-yt-rB9" firstAttribute="leading" secondItem="WKC-8f-gkR" secondAttribute="leading" constant="32" id="m7K-xb-Y2v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WKC-8f-gkR"/>
                         <variation key="default">

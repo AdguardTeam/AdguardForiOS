@@ -341,8 +341,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNz-eH-Heh" userLabel="GetProView">
                                                     <rect key="frame" x="48" y="-58" width="318" height="160"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="YCi-pz-es6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="318" height="0.0"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="YCi-pz-es6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -353,8 +353,8 @@
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-X6-fFy" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="8" width="318" height="68"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="clip" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-X6-fFy" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="8" width="350" height="68"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -407,10 +407,10 @@
                                             <constraints>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="width" secondItem="MQF-ay-7AF" secondAttribute="width" multiplier="0.4" id="8nd-8q-AuH"/>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="leading" secondItem="MQF-ay-7AF" secondAttribute="leading" constant="39" id="Der-4A-yOb">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="32"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="aNz-eH-Heh" secondAttribute="trailing" constant="64" id="H9A-x4-p2X">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="32"/>
                                                 </constraint>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="centerX" secondItem="MQF-ay-7AF" secondAttribute="centerX" id="Qy0-5c-YJd"/>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="centerY" secondItem="MQF-ay-7AF" secondAttribute="centerY" id="eKS-Mv-LAv"/>

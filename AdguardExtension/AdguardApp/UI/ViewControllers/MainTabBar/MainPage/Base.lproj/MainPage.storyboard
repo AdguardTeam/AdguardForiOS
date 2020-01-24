@@ -563,8 +563,8 @@
                                             <action selector="crossTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="aO6-TN-fiE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46F-Jh-wHm">
-                                        <rect key="frame" x="278" y="6.5" width="80" height="32"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46F-Jh-wHm">
+                                        <rect key="frame" x="276" y="-16" width="90" height="32"/>
                                         <color key="backgroundColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="4Xm-EO-X6b"/>
@@ -596,12 +596,12 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="wjI-86-pkN" secondAttribute="trailing" constant="16" id="0E1-Ck-w9v"/>
+                                    <constraint firstAttribute="trailing" secondItem="wjI-86-pkN" secondAttribute="trailing" constant="12" id="0E1-Ck-w9v"/>
                                     <constraint firstItem="46F-Jh-wHm" firstAttribute="centerY" secondItem="FcP-gP-TsG" secondAttribute="centerY" id="0H1-0a-TfY"/>
-                                    <constraint firstItem="46F-Jh-wHm" firstAttribute="leading" secondItem="FcP-gP-TsG" secondAttribute="trailing" constant="16" id="6t4-Gm-w6g"/>
+                                    <constraint firstItem="46F-Jh-wHm" firstAttribute="leading" secondItem="FcP-gP-TsG" secondAttribute="trailing" constant="12" id="6t4-Gm-w6g"/>
                                     <constraint firstItem="FcP-gP-TsG" firstAttribute="centerY" secondItem="k8E-Jo-8op" secondAttribute="centerY" id="DA8-zB-0XO"/>
-                                    <constraint firstItem="FcP-gP-TsG" firstAttribute="leading" secondItem="k8E-Jo-8op" secondAttribute="leading" constant="16" id="W5m-HE-JmP"/>
-                                    <constraint firstItem="wjI-86-pkN" firstAttribute="leading" secondItem="46F-Jh-wHm" secondAttribute="trailing" constant="16" id="XYO-Us-6iV"/>
+                                    <constraint firstItem="FcP-gP-TsG" firstAttribute="leading" secondItem="k8E-Jo-8op" secondAttribute="leading" constant="12" id="W5m-HE-JmP"/>
+                                    <constraint firstItem="wjI-86-pkN" firstAttribute="leading" secondItem="46F-Jh-wHm" secondAttribute="trailing" constant="12" id="XYO-Us-6iV"/>
                                     <constraint firstAttribute="height" id="eSv-Jc-dfo"/>
                                     <constraint firstItem="wjI-86-pkN" firstAttribute="centerY" secondItem="k8E-Jo-8op" secondAttribute="centerY" id="ggm-g2-tfp"/>
                                 </constraints>
@@ -705,6 +705,7 @@
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
                         <outlet property="dataSavedNumberLabel" destination="Zbr-WF-bsX" id="hCA-OE-HiV"/>
                         <outlet property="dataSavedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
+                        <outlet property="fixItIphoneButton" destination="46F-Jh-wHm" id="tpK-eA-iLO"/>
                         <outlet property="fromButtonsToTopHeight" destination="c8q-oE-3NX" id="C62-Le-Ise"/>
                         <outlet property="getProButton" destination="4Ft-5h-4Jd" id="upu-BZ-SFA"/>
                         <outlet property="getProView" destination="jbE-Rs-Ce2" id="JHN-OU-mFW"/>
