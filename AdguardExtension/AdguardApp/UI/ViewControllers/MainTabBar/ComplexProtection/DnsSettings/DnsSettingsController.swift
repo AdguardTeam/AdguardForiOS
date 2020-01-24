@@ -95,11 +95,16 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         
         vpnService.notifier = self
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-            if let enabled = self?.stateFromWidget {
+        if let enabled = stateFromWidget {
+            // We set a small delay to show user a state change
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
                 self?.vpnService.turnSystemProtection(to: enabled, with: self, completion: {
                     self?.stateFromWidget = nil
                 })
+            }
+        } else {
+            DispatchQueue.main.async {[weak self] in
+                self?.updateVpnInfo()
             }
         }
     }
