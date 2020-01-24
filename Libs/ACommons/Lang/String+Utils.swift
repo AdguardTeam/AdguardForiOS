@@ -37,7 +37,11 @@ extension NSMutableAttributedString {
         let wrapped = "<span style=\"font-family: -apple-system; font-size: 16; color: \(color.hex())\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
         
-        guard let resultText = try? NSMutableAttributedString(data: htmlData, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return nil }
+        guard let resultText = try? NSMutableAttributedString(
+            data: htmlData,
+            options: [.documentType: NSAttributedString.DocumentType.html,
+                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
+            documentAttributes: nil) else { return nil }
         
         if attachmentImage != nil {
             
