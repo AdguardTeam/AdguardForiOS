@@ -210,8 +210,12 @@ class GetProTableController: UITableViewController {
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
         
         let htmlString = String(format: format, privacy, eula)
-        guard let data = htmlString.data(using: .unicode) else { return }
-        guard let attributedString = try? NSMutableAttributedString(data: data, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return }
+        guard let data = htmlString.data(using: .utf8) else { return }
+        guard let attributedString = try? NSMutableAttributedString(
+            data: data,
+            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
+                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
+            documentAttributes: nil) else { return }
         
         attributedString.addAttributes([NSAttributedString.Key.foregroundColor: theme.lightGrayTextColor], range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], range: NSRange(location: 0, length: attributedString.length))
