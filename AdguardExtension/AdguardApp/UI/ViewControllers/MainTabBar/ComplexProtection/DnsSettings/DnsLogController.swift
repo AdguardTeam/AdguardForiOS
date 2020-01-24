@@ -81,11 +81,19 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         let record = model.records[indexPath.row]
         
         // Change to category description
-        var detailsString = String(format: "type: %@", record.logRecord.type)
         let timeString = record.logRecord.time()
         
-        if record.logRecord.answerStatus?.count ?? 0 > 0 && record.logRecord.answerStatus != "NOERROR" {
-            detailsString += ", \(record.logRecord.answerStatus!)"
+        var detailsString = ""
+        let answers = record.logRecord.answer.components(separatedBy: .newlines)
+        if (answers.first?.count ?? 0) > 0 {
+            detailsString = answers.first!
+        }
+        else {
+            detailsString = record.logRecord.type
+            
+            if record.logRecord.answerStatus?.count ?? 0 > 0 && record.logRecord.answerStatus != "NOERROR" {
+                detailsString += ", \(record.logRecord.answerStatus!)"
+            }
         }
 
         cell.domain.text = record.logRecord.domain
