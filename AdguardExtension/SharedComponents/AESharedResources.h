@@ -282,6 +282,11 @@ extern NSString* _Nonnull SystemProtectionLastState;
  */
 extern NSString* _Nonnull OnboardingShowed;
 
+/**
+ User defaults key for saving statistics period type ( all time / week / day)
+ */
+extern NSString* _Nonnull StatisticsPeriodType;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

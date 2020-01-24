@@ -4,23 +4,14 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Schlüssel aus der Authentifizierungs-App:";
 
-/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
-"5Ay-kq-RuV.text" = "Sie haben noch kein Konto?";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
-"5iB-q7-5l8.text" = "DNS-Datenschutz";
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Sicherheitsfilter";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Abmelden";
 
-/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
-"7Sy-Te-Eh3.text" = "Sie sind abonniert";
-
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
-"A4T-Kw-foN.text" = "Eigene Regeln hinzufügen";
-
-/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
-"K5r-9l-kKl.text" = "Sie haben eine Lizenz";
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Fügen Sie eigene Regeln hinzu";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-Mail:";
@@ -34,17 +25,11 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "ZU MEINEM KONTO GEHEN";
 
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
-"SKX-L4-odW.text" = "Blockieren Sie Phishing, Betrug und Kryptodiebstahl";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Anmelden";
 
-/* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Schützen Sie Ihre persönlichen Daten";
-
-/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
-"aDc-NB-78y.normalTitle" = "Registrieren";
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Blockieren Sie Phishing, Betrug und Kryptodiebstahl";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Anmelden";
@@ -52,26 +37,17 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Anmelden";
 
-/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
-"fU2-3b-5Lf.text" = "Sicherheitsfilter, DNS-Datenschutz, benutzerdefinierte Filter usw. ";
+/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Systemweiter Schutz vor Tracking";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
-"jUb-cY-Qt7.normalTitle" = "Kostenlos ausprobieren";
+/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Systemschutz";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Einkäufe wiederherstellen";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
-"mpR-bB-C6U.text" = "Sicherheitsfilter";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
-"oxc-z7-F6Z.text" = "Eigene Filter";
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Eigene Filter";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "Bestätigen";
-
-/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
-"wLZ-TG-e9w.normalTitle" = "Anmelden";
-
-/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
-"zFg-Ls-ea6.text" = "Überprüfen Sie unsere Premium-Funktionen kostenlos";

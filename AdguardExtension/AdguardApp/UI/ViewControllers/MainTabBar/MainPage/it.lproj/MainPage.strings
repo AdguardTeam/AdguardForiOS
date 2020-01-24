@@ -1,57 +1,47 @@
-
 /* Class = "UILabel"; text = "Be stronger  with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
-"3qN-uj-pOb.text" = "Be stronger  with PREMIUM!";
+"3qN-uj-pOb.text" = "Sii più forte con PREMIUM!";
 
 /* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
-"46F-Jh-wHm.normalTitle" = "FIX IT";
+"46F-Jh-wHm.normalTitle" = "RISOLVERE";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
-"5pX-mg-2fq.text" = "Period";
+"5pX-mg-2fq.text" = "Periodo";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
-"Btd-nN-zLO.text" = "requests";
+"Btd-nN-zLO.text" = "richieste";
 
 /* Class = "UILabel"; text = "data saved*"; ObjectID = "Cfe-vu-29O"; */
-"Cfe-vu-29O.text" = "data saved*";
+"Cfe-vu-29O.text" = "dati salvati*";
 
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
-"FcP-gP-TsG.text" = "Some content blockers are disabled";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "Kxe-Kt-6aQ"; */
-"Kxe-Kt-6aQ.text" = "0";
+"FcP-gP-TsG.text" = "Alcuni blocchi dei contenuti sono disabilitati";
 
 /* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
-"Oez-VU-4fi.normalTitle" = "Today";
+"Oez-VU-4fi.normalTitle" = "Un giorno";
 
 /* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
-"Roe-x7-9e8.normalTitle" = "24 hours";
+"Roe-x7-9e8.normalTitle" = "24 ore";
 
 /* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
-"VRw-EP-ZlF.normalTitle" = "7 days";
+"VRw-EP-ZlF.normalTitle" = "7 giorni";
 
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
-/* Class = "UILabel"; text = "0"; ObjectID = "Zbr-WF-bsX"; */
-"Zbr-WF-bsX.text" = "0";
-
 /* Class = "UILabel"; text = "blocked"; ObjectID = "a5U-A8-S8G"; */
-"a5U-A8-S8G.text" = "blocked";
+"a5U-A8-S8G.text" = "bloccati";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
-"cvv-CS-LMQ.text" = "Some Safari content blockers are disabled";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "eIf-j0-9oP"; */
-"eIf-j0-9oP.text" = "0";
+"cvv-CS-LMQ.text" = "Alcuni blocchi dei contenuti per Safari sono disabilitati";
 
 /* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
-"gDb-ep-jQg.normalTitle" = "All time";
+"gDb-ep-jQg.normalTitle" = "Tutto il periodo";
 
 /* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
-"gu3-as-BZN.normalTitle" = "30 days";
+"gu3-as-BZN.normalTitle" = "30 giorni";
 
 /* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
-"kfe-5H-fB1.normalTitle" = "All time";
+"kfe-5H-fB1.normalTitle" = "Tutto il periodo";
 
 /* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
-"oe6-9O-dBB.normalTitle" = "FIX IT";
+"oe6-9O-dBB.normalTitle" = "RISOLVERE";

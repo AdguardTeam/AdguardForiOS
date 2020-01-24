@@ -115,9 +115,6 @@
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
 "oE2-h8-ZMZ.normalTitle" = "Copied";
 
-/* Class = "UINavigationItem"; title = "DNS Requests Log"; ObjectID = "pnh-iK-rhW"; */
-"pnh-iK-rhW.title" = "DNS Requests Log";
-
 /* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
 "pqA-7I-Vrx.title" = "Activity";
 

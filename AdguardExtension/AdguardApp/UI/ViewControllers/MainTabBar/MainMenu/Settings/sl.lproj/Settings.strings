@@ -1,14 +1,14 @@
-/* Class = "UINavigationItem"; title = "General Settings"; ObjectID = "ChK-gV-7pc"; */
-"ChK-gV-7pc.title" = "Splošne nastavitve";
+/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
+"2s7-mz-LlB.title" = "Ponastavi";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
+"Bjk-AC-5fy.text" = "Tunelski način";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Temna";
 
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic \"cosmetic\" rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PyT-Id-Sle"; */
-"PyT-Id-Sle.text" = "Če je ta nastavitev omogočena, bo AdGuard prezrl splošna \"kozmetična\" pravila. Tako boste pospešili prikaz strani na škodo kakovosti filtriranja";
-
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "TCQ-IQ-R5g"; */
-"TCQ-IQ-R5g.text" = "Uporabi poenostavljene filtre";
+/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
+"Ll9-il-kpC.title" = "Napredne nastavitve";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Sistemska privzeta";
@@ -19,23 +19,11 @@
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Samodejno posodobi samo prek omrežja Wi-Fi";
 
-/* Class = "UILabel"; text = "Invert whitelist"; ObjectID = "bVh-Of-Oxm"; */
+/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
 "bVh-Of-Oxm.text" = "Obrni seznam dovoljenih";
-
-/* Class = "UILabel"; text = "Content Blockers"; ObjectID = "c1p-jc-Itq"; */
-"c1p-jc-Itq.text" = "Zaviralci vsebine";
-
-/* Class = "UITableViewSection"; headerTitle = "Advanced"; ObjectID = "crJ-Vv-yrm"; */
-"crJ-Vv-yrm.headerTitle" = "Napredno";
-
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running."; ObjectID = "mta-fv-reE"; */
-"mta-fv-reE.text" = "Omogočite to možnost, če imate težave z internetno povezavo med delovanjem AdGuarda.";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Drugo";
-
-/* Class = "UILabel"; text = "Restart when network changes"; ObjectID = "nvD-bF-pnp"; */
-"nvD-bF-pnp.text" = "Znova zaženi ob spremembi omrežja";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Svetla";
@@ -45,6 +33,3 @@
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Če je ta nastavitev omogočena, bo AdGuard za posodobitve filtrov v ozadju uporabljal samo Wi-Fi";
-
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain 50,000 rules"; ObjectID = "wMR-5F-GaE"; */
-"wMR-5F-GaE.text" = "Na voljo imate 6 zaviralcev vsebin, vsak od njih lahko vsebuje 50.000 pravil";

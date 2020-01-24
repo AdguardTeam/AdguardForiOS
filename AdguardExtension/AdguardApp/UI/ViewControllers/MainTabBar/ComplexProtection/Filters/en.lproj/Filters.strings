@@ -7,9 +7,6 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
 "6WB-a0-8YE.text" = "Safari protection";
 
-/* Class = "UINavigationItem"; title = "   "; ObjectID = "7uS-9h-kri"; */
-"7uS-9h-kri.title" = "   ";
-
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Name:";
 
@@ -63,9 +60,6 @@
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "ADD";
-
-/* Class = "UIButton"; normalTitle = "Get Premium"; ObjectID = "lFg-x8-C9b"; */
-"lFg-x8-C9b.normalTitle" = "Get Premium";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "CANCEL";

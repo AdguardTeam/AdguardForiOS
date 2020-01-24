@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Safari ads protection"; ObjectID = "28V-ha-qHw"; */
+"28V-ha-qHw.text" = "Safari 보호";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
+"WAp-Xx-eXF.text" = "요청";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "시스템 보호";
+
+/* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
+"cva-11-jEA.text" = "모든 통계:";
+
+/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "절약된 데이터*";
+
+/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "차단됨";

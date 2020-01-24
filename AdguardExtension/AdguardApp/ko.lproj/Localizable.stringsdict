@@ -3,7 +3,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
-    <key>trial_screen_days</key>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>other</key>
+        <string>%d개의 필터가 활성화 됨</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>other</key>
+        <string>%d개의 필터가 활성화 됨</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@days@</string>
@@ -14,10 +42,12 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d일 동안 무료 체험판에 대한 전체 액세스</string>
+        <string>하루동안 모든 액세스가 무료입니다
+
+%d일동안 모든 액세스가 무료입니다</string>
       </dict>
     </dict>
-    <key>trial_screen_weeks</key>
+    <key>getPro_full_access_weeks</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@weeks@</string>
@@ -28,10 +58,12 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d주 동안 무료 체험판에 대한 전체 액세스</string>
+        <string>일주일동안 모든 액세스가 무료입니다
+
+%d주동안 모든 액세스가 무료입니다</string>
       </dict>
     </dict>
-    <key>trial_screen_months</key>
+    <key>getPro_full_access_months</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@months@</string>
@@ -42,10 +74,10 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d개월 동안 무료 체험판에 대한 전체 액세스</string>
+        <string>%d개월돈안 모든 액세스가 무료입니다</string>
       </dict>
     </dict>
-    <key>trial_screen_years</key>
+    <key>getPro_full_access_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
       <string>%#@years@</string>
@@ -56,7 +88,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>%d년 동안 무료 체험판에 대한 전체 액세스</string>
+        <string>%d년동안 모든 액세스가 무료입니다</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -113,62 +145,6 @@
         <string>d</string>
         <key>other</key>
         <string>%d년 무료 체험판 사용해 보세요</string>
-      </dict>
-    </dict>
-    <key>trial_label_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d일 동안 무료 체험판 사용</string>
-      </dict>
-    </dict>
-    <key>trial_label_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d주 동안 무료 체험판 사용</string>
-      </dict>
-    </dict>
-    <key>trial_label_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d개월 동안 무료 체험판 사용</string>
-      </dict>
-    </dict>
-    <key>trial_label_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d년 동안 무료 체험판 사용</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

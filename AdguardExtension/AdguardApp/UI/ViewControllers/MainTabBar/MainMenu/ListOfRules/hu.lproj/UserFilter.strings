@@ -1,12 +1,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "MÉGSEM";
 
-/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
-"8G3-AL-tRu.title" = "Mégsem";
-
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
-"9th-UM-Uaj.normalTitle" = "Mégsem";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "Mentés";
 

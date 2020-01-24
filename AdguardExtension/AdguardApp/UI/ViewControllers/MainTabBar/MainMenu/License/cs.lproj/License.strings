@@ -4,26 +4,11 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Kód z ověřovací aplikace:";
 
-/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
-"5Ay-kq-RuV.text" = "Nemáte účet?";
-
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
-"5iB-q7-5l8.text" = "Soukromí DNS";
-
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Odhlásit se";
 
-/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
-"7Sy-Te-Eh3.text" = "Jste přihlášeni k odběru";
-
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
-"A4T-Kw-foN.text" = "Nastavte si vlastní pravidla";
-
-/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
-"K5r-9l-kKl.text" = "Máte licenci";
-
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "Email:";
+"LJj-cc-Ko5.text" = "E-mail:";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "ZABLOKUJTE VÍCE REKLAM A SLÍDIČŮ";
@@ -34,17 +19,8 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "JÍT NA MŮJ ÚČET";
 
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
-"SKX-L4-odW.text" = "Blokování podvodných webů a další hrozby";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Přihlásit se";
-
-/* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Hodnota vašich soukromých dat";
-
-/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
-"aDc-NB-78y.normalTitle" = "REGISTROVAT";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "PŘIHLÁSIT SE";
@@ -52,26 +28,8 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Přihlásit se";
 
-/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
-"fU2-3b-5Lf.text" = "Bezpečnostní filtry, soukromí DNS, vlastní filtry atd. ";
-
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
-"jUb-cY-Qt7.normalTitle" = "VYZKOUŠEJTE ZDARMA";
-
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Obnovit nákup";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
-"mpR-bB-C6U.text" = "Bezpečnostní filtry";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
-"oxc-z7-F6Z.text" = "Vlastní filtry";
-
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "POTVRDIT";
-
-/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
-"wLZ-TG-e9w.normalTitle" = "přihlásit se";
-
-/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
-"zFg-Ls-ea6.text" = "Zdarma se podívejte na naše prémiové funkce";

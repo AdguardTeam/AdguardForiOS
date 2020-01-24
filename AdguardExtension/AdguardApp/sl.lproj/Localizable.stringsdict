@@ -3,6 +3,86 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>getPro_screen_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začnite svoj enodnevni brezplačni preizkus</string>
+        <key>two</key>
+        <string>Začnite svoj %d-dnevni brezplačni preizkus</string>
+        <key>few</key>
+        <string>Začnite svoj večdnevni brezplačni preizkus</string>
+        <key>other</key>
+        <string>Začnite svoj brezplačni preizkus</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začnite svoj enotedenski brezplačni preizkus</string>
+        <key>two</key>
+        <string>Začnite svoj %d-tedenski brezplačni preizkus</string>
+        <key>few</key>
+        <string>Začnite svoj večtedenski brezplačni preizkus</string>
+        <key>other</key>
+        <string>Začnite svoj brezplačni preizkus</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začnite svoj enodnevni brezplačni preizkus</string>
+        <key>two</key>
+        <string>Začnite svoj %d-mesečni brezplačni preizkus</string>
+        <key>few</key>
+        <string>Začnite svoj nekajmesečni brezplačni preizkus</string>
+        <key>other</key>
+        <string>Začnite svoj %d-mesečni brezplačni preizkus</string>
+      </dict>
+    </dict>
+    <key>getPro_screen_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začnite svoj enoletni brezplačni preizkus</string>
+        <key>two</key>
+        <string>Začnite svoj %d-letni brezplačni preizkus</string>
+        <key>few</key>
+        <string>Začnite svoj %d-letni brezplačni preizkus</string>
+        <key>other</key>
+        <string>Začnite svoj %d-letni brezplačni preizkus</string>
+      </dict>
+    </dict>
     <key>trial_period_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
@@ -23,6 +103,46 @@
         <string>%d dni</string>
       </dict>
     </dict>
+    <key>trial_period_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>%d teden</string>
+        <key>two</key>
+        <string>%d tedna</string>
+        <key>few</key>
+        <string>%d tednov</string>
+        <key>other</key>
+        <string>%d tednov</string>
+      </dict>
+    </dict>
+    <key>trial_period_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>En mesec</string>
+        <key>two</key>
+        <string>%d meseca</string>
+        <key>few</key>
+        <string>%d mesecev</string>
+        <key>other</key>
+        <string>%d mesecev</string>
+      </dict>
+    </dict>
     <key>trial_period_years</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>
@@ -41,6 +161,46 @@
         <string>%d let</string>
         <key>other</key>
         <string>%d let</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Nato %2$@ na dan</string>
+        <key>two</key>
+        <string>Nato %2$@ vsaka %1$d dneva</string>
+        <key>few</key>
+        <string>Nato %2$@ vsakih %1$d dni</string>
+        <key>other</key>
+        <string>Nato %2$@ vsakih %1$d dni</string>
+      </dict>
+    </dict>
+    <key>trial_description_label_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Nato %2$@ vsak teden</string>
+        <key>two</key>
+        <string>Nato %2$@ vsaka %1$d tedna</string>
+        <key>few</key>
+        <string>Nato %2$@ vsakih %1$d tednov</string>
+        <key>other</key>
+        <string>Nato %2$@ vsakih %1$d tednov</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>

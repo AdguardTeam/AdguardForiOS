@@ -13,17 +13,11 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "دستور فیلتر را نمیتوان تبدیل کرد.دستور متن نامعتبر است.";
 
-/* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "دستورات فیلتر کاربر را نمیتوان فیلتر کرد.یکی از دستورات حاوی خطا است.دستور بعدی در موقعیت فعلی مکان نما را بررسی کنید.";
-
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.سعی کنید دستورات خود را پاکسازی کرده،و در لیست سفید قرار دهید یا گروه فیلترهای بکار رفته را تغییر دهید.";
 
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
@@ -34,14 +28,8 @@
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "لیست سفید";
 
-/* (User Filter Screen) Title */
-"user_filter_title" = "فیلتر کاربر";
-
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "دستورات دستی خود را اینجا وارد کنید، با شکستن خط از هم جدا میشوند";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "نام دامنه ها را که با شکستن خط از هم جدا شده اند اینجا وارد کنید، که AdGuard فیلترینگ سافاری را غیرفعال می کند.";
 
 /* YES Button caption in alert */
 "common_action_yes" = "بله";
@@ -94,16 +82,8 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "فیلترهای فعال شده: %d/%d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "غير فعال شده";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "فیلتر بروز رسانی شده  : %@";
-
-/* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
@@ -113,9 +93,6 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "افزودن یک دستور";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "افزودن یک دامنه";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -129,26 +106,11 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "دامنه:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "وارد کردن لیست سفید";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "وارد کردن لیست سیاه";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "خروجیگیری لیست سفید";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "خروجیگیری لیست سیاه";
-
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "گزارش مسدودسازی اشتباه";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "گزارش مشکل";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "تماس با پشتیبانی";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "خروجیگیری وقایع";
@@ -168,9 +130,6 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "نسخه %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "بروز رسانی شده %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "تقسیم تونل،سازگار با برنامه های \"وی پی اِن شخصی\"";
 
@@ -179,9 +138,6 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "تونل-کامل(بدون آیکون VPN)،ناسازگار با سایر برنامه های VPN،کمتر پایدار";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "غير فعال شده";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "مسدودساز تبلیغ،وبسایت های رَدیاب و فیشینگ";
@@ -208,9 +164,6 @@
 "safe_dns_description" = "سرویس DNS با SafeDNS";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "رمزگُذاری";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "امنیتی";
 
 /* Dns Feature Name */
@@ -224,9 +177,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "مسدودسازی تبلیغات";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "به اشخاص  ثالث ها اجازه جاسوسی در فعالیت وبگردی خود ندهید";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "مسدودساز دامنه های فیشینگ و سایر دامنه های خطرناک";
@@ -243,14 +193,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "مسدودسازی تبلیغ و سرورهای رَدیاب";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "سروری انتخاب نشده است";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "فعال شده %1$d از %2$d";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "به کلیپ برد کپی شد";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "عادی";
@@ -288,29 +232,17 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "منتظر بمانید...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "من فقط مسدودساز تبلیغ AdGuard را برای آی اُ اِس نصب کردم";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "اگر شما هم میخواهید وب را بدون تبلیغ مثل من مرور کنید،این را بررسی کن:";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "پوسته";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "ساير";
 
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "پیشرفته";
-
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "مسدودساز محتوا";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "فيلترها:";
-
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "تنظیمات عمومی";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ دستور در حال استفاده است";
@@ -329,9 +261,6 @@
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "قبل از استفاده شما از این اقدام افزونه، %1$@ پیکربندی اولیه را اِجرا می کند. برای انجام آن برنامه اصلی %2$@ را اجرا کنید.";
-
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "پیام را نمیتوان به تیم پشتیبانی ارسال کرد. چون شما ایمیل حساب را پیکربندی نکرده اید.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "توجه کنید که مسدودساز محتوا غیرفعال شده است. این یعنی صرف نظر از تنظیمات AdGuard چیزی فیلتر نخواهد شد. لطفا AdGuard Content blocker را در تنظیمات سافاری برای شروع فیلترینگ فعال کنید.";

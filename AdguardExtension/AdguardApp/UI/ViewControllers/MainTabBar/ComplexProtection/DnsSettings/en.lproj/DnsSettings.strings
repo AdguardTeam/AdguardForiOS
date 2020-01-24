@@ -28,9 +28,6 @@
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "SAVE AND SELECT";
 
-/* Class = "UINavigationItem"; title = "  "; ObjectID = "D3X-CK-RSY"; */
-"D3X-CK-RSY.title" = "  ";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
@@ -92,7 +89,7 @@
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
 /* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses";
+"iaJ-tk-ohH.text" = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses.";
 
 /* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "System Blacklist";

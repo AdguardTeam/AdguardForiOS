@@ -1,23 +1,11 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "PREKLIČI";
 
-/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "8G3-AL-tRu"; */
-"8G3-AL-tRu.title" = "Prekliči";
-
-/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "9th-UM-Uaj"; */
-"9th-UM-Uaj.normalTitle" = "Prekliči";
-
-/* Class = "UILabel"; text = "The rule has been added to the user filter."; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "Pravilo je bilo dodano uporabniškemu filtru.";
-
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "SHRANI";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Uredi";
-
-/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "HB0-zK-xj2"; */
-"HB0-zK-xj2.normalTitle" = "Shrani";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "ODSTRANI";
@@ -25,14 +13,8 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
 "U2P-9b-f6k.normalTitle" = "PREKLIČI";
 
-/* Class = "UIButton"; normalTitle = "Clear"; ObjectID = "cce-mi-paP"; */
-"cce-mi-paP.normalTitle" = "Počisti";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "DODAJ";
-
-/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "lE1-GD-Qr5"; */
-"lE1-GD-Qr5.normalTitle" = "Uredi";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domena:";

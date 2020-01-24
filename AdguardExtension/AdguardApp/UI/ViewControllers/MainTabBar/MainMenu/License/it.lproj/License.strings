@@ -1,23 +1,20 @@
 /* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
 "0Zf-Ng-gYi.title" = "AdGuard Premium";
 
-/* Class = "UILabel"; text = "Don't have an account?"; ObjectID = "5Ay-kq-RuV"; */
-"5Ay-kq-RuV.text" = "Non hai un account?";
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Codice dall'app di autenticazione:";
 
-/* Class = "UILabel"; text = "DNS Privacy"; ObjectID = "5iB-q7-5l8"; */
-"5iB-q7-5l8.text" = "Privacy DNS";
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Filtri di sicurezza";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Logout";
 
-/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "7Sy-Te-Eh3"; */
-"7Sy-Te-Eh3.text" = "Sei iscritto";
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Tutte le funzioni Premium sono disponibili";
 
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "A4T-Kw-foN"; */
-"A4T-Kw-foN.text" = "Imposta le tue regole";
-
-/* Class = "UILabel"; text = "You have a license"; ObjectID = "K5r-9l-kKl"; */
-"K5r-9l-kKl.text" = "Hai una licenza";
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Imposta le tue regole";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
@@ -31,17 +28,11 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "VAI AL MIO ACCOUNT";
 
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "SKX-L4-odW"; Note = "(GetProController) Security filters description"; */
-"SKX-L4-odW.text" = "Blocca il phishing e altre minacce";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Accedere";
 
-/* Class = "UILabel"; text = "Protect your personal data"; ObjectID = "ZMu-UP-PI3"; */
-"ZMu-UP-PI3.text" = "Proteggi i tuoi dati personali";
-
-/* Class = "UIButton"; normalTitle = "REGISTER"; ObjectID = "aDc-NB-78y"; */
-"aDc-NB-78y.normalTitle" = "REGISTRATI";
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Bloccare il phishing, la truffa e il cripto-jacking";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ACCEDERE";
@@ -49,26 +40,20 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Login";
 
-/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters etc. "; ObjectID = "fU2-3b-5Lf"; */
-"fU2-3b-5Lf.text" = "Filtri di sicurezza, privacy DNS, filtri personalizzati, ecc. ";
+/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Protezione dal tracking per lo sistema";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "jUb-cY-Qt7"; */
-"jUb-cY-Qt7.normalTitle" = "PROVA GRATIS";
+/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Protezione di sistema";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Premium é attivato";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Ripristina acquisto";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "mpR-bB-C6U"; */
-"mpR-bB-C6U.text" = "Filtri di sicurezza";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "oxc-z7-F6Z"; */
-"oxc-z7-F6Z.text" = "Filtri personalizzati";
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Filtri personalizzati";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "CONFERMA";
-
-/* Class = "UIButton"; normalTitle = "log in"; ObjectID = "wLZ-TG-e9w"; */
-"wLZ-TG-e9w.normalTitle" = "accedere";
-
-/* Class = "UILabel"; text = "Check out our Premium features for free"; ObjectID = "zFg-Ls-ea6"; */
-"zFg-Ls-ea6.text" = "Scopri le nostre funzioni Premium gratis";

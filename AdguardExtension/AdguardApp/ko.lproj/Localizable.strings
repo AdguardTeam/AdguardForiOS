@@ -14,7 +14,7 @@
 "rule_converting_error" = "필터 규칙을 변환할 수 없습니다. 잘못된 규칙입니다.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "사용자 필터 규칙을 변환할 수 없습니다. 규칙 중 하나에서 오류가 발생하였습니다. 현재 커서 위치 다음 규칙을 확인하세요.";
+"filter_rules_converting_error" = "Safari에 이러한 사용자 규칙을 추가할 수 없음";
 
 /* Alert title. On error. */
 "common_error_title" = "오류";
@@ -29,19 +29,34 @@
 "common_action_no" = "아니요";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "예외 목록 (반전)";
+"inverted_whitelist_title" = "화이트리스트 (반전된)";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "변경 사항을 적용하는 중...";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "이 정보는 차단된 DNS 요청 수를 기반으로 합니다. 이 통계는 처음에 도메인을 차단하지 않았을 경우 사용자가 다운로드 할 수있는 광고, 추적기 및 기타 위협의 정확한 양을 계산할 수 없습니다.";
+
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ KB";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ MB";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ GB";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free" = "무료로 사용해 보세요!";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "예외 목록";
+"whitelist_title" = "화이트리스트";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "사용자 필터";
+"user_filter_title" = "사용자 규칙";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "여기에 사용자 규칙을 줄 바꿈으로 나눠 입력하세요";
-
-/* (User Filter Screen) Whitelist input helper */
-"whitelist_helper" = "여기에 AdGuard가 비활성화 시킬 Safari 필터 도메인명을 줄 바꿈으로 나눠 입력하세요";
 
 /* YES Button caption in alert */
 "common_action_yes" = "예";
@@ -100,19 +115,23 @@
 /* (GroupsController) Filter group filter count format */
 "filter_group_filters_count_format" = "활성화된 필터: %d / %d";
 
-/* (GroupsController) Disabled filter group subtitle */
-"filters_group_disabled" = "비활성화 됨";
-
+/* (GroupsController) Filters update time format */
 "filter_date_format" = "필터가 업데이트 되었습니다: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "이곳에 당신의 사용자 정의 규칙을 추가하세요<br><a href=\"%@\">규칙 문법에 대한</a> 내용을 읽어보세요.";
+"blacklist_text_format" = "이곳에 당신의 사용자 정의 규칙을 추가하세요<br>규칙 문법에 대한<a href=\"%@\">내용을 읽어보세요</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서의 필터링을 비활성화할 것입니다.";
+"whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 다른 모든 설정을 무시하고 이 도메인에 대한 액세스를 차단하지 않습니다.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서만 필터링을 활성화할 것입니다.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "여기에 도메인 명을 줄 바꿈으로 구분하여 입력하세요. AdGuard는 이 도메인에 대한 모든 연결을 허용합니다.";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text_format" = "이 블랙리스트는 <a href=\"%@\">AdGuard의 DNS 문법</a>을 지원합니다. 여기에 규칙을 줄 바꿈으로 나눠 입력하세요. AdGuard는 이 규칙과 일치하는 도메인에 대한 모든 연결을 차단합니다.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "업데이트 중...";
@@ -121,7 +140,7 @@
 "add_blacklist_rule_title" = "규칙 추가";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "도메인 추가";
+"add_whitelist_domain_title" = "도메인을 입력하세요";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -129,23 +148,17 @@
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
 
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Wi-Fi 이름";
+
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "규칙:";
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "도메인:";
 
-/* (UserFilterController) import whitelist button title */
-"import_whitelist_title" = "불러오기";
-
-/* (UserFilterController) import blacklist button title */
-"import_blacklist_title" = "불러오기";
-
-/* (UserFilterController) export whitelist button title */
-"export_whitelist_title" = "내보내기";
-
-/* (UserFilterController) export blacklist button title */
-"export_blacklist_title" = "내보내기";
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "이름:";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "옳지 않은 차단 신고";
@@ -174,26 +187,20 @@
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "버전 %@";
 
-/* (FiltersController) Filter update date format */
-"filter_last_update_format" = "%@ 업데이트 됨";
-
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "분할 터널, \"개인용 VPN\" 어플리케이션과 호환됨";
+"tunnel_mode_split_description" = "분할 터널, \"개인용 VPN\" 애플리케이션과 호환됨";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "전체 터널, 다른 VPN 어플리케이션과 호환되지 않음";
+"tunnel_mode_full_description" = "전체 터널, 다른 VPN 애플리케이션과 호환되지 않음";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 어플리케이션과 호환되지 않음, 불안정함";
-
-/* (MainMenuController) DNS server disabled state */
-"dns_server_disabled" = "비활성화 됨";
+"tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 애플리케이션과 호환되지 않음, 불안정함";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "광고, 트래커, 피싱 웹사이트 차단";
+"adguard_dns_description" = "AdGuard DNS는 다양한 카운터, 분석 시스템 및 피싱 웹사이트로부터 개인 정보를 보호 할 수 있습니다";
 
 /* Adguard Family DNS server description */
-"adguard_family_dns_description" = "성인용 웹사이트도 차단";
+"adguard_family_dns_description" = "AdGuard DNS + SafeSearch 및 성인 콘텐츠 차단";
 
 /* Google DNS server description */
 "google_dns_description" = "구글이 제공하는 글로벌 DNS 서비스";
@@ -214,9 +221,6 @@
 "safe_dns_description" = "SafeDNS로부터 제공된 DNS 서비스";
 
 /* Dns Feature Name */
-"dns_provider_encryption_tag" = "암호화";
-
-/* Dns Feature Name */
 "dns_provider_secure_tag" = "보안";
 
 /* Dns Feature Name */
@@ -230,9 +234,6 @@
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "광고 차단";
-
-/* Dns Feature description */
-"dns_provider_encryption_summary" = "제 3자가 당신의 브라우징 활동을 몰래 볼 수 있게 하지 마십시오.";
 
 /* Dns Feature description */
 "dns_provider_secure_summary" = "알려진 피싱 사이트와 위험한 도메인들을 차단합니다";
@@ -249,14 +250,11 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "광고와 트래킹 서버를 차단";
 
-/* MainMenuController - dns privacy menu description */
-"no_dns_server_selected" = "지정된 서버 없음";
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "시스템 DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%2$d가지 중 %1$d가지가 활성화 됨";
-
-/* DnsRequestDetailsController - this text is showed in toast alert when dns responses copied to pasteboard */
-"text_copied" = "클립보드에 복사되었습니다.";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "일반";
@@ -283,7 +281,7 @@
 "purchase_description_format" = "AdGuard 구독 서비스에 대하여:<br><br>• 결제는 구입 확인 시 iTunes 계정을 통해 이루어집니다.<br>• 구독 서비스는 자동 갱신이 종료되기 24시간 전에 비활성화하지 않는 한 자동으로 갱신됩니다.<br>• 구독 갱신 수수료는 갱신되기 24시간 전에 청구됩니다. 고객님은 구독을 직접 관리할 수 있으며, 자동 갱신은 구독 후 iTunes 계정 설정에서 비활성화 할 수 있습니다.<br><br><a href=%1$@>개인 정보 처리 방침</a> <br><br><a href=%2$@>이용 약관</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>개인 정보 처리 방침</a> <br><br><a href=%2$@>이용 약관</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>이용 약관</a> 및<a href=%1$@>개인 정보 처리 방침</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "확인";
@@ -300,20 +298,11 @@
 /* this message is shown during the login on the license screen */
 "loading_message" = "잠시만 기다려주세요...";
 
-/* (MainController) Share this app initial text on Mail Body (text row) */
-"share_mail_body_text" = "막 AdGuard 광고차단 앱을 설치했어요.";
-
-/* (MainController) Share this app initial text on Mail Body (before link row) */
-"share_mail_body_subtext" = "저 처럼 인터넷을 광고 없이 즐기려면, 한번 살펴보세요:";
-
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "테마";
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "기타";
-
-/* (AdvancedSettingsController) "Advanced" header view title*/
-"advanced_header_title" = "고급";
 
 /* (ContentBlockerStateController) "Content Blockers" title */
 "content_blockers_title" = "콘텐츠 차단기";
@@ -321,11 +310,17 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "필터:";
 
-/* (AdvancedSettingsController) "General Settings" title */
-"general_settings_title" = "일반 설정";
-
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "VPN 을 먼저 활성화해야합니다";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "통계 초기화";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "모든 통계가 지워집니다!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "초기화";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@개의 규칙이 사용되는 중";
@@ -348,11 +343,8 @@
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "이 확장 프로그램을 사용하기 위해서는 %1$@가 초기 환경설정을 수행해야 합니다. %2$@ 앱을 실행하여 초기 환경설정을 수행할 수 있도록 하십시오.";
 
-/* (AEUIAboutController) Alert message if user have no e-mail account on device */
-"support_message_sending_error" = "이메일 계정을 설정하지 않아서 지원 팀에게 메시지를 보낼 수 없습니다.";
-
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
-"content_blocker_disabled_format" = "콘텐츠 차단기가 비활성화 되었습니다. 이는 AdGuard 설정에 상관 없이 광고가 필터링 되지 않을 것을 의미합니다. 사파리 설정에서 AdGuard Content Blocker을 활성화 하여 필터링을 활성화 하십시오.";
+"content_blocker_disabled_format" = "콘텐츠 차단기가 비활성화 되었습니다. 이는 AdGuard 설정에 상관 없이 광고가 필터링 되지 않을 것을 의미합니다. Safari 설정에서 AdGuard Content Blocker을 활성화 하여 필터링을 활성화 하십시오.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
 "hostname_obtaining_error" = "호스트 이름을 알 수 없습니다. 페이지가 아직 로딩되지 않았을 수도 있습니다.";
@@ -387,12 +379,6 @@
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "한 번 구매하여 AdGuard 프리미엄 특전을 모든 기기에서 누려보세요!";
 
-/* (TrialController) alert text title if there is no internet */
-"no_internet" = "인터넷을 연결할 수 없습니다";
-
-/* (TrialController) alert text message if there is no internet */
-"no_internet_message" = "무료 평가판을 시작하려면 인터넷에 연결하세요";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "이메일 주소 또는 비밀번호가 올바르지 않습니다";
 
@@ -405,5 +391,230 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "잘못된 2FA 토큰";
 
-/* (LoginController) terms and eula text */
-"login_terms_string" = "계속하면 <a href=\"%@\"> 이용 약관 </a> 및 <a href=\"%@\"> EULA </a>에 동의하게 됩니다.";
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi 예외";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "아래에 나열된 Wi-Fi 네트워크에는 시스템 보호가 작동하지 않습니다";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "예외 추가";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "모바일 데이터 필터링";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Wi-Fi 필터링";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "모바일 네트워크를 통해 데이터를 전송할 때 시스템을 보호합니다";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Wi-Fi를 사용하는 동안 시스템을 보호합니다";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "화이트리스트";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "블랙리스트";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari 사용자 규칙";
+
+/* (ListOfRulesModel) title for export */
+"export" = "내보내기";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "비우기";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "저장";
+
+/* (ListOfRulesModel) title for import */
+"import" = "가져오기";
+
+/* "Disabled" title */
+"disabled" = "비활성화 됨";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "화이트리스트에서 제거";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "블랙리스트에서 제거";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "화이트리스트에 추가";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "블랙리스트에 추가";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "피싱 사이트 및 위험한 도메인을 차단할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "타사 필터를 추가 할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "오디오 및 비디오 플레이어";
+
+/*(LogCategory) comments category*/
+"comments" = "댓글";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "고객 상호 작용";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "성인 광고";
+
+/*(LogCategory) advertising category*/
+"advertising" = "광고";
+
+/*(LogCategory) essential category*/
+"essential" = "필수";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "사이트 분석";
+
+/*(LogCategory) social media category*/
+"social_media" = "SNS";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "기타";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "호스팅";
+
+/*(LogCategory) unknown category*/
+"unknown" = "알 수 없음";
+
+/*(LogCategory) extensions category*/
+"extensions" = "확장 프로그램";
+
+/*(ListOfRules) Select title */
+"common_select" = "선택";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "수정";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "삭제";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "모두 선택";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "도메인 추가";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "새 규칙 추가";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "사용자 규칙, 시스템 보호, 인터페이스 및 인증 설정을 포함한 모든 설정이 초기화 됩니다. 이 작업은 취소할 수 없습니다. 설정을 초기화합니까?";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24시간";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "오늘";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7일";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30일";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "전체";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "콘텐츠 차단기 업데이트 중";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "필터 로딩 중...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "규칙이 변환 중...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "새 사용자 정의 필터";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "새 DNS 필터";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "보호가 비활성화 되었습니다.";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "보호가 활성화 되었습니다.";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari와 시스템 보호";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari 콘텐츠 차단";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "모든 보호 모듈이 비활성화 되었습니다";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "시스템 보호";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d 요청, %2$d 차단됨";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "이 정보는 WhoTrackMe.com 서비스에서 로드 되었습니다";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "더보기";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "중복 필터를 추가하려고 했습니다. 이 필터가 이미 목록에 추가되었습니다.";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "변경 사항이 적용되지 않았습니다";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "차단됨";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "처리됨";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "화이트리스트";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "화이트리스트에 추가됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "블랙리스트에 추가됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "화이트리스트에서 제거됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "블랙리스트에서 제거됨";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "%@<b>설정</b>을 엽니다";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "%@<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 %@켭니다</b>";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "시스템 DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "인터넷 서비스 공급자가 제공하는 시스템 기본 DNS 서버를 사용합니다";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "요청 차단";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "화이트리스트 요청";
