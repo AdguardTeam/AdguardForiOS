@@ -107,8 +107,8 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             getSystemProtectionState {[weak self] (systemEnabled) in
                 guard let self = self else { return }
                 
-                let safaryEnabled = self.resources.safariProtectionEnabled
-                self.saveLastStates(safariState: safaryEnabled, systemState: systemEnabled)
+                let safariEnabled = self.resources.safariProtectionEnabled
+                self.saveLastStates(safariState: safariEnabled, systemState: systemEnabled)
                 
                 // Turning off safari and system protection
                 self.switchSafariProtection(state: enabled)
@@ -119,25 +119,25 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         } else {
             let statesTuple = getLastStates()
             
-            let safariEnabled = statesTuple.safariEnabled
-            let systemEnabled = statesTuple.systemEnabled
+            let safariEnabledSaved = statesTuple.safariEnabled
+            let systemEnabledSaved = statesTuple.systemEnabled
             
             /**
              If everything was turned off before disabling complex protection
              then we turning on just safari protection
              */
-            if !(safariEnabled || systemEnabled){
+            if !(safariEnabledSaved || systemEnabledSaved){
                 switchSafariProtection(state: true)
             } else {
                 /**
                  If last state of system protection was true and proStatus became false while complex protection was off
                  we turn on safari protection instead
                  */
-                if safariEnabled || (systemEnabled && !proStatus){
+                if safariEnabledSaved || (systemEnabledSaved && !proStatus){
                     switchSafariProtection(state: true)
                 }
-                if systemEnabled && proStatus {
-                    switchSystemProtection(state: systemEnabled, for: VC)
+                if systemEnabledSaved && proStatus {
+                    switchSystemProtection(state: systemEnabledSaved, for: VC)
                 }
             }
         }

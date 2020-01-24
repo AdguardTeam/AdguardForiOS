@@ -151,7 +151,7 @@ class SafariProtectionController: UITableViewController {
     
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
-        resources.sharedDefaults().set(enabled, forKey: SafariProtectionState)
+        resources.safariProtectionEnabled = enabled
         safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
         
         complexProtection.switchSafariProtection(state: enabled)
