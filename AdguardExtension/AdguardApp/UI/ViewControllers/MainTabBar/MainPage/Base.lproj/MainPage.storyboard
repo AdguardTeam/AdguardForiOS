@@ -32,7 +32,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqG-vP-HUd">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="241.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-2n-Sft" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R2-2n-Sft" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="209.5" width="366" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
@@ -48,7 +48,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYA-et-eyV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYA-et-eyV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="201.5" width="366" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                                 <nil key="textColor"/>
@@ -121,7 +121,7 @@
                                         <constraints>
                                             <constraint firstItem="0R2-2n-Sft" firstAttribute="top" secondItem="lYA-et-eyV" secondAttribute="bottom" constant="8" id="EaA-Fy-zQn"/>
                                             <constraint firstItem="lYA-et-eyV" firstAttribute="leading" secondItem="0R2-2n-Sft" secondAttribute="leading" id="HhC-FV-vcY"/>
-                                            <constraint firstAttribute="bottom" secondItem="0R2-2n-Sft" secondAttribute="bottom" priority="750" constant="32" id="OYQ-np-gFs"/>
+                                            <constraint firstAttribute="bottom" secondItem="0R2-2n-Sft" secondAttribute="bottom" constant="32" id="OYQ-np-gFs"/>
                                             <constraint firstItem="OPP-0X-avj" firstAttribute="centerX" secondItem="VqG-vP-HUd" secondAttribute="centerX" constant="28" id="SoA-hb-6d3">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="28"/>
                                                 <variation key="heightClass=regular-widthClass=regular" constant="34"/>
@@ -131,11 +131,11 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="-34"/>
                                             </constraint>
                                             <constraint firstItem="0R2-2n-Sft" firstAttribute="leading" secondItem="VqG-vP-HUd" secondAttribute="leading" constant="24" id="Ywj-nc-TRJ"/>
-                                            <constraint firstItem="PJh-s4-9Wf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VqG-vP-HUd" secondAttribute="top" constant="16" id="c8q-oE-3NX"/>
+                                            <constraint firstItem="PJh-s4-9Wf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VqG-vP-HUd" secondAttribute="top" constant="20" id="c8q-oE-3NX"/>
                                             <constraint firstAttribute="trailing" secondItem="0R2-2n-Sft" secondAttribute="trailing" constant="24" id="dcn-qQ-76T"/>
                                             <constraint firstItem="lYA-et-eyV" firstAttribute="trailing" secondItem="0R2-2n-Sft" secondAttribute="trailing" id="e00-Wd-uzi"/>
                                             <constraint firstItem="OPP-0X-avj" firstAttribute="centerY" secondItem="PJh-s4-9Wf" secondAttribute="centerY" id="eql-SV-bSr"/>
-                                            <constraint firstItem="lYA-et-eyV" firstAttribute="top" secondItem="PJh-s4-9Wf" secondAttribute="bottom" priority="750" constant="16" id="jXt-WZ-avs"/>
+                                            <constraint firstItem="lYA-et-eyV" firstAttribute="top" secondItem="PJh-s4-9Wf" secondAttribute="bottom" constant="16" id="jXt-WZ-avs"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-f2-PUd">
@@ -705,6 +705,7 @@
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
                         <outlet property="dataSavedNumberLabel" destination="Zbr-WF-bsX" id="hCA-OE-HiV"/>
                         <outlet property="dataSavedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
+                        <outlet property="fromButtonsToTopHeight" destination="c8q-oE-3NX" id="C62-Le-Ise"/>
                         <outlet property="getProButton" destination="4Ft-5h-4Jd" id="upu-BZ-SFA"/>
                         <outlet property="getProView" destination="jbE-Rs-Ce2" id="JHN-OU-mFW"/>
                         <outlet property="manDialogText" destination="3qN-uj-pOb" id="Xx6-Hj-Nz6"/>

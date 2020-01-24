@@ -44,6 +44,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+    private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: NotificationToken?
     private var proObservation: NSKeyValueObservation?
@@ -98,9 +99,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         if let enabled = stateFromWidget {
             // We set a small delay to show user a state change
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                self?.vpnService.turnSystemProtection(to: enabled, with: self, completion: {
-                    self?.stateFromWidget = nil
-                })
+                self?.complexProtection.switchSystemProtection(state: enabled, for: self)
+                self?.stateFromWidget = nil
             }
         } else {
             DispatchQueue.main.async {[weak self] in
@@ -198,8 +198,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        
-        vpnService.turnSystemProtection(to: enabled, with: self, completion: {})
+    
+        complexProtection.switchSystemProtection(state: enabled, for: self)
     }
     
     // MARK: private methods
