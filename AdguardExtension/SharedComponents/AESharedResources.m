@@ -388,7 +388,8 @@ NSString *OnboardingShowed = @"OnboardingShowed";
 }
 
 - (BOOL)safariProtectionEnabled{
-    return [self.sharedDefaults boolForKey:SafariProtectionState];
+    NSNumber *safariEnabled = [self.sharedDefaults objectForKey:SafariProtectionState];
+    return safariEnabled == nil ? YES : safariEnabled.boolValue;
 }
 
 - (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{

@@ -35,6 +35,7 @@ class VpnService: VpnServiceProtocol {
     }
 
     private let vpnManager: APVPNManager
+    private let configuration: ConfigurationServiceProtocol
     
     // MARK: - Observers
     
@@ -42,9 +43,9 @@ class VpnService: VpnServiceProtocol {
     private var vpnConfigurationObserver: NotificationToken?
     
     
-    init(vpnManager: APVPNManager) {
+    init(vpnManager: APVPNManager, configuration: ConfigurationServiceProtocol) {
         self.vpnManager = vpnManager
-        
+        self.configuration = configuration
         addObservers()
     }
     
@@ -52,6 +53,10 @@ class VpnService: VpnServiceProtocol {
         
         let vpnTurner: ()->() = {[weak self] in
             guard let self = self else { return }
+            
+            if !self.configuration.proStatus{
+                return
+            }
             
             if state && !self.vpnManager.vpnInstalled {
                 if let VC = vc {

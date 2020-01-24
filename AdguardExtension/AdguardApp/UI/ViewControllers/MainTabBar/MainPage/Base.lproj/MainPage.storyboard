@@ -76,7 +76,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="42"/>
                                                     </constraint>
                                                 </constraints>
-                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="safari"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
@@ -102,7 +102,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="42"/>
                                                     </constraint>
                                                 </constraints>
-                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" backgroundImage="ic_adguard"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
