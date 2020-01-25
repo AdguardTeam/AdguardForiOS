@@ -194,12 +194,12 @@ class GetProTableController: UITableViewController {
     private func updateTheme() {
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
+            guard let self = self else { return }
+            self.setPurchaseDescription()
+            self.tableView.reloadData()
         }
         theme.setupLabels(themableLabels)
         theme.setupImage(logoImage)
-        setPurchaseDescription()
     }
     
     private func setPurchaseDescription() {
