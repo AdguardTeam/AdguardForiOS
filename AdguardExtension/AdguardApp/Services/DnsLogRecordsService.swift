@@ -132,7 +132,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         if (now - lastPurgeTime) > purgeTimeInterval {
             
             lastPurgeTime = now;
-            writeHandler!.inTransaction { (db, rollback) in
+            writeHandler?.inTransaction { (db, rollback) in
                 db!.executeUpdate("DELETE FROM APDnsLogTable WHERE timeStamp > 0 ORDER BY timeStamp DESC LIMIT -1 OFFSET 1000", withParameterDictionary: [:])
             }
         }

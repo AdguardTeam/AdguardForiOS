@@ -2,6 +2,18 @@
 
 #import "AGDnsProxyEvents.h"
 
+/**
+ * DNS proxy error domain
+ */
+extern NSErrorDomain const AGDnsProxyErrorDomain;
+
+/**
+ * DNS error codes
+ */
+typedef NS_ENUM(NSInteger, AGDnsProxyError) {
+    AGDPE_PARSE_DNS_STAMP_ERROR,
+    AGDPE_TEST_UPSTREAM_ERROR
+};
 
 /**
  * Logging levels
@@ -236,4 +248,59 @@ typedef void (^logCallback)(const char *msg, int length);
 * @return true if string is a valid rule, false otherwise
 */
 + (BOOL) isValidRule: (NSString *) str;
+@end
+
+typedef NS_ENUM(NSInteger, AGStampProtoType) {
+    /** plain is plain DNS */
+    AGSPT_PLAIN = 0x00,
+    /** dnscrypt is DNSCrypt */
+    AGSPT_DNSCRYPT = 0x01,
+    /** doh is DNS-over-HTTPS */
+    AGSPT_DOH = 0x02,
+    /** tls is DNS-over-TLS */
+    AGSPT_TLS = 0x03,
+};
+
+@interface AGDnsStamp : NSObject
+
+/**
+ * Protocol
+ */
+@property(nonatomic, readonly) AGStampProtoType proto;
+/**
+ * Server address
+ */
+@property(nonatomic, readonly) NSString *serverAddr;
+/**
+ * Provider name
+ */
+@property(nonatomic, readonly) NSString *providerName;
+/**
+ * Path (for DOH)
+ */
+@property(nonatomic, readonly) NSString *path;
+
+- (instancetype) initWithProto: (AGStampProtoType) proto
+                    serverAddr: (NSString *) serverAddr
+                  providerName: (NSString *) providerName
+                          path: (NSString *) path;
+@end
+
+@interface AGDnsUtils : NSObject
+
+/**
+ * Parses a DNS stamp string and returns a instance
+ * @param stampStr DNS stamp string
+ * @error error error
+ * @return stamp instance or nil if error
+ */
++ (AGDnsStamp *) parseDnsStampWithStampStr: (NSString *) stampStr error: (NSError **) error;
+
+/**
+ * Checks if upstream is valid and available
+ * @param opts Upstream options
+ * @return If it is, no error is returned. Otherwise this method returns an error with an explanation.
+ */
++ (NSError *) testUpstream: (AGDnsUpstream *) opts;
+
 @end
