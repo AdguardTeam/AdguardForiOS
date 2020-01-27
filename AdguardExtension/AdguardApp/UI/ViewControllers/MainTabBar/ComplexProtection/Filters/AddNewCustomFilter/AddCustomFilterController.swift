@@ -90,14 +90,14 @@ class AddCustomFilterController: BottomAlertController {
     @IBAction func continueAction(_ sender: Any) {
         
         nextButton.startIndicator()
-        nextButton.isUserInteractionEnabled = false
+        nextButton.isEnabled = false
         guard let urlString = urlTextField?.text else {
-            nextButton.isUserInteractionEnabled = true
+            nextButton.isEnabled = true
             nextButton.stopIndicator()
             return
         }
         guard let url = URL(string: urlString) else {
-            nextButton.isUserInteractionEnabled = true
+            nextButton.isEnabled = true
             nextButton.stopIndicator()
             return
         }
@@ -107,7 +107,7 @@ class AddCustomFilterController: BottomAlertController {
             DispatchQueue.main.async {
                 if let parserError = error {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
-                    self.nextButton.isUserInteractionEnabled = true
+                    self.nextButton.isEnabled = true
                     self.nextButton.stopIndicator()
                     return
                 }
@@ -115,7 +115,7 @@ class AddCustomFilterController: BottomAlertController {
                 if let parserResult = result {
                     self.filter = parserResult
                     self.performSegue(withIdentifier: self.detailsSegueId, sender: self)
-                    self.nextButton.isUserInteractionEnabled = true
+                    self.nextButton.isEnabled = true
                     self.nextButton.stopIndicator()
                     return
                 }
@@ -133,6 +133,7 @@ class AddCustomFilterController: BottomAlertController {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
+        nextButton.indicatorStyle = theme.indicatorStyle
     }
 }
 
