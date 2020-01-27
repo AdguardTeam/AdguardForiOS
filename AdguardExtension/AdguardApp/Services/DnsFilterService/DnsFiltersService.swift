@@ -350,7 +350,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                     }
                     if let parserResult = result {
                         let meta = parserResult.meta
-                        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: meta.descr, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+                        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: filter.name ?? meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: filter.desc ?? meta.descr, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
                         dnsFilter.id = filter.id
                             
                         self.filters[i] = dnsFilter
