@@ -181,26 +181,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if let recognizer = contentBlockersGestureRecognizer {
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
+        processOnboarding()
         
-        let allContentBlockersEnabled = configuration.allContentBlockersEnabled
-        if allContentBlockersEnabled == true {
-            processOnboarding()
-        }
         
         getProButton.setTitle(String.localizedString("try_for_free"), for: .normal)
     }
-    
-    func processOnboarding() {
-        if resources.sharedDefaults().bool(forKey: OnboardingShowed) || (configuration.allContentBlockersEnabled ?? false) {
-            ready = true
-            callOnready()
-        }
-        else {
-            showOnboarding()
-            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
-        }
-    }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -248,6 +234,19 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                     self.performSegue(withIdentifier: self.showOnboardingSegueId, sender: self)
                 }
             }
+        }
+    }
+    
+    func processOnboarding() {        
+        let onboardingShowed = resources.sharedDefaults().bool(forKey: OnboardingShowed)
+        let allContentBlockersEnabled = configuration.allContentBlockersEnabled ?? false
+        
+        if !onboardingShowed || !allContentBlockersEnabled {
+            showOnboarding()
+            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
+        } else {
+            ready = true
+            callOnready()
         }
     }
     
