@@ -49,7 +49,14 @@ class RequestsStatisticsBlock: NSObject, NSCoding {
     }
 
     required init?(coder: NSCoder) {
-        self.date = coder.decodeObject(forKey: "date") as! Date
+        if let date = coder.decodeObject(forKey: "date") as? Date {
+            self.date = date
+        }
+        else {
+            self.date = Date()
+            DDLogError("(RequestsStatisticsBlock) init with coder error - can not read date field")
+            assertionFailure()
+        }
         self.numberOfRequests = coder.decodeInteger(forKey: "numberOfRequests")
         self.savedKbytes = coder.decodeInteger(forKey: "savedKbytes")
      }
