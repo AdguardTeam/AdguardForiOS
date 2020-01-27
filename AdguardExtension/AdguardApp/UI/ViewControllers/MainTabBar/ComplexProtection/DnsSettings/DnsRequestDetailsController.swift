@@ -411,6 +411,7 @@ class DnsRequestDetailsController : UITableViewController {
             copiedLabel = originalAnswerCopied
         case .dnsStatus:
             labelToHide = dnsStatusTitleLabel
+            copiedLabel = dnsStatusCopied
         }
         
         animator.startAnimation()
