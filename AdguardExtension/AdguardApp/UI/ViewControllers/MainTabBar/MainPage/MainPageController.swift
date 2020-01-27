@@ -181,8 +181,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if let recognizer = contentBlockersGestureRecognizer {
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
-        processOnboarding()
-        
         
         getProButton.setTitle(String.localizedString("try_for_free"), for: .normal)
     }
@@ -239,9 +237,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     func processOnboarding() {        
         let onboardingShowed = resources.sharedDefaults().bool(forKey: OnboardingShowed)
-        let allContentBlockersEnabled = configuration.allContentBlockersEnabled ?? false
+        let contentBlockersEnabled = configuration.contentBlockerEnabled
+        let someContentBlockersEnabled = contentBlockersEnabled?.reduce(false, { (result, state) -> Bool in return result || state.value }) ?? true
         
-        if !onboardingShowed || !allContentBlockersEnabled {
+        if !onboardingShowed || !someContentBlockersEnabled {
             showOnboarding()
             resources.sharedDefaults().set(true, forKey: OnboardingShowed)
         } else {
