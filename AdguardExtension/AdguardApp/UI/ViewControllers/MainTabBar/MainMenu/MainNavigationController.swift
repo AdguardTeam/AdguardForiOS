@@ -89,14 +89,23 @@ class MainNavigationController: UINavigationController {
         if gestureRecognizer.state == .ended {
             cancelTransition(gestureRecognizer: gestureRecognizer, percent: percent)
         }
-        
-        if gestureRecognizer.state == .began {
+                
+        switch gestureRecognizer.state {
+        case .possible:
+            forceTransitionCancel()
+        case .began:
             transitionCoordinatorHelper?.interactionController = UIPercentDrivenInteractiveTransition()
             popViewController(animated: true)
-        } else if gestureRecognizer.state == .changed {
+        case .changed:
             transitionCoordinatorHelper?.interactionController?.update(percent)
-        } else if gestureRecognizer.state == .ended {
+        case .ended:
             cancelTransition(gestureRecognizer: gestureRecognizer, percent: percent)
+        case .cancelled:
+            forceTransitionCancel()
+        case .failed:
+            forceTransitionCancel()
+        @unknown default:
+            forceTransitionCancel()
         }
     }
     
@@ -107,6 +116,14 @@ class MainNavigationController: UINavigationController {
         } else {
             transitionCoordinatorHelper?.interactionController?.cancel()
         }
+        transitionCoordinatorHelper?.interactionController = nil
+    }
+    
+    /**
+     Force Transition Cancel
+     */
+    private func forceTransitionCancel(){
+        transitionCoordinatorHelper?.interactionController?.cancel()
         transitionCoordinatorHelper?.interactionController = nil
     }
 }
