@@ -56,7 +56,7 @@ class StartupService : NSObject{
         let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
         locator.addService(service: vpnManager)
         
-        let vpnService: VpnServiceProtocol = VpnService(vpnManager: vpnManager)
+        let vpnService: VpnServiceProtocol = VpnService(vpnManager: vpnManager, configuration: configuration)
         locator.addService(service: vpnService)
         
         let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, systemProtectionProcessor: vpnService, configuration: configuration)

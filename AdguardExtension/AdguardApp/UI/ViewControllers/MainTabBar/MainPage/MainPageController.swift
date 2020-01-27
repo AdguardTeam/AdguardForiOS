@@ -114,6 +114,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBOutlet weak var complexSwitchWidth: NSLayoutConstraint!
     @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
+    @IBOutlet weak var fromButtonsToTopHeight: NSLayoutConstraint!
+    @IBOutlet weak var fixItIphoneButton: UIButton!
     
     
     // MARK: - Variables
@@ -768,6 +770,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      As iPhone SE screen is very small we need different constraints for it
      */
     private func setupConstraintsForIphoneSe(){
+        fromButtonsToTopHeight.constant = 10.0
+        
+        fixItIphoneButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
+        manDialogText.font = UIFont.systemFont(ofSize: 19.0, weight: .regular)
+        
         safariIconHeight.constant = 24.0
         safariIconWidth.constant = 24.0
         

@@ -354,9 +354,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         DDLogInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
-        let safariProtectionEnabled = resources.sharedDefaults().object(forKey: SafariProtectionState) as? Bool
+        let safariProtectionEnabled = resources.safariProtectionEnabled
         
-        if safariProtectionEnabled ?? true{
+        if safariProtectionEnabled{
             return autoreleasepool {
                 var rules = blockerRules
                 

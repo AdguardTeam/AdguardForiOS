@@ -44,6 +44,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+    private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: NotificationToken?
     private var proObservation: NSKeyValueObservation?
@@ -53,6 +54,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     }
     
     var stateFromWidget: Bool?
+    var isFromComplexSwitch: Bool?
     
     private let enabledColor = UIColor(hexString: "#67b279")
     private let disabledColor = UIColor(hexString: "#888888")
@@ -95,11 +97,16 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         
         vpnService.notifier = self
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-            if let enabled = self?.stateFromWidget {
-                self?.vpnService.turnSystemProtection(to: enabled, with: self, completion: {
-                    self?.stateFromWidget = nil
-                })
+        if let enabled = stateFromWidget, let isComplex = isFromComplexSwitch {
+            // We set a small delay to show user a state change
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
+                self?.complexProtection.switchSystemProtectionFromWidget(state: enabled, for: self, isFromComplexSwitch: isComplex)
+                self?.stateFromWidget = nil
+                self?.isFromComplexSwitch = nil
+            }
+        } else {
+            DispatchQueue.main.async {[weak self] in
+                self?.updateVpnInfo()
             }
         }
     }
@@ -193,8 +200,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        
-        vpnService.turnSystemProtection(to: enabled, with: self, completion: {})
+    
+        complexProtection.switchSystemProtection(state: enabled, for: self)
     }
     
     // MARK: private methods

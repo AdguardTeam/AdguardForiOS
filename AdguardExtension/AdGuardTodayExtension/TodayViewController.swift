@@ -69,6 +69,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     private var requestNumber = 0
     private var blockedNumber = 0
     
+    private var isFromComplexSwitch = false
+    
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
@@ -154,7 +156,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         
-        turnSystemProtection(to: enabled, with: nil, completion: {})
+        isFromComplexSwitch = false
+        comlexProtection?.switchSystemProtection(state: enabled, for: nil)
         
         let alpha: CGFloat = enabled ? 1.0 : 0.5
         systemImageView.alpha = alpha
@@ -166,6 +169,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     @IBAction func complexSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         
+        isFromComplexSwitch = true
         comlexProtection?.switchComplexProtection(state: enabled, for: nil)
         updateWidgetComplex()
     }
@@ -175,6 +179,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     func turnSystemProtection(to state: Bool, with vc: UIViewController?, completion: @escaping () -> ()) {
         var openSystemProtectionUrl = AE_URLSCHEME + "://systemProtection/"
         openSystemProtectionUrl += state ? "on" : "off"
+        
+        openSystemProtectionUrl += "/"
+        openSystemProtectionUrl += isFromComplexSwitch ? "on" : "off"
         
         if let url = URL(string: openSystemProtectionUrl){
             extensionContext?.open(url, completionHandler: { (success) in

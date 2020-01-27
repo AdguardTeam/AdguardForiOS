@@ -35,6 +35,7 @@ class VpnService: VpnServiceProtocol {
     }
 
     private let vpnManager: APVPNManager
+    private let configuration: ConfigurationServiceProtocol
     
     // MARK: - Observers
     
@@ -42,9 +43,9 @@ class VpnService: VpnServiceProtocol {
     private var vpnConfigurationObserver: NotificationToken?
     
     
-    init(vpnManager: APVPNManager) {
+    init(vpnManager: APVPNManager, configuration: ConfigurationServiceProtocol) {
         self.vpnManager = vpnManager
-        
+        self.configuration = configuration
         addObservers()
     }
     
@@ -52,6 +53,10 @@ class VpnService: VpnServiceProtocol {
         
         let vpnTurner: ()->() = {[weak self] in
             guard let self = self else { return }
+            
+            if !self.configuration.proStatus{
+                return
+            }
             
             if state && !self.vpnManager.vpnInstalled {
                 if let VC = vc {
@@ -106,11 +111,11 @@ class VpnService: VpnServiceProtocol {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let title: String = ACLocalizedString("vpn_confirm_title", nil)
-            let message: String = ACLocalizedString("vpn_confirm_message", nil)
-            let okTitle: String = ACLocalizedString("common_action_ok", nil)
-            let cancelTitle: String = ACLocalizedString("common_action_cancel", nil)
-            let privacyTitle: String = ACLocalizedString("privacy_policy_action", nil)
+            let title: String = String.localizedString("vpn_confirm_title")
+            let message: String = String.localizedString("vpn_confirm_message")
+            let okTitle: String = String.localizedString("common_action_ok")
+            let cancelTitle: String = String.localizedString("common_action_cancel")
+            let privacyTitle: String = String.localizedString("privacy_policy_action")
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             

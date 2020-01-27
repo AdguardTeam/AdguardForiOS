@@ -134,7 +134,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
-        vpnService.turnSystemProtection(to: enabled, with: self, completion: {})
+        complexProtection.switchSystemProtection(state: enabled, for: self)
     }
     
     // MARK: - VpnServiceNotifierDelegate methods
