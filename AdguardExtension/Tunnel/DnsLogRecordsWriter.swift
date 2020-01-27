@@ -141,12 +141,10 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func flush() {
-        recordsQueue.sync { [weak self] in
-            self?.save()
-            self?.saveStatistics()
-            self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
-            self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
-        }
+        save()
+        saveStatistics()
+        resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
+        resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
     }
     
     private func save() {
