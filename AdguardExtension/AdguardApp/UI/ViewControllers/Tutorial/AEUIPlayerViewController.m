@@ -17,6 +17,7 @@
 */
 #import "AEUIPlayerViewController.h"
 #import "ADomain/ADomain.h"
+#import "NSString+Utils.h"
 
 #define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/3.0/%@/%@.mp4"
 
@@ -66,6 +67,15 @@
 
             });
     }
+    
+    NSString *title = ACLocalizedString(@"video_tutorial_title", nil );
+    [self setTitle:title];
+    [self setupBackButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)dealloc {
@@ -74,9 +84,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    
     [super viewWillDisappear:animated];
 
+    [self.tabBarController.tabBar setHidden:NO];
     [[self navigationController] setNavigationBarHidden:NO animated:animated];
     [self hideStatusBar:NO];
     
@@ -198,6 +208,17 @@
             [self.player play];
         }
     }
+}
+
+- (void)setupBackButton{
+    UIImage *image = [[UIImage imageNamed:@"arrow_right"] imageWithHorizontallyFlippedOrientation];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+}
+
+-(void)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:true];
 }
 
 
