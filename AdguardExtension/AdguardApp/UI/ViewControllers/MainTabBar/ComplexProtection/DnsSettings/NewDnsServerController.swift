@@ -75,9 +75,10 @@ class NewDnsServerController: BottomAlertController {
     // MARK: - Actions
     
     @IBAction func addAction(_ sender: Any) {
-        vpnManager.addRemoteDnsServer(nameField.text ?? "", upstreams: [upstreamsField.text ?? ""])
-        
-        dismiss(animated: true, completion: nil)
+        checkUpstream { [weak self] in
+            self?.vpnManager.addRemoteDnsServer(self?.nameField.text ?? "", upstreams: [self?.upstreamsField.text ?? ""])
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -92,12 +93,48 @@ class NewDnsServerController: BottomAlertController {
     }
     
     @IBAction func saveAction(_ sender: Any) {
-        if provider == nil || provider?.servers?.first == nil { return }
-        provider!.name = nameField.text ?? ""
-        provider!.servers?.first!.upstreams = [upstreamsField.text ?? ""]
-        provider!.servers?.first!.name = provider!.name
-        vpnManager.resetCustomDnsProvider(provider!)
-        dismiss(animated: true, completion: nil)
+        checkUpstream { [weak self] in
+            guard let self = self else { return }
+            if self.provider == nil || self.provider?.servers?.first == nil { return }
+            self.provider!.name = self.nameField.text ?? ""
+            self.provider!.servers?.first!.upstreams = [self.upstreamsField.text ?? ""]
+            self.provider!.servers?.first!.name = self.provider!.name
+            self.vpnManager.resetCustomDnsProvider(self.provider!)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func checkUpstream(success:@escaping ()->Void) {
+        
+        saveButton?.isEnabled = false
+        saveButton?.startIndicator()
+        
+        var bootstrap:[String] = []
+        
+        ACNIPUtils.enumerateSystemDns { (ip, _, _, _) in
+            bootstrap.append(ip ?? "")
+        }
+        
+        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstrap, timeoutMs: 2000, serverIp: nil)
+        
+        DispatchQueue(label: "save dns queue").async { [weak self] in
+            guard let self = self else { return }
+            
+            let error = AGDnsUtils.test(upstream)
+            
+            DispatchQueue.main.async {
+                
+                self.saveButton?.isEnabled = true
+                self.saveButton?.stopIndicator()
+                if error == nil {
+                    success()
+                }
+                else {
+                    DDLogError("(NewDnsServerController) saveAction error - \(error!)")
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
+                }
+            }
+        }
     }
     
     // MARK: - textfield delegate methods

@@ -618,3 +618,6 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Whitelist request";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "You have entered an invalid upstream";
