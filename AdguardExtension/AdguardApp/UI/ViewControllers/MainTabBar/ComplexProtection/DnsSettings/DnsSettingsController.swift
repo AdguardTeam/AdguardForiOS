@@ -166,14 +166,9 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let normalHeight = super.tableView.rowHeight
-        
+
         if indexPath.section == getProSection {
-            let tableHeigth = tableView.frame.height
-            let descriptionRowHeight = systemDescriptionCell.frame.height
-            
-            // We need to substract 35.0 to compensate footer height of first section
-            let height: CGFloat = tableHeigth - descriptionRowHeight - 35.0
-            return proStatus ? 0.0 : height
+            return proStatus ? 0.0 : normalHeight
         }
         
         if indexPath.section == menuSection {

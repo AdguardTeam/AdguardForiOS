@@ -165,7 +165,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     }
     
     /**
-     chacks that all safari content blockers are enabled.
+     checks that all safari content blockers are enabled.
      you need observe @contentBlockerEnabled property to get the result
     */
     @objc func checkContentBlockerEnabled() {
