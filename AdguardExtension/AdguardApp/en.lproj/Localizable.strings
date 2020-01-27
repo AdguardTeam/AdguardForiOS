@@ -618,3 +618,6 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Whitelist request";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video Tutorial";
