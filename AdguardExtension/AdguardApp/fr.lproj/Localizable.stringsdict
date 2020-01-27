@@ -48,7 +48,7 @@
         <key>one</key>
         <string>Un jour d'accès complet et gratuit</string>
         <key>other</key>
-        <string>Accès gratuit et complet pour %d jours</string>
+        <string>%d jours d'accès complet et gratuit</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>

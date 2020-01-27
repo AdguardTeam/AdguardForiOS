@@ -50,7 +50,7 @@
 "hjF-1C-hFa.text" = "Premium est activé";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "Restaurer l' achat";
+"mR4-EU-MFx.normalTitle" = "Restaurer l'achat";
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
 "ppx-jv-rek.text" = "Filtres personnalisés";

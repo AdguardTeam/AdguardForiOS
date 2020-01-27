@@ -1,0 +1,6 @@
+
+/* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
+"YaQ-RE-YZT.title" = "AdGuard";
+
+/* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
+"cvv-CS-LMQ.text" = "某些 Safari 內容阻擋器被禁用";

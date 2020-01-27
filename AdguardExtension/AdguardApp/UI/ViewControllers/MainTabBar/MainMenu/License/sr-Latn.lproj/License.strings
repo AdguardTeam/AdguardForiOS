@@ -4,8 +4,17 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Kod iz aplikacije za odobravanje:";
 
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Bezbednosni filteri";
+
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Odjavi se";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Imate licencu";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Postavite vaša pravila";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Adresa elektronske pošte:";
@@ -22,14 +31,29 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Prijavi se";
 
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Blokirajte fišing, prevare i crypto-jacking";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Prijavi se";
 
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Prijavi se";
 
+/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Sistemska zaštita praćenja";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Zaštita sistema";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Prijavljeni ste";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Oporavi kupovinu";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Prilagođeni filteri";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "Potvrdi";

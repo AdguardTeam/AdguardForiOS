@@ -1,11 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
 "03E-rd-Slw.normalTitle" = "Normal";
 
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
+"0ZJ-BI-849.text" = "Configurações de rede";
+
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Nome";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Definir configurações de DNS personalizada";
+
+/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
+"4rw-Lb-MJH.title" = "Servidor DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// ou tls://";
@@ -13,14 +19,47 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "SALVAR";
 
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "O AdGuard não irá bloquear os domínios desta lista";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "O AdGuard irá bloquear os domínios nesta lista";
+
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "SALVAR E SELECIONAR";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-sobre-HTTPS";
 
+/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "Bloqueio de solicitações DNS";
+
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "Configurações avançadas de rede";
+
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "SELECIONAR";
+
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "Servidor DNS";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "Adicionar um filtro";
+
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "Este módulo pode bloquear o rastreamento de domínios e criptografar o seu tráfego DNS";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Proteção do sistema";
+
+/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
+"VR9-fh-ogr.title" = "Configurações de rede";
+
+/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Lista branca do sistema";
+
+/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
+"ZCR-6u-jrf.text" = "Servidores de DNS recomendados";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "CANCELAR";
@@ -34,6 +73,9 @@
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Servidor";
 
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Add servidor de DNS personalizado";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Endereço de servidor DNS";
 
@@ -45,6 +87,12 @@
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
+
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "DNS (Domain Name System) é o equivalente a uma lista telefônica. Ele mantém um diretório de nomes de domínio e os traduz para endereços IP.";
+
+/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Lista negra do sistema";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCELAR";
@@ -58,11 +106,29 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "EXCLUIR";
 
+/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Bloqueio de solicitações DNS";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "Filtros de segurança, privacidade do DNS, filtros personalizados, etc.";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "Filtros";
+
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nome do servidor";
+
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Este módulo pode bloquear o rastreamento de domínios e criptografar o seu tráfego DNS";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Endereço de servidor DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Selecione o protocolo";
+
+/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
+"w0g-Xg-HG0.title" = "Filtros de DNS";
+
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "Filtros e exceções";

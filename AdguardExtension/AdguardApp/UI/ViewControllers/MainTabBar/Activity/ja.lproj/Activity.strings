@@ -62,7 +62,7 @@
 "ZyE-7P-8Tm.title" = "リクエストの詳細";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "セキュリティ・フィルタ、\nDNSプライバシー、\nカスタム・フィルタなど";
+"ae4-WL-0pQ.text" = "セキュリティ・フィルタ、DNSプライバシー、\nカスタム・フィルタなど";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
 "amQ-gv-yFM.normalTitle" = "コピー済み";

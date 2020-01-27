@@ -88,7 +88,7 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses"; ObjectID = "iaJ-tk-ohH"; */
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
 "iaJ-tk-ohH.text" = "ドメインネームシステム (DNS) は、インターネットにおける電話帳のようなものです。DNSはドメイン名のディレクトリを維持しつつ、ドメイン名をIPアドレスに変換します。";
 
 /* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
@@ -110,7 +110,7 @@
 "pC4-RU-DaD.text" = "DNSリクエストをブロック";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "セキュリティ・フィルタ、DNSプライバシー、\nカスタム・フィルタなど";
+"pY3-X6-fFy.text" = "セキュリティ・フィルタ、\nDNSプライバシー、\nカスタム・フィルタなど";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "フィルタ";

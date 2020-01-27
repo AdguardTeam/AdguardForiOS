@@ -1,0 +1,66 @@
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "編輯";
+
+/* Class = "UILabel"; text = "Company"; ObjectID = "7xC-qG-2WW"; */
+"7xC-qG-2WW.text" = "公司";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
+"HUm-JT-lZs.text" = "時間";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
+"KXe-VX-Rq9.normalTitle" = "取消";
+
+/* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
+"M4r-q5-RXv.text" = "域名：";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "O8w-0a-kF9"; */
+"O8w-0a-kF9.text" = "名稱";
+
+/* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
+"ORQ-AZ-NIU.text" = "大小";
+
+/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
+"S05-ei-beX.title" = "DNS 請求細節";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "WZX-eP-abM"; */
+"WZX-eP-abM.text" = "伺服器";
+
+/* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
+"ZyE-7P-8Tm.title" = "請求細節";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "安全性過濾器、DNS 隱私、自訂的過濾器等等";
+
+/* Class = "UILabel"; text = "DNS upstream"; ObjectID = "dFf-Pm-IWR"; */
+"dFf-Pm-IWR.text" = "DNS 上游";
+
+/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
+"dsD-0w-qic.title" = "清除";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
+"fDY-OV-eqp.text" = "類型";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
+"fVC-3Z-ttp.text" = "狀態";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "返回";
+
+/* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
+"i4m-2Q-3Ki.text" = "DNS 狀態";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
+"kwZ-Kw-f1R.text" = "封鎖請求";
+
+/* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
+"lfu-1a-cjJ.text" = "網域";
+
+/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
+"pqA-7I-Vrx.title" = "活動";
+
+/* Class = "UILabel"; text = "DNS answer"; ObjectID = "qhC-LX-WeI"; */
+"qhC-LX-WeI.text" = "DNS 回應";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
+"rIV-zR-Ddb.text" = "類別";

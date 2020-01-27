@@ -1,17 +1,29 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "Restablecer";
 
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "Incompatible con otras aplicaciones VPN, inestable";
+
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
 "Bjk-AC-5fy.text" = "Modo túnel";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
 "ChK-gV-7pc.title" = "Configuración";
 
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "Incompatible con otras aplicaciones VPN";
+
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Oscuro";
 
+/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "No lo cambies a menos que sepas lo que estás haciendo";
+
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Túnel dividido";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
+"JPH-xu-Z3J.text" = "Reiniciar la protección cuando la red cambie";
 
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
 "KSL-dU-yfA.text" = "Bloqueadores de contenido";
@@ -34,8 +46,14 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
 
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
+"W6u-T8-UVZ.text" = "Usar filtros simplificados";
+
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Actualizar automáticamente solo por Wi-Fi";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
+"XFM-ii-xUV.text" = "Tienes 6 bloqueadores de contenido, cada uno de ellos puede contener hasta 50.000 reglas";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Túnel completo";
@@ -49,6 +67,9 @@
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Configuración avanzada";
 
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "Túnel completo (sin icono de VPN)";
+
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Otro";
 
@@ -58,5 +79,11 @@
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
 "q05-UZ-zAB.text" = "Desbloquea anuncios excepto los de los sitios de esta lista";
 
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "Permite configuraciones adicionales para usuarios avanzados";
+
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Si esta opción está activada, AdGuard solo usará WiFi para las actualizaciones de filtros en segundo plano";
+
+/* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
+"wYq-g0-5k6.text" = "Esta opción borrará todos los datos estadísticos, como el número de peticiones, etc.";

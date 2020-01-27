@@ -17,7 +17,7 @@
 "FzS-e3-CK1.text" = "Dunkel";
 
 /* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
-"GBd-dx-t46.text" = "Ändern Sie sie nicht, wenn Sie nicht sicher sind, was Sie tun.";
+"GBd-dx-t46.text" = "Ändern Sie sie nicht, wenn Sie nicht sicher sind, was Sie tun";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
@@ -38,7 +38,7 @@
 "Ory-8I-Ih0.text" = "Entwickler-Modus";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Wenn diese Option aktiviert ist, wird AdGuard allgemeine kosmetische Regeln ignorieren. Dies wird das Laden der Seite auf Kosten der Filterqualität beschleunigen.";
+"PV8-kf-b2c.text" = "Wenn diese Option aktiviert ist, wird AdGuard allgemeine kosmetische Regeln ignorieren. Dies wird das Laden der Seite auf Kosten der Filterqualität beschleunigen";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Statistiken zurücksetzen";
@@ -56,7 +56,7 @@
 "X0A-gU-hzf.text" = "Auto-Update nur über WLAN";
 
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "Sie haben 6 Inhaltsblocker, von denen jeder bis zu 50,000 Regeln enthalten kann.";
+"XFM-ii-xUV.text" = "Sie haben 6 Inhaltsblocker, von denen jeder bis zu 50,000 Regeln enthalten kann";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
@@ -79,7 +79,7 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Kompatibel mit \"Personal VPN\"-Apps";
 
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "jmQ-ze-hFG"; */
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "Im Split-Tunnel-Modus ist AdGuard mit sogenannten \"Personal VPN\"-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
@@ -98,7 +98,7 @@
 "qUy-uy-QiF.text" = "Ermöglicht zusätzliche Einstellungen für fortgeschrittene Benutzer";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Wenn diese Option aktiviert ist, wird AdGuard nur WLAN verwenden, um Filter im Hintergrund zu aktualisieren.";
+"tTY-BW-QcN.text" = "Wenn diese Option aktiviert ist, wird AdGuard nur WLAN verwenden, um Filter im Hintergrund zu aktualisieren";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Diese Funktion entfernt alle statistischen Daten wie Anzahl der Anfragen usw.";

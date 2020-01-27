@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Código de la aplicación de autenticación:";
 
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Filtros de seguridad";
+
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Cerrar sesión";
 
@@ -28,8 +31,14 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Inicio de sesión";
 
+/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Protección del sistema";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restaurar compra";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Filtros personalizados";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "CONFIRMAR";
