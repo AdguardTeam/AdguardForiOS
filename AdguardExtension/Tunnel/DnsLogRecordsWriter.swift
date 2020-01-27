@@ -39,7 +39,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     private var nextSaveTime: Double
     private var nextStatisticsSaveTime: Double
     
-    private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter recods queue")
+    private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter records queue")
+    private let statisticsQueue = DispatchQueue(label: "DnsLogRecordsWriter statistics queue")
     
     @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol) {
         self.resources = resources
@@ -84,13 +85,16 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let tempRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(tempRequestsCount + 1, forKey: AEDefaultsRequests)
         
-        statistics[.all]?.numberOfRequests += 1
-        
-        if (isBlocked(event.answer)) {
-            let tempBlockedRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
+        statisticsQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.statistics[.all]?.numberOfRequests += 1
             
-            statistics[.blocked]?.numberOfRequests += 1
+            if (self.isBlocked(event.answer)) {
+                let tempBlockedRequestsCount = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+                self.resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
+                
+                self.statistics[.blocked]?.numberOfRequests += 1
+            }
         }
         
         let filterIds = event.filterListIds.map { $0.intValue }
@@ -120,23 +124,26 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private func addRecord(record: DnsLogRecord) {
         
+        let now = Date().timeIntervalSince1970
+        
         recordsQueue.async { [weak self] in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
-            sSelf.records.append(record)
+            self.records.append(record)
             
-            let now = Date().timeIntervalSince1970
-            
-            if now > sSelf.nextStatisticsSaveTime{
-                sSelf.saveStatistics()
-            }
-            
-            if now < sSelf.nextSaveTime{
+            if now < self.nextSaveTime{
                 return
             }
             
-            sSelf.save()
-            sSelf.nextSaveTime = now + sSelf.saveRecordsMinimumTime
+            self.save()
+            self.nextSaveTime = now + self.saveRecordsMinimumTime
+        }
+        
+        statisticsQueue.async { [weak self] in
+            guard let self = self else { return }
+            if now > self.nextStatisticsSaveTime{
+                self.saveStatistics()
+            }
         }
     }
     
