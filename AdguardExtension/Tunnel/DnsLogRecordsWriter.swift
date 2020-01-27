@@ -51,7 +51,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         super.init()
         
-        self.reinitializeStatistics()
+        self.loadStatisticsHead()
     }
     
     deinit {
@@ -160,6 +160,17 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         statistics.removeAll()
         reinitializeStatistics()
         nextStatisticsSaveTime = now + saveStatisticsMinimumTime
+    }
+    
+    private func loadStatisticsHead() {
+        
+        let all = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+        let blocked = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+        
+        let date = Date()
+        
+        statistics[.all] = RequestsStatisticsBlock(date: date, numberOfRequests: all)
+        statistics[.blocked] = RequestsStatisticsBlock(date: date, numberOfRequests: blocked)
     }
     
     private func reinitializeStatistics(){
