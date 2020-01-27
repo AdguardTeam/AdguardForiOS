@@ -12,7 +12,7 @@
         <scene sceneID="Q9V-mP-4MB">
             <objects>
                 <tableViewController storyboardIdentifier="DnsSettingsController" id="So5-wP-aAQ" customClass="DnsSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fIm-0l-mh5">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fIm-0l-mh5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -331,8 +331,8 @@
                             </tableViewSection>
                             <tableViewSection id="SBx-cb-OIb">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="N3C-lA-FCw">
-                                        <rect key="frame" x="0.0" y="460" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="N3C-lA-FCw">
+                                        <rect key="frame" x="0.0" y="460" width="414" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N3C-lA-FCw" id="MQF-ay-7AF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -405,6 +405,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="aNz-eH-Heh" secondAttribute="bottom" id="2HS-H7-kCL"/>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="width" secondItem="MQF-ay-7AF" secondAttribute="width" multiplier="0.4" id="8nd-8q-AuH"/>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="leading" secondItem="MQF-ay-7AF" secondAttribute="leading" constant="39" id="Der-4A-yOb">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="32"/>
@@ -413,7 +414,7 @@
                                                     <variation key="heightClass=regular-widthClass=compact" constant="32"/>
                                                 </constraint>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="centerX" secondItem="MQF-ay-7AF" secondAttribute="centerX" id="Qy0-5c-YJd"/>
-                                                <constraint firstItem="aNz-eH-Heh" firstAttribute="centerY" secondItem="MQF-ay-7AF" secondAttribute="centerY" id="eKS-Mv-LAv"/>
+                                                <constraint firstItem="aNz-eH-Heh" firstAttribute="top" secondItem="MQF-ay-7AF" secondAttribute="top" id="prT-hY-e5a"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
