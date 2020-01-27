@@ -158,8 +158,12 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                     
                     id plist;
                     if ([obj isKindOfClass:[NSData class]]) {
-
-                        plist = [NSKeyedUnarchiver unarchiveObjectWithData:obj];
+                        @try {
+                            plist = [NSKeyedUnarchiver unarchiveObjectWithData:obj];
+                        }
+                        @catch (NSException *exception) {
+                            DDLogError(@"(ADBTableRow) initWithDbResult - error: %@", exception.debugDescription);
+                        }
                     }
                     else if ([obj isKindOfClass:[NSString class]]){
                         
