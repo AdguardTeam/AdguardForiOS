@@ -272,13 +272,20 @@ class AppDelegateHelper: NSObject {
             
             // Turning on/off system protection from widget
             if url.scheme == AE_URLSCHEME && command == openSystemProtection {
-                let enabledString = String(url.path.suffix(url.path.count - 1))
+                let suffix = String(url.path.suffix(url.path.count - 1))
+                let parameters = suffix.split(separator: "/")
+                
+                let enabledString = String(parameters.first ?? "")
+                let complexEnabledString = String(parameters.last ?? "")
+                
                 let enabled = enabledString == "on"
+                let complexEnabled = complexEnabledString == "on"
                 
                 let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
                 guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
                 
                 dnsSettingsController.stateFromWidget = enabled
+                dnsSettingsController.isFromComplexSwitch = complexEnabled
                 
                 navController.viewControllers = [mainMenuController, dnsSettingsController]
                 

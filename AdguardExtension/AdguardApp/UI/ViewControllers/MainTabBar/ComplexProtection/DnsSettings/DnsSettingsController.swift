@@ -54,6 +54,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     }
     
     var stateFromWidget: Bool?
+    var isFromComplexSwitch: Bool?
     
     private let enabledColor = UIColor(hexString: "#67b279")
     private let disabledColor = UIColor(hexString: "#888888")
@@ -96,11 +97,12 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         
         vpnService.notifier = self
         
-        if let enabled = stateFromWidget {
+        if let enabled = stateFromWidget, let isComplex = isFromComplexSwitch {
             // We set a small delay to show user a state change
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                self?.complexProtection.switchSystemProtection(state: enabled, for: self)
+                self?.complexProtection.switchSystemProtectionFromWidget(state: enabled, for: self, isFromComplexSwitch: isComplex)
                 self?.stateFromWidget = nil
+                self?.isFromComplexSwitch = nil
             }
         } else {
             DispatchQueue.main.async {[weak self] in

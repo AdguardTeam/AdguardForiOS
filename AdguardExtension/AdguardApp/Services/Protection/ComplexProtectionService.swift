@@ -35,6 +35,10 @@ protocol ComplexProtectionServiceProtocol {
     // Turns on/off system protection
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?)
     
+    // Turns on/off system protection
+    // Is used for switching from widget
+    func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?,isFromComplexSwitch: Bool)
+    
     // Checks state of complex protection
     func checkState(completion: @escaping (Bool)->() )
     
@@ -162,6 +166,15 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
         }
     }
+    
+    func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?, isFromComplexSwitch: Bool) {
+        if isFromComplexSwitch {
+            switchSystemProtectionForComplex(state: enabled, for: VC)
+        } else {
+            switchSystemProtection(state: enabled, for: VC)
+        }
+    }
+    
     
     // MARK: - Private methods
     
