@@ -10,4 +10,5 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var purchasedThroughLogin: Bool { get }
     var developerMode: Bool { get  set }
     var showStatusBar: Bool { get set }
+    var allContentBlockersEnabled: Bool { get }
 }
