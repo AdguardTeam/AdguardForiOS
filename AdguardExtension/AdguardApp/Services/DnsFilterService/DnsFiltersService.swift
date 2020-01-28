@@ -72,6 +72,12 @@ protocol DnsFiltersServiceProtocol {
     
     // removes rules(!not domains) from user filter and restarts the tunnel
     func removeUserRules(_ rules: [String])
+    
+    // user filter identifier
+    var userFilterId: Int { get }
+    
+    // whitelist filter identifier
+    var whitelistFilterId: Int { get}
 }
 
 @objc(DnsFilter)
@@ -170,8 +176,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     var filtersAreUpdating: Bool = false
     
     private let defaultFilterId = 0
-    private let userFilterId = 1
-    private let whitelistFilterId = 2
+    var userFilterId = 1
+    var whitelistFilterId = 2
     private let kSharedDefaultsDnsFiltersMetaKey = "kSharedDefaultsDnsFiltersMetaKey"
     
     private let resources: AESharedResourcesProtocol

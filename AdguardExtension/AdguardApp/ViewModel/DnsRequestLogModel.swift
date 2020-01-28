@@ -40,8 +40,15 @@ class DnsLogRecordExtended {
     
     lazy var matchedFilters: String? = {
         let allFilters = dnsFiltersService.filters
-        let filterNames = self.logRecord.matchedFilterIds?.map { (filterId) -> String in
-            let filter = allFilters.first { (filter) in filter.id == 0 }
+        let filterNames = self.logRecord.matchedFilterIds?.map { [weak self] (filterId) -> String in
+            if filterId == self?.dnsFiltersService.userFilterId {
+                return String.localizedString("system_blacklist")
+            }
+            if filterId == self?.dnsFiltersService.whitelistFilterId {
+                return String.localizedString("system_whitelist")
+            }
+            
+            let filter = allFilters.first { (filter) in filter.id == filterId }
             return filter?.name ?? ""
         }
         return filterNames?.joined(separator: "\n") ?? nil
