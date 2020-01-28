@@ -80,18 +80,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="18.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKD-zg-EfF" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKD-zg-EfF" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="8" width="0.0" height="0.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nK-Ie-kDq" userLabel="Details" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="10.5" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nK-Ie-kDq" userLabel="Details" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="8.5" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -99,8 +99,8 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoz-ma-KPf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="37" y="9.5" width="353" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <rect key="frame" x="37" y="8.5" width="353" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -114,7 +114,7 @@
                                         <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="WKD-zg-EfF" secondAttribute="trailing" constant="13" id="3GL-57-Xfj"/>
                                         <constraint firstItem="WKD-zg-EfF" firstAttribute="top" secondItem="PHp-o6-fVR" secondAttribute="top" constant="8" id="3Of-8f-36M"/>
                                         <constraint firstAttribute="bottom" secondItem="2nK-Ie-kDq" secondAttribute="bottom" constant="8" id="Lpg-za-Uj2"/>
-                                        <constraint firstItem="2nK-Ie-kDq" firstAttribute="top" secondItem="WKD-zg-EfF" secondAttribute="bottom" constant="2" id="MeT-X0-vO9"/>
+                                        <constraint firstItem="2nK-Ie-kDq" firstAttribute="top" secondItem="WKD-zg-EfF" secondAttribute="bottom" id="MeT-X0-vO9"/>
                                         <constraint firstItem="WKD-zg-EfF" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Xip-hH-SwK"/>
                                         <constraint firstItem="2nK-Ie-kDq" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Y5B-nb-2oh"/>
                                         <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="2nK-Ie-kDq" secondAttribute="trailing" constant="13" id="hbi-d3-NCH"/>

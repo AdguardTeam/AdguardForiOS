@@ -45,7 +45,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - private fields
     
     private var selectedRecord: DnsLogRecordExtended?
-    private var notificationToken: NotificationToken?
+    private var themeToken: NotificationToken?
     
     // MARK: - view controller life cycle
     
@@ -54,7 +54,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         
         model.delegate = self
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
@@ -79,25 +79,13 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
         let record = model.records[indexPath.row]
-        
-        // Change to category description
+                
         let timeString = record.logRecord.time()
-        
-        var detailsString = ""
-        let answers = record.logRecord.answer.components(separatedBy: .newlines)
-        if (answers.first?.count ?? 0) > 0 {
-            detailsString = answers.first!
-        }
-        else {
-            detailsString = record.logRecord.type
-            
-            if record.logRecord.answerStatus?.count ?? 0 > 0 && record.logRecord.answerStatus != "NOERROR" {
-                detailsString += ", \(record.logRecord.answerStatus!)"
-            }
-        }
-
-        cell.domain.text = record.logRecord.domain
-        cell.details.text = detailsString
+        let company = record.category.company
+        let domain = record.logRecord.getDetailsString()
+    
+        cell.domain.text = company == nil ? record.logRecord.firstLevelDomain() : company
+        cell.details.attributedText = domain
         cell.timeLabel.text = timeString
         
         let type: BlockedRecordType
@@ -186,13 +174,10 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         case .blocked:
             logSelectedCellColor = UIColor(hexString: "#4DDF3812")
             logBlockedCellColor = UIColor(hexString: "#33DF3812")
-        case .tracked:
-            logSelectedCellColor = UIColor(hexString: "#4Df5a623")
-            logBlockedCellColor = UIColor(hexString: "#33f5a623")
         case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        case .normal:
+        case .normal, .tracked:
             logSelectedCellColor = theme.selectedCellColor
             logBlockedCellColor = .clear
         }

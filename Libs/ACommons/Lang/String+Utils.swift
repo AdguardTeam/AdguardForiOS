@@ -149,4 +149,21 @@ extension String {
         let kBytesString = String(format: "%.0f", kBytes)
         return String(format: String.localizedString("kb_unit"), kBytesString)
     }
+    
+    /**
+    Generates subdomains from top level domain
+    */
+    static func generateSubDomains(from domain: String) -> [String] {
+        let newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        
+        var subdomains = newDomain.split(separator: ".")
+        var domainsToReturn: [String] = []
+        
+        while subdomains.count >= 2{
+            let newSubDomain = subdomains.joined(separator: ".")
+            domainsToReturn.append(newSubDomain)
+            subdomains = Array(subdomains.dropFirst())
+        }
+        return domainsToReturn
+    }
 }

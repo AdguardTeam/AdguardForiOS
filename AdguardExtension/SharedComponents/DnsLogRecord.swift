@@ -121,3 +121,46 @@ class DnsLogRecord: NSObject, NSCoding {
         self.rowid = -1
     }
 }
+
+// MARK: - Methods for UI
+
+extension DnsLogRecord {
+    private func getTypeString() -> String {
+        let IPv4 = "A"
+        let IPv6 = "AAAA"
+        
+        let IPv4String = "IPv4"
+        let IPv6String = "IPv6"
+        
+        if type == IPv4 {
+            return IPv4String
+        } else if type == IPv6 {
+            return IPv6String
+        } else {
+            return type
+        }
+    }
+    
+    func getDetailsString() -> NSMutableAttributedString {
+        let recordType = getTypeString()
+        var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        newDomain = " " + newDomain
+        
+        let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .semibold) ]
+        let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .regular) ]
+        
+        let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
+        let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
+        
+        let combination = NSMutableAttributedString()
+        combination.append(typeAttrString)
+        combination.append(domainAttrString)
+        
+        return combination
+    }
+    
+    func firstLevelDomain() -> String {
+        let domains = String.generateSubDomains(from: domain)
+        return domains.last ?? ""
+    }
+}
