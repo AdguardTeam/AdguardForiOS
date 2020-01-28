@@ -78,7 +78,10 @@ class StartupService : NSObject{
         
         locator.addService(service: filtersService)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration)
+        locator.addService(service: dnsFiltersService)
+        
+        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
         
         supportService.configurationService = configuration;
         
@@ -90,9 +93,6 @@ class StartupService : NSObject{
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources, vpnManager: vpnManager)
         ServiceLocator.shared.addService(service: networkSettingsService)
 
-        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration)
-        locator.addService(service: dnsFiltersService)
-        
         let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
         locator.addService(service: dnsLogService)
         
