@@ -74,9 +74,16 @@ class BlockRequestController: BottomAlertController {
     
     var fullDomain: String = "" {
         didSet{
-            generateSubDomains(from: fullDomain)
+            let domains = String.generateSubDomains(from: fullDomain)
+            var isSelected = true
+            domains.forEach { (domain) in
+                let model = BlockRequestCellModel(domain: domain, isSelected: isSelected, theme: theme)
+                subDomains.append(model)
+                isSelected = false
+            }
         }
     }
+    
     var type: DnsLogButtonType = .addDomainToWhitelist
     var delegate: AddDomainToListDelegate?
     
@@ -147,21 +154,6 @@ class BlockRequestController: BottomAlertController {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
         tableView.reloadData()
-    }
-    
-    private func generateSubDomains(from domain: String) {
-        var subdomains = domain.split(separator: ".")
-        
-        // First rule is selected
-        var isSelected = true
-        
-        while subdomains.count >= 2{
-            let newSubDomain = subdomains.joined(separator: ".")
-            let model = BlockRequestCellModel(domain: newSubDomain, isSelected: isSelected, theme: theme)
-            isSelected = false
-            self.subDomains.append(model)
-            subdomains = Array(subdomains.dropFirst())
-        }
     }
 }
 

@@ -18,6 +18,29 @@
 
 import Foundation
 
+protocol LogCellModelProtocol {
+    var isUserCell: Bool { get }
+    
+    var copiedString: String? { get }
+    var copiedLabel: UIButton? { get }
+    var labelToHide: UILabel? { get }
+}
+
+class LogCellModel: LogCellModelProtocol {
+    var isUserCell: Bool
+    
+    var copiedString: String?
+    var copiedLabel: UIButton?
+    var labelToHide: UILabel?
+    
+    init(isUserCell: Bool, copiedString: String? = nil, copiedLabel: UIButton? = nil, labelToHide: UILabel? = nil) {
+        self.isUserCell = isUserCell
+        self.copiedString = copiedString
+        self.copiedLabel = copiedLabel
+        self.labelToHide = labelToHide
+    }
+}
+
 class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - public fields
@@ -103,6 +126,32 @@ class DnsRequestDetailsController : UITableViewController {
     
     private let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .alert)
     
+    private var cellModels: [IndexPath : LogCellModelProtocol?] = [:]
+    
+    // Sections & Rows
+    private let trackerDetailsSection = 0
+    private let categoryCell = IndexPath(row: 0, section: 0)
+    private let nameCell = IndexPath(row: 1, section: 0)
+    private let companyCell = IndexPath(row: 2, section: 0)
+    
+    private let generalSection = 1
+    private let domainCell = IndexPath(row: 0, section: 1)
+    private let serverCell = IndexPath(row: 1, section: 1)
+    private let statusCell = IndexPath(row: 2, section: 1)
+    private let timeCell = IndexPath(row: 3, section: 1)
+    private let sizeCell = IndexPath(row: 4, section: 1)
+    private let elapsedCell = IndexPath(row: 5, section: 1)
+    
+    private let dnsSection = 2
+    private let typeCell = IndexPath(row: 0, section: 2)
+    private let dnsStatusCell = IndexPath(row: 1, section: 2)
+    private let dnsUpstreamCell = IndexPath(row: 2, section: 2)
+    private let dnsAnswerCell = IndexPath(row: 3, section: 2)
+    private let matchedFiltersCell = IndexPath(row: 4, section: 2)
+    private let matchedRulesCell = IndexPath(row: 5, section: 2)
+    private let originalAnswerCell = IndexPath(row: 6, section: 2)
+    
+    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
@@ -120,24 +169,7 @@ class DnsRequestDetailsController : UITableViewController {
             self.tableView.reloadData()
         }
         
-        timeLabel.text = logRecord?.logRecord.time()
-        elapsedLabel.text = String(format: "%d ms", logRecord?.logRecord.elapsed ?? 0)
-        typeLabel.text = logRecord?.logRecord.type
-        domainLabel.text = logRecord?.logRecord.domain
-        serverLabel.text = logRecord?.logRecord.server
-        addressLabel.text = logRecord?.logRecord.upstreamAddr
-        responsesLabel.text = logRecord?.logRecord.answer
-        categoryLabel.text = logRecord?.category.category
-        
-        nameLabel.text = logRecord?.category.name
-        companyLabel.text = logRecord?.category.company
-        bytesSentLabel.text = String(format: "%d B", logRecord?.logRecord.bytesSent ?? 0)
-        bytesReceivedLabel.text = String(format: "%d B", logRecord?.logRecord.bytesReceived ?? 0)
-        matchedRulesLabel.text = logRecord?.logRecord.blockRules?.joined(separator: "\n")
-        matchedFiltersLabel.text = logRecord?.matchedFilters
-        originalAnswerLabel.text = logRecord?.logRecord.originalAnswer
-        dnsStatusLabel.text = logRecord?.logRecord.answerStatus
-        
+        createCellModels()
         updateStatusLabel()
         updateTheme()
     }
@@ -181,18 +213,18 @@ class DnsRequestDetailsController : UITableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        if indexPath.row == LogCells.category.rawValue {
-            if logRecord?.category == nil{
-                cell.isHidden = true
+        let model = cellModels[indexPath]
+        
+        if let model = cellModels[indexPath] {
+            if let userCell = model?.isUserCell {
+                if !userCell && !configuration.developerMode {
+                    cell.isHidden = true
+                }
             }
-        } else if indexPath.row == LogCells.name.rawValue {
-            if logRecord?.category.name == nil {
-                cell.isHidden = true
-            }
-        } else if indexPath.row == LogCells.company.rawValue{
-            if logRecord?.category.company == nil {
-                cell.isHidden = true
-            }
+        }
+        
+        if model == nil {
+            cell.isHidden = true
         }
 
         theme.setupTableCell(cell)
@@ -202,127 +234,65 @@ class DnsRequestDetailsController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let defaultHeight = super.tableView(tableView, heightForRowAt: indexPath)
+        let model = cellModels[indexPath]
         
-        guard let cellType = LogCells(rawValue: indexPath.row) else {
-            return defaultHeight
+        if let model = cellModels[indexPath] {
+            if let userCell = model?.isUserCell {
+                if !userCell && !configuration.developerMode {
+                    return 0.0
+                }
+            }
         }
         
-        if !configuration.developerMode && !userCells.contains(cellType) {
+        if model == nil {
             return 0.0
         }
         
-        switch cellType {
-        case .category:
-            if logRecord?.category.category == nil{
-                return 0.0
-            }
-            return defaultHeight
-        case .name:
-            if logRecord?.category.name == nil {
-                return 0.0
-            }
-        case .company:
-            if logRecord?.category.company == nil {
-                    return 0.0
-            }
-            
-        case .domain:
-            if logRecord?.logRecord.domain.count == 0 {
-                return 0.0
-            }
-        case .type:
-            if logRecord?.logRecord.type.count == 0 {
-                return 0.0
-            }
-        case .server:
-            if logRecord?.logRecord.server.count == 0 {
-                return 0.0
-            }
-        case .upstream:
-            if logRecord?.logRecord.upstreamAddr?.count == 0 {
-                return 0.0
-            }
-        case .answer:
-            if logRecord?.logRecord.answer.count == 0 {
-                return 0.0
-            }
-        case .matchedFilters:
-            if logRecord?.matchedFilters?.count == 0 {
-                return 0.0
-            }
-        case .matchedRules:
-            if logRecord?.logRecord.blockRules?.joined(separator: "").count == 0  {
-                return 0.0
-            }
-        case .originalAnswer:
-            if logRecord?.logRecord.originalAnswer?.count == 0 {
-                return 0.0
-            }
-        case .dnsStatus:
-            if logRecord?.logRecord.answerStatus?.count == 0 {
-                return 0.0
-            }
-            
-        case .status, .time, .elapsed, .size:
-            break
-            
-        }
-        
+        let defaultHeight = super.tableView(tableView, heightForRowAt: indexPath)
         return defaultHeight
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var copiedString = ""
-        let logCell = LogCells(rawValue: indexPath.row)
-        
-        switch logCell {
-        case .category:
-            copiedString = logRecord?.category.category ?? ""
-        case .status:
-            copiedString = logRecord?.logRecord.status.title() ?? ""
-        case .name:
-            copiedString = logRecord?.category.name ?? ""
-        case .company:
-            copiedString = logRecord?.category.company ?? ""
-        case .time:
-            copiedString = logRecord?.logRecord.time() ?? ""
-        case .domain:
-            copiedString = logRecord?.logRecord.domain ?? ""
-        case .type:
-            copiedString = logRecord?.logRecord.type ?? ""
-        case .server:
-            copiedString = logRecord?.logRecord.server ?? ""
-        case .elapsed:
-            copiedString = String(format: "%d ms", logRecord?.logRecord.elapsed ?? 0)
-        case .size:
-            copiedString = String(format: "%d B / %d B", logRecord?.logRecord.bytesReceived ?? 0, logRecord?.logRecord.bytesSent ?? 0)
-        case .upstream:
-            copiedString = logRecord?.logRecord.upstreamAddr ?? ""
-        case .answer:
-            copiedString = logRecord?.logRecord.answer ?? ""
-        case .none:
-            copiedString = ""
-        case .some(.matchedFilters):
-            copiedString = logRecord?.matchedFilters ?? ""
-        case .some(.matchedRules):
-            copiedString = logRecord?.logRecord.blockRules?.joined(separator: "\n") ?? ""
-        case .some(.originalAnswer):
-            copiedString = logRecord?.logRecord.originalAnswer ?? ""
-        case .some(.dnsStatus):
-            copiedString = logRecord?.logRecord.answerStatus ?? ""
-        }
+        let model = cellModels[indexPath]
+        let copiedString = model??.copiedString ?? ""
         
         // copy responses to pasteboard
         UIPasteboard.general.string = copiedString
-        if let row = logCell{
-            showCopiedLabel(row: row)
-        }
+        showCopiedLabel(indexPath: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == trackerDetailsSection {
+            let categoryModel = cellModels[categoryCell]
+            let nameModel = cellModels[nameCell]
+            let companyModel = cellModels[companyCell]
+            
+            if categoryModel == nil && nameModel == nil && companyModel == nil {
+                return 0.0
+            }
+        }
+        return 52.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var text = ""
+        var needsButton = false
+        
+        switch section {
+        case trackerDetailsSection:
+            text = String.localizedString("tracker_details_header")
+            needsButton = true
+        case generalSection:
+            text = String.localizedString("general_header")
+        case dnsSection:
+            text = String.localizedString("dns_header")
+        default:
+            return nil
+        }
+        
+        let view = createHeaderView(with: text.uppercased(), needsButton: needsButton)
+        return view
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -338,83 +308,30 @@ class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - private methods
     
-    private enum LogCells: Int{
-        case category = 0, status, name, company, time, domain, type, server, elapsed, size, upstream, answer, matchedFilters, matchedRules, originalAnswer, dnsStatus
-    }
-    
-    private let userCells:[LogCells] = [.name, .status, .time, .domain]
-    
     private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
+            guard let self = self else { return }
+            self.view.backgroundColor = self.theme.backgroundColor
+            self.tableView.reloadData()
         }
         theme.setupLabels(themableLabels)
     }
     
-    private func showCopiedLabel(row: LogCells){
-        
-        animator.stopAnimation(true)
-        
-        createAnimator()
-        
-        labelToHide.alpha = 1.0
-        copiedLabel.alpha = 0.0
-        
-        switch row {
-        case .category:
-            labelToHide = categoryTitleLabel
-            copiedLabel = categoryCopied
-        case .status:
-            labelToHide = statusTitleLabel
-            copiedLabel = statusCopied
-        case .name:
-            labelToHide = nameTitleLabel
-            copiedLabel = nameCopied
-        case .company:
-            labelToHide = companyTitleLabel
-            copiedLabel = companyCopied
-        case .time:
-            labelToHide = timeTitleLabel
-            copiedLabel = timeCopied
-        case .domain:
-            labelToHide = domainTitleLabel
-            copiedLabel = domainCopied
-        case .type:
-            labelToHide = typeTitleLabel
-            copiedLabel = typeCopied
-        case .server:
-            labelToHide = serverTitleLabel
-            copiedLabel = serverCopied
-        case .elapsed:
-            labelToHide = elapsedTitleLabel
-            copiedLabel = elapsedCopied
-        case .size:
-            labelToHide = sizeTitleLabel
-            copiedLabel = sizeCopied
-        case .upstream:
-            labelToHide = upstreamTitleLabel
-            copiedLabel = upstreamCopied
-        case .answer:
-            labelToHide = answerTitleLabel
-            copiedLabel = answerCopied
-        case .matchedFilters:
-            labelToHide = matchedFiltersTitleLabel
-            copiedLabel = filtersCopied
-        case .matchedRules:
-            labelToHide = matchedRulesTitleLabel
-            copiedLabel = rulesCopied
-        case .originalAnswer:
-            labelToHide = originalAnswerTitleLabel
-            copiedLabel = originalAnswerCopied
-        case .dnsStatus:
-            labelToHide = dnsStatusTitleLabel
-            copiedLabel = dnsStatusCopied
+    private func showCopiedLabel(indexPath: IndexPath){
+        if let model = cellModels[indexPath] {
+            animator.stopAnimation(true)
+
+            createAnimator()
+            
+            labelToHide.alpha = 1.0
+            copiedLabel.alpha = 0.0
+            
+            copiedLabel = model?.copiedLabel ?? UIButton()
+            labelToHide = model?.labelToHide ?? UILabel()
+            
+            animator.startAnimation()
         }
-        
-        animator.startAnimation()
     }
     
     private func createAnimator(){
@@ -444,5 +361,154 @@ class DnsRequestDetailsController : UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
+    }
+    
+    private func createHeaderView(with text: String, needsButton: Bool) -> UIView{
+        let tableWidth = tableView.frame.width
+        
+        let viewFrame = CGRect(x: 0.0, y: 0.0, width: tableWidth, height: 52.0)
+        let view = UIView(frame: viewFrame)
+        view.backgroundColor = theme.backgroundColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let padding: CGFloat = needsButton ? 60.0 : 24.0
+        let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: 16.0)
+        let label = ThemableLabel(frame: labelFrame)
+        label.lightGreyText = true
+        label.text = text
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        
+        view.addSubview(label)
+        
+        if needsButton {
+            let image = UIImage(named: "question") ?? UIImage()
+            let imageView = UIImageView(image: image)
+            let imageViewFrame = CGRect(x: tableWidth - 48.0, y: label.frame.midY - 12.0, width: 24.0, height: 24.0)
+            imageView.frame = imageViewFrame
+            
+            let buttonFrame = CGRect(x: imageViewFrame.midX - 24.0, y: imageViewFrame.midY - 24.0, width: 48.0, height: 48.0)
+            let button = UIButton(frame: buttonFrame)
+            button.backgroundColor = .clear
+            button.addTarget(self, action: #selector(whoTracksMeInfo(_:)), for: .touchUpInside)
+            
+            view.addSubview(imageView)
+            view.addSubview(button)
+            
+            
+        }
+        
+        theme.setupLabel(label)
+        return view
+    }
+    
+    
+    /**
+     Method to create a model for this VC
+     */
+    private func createCellModels(){
+        guard let record = logRecord else { return }
+        
+        // Category model
+        let category = record.category.category
+        let categoryModel = category == nil ? nil : LogCellModel(isUserCell: true, copiedString: category, copiedLabel: categoryCopied, labelToHide: categoryTitleLabel)
+        cellModels[categoryCell] = categoryModel
+        categoryLabel.text = category
+        
+        // Name model
+        let name = record.category.name
+        let nameModel = name == nil ? nil : LogCellModel(isUserCell: true, copiedString: name, copiedLabel: nameCopied, labelToHide: nameTitleLabel)
+        cellModels[nameCell] = nameModel
+        nameLabel.text = name
+        
+        // Company model
+        let company = record.category.company
+        let companyModel = company == nil ? nil : LogCellModel(isUserCell: true, copiedString: company, copiedLabel: companyCopied, labelToHide: companyTitleLabel)
+        cellModels[companyCell] = companyModel
+        companyLabel.text = company
+        
+        // Domain model
+        var domain = record.logRecord.domain
+        domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        let domainModel = LogCellModel(isUserCell: true, copiedString: domain, copiedLabel: domainCopied, labelToHide: domainTitleLabel)
+        cellModels[domainCell] = domainModel
+        domainLabel.text = domain
+        
+        // Server model
+        let server = record.logRecord.server
+        let serverModel = server.isEmpty ? nil : LogCellModel(isUserCell: true, copiedString: server, copiedLabel: serverCopied, labelToHide: serverTitleLabel)
+        cellModels[serverCell] = serverModel
+        serverLabel.text = server
+        
+        // Status model
+        let status = record.logRecord.status.title()
+        let userStatus = record.logRecord.userStatus
+        let stCopied = userStatus == .none ? status : "\(status)(\(userStatus.title()))"
+        let statusModel = LogCellModel(isUserCell: true, copiedString: stCopied, copiedLabel: statusCopied, labelToHide: statusTitleLabel)
+        cellModels[statusCell] = statusModel
+        
+        // Time model
+        let time = record.logRecord.time()
+        let timeModel = LogCellModel(isUserCell: true, copiedString: time, copiedLabel: timeCopied, labelToHide: timeTitleLabel)
+        cellModels[timeCell] = timeModel
+        timeLabel.text = time
+        
+        // Size model
+        let bytesSent = record.logRecord.bytesSent
+        let bytesReceived = record.logRecord.bytesReceived
+        let size = String(format: "%d B / %d B", bytesReceived, bytesSent)
+        let sizeModel = LogCellModel(isUserCell: false, copiedString: size, copiedLabel: sizeCopied, labelToHide: sizeTitleLabel)
+        cellModels[sizeCell] = sizeModel
+        bytesSentLabel.text = String(format: "%d B", bytesSent)
+        bytesReceivedLabel.text = String(format: "%d B", bytesReceived)
+        
+        // Elapsed model
+        let elapsed = record.logRecord.elapsed
+        let elapsedString = String(format: "%d ms", elapsed)
+        let elapsedModel = LogCellModel(isUserCell: false, copiedString: elapsedString, copiedLabel: elapsedCopied, labelToHide: elapsedTitleLabel)
+        cellModels[elapsedCell] = elapsedModel
+        elapsedLabel.text = elapsedString
+        
+        // Type model
+        let type = record.logRecord.type
+        let typeModel = LogCellModel(isUserCell: false, copiedString: type, copiedLabel: typeCopied, labelToHide: typeTitleLabel)
+        cellModels[typeCell] = typeModel
+        typeLabel.text = type
+        
+        // Dns status model
+        let dnsStatus = record.logRecord.answerStatus
+        let dnsStatusModel = LogCellModel(isUserCell: false, copiedString: dnsStatus, copiedLabel: dnsStatusCopied, labelToHide: dnsStatusTitleLabel)
+        cellModels[dnsStatusCell] = dnsStatusModel
+        dnsStatusLabel.text = dnsStatus
+        
+        // Dns upstream model
+        let dnsUpstream = record.logRecord.upstreamAddr ?? ""
+        let dnsUpstreamModel = dnsUpstream.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsUpstream, copiedLabel: upstreamCopied, labelToHide: upstreamTitleLabel)
+        cellModels[dnsUpstreamCell] = dnsUpstreamModel
+        addressLabel.text = dnsUpstream
+        
+        // Dns answer model
+        let dnsAnswer = record.logRecord.answer ?? ""
+        let dnsAnswerModel = dnsAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsAnswer, copiedLabel: answerCopied, labelToHide: answerTitleLabel)
+        cellModels[dnsAnswerCell] = dnsAnswerModel
+        responsesLabel.text = dnsAnswer
+        
+        // Matched filters model
+        let matchedFilters = record.matchedFilters ?? ""
+        let matchedFiltersModel = matchedFilters.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: matchedFilters, copiedLabel: filtersCopied, labelToHide: matchedFiltersTitleLabel)
+        cellModels[matchedFiltersCell] = matchedFiltersModel
+        matchedFiltersLabel.text = matchedFilters
+        
+        // Matched rules model
+        let matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        let matchedRulesModel = matchedRules.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: matchedRules, copiedLabel: rulesCopied, labelToHide: matchedRulesTitleLabel)
+        cellModels[matchedRulesCell] = matchedRulesModel
+        matchedRulesLabel.text = matchedRules
+        
+        // Original answer model
+        let originalAnswer = record.logRecord.originalAnswer ?? ""
+        let originalAnswerModel = originalAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: originalAnswer, copiedLabel: originalAnswerCopied, labelToHide: originalAnswerTitleLabel)
+        cellModels[originalAnswerCell] = originalAnswerModel
+        originalAnswerLabel.text = originalAnswer
     }
 }
