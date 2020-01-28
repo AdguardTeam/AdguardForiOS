@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "增加過濾器";
 
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "Safari 防護";
+
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "名稱：";
 
@@ -12,6 +15,9 @@
 
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
+"Lq2-mi-McV.text" = "過濾器";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "新自訂的過濾器";
@@ -24,6 +30,9 @@
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "已更新";
+
+/* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
+"VCK-db-aeg.text" = "使用者規則";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
 "Ve5-DF-RNB.text" = "網站";

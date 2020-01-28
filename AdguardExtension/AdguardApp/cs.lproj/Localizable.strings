@@ -37,6 +37,15 @@
 /* (MainPageController) Message for alert about saved data */
 "saved_data_message" = "Tato informace je založena na počtu blokovaných požadavků DNS. Statistiky jsou odhadnuty z důvodu technické nemožnosti spočítat přesné množství reklam, slídičů a dalších hrozeb, které by mohl uživatel stáhnout, pokud by doména nebyla původně zablokována.";
 
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ KB";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ MB";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Vyzkoušet zdarma";
 
@@ -109,8 +118,20 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtry byly aktualizovány: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Zde můžete zadat vlastní pravidla.<br>Přečtěte si <a href=\"%@\">poznámku o syntaxi pravidla</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Zde zadejte názvy domén. AdGuard neblokuje přístup do těchto domén ignorováním všech ostatních nastavení.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Zde zadejte názvy domén. AdGuard povolí filtrování pouze těchto webových stránek v Safari.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Zde zadejte názvy domén oddělené zalomením řádků. AdGuard povolí všechna připojení k těmto doménám.";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text_format" = "Tento seznam zakázaných podporuje <a href=\"%@\">syntaxi AdGuard DNS</a>. Zde zadejte pravidla oddělená zalomení řádků. AdGuard zablokuje všechna připojení k doménám, které těmto pravidlům odpovídají.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aktualizuji...";
@@ -126,6 +147,9 @@
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Název vaší Wi-Fi";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Pravidlo:";
@@ -226,6 +250,9 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blokuje reklamy a sledovací servery";
 
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "Systémový DNS";
+
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Povoleno %1$d z %2$d";
 
@@ -288,6 +315,9 @@
 
 /* (AdvancedSettingsController) Reset statistics title */
 "reset_stat_title" = "Resetovat statistiky";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Všechny statistiky budou vymazány!";
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetovat";
@@ -361,26 +391,191 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Neplatný 2FA token";
 
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Výjimky Wi-Fi";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "Ochrana systému nebude fungovat pro níže uvedené sítě Wi-Fi";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Přidat výjimku";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filtrovat mobilní data";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filtrovat Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Ochrana systému na mobilních datech";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Ochrana systému na Wi-Fi";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Seznam povolených";
 
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "Seznam zakázaných";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Uživatelská pravidla Safari";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Exportovat";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Vymazat";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Uložit";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Importovat";
+
+/* "Disabled" title */
+"disabled" = "Vypnuto";
+
 /*(LogRecord) "REMOVE FROM WHITELIST" button title */
 "remove_from_whitelist" = "ODEBRAT ZE SEZNAMU POVOLENÝCH";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "ODEBRAT ZE SEZNAMU ZAKÁZANÝCH";
 
 /*(LogRecord) "ADD TO WHITELIST" button title */
 "add_to_whitelist" = "PŘIDAT NA SEZNAM POVOLENÝCH";
 
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "PŘIDAT NA SEZNAM ZAKÁZANÝCH";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Umožňuje blokování phishingových webů a dalších nebezpečných domén. Dostupné pro prémiové uživatele";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Umožňuje přidávat filtry třetích stran. K dispozici pro prémiové uživatele";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Přehrávače zvuku a videa";
+
+/*(LogCategory) comments category*/
+"comments" = "Komentáře";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interakce se zákazníky";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornografie";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Reklama";
+
+/*(LogCategory) essential category*/
+"essential" = "Nezbytné";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Analýza stránek";
+
+/*(LogCategory) social media category*/
+"social_media" = "Sociální média";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Různé";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Není známo";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Rozšíření";
+
+/*(ListOfRules) Select title */
+"common_select" = "Vybrat";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Upravit";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Vymazat";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Vybrat vše";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Přidat doménu";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Přidat nové pravidlo";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "Obnoví se všechna nastavení včetně uživatelských pravidel, ochrany systému, rozhraní a autorizačních nastavení. Tuto operaci nelze vrátit zpět. Obnovit nastavení?";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 hodin";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Dnes";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 dní";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 dní";
+
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Celé období";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Blokátory obsahu se aktualizují ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Načítání filtrů ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Pravidla jsou převáděna ...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Nový vlastní filtr";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Nový DNS filtr";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Ochrana je vypnuta";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Ochrana je zapnuta";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Ochrana Safari a systému";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Blokování obsahu v Safari";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Všechny moduly ochrany jsou vypnuty";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "Ochrana systému";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "Požadavků: %1$d, zablokováno: %2$d";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Tyto informace byly získány ze služby WhoTrackMe.com";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Více";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Pokusili jste se přidat duplicitní filtr. Tento filtr je již na seznamu.";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "Změny nebyly použity";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Zablokováno";
@@ -402,3 +597,24 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "odebráno ze seznamu zakázaných";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Otevřít %@ <b>nastavení</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Klepněte na %@ <b>Safari</b> a vyberte položku nabídky <b>„Blokátory obsahu“</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Zapněte %@ všechny blokátory obsahu</b> a vraťte se do naší aplikace!";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "Systémový DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Použít výchozí systémové servery DNS, které poskytuje váš poskytovatel služeb internetu";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Blokovat požadavek";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "Seznam povolených – požadavek";

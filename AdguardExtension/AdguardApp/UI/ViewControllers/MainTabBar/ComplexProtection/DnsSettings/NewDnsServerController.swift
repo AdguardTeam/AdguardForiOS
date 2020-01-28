@@ -150,7 +150,7 @@ class NewDnsServerController: BottomAlertController {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
-        
+        saveButton?.indicatorStyle = theme.indicatorStyle
         for separator in separators {
             separator.backgroundColor = theme.separatorColor
         }

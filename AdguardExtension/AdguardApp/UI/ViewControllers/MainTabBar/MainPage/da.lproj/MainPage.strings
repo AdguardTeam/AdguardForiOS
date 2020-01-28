@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
+"Btd-nN-zLO.text" = "forespørgsler";
+
+/* Class = "UILabel"; text = "data saved*"; ObjectID = "Cfe-vu-29O"; */
+"Cfe-vu-29O.text" = "data sparet*";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
+"Oez-VU-4fi.normalTitle" = "I dag";
+
+/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
+"Roe-x7-9e8.normalTitle" = "24 timer";
+
+/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
+"VRw-EP-ZlF.normalTitle" = "7 dage";
+
+/* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
+"YaQ-RE-YZT.title" = "AdGuard";
+
+/* Class = "UILabel"; text = "blocked"; ObjectID = "a5U-A8-S8G"; */
+"a5U-A8-S8G.text" = "blokeret";
+
+/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
+"gu3-as-BZN.normalTitle" = "30 dage";

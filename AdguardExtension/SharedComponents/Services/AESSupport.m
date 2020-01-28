@@ -65,6 +65,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     AESharedResources *_sharedResources;
     id<SafariServiceProtocol> _safariService;
     id<AESAntibannerProtocol> _antibanner;
+    id<DnsFiltersServiceProtocol> _dnsFiltersService;
 }
 
 @end
@@ -80,13 +81,14 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithResources:(id)resources safariSevice:(id)safariService antibanner:(id<AESAntibannerProtocol>)antibanner {
+- (id)initWithResources:(id)resources safariSevice:(id)safariService antibanner:(id<AESAntibannerProtocol>)antibanner dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService {
     
     self = [super init];
     if (self) {
         _sharedResources = resources;
         _safariService = safariService;
         _antibanner = antibanner;
+        _dnsFiltersService = dnsFiltersService;
     }
     
     return self;
@@ -309,6 +311,11 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         
         for (NSString *upstream in dnsServerInfo.upstreams){
             [sb appendFormat:@"\r\nDns upstream: %@",upstream];
+        }
+        
+        [sb appendString:@"\r\nDns filters:\r\n"];
+        for (DnsFilter* filter in _dnsFiltersService.filters) {
+            [sb appendFormat:@"name: %@ id: %ld url: %@ enabled: %@\r\n", filter.name, (long)filter.id, filter.subscriptionUrl, filter.enabled ? @"YES" : @"NO"];
         }
 
         return sb;

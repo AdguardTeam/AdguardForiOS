@@ -285,7 +285,6 @@
                             <outlet property="delegate" destination="Gbg-cv-RVg" id="yg2-Nv-w4Y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="   " id="7uS-9h-kri"/>
                     <connections>
                         <outlet property="numberOfFiltersLabel" destination="2kF-Mk-dHf" id="Yn1-hr-EjL"/>
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>

@@ -106,6 +106,9 @@
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Tilføj en regel";
 
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Indtast et domæne";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 

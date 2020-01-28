@@ -25,6 +25,9 @@
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "GIg-sl-FZd"; */
 "GIg-sl-FZd.normalTitle" = "Copiado";
 
+/* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
+"HUm-JT-lZs.text" = "Hora";
+
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
 "HgO-j6-UT3.normalTitle" = "Copiado";
 
@@ -39,6 +42,12 @@
 
 /* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
 "ORQ-AZ-NIU.text" = "Tamaño";
+
+/* Class = "UILabel"; text = "Original answer"; ObjectID = "RjM-Qn-ufh"; */
+"RjM-Qn-ufh.text" = "Respuesta original";
+
+/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
+"S05-ei-beX.title" = "Detalles de la petición DNS";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "VcB-hA-6Ju"; */
 "VcB-hA-6Ju.normalTitle" = "Copiado";
@@ -61,14 +70,26 @@
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
 "dWi-vv-Ca0.normalTitle" = "Copiado";
 
+/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
+"dsD-0w-qic.title" = "Borrar registro";
+
 /* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
 "fDY-OV-eqp.text" = "Tipo";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
 "fVC-3Z-ttp.text" = "Estado";
 
+/* Class = "UILabel"; text = "Matched filters"; ObjectID = "fen-B6-KSP"; */
+"fen-B6-KSP.text" = "Filtros coincidentes";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "ATRÁS";
+
 /* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
 "i4m-2Q-3Ki.text" = "Estado del DNS";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
+"kwZ-Kw-f1R.text" = "Bloquear petición";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "AÑADIR";
@@ -76,14 +97,32 @@
 /* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
 "lfu-1a-cjJ.text" = "Dominio";
 
+/* Class = "UILabel"; text = "Elapsed"; ObjectID = "miG-Yh-36b"; */
+"miG-Yh-36b.text" = "Transcurrido";
+
+/* Class = "UILabel"; text = "Matched rules"; ObjectID = "o0L-yz-2WC"; */
+"o0L-yz-2WC.text" = "Reglas coincidentes";
+
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
 "oE2-h8-ZMZ.normalTitle" = "Copiado";
 
+/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
+"pqA-7I-Vrx.title" = "Actividad";
+
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "ptt-hU-4Dv"; */
 "ptt-hU-4Dv.normalTitle" = "Copiado";
+
+/* Class = "UILabel"; text = "DNS answer"; ObjectID = "qhC-LX-WeI"; */
+"qhC-LX-WeI.text" = "Respuesta DNS";
 
 /* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
 "rIV-zR-Ddb.text" = "Categoría";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
 "tJd-oY-zOt.normalTitle" = "Copiado";
+
+/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Elija el nivel de dominio";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
+"y8j-ib-ZgR.text" = "Bloquear petición";

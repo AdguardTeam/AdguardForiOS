@@ -31,6 +31,9 @@
 /* Main Controller. Inverted whitelist cell caption */
 "inverted_whitelist_title" = "白名單（反向的）";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free" = "免費地試用";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "白名單";
 
@@ -100,6 +103,12 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "過濾器被更新：%@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "於此您可增加您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "於此輸入該域名。AdGuard 將不封鎖至這些忽略所有其它設定的網域之存取。";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
 
@@ -123,6 +132,9 @@
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "網域：";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "名稱：";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "報告不正確的封鎖";
@@ -277,6 +289,12 @@
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "您需要先啟用 VPN";
 
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "重置統計資料";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "重置";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 規則正被使用";
 
@@ -345,3 +363,84 @@
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "無效的雙因素驗證（2FA）權杖";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "白名單";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "黑名單";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari 使用者規則";
+
+/* (ListOfRulesModel) title for export */
+"export" = "匯出";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "清除";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "儲存";
+
+/* (ListOfRulesModel) title for import */
+"import" = "匯入";
+
+/*(LogCategory) unknown category*/
+"unknown" = "未知的";
+
+/*(LogCategory) extensions category*/
+"extensions" = "延伸功能";
+
+/*(ListOfRules) Select title */
+"common_select" = "選擇";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "編輯";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "刪除";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "全選";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "正在載入過濾器…";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "新自訂的過濾器";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "新的 DNS 過濾器";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "防護被禁用";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "防護被啟用";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari 和系統防護";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari 內容阻擋";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "系統防護";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "已封鎖的";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "已處理的";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "已列入白名單的";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "系統 DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "使用由您的 ISP（網際網路服務供應商）提供之系統預設 DNS 伺服器";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "封鎖請求";

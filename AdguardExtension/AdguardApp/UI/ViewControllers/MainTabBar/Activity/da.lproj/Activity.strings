@@ -1,0 +1,83 @@
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "02d-Xt-oTe"; */
+"02d-Xt-oTe.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "TILFØJ";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "2UK-IJ-AM8"; */
+"2UK-IJ-AM8.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "3Ic-4w-EoD"; */
+"3Ic-4w-EoD.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "5Au-6G-hmh"; */
+"5Au-6G-hmh.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "REDIGER";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "BvX-hA-l9D"; */
+"BvX-hA-l9D.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "CS5-Vy-AD1"; */
+"CS5-Vy-AD1.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "GIg-sl-FZd"; */
+"GIg-sl-FZd.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
+"HgO-j6-UT3.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
+"KXe-VX-Rq9.normalTitle" = "ANNULLER";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "O8w-0a-kF9"; */
+"O8w-0a-kF9.text" = "Navn";
+
+/* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
+"ORQ-AZ-NIU.text" = "Størrelse";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "VcB-hA-6Ju"; */
+"VcB-hA-6Ju.normalTitle" = "Kopieret";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "WZX-eP-abM"; */
+"WZX-eP-abM.text" = "Server";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
+"amQ-gv-yFM.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "bKN-2M-LhL"; */
+"bKN-2M-LhL.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dU9-gV-MqN"; */
+"dU9-gV-MqN.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
+"dWi-vv-Ca0.normalTitle" = "Kopieret";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
+"fDY-OV-eqp.text" = "Type";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
+"fVC-3Z-ttp.text" = "Status";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "TILBAGE";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "TILFØJ";
+
+/* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
+"lfu-1a-cjJ.text" = "Domæne";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
+"oE2-h8-ZMZ.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "ptt-hU-4Dv"; */
+"ptt-hU-4Dv.normalTitle" = "Kopieret";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
+"rIV-zR-Ddb.text" = "Kategori";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
+"tJd-oY-zOt.normalTitle" = "Kopieret";

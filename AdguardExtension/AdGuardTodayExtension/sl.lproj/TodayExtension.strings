@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Safari ads protection"; ObjectID = "28V-ha-qHw"; */
+"28V-ha-qHw.text" = "Zaščita Safarija";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
+"WAp-Xx-eXF.text" = "zahtev";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "Zaščita sistema";
+
+/* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
+"cva-11-jEA.text" = "Statistika vseh časov:";
+
+/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "shr. podatkov*";
+
+/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "onemogočeno";

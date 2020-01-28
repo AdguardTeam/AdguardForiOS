@@ -15,3 +15,6 @@
 
 /* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "Tento modul Vás chráni pred sledovaním celého systému. Šifruje Vaše DNS dopyty a blokuje sledovacie domény vo všetkých aplikáciách, nielen v prehliadači Safari";
+
+/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Tento modul blokuje reklamy a sledovače na webových stránkach otvorených v prehliadači Safari. V nižšie uvedených nastaveniach si môžete vybrať z rôznych zoznamov filtrov alebo pridať svoj vlastný";

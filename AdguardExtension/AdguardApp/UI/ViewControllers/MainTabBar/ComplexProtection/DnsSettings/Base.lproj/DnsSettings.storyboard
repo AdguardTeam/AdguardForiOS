@@ -445,7 +445,6 @@
                             <outlet property="delegate" destination="So5-wP-aAQ" id="f5R-fO-wuO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="  " id="D3X-CK-RSY"/>
                     <connections>
                         <outlet property="enabledSwitch" destination="d2y-PM-g5Z" id="x2G-ek-kwy"/>
                         <outlet property="getProCell" destination="N3C-lA-FCw" id="SUD-jH-MdZ"/>

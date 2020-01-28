@@ -22,11 +22,26 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "V Safariju ni mogoče naložiti filtrov. Zato nedavne spremembe niso bile uporabljene.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Ni mogoče naložiti filtrov v Safari. Poskusite počistiti pravila in seznam dovoljenih ali spremenite nabor uporabljenih filtrov.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NE";
 
 /* Main Controller. Inverted whitelist cell caption */
 "inverted_whitelist_title" = "Seznam dovoljenih (obrnjen)";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Uveljavitev sprememb...";
+
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ Kb";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ Mb";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ Gb";
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Poskusite brezplačno";
@@ -100,8 +115,17 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Posodobljeni filtri: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Tukaj lahko dodate lastna pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Tukaj vnesite imena domen. AdGuard ne bo onemogočil dostop do teh domen in bo prezrl vse druge nastavitve.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Tu vnesite imena domen, ločena s prelomi vrstic. AdGuard bo dovolil vse povezave do teh domen.";
 
 /* (UserFilterController) dns blacklist description */
 "dns_blacklist_text_format" = "Ta Seznam nedovoljenih podpira <a href=\"%@\">AdGuardovo sintakso DNS</a>. Tu vnesite pravila, ločena s prelomi vrstic. AdGuard bo onemogočil vse povezave z domenami, ki ustrezajo tem pravilom.";
@@ -112,11 +136,17 @@
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Dodaj pravilo";
 
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Vnesi domeno";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||primer.org^";
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "primer.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Ime vašega brezžičnega omrežja";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Pravilo:";
@@ -124,11 +154,17 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domena:";
 
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Ime:";
+
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Prijavi nepravilno zaviranje";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Prijavi napako na GitHubu";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Obrnite se na podporo";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Izvozi dnevnike";
@@ -211,6 +247,9 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Zavira oglase in sledilne strežnike";
 
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "Sistemski DNS";
+
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Omogočen %1$d izven %2$d";
 
@@ -234,6 +273,9 @@
 
 /* login error message */
 "login_error_message" = "Prišlo do napake pri prijavi v";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Vredu";
@@ -264,6 +306,15 @@
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Najprej omogočite VPN";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Ponastavi statistiko";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Vsa statistika bo počiščena!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Ponastavi";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "Uporablja se %@ pravil";
@@ -349,6 +400,9 @@
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtriraj Wi-Fi";
 
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Zaščita sistema med mobilnimi podatki";
+
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Seznam dovoljenih";
 
@@ -372,6 +426,24 @@
 
 /* "Disabled" title */
 "disabled" = "Onemogočeno";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Omogoča dodajanje filtrov drugih avtorjev. Na voljo uporabnikom Premium";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Predvajalniki zvoka in videa";
+
+/*(LogCategory) comments category*/
+"comments" = "Komentarji";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interakcija s strankami";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Porno oglaševanje";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Oglaševanje";
 
 /*(LogCategory) essential category*/
 "essential" = "Bistveno";
@@ -430,6 +502,9 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Ves čas";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Zaviralci vsebine so posodobljeni...";
+
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Nalaganje filtrov...";
 
@@ -469,6 +544,9 @@
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Več";
 
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Poskusili ste dodati podvojeni filter. Ta filter je že na seznamu";
+
 /*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
 "changes_not_applied" = "Spremembe niso bile uporabljene";
 
@@ -483,3 +561,30 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "dodana na Seznam dovoljenih";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "dodana na Seznam nedovoljenih";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "odstranjena s Seznama dovoljenih";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "odstranjena s Seznama nedovoljenih";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Odpri %@ <b>nastavitve</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Tapnite na %@ <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Preklopite na %@ vsi zaviralci vsebine</b> in se vrnite v aplikacijo!";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "Sistemski DNS";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Onemogoči zahtevo";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "Zahtevo na Seznam dovoljenih";
