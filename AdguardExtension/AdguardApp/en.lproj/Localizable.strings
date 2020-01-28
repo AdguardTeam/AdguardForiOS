@@ -624,3 +624,12 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "You have entered an invalid upstream";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Tracker details";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "General";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
