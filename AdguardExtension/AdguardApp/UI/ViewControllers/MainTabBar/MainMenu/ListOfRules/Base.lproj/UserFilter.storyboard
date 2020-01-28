@@ -610,18 +610,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Tu-Ma6">
-                                        <rect key="frame" x="25" y="52" width="550" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="M38-7o-6TT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="GIU-jw-55U" id="hpZ-s2-JFz"/>
-                                        </connections>
-                                    </textView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovF-SA-Xg2">
                                         <rect key="frame" x="25" y="95" width="550" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -669,6 +657,18 @@
                                             <action selector="cancelAction:" destination="GIU-jw-55U" eventType="touchUpInside" id="3bU-Fj-VNj"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BIv-Tu-Ma6">
+                                        <rect key="frame" x="25" y="52" width="364" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="M38-7o-6TT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="GIU-jw-55U" id="hpZ-s2-JFz"/>
+                                        </connections>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -677,10 +677,9 @@
                                     <constraint firstItem="avo-Ef-skJ" firstAttribute="leading" secondItem="wr2-gy-Jd9" secondAttribute="leading" id="9in-8t-OpM"/>
                                     <constraint firstItem="fCd-gA-rXS" firstAttribute="leading" secondItem="wr2-gy-Jd9" secondAttribute="leading" id="9uj-aY-rbd"/>
                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="trailing" secondItem="fCd-gA-rXS" secondAttribute="trailing" id="BvQ-w4-vub"/>
-                                    <constraint firstItem="ovF-SA-Xg2" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" constant="-8" id="JMw-VY-fmC"/>
                                     <constraint firstItem="g8X-4z-jzB" firstAttribute="top" secondItem="wr2-gy-Jd9" secondAttribute="top" constant="25" id="P9k-5n-dB0"/>
                                     <constraint firstAttribute="trailing" secondItem="fCd-gA-rXS" secondAttribute="trailing" id="R7M-nn-7PJ"/>
-                                    <constraint firstItem="cEh-Sj-zqF" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="top" id="SVK-D8-7yE"/>
+                                    <constraint firstItem="cEh-Sj-zqF" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="top" constant="8" id="SVK-D8-7yE"/>
                                     <constraint firstAttribute="trailing" secondItem="avo-Ef-skJ" secondAttribute="trailing" id="WMr-ow-GCn"/>
                                     <constraint firstItem="g8X-4z-jzB" firstAttribute="leading" secondItem="wr2-gy-Jd9" secondAttribute="leading" constant="25" id="XCL-PX-H7V"/>
                                     <constraint firstItem="avo-Ef-skJ" firstAttribute="top" secondItem="fCd-gA-rXS" secondAttribute="bottom" id="XNw-Vh-fgS"/>
@@ -697,6 +696,7 @@
                                     <constraint firstAttribute="bottom" secondItem="avo-Ef-skJ" secondAttribute="bottom" constant="60" id="rE8-Be-vcX"/>
                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="leading" secondItem="fCd-gA-rXS" secondAttribute="leading" id="rFr-E1-Twr"/>
                                     <constraint firstItem="ovF-SA-Xg2" firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" id="urZ-Fz-5LE"/>
+                                    <constraint firstItem="ovF-SA-Xg2" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="v4M-c5-Qu7"/>
                                     <constraint firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" constant="25" id="wFg-9j-KKv"/>
                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="top" secondItem="avo-Ef-skJ" secondAttribute="bottom" id="wJ7-dt-Y83"/>
                                     <constraint firstItem="oZN-ZW-fP8" firstAttribute="top" secondItem="g8X-4z-jzB" secondAttribute="bottom" constant="27" id="zMl-7B-k4a"/>
