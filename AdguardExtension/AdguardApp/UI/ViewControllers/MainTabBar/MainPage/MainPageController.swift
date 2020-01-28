@@ -134,6 +134,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // We change constraints only for iphone SE - like devices
     private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
     
+    // Indicates whether filters are updating
+    private var updateInProcess = false
     
     // MARK: - Services
     
@@ -262,18 +264,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             switch(safariUpdateEnded, dnsUpdateEnded){
             case (true, true):
                 self?.updateEnded()
-            case (true, false):
-                self?.protectionStatusLabel.text = ACLocalizedString("update_filter_start_message", nil)
             default:
                 break
             }
-            
         }
         
         mainPageModel?.updateFilters(start: {
             DispatchQueue.main.async { [weak self] in
                 self?.updateStarted()
-                self?.protectionStatusLabel.text = ACLocalizedString("update_filter_start_message", nil)
+                self?.protectionStatusLabel.text = String.localizedString("update_filter_start_message")
             }
         }, finish: { [weak self] (message) in
             DispatchQueue.main.async {
@@ -591,6 +590,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Starts to rotate refresh button
      */
     private func updateStarted(){
+        updateInProcess = true
         iconButton?.isUserInteractionEnabled = false
         updateButton.customView?.rotateImage(isNedeed: true)
     }
@@ -600,9 +600,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      */
     private func updateEnded(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {[weak self] in
+            self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
-            self?.changeProtectionStatusLabel()
+            self?.checkProtectionStates()
         })
     }
     
@@ -640,10 +641,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     */
     private func checkProtectionStates(){
         complexProtection.getAllStates {[weak self] (safariEnabled, systemEnabled, complexEnabled) in
-            guard let self = self else { return }
+            guard let self = self, !self.updateInProcess else { return }
 
             DispatchQueue.main.async {
-                
                 
                 self.safariProtectionButton.buttonIsOn = safariEnabled
                 self.systemProtectionButton.buttonIsOn = systemEnabled
