@@ -33,7 +33,7 @@ class ActionViewController: UIViewController {
     private var injectScriptSupported = false
     private var enabled = false
     private var dbObserver: Any?
-    private var configuration: SimpleConfigurationSwift?
+    private var configuration: SimpleConfigurationSwift
     
     var systemStyleIsDark: Bool {
         if #available(iOSApplicationExtension 13.0, *) {
@@ -78,9 +78,11 @@ class ActionViewController: UIViewController {
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
         let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
+        configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
+        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration)
         self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources)
         contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
-        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner)
+        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
         
         super.init(coder: coder)
     }
@@ -92,8 +94,8 @@ class ActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: systemStyleIsDark)
-        self.theme = ThemeService(configuration!)
+        self.configuration.systemAppearenceIsDark = systemStyleIsDark
+        self.theme = ThemeService(configuration)
         
         navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -151,7 +153,7 @@ class ActionViewController: UIViewController {
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        configuration?.systemAppearenceIsDark = systemStyleIsDark
+        configuration.systemAppearenceIsDark = systemStyleIsDark
         updateTheme()
     }
     
