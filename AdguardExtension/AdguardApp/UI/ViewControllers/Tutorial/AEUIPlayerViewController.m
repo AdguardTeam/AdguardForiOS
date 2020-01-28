@@ -19,7 +19,7 @@
 #import "ADomain/ADomain.h"
 #import "NSString+Utils.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/3.0/%@/%@.mp4"
+#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/4.0/%@/%@.mp4"
 
 #define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
 #define HIDE_NAVIGATION_DELAY 4 // seconds
