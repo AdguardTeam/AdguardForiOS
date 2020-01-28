@@ -127,8 +127,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         let imgBackArrow = UIImage(named: "arrow_back") ?? UIImage()
         navigationController?.navigationBar.backIndicatorImage = imgBackArrow
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = imgBackArrow
-        navigationController?.navigationBar.backItem?.title = ""
-        navigationController?.navigationBar.topItem?.title = ""
+        
+        navigationItem.leftItemsSupplementBackButton = true
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
     
     // MARK: - FilterDetailsControllerAnimationDelegate
