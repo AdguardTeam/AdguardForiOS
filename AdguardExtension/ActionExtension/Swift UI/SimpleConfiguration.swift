@@ -59,5 +59,8 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     @objc init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
         self.resources = resources
         self.systemAppearenceIsDark = systemAppearenceIsDark
+        allContentBlockersEnabled = true
     }
+    
+    var allContentBlockersEnabled: Bool
 }

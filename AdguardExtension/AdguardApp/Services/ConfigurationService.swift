@@ -88,8 +88,8 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     @objc
     dynamic var contentBlockerEnabled: [Int : Bool]?
     
-    var allContentBlockersEnabled: Bool? {
-        return contentBlockerEnabled?.reduce(true, { (result, state) -> Bool in return result && state.value })
+    var allContentBlockersEnabled: Bool {
+        return contentBlockerEnabled?.reduce(true, { (result, state) -> Bool in return result && state.value }) ?? true
     }
     
     /**

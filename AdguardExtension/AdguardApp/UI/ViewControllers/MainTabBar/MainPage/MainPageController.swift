@@ -681,9 +681,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.contentBlockerViewIpad.isHidden = isIphone
         }
         
-        guard let allEnabled = configuration.allContentBlockersEnabled else { return }
-        
-        if allEnabled {
+        if configuration.allContentBlockersEnabled {
             hideContentBlockersInfo()
         } else {
             showContentBlockersInfo()
