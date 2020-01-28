@@ -75,6 +75,7 @@ protocol DnsFiltersServiceProtocol {
 }
 
 @objc(DnsFilter)
+@objcMembers
 class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     
     private let defaultFilterId = 0
