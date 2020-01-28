@@ -16,6 +16,9 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Tamno";
 
+/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "Nemojte ih menjati ako ne znate šta radite";
+
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
@@ -75,6 +78,9 @@
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Kompatibilno sa “Ličnim VPN” aplikacijama";
+
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
+"jmQ-ze-hFG.text" = "U Split-Tunnel načinu rada AdGuard je kompatibilan sa takozvanim “Ličnim VPN” aplikacijama. Zbog toga, u ovom načinu rada AdGuard može biti premošćen od strane sistema u slučaju loše veze";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
 "mdJ-Nh-wTi.text" = "Dozvoli prikazivanje statusa preuzimanja filtera i tok zaštite";

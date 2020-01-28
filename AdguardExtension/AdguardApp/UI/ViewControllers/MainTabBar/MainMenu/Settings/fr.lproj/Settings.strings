@@ -17,7 +17,7 @@
 "FzS-e3-CK1.text" = "Sombre";
 
 /* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
-"GBd-dx-t46.text" = "Quelle est la profondeur du terrier du lapin ?";
+"GBd-dx-t46.text" = "Ne changez rien si vous n'êtes pas certain(e)";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
@@ -79,7 +79,7 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatible avec les applications «Personal VPN»";
 
-/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity"; ObjectID = "jmQ-ze-hFG"; */
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "En mode Split-Tunnel, AdGuard est compatible avec les applications dites «Personal VPN». Comme compromis, dans ce mode, il peut être ignoré par le système en cas de mauvaise connectivité";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */

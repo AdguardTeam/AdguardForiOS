@@ -37,6 +37,15 @@
 /* (MainPageController) Message for alert about saved data */
 "saved_data_message" = "Táto informácia je založená na počte blokovaných DNS dopytov. Štatistiky predstavujú odhad z dôvodu technickej nemožnosti vypočítať presný počet reklám, sledovačov a iných hrozieb, ktoré mohol používateľ stiahnuť, ak doména nebola pôvodne zablokovaná.";
 
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ Kb";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ Mb";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ Gb";
+
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Vyskúšajte bezplatne";
 
@@ -109,8 +118,17 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtre boli aktualizované: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Sem zadajte mená domén. AdGuard nebude blokovať prístup do týchto domén ignorovaním všetkých ostatných nastavení.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Sem zadajte názvy domén. AdGuard zapne filtráciu len na týchto webových stránkach v Safari";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Sem zadajte mená domén oddelené zalomením riadkov. AdGuard povolí všetky pripojenia k týmto doménam.";
 
 /* (UserFilterController) dns blacklist description */
 "dns_blacklist_text_format" = "Táto čierna listina podporuje <a href=\"%@\">DNS AdGuard syntax</a>. Sem zadajte pravidlá oddelené zalomením riadkov. AdGuard zablokuje všetky pripojenia k doménam, ktoré zodpovedajú týmto pravidlám.";
@@ -430,6 +448,9 @@
 /*(LogRecord) "ADD TO BLACKLIST" button title */
 "add_to_blacklist" = "PRIDAŤ DO ČIERNEJ LISTINY";
 
+/*(GroupsController) Security description without premium  */
+"security_description" = "Povoliť blokovanie podvodných stránok a ďalších nebezpečných domén. K dispozícii pre prémiových používateľov";
+
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Umožňuje pridávať filtre tretích strán. K dispozícii pre prémiových používateľov";
 
@@ -549,6 +570,9 @@
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Viac";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Pokúsili ste sa pridať duplicitný filter. Tento filter je už na zozname.";
 
 /*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
 "changes_not_applied" = "Zmeny sa neuplatnili";

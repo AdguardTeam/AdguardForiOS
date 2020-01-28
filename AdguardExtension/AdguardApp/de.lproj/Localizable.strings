@@ -119,7 +119,7 @@
 "filter_date_format" = "Filter aktualisiert: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
+"blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird den Zugriff auf diese Domains ungeachtet aller anderen Einstellungen nicht blockieren.";

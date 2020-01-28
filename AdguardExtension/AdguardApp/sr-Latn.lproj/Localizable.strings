@@ -37,6 +37,15 @@
 /* (MainPageController) Message for alert about saved data */
 "saved_data_message" = "Ove informacije su zasnovane na broju blokiranih DNS zahteva. Statistika je približna zbog tehničke nemogućnosti da se izračuna tačan broj reklama, praćenja i drugih pretnji koje mogu biti preuzete od korisnika ako domen nije inicijalno blokiran.";
 
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ Kb";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ Mb";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ Gb";
+
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Isprobaj besplatno";
 
@@ -109,8 +118,17 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Ažurirano filtera: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Ovde možete dodati vaša pravila<br>Pročitajte ovu <a href=\"%@\">napomenu o sintaksi pravila</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Ovde unesite imena domena. AdGuard će isključiti filtriranje u Safariju za ove sajtove.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Ovde unesite domen. AdGuard će uključiti filtriranje u Safariju samo za te sajtove.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Ovde unesite domene. AdGuard neće blokirati te domene";
 
 /* (UserFilterController) dns blacklist description */
 "dns_blacklist_text_format" = "Ovde unesite domene. AdGuard će sprečiti sve aplikacije i preglednike da učitaju te domene. Ova crna lista podržava <a href=\"%@\">AdGuard's DNS sintaksu</a>";
@@ -430,6 +448,9 @@
 /*(LogRecord) "ADD TO BLACKLIST" button title */
 "add_to_blacklist" = "Dodaj na crnu listu";
 
+/*(GroupsController) Security description without premium  */
+"security_description" = "Dozvoli blokiranje fišing sajtova i drugih opasnih domena. Dostupno za Premium korisnike";
+
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Dozvoljava dodavanje filtera trećih strana. Dostupno za premium korisnike";
 
@@ -549,6 +570,9 @@
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Više";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Pokušali ste da dodate postojeći filter. Ovaj filter je već na listi.";
 
 /*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
 "changes_not_applied" = "Promene nisu primenjene";

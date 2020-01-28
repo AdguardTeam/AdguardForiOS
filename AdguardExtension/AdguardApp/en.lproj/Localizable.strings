@@ -623,4 +623,4 @@
 "video_tutorial_title" = "Video Tutorial";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "You have entered an invalid upstream";
+"invalid_upstream_message" = "You have entered the invalid upstream";

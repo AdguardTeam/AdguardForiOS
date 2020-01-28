@@ -43,6 +43,12 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Añadir filtro";
 
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "Este módulo puede bloquear los dominios de rastreo y cifrar tu tráfico DNS";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Protección del sistema";
+
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Configuración de red";
 
@@ -73,6 +79,9 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "DNS (sistema de nombres de dominio) es el equivalente en Internet de una guía telefónica. Mantiene un directorio de nombres de dominio y los traduce a direcciones IP.";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCELAR";
 
@@ -94,11 +103,17 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nombre del servidor";
 
+/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Este módulo puede bloquear los dominios de rastreo y cifrar tu tráfico DNS";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Dirección del servidor DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Seleccione un protocolo";
+
+/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
+"w0g-Xg-HG0.title" = "Filtros DNS";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtros y excepciones";

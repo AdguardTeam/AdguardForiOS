@@ -10,6 +10,9 @@
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Abmelden";
 
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Alle Premium-Features sind für Sie verfügbar";
+
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "Fügen Sie eigene Regeln hinzu";
 
@@ -42,6 +45,9 @@
 
 /* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "Systemschutz";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Premium ist aktiviert";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Einkäufe wiederherstellen";

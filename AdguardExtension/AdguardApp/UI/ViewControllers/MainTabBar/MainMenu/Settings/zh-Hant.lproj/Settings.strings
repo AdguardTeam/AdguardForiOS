@@ -1,11 +1,44 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "重置";
 
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "與其它的 VPN 應用程式不相容，不穩定的";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
+"Bjk-AC-5fy.text" = "隧道模式";
+
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
 "ChK-gV-7pc.title" = "設定";
 
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "與其它的 VPN 應用程式不相容";
+
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "深色";
+
+/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
+"GGp-kp-YJI.text" = "分離的隧道";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
+"JPH-xu-Z3J.text" = "當網路更改時，重新啟動防護";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
+"KSL-dU-yfA.text" = "內容阻擋器";
+
+/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
+"KVr-dC-Lo5.title" = "隧道模式";
+
+/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
+"Ll9-il-kpC.title" = "進階的設定";
+
+/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "開發者模式";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
+"PV8-kf-b2c.text" = "如果此設定被啟用，AdGuard 將忽略通用之修飾的（cosmetic）規則。作為過濾品質的交換，這將加速頁面呈現";
+
+/* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
+"QEc-dY-TtB.text" = "重置統計資料";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "系統預設";
@@ -13,11 +46,35 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "主題";
 
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
+"W6u-T8-UVZ.text" = "使用簡化的過濾器";
+
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "僅透過 Wi-Fi 自動更新";
 
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
+"XFM-ii-xUV.text" = "您有 6 個內容阻擋器，它們每個可包含高達 50,000 項規則";
+
+/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
+"aIJ-gX-03k.text" = "完全的隧道";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
+"aRS-WH-mRj.text" = "當 AdGuard 正在執行時，如果您遭受關於網際網路連線的問題，啟用此選項";
+
 /* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
 "bVh-Of-Oxm.text" = "反向白名單";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
+"eIa-RB-Phv.text" = "進階的設定";
+
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "完全的隧道（無 VPN 圖像）";
+
+/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
+"gxl-pG-zh1.text" = "與\"個人級 VPN\"應用程式相容";
+
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
+"jmQ-ze-hFG.text" = "在分離的隧道模式下，AdGuard 與所謂的\"個人級 VPN\"應用程式相容。作為交換，在這種模式下，若發生不良的連線，它可能被系統繞過。";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其它的";

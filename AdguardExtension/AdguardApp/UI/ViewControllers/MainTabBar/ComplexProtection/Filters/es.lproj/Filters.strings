@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "Añadir filtro";
 
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "Protección para Safari";
+
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Nombre:";
 
@@ -45,6 +48,9 @@
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "Añada listas de filtros personalizados aquí";
+
+/* Class = "UILabel"; text = "Safari Whitelist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "Lista blanca para Safari";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filtros";
