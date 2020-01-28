@@ -41,11 +41,11 @@ import Foundation
     var navigationBarColor: UIColor { get }
     var notificationWindowColor: UIColor { get }
     var chartViewTextColor: UIColor { get }
-    
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
-    
     var ruleTextColor: UIColor { get }
+    
+    var indicatorStyle: UIActivityIndicatorView.Style { get }
     
     func setupImage(_ imageView: ThemeableImageView)
     func setupLabel(_ label: ThemableLabel)
@@ -157,6 +157,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var chartViewTextColor: UIColor {
         return configuration.darkTheme ? UIColor(hexString: "#2a2a2a") : UIColor(hexString: "#d8d8d8")
+    }
+    
+    var indicatorStyle: UIActivityIndicatorView.Style {
+        return configuration.darkTheme ? UIActivityIndicatorView.Style.white : .gray
     }
     
     func setupTagButton(_ button: RoundRectButton) {

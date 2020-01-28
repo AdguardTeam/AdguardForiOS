@@ -89,22 +89,34 @@ class AddCustomFilterController: BottomAlertController {
     
     @IBAction func continueAction(_ sender: Any) {
         
-        guard let urlString = urlTextField?.text else { return }
-        guard let url = URL(string: urlString) else { return }
+        nextButton.startIndicator()
+        nextButton.isEnabled = false
+        guard let urlString = urlTextField?.text else {
+            nextButton.isEnabled = true
+            nextButton.stopIndicator()
+            return
+        }
+        guard let url = URL(string: urlString) else {
+            nextButton.isEnabled = true
+            nextButton.stopIndicator()
+            return
+        }
         let parser = AASFilterSubscriptionParser()
         parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                guard let strongSelf = self else {return}
                 if let parserError = error {
-                    ACSSystemUtils.showSimpleAlert(for: strongSelf, withTitle: nil, message: parserError.localizedDescription)
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
+                    self.nextButton.isEnabled = true
+                    self.nextButton.stopIndicator()
                     return
                 }
 
                 if let parserResult = result {
-                    DispatchQueue.main.async {
-                        strongSelf.filter = parserResult
-                        strongSelf.performSegue(withIdentifier: strongSelf.detailsSegueId, sender: strongSelf)
-                    }
+                    self.filter = parserResult
+                    self.performSegue(withIdentifier: self.detailsSegueId, sender: self)
+                    self.nextButton.isEnabled = true
+                    self.nextButton.stopIndicator()
                     return
                 }
             }
@@ -121,6 +133,7 @@ class AddCustomFilterController: BottomAlertController {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
+        nextButton.indicatorStyle = theme.indicatorStyle
     }
 }
 
