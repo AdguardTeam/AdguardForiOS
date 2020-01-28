@@ -35,4 +35,31 @@ class StringUtilsTest: XCTestCase {
             XCTAssertFalse(server.checkIfValidDnsServer())
         }
     }
+    
+    // MARK: - generateSubDomains tests
+    
+    func testGenerateSubDomainsWithNormalDomain(){
+        let domain = "e6858.dscce9.akamaiedge.net"
+        let subdomains = ["e6858.dscce9.akamaiedge.net",
+                          "dscce9.akamaiedge.net",
+                          "akamaiedge.net"]
+        let subDomainsToCheck = String.generateSubDomains(from: domain)
+        XCTAssertEqual(subdomains, subDomainsToCheck)
+    }
+    
+    func testGenerateSubDomainsWithDotInTheEnd(){
+        let domain = "e6858.dscce9.akamaiedge.net."
+        let subdomains = ["e6858.dscce9.akamaiedge.net",
+                          "dscce9.akamaiedge.net",
+                          "akamaiedge.net"]
+        let subDomainsToCheck = String.generateSubDomains(from: domain)
+        XCTAssertEqual(subdomains, subDomainsToCheck)
+    }
+    
+    func testGenerateSubDomainsWithEmptyDomain(){
+        let domain = ""
+        let subdomains: [String] = []
+        let subDomainsToCheck = String.generateSubDomains(from: domain)
+        XCTAssertEqual(subdomains, subDomainsToCheck)
+    }
 }
