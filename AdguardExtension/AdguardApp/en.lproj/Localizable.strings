@@ -624,3 +624,9 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "You have entered the invalid upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "System Blacklist";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "System Whitelist";
