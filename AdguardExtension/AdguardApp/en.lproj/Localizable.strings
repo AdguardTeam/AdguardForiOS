@@ -687,3 +687,6 @@
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Original answer";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Empty";

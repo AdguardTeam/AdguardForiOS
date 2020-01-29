@@ -61,7 +61,8 @@ struct Tracker: Codable {
 
 @objc class DnsTrackerService: NSObject, DnsTrackerServiceProtocol {
     
-    private var dnsTrackers: DnsTrackers?
+    private var whotracksmeTrackers: DnsTrackers?
+    private var adguardTrackers: DnsTrackers?
     
     override init() {
         super.init()
@@ -70,12 +71,26 @@ struct Tracker: Codable {
     
     func getTrackerInfo(by domain: String) -> DnsTrackerInfo? {
         
-        let trackerDomains = dnsTrackers?.trackerDomains
+        if let trackers = adguardTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers) {
+            return info
+        }
+        
+        if let trackers = whotracksmeTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers) {
+            return info
+        }
+        
+        return nil
+    }
+    
+    // MARK: - Initialization of dns trackers object
+    
+    private func getTrackerInfo(by domain: String, dnsTrackers: DnsTrackers) -> DnsTrackerInfo? {
+        let trackerDomains = dnsTrackers.trackerDomains
         
         var cuttedDomain = domain
         var domainKey: String?
         while cuttedDomain.count > 0 {
-            domainKey = trackerDomains?[cuttedDomain]
+            domainKey = trackerDomains[cuttedDomain]
             if domainKey != nil { break }
             
             let splitted = cuttedDomain.split(separator: ".", maxSplits: 1)
@@ -86,32 +101,40 @@ struct Tracker: Codable {
         
         if domainKey == nil { return nil }
         
-        let trackers = dnsTrackers?.trackers
-        guard let info = trackers?[domainKey!] else { return nil }
+        let trackers = dnsTrackers.trackers
+        guard let info = trackers[domainKey!] else { return nil }
         
-        let categories = dnsTrackers?.categories
+        let categories = dnsTrackers.categories
         
         let categoryId = info.categoryId
-        guard let categoryKey = categories?[String(categoryId)] else { return nil }
+        guard let categoryKey = categories[String(categoryId)] else { return nil }
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
         return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company)
     }
     
-    // MARK: - Initialization of dns trackers object
-    
     private func initializeDnsTrackers(){
-        guard let path = Bundle.main.path(forResource: "whotracksme", ofType: "json") else { return }
+        guard let whotracksmePath = Bundle.main.path(forResource: "whotracksme", ofType: "json"),
+                let adguardPath = Bundle.main.path(forResource: "adguard", ofType: "json")
+            else { return }
         do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-            try decodeTrackers(data: data)
+            let whotracksmeData = try Data(contentsOf: URL(fileURLWithPath: whotracksmePath), options: .mappedIfSafe)
+            try decodeWhotraksmeTrackers(data: whotracksmeData)
+            
+            let adguardData = try Data(contentsOf: URL(fileURLWithPath: adguardPath), options: .mappedIfSafe)
+            try decodeAdguardTrackers(data: adguardData)
         } catch {
-            DDLogError("Failed to decode whotracksme.json")
+            assertionFailure("Failed to decode whotracksme.json \(error)")
+            DDLogError("Failed to decode whotracksme.json \(error)")
         }
     }
     
-    func decodeTrackers(data: Data) throws {
-        dnsTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
+    func decodeWhotraksmeTrackers(data: Data) throws {
+        whotracksmeTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
+    }
+    
+    func decodeAdguardTrackers(data: Data) throws {
+        adguardTrackers = try JSONDecoder().decode(DnsTrackers.self, from: data)
     }
 }
