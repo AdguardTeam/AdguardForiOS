@@ -215,6 +215,8 @@ class DnsRequestDetailsController : UITableViewController {
         
         let model = cellModels[indexPath]
         
+        cell.isHidden = false
+        
         if let model = cellModels[indexPath] {
             if let userCell = model?.isUserCell {
                 if !userCell && !configuration.developerMode {
@@ -286,7 +288,7 @@ class DnsRequestDetailsController : UITableViewController {
         case generalSection:
             text = String.localizedString("general_header")
         case dnsSection:
-            text = String.localizedString("dns_header")
+            text = configuration.developerMode ? String.localizedString("dns_header") : ""
         default:
             return nil
         }
@@ -473,7 +475,16 @@ class DnsRequestDetailsController : UITableViewController {
         let type = record.logRecord.type
         let typeModel = LogCellModel(isUserCell: false, copiedString: type, copiedLabel: typeCopied, labelToHide: typeTitleLabel)
         cellModels[typeCell] = typeModel
-        typeLabel.text = type
+        let mappedType: String
+        switch type {
+        case "A":
+            mappedType = "A (IPv4)"
+        case "AAAA":
+            mappedType = "AAAA (IPv6)"
+        default:
+            mappedType = type
+        }
+        typeLabel.text = mappedType
         
         // Dns status model
         let dnsStatus = record.logRecord.answerStatus
