@@ -173,6 +173,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1j-Q6-vGE">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
+                                <connections>
+                                    <segue destination="7eB-aD-VKK" kind="embed" id="qCe-mL-boE"/>
+                                </connections>
+                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pb-x4-4OY" customClass="BottomShadowView" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="738" width="414" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -183,12 +189,6 @@
                                     <outlet property="buttonsViewHeight" destination="b86-5b-m56" id="PIF-3c-IWk"/>
                                 </connections>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1j-Q6-vGE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
-                                <connections>
-                                    <segue destination="7eB-aD-VKK" kind="embed" id="qCe-mL-boE"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1298,8 +1298,8 @@
                                     <constraints>
                                         <constraint firstItem="6SH-LB-6pP" firstAttribute="leading" secondItem="ylO-pw-vbs" secondAttribute="trailing" constant="5" id="03z-fg-ahM"/>
                                         <constraint firstAttribute="bottom" secondItem="hLu-qb-YH2" secondAttribute="bottom" constant="16" id="HGn-GQ-XMf"/>
+                                        <constraint firstItem="QUa-JO-MEg" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Kdq-Gt-B57"/>
                                         <constraint firstItem="PF8-IT-uim" firstAttribute="centerY" secondItem="GPM-Xq-MPe" secondAttribute="centerY" id="Lfq-Tk-i2d"/>
-                                        <constraint firstItem="QUa-JO-MEg" firstAttribute="centerY" secondItem="mmk-iv-asa" secondAttribute="centerY" id="QSo-FE-ZMX"/>
                                         <constraint firstItem="hLu-qb-YH2" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Qv8-ar-uG8"/>
                                         <constraint firstItem="QUa-JO-MEg" firstAttribute="leading" secondItem="mmk-iv-asa" secondAttribute="leading" constant="24" id="T1B-qp-9kL"/>
                                         <constraint firstAttribute="trailing" secondItem="6SH-LB-6pP" secondAttribute="trailing" constant="24" id="TdB-8k-UyY"/>

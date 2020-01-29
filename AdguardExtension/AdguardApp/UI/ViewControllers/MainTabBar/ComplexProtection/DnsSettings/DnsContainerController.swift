@@ -35,7 +35,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
     
-    
     var logRecord: DnsLogRecordExtended!
     
     private var blockRequestControllerId = "BlockRequestControllerId"

@@ -81,6 +81,17 @@ class NewDnsRequestDetailsController: UITableViewController {
             guard let self = self else { return }
             self.tableView.reloadData()
         }
+        
+        updateTheme()
+        createAlert()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        guard let container = containerController else { return }
+        if container.containerView.frame.height <= tableView.contentSize.height {
+            shadowView?.animateAppearingOfShadow()
+        }
+        containerController = nil
     }
 
     // MARK: - Table view data source
@@ -98,6 +109,7 @@ class NewDnsRequestDetailsController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: requestDetailsCellId) as? RequestDetailsCell else { return UITableViewCell() }
         let model = getModel(for: indexPath)
         cell.model = model
+        theme.setupTableCell(cell)
         return cell
     }
     
@@ -181,9 +193,10 @@ class NewDnsRequestDetailsController: UITableViewController {
     // MARK: - Public function
     
     func updateStatusLabel(){
-        if let statusCellModel = getModel(for: statusCell){
-            tableView.reloadRows(at: [statusCell], with: .fade)
-        }
+        let statusCellModel = getStatusCellModel()
+        sectionModels[generalSection]?[statusCell.row] = statusCellModel
+        tableView.reloadRows(at: [statusCell], with: .fade)
+        
     }
     
     // MARK: - Private methods
@@ -266,6 +279,19 @@ class NewDnsRequestDetailsController: UITableViewController {
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
     }
     
+    private func getStatusCellModel() -> LogCellModel? {
+        guard let record = logRecord else { return nil }
+        
+        let status = record.logRecord.status.title()
+        let userStatus = record.logRecord.userStatus
+        let stCopied = userStatus == .none ? status : "\(status)(\(userStatus.title()))"
+        let color = record.logRecord.status.color()
+        let statusFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        let statusTitle = String.localizedString("status_title")
+        let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFont: statusFont, infoColor: color, theme: theme, configuration: configuration)
+        return statusModel
+    }
+    
     /**
      Method to create a model for this VC
      */
@@ -275,62 +301,56 @@ class NewDnsRequestDetailsController: UITableViewController {
         /**
          Tracker Details Section
          */
-        var trackerDetailsSectionModel: [Int : LogCellModelProtocol?]? = nil
+        var trackerDetailsSectionModel: [Int : LogCellModelProtocol?] = [:]
         
         // Category model
         let category = record.category.category ?? ""
         let categoryTitle = String.localizedString("category_title")
         let categoryModel = category.isEmpty ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, theme: theme, configuration: configuration)
-        trackerDetailsSectionModel?[categoryCell.row] = categoryModel
+        trackerDetailsSectionModel[categoryCell.row] = categoryModel
         
         // Name model
         let name = record.category.name ?? ""
         let nameTitle = String.localizedString("name_title")
         let nameFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
         let nameModel = name.isEmpty ? nil : LogCellModel(copiedString: name, title: nameTitle, info: name, infoFont: nameFont, theme: theme, configuration: configuration)
-        trackerDetailsSectionModel?[nameCell.row] = nameModel
+        trackerDetailsSectionModel[nameCell.row] = nameModel
         
         // Company model
         let company = record.category.company ?? ""
         let companyTitle = String.localizedString("company_title")
         let companyModel = company.isEmpty ? nil : LogCellModel(copiedString: company, title: companyTitle, info: company, theme: theme, configuration: configuration)
-        trackerDetailsSectionModel?[companyCell.row] = companyModel
+        trackerDetailsSectionModel[companyCell.row] = companyModel
         
         sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
         
         /**
          General Section
          */
-        var generalSectionModel: [Int : LogCellModelProtocol?]? = nil
+        var generalSectionModel: [Int : LogCellModelProtocol?] = [:]
         
         // Domain model
         var domain = record.logRecord.domain
         domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
         let domainTitle = String.localizedString("domain_title")
         let domainModel = domain.isEmpty ? nil : LogCellModel(copiedString: domain, title: domainTitle, info: domain, theme: theme, configuration: configuration)
-        generalSectionModel?[domainCell.row] = domainModel
+        generalSectionModel[domainCell.row] = domainModel
         
         // Server model
         let server = record.logRecord.server
         let serverTitle = String.localizedString("server_title")
         let serverModel = server.isEmpty ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme, configuration: configuration)
-        generalSectionModel?[serverCell.row] = serverModel
+        generalSectionModel[serverCell.row] = serverModel
         
         // Status model
-        let status = record.logRecord.status.title()
-        let userStatus = record.logRecord.userStatus
-        let stCopied = userStatus == .none ? status : "\(status)(\(userStatus.title()))"
-        let color = record.logRecord.status.color()
-        let statusFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
-        let statusTitle = String.localizedString("status_title")
-        let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFont: statusFont, infoColor: color, theme: theme, configuration: configuration)
-        generalSectionModel?[statusCell.row] = statusModel
+        let statusModel = getStatusCellModel()
+        generalSectionModel[statusCell.row] = statusModel
         
         // Time model
         let time = record.logRecord.time()
         let timeTitle = String.localizedString("time_title")
         let timeModel = time.isEmpty ? nil : LogCellModel(copiedString: time, title:timeTitle, info: time, theme: theme, configuration: configuration)
-        generalSectionModel?[timeCell.row] = timeModel
+        generalSectionModel[timeCell.row] = timeModel
         
         // Size model
         let bytesSent = record.logRecord.bytesSent
@@ -340,63 +360,63 @@ class NewDnsRequestDetailsController: UITableViewController {
         let sizeTitle = String.localizedString("size_title")
         let size = String(format: "%d B / %d B", bytesReceived, bytesSent)
         let sizeModel = LogCellModel(isUserCell: false, isDataCell: true, copiedString: size, title: sizeTitle, bytesSent: bytesSentText, bytesReceived: bytesReceivedText, theme: theme, configuration: configuration)
-        generalSectionModel?[sizeCell.row] = sizeModel
+        generalSectionModel[sizeCell.row] = sizeModel
         
         // Elapsed model
         let elapsed = record.logRecord.elapsed
         let elapsedTitle = String.localizedString("elapsed_title")
         let elapsedString = String(format: "%d ms", elapsed)
         let elapsedModel = LogCellModel(isUserCell: false, copiedString: elapsedString, title: elapsedTitle, info: elapsedString, theme: theme, configuration: configuration)
-        generalSectionModel?[elapsedCell.row] = elapsedModel
+        generalSectionModel[elapsedCell.row] = elapsedModel
         
         sectionModels[generalSection] = generalSectionModel
         
         /**
          DNS Section
         */
-        var dnsSectionModel: [Int : LogCellModelProtocol?]? = nil
+        var dnsSectionModel: [Int : LogCellModelProtocol?] = [:]
         
         // Type model
         let type = record.logRecord.getTypeAndIp()
         let typeTitle = String.localizedString("type_title")
         let typeModel = type.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: type, title: typeTitle, info: type, theme: theme, configuration: configuration)
-        dnsSectionModel?[typeCell.row] = typeModel
+        dnsSectionModel[typeCell.row] = typeModel
         
         // Dns status model
         let dnsStatus = record.logRecord.answerStatus ?? ""
         let dnsStatusTitle = String.localizedString("dns_status_title")
         let dnsStatusModel = dnsStatus.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsStatus, title: dnsStatusTitle, info: dnsStatus, theme: theme, configuration: configuration)
-        dnsSectionModel?[dnsStatusCell.row] = dnsStatusModel
+        dnsSectionModel[dnsStatusCell.row] = dnsStatusModel
         
         // Dns upstream model
         let dnsUpstream = record.logRecord.upstreamAddr ?? ""
         let dnsUpstreamTitle = String.localizedString("dns_upstream_title")
         let dnsUpstreamModel = dnsUpstream.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsUpstream, title: dnsUpstreamTitle, info: dnsUpstream, theme: theme, configuration: configuration)
-        dnsSectionModel?[dnsUpstreamCell.row] = dnsUpstreamModel
+        dnsSectionModel[dnsUpstreamCell.row] = dnsUpstreamModel
         
         // Dns answer model
         let dnsAnswer = record.logRecord.answer
         let dnsAnserTitle = String.localizedString("dns_answer_title")
         let dnsAnswerModel = dnsAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsAnswer, title: dnsAnserTitle, info: dnsAnswer, theme: theme, configuration: configuration)
-        dnsSectionModel?[dnsAnswerCell.row] = dnsAnswerModel
+        dnsSectionModel[dnsAnswerCell.row] = dnsAnswerModel
         
         // Matched filters model
         let matchedFilters = record.matchedFilters ?? ""
         let matchedFiltersTitle = String.localizedString("matched_filters_title")
         let matchedFiltersModel = matchedFilters.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme, configuration: configuration)
-        dnsSectionModel?[matchedFiltersCell.row] = matchedFiltersModel
+        dnsSectionModel[matchedFiltersCell.row] = matchedFiltersModel
         
         // Matched rules model
         let matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
         let matchedRulesTitle = String.localizedString("matched_rules_title")
         let matchedRulesModel = matchedRules.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme, configuration: configuration)
-        dnsSectionModel?[matchedRulesCell.row] = matchedRulesModel
+        dnsSectionModel[matchedRulesCell.row] = matchedRulesModel
         
         // Original answer model
         let originalAnswer = record.logRecord.originalAnswer ?? ""
         let originalAnswerTitle = String.localizedString("original_answer_title")
         let originalAnswerModel = originalAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: originalAnswer, title: originalAnswerTitle, info: originalAnswer, theme: theme, configuration: configuration)
-        dnsSectionModel?[originalAnswerCell.row] = originalAnswerModel
+        dnsSectionModel[originalAnswerCell.row] = originalAnswerModel
         
         sectionModels[dnsSection] = dnsSectionModel
     }

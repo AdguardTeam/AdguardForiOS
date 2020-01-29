@@ -156,7 +156,8 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         }
         
         infoLabel.text = model.info
-        infoLabel.font = model.infoFont == nil ? infoLabel.font : model.infoFont
+        let font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
+        infoLabel.font = model.infoFont == nil ? font : model.infoFont
         infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
     }
     
