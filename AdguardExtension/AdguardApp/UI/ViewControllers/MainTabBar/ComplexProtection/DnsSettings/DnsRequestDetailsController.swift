@@ -499,8 +499,8 @@ class DnsRequestDetailsController : UITableViewController {
         addressLabel.text = dnsUpstream
         
         // Dns answer model
-        let dnsAnswer = record.logRecord.answer ?? ""
-        let dnsAnswerModel = dnsAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsAnswer, copiedLabel: answerCopied, labelToHide: answerTitleLabel)
+        let dnsAnswer = record.logRecord.answer.isEmpty ? String.localizedString("empty_dns_answer") : record.logRecord.answer
+        let dnsAnswerModel = LogCellModel(isUserCell: false, copiedString: dnsAnswer, copiedLabel: answerCopied, labelToHide: answerTitleLabel)
         cellModels[dnsAnswerCell] = dnsAnswerModel
         responsesLabel.text = dnsAnswer
         

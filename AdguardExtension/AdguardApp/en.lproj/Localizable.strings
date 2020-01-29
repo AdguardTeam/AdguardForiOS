@@ -639,3 +639,6 @@
 
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Empty";
