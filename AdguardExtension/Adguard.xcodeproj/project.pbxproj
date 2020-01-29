@@ -515,7 +515,7 @@
 		7E06B68C22FB1606006859AC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		7E06B68E22FB1606006859AC /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		7E06B69B22FB1955006859AC /* AdguardBlockingExtensionSecurity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7E1022CE23E1655A00604C90 /* NewDnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* NewDnsRequestDetailsController.swift */; };
+		7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */; };
 		7E103A4B23B60B7800C0C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
 		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
@@ -1852,7 +1852,7 @@
 		7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionPrivacy.plist; sourceTree = "<group>"; };
 		7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionSecurity.plist; sourceTree = "<group>"; };
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E1022CD23E1655A00604C90 /* NewDnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDnsRequestDetailsController.swift; sourceTree = "<group>"; };
+		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
@@ -3516,7 +3516,7 @@
 		7E6D962423E172D1006202C2 /* RequestDetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				7E1022CD23E1655A00604C90 /* NewDnsRequestDetailsController.swift */,
+				7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */,
 				7E6D962523E17347006202C2 /* RequestDetailsCell.swift */,
 			);
 			path = RequestDetailsScreen;
@@ -5781,7 +5781,7 @@
 				D031A12B219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				65C12EEC1BD4D29F00FFC71C /* AESAntibanner.m in Sources */,
 				7EF005E3239929FC00047073 /* ComplexProtectionService.swift in Sources */,
-				7E1022CE23E1655A00604C90 /* NewDnsRequestDetailsController.swift in Sources */,
+				7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */,
 				7EEF93F22360365300F5856A /* NetworkSettingsService.swift in Sources */,
 				D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */,
 				7E9F3E1023CE08E300A7BDA2 /* DomainsConverter.swift in Sources */,

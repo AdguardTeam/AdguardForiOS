@@ -46,12 +46,12 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     
     private var themeObserver: Any? = nil
     
-    private var detailsController: NewDnsRequestDetailsController?
+    private var detailsController: DnsRequestDetailsController?
     
     // MARK: - view controller life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? NewDnsRequestDetailsController {
+        if let destinationVC = segue.destination as? DnsRequestDetailsController {
             destinationVC.logRecord = logRecord
             destinationVC.shadowView = shadowView
             destinationVC.containerController = self

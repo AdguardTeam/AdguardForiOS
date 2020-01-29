@@ -18,7 +18,7 @@
 
 import UIKit
 
-class NewDnsRequestDetailsController: UITableViewController {
+class DnsRequestDetailsController: UITableViewController {
 
     // MARK: - public fields
     var logRecord: DnsLogRecordExtended? {
@@ -396,8 +396,10 @@ class NewDnsRequestDetailsController: UITableViewController {
         
         // Dns answer model
         let dnsAnswer = record.logRecord.answer
+        let emptyAnswer = String.localizedString("empty_dns_answer")
+        let answerString = dnsAnswer.isEmpty ? emptyAnswer : dnsAnswer
         let dnsAnserTitle = String.localizedString("dns_answer_title")
-        let dnsAnswerModel = dnsAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsAnswer, title: dnsAnserTitle, info: dnsAnswer, theme: theme, configuration: configuration)
+        let dnsAnswerModel = LogCellModel(isUserCell: false, copiedString: answerString, title: dnsAnserTitle, info: answerString, theme: theme, configuration: configuration)
         dnsSectionModel[dnsAnswerCell.row] = dnsAnswerModel
         
         // Matched filters model
