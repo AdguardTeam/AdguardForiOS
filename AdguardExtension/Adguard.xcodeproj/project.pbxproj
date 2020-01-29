@@ -1197,10 +1197,10 @@
 		D0A100411F44428300082F62 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
 		D0A29F8623DF206B00D974CF /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D0A29F8723DF273B00D974CF /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
+		D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
 		D0A29F8A23E053C300D974CF /* AESSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D9A25E1C0328E6004DA210 /* AESSupport.m */; };
 		D0A29F8B23E053CC00D974CF /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
 		D0A29F8C23E053E000D974CF /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
-		D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
 		D0ABE0D42230FD5500771635 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D0B035591FD972AB00AB8F9D /* ABECService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B035581FD972AB00AB8F9D /* ABECService.m */; };
 		D0B0355A1FD972AB00AB8F9D /* ABECService.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B035581FD972AB00AB8F9D /* ABECService.m */; };
@@ -1228,6 +1228,7 @@
 		D0C4EF2A23C7532800C57E22 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */; };
 		D0C4EF2D23C8A1F700C57E22 /* DnsTrackerServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */; };
 		D0C4EF2E23C8A27900C57E22 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
+		D0C940E123E1B641008B85EC /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = D0C940E023E1B640008B85EC /* adguard.json */; };
 		D0C9911A238FDB8700C9123F /* SafariServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C99119238FDB8700C9123F /* SafariServiceTest.swift */; };
 		D0CA2EBC1FF39B000072B4A6 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D0CA618022033CBE005CAAA4 /* DnsProviderContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */; };
@@ -2332,6 +2333,7 @@
 		D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
 		D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriterProtocol.swift; sourceTree = "<group>"; };
 		D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerServiceTest.swift; sourceTree = "<group>"; };
+		D0C940E023E1B640008B85EC /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
 		D0C99119238FDB8700C9123F /* SafariServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceTest.swift; sourceTree = "<group>"; };
 		D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderContainerController.swift; sourceTree = "<group>"; };
 		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -3607,6 +3609,7 @@
 		7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */ = {
 			isa = PBXGroup;
 			children = (
+				D0C940E023E1B640008B85EC /* adguard.json */,
 				7EF75A6A234B6000006ED3E5 /* whotracksme.json */,
 				7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */,
 			);
@@ -4749,6 +4752,7 @@
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
+				D0C940E123E1B641008B85EC /* adguard.json in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
