@@ -639,3 +639,51 @@
 
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Category";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Name";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "Company";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domain";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Time";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Size";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Elapsed";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Type";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS status";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS answer";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "Matched filters";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "Matched rules";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Original answer";

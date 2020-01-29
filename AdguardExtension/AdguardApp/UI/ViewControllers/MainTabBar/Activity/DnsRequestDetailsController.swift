@@ -18,29 +18,6 @@
 
 import Foundation
 
-protocol LogCellModelProtocol {
-    var isUserCell: Bool { get }
-    
-    var copiedString: String? { get }
-    var copiedLabel: UIButton? { get }
-    var labelToHide: UILabel? { get }
-}
-
-class LogCellModel: LogCellModelProtocol {
-    var isUserCell: Bool
-    
-    var copiedString: String?
-    var copiedLabel: UIButton?
-    var labelToHide: UILabel?
-    
-    init(isUserCell: Bool, copiedString: String? = nil, copiedLabel: UIButton? = nil, labelToHide: UILabel? = nil) {
-        self.isUserCell = isUserCell
-        self.copiedString = copiedString
-        self.copiedLabel = copiedLabel
-        self.labelToHide = labelToHide
-    }
-}
-
 class DnsRequestDetailsController : UITableViewController {
     
     // MARK: - public fields
@@ -488,7 +465,7 @@ class DnsRequestDetailsController : UITableViewController {
         addressLabel.text = dnsUpstream
         
         // Dns answer model
-        let dnsAnswer = record.logRecord.answer ?? ""
+        let dnsAnswer = record.logRecord.answer
         let dnsAnswerModel = dnsAnswer.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: dnsAnswer, copiedLabel: answerCopied, labelToHide: answerTitleLabel)
         cellModels[dnsAnswerCell] = dnsAnswerModel
         responsesLabel.text = dnsAnswer

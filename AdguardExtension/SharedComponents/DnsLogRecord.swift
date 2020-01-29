@@ -141,6 +141,22 @@ extension DnsLogRecord {
         }
     }
     
+    func getTypeAndIp() -> String {
+        let IPv4 = "A"
+        let IPv6 = "AAAA"
+        
+        let IPv4String = "IPv4"
+        let IPv6String = "IPv6"
+        
+        if type == IPv4 {
+            return "\(type)(\(IPv4String))"
+        } else if type == IPv6 {
+            return "\(type)(\(IPv6String))"
+        } else {
+            return type
+        }
+    }
+    
     func getDetailsString() -> NSMutableAttributedString {
         let recordType = getTypeString()
         var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
