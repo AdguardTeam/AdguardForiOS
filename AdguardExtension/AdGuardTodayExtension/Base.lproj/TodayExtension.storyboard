@@ -30,8 +30,8 @@
                                                     <action selector="safariSwitch:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="fTB-MW-YMG"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari ads protection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28V-ha-qHw">
-                                                <rect key="frame" x="64" y="11.5" width="269" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari protection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28V-ha-qHw">
+                                                <rect key="frame" x="64" y="12" width="269" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="SMp-2r-2XM"/>
                                                 </constraints>
