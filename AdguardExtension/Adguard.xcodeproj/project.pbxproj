@@ -2212,7 +2212,6 @@
 		D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportRulesController.swift; sourceTree = "<group>"; };
 		D04B8CB32031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		D05538052161D8190020993A /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		D0569E2F21F1C0A800985DA9 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569E3021F1C0A800985DA9 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Tunnel.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Tunnel.plist; sourceTree = "<absolute>"; };
@@ -3552,7 +3551,6 @@
 			children = (
 				7E952E9C23D5FFBA00D89AE0 /* Activity.storyboard */,
 				7E6D962423E172D1006202C2 /* RequestDetailsScreen */,
-				D04CD26322007433000B0331 /* DnsRequestDetailsController.swift */,
 				7ED3D36D23CCD5480014734A /* BlockRequestController.swift */,
 				7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */,
 			);
