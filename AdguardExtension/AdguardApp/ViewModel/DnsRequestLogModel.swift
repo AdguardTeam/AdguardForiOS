@@ -24,7 +24,6 @@ struct DnsLogRecordCategory{
     let category: String?
     let name: String?
     let isTracked: Bool?
-    let company: String?
     let url: String?
     let isAdguardJson: Bool
 }
@@ -208,7 +207,7 @@ class DnsRequestLogViewModel {
                 categoryName = ACLocalizedString(categoryKey, nil)
             }
             
-            let category = DnsLogRecordCategory(category: categoryName, name: info?.name, isTracked: info?.isTracked, company: info?.company, url: info?.url, isAdguardJson: info?.isAdguardJson ?? false)
+            let category = DnsLogRecordCategory(category: categoryName, name: info?.name, isTracked: info?.isTracked, url: info?.url, isAdguardJson: info?.isAdguardJson ?? false)
             
             let record = DnsLogRecordExtended(record: logRecord, category: category, dnsFiltersService: dnsFiltersService)
             allRecords.append(record)

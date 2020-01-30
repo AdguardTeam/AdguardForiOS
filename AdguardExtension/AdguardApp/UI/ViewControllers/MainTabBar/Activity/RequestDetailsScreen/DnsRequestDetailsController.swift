@@ -49,8 +49,7 @@ class DnsRequestDetailsController: UITableViewController {
     private let trackerDetailsSection = 0
     private let categoryCell = IndexPath(row: 0, section: 0)
     private let nameCell = IndexPath(row: 1, section: 0)
-    private let companyCell = IndexPath(row: 2, section: 0)
-    private let websiteCell = IndexPath(row: 3, section: 0)
+    private let websiteCell = IndexPath(row: 2, section: 0)
     
     private let generalSection = 1
     private let domainCell = IndexPath(row: 0, section: 1)
@@ -181,10 +180,9 @@ class DnsRequestDetailsController: UITableViewController {
             if let sectionModel = sectionModels[section] {
                 let categoryModel = sectionModel[categoryCell.row]
                 let nameModel = sectionModel[nameCell.row]
-                let companyModel = sectionModel[companyCell.row]
                 let websiteModel = sectionModel[websiteCell.row]
                     
-                if categoryModel == nil && nameModel == nil && companyModel == nil && websiteModel == nil{
+                if categoryModel == nil && nameModel == nil && websiteModel == nil{
                     return 0.0
                 }
             }
@@ -339,12 +337,6 @@ class DnsRequestDetailsController: UITableViewController {
         let nameFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
         let nameModel = name.isEmpty ? nil : LogCellModel(copiedString: name, title: nameTitle, info: name, infoFont: nameFont, theme: theme, configuration: configuration)
         trackerDetailsSectionModel[nameCell.row] = nameModel
-        
-        // Company model
-        let company = record.category.company ?? ""
-        let companyTitle = String.localizedString("company_title")
-        let companyModel = company.isEmpty ? nil : LogCellModel(copiedString: company, title: companyTitle, info: company, theme: theme, configuration: configuration)
-        trackerDetailsSectionModel[companyCell.row] = companyModel
         
         // Website model
         let website = record.category.url ?? ""

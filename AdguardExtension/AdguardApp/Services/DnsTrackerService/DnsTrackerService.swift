@@ -31,13 +31,11 @@ struct Tracker: Codable {
     let name: String
     let categoryId: Int
     let url: String?
-    let company: String?
 
     enum CodingKeys: String, CodingKey {
         case name
         case categoryId
         case url
-        case company
     }
 }
 
@@ -49,15 +47,13 @@ struct Tracker: Codable {
     let categoryKey: String?
     let name: String?
     let isTracked: Bool?
-    let company: String?
     let url: String?
     let isAdguardJson: Bool
     
-    init(categoryKey: String?, name: String?, isTracked: Bool?, company: String?, url: String?, isAdguardJson: Bool) {
+    init(categoryKey: String?, name: String?, isTracked: Bool?, url: String?, isAdguardJson: Bool) {
         self.categoryKey = categoryKey
         self.name = name
         self.isTracked = isTracked
-        self.company = company
         self.url = url
         self.isAdguardJson = isAdguardJson
     }
@@ -115,7 +111,7 @@ struct Tracker: Codable {
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
-        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company, url: info.url, isAdguardJson: isAdguardJson)
+        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, url: info.url, isAdguardJson: isAdguardJson)
     }
     
     private func initializeDnsTrackers(){
