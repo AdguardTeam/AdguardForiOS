@@ -682,8 +682,8 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS answer";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Matched filters";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Matched filter";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
 "matched_rules_title" = "Matched rules";

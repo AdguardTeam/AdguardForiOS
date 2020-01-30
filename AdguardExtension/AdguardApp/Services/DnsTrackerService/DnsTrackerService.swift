@@ -115,6 +115,9 @@ struct Tracker: Codable {
     }
     
     private func initializeDnsTrackers(){
+        /**
+         This file is downloaded from https://github.com/AdguardTeam/AdGuardHome/tree/master/client/src/helpers/trackers
+         */
         guard let whotracksmePath = Bundle.main.path(forResource: "whotracksme", ofType: "json"),
                 let adguardPath = Bundle.main.path(forResource: "adguard", ofType: "json")
             else { return }

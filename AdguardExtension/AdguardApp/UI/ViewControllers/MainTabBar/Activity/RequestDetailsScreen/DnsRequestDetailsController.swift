@@ -31,6 +31,8 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - private fields
     private var sectionModels: [Int : [Int : LogCellModelProtocol?]] = [:]
+    private var numberOfRowsPerSection: [Int: Int] = [:]
+    private var lastNonNilRowPerSection: [Int: Int] = [:]
     
     private let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .alert)
     private let webPage = "https://whotracks.me"
@@ -47,11 +49,15 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - Sections & Rows
     private let trackerDetailsSection = 0
+    private let trackerDetailsRowsCount = 3
+    
     private let categoryCell = IndexPath(row: 0, section: 0)
     private let nameCell = IndexPath(row: 1, section: 0)
     private let websiteCell = IndexPath(row: 2, section: 0)
     
     private let generalSection = 1
+    private let generalSectionRowsCount = 6
+    
     private let domainCell = IndexPath(row: 0, section: 1)
     private let serverCell = IndexPath(row: 1, section: 1)
     private let statusCell = IndexPath(row: 2, section: 1)
@@ -60,6 +66,8 @@ class DnsRequestDetailsController: UITableViewController {
     private let elapsedCell = IndexPath(row: 5, section: 1)
     
     private let dnsSection = 2
+    private let dnsSectionRowsCount = 7
+    
     private let typeCell = IndexPath(row: 0, section: 2)
     private let dnsStatusCell = IndexPath(row: 1, section: 2)
     private let dnsUpstreamCell = IndexPath(row: 2, section: 2)
@@ -72,6 +80,10 @@ class DnsRequestDetailsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        numberOfRowsPerSection[trackerDetailsSection] = trackerDetailsRowsCount
+        numberOfRowsPerSection[generalSection] = generalSectionRowsCount
+        numberOfRowsPerSection[dnsSection] = dnsSectionRowsCount
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -101,8 +113,7 @@ class DnsRequestDetailsController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionModel = sectionModels[section] else { return 0 }
-        return sectionModel.count
+        return numberOfRowsPerSection[section] ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,13 +122,11 @@ class DnsRequestDetailsController: UITableViewController {
         let model = getModel(for: indexPath)
         cell.model = model
         theme.setupTableCell(cell)
-        
-        if let sectionModel = sectionModels[indexPath.section] {
-            if sectionModel.count - 1 == indexPath.row {
-                cell.hideSeparator()
-            } else {
-                cell.showSeparator()
-            }
+    
+        if indexPath.row == lastNonNilRowPerSection[indexPath.section] {
+            cell.hideSeparator()
+        } else {
+           cell.showSeparator()
         }
         
         return cell
@@ -218,7 +227,6 @@ class DnsRequestDetailsController: UITableViewController {
         let statusCellModel = getStatusCellModel()
         sectionModels[generalSection]?[statusCell.row] = statusCellModel
         tableView.reloadRows(at: [statusCell], with: .fade)
-        
     }
     
     // MARK: - Private methods
@@ -315,6 +323,31 @@ class DnsRequestDetailsController: UITableViewController {
     }
     
     /**
+     This function sets last empty rows values for each section
+     It is needed for separators
+     */
+    private func setLastEmptyRows(){
+        let trackerDetailsMaxRow = websiteCell.row
+        let generalMaxRow = elapsedCell.row
+        let dnsMaxRow = originalAnswerCell.row
+        
+        getLastRow(for: trackerDetailsSection, max: trackerDetailsMaxRow)
+        getLastRow(for: generalSection, max: generalMaxRow)
+        getLastRow(for: dnsSection, max: dnsMaxRow)
+    }
+    
+    private func getLastRow(for section: Int, max row: Int) {
+        for rowNumber in stride(from: row, to: 0, by: -1) {
+            let indexPath = IndexPath(row: rowNumber, section: section)
+            let model = getModel(for: indexPath)
+            if model != nil {
+                lastNonNilRowPerSection[section] = rowNumber
+                return
+            }
+        }
+    }
+    
+    /**
      Method to create a model for this VC
      */
     private func createCellModels(){
@@ -342,10 +375,7 @@ class DnsRequestDetailsController: UITableViewController {
         let website = record.category.url ?? ""
         let websiteTitle = String.localizedString("website_title")
         let color: UIColor = UIColor(hexString: "#4CA524")
-        let attrString = NSMutableAttributedString(string: website)
-        attrString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attrString.length))
-        attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attrString.length))
-        let websiteModel = website.isEmpty ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoAttributedString: attrString, theme: theme, configuration: configuration)
+        let websiteModel = website.isEmpty ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoColor: color,  theme: theme, configuration: configuration)
         trackerDetailsSectionModel[websiteCell.row] = websiteModel
         
         sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
@@ -431,7 +461,7 @@ class DnsRequestDetailsController: UITableViewController {
         
         // Matched filters model
         let matchedFilters = record.matchedFilters ?? ""
-        let matchedFiltersTitle = String.localizedString("matched_filters_title")
+        let matchedFiltersTitle = String.localizedString("matched_filter_title")
         let matchedFiltersModel = matchedFilters.isEmpty ? nil : LogCellModel(isUserCell: false, copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme, configuration: configuration)
         dnsSectionModel[matchedFiltersCell.row] = matchedFiltersModel
         
@@ -448,6 +478,8 @@ class DnsRequestDetailsController: UITableViewController {
         dnsSectionModel[originalAnswerCell.row] = originalAnswerModel
         
         sectionModels[dnsSection] = dnsSectionModel
+        
+        setLastEmptyRows()
     }
 }
 
