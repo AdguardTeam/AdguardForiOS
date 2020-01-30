@@ -1,38 +1,8 @@
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "02d-Xt-oTe"; */
-"02d-Xt-oTe.normalTitle" = "Zkopírováno";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "PŘIDAT";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "2UK-IJ-AM8"; */
-"2UK-IJ-AM8.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "3Ic-4w-EoD"; */
-"3Ic-4w-EoD.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "5Au-6G-hmh"; */
-"5Au-6G-hmh.normalTitle" = "Zkopírováno";
-
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "UPRAVIT";
-
-/* Class = "UILabel"; text = "Company"; ObjectID = "7xC-qG-2WW"; */
-"7xC-qG-2WW.text" = "Společnost";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "BvX-hA-l9D"; */
-"BvX-hA-l9D.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "CS5-Vy-AD1"; */
-"CS5-Vy-AD1.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "GIg-sl-FZd"; */
-"GIg-sl-FZd.normalTitle" = "Zkopírováno";
-
-/* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
-"HUm-JT-lZs.text" = "Čas";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
-"HgO-j6-UT3.normalTitle" = "Zkopírováno";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "ZRUŠIT";
@@ -40,62 +10,17 @@
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Název domény:";
 
-/* Class = "UILabel"; text = "Name"; ObjectID = "O8w-0a-kF9"; */
-"O8w-0a-kF9.text" = "Název";
-
-/* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
-"ORQ-AZ-NIU.text" = "Velikost";
-
-/* Class = "UILabel"; text = "Original answer"; ObjectID = "RjM-Qn-ufh"; */
-"RjM-Qn-ufh.text" = "Původní odpověď";
-
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
-"S05-ei-beX.title" = "Podrobnosti DNS požadavků";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "VcB-hA-6Ju"; */
-"VcB-hA-6Ju.normalTitle" = "Zkopírováno";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "WZX-eP-abM"; */
-"WZX-eP-abM.text" = "Server";
-
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "Podrobnosti požadavků";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Bezpečnostní filtry, soukromí DNS, vlastní filtry atd.";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
-"amQ-gv-yFM.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "bKN-2M-LhL"; */
-"bKN-2M-LhL.normalTitle" = "Zkopírováno";
-
-/* Class = "UILabel"; text = "DNS upstream"; ObjectID = "dFf-Pm-IWR"; */
-"dFf-Pm-IWR.text" = "DNS upstream";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dU9-gV-MqN"; */
-"dU9-gV-MqN.normalTitle" = "Zkopírováno";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
-"dWi-vv-Ca0.normalTitle" = "Zkopírováno";
-
 /* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
 "dsD-0w-qic.title" = "Vymazat";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
-"fDY-OV-eqp.text" = "Typ";
-
-/* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
-"fVC-3Z-ttp.text" = "Stav";
-
-/* Class = "UILabel"; text = "Matched filters"; ObjectID = "fen-B6-KSP"; */
-"fen-B6-KSP.text" = "Odpovídající filtry";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "ZPĚT";
-
-/* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
-"i4m-2Q-3Ki.text" = "Stav DNS";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Blokovat požadavek";
@@ -103,32 +28,8 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "PŘIDAT";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
-"lfu-1a-cjJ.text" = "Doména";
-
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "miG-Yh-36b"; */
-"miG-Yh-36b.text" = "Uplynulý čaas";
-
-/* Class = "UILabel"; text = "Matched rules"; ObjectID = "o0L-yz-2WC"; */
-"o0L-yz-2WC.text" = "Odpovídající pravidla";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
-"oE2-h8-ZMZ.normalTitle" = "Zkopírováno";
-
 /* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
 "pqA-7I-Vrx.title" = "Aktivita";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "ptt-hU-4Dv"; */
-"ptt-hU-4Dv.normalTitle" = "Zkopírováno";
-
-/* Class = "UILabel"; text = "DNS answer"; ObjectID = "qhC-LX-WeI"; */
-"qhC-LX-WeI.text" = "Odpověď DNS";
-
-/* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
-"rIV-zR-Ddb.text" = "Kategorie";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
-"tJd-oY-zOt.normalTitle" = "Zkopírováno";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Vyberte blokování na úrovni domény:";

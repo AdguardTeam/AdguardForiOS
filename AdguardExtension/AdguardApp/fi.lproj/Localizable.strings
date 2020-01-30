@@ -13,11 +13,17 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "Ei voida muuntaa sääntöä. Sääntö on virheellinen.";
 
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Ei voida muuntaa käyttäjäsuodatinsääntöjä. Jokin säännöistä on virheellinen. Tarkista sääntö nykyisen kohdistimen sijainnin vierestä.";
+
 /* Alert title. On error. */
 "common_error_title" = "Virhe";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Suodattimia ei voida ladata Safariin. Tästä syystä viimeisimpiä muutoksia ei otettu käyttöön.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Suodattimia ei voida ladata Safariin. Tyhjennä säännöt sekä sallittujen lista, tai muuta valittuja suodattimia.";
 
 /* NO Button caption in alert */
 "common_action_no" = "EI";
@@ -27,6 +33,9 @@
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Sallittujen Lista";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Käyttäjäsuodatin";
 
 /* YES Button caption in alert */
 "common_action_yes" = "KYLLÄ";

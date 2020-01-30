@@ -22,6 +22,9 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtreid ei õnnestu Safarisse laadida. Selle tõttu ei rakendatud sinu muudatusi.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtreid ei õnnestu Safarisse laadida. Proovi oma reegleid ja valget listi puhastada. Lisaks vaata üle kasutatavad filtrid.";
+
 /* NO Button caption in alert */
 "common_action_no" = "EI";
 
@@ -97,6 +100,12 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Uuendatud filtrid: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Sisesta kohandatud reeglid siia<br>Loe seda <a href=\"%@\">märkust reeglite süntaksi kohta</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Sisesta domeeni nimed siia. AdGuard ei filtreeri Safaris nende lehekülgede sisu.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Sisesta domeeni nimed siia. AdGuard filtreerib Safaris ainult nende lehekülgede sisu.";
 
@@ -105,6 +114,9 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Lisa reegel";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Lisa domeen";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -123,6 +135,9 @@
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Vearaport";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Kontakteeru tehnilise toega";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Ekspordi logid";
@@ -228,6 +243,12 @@
 
 /* login error message */
 "login_error_message" = "Sisselogimisel ilmnes viga";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium on tasuline, aasta kaupa makstav teenus, mille hind on $2.99/aasta (hind võib olenevalt regioonist erineda). Makse lisatakse pärast tellimuse kinnitamist iTunes kontole. Tellimust uuendatakse iga aasta automaatselt. Seda välja arvatud juhul, kui automaatne tellimuse pikendamine on vähemalt 24 tundi enne selle toimumist tühistatud. Makse toimub läbi iTunesi konto 24 tunni jooksul enne käimasoleva perioodi lõppu. Pärast ostu saab tellimust ning automaatset pikendust hallata läbi oma iTunes konto seadete. <br><br><a href=%2$@>Kasutustingimused</a> <a href=%1$@>Privaatsuspoliitika</a> ";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Kasutustingimused</a> <a href=%1$@>Privaatsuspoliitika</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";

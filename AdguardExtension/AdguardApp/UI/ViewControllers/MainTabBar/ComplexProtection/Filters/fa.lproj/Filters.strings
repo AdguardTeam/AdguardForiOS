@@ -34,6 +34,9 @@
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "نسخه";
 
+/* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "از فیلترهای دستی خود در اینجا استفاده کنید";
+
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "فیلترها";
 

@@ -618,3 +618,27 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Zaradiť dopyt do bielej listiny";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Videonávod";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Zadali ste neplatný upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Čierna listina systému";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Biela listina systému";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Detaily sledovača";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Všeobecné";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Prázdna";

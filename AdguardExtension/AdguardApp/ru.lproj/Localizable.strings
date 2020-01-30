@@ -484,6 +484,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Мобильная статистика";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Хостинг";
 
@@ -618,3 +621,78 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Добавить запрос в Белый список";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Видеоинструкция";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Вы ввели некорректный upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Общий черный список";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Общий белый список";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Информация о трекере";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Общие";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Категория";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Название";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "Компания";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Веб-сайт";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Домен";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Сервер";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Статус";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Время";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Размер";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Затрачено";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Тип";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS-статус";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS-upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS-ответ";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "Подходящие фильтры";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "Подходящие правила";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Исходный ответ";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Пусто";

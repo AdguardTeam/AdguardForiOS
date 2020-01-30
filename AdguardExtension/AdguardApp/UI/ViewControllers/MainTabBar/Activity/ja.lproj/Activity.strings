@@ -1,38 +1,11 @@
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "02d-Xt-oTe"; */
-"02d-Xt-oTe.normalTitle" = "コピー済み";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "追加";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "2UK-IJ-AM8"; */
-"2UK-IJ-AM8.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "3Ic-4w-EoD"; */
-"3Ic-4w-EoD.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "5Au-6G-hmh"; */
-"5Au-6G-hmh.normalTitle" = "コピー済み";
 
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "編集";
 
-/* Class = "UILabel"; text = "Company"; ObjectID = "7xC-qG-2WW"; */
-"7xC-qG-2WW.text" = "社名";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "BvX-hA-l9D"; */
-"BvX-hA-l9D.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "CS5-Vy-AD1"; */
-"CS5-Vy-AD1.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "GIg-sl-FZd"; */
-"GIg-sl-FZd.normalTitle" = "コピー済み";
-
-/* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
-"HUm-JT-lZs.text" = "時刻";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
-"HgO-j6-UT3.normalTitle" = "コピー済み";
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
+"J13-xW-KiK.normalTitle" = "コピー済み";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "キャンセル";
@@ -40,62 +13,17 @@
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "ドメイン名:";
 
-/* Class = "UILabel"; text = "Name"; ObjectID = "O8w-0a-kF9"; */
-"O8w-0a-kF9.text" = "名称";
-
-/* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
-"ORQ-AZ-NIU.text" = "サイズ";
-
-/* Class = "UILabel"; text = "Original answer"; ObjectID = "RjM-Qn-ufh"; */
-"RjM-Qn-ufh.text" = "元の応答";
-
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
-"S05-ei-beX.title" = "DNSリクエストの詳細";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "VcB-hA-6Ju"; */
-"VcB-hA-6Ju.normalTitle" = "コピー済み";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "WZX-eP-abM"; */
-"WZX-eP-abM.text" = "サーバー";
-
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "リクエストの詳細";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "セキュリティ・フィルタ、DNSプライバシー、\nカスタム・フィルタなど";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
-"amQ-gv-yFM.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "bKN-2M-LhL"; */
-"bKN-2M-LhL.normalTitle" = "コピー済み";
-
-/* Class = "UILabel"; text = "DNS upstream"; ObjectID = "dFf-Pm-IWR"; */
-"dFf-Pm-IWR.text" = "DNSアップストリーム";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dU9-gV-MqN"; */
-"dU9-gV-MqN.normalTitle" = "コピー済み";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
-"dWi-vv-Ca0.normalTitle" = "コピー済み";
-
 /* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
 "dsD-0w-qic.title" = "クリア";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
-"fDY-OV-eqp.text" = "種類";
-
-/* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
-"fVC-3Z-ttp.text" = "ステータス";
-
-/* Class = "UILabel"; text = "Matched filters"; ObjectID = "fen-B6-KSP"; */
-"fen-B6-KSP.text" = "マッチしたフィルタ";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "戻る";
-
-/* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
-"i4m-2Q-3Ki.text" = "DNSステータス";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "リクエストをブロック";
@@ -103,32 +31,8 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "追加";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
-"lfu-1a-cjJ.text" = "ドメイン";
-
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "miG-Yh-36b"; */
-"miG-Yh-36b.text" = "経過時間";
-
-/* Class = "UILabel"; text = "Matched rules"; ObjectID = "o0L-yz-2WC"; */
-"o0L-yz-2WC.text" = "マッチしたルール";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
-"oE2-h8-ZMZ.normalTitle" = "コピー済み";
-
 /* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
 "pqA-7I-Vrx.title" = "アクティビティ";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "ptt-hU-4Dv"; */
-"ptt-hU-4Dv.normalTitle" = "コピー済み";
-
-/* Class = "UILabel"; text = "DNS answer"; ObjectID = "qhC-LX-WeI"; */
-"qhC-LX-WeI.text" = "DNS応答";
-
-/* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
-"rIV-zR-Ddb.text" = "カテゴリ";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
-"tJd-oY-zOt.normalTitle" = "コピー済み";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "ドメインレベルをお選びください";

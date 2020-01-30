@@ -13,11 +13,17 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "Kan ikke konvertere filterregelen. Regelteksten er ugyldig.";
 
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Kan ikke konvertere brukerfilterregler. En av reglene inneholder en feil. Kontroller regelen ved siden av gjeldende museposisjon.";
+
 /* Alert title. On error. */
 "common_error_title" = "Feil";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtrene kan ikke lastes inn i Safari. Derfor ble de siste endringene dine ikke lagret.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtrene kan ikke lastes inn i Safari. Prøv å tømme reglene og hvitelisten, eller endre settet av brukte filtre.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
@@ -27,6 +33,9 @@
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Hviteliste";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Brukerfiltre";
 
 /* YES Button caption in alert */
 "common_action_yes" = "JA";

@@ -13,11 +13,17 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "无法转换过滤器规则。规则文本无效。";
 
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "无法转换用户过滤规则。";
+
 /* Alert title. On error. */
 "common_error_title" = "错误";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "无法加载过滤器到 Safari。因此，无法应用您的最近更新。";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "无法加载过滤器到 Safari。请尝试清除您的规则和白名单，或更改使用的过滤器设置。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -25,8 +31,29 @@
 /* Main Controller. Inverted whitelist cell caption */
 "inverted_whitelist_title" = "白名单（颠倒的）";
 
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "正在应用变更…";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "此信息基于被阻止的DNS请求数。这些统计数据是一种估计，因为技术上无法计算出因域名没有被屏蔽而下载的广告、追踪器和其他威胁的确切数量。";
+
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ Kb";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ Mb";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ Gb";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free" = "免费试用";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "白名单";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "用户过滤器";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "在此输入您的自定义规则，以换行符分隔";
@@ -45,6 +72,12 @@
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "订阅";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "购买";
+
+/* (LoginController) lost password button title */
+"lost_password" = "忘记密码？";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高级版账户已经过期";
@@ -85,8 +118,20 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "过滤器已更新：%@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "输入您的自定义规则于此<br>阅读此<a href=\"%@\">注意事项以获规则语法</a>。";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "在这里输入域名。AdGuard 将在 Safari 中禁用这些网站的过滤。";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "在这里输入域名。AdGuard将仅在Safari中对这些网站进行过滤。";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "在此处输入用域名，以换行符（回车）来隔开。AdGuard将允许所有到这些域名的连接";
+
+/* (UserFilterController) dns blacklist description */
+"dns_blacklist_text_format" = "此黑名单支持<a href=\"%@\">AdGuard DNS语法</a>。在此处输入规则，以换行符（回车）隔开。AdGuard将会拦截一切符合规则的、到这些域名的连接。";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "更新...";
@@ -94,11 +139,17 @@
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "添加规则";
 
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "添加域";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "您的Wi-Fi名称";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "规则：";
@@ -106,11 +157,17 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "域:";
 
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "名称:";
+
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "报告错误拦截";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "在 GitHub 上报告错误";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "联系支持";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "导出日志";
@@ -193,6 +250,9 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "拦截广告和跟踪服务器";
 
+/* MainMenuController - System DNS Title, when a server is not selected */
+"system_dns_server" = "系统DNS";
+
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已开启 %1$d / %2$d";
 
@@ -216,6 +276,12 @@
 
 /* login error message */
 "login_error_message" = "登录时发生错误";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium 是一种年度付费服务，每年的订阅价格为 $2.99（定价可能会因区域不同而有所不同）。在购买确认时，款项会充值到 iTunes 账号。订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。当前订阅期结束前的 24 小时内，款项会自动充值到账号。您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。<br><br><a href=%1$@>隐私策略</a> <br><br><a href=%2$@>使用条款</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>隐私政策</a> <br><br><a href=%2$@>使用条款</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "确定";
@@ -244,11 +310,26 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "过滤器：";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "你需要先启用 VPN";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "重置统计";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "一切统计数据将被清除！";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "重置";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 条规则正被使用";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "在 Safari 设置内已禁用";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "检查更新...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "已达到 %1$@ 条规则的限制。该应用可能无法正常工作。请禁用额外规则。目前正在使用 %3$@ 条规则中的 %2$@ 条； %4$@ 条规则已禁用。";
@@ -294,3 +375,252 @@
 
 /* (AboutController) current app version string */
 "about_version" = "版本";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard Premium！";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "不正确的邮箱或密码";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "账户已被禁用";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "账户被暂时封锁";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "无效的两步验证令牌";
+
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi特例";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "系统防护将不会为下列Wi-Fi网络启用";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "添加特例";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "启用移动数据时过滤";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "启用Wi-Fi时过滤";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "移动数据开启时进行系统防护";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Wi-Fi开启时进行系统防护";
+
+/* (ListOfRulesModel) title for dns and safari white list*/
+"whitelist_title" = "白名单";
+
+/* (ListOfRulesModel) title for dns black list */
+"dns_blacklist_title" = "黑名单";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari用户规则";
+
+/* (ListOfRulesModel) title for export */
+"export" = "导出";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "清除";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "保存";
+
+/* (ListOfRulesModel) title for import */
+"import" = "导入";
+
+/* "Disabled" title */
+"disabled" = "禁用";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "从白名单移除";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "从黑名单移除";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "添加到白名单";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "添加到黑名单";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "允许阻止钓鱼网站和其他危险域。高级用户可用。";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "允许添加第三方过滤器。高级用户可用。";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "音视频播放器";
+
+/*(LogCategory) comments category*/
+"comments" = "评论";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "顾客交互";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "露骨广告";
+
+/*(LogCategory) advertising category*/
+"advertising" = "广告";
+
+/*(LogCategory) essential category*/
+"essential" = "必要的";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "站点统计";
+
+/*(LogCategory) social media category*/
+"social_media" = "社交媒体";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "杂项";
+
+/*(LogCategory) DNS category*/
+"cdn" = "内容分发网络";
+
+/*(LogCategory) hosting category*/
+"hosting" = "托管";
+
+/*(LogCategory) unknown category*/
+"unknown" = "未知";
+
+/*(LogCategory) extensions category*/
+"extensions" = "扩展";
+
+/*(ListOfRules) Select title */
+"common_select" = "选择";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "编辑";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "删除";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "全选";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "添加域";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "添加新规则";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "将重置所有设置，包括用户规则、系统保护、界面和授权设置。此操作无法撤消。您确定要重置吗？";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 小时";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "今天";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "一周";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "一个月";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "全时段";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "内容拦截器更新中…";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "过滤器加载中…";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "规则已反转…";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "新建自定义过滤器";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "新建 DNS 过滤器";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "防护已禁用";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "防护已开启";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari与系统防护";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari内容拦截";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "所有防护模组被禁用";
+
+/*(TodayViewController) System protection is enabled text  */
+"system_enabled" = "System防护";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d条请求，%2$d次拦截";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "此信息是从WhoTrackMe.com服务加载的";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "更多";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "您试图添加重复的过滤器。此过滤器已在列表中";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "更改未应用";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "已拦截";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "已处理";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "已列入白名单";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "已加入白名单";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "已加入黑名单";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "已从白名单移除";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "已从黑名单移除";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "打开%@ <b>设置</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "向下滑动到%@ <b>Safari浏览器</b>一栏后，点击进入并找到 <b>\"内容拦截器\"</b> 菜单项";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>打开 %@ 所有内容拦截器</b>后返回AdGuard APP！";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "系统DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "使用运营商提供的系统默认DNS服务器";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "拦截请求";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "白名单请求";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "视频教程";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "您输入了非法的上游服务器";

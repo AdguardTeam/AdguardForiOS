@@ -37,6 +37,15 @@
 /* (MainPageController) Message for alert about saved data */
 "saved_data_message" = "Esta información se basa en el número de peticiones DNS bloqueadas. Las estadísticas son una estimación debido a la imposibilidad técnica de calcular la cantidad exacta de anuncios, rastreadores y otras amenazas que podrían haber sido descargadas por el usuario si el dominio no hubiera sido bloqueado inicialmente.";
 
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ KB";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ MB";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ GB";
+
 /* (MainPageController) Text for "try for free" button */
 "try_for_free" = "Prueba gratis";
 
@@ -109,6 +118,12 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtros actualizados: %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Usted puede añadir sus reglas personalizadas aquí<br>Lea esta <a href=\"%@\">nota acerca de la sintaxis de las reglas</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard deshabilitará el filtrado en Safari para estos sitios web.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
 
@@ -117,6 +132,9 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Añadir una regla";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Agregar un dominio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||ejemplo.org^";
@@ -138,6 +156,9 @@
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "Informar de un problema";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "Contactar asistencia técnica";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "Exportar registros";
@@ -243,6 +264,12 @@
 
 /* login error message */
 "login_error_message" = "Ocurrió un error mientras se iniciaba la sesión";
+
+/* purchase secription format */
+"purchase_description_format" = "Acerca de la suscripción a AdGuard:<br><br>• El pago se cargará a tu cuenta de iTunes en el momento de la confirmación de la compra.<br>• La suscripción se renueva automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual.<br>• La tarifa de renovación de la suscripción se cobrará dentro de las 24 horas anteriores al final del período actual. Tus suscripciones pueden ser administradas y tu renovación automática puede ser desactivada en la configuración de tu cuenta de iTunes después de comprar una suscripción.<br><br><a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Aceptar";
