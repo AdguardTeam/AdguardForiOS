@@ -485,7 +485,7 @@
 "cdn" = "CDN";
 
 /*(LogCategory) mobile analytics category*/
-"mobile_analytics" = "mobile analytics";
+"mobile_analytics" = "Mobile analytics";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
