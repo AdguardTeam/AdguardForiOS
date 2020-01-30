@@ -139,20 +139,20 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
             isHidden = true
             return
         }
-
+        
         updateTheme(model.theme)
         titleLabel.text = model.title
         stringToCopy = model.copiedString
-        
+    
         if model.isDataCell {
-            dataViews.forEach({
-                $0.isHidden = false
-                $0.alpha = 1.0
-                infoLabel.isHidden = true
-            })
+            dataViews.forEach({ $0.isHidden = false })
+            infoLabel.isHidden = true
             bytesSentLabel.text = model.bytesSent
             bytesReceivedLabel.text = model.bytesReceived
             return
+        } else {
+            dataViews.forEach({ $0.isHidden = true })
+            infoLabel.isHidden = false
         }
         
         infoLabel.text = model.info
