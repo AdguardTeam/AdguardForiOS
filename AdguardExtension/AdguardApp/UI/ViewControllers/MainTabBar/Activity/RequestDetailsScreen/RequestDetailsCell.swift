@@ -28,6 +28,7 @@ protocol LogCellModelProtocol {
     var info: String? { get }
     var infoFont: UIFont? { get }
     var infoColor: UIColor? { get }
+    var infoAttributedString: NSMutableAttributedString? { get }
     
     // These fields are for DataRequestDetailsCell
     var bytesSent: String? { get }
@@ -48,6 +49,7 @@ class LogCellModel: LogCellModelProtocol {
     var info: String?
     var infoFont: UIFont?
     var infoColor: UIColor?
+    var infoAttributedString: NSMutableAttributedString?
     
     var bytesSent: String?
     var bytesReceived: String?
@@ -55,7 +57,7 @@ class LogCellModel: LogCellModelProtocol {
     var theme: ThemeServiceProtocol?
     var configuration: ConfigurationServiceProtocol?
     
-    init(isUserCell: Bool = true, isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil, configuration: ConfigurationServiceProtocol? = nil) {
+    init(isUserCell: Bool = true, isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, infoAttributedString: NSMutableAttributedString? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil, configuration: ConfigurationServiceProtocol? = nil) {
         self.isUserCell = isUserCell
         self.isDataCell = isDataCell
         self.copiedString = copiedString
@@ -63,6 +65,7 @@ class LogCellModel: LogCellModelProtocol {
         self.info = info
         self.infoFont = infoFont
         self.infoColor = infoColor
+        self.infoAttributedString = infoAttributedString
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
         self.theme = theme
@@ -81,7 +84,9 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
     @IBOutlet weak var copiedLabel: UIButton!
+    @IBOutlet weak var separator: UIView!
     
+    @IBOutlet weak var separatorHeight: NSLayoutConstraint!
     // For data
     @IBOutlet weak var bytesSentLabel: ThemableLabel!
     @IBOutlet weak var bytesReceivedLabel: ThemableLabel!
@@ -92,6 +97,25 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     var model: LogCellModelProtocol? {
         didSet{
             updateModel(model)
+        }
+    }
+    
+    // MARK: - Public methods
+    
+    func hideSeparator(){
+        separator.isHidden = true
+        separatorHeight.constant = 0.0
+    }
+    
+    func showSeparator(){
+        separator.isHidden = false
+        separatorHeight.constant = 1.0
+    }
+    
+    func openWebsite() {
+        guard let website = model?.info else { return }
+        if let url = URL(string: website){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
@@ -130,16 +154,19 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     
     private func updateModel(_ model: LogCellModelProtocol?) {
         guard let model = model else {
+            hideSeparator()
             isHidden = true
             return
         }
         
         let developerMode = model.configuration?.developerMode ?? false
         if !developerMode && !model.isUserCell {
+            hideSeparator()
             isHidden = true
             return
         }
         
+        showSeparator()
         updateTheme(model.theme)
         titleLabel.text = model.title
         stringToCopy = model.copiedString
@@ -155,6 +182,9 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
             infoLabel.isHidden = false
         }
         
+        infoLabel.text = nil
+        infoLabel.attributedText = model.infoAttributedString
+
         infoLabel.text = model.info
         let font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
         infoLabel.font = model.infoFont == nil ? font : model.infoFont
@@ -163,6 +193,7 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     
     private func updateTheme(_ theme: ThemeServiceProtocol?){
         theme?.setupLabel(titleLabel)
+        separator.backgroundColor = theme?.separatorColor
         
         if model?.isDataCell ?? false {
             theme?.setupLabel(bytesSentLabel)

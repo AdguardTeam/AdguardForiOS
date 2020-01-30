@@ -652,6 +652,9 @@
 /* (DnsRequestDetailsController) "Company" title for cell */
 "company_title" = "Company";
 
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Website";
+
 /* (DnsRequestDetailsController) "Domain" title for cell */
 "domain_title" = "Domain";
 

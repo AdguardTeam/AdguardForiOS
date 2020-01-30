@@ -50,6 +50,7 @@ class DnsRequestDetailsController: UITableViewController {
     private let categoryCell = IndexPath(row: 0, section: 0)
     private let nameCell = IndexPath(row: 1, section: 0)
     private let companyCell = IndexPath(row: 2, section: 0)
+    private let websiteCell = IndexPath(row: 3, section: 0)
     
     private let generalSection = 1
     private let domainCell = IndexPath(row: 0, section: 1)
@@ -107,9 +108,19 @@ class DnsRequestDetailsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: requestDetailsCellId) as? RequestDetailsCell else { return UITableViewCell() }
+        
         let model = getModel(for: indexPath)
         cell.model = model
         theme.setupTableCell(cell)
+        
+        if let sectionModel = sectionModels[indexPath.section] {
+            if sectionModel.count - 1 == indexPath.row {
+                cell.hideSeparator()
+            } else {
+                cell.showSeparator()
+            }
+        }
+        
         return cell
     }
     
@@ -127,13 +138,15 @@ class DnsRequestDetailsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let record = logRecord else { return nil }
+        
         var text = ""
         var needsButton = false
         
         switch section {
         case trackerDetailsSection:
             text = String.localizedString("tracker_details_header")
-            needsButton = true
+            needsButton = !record.category.isAdguardJson
         case generalSection:
             text = String.localizedString("general_header")
         case dnsSection:
@@ -147,10 +160,20 @@ class DnsRequestDetailsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        defer {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        if indexPath == websiteCell {
+            guard let cell = tableView.cellForRow(at: indexPath) as? RequestDetailsCell else { return }
+            cell.openWebsite()
+            return
+        }
+        
         guard let cell = tableView.cellForRow(at: indexPath) as? CopiableCellInfo else { return }
         cell.showCopyLabel()
         UIPasteboard.general.string = cell.stringToCopy
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -159,8 +182,9 @@ class DnsRequestDetailsController: UITableViewController {
                 let categoryModel = sectionModel[categoryCell.row]
                 let nameModel = sectionModel[nameCell.row]
                 let companyModel = sectionModel[companyCell.row]
+                let websiteModel = sectionModel[websiteCell.row]
                     
-                if categoryModel == nil && nameModel == nil && companyModel == nil {
+                if categoryModel == nil && nameModel == nil && companyModel == nil && websiteModel == nil{
                     return 0.0
                 }
             }
@@ -322,7 +346,18 @@ class DnsRequestDetailsController: UITableViewController {
         let companyModel = company.isEmpty ? nil : LogCellModel(copiedString: company, title: companyTitle, info: company, theme: theme, configuration: configuration)
         trackerDetailsSectionModel[companyCell.row] = companyModel
         
+        // Website model
+        let website = record.category.url ?? ""
+        let websiteTitle = String.localizedString("website_title")
+        let color: UIColor = UIColor(hexString: "#4CA524")
+        let attrString = NSMutableAttributedString(string: website)
+        attrString.addAttribute(.foregroundColor, value: color, range: NSRange(location: 0, length: attrString.length))
+        attrString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attrString.length))
+        let websiteModel = website.isEmpty ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoAttributedString: attrString, theme: theme, configuration: configuration)
+        trackerDetailsSectionModel[websiteCell.row] = websiteModel
+        
         sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
+        
         
         /**
          General Section
