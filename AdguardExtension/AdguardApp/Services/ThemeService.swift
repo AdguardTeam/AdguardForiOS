@@ -100,11 +100,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var grayTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#D8D8D8") : UIColor.init(hexString: "#888888")
+        return configuration.darkTheme ? UIColor.init(hexString: "#D8D8D8") : UIColor.init(hexString: "#4D4D4D")
     }
 
     var lightGrayTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#a4a4a4") : UIColor.init(hexString: "#a4a4a4")
+        return configuration.darkTheme ? UIColor.init(hexString: "#a4a4a4") : UIColor.init(hexString: "#888888")
     }
     
     var placeholderTextColor: UIColor {
