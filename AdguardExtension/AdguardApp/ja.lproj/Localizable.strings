@@ -484,6 +484,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "モバイル分析ソフト";
+
 /*(LogCategory) hosting category*/
 "hosting" = "ホスティング";
 
@@ -618,3 +621,78 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "リクエストをホワイトリストに追加する";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "使い方（動画）";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "入力されたアップストリームは無効です";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "システム・ブラックリスト";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "システム・ホワイトリスト";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "追跡ソフト情報";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "一般";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "カテゴリ";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "フィルタ名";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "社名";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "ウェブサイト";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "ドメイン";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "サーバー";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "ステータス";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "時刻";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "サイズ";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "経過時間";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "種類";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNSステータス";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNSアップストリーム";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS応答";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "マッチしたフィルタ";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "マッチしたルール";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "元の応答";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "未定義";

@@ -1,0 +1,30 @@
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
+"3BA-9g-I6J.placeholder" = "Име";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
+"6e9-sP-YMb.normalTitle" = "ЗАПИС";
+
+/* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
+"B2l-7z-M2N.normalTitle" = "ЗАПИШИ И ИЗБЕРИ";
+
+/* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
+"J1Z-V3-gS6.normalTitle" = "ИЗБЕРИ";
+
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "Сървър";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
+"mBR-7g-DjT.placeholder" = "Име";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
+"mN8-Uh-sLQ.text" = "Уебсайт";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
+"oSP-2V-qCA.normalTitle" = "ИЗТРИИ";
+
+/* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
+"pzP-ns-QSS.text" = "Име на сървъра";
+
+/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "Избери протокол";

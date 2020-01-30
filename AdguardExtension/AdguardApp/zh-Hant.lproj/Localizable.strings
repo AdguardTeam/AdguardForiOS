@@ -444,3 +444,27 @@
 
 /* (BlockRequestController) Block request title */
 "block_request" = "封鎖請求";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "視訊導覽";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "您已輸入無效的上游";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "系統黑名單";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "系統白名單";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "追蹤器細節";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "一般的";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "空無的";

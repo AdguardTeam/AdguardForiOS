@@ -3,6 +3,126 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 omogočeno pravilo</string>
+        <key>two</key>
+        <string>%d omogočeni pravili</string>
+        <key>few</key>
+        <string>%d omogočenih pravil</string>
+        <key>other</key>
+        <string>%d omogočenih pravil</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>1 omogočen filter</string>
+        <key>two</key>
+        <string>%d omogočena filtra</string>
+        <key>few</key>
+        <string>%d omogočenih filtrov</string>
+        <key>other</key>
+        <string>%d omogočenih filtrov</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Enodnevni brezplačen popoln dostop</string>
+        <key>two</key>
+        <string>%d-dnevni brezplačen popoln dostop</string>
+        <key>few</key>
+        <string>%d-dnevni brezplačen popoln dostop</string>
+        <key>other</key>
+        <string>%d-dnevni brezplačen popoln dostop</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Enotedenski brezplačen popoln dostop</string>
+        <key>two</key>
+        <string>%d-tedenski brezplačen popoln dostop</string>
+        <key>few</key>
+        <string>%d-tedenski brezplačen popoln dostop</string>
+        <key>other</key>
+        <string>%d-tedenski brezplačen popoln dostop</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Enomesečni brezplačen popoln dostop</string>
+        <key>two</key>
+        <string>%d-mesečni brezplačen popoln dostop</string>
+        <key>few</key>
+        <string>%d-mesečni brezplačen popoln dostop</string>
+        <key>other</key>
+        <string>%d-mesečni brezplačen popoln dostop</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Enoletni brezplačen popoln dostop</string>
+        <key>two</key>
+        <string>%d-letni brezplačen popoln dostop</string>
+        <key>few</key>
+        <string>%d-letni brezplačen popoln dostop</string>
+        <key>other</key>
+        <string>%d-letni brezplačen popoln dostop</string>
+      </dict>
+    </dict>
     <key>getPro_screen_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>

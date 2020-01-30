@@ -13,11 +13,17 @@
 /* (AEService) Service errors descriptions */
 "rule_converting_error" = "دستور فیلتر را نمیتوان تبدیل کرد.دستور متن نامعتبر است.";
 
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "دستورات فیلتر کاربر را نمیتوان فیلتر کرد.یکی از دستورات حاوی خطا است.دستور بعدی در موقعیت فعلی مکان نما را بررسی کنید.";
+
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.سعی کنید دستورات خود را پاکسازی کرده،و در لیست سفید قرار دهید یا گروه فیلترهای بکار رفته را تغییر دهید.";
 
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
@@ -27,6 +33,9 @@
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "لیست سفید";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "فیلتر کاربر";
 
 /* (User Filter Screen) User Filter input helper */
 "user_filter_helper" = "دستورات دستی خود را اینجا وارد کنید، با شکستن خط از هم جدا میشوند";
@@ -45,6 +54,12 @@
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "دریافت اشتراک";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "خرید";
+
+/* (LoginController) lost password button title */
+"lost_password" = "رمزعبور را گم کرده اید؟";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
@@ -85,6 +100,12 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "فیلتر بروز رسانی شده  : %@";
 
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
 
@@ -93,6 +114,9 @@
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "افزودن یک دستور";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "افزودن یک دامنه";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -111,6 +135,9 @@
 
 /* (Main Menu) Subject field for mail bug report */
 "action_bug_report" = "گزارش مشکل";
+
+/* (Main Menu) Subject field for mail bug report */
+"action_contact_support" = "تماس با پشتیبانی";
 
 /* (Main Menu) Subject field for export logs */
 "action_export_logs" = "خروجیگیری وقایع";
@@ -217,6 +244,12 @@
 /* login error message */
 "login_error_message" = "یک خطا حین ورود رخ داده است";
 
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium یک سرویس پولی سالانه با هزینه اشتراک $2.99/سال (قیمت در هر منطقه میتواند متفاوت باشد) هست. هزینه در حساب iTunes در حین تایید خرید کسر میشود. اشتراک خودکار تمدید میشود مگر اینکه تمدید خودکار حداقل 24 ساعت قبل از پایان دوره فعلی خاموش شده باشد. حساب خودکار به مدت 24 ساعت قبل از پایان دوره فعلی کسر می شود. اشتراک های شما میتواند مدیریت شود و تمدید خودکار میتواند با رفتن به تنظیمات iTunes بعد از خرید اشتراک غیرفعال شود.<br><br><a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "تأیید";
 
@@ -244,11 +277,17 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "فيلترها:";
 
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "شما ابتدا باید VPN را فعال کنید";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ دستور در حال استفاده است";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "در تنظیمات سافاری غیرفعال شده است";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "بررسی برای بروز رسانی...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "محدودیت %1$@ دستور به سر رسید. برنامه امکان دارد درست کار نکند. لطفا دستورات اضافه را غیرفعال کنید. اکنون %2$@ از %3$@ دستور در حال استفاده است; %4$@ دستور غیرفعال است.";
@@ -294,3 +333,18 @@
 
 /* (AboutController) current app version string */
 "about_version" = "نسخه";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "یکبار هزینه کنید و ویژگی های AdGuard را در همه دستگاه های خود استفاده کنید!";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "رمزعبور یا ایمیل اشتباه است";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "حساب مسدود شده است";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "حساب موقتا قفل شده است";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "توکن احراز هویت دو مرحله ای نامعتبر است";

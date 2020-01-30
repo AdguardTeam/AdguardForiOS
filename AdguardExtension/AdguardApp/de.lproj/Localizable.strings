@@ -269,7 +269,7 @@
 "dot_protocol" = "DNS-over-TLS";
 
 /* GetProController - confirm logout text */
-"confirm_logout_text" = "Sind Sie sicher, dass Sie sich abmelden möchten?";
+"confirm_logout_text" = "Möchten Sie sich wirklich abmelden?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Es besteht ein Problem mit der VPN-Konfiguration. Kontaktieren Sie bitte den AdGuard-Support.";
@@ -407,10 +407,10 @@
 "filter_wifi_title" = "WLAN filtern";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Systemschutz bei mobilen Daten\n";
+"mobile_data_description" = "Systemschutz für mobile Daten\n";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Systemschutz während des WLAN-Betriebs\n\n";
+"wifi_data_description" = "Systemschutz im WLAN-Modus\n";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
@@ -483,6 +483,9 @@
 
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Mobile Analyse";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
@@ -618,3 +621,78 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Whitelist-Anfrage";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video-Anleitung";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Sie haben eine ungültigen Upstream eingegeben";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "System-Blacklist";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "System-Whitelist";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Tracker-Details";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Allgemein";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategorie";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Name";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "Unternehmen";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Webseite";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domain";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Zeit";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Größe";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Verstrichen";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Typ";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS-Status";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS-Upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS-Antwort";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "Angepasste Filter";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "Angepasste Regeln";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Ursprüngliche Antwort";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Leer";

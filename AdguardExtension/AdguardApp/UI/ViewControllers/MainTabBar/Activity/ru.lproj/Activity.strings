@@ -1,38 +1,11 @@
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "02d-Xt-oTe"; */
-"02d-Xt-oTe.normalTitle" = "Скопировано";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "ДОБАВИТЬ";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "2UK-IJ-AM8"; */
-"2UK-IJ-AM8.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "3Ic-4w-EoD"; */
-"3Ic-4w-EoD.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "5Au-6G-hmh"; */
-"5Au-6G-hmh.normalTitle" = "Скопировано";
 
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "РЕДАКТИРОВАТЬ";
 
-/* Class = "UILabel"; text = "Company"; ObjectID = "7xC-qG-2WW"; */
-"7xC-qG-2WW.text" = "Компания";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "BvX-hA-l9D"; */
-"BvX-hA-l9D.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "CS5-Vy-AD1"; */
-"CS5-Vy-AD1.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "GIg-sl-FZd"; */
-"GIg-sl-FZd.normalTitle" = "Скопировано";
-
-/* Class = "UILabel"; text = "Time"; ObjectID = "HUm-JT-lZs"; */
-"HUm-JT-lZs.text" = "Время";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "HgO-j6-UT3"; */
-"HgO-j6-UT3.normalTitle" = "Скопировано";
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
+"J13-xW-KiK.normalTitle" = "Скопировано";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "ОТМЕНА";
@@ -40,62 +13,17 @@
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Доменное имя:";
 
-/* Class = "UILabel"; text = "Name"; ObjectID = "O8w-0a-kF9"; */
-"O8w-0a-kF9.text" = "Имя";
-
-/* Class = "UILabel"; text = "Size"; ObjectID = "ORQ-AZ-NIU"; */
-"ORQ-AZ-NIU.text" = "Размер";
-
-/* Class = "UILabel"; text = "Original answer"; ObjectID = "RjM-Qn-ufh"; */
-"RjM-Qn-ufh.text" = "Исходный ответ";
-
-/* Class = "UINavigationItem"; title = "DNS request details"; ObjectID = "S05-ei-beX"; */
-"S05-ei-beX.title" = "Детали DNS-запроса";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "VcB-hA-6Ju"; */
-"VcB-hA-6Ju.normalTitle" = "Скопировано";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "WZX-eP-abM"; */
-"WZX-eP-abM.text" = "Сервер";
-
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "Информация о запросе";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Фильтры безопасности, DNS-приватность, собственные фильтры и прочее.";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "amQ-gv-yFM"; */
-"amQ-gv-yFM.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "bKN-2M-LhL"; */
-"bKN-2M-LhL.normalTitle" = "Скопировано";
-
-/* Class = "UILabel"; text = "DNS upstream"; ObjectID = "dFf-Pm-IWR"; */
-"dFf-Pm-IWR.text" = "DNS upstream";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dU9-gV-MqN"; */
-"dU9-gV-MqN.normalTitle" = "Скопировано";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "dWi-vv-Ca0"; */
-"dWi-vv-Ca0.normalTitle" = "Скопировано";
-
 /* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
 "dsD-0w-qic.title" = "Очистить";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "fDY-OV-eqp"; */
-"fDY-OV-eqp.text" = "Тип";
-
-/* Class = "UILabel"; text = "Status"; ObjectID = "fVC-3Z-ttp"; */
-"fVC-3Z-ttp.text" = "Статус";
-
-/* Class = "UILabel"; text = "Matched filters"; ObjectID = "fen-B6-KSP"; */
-"fen-B6-KSP.text" = "Совпадающие фильтры";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "НАЗАД";
-
-/* Class = "UILabel"; text = "DNS status"; ObjectID = "i4m-2Q-3Ki"; */
-"i4m-2Q-3Ki.text" = "Статус DNS";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Заблокировать запрос";
@@ -103,32 +31,8 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "ДОБАВИТЬ";
 
-/* Class = "UILabel"; text = "Domain"; ObjectID = "lfu-1a-cjJ"; */
-"lfu-1a-cjJ.text" = "Домен";
-
-/* Class = "UILabel"; text = "Elapsed"; ObjectID = "miG-Yh-36b"; */
-"miG-Yh-36b.text" = "Затрачено";
-
-/* Class = "UILabel"; text = "Matched rules"; ObjectID = "o0L-yz-2WC"; */
-"o0L-yz-2WC.text" = "Совпадающие правила";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "oE2-h8-ZMZ"; */
-"oE2-h8-ZMZ.normalTitle" = "Скопировано";
-
 /* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
 "pqA-7I-Vrx.title" = "Активность";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "ptt-hU-4Dv"; */
-"ptt-hU-4Dv.normalTitle" = "Скопировано";
-
-/* Class = "UILabel"; text = "DNS answer"; ObjectID = "qhC-LX-WeI"; */
-"qhC-LX-WeI.text" = "DNS-ответ";
-
-/* Class = "UILabel"; text = "Category"; ObjectID = "rIV-zR-Ddb"; */
-"rIV-zR-Ddb.text" = "Категория";
-
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "tJd-oY-zOt"; */
-"tJd-oY-zOt.normalTitle" = "Скопировано";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Выбрать уровень домена";

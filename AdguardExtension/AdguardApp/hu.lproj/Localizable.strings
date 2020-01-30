@@ -16,6 +16,9 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Nem lehetett betölteni a szűrőket a Safariba. Ezért a változások nem léptek életbe.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "A szűrőket nem sikerült betölteni a Safariba. Próbálja üríteni a szabályok és kivételek listáját, vagy módosítsa a felhasznált szűrőket.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEM";
 
@@ -24,6 +27,9 @@
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Kivételek";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Felhasználói szűrő";
 
 /* YES Button caption in alert */
 "common_action_yes" = "Igen";
@@ -70,11 +76,17 @@
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Szűrők frissítve %@";
 
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard letiltja a szűrést a Safari webhelyen.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard engedélyezi a szűrést a Safari-ban csak ezeken a webhelyeken.";
 
 /* (UserFilterController) add blacklist rule button title */
 "add_blacklist_rule_title" = "Szabály hozzáadása";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Domain hozzáadása";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Szabály:";

@@ -5,7 +5,7 @@
 "support_rule_converting_error" = "Pravil ni mogoče pretvoriti. Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
 /* (AEService) Service errors descriptions */
-"json_converting_error" = "Ni mogoče inicializiranje Pretvornika v format JSON.";
+"json_converting_error" = "Ni mogoče inicializirati Pretvornika v format JSON.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Prekliči";
@@ -33,6 +33,9 @@
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Uveljavitev sprememb...";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "Te informacije temeljijo na številu onemogočenih zahtev DNS. Statistika je ocena zaradi tehnične nezmožnosti izračuna natančne količine oglasov, sledilcev in drugih groženj, ki bi jih lahko uporabnik prenesel, če domena ne bi bila prvotno onemogočena.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ Kb";
@@ -274,6 +277,9 @@
 /* login error message */
 "login_error_message" = "Prišlo do napake pri prijavi v";
 
+/* purchase secription format */
+"purchase_description_format" = "O naročnini AdGuarda:<br><br>• Plačilo bo nakazano na vaš račun iTunes ob potrditvi nakupa.<br><br>• Naročnina se samodejno obnovi, razen če je samodejno podaljšanje izklopljeno vsaj 24 ur pred koncem trenutnega obdobja.<br><br>• Nadomestilo naročnine se bo zaračunalo v 24 urah pred koncem tekočega obdobja.<br><br>Po naročilu lahko upravljate svoje naročnine in po nakupu naročnine v nastavitvah računa iTunes izklopite samodejno obnovo.<br><br><a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
+
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
 
@@ -403,6 +409,9 @@
 /* (NetworkSettingsController) description for mobile data */
 "mobile_data_description" = "Zaščita sistema med mobilnimi podatki";
 
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Zaščita sistema med brezžičnim omrežjem";
+
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Seznam dovoljenih";
 
@@ -426,6 +435,21 @@
 
 /* "Disabled" title */
 "disabled" = "Onemogočeno";
+
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "ODSTRANI S SEZNAMA DOVOLJENIH";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "ODSTRANI S SEZNAMA NEDOVOLJENIH";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "DODAJ NA SEZNAM DOVOLJENIH";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "DODAJ NA SEZNAM NEDOVOLJENIH";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Dovoli zaviranje lažnega predstavljanja in drugih nevarnih domen. Na voljo uporabnikom Premium";
 
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Omogoča dodajanje filtrov drugih avtorjev. Na voljo uporabnikom Premium";
@@ -486,6 +510,9 @@
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Dodaj novo pravilo";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "Vse nastavitve, vključno z uporabniškimi pravili, zaščito sistema, nastavitvami vmesnika in nastavitve pooblastil, bodo ponastavljene. Tega postopka ni mogoče razveljaviti. Ponastavim nastavitve?";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 ur";
@@ -583,8 +610,35 @@
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistemski DNS";
 
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Uporabite sistemsko privzete strežnike DNS, ki jih ponuja vaš ponudnik internetnih storitev";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Onemogoči zahtevo";
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Zahtevo na Seznam dovoljenih";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video vadnica";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Vnesli ste neveljaven upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Sistemski seznam nedovoljenih";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Sistemski seznam dovoljenih";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Podrobnosti sledilca";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Splošno";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Prazno";

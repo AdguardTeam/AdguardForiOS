@@ -484,6 +484,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "모바일 분석";
+
 /*(LogCategory) hosting category*/
 "hosting" = "호스팅";
 
@@ -618,3 +621,78 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "화이트리스트 요청";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "비디오 튜토리얼";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "유효하지 않는 업스트림입니다";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "시스템 블랙리스트";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "시스템 화이트리스트";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "트래커 세부 사항";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "일반";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "카테고리";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "이름";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "기업";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "웹사이트";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "도메인";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "서버";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "상태";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "시간";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "응답 크기";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "소요됨";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "형식";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS 상태";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS 업스트림";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS 응답";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "일치 필터";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "일치 규칙";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "본래의 응답";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "비어있음";

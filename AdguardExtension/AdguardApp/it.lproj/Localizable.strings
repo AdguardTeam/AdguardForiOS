@@ -484,6 +484,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Dati analitici cellullari";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
 
@@ -618,3 +621,78 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Mettere richiesta nella Whitelist";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video Tutorial";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Hai inserito il upstream non valido";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Blacklist di sistema";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Whitelist di sistema";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "I dettagli del tracker";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Generale";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Categoria";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Nome";
+
+/* (DnsRequestDetailsController) "Company" title for cell */
+"company_title" = "Società";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Sito web";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Dominio";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Stato";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Ora";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Dimensione";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Tempo trascorso";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tipo";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Stato DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS Upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Risposta DNS";
+
+/* (DnsRequestDetailsController) "Matched filters" title for cell */
+"matched_filters_title" = "Filtri adequati";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rules_title" = "Regole adequate";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Risposta originale";
+
+/* (DnsRequestDetailsController) - empty dns answer description */
+"empty_dns_answer" = "Vuoto";
