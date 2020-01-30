@@ -34,7 +34,7 @@ extension NSMutableAttributedString {
         style.alignment = .center
         
         let format = NSMutableString(string: html)
-        let wrapped = "<span style=\"font-family: -apple-system; font-size: 16; color: \(color.hex())\">\(format)</span>"
+        let wrapped = "<span style=\"font-family: -apple-system; font-size: \(fontSize); color: \(color.hex())\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
         
         guard let resultText = try? NSMutableAttributedString(

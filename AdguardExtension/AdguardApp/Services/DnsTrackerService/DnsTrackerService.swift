@@ -50,12 +50,16 @@ struct Tracker: Codable {
     let name: String?
     let isTracked: Bool?
     let company: String?
+    let url: String?
+    let isAdguardJson: Bool
     
-    init(categoryKey: String?, name: String?, isTracked: Bool?, company: String?) {
+    init(categoryKey: String?, name: String?, isTracked: Bool?, company: String?, url: String?, isAdguardJson: Bool) {
         self.categoryKey = categoryKey
         self.name = name
         self.isTracked = isTracked
         self.company = company
+        self.url = url
+        self.isAdguardJson = isAdguardJson
     }
 }
 
@@ -71,11 +75,11 @@ struct Tracker: Codable {
     
     func getTrackerInfo(by domain: String) -> DnsTrackerInfo? {
         
-        if let trackers = adguardTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers) {
+        if let trackers = adguardTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers, isAdguardJson: true) {
             return info
         }
         
-        if let trackers = whotracksmeTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers) {
+        if let trackers = whotracksmeTrackers, let info = getTrackerInfo(by: domain, dnsTrackers: trackers, isAdguardJson: false) {
             return info
         }
         
@@ -84,7 +88,7 @@ struct Tracker: Codable {
     
     // MARK: - Initialization of dns trackers object
     
-    private func getTrackerInfo(by domain: String, dnsTrackers: DnsTrackers) -> DnsTrackerInfo? {
+    private func getTrackerInfo(by domain: String, dnsTrackers: DnsTrackers, isAdguardJson: Bool) -> DnsTrackerInfo? {
         let trackerDomains = dnsTrackers.trackerDomains
         
         var cuttedDomain = domain
@@ -111,7 +115,7 @@ struct Tracker: Codable {
         
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
-        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company)
+        return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, company: info.company, url: info.url, isAdguardJson: isAdguardJson)
     }
     
     private func initializeDnsTrackers(){

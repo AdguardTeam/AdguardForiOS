@@ -171,7 +171,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         addObservers()
         chooseRequest()
         changeProtectionStatusLabel()
-        observeContentBlockersState()
     
         chartModel?.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
