@@ -80,11 +80,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var backgroundColor: UIColor {
-        return configuration.darkTheme ? .black : .white
+        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
     }
     
     var invertedBackgroundColor: UIColor {
-        return configuration.darkTheme ? .white : .black
+        return configuration.darkTheme ? .white : UIColor(hexString: "#131313")
     }
     
     var popupBackgroundColor: UIColor {
@@ -96,19 +96,19 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var blackTextColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor.init(hexString: "#222222")
+        return configuration.darkTheme ? UIColor(hexString: "#F3F3F3") : UIColor.init(hexString: "#4D4D4D")
     }
     
     var grayTextColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor.init(hexString: "#4A4A4A")
+        return configuration.darkTheme ? UIColor.init(hexString: "#D8D8D8") : UIColor.init(hexString: "#888888")
     }
 
     var lightGrayTextColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor.init(hexString: "#888888")
+        return configuration.darkTheme ? UIColor.init(hexString: "#a4a4a4") : UIColor.init(hexString: "#a4a4a4")
     }
     
     var placeholderTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#777777") : UIColor.init(hexString: "#DDDDDD")
+        return configuration.darkTheme ? UIColor.init(hexString: "#888888") : UIColor.init(hexString: "#D8D8D8")
     }
     
     var separatorColor: UIColor {
@@ -116,11 +116,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var selectedCellColor: UIColor {
-         return configuration.darkTheme ?  UIColor(hexString: "#0E1911") : UIColor.init(hexString: "#F3F3F3")
+         return configuration.darkTheme ?  UIColor(hexString: "#4D4D4D") : UIColor.init(hexString: "#F3F3F3")
     }
     
     var errorRedColor: UIColor {
-        return UIColor(hexString: "#df3812")
+        return UIColor(hexString: "#C23814")
     }
     
     var editLineColor: UIColor {
@@ -140,15 +140,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var tabBarColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#1e1e1e") : .white
+        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
     }
     
     var ruleTextColor: UIColor {
-        return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#434343")
+        return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#4D4D4D")
     }
     
     var navigationBarColor: UIColor {
-        return configuration.darkTheme ? UIColor.white : UIColor(hexString: "4D4D4D")
+        return configuration.darkTheme ? UIColor(hexString: "#F3F3F3") : UIColor(hexString: "4D4D4D")
     }
     
     var notificationWindowColor: UIColor {
@@ -156,7 +156,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var chartViewTextColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#2a2a2a") : UIColor(hexString: "#d8d8d8")
+        return configuration.darkTheme ? UIColor(hexString: "#4D4D4D") : UIColor(hexString: "#d8d8d8")
     }
     
     var indicatorStyle: UIActivityIndicatorView.Style {
@@ -224,7 +224,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         let dark = configuration.darkTheme
         let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
         navBar.titleTextAttributes = textAttributes
-        navBar.barTintColor = dark ? .clear : .white
+        navBar.barTintColor = backgroundColor
         navBar.barStyle = dark ? .black : .default
     }
     
@@ -241,9 +241,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func statusbarStyle() -> UIStatusBarStyle {
         if #available(iOS 13.0, *) {
-            // (UIStatusBarStyle(rawValue: 3) - we use it instead of using .darkContent to prevent compile time error in xcode v. < 11.0
-            // todo: we must remove this hack, when xcode 11 will be released
-            return configuration.darkTheme ? .lightContent : (UIStatusBarStyle(rawValue: 3) ?? .default)
+            return configuration.darkTheme ? .lightContent : .darkContent
         } else {
             return configuration.darkTheme ? .lightContent : .default
         }
