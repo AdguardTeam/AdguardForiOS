@@ -82,6 +82,9 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         
         var statistics = [DnsStatisticsType:[RequestsStatisticsBlock]]()
         
+        let group = DispatchGroup()
+        group.enter()
+        
         ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
             self?.readHandler?.inTransaction { (db, rollback) in
                 let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
@@ -92,7 +95,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                     statistics[.blocked] = result.map { $0.blockedStatisticsBlocks }
                 }
             }
+            group.leave()
         }
+        
+        group.wait()
         
         return statistics;
     }
