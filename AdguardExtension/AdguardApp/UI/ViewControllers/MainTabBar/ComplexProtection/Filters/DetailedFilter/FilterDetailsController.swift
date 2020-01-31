@@ -45,6 +45,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     private var notificationToken: NotificationToken?
     
+    private let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .alert)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +62,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
         
         setupBackItem()
-        
+        createAlert()
         deleteButton.makeTitleTextUppercased()
     }
 
@@ -74,15 +76,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        if let customFilter = filter as? Filter {
-            filtersService.deleteCustomFilter(customFilter)
-        }
-        
-        if let dnsFilter = filter as? DnsFilter {
-            dnsFiltersService.deleteFilter(dnsFilter)
-        }
-        
-        navigationController?.popViewController(animated: true)
+        present(alert, animated: true)
     }
     
     private func updateTheme () {
@@ -118,6 +112,31 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
                 self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.5)
             }
         }
+    }
+    
+    private func createAlert(){
+        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
+            guard let self = self else { return }
+            self.alert.dismiss(animated: true, completion: nil)
+            
+            if let customFilter = self.filter as? Filter {
+                self.filtersService.deleteCustomFilter(customFilter)
+            }
+            
+            if let dnsFilter = self.filter as? DnsFilter {
+                self.dnsFiltersService.deleteFilter(dnsFilter)
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) {[weak self] _ in
+            self?.alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
     }
     
     /**

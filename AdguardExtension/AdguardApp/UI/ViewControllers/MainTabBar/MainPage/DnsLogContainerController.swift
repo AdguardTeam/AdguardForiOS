@@ -73,7 +73,7 @@ class DnsLogContainerController: UIViewController {
     // MARK: - Actions
     
     @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
     
     // MARK: - Private methods
