@@ -190,9 +190,9 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - Public function
     
     func updateStatusLabel(){
-        guard let statusCell = statusCell, let generalSection = generalSection else { return }
+        guard let statusCell = statusCell, let filteringSection = filteringSection else { return }
         let statusCellModel = getStatusCellModel()
-        sectionModels[generalSection]?[statusCell.row] = statusCellModel
+        sectionModels[filteringSection]?[statusCell.row] = statusCellModel
         tableView.reloadRows(at: [statusCell], with: .fade)
     }
     
