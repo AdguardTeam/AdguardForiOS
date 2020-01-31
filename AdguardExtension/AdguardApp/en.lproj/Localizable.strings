@@ -686,7 +686,7 @@
 "matched_filter_title" = "Matched filter";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Matched rules";
+"matched_rule_title" = "Matched rule";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Original answer";
