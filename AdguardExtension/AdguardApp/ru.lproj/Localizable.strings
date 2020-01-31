@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Попробовать бесплатно";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Попробовать бесплатно";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Белый список";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Домашняя страница:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Удалить фильтр";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Вы уверены, что хотите удалить этот фильтр?";
+
 /* (AboutController) current app version string */
 "about_version" = "Версия";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Все настройки, включая пользовательские правила, защиту системы, интерфейс и настройки авторизации, будут сброшены. Это действие нельзя отменить. Сбросить настройки?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Сбросить лог активности";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Все записи об активностях будут удалены!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 часа";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Общие";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Фильтрация";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Название";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Компания";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Веб-сайт";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS-ответ";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Подходящие фильтры";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Подходящий фильтр";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Подходящие правила";
+"matched_rule_title" = "Подходящее правило";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Исходный ответ";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Пусто";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Правило не найдено";

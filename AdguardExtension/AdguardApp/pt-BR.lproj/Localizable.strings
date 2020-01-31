@@ -46,7 +46,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Experimente gratuitamente";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
@@ -484,6 +484,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Análise móvel";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Hospedagem";
 
@@ -640,5 +643,47 @@
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Categoria";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Nome";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Site";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domínio";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Servidor";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Data";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Tamanho";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Tempo decorrido";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tipo";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Status do DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Resposta de DNS";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Resposta original";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vazio";

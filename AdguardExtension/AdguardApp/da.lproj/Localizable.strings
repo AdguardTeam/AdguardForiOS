@@ -46,7 +46,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Prøv gratis";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
@@ -400,8 +400,17 @@
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Tilføj en undtagelse";
 
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filtrer mobildata";
+
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtrer Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Systembeskyttelse mens du bruger mobildata";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Systembeskyttelse mens du bruger Wi-Fi";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
@@ -427,8 +436,59 @@
 /* "Disabled" title */
 "disabled" = "Deaktiveret";
 
+/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+"remove_from_whitelist" = "FJERN FRA WHITELIST";
+
+/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+"remove_from_blacklist" = "FJERN FRA BLACKLIST";
+
+/*(LogRecord) "ADD TO WHITELIST" button title */
+"add_to_whitelist" = "TILFØJ TIL WHITELIST";
+
+/*(LogRecord) "ADD TO BLACKLIST" button title */
+"add_to_blacklist" = "TILFØJ TIL BLACKLIST";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Tillad at blokere phishing-websider og andre farlige domæner. Tilgængelig for Premium-brugere";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Tillader tilføjelse af filtre fra tredjeparter. Tilgængelig for Premium-brugere";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Audio- og videoafspillere";
+
+/*(LogCategory) comments category*/
+"comments" = "Kommentarer";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interaktion med kunder";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornografi";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Reklame";
+
+/*(LogCategory) essential category*/
+"essential" = "Essentiel";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Webstedsanalyse";
+
+/*(LogCategory) social media category*/
+"social_media" = "Sociale medier";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Diverse";
+
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Mobil-analyse";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
 
 /*(LogCategory) unknown category*/
 "unknown" = "Ukendt";
@@ -454,6 +514,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Tilføj en ny regel";
 
+/* confirm reset lert text */
+"confirm_reset_text" = "Alle indstillinger, inklusiv brugerregler, systembeskyttelse, interface og autorisationsindstillinger vil blive nulstillet. Denne handling kan ikke fortrydes. Nulstil indstillingerne?";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 timer";
 
@@ -469,8 +532,14 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Samlet";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Indholdsblockere opdateres ...";
+
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Indlæser filtre ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Regler konverteres ...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nyt tilpasset filter";
@@ -487,17 +556,92 @@
 /*(TodayViewController) Complex protection is enabled text  */
 "complex_enabled" = "Safari og Systembeskyttelse";
 
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari-indholdsblokering";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Alle beskyttelsesmoduler er deaktiverede";
+
 /*(TodayViewController) System protection is enabled text  */
 "system_enabled" = "Systembeskyttelse";
 
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d forespørgsler, %2$d blokeret";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Denne information blev indlæst fra WhoTrackMe.com tjenesten";
+
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Mere";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Du har forsøgt at tilføje et duplikeret filter. Dette filter er allerede på listen.";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "Ændringerne blev ikke anvendt";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blokeret";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Behandlet";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "Whitelisted";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "tilføjet til Whitelisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "tilføjet til Blacklisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "fjernet fra Whitelisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "fjernet fra Blacklisten";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Åben %@ <b>indstillingerne</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Tryk på %@ <b>Safari</b> og vælg menupunktet <b>\"Indholdsblockere\"</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Aktiver %@ alle indholdsblockere</b> og kom tilbage til vores app!";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "System DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Brug systemets standard DNS-servere leveret af din internetudbyder";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Bloker forespørgsel";
+
+/* (BlockRequestController) Whitelist request title */
+"whitelist_request" = "Whitelist forespørgsel";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Videovejledning";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Du har indtastet en ugyldig upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "System Blacklist";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "System Whitelist";
 
 /* (DnsRequestDetailsController) "Tracker details" title for section header */
 "tracker_details_header" = "Sporingsdetaljer";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Generelt";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtrering";
 
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
@@ -507,9 +651,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Navn";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Firma";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Webside";
@@ -544,14 +685,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS-svar";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Matchende filtre";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Matchende filter";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Matchende regler";
+"matched_rule_title" = "Matchende regel";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Oprindeligt svar";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Tom";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Ingen regel fundet";

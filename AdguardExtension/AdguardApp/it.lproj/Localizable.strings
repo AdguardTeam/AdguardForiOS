@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Prova gratis";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Prova gratis";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Whitelist";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Pagina iniziale:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Eliminare filtro";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Sei sicuro di voler eliminare questo filtro?";
+
 /* (AboutController) current app version string */
 "about_version" = "Versione";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Tutte le impostazioni, incluse le regole utente, la protezione del sistema, l'interfaccia e le impostazioni di autorizzazione, saranno ripristinate. Questa operazione non può essere annullata. Resettare le impostazioni?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Ripristinare il registro di attività";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Tutti le attività registrate saranno eliminati!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 ore";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Generale";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtraggio";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Nome";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Società";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Sito web";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "Risposta DNS";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Filtri adequati";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Filtro adequato";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Regole adequate";
+"matched_rule_title" = "Regola adequata";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Risposta originale";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vuoto";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Nessuna regola trovata";

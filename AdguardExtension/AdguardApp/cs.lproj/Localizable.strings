@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Vyzkoušet zdarma";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Vyzkoušet zdarma";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Seznam povolených";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Domovská stránka:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Smazat filtr";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Opravdu chcete smazat tento filtr?";
+
 /* (AboutController) current app version string */
 "about_version" = "Verze";
 
@@ -484,6 +493,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Analýza mobilního připojení";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
 
@@ -513,6 +525,12 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "Obnoví se všechna nastavení včetně uživatelských pravidel, ochrany systému, rozhraní a autorizačních nastavení. Tuto operaci nelze vrátit zpět. Obnovit nastavení?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Resetovat protokol aktivity";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Všechny záznamy aktivity budou smazány!";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 hodin";
@@ -637,8 +655,62 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Obecné";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtrování";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategorie";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Název";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Webová stránka";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Doména";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Stav";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Čas";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Velikost";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Uplynulý čas";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Typ";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Stav DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Odpověď DNS";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Odpovídající filtr";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Odpovídající pravidlo";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Původní odpověď";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prázdná";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Pravidlo nenalezeno";

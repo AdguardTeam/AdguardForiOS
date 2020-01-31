@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "無料お試し";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "詳細はこちら";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "ホワイトリスト";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "ホームページ：";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "フィルタの削除";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "このフィルタを削除してもよろしいですか？";
+
 /* (AboutController) current app version string */
 "about_version" = "バージョン";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "ユーザールール、「システム全体でブロック」、インターフェイスおよび認証設定を含むすべての設定がリセットされます。この操作を取り消すことはできません。設定をリセットしますか？";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "アクティビティ・ログのリセット";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "注：アクティビティ記録が全部削除されます！";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24時間";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "一般";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "フィルタリング";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "フィルタ名";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "社名";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "ウェブサイト";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS応答";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "マッチしたフィルタ";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "マッチしたフィルタ";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "マッチしたルール";
+"matched_rule_title" = "マッチしたルール";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "元の応答";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "未定義";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "ルール見つかりません";

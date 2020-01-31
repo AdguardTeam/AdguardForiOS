@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "무료로 사용해 보세요!";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "무료로 사용해 보세요";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "화이트리스트";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "홈페이지:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "필터 삭제";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "이 필터를 지우시겠습니까?";
+
 /* (AboutController) current app version string */
 "about_version" = "버전";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "사용자 규칙, 시스템 보호, 인터페이스 및 인증 설정을 포함한 모든 설정이 초기화 됩니다. 이 작업은 취소할 수 없습니다. 설정을 초기화합니까?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "작업 로그 초기화";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "모든 활동 기록이 삭제됩니다!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24시간";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "일반";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "필터링";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "이름";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "기업";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "웹사이트";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS 응답";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "일치 필터";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "일치 필터";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "일치 규칙";
+"matched_rule_title" = "일치 규칙";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "본래의 응답";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "비어있음";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "규칙 없음";

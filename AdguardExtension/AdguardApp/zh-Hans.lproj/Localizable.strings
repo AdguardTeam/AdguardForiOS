@@ -46,7 +46,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ Gb";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "免费试用";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
