@@ -691,5 +691,9 @@
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Original answer";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Empty";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "No rule found";
+

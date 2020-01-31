@@ -508,11 +508,13 @@ class DnsRequestDetailsController: UITableViewController {
         }
         
         // Matched rules model
-        let matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        let noRulesFoundStr = String.localizedString("no_rule_found")
+        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
         let matchedRulesTitle = String.localizedString("matched_rule_title")
-        let matchedRulesModelIsNil = matchedRules.isEmpty
-        let matchedRulesModel = matchedRulesModelIsNil ? nil : LogCellModel(isUserCell: false, copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme, configuration: configuration)
-        if !matchedRulesModelIsNil && configuration.developerMode {
+        
+        let matchedRulesModel = LogCellModel(isUserCell: false, copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme, configuration: configuration)
+        if configuration.developerMode {
             dnsSection = dnsSectionToAssign
             matchedRulesCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
