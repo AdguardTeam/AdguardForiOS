@@ -640,6 +640,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "General";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtering";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +651,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Name";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Company";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Website";
@@ -685,14 +685,18 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS answer";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Matched filters";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Matched filter";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Matched rules";
+"matched_rule_title" = "Matched rule";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Original answer";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Empty";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "No rule found";
+

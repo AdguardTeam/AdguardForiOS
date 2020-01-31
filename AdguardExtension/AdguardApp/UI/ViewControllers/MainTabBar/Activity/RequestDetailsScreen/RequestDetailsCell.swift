@@ -28,7 +28,6 @@ protocol LogCellModelProtocol {
     var info: String? { get }
     var infoFont: UIFont? { get }
     var infoColor: UIColor? { get }
-    var infoAttributedString: NSMutableAttributedString? { get }
     
     // These fields are for DataRequestDetailsCell
     var bytesSent: String? { get }
@@ -49,7 +48,6 @@ class LogCellModel: LogCellModelProtocol {
     var info: String?
     var infoFont: UIFont?
     var infoColor: UIColor?
-    var infoAttributedString: NSMutableAttributedString?
     
     var bytesSent: String?
     var bytesReceived: String?
@@ -57,7 +55,7 @@ class LogCellModel: LogCellModelProtocol {
     var theme: ThemeServiceProtocol?
     var configuration: ConfigurationServiceProtocol?
     
-    init(isUserCell: Bool = true, isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, infoAttributedString: NSMutableAttributedString? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil, configuration: ConfigurationServiceProtocol? = nil) {
+    init(isUserCell: Bool = true, isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil, configuration: ConfigurationServiceProtocol? = nil) {
         self.isUserCell = isUserCell
         self.isDataCell = isDataCell
         self.copiedString = copiedString
@@ -65,7 +63,6 @@ class LogCellModel: LogCellModelProtocol {
         self.info = info
         self.infoFont = infoFont
         self.infoColor = infoColor
-        self.infoAttributedString = infoAttributedString
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
         self.theme = theme
@@ -183,7 +180,6 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         }
         
         infoLabel.text = nil
-        infoLabel.attributedText = model.infoAttributedString
 
         infoLabel.text = model.info
         let font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
