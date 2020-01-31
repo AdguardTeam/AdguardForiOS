@@ -40,6 +40,7 @@ class DnsLogContainerController: UIViewController {
     
     private let showDnsLogSegueId = "showDnsLogSegue"
     
+    private let alert = UIAlertController(title: String.localizedString("reset_activity_title"), message: String.localizedString("reset_activity_message"), preferredStyle: .alert)
     
     // MARK: - View Controller life cycle
     
@@ -47,7 +48,7 @@ class DnsLogContainerController: UIViewController {
         super.viewDidLoad()
         
         updateTheme()
-        
+        createAlert()
         observeProStatus()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
@@ -72,7 +73,7 @@ class DnsLogContainerController: UIViewController {
     // MARK: - Actions
     
     @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-        delegate?.clearButtonTapped()
+        self.present(alert, animated: true)
     }
     
     // MARK: - Private methods
@@ -80,6 +81,21 @@ class DnsLogContainerController: UIViewController {
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
+    }
+    
+    private func createAlert(){
+        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
+            self?.alert.dismiss(animated: true, completion: nil)
+            self?.delegate?.clearButtonTapped()
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) {[weak self] _ in
+            self?.alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
     }
     
     private func observeProStatus(){

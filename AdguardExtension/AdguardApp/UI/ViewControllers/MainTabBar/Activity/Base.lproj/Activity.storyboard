@@ -72,6 +72,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="tgQ-Xs-B2p">
+                            <rect key="frame" x="0.0" y="72.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DnsRequestCell" id="Yrg-cu-suc" customClass="DnsRequestCell" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="18.5"/>
@@ -380,7 +385,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ae4-WL-0pQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="8" width="350" height="68"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -415,7 +420,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ae4-WL-0pQ" secondAttribute="trailing" id="4wf-9w-cvI"/>
                                     <constraint firstItem="6xN-ij-jJj" firstAttribute="centerX" secondItem="eze-yt-rB9" secondAttribute="centerX" id="8Ch-nu-2rW"/>
-                                    <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="8" id="Ayz-Cp-tlq"/>
+                                    <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="16" id="Ayz-Cp-tlq"/>
                                     <constraint firstItem="6xN-ij-jJj" firstAttribute="height" secondItem="eze-yt-rB9" secondAttribute="height" multiplier="0.2" id="ODL-fa-zRa"/>
                                     <constraint firstItem="ae4-WL-0pQ" firstAttribute="leading" secondItem="eze-yt-rB9" secondAttribute="leading" id="Pac-Xe-yTK"/>
                                     <constraint firstItem="ApV-fQ-kgK" firstAttribute="top" secondItem="eze-yt-rB9" secondAttribute="top" id="UKG-z9-2bQ"/>

@@ -517,6 +517,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Reset activity log";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "All activity records will be deleted!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 hours";
 
