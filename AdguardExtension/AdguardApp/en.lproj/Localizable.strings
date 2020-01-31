@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Try for free";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Try for free";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Whitelist";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Homepage:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Delete filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Are you sure you want to delete this filter?";
+
 /* (AboutController) current app version string */
 "about_version" = "Version";
 
@@ -516,6 +525,12 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Reset activity log";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "All activity records will be deleted!";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 hours";

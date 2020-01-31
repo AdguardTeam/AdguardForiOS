@@ -183,7 +183,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
         
-        getProButton.setTitle(String.localizedString("try_for_free"), for: .normal)
+        getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
     }
         
     override func viewWillAppear(_ animated: Bool) {

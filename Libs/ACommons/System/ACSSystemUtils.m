@@ -44,7 +44,7 @@
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"common_action_ok", nil) style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {

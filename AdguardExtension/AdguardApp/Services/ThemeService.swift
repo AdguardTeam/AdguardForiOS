@@ -234,7 +234,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         searchBar.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
         
         searchBar.barTintColor = .clear
-        textField?.backgroundColor = configuration.darkTheme ? UIColor.init(hexString: "#131313") : UIColor.init(hexString: "#F3F3F3")
+        textField?.backgroundColor = notificationWindowColor
         searchBar.backgroundImage = UIImage()
         searchBar.setImage(UIImage(named: "search-icon"), for: .search, state: .normal)
     }

@@ -32,7 +32,6 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - private fields
     private var sectionModels: [Int : [Int : LogCellModelProtocol?]] = [:]
     
-    private let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .alert)
     private let webPage = "https://whotracks.me"
     
     private let requestDetailsCellId = "RequestDetailsCellId"
@@ -86,7 +85,6 @@ class DnsRequestDetailsController: UITableViewController {
         }
         
         updateTheme()
-        createAlert()
     }
     
     override func viewDidLayoutSubviews() {
@@ -186,15 +184,15 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func whoTracksMeInfo(_ sender: UIButton) {
-        present(alert, animated: true, completion: nil)
+        showAlert()
     }
     
     // MARK: - Public function
     
     func updateStatusLabel(){
-        guard let statusCell = statusCell, let generalSection = generalSection else { return }
+        guard let statusCell = statusCell, let filteringSection = filteringSection else { return }
         let statusCellModel = getStatusCellModel()
-        sectionModels[generalSection]?[statusCell.row] = statusCellModel
+        sectionModels[filteringSection]?[statusCell.row] = statusCellModel
         tableView.reloadRows(at: [statusCell], with: .fade)
     }
     
@@ -267,7 +265,9 @@ class DnsRequestDetailsController: UITableViewController {
     /**
      Creates alert for additional info about whoTracksMe json
      */
-    private func createAlert() {
+    private func showAlert() {
+        let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .actionSheet)
+        
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
             guard let self = self else { return }
             guard let url = URL(string: self.webPage) else { return }
@@ -276,6 +276,8 @@ class DnsRequestDetailsController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     private func getStatusCellModel() -> LogCellModel? {
