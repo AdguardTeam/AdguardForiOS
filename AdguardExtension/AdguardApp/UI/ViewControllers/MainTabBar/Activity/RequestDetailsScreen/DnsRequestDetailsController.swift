@@ -54,18 +54,20 @@ class DnsRequestDetailsController: UITableViewController {
     private var generalSection: Int?
     private var domainCell: IndexPath?
     private var serverCell: IndexPath?
-    private var statusCell: IndexPath?
     private var timeCell: IndexPath?
     private var sizeCell: IndexPath?
     private var elapsedCell: IndexPath?
+    
+    private var filteringSection: Int?
+    private var statusCell: IndexPath?
+    private var matchedFiltersCell: IndexPath?
+    private var matchedRulesCell: IndexPath?
     
     private var dnsSection: Int?
     private var typeCell: IndexPath?
     private var dnsStatusCell: IndexPath?
     private var dnsUpstreamCell: IndexPath?
     private var dnsAnswerCell: IndexPath?
-    private var matchedFiltersCell: IndexPath?
-    private var matchedRulesCell: IndexPath?
     private var originalAnswerCell: IndexPath?
     
     // MARK: - ViewController life cycle
@@ -137,6 +139,8 @@ class DnsRequestDetailsController: UITableViewController {
             needsButton = !record.category.isAdguardJson
         case generalSection:
             text = String.localizedString("general_header")
+        case filteringSection:
+            text = String.localizedString("filtering_header")
         case dnsSection:
             text = String.localizedString("dns_header")
         default:
@@ -293,6 +297,7 @@ class DnsRequestDetailsController: UITableViewController {
     private func createCellModels(){
         trackerDetailsSection = nil
         generalSection = nil
+        filteringSection = nil
         dnsSection = nil
         sectionModels.removeAll()
         
@@ -385,16 +390,6 @@ class DnsRequestDetailsController: UITableViewController {
             generalSectionModel[serverCell!.row] = serverModel
         }
         
-        // Status model
-        let statusModel = getStatusCellModel()
-        let statusModelIsNil = statusModel == nil
-        if !statusModelIsNil {
-            generalSection = generalSectionToAssign
-            statusCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[statusCell!.row] = statusModel
-        }
-        
         // Time model
         let time = record.logRecord.time()
         let timeTitle = String.localizedString("time_title")
@@ -437,6 +432,51 @@ class DnsRequestDetailsController: UITableViewController {
         if let generalSection = generalSection {
             sectionsArray.append(generalSection)
             sectionModels[generalSection] = generalSectionModel
+        }
+        
+        /**
+         Filtering Section
+        */
+        var filteringSectionModel: [Int : LogCellModelProtocol?] = [:]
+        var filteringRows = 0
+        let filteringSectionToAssign = sectionNumber
+        
+        // Status model
+        let statusModel = getStatusCellModel()
+        let statusModelIsNil = statusModel == nil
+        if !statusModelIsNil {
+            filteringSection = filteringSectionToAssign
+            statusCell = IndexPath(row: filteringRows, section: filteringSection!)
+            filteringRows += 1
+            filteringSectionModel[statusCell!.row] = statusModel
+        }
+        
+        // Matched filters model
+        let matchedFilters = record.matchedFilters ?? ""
+        let matchedFiltersTitle = String.localizedString("matched_filter_title")
+        let matchedFiltersModelIsNil = matchedFilters.isEmpty
+        let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme, configuration: configuration)
+        if !matchedFiltersModelIsNil {
+            filteringSection = filteringSectionToAssign
+            matchedFiltersCell = IndexPath(row: filteringRows, section: filteringSection!)
+            filteringRows += 1
+            filteringSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
+        }
+        
+        // Matched rules model
+        let noRulesFoundStr = String.localizedString("no_rule_found")
+        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
+        let matchedRulesTitle = String.localizedString("matched_rule_title")
+        let matchedRulesModel = LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme, configuration: configuration)
+        filteringSection = filteringSectionToAssign
+        matchedRulesCell = IndexPath(row: filteringRows, section: filteringSection!)
+        filteringRows += 1
+        filteringSectionModel[matchedRulesCell!.row] = matchedRulesModel
+        
+        if let filteringSection = filteringSection {
+            sectionsArray.append(filteringSection)
+            sectionModels[filteringSection] = filteringSectionModel
         }
         
         /**
@@ -493,32 +533,6 @@ class DnsRequestDetailsController: UITableViewController {
             dnsAnswerCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
             dnsSectionModel[dnsAnswerCell!.row] = dnsAnswerModel
-        }
-        
-        // Matched filters model
-        let matchedFilters = record.matchedFilters ?? ""
-        let matchedFiltersTitle = String.localizedString("matched_filter_title")
-        let matchedFiltersModelIsNil = matchedFilters.isEmpty
-        let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(isUserCell: false, copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme, configuration: configuration)
-        if !matchedFiltersModelIsNil && configuration.developerMode {
-            dnsSection = dnsSectionToAssign
-            matchedFiltersCell = IndexPath(row: dnsRows, section: dnsSection!)
-            dnsRows += 1
-            dnsSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
-        }
-        
-        // Matched rules model
-        let noRulesFoundStr = String.localizedString("no_rule_found")
-        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
-        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
-        let matchedRulesTitle = String.localizedString("matched_rule_title")
-        
-        let matchedRulesModel = LogCellModel(isUserCell: false, copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme, configuration: configuration)
-        if configuration.developerMode {
-            dnsSection = dnsSectionToAssign
-            matchedRulesCell = IndexPath(row: dnsRows, section: dnsSection!)
-            dnsRows += 1
-            dnsSectionModel[matchedRulesCell!.row] = matchedRulesModel
         }
         
         // Original answer model

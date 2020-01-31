@@ -640,6 +640,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "General";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtering";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
