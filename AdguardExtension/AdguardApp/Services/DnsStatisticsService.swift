@@ -94,8 +94,8 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                     statistics[.all] = result.map { $0.allStatisticsBlocks }
                     statistics[.blocked] = result.map { $0.blockedStatisticsBlocks }
                 }
-                group.leave()
             }
+            group.leave()
         }
         
         group.wait()
