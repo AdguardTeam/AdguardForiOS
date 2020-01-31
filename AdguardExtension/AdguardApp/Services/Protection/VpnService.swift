@@ -117,7 +117,7 @@ class VpnService: VpnServiceProtocol {
             let cancelTitle: String = String.localizedString("common_action_cancel")
             let privacyTitle: String = String.localizedString("privacy_policy_action")
             
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
             
             let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
                 self.vpnManager.enabled = enabled

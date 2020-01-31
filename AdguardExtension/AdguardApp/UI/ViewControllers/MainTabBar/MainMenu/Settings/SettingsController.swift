@@ -142,7 +142,7 @@ class SettingsController: UITableViewController {
     }
     
     @IBAction func resetAction(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .actionSheet)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
             alert.dismiss(animated: true, completion: nil)
@@ -157,11 +157,11 @@ class SettingsController: UITableViewController {
         
         alert.addAction(cancelAction)
 
-        self.present(alert, animated: true)
+        present(alert, animated: true)
     }
     
     private func resetStatistics(){
-        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .alert)
+        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .actionSheet)
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)

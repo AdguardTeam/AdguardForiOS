@@ -99,7 +99,7 @@ class GetProController: UIViewController {
     
     @IBAction func logoutAction(_ sender: Any) {
         
-        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .alert)
+        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
