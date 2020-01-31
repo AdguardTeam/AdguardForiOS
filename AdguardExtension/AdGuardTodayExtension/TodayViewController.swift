@@ -96,8 +96,10 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        changeTextForButton(with: AEDefaultsRequests)
-        changeTextForButton(with: AEDefaultsBlockedRequests)
+        let statistics = dnsStatisticsService.readStatistics()
+              
+        changeTextForButton(statistics: statistics, keyPath: AEDefaultsRequests)
+        changeTextForButton(statistics: statistics, keyPath: AEDefaultsBlockedRequests)
     }
     
     deinit {
@@ -106,7 +108,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            changeTextForButton(with: keyPath)
+            let statistics = dnsStatisticsService.readStatistics()
+            changeTextForButton(statistics: statistics, keyPath: keyPath)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -370,8 +373,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     /**
      Changes number of requests for specific button
      */
-    private func changeTextForButton(with keyPath: String?){
-        let statistics = dnsStatisticsService.readStatistics()
+    private func changeTextForButton(statistics: [DnsStatisticsType:[RequestsStatisticsBlock]], keyPath: String?){
         
         var requests = 0
         var blocked = 0

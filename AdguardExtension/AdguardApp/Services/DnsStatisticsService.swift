@@ -81,13 +81,16 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]] {
         
         var statistics = [DnsStatisticsType:[RequestsStatisticsBlock]]()
-        readHandler?.inTransaction { (db, rollback) in
-            let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
-            guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else { return }
-            
-            if result.count > 0 {
-                statistics[.all] = result.map { $0.allStatisticsBlocks }
-                statistics[.blocked] = result.map { $0.blockedStatisticsBlocks }
+        
+        ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
+            self?.readHandler?.inTransaction { (db, rollback) in
+                let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
+                guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else { return }
+                
+                if result.count > 0 {
+                    statistics[.all] = result.map { $0.allStatisticsBlocks }
+                    statistics[.blocked] = result.map { $0.blockedStatisticsBlocks }
+                }
             }
         }
         
@@ -95,14 +98,14 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     }
     
     func clearStatistics() {
-        writeHandler?.inTransaction({[weak self] (db, rollback) in
+        writeHandler?.inTransaction { [weak self] (db, rollback) in
             let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
             let success = table?.delete(withKeys: nil, inRowObject: nil)
             if success ?? false {
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
             }
-        })
+        }
     }
     
     // MARK: - private methods
