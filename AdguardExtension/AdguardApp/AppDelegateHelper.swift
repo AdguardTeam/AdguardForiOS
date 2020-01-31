@@ -166,7 +166,7 @@ class AppDelegateHelper: NSObject {
      Also it removes vpn profile. And reomves all keys from keychain (reset authorisation) */
     func resetAllSettings() {
         
-        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
 
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         loadingIndicator.hidesWhenStopped = true
