@@ -3,6 +3,126 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>user_rules_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@rules@</string>
+      <key>rules</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Увімкнено 1 правило</string>
+        <key>few</key>
+        <string>Увімкнено %d правила</string>
+        <key>many</key>
+        <string>Увімкнено %d правил</string>
+        <key>other</key>
+        <string>Увімкнено %d правил</string>
+      </dict>
+    </dict>
+    <key>safari_filters_format</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@filters@</string>
+      <key>filters</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Увімкнено 1 фільтр</string>
+        <key>few</key>
+        <string>Увімкнено %d фільтри</string>
+        <key>many</key>
+        <string>Увімкнено %d фільтрів</string>
+        <key>other</key>
+        <string>Увімкнено %d фільтрів</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Безкоштовний повний доступ на 1 день</string>
+        <key>few</key>
+        <string>Безкоштовний повний доступ на %d дні</string>
+        <key>many</key>
+        <string>Безкоштовний повний доступ на %d днів</string>
+        <key>other</key>
+        <string>Безкоштовний повний доступ на %d днів</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Безкоштовний повний доступ на 1 тиждень</string>
+        <key>few</key>
+        <string>Безкоштовний повний доступ на %d тижні</string>
+        <key>many</key>
+        <string>Безкоштовний повний доступ на %d тижнів</string>
+        <key>other</key>
+        <string>Безкоштовний повний доступ на %d тижнів</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Безкоштовний повний доступ на 1 місяць</string>
+        <key>few</key>
+        <string>Безкоштовний повний доступ на %d місяці</string>
+        <key>many</key>
+        <string>Безкоштовний повний доступ на %d місяців</string>
+        <key>other</key>
+        <string>Безкоштовний повний доступ на %d місяців</string>
+      </dict>
+    </dict>
+    <key>getPro_full_access_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Безкоштовний повний доступ на 1 рік</string>
+        <key>few</key>
+        <string>Безкоштовний повний доступ на %d роки</string>
+        <key>many</key>
+        <string>Безкоштовний повний доступ на %d років</string>
+        <key>other</key>
+        <string>Безкоштовний повний доступ на %d років</string>
+      </dict>
+    </dict>
     <key>getPro_screen_days</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>

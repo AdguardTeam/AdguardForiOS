@@ -46,7 +46,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Prueba gratis";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
@@ -127,6 +127,9 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
 
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Ingrese aquí los nombres de dominio separados por saltos de línea. AdGuard permitirá todas las conexiones a estos dominios.";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Actualizando...";
 
@@ -141,6 +144,9 @@
 
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "ejemplo.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Nombre de tu Wi-Fi";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Regla: ";
@@ -376,6 +382,21 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Token 2FA no válido";
 
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Excepciones de Wi-Fi";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "La protección del sistema no funcionará para las redes Wi-Fi que se enumeran abajo";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Añadir excepción";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filtrar Wi-Fi";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Protección del sistema mientras está en Wi-Fi";
+
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Lista blanca";
 
@@ -384,6 +405,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Exportar";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Borrar";
 
 /* (ListOfRulesModel) title for Save button */
 "common_save" = "Guardar";
@@ -394,8 +418,26 @@
 /* "Disabled" title */
 "disabled" = "Deshabilitado";
 
+/*(GroupsController) Security description without premium  */
+"security_description" = "Permite bloquear sitios de phishing y otros dominios peligrosos. Disponible para usuarios Premium";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Permite añadir filtros de terceros. Disponible para los usuarios Premium";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Reproductores de audio y vídeo";
+
 /*(LogCategory) comments category*/
 "comments" = "Comentarios";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interacción con el cliente";
+
+/*(LogCategory) essential category*/
+"essential" = "Esencial";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Sitio de análisis";
 
 /*(LogCategory) social media category*/
 "social_media" = "Redes sociales";
@@ -405,6 +447,9 @@
 
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
 
 /*(LogCategory) unknown category*/
 "unknown" = "Desconocido";
@@ -439,17 +484,92 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Todo el tiempo";
 
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Cargando filtros...";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Protección deshabilitada";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Protección habilitada";
 
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Esta información fue cargada desde el servicio whotrackme.com";
+
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Más";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Has intentado añadir un filtro duplicado. Este filtro ya está en la lista.";
+
+/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
+"changes_not_applied" = "Los cambios no se aplicaron";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqueado";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_processed" = "Procesado";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "DNS del sistema";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Usar los servidores DNS predeterminados del sistema proporcionados por su proveedor de servicios de Internet";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Bloquear petición";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Vídeo tutorial";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Detalles del rastreador";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "General";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Categoría";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Nombre";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Sitio web";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Dominio";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Servidor";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Estado";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Hora";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Tamaño";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Transcurrido";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tipo";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Estado del DNS";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Respuesta DNS";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Respuesta original";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Vacío";

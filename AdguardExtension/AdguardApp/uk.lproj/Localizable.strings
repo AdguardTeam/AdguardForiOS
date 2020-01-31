@@ -46,7 +46,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ ГБ";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Спробувати безплатно";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
@@ -182,13 +182,13 @@
 "filter_version_format" = "версія %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Split-Tunnel. Сумісний з \"Personal VPN\" додатками";
+"tunnel_mode_split_description" = "Split-Tunnel. Сумісний з \"Personal VPN\" програмами";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel. Несумісний з іншими VPN-додатками";
+"tunnel_mode_full_description" = "Full-Tunnel. Несумісний з іншими VPN-програмами";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN). Несумісний з іншими VPN-додатками, менш стабільний";
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN). Несумісний з іншими VPN-програмами, менш стабільний";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS - це альтернативний спосіб захисту приватності від різних лічильників, аналітичних систем i шахрайських веб-сайтів";
@@ -326,7 +326,7 @@
 "update_current_state_label" = "Завантаження в Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
-"over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Додаток може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
+"over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Програма може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
 "failed_updating_current_state_label" = "Фільтри не були оновлені";
@@ -335,7 +335,7 @@
 "login_max_computers_exceeded" = "Цю ліцензію було активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з невикористовуваних пристроїв у своєму особистому кабінеті на: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "Перед тим, як використовувати це розширення, %1$@ повинен виконати початкову конфігурацію. Відкрийте основний додаток %2$@, щоб дозволити йому зробити це.";
+"action_extension_no_configuration_message_format" = "Перед тим, як використовувати це розширення, %1$@ повинен виконати початкову конфігурацію. Відкрийте основну програму %2$@, щоб дозволити зробити це.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Зверніть увагу, що блокувальник вмісту вимкнено. Це означає, що реклама не буде фільтруватися незалежно від налаштувань AdGuard. Щоб почати фільтрування, увімкніть блокувальник вмісту для AdGuard в налаштуваннях Safari.";
@@ -477,6 +477,9 @@
 
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Мобільна аналітика";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Хостинг";
@@ -640,11 +643,8 @@
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Назва";
 
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Компанія";
-
 /* (DnsRequestDetailsController) "Website" title for cell */
-"website_title" = "Сайт";
+"website_title" = "Веб-сайт";
 
 /* (DnsRequestDetailsController) "Domain" title for cell */
 "domain_title" = "Домен";
@@ -653,7 +653,7 @@
 "server_title" = "Сервер";
 
 /* (DnsRequestDetailsController) "Status" title for cell */
-"status_title" = "Cтан";
+"status_title" = "Стан";
 
 /* (DnsRequestDetailsController) "Time" title for cell */
 "time_title" = "Час";
@@ -662,13 +662,13 @@
 "size_title" = "Розмір";
 
 /* (DnsRequestDetailsController) "Elapsed" title for cell */
-"elapsed_title" = "Витрачено";
+"elapsed_title" = "Витрачений час";
 
 /* (DnsRequestDetailsController) "Type" title for cell */
 "type_title" = "Тип";
 
 /* (DnsRequestDetailsController) "DNS status" title for cell */
-"dns_status_title" = "Статус DNS";
+"dns_status_title" = "Стан DNS";
 
 /* (DnsRequestDetailsController) "DNS upstream" title for cell */
 "dns_upstream_title" = "DNS upstream";
@@ -676,14 +676,8 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS-відповідь";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Відповідні фільтри";
-
-/* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Відповідні правила";
-
 /* (DnsRequestDetailsController) "Original answer" title for cell */
-"original_answer_title" = "Первинна відповідь";
+"original_answer_title" = "Оригінальна відповідь";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Порожньо";

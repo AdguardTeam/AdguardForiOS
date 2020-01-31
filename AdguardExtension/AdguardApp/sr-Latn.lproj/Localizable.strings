@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ Gb";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Isprobaj besplatno";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Probajte besplatno";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Bela lista";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Početna stranica:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Izbriši filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Jeste li sigurni da želite da izbrišete ovaj filter?";
+
 /* (AboutController) current app version string */
 "about_version" = "Verzija";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, sistemsku zaštitu, okruženje i postavke autorizacije, biće vraćene na podrazumevane vrednosti. Ova radnja se ne može opozvati. Želite li da nastavite?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Resetuj dnevnik aktivnosti";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Svi zapisi sa aktivnostima će biti izbrisani!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 časa";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Opšte";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtriranje";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Ime";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Kompanija";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Sajt";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS odgovor";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Filteri poklapanja";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Filter poklapanja";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Pravila poklapanja";
+"matched_rule_title" = "Pravilo poklapanja";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Izvorni odgovor";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Pravilo nije pronađeno";

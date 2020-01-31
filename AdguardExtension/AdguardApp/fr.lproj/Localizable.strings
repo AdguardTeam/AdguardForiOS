@@ -46,8 +46,11 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Essai gratuit";
+
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Essai gratuit";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Liste Blanche";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Page d'accueil :";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Supprimer filtre";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Voulez-vous vraiment supprimer ce filtre ?";
+
 /* (AboutController) current app version string */
 "about_version" = "Version";
 
@@ -517,6 +526,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Tous les paramètres, y compris les règles d'utilisation, la protection du système, l'interface et les paramètres d'autorisation, seront réinitialisés. Cette opération ne peut pas être annulée. Réinitialiser les paramètres ?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Réinitialiser le journal d'activité";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Toutes les opérations journalisées seront supprimées !";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 heures";
 
@@ -640,6 +655,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Paramètres généraux";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtrage";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -648,9 +666,6 @@
 
 /* (DnsRequestDetailsController) "Name" title for cell */
 "name_title" = "Nom";
-
-/* (DnsRequestDetailsController) "Company" title for cell */
-"company_title" = "Société";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Site Web";
@@ -685,14 +700,17 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "Réponse DNS";
 
-/* (DnsRequestDetailsController) "Matched filters" title for cell */
-"matched_filters_title" = "Filtres correspondants";
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Filtre correspondant";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rules_title" = "Règles correspondantes";
+"matched_rule_title" = "Règle correspondante";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Réponse originelle";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vide";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Aucune règle trouvée";

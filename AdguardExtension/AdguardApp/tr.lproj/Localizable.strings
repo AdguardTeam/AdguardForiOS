@@ -34,7 +34,7 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Değişiklikleri uygula...";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Ücretsiz deneyin";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */

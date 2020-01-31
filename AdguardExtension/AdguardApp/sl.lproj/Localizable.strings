@@ -4,9 +4,6 @@
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Pravil ni mogoče pretvoriti. Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
-/* (AEService) Service errors descriptions */
-"json_converting_error" = "Ni mogoče inicializirati Pretvornika v format JSON.";
-
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Prekliči";
 
@@ -46,7 +43,7 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ Gb";
 
-/* (MainPageController) Text for "try for free" button */
+/* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Poskusite brezplačno";
 
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
@@ -484,6 +481,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Analitika mobilnika";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Gostovanje";
 
@@ -640,5 +640,47 @@
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
-/* (DnsRequestDetailsController) - empty dns answer description */
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategorija";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Ime";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Spletna stran";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domena";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Strežnik";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Stanje";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Čas";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Velikost";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Preteklo";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Vrsta";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Stanje DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS Upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Odgovor DNS";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Izvirni odgovor";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";

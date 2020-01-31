@@ -4,6 +4,9 @@
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "UPRAVIŤ";
 
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
+"J13-xW-KiK.normalTitle" = "Skopírované";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "ZRUŠIŤ";
 
