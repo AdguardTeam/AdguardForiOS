@@ -82,7 +82,6 @@ class NewDnsServerController: BottomAlertController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -106,6 +105,8 @@ class NewDnsServerController: BottomAlertController {
     
     private func checkUpstream(success:@escaping ()->Void) {
         
+        addButton?.isEnabled = false
+        addButton?.startIndicator()
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
         
@@ -124,8 +125,11 @@ class NewDnsServerController: BottomAlertController {
             
             DispatchQueue.main.async {
                 
+                self.addButton?.isEnabled = true
+                self.addButton?.stopIndicator()
                 self.saveButton?.isEnabled = true
                 self.saveButton?.stopIndicator()
+                
                 if error == nil {
                     success()
                 }
@@ -150,6 +154,7 @@ class NewDnsServerController: BottomAlertController {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
+        addButton?.indicatorStyle = theme.indicatorStyle
         saveButton?.indicatorStyle = theme.indicatorStyle
         for separator in separators {
             separator.backgroundColor = theme.separatorColor
