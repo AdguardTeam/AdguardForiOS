@@ -19,7 +19,6 @@
 import UIKit
 
 protocol LogCellModelProtocol {
-    var isUserCell: Bool { get }
     var isDataCell: Bool { get }
     
     var copiedString: String? { get }
@@ -35,11 +34,9 @@ protocol LogCellModelProtocol {
     
     // Services
     var theme: ThemeServiceProtocol? { get }
-    var configuration: ConfigurationServiceProtocol? { get }
 }
 
 class LogCellModel: LogCellModelProtocol {
-    var isUserCell: Bool
     var isDataCell: Bool
     
     var copiedString: String?
@@ -53,10 +50,8 @@ class LogCellModel: LogCellModelProtocol {
     var bytesReceived: String?
     
     var theme: ThemeServiceProtocol?
-    var configuration: ConfigurationServiceProtocol?
     
-    init(isUserCell: Bool = true, isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil, configuration: ConfigurationServiceProtocol? = nil) {
-        self.isUserCell = isUserCell
+    init(isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil) {
         self.isDataCell = isDataCell
         self.copiedString = copiedString
         self.title = title
@@ -66,7 +61,6 @@ class LogCellModel: LogCellModelProtocol {
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
         self.theme = theme
-        self.configuration = configuration
     }
 }
 
@@ -149,19 +143,8 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     // MARK: -  private methods
     
     private func updateModel(_ model: LogCellModelProtocol?) {
-        guard let model = model else {
-            hideSeparator()
-            isHidden = true
-            return
-        }
-        
-        let developerMode = model.configuration?.developerMode ?? false
-        if !developerMode && !model.isUserCell {
-            hideSeparator()
-            isHidden = true
-            return
-        }
-        
+        guard let model = model else { return }
+                
         // Force hide copied label
         titleLabel.isHidden = false
         copiedLabel.isHidden = true
