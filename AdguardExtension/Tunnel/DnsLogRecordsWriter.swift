@@ -46,8 +46,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         self.dnsStatisticsService = DnsStatisticsService(resources: resources)
         self.dnsLogService = dnsLogService
         
-        
-        
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
         nextStatisticsSaveTime = Date().timeIntervalSince1970 + dnsStatisticsService.minimumStatisticSaveTime
         

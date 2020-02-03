@@ -73,6 +73,12 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
         updateTheme()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model?.obtainRecords()
+        tableView.reloadData()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return theme.statusbarStyle()
     }
