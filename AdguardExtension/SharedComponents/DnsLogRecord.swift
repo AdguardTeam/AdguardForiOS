@@ -22,7 +22,7 @@ import Foundation
 enum DnsLogRecordStatus: Int {
     typealias RawValue = Int
 
-    case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelisted 
+    case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelistedByUserFilter, whitelistedByOtherFilter
 }
 
 @objc(DnsLogRecordUserStatus)

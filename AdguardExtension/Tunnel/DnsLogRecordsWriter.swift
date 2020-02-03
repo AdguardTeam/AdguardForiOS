@@ -20,6 +20,7 @@ import Foundation
 
 class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
+    var whitelistFilterId: NSNumber?
     var userFilterId: NSNumber?
     var otherFilterIds: [NSNumber]?
     
@@ -70,7 +71,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         var status: DnsLogRecordStatus
         
         if event.whitelist {
-            status = .whitelisted
+            status = event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
         }
         else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
             status = .blacklistedByUserFilter

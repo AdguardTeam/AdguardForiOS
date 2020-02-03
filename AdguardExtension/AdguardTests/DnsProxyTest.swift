@@ -3,6 +3,8 @@ import XCTest
 
 class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
     
+    var whitelistFilterId: NSNumber?
+    
     var userFilterId: NSNumber?
     
     var otherFilterIds: [NSNumber]?
