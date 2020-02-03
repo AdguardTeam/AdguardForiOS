@@ -97,14 +97,14 @@ class GetProController: UIViewController {
         UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
     }
     
-    @IBAction func logoutAction(_ sender: Any) {
+    @IBAction func logoutAction(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: ACLocalizedString("common_action_yes", nil), style: .default) {
+        let okAction = UIAlertAction(title: ACLocalizedString("common_action_yes", nil), style: .destructive) {
             [weak self] (action) in
             if self?.purchaseService.logout() ?? false {
                 DispatchQueue.main.async {
@@ -113,6 +113,10 @@ class GetProController: UIViewController {
             }
         }
         alert.addAction(okAction)
+        
+        if let presenter = alert.popoverPresentationController{
+            presenter.barButtonItem = sender
+        }
         
         self.present(alert, animated: true, completion: nil)
     }

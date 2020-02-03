@@ -72,8 +72,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
-    @IBAction func deleteAction(_ sender: Any) {
-        showAlert()
+    @IBAction func deleteAction(_ sender: UIButton) {
+        showAlert(sender)
     }
     
     private func updateTheme () {
@@ -111,7 +111,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
-    private func showAlert(){
+    private func showAlert(_ sender: UIButton){
         let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .actionSheet)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
@@ -136,6 +136,12 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
         
         alert.addAction(cancelAction)
+        
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = sender
+            presenter.sourceRect = sender.bounds
+        }
         
         present(alert, animated: true)
     }

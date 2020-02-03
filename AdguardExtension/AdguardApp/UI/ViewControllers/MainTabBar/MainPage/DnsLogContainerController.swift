@@ -70,7 +70,7 @@ class DnsLogContainerController: UIViewController {
     // MARK: - Actions
     
     @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-        showAlert()
+        showAlert(sender)
     }
     
     // MARK: - Private methods
@@ -80,7 +80,7 @@ class DnsLogContainerController: UIViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
-    private func showAlert(){
+    private func showAlert(_ sender: UIBarButtonItem){
         let alert = UIAlertController(title: String.localizedString("reset_activity_title"), message: String.localizedString("reset_activity_message"), preferredStyle: .actionSheet)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
@@ -95,6 +95,10 @@ class DnsLogContainerController: UIViewController {
         }
         
         alert.addAction(cancelAction)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.barButtonItem = sender
+        }
         
         present(alert, animated: true)
     }

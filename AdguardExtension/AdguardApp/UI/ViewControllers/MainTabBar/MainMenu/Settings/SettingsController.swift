@@ -103,7 +103,7 @@ class SettingsController: UITableViewController {
             developerModeSwitch.setOn(!developerModeSwitch!.isOn, animated: true)
             developerModeAction(developerModeSwitch)
         case (otherSection, resetStatisticsRow):
-            resetStatistics()
+            resetStatistics(indexPath)
         default:
             break
         }
@@ -157,10 +157,14 @@ class SettingsController: UITableViewController {
         
         alert.addAction(cancelAction)
 
+        if let presenter = alert.popoverPresentationController {
+            presenter.barButtonItem = sender
+        }
+        
         present(alert, animated: true)
     }
     
-    private func resetStatistics(){
+    private func resetStatistics(_ indexPath: IndexPath){
         let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .actionSheet)
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
@@ -175,6 +179,11 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
+        
+        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
+            presenter.sourceView = cell
+            presenter.sourceRect = cell.bounds
+        }
 
         self.present(alert, animated: true)
     }

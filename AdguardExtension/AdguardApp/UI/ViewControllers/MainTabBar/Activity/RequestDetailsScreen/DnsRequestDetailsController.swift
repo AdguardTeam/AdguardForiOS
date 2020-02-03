@@ -184,7 +184,7 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func whoTracksMeInfo(_ sender: UIButton) {
-        showAlert()
+        showAlert(sender)
     }
     
     // MARK: - Public function
@@ -265,7 +265,7 @@ class DnsRequestDetailsController: UITableViewController {
     /**
      Creates alert for additional info about whoTracksMe json
      */
-    private func showAlert() {
+    private func showAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
@@ -276,6 +276,11 @@ class DnsRequestDetailsController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = sender
+            presenter.sourceRect = sender.bounds
+        }
         
         present(alert, animated: true, completion: nil)
     }
