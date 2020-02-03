@@ -66,6 +66,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         
         var filters = [NSNumber:String]()
         var userFilterId: Int?
+        var whitelistFilterId: Int?
         var otherFilterIds = [Int]()
         
         for filter in filterFiles {
@@ -73,10 +74,15 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String
             let userFilter = (filter["user_filter"] as? Bool) ?? false
+            let whitelist = (filter["whitelist"] as? Bool) ?? false
             
             if userFilter {
                 userFilterId = identifier
-            } else {
+            }
+            else if whitelist {
+                whitelistFilterId = identifier
+            }
+            else {
                 otherFilterIds.append(identifier)
             }
             
@@ -86,6 +92,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         
         dnsRecordsWriter.userFilterId = userFilterId as NSNumber?
+        dnsRecordsWriter.whitelistFilterId = whitelistFilterId as NSNumber?
         dnsRecordsWriter.otherFilterIds = otherFilterIds as [NSNumber]
         
         guard let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeoutMs: 3000, serverIp: nil) else {

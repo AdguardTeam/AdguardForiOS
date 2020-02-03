@@ -224,7 +224,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             // todo: do not read all rules to get counter
             let systemWhiteListEnabled = resources.systemWhitelistEnabled
             if whitelistRules.count > 0 && systemWhiteListEnabled {
-                json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId)])
+                json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId), "whitelist": true])
             }
             
             guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) else {

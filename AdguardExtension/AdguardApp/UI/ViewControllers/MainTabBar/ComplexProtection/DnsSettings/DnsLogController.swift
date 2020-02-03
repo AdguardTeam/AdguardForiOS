@@ -96,8 +96,9 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
             type = .tracked
         case (.processed, _):
             type = .normal
-        case (.whitelisted, _):
+        case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
+            
         case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
             type = .blocked
         }

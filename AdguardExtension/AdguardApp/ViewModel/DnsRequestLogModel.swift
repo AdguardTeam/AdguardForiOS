@@ -62,7 +62,7 @@ extension DnsLogRecordStatus {
         switch self {
         case .processed:
             return String.localizedString("dns_request_status_processed")
-        case .whitelisted:
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
             return String.localizedString("dns_request_status_whitelisted")
         case .blacklistedByOtherFilter, .blacklistedByUserFilter:
             return String.localizedString("dns_request_status_blocked")
@@ -73,7 +73,7 @@ extension DnsLogRecordStatus {
         switch self {
         case .processed:
             return UIColor(hexString: "#eb9300")
-        case .whitelisted:
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
             return UIColor(hexString: "#67b279")
         case .blacklistedByOtherFilter, .blacklistedByUserFilter:
             return UIColor(hexString: "#df3812")
@@ -103,7 +103,7 @@ enum DnsLogButtonType {
     case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
 }
  
-extension DnsLogRecord
+extension DnsLogRecord 
 {
     func getButtons() -> [DnsLogButtonType] {
         switch (status, userStatus) {
@@ -119,8 +119,11 @@ extension DnsLogRecord
             return [.removeRuleFromUserFilter]
         case (.blacklistedByOtherFilter, _):
             return [.addDomainToWhitelist]
-        case (.whitelisted, _):
+        case (.whitelistedByUserFilter, _):
             return [.removeDomainFromWhitelist]
+        case (.whitelistedByOtherFilter, _):
+            return [] // we can not remove a rule from filter and can not block it by user blacklist,
+                      // because whitelist rules have higher priority
         case (.processed, _):
             return [.addDomainToWhitelist, .addRuleToUserFlter]
         }
