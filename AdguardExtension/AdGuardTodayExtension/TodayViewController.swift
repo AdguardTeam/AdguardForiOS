@@ -93,8 +93,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
         let statistics = dnsStatisticsService.readStatistics()
               
@@ -102,9 +100,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         changeTextForButton(statistics: statistics, keyPath: AEDefaultsBlockedRequests)
     }
     
-    deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addStatisticsObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeStatisticsObservers()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -395,6 +398,16 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
             blockedNumber = blocked + number
             dataSavedLabel.text = String.dataUnitsConverter(kBytesSaved)
         }
+    }
+    
+    private func addStatisticsObservers() {
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+    }
+    
+    private func removeStatisticsObservers() {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
     }
 }
 
