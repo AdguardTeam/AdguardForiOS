@@ -28,11 +28,15 @@ class DnsLogContainerController: UIViewController {
     
     @IBOutlet weak var clearButton: UIBarButtonItem!
     
+    @IBOutlet weak var systemProtectionEnablerContainerView: UIView!
     @IBOutlet weak var getProContainerView: UIView!
     @IBOutlet weak var dnsLogContainerView: UIView!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    
+    private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
     private var delegate: DnsLogContainerControllerDelegate?
     private var themeNotificationToken: NotificationToken?
@@ -42,26 +46,31 @@ class DnsLogContainerController: UIViewController {
     
     // MARK: - View Controller life cycle
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        model.obtainRecords()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateTheme()
-        observeProStatus()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeProStatus()
-        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setCurrentContainerView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsLogSegueId {
             if let vc = segue.destination as? DnsLogController {
                 delegate = vc
+                vc.model = model
             }
         }
     }
@@ -103,15 +112,32 @@ class DnsLogContainerController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func observeProStatus(){
+    private func setCurrentContainerView(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             let proStatus = self.configuration.proStatus
             
-            self.navigationItem.rightBarButtonItems = proStatus ? [self.clearButton] : []
-            
-            self.getProContainerView.isHidden = proStatus
-            self.dnsLogContainerView.isHidden = !proStatus
+            if proStatus {
+                self.complexProtection.getSystemProtectionState { (systemProtectionEnabled) in
+                    let recordsAreEmpty = self.model.records.isEmpty
+                    if recordsAreEmpty && !systemProtectionEnabled {
+                        self.navigationItem.rightBarButtonItems = []
+                        self.getProContainerView.isHidden = true
+                        self.systemProtectionEnablerContainerView.isHidden = false
+                        self.dnsLogContainerView.isHidden = true
+                    } else {
+                        self.getProContainerView.isHidden = true
+                        self.systemProtectionEnablerContainerView.isHidden = true
+                        self.dnsLogContainerView.isHidden = false
+                        self.navigationItem.rightBarButtonItems = [self.clearButton]
+                    }
+                }
+            } else {
+                self.navigationItem.rightBarButtonItems = []
+                self.getProContainerView.isHidden = false
+                self.systemProtectionEnablerContainerView.isHidden = true
+                self.dnsLogContainerView.isHidden = true
+            }
         }
     }
 }

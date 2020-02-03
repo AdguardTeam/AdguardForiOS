@@ -42,6 +42,9 @@ protocol ComplexProtectionServiceProtocol {
     // Checks state of complex protection
     func checkState(completion: @escaping (Bool)->() )
     
+    // Checks system protection state
+    func getSystemProtectionState(completion:@escaping (Bool)->() )
+    
     // Checks states of all protection modules
     func getAllStates(completion: @escaping (_ safari: Bool, _ system: Bool, _ complex: Bool)->())
 }
@@ -174,14 +177,11 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             switchSystemProtection(state: enabled, for: VC)
         }
     }
-    
-    
-    // MARK: - Private methods
-    
+        
     /**
      Gets current System protection state and returns it in completion
      */
-    private func getSystemProtectionState(completion:@escaping (Bool)->() ) {
+    func getSystemProtectionState(completion:@escaping (Bool)->() ) {
         NETunnelProviderManager.loadAllFromPreferences {(managers, error) in
             if error != nil {
                 completion(false)
@@ -194,6 +194,8 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             }
         }
     }
+    
+    // MARK: - Private methods
     
     /**
      When turning off complex protection state it is needed to save
