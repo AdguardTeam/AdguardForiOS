@@ -90,7 +90,6 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     
     @IBOutlet var dataViews: [UIView]!
     
-    
     var model: LogCellModelProtocol? {
         didSet{
             updateModel(model)
@@ -162,6 +161,12 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
             isHidden = true
             return
         }
+        
+        // Force hide copied label
+        titleLabel.isHidden = false
+        copiedLabel.isHidden = true
+        titleLabel.alpha = 1.0
+        copiedLabel.alpha = 0.0
         
         showSeparator()
         updateTheme(model.theme)
