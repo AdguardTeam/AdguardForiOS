@@ -18,11 +18,38 @@
 
 import Foundation
 
+enum DynamicStatisticSaveTime: Int {
+    typealias RawValue = Int
+    
+    case ten_seconds = 10
+    case thirty_seconds = 30
+    case one_minute = 60
+    case five_minutes = 300
+    case ten_minutes = 600
+    
+    func getNextCase() -> DynamicStatisticSaveTime {
+        switch self {
+        case .ten_seconds:
+            return .thirty_seconds
+        case .thirty_seconds:
+            return .one_minute
+        case .one_minute:
+            return .five_minutes
+        case .five_minutes:
+            return .ten_minutes
+        case .ten_minutes:
+            return .ten_minutes
+        }
+    }
+}
+
 @objc enum DnsStatisticsType: Int {
     case all, blocked
 }
 
 protocol DnsStatisticsServiceProtocol {
+    var minimumStatisticSaveTime: Double { get }
+    
     func writeStatistics(_ statistics: [DnsStatisticsType: RequestsStatisticsBlock])
     
     func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]]
@@ -31,6 +58,20 @@ protocol DnsStatisticsServiceProtocol {
 }
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
+    
+    var minimumStatisticSaveTime: Double {
+        return Double(statisticSaveTime.rawValue)
+    }
+    
+    private var statisticSaveTime: DynamicStatisticSaveTime {
+        get {
+            let statisticsSaveTime = resources.sharedDefaults().integer(forKey: StatisticsSaveTime)
+            return DynamicStatisticSaveTime(rawValue: statisticsSaveTime) ?? .ten_seconds
+        }
+        set {
+            resources.sharedDefaults().set(newValue.rawValue, forKey: StatisticsSaveTime)
+        }
+    }
     
     private let resources: AESharedResourcesProtocol
     
@@ -108,6 +149,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
             let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
             let success = table?.delete(withKeys: nil, inRowObject: nil)
             if success ?? false {
+                self?.statisticSaveTime = .ten_seconds
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
             }
@@ -132,6 +174,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
             let statistics = readStatistics()
             
             if statistics.count > statisticsRecordsLimit {
+                statisticSaveTime = statisticSaveTime.getNextCase()
                 rearrangeDb(statistics)
             }
         }

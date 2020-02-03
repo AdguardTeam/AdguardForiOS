@@ -132,6 +132,8 @@ class ChartViewModel: ChartViewModelProtocol {
     
     private let dateFormatter = DateFormatter()
     
+    private var timer: Timer?
+    
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
@@ -147,6 +149,11 @@ class ChartViewModel: ChartViewModelProtocol {
         blockedRequests = statistics[.blocked] ?? []
         
         changeChart()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
+            self?.obtainStatistics()
+            timer.invalidate()
+        })
     }
     
     // MARK: - private methods

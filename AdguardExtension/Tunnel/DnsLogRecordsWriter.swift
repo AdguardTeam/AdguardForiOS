@@ -35,7 +35,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     
     private let saveRecordsMinimumTime = 3.0 // seconds
-    private let saveStatisticsMinimumTime = 60.0*10.0 // seconds - 10 minutes
     private var nextSaveTime: Double
     private var nextStatisticsSaveTime: Double
     
@@ -47,8 +46,10 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         self.dnsStatisticsService = DnsStatisticsService(resources: resources)
         self.dnsLogService = dnsLogService
         
+        
+        
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
-        nextStatisticsSaveTime = Date().timeIntervalSince1970 + saveStatisticsMinimumTime
+        nextStatisticsSaveTime = Date().timeIntervalSince1970 + dnsStatisticsService.minimumStatisticSaveTime
         
         super.init()
         
@@ -164,7 +165,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         dnsStatisticsService.writeStatistics(statistics)
         statistics.removeAll()
         reinitializeStatistics()
-        nextStatisticsSaveTime = now + saveStatisticsMinimumTime
+        nextStatisticsSaveTime = now + dnsStatisticsService.minimumStatisticSaveTime
     }
     
     private func loadStatisticsHead() {
