@@ -621,6 +621,7 @@
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E844C3623AA7270009EA1AE /* GetProPageController.swift */; };
+		7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */; };
 		7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */; };
 		7E8FBC2523E2E644005F36C4 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E8FBC2323E2E644005F36C4 /* adguard.json */; };
 		7E8FBC2723E33A70005F36C4 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E8FBC2623E33A70005F36C4 /* whotracksme.json */; };
@@ -1933,6 +1934,7 @@
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
+		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7E8FBC2323E2E644005F36C4 /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
 		7E8FBC2623E33A70005F36C4 /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
@@ -3872,6 +3874,7 @@
 				7EB638DF23462E5600260A3C /* DnsContainerController.swift */,
 				7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */,
 				7E15B65C234358C20048E63F /* DnsFiltersController.swift */,
+				7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */,
 			);
 			path = DnsSettings;
 			sourceTree = "<group>";
@@ -5671,6 +5674,7 @@
 				7E3064DF23B4B7D000D12AE9 /* GradientButton.swift in Sources */,
 				65F398191B7B684700ABCD39 /* AppDelegate.m in Sources */,
 				D031A101219EFC99002C17D9 /* CLIColor.m in Sources */,
+				7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */,
 				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
 				7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,

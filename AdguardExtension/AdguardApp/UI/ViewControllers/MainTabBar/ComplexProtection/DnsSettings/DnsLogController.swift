@@ -40,7 +40,10 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
+    
+    // MARK: - public fields
+    
+    var model: DnsRequestLogViewModel?
     
     // MARK: - private fields
     
@@ -52,17 +55,16 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        model.delegate = self
+        model?.delegate = self
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        model.recordsObserver = { [weak self] (records) in
+        model?.recordsObserver = { [weak self] (records) in
             self?.tableView.reloadData()
             self?.refreshControl?.endRefreshing()
         }
-        model.obtainRecords()
         
         tableView.tableHeaderView = searchView
         
@@ -78,7 +80,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DnsRequestCell") as! DnsRequestCell
-        let record = model.records[indexPath.row]
+        guard let record = model?.records[indexPath.row] else { return UITableViewCell() }
                 
         let timeString = record.logRecord.time()
         let name = record.category.name
@@ -110,12 +112,14 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.records.count
+        return model?.records.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRecord = model.records[indexPath.row]
-        performSegue(withIdentifier: "showDnsContainer", sender: self)
+        if let record = model?.records[indexPath.row] {
+            selectedRecord = record
+            performSegue(withIdentifier: "showDnsContainer", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -126,7 +130,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - searchbar delegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        model.searchString = searchText
+        model?.searchString = searchText
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -144,7 +148,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     // MARK: - DnsLogContainerControllerDelegate method
     
     func clearButtonTapped() {
-        model.clearRecords()
+        model?.clearRecords()
     }
     
     // MARK: - private methods
@@ -162,7 +166,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
     }
     
     @objc private func refresh() {
-        model.obtainRecords()
+        model?.obtainRecords()
     }
     
     private func setupRecordCell(cell: UITableViewCell, type: BlockedRecordType, dnsStatus: String){
