@@ -49,6 +49,9 @@
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Isprobajte besplatno";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Isprobajte besplatno";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Popis dopuštenih";
 
@@ -212,7 +215,7 @@
 "open_dns_familyshield_description" = "OpenDNS poslužitelj s blokiranjem sadržaja za odrasle";
 
 /* Quad9 DNS server description */
-"quad_nine_dns_description" = "Besplatna, alternativna DNS usluga s zaštitom od krađe identiteta i špijunskog softvera";
+"quad_nine_dns_description" = "Besplatna, alternativna DNS usluga s zaštitom od krađe identiteta i špijunskih programa";
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Besplatna DNS usluga od Cloudflarea";
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Početna stranica:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Ukloni filtar";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Jeste li sigurni da želite ukloniti ovaj filtar?";
+
 /* (AboutController) current app version string */
 "about_version" = "Verzija";
 
@@ -484,6 +493,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Analitika mobitela";
+
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
 
@@ -513,6 +525,12 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, zaštitu sustava, postavke sučelja i autorizacije će biti poništene. Ova radnje se nemože poništiti. Poništi postavke?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Poništi zapisnik aktivnosti";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Svi zapisi aktivnosti će biti uklonjeni!";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 sata";
@@ -618,3 +636,87 @@
 
 /* (BlockRequestController) Whitelist request title */
 "whitelist_request" = "Zahtjev popisa dopuštenih";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video upute";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Unijeli ste nevažeći upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Sistemski popis neželjenih";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Sistemski popis dopuštenih";
+
+/* (DnsRequestDetailsController) "Tracker details" title for section header */
+"tracker_details_header" = "Detalji o pratitelju";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Općenito";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtriranje";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategorija";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Naziv";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Web stranica";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domena";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Poslužitelj";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Vrijeme";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Veličina";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Proteklo";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Vrsta";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS status";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS odgovor";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Podudarajući filtar";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Podudarajuće pravilo";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Originalni odgovor";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Prazno";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Nije pronađeno pravilo";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Zaštita sustava je onemogućena";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Omogući";

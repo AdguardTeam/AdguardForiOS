@@ -46,6 +46,9 @@
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Poskusite brezplačno";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Poskusite brezplačno";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Seznam dovoljenih";
 
@@ -370,6 +373,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Domača stran:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Izbriši filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Ali ste prepričani, da želite izbrisati ta filter?";
+
 /* (AboutController) current app version string */
 "about_version" = "Različica";
 
@@ -514,6 +523,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Vse nastavitve, vključno z uporabniškimi pravili, zaščito sistema, nastavitvami vmesnika in nastavitve pooblastil, bodo ponastavljene. Tega postopka ni mogoče razveljaviti. Ponastavim nastavitve?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Ponastavi dnevnik dejavnosti";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Vsi zapisi dejavnosti bodo izbrisani!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 ur";
 
@@ -637,6 +652,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Splošno";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtriranje";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -679,8 +697,23 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "Odgovor DNS";
 
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Ujemajoč se filter";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Ujemajoče se pravilo";
+
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Izvirni odgovor";
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Ni najdenega pravila";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Sistemska zaščita je onemogočena";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Omogoči";

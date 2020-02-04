@@ -714,3 +714,9 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Правило не найдено";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Системная защита отключена";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Включить";

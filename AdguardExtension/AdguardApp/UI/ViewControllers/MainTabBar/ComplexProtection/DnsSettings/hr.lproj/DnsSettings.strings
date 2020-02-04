@@ -56,7 +56,7 @@
 "VR9-fh-ogr.title" = "Mrežne postavke";
 
 /* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Popis dopuštenih sustava";
+"Wml-J6-ced.text" = "Sistemski popis dopuštenih";
 
 /* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
 "ZCR-6u-jrf.text" = "Preporučeni pružatelji DNS-a";
@@ -92,7 +92,7 @@
 "iaJ-tk-ohH.text" = "DNS (Domain Name Server) je internetski ekvivalent telefonskom imeniku. Održava direktorij naziva domena i prevodi ih u IP adrese.";
 
 /* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Popis neželjenih sustava";
+"ihd-7R-RfE.text" = "Sistemski popis neželjenih";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "PONIŠTI";

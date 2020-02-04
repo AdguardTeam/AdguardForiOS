@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "Blokiraj element na ovoj stranici";
+
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "Kontaktirajte podršku";
+
+/* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
+"Znm-Yl-fWN.text" = "Pritisnite ovdje kako biste pomoću alata uklonili propuštene oglase i sve druge elemente koje ne želite vidjeti";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "Omogući na ovoj stranici";
+
+/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "ZATVORI";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "Prijavi problem na ovoj web stranici";

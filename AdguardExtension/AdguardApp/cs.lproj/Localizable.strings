@@ -714,3 +714,9 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Pravidlo nenalezeno";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Ochrana systému je vypnuta";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Zapnout";

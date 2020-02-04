@@ -49,6 +49,9 @@
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Prøv gratis";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Prøv gratis";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Whitelist";
 
@@ -373,6 +376,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Hjemmeside:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Slet filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Er du sikker på, at du vil slette dette filter?";
+
 /* (AboutController) current app version string */
 "about_version" = "Version";
 
@@ -516,6 +525,12 @@
 
 /* confirm reset lert text */
 "confirm_reset_text" = "Alle indstillinger, inklusiv brugerregler, systembeskyttelse, interface og autorisationsindstillinger vil blive nulstillet. Denne handling kan ikke fortrydes. Nulstil indstillingerne?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Nulstil aktivitetslog";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Alle aktivitetsregistreringer vil blive slettet!";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 timer";
@@ -699,3 +714,9 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Ingen regel fundet";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Systembeskyttelse er deaktiveret";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Aktiver";
