@@ -568,7 +568,7 @@
                                         <color key="backgroundColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="4Xm-EO-X6b"/>
-                                            <constraint firstAttribute="width" constant="90" id="cue-41-mvi"/>
+                                            <constraint firstAttribute="width" constant="100" id="cue-41-mvi"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
