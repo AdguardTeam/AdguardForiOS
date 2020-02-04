@@ -379,6 +379,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         checkProtectionStates()
     }
     
+    func proStatusEnableFailure() {
+        performSegue(withIdentifier: getProSegueId, sender: self)
+    }
     
     // MARK: - Complex protection delegate method
     
@@ -388,11 +391,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self.checkProtectionStates()
         }
     }
-    
-    func proStatusHandler() {
-        performSegue(withIdentifier: getProSegueId, sender: self)
-    }
-    
     
     // MARK: - ChartPointsChangedDelegate method
     

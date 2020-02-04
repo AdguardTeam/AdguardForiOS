@@ -139,6 +139,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         }
     }
     
+    func proStatusEnableFailure() {}
+    
     // MARK: - Table view delegate methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

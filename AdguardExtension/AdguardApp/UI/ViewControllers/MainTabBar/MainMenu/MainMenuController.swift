@@ -84,6 +84,8 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
+    func proStatusEnableFailure() {}
+    
     // MARK: - Actions
     @IBAction func contactSupportAction(_ sender: Any) {
         

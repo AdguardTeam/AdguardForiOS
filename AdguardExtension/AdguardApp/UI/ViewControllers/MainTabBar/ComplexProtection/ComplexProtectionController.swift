@@ -165,6 +165,9 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         }
     }
     
+    func proStatusEnableFailure() {
+        performSegue(withIdentifier: showGetProSwgueId, sender: self)
+    }
     
     // MARK: - Table view delegates and dataSource methods
     
@@ -184,7 +187,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
                 systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
                 systemProtectionChanged(systemProtectionSwitch)
             } else {
-                performSegue(withIdentifier: showGetProSwgueId, sender: self)
+                proStatusEnableFailure()
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
