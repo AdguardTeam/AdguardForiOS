@@ -34,6 +34,9 @@
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "免費地試用";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "免費地試用";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "白名單";
 
@@ -86,7 +89,7 @@
 "restore_success_message" = "該購買已被回復！AdGuard for iOS 的高級版已被啟動。";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
-"nothing_to_restore_message" = "無購買以回復";
+"nothing_to_restore_message" = "無要回復的購買";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
 "purchase_success_message" = "該購買已被成功地完成！AdGuard for iOS 的高級版已被啟動。";
@@ -346,6 +349,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "首頁：";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "刪除過濾器";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "您確定您想要刪除該過濾器嗎？";
+
 /* (AboutController) current app version string */
 "about_version" = "版本";
 
@@ -409,6 +418,12 @@
 /*(ListOfRules) Select all title */
 "common_select_all" = "全選";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "重置活動記錄";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "所有的活動記錄將被刪除！";
+
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "正在載入過濾器…";
 
@@ -469,6 +484,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "一般的";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "過濾";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -510,3 +528,9 @@
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "空無的";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "系統防護被禁用";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "啟用";

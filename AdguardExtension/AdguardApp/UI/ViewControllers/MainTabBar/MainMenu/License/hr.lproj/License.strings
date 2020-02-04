@@ -4,8 +4,17 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Kôd iz autentikacijske aplikacije:";
 
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Sigurnosni filtri";
+
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Odjava";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Sve Premium značajke su dostupne";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Postavite svoja pravila";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-pošta:";
@@ -22,14 +31,29 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Prijava";
 
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Blokira krađe identiteta, zločudne programe i kripto krađe";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "PRIJAVA";
 
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Prijava";
 
+/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Zaštita od praćenja na razini cijelog sustava";
+
+/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Zaštita sustava";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Premium je aktiviran";
+
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Oporavak kupovine";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Prilagođeni filtri";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "POTVRDI";

@@ -714,3 +714,9 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "규칙 없음";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "시스템 보호가 비활성화되었습니다";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "활성화";

@@ -714,3 +714,9 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "ルール見つかりません";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "「システム全体でブロック」がオフになっています。";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "オンにする";

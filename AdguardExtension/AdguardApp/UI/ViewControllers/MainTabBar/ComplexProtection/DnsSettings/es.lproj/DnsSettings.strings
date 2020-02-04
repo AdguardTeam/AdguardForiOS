@@ -34,6 +34,9 @@
 /* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
 "Edw-bD-gDt.title" = "Bloqueo de peticiones DNS";
 
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "Configuración de red avanzada";
+
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "ELIGE ESTE SERVIDOR";
 
@@ -52,6 +55,9 @@
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Configuración de red";
 
+/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Lista blanca del sistema";
+
 /* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
 "ZCR-6u-jrf.text" = "Proveedores de DNS recomendados";
 
@@ -66,6 +72,9 @@
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Servidor";
+
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Añadir un servidor DNS personalizado";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Dirección del servidor DNS";
@@ -82,6 +91,9 @@
 /* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
 "iaJ-tk-ohH.text" = "DNS (sistema de nombres de dominio) es el equivalente en Internet de una guía telefónica. Mantiene un directorio de nombres de dominio y los traduce a direcciones IP.";
 
+/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Lista negra del sistema";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCELAR";
 
@@ -96,6 +108,9 @@
 
 /* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "Bloqueo de peticiones DNS";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "Filtros de seguridad, DNS con privacidad, filtros personalizados, etc.";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "Filtros";

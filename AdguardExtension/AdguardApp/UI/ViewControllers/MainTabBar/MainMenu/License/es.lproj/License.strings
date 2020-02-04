@@ -10,6 +10,12 @@
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "Cerrar sesión";
 
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Todas las funciones Premium están disponibles";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Establece tus propias reglas";
+
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Correo electrónico:";
 
@@ -25,14 +31,23 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Inicio de sesión";
 
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Bloquea phishing, estafa y minado de criptomonedas";
+
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "INICIAR SESIÓN";
 
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Inicio de sesión";
 
+/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Protección contra rastreo en todo el sistema";
+
 /* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "Protección del sistema";
+
+/* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Premium está activado";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "Restaurar compra";
