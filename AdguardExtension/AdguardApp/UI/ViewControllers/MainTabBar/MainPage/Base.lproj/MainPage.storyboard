@@ -305,14 +305,14 @@
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="27"/>
                                                                             </constraint>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <variation key="heightClass=regular-widthClass=compact">
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
@@ -385,14 +385,14 @@
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="27"/>
                                                                             </constraint>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <variation key="heightClass=regular-widthClass=compact">
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
@@ -465,14 +465,14 @@
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="27"/>
                                                                             </constraint>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <variation key="heightClass=regular-widthClass=compact">
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>

@@ -133,6 +133,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // We change constraints only for iphone SE - like devices
     private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
+    private let screenIsLessThanIphone6 = UIScreen.main.bounds.width <= 414.0
     
     // Indicates whether filters are updating
     private var updateInProcess = false
@@ -209,6 +210,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidLayoutSubviews()
         if isIphoneSeLike {
             setupConstraintsForIphoneSe()
+        }
+        if screenIsLessThanIphone6 {
+            setupFontsForSmallScreen()
         }
     }
         
@@ -784,5 +788,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexSwitchHeight.constant = 30.0
         
         view.layoutIfNeeded()
+    }
+    
+    private func setupFontsForSmallScreen(){
+        requestsTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        blockedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        dataSavedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
 }
