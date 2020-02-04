@@ -138,6 +138,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // Indicates whether filters are updating
     private var updateInProcess = false
     
+    // Show onboarding only once during app lifecycle
+    private var onboardingWasShown = false
+    
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -185,6 +188,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
+        
+        configuration.checkContentBlockerEnabled()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -240,14 +245,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    func processOnboarding() {        
-        let onboardingShowed = resources.sharedDefaults().bool(forKey: OnboardingShowed)
+    func processOnboarding() {
         let contentBlockersEnabled = configuration.contentBlockerEnabled
         let someContentBlockersEnabled = contentBlockersEnabled?.reduce(false, { (result, state) -> Bool in return result || state.value }) ?? true
-        
-        if !onboardingShowed || !someContentBlockersEnabled {
+
+        if !someContentBlockersEnabled && !onboardingWasShown {
             showOnboarding()
-            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
+            onboardingWasShown = true
         } else {
             ready = true
             callOnready()
@@ -574,8 +578,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
         observations.append(proObservation)
         observations.append(contenBlockerObservation)
-        
-        configuration.checkContentBlockerEnabled()
     }
     
     /**
@@ -688,9 +690,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             showContentBlockersInfo()
         }
         
-        DispatchQueue.main.async {[weak self] in
-            self?.processOnboarding()
-        }
+        processOnboarding()
     }
     
     /**
@@ -755,7 +755,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     private func showOnboarding() {
-        performSegue(withIdentifier: showOnboardingSegueId, sender: self)
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.performSegue(withIdentifier: self.showOnboardingSegueId, sender: self)
+        }
     }
     
     private func callOnready() {
