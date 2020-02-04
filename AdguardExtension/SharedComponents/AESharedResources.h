@@ -287,6 +287,11 @@ extern NSString* _Nonnull OnboardingShowed;
  */
 extern NSString* _Nonnull StatisticsPeriodType;
 
+/**
+ User defaults key for current statistics save intervals
+ */
+extern NSString* _Nonnull StatisticsSaveTime;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
