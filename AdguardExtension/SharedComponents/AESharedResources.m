@@ -90,8 +90,6 @@ NSString* DnsFilterUniqueId = @"DnsFilterUniqueId";
 NSString *SafariProtectionLastState = @"SafariProtectionLastState";
 NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 
-NSString *OnboardingShowed = @"OnboardingShowed";
-
 NSString *StatisticsPeriodType = @"StatisticsPeriodType";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"

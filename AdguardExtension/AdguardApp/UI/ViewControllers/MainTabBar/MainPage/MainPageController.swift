@@ -162,6 +162,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - View Controller life cycle
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configuration.checkContentBlockerEnabled()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -184,6 +189,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
+        
+        processOnboarding()
+        observeContentBlockersState()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -236,14 +244,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    func processOnboarding() {        
-        let onboardingShowed = resources.sharedDefaults().bool(forKey: OnboardingShowed)
+    func processOnboarding() {
         let contentBlockersEnabled = configuration.contentBlockerEnabled
         let someContentBlockersEnabled = contentBlockersEnabled?.reduce(false, { (result, state) -> Bool in return result || state.value }) ?? true
-        
-        if !onboardingShowed || !someContentBlockersEnabled {
+
+        if !someContentBlockersEnabled {
             showOnboarding()
-            resources.sharedDefaults().set(true, forKey: OnboardingShowed)
         } else {
             ready = true
             callOnready()
@@ -572,8 +578,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
         observations.append(proObservation)
         observations.append(contenBlockerObservation)
-        
-        configuration.checkContentBlockerEnabled()
     }
     
     /**
@@ -684,10 +688,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             hideContentBlockersInfo()
         } else {
             showContentBlockersInfo()
-        }
-        
-        DispatchQueue.main.async {[weak self] in
-            self?.processOnboarding()
         }
     }
     
