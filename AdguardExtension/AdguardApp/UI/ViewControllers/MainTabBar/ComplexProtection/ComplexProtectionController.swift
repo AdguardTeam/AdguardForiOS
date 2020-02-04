@@ -165,6 +165,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         }
     }
     
+    func proStatusHandler() {}
     
     // MARK: - Table view delegates and dataSource methods
     

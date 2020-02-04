@@ -56,11 +56,6 @@ protocol ComplexProtectionDelegate {
      Method is called when safari protection status changes
      */
     func safariProtectionChanged()
-    
-    /**
-     Method is called when trying to turn system protection on, and proStatus is false
-     */
-    func proStatusHandler()
 }
 
 // MARK: - Complex protection class -
@@ -160,14 +155,10 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?) {
-        if !proStatus {
-            delegate?.proStatusHandler()
-        } else {
-            if !enabled {
-               resources.sharedDefaults().set(enabled, forKey: SystemProtectionLastState)
-            }
-            systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
+        if !enabled {
+            resources.sharedDefaults().set(enabled, forKey: SystemProtectionLastState)
         }
+        systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
     }
     
     func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?, isFromComplexSwitch: Bool) {
@@ -245,10 +236,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     This method is for complex protection interaction
     */
     private func switchSystemProtectionForComplex(state enabled: Bool, for VC: UIViewController?){
-        if !proStatus {
-            delegate?.proStatusHandler()
-        } else {
-            systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
-        }
+        systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
     }
 }

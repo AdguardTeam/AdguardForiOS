@@ -19,12 +19,26 @@
 import Foundation
 
 protocol VpnServiceNotifierDelegate {
-    
+    /**
+     Method is called when tunnel mode (full tunnel / split tunnel) changes
+     */
     func tunnelModeChanged()
     
+    /**
+     Method is called when vpn configuration changes
+     */
     func vpnConfigurationChanged(with error: Error?)
     
+    /**
+     Method is called when app asks user to install vpn configuration
+     and user refuses
+     */
     func cancelledAddingVpnConfiguration()
+    
+    /**
+     Method is called when trying to turn system protection on, and proStatus is false
+     */
+    func proStatusHandler()
 }
 
 protocol TurnSystemProtectionProtocol: class {
