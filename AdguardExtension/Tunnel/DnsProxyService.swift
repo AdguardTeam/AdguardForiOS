@@ -21,7 +21,7 @@ import Foundation
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
-    func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, ipv6Available: Bool) -> Bool
+    func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -54,7 +54,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     var agproxy: AGDnsProxy?
     
-    @objc func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, ipv6Available: Bool) -> Bool {
+    @objc func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool {
         
         let bootstrapDnsArray = bootstrapDns.components(separatedBy: .whitespacesAndNewlines)
         
@@ -65,24 +65,15 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
         
         var filters = [NSNumber:String]()
-        var userFilterId: Int?
-        var whitelistFilterId: Int?
+        
         var otherFilterIds = [Int]()
         
         for filter in filterFiles {
             
             let identifier = filter["id"] as! Int
             let path = filter["path"] as! String
-            let userFilter = (filter["user_filter"] as? Bool) ?? false
-            let whitelist = (filter["whitelist"] as? Bool) ?? false
             
-            if userFilter {
-                userFilterId = identifier
-            }
-            else if whitelist {
-                whitelistFilterId = identifier
-            }
-            else {
+            if identifier != userFilterId && identifier != whitelistFilterId {
                 otherFilterIds.append(identifier)
             }
             
