@@ -379,7 +379,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         checkProtectionStates()
     }
     
-    func proStatusHandler() {
+    func proStatusEnableFailure() {
         performSegue(withIdentifier: getProSegueId, sender: self)
     }
     

@@ -55,7 +55,7 @@ class VpnService: VpnServiceProtocol {
             guard let self = self else { return }
             
             if !self.configuration.proStatus{
-                self.notifier?.proStatusHandler()
+                self.notifier?.proStatusEnableFailure()
                 return
             }
             

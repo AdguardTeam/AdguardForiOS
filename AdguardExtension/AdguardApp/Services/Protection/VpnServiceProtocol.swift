@@ -38,7 +38,7 @@ protocol VpnServiceNotifierDelegate {
     /**
      Method is called when trying to turn system protection on, and proStatus is false
      */
-    func proStatusHandler()
+    func proStatusEnableFailure()
 }
 
 protocol TurnSystemProtectionProtocol: class {

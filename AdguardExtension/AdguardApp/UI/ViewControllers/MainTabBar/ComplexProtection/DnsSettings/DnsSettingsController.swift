@@ -139,7 +139,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         }
     }
     
-    func proStatusHandler() {}
+    func proStatusEnableFailure() {}
     
     // MARK: - Table view delegate methods
     
