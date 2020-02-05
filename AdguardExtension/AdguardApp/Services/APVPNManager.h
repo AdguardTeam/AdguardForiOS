@@ -20,6 +20,8 @@
 #import "AESharedResources.h"
 
 @class  ASDFilterRule, DnsProviderInfo, DnsServerInfo, ConfigurationService, DnsLogRecord, RequestsStatisticsBlock;
+@protocol NetworkSettingsServiceProtocol;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APVPNManager Constants
@@ -56,6 +58,8 @@ extern NSString* __nonnull APVpnChangedNotification;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
+
+@property (nullable, weak) id<NetworkSettingsServiceProtocol> networkingSettings;
 
 /**
  DNS providers <DnsProviderInfo>
@@ -100,16 +104,6 @@ extern NSString* __nonnull APVpnChangedNotification;
  this flag indicates that vpn configuration allready installed
  */
 @property (readonly) BOOL vpnInstalled;
-
-/**
-this flag indicates that filtering of Wi-Fi data is on/off
-*/
-@property BOOL filteringWifiDataEnabled;
-
-/**
-this flag indicates that filtering of mobile data is on/off
-*/
-@property BOOL filteringMobileDataEnabled;
 
 /**
  Adds custom (editable) DNS server.
@@ -160,8 +154,6 @@ this flag indicates that filtering of mobile data is on/off
  checks if active dns server is custom
  */
 - (BOOL) isCustomServerActive;
-
-- (nonnull DnsServerInfo*) defaultServer;
 
 /**remove vpn configuration from system settings*/
 - (void)removeVpnConfiguration;

@@ -2,6 +2,9 @@
 import Foundation
 
 class VpnManagerMock: NSObject, APVPNManagerProtocol {
+    
+    var networkingSettings: NetworkSettingsServiceProtocol?
+    
     var providers: [DnsProviderInfo] = [DnsProviderInfo]()
     
     var activeDnsServer: DnsServerInfo?
@@ -19,10 +22,6 @@ class VpnManagerMock: NSObject, APVPNManagerProtocol {
     var restartByReachability: Bool = true
     
     var vpnInstalled: Bool = true
-    
-    var filteringWifiDataEnabled: Bool = true
-    
-    var filteringMobileDataEnabled: Bool = true
     
     func addRemoteDnsServer(_ name: String, upstreams: [String]) -> Bool {
         return true
@@ -56,10 +55,6 @@ class VpnManagerMock: NSObject, APVPNManagerProtocol {
         return true
     }
     
-    func defaultServer() -> DnsServerInfo {
-        return DnsServerInfo(dnsProtocol: .dns, serverId: "0", name: "", upstreams: [""], anycast: true)
-    }
-    
     func removeVpnConfiguration() {
         
     }
@@ -67,4 +62,5 @@ class VpnManagerMock: NSObject, APVPNManagerProtocol {
     var delayedTurn: (() -> Void)?
     
     var managerWasLoaded: Bool = true
+
 }
