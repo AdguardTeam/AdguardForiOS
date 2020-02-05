@@ -59,7 +59,7 @@ extern NSString* __nonnull APVpnChangedNotification;
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
-@property (weak) id<NetworkSettingsServiceProtocol> networkingSettings;
+@property (nullable, weak) id<NetworkSettingsServiceProtocol> networkingSettings;
 
 /**
  DNS providers <DnsProviderInfo>
