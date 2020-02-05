@@ -65,7 +65,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var filterWifiDataEnabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsFilterWifiEnabled)
+            return resources.sharedDefaults().object(forKey: AEDefaultsFilterWifiEnabled) as? Bool ?? true
         }
         set {
             if filterWifiDataEnabled != newValue {
@@ -77,7 +77,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var filterMobileDataEnabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsFilterMobileEnabled)
+            return resources.sharedDefaults().object(forKey: AEDefaultsFilterMobileEnabled) as? Bool ?? true
         }
         set {
             if filterMobileDataEnabled != newValue {
