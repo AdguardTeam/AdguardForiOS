@@ -518,6 +518,8 @@
 		7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */; };
 		7E103A4B23B60B7800C0C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
+		7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D4FE23EA9A7B0009108D /* whotracksme.json */; };
+		7E12D50123EA9AAF0009108D /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D50023EA9AAF0009108D /* adguard.json */; };
 		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
 		7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
 		7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */; };
@@ -623,8 +625,6 @@
 		7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E844C3623AA7270009EA1AE /* GetProPageController.swift */; };
 		7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */; };
 		7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */; };
-		7E8FBC2523E2E644005F36C4 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E8FBC2323E2E644005F36C4 /* adguard.json */; };
-		7E8FBC2723E33A70005F36C4 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E8FBC2623E33A70005F36C4 /* whotracksme.json */; };
 		7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */; };
 		7E952E9723D5FFB400D89AE0 /* Protection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9923D5FFB400D89AE0 /* Protection.storyboard */; };
 		7E952E9A23D5FFBA00D89AE0 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9C23D5FFBA00D89AE0 /* Activity.storyboard */; };
@@ -1853,6 +1853,8 @@
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
+		7E12D4FE23EA9A7B0009108D /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
+		7E12D50023EA9AAF0009108D /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
 		7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentBlockerStateCell.xib; sourceTree = "<group>"; };
@@ -1936,8 +1938,6 @@
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		7E8FBC2323E2E644005F36C4 /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
-		7E8FBC2623E33A70005F36C4 /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
 		7E952E9123D5FF8500D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainPage.storyboard; sourceTree = "<group>"; };
 		7E952E9823D5FFB400D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Protection.storyboard; sourceTree = "<group>"; };
 		7E952E9B23D5FFBA00D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -3621,8 +3621,8 @@
 		7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */ = {
 			isa = PBXGroup;
 			children = (
-				7E8FBC2623E33A70005F36C4 /* whotracksme.json */,
-				7E8FBC2323E2E644005F36C4 /* adguard.json */,
+				7E12D50023EA9AAF0009108D /* adguard.json */,
+				7E12D4FE23EA9A7B0009108D /* whotracksme.json */,
 				7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */,
 			);
 			path = DnsTrackerService;
@@ -4755,7 +4755,7 @@
 				65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */,
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */,
-				7E8FBC2723E33A70005F36C4 /* whotracksme.json in Resources */,
+				7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
 				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
@@ -4763,8 +4763,8 @@
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
+				7E12D50123EA9AAF0009108D /* adguard.json in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
-				7E8FBC2523E2E644005F36C4 /* adguard.json in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
