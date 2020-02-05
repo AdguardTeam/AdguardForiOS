@@ -32,12 +32,15 @@ import Foundation
     }
 }
 
+@objc
 protocol NetworkSettingsChangedDelegate {
     func settingsChanged()
 }
 
+@objc
 protocol NetworkSettingsServiceProtocol {
     var exceptions: [WifiException] { get }
+    var enabledExceptions: [WifiException] { get }
     var filterWifiDataEnabled: Bool { get set }
     var filterMobileDataEnabled: Bool { get set }
     var delegate: NetworkSettingsChangedDelegate? { get set }
@@ -47,11 +50,18 @@ protocol NetworkSettingsServiceProtocol {
     func change(oldException: WifiException, newException: WifiException)
 }
 
+@objcMembers
 class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var delegate: NetworkSettingsChangedDelegate?
     
     var exceptions: [WifiException] = []
+    
+    var enabledExceptions: [WifiException] {
+        get {
+            return exceptions.filter { $0.enabled }
+        }
+    }
     
     var filterWifiDataEnabled: Bool {
         get {
@@ -59,8 +69,8 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
         set {
             if filterWifiDataEnabled != newValue {
-                vpnManager.filteringWifiDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterWifiEnabled)
+                vpnManager.restartTunnel()
             }
         }
     }
@@ -71,8 +81,8 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
         set {
             if filterMobileDataEnabled != newValue {
-                vpnManager.filteringMobileDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
+                vpnManager.restartTunnel()
             }
         }
     }
