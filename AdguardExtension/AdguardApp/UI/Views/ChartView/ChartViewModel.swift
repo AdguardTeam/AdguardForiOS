@@ -143,7 +143,7 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     func obtainStatistics() {
-        DispatchQueue(label: "").async { [weak self] in
+        DispatchQueue(label: "obtainStatistics queue").async { [weak self] in
             guard let self = self else { return }
             let statistics = self.dnsStatisticsService.readStatistics()
             
