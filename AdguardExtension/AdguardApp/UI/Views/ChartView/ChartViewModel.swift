@@ -143,17 +143,22 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     func obtainStatistics() {
-        let statistics = dnsStatisticsService.readStatistics()
-        
-        requests = statistics[.all] ?? []
-        blockedRequests = statistics[.blocked] ?? []
-        
-        changeChart()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-            self?.obtainStatistics()
-            timer.invalidate()
-        })
+        DispatchQueue(label: "").async { [weak self] in
+            guard let self = self else { return }
+            let statistics = self.dnsStatisticsService.readStatistics()
+            
+            self.requests = statistics[.all] ?? []
+            self.blockedRequests = statistics[.blocked] ?? []
+            
+            DispatchQueue.main.async {
+                self.changeChart()
+            }
+            
+            self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
+                self?.obtainStatistics()
+                timer.invalidate()
+            })
+        }
     }
     
     // MARK: - private methods
