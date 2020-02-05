@@ -50,6 +50,7 @@ Adguard.ipa
 
 # Debug files
 *.dSYM/
+!AGDnsProxy.*.dSYM/
 *.su
 
 # -------------- Xcode.gitignore -------------------
