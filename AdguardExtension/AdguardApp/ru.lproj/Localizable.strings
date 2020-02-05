@@ -431,7 +431,7 @@
 "safari_userfilter_title" = "Пользовательские правила Safari";
 
 /* (ListOfRulesModel) title for export */
-"export" = "Экспортировать";
+"export" = "Экспорт";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Очистить";
@@ -440,7 +440,7 @@
 "common_save" = "Сохранить";
 
 /* (ListOfRulesModel) title for import */
-"import" = "Импортировать";
+"import" = "Импорт";
 
 /* "Disabled" title */
 "disabled" = "Отключено";
