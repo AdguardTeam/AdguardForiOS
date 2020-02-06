@@ -187,7 +187,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
-        if (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.developerMode {
+        if state == .normal && (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.developerMode {
             return 0.0
         }
         
