@@ -143,6 +143,10 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     func obtainStatistics() {
+        
+        timer?.invalidate()
+        timer = nil
+        
         DispatchQueue(label: "obtainStatistics queue").async { [weak self] in
             guard let self = self else { return }
             let statistics = self.dnsStatisticsService.readStatistics()
@@ -156,7 +160,6 @@ class ChartViewModel: ChartViewModelProtocol {
             
             self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
                 self?.obtainStatistics()
-                timer.invalidate()
             })
         }
     }

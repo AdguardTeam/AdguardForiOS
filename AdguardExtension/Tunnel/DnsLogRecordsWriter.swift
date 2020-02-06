@@ -89,7 +89,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             guard let self = self else { return }
             self.statistics[.all]?.numberOfRequests += 1
             
-            if (self.isBlocked(event.answer)) {
+            if (status == .blacklistedByUserFilter || status == .blacklistedByOtherFilter) {
                 let tempBlockedRequestsCount = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
                 self.resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
                 
@@ -186,20 +186,5 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
-    }
-    
-    private func isBlocked(_ answer: String?) -> Bool {
-        if answer == nil || answer == "" {
-            // Mark all NXDOMAIN responses as blocked
-            return true
-        }
-
-        if answer!.contains("0.0.0.0") ||
-            answer!.contains("127.0.0.1") ||
-            answer!.contains("[::]")  {
-            return true
-        }
-
-        return false
     }
 }
