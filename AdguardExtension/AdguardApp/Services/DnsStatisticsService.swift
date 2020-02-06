@@ -102,6 +102,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
         super.init()
+        // lazy vars are not thread safe
+        // force load lazy vars in init
+        let _ = self.readHandler
+        let _ = self.writeHandler
     }
     
     // MARK: - public methods
