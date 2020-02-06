@@ -286,6 +286,11 @@ extern NSString* _Nonnull StatisticsPeriodType;
  */
 extern NSString* _Nonnull StatisticsSaveTime;
 
+/**
+ User defaults key for activeProtocols in dns servers
+ */
+extern NSString* _Nonnull DnsActiveProtocols;
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

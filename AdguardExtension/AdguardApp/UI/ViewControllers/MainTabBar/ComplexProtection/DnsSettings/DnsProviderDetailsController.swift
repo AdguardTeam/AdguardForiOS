@@ -24,16 +24,15 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     // MARK: - public fields
     
     var provider: DnsProviderInfo?
-    var selectedProtocol: DnsProtocol = .dns
-    
-    var protocolWasChanged = false
+    var selectedProtocol: DnsProtocol?
     
     //MARK: - IB Outlets
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - constants
     
@@ -109,9 +108,10 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
             let serverCell = tableView.dequeueReusableCell(withIdentifier: "serverCell") as! DnsProviderServerCell
             cell = serverCell
             
-            let dnsProtocolStringId = DnsProtocol.stringIdByProtocol[selectedProtocol]
-            
-            serverCell.server.text = ACLocalizedString(dnsProtocolStringId, nil)
+            if let selectedProtocol = selectedProtocol {
+                let dnsProtocolStringId = DnsProtocol.stringIdByProtocol[selectedProtocol]
+                serverCell.server.text = ACLocalizedString(dnsProtocolStringId, nil)
+            }
             
             theme.setupLabels(serverCell.themableLabels)
             serverCell.separator.backgroundColor = theme.separatorColor
@@ -200,9 +200,17 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     
     func protocolSelected(chosenProtocol: DnsProtocol) {
         DispatchQueue.main.async {[weak self] in
-            self?.protocolWasChanged = true
-            self?.selectedProtocol = chosenProtocol
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.selectedProtocol = chosenProtocol
+            self.provider?.setActiveProtocol(self.resources, protcol: chosenProtocol)
+            self.tableView.reloadData()
+            
+            if self.vpnManager.activeDnsProvider == self.provider {
+                if let server = self.provider?.serverByProtocol(dnsProtocol: chosenProtocol) {
+                    self.vpnManager.activeDnsServer = server
+                    self.vpnManager.enabled = true
+                }
+            }
         }
     }
     
@@ -218,10 +226,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     }
     
     private func updateProtocol() {
-        if vpnManager.isActiveProvider(provider!) {
-            if let activeProtocol = vpnManager.activeDnsServer?.dnsProtocol {
-                selectedProtocol = activeProtocol
-            }
+        if let prot = provider?.getActiveProtocol(resources) {
+            selectedProtocol = prot
         }
     }
 }

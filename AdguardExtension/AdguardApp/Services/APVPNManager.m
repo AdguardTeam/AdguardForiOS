@@ -151,7 +151,7 @@ NSString *APVpnChangedNotification = @"APVpnChangedNotification";
         _connectionStatus = APVpnConnectionStatusDisconnecting;
         _enabled = NO;
         
-        _providersService = [DnsProvidersService new];
+        _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
         
         // don't restart by default
         _restartByReachability = NO;

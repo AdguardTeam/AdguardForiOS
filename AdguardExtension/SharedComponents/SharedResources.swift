@@ -19,6 +19,19 @@
 import Foundation
 
 extension AESharedResourcesProtocol {
+    
+    dynamic var dnsActiveProtocols: [String: Int] {
+        get {
+            if let protocols = sharedDefaults().value(forKey: DnsActiveProtocols) as? [String: Int]{
+                return protocols
+            }
+            return [:]
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: DnsActiveProtocols)
+        }
+    }
+    
     dynamic var safariWhitelistEnabled: Bool {
         get {
             filterEnabled(defaultsKey: AEDefaultsSafariWhitelistEnabled)

@@ -18,19 +18,11 @@
 
 import Foundation
 
-protocol DnsProtocolChangedDelegate: class {
-    func changesWereApplied(_ applied: Bool)
-}
-
 class DnsProviderContainerController : UIViewController {
 
     // MARK: - public fields
 
     var provider: DnsProviderInfo?
-    var defaultDnsServer: DnsServerInfo?
-    var chosenProtocol: DnsProtocol?
-    
-    weak var delegate: DnsProtocolChangedDelegate?
     
     // MARK: - IB Outlets
 
@@ -39,15 +31,14 @@ class DnsProviderContainerController : UIViewController {
     @IBOutlet weak var buttonView: UIView!
     
     private var notificationToken: NotificationToken?
-    
+    private var chosenProtocol: DnsProtocol?
     private var childController: DnsProviderDetailsController?
     
     // MARK: - services
 
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
-    
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - view controller life cycle
 
@@ -58,65 +49,33 @@ class DnsProviderContainerController : UIViewController {
             self?.updateTheme()
         }
         
-        if provider == nil { return }
-        
-        if vpnManager.isActiveProvider(provider!) {
-            chosenProtocol = vpnManager.activeDnsServer?.dnsProtocol
-        }
-        else {
-            chosenProtocol = defaultDnsServer?.dnsProtocol
-        }
-        
-        navigationItem.title = provider?.name
-        
         setupBackButton()
         updateTheme()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         
-        if let protocolChanged = childController?.protocolWasChanged {
-            delegate?.changesWereApplied(!protocolChanged)
-        }
+        guard let provider = provider else  { return }
+        navigationItem.title = provider.name
+        
+        guard let protcol = provider.getActiveProtocol(resources) else { return }
+        chosenProtocol = protcol
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "providerDetailsEmbedSegue" {
             guard let controller = segue.destination as? DnsProviderDetailsController else { return }
             controller.provider = provider
-            
             childController = controller
-    
-            var server: DnsServerInfo?
-            
-            if vpnManager.isActiveProvider(provider!) {
-                server = vpnManager.activeDnsServer
-            }
-            else {
-                server = defaultDnsServer
-            }
-            
-            if let dnsProtocol = server?.dnsProtocol {
-                controller.selectedProtocol = dnsProtocol
-            }
+            controller.selectedProtocol = chosenProtocol
         }
     }
 
     // MARK: - Actions
 
     @IBAction func useServerAction(_ sender: Any) {
-        /**
-         When we tap "select" button we apply protocol changes
-         */
-        childController?.protocolWasChanged = false
         if let currentProtocol: DnsProtocol = childController?.selectedProtocol {
-            if let defaultServer = defaultDnsServer {
-                let currentServer: DnsServerInfo = provider?.serverByProtocol(dnsProtocol: currentProtocol) ?? defaultServer
+            if let currentServer: DnsServerInfo = provider?.serverByProtocol(dnsProtocol: currentProtocol){
                 activateServer(currentServer)
             }
         }
-        
         navigationController?.popViewController(animated: true)
     }
     
