@@ -20,10 +20,10 @@ import Foundation
 
 // MARK: - data types -
 @objc enum DnsProtocol: Int {
-    case doh = 0
-    case dot
+    case dns = 0
     case dnsCrypt
-    case dns
+    case doh
+    case dot
     
     static let protocolByString: [String: DnsProtocol] = [ "dns": .dns,
                                                            "dnscrypt": .dnsCrypt,
@@ -131,9 +131,7 @@ class DnsServerInfo : ACObject {
     }
     
     func setActiveProtocol(_ resources: AESharedResourcesProtocol, protcol: DnsProtocol?) {
-        if let protocolRawValue = protcol?.rawValue {
-            resources.dnsActiveProtocols[name] = protocolRawValue
-        }
+        resources.dnsActiveProtocols[name] = protcol?.rawValue
     }
 }
 
@@ -242,8 +240,7 @@ protocol DnsProvidersServiceProtocol {
                 
                 let protcol = provider.getActiveProtocol(resources)
                 if protcol == nil {
-                    let defaultProt = defaultProtocol(provider).rawValue
-                    let prot = DnsProtocol(rawValue: defaultProt)
+                    let prot = defaultProtocol(provider)
                     provider.setActiveProtocol(resources, protcol: prot)
                 }
                 
@@ -305,7 +302,7 @@ protocol DnsProvidersServiceProtocol {
         }
         
         if doh != nil {
-            return .dns
+            return .doh
         }
         
         let dot = provider.servers?.first { (dns) -> Bool in
