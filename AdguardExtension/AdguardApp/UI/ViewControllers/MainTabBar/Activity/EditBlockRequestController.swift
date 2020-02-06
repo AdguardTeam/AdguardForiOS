@@ -41,7 +41,9 @@ class EditBlockRequestController: BottomAlertController {
         
         titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
         
-        domainNameTextField.text = type == .addDomainToWhitelist ? domain : "||" + domain + "^"
+        let converter = DomainsConverter()
+        
+        domainNameTextField.text = type == .addDomainToWhitelist ? domain : converter.blacklistRuleFromDomain(domain)
         domainNameTextField.becomeFirstResponder()
         
         updateTheme()
