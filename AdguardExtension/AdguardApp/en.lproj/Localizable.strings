@@ -592,9 +592,6 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "You've tried to add a duplicate filter. This filter is already on the list.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Changes were not applied";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blocked";
 

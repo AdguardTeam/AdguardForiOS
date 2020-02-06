@@ -125,8 +125,6 @@
     
     DnsProxyService* _dnsProxy;
     
-    DnsProvidersService* _dnsProvidersService;
-    
     id<DnsLogRecordsWriterProtocol> _logWriter;
 }
 
@@ -166,8 +164,6 @@
         id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
         id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc]initWithResources:_resources dnsLogService:logService];
         _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
-        
-        _dnsProvidersService = [DnsProvidersService new];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }
     return self;

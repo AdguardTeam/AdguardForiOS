@@ -30,12 +30,13 @@ class DescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
-class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate, DnsProtocolChangedDelegate {
+class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate {
     
     // MARK: - services
     
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: Private properties
     private lazy var providers = { self.vpnManager.providers } ()
@@ -102,8 +103,6 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderContainerController
             controller.provider = providerToShow
-            controller.defaultDnsServer = defaultServer(providerToShow!)
-            controller.delegate = self
         }
     }
     
@@ -256,7 +255,9 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         }
         else {
             let provider = providers[sender.tag]
-            server = defaultServer(provider)
+            if let prot = provider.getActiveProtocol(resources) {
+                server = provider.serverByProtocol(dnsProtocol: prot)
+            }
         }
         
         vpnManager.activeDnsServer = server
@@ -269,17 +270,6 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomAnimatedTransitioning()
-    }
-    
-    // MARK: - DnsProtocolChangedDelegate method
-    
-    func changesWereApplied(_ applied: Bool) {
-        if !applied {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("changes_not_applied"))
-            }
-        }
     }
     
     // MARK: private methods
@@ -300,43 +290,5 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         controller.provider = provider
         
         present(controller, animated: true, completion: nil)
-    }
-    
-    private func defaultServer(_ provider: DnsProviderInfo)->DnsServerInfo? {
-        
-        let doh = provider.servers?.first { (dns) -> Bool in
-            return dns.dnsProtocol == DnsProtocol.doh
-        }
-        
-        if doh != nil {
-            return doh
-        }
-        
-        let dnsCrypt = provider.servers?.first { (dns) -> Bool in
-            return dns.dnsProtocol == DnsProtocol.dnsCrypt
-        }
-        
-        if dnsCrypt != nil {
-            return dnsCrypt
-        }
-
-        let dot = provider.servers?.first { (dns) -> Bool in
-            return dns.dnsProtocol == DnsProtocol.dot
-        }
-
-        if dot != nil {
-            return dot
-        }
-        
-        let regular = provider.servers?.first { (dns) -> Bool in
-            return dns.dnsProtocol == DnsProtocol.dns
-        }
-        
-        if regular != nil {
-            return regular
-        }
-        
-        
-        return provider.servers?.first
     }
 }

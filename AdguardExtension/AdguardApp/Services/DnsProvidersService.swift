@@ -20,10 +20,10 @@ import Foundation
 
 // MARK: - data types -
 @objc enum DnsProtocol: Int {
-    case dns
-    case dnsCrypt
-    case doh
+    case doh = 0
     case dot
+    case dnsCrypt
+    case dns
     
     static let protocolByString: [String: DnsProtocol] = [ "dns": .dns,
                                                            "dnscrypt": .dnsCrypt,
@@ -120,8 +120,20 @@ class DnsServerInfo : ACObject {
                 return server
             }
         }
-        
         return nil
+    }
+    
+    func getActiveProtocol(_ resources: AESharedResourcesProtocol) -> DnsProtocol? {
+        if let protocolRawValue = resources.dnsActiveProtocols[name]{
+            return DnsProtocol(rawValue: protocolRawValue)
+        }
+        return nil
+    }
+    
+    func setActiveProtocol(_ resources: AESharedResourcesProtocol, protcol: DnsProtocol?) {
+        if let protocolRawValue = protcol?.rawValue {
+            resources.dnsActiveProtocols[name] = protocolRawValue
+        }
     }
 }
 
@@ -140,6 +152,8 @@ protocol DnsProvidersServiceProtocol {
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
     
     private var providersInternal: [DnsProviderInfo]?
+    
+    @objc private let resources: AESharedResourcesProtocol
     
     @objc var providers: [DnsProviderInfo] {
         get {
@@ -163,6 +177,10 @@ protocol DnsProvidersServiceProtocol {
     
     @objc func defaultServer() -> DnsServerInfo? {
         return providers.first?.servers?.first
+    }
+    
+    @objc init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
     }
     
     // MARK: - private methods
@@ -222,6 +240,13 @@ protocol DnsProvidersServiceProtocol {
                 provider.servers = servers
                 provider.website = website
                 
+                let protcol = provider.getActiveProtocol(resources)
+                if protcol == nil {
+                    let defaultProt = defaultProtocol(provider).rawValue
+                    let prot = DnsProtocol(rawValue: defaultProt)
+                    provider.setActiveProtocol(resources, protcol: prot)
+                }
+                
                 dnsProviders.append(provider)
             }
             
@@ -271,5 +296,42 @@ protocol DnsProvidersServiceProtocol {
         }
         
         return servers
+    }
+    
+    private func defaultProtocol(_ provider: DnsProviderInfo) -> DnsProtocol {
+        
+        let doh = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.doh
+        }
+        
+        if doh != nil {
+            return .dns
+        }
+        
+        let dot = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dot
+        }
+
+        if dot != nil {
+            return .dot
+        }
+        
+        let dnsCrypt = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dnsCrypt
+        }
+        
+        if dnsCrypt != nil {
+            return .dnsCrypt
+        }
+        
+        let regular = provider.servers?.first { (dns) -> Bool in
+            return dns.dnsProtocol == DnsProtocol.dns
+        }
+        
+        if regular != nil {
+            return .dns
+        }
+        
+        return provider.servers?.first?.dnsProtocol ?? .dns
     }
 }
