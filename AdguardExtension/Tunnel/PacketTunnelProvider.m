@@ -110,10 +110,6 @@
     APVpnManagerTunnelMode _tunnelMode;
     
     BOOL _restartByRechability;
-    BOOL _filteringMobileDataEnabled;
-    BOOL _filteringWifiDataEnabled;
-    
-    NSMutableArray<WifiException*>* _exceptions;
     
     Reachability *_reachabilityHandler;
     APTunnelConnectionsHandler *_connectionHandler;
@@ -346,32 +342,6 @@
 - (void) updateTunnelSettingsInternalWithCompletionHandler:(nonnull void (^)( NSError * __nullable error))completionHandler {
     DDLogInfo(@"(PacketTunnelProvider) Update Tunnel Settings");
     
-    BOOL needsToSendEmptySettings = [self needsToSendEmptySettings];
-    
-    if (needsToSendEmptySettings){
-        // SETs network settings
-        
-        //create empty tunnel settings
-        NEPacketTunnelNetworkSettings *settings = [[NEPacketTunnelNetworkSettings alloc] initWithTunnelRemoteAddress:V_REMOTE_ADDRESS];
-        
-        DDLogInfo(@"(PacketTunnelProvider) Empty tunnel settings created.");
-        
-        ASSIGN_WEAK(self);
-        [self setTunnelNetworkSettings:settings completionHandler:^(NSError *_Nullable error) {
-            
-            ASSIGN_STRONG(self);
-            
-            if(error)
-                DDLogInfo(@"(PacketTunnelProvider) set empty tunnel settings error : %@", error.localizedDescription);
-            
-            DDLogInfo(@"(PacketTunnelProvider) update Tunnel with empty settings ");
-            completionHandler(error);
-            
-            [USE_STRONG(self) logNetworkInterfaces];
-        }];
-        return;
-    }
-    
     BOOL full = NO;
     BOOL withoutIcon = NO;
     
@@ -413,9 +383,6 @@
 
 - (void) readProtocolConfiguration {
     
-    // Getting wifi exceptions
-    [self getExceptions];
-    
     // Getting DNS
     NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
     
@@ -428,12 +395,8 @@
     _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
     
     NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
-    NSNumber* wifiFilteringEnabled = protocol.providerConfiguration[APVpnManagerFilteringWifiDataEnabled];
-    NSNumber* mobileFilteringEnabled = protocol.providerConfiguration[APVpnManagerFilteringMobileDataEnabled];
     
     _restartByRechability = restartValue ? [restartValue boolValue] : NO;
-    _filteringWifiDataEnabled = wifiFilteringEnabled ? [wifiFilteringEnabled boolValue] : NO;
-    _filteringMobileDataEnabled = mobileFilteringEnabled ? [mobileFilteringEnabled boolValue] : NO;
     
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@", _currentServer.name ?: @"system default dns");
 }
@@ -684,60 +647,6 @@
     
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
     return [_dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDns  fallback: systemDns serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
-}
-
--(NSString *)getCurrentWifiName {
-    NSArray *interFaceNames = (__bridge_transfer id)CNCopySupportedInterfaces();
-    for (NSString *name in interFaceNames)
-    {
-        NSDictionary *info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)name);
-        return info[@"SSID"];
-    }
-    return nil;
-}
-
--(void)getExceptions {
-    NSString *fileName = @"NetworkSettings";
-    NSData *data = [_resources loadDataFromFileRelativePath:fileName];
-    if (data) {
-        NSError *error = nil;
-        NSMutableArray<WifiException*>* exceptions =
-        [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        _exceptions = exceptions;
-    }
-}
-
--(BOOL)isConnectedToSsidFromExceptions {
-    NSString* wifiName = [self getCurrentWifiName];
-    for (NSDictionary *exception in _exceptions){
-        NSString *rule = exception[@"rule"];
-        NSNumber *enabled = exception[@"enabled"];
-        if ([rule isEqualToString:wifiName] && [enabled boolValue]){
-            return YES;
-        }
-    }
-    return NO;
-}
-
--(BOOL)needsToSendEmptySettings{
-    
-    if (_reachabilityHandler.isReachableViaWiFi){
-        BOOL isConnected = [self isConnectedToSsidFromExceptions];
-        if (isConnected){
-            DDLogInfo(@"Connected to ssid from list of exceptions, sending empty settings");
-            return YES;
-        }
-        if (!_filteringWifiDataEnabled) {
-            DDLogInfo(@"Connected via Wi-Fi, Wi-Fi filtering disabled, sending empty settings");
-            return YES;
-        }
-    }
-    if ((_reachabilityHandler.isReachableViaWWAN) && !_filteringMobileDataEnabled){
-        DDLogInfo(@"Connected via WWAN, mobile data filtering is disabled, sending empty settings");
-        return YES;
-    }
-    DDLogInfo(@"Sending not empty settings");
-    return NO;
 }
 
 @end

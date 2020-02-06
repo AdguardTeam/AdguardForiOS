@@ -32,12 +32,15 @@ import Foundation
     }
 }
 
+@objc
 protocol NetworkSettingsChangedDelegate {
     func settingsChanged()
 }
 
+@objc
 protocol NetworkSettingsServiceProtocol {
     var exceptions: [WifiException] { get }
+    var enabledExceptions: [WifiException] { get }
     var filterWifiDataEnabled: Bool { get set }
     var filterMobileDataEnabled: Bool { get set }
     var delegate: NetworkSettingsChangedDelegate? { get set }
@@ -47,32 +50,39 @@ protocol NetworkSettingsServiceProtocol {
     func change(oldException: WifiException, newException: WifiException)
 }
 
+@objcMembers
 class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var delegate: NetworkSettingsChangedDelegate?
     
     var exceptions: [WifiException] = []
     
+    var enabledExceptions: [WifiException] {
+        get {
+            return exceptions.filter { $0.enabled }
+        }
+    }
+    
     var filterWifiDataEnabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsFilterWifiEnabled)
+            return resources.sharedDefaults().object(forKey: AEDefaultsFilterWifiEnabled) as? Bool ?? true
         }
         set {
             if filterWifiDataEnabled != newValue {
-                vpnManager.filteringWifiDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterWifiEnabled)
+                vpnManager.restartTunnel()
             }
         }
     }
     
     var filterMobileDataEnabled: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsFilterMobileEnabled)
+            return resources.sharedDefaults().object(forKey: AEDefaultsFilterMobileEnabled) as? Bool ?? true
         }
         set {
             if filterMobileDataEnabled != newValue {
-                vpnManager.filteringMobileDataEnabled = newValue
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
+                vpnManager.restartTunnel()
             }
         }
     }

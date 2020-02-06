@@ -58,7 +58,8 @@ class EditBlockRequestController: BottomAlertController {
     
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = domainNameTextField.text ?? ""
-        delegate?.add(domain: domain, needsCorrecting: false, by: type)
+        let needsCorrecting = type == .addDomainToWhitelist
+        delegate?.add(domain: domain, needsCorrecting: needsCorrecting, by: type)
         dismiss(animated: true, completion: nil)
     }
     

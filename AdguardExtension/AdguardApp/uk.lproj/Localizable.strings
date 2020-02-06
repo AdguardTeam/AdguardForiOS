@@ -49,6 +49,9 @@
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Спробувати безплатно";
 
+/* (MainPageController) Text for "try for free" button */
+"try_for_free_main" = "Спробувати безплатно";
+
 /* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
 "whitelist_title" = "Білий список";
 
@@ -367,6 +370,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Домівка:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Видалити фільтр";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Ви впевнені, що хочете видалити цей фільтр?";
+
 /* (AboutController) current app version string */
 "about_version" = "Версія";
 
@@ -511,6 +520,12 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "Всі параметри, включно з правилами користувача, захистом системи, інтерфейсом та авторизацією, будуть скинуті. Цю операцію неможливо скасувати. Скинути параметри?";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Скинути журнал активності";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Всі записи журналу будуть видалені!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 години";
 
@@ -634,6 +649,9 @@
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Загальні";
 
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Фільтрування";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
@@ -676,8 +694,23 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS-відповідь";
 
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Відповідний фільтр";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Відповідне правило";
+
 /* (DnsRequestDetailsController) "Original answer" title for cell */
 "original_answer_title" = "Оригінальна відповідь";
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Порожньо";
+
+/* (DnsRequestDetailsController) - No rule found title */
+"no_rule_found" = "Правило не знайдено";
+
+/* (SystemProtectionEnablerController) - System protection is disabled title */
+"protection_enabler_title" = "Захист системи вимкнено";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Увімкнути";
