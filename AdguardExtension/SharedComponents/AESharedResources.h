@@ -286,16 +286,6 @@ extern NSString* _Nonnull HideStatusViewNotification;
 extern NSString* _Nonnull DnsFilterUniqueId;
 
 /**
- Last state of safari protection
- */
-extern NSString* _Nonnull SafariProtectionLastState;
-
-/**
- Last state of Tracking protection
- */
-extern NSString* _Nonnull SystemProtectionLastState;
-
-/**
  User defaults key for saving statistics period type ( all time / week / day)
  */
 extern NSString* _Nonnull StatisticsPeriodType;
@@ -310,6 +300,15 @@ extern NSString* _Nonnull StatisticsSaveTime;
  */
 extern NSString* _Nonnull DnsActiveProtocols;
 
+/**
+ User defaults key for active dns server
+ */
+extern NSString* _Nonnull AEDefaultsActiveDnsServer;
+
+/**
+User defaults key for complex protection state
+*/
+extern NSString* _Nonnull AEComplexProtectionEnabled;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -406,6 +405,8 @@ extern NSString* _Nonnull DnsActiveProtocols;
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
 @property BOOL safariProtectionEnabled;
+
+@property BOOL systemProtectionEnabled;
 
 @end
 

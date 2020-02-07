@@ -151,10 +151,9 @@ class SafariProtectionController: UITableViewController {
     
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
-        resources.safariProtectionEnabled = enabled
         safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
         
-        complexProtection.switchSafariProtection(state: enabled)
+        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
     }
     
     // MARK: - Private methods
@@ -171,7 +170,7 @@ class SafariProtectionController: UITableViewController {
     }
     
     private func updateSafariProtectionInfo(){
-        let protectionEnabled = resources.safariProtectionEnabled
+        let protectionEnabled = complexProtection.safariProtectionEnabled
         protectionStateSwitch.isOn = protectionEnabled
         safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
         

@@ -1,70 +1,35 @@
+/**
+   This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+   Copyright © Adguard Software Limited. All rights reserved.
+
+   Adguard for iOS is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Adguard for iOS is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 import Foundation
 
-class VpnManagerMock: NSObject, APVPNManagerProtocol {
+class VpnManagerMock: NSObject, VpnManagerProtocol {
+    func updateSettings(completion: ((Error?) -> Void)?) {
+        completion?(nil)
+    }
     
-    // MARK: - Variables to test functions execution
+    func removeVpnConfiguration(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
     
-    var restartTunnelWasCalledCount = 0
-    
-    var networkingSettings: NetworkSettingsServiceProtocol?
-    
-    var providers: [DnsProviderInfo] = [DnsProviderInfo]()
-    
-    var activeDnsServer: DnsServerInfo?
-    
-    var activeDnsProvider: DnsProviderInfo?
-    
-    var connectionStatus: APVpnConnectionStatus = APVpnConnectionStatusConnected
-    
-    var lastError: Error?
-    
-    var enabled: Bool = true
-    
-    var tunnelMode: APVpnManagerTunnelMode = APVpnManagerTunnelModeSplit
-    
-    var restartByReachability: Bool = true
+    func installVpnConfiguration(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
     
     var vpnInstalled: Bool = true
-    
-    func addRemoteDnsServer(_ name: String, upstreams: [String]) -> Bool {
-        return true
-    }
-    
-    func deleteCustomDnsProvider(_ provider: DnsProviderInfo) -> Bool {
-        return true
-    }
-    
-    func resetCustomDnsProvider(_ provider: DnsProviderInfo) -> Bool {
-        return true
-    }
-    
-    func restartTunnel() {
-        restartTunnelWasCalledCount += 1
-    }
-    
-    func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
-        return true
-    }
-    
-    func isCustomProvider(_ provider: DnsProviderInfo) -> Bool {
-        return true
-    }
-    
-    func isCustomServer(_ server: DnsServerInfo) -> Bool {
-        return true
-    }
-    
-    func isCustomServerActive() -> Bool {
-        return true
-    }
-    
-    func removeVpnConfiguration() {
-        
-    }
-    
-    var delayedTurn: (() -> Void)?
-    
-    var managerWasLoaded: Bool = true
-
 }

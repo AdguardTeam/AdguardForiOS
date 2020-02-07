@@ -49,6 +49,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
     private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
+    private var complexProtection: ComplexProtectionServiceProtocol
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
@@ -80,10 +81,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, complexProtection: ComplexProtectionServiceProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.antibanner = antibanner
+        self.complexProtection = complexProtection
         super.init()
     }
     
@@ -354,7 +356,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         DDLogInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
-        let safariProtectionEnabled = resources.safariProtectionEnabled
+        let safariProtectionEnabled = complexProtection.safariProtectionEnabled
         
         if safariProtectionEnabled{
             return autoreleasepool {

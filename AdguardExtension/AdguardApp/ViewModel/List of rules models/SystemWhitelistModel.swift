@@ -55,7 +55,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue{
                 resources.systemWhitelistEnabled = newValue
-                vpnManager.restartTunnel()
+                vpnManager.updateSettings(completion: nil)
             }
         }
     }
@@ -98,7 +98,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private var dnsFiltersService: DnsFiltersServiceProtocol
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
-    private let vpnManager: APVPNManager
+    private let vpnManager: VpnManagerProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     
@@ -110,7 +110,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(dnsFiltersService: DnsFiltersServiceProtocol, resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol, vpnManager: APVPNManager) {
+    init(dnsFiltersService: DnsFiltersServiceProtocol, resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol, vpnManager: VpnManagerProtocol) {
         self.dnsFiltersService = dnsFiltersService
         self.resources = resources
         self.theme = theme

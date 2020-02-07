@@ -122,6 +122,7 @@
     DnsProxyService* _dnsProxy;
     
     id<DnsLogRecordsWriterProtocol> _logWriter;
+    DnsProvidersService* _providersService;
 }
 
 - (id)init {
@@ -151,6 +152,7 @@
 #endif
         
         _dnsTrackerService = [DnsTrackerService new];
+        _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
@@ -329,7 +331,7 @@
         // otherwise we will receive only our fake dns addresses
         NSMutableArray<NSString *> * allSystemDnsIps = [USE_STRONG(self) getSysstemDnsIps];
         
-        [USE_STRONG(self) readProtocolConfiguration];
+        [USE_STRONG(self) readSettings];
         
         [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
             [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
@@ -381,22 +383,11 @@
     }];
 }
 
-- (void) readProtocolConfiguration {
-    
-    // Getting DNS
-    NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
-    
-    _currentServer = nil;
-    NSData *currentServerData = protocol.providerConfiguration[APVpnManagerParameterRemoteDnsServer];
-    if (currentServerData) {
-        _currentServer = [NSKeyedUnarchiver unarchiveObjectWithData:currentServerData];
-    }
-    
-    _tunnelMode = [protocol.providerConfiguration[APVpnManagerParameterTunnelMode] unsignedIntegerValue];
-    
-    NSNumber* restartValue = protocol.providerConfiguration[APVpnManagerRestartByReachability];
-    
-    _restartByRechability = restartValue ? [restartValue boolValue] : NO;
+- (void) readSettings {
+
+    _currentServer = _providersService.activeDnsServer;
+    _tunnelMode = [_resources.sharedDefaults integerForKey:AEDefaultsVPNTunnelMode];
+    _restartByRechability = [_resources.sharedDefaults boolForKey:AEDefaultsRestartByReachability];
     
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel with configuration: %@", _currentServer.name ?: @"system default dns");
 }
@@ -639,8 +630,8 @@
     
     BOOL ipv6Available = [ACNIPUtils isIpv6Available];
     SimpleConfigurationSwift* configuration = [[SimpleConfigurationSwift alloc] initWithResources:_resources systemAppearenceIsDark:false];
-    
-    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil configuration: configuration];
+
+    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil configuration:configuration complexProtection:nil];
     NSString* filtersJson = [dnsFiltersService filtersJson];
     long userFilterId = dnsFiltersService.userFilterId;
     long whitelistFilterId = dnsFiltersService.whitelistFilterId;

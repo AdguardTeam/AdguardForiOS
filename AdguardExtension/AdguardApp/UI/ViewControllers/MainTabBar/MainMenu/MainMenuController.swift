@@ -18,11 +18,11 @@
 
 import Foundation
 
-class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
+class MainMenuController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
-    private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
+    private var dnsProviders: DnsProvidersService = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -46,8 +46,7 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
-        vpnService.notifier = self
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
+        systemProtectionLabel.text = proStatus ? dnsProviders.currentServerName : String.localizedString("system_dns_server")
     }
     
     override func viewDidLoad() {
@@ -70,20 +69,6 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         }
         
         updateFilters()
-    }
-    
-    // MARK: - VpnServiceNotifierDelegate methods
-    
-    func tunnelModeChanged() {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
-    }
-    
-    func vpnConfigurationChanged(with error: Error?) {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
-    }
-    
-    func cancelledAddingVpnConfiguration() {
-        systemProtectionLabel.text = proStatus ? vpnService.currentServerName : String.localizedString("system_dns_server")
     }
     
     func proStatusEnableFailure() {}

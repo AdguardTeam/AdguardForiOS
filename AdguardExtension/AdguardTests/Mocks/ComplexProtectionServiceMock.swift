@@ -18,21 +18,19 @@
 
 import Foundation
 
-class UserNotificationServiceMock: UserNotificationServiceProtocol {
-    
-    var postNotificationWasCalled = false
-    
-    func requestPermissions() {
+class ComplexProtectionServiceMock: ComplexProtectionServiceProtocol {
+    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?, Error?) -> Void) {
     }
     
-    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?) {
-        postNotificationWasCalled = true
+    func switchSafariProtection(state enabled: Bool, completion: @escaping (Error?) -> Void) {
     }
     
-    func postNotificationInForeground(body: String, title: String) {
-        
+    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?) -> Void) {
     }
     
-    func removeNotifications() {
-    }
+    var safariProtectionEnabled: Bool = true
+    
+    var systemProtectionEnabled: Bool = true
+    
+    var complexProtectionEnabled: Bool = true
 }

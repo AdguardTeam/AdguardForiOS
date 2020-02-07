@@ -125,6 +125,47 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var tunnelMode: APVpnManagerTunnelMode {
+        get {
+            guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt else {
+                return APVpnManagerTunnelModeSplit
+            }
+            
+            return APVpnManagerTunnelMode(value)
+        }
+        set {
+            sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsVPNTunnelMode)
+        }
+    }
+    
+    dynamic var restartByReachability: Bool {
+        get {
+            guard let value = sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool else {
+                return true
+            }
+            
+            return value
+        }
+        
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsRestartByReachability)
+        }
+    }
+    
+    dynamic var complexProtectionEnabled: Bool {
+        get {
+            guard let value = sharedDefaults().object(forKey: AEComplexProtectionEnabled) as? Bool else {
+                return true
+            }
+            
+            return value
+        }
+        
+        set {
+            sharedDefaults().set(newValue, forKey: AEComplexProtectionEnabled)
+        }
+    }
+    
     private func filterEnabled(defaultsKey: String)->Bool {
         let defaultValue = true
         guard let value = sharedDefaults().object(forKey: defaultsKey) as? Bool else {

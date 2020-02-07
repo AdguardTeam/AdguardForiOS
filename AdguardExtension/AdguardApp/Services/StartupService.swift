@@ -53,14 +53,21 @@ class StartupService : NSObject{
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
         
-        let vpnManager: APVPNManager = APVPNManager(resources: sharedResources, configuration: configuration)
-        locator.addService(service: vpnManager)
+        let dnsProviders: DnsProvidersService = DnsProvidersService(resources: sharedResources)
+        locator.addService(service: dnsProviders)
         
-        let vpnService: VpnServiceProtocol = VpnService(vpnManager: vpnManager, configuration: configuration)
-        locator.addService(service: vpnService)
+        let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
+        ServiceLocator.shared.addService(service: networkSettingsService)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, systemProtectionProcessor: vpnService, configuration: configuration)
+        let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService, dnsProviders: dnsProviders)
+
+        locator.addService(service: vpnManager as VpnManagerProtocol)
+        
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager)
         locator.addService(service: complexProtection)
+        
+        vpnManager.complexProtection = complexProtection
+        vpnManager.checkVpnInstalled { _ in }
         
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
@@ -71,14 +78,14 @@ class StartupService : NSObject{
         let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources)
         locator.addService(service: antibannerController)
         
-        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
+        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, complexProtection: complexProtection)
         locator.addService(service: contentBlockerService)
         
         let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)
         
         locator.addService(service: filtersService)
         
-        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration)
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
         let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
@@ -90,11 +97,6 @@ class StartupService : NSObject{
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
         
-        let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources, vpnManager: vpnManager)
-        ServiceLocator.shared.addService(service: networkSettingsService)
-        
-        vpnManager.networkingSettings = networkSettingsService;
-
         let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
         locator.addService(service: dnsLogService)
         

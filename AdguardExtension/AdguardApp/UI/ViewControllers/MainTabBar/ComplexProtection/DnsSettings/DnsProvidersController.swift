@@ -34,12 +34,13 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     // MARK: - services
     
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: Private properties
-    private lazy var providers = { self.vpnManager.providers } ()
+    private lazy var providers = { self.dnsProvidersService.allProviders } ()
     private var selectedCellTag = 0
     private var activeProviderObservation: NSKeyValueObservation?
     private var providersObservation: NSKeyValueObservation?
@@ -68,29 +69,29 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         
         let selectCellFunc = { [weak self] in
             guard let self = self else { return }
-            if self.vpnManager.activeDnsServer == nil {
+            if self.dnsProvidersService.activeDnsServer == nil {
                 self.selectedCellTag = self.defaultProviderTag
                 return
             }
             else {
-                let row = self.providers.firstIndex { self.vpnManager.isActiveProvider($0) }
+                let row = self.providers.firstIndex { self.dnsProvidersService.isActiveProvider($0) }
                 self.selectedCellTag = row ?? 0
             }
         }
         
         selectCellFunc()
         
-        activeProviderObservation = vpnManager.observe(\.activeDnsServer) {[weak self]  (server, change)  in
+        activeProviderObservation = dnsProvidersService.observe(\.activeDnsServer) {[weak self]  (server, change)  in
             DispatchQueue.main.async {
                 selectCellFunc()
                 self?.tableView.reloadData()
             }
         }
         
-        providersObservation = vpnManager.observe(\.providers) {[weak self]  (server, change)  in
+        providersObservation = dnsProvidersService.observe(\.allProviders) {[weak self]  (server, change)  in
             DispatchQueue.main.async {
                 guard let sSelf = self else { return }
-                sSelf.providers = sSelf.vpnManager.providers
+                sSelf.providers = sSelf.dnsProvidersService.allProviders
                 sSelf.tableView.reloadData()
             }
         }
@@ -137,7 +138,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             
         case providerSection:
             let provider = providers[indexPath.row]
-            let custom = vpnManager.isCustomProvider(provider)
+            let custom = dnsProvidersService.isCustomProvider(provider)
             
             let cell = tableView.dequeueReusableCell(withIdentifier: custom ? "CustomDnsServerCell" :"DnsServerCell") as! DnsProviderCell
             
@@ -219,11 +220,11 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         switch indexPath.section {
         case defaultProviderSection:
             selectedCellTag = defaultProviderTag
-            vpnManager.activeDnsServer = nil
-            vpnManager.enabled = true;
+            dnsProvidersService.activeDnsServer = nil
+            vpnManager.updateSettings(completion: nil)
             
         case providerSection:
-            if vpnManager.isCustomProvider(providers[indexPath.row]) {
+            if dnsProvidersService.isCustomProvider(providers[indexPath.row]) {
                 editProvider(providers[indexPath.row])
             }
             else {
@@ -264,8 +265,8 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             }
         }
         
-        vpnManager.activeDnsServer = server
-        vpnManager.enabled = true;
+        dnsProvidersService.activeDnsServer = server
+        vpnManager.updateSettings(completion: nil)
         
         selectedCellTag = sender.tag
     }

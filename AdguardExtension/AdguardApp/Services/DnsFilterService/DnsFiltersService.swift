@@ -181,14 +181,16 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let kSharedDefaultsDnsFiltersMetaKey = "kSharedDefaultsDnsFiltersMetaKey"
     
     private let resources: AESharedResourcesProtocol
-    private let vpnManager: APVPNManagerProtocol?
+    private let vpnManager: VpnManagerProtocol?
     private let configuration: ConfigurationServiceProtocol
     private let parser = AASFilterSubscriptionParser()
+    private let complexProtection: ComplexProtectionServiceProtocol?
         
-    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol?, configuration: ConfigurationServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol?) {
         self.resources = resources
         self.vpnManager = vpnManager
         self.configuration = configuration
+        self.complexProtection = complexProtection
         super.init()
         readFiltersMeta()
     }
@@ -215,13 +217,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return ["id":filter.id, "path":filterPath(filterId: filter.id)]
             })
             
-            // todo: do not read all rules to get counter
             let systemBlackListEnabled = resources.systemUserFilterEnabled
             if userRules.count > 0 && systemBlackListEnabled {
                 json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
             }
 
-            // todo: do not read all rules to get counter
             let systemWhiteListEnabled = resources.systemWhitelistEnabled
             if whitelistRules.count > 0 && systemWhiteListEnabled {
                 json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId), "whitelist": true])
@@ -264,7 +264,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             rules.append("") // temporary fix dnslibs bug
             if let data = rules.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
-                vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
+                vpnManager?.updateSettings {_ in } // update vpn settings and enable tunnel if needed
             }
             else {
                 DDLogError("(DnsFiltersService) error - can not save user filter to file")
@@ -282,7 +282,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         saveFiltersMeta()
-        vpnManager?.restartTunnel() // update vpn settings and enable tunnel if needed
+        vpnManager?.updateSettings{_ in } // update vpn settings and enable tunnel if needed
     }
     
     func addFilter(_ filter: DnsFilter, data: Data?) {
@@ -302,7 +302,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         saveFiltersMeta()
-        vpnManager?.restartTunnel()
+        vpnManager?.updateSettings{_ in }
     }
     
     func deleteFilter(_ filter: DnsFilter) {
@@ -316,7 +316,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return
             }
         }
-        vpnManager?.restartTunnel()
+        vpnManager?.updateSettings{_ in }
     }
     
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
@@ -375,8 +375,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             }
             
             group.wait()
-            if self.vpnManager?.enabled ?? false {
-                self.vpnManager?.restartTunnel()
+            if self.complexProtection?.systemProtectionEnabled ?? false {
+                self.vpnManager?.updateSettings(completion: nil)
             }
             
             self.filtersAreUpdating = false
@@ -481,7 +481,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private func saveWhitlistRules(rules:[String]) {
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
             resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
-            vpnManager?.restartTunnel()
+            vpnManager?.updateSettings{_ in }
         }
         else {
             DDLogError("(DnsFiltersService) error - can not save user filter to file")

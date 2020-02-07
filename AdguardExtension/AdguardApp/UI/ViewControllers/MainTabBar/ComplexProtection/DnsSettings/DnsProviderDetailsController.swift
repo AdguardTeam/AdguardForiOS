@@ -31,7 +31,8 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - constants
@@ -205,10 +206,10 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
             self.provider?.setActiveProtocol(self.resources, protcol: chosenProtocol)
             self.tableView.reloadData()
             
-            if self.vpnManager.activeDnsProvider == self.provider {
+            if self.dnsProvidersService.activeDnsProvider == self.provider {
                 if let server = self.provider?.serverByProtocol(dnsProtocol: chosenProtocol) {
-                    self.vpnManager.activeDnsServer = server
-                    self.vpnManager.enabled = true
+                    self.dnsProvidersService.activeDnsServer = server
+                    self.vpnManager.updateSettings(completion: nil)
                 }
             }
         }

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ComplexProtectionController: UITableViewController, VpnServiceNotifierDelegate {
+class ComplexProtectionController: UITableViewController {
 
     // MARK: - Safari protection outlets
     
@@ -70,7 +70,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
+    private var dnsProviders: DnsProvidersService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -116,7 +116,6 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         updateVpnInfo()
         updateSafariProtectionInfo()
         observeProStatus()
-        vpnService.notifier = self
         updateVpnInfo()
     }
     
@@ -129,44 +128,17 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
 
     @IBAction func safariProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
-        complexProtection.switchSafariProtection(state: enabled)
+        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
     }
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
-        complexProtection.switchSystemProtection(state: enabled, for: self)
-    }
-    
-    // MARK: - VpnServiceNotifierDelegate methods
-    
-    func tunnelModeChanged() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.updateVpnInfo()
-        }
-    }
-    
-    func vpnConfigurationChanged(with error: Error?) {
-        DispatchQueue.main.async{[weak self] in
-            guard let self = self else { return }
-            
-            if error != nil {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
-                self.systemProtectionSwitch.isOn = false
-            } else {
-                self.systemProtectionSwitch.isOn = self.vpnService.vpnEnabled
+        complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.systemProtectionSwitch.isOn = self.complexProtection.systemProtectionEnabled
             }
         }
-    }
-    
-    func cancelledAddingVpnConfiguration() {
-        DispatchQueue.main.async {[weak self] in
-            self?.systemProtectionSwitch.isOn = false
-        }
-    }
-    
-    func proStatusEnableFailure() {
-        performSegue(withIdentifier: showGetProSwgueId, sender: self)
     }
     
     // MARK: - Table view delegates and dataSource methods
@@ -202,6 +174,10 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     }
     
     // MARK: - Private methods
+    
+    private func proStatusEnableFailure() {
+        performSegue(withIdentifier: showGetProSwgueId, sender: self)
+    }
     
     /**
      Updates theme
@@ -244,7 +220,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
      Called when vpn configuration changes
      */
     private func updateVpnInfo(){
-        let enabled = vpnService.vpnEnabled
+        let enabled = complexProtection.systemProtectionEnabled
         systemProtectionSwitch.isOn = enabled
         systemProtectionSwitch.isEnabled = proStatus
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
@@ -252,7 +228,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     }
     
     private func updateSafariProtectionInfo(){
-        let protectionEnabled = resources.safariProtectionEnabled
+        let protectionEnabled = complexProtection.safariProtectionEnabled
         safariProtectionSwitch.isOn = protectionEnabled
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }

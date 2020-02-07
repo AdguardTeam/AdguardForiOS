@@ -31,7 +31,7 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
     
     override func setUp() {
         resources = SharedResourcesMock()
-        networkSettingsService = NetworkSettingsService(resources: resources, vpnManager: vpnManager)
+        networkSettingsService = NetworkSettingsService(resources: resources)
         networkSettingsService.delegate = self
         settingsChangedCalledCount = 0
     }
@@ -47,7 +47,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         XCTAssertNotNil(valueFromResources)
         
         XCTAssert(valueFromResources == !enabled)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 1)
     }
     
     func testFilterWifiDataEnabledSetWithCurrentValue(){
@@ -59,7 +58,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         XCTAssertNotNil(valueFromResources)
         
         XCTAssert(valueFromResources == enabled)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 0)
     }
     
     // MARK: - test filterMobileDataEnabled
@@ -73,7 +71,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         XCTAssertNotNil(valueFromResources)
         
         XCTAssert(valueFromResources == !enabled)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 1)
     }
     
     func testFilterMobileDataEnabledSetWithCurrentValue(){
@@ -85,7 +82,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         XCTAssertNotNil(valueFromResources)
         
         XCTAssert(valueFromResources == enabled)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 0)
     }
     
     
@@ -98,7 +94,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         
         networkSettingsService.add(exception: exeption)
 
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 1)
         XCTAssert(settingsChangedCalledCount == 1)
         
         XCTAssertEqual([exeption], networkSettingsService.exceptions)
@@ -117,7 +112,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
             
         networkSettingsService.add(exception: exeption)
 
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 1)
         XCTAssert(settingsChangedCalledCount == 1)
             
         XCTAssertEqual([exeption], networkSettingsService.exceptions)
@@ -136,7 +130,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.delete(exception: exeption2)
         XCTAssertEqual([exeption1, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 4)
         XCTAssert(settingsChangedCalledCount == 4)
     }
     
@@ -151,7 +144,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.delete(exception: exeptionToDelete)
         XCTAssertEqual([exeption1, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 4)
         XCTAssert(settingsChangedCalledCount == 4)
     }
     
@@ -166,7 +158,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.delete(exception: exeptionToDelete)
         XCTAssertEqual([exeption1, exeption2, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption2, exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 3)
         XCTAssert(settingsChangedCalledCount == 3)
     }
     
@@ -181,7 +172,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         
         networkSettingsService.change(oldException: exeption2, newException: newExeption)
         XCTAssertEqual([exeption1, newExeption, exeption3], networkSettingsService.exceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 4)
         XCTAssert(settingsChangedCalledCount == 4)
     }
     
@@ -195,7 +185,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.change(oldException: exeption2, newException: newExeption)
         XCTAssertEqual([exeption1, newExeption, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 4)
         XCTAssert(settingsChangedCalledCount == 4)
     }
     
@@ -213,7 +202,6 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.change(oldException: absentExeption, newException: newExeption)
         XCTAssertEqual([exeption1, exeption2, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption2, exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 3)
         XCTAssert(settingsChangedCalledCount == 3)
     }
     
@@ -230,19 +218,16 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         networkSettingsService.add(exception: exeption1)
         XCTAssertEqual([exeption1], networkSettingsService.exceptions)
         XCTAssertEqual([], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 1)
         XCTAssert(settingsChangedCalledCount == 1)
         
         networkSettingsService.add(exception: exeption2)
         XCTAssertEqual([exeption1, exeption2], networkSettingsService.exceptions)
         XCTAssertEqual([exeption2], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 2)
         XCTAssert(settingsChangedCalledCount == 2)
         
         networkSettingsService.add(exception: exeption3)
         XCTAssertEqual([exeption1, exeption2, exeption3], networkSettingsService.exceptions)
         XCTAssertEqual([exeption2, exeption3], networkSettingsService.enabledExceptions)
-        XCTAssert(vpnManager.restartTunnelWasCalledCount == 3)
         XCTAssert(settingsChangedCalledCount == 3)
     }
 }

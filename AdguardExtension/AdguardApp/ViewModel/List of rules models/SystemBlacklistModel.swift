@@ -52,7 +52,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue {
                 resources.systemUserFilterEnabled = newValue
-                vpnManager.restartTunnel()
+                vpnManager.updateSettings(completion: nil)
             }
         }
     }
@@ -104,7 +104,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
-    private let vpnManager: APVPNManager
+    private let vpnManager: VpnManagerProtocol
     
     /* Variables */
     private let fileName = "dns_blacklist.txt"
@@ -114,7 +114,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, dnsFiltersService: DnsFiltersServiceProtocol, theme: ThemeServiceProtocol, vpnManager: APVPNManager) {
+    init(resources: AESharedResourcesProtocol, dnsFiltersService: DnsFiltersServiceProtocol, theme: ThemeServiceProtocol, vpnManager: VpnManagerProtocol) {
         self.resources = resources
         self.dnsFiltersService = dnsFiltersService
         self.theme = theme

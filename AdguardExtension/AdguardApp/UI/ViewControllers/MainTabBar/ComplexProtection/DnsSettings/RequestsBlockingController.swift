@@ -30,7 +30,7 @@ class RequestsBlockingController: UITableViewController {
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
@@ -113,7 +113,7 @@ class RequestsBlockingController: UITableViewController {
         resources.dnsRequestBlockingEnabled = sender.isOn
         requestBlockingStateLabel.text = sender.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         
-        vpnManager.restartTunnel()
+        vpnManager.updateSettings(completion: nil)
     }
     
     private func updateTheme() {
