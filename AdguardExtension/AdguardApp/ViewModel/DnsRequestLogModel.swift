@@ -122,8 +122,7 @@ extension DnsLogRecord
         case (.whitelistedByUserFilter, _):
             return [.removeDomainFromWhitelist]
         case (.whitelistedByOtherFilter, _):
-            return [] // we can not remove a rule from filter and can not block it by user blacklist,
-                      // because whitelist rules have higher priority
+            return [.addRuleToUserFlter]
         case (.processed, _):
             return [.addDomainToWhitelist, .addRuleToUserFlter]
         }

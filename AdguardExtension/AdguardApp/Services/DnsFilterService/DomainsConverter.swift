@@ -32,10 +32,10 @@ protocol DomainsConverterProtocol {
 class DomainsConverter: DomainsConverterProtocol {
     
     private let whitelistPrefix = "@@||"
-    private let whitelistSuffix = "^|"
+    private let whitelistSuffix = "^|$important"
     
     private let blacklistPrefix = "||"
-    private let blacklistSuffix = "^"
+    private let blacklistSuffix = "^$important"
     
     func whitelistDomainFromRule(_ rule: String)->String {
         let start = rule.hasPrefix(whitelistPrefix) ? whitelistPrefix.count : 0
