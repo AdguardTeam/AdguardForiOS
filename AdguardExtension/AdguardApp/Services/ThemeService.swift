@@ -236,7 +236,6 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         searchBar.barTintColor = .clear
         textField?.backgroundColor = notificationWindowColor
         searchBar.backgroundImage = UIImage()
-        searchBar.setImage(UIImage(named: "search-icon"), for: .search, state: .normal)
     }
     
     func statusbarStyle() -> UIStatusBarStyle {
