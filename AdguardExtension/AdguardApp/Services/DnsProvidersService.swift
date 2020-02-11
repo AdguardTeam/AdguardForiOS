@@ -121,7 +121,7 @@ class DnsServerInfo : ACObject {
             }
         }
         /**
-         If searching a server by protocol failed and server is nil
+         If searching a server by protocol failed
          the method will just return the first protocol of this server
          */
         return servers?.first
