@@ -106,5 +106,8 @@ class StartupService : NSObject{
         
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
+        
+        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
+        locator.addService(service: httpRequestService)
     }
 }
