@@ -21,7 +21,7 @@ import Foundation
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     
-    func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
+    func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -54,12 +54,14 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     var agproxy: AGDnsProxy?
     
-    @objc func start(upstreams: [String], bootstrapDns: String, fallback: String, serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool {
-        
-        let bootstrapDnsArray = bootstrapDns.components(separatedBy: .whitespacesAndNewlines)
-        
+    @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool {
+                
         let agUpstreams = upstreams.map { (upstream) -> AGDnsUpstream in
-            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDnsArray, timeoutMs: 2000, serverIp: nil)
+            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
+        }
+        
+        let agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
+            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
         }
         
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
@@ -86,14 +88,20 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         dnsRecordsWriter.whitelistFilterId = whitelistFilterId as NSNumber?
         dnsRecordsWriter.otherFilterIds = otherFilterIds as [NSNumber]
         
-        guard let upstream = AGDnsUpstream(address: fallback, bootstrap: bootstrapDnsArray, timeoutMs: 3000, serverIp: nil) else {
-            DDLogError("(DnsProxyService) error - can not create upstream: \(fallback), bootstrap: \(bootstrapDnsArray)")
-            return false
-        }
+        /**
+         Detect ipv6 addresses,
+         If address contains ":", than it is ipv6 address
+         We need to use system DNS in dns64Settings variable, that's why we iterate through fallbacks variable
+         */
+        let ipv6Addresses = fallbacks.filter({ $0.contains(":") })
         
-        let dns64Settings = AGDns64Settings(upstreams: [upstream], maxTries: 2, waitTimeMs: 3000)
+        let ipv6Upstreams = ipv6Addresses.map { (address) -> AGDnsUpstream in
+            return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
+        }
+    
+        let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
-                                      fallbacks: nil,
+                                      fallbacks: agFallbacks,
                                       filters: filters,
                                       blockedResponseTtlSecs: 2,
                                       dns64Settings: dns64Settings,
