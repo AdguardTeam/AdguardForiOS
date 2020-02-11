@@ -120,7 +120,7 @@ class DnsServerInfo : ACObject {
                 return server
             }
         }
-        return nil
+        return servers?.first
     }
     
     func getActiveProtocol(_ resources: AESharedResourcesProtocol) -> DnsProtocol? {
