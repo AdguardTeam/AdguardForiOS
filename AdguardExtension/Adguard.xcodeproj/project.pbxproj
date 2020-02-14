@@ -627,6 +627,8 @@
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
 		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
+		7E6E73B723F6C630001D5019 /* RateAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E73B523F6C630001D5019 /* RateAppController.swift */; };
+		7E6E73B823F6C630001D5019 /* RateAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E73B623F6C630001D5019 /* RateAppController.xib */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
@@ -1970,6 +1972,8 @@
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
+		7E6E73B523F6C630001D5019 /* RateAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppController.swift; sourceTree = "<group>"; };
+		7E6E73B623F6C630001D5019 /* RateAppController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateAppController.xib; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
@@ -3576,6 +3580,15 @@
 			path = RequestDetailsScreen;
 			sourceTree = "<group>";
 		};
+		7E6E73B223F6C5D7001D5019 /* RateAppAlert */ = {
+			isa = PBXGroup;
+			children = (
+				7E6E73B523F6C630001D5019 /* RateAppController.swift */,
+				7E6E73B623F6C630001D5019 /* RateAppController.xib */,
+			);
+			path = RateAppAlert;
+			sourceTree = "<group>";
+		};
 		7E74FCB1239F9CA0006C0990 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -4018,6 +4031,7 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E73B223F6C5D7001D5019 /* RateAppAlert */,
 				7E8AC81523A7BF2700669C75 /* MainTabBar */,
 				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
 				D0EDE45422A9288E00086C00 /* Tutorial */,
@@ -4878,6 +4892,7 @@
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
 				D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */,
 				D0C940F123EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM in Resources */,
+				7E6E73B823F6C630001D5019 /* RateAppController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5799,6 +5814,7 @@
 				7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D08187CA2264C89400E961B5 /* LoginService.swift in Sources */,
+				7E6E73B723F6C630001D5019 /* RateAppController.swift in Sources */,
 				7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */,
 				7E15B65D234358C20048E63F /* DnsFiltersController.swift in Sources */,
 				D0EC86BE23A8C5F300EDF107 /* APDnsLogTable.m in Sources */,

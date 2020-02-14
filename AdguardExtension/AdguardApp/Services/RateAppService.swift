@@ -24,18 +24,18 @@ protocol RateAppServiceProtocol {
     /* shows rate dialog if it was not already showed before */
     func showRateDialogIfNeeded(_ controller: UIViewController)
     
-    /* open appstore to write a review */
-    func rateInAppStore()
+    /* decides how to rate an app by stars number */
+    func rateApp(_ starsCount: Int)
 }
 
 class RateAppService: RateAppServiceProtocol {
     
-    let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
+    private let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     
-    let minTimeInterValToRate = { 2 * 24 * 3600 }() // 2 days
+    private let minTimeInterValToRate = { 2 * 24 * 3600 }() // 2 days
     
-    let resources: AESharedResourcesProtocol
-    let configuration: ConfigurationServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    private let configuration: ConfigurationServiceProtocol
     
     init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol) {
         self.resources = resources
@@ -54,14 +54,24 @@ class RateAppService: RateAppServiceProtocol {
         showAlert(controller)
     }
     
-    func rateInAppStore() {
+    func rateApp(_ starsCount: Int){
+        if starsCount > 3 {
+            rateInAppStore()
+        } else {
+            print("Redirect to page")
+        }
+    }
+    
+    /* opens appstore to write a review */
+    private func rateInAppStore() {
         guard let writeReviewURL = URL(string: reviewUrl) else { return }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
     
     private func showAlert(_ controller: UIViewController) {
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        }
+        let rateAppViewController = RateAppController(nibName: "RateAppController", bundle: nil)
+        rateAppViewController.modalPresentationStyle = .overCurrentContext
+        rateAppViewController.modalTransitionStyle = .coverVertical
+        controller.present(rateAppViewController, animated: true, completion: nil)
     }
 }
