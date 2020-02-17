@@ -86,7 +86,7 @@ class RateAppController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.2) {[weak self] in
                 guard let self = self else { return }
-                self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+                self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
             }
         }
     }
