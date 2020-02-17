@@ -120,7 +120,11 @@ class DnsServerInfo : ACObject {
                 return server
             }
         }
-        return nil
+        /**
+         If searching a server by protocol failed
+         the method will just return the first protocol of this server
+         */
+        return servers?.first
     }
     
     func getActiveProtocol(_ resources: AESharedResourcesProtocol) -> DnsProtocol? {

@@ -633,9 +633,9 @@
         upstreams = systemDnsServers;
     }
 
-    NSString* systemDns = [systemDnsServers componentsJoinedByString:@"\n"];
+    NSString* systemDnsServersString = [systemDnsServers componentsJoinedByString:@"\n"];
     
-    DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDns);
+    DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDnsServersString);
     
     BOOL ipv6Available = [ACNIPUtils isIpv6Available];
     SimpleConfigurationSwift* configuration = [[SimpleConfigurationSwift alloc] initWithResources:_resources systemAppearenceIsDark:false];
@@ -646,7 +646,9 @@
     long whitelistFilterId = dnsFiltersService.whitelistFilterId;
     
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
-    return [_dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDns  fallback: systemDns serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
+    
+    // Using system DNS servers as bootstraps and fallbacks
+    return [_dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
 }
 
 @end
