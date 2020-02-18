@@ -35,3 +35,4 @@
 #import "APDnsLogTable.h"
 #import "APStatisticsTable.h"
 #import "ACNIPUtils.h"
+#import "ADLocales.h"

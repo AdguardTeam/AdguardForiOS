@@ -20,6 +20,6 @@ import Foundation
 
 protocol ParserProtocol {
     associatedtype Model
-    func parse(data: Data) -> Model?
+    func parse(data: Data, response: URLResponse?) -> Model?
 }
 

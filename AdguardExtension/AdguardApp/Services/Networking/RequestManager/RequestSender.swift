@@ -35,7 +35,7 @@ final class RequestSender: RequestSenderProtocol{
                 return
             }
             guard let data = data,
-                let parsedModel: Parser.Model = requestConfig.parser.parse(data: data)
+                let parsedModel: Parser.Model = requestConfig.parser.parse(data: data, response: response)
                 else {
                     completionHandler(Result.error(RequestSenderErrors.receivedDataParsingError))
                     return

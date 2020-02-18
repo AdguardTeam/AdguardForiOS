@@ -1,10 +1,20 @@
-//
-//  RateAppController.swift
-//  Adguard
-//
-//  Created by Илья Ковальчук on 14.02.2020.
-//  Copyright © 2020 Performiks. All rights reserved.
-//
+/**
+      This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+      Copyright © Adguard Software Limited. All rights reserved.
+
+      Adguard for iOS is free software: you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation, either version 3 of the License, or
+      (at your option) any later version.
+
+      Adguard for iOS is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License
+      along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 import UIKit
 
@@ -25,7 +35,11 @@ class RateAppController: UIViewController {
     
     private let rateAppService: RateAppServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var selectedStar: Int? = nil
+    private var selectedStar: Int? = nil {
+        didSet {
+            submitButton.isEnabled = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +63,9 @@ class RateAppController: UIViewController {
 
     @IBAction func starTapped(_ sender: UIButton) {
         let tag = sender.tag
-        selectedStar = tag + 1
+        selectedStar = tag
         
-        for star in stars {
-            star.isSelected = star.tag <= tag
-        }
+        stars.forEach({ $0.isSelected = $0.tag <= tag })
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {
@@ -61,9 +73,19 @@ class RateAppController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        if let selectedStar = selectedStar {
-            rateAppService.rateApp(selectedStar)
-            dismiss(animated: true, completion: nil)
+        weak var pvc = self.presentingViewController
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else { return }
+            if let selectedStar = self.selectedStar {
+                self.rateAppService.rateApp(selectedStar) {
+                    DispatchQueue.main.async {
+                        let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController")
+                        controller.modalTransitionStyle = .crossDissolve
+                        pvc?.present(controller, animated: true)
+                    }
+                }
+            }
         }
     }
     

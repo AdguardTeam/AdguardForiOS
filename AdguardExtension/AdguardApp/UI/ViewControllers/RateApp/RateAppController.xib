@@ -70,49 +70,49 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="he9-R0-MAV">
                             <rect key="frame" x="32" y="90.5" width="236" height="30"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osd-nT-B02">
-                                    <rect key="frame" x="0.0" y="0.0" width="47" height="30"/>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osd-nT-B02">
+                                    <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
                                     <color key="tintColor" red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="star"/>
                                     <state key="selected" image="star_selected"/>
                                     <connections>
-                                        <action selector="starTapped:" destination="-1" eventType="touchUpInside" id="7WF-3P-aTp"/>
+                                        <action selector="starTapped:" destination="-1" eventType="touchDown" id="gaP-YI-7fQ"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7d-eo-3Cd">
-                                    <rect key="frame" x="47" y="0.0" width="47.5" height="30"/>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7d-eo-3Cd">
+                                    <rect key="frame" x="60" y="0.0" width="60" height="30"/>
                                     <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="star"/>
                                     <state key="selected" image="star_selected"/>
                                     <connections>
-                                        <action selector="starTapped:" destination="-1" eventType="touchUpInside" id="kER-Nn-BdE"/>
+                                        <action selector="starTapped:" destination="-1" eventType="touchDown" id="vPz-l7-aeI"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVM-Ex-uNa">
-                                    <rect key="frame" x="94.5" y="0.0" width="47" height="30"/>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVM-Ex-uNa">
+                                    <rect key="frame" x="120" y="0.0" width="60" height="30"/>
                                     <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="star"/>
                                     <state key="selected" image="star_selected"/>
                                     <connections>
-                                        <action selector="starTapped:" destination="-1" eventType="touchUpInside" id="i32-iD-5EN"/>
+                                        <action selector="starTapped:" destination="-1" eventType="touchDown" id="Ibm-RG-K1Z"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTF-k5-tEF">
-                                    <rect key="frame" x="141.5" y="0.0" width="47.5" height="30"/>
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTF-k5-tEF">
+                                    <rect key="frame" x="180" y="0.0" width="60" height="30"/>
                                     <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="star"/>
                                     <state key="selected" image="star_selected"/>
                                     <connections>
-                                        <action selector="starTapped:" destination="-1" eventType="touchUpInside" id="Nxa-ju-va3"/>
+                                        <action selector="starTapped:" destination="-1" eventType="touchDown" id="0y9-gt-fJB"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea4-HI-CIS">
-                                    <rect key="frame" x="189" y="0.0" width="47" height="30"/>
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea4-HI-CIS">
+                                    <rect key="frame" x="240" y="0.0" width="60" height="30"/>
                                     <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" image="star"/>
                                     <state key="selected" image="star_selected"/>
                                     <connections>
-                                        <action selector="starTapped:" destination="-1" eventType="touchUpInside" id="DBt-y4-Vvp"/>
+                                        <action selector="starTapped:" destination="-1" eventType="touchDown" id="M4n-zb-3Jn"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -120,8 +120,8 @@
                                 <constraint firstAttribute="height" constant="30" id="cpE-d7-kEX"/>
                             </constraints>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fks-qW-E3t">
-                            <rect key="frame" x="150.5" y="151.5" width="149.5" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fks-qW-E3t">
+                            <rect key="frame" x="182.5" y="151.5" width="181.5" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="3LB-mh-ryb"/>
                             </constraints>

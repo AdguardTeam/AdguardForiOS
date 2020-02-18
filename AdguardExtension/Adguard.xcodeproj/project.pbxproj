@@ -655,6 +655,10 @@
 		7EA4183A239FEBE700CF517C /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
+		7EAFC5C423FA7F2900DB8766 /* RateApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C323FA7F2900DB8766 /* RateApp.storyboard */; };
+		7EAFC5C623FA8A5C00DB8766 /* RateAppDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C523FA8A5C00DB8766 /* RateAppDialogController.swift */; };
+		7EAFC5C823FA8AE100DB8766 /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */; };
+		7EAFC5CA23FA8CFD00DB8766 /* FeedbackCompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */; };
 		7EB2F94823F2B64500F9A544 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
 		7EB2F94A23F2B64500F9A544 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */; };
 		7EB2F94C23F2B64500F9A544 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94523F2B64400F9A544 /* RequestSender.swift */; };
@@ -2119,6 +2123,10 @@
 		7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverter.swift; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
+		7EAFC5C323FA7F2900DB8766 /* RateApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RateApp.storyboard; sourceTree = "<group>"; };
+		7EAFC5C523FA8A5C00DB8766 /* RateAppDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppDialogController.swift; sourceTree = "<group>"; };
+		7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
+		7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCompletionController.swift; sourceTree = "<group>"; };
 		7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		7EB2F94523F2B64400F9A544 /* RequestSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
@@ -3580,13 +3588,17 @@
 			path = RequestDetailsScreen;
 			sourceTree = "<group>";
 		};
-		7E6E73B223F6C5D7001D5019 /* RateAppAlert */ = {
+		7E6E73B223F6C5D7001D5019 /* RateApp */ = {
 			isa = PBXGroup;
 			children = (
 				7E6E73B523F6C630001D5019 /* RateAppController.swift */,
 				7E6E73B623F6C630001D5019 /* RateAppController.xib */,
+				7EAFC5C323FA7F2900DB8766 /* RateApp.storyboard */,
+				7EAFC5C523FA8A5C00DB8766 /* RateAppDialogController.swift */,
+				7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */,
+				7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */,
 			);
-			path = RateAppAlert;
+			path = RateApp;
 			sourceTree = "<group>";
 		};
 		7E74FCB1239F9CA0006C0990 /* MainPage */ = {
@@ -4031,7 +4043,7 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7E6E73B223F6C5D7001D5019 /* RateAppAlert */,
+				7E6E73B223F6C5D7001D5019 /* RateApp */,
 				7E8AC81523A7BF2700669C75 /* MainTabBar */,
 				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
 				D0EDE45422A9288E00086C00 /* Tutorial */,
@@ -4884,6 +4896,7 @@
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				7E952E9D23D5FFC400D89AE0 /* Onboarding.storyboard in Resources */,
 				D0CDD56C2344EAA3000584EF /* dns_filter.txt in Resources */,
+				7EAFC5C423FA7F2900DB8766 /* RateApp.storyboard in Resources */,
 				D005096B2201DA2F006BC10C /* providers.json in Resources */,
 				7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */,
 				D0D6B9FF21A6AF5B007360BC /* MainMenu.storyboard in Resources */,
@@ -5718,6 +5731,7 @@
 				D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				7E4D203622D71A5B003B0E75 /* mz_strm_os_posix.c in Sources */,
+				7EAFC5C623FA8A5C00DB8766 /* RateAppDialogController.swift in Sources */,
 				7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */,
 				D0569E4921F1F11300985DA9 /* ADBTableRow.m in Sources */,
 				65EC9BE41BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
@@ -5772,6 +5786,7 @@
 				7EB2F94C23F2B64500F9A544 /* RequestSender.swift in Sources */,
 				D07427F3232B97040019AAF4 /* SafariRule.swift in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
+				7EAFC5C823FA8AE100DB8766 /* FeedbackController.swift in Sources */,
 				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				7ECF38BB23AA43A300A39094 /* DnsLogContainerController.swift in Sources */,
@@ -5781,6 +5796,7 @@
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				7E4D203822D71A5B003B0E75 /* mz_strm_pkcrypt.c in Sources */,
 				6562800A1EA3EB2600EC9F97 /* AESProductSchemaManager.m in Sources */,
+				7EAFC5CA23FA8CFD00DB8766 /* FeedbackCompletionController.swift in Sources */,
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
 				D0702B3F2188859D0051669A /* FileShareService.swift in Sources */,

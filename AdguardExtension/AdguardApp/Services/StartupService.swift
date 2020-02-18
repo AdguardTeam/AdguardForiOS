@@ -109,5 +109,8 @@ class StartupService : NSObject{
         
         let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
         locator.addService(service: httpRequestService)
+        
+        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
+        locator.addService(service: keyChainService)
     }
 }

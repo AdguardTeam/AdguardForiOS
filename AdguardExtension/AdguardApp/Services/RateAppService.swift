@@ -25,7 +25,7 @@ protocol RateAppServiceProtocol {
     func showRateDialogIfNeeded(_ controller: UIViewController)
     
     /* decides how to rate an app by stars number */
-    func rateApp(_ starsCount: Int)
+    func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
 }
 
 class RateAppService: RateAppServiceProtocol {
@@ -54,11 +54,11 @@ class RateAppService: RateAppServiceProtocol {
         showAlert(controller)
     }
     
-    func rateApp(_ starsCount: Int){
+    func rateApp(_ starsCount: Int, _ fewStarsAction: ()->()){
         if starsCount > 3 {
             rateInAppStore()
         } else {
-            print("Redirect to page")
+            fewStarsAction()
         }
     }
     

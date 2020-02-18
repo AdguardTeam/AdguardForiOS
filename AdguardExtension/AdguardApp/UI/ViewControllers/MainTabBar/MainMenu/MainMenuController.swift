@@ -92,6 +92,22 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         
+        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {[weak self] (action) in
+            let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "RateAppDialogController")
+            self?.present(controller, animated: true)
+        }
+        
+        let justSendFeedback = UIAlertAction(title: String.localizedString("just_send_feedback"), style: .default) {[weak self] (action) in
+            let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
+            if let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController") as? UINavigationController {
+                if let feedbackController = controller.viewControllers.first as? FeedbackController {
+                    feedbackController.simpleFeedback = false
+                    self?.present(controller, animated: true)
+                }
+            }
+        }
+         
         let incorrectAction = UIAlertAction(title: ACLocalizedString("incorrect_blocking_report", nil), style: .default) { (action) in
             guard let reportUrl = self.support.composeWebReportUrl(forSite: nil) else { return }
             UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
@@ -108,6 +124,8 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         }
         
         actionSheet.addAction(cancelAction)
+        actionSheet.addAction(rateAppAction)
+        actionSheet.addAction(justSendFeedback)
         actionSheet.addAction(incorrectAction)
         actionSheet.addAction(contactSupportAction)
         actionSheet.addAction(exportLogsAction)

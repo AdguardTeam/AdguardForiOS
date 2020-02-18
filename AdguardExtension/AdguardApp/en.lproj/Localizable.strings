@@ -163,6 +163,12 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Name:";
 
+/* (Main Menu) Rate app action */
+"rate_app_title" = "Rate app";
+
+/* (Main Menu) Just send feedback action */
+"just_send_feedback" = "Just send feedback";
+
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Report incorrect blocking";
 
