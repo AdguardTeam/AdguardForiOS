@@ -52,6 +52,7 @@ class RateAppDialogController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        rateButton.layoutIfNeeded()
         rateButton.layer.cornerRadius = rateButton.frame.height / 2
     }
 

@@ -26,6 +26,9 @@ protocol RateAppServiceProtocol {
     
     /* decides how to rate an app by stars number */
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
+    
+    /* shifts the deadline of showing rate dialog */
+    func cancelTapped()
 }
 
 class RateAppService: RateAppServiceProtocol {
@@ -47,7 +50,6 @@ class RateAppService: RateAppServiceProtocol {
     }
     
     func showRateDialogIfNeeded(_ controller: UIViewController) {
-        
         guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
         if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeInterValToRate || !configuration.allContentBlockersEnabled { return }
         
@@ -60,6 +62,10 @@ class RateAppService: RateAppServiceProtocol {
         } else {
             fewStarsAction()
         }
+    }
+    
+    func cancelTapped() {
+        resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
     }
     
     /* opens appstore to write a review */

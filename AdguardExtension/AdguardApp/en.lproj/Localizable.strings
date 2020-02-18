@@ -723,3 +723,9 @@
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Enable";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Failed to send your feedback";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Something went wrong";

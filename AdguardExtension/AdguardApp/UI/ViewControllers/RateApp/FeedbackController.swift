@@ -27,7 +27,9 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var feedBackTextViewPlaceholder: UILabel!
     @IBOutlet weak var sendButton: RoundRectButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var separatorView: UIView!
     
+    // FUTURE FLAG FOR DIFFERENT FEEDBACK TYPES
     var simpleFeedback = true
     
     private let httpRequestService: HttpRequestServiceProtocol = ServiceLocator.shared.getService()!
@@ -63,6 +65,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        sendButton.layoutIfNeeded()
         sendButton.layer.cornerRadius = sendButton.frame.height / 2
     }
     
@@ -76,7 +79,15 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 
         let feedback = createFeedback()
         
-        if feedback.description?.isEmpty ?? true{
+        if feedback.description?.isEmpty ?? true {
+            sendButton.stopIndicator()
+            return
+        }
+        
+        if !isValidEmail(feedback.email ?? "") && !(emailTextField.text == nil || emailTextField.text == "") {
+            emailTextField.textColor = theme.errorRedColor
+            separatorView.backgroundColor = theme.errorRedColor
+            sendButton.stopIndicator()
             return
         }
         
@@ -84,7 +95,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if !success {
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: "SOME ERROR", message: "SOME ERROR")
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("feedback_sending_failed_title") , message: String.localizedString("feedback_sending_failed_message"))
                 } else {
                     self.performSegue(withIdentifier: self.showCompletionSuccessSegue, sender: self)
                 }
@@ -107,21 +118,27 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         return true
     }
     
+    @IBAction func textFieldTextChanged(_ sender: UITextField) {
+        emailTextField.textColor = theme.textFieldTextColor
+        separatorView.backgroundColor = theme.separatorColor
+    }
+    
     // MARK: - private methods
     
     private func updateTheme() {
         view.backgroundColor = theme.popupBackgroundColor
         scrollView.backgroundColor = theme.popupBackgroundColor
         feedBackTextViewPlaceholder.textColor = theme.placeholderTextColor
+        separatorView.backgroundColor = theme.separatorColor
         theme.setupTextField(emailTextField)
         theme.setupTextView(feedbackTextView)
         theme.setupLabel(titleLabel)
     }
     
     private func createFeedback() -> FeedBackProtocol {
-        let appId = keyChainService.appId ?? ""
+        let appId = keyChainService.appId
         let version = ADProductInfo.buildVersion()
-        let email = emailTextField.text ?? ""
+        let email = emailTextField.text
         let language = ADLocales.lang()
         // METHOD TYPE
         let subject = "Feedback"
@@ -130,5 +147,11 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         
         let feedback: FeedBackProtocol = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState)
         return feedback
+    }
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
     }
 }

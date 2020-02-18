@@ -69,6 +69,7 @@ class RateAppController: UIViewController {
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {
+        rateAppService.cancelTapped()
         dismiss(animated: true, completion: nil)
     }
     

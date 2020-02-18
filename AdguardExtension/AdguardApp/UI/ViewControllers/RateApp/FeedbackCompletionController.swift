@@ -43,8 +43,9 @@ class FeedbackCompletionController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-          super.viewDidLayoutSubviews()
-          homeButton.layer.cornerRadius = homeButton.frame.height / 2
+        super.viewDidLayoutSubviews()
+        homeButton.layoutIfNeeded()
+        homeButton.layer.cornerRadius = homeButton.frame.height / 2
     }
     
     @IBAction func homeButtonTapped(_ sender: UIButton) {

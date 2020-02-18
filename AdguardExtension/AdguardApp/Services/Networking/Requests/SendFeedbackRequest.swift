@@ -28,6 +28,7 @@ protocol FeedBackProtocol {
     var subject: String? { get }
     var description: String? { get }
     var applicationState: String? { get }
+    var appName: String { get }
 }
 
 class FeedBack: FeedBackProtocol {
@@ -38,6 +39,7 @@ class FeedBack: FeedBackProtocol {
     var subject: String?
     var description: String?
     var applicationState: String?
+    var appName: String = "adguard_ios"
     
     init(applicationId: String?, version: String?, email: String?, language: String?, subject: String?, description: String?, applicationState: String?) {
         self.applicationId = applicationId
@@ -76,7 +78,8 @@ final class SendFeedbackRequest: RequestProtocol {
                 "language" : feedBack.language ?? "",
                 "subject" : feedBack.subject ?? "",
                 "description" : feedBack.description ?? "",
-                "applicationState" : feedBack.applicationState ?? ""
+                "applicationState" : feedBack.applicationState ?? "",
+                "app_name" : feedBack.appName
             ]
             request.httpBody = parameters.percentEncoded()
             return request
