@@ -49,7 +49,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
             guard let self = self else { return }
-            self.rateService.showRateDialogIfNeeded(self) {
+            self.rateService.showRateDialogIfNeeded {
                 let rateAppViewController = RateAppController(nibName: "RateAppController", bundle: nil)
                 rateAppViewController.modalPresentationStyle = .overCurrentContext
                 rateAppViewController.modalTransitionStyle = .coverVertical

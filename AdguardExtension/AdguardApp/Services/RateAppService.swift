@@ -22,7 +22,7 @@ import StoreKit
 @objc protocol RateAppServiceProtocol {
     
     /* shows rate dialog if it was not already showed before */
-    func showRateDialogIfNeeded(_ controller: UIViewController, _ showAlert: ()->())
+    func showRateDialogIfNeeded(showAlert: ()->())
     
     /* decides how to rate an app by stars number */
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
@@ -60,18 +60,18 @@ class RateAppService: RateAppServiceProtocol {
         }
     }
     
-    func showRateDialogIfNeeded(_ controller: UIViewController, _ showAlert: ()->()) {
-        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-        if configuration.appRated { return }
+    func showRateDialogIfNeeded(showAlert: ()->()) {
+//        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
+//        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+//        if configuration.appRated { return }
         
         showAlert()
     }
     
     func showRateNotificationIfNeeded() {
-        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-        if configuration.appRated { return }
+//        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
+//        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+//        if configuration.appRated { return }
         
         let title = String.localizedString("rate_notification_title")
         let body = String.localizedString("rate_notification_message")

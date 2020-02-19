@@ -2,7 +2,7 @@
 import Foundation
 
 class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
-    var appRated: Bool = true
+    var appRated: Bool = false
     var developerMode: Bool = true
     var userThemeMode: AEThemeMode = AELightThemeMode
     var showStatusBar: Bool = true
