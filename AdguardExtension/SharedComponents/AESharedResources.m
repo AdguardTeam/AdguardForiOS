@@ -36,6 +36,7 @@ NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
+NSString *MinTimeIntervalToRate = @"MinTimeIntervalToRate";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
 NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";

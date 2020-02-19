@@ -36,6 +36,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let keyChainService: KeychainServiceProtocol = ServiceLocator.shared.getService()!
     private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private var themeToken: NotificationToken?
     
     private var keyboardMover: KeyboardMover?
@@ -97,6 +98,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 if !success {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("feedback_sending_failed_title") , message: String.localizedString("feedback_sending_failed_message"))
                 } else {
+                    configuration.appRated = true
                     self.performSegue(withIdentifier: self.showCompletionSuccessSegue, sender: self)
                 }
                 self.sendButton.stopIndicator()

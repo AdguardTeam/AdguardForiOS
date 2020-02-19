@@ -27,7 +27,7 @@ protocol RateAppServiceProtocol {
     /* decides how to rate an app by stars number */
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
     
-    /* shifts the deadline of showing rate dialog */
+    /* shifts the deadline of showing rate dialog by 7 days */
     func cancelTapped()
 }
 
@@ -35,7 +35,13 @@ class RateAppService: RateAppServiceProtocol {
     
     private let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     
-    private let minTimeInterValToRate = { 2 * 24 * 3600 }() // 2 days
+    private var minTimeIntervalToRate: Int  {
+        if let time = resources.sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int {
+            return time
+        } else {
+            return 24 * 3600 // 1 day
+        }
+    }
     
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
@@ -51,7 +57,8 @@ class RateAppService: RateAppServiceProtocol {
     
     func showRateDialogIfNeeded(_ controller: UIViewController) {
         guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeInterValToRate || !configuration.allContentBlockersEnabled { return }
+        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+        if configuration.appRated { return }
         
         showAlert(controller)
     }
@@ -65,13 +72,16 @@ class RateAppService: RateAppServiceProtocol {
     }
     
     func cancelTapped() {
+        let week = 3600 * 7 // 7 days
         resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
+        resources.sharedDefaults().set(week, forKey: MinTimeIntervalToRate)
     }
     
     /* opens appstore to write a review */
     private func rateInAppStore() {
         guard let writeReviewURL = URL(string: reviewUrl) else { return }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        configuration.appRated = true
     }
     
     private func showAlert(_ controller: UIViewController) {

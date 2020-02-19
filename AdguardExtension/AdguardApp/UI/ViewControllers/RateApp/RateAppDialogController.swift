@@ -36,10 +36,15 @@ class RateAppDialogController: UIViewController {
     
     private let rateAppService: RateAppServiceProtocol = ServiceLocator.shared.getService()!
     
+    private let goodCaseImage = UIImage(named: "smile_man")
+    private let badCaseImage = UIImage(named: "sad_man")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         starsButtons.forEach({ $0.isSelected = true })
+        titleLabel.text = String.localizedString("5_star_title")
+        messageLabel.text = String.localizedString("5_star_message")
         updateTheme()
         setupBackButton()
         title = String.localizedString("rate_app_title")
@@ -60,6 +65,9 @@ class RateAppDialogController: UIViewController {
         let tag = sender.tag
         selectedStar = tag
         starsButtons.forEach({ $0.isSelected = $0.tag <= tag })
+        manImageView.image = tag > 3 ? goodCaseImage : badCaseImage
+        titleLabel.text = String.localizedString("\(tag)_star_title")
+        messageLabel.text = String.localizedString("\(tag)_star_message")
     }
     
     @IBAction func rateButtonTapped(_ sender: UIButton) {

@@ -112,6 +112,11 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
+ User Defaults key, which defines the next minimum time to show rate app alert
+ */
+extern NSString * _Nonnull MinTimeIntervalToRate;
+
+/**
  User Defaults key, which defines that pro feature is purchased.
  */
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
