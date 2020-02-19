@@ -224,7 +224,7 @@ class AppDelegateHelper: NSObject {
                 
         let command = url.host
 
-        guard let tab = self.getMainTabController() else {
+        guard let tab = getMainTabController() else {
             DDLogError("(AppDeegate) application open url error. There is no tab controller")
             return false
         }
@@ -246,7 +246,9 @@ class AppDelegateHelper: NSObject {
             // Adding new user rule from safari
             if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
                 antibannerController.onReady { (antibanner) in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        
                         let path = String(url.path.suffix(url.path.count - 1))
                         
                         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
@@ -299,6 +301,39 @@ class AppDelegateHelper: NSObject {
         return false
     }
     
+    // MARK: - Open RateAppDialogController function
+    
+    func openRateAppDialogController(){
+        guard let tab = self.getMainTabController() else {
+            DDLogError("(AppDeegateHelper) openRateAppDialogController error. There is no tab controller")
+            return
+        }
+        
+        if tab.viewControllers?.count == 0 { return }
+        
+        // 4-th Navigation Controller is settings tab
+        guard let navController = tab.viewControllers?[3] as? MainNavigationController else { return }
+        
+        if let mainMenuController = navController.viewControllers.first as? MainMenuController {
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                
+                let rateAppStoryboard = UIStoryboard(name: "RateApp", bundle: nil)
+                let controller = rateAppStoryboard.instantiateViewController(withIdentifier: "RateAppDialogController")
+                
+                controller.loadViewIfNeeded()
+                
+                navController.viewControllers = [mainMenuController]
+                
+                tab.selectedViewController = navController
+                
+                self.appDelegate.window.rootViewController = tab
+                
+                mainMenuController.present(controller, animated: true, completion: nil)
+            }
+        }
+    }
+    
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {
             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
@@ -306,7 +341,7 @@ class AppDelegateHelper: NSObject {
                         guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
                         
                         if type == PurchaseService.kPSNotificationPremiumExpired {
-                            self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil))
+                            self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
                         }
                     }
         }

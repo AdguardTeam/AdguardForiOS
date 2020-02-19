@@ -50,6 +50,11 @@ extern NSString *OpenDnsSettingsSegue;
  */
 extern NSString *ShowCommonAlertNotification;
 
+/**
+ Open RateAppDialogController to rate an app
+ */
+extern NSString *OpenRateAppDialogControllerNotification;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate
 /////////////////////////////////////////////////////////////////////

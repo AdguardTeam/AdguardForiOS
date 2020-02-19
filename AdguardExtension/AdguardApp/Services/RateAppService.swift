@@ -19,7 +19,7 @@
 import Foundation
 import StoreKit
 
-protocol RateAppServiceProtocol {
+@objc protocol RateAppServiceProtocol {
     
     /* shows rate dialog if it was not already showed before */
     func showRateDialogIfNeeded(_ controller: UIViewController)
@@ -29,6 +29,9 @@ protocol RateAppServiceProtocol {
     
     /* shifts the deadline of showing rate dialog by 7 days */
     func cancelTapped()
+    
+    /* shows push notification if the app is in the background */
+    func showRateNotificationIfNeeded()
 }
 
 class RateAppService: RateAppServiceProtocol {
@@ -45,10 +48,12 @@ class RateAppService: RateAppServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
+    private let userNotificationService: UserNotificationServiceProtocol
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, userNotificationService: UserNotificationServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
+        self.userNotificationService = userNotificationService
         
         if (resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date) == nil {
             resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
@@ -61,6 +66,17 @@ class RateAppService: RateAppServiceProtocol {
         if configuration.appRated { return }
         
         showAlert(controller)
+    }
+    
+    func showRateNotificationIfNeeded() {
+        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
+        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+        if configuration.appRated { return }
+        
+        let title = String.localizedString("rate_notification_title")
+        let body = String.localizedString("rate_notification_message")
+        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openRateAppDialogController.rawValue]
+        userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
     }
     
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->()){

@@ -19,6 +19,15 @@
 import Foundation
 import UserNotifications
 
+// Must support NSSecureCoding thus it is Int
+enum PushNotificationCommands: Int {
+    typealias RawValue = Int
+    
+    static let command: String = "command"
+    
+    case openRateAppDialogController = 0
+}
+
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()
@@ -26,7 +35,7 @@ protocol UserNotificationServiceProtocol {
     /*
      Method to post notifications which come while app is in background
      **/
-    func postNotification(title: String, body: String)
+    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?)
     func removeNotifications()
     
     /*
@@ -42,12 +51,10 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     
     func requestPermissions() {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            
-        }
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
     }
     
-    func postNotification(title: String, body: String) {
+    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]? = nil) {
         let center = UNUserNotificationCenter.current()
     
         center.getNotificationSettings { [weak self] (settings) in
@@ -57,7 +64,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
             }
             
             if settings.alertSetting == .enabled {
-                self?.alertNotification(title: title, body: body)
+                self?.alertNotification(title: title, body: body, userInfo: userInfo)
             }
             else {
                 self?.badgeAndSound()
@@ -65,13 +72,55 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         }
     }
     
+    func removeNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
+    }
+    
+    func postNotificationInForeground(body: String, title: String) {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings {[weak self] (settings) in
+            if settings.authorizationStatus == .authorized && settings.alertSetting == .enabled {
+                self?.alertNotification(title: title, body: body, userInfo: nil)
+            } else {
+                let userInfo = [UserNotificationService.notificationBody : body,
+                                UserNotificationService.notificationTitle : title]
+                NotificationCenter.default.post(name: NSNotification.Name.ShowCommonAlert, object: nil, userInfo: userInfo)
+            }
+        }
+    }
+    
+    // MARK: - UNUserNotificationCenterDelegate methods
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        guard let command = userInfo[PushNotificationCommands.command] as? Int else {
+            completionHandler()
+            return
+        }
+        
+        if command == PushNotificationCommands.openRateAppDialogController.rawValue {
+            NotificationCenter.default.post(name: NSNotification.Name.OpenRateAppDialogController, object: nil, userInfo: nil)
+            completionHandler()
+            return
+        }
+        
+        completionHandler()
+    }
+    
     // MARK: - private methods
     
-    private func alertNotification(title: String?, body: String?) {
+    private func alertNotification(title: String?, body: String?, userInfo: [AnyHashable : Any]?) {
         let content = UNMutableNotificationContent()
         
         content.title = title ?? ""
         content.body = body ?? ""
+        content.userInfo = userInfo ?? [:]
         
         content.badge = 1
         
@@ -89,31 +138,6 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     }
     
     private func badgeAndSound() {
-        alertNotification(title: nil, body: nil)
-    }
-    
-    func removeNotifications() {
-        let center = UNUserNotificationCenter.current()
-        center.removeAllDeliveredNotifications()
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-
-        completionHandler([.alert, .badge, .sound])
-    }
-    
-    
-    func postNotificationInForeground(body: String, title: String) {
-        let center = UNUserNotificationCenter.current()
-
-        center.getNotificationSettings {[weak self] (settings) in
-            if settings.authorizationStatus == .authorized && settings.alertSetting == .enabled {
-                self?.alertNotification(title: title, body: body)
-            } else {
-                let userInfo = [UserNotificationService.notificationBody : body,
-                                UserNotificationService.notificationTitle : title]
-                NotificationCenter.default.post(name: NSNotification.Name.ShowCommonAlert, object: nil, userInfo: userInfo)
-            }
-        }
+        alertNotification(title: nil, body: nil, userInfo: nil)
     }
 }

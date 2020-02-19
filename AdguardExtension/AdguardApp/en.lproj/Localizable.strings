@@ -759,3 +759,9 @@
 
 /* (RateAppDialogController) - 5 stars message */
 "5_star_message" = "You are breathtaking!";
+
+/* (RateAppService) - Notification title */
+"rate_notification_title" = "Do you like AdGuard?";
+
+/* (RateAppService) - Notification message */
+"rate_notification_message" = "Rate our app in a snap";
