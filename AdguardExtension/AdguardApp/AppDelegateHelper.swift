@@ -304,6 +304,9 @@ class AppDelegateHelper: NSObject {
     // MARK: - Open RateAppDialogController function
     
     func openRateAppDialogController(){
+        // If user tapped on notification we assume that he has rated an app
+        configuration.appRated = true
+        
         guard let tab = self.getMainTabController() else {
             DDLogError("(AppDeegateHelper) openRateAppDialogController error. There is no tab controller")
             return
