@@ -27,7 +27,6 @@
 #import "AESharedResources.h"
 #import "AESProductSchemaManager.h"
 #import "ACDnsUtils.h"
-
 #import "Adguard-Swift.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
@@ -39,9 +38,6 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
-NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
-NSString *OpenRateAppDialogControllerNotification = @"OpenRateAppDialogController";
-
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
@@ -160,8 +156,8 @@ static NSTimeInterval lastCheckTime;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openRateAppDialogController) name:OpenRateAppDialogControllerNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openRateAppDialogController) name:NSNotification.openRateAppDialogController object:nil];
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];

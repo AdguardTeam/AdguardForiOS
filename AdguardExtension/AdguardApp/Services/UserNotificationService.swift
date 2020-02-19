@@ -86,7 +86,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
             } else {
                 let userInfo = [UserNotificationService.notificationBody : body,
                                 UserNotificationService.notificationTitle : title]
-                NotificationCenter.default.post(name: NSNotification.Name.ShowCommonAlert, object: nil, userInfo: userInfo)
+                NotificationCenter.default.post(name: .showCommonAlert, object: nil, userInfo: userInfo)
             }
         }
     }
@@ -105,7 +105,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         }
         
         if command == PushNotificationCommands.openRateAppDialogController.rawValue {
-            NotificationCenter.default.post(name: NSNotification.Name.OpenRateAppDialogController, object: nil, userInfo: nil)
+            NotificationCenter.default.post(name: .openRateAppDialogController, object: nil, userInfo: nil)
             completionHandler()
             return
         }

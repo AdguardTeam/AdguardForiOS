@@ -22,7 +22,7 @@ import StoreKit
 @objc protocol RateAppServiceProtocol {
     
     /* shows rate dialog if it was not already showed before */
-    func showRateDialogIfNeeded(_ controller: UIViewController)
+    func showRateDialogIfNeeded(_ controller: UIViewController, _ showAlert: ()->())
     
     /* decides how to rate an app by stars number */
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
@@ -60,12 +60,12 @@ class RateAppService: RateAppServiceProtocol {
         }
     }
     
-    func showRateDialogIfNeeded(_ controller: UIViewController) {
+    func showRateDialogIfNeeded(_ controller: UIViewController, _ showAlert: ()->()) {
         guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
         if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
         if configuration.appRated { return }
         
-        showAlert(controller)
+        showAlert()
     }
     
     func showRateNotificationIfNeeded() {
@@ -99,11 +99,14 @@ class RateAppService: RateAppServiceProtocol {
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         configuration.appRated = true
     }
-    
-    private func showAlert(_ controller: UIViewController) {
-        let rateAppViewController = RateAppController(nibName: "RateAppController", bundle: nil)
-        rateAppViewController.modalPresentationStyle = .overCurrentContext
-        rateAppViewController.modalTransitionStyle = .coverVertical
-        controller.present(rateAppViewController, animated: true, completion: nil)
-    }
+}
+
+extension Notification.Name {
+    static let showCommonAlert = Notification.Name("showCommonAlert")
+    static let openRateAppDialogController = Notification.Name("openRateAppDialogController")
+}
+
+@objc extension NSNotification {
+    public static let showCommonAlert = Notification.Name.showCommonAlert
+    public static let openRateAppDialogController = Notification.Name.openRateAppDialogController
 }

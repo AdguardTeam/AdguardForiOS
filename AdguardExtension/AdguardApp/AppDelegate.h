@@ -45,16 +45,6 @@ extern NSString *AppDelegateUpdatedFiltersKey;
  */
 extern NSString *OpenDnsSettingsSegue;
 
-/**
- Notify user through app
- */
-extern NSString *ShowCommonAlertNotification;
-
-/**
- Open RateAppDialogController to rate an app
- */
-extern NSString *OpenRateAppDialogControllerNotification;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AppDelegate
 /////////////////////////////////////////////////////////////////////
