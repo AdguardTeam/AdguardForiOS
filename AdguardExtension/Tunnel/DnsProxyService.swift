@@ -112,7 +112,17 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                                       customBlockingIpv4: nil,
                                       customBlockingIpv6: nil,
                                       dnsCacheSize: 128)
-        agproxy = AGDnsProxy(config: config, handler: events)
+
+        var error: NSError?
+        agproxy = AGDnsProxy(config: config, handler: events, error: &error)
+        if agproxy == nil && error != nil {
+            DDLogError("(DnsProxyService) can not start dns proxy - \(error!)")
+        }
+        else if error != nil {
+            DDLogInfo("(DnsProxyService) dns proxy started with error - \(error!)")
+            // todo: handle limit of rules exceeded error
+            // todo: send message to main app
+        }
         
         return agproxy != nil
     }

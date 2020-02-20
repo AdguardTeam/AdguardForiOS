@@ -12,7 +12,9 @@ extern NSErrorDomain const AGDnsProxyErrorDomain;
  */
 typedef NS_ENUM(NSInteger, AGDnsProxyError) {
     AGDPE_PARSE_DNS_STAMP_ERROR,
-    AGDPE_TEST_UPSTREAM_ERROR
+    AGDPE_TEST_UPSTREAM_ERROR,
+    AGDPE_PROXY_INIT_ERROR,
+    AGDPE_PROXY_INIT_WARNING,
 };
 
 /**
@@ -230,9 +232,11 @@ typedef void (^logCallback)(const char *msg, int length);
  *
  * @param config proxy configuration
  * @param events proxy events handler
+ * @param error  error reference
  */
 - (instancetype) initWithConfig: (AGDnsProxyConfig *) config
-        handler: (AGDnsProxyEvents *)events;
+                        handler: (AGDnsProxyEvents *) events
+                          error: (NSError **) error NS_SWIFT_NOTHROW;
 
 /**
  * @brief Process UDP/TCP packet payload
