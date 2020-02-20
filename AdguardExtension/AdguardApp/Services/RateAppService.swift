@@ -61,17 +61,17 @@ class RateAppService: RateAppServiceProtocol {
     }
     
     func showRateDialogIfNeeded(showAlert: ()->()) {
-//        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-//        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-//        if configuration.appRated { return }
+        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
+        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+        if configuration.appRated { return }
         
         showAlert()
     }
     
     func showRateNotificationIfNeeded() {
-//        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-//        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-//        if configuration.appRated { return }
+        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
+        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
+        if configuration.appRated { return }
         
         let title = String.localizedString("rate_notification_title")
         let body = String.localizedString("rate_notification_message")

@@ -61,7 +61,7 @@ final class SendFeedbackRequest: RequestProtocol {
     }
     
     var urlRequest: URLRequest? {
-        let domain = "https://testmobile.adtidy.org/"
+        let domain = "https://mobile.adtidy.org/"
         let command = "api/1.0/feedback.html"
         let key = "key=4DDBE80A3DA94D819A00523252FB6380"
         let request = domain + command + "?" + key
