@@ -167,7 +167,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="m0d-ta-F8j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T51-Ul-VKg" secondAttribute="bottom" constant="20" id="1bM-UJ-L0W"/>
+                            <constraint firstItem="m0d-ta-F8j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T51-Ul-VKg" secondAttribute="bottom" constant="24" id="1bM-UJ-L0W"/>
                             <constraint firstItem="uAu-vt-MmX" firstAttribute="leading" secondItem="hy0-Nx-e9Y" secondAttribute="leading" constant="62" id="1gb-bs-blj">
                                 <variation key="heightClass=regular-widthClass=regular" constant="72"/>
                             </constraint>
@@ -181,7 +181,7 @@
                             <constraint firstItem="hy0-Nx-e9Y" firstAttribute="trailing" secondItem="uAu-vt-MmX" secondAttribute="trailing" constant="62" id="Klg-7T-nQj">
                                 <variation key="heightClass=regular-widthClass=regular" constant="72"/>
                             </constraint>
-                            <constraint firstItem="2HI-bv-Kom" firstAttribute="top" secondItem="m0d-ta-F8j" secondAttribute="bottom" constant="20" id="MOY-1U-4hh"/>
+                            <constraint firstItem="2HI-bv-Kom" firstAttribute="top" secondItem="m0d-ta-F8j" secondAttribute="bottom" priority="250" constant="48" id="MOY-1U-4hh"/>
                             <constraint firstItem="IQD-pU-Meh" firstAttribute="top" secondItem="4vK-Mb-3Ng" secondAttribute="bottom" constant="32" id="TQm-fI-d8i"/>
                             <constraint firstItem="4vK-Mb-3Ng" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uAu-vt-MmX" secondAttribute="bottom" constant="8" id="Ytx-yA-f9D"/>
                             <constraint firstItem="T51-Ul-VKg" firstAttribute="top" secondItem="IQD-pU-Meh" secondAttribute="bottom" constant="8" id="hyp-eq-OIv"/>
