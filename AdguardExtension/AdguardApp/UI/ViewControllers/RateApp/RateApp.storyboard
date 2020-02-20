@@ -49,62 +49,62 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="m0d-ta-F8j">
                                 <rect key="frame" x="372" y="604" width="280" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Mc-9D-MMF">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Mc-9D-MMF">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="7Mc-9D-MMF" secondAttribute="height" multiplier="1:1" id="cj0-k2-ecu"/>
                                         </constraints>
                                         <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="star"/>
-                                        <state key="selected" backgroundImage="star_selected"/>
+                                        <state key="normal" image="star"/>
+                                        <state key="selected" image="star_selected"/>
                                         <connections>
                                             <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="idz-X7-ApR"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-gh-WWj">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-gh-WWj">
                                         <rect key="frame" x="60" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="PtS-gh-WWj" secondAttribute="height" multiplier="1:1" id="6oa-h4-pDj"/>
                                         </constraints>
                                         <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="star"/>
-                                        <state key="selected" backgroundImage="star_selected"/>
+                                        <state key="normal" image="star"/>
+                                        <state key="selected" image="star_selected"/>
                                         <connections>
                                             <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="MWb-DS-z8b"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpi-0C-4tG">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpi-0C-4tG">
                                         <rect key="frame" x="120" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="kpi-0C-4tG" secondAttribute="height" multiplier="1:1" id="Qkz-vy-RfD"/>
                                         </constraints>
                                         <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="star"/>
-                                        <state key="selected" backgroundImage="star_selected"/>
+                                        <state key="normal" image="star"/>
+                                        <state key="selected" image="star_selected"/>
                                         <connections>
                                             <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="D1m-VL-dqn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-SG-ynD">
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-SG-ynD">
                                         <rect key="frame" x="180" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Y8W-SG-ynD" secondAttribute="height" multiplier="1:1" id="11C-ns-c9P"/>
                                         </constraints>
                                         <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="star"/>
-                                        <state key="selected" backgroundImage="star_selected"/>
+                                        <state key="normal" image="star"/>
+                                        <state key="selected" image="star_selected"/>
                                         <connections>
                                             <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="UhR-1c-iNP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0C-ue-Epm">
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0C-ue-Epm">
                                         <rect key="frame" x="240" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="s0C-ue-Epm" secondAttribute="height" multiplier="1:1" id="2q6-vS-Fp1"/>
                                         </constraints>
                                         <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" backgroundImage="star"/>
-                                        <state key="selected" backgroundImage="star_selected"/>
+                                        <state key="normal" image="star"/>
+                                        <state key="selected" image="star_selected"/>
                                         <connections>
                                             <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="uun-Cp-yA8"/>
                                         </connections>
@@ -167,7 +167,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="m0d-ta-F8j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T51-Ul-VKg" secondAttribute="bottom" constant="8" id="1bM-UJ-L0W"/>
+                            <constraint firstItem="m0d-ta-F8j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T51-Ul-VKg" secondAttribute="bottom" constant="20" id="1bM-UJ-L0W"/>
                             <constraint firstItem="uAu-vt-MmX" firstAttribute="leading" secondItem="hy0-Nx-e9Y" secondAttribute="leading" constant="62" id="1gb-bs-blj">
                                 <variation key="heightClass=regular-widthClass=regular" constant="72"/>
                             </constraint>
@@ -181,7 +181,7 @@
                             <constraint firstItem="hy0-Nx-e9Y" firstAttribute="trailing" secondItem="uAu-vt-MmX" secondAttribute="trailing" constant="62" id="Klg-7T-nQj">
                                 <variation key="heightClass=regular-widthClass=regular" constant="72"/>
                             </constraint>
-                            <constraint firstItem="2HI-bv-Kom" firstAttribute="top" secondItem="m0d-ta-F8j" secondAttribute="bottom" constant="32" id="MOY-1U-4hh"/>
+                            <constraint firstItem="2HI-bv-Kom" firstAttribute="top" secondItem="m0d-ta-F8j" secondAttribute="bottom" constant="20" id="MOY-1U-4hh"/>
                             <constraint firstItem="IQD-pU-Meh" firstAttribute="top" secondItem="4vK-Mb-3Ng" secondAttribute="bottom" constant="32" id="TQm-fI-d8i"/>
                             <constraint firstItem="4vK-Mb-3Ng" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uAu-vt-MmX" secondAttribute="bottom" constant="8" id="Ytx-yA-f9D"/>
                             <constraint firstItem="T51-Ul-VKg" firstAttribute="top" secondItem="IQD-pU-Meh" secondAttribute="bottom" constant="8" id="hyp-eq-OIv"/>
