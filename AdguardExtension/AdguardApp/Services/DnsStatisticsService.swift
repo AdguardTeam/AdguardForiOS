@@ -156,6 +156,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 self?.statisticSaveTime = .ten_seconds
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
                 self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
+                self?.resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
             }
         }
     }

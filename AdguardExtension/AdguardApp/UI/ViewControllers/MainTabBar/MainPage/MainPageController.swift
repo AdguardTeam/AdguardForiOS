@@ -141,6 +141,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // Show onboarding only once during app lifecycle
     private var onboardingWasShown = false
     
+    // Last statistics obtain time
+    private var lastStatisticsObtainTime: Date?
+    
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -190,6 +193,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
         
         configuration.checkContentBlockerEnabled()
+        
+        chartModel?.obtainStatistics()
+        lastStatisticsObtainTime = Date()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -199,7 +205,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexProtection.delegate = self
         updateTheme()
         observeProStatus()
-        chartModel?.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()
     }
@@ -366,6 +371,17 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Observing Values from User Defaults
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        if keyPath == LastStatisticsSaveTime {
+            if let lastSaveTime = resources.sharedDefaults().value(forKey: LastStatisticsSaveTime) as? Date, let lastStatisticsObtainTime = lastStatisticsObtainTime {
+                if lastStatisticsObtainTime < lastSaveTime {
+                    chartModel?.obtainStatistics()
+                    // Don't let update text for buttons in this case
+                    return
+                }
+            }
+        }
+        
         updateTextForButtons()
     }
     
@@ -566,6 +582,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
+        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
+        
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeProStatus()
@@ -587,6 +605,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
         
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        
+        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
     }
     
     /**

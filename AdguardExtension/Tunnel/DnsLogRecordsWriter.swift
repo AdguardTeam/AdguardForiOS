@@ -152,6 +152,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         saveStatistics()
         resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
+        resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
     private func save() {
@@ -186,5 +187,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
+        resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
 }

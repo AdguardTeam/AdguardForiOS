@@ -129,7 +129,6 @@ extern NSString* _Nonnull AEDefaultsPremiumExpirationDate;
  User defaults key, which defines tha user has premium license */
 extern NSString* _Nonnull AEDefaultsHasPremiumLicense;
 
-
 /**
  User defaults key, which contains In app purchase subscription expiration date (NSDate) */
 extern NSString* _Nonnull AEDefaultsRenewableSubscriptionExpirationDate;
@@ -245,6 +244,11 @@ extern NSString* _Nonnull AEDefaultsRequests;
  made in period of logs writing
  */
 extern NSString* _Nonnull AEDefaultsBlockedRequests;
+
+/**
+ User defaults key, which defines last statistics save time
+ */
+extern NSString*  _Nonnull LastStatisticsSaveTime;
 
 /**
  String to send notifications for StatusView
