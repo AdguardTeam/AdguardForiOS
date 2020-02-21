@@ -22,7 +22,7 @@ import StoreKit
 @objc protocol RateAppServiceProtocol {
     
     /* shows rate dialog if it was not already showed before */
-    func showRateDialogIfNeeded(showAlert: ()->())
+    var rateAppAlertNeedsShowing: Bool { get }
     
     /* decides how to rate an app by stars number */
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
@@ -36,42 +36,35 @@ import StoreKit
 
 class RateAppService: RateAppServiceProtocol {
     
-    private let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
-    
-    private var minTimeIntervalToRate: Int  {
-        if let time = resources.sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int {
-            return time
-        } else {
-            return 24 * 3600 // 1 day
+    var rateAppAlertNeedsShowing: Bool {
+        get {
+            guard let firstLaunchDate = resources.firstLaunchDate else { return false }
+            if Int(date.currentDate.timeIntervalSince(firstLaunchDate)) < resources.minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return false }
+            if configuration.appRated { return false }
+            return true
         }
     }
+    
+    private let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
     private let userNotificationService: UserNotificationServiceProtocol
+    private let date: TestableDateProtocol
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, userNotificationService: UserNotificationServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, userNotificationService: UserNotificationServiceProtocol, _ date: TestableDateProtocol = Date()) {
         self.resources = resources
         self.configuration = configuration
         self.userNotificationService = userNotificationService
+        self.date = date
         
-        if (resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date) == nil {
-            resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
+        if resources.firstLaunchDate == nil {
+            resources.firstLaunchDate = date.currentDate
         }
     }
-    
-    func showRateDialogIfNeeded(showAlert: ()->()) {
-        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-        if configuration.appRated { return }
-        
-        showAlert()
-    }
-    
+
     func showRateNotificationIfNeeded() {
-        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return }
-        if configuration.appRated { return }
+        if !rateAppAlertNeedsShowing { return }
         
         let title = String.localizedString("rate_notification_title")
         let body = String.localizedString("rate_notification_message")
@@ -88,9 +81,27 @@ class RateAppService: RateAppServiceProtocol {
     }
     
     func cancelTapped() {
-        let week = 3600 * 7 // 7 days
-        resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
-        resources.sharedDefaults().set(week, forKey: MinTimeIntervalToRate)
+        /*
+         If cancelled was already tapped and user types it second time
+         we do not disturb him anymore and just return
+         */
+        if resources.cancelTappedWhenAppRating != nil {
+            return
+        }
+        /*
+        If cancelled was initially tapped we shift next
+        rate app appearence for 1 week
+        */
+        else {
+            guard let firstLaunchDate = resources.firstLaunchDate else { return }
+            let firstLaunch = firstLaunchDate.timeIntervalSinceReferenceDate
+            let now = date.currentDate.timeIntervalSinceReferenceDate
+            let week: Double = 3600.0 * 7.0 // 7 days
+            let newTimeInterval = now - firstLaunch + week
+            
+            resources.minTimeIntervalToRate = Int(newTimeInterval)
+            resources.cancelTappedWhenAppRating = true
+        }
     }
     
     /* opens appstore to write a review */

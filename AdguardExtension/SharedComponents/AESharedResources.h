@@ -112,6 +112,11 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 
 /**
+ User Defaults key, which tells if cancel was tapped when rating an app
+ */
+extern NSString * _Nonnull CancelTappedWhenAppRating;
+
+/**
  User Defaults key, which defines the next minimum time to show rate app alert
  */
 extern NSString * _Nonnull MinTimeIntervalToRate;

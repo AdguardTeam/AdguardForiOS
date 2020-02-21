@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension Date{
+extension Date {
     // return formated and localized string from date
     public func formatedString() -> String?{
         let dateFormatter = DateFormatter()
@@ -31,14 +31,14 @@ extension Date{
     }
     
     // return formated and localized string from date
-        public func formatedStringWithHoursAndMinutes() -> String?{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            let id = Locale.current.identifier
-            dateFormatter.locale = Locale(identifier: id)
-            let dateString = dateFormatter.string(from: self)
+    public func formatedStringWithHoursAndMinutes() -> String?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        let id = Locale.current.identifier
+        dateFormatter.locale = Locale(identifier: id)
+        let dateString = dateFormatter.string(from: self)
             
-            return dateString
-        }
+        return dateString
+    }
 }

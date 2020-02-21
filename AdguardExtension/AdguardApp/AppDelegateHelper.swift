@@ -48,6 +48,8 @@ class AppDelegateHelper: NSObject {
     private var statusBarIsShown = false
     private let statusView = StatusView()
     
+    private let mainMenuControllerTab = 3
+    
     var purchaseObservation: Any?
     
     // MARK: String Constants
@@ -240,7 +242,7 @@ class AppDelegateHelper: NSObject {
         }
         
         // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[3] as? MainNavigationController else { return false }
+        guard let navController = tab.viewControllers?[mainMenuControllerTab] as? MainNavigationController else { return false }
 
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             // Adding new user rule from safari
@@ -315,7 +317,7 @@ class AppDelegateHelper: NSObject {
         if tab.viewControllers?.count == 0 { return }
         
         // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[3] as? MainNavigationController else { return }
+        guard let navController = tab.viewControllers?[mainMenuControllerTab] as? MainNavigationController else { return }
         
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             DispatchQueue.main.async {[weak self] in

@@ -6,93 +6,126 @@ class RateAppServiceTest: XCTestCase {
     var userNotificationService: UserNotificationServiceProtocol!
     var configuration: ConfigurationServiceProtocol!
     var rateAppService: RateAppServiceProtocol!
+    var testableDate: TestableDateProtocol!
 
     override func setUp() {
         resources = SharedResourcesMock()
         userNotificationService = UserNotificationServiceMock()
         configuration = ConfigurationServiceMock()
+        testableDate = TestableDateMock()
         
-        rateAppService = RateAppService(resources: resources, configuration: configuration, userNotificationService: userNotificationService)
+        rateAppService = RateAppService(resources: resources, configuration: configuration, userNotificationService: userNotificationService, testableDate)
     }
     
     func testInit(){
         let _ = RateAppService(resources: resources, configuration: configuration, userNotificationService: userNotificationService)
         
         let firstLaunchDate = resources.sharedDefaults().value(forKey: AEDefaultsFirstLaunchDate) as? Date
-        let now = Date()
+        let now = testableDate.currentDate
         
         XCTAssertEqual(Int(now.timeIntervalSinceReferenceDate), Int(firstLaunchDate!.timeIntervalSinceReferenceDate))
     }
     
-    func testShowRateDialogIfNeededWithNoLaunchDate(){
+    func testRateAppAlertNeedsShowingWithNoLaunchDate(){
+        configuration.appRated = false
         resources.sharedDefaults().set(nil, forKey: AEDefaultsFirstLaunchDate)
-        var showAlertWasCalled = false
-        
-        rateAppService.showRateDialogIfNeeded {
-            showAlertWasCalled = true
-        }
-        
-        XCTAssert(showAlertWasCalled == false)
+        XCTAssert(rateAppService.rateAppAlertNeedsShowing == false)
     }
     
     /* Current Date() is set in init */
-    func testShowRateDialogIfNeededWithUnsuitableTimeInterval(){
-        var showAlertWasCalled = false
-        
-        rateAppService.showRateDialogIfNeeded {
-            showAlertWasCalled = true
-        }
-        
-        XCTAssert(showAlertWasCalled == false)
+    func testRateAppAlertNeedsShowingWithUnsuitableTimeInterval(){
+        configuration.appRated = false
+        XCTAssert(rateAppService.rateAppAlertNeedsShowing == false)
     }
     
-    func testShowRateDialogIfNeededWithSuitableTimeIntervalWithAppNotRated(){
+    func testRateAppAlertNeedsShowingWithSuitableTimeIntervalWithAppNotRated(){
         configuration.appRated = false
         
         let minInterval: Double = 24.0 * 3600.0 // 1 day
-        let dateToTestInt = Date().timeIntervalSinceReferenceDate - minInterval
+        let dateToTestInt = testableDate.currentDate.timeIntervalSinceReferenceDate - minInterval
         let dateToTest = Date(timeIntervalSinceReferenceDate: dateToTestInt)
         
         resources.sharedDefaults().set(dateToTest, forKey: AEDefaultsFirstLaunchDate)
-        
-        var showAlertWasCalled = false
-        
-        rateAppService.showRateDialogIfNeeded {
-            showAlertWasCalled = true
-        }
-        
-        XCTAssert(showAlertWasCalled == true)
+                
+        XCTAssert(rateAppService.rateAppAlertNeedsShowing == true)
     }
     
     func testShowRateDialogIfNeededWithSuitableTimeIntervalWithAppRated(){
         configuration.appRated = true
         
         let minInterval: Double = 24.0 * 3600.0 // 1 day
-        let dateToTestInt = Date().timeIntervalSinceReferenceDate - minInterval
+        let dateToTestInt = testableDate.currentDate.timeIntervalSinceReferenceDate - minInterval
         let dateToTest = Date(timeIntervalSinceReferenceDate: dateToTestInt)
         
         resources.sharedDefaults().set(dateToTest, forKey: AEDefaultsFirstLaunchDate)
+
+        XCTAssert(rateAppService.rateAppAlertNeedsShowing == false)
+    }
+    
+    func testShowRateNotificationIfNeededCallsPostNotification(){
+        // Create appropriate conditions for showing alert
+        testRateAppAlertNeedsShowingWithSuitableTimeIntervalWithAppNotRated()
         
-        var showAlertWasCalled = false
-        
-        rateAppService.showRateDialogIfNeeded {
-            showAlertWasCalled = true
+        if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(userNotificationService.postNotificationWasCalled == true)
+            return
         }
+        XCTAssert(false)
+    }
+    
+    func testShowRateNotificationIfNeededDoesntCallPostNotification(){
+        // Create inappropriate conditions for showing alert
+        testShowRateDialogIfNeededWithSuitableTimeIntervalWithAppRated()
         
-        XCTAssert(showAlertWasCalled == false)
+        if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            return
+        }
+        XCTAssert(false)
     }
 
-    func testCancelTapped(){
-        let week = 3600 * 7 // 7 days
-        let now = Date()
+    func testCancelTappedFirstTime(){
+        // Check if cancelTappedWhenAppRating is nil
+        XCTAssertNil(resources.cancelTappedWhenAppRating)
         
         rateAppService.cancelTapped()
         
-        let newFirstLaunchDate = resources.sharedDefaults().value(forKey: AEDefaultsFirstLaunchDate) as? Date
-        XCTAssertEqual(Int(now.timeIntervalSinceReferenceDate), Int(newFirstLaunchDate!.timeIntervalSinceReferenceDate))
+        guard let firstLaunchDate = resources.firstLaunchDate else { return }
+        let firstLaunch = firstLaunchDate.timeIntervalSinceReferenceDate
+        let now = testableDate.currentDate.timeIntervalSinceReferenceDate
+        let week: Double = 3600.0 * 7.0 // 7 days
+        let newTimeInterval = now - firstLaunch + week
         
-        let newMinTimeIntervalToRate = resources.sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int
-        XCTAssertEqual(week, newMinTimeIntervalToRate)
+        XCTAssert(resources.minTimeIntervalToRate == Int(newTimeInterval))
+    }
+    
+    func testCancelTappedSecondTime(){
+        // Check if cancelTappedWhenAppRating is nil
+        XCTAssertNil(resources.cancelTappedWhenAppRating)
+        
+        // Tapping first time
+        rateAppService.cancelTapped()
+        
+        guard let firstLaunchDate = resources.firstLaunchDate else { return }
+        let firstLaunch = firstLaunchDate.timeIntervalSinceReferenceDate
+        let now = testableDate.currentDate.timeIntervalSinceReferenceDate
+        let week: Double = 3600.0 * 7.0 // 7 days
+        let newTimeInterval = now - firstLaunch + week
+        
+        XCTAssert(resources.minTimeIntervalToRate == Int(newTimeInterval))
+        
+        // Check if cancelTappedWhenAppRating is not nil
+        XCTAssertNotNil(resources.cancelTappedWhenAppRating)
+        
+        /**
+         Tapping second time must do nothing to minTimeIntervalToRate and just exit the method
+         */
+        rateAppService.cancelTapped()
+        XCTAssert(resources.minTimeIntervalToRate == Int(newTimeInterval))
     }
     
     func testRateApp(){

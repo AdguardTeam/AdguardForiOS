@@ -20,6 +20,42 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
+    dynamic var firstLaunchDate: Date? {
+        get {
+            if let date = sharedDefaults().value(forKey: AEDefaultsFirstLaunchDate) as? Date {
+                return date
+            }
+            return nil
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsFirstLaunchDate)
+        }
+    }
+
+    dynamic var cancelTappedWhenAppRating: Bool? {
+        get {
+            if let tapped = sharedDefaults().value(forKey: CancelTappedWhenAppRating) as? Bool {
+                return tapped
+            }
+            return nil
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: CancelTappedWhenAppRating)
+        }
+    }
+    
+    dynamic var minTimeIntervalToRate: Int {
+        get {
+            if let interval = sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int {
+                return interval
+            }
+            return 24 * 3600 // 1 day
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: MinTimeIntervalToRate)
+        }
+    }
+    
     dynamic var dnsActiveProtocols: [String: Int] {
         get {
             if let protocols = sharedDefaults().value(forKey: DnsActiveProtocols) as? [String: Int]{
