@@ -18,6 +18,15 @@
 
 import Foundation
 
+enum TabBarTabs: Int {
+    typealias RawValue = Int
+    
+    case mainTab = 0
+    case protectionTab = 1
+    case activityTab = 2
+    case settingTab = 3
+}
+
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private var bottomView: UIView?
@@ -34,9 +43,33 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         delegate = self
         
-        for item in tabBar.items ?? [] {
+        if tabBar.items == nil {
+            return
+        }
+        
+        for (index, item) in tabBar.items!.enumerated() {
             item.title = nil
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            
+            if index == TabBarTabs.mainTab.rawValue {
+                item.accessibilityLabel = String.localizedString("main_page_tab")
+                continue
+            }
+            
+            if index == TabBarTabs.protectionTab.rawValue {
+                item.accessibilityLabel = String.localizedString("protection_page_tab")
+                continue
+            }
+            
+            if index == TabBarTabs.activityTab.rawValue {
+                item.accessibilityLabel = String.localizedString("activity_page_tab")
+                continue
+            }
+            
+            if index == TabBarTabs.settingTab.rawValue {
+                item.accessibilityLabel = String.localizedString("settings_page_tab")
+                continue
+            }
         }
         
         updateTheme()

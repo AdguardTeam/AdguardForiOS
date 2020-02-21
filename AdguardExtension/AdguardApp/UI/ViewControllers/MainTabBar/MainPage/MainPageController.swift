@@ -33,6 +33,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBOutlet weak var updateButton: UIBarButtonItem! {
         didSet{
+            updateButton.accessibilityLabel = String.localizedString("update_filters_voiceover")
             let icon = UIImage(named: "refresh-icon")
             let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
             let tintColor = UIColor(hexString: "#67b279")
@@ -68,6 +69,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBOutlet weak var requestsButton: UIButton!
     @IBOutlet weak var blockedButton: UIButton!
+    @IBOutlet weak var dataSavedButton: UIButton!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var blockedNumberLabel: ThemableLabel!
@@ -175,6 +177,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         addObservers()
         chooseRequest()
         changeProtectionStatusLabel()
+        setupVoiceOverLabels()
     
         chartModel?.chartPointsChangedDelegate = self
         complexProtectionSwitch.delegate = self
@@ -797,5 +800,16 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         requestsTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         blockedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         dataSavedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+    }
+    
+    private func setupVoiceOverLabels(){
+        safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
+        systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
+        
+        getProButton.accessibilityLabel = String.localizedString("try_for_free")
+        
+        requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
+        blockedButton.accessibilityLabel = String.localizedString("blocked_number_voiceover")
+        dataSavedButton.accessibilityLabel = String.localizedString("saved_data_voiceover")
     }
 }

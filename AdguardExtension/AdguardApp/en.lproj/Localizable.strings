@@ -717,3 +717,35 @@
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Enable";
+
+
+// MARK: - Strings for VoiceOver-
+
+// MARK: - MainPageController
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Update filters";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Requests number";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "Blocked requests number";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "Saved data size";
+
+
+// MARK: - MainTabBarController
+
+/* (MainTabBarController) Main page tab for VoiceOver*/
+"main_page_tab" = "Main page";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Protection page";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Activity page";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Settings page";
