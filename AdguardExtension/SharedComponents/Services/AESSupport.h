@@ -30,6 +30,8 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
 - (void)exportLogsWithParentController:(nonnull UIViewController *)parent sourceView: (nonnull UIView*)sourceView sourceRect:(CGRect)sourceRect;
 
+- (nonnull NSString *)applicationState;
+
 @end
 
 @interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>

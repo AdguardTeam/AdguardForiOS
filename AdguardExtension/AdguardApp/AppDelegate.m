@@ -27,7 +27,6 @@
 #import "AESharedResources.h"
 #import "AESProductSchemaManager.h"
 #import "ACDnsUtils.h"
-
 #import "Adguard-Swift.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
@@ -39,8 +38,6 @@ NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotif
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
-NSString *ShowCommonAlertNotification = @"ShowCommonAlert";
-
 NSString *OpenDnsSettingsSegue = @"dns_settings";
 
 typedef void (^AETFetchCompletionBlock)(UIBackgroundFetchResult);
@@ -70,6 +67,7 @@ static NSTimeInterval lastCheckTime;
     id<ACNNetworkingProtocol> _networking;
     ConfigurationService *_configuration;
     id<ThemeServiceProtocol> _theme;
+    id<RateAppServiceProtocol> _rateAppService;
     
     BOOL _activateWithOpenUrl;
     
@@ -100,6 +98,7 @@ static NSTimeInterval lastCheckTime;
     _networking = [ServiceLocator.shared getSetviceWithTypeName:@"ACNNetworking"];
     _configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
     _theme = [ServiceLocator.shared getSetviceWithTypeName:@"ThemeServiceProtocol"];
+    _rateAppService = [ServiceLocator.shared getSetviceWithTypeName:@"RateAppServiceProtocol"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -157,7 +156,8 @@ static NSTimeInterval lastCheckTime;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:ShowCommonAlertNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openRateAppDialogController) name:NSNotification.openRateAppDialogController object:nil];
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
@@ -276,6 +276,7 @@ static NSTimeInterval lastCheckTime;
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
         
+        // Update safari filters
         [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
             
             [antibanner repairUpdateStateWithCompletionBlock:^{
@@ -302,12 +303,16 @@ static NSTimeInterval lastCheckTime;
             [_purchaseService checkPremiumStatusChanged];
         }];
         
+        // Update dns filters
         NSTimeInterval now = NSDate.date.timeIntervalSince1970;
         if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus && checkResult){
             lastCheckTime = now;
             [_dnsFiltersService updateFiltersWithNetworking:_networking callback:nil];
             DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
         }
+        
+        // Show push notification for app rating
+        [_rateAppService showRateNotificationIfNeeded];
     }
 }
 
@@ -671,6 +676,10 @@ static NSTimeInterval lastCheckTime;
         
         [ACSSystemUtils showSimpleAlertForController:vc withTitle:title message:body];
     });
+}
+
+- (void)openRateAppDialogController{
+    [helper openRateAppDialogController];
 }
 
 @end

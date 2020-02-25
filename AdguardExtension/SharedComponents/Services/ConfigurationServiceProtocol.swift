@@ -7,6 +7,7 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var userThemeMode: AEThemeMode { get }
     var systemAppearenceIsDark: Bool { get }
     var proStatus : Bool { get }
+    var appRated: Bool { get set }
     var purchasedThroughLogin: Bool { get }
     var developerMode: Bool { get  set }
     var showStatusBar: Bool { get set }

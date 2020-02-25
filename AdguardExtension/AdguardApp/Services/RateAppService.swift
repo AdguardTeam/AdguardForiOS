@@ -19,49 +19,105 @@
 import Foundation
 import StoreKit
 
-protocol RateAppServiceProtocol {
+@objc protocol RateAppServiceProtocol {
     
     /* shows rate dialog if it was not already showed before */
-    func showRateDialogIfNeeded(_ controller: UIViewController)
+    var rateAppAlertNeedsShowing: Bool { get }
     
-    /* open appstore to write a review */
-    func rateInAppStore()
+    /* decides how to rate an app by stars number */
+    func rateApp(_ starsCount: Int, _ fewStarsAction: ()->())
+    
+    /* shifts the deadline of showing rate dialog by 7 days */
+    func cancelTapped()
+    
+    /* shows push notification if the app is in the background */
+    func showRateNotificationIfNeeded()
 }
 
 class RateAppService: RateAppServiceProtocol {
     
-    let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
+    var rateAppAlertNeedsShowing: Bool {
+        get {
+            guard let firstLaunchDate = resources.firstLaunchDate else { return false }
+            if Int(date.currentDate.timeIntervalSince(firstLaunchDate)) < resources.minTimeIntervalToRate || !configuration.allContentBlockersEnabled { return false }
+            if configuration.appRated { return false }
+            return true
+        }
+    }
     
-    let minTimeInterValToRate = { 2 * 24 * 3600 }() // 2 days
+    private let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     
-    let resources: AESharedResourcesProtocol
-    let configuration: ConfigurationServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    private let configuration: ConfigurationServiceProtocol
+    private let userNotificationService: UserNotificationServiceProtocol
+    private let date: TestableDateProtocol
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, userNotificationService: UserNotificationServiceProtocol, _ date: TestableDateProtocol = Date()) {
         self.resources = resources
         self.configuration = configuration
+        self.userNotificationService = userNotificationService
+        self.date = date
         
-        if (resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date) == nil {
-            resources.sharedDefaults().set(Date(), forKey: AEDefaultsFirstLaunchDate)
+        if resources.firstLaunchDate == nil {
+            resources.firstLaunchDate = date.currentDate
+        }
+    }
+
+    func showRateNotificationIfNeeded() {
+        if !rateAppAlertNeedsShowing { return }
+        
+        let title = String.localizedString("rate_notification_title")
+        let body = String.localizedString("rate_notification_message")
+        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openRateAppDialogController.rawValue]
+        userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+    }
+    
+    func rateApp(_ starsCount: Int, _ fewStarsAction: ()->()){
+        if starsCount > 3 {
+            rateInAppStore()
+        } else {
+            fewStarsAction()
         }
     }
     
-    func showRateDialogIfNeeded(_ controller: UIViewController) {
-        
-        guard let firstLaunchDate = resources.sharedDefaults().object(forKey: AEDefaultsFirstLaunchDate) as? Date else { return }
-        if Int(Date().timeIntervalSince(firstLaunchDate)) < minTimeInterValToRate || !configuration.allContentBlockersEnabled { return }
-        
-        showAlert(controller)
+    func cancelTapped() {
+        /*
+         If cancelled was already tapped and user types it second time
+         we do not disturb him anymore and just return
+         */
+        if resources.cancelTappedWhenAppRating != nil {
+            return
+        }
+        /*
+        If cancelled was initially tapped we shift next
+        rate app appearence for 1 week
+        */
+        else {
+            guard let firstLaunchDate = resources.firstLaunchDate else { return }
+            let firstLaunch = firstLaunchDate.timeIntervalSinceReferenceDate
+            let now = date.currentDate.timeIntervalSinceReferenceDate
+            let week: Double = 3600.0 * 7.0 // 7 days
+            let newTimeInterval = now - firstLaunch + week
+            
+            resources.minTimeIntervalToRate = Int(newTimeInterval)
+            resources.cancelTappedWhenAppRating = true
+        }
     }
     
-    func rateInAppStore() {
+    /* opens appstore to write a review */
+    private func rateInAppStore() {
         guard let writeReviewURL = URL(string: reviewUrl) else { return }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        configuration.appRated = true
     }
-    
-    private func showAlert(_ controller: UIViewController) {
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        }
-    }
+}
+
+extension Notification.Name {
+    static let showCommonAlert = Notification.Name("showCommonAlert")
+    static let openRateAppDialogController = Notification.Name("openRateAppDialogController")
+}
+
+@objc extension NSNotification {
+    public static let showCommonAlert = Notification.Name.showCommonAlert
+    public static let openRateAppDialogController = Notification.Name.openRateAppDialogController
 }
