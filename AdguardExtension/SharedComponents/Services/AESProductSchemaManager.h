@@ -19,6 +19,8 @@
 #import <UIKit/UIKit.h>
 
 @protocol AESAntibannerProtocol;
+@protocol DnsFiltersServiceProtocol;
+@protocol ACNNetworkingProtocol;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESProductSchemaManager
@@ -27,7 +29,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-+ (void)upgradeWithAntibanner: (id<AESAntibannerProtocol>) antibanner;
++ (void)upgradeWithAntibanner: (id<AESAntibannerProtocol>) antibanner dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService networking:(id<ACNNetworkingProtocol>) networking;
 + (void)install;
 
 /////////////////////////////////////////////////////////////////////
