@@ -806,7 +806,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
         systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
         
-        getProButton.accessibilityLabel = String.localizedString("try_for_free")
+        getProButton.accessibilityLabel = String.localizedString("try_for_free_main")
         
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
         blockedButton.accessibilityLabel = String.localizedString("blocked_number_voiceover")
