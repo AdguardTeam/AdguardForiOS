@@ -24,6 +24,8 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     
     var showStatusBar: Bool = false
     
+    var appRated: Bool = false
+    
     var userThemeMode: AEThemeMode {
         guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
             if #available(iOS 13.0, *) {

@@ -44,6 +44,7 @@ import Foundation
     var logBlockedCellColor: UIColor { get }
     var logSelectedCellColor: UIColor { get }
     var ruleTextColor: UIColor { get }
+    var textFieldTextColor: UIColor { get }
     
     var indicatorStyle: UIActivityIndicatorView.Style { get }
     
@@ -163,6 +164,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         return configuration.darkTheme ? UIActivityIndicatorView.Style.white : .gray
     }
     
+    var textFieldTextColor: UIColor {
+        return configuration.darkTheme ? .white : .darkGray
+    }
+    
     func setupTagButton(_ button: RoundRectButton) {
         button.customBackgroundColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#4D4D4D")
         button.setTitleColor(configuration.darkTheme ? UIColor.init(hexString: "#4D4D4D") : UIColor.init(hexString: "#D8D8D8"), for: .normal)
@@ -251,7 +256,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         textField.attributedPlaceholder = NSAttributedString(string: placeHolderText,
         attributes: [NSAttributedString.Key.foregroundColor: placeholderTextColor])
         
-        textField.textColor = configuration.darkTheme ? .white : .darkGray
+        textField.textColor = textFieldTextColor
         textField.keyboardAppearance = configuration.darkTheme ? .dark : .light
     }
     
