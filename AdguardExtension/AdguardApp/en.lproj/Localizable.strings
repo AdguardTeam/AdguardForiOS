@@ -166,8 +166,8 @@
 /* (Main Menu) Rate app action */
 "rate_app_title" = "Rate app";
 
-/* (Main Menu) Just send feedback action */
-"just_send_feedback" = "Just send feedback";
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "Send feedback";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Report incorrect blocking";
@@ -755,7 +755,7 @@
 "4_star_message" = "Aw, thanks!";
 
 /* (RateAppDialogController) - 5 stars title */
-"5_star_title" = "Exellent";
+"5_star_title" = "Excellent";
 
 /* (RateAppDialogController) - 5 stars message */
 "5_star_message" = "You are breathtaking!";
