@@ -141,9 +141,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // Show onboarding only once during app lifecycle
     private var onboardingWasShown = false
     
-    // Last statistics obtain time
-    private var lastStatisticsObtainTime: Date?
-    
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -195,7 +192,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         configuration.checkContentBlockerEnabled()
         
         chartModel?.obtainStatistics()
-        lastStatisticsObtainTime = Date()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -371,17 +367,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Observing Values from User Defaults
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
         if keyPath == LastStatisticsSaveTime {
-            if let lastSaveTime = resources.sharedDefaults().value(forKey: LastStatisticsSaveTime) as? Date, let lastStatisticsObtainTime = lastStatisticsObtainTime {
-                if lastStatisticsObtainTime < lastSaveTime {
-                    chartModel?.obtainStatistics()
-                    // Don't let update text for buttons in this case
-                    return
-                }
-            }
+            chartModel?.obtainStatistics()
+            return
         }
-        
         updateTextForButtons()
     }
     
