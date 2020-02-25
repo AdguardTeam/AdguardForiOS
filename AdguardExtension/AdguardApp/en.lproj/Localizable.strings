@@ -721,6 +721,21 @@
 
 // MARK: - Strings for VoiceOver-
 
+// MARK: - MainTabBarController
+
+/* (MainTabBarController) Main page tab for VoiceOver*/
+"main_page_tab" = "Main page";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Protection page";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Activity page";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Settings page";
+
+
 // MARK: - MainPageController
 
 /* (MainPageController) update filters title for VoiceOver*/
@@ -736,16 +751,9 @@
 "saved_data_voiceover" = "Saved data size";
 
 
-// MARK: - MainTabBarController
+// MARK: - SystemProtectionEnablerController
 
-/* (MainTabBarController) Main page tab for VoiceOver*/
-"main_page_tab" = "Main page";
+/* (SystemProtectionEnablerController) Enable system protection for VoiceOver*/
+"enable_system_protection_voiceover" = "Enable system protection";
 
-/* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Protection page";
 
-/* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Activity page";
-
-/* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Settings page";

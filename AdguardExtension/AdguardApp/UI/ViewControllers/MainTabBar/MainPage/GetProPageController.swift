@@ -36,6 +36,7 @@ class GetProPageController: UIViewController {
     
         titleLabel.text = getTitleString(product: product).uppercased()
         tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
+        tryButton.accessibilityLabel = String.localizedString("try_for_free")
         
         updateTheme()
         
