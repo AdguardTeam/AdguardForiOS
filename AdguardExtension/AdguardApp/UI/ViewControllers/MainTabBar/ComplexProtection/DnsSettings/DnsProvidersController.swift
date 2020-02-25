@@ -258,6 +258,10 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             if let prot = provider.getActiveProtocol(resources) {
                 server = provider.serverByProtocol(dnsProtocol: prot)
             }
+            /* If there is no active protocol in the provider than it means that it is custom one */
+            else if let customServer = provider.servers?.first {
+                server = customServer
+            }
         }
         
         vpnManager.activeDnsServer = server
