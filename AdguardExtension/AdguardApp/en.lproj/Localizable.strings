@@ -719,7 +719,7 @@
 "protection_enabler_button" = "Enable";
 
 
-// MARK: - Strings for VoiceOver-
+// MARK: - Strings for VoiceOver -
 
 // MARK: - MainTabBarController
 
@@ -757,3 +757,15 @@
 "enable_system_protection_voiceover" = "Enable system protection";
 
 
+// MARK: - GetProTableController
+
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+"choose_sub_voiceover" = "Choose your subscription type";
+
+// MARK: - LoginController
+
+/* (LoginController) Enter your email here title for VoiceOver*/
+"enter_email_voiceover" = "Enter your email here";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Enter your password here";
