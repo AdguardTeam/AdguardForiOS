@@ -64,12 +64,13 @@ class RateAppService: RateAppServiceProtocol {
     }
 
     func showRateNotificationIfNeeded() {
-        if !rateAppAlertNeedsShowing { return }
+        if !rateAppAlertNeedsShowing || resources.appRatingNotificationShown { return }
         
         let title = String.localizedString("rate_notification_title")
         let body = String.localizedString("rate_notification_message")
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openRateAppDialogController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+        resources.appRatingNotificationShown = true
     }
     
     func rateApp(_ starsCount: Int, _ fewStarsAction: ()->()){
