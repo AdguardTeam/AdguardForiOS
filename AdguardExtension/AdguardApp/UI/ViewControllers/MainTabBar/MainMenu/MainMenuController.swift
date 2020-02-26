@@ -27,6 +27,7 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     
+    @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
     @IBOutlet weak var systemProtectionLabel: ThemableLabel!
     @IBOutlet weak var bugreportCell: UITableViewCell!
@@ -51,6 +52,8 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        settingsImageView.image = UIImage(named: "advanced-settings-icon")
         
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -142,6 +145,14 @@ class MainMenuController: UITableViewController, VpnServiceNotifierDelegate {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 32.0 : 0.1
     }
     
     // MARK: - private methods
