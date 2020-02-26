@@ -25,7 +25,7 @@
 
 #import "Adguard-Swift.h"
 
-#define SCHEMA_VERSION                      @(3)
+#define SCHEMA_VERSION                      @(4)
 
 
 /////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark Init and Class methods
 
-+ (void)upgradeWithAntibanner:(id<AESAntibannerProtocol>)antibanner {
++ (void)upgradeWithAntibanner:(id<AESAntibannerProtocol>)antibanner dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService networking:(id<ACNNetworkingProtocol>) networking{
     
     AESharedResources *resources = [AESharedResources new];
     NSNumber *currentSchemaVersion = [resources.sharedDefaults objectForKey:AEDefaultsProductSchemaVersion];
@@ -48,12 +48,10 @@
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             
             if ([self onUpgradeFrom:currentSchemaVersion to:SCHEMA_VERSION antibanner:antibanner]) {
-                
                 [resources.sharedDefaults setObject:SCHEMA_VERSION forKey:AEDefaultsProductSchemaVersion];
             }
             else {
-                
-                DDLogError(@"(AESProductSchemaManager) Product schema could not upgraded.");
+                DDLogError(@"(AESProductSchemaManager) Product schema could not be upgraded.");
             }
         });
     }
@@ -63,7 +61,7 @@
     
     if(![lastBuildVersion isEqual:build]) {
         
-        if([self onMinorUpgradeWithAntibanner:antibanner])
+        if([self onMinorUpgradeWithAntibanner:antibanner dnsFiltersService:dnsFiltersService networking:networking])
             [resources.sharedDefaults setObject:build forKey:AEDefaultsProductBuildVersion];
     }
 }
@@ -94,20 +92,22 @@
 }
 
 + (BOOL)onInstall {
-    
     return YES;
 }
 
-+ (BOOL)onMinorUpgradeWithAntibanner:(id<AESAntibannerProtocol>) antibanner {
-    
++ (BOOL)onMinorUpgradeWithAntibanner:(id<AESAntibannerProtocol>) antibanner dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService networking:(id<ACNNetworkingProtocol>) networking{
     [self removeMalwareFilterWithAntibanner:antibanner];
+    
+    [antibanner beginTransaction];
+    [antibanner startUpdatingForced:YES interactive:NO];
+    
+    [dnsFiltersService updateFiltersWithNetworking: networking callback:nil];
     
     return YES;
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper Methods (private)
-
 
 + (void) removeMalwareFilterWithAntibanner:(id<AESAntibannerProtocol>) antibanner {
     [antibanner unsubscribeFilter:@(208)];

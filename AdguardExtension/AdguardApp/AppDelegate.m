@@ -295,7 +295,6 @@ static NSTimeInterval lastCheckTime;
                 }
                 
                 if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
-                    
                     [self antibanerUpdateFinished:AEUpdateFailed];
                 }
             }];

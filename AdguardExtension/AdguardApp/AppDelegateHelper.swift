@@ -39,6 +39,7 @@ class AppDelegateHelper: NSObject {
     lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
     lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
+    lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -104,7 +105,7 @@ class AppDelegateHelper: NSObject {
             purchaseService.checkLicenseStatus()
             firstRun = false
         } else {
-            AESProductSchemaManager.upgrade(withAntibanner: antibanner)
+            AESProductSchemaManager.upgrade(withAntibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networking)
         }
         
         return true;
@@ -342,13 +343,12 @@ class AppDelegateHelper: NSObject {
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {
             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
+                guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
                         
-                        guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-                        
-                        if type == PurchaseService.kPSNotificationPremiumExpired {
-                            self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
-                        }
-                    }
+                if type == PurchaseService.kPSNotificationPremiumExpired {
+                    self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
+                }
+            }
         }
     }
     
