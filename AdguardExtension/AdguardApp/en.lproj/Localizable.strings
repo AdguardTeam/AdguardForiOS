@@ -813,8 +813,8 @@
 
 // MARK: - SystemProtectionEnablerController
 
-/* (SystemProtectionEnablerController) Enable system protection for VoiceOver*/
-"enable_system_protection_voiceover" = "Enable system protection";
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+"enable_system_protection_voiceover" = "Enable tracking protection";
 
 
 // MARK: - GetProTableController
