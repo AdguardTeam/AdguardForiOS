@@ -811,5 +811,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
         blockedButton.accessibilityLabel = String.localizedString("blocked_number_voiceover")
         dataSavedButton.accessibilityLabel = String.localizedString("saved_data_voiceover")
+        
+        safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
+        safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
+        
+        systemProtectionButton.onAccessibilityTitle = String.localizedString("tracking_protection_enabled_voiceover")
+        systemProtectionButton.offAccessibilityTitle = String.localizedString("tracking_protection_disabled_voiceover")
     }
 }

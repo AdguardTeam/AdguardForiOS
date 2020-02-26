@@ -144,6 +144,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUL-Oa-fId" customClass="ComplexProtectionSwitch" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="153.5" y="81" width="107" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="0a5-hf-n2q">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="107"/>

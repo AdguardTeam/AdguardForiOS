@@ -70,9 +70,16 @@ class RoundRectButton: UIButton {
         }
     }
     
+    
+    var onAccessibilityTitle: String? = nil
+    var offAccessibilityTitle: String? = nil
+    
     var buttonIsOn: Bool = true {
         didSet{
             updateTints()
+            
+            if onAccessibilityTitle == nil || offAccessibilityTitle == nil { return }
+            accessibilityLabel = buttonIsOn ? onAccessibilityTitle : offAccessibilityTitle
         }
     }
     
