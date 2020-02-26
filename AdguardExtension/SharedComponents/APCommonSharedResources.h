@@ -28,7 +28,7 @@
 #pragma mark - APSharedResources Constants
 
 /**
- User Defaults key that define, create log of the DNS requests or not.
+ User Defaults key that define, create log of the DNS trackers or not.
  */
 extern NSString *APDefaultsDnsLoggingEnabled;
 

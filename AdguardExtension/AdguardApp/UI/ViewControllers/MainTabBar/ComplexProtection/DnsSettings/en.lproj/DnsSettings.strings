@@ -31,8 +31,8 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "DNS requests blocking";
+/* Class = "UINavigationItem"; title = "DNS trackers blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "DNS trackers blocking";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Advanced network settings";
@@ -49,8 +49,8 @@
 /* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
 "PFY-Cq-NFN.text" = "This module can block tracking domains and encrypt your DNS traffic";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "System protection";
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Tracking protection";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Network settings";
@@ -106,8 +106,8 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "DELETE";
 
-/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS requests blocking";
+/* Class = "UILabel"; text = "DNS trackers blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "DNS trackers blocking";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters, etc.";

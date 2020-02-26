@@ -240,7 +240,7 @@ extern NSString* _Nonnull AEDefaultsDeveloperMode;
 extern NSString* _Nonnull AEDefaultsShowStatusBar;
 
 /**
- User defaults key, which defines whether DNS request blocking is enabled */
+ User defaults key, which defines whether DNS trackers blocking is enabled */
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /**
@@ -286,7 +286,7 @@ extern NSString* _Nonnull DnsFilterUniqueId;
 extern NSString* _Nonnull SafariProtectionLastState;
 
 /**
- Last state of system protection
+ Last state of Tracking protection
  */
 extern NSString* _Nonnull SystemProtectionLastState;
 

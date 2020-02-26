@@ -58,7 +58,7 @@
 
     APTDnsRequest *req = [[APTDnsRequest alloc] initWithData:payload];
     
-    NSLog(@"DNS Request:\n%@", req);
+    NSLog(@"DNS Trackers:\n%@", req);
 }
 
 - (NSData *)packetFromDumpString:(NSString *)dumpString{

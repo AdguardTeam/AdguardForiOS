@@ -49,7 +49,7 @@
 /* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
 "PFY-Cq-NFN.text" = "Dieses Modul blockiert Domain-Tracking und verschlüsselt den DNS-Datenverkehr";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Systemschutz";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */

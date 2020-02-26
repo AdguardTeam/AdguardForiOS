@@ -577,7 +577,7 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Alle Schutz-Module sind deaktiviert";
 
-/*(TodayViewController) System protection is enabled text  */
+/*(TodayViewController) Tracking protection is enabled text  */
 "system_enabled" = "Systemschutz";
 
 /*(TodayViewController) Statistics format text  */
