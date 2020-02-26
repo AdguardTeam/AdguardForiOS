@@ -190,6 +190,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
         
         configuration.checkContentBlockerEnabled()
+        
+        chartModel?.obtainStatistics()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -199,7 +201,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         complexProtection.delegate = self
         updateTheme()
         observeProStatus()
-        chartModel?.obtainStatistics()
         updateTextForButtons()
         checkProtectionStates()
     }
@@ -366,6 +367,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Observing Values from User Defaults
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == LastStatisticsSaveTime {
+            chartModel?.obtainStatistics()
+            return
+        }
         updateTextForButtons()
     }
     
@@ -566,6 +571,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
+        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
+        
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeProStatus()
@@ -587,6 +594,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
         
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        
+        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
     }
     
     /**

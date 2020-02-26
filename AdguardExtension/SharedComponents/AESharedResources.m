@@ -80,6 +80,7 @@ NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
 NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
+NSString* LastStatisticsSaveTime = @"LastStatisticsSaveTime";
 
 NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
 NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
