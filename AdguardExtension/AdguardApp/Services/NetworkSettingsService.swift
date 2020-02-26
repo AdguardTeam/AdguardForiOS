@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SystemConfiguration.CaptiveNetwork
 
 @objcMembers class WifiException: NSObject, Codable {
     @objc var rule: String
@@ -48,6 +49,7 @@ protocol NetworkSettingsServiceProtocol {
     func add(exception: WifiException)
     func delete(exception: WifiException)
     func change(oldException: WifiException, newException: WifiException)
+    func getCurrentWiFiName() ->  String?
 }
 
 @objcMembers
@@ -133,6 +135,21 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
             
             reloadArray()
         }
+    }
+    
+    func getCurrentWiFiName() ->  String? {
+        if let interfaces = CNCopySupportedInterfaces() {
+            for i in 0..<CFArrayGetCount(interfaces){
+                let interfaceName: UnsafeRawPointer = CFArrayGetValueAtIndex(interfaces, i)
+                let rec = unsafeBitCast(interfaceName, to: AnyObject.self)
+                let unsafeInterfaceData = CNCopyCurrentNetworkInfo("\(rec)" as CFString)
+                 
+                if let unsafeInterfaceData = unsafeInterfaceData as? Dictionary<AnyHashable, Any> {
+                    return unsafeInterfaceData["SSID"] as? String
+                }
+            }
+        }
+        return nil
     }
     
     // MARK: - Private methods

@@ -57,6 +57,10 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         
         addButton.isEnabled = false
         
+        if type == .wifiExceptions {
+            fillTextViewWithCurrentWiFiName()
+        }
+        
         if (type == .safariWhitelist || type == .invertedSafariWhitelist || type == .systemWhitelist){
             ruleTextView.keyboardType = .URL
         }
@@ -127,7 +131,6 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        
         dismiss(animated: true) {}
     }
     
@@ -138,13 +141,25 @@ class AddRuleController: UIViewController, UITextViewDelegate {
         addButton.isEnabled = textView.text != nil && textView.text != ""
     }
 
-    // MARK: - privat methods
+    // MARK: - private methods
     
     private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         rulePlaceholderLabel.textColor = theme.placeholderTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
+    }
+    
+    private func fillTextViewWithCurrentWiFiName() {
+        let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
+        let ssid = networkSettingsService.getCurrentWiFiName()
+        
+        if let ssid = ssid {
+            ruleTextView.text = ssid
+            ruleTextView.selectAll(self)
+            rulePlaceholderLabel.isHidden = true
+            addButton.isEnabled = true
+        }
     }
     
     private func getTitleText() -> String {
