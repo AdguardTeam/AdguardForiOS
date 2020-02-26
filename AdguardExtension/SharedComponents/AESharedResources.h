@@ -117,6 +117,11 @@ extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 extern NSString * _Nonnull CancelTappedWhenAppRating;
 
 /**
+ User Defaults key, which defines whether push notification about app rating was shown
+ */
+extern NSString * _Nonnull AppRatingNotificationShown;
+
+/**
  User Defaults key, which defines the next minimum time to show rate app alert
  */
 extern NSString * _Nonnull MinTimeIntervalToRate;

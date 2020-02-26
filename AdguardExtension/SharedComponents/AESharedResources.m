@@ -37,6 +37,7 @@ NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutoria
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsFirstLaunchDate = @"AEDefaultsFirstLaunchDate";
 NSString *CancelTappedWhenAppRating = @"CancelTappedWhenAppRating";
+NSString *AppRatingNotificationShown = @"AppRatingNotificationShown";
 NSString *MinTimeIntervalToRate = @"MinTimeIntervalToRate";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";

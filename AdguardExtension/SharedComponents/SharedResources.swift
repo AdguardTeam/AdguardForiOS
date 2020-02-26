@@ -44,6 +44,18 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var appRatingNotificationShown: Bool {
+        get {
+            if let shown = sharedDefaults().value(forKey: AppRatingNotificationShown) as? Bool {
+                return shown
+            }
+            return false
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AppRatingNotificationShown)
+        }
+    }
+    
     dynamic var minTimeIntervalToRate: Int {
         get {
             if let interval = sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int {

@@ -64,11 +64,13 @@ class RateAppServiceTest: XCTestCase {
     
     func testShowRateNotificationIfNeededCallsPostNotification(){
         // Create appropriate conditions for showing alert
+        resources.appRatingNotificationShown = false
         testRateAppAlertNeedsShowingWithSuitableTimeIntervalWithAppNotRated()
         
         if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
             XCTAssert(userNotificationService.postNotificationWasCalled == false)
             rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(resources.appRatingNotificationShown == true)
             XCTAssert(userNotificationService.postNotificationWasCalled == true)
             return
         }
@@ -76,12 +78,44 @@ class RateAppServiceTest: XCTestCase {
     }
     
     func testShowRateNotificationIfNeededDoesntCallPostNotification(){
+        // Create appropriate conditions for showing alert and app was already rated
+        resources.appRatingNotificationShown = true
+        testRateAppAlertNeedsShowingWithSuitableTimeIntervalWithAppNotRated()
+        
+        if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(resources.appRatingNotificationShown == true)
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            return
+        }
+        XCTAssert(false)
+    }
+    
+    func testShowRateNotificationIfNeededDoesntCallPostNotificationAndNotificationIsNotShown(){
         // Create inappropriate conditions for showing alert
+        resources.appRatingNotificationShown = false
         testShowRateDialogIfNeededWithSuitableTimeIntervalWithAppRated()
         
         if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
             XCTAssert(userNotificationService.postNotificationWasCalled == false)
             rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(resources.appRatingNotificationShown == false)
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            return
+        }
+        XCTAssert(false)
+    }
+    
+    func testShowRateNotificationIfNeededDoesntCallPostNotificationAndNotificationIsShown(){
+        // Create inappropriate conditions for showing alert
+        resources.appRatingNotificationShown = true
+        testShowRateDialogIfNeededWithSuitableTimeIntervalWithAppRated()
+        
+        if let userNotificationService = userNotificationService as? UserNotificationServiceMock {
+            XCTAssert(userNotificationService.postNotificationWasCalled == false)
+            rateAppService.showRateNotificationIfNeeded()
+            XCTAssert(resources.appRatingNotificationShown == true)
             XCTAssert(userNotificationService.postNotificationWasCalled == false)
             return
         }
