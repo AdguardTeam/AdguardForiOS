@@ -24,11 +24,7 @@ protocol ComplexSwitchDelegate {
 
 class ComplexProtectionSwitch: UIControl {
     
-    private(set) var isOn = false {
-        didSet {
-            accessibilityLabel = isOn ? String.localizedString("complex_protection_enabled_voiceover") : String.localizedString("complex_protection_disabled_voiceover")
-        }
-    }
+    private(set) var isOn = false
     
     var delegate: ComplexSwitchDelegate?
     

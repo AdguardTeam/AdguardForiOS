@@ -669,6 +669,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                     self.complexText = ACLocalizedString("system_enabled", nil)
                 }
                 self.protectionStatusLabel.text = self.complexText
+                self.complexProtectionSwitch.accessibilityLabel = self.complexText
                 
                 self.applyingChangesEnded()
             }

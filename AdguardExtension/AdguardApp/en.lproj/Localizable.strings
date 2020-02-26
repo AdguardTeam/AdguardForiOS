@@ -798,12 +798,6 @@
 /* (MainPageController) tracking protection disabled title for VoiceOver*/
 "tracking_protection_disabled_voiceover" = "Tracking protection disabled";
 
-/* (MainPageController) complex protection enabled title for VoiceOver*/
-"complex_protection_enabled_voiceover" = "Complex protection enabled";
-
-/* (MainPageController) complex protection disabled title for VoiceOver*/
-"complex_protection_disabled_voiceover" = "Complex protection disabled";
-
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Update filters";
 
