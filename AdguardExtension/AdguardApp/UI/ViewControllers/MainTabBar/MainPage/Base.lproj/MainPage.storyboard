@@ -144,6 +144,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUL-Oa-fId" customClass="ComplexProtectionSwitch" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="153.5" y="81" width="107" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="YES"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="80" id="0a5-hf-n2q">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="107"/>
@@ -703,6 +706,7 @@
                         <outlet property="contentBlockerViewConstraint" destination="eSv-Jc-dfo" id="bbd-3y-nVI"/>
                         <outlet property="contentBlockerViewIpad" destination="IU2-ER-A7n" id="t1x-7D-JNM"/>
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
+                        <outlet property="dataSavedButton" destination="vwk-XK-u63" id="wpf-Rq-83N"/>
                         <outlet property="dataSavedNumberLabel" destination="Zbr-WF-bsX" id="hCA-OE-HiV"/>
                         <outlet property="dataSavedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
                         <outlet property="fixItIphoneButton" destination="46F-Jh-wHm" id="tpK-eA-iLO"/>

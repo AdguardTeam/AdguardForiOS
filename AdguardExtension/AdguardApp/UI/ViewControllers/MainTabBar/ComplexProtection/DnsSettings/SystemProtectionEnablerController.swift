@@ -31,6 +31,7 @@ class SystemProtectionEnablerController: UIViewController {
         
         titleLabel.text = String.localizedString("protection_enabler_title")
         enableButton.setTitle(String.localizedString("protection_enabler_button"), for: .normal)
+        enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
         updateTheme()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in

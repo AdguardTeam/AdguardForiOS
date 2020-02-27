@@ -90,6 +90,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         updateTheme()
         
         tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
+        tryButton.accessibilityLabel = String.localizedString("try_for_free")
     }
     
     override func viewWillAppear(_ animated: Bool) {
