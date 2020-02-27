@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SystemConfiguration.CaptiveNetwork
 
 @objcMembers class WifiException: NSObject, Codable {
     @objc var rule: String
@@ -27,8 +28,11 @@ import Foundation
         self.enabled = enabled
     }
     
-    static func == (lhs: WifiException, rhs: WifiException) -> Bool {
-        return lhs.rule == rhs.rule
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? WifiException {
+            return self.rule == object.rule
+        }
+        return false
     }
 }
 
@@ -48,6 +52,7 @@ protocol NetworkSettingsServiceProtocol {
     func add(exception: WifiException)
     func delete(exception: WifiException)
     func change(oldException: WifiException, newException: WifiException)
+    func getCurrentWiFiName() ->  String?
 }
 
 @objcMembers
@@ -125,14 +130,25 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     func change(oldException: WifiException, newException: WifiException) {
         if let index = exceptions.firstIndex(of: oldException){
-            let ex = exceptions[index]
-            ex.enabled = newException.enabled
-            ex.rule = newException.rule
-            
+            exceptions[index] = newException
             vpnManager.restartTunnel()
-            
             reloadArray()
         }
+    }
+    
+    func getCurrentWiFiName() ->  String? {
+        if let interfaces = CNCopySupportedInterfaces() {
+            for i in 0..<CFArrayGetCount(interfaces){
+                let interfaceName: UnsafeRawPointer = CFArrayGetValueAtIndex(interfaces, i)
+                let rec = unsafeBitCast(interfaceName, to: AnyObject.self)
+                let unsafeInterfaceData = CNCopyCurrentNetworkInfo("\(rec)" as CFString)
+                 
+                if let unsafeInterfaceData = unsafeInterfaceData as? Dictionary<AnyHashable, Any> {
+                    return unsafeInterfaceData["SSID"] as? String
+                }
+            }
+        }
+        return nil
     }
     
     // MARK: - Private methods

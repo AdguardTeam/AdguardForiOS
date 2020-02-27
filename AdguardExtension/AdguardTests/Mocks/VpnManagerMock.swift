@@ -3,6 +3,10 @@ import Foundation
 
 class VpnManagerMock: NSObject, APVPNManagerProtocol {
     
+    // MARK: - Variables to test functions execution
+    
+    var restartTunnelWasCalledCount = 0
+    
     var networkingSettings: NetworkSettingsServiceProtocol?
     
     var providers: [DnsProviderInfo] = [DnsProviderInfo]()
@@ -36,7 +40,7 @@ class VpnManagerMock: NSObject, APVPNManagerProtocol {
     }
     
     func restartTunnel() {
-        
+        restartTunnelWasCalledCount += 1
     }
     
     func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
