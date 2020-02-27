@@ -43,8 +43,8 @@
 /* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "System-wide tracking protection";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "System protection";
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Tracking protection";
 
 /* Class = "UILabel"; text = "You are subscribed"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "Premium is activated";

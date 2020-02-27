@@ -97,7 +97,7 @@
                                                     <action selector="systemSwitch:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="rIo-hN-Je2"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System protection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="box-OA-msa">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking protection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="box-OA-msa">
                                                 <rect key="frame" x="64" y="11.5" width="269" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="g8s-EN-ot8"/>

@@ -32,17 +32,17 @@ protocol ComplexProtectionServiceProtocol {
     // Turns on/off safari protection
     func switchSafariProtection(state enabled: Bool)
     
-    // Turns on/off system protection
+    // Turns on/off tracking protection
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?)
     
-    // Turns on/off system protection
+    // Turns on/off tracking protection
     // Is used for switching from widget
     func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?,isFromComplexSwitch: Bool)
     
     // Checks state of complex protection
     func checkState(completion: @escaping (Bool)->() )
     
-    // Checks system protection state
+    // Checks tracking protection state
     func getSystemProtectionState(completion:@escaping (Bool)->() )
     
     // Checks states of all protection modules
@@ -112,7 +112,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 let safariEnabled = self.resources.safariProtectionEnabled
                 self.saveLastStates(safariState: safariEnabled, systemState: systemEnabled)
                 
-                // Turning off safari and system protection
+                // Turning off safari and tracking protection
                 self.switchSafariProtectionForComplex(state: enabled)
                 if systemEnabled {
                     self.switchSystemProtectionForComplex(state: enabled, for: VC)
@@ -132,7 +132,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 switchSafariProtectionForComplex(state: true)
             } else {
                 /**
-                 If last state of system protection was true and proStatus became false while complex protection was off
+                 If last state of tracking protection was true and proStatus became false while complex protection was off
                  we turn on safari protection instead
                  */
                 if safariEnabledSaved || (systemEnabledSaved && !proStatus){
@@ -170,7 +170,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
         
     /**
-     Gets current System protection state and returns it in completion
+     Gets current tracking protection state and returns it in completion
      */
     func getSystemProtectionState(completion:@escaping (Bool)->() ) {
         NETunnelProviderManager.loadAllFromPreferences {(managers, error) in

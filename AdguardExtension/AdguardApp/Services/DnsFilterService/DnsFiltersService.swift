@@ -205,7 +205,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var filtersJson: String  {
         get {
-            // If DNS requests blocking option is off, we return empty json
+            // If DNS trackers blocking option is off, we return empty json
             if !resources.dnsRequestBlockingEnabled {
                 return "[]"
             }

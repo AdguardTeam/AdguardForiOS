@@ -273,7 +273,7 @@ class AppDelegateHelper: NSObject {
                 }
             }
             
-            // Turning on/off system protection from widget
+            // Turning on/off Tracking protection from widget
             if url.scheme == AE_URLSCHEME && command == openSystemProtection {
                 let suffix = String(url.path.suffix(url.path.count - 1))
                 let parameters = suffix.split(separator: "/")
