@@ -37,8 +37,10 @@
                                                     <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="Avv-yV-0H1"/>
-                                                        <constraint firstAttribute="height" constant="48" id="P4B-b6-O9Q"/>
+                                                        <constraint firstAttribute="width" constant="48" id="Avv-yV-0H1">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="72"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="72" id="P4B-b6-O9Q"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYv-iX-uIo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -49,6 +51,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="This module can block tracking domains and encrypt your DNS traffic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-Cq-NFN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="108" width="366" height="38.5"/>
@@ -76,8 +81,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qLh-Mq-5yO">
-                                        <rect key="frame" x="0.0" y="172" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="qLh-Mq-5yO">
+                                        <rect key="frame" x="0.0" y="172" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qLh-Mq-5yO" id="lCQ-zH-1w3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -116,8 +121,8 @@
                             </tableViewSection>
                             <tableViewSection id="RPW-wU-xiy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="OK6-BQ-b7Z">
-                                        <rect key="frame" x="0.0" y="272" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="OK6-BQ-b7Z">
+                                        <rect key="frame" x="0.0" y="272" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OK6-BQ-b7Z" id="dJ6-Kc-1xt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -186,8 +191,8 @@
                                             <segue destination="6xC-0w-wab" kind="show" id="14d-LA-GXB"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nDW-xn-Kz8">
-                                        <rect key="frame" x="0.0" y="316" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nDW-xn-Kz8">
+                                        <rect key="frame" x="0.0" y="316" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nDW-xn-Kz8" id="Pd9-B4-rdH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -256,8 +261,8 @@
                                             <segue destination="5ol-3D-VBk" kind="show" id="toR-Ct-QAP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mqk-8k-12F">
-                                        <rect key="frame" x="0.0" y="360" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mqk-8k-12F">
+                                        <rect key="frame" x="0.0" y="360" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqk-8k-12F" id="FFS-Kh-Ktm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

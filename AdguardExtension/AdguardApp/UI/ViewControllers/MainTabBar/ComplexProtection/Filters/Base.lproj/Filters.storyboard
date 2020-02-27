@@ -40,8 +40,10 @@
                                                     <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="bNp-Kn-77j"/>
-                                                        <constraint firstAttribute="width" constant="48" id="f8g-2b-5Po"/>
+                                                        <constraint firstAttribute="height" constant="72" id="bNp-Kn-77j"/>
+                                                        <constraint firstAttribute="width" constant="48" id="f8g-2b-5Po">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="72"/>
+                                                        </constraint>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-a0-8YE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -52,6 +54,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>

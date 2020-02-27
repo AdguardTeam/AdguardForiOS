@@ -22,8 +22,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="oDH-UV-5ci">
                                 <rect key="frame" x="175" y="416" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="IoQ-Aq-oU7"/>
-                                    <constraint firstAttribute="height" constant="64" id="N9z-Ru-TVp"/>
+                                    <constraint firstAttribute="width" constant="64" id="IoQ-Aq-oU7">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="92"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="64" id="N9z-Ru-TVp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="92"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                         </subviews>
