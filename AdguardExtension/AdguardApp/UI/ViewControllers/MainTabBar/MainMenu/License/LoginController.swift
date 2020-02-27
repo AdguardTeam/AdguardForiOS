@@ -84,6 +84,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
         updateTheme()
         
         loginButton.makeTitleTextUppercased()
+        
+        nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
+        passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
     }
     
     override func viewDidAppear(_ animated: Bool) {

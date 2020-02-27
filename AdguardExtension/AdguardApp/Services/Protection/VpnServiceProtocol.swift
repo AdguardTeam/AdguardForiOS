@@ -36,7 +36,7 @@ protocol VpnServiceNotifierDelegate {
     func cancelledAddingVpnConfiguration()
     
     /**
-     Method is called when trying to turn system protection on, and proStatus is false
+     Method is called when trying to turn tracking protection on, and proStatus is false
      */
     func proStatusEnableFailure()
 }

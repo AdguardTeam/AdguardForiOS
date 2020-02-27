@@ -35,7 +35,7 @@
 "applying_changes" = "Applying changes...";
 
 /* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "This information is based on the number of blocked DNS requests. The statistics are an estimate due to technical impossibility to calculate the exact amount of ads, trackers and other threats that could have been downloaded by the user if the domain had not been initially blocked.";
+"saved_data_message" = "This information is based on the number of blocked DNS trackers. The statistics are an estimate due to technical impossibility to calculate the exact amount of ads, trackers and other threats that could have been downloaded by the user if the domain had not been initially blocked.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
@@ -257,7 +257,7 @@
 "dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocks ads and tracking systems";
+"dns_provider_ad_blocking_summary" = "Blocks tracking systems";
 
 /* MainMenuController - System DNS Title, when a server is not selected */
 "system_dns_server" = "System DNS";
@@ -410,7 +410,7 @@
 "wifi_exceptions_title" = "Wi-Fi exceptions";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "System protection will not work for Wi-Fi networks listed below";
+"wifi_exceptions_description" = "Tracking protection will not work for Wi-Fi networks listed below";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Add an exception";
@@ -422,10 +422,10 @@
 "filter_wifi_title" = "Filter Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "System protection while on Mobile data";
+"mobile_data_description" = "Tracking protection while on Mobile data";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "System protection while on Wi-Fi";
+"wifi_data_description" = "Tracking protection while on Wi-Fi";
 
 /* (ListOfRulesModel) title for dns and safari white list*/
 "whitelist_title" = "Whitelist";
@@ -530,7 +530,7 @@
 "add_new_rule" = "Add a new rule";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "All settings, including user rules, system protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+"confirm_reset_text" = "All settings, including user rules, tracking protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Reset activity log";
@@ -575,7 +575,7 @@
 "protection_enabled" = "Protection is enabled";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and System protection";
+"complex_enabled" = "Safari and Tracking protection";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari content blocking";
@@ -583,8 +583,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "All protection modules are disabled";
 
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "System protection";
+/*(TodayViewController) Tracking protection is enabled text  */
+"system_enabled" = "Tracking protection";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requests, %2$d blocked";
@@ -718,8 +718,8 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "No rule found";
 
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "System protection is disabled";
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "Tracking protection is disabled";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Enable";
@@ -765,3 +765,67 @@
 
 /* (RateAppService) - Notification message */
 "rate_notification_message" = "Rate our app in a snap";
+
+
+// MARK: - Strings for VoiceOver -
+
+// MARK: - MainTabBarController
+
+/* (MainTabBarController) Main page tab for VoiceOver*/
+"main_page_tab" = "Main page";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Protection page";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Activity page";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Settings page";
+
+
+// MARK: - MainPageController
+
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+"safari_protection_enabled_voiceover" = "Safari protection enabled";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari protection disabled";
+
+/* (MainPageController) tracking protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Tracking protection enabled";
+
+/* (MainPageController) tracking protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Tracking protection disabled";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Update filters";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Requests number";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "Blocked requests number";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "Saved data size";
+
+
+// MARK: - SystemProtectionEnablerController
+
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+"enable_system_protection_voiceover" = "Enable tracking protection";
+
+
+// MARK: - GetProTableController
+
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+"choose_sub_voiceover" = "Choose your subscription type";
+
+// MARK: - LoginController
+
+/* (LoginController) Enter your email here title for VoiceOver*/
+"enter_email_voiceover" = "Enter your email here";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Enter your password here";

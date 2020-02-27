@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "requests";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "System protection";
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "Tracking protection";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "All time statistics:";

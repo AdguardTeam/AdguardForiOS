@@ -117,6 +117,11 @@ extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
 extern NSString * _Nonnull CancelTappedWhenAppRating;
 
 /**
+ User Defaults key, which defines whether push notification about app rating was shown
+ */
+extern NSString * _Nonnull AppRatingNotificationShown;
+
+/**
  User Defaults key, which defines the next minimum time to show rate app alert
  */
 extern NSString * _Nonnull MinTimeIntervalToRate;
@@ -240,7 +245,7 @@ extern NSString* _Nonnull AEDefaultsDeveloperMode;
 extern NSString* _Nonnull AEDefaultsShowStatusBar;
 
 /**
- User defaults key, which defines whether DNS request blocking is enabled */
+ User defaults key, which defines whether DNS trackers blocking is enabled */
 extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
 
 /**
@@ -286,7 +291,7 @@ extern NSString* _Nonnull DnsFilterUniqueId;
 extern NSString* _Nonnull SafariProtectionLastState;
 
 /**
- Last state of system protection
+ Last state of Tracking protection
  */
 extern NSString* _Nonnull SystemProtectionLastState;
 

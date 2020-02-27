@@ -86,6 +86,8 @@ class GetProTableController: UITableViewController {
         
         upgradeButton.makeTitleTextUppercased()
         titleLabel.text = titleLabel.text?.uppercased()
+        
+        periodButton.accessibilityLabel = String.localizedString("choose_sub_voiceover")
     }
     
     // MARK: - table view delegate methods

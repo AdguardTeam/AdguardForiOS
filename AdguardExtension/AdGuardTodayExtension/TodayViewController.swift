@@ -222,7 +222,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     /**
-     Updates system protection view
+     Updates Tracking protection view
      */
     private func updateWidgetSystem(){
         NETunnelProviderManager.loadAllFromPreferences {[weak self] (managers, error) in

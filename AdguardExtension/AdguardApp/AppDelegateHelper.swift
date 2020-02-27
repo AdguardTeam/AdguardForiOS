@@ -49,8 +49,6 @@ class AppDelegateHelper: NSObject {
     private var statusBarIsShown = false
     private let statusView = StatusView()
     
-    private let mainMenuControllerTab = 3
-    
     var purchaseObservation: Any?
     
     // MARK: String Constants
@@ -243,7 +241,7 @@ class AppDelegateHelper: NSObject {
         }
         
         // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[mainMenuControllerTab] as? MainNavigationController else { return false }
+        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else { return false }
 
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             // Adding new user rule from safari
@@ -275,7 +273,7 @@ class AppDelegateHelper: NSObject {
                 }
             }
             
-            // Turning on/off system protection from widget
+            // Turning on/off Tracking protection from widget
             if url.scheme == AE_URLSCHEME && command == openSystemProtection {
                 let suffix = String(url.path.suffix(url.path.count - 1))
                 let parameters = suffix.split(separator: "/")
@@ -318,7 +316,7 @@ class AppDelegateHelper: NSObject {
         if tab.viewControllers?.count == 0 { return }
         
         // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[mainMenuControllerTab] as? MainNavigationController else { return }
+        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else { return }
         
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             DispatchQueue.main.async {[weak self] in
