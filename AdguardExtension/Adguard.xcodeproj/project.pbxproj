@@ -555,6 +555,7 @@
 		7E3BBDBF23FF0517009C42C0 /* Date+TestableDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BBDBE23FF0517009C42C0 /* Date+TestableDate.swift */; };
 		7E3BBDC023FF051C009C42C0 /* Date+TestableDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BBDBE23FF0517009C42C0 /* Date+TestableDate.swift */; };
 		7E3BDEE023A15709009492CE /* GetProDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BDEDF23A15709009492CE /* GetProDialogView.swift */; };
+		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
 		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
 		7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
 		7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407994231E7A52007EFB26 /* ActionViewController.swift */; };
@@ -1919,6 +1920,7 @@
 		7E3BBDBC23FF04E5009C42C0 /* TestableDateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableDateMock.swift; sourceTree = "<group>"; };
 		7E3BBDBE23FF0517009C42C0 /* Date+TestableDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TestableDate.swift"; sourceTree = "<group>"; };
 		7E3BDEDF23A15709009492CE /* GetProDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProDialogView.swift; sourceTree = "<group>"; };
+		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
 		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
 		7E3F118F2350624900D1D17E /* UserFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterModel.swift; sourceTree = "<group>"; };
 		7E407994231E7A52007EFB26 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
@@ -3439,6 +3441,7 @@
 				7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */,
 				7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */,
 				7E5844D723FD87E900BAD052 /* RateAppServiceTest.swift */,
+				7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -6008,6 +6011,7 @@
 				D0288F3C2306991F00A4EBEF /* NSString+Utils.m in Sources */,
 				D03E532921B412FA00C62152 /* SafariService.swift in Sources */,
 				D0ABE0D42230FD5500771635 /* Constants.swift in Sources */,
+				7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */,
 				65EC9CA91BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0288F30230697BA00A4EBEF /* Reachability.m in Sources */,
 				D07A811C23B5036E00181E54 /* SharedResourcesTest.swift in Sources */,

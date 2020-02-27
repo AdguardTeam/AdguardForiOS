@@ -28,8 +28,11 @@ import SystemConfiguration.CaptiveNetwork
         self.enabled = enabled
     }
     
-    static func == (lhs: WifiException, rhs: WifiException) -> Bool {
-        return lhs.rule == rhs.rule
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? WifiException {
+            return self.rule == object.rule
+        }
+        return false
     }
 }
 
@@ -127,12 +130,8 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     func change(oldException: WifiException, newException: WifiException) {
         if let index = exceptions.firstIndex(of: oldException){
-            let ex = exceptions[index]
-            ex.enabled = newException.enabled
-            ex.rule = newException.rule
-            
+            exceptions[index] = newException
             vpnManager.restartTunnel()
-            
             reloadArray()
         }
     }
