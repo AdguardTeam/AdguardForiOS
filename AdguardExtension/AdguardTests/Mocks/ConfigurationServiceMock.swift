@@ -11,4 +11,5 @@ class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
     var darkTheme = false
     var proStatus = true
     var allContentBlockersEnabled: Bool = true
+    var someContentBlockersEnabled: Bool = true
 }

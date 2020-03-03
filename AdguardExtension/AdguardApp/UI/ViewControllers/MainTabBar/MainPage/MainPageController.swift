@@ -125,8 +125,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private var iconButton: UIButton? = nil
     private var complexText = ""
     private let getProSegueId = "getProSegue"
-    private let showOnboardingSegueId = "showOnboardingSegue"
-    private let videoTutorialSegueId = "videoTutorialSegue"
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -139,6 +137,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // Indicates whether filters are updating
     private var updateInProcess = false
+    
+    // Show helper only once during app lifecycle
+    private var contentBlockerHelperWasShown = false
     
     // Show onboarding only once during app lifecycle
     private var onboardingWasShown = false
@@ -233,35 +234,16 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         return theme.statusbarStyle()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showOnboardingSegueId {
-            if let controller = segue.destination as? OnboardingController {
-                controller.delegate = self
-            }
-        }
-        if segue.identifier == videoTutorialSegueId {
-            if let controller = segue.destination as? AEUIPlayerViewController {
-                controller.completionBlock = { [weak self] in
-                    guard let self = self else { return }
-                    self.performSegue(withIdentifier: self.showOnboardingSegueId, sender: self)
-                }
-            }
-        }
-    }
-    
-    func processOnboarding() {
-        let contentBlockersEnabled = configuration.contentBlockerEnabled
-        let someContentBlockersEnabled = contentBlockersEnabled?.reduce(false, { (result, state) -> Bool in return result || state.value }) ?? true
-
-        if !someContentBlockersEnabled && !onboardingWasShown {
-            showOnboarding()
-            onboardingWasShown = true
+    private func processContentBlockersHelper() {
+        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
+            showContentBlockersHelper()
+            contentBlockerHelperWasShown = true
         } else {
             ready = true
             callOnready()
         }
     }
-    
+
     // MARK: - Actions
 
     
@@ -352,10 +334,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - Get pro action
     
-    @IBAction func getProAction(_ sender: UIButton) {
-        
-    }
-    
+    @IBAction func getProAction(_ sender: UIButton) {}
     
     // MARK: - Content blockers view actions
     
@@ -364,7 +343,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     @IBAction func fixItTapped(_ sender: UIButton) {
-        showOnboarding()
+        showContentBlockersHelper()
     }
     
     // MARK: - Observing Values from User Defaults
@@ -441,13 +420,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - OnboardingViewController delegate
     
-    func showVideoAction(sender: UIViewController) {
-        sender.dismiss(animated: true) {
-            self.performSegue(withIdentifier: self.videoTutorialSegueId, sender: self)
-        }
-    }
-    
     func onboardingDidFinish() {
+        // UNCOMMENT WHEN FINISH TESTING
+        //resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
         ready = true
         callOnready()
     }
@@ -703,7 +678,16 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             showContentBlockersInfo()
         }
         
-        processOnboarding()
+        let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
+        
+        if !onboardingShown && !configuration.someContentBlockersEnabled && !self.onboardingWasShown && !configuration.proStatus{
+            showOnboarding()
+        } else {
+            processContentBlockersHelper()
+        }
+        
+        // Local variable
+        self.onboardingWasShown = true
     }
     
     /**
@@ -768,9 +752,27 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     private func showOnboarding() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.performSegue(withIdentifier: self.showOnboardingSegueId, sender: self)
+        DispatchQueue.main.async { [weak self] in
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController {
+                if let controller = navController.viewControllers.first as? IntroductionOnboardingController {
+                    controller.delegate = self
+                }
+                self?.onboardingWasShown = true
+                self?.present(navController, animated: true)
+            }
+        }
+    }
+    
+    private func showContentBlockersHelper(){
+        DispatchQueue.main.async { [weak self] in
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController, let controller = storyboard.instantiateViewController(withIdentifier: "OnboardingController") as? OnboardingController{
+                navController.viewControllers = [controller]
+                controller.delegate = self
+                controller.needsShowingPremium = false
+                self?.present(navController, animated: true)
+            }
         }
     }
     

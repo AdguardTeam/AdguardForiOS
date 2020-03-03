@@ -18,28 +18,43 @@
 
 import Foundation
 
+class OnboardingCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var separator: UIView!
+}
+
 protocol OnboardingControllerDelegate {
-    func showVideoAction(sender: UIViewController)
     func onboardingDidFinish()
 }
 
 class OnboardingController: UIViewController {
     
     var delegate: OnboardingControllerDelegate?
+    var needsShowingPremium: Bool?
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    
     private var themeToken: NotificationToken?
+    private var contenBlockerObservation: NSKeyValueObservation?
+    
+    private let showLicenseSegue = "ShowLicenseSegue"
+    private let onboardingCellId = "OnboardingCellId"
+    
+    private let contentBlockers = ["AdGuard — Custom", "AdGuard — General", "AdGuard — Other", "AdGuard — Privacy"]
+    private let cellsAlpha: [CGFloat] = [1.0, 0.7, 0.4, 0.1]
     
     // MARK: - outlets
     @IBOutlet weak var settingsLabel: ThemableLabel!
     @IBOutlet weak var safariLabel: ThemableLabel!
     @IBOutlet weak var switchLabel: ThemableLabel!
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    @IBOutlet weak var videoButton: RoundRectButton!
-    
     // MARK: - view controller live cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,34 +62,83 @@ class OnboardingController: UIViewController {
             self?.updateTheme()
             self?.setupLabels()
         }
-        setupLabels()
         
+        contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
+            self?.observeContentBlockersState()
+        }
+        
+        setupLabels()
         updateTheme()
     }
     
-    // MARK: - actions
-    @IBAction func videoAction(_ sender: Any) {
-        delegate?.showVideoAction(sender: self)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let getProController = segue.destination as? GetProController {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            getProController.isFromOnboarding = true
+            getProController.onboardingDelegate = delegate
+        }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return theme.statusbarStyle()
+    }
+    
+    // MARK: - Actions
     
     @IBAction func closeAction(_ sender: Any) {
         dismiss(animated: true) { [weak self] in
             self?.delegate?.onboardingDidFinish()
         }
     }
-    // MARK: - private methods
     
-    func setupLabels() {
-        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "settings"))
-        
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "safari_onboarding"))
-        
-        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: 16, color: theme.grayTextColor, attachmentImage: UIImage(named: "switch"))   
+    @IBAction func videoAction(_ sender: UIButton) {
+        showVideoTutorial()
     }
     
-    func updateTheme() {
+    
+    // MARK: - Private methods
+    
+    private func setupLabels() {
+        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        
+        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        
+        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+    }
+    
+    private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
-        theme.setupPopupButton(videoButton)
+        theme.setupTable(tableView)
+        tableView.reloadData()
+    }
+    
+    private func observeContentBlockersState(){
+        if needsShowingPremium == true && configuration.someContentBlockersEnabled && !configuration.proStatus {
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                self.performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+            }
+        }
+    }
+}
+
+extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contentBlockers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: onboardingCellId) as? OnboardingCell {
+            cell.titleLabel.text = contentBlockers[indexPath.row]
+            cell.separator.isHidden = indexPath.row == contentBlockers.count - 1
+            
+            theme.setupTableCell(cell)
+            theme.setupSeparator(cell.separator)
+            cell.titleLabel.textColor = theme.whiteOrBlackColor
+            cell.contentView.alpha = cellsAlpha[indexPath.row]
+            return cell
+        }
+        return UITableViewCell()
     }
 }

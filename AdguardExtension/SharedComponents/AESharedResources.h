@@ -310,6 +310,10 @@ extern NSString* _Nonnull StatisticsSaveTime;
  */
 extern NSString* _Nonnull DnsActiveProtocols;
 
+/**
+ User defaults key, which defines whethet onboarding was shown
+ */
+extern NSString* _Nonnull OnboardingWasShown;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

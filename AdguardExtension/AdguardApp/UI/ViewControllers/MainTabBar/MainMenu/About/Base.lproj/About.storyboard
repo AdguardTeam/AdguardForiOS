@@ -387,7 +387,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGI-i8-9aW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="74H-Xz-46y" userLabel="How To Use Gesture Recognizer">
                     <connections>
-                        <segue destination="Pwk-zm-oJp" kind="show" id="4yh-qb-Vya"/>
+                        <action selector="openVideoTutorial:" destination="yJh-2O-z76" id="yMi-87-3mS"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="WDb-dI-3qM" userLabel="Site Gesture Recognizer">
@@ -417,14 +417,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="450" y="-176"/>
-        </scene>
-        <!--Tutorial-->
-        <scene sceneID="x3t-yV-B8f">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Tutorial.storyboard" storyboardName="Tutorial" id="Pwk-zm-oJp" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YS3-J6-GVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1062" y="-161"/>
         </scene>
         <!--GetProController-->
         <scene sceneID="S6k-Qf-GKH">

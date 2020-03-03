@@ -20,6 +20,15 @@ import Foundation
 
 extension UIViewController {
     
+    func showVideoTutorial(){
+        DispatchQueue.main.async { [weak self] in
+            let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
+            if let controller = storyboard.instantiateViewController(withIdentifier: "TutorialController") as? AEUIPlayerViewController{
+                self?.present(controller, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func setupBackButton(with action: Selector? = nil) {
         let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
         
