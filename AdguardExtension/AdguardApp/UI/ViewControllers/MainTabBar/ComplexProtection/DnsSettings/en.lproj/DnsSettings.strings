@@ -31,8 +31,8 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UINavigationItem"; title = "DNS trackers blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "DNS trackers blocking";
+/* Class = "UINavigationItem"; title = "Customize blocking"; ObjectID = "Edw-bD-gDt"; */
+"Edw-bD-gDt.title" = "Customize blocking";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Advanced network settings";
@@ -106,8 +106,8 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "DELETE";
 
-/* Class = "UILabel"; text = "DNS trackers blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS trackers blocking";
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Customize blocking";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters, etc.";
