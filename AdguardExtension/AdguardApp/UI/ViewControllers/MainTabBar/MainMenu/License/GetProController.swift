@@ -18,10 +18,14 @@
 
 import Foundation
 
+protocol GetProControllerDelegate {
+    func getProControllerClosed()
+}
+
 class GetProController: UIViewController {
     
-    var isFromOnboarding = false
-    var onboardingDelegate: OnboardingControllerDelegate?
+    var needsShowingExitButton = false
+    var getProControllerDelegate: GetProControllerDelegate?
     
     // MARK: - properties
     private var notificationObserver: Any?
@@ -79,7 +83,7 @@ class GetProController: UIViewController {
         
         myAccountButton.makeTitleTextUppercased()
         
-        if isFromOnboarding {
+        if needsShowingExitButton {
             navigationItem.leftBarButtonItems = [exitButton]
         } else {
             setupBackButton()
@@ -95,7 +99,7 @@ class GetProController: UIViewController {
     // MARK: - actions
     @IBAction func exitAction(_ sender: UIBarButtonItem) {
         navigationController?.dismiss(animated: true) {[weak self] in
-            self?.onboardingDelegate?.onboardingDidFinish()
+            self?.getProControllerDelegate?.getProControllerClosed()
         }
     }
     

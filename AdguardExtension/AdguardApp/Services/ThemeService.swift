@@ -23,9 +23,7 @@ import Foundation
  */
 
 @objc protocol ThemeServiceProtocol : NSObjectProtocol {
-    
-    var blackOrWhiteColor: UIColor { get }
-    var whiteOrBlackColor: UIColor { get }
+
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
@@ -80,18 +78,6 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     init(_ configuration: ConfigurationServiceProtocol) {
         self.configuration = configuration
         super.init()
-    }
-    
-    var blackOrWhiteColor: UIColor {
-        get {
-            return configuration.darkTheme ? .black : .white
-        }
-    }
-    
-    var whiteOrBlackColor: UIColor {
-        get {
-            return configuration.darkTheme ? .white : .black
-        }
     }
     
     var backgroundColor: UIColor {

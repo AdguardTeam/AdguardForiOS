@@ -66,8 +66,7 @@ class IntroductionOnboardingController: UIViewController {
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
         let htmlString = String(format: format, privacy, eula)
         
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        let font = UIFont.systemFont(ofSize: isIphone ? 11.0 : 15.0)
+        let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
         
         let style = NSMutableParagraphStyle()
         style.alignment = .center

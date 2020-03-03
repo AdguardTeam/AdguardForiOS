@@ -95,9 +95,8 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     /**
     this flag indicates that at least one safari content blocker is enabled in safari settings
     */
-    @objc
     var someContentBlockersEnabled: Bool {
-        return contentBlockerEnabled?.reduce(false, { (result, state) -> Bool in return result || state.value }) ?? true
+        return contentBlockerEnabled?.values.contains(true) ?? false
     }
     
     /**

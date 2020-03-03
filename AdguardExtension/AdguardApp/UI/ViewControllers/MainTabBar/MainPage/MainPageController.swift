@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -140,9 +140,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // Show helper only once during app lifecycle
     private var contentBlockerHelperWasShown = false
-    
-    // Show onboarding only once during app lifecycle
-    private var onboardingWasShown = false
     
     // MARK: - Services
     
@@ -427,6 +424,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         callOnready()
     }
     
+    // MARK: - GetProControllerDelegate delegate
+    
+    func getProControllerClosed() {
+        onboardingDidFinish()
+    }
+    
     // MARK: - Private methods
     
     /**
@@ -680,14 +683,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
         
-        if !onboardingShown && !configuration.someContentBlockersEnabled && !self.onboardingWasShown && !configuration.proStatus{
+        if !onboardingShown && !configuration.someContentBlockersEnabled && !configuration.proStatus{
             showOnboarding()
         } else {
             processContentBlockersHelper()
         }
-        
-        // Local variable
-        self.onboardingWasShown = true
     }
     
     /**
@@ -758,7 +758,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                 if let controller = navController.viewControllers.first as? IntroductionOnboardingController {
                     controller.delegate = self
                 }
-                self?.onboardingWasShown = true
                 self?.present(navController, animated: true)
             }
         }

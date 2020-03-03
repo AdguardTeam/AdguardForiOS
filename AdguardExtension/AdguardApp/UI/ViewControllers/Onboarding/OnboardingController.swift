@@ -74,8 +74,10 @@ class OnboardingController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let getProController = segue.destination as? GetProController {
             navigationController?.setNavigationBarHidden(false, animated: true)
-            getProController.isFromOnboarding = true
-            getProController.onboardingDelegate = delegate
+            getProController.needsShowingExitButton = true
+            if let getProControllerDelegate = delegate as? GetProControllerDelegate {
+                getProController.getProControllerDelegate = getProControllerDelegate
+            }
         }
     }
     
@@ -135,7 +137,7 @@ extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
             
             theme.setupTableCell(cell)
             theme.setupSeparator(cell.separator)
-            cell.titleLabel.textColor = theme.whiteOrBlackColor
+            cell.titleLabel.textColor = configuration.darkTheme ? .white : .black
             cell.contentView.alpha = cellsAlpha[indexPath.row]
             return cell
         }
