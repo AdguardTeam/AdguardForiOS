@@ -77,7 +77,6 @@ NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
 NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
-NSString* AEDefaultsDNSRequestsBlocking = @"AEDefaultsDNSRequestsBlocking";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
 NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";

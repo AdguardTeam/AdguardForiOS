@@ -20,8 +20,6 @@ import UIKit
 
 class RequestsBlockingController: UITableViewController {
 
-    @IBOutlet weak var enabledSwitch: UISwitch!
-    @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
     @IBOutlet weak var filtersLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -39,7 +37,6 @@ class RequestsBlockingController: UITableViewController {
     private var notificationToken: NotificationToken?
     private var configurationToken: NSKeyValueObservation?
     
-    private let enabledRow = 0
     private let headerSection = 0
     
     // MARK: - View controller life cycle
@@ -74,9 +71,6 @@ class RequestsBlockingController: UITableViewController {
             self.tableView.reloadData()
         }
         
-        enabledSwitch.isOn = resources.dnsRequestBlockingEnabled
-        requestBlockingStateLabel.text = enabledSwitch.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
-        
         setupBackButton()
     }
     
@@ -96,31 +90,16 @@ class RequestsBlockingController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.section == headerSection && indexPath.row == enabledRow && !configuration.developerMode {
-            return 0.0
-        }
-        
-        return tableView.rowHeight
-    }
-    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.0 : 0.1
+        return section == headerSection ? 0.1 : 0.0
     }
 
-    @IBAction func enabledSwitchAction(_ sender: UISwitch) {
-        resources.dnsRequestBlockingEnabled = sender.isOn
-        requestBlockingStateLabel.text = sender.isOn ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
-        
-        vpnManager.restartTunnel()
-    }
+    // MARK: - Private methods
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
-        theme.setupSwitch(enabledSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
