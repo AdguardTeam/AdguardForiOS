@@ -49,6 +49,7 @@ class OnboardingAnimationsController: UIViewController {
         
         updateTheme()
         setupAnimationViews()
+        addGestureRecognizers()
         firstAnimationView.play()
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
@@ -142,5 +143,62 @@ class OnboardingAnimationsController: UIViewController {
         
         animationsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
         textsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
+    }
+    
+    private func addGestureRecognizers() {
+        let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onRightSwipe(_:)))
+        let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onLeftSwipe(_:)))
+        
+        rightSwipeRecognizer.direction = .right
+        leftSwipeRecognizer.direction = .left
+        
+        view.addGestureRecognizer(rightSwipeRecognizer)
+        view.addGestureRecognizer(leftSwipeRecognizer)
+    }
+    
+    @objc private func onRightSwipe(_ sender: UISwipeGestureRecognizer) {
+        if currentStep == 1 {
+            return
+        }
+        
+        pageContol.currentPage -= 1
+        currentStep -= 1
+        
+        setupScrollViews()
+        
+        if currentStep == 2 {
+            thirdAnimationView.stop()
+            secondAnimationView.play()
+            return
+        }
+        
+        if currentStep == 1 {
+            secondAnimationView.stop()
+            firstAnimationView.play()
+            return
+        }
+    }
+    
+    @objc private func onLeftSwipe(_ sender: UISwipeGestureRecognizer) {
+        if currentStep == 3 {
+            return
+        }
+        
+        pageContol.currentPage += 1
+        currentStep += 1
+        
+        setupScrollViews()
+        
+        if currentStep == 2 {
+            firstAnimationView.stop()
+            secondAnimationView.play()
+            return
+        }
+        
+        if currentStep == 3 {
+            secondAnimationView.stop()
+            thirdAnimationView.play()
+            return
+        }
     }
 }
