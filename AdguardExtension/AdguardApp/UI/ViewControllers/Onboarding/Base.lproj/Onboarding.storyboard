@@ -474,13 +474,19 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-B8-UIZ">
                                 <rect key="frame" x="24" y="822" width="366" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="oVb-1p-g0o"/>
+                                    <constraint firstAttribute="height" constant="20" id="oVb-1p-g0o">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Watch manual" image="icon_play">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                </variation>
                                 <connections>
                                     <action selector="videoAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="KGQ-e8-W9K"/>
                                 </connections>
@@ -721,7 +727,9 @@
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="width" secondItem="VQc-D7-UHv" secondAttribute="width" multiplier="0.4" id="0b4-jd-Npx"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="0m5-zW-TP1"/>
                             <constraint firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" constant="48" id="0uO-OG-9XN"/>
-                            <constraint firstItem="fd3-xK-PyV" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="16" id="6GS-jI-He5"/>
+                            <constraint firstItem="fd3-xK-PyV" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="16" id="6GS-jI-He5">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="top" secondItem="F7O-MB-LHu" secondAttribute="bottom" constant="32" id="6ex-EX-QfA">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
@@ -729,7 +737,9 @@
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="top" secondItem="fd3-xK-PyV" secondAttribute="bottom" constant="32" id="7qa-wa-a9X"/>
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="leading" secondItem="VQc-D7-UHv" secondAttribute="leading" constant="24" id="8LC-Jz-LHE"/>
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="centerX" secondItem="sqA-SS-pYR" secondAttribute="centerX" id="8XT-dZ-Wao"/>
-                            <constraint firstItem="fd3-xK-PyV" firstAttribute="leading" secondItem="sqA-SS-pYR" secondAttribute="leading" constant="8" id="9NY-dN-GoO"/>
+                            <constraint firstItem="fd3-xK-PyV" firstAttribute="leading" secondItem="sqA-SS-pYR" secondAttribute="leading" constant="8" id="9NY-dN-GoO">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
                             <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="EG2-SZ-8xL" secondAttribute="trailing" constant="24" id="Fgb-Lb-Xmi"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="top" secondItem="EG2-SZ-8xL" secondAttribute="bottom" constant="16" id="Gqa-OW-uTO">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
@@ -828,7 +838,7 @@
         <!--Main Navigation Controller-->
         <scene sceneID="FIy-PU-cOp">
             <objects>
-                <navigationController storyboardIdentifier="OnboardingNavigationController" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="rOd-yI-7kW" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingNavigationController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="rOd-yI-7kW" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="1Hw-tO-cwF">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
