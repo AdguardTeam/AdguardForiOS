@@ -94,7 +94,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         let tabBar = tabBarController?.tabBar
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: view, tabBar: tabBar)
         
-        title = model?.title
         navigationItem.rightBarButtonItems = [searchButton]
         
         changeRightButtton()

@@ -18,6 +18,10 @@
 
 import Foundation
 
+class TitleListOfRulesCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: ThemableLabel!
+}
+
 class EnableListOfRulesCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var serviceStateLabel: ThemableLabel!
@@ -89,9 +93,10 @@ class DesciptionCell: UITableViewCell {
     
     private func setDescriptionText(_ text: String){
         if let headerText = text.attributedStringFromHtml() {
+            let font = descriptionTextView.font ?? UIFont.systemFont(ofSize: 14)
             descriptionTextView.text = ""
             headerText.addAttribute(.foregroundColor, value: theme?.lightGrayTextColor ?? .black, range: NSRange(location: 0, length: headerText.length))
-            headerText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: headerText.length))
+            headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
             descriptionTextView.attributedText = headerText
         }
     }
@@ -104,8 +109,6 @@ class DesciptionCell: UITableViewCell {
 }
 
 class AddRuleCell: UITableViewCell {
-    @IBOutlet weak var addRuleHeight: NSLayoutConstraint!
-    @IBOutlet weak var addRuleWidth: NSLayoutConstraint!
     @IBOutlet weak var addRuleLabel: ThemableLabel!
     
     var theme: ThemeServiceProtocol? {
@@ -117,31 +120,20 @@ class AddRuleCell: UITableViewCell {
     var type: RulesType?{
         didSet {
             setupLabel()
-            setupImage()
         }
     }
     
     private func setupLabel(){
+        let fontSize = addRuleLabel.font.pointSize
         if type == .safariUserfilter {
-            addRuleLabel.font = UIFont(name: "PTMono-Regular", size: 15.0)
+            addRuleLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
             addRuleLabel.text = ACLocalizedString("add_new_rule", nil)
         } else {
-            addRuleLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
+            addRuleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
             addRuleLabel.text = type == .systemBlacklist ? String.localizedString("add_new_rule") : String.localizedString("add_domain")
         }
         addRuleLabel.textColor = UIColor(hexString: "#67b279")
     }
-    
-    private func setupImage(){
-        if type == .safariUserfilter{
-            addRuleWidth.constant = 20.0
-            addRuleHeight.constant = 20.0
-        } else {
-            addRuleWidth.constant = 24.0
-            addRuleHeight.constant = 24.0
-        }
-    }
-    
     
     private func updateTheme(){
         theme?.setupLabel(addRuleLabel)
@@ -183,12 +175,14 @@ class NormalRuleCell: UITableViewCell {
                 ruleStateImageView.isHidden = true
             }
             
+            let fontSize = ruleNameLabel.font.pointSize
+            
             if type == .safariUserfilter {
-                ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: 15.0)
+                ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
                 topConstraint.constant = 6.0
                 bottomConstraint.constant = 6.0
             } else {
-                ruleNameLabel.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
+                ruleNameLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
                 topConstraint.constant = 16.0
                 bottomConstraint.constant = 16.0
             }
