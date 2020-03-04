@@ -141,6 +141,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // Show helper only once during app lifecycle
     private var contentBlockerHelperWasShown = false
     
+    private var onBoardingIsInProcess = false
+    
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -420,6 +422,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     func onboardingDidFinish() {
         // UNCOMMENT WHEN FINISH TESTING
         //resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
+        onBoardingIsInProcess = false
         ready = true
         callOnready()
     }
@@ -683,10 +686,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
         
-        if !onboardingShown && !configuration.someContentBlockersEnabled && !configuration.proStatus{
-            showOnboarding()
-        } else {
-            processContentBlockersHelper()
+        if !onBoardingIsInProcess {
+            if !onboardingShown && !configuration.someContentBlockersEnabled && !configuration.proStatus{
+                showOnboarding()
+            } else {
+                processContentBlockersHelper()
+            }
         }
     }
     
@@ -758,6 +763,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
                 if let controller = navController.viewControllers.first as? IntroductionOnboardingController {
                     controller.delegate = self
                 }
+                self?.onBoardingIsInProcess = true
                 self?.present(navController, animated: true)
             }
         }
