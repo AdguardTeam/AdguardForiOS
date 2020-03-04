@@ -88,8 +88,12 @@ class OnboardingController: UIViewController {
     // MARK: - Actions
     
     @IBAction func closeAction(_ sender: Any) {
-        dismiss(animated: true) { [weak self] in
-            self?.delegate?.onboardingDidFinish()
+        if needsShowingPremium == true {
+            performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+        } else {
+            dismiss(animated: true) { [weak self] in
+                self?.delegate?.onboardingDidFinish()
+            }
         }
     }
     
