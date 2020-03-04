@@ -420,8 +420,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - OnboardingViewController delegate
     
     func onboardingDidFinish() {
-        // UNCOMMENT WHEN FINISH TESTING
-        //resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
+        resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
         onBoardingIsInProcess = false
         ready = true
         callOnready()

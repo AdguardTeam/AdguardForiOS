@@ -767,7 +767,7 @@
 "rate_notification_message" = "Rate our app in a snap";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "By continuing using it, You accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
 // MARK: - Strings for VoiceOver -
 
