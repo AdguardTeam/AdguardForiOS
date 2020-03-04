@@ -208,7 +208,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Il-Qe8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -223,7 +223,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         </variation>
                                                     </label>
                                                 </subviews>
@@ -257,7 +257,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari Protection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf9-6r-TUk" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -269,7 +269,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
                                                 </subviews>
@@ -296,7 +296,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-WJ-CpC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -311,7 +311,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         </variation>
                                                     </label>
                                                 </subviews>
@@ -356,6 +356,11 @@
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="p19-nM-t9P">
+                                <rect key="frame" x="364.5" y="518" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-xM-B5q">
                                 <rect key="frame" x="24" y="798" width="366" height="40"/>
                                 <constraints>
@@ -374,11 +379,6 @@
                                     <action selector="nextButtonTapped:" destination="wQn-A0-Ee1" eventType="touchUpInside" id="w1Z-Y1-30n"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="p19-nM-t9P">
-                                <rect key="frame" x="187.66666666666666" y="498" width="39" height="37"/>
-                                <color key="pageIndicatorTintColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -720,11 +720,24 @@
                                     <outlet property="delegate" destination="eQY-Hl-hIc" id="QMV-co-vJv"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOu-4j-RcN">
+                                <rect key="frame" x="192" y="713" width="384" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="idP-YW-8wV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <state key="normal" title="WATCH MANUAL"/>
+                                <connections>
+                                    <action selector="videoAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="Hst-jI-E2G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" id="08u-Mf-dCM"/>
-                            <constraint firstItem="F7O-MB-LHu" firstAttribute="width" secondItem="VQc-D7-UHv" secondAttribute="width" multiplier="0.4" id="0b4-jd-Npx"/>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="top" secondItem="zYS-ll-8qM" secondAttribute="bottom" constant="40" id="0Fe-Ne-WG8"/>
+                            <constraint firstItem="F7O-MB-LHu" firstAttribute="width" secondItem="VQc-D7-UHv" secondAttribute="width" multiplier="0.5" id="0b4-jd-Npx"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="0m5-zW-TP1"/>
                             <constraint firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" constant="48" id="0uO-OG-9XN"/>
                             <constraint firstItem="fd3-xK-PyV" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="16" id="6GS-jI-He5">
@@ -757,7 +770,9 @@
                             <constraint firstItem="zYS-ll-8qM" firstAttribute="top" secondItem="eyJ-Xh-OdS" secondAttribute="bottom" constant="16" id="nhP-pu-sar">
                                 <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                             </constraint>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="trailing" secondItem="zYS-ll-8qM" secondAttribute="trailing" id="od4-34-QOr"/>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="pOA-Wx-8WJ"/>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="leading" secondItem="zYS-ll-8qM" secondAttribute="leading" id="q2T-vY-bFu"/>
                             <constraint firstItem="zYS-ll-8qM" firstAttribute="height" secondItem="VQc-D7-UHv" secondAttribute="height" multiplier="0.2" id="rvi-4W-fTr"/>
                             <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="3ju-B8-UIZ" secondAttribute="trailing" constant="24" id="t3E-iQ-vw0"/>
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="100" id="uE7-2j-2TS"/>
@@ -769,7 +784,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sqA-SS-pYR"/>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3ju-B8-UIZ"/>
+                                <exclude reference="GOu-4j-RcN"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="IX0-I2-taI"/>
+                                <exclude reference="Ni1-wJ-ITP"/>
+                                <exclude reference="aco-9j-jpc"/>
                                 <exclude reference="76E-lx-42G"/>
                                 <exclude reference="Fgb-Lb-Xmi"/>
                                 <exclude reference="POA-qW-Z3L"/>
@@ -782,13 +804,14 @@
                                 <exclude reference="uE7-2j-2TS"/>
                                 <exclude reference="08u-Mf-dCM"/>
                                 <exclude reference="rvi-4W-fTr"/>
-                                <exclude reference="IX0-I2-taI"/>
-                                <exclude reference="Ni1-wJ-ITP"/>
-                                <exclude reference="aco-9j-jpc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3ju-B8-UIZ"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="Ni1-wJ-ITP"/>
                                 <include reference="76E-lx-42G"/>
                                 <include reference="Fgb-Lb-Xmi"/>
                                 <include reference="POA-qW-Z3L"/>
@@ -796,18 +819,20 @@
                                 <include reference="0uO-OG-9XN"/>
                                 <include reference="7qa-wa-a9X"/>
                                 <include reference="8LC-Jz-LHE"/>
-                                <include reference="Ni1-wJ-ITP"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="GOu-4j-RcN"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="IX0-I2-taI"/>
+                                <include reference="aco-9j-jpc"/>
                                 <include reference="0b4-jd-Npx"/>
                                 <include reference="8XT-dZ-Wao"/>
                                 <include reference="uE7-2j-2TS"/>
                                 <include reference="08u-Mf-dCM"/>
                                 <include reference="rvi-4W-fTr"/>
-                                <include reference="IX0-I2-taI"/>
-                                <include reference="aco-9j-jpc"/>
                             </mask>
                         </variation>
                     </view>
@@ -817,6 +842,7 @@
                         <outlet property="settingsLabel" destination="tsx-Ce-cc8" id="oSv-VA-ASX"/>
                         <outlet property="switchLabel" destination="eyJ-Xh-OdS" id="SUU-NP-2XH"/>
                         <outlet property="tableView" destination="zYS-ll-8qM" id="UPO-hq-bO7"/>
+                        <outlet property="watchManualButtonIpad" destination="GOu-4j-RcN" id="GcB-qt-Kfa"/>
                         <outletCollection property="themableLabels" destination="F7O-MB-LHu" collectionClass="NSMutableArray" id="eIt-3Z-pZR"/>
                         <segue destination="CxR-gs-ONl" kind="show" identifier="ShowLicenseSegue" id="0vG-94-8fw"/>
                     </connections>

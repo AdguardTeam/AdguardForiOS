@@ -51,6 +51,7 @@ class OnboardingController: UIViewController {
     @IBOutlet weak var switchLabel: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     // MARK: - view controller live cycle
@@ -69,6 +70,13 @@ class OnboardingController: UIViewController {
         
         setupLabels()
         updateTheme()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        watchManualButtonIpad.layer.cornerRadius = watchManualButtonIpad.frame.height / 2
+        watchManualButtonIpad.layer.borderColor  = UIColor(hexString: "#67b279").cgColor
+        watchManualButtonIpad.layer.borderWidth = 1.0
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
