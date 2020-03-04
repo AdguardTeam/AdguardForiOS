@@ -838,7 +838,7 @@
         <!--Main Navigation Controller-->
         <scene sceneID="FIy-PU-cOp">
             <objects>
-                <navigationController storyboardIdentifier="OnboardingNavigationController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="rOd-yI-7kW" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingNavigationController" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="rOd-yI-7kW" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="1Hw-tO-cwF">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
