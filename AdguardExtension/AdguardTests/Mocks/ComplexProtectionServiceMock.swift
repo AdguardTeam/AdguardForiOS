@@ -19,12 +19,12 @@
 import Foundation
 
 class ComplexProtectionServiceMock: ComplexProtectionServiceProtocol {
+    func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?) -> Void) {
+        
+    }
+    
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?, Error?) -> Void) {
     }
-    
-    func switchSafariProtection(state enabled: Bool, completion: @escaping (Error?) -> Void) {
-    }
-    
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?) -> Void) {
     }
     
