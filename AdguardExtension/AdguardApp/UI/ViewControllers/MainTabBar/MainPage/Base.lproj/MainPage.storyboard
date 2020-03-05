@@ -741,20 +741,11 @@
                         <outletCollection property="themableLabels" destination="Zbr-WF-bsX" collectionClass="NSMutableArray" id="we7-0t-0Uk"/>
                         <outletCollection property="themableLabels" destination="Cfe-vu-29O" collectionClass="NSMutableArray" id="KbF-C7-ANX"/>
                         <segue destination="t6s-y4-WsD" kind="presentation" identifier="showOnboardingSegue" modalPresentationStyle="fullScreen" id="SIK-gU-Bfj"/>
-                        <segue destination="0hL-sO-ffg" kind="presentation" identifier="videoTutorialSegue" id="Sih-7E-4Rs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bb-EW-EVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940.57971014492762" y="-196.20535714285714"/>
-        </scene>
-        <!--Tutorial-->
-        <scene sceneID="gxO-fz-hUh">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Tutorial" id="0hL-sO-ffg" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PwB-5D-KFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1586" y="-406"/>
         </scene>
         <!--Onboarding-->
         <scene sceneID="bKG-ij-XYW">
@@ -762,7 +753,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="t6s-y4-WsD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRc-rS-l2D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1604" y="-328"/>
+            <point key="canvasLocation" x="1602" y="-211"/>
         </scene>
         <!--Chart Date Type Controller-->
         <scene sceneID="47Z-dA-g5p">

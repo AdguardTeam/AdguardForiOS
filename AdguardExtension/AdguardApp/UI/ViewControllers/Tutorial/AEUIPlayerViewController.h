@@ -19,9 +19,4 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface AEUIPlayerViewController : AVPlayerViewController <UIGestureRecognizerDelegate>
-
-@property NSString *videoName;
-
-@property (copy) void (^completionBlock)(void);
-
 @end

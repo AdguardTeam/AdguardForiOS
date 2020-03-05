@@ -23,7 +23,7 @@ import Foundation
  */
 
 @objc protocol ThemeServiceProtocol : NSObjectProtocol {
-    
+
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
