@@ -54,6 +54,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     lazy private var model: DnsFiltersModel = {
         let filtersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
@@ -94,7 +95,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Table view delegate methods
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if model.isSearchActive && indexPath.section == addFilterSection{
+        if (model.isSearchActive || !configuration.developerMode) && indexPath.section == addFilterSection {
             return 0.0
         }
         return UITableView.automaticDimension
@@ -112,7 +113,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
                 theme.setupTableCell(cell)
-                if model.isSearchActive {
+                if model.isSearchActive || !configuration.developerMode{
                     cell.isHidden = true
                 }
                 return cell
