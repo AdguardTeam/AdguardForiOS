@@ -57,7 +57,7 @@ class VpnManager: VpnManagerProtocol {
     private var configurationObserver: NotificationToken?
     private var dnsProviders: DnsProvidersServiceProtocol
     
-    weak var complexProtection: ComplexProtectionServiceProtocol!
+    weak var complexProtection: ComplexProtectionServiceProtocol?
     
     private var vpnInstalledValue: Bool?
             
@@ -315,7 +315,7 @@ class VpnManager: VpnManagerProtocol {
         
         manager.onDemandRules = ondemandRules
         
-        let enabled = self.complexProtection.systemProtectionEnabled
+        let enabled = self.complexProtection?.systemProtectionEnabled ?? false
         manager.isEnabled = enabled
         manager.isOnDemandEnabled = enabled
     }
