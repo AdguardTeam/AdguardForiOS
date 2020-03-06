@@ -25,7 +25,7 @@ protocol LogCellModelProtocol {
     var title: String? { get }
     
     var info: String? { get }
-    var infoFont: UIFont? { get }
+    var infoFontWeight: UIFont.Weight? { get }
     var infoColor: UIColor? { get }
     
     // These fields are for DataRequestDetailsCell
@@ -43,7 +43,7 @@ class LogCellModel: LogCellModelProtocol {
     var title: String?
     
     var info: String?
-    var infoFont: UIFont?
+    var infoFontWeight: UIFont.Weight?
     var infoColor: UIColor?
     
     var bytesSent: String?
@@ -51,12 +51,12 @@ class LogCellModel: LogCellModelProtocol {
     
     var theme: ThemeServiceProtocol?
     
-    init(isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFont: UIFont? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil) {
+    init(isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFontWeight: UIFont.Weight? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil) {
         self.isDataCell = isDataCell
         self.copiedString = copiedString
         self.title = title
         self.info = info
-        self.infoFont = infoFont
+        self.infoFontWeight = infoFontWeight
         self.infoColor = infoColor
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
@@ -88,6 +88,17 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         didSet{
             updateModel(model)
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        titleLabel.isHidden = false
+        copiedLabel.isHidden = true
+        titleLabel.alpha = 1.0
+        copiedLabel.alpha = 0.0
+        infoLabel.text = nil
+        showSeparator()
     }
     
     // MARK: - Public methods
@@ -145,13 +156,6 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     private func updateModel(_ model: LogCellModelProtocol?) {
         guard let model = model else { return }
                 
-        // Force hide copied label
-        titleLabel.isHidden = false
-        copiedLabel.isHidden = true
-        titleLabel.alpha = 1.0
-        copiedLabel.alpha = 0.0
-        
-        showSeparator()
         updateTheme(model.theme)
         titleLabel.text = model.title
         stringToCopy = model.copiedString
@@ -166,12 +170,10 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
             dataViews.forEach({ $0.isHidden = true })
             infoLabel.isHidden = false
         }
-        
-        infoLabel.text = nil
 
         infoLabel.text = model.info
-        let font = UIFont.systemFont(ofSize: 15.0, weight: .regular)
-        infoLabel.font = model.infoFont == nil ? font : model.infoFont
+        let font = UIFont.systemFont(ofSize: infoLabel.font.pointSize, weight: model.infoFontWeight ?? .regular)
+        infoLabel.font = font
         infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
     }
     

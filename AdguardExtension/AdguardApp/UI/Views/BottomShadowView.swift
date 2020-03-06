@@ -152,8 +152,9 @@ class BottomShadowView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
 
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        button.titleLabel?.font = UIFont.systemFont(ofSize: isIphone ? 16.0 : 20.0, weight: .medium)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: isIphone ? 16.0 : 24.0, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         
         button.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true

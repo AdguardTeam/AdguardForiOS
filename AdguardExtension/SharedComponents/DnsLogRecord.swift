@@ -157,13 +157,13 @@ extension DnsLogRecord {
         }
     }
     
-    func getDetailsString() -> NSMutableAttributedString {
+    func getDetailsString(_ fontSize: CGFloat) -> NSMutableAttributedString {
         let recordType = getTypeString()
         var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
         newDomain = " " + newDomain
         
-        let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .semibold) ]
-        let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14.0, weight: .regular) ]
+        let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+        let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
         
         let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
         let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)

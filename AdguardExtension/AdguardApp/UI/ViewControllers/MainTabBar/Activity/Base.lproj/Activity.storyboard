@@ -104,6 +104,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nK-Ie-kDq" userLabel="Details" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="24" y="8.5" width="0.0" height="0.0"/>
@@ -113,6 +116,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zoz-ma-KPf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="37" y="8.5" width="353" height="0.0"/>
@@ -122,18 +128,35 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Zoz-ma-KPf" secondAttribute="trailing" constant="24" id="2Fi-aF-dIR"/>
-                                        <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="WKD-zg-EfF" secondAttribute="trailing" constant="13" id="3GL-57-Xfj"/>
-                                        <constraint firstItem="WKD-zg-EfF" firstAttribute="top" secondItem="PHp-o6-fVR" secondAttribute="top" constant="8" id="3Of-8f-36M"/>
-                                        <constraint firstAttribute="bottom" secondItem="2nK-Ie-kDq" secondAttribute="bottom" constant="8" id="Lpg-za-Uj2"/>
+                                        <constraint firstAttribute="trailing" secondItem="Zoz-ma-KPf" secondAttribute="trailing" constant="24" id="2Fi-aF-dIR">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                        </constraint>
+                                        <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="WKD-zg-EfF" secondAttribute="trailing" constant="24" id="3GL-57-Xfj">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                        </constraint>
+                                        <constraint firstItem="WKD-zg-EfF" firstAttribute="top" secondItem="PHp-o6-fVR" secondAttribute="top" constant="8" id="3Of-8f-36M">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                        </constraint>
+                                        <constraint firstAttribute="bottom" secondItem="2nK-Ie-kDq" secondAttribute="bottom" constant="8" id="Lpg-za-Uj2">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                        </constraint>
                                         <constraint firstItem="2nK-Ie-kDq" firstAttribute="top" secondItem="WKD-zg-EfF" secondAttribute="bottom" id="MeT-X0-vO9"/>
-                                        <constraint firstItem="WKD-zg-EfF" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Xip-hH-SwK"/>
-                                        <constraint firstItem="2nK-Ie-kDq" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Y5B-nb-2oh"/>
-                                        <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="2nK-Ie-kDq" secondAttribute="trailing" constant="13" id="hbi-d3-NCH"/>
+                                        <constraint firstItem="WKD-zg-EfF" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Xip-hH-SwK">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                        </constraint>
+                                        <constraint firstItem="2nK-Ie-kDq" firstAttribute="leading" secondItem="PHp-o6-fVR" secondAttribute="leading" constant="24" id="Y5B-nb-2oh">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                        </constraint>
+                                        <constraint firstItem="Zoz-ma-KPf" firstAttribute="leading" secondItem="2nK-Ie-kDq" secondAttribute="trailing" constant="24" id="hbi-d3-NCH">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                        </constraint>
                                         <constraint firstItem="Zoz-ma-KPf" firstAttribute="centerY" secondItem="PHp-o6-fVR" secondAttribute="centerY" id="lgF-I0-Jpg"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -250,19 +273,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUa-JO-MEg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="16" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <rect key="frame" x="24" y="20" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLu-qb-YH2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="390" y="16" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <rect key="frame" x="688" y="20" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J13-xW-KiK">
                                             <rect key="frame" x="14" y="4" width="61" height="24"/>
@@ -280,40 +309,57 @@
                                                     <integer key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            </variation>
                                         </button>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPM-Xq-MPe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="360" y="16" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <rect key="frame" x="643" y="20" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle down" translatesAutoresizingMaskIntoConstraints="NO" id="PF8-IT-uim">
                                             <rect key="frame" x="340" y="8.5" width="15" height="15"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="15" id="39y-S0-xh6"/>
-                                                <constraint firstAttribute="height" constant="15" id="Gce-8N-gTL"/>
+                                                <constraint firstAttribute="width" constant="16" id="39y-S0-xh6">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="height" constant="16" id="Gce-8N-gTL">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                             </constraints>
                                         </imageView>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle up" translatesAutoresizingMaskIntoConstraints="NO" id="ylO-pw-vbs">
                                             <rect key="frame" x="370" y="8.5" width="15" height="15"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="15" id="Rig-2N-aFP"/>
-                                                <constraint firstAttribute="height" constant="15" id="tIz-AB-mmI"/>
+                                                <constraint firstAttribute="width" constant="16" id="Rig-2N-aFP">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="height" constant="16" id="tIz-AB-mmI">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                             </constraints>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SH-LB-6pP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="390" y="16" width="0.0" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <rect key="frame" x="688" y="20" width="0.0" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oz5-tU-KTe">
                                             <rect key="frame" x="0.0" y="32" width="414" height="1"/>
@@ -325,25 +371,45 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="6SH-LB-6pP" firstAttribute="leading" secondItem="ylO-pw-vbs" secondAttribute="trailing" constant="5" id="03z-fg-ahM"/>
-                                        <constraint firstItem="Oz5-tU-KTe" firstAttribute="top" secondItem="6SH-LB-6pP" secondAttribute="bottom" constant="16" id="21P-Ri-4yB"/>
+                                        <constraint firstItem="Oz5-tU-KTe" firstAttribute="top" secondItem="6SH-LB-6pP" secondAttribute="bottom" constant="16" id="21P-Ri-4yB">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
                                         <constraint firstItem="Oz5-tU-KTe" firstAttribute="leading" secondItem="mmk-iv-asa" secondAttribute="leading" id="5FC-E2-R6y"/>
                                         <constraint firstAttribute="trailing" secondItem="Oz5-tU-KTe" secondAttribute="trailing" id="8aB-1R-2di"/>
-                                        <constraint firstItem="Oz5-tU-KTe" firstAttribute="top" secondItem="hLu-qb-YH2" secondAttribute="bottom" constant="16" id="8d8-nT-Hns"/>
-                                        <constraint firstItem="QUa-JO-MEg" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Kdq-Gt-B57"/>
+                                        <constraint firstItem="Oz5-tU-KTe" firstAttribute="top" secondItem="hLu-qb-YH2" secondAttribute="bottom" constant="16" id="8d8-nT-Hns">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
+                                        <constraint firstItem="QUa-JO-MEg" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Kdq-Gt-B57">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
                                         <constraint firstItem="PF8-IT-uim" firstAttribute="centerY" secondItem="GPM-Xq-MPe" secondAttribute="centerY" id="Lfq-Tk-i2d"/>
-                                        <constraint firstItem="hLu-qb-YH2" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Qv8-ar-uG8"/>
+                                        <constraint firstItem="hLu-qb-YH2" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="Qv8-ar-uG8">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
                                         <constraint firstItem="QUa-JO-MEg" firstAttribute="leading" secondItem="mmk-iv-asa" secondAttribute="leading" constant="24" id="T1B-qp-9kL"/>
-                                        <constraint firstAttribute="trailing" secondItem="6SH-LB-6pP" secondAttribute="trailing" constant="24" id="TdB-8k-UyY"/>
+                                        <constraint firstAttribute="trailing" secondItem="6SH-LB-6pP" secondAttribute="trailing" constant="16" id="TdB-8k-UyY">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
                                         <constraint firstItem="ylO-pw-vbs" firstAttribute="centerY" secondItem="6SH-LB-6pP" secondAttribute="centerY" id="WrT-9b-PRv"/>
                                         <constraint firstItem="J13-xW-KiK" firstAttribute="centerY" secondItem="QUa-JO-MEg" secondAttribute="centerY" id="a6U-UP-EUo"/>
                                         <constraint firstAttribute="bottom" secondItem="Oz5-tU-KTe" secondAttribute="bottom" id="aQR-rc-yWG"/>
-                                        <constraint firstAttribute="trailing" secondItem="hLu-qb-YH2" secondAttribute="trailing" constant="24" id="am5-Fh-86l"/>
-                                        <constraint firstItem="ylO-pw-vbs" firstAttribute="leading" secondItem="GPM-Xq-MPe" secondAttribute="trailing" constant="10" id="bpx-vW-A0P"/>
+                                        <constraint firstAttribute="trailing" secondItem="hLu-qb-YH2" secondAttribute="trailing" constant="16" id="am5-Fh-86l">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
+                                        <constraint firstItem="ylO-pw-vbs" firstAttribute="leading" secondItem="GPM-Xq-MPe" secondAttribute="trailing" constant="10" id="bpx-vW-A0P">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                        </constraint>
                                         <constraint firstItem="GPM-Xq-MPe" firstAttribute="centerY" secondItem="ylO-pw-vbs" secondAttribute="centerY" id="hUA-4n-eZy"/>
-                                        <constraint firstItem="J13-xW-KiK" firstAttribute="leading" secondItem="mmk-iv-asa" secondAttribute="leading" constant="14" id="mEM-gD-Qfw"/>
+                                        <constraint firstItem="J13-xW-KiK" firstAttribute="leading" secondItem="mmk-iv-asa" secondAttribute="leading" constant="16" id="mEM-gD-Qfw">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
                                         <constraint firstItem="GPM-Xq-MPe" firstAttribute="leading" secondItem="PF8-IT-uim" secondAttribute="trailing" constant="5" id="nHi-qJ-mGr"/>
-                                        <constraint firstItem="6SH-LB-6pP" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="pUw-8Q-pvN"/>
-                                        <constraint firstItem="hLu-qb-YH2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QUa-JO-MEg" secondAttribute="trailing" constant="24" id="w4s-bu-n8x"/>
+                                        <constraint firstItem="6SH-LB-6pP" firstAttribute="top" secondItem="mmk-iv-asa" secondAttribute="top" constant="16" id="pUw-8Q-pvN">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
+                                        <constraint firstItem="hLu-qb-YH2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QUa-JO-MEg" secondAttribute="trailing" constant="16" id="w4s-bu-n8x">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -391,19 +457,19 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ae4-WL-0pQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="350" height="68"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="0.0" y="40" width="384" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xN-ij-jJj" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
@@ -420,7 +486,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         </variation>
                                         <connections>
                                             <segue destination="hiO-0L-XhV" kind="show" id="1uN-5y-5rj"/>
@@ -431,13 +497,17 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ae4-WL-0pQ" secondAttribute="trailing" id="4wf-9w-cvI"/>
                                     <constraint firstItem="6xN-ij-jJj" firstAttribute="centerX" secondItem="eze-yt-rB9" secondAttribute="centerX" id="8Ch-nu-2rW"/>
-                                    <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="16" id="Ayz-Cp-tlq"/>
+                                    <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="16" id="Ayz-Cp-tlq">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                    </constraint>
                                     <constraint firstItem="6xN-ij-jJj" firstAttribute="height" secondItem="eze-yt-rB9" secondAttribute="height" multiplier="0.2" id="ODL-fa-zRa"/>
                                     <constraint firstItem="ae4-WL-0pQ" firstAttribute="leading" secondItem="eze-yt-rB9" secondAttribute="leading" id="Pac-Xe-yTK"/>
                                     <constraint firstItem="ApV-fQ-kgK" firstAttribute="top" secondItem="eze-yt-rB9" secondAttribute="top" id="UKG-z9-2bQ"/>
                                     <constraint firstItem="6xN-ij-jJj" firstAttribute="width" secondItem="eze-yt-rB9" secondAttribute="width" multiplier="0.8" id="apU-cP-6w2"/>
                                     <constraint firstAttribute="trailing" secondItem="ApV-fQ-kgK" secondAttribute="trailing" id="cpr-cV-2GL"/>
-                                    <constraint firstItem="6xN-ij-jJj" firstAttribute="top" secondItem="ae4-WL-0pQ" secondAttribute="bottom" constant="32" id="fEU-rx-rPW"/>
+                                    <constraint firstItem="6xN-ij-jJj" firstAttribute="top" secondItem="ae4-WL-0pQ" secondAttribute="bottom" constant="32" id="fEU-rx-rPW">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                                    </constraint>
                                     <constraint firstAttribute="bottom" secondItem="6xN-ij-jJj" secondAttribute="bottom" constant="20" symbolic="YES" id="iyI-nK-D7K"/>
                                     <constraint firstItem="ApV-fQ-kgK" firstAttribute="leading" secondItem="eze-yt-rB9" secondAttribute="leading" id="sg6-hM-V3o"/>
                                 </constraints>
@@ -448,7 +518,7 @@
                             <constraint firstItem="eze-yt-rB9" firstAttribute="centerX" secondItem="WKC-8f-gkR" secondAttribute="centerX" id="40G-nl-lqW"/>
                             <constraint firstItem="eze-yt-rB9" firstAttribute="centerY" secondItem="4yd-JI-m92" secondAttribute="centerY" id="4Q8-0e-ZB5"/>
                             <constraint firstItem="WKC-8f-gkR" firstAttribute="trailing" secondItem="eze-yt-rB9" secondAttribute="trailing" constant="32" id="5BJ-7l-wdX"/>
-                            <constraint firstItem="eze-yt-rB9" firstAttribute="width" secondItem="4yd-JI-m92" secondAttribute="width" multiplier="0.4" id="7Hp-lt-4gU"/>
+                            <constraint firstItem="eze-yt-rB9" firstAttribute="width" secondItem="4yd-JI-m92" secondAttribute="width" multiplier="0.5" id="7Hp-lt-4gU"/>
                             <constraint firstItem="eze-yt-rB9" firstAttribute="leading" secondItem="WKC-8f-gkR" secondAttribute="leading" constant="32" id="m7K-xb-Y2v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WKC-8f-gkR"/>
@@ -928,15 +998,16 @@
                                 <rect key="frame" x="32" y="372.66666666666669" width="350" height="106.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="16" width="350" height="14.666666666666664"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="12"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wds-ct-qid" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
@@ -953,7 +1024,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         </variation>
                                         <connections>
                                             <segue destination="mY4-FA-RWN" kind="show" id="jfS-qU-0cJ"/>
@@ -966,9 +1037,11 @@
                                     <constraint firstItem="wds-ct-qid" firstAttribute="centerX" secondItem="C8B-h9-VeD" secondAttribute="centerX" id="6Eb-Tz-JM0"/>
                                     <constraint firstAttribute="bottom" secondItem="wds-ct-qid" secondAttribute="bottom" constant="20" symbolic="YES" id="CAs-a3-7rg"/>
                                     <constraint firstAttribute="trailing" secondItem="X1F-2p-Xpe" secondAttribute="trailing" id="EAG-0c-2SP"/>
-                                    <constraint firstItem="X1F-2p-Xpe" firstAttribute="top" secondItem="C8B-h9-VeD" secondAttribute="top" constant="16" id="PBj-IL-sMA"/>
+                                    <constraint firstItem="X1F-2p-Xpe" firstAttribute="top" secondItem="C8B-h9-VeD" secondAttribute="top" id="PBj-IL-sMA"/>
                                     <constraint firstItem="wds-ct-qid" firstAttribute="height" secondItem="C8B-h9-VeD" secondAttribute="height" multiplier="0.3" id="baE-Rm-eT8"/>
-                                    <constraint firstItem="wds-ct-qid" firstAttribute="top" secondItem="X1F-2p-Xpe" secondAttribute="bottom" constant="24" id="fKF-kE-5H5"/>
+                                    <constraint firstItem="wds-ct-qid" firstAttribute="top" secondItem="X1F-2p-Xpe" secondAttribute="bottom" constant="32" id="fKF-kE-5H5">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                                    </constraint>
                                     <constraint firstItem="X1F-2p-Xpe" firstAttribute="leading" secondItem="C8B-h9-VeD" secondAttribute="leading" id="pX4-y1-bKk"/>
                                 </constraints>
                             </view>
@@ -977,7 +1050,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="C8B-h9-VeD" secondAttribute="trailing" constant="32" id="BWL-IG-Vi9"/>
                             <constraint firstItem="C8B-h9-VeD" firstAttribute="centerY" secondItem="PPf-Px-lBj" secondAttribute="centerY" id="BbT-mb-Dsh"/>
-                            <constraint firstItem="C8B-h9-VeD" firstAttribute="width" secondItem="PPf-Px-lBj" secondAttribute="width" multiplier="0.4" id="jkw-Ng-e7E"/>
+                            <constraint firstItem="C8B-h9-VeD" firstAttribute="width" secondItem="PPf-Px-lBj" secondAttribute="width" multiplier="0.5" id="jkw-Ng-e7E"/>
                             <constraint firstItem="C8B-h9-VeD" firstAttribute="centerX" secondItem="PPf-Px-lBj" secondAttribute="centerX" id="lBe-eV-hdH"/>
                             <constraint firstItem="C8B-h9-VeD" firstAttribute="leading" secondItem="PPf-Px-lBj" secondAttribute="leading" constant="32" id="n6N-0K-q5J"/>
                         </constraints>

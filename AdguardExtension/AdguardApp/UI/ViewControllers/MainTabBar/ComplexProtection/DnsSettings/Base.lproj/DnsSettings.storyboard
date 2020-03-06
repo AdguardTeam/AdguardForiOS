@@ -520,7 +520,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="aNz-eH-Heh" secondAttribute="bottom" id="2HS-H7-kCL"/>
-                                                <constraint firstItem="aNz-eH-Heh" firstAttribute="width" secondItem="MQF-ay-7AF" secondAttribute="width" multiplier="0.4" id="8nd-8q-AuH"/>
+                                                <constraint firstItem="aNz-eH-Heh" firstAttribute="width" secondItem="MQF-ay-7AF" secondAttribute="width" multiplier="0.5" id="8nd-8q-AuH"/>
                                                 <constraint firstItem="aNz-eH-Heh" firstAttribute="leading" secondItem="MQF-ay-7AF" secondAttribute="leading" constant="39" id="Der-4A-yOb">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="32"/>
                                                 </constraint>

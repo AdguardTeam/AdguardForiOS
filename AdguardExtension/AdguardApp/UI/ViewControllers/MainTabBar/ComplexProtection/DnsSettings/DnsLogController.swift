@@ -90,7 +90,7 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
                 
         let timeString = record.logRecord.time()
         let name = record.category.name
-        let domain = record.logRecord.getDetailsString()
+        let domain = record.logRecord.getDetailsString(cell.details.font.pointSize)
     
         cell.domain.text = name == nil ? record.logRecord.firstLevelDomain() : name
         cell.details.attributedText = domain
