@@ -1200,6 +1200,7 @@
 		D08187C02260A69200E961B5 /* DnsLogRecordsWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187BE2260A5E300E961B5 /* DnsLogRecordsWriter.swift */; };
 		D08187C32260ACE300E961B5 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
 		D08187CA2264C89400E961B5 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
+		D081FC16241250D9000A10DA /* ComplexProtectionServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC15241250D9000A10DA /* ComplexProtectionServiceTest.swift */; };
 		D082D50A2310047E00799D98 /* AASFilterSubscriptionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D082D5092310047E00799D98 /* AASFilterSubscriptionParserTest.swift */; };
 		D08C96CF1FE3C459002456B3 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D08CE426240D37B200A70089 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
@@ -2373,6 +2374,7 @@
 		D08187BE2260A5E300E961B5 /* DnsLogRecordsWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriter.swift; sourceTree = "<group>"; };
 		D08187C12260ABD600E961B5 /* DnsLogRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecord.swift; sourceTree = "<group>"; };
 		D08187C92264C89400E961B5 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		D081FC15241250D9000A10DA /* ComplexProtectionServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionServiceTest.swift; sourceTree = "<group>"; };
 		D082D4F0230FE85000799D98 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = bg; path = bg.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D082D4F1230FE85100799D98 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		D082D4F2230FE85300799D98 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -3479,6 +3481,7 @@
 				D0116CF12063E004009598B1 /* ACNCidrRangeTest.m */,
 				D0F9117B2134414A006DF0D3 /* AdguardTests-Bridging-Header.h */,
 				D093718721AEA770004A24F1 /* ContentBlockerTest.swift */,
+				D081FC15241250D9000A10DA /* ComplexProtectionServiceTest.swift */,
 				D0EC86B223A772BF00EDF107 /* DnsFiltersServiceTest.swift */,
 				D0D5949623AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift */,
 				D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */,
@@ -6104,6 +6107,7 @@
 				7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */,
 				65EC9AF51BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
+				D081FC16241250D9000A10DA /* ComplexProtectionServiceTest.swift in Sources */,
 				D0288F31230697C800A4EBEF /* ACLFileLocker.m in Sources */,
 				653B4CEB1DA5051200B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				7E50FC1A238C0AB400F11722 /* DnsFiltersService.swift in Sources */,

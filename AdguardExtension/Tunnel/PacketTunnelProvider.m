@@ -172,7 +172,10 @@
 
 - (void)startTunnelWithOptions:(NSDictionary *)options completionHandler:(void (^)(NSError *))completionHandler
 {
-    
+ 
+    NETunnelProviderProtocol *protocol = (NETunnelProviderProtocol *)self.protocolConfiguration;
+
+    [VpnManagerMigration migrateSettingsIfNeededWithResources:_resources dnsProviders:_providersService providerConfiguration:protocol.providerConfiguration];
     DDLogInfo(@"(PacketTunnelProvider) Start Tunnel Event");
     
     [_reachabilityHandler startNotifier];

@@ -149,7 +149,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var dnsProviders: DnsProvidersService = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
@@ -193,13 +192,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         configuration.checkContentBlockerEnabled()
         
         chartModel?.obtainStatistics()
-        
-        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
-            DispatchQueue.main.async {
-                self?.updateProtectionStates()
-                self?.updateProtectionStatusText()
-            }
-        }
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -298,9 +290,14 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
     
         applyingChangesStarted()
-        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn, for: self) { [weak self] _ in
+        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn, for: self) { [weak self] error in
             DispatchQueue.main.async {
-                self?.applyingChangesEnded()
+                guard let self = self else { return }
+                self.applyingChangesEnded()
+                
+                if error != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+                }
             }
         }
         updateProtectionStates()
@@ -310,9 +307,14 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         if configuration.proStatus {
             applyingChangesStarted()
-            complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self) { [weak self] _ in
+            complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self) { [weak self] error in
                 DispatchQueue.main.async {
-                    self?.applyingChangesEnded()
+                    guard let self = self else { return }
+                    
+                    self.applyingChangesEnded()
+                    if error != nil {
+                        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+                    }
                 }
             }
         }
@@ -327,9 +329,18 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
         applyingChangesStarted()
-        complexProtection.switchComplexProtection(state: enabled, for: self) { [weak self] (_, _) in
+        complexProtection.switchComplexProtection(state: enabled, for: self) { [weak self] (safariError, systemError) in
             DispatchQueue.main.async {
-                self?.applyingChangesEnded()
+                guard let self = self else { return }
+                self.applyingChangesEnded()
+                
+                if safariError != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: safariError?.localizedDescription)
+                }
+                
+                if systemError != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: systemError?.localizedDescription)
+                }
             }
         }
         updateProtectionStates()
@@ -554,6 +565,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeContentBlockersState()
+        }
+        
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            DispatchQueue.main.async {
+                self?.updateProtectionStates()
+                self?.updateProtectionStatusText()
+            }
         }
 
         observations.append(proObservation)

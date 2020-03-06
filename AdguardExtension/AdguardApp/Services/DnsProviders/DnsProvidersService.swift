@@ -23,6 +23,7 @@ import Foundation
 /**
  DnsProvidersService is responsible for managing dns providers
  */
+@objc
 protocol DnsProvidersServiceProtocol {
     
     var allProviders: [DnsProviderInfo] { get }
@@ -45,7 +46,7 @@ protocol DnsProvidersServiceProtocol {
     
     private var predefinedProvidersInternal: [DnsProviderInfo]?
     private var customProvidersInternal: [DnsProviderInfo]?
-    private var workingQueue = DispatchQueue(label: "dns providers queue")
+    private let workingQueue = DispatchQueue(label: "dns providers queue")
     
     @objc private let resources: AESharedResourcesProtocol
     
@@ -269,7 +270,7 @@ protocol DnsProvidersServiceProtocol {
         }
     }
     
-    func protocolsFromArray(_ arr: [String]) -> [DnsProtocol] {
+    private func protocolsFromArray(_ arr: [String]) -> [DnsProtocol] {
         var protocols = [DnsProtocol] ()
         
         for protocolName in arr {
@@ -289,7 +290,7 @@ protocol DnsProvidersServiceProtocol {
         return features
     }
     
-    func serversFromArray(_ arr:[[String: Any]]) -> [DnsServerInfo] {
+    private func serversFromArray(_ arr:[[String: Any]]) -> [DnsServerInfo] {
         
         var servers = [DnsServerInfo]()
         

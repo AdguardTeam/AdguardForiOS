@@ -19,7 +19,11 @@
 import Foundation
 
 class VpnManagerMock: NSObject, VpnManagerProtocol {
+    
+    var updateCalled = false
+    
     func updateSettings(completion: ((Error?) -> Void)?) {
+        updateCalled = true
         completion?(nil)
     }
     

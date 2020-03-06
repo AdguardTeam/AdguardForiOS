@@ -67,6 +67,8 @@ class SafariServiceMock: NSObject, SafariServiceProtocol {
     
     var errors: [ContentBlockerType: Bool] = [ContentBlockerType: Bool]()
     
+    var invalidateCalled = false
+    
     func invalidateBlockingJson(type: ContentBlockerType, completion: @escaping (Error?) -> Void) {
         DispatchQueue(label: "safari mock invalidate").asyncAfter(deadline: .now() + 0.5) {
             completion((self.errors[type] ?? false) ? NSError(domain: "", code: 0, userInfo: nil):nil)
@@ -83,6 +85,7 @@ class SafariServiceMock: NSObject, SafariServiceProtocol {
     var jsons = [ContentBlockerType: Data]()
     
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
+        invalidateCalled = true
         completion(nil)
     }
     

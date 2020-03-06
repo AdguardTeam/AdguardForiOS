@@ -39,11 +39,12 @@ protocol ComplexProtectionServiceProtocol: class {
     var complexProtectionEnabled: Bool { get }
 }
 
+enum ComplexProtectionError: Error {
+    case cancelledAddingVpnConfiguration
+}
+
 // MARK: - Complex protection class -
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
-    
-    static let errorDomain = "ComplexProtectionServiceErrorDomain"
-    static let cancelledAddingVpnConfiguration = -1
     
     var safariProtectionEnabled: Bool {
         return resources.safariProtectionEnabled && resources.complexProtectionEnabled
@@ -61,7 +62,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     private let resources: AESharedResourcesProtocol
-    private let safariService: SafariService
+    private let safariService: SafariServiceProtocol
     private let configuration: ConfigurationServiceProtocol
     private let vpnManager: VpnManagerProtocol
     
@@ -71,7 +72,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariService, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.configuration = configuration
@@ -96,72 +97,64 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             resources.systemProtectionEnabled = configuration.proStatus
         }
         
-        DispatchQueue(label: "complex protection queue").async { [weak self] in
+        updateProtections(safari: true, system: true, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
             
-            let group = DispatchGroup()
-            
-            var safariError, systemError: Error?
-        
-            group.enter()
-            self.updateVpnSettings(vc: VC) {error in
-                systemError = error
-                group.leave()
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariEnabled
             }
             
-            group.enter()
-            self.safariInvalidateJson { error in
-                safariError = error
-                group.leave()
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemEnabled
             }
-            
-            group.wait()
             
             completion(safariError, systemError)
         }
     }
     
     func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void){
-        resources.safariProtectionEnabled = enabled
         
         var needsUpdateSystemProtection = false
+        let needsUpdateSafari = resources.safariProtectionEnabled != enabled
+        
+        let systemOld = resources.systemProtectionEnabled
+        let safariOld = resources.safariProtectionEnabled
+        
+        resources.safariProtectionEnabled = enabled
         
         if enabled && !resources.complexProtectionEnabled {
-             resources.complexProtectionEnabled = true
-             needsUpdateSystemProtection = resources.systemProtectionEnabled
-         }
-         
-         if !enabled && !systemProtectionEnabled {
-             resources.complexProtectionEnabled = false
-         }
+            resources.complexProtectionEnabled = true
+            needsUpdateSystemProtection = resources.systemProtectionEnabled
+        }
+
+        if !enabled && !systemProtectionEnabled {
+            resources.complexProtectionEnabled = false
+        }
         
-        DispatchQueue(label: "complex protection queue").async { [weak self] in
+        updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
-            let group = DispatchGroup()
             
-            if needsUpdateSystemProtection {
-                group.enter()
-                self.updateVpnSettings(vc: VC) {_ in
-                    group.leave()
-                }
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariOld
             }
             
-            group.enter()
-            self.safariInvalidateJson {_ in
-                group.leave()
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemOld
             }
             
-            group.wait()
-            
-            completion(nil)
+            completion(safariError)
         }
     }
     
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
         
         var needsUpdateSafari = false
+        let needsUpdateSystem = resources.systemProtectionEnabled != enabled
         
-        self.resources.systemProtectionEnabled = enabled
+        let systemOld = resources.systemProtectionEnabled
+        let safariOld = resources.safariProtectionEnabled
+        
+        resources.systemProtectionEnabled = enabled
          
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
@@ -172,29 +165,53 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             self.resources.complexProtectionEnabled = false
         }
         
-        DispatchQueue(label: "complex protection queue").async { [weak self] in
+        updateProtections(safari: needsUpdateSafari, system: needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
             
-            let group = DispatchGroup()
-            if needsUpdateSafari {
-                group.enter()
-                self.safariInvalidateJson { _ in
-                    group.leave()
-                }
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariOld
             }
             
-            group.enter()
-            self.updateVpnSettings(vc: VC) { _ in
-                group.leave()
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemOld
             }
             
-            group.wait()
-            
-            completion(nil)
+            completion(systemError)
         }
     }
     
     // MARK: - Private methods
+    
+    func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
+        
+        DispatchQueue(label: "complex protection queue").async { [weak self] in
+            guard let self = self else { return }
+            
+            var safariError: Error?
+            var systemError: Error?
+            
+            let group = DispatchGroup()
+            if safari {
+                group.enter()
+                self.safariInvalidateJson { error in
+                    safariError = error
+                    group.leave()
+                }
+            }
+            
+            if system {
+                group.enter()
+                self.updateVpnSettings(vc: vc) { error in
+                    systemError = error
+                    group.leave()
+                }
+            }
+            
+            group.wait()
+            
+            completion(safariError, systemError)
+        }
+    }
     
     /**
      This method invalidates blocking json
@@ -211,7 +228,10 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {
-        if !configuration.proStatus { return }
+        if !configuration.proStatus {
+            completion(nil)
+            return
+        }
         
         let updateClosure = { [weak self] in
             self?.vpnManager.updateSettings { (error) in
@@ -227,7 +247,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 
                 if !confirmed {
                     self.resources.systemProtectionEnabled = false
-                    completion(NSError(domain: ComplexProtectionService.errorDomain, code: ComplexProtectionService.cancelledAddingVpnConfiguration, userInfo: nil))
+                    completion(ComplexProtectionError.cancelledAddingVpnConfiguration)
                     return
                 }
                 

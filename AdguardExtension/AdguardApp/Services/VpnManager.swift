@@ -37,6 +37,10 @@ protocol VpnManagerProtocol {
     var vpnInstalled: Bool { get }
 }
 
+enum VpnManagerError: Error {
+    case managerNotInstalled
+}
+
 class VpnManager: VpnManagerProtocol {
     
     static let configurationRemovedNotification = NSNotification.Name("configurationRemovedNotification")
@@ -48,9 +52,6 @@ class VpnManager: VpnManagerProtocol {
     let networkSettings: NetworkSettingsServiceProtocol
     
     let workingQueue = DispatchQueue(label: "vpn manager queue")
-    
-    let errorDomain = "VpnManagerErrorDomain"
-    let managerNotInstalledError = -1
     
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
@@ -98,12 +99,12 @@ class VpnManager: VpnManagerProtocol {
         // get manager from system preferences
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            let manager = self.loadManager().0
+            let (manager, error) = self.loadManager()
             if let providerConfiguration = (manager?.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration {
-                VpnManager.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
+                VpnManagerMigration.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
             }
             
-            completion(nil)
+            completion(error)
         }
     }
     
@@ -112,6 +113,8 @@ class VpnManager: VpnManagerProtocol {
     func updateSettings(completion: ((Error?) -> Void)?) {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
+            
+            DDLogInfo("(VpnManager) updateSettings")
             
             let (manager, error) = self.loadManager()
             
@@ -122,7 +125,7 @@ class VpnManager: VpnManagerProtocol {
             
             if manager == nil {
                 DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
-                let error = NSError(domain: self.errorDomain, code: self.managerNotInstalledError, userInfo: nil)
+                let error = VpnManagerError.managerNotInstalled
                 completion?(error)
                 
                 return
@@ -181,34 +184,6 @@ class VpnManager: VpnManagerProtocol {
     
     var vpnInstalled: Bool {
         return vpnInstalledValue ?? true
-    }
-    
-    class func migrateSettingsIfNeeded(resources: AESharedResourcesProtocol, dnsProviders: DnsProvidersServiceProtocol, providerConfiguration: [String : Any]) {
-        // in app version below 4.0.0 we stored tunnel settings(activeDnsServer, tunnelMode, restartByReachability) in protocol configuration.
-        // now we store it in shared defaults
-        
-        var dnsProviders = dnsProviders
-        
-        let tunnelModeNew = resources.sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt
-        let activeDnsServerNew = dnsProviders.activeDnsServer
-        let restartByReachabilityNew = resources.sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool
-        
-        if tunnelModeNew == nil && activeDnsServerNew == nil && restartByReachabilityNew == nil {
-            
-            if let tunnelModeOld = providerConfiguration[APVpnManagerParameterTunnelMode] as? UInt {
-                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld)
-            }
-            
-            if let restartOld = providerConfiguration[APVpnManagerRestartByReachability] as? Bool {
-                resources.restartByReachability = restartOld
-            }
-            
-            if let activeDnsServerData = providerConfiguration[APVpnManagerParameterRemoteDnsServer] as? Data {
-                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData) as? DnsServerInfo {
-                    dnsProviders.activeDnsServer = activeDnsServerOld
-                }
-            }
-        }
     }
     
     // MARK: - private methods
@@ -361,3 +336,38 @@ class VpnManager: VpnManagerProtocol {
         manager.connection.stopVPNTunnel()
     }
 }
+
+@objc
+class VpnManagerMigration: NSObject {
+    @objc
+    class func migrateSettingsIfNeeded(resources: AESharedResourcesProtocol, dnsProviders: DnsProvidersServiceProtocol, providerConfiguration: [String : Any]) {
+        // in app version below 4.0.0 we stored tunnel settings(activeDnsServer, tunnelMode, restartByReachability) in protocol configuration.
+        // now we store it in shared defaults
+        
+        let tunnelModeNew = resources.sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt
+        let activeDnsServerNew = dnsProviders.activeDnsServer
+        let restartByReachabilityNew = resources.sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool
+        
+        if tunnelModeNew == nil && activeDnsServerNew == nil && restartByReachabilityNew == nil {
+            
+            DDLogInfo("(VpnManagerMigration) there are not new settings in shared resources. Try to read it from protocol configuration")
+            if let tunnelModeOld = providerConfiguration[APVpnManagerParameterTunnelMode] as? UInt {
+                DDLogInfo("(VpnManagerMigration) save tunnelModeOld in resources")
+                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld)
+            }
+            
+            if let restartOld = providerConfiguration[APVpnManagerRestartByReachability] as? Bool {
+                DDLogInfo("(VpnManagerMigration) save restartOld in resources")
+                resources.restartByReachability = restartOld
+            }
+            
+            if let activeDnsServerData = providerConfiguration[APVpnManagerParameterRemoteDnsServer] as? Data {
+                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData) as? DnsServerInfo {
+                    DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
+                    dnsProviders.activeDnsServer = activeDnsServerOld
+                }
+            }
+        }
+    }
+}
+

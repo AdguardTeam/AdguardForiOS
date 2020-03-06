@@ -264,6 +264,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             rules.append("") // temporary fix dnslibs bug
             if let data = rules.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
+                DDLogInfo("(DsnFiltersService) set userRules - update vpn settings")
                 vpnManager?.updateSettings {_ in } // update vpn settings and enable tunnel if needed
             }
             else {
@@ -282,6 +283,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         saveFiltersMeta()
+        
+        DDLogInfo("(DsnFiltersService) setFilter(enabled) - update vpn settings")
         vpnManager?.updateSettings{_ in } // update vpn settings and enable tunnel if needed
     }
     
@@ -302,6 +305,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         saveFiltersMeta()
+        DDLogInfo("(DsnFiltersService) addFilter - update vpn settings")
         vpnManager?.updateSettings{_ in }
     }
     
@@ -316,6 +320,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 return
             }
         }
+        
+        DDLogInfo("(DsnFiltersService) deleteFilter - update vpn settings")
         vpnManager?.updateSettings{_ in }
     }
     
@@ -376,6 +382,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             
             group.wait()
             if self.complexProtection?.systemProtectionEnabled ?? false {
+                DDLogInfo("(DsnFiltersService) updateFilters - filters are updated. Start updating vpn settings")
                 self.vpnManager?.updateSettings(completion: nil)
             }
             
@@ -480,11 +487,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private func saveWhitlistRules(rules:[String]) {
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
+            DDLogInfo("(DnsFiltersService) saveWhitlistRules - save whitelist rules")
             resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
             vpnManager?.updateSettings{_ in }
         }
         else {
-            DDLogError("(DnsFiltersService) error - can not save user filter to file")
+            DDLogError("(DnsFiltersService) saveWhitlistRules error - can not save user filter to file")
         }
     }
 }

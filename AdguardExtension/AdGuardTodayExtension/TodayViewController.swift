@@ -82,7 +82,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         super.init(coder: coder)
         
-//        complexProtection.delegate = self
         initLogger()
     }
     
