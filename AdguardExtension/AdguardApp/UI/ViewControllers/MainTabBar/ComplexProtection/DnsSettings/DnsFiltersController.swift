@@ -18,6 +18,10 @@
 
 import UIKit
 
+class DnsFilterTitleCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: ThemableLabel!
+}
+
 class AddFilterCell: UITableViewCell {
     
 }
@@ -44,9 +48,7 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, NewCustomFilterDetailsDelegate {
-    
-    @IBOutlet weak var tableView: UITableView!
+class DnsFiltersController: UITableViewController, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, NewCustomFilterDetailsDelegate {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet var searchBar: UISearchBar!
@@ -65,11 +67,13 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
     
     private let filterDetailsControllerId = "FilterDetailsController"
     
+    private let titleCellReuseId = "DnsFilterTitleCell"
     private let dnsCellReuseId = "DnsFilterCell"
     private let addFilterCellReuseId = "AddFilterCell"
     
-    private let addFilterSection = 0
-    private let filtersSection = 1
+    private let titleSection = 0
+    private let addFilterSection = 1
+    private let filtersSection = 2
     
     // MARK: - View controller life cycle
     
@@ -82,35 +86,73 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationItem.rightBarButtonItems = [searchButton]
         
         model.delegate = self
+        searchBar.delegate = self
+        
+        tableView.estimatedRowHeight = 50.0
+        tableView.rowHeight = UITableView.automaticDimension
         
         setupBackButton()
+        updateTheme()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.updateFilters()
-        updateTheme()
     }
     
     // MARK: - Table view delegate methods
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (model.isSearchActive || !configuration.developerMode) && indexPath.section == addFilterSection {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if model.isSearchActive && indexPath.section == addFilterSection {
             return 0.0
         }
+
+        if model.isSearchActive && indexPath.section == titleSection {
+            return 0.0
+        }
+
+        if !configuration.developerMode && indexPath.section == addFilterSection {
+            return 0.0
+        }
+
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == addFilterSection ? 1 : model.filters.count
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == titleSection {
+            return 0.01
+        }
+        return 0.0
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case titleSection:
+            return 1
+        case addFilterSection:
+            return 1
+        case filtersSection:
+            return model.filters.count
+        default:
+            return 0
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == addFilterSection {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == titleSection {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: titleCellReuseId) as? DnsFilterTitleCell {
+                theme.setupTableCell(cell)
+                theme.setupLabel(cell.titleLabel)
+                if model.isSearchActive{
+                    cell.isHidden = true
+                }
+                return cell
+            }
+        } else if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
                 theme.setupTableCell(cell)
                 if model.isSearchActive || !configuration.developerMode{
@@ -133,7 +175,7 @@ class DnsFiltersController: UIViewController, UITableViewDelegate, UITableViewDa
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == addFilterSection {
             showAddFilterDialog()
         } else {
