@@ -20,8 +20,6 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
     
-    var customStatusBarStyle: UIStatusBarStyle?
-    
     private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
    
     private let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
@@ -32,12 +30,7 @@ class MainNavigationController: UINavigationController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        if customStatusBarStyle != nil {
-            return customStatusBarStyle!
-        }
-        else {
-            return theme.statusbarStyle()
-        }
+        return theme.statusbarStyle()
     }
     
     static private var coordinatorHelperKey = "UINavigationController.TransitionCoordinatorHelper"

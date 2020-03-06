@@ -60,6 +60,9 @@ class AboutTableController : UITableViewController {
     
     // MARK: - Actions
  
+    @IBAction func openVideoTutorial(_ sender: UITapGestureRecognizer) {
+        showVideoTutorial()
+    }
     @IBAction func siteAction(_ sender: Any) {
         UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
     }

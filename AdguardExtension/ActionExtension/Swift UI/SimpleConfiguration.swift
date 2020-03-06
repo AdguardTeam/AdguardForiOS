@@ -77,7 +77,11 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
         self.resources = resources
         self.systemAppearenceIsDark = systemAppearenceIsDark
         self.purchaseService = purchaseService
+        allContentBlockersEnabled = true
+        someContentBlockersEnabled = true
     }
     
-    var allContentBlockersEnabled = true
+    var allContentBlockersEnabled: Bool
+    
+    var someContentBlockersEnabled: Bool
 }

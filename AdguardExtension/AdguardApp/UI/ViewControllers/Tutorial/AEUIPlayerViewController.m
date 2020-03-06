@@ -24,97 +24,20 @@
 #define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
 #define HIDE_NAVIGATION_DELAY 4 // seconds
 
-@interface AEUIPlayerViewController ()
-
-@end
-
-@implementation AEUIPlayerViewController {
-
-    UITapGestureRecognizer *_gesture;
-    BOOL _statusBarHidden;
-}
+@implementation AEUIPlayerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    if (!self.videoName) {
-        self.videoName = DEFAULT_TUTORIAL_VIDEO;
-    }
     
-    NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, [ADLocales lang], self.videoName]];
+    NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, [ADLocales lang], DEFAULT_TUTORIAL_VIDEO]];
     
     if (videoURL) {
-
-        _gesture = [[UITapGestureRecognizer alloc]
-            initWithTarget:self
-                    action:@selector(handleGesture:)];
-        _gesture.delegate = self;
-        
-        [self.view addGestureRecognizer: _gesture];
-
         [self createPlayerForUrl:videoURL];
-        
-        
-        
-        dispatch_after(
-            dispatch_time(DISPATCH_TIME_NOW,
-                          (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
-            dispatch_get_main_queue(), ^{
-                [self.view addGestureRecognizer:_gesture];
-                [[self navigationController] setNavigationBarHidden:YES
-                                                         animated:YES];
-                [self hideStatusBar:YES];
-
-            });
     }
-    
-    NSString *title = ACLocalizedString(@"video_tutorial_title", nil );
-    [self setTitle:title];
-    [self setupBackButton];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)dealloc {
-
     [self removePlayer];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-
-    [self.tabBarController.tabBar setHidden:NO];
-    [[self navigationController] setNavigationBarHidden:NO animated:animated];
-    [self hideStatusBar:NO];
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    if (_completionBlock) {
-        _completionBlock();
-    }
-}
-
-- (void)hideStatusBar:(BOOL)hide {
-
-    if (_statusBarHidden != hide) {
-        _statusBarHidden = hide;
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
-}
-
-- (void)didMoveToParentViewController:(UIViewController *)parent {
-    if(self.completionBlock)
-        self.completionBlock();
-}
-
-- (BOOL)prefersStatusBarHidden {
-
-    return _statusBarHidden;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
@@ -123,38 +46,12 @@
     return YES;
 }
 
-- (void)showControls {
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self hideStatusBar:NO];
-    dispatch_after(
-                   dispatch_time(DISPATCH_TIME_NOW,
-                                 (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
-                   dispatch_get_main_queue(), ^{
-                       [[self navigationController] setNavigationBarHidden:YES
-                                                                  animated:YES];
-                       [self hideStatusBar:YES];
-                   });
-}
-
-- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer;
-{
-
-    if (gestureRecognizer.numberOfTouches == 1) {
-        [self showControls];
-    }
-}
-
 - (void)playerEnd:(NSNotification *)noti {
-
-    [self.view removeGestureRecognizer:_gesture];
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    [self hideStatusBar:NO];
-
     dispatch_after(
         dispatch_time(DISPATCH_TIME_NOW,
                       (int64_t)(HIDE_NAVIGATION_DELAY * NSEC_PER_SEC)),
         dispatch_get_main_queue(), ^{
-          [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         });
 }
 
@@ -178,12 +75,8 @@
 }
 
 - (void)removePlayer {
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
-
     [self.player.currentItem removeObserver:self forKeyPath:@"status"];
-    
-
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -194,33 +87,18 @@
 
         if (status == AVPlayerItemStatusFailed) {
 
-            NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, ADL_DEFAULT_LANG, self.videoName]];
+            NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, ADL_DEFAULT_LANG, DEFAULT_TUTORIAL_VIDEO]];
 
             if (videoURL) {
-
                 [self removePlayer];
                 [self createPlayerForUrl:videoURL];
             }
 
         }
         else if (status == AVPlayerItemStatusReadyToPlay) {
-
             [self.player play];
         }
     }
 }
-
-- (void)setupBackButton{
-    UIImage *image = [[UIImage imageNamed:@"arrow_right"] imageWithHorizontallyFlippedOrientation];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-}
-
--(void)goBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:true];
-}
-
-
 
 @end

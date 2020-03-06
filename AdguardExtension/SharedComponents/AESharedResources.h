@@ -309,6 +309,10 @@ extern NSString* _Nonnull AEDefaultsActiveDnsServer;
 User defaults key for complex protection state
 */
 extern NSString* _Nonnull AEComplexProtectionEnabled;
+/**
+ User defaults key, which defines whethet onboarding was shown
+ */
+extern NSString* _Nonnull OnboardingWasShown;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
