@@ -64,7 +64,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     
     var title: String {
         get {
-            return ACLocalizedString("whitelist_title", nil)
+            return ACLocalizedString("allowlist_title", nil)
         }
     }
     
@@ -103,7 +103,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     
     /* Variables */
-    private let fileName = "dns_whitelist.txt"
+    private let fileName = "dns_allowlist.txt"
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()

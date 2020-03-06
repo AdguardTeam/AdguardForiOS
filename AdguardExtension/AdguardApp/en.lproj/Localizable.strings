@@ -52,9 +52,6 @@
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Try for free";
 
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
@@ -133,13 +130,13 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Enter here the domain names separated by line breaks. AdGuard will allow all connections to these domains.";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "This Blacklist supports <a href=\"%@\">AdGuard's DNS syntax</a>. Enter here the rules separated by line breaks. AdGuard will block all connections to domains that match these rules.";
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "This Blocklist supports <a href=\"%@\">AdGuard's DNS syntax</a>. Enter here the rules separated by line breaks. AdGuard will block all connections to domains that match these rules.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Updating...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Add a rule";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -427,11 +424,14 @@
 /* (NetworkSettingsController) description for wi-fi data */
 "wifi_data_description" = "Tracking protection while on Wi-Fi";
 
-/* (ListOfRulesModel) title for dns and safari white list*/
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Allowlist";
+
+/* (ListOfRulesModel) title safari white list*/
 "whitelist_title" = "Whitelist";
 
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Blacklist";
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Blocklist";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari user rules";
@@ -451,17 +451,17 @@
 /* "Disabled" title */
 "disabled" = "Disabled";
 
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "REMOVE FROM WHITELIST";
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "REMOVE FROM ALLOWLIST";
 
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "REMOVE FROM BLACKLIST";
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "REMOVE FROM BLOCKLIST";
 
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "ADD TO WHITELIST";
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "ADD TO ALLOWLIST";
 
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "ADD TO BLACKLIST";
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "ADD TO BLOCKLIST";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Allow to block phishing sites and other dangerous domains. Available to Premium users";
@@ -605,19 +605,19 @@
 "dns_request_status_processed" = "Processed";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Whitelisted";
+"dns_request_status_whitelisted" = "Allowlisted";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "added to the Whitelist";
+"dns_request_user_status_added_to_whitelist" = "added to the Allowlist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "added to the Blacklist";
+"dns_request_user_status_added_to_blacklist" = "added to the Blocklist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "removed from the Whitelist";
+"dns_request_user_status_removed_from_whitelist" = "removed from the Allowlist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "removed from the Blacklist";
+"dns_request_user_status_removed_from_blacklist" = "removed from the Blocklist";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "Open the %@ <b>settings</b>";
@@ -638,7 +638,7 @@
 "block_request" = "Block request";
 
 /* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Whitelist request";
+"whitelist_request" = "Allowlist request";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video Tutorial";
@@ -647,10 +647,10 @@
 "invalid_upstream_message" = "You have entered the invalid upstream";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "System Blacklist";
+"system_blacklist" = "System Blocklist";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "System Whitelist";
+"system_whitelist" = "System Allowlist";
 
 /* (DnsRequestDetailsController) "Tracker details" title for section header */
 "tracker_details_header" = "Tracker details";
