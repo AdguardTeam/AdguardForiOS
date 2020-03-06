@@ -47,11 +47,11 @@ class VpnManager: VpnManagerProtocol {
     
     // MARK: - private properties
        
-    let resources: AESharedResourcesProtocol
-    let appConfiguration: ConfigurationServiceProtocol
-    let networkSettings: NetworkSettingsServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    private let appConfiguration: ConfigurationServiceProtocol
+    private let networkSettings: NetworkSettingsServiceProtocol
     
-    let workingQueue = DispatchQueue(label: "vpn manager queue")
+    private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
