@@ -75,6 +75,8 @@ class GetProController: UIViewController {
         updateTheme()
         
         myAccountButton.makeTitleTextUppercased()
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        myAccountButton.contentEdgeInsets.left = isIphone ? 16.0 : 24.0
     }
     
     override func viewWillAppear(_ animated: Bool) {

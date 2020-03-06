@@ -611,13 +611,21 @@
                                                 <constraint firstAttribute="bottom" secondItem="mR4-EU-MFx" secondAttribute="bottom" constant="20" id="8pd-x5-9PA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="42"/>
                                                 </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="85Z-Yj-BfW" secondAttribute="trailing" constant="24" id="Aah-fk-ZUd"/>
-                                                <constraint firstItem="UbO-jW-NNO" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="24" id="Lxp-D2-xsr"/>
+                                                <constraint firstAttribute="trailing" secondItem="85Z-Yj-BfW" secondAttribute="trailing" constant="16" id="Aah-fk-ZUd">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="UbO-jW-NNO" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="16" id="Lxp-D2-xsr">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                                 <constraint firstItem="UbO-jW-NNO" firstAttribute="top" secondItem="85Z-Yj-BfW" secondAttribute="bottom" constant="16" id="MSp-FB-3RG">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="85Z-Yj-BfW" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="24" id="O4c-ie-mqF"/>
-                                                <constraint firstAttribute="trailing" secondItem="UbO-jW-NNO" secondAttribute="trailing" constant="24" id="USi-fX-ytg"/>
+                                                <constraint firstItem="85Z-Yj-BfW" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="16" id="O4c-ie-mqF">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="UbO-jW-NNO" secondAttribute="trailing" constant="16" id="USi-fX-ytg">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="mR4-EU-MFx" secondAttribute="trailing" id="qMQ-kV-Wq3"/>
                                                 <constraint firstItem="85Z-Yj-BfW" firstAttribute="top" secondItem="Fux-84-Tbi" secondAttribute="top" constant="16" id="rDm-Fq-ORc">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="42"/>
@@ -648,8 +656,12 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="XXd-IL-9us" secondAttribute="bottom" constant="20" id="7f3-jY-hD0"/>
                                                 <constraint firstItem="XXd-IL-9us" firstAttribute="top" secondItem="c4g-LL-BQc" secondAttribute="top" id="MNq-e1-gPM"/>
-                                                <constraint firstItem="XXd-IL-9us" firstAttribute="leading" secondItem="c4g-LL-BQc" secondAttribute="leading" constant="24" id="mMb-0t-z0h"/>
-                                                <constraint firstAttribute="trailing" secondItem="XXd-IL-9us" secondAttribute="trailing" constant="24" id="tHp-v7-IBN"/>
+                                                <constraint firstItem="XXd-IL-9us" firstAttribute="leading" secondItem="c4g-LL-BQc" secondAttribute="leading" constant="16" id="mMb-0t-z0h">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="XXd-IL-9us" secondAttribute="trailing" constant="16" id="tHp-v7-IBN">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
