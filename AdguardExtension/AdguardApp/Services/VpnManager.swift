@@ -53,6 +53,7 @@ class VpnManager: VpnManagerProtocol {
     
     private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
+    // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
     private var configurationObserver: NotificationToken?

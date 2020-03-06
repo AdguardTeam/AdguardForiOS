@@ -264,8 +264,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             rules.append("") // temporary fix dnslibs bug
             if let data = rules.joined(separator: "\n").data(using: .utf8) {
                 resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
-                DDLogInfo("(DsnFiltersService) set userRules - update vpn settings")
-                vpnManager?.updateSettings {_ in } // update vpn settings and enable tunnel if needed
+                vpnManager?.updateSettings { error in
+                    if error != nil {
+                        DDLogError("(DsnFiltersService) set userRules error: \(error!)")
+                    }
+                } // update vpn settings and enable tunnel if needed
             }
             else {
                 DDLogError("(DnsFiltersService) error - can not save user filter to file")
@@ -285,7 +288,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         saveFiltersMeta()
         
         DDLogInfo("(DsnFiltersService) setFilter(enabled) - update vpn settings")
-        vpnManager?.updateSettings{_ in } // update vpn settings and enable tunnel if needed
+        vpnManager?.updateSettings{ error in
+            if error != nil {
+                DDLogError("(DsnFiltersService) setFilter(enabled) error: \(error!)")
+            }
+        }
     }
     
     func addFilter(_ filter: DnsFilter, data: Data?) {
@@ -305,8 +312,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         saveFiltersMeta()
-        DDLogInfo("(DsnFiltersService) addFilter - update vpn settings")
-        vpnManager?.updateSettings{_ in }
+        
+        vpnManager?.updateSettings{ error in
+            if error != nil {
+                DDLogError("(DsnFiltersService) addFilter error: \(error!)")
+            }
+        }
     }
     
     func deleteFilter(_ filter: DnsFilter) {
@@ -322,7 +333,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         
         DDLogInfo("(DsnFiltersService) deleteFilter - update vpn settings")
-        vpnManager?.updateSettings{_ in }
+        vpnManager?.updateSettings{ error in
+            if error != nil {
+                DDLogError("(DsnFiltersService) deleteFilter error: \(error!)")
+            }
+        }
     }
     
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
@@ -487,9 +502,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private func saveWhitlistRules(rules:[String]) {
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
-            DDLogInfo("(DnsFiltersService) saveWhitlistRules - save whitelist rules")
             resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
-            vpnManager?.updateSettings{_ in }
+            vpnManager?.updateSettings{ error in
+                if error != nil {
+                    DDLogError("(DsnFiltersService) saveWhitlistRules error: \(error!)")
+                }
+            }
         }
         else {
             DDLogError("(DnsFiltersService) saveWhitlistRules error - can not save user filter to file")
