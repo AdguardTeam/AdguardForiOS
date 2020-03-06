@@ -46,8 +46,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Add a filter";
 
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
-"PFY-Cq-NFN.text" = "This module can block tracking domains and encrypt your DNS traffic";
+/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+"PFY-Cq-NFN.text" = "Enable this module to block tracking domains and encrypt your DNS traffic";
 
 /* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Tracking protection";
@@ -118,8 +118,8 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Server name";
 
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "This module can block tracking domains and encrypt your DNS traffic";
+/* Class = "UILabel"; text = "Choose ready-to-use anti-tracking lists or add your own rules"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Choose ready-to-use anti-tracking lists or add your own rules";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS server address";
