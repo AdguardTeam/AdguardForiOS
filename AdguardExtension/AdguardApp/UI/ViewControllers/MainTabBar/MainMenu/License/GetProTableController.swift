@@ -42,6 +42,14 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var startTrialTitleLable: ThemableLabel!
     @IBOutlet weak var startTrialDescriptionLabel: ThemableLabel!
     
+    // MARK: - feature icons
+    
+    @IBOutlet weak var trackingProtectionImageView: UIImageView!
+    @IBOutlet weak var securityFiltersImageView: UIImageView!
+    @IBOutlet weak var customFiltersImageView: UIImageView!
+    @IBOutlet weak var premiumImageView: UIImageView!
+    
+    
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -88,6 +96,17 @@ class GetProTableController: UITableViewController {
         titleLabel.text = titleLabel.text?.uppercased()
         
         periodButton.accessibilityLabel = String.localizedString("choose_sub_voiceover")
+        
+        trackingProtectionImageView.image = UIImage(named: "ic_adguard")
+        securityFiltersImageView.image = UIImage(named: "ic_encryption")
+        customFiltersImageView.image = UIImage(named: "custom")
+        premiumImageView.image = UIImage(named: "subscribed-icon")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        upgradeButton.layer.cornerRadius = upgradeButton.frame.height / 2
+        periodButton.layer.cornerRadius = periodButton.frame.height / 2
     }
     
     // MARK: - table view delegate methods
@@ -220,7 +239,7 @@ class GetProTableController: UITableViewController {
             documentAttributes: nil) else { return }
         
         attributedString.addAttributes([NSAttributedString.Key.foregroundColor: theme.lightGrayTextColor], range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)], range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttributes([NSAttributedString.Key.font: purchaseDescriptionTextView.font!], range: NSRange(location: 0, length: attributedString.length))
         
         purchaseDescriptionTextView.attributedText = attributedString
     }
