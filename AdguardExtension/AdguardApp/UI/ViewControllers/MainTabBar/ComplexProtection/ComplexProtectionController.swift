@@ -19,6 +19,10 @@
 import UIKit
 
 class ComplexProtectionController: UITableViewController, VpnServiceNotifierDelegate {
+    
+    // MARK: - Title Outlets
+    
+    @IBOutlet weak var titlImageView: UIImageView!
 
     // MARK: - Safari protection outlets
     
@@ -84,6 +88,9 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     private let enabledColor = UIColor(hexString: "#67B279")
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
+    private let titleSection = 0
+    private let protectionSection = 1
+    
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
     
@@ -109,6 +116,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         
         freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()
+        titlImageView.image = UIImage(named: "apps")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,18 +187,29 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == safariProtectionCell {
-            safariProtectionSwitch.setOn(!safariProtectionSwitch.isOn, animated: true)
-            safariProtectionChanged(safariProtectionSwitch)
-        } else if indexPath.row == systemProtectionCell {
-            if proStatus{
-                systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
-                systemProtectionChanged(systemProtectionSwitch)
-            } else {
-                proStatusEnableFailure()
+        if indexPath.section == protectionSection {
+            if indexPath.row == safariProtectionCell {
+                safariProtectionSwitch.setOn(!safariProtectionSwitch.isOn, animated: true)
+                safariProtectionChanged(safariProtectionSwitch)
+            } else if indexPath.row == systemProtectionCell {
+                if proStatus{
+                    systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
+                    systemProtectionChanged(systemProtectionSwitch)
+                } else {
+                    proStatusEnableFailure()
+                }
             }
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == titleSection ? 32.0 : 0.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     // MARK: - Observer
@@ -227,8 +246,11 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
-            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
+            let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+            let height: CGFloat = isIphone ? 18.0 : 26.0 
+            
+            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : height
+            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : height
             
             self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
