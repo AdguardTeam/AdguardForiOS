@@ -39,7 +39,6 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
         
         // define developer mode as false
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
@@ -49,7 +48,6 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
         
         // set developer mode to true
         
@@ -60,35 +58,30 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
         
         // define all filters as enabled
         resources.safariWhitelistEnabled = true
         resources.safariUserFilterEnabled = true
         resources.systemWhitelistEnabled = true
         resources.systemUserFilterEnabled = true
-        resources.dnsRequestBlockingEnabled = true
         
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
         
         // set all filters as disabled
         resources.safariWhitelistEnabled = false
         resources.safariUserFilterEnabled = false
         resources.systemWhitelistEnabled = false
         resources.systemUserFilterEnabled = false
-        resources.dnsRequestBlockingEnabled = false
         
         // all filters must be disabled
         XCTAssertFalse(resources.safariWhitelistEnabled)
         XCTAssertFalse(resources.safariUserFilterEnabled)
         XCTAssertFalse(resources.systemWhitelistEnabled)
         XCTAssertFalse(resources.systemUserFilterEnabled)
-        XCTAssertFalse(resources.dnsRequestBlockingEnabled)
         
         // set developer mode true
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
@@ -98,7 +91,6 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
         
         // undefine developer mode
         resources.sharedDefaults().removeObject(forKey: AEDefaultsDeveloperMode)
@@ -108,8 +100,6 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        XCTAssertTrue(resources.dnsRequestBlockingEnabled)
-        
     }
 
 }
