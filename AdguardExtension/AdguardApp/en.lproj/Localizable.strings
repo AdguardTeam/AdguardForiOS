@@ -256,8 +256,8 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Blocks tracking systems";
 
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "System DNS";
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "No encryption (System DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Enabled %1$d out of %2$d";
@@ -602,10 +602,10 @@
 "dns_request_status_blocked" = "Blocked";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Processed";
+"dns_request_status_processed" = "Allowed";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Allowlisted";
+"dns_request_status_whitelisted" = "Allowed";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "added to the Allowlist";
