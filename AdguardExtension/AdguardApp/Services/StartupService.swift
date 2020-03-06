@@ -63,7 +63,10 @@ class StartupService : NSObject{
 
         locator.addService(service: vpnManager as VpnManagerProtocol)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager)
+        let safariProtection =  SafariProtectionService(resources: sharedResources)
+        locator.addService(service: safariProtection)
+        
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection
@@ -78,7 +81,7 @@ class StartupService : NSObject{
         let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources)
         locator.addService(service: antibannerController)
         
-        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, complexProtection: complexProtection)
+        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
         locator.addService(service: contentBlockerService)
         
         let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)

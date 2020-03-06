@@ -78,7 +78,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         dnsProvidersService = DnsProvidersService(resources: resources)
         dnsStatisticsService = DnsStatisticsService(resources: resources)
         let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager)
+        
+        let safariProtection = SafariProtectionService(resources: resources)
+        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection)
         
         super.init(coder: coder)
         

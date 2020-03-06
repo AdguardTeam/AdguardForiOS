@@ -30,7 +30,7 @@ class ContentBlockerTest: XCTestCase {
         safari = SafariServiceMock()
         antibanner = AntibannerMock()
         
-        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner, complexProtection: ComplexProtectionServiceMock())
+        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner, safariProtection: SafariProtectionService(resources: resources))
         contentBlocker.createConverter = {
             return (ConverterMock(), nil)
         }

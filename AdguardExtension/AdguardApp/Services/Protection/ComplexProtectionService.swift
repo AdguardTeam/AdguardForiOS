@@ -22,6 +22,22 @@ import NetworkExtension
 
 // MARK: - Complex protection Interface -
 
+protocol SafariProtectionServiceProtocol {
+    var safariProtectionEnabled: Bool { get }
+}
+
+class SafariProtectionService: SafariProtectionServiceProtocol {
+    
+    let resources: AESharedResourcesProtocol
+    
+    init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
+    }
+    var safariProtectionEnabled: Bool {
+        return resources.safariProtectionEnabled && resources.complexProtectionEnabled
+    }
+}
+
 @objc
 protocol ComplexProtectionServiceProtocol: class {
     
@@ -47,8 +63,10 @@ enum ComplexProtectionError: Error {
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     var safariProtectionEnabled: Bool {
-        return resources.safariProtectionEnabled && resources.complexProtectionEnabled
+        return safariProtection.safariProtectionEnabled
     }
+    
+    let safariProtection: SafariProtectionServiceProtocol
     
     var systemProtectionEnabled: Bool {
         return configuration.proStatus
@@ -72,11 +90,12 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService) {
         self.resources = resources
         self.safariService = safariService
         self.configuration = configuration
         self.vpnManager = vpnManager
+        self.safariProtection = safariProtection
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
@@ -161,7 +180,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             needsUpdateSafari = resources.safariProtectionEnabled
         }
         
-        if !enabled && !self.safariProtectionEnabled {
+        if !enabled && !safariProtection.safariProtectionEnabled {
             self.resources.complexProtectionEnabled = false
         }
         
