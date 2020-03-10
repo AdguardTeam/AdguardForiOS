@@ -166,6 +166,8 @@ class DnsSettingsController : UITableViewController {
         let enabled = sender.isOn
     
         complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
+        
+        updateVpnInfo()
     }
     
     // MARK: private methods

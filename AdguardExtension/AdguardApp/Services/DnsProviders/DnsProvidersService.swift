@@ -104,7 +104,10 @@ protocol DnsProvidersServiceProtocol {
             }
             
             let data = NSKeyedArchiver.archivedData(withRootObject:server)
+            
+            willChangeValue(for: \.activeDnsServer)
             resources.sharedDefaults().set(data, forKey: AEDefaultsActiveDnsServer)
+            didChangeValue(for: \.activeDnsServer)
         }
     }
     

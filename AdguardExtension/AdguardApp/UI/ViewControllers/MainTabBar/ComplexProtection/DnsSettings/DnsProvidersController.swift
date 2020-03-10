@@ -269,6 +269,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         vpnManager.updateSettings(completion: nil)
         
         selectedCellTag = sender.tag
+        tableView.reloadData()
     }
     
     // MARK: - Presentation delegate methods
