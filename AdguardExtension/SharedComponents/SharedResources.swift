@@ -116,15 +116,6 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var dnsRequestBlockingEnabled: Bool {
-        get {
-            filterEnabled(defaultsKey: AEDefaultsDNSRequestsBlocking)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsDNSRequestsBlocking)
-        }
-    }
-    
     dynamic var tunnelMode: APVpnManagerTunnelMode {
         get {
             guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt else {

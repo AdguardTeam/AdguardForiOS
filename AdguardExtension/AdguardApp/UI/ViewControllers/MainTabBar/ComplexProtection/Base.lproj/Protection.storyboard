@@ -90,6 +90,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <segue destination="2RB-J9-9js" kind="show" id="UVP-7m-e38"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qdI-Qn-GO4">
                                         <rect key="frame" x="0.0" y="157" width="414" height="168"/>
@@ -158,6 +161,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="teo-vm-NRJ" secondAttribute="bottom" constant="24" id="zsJ-Mi-jYC"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DtZ-fi-OgI" kind="show" identifier="showTrackingProtection" id="f0x-0D-2qP"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -187,22 +193,31 @@
                         <outletCollection property="themableLabels" destination="884-Hm-mb6" collectionClass="NSMutableArray" id="WRG-b1-9GS"/>
                         <outletCollection property="themableLabels" destination="cnF-td-Ba1" collectionClass="NSMutableArray" id="Amt-To-ryK"/>
                         <outletCollection property="themableLabels" destination="teo-vm-NRJ" collectionClass="NSMutableArray" id="c3T-UA-1dF"/>
-                        <segue destination="nr4-0t-luE" kind="show" identifier="showGetProSwgueId" id="i4Z-ZX-QUW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHj-J0-uTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-213.04347826086959" y="-137.27678571428569"/>
         </scene>
-        <!--License-->
-        <scene sceneID="hQl-2I-GuT">
+        <!--DnsSettings-->
+        <scene sceneID="wE2-2E-vn1">
             <objects>
-                <viewControllerPlaceholder storyboardName="License" id="nr4-0t-luE" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="9jf-or-sU8"/>
+                <viewControllerPlaceholder storyboardName="DnsSettings" id="DtZ-fi-OgI" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="jF7-Sv-uqA"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sBM-51-doE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bka-Un-6h2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="-137"/>
+            <point key="canvasLocation" x="327" y="-118"/>
+        </scene>
+        <!--Filters-->
+        <scene sceneID="tRN-e9-hQ2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filters" id="2RB-J9-9js" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ei9-dp-f0o"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YL2-hE-3dD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="-151"/>
         </scene>
     </scenes>
     <resources>

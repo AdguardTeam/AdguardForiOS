@@ -45,6 +45,12 @@ class DnsRequestDetailsController: UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - Sections & Rows
+    
+    private var filteringSection: Int?
+    private var statusCell: IndexPath?
+    private var matchedFiltersCell: IndexPath?
+    private var matchedRulesCell: IndexPath?
+    
     private var trackerDetailsSection: Int?
     private var categoryCell: IndexPath?
     private var nameCell: IndexPath?
@@ -56,11 +62,6 @@ class DnsRequestDetailsController: UITableViewController {
     private var timeCell: IndexPath?
     private var sizeCell: IndexPath?
     private var elapsedCell: IndexPath?
-    
-    private var filteringSection: Int?
-    private var statusCell: IndexPath?
-    private var matchedFiltersCell: IndexPath?
-    private var matchedRulesCell: IndexPath?
     
     private var dnsSection: Int?
     private var typeCell: IndexPath?
@@ -290,7 +291,7 @@ class DnsRequestDetailsController: UITableViewController {
         
         let status = record.logRecord.status.title()
         let userStatus = record.logRecord.userStatus
-        let stCopied = userStatus == .none ? status : "\(status)(\(userStatus.title()))"
+        let stCopied = userStatus == .none ? status : "\(status) (\(userStatus.title()))"
         let color = record.logRecord.status.color()
         let statusFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
         let statusTitle = String.localizedString("status_title")
@@ -314,6 +315,52 @@ class DnsRequestDetailsController: UITableViewController {
             let lastSection = sectionsArray.last ?? 0
             return sectionsArray.isEmpty ? 0 : (lastSection + 1)
         }
+        
+        /**
+         Filtering Section
+        */
+        var filteringSectionModel: [Int : LogCellModelProtocol?] = [:]
+        var filteringRows = 0
+        let filteringSectionToAssign = sectionNumber
+        
+        // Status model
+        let statusModel = getStatusCellModel()
+        let statusModelIsNil = statusModel == nil
+        if !statusModelIsNil {
+            filteringSection = filteringSectionToAssign
+            statusCell = IndexPath(row: filteringRows, section: filteringSection!)
+            filteringRows += 1
+            filteringSectionModel[statusCell!.row] = statusModel
+        }
+        
+        // Matched filters model
+        let matchedFilters = record.matchedFilters ?? ""
+        let matchedFiltersTitle = String.localizedString("matched_filter_title")
+        let matchedFiltersModelIsNil = matchedFilters.isEmpty
+        let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme)
+        if !matchedFiltersModelIsNil {
+            filteringSection = filteringSectionToAssign
+            matchedFiltersCell = IndexPath(row: filteringRows, section: filteringSection!)
+            filteringRows += 1
+            filteringSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
+        }
+        
+        // Matched rules model
+        let noRulesFoundStr = String.localizedString("no_rule_found")
+        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
+        let matchedRulesTitle = String.localizedString("matched_rule_title")
+        let matchedRulesModel = LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme)
+        filteringSection = filteringSectionToAssign
+        matchedRulesCell = IndexPath(row: filteringRows, section: filteringSection!)
+        filteringRows += 1
+        filteringSectionModel[matchedRulesCell!.row] = matchedRulesModel
+        
+        if let filteringSection = filteringSection {
+            sectionsArray.append(filteringSection)
+            sectionModels[filteringSection] = filteringSectionModel
+        }
+        
         /**
          Tracker Details Section
          */
@@ -439,51 +486,6 @@ class DnsRequestDetailsController: UITableViewController {
         if let generalSection = generalSection {
             sectionsArray.append(generalSection)
             sectionModels[generalSection] = generalSectionModel
-        }
-        
-        /**
-         Filtering Section
-        */
-        var filteringSectionModel: [Int : LogCellModelProtocol?] = [:]
-        var filteringRows = 0
-        let filteringSectionToAssign = sectionNumber
-        
-        // Status model
-        let statusModel = getStatusCellModel()
-        let statusModelIsNil = statusModel == nil
-        if !statusModelIsNil {
-            filteringSection = filteringSectionToAssign
-            statusCell = IndexPath(row: filteringRows, section: filteringSection!)
-            filteringRows += 1
-            filteringSectionModel[statusCell!.row] = statusModel
-        }
-        
-        // Matched filters model
-        let matchedFilters = record.matchedFilters ?? ""
-        let matchedFiltersTitle = String.localizedString("matched_filter_title")
-        let matchedFiltersModelIsNil = matchedFilters.isEmpty
-        let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme)
-        if !matchedFiltersModelIsNil {
-            filteringSection = filteringSectionToAssign
-            matchedFiltersCell = IndexPath(row: filteringRows, section: filteringSection!)
-            filteringRows += 1
-            filteringSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
-        }
-        
-        // Matched rules model
-        let noRulesFoundStr = String.localizedString("no_rule_found")
-        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
-        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
-        let matchedRulesTitle = String.localizedString("matched_rule_title")
-        let matchedRulesModel = LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme)
-        filteringSection = filteringSectionToAssign
-        matchedRulesCell = IndexPath(row: filteringRows, section: filteringSection!)
-        filteringRows += 1
-        filteringSectionModel[matchedRulesCell!.row] = matchedRulesModel
-        
-        if let filteringSection = filteringSection {
-            sectionsArray.append(filteringSection)
-            sectionModels[filteringSection] = filteringSectionModel
         }
         
         /**

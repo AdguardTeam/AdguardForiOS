@@ -328,19 +328,25 @@
     ASSIGN_WEAK(self);
     [self setTunnelNetworkSettings:nil completionHandler:^(NSError * _Nullable error) {
         
-        ASSIGN_STRONG(self);
-        
-        // we must obtain system dns ip addreses before setting real tunnel settings
-        // otherwise we will receive only our fake dns addresses
-        NSMutableArray<NSString *> * allSystemDnsIps = [USE_STRONG(self) getSysstemDnsIps];
-        
-        [USE_STRONG(self) readSettings];
-        
-        [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
-            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
-                completionHandler(error, allSystemDnsIps);
+        // https://github.com/AdguardTeam/AdguardForiOS/issues/1499
+        // sometimes we get empty list of system dns servers.
+        // Here we add a pause after setting the empty settings.
+        // Perhaps this will eliminate the situation with an empty dns list
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            ASSIGN_STRONG(self);
+            
+            // we must obtain system dns ip addreses before setting real tunnel settings
+            // otherwise we will receive only our fake dns addresses
+            NSMutableArray<NSString *> * allSystemDnsIps = [USE_STRONG(self) getSysstemDnsIps];
+            
+            [USE_STRONG(self) readSettings];
+            
+            [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
+                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+                    completionHandler(error, allSystemDnsIps);
+                }];
             }];
-        }];
+        });
     }];
 }
 
@@ -616,7 +622,7 @@
     
     if (systemDnsServers.count == 0) {
         DDLogError(@"(PacketTunnelProvider) - startDnsProxy error. There is no system dns servers");
-        return NO;
+        systemDnsServers = @[@"9.9.9.9"];
     }
     
     NSArray *upstreams;

@@ -85,9 +85,9 @@ class ComplexProtectionController: UITableViewController {
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
-    
-    private let showGetProSwgueId = "showGetProSwgueId"
-    
+
+    private let showTrackingProtectionSegue = "showTrackingProtection"
+
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -132,10 +132,14 @@ class ComplexProtectionController: UITableViewController {
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
-        complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
+        complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.systemProtectionSwitch.isOn = self.complexProtection.systemProtectionEnabled
+                
+                if error != nil {
+                    self.performSegue(withIdentifier: self.showTrackingProtectionSegue, sender: self)
+                }
             }
         }
     }
@@ -149,21 +153,6 @@ class ComplexProtectionController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == safariProtectionCell {
-            safariProtectionSwitch.setOn(!safariProtectionSwitch.isOn, animated: true)
-            safariProtectionChanged(safariProtectionSwitch)
-        } else if indexPath.row == systemProtectionCell {
-            if proStatus{
-                systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
-                systemProtectionChanged(systemProtectionSwitch)
-            } else {
-                proStatusEnableFailure()
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     // MARK: - Observer
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -173,10 +162,6 @@ class ComplexProtectionController: UITableViewController {
     }
     
     // MARK: - Private methods
-    
-    private func proStatusEnableFailure() {
-        performSegue(withIdentifier: showGetProSwgueId, sender: self)
-    }
     
     /**
      Updates theme

@@ -245,10 +245,6 @@ extern NSString* _Nonnull AEDefaultsDeveloperMode;
 extern NSString* _Nonnull AEDefaultsShowStatusBar;
 
 /**
- User defaults key, which defines whether DNS trackers blocking is enabled */
-extern NSString* _Nonnull AEDefaultsDNSRequestsBlocking;
-
-/**
  User defaults key, which defines number of requests
  made in period of logs writing
  */

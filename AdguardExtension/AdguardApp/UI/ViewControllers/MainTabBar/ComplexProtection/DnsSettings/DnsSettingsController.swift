@@ -31,6 +31,7 @@ class DnsSettingsController : UITableViewController {
     @IBOutlet weak var systemDescriptionCell: UITableViewCell!
     @IBOutlet weak var getProCell: UITableViewCell!
     @IBOutlet weak var getPtoTitleLabel: ThemableLabel!
+    @IBOutlet weak var dnsServerSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -66,6 +67,8 @@ class DnsSettingsController : UITableViewController {
     
     private let titleDescriptionCell = 0
     private let titleStateCell = 1
+    
+    private let networkSettingsRow = 2
     
     // MARK: - View Controller life cycle
     
@@ -127,6 +130,11 @@ class DnsSettingsController : UITableViewController {
             cell.isHidden = !proStatus
             cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
+            
+            if indexPath.row == networkSettingsRow && proStatus {
+                cell.isHidden = !configuration.developerMode
+                dnsServerSeparator.isHidden = !configuration.developerMode
+            }
         }
 
         theme.setupTableCell(cell)
@@ -141,6 +149,10 @@ class DnsSettingsController : UITableViewController {
         }
         
         if indexPath.section == menuSection {
+            if indexPath.row == networkSettingsRow && proStatus {
+                return configuration.developerMode ? normalHeight : 0.0
+            }
+            
             return proStatus ? normalHeight : 0.0
         }
         
