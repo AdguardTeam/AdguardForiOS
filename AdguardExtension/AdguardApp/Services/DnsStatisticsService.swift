@@ -131,6 +131,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         group.enter()
         
         ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
+            if expired {
+                return
+            }
+            
             self?.readHandler?.inTransaction { (db, rollback) in
                 let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
                 guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else { return }
