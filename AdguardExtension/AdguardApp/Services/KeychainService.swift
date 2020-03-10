@@ -48,6 +48,8 @@ class KeychainService : KeychainServiceProtocol {
         get {
             let (storedId, notFound) = getStoredAppId()
             
+            DDLogInfo("(KeychainService) get appId. strored: \(storedId ?? "nil")")
+            
             migrate3_0_0appIdIfNeeded(storedId)
             
             if storedId != nil {
@@ -57,6 +59,7 @@ class KeychainService : KeychainServiceProtocol {
             if notFound {
                 let newAppId = generateAppId()
                 
+                DDLogInfo("(KeychainService) generate new app id: \(newAppId)")
                 if !save(appId: newAppId) {
                     return nil
                 }
@@ -279,6 +282,8 @@ class KeychainService : KeychainServiceProtocol {
         
         var result: CFTypeRef?
         let status = SecItemAdd(query as CFDictionary, &result)
+        
+        DDLogInfo("(KeychainService) save app id status: \(status)")
         
         let success = status == errSecSuccess
         
