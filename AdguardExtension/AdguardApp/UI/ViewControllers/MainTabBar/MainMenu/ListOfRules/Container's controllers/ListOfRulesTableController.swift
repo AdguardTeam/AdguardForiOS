@@ -33,10 +33,12 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private let rulesSection = 2
     
     /* Rows */
-    private let enableRow = 0
-    private let descriptionRow = 1
+    private let titleRow = 0
+    private let enableRow = 1
+    private let descriptionRow = 2
     
     /* Reuse identifiers */
+    private let titleListOfRulesId = "titleListOfRulesCell"
     private let enabledReuseId = "enabledCell"
     private let descriptionReuseId = "descriptionReuseId"
     private let addRuleReuseId = "addRuleCell"
@@ -81,6 +83,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             self?.tableView.reloadData()
         }
         
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
         updateTheme()
     }
     
@@ -129,7 +133,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         if state == .normal {
             switch section {
             case enableListOfRulesSection:
-                return 2
+                return 3
             case addRuleSection:
                 return 1
             case rulesSection:
@@ -145,6 +149,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if state == .normal {
             switch (indexPath.section, indexPath.row) {
+            case (enableListOfRulesSection, titleRow):
+                return setupTitleListOfRulesCell()
             case (enableListOfRulesSection, enableRow):
                 return setupEnableListOfRulesCell()
             case (enableListOfRulesSection, descriptionRow):
@@ -186,14 +192,14 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
+
         if state == .normal && (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.developerMode {
             return 0.0
         }
-        
+
         return tableView.rowHeight
     }
-    
+
     // MARK: - ListOfRulesModelDelegate method
     
     func listOfRulesChanged() {
@@ -274,6 +280,16 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     }
     
     // MARK: - Cells setup functions
+    
+    private func setupTitleListOfRulesCell() -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: titleListOfRulesId) as? TitleListOfRulesCell {
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.titleLabel)
+            cell.titleLabel.text = model?.title
+            return cell
+        }
+        return UITableViewCell()
+    }
     
     private func setupEnableListOfRulesCell() -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: enabledReuseId) as? EnableListOfRulesCell{

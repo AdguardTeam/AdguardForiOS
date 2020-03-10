@@ -86,9 +86,9 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
-    
-    private let showGetProSwgueId = "showGetProSwgueId"
-    
+
+    private let showTrackingProtectionSegue = "showTrackingProtection"
+
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -166,7 +166,7 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
     }
     
     func proStatusEnableFailure() {
-        performSegue(withIdentifier: showGetProSwgueId, sender: self)
+        performSegue(withIdentifier: showTrackingProtectionSegue, sender: self)
     }
     
     // MARK: - Table view delegates and dataSource methods
@@ -176,21 +176,6 @@ class ComplexProtectionController: UITableViewController, VpnServiceNotifierDele
         theme.setupTableCell(cell)
         
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == safariProtectionCell {
-            safariProtectionSwitch.setOn(!safariProtectionSwitch.isOn, animated: true)
-            safariProtectionChanged(safariProtectionSwitch)
-        } else if indexPath.row == systemProtectionCell {
-            if proStatus{
-                systemProtectionSwitch.setOn(!systemProtectionSwitch.isOn, animated: true)
-                systemProtectionChanged(systemProtectionSwitch)
-            } else {
-                proStatusEnableFailure()
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Observer

@@ -205,11 +205,6 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var filtersJson: String  {
         get {
-            // If DNS trackers blocking option is off, we return empty json
-            if !resources.dnsRequestBlockingEnabled {
-                return "[]"
-            }
-            
             let filtersToAdd = filters.filter { $0.enabled }
             var json = filtersToAdd.map({ (filter) -> [String:Any] in
                 return ["id":filter.id, "path":filterPath(filterId: filter.id)]

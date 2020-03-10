@@ -53,8 +53,6 @@ class DnsProviderContainerController : UIViewController {
         updateTheme()
         
         guard let provider = provider else  { return }
-        navigationItem.title = provider.name
-        
         guard let protcol = provider.getActiveProtocol(resources) else { return }
         chosenProtocol = protcol
     }

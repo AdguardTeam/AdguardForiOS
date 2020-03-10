@@ -107,7 +107,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     private let vpnManager: APVPNManager
     
     /* Variables */
-    private let fileName = "dns_blacklist.txt"
+    private let fileName = "dns_blocklist.txt"
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()

@@ -116,15 +116,6 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var dnsRequestBlockingEnabled: Bool {
-        get {
-            filterEnabled(defaultsKey: AEDefaultsDNSRequestsBlocking)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsDNSRequestsBlocking)
-        }
-    }
-    
     private func filterEnabled(defaultsKey: String)->Bool {
         let defaultValue = true
         guard let value = sharedDefaults().object(forKey: defaultsKey) as? Bool else {
