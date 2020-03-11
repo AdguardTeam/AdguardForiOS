@@ -26,8 +26,20 @@ class AboutTableController : UITableViewController {
     
     private let openUrlFrom = "about"
     
-    private let licenseSegue = "licenseSegue"
-    private let trialSegue = "trialSegue"
+    // Sections
+    private let titleSection = 0
+    private let actionsSection = 1
+    
+    // Rows
+    private let tutorialRow = 0
+    private let websiteRow = 1
+    private let forumRow = 2
+    private let acknowledgmentsRow = 3
+    private let licenseRow = 4
+    
+    @IBOutlet weak var logoImage: ThemeableImageView!
+    @IBOutlet weak var versionLabel: ThemableLabel!
+    @IBOutlet var loginButton: UIBarButtonItem!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -35,22 +47,43 @@ class AboutTableController : UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private var notificationToken: NotificationToken?
+    private var proStatusObservation: NSKeyValueObservation?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         notificationToken =  NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        proStatusObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItems = self.configuration.proStatus ? [] : [self.loginButton]
+            }
+        }
+        
+        if !configuration.proStatus {
+            navigationItem.rightBarButtonItems = [loginButton]
+        }
+        
+        versionLabel.text = ACLocalizedString("about_version", nil) + " " +  ADProductInfo.versionWithBuildNumber()
+        
         updateTheme()
+        setupBackButton()
     }
     
     // MARK: - tableview delegate methods
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -58,26 +91,31 @@ class AboutTableController : UITableViewController {
         return cell
     }
     
-    // MARK: - Actions
- 
-    @IBAction func siteAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
-    }
-    @IBAction func forumAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: forumAction, from: openUrlFrom)
-    }
-    @IBAction func thanksAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
-    }
-    
-    @IBAction func licenseAction(_ sender: Any) {
-        let segueId = configuration.proStatus ? licenseSegue : trialSegue
-        performSegue(withIdentifier: segueId, sender: self)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case tutorialRow:
+            // SHOW Tutorial from other request
+            break
+        case websiteRow:
+            UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
+        case forumRow:
+            UIApplication.shared.openAdguardUrl(action: forumAction, from: openUrlFrom)
+        case acknowledgmentsRow:
+            UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
+        case licenseRow:
+            break
+        default:
+            break
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - private methods
     private func updateTheme() {
+        theme.setupImage(logoImage)
         theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
