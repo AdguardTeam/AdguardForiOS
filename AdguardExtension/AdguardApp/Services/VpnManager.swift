@@ -33,8 +33,11 @@ protocol VpnManagerProtocol {
      */
     func installVpnConfiguration(completion: @escaping (Error?)->Void)
 
-    /** checks vpn cpnfiguration is installed */
+    /** returns vpn cpnfiguration installed status */
     var vpnInstalled: Bool { get }
+    
+    /** checks vpn cpnfiguration is installed */
+    func checkVpnInstalled(completion: @escaping (Error?)->Void)
 }
 
 enum VpnManagerError: Error {

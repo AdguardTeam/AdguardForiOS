@@ -83,8 +83,13 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
-            
-            self.switchSystemProtection(state: false, for: nil) {_ in}
+            self.resources.systemProtectionEnabled = false
+        }
+        
+        vpnManager.checkVpnInstalled { (_) in
+            if !vpnManager.vpnInstalled {
+                resources.systemProtectionEnabled = false
+            }
         }
     }
     
