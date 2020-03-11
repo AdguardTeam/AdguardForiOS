@@ -456,15 +456,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
-    func getReceipt() -> String? {
-        // Load the receipt from the app bundle.
-        guard let receiptURL = Bundle.main.appStoreReceiptURL,
-              let receiptData = try? Data(contentsOf: receiptURL) else { return nil }
-        let encReceipt = receiptData.base64EncodedString()
-        
-        return encReceipt
-    }
-    
     @objc
     func checkPremiumStatusChanged() {
         

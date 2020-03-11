@@ -1211,6 +1211,7 @@
 		D081FC332418EB59000A10DA /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
 		D081FC342418EB76000A10DA /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
 		D081FC352418EB8E000A10DA /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
+		D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC3624190CA8000A10DA /* DnsProvidersServiceTest.swift */; };
 		D082D50A2310047E00799D98 /* AASFilterSubscriptionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D082D5092310047E00799D98 /* AASFilterSubscriptionParserTest.swift */; };
 		D08C96CF1FE3C459002456B3 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
 		D08CE426240D37B200A70089 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
@@ -2386,6 +2387,7 @@
 		D08187C92264C89400E961B5 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		D081FC15241250D9000A10DA /* ComplexProtectionServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionServiceTest.swift; sourceTree = "<group>"; };
 		D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionService.swift; sourceTree = "<group>"; };
+		D081FC3624190CA8000A10DA /* DnsProvidersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersServiceTest.swift; sourceTree = "<group>"; };
 		D082D4F0230FE85000799D98 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = bg; path = bg.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D082D4F1230FE85100799D98 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		D082D4F2230FE85300799D98 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -3495,6 +3497,7 @@
 				D081FC15241250D9000A10DA /* ComplexProtectionServiceTest.swift */,
 				D0EC86B223A772BF00EDF107 /* DnsFiltersServiceTest.swift */,
 				D0D5949623AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift */,
+				D081FC3624190CA8000A10DA /* DnsProvidersServiceTest.swift */,
 				D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */,
 				D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */,
 				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
@@ -6142,6 +6145,7 @@
 				65EC9BD91BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				D0C37ECF22A687B30004337D /* DnsProvidersService.swift in Sources */,
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
+				D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */,
 				D0C37ED022A687D20004337D /* DnsProxyService.swift in Sources */,
 				D04C2B7A240FA7DC009330A8 /* ComplexProtectionServiceMock.swift in Sources */,
 				D0D5949823AA3B8F0033CAF3 /* DnsLogRecordsService.swift in Sources */,

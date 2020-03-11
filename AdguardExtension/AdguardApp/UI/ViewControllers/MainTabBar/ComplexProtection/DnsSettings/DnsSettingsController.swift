@@ -103,6 +103,7 @@ class DnsSettingsController : UITableViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
                 self?.complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
                 self?.stateFromWidget = nil
+                self?.updateVpnInfo()
             }
         } else {
             DispatchQueue.main.async {[weak self] in

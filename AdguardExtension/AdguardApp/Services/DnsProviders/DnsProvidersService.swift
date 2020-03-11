@@ -78,12 +78,14 @@ protocol DnsProvidersServiceProtocol {
         }
         
         set {
+            willChangeValue(for: \.allProviders)
             customProvidersInternal = newValue
             if customProvidersInternal != nil {
                 let data = NSKeyedArchiver.archivedData(withRootObject: customProvidersInternal!)
                 resources.sharedDefaults().set(data, forKey: APDefaultsCustomDnsProviders)
                 resources.sharedDefaults().synchronize()
             }
+            didChangeValue(for: \.allProviders)
         }
     }
     
@@ -143,7 +145,7 @@ protocol DnsProvidersServiceProtocol {
             
             // search provider by server id.
             customProviders = customProviders.filter {
-                $0.servers?.first?.serverId == provider.servers?.first?.serverId
+                $0.servers?.first?.serverId != provider.servers?.first?.serverId
             }
             
             self.didChangeValue(forKey: "allProviders")
