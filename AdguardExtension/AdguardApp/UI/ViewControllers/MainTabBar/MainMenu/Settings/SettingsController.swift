@@ -197,15 +197,19 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        let padding: CGFloat = isIphone ? 16.0 : 24.0
+        let font = UIFont.systemFont(ofSize: isIphone ? 20.0 : 30.0, weight: .medium)
+        let labelHeight: CGFloat = isIphone ? 20.0 : 30.0
         
         let height = calculateHeaderHeight(section: section)
         
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: height))
         view.backgroundColor = theme.backgroundColor
         
-        let label = ThemableLabel(frame: CGRect(x: 24.0, y: height - 32, width: self.view.frame.width - 24.0, height: 24.0))
+        let label = ThemableLabel(frame: CGRect(x: padding, y: height - 32, width: self.view.frame.width - padding, height: labelHeight))
         label.greyText = true
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.font = font
         label.text = headersTitles[section]
         label.textAlignment = .left
         theme.setupLabel(label)
