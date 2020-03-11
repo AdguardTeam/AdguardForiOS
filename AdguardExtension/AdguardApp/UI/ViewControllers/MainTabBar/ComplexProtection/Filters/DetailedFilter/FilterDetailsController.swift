@@ -30,7 +30,6 @@ protocol FilterDetailsControllerTableViewDelegate {
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
     
     var filter: FilterDetailedInterface!
-    var isCustom: Bool!
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
@@ -48,10 +47,13 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = filter.name
-        deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
         
+        self.title = filter.name
+        
+        deleteButtonHeightConstraint.constant = filter.removable ? 60 : 0
         deleteButton.isHidden = !filter.removable
+        deleteButton.contentEdgeInsets.left = isIphone ? 16.0 : 24
         
         updateTheme()
         

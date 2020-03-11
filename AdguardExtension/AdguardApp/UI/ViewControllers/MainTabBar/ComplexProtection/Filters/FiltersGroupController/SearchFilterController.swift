@@ -237,7 +237,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
             if let destinationVC = segue.destination as? FilterDetailsController {
                 let filter = group.filters[selectedFilter]
                 destinationVC.filter = filter
-                destinationVC.isCustom = filter.groupId == FilterGroupId.custom
             }
         }
     }

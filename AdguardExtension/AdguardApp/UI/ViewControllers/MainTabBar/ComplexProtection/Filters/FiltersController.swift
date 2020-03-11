@@ -132,7 +132,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
             let filter = group?.filters[selectedIndex.row]
             
             detailsController.filter = filter
-            detailsController.isCustom = group?.groupId == FilterGroupId.custom ? true : false
         }
     }
     
