@@ -93,6 +93,13 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     }
     
     /**
+    this flag indicates that at least one safari content blocker is enabled in safari settings
+    */
+    var someContentBlockersEnabled: Bool {
+        return contentBlockerEnabled?.values.contains(true) ?? false
+    }
+    
+    /**
      dark or light theme of app UI
     */
     @objc dynamic var darkTheme: Bool {

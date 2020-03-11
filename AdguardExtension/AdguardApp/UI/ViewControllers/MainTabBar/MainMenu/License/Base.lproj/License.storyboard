@@ -11,7 +11,7 @@
         <!--Get Pro Table Controller-->
         <scene sceneID="HSX-bI-e9q">
             <objects>
-                <tableViewController id="y2N-tV-Unf" customClass="GetProTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="y2N-tV-Unf" customClass="GetProTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ndi-AP-Wlc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -718,7 +718,7 @@
         <!--AdGuard Premium-->
         <scene sceneID="9v9-9v-ByE">
             <objects>
-                <viewController storyboardIdentifier="GetProController" id="gVb-oh-MXP" customClass="GetProController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GetProController" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="gVb-oh-MXP" customClass="GetProController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xAN-CY-VAv"/>
                         <viewControllerLayoutGuide type="bottom" id="7QO-OD-IpH"/>
@@ -787,6 +787,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accountView" destination="YZG-h1-909" id="ox3-o8-9f1"/>
+                        <outlet property="exitButton" destination="YmR-dW-KlO" id="LeY-6g-ZdE"/>
                         <outlet property="goToMyAccountHeight" destination="ENZ-fq-jz2" id="EUh-4k-evW"/>
                         <outlet property="loginBarButton" destination="UaA-JQ-kV4" id="4kD-dX-9HF"/>
                         <outlet property="logoutBarButton" destination="70b-CS-wqh" id="bgv-ye-bwg"/>
@@ -806,6 +807,11 @@
                     <color key="tintColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="logoutAction:" destination="gVb-oh-MXP" id="SbG-5H-Bix"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="cross" id="YmR-dW-KlO">
+                    <connections>
+                        <action selector="exitAction:" destination="gVb-oh-MXP" id="dWc-2B-3iH"/>
                     </connections>
                 </barButtonItem>
             </objects>

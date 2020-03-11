@@ -213,6 +213,7 @@ class GetProTableController: UITableViewController {
     // MARK: - private methods
     
     private func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

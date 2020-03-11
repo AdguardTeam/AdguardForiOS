@@ -18,15 +18,22 @@
 
 import Foundation
 
+protocol GetProControllerDelegate {
+    func getProControllerClosed()
+}
+
 class GetProController: UIViewController {
+    
+    var needsShowingExitButton = false
+    var getProControllerDelegate: GetProControllerDelegate?
     
     // MARK: - properties
     private var notificationObserver: Any?
     private var notificationToken: NotificationToken?
     
-    let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-    let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+    private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
@@ -36,6 +43,7 @@ class GetProController: UIViewController {
     
     @IBOutlet var loginBarButton: UIBarButtonItem!
     @IBOutlet var logoutBarButton: UIBarButtonItem!
+    @IBOutlet var exitButton: UIBarButtonItem!
     @IBOutlet weak var goToMyAccountHeight: NSLayoutConstraint!
     
     // MARK: - constants
@@ -70,21 +78,18 @@ class GetProController: UIViewController {
             }
         }
         
-        setupBackButton()
         updateViews()
         updateTheme()
         
         myAccountButton.makeTitleTextUppercased()
+        
+        if needsShowingExitButton {
+            navigationItem.leftBarButtonItems = [exitButton]
+        } else {
+            setupBackButton()
+        }
         let isIphone = UIDevice.current.userInterfaceIdiom == .phone
         myAccountButton.contentEdgeInsets.left = isIphone ? 16.0 : 24.0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     deinit {
@@ -94,6 +99,11 @@ class GetProController: UIViewController {
     }
     
     // MARK: - actions
+    @IBAction func exitAction(_ sender: UIBarButtonItem) {
+        navigationController?.dismiss(animated: true) {[weak self] in
+            self?.getProControllerDelegate?.getProControllerClosed()
+        }
+    }
     
     @IBAction func accountAction(_ sender: Any) {
         UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
@@ -195,7 +205,6 @@ class GetProController: UIViewController {
     }
     
     private func updateTheme() {
-        
         view.backgroundColor = theme.backgroundColor
         separator2.backgroundColor = theme.separatorColor
         theme.setupNavigationBar(navigationController?.navigationBar)
