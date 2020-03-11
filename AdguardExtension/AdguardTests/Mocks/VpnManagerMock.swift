@@ -35,5 +35,9 @@ class VpnManagerMock: NSObject, VpnManagerProtocol {
         completion(nil)
     }
     
+    func checkVpnInstalled(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
+    
     var vpnInstalled: Bool = true
 }

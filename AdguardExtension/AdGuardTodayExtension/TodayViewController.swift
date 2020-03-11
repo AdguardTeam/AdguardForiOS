@@ -94,8 +94,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         super.init(coder: coder)
         
-        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self, configuration: configuration)
-        
         DDLogInfo("(TodayViewController) - init end")
         ACLLogger.singleton()?.flush()
     }
