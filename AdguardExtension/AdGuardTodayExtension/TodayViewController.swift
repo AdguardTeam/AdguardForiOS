@@ -74,6 +74,16 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
+        
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        
+        #if DEBUG
+        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+        #endif
+        
+        DDLogInfo("(TodayViewController) - init start")
+        
         safariService = SafariService(resources: resources)
         purchaseService = PurchaseService(network: networkService, resources: resources)
         configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
@@ -83,10 +93,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         super.init(coder: coder)
         
         comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self, configuration: configuration)
-        initLogger()
+        
+        DDLogInfo("(TodayViewController) - init end")
+        ACLLogger.singleton()?.flush()
     }
     
     override func viewDidLoad() {
+        DDLogInfo("(TodayViewController) - viewDidLoad")
         super.viewDidLoad()
         
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
@@ -101,6 +114,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        DDLogInfo("(TodayViewController) - viewWillAppear")
         super.viewWillAppear(animated)
         addStatisticsObservers()
     }
@@ -111,8 +125,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            let statistics = dnsStatisticsService.readStatistics()
-            changeTextForButton(statistics: statistics, keyPath: keyPath)
+        DDLogInfo("(TodayViewController) - observeValue")
+        let statistics = dnsStatisticsService.readStatistics()
+        changeTextForButton(statistics: statistics, keyPath: keyPath)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -279,18 +294,6 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
                 self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
             }
         })
-    }
-    
-    /**
-     Inits standard logger
-     */
-    private func initLogger(){
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
     }
     
     /**
