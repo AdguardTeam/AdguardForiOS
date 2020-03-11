@@ -1628,21 +1628,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCellID" rowHeight="151" id="0tQ-9p-9tM" customClass="FilterCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="151"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCellID" id="0tQ-9p-9tM" customClass="FilterCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="712" height="64.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0tQ-9p-9tM" id="gnA-Kf-bfZ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="151"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xS8-f2-3yC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="26" y="15" width="310" height="0.0"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <rect key="frame" x="24" y="20" width="591" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                             <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                            </variation>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uFy-wS-wjP" customClass="FilterCellUISwitch" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="535" y="16" width="51" height="31"/>
@@ -1662,6 +1665,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x93-x6-7Fw" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="26" y="41" width="496" height="0.0"/>
@@ -1671,6 +1677,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GiY-N7-EtV" customClass="FilterTagsView" customModule="Adguard" customModuleProvider="target">
                                             <rect key="frame" x="26" y="41" width="496" height="95"/>
@@ -1679,18 +1688,36 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="GiY-N7-EtV" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="leading" id="6E0-G2-7pz"/>
-                                        <constraint firstItem="kab-Sc-THo" firstAttribute="top" secondItem="xS8-f2-3yC" secondAttribute="bottom" constant="8" id="8hP-cK-86b"/>
-                                        <constraint firstItem="xS8-f2-3yC" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="15" id="96e-Gn-HA2"/>
-                                        <constraint firstItem="xS8-f2-3yC" firstAttribute="leading" secondItem="gnA-Kf-bfZ" secondAttribute="leading" constant="26" id="BtA-Bc-sPe"/>
-                                        <constraint firstItem="uFy-wS-wjP" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="trailing" constant="13" id="D0c-IH-0qI"/>
-                                        <constraint firstAttribute="bottom" secondItem="GiY-N7-EtV" secondAttribute="bottom" constant="15" id="LMP-kU-aXp"/>
-                                        <constraint firstItem="GiY-N7-EtV" firstAttribute="top" secondItem="x93-x6-7Fw" secondAttribute="bottom" id="MFl-xD-hAD"/>
-                                        <constraint firstItem="uFy-wS-wjP" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="16" id="ZOG-Fs-4Hq"/>
+                                        <constraint firstItem="kab-Sc-THo" firstAttribute="top" secondItem="xS8-f2-3yC" secondAttribute="bottom" constant="8" id="8hP-cK-86b">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                        </constraint>
+                                        <constraint firstItem="xS8-f2-3yC" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="16" id="96e-Gn-HA2">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
+                                        <constraint firstItem="xS8-f2-3yC" firstAttribute="leading" secondItem="gnA-Kf-bfZ" secondAttribute="leading" constant="16" id="BtA-Bc-sPe">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
+                                        <constraint firstItem="uFy-wS-wjP" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="trailing" constant="16" id="D0c-IH-0qI">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
+                                        <constraint firstAttribute="bottom" secondItem="GiY-N7-EtV" secondAttribute="bottom" constant="16" id="LMP-kU-aXp">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
+                                        <constraint firstItem="GiY-N7-EtV" firstAttribute="top" secondItem="x93-x6-7Fw" secondAttribute="bottom" id="MFl-xD-hAD">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="2"/>
+                                        </constraint>
+                                        <constraint firstItem="uFy-wS-wjP" firstAttribute="top" secondItem="gnA-Kf-bfZ" secondAttribute="top" constant="16" id="ZOG-Fs-4Hq">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        </constraint>
                                         <constraint firstItem="x93-x6-7Fw" firstAttribute="trailing" secondItem="kab-Sc-THo" secondAttribute="trailing" id="cGx-Ms-ijj"/>
-                                        <constraint firstAttribute="trailing" secondItem="uFy-wS-wjP" secondAttribute="trailing" constant="16" id="fwT-WS-a2h"/>
+                                        <constraint firstAttribute="trailing" secondItem="uFy-wS-wjP" secondAttribute="trailing" constant="16" id="fwT-WS-a2h">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
                                         <constraint firstItem="GiY-N7-EtV" firstAttribute="trailing" secondItem="xS8-f2-3yC" secondAttribute="trailing" id="kLx-Sb-Whc"/>
                                         <constraint firstItem="kab-Sc-THo" firstAttribute="leading" secondItem="xS8-f2-3yC" secondAttribute="leading" id="l8s-nR-EgF"/>
-                                        <constraint firstItem="x93-x6-7Fw" firstAttribute="top" secondItem="kab-Sc-THo" secondAttribute="bottom" id="oeK-EH-bkv"/>
+                                        <constraint firstItem="x93-x6-7Fw" firstAttribute="top" secondItem="kab-Sc-THo" secondAttribute="bottom" id="oeK-EH-bkv">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="2"/>
+                                        </constraint>
                                         <constraint firstItem="kab-Sc-THo" firstAttribute="trailing" secondItem="xS8-f2-3yC" secondAttribute="trailing" id="sxA-Xl-0iw"/>
                                         <constraint firstItem="x93-x6-7Fw" firstAttribute="leading" secondItem="kab-Sc-THo" secondAttribute="leading" id="yNG-Na-fuI"/>
                                     </constraints>
@@ -1934,7 +1961,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="u0d-JL-uIG"/>
-        <segue reference="3B2-aA-sGN"/>
+        <segue reference="6Ap-Zj-DX8"/>
+        <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
 </document>

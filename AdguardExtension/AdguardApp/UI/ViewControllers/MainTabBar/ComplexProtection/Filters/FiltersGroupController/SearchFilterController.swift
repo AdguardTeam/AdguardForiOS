@@ -93,19 +93,28 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         guard let group = viewModel?.groups?[section] else { return UIView() }
-        let height: CGFloat = 72.0
+        
+        // Section header sizes
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        let padding: CGFloat = isIphone ? 16.0 : 24.0
+        let font: UIFont = isIphone ? UIFont.systemFont(ofSize: 20, weight: .medium) : UIFont.systemFont(ofSize: 40, weight: .medium)
+        let labelHeight: CGFloat = isIphone ? 24.0 : 44.0
+        let topOffset: CGFloat = isIphone ? 32.0 : 64.0
+        let bottomOffset: CGFloat = isIphone ? 16.0 : 32.0
+        
+        let height: CGFloat = labelHeight + topOffset + bottomOffset
         let width: CGFloat = self.view.frame.width
         
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
         view.backgroundColor = theme.backgroundColor
             
-        let label = ThemableLabel(frame: CGRect(x: 26.0, y: height - 32.0, width: width - 24.0, height: 24.0))
+        let label = ThemableLabel(frame: CGRect(x: padding, y: height - topOffset, width: width - padding, height: labelHeight))
         let segueButton = UIButton(frame: view.frame)
         segueButton.backgroundColor = .clear
         segueButton.tag = section
         segueButton.addTarget(self, action: #selector(segueButtonTapped(_:)), for: .touchUpInside)
         
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.font = font
         label.text = group.name
         label.textAlignment = .left
         label.greyText = true
@@ -117,7 +126,8 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 72.0
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        return isIphone ? 72.0 : 140.0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
