@@ -22,22 +22,6 @@ import NetworkExtension
 
 // MARK: - Complex protection Interface -
 
-protocol SafariProtectionServiceProtocol {
-    var safariProtectionEnabled: Bool { get }
-}
-
-class SafariProtectionService: SafariProtectionServiceProtocol {
-    
-    let resources: AESharedResourcesProtocol
-    
-    init(resources: AESharedResourcesProtocol) {
-        self.resources = resources
-    }
-    var safariProtectionEnabled: Bool {
-        return resources.safariProtectionEnabled && resources.complexProtectionEnabled
-    }
-}
-
 @objc
 protocol ComplexProtectionServiceProtocol: class {
     

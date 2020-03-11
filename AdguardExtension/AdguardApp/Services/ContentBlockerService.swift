@@ -94,8 +94,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void) {
         DDLogInfo("(ContentBlockerService) reloadJsons")
         
-        DDLogInfo("(ContentBlockerService) reloadJsons")
-        
 #if !APP_EXTENSION
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
 #endif
