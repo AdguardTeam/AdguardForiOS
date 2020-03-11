@@ -35,7 +35,6 @@ class AboutTableController : UITableViewController {
     private let websiteRow = 1
     private let forumRow = 2
     private let acknowledgmentsRow = 3
-    private let licenseRow = 4
     
     @IBOutlet weak var logoImage: ThemeableImageView!
     @IBOutlet weak var versionLabel: ThemableLabel!
@@ -94,16 +93,13 @@ class AboutTableController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case tutorialRow:
-            // SHOW Tutorial from other request
-            break
+            showVideoTutorial()
         case websiteRow:
             UIApplication.shared.openAdguardUrl(action: homeAction, from: openUrlFrom)
         case forumRow:
             UIApplication.shared.openAdguardUrl(action: forumAction, from: openUrlFrom)
         case acknowledgmentsRow:
             UIApplication.shared.openAdguardUrl(action: acknowledgmentsAction, from: openUrlFrom)
-        case licenseRow:
-            break
         default:
             break
         }
