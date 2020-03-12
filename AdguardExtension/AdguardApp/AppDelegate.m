@@ -679,8 +679,4 @@ static NSTimeInterval lastCheckTime;
     });
 }
 
-- (void)openRateAppDialogController{
-    [helper openRateAppDialogController];
-}
-
 @end

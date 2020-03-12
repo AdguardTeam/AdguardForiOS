@@ -161,7 +161,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         
     }
     else{
-        
         [ACSSystemUtils showSimpleAlertForController:parent withTitle:ACLocalizedString(@"common_error_title", @"")
                                              message:ACLocalizedString(@"bug_report_sending_error", @"(AEUIAboutController) Alert message if user have no e-mail account on device")];
     }

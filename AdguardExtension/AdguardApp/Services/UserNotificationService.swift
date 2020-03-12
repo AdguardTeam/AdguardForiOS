@@ -19,15 +19,6 @@
 import Foundation
 import UserNotifications
 
-// Must support NSSecureCoding thus it is Int
-enum PushNotificationCommands: Int {
-    typealias RawValue = Int
-    
-    static let command: String = "command"
-    
-    case openRateAppDialogController = 0
-}
-
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()

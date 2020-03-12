@@ -107,7 +107,7 @@ extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 
 /**
- User Defaults key, which defines app first launch date. Is used to show Rate me allert.
+ User Defaults key, which defines number of entries into an app from last build version.
  */
 extern NSString * _Nonnull AEDefaultsAppEntryCount;
 
