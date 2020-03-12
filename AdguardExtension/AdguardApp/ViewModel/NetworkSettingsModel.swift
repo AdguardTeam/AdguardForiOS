@@ -41,6 +41,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterWifiDataEnabled = newValue
+            vpnManager.updateSettings(completion: nil)
         }
     }
     
@@ -50,6 +51,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterMobileDataEnabled = newValue
+            vpnManager.updateSettings(completion: nil)
         }
     }
     
@@ -68,9 +70,11 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     // MARK: - Private variables
     
     private var networkSettingsService: NetworkSettingsServiceProtocol
+    private var vpnManager: VpnManagerProtocol
     
-    init(networkSettingsService: NetworkSettingsServiceProtocol) {
+    init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol) {
         self.networkSettingsService = networkSettingsService
+        self.vpnManager = vpnManager
     }
     
     // MARK: - Global methods
@@ -78,12 +82,14 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     func addException(rule: String) {
         let exception = WifiException(rule: rule, enabled: true)
         networkSettingsService.add(exception: exception)
+        vpnManager.updateSettings(completion: nil)
     }
     
     func delete(rule: String) {
         for exception in exceptions {
             if exception.rule == rule {
                 networkSettingsService.delete(exception: exception)
+                vpnManager.updateSettings(completion: nil)
             }
         }
     }
@@ -93,6 +99,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
             if exception.rule == rule {
                 let newException = WifiException(rule: newRule, enabled: exception.enabled)
                 networkSettingsService.change(oldException: exception, newException: newException)
+                vpnManager.updateSettings(completion: nil)
             }
         }
     }
@@ -102,6 +109,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
             if exception.rule == rule {
                 let newException = WifiException(rule: exception.rule, enabled: newEnabled)
                 networkSettingsService.change(oldException: exception, newException: newException)
+                vpnManager.updateSettings(completion: nil)
             }
         }
     }

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, VpnServiceNotifierDelegate, ComplexProtectionDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
+class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -123,7 +123,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     // MARK: - Variables
     
     private var iconButton: UIButton? = nil
-    private var complexText = ""
     private let getProSegueId = "getProSegue"
     
     private var proStatus: Bool {
@@ -150,7 +149,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var vpnService: VpnServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
@@ -164,7 +162,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
-    
+    private var vpnConfigurationObserver: NotificationToken!
     
     // MARK: - View Controller life cycle
     
@@ -176,7 +174,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         addObservers()
         chooseRequest()
-        changeProtectionStatusLabel()
         setupVoiceOverLabels()
     
         chartModel?.chartPointsChangedDelegate = self
@@ -200,12 +197,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        vpnService.notifier = self
-        complexProtection.delegate = self
         updateTheme()
         observeProStatus()
         updateTextForButtons()
-        checkProtectionStates()
+        updateProtectionStates()
+        updateProtectionStatusText()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -292,23 +288,62 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
-        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn)
+    
         applyingChangesStarted()
+        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn, for: self) { [weak self] error in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.applyingChangesEnded()
+                
+                if error != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+                }
+            }
+        }
+        updateProtectionStates()
     }
     
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
-        complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self)
-        applyingChangesStarted()
+        if configuration.proStatus {
+            applyingChangesStarted()
+            complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self) { [weak self] error in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    
+                    self.applyingChangesEnded()
+                    if error != nil {
+                        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
+                    }
+                }
+            }
+        }
+        else {
+            performSegue(withIdentifier: getProSegueId, sender: self)
+        }
+        updateProtectionStates()
     }
-    
     
     // MARK: - Complex protection switch action
     
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
-        complexProtection.switchComplexProtection(state: enabled, for: self)
         applyingChangesStarted()
+        complexProtection.switchComplexProtection(state: enabled, for: self) { [weak self] (safariError, systemError) in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.applyingChangesEnded()
+                
+                if safariError != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: safariError?.localizedDescription)
+                }
+                
+                if systemError != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: systemError?.localizedDescription)
+                }
+            }
+        }
+        updateProtectionStates()
     }
     
     
@@ -353,37 +388,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             return
         }
         updateTextForButtons()
-    }
-    
-    
-    // MARK: - Vpn notifiers
-       
-    func tunnelModeChanged() {
-        checkProtectionStates()
-    }
-       
-    func vpnConfigurationChanged(with error: Error?) {
-        if error != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
-            checkProtectionStates()
-        }
-    }
-       
-    func cancelledAddingVpnConfiguration() {
-        checkProtectionStates()
-    }
-    
-    func proStatusEnableFailure() {
-        performSegue(withIdentifier: getProSegueId, sender: self)
-    }
-    
-    // MARK: - Complex protection delegate method
-    
-    func safariProtectionChanged() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.checkProtectionStates()
-        }
     }
     
     // MARK: - ChartPointsChangedDelegate method
@@ -498,10 +502,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    private func changeProtectionStatusLabel(){
-        protectionStatusLabel.text = complexText
-    }
-    
     /**
      Called when "requests" button tapped
      */
@@ -547,7 +547,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: {[weak self] (notification) in
-            self?.checkProtectionStates()
+            self?.updateProtectionStates()
+            self?.updateProtectionStatusText()
         })
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
@@ -564,6 +565,13 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeContentBlockersState()
+        }
+        
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            DispatchQueue.main.async {
+                self?.updateProtectionStates()
+                self?.updateProtectionStatusText()
+            }
         }
 
         observations.append(proObservation)
@@ -598,7 +606,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
-            self?.checkProtectionStates()
+            self?.updateProtectionStates()
         })
     }
     
@@ -613,7 +621,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     Stops indicating that changes are applied
     */
     private func applyingChangesEnded(){
-        changeProtectionStatusLabel()
+        updateProtectionStatusText()
+        updateProtectionStates()
     }
     
     /**
@@ -626,43 +635,46 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self.getProView.isHidden = self.proStatus
             self.statisticsStackView.isHidden = !self.proStatus
             self.changeStatisticsDatesButton.isHidden = !self.proStatus
-            self.systemProtectionButton.buttonIsOn = self.proStatus
+            self.systemProtectionButton.buttonIsOn = self.complexProtection.systemProtectionEnabled
         }
     }
     
     /**
-    Checks state of safari, system and complex protection
+    Update state of safari, system and complex protection
      and updates UI
     */
-    private func checkProtectionStates(){
-        complexProtection.getAllStates {[weak self] (safariEnabled, systemEnabled, complexEnabled) in
-            guard let self = self, !self.updateInProcess else { return }
-
-            DispatchQueue.main.async {
-                
-                self.safariProtectionButton.buttonIsOn = safariEnabled
-                self.systemProtectionButton.buttonIsOn = systemEnabled
-                self.chartView.isEnabled = systemEnabled
-                self.complexProtectionSwitch.setOn(on: complexEnabled)
-                
-                let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
-                self.protectionStateLabel.text = enabledText
-                
-                if safariEnabled && systemEnabled {
-                    self.complexText = ACLocalizedString("complex_enabled", nil)
-                } else if !complexEnabled{
-                    self.complexText = ACLocalizedString("complex_disabled", nil)
-                } else if safariEnabled {
-                    self.complexText = ACLocalizedString("safari_enabled", nil)
-                } else if systemEnabled {
-                    self.complexText = ACLocalizedString("system_enabled", nil)
-                }
-                self.protectionStatusLabel.text = self.complexText
-                self.complexProtectionSwitch.accessibilityLabel = self.complexText
-                
-                self.applyingChangesEnded()
-            }
+    
+    private func updateProtectionStatusText() {
+        
+        let complexText: String
+        
+        switch (complexProtection.safariProtectionEnabled, complexProtection.systemProtectionEnabled, complexProtection.complexProtectionEnabled) {
+        case (true, true, true):
+            complexText = ACLocalizedString("complex_enabled", nil)
+        case (_, _, false):
+            complexText = ACLocalizedString("complex_disabled", nil)
+        case (true, _, _):
+            complexText = ACLocalizedString("safari_enabled", nil)
+        case (_, true, _):
+            complexText = ACLocalizedString("system_enabled", nil)
+        case (false, false, true):
+            // incorrect state
+            complexText = ""
         }
+        
+        protectionStatusLabel.text = complexText
+        complexProtectionSwitch.accessibilityLabel = complexText
+    }
+    
+    private func updateProtectionStates(){
+            
+        let enabledText = complexProtection.complexProtectionEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
+        protectionStateLabel.text = enabledText
+        
+        self.safariProtectionButton.buttonIsOn = complexProtection.safariProtectionEnabled
+        self.systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
+        self.chartView.isEnabled = complexProtection.systemProtectionEnabled
+        self.complexProtectionSwitch.setOn(on: complexProtection.complexProtectionEnabled)
     }
     
     /**

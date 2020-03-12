@@ -18,7 +18,6 @@
 #import "NSString+Utils.h"
 #import "AEWhitelistDomainObject.h"
 #import "AESFilterConverter.h"
-#import "APVPNManager.h"
 #import "ACDnsUtils.h"
 #import "DDLogMacros.h"
 #import "ACNUrlUtils.h"
@@ -36,3 +35,4 @@
 #import "APStatisticsTable.h"
 #import "ACNIPUtils.h"
 #import "ADLocales.h"
+#import "APCommonSharedResources.h"

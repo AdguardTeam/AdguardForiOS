@@ -18,6 +18,8 @@
 
 #import "ADBTableRow.h"
 
+@class DnsLogRecord;
+
 @interface APDnsLogTable : ADBTableRow
 
 @property (nonatomic, nonnull) NSNumber* rowid;

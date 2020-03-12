@@ -37,9 +37,10 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
         return AEThemeMode.init(themeMode)
     }
     
-    var systemAppearenceIsDark: Bool
+    var systemAppearenceIsDark: Bool = false
     
-    var resources: AESharedResourcesProtocol
+    var resources: AESharedResourcesProtocol!
+    var purchaseService: PurchaseServiceProtocol?
     
     var darkTheme: Bool {
         switch userThemeMode {
@@ -55,7 +56,7 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     }
     
     var proStatus: Bool {
-        return false
+        return purchaseService?.isProPurchased ?? false
     }
     
     var purchasedThroughLogin: Bool {
@@ -63,13 +64,22 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     }
     
     @objc init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool) {
-        self.resources = resources
-        self.systemAppearenceIsDark = systemAppearenceIsDark
-        allContentBlockersEnabled = true
-        someContentBlockersEnabled = true
+        super.init()
+        initialize(withResources: resources, systemAppearenceIsDark: systemAppearenceIsDark, purchaseService: nil)
     }
     
-    var allContentBlockersEnabled: Bool
+    init(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool, purchaseService: PurchaseServiceProtocol?) {
+        super.init()
+        initialize(withResources: resources, systemAppearenceIsDark: systemAppearenceIsDark, purchaseService: purchaseService)
+    }
     
-    var someContentBlockersEnabled: Bool
+    func initialize(withResources resources: AESharedResourcesProtocol, systemAppearenceIsDark: Bool, purchaseService: PurchaseServiceProtocol?) {
+        self.resources = resources
+        self.systemAppearenceIsDark = systemAppearenceIsDark
+        self.purchaseService = purchaseService
+    }
+    
+    var allContentBlockersEnabled: Bool = true
+    
+    var someContentBlockersEnabled: Bool = true
 }

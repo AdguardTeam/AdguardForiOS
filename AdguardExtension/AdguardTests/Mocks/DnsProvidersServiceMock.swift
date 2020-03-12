@@ -18,21 +18,38 @@
 
 import Foundation
 
-class UserNotificationServiceMock: UserNotificationServiceProtocol {
+class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    var allProviders: [DnsProviderInfo] = []
     
-    var postNotificationWasCalled = false
+    var predefinedProviders: [DnsProviderInfo] = []
     
-    func requestPermissions() {
+    var customProviders: [DnsProviderInfo] = []
+    
+    var activeDnsServer: DnsServerInfo?
+    
+    var activeDnsProvider: DnsProviderInfo?
+    
+    var currentServerName: String = ""
+    
+    func addProvider(name: String, upstreams: [String]) -> DnsProviderInfo {
+        return DnsProviderInfo(name: "")
     }
     
-    func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?) {
-        postNotificationWasCalled = true
+    func deleteProvider(_ provider: DnsProviderInfo) {
     }
     
-    func postNotificationInForeground(body: String, title: String) {
-        
+    func updateProvider(_ provider: DnsProviderInfo) {
     }
     
-    func removeNotifications() {
+    func isCustomProvider(_ provider: DnsProviderInfo) -> Bool {
+        return true
     }
+    
+    func isCustomServer(_ server: DnsServerInfo) -> Bool {
+        return true
+    }
+    
+    func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
+        return true
+    }    
 }

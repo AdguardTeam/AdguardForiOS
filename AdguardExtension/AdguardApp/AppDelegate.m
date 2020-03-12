@@ -156,6 +156,7 @@ static NSTimeInterval lastCheckTime;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerDidntStartUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerInstalledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openRateAppDialogController) name:NSNotification.openRateAppDialogController object:nil];
     
@@ -498,6 +499,11 @@ static NSTimeInterval lastCheckTime;
         
         DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
         [self antibanerUpdateFinished:AEUpdateNewData];
+    }
+    else if ([notification.name isEqualToString:ASAntibannerInstalledNotification]) {
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
+            DDLogInfo(@"(AppDelegate) content blocker reloaded after antibanner notification ASAntibannerInstalledNotification");
+        }];
     }
 }
 
