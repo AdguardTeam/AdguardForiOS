@@ -166,6 +166,8 @@ class VpnManager: VpnManagerProtocol {
     
     func installVpnConfiguration(completion: @escaping (Error?) -> Void) {
         
+        DDLogInfo("(VpnManager) installVpnConfiguration")
+        
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -238,6 +240,9 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func createManager()->NETunnelProviderManager {
+        
+        DDLogInfo("(VpnManager) createManager")
+        
         let manager = providerManagerType.self.init()
         let protocolConfiguration = NETunnelProviderProtocol()
         protocolConfiguration.providerBundleIdentifier = AP_TUNNEL_ID
@@ -301,6 +306,7 @@ class VpnManager: VpnManagerProtocol {
     
     private func saveManager(_ manager: NETunnelProviderManager)->Error? {
         
+        DDLogInfo("(VpnManager) saveManager")
         var resultError: Error?
         
         let group = DispatchGroup()
@@ -310,6 +316,9 @@ class VpnManager: VpnManagerProtocol {
             resultError = error
             if error != nil {
                 DDLogError("(VpnManager) saveManager error: \(error!)")
+            }
+            else {
+                DDLogInfo("(VpnManager) saveManager success")
             }
             
             group.leave()

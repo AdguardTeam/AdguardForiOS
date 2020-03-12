@@ -241,12 +241,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             return
         }
         
-        let updateClosure = { [weak self] in
-            self?.vpnManager.updateSettings { (error) in
-                completion(error)
-            }
-        }
-        
         if !vpnManager.vpnInstalled && resources.systemProtectionEnabled && vc != nil {
             
             #if !APP_EXTENSION
@@ -259,19 +253,12 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                     return
                 }
                 
-                self.vpnManager.installVpnConfiguration { (error) in
-                    if error != nil {
-                        completion(error)
-                        return
-                    }
-                    
-                    updateClosure()
-                }
+                self.vpnManager.installVpnConfiguration(completion: completion)
             }
             #endif
         }
         else {
-            updateClosure()
+            vpnManager.updateSettings(completion: completion)
         }
     }
     
