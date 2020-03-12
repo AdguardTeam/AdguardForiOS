@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the Whitelist, or change the set of used filters.";
+"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the Allowlist, or change the set of used filters.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (inverted)";
+"inverted_whitelist_title" = "Allowlist (inverted)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applying changes...";
@@ -427,8 +427,8 @@
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Allowlist";
 
-/* (ListOfRulesModel) title safari white list*/
-"whitelist_title" = "Whitelist";
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Allowlist";
 
 /* (ListOfRulesModel) title for dns block list */
 "dns_blacklist_title" = "Blocklist";
@@ -637,7 +637,7 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Block request";
 
-/* (BlockRequestController) Whitelist request title */
+/* (BlockRequestController) Allowlist request title */
 "whitelist_request" = "Allowlist request";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
