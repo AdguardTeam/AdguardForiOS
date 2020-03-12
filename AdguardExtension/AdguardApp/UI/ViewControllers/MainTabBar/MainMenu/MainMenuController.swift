@@ -80,10 +80,11 @@ class MainMenuController: UITableViewController {
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         
-        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {[weak self] (action) in
-            let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "RateAppDialogController")
-            self?.present(controller, animated: true)
+        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {(action) in
+            let reviewUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
+            if let writeReviewURL = URL(string: reviewUrl) {
+                UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+            }
         }
         
         let justSendFeedback = UIAlertAction(title: String.localizedString("just_send_feedback"), style: .default) {[weak self] (action) in

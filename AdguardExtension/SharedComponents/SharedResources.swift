@@ -20,51 +20,21 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
-    dynamic var firstLaunchDate: Date? {
+    dynamic var appEntryCount: Int {
         get {
-            if let date = sharedDefaults().value(forKey: AEDefaultsFirstLaunchDate) as? Date {
-                return date
-            }
-            return nil
+            return sharedDefaults().integer(forKey: AEDefaultsAppEntryCount)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsFirstLaunchDate)
-        }
-    }
-
-    dynamic var cancelTappedWhenAppRating: Bool? {
-        get {
-            if let tapped = sharedDefaults().value(forKey: CancelTappedWhenAppRating) as? Bool {
-                return tapped
-            }
-            return nil
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: CancelTappedWhenAppRating)
+            sharedDefaults().set(newValue, forKey: AEDefaultsAppEntryCount)
         }
     }
     
-    dynamic var appRatingNotificationShown: Bool {
+    dynamic var lastBuildRateAppRequested: Int {
         get {
-            if let shown = sharedDefaults().value(forKey: AppRatingNotificationShown) as? Bool {
-                return shown
-            }
-            return false
+            return sharedDefaults().integer(forKey: AEDefaultsLastBuildRateAppRequested)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AppRatingNotificationShown)
-        }
-    }
-    
-    dynamic var minTimeIntervalToRate: Int {
-        get {
-            if let interval = sharedDefaults().value(forKey: MinTimeIntervalToRate) as? Int {
-                return interval
-            }
-            return 24 * 3600 // 1 day
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: MinTimeIntervalToRate)
+            sharedDefaults().set(newValue, forKey: AEDefaultsLastBuildRateAppRequested)
         }
     }
     

@@ -107,19 +107,14 @@ extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 
 /**
- User Defaults key, which defines app first launch date. Used for show Rate me allert.
+ User Defaults key, which defines app first launch date. Is used to show Rate me allert.
  */
-extern NSString * _Nonnull AEDefaultsFirstLaunchDate;
+extern NSString * _Nonnull AEDefaultsAppEntryCount;
 
 /**
- User Defaults key, which tells if cancel was tapped when rating an app
+ User Defaults key, which defines last build version that Rate app dialog was requested.
  */
-extern NSString * _Nonnull CancelTappedWhenAppRating;
-
-/**
- User Defaults key, which defines whether push notification about app rating was shown
- */
-extern NSString * _Nonnull AppRatingNotificationShown;
+extern NSString * _Nonnull AEDefaultsLastBuildRateAppRequested;
 
 /**
  User Defaults key, which defines the next minimum time to show rate app alert
