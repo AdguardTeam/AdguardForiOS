@@ -301,7 +301,6 @@
 		659887011CF83580003ECD1C /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
 		659887021CF83580003ECD1C /* FMStatementQuotedRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEE1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m */; };
 		659887031CF83580003ECD1C /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
-		659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */; };
 		659887051CF83580003ECD1C /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
 		659887061CF83580003ECD1C /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01C21C6B7686000F00D7 /* ACLLogger.m */; };
 		659887091CF83580003ECD1C /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
@@ -366,7 +365,6 @@
 		65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		65B40D331BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
 		65B40D341BDE635200A9C595 /* JSConverter.js in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D321BDE635200A9C595 /* JSConverter.js */; };
-		65B40D381BDE7D1800A9C595 /* AEAUILoaderSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */; };
 		65B40D3A1BDE807400A9C595 /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
 		65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
 		65B4F02D1D5C828300893BA0 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADE1BB9824C00F53F3B /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -1801,8 +1799,6 @@
 		6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Pro-Config.xcconfig"; sourceTree = "<group>"; };
 		659E59781BC6D86D00FA2384 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		659E59791BC6D87000FA2384 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		659FBCF01BDE3F03007A87FE /* AEAUIDomainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAUIDomainCell.h; sourceTree = "<group>"; };
-		659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAUIDomainCell.m; sourceTree = "<group>"; };
 		65AA104D1C88540800CB67C5 /* adguard-assistant.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "adguard-assistant.js"; sourceTree = "<group>"; };
 		65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		65AD3BB91B7CB15400004A02 /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
@@ -1812,8 +1808,6 @@
 		65B0070D1BCD6D2500844F2E /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65B007101BCD6D2600844F2E /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65B40D321BDE635200A9C595 /* JSConverter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSConverter.js; sourceTree = "<group>"; };
-		65B40D361BDE7D1800A9C595 /* AEAUILoaderSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAUILoaderSegue.h; sourceTree = "<group>"; };
-		65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAUILoaderSegue.m; sourceTree = "<group>"; };
 		65B40D391BDE807400A9C595 /* stringUIResources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stringUIResources.plist; sourceTree = "<group>"; };
 		65B621021D2D3D9E0047248F /* AdguardProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdguardProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B621061D2D3D9F0047248F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3095,17 +3089,6 @@
 			path = AdguardPro;
 			sourceTree = "<group>";
 		};
-		659FBCEC1BDE31B4007A87FE /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				659FBCF01BDE3F03007A87FE /* AEAUIDomainCell.h */,
-				659FBCF11BDE3F03007A87FE /* AEAUIDomainCell.m */,
-				65B40D361BDE7D1800A9C595 /* AEAUILoaderSegue.h */,
-				65B40D371BDE7D1800A9C595 /* AEAUILoaderSegue.m */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
 		65A6AC971BE12280006A86E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -3187,7 +3170,6 @@
 			children = (
 				651D67931BB02B44007F00FA /* ActionExtension.entitlements */,
 				65D04F781C872B92001A9A02 /* js */,
-				659FBCEC1BDE31B4007A87FE /* UI */,
 				7E49DBA722D88D9C00027E93 /* Swift UI */,
 				65C52B3B1B906105003AF42F /* MainInterface.storyboard */,
 				65A6AC971BE12280006A86E5 /* Supporting Files */,
@@ -5515,7 +5497,6 @@
 				659887021CF83580003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
 				6518BD8B1DABBEE900FDD1F3 /* ADBTableRow.m in Sources */,
 				659887031CF83580003ECD1C /* ACLFileLogger.m in Sources */,
-				659887041CF83580003ECD1C /* AEAUILoaderSegue.m in Sources */,
 				659887051CF83580003ECD1C /* ASDatabase.m in Sources */,
 				D05CA8711F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				659887061CF83580003ECD1C /* ACLLogger.m in Sources */,
@@ -5665,7 +5646,6 @@
 				7E4D204322D71A5B003B0E75 /* mz_crypt_apple.c in Sources */,
 				651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02361C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
-				65B40D381BDE7D1800A9C595 /* AEAUILoaderSegue.m in Sources */,
 				65EC9BDB1BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				655A023F1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				65CB60341D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
