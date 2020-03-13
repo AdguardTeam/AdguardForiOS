@@ -23,8 +23,8 @@
 
 @interface APStatisticsTable : ADBTableRow
 
-@property (nonatomic) NSDate *timeStamp;
-@property (nonatomic) RequestsStatisticsBlock *allStatisticsBlocks;
-@property (nonatomic) RequestsStatisticsBlock *blockedStatisticsBlocks;
+@property (nonatomic, nonnull) NSDate *timeStamp;
+@property (nonatomic, nullable) RequestsStatisticsBlock *allStatisticsBlocks;
+@property (nonatomic, nullable) RequestsStatisticsBlock *blockedStatisticsBlocks;
 
 @end
