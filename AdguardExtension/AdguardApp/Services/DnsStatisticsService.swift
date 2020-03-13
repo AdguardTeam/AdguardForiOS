@@ -140,8 +140,8 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else { return }
                 
                 if result.count > 0 {
-                    statistics[.all] = result.map { $0.allStatisticsBlocks }
-                    statistics[.blocked] = result.map { $0.blockedStatisticsBlocks }
+                    statistics[.all] = result.map { $0.allStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
+                    statistics[.blocked] = result.map { $0.blockedStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
                 }
             }
             group.leave()
