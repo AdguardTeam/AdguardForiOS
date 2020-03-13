@@ -22,220 +22,278 @@ import NetworkExtension
 
 // MARK: - Complex protection Interface -
 
-protocol ComplexProtectionServiceProtocol {
-    // Delegate
-    var delegate: ComplexProtectionDelegate? { get set }
+@objc
+protocol ComplexProtectionServiceProtocol: class {
     
     // Turns on/off complex protection
-    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?)
+    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?,  completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void)
     
     // Turns on/off safari protection
-    func switchSafariProtection(state enabled: Bool)
+    func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void)
     
     // Turns on/off tracking protection
-    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?)
+    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void)
     
-    // Turns on/off tracking protection
-    // Is used for switching from widget
-    func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?,isFromComplexSwitch: Bool)
-    
-    // Checks state of complex protection
-    func checkState(completion: @escaping (Bool)->() )
-    
-    // Checks tracking protection state
-    func getSystemProtectionState(completion:@escaping (Bool)->() )
-    
-    // Checks states of all protection modules
-    func getAllStates(completion: @escaping (_ safari: Bool, _ system: Bool, _ complex: Bool)->())
+    var safariProtectionEnabled: Bool { get }
+    var systemProtectionEnabled: Bool { get }
+    var complexProtectionEnabled: Bool { get }
 }
 
-// MARK: - Complex protection Delegate -
-
-protocol ComplexProtectionDelegate {
-    /**
-     Method is called when safari protection status changes
-     */
-    func safariProtectionChanged()
+enum ComplexProtectionError: Error {
+    case cancelledAddingVpnConfiguration
 }
 
 // MARK: - Complex protection class -
-
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
-    var delegate: ComplexProtectionDelegate?
+    var safariProtectionEnabled: Bool {
+        return safariProtection.safariProtectionEnabled
+    }
+    
+    let safariProtection: SafariProtectionServiceProtocol
+    
+    var systemProtectionEnabled: Bool {
+        return configuration.proStatus
+            && resources.systemProtectionEnabled
+            && resources.complexProtectionEnabled
+            && vpnManager.vpnInstalled
+    }
+    
+    var complexProtectionEnabled: Bool {
+        return resources.complexProtectionEnabled
+    }
     
     private let resources: AESharedResourcesProtocol
-    private let safariService: SafariService
-    private let configuration: ConfigurationService
+    private let safariService: SafariServiceProtocol
+    private let configuration: ConfigurationServiceProtocol
+    private let vpnManager: VpnManagerProtocol
     
-    private let systemProtectionProcessor: TurnSystemProtectionProtocol
+    private var vpnConfigurationObserver: NotificationToken!
     
     private var proStatus: Bool {
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariService, systemProtectionProcessor: TurnSystemProtectionProtocol, configuration: ConfigurationService) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService) {
         self.resources = resources
         self.safariService = safariService
-        self.systemProtectionProcessor = systemProtectionProcessor
         self.configuration = configuration
-    }
-    
-    func checkState(completion: @escaping (Bool)->()){
-        getSystemProtectionState {[weak self] (systemEnabled) in
-            guard let self = self else { return }
-            
-            let safaryEnabled = self.resources.safariProtectionEnabled
-            let systemEnabled = systemEnabled
-            
-            completion(safaryEnabled || systemEnabled)
-        }
-    }
-    
-    func getAllStates(completion: @escaping (Bool, Bool, Bool) -> ()) {
-        getSystemProtectionState {[weak self] (systemEnabled) in
-            guard let self = self else { return }
-            
-            let safaryEnabled = self.resources.safariProtectionEnabled
-            let systemEnabled = systemEnabled
-            
-            completion(safaryEnabled, systemEnabled, safaryEnabled || systemEnabled)
-        }
-    }
-    
-    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?) {
+        self.vpnManager = vpnManager
+        self.safariProtection = safariProtection
         
-        if !enabled {
-            getSystemProtectionState {[weak self] (systemEnabled) in
-                guard let self = self else { return }
-                
-                let safariEnabled = self.resources.safariProtectionEnabled
-                self.saveLastStates(safariState: safariEnabled, systemState: systemEnabled)
-                
-                // Turning off safari and tracking protection
-                self.switchSafariProtectionForComplex(state: enabled)
-                if systemEnabled {
-                    self.switchSystemProtectionForComplex(state: enabled, for: VC)
-                }
-            }
-        } else {
-            let statesTuple = getLastStates()
-            
-            let safariEnabledSaved = statesTuple.safariEnabled
-            let systemEnabledSaved = statesTuple.systemEnabled
-            
-            /**
-             If everything was turned off before disabling complex protection
-             then we turning on just safari protection
-             */
-            if !(safariEnabledSaved || systemEnabledSaved){
-                switchSafariProtectionForComplex(state: true)
-            } else {
-                /**
-                 If last state of tracking protection was true and proStatus became false while complex protection was off
-                 we turn on safari protection instead
-                 */
-                if safariEnabledSaved || (systemEnabledSaved && !proStatus){
-                    switchSafariProtectionForComplex(state: true)
-                }
-                if systemEnabledSaved && proStatus {
-                    switchSystemProtectionForComplex(state: systemEnabledSaved, for: VC)
-                }
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            self.resources.systemProtectionEnabled = false
+        }
+        
+        vpnManager.checkVpnInstalled { (_) in
+            if !vpnManager.vpnInstalled {
+                resources.systemProtectionEnabled = false
             }
         }
     }
     
-    func switchSafariProtection(state enabled: Bool){
+    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
+        
+        resources.complexProtectionEnabled = enabled
+                    
+        let safariEnabled = resources.safariProtectionEnabled
+        let systemEnabled = resources.systemProtectionEnabled
+        
+        if enabled && !safariEnabled && !systemEnabled {
+            resources.safariProtectionEnabled = true
+            resources.systemProtectionEnabled = configuration.proStatus
+        }
+        
+        updateProtections(safari: true, system: true, vc: VC) { [weak self] (safariError, systemError) in
+            guard let self = self else { return }
+            
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariEnabled
+            }
+            
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemEnabled
+            }
+            
+            completion(safariError, systemError)
+        }
+    }
+    
+    func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void){
+        
+        var needsUpdateSystemProtection = false
+        let needsUpdateSafari = resources.safariProtectionEnabled != enabled
+        
+        let systemOld = resources.systemProtectionEnabled
+        let safariOld = resources.safariProtectionEnabled
+        
         resources.safariProtectionEnabled = enabled
-       
-        if !enabled {
-            resources.sharedDefaults().set(enabled, forKey: SafariProtectionLastState)
-        }
-        safariInvalidateJson()
-    }
-    
-    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?) {
-        if !enabled {
-            resources.sharedDefaults().set(enabled, forKey: SystemProtectionLastState)
-        }
-        systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
-    }
-    
-    func switchSystemProtectionFromWidget(state enabled: Bool, for VC: UIViewController?, isFromComplexSwitch: Bool) {
-        if isFromComplexSwitch {
-            switchSystemProtectionForComplex(state: enabled, for: VC)
-        } else {
-            switchSystemProtection(state: enabled, for: VC)
-        }
-    }
         
-    /**
-     Gets current tracking protection state and returns it in completion
-     */
-    func getSystemProtectionState(completion:@escaping (Bool)->() ) {
-        NETunnelProviderManager.loadAllFromPreferences {(managers, error) in
-            if error != nil {
-                completion(false)
-                DDLogError("(ComplexProtectionService) Error loading vpn configuration: \(String(describing: error?.localizedDescription))")
-            } else {
-                let manager = managers?.first
-                let vpnEnabled = manager?.isEnabled ?? false
-                
-                completion(vpnEnabled)
+        if enabled && !resources.complexProtectionEnabled {
+            resources.complexProtectionEnabled = true
+            needsUpdateSystemProtection = resources.systemProtectionEnabled
+        }
+
+        if !enabled && !systemProtectionEnabled {
+            resources.complexProtectionEnabled = false
+        }
+        
+        updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
+            guard let self = self else { return }
+            
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariOld
             }
+            
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemOld
+            }
+            
+            completion(safariError)
+        }
+    }
+    
+    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
+        
+        var needsUpdateSafari = false
+        let needsUpdateSystem = resources.systemProtectionEnabled != enabled
+        
+        let systemOld = resources.systemProtectionEnabled
+        let safariOld = resources.safariProtectionEnabled
+        
+        resources.systemProtectionEnabled = enabled
+         
+        if enabled && !resources.complexProtectionEnabled {
+            resources.complexProtectionEnabled = true
+            needsUpdateSafari = resources.safariProtectionEnabled
+        }
+        
+        if !enabled && !safariProtection.safariProtectionEnabled {
+            self.resources.complexProtectionEnabled = false
+        }
+        
+        updateProtections(safari: needsUpdateSafari, system: needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
+            guard let self = self else { return }
+            
+            if safariError != nil {
+                self.resources.safariProtectionEnabled = safariOld
+            }
+            
+            if systemError != nil {
+                self.resources.systemProtectionEnabled = systemOld
+            }
+            
+            completion(systemError)
         }
     }
     
     // MARK: - Private methods
     
-    /**
-     When turning off complex protection state it is needed to save
-     System and Safari protection last states to recover them
-     */
-    private func saveLastStates(safariState: Bool, systemState: Bool){
-        resources.sharedDefaults().set(safariState, forKey: SafariProtectionLastState)
-        resources.sharedDefaults().set(systemState, forKey: SystemProtectionLastState)
-    }
-    
-    /**
-     When turning on complex protection state it takes saved
-     states and recovers them
-     */
-    private func getLastStates() -> (safariEnabled: Bool, systemEnabled: Bool){
-        let safaryEnabled = resources.sharedDefaults().bool(forKey: SafariProtectionLastState)
-        let systemEnabled = resources.sharedDefaults().bool(forKey: SystemProtectionLastState)
+    func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
         
-        return (safaryEnabled, systemEnabled)
+        DispatchQueue(label: "complex protection queue").async { [weak self] in
+            guard let self = self else { return }
+            
+            var safariError: Error?
+            var systemError: Error?
+            
+            let group = DispatchGroup()
+            if safari {
+                group.enter()
+                self.safariInvalidateJson { error in
+                    safariError = error
+                    group.leave()
+                }
+            }
+            
+            if system {
+                group.enter()
+                self.updateVpnSettings(vc: vc) { error in
+                    systemError = error
+                    group.leave()
+                }
+            }
+            
+            group.wait()
+            
+            completion(safariError, systemError)
+        }
     }
     
     /**
      This method invalidates blocking json
      */
-    private func safariInvalidateJson(){
-        safariService.invalidateBlockingJsons(completion: {[weak self] (error) in
+    private func safariInvalidateJson(completion: @escaping (Error?)->Void){
+        safariService.invalidateBlockingJsons { (error) in
             if error != nil {
                 DDLogError("(ComplexProtectionService) Error invalidating json")
             } else {
                 DDLogInfo("(ComplexProtectionService) Successfull invalidating of json")
             }
-            self?.delegate?.safariProtectionChanged()
-        })
+            completion(error)
+        }
     }
     
-    /**
-     We need to know where was a protection turned from
-     This method is for complex protection interaction
-     */
-    private func switchSafariProtectionForComplex(state enabled: Bool){
-        resources.safariProtectionEnabled = enabled
-        safariInvalidateJson()
+    private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {
+        if !configuration.proStatus {
+            completion(nil)
+            return
+        }
+        
+        if !vpnManager.vpnInstalled && resources.systemProtectionEnabled && vc != nil {
+            
+            #if !APP_EXTENSION
+            self.showConfirmVpnAlert(for: vc!) { [weak self] (confirmed) in
+                guard let self = self else { return }
+                
+                if !confirmed {
+                    self.resources.systemProtectionEnabled = false
+                    completion(ComplexProtectionError.cancelledAddingVpnConfiguration)
+                    return
+                }
+                
+                self.vpnManager.installVpnConfiguration(completion: completion)
+            }
+            #endif
+        }
+        else {
+            vpnManager.updateSettings(completion: completion)
+        }
     }
     
-    /**
-    We need to know where was a protection turned from
-    This method is for complex protection interaction
-    */
-    private func switchSystemProtectionForComplex(state enabled: Bool, for VC: UIViewController?){
-        systemProtectionProcessor.turnSystemProtection(to: enabled, with: VC, completion: {})
+#if !APP_EXTENSION
+    private func showConfirmVpnAlert(for vc: UIViewController, confirmed: @escaping (Bool)->Void){
+        
+        DispatchQueue.main.async {
+            let title: String = String.localizedString("vpn_confirm_title")
+            let message: String = String.localizedString("vpn_confirm_message")
+            let okTitle: String = String.localizedString("common_action_ok")
+            let cancelTitle: String = String.localizedString("common_action_cancel")
+            let privacyTitle: String = String.localizedString("privacy_policy_action")
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
+                confirmed(true)
+            }
+            
+            let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { (alert) in
+                UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
+                confirmed(false)
+            }
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (alert) in
+                confirmed(false)
+            }
+            
+            alert.addAction(okAction)
+            alert.addAction(privacyAction)
+            alert.addAction(cancelAction)
+            
+            alert.preferredAction = okAction
+            
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
+#endif
 }

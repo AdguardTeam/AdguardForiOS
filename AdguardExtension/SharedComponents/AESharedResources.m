@@ -98,6 +98,12 @@ NSString *StatisticsSaveTime = @"StatisticsSaveTime";
 
 NSString *DnsActiveProtocols = @"DnsActiveProtocols";
 
+NSString* AEDefaultsActiveDnsServer = @"AEDefaultsActiveDnsServer";
+
+NSString* AESystemProtectionEnabled = @"AESystemProtectionEnabled";
+
+NSString* AEComplexProtectionEnabled = @"AEComplexProtectionEnabled";
+
 NSString *OnboardingWasShown = @"OnboardingWasShown";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
@@ -402,6 +408,14 @@ NSString *OnboardingWasShown = @"OnboardingWasShown";
 
 - (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
     [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
+}
+
+- (BOOL)systemProtectionEnabled {
+    return [self.sharedDefaults boolForKey:AESystemProtectionEnabled]; // default false
+}
+
+- (void)setSystemProtectionEnabled:(BOOL)enabled {
+    [self.sharedDefaults setBool:enabled forKey:AESystemProtectionEnabled];
 }
 
 /////////////////////////////////////////////////////////////////////

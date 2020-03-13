@@ -25,7 +25,7 @@ class DnsFiltersServiceTest: XCTestCase {
     var vpn = VpnManagerMock()
 
     override func setUp() {
-        filtersService = DnsFiltersService(resources: resources, vpnManager: vpn, configuration: ConfigurationServiceMock())
+        filtersService = DnsFiltersService(resources: resources, vpnManager: vpn, configuration: ConfigurationServiceMock(), complexProtection: ComplexProtectionServiceMock())
     }
 
     override func tearDown() {

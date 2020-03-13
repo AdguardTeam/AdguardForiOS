@@ -20,7 +20,7 @@ import UIKit
 import NotificationCenter
 import NetworkExtension
 
-class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtectionProtocol {
+class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet weak var height: NSLayoutConstraint!
     
@@ -59,34 +59,47 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     
     private let resources: AESharedResources = AESharedResources()
     private var safariService: SafariService
-    private var comlexProtection: ComplexProtectionServiceProtocol?
+    private var complexProtection: ComplexProtectionServiceProtocol
     private let networkService = ACNNetworking()
     private var purchaseService: PurchaseServiceProtocol
     private var configuration: ConfigurationService
-    private let vpnManager: APVPNManager
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
+    private let dnsProvidersService: DnsProvidersServiceProtocol
     
     private var requestNumber = 0
     private var blockedNumber = 0
     
-    private var isFromComplexSwitch = false
-    
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
+        
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        
+        #if DEBUG
+        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+        #endif
+        
+        DDLogInfo("(TodayViewController) - init start")
+        
         safariService = SafariService(resources: resources)
         purchaseService = PurchaseService(network: networkService, resources: resources)
         configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
-        vpnManager  = APVPNManager(resources: resources, configuration: configuration)
+        dnsProvidersService = DnsProvidersService(resources: resources)
         dnsStatisticsService = DnsStatisticsService(resources: resources)
+        let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
+        
+        let safariProtection = SafariProtectionService(resources: resources)
+        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection)
         
         super.init(coder: coder)
         
-        comlexProtection = ComplexProtectionService(resources: resources, safariService: safariService, systemProtectionProcessor: self, configuration: configuration)
-        initLogger()
+        DDLogInfo("(TodayViewController) - init end")
+        ACLLogger.singleton()?.flush()
     }
     
     override func viewDidLoad() {
+        DDLogInfo("(TodayViewController) - viewDidLoad")
         super.viewDidLoad()
         
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
@@ -101,6 +114,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        DDLogInfo("(TodayViewController) - viewWillAppear")
         super.viewWillAppear(animated)
         addStatisticsObservers()
     }
@@ -111,8 +125,9 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            let statistics = dnsStatisticsService.readStatistics()
-            changeTextForButton(statistics: statistics, keyPath: keyPath)
+        DDLogInfo("(TodayViewController) - observeValue")
+        let statistics = dnsStatisticsService.readStatistics()
+        changeTextForButton(statistics: statistics, keyPath: keyPath)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -146,15 +161,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
 
     @IBAction func safariSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        resources.safariProtectionEnabled = enabled
-        
-        safariService.invalidateBlockingJsons(completion: { (error) in
+        complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
             if error != nil {
                 DDLogError("Error invalidating json from Today Extension")
             } else {
                 DDLogInfo("Successfull invalidating of json from Today Extension")
             }
-        })
+        }
         
         updateWidgetSafari()
     }
@@ -162,33 +175,30 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         
-        isFromComplexSwitch = false
-        comlexProtection?.switchSystemProtection(state: enabled, for: nil)
+        complexProtection.switchSystemProtection(state: enabled, for: nil) { _ in }
         
         let alpha: CGFloat = enabled ? 1.0 : 0.5
         systemImageView.alpha = alpha
         systemTextLabel.alpha = alpha
         systemTitleLabel.alpha = alpha
         systemSwitchOutlet.isOn = enabled
+        
+        turnSystemProtection(to: enabled)
     }
     
     @IBAction func complexSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         
-        isFromComplexSwitch = true
-        comlexProtection?.switchComplexProtection(state: enabled, for: nil)
+        complexProtection.switchComplexProtection(state: enabled, for: nil) { (_, _) in }
         updateWidgetComplex()
     }
     
-    // MARK: - TurnSystemProtectionProtocol method
+    // MARK: Private methods
     
-    func turnSystemProtection(to state: Bool, with vc: UIViewController?, completion: @escaping () -> ()) {
+    func turnSystemProtection(to state: Bool) {
         var openSystemProtectionUrl = AE_URLSCHEME + "://systemProtection/"
         openSystemProtectionUrl += state ? "on" : "off"
-        
-        openSystemProtectionUrl += "/"
-        openSystemProtectionUrl += isFromComplexSwitch ? "on" : "off"
-        
+
         if let url = URL(string: openSystemProtectionUrl){
             extensionContext?.open(url, completionHandler: { (success) in
                 if !success {
@@ -200,13 +210,11 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
         }
     }
     
-    // MARK: Private methods
-    
     /**
      Updates safari protection view
      */
     private func updateWidgetSafari(){
-        let safariEnabled = resources.safariProtectionEnabled
+        let safariEnabled = complexProtection.safariProtectionEnabled
         
         let alpha: CGFloat = safariEnabled ? 1.0 : 0.5
         safariImageView.alpha = alpha
@@ -225,72 +233,45 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      Updates Tracking protection view
      */
     private func updateWidgetSystem(){
-        NETunnelProviderManager.loadAllFromPreferences {[weak self] (managers, error) in
-            guard let self = self else { return }
             
-            if error != nil {
-                self.systemSwitchOutlet.isOn = false
-                self.systemImageView.alpha = 0.5
-                self.systemTitleLabel.alpha = 0.5
-                self.systemTextLabel.alpha = 0.5
-                
-                DDLogError("(Today Extension) Error loading vpn configuration: \(String(describing: error?.localizedDescription))")
-            } else {
-                let manager = managers?.first
-                let vpnEnabled = manager?.isEnabled ?? false
-                
-                let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
-                self.systemSwitchOutlet.isOn = vpnEnabled
-                self.systemImageView.alpha = alpha
-                self.systemTitleLabel.alpha = alpha
-                self.systemTextLabel.alpha = alpha
-            }
-            
-            self.systemTextLabel.text = self.getServerName()
-        }
+        let vpnEnabled = complexProtection.systemProtectionEnabled
+        
+        let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
+        self.systemSwitchOutlet.isOn = vpnEnabled
+        self.systemImageView.alpha = alpha
+        self.systemTitleLabel.alpha = alpha
+        self.systemTextLabel.alpha = alpha
+        
+        self.systemTextLabel.text = self.getServerName()
     }
     
     /**
      Updates complex protection view
      */
-    private func updateWidgetComplex(){
-        comlexProtection?.getAllStates(completion: { (safariEnabled, systemEnabled, complexEnabled) in
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
+    private func updateWidgetComplex() {
+        let safariEnabled = complexProtection.safariProtectionEnabled
+        let systemEnabled = complexProtection.systemProtectionEnabled
+        let complexEnabled = complexProtection.complexProtectionEnabled
                 
-                let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
-                
-                self.complexSwitchOutlet.isOn = complexEnabled
-                self.complexProtectionTitle.text = enabledText
-                
-                var complexText = ""
-                
-                if safariEnabled && systemEnabled {
-                    complexText = ACLocalizedString("complex_enabled", nil)
-                } else if !complexEnabled{
-                    complexText = ACLocalizedString("complex_disabled", nil)
-                } else if safariEnabled {
-                    complexText = ACLocalizedString("safari_enabled", nil)
-                } else if systemEnabled {
-                    complexText = ACLocalizedString("system_enabled", nil)
-                }
-                self.complexStatusLabel.text = complexText
-                
-                self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
-            }
-        })
-    }
-    
-    /**
-     Inits standard logger
-     */
-    private func initLogger(){
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
         
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
+        self.complexSwitchOutlet.isOn = complexEnabled
+        self.complexProtectionTitle.text = enabledText
+        
+        var complexText = ""
+        
+        if safariEnabled && systemEnabled {
+            complexText = ACLocalizedString("complex_enabled", nil)
+        } else if !complexEnabled{
+            complexText = ACLocalizedString("complex_disabled", nil)
+        } else if safariEnabled {
+            complexText = ACLocalizedString("safari_enabled", nil)
+        } else if systemEnabled {
+            complexText = ACLocalizedString("system_enabled", nil)
+        }
+        self.complexStatusLabel.text = complexText
+        
+        self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
     }
     
     /**
@@ -360,17 +341,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, TurnSystemProtec
      Gets current server name from vpnManager
      */
     private func getServerName() -> String {
-        if vpnManager.isCustomServerActive() {
-            return vpnManager.activeDnsServer!.name
+        guard let server = dnsProvidersService.activeDnsServer else {
+            return String.localizedString("system_dns_server")
         }
-        else if vpnManager.activeDnsServer?.dnsProtocol == nil {
-            return ACLocalizedString("system_dns_server", nil)
-        }
-        else {
-            let server = vpnManager.activeDnsProvider?.name ?? vpnManager.activeDnsServer?.name ?? ""
-            let protocolName = ACLocalizedString(DnsProtocol.stringIdByProtocol[vpnManager.activeDnsServer!.dnsProtocol], nil)
-            return "\(server) (\(protocolName))"
-        }
+        
+        let provider = dnsProvidersService.activeDnsProvider
+        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
+        
+        return "\(provider?.name ?? server.name) (\(protocolName))"
     }
     
     /**

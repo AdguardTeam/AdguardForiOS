@@ -18,7 +18,7 @@
 
 import Foundation
 
-class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate {
+class DnsSettingsController : UITableViewController {
     
     //MARK: - IB Outlets
     
@@ -42,7 +42,7 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
-    private let vpnService: VpnServiceProtocol = ServiceLocator.shared.getService()!
+    private var dnsProviders: DnsProvidersService = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
@@ -55,7 +55,6 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     }
     
     var stateFromWidget: Bool?
-    var isFromComplexSwitch: Bool?
     
     private let enabledColor = UIColor(hexString: "#67b279")
     private let disabledColor = UIColor(hexString: "#888888")
@@ -99,14 +98,12 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        vpnService.notifier = self
-        
-        if let enabled = stateFromWidget, let isComplex = isFromComplexSwitch {
+        if let enabled = stateFromWidget {
             // We set a small delay to show user a state change
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                self?.complexProtection.switchSystemProtectionFromWidget(state: enabled, for: self, isFromComplexSwitch: isComplex)
+                self?.complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
                 self?.stateFromWidget = nil
-                self?.isFromComplexSwitch = nil
+                self?.updateVpnInfo()
             }
         } else {
             DispatchQueue.main.async {[weak self] in
@@ -114,36 +111,6 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
             }
         }
     }
-    
-    // MARK: - VpnServiceNotifierDelegate methods
-    
-    func tunnelModeChanged() {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            self.updateVpnInfo()
-        }
-    }
-    
-    func vpnConfigurationChanged(with error: Error?) {
-        DispatchQueue.main.async{[weak self] in
-            guard let self = self else { return }
-            
-            if error != nil {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
-                self.enabledSwitch.isOn = false
-            } else {
-                self.updateVpnInfo()
-            }
-        }
-    }
-    
-    func cancelledAddingVpnConfiguration() {
-        DispatchQueue.main.async {[weak self] in
-            self?.updateVpnInfo()
-        }
-    }
-    
-    func proStatusEnableFailure() {}
     
     // MARK: - Table view delegate methods
     
@@ -162,8 +129,8 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
         
         if indexPath.section == menuSection {
             cell.isHidden = !proStatus
-            cell.contentView.alpha = vpnService.vpnEnabled ? 1.0 : 0.5
-            cell.isUserInteractionEnabled = vpnService.vpnEnabled
+            cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
+            cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
             if indexPath.row == networkSettingsRow && proStatus {
                 cell.isHidden = !configuration.developerMode
@@ -211,18 +178,20 @@ class DnsSettingsController : UITableViewController, VpnServiceNotifierDelegate 
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
     
-        complexProtection.switchSystemProtection(state: enabled, for: self)
+        complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
+        
+        updateVpnInfo()
     }
     
     // MARK: private methods
     
     private func updateVpnInfo() {
-        let enabled = vpnService.vpnEnabled
+        let enabled = complexProtection.systemProtectionEnabled
         enabledSwitch.isOn = enabled
         systemProtectionStateLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
         
-        serverName.text = vpnService.currentServerName
+        serverName.text = dnsProviders.currentServerName
         
         tableView.reloadData()
     }

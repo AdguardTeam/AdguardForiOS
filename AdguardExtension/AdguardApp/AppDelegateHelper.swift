@@ -37,7 +37,7 @@ class AppDelegateHelper: NSObject {
     lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var purchaseService: PurchaseServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var filtersService: FiltersServiceProtocol =  { ServiceLocator.shared.getService()! }()
-    lazy var vpnManager: APVPNManager = { ServiceLocator.shared.getService()! }()
+    lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
     
@@ -182,7 +182,7 @@ class AppDelegateHelper: NSObject {
 
             self.filtersService.reset()
             self.antibannerController.reset()
-            self.vpnManager.removeVpnConfiguration()
+            self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
             
             let group = DispatchGroup()
@@ -279,16 +279,12 @@ class AppDelegateHelper: NSObject {
                 let parameters = suffix.split(separator: "/")
                 
                 let enabledString = String(parameters.first ?? "")
-                let complexEnabledString = String(parameters.last ?? "")
-                
                 let enabled = enabledString == "on"
-                let complexEnabled = complexEnabledString == "on"
                 
                 let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
                 guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
                 
                 dnsSettingsController.stateFromWidget = enabled
-                dnsSettingsController.isFromComplexSwitch = complexEnabled
                 
                 navController.viewControllers = [mainMenuController, dnsSettingsController]
                 

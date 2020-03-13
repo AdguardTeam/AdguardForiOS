@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import "AESharedResources.h"
 
-#define AP_TUNNEL_ID                       @ADGUARD_TUNNEL_BUNDLE_ID
+extern NSString * AP_TUNNEL_ID;
 
 #define AP_URLSCHEME                        @ADGUARD_URL_SCHEME
 #define AP_URLSCHEME_COMMAND_STATUS_ON      @"status-on"
@@ -36,8 +36,6 @@ extern NSString *APDefaultsDnsLoggingEnabled;
  User Defaults key, which defines active remote DNS server (APDnsServerObject object).
  */
 extern NSString *APDefaultsActiveRemoteDnsServer;
-
-extern NSString *APDefaultsCustomDnsProviders;
 
 /**
  Key of the parameter, which contains remote DNS server configuration.

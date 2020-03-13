@@ -488,9 +488,4 @@
     XCTAssertEqualObjects(resultArray, excludedArray);
 }
 
-- (void)testPerformanceExample {
-    [self measureBlock:^{
-    }];
-}
-
 @end

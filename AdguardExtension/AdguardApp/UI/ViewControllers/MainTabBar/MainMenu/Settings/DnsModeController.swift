@@ -35,7 +35,8 @@ class DnsModeController: UITableViewController {
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - private fields
     
@@ -54,7 +55,7 @@ class DnsModeController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         
-        let mode = vpnManager.tunnelMode
+        let mode = resources.tunnelMode
         
         switch mode {
         case APVpnManagerTunnelModeSplit:
@@ -95,7 +96,8 @@ class DnsModeController: UITableViewController {
             break
         }
         
-        vpnManager.tunnelMode = mode
+        resources.tunnelMode = mode
+        vpnManager.updateSettings(completion: nil)
         
         selectedCell = indexPath.row
         updateButtons()

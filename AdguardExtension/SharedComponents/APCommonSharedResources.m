@@ -21,8 +21,7 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - APSharedResources Constants
-
-NSString *APDefaultsCustomDnsProviders = @"APDefaultsCustomDnsProviders";
+NSString * AP_TUNNEL_ID = @ADGUARD_TUNNEL_BUNDLE_ID;
 NSString *APDefaultsDnsLocalFiltering = @"APDefaultsDnsLocalFiltering";
 NSString *APDefaultsActiveRemoteDnsServer = @"APDefaultsActiveRemoteDnsServer";
 

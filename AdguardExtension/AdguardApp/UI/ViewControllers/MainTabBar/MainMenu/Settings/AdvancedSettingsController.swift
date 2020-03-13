@@ -33,7 +33,7 @@ class AdvancedSettingsController: UITableViewController {
     private let safariService: SafariService = ServiceLocator.shared.getService()!
     private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
@@ -53,25 +53,13 @@ class AdvancedSettingsController: UITableViewController {
         setupBackButton()
         
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
-        restartProtectionSwitch.isOn = vpnManager.restartByReachability
+        restartProtectionSwitch.isOn = resources.restartByReachability
         showStatusbarSwitch.isOn = configuration.showStatusBar
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        vpnObservation = NotificationCenter.default.observe(name: NSNotification.Name.APVpnChanged, object: nil, queue: nil) {
-            [weak self] (notification) in
-            guard let self = self else { return }
-            DispatchQueue.main.async{
-                self.restartProtectionSwitch.isOn = self.vpnManager.restartByReachability
-                self.setTunnelModeDescription()
-                self.tableView.reloadData()
-            }
-            if self.vpnManager.lastError != nil {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("general_settings_restart_tunnel_error", nil))
-            }
-        }
         setTunnelModeDescription()
     }
     
@@ -100,7 +88,8 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
-        vpnManager.restartByReachability = sender.isOn
+        resources.restartByReachability = sender.isOn
+        vpnManager.updateSettings(completion: nil)
     }
     
     // MARK: - Table view data source
@@ -179,7 +168,7 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     private func setTunnelModeDescription() {
-        switch vpnManager.tunnelMode {
+        switch resources.tunnelMode {
         case APVpnManagerTunnelModeSplit:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_split_description")
         case APVpnManagerTunnelModeFull:

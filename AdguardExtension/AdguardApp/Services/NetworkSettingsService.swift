@@ -75,7 +75,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         set {
             if filterWifiDataEnabled != newValue {
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterWifiEnabled)
-                vpnManager.restartTunnel()
             }
         }
     }
@@ -87,7 +86,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         set {
             if filterMobileDataEnabled != newValue {
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
-                vpnManager.restartTunnel()
             }
         }
     }
@@ -99,11 +97,9 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     /* Services */
     private let resources: AESharedResourcesProtocol
-    private let vpnManager: APVPNManagerProtocol
     
-    init(resources: AESharedResourcesProtocol, vpnManager: APVPNManagerProtocol) {
+    init(resources: AESharedResourcesProtocol) {
         self.resources = resources
-        self.vpnManager = vpnManager
         
         exceptions = getExceptionsFromFile()
     }
@@ -112,8 +108,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         if !exceptions.contains(exception){
             exceptions.append(exception)
             
-            vpnManager.restartTunnel()
-            
             reloadArray()
         }
     }
@@ -121,9 +115,7 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     func delete(exception: WifiException) {
         if let index = exceptions.firstIndex(of: exception){
             exceptions.remove(at: index)
-            
-            vpnManager.restartTunnel()
-            
+
             reloadArray()
         }
     }
@@ -131,7 +123,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     func change(oldException: WifiException, newException: WifiException) {
         if let index = exceptions.firstIndex(of: oldException){
             exceptions[index] = newException
-            vpnManager.restartTunnel()
             reloadArray()
         }
     }

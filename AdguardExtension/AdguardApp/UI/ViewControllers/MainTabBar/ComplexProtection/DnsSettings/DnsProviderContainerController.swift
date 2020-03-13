@@ -37,8 +37,9 @@ class DnsProviderContainerController : UIViewController {
     // MARK: - services
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
 
     // MARK: - view controller life cycle
 
@@ -87,8 +88,8 @@ class DnsProviderContainerController : UIViewController {
     }
     
     private func activateServer(_ server: DnsServerInfo) {
-        vpnManager.activeDnsServer = server
-        vpnManager.enabled = true
+        dnsProvidersService.activeDnsServer = server
+        vpnManager.updateSettings(completion: nil)
         dismiss(animated: true, completion: nil)
     }
 }

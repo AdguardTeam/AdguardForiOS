@@ -18,15 +18,19 @@
 
 import Foundation
 
-class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
-    var appRated: Bool = false
-    var developerMode: Bool = true
-    var userThemeMode: AEThemeMode = AELightThemeMode
-    var showStatusBar: Bool = true
-    var systemAppearenceIsDark = true
-    var purchasedThroughLogin = true
-    var darkTheme = false
-    var proStatus = true
-    var allContentBlockersEnabled: Bool = true
-    var someContentBlockersEnabled: Bool = true
+class ComplexProtectionServiceMock: ComplexProtectionServiceProtocol {
+    func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?) -> Void) {
+        
+    }
+    
+    func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?, Error?) -> Void) {
+    }
+    func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?) -> Void) {
+    }
+    
+    var safariProtectionEnabled: Bool = true
+    
+    var systemProtectionEnabled: Bool = true
+    
+    var complexProtectionEnabled: Bool = true
 }

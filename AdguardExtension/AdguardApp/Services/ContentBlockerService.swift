@@ -49,6 +49,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
     private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
+    private var safariProtection: SafariProtectionServiceProtocol
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
@@ -80,18 +81,17 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, safariProtection: SafariProtectionServiceProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.antibanner = antibanner
+        self.safariProtection = safariProtection
         super.init()
     }
     
     // MARK: - public methods
     @objc
     func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void) {
-        DDLogInfo("(ContentBlockerService) reloadJsons")
-        
         DDLogInfo("(ContentBlockerService) reloadJsons")
         
 #if !APP_EXTENSION
@@ -354,7 +354,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
         DDLogInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
-        let safariProtectionEnabled = resources.safariProtectionEnabled
+        let safariProtectionEnabled = safariProtection.safariProtectionEnabled
         
         if safariProtectionEnabled{
             return autoreleasepool {

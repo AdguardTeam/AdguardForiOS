@@ -118,19 +118,18 @@ class DnsLogContainerController: UIViewController {
             let proStatus = self.configuration.proStatus
             
             if proStatus {
-                self.complexProtection.getSystemProtectionState { (systemProtectionEnabled) in
-                    let recordsAreEmpty = self.model.records.isEmpty
-                    if recordsAreEmpty && !systemProtectionEnabled {
-                        self.navigationItem.rightBarButtonItems = []
-                        self.getProContainerView.isHidden = true
-                        self.systemProtectionEnablerContainerView.isHidden = false
-                        self.dnsLogContainerView.isHidden = true
-                    } else {
-                        self.getProContainerView.isHidden = true
-                        self.systemProtectionEnablerContainerView.isHidden = true
-                        self.dnsLogContainerView.isHidden = false
-                        self.navigationItem.rightBarButtonItems = [self.clearButton]
-                    }
+                let systemProtectionEnabled = self.complexProtection.systemProtectionEnabled
+                let recordsAreEmpty = self.model.records.isEmpty
+                if recordsAreEmpty && !systemProtectionEnabled {
+                    self.navigationItem.rightBarButtonItems = []
+                    self.getProContainerView.isHidden = true
+                    self.systemProtectionEnablerContainerView.isHidden = false
+                    self.dnsLogContainerView.isHidden = true
+                } else {
+                    self.getProContainerView.isHidden = true
+                    self.systemProtectionEnablerContainerView.isHidden = true
+                    self.dnsLogContainerView.isHidden = false
+                    self.navigationItem.rightBarButtonItems = [self.clearButton]
                 }
             } else {
                 self.navigationItem.rightBarButtonItems = []

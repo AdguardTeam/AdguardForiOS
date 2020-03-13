@@ -79,9 +79,13 @@ class ActionViewController: UIViewController {
         safariService = SafariService(resources: sharedResources)
         let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
-        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration)
+        
         self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources)
-        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner)
+        
+        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration, complexProtection: nil)
+        
+        let safariProtection = SafariProtectionService(resources: sharedResources)
+        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
         support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
         
         super.init(coder: coder)

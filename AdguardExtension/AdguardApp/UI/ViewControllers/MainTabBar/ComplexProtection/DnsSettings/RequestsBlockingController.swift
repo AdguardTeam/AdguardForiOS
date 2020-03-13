@@ -28,7 +28,7 @@ class RequestsBlockingController: UITableViewController {
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
@@ -93,8 +93,6 @@ class RequestsBlockingController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == headerSection ? 0.1 : 0.0
     }
-
-    // MARK: - Private methods
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor

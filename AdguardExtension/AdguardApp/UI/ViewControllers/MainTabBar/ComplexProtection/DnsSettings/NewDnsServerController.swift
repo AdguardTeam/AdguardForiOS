@@ -46,7 +46,8 @@ class NewDnsServerController: BottomAlertController {
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    let vpnManager: APVPNManager = ServiceLocator.shared.getService()!
+    let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    let dnsProvidersService: DnsProvidersService =  ServiceLocator.shared.getService()!
     
     // MARK: - view controller lifecycle
     
@@ -76,8 +77,11 @@ class NewDnsServerController: BottomAlertController {
     
     @IBAction func addAction(_ sender: Any) {
         checkUpstream { [weak self] in
-            self?.vpnManager.addRemoteDnsServer(self?.nameField.text ?? "", upstreams: [self?.upstreamsField.text ?? ""])
-            self?.dismiss(animated: true, completion: nil)
+            guard let self = self else { return }
+            let newProvider = self.dnsProvidersService.addProvider(name: self.nameField.text ?? "", upstreams: [self.upstreamsField.text ?? ""])
+            self.dnsProvidersService.activeDnsServer = newProvider.servers?.first
+            self.vpnManager.updateSettings(completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -86,8 +90,15 @@ class NewDnsServerController: BottomAlertController {
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        if provider == nil { return }
-        vpnManager.deleteCustomDnsProvider(provider!)
+        guard let provider = self.provider else { return }
+        
+        dnsProvidersService.deleteProvider(provider)
+        
+        if dnsProvidersService.isActiveProvider(provider) {
+            dnsProvidersService.activeDnsServer = nil
+            vpnManager.updateSettings(completion: nil)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -98,7 +109,13 @@ class NewDnsServerController: BottomAlertController {
             self.provider!.name = self.nameField.text ?? ""
             self.provider!.servers?.first!.upstreams = [self.upstreamsField.text ?? ""]
             self.provider!.servers?.first!.name = self.provider!.name
-            self.vpnManager.resetCustomDnsProvider(self.provider!)
+            self.dnsProvidersService.updateProvider(self.provider!)
+            
+            if self.dnsProvidersService.isActiveProvider(self.provider!) {
+                self.dnsProvidersService.activeDnsServer = self.provider?.servers?.first
+                self.vpnManager.updateSettings(completion: nil)
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }
     }
