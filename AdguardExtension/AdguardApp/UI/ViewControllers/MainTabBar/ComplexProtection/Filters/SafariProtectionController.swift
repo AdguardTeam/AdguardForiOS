@@ -23,6 +23,7 @@ class SafariProtectionController: UITableViewController {
     @IBOutlet weak var numberOfFiltersLabel: UILabel!
     @IBOutlet weak var userFilterStateLabel: UILabel!
     @IBOutlet weak var protectionStateSwitch: UISwitch!
+    @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var whitelistLabel: ThemableLabel!
     @IBOutlet weak var safariIcon: UIImageView!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -43,10 +44,8 @@ class SafariProtectionController: UITableViewController {
     private let descriptionCell = 0
     
     private let contentSection = 1
-    private let stateCell = 0
-    private let filtersCell = 1
-    private let userFilterCell = 2
-    private let whiteListCell = 3
+    private let whiteListCell = 2
+    private let invertWhitelistCell = 3
     
     private let whiteListSegue = "whiteListSegue"
     private let blackListSegue = "blackListSegue"
@@ -88,7 +87,8 @@ class SafariProtectionController: UITableViewController {
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-        whitelistLabel.text = inverted ? ACLocalizedString("inverted_whitelist_title", nil) : ACLocalizedString("whitelist_title", nil)
+        whitelistLabel.text = inverted ? String.localizedString("inverted_whitelist_title") : String.localizedString("whitelist_title")
+        invertedSwitch.isOn = inverted
         
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
@@ -126,6 +126,12 @@ class SafariProtectionController: UITableViewController {
             updateSafariProtectionInfo()
         }
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func toggleInverted(_ sender: UISwitch) {
+        invertWhitelist()
+    }
 
     // MARK: - Table view data source
     
@@ -149,6 +155,14 @@ class SafariProtectionController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == contentSection && indexPath.row == invertWhitelistCell {
+            invertedSwitch.setOn(!invertedSwitch!.isOn, animated: true)
+            toggleInverted(invertedSwitch)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
         safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
@@ -163,6 +177,7 @@ class SafariProtectionController: UITableViewController {
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
+        theme.setupSwitch(invertedSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
@@ -175,5 +190,33 @@ class SafariProtectionController: UITableViewController {
         safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
         
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+    }
+    
+    private func invertWhitelist() {
+        
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+        
+        let oldValue = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        let newValue = invertedSwitch.isOn
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.whitelistLabel.text = newValue ? String.localizedString("inverted_whitelist_title") : String.localizedString("whitelist_title")
+        }
+        
+        if oldValue != newValue {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
+            
+            contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
+                if error != nil {
+                    self?.resources.sharedDefaults().set(oldValue, forKey: AEDefaultsInvertedWhitelist)
+                    DispatchQueue.main.async {
+                        self?.invertedSwitch.setOn(oldValue, animated: true)
+                        self?.whitelistLabel.text = oldValue ? String.localizedString("inverted_whitelist_title") : String.localizedString("whitelist_title")
+                    }
+                }
+                
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+            }
+        }
     }
 }
