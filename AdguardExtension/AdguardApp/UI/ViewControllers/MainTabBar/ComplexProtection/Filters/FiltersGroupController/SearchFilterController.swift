@@ -95,12 +95,12 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         guard let group = viewModel?.groups?[section] else { return UIView() }
         
         // Section header sizes
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        let padding: CGFloat = isIphone ? 16.0 : 24.0
-        let font: UIFont = isIphone ? UIFont.systemFont(ofSize: 20, weight: .medium) : UIFont.systemFont(ofSize: 40, weight: .medium)
-        let labelHeight: CGFloat = isIphone ? 24.0 : 44.0
-        let topOffset: CGFloat = isIphone ? 32.0 : 64.0
-        let bottomOffset: CGFloat = isIphone ? 16.0 : 32.0
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        let padding: CGFloat = isBigScreen ? 24.0 : 16.0
+        let font: UIFont = isBigScreen ? UIFont.systemFont(ofSize: 40, weight: .medium) : UIFont.systemFont(ofSize: 20, weight: .medium)
+        let labelHeight: CGFloat = isBigScreen ? 44.0 : 24.0
+        let topOffset: CGFloat = isBigScreen ? 64.0 : 32.0
+        let bottomOffset: CGFloat = isBigScreen ? 32.0 : 16.0
         
         let height: CGFloat = labelHeight + topOffset + bottomOffset
         let width: CGFloat = self.view.frame.width
@@ -126,8 +126,8 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        return isIphone ? 72.0 : 140.0
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        return isBigScreen ? 140.0 : 72.0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
