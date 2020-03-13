@@ -954,11 +954,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Rdo-NW-cIS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="DELETE">
                                     <color key="titleColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                </variation>
                                 <connections>
                                     <action selector="deleteAction:" destination="Uro-s5-baq" eventType="touchUpInside" id="RoK-eq-8J9"/>
                                 </connections>

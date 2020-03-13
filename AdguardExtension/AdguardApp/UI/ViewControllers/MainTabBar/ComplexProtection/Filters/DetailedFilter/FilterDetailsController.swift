@@ -47,13 +47,10 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        
         self.title = filter.name
         
         deleteButtonHeightConstraint.constant = filter.removable ? 60 : 0
         deleteButton.isHidden = !filter.removable
-        deleteButton.contentEdgeInsets.left = isIphone ? 16.0 : 24
         
         updateTheme()
         
@@ -63,6 +60,12 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         setupBackItem()
         deleteButton.makeTitleTextUppercased()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        deleteButton.contentEdgeInsets.left = isBigScreen ? 24.0 : 16.0
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
