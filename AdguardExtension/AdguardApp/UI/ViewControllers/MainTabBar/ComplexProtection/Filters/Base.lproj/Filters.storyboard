@@ -323,8 +323,8 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari Whitelist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="80" y="20" width="161" height="29"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Allowlist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="20" width="302" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -372,7 +372,7 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="6Sq-1y-eFJ" firstAttribute="centerY" secondItem="OM1-fp-EEj" secondAttribute="centerY" id="cRJ-WE-j0Y"/>
-                                                <constraint firstItem="OM1-fp-EEj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f3z-Yh-zY2" secondAttribute="trailing" constant="16" id="gn7-oT-PFp">
+                                                <constraint firstItem="OM1-fp-EEj" firstAttribute="leading" secondItem="f3z-Yh-zY2" secondAttribute="trailing" constant="16" id="gn7-oT-PFp">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="f3z-Yh-zY2" firstAttribute="leading" secondItem="6Sq-1y-eFJ" secondAttribute="trailing" constant="16" id="hhy-Un-C9u">
@@ -391,6 +391,74 @@
                                             <segue destination="FLo-qe-u1Y" kind="show" identifier="whiteListSegue" id="cuA-KN-WPp"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GfA-Zv-fqa">
+                                        <rect key="frame" x="0.0" y="564" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GfA-Zv-fqa" id="Opn-2R-MRJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Invert the Allowlist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOt-rF-DQo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="317" height="10"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TmL-5C-Yij">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="E9j-Lk-6uo"/>
+                                                    </constraints>
+                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleInverted:" destination="Gbg-cv-RVg" eventType="valueChanged" id="gJO-V8-NKp"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Unblock ads everywhere except for the websites from this list" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2B3-GC-e1o" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="28" width="317" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="top" secondItem="ZOt-rF-DQo" secondAttribute="bottom" constant="2" id="7IO-Pa-i67"/>
+                                                <constraint firstAttribute="trailing" secondItem="TmL-5C-Yij" secondAttribute="trailing" constant="16" id="FtD-AW-TXP">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="2B3-GC-e1o" secondAttribute="bottom" constant="16" id="GSa-oB-6xu">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="ZOt-rF-DQo" firstAttribute="top" secondItem="Opn-2R-MRJ" secondAttribute="top" constant="16" id="JE9-bh-5Dt">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="TmL-5C-Yij" firstAttribute="leading" secondItem="ZOt-rF-DQo" secondAttribute="trailing" constant="16" id="OA0-e8-JV4">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="ZOt-rF-DQo" firstAttribute="leading" secondItem="Opn-2R-MRJ" secondAttribute="leading" constant="16" id="lal-Ca-rPv">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="TmL-5C-Yij" firstAttribute="top" secondItem="Opn-2R-MRJ" secondAttribute="top" constant="16" id="mBf-bk-eMr">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="leading" secondItem="ZOt-rF-DQo" secondAttribute="leading" id="o3w-ve-LhG"/>
+                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="trailing" secondItem="ZOt-rF-DQo" secondAttribute="trailing" id="w6p-sj-SZT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -400,6 +468,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="invertedSwitch" destination="TmL-5C-Yij" id="7eu-ZT-mrA"/>
                         <outlet property="numberOfFiltersLabel" destination="2kF-Mk-dHf" id="Yn1-hr-EjL"/>
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
                         <outlet property="safariIcon" destination="rFj-gs-pCq" id="Oih-Wc-JNO"/>
@@ -415,6 +484,8 @@
                         <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
                         <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
                         <outletCollection property="themableLabels" destination="6WB-a0-8YE" collectionClass="NSMutableArray" id="yve-Tf-DXE"/>
+                        <outletCollection property="themableLabels" destination="ZOt-rF-DQo" collectionClass="NSMutableArray" id="wHQ-jz-23j"/>
+                        <outletCollection property="themableLabels" destination="2B3-GC-e1o" collectionClass="NSMutableArray" id="Gri-YE-QOg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npH-7c-pqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
