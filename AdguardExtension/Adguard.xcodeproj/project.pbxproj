@@ -635,6 +635,8 @@
 		7E6E73B823F6C630001D5019 /* RateAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E73B623F6C630001D5019 /* RateAppController.xib */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
+		7E7F9941241B7A1E00FC89DC /* DnsProvidersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */; };
+		7E7F9943241B7AA400FC89DC /* ComplexProtectionServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F9942241B7AA300FC89DC /* ComplexProtectionServiceMock.swift */; };
 		7E83CA3E234351AC004E2EB8 /* dnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */; };
 		7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E844C3623AA7270009EA1AE /* GetProPageController.swift */; };
 		7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */; };
@@ -963,10 +965,10 @@
 		D044AF7321820ABE00CD9E06 /* CustomAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044AF7221820ABE00CD9E06 /* CustomAnimatedTransitioning.swift */; };
 		D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044AF742183098A00CD9E06 /* AddRuleController.swift */; };
 		D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */; };
-		D04C2B76240F9FF4009330A8 /* DnsProvidersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C2B75240F9FF4009330A8 /* DnsProvidersServiceMock.swift */; };
+		D04C2B76240F9FF4009330A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D04C2B77240FA18E009330A8 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */; };
-		D04C2B7A240FA7DC009330A8 /* ComplexProtectionServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04C2B79240FA7DC009330A8 /* ComplexProtectionServiceMock.swift */; };
+		D04C2B7A240FA7DC009330A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D04C2B7B2410E126009330A8 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D04C2B7C2410E137009330A8 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D04D1B7C201F3F2700D53073 /* ABECSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D08C96CE1FE3C459002456B3 /* ABECSubscription.m */; };
@@ -2043,6 +2045,8 @@
 		7E6E73B623F6C630001D5019 /* RateAppController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateAppController.xib; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
+		7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsProvidersServiceMock.swift; sourceTree = "<group>"; };
+		7E7F9942241B7AA300FC89DC /* ComplexProtectionServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexProtectionServiceMock.swift; sourceTree = "<group>"; };
 		7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnsFiltersModel.swift; sourceTree = "<group>"; };
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
@@ -4080,13 +4084,13 @@
 		D0EFBF5A22BA638F00D2D391 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				7E7F9942241B7AA300FC89DC /* ComplexProtectionServiceMock.swift */,
+				7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */,
 				D0D033F12355ECAF0056789B /* AntibannerControllerMock.swift */,
 				D02C080721BEAB5C00796714 /* AntibannerMock.swift */,
-				D04C2B79240FA7DC009330A8 /* ComplexProtectionServiceMock.swift */,
 				D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */,
 				D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */,
 				D02C080921BEAB8300796714 /* ConverterMock.swift */,
-				D04C2B75240F9FF4009330A8 /* DnsProvidersServiceMock.swift */,
 				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
 				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
 				7E3BBDBC23FF04E5009C42C0 /* TestableDateMock.swift */,
@@ -6094,6 +6098,7 @@
 				7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */,
 				65EC9CA91BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0288F30230697BA00A4EBEF /* Reachability.m in Sources */,
+				7E7F9943241B7AA400FC89DC /* ComplexProtectionServiceMock.swift in Sources */,
 				D081FC2C2418EB54000A10DA /* SafariProtectionService.swift in Sources */,
 				D07A811C23B5036E00181E54 /* SharedResourcesTest.swift in Sources */,
 				7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */,
@@ -6121,9 +6126,10 @@
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */,
 				D0C37ED022A687D20004337D /* DnsProxyService.swift in Sources */,
-				D04C2B7A240FA7DC009330A8 /* ComplexProtectionServiceMock.swift in Sources */,
+				D04C2B7A240FA7DC009330A8 /* (null) in Sources */,
 				D0D5949823AA3B8F0033CAF3 /* DnsLogRecordsService.swift in Sources */,
 				D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */,
+				7E7F9941241B7A1E00FC89DC /* DnsProvidersServiceMock.swift in Sources */,
 				D0AEC26B24093364003E8FCC /* APCommonSharedResources.m in Sources */,
 				D0C4EF2E23C8A27900C57E22 /* DnsTrackerService.swift in Sources */,
 				D0D33BB523102443009082CE /* RulesParser.swift in Sources */,
@@ -6162,7 +6168,7 @@
 				D0AEC26A2409323C003E8FCC /* VpnManager.swift in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
 				D0D033F02355EBF40056789B /* AntibannerController.swift in Sources */,
-				D04C2B76240F9FF4009330A8 /* DnsProvidersServiceMock.swift in Sources */,
+				D04C2B76240F9FF4009330A8 /* (null) in Sources */,
 				D0288F352306981C00A4EBEF /* ACNUrlUtils.m in Sources */,
 				D0F7F0CE22689C7A00592B1E /* LoginService.swift in Sources */,
 				D02C080421BEAAC200796714 /* ConfigurationServiceProtocol.swift in Sources */,

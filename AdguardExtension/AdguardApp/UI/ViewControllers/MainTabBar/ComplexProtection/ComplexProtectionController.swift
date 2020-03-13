@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ComplexProtectionController: UITableViewController, VpnServiceNotifierDelegate {
+class ComplexProtectionController: UITableViewController {
     
     // MARK: - Title Outlets
     
