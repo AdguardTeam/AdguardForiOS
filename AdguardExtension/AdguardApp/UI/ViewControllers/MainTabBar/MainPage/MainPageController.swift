@@ -682,13 +682,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      and updates UI
     */
     private func observeContentBlockersState() {
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        
-        DispatchQueue.main.async {[weak self] in
-            self?.contentBlockerViewIphone.isHidden = !isIphone
-            self?.contentBlockerViewIpad.isHidden = isIphone
-        }
-        
         if configuration.allContentBlockersEnabled {
             hideContentBlockersInfo()
         } else {
@@ -705,52 +698,67 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             }
         }
     }
-    
+
     /**
-     Shows content blockers info in the bottom of the screen
+     Shows iPad content blockers info
      */
-    private func showContentBlockersInfo(){
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        
-        if isIphone {
-            DispatchQueue.main.async {[weak self] in
-                self?.contentBlockerViewIphone.isHidden = false
-                UIView.animate(withDuration: 0.5) {
-                    self?.contentBlockerViewConstraint.constant = 64.0
-                }
-            }
-        } else {
-            DispatchQueue.main.async {[weak self] in
-                self?.contentBlockerViewIpad.alpha = 0.0
-                self?.contentBlockerViewIpad.isHidden = false
-                UIView.animate(withDuration: 0.5) {
-                    self?.contentBlockerViewIpad.alpha = 1.0
-                }
-            }
+    private func showIpadContentBlockersInfo(){
+        contentBlockerViewIpad.alpha = 0.0
+        contentBlockerViewIpad.isHidden = false
+        UIView.animate(withDuration: 0.5) {[weak self] in
+            self?.contentBlockerViewIpad.alpha = 1.0
         }
     }
     
     /**
-     Hides content blockers info in the bottom of the screen
+     Hides iPad content blockers info
+     */
+    private func hideIpadContentBlockersInfo(){
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
+            self?.contentBlockerViewIpad.alpha = 0.0
+        }) {[weak self] (success) in
+            self?.contentBlockerViewIpad.isHidden = true
+        }
+    }
+    
+    /**
+     Shows iPhone content blockers info
+    */
+    private func showIphoneContentBlockersInfo(){
+       contentBlockerViewIphone.isHidden = false
+        UIView.animate(withDuration: 0.5) {[weak self] in
+            self?.contentBlockerViewConstraint.constant = 64.0
+        }
+    }
+    
+    /**
+     Hides iPhone content blockers info
+    */
+    private func hideIphoneContentBlockersInfo(){
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
+            self?.contentBlockerViewConstraint.constant = 0.0
+        }) {[weak self] (success) in
+            self?.contentBlockerViewIphone.isHidden = true
+        }
+    }
+    
+    /**
+     Shows content blockers info
+     */
+    private func showContentBlockersInfo(){
+        DispatchQueue.main.async {[weak self] in
+            self?.showIphoneContentBlockersInfo()
+            self?.showIpadContentBlockersInfo()
+        }
+    }
+    
+    /**
+     Hides content blockers info
      */
     private func hideContentBlockersInfo(){
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        if isIphone {
-            DispatchQueue.main.async {[weak self] in
-                UIView.animate(withDuration: 0.5, animations: {[weak self] in
-                    self?.contentBlockerViewConstraint.constant = 0.0
-                }) {[weak self] (success) in
-                    self?.contentBlockerViewIphone.isHidden = true
-                }
-            }
-        } else {
-            DispatchQueue.main.async {[weak self] in
-                UIView.animate(withDuration: 0.5, animations: {[weak self] in
-                    self?.contentBlockerViewIpad.alpha = 0.0
-                }) {[weak self] (success) in
-                    self?.contentBlockerViewIpad.isHidden = true
-                }
-            }
+        DispatchQueue.main.async {[weak self] in
+            self?.hideIpadContentBlockersInfo()
+            self?.hideIphoneContentBlockersInfo()
         }
     }
     

@@ -678,11 +678,38 @@
                             <constraint firstItem="Woz-a2-14R" firstAttribute="top" secondItem="kV5-xp-1Np" secondAttribute="top" id="RrY-FS-4ZI"/>
                             <constraint firstItem="Woz-a2-14R" firstAttribute="trailing" secondItem="k8E-Jo-8op" secondAttribute="trailing" id="Vjk-DC-g0h"/>
                             <constraint firstItem="IU2-ER-A7n" firstAttribute="leading" secondItem="lIg-oL-XNY" secondAttribute="trailing" constant="16" id="Zwv-Jg-hG2"/>
+                            <constraint firstItem="Woz-a2-14R" firstAttribute="bottom" secondItem="kV5-xp-1Np" secondAttribute="bottom" id="k7s-6e-bka"/>
                             <constraint firstItem="Woz-a2-14R" firstAttribute="trailing" secondItem="kV5-xp-1Np" secondAttribute="trailing" id="khe-gs-trE"/>
                             <constraint firstItem="k8E-Jo-8op" firstAttribute="leading" secondItem="Woz-a2-14R" secondAttribute="leading" id="vqE-AB-KfI"/>
                             <constraint firstItem="kV5-xp-1Np" firstAttribute="leading" secondItem="Woz-a2-14R" secondAttribute="leading" id="w4m-II-al0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Woz-a2-14R"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="k8E-Jo-8op"/>
+                                <exclude reference="IU2-ER-A7n"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="k7s-6e-bka"/>
+                                <exclude reference="BMN-P6-MQZ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="k8E-Jo-8op"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="BMN-P6-MQZ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="IU2-ER-A7n"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="k7s-6e-bka"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="AdGuard" id="YaQ-RE-YZT" userLabel="Activity">
                         <barButtonItem key="rightBarButtonItem" id="mZo-6k-bpe">
