@@ -228,7 +228,7 @@ class DnsRequestDetailsController: UITableViewController {
      */
     private func createHeaderView(with text: String, needsButton: Bool) -> UIView{
         let tableWidth = tableView.frame.width
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
         
         let viewFrame = CGRect(x: 0.0, y: 0.0, width: tableWidth, height: 52.0)
         let view = UIView(frame: viewFrame)
@@ -236,13 +236,13 @@ class DnsRequestDetailsController: UITableViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = needsButton ? 60.0 : 24.0
-        let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: isIphone ? 16.0 : 24.0)
+        let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: isBigScreen ? 24.0 : 16.0)
         let label = ThemableLabel(frame: labelFrame)
         label.lightGreyText = true
         label.text = text
         label.numberOfLines = 0
         
-        label.font = UIFont.systemFont(ofSize: isIphone ? 16.0 : 24.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isBigScreen ? 24.0 : 16.0, weight: .regular)
         
         view.addSubview(label)
         

@@ -197,10 +197,10 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        let padding: CGFloat = isIphone ? 16.0 : 24.0
-        let font = UIFont.systemFont(ofSize: isIphone ? 20.0 : 30.0, weight: .medium)
-        let labelHeight: CGFloat = isIphone ? 20.0 : 30.0
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        let padding: CGFloat = isBigScreen ? 24.0 : 16.0
+        let font = UIFont.systemFont(ofSize: isBigScreen ? 30.0 : 20.0, weight: .medium)
+        let labelHeight: CGFloat = isBigScreen ? 30.0 : 20.0
         
         let height = calculateHeaderHeight(section: section)
         

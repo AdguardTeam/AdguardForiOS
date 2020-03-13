@@ -88,8 +88,12 @@ class GetProController: UIViewController {
         } else {
             setupBackButton()
         }
-        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-        myAccountButton.contentEdgeInsets.left = isIphone ? 16.0 : 24.0
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        myAccountButton.contentEdgeInsets.left = isBigScreen ? 24.0 : 16.0
     }
     
     deinit {
