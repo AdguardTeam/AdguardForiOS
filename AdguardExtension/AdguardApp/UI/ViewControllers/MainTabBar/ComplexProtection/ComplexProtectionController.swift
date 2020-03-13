@@ -126,6 +126,10 @@ class ComplexProtectionController: UITableViewController {
         updateVpnInfo()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        observeProStatus()
+    }
+    
     deinit {
         resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
     }
@@ -195,8 +199,8 @@ class ComplexProtectionController: UITableViewController {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let isIphone = UIDevice.current.userInterfaceIdiom == .phone
-            let height: CGFloat = isIphone ? 18.0 : 26.0 
+            let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
+            let height: CGFloat = isBigScreen ? 26.0 : 18.0
             
             self.freeTextViewHeight.constant = self.proStatus ? 0.0 : height
             self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : height
