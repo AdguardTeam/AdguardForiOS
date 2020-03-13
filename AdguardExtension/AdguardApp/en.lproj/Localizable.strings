@@ -730,42 +730,6 @@
 /* (FeedbackController) - feedback sending failure message */
 "feedback_sending_failed_message" = "Something went wrong";
 
-/* (RateAppDialogController) - 1 star title */
-"1_star_title" = "Disastrous";
-
-/* (RateAppDialogController) - 1 star message */
-"1_star_message" = "That hurts! What could we do better?";
-
-/* (RateAppDialogController) - 2 stars title */
-"2_star_title" = "Failed";
-
-/* (RateAppDialogController) - 2 stars message */
-"2_star_message" = "Sad :( Tell us your opinion";
-
-/* (RateAppDialogController) - 3 stars title */
-"3_star_title" = "It’s okay";
-
-/* (RateAppDialogController) - 3 stars message */
-"3_star_message" = "Please write to us what you didn’t like";
-
-/* (RateAppDialogController) - 4 stars title */
-"4_star_title" = "Good enough";
-
-/* (RateAppDialogController) - 4 stars message */
-"4_star_message" = "Aw, thanks!";
-
-/* (RateAppDialogController) - 5 stars title */
-"5_star_title" = "Excellent";
-
-/* (RateAppDialogController) - 5 stars message */
-"5_star_message" = "You are breathtaking!";
-
-/* (RateAppService) - Notification title */
-"rate_notification_title" = "Do you like AdGuard?";
-
-/* (RateAppService) - Notification message */
-"rate_notification_message" = "Rate our app in a snap";
-
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 

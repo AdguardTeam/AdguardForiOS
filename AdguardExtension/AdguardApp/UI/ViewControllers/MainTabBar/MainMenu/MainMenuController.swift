@@ -80,10 +80,8 @@ class MainMenuController: UITableViewController {
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         
-        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {[weak self] (action) in
-            let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "RateAppDialogController")
-            self?.present(controller, animated: true)
+        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {(action) in
+            UIApplication.shared.openAppStoreToRateApp()
         }
         
         let justSendFeedback = UIAlertAction(title: String.localizedString("just_send_feedback"), style: .default) {[weak self] (action) in
@@ -102,12 +100,10 @@ class MainMenuController: UITableViewController {
         }
     
         let contactSupportAction = UIAlertAction(title: ACLocalizedString("action_contact_support", nil), style: .default) { (action) in
-            
             self.support.sendMailBugReport(withParentController: self)
         }
         
         let exportLogsAction = UIAlertAction(title: ACLocalizedString("action_export_logs", nil), style: .default) { (action) in
-            
             self.support.exportLogs(withParentController: self, sourceView: self.bugreportCell, sourceRect: self.bugreportCell.bounds);
         }
         
@@ -115,7 +111,9 @@ class MainMenuController: UITableViewController {
         actionSheet.addAction(rateAppAction)
         actionSheet.addAction(justSendFeedback)
         actionSheet.addAction(incorrectAction)
-        actionSheet.addAction(contactSupportAction)
+        if MFMailComposeViewController.canSendMail() {
+            actionSheet.addAction(contactSupportAction)
+        }
         actionSheet.addAction(exportLogsAction)
         
         let popController = actionSheet.popoverPresentationController

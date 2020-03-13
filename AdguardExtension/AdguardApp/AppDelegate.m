@@ -158,7 +158,6 @@ static NSTimeInterval lastCheckTime;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerInstalledNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openRateAppDialogController) name:NSNotification.openRateAppDialogController object:nil];
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
@@ -310,9 +309,6 @@ static NSTimeInterval lastCheckTime;
             [_dnsFiltersService updateFiltersWithNetworking:_networking callback:nil];
             DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
         }
-        
-        // Show push notification for app rating
-        [_rateAppService showRateNotificationIfNeeded];
     }
 }
 
@@ -681,10 +677,6 @@ static NSTimeInterval lastCheckTime;
         
         [ACSSystemUtils showSimpleAlertForController:vc withTitle:title message:body];
     });
-}
-
-- (void)openRateAppDialogController{
-    [helper openRateAppDialogController];
 }
 
 @end

@@ -298,42 +298,6 @@ class AppDelegateHelper: NSObject {
         return false
     }
     
-    // MARK: - Open RateAppDialogController function
-    
-    func openRateAppDialogController(){
-        // If user tapped on notification we assume that he has rated an app
-        configuration.appRated = true
-        
-        guard let tab = self.getMainTabController() else {
-            DDLogError("(AppDeegateHelper) openRateAppDialogController error. There is no tab controller")
-            return
-        }
-        
-        if tab.viewControllers?.count == 0 { return }
-        
-        // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else { return }
-        
-        if let mainMenuController = navController.viewControllers.first as? MainMenuController {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                
-                let rateAppStoryboard = UIStoryboard(name: "RateApp", bundle: nil)
-                let controller = rateAppStoryboard.instantiateViewController(withIdentifier: "RateAppDialogController")
-                
-                controller.loadViewIfNeeded()
-                
-                navController.viewControllers = [mainMenuController]
-                
-                tab.selectedViewController = navController
-                
-                self.appDelegate.window.rootViewController = tab
-                
-                mainMenuController.present(controller, animated: true, completion: nil)
-            }
-        }
-    }
-    
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {
             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in

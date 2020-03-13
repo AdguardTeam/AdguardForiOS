@@ -8,213 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Rate app-->
-        <scene sceneID="gIs-7N-60o">
-            <objects>
-                <viewController storyboardIdentifier="RateAppDialogController" modalTransitionStyle="crossDissolve" id="uwy-qp-cOl" customClass="RateAppDialogController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1hY-0Q-Y96">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ktk" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQD-pU-Meh" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="32" y="486" width="960" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ppppp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T51-Ul-VKg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="32" y="530" width="960" height="31.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                </variation>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile_man" translatesAutoresizingMaskIntoConstraints="NO" id="4vK-Mb-3Ng">
-                                <rect key="frame" x="391.5" y="146.99999999999997" width="241" height="307.00000000000006"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="4vK-Mb-3Ng" secondAttribute="height" multiplier="11:14" id="Rd8-n6-cVK"/>
-                                </constraints>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="m0d-ta-F8j">
-                                <rect key="frame" x="372" y="604" width="280" height="40"/>
-                                <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Mc-9D-MMF">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="7Mc-9D-MMF" secondAttribute="height" multiplier="1:1" id="cj0-k2-ecu"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="star"/>
-                                        <state key="selected" image="star_selected"/>
-                                        <connections>
-                                            <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="idz-X7-ApR"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtS-gh-WWj">
-                                        <rect key="frame" x="60" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="PtS-gh-WWj" secondAttribute="height" multiplier="1:1" id="6oa-h4-pDj"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="star"/>
-                                        <state key="selected" image="star_selected"/>
-                                        <connections>
-                                            <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="MWb-DS-z8b"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpi-0C-4tG">
-                                        <rect key="frame" x="120" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="kpi-0C-4tG" secondAttribute="height" multiplier="1:1" id="Qkz-vy-RfD"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="star"/>
-                                        <state key="selected" image="star_selected"/>
-                                        <connections>
-                                            <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="D1m-VL-dqn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-SG-ynD">
-                                        <rect key="frame" x="180" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Y8W-SG-ynD" secondAttribute="height" multiplier="1:1" id="11C-ns-c9P"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="star"/>
-                                        <state key="selected" image="star_selected"/>
-                                        <connections>
-                                            <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="UhR-1c-iNP"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0C-ue-Epm">
-                                        <rect key="frame" x="240" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="s0C-ue-Epm" secondAttribute="height" multiplier="1:1" id="2q6-vS-Fp1"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="star"/>
-                                        <state key="selected" image="star_selected"/>
-                                        <connections>
-                                            <action selector="starButtonTapped:" destination="uwy-qp-cOl" eventType="touchDown" id="uun-Cp-yA8"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="XnO-0B-ef5">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HI-bv-Kom">
-                                <rect key="frame" x="372" y="676" width="280" height="60"/>
-                                <color key="backgroundColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="hl9-Vy-mr2">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="RATE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                </variation>
-                                <connections>
-                                    <action selector="rateButtonTapped:" destination="uwy-qp-cOl" eventType="touchUpInside" id="nnp-yx-G46"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTp-tq-bJy">
-                                <rect key="frame" x="16" y="16" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="byc-ff-U53">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="30" id="ixq-uV-hho">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                    </constraint>
-                                </constraints>
-                                <state key="normal" image="cross"/>
-                                <connections>
-                                    <action selector="crossButtonTapped:" destination="uwy-qp-cOl" eventType="touchUpInside" id="6Xl-Im-ccC"/>
-                                    <action selector="crossTapped:" destination="RXk-W3-fES" eventType="touchUpInside" id="BkY-xy-ucZ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rate app" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-vt-MmX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="72" y="23.5" width="880" height="25.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                </variation>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="m0d-ta-F8j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T51-Ul-VKg" secondAttribute="bottom" constant="24" id="1bM-UJ-L0W"/>
-                            <constraint firstItem="uAu-vt-MmX" firstAttribute="leading" secondItem="hy0-Nx-e9Y" secondAttribute="leading" constant="62" id="1gb-bs-blj">
-                                <variation key="heightClass=regular-widthClass=regular" constant="72"/>
-                            </constraint>
-                            <constraint firstItem="4vK-Mb-3Ng" firstAttribute="height" secondItem="1hY-0Q-Y96" secondAttribute="height" multiplier="0.4" id="7Ax-zC-DM0"/>
-                            <constraint firstItem="4vK-Mb-3Ng" firstAttribute="centerX" secondItem="hy0-Nx-e9Y" secondAttribute="centerX" id="B9W-Yf-qcW"/>
-                            <constraint firstItem="T51-Ul-VKg" firstAttribute="trailing" secondItem="IQD-pU-Meh" secondAttribute="trailing" id="E52-Aq-TcT"/>
-                            <constraint firstItem="IQD-pU-Meh" firstAttribute="centerY" secondItem="hy0-Nx-e9Y" secondAttribute="centerY" constant="62" id="FJ6-Tv-L1v">
-                                <variation key="heightClass=regular-widthClass=regular" constant="120"/>
-                            </constraint>
-                            <constraint firstItem="mTp-tq-bJy" firstAttribute="top" secondItem="hy0-Nx-e9Y" secondAttribute="top" constant="16" id="H4z-Pr-ALd"/>
-                            <constraint firstItem="hy0-Nx-e9Y" firstAttribute="trailing" secondItem="uAu-vt-MmX" secondAttribute="trailing" constant="62" id="Klg-7T-nQj">
-                                <variation key="heightClass=regular-widthClass=regular" constant="72"/>
-                            </constraint>
-                            <constraint firstItem="2HI-bv-Kom" firstAttribute="top" secondItem="m0d-ta-F8j" secondAttribute="bottom" priority="250" constant="48" id="MOY-1U-4hh"/>
-                            <constraint firstItem="IQD-pU-Meh" firstAttribute="top" secondItem="4vK-Mb-3Ng" secondAttribute="bottom" constant="32" id="TQm-fI-d8i"/>
-                            <constraint firstItem="4vK-Mb-3Ng" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uAu-vt-MmX" secondAttribute="bottom" constant="8" id="Ytx-yA-f9D"/>
-                            <constraint firstItem="T51-Ul-VKg" firstAttribute="top" secondItem="IQD-pU-Meh" secondAttribute="bottom" constant="8" id="hyp-eq-OIv"/>
-                            <constraint firstItem="mTp-tq-bJy" firstAttribute="leading" secondItem="hy0-Nx-e9Y" secondAttribute="leading" constant="16" id="iBs-fl-6hA"/>
-                            <constraint firstItem="hy0-Nx-e9Y" firstAttribute="bottom" secondItem="2HI-bv-Kom" secondAttribute="bottom" constant="32" id="kHr-4m-pW5"/>
-                            <constraint firstItem="m0d-ta-F8j" firstAttribute="centerX" secondItem="hy0-Nx-e9Y" secondAttribute="centerX" id="nRW-o9-kVi"/>
-                            <constraint firstItem="uAu-vt-MmX" firstAttribute="centerY" secondItem="mTp-tq-bJy" secondAttribute="centerY" id="oGv-6E-CnL"/>
-                            <constraint firstItem="2HI-bv-Kom" firstAttribute="width" secondItem="m0d-ta-F8j" secondAttribute="width" id="pNj-Y4-Vkg"/>
-                            <constraint firstItem="T51-Ul-VKg" firstAttribute="leading" secondItem="IQD-pU-Meh" secondAttribute="leading" id="s74-wz-42r"/>
-                            <constraint firstItem="2HI-bv-Kom" firstAttribute="centerX" secondItem="hy0-Nx-e9Y" secondAttribute="centerX" id="xCc-Gh-0i9"/>
-                            <constraint firstItem="IQD-pU-Meh" firstAttribute="leading" secondItem="hy0-Nx-e9Y" secondAttribute="leading" constant="32" id="y9p-hm-2wg"/>
-                            <constraint firstItem="hy0-Nx-e9Y" firstAttribute="trailing" secondItem="IQD-pU-Meh" secondAttribute="trailing" constant="32" id="ytI-bY-Dob"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="hy0-Nx-e9Y"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Rate app" id="zu1-H9-4SS"/>
-                    <connections>
-                        <outlet property="manImageView" destination="4vK-Mb-3Ng" id="3vG-bj-e7B"/>
-                        <outlet property="messageLabel" destination="T51-Ul-VKg" id="thT-Q8-Ame"/>
-                        <outlet property="rateAppTitle" destination="uAu-vt-MmX" id="T6G-D2-a2l"/>
-                        <outlet property="rateButton" destination="2HI-bv-Kom" id="je7-GH-ZmB"/>
-                        <outlet property="titleLabel" destination="IQD-pU-Meh" id="enV-rf-dPf"/>
-                        <outletCollection property="starsButtons" destination="7Mc-9D-MMF" collectionClass="NSMutableArray" id="gHf-xN-54Q"/>
-                        <outletCollection property="starsButtons" destination="PtS-gh-WWj" collectionClass="NSMutableArray" id="egJ-GZ-Ut2"/>
-                        <outletCollection property="starsButtons" destination="kpi-0C-4tG" collectionClass="NSMutableArray" id="uhS-gC-tlh"/>
-                        <outletCollection property="starsButtons" destination="Y8W-SG-ynD" collectionClass="NSMutableArray" id="agQ-J1-axc"/>
-                        <outletCollection property="starsButtons" destination="s0C-ue-Epm" collectionClass="NSMutableArray" id="U3W-bD-9Tk"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E2t-Iv-I1w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1638" y="-143"/>
-        </scene>
         <!--Feedback-->
         <scene sceneID="jNF-Oq-y46">
             <objects>
@@ -423,7 +216,6 @@
                                 <state key="normal" image="cross"/>
                                 <connections>
                                     <action selector="crossButtonTapped:" destination="TsU-RG-ZKx" eventType="touchUpInside" id="KNZ-u0-UBi"/>
-                                    <action selector="crossButtonTapped:" destination="uwy-qp-cOl" eventType="touchUpInside" id="R3u-9J-liB"/>
                                     <action selector="crossTapped:" destination="RXk-W3-fES" eventType="touchUpInside" id="CHt-Er-FFI"/>
                                 </connections>
                             </button>
@@ -487,7 +279,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="homeButtonTapped:" destination="TsU-RG-ZKx" eventType="touchUpInside" id="q0z-4p-0hO"/>
-                                    <action selector="rateButtonTapped:" destination="uwy-qp-cOl" eventType="touchUpInside" id="s33-gZ-HrI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -535,7 +326,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Vu9-Kq-lEo">
             <objects>
-                <navigationController storyboardIdentifier="FeedbackController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" navigationBarHidden="YES" id="1Dk-NH-byR" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FeedbackController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="1Dk-NH-byR" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -554,9 +345,6 @@
     </scenes>
     <resources>
         <image name="cross" width="24" height="24"/>
-        <image name="smile_man" width="177" height="239"/>
-        <image name="star" width="26" height="25"/>
-        <image name="star_selected" width="24" height="23"/>
         <image name="thank_man" width="151" height="243"/>
     </resources>
 </document>
