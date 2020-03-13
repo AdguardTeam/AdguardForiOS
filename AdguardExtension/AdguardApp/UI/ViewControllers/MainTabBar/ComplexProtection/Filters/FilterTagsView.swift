@@ -40,45 +40,45 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     
     // MARK: - Variables to distinguish iPad and iPhone
     
-    private var isIphone: Bool {
+    private var isBigScreen: Bool {
         get {
-            return UIDevice.current.userInterfaceIdiom == .phone
+            return traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
         }
     }
     
     private var tagCornerRadius: CGFloat {
         get {
-            return isIphone ? 3.0 : 5.0
+            return isBigScreen ? 5.0 : 3.0
         }
     }
     
     private var buttonHeight: CGFloat {
         get {
-            return isIphone ? 22.0 : 32.0
+            return isBigScreen ? 32.0 : 22.0
         }
     }
     
     private var langButtonWidth: CGFloat {
         get {
-            return isIphone ? 30.0 : 40.0
+            return isBigScreen ? 40.0 : 30.0
         }
     }
     
     private var inset: CGFloat {
         get {
-            return isIphone ? 8.0 : 16.0
+            return isBigScreen ? 16.0 : 8.0
         }
     }
     
     private var tagFont: UIFont {
         get {
-            return isIphone ? UIFont.systemFont(ofSize: 12.0, weight: .regular) : UIFont.systemFont(ofSize: 18.0, weight: .regular)
+            return isBigScreen ? UIFont.systemFont(ofSize: 18.0, weight: .regular) : UIFont.systemFont(ofSize: 12.0, weight: .regular)
         }
     }
     
     private var buttonTextInset: CGFloat {
         get {
-            return isIphone ? 6.0 : 12.0
+            return isBigScreen ? 12.0 : 6.0
         }
     }
     

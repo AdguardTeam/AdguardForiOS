@@ -720,9 +720,7 @@
                                         <constraint firstItem="MxA-VX-Amb" firstAttribute="top" secondItem="cTL-ax-aZV" secondAttribute="bottom" constant="8" id="kPe-qj-mkN">
                                             <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                         </constraint>
-                                        <constraint firstItem="VXN-1M-Lry" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" id="oPX-FE-FNk">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="2"/>
-                                        </constraint>
+                                        <constraint firstItem="VXN-1M-Lry" firstAttribute="top" secondItem="Vp3-Lp-AiW" secondAttribute="bottom" id="oPX-FE-FNk"/>
                                         <constraint firstAttribute="trailing" secondItem="eni-il-6g8" secondAttribute="trailing" constant="16" id="vyP-Wt-DqK">
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
@@ -1961,7 +1959,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="6Ap-Zj-DX8"/>
-        <segue reference="3mI-tN-g7J"/>
+        <segue reference="u0d-JL-uIG"/>
+        <segue reference="3B2-aA-sGN"/>
     </inferredMetricsTieBreakers>
 </document>
