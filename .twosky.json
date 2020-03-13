@@ -45,7 +45,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/en.lproj/MainPage.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection/en.lproj/Protection.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding/en.lproj/Onboarding.strings",
-        "AdguardExtension/AdGuardTodayExtension/en.lproj/TodayExtension.strings"
+        "AdguardExtension/AdGuardTodayExtension/en.lproj/TodayExtension.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/en.lproj/RateApp.strings"
     ],
     "storyboard_dirs": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
@@ -60,7 +61,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/RateApp"
     ]
   }
 ]

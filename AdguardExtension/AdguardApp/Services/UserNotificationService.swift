@@ -19,15 +19,6 @@
 import Foundation
 import UserNotifications
 
-// Must support NSSecureCoding thus it is Int
-enum PushNotificationCommands: Int {
-    typealias RawValue = Int
-    
-    static let command: String = "command"
-    
-    case openRateAppDialogController = 0
-}
-
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()
@@ -97,22 +88,6 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         completionHandler([.alert, .badge, .sound])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        guard let command = userInfo[PushNotificationCommands.command] as? Int else {
-            completionHandler()
-            return
-        }
-        
-        if command == PushNotificationCommands.openRateAppDialogController.rawValue {
-            NotificationCenter.default.post(name: .openRateAppDialogController, object: nil, userInfo: nil)
-            completionHandler()
-            return
-        }
-        
-        completionHandler()
-    }
-    
     // MARK: - private methods
     
     private func alertNotification(title: String?, body: String?, userInfo: [AnyHashable : Any]?) {
@@ -140,4 +115,12 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     private func badgeAndSound() {
         alertNotification(title: nil, body: nil, userInfo: nil)
     }
+}
+
+extension Notification.Name {
+    static let showCommonAlert = Notification.Name("showCommonAlert")
+}
+
+@objc extension NSNotification {
+    public static let showCommonAlert = Notification.Name.showCommonAlert
 }
