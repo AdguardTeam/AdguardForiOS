@@ -1870,7 +1870,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 }
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                       DDLogDebug(@"(ASAntibanner) antibanner has been allready installed.");
+                        DDLogDebug(@"(ASAntibanner) antibanner has been allready installed.");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
                    });
                 }
                 
