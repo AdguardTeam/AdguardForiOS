@@ -95,8 +95,9 @@ class ComplexProtectionSwitch: UIControl {
     // MARK: - Public method
     
     func setOn(on: Bool){
+        isOn = on
         animate(on: on) {[weak self] in
-            self?.isOn = on
+            
         }
     }
     
@@ -140,11 +141,11 @@ class ComplexProtectionSwitch: UIControl {
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         super.endTracking(touch, with: event)
         if touch?.tapCount ?? 0 > 0 {
+            self.generator.impactOccurred()
             animate(on: !isOn){ [weak self] in
                 guard let self = self else { return }
                 self.isOn = !self.isOn
                 self.sendActions(for: UIControl.Event.valueChanged)
-                self.generator.impactOccurred()
             }
             setNeutralShadows()
             return
@@ -153,22 +154,22 @@ class ComplexProtectionSwitch: UIControl {
         let x = touch?.location(in: self).x ?? 0.0
         
         if x > width / 2 {
+            self.generator.impactOccurred()
             animate(on: true){ [weak self] in
                 guard let self = self else { return }
                 self.isOn = true
                 if self.initialSwitchState != self.isOn {
                     self.sendActions(for: UIControl.Event.valueChanged)
                 }
-                self.generator.impactOccurred()
             }
         } else {
+            self.generator.impactOccurred()
             animate(on: false){ [weak self] in
                 guard let self = self else { return }
                 self.isOn = false
                 if self.initialSwitchState != self.isOn {
                     self.sendActions(for: UIControl.Event.valueChanged)
                 }
-                self.generator.impactOccurred()
             }
         }
         
@@ -196,6 +197,8 @@ class ComplexProtectionSwitch: UIControl {
         
         onPoint = bounds.maxX - thumbSide / 2
         offPoint = bounds.minX + thumbSide / 2
+        
+        switchAnimation(on: isOn)
     }
     
     /**
