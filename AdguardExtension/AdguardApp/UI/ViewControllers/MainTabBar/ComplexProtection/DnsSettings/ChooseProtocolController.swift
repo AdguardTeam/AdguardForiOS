@@ -143,7 +143,7 @@ class ChooseProtocolController: BottomAlertController {
     
     private func updateTheme() {
         
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
