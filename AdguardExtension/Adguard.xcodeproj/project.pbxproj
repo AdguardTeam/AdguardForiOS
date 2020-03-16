@@ -659,6 +659,10 @@
 		7EA4183A239FEBE700CF517C /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
+		7EADD513241BDD0200C74B66 /* facebook.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EADD50F241BDD0100C74B66 /* facebook.txt */; };
+		7EADD514241BDD0200C74B66 /* google.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EADD510241BDD0100C74B66 /* google.txt */; };
+		7EADD515241BDD0200C74B66 /* basic.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EADD511241BDD0200C74B66 /* basic.txt */; };
+		7EADD516241BDD0200C74B66 /* strict.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EADD512241BDD0200C74B66 /* strict.txt */; };
 		7EAFC5C823FA8AE100DB8766 /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */; };
 		7EAFC5CA23FA8CFD00DB8766 /* FeedbackCompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */; };
 		7EB2F94823F2B64500F9A544 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
@@ -1328,8 +1332,6 @@
 		D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		D0CDD56A2344E066000584EF /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
-		D0CDD56C2344EAA3000584EF /* dns_filter.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0CDD56B2344EAA3000584EF /* dns_filter.txt */; };
-		D0CDD56D2344EAA3000584EF /* dns_filter.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0CDD56B2344EAA3000584EF /* dns_filter.txt */; };
 		D0D033F02355EBF40056789B /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
 		D0D033F22355ECAF0056789B /* AntibannerControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D033F12355ECAF0056789B /* AntibannerControllerMock.swift */; };
 		D0D3377C23852A3F000AC77D /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
@@ -2212,6 +2214,10 @@
 		7EA3DBC62409367B000D8D42 /* IntroductionOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionOnboardingController.swift; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
+		7EADD50F241BDD0100C74B66 /* facebook.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = facebook.txt; sourceTree = "<group>"; };
+		7EADD510241BDD0100C74B66 /* google.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google.txt; sourceTree = "<group>"; };
+		7EADD511241BDD0200C74B66 /* basic.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = basic.txt; sourceTree = "<group>"; };
+		7EADD512241BDD0200C74B66 /* strict.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = strict.txt; sourceTree = "<group>"; };
 		7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 		7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCompletionController.swift; sourceTree = "<group>"; };
 		7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
@@ -2500,7 +2506,6 @@
 		D0CB347A212DD1AB003B650E /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
 		D0CDAEA42191C9540028001B /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		D0CDD5692344E066000584EF /* DnsFiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersService.swift; sourceTree = "<group>"; };
-		D0CDD56B2344EAA3000584EF /* dns_filter.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dns_filter.txt; sourceTree = "<group>"; };
 		D0D033F12355ECAF0056789B /* AntibannerControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerControllerMock.swift; sourceTree = "<group>"; };
 		D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AGDnsProxy.xcframework; path = ../Frameworks/AGDnsProxy.xcframework; sourceTree = "<group>"; };
 		D0D33BB323101A87009082CE /* RulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesParser.swift; sourceTree = "<group>"; };
@@ -3992,10 +3997,13 @@
 		D0CB3465212C31CC003B650E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7EADD511241BDD0200C74B66 /* basic.txt */,
+				7EADD50F241BDD0100C74B66 /* facebook.txt */,
+				7EADD510241BDD0100C74B66 /* google.txt */,
+				7EADD512241BDD0200C74B66 /* strict.txt */,
 				7E252218240821BE00743648 /* safari_protection_step1.json */,
 				7E252219240821BF00743648 /* safari_protection_step2.json */,
 				7E252217240821BE00743648 /* safari_tracking_protection_step3.json */,
-				D0CDD56B2344EAA3000584EF /* dns_filter.txt */,
 				D02B550722EED8740039BC48 /* PTMono-Regular.ttf */,
 				D005096A2201DA2F006BC10C /* providers.json */,
 				65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */,
@@ -5003,6 +5011,7 @@
 				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				7E952E9A23D5FFBA00D89AE0 /* Activity.storyboard in Resources */,
+				7EADD515241BDD0200C74B66 /* basic.txt in Resources */,
 				65B40D331BDE635200A9C595 /* JSConverter.js in Resources */,
 				7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
@@ -5012,19 +5021,21 @@
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
 				7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
+				7EADD514241BDD0200C74B66 /* google.txt in Resources */,
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
 				D0C940F023EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
 				D0C940F223EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM in Resources */,
+				7EADD513241BDD0200C74B66 /* facebook.txt in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				7E952E9D23D5FFC400D89AE0 /* Onboarding.storyboard in Resources */,
-				D0CDD56C2344EAA3000584EF /* dns_filter.txt in Resources */,
 				7E7F9908241A98E400FC89DC /* RateApp.storyboard in Resources */,
 				D005096B2201DA2F006BC10C /* providers.json in Resources */,
 				7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */,
 				D0D6B9FF21A6AF5B007360BC /* MainMenu.storyboard in Resources */,
 				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				7E952E9723D5FFB400D89AE0 /* Protection.storyboard in Resources */,
+				7EADD516241BDD0200C74B66 /* strict.txt in Resources */,
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
 				D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */,
 				D0C940F123EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM in Resources */,
@@ -5076,7 +5087,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0CDD56D2344EAA3000584EF /* dns_filter.txt in Resources */,
 				D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

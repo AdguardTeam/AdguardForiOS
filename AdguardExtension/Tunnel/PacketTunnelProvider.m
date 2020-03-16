@@ -642,8 +642,8 @@
 
     DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil configuration:configuration complexProtection:nil];
     NSString* filtersJson = [dnsFiltersService filtersJson];
-    long userFilterId = dnsFiltersService.userFilterId;
-    long whitelistFilterId = dnsFiltersService.whitelistFilterId;
+    long userFilterId = DnsFilter.userFilterId;
+    long whitelistFilterId = DnsFilter.whitelistFilterId;
     
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
     

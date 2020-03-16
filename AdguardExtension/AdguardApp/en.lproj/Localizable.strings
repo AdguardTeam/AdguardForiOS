@@ -733,6 +733,41 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
+/* (DnsFiltersService) - Basic Tracking protection filter title */
+"basic_filter_title" = "Basic Protection";
+
+/* (DnsFiltersService) - Basic Tracking protection filter description */
+"basic_filter_description" = "Blocks most common tracking domains.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter title */
+"strict_filter_title" = "Strict Protection";
+
+/* (DnsFiltersService) - Strict Tracking protection filter description */
+"strict_filter_description" = "Blocks all known trackers.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter important description */
+"strict_filter_important_description" = "May break some functionality.";
+
+/* (DnsFiltersService) - Google tracking domains filter title */
+"google_filter_title" = "Block Google trackers";
+
+/* (DnsFiltersService) - Google tracking domains filter description */
+"google_filter_description" = "Stops all known Google tracking domains.";
+
+/* (DnsFiltersService) - Google tracking domains filter important description */
+"google_filter_important_description" = "May interfere with apps and websites that use Google APIs.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter title */
+"facebook_filter_title" = "Block Facebook trackers";
+
+/* (DnsFiltersService) - Facebook tracking domains description */
+"facebook_filter_description" = "Stops all known Facebook tracking domains.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter important description */
+"facebook_filter_important_description" = "May interfere with apps and websites that use Facebook APIs.";
+
+
+
 // MARK: - Strings for VoiceOver -
 
 // MARK: - MainTabBarController
