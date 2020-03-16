@@ -296,6 +296,7 @@
                         <outletCollection property="themableLabels" destination="884-Hm-mb6" collectionClass="NSMutableArray" id="WRG-b1-9GS"/>
                         <outletCollection property="themableLabels" destination="cnF-td-Ba1" collectionClass="NSMutableArray" id="Amt-To-ryK"/>
                         <outletCollection property="themableLabels" destination="teo-vm-NRJ" collectionClass="NSMutableArray" id="c3T-UA-1dF"/>
+                        <outletCollection property="themableLabels" destination="wyK-CX-EwT" collectionClass="NSMutableArray" id="lNj-wW-zLY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHj-J0-uTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
