@@ -199,7 +199,7 @@ protocol DnsProvidersServiceProtocol {
         let provider = activeDnsProvider
         
         if isCustomServer(server) {
-            return "\(provider?.name ?? server.name)"
+            return provider?.name ?? server.name
         }
         
         let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
