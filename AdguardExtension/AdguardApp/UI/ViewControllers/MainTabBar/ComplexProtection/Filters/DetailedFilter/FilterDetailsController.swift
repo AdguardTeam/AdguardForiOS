@@ -206,6 +206,8 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     private var notificationToken: NotificationToken?
     
+    private let zeroVersion = "0.0.0.0"
+    
     // MARK: - constants
     
     // rows
@@ -228,7 +230,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         enabledSwitch.isOn = filter.enabled
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         descriptionLabel.text = filter.desc
-        versionLabel.text = filter.version
+        versionLabel.text = filter.version == zeroVersion ? nil : filter.version
         updatedLabel.text = filter.updateDate?.formatedString()
         rulesCountLabel.text = "\(filter.rulesCount ?? 0)"
         
@@ -273,7 +275,7 @@ class FilterDetailsTableCotroller : UITableViewController {
             return filter.desc == nil || filter.desc?.count == 0 ? 0.0 : calculatedHeight
             
         case .version:
-            return filter.version == nil || filter.version?.count == 0 ? 0.0 : calculatedHeight
+            return (filter.version == nil || filter.version?.count == 0 || filter.version == zeroVersion) ? 0.0 : calculatedHeight
             
         case .updated:
             return filter.updateDate == nil ? 0.0 : calculatedHeight
