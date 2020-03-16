@@ -317,7 +317,15 @@ class VpnManager: VpnManagerProtocol {
         
         manager.onDemandRules = ondemandRules
         
-        let enabled = self.complexProtection?.systemProtectionEnabled ?? false
+        let enabled: Bool
+        
+        if !vpnInstalled {
+            enabled = true // install configuration with enable = true
+        }
+        else {
+           enabled = self.complexProtection?.systemProtectionEnabled ?? false || !vpnInstalled
+        }
+        
         manager.isEnabled = enabled
         manager.isOnDemandEnabled = enabled
     }

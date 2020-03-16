@@ -78,6 +78,7 @@ class ComplexProtectionController: UITableViewController {
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeNotification: NotificationToken?
+    private var vpnChangeObservation: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     
     private var proStatus: Bool {
@@ -111,6 +112,10 @@ class ComplexProtectionController: UITableViewController {
             self.observeProStatus()
         }
         
+        vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in
+            self?.updateVpnInfo()
+        }
+        
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
         freeTextView.text = freeTextView.text.uppercased()
@@ -120,7 +125,6 @@ class ComplexProtectionController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateVpnInfo()
         updateSafariProtectionInfo()
         observeProStatus()
         updateVpnInfo()
@@ -154,6 +158,7 @@ class ComplexProtectionController: UITableViewController {
                 }
             }
         }
+        updateVpnInfo()
     }
     
     // MARK: - Table view delegates and dataSource methods
