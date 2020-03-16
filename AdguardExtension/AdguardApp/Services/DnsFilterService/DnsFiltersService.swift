@@ -113,7 +113,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var removable: Bool {
         get {
             // Check if filter id is in range of predefined filters
-            return DnsFilter.predefinedFiltersRange ~= id
+            return DnsFilter.customFiltersRange ~= id
         }
     }
     
@@ -510,7 +510,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         let name = String.localizedString("strict_filter_title")
         let descr = String.localizedString("strict_filter_description")
-        let importantDesc = String.localizedString("google_filter_important_description")
+        let importantDesc = String.localizedString("strict_filter_important_description")
         
         let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         strictFilter.id = DnsFilter.strictFilterId
