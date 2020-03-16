@@ -22,12 +22,10 @@ protocol AddRuleControllerDelegate {
     func addRule(rule: String)
 }
 
-class AddRuleController: UIViewController, UITextViewDelegate {
+class AddRuleController: BottomAlertController, UITextViewDelegate {
     
     var delegate : AddRuleControllerDelegate?
     var type: RulesType = .safariUserfilter
-    
-    @IBOutlet weak var contentView: RoundrectView!
     
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var rulePlaceholderLabel: UILabel!
@@ -35,8 +33,6 @@ class AddRuleController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var editCaption: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    
-    @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
