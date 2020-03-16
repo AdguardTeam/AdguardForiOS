@@ -46,6 +46,8 @@ enum ComplexProtectionError: Error {
 // MARK: - Complex protection class -
 class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
+    static let systemProtectionChangeNotification = Notification.Name(rawValue: "systemProtectionChangeNotification")
+    
     var safariProtectionEnabled: Bool {
         return safariProtection.safariProtectionEnabled
     }
@@ -69,6 +71,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     private let vpnManager: VpnManagerProtocol
     
     private var vpnConfigurationObserver: NotificationToken!
+    private var vpnStateChangeObserver: NotificationToken!
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -84,6 +87,16 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
             self.resources.systemProtectionEnabled = false
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+        
+        vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            if let enabled = note.object as? Bool {
+                self.resources.systemProtectionEnabled = enabled
+            }
+            
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }
         
         vpnManager.checkVpnInstalled { (_) in

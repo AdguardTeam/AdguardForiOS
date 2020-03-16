@@ -567,7 +567,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self.observeContentBlockersState()
         }
         
-        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: nil) { [weak self] (note) in
             DispatchQueue.main.async {
                 self?.updateProtectionStates()
                 self?.updateProtectionStatusText()
