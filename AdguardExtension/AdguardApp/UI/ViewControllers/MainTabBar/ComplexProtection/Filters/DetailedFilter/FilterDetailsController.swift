@@ -30,7 +30,6 @@ protocol FilterDetailsControllerTableViewDelegate {
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
     
     var filter: FilterDetailedInterface!
-    var isCustom: Bool!
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
@@ -49,8 +48,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         super.viewDidLoad()
         
         self.title = filter.name
-        deleteButtonHeightConstraint.constant = isCustom ? 60 : 0
         
+        deleteButtonHeightConstraint.constant = filter.removable ? 60 : 0
         deleteButton.isHidden = !filter.removable
         
         updateTheme()
@@ -61,6 +60,12 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         setupBackItem()
         deleteButton.makeTitleTextUppercased()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        deleteButton.contentEdgeInsets.left = isBigScreen ? 24.0 : 16.0
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

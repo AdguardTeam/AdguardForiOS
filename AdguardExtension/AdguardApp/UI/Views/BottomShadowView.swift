@@ -69,7 +69,12 @@ class BottomShadowView: UIView {
         }
     }
 
-    private let buttonsHeight: CGFloat = 60.0
+    private var buttonsHeight: CGFloat {
+        get {
+            let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+            return isBigScreen ? 80.0 : 60.0
+        }
+    }
     private let separatorHeight: CGFloat = 1.0
     
     private var shadowColor: UIColor = .clear
@@ -152,8 +157,9 @@ class BottomShadowView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
 
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15.0, weight: .medium)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        button.titleLabel?.font = UIFont.systemFont(ofSize: isBigScreen ? 24.0 : 16.0, weight: .medium)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: isBigScreen ? 24.0 : 16.0, bottom: 0, right: 0)
         button.contentHorizontalAlignment = .left
         
         button.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true

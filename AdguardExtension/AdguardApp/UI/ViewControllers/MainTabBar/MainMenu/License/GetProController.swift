@@ -90,6 +90,12 @@ class GetProController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        myAccountButton.contentEdgeInsets.left = isBigScreen ? 24.0 : 16.0
+    }
+    
     deinit {
         if let observer = notificationObserver {
             NotificationCenter.default.removeObserver(observer)

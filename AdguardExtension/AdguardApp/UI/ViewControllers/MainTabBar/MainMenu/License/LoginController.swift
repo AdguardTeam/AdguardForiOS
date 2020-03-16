@@ -297,12 +297,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         let title = ACLocalizedString("lost_password", nil)
         let color = UIColor(hexString: "#888888")
         let nsRange = NSRange(location: 0, length: title.count)
+        let font = lostPasswordButton.titleLabel?.font
         
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttribute(.foregroundColor, value: color, range: nsRange)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsRange)
         attributedString.addAttribute(.underlineColor, value: color, range: nsRange)
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12.0), range: nsRange)
+        attributedString.addAttribute(.font, value: font!, range: nsRange)
         
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
     }

@@ -57,9 +57,10 @@ class ProviderMock: NETunnelProviderManager {
 class VpnManagerTest: XCTestCase {
 
     var vpnManager: VpnManager!
+    var dnsProviders: DnsProvidersServiceProtocol = DnsProvidersServiceMock()
     
     override func setUp() {
-        vpnManager = VpnManager(resources: SharedResourcesMock(), configuration: ConfigurationServiceMock(), networkSettings: NetworkSettingsService(resources: SharedResourcesMock()), dnsProviders: DnsProvidersServiceMock())
+        vpnManager = VpnManager(resources: SharedResourcesMock(), configuration: ConfigurationServiceMock(), networkSettings: NetworkSettingsService(resources: SharedResourcesMock()), dnsProviders: dnsProviders)
         
         vpnManager.providerManagerType = ProviderMock.self
         

@@ -277,7 +277,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
         
         controller.filter = filter
-        controller.isCustom = true
         
         navigationController?.pushViewController(controller, animated: true)
     }

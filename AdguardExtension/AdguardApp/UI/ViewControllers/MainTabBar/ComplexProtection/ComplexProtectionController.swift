@@ -19,6 +19,10 @@
 import UIKit
 
 class ComplexProtectionController: UITableViewController {
+    
+    // MARK: - Title Outlets
+    
+    @IBOutlet weak var titlImageView: UIImageView!
 
     // MARK: - Safari protection outlets
     
@@ -83,6 +87,9 @@ class ComplexProtectionController: UITableViewController {
     private let enabledColor = UIColor(hexString: "#67B279")
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
+    private let titleSection = 0
+    private let protectionSection = 1
+    
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
 
@@ -108,6 +115,7 @@ class ComplexProtectionController: UITableViewController {
         
         freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()
+        titlImageView.image = UIImage(named: "apps")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +124,10 @@ class ComplexProtectionController: UITableViewController {
         updateSafariProtectionInfo()
         observeProStatus()
         updateVpnInfo()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        observeProStatus()
     }
     
     deinit {
@@ -153,6 +165,14 @@ class ComplexProtectionController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     // MARK: - Observer
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -187,8 +207,11 @@ class ComplexProtectionController: UITableViewController {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
-            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : 18.0
+            let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
+            let height: CGFloat = isBigScreen ? 26.0 : 18.0
+            
+            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : height
+            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : height
             
             self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0

@@ -228,6 +228,7 @@ class DnsRequestDetailsController: UITableViewController {
      */
     private func createHeaderView(with text: String, needsButton: Bool) -> UIView{
         let tableWidth = tableView.frame.width
+        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
         
         let viewFrame = CGRect(x: 0.0, y: 0.0, width: tableWidth, height: 52.0)
         let view = UIView(frame: viewFrame)
@@ -235,12 +236,13 @@ class DnsRequestDetailsController: UITableViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = needsButton ? 60.0 : 24.0
-        let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: 16.0)
+        let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: isBigScreen ? 24.0 : 16.0)
         let label = ThemableLabel(frame: labelFrame)
         label.lightGreyText = true
         label.text = text
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        
+        label.font = UIFont.systemFont(ofSize: isBigScreen ? 24.0 : 16.0, weight: .regular)
         
         view.addSubview(label)
         
@@ -293,9 +295,9 @@ class DnsRequestDetailsController: UITableViewController {
         let userStatus = record.logRecord.userStatus
         let stCopied = userStatus == .none ? status : "\(status) (\(userStatus.title()))"
         let color = record.logRecord.status.color()
-        let statusFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        let statusFontWeight = UIFont.Weight.bold
         let statusTitle = String.localizedString("status_title")
-        let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFont: statusFont, infoColor: color, theme: theme)
+        let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFontWeight: statusFontWeight, infoColor: color, theme: theme)
         return statusModel
     }
     
@@ -383,9 +385,9 @@ class DnsRequestDetailsController: UITableViewController {
         // Name model
         let name = record.category.name ?? ""
         let nameTitle = String.localizedString("name_title")
-        let nameFont = UIFont.systemFont(ofSize: 15.0, weight: .bold)
+        let nameFontWeight = UIFont.Weight.bold
         let nameModelIsNil = name.isEmpty
-        let nameModel = nameModelIsNil ? nil : LogCellModel(copiedString: name, title: nameTitle, info: name, infoFont: nameFont, theme: theme)
+        let nameModel = nameModelIsNil ? nil : LogCellModel(copiedString: name, title: nameTitle, info: name, infoFontWeight: nameFontWeight, theme: theme)
         if !nameModelIsNil {
             trackerDetailsSection = trackerSectionToAssign
             nameCell = IndexPath(row: trackerDetailsRows, section: trackerDetailsSection!)

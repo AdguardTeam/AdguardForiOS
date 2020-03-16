@@ -34,10 +34,55 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         }
     }
     
-    
     private var leftInset: CGFloat = 0.0
     private var currentYposition: CGFloat = 0.0
-    private let inset: CGFloat = 8.0
+    
+    
+    // MARK: - Variables to distinguish iPad and iPhone
+    
+    private var isBigScreen: Bool {
+        get {
+            return traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+        }
+    }
+    
+    private var tagCornerRadius: CGFloat {
+        get {
+            return isBigScreen ? 5.0 : 3.0
+        }
+    }
+    
+    private var buttonHeight: CGFloat {
+        get {
+            return isBigScreen ? 32.0 : 22.0
+        }
+    }
+    
+    private var langButtonWidth: CGFloat {
+        get {
+            return isBigScreen ? 40.0 : 30.0
+        }
+    }
+    
+    private var inset: CGFloat {
+        get {
+            return isBigScreen ? 16.0 : 8.0
+        }
+    }
+    
+    private var tagFont: UIFont {
+        get {
+            return isBigScreen ? UIFont.systemFont(ofSize: 18.0, weight: .regular) : UIFont.systemFont(ofSize: 12.0, weight: .regular)
+        }
+    }
+    
+    private var buttonTextInset: CGFloat {
+        get {
+            return isBigScreen ? 12.0 : 6.0
+        }
+    }
+    
+    
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
     
@@ -68,8 +113,8 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         guard let tags = filter.tags else { return }
         
         if (langs.count > 0 || tags.count > 0) {
-            height += 32.0
-            currentYposition += 10.0
+            height += buttonHeight + inset
+            currentYposition += inset
         }
         
         for view in subviews{
@@ -119,11 +164,11 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         if highlightIsOn{
             langButton.alpha = lang.heighlighted ? 0.3 : 1.0
         }
-        langButton.layer.cornerRadius = 3.0
+        langButton.layer.cornerRadius = tagCornerRadius
         langButton.layer.masksToBounds = true
         
-        langButton.frame.size.height = 22.0
-        langButton.frame.size.width = 30.0
+        langButton.frame.size.height = buttonHeight
+        langButton.frame.size.width = langButtonWidth
         
         addSubview(langButton)
     }
@@ -137,17 +182,17 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         tagButton.customDisabledBackgroundColor = UIColor(hexString: "#CCCCCC")
         
         tagButton.setTitle(tag.name, for: .normal)
-        tagButton.titleLabel?.font = UIFont.systemFont(ofSize: 12.0, weight: .regular)
-        tagButton.layer.cornerRadius = 3.0
+        tagButton.titleLabel?.font = tagFont
+        tagButton.layer.cornerRadius = tagCornerRadius
         if highlightIsOn{
             tagButton.alpha = tag.heighlighted ? 0.3 : 1.0
         }
         tagButton.name = tag.name
         theme.setupTagButton(tagButton)
         
-        tagButton.frame.size.height = 22.0
+        tagButton.frame.size.height = buttonHeight
         var size = tagButton.sizeThatFits(CGSize(width: 1000, height: tagButton.frame.height))
-        size.width = size.width + 6
+        size.width = size.width + buttonTextInset
         size.height = tagButton.frame.size.height
         tagButton.frame.size = size
         

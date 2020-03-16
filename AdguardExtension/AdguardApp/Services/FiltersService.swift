@@ -35,7 +35,11 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     var displayNumber: Int?
     var updateDate: Date?
     var searchAttributedString: NSAttributedString?
-    var removable: Bool = true
+    var removable: Bool {
+        get {
+            return groupId == FilterGroupId.custom
+        }
+    }
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId

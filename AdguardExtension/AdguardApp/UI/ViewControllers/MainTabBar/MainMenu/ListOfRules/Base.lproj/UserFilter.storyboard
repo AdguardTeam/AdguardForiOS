@@ -863,14 +863,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Std-34-cUz" customClass="RoundrectView" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="469" width="600" height="131"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The rule has been added to the User rules" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfI-YN-iXe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="23" width="364" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The rule has been added to the User rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfI-YN-iXe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="24" width="288" height="48"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        </variation>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXl-Bo-7tE">
                                         <rect key="frame" x="0.0" y="70" width="600" height="0.5"/>
@@ -882,15 +885,21 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRm-I7-37E" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="70.5" width="600" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="vt4-hJ-CdT"/>
+                                            <constraint firstAttribute="height" constant="60" id="vt4-hJ-CdT">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
-                                        <inset key="titleEdgeInsets" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
-                                        <state key="normal" title="OK">
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="25" maxY="0.0"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="disabled">
                                             <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        </variation>
                                         <connections>
                                             <action selector="okAction:" destination="bu5-D3-w6D" eventType="touchUpInside" id="BoG-bI-yuK"/>
                                         </connections>
@@ -902,21 +911,42 @@
                                             <constraint firstAttribute="height" constant="0.5" id="yQl-0L-998"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST7-Ut-0aa">
+                                        <rect key="frame" x="16" y="117" width="22.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="QCC-li-ZR0" secondAttribute="bottom" id="5eB-OA-HeH"/>
+                                    <constraint firstItem="ST7-Ut-0aa" firstAttribute="leading" secondItem="zRm-I7-37E" secondAttribute="leading" constant="16" id="BJM-cT-33c">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                    </constraint>
+                                    <constraint firstItem="ST7-Ut-0aa" firstAttribute="centerY" secondItem="zRm-I7-37E" secondAttribute="centerY" id="JsG-Cg-QN4"/>
                                     <constraint firstItem="QCC-li-ZR0" firstAttribute="top" secondItem="zRm-I7-37E" secondAttribute="bottom" id="Ku2-Fc-Xqs"/>
                                     <constraint firstItem="zRm-I7-37E" firstAttribute="top" secondItem="gXl-Bo-7tE" secondAttribute="bottom" id="MM4-ny-0dT"/>
                                     <constraint firstItem="gXl-Bo-7tE" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" id="Ouz-To-NHV"/>
                                     <constraint firstAttribute="trailing" secondItem="gXl-Bo-7tE" secondAttribute="trailing" id="TF8-ef-WfQ"/>
-                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" constant="25" id="aGw-64-FvN"/>
-                                    <constraint firstAttribute="trailing" secondItem="BfI-YN-iXe" secondAttribute="trailing" constant="25" id="iWP-hT-alb"/>
+                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" constant="16" id="aGw-64-FvN">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="BfI-YN-iXe" secondAttribute="trailing" constant="16" id="iWP-hT-alb">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="zRm-I7-37E" secondAttribute="trailing" id="k9j-pd-6H4"/>
-                                    <constraint firstItem="gXl-Bo-7tE" firstAttribute="top" secondItem="BfI-YN-iXe" secondAttribute="bottom" constant="23" id="qKl-08-Exi"/>
+                                    <constraint firstItem="gXl-Bo-7tE" firstAttribute="top" secondItem="BfI-YN-iXe" secondAttribute="bottom" constant="24" id="qKl-08-Exi">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                    </constraint>
                                     <constraint firstItem="zRm-I7-37E" firstAttribute="leading" secondItem="Std-34-cUz" secondAttribute="leading" id="u7C-8s-jbj"/>
-                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="top" secondItem="Std-34-cUz" secondAttribute="top" constant="23" id="vWo-qv-dHd"/>
+                                    <constraint firstItem="BfI-YN-iXe" firstAttribute="top" secondItem="Std-34-cUz" secondAttribute="top" constant="24" id="vWo-qv-dHd">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                         </subviews>
@@ -959,18 +989,24 @@
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="Q0p-j9-7Ln" id="Ppk-KF-RY9"/>
                                 </connections>
                             </textView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkM-jo-HKF" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="24" y="194" width="366" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                </variation>
                             </label>
                         </subviews>
                         <constraints>
