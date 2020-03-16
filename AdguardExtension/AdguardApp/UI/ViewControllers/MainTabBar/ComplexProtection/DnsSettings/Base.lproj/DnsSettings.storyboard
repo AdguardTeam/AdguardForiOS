@@ -1653,17 +1653,32 @@
                                                 <action selector="filterStateAction:" destination="MAM-dm-Y5w" eventType="valueChanged" id="szZ-Qd-Rb8"/>
                                             </connections>
                                         </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usE-jA-ckc" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="52" width="315" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            </variation>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="qf9-ST-yr3" firstAttribute="leading" secondItem="rK4-aV-Mde" secondAttribute="trailing" constant="16" id="3db-yH-57n">
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
+                                        <constraint firstItem="usE-jA-ckc" firstAttribute="trailing" secondItem="cQB-mM-JUf" secondAttribute="trailing" id="AOo-aO-hGV"/>
+                                        <constraint firstItem="usE-jA-ckc" firstAttribute="leading" secondItem="cQB-mM-JUf" secondAttribute="leading" id="C2D-mH-bh4"/>
                                         <constraint firstItem="rK4-aV-Mde" firstAttribute="leading" secondItem="Btq-g0-yLy" secondAttribute="leading" constant="16" id="GVB-mn-4fj">
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
                                         <constraint firstItem="cQB-mM-JUf" firstAttribute="leading" secondItem="rK4-aV-Mde" secondAttribute="leading" id="N8X-sf-JFc"/>
+                                        <constraint firstItem="usE-jA-ckc" firstAttribute="top" secondItem="cQB-mM-JUf" secondAttribute="bottom" id="ZQG-Ay-Dba"/>
                                         <constraint firstItem="cQB-mM-JUf" firstAttribute="top" secondItem="rK4-aV-Mde" secondAttribute="bottom" constant="2" id="a1N-uj-4hV"/>
-                                        <constraint firstAttribute="bottom" secondItem="cQB-mM-JUf" secondAttribute="bottom" constant="16" id="kvI-Jj-8of">
+                                        <constraint firstAttribute="bottom" secondItem="usE-jA-ckc" secondAttribute="bottom" constant="16" id="gDe-HM-IvZ">
                                             <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                         </constraint>
                                         <constraint firstItem="rK4-aV-Mde" firstAttribute="top" secondItem="Btq-g0-yLy" secondAttribute="top" constant="16" id="lrs-C9-DtR">
@@ -1677,9 +1692,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="descriptionLabel" destination="cQB-mM-JUf" id="jWp-b8-uml"/>
                                     <outlet property="filterNameLabel" destination="rK4-aV-Mde" id="Rr3-zz-jcJ"/>
                                     <outlet property="filterSwitch" destination="qf9-ST-yr3" id="mo0-Sj-43Z"/>
-                                    <outlet property="updateLabel" destination="cQB-mM-JUf" id="jWp-b8-uml"/>
+                                    <outlet property="importantDescriptionLabel" destination="usE-jA-ckc" id="l2X-ZP-XFI"/>
                                     <outletCollection property="themableLabels" destination="rK4-aV-Mde" collectionClass="NSMutableArray" id="kbn-ZG-S4M"/>
                                     <outletCollection property="themableLabels" destination="cQB-mM-JUf" collectionClass="NSMutableArray" id="AgS-Ew-uXB"/>
                                 </connections>
@@ -1724,7 +1740,7 @@
                     <viewLayoutGuide key="safeArea" id="Jfl-yH-W4Y"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="1287.5" y="-1267.3828125"/>
+            <point key="canvasLocation" x="1286.9565217391305" y="-1267.6339285714284"/>
         </scene>
         <!--Dns Provider Container Controller-->
         <scene sceneID="XJi-NU-3jG">

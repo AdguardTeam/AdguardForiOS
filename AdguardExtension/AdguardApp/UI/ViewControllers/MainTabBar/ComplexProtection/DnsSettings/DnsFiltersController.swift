@@ -28,7 +28,8 @@ class AddFilterCell: UITableViewCell {
 
 class DnsFilterCell: UITableViewCell {
     @IBOutlet weak var filterNameLabel: ThemableLabel!
-    @IBOutlet weak var updateLabel: ThemableLabel!
+    @IBOutlet weak var descriptionLabel: ThemableLabel!
+    @IBOutlet weak var importantDescriptionLabel: ThemableLabel!
     @IBOutlet weak var filterSwitch: UISwitch!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -41,7 +42,10 @@ class DnsFilterCell: UITableViewCell {
             }
             
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            updateLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            let dateFormatedString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            
+            descriptionLabel.text = (filter?.desc ?? "") + "\n" + dateFormatedString
+            importantDescriptionLabel.text = filter?.importantDesc
             
             filterSwitch.isOn = filter?.enabled ?? false
         }
