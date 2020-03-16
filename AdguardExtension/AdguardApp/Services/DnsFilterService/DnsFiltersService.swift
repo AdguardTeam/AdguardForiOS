@@ -112,7 +112,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var homepage: String?
     var removable: Bool {
         get {
-            // Check if filter id is in range of predefined filters
+            // Check if filter id is in range of custom filters
             return DnsFilter.customFiltersRange ~= id
         }
     }
