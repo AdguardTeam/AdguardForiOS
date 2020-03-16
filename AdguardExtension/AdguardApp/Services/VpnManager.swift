@@ -266,7 +266,7 @@ class VpnManager: VpnManagerProtocol {
         
         var ondemandRules = [NEOnDemandRule]()
         
-        let SSIDs = networkSettings.exceptions.map{ $0.rule }
+        let SSIDs = networkSettings.enabledExceptions.map{ $0.rule }
         if SSIDs.count > 0 {
             let disconnectRule = NEOnDemandRuleDisconnect()
             disconnectRule.ssidMatch = SSIDs
