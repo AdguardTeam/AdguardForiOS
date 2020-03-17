@@ -62,7 +62,7 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/ComplexProtection",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/RateApp"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp"
     ]
   }
 ]

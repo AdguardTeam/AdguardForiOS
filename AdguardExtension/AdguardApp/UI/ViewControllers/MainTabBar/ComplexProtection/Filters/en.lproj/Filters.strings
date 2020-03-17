@@ -1,3 +1,6 @@
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "2B3-GC-e1o"; */
+"2B3-GC-e1o.text" = "Unblock ads everywhere except for the websites from this list";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
 "2wy-vg-qvr.text" = "Add a filter";
 
@@ -46,14 +49,17 @@
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "Filter URL:";
 
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "ZOt-rF-DQo"; */
+"ZOt-rF-DQo.text" = "Invert the Allowlist";
+
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "Version";
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "Add custom filter lists here";
 
-/* Class = "UILabel"; text = "Safari Whitelist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Safari Whitelist";
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "Allowlist";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filters";

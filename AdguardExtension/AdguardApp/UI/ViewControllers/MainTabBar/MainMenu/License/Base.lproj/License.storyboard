@@ -1188,5 +1188,6 @@
         <image name="adguard-premium-logo" width="220" height="68"/>
         <image name="adguard-premium-logo-dark" width="220" height="68"/>
         <image name="bottom-chevrone" width="14" height="8"/>
+        <image name="cross" width="24" height="24"/>
     </resources>
 </document>

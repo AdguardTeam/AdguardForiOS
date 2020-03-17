@@ -72,46 +72,61 @@ protocol DnsFiltersServiceProtocol {
     
     // removes rules(!not domains) from user filter and restarts the tunnel
     func removeUserRules(_ rules: [String])
-    
-    // user filter identifier
-    var userFilterId: Int { get }
-    
-    // whitelist filter identifier
-    var whitelistFilterId: Int { get}
 }
 
 @objc(DnsFilter)
 @objcMembers
 class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     
-    private let defaultFilterId = 0
+    // First 1000 filters are predefined filters
+    static let predefinedFiltersRange = 0..<1000
     
-    // defaultFilterId = 0, userFilterId = 1, whitelistFilterId = 2 , next available id is 3
-    var id: Int = 3
+    // From 1000 to 2000 are user filters
+    static let userFiltersRange = 1000..<2000
+    
+    // From 2000 to 3000 are whitelist filters
+    static let whitelistFiltersRange = 2000..<3000
+    
+    // From 3000 to infinity are custom filters
+    static let customFiltersRange = 3000..<1000000
+    
+    
+    static let basicFilterId = 0
+    static let strictFilterId = 1
+    static let googleFilterId = 2
+    static let facebookFilterId = 3
+    
+    static let userFilterId = userFiltersRange.lowerBound
+    static let whitelistFilterId = whitelistFiltersRange.lowerBound
+    
+    var id: Int = customFiltersRange.lowerBound
     var subscriptionUrl: String?
     var name: String?
     var attributedString: NSAttributedString? = nil
     var updateDate: Date?
     var enabled: Bool
     var desc: String?
+    var importantDesc: String?
     var version: String?
     var rulesCount: Int?
     var homepage: String?
     var removable: Bool {
         get {
-            return id != defaultFilterId
+            // Check if filter id is in range of custom filters
+            return DnsFilter.customFiltersRange ~= id
         }
     }
     
     // MARK: - Initialization
     
-    init(subscriptionUrl: String?, name: String, date: Date, enabled: Bool, desc: String?, version: String?, rulesCount: Int?, homepage: String?) {
+    init(subscriptionUrl: String?, name: String, date: Date, enabled: Bool, desc: String?, importantDesc: String? = nil, version: String?, rulesCount: Int?, homepage: String?) {
         
         self.subscriptionUrl = subscriptionUrl
         self.name = name
         self.updateDate = date
         self.enabled = enabled
         self.desc = desc
+        self.importantDesc = importantDesc
         self.version = version
         self.rulesCount = rulesCount
         self.homepage = homepage
@@ -138,6 +153,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
         coder.encode(updateDate, forKey: "updateDate")
         coder.encode(enabled, forKey: "enabled")
         coder.encode(desc, forKey: "desc")
+        coder.encode(importantDesc, forKey: "importantDesc")
         coder.encode(version, forKey: "version")
         coder.encode(rulesCount, forKey: "rulesCount")
         coder.encode(homepage, forKey: "homepage")
@@ -150,6 +166,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
         self.updateDate = coder.decodeObject(forKey: "updateDate") as? Date ?? Date()
         self.enabled = coder.decodeBool(forKey: "enabled")
         self.desc = coder.decodeObject(forKey: "desc") as? String ?? ""
+        self.importantDesc = coder.decodeObject(forKey: "importantDesc") as? String
         self.version = coder.decodeObject(forKey: "version") as? String? ?? ""
         self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int? ?? 0
         self.homepage = coder.decodeObject(forKey: "homepage") as? String? ?? ""
@@ -175,9 +192,6 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var filtersAreUpdating: Bool = false
     
-    private let defaultFilterId = 0
-    var userFilterId = 1
-    var whitelistFilterId = 2
     private let kSharedDefaultsDnsFiltersMetaKey = "kSharedDefaultsDnsFiltersMetaKey"
     
     private let resources: AESharedResourcesProtocol
@@ -198,8 +212,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private var idCounter: Int {
         get {
             var currentValue = resources.sharedDefaults().integer(forKey: DnsFilterUniqueId)
-            // defaultFilterId = 0, userFilterId = 1, whitelistFilterId = 2 , next available id is 3
-            currentValue = currentValue < 3 ? 3 : currentValue
+            // predefinedFiltersRange = 0..<1000, userFiltersRange = 1000..<2000, whitelistFiltersRange = 2000..<3000, customFiltersRange begins from 3000
+            currentValue = currentValue < DnsFilter.customFiltersRange.lowerBound ? DnsFilter.customFiltersRange.lowerBound : currentValue
             resources.sharedDefaults().set(currentValue + 1, forKey: DnsFilterUniqueId)
             return currentValue
         }
@@ -214,12 +228,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             
             let systemBlackListEnabled = resources.systemUserFilterEnabled
             if userRules.count > 0 && systemBlackListEnabled {
-                json.append(["id": userFilterId, "path": filterPath(filterId: userFilterId), "user_filter": true])
+                json.append(["id": DnsFilter.userFilterId, "path": filterPath(filterId: DnsFilter.userFilterId), "user_filter": true])
             }
 
             let systemWhiteListEnabled = resources.systemWhitelistEnabled
             if whitelistRules.count > 0 && systemWhiteListEnabled {
-                json.append(["id": whitelistFilterId, "path": filterPath(filterId: whitelistFilterId), "whitelist": true])
+                json.append(["id": DnsFilter.whitelistFilterId, "path": filterPath(filterId: DnsFilter.whitelistFilterId), "whitelist": true])
             }
             
             guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) else {
@@ -242,7 +256,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
     var userRules: [String] {
         get {
-            guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: userFilterId)) else {
+            guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: DnsFilter.userFilterId)) else {
                 DDLogError("(DnsFiltersService) error - can not read user filter from file")
                 return []
             }
@@ -258,7 +272,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             var rules = newValue
             rules.append("") // temporary fix dnslibs bug
             if let data = rules.joined(separator: "\n").data(using: .utf8) {
-                resources.save(data, toFileRelativePath: filterFileName(filterId: userFilterId))
+                resources.save(data, toFileRelativePath: filterFileName(filterId: DnsFilter.userFilterId))
                 vpnManager?.updateSettings { error in
                     if error != nil {
                         DDLogError("(DsnFiltersService) set userRules error: \(error!)")
@@ -373,7 +387,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                     }
                     if let parserResult = result {
                         let meta = parserResult.meta
-                        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: filter.name ?? meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: filter.desc ?? meta.descr, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+                        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: filter.name ?? meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: filter.desc ?? meta.descr, importantDesc: filter.importantDesc, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
                         dnsFilter.id = filter.id
                             
                         self.filters[i] = dnsFilter
@@ -435,8 +449,23 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             return obj as! DnsFilter
         }
         
-        if !filters.contains { $0.id == defaultFilterId } {
-            self.addDefaultFilter()
+        if !filters.contains { $0.id == DnsFilter.basicFilterId } {
+            self.addBasicFilter()
+            saveFiltersMeta()
+        }
+        
+        if !filters.contains { $0.id == DnsFilter.strictFilterId } {
+            self.addStrictFilter()
+            saveFiltersMeta()
+        }
+        
+        if !filters.contains { $0.id == DnsFilter.googleFilterId } {
+            self.addGoogleFilter()
+            saveFiltersMeta()
+        }
+        
+        if !filters.contains { $0.id == DnsFilter.facebookFilterId } {
+            self.addFacebookFilter()
             saveFiltersMeta()
         }
     }
@@ -446,24 +475,95 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         resources.sharedDefaults().set(dataToSave, forKey: kSharedDefaultsDnsFiltersMetaKey)
     }
     
-    private func addDefaultFilter() {
-        // read default filter from bundle and save it in right place
-        guard let path = Bundle.main.path(forResource: "dns_filter", ofType: "txt") else { return }
+    private func addBasicFilter() {
+        guard let path = Bundle.main.path(forResource: "basic", ofType: "txt") else { return }
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-            DDLogError("(DnsFiltersService) addDefaultFilter error - can not read filter from bundle")
+            DDLogError("(DnsFiltersService) addBasicFilter error - can not read filter from bundle")
             return
         }
         
-        let filterUrl = "https://filters.adtidy.org/ios/filters/15_optimized.txt"
+        let filterUrl = "https://filters.adtidy.org/hosts/ios/basic.txt"
         let result = parser.parse(from: data, with: filterUrl)
         let meta = result?.meta
         
-        let defaultFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: meta?.name ?? "", date: meta?.updateDate ?? Date(), enabled: true, desc: meta?.descr ?? "", version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
-        defaultFilter.id = defaultFilterId
+        let name = String.localizedString("basic_filter_title")
+        let descr = String.localizedString("basic_filter_description")
         
-        filters.insert(defaultFilter, at: 0)
+        let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        basicFilter.id = DnsFilter.basicFilterId
         
-        resources.save(data, toFileRelativePath: filterFileName(filterId: defaultFilter.id))
+        filters.insert(basicFilter, at: basicFilter.id)
+        
+        resources.save(data, toFileRelativePath: filterFileName(filterId: basicFilter.id))
+    }
+    
+    private func addStrictFilter() {
+        guard let path = Bundle.main.path(forResource: "strict", ofType: "txt") else { return }
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
+            DDLogError("(DnsFiltersService) addStrictFilter error - can not read filter from bundle")
+            return
+        }
+        
+        let filterUrl = "https://filters.adtidy.org/hosts/ios/strict.txt"
+        let result = parser.parse(from: data, with: filterUrl)
+        let meta = result?.meta
+        
+        let name = String.localizedString("strict_filter_title")
+        let descr = String.localizedString("strict_filter_description")
+        let importantDesc = String.localizedString("strict_filter_important_description")
+        
+        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        strictFilter.id = DnsFilter.strictFilterId
+        
+        filters.insert(strictFilter, at: strictFilter.id)
+        
+        resources.save(data, toFileRelativePath: filterFileName(filterId: strictFilter.id))
+    }
+    
+    private func addGoogleFilter() {
+        guard let path = Bundle.main.path(forResource: "google", ofType: "txt") else { return }
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
+            DDLogError("(DnsFiltersService) addGoogleFilter error - can not read filter from bundle")
+            return
+        }
+        
+        let filterUrl = "https://filters.adtidy.org/hosts/ios/google.txt"
+        let result = parser.parse(from: data, with: filterUrl)
+        let meta = result?.meta
+        
+        let name = String.localizedString("google_filter_title")
+        let descr = String.localizedString("google_filter_description")
+        let importantDesc = String.localizedString("google_filter_important_description")
+        
+        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        googleFilter.id = DnsFilter.googleFilterId
+        
+        filters.insert(googleFilter, at: googleFilter.id)
+        
+        resources.save(data, toFileRelativePath: filterFileName(filterId: googleFilter.id))
+    }
+    
+    private func addFacebookFilter() {
+        guard let path = Bundle.main.path(forResource: "facebook", ofType: "txt") else { return }
+        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
+            DDLogError("(DnsFiltersService) addFacebookFilter error - can not read filter from bundle")
+            return
+        }
+        
+        let filterUrl = "https://filters.adtidy.org/hosts/ios/facebook.txt"
+        let result = parser.parse(from: data, with: filterUrl)
+        let meta = result?.meta
+        
+        let name = String.localizedString("facebook_filter_title")
+        let descr = String.localizedString("facebook_filter_description")
+        let importantDesc = String.localizedString("facebook_filter_important_description")
+        
+        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        facebookFilter.id = DnsFilter.facebookFilterId
+        
+        filters.insert(facebookFilter, at: facebookFilter.id)
+        
+        resources.save(data, toFileRelativePath: filterFileName(filterId: facebookFilter.id))
     }
     
     private func filterFileName(filterId: Int)->String {
@@ -475,7 +575,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
         
     private func loadWhitelistRules()->[String] {
-        guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: whitelistFilterId)) else {
+        guard let data = resources.loadData(fromFileRelativePath: filterFileName(filterId: DnsFilter.whitelistFilterId)) else {
             DDLogError("(DnsFiltersService) error - can not read whitelist from file")
             return []
         }
@@ -497,7 +597,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private func saveWhitlistRules(rules:[String]) {
         if let data = rules.joined(separator: "\n").data(using: .utf8) {
-            resources.save(data, toFileRelativePath: filterFileName(filterId: whitelistFilterId))
+            resources.save(data, toFileRelativePath: filterFileName(filterId: DnsFilter.whitelistFilterId))
             vpnManager?.updateSettings{ error in
                 if error != nil {
                     DDLogError("(DsnFiltersService) saveWhitlistRules error: \(error!)")

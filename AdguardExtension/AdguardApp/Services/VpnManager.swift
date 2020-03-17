@@ -47,6 +47,7 @@ enum VpnManagerError: Error {
 class VpnManager: VpnManagerProtocol {
     
     static let configurationRemovedNotification = NSNotification.Name("configurationRemovedNotification")
+    static let stateChangedNotification = NSNotification.Name("stateChangedNotification")
     
     // MARK: - private properties
        
@@ -60,6 +61,7 @@ class VpnManager: VpnManagerProtocol {
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
     private var configurationObserver: NotificationToken?
+    private var configurationObserver2: NotificationToken?
     private var dnsProviders: DnsProvidersServiceProtocol
     
     weak var complexProtection: ComplexProtectionServiceProtocol?
@@ -97,6 +99,18 @@ class VpnManager: VpnManagerProtocol {
                 }
             }
         }
+        
+        configurationObserver2 = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNConfigurationChange, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            
+            self.workingQueue.async { [weak self] in
+                guard let self = self else { return }
+                let (manager, _) = self.loadManager()
+                if let manager = manager {
+                    self.checkState(manager)
+                }
+            }
+        }
     }
     
     func checkVpnInstalled(completion: @escaping (Error?)->Void) {
@@ -106,6 +120,10 @@ class VpnManager: VpnManagerProtocol {
             let (manager, error) = self.loadManager()
             if let providerConfiguration = (manager?.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration {
                 VpnManagerMigration.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
+            }
+            
+            if let manager = manager {
+                self.checkState(manager)
             }
             
             completion(error)
@@ -266,7 +284,7 @@ class VpnManager: VpnManagerProtocol {
         
         var ondemandRules = [NEOnDemandRule]()
         
-        let SSIDs = networkSettings.exceptions.map{ $0.rule }
+        let SSIDs = networkSettings.enabledExceptions.map{ $0.rule }
         if SSIDs.count > 0 {
             let disconnectRule = NEOnDemandRuleDisconnect()
             disconnectRule.ssidMatch = SSIDs
@@ -299,7 +317,15 @@ class VpnManager: VpnManagerProtocol {
         
         manager.onDemandRules = ondemandRules
         
-        let enabled = self.complexProtection?.systemProtectionEnabled ?? false
+        let enabled: Bool
+        
+        if !vpnInstalled {
+            enabled = true // install configuration with enable = true
+        }
+        else {
+           enabled = self.complexProtection?.systemProtectionEnabled ?? false || !vpnInstalled
+        }
+        
         manager.isEnabled = enabled
         manager.isOnDemandEnabled = enabled
     }
@@ -347,6 +373,20 @@ class VpnManager: VpnManagerProtocol {
     private func restartTunnel(_ manager: NETunnelProviderManager) {
         // we just stop the tunnel. It will be started(or not) automatically according to ondemand rules
         manager.connection.stopVPNTunnel()
+    }
+    
+    // check if vpn enabled state was changed outside the application
+    private func checkState(_ manager: NETunnelProviderManager) {
+        
+        let savedEnabled = self.complexProtection?.systemProtectionEnabled ?? false
+        let actualEnabled = manager.isEnabled && manager.isOnDemandEnabled
+        
+        DDLogInfo("(VpnManager) savedState: \(savedEnabled) actual: \(actualEnabled)")
+        
+        if actualEnabled != savedEnabled {
+            DDLogInfo("(VpnManager) vpn anabled state was changed outside the application to state: \(actualEnabled)")
+            NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
+        }
     }
 }
 

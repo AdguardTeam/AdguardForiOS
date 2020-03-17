@@ -195,13 +195,15 @@ class AppDelegateHelper: NSObject {
             
             self.dnsFiltersService.reset()
             
+            self.configuration.reset()
+            
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}
             
             DispatchQueue.main.async { [weak self] in
                 self?.appDelegate.window.rootViewController?.dismiss(animated: true) {
                     let tabController = self?.getMainTabController()
-                    let navController = tabController?.viewControllers?.first as? MainNavigationController
+                    let navController = tabController?.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController
                     tabController?.selectedViewController = navController
                     navController?.popToRootViewController(animated: true)
                 }

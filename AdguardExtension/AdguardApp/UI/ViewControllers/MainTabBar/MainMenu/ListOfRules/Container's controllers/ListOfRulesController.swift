@@ -26,7 +26,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var middleButton: UIButton!
     @IBOutlet weak var bottomBar: UIView!
-    @IBOutlet weak var rightButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet var searchButton: UIBarButtonItem!
@@ -235,8 +234,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         }
         
         rightButton.sizeToFit()
-        rightButtonWidth.constant = rightButton.frame.width
-        bottomBar.setNeedsDisplay()
     }
     
     private func changeState(){

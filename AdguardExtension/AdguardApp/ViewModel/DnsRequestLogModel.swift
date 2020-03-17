@@ -41,11 +41,11 @@ class DnsLogRecordExtended {
     
     lazy var matchedFilters: String? = {
         let allFilters = dnsFiltersService.filters
-        let filterNames = self.logRecord.matchedFilterIds?.map { [weak self] (filterId) -> String in
-            if filterId == self?.dnsFiltersService.userFilterId {
+        let filterNames = logRecord.matchedFilterIds?.map {(filterId) -> String in
+            if filterId == DnsFilter.userFilterId {
                 return String.localizedString("system_blacklist")
             }
-            if filterId == self?.dnsFiltersService.whitelistFilterId {
+            if filterId == DnsFilter.whitelistFilterId {
                 return String.localizedString("system_whitelist")
             }
             

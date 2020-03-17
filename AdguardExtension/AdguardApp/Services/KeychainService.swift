@@ -56,18 +56,21 @@ class KeychainService : KeychainServiceProtocol {
                 return storedId
             }
             
-            if notFound {
-                let newAppId = generateAppId()
-                
-                DDLogInfo("(KeychainService) generate new app id: \(newAppId)")
-                if !save(appId: newAppId) {
-                    return nil
-                }
-                
-                return newAppId
+            // storedId == nil
+            
+            // other errors
+            if !notFound {
+                _ = deleteAppId()
             }
             
-            return nil
+            let newAppId = generateAppId()
+            
+            DDLogInfo("(KeychainService) generate new app id: \(newAppId)")
+            if !save(appId: newAppId) {
+                return nil
+            }
+            
+            return newAppId
         }
     }
     

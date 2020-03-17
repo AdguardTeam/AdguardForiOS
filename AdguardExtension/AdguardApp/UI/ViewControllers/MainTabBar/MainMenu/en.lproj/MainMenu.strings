@@ -13,6 +13,12 @@
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "What is AdGuard?";
 
+/* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
+"UJb-NW-d5B.text" = "Settings";
+
+/* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
+"bEE-nS-r3u.title" = "Settings";
+
 /* Class = "UILabel"; text = "Tracking protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "Tracking protection";
 

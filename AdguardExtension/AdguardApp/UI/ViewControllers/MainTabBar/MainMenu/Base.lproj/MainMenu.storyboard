@@ -333,7 +333,7 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r4M-ec-gKY" secondAttribute="trailing" constant="20" id="bSO-8Z-uOu"/>
                                                 <constraint firstItem="6A7-2N-9SW" firstAttribute="centerY" secondItem="s7Z-Cy-kFx" secondAttribute="centerY" id="dzF-Kj-U36"/>
                                                 <constraint firstItem="YRx-Ju-DXP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="agI-mA-O5w" secondAttribute="trailing" constant="16" id="gXZ-Jx-Dwl"/>
-                                                <constraint firstItem="agI-mA-O5w" firstAttribute="top" secondItem="r4M-ec-gKY" secondAttribute="bottom" constant="5" id="p0v-bJ-1z4"/>
+                                                <constraint firstItem="agI-mA-O5w" firstAttribute="top" secondItem="r4M-ec-gKY" secondAttribute="bottom" constant="2" id="p0v-bJ-1z4"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -519,7 +519,6 @@
                             <outlet property="delegate" destination="bEE-nS-r3u" id="WpS-OU-N0B"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title=" " id="bZf-6u-czc"/>
                     <connections>
                         <outlet property="bugreportCell" destination="eR8-Ok-i9o" id="XNk-wj-2Rr"/>
                         <outlet property="safariProtectionLabel" destination="8SW-O3-k5y" id="ZkE-dJ-wHn"/>

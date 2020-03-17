@@ -48,6 +48,7 @@ class DnsSettingsController : UITableViewController {
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: NotificationToken?
+    private var vpnChangeObservation: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     
     private var proStatus: Bool {
@@ -82,6 +83,10 @@ class DnsSettingsController : UITableViewController {
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
             self.observeProStatus()
+        }
+        
+        vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in
+            self?.updateVpnInfo()
         }
         
         let product = purchaseService.standardProduct

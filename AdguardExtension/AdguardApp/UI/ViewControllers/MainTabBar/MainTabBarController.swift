@@ -84,6 +84,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             guard let self = self else { return }
             self.rateService.showRateAppAlertIfNeeded()
         }
+    
+    }
+
+    override var selectedViewController: UIViewController? {
+        didSet {
+            if let item = tabBar.selectedItem {
+                changeLeftAnchor(for: item)
+            }
+        }
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

@@ -31,12 +31,7 @@
                                 <rect key="frame" x="0.0" y="822" width="414" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFf-Yp-hjB">
-                                        <rect key="frame" x="354" y="0.0" width="44" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="iJx-rG-Ibs">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="72"/>
-                                            </constraint>
-                                        </constraints>
+                                        <rect key="frame" x="352" y="0.0" width="46" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Select">
                                             <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -84,10 +79,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0L1-v7-KpB"/>
                                     <constraint firstItem="HFf-Yp-hjB" firstAttribute="top" secondItem="5hm-p5-6SQ" secondAttribute="top" id="5qA-o0-bpN"/>
-                                    <constraint firstAttribute="trailing" secondItem="HFf-Yp-hjB" secondAttribute="trailing" constant="16" id="Sdd-N6-eNf"/>
+                                    <constraint firstAttribute="trailing" secondItem="HFf-Yp-hjB" secondAttribute="trailing" constant="16" id="Sdd-N6-eNf">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                    </constraint>
                                     <constraint firstItem="HFf-Yp-hjB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ft8-vc-c3j" secondAttribute="trailing" constant="16" id="d99-i1-b7j"/>
                                     <constraint firstItem="ft8-vc-c3j" firstAttribute="top" secondItem="5hm-p5-6SQ" secondAttribute="top" id="sfu-lj-ilY"/>
-                                    <constraint firstItem="ft8-vc-c3j" firstAttribute="leading" secondItem="5hm-p5-6SQ" secondAttribute="leading" constant="16" id="wla-gh-VSr"/>
+                                    <constraint firstItem="ft8-vc-c3j" firstAttribute="leading" secondItem="5hm-p5-6SQ" secondAttribute="leading" constant="16" id="wla-gh-VSr">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                         </subviews>
@@ -115,7 +114,6 @@
                         <outlet property="listOfRulesContainer" destination="JST-ig-0lQ" id="T1w-Dq-Hns"/>
                         <outlet property="middleButton" destination="hra-ph-PFq" id="CYU-GW-cff"/>
                         <outlet property="rightButton" destination="HFf-Yp-hjB" id="HKi-hy-FBm"/>
-                        <outlet property="rightButtonWidth" destination="iJx-rG-Ibs" id="rbf-Tc-Xf3"/>
                         <outlet property="searchButton" destination="RZ2-7G-zqH" id="tcv-Fq-Gks"/>
                         <outlet property="tableViewContainer" destination="2Df-iK-5pG" id="E3e-QF-2I9"/>
                     </connections>
