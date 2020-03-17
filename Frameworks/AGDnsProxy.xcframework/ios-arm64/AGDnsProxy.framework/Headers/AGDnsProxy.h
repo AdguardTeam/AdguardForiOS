@@ -298,7 +298,8 @@ typedef NS_ENUM(NSInteger, AGStampProtoType) {
  * @error error error
  * @return stamp instance or nil if error
  */
-+ (AGDnsStamp *) parseDnsStampWithStampStr: (NSString *) stampStr error: (NSError **) error;
++ (AGDnsStamp *) parseDnsStampWithStampStr: (NSString *) stampStr
+                                     error: (NSError **) error NS_SWIFT_NOTHROW;
 
 /**
  * Checks if upstream is valid and available
