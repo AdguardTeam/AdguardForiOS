@@ -13,4 +13,6 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var showStatusBar: Bool { get set }
     var allContentBlockersEnabled: Bool { get }
     var someContentBlockersEnabled: Bool { get }
+    
+    func reset()
 }

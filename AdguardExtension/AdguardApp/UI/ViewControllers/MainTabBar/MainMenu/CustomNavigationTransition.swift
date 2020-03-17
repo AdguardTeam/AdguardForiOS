@@ -27,7 +27,7 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return TimeInterval(UINavigationController.hideShowBarDuration)
+        return TimeInterval(floatLiteral: 0.3)
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
