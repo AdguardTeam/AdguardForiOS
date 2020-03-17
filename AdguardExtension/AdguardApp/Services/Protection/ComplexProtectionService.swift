@@ -271,7 +271,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             #endif
         }
         else {
-            vpnManager.updateSettings(completion: completion)
+            completion(nil)
         }
     }
     
