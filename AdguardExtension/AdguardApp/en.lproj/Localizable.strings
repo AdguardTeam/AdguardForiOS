@@ -638,7 +638,7 @@
 "block_request" = "Block request";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Allowlist request";
+"whitelist_request" = "Add domain to the Allowlist";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video Tutorial";

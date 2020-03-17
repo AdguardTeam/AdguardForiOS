@@ -519,6 +519,7 @@
                             <outlet property="delegate" destination="bEE-nS-r3u" id="WpS-OU-N0B"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="d4x-ny-PdI"/>
                     <connections>
                         <outlet property="bugreportCell" destination="eR8-Ok-i9o" id="XNk-wj-2Rr"/>
                         <outlet property="safariProtectionLabel" destination="8SW-O3-k5y" id="ZkE-dJ-wHn"/>

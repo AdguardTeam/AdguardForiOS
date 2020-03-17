@@ -13,9 +13,6 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
 "HFf-Yp-hjB.normalTitle" = "Select";
 
-/* Class = "UILabel"; text = "OK"; ObjectID = "ST7-Ut-0aa"; */
-"ST7-Ut-0aa.text" = "OK";
-
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "REMOVE";
 
@@ -27,3 +24,6 @@
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "OK";
