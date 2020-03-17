@@ -230,6 +230,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
         navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = backgroundColor
+        navBar.tintColor = UIColor(hexString: "#888888")
         navBar.barStyle = dark ? .black : .default
     }
     
