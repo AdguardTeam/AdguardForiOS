@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Set custom DNS settings";
 
-/* Class = "UINavigationItem"; title = "DNS encryption"; ObjectID = "4rw-Lb-MJH"; */
-"4rw-Lb-MJH.title" = "DNS encryption";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
 
@@ -31,9 +28,6 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UINavigationItem"; title = "Customize blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "Customize blocking";
-
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Advanced network settings";
 
@@ -46,7 +40,7 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Add a filter";
 
-/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
+/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Enable this module to block tracking domains and encrypt your DNS traffic";
 
 /* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
@@ -58,9 +52,6 @@
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Allowlist";
 
-/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
-"ZCR-6u-jrf.text" = "Recommended DNS providers";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "CANCEL";
 
@@ -69,6 +60,9 @@
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
+
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "DNS encryption";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Server";
@@ -109,6 +103,9 @@
 /* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "Customize blocking";
 
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "DNS Filters";
+
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters, etc.";
 
@@ -124,11 +121,11 @@
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS server address";
 
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "Customize blocking";
+
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Select protocol";
-
-/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
-"w0g-Xg-HG0.title" = "DNS Filters";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filters and exceptions";

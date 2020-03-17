@@ -10,11 +10,11 @@
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "free";
 
-/* Class = "UINavigationItem"; title = "Protection"; ObjectID = "mwP-h9-R34"; */
-"mwP-h9-R34.title" = "Protection";
-
 /* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below";
+
+/* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
+"wyK-CX-EwT.text" = "Protection";
