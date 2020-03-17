@@ -32,7 +32,12 @@ class ChooseProtocolController: BottomAlertController {
     
     // MARK: - constants
     
-    let cellHeight: CGFloat = 60.0
+    var cellHeight: CGFloat {
+        get {
+            let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+            return isBigScreen ? 80.0 : 60.0
+        }
+    }
     
     // MARK: - IB Outlets
     
@@ -143,7 +148,7 @@ class ChooseProtocolController: BottomAlertController {
     
     private func updateTheme() {
         
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
