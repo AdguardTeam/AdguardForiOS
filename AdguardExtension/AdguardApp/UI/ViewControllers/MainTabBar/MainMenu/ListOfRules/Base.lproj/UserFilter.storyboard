@@ -897,10 +897,9 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                             </constraint>
                                             <constraint firstItem="oZN-ZW-fP8" firstAttribute="leading" secondItem="g8X-4z-jzB" secondAttribute="leading" id="lUf-ce-Cvz"/>
-                                            <constraint firstAttribute="bottom" secondItem="5eU-q4-Xed" secondAttribute="bottom" id="nxa-j9-TNI"/>
                                             <constraint firstItem="cEh-Sj-zqF" firstAttribute="bottom" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="qoS-B0-Atp"/>
-                                            <constraint firstAttribute="bottom" secondItem="avo-Ef-skJ" secondAttribute="bottom" constant="60" id="rE8-Be-vcX"/>
                                             <constraint firstItem="5eU-q4-Xed" firstAttribute="leading" secondItem="fCd-gA-rXS" secondAttribute="leading" id="rFr-E1-Twr"/>
+                                            <constraint firstAttribute="bottom" secondItem="5eU-q4-Xed" secondAttribute="bottom" id="tAa-uv-cT8"/>
                                             <constraint firstItem="ovF-SA-Xg2" firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" id="urZ-Fz-5LE"/>
                                             <constraint firstItem="ovF-SA-Xg2" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="v4M-c5-Qu7"/>
                                             <constraint firstItem="5eU-q4-Xed" firstAttribute="top" secondItem="avo-Ef-skJ" secondAttribute="bottom" id="wJ7-dt-Y83"/>
