@@ -12,7 +12,7 @@
         <scene sceneID="bbK-CB-16V">
             <objects>
                 <tableViewController storyboardIdentifier="SafariProtectionController" id="Gbg-cv-RVg" customClass="SafariProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MdP-2F-oA0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MdP-2F-oA0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -186,19 +186,28 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZp-yL-SJy" userLabel="separator">
+                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="8Ld-W1-965"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2kF-Mk-dHf" firstAttribute="leading" secondItem="Lq2-mi-McV" secondAttribute="leading" id="2Sf-Cv-o57"/>
+                                                <constraint firstItem="TZp-yL-SJy" firstAttribute="top" secondItem="2kF-Mk-dHf" secondAttribute="bottom" constant="16" id="7TQ-6C-gdY">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="Lq2-mi-McV" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="16" id="7iS-1W-c8y">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstItem="g6L-S7-okS" firstAttribute="centerY" secondItem="Hjj-nz-Di8" secondAttribute="centerY" id="97F-cy-hs0"/>
+                                                <constraint firstAttribute="trailing" secondItem="TZp-yL-SJy" secondAttribute="trailing" id="BPB-49-6zj"/>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lq2-mi-McV" secondAttribute="trailing" constant="16" id="DCJ-Oa-wgI">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="2kF-Mk-dHf" secondAttribute="bottom" constant="16" id="HRW-zc-0jj">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="TZp-yL-SJy" secondAttribute="bottom" id="FNn-sw-W6Y"/>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2kF-Mk-dHf" secondAttribute="trailing" constant="16" id="Mhe-Ir-cU0">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -213,6 +222,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Hjj-nz-Di8" secondAttribute="trailing" constant="16" id="nMr-99-AWj">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="TZp-yL-SJy" firstAttribute="leading" secondItem="7ry-ou-jFL" secondAttribute="leading" id="yHr-9q-MXq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -272,8 +282,19 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldy-n3-NRr" userLabel="separator">
+                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="rvF-OL-Tvm"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Ldy-n3-NRr" secondAttribute="bottom" id="1Nu-pi-gEF"/>
+                                                <constraint firstItem="Ldy-n3-NRr" firstAttribute="top" secondItem="uVg-Gj-40a" secondAttribute="bottom" constant="16" id="6N6-jP-qzN">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="UHL-hv-lGJ" firstAttribute="leading" secondItem="gd2-1t-bjw" secondAttribute="leading" constant="16" id="7Sy-OB-ou3">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -285,10 +306,8 @@
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VCK-db-aeg" secondAttribute="trailing" constant="16" id="Nox-KZ-PjU">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="Ldy-n3-NRr" secondAttribute="trailing" id="Od3-es-c2d"/>
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="centerY" secondItem="gd2-1t-bjw" secondAttribute="centerY" id="UCs-cE-S1k"/>
-                                                <constraint firstAttribute="bottom" secondItem="uVg-Gj-40a" secondAttribute="bottom" constant="16" id="X1f-Mx-Yyf">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uVg-Gj-40a" secondAttribute="trailing" constant="16" id="XEB-66-DES">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -296,6 +315,7 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="uVg-Gj-40a" firstAttribute="leading" secondItem="VCK-db-aeg" secondAttribute="leading" id="gW7-2T-j74"/>
+                                                <constraint firstItem="Ldy-n3-NRr" firstAttribute="leading" secondItem="gd2-1t-bjw" secondAttribute="leading" id="tnz-dy-NVD"/>
                                                 <constraint firstItem="VCK-db-aeg" firstAttribute="top" secondItem="gd2-1t-bjw" secondAttribute="top" constant="16" id="xth-1d-sWp">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
@@ -391,74 +411,6 @@
                                             <segue destination="FLo-qe-u1Y" kind="show" identifier="whiteListSegue" id="cuA-KN-WPp"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GfA-Zv-fqa">
-                                        <rect key="frame" x="0.0" y="564" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GfA-Zv-fqa" id="Opn-2R-MRJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Invert the Allowlist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOt-rF-DQo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="16" width="317" height="10"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TmL-5C-Yij">
-                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="E9j-Lk-6uo"/>
-                                                    </constraints>
-                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="toggleInverted:" destination="Gbg-cv-RVg" eventType="valueChanged" id="gJO-V8-NKp"/>
-                                                    </connections>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Unblock ads everywhere except for the websites from this list" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2B3-GC-e1o" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="28" width="317" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="top" secondItem="ZOt-rF-DQo" secondAttribute="bottom" constant="2" id="7IO-Pa-i67"/>
-                                                <constraint firstAttribute="trailing" secondItem="TmL-5C-Yij" secondAttribute="trailing" constant="16" id="FtD-AW-TXP">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="2B3-GC-e1o" secondAttribute="bottom" constant="16" id="GSa-oB-6xu">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="ZOt-rF-DQo" firstAttribute="top" secondItem="Opn-2R-MRJ" secondAttribute="top" constant="16" id="JE9-bh-5Dt">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="TmL-5C-Yij" firstAttribute="leading" secondItem="ZOt-rF-DQo" secondAttribute="trailing" constant="16" id="OA0-e8-JV4">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="ZOt-rF-DQo" firstAttribute="leading" secondItem="Opn-2R-MRJ" secondAttribute="leading" constant="16" id="lal-Ca-rPv">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="TmL-5C-Yij" firstAttribute="top" secondItem="Opn-2R-MRJ" secondAttribute="top" constant="16" id="mBf-bk-eMr">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="leading" secondItem="ZOt-rF-DQo" secondAttribute="leading" id="o3w-ve-LhG"/>
-                                                <constraint firstItem="2B3-GC-e1o" firstAttribute="trailing" secondItem="ZOt-rF-DQo" secondAttribute="trailing" id="w6p-sj-SZT"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -468,7 +420,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="invertedSwitch" destination="TmL-5C-Yij" id="7eu-ZT-mrA"/>
                         <outlet property="numberOfFiltersLabel" destination="2kF-Mk-dHf" id="Yn1-hr-EjL"/>
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
                         <outlet property="safariIcon" destination="rFj-gs-pCq" id="Oih-Wc-JNO"/>
@@ -484,8 +435,8 @@
                         <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
                         <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
                         <outletCollection property="themableLabels" destination="6WB-a0-8YE" collectionClass="NSMutableArray" id="yve-Tf-DXE"/>
-                        <outletCollection property="themableLabels" destination="ZOt-rF-DQo" collectionClass="NSMutableArray" id="wHQ-jz-23j"/>
-                        <outletCollection property="themableLabels" destination="2B3-GC-e1o" collectionClass="NSMutableArray" id="Gri-YE-QOg"/>
+                        <outletCollection property="separators" destination="TZp-yL-SJy" collectionClass="NSMutableArray" id="mrZ-wK-P41"/>
+                        <outletCollection property="separators" destination="Ldy-n3-NRr" collectionClass="NSMutableArray" id="edS-Kl-BeV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npH-7c-pqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

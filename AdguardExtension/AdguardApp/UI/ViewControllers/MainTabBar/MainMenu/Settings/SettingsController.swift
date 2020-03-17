@@ -27,6 +27,7 @@ class SettingsController: UITableViewController {
     private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
+    @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var developerModeSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -44,9 +45,10 @@ class SettingsController: UITableViewController {
     private let light = 2
     
     private let wifiOnlyRow = 0
-    private let developerModeRow = 1
-    private let advancedSettingsRow = 2
-    private let resetStatisticsRow = 3
+    private let invertWhitelistRow = 1
+    private let developerModeRow = 2
+    private let advancedSettingsRow = 3
+    private let resetStatisticsRow = 4
     
     private var headersTitles: [String] = []
     
@@ -71,6 +73,9 @@ class SettingsController: UITableViewController {
         
         developerModeSwitch.isOn = configuration.developerMode
         
+        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        invertedSwitch.isOn = inverted
+        
         setupBackButton()
         
         updateUI()
@@ -92,6 +97,9 @@ class SettingsController: UITableViewController {
         case (otherSection, wifiOnlyRow):
             wifiUpdateSwitch.setOn(!wifiUpdateSwitch!.isOn, animated: true)
             toggleWifiOnly(wifiUpdateSwitch)
+        case (otherSection, invertWhitelistRow):
+            invertedSwitch.setOn(!invertedSwitch.isOn, animated: true)
+            toggleInverted(invertedSwitch)
         case (otherSection, developerModeRow):
             developerModeSwitch.setOn(!developerModeSwitch!.isOn, animated: true)
             developerModeAction(developerModeSwitch)
@@ -108,6 +116,10 @@ class SettingsController: UITableViewController {
     
     @IBAction func toggleWifiOnly(_ sender: UISwitch) {
         resources.sharedDefaults().set(sender.isOn, forKey: AEDefaultsWifiOnlyUpdates)
+    }
+    
+    @IBAction func toggleInverted(_ sender: UISwitch) {
+        invertWhitelist()
     }
     
     @IBAction func developerModeAction(_ sender: UISwitch) {
@@ -237,6 +249,7 @@ class SettingsController: UITableViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSwitch(wifiUpdateSwitch)
+        theme.setupSwitch(invertedSwitch)
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
@@ -280,5 +293,28 @@ class SettingsController: UITableViewController {
             configuration.userThemeMode = AELightThemeMode
         }
         updateTheme()
+    }
+    
+    private func invertWhitelist() {
+        
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+        
+        let oldValue = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        let newValue = invertedSwitch.isOn
+        
+        if oldValue != newValue {
+            resources.sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
+            
+            contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
+                if error != nil {
+                    self?.resources.sharedDefaults().set(oldValue, forKey: AEDefaultsInvertedWhitelist)
+                    DispatchQueue.main.async {
+                        self?.invertedSwitch.setOn(oldValue, animated: true)
+                    }
+                }
+                
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+            }
+        }
     }
 }
