@@ -29,4 +29,6 @@ class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
     var proStatus = true
     var allContentBlockersEnabled: Bool = true
     var someContentBlockersEnabled: Bool = true
+    
+    func reset() {}
 }
