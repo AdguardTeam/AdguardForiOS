@@ -78,26 +78,20 @@ protocol DnsFiltersServiceProtocol {
 @objcMembers
 class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     
-    // First 1000 filters are predefined filters
-    static let predefinedFiltersRange = 0..<1000
+    static let userFilterId = 1
+    static let whitelistFilterId = 2
     
-    // From 1000 to 2000 are user filters
-    static let userFiltersRange = 1000..<2000
+    // From 3 to 1000000 are custom filters
+    static let customFiltersRange = 3..<1000000
     
-    // From 2000 to 3000 are whitelist filters
-    static let whitelistFiltersRange = 2000..<3000
+    // From 1000000 to 1100000 are predefined filters
+    static let predefinedFiltersRange = 1000000..<1100000
     
-    // From 3000 to infinity are custom filters
-    static let customFiltersRange = 3000..<1000000
-    
-    
-    static let basicFilterId = 0
-    static let strictFilterId = 1
-    static let googleFilterId = 2
-    static let facebookFilterId = 3
-    
-    static let userFilterId = userFiltersRange.lowerBound
-    static let whitelistFilterId = whitelistFiltersRange.lowerBound
+    // Predefined filters Ids
+    static let basicFilterId = 1000000
+    static let strictFilterId = 1000001
+    static let googleFilterId = 1000002
+    static let facebookFilterId = 1000003
     
     var id: Int = customFiltersRange.lowerBound
     var subscriptionUrl: String?
