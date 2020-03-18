@@ -271,7 +271,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             #endif
         }
         else {
-            completion(nil)
+            vpnManager.updateSettings { (error) in
+                if error as? VpnManagerError == VpnManagerError.managerNotInstalled {
+                    completion(nil)
+                }
+                else {
+                    completion(error)
+                }
+            }
         }
     }
     
