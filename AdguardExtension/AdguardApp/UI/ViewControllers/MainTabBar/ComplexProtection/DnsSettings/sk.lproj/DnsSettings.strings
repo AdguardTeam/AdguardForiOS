@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Zvoliť vlastné DNS nastavenia";
 
-/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
-"4rw-Lb-MJH.title" = "DNS server";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// alebo tls://";
 
@@ -31,35 +28,29 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "Blokovanie DNS dopytov";
-
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Pokročilé sieťové nastavenia";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "ZVOLIŤ";
 
-/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Server";
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "DNS šifrovanie";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Pridať filter";
 
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
-"PFY-Cq-NFN.text" = "Tento modul môže blokovať sledovacie domény a šifrovať DNS prenosy";
+/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Povoľte tomuto modulu blokovať sledovacie domény a šifrovať DNS komunikáciu";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "Ochrana systému";
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Ochrana proti sledovaniu";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Sieťové nastavenia";
 
-/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Biela listina systému";
-
-/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
-"ZCR-6u-jrf.text" = "Odporúčaní poskytovatelia DNS";
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Zoznam povolení";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ZRUŠIŤ";
@@ -69,6 +60,9 @@
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
+
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "DNS šifrovanie";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Server";
@@ -88,11 +82,11 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "DNS (Domain Name System) je internetový ekvivalent telefónneho zoznamu. Spravuje adresár doménových mien a prekladá ich do IP adries";
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Svoje súkromie môžete zvýšiť šifrovaním DNS komunikácie. Vyberte niektorého z odporúčaných poskytovateľov DNS.";
 
-/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Čierna listina systému";
+/* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Zoznam blokovaní";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ZRUŠIŤ";
@@ -106,29 +100,32 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "VYMAZAŤ";
 
-/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "Blokovanie DNS dopytov";
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Prispôsobiť blokovanie";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "DNS filtre";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Bezpečnostné filtre, DNS súkromie, vlastné filtre atď.";
 
-/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "Filtre";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Meno servera";
 
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Tento modul môže blokovať sledovacie domény a šifrovať DNS prenosy";
+/* Class = "UILabel"; text = "Choose ready-to-use anti-tracking lists or add your own rules"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Vyberte si pripravené zoznamy proti sledovaniu a pridajte vlastné pravidlá";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Adresa DNS servera";
 
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "Prispôsobiť blokovanie";
+
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Zvoliť protokol";
-
-/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
-"w0g-Xg-HG0.title" = "DNS filtre";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtre a výnimky";

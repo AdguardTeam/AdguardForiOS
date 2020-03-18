@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "Filter können nicht in Safari geladen werden. Die letzten Änderungen konnten daher nicht übernommen werden.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Whitelist zu löschen, oder ändern Sie die verwendeten Filter.";
+"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Positivliste zu löschen, oder ändern Sie die verwendeten Filter.";
 
 /* NO Button caption in alert */
 "common_action_no" = "Nein";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (invertiert)";
+"inverted_whitelist_title" = "Positivliste (invertiert)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Änderungen werden übernommen...";
@@ -51,9 +51,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Kostenlos testen";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Whitelist";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Benutzerregeln";
@@ -133,13 +130,13 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Geben Sie hier die Domain-Namen ein, getrennt durch Zeilenumbrüche. AdGuard lässt alle Verbindungen zu diesen Domains zu.";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "Diese Blacklist unterstützt <a href=\"%@\">AdGuard's DNS-Syntax</a>. Geben Sie hier die durch Zeilenumbrüche getrennten Regeln ein. AdGuard blockiert alle Verbindungen zu Domains, die diesen Regeln entsprechen.";
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Diese Blockliste unterstützt <a href=\"%@\">AdGuard's DNS-Syntax</a>. Geben Sie hier die durch Zeilenumbrüche getrennten Regeln ein. AdGuard blockiert alle Verbindungen zu Domains, die diesen Regeln entsprechen.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aktualisieren...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Regel hinzufügen";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -162,6 +159,12 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Name:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "App bewerten";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "Feedback senden";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Fehlerhaftes Sperren melden";
@@ -251,10 +254,10 @@
 "dns_provider_safe_search_summary" = "Wenn möglich, wird die Sichere Suche in Browsern erzwungen";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blockiert Anzeigen und Tracking-Systeme";
+"dns_provider_ad_blocking_summary" = "Blockiert Tracking-Systeme";
 
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "System DNS";
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Keine Verschlüsselung (System DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%1$d von %2$d aktiviert";
@@ -404,7 +407,7 @@
 "wifi_exceptions_title" = "WLAN-Ausnahmen";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Der Systemschutz funktioniert nicht für die unten aufgeführten WLAN-Netzwerke";
+"wifi_exceptions_description" = "Der Tracking-Schutz funktioniert nicht für die unten aufgeführten WLAN-Netzwerke";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Ausnahme hinzufügen";
@@ -416,16 +419,19 @@
 "filter_wifi_title" = "WLAN filtern";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Systemschutz für mobile Daten\n";
+"mobile_data_description" = "Tracking-Schutz für mobile Daten\n";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Systemschutz im WLAN-Modus\n";
+"wifi_data_description" = "Tracking-Schutz im WLAN-Modus\n";
 
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "Whitelist";
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Positivliste";
 
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Blacklist";
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Positivliste";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Blockliste";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari-Benutzerregeln";
@@ -445,17 +451,17 @@
 /* "Disabled" title */
 "disabled" = "Deaktiviert";
 
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "AUS DER WHITELIST ENTFERNEN";
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "AUS DER POSITIVLISTE ENTFERNEN";
 
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "AUS DER BLACKLIST ENTFERNEN";
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "AUS DER BLOCKLISTE ENTFERNEN";
 
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "ZUR WHITELIST HINZUFÜGEN";
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "ZUR POSITIVLISTE HINZUFÜGEN";
 
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "ZUR BLACKLIST HINZUFÜGEN";
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "ZUR BLOCKLISTE HINZUFÜGEN";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Erlauben das Blockieren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";
@@ -524,7 +530,7 @@
 "add_new_rule" = "Neue Regel hinzufügen";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Alle Einstellungen, einschließlich der Benutzerregeln, des Systemschutzes, der Schnittstellen- und Berechtigungseinstellungen, werden zurückgesetzt. Dieser Vorgang kann nicht rückgängig gemacht werden. Die Einstellungen zurücksetzen?";
+"confirm_reset_text" = "Alle Einstellungen, einschließlich der Benutzerregeln, des Tracking-Schutzes, der Schnittstellen- und Berechtigungseinstellungen, werden zurückgesetzt. Dieser Vorgang kann nicht rückgängig gemacht werden. Die Einstellungen zurücksetzen?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Aktivitätsprotokoll zurücksetzen\n";
@@ -569,7 +575,7 @@
 "protection_enabled" = "Schutz ist aktiviert";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Schutz in Safari und Systemschutz";
+"complex_enabled" = "Safari- und Tracking-Schutz";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari-Inhaltsblockierung";
@@ -578,7 +584,7 @@
 "complex_disabled" = "Alle Schutz-Module sind deaktiviert";
 
 /*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Systemschutz";
+"system_enabled" = "Tracking-Schutz";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d Anfragen, %2$d blockiert";
@@ -592,38 +598,35 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Sie haben versucht, einen doppelten Filter hinzuzufügen. Dieser Filter ist bereits auf der Liste.\n";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Änderungen wurden nicht angewendet";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blockiert";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Verarbeitet";
+"dns_request_status_processed" = "Zugelassen";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Auf der Whitelist";
+"dns_request_status_whitelisted" = "Zugelassen";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "zur Whitelist hinzugefügt";
+"dns_request_user_status_added_to_whitelist" = "zur Positivliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "zur Blacklist hinzugefügt";
+"dns_request_user_status_added_to_blacklist" = "zur Blockliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "aus Whitelist entfernt";
+"dns_request_user_status_removed_from_whitelist" = "aus Positivliste entfernt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "aus Blacklist entfernt";
+"dns_request_user_status_removed_from_blacklist" = "aus Blockliste entfernt";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Öffnen Sie die %@ <b>Einstellungen</b>";
+"onboarding_first_step_text" = "Öffnen Sie die <b>Einstellungen</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Klicken Sie auf %@ <b>Safari</b> und wählen Sie den Menüpunkt <b>\"Inhaltsblocker\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Aktivieren Sie %@ alle Inhaltsblocker</b> und gehen Sie zurück zu unserer App!";
+"onboarding_third_step_text" = "<b>Aktivieren Sie alle Inhaltsblocker</b> und gehen Sie zurück zu unserer App!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
@@ -634,8 +637,8 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Anfrage blockieren";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Whitelist-Anfrage";
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Domain zur Positivliste hinzufügen";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video-Anleitung";
@@ -644,13 +647,13 @@
 "invalid_upstream_message" = "Sie haben eine ungültigen Upstream eingegeben";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "System-Blacklist";
+"system_blacklist" = "System-Blockliste";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "System-Whitelist";
+"system_whitelist" = "System-Positivliste";
 
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "Tracker-Details";
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Details";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Allgemein";
@@ -715,8 +718,115 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Keine Regel gefunden";
 
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "Systemschutz ist deaktiviert";
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "Tracking-Schutz ist deaktiviert";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Aktivieren";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Senden des Feedbacks fehlgeschlagen";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Ein Problem ist aufgetreten";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Durch das weitere Verwenden akzeptieren Sie die <br /><a href=%2$@>allgemeine Geschäftsbedingungen</a> und  die <a href=%1$@>Datenschutzerklärung</a>.";
+
+/* (DnsFiltersService) - Basic Tracking protection filter title */
+"basic_filter_title" = "Basisschutz";
+
+/* (DnsFiltersService) - Basic Tracking protection filter description */
+"basic_filter_description" = "Blockiert die häufigsten Tracking-Domains.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter title */
+"strict_filter_title" = "Erweiterter Schutz";
+
+/* (DnsFiltersService) - Strict Tracking protection filter description */
+"strict_filter_description" = "Blockiert alle bekannten Tracker.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter important description */
+"strict_filter_important_description" = "Kann einige Funktionen beeinträchtigen.";
+
+/* (DnsFiltersService) - Google tracking domains filter title */
+"google_filter_title" = "Google-Tracker blockieren";
+
+/* (DnsFiltersService) - Google tracking domains filter description */
+"google_filter_description" = "Lässt keine bekannten Google-Tracking-Domains mehr zu.";
+
+/* (DnsFiltersService) - Google tracking domains filter important description */
+"google_filter_important_description" = "Kann Anwendungen und Websites, welche die Google-APIs verwenden, stören.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter title */
+"facebook_filter_title" = "Facebook-Tracker blockieren";
+
+/* (DnsFiltersService) - Facebook tracking domains description */
+"facebook_filter_description" = "Lässt keine bekannten Facebook-Tracking-Domains mehr zu.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter important description */
+"facebook_filter_important_description" = "Kann Anwendungen und Websites, die Facebook-APIs verwenden, stören.";
+
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Hauptseite";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Schutz-Seite";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Aktivitäten-Seite";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Einstellungen-Seite";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari-Schutz aktiviert";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari-Schutz deaktiviert";
+
+/* (MainPageController) tracking protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Tracking-Schutz aktiviert";
+
+/* (MainPageController) tracking protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Tracking-Schutz deaktiviert";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Filter aktualisieren";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Anzahl der Anfragen";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "Anzahl der gesperrten Anfragen";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "Eingesparte Dateigröße";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Tracking-Schutz aktivieren";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Wählen Sie Ihren Abonnement-Typ";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Geben Sie hier Ihre E-Mail-Adresse ein";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Geben Sie hier Ihr Passwort ein";

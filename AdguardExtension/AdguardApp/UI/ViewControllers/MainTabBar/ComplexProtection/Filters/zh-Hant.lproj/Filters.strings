@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
-"2wy-vg-qvr.text" = "增加過濾器";
+"2wy-vg-qvr.text" = "增加一個過濾器";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
-"3WM-jW-br8.text" = "增加過濾器";
+"3WM-jW-br8.text" = "增加一個過濾器";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
 "6WB-a0-8YE.text" = "Safari 防護";
@@ -29,7 +29,7 @@
 "RJU-32-r8h.text" = "規則總數：";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
-"UR2-d4-zYf.text" = "已更新";
+"UR2-d4-zYf.text" = "已更新於";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "使用者規則";
@@ -45,6 +45,9 @@
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "於此增加自訂的過濾器清單";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "允許清單";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "過濾器";

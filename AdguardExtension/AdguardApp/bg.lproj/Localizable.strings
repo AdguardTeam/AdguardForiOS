@@ -19,9 +19,6 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Филтрите не могат да бъдат заредени в Сафари. Поради това новите промени не са приложени.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Филтрите не могат да бъдат заредени в Сафари. Опитайте се да изчистите вашите правила и белия списък или променете настройките на използваните филтри.";
-
 /* (LoginController) lost password button title */
 "lost_password" = "Забравили сте си паролата?";
 

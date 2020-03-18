@@ -1,30 +1,29 @@
-
 /* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "Thank you";
+"6jg-ji-JtC.text" = "Gracias";
 
 /* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "for your feedback";
+"JEI-Pr-Mc2.text" = "por tu comentario";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "Feedback";
+"JXu-e8-XCB.text" = "Comentarios";
 
 /* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Please, tell us about your experience";
+"TBB-iF-qGA.text" = "Por favor, cuéntenos su experiencia";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "Feedback";
+"XtG-5p-3KJ.text" = "Comentarios";
 
 /* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "Feedback";
+"cJk-65-rg8.title" = "Comentarios";
 
 /* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "SEND";
+"nIO-Sh-01f.normalTitle" = "ENVIAR";
 
 /* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Enter email if you'd like us to answer";
+"oJi-EL-gWT.placeholder" = "Ingrese su correo electrónico si desea que le respondamos";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "HOME";
+"tCN-dT-J7Y.normalTitle" = "INICIO";
 
 /* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "Feedback";
+"zE7-4q-9oe.title" = "Comentarios";

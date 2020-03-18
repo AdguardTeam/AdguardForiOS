@@ -22,20 +22,11 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "필터를 사파리에 로드할 수 없습니다. 최근 변경 내용이 적용되지 않습니다.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "사파리에 필터를 로드할 수 없습니다. 사용자 규칙과 화이트리스트 목록을 비우거나, 사용하는 필터를 바꾸어 보세요.";
-
 /* NO Button caption in alert */
 "common_action_no" = "아니요";
 
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "화이트리스트 (반전된)";
-
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "변경 사항을 적용하는 중...";
-
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "이 정보는 차단된 DNS 요청 수를 기반으로 합니다. 이 통계는 처음에 도메인을 차단하지 않았을 경우 사용자가 다운로드 할 수있는 광고, 추적기 및 기타 위협의 정확한 양을 계산할 수 없습니다.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
@@ -51,9 +42,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "무료로 사용해 보세요";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "화이트리스트";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 규칙";
@@ -133,13 +121,10 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "여기에 도메인 명을 줄 바꿈으로 구분하여 입력하세요. AdGuard는 이 도메인에 대한 모든 연결을 허용합니다.";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "이 블랙리스트는 <a href=\"%@\">AdGuard의 DNS 문법</a>을 지원합니다. 여기에 규칙을 줄 바꿈으로 나눠 입력하세요. AdGuard는 이 규칙과 일치하는 도메인에 대한 모든 연결을 차단합니다.";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "업데이트 중...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "규칙 추가";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -249,12 +234,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "가능하다면 언제나 세이프 서치를 브라우저에 강제로 적용시킵니다";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "광고와 트래킹 서버를 차단";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "시스템 DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%2$d가지 중 %1$d가지가 활성화 됨";
@@ -403,9 +382,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi 예외";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "아래에 나열된 Wi-Fi 네트워크에는 시스템 보호가 작동하지 않습니다";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "예외 추가";
 
@@ -414,18 +390,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Wi-Fi 필터링";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "모바일 네트워크를 통해 데이터를 전송할 때 시스템을 보호합니다";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Wi-Fi를 사용하는 동안 시스템을 보호합니다";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "화이트리스트";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "블랙리스트";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari 사용자 규칙";
@@ -444,18 +408,6 @@
 
 /* "Disabled" title */
 "disabled" = "비활성화 됨";
-
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "화이트리스트에서 제거";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "블랙리스트에서 제거";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "화이트리스트에 추가";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "블랙리스트에 추가";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "피싱 사이트 및 위험한 도메인을 차단할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";
@@ -523,9 +475,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "새 규칙 추가";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "사용자 규칙, 시스템 보호, 인터페이스 및 인증 설정을 포함한 모든 설정이 초기화 됩니다. 이 작업은 취소할 수 없습니다. 설정을 초기화합니까?";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "작업 로그 초기화";
 
@@ -568,17 +517,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "보호가 활성화 되었습니다.";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari와 시스템 보호";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari 콘텐츠 차단";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "모든 보호 모듈이 비활성화 되었습니다";
-
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "시스템 보호";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d 요청, %2$d 차단됨";
@@ -592,38 +535,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "중복 필터를 추가하려고 했습니다. 이 필터가 이미 목록에 추가되었습니다.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "변경 사항이 적용되지 않았습니다";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "차단됨";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "처리됨";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "화이트리스트";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "화이트리스트에 추가됨";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "블랙리스트에 추가됨";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "화이트리스트에서 제거됨";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "블랙리스트에서 제거됨";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "%@<b>설정</b>을 엽니다";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "%@<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 %@켭니다</b>";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "시스템 DNS";
@@ -634,23 +547,11 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "요청 차단";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "화이트리스트 요청";
-
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "비디오 튜토리얼";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "유효하지 않는 업스트림입니다";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "시스템 블랙리스트";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "시스템 화이트리스트";
-
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "트래커 세부 사항";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "일반";
@@ -714,9 +615,6 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "규칙 없음";
-
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "시스템 보호가 비활성화되었습니다";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "활성화";

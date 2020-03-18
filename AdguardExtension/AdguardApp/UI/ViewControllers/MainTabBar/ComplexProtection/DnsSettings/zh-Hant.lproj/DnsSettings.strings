@@ -10,14 +10,17 @@
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "設定自訂的 DNS 設定";
 
-/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
-"4rw-Lb-MJH.title" = "DNS 伺服器";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP、sdns://、https://、tls:// 或 tcp://";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "儲存";
+
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "AdGuard 將不封鎖來自此清單中的網域";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "AdGuard 將封鎖來自此清單中的網域";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "儲存並選擇";
@@ -25,26 +28,26 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
-/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "DNS 請求封鎖";
-
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "進階的網路設定";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "選擇";
 
-/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "DNS 伺服器";
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "DNS 加密";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "系統防護";
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "增加一個過濾器";
+
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "追蹤防護";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "網路設定";
 
-/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "系統白名單";
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "允許清單";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "取消";
@@ -55,8 +58,14 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
 
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "DNS 加密";
+
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "伺服器";
+
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "增加一個自訂的 DNS 伺服器";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 伺服器位址";
@@ -70,11 +79,11 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "網域名稱系統（DNS）是電話簿的網際網路相等物。它維護一個域名目錄並轉化它們為網際網路協定（IP）位址。";
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "您可透過加密 DNS 流量提升您的線上隱私。為此，選擇被建議的 DNS 供應商的其中之一。";
 
-/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "系統黑名單";
+/* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "封鎖清單";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "取消";
@@ -88,14 +97,17 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "刪除";
 
-/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS 請求封鎖";
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "自訂封鎖";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "DNS 過濾器";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "安全性過濾器、DNS 隱私、自訂的過濾器等等";
 
-/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "過濾器";
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "DNS 過濾器";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "伺服器名稱";
@@ -103,8 +115,11 @@
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS 伺服器位址";
 
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "自訂封鎖";
+
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "選擇協定";
 
-/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
-"w0g-Xg-HG0.title" = "DNS 過濾器";
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "過濾器和例外";

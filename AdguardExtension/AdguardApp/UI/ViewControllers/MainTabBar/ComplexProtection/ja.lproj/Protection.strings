@@ -4,14 +4,8 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "プレミアム";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "cnF-td-Ba1"; */
-"cnF-td-Ba1.text" = "システム全体でブロック";
-
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "無料";
-
-/* Class = "UINavigationItem"; title = "Protection"; ObjectID = "mwP-h9-R34"; */
-"mwP-h9-R34.title" = "AdGuardによる保護";
 
 /* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "端末のシステム全体で個人情報追跡を防止。DNSクエリを暗号化し、追跡ドメインをSafariに限らず全アプリでブロックします。";

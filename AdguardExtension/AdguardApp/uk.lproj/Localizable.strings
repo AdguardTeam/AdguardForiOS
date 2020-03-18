@@ -22,20 +22,11 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Отже, ваші останні зміни не були застосовані.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та білий список, або змініть набір використовуваних фільтрів.";
-
 /* NO Button caption in alert */
 "common_action_no" = "НІ";
 
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Білий список (інвертований)";
-
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Застосування змін...";
-
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Ця інформація базується на кількості заблокованих DNS запитів. Статистика є приблизною, оскільки технічно неможливо обчислити точну кількість реклами, стеження та інших загроз, що могли бути завантажені, якби домен не блокувався.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ КБ";
@@ -51,9 +42,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Спробувати безплатно";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Білий список";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Правила користувача";
@@ -133,13 +121,10 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Введіть тут назви доменів, розділені новими рядками. AdGuard дозволить всі з'єднання для цих доменів.";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "Цей чорний список підтримує <a href=\"%@\">DNS-синтаксис AdGuard</a>. Введіть тут правила, розділені новими рядками. AdGuard заблокує всі з'єднання, що відповідають цим правилам.";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Оновлення...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Додати правило";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -243,12 +228,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Примусовий безпечний пошук в браузерах, коли це можливо";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Блокує рекламу і сервери стеження";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "Системний DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Увімкнено %1$d з %2$d";
@@ -397,9 +376,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi винятки";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Захист системи не працюватиме у вказаних нижче мережах Wi-Fi";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Додати виняток";
 
@@ -408,18 +384,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Фільтрувати Wi-Fi";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Захист системи в мобільній мережі";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Захист системи в мережі Wi-Fi";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "Білий список";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Чорний список";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Користувацькі правила Safari";
@@ -438,18 +402,6 @@
 
 /* "Disabled" title */
 "disabled" = "Вимкнено";
-
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "ВИЛУЧИТИ З БІЛОГО СПИСКУ";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "ВИЛУЧИТИ З ЧОРНОГО СПИСКУ";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "ДОДАТИ ДО БІЛОГО СПИСКУ";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "ДОДАТИ ДО ЧОРНОГО СПИСКУ";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Дозволити блокування фішингових сайтів та інших небезпечних доменів. Доступно для Преміум-користувачів";
@@ -517,9 +469,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Додати нове правило";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "Всі параметри, включно з правилами користувача, захистом системи, інтерфейсом та авторизацією, будуть скинуті. Цю операцію неможливо скасувати. Скинути параметри?";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Скинути журнал активності";
 
@@ -562,17 +511,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Захист увімкнено";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari та Захист системи";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Блокування вмісту Safari";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Всі модулі захисту вимкнено";
-
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "Захист системи";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d запитів, %2$d заблоковано";
@@ -586,38 +529,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Ви намагалися додати дублікат фільтра. Цей фільтр вже наявний.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Зміни не застосовано";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблоковано";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Оброблено";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "В білому списку";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "додано до білого списку";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "додано до чорного списку";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "вилучено з білого списку";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "вилучено з чорного списку";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Відкрийте %@ <b>Параметри</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Торкніться %@ <b>Safari</b> та оберіть елемент <b>\"Блокувальники вмісту\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Увімкніть %@ всі блокувальники вмісту</b> й повертайтеся до нашої програми!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Системний DNS";
@@ -628,23 +541,11 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Блокувати запит";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Додати запит до білого списку";
-
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Відеоінструкція";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Ви ввели недійсний upstream";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Системний чорний список";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Системний білий список";
-
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "Подробиці елемента стеження";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Загальні";
@@ -708,9 +609,6 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Правило не знайдено";
-
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "Захист системи вимкнено";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Увімкнути";

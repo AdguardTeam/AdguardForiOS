@@ -22,17 +22,8 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtrene kan ikke lastes inn i Safari. Derfor ble de siste endringene dine ikke lagret.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtrene kan ikke lastes inn i Safari. Prøv å tømme reglene og hvitelisten, eller endre settet av brukte filtre.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
-
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Hviteliste (invertert)";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Hviteliste";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";

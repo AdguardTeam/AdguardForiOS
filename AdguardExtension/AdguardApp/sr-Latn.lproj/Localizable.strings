@@ -22,20 +22,11 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filteri ne mogu da se učitaju u Safari, tako da vaša pravila nisu primenjena.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filteri ne mogu da budu učitani u Safari. Pokušajte da očistite vaša pravila ili belu listu, ili promenite skup korišćenih filtera.";
-
 /* NO Button caption in alert */
 "common_action_no" = "Ne";
 
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Bela lista je okrenuta";
-
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Primenjivanje promena...";
-
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Ove informacije su zasnovane na broju blokiranih DNS zahteva. Statistika je približna zbog tehničke nemogućnosti da se izračuna tačan broj reklama, praćenja i drugih pretnji koje mogu biti preuzete od korisnika ako domen nije inicijalno blokiran.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ Kb";
@@ -51,9 +42,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Probajte besplatno";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Bela lista";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Korisnička pravila";
@@ -133,13 +121,10 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Ovde unesite domene. AdGuard neće blokirati te domene";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "Ovde unesite domene. AdGuard će sprečiti sve aplikacije i preglednike da učitaju te domene. Ova crna lista podržava <a href=\"%@\">AdGuard's DNS sintaksu</a>";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Ažuriram...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Dodaj pravilo";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -249,12 +234,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Sigurno pretraživanje je nametnuto u preglednicima kad god je to moguće";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokira reklame i servere praćenja";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "Sistemski Dns";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Uključeno %1$d od %2$d";
@@ -403,9 +382,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi izuzeci";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Zaštita sistema neće raditi na Wi-Fi mrežama koje su izlistane ispod";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Dodaj izuzetak";
 
@@ -414,18 +390,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtriraj Wi-Fi";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Zaštita sistema na mobilnim podacima";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Sistemska zaštita na Wi-Fi";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "Bela lista";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Crna lista";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari korisnička pravila";
@@ -444,18 +408,6 @@
 
 /* "Disabled" title */
 "disabled" = "Isključeno";
-
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "Ukloni sa bele liste";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "Ukloni sa crne liste";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "Dodaj na belu listu";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "Dodaj na crnu listu";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Dozvoli blokiranje fišing sajtova i drugih opasnih domena. Dostupno za Premium korisnike";
@@ -523,9 +475,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Dodaj novo pravilo";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, sistemsku zaštitu, okruženje i postavke autorizacije, biće vraćene na podrazumevane vrednosti. Ova radnja se ne može opozvati. Želite li da nastavite?";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Resetuj dnevnik aktivnosti";
 
@@ -568,17 +517,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Zaštita je uključena";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari i sistemska zaštita";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari blokiranje sadržaja";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Svi podprogrami zaštite su isključeni";
-
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "Sistemska zaštita";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d zahteva, %2$d blokirano";
@@ -592,38 +535,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Pokušali ste da dodate postojeći filter. Ovaj filter je već na listi.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Promene nisu primenjene";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokirano";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Obrađeno";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Stavljeno na belu listu";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "dodato na belu listu";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "dodato na crnu listu";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "uklonjeno sa bele liste";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "uklonjeno sa crne liste";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Otvorite %@ <b>postavke</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Dodirnite %@ <b>Safari</b> i izaberite <b>\"blokatori sadržaja\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Uključite %@ sve blokatore sadržaja</b> pa se vratite u našu aplikaciju!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistemski DNS";
@@ -634,23 +547,11 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokiraj zahtev";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Stavi zahtev na belu listu";
-
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video uputstvo";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Uneli ste nevažeći upstream";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Crna lista sistema";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Bela lista sistema";
-
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "Detalji praćenja";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Opšte";
@@ -714,9 +615,6 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Pravilo nije pronađeno";
-
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "Zaštita sistema je isključena";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Uključi";
