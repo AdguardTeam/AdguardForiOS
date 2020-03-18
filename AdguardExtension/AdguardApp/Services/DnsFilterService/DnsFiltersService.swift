@@ -107,7 +107,8 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var removable: Bool {
         get {
             // Check if filter id is in range of custom filters
-            return DnsFilter.customFiltersRange ~= id
+            // 0 is old predefined filter id
+            return DnsFilter.customFiltersRange ~= id || id == 0
         }
     }
     
@@ -486,7 +487,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         basicFilter.id = DnsFilter.basicFilterId
         
-        filters.insert(basicFilter, at: basicFilter.id)
+        filters.insert(basicFilter, at: 0)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: basicFilter.id))
     }
@@ -509,7 +510,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         strictFilter.id = DnsFilter.strictFilterId
         
-        filters.insert(strictFilter, at: strictFilter.id)
+        filters.insert(strictFilter, at: 1)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: strictFilter.id))
     }
@@ -532,7 +533,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         googleFilter.id = DnsFilter.googleFilterId
         
-        filters.insert(googleFilter, at: googleFilter.id)
+        filters.insert(googleFilter, at: 2)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: googleFilter.id))
     }
@@ -555,7 +556,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         facebookFilter.id = DnsFilter.facebookFilterId
         
-        filters.insert(facebookFilter, at: facebookFilter.id)
+        filters.insert(facebookFilter, at: 3)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: facebookFilter.id))
     }

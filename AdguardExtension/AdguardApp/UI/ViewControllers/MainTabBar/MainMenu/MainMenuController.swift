@@ -135,7 +135,7 @@ class MainMenuController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 32.0 : 0.1
+        return 0.01
     }
     
     // MARK: - private methods
