@@ -52,6 +52,8 @@ import Foundation
     func setupLabel(_ label: ThemableLabel)
     func setupLabelInverted(_ label: ThemableLabel)
     func setupLabels(_ labels: [ThemableLabel])
+    func setupButton(_ button: ThemableButton)
+    func setupButtons(_ buttons: [ThemableButton])
     func setupPopupLabel(_ label: ThemableLabel)
     func setupPopupLabels(_ labels: [ThemableLabel])
     func setupPopupButton(_ button: RoundRectButton)
@@ -195,6 +197,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         for label in labels {
             setupLabel(label)
         }
+    }
+    
+    func setupButton(_ button: ThemableButton) {
+        let color = button.greyText ? grayTextColor : button.lightGreyText ? lightGrayTextColor : blackTextColor
+        button.titleLabel?.textColor = color
+    }
+    
+    func setupButtons(_ buttons: [ThemableButton]) {
+        buttons.forEach({ setupButton($0) })
     }
     
     func setupPopupLabel(_ label: ThemableLabel) {
