@@ -769,10 +769,10 @@
 
 
 // MARK: - Strings for VoiceOver -
-
 // MARK: - MainTabBarController
-
 /* (MainTabBarController) Main page tab for VoiceOver*/
+
+
 "main_page_tab" = "Main page";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
@@ -786,8 +786,8 @@
 
 
 // MARK: - MainPageController
-
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
 "safari_protection_enabled_voiceover" = "Safari protection enabled";
 
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
@@ -813,19 +813,19 @@
 
 
 // MARK: - SystemProtectionEnablerController
-
 /* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+
 "enable_system_protection_voiceover" = "Enable tracking protection";
 
 
 // MARK: - GetProTableController
-
 /* (GetProTableController) Choose your subscription type for VoiceOver*/
+
 "choose_sub_voiceover" = "Choose your subscription type";
 
 // MARK: - LoginController
-
 /* (LoginController) Enter your email here title for VoiceOver*/
+
 "enter_email_voiceover" = "Enter your email here";
 
 /* (LoginController) Enter your password here title for VoiceOver*/

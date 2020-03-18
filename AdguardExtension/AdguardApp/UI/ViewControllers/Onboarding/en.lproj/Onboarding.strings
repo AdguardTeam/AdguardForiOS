@@ -14,7 +14,7 @@
 "Mzf-WJ-CpC.text" = "AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe.";
 
 /* Class = "UILabel"; text = "Tap on Safari and chose the “Content blockers” menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Tap on Safari and chose the “Content blockers” menu item";
+"QL3-U7-vA8.text" = "Tap on Safari and choose the \"Content blockers\" menu item";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "NEXT";
