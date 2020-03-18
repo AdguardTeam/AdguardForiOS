@@ -96,7 +96,7 @@ class OnboardingController: UIViewController {
     // MARK: - Actions
     
     @IBAction func closeAction(_ sender: Any) {
-        if needsShowingPremium == true {
+        if needsShowingPremium == true && !configuration.proStatus{
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)
         } else {
             dismiss(animated: true) { [weak self] in

@@ -78,26 +78,20 @@ protocol DnsFiltersServiceProtocol {
 @objcMembers
 class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     
-    // First 1000 filters are predefined filters
-    static let predefinedFiltersRange = 0..<1000
+    static let userFilterId = 1
+    static let whitelistFilterId = 2
     
-    // From 1000 to 2000 are user filters
-    static let userFiltersRange = 1000..<2000
+    // From 3 to 1000000 are custom filters
+    static let customFiltersRange = 3..<1000000
     
-    // From 2000 to 3000 are whitelist filters
-    static let whitelistFiltersRange = 2000..<3000
+    // From 1000000 to 1100000 are predefined filters
+    static let predefinedFiltersRange = 1000000..<1100000
     
-    // From 3000 to infinity are custom filters
-    static let customFiltersRange = 3000..<1000000
-    
-    
-    static let basicFilterId = 0
-    static let strictFilterId = 1
-    static let googleFilterId = 2
-    static let facebookFilterId = 3
-    
-    static let userFilterId = userFiltersRange.lowerBound
-    static let whitelistFilterId = whitelistFiltersRange.lowerBound
+    // Predefined filters Ids
+    static let basicFilterId = 1000000
+    static let strictFilterId = 1000001
+    static let googleFilterId = 1000002
+    static let facebookFilterId = 1000003
     
     var id: Int = customFiltersRange.lowerBound
     var subscriptionUrl: String?
@@ -113,7 +107,8 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var removable: Bool {
         get {
             // Check if filter id is in range of custom filters
-            return DnsFilter.customFiltersRange ~= id
+            // 0 is old predefined filter id
+            return DnsFilter.customFiltersRange ~= id || id == 0
         }
     }
     
@@ -492,7 +487,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         basicFilter.id = DnsFilter.basicFilterId
         
-        filters.insert(basicFilter, at: basicFilter.id)
+        filters.insert(basicFilter, at: 0)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: basicFilter.id))
     }
@@ -515,7 +510,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         strictFilter.id = DnsFilter.strictFilterId
         
-        filters.insert(strictFilter, at: strictFilter.id)
+        filters.insert(strictFilter, at: 1)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: strictFilter.id))
     }
@@ -538,7 +533,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         googleFilter.id = DnsFilter.googleFilterId
         
-        filters.insert(googleFilter, at: googleFilter.id)
+        filters.insert(googleFilter, at: 2)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: googleFilter.id))
     }
@@ -561,7 +556,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         facebookFilter.id = DnsFilter.facebookFilterId
         
-        filters.insert(facebookFilter, at: facebookFilter.id)
+        filters.insert(facebookFilter, at: 3)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: facebookFilter.id))
     }
