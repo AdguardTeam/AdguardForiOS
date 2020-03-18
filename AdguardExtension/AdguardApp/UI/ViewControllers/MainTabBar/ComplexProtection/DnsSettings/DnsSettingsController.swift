@@ -183,8 +183,11 @@ class DnsSettingsController : UITableViewController {
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
     
-        complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
-        
+        complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.updateVpnInfo()
+            }
+        }
         updateVpnInfo()
     }
     
