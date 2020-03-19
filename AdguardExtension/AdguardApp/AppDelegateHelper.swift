@@ -197,6 +197,9 @@ class AppDelegateHelper: NSObject {
             
             self.configuration.reset()
             
+            let providersService: DnsProvidersService = ServiceLocator.shared.getService()!
+            providersService.reset()
+            
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}
             

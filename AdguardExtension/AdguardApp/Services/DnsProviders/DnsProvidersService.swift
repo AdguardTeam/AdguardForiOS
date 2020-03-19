@@ -40,6 +40,8 @@ protocol DnsProvidersServiceProtocol {
     func isCustomProvider(_ provider: DnsProviderInfo)->Bool
     func isCustomServer(_ server: DnsServerInfo)->Bool
     func isActiveProvider(_ provider: DnsProviderInfo)->Bool
+    
+    func reset()
 }
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
@@ -204,6 +206,10 @@ protocol DnsProvidersServiceProtocol {
         
         let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
         return "\(provider?.name ?? server.name) (\(protocolName))"
+    }
+    
+    func reset() {
+        customProvidersInternal = nil
     }
     
     // MARK: - private methods
