@@ -131,7 +131,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
  
     self = [super init];
     if (self) {
-        
+        @try {
         if (dbResult) {
             
             NSDictionary *result = [dbResult resultDictionary];
@@ -180,12 +180,16 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                             [self setValue:obj forKey:key];
                         }
                         @catch (NSException *exception) {
-                            
+                            DDLogError(@"(ADBTableRow) initWithDbResult standant mapping - error: %@", exception.debugDescription);
                         }
                     }
                 }
             }];
             
+        }
+        }
+        @catch (NSException *exception) {
+            DDLogError(@"(ADBTableRow) initWithDbResult - unknown error: %@", exception.debugDescription);
         }
     }
     
