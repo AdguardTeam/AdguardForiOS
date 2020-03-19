@@ -507,7 +507,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let descr = String.localizedString("strict_filter_description")
         let importantDesc = String.localizedString("strict_filter_important_description")
         
-        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         strictFilter.id = DnsFilter.strictFilterId
         
         filters.insert(strictFilter, at: 1)
@@ -530,7 +530,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let descr = String.localizedString("google_filter_description")
         let importantDesc = String.localizedString("google_filter_important_description")
         
-        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         googleFilter.id = DnsFilter.googleFilterId
         
         filters.insert(googleFilter, at: 2)
@@ -553,7 +553,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let descr = String.localizedString("facebook_filter_description")
         let importantDesc = String.localizedString("facebook_filter_important_description")
         
-        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         facebookFilter.id = DnsFilter.facebookFilterId
         
         filters.insert(facebookFilter, at: 3)
