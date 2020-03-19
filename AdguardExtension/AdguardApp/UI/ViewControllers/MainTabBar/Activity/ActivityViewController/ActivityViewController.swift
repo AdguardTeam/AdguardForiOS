@@ -19,9 +19,97 @@
 import UIKit
 
 class ActivityViewController: UIViewController {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var scrollContentView: UIView!
+    
+    @IBOutlet weak var changePeriodTypeButton: UIButton!
+    
+    @IBOutlet weak var requestsNumberLabel: ThemableLabel!
+    @IBOutlet weak var blockedNumberLabel: UILabel!
+    @IBOutlet weak var dataSavedLabel: UILabel!
+    @IBOutlet weak var companiesNumberLabel: ThemableLabel!
+    
+    @IBOutlet weak var mostActiveCompany: ThemableLabel!
+    @IBOutlet weak var mostBlockedCompany: ThemableLabel!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet var themableButtons: [ThemableButton]!
+    @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet var separators: [UIView]!
+    
+    
+    // MARK: - Services
+    
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    
+    // MARK: - Notifications
+    
+    private var themeToken: NotificationToken?
+    
+    // MARK: - Private variables
+    
+    private let activityTableViewCellReuseId = "ActivityTableViewCellId"
 
+    
+    // MARK: - ViewController life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateTheme()
+        
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func changePeriodTypeAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func infoAction(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func clearActivityLogAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
+    }
+    
+    // MARK: - Private methods
 
+    private func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        scrollContentView.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupSearchBar(searchBar)
+        theme.setupLabels(themableLabels)
+        theme.setupButtons(themableButtons)
+        theme.setupSeparators(separators)
+    }
+}
+
+extension ActivityViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
+            theme.setupTableCell(cell)
+            return cell
+        }
+        return UITableViewCell()
+    }
+}
+
+extension ActivityViewController: UISearchBarDelegate {
+    
 }

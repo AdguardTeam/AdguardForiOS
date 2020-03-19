@@ -1028,6 +1028,9 @@
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="changePeriodTypeAction:" destination="fix-GC-1de" eventType="touchUpInside" id="7fw-ch-9qD"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUr-iR-XCR" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="84" width="166.66666666666666" height="39"/>
@@ -1066,6 +1069,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="HKw-et-5B6"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwU-jp-tvR" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="227.66666666666663" y="123" width="166.33333333333337" height="18"/>
@@ -1079,6 +1085,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="OV2-aR-84W"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVH-fh-5uu">
                                                 <rect key="frame" x="20" y="165" width="166.66666666666666" height="39"/>
@@ -1117,6 +1126,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="Bcb-mt-4Rj"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfs-dl-Met" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="227.66666666666663" y="204" width="166.33333333333337" height="18"/>
@@ -1130,6 +1142,9 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="5Q0-Ca-r7m"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiq-DW-VD3">
                                                 <rect key="frame" x="0.0" y="254" width="414" height="52"/>
@@ -1160,7 +1175,8 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="qQJ-la-3E9" firstAttribute="leading" secondItem="I1X-JJ-Uis" secondAttribute="trailing" constant="16" id="385-1W-g2g"/>
                                                     <constraint firstAttribute="trailing" secondItem="qQJ-la-3E9" secondAttribute="trailing" constant="16" id="67M-yY-I4Y"/>
@@ -1201,7 +1217,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="hu8-PZ-ZQv" firstAttribute="leading" secondItem="440-sb-zeR" secondAttribute="leading" constant="16" id="1Iy-Sk-d9f"/>
                                                     <constraint firstItem="6db-D0-eEv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hu8-PZ-ZQv" secondAttribute="trailing" constant="16" id="2Xw-hV-Ub6"/>
@@ -1224,9 +1240,14 @@
                                                 <rect key="frame" x="0.0" y="510.33333333333337" width="414" height="341.66666666666663"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <view key="tableFooterView" contentMode="scaleToFill" id="mTd-Xb-iJg">
+                                                    <rect key="frame" x="0.0" y="106.5" width="414" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTableViewCell" id="X89-Wn-tkI" customClass="ActivityTableViewCell" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="50.333332061767578"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTableViewCellId" id="X89-Wn-tkI" customClass="ActivityTableViewCell" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="50.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X89-Wn-tkI" id="FPp-ll-PKk">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50.333332061767578"/>
@@ -1270,6 +1291,11 @@
                                                                         <constraint firstAttribute="height" constant="4" id="O2J-ws-HYc"/>
                                                                         <constraint firstAttribute="width" secondItem="r7J-Ch-sFk" secondAttribute="height" id="jEi-4S-w9h"/>
                                                                     </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <integer key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrj-m8-Rhs" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                     <rect key="frame" x="16" y="7.9999999999999982" width="0.0" height="18.333333333333329"/>
@@ -1309,12 +1335,19 @@
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="fix-GC-1de" id="V3G-iw-j7Q"/>
+                                                    <outlet property="delegate" destination="fix-GC-1de" id="ByZ-m8-VTz"/>
+                                                </connections>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-Zh-7u1">
-                                                <rect key="frame" x="16" y="407" width="310" height="19.333333333333314"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-Zh-7u1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="407" width="310" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YG-5z-asB">
                                                 <rect key="frame" x="342" y="404.66666666666669" width="24" height="24"/>
@@ -1323,6 +1356,9 @@
                                                     <constraint firstAttribute="height" constant="24" id="sQy-47-p3Z"/>
                                                 </constraints>
                                                 <state key="normal" image="group"/>
+                                                <connections>
+                                                    <action selector="changeRequestsTypeAction:" destination="fix-GC-1de" eventType="touchUpInside" id="nQK-Cb-HM9"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRx-oo-9wW">
                                                 <rect key="frame" x="374" y="404.66666666666669" width="24" height="24"/>
@@ -1331,10 +1367,16 @@
                                                     <constraint firstAttribute="width" secondItem="dRx-oo-9wW" secondAttribute="height" id="uwz-Ox-2YT"/>
                                                 </constraints>
                                                 <state key="normal" image="options"/>
+                                                <connections>
+                                                    <action selector="clearActivityLogAction:" destination="fix-GC-1de" eventType="touchUpInside" id="aeq-p1-MFh"/>
+                                                </connections>
                                             </button>
                                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CZz-xN-pUP">
                                                 <rect key="frame" x="16" y="446.33333333333331" width="382" height="56"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="fix-GC-1de" id="JVs-Zw-3Nn"/>
+                                                </connections>
                                             </searchBar>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1347,7 +1389,7 @@
                                             <constraint firstAttribute="bottom" secondItem="Oud-tc-keZ" secondAttribute="bottom" id="3CW-fB-rbt"/>
                                             <constraint firstAttribute="trailing" secondItem="9XM-WK-zoX" secondAttribute="trailing" constant="20" id="3LY-jz-qQc"/>
                                             <constraint firstItem="3YG-5z-asB" firstAttribute="centerY" secondItem="dRx-oo-9wW" secondAttribute="centerY" id="3se-CC-zRw"/>
-                                            <constraint firstItem="CZz-xN-pUP" firstAttribute="leading" secondItem="Ndu-I4-AkH" secondAttribute="leading" constant="16" id="4f9-xI-GBl"/>
+                                            <constraint firstItem="CZz-xN-pUP" firstAttribute="leading" secondItem="Ndu-I4-AkH" secondAttribute="leading" constant="8" id="4f9-xI-GBl"/>
                                             <constraint firstItem="3YG-5z-asB" firstAttribute="leading" secondItem="Qnf-Zh-7u1" secondAttribute="trailing" constant="16" id="566-vb-SGP"/>
                                             <constraint firstItem="xxL-Hb-P59" firstAttribute="top" secondItem="TUr-iR-XCR" secondAttribute="bottom" id="6VB-KE-EiQ"/>
                                             <constraint firstItem="xxL-Hb-P59" firstAttribute="trailing" secondItem="TUr-iR-XCR" secondAttribute="trailing" id="8DM-p5-Mog"/>
@@ -1389,7 +1431,7 @@
                                             <constraint firstItem="Si6-Hq-6Md" firstAttribute="centerX" secondItem="Ndu-I4-AkH" secondAttribute="centerX" id="sTQ-lX-wfv"/>
                                             <constraint firstItem="Si6-Hq-6Md" firstAttribute="leading" secondItem="DVH-fh-5uu" secondAttribute="trailing" constant="20" id="tAc-EE-gYK"/>
                                             <constraint firstItem="Oud-tc-keZ" firstAttribute="top" secondItem="CZz-xN-pUP" secondAttribute="bottom" constant="8" id="tS3-cA-qwb"/>
-                                            <constraint firstAttribute="trailing" secondItem="CZz-xN-pUP" secondAttribute="trailing" constant="16" id="u5x-0B-SIj"/>
+                                            <constraint firstAttribute="trailing" secondItem="CZz-xN-pUP" secondAttribute="trailing" constant="8" id="u5x-0B-SIj"/>
                                             <constraint firstItem="hDq-iK-DPU" firstAttribute="bottom" secondItem="xxL-Hb-P59" secondAttribute="bottom" id="u71-2g-xRm"/>
                                             <constraint firstItem="3Hn-iJ-LFQ" firstAttribute="top" secondItem="Si6-Hq-6Md" secondAttribute="top" id="ueP-va-pWY"/>
                                             <constraint firstItem="Nfs-dl-Met" firstAttribute="leading" secondItem="3Hn-iJ-LFQ" secondAttribute="leading" id="w9X-zt-cwB"/>
@@ -1424,6 +1466,31 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WYh-20-g7p"/>
                     </view>
+                    <connections>
+                        <outlet property="blockedNumberLabel" destination="9XM-WK-zoX" id="dCu-1g-p4I"/>
+                        <outlet property="changePeriodTypeButton" destination="p28-YR-Ejf" id="ymk-ce-bnD"/>
+                        <outlet property="companiesNumberLabel" destination="3Hn-iJ-LFQ" id="KPR-BH-PeW"/>
+                        <outlet property="dataSavedLabel" destination="DVH-fh-5uu" id="Omn-es-ryC"/>
+                        <outlet property="mostActiveCompany" destination="I1X-JJ-Uis" id="edv-Gn-RrS"/>
+                        <outlet property="mostBlockedCompany" destination="6db-D0-eEv" id="R2J-4l-wlQ"/>
+                        <outlet property="requestsNumberLabel" destination="TUr-iR-XCR" id="dOg-3D-IPq"/>
+                        <outlet property="scrollContentView" destination="Ndu-I4-AkH" id="Hqd-VJ-Aci"/>
+                        <outlet property="searchBar" destination="CZz-xN-pUP" id="DYK-gg-O2W"/>
+                        <outlet property="tableView" destination="Oud-tc-keZ" id="vdR-0i-jt6"/>
+                        <outletCollection property="themableButtons" destination="xxL-Hb-P59" collectionClass="NSMutableArray" id="8gz-Lw-eMf"/>
+                        <outletCollection property="themableButtons" destination="WwU-jp-tvR" collectionClass="NSMutableArray" id="pC8-Gp-7wD"/>
+                        <outletCollection property="themableButtons" destination="Nfs-dl-Met" collectionClass="NSMutableArray" id="9Ae-CL-BSY"/>
+                        <outletCollection property="themableButtons" destination="Mt8-ZS-0fy" collectionClass="NSMutableArray" id="hQS-9i-kE6"/>
+                        <outletCollection property="themableLabels" destination="TUr-iR-XCR" collectionClass="NSMutableArray" id="xfz-FG-q8T"/>
+                        <outletCollection property="themableLabels" destination="3Hn-iJ-LFQ" collectionClass="NSMutableArray" id="TZz-g2-UNl"/>
+                        <outletCollection property="themableLabels" destination="IZT-IW-C1U" collectionClass="NSMutableArray" id="9K9-O1-9Kb"/>
+                        <outletCollection property="separators" destination="yoA-2B-2eN" collectionClass="NSMutableArray" id="7IA-Ux-TZ8"/>
+                        <outletCollection property="themableLabels" destination="EOm-G0-oDu" collectionClass="NSMutableArray" id="S0p-hS-XOY"/>
+                        <outletCollection property="themableLabels" destination="I1X-JJ-Uis" collectionClass="NSMutableArray" id="brh-ym-O2P"/>
+                        <outletCollection property="themableLabels" destination="hu8-PZ-ZQv" collectionClass="NSMutableArray" id="gLM-8a-dg6"/>
+                        <outletCollection property="themableLabels" destination="6db-D0-eEv" collectionClass="NSMutableArray" id="aY5-nu-huf"/>
+                        <outletCollection property="themableLabels" destination="Qnf-Zh-7u1" collectionClass="NSMutableArray" id="4Hl-E0-zSu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5dx-ge-bgz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

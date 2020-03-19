@@ -201,7 +201,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupButton(_ button: ThemableButton) {
         let color = button.greyText ? grayTextColor : button.lightGreyText ? lightGrayTextColor : blackTextColor
-        button.titleLabel?.textColor = color
+        button.setTitleColor(color, for: .normal)
     }
     
     func setupButtons(_ buttons: [ThemableButton]) {
