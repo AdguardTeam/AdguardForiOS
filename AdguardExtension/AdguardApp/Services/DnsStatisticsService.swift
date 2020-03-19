@@ -125,23 +125,32 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     
     func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]] {
         
+        DDLogInfo("(DnsStatisticsService) readStatistics")
         var statistics = [DnsStatisticsType:[RequestsStatisticsBlock]]()
         
         let group = DispatchGroup()
         group.enter()
         
         ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
+            DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity")
             if expired {
+                DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity expired")
                 return
             }
             
             self?.readHandler?.inTransaction { (db, rollback) in
                 let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
-                guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else { return }
+                guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else {
+                    DDLogInfo("(DnsStatisticsService) readStatistics - select returns empty or incorrect result")
+                    return
+                }
                 
+                DDLogInfo("(DnsStatisticsService) readStatistics - result.count = \(result.count)")
                 if result.count > 0 {
                     statistics[.all] = result.map { $0.allStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
+                    DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.all].count = \(statistics[.all]?.count ?? 0)")
                     statistics[.blocked] = result.map { $0.blockedStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
+                    DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.blocked].count = \(statistics[.blocked]?.count ?? 0)")
                 }
             }
             group.leave()
