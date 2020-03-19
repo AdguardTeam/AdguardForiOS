@@ -773,16 +773,16 @@
 /* (MainTabBarController) Main page tab for VoiceOver*/
 
 
-"main_page_tab" = "Main page";
+"main_page_tab" = "Main screen";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Protection page";
+"protection_page_tab" = "Protection screen";
 
 /* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Activity page";
+"activity_page_tab" = "Activity screen";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Settings page";
+"settings_page_tab" = "Settings screen";
 
 
 // MARK: - MainPageController
