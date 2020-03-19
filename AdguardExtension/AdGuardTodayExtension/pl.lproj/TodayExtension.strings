@@ -1,11 +1,8 @@
-/* Class = "UILabel"; text = "Safari ads protection"; ObjectID = "28V-ha-qHw"; */
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "28V-ha-qHw"; */
 "28V-ha-qHw.text" = "Safari ochrona przed reklamami";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "żądania";
-
-/* Class = "UILabel"; text = "System protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "Ochrona systemu";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Statystyki od początku:";

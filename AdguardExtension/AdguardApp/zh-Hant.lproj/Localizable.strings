@@ -23,22 +23,31 @@
 "safari_filters_loading_error" = "過濾器無法被載進 Safari。因此，您最近的更改未被套用。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和白名單，或更改已使用的過濾器之集合。";
+"load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和允許清單，或更改已使用的過濾器之集合。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "白名單（反向的）";
+"inverted_whitelist_title" = "允許清單（反向的）";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "正在套用更改…";
+
+/* (MainPageController) Text for data units (Kb) Kilobyte */
+"kb_unit" = "%@ KB";
+
+/* (MainPageController) Text for data units (Mb) Megabyte */
+"mb_unit" = "%@ MB";
+
+/* (MainPageController) Text for data units (Gb) Gigobyte */
+"gb_unit" = "%@ GB";
 
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "免費地試用";
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "免費地試用";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "白名單";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者規則";
@@ -104,7 +113,7 @@
 "filter_group_filters_count_format" = "已啟用過濾器：%d/%d";
 
 /* (GroupsController) Filters update time format */
-"filter_date_format" = "過濾器被更新：%@";
+"filter_date_format" = "過濾器已更新於：%@";
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "於此您可增加您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
@@ -118,8 +127,8 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "正在更新…";
 
-/* (UserFilterController) add blacklist rule button title */
-"add_blacklist_rule_title" = "增加規則";
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "增加一項規則";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "輸入一個網域";
@@ -130,6 +139,9 @@
 /* (UserFilterController) add whitelist domain placeholder */
 "add_whitelist_domain_placeholder" = "example.org";
 
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "您的 Wi-Fi 名稱";
+
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "規則：";
 
@@ -138,6 +150,9 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "名稱：";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "傳送回饋意見";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "報告不正確的封鎖";
@@ -227,10 +242,10 @@
 "dns_provider_safe_search_summary" = "無論何時盡可能，安全搜尋在瀏覽器中被強制執行";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "封鎖廣告和追蹤系統";
+"dns_provider_ad_blocking_summary" = "封鎖追蹤系統";
 
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "系統 DNS";
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "無加密（系統 DNS）";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已啟用 %2$d 當中的 %1$d";
@@ -294,6 +309,9 @@
 
 /* (AdvancedSettingsController) Reset statistics title */
 "reset_stat_title" = "重置統計資料";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "所有的統計資料將被清除！";
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "重置";
@@ -362,7 +380,7 @@
 "getPro_screen_lifetime_text" = "付一次費用，然後於所有您的裝置上使用 AdGuard 高級版功能！";
 
 /* (LoginController) incorrect email/passsword mesage */
-"bad_credentials_error" = "不正確的電子郵件地址或密碼";
+"bad_credentials_error" = "不正確的電子郵件位址或密碼";
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "帳戶被封鎖";
@@ -373,17 +391,26 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "無效的雙因素驗證（2FA）權杖";
 
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi 例外";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "增加一個例外";
+
 /* (NetworkSettingsController) title for "Filter mobile data" */
 "filter_mobile_title" = "過濾行動數據";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "過濾 Wi-Fi";
 
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "白名單";
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "允許清單";
 
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "黑名單";
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "允許清單";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "封鎖清單";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari 使用者規則";
@@ -399,6 +426,30 @@
 
 /* (ListOfRulesModel) title for import */
 "import" = "匯入";
+
+/* "Disabled" title */
+"disabled" = "已禁用";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "從允許清單中移除";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "從封鎖清單中移除";
+
+/*(LogCategory) comments category*/
+"comments" = "評論";
+
+/*(LogCategory) advertising category*/
+"advertising" = "廣告";
+
+/*(LogCategory) social media category*/
+"social_media" = "社群媒體";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "雜項的";
+
+/*(LogCategory) DNS category*/
+"cdn" = "內容傳遞網路（CDN）";
 
 /*(LogCategory) unknown category*/
 "unknown" = "未知的";
@@ -418,11 +469,35 @@
 /*(ListOfRules) Select all title */
 "common_select_all" = "全選";
 
+/*(ListOfRules) Add domain title */
+"add_domain" = "增加一個網域";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "增加一項新的規則";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "包括使用者規則、追蹤防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
+
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "重置活動記錄";
 
 /* (DnsLogContainerController) reset activity log message */
 "reset_activity_message" = "所有的活動記錄將被刪除！";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 小時";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "今日";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 日";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 日";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "所有的時間";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "正在載入過濾器…";
@@ -440,22 +515,34 @@
 "protection_enabled" = "防護被啟用";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari 和系統防護";
+"complex_enabled" = "Safari 和追蹤防護";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari 內容阻擋";
 
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "系統防護";
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "所有的防護模組被禁用";
+
+/*(TodayViewController) Tracking protection is enabled text  */
+"system_enabled" = "追蹤防護";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "更多的";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已封鎖的";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "已處理的";
+"dns_request_status_processed" = "已允許的";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "已列入白名單的";
+"dns_request_status_whitelisted" = "已允許的";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "已從允許清單中移除";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "已從封鎖清單中移除";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系統 DNS";
@@ -464,7 +551,10 @@
 "default_dns_server_description" = "使用由您的 ISP（網際網路服務供應商）提供之系統預設 DNS 伺服器";
 
 /* (BlockRequestController) Block request title */
-"block_request" = "封鎖請求";
+"block_request" = "封鎖該請求";
+
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "增加該網域到允許清單";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "視訊導覽";
@@ -473,13 +563,13 @@
 "invalid_upstream_message" = "您已輸入無效的上游";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "系統黑名單";
+"system_blacklist" = "系統封鎖清單";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "系統白名單";
+"system_whitelist" = "系統允許清單";
 
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "追蹤器細節";
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "細節";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "一般的";
@@ -514,6 +604,9 @@
 /* (DnsRequestDetailsController) "Size" title for cell */
 "size_title" = "大小";
 
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "已經過";
+
 /* (DnsRequestDetailsController) "Type" title for cell */
 "type_title" = "類型";
 
@@ -526,11 +619,47 @@
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS 回應";
 
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "相符的過濾器";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "相符的規則";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "原始的回應";
+
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "空無的";
 
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "系統防護被禁用";
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "追蹤防護被禁用";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "啟用";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "未能傳送您的回饋意見";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "某事物出現問題";
+
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "主頁面";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "防護頁面";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "活動頁面";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "設定頁面";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "更新過濾器";

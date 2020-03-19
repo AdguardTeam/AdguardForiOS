@@ -16,7 +16,7 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "Tamno";
 
-/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "Ne mijenjajte ih ako ne znate što radite";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
@@ -67,9 +67,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Prikaži statusnu traku";
 
-/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
-"bVh-Of-Oxm.text" = "Izokrenite popis dopuštenih";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Napredne postavke";
 
@@ -90,9 +87,6 @@
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Svijetlo";
-
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "Odblokirajte oglase svugdje osim za stranice s ove liste";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "Prikaži više posebnih podataka i opcija";

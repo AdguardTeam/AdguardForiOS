@@ -22,20 +22,11 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "フィルタをSafariに読み込ませることができません。 したがって、あなたの最近の変更は適用されませんでした。";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "フィルタをSafariに読み込みすることができません。ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりして解決するかをお試しください。";
-
 /* NO Button caption in alert */
 "common_action_no" = "いいえ";
 
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "逆ホワイトリスト";
-
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "変更を適用中...";
-
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "この情報は、ブロックされたDNSリクエスト数に基づいています。統計は、ドメインがブロックされなかった場合にユーザーによってダウンロードされる広告、トラッカー、およびその他の脅威を想定して計算した推定値です（※技術的に100％正確な数を測ることは不可能です）。";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
@@ -51,9 +42,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "詳細はこちら";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "ホワイトリスト";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
@@ -133,13 +121,10 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "ここにドメイン名を入力できます。AdGuardはこちらに入力されたドメイン名をブロックしません。";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "このブラックリストは<a href=\"%@\">AdGuard DNS構文</a>をサポートします。こちらに改行で区切って入力したルールに従って、AdGuardはドメインへのコネクションをブロックします。";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "アップデート中…";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "ルールを追加";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -249,12 +234,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "可能な限り、セーフサーチはブラウザに適用されます。";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "広告と追跡サーバーをブロック";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "システムDNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "有効フィルタ数：%1$d/%2$d";
@@ -403,9 +382,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fiの除外";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "下記のWi-Fiネットワークに対し「システム全体でブロック」はオフになります。";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "除外項目を追加する";
 
@@ -414,18 +390,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Wi-Fiをフィルタリング";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "モバイル通信接続時の「システム全体でブロック」";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Wi-Fi接続時の「システム全体でブロック」";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "ホワイトリスト";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "ブラックリスト";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safariユーザールール";
@@ -444,18 +408,6 @@
 
 /* "Disabled" title */
 "disabled" = "オフ";
-
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "ホワイトリストから除去";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "ブラックリストから除去";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "ホワイトリストに追加";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "ブラックリストに追加";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "フィッシング詐欺や他の危険なドメインをブロック。※プレミアム版で利用可";
@@ -523,9 +475,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "新しいルールを追加する";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "ユーザールール、「システム全体でブロック」、インターフェイスおよび認証設定を含むすべての設定がリセットされます。この操作を取り消すことはできません。設定をリセットしますか？";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "アクティビティ・ログのリセット";
 
@@ -568,17 +517,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "保護はオンです。";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "「Safariでブロック」と\n「システム全体でブロック」がON";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "「Safariでブロック」がON";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "すべてのブロック機能がオフです。";
-
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "「システム全体でブロック」がON";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "リクエスト数 %1$d、ブロック済数 %2$d";
@@ -592,38 +535,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "重複するフィルターを追加しようとしました。このフィルターは既にリストに登録されています。";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "変更は適用されませんでした。";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "ブロック済";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "処理済";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "ホワイトリストに追加済";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "ホワイトリストに追加済み";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "ブラックリストに追加済み";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "ホワイトリストから削除済み";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "ブラックリストから削除済み";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "%@<b>設定</b>アプリを開き";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "%@ <b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>コンテンツブロッカーの%@スイッチ</b>をすべてオンにしてください。";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "システムDNS";
@@ -634,23 +547,11 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "リクエストをブロック";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "リクエストをホワイトリストに追加する";
-
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "使い方（動画）";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "入力されたアップストリームは無効です";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "システム・ブラックリスト";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "システム・ホワイトリスト";
-
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "追跡ソフト情報";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "一般";
@@ -714,9 +615,6 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "ルール見つかりません";
-
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "「システム全体でブロック」がオフになっています。";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "オンにする";

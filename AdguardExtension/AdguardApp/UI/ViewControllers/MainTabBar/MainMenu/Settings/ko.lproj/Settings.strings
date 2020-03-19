@@ -16,7 +16,7 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "다크";
 
-/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "고급 사용자에게만 권장됩니다";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
@@ -67,9 +67,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "상태 바 표시";
 
-/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
-"bVh-Of-Oxm.text" = "화이트리스트 반전";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "고급 설정";
 
@@ -90,9 +87,6 @@
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "라이트";
-
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "이 목록에 있는 웹사이트를 제외한 모든 곳의 광고를 차단 해제";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "고급 사용자를위한 고급 설정을 적용합니다";

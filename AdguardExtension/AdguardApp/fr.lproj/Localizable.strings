@@ -22,20 +22,11 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Les filtres ne peuvent pas être chargés dans Safari, par conséquent vos dernières modifications ne seront pas appliquées.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Les filtres ne peuvent pas être chargés dans Safari. Essayez d'effacer vos règles et la liste blanche, ou modifiez la série de filtres utilisée.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NON";
 
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Liste Blanche (inversée)";
-
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Appliquer les changements...";
-
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Cette information est basée sur le nombre de demandes DNS bloquées. Les statistiques sont une estimation en raison de l'impossibilité technique de calculer la quantité exacte de publicités, de trackers et d'autres menaces qui auraient pu être téléchargées par l'utilisateur si le domaine n'avait pas été initialement bloqué.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
@@ -51,9 +42,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Essai gratuit";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Liste Blanche";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Règles d'utilisateur";
@@ -133,13 +121,10 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Indiquez ici les noms de domaine séparés par des sauts de ligne. AdGuard autorisera toutes les connexions à ces domaines";
 
-/* (UserFilterController) dns blacklist description */
-"dns_blacklist_text_format" = "Cette liste noire prend en charge la <a href=\"%@\">syntaxe DNS d'AdGuard</a>. Saisissez ici les règles séparées par des sauts de ligne. AdGuard bloquera toutes les connexions aux domaines qui correspondent à ces règles.";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Mise à jour...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Ajouter une règle";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -249,12 +234,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Dans la mesure du possible, la recherche sécurisée est appliquée dans les navigateurs";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Bloque les annonces et les serveurs de suivi";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "DNS du système";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Filtres activés: %1$d sur %2$d";
@@ -403,9 +382,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Exceptions Wi-Fi";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "La protection du niveau système ne fonctionnera pas pour les réseaux Wi-Fi listés ci-dessous";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Ajouter une exception";
 
@@ -414,18 +390,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtrer le Wi-Fi";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Protection du système lors de l'utilisation de données mobiles";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Protection du système en cas de connexion Wi-Fi";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "Liste blanche";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Liste noire";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Règles d'utilisateur pour Safari";
@@ -444,18 +408,6 @@
 
 /* "Disabled" title */
 "disabled" = "Désactivé";
-
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "RETIRER DE LA LISTE BLANCHE";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "RETIRER DE LA LISTE NOIRE";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "AJOUTER À LA LISTE BLANCHE";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "AJOUTER À LA LISTE NOIRE";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permet de bloquer les sites d'hameçonnage et autres domaines dangereux. Disponible pour les utilisateurs Premium";
@@ -523,9 +475,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Ajouter une nouvelle règle";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "Tous les paramètres, y compris les règles d'utilisation, la protection du système, l'interface et les paramètres d'autorisation, seront réinitialisés. Cette opération ne peut pas être annulée. Réinitialiser les paramètres ?";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Réinitialiser le journal d'activité";
 
@@ -568,17 +517,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "La protection est activée";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Protection Safari et au niveau du système";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Blocage des contenus de Safari";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Tous les modules de protection sont désactivés";
-
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "Protection au niveau du système";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requêtes, %2$d bloquées";
@@ -592,38 +535,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Vous avez essayé d'ajouter un filtre en double. Ce filtre est déjà sur la liste";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Les changements n'ont pas été appliqués";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqués";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Traités";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Ajouté à la liste blanche";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "ajouté à la liste blanche";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "ajouté à la liste noire";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "retiré de la liste blanche";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "retiré de la liste noire";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Ouvrez les %@ <b>paramétrages</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Appuyez sur %@ <b>Safari</b> et choisissez l'élément du menu <b>\"Bloqueurs de contenu\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Allumez %@ tous les bloqueurs de contenu</b> et revenez à notre application !";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS du système";
@@ -634,23 +547,11 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloquer requête";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Mettre requête sur la liste blanche";
-
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Tutoriel vidéo";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Vous avez saisi l’amont invalide";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Liste noire du système";
-
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Liste blanche du système";
-
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "Détails du dispositif de suivi";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Paramètres généraux";
@@ -714,9 +615,6 @@
 
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Aucune règle trouvée";
-
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "La protection du système est désactivée";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Activer";

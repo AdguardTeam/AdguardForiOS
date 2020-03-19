@@ -22,23 +22,14 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtreler Safari'ye yüklenemedi. Bu nedenle, son değişiklikler uygulanamadı.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtreler Safari'ye yüklenemedi. Kurallarınızı ve beyaz listeyi temizlemeyi deneyin, ya da kullandığınız aboneliklerde değişiklik yapın.";
-
 /* NO Button caption in alert */
 "common_action_no" = "HAYIR";
-
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Beyazliste (ters çevrilmiş)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Değişiklikleri uygula...";
 
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Ücretsiz deneyin";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Beyazliste";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı Filtresi";
@@ -118,7 +109,7 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Güncelleniyor...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Bir kural ekle";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -225,12 +216,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Mümkün olduğunda tarayıcılar Güvenli Arama yapmaya zorlanacaktır.";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Reklamları ve izleme sunucularını engeller";
-
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "Sistem DNS";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%1$d etkin %2$d toplam";
@@ -373,9 +358,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi istisnaları";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Aşağıda listelenen Kablosuz ağları için sistem koruması çalışmaz";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "İstisna ekle";
 
@@ -384,18 +366,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Wi-Fi'yi filtrele";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Mobil verideyken sistem koruması";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Wi-Fi'deyken sistem koruması";
-
-/* (ListOfRulesModel) title for dns and safari white list*/
-"whitelist_title" = "Beyaz Liste";
-
-/* (ListOfRulesModel) title for dns black list */
-"dns_blacklist_title" = "Kara Liste";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari kullanıcı kuralları";
@@ -415,18 +385,6 @@
 /* "Disabled" title */
 "disabled" = "Devre dışı";
 
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
-"remove_from_whitelist" = "BEYAZ LİSTEDEN SİL";
-
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
-"remove_from_blacklist" = "KARA LİSTEDEN SİL";
-
-/*(LogRecord) "ADD TO WHITELIST" button title */
-"add_to_whitelist" = "BEYAZ LİSTEYE EKLE";
-
-/*(LogRecord) "ADD TO BLACKLIST" button title */
-"add_to_blacklist" = "KARA LİSTEYE EKLE";
-
 /*(GroupsController) Security description without premium  */
 "security_description" = "Kimlik avı sitelerinin ve diğer tehlikeli alan adlarının engellenmesine izin verin. Premium kullanıcılar tarafından kullanılabilir";
 
@@ -439,35 +397,8 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Yinelenen bir filtre eklemeye çalıştınız. Bu filtre zaten listede.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Değişiklikler uygulanmadı";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Engellendi";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Uygulanan";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Beyaz Listedeki";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "beyaz listeye eklendi";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "Kara listeye elendi";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "Beyaz listeden kaldırıldı";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "Kara listeden silindi";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "<b>Ayarları</b> %@ aç";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "<b>Safariye</b> %@ basın ve <b>\"İçerik Engelleyicileri\"</b> menü öğesini seçin";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";

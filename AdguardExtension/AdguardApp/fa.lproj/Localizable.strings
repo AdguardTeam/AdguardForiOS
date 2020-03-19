@@ -22,17 +22,8 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.سعی کنید دستورات خود را پاکسازی کرده،و در لیست سفید قرار دهید یا گروه فیلترهای بکار رفته را تغییر دهید.";
-
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
-
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "لیست سفید (معکوس شده)";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "لیست سفید";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "فیلتر کاربر";
@@ -112,7 +103,7 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "بروز رسانی...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "افزودن یک دستور";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -216,9 +207,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "هر گاه امکان داشت،جستجوی اَمن در مرورگرها اعمال میشود";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "مسدودسازی تبلیغ و سرورهای رَدیاب";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "فعال شده %1$d از %2$d";

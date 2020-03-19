@@ -1,6 +1,9 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "重置";
 
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "反向允許清單";
+
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "與其它的 VPN 應用程式不相容，不穩定的";
 
@@ -15,6 +18,9 @@
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "深色";
+
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "除非您知道您正在做什麼，否則不要更改它們";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "分離的隧道";
@@ -61,8 +67,8 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "當 AdGuard 正在執行時，如果您遭受關於網際網路連線的問題，啟用此選項";
 
-/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
-"bVh-Of-Oxm.text" = "反向白名單";
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
+"aoV-et-2ku.text" = "顯示狀態列";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "進階的設定";
@@ -76,14 +82,17 @@
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "在分離的隧道模式下，AdGuard 與所謂的\"個人級 VPN\"應用程式相容。作為交換，在這種模式下，若發生不良的連線，它可能被系統繞過。";
 
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
+"mdJ-Nh-wTi.text" = "顯示過濾器更新進度列";
+
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其它的";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "淺色";
 
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "除來自該清單中的網站之外，解除封鎖各處廣告";
-
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "如果此設定被啟用，AdGuard 於背景過濾器更新將只使用 Wi-Fi";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "除來自該清單中的網站之外，解除封鎖各處廣告";

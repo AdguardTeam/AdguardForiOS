@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
 "3lB-T7-fSO.text" = "Özel DNS ayarlarını kurun";
 
-/* Class = "UINavigationItem"; title = "DNS server"; ObjectID = "4rw-Lb-MJH"; */
-"4rw-Lb-MJH.title" = "DNS sunucusu";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// veya tls://";
 
@@ -31,35 +28,17 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "HTTPS üzerinden DNS";
 
-/* Class = "UINavigationItem"; title = "DNS requests blocking"; ObjectID = "Edw-bD-gDt"; */
-"Edw-bD-gDt.title" = "DNS isteklerini engelle";
-
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Gelişmiş ağ ayarları";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "BU SUNUCUYU SEÇİN";
 
-/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Sunucu";
-
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Bir filtre ekle";
 
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; */
-"PFY-Cq-NFN.text" = "Bu modül izleme alan adlarını engelleyebilir ve DNS trafiğinizi şifreleyebilir";
-
-/* Class = "UILabel"; text = "System protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "Sistem koruması";
-
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Ağ ayarları";
-
-/* Class = "UILabel"; text = "System Whitelist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Sistem Beyaz listesi";
-
-/* Class = "UILabel"; text = "Recommended DNS providers"; ObjectID = "ZCR-6u-jrf"; */
-"ZCR-6u-jrf.text" = "Önerilen DNS sağlayıcıları";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "İPTAL";
@@ -88,12 +67,6 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
-/* Class = "UILabel"; text = "DNS (Domain Name System) is the Internet’s equivalent of a phone book. It maintains a directory of domain names and translates them to IP adresses."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "DNS (Alan Adı Sistemi) İnternet'in bir telefon rehberine eşdeğeridir. Etki alanı adlarının bir dizinini tutar ve bunları IP adreslerine çevirir.";
-
-/* Class = "UILabel"; text = "System Blacklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Sistem Kara listesi";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "İPTAL";
 
@@ -106,29 +79,17 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "SİL";
 
-/* Class = "UILabel"; text = "DNS requests blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS isteklerini engelle";
-
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler vb.";
 
-/* Class = "UILabel"; text = "Filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "Filtreler";
-
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Sunucu adı";
-
-/* Class = "UILabel"; text = "This module can block tracking domains and encrypt your DNS traffic"; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Bu modül izleme alan adlarını engelleyebilir ve DNS trafiğinizi şifreleyebilir";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS sunucusu adresi";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Protokol seç";
-
-/* Class = "UINavigationItem"; title = "DNS Filters"; ObjectID = "w0g-Xg-HG0"; */
-"w0g-Xg-HG0.title" = "DNS Filtreleri";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtreler ve istisnalar";

@@ -14,17 +14,11 @@
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "بروز رسانی خودکار فقط در وای فای";
 
-/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
-"bVh-Of-Oxm.text" = "معکوس لیست سفید";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "ساير";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "روشن";
-
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "گشودن تبلیغات در همه جا جز وبسایت های این لیست";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "اگر این گزینه فعال شده باشد،AdGuard فقط از وای فای برای بروزرسانی فیلتر در پس زمینه استفاده می کند";

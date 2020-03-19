@@ -16,7 +16,7 @@
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
 "FzS-e3-CK1.text" = "ダーク（暗い）";
 
-/* Class = "UILabel"; text = "How deep does the rabbit hole go?"; ObjectID = "GBd-dx-t46"; */
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "自信のあるユーザー様用 (※詳しくなければ変更しないほうがおすすめです)";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
@@ -67,9 +67,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "ステータスバーを表示する";
 
-/* Class = "UILabel"; text = "Invert the Whitelist"; ObjectID = "bVh-Of-Oxm"; */
-"bVh-Of-Oxm.text" = "ホワイトリストを逆転させる";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "詳細設定";
 
@@ -90,9 +87,6 @@
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "ライト（明るい）";
-
-/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "q05-UZ-zAB"; */
-"q05-UZ-zAB.text" = "このリスト以外のウェブサイトで広告をブロックしないようにします。";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "詳しいユーザー様のための高度な設定モードをオンにします。";

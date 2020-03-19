@@ -49,9 +49,6 @@
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "Tilføj tilpassede filterlister her";
 
-/* Class = "UILabel"; text = "Safari Whitelist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Safari Hvidliste";
-
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filtre";
 
