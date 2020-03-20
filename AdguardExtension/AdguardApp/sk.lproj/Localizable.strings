@@ -767,24 +767,6 @@
 "facebook_filter_important_description" = "Môže interferovať s aplikáciami a webovými stránkami, ktoré používajú Facebook API.";
 
 
-
-// MARK: - Strings for VoiceOver -
-// MARK: - MainTabBarController
-/* (MainTabBarController) Main page tab for VoiceOver*/
-
-
-"main_page_tab" = "Hlavná stránka";
-
-/* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Stránka ochrany";
-
-/* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Stránka aktivity";
-
-/* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Stránka nastavení";
-
-
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 

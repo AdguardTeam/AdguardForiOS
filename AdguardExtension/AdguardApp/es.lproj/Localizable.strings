@@ -203,7 +203,7 @@
 "tunnel_mode_full_without_icon_description" = "Túnel completo (sin icono de VPN), incompatible con otras apps de VPN, menos estable";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "bloquea anuncios, rastreadores y sitios web de suplantación de identidad";
+"adguard_dns_description" = "AdGuard DNS es una forma alternativa de proteger tu privacidad de sistemas analíticos y sitios web de phishing";
 
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "bloquea todo lo anterior y sitios web para adultos";
@@ -773,16 +773,16 @@
 /* (MainTabBarController) Main page tab for VoiceOver*/
 
 
-"main_page_tab" = "Página principal";
+"main_page_tab" = "Pantalla principal";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Página de protección";
+"protection_page_tab" = "Pantalla de protección";
 
 /* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Página de actividad";
+"activity_page_tab" = "Pantalla de actividad";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Página de configuración";
+"settings_page_tab" = "Pantalla de configuración";
 
 
 // MARK: - MainPageController

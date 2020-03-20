@@ -107,7 +107,7 @@
 "pXa-VP-4yy.text" = "Filtros DNS";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Filtros de seguridad, DNS con privacidad, filtros personalizados, etc.";
+"pY3-X6-fFy.text" = "Filtros de seguridad, DNS cifrado, filtros personalizados, etc.";
 
 /* Class = "UILabel"; text = "DNS Filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "Filtros DNS";

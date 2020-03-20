@@ -34,11 +34,23 @@
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "VÆLG";
 
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "DNS-kryptering";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Tilføj et filter";
 
+/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Aktivér dette modul for at blokere sporingsdomæner og kryptere din DNS-trafik";
+
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Sporingsbeskyttelse";
+
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Netværksindstillinger";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Liste over tilladte";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ANNULLER";
@@ -48,6 +60,9 @@
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
+
+/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "DNS-kryptering";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Server";
@@ -67,6 +82,12 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Du kan forbedre dit online privatliv ved at kryptere DNS-trafik. For at gøre dette skal du vælge en af de anbefalede DNS-udbydere.";
+
+/* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Blokeringsliste";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ANNULLER";
 
@@ -79,14 +100,29 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "SLET";
 
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Tilpas blokering";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "DNS-Filtre";
+
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Sikkerhedsfiltre, DNS-privatliv, tilpassede filtre osv.";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "DNS-Filtre";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Servernavn";
 
+/* Class = "UILabel"; text = "Choose ready-to-use anti-tracking lists or add your own rules"; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Vælg klar-til-brug anti-sporingslister eller tilføj dine egne regler";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS-serveradresse";
+
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "Tilpas blokering";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Vælg protokol";

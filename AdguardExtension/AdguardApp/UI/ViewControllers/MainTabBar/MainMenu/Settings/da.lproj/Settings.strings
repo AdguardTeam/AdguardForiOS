@@ -1,6 +1,9 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "Nulstil";
 
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "Inverter listen over tilladte";
+
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Inkompatibel med andre VPN-apps, ustabil";
 
@@ -96,3 +99,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Denne indstilling vil rydde alle statistiske data, f. eks. Antal anmodninger osv.";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "Fjerner blokering af annoncer overalt undtagen på webstederne fra denne liste";

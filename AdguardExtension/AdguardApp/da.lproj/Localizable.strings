@@ -22,11 +22,20 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtre kan ikke indlæses i Safari. Derfor blev dine seneste ændringer ikke anvendt.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtre kan ikke indlæses i Safari. Prøv at rydde dine regler og listen over tilladte eller ændre mængden af brugte filtre.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEJ";
 
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Liste over tilladte (inverteret)";
+
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Anvender ændringer...";
+
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "Denne information er baseret på antallet af blokerede DNS-trackere. Statistikkerne er et skøn på grund af, at det teknisk ikke er muligt at beregne den nøjagtige mængde trackere og andre trusler, som brugeren kunne have downloadet, hvis domænet ikke oprindeligt var blevet blokeret.";
 
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
@@ -121,6 +130,9 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Indtast domænenavne adskilt med linjeskift. AdGuard vil tillade alle forbindelser til disse domæner.";
 
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Denne Blokeringsliste understøtter <a href=\"%@\">AdGuards DNS-syntaks</a>. Indtast reglerne adskilt med linjeskift. AdGuard vil blokere alle forbindelser til domæner, der matcher disse regler.";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Opdaterer...";
 
@@ -147,6 +159,12 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Navn:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "Bedøm app";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "Send feedback";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Rapporter fejlagtig blokering";
@@ -234,6 +252,12 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Når det er muligt, håndhæves Sikker søgning i browserne";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Blokerer sporingssystemer";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Ingen kryptering (System DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%1$d ud af %2$d aktiveret";
@@ -382,6 +406,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi undtagelser";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "Sporingsbeskyttelse vil ikke fungere for de Wi-Fi-netværker, der er anført nedenfor";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Tilføj en undtagelse";
 
@@ -390,6 +417,21 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtrer Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Sporingsbeskyttelse mens du bruger mobildata";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Sporingsbeskyttelse mens du bruger Wi-Fi";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Liste over tilladte";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Liste over tilladte";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Blokeringsliste";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari brugerregler";
@@ -408,6 +450,18 @@
 
 /* "Disabled" title */
 "disabled" = "Deaktiveret";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "FJERN FRA LISTE OVER TILLADTE";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "FJERN FRA BLOKERINGSLISTE";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "TILFØJ TIL LISTE OVER TILLADTE";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "TILFØJ TIL BLOKERINGSLISTE";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Tillad at blokere phishing-websider og andre farlige domæner. Tilgængelig for Premium-brugere";
@@ -475,6 +529,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Tilføj en ny regel";
 
+/* confirm reset lert text */
+"confirm_reset_text" = "Alle indstillinger, inklusiv brugerregler, sporingsbeskyttelse, interface og autorisationsindstillinger vil blive nulstillet. Denne handling kan ikke fortrydes. Nulstil indstillingerne?";
+
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Nulstil aktivitetslog";
 
@@ -517,11 +574,17 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Beskyttelsen er aktiveret";
 
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari og Sporingsbeskyttelse";
+
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari-indholdsblokering";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Alle beskyttelsesmoduler er deaktiverede";
+
+/*(TodayViewController) Tracking protection is enabled text  */
+"system_enabled" = "Sporingsbeskyttelse";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d forespørgsler, %2$d blokeret";
@@ -538,6 +601,33 @@
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokeret";
 
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Tilladt";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "Tilladt";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "tilføjet til listen over tilladte";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "tilføjet til blokeringslisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "fjernet fra listen over tilladte";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "fjernet fra blokeringslisten";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Åben <b>indstillingerne</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Tryk på <b>Safari</b> og vælg menupunktet <b>\"Indholdsblockere\"</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Aktiver alle indholdsblockere</b> og kom tilbage til vores app!";
+
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
 
@@ -547,11 +637,23 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloker forespørgsel";
 
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Tilføj domæne til listen over tilladte";
+
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Videovejledning";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Du har indtastet en ugyldig upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "System-Blokeringsliste";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "System-Liste over tilladte";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Detaljer";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Generelt";
@@ -616,5 +718,115 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Ingen regel fundet";
 
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "Systembeskyttelsen er deaktiveret";
+
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Aktiver";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Kunne ikke sende din feedback";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Noget gik galt";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Ved at fortsætte med at bruge den accepterer du<br /> <a href=%2$@>Vilkår og betingelser</a> og <a href=%1$@>Privatlivspolitik</a>";
+
+/* (DnsFiltersService) - Basic Tracking protection filter title */
+"basic_filter_title" = "Basisbeskyttelse";
+
+/* (DnsFiltersService) - Basic Tracking protection filter description */
+"basic_filter_description" = "Blokerer de mest almindelige sporingsdomæner.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter title */
+"strict_filter_title" = "Streng Beskyttelse";
+
+/* (DnsFiltersService) - Strict Tracking protection filter description */
+"strict_filter_description" = "Blokerer alle kendte trackere.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter important description */
+"strict_filter_important_description" = "Kan ødelægge nogle funktioner.";
+
+/* (DnsFiltersService) - Google tracking domains filter title */
+"google_filter_title" = "Bloker Google trackere";
+
+/* (DnsFiltersService) - Google tracking domains filter description */
+"google_filter_description" = "Stopper alle kendte Google-sporingsdomæner.";
+
+/* (DnsFiltersService) - Google tracking domains filter important description */
+"google_filter_important_description" = "Kan forstyrre apps og websteder, der bruger Google API'er.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter title */
+"facebook_filter_title" = "Bloker Facebook trackere";
+
+/* (DnsFiltersService) - Facebook tracking domains description */
+"facebook_filter_description" = "Stopper alle kendte Facebook-sporingsdomæner.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter important description */
+"facebook_filter_important_description" = "Kan forstyrre apps og websteder, der bruger Facebook API'er.";
+
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Hovedskærm";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Beskyttelsesskærm";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Aktivitetsskærm";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Indstillingsskærm";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari-beskyttelse aktiveret";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari-beskyttelse deaktiveret";
+
+/* (MainPageController) tracking protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Sporingsbeskyttelse aktiveret";
+
+/* (MainPageController) tracking protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Sporingsbeskyttelse deaktiveret";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Opdater filtre";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Antal anmodninger";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "Antal blokerede anmodninger";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "Gemt datastørrelse";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Aktivér sporingsbeskyttelse";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Vælg din abonnementstype";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Indtast din e-mail her";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Indtast din adgangskode her";

@@ -17,7 +17,7 @@
 "ZyE-7P-8Tm.title" = "Detalles de la petición";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "Filtros de seguridad, DNS con privacidad, filtros personalizados, etc.";
+"ae4-WL-0pQ.text" = "Filtros de seguridad, DNS cifrado, filtros personalizados, etc.";
 
 /* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
 "dsD-0w-qic.title" = "Borrar registro";

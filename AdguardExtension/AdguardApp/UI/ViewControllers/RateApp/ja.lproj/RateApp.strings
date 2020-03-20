@@ -1,0 +1,29 @@
+/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
+"6jg-ji-JtC.text" = "ありがとうございます。";
+
+/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
+"JEI-Pr-Mc2.text" = "いただいたフィードバックをもとに修正・改善いたします。";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
+"JXu-e8-XCB.text" = "お問い合わせ・フィードバック";
+
+/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
+"TBB-iF-qGA.text" = "ここにご用件や情報をご記入ください。";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
+"XtG-5p-3KJ.text" = "お問い合わせ・フィードバック";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
+"cJk-65-rg8.title" = "お問い合わせ・フィードバック";
+
+/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
+"nIO-Sh-01f.normalTitle" = "送信する";
+
+/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
+"oJi-EL-gWT.placeholder" = "返信をご希望の場合、メールアドレスを入力してください。";
+
+/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
+"tCN-dT-J7Y.normalTitle" = "メイン画面に戻る";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
+"zE7-4q-9oe.title" = "お問い合わせ・フィードバック";
