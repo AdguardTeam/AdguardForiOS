@@ -463,6 +463,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             self.addFacebookFilter()
             saveFiltersMeta()
         }
+        
+        updatePredefinedFiltersLocalizations()
     }
     
     private func saveFiltersMeta() {
@@ -481,10 +483,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let result = parser.parse(from: data, with: filterUrl)
         let meta = result?.meta
         
-        let name = String.localizedString("basic_filter_title")
-        let descr = String.localizedString("basic_filter_description")
-        
-        let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: true, desc: descr, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: true, desc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         basicFilter.id = DnsFilter.basicFilterId
         
         filters.insert(basicFilter, at: 0)
@@ -503,11 +502,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let result = parser.parse(from: data, with: filterUrl)
         let meta = result?.meta
         
-        let name = String.localizedString("strict_filter_title")
-        let descr = String.localizedString("strict_filter_description")
-        let importantDesc = String.localizedString("strict_filter_important_description")
-        
-        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         strictFilter.id = DnsFilter.strictFilterId
         
         filters.insert(strictFilter, at: 1)
@@ -526,11 +521,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let result = parser.parse(from: data, with: filterUrl)
         let meta = result?.meta
         
-        let name = String.localizedString("google_filter_title")
-        let descr = String.localizedString("google_filter_description")
-        let importantDesc = String.localizedString("google_filter_important_description")
-        
-        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         googleFilter.id = DnsFilter.googleFilterId
         
         filters.insert(googleFilter, at: 2)
@@ -549,16 +540,50 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         let result = parser.parse(from: data, with: filterUrl)
         let meta = result?.meta
         
-        let name = String.localizedString("facebook_filter_title")
-        let descr = String.localizedString("facebook_filter_description")
-        let importantDesc = String.localizedString("facebook_filter_important_description")
-        
-        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: name, date: meta?.updateDate ?? Date(), enabled: false, desc: descr, importantDesc: importantDesc, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
+        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
         facebookFilter.id = DnsFilter.facebookFilterId
         
         filters.insert(facebookFilter, at: 3)
         
         resources.save(data, toFileRelativePath: filterFileName(filterId: facebookFilter.id))
+    }
+    
+    // we should every time set name^ description and other properties to predefined filters to show actual localized descriptions
+    private func updatePredefinedFiltersLocalizations() {
+        for filter in filters {
+            
+            let name: String
+            let descr: String
+            var importantDesc: String? = nil
+            
+            switch filter.id {
+            case DnsFilter.basicFilterId:
+                name = String.localizedString("basic_filter_title")
+                descr = String.localizedString("basic_filter_description")
+                
+            case DnsFilter.strictFilterId:
+                name = String.localizedString("strict_filter_title")
+                descr = String.localizedString("strict_filter_description")
+                importantDesc = String.localizedString("strict_filter_important_description")
+                
+            case DnsFilter.googleFilterId:
+                name = String.localizedString("google_filter_title")
+                descr = String.localizedString("google_filter_description")
+                importantDesc = String.localizedString("google_filter_important_description")
+                
+            case DnsFilter.facebookFilterId:
+                name = String.localizedString("facebook_filter_title")
+                descr = String.localizedString("facebook_filter_description")
+                importantDesc = String.localizedString("facebook_filter_important_description")
+                
+            default:
+                continue
+            }
+            
+            filter.name = name
+            filter.desc = descr
+            filter.importantDesc = importantDesc
+        }
     }
     
     private func filterFileName(filterId: Int)->String {
