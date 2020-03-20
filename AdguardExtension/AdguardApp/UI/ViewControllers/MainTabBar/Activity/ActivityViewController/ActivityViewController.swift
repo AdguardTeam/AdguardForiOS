@@ -34,6 +34,8 @@ class ActivityViewController: UIViewController {
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
+    @IBOutlet weak var recentActivityLabel: ThemableLabel!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -54,6 +56,7 @@ class ActivityViewController: UIViewController {
     // MARK: - Notifications
     
     private var themeToken: NotificationToken?
+    private var keyboardShowToken: NotificationToken?
     private var developerModeToken: NSKeyValueObservation?
     
     // MARK: - Public variables
@@ -83,12 +86,20 @@ class ActivityViewController: UIViewController {
         let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
         dateTypeChanged(dateType: ChartDateType(rawValue: periodType) ?? .alltime)
         
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
             self?.updateTheme()
+        }
+        
+        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
+            self?.keyboardWillShow()
         }
         
         developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
             self?.observeDeveloperMode()
+        }
+        
+        model?.recordsObserver = { [weak self] (records) in
+            self?.tableView.reloadData()
         }
     }
     
@@ -239,6 +250,10 @@ class ActivityViewController: UIViewController {
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
     }
+    
+    private func keyboardWillShow() {
+        scrollView.setContentOffset(CGPoint(x: 0.0, y: recentActivityLabel.frame.minY), animated: true)
+    }
 }
 
 
@@ -275,6 +290,10 @@ extension ActivityViewController: UITableViewDataSource, UITableViewDelegate {
 extension ActivityViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        model?.searchString = searchText
     }
 }
 

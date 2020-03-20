@@ -451,7 +451,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56V-Sc-SLf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="147" width="342" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="9uz-jD-mah"/>
+                                                    <constraint firstAttribute="height" constant="24" id="9uz-jD-mah"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -537,7 +537,7 @@
                             <constraint firstItem="ghH-fR-fGV" firstAttribute="bottom" secondItem="5Ah-Jx-FqB" secondAttribute="bottom" id="NLe-k8-XLe"/>
                             <constraint firstItem="ghH-fR-fGV" firstAttribute="trailing" secondItem="5Ah-Jx-FqB" secondAttribute="trailing" id="b7d-Ow-M3b"/>
                             <constraint firstItem="ptx-Md-2na" firstAttribute="width" secondItem="ghH-fR-fGV" secondAttribute="width" id="lqI-Gh-x7E"/>
-                            <constraint firstItem="CVy-Pg-2ep" firstAttribute="height" secondItem="ghH-fR-fGV" secondAttribute="height" constant="-102" id="xL4-fs-Xxf"/>
+                            <constraint firstItem="CVy-Pg-2ep" firstAttribute="height" secondItem="ghH-fR-fGV" secondAttribute="height" constant="-108" id="xL4-fs-Xxf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ghH-fR-fGV"/>
                     </view>
@@ -1575,7 +1575,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnf-Zh-7u1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="407" width="310" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="18" id="qBY-bz-KCI"/>
+                                                    <constraint firstAttribute="height" constant="24" id="qBY-bz-KCI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -1701,7 +1701,7 @@
                             <constraint firstItem="WYh-20-g7p" firstAttribute="bottom" secondItem="xTI-KP-h80" secondAttribute="bottom" id="KWP-s4-2e3"/>
                             <constraint firstItem="WYh-20-g7p" firstAttribute="trailing" secondItem="xTI-KP-h80" secondAttribute="trailing" id="abc-er-czf"/>
                             <constraint firstItem="WYh-20-g7p" firstAttribute="trailing" secondItem="440-sb-zeR" secondAttribute="trailing" id="cze-d5-Lux"/>
-                            <constraint firstItem="Oud-tc-keZ" firstAttribute="height" secondItem="WYh-20-g7p" secondAttribute="height" constant="-102" id="dFI-gX-UcM"/>
+                            <constraint firstItem="Oud-tc-keZ" firstAttribute="height" secondItem="WYh-20-g7p" secondAttribute="height" constant="-108" id="dFI-gX-UcM"/>
                             <constraint firstItem="xTI-KP-h80" firstAttribute="leading" secondItem="WYh-20-g7p" secondAttribute="leading" id="f9o-T3-DQf"/>
                             <constraint firstItem="WYh-20-g7p" firstAttribute="top" secondItem="xTI-KP-h80" secondAttribute="top" id="mC7-Vr-RAU"/>
                         </constraints>
@@ -1714,6 +1714,7 @@
                         <outlet property="dataSavedLabel" destination="DVH-fh-5uu" id="Omn-es-ryC"/>
                         <outlet property="mostActiveCompany" destination="I1X-JJ-Uis" id="edv-Gn-RrS"/>
                         <outlet property="mostBlockedCompany" destination="6db-D0-eEv" id="R2J-4l-wlQ"/>
+                        <outlet property="recentActivityLabel" destination="Qnf-Zh-7u1" id="qVw-7B-rB7"/>
                         <outlet property="requestsNumberLabel" destination="TUr-iR-XCR" id="dOg-3D-IPq"/>
                         <outlet property="scrollContentView" destination="Ndu-I4-AkH" id="Hqd-VJ-Aci"/>
                         <outlet property="scrollView" destination="xTI-KP-h80" id="4po-kw-Azx"/>
