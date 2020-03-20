@@ -790,6 +790,15 @@
 /* (ActivityViewController) - Companies alert message */
 "companies_info_alert_message" = "This is the number of companies to whom requests were transmitted to.";
 
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "All requests";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Blocked only";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Allowed only";
+
 // MARK: - Strings for VoiceOver -
 
 // MARK: - MainTabBarController

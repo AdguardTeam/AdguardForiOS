@@ -238,6 +238,116 @@
             </objects>
             <point key="canvasLocation" x="3216" y="1353"/>
         </scene>
+        <!--Most Active Companies Controller-->
+        <scene sceneID="xZZ-iE-vuG">
+            <objects>
+                <viewController id="d7M-Oi-Bgo" customClass="MostActiveCompaniesController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zvo-vj-Fmf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most active companies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asq-k8-hi1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="0.0" width="366" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UIc-Ul-TZl">
+                                <rect key="frame" x="16" y="48" width="382" height="32"/>
+                                <segments>
+                                    <segment title="Requests"/>
+                                    <segment title="Blocked"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1U-rp-2rZ">
+                                <rect key="frame" x="0.0" y="87" width="414" height="711"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MostActiveCompaniesCellId" id="fjb-Ci-Jvi" customClass="MostActiveCompaniesCell" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fjb-Ci-Jvi" id="BaZ-mD-rnb">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBn-TP-JBq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="71" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="Wbq-rq-H5F">
+                                                    <rect key="frame" x="374" y="14" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="2hu-O2-eFU"/>
+                                                        <constraint firstAttribute="height" constant="24" id="hLJ-90-7NA"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="17 849 requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQg-eO-CaS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="240" y="16" width="118" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wbq-rq-H5F" firstAttribute="leading" secondItem="QQg-eO-CaS" secondAttribute="trailing" constant="16" id="7y9-fv-ovI"/>
+                                                <constraint firstItem="Wbq-rq-H5F" firstAttribute="centerY" secondItem="BaZ-mD-rnb" secondAttribute="centerY" id="A7R-EB-rUT"/>
+                                                <constraint firstItem="QQg-eO-CaS" firstAttribute="centerY" secondItem="BaZ-mD-rnb" secondAttribute="centerY" id="TVY-PV-oos"/>
+                                                <constraint firstItem="QQg-eO-CaS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DBn-TP-JBq" secondAttribute="trailing" constant="16" id="X2w-yM-NDc"/>
+                                                <constraint firstItem="DBn-TP-JBq" firstAttribute="top" secondItem="BaZ-mD-rnb" secondAttribute="top" constant="16" id="a1d-I5-9NT"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wbq-rq-H5F" secondAttribute="trailing" constant="16" id="lH6-Ec-b5x"/>
+                                                <constraint firstItem="DBn-TP-JBq" firstAttribute="leading" secondItem="BaZ-mD-rnb" secondAttribute="leading" constant="16" id="vZe-F7-ZG8"/>
+                                                <constraint firstAttribute="bottom" secondItem="DBn-TP-JBq" secondAttribute="bottom" constant="16" id="zZJ-7u-AHp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="companyLabel" destination="DBn-TP-JBq" id="73Z-N1-g2s"/>
+                                            <outlet property="requestsNumberLabel" destination="QQg-eO-CaS" id="KOf-gH-Oov"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d7M-Oi-Bgo" id="aFq-pu-wGU"/>
+                                    <outlet property="delegate" destination="d7M-Oi-Bgo" id="EFV-b4-IFr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="qB9-PF-jLI" firstAttribute="trailing" secondItem="Asq-k8-hi1" secondAttribute="trailing" constant="24" id="5DE-a0-bRR"/>
+                            <constraint firstItem="qB9-PF-jLI" firstAttribute="bottom" secondItem="l1U-rp-2rZ" secondAttribute="bottom" id="7pV-no-Xbn"/>
+                            <constraint firstItem="Asq-k8-hi1" firstAttribute="top" secondItem="qB9-PF-jLI" secondAttribute="top" id="LDB-z6-gxl"/>
+                            <constraint firstItem="qB9-PF-jLI" firstAttribute="trailing" secondItem="UIc-Ul-TZl" secondAttribute="trailing" constant="16" id="VqH-iK-XA4"/>
+                            <constraint firstItem="qB9-PF-jLI" firstAttribute="trailing" secondItem="l1U-rp-2rZ" secondAttribute="trailing" id="Zrk-Ll-wIZ"/>
+                            <constraint firstItem="UIc-Ul-TZl" firstAttribute="leading" secondItem="qB9-PF-jLI" secondAttribute="leading" constant="16" id="axs-5b-ztY"/>
+                            <constraint firstItem="l1U-rp-2rZ" firstAttribute="leading" secondItem="qB9-PF-jLI" secondAttribute="leading" id="eBb-E0-TtV"/>
+                            <constraint firstItem="UIc-Ul-TZl" firstAttribute="top" secondItem="Asq-k8-hi1" secondAttribute="bottom" constant="24" id="iez-c6-t00"/>
+                            <constraint firstItem="l1U-rp-2rZ" firstAttribute="top" secondItem="UIc-Ul-TZl" secondAttribute="bottom" constant="8" id="mgd-r0-VGu"/>
+                            <constraint firstItem="Asq-k8-hi1" firstAttribute="leading" secondItem="qB9-PF-jLI" secondAttribute="leading" constant="24" id="qvO-IG-jEZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qB9-PF-jLI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="isp-9c-Wuw"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="UIc-Ul-TZl" id="TUd-5l-mjQ"/>
+                        <outlet property="tableView" destination="l1U-rp-2rZ" id="TOb-rs-PmD"/>
+                        <outletCollection property="themableLabels" destination="Asq-k8-hi1" collectionClass="NSMutableArray" id="VLP-50-fsA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cug-XX-yPN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3213.04347826087" y="2062.5"/>
+        </scene>
         <!--Dns Request Details Controller-->
         <scene sceneID="8CM-yW-ZJC">
             <objects>
@@ -1179,6 +1289,9 @@
                                                     <constraint firstItem="I1X-JJ-Uis" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EOm-G0-oDu" secondAttribute="trailing" constant="16" id="ojE-xL-utq"/>
                                                     <constraint firstAttribute="bottom" secondItem="EOm-G0-oDu" secondAttribute="bottom" constant="16" id="p5T-o0-htT"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="QC9-h1-sst" appends="YES" id="Bmv-yF-GXv"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="440-sb-zeR">
                                                 <rect key="frame" x="0.0" y="307" width="414" height="52"/>
@@ -1210,6 +1323,7 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="hu8-PZ-ZQv" firstAttribute="leading" secondItem="440-sb-zeR" secondAttribute="leading" constant="16" id="1Iy-Sk-d9f"/>
                                                     <constraint firstItem="6db-D0-eEv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hu8-PZ-ZQv" secondAttribute="trailing" constant="16" id="2Xw-hV-Ub6"/>
@@ -1220,6 +1334,9 @@
                                                     <constraint firstItem="DJq-4f-zkt" firstAttribute="centerY" secondItem="440-sb-zeR" secondAttribute="centerY" id="loX-OY-ZfE"/>
                                                     <constraint firstAttribute="trailing" secondItem="DJq-4f-zkt" secondAttribute="trailing" constant="16" id="mQJ-qF-cVC"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="KUn-v2-Bdj" appends="YES" id="e2N-wa-DPs"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yoA-2B-2eN" userLabel="Separator">
                                                 <rect key="frame" x="0.0" y="306" width="414" height="1"/>
@@ -1493,9 +1610,20 @@
                         <outletCollection property="themableLabels" destination="6db-D0-eEv" collectionClass="NSMutableArray" id="aY5-nu-huf"/>
                         <outletCollection property="themableLabels" destination="Qnf-Zh-7u1" collectionClass="NSMutableArray" id="4Hl-E0-zSu"/>
                         <segue destination="xvL-9q-qox" kind="show" identifier="showDnsContainer" id="jGr-Ie-Pae"/>
+                        <segue destination="d7M-Oi-Bgo" kind="show" identifier="showMostActiveCompaniesId" id="6ns-Bl-RbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5dx-ge-bgz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QC9-h1-sst">
+                    <connections>
+                        <action selector="mostActiveTapped:" destination="fix-GC-1de" id="w9k-FA-qLb"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="KUn-v2-Bdj">
+                    <connections>
+                        <action selector="mostBlockedTapped:" destination="fix-GC-1de" id="FRW-j1-pcn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2089.8550724637685" y="1352.6785714285713"/>
         </scene>

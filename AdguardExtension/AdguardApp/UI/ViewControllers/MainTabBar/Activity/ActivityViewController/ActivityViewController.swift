@@ -49,6 +49,7 @@ class ActivityViewController: UIViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -63,9 +64,10 @@ class ActivityViewController: UIViewController {
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
+    private let showMostActiveCompaniesSegueId = "showMostActiveCompaniesId"
     
     private var selectedRecord: DnsLogRecordExtended?
-
+    private var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
     
     // MARK: - ViewController life cycle
     
@@ -75,6 +77,9 @@ class ActivityViewController: UIViewController {
         updateTheme()
         
         model?.delegate = self
+        
+        let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
+        dateTypeChanged(dateType: ChartDateType(rawValue: periodType) ?? .alltime)
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -86,13 +91,17 @@ class ActivityViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as? DnsContainerController
-        controller?.logRecord = selectedRecord
+        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
+            controller.logRecord = selectedRecord
+        } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
+            controller.activeCompaniesDisplayType = activeCompaniesDisplayType
+        }
     }
     
     // MARK: - Actions
     
     @IBAction func changePeriodTypeAction(_ sender: UIButton) {
+        showChartDateTypeController()
     }
     
     @IBAction func infoAction(_ sender: UIButton) {
@@ -118,11 +127,22 @@ class ActivityViewController: UIViewController {
         }
     }
     
+    @IBAction func mostActiveTapped(_ sender: UITapGestureRecognizer) {
+        activeCompaniesDisplayType = .requests
+        performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
+    }
+    
+    @IBAction func mostBlockedTapped(_ sender: UITapGestureRecognizer) {
+        activeCompaniesDisplayType = .blocked
+        performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
+    }
+    
     @IBAction func clearActivityLogAction(_ sender: UIButton) {
         showResetAlert(sender)
     }
     
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
+        showGroupsAlert(sender)
     }
     
     // MARK: - Private methods
@@ -135,6 +155,7 @@ class ActivityViewController: UIViewController {
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
         theme.setupSeparators(separators)
+        tableView.reloadData()
     }
     
     private func observeDeveloperMode(){
@@ -165,6 +186,51 @@ class ActivityViewController: UIViewController {
         }
         
         present(alert, animated: true)
+    }
+    
+    private func showGroupsAlert(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(allRequestsAction)
+        alert.addAction(blockedOnlyAction)
+        alert.addAction(allowedOnlyAction)
+        alert.addAction(cancelAction)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = sender
+            presenter.sourceRect = sender.bounds
+        }
+        
+        present(alert, animated: true)
+    }
+    
+    /**
+     Presents ChartDateTypeController
+     */
+    private func showChartDateTypeController(){
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = self
+        controller.delegate = self
+        
+        present(controller, animated: true, completion: nil)
     }
 }
 
@@ -200,7 +266,9 @@ extension ActivityViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - UISearchBarDelegate
 
 extension ActivityViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - UIScrollViewDelegate
@@ -219,5 +287,22 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+// MARK: - DateTypeChangedProtocol
+
+extension ActivityViewController: DateTypeChangedProtocol {
+    func dateTypeChanged(dateType: ChartDateType) {
+        resources.sharedDefaults().set(dateType.rawValue, forKey: ActivityStatisticsPeriodType)
+        changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
+    }
+}
+
+// MARK: - UIViewControllerTransitioningDelegate
+
+extension ActivityViewController: UIViewControllerTransitioningDelegate{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
 }

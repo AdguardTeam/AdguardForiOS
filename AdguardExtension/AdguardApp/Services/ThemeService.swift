@@ -69,6 +69,7 @@ import Foundation
     func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
     func setupSwitch(_ switch: UISwitch)
+    func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
     func setupSeparator(_ separator: UIView)
     func setupSeparators(_ separators: [UIView])
 }
@@ -250,6 +251,12 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         textField?.textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
         searchBar.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
         
+        if let iconView = textField?.leftView as? UIImageView {
+            iconView.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        }
+        
+        textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
+        
         searchBar.barTintColor = .clear
         textField?.backgroundColor = notificationWindowColor
         searchBar.backgroundImage = UIImage()
@@ -318,6 +325,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     func setupSwitch(_ switchControl: UISwitch) {
         switchControl.onTintColor = UIColor(hexString: "#67b279")
         switchControl.layer.cornerRadius = switchControl.frame.height / 2
+    }
+    
+    func setupSegmentedControl(_ segmentedControl: UISegmentedControl) {
+        segmentedControl.backgroundColor = notificationWindowColor
+        let textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+        if #available(iOS 13.0, *) {
+            segmentedControl.selectedSegmentTintColor = backgroundColor
+        }
     }
     
     func setupSeparator(_ separator: UIView) {

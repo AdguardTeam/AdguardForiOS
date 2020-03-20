@@ -96,6 +96,24 @@ enum ChartDateType: Int {
         return dateFormatter.string(from: date)
     }
     
+    /**
+     Get title for changeStatisticsDatesButton when it is changed
+     */
+    func getDateTypeString() -> String{
+        switch self {
+        case .day:
+            return String.localizedString("chart_24hours")
+        case .today:
+            return String.localizedString("chart_date_today")
+        case .week:
+            return String.localizedString("chart_7days")
+        case .month:
+            return String.localizedString("chart_30days")
+        case .alltime:
+            return String.localizedString("chart_alltime")
+        }
+    }
+    
     private func now() -> Date {
         return Date()
     }

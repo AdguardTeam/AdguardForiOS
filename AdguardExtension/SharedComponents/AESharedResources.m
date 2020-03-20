@@ -92,6 +92,7 @@ NSString *SafariProtectionLastState = @"SafariProtectionLastState";
 NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 
 NSString *StatisticsPeriodType = @"StatisticsPeriodType";
+NSString *ActivityStatisticsPeriodType = @"ActivityStatisticsPeriodType";
 NSString *StatisticsSaveTime = @"StatisticsSaveTime";
 
 NSString *DnsActiveProtocols = @"DnsActiveProtocols";
