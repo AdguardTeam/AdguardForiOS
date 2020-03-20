@@ -776,7 +776,7 @@
 "blocked_info_alert_title" = "Blocked requests";
 
 /* (ActivityViewController) - Blocked alert message */
-"blocked_info_alert_message" = "Originally (или By default), we block only trackers that try to steal your data. For us to block more, you can also configure Blocklist, Allowlist and DNS filtering.";
+"blocked_info_alert_message" = "By default, we block only trackers that try to steal your data. For us to block more, you can also configure Blocklist, Allowlist and DNS filtering.";
 
 /* (ActivityViewController) - Data saved alert title */
 "data_saved_info_alert_title" = "Data saved";

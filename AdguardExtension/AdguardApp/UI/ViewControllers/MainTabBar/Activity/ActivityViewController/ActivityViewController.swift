@@ -76,6 +76,8 @@ class ActivityViewController: UIViewController {
         
         updateTheme()
         
+        setupTableView()
+        
         model?.delegate = self
         
         let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
@@ -231,6 +233,11 @@ class ActivityViewController: UIViewController {
         controller.delegate = self
         
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func setupTableView(){
+        let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
     }
 }
 
