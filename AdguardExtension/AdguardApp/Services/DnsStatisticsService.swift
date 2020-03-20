@@ -126,6 +126,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]] {
         
         DDLogInfo("(DnsStatisticsService) readStatistics")
+        ACLLogger.singleton()?.flush()
         var statistics = [DnsStatisticsType:[RequestsStatisticsBlock]]()
         
         let group = DispatchGroup()
@@ -133,8 +134,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         
         ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
             DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity")
+            ACLLogger.singleton()?.flush()
             if expired {
                 DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity expired")
+                ACLLogger.singleton()?.flush()
                 return
             }
             
@@ -142,15 +145,19 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
                 guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else {
                     DDLogInfo("(DnsStatisticsService) readStatistics - select returns empty or incorrect result")
+                    ACLLogger.singleton()?.flush()
                     return
                 }
                 
                 DDLogInfo("(DnsStatisticsService) readStatistics - result.count = \(result.count)")
+                ACLLogger.singleton()?.flush()
                 if result.count > 0 {
                     statistics[.all] = result.map { $0.allStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
                     DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.all].count = \(statistics[.all]?.count ?? 0)")
+                    ACLLogger.singleton()?.flush()
                     statistics[.blocked] = result.map { $0.blockedStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
                     DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.blocked].count = \(statistics[.blocked]?.count ?? 0)")
+                    ACLLogger.singleton()?.flush()
                 }
             }
             group.leave()

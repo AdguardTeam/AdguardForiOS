@@ -119,6 +119,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var fromButtonsToTopHeight: NSLayoutConstraint!
     @IBOutlet weak var fixItIphoneButton: UIButton!
     
+    var stateFromWidget: Bool?
     
     // MARK: - Variables
     
@@ -192,6 +193,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         configuration.checkContentBlockerEnabled()
         
         chartModel?.obtainStatistics()
+        
+        if let stateFromWidget = self.stateFromWidget {
+            complexProtection.switchComplexProtection(state: stateFromWidget, for: self) { (_, _) in
+            }
+        }
     }
         
     override func viewWillAppear(_ animated: Bool) {

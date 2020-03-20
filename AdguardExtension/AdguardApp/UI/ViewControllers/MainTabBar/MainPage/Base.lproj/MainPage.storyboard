@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHi-Bg-bgC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHi-Bg-bgC">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,7 @@
         <!--AdGuard-->
         <scene sceneID="zqJ-IQ-lJU">
             <objects>
-                <viewController id="T6V-s9-cBk" customClass="MainPageController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainPageController" id="T6V-s9-cBk" customClass="MainPageController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qnu-x2-MQD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +65,7 @@
                                                 </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJh-s4-9Wf" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="163" y="101.5" width="32" height="32"/>
+                                                <rect key="frame" x="163" y="153.5" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="34J-F7-rcO">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="32"/>
@@ -91,7 +91,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPP-0X-avj" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="219" y="101.5" width="32" height="32"/>
+                                                <rect key="frame" x="219" y="153.5" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="32" id="2j6-wO-ZJl">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="32"/>
@@ -196,7 +196,7 @@
                                                                 </variation>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-5h-4Jd" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
-                                                                <rect key="frame" x="32" y="93" width="181" height="45"/>
+                                                                <rect key="frame" x="32" y="93" width="142" height="45"/>
                                                                 <color key="backgroundColor" red="0.27058823529411763" green="0.70196078431372544" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="750" constant="45" id="3E7-jt-e9m"/>
@@ -301,7 +301,7 @@
                                                                         </variation>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="requests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Btd-nN-zLO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="48" width="175" height="20"/>
+                                                                        <rect key="frame" x="4" y="48" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="CGq-K7-wAv">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
@@ -322,7 +322,7 @@
                                                                         </variation>
                                                                     </label>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTP-os-Pis">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="96.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="96.5"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -381,7 +381,7 @@
                                                                         </variation>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blocked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                        <rect key="frame" x="16" y="48" width="175" height="20"/>
+                                                                        <rect key="frame" x="4" y="48" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
@@ -402,7 +402,7 @@
                                                                         </variation>
                                                                     </label>
                                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="561-fR-2DC">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="96.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="138" height="96.5"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -522,7 +522,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfe-5H-fB1">
-                                                <rect key="frame" x="145" y="0.0" width="124" height="48"/>
+                                                <rect key="frame" x="103.5" y="0.0" width="207" height="48"/>
                                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="All time" image="arrow_down">
                                                     <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -554,7 +554,7 @@
                                 <rect key="frame" x="0.0" y="725" width="414" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjI-86-pkN">
-                                        <rect key="frame" x="374" y="-12" width="24" height="24"/>
+                                        <rect key="frame" x="378" y="-12" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="W7m-Na-BuO"/>
                                             <constraint firstAttribute="width" constant="24" id="r81-r2-HFd"/>
@@ -567,7 +567,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46F-Jh-wHm">
-                                        <rect key="frame" x="276" y="-16" width="90" height="32"/>
+                                        <rect key="frame" x="266" y="-16" width="100" height="32"/>
                                         <color key="backgroundColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="4Xm-EO-X6b"/>
@@ -588,7 +588,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-gP-TsG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="-8.5" width="246" height="17"/>
+                                        <rect key="frame" x="12" y="-8.5" width="242" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
