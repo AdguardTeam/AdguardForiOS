@@ -397,25 +397,25 @@ class VpnManagerMigration: NSObject {
         // in app version below 4.0.0 we stored tunnel settings(activeDnsServer, tunnelMode, restartByReachability) in protocol configuration.
         // now we store it in shared defaults
         
-        let tunnelModeNew = resources.sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt
-        let activeDnsServerNew = dnsProviders.activeDnsServer
-        let restartByReachabilityNew = resources.sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool
+        let tunnelModeOld = providerConfiguration[APVpnManagerParameterTunnelMode] as? UInt
+        let restartOld = providerConfiguration[APVpnManagerRestartByReachability] as? Bool
+        let activeDnsServerData = providerConfiguration[APVpnManagerParameterRemoteDnsServer] as? Data
         
-        if tunnelModeNew == nil && activeDnsServerNew == nil && restartByReachabilityNew == nil {
+        if tunnelModeOld != nil || activeDnsServerData != nil || restartOld != nil {
             
             DDLogInfo("(VpnManagerMigration) there are not new settings in shared resources. Try to read it from protocol configuration")
-            if let tunnelModeOld = providerConfiguration[APVpnManagerParameterTunnelMode] as? UInt {
+            if tunnelModeOld != nil {
                 DDLogInfo("(VpnManagerMigration) save tunnelModeOld in resources")
-                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld)
+                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld!)
             }
             
-            if let restartOld = providerConfiguration[APVpnManagerRestartByReachability] as? Bool {
+            if restartOld != nil {
                 DDLogInfo("(VpnManagerMigration) save restartOld in resources")
-                resources.restartByReachability = restartOld
+                resources.restartByReachability = restartOld!
             }
             
-            if let activeDnsServerData = providerConfiguration[APVpnManagerParameterRemoteDnsServer] as? Data {
-                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData) as? DnsServerInfo {
+            if activeDnsServerData != nil {
+                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!) as? DnsServerInfo {
                     DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
                     dnsProviders.activeDnsServer = activeDnsServerOld
                 }
