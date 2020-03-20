@@ -21,9 +21,6 @@ import UIKit
 class DnsLogContainerController: UIViewController {
 
     // MARK: - Variables
-    
-    @IBOutlet weak var clearButton: UIBarButtonItem!
-    
     @IBOutlet weak var systemProtectionEnablerContainerView: UIView!
     @IBOutlet weak var getProContainerView: UIView!
     @IBOutlet weak var dnsLogContainerView: UIView!
@@ -70,12 +67,6 @@ class DnsLogContainerController: UIViewController {
     }
     
     
-    // MARK: - Actions
-    
-    @IBAction func clearButtonTapped(_ sender: UIBarButtonItem) {
-        showAlert(sender)
-    }
-    
     // MARK: - Private methods
     
     private func updateTheme(){
@@ -83,27 +74,7 @@ class DnsLogContainerController: UIViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
-    private func showAlert(_ sender: UIBarButtonItem){
-        let alert = UIAlertController(title: String.localizedString("reset_activity_title"), message: String.localizedString("reset_activity_message"), preferredStyle: .actionSheet)
-        
-        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(yesAction)
-        
-        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.barButtonItem = sender
-        }
-        
-        present(alert, animated: true)
-    }
+    
     
     private func setCurrentContainerView(){
         DispatchQueue.main.async {[weak self] in
@@ -122,7 +93,6 @@ class DnsLogContainerController: UIViewController {
                     self.getProContainerView.isHidden = true
                     self.systemProtectionEnablerContainerView.isHidden = true
                     self.dnsLogContainerView.isHidden = false
-                    self.navigationItem.rightBarButtonItems = [self.clearButton]
                 }
             } else {
                 self.navigationItem.rightBarButtonItems = []

@@ -100,6 +100,7 @@ class ActivityViewController: UIViewController {
     
     
     @IBAction func clearActivityLogAction(_ sender: UIButton) {
+        showResetAlert(sender)
     }
     
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
@@ -121,6 +122,30 @@ class ActivityViewController: UIViewController {
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
+    }
+    
+    private func showResetAlert(_ sender: UIButton){
+        let alert = UIAlertController(title: String.localizedString("reset_activity_title"), message: String.localizedString("reset_activity_message"), preferredStyle: .actionSheet)
+        
+        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
+            alert.dismiss(animated: true, completion: nil)
+            self?.model?.clearRecords()
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
+        
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = sender
+            presenter.sourceRect = sender.bounds
+        }
+        
+        present(alert, animated: true)
     }
 }
 
@@ -172,6 +197,8 @@ extension ActivityViewController: UIScrollViewDelegate {
 
 extension ActivityViewController: DnsRequestsDelegateProtocol {
     func requestsCleared() {
-        
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

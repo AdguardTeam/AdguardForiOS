@@ -53,19 +53,12 @@
                         <viewLayoutGuide key="safeArea" id="QM8-d3-eSj"/>
                     </view>
                     <connections>
-                        <outlet property="clearButton" destination="dsD-0w-qic" id="l4m-hf-VdF"/>
                         <outlet property="dnsLogContainerView" destination="F7h-od-er8" id="1Cf-Hw-8vL"/>
                         <outlet property="getProContainerView" destination="I8C-5V-XdX" id="mJK-Ev-w5w"/>
                         <outlet property="systemProtectionEnablerContainerView" destination="PaQ-5i-arg" id="RuG-72-tqN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq9-uk-t0T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <barButtonItem title="Clear" style="plain" id="dsD-0w-qic">
-                    <color key="tintColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="clearButtonTapped:" destination="WCl-qt-0xD" id="l0U-Ok-y6u"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="940.57971014492762" y="525.66964285714289"/>
         </scene>
