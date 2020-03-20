@@ -262,12 +262,6 @@ class VpnManager: VpnManagerProtocol {
         DDLogInfo("(VpnManager) createManager")
         
         let manager = providerManagerType.self.init()
-        let protocolConfiguration = NETunnelProviderProtocol()
-        protocolConfiguration.providerBundleIdentifier = AP_TUNNEL_ID
-        protocolConfiguration.serverAddress = "127.0.0.1"
-        
-        manager.protocolConfiguration = protocolConfiguration
-        
         manager.localizedDescription = "AdGuard VPN"
         
         return manager
@@ -279,6 +273,13 @@ class VpnManager: VpnManagerProtocol {
         if !appConfiguration.proStatus {
             return
         }
+        
+        // setup protocol configuration
+        let protocolConfiguration = NETunnelProviderProtocol()
+        protocolConfiguration.providerBundleIdentifier = AP_TUNNEL_ID
+        protocolConfiguration.serverAddress = "127.0.0.1"
+        
+        manager.protocolConfiguration = protocolConfiguration
         
         // Configure on demand rules
         
