@@ -96,8 +96,27 @@ class ActivityViewController: UIViewController {
     }
     
     @IBAction func infoAction(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            let title = String.localizedString("requests_info_alert_title")
+            let message = String.localizedString("requests_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        case 1:
+            let title = String.localizedString("blocked_info_alert_title")
+            let message = String.localizedString("blocked_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        case 2:
+            let title = String.localizedString("data_saved_info_alert_title")
+            let message = String.localizedString("data_saved_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        case 3:
+            let title = String.localizedString("companies_info_alert_title")
+            let message = String.localizedString("companies_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        default:
+            return
+        }
     }
-    
     
     @IBAction func clearActivityLogAction(_ sender: UIButton) {
         showResetAlert(sender)

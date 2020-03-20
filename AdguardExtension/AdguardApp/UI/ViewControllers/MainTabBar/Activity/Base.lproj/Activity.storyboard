@@ -1065,8 +1065,8 @@
                                                     <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="HKw-et-5B6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwU-jp-tvR" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="227.66666666666663" y="123" width="166.33333333333337" height="18"/>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WwU-jp-tvR" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="227.5" y="123" width="166.5" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="Sz7-zk-1h2"/>
                                                 </constraints>
@@ -1106,8 +1106,8 @@
                                                     <constraint firstAttribute="width" constant="1" id="RQi-hu-0Ad"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mt8-ZS-0fy" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="204" width="166.66666666666666" height="18"/>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mt8-ZS-0fy" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="204" width="166.5" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="c6B-5g-0FQ"/>
                                                 </constraints>
@@ -1122,8 +1122,8 @@
                                                     <action selector="infoAction:" destination="fix-GC-1de" eventType="touchUpInside" id="Bcb-mt-4Rj"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfs-dl-Met" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="227.66666666666663" y="204" width="166.33333333333337" height="18"/>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfs-dl-Met" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="227.5" y="204" width="166.5" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="7zU-9i-sGZ"/>
                                                 </constraints>

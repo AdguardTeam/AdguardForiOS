@@ -766,7 +766,29 @@
 /* (DnsFiltersService) - Facebook tracking domains filter important description */
 "facebook_filter_important_description" = "May interfere with apps and websites that use Facebook APIs.";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Requests";
 
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know this number to realize the scope of this thing.";
+
+/* (ActivityViewController) - Blocked alert title */
+"blocked_info_alert_title" = "Blocked requests";
+
+/* (ActivityViewController) - Blocked alert message */
+"blocked_info_alert_message" = "Originally (или By default), we block only trackers that try to steal your data. For us to block more, you can also configure Blocklist, Allowlist and DNS filtering.";
+
+/* (ActivityViewController) - Data saved alert title */
+"data_saved_info_alert_title" = "Data saved";
+
+/* (ActivityViewController) - Data saved alert message */
+"data_saved_info_alert_message" = "This is estimated number of traffic you saved thanks to blocking trackers.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Companies quantity";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "This is the number of companies to whom requests were transmitted to.";
 
 // MARK: - Strings for VoiceOver -
 
