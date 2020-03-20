@@ -151,6 +151,9 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "名稱：";
 
+/* (Main Menu) Rate app action */
+"rate_app_title" = "對應用程式評分";
+
 /* (Main Menu) Send feedback action */
 "just_send_feedback" = "傳送回饋意見";
 
@@ -650,16 +653,16 @@
 /* (MainTabBarController) Main page tab for VoiceOver*/
 
 
-"main_page_tab" = "主頁面";
+"main_page_tab" = "主畫面";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "防護頁面";
+"protection_page_tab" = "防護畫面";
 
 /* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "活動頁面";
+"activity_page_tab" = "活動畫面";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "設定頁面";
+"settings_page_tab" = "設定畫面";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "更新過濾器";

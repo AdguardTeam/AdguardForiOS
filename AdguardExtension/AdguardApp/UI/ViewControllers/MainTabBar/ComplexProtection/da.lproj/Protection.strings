@@ -4,6 +4,9 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "cnF-td-Ba1"; */
+"cnF-td-Ba1.text" = "Sporingsbeskyttelse";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";
 
@@ -12,3 +15,6 @@
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Dette modul blokerer annoncer og trackere på websteder der åbnes i Safari. Du kan vælge mellem forskellige filterlister eller tilføje dine egne i nedenstående indstillinger";
+
+/* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
+"wyK-CX-EwT.text" = "Beskyttelse";

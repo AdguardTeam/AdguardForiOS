@@ -767,24 +767,6 @@
 "facebook_filter_important_description" = "Kann Anwendungen und Websites, die Facebook-APIs verwenden, stören.";
 
 
-
-// MARK: - Strings for VoiceOver -
-// MARK: - MainTabBarController
-/* (MainTabBarController) Main page tab for VoiceOver*/
-
-
-"main_page_tab" = "Hauptseite";
-
-/* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Schutz-Seite";
-
-/* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Aktivitäten-Seite";
-
-/* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Einstellungen-Seite";
-
-
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 

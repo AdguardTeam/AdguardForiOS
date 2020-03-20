@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "zahtjeva";
 
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "Zaštita protiv praćenja";
+
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Statistika za svo vrijeme:";
 

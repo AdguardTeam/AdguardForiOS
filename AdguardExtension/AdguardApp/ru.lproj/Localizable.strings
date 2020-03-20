@@ -767,24 +767,6 @@
 "facebook_filter_important_description" = "Может препятствовать работе приложений и сайтов, которые используют Facebook API.";
 
 
-
-// MARK: - Strings for VoiceOver -
-// MARK: - MainTabBarController
-/* (MainTabBarController) Main page tab for VoiceOver*/
-
-
-"main_page_tab" = "Главная страница";
-
-/* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Страница защиты";
-
-/* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Страница активности";
-
-/* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Страница настроек";
-
-
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 

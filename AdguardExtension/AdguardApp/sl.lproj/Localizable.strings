@@ -764,24 +764,6 @@
 "facebook_filter_important_description" = "Lahko moti aplikacije in spletne strani, ki uporabljajo Facebookove API-je.";
 
 
-
-// MARK: - Strings for VoiceOver -
-// MARK: - MainTabBarController
-/* (MainTabBarController) Main page tab for VoiceOver*/
-
-
-"main_page_tab" = "Glavna stran";
-
-/* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Stran z zaščito";
-
-/* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Stran z dejavnostjo";
-
-/* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Stran z nastavitvami";
-
-
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 

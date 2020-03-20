@@ -38,7 +38,10 @@
 "dcW-zZ-VlL.title" = "Prijava";
 
 /* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Zaštita od praćenja na razini cijelog sustava";
+"fwp-I7-Qtl.text" = "Zaštita protiv praćenja na razini cijelog sustava";
+
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Zaštita protiv praćenja";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "Premium je aktiviran";
