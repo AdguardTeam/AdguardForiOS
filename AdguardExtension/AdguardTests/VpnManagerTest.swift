@@ -207,51 +207,6 @@ class VpnManagerTest: XCTestCase {
         XCTAssert(server.upstreams == ["0.0.0.0"])
     }
     
-    func testMigrationNotNeeded() {
-        
-        // set old configuration settings in provider
-        let dnsProviders = DnsProvidersServiceMock()
-        let oldProvider =  createOldProvider()
-        ProviderMock.savedProviders = [oldProvider]
-        
-        let resources = SharedResourcesMock()
-        
-        // set new settings
-        resources.tunnelMode = APVpnManagerTunnelModeSplit
-        resources.restartByReachability = false
-        dnsProviders.activeDnsServer = DnsServerInfo(dnsProtocol: .doh, serverId: "new-server", name: "New Server", upstreams: ["2.2.2.2"], anycast: false)
-        
-        // init vpnManager
-        vpnManager = VpnManager(resources: resources, configuration: ConfigurationServiceMock(), networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProviders)
-        
-        vpnManager.providerManagerType = ProviderMock.self
-        
-        // checkVpnInstalled() method must force migration
-        
-        let group = DispatchGroup()
-        group.enter()
-        vpnManager.checkVpnInstalled { _ in
-            group.leave()
-        }
-        
-        group.wait()
-        
-        // check migration did not overwrite new settings
-        
-        XCTAssert(resources.tunnelMode == APVpnManagerTunnelModeSplit)
-        XCTAssertFalse(resources.restartByReachability)
-        
-        guard let server = dnsProviders.activeDnsServer else {
-            XCTFail()
-            return
-        }
-        
-        XCTAssert(server.name == "New Server")
-        XCTAssert(server.dnsProtocol == .doh)
-        XCTAssert(server.serverId == "new-server")
-        XCTAssert(server.upstreams == ["2.2.2.2"])
-    }
-    
     private func createOldProvider()->ProviderMock {
         
         let configuration = NETunnelProviderProtocol()

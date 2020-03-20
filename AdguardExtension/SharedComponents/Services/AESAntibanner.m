@@ -1406,7 +1406,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                          //https://github.com/AdguardTeam/AdguardForiOS/issues/302
                          || [filterMeta.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)])
                         
-                        && ( forced || interval >= [filterMeta.expires integerValue] )) {
+                        /*&& ( forced || interval >= [filterMeta.expires integerValue] )*/) {
                         
                         [metadataForUpdate addObject:filterMeta];
                     }
