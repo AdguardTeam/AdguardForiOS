@@ -767,6 +767,24 @@
 "facebook_filter_important_description" = "※Facebook APIを使用しているアプリやウェブサイトの動作を妨げる可能性があります。";
 
 
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "メイン画面";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "保護画面";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "アクティビティ画面";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "設定画面";
+
+
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 
