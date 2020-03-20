@@ -278,15 +278,6 @@ extension ActivityViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: - UIScrollViewDelegate
-
-extension ActivityViewController: UIScrollViewDelegate {
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        tableView.isScrollEnabled = true
-        scrollView.isScrollEnabled = false
-    }
-}
-
 // MARK: - DnsRequestsDelegateProtocol
 
 extension ActivityViewController: DnsRequestsDelegateProtocol {

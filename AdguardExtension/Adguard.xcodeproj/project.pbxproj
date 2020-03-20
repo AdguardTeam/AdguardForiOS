@@ -615,6 +615,7 @@
 		7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */; };
 		7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */; };
 		7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */; };
+		7E51DBC62425077700594708 /* CompanyDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51DBC52425077700594708 /* CompanyDetailedController.swift */; };
 		7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */; };
 		7E536C67238D2AC400A83A79 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D096D9411F28C0D70081004D /* NotificationCenter.framework */; };
 		7E536C6A238D2AC400A83A79 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E536C69238D2AC400A83A79 /* TodayViewController.swift */; };
@@ -2034,6 +2035,7 @@
 		7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsCells.swift; sourceTree = "<group>"; };
 		7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsModel.swift; sourceTree = "<group>"; };
 		7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsService.swift; sourceTree = "<group>"; };
+		7E51DBC52425077700594708 /* CompanyDetailedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailedController.swift; sourceTree = "<group>"; };
 		7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersAndGroupsViewModel.swift; sourceTree = "<group>"; };
 		7E536C66238D2AC400A83A79 /* AdGuardTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E536C69238D2AC400A83A79 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -3825,6 +3827,7 @@
 				7EB5526F242247E2000498CC /* ActivityViewControllerModel.swift */,
 				7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */,
 				7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */,
+				7E51DBC52425077700594708 /* CompanyDetailedController.swift */,
 			);
 			path = ActivityViewController;
 			sourceTree = "<group>";
@@ -5994,6 +5997,7 @@
 				65EC9BD81BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				D081FC2B2418EB38000A10DA /* SafariProtectionService.swift in Sources */,
+				7E51DBC62425077700594708 /* CompanyDetailedController.swift in Sources */,
 				D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */,
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				7E4D204C22D71A5B003B0E75 /* mz_os.c in Sources */,
