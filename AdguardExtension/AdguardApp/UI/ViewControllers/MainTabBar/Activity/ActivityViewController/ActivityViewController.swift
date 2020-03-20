@@ -18,11 +18,9 @@
 
 import UIKit
 
-class ActivityViewController: UIViewController {
+class ActivityViewController: UITableViewController {
     
     // MARK: - Outlets
-    
-    @IBOutlet weak var scrollContentView: UIView!
     
     @IBOutlet weak var changePeriodTypeButton: UIButton!
     
@@ -34,17 +32,15 @@ class ActivityViewController: UIViewController {
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
-    @IBOutlet weak var recentActivityLabel: ThemableLabel!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
+    
+    // MARK: - Outlet views for tableview
+    @IBOutlet var sectionHeaderView: UIView!
+    @IBOutlet var tableHeaderView: UIView!
     
     
     // MARK: - Services
@@ -158,11 +154,45 @@ class ActivityViewController: UIViewController {
         showGroupsAlert(sender)
     }
     
+    // MARK: - Tableview Datasource and Delegate
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return sectionHeaderView
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model?.records.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
+            guard let record = model?.records[indexPath.row] else { return UITableViewCell() }
+            cell.developerMode = configuration.developerMode
+            cell.theme = theme
+            cell.record = record
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let record = model?.records[indexPath.row] {
+            selectedRecord = record
+            performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: - Private methods
 
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
-        scrollContentView.backgroundColor = theme.backgroundColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
@@ -248,40 +278,11 @@ class ActivityViewController: UIViewController {
     
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
+        tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
     }
     
     private func keyboardWillShow() {
-        scrollView.setContentOffset(CGPoint(x: 0.0, y: recentActivityLabel.frame.minY), animated: true)
-    }
-}
-
-
-// MARK: - UITableViewDataSource, UITableViewDelegate
-
-extension ActivityViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.records.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
-            guard let record = model?.records[indexPath.row] else { return UITableViewCell() }
-            cell.developerMode = configuration.developerMode
-            cell.theme = theme
-            cell.record = record
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let record = model?.records[indexPath.row] {
-            selectedRecord = record
-            performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }
 
