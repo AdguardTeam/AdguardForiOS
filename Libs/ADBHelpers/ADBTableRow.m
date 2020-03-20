@@ -163,6 +163,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                         }
                         @catch (NSException *exception) {
                             DDLogError(@"(ADBTableRow) initWithDbResult - error: %@", exception.debugDescription);
+                            [ACLLogger.singleton flush];
                         }
                     }
                     else if ([obj isKindOfClass:[NSString class]]){
@@ -181,6 +182,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                         }
                         @catch (NSException *exception) {
                             DDLogError(@"(ADBTableRow) initWithDbResult standant mapping - error: %@", exception.debugDescription);
+                            [ACLLogger.singleton flush];
                         }
                     }
                 }
@@ -190,6 +192,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
         }
         @catch (NSException *exception) {
             DDLogError(@"(ADBTableRow) initWithDbResult - unknown error: %@", exception.debugDescription);
+            [ACLLogger.singleton flush];
         }
     }
     
