@@ -34,6 +34,8 @@ class ActivityViewController: UIViewController {
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var tableView: UITableView!
@@ -46,14 +48,23 @@ class ActivityViewController: UIViewController {
     // MARK: - Services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
     private var themeToken: NotificationToken?
+    private var developerModeToken: NSKeyValueObservation?
+    
+    // MARK: - Public variables
+    
+    var model: DnsRequestLogViewModel?
     
     // MARK: - Private variables
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
+    private let showDnsContainerSegueId = "showDnsContainer"
+    
+    private var selectedRecord: DnsLogRecordExtended?
 
     
     // MARK: - ViewController life cycle
@@ -63,9 +74,20 @@ class ActivityViewController: UIViewController {
         
         updateTheme()
         
+        model?.delegate = self
+        
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            self?.observeDeveloperMode()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as? DnsContainerController
+        controller?.logRecord = selectedRecord
     }
     
     // MARK: - Actions
@@ -94,22 +116,62 @@ class ActivityViewController: UIViewController {
         theme.setupButtons(themableButtons)
         theme.setupSeparators(separators)
     }
+    
+    private func observeDeveloperMode(){
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 }
 
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension ActivityViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return model?.records.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
-            theme.setupTableCell(cell)
+            guard let record = model?.records[indexPath.row] else { return UITableViewCell() }
+            cell.developerMode = configuration.developerMode
+            cell.theme = theme
+            cell.record = record
             return cell
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let record = model?.records[indexPath.row] {
+            selectedRecord = record
+            performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
+
+// MARK: - UISearchBarDelegate
 
 extension ActivityViewController: UISearchBarDelegate {
     
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension ActivityViewController: UIScrollViewDelegate {
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        tableView.isScrollEnabled = true
+        scrollView.isScrollEnabled = false
+    }
+}
+
+// MARK: - DnsRequestsDelegateProtocol
+
+extension ActivityViewController: DnsRequestsDelegateProtocol {
+    func requestsCleared() {
+        
+    }
 }

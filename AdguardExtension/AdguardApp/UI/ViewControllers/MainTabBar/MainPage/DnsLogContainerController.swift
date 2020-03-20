@@ -18,10 +18,6 @@
 
 import UIKit
 
-protocol DnsLogContainerControllerDelegate {
-    func clearButtonTapped()
-}
-
 class DnsLogContainerController: UIViewController {
 
     // MARK: - Variables
@@ -38,7 +34,6 @@ class DnsLogContainerController: UIViewController {
     
     private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
-    private var delegate: DnsLogContainerControllerDelegate?
     private var themeNotificationToken: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     
@@ -68,8 +63,7 @@ class DnsLogContainerController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsLogSegueId {
-            if let vc = segue.destination as? DnsLogController {
-                delegate = vc
+            if let vc = segue.destination as? ActivityViewController {
                 vc.model = model
             }
         }
@@ -94,7 +88,6 @@ class DnsLogContainerController: UIViewController {
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.delegate?.clearButtonTapped()
         }
         
         alert.addAction(yesAction)

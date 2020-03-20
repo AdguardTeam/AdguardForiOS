@@ -19,17 +19,13 @@
 import Foundation
 import UIKit
 
-enum BlockedRecordType {
-    case normal, whitelisted, blocked, tracked
-}
-
 class DnsRequestCell: UITableViewCell {
     @IBOutlet weak var domain: ThemableLabel!
     @IBOutlet weak var details: ThemableLabel!
     @IBOutlet weak var timeLabel: ThemableLabel!
 }
 
-class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol, DnsLogContainerControllerDelegate {
+class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsDelegateProtocol {
     //MARK: - IB Outlets
     
     @IBOutlet var searchView: UIView!
@@ -104,7 +100,6 @@ class DnsLogController: UITableViewController, UISearchBarDelegate, DnsRequestsD
             type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
-            
         case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
             type = .blocked
         }

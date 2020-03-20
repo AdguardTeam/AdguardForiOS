@@ -58,16 +58,6 @@ class DnsLogRecordExtended {
 
 // this extension adds ui features to data type
 extension DnsLogRecordStatus {
-    func title()->String {
-        switch self {
-        case .processed:
-            return String.localizedString("dns_request_status_processed")
-        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
-            return String.localizedString("dns_request_status_whitelisted")
-        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
-            return String.localizedString("dns_request_status_blocked")
-        }
-    }
         
     func color() -> UIColor {
         switch self {

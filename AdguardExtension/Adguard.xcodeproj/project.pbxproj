@@ -1264,7 +1264,6 @@
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
-		D09C9D8B21F5FFD400F3D988 /* DnsLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09C9D8A21F5FFD400F3D988 /* DnsLogController.swift */; };
 		D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
@@ -3802,6 +3801,7 @@
 		7EB5526E242247C3000498CC /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */,
 				7EB5526C24224755000498CC /* ActivityViewController.swift */,
 				7EB5526F242247E2000498CC /* ActivityViewControllerModel.swift */,
 				7EB5527124225B05000498CC /* ActivityTableViewCell.swift */,
@@ -3957,7 +3957,6 @@
 			children = (
 				7E3F118C2350620900D1D17E /* List of rules models */,
 				7E83CA3D234351AC004E2EB8 /* dnsFiltersModel.swift */,
-				D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */,
 				7E53455622FC2296008DA7FF /* FiltersAndGroupsViewModel.swift */,
 				7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */,
 			);
@@ -6023,7 +6022,6 @@
 				D06BB37E238BC2030000075E /* DnsLogRecordsService.swift in Sources */,
 				D031A139219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
 				7E4D203C22D71A5B003B0E75 /* mz_zip.c in Sources */,
-				D09C9D8B21F5FFD400F3D988 /* DnsLogController.swift in Sources */,
 				65C12EF01BD4D29F00FFC71C /* AESFilterConverter.m in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7E4D204822D71A5B003B0E75 /* mz_strm_wzaes.c in Sources */,
