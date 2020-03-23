@@ -125,7 +125,7 @@ enum ChartRequestType {
 
 class ChartViewModel: ChartViewModelProtocol {
     
-    let chartView: ChartView
+    let chartView: ChartView?
     var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
     
     var requestsCount: Int = 0
@@ -155,7 +155,7 @@ class ChartViewModel: ChartViewModelProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView?) {
         self.dnsStatisticsService = dnsStatisticsService
         self.chartView = chartView
     }
@@ -194,7 +194,7 @@ class ChartViewModel: ChartViewModelProtocol {
         
         blockedSavedKbytes = blockedData.savedData
     
-        chartView.chartPoints = (requestsData.points, blockedData.points)
+        chartView?.chartPoints = (requestsData.points, blockedData.points)
         chartPointsChangedDelegate?.numberOfRequestsChanged()
     }
     
@@ -212,8 +212,8 @@ class ChartViewModel: ChartViewModelProtocol {
         let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
         let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
         
-        chartView.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
-        chartView.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
+        chartView?.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
+        chartView?.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
         
         if requestsDates.count < 2 {
             return ([], 0, 0)

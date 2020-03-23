@@ -3746,6 +3746,7 @@
 				7E6D962423E172D1006202C2 /* RequestDetailsScreen */,
 				7ED3D36D23CCD5480014734A /* BlockRequestController.swift */,
 				7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */,
+				7E51DBC52425077700594708 /* CompanyDetailedController.swift */,
 				7EB5526E242247C3000498CC /* ActivityViewController */,
 				7E1E41582424BFE900567C8D /* MostActiveCompaniesController */,
 			);
@@ -3827,7 +3828,6 @@
 				7EB5526F242247E2000498CC /* ActivityViewControllerModel.swift */,
 				7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */,
 				7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */,
-				7E51DBC52425077700594708 /* CompanyDetailedController.swift */,
 			);
 			path = ActivityViewController;
 			sourceTree = "<group>";

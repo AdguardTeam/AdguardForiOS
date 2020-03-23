@@ -61,7 +61,7 @@ class DnsLogContainerController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsLogSegueId {
             if let vc = segue.destination as? ActivityViewController {
-                vc.model = model
+                vc.requestsModel = model
             }
         }
     }

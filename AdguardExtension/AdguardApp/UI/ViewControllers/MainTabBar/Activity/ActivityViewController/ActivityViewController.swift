@@ -57,9 +57,11 @@ class ActivityViewController: UITableViewController {
     
     // MARK: - Public variables
     
-    var model: DnsRequestLogViewModel?
+    var requestsModel: DnsRequestLogViewModel?
     
     // MARK: - Private variables
+    
+    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!, chartView: nil)
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -77,26 +79,19 @@ class ActivityViewController: UITableViewController {
         
         setupTableView()
         
-        model?.delegate = self
+        requestsModel?.delegate = self
+        statisticsModel.chartPointsChangedDelegate = self
         
         let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
         dateTypeChanged(dateType: ChartDateType(rawValue: periodType) ?? .alltime)
         
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
+        addObservers()
         
-        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
-            self?.keyboardWillShow()
-        }
-        
-        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
-            self?.observeDeveloperMode()
-        }
-        
-        model?.recordsObserver = { [weak self] (records) in
-            self?.tableView.reloadData()
-        }
+        statisticsModel.obtainStatistics()
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,6 +100,16 @@ class ActivityViewController: UITableViewController {
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.activeCompaniesDisplayType = activeCompaniesDisplayType
         }
+    }
+    
+    // MARK: - Observing Values from User Defaults
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == LastStatisticsSaveTime {
+            statisticsModel.obtainStatistics()
+            return
+        }
+        updateTextForButtons()
     }
     
     // MARK: - Actions
@@ -165,12 +170,12 @@ class ActivityViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model?.records.count ?? 0
+        return requestsModel?.records.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
-            guard let record = model?.records[indexPath.row] else { return UITableViewCell() }
+            guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.developerMode = configuration.developerMode
             cell.theme = theme
             cell.record = record
@@ -180,7 +185,7 @@ class ActivityViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let record = model?.records[indexPath.row] {
+        if let record = requestsModel?.records[indexPath.row] {
             selectedRecord = record
             performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
         }
@@ -212,7 +217,7 @@ class ActivityViewController: UITableViewController {
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.model?.clearRecords()
+            self?.requestsModel?.clearRecords()
         }
         
         alert.addAction(yesAction)
@@ -284,6 +289,64 @@ class ActivityViewController: UITableViewController {
     private func keyboardWillShow() {
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
+    
+    /**
+    Changes number of requests for all buttons
+    */
+    private func updateTextForButtons(){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+            self.requestsNumberLabel.text = "\((self.statisticsModel.requestsCount) + requestsNumber)"
+            
+            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+            let blockedCount = (self.statisticsModel.blockedCount) + blockedNumber
+            
+            let blockedSaved = self.statisticsModel.blockedSavedKbytes
+            
+            self.blockedNumberLabel.text = "\(blockedCount)"
+            self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
+        }
+    }
+    
+    /**
+     Adds observers to controller
+     */
+    private func addObservers(){
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
+        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
+            self?.keyboardWillShow()
+        }
+        
+        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            self?.observeDeveloperMode()
+        }
+        
+        requestsModel?.recordsObserver = { [weak self] (records) in
+            self?.tableView.reloadData()
+        }
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
+    }
+    
+    /**
+     Removes observers from controller
+     */
+    private func removeObservers(){
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        
+        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -294,7 +357,7 @@ extension ActivityViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        model?.searchString = searchText
+        requestsModel?.searchString = searchText
     }
 }
 
@@ -314,6 +377,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
         resources.sharedDefaults().set(dateType.rawValue, forKey: ActivityStatisticsPeriodType)
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
+        statisticsModel.chartDateType = dateType
     }
 }
 
@@ -322,5 +386,13 @@ extension ActivityViewController: DateTypeChangedProtocol {
 extension ActivityViewController: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomAnimatedTransitioning()
+    }
+}
+
+// MARK: - NumberOfRequestsChangedDelegate
+
+extension ActivityViewController: NumberOfRequestsChangedDelegate {
+    func numberOfRequestsChanged() {
+        updateTextForButtons()
     }
 }
