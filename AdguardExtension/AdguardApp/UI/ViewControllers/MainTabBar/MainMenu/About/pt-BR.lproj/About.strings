@@ -1,2 +1,17 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
 "CqW-k3-vqO.title" = "Entrar";
+
+/* Class = "UILabel"; text = "Manage License"; ObjectID = "K2a-tW-P6P"; */
+"K2a-tW-P6P.text" = "Gerenciar licença";
+
+/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
+"RqV-y2-sfF.text" = "Tutorial em vídeo";
+
+/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "SJc-cd-hKd"; */
+"SJc-cd-hKd.text" = "Site para desenvolvedores";
+
+/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "o0X-Zy-4g6"; */
+"o0X-Zy-4g6.text" = "Reconhecimentos";
+
+/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
+"oFL-ch-4PY.text" = "Fórum";

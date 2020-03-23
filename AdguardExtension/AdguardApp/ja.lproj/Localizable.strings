@@ -620,13 +620,13 @@
 "dns_request_user_status_removed_from_blacklist" = "ブラックリストから削除済み";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "%@<b>設定</b>アプリを開き";
+"onboarding_first_step_text" = "<b>設定</b>アプリを開き";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "%@ <b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
+"onboarding_second_step_text" = "<b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "%@<b>コンテンツブロッカーのスイッチ</b>をすべてオンにしてください。";
+"onboarding_third_step_text" = "<b>コンテンツブロッカーのスイッチ</b>をすべてオンにしてください。";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "システムDNS";

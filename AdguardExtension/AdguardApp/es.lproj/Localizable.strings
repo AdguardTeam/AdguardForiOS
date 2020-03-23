@@ -125,7 +125,7 @@
 "whitelist_text" = "Ingrese aquí los nombres de dominio. AdGuard no bloqueará el acceso a estos dominios ignorando todas las demás configuraciones.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Introduzca los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
+"inverted_whitelist_text" = "Ingrese los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Ingrese aquí los nombres de dominio separados por saltos de línea. AdGuard permitirá todas las conexiones a estos dominios.";
