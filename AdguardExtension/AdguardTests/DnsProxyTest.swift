@@ -116,29 +116,4 @@ class DnsProxyTest: XCTestCase {
         
         wait(for: [expectation2], timeout: 15)
     }
-    
-    
-    func testPerformance() {
-        measure {
-            var expectations: [XCTestExpectation] = []
-            
-            var count = 0
-            for _ in 0...100 {
-                
-                let expectation = XCTestExpectation(description: "expectation")
-                expectations.append(expectation)
-                proxyService.resolve(dnsRequest: request!) { (response) in
-                    
-                    if response != nil && response!.count > 0 {
-                        count += 1
-                    }
-                    expectation.fulfill()
-                }
-            }
-            
-            wait(for: expectations, timeout: 15)
-        }
-    }
-    
-    
 }
