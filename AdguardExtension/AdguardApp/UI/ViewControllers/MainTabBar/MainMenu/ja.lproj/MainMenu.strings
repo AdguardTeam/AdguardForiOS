@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
-"6Z2-0N-PSp.text" = "フィードバックを送る";
+"6Z2-0N-PSp.text" = "お客様サポート";
 
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
-"Em7-2h-SKs.text" = "AdGuardの改善にご協力ください";
+"Em7-2h-SKs.text" = "問題、ご提案等を送信することでAdGuardの改善にご協力ください。";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Safariでブロック";
