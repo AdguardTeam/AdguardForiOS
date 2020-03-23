@@ -142,7 +142,15 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
             }
             
             self?.readHandler?.inTransaction { (db, rollback) in
+                
+                DDLogInfo("(DnsStatisticsService) readStatistics - inTransaction")
+                ACLLogger.singleton()?.flush()
+                
                 let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
+                
+                DDLogInfo("(DnsStatisticsService) readStatistics - table created")
+                ACLLogger.singleton()?.flush()
+                
                 guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else {
                     DDLogInfo("(DnsStatisticsService) readStatistics - select returns empty or incorrect result")
                     ACLLogger.singleton()?.flush()
