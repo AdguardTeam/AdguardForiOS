@@ -87,4 +87,19 @@ class ActivityStatisticsServiceTest: XCTestCase {
             XCTAssertEqual(records, recordsToCheck)
         }
     }
+    
+    func testDeleteAllRecords(){
+        let now = Date()
+        
+        let testRecord1 = ActivityStatisticsRecord(date: now, domain: "testDomain", requests: 10, blocked: 5, savedData: 20)
+        let testRecord2 = ActivityStatisticsRecord(date: now, domain: "testDomain1", requests: 15, blocked: 7, savedData: 40)
+        let testRecord3 = ActivityStatisticsRecord(date: now, domain: "testDomain3", requests: 20, blocked: 10, savedData: 30)
+        let testRecords = [testRecord1, testRecord2, testRecord3]
+        
+        activityStatisticsService.writeRecords(testRecords)
+        activityStatisticsService.deleteAllRecords()
+        activityStatisticsService.getAllRecords { (records) in
+            XCTAssert(records.isEmpty)
+        }
+    }
 }
