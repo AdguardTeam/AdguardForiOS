@@ -69,25 +69,15 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     func writeRecords(_ records: [ActivityStatisticsRecord]){
         writeHandler?.inTransaction{ (db, rollback) in
             guard let db = db else { return }
-            let now = Date().Iso8601YyyyMmDdFormatter()
             
             for record in records {
                 let dateString = record.date.Iso8601YyyyMmDdFormatter()
                 
-                if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable WHERE timeStamp = ? AND DOMAIN = ?", withArgumentsIn: [dateString, record.domain]), resultSet.next(), dateString == now {
-                    if let activityRecord = ActivityStatisticsRecord(resultSet) {
-                        activityRecord.requests += record.requests
-                        activityRecord.blocked += record.blocked
-                        activityRecord.savedData += record.savedData
-                        
-                        let result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = ?, blocked = ?, savedData = ? WHERE timeStamp = ? AND domain = ?", withArgumentsIn: [activityRecord.requests, activityRecord.blocked, activityRecord.savedData, activityRecord.date.Iso8601YyyyMmDdFormatter(), activityRecord.domain])
-                        rollback?.pointee = ObjCBool(!result)
-                    } else {
-                        DDLogError("ActivityStatisticsService Error - illegal case in writeRecords method")
-                    }
-                } else {
-                    let result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) values (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData])
-                    rollback?.pointee = ObjCBool(!result)
+                let result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) VALUES(? , ?, ?, ?, ?) ON CONFLICT(timeStamp, domain) DO UPDATE SET requests = requests + ?, blocked = blocked + ?, savedData = savedData + ? WHERE timeStamp = ? and domain = ?", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData, record.requests, record.blocked, record.savedData, dateString, record.domain])
+                rollback?.pointee = ObjCBool(!result)
+                
+                if !result {
+                    DDLogError("ActivityStatisticsService Error in writeRecords")
                 }
             }
         }
@@ -117,6 +107,9 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             
             let result = db.executeUpdate("DELETE FROM ActivityStatisticsTable", withArgumentsIn: [])
             rollback?.pointee = ObjCBool(!result)
+            if !result {
+                DDLogError("ActivityStatisticsService Error in deleteAllRecords")
+            }
         }
     }
 
@@ -124,6 +117,9 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     // MARK: - private methods
     
     private func createDnsLogTable(_ db: FMDatabase) {
-        db.executeUpdate("CREATE TABLE IF NOT EXISTS ActivityStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, domain TEXT NOT NULL DEFAULT '', requests INTEGER NOT NULL DEFAULT 0, blocked INTEGER NOT NULL DEFAULT 0, savedData INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(timeStamp, domain))", withParameterDictionary: [:])
+        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS ActivityStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, domain TEXT NOT NULL DEFAULT '', requests INTEGER NOT NULL DEFAULT 0, blocked INTEGER NOT NULL DEFAULT 0, savedData INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(timeStamp, domain))", withParameterDictionary: [:])
+        if !result {
+            DDLogError("ActivityStatisticsService Error in createDnsLogTable")
+        }
     }
 }
