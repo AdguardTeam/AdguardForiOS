@@ -1,0 +1,29 @@
+/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
+"6jg-ji-JtC.text" = "Merci";
+
+/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
+"JEI-Pr-Mc2.text" = "pour vos commentaires";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
+"JXu-e8-XCB.text" = "Commentaires";
+
+/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
+"TBB-iF-qGA.text" = "Merci, pour le partage de votre expérience avec AdGuard";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
+"XtG-5p-3KJ.text" = "Commentaires";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
+"cJk-65-rg8.title" = "Commentaires";
+
+/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
+"nIO-Sh-01f.normalTitle" = "ENVOYER";
+
+/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
+"oJi-EL-gWT.placeholder" = "Entrez votre adresse courriel si vous souhaitez que nous vous répondions";
+
+/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
+"tCN-dT-J7Y.normalTitle" = "ACCUEIL";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
+"zE7-4q-9oe.title" = "Commentaires";

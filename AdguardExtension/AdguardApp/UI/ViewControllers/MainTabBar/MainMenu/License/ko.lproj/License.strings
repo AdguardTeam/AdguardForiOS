@@ -40,6 +40,9 @@
 /* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "전체 시스템 추적 보호";
 
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "추적 보호";
+
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "프리미엄이 활성화되었습니다";
 

@@ -52,6 +52,9 @@
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "여기에 사용자 정의 필터를 추가";
 
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "허용 리스트";
+
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "필터";
 
