@@ -737,7 +737,7 @@
 "basic_filter_title" = "基本的な保護";
 
 /* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "すべての既知の追跡ドメインをブロックします。";
+"basic_filter_description" = "ほとんどの既知の追跡ドメインをブロックします。";
 
 /* (DnsFiltersService) - Strict Tracking protection filter title */
 "strict_filter_title" = "強めの保護";

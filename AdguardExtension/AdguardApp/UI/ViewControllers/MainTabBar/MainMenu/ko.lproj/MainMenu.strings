@@ -7,11 +7,20 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Safari 보호";
 
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "일반";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard란 무엇인가요?";
 
+/* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
+"UJb-NW-d5B.text" = "설정";
+
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "설정";
+
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "r4M-ec-gKY"; */
+"r4M-ec-gKY.text" = "추적 보호";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "정보";

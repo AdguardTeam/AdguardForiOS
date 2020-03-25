@@ -148,6 +148,12 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "이름:";
 
+/* (Main Menu) Rate app action */
+"rate_app_title" = "앱 평가하기";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "피드백 전송";
+
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "옳지 않은 차단 신고";
 
@@ -523,6 +529,9 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "모든 보호 모듈이 비활성화 되었습니다";
 
+/*(TodayViewController) Tracking protection is enabled text  */
+"system_enabled" = "추적 보호";
+
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d 요청, %2$d 차단됨";
 
@@ -552,6 +561,9 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "유효하지 않는 업스트림입니다";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "세부 사항";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "일반";
@@ -618,3 +630,65 @@
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "활성화";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "피드백을 보내지 못했습니다";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "계속하는 경우, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인 정보 처리 방침</a>에 동의하시게 됩니다";
+
+/* (DnsFiltersService) - Basic Tracking protection filter title */
+"basic_filter_title" = "기본 보호";
+
+/* (DnsFiltersService) - Google tracking domains filter title */
+"google_filter_title" = "Google 트래커 차단";
+
+/* (DnsFiltersService) - Facebook tracking domains filter title */
+"facebook_filter_title" = "Facebook 트래커 차단";
+
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "메인 화면";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "보호 화면";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "설정 화면";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari 보호가 활성화 되었습니다";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari 보호가 비활성화 되었습니다";
+
+/* (MainPageController) tracking protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "추적 보호가 활성화 되었습니다";
+
+/* (MainPageController) tracking protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "추적 보호가 비활성화 되었습니다";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "필터 업데이트";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "추적 보호 활성화";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "이메일 주소를 입력하세요";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "비밀번호를 입력하세요";

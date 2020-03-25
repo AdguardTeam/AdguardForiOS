@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "Tracking Protection"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "추적 보호";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "다음";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Safari 보호";
+
+/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
+"hak-o1-HWp.text" = "AdGuard를 설치해주셔서 감사합니다!";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Safari 보호";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "다음";
