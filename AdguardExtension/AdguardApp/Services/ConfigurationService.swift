@@ -183,11 +183,6 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
             self.contentBlockerEnabled = mappedDict
         }
     }
-    
-    // Force send a notification about theme change when reseting settings
-    func reset() {
-        NotificationCenter.default.post(name: Notification.Name(ConfigurationService.themeChangeNotification), object: self)
-    }
 }
 
 

@@ -65,9 +65,11 @@ extern NSString *OpenDnsSettingsSegue;
 
  @return Returns YES if antibanner will start update of the filters from backend.
  */
-- (BOOL)invalidateAntibanner:(BOOL)fromUI interactive:(BOOL)interactive;
+- (BOOL) invalidateAntibanner:(BOOL)fromUI interactive:(BOOL)interactive;
 
 - (void) resetAllSettings;
+
+-(void) setAppInterfaceStyle;
 
 
 @end

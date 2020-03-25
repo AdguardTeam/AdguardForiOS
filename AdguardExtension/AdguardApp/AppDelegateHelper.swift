@@ -196,7 +196,7 @@ class AppDelegateHelper: NSObject {
             
             self.dnsFiltersService.reset()
             
-            self.configuration.reset()
+            self.appDelegate.setAppInterfaceStyle()
             
             let providersService: DnsProvidersService = ServiceLocator.shared.getService()!
             providersService.reset()

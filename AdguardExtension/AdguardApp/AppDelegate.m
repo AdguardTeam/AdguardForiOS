@@ -383,8 +383,27 @@ static NSTimeInterval lastCheckTime;
     }
 }
 
-- (void)resetAllSettings {
+- (void) resetAllSettings {
     [helper resetAllSettings];
+}
+
+-(void) setAppInterfaceStyle {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ConfigurationService *configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
+        if (@available(iOS 13.0, *)) {
+            switch (self.window.traitCollection.userInterfaceStyle) {
+                case UIUserInterfaceStyleDark:
+                    configuration.systemAppearenceIsDark = YES;
+                    break;
+            
+                default:
+                    configuration.systemAppearenceIsDark = NO;
+                    break;
+            }
+        } else {
+            configuration.systemAppearenceIsDark = NO;
+        }
+    });
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -646,24 +665,6 @@ static NSTimeInterval lastCheckTime;
     }
     
     return nav;
-}
-
--(void)setAppInterfaceStyle {
-    ConfigurationService *configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
-    if (@available(iOS 13.0, *)) {
-        switch (self.window.traitCollection.userInterfaceStyle) {
-            case UIUserInterfaceStyleDark:
-                configuration.systemAppearenceIsDark = YES;
-                break;
-        
-            default:
-                configuration.systemAppearenceIsDark = NO;
-                break;
-        }
-    } else {
-        configuration.systemAppearenceIsDark = NO;
-    }
-
 }
 
 - (void)showAlertNotification:(NSNotification *)notification {

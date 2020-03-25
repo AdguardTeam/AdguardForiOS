@@ -82,6 +82,4 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var allContentBlockersEnabled: Bool = true
     
     var someContentBlockersEnabled: Bool = true
-    
-    func reset() {}
 }
