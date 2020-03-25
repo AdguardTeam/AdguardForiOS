@@ -38,6 +38,23 @@ final class NotificationToken: NSObject {
     }
 }
 
+final class ObserverToken: NSObject {
+    let observableObject: NSObject
+    unowned let observer: NSObject
+    let keyPath: String
+    
+    init(observableObject: NSObject, observer: NSObject, keyPath: String) {
+        self.observableObject = observableObject
+        self.observer = observer
+        self.keyPath = keyPath
+    }
+
+    deinit {
+        observableObject.removeObserver(observer, forKeyPath: keyPath)
+    }
+}
+
+
 extension NotificationCenter {
     /// Convenience wrapper for addObserver(forName:object:queue:using:)
     /// that returns our custom NotificationToken.
@@ -47,5 +64,12 @@ extension NotificationCenter {
     {
         let token = addObserver(forName: name, object: obj, queue: queue, using: block)
         return NotificationToken(notificationCenter: self, token: token)
+    }
+}
+
+extension NSObject {
+    func addObseverWithToken(_ observer: NSObject, keyPath: String, options: NSKeyValueObservingOptions, context: UnsafeMutableRawPointer?)->ObserverToken {
+        addObserver(observer, forKeyPath: keyPath, options: options, context: context)
+        return ObserverToken(observableObject: self, observer: observer, keyPath: keyPath)
     }
 }

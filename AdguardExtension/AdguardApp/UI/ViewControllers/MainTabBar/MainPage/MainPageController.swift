@@ -164,6 +164,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
+    private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - View Controller life cycle
     
@@ -212,6 +213,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
         }
@@ -227,10 +229,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
         
-    deinit {
-        removeObservers()
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return theme.statusbarStyle()
     }
@@ -557,11 +555,15 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.updateProtectionStatusText()
         })
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
+        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
+        
+        defaultsObservations.append(observerToken1)
+        defaultsObservations.append(observerToken2)
+        defaultsObservations.append(observerToken3)
         
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -582,17 +584,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
         observations.append(proObservation)
         observations.append(contenBlockerObservation)
-    }
-    
-    /**
-     Removes observers from controller
-     */
-    private func removeObservers(){
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
-        
-        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
     }
     
     /**
