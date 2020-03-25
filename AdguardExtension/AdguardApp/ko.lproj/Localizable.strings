@@ -22,8 +22,14 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "필터를 사파리에 로드할 수 없습니다. 최근 변경 내용이 적용되지 않습니다.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Safari에 필터를 로드할 수 없습니다. 규칙과 허용 목록을 비우거나, 사용하는 필터를 변경하세요.";
+
 /* NO Button caption in alert */
 "common_action_no" = "아니요";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "허용 목록 (반전된)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "변경 사항을 적용하는 중...";
@@ -120,6 +126,9 @@
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "여기에 도메인 명을 줄 바꿈으로 구분하여 입력하세요. AdGuard는 이 도메인에 대한 모든 연결을 허용합니다.";
+
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "이 차단 목록은 <a href=\"%@\">AdGuard의 DNS 문법</a>을 지원합니다. 여기에 규칙을 줄 바꿈으로 나눠 입력하세요. AdGuard는 이 규칙과 일치하는 도메인에 대한 모든 연결을 차단합니다.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "업데이트 중...";
@@ -240,6 +249,12 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "가능하다면 언제나 세이프 서치를 브라우저에 강제로 적용시킵니다";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "추적 시스템을 차단합니다";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "암호화 없음 (시스템 DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%2$d가지 중 %1$d가지가 활성화 됨";
@@ -388,6 +403,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi 예외";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "아래에 나열된 Wi-Fi 네트워크에는 추적 보호가 작동하지 않습니다";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "예외 추가";
 
@@ -396,6 +414,21 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Wi-Fi 필터링";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "모빌 데이터 사용 중 추적 보호";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Wi-Fi 사용 중 추적 보호";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "허용 목록";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "허용 목록";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "차단 목록";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari 사용자 규칙";
@@ -414,6 +447,18 @@
 
 /* "Disabled" title */
 "disabled" = "비활성화 됨";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "허용 목록에서 제거";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "차단 목록에서 제거";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "허용 목록에 추가";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "차단 목록에 추가";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "피싱 사이트 및 위험한 도메인을 차단할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";
@@ -481,8 +526,11 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "새 규칙 추가";
 
+/* confirm reset lert text */
+"confirm_reset_text" = "사용자 규칙, 추적 보호, 인터페이스 및 인증 설정을 포함한 모든 설정이 초기화 됩니다. 이 작업은 취소할 수 없습니다. 설정을 초기화합니까?";
+
 /* (DnsLogContainerController) reset activity log title */
-"reset_activity_title" = "작업 로그 초기화";
+"reset_activity_title" = "활동 로그 초기화";
 
 /* (DnsLogContainerController) reset activity log message */
 "reset_activity_message" = "모든 활동 기록이 삭제됩니다!";
@@ -523,6 +571,9 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "보호가 활성화 되었습니다.";
 
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari 및 추적 보호";
+
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari 콘텐츠 차단";
 
@@ -547,6 +598,33 @@
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "차단됨";
 
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "허용됨";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_whitelisted" = "허용됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "허용 목록에 추가됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "차단 목록에 추가됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "허용 목록에서 제거됨";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "차단 목록에서 제거됨";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "%@<b>설정</b>을 엽니다";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "%@<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 %@켭니다</b>";
+
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "시스템 DNS";
 
@@ -556,11 +634,20 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "요청 차단";
 
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "허용 목록에 도메인 추가";
+
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "비디오 튜토리얼";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "유효하지 않는 업스트림입니다";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "시스템 차단 목록";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "시스템 허용 목록";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "세부 사항";
@@ -628,11 +715,17 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "규칙 없음";
 
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "추적 보호가 비활성화되었습니다";
+
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "활성화";
 
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "피드백을 보내지 못했습니다";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "무엇인가 잘못되었습니다";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "계속하는 경우, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인 정보 처리 방침</a>에 동의하시게 됩니다";
@@ -640,11 +733,35 @@
 /* (DnsFiltersService) - Basic Tracking protection filter title */
 "basic_filter_title" = "기본 보호";
 
+/* (DnsFiltersService) - Basic Tracking protection filter description */
+"basic_filter_description" = "가장 흔한 추적 도메인을 차단합니다.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter title */
+"strict_filter_title" = "강력한 보호";
+
+/* (DnsFiltersService) - Strict Tracking protection filter description */
+"strict_filter_description" = "알려진 모든 트래커를 차단합니다.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter important description */
+"strict_filter_important_description" = "일부 기능이 중단될 수 있습니다.";
+
 /* (DnsFiltersService) - Google tracking domains filter title */
 "google_filter_title" = "Google 트래커 차단";
 
+/* (DnsFiltersService) - Google tracking domains filter description */
+"google_filter_description" = "알려진 모든 Google 추적 도메인을 차단합니다.";
+
+/* (DnsFiltersService) - Google tracking domains filter important description */
+"google_filter_important_description" = "Google API를 사용하는 앱 및 웹사이트를 방해할 수 있습니다.";
+
 /* (DnsFiltersService) - Facebook tracking domains filter title */
 "facebook_filter_title" = "Facebook 트래커 차단";
+
+/* (DnsFiltersService) - Facebook tracking domains description */
+"facebook_filter_description" = "알려진 모든 Facebook 추적 도메인을 차단합니다.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter important description */
+"facebook_filter_important_description" = "Facebook API를 사용하는 앱 및 웹사이트를 방해할 수 있습니다.";
 
 
 
@@ -657,6 +774,9 @@
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
 "protection_page_tab" = "보호 화면";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "활동 화면";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
 "settings_page_tab" = "설정 화면";
@@ -679,11 +799,26 @@
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "필터 업데이트";
 
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "요청 건수";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "차단된 요청 건수";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "절약한 데이터 크기";
+
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
 
 "enable_system_protection_voiceover" = "추적 보호 활성화";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "구독 유형을 선택해 주세요";
 
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
