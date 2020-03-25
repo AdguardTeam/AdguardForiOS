@@ -38,6 +38,9 @@ class RequestsBlockingController: UITableViewController {
     private var configurationToken: NSKeyValueObservation?
     
     private let headerSection = 0
+    private let contentSection = 1
+    
+    private let filtersRow = 0
     
     // MARK: - View controller life cycle
     
@@ -86,12 +89,25 @@ class RequestsBlockingController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if !configuration.developerMode && (indexPath.section, indexPath.row) == (contentSection, filtersRow) {
+            cell.isHidden = true
+        }
+        
         theme.setupTableCell(cell)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == headerSection ? 0.1 : 0.0
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if !configuration.developerMode && (indexPath.section, indexPath.row) == (contentSection, filtersRow) {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     private func updateTheme() {
