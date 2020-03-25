@@ -34,6 +34,9 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "변경 사항을 적용하는 중...";
 
+/* (MainPageController) Message for alert about saved data */
+"saved_data_message" = "이 정보는 차단된 DNS 요청 수를 기반으로 합니다. 이 통계는 처음에 도메인을 차단하지 않았을 경우 사용자가 다운로드 할 수있는 광고, 추적기 및 기타 위협의 정확한 양을 계산할 수 없습니다.";
+
 /* (MainPageController) Text for data units (Kb) Kilobyte */
 "kb_unit" = "%@ KB";
 
