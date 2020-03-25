@@ -44,13 +44,13 @@
 "PFY-Cq-NFN.text" = "이 모듈을 활성화하면 추적 도메인을 차단하고 DNS 트래픽을 암호화할 수 있습니다";
 
 /* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "시스템 보호";
+"QYv-iX-uIo.text" = "추적 보호";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "네트워크 설정";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "허용 리스트";
+"Wml-J6-ced.text" = "허용 목록";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "취소";
@@ -86,7 +86,7 @@
 "iaJ-tk-ohH.text" = "DNS 트래픽을 암호화하여 온라인 환경에서 개인 정보 보호를 향상시켜보세요. 권장 DNS 공급자 중 하나를 선택해 활성화 할 수 있습니다.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "차단 리스트";
+"ihd-7R-RfE.text" = "차단 목록";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "취소";
@@ -120,6 +120,9 @@
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS 서버 주소";
+
+/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "맞춤형 차단";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "프로토콜 선택";

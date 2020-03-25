@@ -1,8 +1,14 @@
 /* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
 "6jg-ji-JtC.text" = "감사합니다";
 
+/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
+"JEI-Pr-Mc2.text" = "피드백";
+
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
 "JXu-e8-XCB.text" = "피드백";
+
+/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
+"TBB-iF-qGA.text" = "AdGuard 사용에 대한 피드백을 입력해 주십시오";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
 "XtG-5p-3KJ.text" = "피드백";
@@ -12,6 +18,9 @@
 
 /* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
 "nIO-Sh-01f.normalTitle" = "전송";
+
+/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
+"oJi-EL-gWT.placeholder" = "답변을 원하시면 이메일을 입력하십시오";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
 "tCN-dT-J7Y.normalTitle" = "홈";
