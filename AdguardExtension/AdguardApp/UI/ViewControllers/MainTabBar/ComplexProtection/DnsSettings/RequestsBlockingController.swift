@@ -89,6 +89,11 @@ class RequestsBlockingController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if !configuration.developerMode && (indexPath.section, indexPath.row) == (contentSection, filtersRow) {
+            cell.isHidden = true
+        }
+        
         theme.setupTableCell(cell)
         return cell
     }
