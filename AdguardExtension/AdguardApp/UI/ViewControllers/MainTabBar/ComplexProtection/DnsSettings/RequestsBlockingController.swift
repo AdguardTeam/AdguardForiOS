@@ -99,7 +99,7 @@ class RequestsBlockingController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if !configuration.developerMode && (indexPath.section, indexPath.row) == (contentSection, filtersRow) {
-            return 0.01
+            return 0
         }
         
         return super.tableView(tableView, heightForRowAt: indexPath)
