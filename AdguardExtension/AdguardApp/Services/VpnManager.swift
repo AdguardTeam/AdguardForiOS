@@ -70,14 +70,6 @@ class VpnManager: VpnManagerProtocol {
             
     // MARK: - initialize
     
-    // static class initializtion
-    static let initialize: Void = {
-        // migration:
-        // in app version 3.1.4 and below we mistakenly used the name Adguard.DnsProviderInfo with namespace
-        // now we use DnsProviderInfo
-        NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
-    }()
-    
     init(resources: AESharedResourcesProtocol ,configuration: ConfigurationServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsProviders: DnsProvidersServiceProtocol) {
         self.resources = resources
         self.appConfiguration = configuration
