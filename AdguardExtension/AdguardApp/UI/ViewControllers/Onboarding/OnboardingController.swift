@@ -139,12 +139,6 @@ class OnboardingController: UIViewController {
                 guard let self = self else { return }
                 self.performSegue(withIdentifier: self.showLicenseSegue, sender: self)
             }
-        } else {
-            DispatchQueue.main.async {[weak self] in
-                self?.dismiss(animated: true) { [weak self] in
-                    self?.delegate?.onboardingDidFinish()
-                }
-            }
         }
     }
 }
