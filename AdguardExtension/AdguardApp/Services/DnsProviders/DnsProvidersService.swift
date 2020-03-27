@@ -56,6 +56,11 @@ protocol DnsProvidersServiceProtocol {
     
     @objc init(resources: AESharedResourcesProtocol) {
         self.resources = resources
+        
+        // migration:
+        // in app version 3.1.4 and below we mistakenly used the name Adguard.DnsProviderInfo with namespace
+        // now we use DnsProviderInfo
+        NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
     }
     
     @objc var predefinedProviders: [DnsProviderInfo] {
