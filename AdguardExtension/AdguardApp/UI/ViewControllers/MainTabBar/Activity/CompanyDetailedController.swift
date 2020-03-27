@@ -31,6 +31,8 @@ class CompanyDetailedController: UITableViewController {
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet var sectionHeaderView: UIView!
     
+    @IBOutlet weak var recentActivityLabel: ThemableLabel!
+    
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -74,7 +76,6 @@ class CompanyDetailedController: UITableViewController {
         setupTableView()
         addObservers()
         setupBackButton()
-        checkTableViewIsNotEmpty()
         titleLabel.text = record?.key
         
         requestsModel.delegate = self
@@ -167,14 +168,16 @@ class CompanyDetailedController: UITableViewController {
     // MARK: - Private methods
 
     private func updateTheme(){
+        tableView.reloadData()
         view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
         tableHeaderView.backgroundColor = theme.backgroundColor
         sectionHeaderView.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
-        tableView.reloadData()
+        theme.setupLabel(recentActivityLabel)
     }
     
     private func addObservers(){
@@ -193,14 +196,16 @@ class CompanyDetailedController: UITableViewController {
         requestsModel.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
                 self?.tableView.reloadData()
-                self?.checkTableViewIsNotEmpty()
             }
         }
     }
     
     private func keyboardWillShow() {
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            let isEmpty = self?.tableView.numberOfRows(inSection: 0) == 0
+            if !isEmpty {
+                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         }
     }
     
@@ -213,6 +218,7 @@ class CompanyDetailedController: UITableViewController {
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
+        refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
     }
     
     private func showGroupsAlert(_ sender: UIButton) {
@@ -262,8 +268,11 @@ class CompanyDetailedController: UITableViewController {
         present(alert, animated: true)
     }
     
-    private func checkTableViewIsNotEmpty(){
-        searchBar.isHidden = tableView.numberOfRows(inSection: 0) == 0
+    @objc func updateTableView(sender: UIRefreshControl) {
+        if let type = chartDateType, let domains = record?.domains {
+            requestsModel.obtainRecords(for: type, domains: domains)
+        }
+        refreshControl?.endRefreshing()
     }
 }
 
@@ -272,6 +281,10 @@ class CompanyDetailedController: UITableViewController {
 extension CompanyDetailedController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        requestsModel.searchString = searchText
     }
 }
 

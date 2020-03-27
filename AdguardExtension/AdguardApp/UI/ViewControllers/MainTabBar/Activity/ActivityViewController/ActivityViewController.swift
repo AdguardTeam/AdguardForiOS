@@ -32,6 +32,7 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
+    @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet var themableButtons: [ThemableButton]!
@@ -91,17 +92,13 @@ class ActivityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateTheme()
-        
-        setupTableView()
-        
         requestsModel?.delegate = self
         statisticsModel.chartPointsChangedDelegate = self
         
+        updateTheme()
+        setupTableView()
         dateTypeChanged(dateType: periodType)
-        
         addObservers()
-        
         statisticsModel.obtainStatistics()
     }
     
@@ -221,15 +218,17 @@ class ActivityViewController: UITableViewController {
     // MARK: - Private methods
 
     private func updateTheme(){
+        tableView.reloadData()
         view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
         sectionHeaderView.backgroundColor = theme.backgroundColor
         tableHeaderView.backgroundColor = theme.backgroundColor
+        theme.setupLabel(recentActivityLabel)
         theme.setupTable(tableView)
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
         theme.setupSeparators(separators)
-        tableView.reloadData()
     }
     
     private func observeDeveloperMode(){
@@ -319,11 +318,15 @@ class ActivityViewController: UITableViewController {
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
+        refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
     }
     
     private func keyboardWillShow() {
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            let isEmpty = self?.tableView.numberOfRows(inSection: 0) == 0
+            if !isEmpty {
+                self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         }
     }
     
@@ -386,6 +389,12 @@ class ActivityViewController: UITableViewController {
         
         resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
     }
+    
+    @objc func updateTableView(sender: UIRefreshControl) {
+        dateTypeChanged(dateType: periodType)
+        statisticsModel.obtainStatistics()
+        refreshControl?.endRefreshing()
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -418,8 +427,6 @@ extension ActivityViewController: DateTypeChangedProtocol {
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
         
-        requestsModel?.obtainRecords(for: dateType)
-        
         activityModel.getCompanies(for: dateType) { (mostRequested, mostBlocked, companiesNumber) in
             DispatchQueue.main.async {[weak self] in
                 if !mostRequested.isEmpty {
@@ -439,6 +446,8 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.companiesNumber = companiesNumber
             }
         }
+        
+        requestsModel?.obtainRecords(for: dateType)
     }
 }
 
