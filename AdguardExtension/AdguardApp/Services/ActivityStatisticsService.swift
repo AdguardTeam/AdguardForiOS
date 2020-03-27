@@ -25,6 +25,7 @@ import Foundation
 
 protocol ActivityStatisticsServiceReaderProtocol {
     func getAllRecords(completion: @escaping ([ActivityStatisticsRecord]) -> ())
+    func getRecords(by type: ChartDateType, completion: @escaping ([ActivityStatisticsRecord]) -> ())
 }
 
 typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterProtocol & ActivityStatisticsServiceReaderProtocol
@@ -71,7 +72,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             guard let db = db else { return }
             
             for record in records {
-                let dateString = record.date.Iso8601YyyyMmDdFormatter()
+                let dateString = record.date.iso8601YyyyMmDdFormatter()
                 
                 let result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) VALUES(? , ?, ?, ?, ?) ON CONFLICT(timeStamp, domain) DO UPDATE SET requests = requests + ?, blocked = blocked + ?, savedData = savedData + ? WHERE timeStamp = ? and domain = ?", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData, record.requests, record.blocked, record.savedData, dateString, record.domain])
                 rollback?.pointee = ObjCBool(!result)
@@ -89,6 +90,28 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             var activityRecords = [ActivityStatisticsRecord]()
             
             if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable", withArgumentsIn: []) {
+                while resultSet.next() {
+                    if let record = ActivityStatisticsRecord(resultSet) {
+                        activityRecords.append(record)
+                    }
+                }
+                completion(activityRecords)
+            } else {
+                completion([])
+            }
+        }
+    }
+    
+    func getRecords(by type: ChartDateType, completion: @escaping ([ActivityStatisticsRecord]) -> ()) {
+        readHandler?.inTransaction{ (db, rollback) in
+            guard let db = db else { return }
+            var activityRecords = [ActivityStatisticsRecord]()
+            let intervalTime = type.getTimeInterval()
+            
+            let firstDate = intervalTime.begin.iso8601YyyyMmDdFormatter()
+            let lastDate = intervalTime.end.iso8601YyyyMmDdFormatter()
+            
+            if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable WHERE timeStamp <= ? AND timeStamp >= ? ORDER BY timeStamp DESC, domain ASC", withArgumentsIn: [firstDate, lastDate]) {
                 while resultSet.next() {
                     if let record = ActivityStatisticsRecord(resultSet) {
                         activityRecords.append(record)

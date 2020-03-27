@@ -62,7 +62,7 @@ import Foundation
     
     override func isEqual(_ object: Any?) -> Bool {
         if let object = object as? ActivityStatisticsRecord {
-            return object.date.Iso8601YyyyMmDdFormatter() == self.date.Iso8601YyyyMmDdFormatter() &&
+            return object.date.iso8601YyyyMmDdFormatter() == self.date.iso8601YyyyMmDdFormatter() &&
                 object.domain == self.domain &&
                 object.requests == self.requests &&
                 object.blocked == self.blocked &&

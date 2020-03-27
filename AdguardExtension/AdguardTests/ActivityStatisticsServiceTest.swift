@@ -19,9 +19,6 @@
 import XCTest
 
 class ActivityStatisticsServiceTest: XCTestCase {
-
-    // DB path
-    private lazy var path =  { self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
     
     let resources: AESharedResourcesProtocol = SharedResourcesMock()
     var activityStatisticsService: ActivityStatisticsServiceProtocol!
@@ -100,6 +97,36 @@ class ActivityStatisticsServiceTest: XCTestCase {
         activityStatisticsService.deleteAllRecords()
         activityStatisticsService.getAllRecords { (records) in
             XCTAssert(records.isEmpty)
+        }
+    }
+    
+    func testGetRecordsByType(){
+        let googleRecord1 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-26")!, domain: "google.com", requests: 10, blocked: 8, savedData: 20)
+        let googleRecord2 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-26")!, domain: "google.com", requests: 15, blocked: 16, savedData: 30)
+        let googleRecord3 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-24")!, domain: "google.com", requests: 20, blocked: 24, savedData: 40)
+        
+        let facebookRecord1 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-24")!, domain: "facebook.com", requests: 5, blocked: 2, savedData: 12)
+        let facebookRecord2 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-25")!, domain: "facebook.com", requests: 10, blocked: 4, savedData: 24)
+        let facebookRecord3 = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-25")!, domain: "facebook.com", requests: 15, blocked: 6, savedData: 36)
+        
+        let amazonRecord = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-26")!, domain: "amazon.com", requests: 22, blocked: 33, savedData: 44)
+        
+        let records = [googleRecord1, googleRecord2, googleRecord3, facebookRecord1, facebookRecord2, facebookRecord3, amazonRecord]
+        
+        /* Records made in the same day to the same domain will transform into one record */
+        
+        let jointGoogleRecord = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-26")!, domain: "google.com", requests: googleRecord1.requests + googleRecord2.requests, blocked: googleRecord1.blocked + googleRecord2.blocked, savedData: googleRecord1.savedData + googleRecord2.savedData)
+        
+        let jointFacebookRecord = ActivityStatisticsRecord(date: Date.dateFromIso8601("2020-03-25")!, domain: "facebook.com", requests: facebookRecord2.requests + facebookRecord3.requests, blocked: facebookRecord2.blocked + facebookRecord3.blocked, savedData: facebookRecord2.savedData + facebookRecord3.savedData)
+        
+        
+        let checkRecords = [amazonRecord, jointGoogleRecord, jointFacebookRecord, facebookRecord1, googleRecord3]
+        
+        activityStatisticsService.writeRecords(records)
+        
+        
+        activityStatisticsService.getRecords(by: .week) { (records) in
+            XCTAssertEqual(records, checkRecords)
         }
     }
 }

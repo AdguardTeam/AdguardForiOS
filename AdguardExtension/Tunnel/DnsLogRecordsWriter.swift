@@ -71,7 +71,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
         
-        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(event.domain ?? "nil") answer: \(event.answer == nil ? "nil" : "nonnil")")
+        let domain: String = event.domain.hasSuffix(".") ? String(event.domain.dropLast()) : event.domain
+        
+        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
         var status: DnsLogRecordStatus
         
@@ -110,7 +112,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
         
         let record = DnsLogRecord(
-            domain: event.domain,
+            domain: domain,
             date: date,
             elapsed: Int(event.elapsed),
             type: event.type,
@@ -127,7 +129,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             answerStatus: event.status
         )
         
-        addActivityRecord(domain: event.domain, isBlocked: recordIsBlocked)
+        addActivityRecord(domain: domain, isBlocked: recordIsBlocked)
         addRecord(record: record)
     }
     

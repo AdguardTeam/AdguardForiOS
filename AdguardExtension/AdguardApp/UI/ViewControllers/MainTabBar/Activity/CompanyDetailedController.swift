@@ -18,21 +18,18 @@
 
 import UIKit
 
-class CompanyDetailedController: UIViewController {
+class CompanyDetailedController: UITableViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var scrollContentView: UIView!
-    
     @IBOutlet weak var titleLabel: ThemableLabel!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var blockedNumberLabel: UILabel!
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableHeaderView: UIView!
+    @IBOutlet var sectionHeaderView: UIView!
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -41,26 +38,52 @@ class CompanyDetailedController: UIViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
     private var themeToken: NotificationToken?
     private var developerModeToken: NSKeyValueObservation?
+    private var keyboardShowToken: NotificationToken?
     
     // MARK: - Public variables
+    var chartDateType: ChartDateType?
+    
+    var record: CompanyRequestsRecord?
+    let requestsModel: DnsRequestLogViewModel
     
     // MARK: - Private variables
+    private var selectedRecord: DnsLogRecordExtended?
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
+    private let showDnsContainerSegueId = "showDnsContainer"
     
     //var model:
+    
+    required init?(coder: NSCoder) {
+        requestsModel = DnsRequestLogViewModel(dnsLogService: dnsLogService, dnsTrackerService: dnsTrackersService, dnsFiltersService: dnsFiltersService)
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateTheme()
-        
         setupTableView()
+        addObservers()
+        setupBackButton()
+        checkTableViewIsNotEmpty()
+        titleLabel.text = record?.key
+        
+        requestsModel.delegate = self
+        if let type = chartDateType, let domains = record?.domains {
+            requestsModel.obtainRecords(for: type, domains: domains)
+        }
+        
+        requestsNumberLabel.text = "\(record?.requests ?? 0)"
+        blockedNumberLabel.text = "\(record?.blocked ?? 0)"
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -68,6 +91,14 @@ class CompanyDetailedController: UIViewController {
         
         developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
             self?.observeDeveloperMode()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showDnsContainerSegueId {
+            if let controller = segue.destination as? DnsContainerController {
+                controller.logRecord = selectedRecord
+            }
         }
     }
     
@@ -92,16 +123,85 @@ class CompanyDetailedController: UIViewController {
         showGroupsAlert(sender)
     }
     
+    
+    // MARK: - UITableViewDataSource, UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return sectionHeaderView
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return requestsModel.records.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
+            let record = requestsModel.records[indexPath.row]
+            cell.developerMode = configuration.developerMode
+            cell.theme = theme
+            cell.record = record
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let record = requestsModel.records[indexPath.row]
+        selectedRecord = record
+        performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: - Private methods
 
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
-        scrollContentView.backgroundColor = theme.backgroundColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
         tableView.reloadData()
+    }
+    
+    private func addObservers(){
+        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
+        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
+            self?.keyboardWillShow()
+        }
+        
+        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            self?.observeDeveloperMode()
+        }
+        
+        requestsModel.recordsObserver = { [weak self] (records) in
+            DispatchQueue.main.async {[weak self] in
+                self?.tableView.reloadData()
+                self?.checkTableViewIsNotEmpty()
+            }
+        }
+    }
+    
+    private func keyboardWillShow() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     private func observeDeveloperMode(){
@@ -118,15 +218,30 @@ class CompanyDetailedController: UIViewController {
     private func showGroupsAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) { _ in
+        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel.displayedStatisticsType = .allRequests
+            if let type = self.chartDateType, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: type, domains: domains)
+            }
             alert.dismiss(animated: true, completion: nil)
         }
         
-        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) { _ in
+        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel.displayedStatisticsType = .blockedRequests
+            if let type = self.chartDateType, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: type, domains: domains)
+            }
             alert.dismiss(animated: true, completion: nil)
         }
         
-        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) { _ in
+        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel.displayedStatisticsType = .allowedRequests
+            if let type = self.chartDateType, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: type, domains: domains)
+            }
             alert.dismiss(animated: true, completion: nil)
         }
         
@@ -146,26 +261,9 @@ class CompanyDetailedController: UIViewController {
         
         present(alert, animated: true)
     }
-}
-
-// MARK: - UITableViewDataSource, UITableViewDelegate
-
-extension CompanyDetailedController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
-
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    private func checkTableViewIsNotEmpty(){
+        searchBar.isHidden = tableView.numberOfRows(inSection: 0) == 0
     }
 }
 
@@ -174,5 +272,15 @@ extension CompanyDetailedController: UITableViewDataSource, UITableViewDelegate 
 extension CompanyDetailedController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+}
+
+// MARK: - DnsRequestsDelegateProtocol
+
+extension CompanyDetailedController: DnsRequestsDelegateProtocol {
+    func requestsCleared() {
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

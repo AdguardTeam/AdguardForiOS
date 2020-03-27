@@ -42,7 +42,7 @@ extension Date {
         return dateString
     }
     
-    public func Iso8601YyyyMmDdFormatter() -> String {
+    public func iso8601YyyyMmDdFormatter() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "en_US")

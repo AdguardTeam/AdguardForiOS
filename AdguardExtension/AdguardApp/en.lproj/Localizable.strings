@@ -799,6 +799,12 @@
 /* (ActivityViewController) - Allowed only alert action */
 "allowed_only_alert_action" = "Allowed only";
 
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d requests";
+
+/* (MostActiveCompaniesController) - Blocked number label */
+"blocked_number" = "%d blocked";
+
 // MARK: - Strings for VoiceOver -
 
 // MARK: - MainTabBarController

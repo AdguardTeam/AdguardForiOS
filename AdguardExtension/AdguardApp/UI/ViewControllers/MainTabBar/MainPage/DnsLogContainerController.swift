@@ -28,6 +28,7 @@ class DnsLogContainerController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
@@ -37,11 +38,6 @@ class DnsLogContainerController: UIViewController {
     private let showDnsLogSegueId = "showDnsLogSegue"
     
     // MARK: - View Controller life cycle
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        model.obtainRecords()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

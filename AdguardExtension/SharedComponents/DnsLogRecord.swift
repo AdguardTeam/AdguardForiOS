@@ -109,6 +109,12 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(answerStatus, forKey: "answerStatus")
     }
     
+    override var debugDescription: String {
+        get {
+            return "domain: \(domain); date: \(date)"
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         self.domain = aDecoder.decodeObject(forKey: "domain") as! String
         self.date = aDecoder.decodeObject(forKey: "date") as! Date

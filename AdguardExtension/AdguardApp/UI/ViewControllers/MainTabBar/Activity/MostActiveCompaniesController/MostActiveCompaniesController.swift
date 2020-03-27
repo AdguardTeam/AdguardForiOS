@@ -38,10 +38,19 @@ class MostActiveCompaniesController: UIViewController {
     private var themeToken: NotificationToken?
     
     // MARK: - Public variables
+
+    var chartDateType: ChartDateType?
     var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
     
+    var mostRequestedCompanies: [CompanyRequestsRecord] = []
+    var mostBlockedCompanies: [CompanyRequestsRecord] = []
+    
     // MARK: - Private variables
-    private let mostActiveCompaniesCellReuseId = "MostActiveCompaniesCell"
+    
+    private var choosenRecord: CompanyRequestsRecord?
+    
+    private let mostActiveCompaniesCellReuseId = "MostActiveCompaniesCellId"
+    private let showCompanyDetailsSegueId = "showCompanyDetails"
     
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
@@ -57,6 +66,24 @@ class MostActiveCompaniesController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showCompanyDetailsSegueId {
+            if let controller = segue.destination as? CompanyDetailedController {
+                controller.record = choosenRecord
+                controller.chartDateType = chartDateType
+            }
+        }
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        let index = segmentedControl.selectedSegmentIndex
+        activeCompaniesDisplayType = ActiveCompaniesDisplayType(rawValue: index)
+        
+        tableView.reloadData()
+    }
+    
     // MARK: - Private methods
 
     private func updateTheme(){
@@ -70,14 +97,33 @@ class MostActiveCompaniesController: UIViewController {
 
 extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return activeCompaniesDisplayType == .requests ? mostRequestedCompanies.count : mostBlockedCompanies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: mostActiveCompaniesCellReuseId) as? MostActiveCompaniesCell {
+            let requestActive = activeCompaniesDisplayType == .requests
+            let record = requestActive ? mostRequestedCompanies[indexPath.row] : mostBlockedCompanies[indexPath.row]
             cell.theme = theme
+            cell.companyLabel.text = record.key
+            
+            let text = requestActive ? String(format: String.localizedString("requests_number"), record.requests) : String(format: String.localizedString("blocked_number"), record.blocked)
+            cell.requestsNumberLabel.text = text
+            
+            if indexPath.row == 0 {
+                let fontSize = cell.companyLabel.font.pointSize
+                cell.companyLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+            }
+            
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let requestActive = activeCompaniesDisplayType == .requests
+        choosenRecord = requestActive ? mostRequestedCompanies[indexPath.row] : mostBlockedCompanies[indexPath.row]
+        performSegue(withIdentifier: showCompanyDetailsSegueId, sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

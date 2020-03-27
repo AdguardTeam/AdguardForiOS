@@ -84,6 +84,7 @@ struct Tracker: Codable {
     }
     
     func getTrackerName(by domain: String) -> String? {
+        
         if let trackers = adguardTrackers, let name = getTrackerName(by: domain, dnsTrackers: trackers) {
             return name
         }

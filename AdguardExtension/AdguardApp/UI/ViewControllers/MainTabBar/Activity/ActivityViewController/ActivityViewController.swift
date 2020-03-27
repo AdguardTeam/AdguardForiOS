@@ -48,6 +48,8 @@ class ActivityViewController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -60,7 +62,7 @@ class ActivityViewController: UITableViewController {
     var requestsModel: DnsRequestLogViewModel?
     
     // MARK: - Private variables
-    
+    private let activityModel: ActivityStatisticsModelProtocol
     private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!, chartView: nil)
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
@@ -69,8 +71,22 @@ class ActivityViewController: UITableViewController {
     
     private var selectedRecord: DnsLogRecordExtended?
     private var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
+    private var mostRequestedCompanies: [CompanyRequestsRecord] = []
+    private var mostBlockedCompanies: [CompanyRequestsRecord] = []
+    private var companiesNumber = 0
+    private var periodType: ChartDateType {
+        get {
+            let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
+            return ChartDateType(rawValue: periodType) ?? .alltime
+        }
+    }
     
     // MARK: - ViewController life cycle
+    
+    required init?(coder: NSCoder) {
+        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService)
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +98,7 @@ class ActivityViewController: UITableViewController {
         requestsModel?.delegate = self
         statisticsModel.chartPointsChangedDelegate = self
         
-        let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
-        dateTypeChanged(dateType: ChartDateType(rawValue: periodType) ?? .alltime)
+        dateTypeChanged(dateType: periodType)
         
         addObservers()
         
@@ -99,6 +114,9 @@ class ActivityViewController: UITableViewController {
             controller.logRecord = selectedRecord
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.activeCompaniesDisplayType = activeCompaniesDisplayType
+            controller.mostRequestedCompanies = mostRequestedCompanies
+            controller.mostBlockedCompanies = mostBlockedCompanies
+            controller.chartDateType = periodType
         }
     }
     
@@ -163,6 +181,14 @@ class ActivityViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return sectionHeaderView
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -239,15 +265,24 @@ class ActivityViewController: UITableViewController {
     private func showGroupsAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) { _ in
+        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .allRequests
+            self.requestsModel?.obtainRecords(for: self.periodType)
             alert.dismiss(animated: true, completion: nil)
         }
         
-        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) { _ in
+        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .blockedRequests
+            self.requestsModel?.obtainRecords(for: self.periodType)
             alert.dismiss(animated: true, completion: nil)
         }
         
-        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) { _ in
+        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .allowedRequests
+            self.requestsModel?.obtainRecords(for: self.periodType)
             alert.dismiss(animated: true, completion: nil)
         }
         
@@ -287,7 +322,9 @@ class ActivityViewController: UITableViewController {
     }
     
     private func keyboardWillShow() {
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
     
     /**
@@ -327,7 +364,9 @@ class ActivityViewController: UITableViewController {
         }
         
         requestsModel?.recordsObserver = { [weak self] (records) in
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {[weak self] in
+                self?.tableView.reloadData()
+            }
         }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
@@ -378,6 +417,28 @@ extension ActivityViewController: DateTypeChangedProtocol {
         resources.sharedDefaults().set(dateType.rawValue, forKey: ActivityStatisticsPeriodType)
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
+        
+        requestsModel?.obtainRecords(for: dateType)
+        
+        activityModel.getCompanies(for: dateType) { (mostRequested, mostBlocked, companiesNumber) in
+            DispatchQueue.main.async {[weak self] in
+                if !mostRequested.isEmpty {
+                    let record = mostRequested[0]
+                    self?.mostActiveCompany.text = record.key
+                }
+                
+                if !mostBlocked.isEmpty {
+                    let record = mostBlocked[0]
+                    self?.mostBlockedCompany.text = record.key
+                }
+            
+                self?.companiesNumberLabel.text = "\(companiesNumber)"
+                
+                self?.mostRequestedCompanies = mostRequested
+                self?.mostBlockedCompanies = mostBlocked
+                self?.companiesNumber = companiesNumber
+            }
+        }
     }
 }
 

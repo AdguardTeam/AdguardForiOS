@@ -25,6 +25,7 @@ class SettingsController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
+    private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
@@ -171,6 +172,7 @@ class SettingsController: UITableViewController {
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             self?.statisticsService.clearStatistics()
+            self?.activityStatisticsService.deleteAllRecords()
         }
         
         alert.addAction(yesAction)
