@@ -272,7 +272,7 @@
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wt5-4Q-CTq" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="227.5" y="67" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="qRV-yh-0iW"/>
+                                        <constraint firstAttribute="height" constant="22" id="qRV-yh-0iW"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="blocked" image="info">
@@ -297,7 +297,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPQ-vV-fXm" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="91" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="P4s-7x-cyq"/>
+                                        <constraint firstAttribute="height" constant="22" id="P4s-7x-cyq"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="requests" image="info">
@@ -368,7 +368,7 @@
                         <segue destination="xvL-9q-qox" kind="show" identifier="showDnsContainer" id="5rO-v2-BPZ"/>
                     </connections>
                 </tableViewController>
-                <view contentMode="scaleAspectFit" ambiguous="YES" id="P5d-Vd-a5i">
+                <view contentMode="scaleAspectFit" id="P5d-Vd-a5i">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -1243,7 +1243,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKJ-8V-GJi" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="124" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="obI-Vj-BCL"/>
+                                        <constraint firstAttribute="height" constant="22" id="obI-Vj-BCL"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="requests" image="info">
@@ -1259,7 +1259,7 @@
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IJ-xy-hky" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="227.5" y="124" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="id6-lo-huE"/>
+                                        <constraint firstAttribute="height" constant="22" id="id6-lo-huE"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="blocked" image="info">
@@ -1300,7 +1300,7 @@
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yio-E8-cQV" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="20" y="206" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="zB7-Rs-CAx"/>
+                                        <constraint firstAttribute="height" constant="22" id="zB7-Rs-CAx"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="data saved" image="info">
@@ -1316,7 +1316,7 @@
                                 <button opaque="NO" tag="3" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xj3-X8-fnq" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="227.5" y="206" width="166.5" height="18"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="18" id="mao-24-uqs"/>
+                                        <constraint firstAttribute="height" constant="22" id="mao-24-uqs"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="companies" image="info">
@@ -1505,6 +1505,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="activityTitle" destination="5bV-zZ-4dr" id="OsZ-lX-RAr"/>
                         <outlet property="blockedNumberLabel" destination="iNX-Qd-Hmo" id="a5J-Gh-k13"/>
                         <outlet property="changePeriodTypeButton" destination="NcB-Aq-tH3" id="YzK-7f-91e"/>
                         <outlet property="companiesNumberLabel" destination="Jgb-st-fnO" id="ESb-HV-i8w"/>

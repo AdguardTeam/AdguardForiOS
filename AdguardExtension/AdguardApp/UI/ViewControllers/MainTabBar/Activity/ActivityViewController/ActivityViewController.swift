@@ -18,9 +18,16 @@
 
 import UIKit
 
+protocol ActivityViewControllerDelegate: class {
+    func hideTitle()
+    func showTitle()
+}
+
 class ActivityViewController: UITableViewController {
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var activityTitle: ThemableLabel!
     
     @IBOutlet weak var changePeriodTypeButton: UIButton!
     
@@ -56,13 +63,18 @@ class ActivityViewController: UITableViewController {
     
     private var themeToken: NotificationToken?
     private var keyboardShowToken: NotificationToken?
+    private var resetStatisticsToken: NotificationToken?
     private var developerModeToken: NSKeyValueObservation?
     
     // MARK: - Public variables
     
     var requestsModel: DnsRequestLogViewModel?
+    weak var delegate: ActivityViewControllerDelegate?
     
     // MARK: - Private variables
+    
+    private var titleInNavBarIsShown = false
+    
     private let activityModel: ActivityStatisticsModelProtocol
     private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!, chartView: nil)
     
@@ -213,6 +225,21 @@ class ActivityViewController: UITableViewController {
             performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > activityTitle.frame.maxY && !titleInNavBarIsShown {
+            delegate?.showTitle()
+            titleInNavBarIsShown = true
+            return
+        }
+        
+        if offset < activityTitle.frame.maxY && titleInNavBarIsShown {
+            delegate?.hideTitle()
+            titleInNavBarIsShown = false
+        }
     }
     
     // MARK: - Private methods
@@ -366,6 +393,10 @@ class ActivityViewController: UITableViewController {
             self?.observeDeveloperMode()
         }
         
+        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
+            self?.dateTypeChanged(dateType: self?.periodType ?? .alltime)
+        }
+        
         requestsModel?.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
                 self?.tableView.reloadData()
@@ -432,11 +463,15 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 if !mostRequested.isEmpty {
                     let record = mostRequested[0]
                     self?.mostActiveCompany.text = record.key
+                } else {
+                    self?.mostActiveCompany.text = ""
                 }
                 
                 if !mostBlocked.isEmpty {
                     let record = mostBlocked[0]
                     self?.mostBlockedCompany.text = record.key
+                } else {
+                    self?.mostBlockedCompany.text = ""
                 }
             
                 self?.companiesNumberLabel.text = "\(companiesNumber)"

@@ -58,6 +58,7 @@ class DnsLogContainerController: UIViewController {
         if segue.identifier == showDnsLogSegueId {
             if let vc = segue.destination as? ActivityViewController {
                 vc.requestsModel = model
+                vc.delegate = self
             }
         }
     }
@@ -85,6 +86,7 @@ class DnsLogContainerController: UIViewController {
                     self.getProContainerView.isHidden = true
                     self.systemProtectionEnablerContainerView.isHidden = false
                     self.dnsLogContainerView.isHidden = true
+                    self.hideTitle()
                 } else {
                     self.getProContainerView.isHidden = true
                     self.systemProtectionEnablerContainerView.isHidden = true
@@ -95,7 +97,28 @@ class DnsLogContainerController: UIViewController {
                 self.getProContainerView.isHidden = false
                 self.systemProtectionEnablerContainerView.isHidden = true
                 self.dnsLogContainerView.isHidden = true
+                self.hideTitle()
             }
         }
+    }
+}
+
+extension DnsLogContainerController: ActivityViewControllerDelegate {
+    func hideTitle() {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = ""
+    }
+    
+    func showTitle() {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = String.localizedString("activity_title")
     }
 }

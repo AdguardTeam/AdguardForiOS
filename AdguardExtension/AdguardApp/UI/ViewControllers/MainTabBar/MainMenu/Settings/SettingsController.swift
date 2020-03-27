@@ -173,6 +173,7 @@ class SettingsController: UITableViewController {
             alert.dismiss(animated: true, completion: nil)
             self?.statisticsService.clearStatistics()
             self?.activityStatisticsService.deleteAllRecords()
+            NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }
         
         alert.addAction(yesAction)
@@ -319,4 +320,12 @@ class SettingsController: UITableViewController {
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let resetStatistics = Notification.Name("resetStatistics")
+}
+
+@objc extension NSNotification {
+    public static let resetStatistics = Notification.Name.resetStatistics
 }

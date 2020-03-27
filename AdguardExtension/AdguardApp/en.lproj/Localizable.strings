@@ -799,6 +799,9 @@
 /* (ActivityViewController) - Allowed only alert action */
 "allowed_only_alert_action" = "Allowed only";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Activity";
+
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
 

@@ -62,6 +62,8 @@ class CompanyDetailedController: UITableViewController {
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
     
+    private var titleInNavBarIsShown = false
+    
     //var model:
     
     required init?(coder: NSCoder) {
@@ -156,6 +158,21 @@ class CompanyDetailedController: UITableViewController {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > titleLabel.frame.maxY && !titleInNavBarIsShown {
+            animateShowingTitleInNavBar()
+            titleInNavBarIsShown = true
+            return
+        }
+        
+        if offset < titleLabel.frame.maxY && titleInNavBarIsShown {
+            animateHidingTitleInNavBar()
+            titleInNavBarIsShown = false
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -273,6 +290,24 @@ class CompanyDetailedController: UITableViewController {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
         refreshControl?.endRefreshing()
+    }
+    
+    private func animateShowingTitleInNavBar() {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = record?.key
+    }
+    
+    private func animateHidingTitleInNavBar() {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = ""
     }
 }
 
