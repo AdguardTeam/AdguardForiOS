@@ -96,7 +96,10 @@ class OnboardingController: UIViewController {
     // MARK: - Actions
     
     @IBAction func closeAction(_ sender: Any) {
-        if needsShowingPremium == true && !configuration.proStatus{
+        // We mustn't show License screen for japannese in onboarding
+        let isJapanesse = Locale.current.languageCode == "ja"
+        
+        if needsShowingPremium == true && !configuration.proStatus && !isJapanesse{
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)
         } else {
             dismiss(animated: true) { [weak self] in
@@ -128,10 +131,19 @@ class OnboardingController: UIViewController {
     }
     
     private func observeContentBlockersState(){
+        // We mustn't show License screen for japannese in onboarding
+        let isJapanesse = Locale.current.languageCode == "ja"
+        
         if needsShowingPremium == true && configuration.someContentBlockersEnabled && !configuration.proStatus {
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }
-                self.performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+                if isJapanesse {
+                    self.dismiss(animated: true) {
+                        self.delegate?.onboardingDidFinish()
+                    }
+                } else {
+                    self.performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+                }
             }
         }
     }
