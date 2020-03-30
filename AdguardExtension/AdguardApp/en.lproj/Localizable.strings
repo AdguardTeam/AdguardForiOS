@@ -718,12 +718,6 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "No rule found";
 
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Tracking protection is disabled";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Enable";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Failed to send your feedback";
 

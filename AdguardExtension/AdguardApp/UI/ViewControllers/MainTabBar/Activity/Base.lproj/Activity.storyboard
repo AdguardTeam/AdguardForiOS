@@ -1626,90 +1626,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8B-h9-VeD" userLabel="EnableSystemProtectionView">
-                                <rect key="frame" x="32" y="372.66666666666669" width="350" height="106.66666666666669"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="12"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                        </variation>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wds-ct-qid" customClass="GradientButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="35" y="54.666666666666629" width="280" height="32"/>
-                                        <color key="backgroundColor" red="0.27058823529999998" green="0.70196078429999997" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        </variation>
-                                        <connections>
-                                            <segue destination="mY4-FA-RWN" kind="show" id="jfS-qU-0cJ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking protection is disabled" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="32" y="324" width="350" height="72"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYE-JT-WSH">
+                                <rect key="frame" x="107" y="428" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="wds-ct-qid" firstAttribute="width" secondItem="C8B-h9-VeD" secondAttribute="width" multiplier="0.8" id="5Ef-Mz-ZQL"/>
-                                    <constraint firstItem="wds-ct-qid" firstAttribute="centerX" secondItem="C8B-h9-VeD" secondAttribute="centerX" id="6Eb-Tz-JM0"/>
-                                    <constraint firstAttribute="bottom" secondItem="wds-ct-qid" secondAttribute="bottom" constant="20" symbolic="YES" id="CAs-a3-7rg"/>
-                                    <constraint firstAttribute="trailing" secondItem="X1F-2p-Xpe" secondAttribute="trailing" id="EAG-0c-2SP"/>
-                                    <constraint firstItem="X1F-2p-Xpe" firstAttribute="top" secondItem="C8B-h9-VeD" secondAttribute="top" id="PBj-IL-sMA"/>
-                                    <constraint firstItem="wds-ct-qid" firstAttribute="height" secondItem="C8B-h9-VeD" secondAttribute="height" multiplier="0.3" id="baE-Rm-eT8"/>
-                                    <constraint firstItem="wds-ct-qid" firstAttribute="top" secondItem="X1F-2p-Xpe" secondAttribute="bottom" constant="32" id="fKF-kE-5H5">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                                    <constraint firstAttribute="width" constant="200" id="9YM-Id-ofF">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="400"/>
                                     </constraint>
-                                    <constraint firstItem="X1F-2p-Xpe" firstAttribute="leading" secondItem="C8B-h9-VeD" secondAttribute="leading" id="pX4-y1-bKk"/>
+                                    <constraint firstAttribute="height" constant="40" id="kzo-UZ-arR">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
+                                <state key="normal" title="ENABLE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="mY4-FA-RWN" kind="show" id="yQg-Bm-VqF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="C8B-h9-VeD" secondAttribute="trailing" constant="32" id="BWL-IG-Vi9"/>
-                            <constraint firstItem="C8B-h9-VeD" firstAttribute="centerY" secondItem="PPf-Px-lBj" secondAttribute="centerY" id="BbT-mb-Dsh"/>
-                            <constraint firstItem="C8B-h9-VeD" firstAttribute="width" secondItem="PPf-Px-lBj" secondAttribute="width" multiplier="0.5" id="jkw-Ng-e7E"/>
-                            <constraint firstItem="C8B-h9-VeD" firstAttribute="centerX" secondItem="PPf-Px-lBj" secondAttribute="centerX" id="lBe-eV-hdH"/>
-                            <constraint firstItem="C8B-h9-VeD" firstAttribute="leading" secondItem="PPf-Px-lBj" secondAttribute="leading" constant="32" id="n6N-0K-q5J"/>
+                            <constraint firstItem="XYE-JT-WSH" firstAttribute="centerX" secondItem="o9W-dK-wP7" secondAttribute="centerX" id="2IT-a1-9Tq"/>
+                            <constraint firstItem="XYE-JT-WSH" firstAttribute="top" secondItem="X1F-2p-Xpe" secondAttribute="bottom" constant="32" id="6Xf-9S-t08">
+                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                            </constraint>
+                            <constraint firstItem="X1F-2p-Xpe" firstAttribute="leading" secondItem="PPf-Px-lBj" secondAttribute="leading" constant="32" id="DbF-L9-poL"/>
+                            <constraint firstItem="XYE-JT-WSH" firstAttribute="centerY" secondItem="o9W-dK-wP7" secondAttribute="centerY" id="Jds-AT-ScS"/>
+                            <constraint firstAttribute="trailing" secondItem="X1F-2p-Xpe" secondAttribute="trailing" constant="32" id="v9E-a1-dok"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="o9W-dK-wP7"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="BWL-IG-Vi9"/>
-                                <exclude reference="jkw-Ng-e7E"/>
-                                <exclude reference="lBe-eV-hdH"/>
-                                <exclude reference="n6N-0K-q5J"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="BWL-IG-Vi9"/>
-                                <include reference="n6N-0K-q5J"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="jkw-Ng-e7E"/>
-                                <include reference="lBe-eV-hdH"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="enableButton" destination="wds-ct-qid" id="gdD-XU-Wql"/>
+                        <outlet property="enableButton" destination="XYE-JT-WSH" id="xPO-Vy-U1h"/>
                         <outlet property="titleLabel" destination="X1F-2p-Xpe" id="TOM-US-Lrn"/>
                     </connections>
                 </viewController>
