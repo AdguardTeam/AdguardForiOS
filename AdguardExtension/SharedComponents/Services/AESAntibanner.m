@@ -1373,6 +1373,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 #endif
             
             // Notifying to all, that filter rules may be obtained
+            // todo: check it is realy needed
             if (!serviceReady){
                 
                 serviceReady = YES;

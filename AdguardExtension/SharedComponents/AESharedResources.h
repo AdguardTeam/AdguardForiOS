@@ -305,6 +305,11 @@ extern NSString* _Nonnull AEComplexProtectionEnabled;
  */
 extern NSString* _Nonnull OnboardingWasShown;
 
+/**
+ User defaults key, which defines background fetch state
+ */
+extern NSString* _Nonnull BackgroundFetchStateKey;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -402,6 +407,7 @@ extern NSString* _Nonnull OnboardingWasShown;
 @property BOOL safariProtectionEnabled;
 
 @property BOOL systemProtectionEnabled;
+
 
 @end
 
