@@ -105,20 +105,10 @@ class DnsLogContainerController: UIViewController {
 
 extension DnsLogContainerController: ActivityViewControllerDelegate {
     func hideTitle() {
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.3
-        fadeTextAnimation.type = .fade
-
-        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
-        navigationItem.title = ""
+        animateHidingTitleInNavBar()
     }
     
     func showTitle() {
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.3
-        fadeTextAnimation.type = .fade
-
-        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
-        navigationItem.title = String.localizedString("activity_title")
+        animateShowingTitleInNavBar(String.localizedString("activity_title"))
     }
 }

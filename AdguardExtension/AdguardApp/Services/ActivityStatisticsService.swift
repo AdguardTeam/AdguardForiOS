@@ -18,6 +18,8 @@
 
 import Foundation
 
+// Protocols are devided not to mark all of them as @objc
+
 @objc protocol ActivityStatisticsServiceWriterProtocol {
     func writeRecords(_ records: [ActivityStatisticsRecord])
     func deleteAllRecords()

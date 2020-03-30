@@ -164,7 +164,7 @@ class CompanyDetailedController: UITableViewController {
         let offset = scrollView.contentOffset.y
         
         if offset > titleLabel.frame.maxY && !titleInNavBarIsShown {
-            animateShowingTitleInNavBar()
+            animateShowingTitleInNavBar(record?.key)
             titleInNavBarIsShown = true
             return
         }
@@ -290,24 +290,6 @@ class CompanyDetailedController: UITableViewController {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
         refreshControl?.endRefreshing()
-    }
-    
-    private func animateShowingTitleInNavBar() {
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.3
-        fadeTextAnimation.type = .fade
-
-        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
-        navigationItem.title = record?.key
-    }
-    
-    private func animateHidingTitleInNavBar() {
-        let fadeTextAnimation = CATransition()
-        fadeTextAnimation.duration = 0.3
-        fadeTextAnimation.type = .fade
-
-        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
-        navigationItem.title = ""
     }
 }
 
