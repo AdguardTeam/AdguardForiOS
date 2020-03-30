@@ -1,9 +1,9 @@
 !
 ! Title: Basic Tracking protection
 ! Description: This list blocks the most popular tracking domains.
-! Homepage: https://github.com/AdguardTeam/AdguardSDNSFilter
+! Homepage: https://adguard.com/
 ! License: https://github.com/AdguardTeam/AdguardSDNSFilter/blob/master/LICENSE
-! Last modified: 2020-03-13T14:30:07.015Z
+! Last modified: 2020-03-30T09:30:04.798Z
 !
 ! Compiled by @adguard/hostlist-compiler v1.0.7
 !
@@ -495,7 +495,6 @@
 ||io.narrative.io^
 ||iocnt.net^
 ||ios.bugly.qq.com^
-||ipinfo.info^
 ||ipstack.com^
 ||ironbeast.io^
 ||irqs.ioam.de^

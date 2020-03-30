@@ -1,9 +1,9 @@
 !
 ! Title: Facebook tracking domains
 ! Description: This list blocks all known Facebook tracking domains.
-! Homepage: https://github.com/AdguardTeam/AdguardSDNSFilter
+! Homepage: https://adguard.com/
 ! License: https://github.com/AdguardTeam/AdguardSDNSFilter/blob/master/LICENSE
-! Last modified: 2020-03-13T14:30:08.535Z
+! Last modified: 2020-03-30T09:30:06.814Z
 !
 ! Compiled by @adguard/hostlist-compiler v1.0.7
 !
@@ -12,3 +12,4 @@
 ! Source: src/facebook/facebook.txt
 !
 ||graph.facebook.com^
+||connect.facebook.net^
