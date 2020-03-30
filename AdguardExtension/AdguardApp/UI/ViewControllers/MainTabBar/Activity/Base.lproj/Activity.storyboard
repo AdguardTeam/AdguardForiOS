@@ -132,6 +132,7 @@
                                     <segment title="Requests"/>
                                     <segment title="Blocked"/>
                                 </segments>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="segmentedControlChanged:" destination="d7M-Oi-Bgo" eventType="valueChanged" id="NED-yw-9ag"/>
                                 </connections>
@@ -275,7 +276,7 @@
                                         <constraint firstAttribute="height" constant="22" id="qRV-yh-0iW"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="blocked" image="info">
+                                    <state key="normal" title="blocked" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -300,7 +301,7 @@
                                         <constraint firstAttribute="height" constant="22" id="P4s-7x-cyq"/>
                                     </constraints>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="requests" image="info">
+                                    <state key="normal" title="requests" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1253,8 +1254,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="obI-Vj-BCL"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="requests" image="info">
+                                    <state key="normal" title="requests" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1269,8 +1271,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="id6-lo-huE"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="blocked" image="info">
+                                    <state key="normal" title="blocked" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1310,8 +1313,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="zB7-Rs-CAx"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="data saved" image="info">
+                                    <state key="normal" title="data saved" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1326,8 +1330,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="mao-24-uqs"/>
                                     </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="companies" image="info">
+                                    <state key="normal" title="companies" image="ad_info">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -1704,15 +1709,15 @@
     <resources>
         <image name="Triangle down" width="20" height="10"/>
         <image name="Triangle up" width="20" height="10"/>
+        <image name="ad_info" width="14" height="14"/>
         <image name="arrow_down" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="bullet" width="24" height="24"/>
         <image name="bulletnone" width="24" height="24"/>
         <image name="group" width="24" height="24"/>
-        <image name="info" width="14" height="14"/>
         <image name="options" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ecv-Kh-Q3v"/>
+        <segue reference="5rO-v2-BPZ"/>
     </inferredMetricsTieBreakers>
 </document>

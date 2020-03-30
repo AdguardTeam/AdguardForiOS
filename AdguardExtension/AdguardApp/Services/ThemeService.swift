@@ -339,6 +339,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         segmentedControl.backgroundColor = notificationWindowColor
         let textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+        segmentedControl.tintColor = textColor
         if #available(iOS 13.0, *) {
             segmentedControl.selectedSegmentTintColor = backgroundColor
         }
