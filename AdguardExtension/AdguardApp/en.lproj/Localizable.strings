@@ -793,6 +793,9 @@
 /* (ActivityViewController) - Allowed only alert action */
 "allowed_only_alert_action" = "Allowed only";
 
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "None";
+
 /* (DnsLogContainerController) - Activity title */
 "activity_title" = "Activity";
 

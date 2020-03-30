@@ -36,6 +36,12 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
     
+    @IBOutlet var mostActiveGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var mostBlockedGestureRecognizer: UITapGestureRecognizer!
+    
+    @IBOutlet weak var mostActiveView: UIView!
+    @IBOutlet weak var mostBlockedView: UIView!
+    
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
@@ -461,17 +467,25 @@ extension ActivityViewController: DateTypeChangedProtocol {
         activityModel.getCompanies(for: dateType) { (mostRequested, mostBlocked, companiesNumber) in
             DispatchQueue.main.async {[weak self] in
                 if !mostRequested.isEmpty {
+                    self?.mostActiveView.alpha = 1.0
+                    self?.mostActiveGestureRecognizer.isEnabled = true
                     let record = mostRequested[0]
                     self?.mostActiveCompany.text = record.key
                 } else {
-                    self?.mostActiveCompany.text = ""
+                    self?.mostActiveView.alpha = 0.5
+                    self?.mostActiveGestureRecognizer.isEnabled = false
+                    self?.mostActiveCompany.text = String.localizedString("none_message")
                 }
                 
                 if !mostBlocked.isEmpty {
+                    self?.mostBlockedView.alpha = 1.0
+                    self?.mostBlockedGestureRecognizer.isEnabled = true
                     let record = mostBlocked[0]
                     self?.mostBlockedCompany.text = record.key
                 } else {
-                    self?.mostBlockedCompany.text = ""
+                    self?.mostBlockedView.alpha = 0.5
+                    self?.mostBlockedGestureRecognizer.isEnabled = false
+                    self?.mostBlockedCompany.text = String.localizedString("none_message")
                 }
             
                 self?.companiesNumberLabel.text = "\(companiesNumber)"
