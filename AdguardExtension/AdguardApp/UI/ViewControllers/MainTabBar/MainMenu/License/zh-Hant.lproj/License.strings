@@ -1,6 +1,3 @@
-/* Class = "UINavigationItem"; title = "AdGuard Premium"; ObjectID = "0Zf-Ng-gYi"; */
-"0Zf-Ng-gYi.title" = "AdGuard 高級版";
-
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "來自驗證應用程式的代碼：";
 
@@ -10,11 +7,14 @@
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
 "70b-CS-wqh.title" = "登出";
 
+/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "所有的高級版功能為可用的";
+
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "設定您自己的規則";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "電子郵件地址：";
+"LJj-cc-Ko5.text" = "電子郵件位址：";
 
 /* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
 "NlM-RH-NgY.text" = "封鎖更多的廣告 & 追蹤器";
@@ -40,8 +40,11 @@
 /* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "全系統範圍的追蹤防護";
 
-/* Class = "UILabel"; text = "System protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "系統防護";
+/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "追蹤防護";
+
+/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "高級版為已啟動的";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "回復購買";

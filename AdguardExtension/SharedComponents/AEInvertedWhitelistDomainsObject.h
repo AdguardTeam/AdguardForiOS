@@ -49,7 +49,7 @@
 - (void) addDomain:(nonnull NSString *)domain;
 
 /**
- list of domains
+ list of rules
  */
 @property (nonatomic, nonnull) NSArray<ASDFilterRule*> *rules;
 

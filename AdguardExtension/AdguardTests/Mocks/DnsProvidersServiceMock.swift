@@ -19,6 +19,8 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    func reset() { }
+    
     var allProviders: [DnsProviderInfo] = []
     
     var predefinedProviders: [DnsProviderInfo] = []

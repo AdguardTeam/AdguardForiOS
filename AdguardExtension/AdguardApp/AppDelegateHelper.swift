@@ -53,6 +53,7 @@ class AppDelegateHelper: NSObject {
     
     // MARK: String Constants
     private let openSystemProtection = "systemProtection"
+    private let openComplexProtection = "complexProtection"
     
     private var firstRun: Bool {
         get {
@@ -195,7 +196,10 @@ class AppDelegateHelper: NSObject {
             
             self.dnsFiltersService.reset()
             
-            self.configuration.reset()
+            self.appDelegate.setAppInterfaceStyle()
+            
+            let providersService: DnsProvidersService = ServiceLocator.shared.getService()!
+            providersService.reset()
             
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}
@@ -238,7 +242,7 @@ class AppDelegateHelper: NSObject {
 
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection {
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection {
             appDelegate.window.rootViewController = launchScreenController
         }
         
@@ -247,7 +251,9 @@ class AppDelegateHelper: NSObject {
 
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             // Adding new user rule from safari
-            if url.scheme == AE_URLSCHEME && command == AE_URLSCHEME_COMMAND_ADD {
+            switch(url.scheme, command) {
+           
+            case (AE_URLSCHEME, AE_URLSCHEME_COMMAND_ADD) :
                 antibannerController.onReady { (antibanner) in
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
@@ -273,10 +279,9 @@ class AppDelegateHelper: NSObject {
                         self.appDelegate.window.rootViewController = tab
                     }
                 }
-            }
             
             // Turning on/off Tracking protection from widget
-            if url.scheme == AE_URLSCHEME && command == openSystemProtection {
+            case (AE_URLSCHEME, openSystemProtection):
                 let suffix = String(url.path.suffix(url.path.count - 1))
                 let parameters = suffix.split(separator: "/")
                 
@@ -292,7 +297,32 @@ class AppDelegateHelper: NSObject {
                 
                 tab.selectedViewController = navController
                 self.appDelegate.window.rootViewController = tab
+            
+            case (AE_URLSCHEME, openComplexProtection):
+             
+                guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
+                
+                let suffix = String(url.path.suffix(url.path.count - 1))
+                let parameters = suffix.split(separator: "/")
+                
+                let enabledString = String(parameters.first ?? "")
+                let enabled = enabledString == "on"
+                
+                let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+                guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
+                
+                mainPageController.stateFromWidget = enabled
+                
+                mainTabNavController.viewControllers = [mainPageController]
+                
+                tab.selectedViewController = mainTabNavController
+                self.appDelegate.window.rootViewController = tab
+                
+            default:
+                break
             }
+                
+            
         } else {
             DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
         }

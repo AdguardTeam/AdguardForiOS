@@ -1,20 +1,2 @@
-/* Class = "UILabel"; text = "Manage License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
-"5Xe-d5-8tj.text" = "Gestire Licenza";
-
-/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
-"8KQ-Ga-zhs.text" = "Ringraziamenti";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
 "CqW-k3-vqO.title" = "Accedi";
-
-/* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
-"KkR-EM-giI.text" = "Forum";
-
-/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "Video Tutorial";
-
-/* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
-"ncc-Hk-ota.title" = "Informazioni";
-
-/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "Sito web di sviluppatore";

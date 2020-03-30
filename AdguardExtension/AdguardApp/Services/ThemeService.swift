@@ -248,8 +248,16 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupSearchBar(_ searchBar: UISearchBar) {
         let textField = searchBar.value(forKey: "searchField") as? UITextField
-        textField?.textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
-        searchBar.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        let textFieldColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        
+        textField?.textColor = textFieldColor
+        searchBar.tintColor = textFieldColor
+        
+        if let iconView = textField?.leftView as? UIImageView {
+            iconView.tintColor = textFieldColor
+        }
+        
+        textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
         
         if let iconView = textField?.leftView as? UIImageView {
             iconView.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")

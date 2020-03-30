@@ -40,6 +40,8 @@ protocol DnsProvidersServiceProtocol {
     func isCustomProvider(_ provider: DnsProviderInfo)->Bool
     func isCustomServer(_ server: DnsServerInfo)->Bool
     func isActiveProvider(_ provider: DnsProviderInfo)->Bool
+    
+    func reset()
 }
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
@@ -54,6 +56,11 @@ protocol DnsProvidersServiceProtocol {
     
     @objc init(resources: AESharedResourcesProtocol) {
         self.resources = resources
+        
+        // migration:
+        // in app version 3.1.4 and below we mistakenly used the name Adguard.DnsProviderInfo with namespace
+        // now we use DnsProviderInfo
+        NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
     }
     
     @objc var predefinedProviders: [DnsProviderInfo] {
@@ -204,6 +211,10 @@ protocol DnsProvidersServiceProtocol {
         
         let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
         return "\(provider?.name ?? server.name) (\(protocolName))"
+    }
+    
+    func reset() {
+        customProvidersInternal = nil
     }
     
     // MARK: - private methods

@@ -86,6 +86,7 @@ class RequestsBlockingController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
         theme.setupTableCell(cell)
         return cell
     }

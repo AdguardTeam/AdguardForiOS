@@ -26,7 +26,6 @@ protocol DnsFiltersModelProtocol {
     
     func setFilter(index: Int, enabled: Bool)
     func addFilter(_ filter: DnsFilter, data: Data?) -> Bool
-    func deleteFilter(_ filter: DnsFilter)
     func searchFilter(by string: String?)
     func updateFilters()
 }
@@ -68,17 +67,8 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
         
         allFilters.append(filter)
         filtersService.addFilter(filter, data: data)
+        delegate?.filtersChanged()
         return false
-    }
-    
-    func deleteFilter(_ filter: DnsFilter) {
-        filtersService.deleteFilter(filter)
-        for (i, fil) in filters.enumerated() {
-            if fil.id == filter.id {
-                allFilters.remove(at: i)
-                return
-            }
-        }
     }
     
     func setFilter(index: Int, enabled: Bool) {
@@ -88,6 +78,7 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     
     func updateFilters(){
         allFilters = filtersService.filters
+        delegate?.filtersChanged()
     }
     
     func searchFilter(by string: String?) {

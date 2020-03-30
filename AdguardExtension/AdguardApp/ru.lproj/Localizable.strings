@@ -29,7 +29,7 @@
 "common_action_no" = "НЕТ";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Белый список (инвертированный)";
+"inverted_whitelist_title" = "Белый список (инвертирован)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Сохранение изменений...";
@@ -51,9 +51,6 @@
 
 /* (MainPageController) Text for "try for free" button */
 "try_for_free_main" = "Попробовать бесплатно";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Белый список";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательские правила";
@@ -133,13 +130,13 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Введите доменные имена, разделенные разрывом строки. AdGuard откроет доступ к этим доменам.";
 
-/* (UserFilterController) dns blacklist description */
+/* (UserFilterController) dns blocklist description */
 "dns_blacklist_text_format" = "Черный список поддерживает <a href=\"%@\">DNS-синтаксис AdGuard</a>. Введите правила, разделенные разрывом строки. AdGuard заблокирует все подключения к доменам, которые подходят под эти правила.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Обновление...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Добавить правило";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -162,6 +159,12 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Название:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "Оценить приложение";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "Отправить отзыв";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Пропущенная реклама";
@@ -251,10 +254,10 @@
 "dns_provider_safe_search_summary" = "Когда это возможно, безопасный поиск применяется в браузерах";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Блокирует рекламу и системы отслеживания";
+"dns_provider_ad_blocking_summary" = "Блокирует системы отслеживания";
 
-/* MainMenuController - System DNS Title, when a server is not selected */
-"system_dns_server" = "Системный DNS";
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Без шифрования (Системный DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Включено %1$d из %2$d";
@@ -404,7 +407,7 @@
 "wifi_exceptions_title" = "Сети-исключения";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Защита системы не будет работать для сетей Wi-Fi, перечисленных ниже";
+"wifi_exceptions_description" = "Защита от трекинга не будет работать для сетей Wi-Fi, перечисленных ниже";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Добавить исключение";
@@ -416,15 +419,18 @@
 "filter_wifi_title" = "Фильтровать Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Защита системы при передаче данных через мобильную сеть";
+"mobile_data_description" = "Защита от трекинга при передаче данных через мобильную сеть";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Защита системы при использовании Wi-Fi";
+"wifi_data_description" = "Защита от трекинга при использовании Wi-Fi";
 
-/* (ListOfRulesModel) title for dns and safari white list*/
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Белый список";
+
+/* (ListOfRulesModel) title safari Allowlist */
 "whitelist_title" = "Белый список";
 
-/* (ListOfRulesModel) title for dns black list */
+/* (ListOfRulesModel) title for dns block list */
 "dns_blacklist_title" = "Черный список";
 
 /* (ListOfRulesModel) title for safari user filter */
@@ -445,16 +451,16 @@
 /* "Disabled" title */
 "disabled" = "Отключено";
 
-/*(LogRecord) "REMOVE FROM WHITELIST" button title */
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
 "remove_from_whitelist" = "УДАЛИТЬ ИЗ БЕЛОГО СПИСКА";
 
-/*(LogRecord) "REMOVE FROM BLACKLIST" button title */
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "УДАЛИТЬ ИЗ ЧЕРНОГО СПИСКА";
 
-/*(LogRecord) "ADD TO WHITELIST" button title */
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
 "add_to_whitelist" = "ДОБАВИТЬ В БЕЛЫЙ СПИСОК";
 
-/*(LogRecord) "ADD TO BLACKLIST" button title */
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "ДОБАВИТЬ В ЧЕРНЫЙ СПИСОК";
 
 /*(GroupsController) Security description without premium  */
@@ -524,7 +530,7 @@
 "add_new_rule" = "Добавить новое правило";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Все настройки, включая пользовательские правила, защиту системы, интерфейс и настройки авторизации, будут сброшены. Это действие нельзя отменить. Сбросить настройки?";
+"confirm_reset_text" = "Все настройки, включая пользовательские правила, защиту от трекинга, интерфейс и настройки авторизации, будут сброшены. Это действие нельзя отменить. Сбросить настройки?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Сбросить лог активности";
@@ -569,7 +575,7 @@
 "protection_enabled" = "Защита включена";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Фильтрация Safari + Системная защита";
+"complex_enabled" = "Фильтрация Safari и Защита от трекинга";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Блокировка контента в Safari";
@@ -577,8 +583,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Все модули защиты выключены";
 
-/*(TodayViewController) System protection is enabled text  */
-"system_enabled" = "Системная защита";
+/*(TodayViewController) Tracking protection is enabled text  */
+"system_enabled" = "Защита от трекинга";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d запросов, %2$d заблокировано";
@@ -592,38 +598,35 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Вы попытались добавить дублирующийся фильтр. Этот фильтр уже есть в списке.";
 
-/*(DnsProvidersController) action title for the case when changes of dns protocols are not applied  */
-"changes_not_applied" = "Изменения не были сохранены";
-
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблокирован";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Обработан";
+"dns_request_status_processed" = "Разрешен";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "В белом списке";
+"dns_request_status_whitelisted" = "Разрешен";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "добавлен в Белый список";
+"dns_request_user_status_added_to_whitelist" = "добавлен в белый список";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "добавлен в Черный список";
+"dns_request_user_status_added_to_blacklist" = "добавлен в черный список";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "удален из Белого списка";
+"dns_request_user_status_removed_from_whitelist" = "удален из белого списка";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "удален из Черного списка";
+"dns_request_user_status_removed_from_blacklist" = "удален из черного списка";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Открыть %@ <b>настройки</b>";
+"onboarding_first_step_text" = "Открыть  <b>настройки</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Нажмите на %@ <b>Safari</b> и выберите раздел меню <b>\"Блокировщики контента\"</b>";
+"onboarding_second_step_text" = "Нажмите на <b>Safari</b> и выберите раздел <b>\"Блокировщики контента\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Включите %@ все блокировщики контента</b> и возвращайтесь в приложение!";
+"onboarding_third_step_text" = "<b>Включите все блокировщики контента</b> и возвращайтесь в приложение!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Системный DNS";
@@ -634,8 +637,8 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Заблокировать запрос";
 
-/* (BlockRequestController) Whitelist request title */
-"whitelist_request" = "Добавить запрос в Белый список";
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Добавить домен в белый список";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Видеоинструкция";
@@ -649,8 +652,8 @@
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_whitelist" = "Общий белый список";
 
-/* (DnsRequestDetailsController) "Tracker details" title for section header */
-"tracker_details_header" = "Информация о трекере";
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Детали";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Общие";
@@ -715,8 +718,115 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "Правило не найдено";
 
-/* (SystemProtectionEnablerController) - System protection is disabled title */
-"protection_enabler_title" = "Системная защита отключена";
+/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
+"protection_enabler_title" = "Защита от трекинга отключена";
 
 /* (SystemProtectionEnablerController) - Enable title */
 "protection_enabler_button" = "Включить";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Не удалось отправить ваш отзыв";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Что-то пошло не так";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Продолжая использование, вы принимаете <br /><a href=%2$@>Положения и условия</a> и <a href=%1$@>Политику конфиденциальности</a>";
+
+/* (DnsFiltersService) - Basic Tracking protection filter title */
+"basic_filter_title" = "Базовая защита";
+
+/* (DnsFiltersService) - Basic Tracking protection filter description */
+"basic_filter_description" = "Блокирует наиболее распространенные отслеживающие домены.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter title */
+"strict_filter_title" = "Усиленная защита";
+
+/* (DnsFiltersService) - Strict Tracking protection filter description */
+"strict_filter_description" = "Блокирует все известные трекеры.";
+
+/* (DnsFiltersService) - Strict Tracking protection filter important description */
+"strict_filter_important_description" = "Может нарушить работу некоторых сайтов.";
+
+/* (DnsFiltersService) - Google tracking domains filter title */
+"google_filter_title" = "Блокировать трекеры Google";
+
+/* (DnsFiltersService) - Google tracking domains filter description */
+"google_filter_description" = "Обезвреживает все известные отслеживающие домены Google.";
+
+/* (DnsFiltersService) - Google tracking domains filter important description */
+"google_filter_important_description" = "Может препятствовать работе приложений и сайтов, которые используют Google API.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter title */
+"facebook_filter_title" = "Блокировать трекеры Facebook";
+
+/* (DnsFiltersService) - Facebook tracking domains description */
+"facebook_filter_description" = "Обезвреживает все известные отслеживающие домены Facebook.";
+
+/* (DnsFiltersService) - Facebook tracking domains filter important description */
+"facebook_filter_important_description" = "Может препятствовать работе приложений и сайтов, которые используют Facebook API.";
+
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Главный экран";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Экран защиты";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Экран активности";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Экран настроек";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Защита Safari включена";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Защита Safari отключена";
+
+/* (MainPageController) tracking protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Защита от трекинга включена";
+
+/* (MainPageController) tracking protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Защита от трекинга отключена";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Обновить фильтры";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Количество запросов";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"blocked_number_voiceover" = "Количество заблокированных запросов";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"saved_data_voiceover" = "Cэкономлено трафика";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Включить защиту от трекинга";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Выберите ваш тип подписки";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Введите ваш адрес электронной почты";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Введите ваш пароль";

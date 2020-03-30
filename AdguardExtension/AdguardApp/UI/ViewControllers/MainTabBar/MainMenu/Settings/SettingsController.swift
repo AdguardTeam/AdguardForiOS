@@ -254,12 +254,13 @@ class SettingsController: UITableViewController {
         theme.setupSwitch(wifiUpdateSwitch)
         theme.setupSwitch(invertedSwitch)
         DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
+            self?.tableView.reloadData()
+            self?.updateUI()
         }
     }
     
     private func updateUI() {
+        themeButtons.forEach({ $0.isSelected = false })
         switch configuration.userThemeMode {
         case AESystemDefaultThemeMode:
             themeButtons[systemDefault].isSelected = true

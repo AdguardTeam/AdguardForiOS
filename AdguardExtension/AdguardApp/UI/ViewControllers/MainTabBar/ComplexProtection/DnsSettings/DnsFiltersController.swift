@@ -252,7 +252,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
             if isAlreadyAdded {
                 ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("filter_exists"))
             }
-            self.tableView.reloadData()
         }
     }
 

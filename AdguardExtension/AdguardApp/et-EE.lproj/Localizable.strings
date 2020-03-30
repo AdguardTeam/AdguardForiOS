@@ -22,17 +22,8 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtreid ei õnnestu Safarisse laadida. Selle tõttu ei rakendatud sinu muudatusi.";
 
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtreid ei õnnestu Safarisse laadida. Proovi oma reegleid ja valget listi puhastada. Lisaks vaata üle kasutatavad filtrid.";
-
 /* NO Button caption in alert */
 "common_action_no" = "EI";
-
-/* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Valges listis (pööratud)";
-
-/* Main Menu Controller - Whitelist cell caption and Whitelist Screen - Title */
-"whitelist_title" = "Valge list";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kasutaja reeglid";
@@ -112,7 +103,7 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Uuendamine...";
 
-/* (UserFilterController) add blacklist rule button title */
+/* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Lisa reegel";
 
 /* (UserFilterController) add whitelist domain button title */
@@ -216,9 +207,6 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Kui võimalik, jõustatakse brauserites Turvalist otsingut";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokeerib reklaame ja jälitajaid";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Sisselülitatud %1$d & %2$d -st";

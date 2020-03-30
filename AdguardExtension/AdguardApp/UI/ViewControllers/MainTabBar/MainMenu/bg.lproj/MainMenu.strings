@@ -1,14 +1,8 @@
-/* Class = "UINavigationItem"; title = "Menu"; ObjectID = "62j-Ib-Td5"; Note = "Main Menu header"; */
-"62j-Ib-Td5.title" = "Настройки";
-
 /* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Изпратете ни Вашето мнение";
 
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Помогнете ни да подобрим AdGuard";
-
-/* Class = "UILabel"; text = "Settings"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
-"L2l-pO-K3q.text" = "Общи";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Какво е AdGuard?";

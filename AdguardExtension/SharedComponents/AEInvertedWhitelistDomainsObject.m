@@ -46,6 +46,25 @@
     return @"@@||*$document,domain=";
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    // migration 3.1.4 -> 4.0.0
+    // in old versions we store "domains", now we store "rules"
+    NSArray<NSString*> *domains = [aDecoder decodeObjectForKey:@"domains"];
+    if (domains != nil) {
+        NSMutableArray<ASDFilterRule*> *rules = [NSMutableArray new];
+        for (NSString* domain in domains) {
+            [rules addObject:[[ASDFilterRule alloc] initWithText:domain enabled:YES]];
+        }
+        self.rules = [rules copy];
+    }
+    
+    _rule = [self ruleFromRules:self.rules];
+
+    return self;
+}
+
 - (ASDFilterRule*) ruleFromRules:(NSArray<ASDFilterRule*>*) rules {
     
     NSMutableString* ruleString = [[self rulePrefix] mutableCopy];

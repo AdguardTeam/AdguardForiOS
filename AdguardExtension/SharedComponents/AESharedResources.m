@@ -434,7 +434,7 @@ NSString *OnboardingWasShown = @"OnboardingWasShown";
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
-                if ([locker lock]) {
+                if ([locker waitLock]) {
                     
                     NSData *data = [NSData dataWithContentsOfURL:dataUrl];
                     

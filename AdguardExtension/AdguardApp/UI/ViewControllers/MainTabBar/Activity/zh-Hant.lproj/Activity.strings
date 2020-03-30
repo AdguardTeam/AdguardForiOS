@@ -21,7 +21,13 @@
 "hoI-YR-JcD.normalTitle" = "返回";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
-"kwZ-Kw-f1R.text" = "封鎖請求";
+"kwZ-Kw-f1R.text" = "封鎖該請求";
 
 /* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
 "pqA-7I-Vrx.title" = "活動";
+
+/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "選擇網域層級";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
+"y8j-ib-ZgR.text" = "封鎖該請求";

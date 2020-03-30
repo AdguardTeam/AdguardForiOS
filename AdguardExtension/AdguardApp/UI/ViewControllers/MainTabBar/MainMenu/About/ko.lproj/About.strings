@@ -1,20 +1,17 @@
-/* Class = "UILabel"; text = "Manage License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
-"5Xe-d5-8tj.text" = "라이선스 관리";
-
-/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
-"8KQ-Ga-zhs.text" = "감사의 말";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
 "CqW-k3-vqO.title" = "로그인";
 
-/* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
-"KkR-EM-giI.text" = "포럼";
+/* Class = "UILabel"; text = "Manage License"; ObjectID = "K2a-tW-P6P"; */
+"K2a-tW-P6P.text" = "라이선스 관리";
 
-/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "비디오 튜토리얼";
+/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
+"RqV-y2-sfF.text" = "비디오 튜토리얼";
 
-/* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
-"ncc-Hk-ota.title" = "정보";
+/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "SJc-cd-hKd"; */
+"SJc-cd-hKd.text" = "개발자 웹사이트";
 
-/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "공식 사이트";
+/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "o0X-Zy-4g6"; */
+"o0X-Zy-4g6.text" = "감사의 말";
+
+/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
+"oFL-ch-4PY.text" = "포럼";

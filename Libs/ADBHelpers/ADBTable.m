@@ -63,30 +63,34 @@
 - (NSArray *)selectWithKeys:(NSArray *)keyFields inRowObject:(id)row fromDb:(FMDatabase *)db{
     
     @autoreleasepool {
-        
-        if (!row) {
+        @try {
+            if (!row) {
+                row = [_objectClass new];
+            }
             
-            row = [_objectClass new];
-        }
-        
-        NSMutableArray *rows = [NSMutableArray array];
-        
-        NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
-        NSString *whereString = nil;
-        
-        NSArray *keys = [self validKeysFromKeyFields:keyFields andWhereString:&whereString];
-        if (!keys)
-            return nil;
-        
-        FMResultSet *result = [db executeQuery:[queryString stringByAppendingString:whereString] withParameterDictionary:[row dictionaryWithValuesForKeys:keys]];
-        
-        while ([result next]) {
+            NSMutableArray *rows = [NSMutableArray array];
             
-            [rows addObject:[[_objectClass alloc] initWithDbResult:result]];
+            NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
+            NSString *whereString = nil;
+            
+            NSArray *keys = [self validKeysFromKeyFields:keyFields andWhereString:&whereString];
+            if (!keys)
+                return nil;
+            
+            FMResultSet *result = [db executeQuery:[queryString stringByAppendingString:whereString] withParameterDictionary:[row dictionaryWithValuesForKeys:keys]];
+            
+            while ([result next]) {
+                
+                [rows addObject:[[_objectClass alloc] initWithDbResult:result]];
+            }
+            [result close];
+            
+            return rows;
         }
-        [result close];
-        
-        return rows;
+        @catch (NSException *exception) {
+            DDLogError(@"(ADBTable) selectWithKeys - unknown error: %@", exception.debugDescription);
+            [ACLLogger.singleton flush];
+        }
     }
 }
 

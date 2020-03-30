@@ -81,6 +81,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         #endif
         
         DDLogInfo("(TodayViewController) - init start")
+        ACLLogger.singleton()?.flush()
         
         safariService = SafariService(resources: resources)
         purchaseService = PurchaseService(network: networkService, resources: resources)
@@ -96,10 +97,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         DDLogInfo("(TodayViewController) - init end")
         ACLLogger.singleton()?.flush()
+        ACLLogger.singleton()?.flush()
     }
     
     override func viewDidLoad() {
         DDLogInfo("(TodayViewController) - viewDidLoad")
+        ACLLogger.singleton()?.flush()
         super.viewDidLoad()
         
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
@@ -183,20 +186,29 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         systemTitleLabel.alpha = alpha
         systemSwitchOutlet.isOn = enabled
         
-        turnSystemProtection(to: enabled)
+        turnProtection(.system, to: enabled)
     }
     
     @IBAction func complexSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
         
+        let systemEnabledOldValue = complexProtection.systemProtectionEnabled
         complexProtection.switchComplexProtection(state: enabled, for: nil) { (_, _) in }
+        
+        if systemEnabledOldValue != complexProtection.systemProtectionEnabled {
+            turnProtection(.complex, to: complexProtection.systemProtectionEnabled)
+        }
         updateWidgetComplex()
     }
     
     // MARK: Private methods
     
-    func turnSystemProtection(to state: Bool) {
-        var openSystemProtectionUrl = AE_URLSCHEME + "://systemProtection/"
+    enum Protection {
+        case complex, system
+    }
+    
+    func turnProtection(_ protection: Protection, to state: Bool) {
+        var openSystemProtectionUrl = AE_URLSCHEME + (protection == .system ? "://systemProtection/" : "://complexProtection/")
         openSystemProtectionUrl += state ? "on" : "off"
 
         if let url = URL(string: openSystemProtectionUrl){

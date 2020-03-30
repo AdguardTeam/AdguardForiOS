@@ -1,20 +1,17 @@
-/* Class = "UILabel"; text = "Manage License"; ObjectID = "5Xe-d5-8tj"; Note = "(About Screen) menu item"; */
-"5Xe-d5-8tj.text" = "Administrar licencia";
-
-/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "8KQ-Ga-zhs"; */
-"8KQ-Ga-zhs.text" = "Agradecimientos";
-
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
 "CqW-k3-vqO.title" = "Iniciar sesión";
 
-/* Class = "UILabel"; text = "Forum"; ObjectID = "KkR-EM-giI"; */
-"KkR-EM-giI.text" = "Foro";
+/* Class = "UILabel"; text = "Manage License"; ObjectID = "K2a-tW-P6P"; */
+"K2a-tW-P6P.text" = "Administrar licencia";
 
-/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "NVi-wQ-2Pn"; Note = "About Screen"; */
-"NVi-wQ-2Pn.text" = "Vídeo tutorial";
+/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
+"RqV-y2-sfF.text" = "Vídeo tutorial";
 
-/* Class = "UINavigationItem"; title = "About"; ObjectID = "ncc-Hk-ota"; Note = "(About Screen) Title"; */
-"ncc-Hk-ota.title" = "Acerca de";
+/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "SJc-cd-hKd"; */
+"SJc-cd-hKd.text" = "Sitio web del desarrollador";
 
-/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "xMf-b0-Cfp"; */
-"xMf-b0-Cfp.text" = "Sitio web del desarrollador";
+/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "o0X-Zy-4g6"; */
+"o0X-Zy-4g6.text" = "Agradecimientos";
+
+/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
+"oFL-ch-4PY.text" = "Foro";
