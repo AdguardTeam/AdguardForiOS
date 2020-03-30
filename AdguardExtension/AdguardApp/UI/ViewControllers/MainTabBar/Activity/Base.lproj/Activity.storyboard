@@ -623,7 +623,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="s4c-Cn-DYM" secondAttribute="height" id="NUP-n0-bN8"/>
                                     <constraint firstAttribute="height" constant="48" id="lbN-mF-Sqv">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
                                     </constraint>
                                 </constraints>
                             </imageView>
@@ -660,7 +660,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can see who tries to track you, view stats and the log of DNS requests blocking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0y-mr-Zwa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -672,7 +672,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xN-ij-jJj">
@@ -682,9 +682,11 @@
                                     <constraint firstAttribute="height" constant="40" id="1Kx-Sg-Q7z">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="200" id="agA-2j-rii"/>
+                                    <constraint firstAttribute="width" constant="200" id="agA-2j-rii">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="400"/>
+                                    </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
                                 <state key="normal" title="TRY FOR FREE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -711,12 +713,18 @@
                             <constraint firstItem="ApV-fQ-kgK" firstAttribute="centerY" secondItem="WKC-8f-gkR" secondAttribute="centerY" id="eiv-S2-xYw"/>
                             <constraint firstItem="ApV-fQ-kgK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="T0y-mr-Zwa" secondAttribute="bottom" constant="32" id="fbT-lm-Iwc"/>
                             <constraint firstItem="ApV-fQ-kgK" firstAttribute="trailing" secondItem="T0y-mr-Zwa" secondAttribute="trailing" id="hcY-S6-8JQ"/>
-                            <constraint firstItem="T0y-mr-Zwa" firstAttribute="top" secondItem="Hbu-Bm-HWZ" secondAttribute="bottom" constant="14" id="it7-MT-ZwP"/>
-                            <constraint firstItem="Hbu-Bm-HWZ" firstAttribute="top" secondItem="s4c-Cn-DYM" secondAttribute="bottom" constant="16" id="ki9-1G-wb6">
-                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                            <constraint firstItem="T0y-mr-Zwa" firstAttribute="top" secondItem="Hbu-Bm-HWZ" secondAttribute="bottom" constant="12" id="it7-MT-ZwP">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
-                            <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="16" id="mxp-LN-8un"/>
-                            <constraint firstItem="6xN-ij-jJj" firstAttribute="top" secondItem="ae4-WL-0pQ" secondAttribute="bottom" constant="32" id="nNq-v4-juX"/>
+                            <constraint firstItem="Hbu-Bm-HWZ" firstAttribute="top" secondItem="s4c-Cn-DYM" secondAttribute="bottom" constant="16" id="ki9-1G-wb6">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="ae4-WL-0pQ" firstAttribute="top" secondItem="ApV-fQ-kgK" secondAttribute="bottom" constant="16" id="mxp-LN-8un">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="6xN-ij-jJj" firstAttribute="top" secondItem="ae4-WL-0pQ" secondAttribute="bottom" constant="32" id="nNq-v4-juX">
+                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                            </constraint>
                             <constraint firstItem="T0y-mr-Zwa" firstAttribute="trailing" secondItem="Hbu-Bm-HWZ" secondAttribute="trailing" id="ppc-wA-OSc"/>
                             <constraint firstItem="WKC-8f-gkR" firstAttribute="trailing" secondItem="Hbu-Bm-HWZ" secondAttribute="trailing" constant="24" id="tep-U5-ByQ"/>
                             <constraint firstItem="ApV-fQ-kgK" firstAttribute="leading" secondItem="T0y-mr-Zwa" secondAttribute="leading" id="yFF-Vh-XQi"/>
@@ -1533,7 +1541,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Cn-HT-HfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleAspectFit" ambiguous="YES" id="VaW-QB-faV">
+                <view contentMode="scaleAspectFit" id="VaW-QB-faV">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
