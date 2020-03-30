@@ -532,7 +532,6 @@
 		7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
 		7E1E41572424BFD100567C8D /* MostActiveCompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */; };
 		7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */; };
-		7E1E415C2424C03300567C8D /* MostActiveCompaniesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E415B2424C03300567C8D /* MostActiveCompaniesViewModel.swift */; };
 		7E2522142408201700743648 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2522132408201700743648 /* Lottie */; };
 		7E2522162408207A00743648 /* OnboardingAnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2522152408207A00743648 /* OnboardingAnimationsController.swift */; };
 		7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
@@ -1989,7 +1988,6 @@
 		7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
-		7E1E415B2424C03300567C8D /* MostActiveCompaniesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesViewModel.swift; sourceTree = "<group>"; };
 		7E2522152408207A00743648 /* OnboardingAnimationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimationsController.swift; sourceTree = "<group>"; };
 		7E252217240821BE00743648 /* safari_tracking_protection_step3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_tracking_protection_step3.json; sourceTree = "<group>"; };
 		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
@@ -3607,7 +3605,6 @@
 			children = (
 				7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */,
 				7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */,
-				7E1E415B2424C03300567C8D /* MostActiveCompaniesViewModel.swift */,
 			);
 			path = MostActiveCompaniesController;
 			sourceTree = "<group>";
@@ -6094,7 +6091,6 @@
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7EB5526D24224755000498CC /* ActivityViewController.swift in Sources */,
 				7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */,
-				7E1E415C2424C03300567C8D /* MostActiveCompaniesViewModel.swift in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D031A163219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,

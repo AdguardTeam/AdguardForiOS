@@ -71,6 +71,7 @@ class ActivityViewController: UITableViewController {
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
     private var developerModeToken: NSKeyValueObservation?
+    private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - Public variables
     
@@ -118,10 +119,6 @@ class ActivityViewController: UITableViewController {
         dateTypeChanged(dateType: periodType)
         addObservers()
         statisticsModel.obtainStatistics()
-    }
-    
-    deinit {
-        removeObservers()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -409,22 +406,15 @@ class ActivityViewController: UITableViewController {
             }
         }
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
+        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
-    }
-    
-    /**
-     Removes observers from controller
-     */
-    private func removeObservers(){
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
+        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
         
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
-        
-        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime, context: nil)
+        defaultsObservations.append(observerToken1)
+        defaultsObservations.append(observerToken2)
+        defaultsObservations.append(observerToken3)
     }
     
     @objc func updateTableView(sender: UIRefreshControl) {

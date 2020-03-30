@@ -144,10 +144,10 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
                 activityRecord.requests += 1
                 if isBlocked {
                     activityRecord.blocked += 1
+                    activityRecord.savedData += savedKBytes
                 }
-                activityRecord.savedData += savedKBytes
             } else {
-                let activityRecord = ActivityStatisticsRecord(date: Date(), domain: domain, requests: 1, blocked: isBlocked ? 1 : 0, savedData: savedKBytes)
+                let activityRecord = ActivityStatisticsRecord(date: Date(), domain: domain, requests: 1, blocked: isBlocked ? 1 : 0, savedData: isBlocked ? savedKBytes : 0)
                 self.activityStatisticsRecords[domain] = activityRecord
             }
             

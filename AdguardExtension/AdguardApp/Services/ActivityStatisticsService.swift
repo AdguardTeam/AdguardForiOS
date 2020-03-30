@@ -127,7 +127,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     }
     
     func deleteAllRecords() {
-        readHandler?.inTransaction{ (db, rollback) in
+        writeHandler?.inTransaction{ (db, rollback) in
             guard let db = db else { return }
             
             let result = db.executeUpdate("DELETE FROM ActivityStatisticsTable", withArgumentsIn: [])

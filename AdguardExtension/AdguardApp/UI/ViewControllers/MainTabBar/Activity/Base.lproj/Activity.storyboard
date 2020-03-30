@@ -1540,6 +1540,8 @@
                         <outletCollection property="themableButtons" destination="4IJ-xy-hky" collectionClass="NSMutableArray" id="okt-xp-Y24"/>
                         <outletCollection property="themableLabels" destination="F4A-Cw-TxW" collectionClass="NSMutableArray" id="RNq-TV-KGa"/>
                         <outletCollection property="themableLabels" destination="hR9-Pm-Gq0" collectionClass="NSMutableArray" id="klB-KB-VJ6"/>
+                        <outletCollection property="themableLabels" destination="Bi6-51-PRn" collectionClass="NSMutableArray" id="A1Z-PE-92l"/>
+                        <outletCollection property="themableLabels" destination="gK7-Kw-vh5" collectionClass="NSMutableArray" id="4Ez-Fc-n0J"/>
                         <segue destination="xvL-9q-qox" kind="show" identifier="showDnsContainer" id="Ecv-Kh-Q3v"/>
                         <segue destination="d7M-Oi-Bgo" kind="show" identifier="showMostActiveCompaniesId" id="1hq-S9-5fa"/>
                     </connections>
@@ -1711,6 +1713,6 @@
         <image name="options" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5rO-v2-BPZ"/>
+        <segue reference="Ecv-Kh-Q3v"/>
     </inferredMetricsTieBreakers>
 </document>
