@@ -422,6 +422,16 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     }
     
     func renameCustomFilter(_ filterId: Int, _ newName: String) {
+        for group in groups {
+            if group.groupId != FilterGroupId.custom { continue }
+            
+            for filter in group.filters {
+                if filter.filterId == filterId {
+                    filter.name = newName
+                    notifyChange()
+                }
+            }
+        }
         antibanner?.renameCustomFilter(NSNumber(integerLiteral: filterId), newName: newName)
     }
     

@@ -200,4 +200,6 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     
     func applicationWillEnterForeground() {
     }
+    
+    func renameCustomFilter(_ filterId: NSNumber, newName: String) {}
 }
