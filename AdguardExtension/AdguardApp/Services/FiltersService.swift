@@ -120,20 +120,16 @@ protocol FiltersServiceProtocol {
     var groups: [Group] { get }
     var activeFiltersCount: Int { get }
     
-    /** enable/disable group of filters
-     */
+    /* enable/disable group of filters */
     func setGroup(_ groupId: Int, enabled: Bool)
     
-    /** enable/disable filter
-     */
+    /* enable/disable filter */
     func setFilter(_ filter: Filter, enabled: Bool)
     
-    /** add custom filter
-     */
+    /* add custom filter */
     func addCustomFilter(_ filter: AASCustomFilterParserResult)
     
-    /** delete custom filter
-     */
+    /* delete custom filter */
     func deleteCustomFilter(_ filter: Filter)
     
     /** load filters metadata.
@@ -141,10 +137,12 @@ protocol FiltersServiceProtocol {
      */
     func load(refresh: Bool, _ completion: @escaping () -> Void)
     
-    /** reser service*/
+    /* reser service */
     func reset()
     
     func getGroup(_ groupId: Int)->Group?
+    
+    func renameCustomFilter(_ filterId: Int, _ newName: String)
     
     /** FiltersService sends updateNotification via NotificationCenter when filters changes */
     var updateNotification: Notification.Name { get }
@@ -421,6 +419,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 UIApplication.shared.endBackgroundTask(backgroundTaskID)
             }
         }
+    }
+    
+    func renameCustomFilter(_ filterId: Int, _ newName: String) {
+        antibanner?.renameCustomFilter(NSNumber(integerLiteral: filterId), newName: newName)
     }
     
     func deleteCustomFilter(_ filter: Filter) {
