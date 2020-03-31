@@ -21,10 +21,22 @@ import UIKit
 enum ActiveCompaniesDisplayType: Int {
     typealias RawValue = Int
     case requests = 0, blocked = 1
+    
+    var title: String {
+        get {
+            switch self {
+            case .requests:
+                return String.localizedString("most_active_companies")
+            case .blocked:
+                return String.localizedString("most_blocked_companies")
+            }
+        }
+    }
 }
 
 class MostActiveCompaniesController: UIViewController {
     // MARK: - Outlets
+    @IBOutlet weak var controllerTitle: ThemableLabel!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -60,6 +72,7 @@ class MostActiveCompaniesController: UIViewController {
         setupBackButton()
         
         segmentedControl.selectedSegmentIndex = activeCompaniesDisplayType?.rawValue ?? 0
+        animateTitleTextChange()
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -80,7 +93,7 @@ class MostActiveCompaniesController: UIViewController {
     @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
         let index = segmentedControl.selectedSegmentIndex
         activeCompaniesDisplayType = ActiveCompaniesDisplayType(rawValue: index)
-        
+        animateTitleTextChange()
         tableView.reloadData()
     }
     
@@ -92,6 +105,12 @@ class MostActiveCompaniesController: UIViewController {
         theme.setupLabels(themableLabels)
         theme.setupSegmentedControl(segmentedControl)
         tableView.reloadData()
+    }
+    
+    private func animateTitleTextChange() {
+        UIView.transition(with: controllerTitle, duration: 0.2, options: .transitionCrossDissolve, animations: { [weak self] in
+            self?.controllerTitle.text = self?.activeCompaniesDisplayType?.title
+        })
     }
 }
 

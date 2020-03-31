@@ -117,8 +117,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most active companies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asq-k8-hi1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="0.0" width="366" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asq-k8-hi1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="44" width="366" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -220,6 +220,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="isp-9c-Wuw"/>
                     <connections>
+                        <outlet property="controllerTitle" destination="Asq-k8-hi1" id="ioW-4y-Ey5"/>
                         <outlet property="segmentedControl" destination="UIc-Ul-TZl" id="TUd-5l-mjQ"/>
                         <outlet property="tableView" destination="l1U-rp-2rZ" id="TOb-rs-PmD"/>
                         <outletCollection property="themableLabels" destination="Asq-k8-hi1" collectionClass="NSMutableArray" id="VLP-50-fsA"/>

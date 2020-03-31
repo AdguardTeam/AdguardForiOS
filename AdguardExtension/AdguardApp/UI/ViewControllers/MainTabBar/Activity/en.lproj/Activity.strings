@@ -16,9 +16,6 @@
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "EDIT";
 
-/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
-"Asq-k8-hi1.text" = "Most active companies";
-
 /* Class = "UILabel"; text = "0"; ObjectID = "F4A-Cw-TxW"; */
 "F4A-Cw-TxW.text" = "0";
 

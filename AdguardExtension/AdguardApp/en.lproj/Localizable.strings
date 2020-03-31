@@ -776,13 +776,13 @@
 "data_saved_info_alert_title" = "Data saved";
 
 /* (ActivityViewController) - Data saved alert message */
-"data_saved_info_alert_message" = "This is estimated number of traffic you saved thanks to blocking trackers.";
+"data_saved_info_alert_message" = "This is an estimated amount of traffic you saved by blocking trackers.";
 
 /* (ActivityViewController) - Companies alert title */
-"companies_info_alert_title" = "Companies quantity";
+"companies_info_alert_title" = "Number of companies";
 
 /* (ActivityViewController) - Companies alert message */
-"companies_info_alert_message" = "This is the number of companies to whom requests were transmitted to.";
+"companies_info_alert_message" = "This is the number of companies to which requests have been forwarded.";
 
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "All requests";
@@ -804,6 +804,12 @@
 
 /* (MostActiveCompaniesController) - Blocked number label */
 "blocked_number" = "%d blocked";
+
+/* (MostActiveCompaniesController) - Most active companies title */
+"most_active_companies" = "Most active companies";
+
+/* (MostActiveCompaniesController) - Most blocked companies title */
+"most_blocked_companies" = "Most blocked companies";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
