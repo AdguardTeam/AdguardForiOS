@@ -764,13 +764,13 @@
 "requests_info_alert_title" = "Requests";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know this number to realize the scope of this thing.";
+"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of requests to realize the scope of this problem";
 
 /* (ActivityViewController) - Blocked alert title */
 "blocked_info_alert_title" = "Blocked requests";
 
 /* (ActivityViewController) - Blocked alert message */
-"blocked_info_alert_message" = "By default, we block only trackers that try to steal your data. For us to block more, you can also configure Blocklist, Allowlist and DNS filtering.";
+"blocked_info_alert_message" = "By default, AdGuard blocks only trackers that try to steal your data. To extend the blocking capabilities, configure your DNS filtering, Blocklist and Allowlist.";
 
 /* (ActivityViewController) - Data saved alert title */
 "data_saved_info_alert_title" = "Data saved";

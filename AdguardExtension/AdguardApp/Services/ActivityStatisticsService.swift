@@ -80,7 +80,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 rollback?.pointee = ObjCBool(!result)
                 
                 if !result {
-                    DDLogError("ActivityStatisticsService Error in writeRecords")
+                    DDLogError("ActivityStatisticsService Error in writeRecords; Error: \(db.lastError().debugDescription)")
                 }
             }
         }
@@ -133,7 +133,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             let result = db.executeUpdate("DELETE FROM ActivityStatisticsTable", withArgumentsIn: [])
             rollback?.pointee = ObjCBool(!result)
             if !result {
-                DDLogError("ActivityStatisticsService Error in deleteAllRecords")
+                DDLogError("ActivityStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
             }
         }
     }
@@ -144,7 +144,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     private func createDnsLogTable(_ db: FMDatabase) {
         let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS ActivityStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, domain TEXT NOT NULL DEFAULT '', requests INTEGER NOT NULL DEFAULT 0, blocked INTEGER NOT NULL DEFAULT 0, savedData INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(timeStamp, domain))", withParameterDictionary: [:])
         if !result {
-            DDLogError("ActivityStatisticsService Error in createDnsLogTable")
+            DDLogError("ActivityStatisticsService Error in createDnsLogTable; Error: \(db.lastError().debugDescription)")
         }
     }
 }
