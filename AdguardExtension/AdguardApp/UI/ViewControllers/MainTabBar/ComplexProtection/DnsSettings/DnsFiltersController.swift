@@ -62,11 +62,8 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let networking: ACNNetworking = ServiceLocator.shared.getService()!
     
-    private let model: DnsFiltersModel = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!)
-    
+    private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
     private var themeObservation: Any? = nil
     
@@ -105,7 +102,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        model.updateFilters()
+        model.refreshFilters()
     }
     
     // MARK: - Table view delegate methods
@@ -303,21 +300,11 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     }
     
     @objc private func updateFilters(sender: UIRefreshControl) {
-        // If filters are already in process of update
-        if dnsFiltersService.filtersAreUpdating {
-            refreshControl?.endRefreshing()
-            return
-        }
-        
-        dnsFiltersService.updateFilters(networking: networking) {
+        model.updateFilters { (success) in
             DispatchQueue.main.async {[weak self] in
-                // Force read saved filters from defaults
-                self?.dnsFiltersService.readFiltersMeta()
-                
-                // updating data source for table view
-                self?.model.updateFilters()
-                
-                self?.tableView.reloadData()
+                if success {
+                    self?.tableView.reloadData()
+                }
                 self?.refreshControl?.endRefreshing()
             }
         }
