@@ -37,8 +37,8 @@ class FilterCell: UITableViewCell {
             if let versionString = filter?.version {
                 version.text = String(format: ACLocalizedString("filter_version_format", nil), versionString)
             }
-            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
-            updateDate.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes()
+            updateDate.text = dateString == nil ? "" : String(format: ACLocalizedString("filter_date_format", nil), dateString ?? "")
             enableSwitch.isOn = filter?.enabled ?? false
             
         }
