@@ -75,8 +75,13 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             
             for record in records {
                 let dateString = record.date.iso8601YyyyMmDdFormatter()
+            
+                var result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData])
+
+                if !result {
+                    result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = requests + ?, blocked = blocked + ?, savedData = savedData + ? WHERE timeStamp = ? and domain = ?", withArgumentsIn: [record.requests, record.blocked, record.savedData, dateString, record.domain])
+                }
                 
-                let result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) VALUES (?, ?, ?, ?, ?) ON CONFLICT (timeStamp, domain) DO UPDATE SET requests = requests + ?, blocked = blocked + ?, savedData = savedData + ? WHERE timeStamp = ? and domain = ?", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData, record.requests, record.blocked, record.savedData, dateString, record.domain])
                 rollback?.pointee = ObjCBool(!result)
                 
                 if !result {
