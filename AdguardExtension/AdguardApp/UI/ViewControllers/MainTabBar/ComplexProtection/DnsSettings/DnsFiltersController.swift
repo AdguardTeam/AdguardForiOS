@@ -52,7 +52,7 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UITableViewController, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, NewCustomFilterDetailsDelegate {
+class DnsFiltersController: UITableViewController, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, AddNewFilterDelegate {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet var searchBar: UISearchBar!

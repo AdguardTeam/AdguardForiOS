@@ -27,7 +27,7 @@ protocol FilterDetailsControllerTableViewDelegate {
     func tableViewWasLoaded(with contentSizeHeight: CGFloat)
 }
 
-class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
+class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate, UIViewControllerTransitioningDelegate {
     
     var filter: FilterDetailedInterface!
     
@@ -46,7 +46,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = filter.name
+        title = filter.name
         
         setupButtons()
         updateTheme()
@@ -67,6 +67,14 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
+    // MARK: - UIViewControllerTransitioningDelegate
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
+    }
+    
+    // MARK: - Private methods
+    
     private func updateTheme () {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
@@ -80,6 +88,19 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             let editButton = BottomShadowButton()
             editButton.title = String.localizedString("common_edit").uppercased()
             editButton.titleColor = nil
+            editButton.action = {[weak self] in
+                guard let self = self else { return }
+                if let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController {
+                    let model: NewCustomFilterDetailsControllerInterface = NewCustomFilterDetailsControllerModel(name: self.filter.name, rulesCount: self.filter.rulesCount, homepage: self.filter.homepage)
+                    
+                    controller.editDelegate = self
+                    controller.model = model
+                    controller.transitioningDelegate = self
+                    controller.modalPresentationStyle = .custom
+                    controller.controllerModeType = .editingFilter
+                    self.present(controller, animated: true, completion: nil)
+                }
+            }
             buttons.append(editButton)
         }
         
@@ -153,6 +174,15 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     func tableViewWasLoaded(with contentSizeHeight: CGFloat) {
         if containerView.frame.height <= contentSizeHeight {
             shadowView.animateAppearingOfShadow()
+        }
+    }
+    
+    // MARK: - EditFilterDelegate
+    
+    func renameFilter(newName: String) {
+        title = newName
+        if let safariFilter = filter as? Filter {
+            filtersService.renameCustomFilter(safariFilter.filterId, newName)
         }
     }
 }

@@ -1411,7 +1411,7 @@
         <!--New Custom Filter Details Controller-->
         <scene sceneID="KvF-NZ-eP3">
             <objects>
-                <viewController id="iY4-7b-KHH" customClass="NewCustomFilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewCustomFilterDetailsController" id="iY4-7b-KHH" customClass="NewCustomFilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="u5I-cE-B5j">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2073,7 +2073,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="u0d-JL-uIG"/>
-        <segue reference="3B2-aA-sGN"/>
+        <segue reference="6Ap-Zj-DX8"/>
+        <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
 </document>

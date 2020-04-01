@@ -979,7 +979,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_sync(workQueue, ^{
         [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             BOOL result = [db executeUpdate:@"UPDATE filters SET name = ? WHERE filter_id = ?", newName, filterId];
-            *rollback = result;
+            *rollback = !result;
         }];
     });
 }
