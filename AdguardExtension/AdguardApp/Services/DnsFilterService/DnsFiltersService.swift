@@ -111,6 +111,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
             return DnsFilter.customFiltersRange ~= id || id == 0
         }
     }
+    var editable: Bool = false
     
     // MARK: - Initialization
     

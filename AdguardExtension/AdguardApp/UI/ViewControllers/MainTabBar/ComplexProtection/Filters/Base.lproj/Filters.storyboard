@@ -955,7 +955,7 @@
         <!--Filter Details Controller-->
         <scene sceneID="P2a-VB-LUA">
             <objects>
-                <viewController storyboardIdentifier="FilterDetailsController" id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterDetailsController" modalPresentationStyle="fullScreen" id="Uro-s5-baq" customClass="FilterDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l8F-zH-yJh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="526"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -966,46 +966,38 @@
                                     <segue destination="TuY-uw-gTS" kind="embed" identifier="embedTableSegue" id="isf-qw-rRC"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXe-eu-cfH">
-                                <rect key="frame" x="0.0" y="432" width="600" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-Hi-AnZ" customClass="BottomShadowView" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="808" width="414" height="0.0"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Rdo-NW-cIS"/>
+                                    <constraint firstAttribute="height" id="FbW-tc-QX0"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="DELETE">
-                                    <color key="titleColor" red="0.87450980392156863" green="0.2196078431372549" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                </variation>
                                 <connections>
-                                    <action selector="deleteAction:" destination="Uro-s5-baq" eventType="touchUpInside" id="RoK-eq-8J9"/>
+                                    <outlet property="buttonsViewHeight" destination="FbW-tc-QX0" id="plH-Kd-kIj"/>
                                 </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="RXi-08-oyM" secondAttribute="trailing" id="81b-Co-XyN"/>
                             <constraint firstItem="RXi-08-oyM" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="BZE-on-Wkz"/>
-                            <constraint firstItem="mXe-eu-cfH" firstAttribute="bottom" secondItem="NYf-tJ-qCn" secondAttribute="bottom" id="F5U-MG-YdV"/>
-                            <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="mXe-eu-cfH" secondAttribute="trailing" id="HdQ-Wf-UK0"/>
-                            <constraint firstItem="mXe-eu-cfH" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="LMR-F0-CBU"/>
+                            <constraint firstItem="bJO-Hi-AnZ" firstAttribute="leading" secondItem="NYf-tJ-qCn" secondAttribute="leading" id="CJc-eY-wmu"/>
                             <constraint firstItem="RXi-08-oyM" firstAttribute="top" secondItem="NYf-tJ-qCn" secondAttribute="top" id="PrB-xw-hIy"/>
-                            <constraint firstItem="mXe-eu-cfH" firstAttribute="top" secondItem="RXi-08-oyM" secondAttribute="bottom" id="oog-nw-bxO"/>
+                            <constraint firstItem="NYf-tJ-qCn" firstAttribute="bottom" secondItem="bJO-Hi-AnZ" secondAttribute="bottom" id="f07-34-zvT"/>
+                            <constraint firstItem="bJO-Hi-AnZ" firstAttribute="top" secondItem="RXi-08-oyM" secondAttribute="bottom" id="hpF-Un-gt6"/>
+                            <constraint firstItem="NYf-tJ-qCn" firstAttribute="trailing" secondItem="bJO-Hi-AnZ" secondAttribute="trailing" id="n8b-3Z-WBy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NYf-tJ-qCn"/>
                     </view>
                     <navigationItem key="navigationItem" id="rpi-TZ-Xq3"/>
                     <connections>
                         <outlet property="containerView" destination="RXi-08-oyM" id="SUS-3Z-4ke"/>
-                        <outlet property="deleteButton" destination="mXe-eu-cfH" id="hmc-g3-gQU"/>
-                        <outlet property="deleteButtonHeightConstraint" destination="Rdo-NW-cIS" id="OoT-op-mW6"/>
+                        <outlet property="shadowView" destination="bJO-Hi-AnZ" id="JMS-sm-FS3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZh-6a-asE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2061" y="-701"/>
+            <point key="canvasLocation" x="2060.8695652173915" y="-701.11607142857144"/>
         </scene>
         <!--Filter Details Table Cotroller-->
         <scene sceneID="P6C-oj-Xwy">

@@ -40,6 +40,11 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
             return groupId == FilterGroupId.custom
         }
     }
+    var editable: Bool {
+        get {
+            return groupId == FilterGroupId.custom
+        }
+    }
     
     init(filterId: Int, groupId: Int) {
         self.filterId = filterId
