@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
+"HB4-O1-VPq.text" = "Remove VPN profile";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "Restart protection when network changes";
 
@@ -66,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "Enable this option if you experience issues with the internet connection while AdGuard is running";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable Tracking protection"; ObjectID = "aYm-cM-OAj"; */
+"aYm-cM-OAj.text" = "This will remove your actual VPN profile and disable Tracking protection";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Show status bar";
