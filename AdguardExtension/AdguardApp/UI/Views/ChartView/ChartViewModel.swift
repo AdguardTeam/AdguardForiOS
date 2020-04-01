@@ -37,77 +37,13 @@ protocol NumberOfRequestsChangedDelegate: class {
     func numberOfRequestsChanged()
 }
 
-enum ChartDateType: Int {
-    case alltime = 0, month, week, day, today
-    
-    func getTimeInterval(requestsDates: [Date]) -> (begin: Date, end: Date){
-        let firstDate: Date = requestsDates.first ?? now()
-        let lastDate: Date = requestsDates.last ?? now()
-        
-        var interval: Double = 0.0
-        
-        let hour = 60.0 * 60.0 // 1 hour
-        let day = 24.0 * hour // 24 hours
-        let week = 7.0 * day
-        let month = 30.0 * day
-        
-        switch self {
-        case .today:
-            let calendar = Calendar.current
-            let hours = Double(calendar.component(.hour, from: lastDate))
-            let minutes = Double(calendar.component(.minute, from: lastDate))
-            
-            interval = hours * hour + minutes * 60.0
-
-        case .day:
-            interval = day
-        case .week:
-            interval = week
-        case .month:
-            interval = month
-        case .alltime:
-            return (firstDate, lastDate)
-        }
-        
-        var endDate = lastDate - interval
-        if endDate < firstDate {
-            endDate = firstDate
-        }
-        
-        return (endDate, lastDate)
-    }
-    
-    func getFormatterString(from date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        
-        switch self {
-        case .today:
-            dateFormatter.dateFormat = "HH:mm"
-        case .day:
-            dateFormatter.dateFormat = "E"
-        case .week:
-            dateFormatter.dateFormat = "E"
-        case .month:
-            dateFormatter.dateFormat = "dd.MM"
-        case .alltime:
-            dateFormatter.dateFormat = "MM.yy"
-        }
-        return dateFormatter.string(from: date)
-    }
-    
-    private func now() -> Date {
-        return Date()
-    }
-}
-
 enum ChartRequestType {
     case requests, blocked
 }
 
 class ChartViewModel: ChartViewModelProtocol {
     
-    let chartView: ChartView
+    let chartView: ChartView?
     var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
     
     var requestsCount: Int = 0
@@ -137,7 +73,7 @@ class ChartViewModel: ChartViewModelProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView?) {
         self.dnsStatisticsService = dnsStatisticsService
         self.chartView = chartView
     }
@@ -176,7 +112,7 @@ class ChartViewModel: ChartViewModelProtocol {
         
         blockedSavedKbytes = blockedData.savedData
     
-        chartView.chartPoints = (requestsData.points, blockedData.points)
+        chartView?.chartPoints = (requestsData.points, blockedData.points)
         chartPointsChangedDelegate?.numberOfRequestsChanged()
     }
     
@@ -194,8 +130,8 @@ class ChartViewModel: ChartViewModelProtocol {
         let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
         let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
         
-        chartView.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
-        chartView.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
+        chartView?.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
+        chartView?.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
         
         if requestsDates.count < 2 {
             return ([], 0, 0)

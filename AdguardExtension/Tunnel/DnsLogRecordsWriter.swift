@@ -28,27 +28,33 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let dnsLogService: DnsLogRecordsServiceProtocol
     private let resources: AESharedResourcesProtocol
+    private let activityStatisticsService: ActivityStatisticsServiceWriterProtocol
     
     var dnsStatisticsService: DnsStatisticsServiceProtocol
     
     private var records = [DnsLogRecord]()
+    private var activityStatisticsRecords = [String: ActivityStatisticsRecord]()
     private var statistics: [DnsStatisticsType : RequestsStatisticsBlock] = [:]
     
-    
     private let saveRecordsMinimumTime = 3.0 // seconds
+    private let saveActivityRecordsMinimumTime = 10.0 // seconds
     private var nextSaveTime: Double
     private var nextStatisticsSaveTime: Double
+    private var nextActivityStatisticsSaveTime: Double
     
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter records queue")
     private let statisticsQueue = DispatchQueue(label: "DnsLogRecordsWriter statistics queue")
+    private let activityStatisticsQueue = DispatchQueue(label: "DnsLogRecordsWriter activity statistics queue")
     
-    @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol) {
+    @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol, activityStatisticsService: ActivityStatisticsServiceWriterProtocol) {
         self.resources = resources
         self.dnsStatisticsService = DnsStatisticsService(resources: resources)
         self.dnsLogService = dnsLogService
+        self.activityStatisticsService = activityStatisticsService
         
         nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
         nextStatisticsSaveTime = Date().timeIntervalSince1970 + dnsStatisticsService.minimumStatisticSaveTime
+        nextActivityStatisticsSaveTime = Date().timeIntervalSince1970 + saveActivityRecordsMinimumTime
         
         super.init()
         
@@ -65,7 +71,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             return
         }
         
-        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(event.domain ?? "nil") answer: \(event.answer == nil ? "nil" : "nonnil")")
+        let domain: String = event.domain.hasSuffix(".") ? String(event.domain.dropLast()) : event.domain
+        
+        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
         var status: DnsLogRecordStatus
         
@@ -85,11 +93,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let tempRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(tempRequestsCount + 1, forKey: AEDefaultsRequests)
         
+        let recordIsBlocked = status == .blacklistedByUserFilter || status == .blacklistedByOtherFilter
+        
         statisticsQueue.async { [weak self] in
             guard let self = self else { return }
             self.statistics[.all]?.numberOfRequests += 1
             
-            if (status == .blacklistedByUserFilter || status == .blacklistedByOtherFilter) {
+            if recordIsBlocked {
                 let tempBlockedRequestsCount = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
                 self.resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
                 
@@ -102,7 +112,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
         
         let record = DnsLogRecord(
-            domain: event.domain,
+            domain: domain,
             date: date,
             elapsed: Int(event.elapsed),
             type: event.type,
@@ -119,7 +129,32 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             answerStatus: event.status
         )
         
+        addActivityRecord(domain: domain, isBlocked: recordIsBlocked)
         addRecord(record: record)
+    }
+    
+    private func addActivityRecord(domain: String, isBlocked: Bool){
+        let now = Date().timeIntervalSince1970
+        
+        activityStatisticsQueue.async {[weak self] in
+            guard let self = self else { return }
+            
+            let savedKBytes = Int.random(in: 10..<50)
+            if let activityRecord = self.activityStatisticsRecords[domain] {
+                activityRecord.requests += 1
+                if isBlocked {
+                    activityRecord.blocked += 1
+                    activityRecord.savedData += savedKBytes
+                }
+            } else {
+                let activityRecord = ActivityStatisticsRecord(date: Date(), domain: domain, requests: 1, blocked: isBlocked ? 1 : 0, savedData: isBlocked ? savedKBytes : 0)
+                self.activityStatisticsRecords[domain] = activityRecord
+            }
+            
+            if now > self.nextActivityStatisticsSaveTime{
+                self.saveActivityStatistics()
+            }
+        }
     }
     
     private func addRecord(record: DnsLogRecord) {
@@ -150,6 +185,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     private func flush() {
         save()
         saveStatistics()
+        saveActivityStatistics()
+        
         resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
@@ -166,6 +203,14 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         statistics.removeAll()
         reinitializeStatistics()
         nextStatisticsSaveTime = now + dnsStatisticsService.minimumStatisticSaveTime
+    }
+    
+    private func saveActivityStatistics(){
+        let now = Date().timeIntervalSince1970
+        let recordsArray = Array(activityStatisticsRecords.values)
+        activityStatisticsService.writeRecords(recordsArray)
+        activityStatisticsRecords.removeAll()
+        nextActivityStatisticsSaveTime = now + saveActivityRecordsMinimumTime
     }
     
     private func loadStatisticsHead() {

@@ -282,6 +282,11 @@ extern NSString* _Nonnull DnsFilterUniqueId;
 extern NSString* _Nonnull StatisticsPeriodType;
 
 /**
+ User defaults key for saving activity statistics period type ( all time / week / day)
+ */
+extern NSString* _Nonnull ActivityStatisticsPeriodType;
+
+/**
  User defaults key for current statistics save intervals
  */
 extern NSString* _Nonnull StatisticsSaveTime;

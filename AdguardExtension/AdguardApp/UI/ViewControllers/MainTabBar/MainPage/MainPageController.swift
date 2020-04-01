@@ -405,7 +405,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     func dateTypeChanged(dateType: ChartDateType) {
         resources.sharedDefaults().set(dateType.rawValue, forKey: StatisticsPeriodType)
-        changeDateTypeButton(dateType: dateType)
+        changeStatisticsDatesButton.setTitle(dateType.getDateTypeString(), for: .normal)
         chartModel?.chartDateType = dateType
     }
     
@@ -468,25 +468,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         
         present(controller, animated: true, completion: nil)
     }
-    
-    /**
-     Set title for changeStatisticsDatesButton when it is changed
-     */
-    private func changeDateTypeButton(dateType: ChartDateType){
-        switch dateType {
-        case .day:
-            changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_24hours", nil), for: .normal)
-        case .today:
-            changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_date_today", nil), for: .normal)
-        case .week:
-            changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_7days", nil), for: .normal)
-        case .month:
-            changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_30days", nil), for: .normal)
-        case .alltime:
-            changeStatisticsDatesButton.setTitle(ACLocalizedString("chart_alltime", nil), for: .normal)
-        }
-    }
-        
+            
     /**
     Changes number of requests for all buttons
     */
