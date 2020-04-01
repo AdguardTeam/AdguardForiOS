@@ -210,7 +210,6 @@ class AdvancedSettingsController: UITableViewController {
             guard let self = self else { return }
             self.vpnManager.removeVpnConfiguration {(error) in
                 DispatchQueue.main.async {
-                    alert.dismiss(animated: true)
                     DDLogInfo("AdvancedSettingsController - removing VPN profile")
                     if error != nil {
                         ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
@@ -223,7 +222,6 @@ class AdvancedSettingsController: UITableViewController {
         alert.addAction(removeAction)
         
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-            alert.dismiss(animated: true, completion: nil)
         }
         
         alert.addAction(cancelAction)
