@@ -27,7 +27,8 @@ protocol DnsFiltersModelProtocol {
     func setFilter(index: Int, enabled: Bool)
     func addFilter(_ filter: DnsFilter, data: Data?) -> Bool
     func searchFilter(by string: String?)
-    func updateFilters()
+    func updateFilters(completion: @escaping (Bool)->())
+    func refreshFilters()
 }
 
 protocol DnsFiltersChangedProtocol {
@@ -38,7 +39,8 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     
     var delegate: DnsFiltersChangedProtocol?
     
-    private var filtersService: DnsFiltersServiceProtocol
+    private let filtersService: DnsFiltersServiceProtocol
+    private let networking: ACNNetworkingProtocol
     
     var filters: [DnsFilter] {
         get {
@@ -50,9 +52,11 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     
     var isSearchActive: Bool = false
     
-    init(filtersService: DnsFiltersServiceProtocol) {
+    init(filtersService: DnsFiltersServiceProtocol, networking: ACNNetworking) {
         self.filtersService = filtersService;
-        updateFilters()
+        self.networking = networking
+        
+        refreshFilters()
     }
     
     //MARK: - Public methods
@@ -76,9 +80,22 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
         filtersService.setFilter(filterId: filter.id, enabled: enabled)
     }
     
-    func updateFilters(){
+    func refreshFilters() {
         allFilters = filtersService.filters
         delegate?.filtersChanged()
+    }
+    
+    func updateFilters(completion: @escaping (Bool)->()){
+        if filtersService.filtersAreUpdating {
+            completion(false)
+            return
+        }
+        
+        filtersService.updateFilters(networking: networking) {[weak self] in
+            self?.filtersService.readFiltersMeta()
+            self?.allFilters = self?.filtersService.filters ?? []
+            completion(true)
+        }
     }
     
     func searchFilter(by string: String?) {
