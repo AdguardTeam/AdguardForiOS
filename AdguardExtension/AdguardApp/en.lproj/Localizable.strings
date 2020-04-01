@@ -328,6 +328,27 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Reset";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Remove";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Remove VPN profile";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable Tracking protection?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "An error occured";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Something went wrong while deleting your VPN profile";
+
+/* (AdvancedSettingsController) Vpn profile not installed title */
+"vpn_profile_not_installed_title" = "VPN profile is absent";
+
+/* (AdvancedSettingsController) Vpn profile not installed message */
+"vpn_profile_not_installed_message" = "You can't delete your VPN profile because it doesn't exist.";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ rules are being used";
 

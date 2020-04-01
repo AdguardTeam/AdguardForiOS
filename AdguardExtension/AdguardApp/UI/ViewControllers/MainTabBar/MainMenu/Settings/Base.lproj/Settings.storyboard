@@ -925,6 +925,57 @@
                                             <segue destination="f4F-cS-HoM" kind="show" id="yPl-9Y-jJy"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7mR-kQ-r3G">
+                                        <rect key="frame" x="0.0" y="451" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7mR-kQ-r3G" id="t2u-Np-l14">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove VPN profile" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HB4-O1-VPq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="382" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="This will remove your actual VPN profile and disable Tracking protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYm-cM-OAj" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="18" width="382" height="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="aYm-cM-OAj" secondAttribute="bottom" constant="16" id="0lb-Ow-ZfF">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="aYm-cM-OAj" firstAttribute="trailing" secondItem="HB4-O1-VPq" secondAttribute="trailing" id="4WJ-SH-98W"/>
+                                                <constraint firstItem="HB4-O1-VPq" firstAttribute="top" secondItem="t2u-Np-l14" secondAttribute="top" constant="16" id="6Wp-sx-GEz">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="aYm-cM-OAj" firstAttribute="top" secondItem="HB4-O1-VPq" secondAttribute="bottom" constant="2" id="sEh-nM-A2t"/>
+                                                <constraint firstItem="HB4-O1-VPq" firstAttribute="leading" secondItem="t2u-Np-l14" secondAttribute="leading" constant="16" id="wtd-Ji-7fA">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="aYm-cM-OAj" firstAttribute="leading" secondItem="HB4-O1-VPq" secondAttribute="leading" id="wx0-Ez-1LF"/>
+                                                <constraint firstAttribute="trailing" secondItem="HB4-O1-VPq" secondAttribute="trailing" constant="16" id="yhj-4B-6Gc">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -949,6 +1000,8 @@
                         <outletCollection property="themableLabels" destination="XFM-ii-xUV" collectionClass="NSMutableArray" id="dAx-gt-lNL"/>
                         <outletCollection property="themableLabels" destination="Bjk-AC-5fy" collectionClass="NSMutableArray" id="qrH-ZZ-AgS"/>
                         <outletCollection property="themableLabels" destination="5oc-O8-qI9" collectionClass="NSMutableArray" id="JAC-k2-NSo"/>
+                        <outletCollection property="themableLabels" destination="HB4-O1-VPq" collectionClass="NSMutableArray" id="jgQ-gD-mvK"/>
+                        <outletCollection property="themableLabels" destination="aYm-cM-OAj" collectionClass="NSMutableArray" id="feh-aJ-hmg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uwo-5O-fpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

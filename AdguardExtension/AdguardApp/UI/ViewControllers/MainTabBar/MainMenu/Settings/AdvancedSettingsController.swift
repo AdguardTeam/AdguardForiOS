@@ -42,6 +42,7 @@ class AdvancedSettingsController: UITableViewController {
     private let useSimplifiedRow = 0
     private let showStatusbarRow = 1
     private let restartProtectionRow = 2
+    private let removeVpnProfile = 5
     
     private var themeObservation: NotificationToken?
     private var vpnObservation: NotificationToken?
@@ -116,6 +117,8 @@ class AdvancedSettingsController: UITableViewController {
         case restartProtectionRow:
             restartProtectionSwitch.setOn(!restartProtectionSwitch.isOn, animated: true)
             restartProtectionAction(restartProtectionSwitch)
+        case removeVpnProfile:
+            showRemoveVpnAlert(indexPath)
         default:
             break
         }
@@ -179,4 +182,39 @@ class AdvancedSettingsController: UITableViewController {
             break
         }
     }
+    
+    private func showRemoveVpnAlert(_ indexPath: IndexPath) {
+        if !vpnManager.vpnInstalled {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("vpn_profile_not_installed_title"), message: String.localizedString("vpn_profile_not_installed_message"))
+            return
+        }
+        
+        let alert = UIAlertController(title: String.localizedString("remove_vpn_profile_title"), message: String.localizedString("remove_vpn_profile_message"), preferredStyle: .actionSheet)
+        
+        let yesAction = UIAlertAction(title: String.localizedString("remove_title").uppercased(), style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            self.vpnManager.removeVpnConfiguration {(error) in
+                if error != nil {
+                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
+                }
+            }
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
+        
+        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
+            presenter.sourceView = cell
+            presenter.sourceRect = cell.bounds
+        }
+
+        self.present(alert, animated: true)
+    }
+
 }
