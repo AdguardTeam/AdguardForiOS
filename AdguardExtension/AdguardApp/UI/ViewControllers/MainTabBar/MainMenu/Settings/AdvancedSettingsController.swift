@@ -25,8 +25,10 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var tunnelModeDescription: ThemableLabel!
+    @IBOutlet weak var lastSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet var separators: [UIView]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -45,7 +47,7 @@ class AdvancedSettingsController: UITableViewController {
     private let removeVpnProfile = 5
     
     private var themeObservation: NotificationToken?
-    private var vpnObservation: NotificationToken?
+    private var vpnConfigurationObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,11 @@ class AdvancedSettingsController: UITableViewController {
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
+        }
+        
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] (note) in
+            self?.lastSeparator.isHidden = false
+            self?.tableView.reloadData()
         }
         
         setTunnelModeDescription()
@@ -97,9 +104,14 @@ class AdvancedSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        cell.isHidden = false
         
         if indexPath.row == restartProtectionRow && !configuration.proStatus{
-            cell.isHidden = !configuration.proStatus
+            cell.isHidden = true
+        }
+        
+        if indexPath.row == removeVpnProfile && !vpnManager.vpnInstalled {
+            cell.isHidden = true
         }
         
         theme.setupTableCell(cell)
@@ -126,9 +138,16 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.row == restartProtectionRow && !configuration.proStatus{
             return 0.0
         }
+        
+        if indexPath.row == removeVpnProfile && !vpnManager.vpnInstalled {
+            lastSeparator.isHidden = true
+            return 0.0
+        }
+        
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
@@ -160,6 +179,7 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
+        theme.setupSeparators(separators)
         theme.setupSwitch(useSimplifiedFiltersSwitch)
         theme.setupSwitch(showStatusbarSwitch)
         theme.setupSwitch(restartProtectionSwitch)
@@ -184,24 +204,21 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
-        if !vpnManager.vpnInstalled {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("vpn_profile_not_installed_title"), message: String.localizedString("vpn_profile_not_installed_message"))
-            return
-        }
-        
         let alert = UIAlertController(title: String.localizedString("remove_vpn_profile_title"), message: String.localizedString("remove_vpn_profile_message"), preferredStyle: .actionSheet)
         
-        let yesAction = UIAlertAction(title: String.localizedString("remove_title").uppercased(), style: .destructive) { [weak self] _ in
+        let removeAction = UIAlertAction(title: String.localizedString("remove_title").uppercased(), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
             self.vpnManager.removeVpnConfiguration {(error) in
-                if error != nil {
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
+                DispatchQueue.main.async {
+                    alert.dismiss(animated: true)
+                    if error != nil {
+                        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
+                    }
                 }
             }
-            alert.dismiss(animated: true, completion: nil)
         }
         
-        alert.addAction(yesAction)
+        alert.addAction(removeAction)
         
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)

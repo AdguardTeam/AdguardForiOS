@@ -575,7 +575,7 @@
         <scene sceneID="499-3e-VKK">
             <objects>
                 <tableViewController id="71r-k4-iOF" customClass="AdvancedSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZZo-Eo-LOq">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZZo-Eo-LOq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -629,13 +629,18 @@
                                                         <action selector="useSimplifiedFiltersAction:" destination="71r-k4-iOF" eventType="valueChanged" id="c1M-wJ-S3h"/>
                                                     </connections>
                                                 </switch>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gla-UT-LI9">
+                                                    <rect key="frame" x="0.0" y="43" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Ke0-cm-gEC"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="gla-UT-LI9" firstAttribute="leading" secondItem="sLy-sn-bNF" secondAttribute="leading" id="14G-xL-spZ"/>
                                                 <constraint firstItem="W6u-T8-UVZ" firstAttribute="leading" secondItem="sLy-sn-bNF" secondAttribute="leading" constant="16" id="2ct-JS-ex0">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="PV8-kf-b2c" secondAttribute="bottom" constant="16" id="83P-g5-5EI">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstItem="RDS-1r-fn1" firstAttribute="leading" secondItem="W6u-T8-UVZ" secondAttribute="trailing" constant="16" id="CPw-1c-vRI">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -647,11 +652,16 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="PV8-kf-b2c" firstAttribute="leading" secondItem="W6u-T8-UVZ" secondAttribute="leading" id="Lp3-UY-XIP"/>
+                                                <constraint firstItem="gla-UT-LI9" firstAttribute="top" secondItem="PV8-kf-b2c" secondAttribute="bottom" constant="16" id="RtY-47-SAM">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="PV8-kf-b2c" firstAttribute="top" secondItem="W6u-T8-UVZ" secondAttribute="bottom" constant="2" id="bjp-xK-NPP"/>
                                                 <constraint firstItem="W6u-T8-UVZ" firstAttribute="top" secondItem="sLy-sn-bNF" secondAttribute="top" constant="16" id="cBO-z9-fI7">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="gla-UT-LI9" secondAttribute="bottom" id="iNH-6j-jbl"/>
                                                 <constraint firstItem="RDS-1r-fn1" firstAttribute="leading" secondItem="PV8-kf-b2c" secondAttribute="trailing" constant="24" id="w2X-6o-zHh"/>
+                                                <constraint firstAttribute="trailing" secondItem="gla-UT-LI9" secondAttribute="trailing" id="yy8-9L-4Ug"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -695,6 +705,13 @@
                                                         <action selector="showProgressbarAction:" destination="71r-k4-iOF" eventType="valueChanged" id="pFG-q7-mKa"/>
                                                     </connections>
                                                 </switch>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgX-z9-E4X">
+                                                    <rect key="frame" x="0.0" y="77" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="ALB-6E-iWi"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mdJ-Nh-wTi" firstAttribute="top" secondItem="aoV-et-2ku" secondAttribute="bottom" constant="2" id="4sb-YH-oEr"/>
@@ -711,13 +728,16 @@
                                                 <constraint firstItem="8eF-Ky-7cU" firstAttribute="leading" secondItem="aoV-et-2ku" secondAttribute="trailing" constant="16" id="Ou4-db-pRF">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="cgX-z9-E4X" secondAttribute="trailing" id="Udm-P7-x7l"/>
                                                 <constraint firstAttribute="trailing" secondItem="8eF-Ky-7cU" secondAttribute="trailing" constant="16" id="WGh-fZ-Ht4">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="mdJ-Nh-wTi" secondAttribute="bottom" constant="16" id="bS3-u8-dbt">
+                                                <constraint firstItem="cgX-z9-E4X" firstAttribute="leading" secondItem="0fK-Lh-gbY" secondAttribute="leading" id="WQz-rL-yGW"/>
+                                                <constraint firstAttribute="bottom" secondItem="cgX-z9-E4X" secondAttribute="bottom" id="eJ9-JC-oNV"/>
+                                                <constraint firstItem="mdJ-Nh-wTi" firstAttribute="leading" secondItem="aoV-et-2ku" secondAttribute="leading" id="ume-12-bCF"/>
+                                                <constraint firstItem="cgX-z9-E4X" firstAttribute="top" secondItem="mdJ-Nh-wTi" secondAttribute="bottom" constant="16" id="xhv-Te-d99">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="mdJ-Nh-wTi" firstAttribute="leading" secondItem="aoV-et-2ku" secondAttribute="leading" id="ume-12-bCF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -761,9 +781,17 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     </variation>
                                                 </label>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="foE-Km-3BK">
+                                                    <rect key="frame" x="0.0" y="70" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="JJm-Xb-Seo"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="trailing" secondItem="JPH-xu-Z3J" secondAttribute="trailing" id="23o-3y-13g"/>
+                                                <constraint firstAttribute="trailing" secondItem="foE-Km-3BK" secondAttribute="trailing" id="6ka-m2-yuY"/>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="leading" secondItem="JPH-xu-Z3J" secondAttribute="leading" id="BHP-Pz-is2"/>
                                                 <constraint firstItem="hAq-Ld-n9T" firstAttribute="leading" secondItem="JPH-xu-Z3J" secondAttribute="trailing" constant="16" id="FDi-WD-jYb">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -774,16 +802,18 @@
                                                 <constraint firstItem="hAq-Ld-n9T" firstAttribute="top" secondItem="3mC-Nc-p0V" secondAttribute="top" constant="16" id="PW0-RS-rgh">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
+                                                <constraint firstItem="foE-Km-3BK" firstAttribute="leading" secondItem="3mC-Nc-p0V" secondAttribute="leading" id="RzU-q2-EIH"/>
                                                 <constraint firstItem="aRS-WH-mRj" firstAttribute="top" secondItem="JPH-xu-Z3J" secondAttribute="bottom" constant="2" id="Vht-0C-Q2V"/>
                                                 <constraint firstItem="JPH-xu-Z3J" firstAttribute="top" secondItem="3mC-Nc-p0V" secondAttribute="top" constant="16" id="ZK6-n7-GDu">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="foE-Km-3BK" firstAttribute="top" secondItem="aRS-WH-mRj" secondAttribute="bottom" constant="16" id="gul-PS-Vfx">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="hAq-Ld-n9T" secondAttribute="trailing" constant="16" id="oFz-7h-D80">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="aRS-WH-mRj" secondAttribute="bottom" constant="16" id="qWg-2d-hcL">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="foE-Km-3BK" secondAttribute="bottom" id="yE1-gD-xu0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -829,9 +859,19 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugj-yA-4js">
+                                                    <rect key="frame" x="0.0" y="43" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="1TE-cn-93s"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XFM-ii-xUV" firstAttribute="top" secondItem="KSL-dU-yfA" secondAttribute="bottom" constant="2" id="0aE-hD-PZ7"/>
+                                                <constraint firstItem="Ugj-yA-4js" firstAttribute="top" secondItem="XFM-ii-xUV" secondAttribute="bottom" constant="16" id="18m-qM-AB6">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="JIE-Tt-c8M" secondAttribute="trailing" constant="16" id="5Lh-rK-HXI">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -844,12 +884,12 @@
                                                 <constraint firstItem="KSL-dU-yfA" firstAttribute="leading" secondItem="Ugs-XG-0jt" secondAttribute="leading" constant="16" id="duB-AZ-D7A">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="XFM-ii-xUV" secondAttribute="bottom" constant="16" id="tVA-qJ-qP6">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="Ugj-yA-4js" secondAttribute="bottom" id="rDo-9F-gA1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ugj-yA-4js" secondAttribute="trailing" id="wG4-h5-K69"/>
                                                 <constraint firstItem="JIE-Tt-c8M" firstAttribute="leading" secondItem="KSL-dU-yfA" secondAttribute="trailing" constant="16" id="wPB-DQ-pwR">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="Ugj-yA-4js" firstAttribute="leading" secondItem="Ugs-XG-0jt" secondAttribute="leading" id="xdn-Yc-Q8H"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -898,21 +938,31 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leh-g5-V3v">
+                                                    <rect key="frame" x="0.0" y="43" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Hsw-P5-fEI"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5oc-O8-qI9" firstAttribute="top" secondItem="Bjk-AC-5fy" secondAttribute="bottom" constant="2" id="EAL-GK-dVt"/>
+                                                <constraint firstAttribute="trailing" secondItem="leh-g5-V3v" secondAttribute="trailing" id="JZ0-MJ-UvC"/>
                                                 <constraint firstItem="5oc-O8-qI9" firstAttribute="leading" secondItem="Bjk-AC-5fy" secondAttribute="leading" id="LAg-7k-VFA"/>
+                                                <constraint firstItem="leh-g5-V3v" firstAttribute="top" secondItem="5oc-O8-qI9" secondAttribute="bottom" constant="16" id="Mg7-eY-If2">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="leh-g5-V3v" firstAttribute="leading" secondItem="uch-aU-rlo" secondAttribute="leading" id="d4j-EX-lGa"/>
                                                 <constraint firstItem="tIp-JX-Tj9" firstAttribute="centerY" secondItem="uch-aU-rlo" secondAttribute="centerY" id="fCp-eJ-9zg"/>
                                                 <constraint firstItem="5oc-O8-qI9" firstAttribute="trailing" secondItem="Bjk-AC-5fy" secondAttribute="trailing" id="fZ6-aE-XY6"/>
                                                 <constraint firstItem="tIp-JX-Tj9" firstAttribute="leading" secondItem="Bjk-AC-5fy" secondAttribute="trailing" constant="16" id="gJ5-Ay-kCF">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="5oc-O8-qI9" secondAttribute="bottom" constant="16" id="lqc-Wv-Ve3">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="tIp-JX-Tj9" secondAttribute="trailing" constant="16" id="rDG-gM-S3u">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="leh-g5-V3v" secondAttribute="bottom" id="sPI-Hs-L6d"/>
                                                 <constraint firstItem="Bjk-AC-5fy" firstAttribute="top" secondItem="uch-aU-rlo" secondAttribute="top" constant="16" id="vos-S8-Diy">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
@@ -986,6 +1036,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Advanced settings" id="Ll9-il-kpC"/>
                     <connections>
+                        <outlet property="lastSeparator" destination="leh-g5-V3v" id="Zec-fx-Fhk"/>
                         <outlet property="restartProtectionSwitch" destination="hAq-Ld-n9T" id="fk9-u4-IVQ"/>
                         <outlet property="showStatusbarSwitch" destination="8eF-Ky-7cU" id="UHX-E7-qYX"/>
                         <outlet property="tunnelModeDescription" destination="5oc-O8-qI9" id="Wss-rq-fWA"/>
@@ -1002,6 +1053,11 @@
                         <outletCollection property="themableLabels" destination="5oc-O8-qI9" collectionClass="NSMutableArray" id="JAC-k2-NSo"/>
                         <outletCollection property="themableLabels" destination="HB4-O1-VPq" collectionClass="NSMutableArray" id="jgQ-gD-mvK"/>
                         <outletCollection property="themableLabels" destination="aYm-cM-OAj" collectionClass="NSMutableArray" id="feh-aJ-hmg"/>
+                        <outletCollection property="separators" destination="gla-UT-LI9" collectionClass="NSMutableArray" id="Wkw-9s-5E0"/>
+                        <outletCollection property="separators" destination="cgX-z9-E4X" collectionClass="NSMutableArray" id="qru-Ld-J3l"/>
+                        <outletCollection property="separators" destination="foE-Km-3BK" collectionClass="NSMutableArray" id="Mk5-5k-3yQ"/>
+                        <outletCollection property="separators" destination="Ugj-yA-4js" collectionClass="NSMutableArray" id="Igu-mc-RQi"/>
+                        <outletCollection property="separators" destination="leh-g5-V3v" collectionClass="NSMutableArray" id="f6I-ke-wNc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uwo-5O-fpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

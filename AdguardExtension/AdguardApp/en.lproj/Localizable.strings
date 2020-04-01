@@ -343,12 +343,6 @@
 /* (AdvancedSettingsController) Remove Vpn profile error message */
 "remove_vpn_profile_error_message" = "Something went wrong while deleting your VPN profile";
 
-/* (AdvancedSettingsController) Vpn profile not installed title */
-"vpn_profile_not_installed_title" = "VPN profile is absent";
-
-/* (AdvancedSettingsController) Vpn profile not installed message */
-"vpn_profile_not_installed_message" = "You can't delete your VPN profile because it doesn't exist.";
-
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ rules are being used";
 
