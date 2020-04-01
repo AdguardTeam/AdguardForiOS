@@ -35,10 +35,12 @@ class MigrationService: MigrationServiceProtocol {
     private let networking: ACNNetworkingProtocol
     private let activityStatisticsService: ActivityStatisticsServiceProtocol
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
+    private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
+    
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol) {
+    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -47,6 +49,7 @@ class MigrationService: MigrationServiceProtocol {
         self.networking = networking
         self.activityStatisticsService = activityStatisticsService
         self.dnsStatisticsService = dnsStatisticsService
+        self.dnsLogRecordsService = dnsLogService
     }
     
     func install() {
@@ -79,6 +82,10 @@ class MigrationService: MigrationServiceProtocol {
             
             if savedSchemaVersion < 3 {
                 result = result && enableGroupsWithEnabledFilters()
+                
+                if Bundle.main.isPro {
+                    dnsLogRecordsService.clearLog()
+                }
             }
             
             /* If all migrations are successfull, than save current schema version */

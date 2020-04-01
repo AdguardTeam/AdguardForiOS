@@ -1,4 +1,4 @@
-app_identifier("com.adguard.AdguardExtension") # The bundle identifier of your app
+app_identifier(ENV["APP_IDENTIFIER"]) # The bundle identifier of your app
 apple_id("apple-dev@adguard.com") # Your Apple email address
 team_id("N33TQXN8C7") # Developer Portal Team ID
 itc_team_id("31050800") # App Store Connect Team ID

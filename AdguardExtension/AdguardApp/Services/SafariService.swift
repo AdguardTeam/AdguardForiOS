@@ -104,13 +104,24 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     private var resources: AESharedResourcesProtocol
     
-    static let contenBlockerBundleIdByType: [ContentBlockerType: String] =
-        [.general : "com.adguard.AdguardExtension.extension",
-         .privacy: "com.adguard.AdguardExtension.extensionPrivacy",
-         .socialWidgetsAndAnnoyances: "com.adguard.AdguardExtension.extensionAnnoyances",
-         .other: "com.adguard.AdguardExtension.extensionOther",
-         .custom: "com.adguard.AdguardExtension.extensionCustom",
-         .security: "com.adguard.AdguardExtension.extensionSecurity"]
+    static var contenBlockerBundleIdByType: [ContentBlockerType: String] {
+        if Bundle.main.isPro {
+            return [.general : "com.adguard.AdguardPro.extension",
+            .privacy: "com.adguard.AdguardPro.extensionPrivacy",
+            .socialWidgetsAndAnnoyances: "com.adguard.AdguardPro.extensionAnnoyances",
+            .other: "com.adguard.AdguardPro.extensionOther",
+            .custom: "com.adguard.AdguardPro.extensionCustom",
+            .security: "com.adguard.AdguardPro.extensionSecurity"]
+        }
+        else {
+            return [.general : "com.adguard.AdguardExtension.extension",
+             .privacy: "com.adguard.AdguardExtension.extensionPrivacy",
+             .socialWidgetsAndAnnoyances: "com.adguard.AdguardExtension.extensionAnnoyances",
+             .other: "com.adguard.AdguardExtension.extensionOther",
+             .custom: "com.adguard.AdguardExtension.extensionCustom",
+             .security: "com.adguard.AdguardExtension.extensionSecurity"]
+        }
+    }
     
     private let fileNames: [ContentBlockerType: String] = [
         .general: "cb_general.json",

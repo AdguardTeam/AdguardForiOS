@@ -72,7 +72,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         
         let records = result?.map { (row)->DnsLogRecord in
             let record = row.record
-            record.rowid = row.rowid
+//            record.rowid = row.rowid
             return record
         }
         

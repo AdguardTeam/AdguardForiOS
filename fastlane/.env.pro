@@ -1,0 +1,6 @@
+BUILD_SCHEME = "Adguard Pro"
+OUTPUT_DIRECTORY = "./build_pro"
+XCCONFIG_PATH = "AdguardExtension/AdguardPro/Adguard-Pro-Config.xcconfig"
+IPA_NAME = "Adguard Pro.ipa"
+ARCHIVE_NAME = "Adguard Pro.xcarchive"
+APP_IDENTIFIER = "com.adguard.AdguardPro"

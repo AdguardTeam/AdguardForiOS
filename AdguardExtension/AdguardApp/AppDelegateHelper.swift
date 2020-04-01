@@ -118,6 +118,11 @@ class AppDelegateHelper: NSObject {
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
         dnsLogContainerVC.loadViewIfNeeded()
+        
+        let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
+        if manager.migrateIfNeeeded() {
+            vpnManager.updateSettings(completion: nil)
+        }
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
