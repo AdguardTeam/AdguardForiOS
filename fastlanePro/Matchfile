@@ -1,0 +1,10 @@
+git_url("ssh://git@bit.adguard.com:7999/adguard-ios/certificates.git")
+storage_mode("git")
+type("development")
+app_identifier(["com.adguard.AdguardPro", "com.adguard.AdguardPro.extension",
+                "com.adguard.AdguardPro.extensionPrivacy", "com.adguard.AdguardPro.extensionAnnoyances",
+                "com.adguard.AdguardPro.extensionOther", "com.adguard.AdguardPro.extensionCustom",
+                "com.adguard.AdguardPro.extensionSecurity", "com.adguard.AdguardPro.todayExtension",
+                "com.adguard.AdguardPro.ActionExtension", "com.adguard.AdguardPro.tunnel"])
+username("apple-dev@adguard.com")
+team_id("N33TQXN8C7")

@@ -85,9 +85,13 @@
     BOOL result = YES;
     
     if ([from compare:@(3)] == NSOrderedAscending)  {
-        result = [antibanner enableGroupsWithEnabledFilters];
+        result = result && [antibanner enableGroupsWithEnabledFilters];
     }
     
+    ProductSchemaManager* swiftManager = [ProductSchemaManager new];
+       
+    result = result && [swiftManager onUpgradeFrom:from.integerValue to:to.integerValue];
+        
     return result;
 }
 

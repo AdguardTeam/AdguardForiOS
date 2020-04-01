@@ -72,7 +72,12 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     */
     @objc dynamic var proStatus : Bool {
         get {
-            return purchaseService.isProPurchased
+            if Bundle.main.isPro {
+                return true
+            }
+            else {
+                return purchaseService.isProPurchased
+            }
         }
     }
     

@@ -100,6 +100,11 @@ class AppDelegateHelper: NSObject {
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
         }
+        
+        let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
+        if manager.migrateIfNeeeded() {
+            vpnManager.updateSettings(completion: nil)
+        }
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {

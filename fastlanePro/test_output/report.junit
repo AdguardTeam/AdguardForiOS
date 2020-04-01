@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='AdguardTests.xctest' tests='138' failures='0'>
+  <testsuite name='AdguardTests.AASFilterSubscriptionParserTest' tests='1' failures='0'>
+    <testcase classname='AdguardTests.AASFilterSubscriptionParserTest' name='testAffinity' time='0.018'/>
+  </testsuite>
+  <testsuite name='ACNCidrRangeTest' tests='9' failures='0'>
+    <testcase classname='ACNCidrRangeTest' name='testContains' time='0.002'/>
+    <testcase classname='ACNCidrRangeTest' name='testCreate' time='0.001'/>
+    <testcase classname='ACNCidrRangeTest' name='testExcludeIpv4' time='0.001'/>
+    <testcase classname='ACNCidrRangeTest' name='testExcludeIpv6' time='0.001'/>
+    <testcase classname='ACNCidrRangeTest' name='testExclusion' time='0.025'/>
+    <testcase classname='ACNCidrRangeTest' name='testExclusion2' time='0.003'/>
+    <testcase classname='ACNCidrRangeTest' name='testExclusionsToCidrLis' time='0.003'/>
+    <testcase classname='ACNCidrRangeTest' name='testSplit' time='0.002'/>
+    <testcase classname='ACNCidrRangeTest' name='testUtilMethod' time='0.002'/>
+  </testsuite>
+  <testsuite name='ACNUrlUtilsTest' tests='1' failures='0'>
+    <testcase classname='ACNUrlUtilsTest' name='testHostsLine' time='0.004'/>
+  </testsuite>
+  <testsuite name='AdguardTests.AEInvertedWhitelistDomainsObjectTest' tests='1' failures='0'>
+    <testcase classname='AdguardTests.AEInvertedWhitelistDomainsObjectTest' name='testMigration4_0' time='0.002'/>
+  </testsuite>
+  <testsuite name='AERDomainFilterTest' tests='2' failures='0'>
+    <testcase classname='AERDomainFilterTest' name='testDomainFilter' time='0.002'/>
+    <testcase classname='AERDomainFilterTest' name='testDomainRule' time='0.002'/>
+  </testsuite>
+  <testsuite name='AdguardTests.ComplexProtectionServiceTest' tests='6' failures='0'>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testDisableComplex' time='0.009'/>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testDisableSafari' time='0.005'/>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testDisableSystem' time='0.004'/>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testEnableComplex' time='0.005'/>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testEnableSafari' time='0.006'/>
+    <testcase classname='AdguardTests.ComplexProtectionServiceTest' name='testEnableSystem' time='0.005'/>
+  </testsuite>
+  <testsuite name='AdguardTests.ContentBlockerTest' tests='10' failures='0'>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testAddUserRule' time='0.560'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testAffinityBlocks1' time='0.519'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testAffinityBlocks2' time='0.515'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testAffinityBlocks3' time='0.514'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testAffinityBlocks4' time='0.523'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testMultipleReloadWithErrors' time='5.085'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testMultipleReloadWithoutErrors' time='5.064'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testReloadWithErrors' time='0.517'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testReloadWithoutErrors' time='0.516'/>
+    <testcase classname='AdguardTests.ContentBlockerTest' name='testRuleValidation' time='0.007'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DnsFiltersServiceTest' tests='2' failures='0'>
+    <testcase classname='AdguardTests.DnsFiltersServiceTest' name='testAddWhitelistRule' time='0.004'/>
+    <testcase classname='AdguardTests.DnsFiltersServiceTest' name='testRemoveWhitelistRule2' time='0.011'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DnsLogRecordsServiceTest' tests='2' failures='0'>
+    <testcase classname='AdguardTests.DnsLogRecordsServiceTest' name='testAddRecord' time='0.011'/>
+    <testcase classname='AdguardTests.DnsLogRecordsServiceTest' name='testClearLog' time='0.005'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DnsProvidersServiceTest' tests='2' failures='0'>
+    <testcase classname='AdguardTests.DnsProvidersServiceTest' name='testAddServer' time='0.004'/>
+    <testcase classname='AdguardTests.DnsProvidersServiceTest' name='testRemoveServer' time='0.008'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DnsProxyTest' tests='4' failures='0'>
+    <testcase classname='AdguardTests.DnsProxyTest' name='testResolve' time='0.228'/>
+    <testcase classname='AdguardTests.DnsProxyTest' name='testResolveAfterStop' time='0.005'/>
+    <testcase classname='AdguardTests.DnsProxyTest' name='testRestart' time='0.188'/>
+    <testcase classname='AdguardTests.DnsProxyTest' name='testStopAndResolve' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DnsTrackerServiceTest' tests='7' failures='0'>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testAdguardJson' time='0.006'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testAdguardJsonOverride' time='0.001'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testNotFound' time='0.001'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testSimpleTracker' time='0.001'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testSubdomain' time='0.001'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testSubdomainCategory' time='0.001'/>
+    <testcase classname='AdguardTests.DnsTrackerServiceTest' name='testSubdomainCategory2' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.DomainsConverterTest' tests='7' failures='0'>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testBlacklistRuleFromDomainWithDomain' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testBlacklistRuleFromDomainWithRule' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testBlacklistRuleFromDomainWithRuleWithDotInTheEnd' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testWhitelistDomainFromRuleWithDomain' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testWhitelistDomainFromRuleWithRule' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testWhitelistRuleFromDomainWithDomain' time='0.001'/>
+    <testcase classname='AdguardTests.DomainsConverterTest' name='testWhitelistRuleFromDomainWithRule' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.FiltersServiceTest' tests='6' failures='0'>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testDisableFilter' time='1.008'/>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testDisableGroup' time='1.006'/>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testEnableFilter' time='0.003'/>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testEnableFilter2' time='1.002'/>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testEnableGroup' time='0.003'/>
+    <testcase classname='AdguardTests.FiltersServiceTest' name='testEnableMultipleGroups' time='0.003'/>
+  </testsuite>
+  <testsuite name='AdguardTests.KeychainServiceTest' tests='8' failures='0'>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testDelete' time='0.009'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testDeleteId' time='0.011'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testDeleteLicenseKey' time='0.006'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testOverwrite' time='0.073'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testSave' time='0.007'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testSaveLicenseKey' time='0.004'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testStoreId' time='0.006'/>
+    <testcase classname='AdguardTests.KeychainServiceTest' name='testStoreLicenseReadLogin' time='0.006'/>
+  </testsuite>
+  <testsuite name='AdguardTests.LoginResponseParserTest' tests='8' failures='0'>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetOuathTokenSuccess' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetToken2FARequired' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetTokenBadCredentials' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetTokenDisabled' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetTokenInvalide2FAToken' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetTokenLocked' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testGetTokenUnknownError' time='0.001'/>
+    <testcase classname='AdguardTests.LoginResponseParserTest' name='testMaxComputer' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.LoginServiceTest' tests='6' failures='0'>
+    <testcase classname='AdguardTests.LoginServiceTest' name='test300_301migration' time='0.007'/>
+    <testcase classname='AdguardTests.LoginServiceTest' name='test300_301migration2' time='0.002'/>
+    <testcase classname='AdguardTests.LoginServiceTest' name='test300_301migrationFailed' time='0.005'/>
+    <testcase classname='AdguardTests.LoginServiceTest' name='test300_301migrationFailed2' time='0.002'/>
+    <testcase classname='AdguardTests.LoginServiceTest' name='test300_301migrationFailed3' time='0.002'/>
+    <testcase classname='AdguardTests.LoginServiceTest' name='testWillExpired' time='0.003'/>
+  </testsuite>
+  <testsuite name='AdguardTests.NetworkSettingsServiceTest' tests='13' failures='0'>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testAddExeptionWithExistingRule' time='0.003'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testAddExeptionWithMultipleRules' time='0.002'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testAddExeptionWithNormalRule' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testChangeExeptionNameWithNormalRules' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testChangeExeptionStateWithNormalRules' time='0.002'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testChangeExeptionWithAbsentRule' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testDeleteExeptionWithAbsentRule' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testDeleteExeptionWithDifferentEnabledStates' time='0.002'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testDeleteExeptionWithNormalEnabledRule' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testFilterMobileDataEnabledSetWithCurrentValue' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testFilterModbileataEnabledSetWithNewValue' time='0.003'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testFilterWifiDataEnabledSetWithCurrentValue' time='0.001'/>
+    <testcase classname='AdguardTests.NetworkSettingsServiceTest' name='testFilterWifiDataEnabledSetWithNewValue' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.RateAppServiceTest' tests='4' failures='0'>
+    <testcase classname='AdguardTests.RateAppServiceTest' name='testAppEntryCountWillIncrement' time='0.003'/>
+    <testcase classname='AdguardTests.RateAppServiceTest' name='testAppEntryCountWillNotIncrement' time='0.002'/>
+    <testcase classname='AdguardTests.RateAppServiceTest' name='testWillCallRequestReview' time='0.004'/>
+    <testcase classname='AdguardTests.RateAppServiceTest' name='testWillNotCallRequestReview' time='0.003'/>
+  </testsuite>
+  <testsuite name='AdguardTests.RulesProcessorTest' tests='14' failures='0'>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddDisabledWhitelistDomainToEmptyJson' time='0.002'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddDisabledWhitelistDomainToJson' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddInvertedToEmpty' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddInvertedToExistedEmptyRule' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddInvertedToFilled' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddToOverlimit' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddToOverlimit2' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddWhitelistDomainToEmptyArray' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddWhitelistDomainToEmptyJson' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testAddWhitelistToFilled' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testChangeToDisabledStateInvertedWhitelistDomain' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testEmptyInvertedWhitelist' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testRemoveInverted' time='0.001'/>
+    <testcase classname='AdguardTests.RulesProcessorTest' name='testRemoveWhitelistDomain' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.SafariServiceTest' tests='8' failures='0'>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateAllFailure' time='3.602'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateAllManyTimesFailure' time='7.439'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateAllManyTimesSuccess' time='6.425'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateAllSuccess' time='3.242'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateOneCB' time='0.503'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateOneCBWithError' time='1.056'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateOneCBWithErrorOnFirstTry' time='1.047'/>
+    <testcase classname='AdguardTests.SafariServiceTest' name='testInvalidateOneCBWithErrorOnFirstTryManytimes' time='5.707'/>
+  </testsuite>
+  <testsuite name='AdguardTests.SharedResourcesTest' tests='1' failures='0'>
+    <testcase classname='AdguardTests.SharedResourcesTest' name='testFilterEnabled' time='0.012'/>
+  </testsuite>
+  <testsuite name='AdguardTests.StringUtilsTest' tests='5' failures='0'>
+    <testcase classname='AdguardTests.StringUtilsTest' name='testCheckIfValidDnsServerForCorrectExamples' time='0.002'/>
+    <testcase classname='AdguardTests.StringUtilsTest' name='testCheckIfValidDnsServerForIncorrectExamples' time='0.001'/>
+    <testcase classname='AdguardTests.StringUtilsTest' name='testGenerateSubDomainsWithDotInTheEnd' time='0.002'/>
+    <testcase classname='AdguardTests.StringUtilsTest' name='testGenerateSubDomainsWithEmptyDomain' time='0.000'/>
+    <testcase classname='AdguardTests.StringUtilsTest' name='testGenerateSubDomainsWithNormalDomain' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.UIButtonUtilsTest' tests='5' failures='0'>
+    <testcase classname='AdguardTests.UIButtonUtilsTest' name='testMakeTitleTextUppercasedWithEmptyString' time='0.002'/>
+    <testcase classname='AdguardTests.UIButtonUtilsTest' name='testMakeTitleTextUppercasedWithNil' time='0.001'/>
+    <testcase classname='AdguardTests.UIButtonUtilsTest' name='testMakeTitleTextUppercasedWithRightState' time='0.001'/>
+    <testcase classname='AdguardTests.UIButtonUtilsTest' name='testMakeTitleTextUppercasedWithString' time='0.001'/>
+    <testcase classname='AdguardTests.UIButtonUtilsTest' name='testMakeTitleTextUppercasedWithWrongState' time='0.001'/>
+  </testsuite>
+  <testsuite name='AdguardTests.VpnManagerTest' tests='6' failures='0'>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testInstall' time='0.006'/>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testInstallError' time='0.002'/>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testManyConfigurations' time='0.002'/>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testMigration' time='0.004'/>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testOverwite' time='0.003'/>
+    <testcase classname='AdguardTests.VpnManagerTest' name='testVpnInstalled' time='0.002'/>
+  </testsuite>
+</testsuites>

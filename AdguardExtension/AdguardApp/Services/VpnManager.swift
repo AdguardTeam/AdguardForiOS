@@ -408,9 +408,28 @@ class VpnManagerMigration: NSObject {
             }
             
             if activeDnsServerData != nil {
-                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!) as? DnsServerInfo {
+                
+                let oldServer = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!)
+                if let activeDnsServerOld = oldServer as? DnsServerInfo {
                     DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
                     dnsProviders.activeDnsServer = activeDnsServerOld
+                }
+                else if let activeDnsServerOld = oldServer as? APDnsServerObject {
+                    DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
+                    let prot: DnsProtocol = (activeDnsServerOld.isDnsCrypt?.boolValue ?? false) ? .dnsCrypt : .dns
+                    
+                    var upstreams: [String] = []
+                    
+                    for ipv4Address in activeDnsServerOld.ipv4Addresses {
+                        upstreams.append(ipv4Address.upstream)
+                    }
+                    
+                    for ipv6Address in activeDnsServerOld.ipv6Addresses {
+                        upstreams.append(ipv6Address.upstream)
+                    }
+                    
+                    let newServer = DnsServerInfo(dnsProtocol: prot, serverId:UUID().uuidString, name: activeDnsServerOld.serverName, upstreams: upstreams, anycast: nil)
+                    dnsProviders.activeDnsServer = newServer
                 }
             }
         }

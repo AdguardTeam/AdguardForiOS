@@ -31,4 +31,11 @@
     return self;
 }
 
+- (void)setValue:(id)value forKey:(NSString *)key {
+    if ([key isEqualToString: @"record"] && value == nil) {
+        self.record = [[DnsLogRecord alloc] initWithDomain:@"" date:[NSDate date] elapsed:0 type:@"" answer:@"" server:@"" upstreamAddr:@"" bytesSent:0 bytesReceived:0 status:DnsLogRecordStatusProcessed userStatus:DnsLogRecordUserStatusNone blockRules:nil matchedFilterIds:nil originalAnswer:nil answerStatus:nil];
+    }
+    else [super setValue:value forKey:key];
+}
+
 @end

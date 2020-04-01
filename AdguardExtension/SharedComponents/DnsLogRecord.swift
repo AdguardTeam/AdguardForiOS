@@ -54,7 +54,7 @@ class DnsLogRecord: NSObject, NSCoding {
     let originalAnswer: String?
     let answerStatus: String?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?, originalAnswer: String?, answerStatus: String?) {
+    @objc init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?, originalAnswer: String?, answerStatus: String?) {
         
         self.domain = domain
         self.date = date
