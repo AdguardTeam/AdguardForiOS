@@ -119,6 +119,12 @@ class AppDelegateHelper: NSObject {
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
         dnsLogContainerVC.loadViewIfNeeded()
+        
+        let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
+        if manager.migrateIfNeeeded() {
+            vpnManager.updateSettings(completion: nil)
+            configuration.advancedMode = true
+        }
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -127,12 +133,15 @@ class AppDelegateHelper: NSObject {
         
         addPurchaseStatusObserver()
         
-        if (firstRun) {
-            migrationService.install()
-            purchaseService.checkLicenseStatus()
-            firstRun = false
-        } else {
-            migrationService.migrateIfNeeded()
+        antibannerController.onReady { [weak self] (_) in
+            guard let self = self else { return }
+            if (self.firstRun) {
+                self.migrationService.install()
+                self.purchaseService.checkLicenseStatus()
+                self.firstRun = false
+            } else {
+                self.migrationService.migrateIfNeeded()
+            }
         }
         
         return true

@@ -35,10 +35,12 @@ class MigrationService: MigrationServiceProtocol {
     private let networking: ACNNetworkingProtocol
     private let activityStatisticsService: ActivityStatisticsServiceProtocol
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
+    private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
+    private let configurationService: ConfigurationServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol) {
+    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -47,6 +49,8 @@ class MigrationService: MigrationServiceProtocol {
         self.networking = networking
         self.activityStatisticsService = activityStatisticsService
         self.dnsStatisticsService = dnsStatisticsService
+        self.dnsLogRecordsService = dnsLogService
+        self.configurationService = configuration
     }
     
     func install() {
@@ -79,6 +83,13 @@ class MigrationService: MigrationServiceProtocol {
             
             if savedSchemaVersion < 3 {
                 result = result && enableGroupsWithEnabledFilters()
+                
+                if Bundle.main.isPro {
+                    dnsLogRecordsService.clearLog()
+                    if migrateProDnsUserFilters() {
+                        configurationService.advancedMode = true
+                    }
+                }
             }
             
             /* If all migrations are successfull, than save current schema version */
@@ -181,5 +192,36 @@ class MigrationService: MigrationServiceProtocol {
     
     private func updateDnsFilters() {
         dnsFiltersService.updateFilters(networking: networking, callback: nil)
+    }
+    
+    private func migrateProDnsUserFilters()->Bool {
+        
+        var result = false
+        let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+        let fm = FileManager()
+        
+        let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data")
+        if (whitelistData?.count ?? 0) > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(whitelistData!) as? [String]{
+                for domain in domains {
+                    result = true
+                    dnsFiltersService.addWhitelistRule(domainsConverter.whitelistRuleFromDomain(domain))
+                }
+            }
+            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-whitelist-doamins.data"))
+        }
+        
+        let blacklistData = resources.loadData(fromFileRelativePath: "pro-blacklist-doamins.data")
+        if (blacklistData?.count ?? 0) > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(blacklistData!) as? [String]{
+                for domain in domains {
+                    result = true
+                    dnsFiltersService.addBlacklistRule(domainsConverter.blacklistRuleFromDomain(domain))
+                }
+            }
+            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-blacklist-doamins.data"))
+        }
+        
+        return result
     }
 }

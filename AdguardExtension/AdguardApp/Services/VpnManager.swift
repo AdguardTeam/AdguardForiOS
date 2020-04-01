@@ -383,6 +383,13 @@ class VpnManager: VpnManagerProtocol {
     }
 }
 
+let oldAdguardUUID = "AGDEF01"
+let oldAdguardFamilyUUID = "AGDEF02"
+let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
+let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
+let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
+let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
+
 @objc
 class VpnManagerMigration: NSObject {
     @objc
@@ -408,9 +415,33 @@ class VpnManagerMigration: NSObject {
             }
             
             if activeDnsServerData != nil {
-                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!) as? DnsServerInfo {
+                
+                let oldServer = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!)
+                if let activeDnsServerOld = oldServer as? DnsServerInfo {
                     DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
                     dnsProviders.activeDnsServer = activeDnsServerOld
+                }
+                else if let activeDnsServerOld = oldServer as? APDnsServerObject {
+                    // we used APDnsServerObject in old pro app v <= 2.1.2
+                    DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
+                    
+                    let adguardServer = activeDnsServerOld.uuid == oldAdguardUUID || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv6
+                    
+                    let adguardFamily = activeDnsServerOld.uuid == oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv6
+                    
+                    let activeServer: DnsServerInfo?
+                    
+                    if adguardServer {
+                        activeServer = dnsProviders.adguardDohServer
+                    }
+                    else if adguardFamily {
+                        activeServer = dnsProviders.adguardFamilyDohServer
+                    }
+                    else {
+                        activeServer = nil
+                    }
+                    
+                    dnsProviders.activeDnsServer = activeServer
                 }
             }
         }
