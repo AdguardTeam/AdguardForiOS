@@ -1708,6 +1708,9 @@
                     </tableView>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="osy-0b-Z5C">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="cancelButton" destination="JAa-KQ-Smy" id="f7C-V3-eug"/>
                         <outlet property="searchBar" destination="3s4-VB-Nag" id="RUn-fV-vD8"/>
