@@ -211,8 +211,10 @@ class AdvancedSettingsController: UITableViewController {
             self.vpnManager.removeVpnConfiguration {(error) in
                 DispatchQueue.main.async {
                     alert.dismiss(animated: true)
+                    DDLogInfo("AdvancedSettingsController - removing VPN profile")
                     if error != nil {
                         ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("remove_vpn_profile_error_title"), message: String.localizedString("remove_vpn_profile_error_message"))
+                        DDLogError("AdvancedSettingsController - error removing VPN profile")
                     }
                 }
             }
