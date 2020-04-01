@@ -19,6 +19,10 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    var adguardDohServer: DnsServerInfo? { return nil }
+    
+    var adguardFamilyDohServer: DnsServerInfo? { return nil }
+    
     func reset() { }
     
     var allProviders: [DnsProviderInfo] = []

@@ -38,6 +38,9 @@ protocol VpnManagerProtocol {
     
     /** checks vpn cpnfiguration is installed */
     func checkVpnInstalled(completion: @escaping (Error?)->Void)
+    
+    /** migrate settings pro 2.1.2 and freee 3.0 settings to universal app v4.0 */
+    func migrateOldVpnSettings(completion: @escaping (Error?)->Void)
 }
 
 enum VpnManagerError: Error {
@@ -105,14 +108,15 @@ class VpnManager: VpnManagerProtocol {
         }
     }
     
+    // MARK: - VpnManagerProtocol methods
+    
     func checkVpnInstalled(completion: @escaping (Error?)->Void) {
-        // get manager from system preferences
+        
         workingQueue.async { [weak self] in
             guard let self = self else { return }
+            
+            // get manager from system preferences
             let (manager, error) = self.loadManager()
-            if let providerConfiguration = (manager?.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration {
-                VpnManagerMigration.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
-            }
             
             if let manager = manager {
                 self.checkState(manager)
@@ -121,8 +125,6 @@ class VpnManager: VpnManagerProtocol {
             completion(error)
         }
     }
-    
-    // MARK: - VpnManagerProtocol methods
     
     func updateSettings(completion: ((Error?) -> Void)?) {
         workingQueue.async { [weak self] in
@@ -200,6 +202,20 @@ class VpnManager: VpnManagerProtocol {
     
     var vpnInstalled: Bool {
         return vpnInstalledValue ?? true
+    }
+    
+    func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            // get manager from system preferences
+            let (manager, error) = self.loadManager()
+            if let providerConfiguration = (manager?.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration {
+                VpnManagerMigration.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
+            }
+            
+            completion(error)
+        }
     }
     
     // MARK: - private methods
@@ -390,6 +406,13 @@ class VpnManager: VpnManagerProtocol {
     }
 }
 
+let oldAdguardUUID = "AGDEF01"
+let oldAdguardFamilyUUID = "AGDEF02"
+let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
+let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
+let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
+let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
+
 @objc
 class VpnManagerMigration: NSObject {
     @objc
@@ -415,9 +438,33 @@ class VpnManagerMigration: NSObject {
             }
             
             if activeDnsServerData != nil {
-                if let activeDnsServerOld = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!) as? DnsServerInfo {
+                
+                let oldServer = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!)
+                if let activeDnsServerOld = oldServer as? DnsServerInfo {
                     DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
                     dnsProviders.activeDnsServer = activeDnsServerOld
+                }
+                else if let activeDnsServerOld = oldServer as? APDnsServerObject {
+                    // we used APDnsServerObject in old pro app v <= 2.1.2
+                    DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
+                    
+                    let adguardServer = activeDnsServerOld.uuid == oldAdguardUUID || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv6
+                    
+                    let adguardFamily = activeDnsServerOld.uuid == oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv6
+                    
+                    let activeServer: DnsServerInfo?
+                    
+                    if adguardServer {
+                        activeServer = dnsProviders.adguardDohServer
+                    }
+                    else if adguardFamily {
+                        activeServer = dnsProviders.adguardFamilyDohServer
+                    }
+                    else {
+                        activeServer = nil
+                    }
+                    
+                    dnsProviders.activeDnsServer = activeServer
                 }
             }
         }

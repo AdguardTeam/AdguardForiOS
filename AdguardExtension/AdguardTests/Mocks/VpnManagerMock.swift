@@ -39,5 +39,9 @@ class VpnManagerMock: NSObject, VpnManagerProtocol {
         completion(nil)
     }
     
+    func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
+    
     var vpnInstalled: Bool = true
 }

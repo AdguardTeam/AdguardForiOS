@@ -127,12 +127,15 @@ class AppDelegateHelper: NSObject {
         
         addPurchaseStatusObserver()
         
-        if (firstRun) {
-            migrationService.install()
-            purchaseService.checkLicenseStatus()
-            firstRun = false
-        } else {
-            migrationService.migrateIfNeeded()
+        antibannerController.onReady { [weak self] (_) in
+            guard let self = self else { return }
+            if (self.firstRun) {
+                self.migrationService.install()
+                self.purchaseService.checkLicenseStatus()
+                self.firstRun = false
+            } else {
+                self.migrationService.migrateIfNeeded()
+            }
         }
         
         return true

@@ -14,11 +14,6 @@ default_platform(:ios)
 
 # Configuration
 COMMIT_MESSAGE = "skipci: Automatic version increment"
-BUILD_SCHEME = "AdguardExtension"
-OUTPUT_DIRECTORY = "./build"
-XCCONFIG_PATH = "AdguardExtension/Adguard-Config.xcconfig"
-IPA_NAME = "Adguard.ipa"
-ARCHIVE_NAME = "Adguard.xcarchive"
 
 def commit_ag_build_bump()
   FastlaneCore::CommandExecutor.execute(command: "git add ..",
@@ -34,7 +29,7 @@ def commit_ag_build_bump()
 end
 
 def zip_archive()
-  archive_path = "../#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}"
+  archive_path = "../#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}"
   command = "/usr/bin/ditto -c -k --keepParent \"#{archive_path}\" \"#{archive_path}.zip\""
 
   FastlaneCore::CommandExecutor.execute(command: command,
@@ -45,7 +40,7 @@ def zip_archive()
 end
 
 def clean()
-  FastlaneCore::CommandExecutor.execute(command: "rm -rf ../#{OUTPUT_DIRECTORY}",
+  FastlaneCore::CommandExecutor.execute(command: "rm -rf ../#{ENV['OUTPUT_DIRECTORY']}",
                                         print_all: true,
                                         error: proc do |error_output|
                                           UI.error("Failed to run clean: #{error_output}")
@@ -56,7 +51,7 @@ platform :ios do
   desc "Runs unit tests"
   lane :tests do
     run_tests(
-      scheme: BUILD_SCHEME,
+      scheme: ENV['BUILD_SCHEME'],
       output_types: "junit",
       clean: true,
       code_coverage: true,
@@ -69,15 +64,15 @@ platform :ios do
 
     match(type: "appstore", readonly: true)
     build_app(
-      scheme: BUILD_SCHEME,
-      output_directory: OUTPUT_DIRECTORY,
+      scheme: ENV['BUILD_SCHEME'],
+      output_directory: ENV['OUTPUT_DIRECTORY'],
       include_bitcode: false,
       include_symbols: true,
-      archive_path: "#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}",
+      archive_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}",
     )
     write_build_info(
-      xcconfig: XCCONFIG_PATH,
-      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+      xcconfig: ENV['XCCONFIG_PATH'],
+      build_info_output: "#{ENV['OUTPUT_DIRECTORY']}/build.txt",
     )
     zip_archive()
   end
@@ -88,15 +83,15 @@ platform :ios do
 
     match(type: "adhoc", force_for_new_devices: true)
     build_app(
-      scheme: BUILD_SCHEME,
-      output_directory: OUTPUT_DIRECTORY,
+      scheme: ENV['BUILD_SCHEME'],
+      output_directory: ENV['OUTPUT_DIRECTORY'],
       include_bitcode: false,
       include_symbols: true,
-      archive_path: "#{OUTPUT_DIRECTORY}/#{ARCHIVE_NAME}",
+      archive_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}",
     )
     write_build_info(
-      xcconfig: XCCONFIG_PATH,
-      build_info_output: "#{OUTPUT_DIRECTORY}/build.txt",
+      xcconfig: ENV['XCCONFIG_PATH'],
+      build_info_output: "#{ENV['OUTPUT_DIRECTORY']}/build.txt",
     )
     zip_archive()
   end
@@ -107,7 +102,7 @@ platform :ios do
     ensure_git_status_clean
 
     # Increment the build number (not the version number)
-    increment_ag_build(xcconfig: XCCONFIG_PATH)
+    increment_ag_build(xcconfig: ENV['BUILD_NUMBER_XCCONFIG_PATH'])
 
     # Commit
     commit_ag_build_bump()
@@ -122,7 +117,7 @@ platform :ios do
     upload_to_testflight(
       skip_submission: true,
       skip_waiting_for_build_processing: true,
-      ipa: "#{OUTPUT_DIRECTORY}/#{IPA_NAME}"
+      ipa: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['IPA_NAME']}"
     )
   end
 end

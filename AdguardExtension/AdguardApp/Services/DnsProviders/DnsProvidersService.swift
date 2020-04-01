@@ -29,6 +29,8 @@ protocol DnsProvidersServiceProtocol {
     var allProviders: [DnsProviderInfo] { get }
     var predefinedProviders: [DnsProviderInfo] { get }
     var customProviders: [DnsProviderInfo] { get }
+    var adguardDohServer: DnsServerInfo? { get }
+    var adguardFamilyDohServer: DnsServerInfo? { get }
     
     var activeDnsServer: DnsServerInfo? { get set }
     var activeDnsProvider: DnsProviderInfo? { get }
@@ -223,7 +225,26 @@ protocol DnsProvidersServiceProtocol {
         customProvidersInternal = nil
     }
     
+    var adguardDohServer: DnsServerInfo? {
+        return serverWithId("adguard-doh")
+    }
+    
+    var adguardFamilyDohServer: DnsServerInfo? {
+        return serverWithId("adguard-family-doh")
+    }
+    
     // MARK: - private methods
+    
+    private func serverWithId(_ id: String)->DnsServerInfo? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if server.serverId == id {
+                    return server
+                }
+            }
+        }
+        return nil
+    }
     
     private func readServersJson() {
         
