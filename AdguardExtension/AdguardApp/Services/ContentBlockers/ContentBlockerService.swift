@@ -101,7 +101,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         workQueue.async { [weak self] in
             guard let self = self else { return }
             
-            let error = self.updateContentBlockers()
+            let error = self.updateContentBlockers(background: backgroundUpdate)
 #if !APP_EXTENSION
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
@@ -247,7 +247,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - private methods
     
-    private func updateContentBlockers()->Error? {
+    private func updateContentBlockers(background: Bool)->Error? {
         
         DDLogInfo("(ContentBlockerService) updateContentBlockers")
         let filtersByGroup = activeGroups()
@@ -280,10 +280,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             rulesByContentBlocker[type]?.append(contentsOf: rulesByAffinityBlocks[type] ?? [])
         }
         
-        return convertRulesAndInvalidateSafari(rulesByContentBlocker: rulesByContentBlocker)
+        return convertRulesAndInvalidateSafari(background: background,rulesByContentBlocker: rulesByContentBlocker)
     }
     
-    private func convertRulesAndInvalidateSafari(rulesByContentBlocker: [ContentBlockerType: [ASDFilterRule]])->Error? {
+    private func convertRulesAndInvalidateSafari(background: Bool, rulesByContentBlocker: [ContentBlockerType: [ASDFilterRule]])->Error? {
         var resultError: Error?
         
         let concurrentQueue = DispatchQueue(label: "update_cb", attributes: DispatchQueue.Attributes.concurrent)
@@ -294,15 +294,21 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             group.enter()
             concurrentQueue.async { [weak self] in
                 guard let self = self else { return }
+                
                 let error = self.updateJson(blockerRules: rulesByContentBlocker[type]!, forContentBlocker: type)
                 
                 if error == nil {
-                    // immediately update the safari without waiting for the conversion of other jsons
-                    self.safariService.invalidateBlockingJson(type: type) { (error) in
-                        if error != nil {
-                            resultError = error
-                        }
+                    if background {
                         group.leave()
+                    }
+                    else {
+                        // immediately update the safari without waiting for the conversion of other jsons
+                        self.safariService.invalidateBlockingJson(type: type) { (error) in
+                            if error != nil {
+                                resultError = error
+                            }
+                            group.leave()
+                        }
                     }
                 }
                 else {

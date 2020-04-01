@@ -127,6 +127,21 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var backgroundFetchState: BackgroundFetchState {
+        get {
+            guard let value = sharedDefaults().object(forKey: BackgroundFetchStateKey) as? Int else {
+                return .notStarted
+            }
+            return BackgroundFetchState(rawValue: value)!
+        }
+        set {
+            DDLogInfo("(SharedResources) set background fetch state: \(newValue.rawValue)")
+            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchStateKey)
+        }
+    }
+    
+    // MARK: - private methods
+    
     private func filterEnabled(defaultsKey: String)->Bool {
         let defaultValue = true
         guard let value = sharedDefaults().object(forKey: defaultsKey) as? Bool else {

@@ -104,6 +104,8 @@ NSString* AEComplexProtectionEnabled = @"AEComplexProtectionEnabled";
 
 NSString *OnboardingWasShown = @"OnboardingWasShown";
 
+NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
+
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"

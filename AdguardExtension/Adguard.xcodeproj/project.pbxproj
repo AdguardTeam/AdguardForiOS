@@ -948,6 +948,17 @@
 		D032D173232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
 		D032D174232BA9A1001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
 		D032D175232BA9A1001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
+		D03398062431927200F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D03398072431929D00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D03398082431929E00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D03398092431929E00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980A2431929F00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980B243192A000F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980C243192A100F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980D243192A100F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980E243192A200F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D033980F243192A500F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
+		D0339810243192AB00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
 		D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
 		D03E532921B412FA00C62152 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
@@ -2355,6 +2366,7 @@
 		D031A0C7219EFC99002C17D9 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
 		D031A0C8219EFC99002C17D9 /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
 		D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotEcapingJsonSerialization.swift; sourceTree = "<group>"; };
+		D03398052431927200F6B9DE /* BackgroundFetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchState.swift; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
 		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
@@ -3906,6 +3918,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D033980224318C1900F6B9DE /* ContentBlockers */ = {
+			isa = PBXGroup;
+			children = (
+				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
+				D03398052431927200F6B9DE /* BackgroundFetchState.swift */,
+				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
+			);
+			path = ContentBlockers;
+			sourceTree = "<group>";
+		};
 		D044AF7121820AA700CD9E06 /* other */ = {
 			isa = PBXGroup;
 			children = (
@@ -4170,6 +4192,7 @@
 		D0F9117421303E00006DF0D3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D033980224318C1900F6B9DE /* ContentBlockers */,
 				7EB2F93D23F2B64400F9A544 /* Networking */,
 				D0C940F823ED5FF7008B85EC /* DnsProviders */,
 				7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */,
@@ -4177,13 +4200,11 @@
 				7E9F3E0E23CE08C100A7BDA2 /* DnsFilterService */,
 				7E5EA7AD239A38C500A07DE0 /* Protection */,
 				7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */,
-				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
 				D0EC86BD23A8C5F300EDF107 /* APDnsLogTable.h */,
 				D0EC86BC23A8C5F200EDF107 /* APDnsLogTable.m */,
 				D0EC86C323A8D8F800EDF107 /* APStatisticsTable.h */,
 				D0EC86C423A8D8F800EDF107 /* APStatisticsTable.m */,
 				D0CB347A212DD1AB003B650E /* ConfigurationService.swift */,
-				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
 				D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */,
 				D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */,
 				D0702B3E2188859D0051669A /* FileShareService.swift */,
@@ -5746,6 +5767,7 @@
 				D031A13F219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
 				655A02811C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */,
+				D033980E243192A200F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D031A123219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
 				D031A0DD219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
@@ -6012,6 +6034,7 @@
 				7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
+				D03398062431927200F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D031A163219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D067D8D921412D4D00ECDE6D /* ContentBlockerService.swift in Sources */,
 				D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */,
@@ -6078,6 +6101,7 @@
 				D0EC86C823A8E97F00EDF107 /* APDnsLogTable.m in Sources */,
 				D0C37EB422A66BBF0004337D /* DnsProxyTest.swift in Sources */,
 				D0D5949923AA3C330033CAF3 /* DnsLogRecord.swift in Sources */,
+				D03398072431929D00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D07A811223B501CD00181E54 /* SharedResources.swift in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				D0EC86B823A8C45D00EDF107 /* RequestsStatisticsBlock.swift in Sources */,
@@ -6226,6 +6250,7 @@
 				D093718D21B0565F004A24F1 /* SafariService.swift in Sources */,
 				D031A0D8219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				655A02261C6B7686000F00D7 /* ACIOStream.m in Sources */,
+				D03398082431929E00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				655A02861C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
 				D05CA86E1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D031A13A219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -6276,6 +6301,7 @@
 				7E06B67822FB1606006859AC /* SafariService.swift in Sources */,
 				7E06B67922FB1606006859AC /* DDOSLogger.m in Sources */,
 				7E06B67A22FB1606006859AC /* ACIOStream.m in Sources */,
+				D033980D243192A100F6B9DE /* BackgroundFetchState.swift in Sources */,
 				7E06B67B22FB1606006859AC /* NSURL+Utils.m in Sources */,
 				7E06B67C22FB1606006859AC /* APCommonSharedResources.m in Sources */,
 				7E06B67D22FB1606006859AC /* DDMultiFormatter.m in Sources */,
@@ -6341,6 +6367,7 @@
 				7EB444BD23B64EC4005E015F /* RequestsStatisticsBlock.swift in Sources */,
 				7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */,
 				7EC635B7239EB2AD003A5CE4 /* PurchaseService.swift in Sources */,
+				D0339810243192AB00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */,
 				7E9A487F23A2817900B89540 /* ACIOUtils.m in Sources */,
 				7E33401A2390311B00C39F62 /* String+Utils.swift in Sources */,
@@ -6437,6 +6464,7 @@
 				7E9F3E1123CE0FA700A7BDA2 /* DomainsConverter.swift in Sources */,
 				D0569DD621F1C0A800985DA9 /* DDOSLogger.m in Sources */,
 				D0569DDF21F1C0A800985DA9 /* ABECRequest.m in Sources */,
+				D033980F243192A500F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D0569DEA21F1C0A800985DA9 /* ADBTable.m in Sources */,
 				D0569DEB21F1C0A800985DA9 /* ACNCidrRange.m in Sources */,
 				D04C2B7C2410E137009330A8 /* SafariService.swift in Sources */,
@@ -6494,6 +6522,7 @@
 				D093719021B05661004A24F1 /* SafariService.swift in Sources */,
 				D031A0D9219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D067D8F421428AA900ECDE6D /* NSURL+Utils.m in Sources */,
+				D03398092431929E00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D067D8F521428AA900ECDE6D /* APCommonSharedResources.m in Sources */,
 				D02FABEC2164F52A00174676 /* ACObject.m in Sources */,
 				D031A13B219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -6544,6 +6573,7 @@
 				D093718F21B05661004A24F1 /* SafariService.swift in Sources */,
 				D031A0DA219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D067D92421428B4600ECDE6D /* ACIOStream.m in Sources */,
+				D033980A2431929F00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D067D92521428B4600ECDE6D /* NSURL+Utils.m in Sources */,
 				D067D92621428B4600ECDE6D /* APCommonSharedResources.m in Sources */,
 				D031A13C219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -6594,6 +6624,7 @@
 				D093719121B05662004A24F1 /* SafariService.swift in Sources */,
 				D031A0DB219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D067D95521428B9100ECDE6D /* ACIOStream.m in Sources */,
+				D033980B243192A000F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D067D95621428B9100ECDE6D /* NSURL+Utils.m in Sources */,
 				D067D95721428B9100ECDE6D /* APCommonSharedResources.m in Sources */,
 				D031A13D219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -6644,6 +6675,7 @@
 				D093719221B05662004A24F1 /* SafariService.swift in Sources */,
 				D031A0DC219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D067D98621428BB500ECDE6D /* ACIOStream.m in Sources */,
+				D033980C243192A100F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D067D98721428BB500ECDE6D /* NSURL+Utils.m in Sources */,
 				D067D98821428BB500ECDE6D /* APCommonSharedResources.m in Sources */,
 				D031A13E219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,

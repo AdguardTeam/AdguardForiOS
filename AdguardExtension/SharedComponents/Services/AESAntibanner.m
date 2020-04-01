@@ -1372,17 +1372,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             UIBackgroundTaskIdentifier backgroundTaskIdentifier = [UIApplication.sharedApplication beginBackgroundTaskWithExpirationHandler:nil];
 #endif
             
-            // Notifying to all, that filter rules may be obtained
-            if (!serviceReady){
-                
-                serviceReady = YES;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    DDLogInfo(@"(ASAntibanner) ASAntibannerReadyNotification");
-                    [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerReadyNotification object:self];
-                });
-            }
-            
             // Getting filter info from DB
             NSMutableSet *dbFilterMetas = [NSMutableSet setWithArray:[self filters]];
             
