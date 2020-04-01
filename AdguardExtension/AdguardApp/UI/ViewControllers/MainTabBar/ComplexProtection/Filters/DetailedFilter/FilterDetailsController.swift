@@ -43,8 +43,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     private var notificationToken: NotificationToken?
     
-    private var editButton: BottomShadowButton?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,7 +79,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         if filter.editable {
             let editButton = BottomShadowButton()
             editButton.title = String.localizedString("common_edit").uppercased()
-            editButton.titleColor = theme.grayTextColor
+            editButton.titleColor = nil
             buttons.append(editButton)
         }
         
