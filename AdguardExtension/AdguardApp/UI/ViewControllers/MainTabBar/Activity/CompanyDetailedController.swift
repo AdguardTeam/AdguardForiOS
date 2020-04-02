@@ -85,8 +85,10 @@ class CompanyDetailedController: UITableViewController {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
         
-        requestsNumberLabel.text = "\(record?.requests ?? 0)"
-        blockedNumberLabel.text = "\(record?.blocked ?? 0)"
+        let requestsCount = record?.requests ?? 0
+        let blockedCount = record?.blocked ?? 0
+        requestsNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: requestsCount))
+        blockedNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: blockedCount))
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()

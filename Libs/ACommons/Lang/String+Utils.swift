@@ -158,7 +158,6 @@ extension String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = .current
-        formatter.groupingSeparator = " "
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 0
         return formatter.string(from: number) ?? "0"
