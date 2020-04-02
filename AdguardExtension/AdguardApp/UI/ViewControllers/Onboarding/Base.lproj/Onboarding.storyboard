@@ -491,8 +491,8 @@
                                     <action selector="videoAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="KGQ-e8-W9K"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fd3-xK-PyV" userLabel="Close Button">
-                                <rect key="frame" x="8" y="60" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fd3-xK-PyV" userLabel="Close Button">
+                                <rect key="frame" x="8" y="16" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="1WR-fo-VGZ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>

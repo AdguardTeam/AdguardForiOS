@@ -237,33 +237,42 @@ class KeychainService : KeychainServiceProtocol {
                      kSecReturnAttributes as String:  true,
                      kSecReturnData as String:        true]
         
+        DDLogInfo("(KeychainService) getStoredAppId")
+        
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
         
         if status == errSecItemNotFound {
+            DDLogInfo("(KeychainService) getStoredAppId error - not found")
             return (nil, true)
         }
         if status != errSecSuccess {
+            DDLogError("(KeychainService) getStoredAppId error. Status: \(status)")
             return (nil, false)
         }
         
         guard let resultDict = attributes as! [String: Any]?  else {
+            DDLogError("(KeychainService) getStoredAppId error. Unknown result format")
             return (nil, false)
         }
         
         guard   let key = resultDict[kSecAttrAccount as String] as? String,
                 let value = resultDict[kSecValueData as String] else {
+                DDLogError("(KeychainService) getStoredAppId error. Unknown result format 2")
                 return (nil, false)
         }
         
         guard let valueString = String(data: value as! Data, encoding: .utf8) else {
+            DDLogError("(KeychainService) getStoredAppId error. Unknown result format 3")
             return (nil, false)
         }
         
         if key != appIdKey {
+            DDLogError("(KeychainService) getStoredAppId error. appIdKey does not match")
             return (nil, false)
         }
         
+        DDLogInfo("(KeychainService) getStoredAppId - success")
         return (valueString, false)
     }
     
@@ -301,6 +310,8 @@ class KeychainService : KeychainServiceProtocol {
     
     internal func deleteAppId()-> Bool {
         
+        DDLogInfo("(KeychainService) deleteAppId")
+        
         // read app id from keychain
         
         let query = [kSecClass as String:             kSecClassGenericPassword,
@@ -311,14 +322,22 @@ class KeychainService : KeychainServiceProtocol {
 
         var attributes: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &attributes)
-        if(status != errSecSuccess) { return false }
+        if(status != errSecSuccess) {
+            DDLogError("(KeychainService) deleteAppId read error. Status: \(status) ")
+            return false
+        }
         
         let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
                            kSecAttrService as String:        appIdService as Any,
                            kSecAttrAccount as String:       appIdKey]
         
         let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
-        if deleteStatus != errSecSuccess {return false}
+        if deleteStatus != errSecSuccess {
+            DDLogError("(KeychainService) deleteAppId delete error. Status: \(deleteStatus) ")
+            return false
+        }
+        
+        DDLogInfo("(KeychainService) deleteAppId - success")
         
         return true
     }
@@ -330,17 +349,25 @@ class KeychainService : KeychainServiceProtocol {
      */
     private func migrate3_0_0appIdIfNeeded(_ appId: String?) {
         
+        DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded")
+        
         if appId == nil {
+            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - appId = nil")
             return
         }
         
         let allreadyMigrated = resources.sharedDefaults().bool(forKey: AEDefaultsAppIdSavedWithAccessRights)
         if allreadyMigrated {
+            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - allreadyMigrated)")
             return
         }
         
         if deleteAppId() {
+            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - success")
             _ = save(appId: appId!)
+        }
+        else {
+            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - error. Can not delete old app id)")
         }
     }
 }

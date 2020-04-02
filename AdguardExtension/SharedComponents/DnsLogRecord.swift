@@ -23,6 +23,17 @@ enum DnsLogRecordStatus: Int {
     typealias RawValue = Int
 
     case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelistedByUserFilter, whitelistedByOtherFilter
+    
+    func title()->String {
+        switch self {
+        case .processed:
+            return String.localizedString("dns_request_status_processed")
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
+            return String.localizedString("dns_request_status_whitelisted")
+        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
+            return String.localizedString("dns_request_status_blocked")
+        }
+    }
 }
 
 @objc(DnsLogRecordUserStatus)
@@ -98,6 +109,12 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(answerStatus, forKey: "answerStatus")
     }
     
+    override var debugDescription: String {
+        get {
+            return "domain: \(domain); date: \(date)"
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         self.domain = aDecoder.decodeObject(forKey: "domain") as! String
         self.date = aDecoder.decodeObject(forKey: "date") as! Date
@@ -157,22 +174,44 @@ extension DnsLogRecord {
         }
     }
     
-    func getDetailsString(_ fontSize: CGFloat) -> NSMutableAttributedString {
+    func getDetailsString(_ fontSize: CGFloat, _ developerMode: Bool) -> NSMutableAttributedString {
+        
         let recordType = getTypeString()
-        var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        newDomain = " " + newDomain
         
-        let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
-        let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
-        
-        let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
-        let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
-        
-        let combination = NSMutableAttributedString()
-        combination.append(typeAttrString)
-        combination.append(domainAttrString)
-        
-        return combination
+        if developerMode {
+            var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+            newDomain = " " + newDomain
+            
+            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+            let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
+            
+            let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
+            let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
+            
+            let combination = NSMutableAttributedString()
+            combination.append(typeAttrString)
+            combination.append(domainAttrString)
+            
+            return combination
+        } else {
+            let allowedColor = UIColor(hexString: "#67b279")
+            let blockedColor = UIColor(hexString: "#df3812")
+            
+            let isBlocked =  status == .blacklistedByOtherFilter || status == .blacklistedByUserFilter
+            
+            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+            let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
+                               NSAttributedString.Key.foregroundColor: isBlocked ? blockedColor : allowedColor]
+            
+            let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
+            let statusAttrString = NSAttributedString(string: status.title(), attributes: statusAttr)
+            
+            let combination = NSMutableAttributedString()
+            combination.append(statusAttrString)
+            combination.append(typeAttrString)
+            
+            return combination
+        }
     }
     
     func firstLevelDomain() -> String {

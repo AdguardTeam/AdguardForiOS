@@ -1,9 +1,9 @@
 !
 ! Title: Google tracking domains
 ! Description: This list blocks all known Google tracking domains. IMPORTANT: it may interfere with apps and websites that use Google APIs.
-! Homepage: https://github.com/AdguardTeam/AdguardSDNSFilter
+! Homepage: https://adguard.com/
 ! License: https://github.com/AdguardTeam/AdguardSDNSFilter/blob/master/LICENSE
-! Last modified: 2020-03-13T14:30:08.200Z
+! Last modified: 2020-03-30T09:30:06.421Z
 !
 ! Compiled by @adguard/hostlist-compiler v1.0.7
 !

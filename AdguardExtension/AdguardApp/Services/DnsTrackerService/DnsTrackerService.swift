@@ -41,6 +41,7 @@ struct Tracker: Codable {
 
 @objc protocol DnsTrackerServiceProtocol {
     func getTrackerInfo(by domain: String) -> DnsTrackerInfo?
+    func getTrackerName(by domain: String) -> String?
 }
 
 @objc class DnsTrackerInfo: NSObject {
@@ -82,6 +83,19 @@ struct Tracker: Codable {
         return nil
     }
     
+    func getTrackerName(by domain: String) -> String? {
+        
+        if let trackers = adguardTrackers, let name = getTrackerName(by: domain, dnsTrackers: trackers) {
+            return name
+        }
+        
+        if let trackers = whotracksmeTrackers, let name = getTrackerName(by: domain, dnsTrackers: trackers) {
+            return name
+        }
+        
+        return nil
+    }
+    
     // MARK: - Initialization of dns trackers object
     
     private func getTrackerInfo(by domain: String, dnsTrackers: DnsTrackers, isAdguardJson: Bool) -> DnsTrackerInfo? {
@@ -112,6 +126,29 @@ struct Tracker: Codable {
         let isTracked = categoryId == 3 || categoryId == 4 || categoryId == 6 || categoryId == 7
         
         return DnsTrackerInfo(categoryKey: categoryKey, name: info.name, isTracked: isTracked, url: info.url, isAdguardJson: isAdguardJson)
+    }
+    
+    private func getTrackerName(by domain: String, dnsTrackers: DnsTrackers) -> String? {
+        let trackerDomains = dnsTrackers.trackerDomains
+        
+        var cuttedDomain = domain
+        var domainKey: String?
+        while cuttedDomain.count > 0 {
+            domainKey = trackerDomains[cuttedDomain]
+            if domainKey != nil { break }
+            
+            let splitted = cuttedDomain.split(separator: ".", maxSplits: 1)
+            if splitted.count != 2 { break }
+            
+            cuttedDomain = String(splitted.last!)
+        }
+        
+        if domainKey == nil { return nil }
+        
+        let trackers = dnsTrackers.trackers
+        guard let info = trackers[domainKey!] else { return nil }
+        
+        return info.name
     }
     
     private func initializeDnsTrackers(){

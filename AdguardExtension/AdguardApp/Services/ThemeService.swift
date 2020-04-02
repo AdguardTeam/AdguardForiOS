@@ -52,6 +52,8 @@ import Foundation
     func setupLabel(_ label: ThemableLabel)
     func setupLabelInverted(_ label: ThemableLabel)
     func setupLabels(_ labels: [ThemableLabel])
+    func setupButton(_ button: ThemableButton)
+    func setupButtons(_ buttons: [ThemableButton])
     func setupPopupLabel(_ label: ThemableLabel)
     func setupPopupLabels(_ labels: [ThemableLabel])
     func setupPopupButton(_ button: RoundRectButton)
@@ -67,6 +69,7 @@ import Foundation
     func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
     func setupSwitch(_ switch: UISwitch)
+    func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
     func setupSeparator(_ separator: UIView)
     func setupSeparators(_ separators: [UIView])
 }
@@ -196,6 +199,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         }
     }
     
+    func setupButton(_ button: ThemableButton) {
+        let color = button.greyText ? grayTextColor : button.lightGreyText ? lightGrayTextColor : blackTextColor
+        button.setTitleColor(color, for: .normal)
+    }
+    
+    func setupButtons(_ buttons: [ThemableButton]) {
+        buttons.forEach({ setupButton($0) })
+    }
+    
     func setupPopupLabel(_ label: ThemableLabel) {
         if configuration.darkTheme {
             label.textColor = label.greyText ? UIColor(hexString: "#888888") : UIColor(hexString: "#F3F3F3")
@@ -242,6 +254,12 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         
         if let iconView = textField?.leftView as? UIImageView {
             iconView.tintColor = textFieldColor
+        }
+        
+        textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
+        
+        if let iconView = textField?.leftView as? UIImageView {
+            iconView.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
         }
         
         textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
@@ -314,6 +332,16 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     func setupSwitch(_ switchControl: UISwitch) {
         switchControl.onTintColor = UIColor(hexString: "#67b279")
         switchControl.layer.cornerRadius = switchControl.frame.height / 2
+    }
+    
+    func setupSegmentedControl(_ segmentedControl: UISegmentedControl) {
+        segmentedControl.backgroundColor = notificationWindowColor
+        let textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
+        segmentedControl.tintColor = textColor
+        if #available(iOS 13.0, *) {
+            segmentedControl.selectedSegmentTintColor = backgroundColor
+        }
     }
     
     func setupSeparator(_ separator: UIView) {

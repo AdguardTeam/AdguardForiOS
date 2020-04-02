@@ -62,10 +62,8 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    lazy private var model: DnsFiltersModel = {
-        let filtersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-        return DnsFiltersModel(filtersService: filtersService)
-    }()
+    
+    private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
     private var themeObservation: Any? = nil
     
@@ -83,6 +81,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -91,6 +90,8 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         
         model.delegate = self
         searchBar.delegate = self
+        
+        refreshControl?.addTarget(self, action: #selector(updateFilters(sender:)), for: .valueChanged)
         
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -101,7 +102,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        model.updateFilters()
+        model.refreshFilters()
     }
     
     // MARK: - Table view delegate methods
@@ -288,12 +289,24 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     private func updateTheme() {
         theme.setupTable(tableView)
         view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupSearchBar(searchBar)
         theme.setubBarButtonItem(searchButton)
         theme.setubBarButtonItem(cancelButton)
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
+        }
+    }
+    
+    @objc private func updateFilters(sender: UIRefreshControl) {
+        model.updateFilters { (success) in
+            DispatchQueue.main.async {[weak self] in
+                if success {
+                    self?.tableView.reloadData()
+                }
+                self?.refreshControl?.endRefreshing()
+            }
         }
     }
 }

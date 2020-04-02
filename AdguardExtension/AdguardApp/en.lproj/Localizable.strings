@@ -328,6 +328,21 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Reset";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Remove";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Remove VPN profile";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable Tracking protection?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "An error occurred";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Something went wrong while deleting your VPN profile";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ rules are being used";
 
@@ -724,12 +739,6 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "No rule found";
 
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Tracking protection is disabled";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Enable";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Failed to send your feedback";
 
@@ -772,7 +781,56 @@
 /* (DnsFiltersService) - Facebook tracking domains filter important description */
 "facebook_filter_important_description" = "May interfere with apps and websites that use Facebook APIs.";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Requests";
 
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of requests to realize the scope of this problem.";
+
+/* (ActivityViewController) - Blocked alert title */
+"blocked_info_alert_title" = "Blocked requests";
+
+/* (ActivityViewController) - Blocked alert message */
+"blocked_info_alert_message" = "By default, AdGuard blocks only trackers that try to steal your data. To extend the blocking capabilities, configure your DNS filtering, Blocklist and Allowlist.";
+
+/* (ActivityViewController) - Data saved alert title */
+"data_saved_info_alert_title" = "Data saved";
+
+/* (ActivityViewController) - Data saved alert message */
+"data_saved_info_alert_message" = "This is an estimated amount of traffic you saved by blocking trackers.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Number of companies";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "This is the number of companies to which requests have been forwarded.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "All requests";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Blocked only";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Allowed only";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "None";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Activity";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d requests";
+
+/* (MostActiveCompaniesController) - Blocked number label */
+"blocked_number" = "%d blocked";
+
+/* (MostActiveCompaniesController) - Most active companies title */
+"most_active_companies" = "Most active companies";
+
+/* (MostActiveCompaniesController) - Most blocked companies title */
+"most_blocked_companies" = "Most blocked companies";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

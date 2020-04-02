@@ -72,6 +72,9 @@ protocol DnsFiltersServiceProtocol {
     
     // removes rules(!not domains) from user filter and restarts the tunnel
     func removeUserRules(_ rules: [String])
+    
+    // force read filters meta
+    func readFiltersMeta()
 }
 
 @objc(DnsFilter)
@@ -436,9 +439,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         userRules.removeAll { rules.contains($0)}
     }
     
-    // MARK: - private methods
     
-    private func readFiltersMeta() {
+    func readFiltersMeta() {
         let savedData = resources.sharedDefaults().object(forKey: kSharedDefaultsDnsFiltersMetaKey) as? [Data] ?? []
         filters = savedData.map {
             let obj = NSKeyedUnarchiver.unarchiveObject(with: $0)
@@ -467,6 +469,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         
         updatePredefinedFiltersLocalizations()
     }
+    
+    // MARK: - private methods
     
     private func saveFiltersMeta() {
         let dataToSave = filters.map { NSKeyedArchiver.archivedData(withRootObject: $0) }
