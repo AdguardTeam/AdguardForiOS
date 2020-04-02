@@ -28,6 +28,6 @@ class DomainsParserService: DomainsParserServiceProtocol {
     var domainsParser: DomainParser?
     
     init() {
-        self.domainsParser = try? DomainParser()
+        self.domainsParser = try? DomainParser(quickParsing: true)
     }
 }

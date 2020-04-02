@@ -105,7 +105,7 @@ class ActivityViewController: UITableViewController {
     // MARK: - ViewController life cycle
     
     required init?(coder: NSCoder) {
-        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService)
+        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService)
         super.init(coder: coder)
     }
     

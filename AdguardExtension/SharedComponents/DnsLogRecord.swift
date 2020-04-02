@@ -216,6 +216,6 @@ extension DnsLogRecord {
     
     func firstLevelDomain(parser: DomainParser?) -> String {
         let firstLevelDomain = parser?.parse(host: domain)?.domain
-        return firstLevelDomain ?? ""
+        return firstLevelDomain ?? domain
     }
 }
