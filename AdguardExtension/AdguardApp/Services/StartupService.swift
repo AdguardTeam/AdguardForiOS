@@ -120,5 +120,8 @@ class StartupService : NSObject{
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)
+        
+        let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
+        locator.addService(service: domainsParserService)
     }
 }

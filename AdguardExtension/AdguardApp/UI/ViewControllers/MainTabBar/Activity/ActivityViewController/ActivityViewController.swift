@@ -64,6 +64,7 @@ class ActivityViewController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -215,6 +216,7 @@ class ActivityViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.developerMode = configuration.developerMode
+            cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
             return cell
