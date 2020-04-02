@@ -477,13 +477,14 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             guard let self = self else { return }
             
             let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            self.requestsNumberLabel.text = "\((self.chartModel?.requestsCount ?? 0) + requestsNumber)"
+            let requestsCount = (self.chartModel?.requestsCount ?? 0) + requestsNumber
             
             let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             let blockedCount = (self.chartModel?.blockedCount ?? 0) + blockedNumber
             let blockedSaved = self.chartModel?.blockedSavedKbytes ?? 0
             
-            self.blockedNumberLabel.text = "\(blockedCount)"
+            self.requestsNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: requestsCount))
+            self.blockedNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: blockedCount))
             self.dataSavedNumberLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }

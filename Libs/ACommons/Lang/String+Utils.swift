@@ -136,18 +136,32 @@ extension String {
         
         let gBytes = Double(kBytes) / gBytePower
         if gBytes > 1 {
-            let gBytesString = String(format: "%.1f", gBytes)
+            let gBytesString = String.formatNumberBySpace(NSNumber(floatLiteral: gBytes))
             return String(format: String.localizedString("gb_unit"), gBytesString)
         }
         
         let mBytes = Double(kBytes) / mBytePower
         if mBytes > 1 {
-            let mBytesString = String(format: "%.1f", mBytes)
+            let mBytesString = String.formatNumberBySpace(NSNumber(floatLiteral: mBytes))
             return String(format: String.localizedString("mb_unit"), mBytesString)
         }
         
-        let kBytesString = String(format: "%.0f", kBytes)
+        let kBytesString = String.formatNumberBySpace(NSNumber(integerLiteral: kBytes))
         return String(format: String.localizedString("kb_unit"), kBytesString)
+    }
+    
+    /**
+    Converts number to string and devides thousands by space, ignores decimal part
+    Example: 202089,34 -> 202 089
+    */
+    static func formatNumberBySpace(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.groupingSeparator = " "
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: number) ?? "0"
     }
     
     /**

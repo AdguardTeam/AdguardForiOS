@@ -368,14 +368,15 @@ class ActivityViewController: UITableViewController {
             guard let self = self else { return }
             
             let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            self.requestsNumberLabel.text = "\((self.statisticsModel.requestsCount) + requestsNumber)"
+            let requestsCount = self.statisticsModel.requestsCount + requestsNumber
             
             let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             let blockedCount = (self.statisticsModel.blockedCount) + blockedNumber
             
             let blockedSaved = self.statisticsModel.blockedSavedKbytes
             
-            self.blockedNumberLabel.text = "\(blockedCount)"
+            self.requestsNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: requestsCount))
+            self.blockedNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: blockedCount))
             self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }
