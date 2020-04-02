@@ -583,6 +583,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "New DNS filter";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Edit custom filter";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Add";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Protection is disabled";
 

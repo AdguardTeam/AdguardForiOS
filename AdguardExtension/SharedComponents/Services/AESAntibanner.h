@@ -365,6 +365,11 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (nullable NSNumber*) customFilterIdByUrl: (nonnull NSString*) url;
 
 /**
+ Changes custom filter name
+*/
+- (void) renameCustomFilter: (nonnull NSNumber*) filterId newName: (nonnull NSString *)newName;
+
+/**
  enable groups which contain enabled filters
  */
 - (BOOL) enableGroupsWithEnabledFilters;

@@ -30,4 +30,5 @@ protocol FilterDetailedInterface {
     var rulesCount: Int? { get set }
     var homepage: String? { get set }
     var removable: Bool { get }
+    var editable: Bool { get }
 }
