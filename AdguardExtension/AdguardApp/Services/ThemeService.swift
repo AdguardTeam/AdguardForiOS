@@ -181,7 +181,6 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupLabel(_ label: ThemableLabel) {
-        
         label.textColor = label.greyText ? grayTextColor : label.lightGreyText ? lightGrayTextColor : blackTextColor
     }
     

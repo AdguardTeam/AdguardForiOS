@@ -34,7 +34,7 @@ class AddCustomFilterController: BottomAlertController {
     private let networking: ACNNetworking = ServiceLocator.shared.getService()!
     
     private var filter : AASCustomFilterParserResult?
-    var delegate: NewCustomFilterDetailsDelegate?
+    var delegate: AddNewFilterDelegate?
     
     private var notificationToken: NotificationToken?
     
@@ -62,9 +62,9 @@ class AddCustomFilterController: BottomAlertController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == detailsSegueId {
             if let controller = segue.destination as? NewCustomFilterDetailsController {
-                controller.type = type
+                controller.filterType = type
                 controller.filter = filter
-                controller.delegate = delegate
+                controller.addDelegate = delegate
             }
         }
     }

@@ -125,7 +125,7 @@ class ActivityStatisticsServiceTest: XCTestCase {
         activityStatisticsService.writeRecords(records)
         
         
-        activityStatisticsService.getRecords(by: .week) { (records) in
+        activityStatisticsService.getRecords(by: .alltime) { (records) in
             XCTAssertEqual(records, checkRecords)
         }
     }

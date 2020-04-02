@@ -27,13 +27,12 @@ protocol FilterDetailsControllerTableViewDelegate {
     func tableViewWasLoaded(with contentSizeHeight: CGFloat)
 }
 
-class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate {
+class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate, UIViewControllerTransitioningDelegate {
     
     var filter: FilterDetailedInterface!
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var deleteButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shadowView: BottomShadowView!
     
     private let embedTableSegue = "embedTableSegue"
     
@@ -47,11 +46,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = filter.name
+        title = filter.name
         
-        deleteButtonHeightConstraint.constant = filter.removable ? 60 : 0
-        deleteButton.isHidden = !filter.removable
-        
+        setupButtons()
         updateTheme()
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
@@ -59,13 +56,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
         
         setupBackItem()
-        deleteButton.makeTitleTextUppercased()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
-        deleteButton.contentEdgeInsets.left = isBigScreen ? 24.0 : 16.0
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,43 +67,54 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
-    @IBAction func deleteAction(_ sender: UIButton) {
-        showAlert(sender)
+    // MARK: - UIViewControllerTransitioningDelegate
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomAnimatedTransitioning()
     }
+    
+    // MARK: - Private methods
     
     private func updateTheme () {
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
-        deleteButton.backgroundColor = theme.backgroundColor
-        guard let deleteButtonShadowAlpha = deleteButton.layer.shadowColor?.alpha else { return }
-        deleteButton.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(deleteButtonShadowAlpha).cgColor : UIColor.black.withAlphaComponent(deleteButtonShadowAlpha).cgColor
+        shadowView.updateTheme()
     }
     
-    private func setupDeleteButton(){
-        let color: UIColor = configuration.darkTheme ? .white : .black
-        deleteButton.layer.shadowColor = color.withAlphaComponent(0.25).cgColor
-        deleteButton.layer.shadowOffset = CGSize(width: 0, height: 3)
-        deleteButton.layer.shadowOpacity = 1.0
-        deleteButton.layer.shadowRadius = 10.0
-        deleteButton.layer.masksToBounds = false
-    }
-    
-    private func animateHidingOfShadow(){
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            DispatchQueue.main.async {
-                guard let color = self?.deleteButton.layer.shadowColor else { return }
-                self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.0)
+    private func setupButtons(){
+        var buttons: [BottomShadowButton] = []
+        
+        if filter.editable {
+            let editButton = BottomShadowButton()
+            editButton.title = String.localizedString("common_edit").uppercased()
+            editButton.titleColor = nil
+            editButton.action = {[weak self] in
+                guard let self = self else { return }
+                if let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController {
+                    let model: NewCustomFilterDetailsControllerInterface = NewCustomFilterDetailsControllerModel(name: self.filter.name, rulesCount: self.filter.rulesCount, homepage: self.filter.homepage)
+                    
+                    controller.editDelegate = self
+                    controller.model = model
+                    controller.transitioningDelegate = self
+                    controller.modalPresentationStyle = .custom
+                    controller.controllerModeType = .editingFilter
+                    self.present(controller, animated: true, completion: nil)
+                }
             }
+            buttons.append(editButton)
         }
-    }
-    
-    private func animateAppearingOfShadow(){
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            DispatchQueue.main.async {
-                guard let color = self?.deleteButton.layer.shadowColor else { return }
-                self?.deleteButton.layer.shadowColor = color.copy(alpha: 0.5)
+        
+        if filter.removable {
+            let deleteButton = BottomShadowButton()
+            deleteButton.title = String.localizedString("common_delete").uppercased()
+            deleteButton.titleColor = UIColor(hexString: "#df3812")
+            deleteButton.action = {[weak self] in
+                self?.showAlert(deleteButton)
             }
+            buttons.append(deleteButton)
         }
+        
+        shadowView.buttons = buttons
     }
     
     private func showAlert(_ sender: UIButton){
@@ -121,7 +122,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
-            alert.dismiss(animated: true, completion: nil)
             
             if let customFilter = self.filter as? Filter {
                 self.filtersService.deleteCustomFilter(customFilter)
@@ -136,9 +136,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         alert.addAction(yesAction)
         
-        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in }
         
         alert.addAction(cancelAction)
         
@@ -166,19 +164,27 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     // MARK: - FilterDetailsControllerAnimationDelegate
     
     func scrolledToBottom() {
-        animateHidingOfShadow()
+        shadowView.animateHidingOfShadow()
     }
     
     func isScrolling() {
-        animateAppearingOfShadow()
+        shadowView.animateAppearingOfShadow()
     }
     
     func tableViewWasLoaded(with contentSizeHeight: CGFloat) {
         if containerView.frame.height <= contentSizeHeight {
-            setupDeleteButton()
+            shadowView.animateAppearingOfShadow()
         }
     }
     
+    // MARK: - EditFilterDelegate
+    
+    func renameFilter(newName: String) {
+        title = newName
+        if let safariFilter = filter as? Filter {
+            filtersService.renameCustomFilter(safariFilter.filterId, newName)
+        }
+    }
 }
 
 class FilterDetailsTableCotroller : UITableViewController {

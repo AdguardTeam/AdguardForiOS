@@ -25,7 +25,8 @@ class BottomShadowButton: UIButton {
         }
     }
     
-    var titleColor: UIColor = .clear {
+    // If color is nil, than it will be dispalayed as theme.grayTextColor
+    var titleColor: UIColor? = .clear {
         didSet{
             setTitleColor(titleColor, for: .normal)
         }
@@ -93,8 +94,11 @@ class BottomShadowView: UIView {
     
     func updateTheme(){
         for view in subviews {
-            if let _ = view as? UIButton {
-                view.backgroundColor = theme.backgroundColor
+            if let btn = view as? BottomShadowButton {
+                btn.backgroundColor = theme.backgroundColor
+                if btn.titleColor == nil {
+                    btn.setTitleColor(theme.grayTextColor, for: .normal)
+                }
             } else {
                 view.backgroundColor = theme.separatorColor
             }
