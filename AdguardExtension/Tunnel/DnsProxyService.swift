@@ -20,7 +20,6 @@ import Foundation
 
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
-    
     func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
@@ -30,7 +29,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     // set it to 2000 to make sure we will quickly fallback if needed
     private let timeout = 2000
-    private let dnsRecordsWriter: DnsLogRecordsWriterProtocol;
+    private let dnsRecordsWriter: DnsLogRecordsWriterProtocol
+    private let resources: AESharedResourcesProtocol
     
     private let workingQueue = DispatchQueue(label: "dns proxy service working queue")
     private let resolveQueue = DispatchQueue(label: "dns proxy resolve queue", attributes: [.concurrent])
@@ -38,9 +38,10 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     let events: AGDnsProxyEvents
     
     @objc
-    init(logWriter: DnsLogRecordsWriterProtocol) {
+    init(logWriter: DnsLogRecordsWriterProtocol, resources: AESharedResourcesProtocol) {
         DDLogInfo("(DnsProxyService) initializing")
         dnsRecordsWriter = logWriter
+        self.resources = resources
         events = AGDnsProxyEvents()
         
         super.init()
@@ -120,8 +121,9 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         else if error != nil {
             DDLogInfo("(DnsProxyService) dns proxy started with error - \(error!)")
-            // todo: handle limit of rules exceeded error
-            // todo: send message to main app
+            if error?.code == 3 {
+                
+            }
         }
         
         return agproxy != nil

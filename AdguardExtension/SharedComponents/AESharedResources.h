@@ -310,6 +310,11 @@ extern NSString* _Nonnull AEComplexProtectionEnabled;
  */
 extern NSString* _Nonnull OnboardingWasShown;
 
+/**
+ User defaults key, which defines tunnel error code when starting proxy
+ */
+extern NSString* _Nonnull TunnelErrorCode;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
