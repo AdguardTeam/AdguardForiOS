@@ -136,30 +136,45 @@ extension String {
         
         let gBytes = Double(kBytes) / gBytePower
         if gBytes > 1 {
-            let gBytesString = String.formatNumberBySpace(NSNumber(floatLiteral: gBytes))
+            let gBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: gBytes))
             return String(format: String.localizedString("gb_unit"), gBytesString)
         }
         
         let mBytes = Double(kBytes) / mBytePower
         if mBytes > 1 {
-            let mBytesString = String.formatNumberBySpace(NSNumber(floatLiteral: mBytes))
+            let mBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: mBytes))
             return String(format: String.localizedString("mb_unit"), mBytesString)
         }
         
-        let kBytesString = String.formatNumberBySpace(NSNumber(integerLiteral: kBytes))
+        let kBytesString = String.formatNumberByLocale(NSNumber(integerLiteral: kBytes))
         return String(format: String.localizedString("kb_unit"), kBytesString)
     }
     
     /**
-    Converts number to string and devides thousands by space, ignores decimal part
-    Example: 202089,34 -> 202 089
+    Converts number to string, ignores decimal part
+    Formatted by locale
     */
-    static func formatNumberBySpace(_ number: NSNumber) -> String {
+    static func formatNumberByLocale(_ number: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        
+        let decimalNumber: Double = number.doubleValue
+        
+        let millions = decimalNumber / 1000000
+        if millions > 1 {
+            let millionsString = formatter.string(from: NSNumber(floatLiteral: millions)) ?? "0"
+            return String(format: String.localizedString("millions_unit"), millionsString)
+        }
+        
+        let thousands = decimalNumber / 1000
+        if thousands > 100 {
+            let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
+            return String(format: String.localizedString("thousands_unit"), thousandsString)
+        }
+        
         return formatter.string(from: number) ?? "0"
     }
     

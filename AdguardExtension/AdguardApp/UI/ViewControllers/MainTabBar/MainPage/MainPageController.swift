@@ -483,8 +483,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             let blockedCount = (self.chartModel?.blockedCount ?? 0) + blockedNumber
             let blockedSaved = self.chartModel?.blockedSavedKbytes ?? 0
             
-            self.requestsNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: requestsCount))
-            self.blockedNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: blockedCount))
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
+            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
             self.dataSavedNumberLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }

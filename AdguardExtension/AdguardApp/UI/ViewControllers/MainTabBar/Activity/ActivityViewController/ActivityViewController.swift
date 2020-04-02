@@ -377,8 +377,8 @@ class ActivityViewController: UITableViewController {
             
             let blockedSaved = self.statisticsModel.blockedSavedKbytes
             
-            self.requestsNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: requestsCount))
-            self.blockedNumberLabel.text = String.formatNumberBySpace(NSNumber(integerLiteral: blockedCount))
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
+            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
             self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }

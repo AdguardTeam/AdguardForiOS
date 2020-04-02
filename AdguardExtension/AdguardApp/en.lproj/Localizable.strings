@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (Gb) Gigobyte */
 "gb_unit" = "%@ GB";
 
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@ M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@ K";
+
 /* (GetProPageController) Text for "try for free" button */
 "try_for_free" = "Try for free";
 
