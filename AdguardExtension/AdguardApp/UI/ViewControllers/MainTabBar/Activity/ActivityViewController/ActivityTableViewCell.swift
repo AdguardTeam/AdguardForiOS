@@ -30,15 +30,17 @@ class ActivityTableViewCell: UITableViewCell {
     
     var developerMode: Bool = true
     
-    var record: DnsLogRecordExtended? {
-        didSet {
-            processRecord()
-        }
-    }
+    var domainsParser: DomainParser?
     
     var theme: ThemeServiceProtocol? {
         didSet {
             updateTheme()
+        }
+    }
+    
+    var record: DnsLogRecordExtended? {
+        didSet {
+            processRecord()
         }
     }
     
@@ -66,7 +68,7 @@ class ActivityTableViewCell: UITableViewCell {
         let name = record.category.name
         let domain = record.logRecord.getDetailsString(infoLabel.font.pointSize, developerMode)
         
-        companyLabel.text = (name == nil || developerMode) ? record.logRecord.firstLevelDomain() : name
+        companyLabel.text = (name == nil || developerMode) ? record.logRecord.firstLevelDomain(parser: domainsParser) : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
         

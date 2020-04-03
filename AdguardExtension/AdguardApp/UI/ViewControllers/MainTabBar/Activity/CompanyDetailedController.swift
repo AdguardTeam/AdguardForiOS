@@ -43,6 +43,7 @@ class CompanyDetailedController: UITableViewController {
     private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -85,8 +86,10 @@ class CompanyDetailedController: UITableViewController {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
         
-        requestsNumberLabel.text = "\(record?.requests ?? 0)"
-        blockedNumberLabel.text = "\(record?.blocked ?? 0)"
+        let requestsCount = record?.requests ?? 0
+        let blockedCount = record?.blocked ?? 0
+        requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
+        blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -153,6 +156,7 @@ class CompanyDetailedController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             let record = requestsModel.records[indexPath.row]
             cell.developerMode = configuration.developerMode
+            cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
             return cell

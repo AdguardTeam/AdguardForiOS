@@ -24,7 +24,7 @@ import Foundation
 
 @objc
 @objcMembers
-class RulesParser: NSObject {
+class AffinityRulesParser: NSObject {
     
     private let adblockFirstLine = "Adblock Plus"
     private let affinityPrefix = "!#safari_cb_affinity("
@@ -102,7 +102,7 @@ class RulesParser: NSObject {
         for item in list {
             
             let trimmed = item.trimmingCharacters(in: .whitespacesAndNewlines)
-            let affinity = RulesParser.stringToAffinity[trimmed]
+            let affinity = AffinityRulesParser.stringToAffinity[trimmed]
             if affinity != nil {
                 if result == nil {
                     result = affinity

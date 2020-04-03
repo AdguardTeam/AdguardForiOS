@@ -64,6 +64,7 @@ class ActivityViewController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -104,7 +105,7 @@ class ActivityViewController: UITableViewController {
     // MARK: - ViewController life cycle
     
     required init?(coder: NSCoder) {
-        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService)
+        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService)
         super.init(coder: coder)
     }
     
@@ -215,6 +216,7 @@ class ActivityViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.developerMode = configuration.developerMode
+            cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
             return cell
@@ -368,14 +370,15 @@ class ActivityViewController: UITableViewController {
             guard let self = self else { return }
             
             let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            self.requestsNumberLabel.text = "\((self.statisticsModel.requestsCount) + requestsNumber)"
+            let requestsCount = self.statisticsModel.requestsCount + requestsNumber
             
             let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
             let blockedCount = (self.statisticsModel.blockedCount) + blockedNumber
             
             let blockedSaved = self.statisticsModel.blockedSavedKbytes
             
-            self.blockedNumberLabel.text = "\(blockedCount)"
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
+            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
             self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
         }
     }

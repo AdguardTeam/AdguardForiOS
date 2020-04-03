@@ -214,8 +214,8 @@ extension DnsLogRecord {
         }
     }
     
-    func firstLevelDomain() -> String {
-        let domains = String.generateSubDomains(from: domain)
-        return domains.last ?? ""
+    func firstLevelDomain(parser: DomainParser?) -> String {
+        let firstLevelDomain = parser?.parse(host: domain)?.domain
+        return firstLevelDomain ?? domain
     }
 }

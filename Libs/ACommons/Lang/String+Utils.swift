@@ -136,18 +136,46 @@ extension String {
         
         let gBytes = Double(kBytes) / gBytePower
         if gBytes > 1 {
-            let gBytesString = String(format: "%.1f", gBytes)
+            let gBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: gBytes))
             return String(format: String.localizedString("gb_unit"), gBytesString)
         }
         
         let mBytes = Double(kBytes) / mBytePower
         if mBytes > 1 {
-            let mBytesString = String(format: "%.1f", mBytes)
+            let mBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: mBytes))
             return String(format: String.localizedString("mb_unit"), mBytesString)
         }
         
-        let kBytesString = String(format: "%.0f", kBytes)
+        let kBytesString = String.formatNumberByLocale(NSNumber(integerLiteral: kBytes))
         return String(format: String.localizedString("kb_unit"), kBytesString)
+    }
+    
+    /**
+    Converts number to string, ignores decimal part
+    Formatted by locale
+    */
+    static func formatNumberByLocale(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        
+        let decimalNumber: Double = number.doubleValue
+        
+        let millions = decimalNumber / 1000000
+        if millions > 1 {
+            let millionsString = formatter.string(from: NSNumber(floatLiteral: millions)) ?? "0"
+            return String(format: String.localizedString("millions_unit"), millionsString)
+        }
+        
+        let thousands = decimalNumber / 1000
+        if thousands > 100 {
+            let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
+            return String(format: String.localizedString("thousands_unit"), thousandsString)
+        }
+        
+        return formatter.string(from: number) ?? "0"
     }
     
     /**

@@ -59,7 +59,7 @@
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pv-x1-cMp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pv-x1-cMp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                         <rect key="frame" x="411" y="17" width="0.0" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="C2X-oz-U1H"/>

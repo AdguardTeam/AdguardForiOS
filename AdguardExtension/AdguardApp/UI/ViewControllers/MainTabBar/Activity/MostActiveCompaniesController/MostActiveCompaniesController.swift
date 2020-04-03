@@ -145,4 +145,12 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
         performSegue(withIdentifier: showCompanyDetailsSegueId, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }

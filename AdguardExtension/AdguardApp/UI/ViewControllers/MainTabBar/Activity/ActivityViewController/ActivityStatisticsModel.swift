@@ -45,20 +45,24 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     
     private let activityStatisticsService: ActivityStatisticsServiceProtocol
     private let dnsTrackersService: DnsTrackerServiceProtocol
+    private let domainsParserService: DomainsParserServiceProtocol
     
-    init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol) {
+    init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
         self.activityStatisticsService = activityStatisticsService
         self.dnsTrackersService = dnsTrackersService
+        self.domainsParserService = domainsParserService
     }
     
     func getCompanies(for type: ChartDateType, completion: @escaping (_ mostRequested: [CompanyRequestsRecord], _ mostBlocked: [CompanyRequestsRecord], _ companiesNumber: Int) -> ()) {
         activityStatisticsService.getRecords(by: type) {[weak self] (records) in
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
             var companiesNumber = 0
+            let parser = self?.domainsParserService.domainsParser
             
             for record in records {
                 let company = self?.dnsTrackersService.getTrackerName(by: record.domain)
-                let key = company ?? record.domain
+                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
+                let key = company ?? domain
                 
                 if let existingRecord = recordsByCompanies[key] {
                     existingRecord.requests += record.requests
@@ -77,8 +81,20 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             }
             
             let recordsArray = Array(recordsByCompanies.values)
-            let mostRequested = recordsArray.sorted(by: { $0.requests > $1.requests })
-            let mostBlocked = recordsArray.sorted(by: { $0.blocked > $1.blocked })
+            let mostRequested = recordsArray.sorted(by: {
+                if $0.requests != $1.requests {
+                    return $0.requests > $1.requests
+                } else {
+                    return $0.key < $1.key
+                }
+            })
+            let mostBlocked = recordsArray.sorted(by: {
+                if $0.blocked != $1.blocked {
+                    return $0.blocked > $1.blocked
+                } else {
+                    return $0.key < $1.key
+                }
+            })
             
             completion(mostRequested, mostBlocked, companiesNumber)
         }
