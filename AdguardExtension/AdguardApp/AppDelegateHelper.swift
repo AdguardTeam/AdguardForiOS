@@ -28,7 +28,6 @@ class AppDelegateHelper: NSObject {
     
     let appDelegate: AppDelegate
     lazy var userNotificationService: UserNotificationServiceProtocol =  { ServiceLocator.shared.getService()! }()
-    
     lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     lazy var themeService: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var contentBlockerService: ContentBlockerService = { ServiceLocator.shared.getService()! }()
@@ -44,6 +43,7 @@ class AppDelegateHelper: NSObject {
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
+    private var tunnelErrorCodeObserver: ObserverToken?
     
     private var statusBarWindow: UIWindow?
     private var statusBarIsShown = false
@@ -158,6 +158,16 @@ class AppDelegateHelper: NSObject {
                 self?.changeOrientation()
             }
         })
+        
+        tunnelErrorCodeObserver = resources.sharedDefaults().addObseverWithToken(self, keyPath: TunnelErrorCode, options: .new, context: nil)
+    }
+    
+    // MARK: - Observing Values from User Defaults
+       
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == TunnelErrorCode, resources.tunnelErrorCode == 3 {
+            postDnsFiltersOverlimitNotificationIfNedeed()
+        }
     }
     
     func performFetch() {
@@ -215,7 +225,59 @@ class AppDelegateHelper: NSObject {
         }
     }
     
+    // MARK: - Open DnsFiltersController function
+    
+    func openDnsFiltersController(){
+        guard let tab = self.getMainTabController() else {
+            DDLogError("(AppDeegateHelper) openDnsFiltersController error. There is no tab controller")
+            return
+        }
+        
+        if tab.viewControllers?.count == 0 { return }
+        
+        guard let navController = tab.viewControllers?[TabBarTabs.protectionTab.rawValue] as? MainNavigationController else { return }
+        
+        if let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController {
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else { return }
+                
+                let dnsSettingsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
+                let dnsSettingsController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsSettingsController")
+                dnsSettingsController.loadViewIfNeeded()
+                
+                let requestsBlockingController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "RequestsBlockingController")
+                requestsBlockingController.loadViewIfNeeded()
+                
+                let dnsFiltersController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsFiltersController")
+                
+                navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+            }
+        }
+    }
+
+    
     // MARK: - private methods
+    
+    private func postDnsFiltersOverlimitNotificationIfNedeed(){
+        guard let tab = self.getMainTabController() else {
+            DDLogError("(AppDeegateHelper) postDnsFiltersOverlimitNotificationIfNedeed error. There is no tab controller")
+            return
+        }
+        
+        if let selectedVC = tab.selectedViewController as? MainNavigationController {
+            if let _ = selectedVC.viewControllers.last as? DnsFiltersController {
+                return
+            }
+        }
+        
+        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
+        let title = String.localizedString("dns_filters_notification_title")
+        let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
+        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openopenDnsFiltersController.rawValue]
+        userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+    }
     
     private func getMainTabController()->MainTabBarController? {
         return appDelegate.window.rootViewController as? MainTabBarController

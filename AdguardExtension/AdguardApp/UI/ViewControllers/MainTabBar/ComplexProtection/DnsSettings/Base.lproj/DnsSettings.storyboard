@@ -894,7 +894,7 @@
         <!--DNS trackers blocking-->
         <scene sceneID="sFK-bL-qGm">
             <objects>
-                <tableViewController id="6xC-0w-wab" customClass="RequestsBlockingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RequestsBlockingController" id="6xC-0w-wab" customClass="RequestsBlockingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7n9-Hj-1hJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1517,7 +1517,7 @@
         <!--Dns Filters Controller-->
         <scene sceneID="wpe-ZS-1Ke">
             <objects>
-                <tableViewController id="MAM-dm-Y5w" customClass="DnsFiltersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DnsFiltersController" id="MAM-dm-Y5w" customClass="DnsFiltersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1gf-a6-Dh3">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

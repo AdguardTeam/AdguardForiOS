@@ -625,6 +625,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_overlimit_title" = "%@ rules are enabled, it's too much, some rules will be disabled";
 
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Turn off some filters for correct work";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blocked";
 

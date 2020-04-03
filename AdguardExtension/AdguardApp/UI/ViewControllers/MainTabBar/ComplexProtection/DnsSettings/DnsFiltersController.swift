@@ -45,7 +45,7 @@ class DnsFilterCell: UITableViewCell {
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
             let dateFormatedString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             
-            descriptionLabel.text = (filter?.desc ?? "") + "\n" + dateFormatedString
+            descriptionLabel.text = filter?.desc == nil ? filter!.desc! + "\n" + dateFormatedString : dateFormatedString
             importantDescriptionLabel.text = filter?.importantDesc
             
             filterSwitch.isOn = filter?.enabled ?? false
@@ -80,9 +80,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     private let addFilterSection = 1
     private let filtersSection = 2
     
-    /* This error is observed from the Tunnel */
-    private var tunnelErrorCode: Int? = nil
-    
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -93,8 +90,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         }
         
         tunnelErrorCodeObserver = resources.sharedDefaults().addObseverWithToken(self, keyPath: TunnelErrorCode, options: .new, context: nil)
-        
-        tunnelErrorCode = resources.tunnelErrorCode
         
         navigationItem.rightBarButtonItems = [searchButton]
         
@@ -164,7 +159,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
                 theme.setupLabel(cell.titleLabel)
                 
                 let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: model.enabledRulesCount))
-                if tunnelErrorCode == 3 {
+                if resources.tunnelErrorCode == 3 {
                     let redColor = UIColor(hexString: "#df3812")
                     cell.rulesNumberLabel.textColor = redColor
                     cell.rulesNumberLabel.text = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
@@ -318,7 +313,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     private func updateTextForTitle(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            self.tunnelErrorCode = self.resources.tunnelErrorCode
             self.tableView.reloadSections(IndexSet(integer: self.titleSection), with: .fade)
         }
     }
