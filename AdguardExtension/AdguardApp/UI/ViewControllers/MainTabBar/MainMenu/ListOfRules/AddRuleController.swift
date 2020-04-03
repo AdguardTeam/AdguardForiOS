@@ -135,7 +135,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     // MARK: - TextViewDelegateMethods
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if type != .wifiExceptions { return true }
         
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
@@ -143,6 +142,8 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     
         rulePlaceholderLabel.isHidden = updatedText.count > 0
         addButton.isEnabled = updatedText.count > 0
+        
+        if type != .wifiExceptions { return true }
     
         if updatedText.count >= textViewCharectersLimit {
             textView.text = String(updatedText.prefix(textViewCharectersLimit))

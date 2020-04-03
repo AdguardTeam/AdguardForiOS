@@ -29,6 +29,8 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
+    private let textViewCharectersLimit = 50
+    
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -41,7 +43,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         domainOrRuleLabel.text = getEditCaptionText()
 
         
-        ruleTextView.text = rule?.rule
+        ruleTextView.text = type == .wifiExceptions ? String(rule?.rule.prefix(textViewCharectersLimit) ?? "") : rule?.rule
         
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
@@ -81,15 +83,24 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: - UITExtViewDelegate
     
-    func textViewDidChange(_ textView: UITextView) {
-        updateButtons()
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+    
+        saveButton.isEnabled = updatedText.count > 0
+        
+        if type != .wifiExceptions { return true }
+    
+        if updatedText.count >= textViewCharectersLimit {
+            textView.text = String(updatedText.prefix(textViewCharectersLimit))
+            return false
+        }
+        return true
     }
     
     // MARK: - private methods
-    
-    private func updateButtons() {
-        saveButton.isEnabled = !(ruleTextView.text?.isEmpty ?? true) && ruleTextView.text != rule?.rule
-    }
     
     private func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
