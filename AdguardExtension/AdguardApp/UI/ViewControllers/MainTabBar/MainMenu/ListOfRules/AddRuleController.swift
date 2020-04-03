@@ -39,6 +39,8 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var notificationToken: NotificationToken?
     
+    private let textViewCharectersLimit = 50
+    
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,9 +134,21 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     
     // MARK: - TextViewDelegateMethods
     
-    func textViewDidChange(_ textView: UITextView) {
-        rulePlaceholderLabel.isHidden = textView.text != nil && textView.text != ""
-        addButton.isEnabled = textView.text != nil && textView.text != ""
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if type != .wifiExceptions { return true }
+        
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+    
+        rulePlaceholderLabel.isHidden = updatedText.count > 0
+        addButton.isEnabled = updatedText.count > 0
+    
+        if updatedText.count >= textViewCharectersLimit {
+            textView.text = String(updatedText.prefix(textViewCharectersLimit))
+            return false
+        }
+        return true
     }
 
     // MARK: - private methods
@@ -150,7 +164,7 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
         let ssid = networkSettingsService.getCurrentWiFiName()
         
-        if let ssid = ssid {
+        if let ssid = ssid, ssid.count <= textViewCharectersLimit {
             ruleTextView.text = ssid
             ruleTextView.selectAll(self)
             rulePlaceholderLabel.isHidden = true
