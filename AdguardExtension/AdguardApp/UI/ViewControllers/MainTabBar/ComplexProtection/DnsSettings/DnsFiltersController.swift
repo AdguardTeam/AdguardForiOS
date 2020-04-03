@@ -20,6 +20,7 @@ import UIKit
 
 class DnsFilterTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!
+    @IBOutlet weak var rulesNumberLabel: ThemableLabel!
 }
 
 class AddFilterCell: UITableViewCell {
@@ -62,10 +63,12 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
-    private var themeObservation: Any? = nil
+    private var themeObservation: NotificationToken?
+    private var tunnelErrorCodeObserver: ObserverToken?
     
     private let filterDetailsControllerId = "FilterDetailsController"
     
@@ -77,6 +80,9 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     private let addFilterSection = 1
     private let filtersSection = 2
     
+    /* This error is observed from the Tunnel */
+    private var tunnelErrorCode: Int? = nil
+    
     // MARK: - View controller life cycle
     
     override func viewDidLoad() {
@@ -85,6 +91,10 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        tunnelErrorCodeObserver = resources.sharedDefaults().addObseverWithToken(self, keyPath: TunnelErrorCode, options: .new, context: nil)
+        
+        tunnelErrorCode = resources.tunnelErrorCode
         
         navigationItem.rightBarButtonItems = [searchButton]
         
@@ -152,6 +162,17 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
             if let cell = tableView.dequeueReusableCell(withIdentifier: titleCellReuseId) as? DnsFilterTitleCell {
                 theme.setupTableCell(cell)
                 theme.setupLabel(cell.titleLabel)
+                
+                let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: model.enabledRulesCount))
+                if tunnelErrorCode == 3 {
+                    let redColor = UIColor(hexString: "#df3812")
+                    cell.rulesNumberLabel.textColor = redColor
+                    cell.rulesNumberLabel.text = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
+                } else {
+                    cell.rulesNumberLabel.text = String(format: String.localizedString("dns_filters_number_title"), rulesNumberString)
+                    theme.setupLabel(cell.rulesNumberLabel)
+                }
+                
                 if model.isSearchActive{
                     cell.isHidden = true
                 }
@@ -260,6 +281,15 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     @IBAction func filterStateAction(_ sender: UISwitch) {
         model.setFilter(index: sender.tag, enabled: sender.isOn)
+        updateTextForTitle()
+    }
+    
+    // MARK: - Observing Values from User Defaults
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == TunnelErrorCode {
+            updateTextForTitle()
+        }
     }
     
     // MARK: - Private methods
@@ -285,6 +315,13 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    private func updateTextForTitle(){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            self.tunnelErrorCode = self.resources.tunnelErrorCode
+            self.tableView.reloadSections(IndexSet(integer: self.titleSection), with: .fade)
+        }
+    }
     
     private func updateTheme() {
         theme.setupTable(tableView)

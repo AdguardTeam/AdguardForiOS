@@ -78,7 +78,7 @@ class RequestsBlockingController: UITableViewController {
         super.viewWillAppear(animated)
     
         let filtersDescriptionFormat = String.localizedString("safari_filters_format")
-        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount)
+        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount, dnsFiltersService.enabledRulesCount)
         filtersLabel.text = filtersDescriptionText
     }
     

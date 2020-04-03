@@ -116,14 +116,12 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
 
         var error: NSError?
         agproxy = AGDnsProxy(config: config, handler: events, error: &error)
+        resources.tunnelErrorCode = error?.code
         if agproxy == nil && error != nil {
             DDLogError("(DnsProxyService) can not start dns proxy - \(error!)")
         }
         else if error != nil {
             DDLogInfo("(DnsProxyService) dns proxy started with error - \(error!)")
-            if error?.code == 3 {
-                
-            }
         }
         
         return agproxy != nil
