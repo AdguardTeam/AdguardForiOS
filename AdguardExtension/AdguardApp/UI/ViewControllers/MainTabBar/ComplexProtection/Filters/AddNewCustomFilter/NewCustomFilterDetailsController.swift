@@ -72,6 +72,8 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
+    private let textFieldCharectersLimit = 50
+    
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +132,18 @@ class NewCustomFilterDetailsController : BottomAlertController {
         UIApplication.shared.open(url)
     }
     
+    // MARK: - UITextFieldDelegate
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        if  updatedText.count >= textFieldCharectersLimit {
+            textField.text = String(updatedText.prefix(textFieldCharectersLimit))
+            return false
+        }
+        return true
+    }
     
     // MARK: - private methods
     
@@ -142,7 +156,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     private func setupAddingNewFilter() {
         newFilterTitle.text = filterType.getTitleText()
         
-        name.text = filter?.meta.name
+        name.text = String(filter?.meta.name.prefix(textFieldCharectersLimit) ?? "")
         let count: Int = filter?.rules.count ?? 0
         rulesCount.text = String(count)
         
@@ -161,7 +175,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     private func setupEditingFilter() {
         newFilterTitle.text = String.localizedString("edit_custom_filter_title")
-        name.text = model?.name
+        name.text = String(model?.name?.prefix(textFieldCharectersLimit) ?? "")
         rulesCount.text = String(model?.rulesCount ?? 0)
         
         if let homepageUrl = model?.homepage, homepageUrl.count > 0 {
