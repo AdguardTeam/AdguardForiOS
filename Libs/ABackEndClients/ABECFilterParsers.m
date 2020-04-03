@@ -348,7 +348,7 @@
     }
     [stream close];
     
-    RulesParser* rulesParser = [RulesParser new];
+    AffinityRulesParser* rulesParser = [AffinityRulesParser new];
     filter.rules = [rulesParser parseStrings:ruleStrings filterId: self.filterId];
     
     return YES;

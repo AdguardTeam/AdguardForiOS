@@ -315,6 +315,11 @@ extern NSString* _Nonnull OnboardingWasShown;
  */
 extern NSString* _Nonnull TunnelErrorCode;
 
+/**
+ User defaults key, which defines background fetch state
+ */
+extern NSString* _Nonnull BackgroundFetchStateKey;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -412,6 +417,7 @@ extern NSString* _Nonnull TunnelErrorCode;
 @property BOOL safariProtectionEnabled;
 
 @property BOOL systemProtectionEnabled;
+
 
 @end
 

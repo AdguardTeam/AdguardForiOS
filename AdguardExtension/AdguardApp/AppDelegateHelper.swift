@@ -64,6 +64,15 @@ class AppDelegateHelper: NSObject {
         }
     }
     
+    @objc var fetchState: BackgroundFetchState {
+        get {
+            return resources.backgroundFetchState
+        }
+        set {
+            resources.backgroundFetchState = newValue
+        }
+    }
+    
     @objc
     init(appDelegate: AppDelegate) {
         self.appDelegate = appDelegate

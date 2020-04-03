@@ -141,7 +141,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     let updateQueue = DispatchQueue(label: "safari_update", attributes: .concurrent)
     
-    func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
+    @objc func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
     
         updateQueue.async { [weak self] in
             guard let self = self else { return }

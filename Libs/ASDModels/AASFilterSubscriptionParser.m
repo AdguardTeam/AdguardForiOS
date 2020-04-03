@@ -410,7 +410,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 - (void)parseRulesWithContext:(ParsingContext *)context content:(NSString *)content {
     
     NSArray<NSString*> *lines = [content componentsSeparatedByCharactersInSet: NSCharacterSet.newlineCharacterSet];
-    RulesParser* rulesParse = [RulesParser new];
+    AffinityRulesParser* rulesParse = [AffinityRulesParser new];
     
     [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines filterId:@(0)]];
 }
