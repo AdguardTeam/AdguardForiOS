@@ -62,6 +62,7 @@ static NSTimeInterval lastCheckTime;
     id<AntibannerControllerProtocol> _antibannerController;
     id<AESAntibannerProtocol> _antibanner;
     ContentBlockerService* _contentBlockerService;
+    SafariService* _safariService;
     PurchaseService* _purchaseService;
     id<DnsFiltersServiceProtocol> _dnsFiltersService;
     id<ACNNetworkingProtocol> _networking;
@@ -99,6 +100,7 @@ static NSTimeInterval lastCheckTime;
     _configuration = [ServiceLocator.shared getSetviceWithTypeName:@"ConfigurationService"];
     _theme = [ServiceLocator.shared getSetviceWithTypeName:@"ThemeServiceProtocol"];
     _rateAppService = [ServiceLocator.shared getSetviceWithTypeName:@"RateAppServiceProtocol"];
+    _safariService = [ServiceLocator.shared getSetviceWithTypeName:@"SafariService"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -148,7 +150,7 @@ static NSTimeInterval lastCheckTime;
     //------------- Preparing for start application. Stage 2. -----------------
     DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 2.");
     
-    //------------ Subscribe to Antibanner notification -----------------------------
+    //------------ Subscribe to Antibanner notifications -----------------------------
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFailuredUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerFinishedUpdateNotification object:nil];
@@ -157,6 +159,8 @@ static NSTimeInterval lastCheckTime;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdateFilterRulesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerUpdatePartCompletedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(antibannerNotify:) name:ASAntibannerInstalledNotification object:nil];
+    
+    //------------ Subscribe other notifications -----------------------------
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
     
     //---------------------- Set period for checking filters ---------------------
@@ -294,9 +298,47 @@ static NSTimeInterval lastCheckTime;
                     self.antibanerUpdateResult = AEUpdateStarted;
                 }
                 
-                if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
-                    [self antibanerUpdateFinished:AEUpdateFailed];
+                switch (helper.fetchState) {
+                    case BackgroundFetchStateNotStarted:
+                    case BackgroundFetchStateFiltersupdating:
+                    
+                        helper.fetchState = BackgroundFetchStateFiltersupdating;
+                        if (!(checkResult && [self invalidateAntibanner:NO interactive:NO])){
+                            helper.fetchState = BackgroundFetchStateNotStarted;
+                            [self antibanerUpdateFinished:AEUpdateNoData];
+                        }
+                        break;
+                        
+                    case BackgroundFetchStateFiltersupdated:
+                    case BackgroundFetchStateContentBlockersUpdating: {
+                        helper.fetchState = BackgroundFetchStateContentBlockersUpdating;
+                        [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {
+                            if (error) {
+                                helper.fetchState = BackgroundFetchStateNotStarted;
+                            }
+                            else {
+                                helper.fetchState = BackgroundFetchStateContentBlockersUpdated;
+                            }
+
+                            [self antibanerUpdateFinished:AEUpdateNoData];
+                        }];
+                        break;
+                    }
+                    case BackgroundFetchStateContentBlockersUpdated:
+                    case BackgroundFetchStateSafariUpdating: {
+                        helper.fetchState = BackgroundFetchStateSafariUpdating;
+                        [_safariService invalidateBlockingJsonsWithCompletion:^(NSError * _Nullable error) {
+                            helper.fetchState = BackgroundFetchStateNotStarted;
+                            [self antibanerUpdateFinished:AEUpdateNoData];
+                        }];
+                        
+                        break;
+                    }
+                        
+                    default:
+                        [self antibanerUpdateFinished:AEUpdateNoData];
                 }
+
             }];
             
             [_purchaseService checkPremiumStatusChanged];
@@ -378,7 +420,6 @@ static NSTimeInterval lastCheckTime;
         
         DDLogInfo(@"(AppDelegate) Update process NOT started by timer. Time period from previous update too small.");
         
-        
         return NO;
     }
 }
@@ -412,11 +453,15 @@ static NSTimeInterval lastCheckTime;
 
 - (void)antibannerNotify:(NSNotification *)notification {
     
-    // Update filter rule
+    BOOL background = (_fetchCompletion || _downloadCompletion);
+    
+    // Update filter rules
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
+        if (background) {
+            return;
+        }
         
-        BOOL background = (_fetchCompletion || _downloadCompletion);
-        [_contentBlockerService reloadJsonsWithBackgroundUpdate:background completion:^(NSError *error) {
+        [_contentBlockerService reloadJsonsWithBackgroundUpdate:false completion:^(NSError *error) {
             
             if (error) {
                 [_antibanner rollbackTransaction];
@@ -464,11 +509,18 @@ static NSTimeInterval lastCheckTime;
         }
         
         // Special update case.
+        helper.fetchState = BackgroundFetchStateNotStarted;
         [self antibanerUpdateFinished:AEUpdateFailed];
     }
     // Update performed
     else if ([notification.name
               isEqualToString:ASAntibannerFinishedUpdateNotification]) {
+        
+        if (background){
+            helper.fetchState = BackgroundFetchStateFiltersupdated;
+            [self antibanerUpdateFinished:AEUpdateNewData];
+            return;
+        }
         
         _updatedFilters = [notification userInfo][ASAntibannerUpdatedFiltersKey];
         
@@ -504,6 +556,7 @@ static NSTimeInterval lastCheckTime;
         [self updateFailuredNotify];
         
         // Special update case.
+        helper.fetchState = BackgroundFetchStateNotStarted;
         [self antibanerUpdateFinished:AEUpdateFailed];
         
         // turn off network activity indicator
@@ -513,7 +566,6 @@ static NSTimeInterval lastCheckTime;
               isEqualToString:ASAntibannerUpdatePartCompletedNotification]){
         
         DDLogInfo(@"(AppDelegate) Antibanner update PART notification.");
-        [self antibanerUpdateFinished:AEUpdateNewData];
     }
     else if ([notification.name isEqualToString:ASAntibannerInstalledNotification]) {
         [_contentBlockerService reloadJsonsWithBackgroundUpdate:YES completion:^(NSError * _Nullable error) {

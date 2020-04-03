@@ -89,12 +89,8 @@ class MainPageModel: MainPageModelProtocol {
         }
         observers.append(observer2)
         let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
-            guard let sSelf = self else { return }
-            if sSelf.antibanner.inTransaction() {
-                sSelf.antibanner.rollbackTransaction()
-            }
-        
-            self?.error?(ACLocalizedString("filter_updates_error", nil))
+            guard let self = self else { return }
+            self.error?(ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)
     }
