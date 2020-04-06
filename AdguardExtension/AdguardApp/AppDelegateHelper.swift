@@ -242,9 +242,15 @@ class AppDelegateHelper: NSObject {
             return
         }
         
-        if tab.viewControllers?.count == 0 { return }
+        if tab.viewControllers?.count == 0 {
+            DDLogError("(AppDeegateHelper) openDnsFiltersController error. TabBar viewcontrollers number is 0")
+            return
+        }
         
-        guard let navController = tab.viewControllers?[TabBarTabs.protectionTab.rawValue] as? MainNavigationController else { return }
+        guard let navController = tab.viewControllers?[TabBarTabs.protectionTab.rawValue] as? MainNavigationController else {
+            DDLogError("(AppDeegateHelper) openDnsFiltersController error. Failed getting navigation controller from TabBar tab")
+            return
+        }
         
         if let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController {
             DispatchQueue.main.async {[weak self] in
@@ -308,6 +314,7 @@ class AppDelegateHelper: NSObject {
         }
 
         if tab.viewControllers?.count == 0 {
+            DDLogError("(AppDeegateHelper) applicationOpenUrl error. TabBar viewcontrollers number is 0")
             return false
         }
 
@@ -318,7 +325,10 @@ class AppDelegateHelper: NSObject {
         }
         
         // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else { return false }
+        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else {
+            DDLogError("(AppDeegateHelper) applicationOpenUrl error. Failed getting navigation controller from TabBar tab")
+            return false
+        }
 
         if let mainMenuController = navController.viewControllers.first as? MainMenuController {
             // Adding new user rule from safari

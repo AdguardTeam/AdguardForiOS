@@ -49,11 +49,7 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
         }
     }
     
-    var enabledRulesCount: Int {
-        get {
-            return filtersService.enabledRulesCount
-        }
-    }
+    var enabledRulesCount: Int { filtersService.enabledRulesCount }
     
     private var allFilters: [DnsFilter] = []
     private var searchFilters: [DnsFilter] = []

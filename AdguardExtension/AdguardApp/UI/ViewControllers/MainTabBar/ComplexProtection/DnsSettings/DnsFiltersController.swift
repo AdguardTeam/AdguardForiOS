@@ -45,7 +45,7 @@ class DnsFilterCell: UITableViewCell {
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
             let dateFormatedString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
             
-            descriptionLabel.text = filter?.desc == nil ? filter!.desc! + "\n" + dateFormatedString : dateFormatedString
+            descriptionLabel.text = (filter?.desc == nil || filter?.desc?.isEmpty ?? true) ? dateFormatedString : filter!.desc! + "\n" + dateFormatedString
             importantDescriptionLabel.text = filter?.importantDesc
             
             filterSwitch.isOn = filter?.enabled ?? false
