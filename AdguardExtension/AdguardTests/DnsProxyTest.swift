@@ -35,7 +35,7 @@ class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
 
 class DnsProxyTest: XCTestCase {
     
-    var proxyService = DnsProxyService(logWriter: LogWriterMock());
+    var proxyService = DnsProxyService(logWriter: LogWriterMock(), resources: SharedResourcesMock());
     let request = Data(base64Encoded: "RQAAQkGPAAD/ETb1rBDRAsYSAAHOlAA1AC47HU+xAQAAAQAAAAAAAAdjbGllbnRzAWwGZ29vZ2xlA2NvbQAAAQAB")
 
     override func setUp() {

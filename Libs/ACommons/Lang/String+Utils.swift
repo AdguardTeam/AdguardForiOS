@@ -150,6 +150,18 @@ extension String {
         return String(format: String.localizedString("kb_unit"), kBytesString)
     }
     
+    /*
+     Formats a number, devides thousands with separator, depending on current locale
+     */
+    static func simpleThousandsFormatting(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: number) ?? "\(number.intValue)"
+    }
+    
     /**
     Converts number to string, ignores decimal part
     Formatted by locale

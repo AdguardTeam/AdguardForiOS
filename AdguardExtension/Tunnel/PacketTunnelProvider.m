@@ -163,7 +163,7 @@
         
         id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
         id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources dnsLogService:logService activityStatisticsService:_activityStatisticsService];
-        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter];
+        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources];
         _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
     }
     return self;

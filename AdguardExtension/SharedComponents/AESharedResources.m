@@ -105,6 +105,8 @@ NSString* AEComplexProtectionEnabled = @"AEComplexProtectionEnabled";
 
 NSString *OnboardingWasShown = @"OnboardingWasShown";
 
+NSString *TunnelErrorCode = @"TunnelErrorCode";
+
 NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"

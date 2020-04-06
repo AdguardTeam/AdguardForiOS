@@ -625,6 +625,15 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "You've tried to add a duplicate filter. This filter is already on the list.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ rules are enabled";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Too many rules are enabled: %@. Some of them will be disabled";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Turn off some filters for correct work";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blocked";
 

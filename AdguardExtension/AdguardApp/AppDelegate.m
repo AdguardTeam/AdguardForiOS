@@ -162,6 +162,7 @@ static NSTimeInterval lastCheckTime;
     
     //------------ Subscribe other notifications -----------------------------
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertNotification:) name:NSNotification.showCommonAlert object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openDnsFiltersController) name:NSNotification.showDnsFiltersController object:nil];
     
     //---------------------- Set period for checking filters ---------------------
     [self setPeriodForCheckingFilters];
@@ -731,5 +732,10 @@ static NSTimeInterval lastCheckTime;
         [ACSSystemUtils showSimpleAlertForController:vc withTitle:title message:body];
     });
 }
+
+- (void)openDnsFiltersController{
+    [helper openDnsFiltersController];
+}
+
 
 @end

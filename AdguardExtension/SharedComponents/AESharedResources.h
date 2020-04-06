@@ -311,6 +311,11 @@ extern NSString* _Nonnull AEComplexProtectionEnabled;
 extern NSString* _Nonnull OnboardingWasShown;
 
 /**
+ User defaults key, which defines tunnel error code when starting proxy
+ */
+extern NSString* _Nonnull TunnelErrorCode;
+
+/**
  User defaults key, which defines background fetch state
  */
 extern NSString* _Nonnull BackgroundFetchStateKey;
