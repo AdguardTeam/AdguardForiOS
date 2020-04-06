@@ -768,6 +768,10 @@
 		7ED0D65023D598A1004D9E7C /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
 		7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36D23CCD5480014734A /* BlockRequestController.swift */; };
 		7ED3D37023CCD55C0014734A /* EditBlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */; };
+		7ED544F6243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */; };
+		7ED544F7243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */; };
+		7ED544F8243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */; };
+		7ED544F9243B501E004563DA /* DnsStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */; };
 		7EDF9A1B242BA5F30069DA23 /* ActivityStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */; };
 		7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
@@ -2329,6 +2333,7 @@
 		7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+UtilsTest.swift"; sourceTree = "<group>"; };
 		7ED3D36D23CCD5480014734A /* BlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRequestController.swift; sourceTree = "<group>"; };
 		7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBlockRequestController.swift; sourceTree = "<group>"; };
+		7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsRecord.swift; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		7EDAC08322F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Filters.strings; sourceTree = "<group>"; };
@@ -3290,6 +3295,7 @@
 				D08187C12260ABD600E961B5 /* DnsLogRecord.swift */,
 				D0EC86B623A8C45200EDF107 /* RequestsStatisticsBlock.swift */,
 				7EEC43242428EFB100F39C33 /* ActivityStatisticsRecord.swift */,
+				7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -6240,6 +6246,7 @@
 				D07A164221678EA5008BB432 /* RoundrectView.swift in Sources */,
 				D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */,
 				D0F91169212EE214006DF0D3 /* GroupsController.swift in Sources */,
+				7ED544F6243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */,
 				7EB2F95023F2B7C700F9A544 /* SendFeedbackRequest.swift in Sources */,
 				D032D173232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */,
 				7EA3DBC524090D7B000D8D42 /* Animation+Utils.swift in Sources */,
@@ -6276,6 +6283,7 @@
 				D07A811223B501CD00181E54 /* SharedResources.swift in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				D0EC86B823A8C45D00EDF107 /* RequestsStatisticsBlock.swift in Sources */,
+				7ED544F7243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */,
 				D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				65EC9C8D1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -6517,6 +6525,7 @@
 				7E9A487B23A2810B00B89540 /* DnsLogRecord.swift in Sources */,
 				7E9A487D23A2815400B89540 /* AffinityRulesParser.swift in Sources */,
 				7ECD9C48238D65DA0065E88D /* ACObject.m in Sources */,
+				7ED544F9243B501E004563DA /* DnsStatisticsRecord.swift in Sources */,
 				7ECD9C4C238D664D0065E88D /* ACLLogger.m in Sources */,
 				7EC1F9E42391211900210959 /* CocoaLumberjack.swift in Sources */,
 				7E3340272390343D00C39F62 /* ABECRequest.m in Sources */,
@@ -6691,6 +6700,7 @@
 				D0D33BB723102BBE009082CE /* ABECFilterParsers.m in Sources */,
 				D0569E1521F1C0A800985DA9 /* AERDomainFilter.m in Sources */,
 				D0569E1721F1C0A800985DA9 /* ACSSystemUtils.m in Sources */,
+				7ED544F8243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */,
 				D08CE42C240D3A8900A70089 /* PurchaseService.swift in Sources */,
 				7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */,
 				D071EFFE23D8781500111D06 /* ConfigurationServiceProtocol.swift in Sources */,

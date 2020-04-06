@@ -34,7 +34,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private var records = [DnsLogRecord]()
     private var activityStatisticsRecords = [String: ActivityStatisticsRecord]()
-    private var statistics: [DnsStatisticsType : RequestsStatisticsBlock] = [:]
+    private var dnsStatisticsRecord = DnsStatisticsRecord()
     
     private let saveRecordsMinimumTime = 3.0 // seconds
     private let saveActivityRecordsMinimumTime = 10.0 // seconds
@@ -75,37 +75,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
-        var status: DnsLogRecordStatus
-        
-        if event.whitelist {
-            status = event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
-        }
-        else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
-            status = .blacklistedByUserFilter
-        }
-        else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
-            status = .blacklistedByOtherFilter
-        }
-        else {
-            status = .processed
-        }
-        
-        let tempRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-        resources.sharedDefaults().set(tempRequestsCount + 1, forKey: AEDefaultsRequests)
-        
+        let status = getEventStatus(event)
         let recordIsBlocked = status == .blacklistedByUserFilter || status == .blacklistedByOtherFilter
-        
-        statisticsQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.statistics[.all]?.numberOfRequests += 1
-            
-            if recordIsBlocked {
-                let tempBlockedRequestsCount = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-                self.resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
-                
-                self.statistics[.blocked]?.numberOfRequests += 1
-            }
-        }
         
         let filterIds = event.filterListIds.map { $0.intValue }
         
@@ -131,6 +102,32 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         addActivityRecord(domain: domain, isBlocked: recordIsBlocked)
         addRecord(record: record)
+        addDnsStatisticsRecord(isBlocked: recordIsBlocked)
+    }
+    
+    private func addDnsStatisticsRecord(isBlocked: Bool) {
+        let tempRequestsCount = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+        resources.sharedDefaults().set(tempRequestsCount + 1, forKey: AEDefaultsRequests)
+        
+        statisticsQueue.async { [weak self] in
+            guard let self = self else { return }
+            self.dnsStatisticsRecord.requests += 1
+                
+            if isBlocked {
+                let tempBlockedRequestsCount = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
+                self.resources.sharedDefaults().set(tempBlockedRequestsCount + 1, forKey: AEDefaultsBlockedRequests)
+                    
+                self.dnsStatisticsRecord.blocked += 1
+                
+                let savedKBytes = Int.random(in: 10..<50)
+                self.dnsStatisticsRecord.savedData += savedKBytes
+            }
+            
+            let now = Date().timeIntervalSince1970
+            if now > self.nextStatisticsSaveTime{
+                self.saveStatistics()
+            }
+        }
     }
     
     private func addActivityRecord(domain: String, isBlocked: Bool){
@@ -173,13 +170,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             self.save()
             self.nextSaveTime = now + self.saveRecordsMinimumTime
         }
-        
-        statisticsQueue.async { [weak self] in
-            guard let self = self else { return }
-            if now > self.nextStatisticsSaveTime{
-                self.saveStatistics()
-            }
-        }
     }
     
     private func flush() {
@@ -199,8 +189,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private func saveStatistics(){
         let now = Date().timeIntervalSince1970
-        dnsStatisticsService.writeStatistics(statistics)
-        statistics.removeAll()
+        dnsStatisticsService.writeStatistics(dnsStatisticsRecord)
         reinitializeStatistics()
         nextStatisticsSaveTime = now + dnsStatisticsService.minimumStatisticSaveTime
     }
@@ -214,24 +203,38 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func loadStatisticsHead() {
-        
-        let all = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+        let requests = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
         let blocked = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
         
-        let date = Date()
+        dnsStatisticsRecord.requests += requests
+        dnsStatisticsRecord.blocked += blocked
         
-        statistics[.all] = RequestsStatisticsBlock(date: date, numberOfRequests: all)
-        statistics[.blocked] = RequestsStatisticsBlock(date: date, numberOfRequests: blocked)
+        for _ in 1...blocked {
+            let savedKBytes = Int.random(in: 10..<50)
+            dnsStatisticsRecord.savedData += savedKBytes
+        }
     }
     
     private func reinitializeStatistics(){
-        let date = Date()
-        
-        statistics[.all] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
-        statistics[.blocked] = RequestsStatisticsBlock(date: date, numberOfRequests: 0)
+        dnsStatisticsRecord = DnsStatisticsRecord()
         
         resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
         resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
+    }
+    
+    private func getEventStatus(_ event: AGDnsRequestProcessedEvent) -> DnsLogRecordStatus {
+        if event.whitelist {
+            return event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
+        }
+        else if userFilterId != nil && event.filterListIds.contains(userFilterId!) {
+            return .blacklistedByUserFilter
+        }
+        else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
+            return .blacklistedByOtherFilter
+        }
+        else {
+            return .processed
+        }
     }
 }
