@@ -629,7 +629,7 @@
 "dns_filters_number_title" = "%@ rules are enabled";
 
 /*(DnsFiltersController) DNS filters overlimit title */
-"dns_filters_overlimit_title" = "%@ rules are enabled, it's too much, some rules will be disabled";
+"dns_filters_overlimit_title" = "Too many rules are enabled: %@. Some of them will be disabled";
 
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Turn off some filters for correct work";
