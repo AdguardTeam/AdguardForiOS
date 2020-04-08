@@ -497,28 +497,40 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      Called when "requests" button tapped
      */
     private func chooseRequest(){
-        chartView.activeChart = .requests
-        chartModel.chartRequestType = .requests
-        
-        requestsNumberLabel.alpha = 1.0
-        encryptedNumberLabel.alpha = 0.5
-        
-        requestsTextLabel.alpha = 1.0
-        encryptedTextLabel.alpha = 0.5
+        if chartModel.chartRequestType == .requests {
+            let title = String.localizedString("requests_info_alert_title")
+            let message = String.localizedString("requests_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        } else {
+            chartView.activeChart = .requests
+            chartModel.chartRequestType = .requests
+            
+            requestsNumberLabel.alpha = 1.0
+            encryptedNumberLabel.alpha = 0.5
+            
+            requestsTextLabel.alpha = 1.0
+            encryptedTextLabel.alpha = 0.5
+        }
     }
     
     /**
     Called when "blocked" button tapped
     */
     private func chooseEncrypted(){
-        chartView.activeChart = .encrypted
-        chartModel.chartRequestType = .encrypted
-        
-        requestsNumberLabel.alpha = 0.5
-        encryptedNumberLabel.alpha = 1.0
-        
-        requestsTextLabel.alpha = 0.5
-        encryptedTextLabel.alpha = 1.0
+        if chartModel.chartRequestType == .encrypted {
+            let title = String.localizedString("encrypted_info_alert_title")
+            let message = String.localizedString("encrypted_info_alert_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+        } else {
+            chartView.activeChart = .encrypted
+            chartModel.chartRequestType = .encrypted
+            
+            requestsNumberLabel.alpha = 0.5
+            encryptedNumberLabel.alpha = 1.0
+            
+            requestsTextLabel.alpha = 0.5
+            encryptedTextLabel.alpha = 1.0
+        }
     }
     
     /**

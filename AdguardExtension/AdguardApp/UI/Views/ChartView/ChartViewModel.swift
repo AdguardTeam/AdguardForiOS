@@ -56,7 +56,7 @@ class ChartViewModel: ChartViewModelProtocol {
         }
     }
     
-    var chartRequestType: ChartRequestType = .requests {
+    var chartRequestType: ChartRequestType = .encrypted {
         didSet {
             changeChart()
         }
