@@ -22,8 +22,8 @@
         <scene sceneID="zqJ-IQ-lJU">
             <objects>
                 <viewController storyboardIdentifier="MainPageController" id="T6V-s9-cBk" customClass="MainPageController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="Qnu-x2-MQD">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="Qnu-x2-MQD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kV5-xp-1Np">
@@ -380,7 +380,7 @@
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                                         </variation>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blocked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="encrypted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5U-A8-S8G" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                         <rect key="frame" x="4" y="48" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB">
@@ -460,7 +460,7 @@
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                                         </variation>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="data saved*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-vu-29O" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="avg. time*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfe-vu-29O" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                         <rect key="frame" x="4" y="48" width="130" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="qdx-xq-uf3">
@@ -722,7 +722,6 @@
                     <connections>
                         <outlet property="adguardManImageView" destination="gM8-pc-xzq" id="laM-dL-fYX"/>
                         <outlet property="blockedButton" destination="561-fR-2DC" id="28C-6y-DVX"/>
-                        <outlet property="blockedTextLabel" destination="a5U-A8-S8G" id="vGQ-XU-1Ag"/>
                         <outlet property="changeStatisticsDatesButton" destination="kfe-5H-fB1" id="bpY-pU-sXY"/>
                         <outlet property="chartView" destination="aEB-g1-RpB" id="Vwb-3R-zO3"/>
                         <outlet property="complexProtectionSwitch" destination="YUL-Oa-fId" id="jqh-kc-mId"/>
@@ -733,9 +732,10 @@
                         <outlet property="contentBlockerViewIpad" destination="IU2-ER-A7n" id="t1x-7D-JNM"/>
                         <outlet property="contentBlockerViewIphone" destination="k8E-Jo-8op" id="G7Y-dJ-TYB"/>
                         <outlet property="dataSavedButton" destination="vwk-XK-u63" id="wpf-Rq-83N"/>
-                        <outlet property="dataSavedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
                         <outlet property="elapsedNumberLabel" destination="Zbr-WF-bsX" id="hCA-OE-HiV"/>
+                        <outlet property="elapsedTextLabel" destination="Cfe-vu-29O" id="LEm-f2-4IA"/>
                         <outlet property="encryptedNumberLabel" destination="Kxe-Kt-6aQ" id="adZ-O4-B6C"/>
+                        <outlet property="encryptedTextLabel" destination="a5U-A8-S8G" id="vGQ-XU-1Ag"/>
                         <outlet property="fixItIphoneButton" destination="46F-Jh-wHm" id="tpK-eA-iLO"/>
                         <outlet property="fromButtonsToTopHeight" destination="c8q-oE-3NX" id="C62-Le-Ise"/>
                         <outlet property="getProButton" destination="4Ft-5h-4Jd" id="upu-BZ-SFA"/>

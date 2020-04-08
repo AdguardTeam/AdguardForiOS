@@ -76,8 +76,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var elapsedNumberLabel: ThemableLabel!
     
     @IBOutlet weak var requestsTextLabel: ThemableLabel!
-    @IBOutlet weak var blockedTextLabel: ThemableLabel!
-    @IBOutlet weak var dataSavedTextLabel: ThemableLabel!
+    @IBOutlet weak var encryptedTextLabel: ThemableLabel!
+    @IBOutlet weak var elapsedTextLabel: ThemableLabel!
     
     
     // MARK: Get Pro elements
@@ -504,7 +504,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         encryptedNumberLabel.alpha = 0.5
         
         requestsTextLabel.alpha = 1.0
-        blockedTextLabel.alpha = 0.5
+        encryptedTextLabel.alpha = 0.5
     }
     
     /**
@@ -518,7 +518,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         encryptedNumberLabel.alpha = 1.0
         
         requestsTextLabel.alpha = 0.5
-        blockedTextLabel.alpha = 1.0
+        encryptedTextLabel.alpha = 1.0
     }
     
     /**
@@ -818,8 +818,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     private func setupFontsForSmallScreen(){
         requestsTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        blockedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        dataSavedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        encryptedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        elapsedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
     
     private func setupVoiceOverLabels(){
