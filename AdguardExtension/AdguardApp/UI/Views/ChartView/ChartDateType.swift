@@ -19,6 +19,8 @@
 import Foundation
 
 enum ChartDateType: Int, CaseIterable {
+    typealias RawValue = Int
+    
     case alltime = 0, month, week, day, today
     
     /**

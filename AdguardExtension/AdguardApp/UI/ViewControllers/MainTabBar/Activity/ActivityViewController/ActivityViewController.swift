@@ -95,12 +95,6 @@ class ActivityViewController: UITableViewController {
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
     private var mostBlockedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
-    private var periodType: ChartDateType {
-        get {
-            let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
-            return ChartDateType(rawValue: periodType) ?? .alltime
-        }
-    }
     
     // MARK: - ViewController life cycle
     
@@ -117,7 +111,7 @@ class ActivityViewController: UITableViewController {
         
         updateTheme()
         setupTableView()
-        dateTypeChanged(dateType: periodType)
+        dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         statisticsModel.obtainStatistics()
     }
@@ -129,7 +123,7 @@ class ActivityViewController: UITableViewController {
             controller.activeCompaniesDisplayType = activeCompaniesDisplayType
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.mostBlockedCompanies = mostBlockedCompanies
-            controller.chartDateType = periodType
+            controller.chartDateType = resources.activityStatisticsType
         }
     }
     
@@ -299,21 +293,21 @@ class ActivityViewController: UITableViewController {
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .blockedRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allowedRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
@@ -400,7 +394,7 @@ class ActivityViewController: UITableViewController {
         }
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.periodType ?? .alltime)
+            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         
         requestsModel?.recordsObserver = { [weak self] (records) in
@@ -421,7 +415,7 @@ class ActivityViewController: UITableViewController {
     }
     
     @objc func updateTableView(sender: UIRefreshControl) {
-        dateTypeChanged(dateType: periodType)
+        dateTypeChanged(dateType: resources.activityStatisticsType)
         statisticsModel.obtainStatistics()
         refreshControl?.endRefreshing()
     }
@@ -453,7 +447,7 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
 
 extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
-        resources.sharedDefaults().set(dateType.rawValue, forKey: ActivityStatisticsPeriodType)
+        resources.activityStatisticsType = dateType
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
         

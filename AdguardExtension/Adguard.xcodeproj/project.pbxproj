@@ -468,6 +468,13 @@
 		65FAB3371D6C569500A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB33B1D6C576900A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		65FAB3461D6F2BE300A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
+		7E01DD52243E1A9A00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD53243E1A9A00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD54243E1A9C00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD55243E1A9C00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD56243E1A9D00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD57243E1A9D00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E01DD58243E1A9E00AA05EE /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
 		7E06B66522FB1606006859AC /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		7E06B66622FB1606006859AC /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B8219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m */; };
@@ -5917,6 +5924,7 @@
 				D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */,
 				D033980E243192A200F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D031A123219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
+				7E01DD58243E1A9E00AA05EE /* ChartDateType.swift in Sources */,
 				D031A0DD219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				7E4D204B22D71A5B003B0E75 /* mz_compat.c in Sources */,
@@ -6441,6 +6449,7 @@
 				65AD3BBC1B7CB15400004A02 /* AESharedResources.m in Sources */,
 				D08CE432240D4BD000A70089 /* String+Utils.swift in Sources */,
 				D093719321B056B7004A24F1 /* CocoaLumberjack.swift in Sources */,
+				7E01DD52243E1A9A00AA05EE /* ChartDateType.swift in Sources */,
 				655A028F1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				D08CE438240D4C5D00A70089 /* UIColorUtils.swift in Sources */,
 				D031A102219EFC99002C17D9 /* CLIColor.m in Sources */,
@@ -6492,6 +6501,7 @@
 				7E06B68322FB1606006859AC /* AESharedResources.m in Sources */,
 				D08CE437240D4BD300A70089 /* String+Utils.swift in Sources */,
 				7E06B68422FB1606006859AC /* CocoaLumberjack.swift in Sources */,
+				7E01DD57243E1A9D00AA05EE /* ChartDateType.swift in Sources */,
 				7E06B68522FB1606006859AC /* ACNHttpUtils.m in Sources */,
 				D08CE43D240D4C6000A70089 /* UIColorUtils.swift in Sources */,
 				7E06B68622FB1606006859AC /* CLIColor.m in Sources */,
@@ -6732,6 +6742,7 @@
 				D067D8FB21428AA900ECDE6D /* AESharedResources.m in Sources */,
 				D08CE433240D4BD100A70089 /* String+Utils.swift in Sources */,
 				D093719421B056B8004A24F1 /* CocoaLumberjack.swift in Sources */,
+				7E01DD54243E1A9C00AA05EE /* ChartDateType.swift in Sources */,
 				D067D8FC21428AA900ECDE6D /* ACNHttpUtils.m in Sources */,
 				D08CE439240D4C5D00A70089 /* UIColorUtils.swift in Sources */,
 				D031A103219EFC99002C17D9 /* CLIColor.m in Sources */,
@@ -6783,6 +6794,7 @@
 				D067D92C21428B4600ECDE6D /* AESharedResources.m in Sources */,
 				D08CE434240D4BD100A70089 /* String+Utils.swift in Sources */,
 				D093719521B056B9004A24F1 /* CocoaLumberjack.swift in Sources */,
+				7E01DD53243E1A9A00AA05EE /* ChartDateType.swift in Sources */,
 				D067D92D21428B4600ECDE6D /* ACNHttpUtils.m in Sources */,
 				D08CE43A240D4C5E00A70089 /* UIColorUtils.swift in Sources */,
 				D031A104219EFC99002C17D9 /* CLIColor.m in Sources */,
@@ -6834,6 +6846,7 @@
 				D067D95D21428B9100ECDE6D /* AESharedResources.m in Sources */,
 				D08CE435240D4BD200A70089 /* String+Utils.swift in Sources */,
 				D093719621B056B9004A24F1 /* CocoaLumberjack.swift in Sources */,
+				7E01DD56243E1A9D00AA05EE /* ChartDateType.swift in Sources */,
 				D067D95E21428B9100ECDE6D /* ACNHttpUtils.m in Sources */,
 				D08CE43B240D4C5E00A70089 /* UIColorUtils.swift in Sources */,
 				D031A105219EFC99002C17D9 /* CLIColor.m in Sources */,
@@ -6885,6 +6898,7 @@
 				D067D98E21428BB500ECDE6D /* AESharedResources.m in Sources */,
 				D08CE436240D4BD200A70089 /* String+Utils.swift in Sources */,
 				D093719721B056BA004A24F1 /* CocoaLumberjack.swift in Sources */,
+				7E01DD55243E1A9C00AA05EE /* ChartDateType.swift in Sources */,
 				D067D98F21428BB500ECDE6D /* ACNHttpUtils.m in Sources */,
 				D08CE43C240D4C5F00A70089 /* UIColorUtils.swift in Sources */,
 				D031A106219EFC99002C17D9 /* CLIColor.m in Sources */,
