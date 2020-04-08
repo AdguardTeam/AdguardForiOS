@@ -32,7 +32,7 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var changePeriodTypeButton: UIButton!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var blockedNumberLabel: UILabel!
+    @IBOutlet weak var encryptedNumberLabel: UILabel!
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
     
@@ -84,7 +84,7 @@ class ActivityViewController: UITableViewController {
     private var titleInNavBarIsShown = false
     
     private let activityModel: ActivityStatisticsModelProtocol
-    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!, chartView: nil)
+    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -369,17 +369,17 @@ class ActivityViewController: UITableViewController {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+            let requestsNumber = self.resources.tempRequestsCount
             let requestsCount = self.statisticsModel.requestsCount + requestsNumber
             
-            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            let blockedCount = (self.statisticsModel.blockedCount) + blockedNumber
+            let ecnryptedNumber = self.resources.tempEncryptedRequestsCount
+            let ecnryptedCount = self.statisticsModel.encryptedCount + ecnryptedNumber
             
-            let blockedSaved = self.statisticsModel.blockedSavedKbytes
+            let averageElapsed = self.statisticsModel.averageElapsed
             
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
-            self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedCount))
+            self.dataSavedLabel.text = String.simpleDecimalFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     
@@ -411,7 +411,7 @@ class ActivityViewController: UITableViewController {
         
         let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
         
         let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
         
@@ -457,36 +457,36 @@ extension ActivityViewController: DateTypeChangedProtocol {
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
         
-        activityModel.getCompanies(for: dateType) { (mostRequested, mostBlocked, companiesNumber) in
-            DispatchQueue.main.async {[weak self] in
-                if !mostRequested.isEmpty {
-                    self?.mostActiveView.alpha = 1.0
-                    self?.mostActiveGestureRecognizer.isEnabled = true
-                    let record = mostRequested[0]
-                    self?.mostActiveCompany.text = record.key
-                } else {
-                    self?.mostActiveView.alpha = 0.5
-                    self?.mostActiveGestureRecognizer.isEnabled = false
-                    self?.mostActiveCompany.text = String.localizedString("none_message")
-                }
-                
-                if !mostBlocked.isEmpty {
-                    self?.mostBlockedView.alpha = 1.0
-                    self?.mostBlockedGestureRecognizer.isEnabled = true
-                    let record = mostBlocked[0]
-                    self?.mostBlockedCompany.text = record.key
-                } else {
-                    self?.mostBlockedView.alpha = 0.5
-                    self?.mostBlockedGestureRecognizer.isEnabled = false
-                    self?.mostBlockedCompany.text = String.localizedString("none_message")
-                }
-            
-                self?.companiesNumberLabel.text = "\(companiesNumber)"
-                
-                self?.mostRequestedCompanies = mostRequested
-                self?.mostBlockedCompanies = mostBlocked
-                self?.companiesNumber = companiesNumber
+        let companiesInfo = activityModel.getCompanies(for: dateType)
+        
+        DispatchQueue.main.async {[weak self] in
+            if !companiesInfo.mostRequested.isEmpty {
+                self?.mostActiveView.alpha = 1.0
+                self?.mostActiveGestureRecognizer.isEnabled = true
+                let record = companiesInfo.mostRequested[0]
+                self?.mostActiveCompany.text = record.key
+            } else {
+                self?.mostActiveView.alpha = 0.5
+                self?.mostActiveGestureRecognizer.isEnabled = false
+                self?.mostActiveCompany.text = String.localizedString("none_message")
             }
+                
+            if !companiesInfo.mostBlocked.isEmpty {
+                self?.mostBlockedView.alpha = 1.0
+                self?.mostBlockedGestureRecognizer.isEnabled = true
+                let record = companiesInfo.mostBlocked[0]
+                self?.mostBlockedCompany.text = record.key
+            } else {
+                self?.mostBlockedView.alpha = 0.5
+                self?.mostBlockedGestureRecognizer.isEnabled = false
+                self?.mostBlockedCompany.text = String.localizedString("none_message")
+            }
+            
+            self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
+            
+            self?.mostRequestedCompanies = companiesInfo.mostRequested
+            self?.mostBlockedCompanies = companiesInfo.mostBlocked
+            self?.companiesNumber = companiesInfo.companiesNumber
         }
         
         requestsModel?.obtainRecords(for: dateType)

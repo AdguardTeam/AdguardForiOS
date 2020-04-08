@@ -126,28 +126,13 @@ extension String {
         return ACLocalizedString(key, nil)
     }
     
-    /**
-     Converts kBytes to text and appropriate units
-     */
-    static func dataUnitsConverter(_ kBytes: Int) -> String {
-        
-        let mBytePower = pow(2.0, 10.0) // 2^10 (1024) kBytes in 1 mByte
-        let gBytePower = pow(2.0, 20.0) // 2^20 (1048576) kBytes in 1gByte
-        
-        let gBytes = Double(kBytes) / gBytePower
-        if gBytes > 1 {
-            let gBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: gBytes))
-            return String(format: String.localizedString("gb_unit"), gBytesString)
-        }
-        
-        let mBytes = Double(kBytes) / mBytePower
-        if mBytes > 1 {
-            let mBytesString = String.formatNumberByLocale(NSNumber(floatLiteral: mBytes))
-            return String(format: String.localizedString("mb_unit"), mBytesString)
-        }
-        
-        let kBytesString = String.formatNumberByLocale(NSNumber(integerLiteral: kBytes))
-        return String(format: String.localizedString("kb_unit"), kBytesString)
+    static func simpleDecimalFormatter(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter.string(from: number) ?? "\(number.intValue)"
     }
     
     /*

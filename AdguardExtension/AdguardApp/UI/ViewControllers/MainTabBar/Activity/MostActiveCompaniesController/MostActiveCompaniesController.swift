@@ -126,7 +126,7 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
             cell.theme = theme
             cell.companyLabel.text = record.key
             
-            let text = requestActive ? String(format: String.localizedString("requests_number"), record.requests) : String(format: String.localizedString("blocked_number"), record.blocked)
+            let text = requestActive ? String(format: String.localizedString("requests_number"), record.requests) : String(format: String.localizedString("blocked_number"), record.encrypted)
             cell.requestsNumberLabel.text = text
             
             if indexPath.row == 0 {

@@ -22,30 +22,30 @@ import Foundation
     let date: Date
     let domain: String
     var requests: Int
-    var blocked: Int
-    var savedData: Int
+    var encrypted: Int
+    var elapsedSumm: Int
     
-    init(date: Date, domain: String, requests: Int, blocked: Int, savedData: Int) {
+    init(date: Date = Date(), domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int = 0) {
         self.date = date
         self.domain = domain
         self.requests = requests
-        self.blocked = blocked
-        self.savedData = savedData
+        self.encrypted = encrypted
+        self.elapsedSumm = elapsedSumm
     }
     
     init?(_ resultSet: FMResultSet) {
         if let iso8601DateString = resultSet["timeStamp"] as? String,
-            let date = Date.dateFromIso8601(iso8601DateString),
+            let date = ISO8601DateFormatter().date(from: iso8601DateString),
             let domain = resultSet["domain"] as? String,
             let requests = resultSet["requests"] as? Int,
-            let blocked = resultSet["blocked"] as? Int,
-            let savedData = resultSet["savedData"] as? Int {
+            let encrypted = resultSet["encrypted"] as? Int,
+            let elapsedSumm = resultSet["elapsedSumm"] as? Int {
             
             self.date = date
             self.domain = domain
             self.requests = requests
-            self.blocked = blocked
-            self.savedData = savedData
+            self.encrypted = encrypted
+            self.elapsedSumm = elapsedSumm
         }
         else {
             return nil
@@ -54,7 +54,7 @@ import Foundation
 
     override var debugDescription: String {
         get {
-            return "date = \(self.date); domain = \(self.domain); requests = \(self.requests); blocked = \(self.blocked); savedData = \(self.savedData)"
+            return "date = \(self.date); domain = \(self.domain); requests = \(self.requests); encrypted = \(self.encrypted); elapsedSumm = \(self.elapsedSumm)"
         }
     }
     
@@ -62,11 +62,11 @@ import Foundation
     
     override func isEqual(_ object: Any?) -> Bool {
         if let object = object as? ActivityStatisticsRecord {
-            return object.date.iso8601YyyyMmDdFormatter() == self.date.iso8601YyyyMmDdFormatter() &&
+            return ISO8601DateFormatter().string(from: object.date) == ISO8601DateFormatter().string(from: self.date) &&
                 object.domain == self.domain &&
                 object.requests == self.requests &&
-                object.blocked == self.blocked &&
-                object.savedData == self.savedData
+                object.encrypted == self.encrypted &&
+                object.elapsedSumm == self.elapsedSumm
         }
         return false
     }

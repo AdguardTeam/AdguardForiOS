@@ -40,23 +40,24 @@ class ChartView: UIView {
         }
     }
     
-    var chartPoints: (requests: [Point], blocked: [Point]) = ([], []) {
+    var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
         didSet {
             chartPoints.requests.sort(by: { $0.x < $1.x })
-            chartPoints.blocked.sort(by: { $0.x < $1.x })
+            chartPoints.encrypted.sort(by: { $0.x < $1.x })
             
             let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
             let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
             
-            let maxXblocked = chartPoints.blocked.map({ $0.x }).max() ?? 0.0
-            let maxYblocked = chartPoints.blocked.map({ $0.y }).max() ?? 0.0
+            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0.0
+            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0.0
             
             maxXelement = max(maxXrequests, maxXblocked)
             maxYelement = max(maxYrequests, maxYblocked)
             
-            topBorderLabel.text = "\(Int(maxYelement))"
-            
-            drawChart()
+            DispatchQueue.main.async {[weak self] in
+                self?.topBorderLabel.text = "\(Int(self?.maxYelement ?? 0))"
+                self?.drawChart()
+            }
         }
     }
     
@@ -215,16 +216,16 @@ class ChartView: UIView {
     
     private func drawChart(){
         let requestLineLayer = CAShapeLayer()
-        let blockedLineLayer = CAShapeLayer()
+        let encryptedLineLayer = CAShapeLayer()
         
         var requestPoints = convertPoints(points: chartPoints.requests)
-        var blockedPoints = convertPoints(points: chartPoints.blocked)
+        var encryptedPoints = convertPoints(points: chartPoints.encrypted)
         
         let requestsPath = getLinePath(from: &requestPoints)
-        let blockedPath = getLinePath(from: &blockedPoints)
+        let blockedPath = getLinePath(from: &encryptedPoints)
         
         let requestsAlpha: CGFloat = activeChart == .requests ? 1.0 : 0.3
-        let blockedAlpha: CGFloat = activeChart == .blocked ? 1.0 : 0.3
+        let encryptedAlpha: CGFloat = activeChart == .encrypted ? 1.0 : 0.3
                     
         requestLineLayer.path = requestsPath.cgPath
         requestLineLayer.fillColor = UIColor.clear.cgColor
@@ -236,15 +237,15 @@ class ChartView: UIView {
         requestLineLayer.shadowOpacity = 0.5
         requestLineLayer.shadowRadius = 4.0
         
-        blockedLineLayer.path = blockedPath.cgPath
-        blockedLineLayer.fillColor = UIColor.clear.cgColor
-        blockedLineLayer.strokeColor = lineColor.withAlphaComponent(blockedAlpha).cgColor
-        blockedLineLayer.lineWidth = 3.0
+        encryptedLineLayer.path = blockedPath.cgPath
+        encryptedLineLayer.fillColor = UIColor.clear.cgColor
+        encryptedLineLayer.strokeColor = lineColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.lineWidth = 3.0
             
-        blockedLineLayer.shadowColor = shadowColor.withAlphaComponent(blockedAlpha).cgColor
-        blockedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
-        blockedLineLayer.shadowOpacity = 0.5
-        blockedLineLayer.shadowRadius = 4.0
+        encryptedLineLayer.shadowColor = shadowColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
+        encryptedLineLayer.shadowOpacity = 0.5
+        encryptedLineLayer.shadowRadius = 4.0
         
         layer.sublayers?.forEach({ (sublayer) in
             if sublayer.isKind(of: CAShapeLayer.self) {
@@ -253,7 +254,7 @@ class ChartView: UIView {
         })
         
         layer.addSublayer(requestLineLayer)
-        layer.addSublayer(blockedLineLayer)
+        layer.addSublayer(encryptedLineLayer)
     }
     
     private func convertPoints(points: [Point]) -> [CGPoint] {

@@ -20,6 +20,24 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
+    dynamic var tempRequestsCount: Int {
+        get {
+            return sharedDefaults().integer(forKey: AEDefaultsRequests)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsRequests)
+        }
+    }
+    
+    dynamic var tempEncryptedRequestsCount: Int {
+        get {
+            return sharedDefaults().integer(forKey: AEDefaultsEncryptedRequests)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsEncryptedRequests)
+        }
+    }
+    
     dynamic var tunnelErrorCode: Int? {
         get {
             return sharedDefaults().object(forKey: TunnelErrorCode) as? Int

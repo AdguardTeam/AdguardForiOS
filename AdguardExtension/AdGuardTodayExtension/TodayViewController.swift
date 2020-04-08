@@ -42,9 +42,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet weak var requestsLabel: UILabel!
     
-    @IBOutlet weak var blockedLabel: UILabel!
+    @IBOutlet weak var encryptedLabel: UILabel!
     
-    @IBOutlet weak var dataSavedLabel: UILabel!
+    @IBOutlet weak var elapsedLabel: UILabel!
     
     @IBOutlet var labels: [UILabel]!
 
@@ -67,7 +67,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private let dnsProvidersService: DnsProvidersServiceProtocol
     
     private var requestNumber = 0
-    private var blockedNumber = 0
+    private var encryptedNumber = 0
     
     // MARK: View Controller lifecycle
     
@@ -109,11 +109,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        
-        let statistics = dnsStatisticsService.readStatistics()
-              
-        changeTextForButton(statistics: statistics, keyPath: AEDefaultsRequests)
-        changeTextForButton(statistics: statistics, keyPath: AEDefaultsBlockedRequests)
+        let records = dnsStatisticsService.getAllRecords()
+        changeTextForButton(records: records)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,8 +126,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         DDLogInfo("(TodayViewController) - observeValue")
-        let statistics = dnsStatisticsService.readStatistics()
-        changeTextForButton(statistics: statistics, keyPath: keyPath)
+        let records = dnsStatisticsService.getAllRecords()
+        changeTextForButton(records: records)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -283,7 +280,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         self.complexStatusLabel.text = complexText
         
-        self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.blockedNumber)
+        self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.encryptedNumber)
     }
     
     /**
@@ -303,8 +300,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         allTimeStaisticsLabel.textColor = .widgetTitleColor
         requestsLabel.textColor = .widgetTitleColor
-        blockedLabel.textColor = .widgetTitleColor
-        dataSavedLabel.textColor = .widgetTitleColor
+        encryptedLabel.textColor = .widgetTitleColor
+        elapsedLabel.textColor = .widgetTitleColor
         
         labels.forEach({ $0.textColor = .widgetTextColor })
         
@@ -366,38 +363,41 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     /**
      Changes number of requests for specific button
      */
-    private func changeTextForButton(statistics: [DnsStatisticsType:[RequestsStatisticsBlock]], keyPath: String?){
-        
-        var requests = 0
-        var blocked = 0
-        var kBytesSaved = 0
-        
-        statistics[.all]?.forEach({ requests += $0.numberOfRequests })
-        statistics[.blocked]?.forEach({
-            blocked += $0.numberOfRequests
-            kBytesSaved += $0.savedKbytes
-        })
-        
-        if keyPath == AEDefaultsRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            requestsLabel.text = "\(requests + number)"
-            requestNumber = requests + number
-        } else if keyPath == AEDefaultsBlockedRequests {
-            let number = resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            blockedLabel.text = "\(blocked + number)"
-            blockedNumber = blocked + number
-            dataSavedLabel.text = String.dataUnitsConverter(kBytesSaved)
+    private func changeTextForButton(records: [DnsStatisticsRecord]){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            var requests = 0
+            var encrypted = 0
+            var elapsedSumm = 0
+            
+            for record in records {
+                requests += record.requests
+                encrypted += record.encrypted
+                elapsedSumm += record.elapsedSumm
+            }
+            
+            let requestsNumber = self.resources.tempRequestsCount
+            self.requestsLabel.text = "\(requests + requestsNumber)"
+            self.requestNumber = requests + requestsNumber
+            
+            let encryptedNumber = self.resources.tempEncryptedRequestsCount
+            self.encryptedLabel.text = "\(encrypted + encryptedNumber)"
+            self.encryptedNumber = encrypted + encryptedNumber
+            
+            let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
+            self.elapsedLabel.text = String.simpleDecimalFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     
     private func addStatisticsObservers() {
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
     }
     
     private func removeStatisticsObservers() {
         resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsBlockedRequests, context: nil)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsEncryptedRequests, context: nil)
     }
 }
 

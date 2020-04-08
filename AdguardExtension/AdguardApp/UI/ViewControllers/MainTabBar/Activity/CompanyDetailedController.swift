@@ -24,7 +24,7 @@ class CompanyDetailedController: UITableViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var blockedNumberLabel: UILabel!
+    @IBOutlet weak var encryptedNumberLabel: UILabel!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -87,9 +87,9 @@ class CompanyDetailedController: UITableViewController {
         }
         
         let requestsCount = record?.requests ?? 0
-        let blockedCount = record?.blocked ?? 0
+        let encryptedCount = record?.encrypted ?? 0
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-        blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
+        encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()

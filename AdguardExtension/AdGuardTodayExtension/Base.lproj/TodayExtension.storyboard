@@ -306,13 +306,13 @@
                     <size key="freeformSize" width="414" height="268"/>
                     <connections>
                         <outlet property="allTimeStaisticsLabel" destination="cva-11-jEA" id="aSD-OJ-dT6"/>
-                        <outlet property="blockedLabel" destination="6Gp-mS-9oI" id="RgW-GQ-9gN"/>
                         <outlet property="compactView" destination="LDB-v9-R8w" id="dhi-zs-ZnX"/>
                         <outlet property="complexProtectionTitle" destination="Sbv-f5-jTd" id="u7u-Id-BUB"/>
                         <outlet property="complexStatisticsLabel" destination="yLB-hW-Q36" id="zQm-Vn-PhS"/>
                         <outlet property="complexStatusLabel" destination="veU-On-v4x" id="anh-df-pnE"/>
                         <outlet property="complexSwitchOutlet" destination="msY-PO-wL6" id="NAc-Ys-Xbq"/>
-                        <outlet property="dataSavedLabel" destination="2B3-i9-r5F" id="pow-3j-c4w"/>
+                        <outlet property="elapsedLabel" destination="2B3-i9-r5F" id="pow-3j-c4w"/>
+                        <outlet property="encryptedLabel" destination="6Gp-mS-9oI" id="RgW-GQ-9gN"/>
                         <outlet property="expandedStackView" destination="3GI-zA-x7y" id="Y9W-UF-u0U"/>
                         <outlet property="height" destination="bwu-Xo-Mhp" id="mvg-zo-OuL"/>
                         <outlet property="requestsLabel" destination="uPl-zG-XAF" id="cDW-Fg-QFO"/>

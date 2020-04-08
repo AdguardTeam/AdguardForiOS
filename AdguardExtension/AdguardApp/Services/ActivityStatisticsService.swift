@@ -26,8 +26,8 @@ import Foundation
 }
 
 protocol ActivityStatisticsServiceReaderProtocol {
-    func getAllRecords(completion: @escaping ([ActivityStatisticsRecord]) -> ())
-    func getRecords(by type: ChartDateType, completion: @escaping ([ActivityStatisticsRecord]) -> ())
+    func getAllRecords() -> [ActivityStatisticsRecord]
+    func getRecords(by type: ChartDateType) -> [ActivityStatisticsRecord]
 }
 
 typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterProtocol & ActivityStatisticsServiceReaderProtocol
@@ -40,20 +40,16 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     
     // MARK: - Private variables
     
-    private lazy var path =  { self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
+    private lazy var path =  { resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
     
-    private lazy var writeHandler: FMDatabaseQueue? = {
+    private lazy var dbHandler: FMDatabaseQueue? = {
         let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
         
-        handler?.inTransaction{ (db, rollback) in
-            self.createDnsLogTable(db!)
+        handler?.inTransaction{[weak self] (db, rollback) in
+            self?.createDnsLogTable(db!)
         }
         
         return handler
-    }()
-    
-    private lazy var readHandler: FMDatabaseQueue? = {
-        return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
     }()
     
     // MARK: - Init
@@ -63,23 +59,26 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
         super.init()
         // lazy vars are not thread safe
         // force load lazy vars in init
-        let _ = self.readHandler
-        let _ = self.writeHandler
+        let _ = self.dbHandler
     }
     
     // MARK: - Public methods
     
     func writeRecords(_ records: [ActivityStatisticsRecord]){
-        writeHandler?.inTransaction{ (db, rollback) in
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction{ (db, rollback) in
+            defer { group.leave() }
             guard let db = db else { return }
             
             for record in records {
-                let dateString = record.date.iso8601YyyyMmDdFormatter()
+                let dateString = ISO8601DateFormatter().string(from: record.date)
             
-                var result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, blocked, savedData) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.blocked, record.savedData])
+                var result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, encrypted, elapsedSumm) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.encrypted, record.elapsedSumm])
 
                 if !result {
-                    result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = requests + ?, blocked = blocked + ?, savedData = savedData + ? WHERE timeStamp = ? and domain = ?", withArgumentsIn: [record.requests, record.blocked, record.savedData, dateString, record.domain])
+                    result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = requests + ?, encrypted = encrypted + ?, elapsedSumm = elapsedSumm + ? WHERE timeStamp = ? AND domain = ?", withArgumentsIn: [record.requests, record.encrypted, record.elapsedSumm, dateString, record.domain])
                 }
                 
                 rollback?.pointee = ObjCBool(!result)
@@ -89,34 +88,44 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 }
             }
         }
+        
+        group.wait()
     }
     
-    func getAllRecords(completion: @escaping ([ActivityStatisticsRecord]) -> ()) {
-        readHandler?.inTransaction{ (db, rollback) in
+    func getAllRecords() -> [ActivityStatisticsRecord] {
+        var activityRecords = [ActivityStatisticsRecord]()
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction{ (db, rollback) in
+            defer { group.leave() }
             guard let db = db else { return }
-            var activityRecords = [ActivityStatisticsRecord]()
-            
+    
             if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable", withArgumentsIn: []) {
                 while resultSet.next() {
                     if let record = ActivityStatisticsRecord(resultSet) {
                         activityRecords.append(record)
                     }
                 }
-                completion(activityRecords)
-            } else {
-                completion([])
             }
         }
+        
+        group.wait()
+        return activityRecords
     }
     
-    func getRecords(by type: ChartDateType, completion: @escaping ([ActivityStatisticsRecord]) -> ()) {
-        readHandler?.inTransaction{ (db, rollback) in
+    func getRecords(by type: ChartDateType) -> [ActivityStatisticsRecord] {
+        var activityRecords = [ActivityStatisticsRecord]()
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction{ (db, rollback) in
+            defer { group.leave() }
             guard let db = db else { return }
-            var activityRecords = [ActivityStatisticsRecord]()
             let intervalTime = type.getTimeInterval()
             
-            let firstDate = intervalTime.begin.iso8601YyyyMmDdFormatter()
-            let lastDate = intervalTime.end.iso8601YyyyMmDdFormatter()
+            let firstDate = ISO8601DateFormatter().string(from: intervalTime.begin)
+            let lastDate = ISO8601DateFormatter().string(from: intervalTime.end)
             
             if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable WHERE timeStamp <= ? AND timeStamp >= ? ORDER BY timeStamp DESC, domain ASC", withArgumentsIn: [firstDate, lastDate]) {
                 while resultSet.next() {
@@ -124,15 +133,18 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                         activityRecords.append(record)
                     }
                 }
-                completion(activityRecords)
-            } else {
-                completion([])
             }
         }
+        group.wait()
+        return activityRecords
     }
     
     func deleteAllRecords() {
-        writeHandler?.inTransaction{ (db, rollback) in
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction{ (db, rollback) in
+            defer { group.leave() }
             guard let db = db else { return }
             
             let result = db.executeUpdate("DELETE FROM ActivityStatisticsTable", withArgumentsIn: [])
@@ -141,13 +153,15 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 DDLogError("ActivityStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
             }
         }
+        
+        group.wait()
     }
 
     
     // MARK: - private methods
     
     private func createDnsLogTable(_ db: FMDatabase) {
-        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS ActivityStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, domain TEXT NOT NULL DEFAULT '', requests INTEGER NOT NULL DEFAULT 0, blocked INTEGER NOT NULL DEFAULT 0, savedData INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(timeStamp, domain))", withParameterDictionary: [:])
+        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS ActivityStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, domain TEXT NOT NULL DEFAULT '', requests INTEGER NOT NULL DEFAULT 0, encrypted INTEGER NOT NULL DEFAULT 0, elapsedSumm INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(timeStamp, domain))", withParameterDictionary: [:])
         if !result {
             DDLogError("ActivityStatisticsService Error in createDnsLogTable; Error: \(db.lastError().debugDescription)")
         }

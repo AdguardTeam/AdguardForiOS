@@ -351,7 +351,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="blockedNumberLabel" destination="3mo-qx-mDo" id="SHF-11-X0V"/>
+                        <outlet property="encryptedNumberLabel" destination="3mo-qx-mDo" id="SHF-11-X0V"/>
                         <outlet property="recentActivityLabel" destination="kX9-ZX-NOu" id="Xfz-by-IEM"/>
                         <outlet property="requestsNumberLabel" destination="dlk-kG-3Jp" id="yvb-pc-IsA"/>
                         <outlet property="searchBar" destination="7QZ-G6-e5U" id="4qt-HJ-aI7"/>
@@ -1516,10 +1516,10 @@
                     </refreshControl>
                     <connections>
                         <outlet property="activityTitle" destination="5bV-zZ-4dr" id="OsZ-lX-RAr"/>
-                        <outlet property="blockedNumberLabel" destination="iNX-Qd-Hmo" id="a5J-Gh-k13"/>
                         <outlet property="changePeriodTypeButton" destination="NcB-Aq-tH3" id="YzK-7f-91e"/>
                         <outlet property="companiesNumberLabel" destination="Jgb-st-fnO" id="ESb-HV-i8w"/>
                         <outlet property="dataSavedLabel" destination="w9H-e5-jiH" id="xc1-MF-VaJ"/>
+                        <outlet property="encryptedNumberLabel" destination="iNX-Qd-Hmo" id="a5J-Gh-k13"/>
                         <outlet property="mostActiveCompany" destination="gK7-Kw-vh5" id="cmM-H9-QYp"/>
                         <outlet property="mostActiveGestureRecognizer" destination="hon-hQ-zoI" id="xup-0d-iFU"/>
                         <outlet property="mostActiveView" destination="VDo-37-dFa" id="nmL-Mn-d1J"/>
@@ -1549,7 +1549,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Cn-HT-HfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleAspectFit" id="VaW-QB-faV">
+                <view contentMode="scaleAspectFit" ambiguous="YES" id="VaW-QB-faV">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>

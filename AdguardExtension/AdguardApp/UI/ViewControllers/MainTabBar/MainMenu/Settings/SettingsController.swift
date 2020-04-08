@@ -171,7 +171,7 @@ class SettingsController: UITableViewController {
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.statisticsService.clearStatistics()
+            self?.statisticsService.deleteAllRecords()
             self?.activityStatisticsService.deleteAllRecords()
             NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }

@@ -31,7 +31,6 @@
 #import "ADBTableRow.h"
 #import "ADBTable.h"
 #import "APDnsLogTable.h"
-#import "APStatisticsTable.h"
 #import "ACNIPUtils.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"

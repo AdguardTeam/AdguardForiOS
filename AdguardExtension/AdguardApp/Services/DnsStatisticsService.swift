@@ -43,18 +43,18 @@ enum DynamicStatisticSaveTime: Int {
     }
 }
 
-@objc enum DnsStatisticsType: Int {
-    case all, blocked
-}
-
 protocol DnsStatisticsServiceProtocol {
     var minimumStatisticSaveTime: Double { get }
     
-    func writeStatistics(_ statistics: [DnsStatisticsType: RequestsStatisticsBlock])
+    func writeRecord(_ record: DnsStatisticsRecord)
     
-    func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]]
+    func getAllRecords() -> [DnsStatisticsRecord]
     
-    func clearStatistics()
+    func getRecords(by type: ChartDateType)  -> [DnsStatisticsRecord]
+    
+    func getRecordsCount() -> Int
+    
+    func deleteAllRecords()
 }
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
@@ -77,24 +77,17 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     
     private lazy var path =  { self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
     
-    private let statisticsRearrangeLimit:Double = 3600   // 1 hour
     private let statisticsRecordsLimit = 1500   // 1500 records
     private let statisticsSectorsLimit = 150   // 1500 records -> 150 records
     
-    private lazy var lastStatisticsRearrangeTime: TimeInterval = Date().timeIntervalSince1970 + statisticsRearrangeLimit
-    
-    private lazy var writeHandler: FMDatabaseQueue? = {
+    private lazy var dbHandler: FMDatabaseQueue? = {
         let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
         
-        handler?.inTransaction{ (db, rollback) in
-            self.createStatisticsTable(db!)
+        handler?.inTransaction{[weak self] (db, rollback) in
+            self?.createStatisticsTable(db!)
         }
         
         return handler
-    }()
-    
-    private lazy var readHandler: FMDatabaseQueue? = {
-        return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
     }()
     
     // MARK: - init
@@ -104,237 +97,223 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         super.init()
         // lazy vars are not thread safe
         // force load lazy vars in init
-        let _ = self.readHandler
-        let _ = self.writeHandler
+        let _ = self.dbHandler
     }
     
     // MARK: - public methods
     
-    func writeStatistics(_ statistics: [DnsStatisticsType : RequestsStatisticsBlock]) {
+    func writeRecord(_ record: DnsStatisticsRecord) {
+        let group = DispatchGroup()
+        group.enter()
         
-        rearrangeStatistics()
-        
-        writeHandler?.inTransaction { (db, rollback) in
-            let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
-            let row = APStatisticsTable()
-            row.allStatisticsBlocks = statistics[.all]
-            row.blockedStatisticsBlocks = statistics[.blocked]
-            table?.insertOrReplace(false, fromRowObject: row)
+        dbHandler?.inTransaction { (db, rollback) in
+            defer { group.leave() }
+            guard let db = db else { return }
+            
+            let dateString = ISO8601DateFormatter().string(from: record.date)
+            
+            let result = db.executeUpdate("INSERT INTO DnsStatisticsTable (timeStamp, requests, encrypted, elapsedSumm) VALUES (?, ?, ?, ?)", withArgumentsIn: [dateString, record.requests, record.encrypted, record.elapsedSumm])
+            rollback?.pointee = ObjCBool(!result)
+            
+            if !result {
+                DDLogError("DnsStatisticsService Error in writeRecord; Error: \(db.lastError().debugDescription)")
+            }
         }
+        
+        group.wait()
+        
+        rearrangeRecordsIfNeeded()
     }
     
-    func readStatistics()->[DnsStatisticsType:[RequestsStatisticsBlock]] {
-        
-        DDLogInfo("(DnsStatisticsService) readStatistics")
-        ACLLogger.singleton()?.flush()
-        var statistics = [DnsStatisticsType:[RequestsStatisticsBlock]]()
+    func getAllRecords() -> [DnsStatisticsRecord] {
+        var records = [DnsStatisticsRecord]()
         
         let group = DispatchGroup()
         group.enter()
         
         ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
-            DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity")
+            DDLogInfo("(DnsStatisticsService) getAllRecords - performExpiringActivity")
             ACLLogger.singleton()?.flush()
             if expired {
-                DDLogInfo("(DnsStatisticsService) readStatistics - performExpiringActivity expired")
+                DDLogInfo("(DnsStatisticsService) getAllRecords - performExpiringActivity expired")
                 ACLLogger.singleton()?.flush()
                 return
             }
             
-            self?.readHandler?.inTransaction { (db, rollback) in
+            self?.dbHandler?.inTransaction{ (db, rollback) in
+                defer { group.leave() }
+                guard let db = db else { return }
                 
-                DDLogInfo("(DnsStatisticsService) readStatistics - inTransaction")
-                ACLLogger.singleton()?.flush()
-                
-                let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
-                
-                DDLogInfo("(DnsStatisticsService) readStatistics - table created")
-                ACLLogger.singleton()?.flush()
-                
-                guard let result = table?.select(withKeys: nil, inRowObject: nil) as? [APStatisticsTable] else {
-                    DDLogInfo("(DnsStatisticsService) readStatistics - select returns empty or incorrect result")
-                    ACLLogger.singleton()?.flush()
-                    return
-                }
-                
-                DDLogInfo("(DnsStatisticsService) readStatistics - result.count = \(result.count)")
-                ACLLogger.singleton()?.flush()
-                if result.count > 0 {
-                    statistics[.all] = result.map { $0.allStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
-                    DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.all].count = \(statistics[.all]?.count ?? 0)")
-                    ACLLogger.singleton()?.flush()
-                    statistics[.blocked] = result.map { $0.blockedStatisticsBlocks ?? RequestsStatisticsBlock(date: Date(), numberOfRequests: 0) }
-                    DDLogInfo("(DnsStatisticsService) readStatistics - statistics[.blocked].count = \(statistics[.blocked]?.count ?? 0)")
-                    ACLLogger.singleton()?.flush()
+                if let resultSet = db.executeQuery("SELECT * FROM DnsStatisticsTable ORDER BY timeStamp", withArgumentsIn: []) {
+                    while resultSet.next() {
+                        if let record = DnsStatisticsRecord(resultSet) {
+                            records.append(record)
+                        }
+                    }
                 }
             }
-            group.leave()
         }
         
         group.wait()
-        
-        return statistics;
+        return records
     }
     
-    func clearStatistics() {
-        writeHandler?.inTransaction { [weak self] (db, rollback) in
-            let table = ADBTable(rowClass: APStatisticsTable.self, db: db)
-            let success = table?.delete(withKeys: nil, inRowObject: nil)
-            if success ?? false {
-                self?.statisticSaveTime = .ten_seconds
-                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
-                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsBlockedRequests)
-                self?.resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
+    func getRecords(by type: ChartDateType) -> [DnsStatisticsRecord] {
+        var records = [DnsStatisticsRecord]()
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
+            DDLogInfo("(DnsStatisticsService) getAllRecords - performExpiringActivity")
+            ACLLogger.singleton()?.flush()
+            if expired {
+                DDLogInfo("(DnsStatisticsService) getAllRecords - performExpiringActivity expired")
+                ACLLogger.singleton()?.flush()
+                return
+            }
+            
+            self?.dbHandler?.inTransaction{ (db, rollback) in
+                defer { group.leave() }
+                guard let db = db else { return }
+                let intervalTime = type.getTimeInterval()
+                
+                let firstDate = ISO8601DateFormatter().string(from: intervalTime.begin)
+                let lastDate = ISO8601DateFormatter().string(from: intervalTime.end)
+                
+                if let resultSet = db.executeQuery("SELECT * FROM DnsStatisticsTable WHERE timeStamp <= ? AND timeStamp >= ? ORDER BY timeStamp", withArgumentsIn: [firstDate, lastDate]) {
+                    while resultSet.next() {
+                        if let record = DnsStatisticsRecord(resultSet) {
+                            records.append(record)
+                        }
+                    }
+                }
             }
         }
+        
+        group.wait()
+        return records
+    }
+    
+    func getRecordsCount() -> Int {
+        var recordsCount = 0
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction({ (db, rollback) in
+            defer { group.leave() }
+            guard let db = db else { return }
+            
+            if let result = db.executeQuery("SELECT count(*) AS count FROM DnsStatisticsTable", withArgumentsIn: []), result.next() == true {
+                recordsCount = Int(result.int(forColumn: "count"))
+            }
+        })
+        
+        group.wait()
+        return recordsCount
+    }
+    
+    func deleteAllRecords() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        dbHandler?.inTransaction { [weak self] (db, rollback) in
+            defer { group.leave() }
+            guard let db = db else { return }
+            
+            let result = db.executeUpdate("DELETE FROM DnsStatisticsTable", withArgumentsIn: [])
+            rollback?.pointee = ObjCBool(!result)
+            
+            if result {
+                self?.statisticSaveTime = .ten_seconds
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
+                self?.resources.sharedDefaults().set(0, forKey: AEDefaultsEncryptedRequests)
+                self?.resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
+            } else {
+                DDLogError("DnsStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
+            }
+        }
+        
+        group.wait()
     }
     
     // MARK: - private methods
     
     private func createStatisticsTable(_ db:FMDatabase) {
-        
-        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS APStatisticsTable (timeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, allStatisticsBlocks BLOB, blockedStatisticsBlocks BLOB)", withParameterDictionary: [:])
-        if result {
-            db.executeUpdate("CREATE INDEX IF NOT EXISTS mainIndex ON APStatisticsTable (timeStamp)", withParameterDictionary: [:])
+        let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS DnsStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP PRIMARY KEY, requests INTEGER NOT NULL DEFAULT 0, encrypted INTEGER NOT NULL DEFAULT 0, elapsedSumm INTEGER NOT NULL DEFAULT 0)", withParameterDictionary: [:])
+        if !result {
+            DDLogError("DnsStatisticsService Error in createStatisticsTable; Error: \(db.lastError().debugDescription)")
         }
     }
     
-    private func rearrangeStatistics() {
-        let now = Date().timeIntervalSince1970
-        if now - lastStatisticsRearrangeTime > statisticsRearrangeLimit {
-            lastStatisticsRearrangeTime = now
+    private func rearrangeRecordsIfNeeded() {
+        let recordsCount = getRecordsCount()
+        
+        if recordsCount >= statisticsRecordsLimit {
+            let records = getAllRecords()
             
-            let statistics = readStatistics()
-            
-            if statistics.count > statisticsRecordsLimit {
-                statisticSaveTime = statisticSaveTime.getNextCase()
-                rearrangeDb(statistics)
-            }
-        }
-    }
-    
-    private func rearrangeDb(_ statistics: [DnsStatisticsType:[RequestsStatisticsBlock]]) {
-        
-        let rearrangedAll = rearrangeRow(statistics[.all]!)
-        let rearrangedBlocked = rearrangeRow(statistics[.blocked]!)
-        
-        if removeStatistics() {
-            for i in 0..<rearrangedAll.count {
-                var newStatistics = [DnsStatisticsType: RequestsStatisticsBlock]()
-                newStatistics[.all] = rearrangedAll[i]
-                newStatistics[.blocked] = rearrangedBlocked[i]
-                writeStatistics(newStatistics)
-            }
-        }
-    }
-    
-    private func rearrangeRow(_ row: [RequestsStatisticsBlock])->[RequestsStatisticsBlock] {
-        
-        if row.count < 2 {
-            return row
-        }
-        
-        // Number of new sectors in db, for example
-        // We had 1500 blocks, after rearranging we'll have 150
-        let numberOfSectors = statisticsSectorsLimit
-        
-        // Sort all blocks by date
-        let sorted = row.sorted { $0.date > $1.date }
-        
-        // Getting dates from blocks
-        let sortedDates = sorted.map { $0.date }
-        
-        // Newest and oldest dates
-        // sortedDates array looks like this
-        // [oldest_date...some_date...some_date...some_date...newest_date]
-        let oldestDate = sortedDates.first!.timeIntervalSinceReferenceDate
-        let newestDate = sortedDates.last!.timeIntervalSinceReferenceDate
-        
-        // Devide all dates to equal sectors by date, not by number of elements
-        let step = (newestDate - oldestDate) / Double(numberOfSectors);
-        
-        // separatorsDates are borders for new blocks
-        var separatorsDates: [TimeInterval] = []
-        var dateIterator = oldestDate
-        while dateIterator < newestDate {
-            separatorsDates.append(dateIterator)
-            dateIterator += step;
-        }
-        
-        separatorsDates.append(newestDate)
-        
-        var copySorted = Array(sorted)
-        var returnArray:[RequestsStatisticsBlock] = []
-        
-        var iterator = 0
-        var elementsToCut = 0
-        var newSum = 0
-        var dateSum:TimeInterval = 0
-        
-        // Iterating through array and summing up blocks between generated borders
-        // If there were no blocks between two borders than we add a block with zero value
-        while copySorted.count != 0 && iterator < separatorsDates.count - 1 {
-            let leftBorder = separatorsDates[iterator]
-            let rightBorder = separatorsDates[iterator + 1]
-            
-            for i in 0..<(copySorted.count - 1) {
-                let block = copySorted[i]
-                let nextBlock = copySorted[i+1]
-                
-                let date = block.date.timeIntervalSinceReferenceDate
-                let nextDate = nextBlock.date.timeIntervalSinceReferenceDate
-                let number = block.numberOfRequests
-                let nextNumber = nextBlock.numberOfRequests
-                
-                if date >= leftBorder && date < rightBorder{
-                    newSum += number
-                    dateSum += date
-                    elementsToCut += 1
+            statisticSaveTime = statisticSaveTime.getNextCase()
                     
-                    if nextDate >= rightBorder {
-                        
-                        if nextDate == newestDate {
-                            newSum += nextNumber
-                            dateSum += nextDate
-                            elementsToCut += 1
-                        }
-                        
-                        let newDate = Date(timeIntervalSinceReferenceDate: elementsToCut == 0 ? leftBorder : dateSum / Double(elementsToCut))
-                            
-                        let newBlock = RequestsStatisticsBlock(date: newDate, numberOfRequests: newSum)
-                        returnArray.append(newBlock)
-                        
-                        iterator += 1
-                        newSum = 0
-                        dateSum = 0
-                        break;
-                    }
-                } else {
-                    let newDate = Date(timeIntervalSinceReferenceDate: leftBorder)
-                    let newBlock = RequestsStatisticsBlock(date: newDate, numberOfRequests: 0)
-                    returnArray.append(newBlock)
-                    
-                    iterator += 1
-                    elementsToCut = 0
-                    break;
-                }
+            /* If table is needed to be rearranged we delete old records and rearrange them */
+            deleteAllRecords()
+            rearrangeRecords(records)
+        }
+    }
+    
+    private func rearrangeRecords(_ records: [DnsStatisticsRecord]){
+        guard let oldestDate = records.first?.date, let newestDate = records.last?.date else { return }
+        
+        let sectorsDateIntervals = getTimeIntervalsForRearrangedRecords(newestDate: newestDate, oldestDate: oldestDate)
+        
+        for interval in sectorsDateIntervals {
+            /* Filter records that fit interval */
+            let recordsFittingInterval = records.filter({ interval.contains($0.date) })
+            
+            /* Getting middle date from interval for new record */
+            let middleDate = getMiddleDate(interval)
+            
+            let newRecord = DnsStatisticsRecord(date: middleDate)
+            
+            for record in recordsFittingInterval {
+                newRecord.requests += record.requests
+                newRecord.encrypted += record.encrypted
+                newRecord.elapsedSumm += record.elapsedSumm
             }
             
-            copySorted.removeFirst(elementsToCut)
-            elementsToCut = 0
+            /* Appending new rearranged record to db */
+            writeRecord(newRecord)
         }
-        // returning new blocks
-        return returnArray;
     }
     
-    private func removeStatistics()->Bool {
-        var result = false
-        writeHandler?.inTransaction { (db, rollback) in
-            let table = ADBTable(rowClass: APStatisticsTable.self, db: db)!
-            result = table.delete(withKeys: nil, inRowObject: nil)
-        }
-    
-        return result
-    }
+    private func getTimeIntervalsForRearrangedRecords(newestDate: Date, oldestDate: Date) -> [DateInterval] {
+        /* Difference in seconds between newest and oldest date */
+        let difference = newestDate.timeIntervalSinceReferenceDate - oldestDate.timeIntervalSinceReferenceDate
+        
+        /* Divide difference by number of new sectors and getting one sector duration */
+        let sectorDuration = difference / Double(statisticsSectorsLimit)
+        
+        /* Array of DateInterval to return */
+        var dateIntervals: [DateInterval] = []
+        
+        /* Date to change in cycle, it used to initialize DateInterval */
+        var startDate = oldestDate
+        
+        /* Generating DateInterval for each new sector */
+        for _ in 1...statisticsSectorsLimit {
+            let dateInterval = DateInterval(start: startDate, duration: sectorDuration)
+            dateIntervals.append(dateInterval)
 
+            startDate = startDate.addingTimeInterval(sectorDuration)
+        }
+        
+        return dateIntervals
+    }
+    
+    /* Returns middle between two dates */
+    private func getMiddleDate(_ dateInterval: DateInterval) -> Date {
+        let startDate = dateInterval.start.timeIntervalSinceReferenceDate
+        let endDate = dateInterval.end.timeIntervalSinceReferenceDate
+        let middleDateInterval = startDate + (endDate - startDate) / 2.0
+        return Date(timeIntervalSinceReferenceDate: middleDateInterval)
+    }
 }
