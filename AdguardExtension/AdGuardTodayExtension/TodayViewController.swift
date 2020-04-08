@@ -386,7 +386,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.encryptedNumber = encrypted + encryptedNumber
             
             let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
-            self.elapsedLabel.text = String.simpleDecimalFormatter(NSNumber(floatLiteral: averageElapsed))
+            self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     

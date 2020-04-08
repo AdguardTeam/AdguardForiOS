@@ -373,7 +373,7 @@ class ActivityViewController: UITableViewController {
             
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedCount))
-            self.dataSavedLabel.text = String.simpleDecimalFormatter(NSNumber(floatLiteral: averageElapsed))
+            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     

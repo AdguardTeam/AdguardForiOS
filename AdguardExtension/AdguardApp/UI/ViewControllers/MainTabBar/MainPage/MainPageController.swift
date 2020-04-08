@@ -489,7 +489,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-            self.elapsedNumberLabel.text = String.simpleDecimalFormatter(NSNumber(floatLiteral: averageElapsed))
+            self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     

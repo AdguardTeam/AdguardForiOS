@@ -126,13 +126,15 @@ extension String {
         return ACLocalizedString(key, nil)
     }
     
-    static func simpleDecimalFormatter(_ number: NSNumber) -> String {
+    
+    static func simpleSecondsFormatter(_ number: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 1
-        return formatter.string(from: number) ?? "\(number.intValue)"
+        formatter.maximumFractionDigits = 0
+        let formatterString = formatter.string(from: number) ?? "\(number.intValue)"
+        return String(format: String.localizedString("ms_unit"), formatterString)
     }
     
     /*
