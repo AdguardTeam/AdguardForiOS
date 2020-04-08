@@ -265,20 +265,52 @@ class ChartView: UIView {
     }
     
     private func convertPoints(points: [Point]) -> [CGPoint] {
+        let preparedPoints = preparePoints(points: points)
         var newPoints = [CGPoint]()
                 
-        for point in points {
-            var ratioX: CGFloat = point.x / maxXelement
+        for point in preparedPoints {
             var ratioY: CGFloat = (point.y / maxYelement) * 0.7
             
             // There is a devision by zero, when initializing this variables
-            ratioX = ratioX.isNaN ? 0.0 : ratioX
             ratioY = ratioY.isNaN ? 0.0 : ratioY
             
-            let newX = frame.width * ratioX
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
-            newPoints.append(CGPoint(x: newX, y: newY))
+            //newPoints.append(CGPoint(x: newX, y: newY))
+            
+            let newPoint = CGPoint(x: point.x, y: newY)
+            newPoints.append(newPoint)
         }
+        return newPoints
+    }
+    
+    /* This function is needed to avoid points overlay */
+    private func preparePoints(points: [Point]) -> [Point] {
+        let minimumSpacing: CGFloat = 5.0
+        var newPoints = [Point]()
+        
+        for point in points {
+            var ratioX: CGFloat = point.x / maxXelement
+            
+            // There is a devision by zero, when initializing this variables
+            ratioX = ratioX.isNaN ? 0.0 : ratioX
+            let newX = frame.width * ratioX
+            
+            var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
+            if  newX - lastPoint.x <= minimumSpacing {
+                newPoints = newPoints.dropLast()
+                if lastPoint.x != 0.0 {
+                    lastPoint.x += (newX - lastPoint.x) / 2
+                }
+                lastPoint.y = lastPoint.y + point.y
+                newPoints.append(lastPoint)
+                if lastPoint.y > maxYelement {
+                    maxYelement = lastPoint.y
+                }
+            } else {
+                newPoints.append(Point(x: newX, y: point.y))
+            }
+        }
+        
         return newPoints
     }
     

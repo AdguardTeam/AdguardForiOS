@@ -189,6 +189,7 @@ class ChartViewModel: ChartViewModelProtocol {
             
             if copyPoints.count < intRatio {
                 copyPoints.forEach({ newPoints.append($0) })
+                copyPoints.removeAll()
             } else {
                 copyPoints.removeFirst(intRatio)
             }
