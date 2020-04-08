@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "3mo-qx-mDo"; */
 "3mo-qx-mDo.text" = "0";
 
-/* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "blocked";
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "encrypted";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Activity";
@@ -103,5 +103,5 @@
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Most active";
 
-/* Class = "UIButton"; normalTitle = "data saved"; ObjectID = "yio-E8-cQV"; */
-"yio-E8-cQV.normalTitle" = "data saved";
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "avg. time";

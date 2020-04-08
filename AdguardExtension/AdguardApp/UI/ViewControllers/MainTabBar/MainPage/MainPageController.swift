@@ -68,8 +68,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var statisticsStackView: UIStackView!
     
     @IBOutlet weak var requestsButton: UIButton!
-    @IBOutlet weak var blockedButton: UIButton!
-    @IBOutlet weak var dataSavedButton: UIButton!
+    @IBOutlet weak var encryptedButton: UIButton!
+    @IBOutlet weak var elapsedButton: UIButton!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var encryptedNumberLabel: ThemableLabel!
@@ -365,12 +365,12 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chooseRequest()
     }
     
-    @IBAction func blockedTapped(_ sender: UIButton) {
+    @IBAction func encryptedTapped(_ sender: UIButton) {
         chooseEncrypted()
     }
     
-    @IBAction func dataSavedTapped(_ sender: UIButton) {
-        chooseDataSaved()
+    @IBAction func averageTimeTapped(_ sender: UIButton) {
+        chooseElapsedTime()
     }
     
     
@@ -524,8 +524,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     /**
     Called when "data daved" button tapped
     */
-    private func chooseDataSaved(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("saved_data_message"))
+    private func chooseElapsedTime(){
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("average_info_alert_title"), message: String.localizedString("average_info_alert_message"))
     }
     
     /**
@@ -829,8 +829,8 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         getProButton.accessibilityLabel = String.localizedString("try_for_free_main")
         
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
-        blockedButton.accessibilityLabel = String.localizedString("blocked_number_voiceover")
-        dataSavedButton.accessibilityLabel = String.localizedString("saved_data_voiceover")
+        encryptedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")
+        elapsedButton.accessibilityLabel = String.localizedString("elapsed_time_voiceover")
         
         safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
         safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
