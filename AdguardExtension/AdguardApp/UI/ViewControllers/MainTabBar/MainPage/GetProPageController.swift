@@ -39,8 +39,6 @@ class GetProPageController: UIViewController {
     
         titleLabel.text = getTitleString(product: product).uppercased()
     
-        tryButton.accessibilityLabel = String.localizedString("try_for_free")
-        
         updateTheme()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in

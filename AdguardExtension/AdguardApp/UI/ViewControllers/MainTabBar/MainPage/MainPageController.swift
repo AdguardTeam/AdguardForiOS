@@ -118,6 +118,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
     @IBOutlet weak var fromButtonsToTopHeight: NSLayoutConstraint!
     @IBOutlet weak var fixItIphoneButton: UIButton!
+    @IBOutlet weak var fixItiPadButton: UIButton!
     
     var stateFromWidget: Bool?
     
@@ -193,8 +194,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
         
-        getProButton.setTitle(String.localizedString("try_for_free_main"), for: .normal)
-        
         configuration.checkContentBlockerEnabled()
         
         chartModel.obtainStatistics()
@@ -231,6 +230,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         if screenIsLessThanIphone6 {
             setupFontsForSmallScreen()
         }
+        
+        getProButton.layer.cornerRadius = getProButton.frame.height / 2
+        fixItIphoneButton.layer.cornerRadius = fixItIphoneButton.frame.height / 2
+        fixItiPadButton.layer.cornerRadius = fixItiPadButton.frame.height / 2
     }
         
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -372,11 +375,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     @IBAction func averageTimeTapped(_ sender: UIButton) {
         chooseElapsedTime()
     }
-    
-    
-    // MARK: - Get pro action
-    
-    @IBAction func getProAction(_ sender: UIButton) {}
     
     // MARK: - Content blockers view actions
     
@@ -837,8 +835,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private func setupVoiceOverLabels(){
         safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
         systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
-        
-        getProButton.accessibilityLabel = String.localizedString("try_for_free_main")
         
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
         encryptedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")

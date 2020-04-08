@@ -52,12 +52,6 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@K";
 
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Try for free";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Try for free";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
