@@ -27,9 +27,13 @@ class ChartView: UIView {
     
     var isEnabled: Bool = true {
         didSet{
-            let color = isEnabled ? onColor : offColor
-            lineColor = color
-            shadowColor = color
+            let requestsColor = UIColor(hexString: "67b279")
+            let encryptedColor = UIColor(hexString: "#677bb2")
+            
+            requestsLineColor = isEnabled ? requestsColor : offColor
+            requestsShadowColor = isEnabled ? requestsColor : offColor
+            encryptedLineColor = isEnabled ? encryptedColor : offColor
+            encryptedShadowColor = isEnabled ? encryptedColor : offColor
             drawChart()
         }
     }
@@ -79,11 +83,14 @@ class ChartView: UIView {
     private var bottomBorderLabel = UILabel()
     private var topBorderLabel = UILabel()
     
-    private var lineColor: UIColor = UIColor(hexString: "67b279")
-    private var shadowColor: UIColor = UIColor(hexString: "67b279")
-    private var gridColor: UIColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    private var requestsLineColor = UIColor(hexString: "67b279")
+    private var requestsShadowColor = UIColor(hexString: "67b279")
     
-    private let onColor = UIColor(hexString: "67b279")
+    private var encryptedLineColor = UIColor(hexString: "#677bb2")
+    private var encryptedShadowColor = UIColor(hexString: "677bb2")
+    
+    private var gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    
     private let offColor = UIColor(hexString: "#888888")
     
     private var numberOfVerticalSectors = 7
@@ -229,20 +236,20 @@ class ChartView: UIView {
                     
         requestLineLayer.path = requestsPath.cgPath
         requestLineLayer.fillColor = UIColor.clear.cgColor
-        requestLineLayer.strokeColor = lineColor.withAlphaComponent(requestsAlpha).cgColor
+        requestLineLayer.strokeColor = requestsLineColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.lineWidth = 3.0
             
-        requestLineLayer.shadowColor = shadowColor.withAlphaComponent(requestsAlpha).cgColor
+        requestLineLayer.shadowColor = requestsShadowColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         requestLineLayer.shadowOpacity = 0.5
         requestLineLayer.shadowRadius = 4.0
         
         encryptedLineLayer.path = blockedPath.cgPath
         encryptedLineLayer.fillColor = UIColor.clear.cgColor
-        encryptedLineLayer.strokeColor = lineColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.strokeColor = encryptedLineColor.withAlphaComponent(encryptedAlpha).cgColor
         encryptedLineLayer.lineWidth = 3.0
             
-        encryptedLineLayer.shadowColor = shadowColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.shadowColor = encryptedShadowColor.withAlphaComponent(encryptedAlpha).cgColor
         encryptedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         encryptedLineLayer.shadowOpacity = 0.5
         encryptedLineLayer.shadowRadius = 4.0
