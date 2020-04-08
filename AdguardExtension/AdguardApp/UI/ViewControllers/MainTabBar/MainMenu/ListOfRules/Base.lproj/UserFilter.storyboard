@@ -78,12 +78,12 @@
                                 <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0L1-v7-KpB"/>
-                                    <constraint firstItem="HFf-Yp-hjB" firstAttribute="top" secondItem="5hm-p5-6SQ" secondAttribute="top" id="5qA-o0-bpN"/>
+                                    <constraint firstItem="ft8-vc-c3j" firstAttribute="centerY" secondItem="5hm-p5-6SQ" secondAttribute="centerY" id="MXo-uD-p2t"/>
+                                    <constraint firstItem="HFf-Yp-hjB" firstAttribute="centerY" secondItem="5hm-p5-6SQ" secondAttribute="centerY" id="N2a-mU-b8E"/>
                                     <constraint firstAttribute="trailing" secondItem="HFf-Yp-hjB" secondAttribute="trailing" constant="16" id="Sdd-N6-eNf">
                                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                     </constraint>
                                     <constraint firstItem="HFf-Yp-hjB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ft8-vc-c3j" secondAttribute="trailing" constant="16" id="d99-i1-b7j"/>
-                                    <constraint firstItem="ft8-vc-c3j" firstAttribute="top" secondItem="5hm-p5-6SQ" secondAttribute="top" id="sfu-lj-ilY"/>
                                     <constraint firstItem="ft8-vc-c3j" firstAttribute="leading" secondItem="5hm-p5-6SQ" secondAttribute="leading" constant="16" id="wla-gh-VSr">
                                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                     </constraint>

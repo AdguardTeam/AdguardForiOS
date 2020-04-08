@@ -287,8 +287,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V8-7K-3Aa">
                                                 <rect key="frame" x="828" y="0.0" width="414" height="256"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking Protection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="0.0" width="366" height="26.333333333333332"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS Protection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="0.0" width="272" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -789,9 +789,6 @@
                                 <exclude reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="IX0-I2-taI"/>
-                                <exclude reference="Ni1-wJ-ITP"/>
-                                <exclude reference="aco-9j-jpc"/>
                                 <exclude reference="76E-lx-42G"/>
                                 <exclude reference="Fgb-Lb-Xmi"/>
                                 <exclude reference="POA-qW-Z3L"/>
@@ -804,6 +801,9 @@
                                 <exclude reference="uE7-2j-2TS"/>
                                 <exclude reference="08u-Mf-dCM"/>
                                 <exclude reference="rvi-4W-fTr"/>
+                                <exclude reference="IX0-I2-taI"/>
+                                <exclude reference="Ni1-wJ-ITP"/>
+                                <exclude reference="aco-9j-jpc"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -811,7 +811,6 @@
                                 <include reference="3ju-B8-UIZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ni1-wJ-ITP"/>
                                 <include reference="76E-lx-42G"/>
                                 <include reference="Fgb-Lb-Xmi"/>
                                 <include reference="POA-qW-Z3L"/>
@@ -819,6 +818,7 @@
                                 <include reference="0uO-OG-9XN"/>
                                 <include reference="7qa-wa-a9X"/>
                                 <include reference="8LC-Jz-LHE"/>
+                                <include reference="Ni1-wJ-ITP"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -826,13 +826,13 @@
                                 <include reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="IX0-I2-taI"/>
-                                <include reference="aco-9j-jpc"/>
                                 <include reference="0b4-jd-Npx"/>
                                 <include reference="8XT-dZ-Wao"/>
                                 <include reference="uE7-2j-2TS"/>
                                 <include reference="08u-Mf-dCM"/>
                                 <include reference="rvi-4W-fTr"/>
+                                <include reference="IX0-I2-taI"/>
+                                <include reference="aco-9j-jpc"/>
                             </mask>
                         </variation>
                     </view>
