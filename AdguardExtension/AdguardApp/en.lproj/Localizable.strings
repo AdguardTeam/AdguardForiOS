@@ -739,9 +739,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Empty";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "No rule found";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Failed to send your feedback";
 

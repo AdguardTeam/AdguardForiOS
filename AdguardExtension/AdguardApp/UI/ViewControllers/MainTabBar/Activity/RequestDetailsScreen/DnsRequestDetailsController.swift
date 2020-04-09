@@ -46,8 +46,13 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - Sections & Rows
     
-    private var filteringSection: Int?
+    private var generalSection: Int?
+    private var domainCell: IndexPath?
     private var statusCell: IndexPath?
+    private var elapsedCell: IndexPath?
+    private var timeCell: IndexPath?
+    private var serverCell: IndexPath?
+    private var sizeCell: IndexPath?
     private var matchedFiltersCell: IndexPath?
     private var matchedRulesCell: IndexPath?
     
@@ -55,13 +60,6 @@ class DnsRequestDetailsController: UITableViewController {
     private var categoryCell: IndexPath?
     private var nameCell: IndexPath?
     private var websiteCell: IndexPath?
-    
-    private var generalSection: Int?
-    private var domainCell: IndexPath?
-    private var serverCell: IndexPath?
-    private var timeCell: IndexPath?
-    private var sizeCell: IndexPath?
-    private var elapsedCell: IndexPath?
     
     private var dnsSection: Int?
     private var typeCell: IndexPath?
@@ -138,8 +136,6 @@ class DnsRequestDetailsController: UITableViewController {
             needsButton = !record.category.isAdguardJson
         case generalSection:
             text = String.localizedString("general_header")
-        case filteringSection:
-            text = String.localizedString("filtering_header")
         case dnsSection:
             text = String.localizedString("dns_header")
         default:
@@ -191,9 +187,9 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - Public function
     
     func updateStatusLabel(){
-        guard let statusCell = statusCell, let filteringSection = filteringSection else { return }
+        guard let statusCell = statusCell, let generalSection = generalSection else { return }
         let statusCellModel = getStatusCellModel()
-        sectionModels[filteringSection]?[statusCell.row] = statusCellModel
+        sectionModels[generalSection]?[statusCell.row] = statusCellModel
         tableView.reloadRows(at: [statusCell], with: .fade)
     }
     
@@ -307,7 +303,6 @@ class DnsRequestDetailsController: UITableViewController {
     private func createCellModels(){
         trackerDetailsSection = nil
         generalSection = nil
-        filteringSection = nil
         dnsSection = nil
         sectionModels.removeAll()
         
@@ -319,21 +314,86 @@ class DnsRequestDetailsController: UITableViewController {
         }
         
         /**
-         Filtering Section
-        */
-        var filteringSectionModel: [Int : LogCellModelProtocol?] = [:]
-        var filteringRows = 0
-        let filteringSectionToAssign = sectionNumber
+         General Section
+         */
+        var generalSectionModel: [Int : LogCellModelProtocol?] = [:]
+        var generalRows = 0
+        let generalSectionToAssign = sectionNumber
+        
+        // Domain model
+        var domain = record.logRecord.domain
+        domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+        let domainTitle = String.localizedString("domain_title")
+        let domainModelIsNil = domain.isEmpty
+        let domainModel = domainModelIsNil ? nil : LogCellModel(copiedString: domain, title: domainTitle, info: domain, theme: theme)
+        if !domainModelIsNil{
+            generalSection = generalSectionToAssign
+            domainCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[domainCell!.row] = domainModel
+        }
         
         // Status model
         let statusModel = getStatusCellModel()
         let statusModelIsNil = statusModel == nil
         if !statusModelIsNil {
-            filteringSection = filteringSectionToAssign
-            statusCell = IndexPath(row: filteringRows, section: filteringSection!)
-            filteringRows += 1
-            filteringSectionModel[statusCell!.row] = statusModel
+            generalSection = generalSectionToAssign
+            statusCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[statusCell!.row] = statusModel
         }
+        
+        // Elapsed model
+        let elapsed = record.logRecord.elapsed
+        let elapsedTitle = String.localizedString("elapsed_title")
+        let elapsedString = String(format: "%d ms", elapsed)
+        let elapsedModel = LogCellModel(copiedString: elapsedString, title: elapsedTitle, info: elapsedString, theme: theme)
+        if configuration.developerMode {
+            generalSection = generalSectionToAssign
+            elapsedCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[elapsedCell!.row] = elapsedModel
+        }
+        
+        // Time model
+        let time = record.logRecord.time()
+        let timeTitle = String.localizedString("time_title")
+        let timeModelIsNil = time.isEmpty
+        let timeModel = timeModelIsNil ? nil : LogCellModel(copiedString: time, title:timeTitle, info: time, theme: theme)
+        if !timeModelIsNil {
+            generalSection = generalSectionToAssign
+            timeCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[timeCell!.row] = timeModel
+        }
+        
+        // Server model
+        let server = record.logRecord.server
+        let serverTitle = String.localizedString("server_title")
+        let serverModelIsNil = server.isEmpty
+        let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
+        if !serverModelIsNil {
+            generalSection = generalSectionToAssign
+            serverCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[serverCell!.row] = serverModel
+        }
+        
+        // Size model
+        let bytesSent = record.logRecord.bytesSent
+        let bytesReceived = record.logRecord.bytesReceived
+        let bytesSentText = String(format: "%d B", bytesSent)
+        let bytesReceivedText = String(format: "%d B", bytesReceived)
+        let sizeTitle = String.localizedString("size_title")
+        let size = String(format: "%d B / %d B", bytesReceived, bytesSent)
+        let sizeModel = LogCellModel(isDataCell: true, copiedString: size, title: sizeTitle, bytesSent: bytesSentText, bytesReceived: bytesReceivedText, theme: theme)
+        if configuration.developerMode{
+            generalSection = generalSectionToAssign
+            sizeCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[sizeCell!.row] = sizeModel
+        }
+        
         
         // Matched filters model
         let matchedFilters = record.matchedFilters ?? ""
@@ -341,26 +401,28 @@ class DnsRequestDetailsController: UITableViewController {
         let matchedFiltersModelIsNil = matchedFilters.isEmpty
         let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme)
         if !matchedFiltersModelIsNil {
-            filteringSection = filteringSectionToAssign
-            matchedFiltersCell = IndexPath(row: filteringRows, section: filteringSection!)
-            filteringRows += 1
-            filteringSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
+            generalSection = generalSectionToAssign
+            matchedFiltersCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
         }
         
         // Matched rules model
-        let noRulesFoundStr = String.localizedString("no_rule_found")
-        var matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
-        matchedRules = matchedRules.isEmpty ? noRulesFoundStr : matchedRules
+        let matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        let matchedRulesModelIsNil = matchedRules.isEmpty
         let matchedRulesTitle = String.localizedString("matched_rule_title")
-        let matchedRulesModel = LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme)
-        filteringSection = filteringSectionToAssign
-        matchedRulesCell = IndexPath(row: filteringRows, section: filteringSection!)
-        filteringRows += 1
-        filteringSectionModel[matchedRulesCell!.row] = matchedRulesModel
+        let matchedRulesModel = matchedRulesModelIsNil ? nil : LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme)
+        generalSection = generalSectionToAssign
+        if !matchedRulesModelIsNil {
+            generalSection = generalSectionToAssign
+            matchedRulesCell = IndexPath(row: generalRows, section: generalSection!)
+            generalRows += 1
+            generalSectionModel[matchedRulesCell!.row] = matchedRulesModel
+        }
         
-        if let filteringSection = filteringSection {
-            sectionsArray.append(filteringSection)
-            sectionModels[filteringSection] = filteringSectionModel
+        if let generalSection = generalSection {
+            sectionsArray.append(generalSection)
+            sectionModels[generalSection] = generalSectionModel
         }
         
         /**
@@ -412,83 +474,7 @@ class DnsRequestDetailsController: UITableViewController {
             sectionsArray.append(trackerDetailsSection)
             sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
         }
-        
-        /**
-         General Section
-         */
-        var generalSectionModel: [Int : LogCellModelProtocol?] = [:]
-        var generalRows = 0
-        let generalSectionToAssign = sectionNumber
-        
-        // Domain model
-        var domain = record.logRecord.domain
-        domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        let domainTitle = String.localizedString("domain_title")
-        let domainModelIsNil = domain.isEmpty
-        let domainModel = domainModelIsNil ? nil : LogCellModel(copiedString: domain, title: domainTitle, info: domain, theme: theme)
-        if !domainModelIsNil{
-            generalSection = generalSectionToAssign
-            domainCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[domainCell!.row] = domainModel
-        }
-        
-        
-        // Server model
-        let server = record.logRecord.server
-        let serverTitle = String.localizedString("server_title")
-        let serverModelIsNil = server.isEmpty
-        let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
-        if !serverModelIsNil {
-            generalSection = generalSectionToAssign
-            serverCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[serverCell!.row] = serverModel
-        }
-        
-        // Time model
-        let time = record.logRecord.time()
-        let timeTitle = String.localizedString("time_title")
-        let timeModelIsNil = time.isEmpty
-        let timeModel = timeModelIsNil ? nil : LogCellModel(copiedString: time, title:timeTitle, info: time, theme: theme)
-        if !timeModelIsNil {
-            generalSection = generalSectionToAssign
-            timeCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[timeCell!.row] = timeModel
-        }
-        
-        // Size model
-        let bytesSent = record.logRecord.bytesSent
-        let bytesReceived = record.logRecord.bytesReceived
-        let bytesSentText = String(format: "%d B", bytesSent)
-        let bytesReceivedText = String(format: "%d B", bytesReceived)
-        let sizeTitle = String.localizedString("size_title")
-        let size = String(format: "%d B / %d B", bytesReceived, bytesSent)
-        let sizeModel = LogCellModel(isDataCell: true, copiedString: size, title: sizeTitle, bytesSent: bytesSentText, bytesReceived: bytesReceivedText, theme: theme)
-        if configuration.developerMode{
-            generalSection = generalSectionToAssign
-            sizeCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[sizeCell!.row] = sizeModel
-        }
-        
-        // Elapsed model
-        let elapsed = record.logRecord.elapsed
-        let elapsedTitle = String.localizedString("elapsed_title")
-        let elapsedString = String(format: "%d ms", elapsed)
-        let elapsedModel = LogCellModel(copiedString: elapsedString, title: elapsedTitle, info: elapsedString, theme: theme)
-        if configuration.developerMode {
-            generalSection = generalSectionToAssign
-            elapsedCell = IndexPath(row: generalRows, section: generalSection!)
-            generalRows += 1
-            generalSectionModel[elapsedCell!.row] = elapsedModel
-        }
-        
-        if let generalSection = generalSection {
-            sectionsArray.append(generalSection)
-            sectionModels[generalSection] = generalSectionModel
-        }
+
         
         /**
          DNS Section

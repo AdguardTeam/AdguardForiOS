@@ -80,7 +80,7 @@
                                 <rect key="frame" x="0.0" y="738" width="414" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="b86-5b-m56"/>
+                                    <constraint firstAttribute="height" id="b86-5b-m56"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="buttonsViewHeight" destination="b86-5b-m56" id="PIF-3c-IWk"/>
