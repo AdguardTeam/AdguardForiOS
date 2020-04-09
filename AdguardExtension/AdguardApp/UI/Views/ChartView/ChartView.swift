@@ -293,13 +293,13 @@ class ChartView: UIView {
             
             // There is a devision by zero, when initializing this variables
             ratioX = ratioX.isNaN ? 0.0 : ratioX
-            let newX = frame.width * ratioX
+            let newX = (frame.width * ratioX).rounded(.up)
             
             var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
             if  newX - lastPoint.x <= minimumSpacing {
                 newPoints = newPoints.dropLast()
                 if lastPoint.x != 0.0 {
-                    lastPoint.x += (newX - lastPoint.x) / 2
+                    lastPoint.x += ((newX - lastPoint.x) / 2).rounded(.up)
                 }
                 lastPoint.y = lastPoint.y + point.y
                 newPoints.append(lastPoint)
