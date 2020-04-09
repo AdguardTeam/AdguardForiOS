@@ -155,8 +155,8 @@
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-z4-zg1">
                                                                     <rect key="frame" x="24" y="17.5" width="494" height="40.5"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System-wide tracking protection" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwp-I7-Qtl" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="23.5" width="494" height="17"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value your privacy" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwp-I7-Qtl" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="21.5" width="518" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -167,8 +167,8 @@
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                             </variation>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Tracking protection" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-6o-GGa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="494" height="19.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="DNS protection" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-6o-GGa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="518" height="19.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -715,7 +715,7 @@
             </objects>
             <point key="canvasLocation" x="3776.811594202899" y="3567.8571428571427"/>
         </scene>
-        <!--AdGuard Premium-->
+        <!--Get Pro Controller-->
         <scene sceneID="9v9-9v-ByE">
             <objects>
                 <viewController storyboardIdentifier="GetProController" extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="gVb-oh-MXP" customClass="GetProController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
