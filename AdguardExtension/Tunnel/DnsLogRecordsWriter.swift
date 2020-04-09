@@ -23,14 +23,15 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     var whitelistFilterId: NSNumber?
     var userFilterId: NSNumber?
     var otherFilterIds: [NSNumber]?
-    
+
     var server = ""
+    
+    weak var dnsProxyService: DnsProxyServiceProtocol?
     
     private let dnsLogService: DnsLogRecordsServiceProtocol
     private let resources: AESharedResourcesProtocol
     private let activityStatisticsService: ActivityStatisticsServiceWriterProtocol
-    
-    var dnsStatisticsService: DnsStatisticsServiceProtocol
+    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     private var records = [DnsLogRecord]()
     private var activityStatisticsRecords = [String: ActivityStatisticsRecord]()
@@ -76,7 +77,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
         let status = getEventStatus(event)
-        let recordIsEncrypted = checkIfRecordIsEncrypted(event.upstreamAddr)
+        let dnsProxyUpstream = dnsProxyService?.upstreamsById[event.upstreamId]
+        let recordIsEncrypted = dnsProxyUpstream?.isCrypto ?? false
+        let upstreamAddr = dnsProxyUpstream?.upstream
         
         let filterIds = event.filterListIds.map { $0.intValue }
         
@@ -89,7 +92,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             type: event.type,
             answer: event.answer,
             server: server,
-            upstreamAddr: event.upstreamAddr,
+            upstreamAddr: upstreamAddr,
             bytesSent: Int(event.bytesSent),
             bytesReceived: Int(event.bytesReceived),
             status: status,
@@ -225,27 +228,5 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         else {
             return .processed
         }
-    }
-    
-    private func checkIfRecordIsEncrypted(_ upstream: String) -> Bool {
-        if let dohPrefix = DnsProtocol.prefixForProtocol[.doh] {
-            if upstream.hasPrefix(dohPrefix) {
-                return true
-            }
-        }
-        
-        if let dotPrefix = DnsProtocol.prefixForProtocol[.dot] {
-            if upstream.hasPrefix(dotPrefix) {
-                return true
-            }
-        }
-        
-        if let dnsCryptPrefix = DnsProtocol.prefixForProtocol[.dnsCrypt] {
-            if upstream.hasPrefix(dnsCryptPrefix) {
-                return true
-            }
-        }
-        
-        return false
     }
 }

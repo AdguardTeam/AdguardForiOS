@@ -19,6 +19,7 @@
 import XCTest
 
 class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
+    var dnsProxyService: DnsProxyServiceProtocol?
     
     var whitelistFilterId: NSNumber?
     
@@ -35,15 +36,11 @@ class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
 
 class DnsProxyTest: XCTestCase {
     
-    var proxyService = DnsProxyService(logWriter: LogWriterMock(), resources: SharedResourcesMock());
+    var proxyService = DnsProxyService(logWriter: LogWriterMock(), resources: SharedResourcesMock(), dnsProvidersService: DnsProvidersServiceMock());
     let request = Data(base64Encoded: "RQAAQkGPAAD/ETb1rBDRAsYSAAHOlAA1AC47HU+xAQAAAQAAAAAAAAdjbGllbnRzAWwGZ29vZ2xlA2NvbQAAAQAB")
 
     override func setUp() {
         XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true))
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testResolve() {
@@ -115,5 +112,25 @@ class DnsProxyTest: XCTestCase {
         }
         
         wait(for: [expectation2], timeout: 15)
+    }
+    
+    func testUpstreamsById(){
+        proxyService.stop() {}
+        
+        let ipV6Adress = "0000:0000:0000:0000:0000:0000:0000:0000"
+        let isSuccess = proxyService.start(upstreams: ["1.1.1.1", "2.2.2.2", "3.3.3.3"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8", ipV6Adress], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true)
+        
+        XCTAssert(isSuccess)
+        
+        let upstreams = proxyService.upstreamsById
+        /* 3 upstreams, 2 fallbacks, 1 ipV6 fallback */
+        XCTAssert(upstreams.count == 6)
+        
+        XCTAssertEqual(upstreams[0]!.upstream, "1.1.1.1")
+        XCTAssertEqual(upstreams[1]!.upstream, "2.2.2.2")
+        XCTAssertEqual(upstreams[2]!.upstream, "3.3.3.3")
+        XCTAssertEqual(upstreams[3]!.upstream, "8.8.8.8")
+        XCTAssertEqual(upstreams[4]!.upstream, ipV6Adress)
+        XCTAssertEqual(upstreams[5]!.upstream, ipV6Adress)
     }
 }

@@ -11,9 +11,9 @@
 @property(nonatomic, readonly) NSString *status; /**< DNS answer's status */
 @property(nonatomic, readonly) NSString *answer; /**< DNS Answers string representation */
 @property(nonatomic, readonly) NSString *originalAnswer; /**< If blocked by CNAME, here will be DNS original answer's string representation */
-@property(nonatomic, readonly) NSString *upstreamAddr; /**< Address of the upstream used to resolve */
-@property(nonatomic, readonly) NSUInteger bytesSent; /**< Number of bytes sent to a server */
-@property(nonatomic, readonly) NSUInteger bytesReceived; /**< Number of bytes received from a server */
+@property(nonatomic, readonly) NSInteger upstreamId; /**< ID of the upstream that provided this answer */
+@property(nonatomic, readonly) NSInteger bytesSent; /**< Number of bytes sent to a server */
+@property(nonatomic, readonly) NSInteger bytesReceived; /**< Number of bytes received from a server */
 @property(nonatomic, readonly) NSArray<NSString *> *rules; /**< Filtering rules texts */
 @property(nonatomic, readonly) NSArray<NSNumber *> *filterListIds; /**< Filter lists IDs of corresponding rules */
 @property(nonatomic, readonly) BOOL whitelist; /**< True if filtering rule is whitelist */

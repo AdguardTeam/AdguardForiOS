@@ -34,10 +34,6 @@ import Foundation
                                                             .dnsCrypt: "dns_crypt_protocol",
                                                             .doh: "doh_protocol",
                                                             .dot: "dot_protocol"]
-    
-    static let prefixForProtocol: [DnsProtocol: String] = [.dnsCrypt: "sdns://",
-                                                           .doh: "https://",
-                                                           .dot: "tls://"]
 }
 
 struct DnsProviderFeature {
