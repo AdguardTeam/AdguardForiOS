@@ -48,6 +48,7 @@ class ActivityViewController: UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     // MARK: - Outlet views for tableview
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet var sectionHeaderView: UIView!
     @IBOutlet var tableHeaderView: UIView!
     
@@ -107,6 +108,7 @@ class ActivityViewController: UITableViewController {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         statisticsModel.obtainStatistics()
+        filterButton.isHidden = !configuration.developerMode
     }
     
     override func viewDidLayoutSubviews() {
@@ -257,7 +259,9 @@ class ActivityViewController: UITableViewController {
     
     private func observeDeveloperMode(){
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.filterButton.isHidden = !self.configuration.developerMode
+            self.tableView.reloadData()
         }
     }
     

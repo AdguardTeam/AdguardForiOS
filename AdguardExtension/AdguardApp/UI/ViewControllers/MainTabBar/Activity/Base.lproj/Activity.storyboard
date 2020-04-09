@@ -1551,6 +1551,7 @@
                         <outlet property="companiesNumberLabel" destination="Jgb-st-fnO" id="ESb-HV-i8w"/>
                         <outlet property="dataSavedLabel" destination="w9H-e5-jiH" id="xc1-MF-VaJ"/>
                         <outlet property="encryptedNumberLabel" destination="iNX-Qd-Hmo" id="a5J-Gh-k13"/>
+                        <outlet property="filterButton" destination="KhR-jD-8wC" id="5tH-Lq-AEY"/>
                         <outlet property="mostActiveButton" destination="BA0-fw-Cpe" id="zMp-Nq-hmq"/>
                         <outlet property="mostActiveCompany" destination="gK7-Kw-vh5" id="cmM-H9-QYp"/>
                         <outlet property="mostActiveLabel" destination="yWy-kc-8Zg" id="lT3-5e-1al"/>
