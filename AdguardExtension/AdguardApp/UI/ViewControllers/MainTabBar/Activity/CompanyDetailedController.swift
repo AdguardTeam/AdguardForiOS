@@ -35,6 +35,7 @@ class CompanyDetailedController: UITableViewController {
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var filterButton: UIButton!
     
     // MARK: - Services
     
@@ -88,6 +89,9 @@ class CompanyDetailedController: UITableViewController {
         
         let requestsCount = record?.requests ?? 0
         let encryptedCount = record?.encrypted ?? 0
+        
+        filterButton.isHidden = !configuration.developerMode
+        
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
         
@@ -245,7 +249,9 @@ class CompanyDetailedController: UITableViewController {
     
     private func observeDeveloperMode(){
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            self.filterButton.isHidden = !self.configuration.developerMode
         }
     }
     

@@ -375,6 +375,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="encryptedNumberLabel" destination="3mo-qx-mDo" id="SHF-11-X0V"/>
+                        <outlet property="filterButton" destination="eDh-XO-ei7" id="78K-Sp-wlk"/>
                         <outlet property="recentActivityLabel" destination="kX9-ZX-NOu" id="Xfz-by-IEM"/>
                         <outlet property="requestsNumberLabel" destination="dlk-kG-3Jp" id="yvb-pc-IsA"/>
                         <outlet property="searchBar" destination="7QZ-G6-e5U" id="4qt-HJ-aI7"/>
@@ -1750,6 +1751,6 @@
         <image name="options" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ecv-Kh-Q3v"/>
+        <segue reference="5rO-v2-BPZ"/>
     </inferredMetricsTieBreakers>
 </document>
