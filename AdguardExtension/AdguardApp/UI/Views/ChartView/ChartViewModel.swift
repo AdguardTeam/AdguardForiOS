@@ -112,7 +112,7 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     private func getInfo(from records: [DnsStatisticsRecord]) -> (requestsPoints: [Point], requestsNumber: Int, encryptedPoints: [Point], encryptedNumber: Int, averageElapsedTime: Double){
-        let maximumPointsNumber = 35
+        let maximumPointsNumber = 50
         
         var requestsPoints: [Point] = []
         var requestsNumber: Int = 0
