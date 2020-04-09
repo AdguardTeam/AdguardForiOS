@@ -57,21 +57,6 @@ class DnsLogRecordExtended {
 }
 
 // this extension adds ui features to data type
-extension DnsLogRecordStatus {
-        
-    func color() -> UIColor {
-        switch self {
-        case .processed:
-            return UIColor(hexString: "#eb9300")
-        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
-            return UIColor(hexString: "#67b279")
-        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
-            return UIColor(hexString: "#df3812")
-        }
-    }
-}
-
-// this extension adds ui features to data type
 extension DnsLogRecordUserStatus {
     func title()-> String {
         switch self {
@@ -97,6 +82,8 @@ extension DnsLogRecord
 {
     func getButtons() -> [DnsLogButtonType] {
         switch (status, userStatus) {
+        case (.encrypted, _):
+            return [.addDomainToWhitelist, .addRuleToUserFlter]
         case (_, .movedToBlacklist):
             return [.removeRuleFromUserFilter]
         case (_, .movedToWhitelist):

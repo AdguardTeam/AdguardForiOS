@@ -76,10 +76,11 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
-        let status = getEventStatus(event)
         let dnsProxyUpstream = dnsProxyService?.upstreamsById[event.upstreamId]
         let recordIsEncrypted = dnsProxyUpstream?.isCrypto ?? false
         let upstreamAddr = dnsProxyUpstream?.upstream
+        
+        let status = getEventStatus(event, isEncrypted: recordIsEncrypted)
         
         let filterIds = event.filterListIds.map { $0.intValue }
         
@@ -215,7 +216,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
-    private func getEventStatus(_ event: AGDnsRequestProcessedEvent) -> DnsLogRecordStatus {
+    private func getEventStatus(_ event: AGDnsRequestProcessedEvent, isEncrypted: Bool) -> DnsLogRecordStatus {
         if event.whitelist {
             return event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
         }
@@ -224,6 +225,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         }
         else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
             return .blacklistedByOtherFilter
+        } else if isEncrypted {
+            return .encrypted
         }
         else {
             return .processed

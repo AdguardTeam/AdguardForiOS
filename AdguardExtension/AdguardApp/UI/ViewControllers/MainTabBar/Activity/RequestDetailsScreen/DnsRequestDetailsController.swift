@@ -294,7 +294,7 @@ class DnsRequestDetailsController: UITableViewController {
         let status = record.logRecord.status.title()
         let userStatus = record.logRecord.userStatus
         let stCopied = userStatus == .none ? status : "\(status) (\(userStatus.title()))"
-        let color = record.logRecord.status.color()
+        let color = record.logRecord.status.textColor
         let statusFontWeight = UIFont.Weight.bold
         let statusTitle = String.localizedString("status_title")
         let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFontWeight: statusFontWeight, infoColor: color, theme: theme)

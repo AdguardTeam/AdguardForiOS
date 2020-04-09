@@ -79,6 +79,8 @@ class ActivityTableViewCell: UITableViewCell {
             type = .tracked
         case (.processed, _):
             type = .normal
+        case (.encrypted, _):
+            type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
         case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):

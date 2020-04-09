@@ -37,15 +37,6 @@
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
 /* (MainPageController) Text for data units (M) Millions */
 "millions_unit" = "%@M";
 
@@ -632,10 +623,13 @@
 "dns_request_status_blocked" = "Blocked";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Allowed";
+"dns_request_status_processed" = "Processed";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Allowed";
+"dns_request_status_encrypted" = "Encrypted";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Allowed";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "added to the Allowlist";
