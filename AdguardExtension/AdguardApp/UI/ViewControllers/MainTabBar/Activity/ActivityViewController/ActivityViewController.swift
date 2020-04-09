@@ -36,11 +36,10 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
     
-    @IBOutlet var mostActiveGestureRecognizer: UITapGestureRecognizer!
-    
-    @IBOutlet weak var mostActiveView: UIView!
-    
+    @IBOutlet weak var mostActiveButton: RoundRectButton!
+    @IBOutlet weak var mostActiveLabel: ThemableLabel!
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
+    @IBOutlet weak var rightArrowImageView: UIImageView!
     
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -171,7 +170,7 @@ class ActivityViewController: UITableViewController {
         }
     }
     
-    @IBAction func mostActiveTapped(_ sender: UITapGestureRecognizer) {
+    @IBAction func mostActiveTapped(_ sender: UIButton) {
         performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
     }
     
@@ -253,6 +252,7 @@ class ActivityViewController: UITableViewController {
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
+        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
     }
     
     private func observeDeveloperMode(){
@@ -453,13 +453,19 @@ extension ActivityViewController: DateTypeChangedProtocol {
         
         DispatchQueue.main.async {[weak self] in
             if !companiesInfo.mostRequested.isEmpty {
-                self?.mostActiveView.alpha = 1.0
-                self?.mostActiveGestureRecognizer.isEnabled = true
+                self?.mostActiveButton.alpha = 1.0
+                self?.mostActiveLabel.alpha = 1.0
+                self?.mostActiveCompany.alpha = 1.0
+                self?.rightArrowImageView.alpha = 1.0
+                self?.mostActiveButton.isEnabled = true
                 let record = companiesInfo.mostRequested[0]
                 self?.mostActiveCompany.text = record.key
             } else {
-                self?.mostActiveView.alpha = 0.5
-                self?.mostActiveGestureRecognizer.isEnabled = false
+                self?.mostActiveButton.alpha = 0.5
+                self?.mostActiveLabel.alpha = 0.5
+                self?.mostActiveCompany.alpha = 0.5
+                self?.rightArrowImageView.alpha = 0.5
+                self?.mostActiveButton.isEnabled = false
                 self?.mostActiveCompany.text = String.localizedString("none_message")
             }
             

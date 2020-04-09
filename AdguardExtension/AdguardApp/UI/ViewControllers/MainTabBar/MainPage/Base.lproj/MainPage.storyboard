@@ -299,7 +299,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="CGq-K7-wAv">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                                                                                <variation key="heightClass=regular-widthClass=regular" constant="27"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                                                             </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -379,7 +379,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="nPj-4r-pOB">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                                                                                <variation key="heightClass=regular-widthClass=regular" constant="27"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                                                             </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -459,7 +459,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="qdx-xq-uf3">
                                                                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
-                                                                                <variation key="heightClass=regular-widthClass=regular" constant="27"/>
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                                                             </constraint>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -679,9 +679,9 @@
                                 <exclude reference="IU2-ER-A7n"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="BMN-P6-MQZ"/>
                                 <exclude reference="k7s-6e-bka"/>
                                 <exclude reference="lPt-ie-c3g"/>
+                                <exclude reference="BMN-P6-MQZ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
