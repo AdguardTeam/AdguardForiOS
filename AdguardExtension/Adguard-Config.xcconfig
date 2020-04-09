@@ -19,7 +19,7 @@
 // Global product settings
 AG_PRODUCT = AdGuard
 AG_VERSION = 4.0.0
-AG_BUILD = 443
+AG_BUILD = 444
 
 // URL scheme for receiving commands in Adguard main app from Safari
 ADGUARD_URL_SCHEME = adguard
