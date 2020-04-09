@@ -37,20 +37,16 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
     
     @IBOutlet var mostActiveGestureRecognizer: UITapGestureRecognizer!
-    @IBOutlet var mostBlockedGestureRecognizer: UITapGestureRecognizer!
     
     @IBOutlet weak var mostActiveView: UIView!
-    @IBOutlet weak var mostBlockedView: UIView!
     
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
-    @IBOutlet weak var mostBlockedCompany: ThemableLabel!
     
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
     
     // MARK: - Outlet views for tableview
     @IBOutlet var sectionHeaderView: UIView!
@@ -91,9 +87,7 @@ class ActivityViewController: UITableViewController {
     private let showMostActiveCompaniesSegueId = "showMostActiveCompaniesId"
     
     private var selectedRecord: DnsLogRecordExtended?
-    private var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
-    private var mostBlockedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
     
     // MARK: - ViewController life cycle
@@ -133,9 +127,7 @@ class ActivityViewController: UITableViewController {
         if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
             controller.logRecord = selectedRecord
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
-            controller.activeCompaniesDisplayType = activeCompaniesDisplayType
             controller.mostRequestedCompanies = mostRequestedCompanies
-            controller.mostBlockedCompanies = mostBlockedCompanies
             controller.chartDateType = resources.activityStatisticsType
         }
     }
@@ -180,12 +172,6 @@ class ActivityViewController: UITableViewController {
     }
     
     @IBAction func mostActiveTapped(_ sender: UITapGestureRecognizer) {
-        activeCompaniesDisplayType = .requests
-        performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
-    }
-    
-    @IBAction func mostBlockedTapped(_ sender: UITapGestureRecognizer) {
-        activeCompaniesDisplayType = .blocked
         performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
     }
     
@@ -267,7 +253,6 @@ class ActivityViewController: UITableViewController {
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
-        theme.setupSeparators(separators)
     }
     
     private func observeDeveloperMode(){
@@ -477,22 +462,10 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.mostActiveGestureRecognizer.isEnabled = false
                 self?.mostActiveCompany.text = String.localizedString("none_message")
             }
-                
-            if !companiesInfo.mostBlocked.isEmpty {
-                self?.mostBlockedView.alpha = 1.0
-                self?.mostBlockedGestureRecognizer.isEnabled = true
-                let record = companiesInfo.mostBlocked[0]
-                self?.mostBlockedCompany.text = record.key
-            } else {
-                self?.mostBlockedView.alpha = 0.5
-                self?.mostBlockedGestureRecognizer.isEnabled = false
-                self?.mostBlockedCompany.text = String.localizedString("none_message")
-            }
             
             self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
             
             self?.mostRequestedCompanies = companiesInfo.mostRequested
-            self?.mostBlockedCompanies = companiesInfo.mostBlocked
             self?.companiesNumber = companiesInfo.companiesNumber
         }
         

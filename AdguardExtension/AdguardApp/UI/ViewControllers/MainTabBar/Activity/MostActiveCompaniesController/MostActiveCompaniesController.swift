@@ -18,27 +18,9 @@
 
 import UIKit
 
-enum ActiveCompaniesDisplayType: Int {
-    typealias RawValue = Int
-    case requests = 0, blocked = 1
-    
-    var title: String {
-        get {
-            switch self {
-            case .requests:
-                return String.localizedString("most_active_companies")
-            case .blocked:
-                return String.localizedString("most_blocked_companies")
-            }
-        }
-    }
-}
-
 class MostActiveCompaniesController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var controllerTitle: ThemableLabel!
-    
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -52,10 +34,7 @@ class MostActiveCompaniesController: UIViewController {
     // MARK: - Public variables
 
     var chartDateType: ChartDateType?
-    var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
-    
     var mostRequestedCompanies: [CompanyRequestsRecord] = []
-    var mostBlockedCompanies: [CompanyRequestsRecord] = []
     
     // MARK: - Private variables
     
@@ -71,9 +50,6 @@ class MostActiveCompaniesController: UIViewController {
         updateTheme()
         setupBackButton()
         
-        segmentedControl.selectedSegmentIndex = activeCompaniesDisplayType?.rawValue ?? 0
-        animateTitleTextChange()
-        
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
@@ -88,46 +64,27 @@ class MostActiveCompaniesController: UIViewController {
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-        let index = segmentedControl.selectedSegmentIndex
-        activeCompaniesDisplayType = ActiveCompaniesDisplayType(rawValue: index)
-        animateTitleTextChange()
-        tableView.reloadData()
-    }
-    
     // MARK: - Private methods
 
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
-        theme.setupSegmentedControl(segmentedControl)
         tableView.reloadData()
-    }
-    
-    private func animateTitleTextChange() {
-        UIView.transition(with: controllerTitle, duration: 0.2, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.controllerTitle.text = self?.activeCompaniesDisplayType?.title
-        })
     }
 }
 
 extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activeCompaniesDisplayType == .requests ? mostRequestedCompanies.count : mostBlockedCompanies.count
+        return mostRequestedCompanies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: mostActiveCompaniesCellReuseId) as? MostActiveCompaniesCell {
-            let requestActive = activeCompaniesDisplayType == .requests
-            let record = requestActive ? mostRequestedCompanies[indexPath.row] : mostBlockedCompanies[indexPath.row]
+            let record = mostRequestedCompanies[indexPath.row]
             cell.theme = theme
             cell.companyLabel.text = record.key
-            
-            let text = requestActive ? String(format: String.localizedString("requests_number"), record.requests) : String(format: String.localizedString("blocked_number"), record.encrypted)
-            cell.requestsNumberLabel.text = text
+            cell.requestsNumberLabel.text = String(format: String.localizedString("requests_number"), record.requests)
             
             if indexPath.row == 0 {
                 let fontSize = cell.companyLabel.font.pointSize
@@ -140,8 +97,7 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let requestActive = activeCompaniesDisplayType == .requests
-        choosenRecord = requestActive ? mostRequestedCompanies[indexPath.row] : mostBlockedCompanies[indexPath.row]
+        choosenRecord = mostRequestedCompanies[indexPath.row]
         performSegue(withIdentifier: showCompanyDetailsSegueId, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }

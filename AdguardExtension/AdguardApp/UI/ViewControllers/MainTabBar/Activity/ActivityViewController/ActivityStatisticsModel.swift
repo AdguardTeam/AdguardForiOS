@@ -39,7 +39,7 @@ class CompanyRequestsRecord {
 
 struct CompaniesInfo {
     let mostRequested: [CompanyRequestsRecord]
-    let mostBlocked: [CompanyRequestsRecord]
+    let mostEncrypted: [CompanyRequestsRecord]
     let companiesNumber: Int
 }
 
@@ -95,7 +95,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
                 return $0.key < $1.key
             }
         })
-        let mostBlocked = recordsArray.sorted(by: {
+        let mostEncrypted = recordsArray.sorted(by: {
             if $0.encrypted != $1.encrypted {
                 return $0.encrypted > $1.encrypted
             } else {
@@ -103,6 +103,6 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             }
         })
             
-        return CompaniesInfo(mostRequested: mostRequested, mostBlocked: mostBlocked, companiesNumber: companiesNumber)
+        return CompaniesInfo(mostRequested: mostRequested, mostEncrypted: mostEncrypted, companiesNumber: companiesNumber)
     }
 }

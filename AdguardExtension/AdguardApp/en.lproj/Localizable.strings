@@ -832,15 +832,6 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
 
-/* (MostActiveCompaniesController) - Blocked number label */
-"blocked_number" = "%d blocked";
-
-/* (MostActiveCompaniesController) - Most active companies title */
-"most_active_companies" = "Most active companies";
-
-/* (MostActiveCompaniesController) - Most blocked companies title */
-"most_blocked_companies" = "Most blocked companies";
-
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
