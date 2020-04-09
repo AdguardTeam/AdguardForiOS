@@ -117,8 +117,8 @@ class CompanyDetailedController: UITableViewController {
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 1:
-            let title = String.localizedString("blocked_info_alert_title")
-            let message = String.localizedString("blocked_info_alert_message")
+            let title = String.localizedString("encrypted_info_alert_title")
+            let message = String.localizedString("encrypted_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         default:
             return

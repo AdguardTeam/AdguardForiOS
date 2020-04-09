@@ -91,8 +91,8 @@
 /* Class = "UILabel"; text = "0"; ObjectID = "w9H-e5-jiH"; */
 "w9H-e5-jiH.text" = "0";
 
-/* Class = "UIButton"; normalTitle = "blocked"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "blocked";
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "encrypted";
 
 /* Class = "UILabel"; text = "Most blocked"; ObjectID = "xIs-8M-KO7"; */
 "xIs-8M-KO7.text" = "Most blocked";
