@@ -116,6 +116,19 @@ class ActivityViewController: UITableViewController {
         statisticsModel.obtainStatistics()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        var headerFrame = tableHeaderView.frame
+
+        if height != headerFrame.size.height {
+            headerFrame.size.height = height
+            tableHeaderView.frame = headerFrame
+            tableView.tableHeaderView = tableHeaderView
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
             controller.logRecord = selectedRecord

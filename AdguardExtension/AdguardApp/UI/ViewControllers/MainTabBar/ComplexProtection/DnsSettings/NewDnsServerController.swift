@@ -42,6 +42,8 @@ class NewDnsServerController: BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
+    private let textFieldCharectersLimit = 50
+    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -59,7 +61,7 @@ class NewDnsServerController: BottomAlertController {
         }
         
         if provider != nil {
-            nameField.text = provider?.name
+            nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
         }
         
@@ -163,6 +165,20 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func editingChanged(_ sender: Any) {
         updateSaveButton()
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField != nameField { return true }
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        if  updatedText.count >= textFieldCharectersLimit {
+            textField.text = String(updatedText.prefix(textFieldCharectersLimit))
+            return false
+        }
+        return true
+    }
+
     
     // MARK: - private methods
     
