@@ -462,27 +462,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             return obj as! DnsFilter
         }
         
-        if !filters.contains { $0.id == DnsFilter.basicFilterId } {
-            self.addBasicFilter()
-            saveFiltersMeta()
-        }
-        
-        if !filters.contains { $0.id == DnsFilter.strictFilterId } {
-            self.addStrictFilter()
-            saveFiltersMeta()
-        }
-        
-        if !filters.contains { $0.id == DnsFilter.googleFilterId } {
-            self.addGoogleFilter()
-            saveFiltersMeta()
-        }
-        
-        if !filters.contains { $0.id == DnsFilter.facebookFilterId } {
-            self.addFacebookFilter()
-            saveFiltersMeta()
-        }
-        
-        updatePredefinedFiltersLocalizations()
+        removeOldPredefinedFilters()
     }
     
     // MARK: - private methods
@@ -490,120 +470,6 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private func saveFiltersMeta() {
         let dataToSave = filters.map { NSKeyedArchiver.archivedData(withRootObject: $0) }
         resources.sharedDefaults().set(dataToSave, forKey: kSharedDefaultsDnsFiltersMetaKey)
-    }
-    
-    private func addBasicFilter() {
-        guard let path = Bundle.main.path(forResource: "basic", ofType: "txt") else { return }
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-            DDLogError("(DnsFiltersService) addBasicFilter error - can not read filter from bundle")
-            return
-        }
-        
-        let filterUrl = "https://filters.adtidy.org/hosts/ios/basic.txt"
-        let result = parser.parse(from: data, with: filterUrl)
-        let meta = result?.meta
-        
-        let basicFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: true, desc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
-        basicFilter.id = DnsFilter.basicFilterId
-        
-        filters.insert(basicFilter, at: 0)
-        
-        resources.save(data, toFileRelativePath: filterFileName(filterId: basicFilter.id))
-    }
-    
-    private func addStrictFilter() {
-        guard let path = Bundle.main.path(forResource: "strict", ofType: "txt") else { return }
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-            DDLogError("(DnsFiltersService) addStrictFilter error - can not read filter from bundle")
-            return
-        }
-        
-        let filterUrl = "https://filters.adtidy.org/hosts/ios/strict.txt"
-        let result = parser.parse(from: data, with: filterUrl)
-        let meta = result?.meta
-        
-        let strictFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
-        strictFilter.id = DnsFilter.strictFilterId
-        
-        filters.insert(strictFilter, at: 1)
-        
-        resources.save(data, toFileRelativePath: filterFileName(filterId: strictFilter.id))
-    }
-    
-    private func addGoogleFilter() {
-        guard let path = Bundle.main.path(forResource: "google", ofType: "txt") else { return }
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-            DDLogError("(DnsFiltersService) addGoogleFilter error - can not read filter from bundle")
-            return
-        }
-        
-        let filterUrl = "https://filters.adtidy.org/hosts/ios/google.txt"
-        let result = parser.parse(from: data, with: filterUrl)
-        let meta = result?.meta
-        
-        let googleFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
-        googleFilter.id = DnsFilter.googleFilterId
-        
-        filters.insert(googleFilter, at: 2)
-        
-        resources.save(data, toFileRelativePath: filterFileName(filterId: googleFilter.id))
-    }
-    
-    private func addFacebookFilter() {
-        guard let path = Bundle.main.path(forResource: "facebook", ofType: "txt") else { return }
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-            DDLogError("(DnsFiltersService) addFacebookFilter error - can not read filter from bundle")
-            return
-        }
-        
-        let filterUrl = "https://filters.adtidy.org/hosts/ios/facebook.txt"
-        let result = parser.parse(from: data, with: filterUrl)
-        let meta = result?.meta
-        
-        let facebookFilter = DnsFilter(subscriptionUrl: meta?.subscriptionUrl ?? "", name: "", date: meta?.updateDate ?? Date(), enabled: false, desc: nil, importantDesc: nil, version: meta?.version ?? "", rulesCount: result?.rules.count ?? 0, homepage: meta?.homepage ?? "")
-        facebookFilter.id = DnsFilter.facebookFilterId
-        
-        filters.insert(facebookFilter, at: 3)
-        
-        resources.save(data, toFileRelativePath: filterFileName(filterId: facebookFilter.id))
-    }
-    
-    // we should every time set name^ description and other properties to predefined filters to show actual localized descriptions
-    private func updatePredefinedFiltersLocalizations() {
-        for filter in filters {
-            
-            let name: String
-            let descr: String
-            var importantDesc: String? = nil
-            
-            switch filter.id {
-            case DnsFilter.basicFilterId:
-                name = String.localizedString("basic_filter_title")
-                descr = String.localizedString("basic_filter_description")
-                
-            case DnsFilter.strictFilterId:
-                name = String.localizedString("strict_filter_title")
-                descr = String.localizedString("strict_filter_description")
-                importantDesc = String.localizedString("strict_filter_important_description")
-                
-            case DnsFilter.googleFilterId:
-                name = String.localizedString("google_filter_title")
-                descr = String.localizedString("google_filter_description")
-                importantDesc = String.localizedString("google_filter_important_description")
-                
-            case DnsFilter.facebookFilterId:
-                name = String.localizedString("facebook_filter_title")
-                descr = String.localizedString("facebook_filter_description")
-                importantDesc = String.localizedString("facebook_filter_important_description")
-                
-            default:
-                continue
-            }
-            
-            filter.name = name
-            filter.desc = descr
-            filter.importantDesc = importantDesc
-        }
     }
     
     private func filterFileName(filterId: Int)->String {
@@ -646,6 +512,16 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
         else {
             DDLogError("(DnsFiltersService) saveWhitlistRules error - can not save user filter to file")
+        }
+    }
+    
+    private func removeOldPredefinedFilters() {
+        for predefined in [DnsFilter.basicFilterId, DnsFilter.strictFilterId, DnsFilter.facebookFilterId, DnsFilter.googleFilterId] {
+            
+            if let filter = filters.first(where: { (filter) -> Bool in
+                return filter.id == predefined }) {
+                deleteFilter(filter)
+            }
         }
     }
 }
