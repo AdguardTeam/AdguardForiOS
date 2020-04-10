@@ -20,9 +20,10 @@ import UIKit
 
 class GetProPageController: UIViewController {
     
+    @IBOutlet weak var activityImage: UIImageView!
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var tryButton: UIButton!
+    @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
@@ -32,17 +33,22 @@ class GetProPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityImage.image = UIImage(named: "other-group-icon")
+        
         let product = purchaseService.standardProduct
     
         titleLabel.text = getTitleString(product: product).uppercased()
-        tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
-        tryButton.accessibilityLabel = String.localizedString("try_for_free")
-        
+    
         updateTheme()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tryButton.layer.cornerRadius = tryButton.frame.height / 2
     }
     
     private func getTitleString(product: Product?) -> String {
@@ -74,7 +80,6 @@ class GetProPageController: UIViewController {
     
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
-        theme.setupLabel(titleLabel)
-        theme.setupLabel(descriptionLabel)
+        theme.setupLabels(themableLabels)
     }
 }

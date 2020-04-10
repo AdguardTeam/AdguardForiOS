@@ -57,31 +57,6 @@ class DnsLogRecordExtended {
 }
 
 // this extension adds ui features to data type
-extension DnsLogRecordStatus {
-    func title()->String {
-        switch self {
-        case .processed:
-            return String.localizedString("dns_request_status_processed")
-        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
-            return String.localizedString("dns_request_status_whitelisted")
-        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
-            return String.localizedString("dns_request_status_blocked")
-        }
-    }
-        
-    func color() -> UIColor {
-        switch self {
-        case .processed:
-            return UIColor(hexString: "#eb9300")
-        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
-            return UIColor(hexString: "#67b279")
-        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
-            return UIColor(hexString: "#df3812")
-        }
-    }
-}
-
-// this extension adds ui features to data type
 extension DnsLogRecordUserStatus {
     func title()-> String {
         switch self {
@@ -107,6 +82,8 @@ extension DnsLogRecord
 {
     func getButtons() -> [DnsLogButtonType] {
         switch (status, userStatus) {
+        case (.encrypted, _):
+            return [.addDomainToWhitelist, .addRuleToUserFlter]
         case (_, .movedToBlacklist):
             return [.removeRuleFromUserFilter]
         case (_, .movedToWhitelist):
@@ -139,9 +116,13 @@ protocol DnsRequestsDelegateProtocol {
     func requestsCleared()
 }
 
+enum DnsStatisticsDisplayedRequestsType {
+    case allRequests, allowedRequests, blockedRequests
+}
+
 // MARK: - DnsRequestLogModel -
 /**
- view model for DnsLogController
+ view model for ActivityViewController
  */
 class DnsRequestLogViewModel {
     
@@ -154,6 +135,11 @@ class DnsRequestLogViewModel {
             return searchString.count > 0 ? searchRecords : allRecords
         }
     }
+    
+    /**
+     Type of the displayed statistics
+    */
+    var displayedStatisticsType: DnsStatisticsDisplayedRequestsType = .allRequests
     
     /**
      records changes observer. It calls when records array changes
@@ -194,15 +180,38 @@ class DnsRequestLogViewModel {
     /**
      obtains records array from vpnManager
     */
-    func obtainRecords() {
-        let logRecords = dnsLogService.readRecords()
+    func obtainRecords(for type: ChartDateType, domains: Set<String>? = nil) {
         
+        let intervalTime = type.getTimeInterval()
+        let firstDate = intervalTime.begin
+        let lastDate = intervalTime.end
+        
+        let logRecords = dnsLogService.readRecords()
         allRecords = [DnsLogRecordExtended]()
         
         for logRecord in logRecords.reversed() {
+            if let domains = domains, !domains.contains(logRecord.domain) {
+                continue
+            }
             
-            let trimmed = logRecord.domain.hasSuffix(".") ? String(logRecord.domain.dropLast()) : logRecord.domain
-            let info = dnsTrackerService.getTrackerInfo(by: trimmed)
+            if !(logRecord.date <= firstDate && logRecord.date >= lastDate) {
+                continue
+            }
+            
+            if displayedStatisticsType == .blockedRequests {
+                if !(logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter) {
+                    continue
+                }
+            }
+            
+            if displayedStatisticsType == .allowedRequests {
+                if logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter {
+                    continue
+                }
+            }
+            
+            
+            let info = dnsTrackerService.getTrackerInfo(by: logRecord.domain)
             
             var categoryName: String? = nil
             if let categoryKey = info?.categoryKey {

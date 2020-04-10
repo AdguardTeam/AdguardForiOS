@@ -159,8 +159,6 @@ int main(int argc, const char * argv[])
                 ASDFilter *filterData;
                 for (ASDFilterMetadata *version in metadata.filters) {
                     
-                    //                    [db executeUpdate:@"update filters set last_update_time = datetime(?), version = ?, last_check_time = datetime(?) where filter_id = ?", version.updateDateString, version.version, [[NSDate date] iso8601String] , version.filterId ];
-                    
                     filterData = [[ABECFilterClient singleton] filterWithFilterId:version.filterId];
                     
                     if (filterData && filterData.rules.count)

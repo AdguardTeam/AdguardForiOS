@@ -106,6 +106,9 @@ class StartupService : NSObject{
         let dnsStatisticsService: DnsStatisticsServiceProtocol = DnsStatisticsService(resources: sharedResources)
         locator.addService(service: dnsStatisticsService)
         
+        let activityStatisticsService: ActivityStatisticsServiceProtocol = ActivityStatisticsService(resources: sharedResources)
+        locator.addService(service: activityStatisticsService)
+        
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
@@ -117,5 +120,8 @@ class StartupService : NSObject{
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)
+        
+        let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
+        locator.addService(service: domainsParserService)
     }
 }

@@ -19,6 +19,15 @@
 import Foundation
 import UserNotifications
 
+// Must support NSSecureCoding thus it is Int
+enum PushNotificationCommands: Int {
+    typealias RawValue = Int
+    
+    static let command: String = "command"
+    
+    case openDnsFiltersController = 0
+}
+
 protocol UserNotificationServiceProtocol {
 
     func requestPermissions()
@@ -88,6 +97,22 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         completionHandler([.alert, .badge, .sound])
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        guard let command = userInfo[PushNotificationCommands.command] as? Int else {
+            completionHandler()
+            return
+        }
+        
+        if command == PushNotificationCommands.openDnsFiltersController.rawValue {
+            NotificationCenter.default.post(name: NSNotification.Name.showDnsFiltersController, object: nil, userInfo: nil)
+            completionHandler()
+            return
+        }
+        
+        completionHandler()
+    }
+    
     // MARK: - private methods
     
     private func alertNotification(title: String?, body: String?, userInfo: [AnyHashable : Any]?) {
@@ -119,8 +144,10 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
 
 extension Notification.Name {
     static let showCommonAlert = Notification.Name("showCommonAlert")
+    static let showDnsFiltersController = Notification.Name("showDnsFiltersController")
 }
 
 @objc extension NSNotification {
     public static let showCommonAlert = Notification.Name.showCommonAlert
+    public static let showDnsFiltersController = Notification.Name.showDnsFiltersController
 }

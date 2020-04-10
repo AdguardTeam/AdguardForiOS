@@ -22,6 +22,7 @@ protocol DnsFiltersModelProtocol {
     var delegate: DnsFiltersChangedProtocol? { get set }
     
     var filters: [DnsFilter] { get }
+    var enabledRulesCount: Int { get }
     var isSearchActive: Bool { get set }
     
     func setFilter(index: Int, enabled: Bool)
@@ -47,6 +48,9 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
             return isSearchActive ? searchFilters : allFilters
         }
     }
+    
+    var enabledRulesCount: Int { filtersService.enabledRulesCount }
+    
     private var allFilters: [DnsFilter] = []
     private var searchFilters: [DnsFilter] = []
     

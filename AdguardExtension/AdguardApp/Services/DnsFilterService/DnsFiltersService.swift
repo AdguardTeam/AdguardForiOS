@@ -28,6 +28,9 @@ protocol DnsFiltersServiceProtocol {
     // Counts enabled filters
     var enabledFiltersCount: Int { get }
     
+    // Number of rules in enabled filters
+    var enabledRulesCount: Int { get }
+    
     // json which can be used in dnsProxy. It contains only enabled filters
     var filtersJson: String { get }
     
@@ -114,6 +117,7 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
             return DnsFilter.customFiltersRange ~= id || id == 0
         }
     }
+    var editable: Bool = false
     
     // MARK: - Initialization
     
@@ -177,14 +181,14 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     var filters = [DnsFilter]()
 
     var enabledFiltersCount: Int {
-        get {
-            var count = 0
-            filters.forEach { (filter) in
-                if filter.enabled {
-                    count += 1
-                }
-            }
-            return count
+        filters.reduce(0) { (result, filter) -> Int in
+            return result + (filter.enabled ? 1 : 0)
+        }
+    }
+    
+    var enabledRulesCount: Int {
+        filters.reduce(0) { (result, filter) -> Int in
+            return result + (filter.rulesCount ?? 0)
         }
     }
     

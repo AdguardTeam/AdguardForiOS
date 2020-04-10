@@ -975,6 +975,15 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return filterId;
 }
 
+- (void) renameCustomFilter: (nonnull NSNumber*) filterId newName: (NSString *)newName {
+    dispatch_sync(workQueue, ^{
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
+            BOOL result = [db executeUpdate:@"UPDATE filters SET name = ? WHERE filter_id = ?", newName, filterId];
+            *rollback = !result;
+        }];
+    });
+}
+
 - (BOOL)updateFilter:(ASDFilterMetadata *)filter rules:(NSArray <ASDFilterRule *> *)rules db:(ASDatabase *)theDB{
     
     __block BOOL result = NO;
@@ -1508,7 +1517,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
 }
 
-/** loads sync filters forom backend and update database
+/** loads sync filters from backend and update database
  */
 - (void) updateCustomFilters {
     
@@ -1521,9 +1530,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
     
     [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
-        
         FMResultSet *result = [db executeQuery: @"select * from filters where group_id = ?" , @(FilterGroupId.custom)];
-        
         
         while ([result next]) {
             
@@ -1531,8 +1538,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             [filtersToUpdate addObject:filterMetadata];
         }
         [result close];
-        
-        
     }];
 
     // load filters from backend
@@ -1569,7 +1574,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     dispatch_group_wait(parseGroup, DISPATCH_TIME_FOREVER);
     
     for (AASCustomFilterParserResult* parseResult in parseResults) {
-        
         [self subscribeCustomFilterFromResultInternal:parseResult completion:nil];
     }
 }

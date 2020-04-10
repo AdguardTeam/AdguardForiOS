@@ -18,18 +18,44 @@
 
 import Foundation
 
-protocol NewCustomFilterDetailsDelegate {
+protocol AddNewFilterDelegate {
     func addCustomFilter(filter: AASCustomFilterParserResult)
+}
+
+protocol EditFilterDelegate {
+    func renameFilter(newName: String)
+}
+
+enum ControllerModeType {
+    case addingFilter, editingFilter
+}
+
+protocol NewCustomFilterDetailsControllerInterface {
+    var name: String? { get }
+    var rulesCount: Int? { get }
+    var homepage: String? { get }
+}
+
+struct NewCustomFilterDetailsControllerModel: NewCustomFilterDetailsControllerInterface {
+    var name: String?
+    var rulesCount: Int?
+    var homepage: String?
 }
 
 class NewCustomFilterDetailsController : BottomAlertController {
     
-    var type: NewFilterType = .safariCustom
+    var filterType: NewFilterType = .safariCustom
+    var controllerModeType: ControllerModeType = .addingFilter
+    
+    var model: NewCustomFilterDetailsControllerInterface? = nil
+    var filter : AASCustomFilterParserResult?
+    
+    var addDelegate : AddNewFilterDelegate?
+    var editDelegate: EditFilterDelegate?
     
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    var filter : AASCustomFilterParserResult?
-    var delegate : NewCustomFilterDetailsDelegate?
+    
     private var homepageLink: String?
     
     // MARK: - IB Outlets
@@ -46,17 +72,91 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
+    private let textFieldCharectersLimit = 50
+    
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        newFilterTitle.text = type.getTitleText()
+        if controllerModeType == .addingFilter {
+            setupAddingNewFilter()
+        } else {
+            setupEditingFilter()
+        }
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        name.text = filter?.meta.name
+        updateTheme()
+        cancelButton.makeTitleTextUppercased()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        if touch.view != contentView, controllerModeType == .addingFilter {
+            navigationController?.dismiss(animated: true, completion: nil)
+        } else if touch.view != contentView, controllerModeType == .editingFilter {
+            dismiss(animated: true)
+        }
+        else {
+            super.touchesBegan(touches, with: event)
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func AddAction(_ sender: Any) {
+        if controllerModeType == .addingFilter {
+            filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
+            addDelegate?.addCustomFilter(filter: filter!)
+            navigationController?.dismiss(animated: true, completion: nil)
+        } else if controllerModeType == .editingFilter {
+            if let newName = (name.text == nil || name.text == "") ? model?.name : name.text {
+                editDelegate?.renameFilter(newName: newName)
+            }
+            dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        if controllerModeType == .addingFilter {
+            navigationController?.dismiss(animated: true, completion: nil)
+        } else {
+            dismiss(animated: true)
+        }
+    }
+    
+    @IBAction func redirectToSafariAction(_ sender: UIButton) {
+        guard let link = homepageLink else { return }
+        guard let url = URL(string: link) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        if  updatedText.count >= textFieldCharectersLimit {
+            textField.text = String(updatedText.prefix(textFieldCharectersLimit))
+            return false
+        }
+        return true
+    }
+    
+    // MARK: - private methods
+    
+    private func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(name)
+        theme.setupPopupLabels(themableLabels)
+    }
+    
+    private func setupAddingNewFilter() {
+        newFilterTitle.text = filterType.getTitleText()
+        
+        name.text = String(filter?.meta.name.prefix(textFieldCharectersLimit) ?? "")
         let count: Int = filter?.rules.count ?? 0
         rulesCount.text = String(count)
         
@@ -70,46 +170,25 @@ class NewCustomFilterDetailsController : BottomAlertController {
             homepageTopConstraint.constant = 23.0
         }
         
-        updateTheme()
-        
-        addButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
+        addButton.setTitle(String.localizedString("common_add").uppercased(), for: .normal)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            navigationController?.dismiss(animated: true, completion: nil)
+    private func setupEditingFilter() {
+        newFilterTitle.text = String.localizedString("edit_custom_filter_title")
+        name.text = String(model?.name?.prefix(textFieldCharectersLimit) ?? "")
+        rulesCount.text = String(model?.rulesCount ?? 0)
+        
+        if let homepageUrl = model?.homepage, homepageUrl.count > 0 {
+            homepageLink = homepageUrl
+            homepage.attributedText = makeAttributedLink(with: homepageUrl)
+            homepageTopConstraint.constant = 52.0
         }
         else {
-            super.touchesBegan(touches, with: event)
+            homepage.isHidden = true
+            homepageTopConstraint.constant = 23.0
         }
-    }
-    
-    // MARK: - Actions
-    @IBAction func AddAction(_ sender: Any) {
-        filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
-        delegate?.addCustomFilter(filter: filter!)
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cancelAction(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func redirectToSafariAction(_ sender: UIButton) {
-        guard let link = homepageLink else { return }
-        guard let url = URL(string: link) else { return }
-        UIApplication.shared.open(url)
-    }
-    
-    
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupTextField(name)
-        theme.setupPopupLabels(themableLabels)
+
+        addButton.setTitle(String.localizedString("common_save").uppercased(), for: .normal)
     }
     
     private func makeAttributedLink(with url: String) -> NSAttributedString {

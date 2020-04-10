@@ -206,7 +206,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
             selectedCellTag = defaultProviderTag
             dnsProvidersService.activeDnsServer = nil
             vpnManager.updateSettings(completion: nil)
-            
+            tableView.reloadData()
         case providerSection:
             if dnsProvidersService.isCustomProvider(providers[indexPath.row]) {
                 editProvider(providers[indexPath.row])

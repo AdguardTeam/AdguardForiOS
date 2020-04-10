@@ -35,6 +35,25 @@ import Foundation
                                                             .doh: "doh_protocol",
                                                             .dot: "dot_protocol"]
     
+    static let prefixByProtocol: [DnsProtocol: String] = [.dnsCrypt: "sdns://",
+                                                          .doh: "https://",
+                                                          .dot: "tls://"]
+    
+    static func getProtocolByUpstream(_ upstream: String) -> DnsProtocol {
+        if let dohPrefix = DnsProtocol.prefixByProtocol[.doh], upstream.hasPrefix(dohPrefix) {
+            return .doh
+        }
+        
+        if let dotPrefix = DnsProtocol.prefixByProtocol[.dot], upstream.hasPrefix(dotPrefix) {
+            return .dot
+        }
+        
+        if let dnsCryptPrefix = DnsProtocol.prefixByProtocol[.dnsCrypt], upstream.hasPrefix(dnsCryptPrefix) {
+            return .dnsCrypt
+        }
+        
+        return .dns
+    }
 }
 
 struct DnsProviderFeature {

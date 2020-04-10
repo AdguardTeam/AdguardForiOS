@@ -49,4 +49,22 @@ extension UIViewController {
     @objc private func standardAction(sender: UIBarButtonItem){
         navigationController?.popViewController(animated: true)
     }
+    
+    func animateShowingTitleInNavBar(_ title: String?) {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = title
+    }
+    
+    func animateHidingTitleInNavBar() {
+        let fadeTextAnimation = CATransition()
+        fadeTextAnimation.duration = 0.3
+        fadeTextAnimation.type = .fade
+
+        navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
+        navigationItem.title = ""
+    }
 }

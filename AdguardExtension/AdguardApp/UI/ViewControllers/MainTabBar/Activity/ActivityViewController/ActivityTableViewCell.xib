@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTableViewCellId" rowHeight="51" id="JVh-jI-5R1" customClass="ActivityTableViewCell" customModule="Adguard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="427" height="51"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JVh-jI-5R1" id="EiC-kI-vdi">
+                <rect key="frame" x="0.0" y="0.0" width="427" height="51"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lke-4s-RFN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                        <rect key="frame" x="16" y="26" width="0.0" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="zMI-cq-xBe">
+                                <variation key="heightClass=regular-widthClass=regular" constant="18"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        </variation>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLE-3d-E6L">
+                        <rect key="frame" x="24" y="15" width="4" height="4"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="4" id="bON-JL-izX">
+                                <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="eLE-3d-E6L" secondAttribute="height" id="flB-QR-jqf"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-e1-qTV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                        <rect key="frame" x="16" y="8" width="0.0" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="ijD-8n-Ix3">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Pv-x1-cMp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                        <rect key="frame" x="411" y="17" width="0.0" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="C2X-oz-U1H">
+                                <variation key="heightClass=regular-widthClass=regular" constant="18"/>
+                            </constraint>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="70" id="loc-Bz-HB4">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        </variation>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="E1e-e1-qTV" firstAttribute="leading" secondItem="EiC-kI-vdi" secondAttribute="leading" constant="16" id="0oB-6L-MeO">
+                        <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                    </constraint>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="centerY" secondItem="EiC-kI-vdi" secondAttribute="centerY" id="4Tp-CD-oas"/>
+                    <constraint firstItem="Lke-4s-RFN" firstAttribute="leading" secondItem="E1e-e1-qTV" secondAttribute="leading" id="4gR-5A-J9c"/>
+                    <constraint firstAttribute="trailing" secondItem="9Pv-x1-cMp" secondAttribute="trailing" constant="16" id="6JD-6x-oND">
+                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                    </constraint>
+                    <constraint firstItem="eLE-3d-E6L" firstAttribute="centerY" secondItem="E1e-e1-qTV" secondAttribute="centerY" id="CTJ-Lw-mTv"/>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eLE-3d-E6L" secondAttribute="trailing" constant="16" id="ane-0D-dkz">
+                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                    </constraint>
+                    <constraint firstItem="eLE-3d-E6L" firstAttribute="leading" secondItem="E1e-e1-qTV" secondAttribute="trailing" constant="8" id="eO4-G6-xuu">
+                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lke-4s-RFN" secondAttribute="trailing" constant="16" id="f7n-tV-w2p">
+                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                    </constraint>
+                    <constraint firstItem="E1e-e1-qTV" firstAttribute="top" secondItem="EiC-kI-vdi" secondAttribute="top" constant="8" id="oYT-Rk-tKi">
+                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstAttribute="bottom" secondItem="Lke-4s-RFN" secondAttribute="bottom" constant="8" id="ssZ-T3-qgD">
+                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                    </constraint>
+                    <constraint firstItem="Lke-4s-RFN" firstAttribute="top" secondItem="E1e-e1-qTV" secondAttribute="bottom" id="tQT-Nl-br5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="blockStateView" destination="eLE-3d-E6L" id="J4p-sm-NgQ"/>
+                <outlet property="companyLabel" destination="E1e-e1-qTV" id="fh5-8x-Yym"/>
+                <outlet property="infoLabel" destination="Lke-4s-RFN" id="xnh-hM-RUb"/>
+                <outlet property="timeLabel" destination="9Pv-x1-cMp" id="m3B-4R-4Gk"/>
+            </connections>
+            <point key="canvasLocation" x="105.07246376811595" y="238.05803571428569"/>
+        </tableViewCell>
+    </objects>
+</document>

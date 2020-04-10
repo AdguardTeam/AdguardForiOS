@@ -42,6 +42,8 @@ class NewDnsServerController: BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
+    private let textFieldCharectersLimit = 50
+    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -59,7 +61,7 @@ class NewDnsServerController: BottomAlertController {
         }
         
         if provider != nil {
-            nameField.text = provider?.name
+            nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
         }
         
@@ -78,7 +80,7 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func addAction(_ sender: Any) {
         checkUpstream { [weak self] in
             guard let self = self else { return }
-            let newProvider = self.dnsProvidersService.addProvider(name: self.nameField.text ?? "", upstreams: [self.upstreamsField.text ?? ""])
+            let newProvider = self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: self.upstreamsField.text ?? "")
             self.dnsProvidersService.activeDnsServer = newProvider.servers?.first
             self.vpnManager.updateSettings(completion: nil)
             self.dismiss(animated: true, completion: nil)
@@ -106,9 +108,11 @@ class NewDnsServerController: BottomAlertController {
         checkUpstream { [weak self] in
             guard let self = self else { return }
             if self.provider == nil || self.provider?.servers?.first == nil { return }
+            let upstream = self.upstreamsField.text ?? ""
             self.provider!.name = self.nameField.text ?? ""
-            self.provider!.servers?.first!.upstreams = [self.upstreamsField.text ?? ""]
+            self.provider!.servers?.first!.upstreams = [upstream]
             self.provider!.servers?.first!.name = self.provider!.name
+            self.provider!.servers?.first!.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
             self.dnsProvidersService.updateProvider(self.provider!)
             
             if self.dnsProvidersService.isActiveProvider(self.provider!) {
@@ -133,7 +137,7 @@ class NewDnsServerController: BottomAlertController {
             bootstrap.append(ip ?? "")
         }
         
-        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstrap, timeoutMs: 2000, serverIp: nil)
+        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstrap, timeoutMs: 2000, serverIp: nil, id: 0)
         
         DispatchQueue(label: "save dns queue").async { [weak self] in
             guard let self = self else { return }
@@ -163,6 +167,20 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func editingChanged(_ sender: Any) {
         updateSaveButton()
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField != nameField { return true }
+        
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        if  updatedText.count >= textFieldCharectersLimit {
+            textField.text = String(updatedText.prefix(textFieldCharectersLimit))
+            return false
+        }
+        return true
+    }
+
     
     // MARK: - private methods
     

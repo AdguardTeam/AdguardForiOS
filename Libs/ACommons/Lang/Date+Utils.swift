@@ -41,4 +41,11 @@ extension Date {
             
         return dateString
     }
+    
+    static func dateFromIso8601(_ from: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.date(from: from)
+    }
 }

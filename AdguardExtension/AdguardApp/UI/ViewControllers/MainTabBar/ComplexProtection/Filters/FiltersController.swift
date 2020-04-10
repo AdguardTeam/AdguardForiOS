@@ -21,7 +21,7 @@ import UIKit
 
 
 // MARK: - FiltersController
-class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, NewCustomFilterDetailsDelegate, TagButtonTappedDelegate {
+class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddNewFilterDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersAndGroupsViewModelProtocol?
     var group: Group? {

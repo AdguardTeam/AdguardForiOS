@@ -34,7 +34,7 @@ protocol DnsProvidersServiceProtocol {
     var activeDnsProvider: DnsProviderInfo? { get }
     var currentServerName: String { get }
     
-    func addProvider(name: String, upstreams:[String])->DnsProviderInfo
+    func addCustomProvider(name: String, upstream: String)->DnsProviderInfo
     func deleteProvider(_ provider: DnsProviderInfo)
     func updateProvider(_ provider: DnsProviderInfo)
     func isCustomProvider(_ provider: DnsProviderInfo)->Bool
@@ -78,6 +78,13 @@ protocol DnsProvidersServiceProtocol {
             if customProvidersInternal == nil {
                 if let data = resources.sharedDefaults().object(forKey: APDefaultsCustomDnsProviders) as? Data {
                     customProvidersInternal = NSKeyedUnarchiver.unarchiveObject(with: data) as? [DnsProviderInfo] ?? []
+                    
+                    /**
+                     Migration:
+                     in app version 4.0 we began to inititalize custom dns servers with dns protocol,
+                     for previously added custom servers we set protocol here
+                     */
+                    setProtocolForCustomProviders()
                 }
             }
             
@@ -129,11 +136,12 @@ protocol DnsProvidersServiceProtocol {
         }
     }
     
-    @objc func addProvider(name: String, upstreams: [String]) -> DnsProviderInfo {
+    func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
         let provider = DnsProviderInfo(name: name)
         
-        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: upstreams, anycast: nil)
+        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream], anycast: nil)
         
+        server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         provider.servers = [server]
         
         workingQueue.sync { [weak self] in
@@ -366,5 +374,13 @@ protocol DnsProvidersServiceProtocol {
         }
         
         return provider.servers?.first?.dnsProtocol ?? .dns
+    }
+    
+    private func setProtocolForCustomProviders(){
+        for provider in customProvidersInternal ?? [] {
+            if let server = provider.servers?.first, server.dnsProtocol == .dns, let upstream = server.upstreams.first {
+                server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
+            }
+        }
     }
 }

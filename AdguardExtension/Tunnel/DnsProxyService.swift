@@ -18,8 +18,19 @@
 
 import Foundation
 
+@objc class DnsProxyUpstream: NSObject {
+    let upstream: String
+    let isCrypto: Bool
+    
+    init(upstream: String, isCrypto: Bool) {
+        self.upstream = upstream
+        self.isCrypto = isCrypto
+    }
+}
+
 @objc
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
+    var upstreamsById: [Int: DnsProxyUpstream] { get }
     
     func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
@@ -27,10 +38,15 @@ protocol DnsProxyServiceProtocol : NSObjectProtocol {
 }
 
 class DnsProxyService : NSObject, DnsProxyServiceProtocol {
+    var upstreamsById: [Int : DnsProxyUpstream] = [:]
     
     // set it to 2000 to make sure we will quickly fallback if needed
     private let timeout = 2000
-    private let dnsRecordsWriter: DnsLogRecordsWriterProtocol;
+    private let dnsRecordsWriter: DnsLogRecordsWriterProtocol
+    private let resources: AESharedResourcesProtocol
+    private let dnsProvidersService: DnsProvidersServiceProtocol
+    
+    private var nextUpstreamId: Int { upstreamsById.count }
     
     private let workingQueue = DispatchQueue(label: "dns proxy service working queue")
     private let resolveQueue = DispatchQueue(label: "dns proxy resolve queue", attributes: [.concurrent])
@@ -38,9 +54,11 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     let events: AGDnsProxyEvents
     
     @objc
-    init(logWriter: DnsLogRecordsWriterProtocol) {
+    init(logWriter: DnsLogRecordsWriterProtocol, resources: AESharedResourcesProtocol, dnsProvidersService: DnsProvidersServiceProtocol) {
         DDLogInfo("(DnsProxyService) initializing")
         dnsRecordsWriter = logWriter
+        self.resources = resources
+        self.dnsProvidersService = dnsProvidersService
         events = AGDnsProxyEvents()
         
         super.init()
@@ -55,13 +73,23 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     var agproxy: AGDnsProxy?
     
     @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool {
-                
-        let agUpstreams = upstreams.map { (upstream) -> AGDnsUpstream in
-            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
+           
+        let isCrypto = upstreamIsCrypto()
+        let agUpstreams = upstreams.map {(upstream) -> AGDnsUpstream in
+            let id = nextUpstreamId
+            let dnsProxyUpstream = DnsProxyUpstream(upstream: upstream, isCrypto: isCrypto)
+            upstreamsById[id] = dnsProxyUpstream
+            
+            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
         
         let agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
-            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
+            let id = nextUpstreamId
+            let isCrypto = false
+            let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
+            upstreamsById[id] = dnsProxyUpstream
+            
+            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
         
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
@@ -96,7 +124,12 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let ipv6Addresses = fallbacks.filter({ $0.contains(":") })
         
         let ipv6Upstreams = ipv6Addresses.map { (address) -> AGDnsUpstream in
-            return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil)
+            let id = nextUpstreamId
+            let isCrypto = false
+            let dnsProxyUpstream = DnsProxyUpstream(upstream: address, isCrypto: isCrypto)
+            upstreamsById[id] = dnsProxyUpstream
+            
+            return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
     
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
@@ -115,13 +148,12 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
 
         var error: NSError?
         agproxy = AGDnsProxy(config: config, handler: events, error: &error)
+        resources.tunnelErrorCode = error?.code
         if agproxy == nil && error != nil {
             DDLogError("(DnsProxyService) can not start dns proxy - \(error!)")
         }
         else if error != nil {
             DDLogInfo("(DnsProxyService) dns proxy started with error - \(error!)")
-            // todo: handle limit of rules exceeded error
-            // todo: send message to main app
         }
         
         return agproxy != nil
@@ -136,16 +168,23 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             }
         }
         
+        upstreamsById.removeAll()
         callback()
         
         return
     }
     
     @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
-        
         resolveQueue.async { [weak self] in
             let reply = self?.agproxy?.handlePacket(dnsRequest)
             callback(reply)
         }
+    }
+    
+    private func upstreamIsCrypto() -> Bool {
+        if let activeDnsServer = dnsProvidersService.activeDnsServer {
+            return activeDnsServer.dnsProtocol != .dns
+        }
+        return false
     }
 }

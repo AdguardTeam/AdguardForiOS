@@ -89,6 +89,14 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         return viewModel?.constantAllGroups.count ?? 0
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let group = viewModel?.constantAllGroups[indexPath.row] else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as! GroupCell
