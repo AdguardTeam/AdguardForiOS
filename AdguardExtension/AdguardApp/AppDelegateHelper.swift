@@ -272,6 +272,20 @@ class AppDelegateHelper: NSObject {
         }
     }
 
+    func showCommonAlertForTopVc(_ body: String?, _ title: String?) {
+        DispatchQueue.main.async {[weak self] in
+            guard let tab = self?.getMainTabController() else {
+                DDLogError("(AppDeegateHelper) showCommonAlertForTopVc error. There is no tab controller")
+                return
+            }
+            
+            if let selectedNavController = tab.selectedViewController as? MainNavigationController {
+                if let topVC = selectedNavController.topViewController {
+                    ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
+                }
+            }
+        }
+    }
     
     // MARK: - private methods
     
@@ -290,7 +304,7 @@ class AppDelegateHelper: NSObject {
         let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
         let title = String.localizedString("dns_filters_notification_title")
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
-        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openopenDnsFiltersController.rawValue]
+        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
     }
     

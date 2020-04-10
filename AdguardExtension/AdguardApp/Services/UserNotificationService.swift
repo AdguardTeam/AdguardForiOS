@@ -25,7 +25,7 @@ enum PushNotificationCommands: Int {
     
     static let command: String = "command"
     
-    case openopenDnsFiltersController = 0
+    case openDnsFiltersController = 0
 }
 
 protocol UserNotificationServiceProtocol {
@@ -104,7 +104,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
             return
         }
         
-        if command == PushNotificationCommands.openopenDnsFiltersController.rawValue {
+        if command == PushNotificationCommands.openDnsFiltersController.rawValue {
             NotificationCenter.default.post(name: NSNotification.Name.showDnsFiltersController, object: nil, userInfo: nil)
             completionHandler()
             return
