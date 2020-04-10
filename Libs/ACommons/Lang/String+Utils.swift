@@ -126,28 +126,55 @@ extension String {
         return ACLocalizedString(key, nil)
     }
     
-    /**
-     Converts kBytes to text and appropriate units
+    
+    static func simpleSecondsFormatter(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        let formatterString = formatter.string(from: number) ?? "\(number.intValue)"
+        return String(format: String.localizedString("ms_unit"), formatterString)
+    }
+    
+    /*
+     Formats a number, devides thousands with separator, depending on current locale
      */
-    static func dataUnitsConverter(_ kBytes: Int) -> String {
+    static func simpleThousandsFormatting(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        return formatter.string(from: number) ?? "\(number.intValue)"
+    }
+    
+    /**
+    Converts number to string, ignores decimal part
+    Formatted by locale
+    */
+    static func formatNumberByLocale(_ number: NSNumber) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = .current
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
         
-        let mBytePower = pow(2.0, 10.0) // 2^10 (1024) kBytes in 1 mByte
-        let gBytePower = pow(2.0, 20.0) // 2^20 (1048576) kBytes in 1gByte
+        let decimalNumber: Double = number.doubleValue
         
-        let gBytes = Double(kBytes) / gBytePower
-        if gBytes > 1 {
-            let gBytesString = String(format: "%.1f", gBytes)
-            return String(format: String.localizedString("gb_unit"), gBytesString)
+        let millions = decimalNumber / 1000000
+        if millions > 1 {
+            let millionsString = formatter.string(from: NSNumber(floatLiteral: millions)) ?? "0"
+            return String(format: String.localizedString("millions_unit"), millionsString)
         }
         
-        let mBytes = Double(kBytes) / mBytePower
-        if mBytes > 1 {
-            let mBytesString = String(format: "%.1f", mBytes)
-            return String(format: String.localizedString("mb_unit"), mBytesString)
+        let thousands = decimalNumber / 1000
+        if thousands > 100 {
+            let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
+            return String(format: String.localizedString("thousands_unit"), thousandsString)
         }
         
-        let kBytesString = String(format: "%.0f", kBytes)
-        return String(format: String.localizedString("kb_unit"), kBytesString)
+        return formatter.string(from: number) ?? "0"
     }
     
     /**

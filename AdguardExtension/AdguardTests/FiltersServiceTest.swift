@@ -26,7 +26,7 @@ class FiltersServiceTest: XCTestCase {
     override func tearDown() {
     }
     
-    func initService(groups:[(groupId: Int, enabled: Bool)], filters: [(filterId: Int, groupId: Int, enabled: Bool)])->FiltersService {
+    func initService(groups:[(groupId: Int, enabled: Bool)], filters: [(filterName: String, filterId: Int, groupId: Int, enabled: Bool)])->FiltersService {
         let antibanner = AntibannerMock()
         let antibannerController = AntibannerControllerMock(antibanner)
         let contentBlocker = ContentBlockerServiceMock()
@@ -48,6 +48,7 @@ class FiltersServiceTest: XCTestCase {
         
         for filterParams in filters {
             let filter = ASDFilterMetadata()
+            filter.name = filterParams.filterName
             filter.filterId = filterParams.filterId as NSNumber
             filter.groupId = filterParams.groupId as NSNumber
             filter.enabled = filterParams.enabled as NSNumber
@@ -74,7 +75,7 @@ class FiltersServiceTest: XCTestCase {
 
     func testEnableFilter() {
         
-        let service = initService(groups: [(123, false)], filters: [(321, 123, false)])
+        let service = initService(groups: [(123, false)], filters: [("filter name", 321, 123, false)])
         
         XCTAssertTrue(service.groups.count == 1)
         XCTAssertTrue(service.groups[0].filters.count == 1)
@@ -88,7 +89,7 @@ class FiltersServiceTest: XCTestCase {
     
     func testEnableGroup() {
         
-        let service = initService(groups: [(123, false)], filters: [(321, 123, true), (456, 123, false)])
+        let service = initService(groups: [(123, false)], filters: [("filter name 1", 321, 123, true), ("filter name 2",456, 123, false)])
         
         XCTAssertTrue(service.groups.count == 1)
         XCTAssertTrue(service.groups[0].filters.count == 2)
@@ -106,7 +107,7 @@ class FiltersServiceTest: XCTestCase {
     
     func testDisableFilter(){
        
-        let service = initService(groups: [(123, true)], filters: [(321, 123, false), (456, 123, true)])
+        let service = initService(groups: [(123, true)], filters: [("filter name 1", 321, 123, false), ("filter name 2", 456, 123, true)])
 
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
@@ -123,7 +124,7 @@ class FiltersServiceTest: XCTestCase {
     
     func testDisableGroup() {
         
-        let service = initService(groups: [(123, true)], filters: [(321, 123, false), (456, 123, true)])
+        let service = initService(groups: [(123, true)], filters: [("filter name 1", 321, 123, false), ("filter name 2", 456, 123, true)])
         
         XCTAssertTrue(service.groups[0].enabled)
         XCTAssertFalse(service.groups[0].filters[0].enabled)
@@ -140,7 +141,7 @@ class FiltersServiceTest: XCTestCase {
     
     func testEnableMultipleGroups() {
         let service = initService(groups: [(123, false), (124, false)],
-                                  filters: [(321, 123, true), (456, 124, true)])
+                                  filters: [("filter name 1", 321, 123, true), ("filter name 2", 456, 124, true)])
         
         XCTAssertFalse(service.groups[0].enabled)
         XCTAssertFalse(service.groups[1].enabled)
@@ -160,7 +161,7 @@ class FiltersServiceTest: XCTestCase {
         // disabled group with one enabled and one disabled filters
         // all filters are showed to user as disabled
         // after enabling second filter first filter must stay enabled
-        let service = initService(groups: [(123, false)], filters: [(321, 123, true), (456, 123, false)])
+        let service = initService(groups: [(123, false)], filters: [("filter name 1", 321, 123, true), ("filter name 2", 456, 123, false)])
         
         XCTAssertFalse(service.groups[0].enabled)
         XCTAssertTrue(service.groups[0].filters[0].enabled)
@@ -173,5 +174,18 @@ class FiltersServiceTest: XCTestCase {
         XCTAssertFalse(service.groups[0].enabled)
         XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertTrue(service.groups[0].filters[1].enabled)
+    }
+    
+    func testRenameCustomFilter() {
+        let filterIdToRename = 100
+        let newName = "new name"
+        
+        let service = initService(groups: [(FilterGroupId.custom, true)], filters: [("filter name 1", 321, FilterGroupId.custom, false), ("filter name 2", filterIdToRename, FilterGroupId.custom, true)])
+        
+        service.renameCustomFilter(filterIdToRename, newName)
+        
+        let group = service.groups[0]
+        let filter = group.filters[1]
+        XCTAssertEqual(filter.name, newName)
     }
 }

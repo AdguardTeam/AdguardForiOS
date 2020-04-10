@@ -77,7 +77,7 @@ NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
-NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
+NSString* AEDefaultsEncryptedRequests = @"AEDefaultsEncryptedRequests";
 NSString* LastStatisticsSaveTime = @"LastStatisticsSaveTime";
 
 NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
@@ -92,6 +92,7 @@ NSString *SafariProtectionLastState = @"SafariProtectionLastState";
 NSString *SystemProtectionLastState = @"SystemProtectionLastState";
 
 NSString *StatisticsPeriodType = @"StatisticsPeriodType";
+NSString *ActivityStatisticsPeriodType = @"ActivityStatisticsPeriodType";
 NSString *StatisticsSaveTime = @"StatisticsSaveTime";
 
 NSString *DnsActiveProtocols = @"DnsActiveProtocols";
@@ -103,6 +104,8 @@ NSString* AESystemProtectionEnabled = @"AESystemProtectionEnabled";
 NSString* AEComplexProtectionEnabled = @"AEComplexProtectionEnabled";
 
 NSString *OnboardingWasShown = @"OnboardingWasShown";
+
+NSString *TunnelErrorCode = @"TunnelErrorCode";
 
 NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 

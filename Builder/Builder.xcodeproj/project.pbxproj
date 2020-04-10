@@ -56,7 +56,7 @@
 		65FAB33A1D6C572200A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FAB3391D6C572200A0706B /* ACObject.m */; };
 		D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A18E219F0811002C17D9 /* DDLoggerNames.m */; };
 		D0D33BC023102D64009082CE /* Affinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BBF23102D64009082CE /* Affinity.swift */; };
-		D0D33BC223102DA9009082CE /* RulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BC123102DA9009082CE /* RulesParser.swift */; };
+		D0D33BC223102DA9009082CE /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,7 +190,7 @@
 		D0C4EF2B23C758A600C57E22 /* DDLogMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
 		D0D33BBE23102D63009082CE /* Builder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Builder-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0D33BBF23102D64009082CE /* Affinity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
-		D0D33BC123102DA9009082CE /* RulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesParser.swift; sourceTree = "<group>"; };
+		D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -235,7 +235,7 @@
 		655A04A31C6B7790000F00D7 /* ABackEndClients */ = {
 			isa = PBXGroup;
 			children = (
-				D0D33BC123102DA9009082CE /* RulesParser.swift */,
+				D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */,
 				D0D33BBF23102D64009082CE /* Affinity.swift */,
 				655A04A41C6B7790000F00D7 /* ABECConstants.h */,
 				655A04A51C6B7790000F00D7 /* ABECFilter.h */,
@@ -641,7 +641,7 @@
 				6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */,
 				655A05B01C6B7790000F00D7 /* NSURL+Utils.m in Sources */,
 				655A05A31C6B7790000F00D7 /* DDLog.m in Sources */,
-				D0D33BC223102DA9009082CE /* RulesParser.swift in Sources */,
+				D0D33BC223102DA9009082CE /* AffinityRulesParser.swift in Sources */,
 				655A05A51C6B7790000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
 				655A05A61C6B7790000F00D7 /* DDDispatchQueueLogFormatter.m in Sources */,
 				655A058C1C6B7790000F00D7 /* ACFFileUtils.m in Sources */,

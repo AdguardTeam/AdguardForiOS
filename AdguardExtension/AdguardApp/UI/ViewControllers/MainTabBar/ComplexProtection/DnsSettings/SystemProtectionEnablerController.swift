@@ -21,7 +21,7 @@ import UIKit
 class SystemProtectionEnablerController: UIViewController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var enableButton: GradientButton!
+    @IBOutlet weak var enableButton: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeNotificationToken: NotificationToken?
@@ -29,14 +29,17 @@ class SystemProtectionEnablerController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = String.localizedString("protection_enabler_title")
-        enableButton.setTitle(String.localizedString("protection_enabler_button"), for: .normal)
         enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
         updateTheme()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        enableButton.layer.cornerRadius = enableButton.frame.height / 2
     }
 
     private func updateTheme(){

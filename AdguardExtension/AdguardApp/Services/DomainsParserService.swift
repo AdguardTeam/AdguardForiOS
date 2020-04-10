@@ -16,15 +16,18 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#import <Foundation/Foundation.h>
-#import "ADBTableRow.h"
+import Foundation
 
-@class RequestsStatisticsBlock;
+protocol DomainsParserServiceProtocol {
+    var domainsParser: DomainParser? { get }
+}
 
-@interface APStatisticsTable : ADBTableRow
-
-@property (nonatomic, nonnull) NSDate *timeStamp;
-@property (nonatomic, nullable) RequestsStatisticsBlock *allStatisticsBlocks;
-@property (nonatomic, nullable) RequestsStatisticsBlock *blockedStatisticsBlocks;
-
-@end
+class DomainsParserService: DomainsParserServiceProtocol {
+    /* It must be initialized and stored during app life
+     because it initializes a big list inside */
+    var domainsParser: DomainParser?
+    
+    init() {
+        self.domainsParser = try? DomainParser(quickParsing: true)
+    }
+}

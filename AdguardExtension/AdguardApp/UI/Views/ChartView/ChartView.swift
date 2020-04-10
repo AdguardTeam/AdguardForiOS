@@ -27,9 +27,13 @@ class ChartView: UIView {
     
     var isEnabled: Bool = true {
         didSet{
-            let color = isEnabled ? onColor : offColor
-            lineColor = color
-            shadowColor = color
+            let requestsColor = UIColor(hexString: "67b279")
+            let encryptedColor = UIColor(hexString: "#677bb2")
+            
+            requestsLineColor = isEnabled ? requestsColor : offColor
+            requestsShadowColor = isEnabled ? requestsColor : offColor
+            encryptedLineColor = isEnabled ? encryptedColor : offColor
+            encryptedShadowColor = isEnabled ? encryptedColor : offColor
             drawChart()
         }
     }
@@ -40,23 +44,24 @@ class ChartView: UIView {
         }
     }
     
-    var chartPoints: (requests: [Point], blocked: [Point]) = ([], []) {
+    var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
         didSet {
             chartPoints.requests.sort(by: { $0.x < $1.x })
-            chartPoints.blocked.sort(by: { $0.x < $1.x })
+            chartPoints.encrypted.sort(by: { $0.x < $1.x })
             
             let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
             let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
             
-            let maxXblocked = chartPoints.blocked.map({ $0.x }).max() ?? 0.0
-            let maxYblocked = chartPoints.blocked.map({ $0.y }).max() ?? 0.0
+            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0.0
+            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0.0
             
             maxXelement = max(maxXrequests, maxXblocked)
             maxYelement = max(maxYrequests, maxYblocked)
             
-            topBorderLabel.text = "\(Int(maxYelement))"
-            
-            drawChart()
+            DispatchQueue.main.async {[weak self] in
+                self?.topBorderLabel.text = "\(Int(self?.maxYelement ?? 0))"
+                self?.drawChart()
+            }
         }
     }
     
@@ -78,11 +83,14 @@ class ChartView: UIView {
     private var bottomBorderLabel = UILabel()
     private var topBorderLabel = UILabel()
     
-    private var lineColor: UIColor = UIColor(hexString: "67b279")
-    private var shadowColor: UIColor = UIColor(hexString: "67b279")
-    private var gridColor: UIColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    private var requestsLineColor = UIColor(hexString: "67b279")
+    private var requestsShadowColor = UIColor(hexString: "67b279")
     
-    private let onColor = UIColor(hexString: "67b279")
+    private var encryptedLineColor = UIColor(hexString: "#677bb2")
+    private var encryptedShadowColor = UIColor(hexString: "677bb2")
+    
+    private var gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    
     private let offColor = UIColor(hexString: "#888888")
     
     private var numberOfVerticalSectors = 7
@@ -215,36 +223,36 @@ class ChartView: UIView {
     
     private func drawChart(){
         let requestLineLayer = CAShapeLayer()
-        let blockedLineLayer = CAShapeLayer()
+        let encryptedLineLayer = CAShapeLayer()
         
         var requestPoints = convertPoints(points: chartPoints.requests)
-        var blockedPoints = convertPoints(points: chartPoints.blocked)
+        var encryptedPoints = convertPoints(points: chartPoints.encrypted)
         
         let requestsPath = getLinePath(from: &requestPoints)
-        let blockedPath = getLinePath(from: &blockedPoints)
+        let blockedPath = getLinePath(from: &encryptedPoints)
         
         let requestsAlpha: CGFloat = activeChart == .requests ? 1.0 : 0.3
-        let blockedAlpha: CGFloat = activeChart == .blocked ? 1.0 : 0.3
+        let encryptedAlpha: CGFloat = activeChart == .encrypted ? 1.0 : 0.3
                     
         requestLineLayer.path = requestsPath.cgPath
         requestLineLayer.fillColor = UIColor.clear.cgColor
-        requestLineLayer.strokeColor = lineColor.withAlphaComponent(requestsAlpha).cgColor
+        requestLineLayer.strokeColor = requestsLineColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.lineWidth = 3.0
             
-        requestLineLayer.shadowColor = shadowColor.withAlphaComponent(requestsAlpha).cgColor
+        requestLineLayer.shadowColor = requestsShadowColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         requestLineLayer.shadowOpacity = 0.5
         requestLineLayer.shadowRadius = 4.0
         
-        blockedLineLayer.path = blockedPath.cgPath
-        blockedLineLayer.fillColor = UIColor.clear.cgColor
-        blockedLineLayer.strokeColor = lineColor.withAlphaComponent(blockedAlpha).cgColor
-        blockedLineLayer.lineWidth = 3.0
+        encryptedLineLayer.path = blockedPath.cgPath
+        encryptedLineLayer.fillColor = UIColor.clear.cgColor
+        encryptedLineLayer.strokeColor = encryptedLineColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.lineWidth = 3.0
             
-        blockedLineLayer.shadowColor = shadowColor.withAlphaComponent(blockedAlpha).cgColor
-        blockedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
-        blockedLineLayer.shadowOpacity = 0.5
-        blockedLineLayer.shadowRadius = 4.0
+        encryptedLineLayer.shadowColor = encryptedShadowColor.withAlphaComponent(encryptedAlpha).cgColor
+        encryptedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
+        encryptedLineLayer.shadowOpacity = 0.5
+        encryptedLineLayer.shadowRadius = 4.0
         
         layer.sublayers?.forEach({ (sublayer) in
             if sublayer.isKind(of: CAShapeLayer.self) {
@@ -253,24 +261,56 @@ class ChartView: UIView {
         })
         
         layer.addSublayer(requestLineLayer)
-        layer.addSublayer(blockedLineLayer)
+        layer.addSublayer(encryptedLineLayer)
     }
     
     private func convertPoints(points: [Point]) -> [CGPoint] {
+        let preparedPoints = preparePoints(points: points)
         var newPoints = [CGPoint]()
                 
-        for point in points {
-            var ratioX: CGFloat = point.x / maxXelement
+        for point in preparedPoints {
             var ratioY: CGFloat = (point.y / maxYelement) * 0.7
             
             // There is a devision by zero, when initializing this variables
-            ratioX = ratioX.isNaN ? 0.0 : ratioX
             ratioY = ratioY.isNaN ? 0.0 : ratioY
             
-            let newX = frame.width * ratioX
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
-            newPoints.append(CGPoint(x: newX, y: newY))
+            //newPoints.append(CGPoint(x: newX, y: newY))
+            
+            let newPoint = CGPoint(x: point.x, y: newY)
+            newPoints.append(newPoint)
         }
+        return newPoints
+    }
+    
+    /* This function is needed to avoid points overlay */
+    private func preparePoints(points: [Point]) -> [Point] {
+        let minimumSpacing: CGFloat = 5.0
+        var newPoints = [Point]()
+        
+        for point in points {
+            var ratioX: CGFloat = point.x / maxXelement
+            
+            // There is a devision by zero, when initializing this variables
+            ratioX = ratioX.isNaN ? 0.0 : ratioX
+            let newX = (frame.width * ratioX).rounded(.up)
+            
+            var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
+            if  newX - lastPoint.x <= minimumSpacing {
+                newPoints = newPoints.dropLast()
+                if lastPoint.x != 0.0 {
+                    lastPoint.x += ((newX - lastPoint.x) / 2).rounded(.up)
+                }
+                lastPoint.y = lastPoint.y + point.y
+                newPoints.append(lastPoint)
+                if lastPoint.y > maxYelement {
+                    maxYelement = lastPoint.y
+                }
+            } else {
+                newPoints.append(Point(x: newX, y: point.y))
+            }
+        }
+        
         return newPoints
     }
     

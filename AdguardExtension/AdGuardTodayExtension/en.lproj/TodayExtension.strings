@@ -10,8 +10,8 @@
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "All time statistics:";
 
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
-"eaJ-er-mJu.text" = "data saved*";
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "avg. time";
 
-/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
-"wd5-Po-h4x.text" = "blocked";
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "encrypted";

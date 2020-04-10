@@ -22,7 +22,37 @@ import Foundation
 enum DnsLogRecordStatus: Int {
     typealias RawValue = Int
 
-    case processed, blacklistedByUserFilter, blacklistedByOtherFilter, whitelistedByUserFilter, whitelistedByOtherFilter
+    case processed, encrypted, blacklistedByUserFilter, blacklistedByOtherFilter, whitelistedByUserFilter, whitelistedByOtherFilter
+    
+    func title()->String {
+        switch self {
+        case .processed:
+            return String.localizedString("dns_request_status_processed")
+        case .encrypted:
+            return String.localizedString("dns_request_status_encrypted")
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
+            return String.localizedString("dns_request_status_allowlisted")
+        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
+            return String.localizedString("dns_request_status_blocked")
+        }
+    }
+    
+    var textColor: UIColor {
+        let allowedColor = UIColor(hexString: "#67b279")
+        let blockedColor = UIColor(hexString: "#df3812")
+        let processedColor = UIColor(hexString: "#EB9300")
+        
+        switch self {
+        case .processed:
+            return processedColor
+        case .encrypted:
+            return allowedColor
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
+            return allowedColor
+        case .blacklistedByOtherFilter, .blacklistedByUserFilter:
+            return blockedColor
+        }
+    }
 }
 
 @objc(DnsLogRecordUserStatus)
@@ -54,7 +84,7 @@ class DnsLogRecord: NSObject, NSCoding {
     let originalAnswer: String?
     let answerStatus: String?
     
-    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?, originalAnswer: String?, answerStatus: String?) {
+    init(domain: String, date: Date, elapsed: Int, type: String, answer: String, server: String, upstreamAddr: String?, bytesSent: Int, bytesReceived: Int, status: DnsLogRecordStatus, userStatus: DnsLogRecordUserStatus, blockRules: [String]?, matchedFilterIds: [Int]?, originalAnswer: String?, answerStatus: String?) {
         
         self.domain = domain
         self.date = date
@@ -96,6 +126,12 @@ class DnsLogRecord: NSObject, NSCoding {
         aCoder.encode(matchedFilterIds,forKey: "matchedFilterIds")
         aCoder.encode(originalAnswer, forKey: "originalAnswer")
         aCoder.encode(answerStatus, forKey: "answerStatus")
+    }
+    
+    override var debugDescription: String {
+        get {
+            return "domain: \(domain); date: \(date)"
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -157,26 +193,43 @@ extension DnsLogRecord {
         }
     }
     
-    func getDetailsString(_ fontSize: CGFloat) -> NSMutableAttributedString {
+    func getDetailsString(_ fontSize: CGFloat, _ developerMode: Bool) -> NSMutableAttributedString {
+        
         let recordType = getTypeString()
-        var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        newDomain = " " + newDomain
         
-        let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
-        let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
-        
-        let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
-        let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
-        
-        let combination = NSMutableAttributedString()
-        combination.append(typeAttrString)
-        combination.append(domainAttrString)
-        
-        return combination
+        if developerMode {
+            var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
+            newDomain = " " + newDomain
+            
+            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+            let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
+            
+            let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
+            let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
+            
+            let combination = NSMutableAttributedString()
+            combination.append(typeAttrString)
+            combination.append(domainAttrString)
+            
+            return combination
+        } else {
+            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+            let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
+                               NSAttributedString.Key.foregroundColor: status.textColor]
+            
+            let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
+            let statusAttrString = NSAttributedString(string: status.title(), attributes: statusAttr)
+            
+            let combination = NSMutableAttributedString()
+            combination.append(statusAttrString)
+            combination.append(typeAttrString)
+            
+            return combination
+        }
     }
     
-    func firstLevelDomain() -> String {
-        let domains = String.generateSubDomains(from: domain)
-        return domains.last ?? ""
+    func firstLevelDomain(parser: DomainParser?) -> String {
+        let firstLevelDomain = parser?.parse(host: domain)?.domain
+        return firstLevelDomain ?? domain
     }
 }

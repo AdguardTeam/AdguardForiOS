@@ -22,7 +22,7 @@ class DnsSettingsController : UITableViewController {
     
     //MARK: - IB Outlets
     
-    @IBOutlet weak var tryButton: GradientButton!
+    @IBOutlet weak var tryButton: UIButton!
     @IBOutlet weak var systemIcon: UIImageView!
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var serverName: ThemableLabel!
@@ -98,9 +98,6 @@ class DnsSettingsController : UITableViewController {
         updateVpnInfo()
         setupBackButton()
         updateTheme()
-        
-        tryButton.setTitle(String.localizedString("try_for_free"), for: .normal)
-        tryButton.accessibilityLabel = String.localizedString("try_for_free")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +115,11 @@ class DnsSettingsController : UITableViewController {
                 self?.updateVpnInfo()
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tryButton.layer.cornerRadius = tryButton.frame.height / 2
     }
     
     // MARK: - Table view delegate methods
