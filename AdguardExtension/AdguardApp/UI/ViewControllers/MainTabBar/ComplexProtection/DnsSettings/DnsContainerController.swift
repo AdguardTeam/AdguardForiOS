@@ -43,8 +43,10 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private var themeObserver: Any? = nil
+    private var developerModeToken: NSKeyValueObservation?
     
     private var detailsController: DnsRequestDetailsController?
     
@@ -64,6 +66,12 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
+        }
+        
+        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+            DispatchQueue.main.async {[weak self] in
+                self?.updateButtons()
+            }
         }
         
         updateButtons()
@@ -124,6 +132,13 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     }
     
     private func updateButtons() {
+        shadowView.isHidden = !configuration.developerMode
+        
+        if !configuration.developerMode {
+            shadowView.buttons = []
+            return
+        }
+        
         let buttons = logRecord!.logRecord.getButtons().map{ [weak self] (type) -> BottomShadowButton in
             guard let self = self else { return BottomShadowButton() }
             let button = BottomShadowButton()

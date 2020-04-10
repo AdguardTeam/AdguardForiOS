@@ -32,27 +32,23 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var changePeriodTypeButton: UIButton!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var blockedNumberLabel: UILabel!
+    @IBOutlet weak var encryptedNumberLabel: UILabel!
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
     
-    @IBOutlet var mostActiveGestureRecognizer: UITapGestureRecognizer!
-    @IBOutlet var mostBlockedGestureRecognizer: UITapGestureRecognizer!
-    
-    @IBOutlet weak var mostActiveView: UIView!
-    @IBOutlet weak var mostBlockedView: UIView!
-    
+    @IBOutlet weak var mostActiveButton: RoundRectButton!
+    @IBOutlet weak var mostActiveLabel: ThemableLabel!
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
-    @IBOutlet weak var mostBlockedCompany: ThemableLabel!
+    @IBOutlet weak var rightArrowImageView: UIImageView!
     
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
     
     // MARK: - Outlet views for tableview
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet var sectionHeaderView: UIView!
     @IBOutlet var tableHeaderView: UIView!
     
@@ -84,23 +80,15 @@ class ActivityViewController: UITableViewController {
     private var titleInNavBarIsShown = false
     
     private let activityModel: ActivityStatisticsModelProtocol
-    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!, chartView: nil)
+    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
     private let showMostActiveCompaniesSegueId = "showMostActiveCompaniesId"
     
     private var selectedRecord: DnsLogRecordExtended?
-    private var activeCompaniesDisplayType: ActiveCompaniesDisplayType?
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
-    private var mostBlockedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
-    private var periodType: ChartDateType {
-        get {
-            let periodType = resources.sharedDefaults().integer(forKey: ActivityStatisticsPeriodType)
-            return ChartDateType(rawValue: periodType) ?? .alltime
-        }
-    }
     
     // MARK: - ViewController life cycle
     
@@ -117,9 +105,10 @@ class ActivityViewController: UITableViewController {
         
         updateTheme()
         setupTableView()
-        dateTypeChanged(dateType: periodType)
+        dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         statisticsModel.obtainStatistics()
+        filterButton.isHidden = !configuration.developerMode
     }
     
     override func viewDidLayoutSubviews() {
@@ -139,10 +128,8 @@ class ActivityViewController: UITableViewController {
         if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
             controller.logRecord = selectedRecord
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
-            controller.activeCompaniesDisplayType = activeCompaniesDisplayType
             controller.mostRequestedCompanies = mostRequestedCompanies
-            controller.mostBlockedCompanies = mostBlockedCompanies
-            controller.chartDateType = periodType
+            controller.chartDateType = resources.activityStatisticsType
         }
     }
     
@@ -169,12 +156,12 @@ class ActivityViewController: UITableViewController {
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 1:
-            let title = String.localizedString("blocked_info_alert_title")
-            let message = String.localizedString("blocked_info_alert_message")
+            let title = String.localizedString("encrypted_info_alert_title")
+            let message = String.localizedString("encrypted_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 2:
-            let title = String.localizedString("data_saved_info_alert_title")
-            let message = String.localizedString("data_saved_info_alert_message")
+            let title = String.localizedString("average_info_alert_title")
+            let message = String.localizedString("average_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 3:
             let title = String.localizedString("companies_info_alert_title")
@@ -185,13 +172,7 @@ class ActivityViewController: UITableViewController {
         }
     }
     
-    @IBAction func mostActiveTapped(_ sender: UITapGestureRecognizer) {
-        activeCompaniesDisplayType = .requests
-        performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
-    }
-    
-    @IBAction func mostBlockedTapped(_ sender: UITapGestureRecognizer) {
-        activeCompaniesDisplayType = .blocked
+    @IBAction func mostActiveTapped(_ sender: UIButton) {
         performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
     }
     
@@ -273,12 +254,14 @@ class ActivityViewController: UITableViewController {
         theme.setupSearchBar(searchBar)
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
-        theme.setupSeparators(separators)
+        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
     }
     
     private func observeDeveloperMode(){
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.filterButton.isHidden = !self.configuration.developerMode
+            self.tableView.reloadData()
         }
     }
     
@@ -312,21 +295,21 @@ class ActivityViewController: UITableViewController {
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .blockedRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allowedRequests
-            self.requestsModel?.obtainRecords(for: self.periodType)
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
             alert.dismiss(animated: true, completion: nil)
         }
         
@@ -382,17 +365,17 @@ class ActivityViewController: UITableViewController {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
+            let requestsNumber = self.resources.tempRequestsCount
             let requestsCount = self.statisticsModel.requestsCount + requestsNumber
             
-            let blockedNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsBlockedRequests)
-            let blockedCount = (self.statisticsModel.blockedCount) + blockedNumber
+            let ecnryptedNumber = self.resources.tempEncryptedRequestsCount
+            let ecnryptedCount = self.statisticsModel.encryptedCount + ecnryptedNumber
             
-            let blockedSaved = self.statisticsModel.blockedSavedKbytes
+            let averageElapsed = self.statisticsModel.averageElapsed
             
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
-            self.dataSavedLabel.text = String.dataUnitsConverter(blockedSaved)
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedCount))
+            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
     
@@ -413,7 +396,7 @@ class ActivityViewController: UITableViewController {
         }
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.periodType ?? .alltime)
+            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         
         requestsModel?.recordsObserver = { [weak self] (records) in
@@ -424,7 +407,7 @@ class ActivityViewController: UITableViewController {
         
         let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsBlockedRequests, options: .new, context: nil)
+        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
         
         let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
         
@@ -434,7 +417,7 @@ class ActivityViewController: UITableViewController {
     }
     
     @objc func updateTableView(sender: UIRefreshControl) {
-        dateTypeChanged(dateType: periodType)
+        dateTypeChanged(dateType: resources.activityStatisticsType)
         statisticsModel.obtainStatistics()
         refreshControl?.endRefreshing()
     }
@@ -466,40 +449,34 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
 
 extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
-        resources.sharedDefaults().set(dateType.rawValue, forKey: ActivityStatisticsPeriodType)
+        resources.activityStatisticsType = dateType
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
         
-        activityModel.getCompanies(for: dateType) { (mostRequested, mostBlocked, companiesNumber) in
-            DispatchQueue.main.async {[weak self] in
-                if !mostRequested.isEmpty {
-                    self?.mostActiveView.alpha = 1.0
-                    self?.mostActiveGestureRecognizer.isEnabled = true
-                    let record = mostRequested[0]
-                    self?.mostActiveCompany.text = record.key
-                } else {
-                    self?.mostActiveView.alpha = 0.5
-                    self?.mostActiveGestureRecognizer.isEnabled = false
-                    self?.mostActiveCompany.text = String.localizedString("none_message")
-                }
-                
-                if !mostBlocked.isEmpty {
-                    self?.mostBlockedView.alpha = 1.0
-                    self?.mostBlockedGestureRecognizer.isEnabled = true
-                    let record = mostBlocked[0]
-                    self?.mostBlockedCompany.text = record.key
-                } else {
-                    self?.mostBlockedView.alpha = 0.5
-                    self?.mostBlockedGestureRecognizer.isEnabled = false
-                    self?.mostBlockedCompany.text = String.localizedString("none_message")
-                }
-            
-                self?.companiesNumberLabel.text = "\(companiesNumber)"
-                
-                self?.mostRequestedCompanies = mostRequested
-                self?.mostBlockedCompanies = mostBlocked
-                self?.companiesNumber = companiesNumber
+        let companiesInfo = activityModel.getCompanies(for: dateType)
+        
+        DispatchQueue.main.async {[weak self] in
+            if !companiesInfo.mostRequested.isEmpty {
+                self?.mostActiveButton.alpha = 1.0
+                self?.mostActiveLabel.alpha = 1.0
+                self?.mostActiveCompany.alpha = 1.0
+                self?.rightArrowImageView.alpha = 1.0
+                self?.mostActiveButton.isEnabled = true
+                let record = companiesInfo.mostRequested[0]
+                self?.mostActiveCompany.text = record.key
+            } else {
+                self?.mostActiveButton.alpha = 0.5
+                self?.mostActiveLabel.alpha = 0.5
+                self?.mostActiveCompany.alpha = 0.5
+                self?.rightArrowImageView.alpha = 0.5
+                self?.mostActiveButton.isEnabled = false
+                self?.mostActiveCompany.text = String.localizedString("none_message")
             }
+            
+            self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
+            
+            self?.mostRequestedCompanies = companiesInfo.mostRequested
+            self?.companiesNumber = companiesInfo.companiesNumber
         }
         
         requestsModel?.obtainRecords(for: dateType)

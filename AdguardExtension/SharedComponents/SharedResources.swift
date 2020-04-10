@@ -20,6 +20,48 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
+    dynamic var activityStatisticsType: ChartDateType {
+        get {
+            let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
+            let rawValue = periodType ?? ChartDateType.day.rawValue
+            return ChartDateType(rawValue: rawValue) ?? .day
+        }
+        set {
+            let rawValue = newValue.rawValue
+            sharedDefaults().set(rawValue, forKey: ActivityStatisticsPeriodType)
+        }
+    }
+    
+    dynamic var chartDateType: ChartDateType {
+        get {
+            let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int
+            let rawValue = periodType ?? ChartDateType.day.rawValue
+            return ChartDateType(rawValue: rawValue) ?? .day
+        }
+        set {
+            let rawValue = newValue.rawValue
+            sharedDefaults().set(rawValue, forKey: StatisticsPeriodType)
+        }
+    }
+    
+    dynamic var tempRequestsCount: Int {
+        get {
+            return sharedDefaults().integer(forKey: AEDefaultsRequests)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsRequests)
+        }
+    }
+    
+    dynamic var tempEncryptedRequestsCount: Int {
+        get {
+            return sharedDefaults().integer(forKey: AEDefaultsEncryptedRequests)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsEncryptedRequests)
+        }
+    }
+    
     dynamic var tunnelErrorCode: Int? {
         get {
             return sharedDefaults().object(forKey: TunnelErrorCode) as? Int

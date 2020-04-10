@@ -27,27 +27,50 @@ class DnsProvidersServiceTest: XCTestCase {
         resources = SharedResourcesMock()
         dnsProviders = DnsProvidersService(resources: resources)
     }
-
-    func testAddServer() {
-        
-        let result = dnsProviders.addProvider(name: "test provider", upstreams: ["0.0.0.0"])
+    
+    func testAddCustomServer() {
+        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "0.0.0.0")
         XCTAssertNotNil(result)
+        XCTAssert(dnsProviders.customProviders.count == 1)
         XCTAssert(dnsProviders.allProviders.count == 1)
         
-        guard let addedProvider = dnsProviders.allProviders.first else {
+        guard let addedProvider = dnsProviders.customProviders.first else {
             XCTFail()
             return
         }
         
         XCTAssertEqual(addedProvider.name, "test provider")
         XCTAssertEqual(addedProvider.servers?.first?.upstreams, ["0.0.0.0"])
+        XCTAssertEqual(addedProvider.servers?.first?.dnsProtocol, .dns)
+    }
+    
+    func testCustomServerProtocolDohType() {
+        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "https://server")
+        XCTAssertNotNil(result)
+        let server = dnsProviders.customProviders[0].servers?.first
+        XCTAssertEqual(server?.dnsProtocol, .doh)
+    }
+    
+    func testCustomServerProtocolDotType() {
+        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "tls://server")
+        XCTAssertNotNil(result)
+        let server = dnsProviders.customProviders[0].servers?.first
+        XCTAssertEqual(server?.dnsProtocol, .dot)
+    }
+    
+    func testCustomServerProtocolDnsCryptType() {
+        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "sdns://server")
+        XCTAssertNotNil(result)
+        let server = dnsProviders.customProviders[0].servers?.first
+        XCTAssertEqual(server?.dnsProtocol, .dnsCrypt)
     }
     
     func testRemoveServer() {
-        _ = dnsProviders.addProvider(name: "test provider1", upstreams: ["0.0.0.1"])
-        let providerToRemove = dnsProviders.addProvider(name: "test provider2", upstreams: ["0.0.0.2"])
-        _ = dnsProviders.addProvider(name: "test provider3", upstreams: ["0.0.0.3"])
+        _ = dnsProviders.addCustomProvider(name: "test provider1", upstream: "0.0.0.1")
+        let providerToRemove = dnsProviders.addCustomProvider(name: "test provider2", upstream: "0.0.0.2")
+        _ = dnsProviders.addCustomProvider(name: "test provider3", upstream: "0.0.0.3")
         
+        XCTAssert(dnsProviders.customProviders.count == 3)
         XCTAssert(dnsProviders.allProviders.count == 3)
         
         dnsProviders.deleteProvider(providerToRemove)
@@ -55,5 +78,9 @@ class DnsProvidersServiceTest: XCTestCase {
         XCTAssert(dnsProviders.allProviders.count == 2)
         XCTAssertEqual(dnsProviders.allProviders[0].name, "test provider1")
         XCTAssertEqual(dnsProviders.allProviders[1].name, "test provider3")
+        
+        XCTAssert(dnsProviders.customProviders.count == 2)
+        XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider1")
+        XCTAssertEqual(dnsProviders.customProviders[1].name, "test provider3")
     }
 }

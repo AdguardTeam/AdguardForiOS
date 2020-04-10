@@ -33,7 +33,7 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     
     var currentServerName: String = ""
     
-    func addProvider(name: String, upstreams: [String]) -> DnsProviderInfo {
+    func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
         return DnsProviderInfo(name: "")
     }
     

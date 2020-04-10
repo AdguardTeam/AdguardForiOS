@@ -19,6 +19,8 @@
 import Foundation
 
 enum ChartDateType: Int, CaseIterable {
+    typealias RawValue = Int
+    
     case alltime = 0, month, week, day, today
     
     /**
@@ -48,46 +50,6 @@ enum ChartDateType: Int, CaseIterable {
             
             return (now, now - interval)
         }
-    }
-    
-    /**
-     Returns the first and last date of an array of [Date] that satisfy the given type
-     */
-    func getTimeInterval(requestsDates: [Date]) -> (begin: Date, end: Date){
-        let firstDate: Date = requestsDates.first ?? now()
-        let lastDate: Date = requestsDates.last ?? now()
-        
-        var interval: Double = 0.0
-        
-        let hour = 60.0 * 60.0 // 1 hour
-        let day = 24.0 * hour // 24 hours
-        let week = 7.0 * day
-        let month = 30.0 * day
-        
-        switch self {
-        case .today:
-            let calendar = Calendar.current
-            let hours = Double(calendar.component(.hour, from: lastDate))
-            let minutes = Double(calendar.component(.minute, from: lastDate))
-            
-            interval = hours * hour + minutes * 60.0
-
-        case .day:
-            interval = day
-        case .week:
-            interval = week
-        case .month:
-            interval = month
-        case .alltime:
-            return (firstDate, lastDate)
-        }
-        
-        var endDate = lastDate - interval
-        if endDate < firstDate {
-            endDate = firstDate
-        }
-        
-        return (endDate, lastDate)
     }
     
     func getFormatterString(from date: Date) -> String {

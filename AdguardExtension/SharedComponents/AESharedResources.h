@@ -249,7 +249,7 @@ extern NSString* _Nonnull AEDefaultsRequests;
  User defaults key, which defines number of blocked requests
  made in period of logs writing
  */
-extern NSString* _Nonnull AEDefaultsBlockedRequests;
+extern NSString* _Nonnull AEDefaultsEncryptedRequests;
 
 /**
  User defaults key, which defines last statistics save time

@@ -91,11 +91,16 @@ typedef void (^logCallback)(const char *msg, int length);
  * bootstrap DNS servers won't be used at all.
  */
 @property(nonatomic, readonly) NSData *serverIp;
+/**
+ * User-provided ID for this upstream
+ */
+@property(nonatomic, readonly) NSInteger id;
 
 - (instancetype) initWithAddress: (NSString *) address
         bootstrap: (NSArray<NSString *> *) bootstrap
         timeoutMs: (NSInteger) timeoutMs
-        serverIp: (NSData *) serverIp;
+        serverIp: (NSData *) serverIp
+        id: (NSInteger) id;
 @end
 
 @interface AGDns64Settings : NSObject

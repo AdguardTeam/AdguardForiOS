@@ -24,7 +24,7 @@ class CompanyDetailedController: UITableViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    @IBOutlet weak var blockedNumberLabel: UILabel!
+    @IBOutlet weak var encryptedNumberLabel: UILabel!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -35,6 +35,7 @@ class CompanyDetailedController: UITableViewController {
     
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var filterButton: UIButton!
     
     // MARK: - Services
     
@@ -87,9 +88,12 @@ class CompanyDetailedController: UITableViewController {
         }
         
         let requestsCount = record?.requests ?? 0
-        let blockedCount = record?.blocked ?? 0
+        let encryptedCount = record?.encrypted ?? 0
+        
+        filterButton.isHidden = !configuration.developerMode
+        
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-        blockedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: blockedCount))
+        encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -97,6 +101,19 @@ class CompanyDetailedController: UITableViewController {
         
         developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
             self?.observeDeveloperMode()
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        var headerFrame = tableHeaderView.frame
+
+        if height != headerFrame.size.height {
+            headerFrame.size.height = height
+            tableHeaderView.frame = headerFrame
+            tableView.tableHeaderView = tableHeaderView
         }
     }
     
@@ -117,8 +134,8 @@ class CompanyDetailedController: UITableViewController {
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         case 1:
-            let title = String.localizedString("blocked_info_alert_title")
-            let message = String.localizedString("blocked_info_alert_message")
+            let title = String.localizedString("encrypted_info_alert_title")
+            let message = String.localizedString("encrypted_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         default:
             return
@@ -232,7 +249,9 @@ class CompanyDetailedController: UITableViewController {
     
     private func observeDeveloperMode(){
         DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            self.filterButton.isHidden = !self.configuration.developerMode
         }
     }
     

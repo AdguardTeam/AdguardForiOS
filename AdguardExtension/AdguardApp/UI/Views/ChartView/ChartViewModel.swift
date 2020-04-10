@@ -19,11 +19,11 @@
 import Foundation
 
 protocol ChartViewModelProtocol {
+    var chartView: ChartView? { get set }
     
     var requestsCount: Int { get set }
-    var blockedCount: Int { get set }
-    
-    var blockedSavedKbytes: Int { get set }
+    var encryptedCount: Int { get set }
+    var averageElapsed: Double { get set }
     
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
@@ -38,33 +38,31 @@ protocol NumberOfRequestsChangedDelegate: class {
 }
 
 enum ChartRequestType {
-    case requests, blocked
+    case requests, encrypted
 }
 
 class ChartViewModel: ChartViewModelProtocol {
     
-    let chartView: ChartView?
+    var chartView: ChartView?
     var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
     
     var requestsCount: Int = 0
-    var blockedCount: Int = 0
-    
-    var blockedSavedKbytes: Int = 0
-        
-    var requests: [RequestsStatisticsBlock] = []
-    var blockedRequests: [RequestsStatisticsBlock] = []
-    
+    var encryptedCount: Int = 0
+    var averageElapsed: Double = 0.0
+
     var chartDateType: ChartDateType = .alltime {
         didSet {
             changeChart()
         }
     }
     
-    var chartRequestType: ChartRequestType = .requests {
+    var chartRequestType: ChartRequestType = .encrypted {
         didSet {
             changeChart()
         }
     }
+    
+    private var recordsByType: [ChartDateType: [DnsStatisticsRecord]] = [:]
     
     private let dateFormatter = DateFormatter()
     
@@ -73,26 +71,22 @@ class ChartViewModel: ChartViewModelProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, chartView: ChartView?) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
         self.dnsStatisticsService = dnsStatisticsService
-        self.chartView = chartView
     }
     
     func obtainStatistics() {
-        
-        timer?.invalidate()
-        timer = nil
-        
         DispatchQueue(label: "obtainStatistics queue").async { [weak self] in
             guard let self = self else { return }
-            let statistics = self.dnsStatisticsService.readStatistics()
             
-            self.requests = statistics[.all] ?? []
-            self.blockedRequests = statistics[.blocked] ?? []
+            self.timer?.invalidate()
+            self.timer = nil
             
-            DispatchQueue.main.async {
-                self.changeChart()
+            for type in ChartDateType.allCases {
+                self.recordsByType[type] = self.dnsStatisticsService.getRecords(by: type)
             }
+            
+            self.changeChart()
             
             self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
                 self?.obtainStatistics()
@@ -103,57 +97,67 @@ class ChartViewModel: ChartViewModelProtocol {
     // MARK: - private methods
     
     private func changeChart(){
-    
-        let requestsData = getPoints(from: requests)
-        let blockedData = getPoints(from: blockedRequests)
-        
-        requestsCount = requestsData.number
-        blockedCount = blockedData.number
-        
-        blockedSavedKbytes = blockedData.savedData
-    
-        chartView?.chartPoints = (requestsData.points, blockedData.points)
-        chartPointsChangedDelegate?.numberOfRequestsChanged()
+        DispatchQueue(label: "chart processing queue").async { [weak self] in
+            guard let self = self, let records = self.recordsByType[self.chartDateType] else { return }
+            let requestsInfo = self.getInfo(from: records)
+                
+            self.requestsCount = requestsInfo.requestsNumber
+            self.encryptedCount = requestsInfo.encryptedNumber
+                
+            self.averageElapsed = requestsInfo.averageElapsedTime
+            
+            self.chartView?.chartPoints = (requestsInfo.requestsPoints, requestsInfo.encryptedPoints)
+            self.chartPointsChangedDelegate?.numberOfRequestsChanged()
+        }
     }
     
-    private func getPoints(from requests: [RequestsStatisticsBlock]) -> (points: [Point], number: Int, savedData: Int){
+    private func getInfo(from records: [DnsStatisticsRecord]) -> (requestsPoints: [Point], requestsNumber: Int, encryptedPoints: [Point], encryptedNumber: Int, averageElapsedTime: Double){
         let maximumPointsNumber = 50
-        var pointsArray: [Point] = []
-        var savedKbytes = 0
-        var number = 0
-                
-        var requestsDates: [Date] = requests.map({ $0.date })
-        requestsDates.sort(by: { $0 < $1 })
         
-        let intervalTime = chartDateType.getTimeInterval(requestsDates: requestsDates)
+        var requestsPoints: [Point] = []
+        var requestsNumber: Int = 0
         
-        let firstDate = intervalTime.begin.timeIntervalSinceReferenceDate
-        let lastDate = intervalTime.end.timeIntervalSinceReferenceDate
+        var encryptedPoints: [Point] = []
+        var encryptedNumber = 0
         
-        chartView?.leftDateLabelText = chartDateType.getFormatterString(from: intervalTime.begin)
-        chartView?.rightDateLabelText = chartDateType.getFormatterString(from: intervalTime.end)
+        var elapsedSumm: Int = 0
+                    
+        let firstDate = records.first?.date ?? Date()
+        let lastDate = records.last?.date ?? Date()
         
-        if requestsDates.count < 2 {
-            return ([], 0, 0)
+        DispatchQueue.main.async { [weak self] in
+            self?.chartView?.leftDateLabelText = self?.chartDateType.getFormatterString(from: firstDate)
+            self?.chartView?.rightDateLabelText = self?.chartDateType.getFormatterString(from: lastDate)
         }
         
-        var xPosition: CGFloat = 0.0
-        for request in requests {
-            let date = request.date.timeIntervalSinceReferenceDate
-            if (date > firstDate && date < lastDate) || chartDateType == .alltime {
-                let point = Point(x: xPosition, y: CGFloat(integerLiteral: request.numberOfRequests))
-                number += request.numberOfRequests
-                savedKbytes += request.savedKbytes
-                pointsArray.append(point)
-                xPosition += 1.0
-            }
+        if records.count < 2 {
+            return ([], 0, [], 0, 0.0)
         }
         
-        if pointsArray.count > maximumPointsNumber {
-            let points = rearrangePoints(from: pointsArray, max: maximumPointsNumber)
-            return (points, number, savedKbytes)
+        let firstDateSecondsFromReferenceDate: CGFloat = CGFloat(firstDate.timeIntervalSinceReferenceDate)
+        for record in records {
+            let xPosition: CGFloat = CGFloat(record.date.timeIntervalSinceReferenceDate) - firstDateSecondsFromReferenceDate
+            
+            let requestPoint = Point(x: xPosition, y: CGFloat(integerLiteral: record.requests))
+            requestsPoints.append(requestPoint)
+            requestsNumber += record.requests
+            
+            let encryptedPoint = Point(x: xPosition, y: CGFloat(integerLiteral: record.encrypted))
+            encryptedPoints.append(encryptedPoint)
+            encryptedNumber += record.encrypted
+            
+            elapsedSumm += record.elapsedSumm
+        }
+        
+        let averageElapsedTime = Double(elapsedSumm) / Double(requestsNumber)
+        
+        if records.count > maximumPointsNumber {
+            let rearrangedRequestsPoints = rearrangePoints(from: requestsPoints, max: maximumPointsNumber)
+            let rearrangedEncryptedPoints = rearrangePoints(from: encryptedPoints, max: maximumPointsNumber)
+            
+            return (rearrangedRequestsPoints, requestsNumber, rearrangedEncryptedPoints, encryptedNumber, averageElapsedTime)
         } else {
-            return (pointsArray, number, savedKbytes)
+            return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
         }
     }
     
@@ -161,25 +165,36 @@ class ChartViewModel: ChartViewModelProtocol {
         var ratio: Float = Float(points.count) / Float(max)
         ratio = ceil(ratio)
         
-        var copyPoints = points.map({$0.y})
-        
+        var copyPoints = points
+    
         let intRatio = Int(ratio)
         var newPoints = [Point]()
-        var xPosition: CGFloat = 0.0
+        
+        /* X must be 0.0 for first records */
+        var isFirstRecord = true
         
         while !copyPoints.isEmpty {
-            let points = copyPoints.prefix(intRatio)
-            let sum = points.reduce(0, +)
-            let point = Point(x: xPosition, y: sum)
+            let mergedPoints = copyPoints.prefix(intRatio)
+            
+            let xPoints = mergedPoints.map({ $0.x })
+            let yPoints = mergedPoints.map({ $0.y })
+            
+            let ySumm = yPoints.reduce(0, +)
+            let xSumm = xPoints.reduce(0, +)
+            
+            let xPosition: CGFloat = isFirstRecord ? 0.0 : xSumm / CGFloat(xPoints.count)
+            
+            let point = Point(x: xPosition, y: ySumm)
             newPoints.append(point)
             
-            xPosition += 1.0
-            
             if copyPoints.count < intRatio {
+                copyPoints.forEach({ newPoints.append($0) })
                 copyPoints.removeAll()
             } else {
                 copyPoints.removeFirst(intRatio)
             }
+            
+            isFirstRecord = false
         }
         
         return newPoints

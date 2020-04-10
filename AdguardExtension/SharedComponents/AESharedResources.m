@@ -77,7 +77,7 @@ NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";
 
 NSString* AEDefaultsRequests = @"AEDefaultsRequests";
-NSString* AEDefaultsBlockedRequests = @"AEDefaultsBlockedRequests";
+NSString* AEDefaultsEncryptedRequests = @"AEDefaultsEncryptedRequests";
 NSString* LastStatisticsSaveTime = @"LastStatisticsSaveTime";
 
 NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
