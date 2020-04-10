@@ -103,11 +103,7 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     // MARK: - public methods
     
     func writeRecord(_ record: DnsStatisticsRecord) {
-        let group = DispatchGroup()
-        group.enter()
-        
         dbHandler?.inTransaction { (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             
             let dateString = ISO8601DateFormatter().string(from: record.date)
@@ -119,8 +115,6 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 DDLogError("DnsStatisticsService Error in writeRecord; Error: \(db.lastError().debugDescription)")
             }
         }
-        
-        group.wait()
         
         rearrangeRecordsIfNeeded()
     }
@@ -197,28 +191,19 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     
     func getRecordsCount() -> Int {
         var recordsCount = 0
-        let group = DispatchGroup()
-        group.enter()
         
         dbHandler?.inTransaction({ (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             
             if let result = db.executeQuery("SELECT count(*) AS count FROM DnsStatisticsTable", withArgumentsIn: []), result.next() == true {
                 recordsCount = Int(result.int(forColumn: "count"))
             }
         })
-        
-        group.wait()
         return recordsCount
     }
     
     func deleteAllRecords() {
-        let group = DispatchGroup()
-        group.enter()
-        
         dbHandler?.inTransaction { [weak self] (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             
             let result = db.executeUpdate("DELETE FROM DnsStatisticsTable", withArgumentsIn: [])
@@ -233,8 +218,6 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 DDLogError("DnsStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
             }
         }
-        
-        group.wait()
     }
     
     // MARK: - private methods

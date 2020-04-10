@@ -67,7 +67,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         let parser = domainsParserService.domainsParser
             
         for record in records {
-            let company = dnsTrackersService.getTrackerName(by: record.domain)
+            let company = dnsTrackersService.getTrackerInfo(by: record.domain)?.name
             let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
             let key = company ?? domain
                 

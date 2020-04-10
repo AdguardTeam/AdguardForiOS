@@ -65,11 +65,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     // MARK: - Public methods
     
     func writeRecords(_ records: [ActivityStatisticsRecord]){
-        let group = DispatchGroup()
-        group.enter()
-        
         dbHandler?.inTransaction{ (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             
             for record in records {
@@ -88,17 +84,11 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 }
             }
         }
-        
-        group.wait()
     }
     
     func getAllRecords() -> [ActivityStatisticsRecord] {
         var activityRecords = [ActivityStatisticsRecord]()
-        let group = DispatchGroup()
-        group.enter()
-        
         dbHandler?.inTransaction{ (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
     
             if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable", withArgumentsIn: []) {
@@ -109,18 +99,13 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 }
             }
         }
-        
-        group.wait()
         return activityRecords
     }
     
     func getRecords(by type: ChartDateType) -> [ActivityStatisticsRecord] {
         var activityRecords = [ActivityStatisticsRecord]()
-        let group = DispatchGroup()
-        group.enter()
         
         dbHandler?.inTransaction{ (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             let intervalTime = type.getTimeInterval()
             
@@ -135,16 +120,11 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 }
             }
         }
-        group.wait()
         return activityRecords
     }
     
     func deleteAllRecords() {
-        let group = DispatchGroup()
-        group.enter()
-        
         dbHandler?.inTransaction{ (db, rollback) in
-            defer { group.leave() }
             guard let db = db else { return }
             
             let result = db.executeUpdate("DELETE FROM ActivityStatisticsTable", withArgumentsIn: [])
@@ -153,8 +133,6 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
                 DDLogError("ActivityStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
             }
         }
-        
-        group.wait()
     }
 
     

@@ -181,26 +181,14 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     var filters = [DnsFilter]()
 
     var enabledFiltersCount: Int {
-        get {
-            var count = 0
-            filters.forEach { (filter) in
-                if filter.enabled {
-                    count += 1
-                }
-            }
-            return count
+        filters.reduce(0) { (result, filter) -> Int in
+            return result + (filter.enabled ? 1 : 0)
         }
     }
     
     var enabledRulesCount: Int {
-        get {
-            var count = 0
-            filters.forEach { (filter) in
-                if filter.enabled {
-                    count += filter.rulesCount ?? 0
-                }
-            }
-            return count
+        filters.reduce(0) { (result, filter) -> Int in
+            return result + (filter.rulesCount ?? 0)
         }
     }
     
