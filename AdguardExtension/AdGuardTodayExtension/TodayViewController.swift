@@ -242,7 +242,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     /**
-     Updates Tracking protection view
+     Updates DNS protection view
      */
     private func updateWidgetSystem(){
             

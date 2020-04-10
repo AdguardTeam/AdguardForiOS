@@ -410,7 +410,7 @@
 "about_version" = "Version";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your devices!";
+"getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your iOS devices!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Incorrect email or password";
@@ -428,7 +428,7 @@
 "wifi_exceptions_title" = "Wi-Fi exceptions";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Tracking protection will not work for Wi-Fi networks listed below";
+"wifi_exceptions_description" = "DNS protection will not work for Wi-Fi networks listed below";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Add an exception";
@@ -440,10 +440,10 @@
 "filter_wifi_title" = "Filter Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Tracking protection while on Mobile data";
+"mobile_data_description" = "DNS protection while on Mobile data";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Tracking protection while on Wi-Fi";
+"wifi_data_description" = "DNS protection while on Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Allowlist";
@@ -551,7 +551,7 @@
 "add_new_rule" = "Add a new rule";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "All settings, including user rules, tracking protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+"confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Reset activity log";
@@ -602,7 +602,7 @@
 "protection_enabled" = "Protection is enabled";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and Tracking protection";
+"complex_enabled" = "Safari and DNS protection";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari content blocking";
@@ -610,8 +610,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "All protection modules are disabled";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Tracking protection";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS protection";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requests, %2$d blocked";
@@ -754,6 +754,12 @@
 /* (DnsRequestDetailsController) - No rule found title */
 "no_rule_found" = "No rule found";
 
+/* (SystemProtectionEnablerController) - DNS protection is disabled title */
+"protection_enabler_title" = "DNS protection is disabled";
+
+/* (SystemProtectionEnablerController) - Enable title */
+"protection_enabler_button" = "Enable";
+
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Failed to send your feedback";
 
@@ -763,89 +769,6 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Basic Protection";
-
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Blocks most common tracking domains.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Strict Protection";
-
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Blocks all known trackers.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "May break some functionality.";
-
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Block Google trackers";
-
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Stops all known Google tracking domains.";
-
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "May interfere with apps and websites that use Google APIs.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Block Facebook trackers";
-
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Stops all known Facebook tracking domains.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "May interfere with apps and websites that use Facebook APIs.";
-
-/* (ActivityViewController) - Requests alert title */
-"requests_info_alert_title" = "Requests";
-
-/* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of requests to realize the scope of this problem.";
-
-/* (ActivityViewController) - Blocked alert title */
-"blocked_info_alert_title" = "Blocked requests";
-
-/* (ActivityViewController) - Blocked alert message */
-"blocked_info_alert_message" = "By default, AdGuard blocks only trackers that try to steal your data. To extend the blocking capabilities, configure your DNS filtering, Blocklist and Allowlist.";
-
-/* (ActivityViewController) - Data saved alert title */
-"data_saved_info_alert_title" = "Data saved";
-
-/* (ActivityViewController) - Data saved alert message */
-"data_saved_info_alert_message" = "This is an estimated amount of traffic you saved by blocking trackers.";
-
-/* (ActivityViewController) - Companies alert title */
-"companies_info_alert_title" = "Number of companies";
-
-/* (ActivityViewController) - Companies alert message */
-"companies_info_alert_message" = "This is the number of companies to which requests have been forwarded.";
-
-/* (ActivityViewController) - All requests alert action */
-"all_requests_alert_action" = "All requests";
-
-/* (ActivityViewController) - Blocked only alert action */
-"blocked_only_alert_action" = "Blocked only";
-
-/* (ActivityViewController) - Allowed only alert action */
-"allowed_only_alert_action" = "Allowed only";
-
-/* (ActivityViewController) - None message when there is no statistics */
-"none_message" = "None";
-
-/* (DnsLogContainerController) - Activity title */
-"activity_title" = "Activity";
-
-/* (MostActiveCompaniesController) - Requests number label */
-"requests_number" = "%d requests";
-
-/* (MostActiveCompaniesController) - Blocked number label */
-"blocked_number" = "%d blocked";
-
-/* (MostActiveCompaniesController) - Most active companies title */
-"most_active_companies" = "Most active companies";
-
-/* (MostActiveCompaniesController) - Most blocked companies title */
-"most_blocked_companies" = "Most blocked companies";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -872,11 +795,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Safari protection disabled";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Tracking protection enabled";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS protection enabled";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Tracking protection disabled";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS protection disabled";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Update filters";
@@ -892,9 +815,9 @@
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Enable tracking protection";
+"enable_system_protection_voiceover" = "Enable DNS protection";
 
 
 // MARK: - GetProTableController

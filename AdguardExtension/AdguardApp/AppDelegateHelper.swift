@@ -361,7 +361,7 @@ class AppDelegateHelper: NSObject {
                     }
                 }
             
-            // Turning on/off Tracking protection from widget
+            // Turning on/off DNS protection from widget
             case (AE_URLSCHEME, openSystemProtection):
                 let suffix = String(url.path.suffix(url.path.count - 1))
                 let parameters = suffix.split(separator: "/")
