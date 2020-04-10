@@ -80,7 +80,7 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func addAction(_ sender: Any) {
         checkUpstream { [weak self] in
             guard let self = self else { return }
-            let newProvider = self.dnsProvidersService.addProvider(name: self.nameField.text ?? "", upstreams: [self.upstreamsField.text ?? ""])
+            let newProvider = self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: self.upstreamsField.text ?? "")
             self.dnsProvidersService.activeDnsServer = newProvider.servers?.first
             self.vpnManager.updateSettings(completion: nil)
             self.dismiss(animated: true, completion: nil)
@@ -108,9 +108,11 @@ class NewDnsServerController: BottomAlertController {
         checkUpstream { [weak self] in
             guard let self = self else { return }
             if self.provider == nil || self.provider?.servers?.first == nil { return }
+            let upstream = self.upstreamsField.text ?? ""
             self.provider!.name = self.nameField.text ?? ""
-            self.provider!.servers?.first!.upstreams = [self.upstreamsField.text ?? ""]
+            self.provider!.servers?.first!.upstreams = [upstream]
             self.provider!.servers?.first!.name = self.provider!.name
+            self.provider!.servers?.first!.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
             self.dnsProvidersService.updateProvider(self.provider!)
             
             if self.dnsProvidersService.isActiveProvider(self.provider!) {
