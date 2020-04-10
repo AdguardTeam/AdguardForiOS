@@ -205,7 +205,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="9ZO-1D-gkb"/>
+                                                        <constraint firstAttribute="height" constant="1" id="9ZO-1D-gkb"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -301,7 +301,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="tdl-4V-eOh"/>
+                                                        <constraint firstAttribute="height" constant="1" id="tdl-4V-eOh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -408,7 +408,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="3Z3-PR-W6c"/>
+                                                        <constraint firstAttribute="height" constant="1" id="3Z3-PR-W6c"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -454,7 +454,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="N3C-lA-FCw">
                                         <rect key="frame" x="0.0" y="772" width="414" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N3C-lA-FCw" id="MQF-ay-7AF">
+                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N3C-lA-FCw" id="MQF-ay-7AF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -568,6 +568,7 @@
                         <outletCollection property="themableLabels" destination="0ZJ-BI-849" collectionClass="NSMutableArray" id="WiD-OR-nP2"/>
                         <outletCollection property="themableLabels" destination="YCi-pz-es6" collectionClass="NSMutableArray" id="0Ov-Bm-TKK"/>
                         <outletCollection property="themableLabels" destination="pY3-X6-fFy" collectionClass="NSMutableArray" id="jhn-ye-06q"/>
+                        <outletCollection property="separators" destination="BlE-s9-qaB" collectionClass="NSMutableArray" id="vMH-4Z-EiM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wY8-my-bWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
