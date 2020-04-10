@@ -723,14 +723,8 @@ static NSTimeInterval lastCheckTime;
 - (void)showAlertNotification:(NSNotification *)notification {
     NSString *body = notification.userInfo[UserNotificationService.notificationBody];
     NSString *title = notification.userInfo[UserNotificationService.notificationTitle];
-    ASSIGN_WEAK(self);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        ASSIGN_STRONG(self);
-        UINavigationController *nav = [USE_STRONG(self) getNavigationController];
-        UIViewController *vc = [nav topViewController];
-        
-        [ACSSystemUtils showSimpleAlertForController:vc withTitle:title message:body];
-    });
+    
+    [helper showCommonAlertForTopVc:body :title];
 }
 
 - (void)openDnsFiltersController{
