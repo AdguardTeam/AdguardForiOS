@@ -749,48 +749,6 @@
 "introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
 
-/* (ActivityViewController) - Requests alert title */
-"requests_info_alert_title" = "Requests";
-
-/* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of requests to realize the scope of this problem.";
-
-/* (ActivityViewController) - encrypted alert title */
-"encrypted_info_alert_title" = "Encrypted requests";
-
-/* (ActivityViewController) - encrypted alert message */
-"encrypted_info_alert_message" = "The number of encrypted DNS requests. You need to use an encrypted DNS server to have your DNS traffic encrypted.";
-
-/* (ActivityViewController) - Average time title */
-"average_info_alert_title" = "Average time";
-
-/* (ActivityViewController) - Average time message */
-"average_info_alert_message" = "Average time it takes to process a DNS request. The faster DNS server you use, the lower this would be.";
-
-/* (ActivityViewController) - Companies alert title */
-"companies_info_alert_title" = "Number of companies";
-
-/* (ActivityViewController) - Companies alert message */
-"companies_info_alert_message" = "This is the number of companies to which requests have been forwarded.";
-
-/* (ActivityViewController) - All requests alert action */
-"all_requests_alert_action" = "All requests";
-
-/* (ActivityViewController) - Blocked only alert action */
-"blocked_only_alert_action" = "Blocked only";
-
-/* (ActivityViewController) - Allowed only alert action */
-"allowed_only_alert_action" = "Allowed only";
-
-/* (ActivityViewController) - None message when there is no statistics */
-"none_message" = "None";
-
-/* (DnsLogContainerController) - Activity title */
-"activity_title" = "Activity";
-
-/* (MostActiveCompaniesController) - Requests number label */
-"requests_number" = "%d requests";
-
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
