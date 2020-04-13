@@ -25,7 +25,6 @@
 #import "AESAntibanner.h"
 #import "AESFilterConverter.h"
 #import "AESharedResources.h"
-#import "AESProductSchemaManager.h"
 #import "ACDnsUtils.h"
 #import "Adguard-Swift.h"
 
