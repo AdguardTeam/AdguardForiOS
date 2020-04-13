@@ -132,6 +132,14 @@ extension String {
         formatter.numberStyle = .decimal
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
+        
+        let seconds = number.doubleValue / 1000
+        if seconds >= 1 {
+            formatter.maximumFractionDigits = 1
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: seconds)) ?? "\(number.intValue)"
+            return String(format: String.localizedString("ms_unit"), formatterString)
+        }
+        
         formatter.maximumFractionDigits = 0
         let formatterString = formatter.string(from: number) ?? "\(number.intValue)"
         return String(format: String.localizedString("ms_unit"), formatterString)

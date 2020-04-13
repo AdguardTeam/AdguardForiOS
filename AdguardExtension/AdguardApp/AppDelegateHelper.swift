@@ -86,7 +86,7 @@ class AppDelegateHelper: NSObject {
             return
         }
         
-        guard let firstPageNavController = mainTabBar.viewControllers?.first as? MainNavigationController else {
+        guard let firstPageNavController = mainTabBar.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else {
             assertionFailure("there is no navigation controller on first page")
             return
         }
@@ -100,6 +100,20 @@ class AppDelegateHelper: NSObject {
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
         }
+        
+        guard let activityPageNavController = mainTabBar.viewControllers?[TabBarTabs.activityTab.rawValue] as? MainNavigationController else {
+            assertionFailure("there is no navigation controller on activity page")
+            return
+        }
+        
+        guard let dnsLogContainerVC = activityPageNavController.viewControllers.first as? DnsLogContainerController else {
+            assertionFailure("there is no ActivityViewController on activity page")
+            return
+        }
+        /**
+         To quickly show stats in ActivityViewController, we load ViewController when app starts
+         */
+        dnsLogContainerVC.loadViewIfNeeded()
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
