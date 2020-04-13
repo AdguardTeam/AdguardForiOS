@@ -78,13 +78,6 @@ protocol DnsProvidersServiceProtocol {
             if customProvidersInternal == nil {
                 if let data = resources.sharedDefaults().object(forKey: APDefaultsCustomDnsProviders) as? Data {
                     customProvidersInternal = NSKeyedUnarchiver.unarchiveObject(with: data) as? [DnsProviderInfo] ?? []
-                    
-                    /**
-                     Migration:
-                     in app version 4.0 we began to inititalize custom dns servers with dns protocol,
-                     for previously added custom servers we set protocol here
-                     */
-                    setProtocolForCustomProviders()
                 }
             }
             
@@ -374,13 +367,5 @@ protocol DnsProvidersServiceProtocol {
         }
         
         return provider.servers?.first?.dnsProtocol ?? .dns
-    }
-    
-    private func setProtocolForCustomProviders(){
-        for provider in customProvidersInternal ?? [] {
-            if let server = provider.servers?.first, server.dnsProtocol == .dns, let upstream = server.upstreams.first {
-                server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-            }
-        }
     }
 }

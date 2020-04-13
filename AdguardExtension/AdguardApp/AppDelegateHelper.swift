@@ -39,6 +39,7 @@ class AppDelegateHelper: NSObject {
     lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
+    lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -123,14 +124,14 @@ class AppDelegateHelper: NSObject {
         addPurchaseStatusObserver()
         
         if (firstRun) {
-            AESProductSchemaManager.install()
+            migrationService.install()
             purchaseService.checkLicenseStatus()
             firstRun = false
         } else {
-            AESProductSchemaManager.upgrade(withAntibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networking)
+            migrationService.migrateIfNeeded()
         }
         
-        return true;
+        return true
     }
     
     var statusViewCounter = 0
