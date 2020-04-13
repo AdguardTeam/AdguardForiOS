@@ -188,7 +188,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     var enabledRulesCount: Int {
         filters.reduce(0) { (result, filter) -> Int in
-            return result + (filter.rulesCount ?? 0)
+            return result + (filter.enabled ? (filter.rulesCount ?? 0) : 0)
         }
     }
     
