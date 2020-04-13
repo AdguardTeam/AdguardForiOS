@@ -121,6 +121,7 @@ class MigrationService: MigrationServiceProtocol {
                 if newProtocol != server.dnsProtocol {
                     changesCount += 1
                     server.dnsProtocol = newProtocol
+                    dnsProvidersService.updateProvider(provider)
                 }
             }
         }

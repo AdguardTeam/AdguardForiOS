@@ -172,6 +172,11 @@ protocol DnsProvidersServiceProtocol {
                 if server.serverId == provider.servers?.first?.serverId {
                     server.name = provider.servers?.first?.name ?? ""
                     server.upstreams = provider.servers?.first?.upstreams ?? []
+                    server.dnsProtocol = provider.servers?.first?.dnsProtocol ?? .dns
+                    
+                    if server.serverId == activeDnsServer?.serverId {
+                        activeDnsServer = server
+                    }
                 }
                 
                 return currentProvider
