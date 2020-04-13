@@ -704,6 +704,7 @@
 		7EA2163A2444847700393949 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA216392444847700393949 /* MigrationService.swift */; };
 		7EA2163C24449EA700393949 /* MigrationServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2163B24449EA700393949 /* MigrationServiceTest.swift */; };
 		7EA2163D24449EEC00393949 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA216392444847700393949 /* MigrationService.swift */; };
+		7EA2163F2444C76700393949 /* DnsFiltersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2163E2444C76700393949 /* DnsFiltersServiceMock.swift */; };
 		7EA2B3252424FE8F00FD3304 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */; };
 		7EA2B3262424FE8F00FD3304 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		7EA3DBC524090D7B000D8D42 /* Animation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */; };
@@ -2299,6 +2300,7 @@
 		7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverter.swift; sourceTree = "<group>"; };
 		7EA216392444847700393949 /* MigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationService.swift; sourceTree = "<group>"; };
 		7EA2163B24449EA700393949 /* MigrationServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationServiceTest.swift; sourceTree = "<group>"; };
+		7EA2163E2444C76700393949 /* DnsFiltersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersServiceMock.swift; sourceTree = "<group>"; };
 		7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Utils.swift"; sourceTree = "<group>"; };
@@ -4293,6 +4295,7 @@
 				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
 				7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */,
 				D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */,
+				7EA2163E2444C76700393949 /* DnsFiltersServiceMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -6348,6 +6351,7 @@
 				7EF14476242A287D0034A727 /* ActivityStatisticsRecord.swift in Sources */,
 				7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */,
 				D0E84F0F242A32BF0000EEDB /* AEInvertedWhitelistDomainsObjectTest.swift in Sources */,
+				7EA2163F2444C76700393949 /* DnsFiltersServiceMock.swift in Sources */,
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0D5949A23AA3CAD0033CAF3 /* ADBTable.m in Sources */,
 				7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */,
