@@ -225,8 +225,18 @@ class ChartView: UIView {
         let requestLineLayer = CAShapeLayer()
         let encryptedLineLayer = CAShapeLayer()
         
-        let requestPoints = convertPoints(points: chartPoints.requests)
-        let encryptedPoints = convertPoints(points: chartPoints.encrypted)
+        var requestPoints = convertPoints(points: chartPoints.requests)
+        var encryptedPoints = convertPoints(points: chartPoints.encrypted)
+        
+        if requestPoints.count < 3 {
+            maxXelement = 10.0
+            requestPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+        }
+        
+        if encryptedPoints.count < 3 {
+            maxXelement = 10.0
+            encryptedPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+        }
         
         guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
             let blockedPath = UIBezierPath(quadCurve: encryptedPoints)

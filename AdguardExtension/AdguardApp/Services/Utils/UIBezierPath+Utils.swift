@@ -20,7 +20,7 @@ import Foundation
 
 extension UIBezierPath {
     
-    public convenience init?(quadCurve points: [CGPoint]) {
+    convenience init?(quadCurve points: [CGPoint]) {
         guard points.count > 1 else { return nil }
         
         self.init()
