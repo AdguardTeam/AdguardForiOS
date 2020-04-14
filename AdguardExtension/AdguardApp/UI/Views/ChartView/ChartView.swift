@@ -280,10 +280,7 @@ class ChartView: UIView {
         var newPoints = [CGPoint]()
                 
         for point in preparedPoints {
-            var ratioY: CGFloat = (point.y / maxYelement) * 0.7
-            
-            // There is a devision by zero, when initializing this variables
-            ratioY = ratioY.isNaN ? 0.0 : ratioY
+            let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (point.y / maxYelement) * 0.7
 
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
             //newPoints.append(CGPoint(x: newX, y: newY))
@@ -300,10 +297,7 @@ class ChartView: UIView {
         var newPoints = [Point]()
         
         for point in points {
-            var ratioX: CGFloat = point.x / maxXelement
-            
-            // There is a devision by zero, when initializing this variables
-            ratioX = ratioX.isNaN ? 0.0 : ratioX
+            let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
             let newX = (frame.width * ratioX).rounded(.up)
             
             var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
