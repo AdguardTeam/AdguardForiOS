@@ -33,14 +33,14 @@ class SharedResourcesTest: XCTestCase {
 
     func testFilterEnabled() {
         
-        // developer mode and all keys are undefined
+        // advanced mode and all keys are undefined
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
         
-        // define developer mode as false
+        // define advanced mode as false
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
         
         // all filters must be enabled
@@ -49,7 +49,7 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
         
-        // set developer mode to true
+        // set advanced mode to true
         
         resources.sharedDefaults().set(true, forKey: AEDefaultsDeveloperMode)
 
@@ -83,16 +83,16 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertFalse(resources.systemWhitelistEnabled)
         XCTAssertFalse(resources.systemUserFilterEnabled)
         
-        // set developer mode true
+        // set advanced mode true
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
         
-        // all filters must be enabled, because developer mode is false
+        // all filters must be enabled, because advanced mode is false
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
         
-        // undefine developer mode
+        // undefine advanced mode
         resources.sharedDefaults().removeObject(forKey: AEDefaultsDeveloperMode)
         
         // all filters must be enabled

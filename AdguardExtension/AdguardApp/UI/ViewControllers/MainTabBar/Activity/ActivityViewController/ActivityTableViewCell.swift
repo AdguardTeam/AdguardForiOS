@@ -28,7 +28,7 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var blockStateView: UIView!
     @IBOutlet weak var timeLabel: ThemableLabel!
     
-    var developerMode: Bool = true
+    var advancedMode: Bool = true
     
     var domainsParser: DomainParser?
     
@@ -66,9 +66,9 @@ class ActivityTableViewCell: UITableViewCell {
         guard let record = record else { return }
         let timeString = record.logRecord.time()
         let name = record.category.name
-        let domain = record.logRecord.getDetailsString(infoLabel.font.pointSize, developerMode)
+        let domain = record.logRecord.getDetailsString(infoLabel.font.pointSize, advancedMode)
         
-        companyLabel.text = (name == nil || developerMode) ? record.logRecord.firstLevelDomain(parser: domainsParser) : name
+        companyLabel.text = (name == nil || advancedMode) ? record.logRecord.firstLevelDomain(parser: domainsParser) : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
         

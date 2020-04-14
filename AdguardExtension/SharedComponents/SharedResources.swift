@@ -199,11 +199,11 @@ extension AESharedResourcesProtocol {
             return defaultValue
         }
         
-        guard let developerMode = sharedDefaults().object(forKey: AEDefaultsDeveloperMode) as? Bool else {
+        guard let advancedMode = sharedDefaults().object(forKey: AEDefaultsDeveloperMode) as? Bool else {
             return defaultValue
         }
         
-        if !developerMode {
+        if !advancedMode {
             return defaultValue
         }
         

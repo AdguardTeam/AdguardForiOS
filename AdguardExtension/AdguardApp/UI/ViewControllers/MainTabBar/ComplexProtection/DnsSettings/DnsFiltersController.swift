@@ -121,7 +121,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
             return 0.0
         }
 
-        if !configuration.developerMode && indexPath.section == addFilterSection {
+        if !configuration.advancedMode && indexPath.section == addFilterSection {
             return 0.0
         }
 
@@ -176,7 +176,7 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         } else if indexPath.section == addFilterSection {
             if let cell = tableView.dequeueReusableCell(withIdentifier: addFilterCellReuseId) as? AddFilterCell {
                 theme.setupTableCell(cell)
-                if model.isSearchActive || !configuration.developerMode{
+                if model.isSearchActive || !configuration.advancedMode{
                     cell.isHidden = true
                 }
                 return cell

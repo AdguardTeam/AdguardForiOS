@@ -143,8 +143,8 @@ class DnsSettingsController : UITableViewController {
             cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
             if indexPath.row == dnsFilteringRow && proStatus {
-                cell.isHidden = !configuration.developerMode
-                networkSettingsSeparator.isHidden = !configuration.developerMode
+                cell.isHidden = !configuration.advancedMode
+                networkSettingsSeparator.isHidden = !configuration.advancedMode
             }
         }
 
@@ -161,7 +161,7 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             
-            if indexPath.row == dnsFilteringRow && !configuration.developerMode {
+            if indexPath.row == dnsFilteringRow && !configuration.advancedMode {
                 return 0.0
             }
             

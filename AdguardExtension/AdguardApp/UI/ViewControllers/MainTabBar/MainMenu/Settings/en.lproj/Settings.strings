@@ -40,8 +40,8 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Advanced settings";
 
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Developer mode";
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Advanced mode";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality";

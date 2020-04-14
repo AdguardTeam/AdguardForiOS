@@ -29,7 +29,7 @@ class SettingsController: UITableViewController {
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
-    @IBOutlet weak var developerModeSwitch: UISwitch!
+    @IBOutlet weak var advancedModeSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableFooterView: UIView!
@@ -47,7 +47,7 @@ class SettingsController: UITableViewController {
     
     private let wifiOnlyRow = 0
     private let invertWhitelistRow = 1
-    private let developerModeRow = 2
+    private let advancedModeRow = 2
     private let advancedSettingsRow = 3
     private let resetStatisticsRow = 4
     
@@ -72,7 +72,7 @@ class SettingsController: UITableViewController {
         let wifiOnly = wifiOnlyObject?.boolValue ?? true
         wifiUpdateSwitch.isOn = wifiOnly
         
-        developerModeSwitch.isOn = configuration.developerMode
+        advancedModeSwitch.isOn = configuration.advancedMode
         
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
         invertedSwitch.isOn = inverted
@@ -101,9 +101,9 @@ class SettingsController: UITableViewController {
         case (otherSection, invertWhitelistRow):
             invertedSwitch.setOn(!invertedSwitch.isOn, animated: true)
             toggleInverted(invertedSwitch)
-        case (otherSection, developerModeRow):
-            developerModeSwitch.setOn(!developerModeSwitch!.isOn, animated: true)
-            developerModeAction(developerModeSwitch)
+        case (otherSection, advancedModeRow):
+            advancedModeSwitch.setOn(!advancedModeSwitch!.isOn, animated: true)
+            advancedModeAction(advancedModeSwitch)
         case (otherSection, resetStatisticsRow):
             resetStatistics(indexPath)
         default:
@@ -123,8 +123,8 @@ class SettingsController: UITableViewController {
         invertWhitelist()
     }
     
-    @IBAction func developerModeAction(_ sender: UISwitch) {
-        configuration.developerMode = sender.isOn
+    @IBAction func advancedModeAction(_ sender: UISwitch) {
+        configuration.advancedMode = sender.isOn
         if !sender.isOn {
            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
@@ -235,7 +235,7 @@ class SettingsController: UITableViewController {
             }
         }
         
-        if !configuration.developerMode && indexPath.section == otherSection && indexPath.row == advancedSettingsRow {
+        if !configuration.advancedMode && indexPath.section == otherSection && indexPath.row == advancedSettingsRow {
             tableView.cellForRow(at: indexPath)?.isHidden = true
             return 0.0
         }

@@ -67,7 +67,7 @@ class ActivityViewController: UITableViewController {
     private var themeToken: NotificationToken?
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
-    private var developerModeToken: NSKeyValueObservation?
+    private var advancedModeToken: NSKeyValueObservation?
     private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - Public variables
@@ -108,7 +108,7 @@ class ActivityViewController: UITableViewController {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         statisticsModel.obtainStatistics()
-        filterButton.isHidden = !configuration.developerMode
+        filterButton.isHidden = !configuration.advancedMode
     }
     
     override func viewDidLayoutSubviews() {
@@ -209,7 +209,7 @@ class ActivityViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
-            cell.developerMode = configuration.developerMode
+            cell.advancedMode = configuration.advancedMode
             cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
@@ -257,10 +257,10 @@ class ActivityViewController: UITableViewController {
         mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
     }
     
-    private func observeDeveloperMode(){
+    private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            self.filterButton.isHidden = !self.configuration.developerMode
+            self.filterButton.isHidden = !self.configuration.advancedMode
             self.tableView.reloadData()
         }
     }
@@ -391,8 +391,8 @@ class ActivityViewController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
-            self?.observeDeveloperMode()
+        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+            self?.observeAdvancedMode()
         }
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in

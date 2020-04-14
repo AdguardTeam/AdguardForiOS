@@ -66,7 +66,7 @@ class RequestsBlockingController: UITableViewController {
             self?.updateTheme()
         }
         
-        configurationToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+        configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             guard let self = self else { return }
             self.tableView.reloadData()
         }
