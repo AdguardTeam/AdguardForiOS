@@ -26,7 +26,7 @@ class MigrationServiceTest: XCTestCase {
     let resources = SharedResourcesMock()
 
     override func setUp() {
-        migrationService = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProvidersService, resources: resources, antibanner: AntibannerMock(), dnsFiltersService: DnsFiltersServiceMock(), networking: NetworkMock())
+        migrationService = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProvidersService, resources: resources, antibanner: AntibannerMock(), dnsFiltersService: DnsFiltersServiceMock(), networking: NetworkMock(), activityStatisticsService: ActivityStatisticsServiceMock(), dnsStatisticsService: DnsStatisticsServiceMock())
     }
     
     func testMajorMigration() {
