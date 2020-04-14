@@ -23,6 +23,7 @@ import Foundation
 @objc protocol ActivityStatisticsServiceWriterProtocol {
     func writeRecords(_ records: [ActivityStatisticsRecord])
     func deleteAllRecords()
+    func reset()
 }
 
 protocol ActivityStatisticsServiceReaderProtocol {
@@ -135,6 +136,24 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
         }
     }
 
+    func reset() {
+        dbHandler = nil
+        
+        // delete database file
+        let url = resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
+        try? FileManager.default.removeItem(atPath: url.path)
+        
+        dbHandler = {
+            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+            
+            handler?.inTransaction{[weak self] (db, rollback) in
+                self?.createDnsLogTable(db!)
+            }
+            
+            return handler
+        }()
+        print(dbHandler)
+    }
     
     // MARK: - private methods
     

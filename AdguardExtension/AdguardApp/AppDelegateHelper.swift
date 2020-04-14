@@ -39,6 +39,10 @@ class AppDelegateHelper: NSObject {
     lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
+    lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var activityStatisticsService: ActivityStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var dnsStatisticsService: DnsStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -204,6 +208,9 @@ class AppDelegateHelper: NSObject {
             self.antibannerController.reset()
             self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
+            self.activityStatisticsService.reset()
+            self.dnsStatisticsService.reset()
+            self.dnsLogRecordsService.reset()
             
             let group = DispatchGroup()
             group.enter()

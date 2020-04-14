@@ -24,6 +24,7 @@ protocol DnsLogRecordsServiceProtocol{
     func readRecords()->[DnsLogRecord]
     func set(rowId: NSNumber, status: DnsLogRecordUserStatus, userRule: String?)
     func clearLog()
+    func reset()
 }
 
 @objc
@@ -119,6 +120,10 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             table?.update(withKeys: ["rowid"], fromRowObject: row, updateFields: [], fromRowObject: row)
         }
+    }
+    
+    func reset() {
+        
     }
     
     // MARK: - private methods

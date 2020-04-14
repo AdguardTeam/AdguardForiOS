@@ -55,6 +55,8 @@ protocol DnsStatisticsServiceProtocol {
     func getRecordsCount() -> Int
     
     func deleteAllRecords()
+    
+    func reset()
 }
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
@@ -218,6 +220,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                 DDLogError("DnsStatisticsService Error in deleteAllRecords; Error: \(db.lastError().debugDescription)")
             }
         }
+    }
+    
+    func reset() {
+        
     }
     
     // MARK: - private methods
