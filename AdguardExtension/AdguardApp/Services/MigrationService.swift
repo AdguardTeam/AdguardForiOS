@@ -33,16 +33,20 @@ class MigrationService: MigrationServiceProtocol {
     private let antibanner: AESAntibannerProtocol
     private let dnsFiltersService: DnsFiltersServiceProtocol
     private let networking: ACNNetworkingProtocol
+    private let activityStatisticsService: ActivityStatisticsServiceProtocol
+    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol) {
+    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
         self.antibanner = antibanner
         self.dnsFiltersService = dnsFiltersService
         self.networking = networking
+        self.activityStatisticsService = activityStatisticsService
+        self.dnsStatisticsService = dnsStatisticsService
     }
     
     func install() {
@@ -99,11 +103,23 @@ class MigrationService: MigrationServiceProtocol {
         
         /**
         Migration:
-        in app version 4.0 (446) we began to inititalize custom dns servers with dns protocol,
-        for previously added custom servers we set protocol here
+         In app version 4.0 (446) we began to inititalize custom dns servers with dns protocol
+         for previously added custom servers we set protocol here
         */
-        if lastBuildVersion < 447 {
+        if lastBuildVersion < 446 {
+            DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             setProtocolForCustomProviders()
+        }
+        
+        /**
+        Migration:
+         In app version 4.0 (448) we've begun reseting all statistics while resetting the settings;
+         In early versions of 4.0 we were detecting blocked requests instead of encrypted;
+         Early app version hasn't reached app store, so we just reset old statistics and db files.
+        */
+        if lastBuildVersion < 448 {
+            DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            resetStatistics()
         }
         
         updateAntibanner()
@@ -134,6 +150,20 @@ class MigrationService: MigrationServiceProtocol {
                 }
             }
         }
+    }
+    
+    private func resetStatistics(){
+        /* Reseting statistics Start*/
+        self.activityStatisticsService.stopDb()
+        self.dnsStatisticsService.stopDb()
+        
+        // delete database file
+        let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
+        try? FileManager.default.removeItem(atPath: url.path)
+        
+        /* Reseting statistics end */
+        self.activityStatisticsService.startDb()
+        self.dnsStatisticsService.startDb()
     }
     
     private func enableGroupsWithEnabledFilters() -> Bool {
