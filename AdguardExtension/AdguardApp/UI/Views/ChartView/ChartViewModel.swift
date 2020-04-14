@@ -112,8 +112,6 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     private func getInfo(from records: [DnsStatisticsRecord]) -> (requestsPoints: [Point], requestsNumber: Int, encryptedPoints: [Point], encryptedNumber: Int, averageElapsedTime: Double){
-        let maximumPointsNumber = 50
-        
         var requestsPoints: [Point] = []
         var requestsNumber: Int = 0
         
@@ -150,54 +148,7 @@ class ChartViewModel: ChartViewModelProtocol {
         }
         
         let averageElapsedTime = Double(elapsedSumm) / Double(requestsNumber)
-        
-        if records.count > maximumPointsNumber {
-            let rearrangedRequestsPoints = rearrangePoints(from: requestsPoints, max: maximumPointsNumber)
-            let rearrangedEncryptedPoints = rearrangePoints(from: encryptedPoints, max: maximumPointsNumber)
-            
-            return (rearrangedRequestsPoints, requestsNumber, rearrangedEncryptedPoints, encryptedNumber, averageElapsedTime)
-        } else {
-            return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
-        }
+
+        return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
     }
-    
-    private func rearrangePoints(from points: [Point], max: Int) -> [Point] {
-        var ratio: Float = Float(points.count) / Float(max)
-        ratio = ceil(ratio)
-        
-        var copyPoints = points
-    
-        let intRatio = Int(ratio)
-        var newPoints = [Point]()
-        
-        /* X must be 0.0 for first records */
-        var isFirstRecord = true
-        
-        while !copyPoints.isEmpty {
-            let mergedPoints = copyPoints.prefix(intRatio)
-            
-            let xPoints = mergedPoints.map({ $0.x })
-            let yPoints = mergedPoints.map({ $0.y })
-            
-            let ySumm = yPoints.reduce(0, +)
-            let xSumm = xPoints.reduce(0, +)
-            
-            let xPosition: CGFloat = isFirstRecord ? 0.0 : xSumm / CGFloat(xPoints.count)
-            
-            let point = Point(x: xPosition, y: ySumm)
-            newPoints.append(point)
-            
-            if copyPoints.count < intRatio {
-                copyPoints.forEach({ newPoints.append($0) })
-                copyPoints.removeAll()
-            } else {
-                copyPoints.removeFirst(intRatio)
-            }
-            
-            isFirstRecord = false
-        }
-        
-        return newPoints
-    }
-    
 }

@@ -79,7 +79,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
                 self?.updateTheme()
         }
         
-        conficurationObservation = configuration.observe(\.developerMode) { [weak self] (_, _) in
+        conficurationObservation = configuration.observe(\.advancedMode) { [weak self] (_, _) in
             self?.tableView.reloadData()
         }
         
@@ -193,7 +193,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        if state == .normal && (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.developerMode {
+        if state == .normal && (indexPath.section, indexPath.row) == (enableListOfRulesSection, enableRow) && !configuration.advancedMode {
             return 0.0
         }
 

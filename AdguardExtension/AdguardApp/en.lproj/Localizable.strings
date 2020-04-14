@@ -37,6 +37,9 @@
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
 
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
+
 /* (MainPageController) Text for data units (M) Millions */
 "millions_unit" = "%@M";
 

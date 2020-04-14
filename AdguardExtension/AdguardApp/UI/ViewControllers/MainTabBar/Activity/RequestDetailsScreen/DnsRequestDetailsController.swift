@@ -77,7 +77,7 @@ class DnsRequestDetailsController: UITableViewController {
             self?.updateTheme()
         }
         
-        configurationToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+        configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             guard let self = self else { return }
             self.createCellModels()
             self.tableView.reloadData()
@@ -348,7 +348,7 @@ class DnsRequestDetailsController: UITableViewController {
         let elapsedTitle = String.localizedString("elapsed_title")
         let elapsedString = String(format: "%d ms", elapsed)
         let elapsedModel = LogCellModel(copiedString: elapsedString, title: elapsedTitle, info: elapsedString, theme: theme)
-        if configuration.developerMode {
+        if configuration.advancedMode {
             generalSection = generalSectionToAssign
             elapsedCell = IndexPath(row: generalRows, section: generalSection!)
             generalRows += 1
@@ -387,7 +387,7 @@ class DnsRequestDetailsController: UITableViewController {
         let sizeTitle = String.localizedString("size_title")
         let size = String(format: "%d B / %d B", bytesReceived, bytesSent)
         let sizeModel = LogCellModel(isDataCell: true, copiedString: size, title: sizeTitle, bytesSent: bytesSentText, bytesReceived: bytesReceivedText, theme: theme)
-        if configuration.developerMode{
+        if configuration.advancedMode {
             generalSection = generalSectionToAssign
             sizeCell = IndexPath(row: generalRows, section: generalSection!)
             generalRows += 1
@@ -488,7 +488,7 @@ class DnsRequestDetailsController: UITableViewController {
         let typeTitle = String.localizedString("type_title")
         let typeModelIsNil = type.isEmpty
         let typeModel = typeModelIsNil ? nil : LogCellModel(copiedString: type, title: typeTitle, info: type, theme: theme)
-        if !typeModelIsNil && configuration.developerMode {
+        if !typeModelIsNil && configuration.advancedMode {
             dnsSection = dnsSectionToAssign
             typeCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
@@ -500,7 +500,7 @@ class DnsRequestDetailsController: UITableViewController {
         let dnsStatusTitle = String.localizedString("dns_status_title")
         let dnsStatusModelIsNil = dnsStatus.isEmpty
         let dnsStatusModel = dnsStatusModelIsNil ? nil : LogCellModel(copiedString: dnsStatus, title: dnsStatusTitle, info: dnsStatus, theme: theme)
-        if !dnsStatusModelIsNil && configuration.developerMode {
+        if !dnsStatusModelIsNil && configuration.advancedMode {
             dnsSection = dnsSectionToAssign
             dnsStatusCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
@@ -512,7 +512,7 @@ class DnsRequestDetailsController: UITableViewController {
         let dnsUpstreamTitle = String.localizedString("dns_upstream_title")
         let dnsUpstreamModelIsNil = dnsUpstream.isEmpty
         let dnsUpstreamModel = dnsUpstreamModelIsNil ? nil : LogCellModel(copiedString: dnsUpstream, title: dnsUpstreamTitle, info: dnsUpstream, theme: theme)
-        if !dnsUpstreamModelIsNil && configuration.developerMode {
+        if !dnsUpstreamModelIsNil && configuration.advancedMode {
             dnsSection = dnsSectionToAssign
             dnsUpstreamCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
@@ -525,7 +525,7 @@ class DnsRequestDetailsController: UITableViewController {
         let answerString = dnsAnswer.isEmpty ? emptyAnswer : dnsAnswer
         let dnsAnserTitle = String.localizedString("dns_answer_title")
         let dnsAnswerModel = LogCellModel(copiedString: answerString, title: dnsAnserTitle, info: answerString, theme: theme)
-        if configuration.developerMode {
+        if configuration.advancedMode {
             dnsSection = dnsSectionToAssign
             dnsAnswerCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1
@@ -537,7 +537,7 @@ class DnsRequestDetailsController: UITableViewController {
         let originalAnswerTitle = String.localizedString("original_answer_title")
         let originalAnswerModelIsNil = originalAnswer.isEmpty
         let originalAnswerModel = originalAnswerModelIsNil ? nil : LogCellModel(copiedString: originalAnswer, title: originalAnswerTitle, info: originalAnswer, theme: theme)
-        if !originalAnswerModelIsNil && configuration.developerMode {
+        if !originalAnswerModelIsNil && configuration.advancedMode {
             dnsSection = dnsSectionToAssign
             originalAnswerCell = IndexPath(row: dnsRows, section: dnsSection!)
             dnsRows += 1

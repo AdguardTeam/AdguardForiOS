@@ -1,9 +1,6 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "ADD";
 
-/* Class = "UILabel"; text = "0"; ObjectID = "3mo-qx-mDo"; */
-"3mo-qx-mDo.text" = "0";
-
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "encrypted";
 
@@ -19,17 +16,11 @@
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Most active companies";
 
-/* Class = "UILabel"; text = "0"; ObjectID = "F4A-Cw-TxW"; */
-"F4A-Cw-TxW.text" = "0";
-
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Activity";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
 "J13-xW-KiK.normalTitle" = "Copied";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "Jgb-st-fnO"; */
-"Jgb-st-fnO.text" = "0";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "CANCEL";
@@ -55,17 +46,11 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Security filters, DNS privacy, custom filters, etc.";
 
-/* Class = "UILabel"; text = "0"; ObjectID = "dlk-kG-3Jp"; */
-"dlk-kG-3Jp.text" = "0";
-
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Recent activity";
 
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "BACK";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "iNX-Qd-Hmo"; */
-"iNX-Qd-Hmo.text" = "0";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
 "kX9-ZX-NOu.text" = "Recent activity";
@@ -84,9 +69,6 @@
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Choose the domain level";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "w9H-e5-jiH"; */
-"w9H-e5-jiH.text" = "0";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
 "wt5-4Q-CTq.normalTitle" = "encrypted";

@@ -228,8 +228,19 @@ class ChartView: UIView {
         var requestPoints = convertPoints(points: chartPoints.requests)
         var encryptedPoints = convertPoints(points: chartPoints.encrypted)
         
-        let requestsPath = getLinePath(from: &requestPoints)
-        let blockedPath = getLinePath(from: &encryptedPoints)
+        if requestPoints.count < 3 {
+            maxXelement = 10.0
+            requestPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+        }
+        
+        if encryptedPoints.count < 3 {
+            maxXelement = 10.0
+            encryptedPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+        }
+        
+        guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
+            let blockedPath = UIBezierPath(quadCurve: encryptedPoints)
+            else { return }
         
         let requestsAlpha: CGFloat = activeChart == .requests ? 1.0 : 0.3
         let encryptedAlpha: CGFloat = activeChart == .encrypted ? 1.0 : 0.3
@@ -269,11 +280,8 @@ class ChartView: UIView {
         var newPoints = [CGPoint]()
                 
         for point in preparedPoints {
-            var ratioY: CGFloat = (point.y / maxYelement) * 0.7
-            
-            // There is a devision by zero, when initializing this variables
-            ratioY = ratioY.isNaN ? 0.0 : ratioY
-            
+            let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (point.y / maxYelement) * 0.7
+
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
             //newPoints.append(CGPoint(x: newX, y: newY))
             
@@ -289,10 +297,7 @@ class ChartView: UIView {
         var newPoints = [Point]()
         
         for point in points {
-            var ratioX: CGFloat = point.x / maxXelement
-            
-            // There is a devision by zero, when initializing this variables
-            ratioX = ratioX.isNaN ? 0.0 : ratioX
+            let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
             let newX = (frame.width * ratioX).rounded(.up)
             
             var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
@@ -313,45 +318,4 @@ class ChartView: UIView {
         
         return newPoints
     }
-    
-    private func getLinePath(from points: inout [CGPoint]) -> UIBezierPath {
-        
-        let lowestYpoint = frame.height * 0.85
-        
-        if points.isEmpty {
-            let minPoint = CGPoint(x: 0.0, y: lowestYpoint)
-            let maxPoint = CGPoint(x: frame.width, y: lowestYpoint)
-            
-            points.append(minPoint)
-            points.append(maxPoint)
-        } else if points.count == 1 {
-            let minPoint = CGPoint(x: 0.0, y: lowestYpoint)
-            let maxPoint = CGPoint(x: frame.width, y: lowestYpoint)
-            
-            points.append(minPoint)
-            points.append(maxPoint)
-            
-            points.sort(by: { $0.x < $1.x })
-        }
-        
-        let cubicCurveAlgorithm = CubicBezierCurveAlgorithm()
-        
-        let controlPoints = cubicCurveAlgorithm.controlPointsFromPoints(dataPoints: points)
-
-        let linePath = UIBezierPath()
-            
-        for i in 0..<points.count {
-            let point = points[i];
-            
-            if i==0 {
-                linePath.move(to: point)
-            } else {
-                let segment = controlPoints[i-1]
-                linePath.addCurve(to: point, controlPoint1: segment.controlPoint1, controlPoint2: segment.controlPoint2)
-            }
-        }
-        
-        return linePath
-    }
-    
 }

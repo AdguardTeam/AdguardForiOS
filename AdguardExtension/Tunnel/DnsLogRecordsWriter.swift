@@ -110,6 +110,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func addDnsStatisticsRecord(isEncrypted: Bool, elapsed: Int) {
+        /* If elapsed time is greater than timeout, than we do not add it to statistics */
+        if elapsed >= 2000 { return }
+        
         statisticsQueue.async { [weak self] in
             guard let self = self else { return }
             self.resources.tempRequestsCount += 1
@@ -130,6 +133,9 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     }
     
     private func addActivityRecord(domain: String, isEncrypted: Bool, elapsed: Int){
+        /* If elapsed time is greater than timeout, than we do not add it to statistics */
+        if elapsed >= 2000 { return }
+        
         activityStatisticsQueue.async {[weak self] in
             guard let self = self else { return }
             

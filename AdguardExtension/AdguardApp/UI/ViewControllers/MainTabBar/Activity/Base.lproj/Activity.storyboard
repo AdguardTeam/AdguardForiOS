@@ -263,7 +263,7 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mo-qx-mDo">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mo-qx-mDo">
                                     <rect key="frame" x="215.5" y="60" width="190.5" height="57.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -298,7 +298,7 @@
                                         <action selector="infoAction:" destination="JIr-fp-rYK" eventType="touchUpInside" id="7em-UQ-u5v"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlk-kG-3Jp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlk-kG-3Jp" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="8" y="60" width="190.5" height="19"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <nil key="textColor"/>
@@ -1265,8 +1265,8 @@
                                         <action selector="changePeriodTypeAction:" destination="lL1-Yv-4AH" eventType="touchUpInside" id="i2q-B0-bjf"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4A-Cw-TxW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="84" width="166.5" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4A-Cw-TxW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                    <rect key="frame" x="8" y="82" width="190.5" height="61.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="jTf-0Z-5ql"/>
                                     </constraints>
@@ -1280,8 +1280,8 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNX-Qd-Hmo">
-                                    <rect key="frame" x="227.5" y="84" width="166.5" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNX-Qd-Hmo">
+                                    <rect key="frame" x="215.5" y="82" width="190.5" height="61.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -1333,8 +1333,8 @@
                                         <action selector="infoAction:" destination="lL1-Yv-4AH" eventType="touchUpInside" id="LWJ-Vu-V7r"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e5-jiH">
-                                    <rect key="frame" x="20" y="166" width="166.5" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e5-jiH">
+                                    <rect key="frame" x="8" y="189.5" width="190.5" height="61.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.4823529412" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -1345,8 +1345,8 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-st-fnO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="227.5" y="166" width="166.5" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-st-fnO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                    <rect key="frame" x="215.5" y="189.5" width="190.5" height="61.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>

@@ -193,11 +193,11 @@ extension DnsLogRecord {
         }
     }
     
-    func getDetailsString(_ fontSize: CGFloat, _ developerMode: Bool) -> NSMutableAttributedString {
+    func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
         
         let recordType = getTypeString()
         
-        if developerMode {
+        if advancedMode {
             var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
             newDomain = " " + newDomain
             

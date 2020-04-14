@@ -20,7 +20,7 @@ import Foundation
 
 class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     
-    var developerMode: Bool = false
+    var advancedMode: Bool = false
     
     var showStatusBar: Bool = false
     

@@ -18,15 +18,28 @@
 
 import Foundation
 
-class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
-    var appRated: Bool = false
-    var advancedMode: Bool = true
-    var userThemeMode: AEThemeMode = AELightThemeMode
-    var showStatusBar: Bool = true
-    var systemAppearenceIsDark = true
-    var purchasedThroughLogin = true
-    var darkTheme = false
-    var proStatus = true
-    var allContentBlockersEnabled: Bool = true
-    var someContentBlockersEnabled: Bool = true
+class ActivityStatisticsServiceMock: ActivityStatisticsServiceProtocol {
+    func writeRecords(_ records: [ActivityStatisticsRecord]) {
+        
+    }
+    
+    func deleteAllRecords() {
+        
+    }
+    
+    func stopDb() {
+        
+    }
+    
+    func startDb() {
+        
+    }
+    
+    func getAllRecords() -> [ActivityStatisticsRecord] {
+        return []
+    }
+    
+    func getRecords(by type: ChartDateType) -> [ActivityStatisticsRecord] {
+        return []
+    }
 }

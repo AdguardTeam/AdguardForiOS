@@ -49,7 +49,7 @@ class CompanyDetailedController: UITableViewController {
     // MARK: - Notifications
     
     private var themeToken: NotificationToken?
-    private var developerModeToken: NSKeyValueObservation?
+    private var advancedModeToken: NSKeyValueObservation?
     private var keyboardShowToken: NotificationToken?
     
     // MARK: - Public variables
@@ -90,7 +90,7 @@ class CompanyDetailedController: UITableViewController {
         let requestsCount = record?.requests ?? 0
         let encryptedCount = record?.encrypted ?? 0
         
-        filterButton.isHidden = !configuration.developerMode
+        filterButton.isHidden = !configuration.advancedMode
         
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
@@ -99,8 +99,8 @@ class CompanyDetailedController: UITableViewController {
             self?.updateTheme()
         }
         
-        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
-            self?.observeDeveloperMode()
+        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+            self?.observeAdvancedMode()
         }
     }
     
@@ -172,7 +172,7 @@ class CompanyDetailedController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             let record = requestsModel.records[indexPath.row]
-            cell.developerMode = configuration.developerMode
+            cell.advancedMode = configuration.advancedMode
             cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
@@ -227,8 +227,8 @@ class CompanyDetailedController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
-            self?.observeDeveloperMode()
+        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+            self?.observeAdvancedMode()
         }
         
         requestsModel.recordsObserver = { [weak self] (records) in
@@ -247,11 +247,11 @@ class CompanyDetailedController: UITableViewController {
         }
     }
     
-    private func observeDeveloperMode(){
+    private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            self.filterButton.isHidden = !self.configuration.developerMode
+            self.filterButton.isHidden = !self.configuration.advancedMode
         }
     }
     

@@ -18,15 +18,34 @@
 
 import Foundation
 
-class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
-    var appRated: Bool = false
-    var advancedMode: Bool = true
-    var userThemeMode: AEThemeMode = AELightThemeMode
-    var showStatusBar: Bool = true
-    var systemAppearenceIsDark = true
-    var purchasedThroughLogin = true
-    var darkTheme = false
-    var proStatus = true
-    var allContentBlockersEnabled: Bool = true
-    var someContentBlockersEnabled: Bool = true
+class DnsStatisticsServiceMock: DnsStatisticsServiceProtocol {
+    var minimumStatisticSaveTime: Double = 0.0
+    
+    func writeRecord(_ record: DnsStatisticsRecord) {
+        
+    }
+    
+    func getAllRecords() -> [DnsStatisticsRecord] {
+        return []
+    }
+    
+    func getRecords(by type: ChartDateType) -> [DnsStatisticsRecord] {
+        return []
+    }
+    
+    func getRecordsCount() -> Int {
+        return 0
+    }
+    
+    func deleteAllRecords() {
+        
+    }
+    
+    func stopDb() {
+        
+    }
+    
+    func startDb() {
+        
+    }
 }

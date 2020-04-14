@@ -149,9 +149,9 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     }
     
     /**
-     Developer mode state
+     Advanced mode state
      */
-    @objc dynamic var developerMode: Bool {
+    @objc dynamic var advancedMode: Bool {
         set {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
         }
@@ -163,7 +163,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     @objc dynamic var showStatusBar: Bool {
         get {
             let showStatusBar: Bool = resources.sharedDefaults().object(forKey: AEDefaultsShowStatusBar) as? Bool ?? true
-            return showStatusBar && developerMode
+            return showStatusBar && advancedMode
         }
         set{
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsShowStatusBar)

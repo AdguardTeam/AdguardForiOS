@@ -9,7 +9,7 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var proStatus : Bool { get }
     var appRated: Bool { get set }
     var purchasedThroughLogin: Bool { get }
-    var developerMode: Bool { get  set }
+    var advancedMode: Bool { get  set }
     var showStatusBar: Bool { get set }
     var allContentBlockersEnabled: Bool { get }
     var someContentBlockersEnabled: Bool { get }

@@ -46,7 +46,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private var themeObserver: Any? = nil
-    private var developerModeToken: NSKeyValueObservation?
+    private var advancedModeToken: NSKeyValueObservation?
     
     private var detailsController: DnsRequestDetailsController?
     
@@ -68,7 +68,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
             self?.updateTheme()
         }
         
-        developerModeToken = configuration.observe(\.developerMode) {[weak self] (_, _) in
+        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             DispatchQueue.main.async {[weak self] in
                 self?.updateButtons()
             }
@@ -132,9 +132,9 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     }
     
     private func updateButtons() {
-        shadowView.isHidden = !configuration.developerMode
+        shadowView.isHidden = !configuration.advancedMode
         
-        if !configuration.developerMode {
+        if !configuration.advancedMode {
             shadowView.buttons = []
             return
         }

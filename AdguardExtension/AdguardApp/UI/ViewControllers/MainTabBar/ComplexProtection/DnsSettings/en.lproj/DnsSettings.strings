@@ -118,14 +118,14 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Server name";
 
-/* Class = "UILabel"; text = "Choose ready-to-use anti-tracking lists or add your own rules"; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Choose ready-to-use anti-tracking lists or add your own rules";
+/* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Customize your DNS traffic by applying your own rules.";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS server address";
 
-/* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "Customize your DNS traffic by applying your own rules";
+/* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "DNS filtering";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Select protocol";
