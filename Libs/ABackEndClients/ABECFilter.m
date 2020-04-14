@@ -62,8 +62,8 @@ NSString *ABECFilterError = @"ABECFilterError";
 NSString *FilterUrlStart = ABEC_FILTER_URL_BASE @"filters/";
 NSString *FilterUrlEnd = @"_optimized.txt";
 
-NSString *FilterMetadataUrl = ABEC_FILTER_URL_BASE @"filters.json";
-NSString *FilterI18nUrl = ABEC_FILTER_URL_BASE @"filters_i18n.json";
+NSString *FilterMetadataUrl = ABEC_FILTER_URL_BASE @"filters.js";
+NSString *FilterI18nUrl = ABEC_FILTER_URL_BASE @"filters_i18n.js";
 
 NSString *VERSION_PARAM = @"v";
 NSString *USER_ID_PARAM = @"cid";
