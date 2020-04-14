@@ -68,6 +68,7 @@ class ActivityViewController: UITableViewController {
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
+    private var resetSettingsToken: NotificationToken?
     private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - Public variables
@@ -396,6 +397,11 @@ class ActivityViewController: UITableViewController {
         }
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
+            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
+        }
+        
+        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+            self?.statisticsModel.obtainStatistics()
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         

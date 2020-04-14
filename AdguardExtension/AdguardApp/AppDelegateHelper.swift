@@ -39,6 +39,9 @@ class AppDelegateHelper: NSObject {
     lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
+    lazy var activityStatisticsService: ActivityStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var dnsStatisticsService: DnsStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
@@ -219,6 +222,7 @@ class AppDelegateHelper: NSObject {
             self.antibannerController.reset()
             self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
+            self.resetStatistics()
             
             let group = DispatchGroup()
             group.enter()
@@ -237,6 +241,9 @@ class AppDelegateHelper: NSObject {
             
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}
+            
+            // Notify that settings were reset
+            NotificationCenter.default.post(name: NSNotification.resetSettings, object: self)
             
             DispatchQueue.main.async { [weak self] in
                 self?.appDelegate.window.rootViewController?.dismiss(animated: true) {
@@ -526,5 +533,21 @@ class AppDelegateHelper: NSObject {
         DispatchQueue.main.async {[weak self] in
             self?.statusView.text = text
         }
+    }
+    
+    private func resetStatistics(){
+        /* Reseting statistics Start*/
+        self.activityStatisticsService.stopDb()
+        self.dnsStatisticsService.stopDb()
+        
+        // delete database file
+        let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
+        try? FileManager.default.removeItem(atPath: url.path)
+        
+        /* Reseting statistics end */
+        self.activityStatisticsService.startDb()
+        self.dnsStatisticsService.startDb()
+        
+        self.dnsLogRecordsService.reset()
     }
 }
