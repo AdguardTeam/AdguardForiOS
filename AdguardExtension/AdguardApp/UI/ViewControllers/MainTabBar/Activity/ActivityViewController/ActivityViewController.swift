@@ -401,6 +401,7 @@ class ActivityViewController: UITableViewController {
         }
         
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+            self?.statisticsModel.obtainStatistics()
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         

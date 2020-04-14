@@ -37,35 +37,24 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
      
     private lazy var path = resources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db").absoluteString
     
-    private lazy var writeHandler: FMDatabaseQueue? = {
-        let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-        
-        handler?.inTransaction{ (db, rollback) in
-            self.createDnsLogTable(db!)
-        }
-        
-        return handler
-    }()
-    
-    private lazy var readHandler: FMDatabaseQueue? = {
-        return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-    }()
+    private var dbHandler: FMDatabaseQueue?
     
     @objc
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
         super.init()
-        // lazy vars are not thread safe
-        // force load lazy vars in init
-        let _ = self.readHandler
-        let _ = self.writeHandler
+        
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{ (db, rollback) in
+            self.createDnsLogTable(db!)
+        }
     }
     
     func writeRecords(_ records: [DnsLogRecord]) {
         
         purgeDnsLog()
         
-        writeHandler?.inTransaction{ (db, rollback) in
+        dbHandler?.inTransaction{ (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db!)
             for item in records {
                 table?.insertOrReplace(false, fromRowObject: APDnsLogTable(timestamp: item.date.timeIntervalSince1970, record: item))
@@ -76,7 +65,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     func readRecords() -> [DnsLogRecord] {
         
         var result: [APDnsLogTable]?
-        readHandler?.inTransaction { (db, handler) in
+        dbHandler?.inTransaction { (db, handler) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             result = table?.select(withKeys: nil, inRowObject: APDnsLogTable.self) as? [APDnsLogTable]
         }
@@ -91,7 +80,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     }
     
     func clearLog() {
-        writeHandler?.inTransaction { (db, rollback) in
+        dbHandler?.inTransaction { (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             table?.delete(withKeys: nil, inRowObject: nil)
         }
@@ -100,7 +89,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     func set(rowId: NSNumber, status: DnsLogRecordUserStatus, userRule: String?) {
         
         var result: [APDnsLogTable]?
-        readHandler?.inTransaction{ (db, rollback) in
+        dbHandler?.inTransaction{ (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             let t = APDnsLogTable()
             t.rowid = rowId
@@ -116,40 +105,26 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         row?.record.userStatus = status
         row?.record.userRule = userRule
         
-        writeHandler?.inTransaction { (db, rollback) in
+        dbHandler?.inTransaction { (db, rollback) in
             let table = ADBTable(rowClass: APDnsLogTable.self, db: db)
             table?.update(withKeys: ["rowid"], fromRowObject: row, updateFields: [], fromRowObject: row)
         }
     }
     
     func reset() {
-        writeHandler?.inTransaction({ (db, rollback) in
+        dbHandler?.inTransaction({ (db, rollback) in
             db?.close()
         })
-        writeHandler = nil
-        
-        readHandler?.inTransaction({ (db, rollback) in
-            db?.close()
-        })
-        readHandler = nil
-        
+        dbHandler = nil
+
         // delete database file
         let url = resources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db")
         try? FileManager.default.removeItem(atPath: url.path)
         
-        writeHandler = {
-            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-            
-            handler?.inTransaction{ (db, rollback) in
-                self.createDnsLogTable(db!)
-            }
-            
-            return handler
-        }()
-        
-        readHandler = {
-            return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-        }()
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{ (db, rollback) in
+            self.createDnsLogTable(db!)
+        }
     }
     
     // MARK: - private methods
@@ -168,7 +143,7 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         if (now - lastPurgeTime) > purgeTimeInterval {
             
             lastPurgeTime = now;
-            writeHandler?.inTransaction { (db, rollback) in
+            dbHandler?.inTransaction { (db, rollback) in
                 db!.executeUpdate("DELETE FROM APDnsLogTable WHERE timeStamp > 0 ORDER BY timeStamp DESC LIMIT -1 OFFSET 1000", withParameterDictionary: [:])
             }
         }

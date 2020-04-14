@@ -47,24 +47,18 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     
     private lazy var path =  { resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db").absoluteString }()
     
-    private lazy var dbHandler: FMDatabaseQueue? = {
-        let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+    private var dbHandler: FMDatabaseQueue?
         
-        handler?.inTransaction{[weak self] (db, rollback) in
-            self?.createDnsLogTable(db!)
-        }
-        
-        return handler
-    }()
-    
     // MARK: - Init
     
     @objc init(resources: AESharedResourcesProtocol) {
         self.resources = resources
         super.init()
-        // lazy vars are not thread safe
-        // force load lazy vars in init
-        let _ = self.dbHandler
+        
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{[weak self] (db, rollback) in
+            self?.createDnsLogTable(db!)
+        }
     }
     
     // MARK: - Public methods
@@ -148,16 +142,10 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
     }
     
     func startDb() {
-        dbHandler = {
-            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-            
-            handler?.inTransaction{[weak self] (db, rollback) in
-                self?.createDnsLogTable(db!)
-            }
-            
-            return handler
-        }()
-        let _ = dbHandler
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{[weak self] (db, rollback) in
+            self?.createDnsLogTable(db!)
+        }
     }
     
     // MARK: - private methods

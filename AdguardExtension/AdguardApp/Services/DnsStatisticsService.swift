@@ -85,24 +85,19 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     private let statisticsRecordsLimit = 1500   // 1500 records
     private let statisticsSectorsLimit = 150   // 1500 records -> 150 records
     
-    private lazy var dbHandler: FMDatabaseQueue? = {
-        let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-        
-        handler?.inTransaction{[weak self] (db, rollback) in
-            self?.createStatisticsTable(db!)
-        }
-        
-        return handler
-    }()
+    private var dbHandler: FMDatabaseQueue?
+
     
     // MARK: - init
     
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
         super.init()
-        // lazy vars are not thread safe
-        // force load lazy vars in init
-        let _ = self.dbHandler
+        
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{[weak self] (db, rollback) in
+            self?.createStatisticsTable(db!)
+        }
     }
     
     // MARK: - public methods
@@ -233,16 +228,10 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     }
     
     func startDb() {
-        dbHandler = {
-            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
-            
-            handler?.inTransaction{[weak self] (db, rollback) in
-                self?.createStatisticsTable(db!)
-            }
-            
-            return handler
-        }()
-        let _ = dbHandler
+        dbHandler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        dbHandler?.inTransaction{[weak self] (db, rollback) in
+            self?.createStatisticsTable(db!)
+        }
     }
     
     // MARK: - private methods
