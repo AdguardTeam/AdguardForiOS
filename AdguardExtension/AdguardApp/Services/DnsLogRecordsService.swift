@@ -123,7 +123,33 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
     }
     
     func reset() {
+        writeHandler?.inTransaction({ (db, rollback) in
+            db?.close()
+        })
+        writeHandler = nil
         
+        readHandler?.inTransaction({ (db, rollback) in
+            db?.close()
+        })
+        readHandler = nil
+        
+        // delete database file
+        let url = resources.sharedResuorcesURL().appendingPathComponent("dns-log-records.db")
+        try? FileManager.default.removeItem(atPath: url.path)
+        
+        writeHandler = {
+            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+            
+            handler?.inTransaction{ (db, rollback) in
+                self.createDnsLogTable(db!)
+            }
+            
+            return handler
+        }()
+        
+        readHandler = {
+            return FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+        }()
     }
     
     // MARK: - private methods

@@ -23,7 +23,11 @@ import Foundation
 @objc protocol ActivityStatisticsServiceWriterProtocol {
     func writeRecords(_ records: [ActivityStatisticsRecord])
     func deleteAllRecords()
-    func reset()
+    
+    /* Using two methods, because DnsStatisticsService uses the same db file, and
+    we need to close connection before deleting db file */
+    func stopDb()
+    func startDb()
 }
 
 protocol ActivityStatisticsServiceReaderProtocol {
@@ -136,13 +140,14 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
         }
     }
 
-    func reset() {
+    func stopDb() {
+        dbHandler?.inTransaction({ (db, rollback) in
+            db?.close()
+        })
         dbHandler = nil
-        
-        // delete database file
-        let url = resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
-        try? FileManager.default.removeItem(atPath: url.path)
-        
+    }
+    
+    func startDb() {
         dbHandler = {
             let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
             
@@ -152,7 +157,7 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             
             return handler
         }()
-        print(dbHandler)
+        let _ = dbHandler
     }
     
     // MARK: - private methods

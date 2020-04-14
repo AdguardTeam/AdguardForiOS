@@ -56,7 +56,10 @@ protocol DnsStatisticsServiceProtocol {
     
     func deleteAllRecords()
     
-    func reset()
+    /* Using two methods, because ActivityStatisticsService uses the same db file, and
+     we need to close connection before deleting db file */
+    func stopDb()
+    func startDb()
 }
 
 class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
@@ -222,8 +225,24 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         }
     }
     
-    func reset() {
-        
+    func stopDb() {
+        dbHandler?.inTransaction({ (db, rollback) in
+            db?.close()
+        })
+        dbHandler = nil
+    }
+    
+    func startDb() {
+        dbHandler = {
+            let handler = FMDatabaseQueue.init(path: path, flags: SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE)
+            
+            handler?.inTransaction{[weak self] (db, rollback) in
+                self?.createStatisticsTable(db!)
+            }
+            
+            return handler
+        }()
+        let _ = dbHandler
     }
     
     // MARK: - private methods

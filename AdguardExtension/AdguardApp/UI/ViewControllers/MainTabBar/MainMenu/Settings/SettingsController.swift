@@ -325,8 +325,10 @@ class SettingsController: UITableViewController {
 
 extension Notification.Name {
     static let resetStatistics = Notification.Name("resetStatistics")
+    static let resetSettings = Notification.Name("resetSettings")
 }
 
 @objc extension NSNotification {
     public static let resetStatistics = Notification.Name.resetStatistics
+    public static let resetSettings = Notification.Name.resetSettings
 }

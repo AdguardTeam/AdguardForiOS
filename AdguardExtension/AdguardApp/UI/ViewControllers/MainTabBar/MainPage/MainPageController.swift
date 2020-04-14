@@ -163,6 +163,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
+    private var resetSettingsToken: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
     private var defaultsObservations: [ObserverToken] = []
@@ -551,6 +552,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
         })
+        
+        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+            self?.chartModel.obtainStatistics()
+        }
         
         let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
         
