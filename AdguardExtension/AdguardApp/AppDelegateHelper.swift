@@ -39,7 +39,6 @@ class AppDelegateHelper: NSObject {
     lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     lazy var networking: ACNNetworking = { ServiceLocator.shared.getService()! }()
-    lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var activityStatisticsService: ActivityStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var dnsStatisticsService: DnsStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
