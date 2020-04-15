@@ -755,7 +755,7 @@
 "requests_info_alert_title" = "Requests";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of such requests to realize the scope of this problem.";
+"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the total number of requests to realize the scope of this problem.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Encrypted requests";
