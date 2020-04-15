@@ -34,21 +34,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "正在套用更改…";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "免費地試用";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "免費地試用";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者規則";
 
@@ -380,7 +365,7 @@
 "about_version" = "版本";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "付一次費用，然後於所有您的裝置上使用 AdGuard 高級版功能！";
+"getPro_screen_lifetime_text" = "付費一次，然後於所有您的 iOS 裝置上使用 AdGuard 高級版功能！";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正確的電子郵件位址或密碼";
@@ -479,7 +464,7 @@
 "add_new_rule" = "增加一項新的規則";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "包括使用者規則、追蹤防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
+"confirm_reset_text" = "包括使用者規則、DNS 防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "重置活動記錄";
@@ -518,7 +503,7 @@
 "protection_enabled" = "防護被啟用";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari 和追蹤防護";
+"complex_enabled" = "Safari 和 DNS 防護";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari 內容阻擋";
@@ -526,8 +511,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "所有的防護模組被禁用";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "追蹤防護";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS 防護";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "更多的";
@@ -536,10 +521,7 @@
 "dns_request_status_blocked" = "已封鎖的";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "已允許的";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "已允許的";
+"dns_request_status_processed" = "已處理的";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_whitelist" = "已從允許清單中移除";
@@ -634,18 +616,11 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "空無的";
 
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "追蹤防護被禁用";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "啟用";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "未能傳送您的回饋意見";
 
 /* (FeedbackController) - feedback sending failure message */
 "feedback_sending_failed_message" = "某事物出現問題";
-
 
 
 // MARK: - Strings for VoiceOver -

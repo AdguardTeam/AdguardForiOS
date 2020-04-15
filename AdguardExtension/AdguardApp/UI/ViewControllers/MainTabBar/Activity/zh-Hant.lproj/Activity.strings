@@ -14,17 +14,11 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "安全性過濾器、DNS 隱私、自訂的過濾器等等";
 
-/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
-"dsD-0w-qic.title" = "清除";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "返回";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "封鎖該請求";
-
-/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
-"pqA-7I-Vrx.title" = "活動";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "選擇網域層級";

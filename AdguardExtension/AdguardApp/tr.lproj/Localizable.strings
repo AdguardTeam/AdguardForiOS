@@ -28,9 +28,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Değişiklikleri uygula...";
 
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Ücretsiz deneyin";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı Filtresi";
 
@@ -339,9 +336,6 @@
 
 /* (AboutController) current app version string */
 "about_version" = "Versiyon";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Bir defa ödeyin ve AdGuard Premium özelliklerini bütün cihazlarınızda kullanın!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Yanlış e-posta veya parola";

@@ -1,2 +1,8 @@
 /* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
 "CqW-k3-vqO.title" = "Zaloguj się";
+
+/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
+"RqV-y2-sfF.text" = "Film instruktażowy";
+
+/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
+"oFL-ch-4PY.text" = "Forum";

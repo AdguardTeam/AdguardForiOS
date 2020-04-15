@@ -49,6 +49,9 @@
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "在此使用您自定义的过滤器";
 
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "白名单";
+
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "过滤器";
 
@@ -57,9 +60,6 @@
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "取消";
-
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
-"mXe-eu-cfH.normalTitle" = "删除";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "下一步";

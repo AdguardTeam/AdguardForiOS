@@ -22,26 +22,17 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Отже, ваші останні зміни не були застосовані.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та список дозволів, або змініть набір використовуваних фільтрів.";
+
 /* NO Button caption in alert */
 "common_action_no" = "НІ";
 
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Список дозволів (інвертований)";
+
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Застосування змін...";
-
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ КБ";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ МБ";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ ГБ";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Спробувати безплатно";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Спробувати безплатно";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Правила користувача";
@@ -121,6 +112,9 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Введіть тут назви доменів, розділені новими рядками. AdGuard дозволить всі з'єднання для цих доменів.";
 
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Цей список блокування підтримує <a href=\"%@\">DNS-синтаксис AdGuard</a>. Введіть тут правила, розділені новими рядками. AdGuard заблокує всі з'єднання, що відповідають цим правилам.";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Оновлення...";
 
@@ -141,6 +135,12 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Назва:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "Оцінити програму";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "Надіслати відгук";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Звіт про неправильне блокування";
@@ -228,6 +228,12 @@
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Примусовий безпечний пошук в браузерах, коли це можливо";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Блокує системи стеження";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Без шифрування (Системний DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Увімкнено %1$d з %2$d";
@@ -358,9 +364,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Версія";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Сплачуйте один раз і користуйтесь функціями AdGuard Premium на всіх своїх пристроях!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Невірна електронна пошта або пароль";
 
@@ -385,6 +388,15 @@
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Фільтрувати Wi-Fi";
 
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Список дозволів";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Список дозволів";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Список блокування";
+
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Користувацькі правила Safari";
 
@@ -402,6 +414,18 @@
 
 /* "Disabled" title */
 "disabled" = "Вимкнено";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "ВИЛУЧИТИ ЗІ СПИСКУ ДОЗВОЛІВ";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "ВИЛУЧИТИ ЗІ СПИСКУ БЛОКУВАННЯ";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "ДОДАТИ ДО СПИСКУ ДОЗВОЛІВ";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "ДОДАТИ ДО СПИСКУ БЛОКУВАННЯ";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Дозволити блокування фішингових сайтів та інших небезпечних доменів. Доступно для Преміум-користувачів";
@@ -532,6 +556,27 @@
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблоковано";
 
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "додано до списку дозволів";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "додано до списку блокування";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "вилучено зі списку дозволів";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "вилучено зі списку блокування";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Відкрийте <b>Параметри</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Торкніться <b>Safari</b> та оберіть елемент <b>\"Блокувальники вмісту\"</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Увімкніть всі блокувальники вмісту</b> й повертайтеся до нашої програми!";
+
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Системний DNS";
 
@@ -541,11 +586,23 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "Блокувати запит";
 
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Додати домен до списку дозволів";
+
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Відеоінструкція";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Ви ввели недійсний upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Системний список блокування";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Системний список дозволів";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Подробиці";
 
 /* (DnsRequestDetailsController) "General" title for section header */
 "general_header" = "Загальні";
@@ -607,8 +664,57 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Порожньо";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Правило не знайдено";
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Не вдалося відправити ваш відгук";
 
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Увімкнути";
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Щось пішло не так";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Продовжуючи використання, ви приймаєте <br /><a href=%2$@>Умови та положення</a> і <a href=%1$@>Політику приватності</a>";
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Головний екран";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Екран захисту";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Екран активності";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Екран параметрів";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Захист Safari увімкнено";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Захист Safari вимкнено";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Оновити фільтри";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Кількість запитів";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Оберіть тип передплати";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Введіть свою е-пошту";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Введіть свій пароль";

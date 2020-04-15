@@ -14,13 +14,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 pravidlo povolené</string>
+        <string>1 pravidlo zapnuté</string>
         <key>few</key>
-        <string>%d pravidlá povolené</string>
+        <string>%d pravidlá zapnuté</string>
         <key>many</key>
-        <string>%d pravidiel povolených</string>
+        <string>%d pravidiel zapnutých</string>
         <key>other</key>
-        <string>%d pravidiel povolených</string>
+        <string>%d pravidiel zapnutých</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -34,13 +34,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 filter povolený</string>
+        <string>1 filter zapnutý</string>
         <key>few</key>
-        <string>%d filtre povolené</string>
+        <string>%d filtre zapnuté</string>
         <key>many</key>
-        <string>%d filtrov povolených</string>
+        <string>%d filtrov zapnutých</string>
         <key>other</key>
-        <string>%d filtrov povolených</string>
+        <string>%d filtrov zapnutých</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>

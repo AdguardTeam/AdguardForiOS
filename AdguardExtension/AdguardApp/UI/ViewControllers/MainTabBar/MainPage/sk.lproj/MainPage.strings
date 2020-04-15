@@ -4,14 +4,17 @@
 /* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
 "46F-Jh-wHm.normalTitle" = "OPRAVIŤ";
 
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "VYSKÚŠAŤ ZADARMO";
+
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Obdobie";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "dopyty";
 
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "Cfe-vu-29O"; */
-"Cfe-vu-29O.text" = "ušetrených dát*";
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "Cfe-vu-29O"; */
+"Cfe-vu-29O.text" = "priem. čas";
 
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "Niektoré blokovače obsahu sú vypnuté";
@@ -28,8 +31,8 @@
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
-/* Class = "UILabel"; text = "blocked"; ObjectID = "a5U-A8-S8G"; */
-"a5U-A8-S8G.text" = "zablokované";
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "a5U-A8-S8G"; */
+"a5U-A8-S8G.text" = "šifrovaných";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Niektoré blokovače obsahu Safari sú vypnuté";

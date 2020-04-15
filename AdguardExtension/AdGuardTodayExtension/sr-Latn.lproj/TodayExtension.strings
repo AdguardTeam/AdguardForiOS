@@ -6,9 +6,3 @@
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Statistika za sve vreme:";
-
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
-"eaJ-er-mJu.text" = "sačuvani podaci*";
-
-/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
-"wd5-Po-h4x.text" = "blokirano";

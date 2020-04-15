@@ -61,9 +61,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "Otkaži";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "mXe-eu-cfH"; */
-"mXe-eu-cfH.normalTitle" = "Izbriši";
-
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "Dalje";
 

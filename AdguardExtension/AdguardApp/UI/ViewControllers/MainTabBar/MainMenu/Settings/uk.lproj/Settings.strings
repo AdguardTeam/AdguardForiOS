@@ -1,6 +1,9 @@
 /* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
 "2s7-mz-LlB.title" = "Скинути";
 
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "Інвертувати список дозволів";
+
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Несумісний з іншими VPN-програмами, нестабільний";
 
@@ -33,9 +36,6 @@
 
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Розширені параметри";
-
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Режим розробника";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "Якщо цей параметр увімкнено, AdGuard ігноруватиме загальні косметичні правила. Це підвищить швидкість завантаження сторінок за рахунок нижчої якості фільтрування";
@@ -96,3 +96,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Ця опція зітре усі статистичні дані, наприклад, кількість запитів та ін.";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "Розблокувати рекламу всюди, окрім вебсайтів з цього списку";

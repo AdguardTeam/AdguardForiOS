@@ -11,9 +11,6 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Блокирай фишинг, измами и криптокопачки";
 
-/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Защита на цялата система от проследяване";
-
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "Вие сте абонирани";
 

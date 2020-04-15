@@ -4,14 +4,14 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "リクエスト数";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "追跡をブロック";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "DNS通信を保護";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "全期間の統計：";
 
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
-"eaJ-er-mJu.text" = "通信節約量*";
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "平均時間";
 
-/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
-"wd5-Po-h4x.text" = "ブロック数";
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "暗号化済み数";

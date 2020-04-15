@@ -1,8 +1,23 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "AÑADIR";
 
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "cifrado";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "Actividad";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "PRUEBA GRATIS";
+
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "EDITAR";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "Empresas más activas";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "Actividad";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
 "J13-xW-KiK.normalTitle" = "Copiado";
@@ -13,17 +28,32 @@
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Nombre del dominio:";
 
+/* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
+"T0y-mr-Zwa.text" = "Puedes ver quién intenta rastrearte, ver las estadísticas y el registro de bloqueo de peticiones DNS";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "Protección DNS deshabilitada";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "HABILITAR";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "empresas";
+
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "Detalles de la petición";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Filtros de seguridad, DNS cifrado, filtros personalizados, etc.";
 
-/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
-"dsD-0w-qic.title" = "Borrar registro";
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "Actividad reciente";
 
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "ATRÁS";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "Actividad reciente";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Bloquear petición";
@@ -31,11 +61,23 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "AÑADIR";
 
-/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
-"pqA-7I-Vrx.title" = "Actividad";
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "peticiones";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "peticiones";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Elija el nivel de dominio";
 
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "cifrado";
+
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Bloquear petición";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "Más activo";
+
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "tiempo promedio";

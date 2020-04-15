@@ -4,14 +4,5 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "requêtes";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "Protection contre le suivi";
-
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Les statistiques dès le début :";
-
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
-"eaJ-er-mJu.text" = "trafic économisé*";
-
-/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
-"wd5-Po-h4x.text" = "bloqué";

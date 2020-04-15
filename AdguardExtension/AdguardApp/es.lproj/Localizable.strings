@@ -34,23 +34,23 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplicando cambios...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Esta información se basa en el número de rastreadores DNS bloqueados. Las estadísticas son una estimación debido a la imposibilidad técnica de calcular la cantidad exacta de rastreadores y otras amenazas que podrían haber sido descargadas por el usuario si el dominio no hubiera sido bloqueado inicialmente.";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
 
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@ Millones";
 
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@ Mil";
 
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Prueba gratis";
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@ Millones";
 
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Prueba gratis";
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@ Mil";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reglas del usuario";
@@ -275,7 +275,7 @@
 "dot_protocol" = "DNS mediante TLS";
 
 /* GetProController - confirm logout text */
-"confirm_logout_text" = "¿Está seguro que quiere cerrar la sesión?";
+"confirm_logout_text" = "¿Está seguro de que desea cerrar sesión?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
@@ -328,6 +328,21 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Restablecer";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Eliminar";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Eliminar perfil VPN";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "¿Está seguro de que desea eliminar su perfil VPN y deshabilitar la protección DNS?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Se ha producido un error";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Algo salió mal al eliminar tu perfil VPN";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ reglas se están utilizando";
 
@@ -368,7 +383,7 @@
 "filter_rules_maximum" = "Ha excedido el número máximo de reglas de filtrado.";
 
 /* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanente";
+"permanent_subscription_title" = "Vitalicia";
 
 /* (FiltersController) ON state in groups section */
 "on_state" = "ACTIVADO";
@@ -389,7 +404,7 @@
 "about_version" = "Versión";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "¡Paga una vez y utiliza las características de AdGuard Premium en todos tus dispositivos!";
+"getPro_screen_lifetime_text" = "¡Paga una vez y utiliza las características de AdGuard Premium en todos tus dispositivos iOS!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Correo electrónico o contraseña incorrectos";
@@ -407,7 +422,7 @@
 "wifi_exceptions_title" = "Excepciones de Wi-Fi";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "La protección contra rastreo no funcionará para las redes Wi-Fi que se enumeran abajo";
+"wifi_exceptions_description" = "La protección DNS no funcionará para las redes Wi-Fi que se enumeran abajo";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Añadir excepción";
@@ -419,10 +434,10 @@
 "filter_wifi_title" = "Filtrar Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Protección contra rastreo mientras está en datos móviles";
+"mobile_data_description" = "Protección DNS mientras está en datos móviles";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Protección contra rastreo mientras está en Wi-Fi";
+"wifi_data_description" = "Protección DNS mientras está en Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Lista de permitido";
@@ -530,7 +545,7 @@
 "add_new_rule" = "Añadir nueva regla";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Se restablecerán todas las configuraciones, incluidas las reglas del usuario, protección contra rastreo, interfaz y la configuración de autorización. Esta operación no se puede deshacer. ¿Restablecer configuraciones?";
+"confirm_reset_text" = "Se restablecerán todas las configuraciones, incluidas las reglas del usuario, protección DNS, interfaz y la configuración de autorización. Esta operación no se puede deshacer. ¿Restablecer configuraciones?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Restablecer registro de actividad";
@@ -568,6 +583,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nuevo filtro DNS";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Editar filtro personalizado";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Añadir";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Protección deshabilitada";
 
@@ -575,7 +596,7 @@
 "protection_enabled" = "Protección habilitada";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari y protección contra rastreo";
+"complex_enabled" = "Safari y protección DNS";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Bloqueo de contenido en Safari";
@@ -583,8 +604,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Todos los módulos de protección están deshabilitados";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Protección contra rastreo";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Protección DNS";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d peticiones, %2$d bloqueados";
@@ -598,14 +619,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Has intentado añadir un filtro duplicado. Este filtro ya está en la lista.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ reglas habilitadas";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Demasiadas reglas están habilitadas: %@. Algunos de ellos serán deshabilitados";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Deshabilite algunos filtros para el trabajo correcto";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqueado";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Permitido";
+"dns_request_status_processed" = "Procesado";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Permitido";
+"dns_request_status_encrypted" = "Cifrado";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Permitido";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "añadido a la lista de permitido";
@@ -715,15 +748,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vacío";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Ninguna regla encontrada";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Protección contra rastreo deshabilitada";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Habilitar";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Error al enviar tu comentario";
 
@@ -733,39 +757,47 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Al continuar usándolo, aceptas los<br /><a href=%2$@>términos y condiciones</a> y la <a href=%1$@>política de privacidad</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Protección básica";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Peticiones";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Bloquea los dominios de rastreo más comunes.";
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Cada vez que se visita un sitio web, se envía una petición. Los sitios web pueden enviar peticiones ocultas y filtrar datos personales. Es útil saber el número total de tales peticiones para comprender el alcance de este problema.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Protección estricta";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Peticiones cifradas";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Bloquea todos los rastreadores conocidos.";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Número de peticiones DNS cifradas. Debes usar un servidor DNS cifrado para cifrar tu tráfico DNS.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Puede romper alguna funcionalidad.";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Tiempo promedio";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Bloquear rastreadores de Google";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Tiempo medio que se tarda en procesar una petición DNS. Cuanto más rápido sea el servidor DNS que uses, más bajo será.";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Detiene todos los dominios de rastreo de Google conocidos.";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Número de empresas";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Puede interferir con aplicaciones y sitios web que utilizan APIs de Google.";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Este es el número de empresas a las que se han enviado peticiones.";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Bloquear rastreadores de Facebook";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Todas las peticiones";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Detiene todos los dominios de rastreo de Facebook conocidos.";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Solo bloqueado";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Puede interferir con aplicaciones y sitios web que utilizan APIs de Facebook.";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Solo permitido";
 
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Ninguno";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Actividad";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d peticiones";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +825,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Protección para Safari deshabilitada";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Protección contra rastreo habilitada";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Protección DNS habilitada";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Protección contra rastreo deshabilitada";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Protección DNS deshabilitada";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Actualizar filtros";
@@ -806,16 +838,16 @@
 "requests_number_voiceover" = "Número de peticiones";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Número de peticiones bloqueadas";
+"encrypted_number_voiceover" = "Número de peticiones DNS cifradas";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Tamaño de datos ahorrados";
+"elapsed_time_voiceover" = "Tiempo promedio para procesar una petición DNS";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Habilitar protección contra rastreo";
+"enable_system_protection_voiceover" = "Habilitar protección DNS";
 
 
 // MARK: - GetProTableController

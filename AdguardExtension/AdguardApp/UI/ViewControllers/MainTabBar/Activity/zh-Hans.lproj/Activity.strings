@@ -16,9 +16,6 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "安全性过滤器，DNS 隐私，自定义过滤器等。";
 
-/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
-"dsD-0w-qic.title" = "清除";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "返回";
 
@@ -27,9 +24,6 @@
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "添加";
-
-/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
-"pqA-7I-Vrx.title" = "激活";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "选择域名层级";

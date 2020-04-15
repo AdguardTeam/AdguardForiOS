@@ -1,0 +1,29 @@
+/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
+"6jg-ji-JtC.text" = "Дякуємо";
+
+/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
+"JEI-Pr-Mc2.text" = "за ваш відгук";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
+"JXu-e8-XCB.text" = "Відгук";
+
+/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
+"TBB-iF-qGA.text" = "Розкажіть нам про свої враження";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
+"XtG-5p-3KJ.text" = "Відгук";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
+"cJk-65-rg8.title" = "Відгук";
+
+/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
+"nIO-Sh-01f.normalTitle" = "ВІДПРАВИТИ";
+
+/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
+"oJi-EL-gWT.placeholder" = "Введіть свою е-пошту, якщо ви хочете отримати відповідь";
+
+/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
+"tCN-dT-J7Y.normalTitle" = "ДОМІВКА";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
+"zE7-4q-9oe.title" = "Відгук";

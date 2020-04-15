@@ -4,11 +4,14 @@
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "為了在 Safari 中使用 AdGuard，遵循一些簡單的步驟";
 
-/* Class = "UILabel"; text = "Tracking Protection"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "追蹤防護";
+/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "DNS 防護";
 
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "觀看用法說明";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "下一步";
 
 /* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
 "hXU-wD-fbI.text" = "Safari 防護";
@@ -18,3 +21,6 @@
 
 /* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
 "hf9-6r-TUk.text" = "Safari 防護";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "下一步";

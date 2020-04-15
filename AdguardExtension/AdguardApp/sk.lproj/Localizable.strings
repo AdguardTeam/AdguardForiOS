@@ -34,23 +34,23 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Uplatnenie zmien...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Táto informácia je založená na počte blokovaných DNS sledovačov. Štatistika predstavuje odhad z dôvodu technickej nemožnosti vypočítať presný počet reklám, sledovačov a iných hrozieb, ktoré mohol používateľ stiahnuť, ak doména nebola pôvodne zablokovaná.";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ Kb";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
 
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ Mb";
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
 
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ Gb";
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@K";
 
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Vyskúšajte bezplatne";
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@M";
 
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Vyskúšajte bezplatne";
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@K";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Používateľský filter";
@@ -260,7 +260,7 @@
 "system_dns_server" = "Bez šifrovania (systémové DNS)";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "Povolených  %1$d z %2$d";
+"filters_description_format" = "Zapnutých %1$d z %2$d";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Štandardný";
@@ -299,7 +299,7 @@
 "vpn_confirm_title" = "Bude vytvorená VPN";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "Pre vlastné nastavenia DNS sa vyžaduje VPN. Vytvorená VPN je lokálna, čo znamená, že Vaša prevádzka nebude smerovaná cez žiadne servery.\nPri používaní VPN profilu nezhromažďujeme žiadne údaje.";
+"vpn_confirm_message" = "Pre vlastné nastavenia DNS sa vyžaduje VPN. Vytvorená VPN je lokálna, čo znamená, že Vaša komunikácia nebude smerovaná cez žiadne servery.\nPri používaní VPN profilu nezhromažďujeme žiadne údaje.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Čakajte prosím…";
@@ -327,6 +327,18 @@
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Vynulovať";
+
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Odstrániť";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Odstrániť VPN profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Vyskytla sa chyba";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Pri odstraňovaní VPN profilu sa vyskytla chyba";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "Bolo použitých %@ pravidiel";
@@ -407,7 +419,7 @@
 "wifi_exceptions_title" = "Výnimky Wi-Fi";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Ochrana proti sledovaniu nebude fungovať pre nižšie uvedené siete Wi-Fi";
+"wifi_exceptions_description" = "DNS ochrana nebude fungovať pre nižšie uvedené siete Wi-Fi";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Pridať výnimku";
@@ -419,10 +431,10 @@
 "filter_wifi_title" = "Filtrovať Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Ochrana proti sledovaniu počas mobilného pripojenia";
+"mobile_data_description" = "DNS ochrana počas mobilného pripojenia";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Ochrana proti sledovaniu počas Wi-Fi pripojenia";
+"wifi_data_description" = "DNS ochrana počas Wi-Fi pripojenia";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Zoznam povolení";
@@ -568,6 +580,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nový DNS filter";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Upraviť vlastný filter";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Pridať";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Ochrana je vypnutá";
 
@@ -575,7 +593,7 @@
 "protection_enabled" = "Ochrana je zapnutá";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari a ochrana proti sledovaniu";
+"complex_enabled" = "Safari a DNS ochrana";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Blokovanie obsahu Safari";
@@ -583,8 +601,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Všetky moduly ochrany sú vypnuté";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Ochrana proti sledovaniu";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS ochrana";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d dopytov, %2$d blokovaných";
@@ -598,14 +616,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Pokúsili ste sa pridať duplicitný filter. Tento filter je už na zozname.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "Je zapnutých %@ pravidiel";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Je zapnutých príliš veľa pravidiel: %@. Niektoré z nich budú vypnuté";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Pre správnu prácu vypnite niektoré filtre";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Zablokované";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Povolené";
+"dns_request_status_processed" = "Spracované";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Povolené";
+"dns_request_status_encrypted" = "Šifrované";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Povolené";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "pridané do zoznamu povolení";
@@ -715,15 +745,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prázdna";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Nenašlo sa pravidlo";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Ochrana proti sledovaniu je vypnutá";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Zapnúť";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Nepodarilo sa poslať spätnú väzbu";
 
@@ -733,39 +754,44 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Pokračovaním v používaní akceptujete<br /><a href=%2$@>Zmluvné podmienky</a> a <a href=%1$@>Zásady ochrany osobných údajov</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Základná ochrana";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Dopyty";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Blokuje väčšinu bežných sledovacích domén.";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Šifrované dopyty";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Prísna ochrana";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Počet šifrovaných DNS dopytov. Na šifrovanie DNS komunikácie musíte použiť šifrovaný DNS server.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Blokuje všetky známe sledovače.";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Priemerný čas";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Môže narušiť niektoré funkcie.";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Priemerný čas potrebný na spracovanie DNS dopytu. Čím rýchlejší DNS server používate, tým nižšia hodnota by to mala byť.";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Blokuje sledovače Google";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Počet spoločností";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Zastavuje všetky známe sledovacie domény Google.";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Toto je počet spoločností, ktorým boli dopyty zaslané.";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Môže interferovať s aplikáciami a webovými stránkami, ktoré používajú Google API.";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Všetky dopyty";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Blokuje sledovače Facbook";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Len blokované";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Zastavuje všetky známe sledovacie domény Facebook.";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Len povolené";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Môže interferovať s aplikáciami a webovými stránkami, ktoré používajú Facebook API.";
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Žiadne";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivita";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d dopytov";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +819,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Ochrana Safari vypnutá";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Ochrana pred sledovaním zapnutá";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS ochrana zapnutá";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Ochrana pred sledovaním vypnutá";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS ochrana vypnutá";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Aktualizovať filtre";
@@ -806,16 +832,16 @@
 "requests_number_voiceover" = "Počet dopytov";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Počet blokovaných dopytov";
+"encrypted_number_voiceover" = "Počet šifrovaných DNS dopytov";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Množstvo ušetrených dát";
+"elapsed_time_voiceover" = "Priemerný čas na spracovanie DNS dopytu";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Zapnúť ochranu proti sledovaniu";
+"enable_system_protection_voiceover" = "Zapnúť DNS ochranu";
 
 
 // MARK: - GetProTableController

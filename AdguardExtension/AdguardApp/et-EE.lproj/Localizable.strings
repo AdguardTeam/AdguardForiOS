@@ -322,9 +322,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Versioon";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Maksa üks kord ja kasuta Adguard Premium funktsioone kõikides oma seadmetes!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Vale e-post või parool";
 

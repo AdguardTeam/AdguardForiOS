@@ -4,14 +4,14 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "cnF-td-Ba1"; */
-"cnF-td-Ba1.text" = "Ochrana systému";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
+"cnF-td-Ba1.text" = "DNS ochrana";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "zadarmo";
 
-/* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Tento modul Vás chráni pred sledovaním celého systému. Šifruje Vaše DNS dopyty a blokuje sledovacie domény vo všetkých aplikáciách, nielen v prehliadači Safari";
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Tento modul Vám umožňuje používať vlastný DNS server a zvyšuje Vaše súkromie šifrovaním DNS dopytov.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Tento modul blokuje reklamy a sledovače na webových stránkach otvorených v prehliadači Safari. V nižšie uvedených nastaveniach si môžete vybrať z rôznych zoznamov filtrov alebo pridať svoj vlastný";

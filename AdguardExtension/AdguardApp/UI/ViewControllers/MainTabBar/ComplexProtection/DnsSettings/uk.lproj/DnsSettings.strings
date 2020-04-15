@@ -40,6 +40,9 @@
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "Параметри мережі";
 
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Список дозволів";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "СКАСУВАТИ";
 
@@ -67,6 +70,12 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Ви можете вдосконалити свою онлайн-приватність, шифруючи DNS-трафік. Для цього оберіть один з рекомендованих провайдерів DNS.";
+
+/* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Список блокування";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "СКАСУВАТИ";
 
@@ -78,6 +87,9 @@
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "ВИДАЛИТИ";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "DNS-фільтри";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Фільтри безпеки, DNS-приватність, власні фільтри та ін.";

@@ -37,11 +37,11 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "ログイン";
 
-/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "システム全体中で個人情報の追跡を防止";
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "個人情報追跡を防止しプライバシーを保護";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "追跡をブロック";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "DNS通信を保護";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "サブスクリプション有効";

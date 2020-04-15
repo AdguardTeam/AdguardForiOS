@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Delený tunel";
 
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
+"HB4-O1-VPq.text" = "Odstrániť VPN profil";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "Reštartovať keď sa zmení sieť";
 
@@ -37,11 +40,8 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Pokročilé nastavenia";
 
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Režim pre vývojárov";
-
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Keď toto nastavenie je povolené, AdGuard bude ignorovať všeobecné kozmetické pravidlá. Toto zrýchli renderovanie stránok výmenou za zmenšenie kvality filtrácie";
+"PV8-kf-b2c.text" = "Keď je toto nastavenie zapnuté, AdGuard bude ignorovať všeobecné kozmetické pravidlá. Toto zrýchli renderovanie stránok výmenou za zmenšenie kvality filtrácie";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Vynulovať štatistiku";
@@ -65,7 +65,7 @@
 "aIJ-gX-03k.text" = "Úplný tunel";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "Zapnite túto možnosť ak máte problémy s internetovým pripojením, keď je spustený AdGuard";
+"aRS-WH-mRj.text" = "Zapnite túto voľbu, ak máte problémy s internetovým pripojením, keď je spustený AdGuard";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Zobraziť stavový riadok";
@@ -95,7 +95,7 @@
 "qUy-uy-QiF.text" = "Poskytuje ďalšie nastavenia pre pokročilých používateľov";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Keď toto nastavenie bude aktivované, AdGuard bude používať pre aktualizáciu filtrov na pozadí len Wi-Fi";
+"tTY-BW-QcN.text" = "Keď je toto nastavenie zapnuté, AdGuard bude používať pre aktualizáciu filtrov na pozadí len Wi-Fi";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Táto voľba vymaže všetky štatistické údaje, napríklad počet žiadostí atď.";

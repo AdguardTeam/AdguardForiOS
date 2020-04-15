@@ -4,14 +4,14 @@
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
 "WAp-Xx-eXF.text" = "požadavky";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "Ochrana před sledováním";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "DNS ochrana";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Statistiky za celé období:";
 
-/* Class = "UILabel"; text = "data saved*"; ObjectID = "eaJ-er-mJu"; */
-"eaJ-er-mJu.text" = "ušetřená data*";
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "prům. čas";
 
-/* Class = "UILabel"; text = "blocked"; ObjectID = "wd5-Po-h4x"; */
-"wd5-Po-h4x.text" = "zablokováno";
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "šifrováno";

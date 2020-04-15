@@ -19,9 +19,6 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Filtros de segurança, privacidade de DNS, filtros personalizados, etc.";
 
-/* Class = "UIBarButtonItem"; title = "Clear"; ObjectID = "dsD-0w-qic"; */
-"dsD-0w-qic.title" = "Limpar";
-
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "VOLTAR";
 
@@ -30,9 +27,6 @@
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "ADD";
-
-/* Class = "UINavigationItem"; title = "Activity"; ObjectID = "pqA-7I-Vrx"; Note = "Main Menu header"; */
-"pqA-7I-Vrx.title" = "Atividade";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Escolha o nível de domínio";

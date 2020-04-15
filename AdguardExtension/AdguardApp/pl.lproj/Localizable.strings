@@ -28,18 +28,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Stosowanie zmian...";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Wypróbuj za darmo";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reguły użytkownika";
 
@@ -144,6 +132,9 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Nazwa:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "Oceń aplikację";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "Zgłoś nieprawidłowe zablokowanie";
@@ -352,11 +343,11 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Strona główna:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Usuń filtr";
+
 /* (AboutController) current app version string */
 "about_version" = "Wersja";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Zapłać raz i korzystaj z funkcji AdGuard Premium na wszystkich swoich urządzeniach!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nieprawidłowy e-mail lub hasło";
@@ -534,3 +525,6 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Wpisałeś nieprawidłowy upstream";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
