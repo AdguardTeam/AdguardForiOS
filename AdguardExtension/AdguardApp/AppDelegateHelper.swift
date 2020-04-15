@@ -122,6 +122,7 @@ class AppDelegateHelper: NSObject {
         let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
         if manager.migrateIfNeeeded() {
             vpnManager.updateSettings(completion: nil)
+            configuration.advancedMode = true
         }
     }
     

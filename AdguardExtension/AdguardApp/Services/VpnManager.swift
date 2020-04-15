@@ -383,6 +383,13 @@ class VpnManager: VpnManagerProtocol {
     }
 }
 
+let oldAdguardUUID = "AGDEF01"
+let oldAdguardFamilyUUID = "AGDEF02"
+let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
+let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
+let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
+let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
+
 @objc
 class VpnManagerMigration: NSObject {
     @objc
@@ -415,21 +422,21 @@ class VpnManagerMigration: NSObject {
                     dnsProviders.activeDnsServer = activeDnsServerOld
                 }
                 else if let activeDnsServerOld = oldServer as? APDnsServerObject {
+                    // we used APDnsServerObject in old pro app v <= 2.1.2
                     DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
-                    let prot: DnsProtocol = (activeDnsServerOld.isDnsCrypt?.boolValue ?? false) ? .dnsCrypt : .dns
                     
-                    var upstreams: [String] = []
+                    let adguardServer = activeDnsServerOld.uuid == oldAdguardUUID || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv6
                     
-                    for ipv4Address in activeDnsServerOld.ipv4Addresses {
-                        upstreams.append(ipv4Address.upstream)
+                    let adguardFamily = activeDnsServerOld.uuid == oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv6
+                    
+                    let activeServer: DnsServerInfo?
+                    
+                    if adguardServer {
+                        activeServer = dnsProviders.adguardDohServer
                     }
-                    
-                    for ipv6Address in activeDnsServerOld.ipv6Addresses {
-                        upstreams.append(ipv6Address.upstream)
+                    else if adguardFamily {
+                        activeServer = dnsProviders.adguardFamilyDohServer
                     }
-                    
-                    let newServer = DnsServerInfo(dnsProtocol: prot, serverId:UUID().uuidString, name: activeDnsServerOld.serverName, upstreams: upstreams, anycast: nil)
-                    dnsProviders.activeDnsServer = newServer
                 }
             }
         }
