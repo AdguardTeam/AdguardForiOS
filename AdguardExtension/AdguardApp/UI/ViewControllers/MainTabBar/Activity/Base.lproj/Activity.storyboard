@@ -1670,7 +1670,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking protection is disabled" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS protection is disabled" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="32" y="324" width="350" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>

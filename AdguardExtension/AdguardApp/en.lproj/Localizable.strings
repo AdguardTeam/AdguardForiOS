@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@K";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@K";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
@@ -329,7 +335,7 @@
 "remove_vpn_profile_title" = "Remove VPN profile";
 
 /* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable Tracking protection?";
+"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable DNS protection?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "An error occurred";
@@ -755,7 +761,7 @@
 "requests_info_alert_title" = "Requests";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the number of such requests to realize the scope of this problem.";
+"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the total number of requests to realize the scope of this problem.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Encrypted requests";

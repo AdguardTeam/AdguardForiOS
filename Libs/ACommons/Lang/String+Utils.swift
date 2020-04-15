@@ -170,6 +170,28 @@ extension String {
         
         let decimalNumber: Double = number.doubleValue
         
+        /* Asian countries from this array have a different way of formatting numbers */
+        let specialAsianCountriesCodes = ["zh", "ko", "ja"]
+        let currentLocaleLanguageCode = Locale.current.languageCode ?? ""
+        
+        if specialAsianCountriesCodes.contains(currentLocaleLanguageCode) {
+            
+            let hundredMillions = decimalNumber / 100000000
+            if hundredMillions > 1 {
+                let hundredMillionsString = formatter.string(from: NSNumber(floatLiteral: hundredMillions)) ?? "0"
+                return String(format: String.localizedString("hundred_millions_unit"), hundredMillionsString)
+            }
+            
+            let tenThousands = decimalNumber / 10000
+            if tenThousands > 100 {
+                let tenThousandsString = formatter.string(from: NSNumber(floatLiteral: tenThousands)) ?? "0"
+                return String(format: String.localizedString("ten_thousands_unit"), tenThousandsString)
+            }
+            
+            return formatter.string(from: number) ?? "0"
+        }
+        
+        /* This is normal formatting */
         let millions = decimalNumber / 1000000
         if millions > 1 {
             let millionsString = formatter.string(from: NSNumber(floatLiteral: millions)) ?? "0"
