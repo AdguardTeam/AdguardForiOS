@@ -70,20 +70,19 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             let company = dnsTrackersService.getTrackerInfo(by: record.domain)?.name
             let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
             let key = company ?? domain
-                
+            
             if let existingRecord = recordsByCompanies[key] {
                 existingRecord.requests += record.requests
                 existingRecord.encrypted += record.encrypted
                 existingRecord.elapsedSumm += record.elapsedSumm
                 existingRecord.domains.insert(record.domain)
             } else {
-                let requestRecord = CompanyRequestsRecord(date: record.date, company: company, key: company ?? record.domain, requests: record.requests, encrypted: record.encrypted, elapsedSumm: record.elapsedSumm)
+                let requestRecord = CompanyRequestsRecord(date: record.date, company: company, key: key, requests: record.requests, encrypted: record.encrypted, elapsedSumm: record.elapsedSumm)
                 requestRecord.domains.insert(record.domain)
                 recordsByCompanies[key] = requestRecord
-                    
-                if company != nil {
-                    companiesNumber += 1
-                }
+                
+                /* We count unique domains as companies if a company wasn't found by domain */
+                companiesNumber += 1
             }
         }
             
