@@ -2302,7 +2302,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <inset key="titleEdgeInsets" minX="32" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="SAVE AND SELECT">
-                                                    <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 </state>
                                                 <state key="disabled">
                                                     <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2903,7 +2903,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <inset key="titleEdgeInsets" minX="32" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="SAVE">
-                                                    <color key="titleColor" red="0.29803921570000003" green="0.64705882349999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 </state>
                                                 <state key="disabled">
                                                     <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
