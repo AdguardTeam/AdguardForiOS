@@ -329,7 +329,7 @@
 "remove_vpn_profile_title" = "Remove VPN profile";
 
 /* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable Tracking protection?";
+"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable DNS protection?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "An error occurred";
