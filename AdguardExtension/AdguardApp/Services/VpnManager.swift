@@ -437,6 +437,11 @@ class VpnManagerMigration: NSObject {
                     else if adguardFamily {
                         activeServer = dnsProviders.adguardFamilyDohServer
                     }
+                    else {
+                        activeServer = nil
+                    }
+                    
+                    dnsProviders.activeDnsServer = activeServer
                 }
             }
         }
