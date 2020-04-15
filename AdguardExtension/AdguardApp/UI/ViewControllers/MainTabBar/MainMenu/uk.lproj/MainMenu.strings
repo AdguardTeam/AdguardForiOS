@@ -7,8 +7,14 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Захист Safari";
 
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "Загальні";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Що таке AdGuard?";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
+"UJb-NW-d5B.text" = "Параметри";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Параметри";

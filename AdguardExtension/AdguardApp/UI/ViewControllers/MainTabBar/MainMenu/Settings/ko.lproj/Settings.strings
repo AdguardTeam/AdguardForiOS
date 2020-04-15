@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "분할 터널";
 
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
+"HB4-O1-VPq.text" = "VPN 프로필 제거";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "네트워크가 변경되면 보호를 다시 시작합니다";
 
@@ -36,9 +39,6 @@
 
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "고급 설정";
-
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "개발자 모드";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "이 설정이 활성화 되어 있는 경우 AdGuard는 일반적인 코스메틱 규칙을 무시합니다. 이것은 필터링 품질을 대가로 페이지 렌더링 속도를 향상합니다.";

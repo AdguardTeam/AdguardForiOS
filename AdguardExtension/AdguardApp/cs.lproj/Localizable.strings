@@ -34,23 +34,17 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplikuji změny...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Tato informace je založena na počtu blokovaných požadavků DNS. Statistiky jsou odhadnuty z důvodu technické nemožnosti spočítat přesné množství reklam, slídičů a dalších hrozeb, které by mohl uživatel stáhnout, pokud by doména nebyla původně zablokována.";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
 
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
 
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Vyzkoušet zdarma";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Vyzkoušet zdarma";
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@k";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uživatelská pravidla";
@@ -128,10 +122,10 @@
 "inverted_whitelist_text" = "Zde zadejte názvy domén. AdGuard povolí filtrování pouze těchto webových stránek v Safari.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Zde zadejte názvy domén oddělené zalomením řádků. AdGuard povolí všechna připojení k těmto doménám.";
+"dns_whitelist_text" = "Zde zadejte názvy domén. Každá doména na samostatný řádek. AdGuard povolí všechna připojení k těmto doménám.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Tento seznam zakázaných podporuje <a href=\"%@\">syntaxi AdGuard DNS</a>. Zde zadejte pravidla oddělená zalomení řádků. AdGuard zablokuje všechna připojení k doménám, které těmto pravidlům odpovídají.";
+"dns_blacklist_text_format" = "Tento seznam zakázaných podporuje <a href=\"%@\">syntaxi AdGuard DNS</a>. Zde zadejte pravidla. Každé pravidlo na samostatný řádek. AdGuard zablokuje všechna připojení k doménám, které těmto pravidlům odpovídají.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aktualizuji...";
@@ -149,7 +143,7 @@
 "add_whitelist_domain_placeholder" = "example.org";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "Název vaší Wi-Fi";
+"add_wifi_name_placeholder" = "Název vaší WiFi";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Pravidlo:";
@@ -328,6 +322,18 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetovat";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Odstranit";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Odstranit VPN profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Vyskytla se chyba";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Při odstraňování VPN profilu došlo k chybě";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "Jsou používána pravidla: %@";
 
@@ -389,7 +395,7 @@
 "about_version" = "Verze";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Zaplaťte jedenkrát a používejte funkce AdGuard Premium na všech svých zařízeních!";
+"getPro_screen_lifetime_text" = "Zaplaťte jedenkrát a používejte funkce AdGuard Premium na všech svých iOS zařízeních!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nesprávný e-mail nebo heslo";
@@ -404,10 +410,10 @@
 "invalid_2fa_code_error" = "Neplatný 2FA token";
 
 /* (NetworkSettingsController) title for wifi exceptions */
-"wifi_exceptions_title" = "Výjimky Wi-Fi";
+"wifi_exceptions_title" = "WiFi výjimky";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Ochrana proti sledování nebude fungovat pro níže uvedené sítě Wi-Fi";
+"wifi_exceptions_description" = "DNS ochrana bude vypnutá pro níže uvedené WiFi sítě";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Přidat výjimku";
@@ -416,13 +422,13 @@
 "filter_mobile_title" = "Filtrovat mobilní data";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
-"filter_wifi_title" = "Filtrovat Wi-Fi";
+"filter_wifi_title" = "Filtrovat WiFi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Ochrana proti sledování na mobilních datech";
+"mobile_data_description" = "DNS ochrana na mobilních datech";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Ochrana proti sledování na Wi-Fi";
+"wifi_data_description" = "DNS ochrana na WiFi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Seznam povolených";
@@ -464,7 +470,7 @@
 "add_to_blacklist" = "PŘIDAT NA SEZNAM ZAKÁZANÝCH";
 
 /*(GroupsController) Security description without premium  */
-"security_description" = "Umožňuje blokování phishingových webů a dalších nebezpečných domén. Dostupné pro prémiové uživatele";
+"security_description" = "Umožňuje blokování podvodných webů a dalších nebezpečných domén. Dostupné pro prémiové uživatele";
 
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Umožňuje přidávat filtry třetích stran. K dispozici pro prémiové uživatele";
@@ -479,7 +485,7 @@
 "customer_interaction" = "Interakce se zákazníky";
 
 /*(LogCategory) pornvertising category*/
-"pornvertising" = "Pornografie";
+"pornvertising" = "Reklama na pornowebech";
 
 /*(LogCategory) advertising category*/
 "advertising" = "Reklama";
@@ -530,7 +536,7 @@
 "add_new_rule" = "Přidat nové pravidlo";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Obnoví se všechna nastavení včetně uživatelských pravidel, ochrany proti sledování, rozhraní a autorizačních nastavení. Tuto operaci nelze vrátit zpět. Obnovit nastavení?";
+"confirm_reset_text" = "Všechna nastavení včetně uživatelských pravidel, DNS ochrany, rozhraní a autorizačních nastavení budou resetována do výchozího stavu. Tuto operaci nelze vrátit zpět. Obnovit nastavení?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Resetovat protokol aktivity";
@@ -554,19 +560,25 @@
 "chart_alltime" = "Celé období";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Blokátory obsahu se aktualizují ...";
+"loading_content_blockers" = "Blokátory obsahu se aktualizují...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Načítání filtrů ...";
+"loading_filters" = "Načítání filtrů...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Pravidla jsou převáděna ...";
+"converting_rules" = "Pravidla jsou převáděna...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nový vlastní filtr";
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nový DNS filtr";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Upravit vlastní filtr";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Přidat";
 
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Ochrana je vypnuta";
@@ -575,7 +587,7 @@
 "protection_enabled" = "Ochrana je zapnuta";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Ochrana Safari a ochrana proti sledování";
+"complex_enabled" = "Ochrana Safari a DNS ochrana";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Blokování obsahu v Safari";
@@ -583,8 +595,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Všechny moduly ochrany jsou vypnuty";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Ochrana proti sledování";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS ochrana";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "Požadavků: %1$d, zablokováno: %2$d";
@@ -598,14 +610,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Pokusili jste se přidat duplicitní filtr. Tento filtr je již na seznamu.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "Jsou zapnuta pravidla: %@";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Je zapnuto příliš mnoho pravidel: %@. Některá z nich budou vypnuta";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Pro správnou funkci vypněte některé filtry";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Zablokováno";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Povoleno";
+"dns_request_status_processed" = "Zpracováno";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Povoleno";
+"dns_request_status_encrypted" = "Šifrováno";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Povoleno";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "přidáno na seznam povolených";
@@ -632,7 +656,7 @@
 "default_dns_server_name" = "Systémový DNS";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Použít výchozí systémové servery DNS, které poskytuje váš poskytovatel služeb internetu";
+"default_dns_server_description" = "Použít výchozí systémové DNS servery, které poskytuje váš poskytovatel internetu";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokovat požadavek";
@@ -644,7 +668,7 @@
 "video_tutorial_title" = "Video návod";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "Zadali jste neplatný upstream";
+"invalid_upstream_message" = "Zadali jste neplatný odchozí proud";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systémový seznam zakázaných";
@@ -698,7 +722,7 @@
 "dns_status_title" = "Stav DNS";
 
 /* (DnsRequestDetailsController) "DNS upstream" title for cell */
-"dns_upstream_title" = "DNS upstream";
+"dns_upstream_title" = "DNS cíl";
 
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "Odpověď DNS";
@@ -715,15 +739,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prázdná";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Pravidlo nenalezeno";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Ochrana proti sledování je vypnuta";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Povolit";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Chyba při odesílání Vaší zpětné vazby";
 
@@ -733,39 +748,44 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Pokračováním v užívání souhlasíte s<br /><a href=%2$@>Pravidly a podmínkami</a> a <a href=%1$@>Zásadami ochrany osobních údajů</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Základní ochrana";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Požadavky";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Blokuje nejznámější domény slídičů.";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Šifrované požadavky";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Přísná ochrana";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Počet šifrovaných DNS dotazů. Pro šifrování DNS provozu musíte použít šifrovaný DNS server.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Blokuje všechny známé slídiče.";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Průměrný čas";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Může narušit některé funkce.";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Průměrný čas potřebný na zpracování DNS dotazu. Čím rychlejší DNS server používáte, tím nižší hodnota by to měla být.";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Blokovat Google slídiče";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Počet společností";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Blokuje všechny známé domény Google slídičů.";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Toto je počet společností, kterým byly dotazy zaslány.";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Může narušit chování aplikací, které využívají Google API.";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Všechny požadavky";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Blokuje Facebook slídiče";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Pouze blokované";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Blokuje všechny známé domény Facebook slídičů.";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Pouze povolené";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Může narušit chování aplikací, které využívají Facebook API.";
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Žádný";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivita";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "Požadavků: %d";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +813,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Ochrana Safari vypnuta";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Ochrana proti sledování zapnuta";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS ochrana zapnuta";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Ochrana proti sledování vypnuta";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS ochrana vypnuta";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Aktualizovat filtry";
@@ -806,16 +826,16 @@
 "requests_number_voiceover" = "Počet požadavků";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Počet zablokovaných požadavků";
+"encrypted_number_voiceover" = "Počet šifrovaných DNS dotazů";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Ušetřené množství dat";
+"elapsed_time_voiceover" = "Průměrný čas na zpracování DNS dotazu";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Zapnout ochranu proti sledování";
+"enable_system_protection_voiceover" = "Zapnout DNS ochranu";
 
 
 // MARK: - GetProTableController

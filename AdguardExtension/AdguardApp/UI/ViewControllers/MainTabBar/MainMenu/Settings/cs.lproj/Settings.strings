@@ -8,7 +8,7 @@
 "8jT-85-XFp.text" = "Nekompatibilní s dalšími VPN aplikacemi, nestabilní";
 
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
-"Bjk-AC-5fy.text" = "Režim Tunnel";
+"Bjk-AC-5fy.text" = "Režim VPN tunelu";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
 "ChK-gV-7pc.title" = "Nastavení";
@@ -23,7 +23,10 @@
 "GBd-dx-t46.text" = "Neměňte, pokud nevíte, co děláte";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
-"GGp-kp-YJI.text" = "Split-Tunnel";
+"GGp-kp-YJI.text" = "Dělený tunel";
+
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
+"HB4-O1-VPq.text" = "Odstranit VPN profil";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "Restartovat ochranu při změně sítě";
@@ -32,16 +35,13 @@
 "KSL-dU-yfA.text" = "Blokátory obsahu";
 
 /* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
-"KVr-dC-Lo5.title" = "Režim Tunnel";
+"KVr-dC-Lo5.title" = "Režim VPN tunelu";
 
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Pokročilá nastavení";
 
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Vývojářský režim";
-
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Pokud je toto nastavení povoleno, AdGuard bude ignorovat obecná kosmetická pravidla. Tím se zrychlí vykreslování stránek výměnou za kvalitu filtrování";
+"PV8-kf-b2c.text" = "Pokud je toto nastavení povoleno, AdGuard bude ignorovat obecná kosmetická pravidla. Zrychlí se vykreslování stránek výměnou za sníženou kvalitu filtrování";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Resetovat statistiky";
@@ -62,7 +62,7 @@
 "XFM-ii-xUV.text" = "Máte 6 blokátorů obsahu, z nichž každý může obsahovat až 50 000 pravidel";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
-"aIJ-gX-03k.text" = "Full-Tunnel";
+"aIJ-gX-03k.text" = "Úplný tunel";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "Tuto možnost zapněte, pokud máte problémy s připojením k internetu při spuštěném AdGuardu";
@@ -74,16 +74,16 @@
 "eIa-RB-Phv.text" = "Pokročilá nastavení";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
-"eiP-yl-Xb3.text" = "Full-Tunnel (bez ikony VPN)";
+"eiP-yl-Xb3.text" = "Úplný tunel (bez ikony VPN)";
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
-"gxl-pG-zh1.text" = "Kompatibilní s aplikacemi „Osobní VPN“";
+"gxl-pG-zh1.text" = "Kompatibilní s Vašimi dalšími VPN aplikacemi";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "V režimu Split-Tunnel je AdGuard kompatibilní s tzv. aplikacemi „Osobní VPN“. Jako kompromis v případě špatného připojení může být v tomto režimu systém obcházen.";
+"jmQ-ze-hFG.text" = "V režimu Dělený tunel je AdGuard kompatibilní s tzv. dalšími VPN aplikacemi, které můžete mít spuštěné. Jako kompromis může operační systém v případě špatného připojení obcházet AdGuard a tím i filtrování.";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "Zobrazit lištu průběhu aktualizace filtru";
+"mdJ-Nh-wTi.text" = "Zobrazit lištu s průběhem aktualizací filtrů";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Ostatní";
@@ -98,7 +98,7 @@
 "tTY-BW-QcN.text" = "Pokud je toto nastavení zapnuto, AdGuard použije pro aktualizace filtrů na pozadí pouze Wi-Fi";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Tato možnost vymaže všechny statistické údaje, například počet požadavků atd.";
+"wYq-g0-5k6.text" = "Tato akce vymaže všechny statistické údaje, například počet požadavků atd.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Povolí reklamy všude kromě webů z tohoto seznamu";

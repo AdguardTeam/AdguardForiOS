@@ -4,14 +4,14 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "cnF-td-Ba1"; */
-"cnF-td-Ba1.text" = "Zaščita pred sledenjem";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
+"cnF-td-Ba1.text" = "Zaščita DNS";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "brezplačna";
 
-/* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Ta modul vas varuje pred sledenjem po celotnem sistemu. Šifrira vaše poizvedbe DNS in onemogoča sledilne domene v vseh aplikacijah, ne le v Safariju";
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Ta modul vam omogoča uporabo strežnika DNS po meri in povečuje vašo zasebnost s šifriranjem poizvedb DNS.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Ta modul zavira oglase in sledilce na spletnih straneh, odprtih v Safariju. V spodnjih nastavitvah lahko izbirate med različnimi seznami filtrov ali dodate svojega";

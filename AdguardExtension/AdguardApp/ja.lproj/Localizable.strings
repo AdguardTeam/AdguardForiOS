@@ -34,23 +34,11 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "変更を適用中...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "この情報は、ブロックされたDNSリクエスト数に基づいています。統計は、ドメインがブロックされなかった場合にユーザーによってダウンロードされるトラッカー（追跡ソフト）およびその他の脅威を想定して計算した推定値です（※技術的に100％正確な数を測ることは不可能です）。";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "無料お試し";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "詳細はこちら";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
@@ -328,6 +316,18 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "リセット";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "除去する";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "VPNプロファイルの除去";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "エラーが発生しました。";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "VPNプロファイル除去中に何かの問題が発生しました。";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "使用ルール数：%@";
 
@@ -389,7 +389,7 @@
 "about_version" = "バージョン";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "一度限りのお支払いで、すべてのデバイスでAdGuardプレミアム機能をご利用できます！";
+"getPro_screen_lifetime_text" = "一度限りのお支払いで、お使いの全iOSデバイスでAdGuardプレミアム機能をご利用できます！";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "メールアドレスもしくはパスワードが間違っています";
@@ -407,7 +407,7 @@
 "wifi_exceptions_title" = "Wi-Fiの除外";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "下記のWi-Fiネットワークに対し「追跡をブロック」はオフになります。";
+"wifi_exceptions_description" = "下記のWi-Fiネットワークに対し「DNS通信を保護」はオフになります。";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "除外項目を追加する";
@@ -419,10 +419,10 @@
 "filter_wifi_title" = "Wi-Fiをフィルタリング";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "モバイル通信接続時の「追跡をブロック」";
+"mobile_data_description" = "モバイル通信接続時の「DNS通信を保護」";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Wi-Fi接続時の「追跡をブロック」";
+"wifi_data_description" = "Wi-Fi接続時の「DNS通信を保護」";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "ホワイトリスト";
@@ -530,7 +530,7 @@
 "add_new_rule" = "新しいルールを追加する";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "ユーザールール、「追跡をブロック」、インターフェイスおよび認証設定を含むすべての設定がリセットされます。この操作を取り消すことはできません。設定をリセットしますか？";
+"confirm_reset_text" = "ユーザールール、「DNS通信を保護」、インターフェイスおよび認証設定を含むすべての設定がリセットされます。この操作を取り消すことはできません。設定をリセットしますか？";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "アクティビティ・ログのリセット";
@@ -568,6 +568,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "新規DNSフィルタ";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "カスタムフィルタの編集";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "追加";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "保護はオフです。";
 
@@ -575,7 +581,7 @@
 "protection_enabled" = "保護はオンです。";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "「Safariでブロック」と\n「追跡をブロック」がON";
+"complex_enabled" = "「Safariでブロック」と\n「DNS通信を保護」がONです。";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "「Safariでブロック」がON";
@@ -583,8 +589,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "すべてのブロック機能がオフです。";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "「追跡をブロック」がON";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "「DNS通信を保護」がONです。";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "リクエスト数 %1$d、ブロック済数 %2$d";
@@ -598,14 +604,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "重複するフィルターを追加しようとしました。このフィルターは既にリストに登録されています。";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@本のルールが有効になっています。";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "有効ルール数が多すぎています：%@。 一部のルールは無効になります。";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "正しく動作するにはフィルタを一部オフにしてください";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "ブロック済";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "許可済み";
+"dns_request_status_processed" = "処理済み";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "許可済み";
+"dns_request_status_encrypted" = "暗号化済み";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "許可済み";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "ホワイトリストに追加済み";
@@ -715,15 +733,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "未定義";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "ルール見つかりません";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "「追跡をブロック」がオフになっています。";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "オンにする";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "フィードバックを送れませんでした";
 
@@ -733,39 +742,44 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "本アプリを引き続き使用することにより、<a href=%2$@>利用規約</a>および<a href=%1$@>プライバシーポリシー</a>に同意したことになります。";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "基本的な保護";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "リクエスト総数";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "ほとんどの既知の追跡ドメインをブロックします。";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "暗号化済みリクエスト数";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "強めの保護";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "暗号化されたDNSリクエストの数です。DNS通信を暗号化するには、暗号化されたDNSサーバーを使用する必要があります。";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "既知のすべての追跡をブロックします。";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "平均時間";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "一部の機能を妨げる可能性があります。";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "DNSリクエスト処理にかかる平均時間。使用しているDNSサーバーが高速であるほど、この平均時間は短くなります。";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Googleによる追跡をブロック";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "企業数";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "既知のGoogleによる追跡ドメインをすべてブロックします。";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "リクエストの転送先企業の数です。";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "※Google APIを使用しているアプリやウェブサイトの動作を妨げる可能性があります。";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "すべてのリクエスト";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Facebookによる追跡をブロック";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "ブロック済みのみ";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "既知のFacebookによる追跡ドメインをすべてブロックします。";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "許可済みのみ";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "※Facebook APIを使用しているアプリやウェブサイトの動作を妨げる可能性があります。";
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "なし";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "アクティビティ";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "リクエスト数 %d";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +807,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Safariでブロックがオフです。";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "追跡をブロックがオンになっています。";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS通信を保護がオンになっています。";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "追跡をブロックはオフになっています。";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS通信を保護はオフになっています。";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "フィルターを更新する";
@@ -806,16 +820,16 @@
 "requests_number_voiceover" = "リクエストの総数";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "ブロックされたリクエストの数";
+"encrypted_number_voiceover" = "暗号化済みDNSリクエストの数";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "節約された通信量";
+"elapsed_time_voiceover" = "DNSリクエストの処理にかかる平均時間";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "追跡ブロックをオンにする";
+"enable_system_protection_voiceover" = "DNS通信を保護をオンにする";
 
 
 // MARK: - GetProTableController

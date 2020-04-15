@@ -34,24 +34,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplicando alterações...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Esta informação é baseada no número de solicitações DNS bloqueadas. As estatísticas são uma estimativa devido à impossibilidade técnica de calcular a quantidade exata de anúncios, rastreadores e outras ameaças que poderiam ter sido transferidas pelo usuário se o domínio não tivesse sido inicialmente bloqueado.";
-
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Experimente gratuitamente";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Experimentar gratuitamente";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regras de usuário";
 
@@ -388,9 +370,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Versão";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pague uma vez e use os recursos do AdGuard Premium em todos os seus dispositivos!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail ou senha inválida";
 
@@ -406,9 +385,6 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Exceções de Wi-Fi";
 
-/* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "A proteção contra rastreamento não vai funcionar para as redes Wi-Fi listadas abaixo";
-
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Adicionar exceção";
 
@@ -417,12 +393,6 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtro de Wi-Fi";
-
-/* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Proteção contra rastreamento enquanto estiver conectado com dados móveis";
-
-/* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Proteção contra rastreamento enquanto estiver conectado com Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Lista branca";
@@ -529,9 +499,6 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Adicionar uma nova regra";
 
-/* confirm reset lert text */
-"confirm_reset_text" = "Todas as configurações, incluindo regras de usuário, proteção de rastreamento, interface e configurações de autorização, serão redefinidas. Esta operação não pode ser desfeita. Deseja redefinir as configurações?";
-
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Redefinir registro de atividades";
 
@@ -574,17 +541,11 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "A proteção está ativada";
 
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari e proteção contra rastreamento";
-
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Bloqueio de conteúdo do Safari";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Todos os módulos de proteção está desativados";
-
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Proteção contra rastreamento";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d solicitações, %2$d bloqueado";
@@ -600,12 +561,6 @@
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqueado";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Permitido";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Permitido";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "adicionado na lista branca";
@@ -715,15 +670,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vazio";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Nenhuma regra encontrada";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "A proteção do sistema está desativada";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Ativar";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Ocorreu um erro ao enviar seu feedback";
 
@@ -732,40 +678,6 @@
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Ao continuar a usá-lo, você aceita os<br /><a href=%2$@>Termos e condições</a> e a nossa <a href=%1$@>Política de privacidade</a>";
-
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Proteção básica";
-
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Bloqueia os domínios de rastreamento mais usados.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Proteção rigorosa";
-
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Bloqueia todos os rastreadores conhecidos.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Pode quebrar algumas funcionalidades.";
-
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Bloquear rastreadores do Google";
-
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Bloqueia todos os domínios de rastreamento conhecidos do Google.";
-
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Pode interferir com aplicativos e sites que usam as APIs do Google.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Bloquear rastreadores do Facebook";
-
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Bloqueia todos os domínios de rastreamento conhecidos do Facebook.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Pode interferir com aplicativos e sites que usam as APIs do Facebook.";
-
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,29 +705,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "A proteção do Safaria está desativada";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "A proteção contra rastreamento está ativada";
-
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "A proteção contra rastreamento está desativada";
-
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Atualizar filtros";
 
 /* (MainPageController) requests number title for VoiceOver*/
 "requests_number_voiceover" = "Número de solicitações";
-
-/* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Número de solicitações bloqueadas";
-
-/* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Tamanho dos dados economizados";
-
-
-// MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
-
-"enable_system_protection_voiceover" = "Ativar proteção contra rastreamento";
 
 
 // MARK: - GetProTableController

@@ -28,21 +28,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Primenjivanje promena...";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ Kb";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ Mb";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ Gb";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Isprobaj besplatno";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Probajte besplatno";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Korisnička pravila";
 
@@ -364,9 +349,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Verzija";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Platite jednom i koristite AdGuard Premium na svim vašim uređajima!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Netačna adresa elektronske pošte ili lozinka";
 
@@ -612,9 +594,3 @@
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
-
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Pravilo nije pronađeno";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Uključi";

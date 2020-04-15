@@ -34,24 +34,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Appliquer les changements...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Cette information est basée sur le nombre de demandes DNS bloquées. Les statistiques sont une estimation en raison de l’impossibilité technique de calculer la quantité exacte de publicités, pisteurs et autres menaces qui auraient pu être téléchargées par l’utilisateur si le domaine n’avait pas été initialement bloqué.";
-
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Essai gratuit";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Essai gratuit";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Règles d'utilisateur";
 
@@ -385,9 +367,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Version";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Payez une fois et utilisez les fonctionnalités Premium d'AdGuard sur tous vos appareils!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Adresse e-mail ou mot de passe incorrect";
 
@@ -565,9 +544,6 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Tous les modules de protection sont désactivés";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Protection contre le suivi";
-
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requêtes, %2$d bloquées";
 
@@ -582,12 +558,6 @@
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqués";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Ajoutée à la liste Blanche";
-
-/*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Ajoutée à la liste Blanche";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "ajoutée à la liste Blanche";
@@ -697,15 +667,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vide";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Aucune règle trouvée";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Protection contre le suivi désactivée";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Activer";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Échec de l’envoi de vos commentaires";
 
@@ -714,40 +675,6 @@
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "En continuant à l’utiliser, vous acceptez les <br/><a href=%2$@>Conditions générales</a> et la <a href=%1$@>Politique de confidentialité</a>";
-
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Protection de base";
-
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Bloque les domaines de suivi les plus courants.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Protection avancée";
-
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Bloque tous les traqueurs de suivis connus.";
-
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Peut nuire à certaines fonctionnalités.";
-
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Bloquer les traqueurs de suivi de Google";
-
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Arrête tous les domaines de pisteurs de Google connus.";
-
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Peut interférer avec les applications et les sites Web qui utilisent les API de Google.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Bloquer les traqueurs de suivi de Facebook";
-
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Bloquer tous les domaines de suivi connus de Facebook.";
-
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Peut interférer avec les applications et les sites Web qui utilisent les API de Facebook.";
-
 
 
 // MARK: - Strings for VoiceOver -
@@ -775,29 +702,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Protection sous Safari désactivée";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Protection contre le suivi activée";
-
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Protection contre le suivi désactivée";
-
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Mettre à jour les filtres";
 
 /* (MainPageController) requests number title for VoiceOver*/
 "requests_number_voiceover" = "Nombre de requêtes";
-
-/* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Nombre de requêtes bloquées";
-
-/* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Taille des données enregistrées";
-
-
-// MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
-
-"enable_system_protection_voiceover" = "Activer la protection contre le suivi";
 
 
 // MARK: - GetProTableController

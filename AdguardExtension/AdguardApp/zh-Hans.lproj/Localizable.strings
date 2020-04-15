@@ -22,23 +22,14 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "无法加载过滤器到 Safari。因此，无法应用您的最近更新。";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "无法把过滤器加载到 Safari。请尝试清除您的规则和白名单或更改使用过滤器的设置。";
+
 /* NO Button caption in alert */
 "common_action_no" = "否";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "正在应用变更…";
-
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ Kb";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ Mb";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ Gb";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "免费试用";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "用户过滤器";
@@ -125,7 +116,7 @@
 "add_blacklist_rule_title" = "添加规则";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "添加域";
+"add_whitelist_domain_title" = "输入域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -232,6 +223,12 @@
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "只要有可能，安全搜索就会在浏览器中强制执行";
 
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "阻止追踪系统";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "无加密（系统DNS）";
+
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已开启 %1$d / %2$d";
 
@@ -301,6 +298,18 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "重置";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "移除";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "移除VPN 配置文件";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "发生错误";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "删除您的VPN配置文件时出现了问题。";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 条规则正被使用";
 
@@ -355,9 +364,6 @@
 /* (AboutController) current app version string */
 "about_version" = "版本";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard Premium！";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正确的邮箱或密码";
 
@@ -382,6 +388,15 @@
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "启用Wi-Fi时过滤";
 
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "白名单";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "白名单";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "黑名单";
+
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari用户规则";
 
@@ -399,6 +414,18 @@
 
 /* "Disabled" title */
 "disabled" = "禁用";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "移出白名单";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "移出黑名单";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "添加到白名单";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "添加到黑名单";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "允许阻止钓鱼网站和其他危险域。高级用户可用。";
@@ -493,17 +520,26 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "新建 DNS 过滤器";
 
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "添加";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "防护已禁用";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "防护已开启";
 
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari与DNS防护";
+
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari内容拦截";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "所有防护模组被禁用";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS防护";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d条请求，%2$d次拦截";
@@ -520,6 +556,21 @@
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已拦截";
 
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "已处理";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "已添加至白名单\n";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "已添加至黑名单";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "已从白名单移除";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "已从黑名单移除";
+
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系统DNS";
 
@@ -529,8 +580,20 @@
 /* (BlockRequestController) Block request title */
 "block_request" = "拦截请求";
 
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "将域名添加到白名单";
+
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "视频教程";
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "您输入了非法的上游服务器";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "开启DNS防护";

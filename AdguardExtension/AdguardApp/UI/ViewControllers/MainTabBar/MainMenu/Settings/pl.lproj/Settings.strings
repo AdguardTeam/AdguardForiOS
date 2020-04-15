@@ -34,9 +34,6 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Ustawienia zaawansowane";
 
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Tryb deweloperski";
-
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "Jeśli to ustawienie jest włączone, AdGuard zignoruje ogólne reguły „kosmetyczne”. Przyspieszy to renderowanie stron w zamian za jakość filtrowania";
 

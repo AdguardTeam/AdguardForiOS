@@ -34,17 +34,20 @@
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "선택";
 
-/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "DNS 암호화";
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "DNS 서버";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "필터 추가";
 
-/* Class = "UILabel"; text = "Enable this module to block tracking domains and encrypt your DNS traffic"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "이 모듈을 활성화하면 추적 도메인을 차단하고 DNS 트래픽을 암호화할 수 있습니다";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "이 모듈을 활성화하면 DNS 트래픽을 암호화하여 개인정보 보호 기능을 향상시킬 수 있습니다.";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "추적 보호";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "DNS 보호";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
+"Uem-fP-tai.normalTitle" = "무료 사용";
 
 /* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
 "VR9-fh-ogr.title" = "네트워크 설정";
@@ -61,8 +64,8 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
 
-/* Class = "UILabel"; text = "DNS encryption"; ObjectID = "c9G-jn-5ym"; */
-"c9G-jn-5ym.text" = "DNS 암호화";
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "DNS 서버";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "서버";
@@ -100,8 +103,8 @@
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "삭제";
 
-/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "맞춤형 차단";
+/* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "DNS 필터링";
 
 /* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
 "pXa-VP-4yy.text" = "DNS 필터";
@@ -109,20 +112,20 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "보안 필터, DNS 보호, 사용자 정의 필터, 기타.";
 
-/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "plc-eu-aXh"; */
+/* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "DNS 필터";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "서버 이름";
 
-/* Class = "UILabel"; text = "Choose ready-to-use anti-tracking lists or add your own rules"; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "즉시 사용 가능한 추적 방지 목록을 선택하거나 나만의 규칙을 추가해보세요.";
+/* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "나만의 규칙을 사용하여 DNS 트래픽을 구성하세요.";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS 서버 주소";
 
-/* Class = "UILabel"; text = "Customize blocking"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "맞춤형 차단";
+/* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "DNS 필터링";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "프로토콜 선택";

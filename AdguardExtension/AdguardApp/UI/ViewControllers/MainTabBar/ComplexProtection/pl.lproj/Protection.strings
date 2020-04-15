@@ -7,8 +7,5 @@
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "darmowa";
 
-/* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Ten moduł chroni Cię przed śledzeniem w całym systemie. Szyfruje zapytania DNS i blokuje domeny śledzące we wszystkich aplikacjach, nie tylko w Safari";
-
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Ten moduł blokuje reklamy i elementy śledzące na stronach otwieranych w Safari. Możesz wybierać spośród różnych list filtrów w ustawieniach AdGuard";

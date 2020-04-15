@@ -322,9 +322,6 @@
 /* (AboutController) current app version string */
 "about_version" = "نسخه";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "یکبار هزینه کنید و ویژگی های AdGuard را در همه دستگاه های خود استفاده کنید!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "رمزعبور یا ایمیل اشتباه است";
 

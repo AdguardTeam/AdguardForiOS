@@ -34,23 +34,17 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Primjena promjena...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Ova informacija temelji se na broju blokiranih DNS pratitelja. Statistika je samo procjena zbog tehničke nemogućnosti izračuna točnog broja pratitelja i drugih prijetnji koje je korisnik mogao preuzeti, ukoliko domena nije bila inicijalno blokirana.";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
 
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@ mil";
 
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Isprobajte besplatno";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Isprobajte besplatno";
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@ tis";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Korisnička pravila";
@@ -328,6 +322,18 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Poništi";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Ukloni";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Ukloni VPN profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Došlo je do pogreške";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Došlo je do pogreške prilikom uklanjanja vašeg VPN profila";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ pravila se koriste";
 
@@ -389,7 +395,7 @@
 "about_version" = "Verzija";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Platite jednom i koristite AdGuard Premium značajke na svim svojim uređajima!";
+"getPro_screen_lifetime_text" = "Platite jednom i koristite AdGuard Premium značajke na svim svojim iOS uređajima!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Netočna adresa e-pošte ili lozinka";
@@ -407,7 +413,7 @@
 "wifi_exceptions_title" = "Wi-Fi iznimke";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Zaštita protiv praćenja neće raditi za Wi-Fi mreže navedene ispod";
+"wifi_exceptions_description" = "DNS zaštita neće raditi za Wi-Fi mreže navedene ispod";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Dodaj iznimku";
@@ -419,10 +425,10 @@
 "filter_wifi_title" = "Filtriraj Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Zaštita protiv praćenja dok ste na mobilnim podacima";
+"mobile_data_description" = "DNS zaštita dok koristite mobilne podatke";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Zaštita protiv praćenja dok ste na Wi-Fi-u";
+"wifi_data_description" = "DNS zaštita dok koristite Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Popis dopuštenih";
@@ -530,7 +536,7 @@
 "add_new_rule" = "Dodaj novo pravilo";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, zaštita protiv praćenja, postavke sučelja i autorizacije će biti poništene. Ova radnje se nemože poništiti. Poništi postavke?";
+"confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, DNS zaštita, postavke sučelja i autorizacije će biti poništene. Ova radnje se nemože poništiti. Poništi postavke?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Poništi zapisnik aktivnosti";
@@ -568,6 +574,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Novi DNS filtar";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Uredi prilagođeni filtar";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Dodaj";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Zaštita je onemogućena";
 
@@ -575,7 +587,7 @@
 "protection_enabled" = "Zaštita je omogućena";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari zaštita i zaštita protiv praćenja";
+"complex_enabled" = "Safari i DNS zaštita";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari blokiranje sadržaja";
@@ -583,8 +595,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Svi moduli zaštite su onemogućeni";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Zaštita protiv praćenja";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS zaštita";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d zahtjeva, %2$d blokirano";
@@ -598,14 +610,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Pokušali ste dodati duplicirani filtar. Ovaj filtar je već na popisu.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ pravila je omogućeno";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Prevelik broj omogućenih pravila: %@. Neka od njih će morati biti onemogućena";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Onemogućite neke filtre za ispravan rad";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokirano";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Dopušteno";
+"dns_request_status_processed" = "Obrađeno";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Dopušteno";
+"dns_request_status_encrypted" = "Šifrirano";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Dopušteno";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "dodano na popis dopuštenih";
@@ -715,15 +739,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Nije pronađeno pravilo";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Zaštita protiv praćenja je onemogućena";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Omogući";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Neuspješno slanje vaše povratne informacije";
 
@@ -733,39 +748,44 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Nastavljanjem s upotrebom, prihvaćate<br /><a href=%2$@>Uvjete i odredbe</a> i <a href=%1$@>Pravila privatnosti</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Osnovna zaštita";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Zahtjevi";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Blokira najčešće domene praćenja.";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Šifrirani zahtjevi";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Stroga zaštita";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Broj šifriranih DNS zahtjeva. Trebate koristiti šifrirani DNS poslužitelj da bi vaš DNS promet bio šifriran.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Blokira sve poznate pratitelje.";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Prosječno vrijeme";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Može pokvariti neke funkcionalnosti.";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Prosječno vrijeme za obradu DNS zahtjeva. Što je brži DNS poslužitelj kojeg koristite, manje vrijeme će biti.";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Blokiraj Google pratitelje";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Broj tvrtki";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Zaustavlja sve poznate domene Google pratitelja.";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Ovo je broj tvrtki kojima su zahtjevi proslijeđeni.";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Može ometati aplikacije i web stranice koje koriste Google API-je.";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Svi zahtjevi";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Blokiraj Facebook pratitelje";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Samo blokirani";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Zaustavlja sve poznate domene Facebook pratitelja.";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Samo dopušteni";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Može ometati aplikacije i web stranice koje koriste Facebook API-je.";
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Nema";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivnosti";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d zahtjeva";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +813,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Safari zaštita je onemogućena";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Zaštita protiv praćenja je omogućena";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS zaštita je omogućena";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Zaštita protiv praćenja je onemogućena";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS zaštita je onemogućena";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Ažuriraj filtare";
@@ -806,16 +826,16 @@
 "requests_number_voiceover" = "Broj zahtjeva";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Broj blokiranih zahtjeva";
+"encrypted_number_voiceover" = "Broj šifriranih DNS zahtjeva";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Količina ušteđenih podataka";
+"elapsed_time_voiceover" = "Prosječno vrijeme za obradu DNS zahtjeva";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Omogući zaštitu protiv praćenja";
+"enable_system_protection_voiceover" = "Omogući DNS zaštitu";
 
 
 // MARK: - GetProTableController

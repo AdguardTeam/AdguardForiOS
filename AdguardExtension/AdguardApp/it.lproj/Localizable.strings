@@ -28,21 +28,6 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applicazione dei cambiamenti...";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
-
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
-
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Prova gratis";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Prova gratis";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regole utente";
 
@@ -364,9 +349,6 @@
 /* (AboutController) current app version string */
 "about_version" = "Versione";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Paga una volta e usa le funzionalità AdGuard Premium su tutti i tuoi dispositivi!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail o password errate";
 
@@ -612,9 +594,3 @@
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vuoto";
-
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Nessuna regola trovata";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Abilita";

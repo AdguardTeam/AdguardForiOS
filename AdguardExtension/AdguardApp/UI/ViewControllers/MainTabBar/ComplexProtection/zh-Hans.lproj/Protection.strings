@@ -7,8 +7,5 @@
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "免费";
 
-/* Class = "UILabel"; text = "This module protects you from tracking system-wide. It encrypts your DNS queries and blocks tracking domains in all apps, not just in Safari"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "此模块可保护您在系统范围内不被跟踪。其会加密您的DNS查询并阻止所有应用程序中的跟踪域，而不仅仅是在Safari中";
-
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "此模块阻止在Safari中打开的网站上的广告和跟踪器。您可以在AdGuard设置中选择不同的过滤器";

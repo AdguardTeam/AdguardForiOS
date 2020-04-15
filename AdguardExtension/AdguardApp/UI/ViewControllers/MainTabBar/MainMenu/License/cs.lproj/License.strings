@@ -37,11 +37,11 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Přihlásit se";
 
-/* Class = "UILabel"; text = "System-wide tracking protection"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Ochrana před sledováním celého systému";
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Hodnota Vašeho soukromí";
 
-/* Class = "UILabel"; text = "Tracking protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "Ochrana proti sledování";
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "DNS ochrana";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "Prémiová verze je aktivována";

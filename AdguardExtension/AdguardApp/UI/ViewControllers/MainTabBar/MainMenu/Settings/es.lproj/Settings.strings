@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Túnel dividido";
 
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
+"HB4-O1-VPq.text" = "Eliminar perfil VPN";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
 "JPH-xu-Z3J.text" = "Reiniciar la protección cuando la red cambie";
 
@@ -37,8 +40,8 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Configuración avanzada";
 
-/* Class = "UILabel"; text = "Developer mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "Modo desarrollador";
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Modo avanzado";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "Si esta configuración está habilitada, AdGuard ignorará las reglas cosméticas genéricas. Esto acelerará el renderizado de las páginas a cambio de calidad de filtrado";
@@ -66,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "Habilite esta opción si tiene problemas con la conexión a Internet mientras AdGuard se está ejecutando";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
+"aYm-cM-OAj.text" = "Esto eliminará tu perfil VPN real y deshabilitará la protección DNS";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Mostrar barra de estado";

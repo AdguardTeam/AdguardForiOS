@@ -34,23 +34,17 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Сохранение изменений...";
 
-/* (MainPageController) Message for alert about saved data */
-"saved_data_message" = "Эта информация основана на количестве заблокированных DNS-запросов. Статистика является приблизительной в силу технической невозможности подсчитать точное количество баннеров, счетчиков и других угроз, которые могли быть загружены пользователем, если бы домен не был изначально заблокирован.";
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ мс";
 
-/* (MainPageController) Text for data units (Kb) Kilobyte */
-"kb_unit" = "%@ KB";
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ с";
 
-/* (MainPageController) Text for data units (Mb) Megabyte */
-"mb_unit" = "%@ MB";
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@млн";
 
-/* (MainPageController) Text for data units (Gb) Gigobyte */
-"gb_unit" = "%@ GB";
-
-/* (GetProPageController) Text for "try for free" button */
-"try_for_free" = "Попробовать бесплатно";
-
-/* (MainPageController) Text for "try for free" button */
-"try_for_free_main" = "Попробовать бесплатно";
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@тыс.";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательские правила";
@@ -328,6 +322,18 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Сбросить";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Удалить";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Удалить VPN-профиль";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Произошла ошибка";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Что-то пошло не так при удалении вашего VPN-профиля";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ правил используются";
 
@@ -389,7 +395,7 @@
 "about_version" = "Версия";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих устройствах!";
+"getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих iOS-устройствах!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Неверный адрес почты или пароль";
@@ -407,7 +413,7 @@
 "wifi_exceptions_title" = "Сети-исключения";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "Защита от трекинга не будет работать для сетей Wi-Fi, перечисленных ниже";
+"wifi_exceptions_description" = "Защита системы не будет работать для сетей Wi-Fi, перечисленных ниже";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Добавить исключение";
@@ -419,10 +425,10 @@
 "filter_wifi_title" = "Фильтровать Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Защита от трекинга при передаче данных через мобильную сеть";
+"mobile_data_description" = "Защита системы при передаче данных через мобильную сеть";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Защита от трекинга при использовании Wi-Fi";
+"wifi_data_description" = "Защита системы при использовании Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Белый список";
@@ -530,7 +536,7 @@
 "add_new_rule" = "Добавить новое правило";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Все настройки, включая пользовательские правила, защиту от трекинга, интерфейс и настройки авторизации, будут сброшены. Это действие нельзя отменить. Сбросить настройки?";
+"confirm_reset_text" = "Все настройки, включая пользовательские правила, системную защиту, интерфейс и настройки авторизации, будут сброшены. Это действие нельзя отменить. Сбросить настройки?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Сбросить лог активности";
@@ -568,6 +574,12 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Новый DNS-фильтр";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Отредактировать свой фильтр";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Добавить";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Защита выключена";
 
@@ -575,7 +587,7 @@
 "protection_enabled" = "Защита включена";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Фильтрация Safari и Защита от трекинга";
+"complex_enabled" = "Фильтрация Safari + Системная защита";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Блокировка контента в Safari";
@@ -583,8 +595,8 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Все модули защиты выключены";
 
-/*(TodayViewController) Tracking protection is enabled text  */
-"system_enabled" = "Защита от трекинга";
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Системная защита";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d запросов, %2$d заблокировано";
@@ -598,14 +610,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Вы попытались добавить дублирующийся фильтр. Этот фильтр уже есть в списке.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ правил включено";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Используется слишком много правил: %@. Некоторые из них будут отключены";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Отключите несколько фильтров для корректной работы";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблокирован";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Разрешен";
+"dns_request_status_processed" = "Обработан";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_whitelisted" = "Разрешен";
+"dns_request_status_encrypted" = "Зашифровано";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Разрешен";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "добавлен в белый список";
@@ -715,15 +739,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Пусто";
 
-/* (DnsRequestDetailsController) - No rule found title */
-"no_rule_found" = "Правило не найдено";
-
-/* (SystemProtectionEnablerController) - Tracking protection is disabled title */
-"protection_enabler_title" = "Защита от трекинга отключена";
-
-/* (SystemProtectionEnablerController) - Enable title */
-"protection_enabler_button" = "Включить";
-
 /* (FeedbackController) - feedback sending failure title */
 "feedback_sending_failed_title" = "Не удалось отправить ваш отзыв";
 
@@ -733,39 +748,44 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Продолжая использование, вы принимаете <br /><a href=%2$@>Положения и условия</a> и <a href=%1$@>Политику конфиденциальности</a>";
 
-/* (DnsFiltersService) - Basic Tracking protection filter title */
-"basic_filter_title" = "Базовая защита";
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Запросы";
 
-/* (DnsFiltersService) - Basic Tracking protection filter description */
-"basic_filter_description" = "Блокирует наиболее распространенные отслеживающие домены.";
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Зашифрованные запросы";
 
-/* (DnsFiltersService) - Strict Tracking protection filter title */
-"strict_filter_title" = "Усиленная защита";
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Количество зашифрованных DNS-запросов. Вам нужно использовать DNS-сервер с шифрованием, чтобы зашифровать трафик.";
 
-/* (DnsFiltersService) - Strict Tracking protection filter description */
-"strict_filter_description" = "Блокирует все известные трекеры.";
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Среднее время";
 
-/* (DnsFiltersService) - Strict Tracking protection filter important description */
-"strict_filter_important_description" = "Может нарушить работу некоторых сайтов.";
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Среднее время, которое нужно для обработки DNS-запроса. Чем быстрее DNS-сервер, который вы используете, тем меньше времени ему потребуется.";
 
-/* (DnsFiltersService) - Google tracking domains filter title */
-"google_filter_title" = "Блокировать трекеры Google";
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Количество компаний";
 
-/* (DnsFiltersService) - Google tracking domains filter description */
-"google_filter_description" = "Обезвреживает все известные отслеживающие домены Google.";
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Это количество компаний, которым направляются запросы.";
 
-/* (DnsFiltersService) - Google tracking domains filter important description */
-"google_filter_important_description" = "Может препятствовать работе приложений и сайтов, которые используют Google API.";
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Все запросы";
 
-/* (DnsFiltersService) - Facebook tracking domains filter title */
-"facebook_filter_title" = "Блокировать трекеры Facebook";
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Только заблокированные";
 
-/* (DnsFiltersService) - Facebook tracking domains description */
-"facebook_filter_description" = "Обезвреживает все известные отслеживающие домены Facebook.";
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Только разрешенные";
 
-/* (DnsFiltersService) - Facebook tracking domains filter important description */
-"facebook_filter_important_description" = "Может препятствовать работе приложений и сайтов, которые используют Facebook API.";
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Отсутствует";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Активность";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d запросов";
 
 
 // MARK: - Strings for VoiceOver -
@@ -793,11 +813,11 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Защита Safari отключена";
 
-/* (MainPageController) tracking protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "Защита от трекинга включена";
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = " DNS-защита включена";
 
-/* (MainPageController) tracking protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "Защита от трекинга отключена";
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS-защита отключена";
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Обновить фильтры";
@@ -806,16 +826,16 @@
 "requests_number_voiceover" = "Количество запросов";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"blocked_number_voiceover" = "Количество заблокированных запросов";
+"encrypted_number_voiceover" = "Количество зашифрованных DNS-запросов";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"saved_data_voiceover" = "Cэкономлено трафика";
+"elapsed_time_voiceover" = "Среднее время для обработки DNS-запроса";
 
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable tracking protection for VoiceOver*/
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Включить защиту от трекинга";
+"enable_system_protection_voiceover" = "Включить DNS-защиту";
 
 
 // MARK: - GetProTableController

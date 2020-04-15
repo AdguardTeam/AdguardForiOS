@@ -1,0 +1,41 @@
+/* Class = "UIButton"; normalTitle = "Watch manual"; ObjectID = "3ju-B8-UIZ"; */
+"3ju-B8-UIZ.normalTitle" = "Переглянути інструкцію";
+
+/* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "Щоб активувати AdGuard в Safari, виконайте кілька простих кроків";
+
+/* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
+"GOu-4j-RcN.normalTitle" = "ПЕРЕГЛЯНУТИ ІНСТРУКЦІЮ";
+
+/* Class = "UILabel"; text = "AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
+"Mzf-WJ-CpC.text" = "AdGuard протистоїть тисячам корпорацій, які стежать за кожним вашим кліком, і захищає вашу приватність.";
+
+/* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
+"QL3-U7-vA8.text" = "Торкніться до Safari та оберіть елемент \"Блокувальники вмісту\"";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "ДАЛІ";
+
+/* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
+"eyJ-Xh-OdS.text" = "Увімкніть всі блокувальники вмісту й повертайтеся до нашої програми!";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Захист Safari";
+
+/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
+"hak-o1-HWp.text" = "Дякуємо за встановлення AdGuard!";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Захист Safari";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "ДАЛІ";
+
+/* Class = "UILabel"; text = "AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast."; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
+"r3n-Il-Qe8.text" = "AdGuard неперевершений в блокуванні реклами на будь-яких вебсайтах в Safari, щоб ви могли користуватися швидким Інтернетом без реклами.";
+
+/* Class = "UILabel"; text = "AdGuard is able to filter any type of content, and you can tune the filtering to exactly suit your needs."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+"thP-lV-BhN.text" = "AdGuard може фільтрувати будь-який тип вмісту, і ви можете підлаштувати його саме для своїх потреб.";
+
+/* Class = "UILabel"; text = "Open the settings"; ObjectID = "tsx-Ce-cc8"; */
+"tsx-Ce-cc8.text" = "Відкрийте Параметри";
