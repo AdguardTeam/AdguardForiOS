@@ -44,6 +44,8 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var placeHolderLabel: ThemableLabel!
+    
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -51,6 +53,7 @@ class ActivityViewController: UITableViewController {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet var sectionHeaderView: UIView!
     @IBOutlet var tableHeaderView: UIView!
+    @IBOutlet weak var tableFooterView: UIView!
     
     
     // MARK: - Services
@@ -192,10 +195,15 @@ class ActivityViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        theme.setupLabel(placeHolderLabel)
+        return requestsModel?.records.count == 0 ? tableFooterView : UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if requestsModel?.records.count == 0 {
+            let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+            return isBigScreen ? 200.0 : 150.0
+        }
         return 0.01
     }
     

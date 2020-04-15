@@ -376,10 +376,12 @@
                     <connections>
                         <outlet property="encryptedNumberLabel" destination="3mo-qx-mDo" id="SHF-11-X0V"/>
                         <outlet property="filterButton" destination="eDh-XO-ei7" id="78K-Sp-wlk"/>
+                        <outlet property="placeHolderLabel" destination="DCy-so-G1C" id="7A3-UV-JKW"/>
                         <outlet property="recentActivityLabel" destination="kX9-ZX-NOu" id="Xfz-by-IEM"/>
                         <outlet property="requestsNumberLabel" destination="dlk-kG-3Jp" id="yvb-pc-IsA"/>
                         <outlet property="searchBar" destination="7QZ-G6-e5U" id="4qt-HJ-aI7"/>
                         <outlet property="sectionHeaderView" destination="P5d-Vd-a5i" id="rkr-fv-FiP"/>
+                        <outlet property="tableFooterView" destination="K6G-aX-FSJ" id="hC5-XU-gxg"/>
                         <outlet property="tableHeaderView" destination="Yw0-L4-dd5" id="ftO-Be-MSk"/>
                         <outlet property="titleLabel" destination="hjW-gw-C72" id="cLM-vv-N6I"/>
                         <outletCollection property="themableButtons" destination="qPQ-vV-fXm" collectionClass="NSMutableArray" id="RbU-kT-waD"/>
@@ -389,6 +391,38 @@
                         <segue destination="xvL-9q-qox" kind="show" identifier="showDnsContainer" id="5rO-v2-BPZ"/>
                     </connections>
                 </tableViewController>
+                <view contentMode="scaleToFill" id="K6G-aX-FSJ">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No recent activity tracked (we store only the last 1500 requests)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCy-so-G1C" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                            <rect key="frame" x="58.5" y="56" width="297.5" height="38.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="DCy-so-G1C" firstAttribute="top" relation="greaterThanOrEqual" secondItem="K6G-aX-FSJ" secondAttribute="top" constant="24" id="73p-oK-l3U"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DCy-so-G1C" secondAttribute="bottom" constant="24" id="AuU-gB-tbs"/>
+                        <constraint firstItem="DCy-so-G1C" firstAttribute="centerX" secondItem="K6G-aX-FSJ" secondAttribute="centerX" id="Dy6-GD-4nd"/>
+                        <constraint firstItem="DCy-so-G1C" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K6G-aX-FSJ" secondAttribute="leading" constant="48" id="MA7-OB-oCE">
+                            <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                        </constraint>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DCy-so-G1C" secondAttribute="trailing" constant="48" id="Xsp-wD-MQz">
+                            <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                        </constraint>
+                        <constraint firstItem="DCy-so-G1C" firstAttribute="centerY" secondItem="K6G-aX-FSJ" secondAttribute="centerY" id="vsc-jV-WFH"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="VvS-FN-9oI"/>
+                </view>
                 <view contentMode="scaleAspectFit" id="P5d-Vd-a5i">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1556,11 +1590,13 @@
                         <outlet property="mostActiveButton" destination="BA0-fw-Cpe" id="zMp-Nq-hmq"/>
                         <outlet property="mostActiveCompany" destination="gK7-Kw-vh5" id="cmM-H9-QYp"/>
                         <outlet property="mostActiveLabel" destination="yWy-kc-8Zg" id="lT3-5e-1al"/>
+                        <outlet property="placeHolderLabel" destination="Epn-q1-BdL" id="2Js-lk-wGb"/>
                         <outlet property="recentActivityLabel" destination="hR9-Pm-Gq0" id="kNa-TO-pPw"/>
                         <outlet property="requestsNumberLabel" destination="F4A-Cw-TxW" id="P41-4B-aSi"/>
                         <outlet property="rightArrowImageView" destination="9cb-6s-8gL" id="EWD-5w-aMh"/>
                         <outlet property="searchBar" destination="dEb-Gf-ItY" id="t0U-k0-8U6"/>
                         <outlet property="sectionHeaderView" destination="VaW-QB-faV" id="f2u-YE-2Ny"/>
+                        <outlet property="tableFooterView" destination="TIF-y9-Yu5" id="QK6-fL-8LA"/>
                         <outlet property="tableHeaderView" destination="TA4-Ly-S7C" id="Y8F-pM-o8S"/>
                         <outletCollection property="themableButtons" destination="Xj3-X8-fnq" collectionClass="NSMutableArray" id="gHn-dA-WGf"/>
                         <outletCollection property="themableLabels" destination="5bV-zZ-4dr" collectionClass="NSMutableArray" id="N9c-MA-OKZ"/>
@@ -1577,6 +1613,38 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Cn-HT-HfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="TIF-y9-Yu5">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No recent activity tracked (we store only the last 1500 requests)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epn-q1-BdL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                            <rect key="frame" x="58.5" y="56" width="297.5" height="38.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Epn-q1-BdL" firstAttribute="centerY" secondItem="TIF-y9-Yu5" secondAttribute="centerY" id="Ec5-6P-6IG"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Epn-q1-BdL" secondAttribute="trailing" constant="48" id="UfH-zT-I0J">
+                            <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                        </constraint>
+                        <constraint firstItem="Epn-q1-BdL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TIF-y9-Yu5" secondAttribute="leading" constant="48" id="ci4-2A-1Oq">
+                            <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                        </constraint>
+                        <constraint firstItem="Epn-q1-BdL" firstAttribute="centerX" secondItem="TIF-y9-Yu5" secondAttribute="centerX" id="t6i-HQ-3va"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Epn-q1-BdL" secondAttribute="bottom" constant="24" id="thd-qM-cgo"/>
+                        <constraint firstItem="Epn-q1-BdL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TIF-y9-Yu5" secondAttribute="top" constant="24" id="z3B-Pc-jTz"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="seG-NV-wkG"/>
+                </view>
                 <view contentMode="scaleAspectFit" id="VaW-QB-faV">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1751,6 +1819,6 @@
         <image name="options" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5rO-v2-BPZ"/>
+        <segue reference="Ecv-Kh-Q3v"/>
     </inferredMetricsTieBreakers>
 </document>
