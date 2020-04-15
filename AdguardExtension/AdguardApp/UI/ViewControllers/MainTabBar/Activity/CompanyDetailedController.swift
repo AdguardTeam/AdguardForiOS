@@ -28,7 +28,10 @@ class CompanyDetailedController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var placeHolderLabel: ThemableLabel!
+    
     @IBOutlet weak var tableHeaderView: UIView!
+    @IBOutlet var tableFooterView: UIView!
     @IBOutlet var sectionHeaderView: UIView!
     
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
@@ -154,10 +157,15 @@ class CompanyDetailedController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        theme.setupLabel(placeHolderLabel)
+        return requestsModel.records.count == 0 ? tableFooterView : UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if requestsModel.records.count == 0 {
+            let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
+            return isBigScreen ? 200.0 : 150.0
+        }
         return 0.01
     }
     

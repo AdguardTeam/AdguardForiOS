@@ -16,6 +16,12 @@
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Most active companies";
 
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "No recent activity tracked (we store only the last 1500 requests)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "No recent activity tracked (we store only the last 1500 requests)";
+
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Activity";
 
