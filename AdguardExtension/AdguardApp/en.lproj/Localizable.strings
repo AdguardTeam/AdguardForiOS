@@ -47,10 +47,10 @@
 "thousands_unit" = "%@K";
 
 /* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"hundred_millions_unit" = "%@M";
+"hundred_millions_unit" = "%@100M";
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"ten_thousands_unit" = "%@K";
+"ten_thousands_unit" = "%@10K";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
