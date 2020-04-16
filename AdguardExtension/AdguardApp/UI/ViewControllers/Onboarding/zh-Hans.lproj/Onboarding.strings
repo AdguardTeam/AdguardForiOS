@@ -1,0 +1,11 @@
+/* Class = "UIButton"; normalTitle = "Watch manual"; ObjectID = "3ju-B8-UIZ"; */
+"3ju-B8-UIZ.normalTitle" = "手动播放视频";
+
+/* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "要在Safari浏览器中使用AdGuard，请遵循以下几个简单步骤：";
+
+/* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
+"QL3-U7-vA8.text" = "点击 ”Safari浏览器“后，选择 ”内容拦截器“ 菜单项";
+
+/* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
+"eyJ-Xh-OdS.text" = "开启所有内容拦截器后，返回AdGuard 应用！";

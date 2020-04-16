@@ -28,8 +28,29 @@
 /* NO Button caption in alert */
 "common_action_no" = "否";
 
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "白名单（颠倒的）";
+
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "正在应用变更…";
+
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@毫秒";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = " %@秒 ";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@百万";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@千";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@亿";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@万";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "用户过滤器";
@@ -109,6 +130,9 @@
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "在此处输入用域名，以换行符（回车）来隔开。AdGuard将允许所有到这些域名的连接";
 
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "此黑名单支持<a href=\"%@\">AdGuard DNS语法</a>。在此处输入用换行符分割的规则。AdGuard屏蔽一切符合这些规则的域连接。";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "更新...";
 
@@ -135,6 +159,12 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "名称:";
+
+/* (Main Menu) Rate app action */
+"rate_app_title" = "评价应用";
+
+/* (Main Menu) Send feedback action */
+"just_send_feedback" = "发送反馈";
 
 /* (Main Menu) Mail subject to support team about incorrect blocking */
 "incorrect_blocking_report" = "报告错误拦截";
@@ -304,6 +334,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "移除VPN 配置文件";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "确定您想移除VPN 配置文件并禁用DNS防护吗？";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "发生错误";
 
@@ -361,8 +394,17 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "主页：";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "删除过滤器\n";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "是否删除选中的过滤器？";
+
 /* (AboutController) current app version string */
 "about_version" = "版本";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard 高级版！";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正确的邮箱或密码";
@@ -379,6 +421,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi特例";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "DNS防护将不会为下列Wi-Fi网络启用";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "添加特例";
 
@@ -387,6 +432,12 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "启用Wi-Fi时过滤";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "移动数据开启时进行DNS防护";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Wi-Fi开启时进行DNS防护";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "白名单";
@@ -463,6 +514,9 @@
 /*(LogCategory) DNS category*/
 "cdn" = "内容分发网络";
 
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "移动分析";
+
 /*(LogCategory) hosting category*/
 "hosting" = "托管";
 
@@ -489,6 +543,12 @@
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "添加新规则";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "重置所有设置包括用户规则、DNS防护、界面和授权设置。此操作无法撤消。您确定要重置吗？";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "所有活动记录将要被删除";
 
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 小时";
@@ -519,6 +579,9 @@
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "新建 DNS 过滤器";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "编辑自定义过滤器";
 
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "添加";
@@ -553,11 +616,20 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "您试图添加重复的过滤器。此过滤器已在列表中";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@规则已启用";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "以正常工作，关闭一些过滤器";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已拦截";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_processed" = "已处理";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "加密的";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "已添加至白名单\n";
@@ -570,6 +642,15 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "已从黑名单移除";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "打开%@ <b>设置</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "点击%@ <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>开启 %@ 所有内容拦截器</b>后返回AdGuard 应用！";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系统DNS";
@@ -589,8 +670,131 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "您输入了非法的上游服务器";
 
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "系统黑名单";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "系统白名单";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "详细信息";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "通用";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "过滤";
+
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "类别";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "名称";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "网站";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "域名";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "服务器";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "状态";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "时间";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "大小";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "已用";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "类型";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS状态";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS上游";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS应答";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "相符的过滤器";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "相符的规则";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "原始应答";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "空";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "反馈发送失败";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "发生错误";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "使用AdGuard，即代表你同意<br /><a href=%2$@>条款和条件</a> 和 <a href=%1$@>隐私策略</a>";
+
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "请求";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "每次访问网站时，都会发送一个请求。网站会发送隐藏请求并泄露个人数据。为了了解这个问题的范围，该知道请求总数。";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "加密的请求\n";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "加密的DNS请求数。使用加密DNS服务器时后，DNS流量能被加密。";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "平均时间";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "公司总数";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "这是已请求转发到的公司总数";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "全部请求";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "仅被允许";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "无";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d请求";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS防护已启用";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS防护已停用";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "更新过滤器";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "请求总数";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "加密DNS请求数";
 
 
 // MARK: - SystemProtectionEnablerController

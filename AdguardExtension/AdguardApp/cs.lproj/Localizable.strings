@@ -328,6 +328,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstranit VPN profil";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Opravdu chcete odebrat VPN profil a vypnout DNS ochranu?";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Vyskytla se chyba";
 
@@ -750,6 +753,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Požadavky";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Při každé návštěvě webové stránky se odešle dotaz. Webové stránky mohou odesílat skryté dotazy a umožnit tak únik osobních údajů. Je užitečné znát celkový počet dotazů, abychom si uvědomili rozsah tohoto problému.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrované požadavky";

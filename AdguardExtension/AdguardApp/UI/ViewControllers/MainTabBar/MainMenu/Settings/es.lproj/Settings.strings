@@ -44,7 +44,7 @@
 "Ory-8I-Ih0.text" = "Modo avanzado";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Si esta configuración está habilitada, AdGuard ignorará las reglas cosméticas genéricas. Esto acelerará el renderizado de las páginas a cambio de calidad de filtrado";
+"PV8-kf-b2c.text" = "Si esta opción está habilitada, AdGuard ignorará las reglas cosméticas genéricas. Esto acelerará el renderizado de las páginas a cambio de calidad de filtrado";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Restablecer estadísticas";
@@ -71,7 +71,7 @@
 "aRS-WH-mRj.text" = "Habilite esta opción si tiene problemas con la conexión a Internet mientras AdGuard se está ejecutando";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
-"aYm-cM-OAj.text" = "Esto eliminará tu perfil VPN real y deshabilitará la protección DNS";
+"aYm-cM-OAj.text" = "Esto eliminará tu perfil VPN actual y deshabilitará la protección DNS";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Mostrar barra de estado";
@@ -101,7 +101,7 @@
 "qUy-uy-QiF.text" = "Permite configuraciones adicionales para usuarios avanzados";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Si esta opción está activada, AdGuard solo usará WiFi para las actualizaciones de filtros en segundo plano";
+"tTY-BW-QcN.text" = "Si esta opción está habilitada, AdGuard solo usará Wi-Fi para las actualizaciones de filtros en segundo plano";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Esta opción borrará todos los datos estadísticos, como el número de peticiones, etc.";

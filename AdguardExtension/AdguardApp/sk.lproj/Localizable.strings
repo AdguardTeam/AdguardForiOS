@@ -46,12 +46,6 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@K";
 
-/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"hundred_millions_unit" = "%@M";
-
-/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"ten_thousands_unit" = "%@K";
-
 /* (User Filter Screen) Title */
 "user_filter_title" = "Používateľský filter";
 
@@ -333,6 +327,9 @@
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstrániť VPN profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Naozaj chcete odstrániť VPN profil a vypnúť DNS ochranu?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Vyskytla sa chyba";
@@ -756,6 +753,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Dopyty";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Zakaždým, keď navštívite webovú stránku, pošle sa dopyt. Webové stránky môžu odosielať skryté dopyty a umožniť tak únik osobných údajov. Je užitočné poznať celkový počet takýchto dopytov pre uvedomenie si rozsahu tohto problému.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrované dopyty";

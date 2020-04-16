@@ -328,6 +328,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN-Profil entfernen";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Möchten Sie Ihr VPN-Profil wirklich entfernen und den DNS-Schutz deaktivieren?";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Ein Fehler ist aufgetreten";
 
@@ -750,6 +753,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Anfragen";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Jedes Mal, wenn Sie eine Website besuchen, wird eine Anfrage gesendet. Websites können versteckte Anfragen senden und persönliche Daten preisgeben. Es ist hilfreich, die Anzahl solcher Anfragen zu ermitteln, um das Ausmaß dieses Problems zu erkennen.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Verschlüsselte Anfragen";

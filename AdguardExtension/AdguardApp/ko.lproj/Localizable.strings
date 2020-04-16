@@ -41,10 +41,16 @@
 "s_unit" = "%@초";
 
 /* (MainPageController) Text for data units (M) Millions */
-"millions_unit" = "%@00만";
+"millions_unit" = "%@백만";
 
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@천";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@억";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@만";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 규칙";
@@ -327,6 +333,9 @@
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN 프로필 제거";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "VPN 프로필을 제거하고 추적 보호를 비활성화 하시겠습니까?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "오류가 발생했습니다";
@@ -750,6 +759,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "요청";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "웹사이트를 방문할 때마다 요청이 전송됩니다. 웹사이트는 숨겨진 요청을 보내고 개인 데이터를 유출할 수 있습니다. 이 문제의 범위를 보기 위해 이러한 요청의 수를 아는 것이 유용합니다.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "암호화된 요청";
