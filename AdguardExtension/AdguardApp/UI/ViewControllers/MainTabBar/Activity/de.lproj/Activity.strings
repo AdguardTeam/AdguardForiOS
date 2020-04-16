@@ -16,6 +16,12 @@
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Die aktivsten Unternehmen";
 
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Keine kürzlichen Aktivitäten aufgezeichnet (es werden nur die letzten 1.500 Anfragen gespeichert)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Keine kürzlichen Aktivitäten aufgezeichnet (es werden nur die letzten 1.500 Anfragen gespeichert)";
+
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Aktivität";
 
@@ -30,6 +36,9 @@
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
 "T0y-mr-Zwa.text" = "Sie können sich anzeigen lassen, wer versucht, Sie zu verfolgen und Statistiken und das Protokoll der Blockierung von DNS-Anfragen einsehen";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "DNS-Schutz ist deaktiviert";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "AKTIVIEREN";

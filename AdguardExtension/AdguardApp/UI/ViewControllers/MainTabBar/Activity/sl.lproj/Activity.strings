@@ -16,6 +16,12 @@
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Večina aktivnih podjetij";
 
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Ni nedavnih sledljivih dejavnosti (shranimo samo zadnjih 1500 zahtev)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Ni nedavnih sledljivih dejavnosti (shranimo samo zadnjih 1500 zahtev)";
+
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Dejavnost";
 
@@ -30,6 +36,9 @@
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
 "T0y-mr-Zwa.text" = "Lahko vidite, kdo vam poskuša slediti, si ogledate statistiko in dnevnik zaviranj zahtev DNS";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "Zaščita DNS je onemogočena";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "OMOGOČI";

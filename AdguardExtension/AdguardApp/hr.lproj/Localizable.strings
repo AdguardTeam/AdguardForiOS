@@ -328,6 +328,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Ukloni VPN profil";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Jeste li sigurni da želite ukloniti vaš VPN profil i onemogućiti DNS zaštitu?";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Došlo je do pogreške";
 
@@ -750,6 +753,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Zahtjevi";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Svaki put kada posjetite web stranicu, šalje se zahtjev. Web stranice mogu slati skrivene zahtjeve i procuriti vaše osobne podatke. Korisno je znati ukupan broj zahtjeva da biste shvatili opseg ovog problema.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Šifrirani zahtjevi";

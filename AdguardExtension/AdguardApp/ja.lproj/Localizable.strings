@@ -40,6 +40,18 @@
 /* (MainPageController) Text for seconds units (s) seconds */
 "s_unit" = "%@ s";
 
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@K";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@億";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@万";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
 
@@ -321,6 +333,9 @@
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPNプロファイルの除去";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "VPNプロファイルを除去して「DNS通信を保護」をオフにしてもよろしいですか？";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "エラーが発生しました。";
@@ -744,6 +759,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "リクエスト総数";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "それぞれのWebサイトにアクセスするたびに、リクエストが送信されます。そこで、Webサイトは隠されたリクエストを送信することがあり、個人情報を漏洩する可能性があります。この問題の範囲を把握するには、リクエストの総数を知っておくと便利です。";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "暗号化済みリクエスト数";

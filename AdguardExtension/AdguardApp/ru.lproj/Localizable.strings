@@ -328,6 +328,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Удалить VPN-профиль";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Вы уверены, что хотите удалить VPN-профиль и отключить защиту от отслеживания?";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Произошла ошибка";
 
@@ -750,6 +753,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Запросы";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Каждый раз, когда вы посещаете вебсайт, посылается запрос. Сайты могут отправлять скрытые запросы, из-за которых утекают личные данные. Полезно знать количество таких запросов, чтобы осознавать масштаб проблемы.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Зашифрованные запросы";

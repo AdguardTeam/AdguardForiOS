@@ -40,6 +40,9 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "고급 설정";
 
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "개발자 모드";
+
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "이 설정이 활성화 되어 있는 경우 AdGuard는 일반적인 코스메틱 규칙을 무시합니다. 이것은 필터링 품질을 대가로 페이지 렌더링 속도를 향상합니다.";
 
@@ -66,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "AdGuard가 실행중인 동안에 인터넷 연결에 문제가 있다면 이 옵션을 활성화하세요";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
+"aYm-cM-OAj.text" = "실제 VPN 프로필이 제거되고 DNS보호가 비활성화됩니다.";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "상태 바 표시";
