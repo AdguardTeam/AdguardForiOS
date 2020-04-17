@@ -166,6 +166,7 @@ ac.at
 co.at
 gv.at
 or.at
+sth.ac.at
 au
 com.au
 net.au
@@ -7260,7 +7261,6 @@ xin
 дети
 ポイント
 新闻
-工行
 家電
 كوم
 中文网
@@ -7566,6 +7566,7 @@ static-access.net
 realm.cz
 *.cryptonomic.net
 cupcake.is
+curv.dev
 *.customer-oci.com
 *.oci.customer-oci.com
 *.ocp.customer-oci.com
@@ -7585,6 +7586,7 @@ co.dk
 firm.dk
 reg.dk
 store.dk
+dyndns.dappnode.io
 *.dapps.earth
 *.bzz.dapps.earth
 builtwithdark.com
@@ -7987,6 +7989,7 @@ twmail.net
 twmail.org
 mymailer.com.tw
 url.tw
+onfabrica.com
 apps.fbsbx.com
 ru.net
 adygeya.ru
@@ -8074,12 +8077,20 @@ b.ssl.fastly.net
 global.ssl.fastly.net
 fastpanel.direct
 fastvps-server.com
+myfast.space
+myfast.host
+fastvps.site
+fastvps.host
 fhapp.xyz
 fedorainfracloud.org
 fedorapeople.org
 cloud.fedoraproject.org
 app.os.fedoraproject.org
 app.os.stg.fedoraproject.org
+conn.uk
+copro.uk
+couk.me
+ukco.me
 mydobiss.com
 filegear.me
 filegear-au.me
@@ -8089,7 +8100,6 @@ filegear-ie.me
 filegear-jp.me
 filegear-sg.me
 firebaseapp.com
-flynnhub.com
 flynnhosting.net
 0e.vc
 freebox-os.com
@@ -8212,6 +8222,7 @@ pagespeedmobilizer.com
 publishproxy.com
 withgoogle.com
 withyoutube.com
+graphox.us
 awsmppl.com
 fin.ci
 free.hr
@@ -8290,6 +8301,7 @@ to.leg.br
 pixolino.com
 ipifony.net
 mein-iserv.de
+schulserver.de
 test-iserv.de
 iserv.dev
 iobb.net
@@ -8407,6 +8419,7 @@ of.work
 to.work
 nctu.me
 bitballoon.com
+netlify.app
 netlify.com
 4u.com
 ngrok.io
@@ -8607,6 +8620,9 @@ perspecta.cloud
 on-web.fr
 *.platform.sh
 *.platformsh.site
+platter-app.com
+platter-app.dev
+platterp.us
 dyn53.io
 co.bn
 xen.prgmr.com
@@ -8685,6 +8701,7 @@ stackhero-network.com
 static.land
 dev.static.land
 sites.static.land
+playstation-cloud.com
 apps.lair.io
 *.stolos.io
 spacekit.io
@@ -8796,6 +8813,8 @@ remotewd.com
 wmflabs.org
 toolforge.org
 wmcloud.org
+panel.gg
+daemon.panel.gg
 myforum.community
 community-pro.de
 diskussionsbereich.de
