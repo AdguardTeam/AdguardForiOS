@@ -34,6 +34,24 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Appliquer les changements...";
 
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@ M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@ k";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@ M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@ k";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Règles d'utilisateur";
 
@@ -238,6 +256,9 @@
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Bloque les annonces et les serveurs de suivi";
 
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Aucun chiffrage (DNS du système)";
+
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Filtres activés: %1$d sur %2$d";
 
@@ -307,6 +328,21 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Réinitialiser";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Supprimer";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Supprimer le profil VPN";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Êtes-vous sûr de vouloir supprimer votre profil VPN et désactiver la DNS protection?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Une erreur est survenue";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Une erreur s’est produite lors de la suppression de votre profil VPN";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ règles sont en cours d'utilisation";
 
@@ -367,6 +403,9 @@
 /* (AboutController) current app version string */
 "about_version" = "Version";
 
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Payez une fois et utilisez les fonctionnalités Premium d'AdGuard sur tous vos appareils iOS!";
+
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Adresse e-mail ou mot de passe incorrect";
 
@@ -382,6 +421,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Exceptions Wi-Fi";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "La protection DNS ne fonctionnera pas pour les réseaux Wi-Fi répertoriés ci-dessous";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Ajouter une exception";
 
@@ -390,6 +432,12 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Filtrer le Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Protection DNS lors de l’utilisation des données mobiles";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Protection DNS sur le Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Liste Blanche";
@@ -496,6 +544,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Ajouter une nouvelle règle";
 
+/* confirm reset lert text */
+"confirm_reset_text" = "Tous les paramètres, y compris les règles utilisateur, la protection DNS, les paramètres d’interface et d’autorisation, seront réinitialisés. Cette opération ne peut pas être annulée. Réinitialiser les paramètres?";
+
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Réinitialiser le journal d'activité";
 
@@ -532,17 +583,29 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nouveau filtre DNS";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Modifier le filtre personnalisé";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Ajouter";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "La protection est désactivée";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "La protection est activée";
 
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari et protection DNS";
+
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Blocage des contenus de Safari";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Tous les modules de protection sont désactivés";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Protection DNS";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d requêtes, %2$d bloquées";
@@ -556,8 +619,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Vous avez essayé d'ajouter un filtre en double. Ce filtre est déjà sur la liste";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ règles sont activées";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Trop de règles sont activées : %@. Certaines d’entre elles seront désactivées";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Désactiver certains filtres pour le bon fonctionnement";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqués";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Traités";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Chifrée";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Autorisée";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "ajoutée à la liste Blanche";
@@ -676,6 +757,48 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "En continuant à l’utiliser, vous acceptez les <br/><a href=%2$@>Conditions générales</a> et la <a href=%1$@>Politique de confidentialité</a>";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Requêtes";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Chaque fois que vous visitez un site Web, une demande est envoyée. Les sites Web peuvent envoyer des demandes cachées et divulguer des données personnelles. Il est utile de connaître le nombre de ces demandes pour comprendre l’ampleur de ce problème.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Requêtes chiffrées";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Le nombre de requêtes DNS chiffrées. Vous devez utiliser un serveur DNS chiffré pour chiffrer votre trafic DNS.";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Temps moyen";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Temps moyen nécessaire pour traiter une demande DNS. Plus le serveur DNS que vous utilisez est rapide, plus il sera faible.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Nombre d’entreprises";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Il s’agit du nombre d’entreprises auxquelles des demandes ont été transmises.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Toutes les requêtes";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Bloquées uniquement";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Autorisées uniquement";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Aucune";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Activité";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d requêtes";
+
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -702,11 +825,29 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Protection sous Safari désactivée";
 
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Protection DNS activée";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Protection DNS désactivée";
+
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Mettre à jour les filtres";
 
 /* (MainPageController) requests number title for VoiceOver*/
 "requests_number_voiceover" = "Nombre de requêtes";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Le nombre de requêtes DNS chiffrées";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Temps moyen pour traiter une demande DNS";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Activer la protection DNS";
 
 
 // MARK: - GetProTableController
