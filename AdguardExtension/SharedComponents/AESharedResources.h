@@ -410,8 +410,6 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
  */
 @property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
-@property (nullable) DnsServerInfo* activeDnsServer;
-
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
 @property BOOL safariProtectionEnabled;

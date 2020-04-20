@@ -117,7 +117,6 @@ NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 #define AES_SAFARI_INVERTED_WHITELIST_RULES     @"safari-inverdet-whitelist-rules.data"
 #define AES_FILTERS_META_CACHE                  @"metadata-cache.data"
 #define AES_FILTERS_I18_CACHE                   @"i18-cache.data"
-#define AES_ACTIVE_DNS_SERVER                   @"active-dns-server.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -383,25 +382,6 @@ NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 - (void)synchronizeSharedDefaults{
     
     [_sharedUserDefaults synchronize];
-}
-
-- (void)setActiveDnsServer:(DnsServerInfo *)activeDnsServer {
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:activeDnsServer];
-    if (!data) {
-        data = [NSData data];
-    }
-    
-    [self saveData:data toFileRelativePath:AES_ACTIVE_DNS_SERVER];
-}
-
-- (DnsServerInfo *)activeDnsServer {
-    NSData *data = [self loadDataFromFileRelativePath:AES_ACTIVE_DNS_SERVER];
-    
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
 }
 
 - (BOOL)safariProtectionEnabled{

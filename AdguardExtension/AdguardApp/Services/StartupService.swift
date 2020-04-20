@@ -91,9 +91,15 @@ class StartupService : NSObject{
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
-        
-        supportService.configurationService = configuration;
+        let supportService: AESSupport = AESSupport(resources: sharedResources,
+                                                    safariSevice: safariService,
+                                                    antibanner: antibanner,
+                                                    dnsFiltersService: dnsFiltersService,
+                                                    dnsProviders: dnsProviders,
+                                                    configuration: configuration,
+                                                    complexProtection: complexProtection,
+                                                    networtkSettings: networkSettingsService,
+                                                    dnsFilters: dnsFiltersService)
         
         locator.addService(service: supportService as AESSupportProtocol)
 

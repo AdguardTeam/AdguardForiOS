@@ -824,6 +824,8 @@
 		D020B28E21FA12FE0075BB8D /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B28C21FA11F80075BB8D /* DnsProxyService.swift */; };
 		D020B28F21FA16C70075BB8D /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
+		D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0227DD3244D4A08009B7579 /* SupportService.swift */; };
+		D0227DD5244D50EC009B7579 /* SupportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0227DD3244D4A08009B7579 /* SupportService.swift */; };
 		D023181522FD9C2000905DD6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		D0288F2D2305AEF900A4EBEF /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D0288F2E2306974F00A4EBEF /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
@@ -2397,6 +2399,7 @@
 		D0186729203C86050003110A /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestLogModel.swift; sourceTree = "<group>"; };
 		D020B28C21FA11F80075BB8D /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
+		D0227DD3244D4A08009B7579 /* SupportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportService.swift; sourceTree = "<group>"; };
 		D0288F4923069D7200A4EBEF /* TestHostApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHostApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0288F4B23069D7200A4EBEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0288F5723069D7400A4EBEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3325,6 +3328,7 @@
 				65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */,
 				65D9A25D1C0328E6004DA210 /* AESSupport.h */,
 				65D9A25E1C0328E6004DA210 /* AESSupport.m */,
+				D0227DD3244D4A08009B7579 /* SupportService.swift */,
 				65C12EE91BD4D29F00FFC71C /* AESFilterConverter.h */,
 				65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */,
 				65B40D321BDE635200A9C595 /* JSConverter.js */,
@@ -5932,6 +5936,7 @@
 				D090FC972407F66E00A0C026 /* VpnManager.swift in Sources */,
 				D081FC2D2418EB56000A10DA /* SafariProtectionService.swift in Sources */,
 				D093719821B056BB004A24F1 /* CocoaLumberjack.swift in Sources */,
+				D0227DD5244D50EC009B7579 /* SupportService.swift in Sources */,
 				65FAB33B1D6C576900A0706B /* ACObject.m in Sources */,
 				D07A811323B501CE00181E54 /* SharedResources.swift in Sources */,
 				655A02301C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
@@ -5990,6 +5995,7 @@
 				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
+				D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */,
 				D044AF7321820ABE00CD9E06 /* CustomAnimatedTransitioning.swift in Sources */,
 				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
