@@ -5,7 +5,7 @@
 "F7O-MB-LHu.text" = "Um AdGuard in Safari nutzen zu können, folgen Sie den wenigen einfachen Schritten:";
 
 /* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "Tracking-Schutz";
+"FDG-As-HDY.text" = "DNS-Schutz";
 
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "ANLEITUNG ANSEHEN";
