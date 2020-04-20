@@ -106,7 +106,7 @@ class MigrationService: MigrationServiceProtocol {
          In app version 4.0 (446) we began to inititalize custom dns servers with dns protocol
          for previously added custom servers we set protocol here
         */
-        if lastBuildVersion < 446 {
+        if lastBuildVersion < 457 {
             DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             setProtocolForCustomProviders()
         }
@@ -135,6 +135,7 @@ class MigrationService: MigrationServiceProtocol {
             if let server = provider.servers?.first, server.dnsProtocol == .dns, let upstream = server.upstreams.first {
                 let newProtocol = DnsProtocol.getProtocolByUpstream(upstream)
                 if newProtocol != server.dnsProtocol {
+                    DDLogInfo("(MigrationService) - setProtocolForCustomProviders, name: \(server.name); upstream: \(upstream); oldProtocol: \(DnsProtocol.stringIdByProtocol[server.dnsProtocol] ?? "Unknown"); newProtocol: \(DnsProtocol.stringIdByProtocol[newProtocol] ?? "Unknown")")
                     changesCount += 1
                     server.dnsProtocol = newProtocol
                     dnsProvidersService.updateProvider(provider)
