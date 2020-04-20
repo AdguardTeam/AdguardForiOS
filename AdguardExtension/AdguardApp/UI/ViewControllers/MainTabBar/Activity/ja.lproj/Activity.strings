@@ -68,10 +68,10 @@
 "l5B-oj-DnW.normalTitle" = "追加";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
-"lKJ-8V-GJi.normalTitle" = "リクエスト総数";
+"lKJ-8V-GJi.normalTitle" = "リクエスト数";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
-"qPQ-vV-fXm.normalTitle" = "リクエスト総数";
+"qPQ-vV-fXm.normalTitle" = "リクエスト数";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "ドメインレベルをお選びください";
