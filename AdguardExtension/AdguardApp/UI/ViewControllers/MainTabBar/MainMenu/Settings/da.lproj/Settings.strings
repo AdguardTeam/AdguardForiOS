@@ -40,6 +40,9 @@
 /* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
 "Ll9-il-kpC.title" = "Avancerede indstillinger";
 
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Avanceret tilstand";
+
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
 "PV8-kf-b2c.text" = "Hvis denne indstilling er aktiveret, vil AdGuard ignorere generiske kosmetiske regler. Dette vil øge hastigheden for indlæsning af sider i bytte for filtreringskvalitet";
 
@@ -66,6 +69,9 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
 "aRS-WH-mRj.text" = "Aktivér denne indstilling, hvis du oplever problemer med internetforbindelsen, mens AdGuard kører";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
+"aYm-cM-OAj.text" = "Dette fjerner din aktuelle VPN-profil og deaktiverer DNS-beskyttelsen";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
 "aoV-et-2ku.text" = "Vis statuslinje";

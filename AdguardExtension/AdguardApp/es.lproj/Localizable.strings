@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@ Mil";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@ Millones";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@ Mil";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reglas del usuario";
 

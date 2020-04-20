@@ -4,8 +4,29 @@
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "加密的";
 
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "活动";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "免费试用";
+
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "编辑";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "最活跃公司";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "没有被追踪的最新活动（可查看最近1500次的请求记录）";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "没有被追踪的最新活动（可查看最近1500次的请求记录）";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "活动";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
+"J13-xW-KiK.normalTitle" = "已复制";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "取消";
@@ -16,20 +37,41 @@
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
 "T0y-mr-Zwa.text" = "你可以查看谁试图跟踪你。查看统计信息，DNS请求阻止日志";
 
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "DNS防护已停用";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "启用";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "公司";
+
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "请求详情";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "安全性过滤器，DNS 隐私，自定义过滤器等。";
 
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "最新活动";
+
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "返回";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "最新活动";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "拦截请求";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "添加";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "请求";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "请求";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "选择域名层级";
@@ -39,6 +81,9 @@
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "拦截请求";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "最活跃";
 
 /* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
 "yio-E8-cQV.normalTitle" = "平均时间";

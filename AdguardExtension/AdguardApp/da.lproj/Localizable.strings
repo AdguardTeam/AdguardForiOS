@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@ K";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10K";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerregler";
 
@@ -327,6 +333,9 @@
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Er du sikker på, at du vil fjerne din VPN-profil og deaktivere DNS-beskyttelse?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Der opstod en fejl";
@@ -750,6 +759,9 @@
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Forespørgsler";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Hver gang du besøger et websted, sendes en forespørgsel. Websteder sender muligvis skjulte forespørgsler og lækker personlige data. Det er nyttigt at kende det samlede antal af forespørgsler for at forstå omfanget af dette problem.";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Krypterede forespørgsler";

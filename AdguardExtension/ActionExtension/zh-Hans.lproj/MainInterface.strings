@@ -1,3 +1,17 @@
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "屏蔽此页面上的元素";
+
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "联系支持";
 
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
 "Znm-Yl-fWN.text" = "点按此处可用该工具移除错过的广告或您通常不想在页面上看到的任何元素";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "在此页面上启用";
+
+/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "关闭";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "在此页面上报告问题\n";

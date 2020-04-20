@@ -37,6 +37,9 @@
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
 "T0y-mr-Zwa.text" = "Du kan se, hvem der forsøger at spore dig, se statistikker og loggen over blokerede DNS-forespørgsler";
 
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "DNS-beskyttelse er deaktiveret";
+
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "AKTIVER";
 

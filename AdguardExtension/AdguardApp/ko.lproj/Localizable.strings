@@ -284,16 +284,16 @@
 "login_error_message" = "로그인 중 오류가 발생했습니다.";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard 구독 서비스에 대하여:<br><br>• 결제는 구입 확인 시 iTunes 계정을 통해 이루어집니다.<br>• 구독 서비스는 자동 갱신이 종료되기 24시간 전에 비활성화하지 않는 한 자동으로 갱신됩니다.<br>• 구독 갱신 수수료는 갱신되기 24시간 전에 청구됩니다. 고객님은 구독을 직접 관리할 수 있으며, 자동 갱신은 구독 후 iTunes 계정 설정에서 비활성화 할 수 있습니다.<br><br><a href=%1$@>개인 정보 처리 방침</a> <br><br><a href=%2$@>이용 약관</a>";
+"purchase_description_format" = "AdGuard 구독 서비스에 대하여:<br><br>• 결제는 구입 확인 시 iTunes 계정을 통해 이루어집니다.<br>• 구독 서비스는 자동 갱신이 종료되기 24시간 전에 비활성화하지 않는 한 자동으로 갱신됩니다.<br>• 구독 갱신 수수료는 갱신되기 24시간 전에 청구됩니다. 고객님은 구독을 직접 관리할 수 있으며, 자동 갱신은 구독 후 iTunes 계정 설정에서 비활성화할 수 있습니다.<br><br><a href=%1$@>개인정보취급방침</a> <br><br><a href=%2$@>이용 약관</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>이용 약관</a> 및<a href=%1$@>개인 정보 처리 방침</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>이용 약관</a> 및<a href=%1$@>개인정보취급방침</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "확인";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"privacy_policy_action" = "개인 정보 처리 방침";
+"privacy_policy_action" = "개인정보취급방침";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
 "vpn_confirm_title" = "VPN이 생성됩니다.";
@@ -434,7 +434,7 @@
 "filter_wifi_title" = "Wi-Fi 필터링";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "모빌 데이터 사용 중 DNS 보호";
+"mobile_data_description" = "모바일 데이터 사용 중 추적 보호";
 
 /* (NetworkSettingsController) description for wi-fi data */
 "wifi_data_description" = "Wi-Fi 사용 중 DNS 보호";
@@ -755,7 +755,7 @@
 "feedback_sending_failed_message" = "무엇인가 잘못되었습니다";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "계속하는 경우, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인 정보 처리 방침</a>에 동의하시게 됩니다";
+"introduction_license_agreement" = "계속하면, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인정보취급방침</a>에 동의하는 것입니다";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "요청";
@@ -779,7 +779,7 @@
 "companies_info_alert_title" = "기업 수";
 
 /* (ActivityViewController) - Companies alert message */
-"companies_info_alert_message" = "요청이 전달된 기업 수입니다";
+"companies_info_alert_message" = "요청이 전달된 기업의 숫자입니다";
 
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "모든 요청";

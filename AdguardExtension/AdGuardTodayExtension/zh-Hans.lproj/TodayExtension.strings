@@ -1,3 +1,14 @@
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "28V-ha-qHw"; */
+"28V-ha-qHw.text" = "Safari浏览器防护";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
+"WAp-Xx-eXF.text" = "请求";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "DNS防护";
+
+/* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
+"cva-11-jEA.text" = "全时段统计";
 
 /* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
 "eaJ-er-mJu.text" = "平均时间";
