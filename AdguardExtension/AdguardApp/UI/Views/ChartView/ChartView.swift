@@ -59,7 +59,6 @@ class ChartView: UIView {
             maxYelement = max(maxYrequests, maxYblocked)
             
             DispatchQueue.main.async {[weak self] in
-                self?.topBorderLabel.text = "\(Int(self?.maxYelement ?? 0))"
                 self?.drawChart()
             }
         }
@@ -283,29 +282,30 @@ class ChartView: UIView {
             let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (point.y / maxYelement) * 0.7
 
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
-            //newPoints.append(CGPoint(x: newX, y: newY))
             
             let newPoint = CGPoint(x: point.x, y: newY)
             newPoints.append(newPoint)
         }
+        
+        DispatchQueue.main.async {[weak self] in
+            self?.topBorderLabel.text = "\(Int(self?.maxYelement ?? 0))"
+        }
+        
         return newPoints
     }
     
     /* This function is needed to avoid points overlay */
     private func preparePoints(points: [Point]) -> [Point] {
-        let minimumSpacing: CGFloat = 5.0
+        let minimumSpacing: CGFloat = 10.0
         var newPoints = [Point]()
         
         for point in points {
             let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
-            let newX = (frame.width * ratioX).rounded(.up)
+            let newX = (frame.width * ratioX)
             
             var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
-            if  newX - lastPoint.x <= minimumSpacing {
+            if  newX - lastPoint.x < minimumSpacing {
                 newPoints = newPoints.dropLast()
-                if lastPoint.x != 0.0 {
-                    lastPoint.x += ((newX - lastPoint.x) / 2).rounded(.up)
-                }
                 lastPoint.y = lastPoint.y + point.y
                 newPoints.append(lastPoint)
                 if lastPoint.y > maxYelement {
