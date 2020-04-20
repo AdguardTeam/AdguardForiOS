@@ -54,6 +54,7 @@ class AppDelegateHelper: NSObject {
     private let statusView = StatusView()
     
     var purchaseObservation: Any?
+    var proStatusObservation: Any?
     
     // MARK: String Constants
     private let openSystemProtection = "systemProtection"
@@ -454,6 +455,20 @@ class AppDelegateHelper: NSObject {
                         
                 if type == PurchaseService.kPSNotificationPremiumExpired {
                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
+                }
+            }
+        }
+        
+        if proStatusObservation == nil {
+            proStatusObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
+                guard let self = self else { return }
+                if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
+                    DDLogInfo("(AppDelegateHelper) Remove vpn configuration")
+                    self.vpnManager.removeVpnConfiguration { (error) in
+                        if error != nil {
+                            DDLogError("(AppDelegateHelper) Remove vpn configuration failed: \(error!)")
+                        }
+                    }
                 }
             }
         }
