@@ -73,6 +73,8 @@ class ChartViewModel: ChartViewModelProtocol {
     // MARK: - init
     init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
         self.dnsStatisticsService = dnsStatisticsService
+        
+        obtainStatistics()
     }
     
     func obtainStatistics() {
