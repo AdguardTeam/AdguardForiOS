@@ -20,7 +20,7 @@
 
 extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@protocol AESharedResourcesProtocol, SafariServiceProtocol, AESAntibannerProtocol, ConfigurationServiceProtocol, DnsFiltersServiceProtocol;
+@protocol AESharedResourcesProtocol, SafariServiceProtocol, AESAntibannerProtocol, ConfigurationServiceProtocol, DnsFiltersServiceProtocol, DnsProvidersServiceProtocol, ConfigurationServiceProtocol, ComplexProtectionServiceProtocol, NetworkSettingsServiceProtocol, DnsFiltersServiceProtocol;
 
 @protocol AESSupportProtocol <NSObject>
 
@@ -35,10 +35,15 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 @end
 
 @interface AESSupport : NSObject <AESSupportProtocol, MFMailComposeViewControllerDelegate>
-@property (nullable) id<ConfigurationServiceProtocol> configurationService;
 - (nonnull instancetype) initWithResources: (nonnull id<AESharedResourcesProtocol>) resources
-                      safariSevice: (nonnull id<SafariServiceProtocol>) safariService
-                         antibanner: (nonnull id<AESAntibannerProtocol>) antibanner
-                 dnsFiltersService:(nonnull id<DnsFiltersServiceProtocol>) dnsFiltersService;
+                              safariSevice: (nonnull id<SafariServiceProtocol>) safariService
+                                antibanner: (nonnull id<AESAntibannerProtocol>) antibanner
+                         dnsFiltersService: (nonnull id<DnsFiltersServiceProtocol>) dnsFiltersService
+                              dnsProviders: (nonnull id<DnsProvidersServiceProtocol>) dnsProviders
+                             configuration: (nonnull id<ConfigurationServiceProtocol>) configuration
+                         complexProtection: (nonnull id<ComplexProtectionServiceProtocol>) complexProtection
+                          networtkSettings: (nonnull id<NetworkSettingsServiceProtocol>) networkSettings
+                                dnsFilters: (nonnull id<DnsFiltersServiceProtocol>) dnsFilters;
+
 
 @end

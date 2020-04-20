@@ -66,6 +66,10 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     id<SafariServiceProtocol> _safariService;
     id<AESAntibannerProtocol> _antibanner;
     id<DnsFiltersServiceProtocol> _dnsFiltersService;
+    id<DnsProvidersServiceProtocol> _dnsProviders;
+    id<ConfigurationServiceProtocol> _configurationService;
+        
+    id<SupportServiceProtocol> _support;
 }
 
 @end
@@ -81,7 +85,16 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
-- (id)initWithResources:(id)resources safariSevice:(id)safariService antibanner:(id<AESAntibannerProtocol>)antibanner dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService {
+- (id)initWithResources:(id)resources
+           safariSevice:(id)safariService
+             antibanner:(id<AESAntibannerProtocol>)antibanner
+      dnsFiltersService:(id<DnsFiltersServiceProtocol>) dnsFiltersService
+           dnsProviders:(id<DnsProvidersServiceProtocol>) dnsProviders
+          configuration:(id<ConfigurationServiceProtocol>) configuration
+      complexProtection:(id<ComplexProtectionServiceProtocol>) complexProtection
+       networtkSettings:(id<NetworkSettingsServiceProtocol>) networkSettings
+             dnsFilters:(id<DnsFiltersServiceProtocol>) dnsFilters
+{
     
     self = [super init];
     if (self) {
@@ -89,6 +102,15 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         _safariService = safariService;
         _antibanner = antibanner;
         _dnsFiltersService = dnsFiltersService;
+        _dnsProviders = dnsProviders;
+        _configurationService = configuration;
+        
+        _support = [[SupportService alloc] initWithResources:resources
+                                               configuration:configuration
+                                           complexProtection:complexProtection
+                                                dnsProviders:dnsProviders
+                                             networkSettings:networkSettings
+                                                  dnsFilters:dnsFilters];
     }
     
     return self;
@@ -193,7 +215,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     NSString* dnsServerParam = nil;
     BOOL custom = NO;
     
-    DnsServerInfo * dnsServer = _sharedResources.activeDnsServer;
+    DnsServerInfo * dnsServer = _dnsProviders.activeDnsServer;
     if([DnsServerInfo.adguardDnsIds containsObject: dnsServer.serverId]) {
         dnsServerParam = REPORT_DNS_ADGUARD;
     }
@@ -269,53 +291,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         for (ASDFilterMetadata *meta in filters)
             [sb appendFormat:@"\r\nID=%@ Name=\"%@\" Version=%@ Enabled=%@", meta.filterId, meta.name, meta.version, ([meta.enabled boolValue] ? @"YES" : @"NO")];
         
-        BOOL proStatus = _configurationService.proStatus;
-        
-        DnsServerInfo *dnsServerInfo = _sharedResources.activeDnsServer;
-        NSString *tunnelMode = [NSString new];
-        NSInteger tunnel = [_sharedResources.sharedDefaults integerForKey:AEDefaultsVPNTunnelMode];
-        switch (tunnel) {
-            case APVpnManagerTunnelModeSplit:
-                tunnelMode = @"SPLIT";
-                break;
-            case APVpnManagerTunnelModeFull:
-                tunnelMode = @"FULL";
-                break;
-            case APVpnManagerTunnelModeFullWithoutVPNIcon:
-                tunnelMode = @"WITHOUT_VPN_ICON";
-                break;
-        }
-        
-        [sb appendFormat:@"\r\n\r\nPRO:\r\nPro feature %@.\r\n\r\nVPN is %s\r\nTunnel mode %@\r\nDNS server: %@",
-         (proStatus ? @"ENABLED" : @"DISABLED"), ([_sharedResources.sharedDefaults boolForKey:AEDefaultsVPNEnabled] ? "ENABLED" : "DISABLED"),
-         tunnelMode, dnsServerInfo.name];
-        
-        [sb appendFormat:@"\r\nRestart when network changes: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsRestartByReachability] ? @"YES" : @"NO"];
-        [sb appendFormat:@"\r\nFilter mobile data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterMobileEnabled] ? @"YES" : @"NO"];
-        [sb appendFormat:@"\r\nFilter wi-fi data: %@", [_sharedResources.sharedDefaults boolForKey:AEDefaultsFilterWifiEnabled] ? @"YES" : @"NO"];
-        
-        
-        [sb appendFormat:@"\r\n\r\nDns server id: %@",dnsServerInfo.serverId];
-        
-        NSArray<WifiException*>* exceptions = [self getExceptions];
-        
-        if (exceptions)
-            [sb appendString:@"\r\n\r\nWi-Fi exceptions:"];
-        
-        for (NSDictionary *exception in exceptions){
-            NSString *rule = exception[@"rule"];
-            NSNumber *enabled = exception[@"enabled"];
-            [sb appendFormat:@"\r\nWi-Fi name=\"%@\" Enabled=%@", rule, [enabled boolValue] ? @"YES" : @"NO"];
-        }
-        
-        for (NSString *upstream in dnsServerInfo.upstreams){
-            [sb appendFormat:@"\r\nDns upstream: %@",upstream];
-        }
-        
-        [sb appendString:@"\r\nDns filters:\r\n"];
-        for (DnsFilter* filter in _dnsFiltersService.filters) {
-            [sb appendFormat:@"name: %@ id: %ld url: %@ enabled: %@\r\n", filter.name, (long)filter.id, filter.subscriptionUrl, filter.enabled ? @"YES" : @"NO"];
-        }
+        [sb appendString:[_support proFeaturesStatus]];
 
         return sb;
     }

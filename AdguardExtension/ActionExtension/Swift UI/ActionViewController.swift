@@ -82,11 +82,33 @@ class ActionViewController: UIViewController {
         
         self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources)
         
+        let safariProtectoin = SafariProtectionService(resources: sharedResources)
+        
         let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration, complexProtection: nil)
         
         let safariProtection = SafariProtectionService(resources: sharedResources)
-        contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
-        support = AESSupport(resources: sharedResources, safariSevice: safariService, antibanner: antibanner, dnsFiltersService: dnsFiltersService)
+        
+        let dnsProviders = DnsProvidersService(resources: sharedResources)
+        
+        let networkSettings = NetworkSettingsService(resources: sharedResources)
+
+        let vpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettings, dnsProviders: dnsProviders)
+        
+        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin)
+
+        contentBlockerService = ContentBlockerService(resources: sharedResources,
+                                                      safariService: safariService,
+                                                      antibanner: antibanner,
+                                                      safariProtection: safariProtection)
+        support = AESSupport(resources: sharedResources,
+                             safariSevice: safariService,
+                             antibanner: antibanner,
+                             dnsFiltersService: dnsFiltersService,
+                             dnsProviders: dnsProviders,
+                             configuration: configuration,
+                             complexProtection: complexProtection,
+                             networtkSettings: networkSettings,
+                             dnsFilters: dnsFiltersService)
         
         super.init(coder: coder)
     }
