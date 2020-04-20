@@ -43,6 +43,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@K";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10K";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uporabniška pravila";
 
@@ -200,16 +206,16 @@
 "adguard_family_dns_description" = "AdGuard DNS + Varno iskanje in zaviranje vsebin za odrasle";
 
 /* Google DNS server description */
-"google_dns_description" = "Google brezplačnA alternativna DNS storitev";
+"google_dns_description" = "Googlova brezplačna nadomestna storitev DNS";
 
 /* Open DNS server description */
 "open_dns_description" = "Strežnik DNS, ki varuje vašo napravo pred lažnim predstavljanjem in prevarami";
 
 /* Open Family DNS server description */
-"open_dns_familyshield_description" = "Odprt Dns strežnik z zaviranjem vsebin za odrasle";
+"open_dns_familyshield_description" = "OpenDNS strežnik z zaviranjem vsebin za odrasle";
 
 /* Quad9 DNS server description */
-"quad_nine_dns_description" = "Brezplačna alternativna storitev DNS z varovanje pred lažnim predstavljanjem in vohunskimi programi";
+"quad_nine_dns_description" = "Brezplačna nadomestna storitev DNS z varstvom pred lažnim predstavljanjem in vohunskimi programi";
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Brezplačna DNS storitev podjetja Cloudflare";
@@ -224,7 +230,7 @@
 "dns_provider_adult_tag" = "Zaviranje vsebin za odrasle";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Ni politike vodenja dnevnika";
+"dns_provider_no_logs_tag" = "Politika ne vodenja dnevnika";
 
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Varno iskanje";
@@ -242,10 +248,10 @@
 "dns_provider_no_logs_summary" = "Ne shranjuje vaših Dnevnikov poizvedb DNS";
 
 /* Dns Feature description */
-"dns_provider_safe_search_summary" = "Varno iskanje se uveljavlja v brskalnikih, kadarkoli je to mogoče";
+"dns_provider_safe_search_summary" = "Varno iskanje se izvaja v brskalnikih, kadarkoli je to mogoče";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Onemogoča oglase in sledilne strežnike";
+"dns_provider_ad_blocking_summary" = "Onemogoča sisteme za sledenje";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Brez šifriranja (Sistemski DNS)";
@@ -269,7 +275,7 @@
 "confirm_logout_text" = "Ali ste prepričani, da se želite odjaviti?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "Pri konfiguraciji VPN je prišlo do težave. Obrnite se na našo podporo.";
+"support_vpn_configuration_problem" = "Pri nastavitvah VPN je prišlo do težave. Obrnite se na našo podporo.";
 
 /* login error message */
 "login_error_message" = "Prišlo do napake pri prijavi v";

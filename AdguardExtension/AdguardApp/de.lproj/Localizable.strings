@@ -590,7 +590,7 @@
 "protection_enabled" = "Schutz ist aktiviert";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari- und Tracking-Schutz";
+"complex_enabled" = "Safari- und DNS-Schutz";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari-Inhaltsblockierung";

@@ -17,10 +17,10 @@
 "Asq-k8-hi1.text" = "가장 활발한 기업";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
-"DCy-so-G1C.text" = "최근 활동이 추적되지 않았습니다 (마지막 1500개의 요청만 저장됨)";
+"DCy-so-G1C.text" = "최근 활동 기록이 없습니다 (마지막 1500개의 요청만 저장됨)";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
-"Epn-q1-BdL.text" = "최근 활동이 추적되지 않았습니다 (마지막 1500개의 요청만 저장됨)";
+"Epn-q1-BdL.text" = "최근 활동 기록이 없습니다 (마지막 1500개의 요청만 저장됨)";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "활동";
@@ -35,7 +35,7 @@
 "M4r-q5-RXv.text" = "도메인 명:";
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
-"T0y-mr-Zwa.text" = "사용자는 통계 및 DNS 요청 차단 로그를 보고 추적 중인지 확인할 수 있습니다";
+"T0y-mr-Zwa.text" = "사용자는 통계 및 DNS 요청 차단 로그를 보고 추적당하는 중인지 확인할 수 있습니다";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "추적 보호가 비활성화되었습니다";

@@ -547,6 +547,9 @@
 /* confirm reset lert text */
 "confirm_reset_text" = "重置所有设置包括用户规则、DNS防护、界面和授权设置。此操作无法撤消。您确定要重置吗？";
 
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "重置活动日志";
+
 /* (DnsLogContainerController) reset activity log message */
 "reset_activity_message" = "所有活动记录将要被删除";
 
@@ -620,6 +623,9 @@
 "dns_filters_number_title" = "%@规则已启用";
 
 /*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "太多规则已启用：%@. 它们之间有些将要被停用";
+
+/*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "以正常工作，关闭一些过滤器";
 
 /*(DnsLogController) status of dns request */
@@ -630,6 +636,9 @@
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_encrypted" = "加密的";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "被允许";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "已添加至白名单\n";
@@ -763,6 +772,9 @@
 /* (ActivityViewController) - Average time title */
 "average_info_alert_title" = "平均时间";
 
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "处理DNS请求的平均时间。你用的DNS服务器越快，处理DNS请求的时间越短。";
+
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "公司总数";
 
@@ -772,14 +784,46 @@
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "全部请求";
 
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "仅已阻止";
+
 /* (ActivityViewController) - Allowed only alert action */
-"allowed_only_alert_action" = "仅被允许";
+"allowed_only_alert_action" = "仅已允许";
 
 /* (ActivityViewController) - None message when there is no statistics */
 "none_message" = "无";
 
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "活动";
+
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d请求";
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "主屏幕";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "保护屏";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "活动屏幕";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "设置屏幕";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari浏览器防护已启用";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari浏览器防护已停用";
 
 /* (MainPageController) DNS protection enabled title for VoiceOver*/
 "tracking_protection_enabled_voiceover" = "DNS防护已启用";
@@ -796,8 +840,25 @@
 /* (MainPageController) blocked requests number title for VoiceOver*/
 "encrypted_number_voiceover" = "加密DNS请求数";
 
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "处理DNS请求的平均时间";
+
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
 "enable_system_protection_voiceover" = "开启DNS防护";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "选择订阅类型";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "请在这儿输入您的电子邮件";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "请在这儿输入您的密码";
