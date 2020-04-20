@@ -18,9 +18,13 @@
 
 import UIKit
 
-struct Point {
+struct Point: Equatable {
     var x: CGFloat
     var y: CGFloat
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
 }
 
 class ChartView: UIView {
@@ -304,7 +308,7 @@ class ChartView: UIView {
             let newX = (frame.width * ratioX)
             
             var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
-            if  newX - lastPoint.x < minimumSpacing {
+            if  newX - lastPoint.x < minimumSpacing && points.last != point {
                 newPoints = newPoints.dropLast()
                 lastPoint.y = lastPoint.y + point.y
                 newPoints.append(lastPoint)
