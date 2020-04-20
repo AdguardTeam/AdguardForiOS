@@ -88,7 +88,7 @@ class SupportService: NSObject, SupportServiceProtocol {
         }
         
         if dnsFilters.filters.count > 0 {
-            resultString.append("Dns filters: \r\n");
+            resultString.append("\r\nDns filters: \r\n");
             
             for filter in dnsFilters.filters {
                 resultString.append("name: \(filter.name ?? "UNDEFINED") id: \(filter.id) url: \(filter.subscriptionUrl ?? "UNDEFINED") enabled: \(filter.enabled)\r\n")
