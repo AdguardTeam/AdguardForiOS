@@ -154,24 +154,20 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
-    
-    private var chartModel: ChartViewModelProtocol
     private let mainPageModel: MainPageModelProtocol
+    private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     
     // MARK: - Observers
     
     private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
-    private var resetSettingsToken: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
-    private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - View Controller life cycle
     
     required init?(coder: NSCoder) {
-        chartModel = ChartViewModel(ServiceLocator.shared.getService()!)
         mainPageModel = MainPageModel(antibanner: ServiceLocator.shared.getService()!)
         super.init(coder: coder)
     }
@@ -182,10 +178,10 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chartModel.chartView = chartView
         
         addObservers()
-        chooseRequest()
+        setUIForRequestType()
         setupVoiceOverLabels()
     
-        chartModel.chartPointsChangedDelegate = self
+        chartModel.chartPointsChangedDelegates.append(self)
         complexProtectionSwitch.delegate = self
         
         dateTypeChanged(dateType: resources.chartDateType)
@@ -196,8 +192,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
         
         configuration.checkContentBlockerEnabled()
-        
-        chartModel.obtainStatistics()
         
         if let stateFromWidget = self.stateFromWidget {
             complexProtection.switchComplexProtection(state: stateFromWidget, for: self) { (_, _) in
@@ -210,7 +204,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
         updateTheme()
         observeProStatus()
-        updateTextForButtons()
         updateProtectionStates()
         updateProtectionStatusText()
     }
@@ -387,22 +380,11 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         showContentBlockersHelper()
     }
     
-    // MARK: - Observing Values from User Defaults
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == LastStatisticsSaveTime {
-            chartModel.obtainStatistics()
-            return
-        }
-        updateTextForButtons()
-    }
-    
     // MARK: - ChartPointsChangedDelegate method
     
-    func numberOfRequestsChanged() {
-        updateTextForButtons()
+    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
+        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
     }
-    
     
     // MARK: - DateTypeChangedProtocol method
     
@@ -475,19 +457,18 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     /**
     Changes number of requests for all buttons
     */
-    private func updateTextForButtons(){
+    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            let requestsCount = self.chartModel.requestsCount + requestsNumber
+            let requestsNumberDefaults = self.resources.tempRequestsCount
+            let requestsNumber = requestsCount + requestsNumberDefaults
             
-            let encryptedNumber = self.resources.tempEncryptedRequestsCount
-            let encryptedCount = self.chartModel.encryptedCount + encryptedNumber
-            let averageElapsed = self.chartModel.averageElapsed
+            let encryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
+            let encryptedNumber = encryptedCount + encryptedNumberDefaults
             
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
@@ -501,15 +482,19 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             let message = String.localizedString("requests_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         } else {
-            chartView.activeChart = .requests
-            chartModel.chartRequestType = .requests
-            
-            requestsNumberLabel.alpha = 1.0
-            encryptedNumberLabel.alpha = 0.5
-            
-            requestsTextLabel.alpha = 1.0
-            encryptedTextLabel.alpha = 0.5
+            setUIForRequestType()
         }
+    }
+    
+    private func setUIForRequestType() {
+        chartView.activeChart = .requests
+        chartModel.chartRequestType = .requests
+        
+        requestsNumberLabel.alpha = 1.0
+        encryptedNumberLabel.alpha = 0.5
+        
+        requestsTextLabel.alpha = 1.0
+        encryptedTextLabel.alpha = 0.5
     }
     
     /**
@@ -552,20 +537,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
         })
-        
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.chartModel.obtainStatistics()
-        }
-        
-        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
-        
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        
-        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
-        
-        defaultsObservations.append(observerToken1)
-        defaultsObservations.append(observerToken2)
-        defaultsObservations.append(observerToken3)
         
         let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }

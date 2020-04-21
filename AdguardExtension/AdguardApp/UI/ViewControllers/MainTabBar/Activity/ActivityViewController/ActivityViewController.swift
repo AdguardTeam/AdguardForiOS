@@ -72,7 +72,6 @@ class ActivityViewController: UITableViewController {
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
     private var resetSettingsToken: NotificationToken?
-    private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - Public variables
     
@@ -84,7 +83,7 @@ class ActivityViewController: UITableViewController {
     private var titleInNavBarIsShown = false
     
     private let activityModel: ActivityStatisticsModelProtocol
-    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)
+    private var statisticsModel: ChartViewModelProtocol = ServiceLocator.shared.getService()!
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -105,13 +104,12 @@ class ActivityViewController: UITableViewController {
         super.viewDidLoad()
         
         requestsModel?.delegate = self
-        statisticsModel.chartPointsChangedDelegate = self
+        statisticsModel.chartPointsChangedDelegates.append(self)
         
         updateTheme()
         setupTableView()
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
-        statisticsModel.obtainStatistics()
         filterButton.isHidden = !configuration.advancedMode
     }
     
@@ -135,16 +133,6 @@ class ActivityViewController: UITableViewController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.chartDateType = resources.activityStatisticsType
         }
-    }
-    
-    // MARK: - Observing Values from User Defaults
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == LastStatisticsSaveTime {
-            statisticsModel.obtainStatistics()
-            return
-        }
-        updateTextForButtons()
     }
     
     // MARK: - Actions
@@ -368,27 +356,6 @@ class ActivityViewController: UITableViewController {
     }
     
     /**
-    Changes number of requests for all buttons
-    */
-    private func updateTextForButtons(){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            
-            let requestsNumber = self.resources.tempRequestsCount
-            let requestsCount = self.statisticsModel.requestsCount + requestsNumber
-            
-            let ecnryptedNumber = self.resources.tempEncryptedRequestsCount
-            let ecnryptedCount = self.statisticsModel.encryptedCount + ecnryptedNumber
-            
-            let averageElapsed = self.statisticsModel.averageElapsed
-            
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedCount))
-            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
-        }
-    }
-    
-    /**
      Adds observers to controller
      */
     private func addObservers(){
@@ -409,7 +376,6 @@ class ActivityViewController: UITableViewController {
         }
         
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.statisticsModel.obtainStatistics()
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         
@@ -418,22 +384,15 @@ class ActivityViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
-        
-        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
-        
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        
-        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
-        
-        defaultsObservations.append(observerToken1)
-        defaultsObservations.append(observerToken2)
-        defaultsObservations.append(observerToken3)
     }
     
     @objc func updateTableView(sender: UIRefreshControl) {
         dateTypeChanged(dateType: resources.activityStatisticsType)
-        statisticsModel.obtainStatistics()
-        refreshControl?.endRefreshing()
+        statisticsModel.obtainStatistics{
+            DispatchQueue.main.async {[weak self] in
+                self?.refreshControl?.endRefreshing()
+            }
+        }
     }
 }
 
@@ -465,10 +424,15 @@ extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
         resources.activityStatisticsType = dateType
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
-        statisticsModel.chartDateType = dateType
+        statisticsModel.chartDateTypeActivity = dateType
         
-        let companiesInfo = activityModel.getCompanies(for: dateType)
-        
+        activityModel.getCompanies(for: dateType) {[weak self] (info) in
+            self?.processCompaniesInfo(info)
+        }
+        requestsModel?.obtainRecords(for: dateType)
+    }
+    
+    private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
         DispatchQueue.main.async {[weak self] in
             if !companiesInfo.mostRequested.isEmpty {
                 self?.mostActiveButton.alpha = 1.0
@@ -492,8 +456,6 @@ extension ActivityViewController: DateTypeChangedProtocol {
             self?.mostRequestedCompanies = companiesInfo.mostRequested
             self?.companiesNumber = companiesInfo.companiesNumber
         }
-        
-        requestsModel?.obtainRecords(for: dateType)
     }
 }
 
@@ -508,7 +470,26 @@ extension ActivityViewController: UIViewControllerTransitioningDelegate{
 // MARK: - NumberOfRequestsChangedDelegate
 
 extension ActivityViewController: NumberOfRequestsChangedDelegate {
-    func numberOfRequestsChanged() {
-        updateTextForButtons()
+    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
+        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
+    }
+    
+    /**
+    Changes number of requests for all buttons
+    */
+    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let requestsNumberDefaults = self.resources.tempRequestsCount
+            let requestsNumber = requestsCount + requestsNumberDefaults
+            
+            let ecnryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
+            let ecnryptedNumber = encryptedCount + ecnryptedNumberDefaults
+            
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedNumber))
+            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+        }
     }
 }
