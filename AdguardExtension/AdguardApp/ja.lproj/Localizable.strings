@@ -761,7 +761,7 @@
 "requests_info_alert_title" = "リクエスト数";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "それぞれのWebサイトにアクセスするたびに、リクエストが送信されます。そこで、Webサイトは隠されたリクエストを送信することがあり、個人情報を漏洩する可能性があります。この問題の範囲を把握するには、リクエストの数を知っておくと便利です。";
+"requests_info_alert_message" = "それぞれのWebサイトにアクセスするたびに、リクエストが送信されます。そこで、Webサイトは隠されたリクエストを送信することがあり、個人情報を漏洩する可能性があります。この問題の範囲を把握するには、リクエストの総数を知っておくと便利です。";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "暗号化済みリクエスト数";
