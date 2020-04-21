@@ -72,7 +72,6 @@ class ActivityViewController: UITableViewController {
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
     private var resetSettingsToken: NotificationToken?
-    private var defaultsObservations: [ObserverToken] = []
     
     // MARK: - Public variables
     
@@ -84,7 +83,7 @@ class ActivityViewController: UITableViewController {
     private var titleInNavBarIsShown = false
     
     private let activityModel: ActivityStatisticsModelProtocol
-    private var statisticsModel: ChartViewModelProtocol = ChartViewModel(ServiceLocator.shared.getService()!)
+    private var statisticsModel: ChartViewModelProtocol = ServiceLocator.shared.getService()!
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -105,14 +104,14 @@ class ActivityViewController: UITableViewController {
         super.viewDidLoad()
         
         requestsModel?.delegate = self
-        statisticsModel.chartPointsChangedDelegate = self
+        statisticsModel.chartPointsChangedDelegates.append(self)
         
         updateTheme()
         setupTableView()
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
-        statisticsModel.obtainStatistics()
         filterButton.isHidden = !configuration.advancedMode
+        updateTextForButtons()
     }
     
     override func viewDidLayoutSubviews() {
@@ -135,16 +134,6 @@ class ActivityViewController: UITableViewController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.chartDateType = resources.activityStatisticsType
         }
-    }
-    
-    // MARK: - Observing Values from User Defaults
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == LastStatisticsSaveTime {
-            statisticsModel.obtainStatistics()
-            return
-        }
-        updateTextForButtons()
     }
     
     // MARK: - Actions
@@ -409,7 +398,6 @@ class ActivityViewController: UITableViewController {
         }
         
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.statisticsModel.obtainStatistics()
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         
@@ -418,16 +406,6 @@ class ActivityViewController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
-        
-        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
-        
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        
-        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
-        
-        defaultsObservations.append(observerToken1)
-        defaultsObservations.append(observerToken2)
-        defaultsObservations.append(observerToken3)
     }
     
     @objc func updateTableView(sender: UIRefreshControl) {

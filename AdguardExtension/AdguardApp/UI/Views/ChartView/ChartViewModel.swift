@@ -28,7 +28,7 @@ protocol ChartViewModelProtocol {
     var chartDateType: ChartDateType { get set }
     var chartRequestType: ChartRequestType { get set }
     
-    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate? { get set }
+    var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] { get set }
     
     func obtainStatistics()
 }
@@ -41,10 +41,10 @@ enum ChartRequestType {
     case requests, encrypted
 }
 
-class ChartViewModel: ChartViewModelProtocol {
+class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     var chartView: ChartView?
-    var chartPointsChangedDelegate: NumberOfRequestsChangedDelegate?
+    var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] = []
     
     var requestsCount: Int = 0
     var encryptedCount: Int = 0
@@ -56,7 +56,7 @@ class ChartViewModel: ChartViewModelProtocol {
         }
     }
     
-    var chartRequestType: ChartRequestType = .encrypted {
+    var chartRequestType: ChartRequestType = .requests {
         didSet {
             changeChart()
         }
@@ -69,12 +69,20 @@ class ChartViewModel: ChartViewModelProtocol {
     private var timer: Timer?
     
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    
+    /* Observers */
+    private var defaultsObservations: [ObserverToken] = []
+    private var resetSettingsToken: NotificationToken?
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol) {
+    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, resources: AESharedResourcesProtocol) {
         self.dnsStatisticsService = dnsStatisticsService
+        self.resources = resources
+        super.init()
         
         obtainStatistics()
+        addObservers()
     }
     
     func obtainStatistics() {
@@ -96,6 +104,16 @@ class ChartViewModel: ChartViewModelProtocol {
         }
     }
     
+    // MARK: - Observing Values from User Defaults
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == LastStatisticsSaveTime {
+            obtainStatistics()
+            return
+        }
+        chartPointsChangedDelegates.forEach({ $0.numberOfRequestsChanged() })
+    }
+    
     // MARK: - private methods
     
     private func changeChart(){
@@ -109,7 +127,7 @@ class ChartViewModel: ChartViewModelProtocol {
             self.averageElapsed = requestsInfo.averageElapsedTime
             
             self.chartView?.chartPoints = (requestsInfo.requestsPoints, requestsInfo.encryptedPoints)
-            self.chartPointsChangedDelegate?.numberOfRequestsChanged()
+            self.chartPointsChangedDelegates.forEach({ $0.numberOfRequestsChanged() })
         }
     }
     
@@ -152,5 +170,21 @@ class ChartViewModel: ChartViewModelProtocol {
         let averageElapsedTime = Double(elapsedSumm) / Double(requestsNumber)
 
         return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
+    }
+    
+    private func addObservers() {
+        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+            self?.obtainStatistics()
+        }
+        
+        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
+        
+        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
+        
+        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
+        
+        defaultsObservations.append(observerToken1)
+        defaultsObservations.append(observerToken2)
+        defaultsObservations.append(observerToken3)
     }
 }
