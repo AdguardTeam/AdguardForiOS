@@ -204,7 +204,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
 
         updateTheme()
         observeProStatus()
-        updateTextForButtons()
         updateProtectionStates()
         updateProtectionStatusText()
     }
@@ -383,10 +382,9 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     
     // MARK: - ChartPointsChangedDelegate method
     
-    func numberOfRequestsChanged() {
-        updateTextForButtons()
+    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
+        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
     }
-    
     
     // MARK: - DateTypeChangedProtocol method
     
@@ -459,19 +457,18 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
     /**
     Changes number of requests for all buttons
     */
-    private func updateTextForButtons(){
+    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requestsNumber = self.resources.sharedDefaults().integer(forKey: AEDefaultsRequests)
-            let requestsCount = self.chartModel.requestsCount + requestsNumber
+            let requestsNumberDefaults = self.resources.tempRequestsCount
+            let requestsNumber = requestsCount + requestsNumberDefaults
             
-            let encryptedNumber = self.resources.tempEncryptedRequestsCount
-            let encryptedCount = self.chartModel.encryptedCount + encryptedNumber
-            let averageElapsed = self.chartModel.averageElapsed
+            let encryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
+            let encryptedNumber = encryptedCount + encryptedNumberDefaults
             
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }

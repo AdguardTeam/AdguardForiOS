@@ -111,7 +111,6 @@ class ActivityViewController: UITableViewController {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
-        updateTextForButtons()
     }
     
     override func viewDidLayoutSubviews() {
@@ -357,27 +356,6 @@ class ActivityViewController: UITableViewController {
     }
     
     /**
-    Changes number of requests for all buttons
-    */
-    private func updateTextForButtons(){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            
-            let requestsNumber = self.resources.tempRequestsCount
-            let requestsCount = self.statisticsModel.requestsCount + requestsNumber
-            
-            let ecnryptedNumber = self.resources.tempEncryptedRequestsCount
-            let ecnryptedCount = self.statisticsModel.encryptedCount + ecnryptedNumber
-            
-            let averageElapsed = self.statisticsModel.averageElapsed
-            
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedCount))
-            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
-        }
-    }
-    
-    /**
      Adds observers to controller
      */
     private func addObservers(){
@@ -446,7 +424,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
         resources.activityStatisticsType = dateType
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
-        statisticsModel.chartDateType = dateType
+        statisticsModel.chartDateTypeActivity = dateType
         
         activityModel.getCompanies(for: dateType) {[weak self] (info) in
             self?.processCompaniesInfo(info)
@@ -492,7 +470,26 @@ extension ActivityViewController: UIViewControllerTransitioningDelegate{
 // MARK: - NumberOfRequestsChangedDelegate
 
 extension ActivityViewController: NumberOfRequestsChangedDelegate {
-    func numberOfRequestsChanged() {
-        updateTextForButtons()
+    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
+        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
+    }
+    
+    /**
+    Changes number of requests for all buttons
+    */
+    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let requestsNumberDefaults = self.resources.tempRequestsCount
+            let requestsNumber = requestsCount + requestsNumberDefaults
+            
+            let ecnryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
+            let ecnryptedNumber = encryptedCount + ecnryptedNumberDefaults
+            
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedNumber))
+            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+        }
     }
 }
