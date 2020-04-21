@@ -43,7 +43,11 @@ enum ChartRequestType {
 
 class ChartViewModel: NSObject, ChartViewModelProtocol {
     
-    var chartView: ChartView?
+    var chartView: ChartView? {
+        didSet {
+            changeChart {}
+        }
+    }
     var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] = []
     
     var requestsCount: Int = 0
