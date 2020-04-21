@@ -168,6 +168,8 @@ class DnsRequestLogViewModel {
     private var allRecords = [DnsLogRecordExtended]()
     private var searchRecords = [DnsLogRecordExtended]()
     
+    private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
+    
     // MARK: - init
     init(dnsLogService: DnsLogRecordsServiceProtocol, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         self.dnsLogService = dnsLogService
@@ -181,7 +183,19 @@ class DnsRequestLogViewModel {
      obtains records array from vpnManager
     */
     func obtainRecords(for type: ChartDateType, domains: Set<String>? = nil) {
-        
+        workingQueue.async {[weak self] in
+            self?.obtainRecordsInternal(for: type, domains: domains)
+        }
+    }
+    
+    func clearRecords(){
+        dnsLogService.clearLog()
+        allRecords = []
+        searchRecords = []
+        delegate?.requestsCleared()
+    }
+    
+    private func obtainRecordsInternal(for type: ChartDateType, domains: Set<String>? = nil) {
         let intervalTime = type.getTimeInterval()
         let firstDate = intervalTime.begin
         let lastDate = intervalTime.end
@@ -225,12 +239,5 @@ class DnsRequestLogViewModel {
         }
         
         recordsObserver?(allRecords)
-    }
-    
-    func clearRecords(){
-        dnsLogService.clearLog()
-        allRecords = []
-        searchRecords = []
-        delegate?.requestsCleared()
     }
 }

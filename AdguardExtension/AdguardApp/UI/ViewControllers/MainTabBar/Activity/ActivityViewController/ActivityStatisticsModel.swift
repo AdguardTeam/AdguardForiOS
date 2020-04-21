@@ -44,7 +44,7 @@ struct CompaniesInfo {
 }
 
 protocol ActivityStatisticsModelProtocol {
-    func getCompanies(for type: ChartDateType) -> CompaniesInfo
+    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
 }
 
 class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
@@ -53,55 +53,60 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     private let dnsTrackersService: DnsTrackerServiceProtocol
     private let domainsParserService: DomainsParserServiceProtocol
     
+    private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue")
+    
     init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
         self.activityStatisticsService = activityStatisticsService
         self.dnsTrackersService = dnsTrackersService
         self.domainsParserService = domainsParserService
     }
     
-    func getCompanies(for type: ChartDateType) -> CompaniesInfo {
-        
-        let records = activityStatisticsService.getRecords(by: type)
-        var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
-        var companiesNumber = 0
-        let parser = domainsParserService.domainsParser
-            
-        for record in records {
-            let company = dnsTrackersService.getTrackerInfo(by: record.domain)?.name
-            let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
-            let key = company ?? domain
-            
-            if let existingRecord = recordsByCompanies[key] {
-                existingRecord.requests += record.requests
-                existingRecord.encrypted += record.encrypted
-                existingRecord.elapsedSumm += record.elapsedSumm
-                existingRecord.domains.insert(record.domain)
-            } else {
-                let requestRecord = CompanyRequestsRecord(date: record.date, company: company, key: key, requests: record.requests, encrypted: record.encrypted, elapsedSumm: record.elapsedSumm)
-                requestRecord.domains.insert(record.domain)
-                recordsByCompanies[key] = requestRecord
+    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
+        workingQueue.async {[weak self] in
+            guard let self = self else { return }
+            let records = self.activityStatisticsService.getRecords(by: type)
+            var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
+            var companiesNumber = 0
+            let parser = self.domainsParserService.domainsParser
                 
-                /* We count unique domains as companies if a company wasn't found by domain */
-                companiesNumber += 1
+            for record in records {
+                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name
+                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
+                let key = company ?? domain
+                
+                if let existingRecord = recordsByCompanies[key] {
+                    existingRecord.requests += record.requests
+                    existingRecord.encrypted += record.encrypted
+                    existingRecord.elapsedSumm += record.elapsedSumm
+                    existingRecord.domains.insert(record.domain)
+                } else {
+                    let requestRecord = CompanyRequestsRecord(date: record.date, company: company, key: key, requests: record.requests, encrypted: record.encrypted, elapsedSumm: record.elapsedSumm)
+                    requestRecord.domains.insert(record.domain)
+                    recordsByCompanies[key] = requestRecord
+                    
+                    /* We count unique domains as companies if a company wasn't found by domain */
+                    companiesNumber += 1
+                }
             }
+                
+            let recordsArray = Array(recordsByCompanies.values)
+            let mostRequested = recordsArray.sorted(by: {
+                if $0.requests != $1.requests {
+                    return $0.requests > $1.requests
+                } else {
+                    return $0.key < $1.key
+                }
+            })
+            let mostEncrypted = recordsArray.sorted(by: {
+                if $0.encrypted != $1.encrypted {
+                    return $0.encrypted > $1.encrypted
+                } else {
+                    return $0.key < $1.key
+                }
+            })
+                
+            let info = CompaniesInfo(mostRequested: mostRequested, mostEncrypted: mostEncrypted, companiesNumber: companiesNumber)
+            completion(info)
         }
-            
-        let recordsArray = Array(recordsByCompanies.values)
-        let mostRequested = recordsArray.sorted(by: {
-            if $0.requests != $1.requests {
-                return $0.requests > $1.requests
-            } else {
-                return $0.key < $1.key
-            }
-        })
-        let mostEncrypted = recordsArray.sorted(by: {
-            if $0.encrypted != $1.encrypted {
-                return $0.encrypted > $1.encrypted
-            } else {
-                return $0.key < $1.key
-            }
-        })
-            
-        return CompaniesInfo(mostRequested: mostRequested, mostEncrypted: mostEncrypted, companiesNumber: companiesNumber)
     }
 }

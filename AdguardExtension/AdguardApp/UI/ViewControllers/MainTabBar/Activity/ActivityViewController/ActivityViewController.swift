@@ -410,8 +410,11 @@ class ActivityViewController: UITableViewController {
     
     @objc func updateTableView(sender: UIRefreshControl) {
         dateTypeChanged(dateType: resources.activityStatisticsType)
-        statisticsModel.obtainStatistics()
-        refreshControl?.endRefreshing()
+        statisticsModel.obtainStatistics{
+            DispatchQueue.main.async {[weak self] in
+                self?.refreshControl?.endRefreshing()
+            }
+        }
     }
 }
 
@@ -445,8 +448,13 @@ extension ActivityViewController: DateTypeChangedProtocol {
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateType = dateType
         
-        let companiesInfo = activityModel.getCompanies(for: dateType)
-        
+        activityModel.getCompanies(for: dateType) {[weak self] (info) in
+            self?.processCompaniesInfo(info)
+        }
+        requestsModel?.obtainRecords(for: dateType)
+    }
+    
+    private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
         DispatchQueue.main.async {[weak self] in
             if !companiesInfo.mostRequested.isEmpty {
                 self?.mostActiveButton.alpha = 1.0
@@ -470,8 +478,6 @@ extension ActivityViewController: DateTypeChangedProtocol {
             self?.mostRequestedCompanies = companiesInfo.mostRequested
             self?.companiesNumber = companiesInfo.companiesNumber
         }
-        
-        requestsModel?.obtainRecords(for: dateType)
     }
 }
 

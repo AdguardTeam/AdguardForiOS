@@ -30,7 +30,7 @@ protocol ChartViewModelProtocol {
     
     var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] { get set }
     
-    func obtainStatistics()
+    func obtainStatistics(_ completion: @escaping ()->())
 }
 
 protocol NumberOfRequestsChangedDelegate: class {
@@ -52,13 +52,13 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
 
     var chartDateType: ChartDateType = .alltime {
         didSet {
-            changeChart()
+            changeChart {}
         }
     }
     
     var chartRequestType: ChartRequestType = .requests {
         didSet {
-            changeChart()
+            changeChart{}
         }
     }
     
@@ -81,11 +81,17 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
         self.resources = resources
         super.init()
         
-        obtainStatistics()
         addObservers()
+        
+        /* Waiting when statistics is obtained, to show ready statistics on main page, without redrawing it */
+        let group = DispatchGroup()
+        group.enter()
+        obtainStatistics{ group.leave() }
+        group.wait()
     }
     
-    func obtainStatistics() {
+    func obtainStatistics(_ completion: @escaping ()->()) {
+        
         DispatchQueue(label: "obtainStatistics queue").async { [weak self] in
             guard let self = self else { return }
             
@@ -96,10 +102,12 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
                 self.recordsByType[type] = self.dnsStatisticsService.getRecords(by: type)
             }
             
-            self.changeChart()
+            self.changeChart {
+                completion()
+            }
             
             self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-                self?.obtainStatistics()
+                self?.obtainStatistics{}
             })
         }
     }
@@ -108,7 +116,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == LastStatisticsSaveTime {
-            obtainStatistics()
+            obtainStatistics{}
             return
         }
         chartPointsChangedDelegates.forEach({ $0.numberOfRequestsChanged() })
@@ -116,7 +124,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     // MARK: - private methods
     
-    private func changeChart(){
+    private func changeChart(_ completion: @escaping ()->()){
         DispatchQueue(label: "chart processing queue").async { [weak self] in
             guard let self = self, let records = self.recordsByType[self.chartDateType] else { return }
             let requestsInfo = self.getInfo(from: records)
@@ -128,6 +136,8 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             
             self.chartView?.chartPoints = (requestsInfo.requestsPoints, requestsInfo.encryptedPoints)
             self.chartPointsChangedDelegates.forEach({ $0.numberOfRequestsChanged() })
+            
+            completion()
         }
     }
     
@@ -174,7 +184,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     private func addObservers() {
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.obtainStatistics()
+            self?.obtainStatistics{}
         }
         
         let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
