@@ -116,6 +116,6 @@ extern NSString * _Nonnull APDnsServerUUIDAdguardFamily;
 /**
  compare the equivalence of the settings
  */
-- (BOOL) settingsEqual:(APDnsServerObject*) server;
+- (BOOL) settingsEqual:(APDnsServerObject* _Nonnull) server;
 
 @end
