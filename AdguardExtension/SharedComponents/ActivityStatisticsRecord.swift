@@ -25,7 +25,7 @@ import Foundation
     var encrypted: Int
     var elapsedSumm: Int?
     
-    init(date: Date? = nil, domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int? = 0) {
+    init(date: Date? = nil, domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int? = nil) {
         self.date = date
         self.domain = domain
         self.requests = requests
