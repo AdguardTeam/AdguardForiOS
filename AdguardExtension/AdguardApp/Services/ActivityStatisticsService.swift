@@ -68,12 +68,12 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             guard let db = db else { return }
             
             for record in records {
-                let dateString = ISO8601DateFormatter().string(from: record.date)
+                let dateString = ISO8601DateFormatter().string(from: record.date ?? Date())
             
-                var result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, encrypted, elapsedSumm) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.encrypted, record.elapsedSumm])
+                var result = db.executeUpdate("INSERT INTO ActivityStatisticsTable (timeStamp, domain, requests, encrypted, elapsedSumm) VALUES (?, ?, ?, ?, ?)", withArgumentsIn: [dateString, record.domain, record.requests, record.encrypted, record.elapsedSumm ?? 0])
 
                 if !result {
-                    result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = requests + ?, encrypted = encrypted + ?, elapsedSumm = elapsedSumm + ? WHERE timeStamp = ? AND domain = ?", withArgumentsIn: [record.requests, record.encrypted, record.elapsedSumm, dateString, record.domain])
+                    result = db.executeUpdate("UPDATE ActivityStatisticsTable SET requests = requests + ?, encrypted = encrypted + ?, elapsedSumm = elapsedSumm + ? WHERE timeStamp = ? AND domain = ?", withArgumentsIn: [record.requests, record.encrypted, record.elapsedSumm ?? 0, dateString, record.domain])
                 }
                 
                 rollback?.pointee = ObjCBool(!result)
@@ -90,11 +90,15 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
         dbHandler?.inTransaction{ (db, rollback) in
             guard let db = db else { return }
     
-            if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable", withArgumentsIn: []) {
+            if let resultSet = db.executeQuery("SELECT domain, SUM(requests) as requests, SUM(encrypted) as encrypted FROM ActivityStatisticsTable GROUP BY domain", withArgumentsIn: []) {
                 while resultSet.next() {
-                    if let record = ActivityStatisticsRecord(resultSet) {
-                        activityRecords.append(record)
-                    }
+                    guard let domain = resultSet["domain"] as? String,
+                    let requests = resultSet["requests"] as? Int,
+                    let encrypted = resultSet["encrypted"] as? Int
+                    else { continue }
+                    
+                    let activityRecord = ActivityStatisticsRecord(domain: domain, requests: requests, encrypted: encrypted)
+                    activityRecords.append(activityRecord)
                 }
             }
         }
@@ -110,15 +114,20 @@ typealias ActivityStatisticsServiceProtocol = ActivityStatisticsServiceWriterPro
             
             let firstDate = ISO8601DateFormatter().string(from: intervalTime.begin)
             let lastDate = ISO8601DateFormatter().string(from: intervalTime.end)
-            
-            if let resultSet = db.executeQuery("SELECT * FROM ActivityStatisticsTable WHERE timeStamp <= ? AND timeStamp >= ? ORDER BY timeStamp DESC, domain ASC", withArgumentsIn: [firstDate, lastDate]) {
+        
+            if let resultSet = db.executeQuery("SELECT domain, SUM(requests) as requests, SUM(encrypted) as encrypted FROM ActivityStatisticsTable WHERE timeStamp <= ? AND timeStamp >= ? GROUP BY domain", withArgumentsIn: [firstDate, lastDate]) {
                 while resultSet.next() {
-                    if let record = ActivityStatisticsRecord(resultSet) {
-                        activityRecords.append(record)
-                    }
+                    guard let domain = resultSet["domain"] as? String,
+                    let requests = resultSet["requests"] as? Int,
+                    let encrypted = resultSet["encrypted"] as? Int
+                    else { continue }
+                    
+                    let activityRecord = ActivityStatisticsRecord(domain: domain, requests: requests, encrypted: encrypted)
+                    activityRecords.append(activityRecord)
                 }
             }
         }
+        
         return activityRecords
     }
     

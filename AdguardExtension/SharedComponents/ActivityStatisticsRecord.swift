@@ -19,42 +19,23 @@
 import Foundation
 
 @objc class ActivityStatisticsRecord: NSObject {
-    let date: Date
+    let date: Date?
     let domain: String
     var requests: Int
     var encrypted: Int
-    var elapsedSumm: Int
+    var elapsedSumm: Int?
     
-    init(date: Date = Date(), domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int = 0) {
+    init(date: Date? = nil, domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int? = 0) {
         self.date = date
         self.domain = domain
         self.requests = requests
         self.encrypted = encrypted
         self.elapsedSumm = elapsedSumm
     }
-    
-    init?(_ resultSet: FMResultSet) {
-        if let iso8601DateString = resultSet["timeStamp"] as? String,
-            let date = ISO8601DateFormatter().date(from: iso8601DateString),
-            let domain = resultSet["domain"] as? String,
-            let requests = resultSet["requests"] as? Int,
-            let encrypted = resultSet["encrypted"] as? Int,
-            let elapsedSumm = resultSet["elapsedSumm"] as? Int {
-            
-            self.date = date
-            self.domain = domain
-            self.requests = requests
-            self.encrypted = encrypted
-            self.elapsedSumm = elapsedSumm
-        }
-        else {
-            return nil
-        }
-    }
 
     override var debugDescription: String {
         get {
-            return "date = \(self.date); domain = \(self.domain); requests = \(self.requests); encrypted = \(self.encrypted); elapsedSumm = \(self.elapsedSumm)"
+            return "domain = \(self.domain); requests = \(self.requests); encrypted = \(self.encrypted)"
         }
     }
     
@@ -62,7 +43,7 @@ import Foundation
     
     override func isEqual(_ object: Any?) -> Bool {
         if let object = object as? ActivityStatisticsRecord {
-            return ISO8601DateFormatter().string(from: object.date) == ISO8601DateFormatter().string(from: self.date) &&
+            return object.date == self.date &&
                 object.domain == self.domain &&
                 object.requests == self.requests &&
                 object.encrypted == self.encrypted &&

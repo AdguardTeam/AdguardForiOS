@@ -50,9 +50,6 @@ class ChartView: UIView {
     
     var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
         didSet {
-            chartPoints.requests.sort(by: { $0.x < $1.x })
-            chartPoints.encrypted.sort(by: { $0.x < $1.x })
-            
             let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
             let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
             

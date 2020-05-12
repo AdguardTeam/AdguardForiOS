@@ -19,27 +19,22 @@
 import Foundation
 
 class CompanyRequestsRecord {
-    let date: Date
     var domains = Set<String>()
     let company: String?
     let key: String
     var requests: Int
     var encrypted: Int
-    var elapsedSumm: Int
     
-    init(date: Date, company: String?, key: String, requests: Int, encrypted: Int, elapsedSumm: Int) {
-        self.date = date
+    init(company: String?, key: String, requests: Int, encrypted: Int) {
         self.company = company
         self.key = key
         self.requests = requests
         self.encrypted = encrypted
-        self.elapsedSumm = elapsedSumm
     }
 }
 
 struct CompaniesInfo {
     let mostRequested: [CompanyRequestsRecord]
-    let mostEncrypted: [CompanyRequestsRecord]
     let companiesNumber: Int
 }
 
@@ -53,7 +48,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     private let dnsTrackersService: DnsTrackerServiceProtocol
     private let domainsParserService: DomainsParserServiceProtocol
     
-    private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue")
+    private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
     
     init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
         self.activityStatisticsService = activityStatisticsService
@@ -63,6 +58,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
         workingQueue.async {[weak self] in
+            
             guard let self = self else { return }
             let records = self.activityStatisticsService.getRecords(by: type)
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
@@ -77,10 +73,9 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
                 if let existingRecord = recordsByCompanies[key] {
                     existingRecord.requests += record.requests
                     existingRecord.encrypted += record.encrypted
-                    existingRecord.elapsedSumm += record.elapsedSumm
                     existingRecord.domains.insert(record.domain)
                 } else {
-                    let requestRecord = CompanyRequestsRecord(date: record.date, company: company, key: key, requests: record.requests, encrypted: record.encrypted, elapsedSumm: record.elapsedSumm)
+                    let requestRecord = CompanyRequestsRecord(company: company, key: key, requests: record.requests, encrypted: record.encrypted)
                     requestRecord.domains.insert(record.domain)
                     recordsByCompanies[key] = requestRecord
                     
@@ -97,15 +92,8 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
                     return $0.key < $1.key
                 }
             })
-            let mostEncrypted = recordsArray.sorted(by: {
-                if $0.encrypted != $1.encrypted {
-                    return $0.encrypted > $1.encrypted
-                } else {
-                    return $0.key < $1.key
-                }
-            })
                 
-            let info = CompaniesInfo(mostRequested: mostRequested, mostEncrypted: mostEncrypted, companiesNumber: companiesNumber)
+            let info = CompaniesInfo(mostRequested: mostRequested, companiesNumber: companiesNumber)
             completion(info)
         }
     }
