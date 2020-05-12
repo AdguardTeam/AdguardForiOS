@@ -349,6 +349,8 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func removeManager(_ manager: NETunnelProviderManager)->Error? {
+        DDLogInfo("(VpnManager) - removeManager called")
+        
         var resultError: Error?
         let group = DispatchGroup()
         group.enter()
@@ -364,6 +366,7 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func restartTunnel(_ manager: NETunnelProviderManager) {
+        DDLogInfo("(VpnManager) - restartTunnel called")
         // we just stop the tunnel. It will be started(or not) automatically according to ondemand rules
         manager.connection.stopVPNTunnel()
     }

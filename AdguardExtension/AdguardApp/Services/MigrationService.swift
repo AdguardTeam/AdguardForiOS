@@ -92,8 +92,16 @@ class MigrationService: MigrationServiceProtocol {
         let lastBuildVersion = resources.sharedDefaults().integer(forKey: AEDefaultsProductBuildVersion)
         let currentBuildVersion = Int(ADProductInfo.buildNumber())
         
+        /**
+        Migration:
+         Update Antibanner and DnsFilters on every migration
+        */
         if lastBuildVersion != currentBuildVersion {
+            DDLogInfo("Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
             resources.sharedDefaults().set(currentBuildVersion, forKey: AEDefaultsProductBuildVersion)
+            
+            updateAntibanner()
+            updateDnsFilters()
         }
         
         /* If lastBuildVersion is 0, it means that it is new install and migration is not needed */
@@ -121,16 +129,6 @@ class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             resetStatistics()
         }
-        
-        /**
-        Migration:
-         Update Antibanner and DnsFilters on every migration
-        */
-        if currentBuildVersion != lastBuildVersion {
-            updateAntibanner()
-            updateDnsFilters()
-        }
-
     }
     
     // MARK: - Methods for migrations
