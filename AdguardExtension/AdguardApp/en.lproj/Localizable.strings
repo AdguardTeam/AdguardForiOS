@@ -608,7 +608,7 @@
 "system_enabled" = "DNS protection";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d requests, %2$d blocked";
+"widget_statistics" = "%1$d requests, %2$d encrypted";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
