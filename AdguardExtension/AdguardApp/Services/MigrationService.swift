@@ -122,8 +122,15 @@ class MigrationService: MigrationServiceProtocol {
             resetStatistics()
         }
         
-        updateAntibanner()
-        updateDnsFilters()
+        /**
+        Migration:
+         Update Antibanner and DnsFilters on every migration
+        */
+        if currentBuildVersion != lastBuildVersion {
+            updateAntibanner()
+            updateDnsFilters()
+        }
+
     }
     
     // MARK: - Methods for migrations
