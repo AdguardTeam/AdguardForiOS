@@ -1388,11 +1388,7 @@
 		D0C940E423EABEFA008B85EC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0C940F023EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
-		D0C940F123EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940EE23EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM */; };
-		D0C940F223EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940EF23EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM */; };
 		D0C940F423EAF8F0008B85EC /* AGDnsProxy.framework.ios.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
-		D0C940F523EAF8F0008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940EF23EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM */; };
-		D0C940F623EAF8F0008B85EC /* AGDnsProxy.framework.macos.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940EE23EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM */; };
 		D0C940FA23ED6073008B85EC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
 		D0C940FB23ED60A7008B85EC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
 		D0C940FC23ED60A8008B85EC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
@@ -1779,8 +1775,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				D0C940F423EAF8F0008B85EC /* AGDnsProxy.framework.ios.dSYM in CopyFiles */,
-				D0C940F523EAF8F0008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM in CopyFiles */,
-				D0C940F623EAF8F0008B85EC /* AGDnsProxy.framework.macos.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -2589,8 +2583,6 @@
 		D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriterProtocol.swift; sourceTree = "<group>"; };
 		D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerServiceTest.swift; sourceTree = "<group>"; };
 		D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AGDnsProxy.framework.ios.dSYM; path = ../Frameworks/AGDnsProxy.framework.ios.dSYM; sourceTree = "<group>"; };
-		D0C940EE23EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AGDnsProxy.framework.macos.dSYM; path = ../Frameworks/AGDnsProxy.framework.macos.dSYM; sourceTree = "<group>"; };
-		D0C940EF23EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AGDnsProxy.framework.iphonesimulator.dSYM; path = ../Frameworks/AGDnsProxy.framework.iphonesimulator.dSYM; sourceTree = "<group>"; };
 		D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderInfo.swift; sourceTree = "<group>"; };
 		D0C99119238FDB8700C9123F /* SafariServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceTest.swift; sourceTree = "<group>"; };
 		D0CA617F22033CBE005CAAA4 /* DnsProviderContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderContainerController.swift; sourceTree = "<group>"; };
@@ -3364,8 +3356,6 @@
 			isa = PBXGroup;
 			children = (
 				D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */,
-				D0C940EF23EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM */,
-				D0C940EE23EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM */,
 				D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */,
 				7E40799D231E7E8C007EFB26 /* CoreServices.framework */,
 				7E4D205D22D71B2A003B0E75 /* libiconv.tbd */,
@@ -5178,7 +5168,6 @@
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
 				D0C940F023EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
-				D0C940F223EAF742008B85EC /* AGDnsProxy.framework.iphonesimulator.dSYM in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				7E952E9D23D5FFC400D89AE0 /* Onboarding.storyboard in Resources */,
 				7E7F9908241A98E400FC89DC /* RateApp.storyboard in Resources */,
@@ -5190,7 +5179,6 @@
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
 				7E2D978C24499E58000366B3 /* public_suffix_list.dat in Resources */,
 				D07BC7CC223BBF2400C6B48C /* DnsSettings.storyboard in Resources */,
-				D0C940F123EAF742008B85EC /* AGDnsProxy.framework.macos.dSYM in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
