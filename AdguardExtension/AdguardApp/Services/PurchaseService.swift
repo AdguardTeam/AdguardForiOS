@@ -500,19 +500,18 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         productRequest?.start()
         if reachability?.isReachable() ?? false{
             startProductRequest()
-        } else {
+        } else if notificationToken == nil {
             notificationToken = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) {[weak self] (notification) in
                 guard let sSelf = self else { return }
                 guard let reach = notification.object as? Reachability else { return }
                 if reach.isReachable() {
                     sSelf.startProductRequest()
                     sSelf.reachability?.stopNotifier()
+                    sSelf.notificationToken = nil
                 }
             }
             reachability?.startNotifier()
         }
-        
-        reachability?.startNotifier()
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
