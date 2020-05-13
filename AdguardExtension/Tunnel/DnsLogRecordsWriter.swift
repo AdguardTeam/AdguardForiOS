@@ -143,7 +143,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             
             if let activityRecord = self.activityStatisticsRecords[domain] {
                 activityRecord.requests += 1
-                activityRecord.elapsedSumm += elapsed
+                activityRecord.elapsedSumm? += elapsed
                 if isEncrypted {
                     activityRecord.encrypted += 1
                 }

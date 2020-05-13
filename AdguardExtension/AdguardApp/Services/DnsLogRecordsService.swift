@@ -70,13 +70,15 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
             result = table?.select(withKeys: nil, inRowObject: APDnsLogTable.self) as? [APDnsLogTable]
         }
         
-        let records = result?.map { (row)->DnsLogRecord in
+        var records: [DnsLogRecord] = []
+        for row in result ?? [] {
+            if row.record == nil { continue }
             let record = row.record
             record.rowid = row.rowid
-            return record
+            records.append(record)
         }
         
-        return records ?? [DnsLogRecord]();
+        return records
     }
     
     func clearLog() {

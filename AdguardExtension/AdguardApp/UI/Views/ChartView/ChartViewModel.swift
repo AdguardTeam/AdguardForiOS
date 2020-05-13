@@ -26,7 +26,7 @@ protocol ChartViewModelProtocol {
     
     var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] { get set }
     
-    func obtainStatistics(_ completion: @escaping ()->())
+    func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->())
 }
 
 protocol NumberOfRequestsChangedDelegate: class {
@@ -88,9 +88,9 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     private var defaultsObservations: [ObserverToken] = []
     private var resetSettingsToken: NotificationToken?
     
-    private let chartProcessingQueue = DispatchQueue(label: "chart processing queue")
-    private let activityStatisticsCountQueue = DispatchQueue(label: "activity statistics count queue")
-    private let obtainStatisticsQueue = DispatchQueue(label: "obtainStatistics queue")
+    private let chartProcessingQueue = DispatchQueue(label: "chart processing queue", qos: .userInitiated)
+    private let activityStatisticsCountQueue = DispatchQueue(label: "activity statistics count queue", qos: .userInitiated)
+    private let obtainStatisticsQueue = DispatchQueue(label: "obtainStatistics queue", qos: .userInitiated)
     
     // MARK: - init
     init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, resources: AESharedResourcesProtocol) {
@@ -103,19 +103,34 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
         /* Waiting when statistics is obtained, to show ready statistics on main page, without redrawing it */
         let group = DispatchGroup()
         group.enter()
-        obtainStatistics{ group.leave() }
+        obtainStatistics(false) { group.leave() }
         group.wait()
     }
     
-    func obtainStatistics(_ completion: @escaping ()->()) {
+    func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->()) {
         obtainStatisticsQueue.async { [weak self] in
             guard let self = self else { return }
             
             self.timer?.invalidate()
             self.timer = nil
             
-            for type in ChartDateType.allCases {
-                self.recordsByType[type] = self.dnsStatisticsService.getRecords(by: type)
+            if fromUI {
+                /*
+                 Update from UI is only available from ActivityViewController
+                 To speed up loading data from database we load only current type
+                 */
+                let records = self.dnsStatisticsService.getRecords(by: self.chartDateTypeActivity)
+                self.recordsByType[self.chartDateTypeActivity] = records
+                
+            } else {
+                /*
+                 When updating data not from UI, we load data for all types to
+                 be able quikly change chart when user wants
+                */
+                for type in ChartDateType.allCases {
+                    let records = self.dnsStatisticsService.getRecords(by: type)
+                    self.recordsByType[type] = records
+                }
             }
             
             self.changeChart {
@@ -123,7 +138,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             }
             
             self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-                self?.obtainStatistics{}
+                self?.obtainStatistics(false) {}
             })
         }
     }
@@ -132,7 +147,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == LastStatisticsSaveTime {
-            obtainStatistics{[weak self] in
+            obtainStatistics(false) {[weak self] in
                 self?.countInfoNumbers()
             }
             return
@@ -164,7 +179,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
                 elapsedSumm += record.elapsedSumm
             }
             
-            let averageElapsedTime = Double(elapsedSumm) / Double(requestsNumber)
+            let averageElapsedTime = requestsNumber == 0 ? 0.0 : Double(elapsedSumm) / Double(requestsNumber)
             
             self.requestsActivity = requestsNumber
             self.encryptedActivity = encryptedNumber
@@ -236,7 +251,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     private func addObservers() {
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.obtainStatistics{}
+            self?.obtainStatistics(false) {}
         }
         
         let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
