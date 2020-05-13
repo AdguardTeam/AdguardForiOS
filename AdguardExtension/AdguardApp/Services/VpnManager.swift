@@ -349,6 +349,8 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func removeManager(_ manager: NETunnelProviderManager)->Error? {
+        DDLogInfo("(VpnManager) - removeManager called")
+        
         var resultError: Error?
         let group = DispatchGroup()
         group.enter()
