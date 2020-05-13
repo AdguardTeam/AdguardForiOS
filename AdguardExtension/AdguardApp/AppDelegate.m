@@ -518,6 +518,7 @@ static NSTimeInterval lastCheckTime;
         
         if (background){
             helper.fetchState = BackgroundFetchStateFiltersupdated;
+            [_antibanner endTransaction];
             [self antibanerUpdateFinished:AEUpdateNewData];
             return;
         }
