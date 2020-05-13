@@ -364,8 +364,13 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func restartTunnel(_ manager: NETunnelProviderManager) {
-        // we just stop the tunnel. It will be started(or not) automatically according to ondemand rules
+        DDLogInfo("(VpnManager) - restartTunnel called")
         manager.connection.stopVPNTunnel()
+        do {
+            try manager.connection.startVPNTunnel()
+        } catch {
+            DDLogError("(VpnManager) - start tunnel error: \(error.localizedDescription)")
+        }
     }
     
     // check if vpn enabled state was changed outside the application
