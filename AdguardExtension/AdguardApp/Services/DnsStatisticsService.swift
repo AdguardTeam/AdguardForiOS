@@ -43,12 +43,19 @@ enum DynamicStatisticSaveTime: Int {
     }
 }
 
+struct DnsCounters {
+    var totalRequests: Int
+    var encrypted: Int
+    var totalTime: Int
+}
+
 protocol DnsStatisticsServiceProtocol {
     var minimumStatisticSaveTime: Double { get }
     
     func writeRecord(_ record: DnsStatisticsRecord)
     
     func getAllRecords() -> [DnsStatisticsRecord]
+    func getAllCounters() -> DnsCounters?
     
     func getRecords(by type: ChartDateType)  -> [DnsStatisticsRecord]
     
@@ -150,6 +157,44 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
         
         group.wait()
         return records
+    }
+    
+    func getAllCounters() -> DnsCounters? {
+    
+        let group = DispatchGroup()
+        group.enter()
+        
+        var counters: DnsCounters?
+        
+        ProcessInfo().performExpiringActivity(withReason: "read statistics in background") { [weak self] (expired) in
+            DDLogInfo("(DnsStatisticsService) getAllCounters - performExpiringActivity")
+            ACLLogger.singleton()?.flush()
+            if expired {
+                DDLogInfo("(DnsStatisticsService) getAllCounters - performExpiringActivity expired")
+                ACLLogger.singleton()?.flush()
+                return
+            }
+            
+            self?.dbHandler?.inTransaction{ (db, rollback) in
+                defer { group.leave() }
+                guard let db = db else { return }
+                
+                if let result = db.executeQuery("SELECT SUM(requests) as requests, SUM(encrypted) as encrypted, SUM(elapsedSumm) as elapsedSumm FROM DnsStatisticsTable", withArgumentsIn: []) {
+                    if result.next() {
+                        if let totalRequests = result["requests"] as? Int,
+                            let encrypted = result["encrypted"] as? Int,
+                            let elapsed = result["elapsedSumm"] as? Int {
+                            counters = DnsCounters(totalRequests: totalRequests, encrypted: encrypted, totalTime: elapsed)
+                        }
+                    }
+                    
+                    result.close()
+                }
+            }
+        }
+        
+        group.wait()
+        return counters
     }
     
     func getRecords(by type: ChartDateType) -> [DnsStatisticsRecord] {
