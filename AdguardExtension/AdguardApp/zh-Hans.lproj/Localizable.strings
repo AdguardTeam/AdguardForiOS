@@ -608,7 +608,7 @@
 "system_enabled" = "DNS防护";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d条请求，%2$d次拦截";
+"widget_statistics" = "%1$d条请求，%2$d个已加密";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "此信息是从WhoTrackMe.com服务加载的";

@@ -602,7 +602,7 @@
 "system_enabled" = "DNS-Schutz";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d Anfragen, %2$d blockiert";
+"widget_statistics" = "%1$d Anfragen, %2$d verschlüsselt";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Diese Informationen wurden vom WhoTrackMe.com-Dienst geladen";

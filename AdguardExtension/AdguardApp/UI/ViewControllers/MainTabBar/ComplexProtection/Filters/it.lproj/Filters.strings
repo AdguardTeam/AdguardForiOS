@@ -26,7 +26,7 @@
 "OpB-AR-Og7.normalTitle" = "ANNULLA";
 
 /* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Questo modulo blocca gli annunci e il tracciamento sui siti web aperti in Safari";
+"QHZ-sJ-wTL.text" = "Questo modulo blocca gli annunci e il tracciamento sui siti web aperti con Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Conteggio Regole: ";
@@ -47,7 +47,7 @@
 "cTI-39-Vwx.text" = "Versione";
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Utilizza i filtri personali qui";
+"eAd-RZ-bHN.text" = "Aggiungi filtri personali qui";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filtri";
@@ -62,10 +62,10 @@
 "nch-wu-mKC.normalTitle" = "PROSSIMO";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
-"t8x-PU-hFK.text" = "Pagina iniziale: ";
+"t8x-PU-hFK.text" = "Homepage: ";
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Quantità di regole:";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Inserisci il nome di filtro:";
+"zcB-eh-Ou4.placeholder" = "Inserisci il nome del filtro:";

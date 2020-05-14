@@ -41,22 +41,22 @@
 "s_unit" = "%@ s";
 
 /* (MainPageController) Text for data units (M) Millions */
-"millions_unit" = "%@ Millones";
+"millions_unit" = "%@M";
 
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
-"thousands_unit" = "%@ Mil";
+"thousands_unit" = "%@K";
 
 /* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"hundred_millions_unit" = "%@ Millones";
+"hundred_millions_unit" = "%@100M";
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
-"ten_thousands_unit" = "%@ Mil";
+"ten_thousands_unit" = "%@10K";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reglas del usuario";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Introduzca sus reglas personalizadas aquí, separadas por saltos de línea";
+"user_filter_helper" = "Ingresa tus propias reglas aquí, separadas por saltos de línea";
 
 /* YES Button caption in alert */
 "common_action_yes" = "SÍ";
@@ -86,13 +86,13 @@
 "premium_expired_title" = "Atención";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Ha iniciado sesión correctamente en su cuenta de AdGuard, pero no hay claves de licencia que le permitan activar la versión premium.";
+"not_premium_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard, pero no hay claves de licencia que te permitan activar la versión premium.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard. La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Ha iniciado sesión correctamente en su cuenta de AdGuard, pero las claves de licencia que le permiten activar la versión premium han caducado.";
+"login_premium_expired_message" = "Has iniciado sesión correctamente en tu cuenta de AdGuard, pero las claves de licencia que te permiten activar la versión premium han expirado.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Se ha producido un error al intentar restaurar la compra.";
@@ -107,7 +107,7 @@
 "purchase_success_message" = "¡La compra se ha completado con éxito! La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
-"purchase_failure_message" = "Se produjo un error al procesar su compra.";
+"purchase_failure_message" = "Se produjo un error al procesar tu compra.";
 
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Personalizado";
@@ -122,16 +122,16 @@
 "blacklist_text_format" = "Puedes añadir tus propias reglas aquí.<br>Lea esta <a href=\"%@\">nota sobre la sintaxis de las reglas</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Ingrese aquí los nombres de dominio. AdGuard no bloqueará el acceso a estos dominios ignorando todas las demás configuraciones.";
+"whitelist_text" = "Ingresa los nombres de dominio aquí. AdGuard no bloqueará el acceso a estos dominios ignorando todas las demás configuraciones.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Ingrese los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
+"inverted_whitelist_text" = "Ingresa los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Ingrese aquí los nombres de dominio separados por saltos de línea. AdGuard permitirá todas las conexiones a estos dominios.";
+"dns_whitelist_text" = "Ingresa los nombres de dominio aquí separados por saltos de línea. AdGuard permitirá todas las conexiones a estos dominios.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Esta lista de bloqueo admite la <a href=\"%@\">sintaxis de AdGuard DNS</a>. Ingrese aquí las reglas separadas por saltos de línea. AdGuard bloqueará todas las conexiones a dominios que coincidan con estas reglas.";
+"dns_blacklist_text_format" = "Esta lista de bloqueo admite la <a href=\"%@\">sintaxis de AdGuard DNS</a>. Ingresa las reglas aquí separadas por saltos de línea. AdGuard bloqueará todas las conexiones a dominios que coincidan con estas reglas.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Actualizando...";
@@ -140,7 +140,7 @@
 "add_blacklist_rule_title" = "Añadir una regla";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Ingresar un dominio";
+"add_whitelist_domain_title" = "Ingresa un dominio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||ejemplo.org^";
@@ -179,7 +179,7 @@
 "action_export_logs" = "Exportar registros";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "No se puede enviar tu informe de errores porque no tienes configurada una cuenta de correo.";
+"bug_report_sending_error" = "No se puede enviar tu informe de error. Es posible que no hayas configurado un correo electrónico en tu dispositivo.";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "Error al actualizar los filtros";
@@ -206,13 +206,13 @@
 "adguard_dns_description" = "AdGuard DNS es una forma alternativa de proteger tu privacidad de sistemas analíticos y sitios web de phishing";
 
 /* Adguard Family DNS server description */
-"adguard_family_dns_description" = "bloquea todo lo anterior y sitios web para adultos";
+"adguard_family_dns_description" = "AdGuard DNS + Búsqueda segura y bloqueo de contenido para adultos";
 
 /* Google DNS server description */
 "google_dns_description" = "servicio de dns global ofrecido por Google";
 
 /* Open DNS server description */
-"open_dns_description" = "Servidor DNS que protege su dispositivo de phishing y estafas";
+"open_dns_description" = "Servidor DNS que protege tu dispositivo de phishing y estafas";
 
 /* Open Family DNS server description */
 "open_dns_familyshield_description" = "Servidor OpenDNS con bloqueo de contenido para adultos";
@@ -236,7 +236,7 @@
 "dns_provider_no_logs_tag" = "Norma de no guardar tus datos";
 
 /* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Búsqueda Segura";
+"dns_provider_safe_search_tag" = "Búsqueda segura";
 
 /* Dns Feature Name */
 "dns_provider_ad_blocking_tag" = "Bloqueo de Anuncios";
@@ -248,10 +248,10 @@
 "dns_provider_adult_summary" = "Bloquea sitios web con contenido para adultos";
 
 /* Dns Feature description */
-"dns_provider_no_logs_summary" = "No guarda tus datos DNS";
+"dns_provider_no_logs_summary" = "No almacena tus registros de consultas DNS";
 
 /* Dns Feature description */
-"dns_provider_safe_search_summary" = "Siempre que sea posible, Safe Search es activado en los navegadores";
+"dns_provider_safe_search_summary" = "Siempre que sea posible, la búsqueda segura se aplicará a los navegadores";
 
 /* Dns Feature description */
 "dns_provider_ad_blocking_summary" = "Bloquea sistemas de rastreo";
@@ -299,7 +299,7 @@
 "vpn_confirm_title" = "Una VPN será creada";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "VPN es necesario para configurar la configuración del DNS personalizado. La VPN creada es local, lo que significa que su tráfico no será enrutado a través de ningún servidor.\nNo recopilamos ningún dato cuando utiliza este perfil de VPN.";
+"vpn_confirm_message" = "VPN es necesario para configurar la configuración del DNS personalizado. La VPN creada es local, lo que significa que tu tráfico no será enrutado a través de ningún servidor.\nNo recopilamos ningún dato cuando utilizas este perfil de VPN.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Por favor espere...";
@@ -317,7 +317,7 @@
 "content_blocker_filters" = "Filtros:";
 
 /* (AdvancedSettingsController) Restart when network changes error */
-"general_settings_restart_tunnel_error" = "Necesita habilitar VPN primero";
+"general_settings_restart_tunnel_error" = "Necesitas habilitar VPN primero";
 
 /* (AdvancedSettingsController) Reset statistics title */
 "reset_stat_title" = "Restablecer estadísticas";
@@ -359,10 +359,10 @@
 "failed_updating_current_state_label" = "Los filtros no se han actualizado";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Esta licencia se ha activado en la cantidad máxima de dispositivos.\nPuede desvincular la licencia de los dispositivos no utilizados en su cuenta personal en el sitio web: adguard.com";
+"login_max_computers_exceeded" = "Esta licencia se ha activado en la cantidad máxima de dispositivos.\nPuedes desvincular la licencia de los dispositivos no utilizados en tu cuenta personal en el sitio web: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "Antes de que usted puede añadir esta extensión de acción, %1$@ tiene que llevar a cabo una configuración inicial. Abra la app principal de %2$@ para que lo haga.";
+"action_extension_no_configuration_message_format" = "Antes de que puedas añadir esta extensión de acción, %1$@ tienes que llevar a cabo una configuración inicial. Abre la app principal de %2$@ para que lo haga.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
 "content_blocker_disabled_format" = "Tenga en cuenta que el bloqueador de contenido está deshabilitado. Eso significa que los anuncios no se filtrarán independientemente de la configuración de AdGuard. Habilite el bloqueador de contenido de AdGuard en la configuración de Safari para comenzar a filtrar.";
@@ -377,10 +377,10 @@
 "support_error_safari_extension" = "Se produjo un error inesperado al iniciar la extensión de acción de Safari. Póngase en contacto con el servicio de asistencia de AdGuard si esto vuelve a suceder.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
-"common_warning_title" = "Cuidado";
+"common_warning_title" = "Advertencia";
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
-"filter_rules_maximum" = "Ha excedido el número máximo de reglas de filtrado.";
+"filter_rules_maximum" = "Has excedido el número máximo de reglas de filtrado.";
 
 /* (GetProController) title for permanent subscription */
 "permanent_subscription_title" = "Vitalicia";
@@ -608,7 +608,7 @@
 "system_enabled" = "Protección DNS";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d peticiones, %2$d bloqueados";
+"widget_statistics" = "%1$d peticiones, %2$d cifrados";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Esta información fue cargada desde el servicio whotrackme.com";
@@ -665,7 +665,7 @@
 "default_dns_server_name" = "DNS del sistema";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Usar los servidores DNS predeterminados del sistema proporcionados por su proveedor de servicios de Internet";
+"default_dns_server_description" = "Usar los servidores DNS predeterminados del sistema proporcionados por tu proveedor de servicios de Internet";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloquear petición";
@@ -677,7 +677,7 @@
 "video_tutorial_title" = "Vídeo tutorial";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "Ha ingresado un DNS de subida no válido";
+"invalid_upstream_message" = "Has ingresado un DNS de subida no válido";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de bloqueo del sistema";
@@ -773,7 +773,7 @@
 "average_info_alert_title" = "Tiempo promedio";
 
 /* (ActivityViewController) - Average time message */
-"average_info_alert_message" = "Tiempo medio que se tarda en procesar una petición DNS. Cuanto más rápido sea el servidor DNS que uses, más bajo será.";
+"average_info_alert_message" = "Tiempo promedio que se tarda en procesar una petición DNS. Cuanto más rápido sea el servidor DNS que uses, más bajo será.";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Número de empresas";
@@ -858,7 +858,7 @@
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
 
-"enter_email_voiceover" = "Ingrese su correo electrónico aquí";
+"enter_email_voiceover" = "Ingresa tu correo electrónico aquí";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
-"enter_password_voiceover" = "Ingrese su contraseña aquí";
+"enter_password_voiceover" = "Ingresa tu contraseña aquí";

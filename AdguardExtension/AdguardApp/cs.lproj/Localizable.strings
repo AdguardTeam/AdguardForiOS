@@ -608,7 +608,7 @@
 "system_enabled" = "DNS ochrana";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "Požadavků: %1$d, zablokováno: %2$d";
+"widget_statistics" = "Požadavků: %1$d, šifrováno: %2$d";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Tyto informace byly získány ze služby WhoTrackMe.com";

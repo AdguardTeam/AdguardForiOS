@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Para usar o AdGuard no Safari, siga alguns passos simples";
 
+/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "Proteção de DNS";
+
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "ASSISTIR MANUAL";
 

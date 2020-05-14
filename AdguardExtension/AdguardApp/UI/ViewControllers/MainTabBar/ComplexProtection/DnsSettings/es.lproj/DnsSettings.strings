@@ -41,7 +41,7 @@
 "NX4-vI-1WP.text" = "Añadir filtro";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Habilite este módulo para mejorar su privacidad cifrar el tráfico DNS.";
+"PFY-Cq-NFN.text" = "Habilita este módulo para mejorar tu privacidad cifrando el tráfico DNS.";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Protección DNS";
@@ -86,7 +86,7 @@
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
 /* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "Puedes mejorar tu privacidad en línea cifrando el tráfico DNS. Para hacerlo, elija uno de los proveedores DNS recomendados.";
+"iaJ-tk-ohH.text" = "Puedes mejorar tu privacidad en línea cifrando el tráfico DNS. Para hacerlo, elige uno de los proveedores DNS recomendados.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Lista de bloqueo";

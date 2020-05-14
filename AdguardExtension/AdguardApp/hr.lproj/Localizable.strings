@@ -608,7 +608,7 @@
 "system_enabled" = "DNS zaštita";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d zahtjeva, %2$d blokirano";
+"widget_statistics" = "%1$d zahtjeva, %2$d šifrirano";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Ove informacije su učitane s WhoTrackMe.com servisa";

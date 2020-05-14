@@ -34,6 +34,24 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "正在套用更改…";
 
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ 秒";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@k";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10k";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者規則";
 
@@ -303,6 +321,9 @@
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "重置";
+
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "移除";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 規則正被使用";

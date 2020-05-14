@@ -8,7 +8,7 @@
 "3BA-9g-I6J.placeholder" = "Nome";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Configurazione impostazioni DNS personalizzate";
+"3lB-T7-fSO.text" = "Personalizza le impostazioni DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
@@ -29,7 +29,7 @@
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
-"FUx-XP-SzD.text" = "Impostazioni avvanzate di rete";
+"FUx-XP-SzD.text" = "Impostazioni avanzate di rete";
 
 /* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
 "J1Z-V3-gS6.normalTitle" = "SELEZIONA";
@@ -56,13 +56,13 @@
 "d1u-rO-z2K.text" = "Aggiungi un server DNS personalizzato";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
-"dW3-zk-BPr.text" = "Indirizzo di server DNS";
+"dW3-zk-BPr.text" = "Indirizzo server DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "Nome server";
 
 /* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Modifica impostazioni DNS personalizzate";
+"f57-S8-QfF.text" = "Personalizza le impostazioni DNS";
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
@@ -86,10 +86,10 @@
 "pzP-ns-QSS.text" = "Nome server";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "Indirizzo di server DNS";
+"seX-mS-3mU.text" = "Indirizzo server DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Seleziona il protocollo";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
-"xiD-h8-XrC.text" = "Filtri e esclusioni";
+"xiD-h8-XrC.text" = "Filtri ed esclusioni";
