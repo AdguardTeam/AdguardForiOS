@@ -32,7 +32,7 @@
 "inverted_whitelist_title" = "Liste Blanche (inversée)";
 
 /* (MainPageController) Text to indicate changes processing */
-"applying_changes" = "Appliquer les changements...";
+"applying_changes" = "Application en cours...";
 
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
@@ -606,9 +606,6 @@
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Protection DNS";
-
-/*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d requêtes, %2$d bloquées";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Ces informations ont été chargées à partir du service WhoTrackMe.com";

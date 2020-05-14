@@ -34,6 +34,24 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Застосування змін...";
 
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ мс";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ с";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@млн";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@тис";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100млн";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10тис";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Правила користувача";
 
@@ -107,7 +125,7 @@
 "whitelist_text" = "Вводьте тут назви доменів. AdGuard не блокуватиме доступ до цих доменів, ігноруючи всі інші налаштування.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Додавайте домени тут. AdGuard увімкне фільтрування в Safari лише для цих веб-сайтів.";
+"inverted_whitelist_text" = "Вводьте тут назви доменів. AdGuard увімкне фільтрування в Safari лише для цих вебсайтів.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Введіть тут назви доменів, розділені новими рядками. AdGuard дозволить всі з'єднання для цих доменів.";
@@ -179,7 +197,7 @@
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без піктограми VPN). Несумісний з іншими VPN-програмами, менш стабільний";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS - це альтернативний спосіб захисту приватності від різних лічильників, аналітичних систем i шахрайських веб-сайтів";
+"adguard_dns_description" = "AdGuard DNS - це альтернативний спосіб захисту приватності від різних лічильників, аналітичних систем i шахрайських вебсайтів";
 
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + безпечний пошук і блокування вмісту для дорослих";
@@ -221,7 +239,7 @@
 "dns_provider_secure_summary" = "Блокує відомі зловмисні та шахрайські домени";
 
 /* Dns Feature description */
-"dns_provider_adult_summary" = "Блокує веб-сайти з вмістом для дорослих";
+"dns_provider_adult_summary" = "Блокує вебсайти з вмістом для дорослих";
 
 /* Dns Feature description */
 "dns_provider_no_logs_summary" = "Не зберігає журнал ваших DNS-запитів";
@@ -304,6 +322,21 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Скинути";
 
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Вилучити";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Вилучити VPN-профіль";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Ви впевнені, що хочете вилучити свій VPN-профіль та вимкнути DNS-захист?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Сталася помилка";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "При вилученні VPN-профілю щось пішло не так";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ правил використовуються";
 
@@ -364,6 +397,9 @@
 /* (AboutController) current app version string */
 "about_version" = "Версія";
 
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Сплатіть один раз і користуйтесь функціями AdGuard Premium на всіх iOS пристроях!";
+
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Невірна електронна пошта або пароль";
 
@@ -379,6 +415,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi винятки";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "DNS-захист не працюватиме у вказаних нижче мережах Wi-Fi";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "Додати виняток";
 
@@ -387,6 +426,12 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Фільтрувати Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "DNS-захист в мобільній мережі";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "DNS-захист в мережі Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Список дозволів";
@@ -493,6 +538,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Додати нове правило";
 
+/* confirm reset lert text */
+"confirm_reset_text" = "Всі параметри, включно з правилами користувача, DNS-захистом, інтерфейсом та авторизацією, будуть скинуті. Цю операцію неможливо скасувати. Скинути параметри?";
+
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Скинути журнал активності";
 
@@ -529,11 +577,20 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Новий DNS-фільтр";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Змінити власний фільтр";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Додати";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "Захист вимкнено";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Захист увімкнено";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Захист Safari та DNS";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Блокування вмісту Safari";
@@ -541,8 +598,11 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Всі модулі захисту вимкнено";
 
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS-захист";
+
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d запитів, %2$d заблоковано";
+"widget_statistics" = "%1$d запитів, %2$d зашифровано";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Цю інформацію завантажено з сервісу WhoTrackMe.com";
@@ -553,8 +613,26 @@
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Ви намагалися додати дублікат фільтра. Цей фільтр вже наявний.";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ правил увімкнено";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Увімкнено забагато правил: %@. Деякі з них буде вимкнено";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Вимкніть деякі фільтри для правильної роботи";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблоковано";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Оброблено";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Зашифровано";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Дозволено";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "додано до списку дозволів";
@@ -620,7 +698,7 @@
 "name_title" = "Назва";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
-"website_title" = "Веб-сайт";
+"website_title" = "Вебсайт";
 
 /* (DnsRequestDetailsController) "Domain" title for cell */
 "domain_title" = "Домен";
@@ -673,6 +751,48 @@
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Продовжуючи використання, ви приймаєте <br /><a href=%2$@>Умови та положення</a> і <a href=%1$@>Політику приватності</a>";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Запити";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Щоразу при відвідуванні сайту надсилається запит. Вебсайти можуть надсилати приховані запити і викривати особисті дані. Корисно знати кількість таких запитів для розуміння проблеми.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Зашифровані запити";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Кількість зашифрованих DNS-запитів. Для шифрування DNS-трафіку необхідно використовувати DNS-сервер з шифруванням.";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Середній час";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Середній час обробки DNS-запиту. Чим швидший DNS-сервер, тим краще, і тим нижче буде це значення.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Кількість компаній";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Це кількість компаній, до яких було перенаправлено запити.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Всі запити";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Лише заблоковані";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Лише дозволені";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Немає";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Активність";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d запитів";
+
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -699,11 +819,29 @@
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
 "safari_protection_disabled_voiceover" = "Захист Safari вимкнено";
 
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS-захист увімкнено";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS-захист вимкнено";
+
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Оновити фільтри";
 
 /* (MainPageController) requests number title for VoiceOver*/
 "requests_number_voiceover" = "Кількість запитів";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Кількість зашифрованих DNS-запитів";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Середній час обробки DNS-запиту";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Увімкнути DNS-захист";
 
 
 // MARK: - GetProTableController

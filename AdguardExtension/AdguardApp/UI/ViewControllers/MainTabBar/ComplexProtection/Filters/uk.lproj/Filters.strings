@@ -38,7 +38,7 @@
 "VCK-db-aeg.text" = "Правила користувача";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
-"Ve5-DF-RNB.text" = "Веб-сайт";
+"Ve5-DF-RNB.text" = "Вебсайт";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "Фільтр URL:";

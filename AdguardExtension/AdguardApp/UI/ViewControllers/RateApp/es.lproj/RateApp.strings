@@ -8,7 +8,7 @@
 "JXu-e8-XCB.text" = "Comentarios";
 
 /* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Por favor, cuéntenos su experiencia";
+"TBB-iF-qGA.text" = "Por favor, cuéntanos tu experiencia";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
 "XtG-5p-3KJ.text" = "Comentarios";
@@ -20,7 +20,7 @@
 "nIO-Sh-01f.normalTitle" = "ENVIAR";
 
 /* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Ingrese su correo electrónico si desea que le respondamos";
+"oJi-EL-gWT.placeholder" = "Ingresa tu correo electrónico si deseas que te respondamos";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
 "tCN-dT-J7Y.normalTitle" = "INICIO";

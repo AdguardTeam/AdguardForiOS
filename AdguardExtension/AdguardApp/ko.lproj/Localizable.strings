@@ -608,7 +608,7 @@
 "system_enabled" = "DNS 보호";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d 요청, %2$d 차단됨";
+"widget_statistics" = "요청 수 %1$d, 암호화된 요청 수 %2$d ";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "이 정보는 WhoTrackMe.com 서비스에서 로드 되었습니다";

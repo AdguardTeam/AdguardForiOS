@@ -608,7 +608,7 @@
 "system_enabled" = "「DNS通信を保護」がONです。";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "リクエスト数 %1$d、ブロック済数 %2$d";
+"widget_statistics" = "リクエスト数 %1$d、暗号化済み数 %2$d";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "この情報は、「WhoTrackMe.com」サービスからロードされました。";

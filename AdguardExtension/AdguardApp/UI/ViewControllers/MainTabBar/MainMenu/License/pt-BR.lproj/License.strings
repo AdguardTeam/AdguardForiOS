@@ -37,6 +37,12 @@
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Entrar";
 
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Valorize sua privacidade";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Proteção de DNS";
+
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "O premium está ativado";
 

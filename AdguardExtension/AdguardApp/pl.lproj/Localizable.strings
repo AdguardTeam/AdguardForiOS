@@ -496,9 +496,6 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Wszystkie moduły ochronne są wyłączone";
 
-/*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d żądań, %2$d zablokowanych";
-
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Informacje te zostały załadowane z usługi WhoTrackMe.com";
 

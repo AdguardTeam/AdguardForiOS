@@ -68,7 +68,7 @@
 "aIJ-gX-03k.text" = "Túnel completo";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "Habilite esta opción si tiene problemas con la conexión a Internet mientras AdGuard se está ejecutando";
+"aRS-WH-mRj.text" = "Habilita esta opción si tiene problemas con la conexión a Internet mientras AdGuard se está ejecutando";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
 "aYm-cM-OAj.text" = "Esto eliminará tu perfil VPN actual y deshabilitará la protección DNS";

@@ -1,8 +1,29 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "ADICIONAR";
 
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "criptografado";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "Atividade";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "EXPERIMENTE GRATUITAMENTE";
+
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "EDITAR";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "As empresas mais ativas";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Nenhuma atividade recente rastreada (armazenamos apenas as últimas 1500 solicitações)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Nenhuma atividade recente rastreada (armazenamos apenas as últimas 1500 solicitações)";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "Atividade";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
 "J13-xW-KiK.normalTitle" = "Copiado";
@@ -13,14 +34,32 @@
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Nome de domínio:";
 
+/* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
+"T0y-mr-Zwa.text" = "Você pode ver quem tentou rastreá-lo, visualizar as estatísticas e o registro de bloqueio de solicitações de DNS";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "A proteção de DNS está desativada";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "ATIVAR";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "empresas";
+
 /* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
 "ZyE-7P-8Tm.title" = "Detalhes da solicitação";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Filtros de segurança, privacidade de DNS, filtros personalizados, etc.";
 
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "Atividade recente";
+
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "VOLTAR";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "Atividade recente";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Bloquear solicitação";
@@ -28,8 +67,23 @@
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "ADD";
 
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "solicitações";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "solicitações";
+
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
 "uj0-U3-Qfx.text" = "Escolha o nível de domínio";
 
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "criptografado";
+
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Bloquear solicitação";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "Mais ativas";
+
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "tempo médio";

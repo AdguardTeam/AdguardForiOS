@@ -5,7 +5,7 @@
 "7mk-7J-iLD.normalTitle" = "MODIFICA";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
-"J13-xW-KiK.normalTitle" = "Viene copiato";
+"J13-xW-KiK.normalTitle" = "Copiato";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "ANNULLA";
@@ -20,7 +20,7 @@
 "ae4-WL-0pQ.text" = "Filtri di sicurezza, privacy DNS, filtri personalizzati, ecc.";
 
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "TORNARE";
+"hoI-YR-JcD.normalTitle" = "Indietro";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Bloccare richiesta";
@@ -29,7 +29,7 @@
 "l5B-oj-DnW.normalTitle" = "AGGIUNGI";
 
 /* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Scegli il livello del dominio";
+"uj0-U3-Qfx.text" = "Scegli il livello di dominio";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Bloccare richiesta";

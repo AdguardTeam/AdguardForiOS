@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Codice dall'app di autenticazione:";
+"53G-qY-SZ5.text" = "Codice di autenticazione da app:";
 
 /* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
 "6P7-a5-VLL.text" = "Filtri di sicurezza";
@@ -29,7 +29,7 @@
 "UaA-JQ-kV4.title" = "Accedere";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Bloccare il phishing, la truffa e il cripto-jacking";
+"YIm-R8-cxj.text" = "Bloccare phishing, truffe e cripto-jacking";
 
 /* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ACCEDERE";

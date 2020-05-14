@@ -505,9 +505,6 @@
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Svi podprogrami zaštite su isključeni";
 
-/*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d zahteva, %2$d blokirano";
-
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Ove informacije su učitane sa usluge WhoTrackMe.com";
 

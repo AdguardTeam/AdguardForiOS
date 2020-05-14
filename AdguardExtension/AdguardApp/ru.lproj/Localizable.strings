@@ -602,7 +602,7 @@
 "system_enabled" = "Системная защита";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d запросов, %2$d заблокировано";
+"widget_statistics" = "%1$d запросов, %2$d зашифровано";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Эта информация будет загружена с сервиса WhoTrackMe.com";

@@ -605,10 +605,10 @@
 "system_enabled" = "Zaščita DNS";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d zahtev, %2$d onemogočeno";
+"widget_statistics" = "%1$d zahtev, %2$d šifrirano";
 
 /*(DnsRequestDetailsController) message for info alert  */
-"whotrackme_message" = "Te informacije so bile naložene iz storitve WhoTrackMe.com";
+"whotrackme_message" = "Ti podatki so bili naloženi iz storitve WhoTrackMe.com";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Več";
