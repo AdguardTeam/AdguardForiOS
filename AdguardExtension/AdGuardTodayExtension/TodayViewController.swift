@@ -111,7 +111,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        let counters = dnsStatisticsService.getAllCounters()
+        counters = dnsStatisticsService.getAllCounters()
         changeTextForButton(counters: counters)
     }
     

@@ -19,6 +19,10 @@
 import Foundation
 
 class DnsStatisticsServiceMock: DnsStatisticsServiceProtocol {
+    func getAllCounters() -> DnsCounters? {
+        return nil
+    }
+    
     var minimumStatisticSaveTime: Double = 0.0
     
     func writeRecord(_ record: DnsStatisticsRecord) {
