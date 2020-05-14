@@ -104,6 +104,13 @@
 }
 @end
 
+@interface PacketTunnelProvider()
+
+@property (nonatomic) APTunnelConnectionsHandler *connectionHandler;
+@property (nonatomic) DnsProxyService* dnsProxy;
+
+@end
+
 @implementation PacketTunnelProvider{
     
     DnsServerInfo *_currentServer;
@@ -112,15 +119,12 @@
     BOOL _restartByRechability;
     
     Reachability *_reachabilityHandler;
-    APTunnelConnectionsHandler *_connectionHandler;
     
     NetworkStatus _lastReachabilityStatus;
     
     DnsTrackerService* _dnsTrackerService;
     AESharedResources* _resources;
     id<ActivityStatisticsServiceWriterProtocol> _activityStatisticsService;
-    
-    DnsProxyService* _dnsProxy;
     
     id<DnsLogRecordsWriterProtocol> _logWriter;
     DnsProvidersService* _providersService;
@@ -163,9 +167,9 @@
         
         id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
         id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources dnsLogService:logService activityStatisticsService:_activityStatisticsService];
-        _dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources dnsProvidersService:_providersService];
-        logWriter.dnsProxyService = _dnsProxy;
-        _connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:_dnsProxy];
+        self.dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources dnsProvidersService:_providersService];
+        logWriter.dnsProxyService = self.dnsProxy;
+        self.connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:self.dnsProxy];
     }
     return self;
 }
@@ -189,8 +193,8 @@
     [self updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error, NSArray<NSString *> *systemDnsIps) {
         ASSIGN_STRONG(self);
         
-        if (USE_STRONG(self)->_connectionHandler) {
-            [USE_STRONG(self)->_connectionHandler startHandlingPackets];
+        if (USE_STRONG(self).connectionHandler) {
+            [USE_STRONG(self).connectionHandler startHandlingPackets];
             DDLogInfo(@"(PacketTunnelProvider) connectionHandler started handling packets.");
         }
         
@@ -264,7 +268,7 @@
     [_reachabilityHandler stopNotifier];
     
     [self logNetworkInterfaces];
-    [_dnsProxy stopWithCallback:^{
+    [self.dnsProxy stopWithCallback:^{
         completionHandler();
     }];
 }
@@ -344,7 +348,7 @@
             
             [USE_STRONG(self) readSettings];
             
-            [USE_STRONG(self)->_dnsProxy stopWithCallback:^{
+            [USE_STRONG(self).dnsProxy stopWithCallback:^{
                 [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
                     completionHandler(error, allSystemDnsIps);
                 }];
@@ -433,7 +437,7 @@
     if(_restartByRechability) {
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
-        [_dnsProxy stopWithCallback:^{
+        [self.dnsProxy stopWithCallback:^{
             [self cancelTunnelWithError: nil];
         }];
     }
@@ -448,7 +452,7 @@
     
     ASSIGN_WEAK(self);
     
-    [_dnsProxy stopWithCallback:^{
+    [self.dnsProxy stopWithCallback:^{
         DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
         
         ASSIGN_STRONG(self);
@@ -651,7 +655,7 @@
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
     
     // Using system DNS servers as bootstraps and fallbacks
-    return [_dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
+    return [self.dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
 }
 
 @end

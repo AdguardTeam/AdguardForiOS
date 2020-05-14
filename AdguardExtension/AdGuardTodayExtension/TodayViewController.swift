@@ -69,6 +69,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private var requestNumber = 0
     private var encryptedNumber = 0
     
+    private var counters: DnsCounters?
+    
     // MARK: View Controller lifecycle
     
     required init?(coder: NSCoder) {
@@ -109,8 +111,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        let records = dnsStatisticsService.getAllRecords()
-        changeTextForButton(records: records)
+        counters = dnsStatisticsService.getAllCounters()
+        changeTextForButton(counters: counters)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,9 +127,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
         DDLogInfo("(TodayViewController) - observeValue")
-        let records = dnsStatisticsService.getAllRecords()
-        changeTextForButton(records: records)
+        
+        if keyPath == LastStatisticsSaveTime {
+            counters = dnsStatisticsService.getAllCounters()
+        }
+        
+        changeTextForButton(counters: counters)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -363,19 +370,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     /**
      Changes number of requests for specific button
      */
-    private func changeTextForButton(records: [DnsStatisticsRecord]){
+    private func changeTextForButton(counters: DnsCounters?){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            var requests = 0
-            var encrypted = 0
-            var elapsedSumm = 0
-            
-            for record in records {
-                requests += record.requests
-                encrypted += record.encrypted
-                elapsedSumm += record.elapsedSumm
-            }
+            let requests = counters?.totalRequests ?? 0
+            let encrypted = counters?.encrypted ?? 0
+            let elapsedSumm = counters?.totalTime ?? 0
             
             let requestsNumber = self.resources.tempRequestsCount
             self.requestsLabel.text = "\(requests + requestsNumber)"
@@ -393,6 +394,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func addStatisticsObservers() {
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
     }
     
     private func removeStatisticsObservers() {
