@@ -147,7 +147,6 @@ class ChooseProtocolController: BottomAlertController {
     }
     
     private func updateTheme() {
-        
         contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
