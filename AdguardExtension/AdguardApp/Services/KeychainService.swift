@@ -233,7 +233,7 @@ class KeychainService : KeychainServiceProtocol {
     private func getStoredAppId()->(appId: String?, notFound: Bool) {
         let query = [kSecClass as String:             kSecClassGenericPassword,
                      kSecAttrService as String:        appIdService as Any,
-                     kSecMatchLimit as String:        kSecMatchLimitOne,
+                     kSecMatchLimit as String:        kSecMatchLimitAll,
                      kSecReturnAttributes as String:  true,
                      kSecReturnData as String:        true]
         
@@ -251,29 +251,34 @@ class KeychainService : KeychainServiceProtocol {
             return (nil, false)
         }
         
-        guard let resultDict = attributes as! [String: Any]?  else {
+        guard let resultArr = attributes as? [[String: Any]] else {
             DDLogError("(KeychainService) getStoredAppId error. Unknown result format")
             return (nil, false)
         }
         
-        guard   let key = resultDict[kSecAttrAccount as String] as? String,
-                let value = resultDict[kSecValueData as String] else {
-                DDLogError("(KeychainService) getStoredAppId error. Unknown result format 2")
-                return (nil, false)
+        for resultDict in resultArr {
+            
+            guard   let key = resultDict[kSecAttrAccount as String] as? String,
+                    let value = resultDict[kSecValueData as String] else {
+                    DDLogError("(KeychainService) getStoredAppId error. Unknown result format 2")
+                    continue
+            }
+            
+            guard let valueString = String(data: value as! Data, encoding: .utf8) else {
+                DDLogError("(KeychainService) getStoredAppId error. Unknown result format 3")
+                continue
+            }
+            
+            if key != appIdKey {
+                DDLogError("(KeychainService) getStoredAppId error. appIdKey does not match")
+                continue
+            }
+            
+            DDLogInfo("(KeychainService) getStoredAppId - success")
+            return (valueString, false)
         }
         
-        guard let valueString = String(data: value as! Data, encoding: .utf8) else {
-            DDLogError("(KeychainService) getStoredAppId error. Unknown result format 3")
-            return (nil, false)
-        }
-        
-        if key != appIdKey {
-            DDLogError("(KeychainService) getStoredAppId error. appIdKey does not match")
-            return (nil, false)
-        }
-        
-        DDLogInfo("(KeychainService) getStoredAppId - success")
-        return (valueString, false)
+        return(nil, false)
     }
     
     private func generateAppId()->String {
@@ -327,17 +332,29 @@ class KeychainService : KeychainServiceProtocol {
             return false
         }
         
-        let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
-                           kSecAttrService as String:        appIdService as Any,
-                           kSecAttrAccount as String:       appIdKey]
-        
-        let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
-        if deleteStatus != errSecSuccess {
-            DDLogError("(KeychainService) deleteAppId delete error. Status: \(deleteStatus) ")
+        guard let records = attributes as? [[String: Any]] else {
+            DDLogError("(KeychainService) deleteAppId read error. There are no records")
             return false
         }
         
-        DDLogInfo("(KeychainService) deleteAppId - success")
+        for record in records {
+            
+            guard let account = record[kSecAttrAccount as String] else {
+                continue
+            }
+            
+            let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
+                               kSecAttrService as String:        appIdService as Any,
+                               kSecAttrAccount as String:       account]
+            
+            let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
+            if deleteStatus != errSecSuccess {
+                DDLogError("(KeychainService) deleteAppId delete error. Status: \(deleteStatus) ")
+                return false
+            }
+            
+            DDLogInfo("(KeychainService) deleteAppId - success")
+        }
         
         return true
     }
