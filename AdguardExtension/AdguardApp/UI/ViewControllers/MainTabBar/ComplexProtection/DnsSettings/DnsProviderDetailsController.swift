@@ -174,6 +174,7 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         default:
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Presentation delegate methods

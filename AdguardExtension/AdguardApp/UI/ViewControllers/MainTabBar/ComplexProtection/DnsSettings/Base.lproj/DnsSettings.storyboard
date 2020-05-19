@@ -2533,9 +2533,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="1pc-MH-uzm">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="60" id="1pc-MH-uzm"/>
                                                     <constraint firstItem="03E-rd-Slw" firstAttribute="leading" secondItem="7dU-v6-hwM" secondAttribute="leading" id="VuK-4v-tKC"/>
                                                     <constraint firstItem="zVH-dZ-DEX" firstAttribute="leading" secondItem="03E-rd-Slw" secondAttribute="leading" id="Y7D-6Z-TLV"/>
                                                     <constraint firstItem="FQ9-fU-92k" firstAttribute="centerY" secondItem="7dU-v6-hwM" secondAttribute="centerY" id="aXP-zL-685"/>
@@ -2591,9 +2589,7 @@
                                                 <constraints>
                                                     <constraint firstItem="hh1-EV-7KD" firstAttribute="top" secondItem="V2w-mR-ccI" secondAttribute="top" id="0jx-cn-FQw"/>
                                                     <constraint firstItem="1FP-Mk-s20" firstAttribute="centerY" secondItem="V2w-mR-ccI" secondAttribute="centerY" id="GXO-Xt-COx"/>
-                                                    <constraint firstAttribute="height" constant="60" id="HD7-bc-UZP">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="60" id="HD7-bc-UZP"/>
                                                     <constraint firstItem="rdR-YA-1kg" firstAttribute="leading" secondItem="V2w-mR-ccI" secondAttribute="leading" id="KkU-8A-O9B"/>
                                                     <constraint firstItem="rdR-YA-1kg" firstAttribute="top" secondItem="hh1-EV-7KD" secondAttribute="bottom" constant="-1" id="Kx5-MZ-s5F"/>
                                                     <constraint firstItem="hh1-EV-7KD" firstAttribute="leading" secondItem="V2w-mR-ccI" secondAttribute="leading" id="dAa-xg-6yC"/>
@@ -2652,9 +2648,7 @@
                                                     <constraint firstItem="NCs-lz-s07" firstAttribute="leading" secondItem="7Fq-1p-6Tn" secondAttribute="leading" id="Wvr-0n-0NX"/>
                                                     <constraint firstItem="DrO-hc-ilW" firstAttribute="leading" secondItem="7Fq-1p-6Tn" secondAttribute="leading" id="ajq-nK-bB2"/>
                                                     <constraint firstItem="COG-Qx-Z3w" firstAttribute="centerY" secondItem="7Fq-1p-6Tn" secondAttribute="centerY" id="dOl-Yv-eRP"/>
-                                                    <constraint firstAttribute="height" constant="60" id="vWI-Kw-IPf">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="60" id="vWI-Kw-IPf"/>
                                                     <constraint firstItem="DrO-hc-ilW" firstAttribute="top" secondItem="7Fq-1p-6Tn" secondAttribute="top" id="z38-0L-byb"/>
                                                 </constraints>
                                             </view>
@@ -2695,9 +2689,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="hUr-IR-uXi" firstAttribute="centerY" secondItem="feR-Mr-u4Q" secondAttribute="centerY" id="360-c6-pNB"/>
-                                                    <constraint firstAttribute="height" constant="60" id="EHf-Jd-xbh">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="60" id="EHf-Jd-xbh"/>
                                                     <constraint firstAttribute="trailing" secondItem="hUr-IR-uXi" secondAttribute="trailing" constant="32" id="NDS-6y-ujn"/>
                                                     <constraint firstItem="Zn0-J3-lVl" firstAttribute="leading" secondItem="feR-Mr-u4Q" secondAttribute="leading" id="PIz-ky-ZPa"/>
                                                     <constraint firstAttribute="trailing" secondItem="Zn0-J3-lVl" secondAttribute="trailing" id="wQz-Zs-Dpk"/>
