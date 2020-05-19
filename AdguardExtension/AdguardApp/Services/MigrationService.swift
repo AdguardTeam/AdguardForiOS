@@ -88,6 +88,7 @@ class MigrationService: MigrationServiceProtocol {
                 }
                 else {
                     result = result && enableGroupsWithEnabledFilters()
+                    result = result && migrateVpnSettingsFromTunnelconfiguration()
                 }
             }
             
@@ -234,13 +235,11 @@ class MigrationService: MigrationServiceProtocol {
         return result
     }
     
-    private func proFrom2To4Update()->Bool {
+    // migrate vpn settings (dns server, tunnel mode, restart by reachability)
+    private func migrateVpnSettingsFromTunnelconfiguration() ->Bool {
         
         var result = true
         
-        DDLogInfo("(MigrationService) migrate pro v2->v4")
-        
-        // migrate vpn settings (dns server, tunnel mode, restart by reachability)
         let group = DispatchGroup()
         group.enter()
         DispatchQueue(label: "migrate vpn queue").async { [weak self] in
@@ -253,6 +252,19 @@ class MigrationService: MigrationServiceProtocol {
                 group.leave()
             }
         }
+        
+        group.wait()
+        
+        return result
+    }
+    
+    private func proFrom2To4Update()->Bool {
+        
+        var result = true
+        
+        DDLogInfo("(MigrationService) migrate pro v2->v4")
+        
+        result = result && migrateVpnSettingsFromTunnelconfiguration()
         
         // The format for storing log entries has changed. Clear log.
         dnsLogRecordsService.clearLog()
@@ -278,8 +290,6 @@ class MigrationService: MigrationServiceProtocol {
         
         // turn on groups
         result = result && enableGroupsWithEnabledFilters()
-        
-        group.wait()
         
         return result
     }
