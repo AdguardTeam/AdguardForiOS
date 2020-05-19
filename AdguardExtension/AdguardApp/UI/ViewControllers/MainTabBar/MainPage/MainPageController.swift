@@ -178,7 +178,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         chartModel.chartView = chartView
         
         addObservers()
-        setUIForRequestType()
+        setUIForRequestType(true)
         setupVoiceOverLabels()
     
         chartModel.chartPointsChangedDelegates.append(self)
@@ -486,8 +486,14 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    private func setUIForRequestType() {
-        chartView.activeChart = .requests
+    private func setUIForRequestType(_ initial: Bool = false) {
+        /*
+         When we call this method in viewDidLoad we don't need set chartView.activeChart,
+         because it will redraw chart, and then we call chartModel.chartRequestType that also redraws chart
+        */
+        if !initial {
+            chartView.activeChart = .requests
+        }
         chartModel.chartRequestType = .requests
         
         requestsNumberLabel.alpha = 1.0
