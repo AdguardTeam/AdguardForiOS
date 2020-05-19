@@ -406,15 +406,16 @@ class VpnManager: VpnManagerProtocol {
     }
 }
 
-let oldAdguardUUID = "AGDEF01"
-let oldAdguardFamilyUUID = "AGDEF02"
-let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
-let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
-let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
-let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
-
 @objc
 class VpnManagerMigration: NSObject {
+    
+    private static let oldAdguardUUID = "AGDEF01"
+    private static let oldAdguardFamilyUUID = "AGDEF02"
+    private static let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
+    private static let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
+    private static let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
+    private static let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
+
     @objc
     class func migrateSettingsIfNeeded(resources: AESharedResourcesProtocol, dnsProviders: DnsProvidersServiceProtocol, providerConfiguration: [String : Any]) {
         // in app version below 4.0.0 we stored tunnel settings(activeDnsServer, tunnelMode, restartByReachability) in protocol configuration.
@@ -448,9 +449,9 @@ class VpnManagerMigration: NSObject {
                     // we used APDnsServerObject in old pro app v <= 2.1.2
                     DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
                     
-                    let adguardServer = activeDnsServerOld.uuid == oldAdguardUUID || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardDnsCryptIdIpv6
+                    let adguardServer = activeDnsServerOld.uuid == VpnManagerMigration.oldAdguardUUID || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardDnsCryptIdIpv6
                     
-                    let adguardFamily = activeDnsServerOld.uuid == oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == oldAdguardFamilyDnsCryptIdIpv6
+                    let adguardFamily = activeDnsServerOld.uuid == VpnManagerMigration.oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardFamilyDnsCryptIdIpv6
                     
                     let activeServer: DnsServerInfo?
                     

@@ -210,25 +210,34 @@ class MigrationService: MigrationServiceProtocol {
         let domainsConverter: DomainsConverterProtocol = DomainsConverter()
         let fm = FileManager()
         
-        let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data")
-        if (whitelistData?.count ?? 0) > 0 {
-            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(whitelistData!) as? [String]{
+        if let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data"),
+                whitelistData.count > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(whitelistData) as? [String]{
                 for domain in domains {
                     result = true
                     dnsFiltersService.addWhitelistRule(domainsConverter.whitelistRuleFromDomain(domain))
                 }
             }
+            else {
+                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse whitelist")
+            }
+            
             try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-whitelist-doamins.data"))
         }
         
-        let blacklistData = resources.loadData(fromFileRelativePath: "pro-blacklist-doamins.data")
-        if (blacklistData?.count ?? 0) > 0 {
-            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(blacklistData!) as? [String]{
+        
+        if let blacklistData = resources.loadData(fromFileRelativePath: "pro-blacklist-doamins.data"),
+                blacklistData.count  > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(blacklistData) as? [String]{
                 for domain in domains {
                     result = true
                     dnsFiltersService.addBlacklistRule(domainsConverter.blacklistRuleFromDomain(domain))
                 }
             }
+            else {
+                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse blacklist")
+            }
+            
             try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-blacklist-doamins.data"))
         }
         
@@ -238,19 +247,18 @@ class MigrationService: MigrationServiceProtocol {
     // migrate vpn settings (dns server, tunnel mode, restart by reachability)
     private func migrateVpnSettingsFromTunnelconfiguration() ->Bool {
         
+        DDLogInfo("(MigrationService) migrateVpnSettingsFromTunnelconfiguration")
         var result = true
         
         let group = DispatchGroup()
         group.enter()
-        DispatchQueue(label: "migrate vpn queue").async { [weak self] in
-            self?.vpnManager.migrateOldVpnSettings { (error) in
-                if error != nil {
-                    DDLogError("(MigrationService) proFrom2To4Update - migrateVpnSettings error: \(error!)")
-                    result = false
-                }
-                
-                group.leave()
+        vpnManager.migrateOldVpnSettings { (error) in
+            if error != nil {
+                DDLogError("(MigrationService) proFrom2To4Update - migrateVpnSettings error: \(error!)")
+                result = false
             }
+            
+            group.leave()
         }
         
         group.wait()
@@ -279,6 +287,7 @@ class MigrationService: MigrationServiceProtocol {
         // migrate old dns filter subscriptions to new dns filters
         let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
         if manager.migrateIfNeeeded() {
+            DDLogInfo("(MigrationService) pro subscriptions have been successfully migrated.")
             vpnManager.updateSettings(completion: nil)
             
             // if the user had dns filters we enable advanced mode
@@ -286,6 +295,7 @@ class MigrationService: MigrationServiceProtocol {
         }
         
         // turn off adguard safari filter
+        DDLogInfo("(MigrationService) disable safari adguard filter.")
         antibanner.setFilter(12, enabled: false, fromUI: false)
         
         // turn on groups

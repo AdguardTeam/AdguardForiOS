@@ -70,7 +70,7 @@ platform :ios do
       include_symbols: true,
       archive_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}",
     )
-    write_build_info(
+    write_build_info( 
       xcconfig: ENV['BUILD_NUMBER_XCCONFIG_PATH'],
       build_info_output: "#{ENV['OUTPUT_DIRECTORY']}/build.txt",
     )
@@ -90,7 +90,7 @@ platform :ios do
       archive_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}",
     )
     write_build_info(
-      xcconfig: ENV['XCCONFIG_PATH'],
+      xcconfig: ENV['BUILD_NUMBER_XCCONFIG_PATH'],
       build_info_output: "#{ENV['OUTPUT_DIRECTORY']}/build.txt",
     )
     zip_archive()

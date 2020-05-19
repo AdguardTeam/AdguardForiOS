@@ -23,7 +23,7 @@
 #pragma mark - APBlockingSubscription
 
 /**
- Class, which provides provides information about subscriptions.
+ Class, which provides information about subscriptions.
  */
 @interface APBlockingSubscription : ACObject<NSCoding>
 

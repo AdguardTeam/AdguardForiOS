@@ -56,9 +56,9 @@ class ProSubscriptionsManager {
         DDLogInfo("(ProSubscriptionsManager) read subscriptions data from file")
         let storedArray: [Data] = NSArray(contentsOfFile: self.resources.path(forRelativePath: subscriptionsPath)) as? [Data] ?? []
             
-        let subscriptions = storedArray.map { (data) -> APBlockingSubscription  in
+        let subscriptions = storedArray.compactMap { (data) -> APBlockingSubscription?  in
             let subscription = NSKeyedUnarchiver.unarchiveObject(with: data) as? APBlockingSubscription
-            return subscription!
+            return subscription
         }
         
         DDLogInfo("(ProSubscriptionsManager) subscriptions read count: \(subscriptions.count)");
@@ -68,7 +68,12 @@ class ProSubscriptionsManager {
     
     private func deleteSubscriptions() {
         let fm = FileManager()
-        try? fm.removeItem(atPath: resources.path(forRelativePath: subscriptionsPath))
+        do {
+            try fm.removeItem(atPath: resources.path(forRelativePath: subscriptionsPath))
+        }
+        catch {
+            DDLogError("(ProSubscriptionsManager) Failure to delete old DNS filter files: \(error)")
+        }
     }
     
     private func dnsFilterData(rules: [String]?, hosts: [String: String]?)->Data {
