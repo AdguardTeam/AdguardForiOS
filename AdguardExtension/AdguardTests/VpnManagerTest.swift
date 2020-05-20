@@ -180,10 +180,10 @@ class VpnManagerTest: XCTestCase {
         
         let group = DispatchGroup()
         group.enter()
-        vpnManager.checkVpnInstalled { _ in
+        vpnManager.migrateOldVpnSettings { _ in
             group.leave()
         }
-        
+            
         group.wait()
         
         // check migration succeded

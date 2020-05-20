@@ -31,7 +31,7 @@
 
 - (instancetype _Nullable) initWithIp:(NSString* _Nonnull)ip port:(NSString* _Nullable)port;
 
-+ (instancetype) addressWithIp:(NSString*) ip port:(NSString*) port;
++ (instancetype _Nonnull) addressWithIp:(NSString* _Nonnull) ip port:(NSString* _Nullable) port;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

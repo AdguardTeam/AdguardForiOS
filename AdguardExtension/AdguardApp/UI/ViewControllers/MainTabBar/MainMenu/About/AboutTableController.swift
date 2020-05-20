@@ -35,6 +35,7 @@ class AboutTableController : UITableViewController {
     private let websiteRow = 1
     private let forumRow = 2
     private let acknowledgmentsRow = 3
+    private let licenseRow = 4
     
     @IBOutlet weak var logoImage: ThemeableImageView!
     @IBOutlet weak var versionLabel: ThemableLabel!
@@ -86,8 +87,18 @@ class AboutTableController : UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if indexPath.row == licenseRow {
+            cell.isHidden = Bundle.main.isPro
+        }
         theme.setupTableCell(cell)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == licenseRow && Bundle.main.isPro {
+            return 0
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
