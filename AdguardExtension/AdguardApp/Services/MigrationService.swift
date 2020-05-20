@@ -194,10 +194,15 @@ class MigrationService: MigrationServiceProtocol {
     
     private func updateAntibanner() {
         // removing malware filter with antibanner
-        antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
-        
-        antibanner.beginTransaction()
-        antibanner.startUpdatingForced(true, interactive: false)
+        antibanner.repairUpdateState { [weak self] in
+            guard let self = self else { return }
+            if self.antibanner.filters().contains(where: { $0.filterId == 208 }) {
+                self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
+            }
+            
+            self.antibanner.beginTransaction()
+            self.antibanner.startUpdatingForced(true, interactive: false)
+        }
     }
     
     private func updateDnsFilters() {

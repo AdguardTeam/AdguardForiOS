@@ -1971,20 +1971,32 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         result = [db executeUpdate:@"insert or replace into filters (filter_id, version, editable, display_number, group_id, name, description, homepage, is_enabled, last_update_time, last_check_time, removable, expires, subscriptionUrl) values (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime(?), datetime(?), ?, ?, ?)",
                   meta.filterId, meta.version, meta.editable, meta.displayNumber, meta.groupId, meta.name, meta.descr, meta.homepage, meta.enabled, meta.updateDateString, meta.checkDateString, meta.removable, meta.expires, meta.subscriptionUrl];
-        if (!result) break;
+        if (!result) {
+            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filters");
+            break;
+        }
         
         result = [db executeUpdate:@"delete from filter_langs where filter_id = ?", meta.filterId];
-        if (!result) break;
+        if (!result) {
+            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not delete filter %d from filter_langs", meta.filterId.intValue);
+            break;
+        }
         
         for (NSString *lang in meta.langs){
             
             result = [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
-            if (!result) break;
+            if (!result) {
+                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter into filter_langs");
+                break;
+            }
         }
         
         for (ASDFilterTagMeta *tag in meta.tags) {
             result = [db executeUpdate:@"insert or replace into filter_tags (filter_id, tag_id, type, name) values (?, ?, ?, ?)", meta.filterId, @(tag.tagId), @(tag.type), tag.name];
-            if (!result) break;
+            if (!result) {
+                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter_tags");
+                break;
+            }
         }
         
         if (!result) break;
