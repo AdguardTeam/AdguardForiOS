@@ -170,7 +170,7 @@
 "incorrect_blocking_report" = "Informar de bloqueo incorrecto";
 
 /* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Informar de un problema";
+"action_bug_report" = "Reportar un error";
 
 /* (Main Menu) Subject field for mail bug report */
 "action_contact_support" = "Contactar asistencia técnica";
