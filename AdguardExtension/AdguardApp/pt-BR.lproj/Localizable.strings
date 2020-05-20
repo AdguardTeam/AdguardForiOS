@@ -607,6 +607,9 @@
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Proteção contra rastreamento";
 
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d solicitações, %2$d criptografado";
+
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Esta informação foi carregada pelo serviço WhoTrackMe.com";
 

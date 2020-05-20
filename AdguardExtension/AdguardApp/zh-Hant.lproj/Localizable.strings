@@ -325,6 +325,9 @@
 /* (AdvancedSettingsController) Remove button title */
 "remove_title" = "移除";
 
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "錯誤已發生";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 規則正被使用";
 
@@ -451,6 +454,9 @@
 /*(LogCategory) advertising category*/
 "advertising" = "廣告";
 
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "網站分析";
+
 /*(LogCategory) social media category*/
 "social_media" = "社群媒體";
 
@@ -459,6 +465,12 @@
 
 /*(LogCategory) DNS category*/
 "cdn" = "內容傳遞網路（CDN）";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "行動分析";
+
+/*(LogCategory) hosting category*/
+"hosting" = "主機";
 
 /*(LogCategory) unknown category*/
 "unknown" = "未知的";
@@ -517,6 +529,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "新的 DNS 過濾器";
 
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "編輯自訂的過濾器";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "防護被禁用";
 
@@ -544,11 +559,17 @@
 /*(DnsLogController) status of dns request */
 "dns_request_status_processed" = "已處理的";
 
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "已允許的";
+
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_whitelist" = "已從允許清單中移除";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "已從封鎖清單中移除";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "開啟該<b>設定</b>";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系統 DNS";
@@ -643,6 +664,18 @@
 /* (FeedbackController) - feedback sending failure message */
 "feedback_sending_failed_message" = "某事物出現問題";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "請求";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "加密的請求";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "無";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "活動";
+
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -662,3 +695,15 @@
 
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "更新過濾器";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "啟用 DNS 防護";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "選擇您的訂閱類型";

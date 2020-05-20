@@ -233,7 +233,7 @@
 "dns_provider_adult_tag" = "Blokiranje sadržaja za odrasle";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politika ne logiranja";
+"dns_provider_no_logs_tag" = "Politika ne spremanja zapisnika";
 
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Sigurno pretraživanje";
