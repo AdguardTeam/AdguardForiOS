@@ -334,6 +334,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             cell.ruleState = rule.enabled
             cell.changeRuleStateButton.tag = row
             cell.separatorView.isHidden = row + 1 == model?.rules.count
+            cell.layoutIfNeeded()
             return cell
         }
         return UITableViewCell()

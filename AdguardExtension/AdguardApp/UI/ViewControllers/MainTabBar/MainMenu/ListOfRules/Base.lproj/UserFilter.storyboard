@@ -362,9 +362,6 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
-                                            <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                            </variation>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dF-KM-n1V">
                                             <rect key="frame" x="370" y="15" width="20" height="20"/>
@@ -391,13 +388,9 @@
                                             <variation key="heightClass=regular-widthClass=regular" constant="25"/>
                                         </constraint>
                                         <constraint firstAttribute="bottom" secondItem="kSL-O9-xHz" secondAttribute="bottom" id="Yd1-y1-Bqo"/>
-                                        <constraint firstItem="1Mb-0o-nPh" firstAttribute="top" secondItem="0us-Th-sJN" secondAttribute="top" constant="16" id="aaV-B6-hzq">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                        </constraint>
+                                        <constraint firstItem="1Mb-0o-nPh" firstAttribute="top" secondItem="0us-Th-sJN" secondAttribute="top" constant="16" id="aaV-B6-hzq"/>
                                         <constraint firstItem="2i7-n1-e9L" firstAttribute="leading" secondItem="1Mb-0o-nPh" secondAttribute="trailing" id="b8R-A1-8sO"/>
-                                        <constraint firstAttribute="bottom" secondItem="1Mb-0o-nPh" secondAttribute="bottom" constant="16" id="bwO-u2-8ne">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                        </constraint>
+                                        <constraint firstAttribute="bottom" secondItem="1Mb-0o-nPh" secondAttribute="bottom" constant="16" id="bwO-u2-8ne"/>
                                         <constraint firstItem="1Mb-0o-nPh" firstAttribute="leading" secondItem="0us-Th-sJN" secondAttribute="leading" constant="16" id="cWM-my-zi8">
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
