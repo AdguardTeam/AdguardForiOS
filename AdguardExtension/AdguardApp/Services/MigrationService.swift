@@ -290,7 +290,7 @@ class MigrationService: MigrationServiceProtocol {
         }
         
         // migrate old dns filter subscriptions to new dns filters
-        let manager = ProSubscriptionsManager(resources: resources, dnsFiltersService: dnsFiltersService)
+        let manager = ProSubscriptionsMigrationService(resources: resources, dnsFiltersService: dnsFiltersService)
         if manager.migrateIfNeeeded() {
             DDLogInfo("(MigrationService) pro subscriptions have been successfully migrated.")
             vpnManager.updateSettings(completion: nil)
@@ -309,3 +309,4 @@ class MigrationService: MigrationServiceProtocol {
         return result
     }
 }
+
