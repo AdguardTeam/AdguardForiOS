@@ -68,6 +68,7 @@ platform :ios do
       output_directory: ENV['OUTPUT_DIRECTORY'],
       include_bitcode: false,
       include_symbols: true,
+      clean: true,
       archive_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['ARCHIVE_NAME']}",
     )
     write_build_info( 

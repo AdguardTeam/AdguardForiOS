@@ -566,7 +566,7 @@
 		D005096B2201DA2F006BC10C /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = D005096A2201DA2F006BC10C /* providers.json */; };
 		D005096D2202F5EB006BC10C /* DnsProviderDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005096C2202F5EB006BC10C /* DnsProviderDetailsController.swift */; };
 		D00E67502473C7F400161A74 /* DnsLogRecordsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E674F2473C7F400161A74 /* DnsLogRecordsServiceMock.swift */; };
-		D00E67512473C97C00161A74 /* ProSubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsManager.swift */; };
+		D00E67512473C97C00161A74 /* ProSubscriptionsMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */; };
 		D00E67522473CAE100161A74 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E593243C5523001801A5 /* APBlockingSubscription.m */; };
 		D00FDC0622201514000BD1BF /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6BA0A21A6AF67007360BC /* Tutorial.storyboard */; };
 		D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
@@ -1928,8 +1928,8 @@
 		D0D7E590243B1D1D001801A5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7E4D201B22D71A5B003B0E75 /* LICENSE */; };
 		D0D7E597243C5523001801A5 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E593243C5523001801A5 /* APBlockingSubscription.m */; };
 		D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E593243C5523001801A5 /* APBlockingSubscription.m */; };
-		D0D7E59A243C5EF3001801A5 /* ProSubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsManager.swift */; };
-		D0D7E59B243C5EF3001801A5 /* ProSubscriptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsManager.swift */; };
+		D0D7E59A243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */; };
+		D0D7E59B243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */; };
 		D0D7E5A1243C84F1001801A5 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */; };
 		D0D7E5A2243C84F1001801A5 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */; };
 		D0D7E5A3243C94E0001801A5 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */; };
@@ -3401,7 +3401,7 @@
 		D0D7E55B24377280001801A5 /* Bundle+config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+config.swift"; sourceTree = "<group>"; };
 		D0D7E592243C5523001801A5 /* APBlockingSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscription.h; sourceTree = "<group>"; };
 		D0D7E593243C5523001801A5 /* APBlockingSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APBlockingSubscription.m; sourceTree = "<group>"; };
-		D0D7E599243C5EF3001801A5 /* ProSubscriptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProSubscriptionsManager.swift; sourceTree = "<group>"; };
+		D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProSubscriptionsMigrationService.swift; sourceTree = "<group>"; };
 		D0D7E59F243C84F0001801A5 /* APDnsServerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APDnsServerObject.h; sourceTree = "<group>"; };
 		D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerObject.m; sourceTree = "<group>"; };
 		D0DB1B052148DB35006EB991 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -3712,7 +3712,7 @@
 				D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */,
 				D0D7E592243C5523001801A5 /* APBlockingSubscription.h */,
 				D0D7E593243C5523001801A5 /* APBlockingSubscription.m */,
-				D0D7E599243C5EF3001801A5 /* ProSubscriptionsManager.swift */,
+				D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -6249,7 +6249,7 @@
 				65CB60351D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
 				D0B545912435D630002F0AEC /* PurchaseService.swift in Sources */,
 				D0B545992435D636002F0AEC /* FeedbackController.swift in Sources */,
-				D0D7E59B243C5EF3001801A5 /* ProSubscriptionsManager.swift in Sources */,
+				D0D7E59B243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */,
 				D0D7E53E24371AAB001801A5 /* mz_compat.c in Sources */,
 				D0B545D82435D69B002F0AEC /* ListOfRulesCells.swift in Sources */,
 				D0D7E5A2243C84F1001801A5 /* APDnsServerObject.m in Sources */,
@@ -6700,7 +6700,7 @@
 				7EE7E1DC22E9DB1400B2799A /* SearchFilterController.swift in Sources */,
 				D0DE8DAF23607A010073B163 /* NotificationService+Utils.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
-				D0D7E59A243C5EF3001801A5 /* ProSubscriptionsManager.swift in Sources */,
+				D0D7E59A243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
 				D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */,
@@ -7040,7 +7040,7 @@
 				D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */,
 				D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */,
 				D0DE8DB1236093820073B163 /* NotificationService+Utils.swift in Sources */,
-				D00E67512473C97C00161A74 /* ProSubscriptionsManager.swift in Sources */,
+				D00E67512473C97C00161A74 /* ProSubscriptionsMigrationService.swift in Sources */,
 				7EA2163C24449EA700393949 /* MigrationServiceTest.swift in Sources */,
 				D0288F4423069ACB00A4EBEF /* NSDate+Utils.m in Sources */,
 				7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */,

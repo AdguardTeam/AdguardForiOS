@@ -19,7 +19,7 @@
 import Foundation
 
 // this class is used only for migration old blockinng subscriptions(pro v 2.1.2) to new DnsFilters
-class ProSubscriptionsManager {
+class ProSubscriptionsMigrationService {
     
     private let resources:AESharedResourcesProtocol
     private let dnsFilters: DnsFiltersServiceProtocol
