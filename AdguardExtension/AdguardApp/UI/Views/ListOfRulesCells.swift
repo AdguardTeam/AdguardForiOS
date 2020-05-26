@@ -159,6 +159,8 @@ class NormalRuleCell: UITableViewCell {
         }
     }
     
+    var isBigScreen: Bool?
+    
     var rule: RuleInfo? {
         didSet{
             ruleNameLabel.text = rule?.rule
@@ -167,8 +169,6 @@ class NormalRuleCell: UITableViewCell {
     
     var type: RulesType? {
         didSet{
-            // Check if it is iPad or iPhone screen
-            let isBigScreen = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
             
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
@@ -176,7 +176,7 @@ class NormalRuleCell: UITableViewCell {
 
             ruleStateImageView.isHidden = type == .systemWhitelist || type == .systemBlacklist
             
-            let fontSize: CGFloat = isBigScreen ? 20.0 : 16.0
+            let fontSize: CGFloat = (isBigScreen ?? false) ? 20.0 : 16.0
             
             if type == .safariUserfilter {
                 ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
