@@ -116,9 +116,10 @@ extension String {
         return str
     }
     
-    func checkIfValidDnsServer() -> Bool {
+    func isValidUpstream() -> Bool {
         let charSet = CharacterSet(charactersIn: self)
-        let validCharsSet = CharacterSet.urlPathAllowed
+        var validCharsSet = CharacterSet.urlPathAllowed
+        validCharsSet.insert("%")
         return charSet.isSubset(of: validCharsSet) && self.count > 0
     }
     

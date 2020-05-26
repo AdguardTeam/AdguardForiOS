@@ -199,7 +199,7 @@ class NewDnsServerController: BottomAlertController {
     private func updateSaveButton() {
         let dnsName = nameField.text ?? ""
         let dnsUrl = upstreamsField.text ?? ""
-        let correctDns = dnsUrl.checkIfValidDnsServer()
+        let correctDns = dnsUrl.isValidUpstream()
         let enabled = dnsName.count > 0 && correctDns
         
         if !correctDns {
