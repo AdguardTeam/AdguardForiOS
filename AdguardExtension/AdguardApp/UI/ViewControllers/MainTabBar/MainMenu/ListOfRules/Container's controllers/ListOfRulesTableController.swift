@@ -321,6 +321,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     private func setupNormalRuleCell(row: Int) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ruleReuseId) as? NormalRuleCell, let rule = model?.rules[row]{
+            let isBigScreen = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
+            cell.isBigScreen = isBigScreen
             cell.theme = theme
             
             if state == .searching && (rule.attributedString != nil) {
@@ -334,6 +336,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             cell.ruleState = rule.enabled
             cell.changeRuleStateButton.tag = row
             cell.separatorView.isHidden = row + 1 == model?.rules.count
+            cell.layoutIfNeeded()
             return cell
         }
         return UITableViewCell()

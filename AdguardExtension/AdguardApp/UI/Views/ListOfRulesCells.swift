@@ -159,6 +159,8 @@ class NormalRuleCell: UITableViewCell {
         }
     }
     
+    var isBigScreen: Bool?
+    
     var rule: RuleInfo? {
         didSet{
             ruleNameLabel.text = rule?.rule
@@ -167,15 +169,14 @@ class NormalRuleCell: UITableViewCell {
     
     var type: RulesType? {
         didSet{
+            
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
             }
 
-            if type == .systemWhitelist || type == .systemBlacklist{
-                ruleStateImageView.isHidden = true
-            }
+            ruleStateImageView.isHidden = type == .systemWhitelist || type == .systemBlacklist
             
-            let fontSize = ruleNameLabel.font.pointSize
+            let fontSize: CGFloat = (isBigScreen ?? false) ? 20.0 : 16.0
             
             if type == .safariUserfilter {
                 ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
@@ -192,9 +193,19 @@ class NormalRuleCell: UITableViewCell {
     var ruleState: Bool? {
         didSet{
             let state: Bool = ruleState ?? false
-            
             ruleStateImageView.image = state ? tickImage : crossImage
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        ruleNameLabel.attributedText = nil
+        ruleNameLabel.textColor = nil
+        ruleNameLabel.text = nil
+        ruleNameLabel.font = nil
+        topConstraint.constant = 0.0
+        bottomConstraint.constant = 0.0
+        ruleStateImageView.isHidden = true
     }
     
     private func updateTheme(){
