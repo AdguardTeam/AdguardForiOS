@@ -145,6 +145,12 @@ protocol FiltersServiceProtocol {
     /* reser service */
     func reset()
     
+    /* reads groups from database
+     Sometimes we update the states of groups directly in the database.
+     In this case, we must force reading of this states
+     */
+    func updateGroups()
+    
     func getGroup(_ groupId: Int)->Group?
     
     func renameCustomFilter(_ filterId: Int, _ newName: String)
@@ -168,6 +174,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     private var notificationObserver: Any?
     private var proStatusObservation: NSKeyValueObservation?
+    
+    private let groupsQueue = DispatchQueue(label: "load_filter_grops_queue")
     
     // exception languages
     private let langFlags = [
@@ -261,7 +269,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     func load(refresh: Bool, _ completion: @escaping () -> Void){
         
-        DispatchQueue(label: "load_filter_grops_queue").async { [weak self] in
+        groupsQueue.async { [weak self] in
             guard let sSelf = self, let antibanner = self?.antibanner else { return }
             
             DispatchQueue.main.async {
@@ -356,6 +364,21 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
             }
+        }
+    }
+    
+    func updateGroups() {
+        groupsQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            guard let dbGroups = self.antibanner?.groups() else { return }
+            
+            self.groups.forEach({ (group) in
+                if let dbGroup = dbGroups.first(where: { $0.groupId.intValue == group.groupId }) {
+                    group.enabled = dbGroup.enabled.boolValue
+                    self.updateGroupSubtitle(group)
+                }
+            })
         }
     }
     

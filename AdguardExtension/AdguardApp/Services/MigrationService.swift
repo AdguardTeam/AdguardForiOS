@@ -37,10 +37,11 @@ class MigrationService: MigrationServiceProtocol {
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private let configurationService: ConfigurationServiceProtocol
+    private let filtersService: FiltersServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol) {
+    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol, filtersService: FiltersServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -51,6 +52,7 @@ class MigrationService: MigrationServiceProtocol {
         self.dnsStatisticsService = dnsStatisticsService
         self.dnsLogRecordsService = dnsLogService
         self.configurationService = configuration
+        self.filtersService = filtersService
     }
     
     func install() {
@@ -189,7 +191,11 @@ class MigrationService: MigrationServiceProtocol {
     }
     
     private func enableGroupsWithEnabledFilters() -> Bool {
-        return antibanner.enableGroupsWithEnabledFilters()
+        let result = antibanner.enableGroupsWithEnabledFilters()
+        
+        filtersService.updateGroups()
+        
+        return result
     }
     
     private func updateAntibanner() {
