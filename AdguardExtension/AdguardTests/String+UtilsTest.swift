@@ -26,13 +26,13 @@ class StringUtilsTest: XCTestCase {
     
     func testCheckIfValidDnsServerForCorrectExamples() {
         for server in correctDnsServers {
-            XCTAssertTrue(server.checkIfValidDnsServer())
+            XCTAssertTrue(server.isValidUpstream())
         }
     }
     
     func testCheckIfValidDnsServerForIncorrectExamples() {
         for server in incorrectDnsServers {
-            XCTAssertFalse(server.checkIfValidDnsServer())
+            XCTAssertFalse(server.isValidUpstream())
         }
     }
     
