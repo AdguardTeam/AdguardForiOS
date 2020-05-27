@@ -2061,6 +2061,7 @@
 		D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */; };
 		D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D0F911932136DAB0006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
+		D0F97577247EA87800B9DF19 /* FiltersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F97576247EA87800B9DF19 /* FiltersServiceMock.swift */; };
 		D0FA1A002269D0F90047B558 /* AESFilterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EEA1BD4D29F00FFC71C /* AESFilterConverter.m */; };
 		D0FA1A012269D12B0047B558 /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
 /* End PBXBuildFile section */
@@ -3430,6 +3431,7 @@
 		D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		D0F91179213422E1006DF0D3 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		D0F9117B2134414A006DF0D3 /* AdguardTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdguardTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		D0F97576247EA87800B9DF19 /* FiltersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4933,14 +4935,15 @@
 				D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */,
 				D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */,
 				D02C080921BEAB8300796714 /* ConverterMock.swift */,
-				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
-				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
-				7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */,
-				D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */,
 				7EA2163E2444C76700393949 /* DnsFiltersServiceMock.swift */,
 				D00E674F2473C7F400161A74 /* DnsLogRecordsServiceMock.swift */,
 				7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */,
 				7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */,
+				D0F97576247EA87800B9DF19 /* FiltersServiceMock.swift */,
+				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
+				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
+				7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */,
+				D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -7026,6 +7029,7 @@
 				D0D7E62C2444C405001801A5 /* APDnsServerAddress.m in Sources */,
 				D093718821AEA770004A24F1 /* ContentBlockerTest.swift in Sources */,
 				D00E67502473C7F400161A74 /* DnsLogRecordsServiceMock.swift in Sources */,
+				D0F97577247EA87800B9DF19 /* FiltersServiceMock.swift in Sources */,
 				7E279F5B243C9C09006AF0D6 /* DnsStatisticsServiceTest.swift in Sources */,
 				D0C9911A238FDB8700C9123F /* SafariServiceTest.swift in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
