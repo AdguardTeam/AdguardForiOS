@@ -76,7 +76,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
         
-        let dnsProxyUpstream = dnsProxyService?.upstreamsById[event.upstreamId.intValue]
+        let dnsProxyUpstream = event.upstreamId == nil ? nil : dnsProxyService?.upstreamsById[event.upstreamId.intValue]
         let recordIsEncrypted = dnsProxyUpstream?.isCrypto ?? false
         let upstreamAddr = dnsProxyUpstream?.upstream
         
