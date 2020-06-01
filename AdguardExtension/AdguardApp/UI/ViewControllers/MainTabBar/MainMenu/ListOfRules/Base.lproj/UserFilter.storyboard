@@ -700,8 +700,6 @@
                                     <constraint firstItem="FNd-Na-vMx" firstAttribute="leading" secondItem="bjm-Pt-dMF" secondAttribute="leading" id="iOC-mk-j86"/>
                                     <constraint firstItem="FNd-Na-vMx" firstAttribute="top" secondItem="bjm-Pt-dMF" secondAttribute="top" id="y7R-Zi-gdn"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="jgd-sg-tm9"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="SZc-gJ-A2n"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -907,8 +905,6 @@
                                     <constraint firstAttribute="bottom" secondItem="wr2-gy-Jd9" secondAttribute="bottom" id="uTq-0l-EY3"/>
                                     <constraint firstItem="wr2-gy-Jd9" firstAttribute="height" secondItem="RqY-h5-YwS" secondAttribute="height" priority="250" id="v0t-o2-NNC"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="rTS-4N-Cvl"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="BqM-6U-7vz"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

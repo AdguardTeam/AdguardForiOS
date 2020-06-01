@@ -165,8 +165,6 @@
                                     <constraint firstAttribute="bottom" secondItem="uT6-rW-AKV" secondAttribute="bottom" id="kYf-I8-cay"/>
                                     <constraint firstItem="uT6-rW-AKV" firstAttribute="height" secondItem="hrn-UW-Qa1" secondAttribute="height" priority="250" id="vsb-KT-aHM"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="EUP-2i-adF"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="6Qd-3k-6Wh"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

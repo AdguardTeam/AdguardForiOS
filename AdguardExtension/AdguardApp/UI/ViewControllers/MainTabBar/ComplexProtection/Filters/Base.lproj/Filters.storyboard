@@ -1641,8 +1641,6 @@
                                     <constraint firstAttribute="trailing" secondItem="uWd-ZI-H88" secondAttribute="trailing" id="bbc-nI-oQE"/>
                                     <constraint firstItem="uWd-ZI-H88" firstAttribute="leading" secondItem="eVs-ST-ULA" secondAttribute="leading" id="hYY-Cu-VkG"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Lfi-au-VOt"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="zFO-ae-ryA"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2021,8 +2019,6 @@
                                     <constraint firstItem="oG1-6A-zBh" firstAttribute="top" secondItem="2fJ-gg-Q5m" secondAttribute="top" id="Tw0-Gk-qRp"/>
                                     <constraint firstAttribute="trailing" secondItem="oG1-6A-zBh" secondAttribute="trailing" id="iox-sn-9zS"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="e9X-n8-ziD"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="0Rr-RT-bmo"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

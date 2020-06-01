@@ -38,10 +38,10 @@ struct ReadyFlag: OptionSet {
     
     let rawValue: UInt8
     
-    static let notReady = ReadyFlag(rawValue: 0)
-    static let installed = ReadyFlag(rawValue: 1)
-    static let databaseReady = ReadyFlag(rawValue: 2)
-    
+    static let notReady: ReadyFlag = ReadyFlag(rawValue: 0)
+    static let installed: ReadyFlag = ReadyFlag(rawValue: 1)
+    static let databaseReady: ReadyFlag = ReadyFlag(rawValue: 2)
+
     static let ready = installed.union(databaseReady)
 }
 
