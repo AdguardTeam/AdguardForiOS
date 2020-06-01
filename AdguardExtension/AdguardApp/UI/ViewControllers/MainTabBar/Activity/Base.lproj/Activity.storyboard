@@ -268,9 +268,6 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>
@@ -1319,9 +1316,6 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>
@@ -1372,9 +1366,6 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.4823529412" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>

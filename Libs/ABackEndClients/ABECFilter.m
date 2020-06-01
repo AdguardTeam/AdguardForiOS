@@ -294,10 +294,11 @@ static ABECFilterClient *ABECFilterSingleton;
             for (NSURLSessionTask *item in tasks) {
                 
                 DDLogDebug(@"Task \"%@\" status: %@", item.originalRequest.URL, stateName[item.state]);
+                [item cancel];
             }
 #endif
             if (block) {
-                block((tasks.count > 0));
+                block(false);
             }
         }];
     }
@@ -420,10 +421,6 @@ static ABECFilterClient *ABECFilterSingleton;
     configuration.networkServiceType = NSURLNetworkServiceTypeBackground;
     configuration.timeoutIntervalForRequest = ABEC_BACKEND_READ_TIMEOUT;
     configuration.timeoutIntervalForResource = updateTimeout;
-    configuration.discretionary = YES;
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-    configuration.sessionSendsLaunchEvents = YES;
-#endif
     
     return [NSURLSession sessionWithConfiguration:configuration delegate:sessionDelegate delegateQueue:nil];
 }
@@ -533,7 +530,7 @@ static ABECFilterClient *ABECFilterSingleton;
             
             // was metadata request
             
-            DDLogInfo(@"(ABECFilterClient) complate: METADATA");
+            DDLogInfo(@"(ABECFilterClient) complete: METADATA");
             
             if (error) {
                 DDLogError(@"(ABECFilterClient) ASync. Error loading metadata info:%@", [error localizedDescription]);
@@ -547,7 +544,7 @@ static ABECFilterClient *ABECFilterSingleton;
             
             // was i18n request
             
-            DDLogInfo(@"(ABECFilterClient) complate: I18N");
+            DDLogInfo(@"(ABECFilterClient) complete: I18N");
             
             if (error) {
                 DDLogError(@"(ABECFilterClient) ASync. Error loading i18n info:%@", [error localizedDescription]);
@@ -561,7 +558,7 @@ static ABECFilterClient *ABECFilterSingleton;
             
             //was filter request
             
-            DDLogInfo(@"(ABECFilterClient) complate: Filter");
+            DDLogInfo(@"(ABECFilterClient) complete: Filter");
             
             if (error) {
                 DDLogError(@"(ABECFilterClient) ASync. Error loading filter data:%@", [error localizedDescription]);

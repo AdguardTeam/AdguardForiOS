@@ -25,6 +25,7 @@
 #import "AESharedResources.h"
 #import "AASFilterSubscriptionParser.h"
 #import "Adguard-Swift.h"
+#import "ASConstants.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
 #define UPDATE_METADATA_TIMEOUT           3.0
@@ -1404,7 +1405,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                          //https://github.com/AdguardTeam/AdguardForiOS/issues/302
                          || [filterMeta.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)])
                         
-                        && ( forced || interval >= [filterMeta.expires integerValue] )) {
+                        && ( forced || interval >= 0/*[filterMeta.expires integerValue]*/ )) {
                         
                         [metadataForUpdate addObject:filterMeta];
                     }
@@ -1700,9 +1701,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 
                 BOOL result = [self insertMetadataIntoDb:db groups:metadata.groups];
                 result = result && [self insertMetadataIntoDb:db filters:metadata.filters];
+                
+                metadataUpdated = YES;
+                
                 if (filtersMetadataUpdateOnly.count && result) {
                     result = result && [self insertMetadataIntoDb:db filters:filtersMetadataUpdateOnly];
-                    metadataUpdated = result;
+                    metadataUpdated = metadataUpdated && result;
                 }
                 
                 *rollback = !result;
@@ -1965,6 +1969,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 }
 
 - (BOOL)insertMetadataIntoDb:(FMDatabase *)db filters:(NSArray *)metadataList{
+    
+    if (metadataList.count == 0) {
+        return true;
+    }
     
     BOOL result = NO;
     for (ASDFilterMetadata *meta in metadataList) {

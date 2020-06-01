@@ -27,6 +27,7 @@
 #import "AESharedResources.h"
 #import "ACDnsUtils.h"
 #import "Adguard-Swift.h"
+#import "ASConstants.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
@@ -354,23 +355,6 @@ static NSTimeInterval lastCheckTime;
     }
 }
 
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
-
-    DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
-
-    if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
-        
-        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
-            _downloadCompletion = completionHandler;
-            [antibanner repairUpdateStateForBackground];
-        }];
-    }
-    else{
-        DDLogError(@"(AppDelegate) Uncknown background session id: %@", identifier);
-        completionHandler();
-    }
-}
-
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     DDLogError(@"(AppDelegate) application Open URL.");
@@ -390,7 +374,7 @@ static NSTimeInterval lastCheckTime;
         
         // Begin update process (Downloading step)
         
-        NSDate *lastCheck = [_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
+        NSDate *lastCheck = nil;//[_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
         if (fromUI || !lastCheck ||
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
