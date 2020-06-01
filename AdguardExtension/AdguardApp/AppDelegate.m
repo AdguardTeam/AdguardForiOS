@@ -374,7 +374,7 @@ static NSTimeInterval lastCheckTime;
         
         // Begin update process (Downloading step)
         
-        NSDate *lastCheck = nil;//[_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
+        NSDate *lastCheck = [_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
         if (fromUI || !lastCheck ||
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
