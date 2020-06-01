@@ -172,8 +172,6 @@
                                     <constraint firstItem="7iu-xS-0z8" firstAttribute="height" secondItem="y3T-Ho-ORm" secondAttribute="height" id="dWr-4x-AA9"/>
                                     <constraint firstAttribute="trailing" secondItem="7iu-xS-0z8" secondAttribute="trailing" id="hl8-jo-aRJ"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="3E4-rF-p7H"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="qCV-5P-77H"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-36-5FQ">
                                 <rect key="frame" x="8" y="60" width="24" height="24"/>
@@ -337,8 +335,6 @@
                                     <constraint firstItem="4pL-oy-3Mq" firstAttribute="height" secondItem="zNS-Iy-bW2" secondAttribute="height" id="q1p-rf-QJD"/>
                                     <constraint firstAttribute="bottom" secondItem="4pL-oy-3Mq" secondAttribute="bottom" id="xGY-gs-lQl"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="IwC-jY-vwB"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="hk9-OX-FpU"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="R0j-6K-nc9"/>

@@ -1375,8 +1375,8 @@
                                     <outlet property="selectedButton" destination="DzF-Qn-Xxp" id="y6F-6p-AWc"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomDnsServerCell" id="LFh-Y6-rFS" customClass="DnsProviderCell" customModule="Adguard">
-                                <rect key="frame" x="0.0" y="240.5" width="414" height="44.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomDnsServerCell" id="LFh-Y6-rFS" customClass="DnsProviderCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="192.5" width="414" height="44.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LFh-Y6-rFS" id="ESW-dI-j00">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
@@ -2730,8 +2730,6 @@
                                     <constraint firstItem="djI-OP-3az" firstAttribute="top" secondItem="F1v-cB-fxD" secondAttribute="top" id="f6j-pO-CWF"/>
                                     <constraint firstItem="djI-OP-3az" firstAttribute="leading" secondItem="F1v-cB-fxD" secondAttribute="leading" id="gzV-E7-CPG"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="JF1-jA-uaH"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="HYJ-2X-RaD"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
