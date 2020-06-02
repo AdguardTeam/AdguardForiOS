@@ -27,6 +27,7 @@
 #import "AESharedResources.h"
 #import "ACDnsUtils.h"
 #import "Adguard-Swift.h"
+#import "ASConstants.h"
 
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
@@ -351,23 +352,6 @@ static NSTimeInterval lastCheckTime;
             [_dnsFiltersService updateFiltersWithNetworking:_networking callback:nil];
             DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
         }
-    }
-}
-
-- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(nonnull NSString *)identifier completionHandler:(nonnull void (^)(void))completionHandler {
-
-    DDLogInfo(@"(AppDelegate) application handleEventsForBackgroundURLSession.");
-
-    if ([identifier isEqualToString:AE_FILTER_UPDATES_ID]) {
-        
-        [_antibannerController onReady:^(id<AESAntibannerProtocol> _Nonnull antibanner) {
-            _downloadCompletion = completionHandler;
-            [antibanner repairUpdateStateForBackground];
-        }];
-    }
-    else{
-        DDLogError(@"(AppDelegate) Uncknown background session id: %@", identifier);
-        completionHandler();
     }
 }
 

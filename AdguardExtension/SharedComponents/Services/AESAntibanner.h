@@ -18,20 +18,6 @@
 #import <Foundation/Foundation.h>
 #import "ABackEndClients/ABECFilter.h"
 
-#define AS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
-#define AS_EXECUTION_LEEWAY                                5 // 5 seconds
-#define AS_EXECUTION_DELAY                                 2 // 2 seconds
-
-#define AS_CHECK_FILTERS_UPDATES_PERIOD                    AS_EXECUTION_PERIOD_TIME*6
-#define AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY             AS_EXECUTION_DELAY
-#define AS_CHECK_FILTERS_UPDATES_LEEWAY                    AS_EXECUTION_LEEWAY
-#define AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD            AS_EXECUTION_PERIOD_TIME*6
-
-#define AS_FETCH_UPDATE_STATUS_PERIOD                       (AS_CHECK_FILTERS_UPDATES_PERIOD / 2)
-
-/// Timeout for downloading of data from the remote services
-#define AS_URL_LOAD_TIMEOUT                                60
-
 /// When anitbanner service installed
 extern NSString * _Nonnull ASAntibannerInstalledNotification;
 
