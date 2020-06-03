@@ -197,10 +197,11 @@ class ActionExtensionMainController: UITableViewController {
     @IBAction func clickedBlockElement(_ sender: UITapGestureRecognizer) {
         if injectScriptSupported{
             let extensionItem = NSExtensionItem()
-            
+            let settings = ["urlScheme": AE_URLSCHEME]
             let obj: NSItemProvider = NSItemProvider(item:
                  [ NSExtensionJavaScriptFinalizeArgumentKey  : [
-                    "blockElement": NSNumber(value: 1)
+                    "blockElement": NSNumber(value: 1),
+                    "settings": settings
                 ]] as NSSecureCoding, typeIdentifier: String(kUTTypePropertyList))
            
             extensionItem.attachments = [obj]
