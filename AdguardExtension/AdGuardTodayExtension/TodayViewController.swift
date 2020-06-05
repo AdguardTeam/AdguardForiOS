@@ -378,13 +378,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let encrypted = counters?.encrypted ?? 0
             let elapsedSumm = counters?.totalTime ?? 0
             
-            let requestsNumber = self.resources.tempRequestsCount
-            self.requestsLabel.text = "\(requests + requestsNumber)"
-            self.requestNumber = requests + requestsNumber
+            let requestsNumber = self.resources.tempRequestsCount + requests
+            self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.requestNumber = requestsNumber
             
-            let encryptedNumber = self.resources.tempEncryptedRequestsCount
-            self.encryptedLabel.text = "\(encrypted + encryptedNumber)"
-            self.encryptedNumber = encrypted + encryptedNumber
+            let encryptedNumber = self.resources.tempEncryptedRequestsCount + encrypted
+            self.encryptedLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
+            self.encryptedNumber = encryptedNumber
             
             let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
