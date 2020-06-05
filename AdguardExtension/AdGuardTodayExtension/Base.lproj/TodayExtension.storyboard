@@ -11,7 +11,7 @@
         <!--Today View Controller-->
         <scene sceneID="cwh-vc-ff4">
             <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="AdGuardTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="AdGuardProTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="268"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,7 +175,7 @@
                                     <constraint firstItem="msY-PO-wL6" firstAttribute="top" secondItem="LDB-v9-R8w" secondAttribute="top" constant="12" id="tRg-Te-L7D"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="5Fk-Mt-bCB">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5Fk-Mt-bCB">
                                 <rect key="frame" x="16" y="201" width="382" height="56"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxg-07-lIR">
