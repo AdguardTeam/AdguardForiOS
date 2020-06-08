@@ -270,7 +270,6 @@ class VpnManager: VpnManagerProtocol {
         DDLogInfo("(VpnManager) createManager")
         
         let manager = providerManagerType.self.init()
-        manager.localizedDescription = "AdGuard VPN"
         
         return manager
     }
@@ -337,6 +336,8 @@ class VpnManager: VpnManagerProtocol {
         
         manager.isEnabled = enabled
         manager.isOnDemandEnabled = enabled
+        
+        manager.localizedDescription = Constants.aeProductName()
     }
     
     private func saveManager(_ manager: NETunnelProviderManager)->Error? {

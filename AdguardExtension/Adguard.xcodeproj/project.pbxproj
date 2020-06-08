@@ -578,6 +578,10 @@
 		D018672B203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
 		D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
 		D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
+		D01EA0DE248EAADE00FBB365 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
+		D01EA0DF248EAADF00FBB365 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
+		D01EA0E0248EAAEB00FBB365 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
+		D01EA0E1248EAAEC00FBB365 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E49DBBB22DDC25000027E93 /* Constants.m */; };
 		D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */; };
 		D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
 		D020B28E21FA12FE0075BB8D /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B28C21FA11F80075BB8D /* DnsProxyService.swift */; };
@@ -7182,6 +7186,7 @@
 				7E9A487D23A2815400B89540 /* AffinityRulesParser.swift in Sources */,
 				7E9A487D23A2815400B89540 /* AffinityRulesParser.swift in Sources */,
 				D0D7E5A9243C9592001801A5 /* ACSSystemUtils.m in Sources */,
+				D01EA0DE248EAADE00FBB365 /* Constants.m in Sources */,
 				7ECD9C48238D65DA0065E88D /* ACObject.m in Sources */,
 				7ED544F9243B501E004563DA /* DnsStatisticsRecord.swift in Sources */,
 				D0D7E56724377310001801A5 /* Bundle+config.swift in Sources */,
@@ -7266,6 +7271,7 @@
 				7E50FC19238C0A0300F11722 /* DnsFiltersService.swift in Sources */,
 				D0F36294220C009E0065BE8E /* Dns64Utils.swift in Sources */,
 				D0569D4721F1C0A800985DA9 /* NSURL+Utils.m in Sources */,
+				D01EA0E1248EAAEC00FBB365 /* Constants.m in Sources */,
 				D0569D4C21F1C0A800985DA9 /* NSDate+Utils.m in Sources */,
 				D0569D5221F1C0A800985DA9 /* ACLWildcard.m in Sources */,
 				D0569D5321F1C0A800985DA9 /* ACIOUtils.m in Sources */,
@@ -7935,6 +7941,7 @@
 				D0D7E5FA24444F08001801A5 /* RuleLabel.swift in Sources */,
 				D0B544042435C6B8002F0AEC /* DDFileLogger.m in Sources */,
 				D0B544052435C6B8002F0AEC /* DDLoggerNames.m in Sources */,
+				D01EA0DF248EAADF00FBB365 /* Constants.m in Sources */,
 				D0B544062435C6B8002F0AEC /* ComplexProtectionService.swift in Sources */,
 				D0B544072435C6B8002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B544082435C6B8002F0AEC /* DDOSLogger.m in Sources */,
@@ -8154,6 +8161,7 @@
 				D0B544E32435C6BF002F0AEC /* APDnsLogTable.m in Sources */,
 				D0B544E42435C6BF002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B544E52435C6BF002F0AEC /* FMDatabaseQueue.m in Sources */,
+				D01EA0E0248EAAEB00FBB365 /* Constants.m in Sources */,
 				D0B544E62435C6BF002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B544E72435C6BF002F0AEC /* ADLocales.m in Sources */,
 				D0B544E82435C6BF002F0AEC /* Reachability.m in Sources */,
