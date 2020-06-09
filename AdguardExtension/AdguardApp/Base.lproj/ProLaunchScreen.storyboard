@@ -19,15 +19,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-Lt-vE2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProLoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Qi5-Lt-vE2">
                                 <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="4bs-fk-XtG"/>
-                                    <constraint firstAttribute="width" constant="64" id="941-s1-0I7"/>
+                                    <constraint firstAttribute="height" constant="84" id="4bs-fk-XtG">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="112"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="84" id="941-s1-0I7">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="112"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XE8-hc-09o"/>
                             <constraint firstItem="Qi5-Lt-vE2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yhW-Eu-CE6"/>
@@ -41,6 +45,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LoadScreen" width="64" height="64"/>
+        <image name="ProLoadScreen" width="1024" height="1024"/>
     </resources>
 </document>
