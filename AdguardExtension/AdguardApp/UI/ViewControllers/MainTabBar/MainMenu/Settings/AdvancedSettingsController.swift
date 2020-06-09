@@ -67,8 +67,12 @@ class AdvancedSettingsController: UITableViewController {
             self?.lastSeparator.isHidden = false
             self?.tableView.reloadData()
         }
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setTunnelModeDescription()
+        tableView.reloadData()
     }
     
     // MARK: - Prepare for segue
