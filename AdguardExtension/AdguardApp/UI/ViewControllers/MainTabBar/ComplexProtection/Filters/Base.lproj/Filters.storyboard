@@ -1049,7 +1049,7 @@
                                                     <rect key="frame" x="0.0" y="138" width="600" height="1"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="bvT-4B-8av"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="bvT-4B-8av"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1541,7 +1541,7 @@
                                                 <rect key="frame" x="32" y="215.5" width="704" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="OKf-24-CHb"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="OKf-24-CHb"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WuN-ma-ZGi">
@@ -1901,7 +1901,7 @@
                                                 <rect key="frame" x="32" y="120.5" width="311" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="Lbe-kc-p8W"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="Lbe-kc-p8W"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nch-wu-mKC" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">

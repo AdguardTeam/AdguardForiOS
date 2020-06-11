@@ -123,7 +123,7 @@
                                                 <rect key="frame" x="0.0" y="118" width="1024" height="1"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="5M1-Gx-Qy7"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="5M1-Gx-Qy7"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
