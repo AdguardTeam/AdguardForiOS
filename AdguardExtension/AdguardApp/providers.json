@@ -51,7 +51,9 @@
           "name": "Google DNS",
           "upstreams": [
             "8.8.8.8",
-            "8.8.4.4"
+            "8.8.4.4",
+            "2001:4860:4860::8888",
+            "2001:4860:4860::8844"
             ]
         },
         {
@@ -94,7 +96,9 @@
           "name": "Cloudflare",
           "upstreams":[
             "1.1.1.1",
-            "1.0.0.1"
+            "1.0.0.1",
+            "2606:4700:4700::1111",
+            "2606:4700:4700::1001"
           ]
         },
         {
@@ -103,6 +107,8 @@
           "id": "cloudflare",
           "name": "cloudflare",
           "upstreams":[
+            "https://1.1.1.1/dns-query",
+            "https://1.0.0.1/dns-query",
             "https://cloudflare-dns.com/dns-query"
           ]
         },
@@ -112,7 +118,8 @@
           "id": "cloudflare-dot",
           "name": "cloudflare-dot",
           "upstreams":[
-            "tls://1.1.1.1"
+            "tls://1.1.1.1",
+            "tls://1.0.0.1"
           ]
         }
       ]
@@ -205,7 +212,9 @@
           "name": "Quad9",
           "upstreams":[
             "9.9.9.9",
-            "149.112.112.112"
+            "149.112.112.112",
+            "2620:fe::fe",
+            "2620:fe::9"
           ]
         },
         {
@@ -223,6 +232,7 @@
           "id": "quad9-doh-filter-pri",
           "name": "quad9-doh-ipv4-filter-pri",
           "upstreams":[
+            "https://149.112.112.9/dns-query",
             "https://dns9.quad9.net/dns-query"
           ]
         }
