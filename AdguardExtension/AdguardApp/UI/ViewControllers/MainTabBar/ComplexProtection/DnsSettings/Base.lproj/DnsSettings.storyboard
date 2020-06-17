@@ -205,7 +205,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="9ZO-1D-gkb"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="9ZO-1D-gkb"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -301,7 +301,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="tdl-4V-eOh"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="tdl-4V-eOh"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -408,7 +408,7 @@
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="3Z3-PR-W6c"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="3Z3-PR-W6c"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -624,7 +624,7 @@
                                             <rect key="frame" x="0.0" y="70" width="414" height="1"/>
                                             <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="Vq7-Kn-jQm"/>
+                                                <constraint firstAttribute="height" constant="0.5" id="Vq7-Kn-jQm"/>
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLx-Jc-JgZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -820,7 +820,7 @@
                                             <rect key="frame" x="0.0" y="50" width="414" height="1"/>
                                             <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="LGb-ST-Hvk"/>
+                                                <constraint firstAttribute="height" constant="0.5" id="LGb-ST-Hvk"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xff-oK-Kba">
@@ -2241,7 +2241,7 @@
                                                 <rect key="frame" x="25" y="155" width="364" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="c26-BT-Zi3"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="c26-BT-Zi3"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFP-DS-Zaw">
@@ -2289,7 +2289,7 @@
                                                 <rect key="frame" x="25" y="257.5" width="364" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="Zrd-oN-roy"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="Zrd-oN-roy"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2l-7z-M2N" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
@@ -2832,7 +2832,7 @@
                                                 <rect key="frame" x="25" y="155" width="364" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="eY2-3l-9f4"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="eY2-3l-9f4"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZK-yT-vJZ">
@@ -2880,7 +2880,7 @@
                                                 <rect key="frame" x="25" y="257.5" width="364" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="vmN-J9-4bG"/>
+                                                    <constraint firstAttribute="height" constant="0.5" id="vmN-J9-4bG"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6e9-sP-YMb" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">

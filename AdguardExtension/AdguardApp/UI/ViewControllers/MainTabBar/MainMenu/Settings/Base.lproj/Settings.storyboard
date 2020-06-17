@@ -633,7 +633,7 @@
                                                     <rect key="frame" x="0.0" y="43" width="414" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Ke0-cm-gEC"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="Ke0-cm-gEC"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -709,7 +709,7 @@
                                                     <rect key="frame" x="0.0" y="77" width="414" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="ALB-6E-iWi"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="ALB-6E-iWi"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -785,7 +785,7 @@
                                                     <rect key="frame" x="0.0" y="70" width="414" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="JJm-Xb-Seo"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="JJm-Xb-Seo"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -863,7 +863,7 @@
                                                     <rect key="frame" x="0.0" y="43" width="414" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="1TE-cn-93s"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="1TE-cn-93s"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -942,7 +942,7 @@
                                                     <rect key="frame" x="0.0" y="43" width="414" height="1"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Hsw-P5-fEI"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="Hsw-P5-fEI"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
