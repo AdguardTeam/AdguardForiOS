@@ -516,19 +516,30 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
+        DDLogInfo("(PurchaseService) paymentQueue updatedTransactions")
         var restored = false
         var purchased = false
         
         for transaction in transactions {
             let error = transaction.error as NSError?
             
-            if !allProducts.contains(transaction.payment.productIdentifier) { continue }
+            if let error = error {
+                DDLogError("(PurchaseService) payment Queue error \(error.localizedDescription)")
+            }
+            
+            if !allProducts.contains(transaction.payment.productIdentifier) {
+                SKPaymentQueue.default().finishTransaction(transaction)
+                continue
+            }
             
             switch transaction.transactionState {
             case .purchasing, .deferred:
+                DDLogInfo("(PurchaseService) Transaction deffered or purchasing for product: \(transaction.payment.productIdentifier)")
                 break
                 
             case .failed:
+                DDLogInfo("(PurchaseService) Transaction failed for product: \(transaction.payment.productIdentifier)")
+                SKPaymentQueue.default().finishTransaction(transaction)
                 if error?.code == SKError.paymentCancelled.rawValue {
                     postNotification(PurchaseService.kPSNotificationCanceled, nil)
                     break
@@ -536,10 +547,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 postNotification(PurchaseService.kPSNotificationPurchaseFailure, transaction.error)
                 
             case .purchased:
+                DDLogInfo("(PurchaseService) Transaction purchased for product: \(transaction.payment.productIdentifier)")
                 purchased = true
                 SKPaymentQueue.default().finishTransaction(transaction)
                     
             case .restored:
+                DDLogInfo("(PurchaseService) Transaction restored for product: \(transaction.payment.productIdentifier)")
                 restored = true
                 SKPaymentQueue.default().finishTransaction(transaction)
                 
@@ -566,6 +579,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        
+        DDLogInfo("(PurchaseService)productsRequest didReceive products count: \(response.products.count) ")
         productsToPurchase.removeAll()
         
         for product in response.products {
@@ -595,11 +610,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
+        DDLogError("(PurchaseServie) request did fail with error: \(error.localizedDescription)")
         productRequest = nil
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         
+        DDLogInfo("(PurchaseServie) restore completed")
         for transaction in queue.transactions {
             if allProducts.contains(transaction.payment.productIdentifier)  {
                 return
@@ -611,6 +628,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        
+        DDLogError("(PurchaseServie) restore failed with error: \(error.localizedDescription)")
         let nsError = error as NSError
         if nsError.code == SKError.paymentCancelled.rawValue {
             postNotification(PurchaseService.kPSNotificationCanceled, nil)
