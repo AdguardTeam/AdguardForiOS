@@ -144,6 +144,7 @@ class ComplexProtectionController: UITableViewController {
     @IBAction func safariProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
         complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
+        updateSafariProtectionInfo()
     }
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
@@ -221,9 +222,6 @@ class ComplexProtectionController: UITableViewController {
             self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             
-            self.systemProtectionLabel.alpha = self.proStatus ? 1.0 : 0.5
-            self.systemDescriptionLabel.alpha = self.proStatus ? 1.0 : 0.5
-            
             self.tableView.reloadData()
         }
     }
@@ -234,7 +232,7 @@ class ComplexProtectionController: UITableViewController {
     private func updateVpnInfo(){
         let enabled = complexProtection.systemProtectionEnabled
         systemProtectionSwitch.isOn = enabled
-        systemProtectionSwitch.isEnabled = proStatus
+        systemProtectionSwitch.isUserInteractionEnabled = proStatus
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
         tableView.reloadData()
     }

@@ -41,7 +41,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-CX-EwT" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="72" width="366" height="52"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
@@ -112,14 +112,14 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlx-BS-A2y" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="14.333333333333336"/>
                                                     <string key="text">This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
                                                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="free" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-hs-4EK">
@@ -157,7 +157,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="vlx-BS-A2y" secondAttribute="bottom" constant="16" id="UYG-gn-VnA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="X7W-0Y-oFy" firstAttribute="top" secondItem="884-Hm-mb6" secondAttribute="top" constant="4" id="ZwF-2T-faS"/>
+                                                <constraint firstItem="X7W-0Y-oFy" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="top" id="aPs-ao-QHD"/>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7"/>
                                                 <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="wn5-St-EH0"/>
                                                 <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="16" id="y78-mB-GKy">
@@ -209,14 +209,14 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teo-vm-NRJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="42" width="277" height="57.333333333333343"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
                                                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="premium" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-72-GAw">
@@ -244,6 +244,7 @@
                                                 <constraint firstItem="teo-vm-NRJ" firstAttribute="top" secondItem="cnF-td-Ba1" secondAttribute="bottom" constant="2" id="RiJ-Za-rxq"/>
                                                 <constraint firstItem="cnF-td-Ba1" firstAttribute="leading" secondItem="P9C-72-GAw" secondAttribute="leading" id="SUB-Wd-OAg"/>
                                                 <constraint firstItem="teo-vm-NRJ" firstAttribute="leading" secondItem="cnF-td-Ba1" secondAttribute="leading" id="YTk-Bj-AAL"/>
+                                                <constraint firstItem="4LF-7o-NaU" firstAttribute="top" secondItem="P9C-72-GAw" secondAttribute="top" id="alg-dB-Hn2"/>
                                                 <constraint firstAttribute="trailing" secondItem="Nk5-ay-wTI" secondAttribute="trailing" constant="16" id="hgw-WW-ANP">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -253,7 +254,6 @@
                                                 <constraint firstItem="4LF-7o-NaU" firstAttribute="leading" secondItem="rW1-K7-XNG" secondAttribute="leading" constant="16" id="pIQ-3B-x7p">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="4LF-7o-NaU" firstAttribute="top" secondItem="cnF-td-Ba1" secondAttribute="top" constant="4" id="q0l-YF-vs5"/>
                                                 <constraint firstItem="Nk5-ay-wTI" firstAttribute="leading" secondItem="cnF-td-Ba1" secondAttribute="trailing" constant="16" id="t00-Pz-ITD">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
