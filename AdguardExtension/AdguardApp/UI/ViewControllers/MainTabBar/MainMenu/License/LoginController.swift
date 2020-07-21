@@ -98,6 +98,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        loginButton.layer.cornerRadius = loginButton.frame.height / 2
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == confirm2faSegue {
             guard let controller = segue.destination as? Confirm2FaController else { return }
