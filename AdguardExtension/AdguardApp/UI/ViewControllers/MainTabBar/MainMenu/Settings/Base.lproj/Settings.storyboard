@@ -1166,21 +1166,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="0Eq-OY-2Ui" userLabel="Table footer View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentBlockerTitleCell" id="uUV-3G-Dhv" customClass="ContentBlockerTitleCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="53.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uUV-3G-Dhv" id="yw5-M1-FaO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content blockers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPj-OI-Pcb" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="0.0" width="366" height="29.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="nPj-OI-Pcb" firstAttribute="top" secondItem="yw5-M1-FaO" secondAttribute="top" id="Kl0-Uh-25c"/>
+                                        <constraint firstAttribute="trailing" secondItem="nPj-OI-Pcb" secondAttribute="trailing" constant="24" id="RJ4-ee-qU5"/>
+                                        <constraint firstItem="nPj-OI-Pcb" firstAttribute="leading" secondItem="yw5-M1-FaO" secondAttribute="leading" constant="24" id="dFT-6Z-UQr"/>
+                                        <constraint firstAttribute="bottom" secondItem="nPj-OI-Pcb" secondAttribute="bottom" constant="24" id="q3E-nE-pkJ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="nPj-OI-Pcb" id="Hbh-KZ-gpg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="uQx-bh-2Ni" id="lMJ-Zg-RHd"/>
                             <outlet property="delegate" destination="uQx-bh-2Ni" id="EWx-AB-9m5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="XoL-0F-7UO"/>
-                    <connections>
-                        <outlet property="tableFooterView" destination="0Eq-OY-2Ui" id="dez-b7-K17"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ft5-pR-8we" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,13 +18,21 @@
 
 import UIKit
 
+class ContentBlockerTitleCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: ThemableLabel!
+}
+
 class ContentBlockerStateController: UITableViewController {
     
     var theme: ThemeServiceProtocol? = nil
     
     var contentBlockersDataSource: ContentBlockersDataSource? = nil
     
+    private let cbTitleReuseIdentifier = "ContentBlockerTitleCell"
     private let reuseIdentifier = "contentBlockerStateCell"
+    
+    private let titleSection = 0
+    private let contentBlockersSection = 1
     
     private let typeByRow : [Int : ContentBlockerType] = [
         0 : .general,
@@ -44,32 +52,38 @@ class ContentBlockerStateController: UITableViewController {
         .security : 5
     ]
     
-    @IBOutlet weak var tableFooterView: UIView!
-    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTableView()
         addObservers()
-        self.title = ACLocalizedString("content_blockers_title", nil)
-        
         setupBackButton()
-        updateTheme()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         updateTheme()
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentBlockersDataSource!.contentBlockers.count
+        return section == titleSection ? 1 : contentBlockersDataSource!.contentBlockers.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Setup title
+        if indexPath.section == titleSection {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cbTitleReuseIdentifier) as? ContentBlockerTitleCell else {
+                return UITableViewCell()
+            }
+            theme!.setupTableCell(cell)
+            theme!.setupLabel(cell.titleLabel)
+            return cell
+        }
+        
+        // Setup cb rows
         if let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ContentBlockerStateCell {
             
             theme!.setupTableCell(cell)
@@ -79,16 +93,23 @@ class ContentBlockerStateController: UITableViewController {
             cell.layoutIfNeeded()
             cell.blockerState = contentBlockersDataSource!.contentBlockers[type]!
             return cell
-        }else{
+        } else {
            return UITableViewCell()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     // MARK: - private methods
     
     private func updateTheme() {
         view.backgroundColor = theme!.backgroundColor
-        tableFooterView.backgroundColor = theme!.backgroundColor
         theme!.setupNavigationBar(navigationController?.navigationBar)
         theme!.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
