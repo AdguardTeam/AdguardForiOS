@@ -32,13 +32,13 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var advancedModeSwitch: UISwitch!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var tableFooterView: UIView!
     
     @IBOutlet var themeButtons: [UIButton]!
     
     // Sections
-    private let themeSection = 0
-    private let otherSection = 1
+    private let titleSection = 0
+    private let themeSection = 1
+    private let otherSection = 2
     
     // Raws
     private let systemDefault = 0
@@ -50,6 +50,7 @@ class SettingsController: UITableViewController {
     private let advancedModeRow = 2
     private let advancedSettingsRow = 3
     private let resetStatisticsRow = 4
+    private let resetSettingsRow = 5
     
     private var headersTitles: [String] = []
     
@@ -87,6 +88,14 @@ class SettingsController: UITableViewController {
         updateTheme()
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         switch (indexPath.section, indexPath.row) {
@@ -106,6 +115,8 @@ class SettingsController: UITableViewController {
             advancedModeAction(advancedModeSwitch)
         case (otherSection, resetStatisticsRow):
             resetStatistics(indexPath)
+        case (otherSection, resetSettingsRow):
+            resetSettings(indexPath)
         default:
             break
         }
@@ -143,29 +154,6 @@ class SettingsController: UITableViewController {
         setTheme(withButtonTag: sender.tag)
     }
     
-    @IBAction func resetAction(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .actionSheet)
-        
-        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
-            alert.dismiss(animated: true, completion: nil)
-            (UIApplication.shared.delegate as? AppDelegate)?.resetAllSettings()
-        }
-        
-        alert.addAction(yesAction)
-        
-        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(cancelAction)
-
-        if let presenter = alert.popoverPresentationController {
-            presenter.barButtonItem = sender
-        }
-        
-        present(alert, animated: true)
-    }
-    
     private func resetStatistics(_ indexPath: IndexPath){
         let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .actionSheet)
         
@@ -192,6 +180,30 @@ class SettingsController: UITableViewController {
         self.present(alert, animated: true)
     }
     
+    private func resetSettings(_ indexPath: IndexPath) {
+        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .actionSheet)
+        
+        let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
+            alert.dismiss(animated: true, completion: nil)
+            (UIApplication.shared.delegate as? AppDelegate)?.resetAllSettings()
+        }
+        
+        alert.addAction(yesAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
+
+        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
+            presenter.sourceView = cell
+            presenter.sourceRect = cell.bounds
+        }
+
+        self.present(alert, animated: true)
+    }
+    
     // MARK: - table view cells
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,6 +213,8 @@ class SettingsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == titleSection { return UIView() }
+        
         let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
         let padding: CGFloat = isBigScreen ? 24.0 : 16.0
         let font = UIFont.systemFont(ofSize: isBigScreen ? 30.0 : 20.0, weight: .medium)
@@ -247,7 +261,6 @@ class SettingsController: UITableViewController {
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
-        tableFooterView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
@@ -274,12 +287,22 @@ class SettingsController: UITableViewController {
     }
     
     private func fillHeaderTitles(){
+        headersTitles.append("")
         headersTitles.append(ACLocalizedString("theme_header_title", nil))
         headersTitles.append(ACLocalizedString("other_header_title", nil))
     }
     
     private func calculateHeaderHeight(section: Int) -> CGFloat{
-        return (section == themeSection) ? 48.0 : 64.0
+        switch section {
+        case titleSection:
+            return 0.0
+        case themeSection:
+            return 48.0
+        case otherSection:
+            return 64.0
+        default:
+            return 0.0
+        }
     }
     
     private func setTheme(withButtonTag tag: Int){
