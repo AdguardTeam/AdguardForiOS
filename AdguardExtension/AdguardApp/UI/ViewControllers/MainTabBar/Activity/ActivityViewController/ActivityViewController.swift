@@ -223,6 +223,22 @@ class ActivityViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let record = requestsModel?.records[indexPath.row] else {
+            return nil
+        }
+        return nil
+    }
+    
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let record = requestsModel?.records[indexPath.row] else {
+            return nil
+        }
+        return nil
+    }
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         

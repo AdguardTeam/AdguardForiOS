@@ -455,16 +455,16 @@
 "disabled" = "Disabled";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "REMOVE FROM ALLOWLIST";
+"remove_from_whitelist" = "Remove from allowlist";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "REMOVE FROM BLOCKLIST";
+"remove_from_blacklist" = "Remove from blocklist";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "ADD TO ALLOWLIST";
+"add_to_whitelist" = "Add to allowlist";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "ADD TO BLOCKLIST";
+"add_to_blacklist" = "Add to blocklist";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Allow to block phishing sites and other dangerous domains. Available to Premium users";

@@ -24,6 +24,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dw2-f1-QbR" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="16" y="371" width="343" height="0.0"/>
@@ -59,7 +62,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htU-yE-FEi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htU-yE-FEi">
                                 <rect key="frame" x="81" y="403" width="213" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Read more about the product">
@@ -72,7 +75,7 @@
                                     <action selector="readMoreTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="9by-dr-X0A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyB-mD-gtt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyB-mD-gtt">
                                 <rect key="frame" x="167.66666666666666" y="447" width="40" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="EULA">
@@ -85,7 +88,7 @@
                                     <action selector="eulaTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="knv-0c-2Az"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbp-5W-y9v">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbp-5W-y9v">
                                 <rect key="frame" x="137" y="491" width="101" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Privacy Policy">
@@ -98,7 +101,7 @@
                                     <action selector="privacyPolicyTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="v16-JT-XYd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-hy-Fhk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-hy-Fhk">
                                 <rect key="frame" x="172.66666666666666" y="535" width="30" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal">
@@ -112,7 +115,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vwj-hy-Fhk" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="1Aq-Re-tKi"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="height" secondItem="517-dV-Anx" secondAttribute="height" multiplier="0.2" id="6Io-ly-JpZ"/>
@@ -135,7 +139,6 @@
                             <constraint firstItem="uyB-mD-gtt" firstAttribute="top" secondItem="htU-yE-FEi" secondAttribute="bottom" constant="12" id="wPe-GY-b0I"/>
                             <constraint firstItem="htU-yE-FEi" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="xqY-Fn-vzi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
                     </view>
                     <connections>
                         <outlet property="copyrightLabel" destination="oLS-Tk-G1c" id="FBI-6f-d0I"/>
@@ -166,5 +169,8 @@
     <resources>
         <image name="logo_adg_ios" width="163" height="133"/>
         <image name="logo_adg_ios_blck" width="163" height="133"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
