@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Name:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Rate app";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Send feedback";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Report incorrect blocking";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Report a bug on GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contact Support";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Export logs";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Cannot send a bug report. You may not have email configured on your device.";
 
