@@ -378,6 +378,8 @@
 		7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
 		7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
+		7E4E411D24D80D5200250D15 /* SupportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */; };
+		7E4E411E24D80D5200250D15 /* SupportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */; };
 		7E50493022F07C4E0095181C /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIView+Utils.swift */; };
 		7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50493222F07FFA0095181C /* FilterTagsButtons.swift */; };
 		7E50FC18238C09F000F11722 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
@@ -2735,6 +2737,7 @@
 		7E4D203422D71A5B003B0E75 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTableViewController.swift; sourceTree = "<group>"; };
 		7E50492F22F07C4E0095181C /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
 		7E51018E2355A6D900935FE9 /* NetworkSettingsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsTableController.swift; sourceTree = "<group>"; };
@@ -4867,6 +4870,7 @@
 			children = (
 				D0D6BA0121A6AF5B007360BC /* MainMenu.storyboard */,
 				4020A90022C3C863009C188F /* MainNavigationController.swift */,
+				7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */,
 				D028DB8821550615002E4E8E /* MainMenuController.swift */,
 				7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */,
 				D0EDE45322A9287600086C00 /* Settings */,
@@ -6314,6 +6318,7 @@
 				D0B545A52435D640002F0AEC /* DnsProviderContainerController.swift in Sources */,
 				D0B5458F2435D630002F0AEC /* LoginService.swift in Sources */,
 				D0B545EA2435D6A4002F0AEC /* ChartDateTypeController.swift in Sources */,
+				7E4E411E24D80D5200250D15 /* SupportTableViewController.swift in Sources */,
 				D0B5457E2435D62A002F0AEC /* SafariRule.swift in Sources */,
 				D0B545842435D62A002F0AEC /* DomainsConverter.swift in Sources */,
 				659886641CF74DE9003ECD1C /* FMDatabase.m in Sources */,
@@ -6846,6 +6851,7 @@
 				7EB5526D24224755000498CC /* ActivityViewController.swift in Sources */,
 				7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */,
 				7E8576762435F57F0055F63D /* DomainsParserService.swift in Sources */,
+				7E4E411D24D80D5200250D15 /* SupportTableViewController.swift in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D03398062431927200F6B9DE /* BackgroundFetchState.swift in Sources */,
