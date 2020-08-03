@@ -31,6 +31,7 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
     @IBOutlet weak var systemProtectionLabel: ThemableLabel!
     @IBOutlet weak var supportCell: UITableViewCell!
+    @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private var themeObserver: NotificationToken?
@@ -69,6 +70,10 @@ class MainMenuController: UITableViewController {
         }
         
         updateFilters()
+        
+        if Bundle.main.isPro {
+            LicenseCell.isHidden = true
+        }
     }
     
     // MARK: - table view cells
@@ -76,6 +81,9 @@ class MainMenuController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
+        if cell == supportCell, Bundle.main.isPro {
+            cell.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: .greatestFiniteMagnitude)
+        }
         return cell
     }
     

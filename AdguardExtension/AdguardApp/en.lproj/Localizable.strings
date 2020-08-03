@@ -379,8 +379,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Are you sure you want to delete this filter?";
 
-/* (AboutController) current app version string */
-"about_version" = "Version";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Version %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Logout";
+
+/* (AboutViewController) Login title */
+"common_license" = "License";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your iOS devices!";

@@ -713,7 +713,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mle-ng-eR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3776.811594202899" y="3567.8571428571427"/>
+            <point key="canvasLocation" x="3775" y="3569"/>
         </scene>
         <!--Get Pro Controller-->
         <scene sceneID="9v9-9v-ByE">
