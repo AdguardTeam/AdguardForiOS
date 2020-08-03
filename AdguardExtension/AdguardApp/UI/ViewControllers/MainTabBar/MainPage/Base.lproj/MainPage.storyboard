@@ -1065,7 +1065,7 @@
         <scene sceneID="ekN-2o-N88">
             <objects>
                 <navigationController id="hin-Y2-xP7" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="apps" id="z6O-uu-b8f"/>
+                    <tabBarItem key="tabBarItem" title="" image="adguard-small-icon" id="z6O-uu-b8f"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="taq-cg-Czj">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1093,8 +1093,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="adguard-small-icon" width="24" height="24"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
-        <image name="apps" width="24" height="24"/>
         <image name="arrow_down" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
         <image name="home" width="24" height="24"/>

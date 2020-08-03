@@ -331,6 +331,26 @@ extension CompanyDetailedController: UISearchBarDelegate {
         view.endEditing(true)
     }
     
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.showsCancelButton = true
+        }
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.showsCancelButton = false
+        }
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         requestsModel.searchString = searchText
     }
