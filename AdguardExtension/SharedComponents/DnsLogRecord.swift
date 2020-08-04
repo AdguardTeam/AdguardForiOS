@@ -59,7 +59,7 @@ enum DnsLogRecordStatus: Int {
 enum DnsLogRecordUserStatus: Int {
     typealias RawValue = Int
 
-    case none, movedToBlacklist, movedToWhitelist, removedFromBlacklist, removedFromWhitelist
+    case none, movedToBlacklist, movedToWhitelist, removedFromBlacklist, removedFromWhitelist, modified
 }
 
 @objc(DnsLogRecord)

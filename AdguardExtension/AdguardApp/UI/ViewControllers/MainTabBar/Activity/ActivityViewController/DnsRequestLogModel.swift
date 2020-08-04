@@ -62,6 +62,8 @@ extension DnsLogRecordUserStatus {
         switch self {
         case .none:
             return ""
+        case .modified:
+            return ""
         case .movedToWhitelist:
             return String.localizedString("dns_request_user_status_added_to_whitelist")
         case .movedToBlacklist:
@@ -76,6 +78,19 @@ extension DnsLogRecordUserStatus {
     
 enum DnsLogButtonType {
     case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
+    
+    var buttonTitle: String {
+        switch self {
+        case .removeDomainFromWhitelist:
+            return String.localizedString("remove_from_whitelist")
+        case .removeRuleFromUserFilter:
+            return String.localizedString("remove_from_blacklist")
+        case .addDomainToWhitelist:
+            return String.localizedString("add_to_whitelist")
+        case .addRuleToUserFlter:
+            return String.localizedString("add_to_blacklist")
+        }
+    }
 }
  
 extension DnsLogRecord 

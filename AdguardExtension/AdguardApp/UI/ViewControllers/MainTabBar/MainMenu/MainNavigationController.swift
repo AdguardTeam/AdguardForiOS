@@ -20,6 +20,8 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
     
+    var currentSwipeRecognizer: UIPanGestureRecognizer?
+    
     private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
    
     private let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
@@ -43,6 +45,7 @@ class MainNavigationController: UINavigationController {
         let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         if view.gestureRecognizers?.isEmpty ?? false{
             view.addGestureRecognizer(edgeSwipeGestureRecognizer)
+            currentSwipeRecognizer = edgeSwipeGestureRecognizer
         }
     }
     
@@ -68,6 +71,7 @@ class MainNavigationController: UINavigationController {
         
         let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         view.addGestureRecognizer(edgeSwipeGestureRecognizer)
+        currentSwipeRecognizer = edgeSwipeGestureRecognizer
     }
 
     @objc private func handleSwipe(_ gestureRecognizer: UIPanGestureRecognizer) {

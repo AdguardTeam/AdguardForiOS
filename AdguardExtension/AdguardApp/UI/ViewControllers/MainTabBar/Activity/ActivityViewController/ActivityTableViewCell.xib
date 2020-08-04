@@ -42,11 +42,6 @@
                             </constraint>
                             <constraint firstAttribute="width" secondItem="eLE-3d-E6L" secondAttribute="height" id="flB-QR-jqf"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <integer key="value" value="2"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-e1-qTV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                         <rect key="frame" x="16" y="8" width="0.0" height="18"/>

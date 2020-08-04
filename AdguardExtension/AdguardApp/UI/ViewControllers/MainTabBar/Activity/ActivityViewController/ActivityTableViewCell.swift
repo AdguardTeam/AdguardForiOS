@@ -54,11 +54,16 @@ class ActivityTableViewCell: UITableViewCell {
         timeLabel.text = nil
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        blockStateView.layer.cornerRadius = blockStateView.frame.height / 2.0
+    }
+    
     // MARK: - Private variables
     
     private let redDotColor = UIColor(hexString: "#DF3812")
     private let greenDotColor = UIColor(hexString: "#67B279")
-    private let yellowDotColor = UIColor(hexString: "#EB9300")
+    private let greyDotColor = UIColor(hexString: "#888888")
     
     // MARK: - Private methods
     
@@ -91,13 +96,15 @@ class ActivityTableViewCell: UITableViewCell {
         // Setup blockStateView color
         switch (record.logRecord.status, record.logRecord.userStatus) {
         case (.processed, .removedFromWhitelist):
-            blockStateView.backgroundColor = yellowDotColor
+            blockStateView.backgroundColor = .clear
         case (.processed, .removedFromBlacklist):
-            blockStateView.backgroundColor = yellowDotColor
+            blockStateView.backgroundColor = .clear
         case (.processed, .movedToWhitelist):
             blockStateView.backgroundColor = greenDotColor
         case (.processed, .movedToBlacklist):
             blockStateView.backgroundColor = redDotColor
+        case (.processed, .modified):
+            blockStateView.backgroundColor = greyDotColor
         default:
             blockStateView.backgroundColor = .clear
         }
@@ -122,6 +129,9 @@ class ActivityTableViewCell: UITableViewCell {
         case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
+        case .tracked:
+            logSelectedCellColor = UIColor(hexString: "#4Df5a623")
+            logBlockedCellColor = UIColor(hexString: "#33f5a623")
         default:
             return
         }
