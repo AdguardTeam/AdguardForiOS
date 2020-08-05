@@ -389,7 +389,7 @@ class ActivityViewController: UITableViewController {
     @objc func updateTableView(sender: UIRefreshControl) {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         statisticsModel.obtainStatistics(true) {
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
                 self?.refreshControl?.endRefreshing()
             }
         }
