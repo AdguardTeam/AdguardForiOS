@@ -19,13 +19,14 @@
 import Foundation
 
 enum BlockedRecordType {
-    case normal, whitelisted, blocked, tracked
+    case normal, whitelisted, blocked, trackedAndBlocked
 }
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
     @IBOutlet weak var blockStateView: UIView!
+    @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var timeLabel: ThemableLabel!
     
     var advancedMode: Bool = true
@@ -52,6 +53,7 @@ class ActivityTableViewCell: UITableViewCell {
         infoLabel.attributedText = nil
         companyLabel.text = nil
         timeLabel.text = nil
+        categoryImageView.isHidden = false
     }
     
     override func layoutSubviews() {
@@ -79,15 +81,15 @@ class ActivityTableViewCell: UITableViewCell {
         
         // Setup cell background color
         let type: BlockedRecordType
-        switch (record.logRecord.status, record.category.isTracked) {
-        case (.processed, true):
-            type = .tracked
+        switch (record.logRecord.status, record.category.categoryId) {
         case (.processed, _):
             type = .normal
         case (.encrypted, _):
             type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
+        case (.blacklistedByUserFilter, 6), (.blacklistedByOtherFilter, 101):
+            type = .trackedAndBlocked
         case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
             type = .blocked
         }
@@ -107,6 +109,20 @@ class ActivityTableViewCell: UITableViewCell {
             blockStateView.backgroundColor = greyDotColor
         default:
             blockStateView.backgroundColor = .clear
+        }
+        
+        
+        switch record.category.categoryId {
+        case 3:
+            categoryImageView.image = UIImage(named: "porn")
+        case 4:
+            categoryImageView.image = UIImage(named: "ads")
+        case 6, 101:
+            categoryImageView.image = UIImage(named: "trackers")
+        case 7:
+            categoryImageView.image = UIImage(named: "social")
+        default:
+            categoryImageView.isHidden = true
         }
     }
     
@@ -129,7 +145,7 @@ class ActivityTableViewCell: UITableViewCell {
         case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        case .tracked:
+        case .trackedAndBlocked:
             logSelectedCellColor = UIColor(hexString: "#4Df5a623")
             logBlockedCellColor = UIColor(hexString: "#33f5a623")
         default:

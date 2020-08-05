@@ -81,6 +81,17 @@
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         </variation>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmH-3c-DR5">
+                        <rect key="frame" x="387" y="15" width="16" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="h1p-gu-fhU">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                            <constraint firstAttribute="width" constant="16" id="vuM-Tb-5TP">
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="E1e-e1-qTV" firstAttribute="leading" secondItem="EiC-kI-vdi" secondAttribute="leading" constant="16" id="0oB-6L-MeO">
@@ -91,16 +102,18 @@
                     <constraint firstAttribute="trailing" secondItem="9Pv-x1-cMp" secondAttribute="trailing" constant="16" id="6JD-6x-oND">
                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                     </constraint>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" secondItem="YmH-3c-DR5" secondAttribute="trailing" constant="8" id="Bw4-xa-Xqs"/>
                     <constraint firstItem="eLE-3d-E6L" firstAttribute="centerY" secondItem="E1e-e1-qTV" secondAttribute="centerY" id="CTJ-Lw-mTv"/>
-                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eLE-3d-E6L" secondAttribute="trailing" constant="16" id="ane-0D-dkz">
-                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eLE-3d-E6L" secondAttribute="trailing" constant="32" id="ane-0D-dkz">
+                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                     </constraint>
                     <constraint firstItem="eLE-3d-E6L" firstAttribute="leading" secondItem="E1e-e1-qTV" secondAttribute="trailing" constant="8" id="eO4-G6-xuu">
                         <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                     </constraint>
-                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lke-4s-RFN" secondAttribute="trailing" constant="16" id="f7n-tV-w2p">
-                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                    <constraint firstItem="9Pv-x1-cMp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lke-4s-RFN" secondAttribute="trailing" constant="32" id="f7n-tV-w2p">
+                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                     </constraint>
+                    <constraint firstItem="YmH-3c-DR5" firstAttribute="centerY" secondItem="EiC-kI-vdi" secondAttribute="centerY" id="jA1-mg-Ps9"/>
                     <constraint firstItem="E1e-e1-qTV" firstAttribute="top" secondItem="EiC-kI-vdi" secondAttribute="top" constant="8" id="oYT-Rk-tKi">
                         <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                     </constraint>
@@ -112,6 +125,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="blockStateView" destination="eLE-3d-E6L" id="J4p-sm-NgQ"/>
+                <outlet property="categoryImageView" destination="YmH-3c-DR5" id="cKE-d5-6qw"/>
                 <outlet property="companyLabel" destination="E1e-e1-qTV" id="fh5-8x-Yym"/>
                 <outlet property="infoLabel" destination="Lke-4s-RFN" id="xnh-hM-RUb"/>
                 <outlet property="timeLabel" destination="9Pv-x1-cMp" id="m3B-4R-4Gk"/>
