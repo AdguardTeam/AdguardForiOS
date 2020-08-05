@@ -253,6 +253,7 @@ class ActivityViewController: UITableViewController {
             return UISwipeActionsConfiguration(actions: [])
         }
         swipedIndexPath = indexPath
+        swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
         for buttonType in availableTypes {
             if buttonType == .addDomainToWhitelist {
@@ -270,8 +271,8 @@ class ActivityViewController: UITableViewController {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
         }
-        print("kek")
         swipedIndexPath = indexPath
+        swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
         for buttonType in availableTypes {
             if buttonType == .addRuleToUserFlter {
@@ -459,10 +460,6 @@ class ActivityViewController: UITableViewController {
             buttonColor = UIColor(hexString: "#888888")
         }
         let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
-            if buttonType == .addDomainToWhitelist || buttonType == .addRuleToUserFlter {
-                
-            }
-            
             switch buttonType {
             case .addDomainToWhitelist, .addRuleToUserFlter:
                 self?.presentBlockRequestController(record: record, type: buttonType)
@@ -660,7 +657,6 @@ extension ActivityViewController: AddDomainToListDelegate {
             controller.modalPresentationStyle = .custom
             controller.transitioningDelegate = self
             
-            self.swipedRecord = record
             let domain = record.logRecord.domain
             
             if let vc = controller.viewControllers.first as? BlockRequestController {

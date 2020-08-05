@@ -81,17 +81,15 @@ class ActivityTableViewCell: UITableViewCell {
         
         // Setup cell background color
         let type: BlockedRecordType
-        switch (record.logRecord.status, record.category.categoryId) {
+        switch (record.logRecord.status, record.category.categoryId ?? 0) {
         case (.processed, _):
             type = .normal
         case (.encrypted, _):
             type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
-        case (.blacklistedByUserFilter, 6), (.blacklistedByOtherFilter, 101):
-            type = .trackedAndBlocked
-        case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
-            type = .blocked
+        case (.blacklistedByUserFilter, let catergoryId), (.blacklistedByOtherFilter, let catergoryId):
+            type = (catergoryId == 6 || catergoryId == 101) ? .trackedAndBlocked : .blocked
         }
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
