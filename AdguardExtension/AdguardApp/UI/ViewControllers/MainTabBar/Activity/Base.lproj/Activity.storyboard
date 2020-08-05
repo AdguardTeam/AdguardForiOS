@@ -420,7 +420,7 @@
                         <constraint firstItem="DCy-so-G1C" firstAttribute="centerY" secondItem="K6G-aX-FSJ" secondAttribute="centerY" id="vsc-jV-WFH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleAspectFit" ambiguous="YES" id="P5d-Vd-a5i">
+                <view contentMode="scaleAspectFit" id="P5d-Vd-a5i">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -500,11 +500,11 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="1" id="gSW-Cf-kx2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="1C6-M6-KOz">
                             <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RequestDetailsCellId" id="cft-t8-7Ym" customClass="RequestDetailsCell" customModule="Adguard" customModuleProvider="target">
@@ -1362,11 +1362,14 @@
                                         <action selector="infoAction:" destination="lL1-Yv-4AH" eventType="touchUpInside" id="LWJ-Vu-V7r"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e5-jiH">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e5-jiH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                     <rect key="frame" x="8" y="189.5" width="190.5" height="61.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                                    <color key="textColor" red="0.4039215686" green="0.4823529412" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                     </variation>
@@ -1600,6 +1603,7 @@
                         <outletCollection property="themableLabels" destination="hR9-Pm-Gq0" collectionClass="NSMutableArray" id="klB-KB-VJ6"/>
                         <outletCollection property="themableLabels" destination="yWy-kc-8Zg" collectionClass="NSMutableArray" id="UYr-5T-49t"/>
                         <outletCollection property="themableLabels" destination="gK7-Kw-vh5" collectionClass="NSMutableArray" id="4Ez-Fc-n0J"/>
+                        <outletCollection property="themableLabels" destination="w9H-e5-jiH" collectionClass="NSMutableArray" id="t3g-eb-o6f"/>
                         <segue destination="xvL-9q-qox" kind="show" identifier="showDnsContainer" id="Ecv-Kh-Q3v"/>
                         <segue destination="d7M-Oi-Bgo" kind="show" identifier="showMostActiveCompaniesId" id="1hq-S9-5fa"/>
                     </connections>
@@ -1800,7 +1804,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5rO-v2-BPZ"/>
+        <segue reference="Ecv-Kh-Q3v"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Triangle down" width="20" height="10"/>

@@ -434,7 +434,7 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         navigationController?.view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         
-        chartView.updateTheme(theme: theme)
+        chartView.updateTheme()
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         getProView.backgroundColor = theme.backgroundColor
