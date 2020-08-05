@@ -52,6 +52,8 @@ class SettingsController: UITableViewController {
     private let resetStatisticsRow = 4
     private let resetSettingsRow = 5
     
+    private var isBigScreen: Bool { traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular }
+    
     private var headersTitles: [String] = []
     
     private var notificationToken: NotificationToken?
@@ -215,7 +217,6 @@ class SettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == titleSection { return UIView() }
         
-        let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
         let padding: CGFloat = isBigScreen ? 24.0 : 16.0
         let font = UIFont.systemFont(ofSize: isBigScreen ? 30.0 : 20.0, weight: .medium)
         let labelHeight: CGFloat = isBigScreen ? 30.0 : 20.0
@@ -299,7 +300,7 @@ class SettingsController: UITableViewController {
         case themeSection:
             return 48.0
         case otherSection:
-            return 64.0
+            return isBigScreen ? 96.0 : 64.0
         default:
             return 0.0
         }

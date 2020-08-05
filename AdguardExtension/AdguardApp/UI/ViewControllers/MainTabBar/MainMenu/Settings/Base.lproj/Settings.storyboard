@@ -31,10 +31,15 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="sc6-Tw-xnL" secondAttribute="bottom" constant="24" id="H2J-Jv-tHc"/>
+                                                <constraint firstAttribute="bottom" secondItem="sc6-Tw-xnL" secondAttribute="bottom" constant="24" id="H2J-Jv-tHc">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                </constraint>
                                                 <constraint firstItem="sc6-Tw-xnL" firstAttribute="top" secondItem="TZw-ME-jSd" secondAttribute="top" id="avW-mL-qj4"/>
                                                 <constraint firstItem="sc6-Tw-xnL" firstAttribute="leading" secondItem="TZw-ME-jSd" secondAttribute="leading" constant="24" id="fZo-Qn-DCc"/>
                                                 <constraint firstAttribute="trailing" secondItem="sc6-Tw-xnL" secondAttribute="trailing" constant="24" id="pya-Fh-5f9"/>
@@ -668,13 +673,18 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Lig-ju-iTI" firstAttribute="leading" secondItem="sLy-sn-bNF" secondAttribute="leading" constant="24" id="1Xd-be-u82"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lig-ju-iTI" secondAttribute="trailing" constant="24" id="SJq-Ti-Qch"/>
                                                 <constraint firstItem="Lig-ju-iTI" firstAttribute="top" secondItem="sLy-sn-bNF" secondAttribute="top" id="p4x-2F-QbX"/>
-                                                <constraint firstAttribute="bottom" secondItem="Lig-ju-iTI" secondAttribute="bottom" constant="24" id="zst-AH-KAZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lig-ju-iTI" secondAttribute="bottom" constant="24" id="zst-AH-KAZ">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                </constraint>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1182,13 +1192,18 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="nPj-OI-Pcb" firstAttribute="top" secondItem="yw5-M1-FaO" secondAttribute="top" id="Kl0-Uh-25c"/>
                                         <constraint firstAttribute="trailing" secondItem="nPj-OI-Pcb" secondAttribute="trailing" constant="24" id="RJ4-ee-qU5"/>
                                         <constraint firstItem="nPj-OI-Pcb" firstAttribute="leading" secondItem="yw5-M1-FaO" secondAttribute="leading" constant="24" id="dFT-6Z-UQr"/>
-                                        <constraint firstAttribute="bottom" secondItem="nPj-OI-Pcb" secondAttribute="bottom" constant="24" id="q3E-nE-pkJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="nPj-OI-Pcb" secondAttribute="bottom" constant="24" id="q3E-nE-pkJ">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                        </constraint>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1248,7 +1263,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tunnel mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnd-Eh-hpk" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1259,6 +1274,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1275,7 +1293,9 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="bnd-Eh-hpk" firstAttribute="top" secondItem="5LD-TA-aXG" secondAttribute="top" id="ceO-cs-3eV"/>
-                                                <constraint firstItem="jmQ-ze-hFG" firstAttribute="top" secondItem="bnd-Eh-hpk" secondAttribute="bottom" constant="16" id="igQ-4q-WRx"/>
+                                                <constraint firstItem="jmQ-ze-hFG" firstAttribute="top" secondItem="bnd-Eh-hpk" secondAttribute="bottom" constant="12" id="igQ-4q-WRx">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                </constraint>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
