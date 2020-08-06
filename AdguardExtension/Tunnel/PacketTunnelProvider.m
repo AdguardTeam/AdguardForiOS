@@ -140,7 +140,7 @@
         // Init Logger
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
 
-        [AGLogger setLevel: AGLL_TRACE];
+        [AGLogger setLevel: AGLL_WARN];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
                 @autoreleasepool {
