@@ -328,10 +328,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
     }
     
     private func showAddFilterDialog() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterInfoController") as? UINavigationController else { return }
-        
-        (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
-        
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else { return }
+        controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
     

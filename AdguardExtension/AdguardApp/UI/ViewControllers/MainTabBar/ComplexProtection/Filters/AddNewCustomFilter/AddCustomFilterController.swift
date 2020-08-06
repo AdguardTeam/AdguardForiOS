@@ -59,16 +59,6 @@ class AddCustomFilterController: BottomAlertController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == detailsSegueId {
-            if let controller = segue.destination as? NewCustomFilterDetailsController {
-                controller.filterType = type
-                controller.filter = filter
-                controller.addDelegate = delegate
-            }
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         if touch.view != contentView {
@@ -114,9 +104,9 @@ class AddCustomFilterController: BottomAlertController {
 
                 if let parserResult = result {
                     self.filter = parserResult
-                    self.performSegue(withIdentifier: self.detailsSegueId, sender: self)
                     self.nextButton.isEnabled = true
                     self.nextButton.stopIndicator()
+                    self.presentNewCustomFilterDetailsController()
                     return
                 }
             }
@@ -124,7 +114,7 @@ class AddCustomFilterController: BottomAlertController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     // MARK: - private method
@@ -134,6 +124,19 @@ class AddCustomFilterController: BottomAlertController {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
         nextButton.indicatorStyle = theme.indicatorStyle
+    }
+    
+    private func presentNewCustomFilterDetailsController() {
+        let presenter = presentingViewController
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else { return }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController else { return }
+            controller.filterType = self.type
+            controller.filter = self.filter
+            controller.addDelegate = self.delegate
+            presenter?.present(controller, animated: true, completion: nil)
+        }
+        
     }
 }
 

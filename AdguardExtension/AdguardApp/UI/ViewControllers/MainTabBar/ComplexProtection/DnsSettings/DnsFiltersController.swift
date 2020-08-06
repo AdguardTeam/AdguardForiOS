@@ -285,10 +285,9 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     private func showAddFilterDialog() {
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "NewCustomFilterInfoController") as? UINavigationController else { return }
-        (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
-        (controller.viewControllers.first as? AddCustomFilterController)?.type = .dnsCustom
-        
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else { return }
+        controller.delegate = self
+        controller.type = .dnsCustom
         present(controller, animated: true, completion: nil)
     }
     
