@@ -73,6 +73,11 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
+    }
+    
     // MARK: - textView methods
     @IBAction func editingChange(_ sender: Any) {
         updateControls()

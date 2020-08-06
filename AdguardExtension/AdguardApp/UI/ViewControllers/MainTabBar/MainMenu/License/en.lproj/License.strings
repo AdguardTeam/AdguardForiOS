@@ -16,8 +16,8 @@
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
-/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOCK MORE  ADS & TRACKERS";
+/* Class = "UILabel"; text = "BLOCK MORE ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "BLOCK MORE\nADS & TRACKERS";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Password:";
@@ -25,14 +25,14 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
 
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Log in";
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Login";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Block phishing, scam and crypto-jacking";
 
-/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "LOG IN";
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "LOGIN";
 
 /* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
 "dcW-zZ-VlL.title" = "Login";
