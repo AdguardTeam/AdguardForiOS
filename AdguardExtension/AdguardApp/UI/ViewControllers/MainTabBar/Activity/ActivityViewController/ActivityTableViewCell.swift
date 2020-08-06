@@ -94,16 +94,16 @@ class ActivityTableViewCell: UITableViewCell {
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
         // Setup blockStateView color
-        switch (record.logRecord.status, record.logRecord.userStatus) {
-        case (.processed, .removedFromWhitelist):
+        switch record.logRecord.userStatus {
+        case .removedFromWhitelist:
             blockStateView.backgroundColor = .clear
-        case (.processed, .removedFromBlacklist):
+        case .removedFromBlacklist:
             blockStateView.backgroundColor = .clear
-        case (.processed, .movedToWhitelist):
+        case .movedToWhitelist:
             blockStateView.backgroundColor = greenDotColor
-        case (.processed, .movedToBlacklist):
+        case .movedToBlacklist:
             blockStateView.backgroundColor = redDotColor
-        case (.processed, .modified):
+        case .modified:
             blockStateView.backgroundColor = greyDotColor
         default:
             blockStateView.backgroundColor = .clear
