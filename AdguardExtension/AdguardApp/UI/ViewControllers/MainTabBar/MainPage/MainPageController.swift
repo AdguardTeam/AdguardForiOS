@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, UIViewControllerTransitioningDelegate, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
+class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -403,13 +403,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    
-    // MARK: - Presentation delegate method
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - OnboardingViewController delegate
     
     func onboardingDidFinish() {
@@ -447,8 +440,6 @@ class MainPageController: UIViewController, UIViewControllerTransitioningDelegat
      */
     private func showChartDateTypeController(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.delegate = self
         
         present(controller, animated: true, completion: nil)

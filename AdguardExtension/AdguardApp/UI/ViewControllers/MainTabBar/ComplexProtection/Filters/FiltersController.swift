@@ -21,7 +21,7 @@ import UIKit
 
 
 // MARK: - FiltersController
-class FiltersController: UITableViewController, UISearchBarDelegate, UIViewControllerTransitioningDelegate, AddNewFilterDelegate, TagButtonTappedDelegate {
+class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilterDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersAndGroupsViewModelProtocol?
     var group: Group? {
@@ -284,12 +284,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
         viewModel?.searchFilter(query: searchBar.text ?? "")
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - NewCustomFilter delegate
     func addCustomFilter(filter: AASCustomFilterParserResult) {
         viewModel?.addCustomFilter(filter: filter, completion: { (success) in
@@ -335,8 +329,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, UIViewContr
     
     private func showAddFilterDialog() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterInfoController") as? UINavigationController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         
         (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
         

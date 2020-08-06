@@ -80,10 +80,21 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         return UIApplication.shared.statusBarFrame.height
     }
     
+    private var bottomSpaceBeforePullUp: CGFloat = 0.0
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        modalPresentationStyle = .custom
+        transitioningDelegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeRoundCorners()
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.bottomViewPulled(_:)))
+        contentView.addGestureRecognizer(gestureRecognizer)
 
         let tabBar = tabBarController?.tabBar
         keyboardMover = KeyboardMover(bottomConstraint: keyboardHeightLayoutConstraint, view: view, tabBar: tabBar)
@@ -104,8 +115,13 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @objc func bottomViewPulled(_ sender: UIPanGestureRecognizer) {
+        processPanGesture(sender)
+    }
+    
+    // MARK: - Private methods
+    
     private func makeRoundCorners(){
-        
         let corners: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         let radius: CGFloat = 10.0
         
@@ -129,5 +145,46 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
         contentView.layer.shadowRadius = 3
         contentView.layer.shadowOpacity = 1
+    }
+    
+    private func processPanGesture(_ recognizer: UIPanGestureRecognizer) {
+        view.endEditing(true) // Hide keyboard when gesture recognized
+        
+        let translation = recognizer.translation(in: view)
+        let velocity = recognizer.velocity(in: view)
+        
+        if recognizer.state == .began {
+            bottomSpaceBeforePullUp = keyboardHeightLayoutConstraint.constant
+        }
+        
+        let resultSpace = bottomSpaceBeforePullUp - translation.y
+        if resultSpace > 0 { return }
+        
+        keyboardHeightLayoutConstraint.constant = resultSpace
+        view.layoutIfNeeded()
+        
+        let percent = 1.0 + resultSpace / contentView.frame.height
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5 * percent)
+        
+        if recognizer.state == .ended {
+            if velocity.y < 0 {
+                UIView.animate(withDuration: 0.2) { [weak self] in
+                    self?.keyboardHeightLayoutConstraint.constant = 0.0
+                    self?.view.layoutIfNeeded()
+                }
+            } else {
+                dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension BottomAlertController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BottomAlertPresentingTransition()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return BottomAlertDismissingTransition(bottomConstraint: keyboardHeightLayoutConstraint)
     }
 }

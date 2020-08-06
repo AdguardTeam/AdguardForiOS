@@ -394,10 +394,7 @@ class ActivityViewController: UITableViewController {
     private func showChartDateTypeController(){
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.delegate = self
-        
         present(controller, animated: true, completion: nil)
     }
     
@@ -588,14 +585,6 @@ extension ActivityViewController: DateTypeChangedProtocol {
     }
 }
 
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension ActivityViewController: UIViewControllerTransitioningDelegate{
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-}
-
 // MARK: - NumberOfRequestsChangedDelegate
 
 extension ActivityViewController: NumberOfRequestsChangedDelegate {
@@ -657,9 +646,6 @@ extension ActivityViewController: AddDomainToListDelegate {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
-            controller.modalPresentationStyle = .custom
-            controller.transitioningDelegate = self
-            
             self.swipedRecord = record
             let domain = record.logRecord.domain
             

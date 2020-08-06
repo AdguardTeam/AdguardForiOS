@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ListOfRulesController: UIViewController, UIViewControllerTransitioningDelegate {
+class ListOfRulesController: UIViewController {
 
     @IBOutlet weak var tableViewContainer: UIView!
     @IBOutlet weak var listOfRulesContainer: UIView!
@@ -104,12 +104,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
         }
         
         updateTheme()
-    }
-    
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
     }
     
     // MARK: - Actions
@@ -305,9 +299,6 @@ class ListOfRulesController: UIViewController, UIViewControllerTransitioningDele
     /* Shows when rule from safsri is added */
     private func showRuleAddedDialog() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleAddedController") as? RuleAddedController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
         present(controller, animated: true, completion: nil)
     }
     

@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class DnsProviderDetailsController : UITableViewController, UIViewControllerTransitioningDelegate,  ChooseProtocolControllerDelegate {
+class DnsProviderDetailsController : UITableViewController,  ChooseProtocolControllerDelegate {
     
     // MARK: - public fields
     
@@ -177,19 +177,10 @@ class DnsProviderDetailsController : UITableViewController, UIViewControllerTran
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - Actions
     
     func selectServer(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "ChooseProtocolController") as? ChooseProtocolController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
         controller.delegate = self
         
         controller.selectedProtocol = selectedProtocol

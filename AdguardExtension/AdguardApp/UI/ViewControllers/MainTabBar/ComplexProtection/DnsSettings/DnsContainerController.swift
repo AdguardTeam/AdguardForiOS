@@ -30,7 +30,7 @@ protocol AddDomainToListDelegate {
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType)
 }
 
-class DnsContainerController: UIViewController, UIViewControllerTransitioningDelegate, AddDomainToListDelegate {
+class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
@@ -80,12 +80,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         updateTheme()
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - AddDomainToListDelegate method
     
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
@@ -119,9 +113,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
     
     private func presentBlockRequestController(with domain: String, type: DnsLogButtonType){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
         if let vc = controller.viewControllers.first as? BlockRequestController {
             vc.fullDomain = domain
             vc.type = type

@@ -18,9 +18,7 @@
 
 import UIKit
 
-class SearchFilterController: UITableViewController, UISearchBarDelegate, TagButtonTappedDelegate, UIViewControllerTransitioningDelegate, FilterMasterControllerDelegate {
-    
-
+class SearchFilterController: UITableViewController, UISearchBarDelegate, TagButtonTappedDelegate, FilterMasterControllerDelegate {
     @IBOutlet var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -186,12 +184,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         viewModel?.currentGroup = nil
         tableView.reloadData()
         searchBar.becomeFirstResponder()
-    }
-    
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
     }
     
     // MARK: - Actions

@@ -19,7 +19,7 @@
 
 import UIKit
 
-class NetworkSettingsTableController: UITableViewController, UIViewControllerTransitioningDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate, NetworkSettingsChangedDelegate {
+class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, RuleDetailsControllerDelegate, NetworkSettingsChangedDelegate {
     
     /* Variables */
     private var themeObserver: Any? = nil
@@ -160,13 +160,6 @@ class NetworkSettingsTableController: UITableViewController, UIViewControllerTra
         }
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
-    
     // MARK: - Private methods -
     
     // MARK: - Cells setups
@@ -238,8 +231,6 @@ class NetworkSettingsTableController: UITableViewController, UIViewControllerTra
     private func addExceptionAction() {
         let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.delegate = self
         controller.type = .wifiExceptions
             
@@ -253,9 +244,6 @@ class NetworkSettingsTableController: UITableViewController, UIViewControllerTra
         
         let rule = RuleInfo(exception.rule, false, true, theme)
         controller.rule = rule
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
         controller.delegate = self
         controller.rule = rule
         controller.type = .wifiExceptions
