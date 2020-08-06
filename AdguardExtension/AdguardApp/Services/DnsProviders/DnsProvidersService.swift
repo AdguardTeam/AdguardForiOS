@@ -248,13 +248,17 @@ protocol DnsProvidersServiceProtocol {
     
     private func readServersJson() {
         
-        guard let path = Bundle.main.path(forResource: "providers", ofType: "json") else { return }
+        guard let providersPath = Bundle.main.path(forResource: "providers", ofType: "json"),
+                let featuresPath = Bundle.main.path(forResource: "providers_features", ofType: "json") else { return }
         do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-            guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? Dictionary<String, AnyObject> else { return }
+            let providersData = try Data(contentsOf: URL(fileURLWithPath: providersPath), options: .mappedIfSafe)
+            guard let providersJsonRoot = try JSONSerialization.jsonObject(with: providersData, options: .mutableLeaves) as? Dictionary<String, AnyObject> else { return }
             
             // parse features
-            guard let featuresJson = json["features"] as? Array<Dictionary<String, String>> else { return }
+            let featuresData = try Data(contentsOf: URL(fileURLWithPath: featuresPath), options: .mappedIfSafe)
+            guard let featuresJsonRoot = try JSONSerialization.jsonObject(with: featuresData, options: .mutableLeaves) as? Dictionary<String, Any> else { return }
+            
+            guard let featuresJson = featuresJsonRoot["features"] as? Array<Dictionary<String, String>> else { return }
             
             var featuresMap = Dictionary<String, DnsProviderFeature>()
             for featureJson in featuresJson {
@@ -269,35 +273,38 @@ protocol DnsProvidersServiceProtocol {
             }
             
             // parse providers
-            guard let providersJson = json["dnsProviders"] as? Array<Dictionary<String, Any>> else { return }
+            guard let providersJson = providersJsonRoot["providers"] as? Array<Dictionary<String, Any>> else { return }
             
             var dnsProviders = [DnsProviderInfo]()
             for providerJson in providersJson {
                 guard   let name = providerJson["name"] as? String,
                         let logo = providerJson["logo"] as? String,
-                        let summary = providerJson["summary"] as? String,
-                        let website = providerJson["website"] as? String
+                        let summary = providerJson["description"] as? String,
+                        let website = providerJson["homepage"] as? String
                     else { return }
                 
-                // parse protocols
-                guard let protocolsJson = providerJson["protocols"] as? [String] else { return }
-                let protocols = self.protocolsFromArray(protocolsJson)
-                
-                // parse features
-                guard let featuresJson = providerJson["features"] as? [String] else { return }
-                let features = self.featuresFromArray(featuresJson, featuresMap: featuresMap)
-             
                 guard let serversJson = providerJson["servers"] as? [[String: Any]] else { return }
                 let servers = self.serversFromArray(serversJson)
                 
+                // parse features
+                var features = Set<String>()
+                for server in serversJson {
+                    guard let serverFeatures = server["features"] as? [String] else { return }
+                    for feature in serverFeatures {
+                        features.insert(feature)
+                    }
+                 }
+                
                 let provider = DnsProviderInfo(name: name)
                 let logoDark = logo + "_white"
+                
+                let protocols = servers.map { $0.dnsProtocol }
                 
                 provider.logo = logo
                 provider.logoDark = logoDark
                 provider.summary = summary
                 provider.protocols = protocols
-                provider.features = features
+                provider.features = features.compactMap { featuresMap[$0] }
                 provider.servers = servers
                 provider.website = website
                 
@@ -317,16 +324,6 @@ protocol DnsProvidersServiceProtocol {
         }
     }
     
-    private func protocolsFromArray(_ arr: [String]) -> [DnsProtocol] {
-        var protocols = [DnsProtocol] ()
-        
-        for protocolName in arr {
-            protocols.append(DnsProtocol.protocolByString[protocolName]!)
-        }
-        
-        return protocols
-    }
-    
     func featuresFromArray(_ arr: [String], featuresMap: [String: DnsProviderFeature]) -> [DnsProviderFeature] {
         var features = [DnsProviderFeature]()
         
@@ -342,7 +339,7 @@ protocol DnsProvidersServiceProtocol {
         var servers = [DnsServerInfo]()
         
         for serverJson in arr {
-            guard   let serverProtocolId = serverJson["protocol"] as? String,
+            guard   let serverProtocolId = serverJson["type"] as? String,
                     let serverId = serverJson["id"] as? String,
                     let name = serverJson["name"] as? String,
                     let upstreams = serverJson["upstreams"] as? [String]
