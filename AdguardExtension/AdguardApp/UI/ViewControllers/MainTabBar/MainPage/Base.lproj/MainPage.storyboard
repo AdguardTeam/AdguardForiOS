@@ -785,15 +785,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWB-sb-M6q">
                                 <rect key="frame" x="0.0" y="544" width="414" height="352"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pX-mg-2fq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="24" width="57.5" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZRv-ws-b0F">
                                         <rect key="frame" x="0.0" y="108" width="414" height="1"/>
                                         <color key="backgroundColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -832,6 +823,9 @@
                                         <state key="normal" title="Today">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="charDataTypeAction:" destination="2RT-Mc-Fn0" eventType="touchUpInside" id="6Q9-27-zzX"/>
                                         </connections>
@@ -846,6 +840,9 @@
                                         <state key="normal" title="24 hours">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="charDataTypeAction:" destination="2RT-Mc-Fn0" eventType="touchUpInside" id="YSQ-De-1sf"/>
                                         </connections>
@@ -860,6 +857,9 @@
                                         <state key="normal" title="7 days">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="charDataTypeAction:" destination="2RT-Mc-Fn0" eventType="touchUpInside" id="OVf-yT-auU"/>
                                         </connections>
@@ -874,6 +874,9 @@
                                         <state key="normal" title="All time">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="charDataTypeAction:" destination="2RT-Mc-Fn0" eventType="touchUpInside" id="MeE-2Y-AKF"/>
                                         </connections>
@@ -888,14 +891,44 @@
                                         <state key="normal" title="30 days">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="charDataTypeAction:" destination="2RT-Mc-Fn0" eventType="touchUpInside" id="4Y2-A2-3Ld"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nel-Z3-aJ4">
+                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
+                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="DWn-Pb-uIU">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="2" id="Sa4-Rk-M8v">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="3"/>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Period" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pX-mg-2fq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="42" width="366" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="63U-tt-p8p" firstAttribute="top" secondItem="gu3-as-BZN" secondAttribute="bottom" id="3Ae-2B-ynN"/>
+                                    <constraint firstItem="5pX-mg-2fq" firstAttribute="top" secondItem="Nel-Z3-aJ4" secondAttribute="bottom" constant="32" id="5uy-tg-gzR">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="gDb-ep-jQg" secondAttribute="trailing" id="7HH-GM-VMZ"/>
                                     <constraint firstAttribute="trailing" secondItem="VRw-EP-ZlF" secondAttribute="trailing" id="7gs-qB-bsD"/>
                                     <constraint firstItem="VRw-EP-ZlF" firstAttribute="top" secondItem="TXG-kf-jTm" secondAttribute="bottom" id="9eO-o5-IXZ"/>
@@ -905,11 +938,12 @@
                                     <constraint firstItem="Oez-VU-4fi" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="K1e-CC-lF1"/>
                                     <constraint firstAttribute="trailing" secondItem="ZRv-ws-b0F" secondAttribute="trailing" id="KGZ-qH-ohz"/>
                                     <constraint firstItem="Roe-x7-9e8" firstAttribute="top" secondItem="ZRv-ws-b0F" secondAttribute="bottom" id="RBu-Uv-VvJ"/>
-                                    <constraint firstItem="5pX-mg-2fq" firstAttribute="top" secondItem="pWB-sb-M6q" secondAttribute="top" constant="24" id="Uwe-Q6-PTl"/>
+                                    <constraint firstItem="Nel-Z3-aJ4" firstAttribute="top" secondItem="pWB-sb-M6q" secondAttribute="top" constant="8" id="U5r-KN-VNO"/>
                                     <constraint firstItem="5pX-mg-2fq" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" constant="24" id="VKn-Aa-Ipm"/>
                                     <constraint firstItem="VRw-EP-ZlF" firstAttribute="top" secondItem="Roe-x7-9e8" secondAttribute="bottom" constant="1" id="XtP-Lw-zSd"/>
                                     <constraint firstItem="Roe-x7-9e8" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="Znx-Lz-ZdF"/>
                                     <constraint firstAttribute="bottom" secondItem="gDb-ep-jQg" secondAttribute="bottom" id="Zqn-Em-56v"/>
+                                    <constraint firstItem="Nel-Z3-aJ4" firstAttribute="centerX" secondItem="pWB-sb-M6q" secondAttribute="centerX" id="bh5-yb-jTF"/>
                                     <constraint firstAttribute="trailing" secondItem="gu3-as-BZN" secondAttribute="trailing" id="d2i-jH-fAY"/>
                                     <constraint firstItem="gu3-as-BZN" firstAttribute="top" secondItem="iEN-CP-sJr" secondAttribute="bottom" id="hJc-Y3-M2l"/>
                                     <constraint firstItem="gDb-ep-jQg" firstAttribute="top" secondItem="63U-tt-p8p" secondAttribute="bottom" id="hPV-a7-ddu"/>
@@ -917,7 +951,10 @@
                                     <constraint firstItem="gDb-ep-jQg" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="i9O-21-KSD"/>
                                     <constraint firstAttribute="trailing" secondItem="Oez-VU-4fi" secondAttribute="trailing" id="nPw-45-cO4"/>
                                     <constraint firstAttribute="trailing" secondItem="Roe-x7-9e8" secondAttribute="trailing" id="oXb-h8-I6m"/>
-                                    <constraint firstItem="Oez-VU-4fi" firstAttribute="top" secondItem="5pX-mg-2fq" secondAttribute="bottom" id="qiU-s4-Btp"/>
+                                    <constraint firstAttribute="trailing" secondItem="5pX-mg-2fq" secondAttribute="trailing" constant="24" id="oiq-en-5uQ"/>
+                                    <constraint firstItem="Oez-VU-4fi" firstAttribute="top" secondItem="5pX-mg-2fq" secondAttribute="bottom" constant="32" id="qiU-s4-Btp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                    </constraint>
                                     <constraint firstItem="gu3-as-BZN" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="v0I-UL-Zn9"/>
                                     <constraint firstItem="ZRv-ws-b0F" firstAttribute="top" secondItem="Oez-VU-4fi" secondAttribute="bottom" id="x8B-H7-bjJ"/>
                                     <constraint firstItem="ZRv-ws-b0F" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="yZB-IR-64q"/>
