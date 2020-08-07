@@ -134,9 +134,9 @@ class BottomShadowView: UIView {
     private func setupShadow(){
         shadowColor = theme.invertedBackgroundColor
         self.layer.shadowColor = shadowColor.withAlphaComponent(shadowAlpha).cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         self.layer.shadowOpacity = 1.0
-        self.layer.shadowRadius = 10.0
+        self.layer.shadowRadius = 4.0
         self.layer.masksToBounds = false
     }
     

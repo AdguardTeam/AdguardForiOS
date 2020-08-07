@@ -18,6 +18,10 @@
 
 import UIKit
 
+class ActivityTitleCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: ThemableLabel!
+}
+
 class DnsRequestDetailsController: UITableViewController {
 
     // MARK: - public fields
@@ -35,6 +39,7 @@ class DnsRequestDetailsController: UITableViewController {
     private let webPage = "https://whotracks.me"
     
     private let requestDetailsCellId = "RequestDetailsCellId"
+    private let activityTitleCellId = "ActivityTitleCell"
     
     // MARK: - Notifications
     private var notificationToken: NotificationToken?
@@ -45,6 +50,7 @@ class DnsRequestDetailsController: UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     // MARK: - Sections & Rows
+    private let titleSection = 0
     
     private var generalSection: Int?
     private var domainCell: IndexPath?
@@ -97,15 +103,25 @@ class DnsRequestDetailsController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionModels.count
+        return sectionModels.count + 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == titleSection { return 1 }
         guard let sectionModel = sectionModels[section] else { return 0 }
         return sectionModel.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == titleSection {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: activityTitleCellId) as? ActivityTitleCell else {
+                return UITableViewCell()
+            }
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.titleLabel)
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: requestDetailsCellId) as? RequestDetailsCell else { return UITableViewCell() }
         
         let model = getModel(for: indexPath)
@@ -125,7 +141,7 @@ class DnsRequestDetailsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let record = logRecord else { return nil }
+        guard let record = logRecord, section != titleSection else { return UIView() }
         
         var text = ""
         var needsButton = false
@@ -146,11 +162,21 @@ class DnsRequestDetailsController: UITableViewController {
         return view
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+        
+        if indexPath.section == titleSection { return }
         
         if indexPath == websiteCell {
             guard let cell = tableView.cellForRow(at: indexPath) as? RequestDetailsCell else { return }
@@ -164,7 +190,7 @@ class DnsRequestDetailsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 52.0
+        return section == titleSection ? 0.01 : 52.0
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -310,7 +336,7 @@ class DnsRequestDetailsController: UITableViewController {
         var sectionsArray: [Int] = []
         var sectionNumber: Int {
             let lastSection = sectionsArray.last ?? 0
-            return sectionsArray.isEmpty ? 0 : (lastSection + 1)
+            return sectionsArray.isEmpty ? 1 : (lastSection + 1)
         }
         
         /**
@@ -460,7 +486,7 @@ class DnsRequestDetailsController: UITableViewController {
         // Website model
         let website = record.category.url ?? ""
         let websiteTitle = String.localizedString("website_title")
-        let color: UIColor = UIColor(hexString: "#4CA524")
+        let color: UIColor = UIColor(hexString: "#67b279")
         let websiteModelIsNil = website.isEmpty
         let websiteModel = websiteModelIsNil ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoColor: color,  theme: theme)
         if !websiteModelIsNil {

@@ -24,7 +24,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     // MARK: - public fields
     
     var provider: DnsProviderInfo?
-    var selectedProtocol: DnsProtocol?
+    private var selectedProtocol: DnsProtocol?
     
     //MARK: - IB Outlets
     
@@ -34,6 +34,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - constants
     
@@ -54,12 +55,13 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
         updateProtocol()
         updateTheme()
+        setupBackButton()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,7 +123,8 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
             let websiteCell = tableView.dequeueReusableCell(withIdentifier: "websiteCell") as! DnsProviderWebsiteCell
             cell = websiteCell
             
-            websiteCell.website.text = provider?.website
+            let host = URL(string: provider?.website ?? "")?.host ?? ""
+            websiteCell.website.text = domainsParserService.domainsParser?.parse(host: host)?.domain ?? provider?.website
             theme.setupLabels(websiteCell.themableLabels)
             
         case (featuresSection, _):
@@ -179,7 +182,16 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     
     // MARK: - Actions
     
-    func selectServer(){
+    @IBAction func selectTapped(_ sender: Any) {
+        if let currentProtocol = selectedProtocol {
+            if let currentServer: DnsServerInfo = provider?.serverByProtocol(dnsProtocol: currentProtocol){
+                activateServer(currentServer)
+            }
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func selectServer(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "ChooseProtocolController") as? ChooseProtocolController else { return }
         controller.delegate = self
         
@@ -212,16 +224,19 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     private func updateProtocol() {
         if let prot = provider?.getActiveProtocol(resources) {
             selectedProtocol = prot
         }
+    }
+    
+    private func activateServer(_ server: DnsServerInfo) {
+        dnsProvidersService.activeDnsServer = server
+        vpnManager.updateSettings(completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 

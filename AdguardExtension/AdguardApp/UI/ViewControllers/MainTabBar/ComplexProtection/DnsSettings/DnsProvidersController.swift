@@ -102,7 +102,7 @@ class DnsProvidersController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "dnsDetailsSegue" {
-            let controller = segue.destination as! DnsProviderContainerController
+            let controller = segue.destination as! DnsProviderDetailsController
             controller.provider = providerToShow
         }
     }

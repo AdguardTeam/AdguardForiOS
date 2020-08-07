@@ -25,16 +25,18 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     private var themeObserver: Any? = nil
     
     /* Cell reuse ids */
+    private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
     private let filterDataCellReuseId = "FilterDataCell"
     private let networkSettingsDescriptionCellReuseId = "NetworkSettingsDescriptionCell"
     private let addExceptionCellReuseId = "AddExceptionCell"
     private let wifiExceptionsCellReuseId = "WifiExceptionsCell"
     
     /* Sections */
-    private let filterDataSection = 0
-    private let descriptionSection = 1
-    private let addExceptionSection = 2
-    private let exceptionsSection = 3
+    private let titleSection = 0
+    private let filterDataSection = 1
+    private let descriptionSection = 2
+    private let addExceptionSection = 3
+    private let exceptionsSection = 4
     
     /* Rows */
     private let mobileDataRow = 0
@@ -89,11 +91,13 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
+        case titleSection:
+            return 1
         case filterDataSection:
             return 2
         case descriptionSection:
@@ -109,6 +113,8 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        case titleSection:
+            return setupTitleCell(row: indexPath.row)
         case filterDataSection:
             return setupFilterDataCell(row: indexPath.row)
         case descriptionSection:
@@ -163,6 +169,15 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     // MARK: - Private methods -
     
     // MARK: - Cells setups
+    
+    private func setupTitleCell(row: Int) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: networkSettingsTitleCellId) as? NetworkSettingsTitleCell {
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.titleLabel)
+            return cell
+        }
+        return UITableViewCell()
+    }
     
     private func setupFilterDataCell(row: Int) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: filterDataCellReuseId) as? FilterDataCell{

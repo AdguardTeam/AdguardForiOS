@@ -127,7 +127,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             
             switch (type) {
             case .addRuleToUserFlter:
-                color = UIColor(hexString: "#eb9300")
+                color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let rule = self.logRecord?.logRecord.domain {
                         self.presentBlockRequestController(with: rule, type: type, delegate: self)
@@ -135,7 +135,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 }
                 
             case .removeDomainFromWhitelist:
-                color = UIColor(hexString: "#eb9300")
+                color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
