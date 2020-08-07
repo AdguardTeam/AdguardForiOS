@@ -29,6 +29,32 @@ extension UIViewController {
         }
     }
     
+    func presentBlockRequestController(with domain: String, type: DnsLogButtonType, delegate: AddDomainToListDelegate?){
+        DispatchQueue.main.async { [weak self] in
+            let activityStoryBoard = UIStoryboard(name: "Activity", bundle: nil)
+            guard let controller = activityStoryBoard.instantiateViewController(withIdentifier: "BlockRequestControllerId") as? BlockRequestController else { return }
+            
+            controller.fullDomain = domain
+            controller.type = type
+            controller.delegate = delegate
+            
+            self?.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func presentEditBlockRequestController(with domain: String, originalDomain: String, type: DnsLogButtonType, delegate: AddDomainToListDelegate?) {
+        DispatchQueue.main.async { [weak self] in
+            let activityStoryBoard = UIStoryboard(name: "Activity", bundle: nil)
+            guard let controller = activityStoryBoard.instantiateViewController(withIdentifier: "EditBlockRequestController") as? EditBlockRequestController else { return }
+            
+            controller.type = type
+            controller.domain = domain
+            controller.originalDomain = originalDomain
+            controller.delegate = delegate
+            self?.present(controller, animated: true, completion: nil)
+        }
+    }
+    
     func setupBackButton(with action: Selector? = nil) {
         let imgBackArrow = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
         

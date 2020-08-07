@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, UIViewControllerTransitioningDelegate, RuleDetailsControllerDelegate, UISearchBarDelegate {
+class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -237,12 +237,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         })
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - RuleDetailsControllerDelegate methods
     
     func removeRule(rule: RuleInfo) {
@@ -357,8 +351,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private func addRule(){
         
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.delegate = self
         controller.type = model?.type ?? .safariUserfilter
         
@@ -368,9 +360,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private func showRuleDetails(indexPath: IndexPath) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
         guard let rule = model?.rules[indexPath.row] else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
         controller.delegate = self
         controller.rule = rule
         controller.type = model?.type ?? .safariUserfilter

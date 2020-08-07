@@ -30,7 +30,7 @@ protocol AddDomainToListDelegate {
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType)
 }
 
-class DnsContainerController: UIViewController, UIViewControllerTransitioningDelegate, AddDomainToListDelegate {
+class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
@@ -80,12 +80,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         updateTheme()
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - AddDomainToListDelegate method
     
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
@@ -117,20 +111,6 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         updateButtons()
     }
     
-    private func presentBlockRequestController(with domain: String, type: DnsLogButtonType){
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
-        if let vc = controller.viewControllers.first as? BlockRequestController {
-            vc.fullDomain = domain
-            vc.type = type
-            vc.delegate = self
-        }
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
     private func updateButtons() {
         shadowView.isHidden = !configuration.advancedMode
         
@@ -147,15 +127,15 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
             
             switch (type) {
             case .addRuleToUserFlter:
-                color = UIColor(hexString: "#eb9300")
+                color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let rule = self.logRecord?.logRecord.domain {
-                        self.presentBlockRequestController(with: rule, type: type)
+                        self.presentBlockRequestController(with: rule, type: type, delegate: self)
                     }
                 }
                 
             case .removeDomainFromWhitelist:
-                color = UIColor(hexString: "#eb9300")
+                color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
@@ -184,7 +164,7 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {
-                        self.presentBlockRequestController(with: domain, type: type)
+                        self.presentBlockRequestController(with: domain, type: type, delegate: self)
                     }
                 }
             }

@@ -109,21 +109,16 @@ class NewCustomFilterDetailsController : BottomAlertController {
         if controllerModeType == .addingFilter {
             filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
             addDelegate?.addCustomFilter(filter: filter!)
-            navigationController?.dismiss(animated: true, completion: nil)
         } else if controllerModeType == .editingFilter {
             if let newName = (name.text == nil || name.text == "") ? model?.name : name.text {
                 editDelegate?.renameFilter(newName: newName)
             }
-            dismiss(animated: true)
         }
+        dismiss(animated: true)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        if controllerModeType == .addingFilter {
-            navigationController?.dismiss(animated: true, completion: nil)
-        } else {
-            dismiss(animated: true)
-        }
+        dismiss(animated: true)
     }
     
     @IBAction func redirectToSafariAction(_ sender: UIButton) {

@@ -18,6 +18,10 @@
 
 import Foundation
 
+class NetworkSettingsTitleCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: ThemableLabel!
+}
+
 class FilterDataCell: UITableViewCell {
     
     @IBOutlet weak var filterDataImage: UIImageView!

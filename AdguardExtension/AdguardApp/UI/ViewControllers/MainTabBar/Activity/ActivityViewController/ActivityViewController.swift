@@ -395,10 +395,7 @@ class ActivityViewController: UITableViewController {
     private func showChartDateTypeController(){
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.delegate = self
-        
         present(controller, animated: true, completion: nil)
     }
     
@@ -460,15 +457,15 @@ class ActivityViewController: UITableViewController {
             buttonColor = UIColor(hexString: "#888888")
         }
         let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
+            guard let self = self else { return }
             switch buttonType {
             case .addDomainToWhitelist, .addRuleToUserFlter:
-                self?.presentBlockRequestController(record: record, type: buttonType)
+                self.presentBlockRequestController(with: record.logRecord.domain, type: buttonType, delegate: self)
             case .removeRuleFromUserFilter:
-                self?.removeRuleFromUserFilter(record: record.logRecord)
+                self.removeRuleFromUserFilter(record: record.logRecord)
             case .removeDomainFromWhitelist:
-                self?.removeDomainFromWhitelist(record: record.logRecord)
+                self.removeDomainFromWhitelist(record: record.logRecord)
             }
-            
             success(true)
         }
         buttonAction.backgroundColor = buttonColor
@@ -585,14 +582,6 @@ extension ActivityViewController: DateTypeChangedProtocol {
     }
 }
 
-// MARK: - UIViewControllerTransitioningDelegate
-
-extension ActivityViewController: UIViewControllerTransitioningDelegate{
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-}
-
 // MARK: - NumberOfRequestsChangedDelegate
 
 extension ActivityViewController: NumberOfRequestsChangedDelegate {
@@ -648,24 +637,5 @@ extension ActivityViewController: AddDomainToListDelegate {
         dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
         swipedRecord.logRecord.userStatus = status
         tableView.reloadRows(at: [swipedIndexPath], with: .fade)
-    }
-    
-    private func presentBlockRequestController(record: DnsLogRecordExtended, type: DnsLogButtonType){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
-            controller.modalPresentationStyle = .custom
-            controller.transitioningDelegate = self
-            
-            let domain = record.logRecord.domain
-            
-            if let vc = controller.viewControllers.first as? BlockRequestController {
-                vc.fullDomain = domain
-                vc.type = type
-                vc.delegate = self
-            }
-            
-            self.present(controller, animated: true, completion: nil)
-        }
     }
 }

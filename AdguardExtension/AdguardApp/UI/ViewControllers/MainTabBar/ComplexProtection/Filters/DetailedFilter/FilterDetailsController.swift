@@ -27,7 +27,7 @@ protocol FilterDetailsControllerTableViewDelegate {
     func tableViewWasLoaded(with contentSizeHeight: CGFloat)
 }
 
-class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate, UIViewControllerTransitioningDelegate {
+class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate {
     
     var filter: FilterDetailedInterface!
     
@@ -67,12 +67,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
-    // MARK: - UIViewControllerTransitioningDelegate
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - Private methods
     
     private func updateTheme () {
@@ -95,8 +89,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
                     
                     controller.editDelegate = self
                     controller.model = model
-                    controller.transitioningDelegate = self
-                    controller.modalPresentationStyle = .custom
                     controller.controllerModeType = .editingFilter
                     self.present(controller, animated: true, completion: nil)
                 }

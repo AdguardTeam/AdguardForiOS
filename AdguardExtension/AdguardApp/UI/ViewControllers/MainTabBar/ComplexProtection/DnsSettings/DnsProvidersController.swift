@@ -31,7 +31,7 @@ class DescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
-class DnsProvidersController: UITableViewController, UIViewControllerTransitioningDelegate {
+class DnsProvidersController: UITableViewController {
     
     // MARK: - services
     
@@ -102,7 +102,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "dnsDetailsSegue" {
-            let controller = segue.destination as! DnsProviderContainerController
+            let controller = segue.destination as! DnsProviderDetailsController
             controller.provider = providerToShow
         }
     }
@@ -218,9 +218,6 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
        
         case addProviderSection:
             guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
-            controller.modalPresentationStyle = .custom
-            controller.transitioningDelegate = self
-            
             present(controller, animated: true, completion: nil)
             
         default:
@@ -256,12 +253,6 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
         tableView.reloadData()
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: private methods
     
     private func updateTheme() {
@@ -275,10 +266,7 @@ class DnsProvidersController: UITableViewController, UIViewControllerTransitioni
     
     private func editProvider(_ provider: DnsProviderInfo) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditDnsServerController") as? NewDnsServerController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
         controller.provider = provider
-        
         present(controller, animated: true, completion: nil)
     }
 }

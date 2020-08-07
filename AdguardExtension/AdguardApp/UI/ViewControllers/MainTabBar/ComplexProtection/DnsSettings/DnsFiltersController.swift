@@ -53,7 +53,7 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UITableViewController, UIViewControllerTransitioningDelegate, UISearchBarDelegate, DnsFiltersChangedProtocol, AddNewFilterDelegate {
+class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFiltersChangedProtocol, AddNewFilterDelegate {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet var searchBar: UISearchBar!
@@ -243,12 +243,6 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
         model.searchFilter(by: nil)
     }
     
-    // MARK: - Presentation delegate methods
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return CustomAnimatedTransitioning()
-    }
-    
     // MARK: - DnsFiltersChangedProtocol method
     
     func filtersChanged() {
@@ -291,13 +285,9 @@ class DnsFiltersController: UITableViewController, UIViewControllerTransitioning
     
     private func showAddFilterDialog() {
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "NewCustomFilterInfoController") as? UINavigationController else { return }
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = self
-        
-        (controller.viewControllers.first as? AddCustomFilterController)?.delegate = self
-        (controller.viewControllers.first as? AddCustomFilterController)?.type = .dnsCustom
-        
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else { return }
+        controller.delegate = self
+        controller.type = .dnsCustom
         present(controller, animated: true, completion: nil)
     }
     
