@@ -93,12 +93,12 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
             logRecord.logRecord.userRule = rule
             dnsFiltersService.addWhitelistRule(rule)
-            set(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .none : .movedToWhitelist, rule)
+            set(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
         } else if type == .addRuleToUserFlter {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
             logRecord.logRecord.userRule = rule
             dnsFiltersService.addBlacklistRule(rule)
-            set(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .none : .movedToBlacklist, rule)
+            set(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
         }
     }
     
@@ -142,12 +142,11 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
         let buttons = logRecord!.logRecord.getButtons().map{ [weak self] (type) -> BottomShadowButton in
             guard let self = self else { return BottomShadowButton() }
             let button = BottomShadowButton()
-            var title: String!
+            let title = type.buttonTitle.uppercased()
             var color: UIColor!
             
             switch (type) {
             case .addRuleToUserFlter:
-                title = String.localizedString("add_to_blacklist").uppercased()
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let rule = self.logRecord?.logRecord.domain {
@@ -156,33 +155,32 @@ class DnsContainerController: UIViewController, UIViewControllerTransitioningDel
                 }
                 
             case .removeDomainFromWhitelist:
-                title = String.localizedString("remove_from_whitelist").uppercased()
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
                         
-                        let rules = record.userStatus != .none ? [userDomain] : record.blockRules
+                        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+                        let rules = isOriginalRecord ? record.blockRules : [userDomain]
 
                         self.dnsFiltersService.removeWhitelistRules(rules ?? [])
-                        self.set(record.userStatus == .movedToWhitelist ? .none : .removedFromWhitelist)
+                        self.set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
                     }
                 }
                 
             case .removeRuleFromUserFilter:
-                title = String.localizedString("remove_from_blacklist").uppercased()
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
-                        let rules = record.userStatus != .none ? [record.userRule ?? ""] : record.blockRules
+                        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+                        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""] 
 
                         self.dnsFiltersService.removeUserRules(rules ?? [])
-                        self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .none : .removedFromBlacklist)
+                        self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
                     }
                 }
                 
             case .addDomainToWhitelist:
-                title = String.localizedString("add_to_whitelist").uppercased()
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {

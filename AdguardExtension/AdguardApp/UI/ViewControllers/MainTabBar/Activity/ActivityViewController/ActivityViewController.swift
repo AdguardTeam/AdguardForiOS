@@ -64,6 +64,9 @@ class ActivityViewController: UITableViewController {
     private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
@@ -93,6 +96,9 @@ class ActivityViewController: UITableViewController {
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
     
+    private var swipedRecord: DnsLogRecordExtended?
+    private var swipedIndexPath: IndexPath?
+    
     // MARK: - ViewController life cycle
     
     required init?(coder: NSCoder) {
@@ -111,6 +117,24 @@ class ActivityViewController: UITableViewController {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let nav = navigationController as? MainNavigationController {
+            nav.currentSwipeRecognizer?.delegate = self
+        }
+        
+        tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let nav = navigationController as? MainNavigationController {
+            nav.currentSwipeRecognizer?.delegate = nil
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -221,6 +245,44 @@ class ActivityViewController: UITableViewController {
             performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
+            return UISwipeActionsConfiguration(actions: [])
+        }
+        swipedIndexPath = indexPath
+        swipedRecord = record
+        let availableTypes = record.logRecord.getButtons()
+        for buttonType in availableTypes {
+            if buttonType == .addDomainToWhitelist {
+                return createSwipeAction(forButtonType: buttonType, record: record)
+            }
+            if buttonType == .removeDomainFromWhitelist {
+                return createSwipeAction(forButtonType: buttonType, record: record)
+            }
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+    
+    @available(iOS 11.0, *)
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
+            return UISwipeActionsConfiguration(actions: [])
+        }
+        swipedIndexPath = indexPath
+        swipedRecord = record
+        let availableTypes = record.logRecord.getButtons()
+        for buttonType in availableTypes {
+            if buttonType == .addRuleToUserFlter {
+                return createSwipeAction(forButtonType: buttonType, record: record)
+            }
+            if buttonType == .removeRuleFromUserFilter {
+                return createSwipeAction(forButtonType: buttonType, record: record)
+            }
+        }
+        return UISwipeActionsConfiguration(actions: [])
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -386,6 +448,50 @@ class ActivityViewController: UITableViewController {
         }
     }
     
+    @available(iOS 11.0, *)
+    private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecordExtended) -> UISwipeActionsConfiguration {
+        var buttonColor: UIColor
+        switch buttonType {
+        case .addDomainToWhitelist:
+            buttonColor = UIColor(hexString: "#67b279")
+        case .addRuleToUserFlter:
+            buttonColor = UIColor(hexString: "#c23814")
+        default:
+            buttonColor = UIColor(hexString: "#888888")
+        }
+        let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
+            switch buttonType {
+            case .addDomainToWhitelist, .addRuleToUserFlter:
+                self?.presentBlockRequestController(record: record, type: buttonType)
+            case .removeRuleFromUserFilter:
+                self?.removeRuleFromUserFilter(record: record.logRecord)
+            case .removeDomainFromWhitelist:
+                self?.removeDomainFromWhitelist(record: record.logRecord)
+            }
+            
+            success(true)
+        }
+        buttonAction.backgroundColor = buttonColor
+        return UISwipeActionsConfiguration(actions: [buttonAction])
+    }
+    
+    private func removeRuleFromUserFilter(record: DnsLogRecord) {
+        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
+        
+        dnsFiltersService.removeUserRules(rules ?? [])
+        set(record.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
+    }
+    
+    private func removeDomainFromWhitelist(record: DnsLogRecord) {
+        let userDomain = domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
+        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+        let rules = isOriginalRecord ? record.blockRules : [userDomain]
+
+        dnsFiltersService.removeWhitelistRules(rules ?? [])
+        set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
+    }
+    
     @objc func updateTableView(sender: UIRefreshControl) {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         statisticsModel.obtainStatistics(true) {
@@ -401,6 +507,26 @@ class ActivityViewController: UITableViewController {
 extension ActivityViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.showsCancelButton = true
+        }
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.showsCancelButton = false
+        }
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        UIView.animate(withDuration: 0.5) {
+            searchBar.resignFirstResponder()
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -490,6 +616,56 @@ extension ActivityViewController: NumberOfRequestsChangedDelegate {
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedNumber))
             self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+        }
+    }
+}
+
+extension ActivityViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let isNavControllerGesture = gestureRecognizer is UIPanGestureRecognizer
+        return isNavControllerGesture
+    }
+}
+
+extension ActivityViewController: AddDomainToListDelegate {
+    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
+        guard let swipedRecord = swipedRecord else { return }
+        if type == .addDomainToWhitelist {
+            let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
+            swipedRecord.logRecord.userRule = rule
+            dnsFiltersService.addWhitelistRule(rule)
+            set(swipedRecord.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
+        } else if type == .addRuleToUserFlter {
+            let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
+            swipedRecord.logRecord.userRule = rule
+            dnsFiltersService.addBlacklistRule(rule)
+            set(swipedRecord.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
+        }
+    }
+    
+    private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
+        guard let swipedRecord = swipedRecord, let swipedIndexPath = swipedIndexPath else { return }
+        dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
+        swipedRecord.logRecord.userStatus = status
+        tableView.reloadRows(at: [swipedIndexPath], with: .fade)
+    }
+    
+    private func presentBlockRequestController(record: DnsLogRecordExtended, type: DnsLogButtonType){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
+            controller.modalPresentationStyle = .custom
+            controller.transitioningDelegate = self
+            
+            let domain = record.logRecord.domain
+            
+            if let vc = controller.viewControllers.first as? BlockRequestController {
+                vc.fullDomain = domain
+                vc.type = type
+                vc.delegate = self
+            }
+            
+            self.present(controller, animated: true, completion: nil)
         }
     }
 }

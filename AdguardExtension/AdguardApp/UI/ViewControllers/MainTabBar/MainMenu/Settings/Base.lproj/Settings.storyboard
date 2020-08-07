@@ -1285,7 +1285,7 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="jmQ-ze-hFG" secondAttribute="bottom" constant="24" id="6Qf-as-Ob2">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="bnd-Eh-hpk" secondAttribute="trailing" constant="24" id="9U5-7J-Tqn"/>
                                                 <constraint firstItem="bnd-Eh-hpk" firstAttribute="leading" secondItem="5LD-TA-aXG" secondAttribute="leading" constant="24" id="MKL-QS-fJW"/>

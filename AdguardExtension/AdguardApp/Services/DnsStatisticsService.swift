@@ -227,6 +227,23 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                         }
                     }
                 }
+                // Adding zero records when they were not found in db
+                if type != .alltime {
+                    let oldestDate = intervalTime.end
+                    let newestDate = intervalTime.begin
+                    
+                    if let firstRecordDate = records.first?.date, firstRecordDate != oldestDate {
+                        var zeroRecords = self?.createZeroRecords(from: oldestDate, to: firstRecordDate) ?? []
+                        zeroRecords.insert(DnsStatisticsRecord(date: oldestDate, requests: 0, encrypted: 0, elapsedSumm: 0), at: 0)
+                        records.insert(contentsOf: zeroRecords, at: 0)
+                    }
+                    
+                    if let lastRecordDate = records.last?.date, lastRecordDate != newestDate {
+                        var zeroRecords = self?.createZeroRecords(from: lastRecordDate, to: newestDate) ?? []
+                        zeroRecords.append(DnsStatisticsRecord(date: newestDate, requests: 0, encrypted: 0, elapsedSumm: 0))
+                        records.append(contentsOf: zeroRecords)
+                    }
+                }
             }
         }
         
@@ -280,6 +297,19 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
     }
     
     // MARK: - private methods
+    
+    /* Creates records with zero data for every hour in within specified borders */
+    private func createZeroRecords(from: Date, to: Date) -> [DnsStatisticsRecord] {
+        let hour: TimeInterval = 60.0 * 60.0
+        var records: [DnsStatisticsRecord] = []
+        var iterationDate: Date = from.addingTimeInterval(hour)
+        while iterationDate < to {
+            let zeroRecord = DnsStatisticsRecord(date: iterationDate, requests: 0, encrypted: 0, elapsedSumm: 0)
+            records.append(zeroRecord)
+            iterationDate = iterationDate.addingTimeInterval(hour)
+        }
+        return records
+    }
     
     private func createStatisticsTable(_ db:FMDatabase) {
         let result = db.executeUpdate("CREATE TABLE IF NOT EXISTS DnsStatisticsTable (timeStamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP PRIMARY KEY, requests INTEGER NOT NULL DEFAULT 0, encrypted INTEGER NOT NULL DEFAULT 0, elapsedSumm INTEGER NOT NULL DEFAULT 0)", withParameterDictionary: [:])

@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Name:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Rate app";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Send feedback";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Report incorrect blocking";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Report a bug on GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contact Support";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Export logs";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Cannot send a bug report. You may not have email configured on your device.";
 
@@ -397,8 +379,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Are you sure you want to delete this filter?";
 
-/* (AboutController) current app version string */
-"about_version" = "Version";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Version %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Logout";
+
+/* (AboutViewController) Login title */
+"common_license" = "License";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your iOS devices!";
@@ -464,16 +455,16 @@
 "disabled" = "Disabled";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "REMOVE FROM ALLOWLIST";
+"remove_from_whitelist" = "Remove from allowlist";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "REMOVE FROM BLOCKLIST";
+"remove_from_blacklist" = "Remove from blocklist";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "ADD TO ALLOWLIST";
+"add_to_whitelist" = "Add to allowlist";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "ADD TO BLOCKLIST";
+"add_to_blacklist" = "Add to blocklist";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Allow to block phishing sites and other dangerous domains. Available to Premium users";

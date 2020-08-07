@@ -30,7 +30,8 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
     @IBOutlet weak var systemProtectionLabel: ThemableLabel!
-    @IBOutlet weak var bugreportCell: UITableViewCell!
+    @IBOutlet weak var supportCell: UITableViewCell!
+    @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private var themeObserver: NotificationToken?
@@ -69,57 +70,10 @@ class MainMenuController: UITableViewController {
         }
         
         updateFilters()
-    }
-    
-    func proStatusEnableFailure() {}
-    
-    // MARK: - Actions
-    @IBAction func contactSupportAction(_ sender: Any) {
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
-        
-        let rateAppAction = UIAlertAction(title: String.localizedString("rate_app_title"), style: .default) {(action) in
-            UIApplication.shared.openAppStoreToRateApp()
+        if Bundle.main.isPro {
+            LicenseCell.isHidden = true
         }
-        
-        let justSendFeedback = UIAlertAction(title: String.localizedString("just_send_feedback"), style: .default) {[weak self] (action) in
-            let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
-            if let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController") as? UINavigationController {
-                if let feedbackController = controller.viewControllers.first as? FeedbackController {
-                    feedbackController.simpleFeedback = false
-                    self?.present(controller, animated: true)
-                }
-            }
-        }
-         
-        let incorrectAction = UIAlertAction(title: ACLocalizedString("incorrect_blocking_report", nil), style: .default) { (action) in
-            guard let reportUrl = self.support.composeWebReportUrl(forSite: nil) else { return }
-            UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
-        }
-    
-        let contactSupportAction = UIAlertAction(title: ACLocalizedString("action_contact_support", nil), style: .default) { (action) in
-            self.support.sendMailBugReport(withParentController: self)
-        }
-        
-        let exportLogsAction = UIAlertAction(title: ACLocalizedString("action_export_logs", nil), style: .default) { (action) in
-            self.support.exportLogs(withParentController: self, sourceView: self.bugreportCell, sourceRect: self.bugreportCell.bounds);
-        }
-        
-        actionSheet.addAction(cancelAction)
-        actionSheet.addAction(rateAppAction)
-        actionSheet.addAction(justSendFeedback)
-        actionSheet.addAction(incorrectAction)
-        if MFMailComposeViewController.canSendMail() {
-            actionSheet.addAction(contactSupportAction)
-        }
-        actionSheet.addAction(exportLogsAction)
-        
-        let popController = actionSheet.popoverPresentationController
-        popController?.sourceView = self.bugreportCell
-        popController?.sourceRect = self.bugreportCell.bounds
-        self.present(actionSheet, animated: true, completion: nil)
     }
     
     // MARK: - table view cells
@@ -127,6 +81,9 @@ class MainMenuController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
+        if cell == supportCell, Bundle.main.isPro {
+            cell.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: .greatestFiniteMagnitude)
+        }
         return cell
     }
     

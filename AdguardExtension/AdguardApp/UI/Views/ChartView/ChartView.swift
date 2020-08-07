@@ -31,14 +31,7 @@ class ChartView: UIView {
     
     var isEnabled: Bool = true {
         didSet{
-            let requestsColor = UIColor(hexString: "67b279")
-            let encryptedColor = UIColor(hexString: "#677bb2")
-            
-            requestsLineColor = isEnabled ? requestsColor : offColor
-            requestsShadowColor = isEnabled ? requestsColor : offColor
-            encryptedLineColor = isEnabled ? encryptedColor : offColor
-            encryptedShadowColor = isEnabled ? encryptedColor : offColor
-            drawChart()
+            enabledStateChanged()
         }
     }
     
@@ -100,6 +93,8 @@ class ChartView: UIView {
     private var maxXelement: CGFloat = 0.0
     private var maxYelement: CGFloat = 0.0
     
+    private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         drawVerticalGridLines()
@@ -112,7 +107,7 @@ class ChartView: UIView {
         setupLabels()
     }
     
-    func updateTheme(theme: ThemeServiceProtocol){
+    func updateTheme(){
         backgroundColor = theme.backgroundColor
         
         leftDateLabel.backgroundColor = theme.backgroundColor
@@ -124,11 +119,24 @@ class ChartView: UIView {
         rightDateLabel.textColor = theme.chartViewTextColor
         bottomBorderLabel.textColor = theme.chartViewTextColor
         topBorderLabel.textColor = theme.chartViewTextColor
+        
+        enabledStateChanged()
     }
     
     // MARK: - Private methods -
     
     // MARK: - Methods for lines
+    
+    private func enabledStateChanged() {
+        let requestsColor = theme.grayTextColor
+        let encryptedColor = UIColor(hexString: "67b279")
+        
+        requestsLineColor = isEnabled ? requestsColor : offColor
+        requestsShadowColor = isEnabled ? requestsColor : offColor
+        encryptedLineColor = isEnabled ? encryptedColor : offColor
+        encryptedShadowColor = isEnabled ? encryptedColor : offColor
+        drawChart()
+    }
     
     private func drawVerticalGridLines(){
         let sectorWidth = (frame.width - CGFloat(integerLiteral: numberOfVerticalSectors) * gridLineWidth) / CGFloat(integerLiteral: numberOfVerticalSectors)
@@ -271,8 +279,13 @@ class ChartView: UIView {
             }
         })
         
-        layer.addSublayer(requestLineLayer)
-        layer.addSublayer(encryptedLineLayer)
+        if activeChart == .requests {
+            layer.addSublayer(encryptedLineLayer)
+            layer.addSublayer(requestLineLayer)
+        } else {
+            layer.addSublayer(requestLineLayer)
+            layer.addSublayer(encryptedLineLayer)
+        }
     }
     
     private func convertPoints(points: [Point]) -> [CGPoint] {

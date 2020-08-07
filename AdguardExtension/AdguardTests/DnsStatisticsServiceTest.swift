@@ -103,6 +103,15 @@ class DnsStatisticsServiceTest: XCTestCase {
         XCTAssertEqual(recordsCount, 2)
         
         let recordsByType = dnsStatisticsService.getRecords(by: type)
-        XCTAssertEqual(recordsByType, [suitableRecord])
+        XCTAssert(recordsByType.contains(suitableRecord))
+        
+        let requests = recordsByType.map{$0.requests}.reduce(0, {$0 + $1})
+        XCTAssertEqual(requests, suitableRecord.requests)
+        
+        let encrypted = recordsByType.map{$0.encrypted}.reduce(0, {$0 + $1})
+        XCTAssertEqual(encrypted, suitableRecord.encrypted)
+        
+        let elapsedSumm = recordsByType.map{$0.elapsedSumm}.reduce(0, {$0 + $1})
+        XCTAssertEqual(elapsedSumm, suitableRecord.elapsedSumm)
     }
 }

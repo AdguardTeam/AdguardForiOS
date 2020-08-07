@@ -19,13 +19,14 @@
 import Foundation
 
 enum BlockedRecordType {
-    case normal, whitelisted, blocked, tracked
+    case normal, whitelisted, blocked, trackedAndBlocked
 }
 
 class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
     @IBOutlet weak var blockStateView: UIView!
+    @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var timeLabel: ThemableLabel!
     
     var advancedMode: Bool = true
@@ -52,13 +53,19 @@ class ActivityTableViewCell: UITableViewCell {
         infoLabel.attributedText = nil
         companyLabel.text = nil
         timeLabel.text = nil
+        categoryImageView.isHidden = false
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        blockStateView.layer.cornerRadius = blockStateView.frame.height / 2.0
     }
     
     // MARK: - Private variables
     
     private let redDotColor = UIColor(hexString: "#DF3812")
     private let greenDotColor = UIColor(hexString: "#67B279")
-    private let yellowDotColor = UIColor(hexString: "#EB9300")
+    private let greyDotColor = UIColor(hexString: "#888888")
     
     // MARK: - Private methods
     
@@ -74,32 +81,46 @@ class ActivityTableViewCell: UITableViewCell {
         
         // Setup cell background color
         let type: BlockedRecordType
-        switch (record.logRecord.status, record.category.isTracked) {
-        case (.processed, true):
-            type = .tracked
+        switch (record.logRecord.status, record.category.categoryId ?? 0) {
         case (.processed, _):
             type = .normal
         case (.encrypted, _):
             type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
-        case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
-            type = .blocked
+        case (.blacklistedByUserFilter, let catergoryId), (.blacklistedByOtherFilter, let catergoryId):
+            type = (catergoryId == 6 || catergoryId == 101) ? .trackedAndBlocked : .blocked
         }
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
         // Setup blockStateView color
-        switch (record.logRecord.status, record.logRecord.userStatus) {
-        case (.processed, .removedFromWhitelist):
-            blockStateView.backgroundColor = yellowDotColor
-        case (.processed, .removedFromBlacklist):
-            blockStateView.backgroundColor = yellowDotColor
-        case (.processed, .movedToWhitelist):
+        switch record.logRecord.userStatus {
+        case .removedFromWhitelist:
+            blockStateView.backgroundColor = .clear
+        case .removedFromBlacklist:
+            blockStateView.backgroundColor = .clear
+        case .movedToWhitelist:
             blockStateView.backgroundColor = greenDotColor
-        case (.processed, .movedToBlacklist):
+        case .movedToBlacklist:
             blockStateView.backgroundColor = redDotColor
+        case .modified:
+            blockStateView.backgroundColor = greyDotColor
         default:
             blockStateView.backgroundColor = .clear
+        }
+        
+        
+        switch record.category.categoryId {
+        case 3:
+            categoryImageView.image = UIImage(named: "porn")
+        case 4:
+            categoryImageView.image = UIImage(named: "ads")
+        case 6, 101:
+            categoryImageView.image = UIImage(named: "trackers")
+        case 7:
+            categoryImageView.image = UIImage(named: "social")
+        default:
+            categoryImageView.isHidden = true
         }
     }
     
@@ -122,6 +143,9 @@ class ActivityTableViewCell: UITableViewCell {
         case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
+        case .trackedAndBlocked:
+            logSelectedCellColor = UIColor(hexString: "#4Df5a623")
+            logBlockedCellColor = UIColor(hexString: "#33f5a623")
         default:
             return
         }
