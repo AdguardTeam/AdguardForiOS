@@ -29,7 +29,7 @@
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
-"H3Q-H6-YV0.text" = "Enable this option if you experience issues with the internet connection while AdGuard is running";
+"H3Q-H6-YV0.text" = "Enable this option if you experience issues with the Internet connection while AdGuard is running";
 
 /* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
 "ILy-oL-9M6.text" = "Use simplified filters";
