@@ -763,6 +763,8 @@
 		D04C2B7A240FA7DC009330A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D04C2B7B2410E126009330A8 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D04C2B7C2410E137009330A8 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
+		D04D743B24DBE18300CD74E9 /* providers_features.json in Resources */ = {isa = PBXBuildFile; fileRef = D04D743A24DBE18300CD74E9 /* providers_features.json */; };
+		D04D743C24DBE34800CD74E9 /* providers_features.json in Resources */ = {isa = PBXBuildFile; fileRef = D04D743A24DBE18300CD74E9 /* providers_features.json */; };
 		D051B05C233101C6008A9A0F /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
 		D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
 		D0569D3921F1C0A800985DA9 /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
@@ -3107,6 +3109,7 @@
 		D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportRulesController.swift; sourceTree = "<group>"; };
 		D04B8CB32031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D04D743A24DBE18300CD74E9 /* providers_features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = providers_features.json; sourceTree = "<group>"; };
 		D0569E2F21F1C0A800985DA9 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569E3021F1C0A800985DA9 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Tunnel.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Tunnel.plist; sourceTree = "<absolute>"; };
 		D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsSettingsController.swift; sourceTree = "<group>"; };
@@ -4804,6 +4807,7 @@
 		D0CB3465212C31CC003B650E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D04D743A24DBE18300CD74E9 /* providers_features.json */,
 				7E252218240821BE00743648 /* safari_protection_step1.json */,
 				7E252219240821BF00743648 /* safari_protection_step2.json */,
 				7E252217240821BE00743648 /* safari_tracking_protection_step3.json */,
@@ -5754,6 +5758,7 @@
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
 				D0D7E589243B1C6A001801A5 /* (null) in Resources */,
 				D0D7E58F243B1CC3001801A5 /* safari_protection_step2.json in Resources */,
+				D04D743C24DBE34800CD74E9 /* providers_features.json in Resources */,
 				659886AA1CF74DE9003ECD1C /* JSConverter.js in Resources */,
 				D0D7E54B24371C8C001801A5 /* Settings.storyboard in Resources */,
 				D0D7E54724371C8C001801A5 /* Filters.storyboard in Resources */,
@@ -5789,6 +5794,7 @@
 				D00FDC0622201514000BD1BF /* Tutorial.storyboard in Resources */,
 				65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */,
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
+				D04D743B24DBE18300CD74E9 /* providers_features.json in Resources */,
 				7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */,
 				7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,

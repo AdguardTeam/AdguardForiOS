@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Free DNS service by Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Anti-malware DNS server by Cloudflare that blocks malicious domains";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare's blocking server that restricts access to malicious and 'adult' domains";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS service by SafeDNS";
 
