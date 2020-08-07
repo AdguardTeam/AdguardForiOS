@@ -10,14 +10,17 @@
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
 "FLH-Qd-Atk.text" = "All Premium features are available";
 
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Login";
+
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "Set your own rules";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
-/* Class = "UILabel"; text = "BLOCK MORE ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOCK MORE\nADS & TRACKERS";
+/* Class = "UILabel"; text = "BLOCK MORE\\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "BLOCK MORE\\nADS & TRACKERS";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Password:";
@@ -33,9 +36,6 @@
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "LOGIN";
-
-/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
-"dcW-zZ-VlL.title" = "Login";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Value your privacy";
