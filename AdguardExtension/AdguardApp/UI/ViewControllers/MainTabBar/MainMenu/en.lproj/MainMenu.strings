@@ -40,17 +40,17 @@
 /* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
 "cWE-CY-2xl.text" = "Export logs";
 
-/* Class = "UILabel"; text = "You can review the app in app store"; ObjectID = "csx-k8-Qg7"; */
-"csx-k8-Qg7.text" = "You can review the app in app store";
+/* Class = "UILabel"; text = "You can review the app in App Store"; ObjectID = "csx-k8-Qg7"; */
+"csx-k8-Qg7.text" = "You can review the app in App Store";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "How to block ads with AdGuard";
 
-/* Class = "UILabel"; text = "Help us to improve app"; ObjectID = "ow5-MW-Ued"; */
-"ow5-MW-Ued.text" = "Help us to improve app";
+/* Class = "UILabel"; text = "Help us to improve our app"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Help us to improve our app";
 
-/* Class = "UILabel"; text = "Report an incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
-"q9f-Zw-7sc.text" = "Report an incorrect blocking";
+/* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
+"q9f-Zw-7sc.text" = "Report incorrect blocking";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "You can export logs and send them to us in a convenient way for you";
