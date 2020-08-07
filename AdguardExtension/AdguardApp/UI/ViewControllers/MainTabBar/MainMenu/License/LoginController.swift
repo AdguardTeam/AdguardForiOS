@@ -23,6 +23,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
     
+    var licenseKey: String?
+    
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
@@ -87,6 +89,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
+        
+        if licenseKey != nil && !licenseKey!.isEmpty {
+            purchaseService.login(withLicenseKey: licenseKey!)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
