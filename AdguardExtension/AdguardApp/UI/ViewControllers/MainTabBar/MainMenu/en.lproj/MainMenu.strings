@@ -40,8 +40,8 @@
 /* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
 "cWE-CY-2xl.text" = "Export logs";
 
-/* Class = "UILabel"; text = "You can review the app in App Store"; ObjectID = "csx-k8-Qg7"; */
-"csx-k8-Qg7.text" = "You can review the app in App Store";
+/* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
+"csx-k8-Qg7.text" = "You can review the app in the App Store";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "How to block ads with AdGuard";
