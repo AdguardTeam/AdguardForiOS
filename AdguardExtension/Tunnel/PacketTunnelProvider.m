@@ -629,7 +629,7 @@
     
     if (systemDnsServers.count == 0) {
         DDLogError(@"(PacketTunnelProvider) - startDnsProxy error. There is no system dns servers");
-        systemDnsServers = @[@"9.9.9.9"];
+        systemDnsServers = @[@"9.9.9.9", @"149.112.112.112", @"2620:fe::fe", @"2620:fe::9"];
     }
     
     NSArray *upstreams;
