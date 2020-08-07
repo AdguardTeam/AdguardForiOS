@@ -99,9 +99,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }
         
-        vpnManager.checkVpnInstalled { (_) in
-            if !vpnManager.vpnInstalled {
-                resources.systemProtectionEnabled = false
+        vpnManager.checkVpnInstalled { (error) in
+            if error != nil {
+                DDLogError("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
+            }
+            else {
+                if !vpnManager.vpnInstalled {
+                    resources.systemProtectionEnabled = false
+                }
             }
         }
     }
