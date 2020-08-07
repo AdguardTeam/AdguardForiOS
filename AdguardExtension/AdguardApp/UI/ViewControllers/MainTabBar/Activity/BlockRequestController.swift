@@ -116,14 +116,6 @@ class BlockRequestController: BottomAlertController {
         cancelButton.makeTitleTextUppercased()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? EditBlockRequestController {
-            vc.type = type
-            vc.domain = subDomains.first(where: { $0.isSelected })?.domain ?? ""
-            vc.delegate = delegate
-        }
-    }
-    
     // MARK: - Actions
     
     @IBAction func addTapped(_ sender: UIButton) {
@@ -133,11 +125,16 @@ class BlockRequestController: BottomAlertController {
     }
     
     @IBAction func editTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: editDomainSegueId, sender: self)
+        let presenter = self.presentingViewController
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else { return }
+            let selectedDomain = self.subDomains.first(where: { $0.isSelected })?.domain ?? ""
+            presenter?.presentEditBlockRequestController(with: selectedDomain, originalDomain: self.fullDomain, type: self.type, delegate: self.delegate)
+        }
     }
     
     @IBAction func cancelTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 
     @IBAction func checkBoxTapped(_ sender: UIButton) {
@@ -152,7 +149,7 @@ class BlockRequestController: BottomAlertController {
     
     private func updateTheme(){
         contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupLabels(themableLabels)
+        theme.setupPopupLabels(themableLabels)
         tableView.reloadData()
     }
 }

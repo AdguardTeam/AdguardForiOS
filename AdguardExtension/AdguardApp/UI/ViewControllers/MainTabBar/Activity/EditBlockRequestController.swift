@@ -31,6 +31,7 @@ class EditBlockRequestController: BottomAlertController {
     
     var type: DnsLogButtonType = .addDomainToWhitelist
     var domain: String = ""
+    var originalDomain: String = ""
     var delegate: AddDomainToListDelegate?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -62,11 +63,15 @@ class EditBlockRequestController: BottomAlertController {
         let domain = domainNameTextField.text ?? ""
         let needsCorrecting = type == .addDomainToWhitelist
         delegate?.add(domain: domain, needsCorrecting: needsCorrecting, by: type)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: false)
+        let presenter = presentingViewController
+        dismiss(animated: true) {[weak self] in
+            guard let self = self else { return }
+            presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
+        }
     }
     
     // MARK: - private methods
@@ -75,6 +80,5 @@ class EditBlockRequestController: BottomAlertController {
         theme.setupTextField(domainNameTextField)
         theme.setupPopupLabels(themableLabels)
     }
-
 }
 

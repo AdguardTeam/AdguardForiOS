@@ -111,17 +111,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
         updateButtons()
     }
     
-    private func presentBlockRequestController(with domain: String, type: DnsLogButtonType){
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditRequestController") as? UINavigationController else { return }
-        if let vc = controller.viewControllers.first as? BlockRequestController {
-            vc.fullDomain = domain
-            vc.type = type
-            vc.delegate = self
-        }
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
     private func updateButtons() {
         shadowView.isHidden = !configuration.advancedMode
         
@@ -141,7 +130,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor(hexString: "#eb9300")
                 button.action = {
                     if let rule = self.logRecord?.logRecord.domain {
-                        self.presentBlockRequestController(with: rule, type: type)
+                        self.presentBlockRequestController(with: rule, type: type, delegate: self)
                     }
                 }
                 
@@ -175,7 +164,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor(hexString: "#67b279")
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {
-                        self.presentBlockRequestController(with: domain, type: type)
+                        self.presentBlockRequestController(with: domain, type: type, delegate: self)
                     }
                 }
             }
