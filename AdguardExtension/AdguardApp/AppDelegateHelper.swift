@@ -59,6 +59,7 @@ class AppDelegateHelper: NSObject {
     // MARK: String Constants
     private let openSystemProtection = "systemProtection"
     private let openComplexProtection = "complexProtection"
+    private let activateLicense = "license"
     
     private var firstRun: Bool {
         get {
@@ -360,7 +361,7 @@ class AppDelegateHelper: NSObject {
 
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection {
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense {
             appDelegate.window.rootViewController = launchScreenController
         }
         
@@ -438,6 +439,44 @@ class AppDelegateHelper: NSObject {
                 
                 tab.selectedViewController = mainTabNavController
                 self.appDelegate.window.rootViewController = tab
+                
+            case (AE_URLSCHEME, activateLicense):
+                guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
+                
+                let params = ACNUrlUtils.parameters(fromQueryString: url.query ?? "")
+                let key = params["key"]
+                
+                DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
+                let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+                guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
+                
+                
+                if key == nil || key!.isEmpty {
+                    DDLogInfo("(AppDelegateHelper) - update license from openUrl")
+                    
+                    mainTabNavController.viewControllers = [mainPageController]
+                    
+                    tab.selectedViewController = mainTabNavController
+                    self.appDelegate.window.rootViewController = tab
+                    
+                    purchaseService.checkLicenseStatus()
+                }
+                else {
+                    DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
+                    
+                    let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
+                    guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
+                        return false
+                    }
+                    
+                    guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? LoginController else { return false}
+                    
+                    loginController.licenseKey = key
+                    mainTabNavController.viewControllers = [mainPageController, getProController, loginController]
+                    
+                    tab.selectedViewController = mainTabNavController
+                    self.appDelegate.window.rootViewController = tab
+                }
                 
             default:
                 break
