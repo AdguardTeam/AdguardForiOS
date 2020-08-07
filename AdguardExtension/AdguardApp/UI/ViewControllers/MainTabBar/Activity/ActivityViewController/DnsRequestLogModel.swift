@@ -97,8 +97,6 @@ extension DnsLogRecord
 {
     func getButtons() -> [DnsLogButtonType] {
         switch (status, userStatus) {
-        case (.encrypted, _):
-            return [.addDomainToWhitelist, .addRuleToUserFlter]
         case (_, .movedToBlacklist):
             return [.removeRuleFromUserFilter]
         case (_, .movedToWhitelist):
@@ -116,6 +114,8 @@ extension DnsLogRecord
         case (.whitelistedByOtherFilter, _):
             return [.addRuleToUserFlter]
         case (.processed, _):
+            return [.addDomainToWhitelist, .addRuleToUserFlter]
+        case (.encrypted, _):
             return [.addDomainToWhitelist, .addRuleToUserFlter]
         }
     }

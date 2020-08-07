@@ -253,6 +253,7 @@ class ActivityViewController: UITableViewController {
             return UISwipeActionsConfiguration(actions: [])
         }
         swipedIndexPath = indexPath
+        swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
         for buttonType in availableTypes {
             if buttonType == .addDomainToWhitelist {
@@ -270,8 +271,8 @@ class ActivityViewController: UITableViewController {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
         }
-        print("kek")
         swipedIndexPath = indexPath
+        swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
         for buttonType in availableTypes {
             if buttonType == .addRuleToUserFlter {
@@ -491,7 +492,7 @@ class ActivityViewController: UITableViewController {
     @objc func updateTableView(sender: UIRefreshControl) {
         dateTypeChanged(dateType: resources.activityStatisticsType)
         statisticsModel.obtainStatistics(true) {
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
                 self?.refreshControl?.endRefreshing()
             }
         }

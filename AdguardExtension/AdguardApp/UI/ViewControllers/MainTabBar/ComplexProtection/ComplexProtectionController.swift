@@ -153,6 +153,7 @@ class ComplexProtectionController: UITableViewController {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.systemProtectionSwitch.isOn = self.complexProtection.systemProtectionEnabled
+                self.systemIcon.tintColor = self.complexProtection.systemProtectionEnabled ? self.enabledColor : self.disabledColor
                 
                 if error != nil {
                     self.performSegue(withIdentifier: self.showTrackingProtectionSegue, sender: self)

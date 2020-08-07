@@ -81,31 +81,29 @@ class ActivityTableViewCell: UITableViewCell {
         
         // Setup cell background color
         let type: BlockedRecordType
-        switch (record.logRecord.status, record.category.categoryId) {
+        switch (record.logRecord.status, record.category.categoryId ?? 0) {
         case (.processed, _):
             type = .normal
         case (.encrypted, _):
             type = .normal
         case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
             type = .whitelisted
-        case (.blacklistedByUserFilter, 6), (.blacklistedByOtherFilter, 101):
-            type = .trackedAndBlocked
-        case (.blacklistedByUserFilter, _), (.blacklistedByOtherFilter, _):
-            type = .blocked
+        case (.blacklistedByUserFilter, let catergoryId), (.blacklistedByOtherFilter, let catergoryId):
+            type = (catergoryId == 6 || catergoryId == 101) ? .trackedAndBlocked : .blocked
         }
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
         // Setup blockStateView color
-        switch (record.logRecord.status, record.logRecord.userStatus) {
-        case (.processed, .removedFromWhitelist):
+        switch record.logRecord.userStatus {
+        case .removedFromWhitelist:
             blockStateView.backgroundColor = .clear
-        case (.processed, .removedFromBlacklist):
+        case .removedFromBlacklist:
             blockStateView.backgroundColor = .clear
-        case (.processed, .movedToWhitelist):
+        case .movedToWhitelist:
             blockStateView.backgroundColor = greenDotColor
-        case (.processed, .movedToBlacklist):
+        case .movedToBlacklist:
             blockStateView.backgroundColor = redDotColor
-        case (.processed, .modified):
+        case .modified:
             blockStateView.backgroundColor = greyDotColor
         default:
             blockStateView.backgroundColor = .clear
