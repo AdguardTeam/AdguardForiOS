@@ -355,6 +355,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 sSelf.updateGroupSubtitle(group)
             })
             
+            self?.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
+            
             DispatchQueue.main.async {
                 sSelf.groups = groupInfos ?? [Group]()
                 sSelf.filterMetas = filters
@@ -745,5 +747,29 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
 
         antibanner.setFilter(filterId as NSNumber, enabled: enabled, fromUI: true)
+    }
+    
+    private func removeObsoleteFilter(metadata: ABECFilterClientMetadata, dbFilters: [ASDFilterMetadata]) {
+        guard let newFilters: [ASDFilterMetadata] = metadata.filters else {
+            DDLogError("(FiltersService) - metadata.filters == nil")
+            return
+        }
+        let newFiltersIds = newFilters.map { $0.filterId }
+        
+        let filtersToRemove = dbFilters.filter { (filter) -> Bool in
+            if newFiltersIds.contains(filter.filterId) {
+                return false
+            }
+            
+            if filter.groupId.intValue == FilterGroupId.custom || filter.groupId.intValue == FilterGroupId.user {
+                return false
+            }
+            
+            return true
+        }
+        
+        for filter in filtersToRemove {
+            antibanner?.unsubscribeFilter(filter.filterId)
+        }
     }
 }
