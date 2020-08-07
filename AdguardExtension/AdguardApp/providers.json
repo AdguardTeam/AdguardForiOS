@@ -11,7 +11,7 @@
                     ],
                     "providerId": 10009,
                     "type": "dns",
-                    "id": 9,
+                    "id": "google-dns",
                     "name": "Google DNS"
                 },
                 {
@@ -23,7 +23,7 @@
                     ],
                     "providerId": 10009,
                     "type": "doh",
-                    "id": 10,
+                    "id": "google-doh",
                     "name": "Google DNS doh"
                 },
                 {
@@ -35,7 +35,7 @@
                     ],
                     "providerId": 10009,
                     "type": "dot",
-                    "id": 11,
+                    "id": "google-dot",
                     "name": "Google DNS dot"
                 }
             ],
@@ -57,7 +57,7 @@
                     ],
                     "providerId": 10012,
                     "type": "dns",
-                    "id": 12,
+                    "id": "cloudflare-dns",
                     "name": "Cloudflare DNS"
                 },
                 {
@@ -70,7 +70,7 @@
                     ],
                     "providerId": 10012,
                     "type": "doh",
-                    "id": 13,
+                    "id": "cloudflare",
                     "name": "Cloudflare DNS doh"
                 },
                 {
@@ -80,7 +80,7 @@
                     ],
                     "providerId": 10012,
                     "type": "dot",
-                    "id": 14,
+                    "id": "cloudflare-dot",
                     "name": "Cloudflare DNS dot"
                 }
             ],
@@ -103,7 +103,7 @@
                     ],
                     "providerId": 10024,
                     "type": "dns",
-                    "id": 24,
+                    "id": "cloudflare-antimalware-dns",
                     "name": "Cloudflare Anti-malware DNS"
                 },
                 {
@@ -117,7 +117,7 @@
                     ],
                     "providerId": 10024,
                     "type": "doh",
-                    "id": 25,
+                    "id": "cloudflare-antimalware-doh",
                     "name": "Cloudflare Anti-malware DNS doh"
                 }
             ],
@@ -141,7 +141,7 @@
                     ],
                     "providerId": 10026,
                     "type": "dns",
-                    "id": 26,
+                    "id": "cloudflare-family-dns",
                     "name": "Cloudflare Family DNS"
                 },
                 {
@@ -156,7 +156,7 @@
                     ],
                     "providerId": 10026,
                     "type": "doh",
-                    "id": 27,
+                    "id": "cloudflare-family-doh",
                     "name": "Cloudflare Family DNS doh"
                 }
             ],
@@ -178,7 +178,7 @@
                     ],
                     "providerId": 10015,
                     "type": "dns",
-                    "id": 15,
+                    "id": "open-dns",
                     "name": "Cisco OpenDNS"
                 },
                 {
@@ -191,7 +191,7 @@
                     ],
                     "providerId": 10015,
                     "type": "dnscrypt",
-                    "id": 16,
+                    "id": "cisco",
                     "name": "Cisco OpenDNS dnscrypt"
                 },
                 {
@@ -204,7 +204,7 @@
                     ],
                     "providerId": 10015,
                     "type": "doh",
-                    "id": 22,
+                    "id": "open-dns-doh",
                     "name": "Cisco OpenDNS doh"
                 }
             ],
@@ -228,7 +228,7 @@
                     ],
                     "providerId": 10017,
                     "type": "dns",
-                    "id": 17,
+                    "id": "open-familyshield-dns",
                     "name": "Cisco OpenDNS with Family Shield"
                 },
                 {
@@ -243,7 +243,7 @@
                     ],
                     "providerId": 10017,
                     "type": "dnscrypt",
-                    "id": 18,
+                    "id": "cisco-familyshield",
                     "name": "Cisco OpenDNS with Family Shield dnscrypt"
                 },
                 {
@@ -258,7 +258,7 @@
                     ],
                     "providerId": 10017,
                     "type": "doh",
-                    "id": 23,
+                    "id": "cisco-familyshield-doh",
                     "name": "Cisco OpenDNS with Family Shield doh"
                 }
             ],
@@ -280,7 +280,7 @@
                     ],
                     "providerId": 10019,
                     "type": "dns",
-                    "id": 19,
+                    "id": "quad9-dns",
                     "name": "Quad9 DNS"
                 },
                 {
@@ -293,7 +293,7 @@
                     ],
                     "providerId": 10019,
                     "type": "dnscrypt",
-                    "id": 20,
+                    "id": "quad9-dnscryptfilter-pri",
                     "name": "Quad9 DNS dnscrypt"
                 },
                 {
@@ -306,7 +306,7 @@
                     ],
                     "providerId": 10019,
                     "type": "doh",
-                    "id": 21,
+                    "id": "quad9-doh-filter-pri",
                     "name": "Quad9 DNS doh"
                 }
             ],
@@ -330,7 +330,7 @@
                     ],
                     "providerId": 10001,
                     "type": "dns",
-                    "id": 1,
+                    "id": "adguard-dns",
                     "name": "AdGuard DNS"
                 },
                 {
@@ -345,7 +345,7 @@
                     ],
                     "providerId": 10001,
                     "type": "dnscrypt",
-                    "id": 2,
+                    "id": "adguard-dnscrypt",
                     "name": "AdGuard DNS dnscrypt"
                 },
                 {
@@ -360,7 +360,7 @@
                     ],
                     "providerId": 10001,
                     "type": "doh",
-                    "id": 3,
+                    "id": "adguard-doh",
                     "name": "AdGuard DNS doh"
                 },
                 {
@@ -375,7 +375,7 @@
                     ],
                     "providerId": 10001,
                     "type": "dot",
-                    "id": 4,
+                    "id": "adguard-dot",
                     "name": "AdGuard DNS dot"
                 }
             ],
@@ -401,7 +401,7 @@
                     ],
                     "providerId": 10005,
                     "type": "dns",
-                    "id": 5,
+                    "id": "adguard-dns-family",
                     "name": "AdGuard DNS family"
                 },
                 {
@@ -418,7 +418,7 @@
                     ],
                     "providerId": 10005,
                     "type": "dnscrypt",
-                    "id": 6,
+                    "id": "adguard-family-dnscrypt",
                     "name": "AdGuard DNS family dnscrypt"
                 },
                 {
@@ -435,7 +435,7 @@
                     ],
                     "providerId": 10005,
                     "type": "doh",
-                    "id": 7,
+                    "id": "adguard-family-doh",
                     "name": "AdGuard DNS family doh"
                 },
                 {
@@ -452,7 +452,7 @@
                     ],
                     "providerId": 10005,
                     "type": "dot",
-                    "id": 8,
+                    "id": "adguard-family-dot",
                     "name": "AdGuard DNS family dot"
                 }
             ],
