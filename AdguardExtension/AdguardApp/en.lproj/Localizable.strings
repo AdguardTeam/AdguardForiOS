@@ -605,7 +605,7 @@
 "widget_statistics" = "%1$d requests, %2$d encrypted";
 
 /*(DnsRequestDetailsController) message for info alert  */
-"whotrackme_message" = "This information was loaded from WhoTrackMe.com service";
+"whotrackme_message" = "This information was loaded from WhoTracksMe.com service";
 
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "More";
