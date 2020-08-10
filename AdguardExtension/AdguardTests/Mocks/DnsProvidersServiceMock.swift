@@ -19,6 +19,8 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    var vpnManager: VpnManagerProtocol?
+    
     var adguardDohServer: DnsServerInfo? { return nil }
     
     var adguardFamilyDohServer: DnsServerInfo? { return nil }
