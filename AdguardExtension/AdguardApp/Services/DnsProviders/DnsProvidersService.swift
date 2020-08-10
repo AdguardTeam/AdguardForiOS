@@ -283,7 +283,12 @@ protocol DnsProvidersServiceProtocol {
             var dnsProviders = [DnsProviderInfo]()
             for providerJson in providersJson {
                 guard   let name = providerJson["name"] as? String,
-                        !name.lowercased().contains("malware"), // Skip DNS server if name contains 'malware' word
+                        /*
+                            Skip DNS server if name contains 'malware' word
+                            Once we didn't passed the AppStore review
+                            because some descriptions contained 'malware' word
+                        */
+                        !name.lowercased().contains("malware"),
                         let logo = providerJson["logo"] as? String,
                         let summary = providerJson["description"] as? String,
                         let website = providerJson["homepage"] as? String
