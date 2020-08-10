@@ -278,18 +278,19 @@ protocol DnsProvidersServiceProtocol {
             var dnsProviders = [DnsProviderInfo]()
             for providerJson in providersJson {
                 guard   let name = providerJson["name"] as? String,
+                        !name.lowercased().contains("malware"), // Skip DNS server if name contains 'malware' word
                         let logo = providerJson["logo"] as? String,
                         let summary = providerJson["description"] as? String,
                         let website = providerJson["homepage"] as? String
-                    else { return }
+                    else { continue }
                 
-                guard let serversJson = providerJson["servers"] as? [[String: Any]] else { return }
+                guard let serversJson = providerJson["servers"] as? [[String: Any]] else { continue }
                 let servers = self.serversFromArray(serversJson)
                 
                 // parse features
                 var features = Set<String>()
                 for server in serversJson {
-                    guard let serverFeatures = server["features"] as? [String] else { return }
+                    guard let serverFeatures = server["features"] as? [String] else { continue }
                     for feature in serverFeatures {
                         features.insert(feature)
                     }
@@ -320,7 +321,7 @@ protocol DnsProvidersServiceProtocol {
             self.predefinedProvidersInternal = dnsProviders
         }
         catch {
-            
+            DDLogError("Error with providers json; Error: \(error.localizedDescription) ")
         }
     }
     
