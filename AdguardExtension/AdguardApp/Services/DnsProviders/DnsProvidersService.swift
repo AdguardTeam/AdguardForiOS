@@ -25,6 +25,7 @@ import Foundation
  */
 @objc
 protocol DnsProvidersServiceProtocol {
+    var vpnManager: VpnManagerProtocol? { get set }
     
     var allProviders: [DnsProviderInfo] { get }
     var predefinedProviders: [DnsProviderInfo] { get }
@@ -53,6 +54,7 @@ protocol DnsProvidersServiceProtocol {
     private let workingQueue = DispatchQueue(label: "dns providers queue")
     
     @objc private let resources: AESharedResourcesProtocol
+    weak var vpnManager: VpnManagerProtocol?
     
     private let APDefaultsCustomDnsProviders = "APDefaultsCustomDnsProviders"
     
@@ -131,6 +133,9 @@ protocol DnsProvidersServiceProtocol {
         }
     }
     
+    /* True if there is no saved server id among fetched providers */
+    private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
+    
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
         let provider = DnsProviderInfo(name: name)
         
@@ -207,7 +212,7 @@ protocol DnsProvidersServiceProtocol {
     }
     
     var currentServerName: String {
-        guard let server = activeDnsServer else {
+        guard let server = activeDnsServer, !providerIsMissing else {
             return String.localizedString("system_dns_server")
         }
         
@@ -278,18 +283,24 @@ protocol DnsProvidersServiceProtocol {
             var dnsProviders = [DnsProviderInfo]()
             for providerJson in providersJson {
                 guard   let name = providerJson["name"] as? String,
+                        /*
+                            Skip DNS server if name contains 'malware' word
+                            Once we didn't passed the AppStore review
+                            because some descriptions contained 'malware' word
+                        */
+                        !name.lowercased().contains("malware"),
                         let logo = providerJson["logo"] as? String,
                         let summary = providerJson["description"] as? String,
                         let website = providerJson["homepage"] as? String
-                    else { return }
+                    else { continue }
                 
-                guard let serversJson = providerJson["servers"] as? [[String: Any]] else { return }
+                guard let serversJson = providerJson["servers"] as? [[String: Any]] else { continue }
                 let servers = self.serversFromArray(serversJson)
                 
                 // parse features
                 var features = Set<String>()
                 for server in serversJson {
-                    guard let serverFeatures = server["features"] as? [String] else { return }
+                    guard let serverFeatures = server["features"] as? [String] else { continue }
                     for feature in serverFeatures {
                         features.insert(feature)
                     }
@@ -318,9 +329,10 @@ protocol DnsProvidersServiceProtocol {
             }
             
             self.predefinedProvidersInternal = dnsProviders
+            self.missingProviderCheck()
         }
         catch {
-            
+            DDLogError("Error with providers json; Error: \(error.localizedDescription) ")
         }
     }
     
@@ -390,5 +402,16 @@ protocol DnsProvidersServiceProtocol {
         }
         
         return provider.servers?.first?.dnsProtocol ?? .dns
+    }
+    
+    /*
+     Check if provider exists for selected server
+     If not, set active server to nil
+     */
+    private func missingProviderCheck() {
+        if !providerIsMissing { return }
+        DDLogInfo("Setting active dns server to nil; Current active server id: \(activeDnsServer?.serverId ?? "nil")")
+        activeDnsServer = nil
+        vpnManager?.updateSettings(completion: nil)
     }
 }

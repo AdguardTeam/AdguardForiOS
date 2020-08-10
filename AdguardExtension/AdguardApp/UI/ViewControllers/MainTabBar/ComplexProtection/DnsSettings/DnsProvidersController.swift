@@ -69,7 +69,7 @@ class DnsProvidersController: UITableViewController {
         
         let selectCellFunc = { [weak self] in
             guard let self = self else { return }
-            if self.dnsProvidersService.activeDnsServer == nil {
+            if self.dnsProvidersService.activeDnsServer == nil || self.dnsProvidersService.activeDnsProvider == nil {
                 self.selectedCellTag = self.defaultProviderTag
                 return
             }

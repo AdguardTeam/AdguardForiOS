@@ -90,43 +90,6 @@
             "description": "cloudflare_public_dns_description"
         },
         {
-            "name": "Cloudflare Anti-malware DNS",
-            "servers": [
-                {
-                    "features": [
-                        "secure",
-                        "no_logs"
-                    ],
-                    "upstreams": [
-                        "1.1.1.2",
-                        "1.0.0.2"
-                    ],
-                    "providerId": 10024,
-                    "type": "dns",
-                    "id": "cloudflare-antimalware-dns",
-                    "name": "Cloudflare Anti-malware DNS"
-                },
-                {
-                    "features": [
-                        "secure",
-                        "no_logs",
-                        "encryption"
-                    ],
-                    "upstreams": [
-                        "https://security.cloudflare-dns.com/dns-query"
-                    ],
-                    "providerId": 10024,
-                    "type": "doh",
-                    "id": "cloudflare-antimalware-doh",
-                    "name": "Cloudflare Anti-malware DNS doh"
-                }
-            ],
-            "providerId": 10024,
-            "logo": "ic_cloudflare_provider_logo",
-            "homepage": "https://www.cloudflare.com/dns/",
-            "description": "cloudflare_anti_malware_dns_description"
-        },
-        {
             "name": "Cloudflare Family DNS",
             "servers": [
                 {
