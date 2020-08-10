@@ -133,6 +133,9 @@ protocol DnsProvidersServiceProtocol {
         }
     }
     
+    /* True if there is no saved server id among fetched providers */
+    private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
+    
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
         let provider = DnsProviderInfo(name: name)
         
@@ -209,7 +212,7 @@ protocol DnsProvidersServiceProtocol {
     }
     
     var currentServerName: String {
-        guard let server = activeDnsServer else {
+        guard let server = activeDnsServer, !providerIsMissing else {
             return String.localizedString("system_dns_server")
         }
         
@@ -398,12 +401,10 @@ protocol DnsProvidersServiceProtocol {
     
     /*
      Check if provider exists for selected server
-     If not set active server to nil
+     If not, set active server to nil
      */
     private func missingProviderCheck() {
-        guard activeDnsProvider == nil, activeDnsServer != nil else {
-            return
-        }
+        if !providerIsMissing { return }
         DDLogInfo("Setting active dns server to nil; Current active server id: \(activeDnsServer?.serverId ?? "nil")")
         activeDnsServer = nil
         vpnManager?.updateSettings(completion: nil)
