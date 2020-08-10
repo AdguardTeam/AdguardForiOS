@@ -25,6 +25,7 @@ import Foundation
  */
 @objc
 protocol DnsProvidersServiceProtocol {
+    var vpnManager: VpnManagerProtocol? { get set }
     
     var allProviders: [DnsProviderInfo] { get }
     var predefinedProviders: [DnsProviderInfo] { get }
@@ -53,6 +54,7 @@ protocol DnsProvidersServiceProtocol {
     private let workingQueue = DispatchQueue(label: "dns providers queue")
     
     @objc private let resources: AESharedResourcesProtocol
+    weak var vpnManager: VpnManagerProtocol?
     
     private let APDefaultsCustomDnsProviders = "APDefaultsCustomDnsProviders"
     
@@ -319,6 +321,7 @@ protocol DnsProvidersServiceProtocol {
             }
             
             self.predefinedProvidersInternal = dnsProviders
+            self.missingProviderCheck()
         }
         catch {
             DDLogError("Error with providers json; Error: \(error.localizedDescription) ")
@@ -391,5 +394,18 @@ protocol DnsProvidersServiceProtocol {
         }
         
         return provider.servers?.first?.dnsProtocol ?? .dns
+    }
+    
+    /*
+     Check if provider exists for selected server
+     If not set active server to nil
+     */
+    private func missingProviderCheck() {
+        guard activeDnsProvider == nil, activeDnsServer != nil else {
+            return
+        }
+        DDLogInfo("Setting active dns server to nil; Current active server id: \(activeDnsServer?.serverId ?? "nil")")
+        activeDnsServer = nil
+        vpnManager?.updateSettings(completion: nil)
     }
 }
