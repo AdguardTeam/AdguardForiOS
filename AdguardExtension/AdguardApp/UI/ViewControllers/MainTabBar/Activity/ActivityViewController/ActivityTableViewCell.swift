@@ -109,19 +109,9 @@ class ActivityTableViewCell: UITableViewCell {
             blockStateView.backgroundColor = .clear
         }
         
-        
-        switch record.category.categoryId {
-        case 3:
-            categoryImageView.image = UIImage(named: "porn")
-        case 4:
-            categoryImageView.image = UIImage(named: "ads")
-        case 6, 101:
-            categoryImageView.image = UIImage(named: "trackers")
-        case 7:
-            categoryImageView.image = UIImage(named: "social")
-        default:
-            categoryImageView.isHidden = true
-        }
+        let categoryImage = UIImage.getCategoryImage(withId: record.category.categoryId)
+        categoryImageView.isHidden = categoryImage == nil
+        categoryImageView.image = categoryImage
     }
     
     private func updateTheme(){

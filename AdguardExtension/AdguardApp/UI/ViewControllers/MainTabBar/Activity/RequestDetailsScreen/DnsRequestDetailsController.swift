@@ -462,7 +462,7 @@ class DnsRequestDetailsController: UITableViewController {
         let category = record.category.category ?? ""
         let categoryTitle = String.localizedString("category_title")
         let categoryModelIsNil = category.isEmpty
-        let categoryModel = categoryModelIsNil ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, theme: theme)
+        let categoryModel = categoryModelIsNil ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, categoryId: record.category.categoryId, theme: theme)
         if !categoryModelIsNil {
             trackerDetailsSection = trackerSectionToAssign
             categoryCell = IndexPath(row: trackerDetailsRows, section: trackerDetailsSection!)
