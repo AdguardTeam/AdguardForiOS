@@ -222,6 +222,22 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
+    private func isLocalHost(dnsAnswer: String, type: String) -> Bool {
+        guard type == "A" || type == "AAAA" else { return false }
+        
+        let splitedAnswers = dnsAnswer.split(separator: "\n").map({ String($0) })
+        guard splitedAnswers.count == 1 else { return false }
+        
+        let dnsAnswer = splitedAnswers[0]
+                
+        guard let range = dnsAnswer.range(of: ", ") else { return false }
+        let ip = dnsAnswer[range.upperBound...]
+        
+        let isIpv4Localhost = type == "A" && (ip == "0.0.0.0" || ip == "127.0.0.1")
+        let isIpv6Localhost = type == "AAAA" && (ip == "::" || ip == "::1")
+        return isIpv4Localhost || isIpv6Localhost
+    }
+    
     private func getEventStatus(_ event: AGDnsRequestProcessedEvent, isEncrypted: Bool) -> DnsLogRecordStatus {
         if event.whitelist {
             return event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
@@ -231,7 +247,14 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         }
         else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
             return .blacklistedByOtherFilter
-        } else if isEncrypted {
+        }
+        else if event.status == "REFUSED" {
+            return .blacklistedByOtherFilter
+        }
+        else if isLocalHost(dnsAnswer: event.answer, type: event.type) {
+            return .blacklistedByOtherFilter
+        }
+        else if isEncrypted {
             return .encrypted
         }
         else {
