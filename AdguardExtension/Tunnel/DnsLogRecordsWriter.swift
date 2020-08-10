@@ -222,27 +222,19 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
-    private typealias DnsAnswer = (type: String, ip: String)
-    
-    private func splitDnsAnswers(answer: String?) -> [DnsAnswer] {
-        guard let answer = answer else {
-            return []
-        }
+    private func isLocalHost(dnsAnswer: String, type: String) -> Bool {
+        guard type == "A" || type == "AAAA" else { return false }
         
-        let splitedAnswers = String(answer).split(separator: "\n").map({ String($0) })
-        return splitedAnswers.map { dnsAnswer in
-            let fields = dnsAnswer.split(separator: ",").map({ String($0) })
-            let type = fields[0]
-            let ip = fields[1].drop(while: { $0 != " " })
-            return (type, String(ip))
-        }
-    }
-    
-    private func isLocalHost(dnsAnswers: [DnsAnswer]) -> Bool {
-        guard dnsAnswers.count == 1 else { return false }
-        let dnsAnswer = dnsAnswers[0]
-        let isIpv4Localhost = dnsAnswer.type == "A" && (dnsAnswer.ip == "0.0.0.0" || dnsAnswer.ip == "127.0.0.1")
-        let isIpv6Localhost = dnsAnswer.type == "AAAA" && (dnsAnswer.ip == "::" || dnsAnswer.ip == "::1")
+        let splitedAnswers = dnsAnswer.split(separator: "\n").map({ String($0) })
+        guard splitedAnswers.count == 1 else { return false }
+        
+        let dnsAnswer = splitedAnswers[0]
+                
+        guard let range = dnsAnswer.range(of: ", ") else { return false }
+        let ip = dnsAnswer[range.upperBound...]
+        
+        let isIpv4Localhost = type == "A" && (ip == "0.0.0.0" || ip == "127.0.0.1")
+        let isIpv6Localhost = type == "AAAA" && (ip == "::" || ip == "::1")
         return isIpv4Localhost || isIpv6Localhost
     }
     
@@ -259,7 +251,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         else if event.status == "REFUSED" {
             return .blacklistedByOtherFilter
         }
-        else if isLocalHost(dnsAnswers: splitDnsAnswers(answer: event.answer)) {
+        else if isLocalHost(dnsAnswer: event.answer, type: event.type) {
             return .blacklistedByOtherFilter
         }
         else if isEncrypted {
