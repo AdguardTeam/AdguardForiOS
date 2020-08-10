@@ -222,6 +222,30 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
+    private typealias DnsAnswer = (type: String, ip: String)
+    
+    private func splitDnsAnswers(answer: String?) -> [DnsAnswer] {
+        guard let answer = answer else {
+            return []
+        }
+        
+        let splitedAnswers = String(answer).split(separator: "\n").map({ String($0) })
+        return splitedAnswers.map { dnsAnswer in
+            let fields = dnsAnswer.split(separator: ",").map({ String($0) })
+            let type = fields[0]
+            let ip = fields[1].drop(while: { $0 != " " })
+            return (type, String(ip))
+        }
+    }
+    
+    private func isLocalHost(dnsAnswers: [DnsAnswer]) -> Bool {
+        guard dnsAnswers.count == 1 else { return false }
+        let dnsAnswer = dnsAnswers[0]
+        let isIpv4Localhost = dnsAnswer.type == "A" && (dnsAnswer.ip == "0.0.0.0" || dnsAnswer.ip == "127.0.0.1")
+        let isIpv6Localhost = dnsAnswer.type == "AAAA" && (dnsAnswer.ip == "::" || dnsAnswer.ip == "::1")
+        return isIpv4Localhost || isIpv6Localhost
+    }
+    
     private func getEventStatus(_ event: AGDnsRequestProcessedEvent, isEncrypted: Bool) -> DnsLogRecordStatus {
         if event.whitelist {
             return event.filterListIds.contains(whitelistFilterId!) ? .whitelistedByUserFilter : .whitelistedByOtherFilter
@@ -231,7 +255,14 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         }
         else if otherFilterIds?.contains(where: { event.filterListIds.contains($0) }) ?? false {
             return .blacklistedByOtherFilter
-        } else if isEncrypted {
+        }
+        else if event.status == "REFUSED" {
+            return .blacklistedByOtherFilter
+        }
+        else if isLocalHost(dnsAnswers: splitDnsAnswers(answer: event.answer)) {
+            return .blacklistedByOtherFilter
+        }
+        else if isEncrypted {
             return .encrypted
         }
         else {
