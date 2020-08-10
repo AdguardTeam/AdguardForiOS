@@ -419,7 +419,7 @@
                         <constraint firstItem="DCy-so-G1C" firstAttribute="centerY" secondItem="K6G-aX-FSJ" secondAttribute="centerY" id="vsc-jV-WFH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleAspectFit" ambiguous="YES" id="P5d-Vd-a5i">
+                <view contentMode="scaleAspectFit" id="P5d-Vd-a5i">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -517,7 +517,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                             <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                             </variation>
                                         </label>
                                     </subviews>
@@ -541,8 +541,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="32.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-uI-jIi" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="16" width="0.0" height="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-uI-jIi" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="16" width="31.5" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -553,8 +553,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qd-3b-7mS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="398" y="16" width="0.0" height="0.0"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qd-3b-7mS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="371" y="16" width="27" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -637,6 +637,17 @@
                                                 <constraint firstAttribute="height" constant="0.5" id="Vr5-at-7en"/>
                                             </constraints>
                                         </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hv7-jl-iD5">
+                                            <rect key="frame" x="347" y="18" width="16" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="4L5-71-qIM">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstAttribute="height" constant="16" id="sxL-Q3-zaY">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="via-do-FsY" firstAttribute="centerY" secondItem="Zvw-Mv-ucP" secondAttribute="centerY" id="2QJ-J6-Onm"/>
@@ -654,6 +665,9 @@
                                         </constraint>
                                         <constraint firstItem="0lE-u6-809" firstAttribute="centerY" secondItem="via-do-FsY" secondAttribute="centerY" id="KXq-uO-BQi"/>
                                         <constraint firstItem="Xgg-jX-hwe" firstAttribute="centerY" secondItem="8S6-uI-jIi" secondAttribute="centerY" id="Ta9-nO-ujL"/>
+                                        <constraint firstItem="hv7-jl-iD5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8S6-uI-jIi" secondAttribute="trailing" constant="16" id="Tc8-kP-ryP">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                        </constraint>
                                         <constraint firstItem="mhy-Ye-nMt" firstAttribute="top" secondItem="0qd-3b-7mS" secondAttribute="bottom" constant="16" id="Vq2-94-GDl">
                                             <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                         </constraint>
@@ -665,9 +679,8 @@
                                             <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                         </constraint>
                                         <constraint firstItem="8N7-yW-obN" firstAttribute="centerY" secondItem="0lE-u6-809" secondAttribute="centerY" id="c90-ex-Hgz"/>
-                                        <constraint firstItem="0qd-3b-7mS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8S6-uI-jIi" secondAttribute="trailing" constant="16" id="f7l-e3-Cxr">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                        </constraint>
+                                        <constraint firstItem="hv7-jl-iD5" firstAttribute="centerY" secondItem="84V-IP-ITQ" secondAttribute="centerY" id="dCf-0e-7UI"/>
+                                        <constraint firstItem="0qd-3b-7mS" firstAttribute="leading" secondItem="hv7-jl-iD5" secondAttribute="trailing" constant="8" id="f5V-8I-YMg"/>
                                         <constraint firstItem="0qd-3b-7mS" firstAttribute="top" secondItem="84V-IP-ITQ" secondAttribute="top" constant="16" id="hO8-Jm-AI1">
                                             <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                         </constraint>
@@ -684,6 +697,7 @@
                                 <connections>
                                     <outlet property="bytesReceivedLabel" destination="0lE-u6-809" id="pyJ-p8-K79"/>
                                     <outlet property="bytesSentLabel" destination="Zvw-Mv-ucP" id="naE-ME-W3N"/>
+                                    <outlet property="categoryImageView" destination="hv7-jl-iD5" id="Iy7-Bu-C4X"/>
                                     <outlet property="copiedLabel" destination="Xgg-jX-hwe" id="5gL-ng-hzH"/>
                                     <outlet property="infoLabel" destination="0qd-3b-7mS" id="JoW-bT-Y5l"/>
                                     <outlet property="separator" destination="mhy-Ye-nMt" id="fUz-ej-7rU"/>

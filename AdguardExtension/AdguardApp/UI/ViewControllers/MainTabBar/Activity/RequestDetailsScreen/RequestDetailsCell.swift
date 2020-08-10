@@ -28,6 +28,8 @@ protocol LogCellModelProtocol {
     var infoFontWeight: UIFont.Weight? { get }
     var infoColor: UIColor? { get }
     
+    var categoryId: Int? { get }
+    
     // These fields are for DataRequestDetailsCell
     var bytesSent: String? { get }
     var bytesReceived: String? { get }
@@ -46,18 +48,21 @@ class LogCellModel: LogCellModelProtocol {
     var infoFontWeight: UIFont.Weight?
     var infoColor: UIColor?
     
+    var categoryId: Int?
+    
     var bytesSent: String?
     var bytesReceived: String?
     
     var theme: ThemeServiceProtocol?
     
-    init(isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFontWeight: UIFont.Weight? = nil, infoColor: UIColor? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil) {
+    init(isDataCell: Bool = false, copiedString: String? = nil, title: String? = nil, info: String? = nil, infoFontWeight: UIFont.Weight? = nil, infoColor: UIColor? = nil, categoryId: Int? = nil, bytesSent: String? = nil, bytesReceived: String? = nil, theme: ThemeServiceProtocol? = nil) {
         self.isDataCell = isDataCell
         self.copiedString = copiedString
         self.title = title
         self.info = info
         self.infoFontWeight = infoFontWeight
         self.infoColor = infoColor
+        self.categoryId = categoryId
         self.bytesSent = bytesSent
         self.bytesReceived = bytesReceived
         self.theme = theme
@@ -74,6 +79,7 @@ protocol CopiableCellInfo {
 class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
+    @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var copiedLabel: UIButton!
     @IBOutlet weak var separator: UIView!
     
@@ -92,7 +98,8 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        
+        categoryImageView.isHidden = true
         titleLabel.isHidden = false
         copiedLabel.isHidden = true
         titleLabel.alpha = 1.0
@@ -175,6 +182,10 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         let font = UIFont.systemFont(ofSize: infoLabel.font.pointSize, weight: model.infoFontWeight ?? .regular)
         infoLabel.font = font
         infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
+        
+        let categoryImage = UIImage.getCategoryImage(withId: model.categoryId)
+        categoryImageView.isHidden = categoryImage == nil
+        categoryImageView.image = categoryImage
     }
     
     private func updateTheme(_ theme: ThemeServiceProtocol?){
