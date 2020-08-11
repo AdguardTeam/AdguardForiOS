@@ -296,6 +296,7 @@
                         <outletCollection property="themableLabels" destination="cnF-td-Ba1" collectionClass="NSMutableArray" id="Amt-To-ryK"/>
                         <outletCollection property="themableLabels" destination="teo-vm-NRJ" collectionClass="NSMutableArray" id="c3T-UA-1dF"/>
                         <outletCollection property="themableLabels" destination="wyK-CX-EwT" collectionClass="NSMutableArray" id="lNj-wW-zLY"/>
+                        <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="WYM-YR-INH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHj-J0-uTJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -310,7 +311,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bka-Un-6h2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="-118"/>
+            <point key="canvasLocation" x="333" y="-102"/>
+        </scene>
+        <!--License-->
+        <scene sceneID="BbT-d9-nxE">
+            <objects>
+                <viewControllerPlaceholder storyboardName="License" id="J4w-JZ-q8A" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Elv-ug-UE7"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kx8-yT-0AB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="312" y="-137"/>
         </scene>
         <!--Filters-->
         <scene sceneID="tRN-e9-hQ2">
@@ -320,7 +331,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YL2-hE-3dD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="-151"/>
+            <point key="canvasLocation" x="307" y="-172"/>
         </scene>
     </scenes>
     <resources>

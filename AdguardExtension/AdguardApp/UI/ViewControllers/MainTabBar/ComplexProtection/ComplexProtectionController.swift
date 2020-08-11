@@ -95,6 +95,7 @@ class ComplexProtectionController: UITableViewController {
     private let systemProtectionCell = 1
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
+    private let showLicenseSegue = "ShowLicenseSegueId"
 
     // MARK: - View Controller life cycle
     
@@ -149,6 +150,11 @@ class ComplexProtectionController: UITableViewController {
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         let enabled = sender.isOn
+        if enabled && !configuration.proStatus {
+            performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+            return
+        }
+        
         complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -233,7 +239,6 @@ class ComplexProtectionController: UITableViewController {
     private func updateVpnInfo(){
         let enabled = complexProtection.systemProtectionEnabled
         systemProtectionSwitch.isOn = enabled
-        systemProtectionSwitch.isUserInteractionEnabled = proStatus
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
         tableView.reloadData()
     }
