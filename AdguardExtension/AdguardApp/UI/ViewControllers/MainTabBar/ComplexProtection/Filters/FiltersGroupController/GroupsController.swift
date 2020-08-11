@@ -19,23 +19,33 @@
 import Foundation
 import UIKit
 
+class GroupsTitleCell: UITableViewCell {
+    @IBOutlet weak var groupsTitleLabel: ThemableLabel!
+}
+
 class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
-    let enabledColor = UIColor.init(hexString: "67B279")
-    let disabledColor = UIColor.init(hexString: "D8D8D8")
+    private let enabledColor = UIColor.init(hexString: "67B279")
+    private let disabledColor = UIColor.init(hexString: "D8D8D8")
     
-    let filtersSegueID = "showFiltersSegue"
-    let getProSegueID = "getProSegue"
+    private let filtersSegueID = "showFiltersSegue"
+    private let getProSegueID = "getProSegue"
+    
+    private let groupsTitleCellId = "GroupsTitleCellId"
+    
+    // Sections
+    private let titleSection = 0
+    private let groupsSection = 1
     
     // MARK: - properties
     var viewModel: FiltersAndGroupsViewModelProtocol? = nil
-    var selectedIndex: Int?
+    private var selectedIndex: Int?
     
-    lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-    let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     private var notificationToken: NotificationToken?
     
@@ -85,8 +95,12 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
     // MARK: - table view
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.constantAllGroups.count ?? 0
+        return section == titleSection ? 1 : viewModel?.constantAllGroups.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -98,8 +112,15 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let group = viewModel?.constantAllGroups[indexPath.row] else { return UITableViewCell() }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as! GroupCell
+        if indexPath.section == titleSection, let cell = tableView.dequeueReusableCell(withIdentifier: groupsTitleCellId) as? GroupsTitleCell {
+            theme.setupTableCell(cell)
+            theme.setupLabel(cell.groupsTitleLabel)
+            return cell
+        }
+        
+        guard let group = viewModel?.constantAllGroups[indexPath.row],
+              let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupCell
+              else { return UITableViewCell() }
         
         cell.nameLabel.text = group.name
         cell.descriptionLabel.text = group.subtitle
@@ -187,7 +208,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
     @objc private func refresh() {
         viewModel?.refresh { [weak self] in
-            DispatchQueue.main.async {
+            // Delay to show user that filters update is called
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self?.tableView.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             }

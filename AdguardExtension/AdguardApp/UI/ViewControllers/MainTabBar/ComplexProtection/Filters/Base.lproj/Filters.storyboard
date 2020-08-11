@@ -443,7 +443,7 @@
             </objects>
             <point key="canvasLocation" x="-2688.4057971014495" y="-319.41964285714283"/>
         </scene>
-        <!--Filters-->
+        <!--Filters Master Controller-->
         <scene sceneID="KTH-3S-Upd">
             <objects>
                 <viewController id="KSi-tR-JOw" customClass="FiltersMasterController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -477,11 +477,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RMc-OR-gt8"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Filters" id="gbf-TL-LXR">
-                        <attributedString key="userComments">
-                            <fragment content="(Filters Screen) Title"/>
-                        </attributedString>
-                    </navigationItem>
                     <connections>
                         <outlet property="cancelButton" destination="I3a-Pl-KzM" id="QO4-rf-xh7"/>
                         <outlet property="groupsContainerView" destination="b5J-Zq-AfJ" id="Xk6-5b-pb2"/>
@@ -503,7 +498,7 @@
             </objects>
             <point key="canvasLocation" x="-1255" y="-319"/>
         </scene>
-        <!--Filters-->
+        <!--Groups Controller-->
         <scene sceneID="Ou6-t2-Alq">
             <objects>
                 <tableViewController id="B60-Yq-lgJ" customClass="GroupsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -513,6 +508,41 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupsTitleCellId" id="MiV-EY-tK3" customClass="GroupsTitleCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="53"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MiV-EY-tK3" id="pqJ-N7-8SX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTM-IO-iFw" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <rect key="frame" x="24" y="0.0" width="366" height="29"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mTM-IO-iFw" firstAttribute="top" secondItem="pqJ-N7-8SX" secondAttribute="top" id="5lb-Ze-t0A"/>
+                                        <constraint firstItem="mTM-IO-iFw" firstAttribute="leading" secondItem="pqJ-N7-8SX" secondAttribute="leading" constant="24" id="7yH-Xj-wbn"/>
+                                        <constraint firstAttribute="trailing" secondItem="mTM-IO-iFw" secondAttribute="trailing" constant="24" id="9WG-jP-m6X"/>
+                                        <constraint firstAttribute="bottom" secondItem="mTM-IO-iFw" secondAttribute="bottom" constant="24" id="tpu-Uv-5DA">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                        </constraint>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="groupsTitleLabel" destination="mTM-IO-iFw" id="0xY-H8-IPu"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="tBp-gJ-03X" customClass="GroupCell" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="35.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -619,11 +649,6 @@
                             <outlet property="delegate" destination="B60-Yq-lgJ" id="PkU-kK-7IU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Filters" id="E3e-Mc-RhD">
-                        <attributedString key="userComments">
-                            <fragment content="(Filters Screen) Title"/>
-                        </attributedString>
-                    </navigationItem>
                     <connections>
                         <segue destination="Llu-1A-iPX" kind="show" identifier="showFiltersSegue" id="3B2-aA-sGN"/>
                         <segue destination="2G0-bK-cL2" kind="show" identifier="getProSegue" id="CG6-qH-Zv4"/>
@@ -2102,7 +2127,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="u0d-JL-uIG"/>
+        <segue reference="6Ap-Zj-DX8"/>
         <segue reference="3B2-aA-sGN"/>
     </inferredMetricsTieBreakers>
 </document>
