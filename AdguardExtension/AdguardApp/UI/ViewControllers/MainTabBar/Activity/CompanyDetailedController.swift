@@ -241,7 +241,11 @@ class CompanyDetailedController: UITableViewController {
         
         requestsModel.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
-                self?.tableView.reloadData()
+                guard let self = self else { return }
+                self.tableView.reloadData()
+                if self.requestsModel.records.isEmpty {
+                    self.tableView.scrollRectToVisible(self.tableFooterView.frame, animated: true)
+                }
             }
         }
     }
