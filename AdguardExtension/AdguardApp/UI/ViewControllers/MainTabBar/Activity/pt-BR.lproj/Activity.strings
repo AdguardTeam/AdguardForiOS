@@ -25,9 +25,6 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Atividade";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
-"J13-xW-KiK.normalTitle" = "Copiado";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "CANCELAR";
 
@@ -45,9 +42,6 @@
 
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "empresas";
-
-/* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
-"ZyE-7P-8Tm.title" = "Detalhes da solicitação";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Filtros de segurança, privacidade de DNS, filtros personalizados, etc.";
@@ -72,9 +66,6 @@
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "solicitações";
-
-/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Escolha o nível de domínio";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
 "wt5-4Q-CTq.normalTitle" = "criptografado";

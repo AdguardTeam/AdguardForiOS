@@ -1,17 +1,9 @@
-/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
-"2s7-mz-LlB.title" = "Redefinir";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Inverter lista branca";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatível com outros aplicativos VPN,  instável";
-
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
-"Bjk-AC-5fy.text" = "Modo túnel";
-
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
-"ChK-gV-7pc.title" = "Configurações";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "Incompatível com outros aplicativos de VPN";
@@ -25,26 +17,8 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
-"HB4-O1-VPq.text" = "Remover perfil de VPN";
-
-/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "Reiniciar a proteção quando a rede sofrer alterações";
-
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
-"KSL-dU-yfA.text" = "Bloqueadores de contéudo";
-
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
-"KVr-dC-Lo5.title" = "Modo túnel";
-
-/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
-"Ll9-il-kpC.title" = "Configurações avançadas";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Modo avançado";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Se esta opção estiver ativada, o AdGuard irá ignorar as regras genéricas cosméticas. Isso acelera o carregamento de páginas em troca da qualidade de filtragem";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Redefinir estatísticas";
@@ -55,26 +29,11 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
-"W6u-T8-UVZ.text" = "Usar filtros simplificados";
-
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Atualização automática apenas por Wi-Fi";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "Você tem 6 bloqueadores de conteúdo, cada um deles pode conter até 50 mil regras";
-
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
-
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "Ative esta opção se você tiver problemas com a conexão de internet enquanto o AdGuard estiver em execução";
-
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
-"aYm-cM-OAj.text" = "Isso removerá seu perfil de VPN atual e desativará a proteção de DNS";
-
-/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
-"aoV-et-2ku.text" = "Mostrar a barra de status";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Configurações avançadas";
@@ -87,9 +46,6 @@
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "No modo Split-Tunnel, o AdGuard é compatível com as chamadas aplicativos de \"VPN Pessoal\". Como um trade-off, neste modo ele pode ser contornado pelo sistema em caso de má conectividade.";
-
-/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "Mostra a barra de progresso de atualizações do filtro";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Outros";

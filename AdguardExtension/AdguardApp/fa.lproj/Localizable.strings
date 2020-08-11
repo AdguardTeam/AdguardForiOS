@@ -121,18 +121,6 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "دامنه:";
 
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "گزارش مسدودسازی اشتباه";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "گزارش مشکل";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "تماس با پشتیبانی";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "خروجیگیری وقایع";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "گزارش مشکل را نمیتوان ارسال کرد چون ایمیل بدرستی در دستگاه شما پیکربندی نشده است.";
 
@@ -259,9 +247,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "ساير";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "مسدودساز محتوا";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "فيلترها:";
 
@@ -318,9 +303,6 @@
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "صفحه خانگي:";
-
-/* (AboutController) current app version string */
-"about_version" = "نسخه";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "رمزعبور یا ایمیل اشتباه است";

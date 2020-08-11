@@ -1,5 +1,5 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "Ha ocurrido un error inesperado. Por favor, contacte con el equipo de soporte.";
+"support_unexpected_error" = "Se ha producido un error inesperado. Por favor, contacta con el equipo de soporte.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "No se pueden convertir las reglas ya que ocurrió un error inesperado. Por favor, contacta con el equipo de soporte.";
@@ -107,7 +107,7 @@
 "purchase_success_message" = "¡La compra se ha completado con éxito! La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
-"purchase_failure_message" = "Se produjo un error al procesar tu compra.";
+"purchase_failure_message" = "Se ha producido un error al procesar tu compra.";
 
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Personalizado";
@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Nombre:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Calificar aplicación";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Enviar comentario";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Informar de bloqueo incorrecto";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Reportar un error";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contactar asistencia técnica";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Exportar registros";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "No se puede enviar tu informe de error. Es posible que no hayas configurado un correo electrónico en tu dispositivo.";
 
@@ -223,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Servicio DNS gratis de Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Servidor DNS contra malware de Cloudflare que bloquea dominios maliciosos";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "El servidor de bloqueo de Cloudflare que restringe el acceso a dominios maliciosos y para \"adultos\"";
+
 /* Safe DNS server description */
 "safe_dns_description" = "Servicio DNS de SafeDNS";
 
@@ -233,7 +221,7 @@
 "dns_provider_adult_tag" = "Bloqueo de contenido para adultos";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Norma de no guardar tus datos";
+"dns_provider_no_logs_tag" = "No hay registros recopilados";
 
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Búsqueda segura";
@@ -281,7 +269,7 @@
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
 
 /* login error message */
-"login_error_message" = "Ocurrió un error mientras se iniciaba la sesión";
+"login_error_message" = "Se ha producido un error al iniciar sesión";
 
 /* purchase secription format */
 "purchase_description_format" = "Acerca de la suscripción a AdGuard:<br><br>• El pago se cargará a tu cuenta de iTunes en el momento de la confirmación de la compra.<br>• La suscripción se renueva automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual.<br>• La tarifa de renovación de la suscripción se cobrará dentro de las 24 horas anteriores al final del período actual. Tus suscripciones pueden ser administradas y tu renovación automática puede ser desactivada en la configuración de tu cuenta de iTunes después de comprar una suscripción.<br><br><a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
@@ -308,10 +296,7 @@
 "theme_header_title" = "Tema";
 
 /* (AdvancedSettingsController) "Other" header view title*/
-"other_header_title" = "Otro";
-
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Bloqueadores de contenido";
+"other_header_title" = "Otros";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtros:";
@@ -374,7 +359,7 @@
 "assistant_launching_unable" = "La política de seguridad de este sitio web no permite ejecutar el Asistente de AdGuard.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "Se produjo un error inesperado al iniciar la extensión de acción de Safari. Póngase en contacto con el servicio de asistencia de AdGuard si esto vuelve a suceder.";
+"support_error_safari_extension" = "Se ha producido un error inesperado al iniciar la extensión de acción de Safari. Póngase en contacto con el servicio de asistencia de AdGuard si esto vuelve a suceder.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
 "common_warning_title" = "Advertencia";
@@ -400,8 +385,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "¿Está seguro de que desea eliminar este filtro?";
 
-/* (AboutController) current app version string */
-"about_version" = "Versión";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Versión %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nTodos los derechos reservados. adguard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Cerrar sesión";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licencia";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "¡Paga una vez y utiliza las características de AdGuard Premium en todos tus dispositivos iOS!";
@@ -467,16 +461,16 @@
 "disabled" = "Deshabilitado";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "ELIMINAR DE LA LISTA DE PERMITIDO";
+"remove_from_whitelist" = "Eliminar de la lista de permitido";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "ELIMINAR DE LA LISTA DE BLOQUEO";
+"remove_from_blacklist" = "Eliminar de la lista de bloqueo";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "AÑADIR A LA LISTA DE PERMITIDO";
+"add_to_whitelist" = "Añadir a la lista de permitido";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "AÑADIR A LA LISTA DE BLOQUEO";
+"add_to_blacklist" = "Añadir a la lista de bloqueo";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permite bloquear sitios de phishing y otros dominios peligrosos. Disponible para usuarios Premium";

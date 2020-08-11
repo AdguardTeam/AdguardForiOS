@@ -154,24 +154,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "名稱：";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "對應用程式評分";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "傳送回饋意見";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "報告不正確的封鎖";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "於 GitHub 上報告程式錯誤";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "與支援聯繫";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "匯出記錄";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "無法傳送程式錯誤報告。您可能於您的裝置上沒有已配置的電子郵件帳號。";
 
@@ -216,6 +198,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "由 Cloudflare 提供之免費的 DNS 服務";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "由 Cloudflare 提供之反惡意軟體 DNS 伺服器，其封鎖惡意的網域";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "限制對惡意的和'成人'網域之存取的 Cloudflare 的封鎖伺服器";
 
 /* Safe DNS server description */
 "safe_dns_description" = "由 SafeDNS 提供之 DNS 服務";
@@ -304,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "其它的";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "內容阻擋器";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "過濾器：";
 
@@ -324,6 +309,12 @@
 
 /* (AdvancedSettingsController) Remove button title */
 "remove_title" = "移除";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "移除 VPN 設定檔";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "您確定您想要移除您的 VPN 設定檔並禁用 DNS 防護嗎？";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "錯誤已發生";
@@ -385,8 +376,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "您確定您想要刪除該過濾器嗎？";
 
-/* (AboutController) current app version string */
-"about_version" = "版本";
+/* (AboutViewController) current app version format */
+"about_version_format" = "版本 %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009–%@。AdGuard 軟體有限公司\n保留所有的權利。AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "登出";
+
+/* (AboutViewController) Login title */
+"common_license" = "授權";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "付費一次，然後於所有您的 iOS 裝置上使用 AdGuard 高級版功能！";
@@ -448,11 +448,29 @@
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "從封鎖清單中移除";
 
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "加至允許清單";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "加至封鎖清單";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "影音播放器";
+
 /*(LogCategory) comments category*/
 "comments" = "評論";
 
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "顧客互動";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "色情廣告";
+
 /*(LogCategory) advertising category*/
 "advertising" = "廣告";
+
+/*(LogCategory) essential category*/
+"essential" = "必要的";
 
 /*(LogCategory) site_analytics category*/
 "site_analytics" = "網站分析";
@@ -520,8 +538,14 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "所有的時間";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "內容阻擋器正被更新…";
+
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "正在載入過濾器…";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "規則正被轉換…";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新自訂的過濾器";
@@ -553,6 +577,12 @@
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "更多的";
 
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ 項規則被啟用";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "太多的規則被啟用：%@。它們有些將被禁用";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已封鎖的";
 
@@ -560,7 +590,16 @@
 "dns_request_status_processed" = "已處理的";
 
 /*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "已加密的";
+
+/*(DnsLogController) status of dns request */
 "dns_request_status_allowlisted" = "已允許的";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "被加至允許清單";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "被加至封鎖清單";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_whitelist" = "已從允許清單中移除";
@@ -664,17 +703,26 @@
 /* (FeedbackController) - feedback sending failure message */
 "feedback_sending_failed_message" = "某事物出現問題";
 
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "透過繼續使用它，您接受該<br /><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "請求";
 
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "加密的請求";
 
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "所有的請求";
+
 /* (ActivityViewController) - None message when there is no statistics */
 "none_message" = "無";
 
 /* (DnsLogContainerController) - Activity title */
 "activity_title" = "活動";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d 項請求";
 
 
 // MARK: - Strings for VoiceOver -
@@ -693,8 +741,26 @@
 /* (MainTabBarController) Settings page tab for VoiceOver*/
 "settings_page_tab" = "設定畫面";
 
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari 防護被啟用";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari 防護被禁用";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS 防護被啟用";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS 防護被禁用";
+
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "更新過濾器";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "請求數量";
 
 
 // MARK: - SystemProtectionEnablerController
@@ -707,3 +773,11 @@
 /* (GetProTableController) Choose your subscription type for VoiceOver*/
 
 "choose_sub_voiceover" = "選擇您的訂閱類型";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "於此輸入您的電子郵件地址";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "於此輸入您的密碼";

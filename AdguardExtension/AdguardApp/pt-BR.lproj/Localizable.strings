@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Nome:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Avaliar aplicativo";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Enviar feedback";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Denunciar bloqueio incorreto";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Reportar um problema no GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Entre em contato com o suporte";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Exportar registros";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Não foi possível enviar o relatório de erro. Você pode não ter configurado um e-mail no seu dispositivo.";
 
@@ -310,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Outros";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Bloqueadores de conteúdo";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtros:";
 
@@ -400,9 +379,6 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Você tem certeza de que deseja excluir este filtro?";
 
-/* (AboutController) current app version string */
-"about_version" = "Versão";
-
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pague uma vez e use os recursos do AdGuard Premium em todos os seus dispositivos!";
 
@@ -465,18 +441,6 @@
 
 /* "Disabled" title */
 "disabled" = "Desativado";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "REMOVER DA LISTA BRANCA";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "REMOVER DA LISTA NEGRA";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "ADICIONAR NA LISTA BRANCA";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "ADICIONAR NA LISTA NEGRA";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permite o bloqueio de sites de phishing e outros domínios perigosos. Disponível para usuários Premium";

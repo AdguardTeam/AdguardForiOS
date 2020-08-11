@@ -110,9 +110,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Comience su primer día con prueba gratuita</string>
+        <string>Comienza tu primer día con prueba gratuita</string>
         <key>other</key>
-        <string>Comience sus primeros %d días con prueba gratuita</string>
+        <string>Comienza tus primeros %d días con prueba gratuita</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -126,9 +126,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Comience su primera semana con prueba gratuita</string>
+        <string>Comienza tu primera semana con prueba gratuita</string>
         <key>other</key>
-        <string>Comience sus primeras %d semanas con prueba gratuita</string>
+        <string>Comienza tus primeras %d semanas con prueba gratuita</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -142,9 +142,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Comience su primer mes con prueba gratuita</string>
+        <string>Comienza tu primer mes con prueba gratuita</string>
         <key>other</key>
-        <string>Comience sus primeros %d meses con prueba gratuita</string>
+        <string>Comienza tus primeros %d meses con prueba gratuita</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -158,9 +158,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Comience su primer año con prueba gratuita</string>
+        <string>Comienza tu primer año con prueba gratuita</string>
         <key>other</key>
-        <string>Comience sus primeros %d años con prueba gratuita</string>
+        <string>Comienza tus primeros %d años con prueba gratuita</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

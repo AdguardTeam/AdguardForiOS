@@ -1,0 +1,50 @@
+/* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Váljon erősebbé a PRÉMIUMMAL!";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "JAVÍTÁS";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "INGYENES PRÓBA";
+
+/* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
+"5pX-mg-2fq.text" = "Időszak";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
+"Btd-nN-zLO.text" = "kérés";
+
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "Cfe-vu-29O"; */
+"Cfe-vu-29O.text" = "átl. idő";
+
+/* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
+"FcP-gP-TsG.text" = "Néhány tartalomblokkoló ki van kapcsolva";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
+"Oez-VU-4fi.normalTitle" = "Ma";
+
+/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
+"Roe-x7-9e8.normalTitle" = "24 óra";
+
+/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
+"VRw-EP-ZlF.normalTitle" = "7 nap";
+
+/* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
+"YaQ-RE-YZT.title" = "AdGuard";
+
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "a5U-A8-S8G"; */
+"a5U-A8-S8G.text" = "titkosított";
+
+/* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
+"cvv-CS-LMQ.text" = "Néhány Safari tartalomblokkoló ki van kapcsolva";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
+"gDb-ep-jQg.normalTitle" = "Mindenkori";
+
+/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
+"gu3-as-BZN.normalTitle" = "30 nap";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
+"kfe-5H-fB1.normalTitle" = "Mindenkori";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "JAVÍTÁS";

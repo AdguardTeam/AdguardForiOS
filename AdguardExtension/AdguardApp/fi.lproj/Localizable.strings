@@ -31,9 +31,6 @@
 /* YES Button caption in alert */
 "common_action_yes" = "KYLLÄ";
 
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Virheraportti";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Ei voida lähettää virheraporttia, koska et ole määrittänyt sähköpostitiliä laitteessasi.";
 

@@ -1,14 +1,74 @@
-/* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
-"6Z2-0N-PSp.text" = "Visszajelzés küldése";
+/* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
+"6Z2-0N-PSp.text" = "Támogatás";
+
+/* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
+"B4f-Bt-0w6.text" = "Alkalmazás értékelése";
+
+/* Class = "UILabel"; text = "Missed ads or broken sites"; ObjectID = "Con-9Z-LDc"; */
+"Con-9Z-LDc.text" = "Megjelenő hirdetések vagy hibás oldalak";
+
+/* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
+"Ebc-Lf-9R1.text" = "Licenc";
 
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Segítsen az AdGuard-nak jobbá tenni";
 
+/* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
+"GA6-E3-BcJ.text" = "Hiba jelentése";
+
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
+"HiP-B6-ATJ.text" = "Safari védelem";
+
+/* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
+"L2l-pO-K3q.text" = "Általános";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Mi az AdGuard?";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
+"UJb-NW-d5B.text" = "Beállítások";
+
+/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Van egy jó ötlete?";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Beállítások";
 
+/* Class = "UILabel"; text = "Support"; ObjectID = "cOi-GX-KAC"; */
+"cOi-GX-KAC.text" = "Támogatás";
+
+/* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
+"cWE-CY-2xl.text" = "Naplók exportálása";
+
+/* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
+"csx-k8-Qg7.text" = "Értékelheti az alkalmazást az App Store-ban";
+
+/* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
+"iwI-Gm-rAp.text" = "Hogyan blokkolja a hirdetéseket az AdGuarddal";
+
+/* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Segítsen az alkalmazás fejlesztésében";
+
+/* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
+"q9f-Zw-7sc.text" = "Téves blokkolás jelentése";
+
+/* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
+"qDy-4e-MsZ.text" = "Exportálhatja a naplókat és elküldheti nekünk kényelmes módon";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
+"r4M-ec-gKY.text" = "DNS védelem";
+
+/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "Funkció kérés";
+
+/* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
+"se6-jk-4Az.text" = "Előfizetések és fiók";
+
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "Névjegy";
+
+/* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
+"xb2-Gf-9h7.text" = "Megjelenés és egyebek";
+
+/* Class = "UILabel"; text = "Watch video tutorial"; ObjectID = "yDj-tf-86u"; Note = "(Main Menu) Advanced Settings caption"; */
+"yDj-tf-86u.text" = "Videós bemutató megtekintése";

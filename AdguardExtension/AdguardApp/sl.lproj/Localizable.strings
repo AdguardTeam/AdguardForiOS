@@ -157,24 +157,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Ime:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Ocenite aplikacijo";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Pošljite povratne informacije";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Prijavi nepravilno zaviranje";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Prijavi napako na GitHubu";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Obrnite se na podporo";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Izvozi dnevnike";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Poročila o napaki ni mogoče poslati. V napravi morda niste nastavili e-pošte.";
 
@@ -219,6 +201,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Brezplačna DNS storitev podjetja Cloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Cloudflare DNS proti zlonamernim programom, ki onemogoča zlonamerne domene";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare zaviralni strežnik, ki omejuje dostop do zlonamernih in domen 'za odrasle'";
 
 /* Safe DNS server description */
 "safe_dns_description" = "DNS storitev podjetja SafeDNS";
@@ -307,9 +295,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Ostalo";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Zaviralci vsebine";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtri:";
 
@@ -397,8 +382,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Ali ste prepričani, da želite izbrisati ta filter?";
 
-/* (AboutController) current app version string */
-"about_version" = "Različica";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Različica %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009–%@. Adguard Software Ltd.\nVse pravice so pridržane. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Odjava";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licenca";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Plačajte enkrat in uporabite funkcije AdGuard Premium na vseh vaših napravah iOS!";
@@ -464,16 +458,16 @@
 "disabled" = "Onemogočeno";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "ODSTRANI S SEZNAMA DOVOLJENIH";
+"remove_from_whitelist" = "Odstrani s seznama dovoljenih";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "ODSTRANI S SEZNAMA NEDOVOLJENIH";
+"remove_from_blacklist" = "Odstrani s seznama nedovoljenih";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "DODAJ NA SEZNAM DOVOLJENIH";
+"add_to_whitelist" = "Dodaj na seznam dovoljenih";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "DODAJ NA SEZNAM NEDOVOLJENIH";
+"add_to_blacklist" = "Dodaj na seznam nedovoljenih";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Dovoli zaviranje lažnega predstavljanja in drugih nevarnih domen. Na voljo uporabnikom Premium";

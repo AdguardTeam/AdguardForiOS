@@ -8,7 +8,7 @@
 "Znm-Yl-fWN.text" = "Tocca qui per usare il strumento per la rimozione di annunci mancanti o in generale qualsiasi elemento che non vuoi vedere su questa pagina";
 
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
-"eVN-fj-ATQ.text" = "Abilita su questa pagina";
+"eVN-fj-ATQ.text" = "Attiva su questa pagina";
 
 /* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
 "fxW-Cr-iPW.normalTitle" = "CHIUDI";

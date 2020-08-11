@@ -154,24 +154,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Название:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Оценить приложение";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Отправить отзыв";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Пропущенная реклама";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Сообщить об ошибке на GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Написать в поддержку";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Экспортировать логи";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Невозможно отправить отчет об ошибке. Возможно, на вашем устройстве не настроена электронная почта.";
 
@@ -304,9 +286,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Прочее";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Блокировщики контента";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Фильтры:";
 
@@ -394,9 +373,6 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Вы уверены, что хотите удалить этот фильтр?";
 
-/* (AboutController) current app version string */
-"about_version" = "Версия";
-
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих iOS-устройствах!";
 
@@ -459,18 +435,6 @@
 
 /* "Disabled" title */
 "disabled" = "Отключено";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "УДАЛИТЬ ИЗ БЕЛОГО СПИСКА";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "УДАЛИТЬ ИЗ ЧЕРНОГО СПИСКА";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "ДОБАВИТЬ В БЕЛЫЙ СПИСОК";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "ДОБАВИТЬ В ЧЕРНЫЙ СПИСОК";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Позволяют блокировать фишинговые сайты и другие опасные домены. Доступен пользователям Премиум-подписки";

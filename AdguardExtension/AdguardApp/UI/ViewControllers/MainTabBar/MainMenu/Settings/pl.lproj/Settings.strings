@@ -1,14 +1,6 @@
-/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
-"2s7-mz-LlB.title" = "Zresetuj";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Niezgodny z innymi aplikacjami VPN,\nniestabilny";
-
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
-"Bjk-AC-5fy.text" = "Tryb tunelowy";
-
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
-"ChK-gV-7pc.title" = "Ustawienia";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "Niezgodny z innymi aplikacjami VPN";
@@ -22,21 +14,6 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "Uruchom ponownie ochronę, gdy\nzmiany sieciowe";
-
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
-"KSL-dU-yfA.text" = "Blokowanie treści";
-
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
-"KVr-dC-Lo5.title" = "Tryb tunelowy";
-
-/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
-"Ll9-il-kpC.title" = "Ustawienia zaawansowane";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Jeśli to ustawienie jest włączone, AdGuard zignoruje ogólne reguły „kosmetyczne”. Przyspieszy to renderowanie stron w zamian za jakość filtrowania";
-
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Wyzeruj statystyki";
 
@@ -46,23 +23,11 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Motyw";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
-"W6u-T8-UVZ.text" = "Użyj uproszczonych filtrów";
-
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Auto-aktualizacja tylko przez Wi-Fi";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "Masz 6 blokerów zawartości, z których każdy może zawierać 50 000 reguł";
-
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
-
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "Włącz tę opcję, jeśli występują problemy z połączeniem internetowym podczas działania AdGuard";
-
-/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
-"aoV-et-2ku.text" = "Pokaż pasek stanu";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Ustawienia zaawansowane";
@@ -75,9 +40,6 @@
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "W trybie Split-Tunnel AdGuard jest kompatybilny z tak zwanymi aplikacjami „Personal VPN”. Jako kompromis, w tym trybie może zostać pominięty przez system w przypadku złej łączności";
-
-/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "Pokaż pasek postępu aktualizacji filtrów";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Inne";

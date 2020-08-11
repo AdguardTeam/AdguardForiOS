@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "名称:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "评价应用";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "发送反馈";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "报告错误拦截";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "在 GitHub 上报告错误";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "联系支持";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "导出日志";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "无法发送错误报告。您可能没有在设备上设置电子邮件。";
 
@@ -310,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "其它";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "内容拦截器";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "过滤器：";
 
@@ -400,9 +379,6 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "是否删除选中的过滤器？";
 
-/* (AboutController) current app version string */
-"about_version" = "版本";
-
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard 高级版！";
 
@@ -465,18 +441,6 @@
 
 /* "Disabled" title */
 "disabled" = "禁用";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "移出白名单";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "移出黑名单";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "添加到白名单";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "添加到黑名单";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "允许阻止钓鱼网站和其他危险域。高级用户可用。";

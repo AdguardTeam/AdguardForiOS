@@ -32,7 +32,7 @@
 "YaQ-RE-YZT.title" = "AdGuard";
 
 /* Class = "UILabel"; text = "encrypted"; ObjectID = "a5U-A8-S8G"; */
-"a5U-A8-S8G.text" = "chifrées";
+"a5U-A8-S8G.text" = "chiffrées";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Certains bloqueurs de contenu pour Safari sont désactivés";
