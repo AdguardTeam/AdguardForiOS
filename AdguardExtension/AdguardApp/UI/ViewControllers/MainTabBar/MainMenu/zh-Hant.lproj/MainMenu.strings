@@ -29,7 +29,7 @@
 "UJb-NW-d5B.text" = "設定";
 
 /* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "您有個很棒的主意嗎？";
+"W6h-Gt-MMt.text" = "有個很棒的主意嗎？";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "設定";
@@ -47,7 +47,7 @@
 "iwI-Gm-rAp.text" = "如何用 AdGuard 封鎖廣告";
 
 /* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
-"ow5-MW-Ued.text" = "幫助我們改善我們的應用程式";
+"ow5-MW-Ued.text" = "幫助我們改善該應用程式";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "報告不正確的封鎖";

@@ -41,7 +41,7 @@
 "cWE-CY-2xl.text" = "Günlükleri dışa aktar";
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
-"csx-k8-Qg7.text" = "Uygulamayı App Store'da inceleyebilirsiniz";
+"csx-k8-Qg7.text" = "Uygulamayı App Store'da değerlendirebilirsiniz";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Adguard ile reklamlar nasıl engellenir";
