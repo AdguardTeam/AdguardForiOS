@@ -1,17 +1,14 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
-"2wy-vg-qvr.text" = "Bir filtre ekle";
+"2wy-vg-qvr.text" = "Filtre ekle";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
-"3WM-jW-br8.text" = "Bir filtre ekle";
+"3WM-jW-br8.text" = "Filtre ekle";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
 "6WB-a0-8YE.text" = "Safari koruması";
 
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "İsim:";
-
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
-"E3e-Mc-RhD.title" = "Filtreler";
 
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
 "Gg8-4u-qvU.text" = "AdGuard bu listedeki sitelerde çalışmıyor";
@@ -52,14 +49,14 @@
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "İzin verilen listesi";
 
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
-"gbf-TL-LXR.title" = "Filtreler";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "EKLE";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "İPTAL";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
+"mTM-IO-iFw.text" = "Filtreler";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "SONRAKİ";
