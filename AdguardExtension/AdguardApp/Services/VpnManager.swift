@@ -70,6 +70,11 @@ class VpnManager: VpnManagerProtocol {
     weak var complexProtection: ComplexProtectionServiceProtocol?
     
     private var vpnInstalledValue: Bool?
+    
+    /*
+     When Tunnel is in process of restarting this variable contains function to start tunnel
+     */
+    private var startTunnel: (() -> Void)?
             
     // MARK: - initialize
     
@@ -79,10 +84,22 @@ class VpnManager: VpnManagerProtocol {
         self.networkSettings = networkSettings
         self.dnsProviders = dnsProviders
         
-        configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNStatusDidChange, object: nil, queue: nil) { [weak self] (note) in
+        configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNStatusDidChange, object: nil, queue: nil) { [weak self] note in
             guard let self = self else { return }
             
-            if (note.object as? NETunnelProviderSession)?.status == NEVPNStatus.invalid {
+            guard let session = note.object as? NETunnelProviderSession else {
+                DDLogError("Invalid note when vpn status received")
+                return
+            }
+            let vpnStatus = session.status
+            
+            // When Tunnel is stopped we should start it
+            if vpnStatus == .disconnected, self.startTunnel != nil {
+                self.startTunnel?()
+                self.startTunnel = nil // Set to nil when restart is finished
+            }
+            
+            if vpnStatus == .invalid {
                 self.workingQueue.async { [weak self] in
                     guard let self = self else { return }
                     
@@ -384,12 +401,17 @@ class VpnManager: VpnManagerProtocol {
     
     private func restartTunnel(_ manager: NETunnelProviderManager) {
         DDLogInfo("(VpnManager) - restartTunnel called")
-        manager.connection.stopVPNTunnel()
-        do {
-            try manager.connection.startVPNTunnel()
-        } catch {
-            DDLogError("(VpnManager) - start tunnel error: \(error.localizedDescription)")
+        
+        // Assigning start tunnel function to call it in observer
+        startTunnel = {
+            do {
+                try manager.connection.startVPNTunnel()
+            } catch {
+                DDLogError("(VpnManager) - start tunnel error: \(error.localizedDescription)")
+            }
         }
+        
+        manager.connection.stopVPNTunnel()
     }
     
     // check if vpn enabled state was changed outside the application
