@@ -92,7 +92,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     @IBAction func listOfRulesStateAction(_ sender: UISwitch) {
         model?.enabled = sender.isOn
-        tableView.reloadRows(at: [IndexPath(row: 0, section: enableListOfRulesSection)], with: .automatic)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: enableListOfRulesSection)], with: .fade)
     }
     
     @IBAction func changeRuleStateAction(_ sender: UIButton) {
@@ -381,7 +381,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         
         DispatchQueue.main.async {[weak self] in
             UIView.animate(withDuration: 0.5){
-                self?.tableView.deleteSections([0,1], with: .top)
+                self?.tableView.deleteSections([0,1], with: .fade)
                 self?.searchView.alpha = 1.0
                 self?.searchBar.alpha = 1.0
                 self?.searchBar.becomeFirstResponder()
@@ -398,8 +398,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             
             UIView.animate(withDuration: 0.5){
                 self?.tableView.beginUpdates()
-                self?.tableView.reloadSections([0], with: .right)
-                self?.tableView.insertSections([0,1], with: .right)
+                self?.tableView.reloadSections([0], with: .fade)
+                self?.tableView.insertSections([0,1], with: .fade)
                 self?.tableView.endUpdates()
             }
         }

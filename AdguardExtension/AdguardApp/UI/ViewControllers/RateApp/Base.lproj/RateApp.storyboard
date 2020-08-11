@@ -108,19 +108,19 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtG-5p-3KJ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="72" y="23.5" width="880" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <rect key="frame" x="72" y="12" width="880" height="48"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f75-SI-pMQ">
-                                                <rect key="frame" x="0.0" y="118" width="1024" height="1"/>
+                                                <rect key="frame" x="0.0" y="144" width="1024" height="0.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="5M1-Gx-Qy7"/>
@@ -137,7 +137,9 @@
                                             <constraint firstItem="ED2-Va-CgA" firstAttribute="top" secondItem="f75-SI-pMQ" secondAttribute="bottom" constant="16" id="CyA-AB-eg9"/>
                                             <constraint firstItem="TBB-iF-qGA" firstAttribute="top" secondItem="ED2-Va-CgA" secondAttribute="top" id="DSz-kz-qsW"/>
                                             <constraint firstAttribute="trailing" secondItem="oJi-EL-gWT" secondAttribute="trailing" constant="24" id="H97-e7-rzj"/>
-                                            <constraint firstItem="oJi-EL-gWT" firstAttribute="top" secondItem="T9u-he-9bU" secondAttribute="bottom" constant="22" id="HJk-dI-Hac"/>
+                                            <constraint firstItem="oJi-EL-gWT" firstAttribute="top" secondItem="T9u-he-9bU" secondAttribute="bottom" constant="24" id="HJk-dI-Hac">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="XtG-5p-3KJ" secondAttribute="trailing" constant="62" id="Isu-X7-xja">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="72"/>
                                             </constraint>

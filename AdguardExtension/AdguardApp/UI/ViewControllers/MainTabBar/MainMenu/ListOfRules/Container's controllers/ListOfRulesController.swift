@@ -219,7 +219,7 @@ class ListOfRulesController: UIViewController {
     private func changeRightButtton(){
         if state == .editing {
             rightButton.setTitle(ACLocalizedString("common_action_cancel", nil), for: .normal)
-            rightButton.setTitleColor(theme.errorRedColor, for: .normal)
+            rightButton.setTitleColor(theme.lightGrayTextColor, for: .normal)
         } else {
             let title = model?.type == .safariUserfilter ? ACLocalizedString("common_edit", nil) : ACLocalizedString("common_select", nil)
             rightButton.setTitle(title, for: .normal)

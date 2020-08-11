@@ -34,8 +34,9 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        textView.font = UIFont(name: "PTMono-Regular", size: 15.0)
+        let fontSize = textView.font?.pointSize ?? 16.0
+        let font = UIFont(name: "PTMono-Regular", size: fontSize)
+        textView.font = font ?? UIFont.systemFont(ofSize: fontSize)
         textView.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         textView.textContainer.lineFragmentPadding = 0.0
         

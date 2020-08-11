@@ -93,10 +93,14 @@ class DesciptionCell: UITableViewCell {
     
     private func setDescriptionText(_ text: String){
         if let headerText = text.attributedStringFromHtml() {
-            let font = descriptionTextView.font ?? UIFont.systemFont(ofSize: 14)
+            let font = descriptionTextView.font ?? UIFont.systemFont(ofSize: 16.0)
             descriptionTextView.text = ""
+            let style = NSMutableParagraphStyle()
+            style.alignment = .center
+            
             headerText.addAttribute(.foregroundColor, value: theme?.lightGrayTextColor ?? .black, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
+            headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
             descriptionTextView.attributedText = headerText
         }
     }
