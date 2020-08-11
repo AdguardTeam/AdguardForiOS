@@ -1,2 +1,11 @@
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
-"CqW-k3-vqO.title" = "Accedi";
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
+"Jbp-5W-y9v.normalTitle" = "Informativa sulla Privacy";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
+"hE0-Ag-02J.text" = "Informazioni";
+
+/* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "Leggi di più riguardo il prodotto";
+
+/* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
+"uyB-mD-gtt.normalTitle" = "EULA";

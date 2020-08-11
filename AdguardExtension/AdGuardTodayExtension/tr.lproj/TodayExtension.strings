@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "28V-ha-qHw"; */
+"28V-ha-qHw.text" = "Safari koruması";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
+"WAp-Xx-eXF.text" = "talep";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "box-OA-msa"; */
+"box-OA-msa.text" = "Sistem koruması";
+
+/* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
+"cva-11-jEA.text" = "Bütün istatistikler:";
+
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "eaJ-er-mJu"; */
+"eaJ-er-mJu.text" = "ort. süre";
+
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "wd5-Po-h4x"; */
+"wd5-Po-h4x.text" = "şifrelenmiş";

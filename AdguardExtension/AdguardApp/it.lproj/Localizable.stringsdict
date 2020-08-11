@@ -14,9 +14,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 regola abilitata</string>
+        <string>1 regola attiva</string>
         <key>other</key>
-        <string>%d regole abilitate</string>
+        <string>%d regole attive</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -30,9 +30,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 filtro abilitato</string>
+        <string>1 filtro attivo</string>
         <key>other</key>
-        <string>%d filtri abilitati</string>
+        <string>%d filtri attivi</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>

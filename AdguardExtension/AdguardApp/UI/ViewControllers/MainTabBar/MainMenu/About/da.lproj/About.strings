@@ -1,17 +1,11 @@
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
-"CqW-k3-vqO.title" = "Log ind";
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
+"Jbp-5W-y9v.normalTitle" = "Privatlivspolitik";
 
-/* Class = "UILabel"; text = "Manage License"; ObjectID = "K2a-tW-P6P"; */
-"K2a-tW-P6P.text" = "Administrer Licens";
+/* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
+"hE0-Ag-02J.text" = "Om";
 
-/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
-"RqV-y2-sfF.text" = "Videovejledning";
+/* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "Læs mere om produktet";
 
-/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "SJc-cd-hKd"; */
-"SJc-cd-hKd.text" = "Udviklerens Websted";
-
-/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "o0X-Zy-4g6"; */
-"o0X-Zy-4g6.text" = "Anerkendelser";
-
-/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
-"oFL-ch-4PY.text" = "Forum";
+/* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
+"uyB-mD-gtt.normalTitle" = "EULA";

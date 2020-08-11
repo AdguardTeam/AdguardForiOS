@@ -16,26 +16,14 @@
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "이메일:";
 
-/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "트래커 및 광고 차단";
-
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "비밀번호:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
 
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "로그인";
-
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "온라인 사기, 피싱 및 크립토재킹을 차단합니다";
-
-/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "로그인";
-
-/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
-"dcW-zZ-VlL.title" = "로그인";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "개인정보를 보호하세요";

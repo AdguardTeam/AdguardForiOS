@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@ Tsd.";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@ 100 Mio.";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@ 10 Tsd.";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Benutzerregeln";
 
@@ -153,24 +159,6 @@
 
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Name:";
-
-/* (Main Menu) Rate app action */
-"rate_app_title" = "App bewerten";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Feedback senden";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Fehlerhaftes Sperren melden";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Fehler auf GitHub melden";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Support kontaktieren";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Protokolle exportieren";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Es kann kein Fehlerreport gesendet werden. Möglicherweise ist keine E-Mail-Adresse auf Ihrem Gerät eingerichtet.";
@@ -304,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Sonstiges";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Inhaltsblocker";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filter:";
 
@@ -394,8 +379,8 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Möchten Sie diesen Filter wirklich löschen?";
 
-/* (AboutController) current app version string */
-"about_version" = "Version";
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAlle Rechte vorbehalten. AdGuard.com";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Nur einmal bezahlen und die AdGuard Premium-Funktionen auf allen Ihren iOS-Geräten nutzen!";
@@ -460,17 +445,8 @@
 /* "Disabled" title */
 "disabled" = "Deaktiviert";
 
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "AUS DER POSITIVLISTE ENTFERNEN";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "AUS DER BLOCKLISTE ENTFERNEN";
-
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "ZUR POSITIVLISTE HINZUFÜGEN";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "ZUR BLOCKLISTE HINZUFÜGEN";
+"add_to_whitelist" = "Zur Positivliste hinzufügen";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Erlauben das Blockieren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";

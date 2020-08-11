@@ -1,8 +1,20 @@
-/* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
-"6Z2-0N-PSp.text" = "发送反馈";
+/* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
+"6Z2-0N-PSp.text" = "支持";
+
+/* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
+"B4f-Bt-0w6.text" = "评价应用";
+
+/* Class = "UILabel"; text = "Missed ads or broken sites"; ObjectID = "Con-9Z-LDc"; */
+"Con-9Z-LDc.text" = "错过的广告或网站损坏";
+
+/* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
+"Ebc-Lf-9R1.text" = "许可";
 
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "帮助我们使 AdGuard 更好";
+
+/* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
+"GA6-E3-BcJ.text" = "报告错误";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Safari防护";
@@ -16,14 +28,47 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "设置";
 
+/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "您是否有更好的提议？";
+
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "设置";
 
+/* Class = "UILabel"; text = "Support"; ObjectID = "cOi-GX-KAC"; */
+"cOi-GX-KAC.text" = "支持";
+
+/* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
+"cWE-CY-2xl.text" = "导出日志";
+
+/* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
+"csx-k8-Qg7.text" = "您可在 App Store 上评价该应用程序";
+
+/* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
+"iwI-Gm-rAp.text" = "如何用 AdGuard 拦截广告";
+
+/* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "帮我们进一步改进我们的应用";
+
+/* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
+"q9f-Zw-7sc.text" = "报告错误拦截";
+
+/* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
+"qDy-4e-MsZ.text" = "您可以导出日志并将其发送给我们";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS保护功能";
+
+/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "功能请求";
+
+/* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
+"se6-jk-4Az.text" = "订阅和账户";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "关于";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "外观和其他";
+
+/* Class = "UILabel"; text = "Watch video tutorial"; ObjectID = "yDj-tf-86u"; Note = "(Main Menu) Advanced Settings caption"; */
+"yDj-tf-86u.text" = "观看视频教程";

@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Nom :";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Noter l’application";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Envoyer vos commentaires";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Signaler un blocage incorrect";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Rapporter la bogue sur GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Contacter l'assistance technique";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Exporter les journaux";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Impossible d'envoyer le rapport de bogue. L'adresse e-mail n'est pas configurée sur votre appareil.";
 
@@ -310,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Autre";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Bloqueurs de contenus";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtres :";
 
@@ -400,9 +379,6 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Voulez-vous vraiment supprimer ce filtre ?";
 
-/* (AboutController) current app version string */
-"about_version" = "Version";
-
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Payez une fois et utilisez les fonctionnalités Premium d'AdGuard sur tous vos appareils iOS!";
 
@@ -465,18 +441,6 @@
 
 /* "Disabled" title */
 "disabled" = "Désactivé";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "RETIRER DE LA LISTE BLANCHE";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "RETIRER DE LA LISTE NOIRE";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "AJOUTER À LA LISTE BLANCHE";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "AJOUTER À LA LISTE NOIRE";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permet de bloquer les sites d'hameçonnage et autres domaines dangereux. Disponible pour les utilisateurs Premium";
@@ -632,7 +596,7 @@
 "dns_request_status_processed" = "Traités";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_encrypted" = "Chifrée";
+"dns_request_status_encrypted" = "Chiffrée";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_allowlisted" = "Autorisée";

@@ -25,9 +25,6 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "활동";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
-"J13-xW-KiK.normalTitle" = "복사됨";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "취소";
 
@@ -45,9 +42,6 @@
 
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "기업";
-
-/* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
-"ZyE-7P-8Tm.title" = "요청 세부 사항";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "보안 필터, DNS 보호, 사용자 정의 필터, 기타.";
@@ -72,9 +66,6 @@
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "요청";
-
-/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "도메인 수준을 선택합니다";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
 "wt5-4Q-CTq.normalTitle" = "암호화됨";

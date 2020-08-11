@@ -31,14 +31,8 @@
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Zaawansowane ustawienia sieciowe";
 
-/* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
-"J1Z-V3-gS6.normalTitle" = "WYBIERZ TEN SERWER";
-
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Dodaj filtr";
-
-/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
-"VR9-fh-ogr.title" = "Ustawienia sieci";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ANULUJ";

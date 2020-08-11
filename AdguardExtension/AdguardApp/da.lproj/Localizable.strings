@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Navn:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Bedøm app";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Send feedback";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Rapporter fejlagtig blokering";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Rapporter en fejl på GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontakt Support";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Eksporter logs";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Kan ikke sende fejlrapport. Du har måske ikke oprettet en e-mail på din enhed.";
 
@@ -222,6 +204,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Gratis DNS-tjeneste af Cloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Anti-malware DNS-server af Cloudflare, der blokerer ondsindede domæner";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflares blokeringsserver, der begrænser adgangen til ondsindede og 'voksne' domæner";
 
 /* Safe DNS server description */
 "safe_dns_description" = "DNS-tjeneste af SafeDNS";
@@ -310,9 +298,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Andre";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Indholdsblockere";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtre:";
 
@@ -400,8 +385,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Er du sikker på, at du vil slette dette filter?";
 
-/* (AboutController) current app version string */
-"about_version" = "Version";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Version %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ Adguard Software Ltd.\nAlle rettigheder forbeholdes. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Log ud";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licens";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Betal en gang, og brug AdGuard Premium-funktionerne på alle dine iOS-enheder!";
@@ -467,16 +461,16 @@
 "disabled" = "Deaktiveret";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "FJERN FRA LISTE OVER TILLADTE";
+"remove_from_whitelist" = "Fjern fra liste over tilladte";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "FJERN FRA BLOKERINGSLISTE";
+"remove_from_blacklist" = "Fjern fra blokeringsliste";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "TILFØJ TIL LISTE OVER TILLADTE";
+"add_to_whitelist" = "Tilføj til liste over tilladte";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "TILFØJ TIL BLOKERINGSLISTE";
+"add_to_blacklist" = "Tilføj til blokeringsliste";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Tillad at blokere phishing-websider og andre farlige domæner. Tilgængelig for Premium-brugere";

@@ -121,18 +121,6 @@
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "Domeen:";
 
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Teavita valest blokeeringust";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Vearaport";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontakteeru tehnilise toega";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Ekspordi logid";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Ei saa vearaportit saata, kuna eeldatavasti pole seadmes e-posti ülesse seatud.";
 
@@ -259,9 +247,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Muu";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Sisu blokeerijad";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtrid:";
 
@@ -318,9 +303,6 @@
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Koduleht:";
-
-/* (AboutController) current app version string */
-"about_version" = "Versioon";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Vale e-post või parool";

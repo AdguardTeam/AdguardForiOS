@@ -22,15 +22,6 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Забравили сте си паролата?";
 
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Доклад за неправилно блокиране";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Доклад за грешка";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Свържете се с еподдръжката";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Не може да изпратим доклад за грешка, защото нямате създаден и-мейл на вашето устройство.";
 

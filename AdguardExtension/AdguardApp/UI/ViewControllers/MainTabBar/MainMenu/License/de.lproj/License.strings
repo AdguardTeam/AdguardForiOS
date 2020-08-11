@@ -16,26 +16,14 @@
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-Mail:";
 
-/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "Blockieren Sie mehr Anzeigen & Tracker";
-
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Passwort:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "ZU MEINEM KONTO GEHEN";
 
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Anmelden";
-
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Blockieren Sie Phishing, Betrug und Kryptodiebstahl";
-
-/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "Anmelden";
-
-/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
-"dcW-zZ-VlL.title" = "Anmelden";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Schätzen Sie Ihre Privatsphäre";

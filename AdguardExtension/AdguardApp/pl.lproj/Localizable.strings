@@ -133,21 +133,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Nazwa:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Oceń aplikację";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Zgłoś nieprawidłowe zablokowanie";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Zgłoszenie błędu";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Skontaktuj się z Pomocą";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Eksportuj logi";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Nie można wysłać raportu o błędach, ponieważ nie skonfigurowano konta e-mail.";
 
@@ -274,9 +259,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Inne";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Blokowanie treści";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtry:";
 
@@ -345,9 +327,6 @@
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Usuń filtr";
-
-/* (AboutController) current app version string */
-"about_version" = "Wersja";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nieprawidłowy e-mail lub hasło";

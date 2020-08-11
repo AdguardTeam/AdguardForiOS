@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Název:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Ohodnotit aplikaci";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Odeslat zpětnou vazbu";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Nahlásit nekorektní blokování";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Nahlásit chybu na GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontaktovat podporu";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Exportovat protokoly";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Nelze odeslat zprávu o chybě. Možná nebyla v zařízení nastavena e-mailová adresa.";
 
@@ -194,13 +176,13 @@
 "filter_version_format" = "verze %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Split-Tunnel, kompatibilní s aplikacemi „Osobní VPN“";
+"tunnel_mode_split_description" = "Dělený tunel, kompatibilní s aplikacemi „Osobní VPN“";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel, nekompatibilní s jinými aplikacemi VPN";
+"tunnel_mode_full_description" = "Úplný tunel, nekompatibilní s jinými aplikacemi VPN";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (bez ikony VPN), nekompatibilní s jinými aplikacemi VPN, méně stabilní";
+"tunnel_mode_full_without_icon_description" = "Úplný tunel (bez ikony VPN), nekompatibilní s jinými aplikacemi VPN, méně stabilní";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "AdGuard DNS je alternativní způsob ochrany vašeho soukromí před různými čítači, analytickými systémy a podvodnými stránkami";
@@ -222,6 +204,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Volně dostupná alternativa DNS od Cloudfare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "DNS servery společnosti Cloudflare s ochranou proti podvodnému software a doménám";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Servery společnosti Cloudflare, které omezují přístup na podvodné domény včetně domén s obsahem pro dospělé";
 
 /* Safe DNS server description */
 "safe_dns_description" = "DNS od SafeDNS";
@@ -310,9 +298,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Ostatní";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Blokátory obsahu";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtry:";
 
@@ -400,8 +385,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Opravdu chcete smazat tento filtr?";
 
-/* (AboutController) current app version string */
-"about_version" = "Verze";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Verze %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nVšechna práva vyhrazena. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Odhlásit se";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licence";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Zaplaťte jedenkrát a používejte funkce AdGuard Premium na všech svých iOS zařízeních!";
@@ -467,16 +461,16 @@
 "disabled" = "Vypnuto";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "ODEBRAT ZE SEZNAMU POVOLENÝCH";
+"remove_from_whitelist" = "Odebrat ze seznamu povolených";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "ODEBRAT ZE SEZNAMU ZAKÁZANÝCH";
+"remove_from_blacklist" = "Odebrat ze seznamu zakázaných";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "PŘIDAT NA SEZNAM POVOLENÝCH";
+"add_to_whitelist" = "Přidat na seznam povolených";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "PŘIDAT NA SEZNAM ZAKÁZANÝCH";
+"add_to_blacklist" = "Přidat na seznam zakázaných";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Umožňuje blokování podvodných webů a dalších nebezpečných domén. Dostupné pro prémiové uživatele";

@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Napredne mrežne postavke";
 
-/* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
-"J1Z-V3-gS6.normalTitle" = "ODABERI";
-
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS poslužitelj";
 
@@ -48,9 +45,6 @@
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "ISPROBAJTE BESPLATNO";
-
-/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
-"VR9-fh-ogr.title" = "Mrežne postavke";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Popis dopuštenih";
@@ -85,11 +79,14 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
+"iPl-vI-lX5.text" = "Mrežne postavke";
+
 /* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
 "iaJ-tk-ohH.text" = "Možete poboljšati svoju internetsku privatnost šifriranjem DNS prometa. Da biste to učinili, odaberite jednog od preporučenih davatelja DNS usluga.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Popis blokiranih";
+"ihd-7R-RfE.text" = "Popis nedopuštenih";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "PONIŠTI";
@@ -123,6 +120,9 @@
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Adresa DNS poslužitelja";
+
+/* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
+"uCw-Mi-HiJ.title" = "Odaberi";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS filtriranje";

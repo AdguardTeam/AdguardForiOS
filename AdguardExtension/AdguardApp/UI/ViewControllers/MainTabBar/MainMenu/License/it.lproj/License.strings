@@ -10,14 +10,17 @@
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
 "FLH-Qd-Atk.text" = "Tutte le funzioni Premium sono disponibili";
 
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Accedi";
+
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "Imposta le tue regole";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
-/* Class = "UILabel"; text = "BLOCK MORE  ADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOCCA PIÙ ANNUNCI & TRACKERS";
+/* Class = "UILabel"; text = "BLOCK MORE\\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "BLOCCA PIÙ ANNUNCI E TRACCIATORI";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Password:";
@@ -25,17 +28,20 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "VAI AL MIO ACCOUNT";
 
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Accedere";
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Accedi";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Bloccare phishing, truffe e cripto-jacking";
 
-/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "ACCEDERE";
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "ACCEDI";
 
-/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
-"dcW-zZ-VlL.title" = "Login";
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Valorizza la tua privacy";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Protezione DNS";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
 "hjF-1C-hFa.text" = "Premium é attivato";

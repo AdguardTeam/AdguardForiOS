@@ -10,6 +10,9 @@
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
 "FLH-Qd-Atk.text" = "Todas las funciones Premium están disponibles";
 
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Iniciar sesión";
+
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
 "KOP-vw-FG7.text" = "Establece tus propias reglas";
 
@@ -25,17 +28,14 @@
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "IR A MI CUENTA";
 
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Inicio de sesión";
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Iniciar sesión";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Bloquea phishing, estafa y minado de criptomonedas";
 
-/* Class = "UIButton"; normalTitle = "LOG IN"; ObjectID = "bUa-fF-AXO"; */
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "INICIAR SESIÓN";
-
-/* Class = "UINavigationItem"; title = "Login"; ObjectID = "dcW-zZ-VlL"; */
-"dcW-zZ-VlL.title" = "Inicio de sesión";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Valora tu privacidad";

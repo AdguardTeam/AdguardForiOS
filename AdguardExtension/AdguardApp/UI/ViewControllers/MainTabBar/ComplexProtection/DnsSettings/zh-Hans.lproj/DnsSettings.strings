@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "高级网络设置";
 
-/* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
-"J1Z-V3-gS6.normalTitle" = "选择此服务器";
-
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS服务器";
 
@@ -48,9 +45,6 @@
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "免费试用";
-
-/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
-"VR9-fh-ogr.title" = "网络设置";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "白名单";

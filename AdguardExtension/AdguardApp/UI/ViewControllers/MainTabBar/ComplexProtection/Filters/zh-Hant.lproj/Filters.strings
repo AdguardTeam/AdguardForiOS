@@ -16,6 +16,9 @@
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
 
+/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard 不對來自此清單中之網站起作用";
+
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "過濾器";
 
@@ -24,6 +27,9 @@
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "取消";
+
+/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "此模組封鎖在 Safari 中被打開的網站上之廣告和追蹤";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "規則總數：";
@@ -44,7 +50,7 @@
 "cTI-39-Vwx.text" = "版本";
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "於此增加自訂的過濾器清單";
+"eAd-RZ-bHN.text" = "於此增加自訂的過濾器";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "允許清單";

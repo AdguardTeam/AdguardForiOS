@@ -1,17 +1,11 @@
-/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "CqW-k3-vqO"; */
-"CqW-k3-vqO.title" = "登入";
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
+"Jbp-5W-y9v.normalTitle" = "隱私政策";
 
-/* Class = "UILabel"; text = "Manage License"; ObjectID = "K2a-tW-P6P"; */
-"K2a-tW-P6P.text" = "管理授權";
+/* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
+"hE0-Ag-02J.text" = "關於";
 
-/* Class = "UILabel"; text = "Video Tutorial"; ObjectID = "RqV-y2-sfF"; */
-"RqV-y2-sfF.text" = "視訊導覽";
+/* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "閱讀更多關於該產品";
 
-/* Class = "UILabel"; text = "Developer’s Website"; ObjectID = "SJc-cd-hKd"; */
-"SJc-cd-hKd.text" = "開發者的網站";
-
-/* Class = "UILabel"; text = "Acknowledgments"; ObjectID = "o0X-Zy-4g6"; */
-"o0X-Zy-4g6.text" = "致謝";
-
-/* Class = "UILabel"; text = "Forum"; ObjectID = "oFL-ch-4PY"; */
-"oFL-ch-4PY.text" = "論壇";
+/* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
+"uyB-mD-gtt.normalTitle" = "終端用戶授權協定";

@@ -1,14 +1,20 @@
-/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
-"2s7-mz-LlB.title" = "Resetuj";
+/* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
+"0RM-mR-ikS.text" = "Vrati postavke na podrazumevano";
+
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "Okreni listu dozvoljenih";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Nije kompatibilan sa drugim VPN aplikacijama, \nnestabilno";
 
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
-"Bjk-AC-5fy.text" = "Tunnel mode";
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Ukloni VPn profil";
 
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
-"ChK-gV-7pc.title" = "Opšte postavke";
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
+"BOT-Ej-15M.text" = "Dozvoli prikazivanje statusa preuzimanja filtera i tok zaštite";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
+"BQY-q7-BQU.text" = "Blokatori sadržaja";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "Nije kompatibilno sa drugim VPn aplikacijama";
@@ -22,20 +28,23 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "Ponovo pokreni zaštitu kada se mreža promeni";
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
+"H3Q-H6-YV0.text" = "Uključite ovo ako imate poteškoća sa internet vezom dok AdGuard radi";
 
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
-"KSL-dU-yfA.text" = "Blokatori sadržaja";
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
+"ILy-oL-9M6.text" = "Koristi pojeednostavljene filtere";
 
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
-"KVr-dC-Lo5.title" = "Tunnel mode";
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Ovo će ukloniti vaš trenutni VPN profil i isključiti DNS zaštitu";
 
-/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
-"Ll9-il-kpC.title" = "Napredne postavke";
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
+"Lig-ju-iTI.text" = "Napredne postavke";
 
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "Ako je ovo uključeno, AdGuard će zanemarivati opšta “kozmetička” pravila. Ovo će ubrzati obradu stranica u zamenu za kvalitet filtriranja";
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
+"ObO-g4-VHL.text" = "Imate 6 blokatora sadržaja, svaki od njih može da sadrži 50,000 pravila";
+
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Način razvojnog programera";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Resetuj statistiku";
@@ -43,26 +52,23 @@
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Sistemski podrazumevano";
 
+/* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
+"Twq-5a-kOB.text" = "Ovo će vratiti sve vaše postavke na podrazumevane vrednosti";
+
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Tema";
-
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
-"W6u-T8-UVZ.text" = "Koristi pojednostavljene filtere";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Automatski ažuriraj samo preko bežičnih mreža";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "Imate 6 blokatora sadržaja, svaki od njih može da sadrži 50,000 pravila";
-
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
 
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "Uključite ovo ako imate poteškoća sa internet vezom dok AdGuard radi";
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
+"bnd-Eh-hpk.text" = "Tunnel mode";
 
-/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
-"aoV-et-2ku.text" = "Prikaži statusnu traku";
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "Ponovo pokreni zaštitu kada se mreža promeni";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Napredne postavke";
@@ -76,11 +82,11 @@
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "U Split-Tunnel načinu rada AdGuard je kompatibilan sa takozvanim “Ličnim VPN” aplikacijama. Zbog toga, u ovom načinu rada AdGuard može biti premošćen od strane sistema u slučaju loše veze";
 
-/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "Dozvoli prikazivanje statusa preuzimanja filtera i tok zaštite";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Ostalo";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
+"nPj-OI-Pcb.text" = "Blokatori sadržaja";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Svetlo";
@@ -88,8 +94,23 @@
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "Prikaži više posebnih opcija i podataka";
 
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
+"qxo-YS-JWL.text" = "Prikaži statusnu traku";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
+"rRz-nr-s4U.text" = "Tunnel mode";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
+"sc6-Tw-xnL.text" = "Postavke";
+
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Ako je ova postavka uključena, AdGuard će koristiti samo Wi-Fi za pozadinsko ažuriranje filtera";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Ovo će očistiti sve statističke podatke, kao što su broj zahteva, itd.";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "Dozvolite reklame svuda osim za sajtove sa ove liste";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
+"yvq-Cw-7Z6.text" = "Ako je ovo uključeno, AdGuard će zanemarivati opšta “kozmetička” pravila. Ovo će ubrzati obradu stranica u zamenu za kvalitet filtriranja";

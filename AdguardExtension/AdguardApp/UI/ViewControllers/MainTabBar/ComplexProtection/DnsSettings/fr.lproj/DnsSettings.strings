@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Paramétrages avancés du réseau";
 
-/* Class = "UIButton"; normalTitle = "SELECT"; ObjectID = "J1Z-V3-gS6"; */
-"J1Z-V3-gS6.normalTitle" = "SÉLECTIONNER";
-
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "Serveur DNS";
 
@@ -41,16 +38,13 @@
 "NX4-vI-1WP.text" = "Ajouter un filtre";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Activez ce module pour bloquer les domaines de suivi et chiffrer votre trafic DNS";
+"PFY-Cq-NFN.text" = "Activez ce module pour renforcer la confidentialité de votre navigation en chiffrant vos requêtes DNS";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "Protection contre le suivi";
+"QYv-iX-uIo.text" = "Protection DNS";
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "ESSAYER GRATUITEMENT";
-
-/* Class = "UINavigationItem"; title = "Network settings"; ObjectID = "VR9-fh-ogr"; */
-"VR9-fh-ogr.title" = "Paramètres réseau";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Liste Blanche";

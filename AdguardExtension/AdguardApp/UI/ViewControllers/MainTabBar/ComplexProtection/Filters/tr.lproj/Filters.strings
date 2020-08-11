@@ -47,7 +47,10 @@
 "cTI-39-Vwx.text" = "Sürüm";
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Özel filtrelerinizi burada kullanın";
+"eAd-RZ-bHN.text" = "Buraya özel filtre listeleri ekleyin";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "İzin verilen listesi";
 
 /* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
 "gbf-TL-LXR.title" = "Filtreler";

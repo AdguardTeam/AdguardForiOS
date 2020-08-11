@@ -1,17 +1,9 @@
-/* Class = "UIBarButtonItem"; title = "Reset"; ObjectID = "2s7-mz-LlB"; */
-"2s7-mz-LlB.title" = "リセット";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "ホワイトリストを逆転する";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "他のVPNアプリと互換性なし、不安定";
-
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "Bjk-AC-5fy"; */
-"Bjk-AC-5fy.text" = "Tunnelモード";
-
-/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ChK-gV-7pc"; */
-"ChK-gV-7pc.title" = "一般設定";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "他のVPNアプリと互換性なし";
@@ -25,26 +17,8 @@
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "HB4-O1-VPq"; */
-"HB4-O1-VPq.text" = "VPNプロファイルを除去する";
-
-/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "JPH-xu-Z3J"; */
-"JPH-xu-Z3J.text" = "ネットワーク変更時に保護を再起動する";
-
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "KSL-dU-yfA"; */
-"KSL-dU-yfA.text" = "コンテンツブロッカー";
-
-/* Class = "UINavigationItem"; title = "Tunnel mode"; ObjectID = "KVr-dC-Lo5"; */
-"KVr-dC-Lo5.title" = "Tunnelモード";
-
-/* Class = "UINavigationItem"; title = "Advanced settings"; ObjectID = "Ll9-il-kpC"; */
-"Ll9-il-kpC.title" = "詳細設定";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "高度な設定モード";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "PV8-kf-b2c"; */
-"PV8-kf-b2c.text" = "この設定をONにすると、AdGuardは汎用の“整形”ルールを無視します。フィルタリングの質は下がるが、ページ読込速度はアップします。";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "統計をリセット";
@@ -55,26 +29,11 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "テーマ";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "W6u-T8-UVZ"; */
-"W6u-T8-UVZ.text" = "シンプル化されたフィルタを使用する";
-
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Wi-Fi接続時のみフィルタを自動更新";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "XFM-ii-xUV"; */
-"XFM-ii-xUV.text" = "コンテンツブロッカーは6つあり、それぞれに50,000本までのルールを含めることができます（計30万本）";
-
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
-
-/* Class = "UILabel"; text = "Enable this option if you experience issues with the internet connection while AdGuard is running"; ObjectID = "aRS-WH-mRj"; */
-"aRS-WH-mRj.text" = "AdGuard実行中にインターネット接続の問題が発生している場合は、このオプションをONにしてください。";
-
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "aYm-cM-OAj"; */
-"aYm-cM-OAj.text" = "実際のVPNプロファイルが除去され、「DNS通信を保護」がオフになります。";
-
-/* Class = "UILabel"; text = "Show status bar"; ObjectID = "aoV-et-2ku"; */
-"aoV-et-2ku.text" = "ステータスバーを表示する";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "詳細設定";
@@ -87,9 +46,6 @@
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "Split-Tunnelモードでは、AdGuardはいわゆる「パーソナルVPN」系アプリと互換性があります。しかし、このモードでは、接続性が悪い場合にシステムによってバイパスされる（“すり抜かれる”）可能性があります。";
-
-/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "mdJ-Nh-wTi"; */
-"mdJ-Nh-wTi.text" = "フィルタダウンロードと保護の進行状況を表示する";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "その他";

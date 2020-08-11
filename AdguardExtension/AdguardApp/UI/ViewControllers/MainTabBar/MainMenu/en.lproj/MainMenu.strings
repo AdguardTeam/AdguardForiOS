@@ -28,8 +28,8 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Settings";
 
-/* Class = "UILabel"; text = "Do you have a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "Do you have a great idea?";
+/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Got a great idea?";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Settings";
@@ -46,8 +46,8 @@
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "How to block ads with AdGuard";
 
-/* Class = "UILabel"; text = "Help us to improve our app"; ObjectID = "ow5-MW-Ued"; */
-"ow5-MW-Ued.text" = "Help us to improve our app";
+/* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Help us improve the app";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Report incorrect blocking";

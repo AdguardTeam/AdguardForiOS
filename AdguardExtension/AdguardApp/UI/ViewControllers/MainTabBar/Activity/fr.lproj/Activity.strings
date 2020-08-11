@@ -2,7 +2,7 @@
 "1rj-wD-aeH.normalTitle" = "AJOUTER";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "chifrées";
+"4IJ-xy-hky.normalTitle" = "chiffrées";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Activité";
@@ -25,9 +25,6 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Activité";
 
-/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "J13-xW-KiK"; */
-"J13-xW-KiK.normalTitle" = "Copié";
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
 "KXe-VX-Rq9.normalTitle" = "ANNULER";
 
@@ -45,9 +42,6 @@
 
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "entreprises";
-
-/* Class = "UINavigationItem"; title = "Request details"; ObjectID = "ZyE-7P-8Tm"; */
-"ZyE-7P-8Tm.title" = "Détails de la requête";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Filtres de sécurité, confidentialité DNS, filtres personnalisés, etc.";
@@ -73,11 +67,8 @@
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "requêtes";
 
-/* Class = "UILabel"; text = "Choose the domain level"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Choisir le niveau du domaine";
-
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "chifrées";
+"wt5-4Q-CTq.normalTitle" = "chiffrées";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Bloquer requête";

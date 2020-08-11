@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "이름:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "앱 평가하기";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "피드백 전송";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "옳지 않은 차단 신고";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "버그 제보";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "고객 지원";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "로그 내보내기";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "버그 제보를 전송할 수 없습니다. 귀하의 기기에 이메일이 설정되지 않았기 때문일 수 있습니다.";
 
@@ -310,9 +292,6 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "기타";
 
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "콘텐츠 차단기";
-
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "필터:";
 
@@ -400,9 +379,6 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "이 필터를 지우시겠습니까?";
 
-/* (AboutController) current app version string */
-"about_version" = "버전";
-
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "한 번 구매하여 모든 iOS 기기에서 AdGuard 프리미엄 기능을 사용하세요!";
 
@@ -465,18 +441,6 @@
 
 /* "Disabled" title */
 "disabled" = "비활성화 됨";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "허용 목록에서 제거";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "차단 목록에서 제거";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "허용 목록에 추가";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "차단 목록에 추가";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "피싱 사이트 및 위험한 도메인을 차단할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";

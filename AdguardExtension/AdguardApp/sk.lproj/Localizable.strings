@@ -160,24 +160,6 @@
 /* (UserFilterController) add wifi name caption */
 "add_wifi_name_caption" = "Meno:";
 
-/* (Main Menu) Rate app action */
-"rate_app_title" = "Hodnotiť aplikáciu";
-
-/* (Main Menu) Send feedback action */
-"just_send_feedback" = "Poslať spätnú väzbu";
-
-/* (Main Menu) Mail subject to support team about incorrect blocking */
-"incorrect_blocking_report" = "Nahlásiť nesprávne blokovanie";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_bug_report" = "Hlásenie chyby na GitHub";
-
-/* (Main Menu) Subject field for mail bug report */
-"action_contact_support" = "Kontaktovať podporu";
-
-/* (Main Menu) Subject field for export logs */
-"action_export_logs" = "Exportovať denníky";
-
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Správa o chybe sa nedá odoslať, lebo pravdepodobne na Vašom zariadení nie je nastavený žiaden e-mail.";
 
@@ -223,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Bezplatná DNS služba od Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Anti-malware DNS server od spoločnosti Cloudflare, ktorý blokuje domény šíriace škodlivý kód";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Blokovací server Cloudflare, ktorý obmedzuje prístup do škodlivých domén a domén pre dospelých";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS služba od SafeDNS";
 
@@ -233,7 +221,7 @@
 "dns_provider_adult_tag" = "Blokovanie obsahu pre dospelých";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Žiadne pravidlá protokolovania";
+"dns_provider_no_logs_tag" = "Politika nevytvárania denníkov";
 
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Bezpečné vyhľadávanie";
@@ -309,9 +297,6 @@
 
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Iné";
-
-/* (ContentBlockerStateController) "Content Blockers" title */
-"content_blockers_title" = "Blokovače obsahu";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtre:";
@@ -400,8 +385,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Naozaj chcete vymazať tento filter?";
 
-/* (AboutController) current app version string */
-"about_version" = "Verzia";
+/* (AboutViewController) current app version format */
+"about_version_format" = "Verzia %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nVšetky práva vyhradené. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Odhlásenie";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licencia";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Zaplaťte raz a používajte funkcie AdGuard Premium na všetkých svojich zariadeniach!";
@@ -465,18 +459,6 @@
 
 /* "Disabled" title */
 "disabled" = "Vypnuté";
-
-/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "ODSTRÁNIŤ ZO ZOZNAMU POVOLENÍ";
-
-/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "ODSTRÁNIŤ ZO ZOZNAMU BLOKOVANÍ";
-
-/*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "PRIDAŤ DO ZOZNAMU POVOLENÍ";
-
-/*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "PRIDAŤ DO ZOZNAMU BLOKOVANÍ";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Povoliť blokovanie podvodných stránok a ďalších nebezpečných domén. K dispozícii pre prémiových používateľov";

@@ -1,8 +1,17 @@
-/* Class = "UILabel"; text = "Send feedback"; ObjectID = "6Z2-0N-PSp"; */
-"6Z2-0N-PSp.text" = "Надіслати відгук";
+/* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
+"6Z2-0N-PSp.text" = "Підтримка";
+
+/* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
+"B4f-Bt-0w6.text" = "Оцінити програму";
+
+/* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
+"Ebc-Lf-9R1.text" = "Ліцензія";
 
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Допоможіть нам зробити AdGuard кращим";
+
+/* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
+"GA6-E3-BcJ.text" = "Повідомити про помилку";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Захист Safari";
@@ -18,6 +27,15 @@
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Параметри";
+
+/* Class = "UILabel"; text = "Support"; ObjectID = "cOi-GX-KAC"; */
+"cOi-GX-KAC.text" = "Підтримка";
+
+/* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
+"cWE-CY-2xl.text" = "Експорт журналів";
+
+/* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
+"q9f-Zw-7sc.text" = "Повідомити про неправильне блокування";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS-захист";
