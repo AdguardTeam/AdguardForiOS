@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Nazwa:";
 
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
-"E3e-Mc-RhD.title" = "Filtry";
-
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
 
@@ -52,14 +49,14 @@
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "Dodaj tutaj niestandardowe listy filtrów";
 
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
-"gbf-TL-LXR.title" = "Filtry";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "DODAJ";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ANULUJ";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
+"mTM-IO-iFw.text" = "Filtry";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "NASTĘPNY";

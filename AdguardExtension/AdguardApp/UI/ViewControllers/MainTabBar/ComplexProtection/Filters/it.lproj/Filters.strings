@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Nome:";
 
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "E3e-Mc-RhD"; Note = "(Filters Screen) Title"; */
-"E3e-Mc-RhD.title" = "Filtri";
-
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
 "Gg8-4u-qvU.text" = "AdGuard non funziona sui siti Web di questa lista";
 
@@ -52,14 +49,14 @@
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "Whitelist";
 
-/* Class = "UINavigationItem"; title = "Filters"; ObjectID = "gbf-TL-LXR"; Note = "(Filters Screen) Title"; */
-"gbf-TL-LXR.title" = "Filtri";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "AGGIUNGI";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
 "mEm-ll-QZR.normalTitle" = "ANNULLA";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
+"mTM-IO-iFw.text" = "Filtri";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "PROSSIMO";

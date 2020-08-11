@@ -35,7 +35,7 @@
 "LTC-71-V9S.text" = "DNS sunucusu";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "Bir filtre ekle";
+"NX4-vI-1WP.text" = "Filtre ekle";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "DNS trafiğinizi şifreleyerek gizliliğinizi artırmak için bu modülü etkinleştirin.";

@@ -460,6 +460,18 @@
 /* "Disabled" title */
 "disabled" = "Vypnuté";
 
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Odstrániť zo zoznamu povolení";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Odstrániť zo zoznamu blokovaní";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Pridať do zoznamu povolení";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Pridať do zoznamu blokovaní";
+
 /*(GroupsController) Security description without premium  */
 "security_description" = "Povoliť blokovanie podvodných stránok a ďalších nebezpečných domén. K dispozícii pre prémiových používateľov";
 
