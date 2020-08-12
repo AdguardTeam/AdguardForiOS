@@ -162,9 +162,10 @@ class ContentBlockerStateController: UITableViewController {
     
     private func reloadRaw(with type: ContentBlockerType){
         DispatchQueue.main.async {[weak self] in
-            guard let raw = self?.rowByType[type] else { return }
-            let indexPath = IndexPath(row: raw, section: 0)
-            self?.tableView.reloadRows(at: [indexPath], with: .fade)
+            guard let self = self else { return }
+            guard let raw = self.rowByType[type] else { return }
+            let indexPath = IndexPath(row: raw, section: self.contentBlockersSection)
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
     }
     
