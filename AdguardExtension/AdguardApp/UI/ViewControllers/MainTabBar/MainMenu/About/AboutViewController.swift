@@ -87,6 +87,8 @@ class AboutViewController: UIViewController {
     }
     
     private func processProStatus() {
+        navigationItem.rightBarButtonItems = configuration.proStatus ? [] : [loginButton]
+        
         if Bundle.main.isPro {
             loginLogoutButton.isHidden = true
             return

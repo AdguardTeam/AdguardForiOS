@@ -157,9 +157,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qR5-hz-sPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Login" id="jMW-e4-GbU">
                     <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <segue destination="FPy-fH-q4F" kind="show" id="JOD-nZ-C7k"/>
+                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-362" y="1222"/>
+        </scene>
+        <!--LoginScene-->
+        <scene sceneID="DsR-vJ-L0J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="License" referencedIdentifier="LoginScene" id="FPy-fH-q4F" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Ibg-eu-nrd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XNg-aH-uKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="345" y="1203"/>
         </scene>
         <!--License-->
         <scene sceneID="wcA-DJ-Qv7">
@@ -169,7 +182,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5I7-Zs-Kic" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="1221"/>
+            <point key="canvasLocation" x="326" y="1239"/>
         </scene>
     </scenes>
     <resources>
