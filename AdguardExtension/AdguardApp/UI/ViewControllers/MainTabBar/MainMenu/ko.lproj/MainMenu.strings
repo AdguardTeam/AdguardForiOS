@@ -29,7 +29,7 @@
 "UJb-NW-d5B.text" = "설정";
 
 /* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "좋은 아이디어가 있습니까?";
+"W6h-Gt-MMt.text" = "제안하고자 하는 기능이 있으십니까?";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "설정";
@@ -53,13 +53,13 @@
 "q9f-Zw-7sc.text" = "잘못된 차단 제보";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
-"qDy-4e-MsZ.text" = "로그를 내보내고 편리한 방법으로 보낼 수 있습니다";
+"qDy-4e-MsZ.text" = "편리한 방법으로 로그를 내보내고 전송할 수 있습니다";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS 보호";
 
 /* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "기능 요청";
+"rlh-5H-fPk.text" = "기능 제안";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "구독 및 계정";
