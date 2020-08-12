@@ -116,7 +116,10 @@ static NSTimeInterval lastCheckTime;
         BOOL succeeded = [helper application:application willFinishLaunchingWithOptions:launchOptions];
 
         // Init Logger
+        BOOL isDebugLogs = [_resources.sharedDefaults boolForKey: AEDefaultsDebugLogs];
+        DDLogInfo(@"Init app with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
+        [[ACLLogger singleton] setLogLevel: isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel];
         
 #if DEBUG
         [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];

@@ -72,6 +72,7 @@ NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecu
 
 NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
+NSString* AEDefaultsDebugLogs = @"AEDefaultsDebugLogs";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";
 NSString* AEDefaultsDeveloperMode = @"AEDefaultsDeveloperMode";
 NSString* AEDefaultsShowStatusBar = @"AEDefaultsShowStatusBar";

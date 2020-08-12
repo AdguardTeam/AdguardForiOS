@@ -296,6 +296,10 @@ class ActionViewController: UIViewController {
         // Init Logger
         ACLLogger.singleton()?.initLogger(sharedResources.sharedAppLogsURL())
         
+        let isDebugLogs = sharedResources.isDebugLogs
+        DDLogInfo("Start action extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif

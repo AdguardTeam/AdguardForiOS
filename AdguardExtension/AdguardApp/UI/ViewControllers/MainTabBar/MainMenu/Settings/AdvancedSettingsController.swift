@@ -24,6 +24,7 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var useSimplifiedFiltersSwitch: UISwitch!
     @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
+    @IBOutlet weak var debugLogsSwitch: UISwitch!
     @IBOutlet weak var tunnelModeDescription: ThemableLabel!
     @IBOutlet weak var lastSeparator: UIView!
     
@@ -44,6 +45,7 @@ class AdvancedSettingsController: UITableViewController {
     private let useSimplifiedRow = 0
     private let showStatusbarRow = 1
     private let restartProtectionRow = 2
+    private let debugLogsRow = 3
     private let removeVpnProfile = 5
     
     private var themeObservation: NotificationToken?
@@ -57,6 +59,7 @@ class AdvancedSettingsController: UITableViewController {
         
         useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         restartProtectionSwitch.isOn = resources.restartByReachability
+        debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
         
         themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
@@ -104,6 +107,14 @@ class AdvancedSettingsController: UITableViewController {
         vpnManager.updateSettings(completion: nil)
     }
     
+    @IBAction func debugLogsAction(_ sender: UISwitch) {
+        let isDebugLogs = sender.isOn
+        resources.isDebugLogs = isDebugLogs
+        DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -141,6 +152,9 @@ class AdvancedSettingsController: UITableViewController {
         case restartProtectionRow:
             restartProtectionSwitch.setOn(!restartProtectionSwitch.isOn, animated: true)
             restartProtectionAction(restartProtectionSwitch)
+        case debugLogsRow:
+            debugLogsSwitch.setOn(!debugLogsSwitch.isOn, animated: true)
+            debugLogsAction(debugLogsSwitch)
         case removeVpnProfile:
             showRemoveVpnAlert(indexPath)
         default:
@@ -195,6 +209,7 @@ class AdvancedSettingsController: UITableViewController {
         theme.setupSwitch(useSimplifiedFiltersSwitch)
         theme.setupSwitch(showStatusbarSwitch)
         theme.setupSwitch(restartProtectionSwitch)
+        theme.setupSwitch(debugLogsSwitch)
 
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }

@@ -228,6 +228,10 @@ extern NSString* _Nonnull AEDefaultsVPNEnabled;
 extern NSString* _Nonnull AEDefaultsRestartByReachability;
 
 /**
+ User defaults key, which defines log level (debug/normal) */
+extern NSString* _Nonnull AEDefaultsDebugLogs;
+
+/**
  User defaults key, which defines vpn tunnel mode */
 extern NSString* _Nonnull AEDefaultsVPNTunnelMode;
 

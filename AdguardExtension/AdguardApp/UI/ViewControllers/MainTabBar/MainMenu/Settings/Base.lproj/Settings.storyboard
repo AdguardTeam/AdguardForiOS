@@ -921,6 +921,83 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RXI-Kc-fx6">
+                                        <rect key="frame" x="0.0" y="409" width="414" height="74"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RXI-Kc-fx6" id="ffz-mm-GGh">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Debug logs" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zG-B5-jE5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="317" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZ8-9j-arQ">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="gDo-Ja-rXU"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="debugLogsAction:" destination="71r-k4-iOF" eventType="valueChanged" id="yMn-ex-jxq"/>
+                                                        <action selector="restartProtectionAction:" destination="71r-k4-iOF" eventType="valueChanged" id="fBJ-HD-sXy"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AdGuard will write more details to the logfile" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFO-xu-Bir" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="28" width="317" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    </variation>
+                                                </label>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p0T-ub-wAj">
+                                                    <rect key="frame" x="0.0" y="70" width="414" height="1"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="nbk-dr-ltq"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="p0T-ub-wAj" firstAttribute="leading" secondItem="ffz-mm-GGh" secondAttribute="leading" id="7CM-a8-7Gc"/>
+                                                <constraint firstItem="GFO-xu-Bir" firstAttribute="leading" secondItem="3zG-B5-jE5" secondAttribute="leading" id="Dkv-Mx-GD1"/>
+                                                <constraint firstAttribute="trailing" secondItem="BZ8-9j-arQ" secondAttribute="trailing" constant="16" id="EkR-MA-mh5">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="p0T-ub-wAj" firstAttribute="top" secondItem="GFO-xu-Bir" secondAttribute="bottom" constant="16" id="FYb-wc-23l">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="BZ8-9j-arQ" firstAttribute="top" secondItem="ffz-mm-GGh" secondAttribute="top" constant="16" id="KzP-Oy-16S">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="p0T-ub-wAj" secondAttribute="trailing" id="Pex-Ek-uzX"/>
+                                                <constraint firstItem="3zG-B5-jE5" firstAttribute="leading" secondItem="ffz-mm-GGh" secondAttribute="leading" constant="16" id="Sfv-NZ-c9J">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="BZ8-9j-arQ" firstAttribute="leading" secondItem="3zG-B5-jE5" secondAttribute="trailing" constant="16" id="ZHV-xF-3eg">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="GFO-xu-Bir" firstAttribute="trailing" secondItem="3zG-B5-jE5" secondAttribute="trailing" id="e9l-Za-pzg"/>
+                                                <constraint firstAttribute="bottom" secondItem="p0T-ub-wAj" secondAttribute="bottom" id="xkj-b9-hLS"/>
+                                                <constraint firstItem="GFO-xu-Bir" firstAttribute="top" secondItem="3zG-B5-jE5" secondAttribute="bottom" constant="2" id="yUX-3n-1sz"/>
+                                                <constraint firstItem="3zG-B5-jE5" firstAttribute="top" secondItem="ffz-mm-GGh" secondAttribute="top" constant="16" id="ywm-3K-2Uw">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ubk-WC-pqc">
                                         <rect key="frame" x="0.0" y="409" width="414" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1139,6 +1216,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="debugLogsSwitch" destination="BZ8-9j-arQ" id="n2t-W8-cfy"/>
                         <outlet property="lastSeparator" destination="wSr-GF-Zvd" id="Coa-X4-Tdq"/>
                         <outlet property="restartProtectionSwitch" destination="Imm-1j-t70" id="7QM-Lx-Do6"/>
                         <outlet property="showStatusbarSwitch" destination="ieW-uu-eVz" id="Mbp-L9-8ip"/>
@@ -1162,6 +1240,9 @@
                         <outletCollection property="separators" destination="Wt4-db-etp" collectionClass="NSMutableArray" id="lIC-3L-ScL"/>
                         <outletCollection property="separators" destination="f8E-WC-3FZ" collectionClass="NSMutableArray" id="MoH-yk-wbJ"/>
                         <outletCollection property="separators" destination="GdD-8F-a2k" collectionClass="NSMutableArray" id="O6Z-DD-MSL"/>
+                        <outletCollection property="themableLabels" destination="3zG-B5-jE5" collectionClass="NSMutableArray" id="VkP-FJ-oZr"/>
+                        <outletCollection property="themableLabels" destination="GFO-xu-Bir" collectionClass="NSMutableArray" id="FCW-Tl-T1q"/>
+                        <outletCollection property="separators" destination="p0T-ub-wAj" collectionClass="NSMutableArray" id="14b-EF-EhL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uwo-5O-fpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
