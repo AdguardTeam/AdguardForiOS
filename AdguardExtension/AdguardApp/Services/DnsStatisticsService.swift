@@ -240,7 +240,12 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
                     
                     if let lastRecordDate = records.last?.date, lastRecordDate != newestDate {
                         var zeroRecords = self?.createZeroRecords(from: lastRecordDate, to: newestDate) ?? []
-                        zeroRecords.append(DnsStatisticsRecord(date: newestDate, requests: 0, encrypted: 0, elapsedSumm: 0))
+                        // Set current time as last record date
+                        if zeroRecords.isEmpty {
+                            records.last?.date = newestDate
+                        } else {
+                            zeroRecords.append(DnsStatisticsRecord(date: newestDate, requests: 0, encrypted: 0, elapsedSumm: 0))
+                        }
                         records.append(contentsOf: zeroRecords)
                     }
                 }

@@ -19,7 +19,7 @@
 import Foundation
 
 class DnsStatisticsRecord: CustomDebugStringConvertible {
-    let date: Date
+    var date: Date
     var requests: Int
     var encrypted: Int
     var elapsedSumm: Int
