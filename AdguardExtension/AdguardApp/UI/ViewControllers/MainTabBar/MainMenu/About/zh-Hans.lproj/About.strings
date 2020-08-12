@@ -1,0 +1,14 @@
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
+"Jbp-5W-y9v.normalTitle" = "隐私政策";
+
+/* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
+"hE0-Ag-02J.text" = "关于";
+
+/* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "阅读更多关于该产品的信息";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
+"jMW-e4-GbU.title" = "登录";
+
+/* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
+"uyB-mD-gtt.normalTitle" = "最终用户许可协议";

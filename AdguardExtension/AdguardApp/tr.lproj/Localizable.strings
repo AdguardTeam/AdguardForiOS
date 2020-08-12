@@ -550,6 +550,9 @@
 /* (BlockRequestController) Allowlist request title */
 "whitelist_request" = "İzin verilen listesine alan adı ekle";
 
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Eğitim Videosu";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_whitelist" = "Sistem İzin verilen listesi";
 
