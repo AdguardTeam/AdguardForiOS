@@ -19,7 +19,8 @@
 import UIKit
 
 class AboutViewController: UIViewController {
-
+    @IBOutlet var loginButton: UIBarButtonItem!
+    
     @IBOutlet weak var logoImageView: ThemeableImageView!
     @IBOutlet weak var versionLabel: ThemableLabel!
     @IBOutlet weak var copyrightLabel: ThemableLabel!
