@@ -78,6 +78,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         
+        let isDebugLogs = resources.isDebugLogs
+        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif

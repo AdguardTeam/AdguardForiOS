@@ -138,9 +138,12 @@
         _resources = [AESharedResources new];
         
         // Init Logger
+        BOOL isDebugLogs = [_resources.sharedDefaults boolForKey:AEDefaultsDebugLogs];
+        DDLogInfo(@"Init tunnel with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
-
-        [AGLogger setLevel: AGLL_WARN];
+        [[ACLLogger singleton] setLogLevel: isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel];
+        
+        [AGLogger setLevel:  isDebugLogs ? AGLL_TRACE : AGLL_WARN];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
                 @autoreleasepool {
@@ -153,7 +156,7 @@
 
 #if DEBUG
         [AGLogger setLevel: AGLL_DEBUG];
-        [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
+        [[ACLLogger singleton] setLogLevel: ACLLDebugLevel];
 #endif
         
         _dnsTrackerService = [DnsTrackerService new];

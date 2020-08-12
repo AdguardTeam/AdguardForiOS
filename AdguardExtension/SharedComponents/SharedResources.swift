@@ -155,12 +155,20 @@ extension AESharedResourcesProtocol {
             guard let value = sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool else {
                 return true
             }
-            
             return value
         }
         
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsRestartByReachability)
+        }
+    }
+    
+    dynamic var isDebugLogs: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsDebugLogs)
         }
     }
     

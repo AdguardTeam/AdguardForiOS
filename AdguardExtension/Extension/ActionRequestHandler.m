@@ -57,9 +57,13 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         //-------------------------------
         
         // Init Logger
+        BOOL isDebugLogs = [resources.sharedDefaults boolForKey: AEDefaultsDebugLogs];
+        DDLogInfo(@"Init ActionRequestHandler with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         [[ACLLogger singleton] initLogger:[resources sharedAppLogsURL]];
+        [[ACLLogger singleton] setLogLevel: isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel];
+        
     #if DEBUG
-        [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
+        [[ACLLogger singleton] setLogLevel: ACLLDebugLevel];
     #endif
 
         BOOL filteringEnabled = [safariProtectionService safariProtectionEnabled];
