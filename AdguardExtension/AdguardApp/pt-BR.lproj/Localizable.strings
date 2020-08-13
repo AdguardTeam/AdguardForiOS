@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Serviço de DNS gratuito do Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Servidor DNS anti-malware da Cloudflare que bloqueia domínios maliciosos";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\"";
+
 /* Safe DNS server description */
 "safe_dns_description" = "Serviço de DNS do SafeDNS";
 
@@ -379,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Você tem certeza de que deseja excluir este filtro?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "Versão %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nTodos os direitos reservados. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Sair";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licença";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Pague uma vez e use os recursos do AdGuard Premium em todos os seus dispositivos!";
 
@@ -441,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "Desativado";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Remover da lista branca";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Remover da lista negra";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Adicionar na lista branca";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Adicionar na lista negra";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permite o bloqueio de sites de phishing e outros domínios perigosos. Disponível para usuários Premium";

@@ -46,6 +46,9 @@
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "ÜCRETSİZ DENE";
 
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "İzin verilen listesi";
+
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "İPTAL";
 

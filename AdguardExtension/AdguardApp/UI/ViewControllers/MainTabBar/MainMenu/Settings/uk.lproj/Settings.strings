@@ -1,9 +1,23 @@
+/* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
+"0RM-mR-ikS.text" = "Скинути налаштування";
+
+/* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
+"3zG-B5-jE5.text" = "Журнали зневадження";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Інвертувати список дозволів";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Несумісний з іншими VPN-програмами, нестабільний";
+
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Вилучити VPN-профіль";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
+"BOT-Ej-15M.text" = "Показувати панель стану оновлення фільтрів";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
+"BQY-q7-BQU.text" = "Блокувальники вмісту";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "Несумісний з іншими VPN-програмами";
@@ -14,8 +28,26 @@
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "Не змінюйте їх, якщо ви не знаєте, що робите";
 
+/* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
+"GFO-xu-Bir.text" = "AdGuard зберігатиме більше подробиць в журналі. Не вмикайте, якщо вам не потрібно відстежити проблему";
+
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
+"H3Q-H6-YV0.text" = "Увімкніть цей параметр, якщо у вас виникли проблеми з Інтернет-з'єднанням під час роботи AdGuard";
+
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
+"ILy-oL-9M6.text" = "Використовувати спрощені фільтри";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Ця дія вилучить ваш актуальний VPN-профіль та вимкне DNS-захист";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
+"Lig-ju-iTI.text" = "Розширені параметри";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
+"ObO-g4-VHL.text" = "У вас є 6 блокувальників вмісту, кожен з яких може містити до 50000 правил";
 
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Розширений режим";
@@ -26,6 +58,9 @@
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Системні налаштування";
 
+/* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
+"Twq-5a-kOB.text" = "Цей параметр скине всі ваші налаштування";
+
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Тема";
 
@@ -34,6 +69,12 @@
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
+"bnd-Eh-hpk.text" = "Режим тунелю";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "Перезапуск захисту при зміні мережі";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Розширені параметри";
@@ -50,11 +91,23 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Інше";
 
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
+"nPj-OI-Pcb.text" = "Блокувальники вмісту";
+
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Світла";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "Додаткові параметри для досвідчених користувачів";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
+"qxo-YS-JWL.text" = "Показувати панель стану";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
+"rRz-nr-s4U.text" = "Режим тунелю";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
+"sc6-Tw-xnL.text" = "Параметри";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Якщо цей параметр увімкнено, AdGuard використовуватиме лише Wi-Fi для фонового оновлення фільтрів";
@@ -64,3 +117,6 @@
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Розблокувати рекламу всюди, окрім вебсайтів з цього списку";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
+"yvq-Cw-7Z6.text" = "Якщо цей параметр увімкнено, AdGuard ігноруватиме загальні косметичні правила. Це підвищить швидкість завантаження сторінок за рахунок нижчої якості фільтрування";

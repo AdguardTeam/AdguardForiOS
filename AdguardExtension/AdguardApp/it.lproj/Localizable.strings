@@ -122,10 +122,10 @@
 "blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti Web.";
+"whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti web.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard abiliterà il filtraggio in Safari solo per questi siti Web.";
+"inverted_whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard abiliterà il filtraggio in Safari solo per questi siti web.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Inserire qui i nomi dei domini separati da interruzioni di riga. AdGuard permetterà tutte le connessioni a questi domini.";

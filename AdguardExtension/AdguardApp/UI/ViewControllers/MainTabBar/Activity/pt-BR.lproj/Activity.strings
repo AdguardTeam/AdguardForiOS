@@ -41,6 +41,9 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "ATIVAR";
 
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
+"Xgg-jX-hwe.normalTitle" = "Copiado";
+
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "empresas";
 
@@ -67,6 +70,12 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "solicitações";
+
+/* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Escolha o nível de domínio";
+
+/* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
+"uni-H6-XNc.text" = "Detalhes da solicitação";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
 "wt5-4Q-CTq.normalTitle" = "criptografado";

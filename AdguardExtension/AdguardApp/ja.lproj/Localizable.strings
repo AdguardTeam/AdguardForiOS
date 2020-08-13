@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Cloudflareによる無料の代替DNSサービス";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Cloudflare提供の、悪意のあるドメインをブロックするマルウェア対策DNSサーバー";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare提供の、悪意のある「アダルト系」ドメインへのアクセスを制限するブロッキングサーバー";
+
 /* Safe DNS server description */
 "safe_dns_description" = "SafeDNS提供のDNSサービス";
 
@@ -379,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "このフィルタを削除してもよろしいですか？";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "バージョン %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "ログアウト";
+
+/* (AboutViewController) Login title */
+"common_license" = "ライセンス";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "一度限りのお支払いで、お使いの全iOSデバイスでAdGuardプレミアム機能をご利用できます！";
 
@@ -441,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "オフ";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "ホワイトリストから削除する";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "ブラックリストから削除する";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "ホワイトリストに追加する";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "ブラックリストに追加する";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "フィッシング詐欺や他の危険なドメインをブロック。※プレミアム版で利用可";
