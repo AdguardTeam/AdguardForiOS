@@ -127,6 +127,12 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
 
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "在此處輸入域名，以換行來隔開。AdGuard 將會允許這些域名的連接。";
+
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "此黑名單支持 <a href=\"%@\">AdGuard DNS 語法 </a>。在這裡以換行來分割這些規則。AdGuard 會封鎖一切符合規則的域名連接。";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "正在更新…";
 
@@ -319,6 +325,9 @@
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "錯誤已發生";
 
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "刪除 VPN 配置文件時發生了錯誤";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ 規則正被使用";
 
@@ -406,6 +415,9 @@
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi 例外";
 
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "DNS 防護將不會在以下列表的 Wi-Fi 網路中啟用";
+
 /* (NetworkSettingsController) button title for "Add an exception" */
 "add_exception_title" = "增加一個例外";
 
@@ -414,6 +426,12 @@
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "過濾 Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "DNS 防護將在行動數據中啟用";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "DNS 防護將在 Wi-Fi 中啟用";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "允許清單";
@@ -453,6 +471,12 @@
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "加至封鎖清單";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "允許封鎖釣魚網站與其他危險網站。高級用戶可用。";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "允許添加第三方過濾規則。高級用戶可用。";
 
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "影音播放器";
@@ -556,6 +580,9 @@
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "編輯自訂的過濾器";
 
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "添加";
+
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "防護被禁用";
 
@@ -574,14 +601,26 @@
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS 防護";
 
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d 條請求，%2$d 已加密";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "此資訊是加載自 WhoTrackMe.com";
+
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "更多的";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "你嘗試添加重複的過濾器。此過濾器已經在列表中。";
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ 項規則被啟用";
 
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_overlimit_title" = "太多的規則被啟用：%@。它們有些將被禁用";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "關閉一些過濾器使其正常的工作";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已封鎖的";
@@ -609,6 +648,12 @@
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "開啟該<b>設定</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "點擊 <b>Safari</b> 後，選擇 <b>\"內容阻擋器\"</b> 選項";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>開啟所有 AdGuard 的內容阻擋器</b>並返回 AdGuard 應用程式。";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系統 DNS";
@@ -709,11 +754,35 @@
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "請求";
 
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "每次訪問網站時，都會發送一個請求。網站可能會發送隱藏的請求並泄露個人數據。為了解此問題，你該知道請求總數。";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "加密的請求";
 
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "加密的 DNS 請求數。使用加密的 DNS 伺服器來加密 DNS 流量。";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "平均時間";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "處理 DNS 請求的平均時間。 你使用的 DNS 伺服器越快，請求時間越短。";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "公司總數";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "這是請求已轉發到公司的公司數量。";
+
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "所有的請求";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "僅已封鎖";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "僅已允許";
 
 /* (ActivityViewController) - None message when there is no statistics */
 "none_message" = "無";
@@ -761,6 +830,12 @@
 
 /* (MainPageController) requests number title for VoiceOver*/
 "requests_number_voiceover" = "請求數量";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "加密的 DNS 請求數";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "處理 DNS 請求的平均時間";
 
 
 // MARK: - SystemProtectionEnablerController

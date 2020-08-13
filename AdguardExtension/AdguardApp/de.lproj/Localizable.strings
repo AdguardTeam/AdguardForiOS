@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Kostenloser DNS-Service von Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Anti-Malware-DNS-Server von Cloudflare, der bösartige Domains sperrt";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Der Sperrserver von Cloudflare, der den Zugriff auf bösartige und „jugendgefährdende” Domains einschränkt";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS-Service von SafeDNS";
 
@@ -379,8 +385,17 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Möchten Sie diesen Filter wirklich löschen?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "Version %@";
+
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAlle Rechte vorbehalten. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Abmelden";
+
+/* (AboutViewController) Login title */
+"common_license" = "Lizenz";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Nur einmal bezahlen und die AdGuard Premium-Funktionen auf allen Ihren iOS-Geräten nutzen!";
@@ -445,8 +460,17 @@
 /* "Disabled" title */
 "disabled" = "Deaktiviert";
 
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Aus der Positivliste entfernen";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Aus der Blockliste entfernen";
+
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
 "add_to_whitelist" = "Zur Positivliste hinzufügen";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Zur Blockliste hinzufügen";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Erlauben das Blockieren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";

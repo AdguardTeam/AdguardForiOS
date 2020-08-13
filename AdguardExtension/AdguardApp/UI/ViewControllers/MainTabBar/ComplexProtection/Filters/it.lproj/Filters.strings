@@ -11,7 +11,7 @@
 "Cyn-cw-Zrm.text" = "Nome:";
 
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard non funziona sui siti Web di questa lista";
+"Gg8-4u-qvU.text" = "AdGuard non funziona sui siti web di questa lista";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtri";

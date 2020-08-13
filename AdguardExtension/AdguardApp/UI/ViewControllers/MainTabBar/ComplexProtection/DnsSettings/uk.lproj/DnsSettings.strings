@@ -79,6 +79,9 @@
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
+"iPl-vI-lX5.text" = "Параметри мережі";
+
 /* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
 "iaJ-tk-ohH.text" = "Ви можете вдосконалити свою онлайн-приватність, шифруючи DNS-трафік. Для цього оберіть один з рекомендованих провайдерів DNS.";
 
@@ -117,6 +120,9 @@
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Адреса DNS-сервера";
+
+/* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
+"uCw-Mi-HiJ.title" = "Обрати";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS-фільтрування";

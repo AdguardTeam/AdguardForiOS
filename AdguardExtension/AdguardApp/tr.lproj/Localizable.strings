@@ -124,6 +124,9 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard yalnızca bu web siteleri için Safari’de filtrelemeyi etkinleştirir.";
 
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Bu Engelleme Listesi <a href=\"%@\">AdGuard'ın DNS sözdizimini</a> destekler. Buraya satır sonları ile ayrılmış kuralları girin. AdGuard, bu kurallara uyan alan adlarına yapılan tüm bağlantıları engeller.";
+
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Güncelleniyor...";
 
@@ -410,7 +413,7 @@
 "whitelist_title" = "İzin verilen listesi";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Engellenen listesi";
+"dns_blacklist_title" = "Engelleme listesi";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari kullanıcı kuralları";
@@ -429,6 +432,9 @@
 
 /* "Disabled" title */
 "disabled" = "Devre dışı";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Engelleme listesine ekle";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Kimlik avı sitelerinin ve diğer tehlikeli alan adlarının engellenmesine izin verin. Premium kullanıcılar tarafından kullanılabilir";
@@ -536,6 +542,9 @@
 "dns_request_user_status_added_to_whitelist" = "İzin verilen listesine eklendi";
 
 /*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "engelleme listesine eklendi";
+
+/*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_whitelist" = "İzin verilen listesinden kaldırıldı";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
@@ -552,6 +561,9 @@
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Eğitim Videosu";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Sistem Engelleme Listesi";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_whitelist" = "Sistem İzin verilen listesi";

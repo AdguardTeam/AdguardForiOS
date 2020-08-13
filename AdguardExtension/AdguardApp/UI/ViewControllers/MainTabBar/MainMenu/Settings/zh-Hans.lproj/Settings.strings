@@ -1,11 +1,20 @@
 /* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
 "0RM-mR-ikS.text" = "重置设置";
 
+/* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
+"3zG-B5-jE5.text" = "调试日志";
+
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "颠倒白名单";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "因不稳定而不兼容其它 VPN 应用";
+
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "移除VPN 配置文件";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
+"BOT-Ej-15M.text" = "显示过滤器更新进度条";
 
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "内容拦截器";
@@ -19,8 +28,26 @@
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "这有多难搞？";
 
+/* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
+"GFO-xu-Bir.text" = "AdGuard将要在日志文件中写入更多详细信息。除非您需要跟踪错误，否则请勿启用该功能";
+
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "半隧道";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
+"H3Q-H6-YV0.text" = "若在运行AdGuard时遇到网络连接问题，请启用此选项";
+
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
+"ILy-oL-9M6.text" = "使用简化过滤器";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "这个要移除您的VPN配置文件并禁用DNS防护";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
+"Lig-ju-iTI.text" = "高级设置";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
+"ObO-g4-VHL.text" = "您有6个内容拦截器，每个内容拦截器可至多包含50,000 条规则";
 
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "高级模式";
@@ -31,6 +58,9 @@
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "系统默认";
 
+/* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
+"Twq-5a-kOB.text" = "该选项将要重置您的所有设置";
+
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "主题";
 
@@ -39,6 +69,12 @@
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "全隧道";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
+"bnd-Eh-hpk.text" = "隧道模式";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "在网络更改时重启防护";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "高级设置";
@@ -55,11 +91,23 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其他";
 
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
+"nPj-OI-Pcb.text" = "内容拦截器";
+
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "明亮";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "为高级用户启用额外设置";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
+"qxo-YS-JWL.text" = "显示状态栏";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
+"rRz-nr-s4U.text" = "隧道模式";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
+"sc6-Tw-xnL.text" = "设置";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "如果启用此设置，AdGuard 将仅使用 Wi-Fi 进行后台过滤器更新";
@@ -69,3 +117,6 @@
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "除此列表中的网站之外取消屏蔽所有的网站广告";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
+"yvq-Cw-7Z6.text" = "如果启用此设置，AdGuard 将忽略通用的修饰规则。这将加速页面渲染以换取过滤质量";

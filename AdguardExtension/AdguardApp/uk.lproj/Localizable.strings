@@ -199,6 +199,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Безплатний DNS від Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Антивірусний DNS-сервер від Cloudflare, який блокує зловмисні домени";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Сервер блокування Cloudflare, який обмежує доступ до зловмисних доменів та сайтів для дорослих";
+
 /* Safe DNS server description */
 "safe_dns_description" = "DNS від SafeDNS";
 
@@ -373,6 +379,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Ви впевнені, що хочете видалити цей фільтр?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "Версія %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nУсі права захищено. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Вийти";
+
+/* (AboutViewController) Login title */
+"common_license" = "Ліцензія";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Сплатіть один раз і користуйтесь функціями AdGuard Premium на всіх iOS пристроях!";
 
@@ -435,6 +453,18 @@
 
 /* "Disabled" title */
 "disabled" = "Вимкнено";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Вилучити зі списку дозволів";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Вилучити зі списку блокування";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Додати до списку дозволів";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Додати до списку блокування";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Дозволити блокування фішингових сайтів та інших небезпечних доменів. Доступно для Преміум-користувачів";
