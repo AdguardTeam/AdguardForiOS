@@ -37,6 +37,9 @@
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
 
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
+
 /* (MainPageController) Text for data units (M) Millions */
 "millions_unit" = "%@M";
 
@@ -124,6 +127,9 @@
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard yalnızca bu web siteleri için Safari’de filtrelemeyi etkinleştirir.";
 
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Buraya satır sonları ile ayrılmış alan adlarını girin. AdGuard, bu alan adlarına tüm bağlantılara izin verecektir.";
+
 /* (UserFilterController) dns blocklist description */
 "dns_blacklist_text_format" = "Bu Engelleme Listesi <a href=\"%@\">AdGuard'ın DNS sözdizimini</a> destekler. Buraya satır sonları ile ayrılmış kuralları girin. AdGuard, bu kurallara uyan alan adlarına yapılan tüm bağlantıları engeller.";
 
@@ -198,6 +204,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Cloudflare tarafından ücretsiz DNS hizmeti";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Cloudflare tarafından kötü amaçlı yazılımdan koruyan zararlı alan adlarını engelleyen DNS sunucusu";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare'nın kötü amaçlı ve 'yetişkin' alan adlarına erişimi kısıtlayan engelleme sunucusu";
 
 /* Safe DNS server description */
 "safe_dns_description" = "SafeDNS tarafından DNS hizmeti";
@@ -310,6 +322,12 @@
 /* (AdvancedSettingsController) Remove Vpn profile message */
 "remove_vpn_profile_message" = "Asıl VPN profilinizi kaldırmak ve DNS korumasını devre dışı bırakmak istediğinize emin misiniz?";
 
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Bir hata oluştu";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "VPN profiliniz silinirken bir şeyler ters gitti";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ kural kullanılıyor";
 
@@ -361,6 +379,12 @@
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Ana sayfa:";
 
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Filtreyi sil";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Bu filtreyi silmek istediğinizden emin misiniz?";
+
 /* (AboutViewController) current app version format */
 "about_version_format" = "Sürüm %@";
 
@@ -409,6 +433,9 @@
 /* (NetworkSettingsController) description for wi-fi data */
 "wifi_data_description" = "Wi-Fi'deyken DNS koruması";
 
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "İzin verilen listesi";
+
 /* (ListOfRulesModel) title safari Allowlist */
 "whitelist_title" = "İzin verilen listesi";
 
@@ -433,11 +460,26 @@
 /* "Disabled" title */
 "disabled" = "Devre dışı";
 
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "İZİN VERİLEN LİSTESİNDEN KALDIR";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "KARA LİSTEDEN SİL";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "İZİN VERİLEN LİSTESİNE EKLE";
+
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Engelleme listesine ekle";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Kimlik avı sitelerinin ve diğer tehlikeli alan adlarının engellenmesine izin verin. Premium kullanıcılar tarafından kullanılabilir";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Üçüncü taraf filtreleri eklemeye izin verir. Premium kullanıcılar tarafından kullanılabilir";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Ses ve video oynatıcılar";
 
 /*(LogCategory) comments category*/
 "comments" = "Yorumlar";
@@ -445,17 +487,29 @@
 /*(LogCategory) customer interaction category*/
 "customer_interaction" = "Müşteri etkileşimi";
 
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornvertising";
+
 /*(LogCategory) advertising category*/
 "advertising" = "Reklamcılık";
 
 /*(LogCategory) essential category*/
 "essential" = "Temel";
 
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Site analizi";
+
 /*(LogCategory) social media category*/
 "social_media" = "Sosyal medya";
 
+/*(LogCategory) miscellaneous category*/
+"misc" = "Diğer";
+
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Mobil analiz";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Barındırma";
@@ -471,6 +525,12 @@
 
 /*(ListOfRules) Edit title */
 "common_edit" = "Düzenle";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Sil";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Hepsini seç";
 
 /*(ListOfRules) Add domain title */
 "add_domain" = "Alan adı ekle";
@@ -499,11 +559,23 @@
 /*(MainScreen) "30 days" chart date type */
 "chart_30days" = "30 gün";
 
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Bütün zamanlar";
+
 /*(SafariService) notification about loading content blockers  */
 "loading_content_blockers" = "İçerik engelleyiciler güncelleniyor ...";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Filtreler yükleniyor ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Kurallar dönüştürülüyor ...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Yeni özel filtre";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Yeni DNS filtresi";
 
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Özel filtreyi düzenle";
@@ -511,11 +583,20 @@
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Ekle";
 
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Koruma devre dışı bırakıldı";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Koruma etkinleştirildi";
+
 /*(TodayViewController) Complex protection is enabled text  */
 "complex_enabled" = "Safari ve DNS koruması";
 
 /*(TodayViewController) Safari protection is enabled text  */
 "safari_enabled" = "Safari içerik engelleme";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Bütün koruma modülleri devre dışı bırakıldı";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS koruması";
@@ -535,8 +616,23 @@
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ kural etkin";
 
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Çok fazla kural etkin: %@. Bazı kurallar devre dışı bırakılacaktır";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Doğru çalışma için bazı filtreleri kapatın";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Engellendi";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "İşlendi";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Şifrelenmiş";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "İzin verildi";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "İzin verilen listesine eklendi";
@@ -547,6 +643,12 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_whitelist" = "İzin verilen listesinden kaldırıldı";
 
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "Kara listeden silindi";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "<b>Ayarları</b> aç";
+
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari'ye</b> %@ dokunun ve <b>\"İçerik Engelleyiciler\"</b> menü öğesini seçin";
 
@@ -556,11 +658,20 @@
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";
 
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "İnternet servis sağlayıcınız tarafından sağlanan sistem varsayılan DNS sunucularını kullanın";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Talep engelleme";
+
 /* (BlockRequestController) Allowlist request title */
 "whitelist_request" = "İzin verilen listesine alan adı ekle";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Eğitim Videosu";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Geçersiz yukarı akışa girdiniz";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistem Engelleme Listesi";
@@ -583,17 +694,59 @@
 /* (DnsRequestDetailsController) "Category" title for cell */
 "category_title" = "Kategori";
 
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "İsim";
+
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Site";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Alan adı";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Sunucu";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Durum";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Saat";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Boyut";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Geçen zaman";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tür";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS durumu";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS yukarı akışı";
 
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS yanıtı";
 
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Eşleşen filtre";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Eşleşen kural";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Orijinal cevap";
+
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Boş";
 
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Geribildirim gönderilemedi";
+
 /* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Bir şeyler yanlış gitti";
+"feedback_sending_failed_message" = "Bir şeyler ters gitti";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Kullanmaya devam ederek<br /><a href=%2$@>Kullanım koşullarını</a> ve <a href=%1$@>Gizlilik politikasını</a> kabul etmiş olursunuz";
@@ -601,8 +754,29 @@
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "İstekler";
 
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Bir web sayfasını her ziyaret ettiğinizde, bir istek gönderilir. Web sayfaları gizli istekler gönderebilir ve kişisel veri sızdırıyor olabilirler. Bu sorunun kapsamını fark edebilmek için toplam istek sayısını bilmek faydalıdır.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Şifrelenmiş istekler";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Şifrelenmiş DNS isteklerinin sayısı. DNS trafiğinizin şifrelenebilmesi için şifrelenmiş bir DNS sunucusu kullanmanız gerekir.";
+
 /* (ActivityViewController) - Average time title */
 "average_info_alert_title" = "Ortalama süre";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Bir DNS isteğininin işlenmesi için geçen ortalama süre. Ne kadar hızlı DNS sunucusu kullanırsanız, o kadar düşük olur.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Şirket sayısı";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Bu istekleri yönlendiren şirketlerin sayısıdır.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Tüm istekler";
 
 /* (ActivityViewController) - Blocked only alert action */
 "blocked_only_alert_action" = "Sadece engellenenler";
@@ -612,6 +786,9 @@
 
 /* (ActivityViewController) - None message when there is no statistics */
 "none_message" = "Hiçbiri";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Etkinlik";
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d istek";
@@ -651,8 +828,31 @@
 /* (MainPageController) update filters title for VoiceOver*/
 "update_filters_voiceover" = "Filtreleri güncelle";
 
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "İstek sayısı";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Şifrelenmiş DNS isteği sayısı";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Bir DNS isteğininin işlenmesi için ortalama süre";
+
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
 "enable_system_protection_voiceover" = "DNS korumasını etkinleştir";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Abonelik türünüzü seçin";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "E-mail adresinizi buraya girin";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Parolanızı buraya girin";
