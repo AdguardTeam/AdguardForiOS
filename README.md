@@ -84,7 +84,7 @@ Add to your `~/.bash_profile`
 
 ```
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 ```
 
 ### Prepare
@@ -93,6 +93,12 @@ Prepare and install Ruby bundler:
 
 ```
 sudo gem install bundler
+```
+
+Then run bundle install:
+
+```
+bundle install
 ```
 
 Then you can run Fastlane using a command like this:
@@ -119,7 +125,13 @@ Actions below are supposed to be used from CI only:
 - `bundle exec fastlane increment` -- increments build number, commits it to git
 - `bundle exec fastlane testflight_beta` -- upload previously built version to testflight
 
+In the case when certificate expires, you may need to nuke the old certs and generate them again:
 
+```
+bundle exec fastlane match nuke development
+bundle exec fastlane match nuke distribution
+bundle exec fastlane generate
+```
 
 ### Acknowledgments
 

@@ -124,24 +124,14 @@ platform :ios do
 end
 
 lane :prepare do
-  get_certificates(
-    development: true,
-    platform: "macos",
-    username: "apple-dev@adguard.com",
-    team_id: "N33TQXN8C7",
-    output_path: "./build",
-  )
-  get_certificates(
-    development: false,
-    platform: "macos",
-    username: "apple-dev@adguard.com",
-    team_id: "N33TQXN8C7",
-    output_path: "./build",
-  )
+  match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+end
 
-  # get_certificates creates .p12 and .cer files in the build directory
-
-  match(type: "development", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "appstore", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "adhoc", readonly: true, platform: "ios", team_id: "N33TQXN8C7")
+# Run this only if you need to generate certs and provisioning profiles
+lane :generate do
+  match(type: "development", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "appstore", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "adhoc", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
 end
