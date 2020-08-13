@@ -34,6 +34,9 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Bloquez l'hameçonnage, les arnaqueurs et le crypto-jacking";
 
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "CONNEXION";
+
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Valorisez votre vie privée";
 
