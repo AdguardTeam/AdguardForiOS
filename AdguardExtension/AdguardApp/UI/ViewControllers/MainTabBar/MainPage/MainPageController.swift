@@ -257,20 +257,8 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     @objc private func updateFilters(_ sender: Any) {
         
-        mainPageModel.updateFilters(start: {
-            DispatchQueue.main.async { [weak self] in
-                self?.updateStarted()
-                self?.protectionStatusLabel.text = String.localizedString("update_filter_start_message")
-            }
-        }, finish: { [weak self] (message) in
-            DispatchQueue.main.async {
-                self?.protectionStatusLabel.text = message
-            }
-        }, error: { [weak self] (message) in
-            DispatchQueue.main.async {
-                self?.protectionStatusLabel.text = message
-            }
-        })
+        safariUpdateEnded = false
+        mainPageModel.updateFilters()
         
         dnsUpdateEnded = false
         
@@ -414,11 +402,19 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - view model delegate methods
     
     func updateStarted() {
+        protectionStatusLabel.text = String.localizedString("update_filter_start_message")
         safariUpdateEnded = false
         updateStartedInternal()
     }
     
-    func updateFinished() {
+    func updateFinished(message: String) {
+        protectionStatusLabel.text = message
+        safariUpdateEnded = true
+        endUpdate()
+    }
+    
+    func updateFailed(error: String) {
+        protectionStatusLabel.text = error
         safariUpdateEnded = true
         endUpdate()
     }

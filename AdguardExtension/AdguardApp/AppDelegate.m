@@ -35,6 +35,7 @@
 #define DNS_FILTERS_CHECK_LIMIT                 21600 // 6 hours
 
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
+NSString *AppDelegateUpdateDidNotStartedNotification = @"AppDelegateUpdateDidNotStartedNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
 NSString *AppDelegateFailuredUpdateNotification = @"AppDelegateFailuredUpdateNotification";
 NSString *AppDelegateUpdatedFiltersKey = @"AppDelegateUpdatedFiltersKey";
@@ -488,7 +489,7 @@ static NSTimeInterval lastCheckTime;
     // Update did not start
     else if ([notification.name
               isEqualToString:ASAntibannerDidntStartUpdateNotification]) {
-        
+        [self updateDidNotStartNotify];
         if ([_antibanner inTransaction]) {
             
             [_antibanner rollbackTransaction];
@@ -572,6 +573,15 @@ static NSTimeInterval lastCheckTime;
         
         DDLogDebug(@"(AppDelegate) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
+    }];
+}
+
+- (void)updateDidNotStartNotify{
+    
+    [ACSSystemUtils callOnMainQueue:^{
+        
+        DDLogDebug(@"(AppDelegate) Did not started update process.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUpdateDidNotStartedNotification object:self];
     }];
 }
 
