@@ -5,10 +5,10 @@
 "6P7-a5-VLL.text" = "Filtri di sicurezza";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "Logout";
+"70b-CS-wqh.title" = "Disconnessione";
 
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "Tutte le funzioni Premium sono disponibili";
+"FLH-Qd-Atk.text" = "Tutte le funzionalità Premium sono disponibili";
 
 /* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Accedi";

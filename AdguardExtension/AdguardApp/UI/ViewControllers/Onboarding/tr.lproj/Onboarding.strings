@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "Watch manual"; ObjectID = "3ju-B8-UIZ"; */
-"3ju-B8-UIZ.normalTitle" = "VİDEO KILAVUZUNU İZLEYİN";
+"3ju-B8-UIZ.normalTitle" = "Kılavuzu izle";
 
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
-"F7O-MB-LHu.text" = "Safari'de AdGuard'ı kullanmak için birkaç kolay adımı izleyin:";
+"F7O-MB-LHu.text" = "Safari'de AdGuard'ı kullanmak için birkaç basit adımı izleyin";
 
 /* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
 "FDG-As-HDY.text" = "DNS Koruması";
@@ -14,7 +14,7 @@
 "Mzf-WJ-CpC.text" = "Adguard her tıklamanızı takip eden binlerce izleyici şirketle savaşır güvenlik ve gizliliğinizi sağlar.";
 
 /* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Safari'ye dokunun ve “İçerik engelleyiciler” menü öğesini seçin";
+"QL3-U7-vA8.text" = "Safari'ye dokunun ve \"İçerik engelleyiciler\" menü öğesini seçin";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "SONRAKİ";
@@ -35,7 +35,7 @@
 "q8l-xM-B5q.normalTitle" = "SONRAKİ";
 
 /* Class = "UILabel"; text = "AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast."; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
-"r3n-Il-Qe8.text" = "AdGuard Safari de her hangi bir sayfadaki reklamları engelleyebilir böylece reklamsız ve hızlı bir şekilde gezinebilirsiniz.";
+"r3n-Il-Qe8.text" = "AdGuard Safari'de herhangi bir sayfadaki reklamları engelleyebilir böylece reklamsız ve hızlı bir şekilde gezinebilirsiniz.";
 
 /* Class = "UILabel"; text = "AdGuard is able to filter any type of content, and you can tune the filtering to exactly suit your needs."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
 "thP-lV-BhN.text" = "AdGuard her tür içeriği filtreleyebilir, ihtiyaçlarınıza tam olarak uyacak şekilde filtrelemeyi hassas şekilde ayarlayabilirsiniz.";

@@ -14,7 +14,7 @@
 "teo-vm-NRJ.text" = "Mit diesem Modul können Sie einen benutzerdefinierten DNS-Server verwenden und Ihre Privatsphäre verbessern durch Verschlüsselung Ihrer DNS-Abfragen.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Dieses Modul blockiert Werbeanzeigen und Tracker auf in Safari geöffneten Websites. In den AdGuard-Einstellungen können Sie zwischen verschiedenen Filterlisten wählen oder Ihre eigene hinzufügen";
+"vlx-BS-A2y.text" = "Dieses Modul sperrt Werbeanzeigen und Tracker auf in Safari geöffneten Websites. In den AdGuard-Einstellungen können Sie zwischen verschiedenen Filterlisten wählen oder Ihre eigene hinzufügen";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Schutz";

@@ -1,8 +1,8 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "Beklenmeyen bir hata oluştu. Destek ekibimizle irtibata geçiniz.";
+"support_unexpected_error" = "Beklenmeyen bir hata oluştu. Destek ekibiyle iletişime geçin.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Kurallar dönüştürülemiyor.Beklenmeyen bir hata oluştu. Destek ekibimizle irtibata geçiniz.";
+"support_rule_converting_error" = "Beklenmeyen bir hata nedeniyle kurallar dönüştürülemiyor. Destek ekibiyle iletişime geçin.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Dönüştürücü JSON biçiminde başlatılamıyor.";
@@ -11,7 +11,7 @@
 "common_action_cancel" = "İptal";
 
 /* (AEService) Service errors descriptions */
-"rule_converting_error" = "Filtre kuralı dönüştürülemiyor.Kural metni geçersiz.";
+"rule_converting_error" = "Filtre kuralı dönüştürülemiyor. Kural metni geçersiz.";
 
 /* (AEUIUtils) User filter convertering error description. */
 "filter_rules_converting_error" = "Bu kullanıcı kuralları Safari'ye eklenemiyor";
@@ -77,7 +77,7 @@
 "upgrade_lifetime_button_title" = "SATIN AL";
 
 /* (LoginController) lost password button title */
-"lost_password" = "Parolanızı mı kaybettiniz?";
+"lost_password" = "Parolanızı mı unuttunuz?";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium hesabınızın süresi doldu";
@@ -266,7 +266,7 @@
 "confirm_logout_text" = "Çıkış yapmak istediğinize emin misiniz?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "VPN yapılandırması ile ilgili bir sorun var, lütfen destek ekibiyle iletişime geçin.";
+"support_vpn_configuration_problem" = "VPN yapılandırması ile ilgili bir sorun var, lütfen destek ekibimizle iletişime geçin.";
 
 /* login error message */
 "login_error_message" = "Giriş yaparken bir hata oluştu";
@@ -320,7 +320,7 @@
 "remove_vpn_profile_title" = "VPN profilini kaldır";
 
 /* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Asıl VPN profilinizi kaldırmak ve DNS korumasını devre dışı bırakmak istediğinize emin misiniz?";
+"remove_vpn_profile_message" = "VPN profilinizi kaldırmak ve DNS korumasını devre dışı bırakmak istediğinize emin misiniz?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Bir hata oluştu";
@@ -410,7 +410,7 @@
 "account_is_locked_error" = "Hesap geçici olarak kilitlenmiştir";
 
 /* (Confirm2faController) Invalid 2fa token on login */
-"invalid_2fa_code_error" = "Geçersiz 2FA simgesi";
+"invalid_2fa_code_error" = "Geçersiz 2FA anahtarı";
 
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi istisnaları";
@@ -422,7 +422,7 @@
 "add_exception_title" = "İstisna ekle";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
-"filter_mobile_title" = "Mobil verilere filtre uygulama";
+"filter_mobile_title" = "Mobil veriyi filtrele";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
 "filter_wifi_title" = "Wi-Fi'yi filtrele";
@@ -464,7 +464,7 @@
 "remove_from_whitelist" = "İZİN VERİLEN LİSTESİNDEN KALDIR";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "KARA LİSTEDEN SİL";
+"remove_from_blacklist" = "Engelleme listesinden sil";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
 "add_to_whitelist" = "İZİN VERİLEN LİSTESİNE EKLE";
@@ -644,7 +644,7 @@
 "dns_request_user_status_removed_from_whitelist" = "İzin verilen listesinden kaldırıldı";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "Kara listeden silindi";
+"dns_request_user_status_removed_from_blacklist" = "Engelleme listesinden silindi";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "<b>Ayarları</b> aç";
@@ -852,7 +852,7 @@
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
 
-"enter_email_voiceover" = "E-mail adresinizi buraya girin";
+"enter_email_voiceover" = "E-posta adresinizi buraya girin";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Parolanızı buraya girin";

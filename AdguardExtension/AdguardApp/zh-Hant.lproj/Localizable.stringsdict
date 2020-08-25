@@ -98,7 +98,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>開始您的前 %d 日免費之試用。</string>
+        <string>開始您的前 %d 日免費之試用</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -112,7 +112,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>開始您的前 %d 週免費之試用。</string>
+        <string>開始您的前 %d 週免費之試用</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -126,7 +126,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>開始您的前 %d 個月免費之試用。</string>
+        <string>開始您的前 %d 個月免費之試用</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -140,7 +140,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>開始您的前 %d 年免費之試用。</string>
+        <string>開始您的前 %d 年免費之試用</string>
       </dict>
     </dict>
     <key>trial_period_days</key>

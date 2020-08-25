@@ -38,7 +38,7 @@
 "cOi-GX-KAC.text" = "Supporto";
 
 /* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
-"cWE-CY-2xl.text" = "Esporta i log";
+"cWE-CY-2xl.text" = "Esporta i registri";
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "Puoi recensire l'app sull'app store";
@@ -53,7 +53,7 @@
 "q9f-Zw-7sc.text" = "Segnala filtraggio non corretto";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
-"qDy-4e-MsZ.text" = "Puoi esportare i log ed inviarceli in un modo che ritieni sicuro";
+"qDy-4e-MsZ.text" = "Puoi esportare i registri ed inviarceli in un modo che ritieni sicuro";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "Protezione DNS";

@@ -14,7 +14,7 @@
 "Mzf-WJ-CpC.text" = "AdGuard 與追蹤您的每次點擊之大量的公司作戰，並確保您的隱私是安全的。";
 
 /* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "於 Safari 上輕觸並選擇\"內容阻擋器\"選單項目";
+"QL3-U7-vA8.text" = "向 Safari 輕觸並選擇\"內容阻擋器\"選單項目";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "下一步";

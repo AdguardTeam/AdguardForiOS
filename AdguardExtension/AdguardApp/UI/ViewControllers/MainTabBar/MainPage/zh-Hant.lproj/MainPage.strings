@@ -14,7 +14,7 @@
 "Btd-nN-zLO.text" = "請求";
 
 /* Class = "UILabel"; text = "avg. time"; ObjectID = "Cfe-vu-29O"; */
-"Cfe-vu-29O.text" = "平均的時間";
+"Cfe-vu-29O.text" = "平均時間";
 
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "某些內容阻擋器被禁用";

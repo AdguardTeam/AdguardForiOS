@@ -614,7 +614,7 @@
 "filter_exists" = "Sie haben versucht, einen doppelten Filter hinzuzufügen. Dieser Filter ist bereits auf der Liste.\n";
 
 /*(DnsFiltersController) DNS filters number title */
-"dns_filters_number_title" = "%@ Regeln aktiviert";
+"dns_filters_number_title" = "%@ Regeln sind aktiviert";
 
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_overlimit_title" = "Es sind zu viele Regeln aktiviert: %@. Einige werden deshalb deaktiviert";

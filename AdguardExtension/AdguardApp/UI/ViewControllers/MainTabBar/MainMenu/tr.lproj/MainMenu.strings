@@ -44,13 +44,13 @@
 "csx-k8-Qg7.text" = "Uygulamayı App Store'da değerlendirebilirsiniz";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
-"iwI-Gm-rAp.text" = "Adguard ile reklamlar nasıl engellenir";
+"iwI-Gm-rAp.text" = "AdGuard ile reklamlar nasıl engellenir";
 
 /* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
 "ow5-MW-Ued.text" = "Uygulamayı geliştirmemize yardımcı olun";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
-"q9f-Zw-7sc.text" = "Yanlış engellemeyi bildirin";
+"q9f-Zw-7sc.text" = "Hatalı engellemeyi bildir";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Günlükleri dışa aktarabilir ve uygun bir şekilde bize gönderebilirsiniz";

@@ -2,7 +2,7 @@
 "0RM-mR-ikS.text" = "Reimposta preferenze";
 
 /* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
-"3zG-B5-jE5.text" = "Log di debug";
+"3zG-B5-jE5.text" = "Registro di debug";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Inverti elenco Whitelist";
@@ -29,7 +29,7 @@
 "GBd-dx-t46.text" = "Non cambiali se non sai cosa stai facendo";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
-"GFO-xu-Bir.text" = "AdGuard aggiungerà ulteriori informazioni nel file di log. Non attivare questa opzione se non necessiti di rilevare un bug";
+"GFO-xu-Bir.text" = "AdGuard aggiungerà ulteriori informazioni nel file di registro. Non attivare questa opzione se non necessiti di rilevare un bug";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";
@@ -53,7 +53,7 @@
 "Ory-8I-Ih0.text" = "Modalità avanzata";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
-"QEc-dY-TtB.text" = "Resetta statistiche";
+"QEc-dY-TtB.text" = "Reimposta statistiche";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Predefiniti di sistema";
@@ -110,7 +110,7 @@
 "sc6-Tw-xnL.text" = "Impostazioni";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Se questo settaggio è attivo, AdGuard controllerà gli aggiornamenti dei filtri in background solo con la rete Wi-Fi";
+"tTY-BW-QcN.text" = "Se questo settaggio è attivo, AdGuard controllerà gli aggiornamenti dei filtri in secondo piano solo con la rete Wi-Fi";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Questa opzione cancellerà tutti i dati statistici, come il numero di richieste, ecc.";

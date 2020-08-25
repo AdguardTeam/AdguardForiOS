@@ -86,7 +86,7 @@
 "gxl-pG-zh1.text" = "“Kişisel VPN” uygulamalarıyla uyumlu";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "Bölünmüş Tünel modunda, AdGuard “Kişisel VPN” uygulamalarıyla uyumludur. Bir takas olarak, bu modda kötü bağlantı olması durumunda sistem tarafından atlanabilir.";
+"jmQ-ze-hFG.text" = "Bölünmüş-Tünel modunda AdGuard, “Kişisel VPN” uygulamaları ile uyumludur. Buna karşın, bu modda bağlantı kötü olursa sistem tarafından atlanabilir.";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Diğer";

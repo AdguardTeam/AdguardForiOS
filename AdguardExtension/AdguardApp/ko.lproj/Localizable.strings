@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Cloudflare에 의해 제공된 무료 DNS 서비스";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Cloudflare의 맬웨어 방지 DNS 서버가 악성 도메인을 차단합니다";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare 차단 서버는 악성 및 '성인' 도메인에 대한 접근을 제한합니다";
+
 /* Safe DNS server description */
 "safe_dns_description" = "SafeDNS로부터 제공된 DNS 서비스";
 
@@ -379,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "이 필터를 지우시겠습니까?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "버전 %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "로그아웃";
+
+/* (AboutViewController) Login title */
+"common_license" = "라이선스";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "한 번 구매하여 모든 iOS 기기에서 AdGuard 프리미엄 기능을 사용하세요!";
 
@@ -441,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "비활성화 됨";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "허용 목록에서 제거";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "차단 목록에서 제거";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "허용 목록에 추가";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "차단 목록에 추가";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "피싱 사이트 및 위험한 도메인을 차단할 수 있습니다. 프리미엄 사용자가 사용할 수 있습니다";
