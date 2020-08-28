@@ -46,7 +46,7 @@ class AdvancedSettingsController: UITableViewController {
     private let showStatusbarRow = 1
     private let restartProtectionRow = 2
     private let debugLogsRow = 3
-    private let removeVpnProfile = 5
+    private let removeVpnProfile = 6
     
     private var themeObservation: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken?
