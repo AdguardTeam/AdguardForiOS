@@ -21,6 +21,7 @@
 
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
 NSString *AE_URLSCHEME_COMMAND_ADD = @"add";
+NSString *AE_SDNS_SCHEME = @"sdns";
 
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";

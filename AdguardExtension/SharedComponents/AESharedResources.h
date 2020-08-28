@@ -40,6 +40,7 @@ typedef enum : NSUInteger {
 
 extern NSString * _Nonnull AE_URLSCHEME;
 extern NSString * _Nonnull AE_URLSCHEME_COMMAND_ADD;
+extern NSString * _Nonnull AE_SDNS_SCHEME;
 
 /**
  User Defaults key that defines app performs first start or not.

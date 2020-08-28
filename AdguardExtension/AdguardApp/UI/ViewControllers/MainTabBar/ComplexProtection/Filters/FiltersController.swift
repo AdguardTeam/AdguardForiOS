@@ -36,6 +36,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         }
     }
     
+    // MARK: oen url settings
+    
+    var openUrl: String?
+    var openTitle: String?
+    
     // MARK:  private properties
     
     var theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -106,6 +111,12 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         if searchString.count > 0 {
             viewModel?.searchFilter(query: searchString)
             searchBar.becomeFirstResponder()
+        }
+        
+        if openUrl != nil || openTitle != nil {
+            showAddFilterDialog()
+            openUrl = nil
+            openTitle = nil
         }
         
         viewModel?.updateCurrentGroup()
@@ -330,6 +341,8 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
     private func showAddFilterDialog() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else { return }
         controller.delegate = self
+        controller.openUrl = openUrl
+        controller.openTitle = openTitle
         present(controller, animated: true, completion: nil)
     }
     

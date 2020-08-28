@@ -1257,7 +1257,7 @@
         <!--Dns Providers Controller-->
         <scene sceneID="dNS-fY-mTh">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="5ol-3D-VBk" customClass="DnsProvidersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DnsProvidersController" modalPresentationStyle="fullScreen" id="5ol-3D-VBk" customClass="DnsProvidersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v87-SU-fOl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3145,6 +3145,9 @@
             <point key="canvasLocation" x="-996" y="6"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5mX-Yl-NLK"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Dnsblocking" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>

@@ -33,6 +33,10 @@ class DescriptionCell: UITableViewCell {
 
 class DnsProvidersController: UITableViewController {
     
+    // MARK: - public fields
+    
+    var openUrl: String?
+    
     // MARK: - services
     
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
@@ -98,6 +102,15 @@ class DnsProvidersController: UITableViewController {
         
         setupBackButton()
         updateTheme()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if openUrl != nil {
+            self.showNewServer()
+            self.openUrl = nil
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -217,8 +230,7 @@ class DnsProvidersController: UITableViewController {
             }
        
         case addProviderSection:
-            guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
-            present(controller, animated: true, completion: nil)
+            showNewServer()
             
         default:
             break
@@ -267,6 +279,12 @@ class DnsProvidersController: UITableViewController {
     private func editProvider(_ provider: DnsProviderInfo) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditDnsServerController") as? NewDnsServerController else { return }
         controller.provider = provider
+        present(controller, animated: true, completion: nil)
+    }
+    
+    private func showNewServer() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
+        controller.openUrl = openUrl
         present(controller, animated: true, completion: nil)
     }
 }

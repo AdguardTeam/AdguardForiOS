@@ -25,6 +25,13 @@ class GroupsTitleCell: UITableViewCell {
 
 class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
+    // MARK: oen url settings
+    
+    var openUrl: String?
+    var openTitle: String?
+    
+    // MARK: private properties
+    
     private let enabledColor = UIColor.init(hexString: "67B279")
     private let disabledColor = UIColor.init(hexString: "D8D8D8")
     
@@ -37,7 +44,6 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     private let titleSection = 0
     private let groupsSection = 1
     
-    // MARK: - properties
     var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     private var selectedIndex: Int?
     
@@ -80,6 +86,29 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         updateTheme()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if openUrl != nil {
+            if !configuration.proStatus {
+                performSegue(withIdentifier: getProSegueID, sender: self)
+            }
+            else {
+                var index = 0
+                viewModel?.groups?.forEach{ (group) in
+                    if group.groupId == FilterGroupId.custom {
+                        selectedIndex = index
+                    }
+                    index += 1
+                }
+                
+                performSegue(withIdentifier: filtersSegueID, sender: self)
+            }
+            
+            openUrl = nil
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         guard let selectedGroup = viewModel?.constantAllGroups[selectedIndex ?? 0] else { return }
@@ -89,6 +118,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         
         if segue.identifier == filtersSegueID {
             let controller = segue.destination as! FiltersController
+            controller.openUrl = openUrl
+            controller.openTitle = openTitle
             controller.viewModel = viewModel
         }
     }
