@@ -81,9 +81,6 @@ class MainMenuController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
-        if cell == supportCell, Bundle.main.isPro {
-            cell.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: .greatestFiniteMagnitude)
-        }
         return cell
     }
     
@@ -93,6 +90,15 @@ class MainMenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cell = self.tableView(tableView, cellForRowAt: indexPath)
+        if cell == LicenseCell &&  Bundle.main.isPro {
+            return 0.0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - private methods
