@@ -11,7 +11,7 @@
         <scene sceneID="8C4-sM-4cw">
             <objects>
                 <tableViewController storyboardIdentifier="MainMenuController" title="Settings" id="bEE-nS-r3u" customClass="MainMenuController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="P5t-Ce-hdY">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="P5t-Ce-hdY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,11 +66,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="UJb-NW-d5B" secondAttribute="trailing" constant="24" id="Hkh-Bc-gbZ"/>
-                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="12" id="LaG-nL-ZWT">
+                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="16" id="LaG-nL-ZWT">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                 </constraint>
                                                 <constraint firstItem="UJb-NW-d5B" firstAttribute="leading" secondItem="5eg-sd-icu" secondAttribute="leading" constant="24" id="c2e-58-e24"/>
-                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="12" id="lTf-kh-Cpp">
+                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="16" id="lTf-kh-Cpp">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                             </constraints>
