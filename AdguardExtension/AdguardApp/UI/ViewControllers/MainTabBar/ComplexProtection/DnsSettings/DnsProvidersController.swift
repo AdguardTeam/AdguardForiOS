@@ -108,8 +108,10 @@ class DnsProvidersController: UITableViewController {
         super.viewDidAppear(true)
         
         if openUrl != nil {
-            self.showNewServer()
-            self.openUrl = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.showNewServer()
+                self.openUrl = nil
+            }
         }
     }
     

@@ -114,9 +114,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         }
         
         if openUrl != nil || openTitle != nil {
-            showAddFilterDialog()
-            openUrl = nil
-            openTitle = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.showAddFilterDialog()
+                self?.openUrl = nil
+                self?.openTitle = nil
+            }
         }
         
         viewModel?.updateCurrentGroup()
