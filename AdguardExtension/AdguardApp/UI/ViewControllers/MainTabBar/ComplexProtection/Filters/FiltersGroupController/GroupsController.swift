@@ -68,6 +68,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             DispatchQueue.main.async {
                 self?.viewModel?.updateAllGroups()
                 self?.tableView.reloadData()
+                
+                self?.processOpenUrl()
             }
         }
         
@@ -86,33 +88,12 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         updateTheme()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if openUrl != nil {
-            if !configuration.proStatus {
-                performSegue(withIdentifier: getProSegueID, sender: self)
-            }
-            else {
-                var index = 0
-                viewModel?.groups?.forEach{ (group) in
-                    if group.groupId == FilterGroupId.custom {
-                        selectedIndex = index
-                    }
-                    index += 1
-                }
-                
-                performSegue(withIdentifier: filtersSegueID, sender: self)
-            }
-            
-            openUrl = nil
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let selectedGroup = viewModel?.constantAllGroups[selectedIndex ?? 0] else { return }
-        viewModel?.currentGroup = selectedGroup
+        if viewModel?.constantAllGroups.count ?? 0 > 0 {
+            guard let selectedGroup = viewModel?.constantAllGroups[selectedIndex ?? 0] else { return }
+            viewModel?.currentGroup = selectedGroup
+        }
         
         viewModel?.cancelSearch()
         
@@ -121,6 +102,9 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             controller.openUrl = openUrl
             controller.openTitle = openTitle
             controller.viewModel = viewModel
+            
+            openUrl = nil
+            openTitle = nil
         }
     }
     
@@ -244,6 +228,27 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
                 self?.tableView.refreshControl?.endRefreshing()
                 self?.tableView.reloadData()
             }
+        }
+    }
+    
+    private func processOpenUrl() {
+        if openUrl != nil {
+            if !configuration.proStatus {
+                performSegue(withIdentifier: getProSegueID, sender: self)
+            }
+            else {
+                var index = 0
+                viewModel?.groups?.forEach{ (group) in
+                    if group.groupId == FilterGroupId.custom {
+                        selectedIndex = index
+                    }
+                    index += 1
+                }
+                
+                performSegue(withIdentifier: filtersSegueID, sender: self)
+            }
+            
+            openUrl = nil
         }
     }
 }
