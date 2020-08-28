@@ -66,11 +66,11 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="UJb-NW-d5B" secondAttribute="trailing" constant="24" id="Hkh-Bc-gbZ"/>
-                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="14" id="LaG-nL-ZWT">
+                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="12" id="LaG-nL-ZWT">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                 </constraint>
                                                 <constraint firstItem="UJb-NW-d5B" firstAttribute="leading" secondItem="5eg-sd-icu" secondAttribute="leading" constant="24" id="c2e-58-e24"/>
-                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="14" id="lTf-kh-Cpp">
+                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="12" id="lTf-kh-Cpp">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                             </constraints>
