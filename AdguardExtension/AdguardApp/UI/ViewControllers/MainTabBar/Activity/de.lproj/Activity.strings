@@ -60,7 +60,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "kX9-ZX-NOu.text" = "Letzte Aktivität";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
-"kwZ-Kw-f1R.text" = "Anfrage blockieren";
+"kwZ-Kw-f1R.text" = "Anfrage sperren";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "Hinzufügen";
@@ -81,7 +81,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "wt5-4Q-CTq.normalTitle" = "verschlüsselt";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
-"y8j-ib-ZgR.text" = "Anfrage blockieren";
+"y8j-ib-ZgR.text" = "Anfrage sperren";
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
 "yWy-kc-8Zg.text" = "Aktivste";

@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Di conseguenza, i tuoi cambiamenti recenti non sono stati applicati.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "I filtro non possono essere caricati in Safari. Prova ad azzerare le tue regole e la Whitelist, o cambia la lista dei filtri utilizzati.";
+"load_to_safari_error" = "I filtro non possono essere caricati in Safari. Prova ad azzerare le tue regole e la Lista Bianca, o cambia la lista dei filtri utilizzati.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (invertita)";
+"inverted_whitelist_title" = "Lista Bianca (invertita)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applicazione dei cambiamenti...";
@@ -119,7 +119,7 @@
 "filter_date_format" = "Filtri aggiornati: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
+"blacklist_text_format" = "Puoi insere le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti web.";
@@ -131,7 +131,7 @@
 "dns_whitelist_text" = "Inserire qui i nomi dei domini separati da interruzioni di riga. AdGuard permetterà tutte le connessioni a questi domini.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Questa Blacklist supporta <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
+"dns_blacklist_text_format" = "Questa Lista Nera supporta la <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aggiornamento...";
@@ -434,19 +434,19 @@
 "wifi_data_description" = "Protezione DNS con Wi-Fi in uso";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Whitelist";
+"allowlist_title" = "Lista Bianca";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Lista Bianca";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Blacklist";
+"dns_blacklist_title" = "Lista Nera";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Regole utente Safari";
 
 /* (ListOfRulesModel) title for export */
-"export" = "Esportare";
+"export" = "Esporta";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Cancellare";
@@ -455,22 +455,22 @@
 "common_save" = "Salva";
 
 /* (ListOfRulesModel) title for import */
-"import" = "Importare";
+"import" = "Importa";
 
 /* "Disabled" title */
 "disabled" = "Disattivati";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "RIMUOVI DALLA WHITELIST";
+"remove_from_whitelist" = "Rimuovi dalla lista bianca";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "RIMUOVI DELLA WHITELIST";
+"remove_from_blacklist" = "Rimuovi dalla lista nera";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "AGGIUNGI ALLA WHITELIST";
+"add_to_whitelist" = "Aggiungi alla lista bianca";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "AGGIUNGI ALLA BLACKLIST";
+"add_to_blacklist" = "Aggiungi alla lista nera";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permette di bloccare i siti di phishing e altri domini pericolosi. Disponibile per gli utenti Premium";
@@ -635,16 +635,16 @@
 "dns_request_status_allowlisted" = "Permesso";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "aggiunto alla Whitelist";
+"dns_request_user_status_added_to_whitelist" = "aggiunto alla Lista Bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "aggiunto alla Blacklist";
+"dns_request_user_status_added_to_blacklist" = "aggiunto alla Lista Nera";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Whitelist";
+"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Lista Bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Blacklist";
+"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Lista Nera";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "Apri le %@ <b>impostazioni</b>";
@@ -665,7 +665,7 @@
 "block_request" = "Bloccare richiesta";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Aggiungi dominio alla Whitelist";
+"whitelist_request" = "Aggiungi dominio alla Lista Bianca";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video Tutorial";
@@ -674,10 +674,10 @@
 "invalid_upstream_message" = "Hai inserito il upstream non valido";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Blacklist di sistema";
+"system_blacklist" = "Lista Nera di sistema";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Whitelist di sistema";
+"system_whitelist" = "Lista Bianca di Sistema";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Dettagli";
