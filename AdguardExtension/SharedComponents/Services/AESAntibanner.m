@@ -1461,6 +1461,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         ABECFilterClientLocalization *i18n = [filterClient loadI18nWithTimeoutInterval:nil];
         if (i18n) {
             
+            // save to cache
+            _i18nCacheForFilterSubscription = i18n.copy;
+            _resources.i18nCacheForFilterSubscription = _i18nCacheForFilterSubscription;
+            _i18nCacheLastUpdated = [NSDate date];
+            
             [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
                 
                 BOOL result = [self insertI18nIntoDb:db filters:i18n.filters groups:i18n.groups];
@@ -1479,6 +1484,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         // main updating work
         ABECFilterClientMetadata *metadata = [filterClient loadMetadataWithTimeoutInterval:nil];
         if (metadata) {
+            
+            // save metadata to cache
+            _metadataCacheForFilterSubscription = metadata.copy;
+            _resources.filtersMetadataCache = _metadataCacheForFilterSubscription;
+            _metaCacheLastUpdated = [NSDate date];
             
             // get metadata only for filters, which must be updated
             metadata.filters = [metadata.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterId IN %@", [[metadataForUpdate allObjects] valueForKey:@"filterId"]]];
