@@ -303,10 +303,17 @@
     @autoreleasepool {
         
         [ACNIPUtils enumerateSystemDnsWithProcessingBlock:^(NSString *ip, NSString *port, BOOL ipv4, BOOL *stop) {
-            if(ipv4)
+            if(ipv4) {
                [ipv4s addObject:[[APDnsServerAddress alloc] initWithIp:ip port:port]];
-            else
+            }
+            else {
+                NSArray* addressComponents = [ip componentsSeparatedByString:@":"];
+                if([addressComponents.firstObject isEqualToString:@"fe80"]){ // fe80 prefix in link-local ip
+                    // skip it
+                    return;
+                }
                 [ipv6s addObject:[[APDnsServerAddress alloc] initWithIp:ip port:port]];
+            }
         }];
     }
     
