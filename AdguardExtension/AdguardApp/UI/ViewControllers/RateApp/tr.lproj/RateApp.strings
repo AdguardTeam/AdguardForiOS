@@ -23,7 +23,7 @@
 "oJi-EL-gWT.placeholder" = "Cevap vermemizi istiyorsanız e-posta adresinizi girin";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "EV";
+"tCN-dT-J7Y.normalTitle" = "ANASAYFA";
 
 /* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
 "zE7-4q-9oe.title" = "Geri Bildirim";

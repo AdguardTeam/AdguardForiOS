@@ -122,7 +122,7 @@
 "blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird den Zugriff auf diese Domains ungeachtet aller anderen Einstellungen nicht blockieren.";
+"whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird den Zugriff auf diese Domains ungeachtet aller anderen Einstellungen nicht sperren.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard aktiviert die Filterung in Safari nur für diese Webseiten.";
@@ -473,7 +473,7 @@
 "add_to_blacklist" = "Zur Blockliste hinzufügen";
 
 /*(GroupsController) Security description without premium  */
-"security_description" = "Erlauben das Blockieren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";
+"security_description" = "Erlauben das Sperren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";
 
 /*(GroupsController) Custom filters description without premium  */
 "custom_description" = "Erlaubt das Hinzufügen der Filter von Drittanbietern. Verfügbar für Premium-Benutzer";
@@ -614,7 +614,7 @@
 "filter_exists" = "Sie haben versucht, einen doppelten Filter hinzuzufügen. Dieser Filter ist bereits auf der Liste.\n";
 
 /*(DnsFiltersController) DNS filters number title */
-"dns_filters_number_title" = "%@ Regeln aktiviert";
+"dns_filters_number_title" = "%@ Regeln sind aktiviert";
 
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_overlimit_title" = "Es sind zu viele Regeln aktiviert: %@. Einige werden deshalb deaktiviert";
@@ -662,7 +662,7 @@
 "default_dns_server_description" = "Verwenden Sie die Standard-DNS-Server des Systems, die von Ihrem Internet-Dienstanbieter bereitgestellt werden";
 
 /* (BlockRequestController) Block request title */
-"block_request" = "Anfrage blockieren";
+"block_request" = "Anfrage sperren";
 
 /* (BlockRequestController) Allowlist request title */
 "whitelist_request" = "Domain zur Positivliste hinzufügen";

@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Di conseguenza, i tuoi cambiamenti recenti non sono stati applicati.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "I filtro non possono essere caricati in Safari. Prova ad azzerare le tue regole e la Whitelist, o cambia la lista dei filtri utilizzati.";
+"load_to_safari_error" = "I filtro non possono essere caricati in Safari. Prova ad azzerare le tue regole e la Lista Bianca, o cambia la lista dei filtri utilizzati.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Whitelist (invertita)";
+"inverted_whitelist_title" = "Lista Bianca (invertita)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applicazione dei cambiamenti...";
@@ -119,7 +119,7 @@
 "filter_date_format" = "Filtri aggiornati: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Puoi inserirci le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
+"blacklist_text_format" = "Puoi insere le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti web.";
@@ -131,7 +131,7 @@
 "dns_whitelist_text" = "Inserire qui i nomi dei domini separati da interruzioni di riga. AdGuard permetterà tutte le connessioni a questi domini.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Questa Blacklist supporta <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
+"dns_blacklist_text_format" = "Questa Lista Nera supporta la <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aggiornamento...";
@@ -206,7 +206,7 @@
 "cloudflare_public_dns_description" = "Servizio DNS gratuito di Cloudflare";
 
 /* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Il server DNS anti-malware di Cloudflare che blocca i domini malevoli";
+"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware di Cloudflare che blocca i domini malevoli";
 
 /* Cloudfare Family DNS server description */
 "cloudflare_family_description" = "Il server di blocco Cloudflare limita l'accesso ai domini malevoli e per adulti";
@@ -221,7 +221,7 @@
 "dns_provider_adult_tag" = "Blocco dei contenuti per adulti";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Nessuna politica dei log";
+"dns_provider_no_logs_tag" = "Nessuna politica di registrazione eventi";
 
 /* Dns Feature Name */
 "dns_provider_safe_search_tag" = "Ricerca sicura";
@@ -236,7 +236,7 @@
 "dns_provider_adult_summary" = "Blocca i siti web con contenuti per adulti";
 
 /* Dns Feature description */
-"dns_provider_no_logs_summary" = "Non memorizza le richieste di log del tuo DNS";
+"dns_provider_no_logs_summary" = "Non memorizza le richieste di registrazione del tuo DNS";
 
 /* Dns Feature description */
 "dns_provider_safe_search_summary" = "Quando possibile, viene forzata la ricerca sicura nei browser";
@@ -251,7 +251,7 @@
 "filters_description_format" = "Attivi %1$d di %2$d";
 
 /* DnsProviderDetailsController - regular dns protocol */
-"regular_dns_protocol" = "Standard";
+"regular_dns_protocol" = "Normale";
 
 /* DnsProviderDetailsController - dns crypt protocol */
 "dns_crypt_protocol" = "DNSCrypt";
@@ -272,16 +272,16 @@
 "login_error_message" = "Si è verificato un errore durante l'accesso";
 
 /* purchase secription format */
-"purchase_description_format" = "Informazioni sull'abbonamento AdGuard:<br><br>• Il pagamento verrà addebitato sul tuo account iTunes alla conferma dell'acquisto.<br><br>• L'abbonamento viene rinnovato automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente.<br><br>• Il canone di rinnovo dell'abbonamento verrà addebitato entro 24 ore prima della fine del periodo corrente.<br><br> Gli abbonamenti possono essere gestiti e il rinnovo automatico può essere disattivato nelle impostazioni dell'account iTunes dopo l'acquisto di un abbonamento.<br><br><a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Informativa sulla privacy</a>";
+"purchase_description_format" = "Informazioni sull'abbonamento AdGuard:<br><br>• Il pagamento verrà addebitato sul tuo account iTunes alla conferma dell'acquisto.<br><br>• L'abbonamento viene rinnovato automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente.<br><br>• Il canone di rinnovo dell'abbonamento verrà addebitato entro 24 ore prima della fine del periodo corrente.<br><br> Gli abbonamenti possono essere gestiti e il rinnovo automatico può essere disattivato nelle impostazioni dell'account iTunes dopo l'acquisto di un abbonamento.<br><br><a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla riservatezza</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla privacy</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla riservatezza</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"privacy_policy_action" = "Informativa sulla Privacy";
+"privacy_policy_action" = "Politica sulla Riservatezza";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
 "vpn_confirm_title" = "Verrà creata una VPN";
@@ -305,13 +305,13 @@
 "general_settings_restart_tunnel_error" = "Devi prima attivare la VPN";
 
 /* (AdvancedSettingsController) Reset statistics title */
-"reset_stat_title" = "Resetta statistiche";
+"reset_stat_title" = "Reimposta statistiche";
 
 /* (AdvancedSettingsController) Reset statistics description */
 "reset_stat_descr" = "Tutte le statistiche saranno cancellate!";
 
 /* (AdvancedSettingsController) Reset button title */
-"reset_title" = "Resetta";
+"reset_title" = "Reimposta";
 
 /* (AdvancedSettingsController) Remove button title */
 "remove_title" = "Rimuovi";
@@ -335,7 +335,7 @@
 "disabled_current_state_label" = "Disattivato nelle impostazioni Safari";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Scaricamento nel Safari...";
+"update_current_state_label" = "Caricamento in Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Hai raggiunto il limite di %1$@ regole attive. L'app potrebbe non funzionare correttamente. Ti preghiamo di disattivare le regole extra. Attualmente sono in uso %2$@ regole su %3$@; %4$@ regole sono disattivate.";
@@ -380,7 +380,7 @@
 "homepage_title" = "Pagina iniziale:";
 
 /* (FilterDetailsController) delete filter title */
-"delete_filter_title" = "Eliminare filtro";
+"delete_filter_title" = "Elimina filtro";
 
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Sei sicuro di voler eliminare questo filtro?";
@@ -398,7 +398,7 @@
 "common_license" = "Licenza";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Paga una volta e usa le funzionalità AdGuard Premium su tutti i tuoi dispositivi iOS!";
+"getPro_screen_lifetime_text" = "Paga una volta e utilizza le funzionalità AdGuard Premium su tutti i tuoi dispositivi iOS!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail o password errate";
@@ -425,7 +425,7 @@
 "filter_mobile_title" = "Filtra i dati mobile";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
-"filter_wifi_title" = "Filtrare il Wi-Fi";
+"filter_wifi_title" = "Filtra Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
 "mobile_data_description" = "Protezione DNS per dati mobile";
@@ -434,43 +434,43 @@
 "wifi_data_description" = "Protezione DNS con Wi-Fi in uso";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Whitelist";
+"allowlist_title" = "Lista Bianca";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Whitelist";
+"whitelist_title" = "Lista Bianca";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Blacklist";
+"dns_blacklist_title" = "Lista Nera";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Regole utente Safari";
 
 /* (ListOfRulesModel) title for export */
-"export" = "Esportare";
+"export" = "Esporta";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Cancellare";
 
 /* (ListOfRulesModel) title for Save button */
-"common_save" = "Salvare";
+"common_save" = "Salva";
 
 /* (ListOfRulesModel) title for import */
-"import" = "Importare";
+"import" = "Importa";
 
 /* "Disabled" title */
 "disabled" = "Disattivati";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "RIMUOVI DALLA WHITELIST";
+"remove_from_whitelist" = "Rimuovi dalla lista bianca";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "RIMUOVI DELLA WHITELIST";
+"remove_from_blacklist" = "Rimuovi dalla lista nera";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "AGGIUNGI ALLA WHITELIST";
+"add_to_whitelist" = "Aggiungi alla lista bianca";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "AGGIUNGI ALLA BLACKLIST";
+"add_to_blacklist" = "Aggiungi alla lista nera";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permette di bloccare i siti di phishing e altri domini pericolosi. Disponibile per gli utenti Premium";
@@ -635,19 +635,19 @@
 "dns_request_status_allowlisted" = "Permesso";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "aggiunto alla Whitelist";
+"dns_request_user_status_added_to_whitelist" = "aggiunto alla Lista Bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "aggiunto alla Blacklist";
+"dns_request_user_status_added_to_blacklist" = "aggiunto alla Lista Nera";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Whitelist";
+"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Lista Bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Blacklist";
+"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Lista Nera";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Aprire le %@ <b>impostazioni</b>";
+"onboarding_first_step_text" = "Apri le %@ <b>impostazioni</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tocchi su <b>Safari</b> e scegli la voce <b>\"Blocchi di contenuti\"</b> dal menù";
@@ -665,7 +665,7 @@
 "block_request" = "Bloccare richiesta";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Aggiungi dominio alla Whitelist";
+"whitelist_request" = "Aggiungi dominio alla Lista Bianca";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video Tutorial";
@@ -674,16 +674,16 @@
 "invalid_upstream_message" = "Hai inserito il upstream non valido";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Blacklist di sistema";
+"system_blacklist" = "Lista Nera di sistema";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Whitelist di sistema";
+"system_whitelist" = "Lista Bianca di Sistema";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Dettagli";
 
 /* (DnsRequestDetailsController) "General" title for section header */
-"general_header" = "Generale";
+"general_header" = "Generali";
 
 /* (DnsRequestDetailsController) "Filtering" title for section header */
 "filtering_header" = "Filtraggio";
@@ -749,7 +749,7 @@
 "feedback_sending_failed_message" = "Qualcosa è andato storto";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Continuando ad utilizzarlo, accetti i<br /><a href=%2$@>Termini e condizioni</a> e la <a href=%1$@>Norme sulla privacy</a>";
+"introduction_license_agreement" = "Procedendo nel relativo utilizzo, accetti i<br /><a href=%2$@>Termini e condizioni</a> e la <a href=%1$@>Politica sulla riservatezza</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Richieste";

@@ -36,7 +36,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "T0y-mr-Zwa.text" = "Możesz zobaczyć, kto próbuje cię śledzić, przeglądać statystyki i dziennik blokowania żądań DNS";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
-"X1F-2p-Xpe.text" = "Ochrona przed śledzeniem jest wyłączona";
+"X1F-2p-Xpe.text" = "Ochrona DNS jest wyłączona";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "WŁĄCZ";

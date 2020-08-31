@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
-"03E-rd-Slw.normalTitle" = "Standard";
+"03E-rd-Slw.normalTitle" = "Normale";
 
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
 "0ZJ-BI-849.text" = "Impostazioni di Rete";
@@ -47,7 +47,7 @@
 "Uem-fP-tai.normalTitle" = "Prova gratuita";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Whitelist di sistema";
+"Wml-J6-ced.text" = "Lista Bianca di sistema";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ANNULLA";
@@ -86,7 +86,7 @@
 "iaJ-tk-ohH.text" = "Puoi migliorare la tua privacy online crittografando il traffico DNS. per fare ciò, scegli uno dei provider DNS consigliati.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Blacklist di sistema";
+"ihd-7R-RfE.text" = "Lista Nera di sistema";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ANNULLA";

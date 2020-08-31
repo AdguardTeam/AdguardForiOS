@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
 "thousands_unit" = "%@тыс.";
 
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10K";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательские правила";
 
@@ -198,6 +204,12 @@
 
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Бесплатный DNS сервис от Сloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Антивирусный DNS-сервер Cloudflare, который блокирует вредоносные домены";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Блокирующий сервер Cloudflare ограничивает доступ к вредоносным и \"взрослым\" доменам";
 
 /* Safe DNS server description */
 "safe_dns_description" = "DNS-сервис от SafeDNS";
@@ -373,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Вы уверены, что хотите удалить этот фильтр?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "Версия %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009–%@. AdGuard Software Ltd.\nВсе права защищены. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Выход";
+
+/* (AboutViewController) Login title */
+"common_license" = "Лицензия";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих iOS-устройствах!";
 
@@ -435,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "Отключено";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Удалить из белого списка";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Удалить из чёрного списка";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Добавить в белый список";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Добавить в чёрный список";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Позволяют блокировать фишинговые сайты и другие опасные домены. Доступен пользователям Премиум-подписки";

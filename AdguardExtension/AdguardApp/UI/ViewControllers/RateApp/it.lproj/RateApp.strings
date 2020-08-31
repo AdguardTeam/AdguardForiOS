@@ -8,7 +8,7 @@
 "JXu-e8-XCB.text" = "Feedback";
 
 /* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Prego, dicci di più in merito alla tua esperienza";
+"TBB-iF-qGA.text" = "Si prega di aggiungere ulteriori informazioni in merito alla propria esperienza";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
 "XtG-5p-3KJ.text" = "Feedback";
@@ -23,7 +23,7 @@
 "oJi-EL-gWT.placeholder" = "Inserisci l'indirizzo email se desideri ricevere una risposta";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "INIZIO";
+"tCN-dT-J7Y.normalTitle" = "PAGINA INIZIALE";
 
 /* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
 "zE7-4q-9oe.title" = "Feedback";

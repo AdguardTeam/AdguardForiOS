@@ -8,7 +8,7 @@
 "4Ft-5h-4Jd.normalTitle" = "ÜCRETSİZ DENE";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
-"5pX-mg-2fq.text" = "Dönem";
+"5pX-mg-2fq.text" = "Süre";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "istek";

@@ -2,10 +2,10 @@
 "28V-ha-qHw.text" = "Safari koruması";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "WAp-Xx-eXF"; */
-"WAp-Xx-eXF.text" = "talep";
+"WAp-Xx-eXF.text" = "istek";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "box-OA-msa"; */
-"box-OA-msa.text" = "Sistem koruması";
+"box-OA-msa.text" = "DNS koruması";
 
 /* Class = "UILabel"; text = "All time statistics:"; ObjectID = "cva-11-jEA"; */
 "cva-11-jEA.text" = "Bütün istatistikler:";

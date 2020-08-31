@@ -1,6 +1,9 @@
 /* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
 "0RM-mR-ikS.text" = "Vrati postavke na podrazumevano";
 
+/* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
+"3zG-B5-jE5.text" = "Dnevnici za ispravljanje grešaka";
+
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Okreni listu dozvoljenih";
 
@@ -24,6 +27,9 @@
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "Nemojte ih menjati ako ne znate šta radite";
+
+/* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
+"GFO-xu-Bir.text" = "AdGuard će upisivati više pojedinosti u datoteke dnevnika. Nemojte ovo uključivati osim ako je potrebno da pratite grešku";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";

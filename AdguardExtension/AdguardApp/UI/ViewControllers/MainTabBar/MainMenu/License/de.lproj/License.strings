@@ -20,7 +20,7 @@
 "LJj-cc-Ko5.text" = "E-Mail:";
 
 /* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "Blockieren Sie mehr\nAnzeigen & Tracker";
+"NlM-RH-NgY.text" = "Sperren Sie mehr\nWerbung und Tracker";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Passwort:";
@@ -32,7 +32,7 @@
 "UaA-JQ-kV4.title" = "Anmelden";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Blockieren Sie Phishing, Betrug und Kryptodiebstahl";
+"YIm-R8-cxj.text" = "Sperren Sie Phishing, Betrug und Kryptodiebstahl";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ANMELDEN";

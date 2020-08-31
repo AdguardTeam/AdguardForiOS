@@ -38,7 +38,7 @@
 "NX4-vI-1WP.text" = "Filter hinzufügen";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Aktivieren Sie dieses Modul, um Tracking-Domains zu blockieren und Ihren DNS-Datenverkehr zu verschlüsseln.";
+"PFY-Cq-NFN.text" = "Aktivieren Sie dieses Modul, um Tracking-Domains zu sperren und Ihren DNS-Datenverkehr zu verschlüsseln.";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS-Schutz";

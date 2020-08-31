@@ -29,7 +29,7 @@
 "GBd-dx-t46.text" = "No lo cambies a menos que sepas lo que estás haciendo";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
-"GFO-xu-Bir.text" = "AdGuard insertará más detalles en el archivo de registro. No lo habilites a menos que necesites localizar un error";
+"GFO-xu-Bir.text" = "AdGuard añadirá más detalles en el archivo de registro. No lo habilites a menos que necesites localizar un error";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Túnel dividido";

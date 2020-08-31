@@ -87,4 +87,4 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "yWy-kc-8Zg.text" = "最活躍的";
 
 /* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
-"yio-E8-cQV.normalTitle" = "平均的時間";
+"yio-E8-cQV.normalTitle" = "平均時間";

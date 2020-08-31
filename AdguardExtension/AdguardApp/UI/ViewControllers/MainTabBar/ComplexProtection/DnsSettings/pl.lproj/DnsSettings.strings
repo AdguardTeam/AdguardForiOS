@@ -32,7 +32,7 @@
 "FUx-XP-SzD.text" = "Zaawansowane ustawienia sieciowe";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "Serwer";
+"LTC-71-V9S.text" = "Serwer DNS";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Dodaj filtr";
@@ -41,7 +41,7 @@
 "PFY-Cq-NFN.text" = "Włącz ten moduł, aby blokować domeny śledzące i szyfrować swój ruch DNS";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "Ochrona przed śledzeniem";
+"QYv-iX-uIo.text" = "Ochrona DNS";
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "WYPRÓBUJ ZA DARMO";
@@ -125,7 +125,7 @@
 "uCw-Mi-HiJ.title" = "Wybierz";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "Dostosuj blokowanie";
+"vDF-5j-uJn.text" = "Filtrowanie DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Wybierz protokół";
