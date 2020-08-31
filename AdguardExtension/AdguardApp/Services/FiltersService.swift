@@ -166,6 +166,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     var groups = [Group]()
     
     private var antibanner: AESAntibannerProtocol?
+    private let antibannerController: AntibannerControllerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
     
@@ -222,6 +223,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
+        self.antibannerController = antibannerController
         
         super.init()
         
@@ -270,101 +272,103 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     func load(refresh: Bool, _ completion: @escaping () -> Void){
         
-        groupsQueue.async { [weak self] in
-            guard let sSelf = self, let antibanner = self?.antibanner else { return }
-            
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
-            }
-            
-            guard let metadata = antibanner.metadata(forSubscribe: refresh),
-                let i18n = antibanner.i18n(forSubscribe: refresh),
-                var filters = metadata.filters else {
+        antibannerController.onReady {[weak self] antibanner in
+            self?.groupsQueue.async { [weak self] in
+                guard let sSelf = self else { return }
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
+                }
+                
+                guard let metadata = antibanner.metadata(forSubscribe: refresh),
+                    let i18n = antibanner.i18n(forSubscribe: refresh),
+                    var filters = metadata.filters else {
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                        }
+                        completion()
+                        return
+                }
+                
+                // remove "Malware Domains" filter from filters list.
+                // Apple rejects binary with word 'malware' within
+                filters = filters.filter { (filter) in
+                    filter.filterId != 208
+                }
+                
+                let installedFilters = antibanner.filters()
+                
+                var groups = antibanner.groups()
+                
+                // set localized name for custom group. We don't store it in database
+                if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
+                    customGroup.name = ACLocalizedString("custom_group_name", nil);
+                }
+                
+                // remove user group
+                groups = groups.filter({ (group) -> Bool in
+                    return group.groupId.intValue != FilterGroupId.user
+                })
+                
+                var meta: ASDFilterMetadata
+                for item in installedFilters {
+                    let index = filters.firstIndex(of: item)
+                    if index != nil {
+                        meta = filters[index!]
+                        let values = item.dictionaryWithValues(forKeys: [
+                            "updateDate",
+                            "updateDateString",
+                            "checkDate",
+                            "checkDateString",
+                            "version",
+                            "enabled"])
+                        meta.setValuesForKeys(values)
+                    }
+                    else if item.filterId.int32Value != ASDF_USER_FILTER_ID{
+                        filters.append(item)
+                    }
+                }
+                
+                let installedFilterIDs = installedFilters.map { $0.filterId }
+                
+                let predicate = NSPredicate(format: "NOT (filterId IN %@)", installedFilterIDs)
+                let disabledFilters = filters.filter(){
+                    predicate.evaluate(with: $0)
+                }
+                
+                disabledFilters.forEach({$0.enabled = false})
+                            
+                let groupInfos = sSelf.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
+                
+                // set real enabled statuses
+                groupInfos?.forEach({ (group) in
+                    guard let storedGroup = (sSelf.groups.first { $0.groupId == group.groupId }) else { return }
+                    group.enabled = storedGroup.enabled
+                })
+                
+                if sSelf.enabledFilters.count == 0 {
+                    for filterMeta in installedFilters {
+                        sSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
+                    }
+                }
+                
+                groupInfos?.forEach({ (group) in
+                    for filter in group.filters {
+                        filter.enabled = sSelf.enabledFilters[filter.filterId] ?? false
+                    }
+                    sSelf.updateGroupSubtitle(group)
+                })
+                
+                self?.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
+                
+                DispatchQueue.main.async {
+                    sSelf.groups = groupInfos ?? [Group]()
+                    sSelf.filterMetas = filters
+                    sSelf.notifyChange()
+                    completion()
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                     }
-                    completion()
-                    return
-            }
-            
-            // remove "Malware Domains" filter from filters list.
-            // Apple rejects binary with word 'malware' within
-            filters = filters.filter { (filter) in
-                filter.filterId != 208
-            }
-            
-            let installedFilters = antibanner.filters()
-            
-            var groups = antibanner.groups()
-            
-            // set localized name for custom group. We don't store it in database
-            if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
-                customGroup.name = ACLocalizedString("custom_group_name", nil);
-            }
-            
-            // remove user group
-            groups = groups.filter({ (group) -> Bool in
-                return group.groupId.intValue != FilterGroupId.user
-            })
-            
-            var meta: ASDFilterMetadata
-            for item in installedFilters {
-                let index = filters.firstIndex(of: item)
-                if index != nil {
-                    meta = filters[index!]
-                    let values = item.dictionaryWithValues(forKeys: [
-                        "updateDate",
-                        "updateDateString",
-                        "checkDate",
-                        "checkDateString",
-                        "version",
-                        "enabled"])
-                    meta.setValuesForKeys(values)
-                }
-                else if item.filterId.int32Value != ASDF_USER_FILTER_ID{
-                    filters.append(item)
-                }
-            }
-            
-            let installedFilterIDs = installedFilters.map { $0.filterId }
-            
-            let predicate = NSPredicate(format: "NOT (filterId IN %@)", installedFilterIDs)
-            let disabledFilters = filters.filter(){
-                predicate.evaluate(with: $0)
-            }
-            
-            disabledFilters.forEach({$0.enabled = false})
-                        
-            let groupInfos = sSelf.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
-            
-            // set real enabled statuses
-            groupInfos?.forEach({ (group) in
-                guard let storedGroup = (sSelf.groups.first { $0.groupId == group.groupId }) else { return }
-                group.enabled = storedGroup.enabled
-            })
-            
-            if sSelf.enabledFilters.count == 0 {
-                for filterMeta in installedFilters {
-                    sSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
-                }
-            }
-            
-            groupInfos?.forEach({ (group) in
-                for filter in group.filters {
-                    filter.enabled = sSelf.enabledFilters[filter.filterId] ?? false
-                }
-                sSelf.updateGroupSubtitle(group)
-            })
-            
-            self?.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
-            
-            DispatchQueue.main.async {
-                sSelf.groups = groupInfos ?? [Group]()
-                sSelf.filterMetas = filters
-                sSelf.notifyChange()
-                completion()
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
             }
         }

@@ -96,6 +96,8 @@ class ComplexProtectionController: UITableViewController {
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
+    
+    private var safariNotificationToken: ObserverToken?
 
     // MARK: - View Controller life cycle
     
@@ -117,7 +119,7 @@ class ComplexProtectionController: UITableViewController {
             self?.updateVpnInfo()
         }
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        safariNotificationToken = resources.sharedDefaults().addObseverWithToken(self, keyPath: SafariProtectionState, options: .new, context: nil)
         
         freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()
@@ -134,11 +136,6 @@ class ComplexProtectionController: UITableViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         observeProStatus()
     }
-    
-    deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
-    }
-
     
     // MARK: - Actions
 

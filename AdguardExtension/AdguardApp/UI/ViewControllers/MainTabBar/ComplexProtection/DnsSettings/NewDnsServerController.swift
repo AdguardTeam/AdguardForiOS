@@ -22,6 +22,7 @@ import Foundation
 class NewDnsServerController: BottomAlertController {
     
     var provider: DnsProviderInfo?
+    var openUrl: String?
     
     // MARK: - IB Outlets
     
@@ -63,6 +64,9 @@ class NewDnsServerController: BottomAlertController {
         if provider != nil {
             nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
+        }
+        else if openUrl != nil {
+            upstreamsField.text = openUrl
         }
         
         nameField.becomeFirstResponder()

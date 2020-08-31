@@ -21,6 +21,8 @@ import Foundation
 class AddCustomFilterController: BottomAlertController {
     
     var type: NewFilterType = .safariCustom
+    var openUrl: String?
+    var openTitle: String?
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
@@ -50,8 +52,14 @@ class AddCustomFilterController: BottomAlertController {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        if openUrl != nil {
+            urlTextField.text = openUrl
+            continueAction(self)
+        }
+        else {
+            urlTextField.becomeFirstResponder()
+        }
         
-        urlTextField.becomeFirstResponder()
         updateTheme()
     }
     
@@ -134,6 +142,11 @@ class AddCustomFilterController: BottomAlertController {
             controller.filterType = self.type
             controller.filter = self.filter
             controller.addDelegate = self.delegate
+            
+            if let title = self.openTitle {
+                controller.filter?.meta.name = title
+            }
+            
             presenter?.present(controller, animated: true, completion: nil)
         }
         

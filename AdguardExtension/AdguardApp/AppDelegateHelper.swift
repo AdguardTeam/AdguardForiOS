@@ -60,6 +60,7 @@ class AppDelegateHelper: NSObject {
     private let openSystemProtection = "systemProtection"
     private let openComplexProtection = "complexProtection"
     private let activateLicense = "license"
+    private let subscribe = "subscribe"
     
     private var firstRun: Bool {
         get {
@@ -340,15 +341,25 @@ class AppDelegateHelper: NSObject {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        DDLogError("(AppDelegate) application Open URL.");
+        DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
             
         /*
         When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
         https://github.com/AdguardTeam/AdguardForiOS/issues/1135
         */
-                
-        let command = url.host
-
+        
+        var command: String?
+        var params: [String: String]?
+        
+        if url.host != nil {
+            command = url.host!
+        } else {
+            let result = parseCustomUrlScheme(url)
+            command = result.command
+            params = result.params
+        }
+        
+        
         guard let tab = getMainTabController() else {
             DDLogError("(AppDeegate) application open url error. There is no tab controller")
             return false
@@ -358,10 +369,14 @@ class AppDelegateHelper: NSObject {
             DDLogError("(AppDeegateHelper) applicationOpenUrl error. TabBar viewcontrollers number is 0")
             return false
         }
+        
+        if command == activateLicense && Bundle.main.isPro {
+            return false
+        }
 
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense {
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense || command == subscribe {
             appDelegate.window.rootViewController = launchScreenController
         }
         
@@ -443,15 +458,14 @@ class AppDelegateHelper: NSObject {
             case (AE_URLSCHEME, activateLicense):
                 guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
                 
-                let params = ACNUrlUtils.parameters(fromQueryString: url.query ?? "")
-                let key = params["key"]
+                let license = params?["license"]
                 
                 DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
                 let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
                 guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
                 
                 
-                if key == nil || key!.isEmpty {
+                if license == nil || license!.isEmpty {
                     DDLogInfo("(AppDelegateHelper) - update license from openUrl")
                     
                     mainTabNavController.viewControllers = [mainPageController]
@@ -471,12 +485,57 @@ class AppDelegateHelper: NSObject {
                     
                     guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? LoginController else { return false}
                     
-                    loginController.licenseKey = key
+                    loginController.licenseKey = license
                     mainTabNavController.viewControllers = [mainPageController, getProController, loginController]
                     
                     tab.selectedViewController = mainTabNavController
                     self.appDelegate.window.rootViewController = tab
                 }
+                
+            case (AE_SDNS_SCHEME, _):
+                DDLogInfo("(AppDelegateHelper) openurl sdns: \(url.absoluteString)");
+                
+                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
+                
+                dnsSettingsController.loadViewIfNeeded()
+                
+                if !configuration.proStatus {
+                    navController.viewControllers = [mainMenuController, dnsSettingsController]
+                }
+                else {
+                    guard let dnsProvidersController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsProvidersController") as? DnsProvidersController else { return false }
+                    
+                    dnsProvidersController.loadViewIfNeeded()
+                    
+                    dnsProvidersController.openUrl = url.absoluteString
+                    navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
+                }
+                
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+                
+            case (_, subscribe):
+                DDLogInfo("(AppDelegateHelper) openurl - subscribe filter")
+                
+                let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+                let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
+                
+                safariProtectionController.loadViewIfNeeded()
+                
+                guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else { return false }
+                
+                filtersMasterController.loadViewIfNeeded()
+            
+                let groupsController = filtersMasterController.children.first { $0 is GroupsController } as? GroupsController
+                
+                groupsController?.openUrl = params?["location"]
+                groupsController?.openTitle = params?["title"]
+                
+                navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
+                
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
                 
             default:
                 break
@@ -606,5 +665,35 @@ class AppDelegateHelper: NSObject {
         self.dnsStatisticsService.startDb()
         
         self.dnsLogRecordsService.reset()
+    }
+    
+    private func parseCustomUrlScheme(_ url: URL)->(command: String?, params:[String: String]?) {
+        
+        let components = url.absoluteString.split(separator: ":", maxSplits: 1)
+        if components.count != 2 {
+            DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
+            return (nil, nil)
+        }
+     
+        let querry = components.last
+        
+        // try to parse url with question (adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList)
+        let questionComponents = querry?.split(separator: "?", maxSplits: 1)
+        
+        if questionComponents?.count == 2 {
+            let command = String((questionComponents?.first)!)
+            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
+            
+            return (command, params)
+        }
+        else if questionComponents?.count == 1 {
+            // try to parse url without question (adguard:license=AAAA)
+            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
+            let command = String(params.first!.key)
+            return (command, params)
+        }
+        
+        DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
+        return (nil, nil)
     }
 }
