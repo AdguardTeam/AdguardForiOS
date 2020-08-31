@@ -341,7 +341,7 @@ class AppDelegateHelper: NSObject {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        DDLogError("(AppDelegate) application Open URL.");
+        DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
             
         /*
         When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
@@ -367,6 +367,10 @@ class AppDelegateHelper: NSObject {
 
         if tab.viewControllers?.count == 0 {
             DDLogError("(AppDeegateHelper) applicationOpenUrl error. TabBar viewcontrollers number is 0")
+            return false
+        }
+        
+        if command == activateLicense && Bundle.main.isPro {
             return false
         }
 
