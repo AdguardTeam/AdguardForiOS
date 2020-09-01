@@ -18,11 +18,19 @@
 
 import Foundation
 
+protocol MainPageModelDelegate {
+    func updateStarted()
+    func updateFinished()
+}
+
 protocol MainPageModelProtocol {
-    func updateFilters(start:@escaping ()->Void, finish:@escaping (_ message: String)->Void, error:@escaping (_ message: String)->Void) 
+    func updateFilters(start:@escaping ()->Void, finish:@escaping (_ message: String)->Void, error:@escaping (_ message: String)->Void)
+    var delegate: MainPageModelDelegate? { get set }
 }
 
 class MainPageModel: MainPageModelProtocol {
+    
+    var delegate: MainPageModelDelegate?
     
     // MARK: - private members
     
@@ -31,7 +39,6 @@ class MainPageModel: MainPageModelProtocol {
     private var finish: ((String)->Void)?
     private var error: ((String)->Void)?
     private var observers = [NSObjectProtocol]()
-    
     
     // MARK: - init
     
@@ -70,6 +77,7 @@ class MainPageModel: MainPageModelProtocol {
     private func observeAntibanerState(){
         let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
             self?.start?()
+            self?.delegate?.updateStarted()
         }
         observers.append(observer1)
         let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
@@ -86,11 +94,15 @@ class MainPageModel: MainPageModelProtocol {
             }
             
             self?.finish?(message!)
+            
+            self?.delegate?.updateFinished()
         }
         observers.append(observer2)
         let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
             self.error?(ACLocalizedString("filter_updates_error", nil))
+            
+            self.delegate?.updateFinished()
         }
         observers.append(observer3)
     }
