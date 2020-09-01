@@ -158,7 +158,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
-    private var mainPageModel: MainPageModelProtocol
+    private let mainPageModel: MainPageModelProtocol
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     

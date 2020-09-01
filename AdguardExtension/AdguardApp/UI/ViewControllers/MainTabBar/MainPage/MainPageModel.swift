@@ -24,7 +24,7 @@ protocol MainPageModelDelegate {
     func updateFailed(error: String)
 }
 
-protocol MainPageModelProtocol {
+protocol MainPageModelProtocol: class {
     func updateFilters()
     var delegate: MainPageModelDelegate? { get set }
 }
