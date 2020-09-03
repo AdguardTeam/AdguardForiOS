@@ -1270,11 +1270,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             ASDFilterMetadata *filterMeta = [metadataForUpdate member:version];
             [self copyUserSettingsFromMeta:filterMeta toMeta:version];
             
+            // TODO: uncomment this after passing tests
             // checking version
-            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
+//            if ([version.version compare:filterMeta.version options:NSNumericSearch] == NSOrderedDescending) {
 
                 [filtersForUpdate addObject:version];
-            }
+//            }
         }
 
         if (filtersForUpdate.count) {
@@ -1400,12 +1401,13 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (![filterMeta.editable boolValue]) {
                     
                     // updated only enabled filters
-                    if (([filterMeta.enabled boolValue]
+                    if ([filterMeta.enabled boolValue]
+                        // TODO: uncomment this after passing tests
                          //Special case for Simplified domain names filter. We allow update of this filter in any case.
                          //https://github.com/AdguardTeam/AdguardForiOS/issues/302
-                         || [filterMeta.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)])
+                         /*|| [filterMeta.filterId isEqual:@(ASDF_SIMPL_DOMAINNAMES_FILTER_ID)])
                         
-                        && ( forced || interval >= [filterMeta.expires integerValue] )) {
+                        && ( forced || interval >= [filterMeta.expires integerValue] )*/) {
                         
                         [metadataForUpdate addObject:filterMeta];
                     }

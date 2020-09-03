@@ -257,15 +257,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     @objc private func updateFilters(_ sender: Any) {
         
-        safariUpdateEnded = false
-        mainPageModel.updateFilters()
-        
         dnsUpdateEnded = false
         
         dnsFiltersService.updateFilters(networking: ACNNetworking()) {
             DispatchQueue.main.async {  [weak self] in
+                
                 self?.dnsUpdateEnded = true
-                self?.endUpdate()
+                
+                self?.safariUpdateEnded = false
+                self?.mainPageModel.updateFilters()
             }
         }
     }
