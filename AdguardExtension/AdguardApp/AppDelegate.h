@@ -33,6 +33,10 @@ extern NSString *AppDelegateFinishedUpdateNotification;
  Notification when update process failured
  */
 extern NSString *AppDelegateFailuredUpdateNotification;
+/**
+ Notification when update did not started
+ */
+extern NSString *AppDelegateUpdateDidNotStartedNotification;
 
 /**
  Key for userInfo of AppDelegateFinishedUpdateNotification that defines

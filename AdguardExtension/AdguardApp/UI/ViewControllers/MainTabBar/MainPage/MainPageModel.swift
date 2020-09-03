@@ -18,20 +18,25 @@
 
 import Foundation
 
-protocol MainPageModelProtocol {
-    func updateFilters(start:@escaping ()->Void, finish:@escaping (_ message: String)->Void, error:@escaping (_ message: String)->Void) 
+protocol MainPageModelDelegate {
+    func updateStarted()
+    func updateFinished(message: String)
+    func updateFailed(error: String)
+}
+
+protocol MainPageModelProtocol: class {
+    func updateFilters()
+    var delegate: MainPageModelDelegate? { get set }
 }
 
 class MainPageModel: MainPageModelProtocol {
     
+    var delegate: MainPageModelDelegate?
+    
     // MARK: - private members
     
     private let antibanner: AESAntibannerProtocol
-    private var start : (()->Void)?
-    private var finish: ((String)->Void)?
-    private var error: ((String)->Void)?
     private var observers = [NSObjectProtocol]()
-    
     
     // MARK: - init
     
@@ -51,14 +56,8 @@ class MainPageModel: MainPageModelProtocol {
     
     /**
      updates filters. calls callback during updating process
-     @start - this callback calls when updating process is started
-     @finish - this callback calls when updating process is finished
-     @error - this callback calls if error occurs
      */
-    func updateFilters(start:@escaping ()->Void, finish:@escaping (_ message: String)->Void, error:@escaping (_ message: String)->Void) {
-        self.start = start
-        self.finish = finish
-        self.error = error
+    func updateFilters() {
         
         antibanner.beginTransaction()
         antibanner.startUpdatingForced(true, interactive: true)
@@ -69,14 +68,15 @@ class MainPageModel: MainPageModelProtocol {
     
     private func observeAntibanerState(){
         let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
-            self?.start?()
+            self?.delegate?.updateStarted()
         }
         observers.append(observer1)
+        
         let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
             
             let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as! Array<Any>?
             
-            var message: String?
+            let message: String
             if updatedMetas != nil && updatedMetas!.count > 0 {
                 
                 let format = ACLocalizedString("filters_updated_format", nil);
@@ -85,13 +85,22 @@ class MainPageModel: MainPageModelProtocol {
                 message = ACLocalizedString("filters_noUpdates", nil);
             }
             
-            self?.finish?(message!)
+            self?.delegate?.updateFinished(message: message)
         }
         observers.append(observer2)
+        
         let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
-            self.error?(ACLocalizedString("filter_updates_error", nil))
+            
+            self.delegate?.updateFailed(error: ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)
+        
+        let observer4 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateUpdateDidNotStarted, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            DDLogInfo("(MainPageModel) update did not start")
+            self.delegate?.updateFinished(message: String.localizedString("filters_noUpdates"))
+        }
+        observers.append(observer4)
     }
 }

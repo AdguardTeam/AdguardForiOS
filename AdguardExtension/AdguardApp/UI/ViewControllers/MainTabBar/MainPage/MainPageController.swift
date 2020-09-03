@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate {
+class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -144,6 +144,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     private var onBoardingIsInProcess = false
     
+    private var safariUpdateEnded = true
+    private var dnsUpdateEnded = true
+    
+    
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
@@ -170,6 +174,8 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     required init?(coder: NSCoder) {
         mainPageModel = MainPageModel(antibanner: ServiceLocator.shared.getService()!)
         super.init(coder: coder)
+        
+        mainPageModel.delegate = self
     }
     
     override func viewDidLoad() {
@@ -251,40 +257,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     @objc private func updateFilters(_ sender: Any) {
         
-        var safariUpdateEnded = false
-        var dnsUpdateEnded = false
-        let endUpdate: ()->Void = { [weak self] in
-            switch(safariUpdateEnded, dnsUpdateEnded){
-            case (true, true):
-                self?.updateEnded()
-            default:
-                break
-            }
-        }
-        
-        mainPageModel.updateFilters(start: {
-            DispatchQueue.main.async { [weak self] in
-                self?.updateStarted()
-                self?.protectionStatusLabel.text = String.localizedString("update_filter_start_message")
-            }
-        }, finish: { [weak self] (message) in
-            DispatchQueue.main.async {
-                self?.protectionStatusLabel.text = message
-                safariUpdateEnded = true
-                endUpdate()
-            }
-        }, error: { [weak self] (message) in
-            DispatchQueue.main.async {
-                self?.protectionStatusLabel.text = message
-                safariUpdateEnded = true
-                endUpdate()
-            }
-        })
+        dnsUpdateEnded = false
         
         dnsFiltersService.updateFilters(networking: ACNNetworking()) {
-            DispatchQueue.main.async {
-                dnsUpdateEnded = true
-                endUpdate()
+            DispatchQueue.main.async {  [weak self] in
+                
+                self?.dnsUpdateEnded = true
+                
+                self?.safariUpdateEnded = false
+                self?.mainPageModel.updateFilters()
             }
         }
     }
@@ -416,6 +397,26 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     func getProControllerClosed() {
         onboardingDidFinish()
+    }
+    
+    // MARK: - view model delegate methods
+    
+    func updateStarted() {
+        protectionStatusLabel.text = String.localizedString("update_filter_start_message")
+        safariUpdateEnded = false
+        updateStartedInternal()
+    }
+    
+    func updateFinished(message: String) {
+        protectionStatusLabel.text = message
+        safariUpdateEnded = true
+        endUpdate()
+    }
+    
+    func updateFailed(error: String) {
+        protectionStatusLabel.text = error
+        safariUpdateEnded = true
+        endUpdate()
     }
     
     // MARK: - Private methods
@@ -559,7 +560,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     /**
      Starts to rotate refresh button
      */
-    private func updateStarted(){
+    private func updateStartedInternal(){
         updateInProcess = true
         iconButton?.isUserInteractionEnabled = false
         updateButton.customView?.rotateImage(isNedeed: true)
@@ -568,7 +569,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     /**
      Stops to rotate refresh button
      */
-    private func updateEnded(){
+    private func updateEndedInternal(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {[weak self] in
             self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
@@ -818,5 +819,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         systemProtectionButton.onAccessibilityTitle = String.localizedString("tracking_protection_enabled_voiceover")
         systemProtectionButton.offAccessibilityTitle = String.localizedString("tracking_protection_disabled_voiceover")
+    }
+    
+    private func endUpdate()
+    {
+        switch(safariUpdateEnded, dnsUpdateEnded){
+        case (true, true):
+            updateEndedInternal()
+        default:
+            break
+        }
     }
 }
