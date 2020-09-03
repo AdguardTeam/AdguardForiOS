@@ -351,12 +351,11 @@ static NSTimeInterval lastCheckTime;
         
         // Update dns filters
         NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-        // TODO: uncomment this after passing tests
-//        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus && checkResult){
+        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus && checkResult){
             lastCheckTime = now;
             [_dnsFiltersService updateFiltersWithNetworking:_networking callback:nil];
             DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
-//        }
+        }
     }
 }
 
@@ -379,8 +378,7 @@ static NSTimeInterval lastCheckTime;
         
         // Begin update process (Downloading step)
         
-        // TODO: uncomment this after passing tests
-        NSDate *lastCheck = nil;//[_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
+        NSDate *lastCheck = [_resources.sharedDefaults objectForKey:AEDefaultsCheckFiltersLastDate];
         if (fromUI || !lastCheck ||
             ([lastCheck timeIntervalSinceNow] * -1) >=
             AS_CHECK_FILTERS_UPDATES_PERIOD) {
