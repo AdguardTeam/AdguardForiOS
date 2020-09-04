@@ -30,6 +30,7 @@ extension UIView {
             rotationAnimation.duration = 0.9;
             rotationAnimation.isCumulative = true;
             rotationAnimation.repeatCount = .infinity;
+            rotationAnimation.isRemovedOnCompletion = false;
             layer.add(rotationAnimation, forKey: "rotationAnimation")
         default:
             layer.removeAnimation(forKey: "rotationAnimation")

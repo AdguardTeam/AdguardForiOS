@@ -207,7 +207,7 @@ class MigrationService: MigrationServiceProtocol {
             }
             
             self.antibanner.beginTransaction()
-            self.antibanner.startUpdatingForced(true, interactive: false)
+            self.antibanner.startUpdatingForced(true, interactive: true)
         }
     }
     

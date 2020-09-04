@@ -570,12 +570,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      Stops to rotate refresh button
      */
     private func updateEndedInternal(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: {[weak self] in
+        DispatchQueue.main.async {[weak self] in
             self?.updateInProcess = false
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.updateProtectionStates()
-        })
+        }
     }
     
     /**
