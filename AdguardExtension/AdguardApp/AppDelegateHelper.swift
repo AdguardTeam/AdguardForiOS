@@ -135,9 +135,9 @@ class AppDelegateHelper: NSObject {
                 self.migrationService.install()
                 self.purchaseService.checkLicenseStatus()
                 self.firstRun = false
-            } else {
-                self.migrationService.migrateIfNeeded()
             }
+               
+            self.migrationService.migrateIfNeeded()
         }
         
         return true
