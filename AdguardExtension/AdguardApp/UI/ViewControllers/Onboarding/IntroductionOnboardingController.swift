@@ -25,6 +25,7 @@ class IntroductionOnboardingController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     private var themeToken: NotificationToken?
     
     var delegate: OnboardingControllerDelegate?
@@ -62,8 +63,8 @@ class IntroductionOnboardingController: UIViewController {
     
     private func setupLicenseTextView() {
         let format = String.localizedString("introduction_license_agreement")
-        let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license")
-        let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
+        let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
+        let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license", buildVersion: productInfo.buildVersion())
         let htmlString = String(format: format, privacy, eula)
         
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)

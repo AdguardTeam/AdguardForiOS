@@ -22,10 +22,11 @@ class RateAppServiceTest: XCTestCase {
 
     private var resources: AESharedResourcesProtocol!
     private var rateAppService: RateAppServiceProtocol!
+    private var productInfo: ADProductInfoProtocol!
     
     private var currentBuild: Int {
         get {
-            if let currentBuild = Int(ADProductInfo.buildNumber()) {
+            if let currentBuild = Int(productInfo.buildNumber()) {
                 return currentBuild
             }
             return 0
@@ -34,7 +35,8 @@ class RateAppServiceTest: XCTestCase {
     
     override func setUp() {
         resources = SharedResourcesMock()
-        rateAppService = RateAppService(resources: resources)
+        productInfo = ProductInfoMock()
+        rateAppService = RateAppService(resources: resources, productInfo: productInfo)
     }
     
     // MARK: - showRateAppAlertIfNeeded test

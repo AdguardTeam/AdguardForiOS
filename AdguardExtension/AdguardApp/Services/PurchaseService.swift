@@ -196,6 +196,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let network: ACNNetworkingProtocol
     private let resources: AESharedResourcesProtocol
     private let keychain: KeychainServiceProtocol
+    private let productInfo: ADProductInfoProtocol
+
     private var productRequest: SKProductsRequest?
     private var productsToPurchase = [SKProduct]()
     private var nonConsumableProduct: SKProduct?
@@ -306,11 +308,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
 
     // MARK: - public methods
-    init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol) {
+    init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
         self.network = network
         self.resources = resources
         self.keychain = KeychainService(resources: resources)
-        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: keychain)
+        self.productInfo = productInfo
+        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: keychain, productInfo: productInfo)
         
         super.init()
         
@@ -398,7 +401,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         let jsonToSend = """
         {
         "\(APP_ID_PARAM)":"\(appId)",
-        "\(APP_VERSION_PARAM)":"\(ADProductInfo.version()!)",
+        "\(APP_VERSION_PARAM)":"\(productInfo.version()!)",
         "\(APP_NAME_PARAM)":"\(LoginService.APP_NAME_VALUE)",
         "\(RECEIPT_DATA_PARAM)":"\(base64Str)"
         }

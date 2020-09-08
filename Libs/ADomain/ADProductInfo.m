@@ -43,7 +43,7 @@ static NSString *userAgentString;
 static NSDictionary *persistentProductInfo;
 
 /// Returns Product Version
-+ (NSString *)version{
+- (NSString *)version{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -58,7 +58,7 @@ static NSDictionary *persistentProductInfo;
     return mVersion;
 }
 
-+ (NSString *)versionWithBuildNumber {
+- (NSString *)versionWithBuildNumber {
     NSString *build = [self buildNumber];
     
     if(build)
@@ -68,7 +68,7 @@ static NSDictionary *persistentProductInfo;
 }
 
 /// Returns Product Version With Build Number
-+ (NSString *)buildVersion{
+- (NSString *)buildVersion{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -90,12 +90,12 @@ static NSDictionary *persistentProductInfo;
     return _buildVersion;
 }
 
-+ (NSString *)buildNumber {
+- (NSString *)buildNumber {
     return [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
 /// Returns Localized Product Name
-+ (NSString *)name{
+- (NSString *)name{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -109,14 +109,14 @@ static NSDictionary *persistentProductInfo;
 }
 
 
-+ (NSString *)applicationID{
+- (NSString *)applicationID{
 
-    [ADProductInfo prepareProductInfo];
+    [self prepareProductInfo];
     
     return persistentProductInfo[INFO_KEY_APPID];
 }
 
-+ (NSString *)userAgentString{
+- (NSString *)userAgentString{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -153,7 +153,7 @@ static NSDictionary *persistentProductInfo;
 #pragma mark  Private Methods
 /////////////////////////////////////////////////////////////////////
 
-+ (void)prepareProductInfo {
+- (void)prepareProductInfo {
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

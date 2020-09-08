@@ -575,6 +575,11 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.updateProtectionStates()
+            
+            // return statur title few secconds latter
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                self?.updateProtectionStatusText()
+            }
         }
     }
     

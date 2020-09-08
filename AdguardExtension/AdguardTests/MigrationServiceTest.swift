@@ -24,16 +24,18 @@ class MigrationServiceTest: XCTestCase {
     let vpnManager = VpnManagerMock()
     let dnsProvidersService = DnsProvidersServiceMock()
     let resources = SharedResourcesMock()
-
+    let productInfo = ProductInfoMock()
+    let antibanner = AntibannerMock()
+    
     override func setUp() {
-        migrationService = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProvidersService, resources: resources, antibanner: AntibannerMock(), dnsFiltersService: DnsFiltersServiceMock(), networking: NetworkMock(), activityStatisticsService: ActivityStatisticsServiceMock(), dnsStatisticsService: DnsStatisticsServiceMock(), dnsLogService: DnsLogRecordsServiceMock(), configuration: ConfigurationServiceMock(), filtersService: FiltersServiceMock())
+        migrationService = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProvidersService, resources: resources, antibanner: antibanner, dnsFiltersService: DnsFiltersServiceMock(), networking: NetworkMock(), activityStatisticsService: ActivityStatisticsServiceMock(), dnsStatisticsService: DnsStatisticsServiceMock(), dnsLogService: DnsLogRecordsServiceMock(), configuration: ConfigurationServiceMock(), filtersService: FiltersServiceMock(), productInfo: productInfo)
     }
     
     func testMajorMigration() {
         let savedSchemaVersion = 3
         resources.sharedDefaults().set(savedSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
         
-        migrationService.migrateIfNeeded()
+        migrationService.migrateIfNeeded(inBackground: false)
         
         let savedSchemaVersionAfterMigration = resources.sharedDefaults().integer(forKey: AEDefaultsProductSchemaVersion)
         
@@ -44,12 +46,35 @@ class MigrationServiceTest: XCTestCase {
         let lastBuildVersion = "440"
         resources.sharedDefaults().set(lastBuildVersion, forKey: AEDefaultsProductBuildVersion)
         
-        migrationService.migrateIfNeeded()
+        migrationService.migrateIfNeeded(inBackground: false)
         sleep(1)
         
-        let currentBuildVersion = Int(ADProductInfo.buildNumber())!
+        let currentBuildVersion = Int(productInfo.buildNumber())!
         let lastBuildVersionAfterMigration = resources.sharedDefaults().integer(forKey: AEDefaultsProductBuildVersion)
         
         XCTAssertEqual(currentBuildVersion, lastBuildVersionAfterMigration)
+    }
+    
+    func testBackgroundMigration() {
+        resources.buildVersion = 100
+        productInfo.buildNumberInternal = "200"
+        
+        // migrate in background
+        
+        migrationService.migrateIfNeeded(inBackground: true)
+        
+        usleep(200000)
+        
+        // in this case filters must not be updated
+        XCTAssertFalse(antibanner.updateStarted)
+        
+        XCTAssert(resources.buildVersion == 200)
+        
+        // then migrate in foreground
+        migrationService.migrateIfNeeded(inBackground: false)
+        
+        usleep(200000)
+        
+        XCTAssertTrue(antibanner.updateStarted)
     }
 }

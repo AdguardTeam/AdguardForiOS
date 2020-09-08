@@ -34,6 +34,7 @@ class GetProController: UIViewController {
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - IB outlets
     @IBOutlet weak var accountView: UIView!
@@ -110,7 +111,7 @@ class GetProController: UIViewController {
     }
     
     @IBAction func accountAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: accountAction, from: from)
+        UIApplication.shared.openAdguardUrl(action: accountAction, from: from, buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {

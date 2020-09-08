@@ -65,6 +65,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private var configuration: ConfigurationService
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
+    private let productInfo: ADProductInfoProtocol
     
     private var requestNumber = 0
     private var encryptedNumber = 0
@@ -90,14 +91,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.flush()
         
         safariService = SafariService(resources: resources)
-        purchaseService = PurchaseService(network: networkService, resources: resources)
+        
+        productInfo = ADProductInfo()
+        purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
         configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
         dnsProvidersService = DnsProvidersService(resources: resources)
         dnsStatisticsService = DnsStatisticsService(resources: resources)
         let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
         
         let safariProtection = SafariProtectionService(resources: resources)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection)
+        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
         
         super.init(coder: coder)
         

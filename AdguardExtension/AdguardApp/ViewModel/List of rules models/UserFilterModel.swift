@@ -91,7 +91,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
     var descriptionTitle: String {
         get {
             let format = ACLocalizedString("blacklist_text_format", nil)
-            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom, buildVersion: productInfo.buildVersion())
             return String(format: format, url)
         }
     }
@@ -104,6 +104,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
     private let antibanner: AESAntibannerProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
+    private let productInfo: ADProductInfoProtocol
     
     private var ruleObjects: [ASDFilterRule] = [ASDFilterRule]()
     
@@ -112,11 +113,12 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, productInfo: ADProductInfoProtocol) {
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.theme = theme
+        self.productInfo = productInfo
         
         ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
         for ruleObject in ruleObjects {

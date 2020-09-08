@@ -92,7 +92,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     var descriptionTitle: String {
         get {
             let format = ACLocalizedString("dns_blacklist_text_format", nil)
-            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom)
+            let url = UIApplication.shared.adguardUrl(action: filterRulesAction, from: openUrlFrom, buildVersion: productInfo.buildVersion())
             return String(format: format, url)
         }
     }
@@ -105,6 +105,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
     private let vpnManager: VpnManagerProtocol
+    private let productInfo: ADProductInfoProtocol
     
     /* Variables */
     private let fileName = "dns_blocklist.txt"
@@ -114,11 +115,12 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, dnsFiltersService: DnsFiltersServiceProtocol, theme: ThemeServiceProtocol, vpnManager: VpnManagerProtocol) {
+    init(resources: AESharedResourcesProtocol, dnsFiltersService: DnsFiltersServiceProtocol, theme: ThemeServiceProtocol, vpnManager: VpnManagerProtocol, productInfo: ADProductInfoProtocol) {
         self.resources = resources
         self.dnsFiltersService = dnsFiltersService
         self.theme = theme
         self.vpnManager = vpnManager
+        self.productInfo = productInfo
         
         // Needs to be changed
         // dnsFiltersService must store rules as [RuleInfo] because we need to know their state

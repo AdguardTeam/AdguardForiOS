@@ -36,6 +36,7 @@ class SafariProtectionController: UITableViewController {
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private var filtersCountObservation: Any?
     private var activeFiltersCountObservation: Any?
@@ -59,7 +60,7 @@ class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     
     required init?(coder: NSCoder) {
-        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
+        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo)
         super.init(coder: coder)
     }
     

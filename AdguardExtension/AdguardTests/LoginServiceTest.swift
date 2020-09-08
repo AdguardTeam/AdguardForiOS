@@ -20,7 +20,7 @@ import XCTest
 
 class LoginServiceTest: XCTestCase {
     
-    lazy var loginService: LoginService = { return  LoginService(defaults: defaults, network: network, keychain: keychain) }()
+    lazy var loginService: LoginService = { return  LoginService(defaults: defaults, network: network, keychain: keychain, productInfo: ProductInfoMock()) }()
     let defaults = UserDefaults(suiteName: "test_defaults")!
     let keychain = KeychainMock()
     let network = NetworkMock()

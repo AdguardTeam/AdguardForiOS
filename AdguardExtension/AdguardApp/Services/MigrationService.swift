@@ -20,7 +20,7 @@ import Foundation
 
 protocol MigrationServiceProtocol {
     func install()
-    func migrateIfNeeded()
+    func migrateIfNeeded(inBackground: Bool)
 }
 
 class MigrationService: MigrationServiceProtocol {
@@ -38,10 +38,11 @@ class MigrationService: MigrationServiceProtocol {
     private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private let configurationService: ConfigurationServiceProtocol
     private let filtersService: FiltersServiceProtocol
+    private let productInfo: ADProductInfoProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol, filtersService: FiltersServiceProtocol) {
+    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol, filtersService: FiltersServiceProtocol, productInfo: ADProductInfoProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -53,6 +54,7 @@ class MigrationService: MigrationServiceProtocol {
         self.dnsLogRecordsService = dnsLogService
         self.configurationService = configuration
         self.filtersService = filtersService
+        self.productInfo = productInfo
     }
     
     func install() {
@@ -62,16 +64,16 @@ class MigrationService: MigrationServiceProtocol {
         }
     }
     
-    func migrateIfNeeded() {
+    func migrateIfNeeded(inBackground: Bool){
         migrationQueue.async {[weak self] in
             guard let self = self else { return }
-            self.migrateIfNeededPrivate()
+            self.migrateIfNeededPrivate(inBackground: inBackground)
         }
     }
     
-    private func migrateIfNeededPrivate() {
+    private func migrateIfNeededPrivate(inBackground: Bool) {
         majorMigration()
-        minorAndPatchMigration()
+        minorAndPatchMigration(inBackground: inBackground)
     }
     
     private func majorMigration() {
@@ -101,9 +103,9 @@ class MigrationService: MigrationServiceProtocol {
         }
     }
     
-    private func minorAndPatchMigration() {
-        let lastBuildVersion = resources.sharedDefaults().integer(forKey: AEDefaultsProductBuildVersion)
-        let currentBuildVersion = Int(ADProductInfo.buildNumber())
+    private func minorAndPatchMigration(inBackground: Bool) {
+        let lastBuildVersion = resources.buildVersion
+        let currentBuildVersion = Int(productInfo.buildNumber())
         
         /**
         Migration:
@@ -111,10 +113,23 @@ class MigrationService: MigrationServiceProtocol {
         */
         if lastBuildVersion != currentBuildVersion {
             DDLogInfo("Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
-            resources.sharedDefaults().set(currentBuildVersion, forKey: AEDefaultsProductBuildVersion)
             
+            resources.buildVersion = currentBuildVersion ?? 0
+            
+            if inBackground {
+                resources.needUpdateFilters = true
+                resources.sharedDefaults().set(true, forKey: NeedToUpdateFiltersKey)
+            }
+            else {
+                updateAntibanner()
+                updateDnsFilters()
+            }
+        }
+        else if resources.needUpdateFilters {
             updateAntibanner()
             updateDnsFilters()
+            
+            resources.needUpdateFilters = false
         }
         
         /* If lastBuildVersion is 0, it means that it is new install and migration is not needed */

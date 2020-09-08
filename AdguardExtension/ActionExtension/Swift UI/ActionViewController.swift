@@ -69,6 +69,7 @@ class ActionViewController: UIViewController {
     private let support: AESSupport
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
+    private let productInfo: ADProductInfoProtocol
     
     private var notificationToken1: NotificationToken?
     private var notificationToken2: NotificationToken?
@@ -80,7 +81,9 @@ class ActionViewController: UIViewController {
         let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
-        self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources)
+        productInfo = ADProductInfo()
+        
+        self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources, productInfo: productInfo)
         
         let safariProtectoin = SafariProtectionService(resources: sharedResources)
         
@@ -94,7 +97,7 @@ class ActionViewController: UIViewController {
 
         let vpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettings, dnsProviders: dnsProviders)
         
-        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin)
+        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo)
 
         contentBlockerService = ContentBlockerService(resources: sharedResources,
                                                       safariService: safariService,
@@ -108,7 +111,7 @@ class ActionViewController: UIViewController {
                              configuration: configuration,
                              complexProtection: complexProtection,
                              networtkSettings: networkSettings,
-                             dnsFilters: dnsFiltersService)
+                             productInfo: productInfo)
         
         super.init(coder: coder)
     }
@@ -322,7 +325,7 @@ class ActionViewController: UIViewController {
         
         // Init database
         let dbUrl = sharedResources.sharedResuorcesURL().appendingPathComponent(aeProductionDb)
-        asDataBase.initDb(with: dbUrl, upgradeDefaultDb: false)
+        asDataBase.initDb(with: dbUrl, upgradeDefaultDb: false, buildVersion: productInfo.buildVersion())
         
         if asDataBase.error != nil {
             DDLogError("(ActionViewController) production DB was not created before.")

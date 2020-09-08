@@ -43,7 +43,10 @@ class StartupService : NSObject{
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
         
-        let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources)
+        let productInfo: ADProductInfoProtocol = ADProductInfo()
+        locator.addService(service: productInfo)
+        
+        let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources, productInfo: productInfo)
         purchaseService.start()
         locator.addService(service: purchaseService)
         
@@ -66,7 +69,7 @@ class StartupService : NSObject{
         let safariProtection =  SafariProtectionService(resources: sharedResources)
         locator.addService(service: safariProtection)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection)
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection
@@ -78,7 +81,7 @@ class StartupService : NSObject{
         let antibanner: AESAntibannerProtocol = AESAntibanner(networking: networkService, resources: sharedResources)
         locator.addService(service: antibanner)
         
-        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources)
+        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources, productInfo: productInfo)
         locator.addService(service: antibannerController)
         
         let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
@@ -99,7 +102,7 @@ class StartupService : NSObject{
                                                     configuration: configuration,
                                                     complexProtection: complexProtection,
                                                     networtkSettings: networkSettingsService,
-                                                    dnsFilters: dnsFiltersService)
+                                                    productInfo: productInfo)
         
         locator.addService(service: supportService as AESSupportProtocol)
 
@@ -118,7 +121,7 @@ class StartupService : NSObject{
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
-        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources)
+        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, productInfo: productInfo)
         locator.addService(service: rateService)
         
         let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
@@ -130,7 +133,7 @@ class StartupService : NSObject{
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)
         
-        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService)
+        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo)
         locator.addService(service: migrationService)
         
         let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)

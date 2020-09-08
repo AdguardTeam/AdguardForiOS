@@ -28,6 +28,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private var notificationObserver: Any?
     
@@ -127,7 +128,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func recoverAction(_ sender: Any) {
-        UIApplication.shared.openAdguardUrl(action: "recovery_password", from: "login")
+        UIApplication.shared.openAdguardUrl(action: "recovery_password", from: "login", buildVersion: productInfo.buildVersion())
     }
     
     // MARK: - text field delegate methods

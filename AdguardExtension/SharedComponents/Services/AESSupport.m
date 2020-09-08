@@ -70,6 +70,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     id<ConfigurationServiceProtocol> _configurationService;
         
     id<SupportServiceProtocol> _support;
+    id<ADProductInfoProtocol> _productInfo;
 }
 
 @end
@@ -93,7 +94,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
           configuration:(id<ConfigurationServiceProtocol>) configuration
       complexProtection:(id<ComplexProtectionServiceProtocol>) complexProtection
        networtkSettings:(id<NetworkSettingsServiceProtocol>) networkSettings
-             dnsFilters:(id<DnsFiltersServiceProtocol>) dnsFilters
+            productInfo:(id<ADProductInfoProtocol>) productInfo
 {
     
     self = [super init];
@@ -104,13 +105,14 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         _dnsFiltersService = dnsFiltersService;
         _dnsProviders = dnsProviders;
         _configurationService = configuration;
+        _productInfo = productInfo;
         
         _support = [[SupportService alloc] initWithResources:resources
                                                configuration:configuration
                                            complexProtection:complexProtection
                                                 dnsProviders:dnsProviders
                                              networkSettings:networkSettings
-                                                  dnsFilters:dnsFilters];
+                                                  dnsFilters:dnsFiltersService];
     }
     
     return self;
@@ -197,7 +199,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
     }
     
     params[REPORT_PARAM_PRODUCT] = REPORT_PRODUCT;
-    params[REPORT_PARAM_VERSION] = ADProductInfo.version;
+    params[REPORT_PARAM_VERSION] = _productInfo.version;
     params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
     
     NSMutableString *filtersString = [NSMutableString new];
@@ -262,7 +264,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 - (NSString *)applicationState{
     @autoreleasepool {
         
-        NSMutableString *sb = [NSMutableString stringWithFormat:@"Application version: %@", [ADProductInfo buildVersion]];
+        NSMutableString *sb = [NSMutableString stringWithFormat:@"Application version: %@", [_productInfo buildVersion]];
         
         NSURL *supportFolder = [_sharedResources sharedLogsURL];
         if (supportFolder) {

@@ -69,6 +69,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     private let safariService: SafariServiceProtocol
     private let configuration: ConfigurationServiceProtocol
     private let vpnManager: VpnManagerProtocol
+    private let productInfo: ADProductInfoProtocol
     
     private var vpnConfigurationObserver: NotificationToken!
     private var vpnStateChangeObserver: NotificationToken!
@@ -77,12 +78,13 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService, productInfo: ADProductInfoProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.configuration = configuration
         self.vpnManager = vpnManager
         self.safariProtection = safariProtection
+        self.productInfo = productInfo
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
@@ -304,7 +306,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             }
             
             let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { (alert) in
-                UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController")
+                UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController", buildVersion: self.productInfo.buildVersion())
                 confirmed(false)
             }
             let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (alert) in

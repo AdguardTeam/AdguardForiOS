@@ -20,7 +20,7 @@
 
 extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
 
-@protocol AESharedResourcesProtocol, AESAntibannerProtocol, ConfigurationServiceProtocol, DnsFiltersServiceProtocol, DnsProvidersServiceProtocol, ConfigurationServiceProtocol, ComplexProtectionServiceProtocol, NetworkSettingsServiceProtocol, DnsFiltersServiceProtocol;
+@protocol AESharedResourcesProtocol, AESAntibannerProtocol, ConfigurationServiceProtocol, DnsFiltersServiceProtocol, DnsProvidersServiceProtocol, ConfigurationServiceProtocol, ComplexProtectionServiceProtocol, NetworkSettingsServiceProtocol, DnsFiltersServiceProtocol, ADProductInfoProtocol;
 
 @class SafariService;
 
@@ -45,7 +45,7 @@ extern NSString * _Nonnull AESSupportSubjectPrefixFormat;
                              configuration: (nonnull id<ConfigurationServiceProtocol>) configuration
                          complexProtection: (nonnull id<ComplexProtectionServiceProtocol>) complexProtection
                           networtkSettings: (nonnull id<NetworkSettingsServiceProtocol>) networkSettings
-                                dnsFilters: (nonnull id<DnsFiltersServiceProtocol>) dnsFilters;
+                               productInfo: (nonnull id<ADProductInfoProtocol>) productInfo;
 
 
 @end

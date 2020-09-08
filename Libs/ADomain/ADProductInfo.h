@@ -21,28 +21,32 @@
 #pragma mark -  ADProductInfo
 /////////////////////////////////////////////////////////////////////
 
-/// Provides product information
-@interface ADProductInfo : NSObject
+@protocol ADProductInfoProtocol
 
 /// Returns Product Version.
-+ (NSString *)version;
+- (NSString *)version;
 
 /// Returns Product Version with build number. e.g. 1.2.2(88)
-+ (NSString *)versionWithBuildNumber;
+- (NSString *)versionWithBuildNumber;
 
 /// Returns Product Version With Build Number for logs. e.g. 1.2.2.88.DEBUG
-+ (NSString *)buildVersion;
+- (NSString *)buildVersion;
 
 /// Returns build number
-+ (NSString *)buildNumber;
+- (NSString *)buildNumber;
 
 /// Returns Localized Product Name.
-+ (NSString *)name;
+- (NSString *)name;
 
 /// Returns string that represents User-Agent HTTP Header.
-+ (NSString *)userAgentString;
+- (NSString *)userAgentString;
 
 /// Returns Application ID for local machine.
-+ (NSString *)applicationID;
+- (NSString *)applicationID;
+
+@end
+
+/// Provides product information
+@interface ADProductInfo : NSObject<ADProductInfoProtocol>
 
 @end

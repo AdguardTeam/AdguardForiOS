@@ -325,6 +325,11 @@ extern NSString* _Nonnull TunnelErrorCode;
  */
 extern NSString* _Nonnull BackgroundFetchStateKey;
 
+/**
+ User defaults key for migrations.
+ */
+extern NSString* _Nonnull NeedToUpdateFiltersKey;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
@@ -420,7 +425,6 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
 @property BOOL safariProtectionEnabled;
 
 @property BOOL systemProtectionEnabled;
-
 
 @end
 

@@ -596,7 +596,7 @@ static ABECFilterClient *ABECFilterSingleton;
     
     NSMutableDictionary* params = [NSMutableDictionary new];
     
-    params[VERSION_PARAM] = [ADProductInfo version];
+    params[VERSION_PARAM] = [[ADProductInfo new] version];
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
     params[USER_ID_PARAM] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 #endif
