@@ -448,7 +448,8 @@ static NSTimeInterval lastCheckTime;
     
     // Update filter rules
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
-        if (_background) {
+        if (self.background) {
+            DDLogInfo(@"(AppDelegate) antibannerNotify. Skip in background");
             return;
         }
         
@@ -507,7 +508,7 @@ static NSTimeInterval lastCheckTime;
     else if ([notification.name
               isEqualToString:ASAntibannerFinishedUpdateNotification]) {
         
-        if (_background){
+        if (self.background){
             helper.fetchState = BackgroundFetchStateFiltersupdated;
             [_antibanner endTransaction];
             [self antibanerUpdateFinished:AEUpdateNewData];

@@ -107,12 +107,14 @@ class MigrationService: MigrationServiceProtocol {
         let lastBuildVersion = resources.buildVersion
         let currentBuildVersion = Int(productInfo.buildNumber())
         
+        DDLogInfo("(MigrationService) - minorAndPatchMigration in Background: \(inBackground)")
+        
         /**
         Migration:
          Update Antibanner and DnsFilters on every migration
         */
         if lastBuildVersion != currentBuildVersion {
-            DDLogInfo("Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
+            DDLogInfo("(MigrationService) Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
             
             resources.buildVersion = currentBuildVersion ?? 0
             
@@ -126,6 +128,8 @@ class MigrationService: MigrationServiceProtocol {
             }
         }
         else if resources.needUpdateFilters {
+            DDLogInfo("(MigrationService) finish migration started in background ")
+            
             updateAntibanner()
             updateDnsFilters()
             

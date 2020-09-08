@@ -576,7 +576,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.updateProtectionStates()
             
-            // return statur title few secconds latter
+            // return status title few seconds later
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 self?.updateProtectionStatusText()
             }
