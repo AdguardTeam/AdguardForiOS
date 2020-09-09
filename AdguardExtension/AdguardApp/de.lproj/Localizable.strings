@@ -32,7 +32,7 @@
 "inverted_whitelist_title" = "Positivliste (invertiert)";
 
 /* (MainPageController) Text to indicate changes processing */
-"applying_changes" = "Änderungen werden übernommen...";
+"applying_changes" = "Änderungen werden übernommen …";
 
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
@@ -134,7 +134,7 @@
 "dns_blacklist_text_format" = "Diese Blockliste unterstützt <a href=\"%@\">AdGuard's DNS-Syntax</a>. Geben Sie hier die durch Zeilenumbrüche getrennten Regeln ein. AdGuard blockiert alle Verbindungen zu Domains, die diesen Regeln entsprechen.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Aktualisieren...";
+"update_filter_start_message" = "Wird aktualisiert …";
 
 /* (UserFilterController) add blocklist rule button title */
 "add_blacklist_rule_title" = "Regel hinzufügen";
@@ -290,7 +290,7 @@
 "vpn_confirm_message" = "VPN ist erforderlich, um benutzerdefinierte DNS-Einstellungen einzurichten. Das erstellte VPN ist lokal, was bedeutet, dass Ihr Datenverkehr nicht über irgendwelche Server geleitet wird. Wir sammeln keine Daten, wenn Sie dieses VPN-Profil benutzen.";
 
 /* this message is shown during the login on the license screen */
-"loading_message" = "Bitte warten...";
+"loading_message" = "Bitte warten …";
 
 /* (AdvancedSettingsController) "Theme" header view title*/
 "theme_header_title" = "Thema";
@@ -335,7 +335,7 @@
 "disabled_current_state_label" = "Deaktiviert in Safari-Einstellungen";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Nach Updates suchen...";
+"update_current_state_label" = "Wird in Safari geladen …";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
 "over_limit_current_state_label" = "Die Obergrenze von %1$@ Regeln ist erreicht. Die App funktioniert möglicherweise nicht richtig. Bitte deaktivieren Sie die zusätzlichen Regeln. Derzeit werden %2$@ aus %3$@ Regeln verwendet; %4$@ Regeln sind deaktiviert.";
@@ -377,7 +377,7 @@
 "off_state" = "AUS";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Startseite:";
+"homepage_title" = "Homepage:";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Filter entfernen";
@@ -461,7 +461,7 @@
 "disabled" = "Deaktiviert";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Aus der Positivliste entfernen";
+"remove_from_whitelist" = "Aus Positivliste entfernen";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Aus der Blockliste entfernen";
@@ -470,7 +470,7 @@
 "add_to_whitelist" = "Zur Positivliste hinzufügen";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "Zur Blockliste hinzufügen";
+"add_to_blacklist" = "Zur Sperrliste hinzufügen";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Erlauben das Sperren von Phishing-Webseiten und anderen gefährlichen Domains. Verfügbar für Premium-Benutzer";
@@ -563,13 +563,13 @@
 "chart_alltime" = "Insgesamt";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Inhaltsblocker werden aktualisiert ...";
+"loading_content_blockers" = "Inhaltsblocker werden aktualisiert …";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Laden von Filtern ...";
+"loading_filters" = "Filter werden geladen …";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Regeln werden konvertiert ...\n";
+"converting_rules" = "Regeln werden konvertiert …";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Neuer benutzerdefinierter Filter";
@@ -632,7 +632,7 @@
 "dns_request_status_encrypted" = "Verschlüsselt";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_allowlisted" = "Ausnahmen";
+"dns_request_status_allowlisted" = "Zugelassen";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "zur Positivliste hinzugefügt";

@@ -164,7 +164,7 @@
 "filters_noUpdates" = "Оновлень не знайдено";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "фільтрів оновлено: %lu ";
+"filters_updated_format" = "Фільтрів оновлено: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "версія %@";

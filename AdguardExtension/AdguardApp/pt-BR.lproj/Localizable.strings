@@ -170,7 +170,7 @@
 "filters_noUpdates" = "Não há atualizações disponíveis";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "filtros atualizados: %lu";
+"filters_updated_format" = "Filtros atualizados: %lu";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versão %@";

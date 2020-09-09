@@ -170,7 +170,7 @@
 "filters_noUpdates" = "Güncelleme bulunamadı";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "%lu filtre güncellendi";
+"filters_updated_format" = "Filtre güncellendi: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "sürüm %@";

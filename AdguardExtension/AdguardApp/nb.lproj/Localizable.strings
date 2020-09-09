@@ -22,14 +22,101 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtrene kan ikke lastes inn i Safari. Derfor ble de siste endringene dine ikke lagret.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtrene kan ikke lastes inn i Safari. Prøv å tømme reglene og hvitelisten, eller endre settet av brukte filtre.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Hviteliste (invertert)";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Benytter endringene …";
+
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ms";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@s";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@T";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10T";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";
 
 /* YES Button caption in alert */
 "common_action_yes" = "JA";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Beskyttelse er skrudd på";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Noen innholdsblokkerere er skrudd av";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Beskyttelse er skrudd av";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "BEGYNN PRØVEPERIODEN";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "KJØP";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Har du glemt passordet?";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "Premium-kontoen din har utløpt";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Oppmerksomhet";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "Ingen kjøp å gjenopprette";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "En feil oppstod under behandling av kjøpet ditt.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "Tilpasset";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "Påskrudde filtre: %d/%d";
+
+/* (GroupsController) Filters update time format */
+"filter_date_format" = "Filtre oppdatert: %@";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Oppdaterer…";
+
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Legg til en oppføring";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Skriv inn et domene";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Navnet på ditt Wi-Fi";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "Regel:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "Domene:";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Navn:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "Kan ikke sende feilrapport fordi det muligens ikke er konfigurert en e-postkonto på enheten din.";
@@ -39,6 +126,21 @@
 
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "Ingen oppdateringer funnet";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "Filtre oppdatert: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "versjon %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "Split-tunnel, kompatibel med «Personlig VPN»-apper";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "Full-tunnel, inkompatibel med andre VPN-apper";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "Full-tunnel (uten VPN-ikon), inkompatibel med andre VPN-apper, mindre stabil";
 
 /* Adguard DNS server description */
 "adguard_dns_description" = "blokkerer annonser, sporinger og nettfisking";
@@ -52,5 +154,552 @@
 /* Open DNS server description */
 "open_dns_description" = "egendefinert filtrering og beskyttelse mot identitetstyveri";
 
+/* Open Family DNS server description */
+"open_dns_familyshield_description" = "OpenDNS-tjener med blokkering av voksent innhold";
+
+/* Quad9 DNS server description */
+"quad_nine_dns_description" = "Gratis alternativ DNS-tjeneste med beskyttelse mot phishing og spionvare";
+
+/* Cloudfare DNS server description */
+"cloudflare_public_dns_description" = "Gratis DNS-tjeneste fra Cloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Anti-skadevare-DNS-tjener fra Cloudflare som blokkerer skadelige domener";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare sin blokkeringstjener som begrenser tilgang til skadelige og \"voksne\" domener";
+
+/* Safe DNS server description */
+"safe_dns_description" = "DNS-tjeneste fra SafeDNS";
+
+/* Dns Feature Name */
+"dns_provider_secure_tag" = "Sikkerhet";
+
+/* Dns Feature Name */
+"dns_provider_adult_tag" = "Blokkering av voksent innhold";
+
+/* Dns Feature Name */
+"dns_provider_no_logs_tag" = "Ingen loggføringsretningslinjer";
+
+/* Dns Feature Name */
+"dns_provider_safe_search_tag" = "Trygge søk";
+
+/* Dns Feature Name */
+"dns_provider_ad_blocking_tag" = "Reklameblokkering";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "Blokkerer gjenkjent phishing og andre farlige domener";
+
+/* Dns Feature description */
+"dns_provider_adult_summary" = "Blokkerer nettsteder med voksent innhold";
+
+/* Dns Feature description */
+"dns_provider_no_logs_summary" = "Lagrer ikke dine DNS-forespørselslogger";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Blokkerer sporingssystemer";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Ingen kryptering (System-DNS)";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "Skrudde på %1$d av %2$d";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Vanlig";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "Er du sikker på at du vil logge ut?";
+
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Det oppstod et problem med VPN-konfigurasjonen. Vennligst kontakt vår brukerstøtte.";
+
+/* login error message */
+"login_error_message" = "En feil oppstod under pålogging";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "OK";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Personvern";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "En VPN vil bli opprettet";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Vennligst vent...";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Andre";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtre:";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Du må skru på VPN først";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Tilbakestill statistikker";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Alle statistikker vil bli tømt!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Tilbakestill";
+
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Slett";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Fjern VPN-profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "En feil oppstod";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ regler blir benyttet";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Skrudd av i Safari-innstillingene";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Laster inn i Safari …";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtrene har ikke blitt oppdatert";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Advarsel";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Du har oversteget maks antall filteroppføringer.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Livstid";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "PÅ";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "AV";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Hjemmeside:";
+
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Slett filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Er du sikker på at du vil slette dette filteret?";
+
+/* (AboutViewController) current app version format */
+"about_version_format" = "Versjon %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAlle rettigheter forbeholdt. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Avlogging";
+
+/* (AboutViewController) Login title */
+"common_license" = "Lisens";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Feil E-postadresse eller passord";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Kontoen er blokkert";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Kontoen er midlertidig låst";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Ugyldig 2-trinnssjetong";
+
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi-unntak";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Legg til et unntak";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filtrer mobildata";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filtrer Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "DNS-beskyttelse mens du er på mobildata";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "DNS-beskyttelse mens du er på Wi-Fi";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Hviteliste";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Hviteliste";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Blokkeringsliste";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari-brukerregler";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Eksporter";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Tøm";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Lagre";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Importer";
+
+/* "Disabled" title */
+"disabled" = "Avslått";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "FJERN FRA HVITELISTEN";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "FJERN FRA BLOKKERINGSLISTEN";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "LEGG TIL I HVITELISTEN";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "LEGG TIL I BLOKKERINGSLISTEN";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Tillater å legge til tredjepartsfiltre. Tilgjengelig for Premium-brukere";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Lyd- og videospillere";
+
+/*(LogCategory) comments category*/
+"comments" = "Kommentarer";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Kundesamhandling";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Erotisk reklame";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Reklamering";
+
+/*(LogCategory) essential category*/
+"essential" = "Essensiell";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Nettstedsanalyse";
+
+/*(LogCategory) social media category*/
+"social_media" = "Sosiale medier";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Diverse";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Mobilanalyse";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Ukjent";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Utvidelser";
+
+/*(ListOfRules) Select title */
+"common_select" = "Velg";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Redigering";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Slett";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Velg alt";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Legg til et domene";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Legg til en ny oppføring";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Tilbakestill aktivitetsloggen";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 timer";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "I dag";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 dager";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 dager";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Til alle tider";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Innholdsblokkerere blir oppdatert …";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Laster inn filtre …";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Reglene blir konvertert  …";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Nytt selvvalgt filter";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Nytt DNS-filter";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Legg til";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Beskyttelse er skrudd av";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Beskyttelse er skrudd på";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari- og DNS-beskyttelse";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari-innholdsblokkering";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Alle beskyttelsesmoduler er skrudd av";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "DNS-beskyttelse";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d forespørsler, %2$d kryptert";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "Mer";
+
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ regler er skrudd på";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blokkert";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Behandlet";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Kryptert";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Tillatt";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "lagt til i hvitelisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "lagt til i blokkeringslisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "fjernet fra hvitelisten";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "fjernet fra blokkeringslisten";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Åpne <b>innstillingene</b>";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "System-DNS";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Blokker forespørsel";
+
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Legg til domenet i hvitelisten";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Videoveiledning";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Systemets blokkeringsliste";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Systemets hviteliste";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Detaljer";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Generelt";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtrerer";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategori";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Navn";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Nettsted";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domene";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Tid";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Størrelse";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Utløpt";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Type";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS-status";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS-oppstrøm";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS-tilbakemelding";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Matchende filtre";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Matchende regel";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Opprinnelig svar";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Tomt innhold";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Mislyktes i å sende tilbakemeldingen din";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Noe gikk galt";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Krypterte forespørsler";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Gjennomsnittstid";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Antall firmaer";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Alle forespørsler";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Kun blokkerte";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Kun tillatte";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Ingen";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivitet";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d forespørsler";
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Hovedskjerm";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Beskyttelsesskjerm";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Aktivitetsskjerm";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Innstillingsskjerm";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Safari-beskyttelse er skrudd på";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Safari-beskyttelse er skrudd av";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS-beskyttelse er skrudd på";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS-beskyttelse er skrudd av";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Antallet krypterte DNS-forespørsler";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Skru på DNS-beskyttelse";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Velg abonnementstypen din";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Skriv inn E-postadressen din her";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Skriv inn passordet ditt her";

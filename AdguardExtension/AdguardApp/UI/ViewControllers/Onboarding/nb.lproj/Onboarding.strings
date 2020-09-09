@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "DNS-beskyttelse";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "NESTE";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Safari-beskyttelse";
+
+/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
+"hak-o1-HWp.text" = "Takk for at du installerte AdGuard!";
+
+/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Safari-beskyttelse";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "NESTE";
+
+/* Class = "UILabel"; text = "Open the settings"; ObjectID = "tsx-Ce-cc8"; */
+"tsx-Ce-cc8.text" = "Åpne innstillingene";

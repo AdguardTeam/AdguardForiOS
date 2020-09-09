@@ -62,7 +62,7 @@
 "nch-wu-mKC.normalTitle" = "WEITER";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
-"t8x-PU-hFK.text" = "Startseite: ";
+"t8x-PU-hFK.text" = "Homepage: ";
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
 "wzJ-ge-NyI.text" = "Anzahl von Regeln:";

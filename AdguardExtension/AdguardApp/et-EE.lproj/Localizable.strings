@@ -131,7 +131,7 @@
 "filters_noUpdates" = "Uuendusi ei leitud";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "uuendatud filtrid: %lu ";
+"filters_updated_format" = "Uuendatud filtrid: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versioon %@";

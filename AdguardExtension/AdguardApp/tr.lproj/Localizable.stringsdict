@@ -238,9 +238,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Sonra gün başına %2$@</string>
+        <string>Sonra günlük %2$@</string>
         <key>other</key>
-        <string>Sonra %1$d gün başına %2$@</string>
+        <string>Sonra %1$d günde %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -254,9 +254,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Sonra hafta başına %2$@</string>
+        <string>Sonra haftada %2$@</string>
         <key>other</key>
-        <string>Sonra %1$d hafta başına %2$@</string>
+        <string>Sonra %1$d haftada %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -270,9 +270,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Sonra ay başına %2$@</string>
+        <string>Sonra ayda %2$@</string>
         <key>other</key>
-        <string>Sonra %1$d ay başına %2$@</string>
+        <string>Sonra %1$d ayda %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>

@@ -210,7 +210,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>然后每 %2$@ 日 %1$d</string>
+        <string>然后每 %1$d 日 %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -224,7 +224,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>然后每 %2$@ 周 %1$d</string>
+        <string>然后每 %1$d 周 %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -238,7 +238,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>然后每 %2$@ 月 %1$d</string>
+        <string>然后每 %1$d 个月 %2$@</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>

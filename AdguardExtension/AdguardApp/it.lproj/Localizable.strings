@@ -170,7 +170,7 @@
 "filters_noUpdates" = "Nessun aggiornamento trovato";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "filtri aggiornati: %lu ";
+"filters_updated_format" = "Filtri aggiornati: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "versione %@";
@@ -563,7 +563,7 @@
 "chart_alltime" = "Tutto il periodo";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "I blocchi di contenuto sono in fase di aggiornamento ...";
+"loading_content_blockers" = "I blocchi di contenuti sono in fase di aggiornamento ...";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Caricamento dei filtri ...";
