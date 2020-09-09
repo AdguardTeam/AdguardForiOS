@@ -20,7 +20,7 @@ import Foundation
 
 class ProductInfoMock: ADProductInfoProtocol {
     
-    var buildNumberInternal = ""
+    var buildNumberInternal = "0"
     
     func version() -> String! {
         return "1.0.0"
