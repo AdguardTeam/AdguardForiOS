@@ -164,7 +164,7 @@
 "filters_noUpdates" = "Nem található frissítés";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "szűrők frissítve %lu ";
+"filters_updated_format" = "Szűrők frissítve %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "verzió %@";

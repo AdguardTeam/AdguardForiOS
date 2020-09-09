@@ -170,7 +170,7 @@
 "filters_noUpdates" = "Ažuriranja nisu pronađena.";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "filteri su ažurirani: %lu ";
+"filters_updated_format" = "Filteri su ažurirani: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "verzija %@";

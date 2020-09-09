@@ -170,7 +170,7 @@
 "filters_noUpdates" = "Nenalezeny žádné aktualizace";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "aktualizováno filtrů: %lu ";
+"filters_updated_format" = "Aktualizováno filtrů: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "verze %@";

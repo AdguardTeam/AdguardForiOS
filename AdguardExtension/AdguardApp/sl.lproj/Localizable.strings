@@ -167,7 +167,7 @@
 "filters_noUpdates" = "Ni najdenih posodobitev";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "%lu posodobljenih filtrov";
+"filters_updated_format" = "Posodobljenih filtrov: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "različica %@";

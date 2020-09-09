@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "Service DNS gratuit par Cloudflare";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Serveur DNS anti-maliciel de Cloudflare qui bloque les domaines malveillants";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Serveur de blocage de Cloudflare qui restreint l’accès aux domaines malveillants et « adultes »";
+
 /* Safe DNS server description */
 "safe_dns_description" = "Service DNS par SafeDNS";
 
@@ -379,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "Voulez-vous vraiment supprimer ce filtre ?";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "Version %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nTous droits réservés. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Déconnexion";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licence";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "Payez une fois et utilisez les fonctionnalités Premium d'AdGuard sur tous vos appareils iOS!";
 
@@ -441,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "Désactivé";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Retirer de la liste blanche";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Retirer de la liste noire";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Ajouter à la liste blanche";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Ajouter à la liste noire";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permet de bloquer les sites d'hameçonnage et autres domaines dangereux. Disponible pour les utilisateurs Premium";
@@ -570,6 +600,9 @@
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Protection DNS";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d requêtes, %2$d bloquées";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Ces informations ont été chargées à partir du service WhoTrackMe.com";

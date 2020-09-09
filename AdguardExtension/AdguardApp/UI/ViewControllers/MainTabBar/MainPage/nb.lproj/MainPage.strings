@@ -1,0 +1,45 @@
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "FIKS DET";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "PRØV GRATIS";
+
+/* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
+"5pX-mg-2fq.text" = "Periode";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
+"Btd-nN-zLO.text" = "forespørsler";
+
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "Cfe-vu-29O"; */
+"Cfe-vu-29O.text" = "gj.snittstid";
+
+/* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
+"FcP-gP-TsG.text" = "Noen innholdsblokkerere er skrudd av";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
+"Oez-VU-4fi.normalTitle" = "I dag";
+
+/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
+"Roe-x7-9e8.normalTitle" = "24 timer";
+
+/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
+"VRw-EP-ZlF.normalTitle" = "7 dager";
+
+/* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
+"YaQ-RE-YZT.title" = "AdGuard";
+
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "a5U-A8-S8G"; */
+"a5U-A8-S8G.text" = "kryptert";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
+"gDb-ep-jQg.normalTitle" = "Til alle tider";
+
+/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
+"gu3-as-BZN.normalTitle" = "30 dager";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
+"kfe-5H-fB1.normalTitle" = "Til alle tider";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "FIKS DET";
