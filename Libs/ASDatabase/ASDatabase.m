@@ -68,7 +68,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 #pragma mark Properties and public methods
 /////////////////////////////////////////////////////////////////////
 
-- (void)initDbWithURL:(NSURL *)dbURL upgradeDefaultDb:(BOOL)upgradeDefaultDb {
+- (void)initDbWithURL:(NSURL *)dbURL upgradeDefaultDb:(BOOL)upgradeDefaultDb buildVersion:(NSString *)buildVersion {
 
     if (!dbURL) {
         return;
@@ -95,7 +95,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
         
         NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
         
-        if (! [marker isEqualToString:[ADProductInfo buildVersion]]) {
+        if (! [marker isEqualToString: buildVersion]) {
 
             BOOL result = NO;
             
@@ -126,7 +126,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
                     if (result) {
                         // save marker as current version+build
                         NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
-                        result = [[ADProductInfo buildVersion] writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                        result = [buildVersion writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
                     }
                     
                 }

@@ -24,19 +24,19 @@ extension UIApplication {
     static let rateAdGuardAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     static let rateAdGuardProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"
     
-    func openAdguardUrl(action: String, from: String) {
+    func openAdguardUrl(action: String, from: String, buildVersion: String) {
         
-        let urlString = adguardUrl(action: action, from: from)
+        let urlString = adguardUrl(action: action, from: from, buildVersion: buildVersion)
         if let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     
-    func adguardUrl(action: String, from: String)->String {
+    func adguardUrl(action: String, from: String, buildVersion: String)->String {
         var params: Dictionary<String, String> = [:]
         
         params["app"] = "ios"
-        params["v"] = ADProductInfo.buildVersion()
+        params["v"] = buildVersion
         params["action"] = action
         params["from"] = from
         

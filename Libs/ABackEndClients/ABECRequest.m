@@ -40,7 +40,7 @@
     if (self)
     {
         // Marking of request, that request is from Adguard.
-        [self setValue:[ADProductInfo userAgentString] forHTTPHeaderField:@"User-Agent"];
+        [self setValue:[[ADProductInfo new] userAgentString] forHTTPHeaderField:@"User-Agent"];
     }
     
     return self;

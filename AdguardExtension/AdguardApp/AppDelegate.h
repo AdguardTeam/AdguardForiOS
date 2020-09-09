@@ -59,6 +59,8 @@ extern NSString *OpenDnsSettingsSegue;
 
 @property BOOL userDefaultsInitialized;
 
+@property (nonatomic) BOOL background;
+
 /**
  If interval between last update and current time more then update period,
  method starts the update procedure of the antibanner.
@@ -73,7 +75,8 @@ extern NSString *OpenDnsSettingsSegue;
 
 - (void) resetAllSettings;
 
--(void) setAppInterfaceStyle;
+- (void) setAppInterfaceStyle;
+
 
 
 @end

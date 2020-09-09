@@ -29,6 +29,8 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     var storedGroups = [ASDFilterGroup]()
     var storedFilters = [ASDFilterMetadata]()
     
+    var updateStarted = false
+    
     func start() {
     }
     
@@ -143,6 +145,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func startUpdatingForced(_ forced: Bool, interactive: Bool) -> Bool {
+        updateStarted = true
         return true
     }
     
@@ -151,7 +154,7 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func repairUpdateState(completionBlock block: (() -> Void)? = nil) {
-        
+        block?()
     }
     
     func filtersLastUpdateTime() -> Date? {

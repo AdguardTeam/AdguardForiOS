@@ -55,6 +55,7 @@ platform :ios do
       output_types: "junit",
       clean: true,
       code_coverage: true,
+      prelaunch_simulator: true,
     )
   end
 

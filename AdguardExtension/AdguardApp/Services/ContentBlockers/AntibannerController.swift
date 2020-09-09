@@ -60,11 +60,13 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     private var database: ASDatabase
     private let resources: AESharedResourcesProtocol
+    private let productInfo: ADProductInfoProtocol
     
-    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol) {
+    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
         self.antibanner = antibanner
         self.database = ASDatabase()
         self.resources = resources
+        self.productInfo = productInfo
         super.init()
         
         self.initDatabase()
@@ -140,7 +142,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     private func initDatabase() {
         let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
         self.antibanner.setDatabase(self.database)
-        self.database.initDb(with: url, upgradeDefaultDb: true)
+        self.database.initDb(with: url, upgradeDefaultDb: true, buildVersion: productInfo.buildVersion())
     }
     
     private func setupDatabaseObserver() {

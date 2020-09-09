@@ -763,6 +763,7 @@
 		D04C2B7A240FA7DC009330A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D04C2B7B2410E126009330A8 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D04C2B7C2410E137009330A8 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
+		D04CDE84250679BF00A6D2CC /* ProductInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */; };
 		D04D743B24DBE18300CD74E9 /* providers_features.json in Resources */ = {isa = PBXBuildFile; fileRef = D04D743A24DBE18300CD74E9 /* providers_features.json */; };
 		D04D743C24DBE34800CD74E9 /* providers_features.json in Resources */ = {isa = PBXBuildFile; fileRef = D04D743A24DBE18300CD74E9 /* providers_features.json */; };
 		D051B05C233101C6008A9A0F /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
@@ -3098,6 +3099,7 @@
 		D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportRulesController.swift; sourceTree = "<group>"; };
 		D04B8CB32031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoMock.swift; sourceTree = "<group>"; };
 		D04D743A24DBE18300CD74E9 /* providers_features.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = providers_features.json; sourceTree = "<group>"; };
 		D0569E2F21F1C0A800985DA9 /* Tunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Tunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0569E3021F1C0A800985DA9 /* Tunnel.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Tunnel.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/Tunnel.plist; sourceTree = "<absolute>"; };
@@ -4950,6 +4952,7 @@
 				7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */,
 				7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */,
 				D0F97576247EA87800B9DF19 /* FiltersServiceMock.swift */,
+				D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */,
 				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
 				D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */,
 				7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */,
@@ -7008,6 +7011,7 @@
 				7E77144F2445F3670078CD6B /* DnsStatisticsServiceMock.swift in Sources */,
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0D5949A23AA3CAD0033CAF3 /* ADBTable.m in Sources */,
+				D04CDE84250679BF00A6D2CC /* ProductInfoMock.swift in Sources */,
 				7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */,
 				7E8576662435F1F70055F63D /* BasicRulesParser.swift in Sources */,
 				65EC9BD91BB9824C00F53F3B /* ASDatabase.m in Sources */,

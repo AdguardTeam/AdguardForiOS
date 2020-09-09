@@ -30,6 +30,7 @@ class RequestsBlockingController: UITableViewController {
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
@@ -44,9 +45,10 @@ class RequestsBlockingController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+        
         if segue.identifier == dnsBlacklistSegue {
             if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme, vpnManager: vpnManager)
+                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme, vpnManager: vpnManager, productInfo: productInfo)
                 controller.model = model
             }
         } else if segue.identifier == dnsWhitelistSegue {

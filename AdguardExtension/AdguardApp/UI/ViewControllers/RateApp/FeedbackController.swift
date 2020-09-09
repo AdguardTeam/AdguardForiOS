@@ -37,6 +37,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     private let keyChainService: KeychainServiceProtocol = ServiceLocator.shared.getService()!
     private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     private var themeToken: NotificationToken?
     
     private var keyboardMover: KeyboardMover?
@@ -139,7 +140,7 @@ class FeedbackController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     private func createFeedback() -> FeedBackProtocol {
         let appId = keyChainService.appId
-        let version = ADProductInfo.buildVersion()
+        let version = productInfo.buildVersion()
         let email = emailTextField.text
         let language = ADLocales.lang()
         // METHOD TYPE

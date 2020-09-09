@@ -43,6 +43,7 @@ class AppDelegateHelper: NSObject {
     lazy var dnsStatisticsService: DnsStatisticsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -137,7 +138,7 @@ class AppDelegateHelper: NSObject {
                 self.firstRun = false
             }
                
-            self.migrationService.migrateIfNeeded()
+            self.migrationService.migrateIfNeeded(inBackground: self.appDelegate.background)
         }
         
         return true
@@ -400,7 +401,7 @@ class AppDelegateHelper: NSObject {
                         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
                         guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
                         
-                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService)
+                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService, productInfo: self.productInfo)
                         
                         userFilterController.model = model
                         userFilterController.newRuleText = path

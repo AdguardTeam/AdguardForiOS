@@ -55,6 +55,7 @@ class GetProTableController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - private fields
     
@@ -228,8 +229,8 @@ class GetProTableController: UITableViewController {
         
         let stringKey = selectedProduct?.type == .some(.lifetime) ? "lifetime_purchase_description_format" : "purchase_description_format"
         let format = ACLocalizedString(stringKey, nil)
-        let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license")
-        let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license")
+        let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
+        let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license", buildVersion: productInfo.buildVersion())
         
         let htmlString = String(format: format, privacy, eula)
         guard let data = htmlString.data(using: .utf8) else { return }

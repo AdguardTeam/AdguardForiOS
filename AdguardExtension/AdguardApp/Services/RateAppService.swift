@@ -27,13 +27,15 @@ import StoreKit
 class RateAppService: RateAppServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
+    private let productInfo: ADProductInfoProtocol
     
-    init(resources: AESharedResourcesProtocol) {
+    init(resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
         self.resources = resources
+        self.productInfo = productInfo
     }
     
     func showRateAppAlertIfNeeded() {
-        if let currentBuild = Int(ADProductInfo.buildNumber()) {
+        if let currentBuild = Int(productInfo.buildNumber()) {
             if currentBuild != resources.lastBuildRateAppRequested {
                 resources.appEntryCount += 1
             }

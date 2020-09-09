@@ -170,7 +170,7 @@
 "filters_noUpdates" = "No updates found";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "filters updated: %lu ";
+"filters_updated_format" = "Filters updated: %lu ";
 
 /* (FiltersController) Filter Version format */
 "filter_version_format" = "version %@";

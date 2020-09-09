@@ -31,6 +31,7 @@ class AboutViewController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private var themeToken: NotificationToken?
     private var proStatusObservation: NSKeyValueObservation?
@@ -59,15 +60,15 @@ class AboutViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func readMoreTapped(_ sender: UIButton) {
-        UIApplication.shared.openAdguardUrl(action: "home", from: "about")
+        UIApplication.shared.openAdguardUrl(action: "home", from: "about", buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func eulaTapped(_ sender: UIButton) {
-        UIApplication.shared.openAdguardUrl(action: "eula", from: "about")
+        UIApplication.shared.openAdguardUrl(action: "eula", from: "about", buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func privacyPolicyTapped(_ sender: UIButton) {
-        UIApplication.shared.openAdguardUrl(action: "privacy", from: "about")
+        UIApplication.shared.openAdguardUrl(action: "privacy", from: "about", buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func loginLogoutTapped(_ sender: UIButton) {
@@ -105,7 +106,7 @@ class AboutViewController: UIViewController {
     }
     
     private func setupLabels() {
-        let version = ADProductInfo.versionWithBuildNumber() ?? ""
+        let version = productInfo.versionWithBuildNumber() ?? ""
         let versionFormat = String.localizedString("about_version_format")
         versionLabel.text = String(format: versionFormat, version)
         

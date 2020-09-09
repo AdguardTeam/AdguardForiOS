@@ -70,6 +70,7 @@ static NSTimeInterval lastCheckTime;
     ConfigurationService *_configuration;
     id<ThemeServiceProtocol> _theme;
     id<RateAppServiceProtocol> _rateAppService;
+    id<ADProductInfoProtocol> _productInfo;
     
     BOOL _activateWithOpenUrl;
     
@@ -102,6 +103,7 @@ static NSTimeInterval lastCheckTime;
     _theme = [ServiceLocator.shared getSetviceWithTypeName:@"ThemeServiceProtocol"];
     _rateAppService = [ServiceLocator.shared getSetviceWithTypeName:@"RateAppServiceProtocol"];
     _safariService = [ServiceLocator.shared getSetviceWithTypeName:@"SafariService"];
+    _productInfo = [ServiceLocator.shared getSetviceWithTypeName:@"ADProductInfoProtocol"];
     
     helper = [[AppDelegateHelper alloc] initWithAppDelegate:self];
     
@@ -126,7 +128,7 @@ static NSTimeInterval lastCheckTime;
         [[ACLLogger singleton] setLogLevel:ACLLDebugLevel];
 #endif
         
-        DDLogInfo(@"Application started. Version: %@", [ADProductInfo buildVersion]);
+        DDLogInfo(@"Application started. Version: %@", [_productInfo buildVersion]);
         
         DDLogInfo(@"(AppDelegate) Preparing for start application. Stage 1.");
         
@@ -435,17 +437,19 @@ static NSTimeInterval lastCheckTime;
     });
 }
 
+- (BOOL)background {
+    return _fetchCompletion || _downloadCompletion;
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark Notifications observers
 /////////////////////////////////////////////////////////////////////
 
 - (void)antibannerNotify:(NSNotification *)notification {
     
-    BOOL background = (_fetchCompletion || _downloadCompletion);
-    
     // Update filter rules
     if ([notification.name isEqualToString:ASAntibannerUpdateFilterRulesNotification]){
-        if (background) {
+        if (self.background) {
+            DDLogInfo(@"(AppDelegate) antibannerNotify. Skip in background");
             return;
         }
         
@@ -504,7 +508,7 @@ static NSTimeInterval lastCheckTime;
     else if ([notification.name
               isEqualToString:ASAntibannerFinishedUpdateNotification]) {
         
-        if (background){
+        if (self.background){
             helper.fetchState = BackgroundFetchStateFiltersupdated;
             [_antibanner endTransaction];
             [self antibanerUpdateFinished:AEUpdateNewData];

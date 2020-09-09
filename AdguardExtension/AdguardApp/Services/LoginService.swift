@@ -105,6 +105,7 @@ class LoginService: LoginServiceProtocol {
     private var defaults: UserDefaults
     private var network: ACNNetworkingProtocol
     private var keychain: KeychainServiceProtocol
+    private var productInfo: ADProductInfoProtocol
     
     private var timer: Timer?
     
@@ -134,10 +135,11 @@ class LoginService: LoginServiceProtocol {
     
     // MARK: - public methods
     
-    init(defaults: UserDefaults, network: ACNNetworkingProtocol, keychain: KeychainServiceProtocol) {
+    init(defaults: UserDefaults, network: ACNNetworkingProtocol, keychain: KeychainServiceProtocol, productInfo: ADProductInfoProtocol) {
         self.defaults = defaults
         self.network = network
         self.keychain = keychain
+        self.productInfo = productInfo
     }
     
     var loggedIn: Bool {
@@ -197,7 +199,7 @@ class LoginService: LoginServiceProtocol {
         
         var params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
-                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!]
+                      LOGIN_APP_VERSION_PARAM:productInfo.version()!]
         
         if !loginByToken {
             params[LOGIN_EMAIL_PARAM] = name
@@ -263,7 +265,7 @@ class LoginService: LoginServiceProtocol {
         
         var params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
-                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
+                      LOGIN_APP_VERSION_PARAM:productInfo.version()!,
                       STATUS_DEVICE_NAME_PARAM: UIDevice.current.name,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
                       ]
@@ -330,7 +332,7 @@ class LoginService: LoginServiceProtocol {
         
         let params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
-                      LOGIN_APP_VERSION_PARAM:ADProductInfo.version()!,
+                      LOGIN_APP_VERSION_PARAM:productInfo.version()!,
                       "key": "KPQ8695OH49KFCWC9EMX95OH49KFF50S" // legacy backend restriction
         ]
         

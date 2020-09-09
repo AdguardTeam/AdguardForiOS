@@ -66,7 +66,7 @@
     @param upgradeDefaultDb         Set to YES this parameter, 
                                     if you need fresh version of the default DB in shared folder.
  */
-- (void)initDbWithURL:(NSURL *)dbURL upgradeDefaultDb:(BOOL)upgradeDefaultDb;
+- (void)initDbWithURL:(NSURL *)dbURL upgradeDefaultDb:(BOOL)upgradeDefaultDb buildVersion: (NSString*) buildVersion;
 
 /**
  Executes queries in "transaction" (in fact in save point,

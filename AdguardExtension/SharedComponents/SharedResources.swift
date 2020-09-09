@@ -199,6 +199,24 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var needUpdateFilters: Bool {
+        get {
+            return sharedDefaults().bool(forKey: NeedToUpdateFiltersKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: NeedToUpdateFiltersKey)
+        }
+    }
+    
+    dynamic var buildVersion: Int {
+        get {
+            return sharedDefaults().integer(forKey: AEDefaultsProductBuildVersion)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsProductBuildVersion)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
