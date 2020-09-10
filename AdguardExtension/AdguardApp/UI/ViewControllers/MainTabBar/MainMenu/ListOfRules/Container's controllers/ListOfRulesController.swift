@@ -286,9 +286,10 @@ class ListOfRulesController: UIViewController {
     }
     
     private func deleteAction(){
-        model?.deleteSelectedRules(completionHandler: {
+        model?.deleteSelectedRules(completionHandler: { rulesWereDeleted in
             DispatchQueue.main.async { [weak self] in
                 self?.tableController?.tableView.reloadData()
+                if rulesWereDeleted { self?.state = .normal }
             }
             }, errorHandler: {[weak self] (error) in
                 guard let sSelf = self else { return }

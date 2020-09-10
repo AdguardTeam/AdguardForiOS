@@ -178,13 +178,17 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
         allRules.forEach({ $0.selected = true })
     }
     
-    func deleteSelectedRules(completionHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
         var newRules = [RuleInfo]()
+        var rulesWereDeleted = false
         for rule in allRules {
             if !rule.selected {
                 newRules.append(rule)
+            } else {
+                rulesWereDeleted = true
             }
         }
+        completionHandler(rulesWereDeleted)
         allRules = newRules
         dnsFiltersService.userRules = allRules.map({ $0.rule })
         

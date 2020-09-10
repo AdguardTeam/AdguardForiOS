@@ -190,18 +190,20 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         deleteInvertedSafariWhitelistRule(index: index, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
-    func deleteSelectedRules(completionHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
         var newRuleInfos = [RuleInfo]()
+        var rulesWereDeleted = false
         
         for ruleInfo in allRules {
             if !ruleInfo.selected {
                 newRuleInfos.append(ruleInfo)
+            } else {
+                rulesWereDeleted = true
             }
         }
-        
         allRules = newRuleInfos
         
-        setNewRules(completionHandler: completionHandler, errorHandler: errorHandler)
+        setNewRules(completionHandler: { completionHandler(rulesWereDeleted) }, errorHandler: errorHandler)
     }
     
     func processRulesFromString(_ string: String, errorHandler: @escaping (String) -> Void) {
@@ -287,7 +289,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
 
                 let objects = self.rulesToObjectsConverter(rules: self.allRules)
                 let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
-                    self.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
+                self.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
                 
                 completionHandler()
                 

@@ -199,7 +199,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         deleteRule(index: index, errorHandler: errorHandler, completionHandler: completionHandler)
     }
     
-    func deleteSelectedRules(completionHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
         // Unrealized method
     }
     
