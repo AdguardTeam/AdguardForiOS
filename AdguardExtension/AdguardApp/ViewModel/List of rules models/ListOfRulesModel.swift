@@ -49,7 +49,7 @@ protocol ListOfRulesModelProtocol {
     func importList(parentController: UIViewController)
     func addRule(ruleText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void)
     func selectAllRules()
-    func deleteSelectedRules(completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void)
+    func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool)->Void, errorHandler: @escaping (_ error: String)->Void)
     func delete(rule: RuleInfo, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void)
     func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) 
     func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void)

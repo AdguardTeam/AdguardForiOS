@@ -195,18 +195,21 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         changeSafariWhitelistRule(index: index, text: newText, enabled: rule.enabled, completionHandler: completionHandler, errorHandler: errorHandler)
     }
     
-    func deleteSelectedRules(completionHandler: @escaping () -> Void, errorHandler: @escaping (String) -> Void) {
+    func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
         var newRuleObjects = [ASDFilterRule]()
         var newRuleInfos = [RuleInfo]()
+        var rulesWereDeleted = false
         
         for (index, ruleInfo) in allRules.enumerated() {
             if !ruleInfo.selected {
                 newRuleObjects.append(ruleObjects[index])
                 newRuleInfos.append(allRules[index])
+            } else {
+                rulesWereDeleted = true
             }
         }
         
-        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: completionHandler, errorHandler: errorHandler)
+        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: { completionHandler(rulesWereDeleted) }, errorHandler: errorHandler)
     }
     
     func processRulesFromString(_ string: String, errorHandler: @escaping (String) -> Void) {
@@ -342,7 +345,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
             newRuleObjects.append(ruleObject)
             newRuleInfos.append(ruleInfo)
         }
-        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {
+        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: { 
             
         }) { (message) in
             errorHandler(message)
