@@ -32,13 +32,17 @@ sudo pip3 install requests
 
 `python3 localization.py -i`
 
-5) check by `git diff` and merge our strings with strings from remote service
+5) check strings translation percentage for all languages
 
-6) import strings from **.strings** to **.storyboard** files. It is necessary to avoid mistaken overwriting of current changes at first step
+`python3 localization.py -c`
+
+6) check by `git diff` and merge our strings with strings from remote service
+
+7) import strings from **.strings** to **.storyboard** files. It is necessary to avoid mistaken overwriting of current changes at first step
 
 `python3 localization.py -x`
 
-8) export english strings to remote server
+9) export english strings to remote server
 
 `python3 localization.py -e`
 
