@@ -9,6 +9,8 @@ import requests
 import json
 import glob
 import optparse
+import re
+import xml.etree.ElementTree as ET
 
 #
 # Runtime variables
@@ -387,26 +389,42 @@ def check_file_translations(path, locale):
     if not os.path.exists(localized_file):
         raise FileNotFoundError(localized_file)
 
-    # TODO: Read strings from base_file
-    # TODO: Read strings from localized_file
-    # TODO: Return two numbers: how many strings there are, how many of them are translated
+    base_strings_count = get_strings_number(base_file)
+    localized_strings_count = get_strings_number(localized_file)
 
-    return 100, 50
+    return base_strings_count, localized_strings_count
+
+
+def get_strings_number(file_path):
+    """Returns number of strings in file"""
+    file = open(file_path)
+    file_string = file.read()
+    if os.path.splitext(file_path) == '.stringsdict':
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+        strings_keys = root[0]
+        return len(strings_keys)
+    else:
+        split_result = re.findall(r'\"(.*)\"[ ]*=[ ]*\"(.*)\";', file_string)
+        return len(split_result)
+
+
 
 def check_translation(locale):
     """Loads all strings from the base file and compares them to 
     the translated version of this file"""
 
-    stringsCount = 0
-    translatedCount = 0
+    strings_count = 0
+    translated_count = 0
 
     for path in LOCALIZABLE_FILES:
         s, t = check_file_translations(path, locale)
-        stringsCount += s
-        translatedCount += t
-
-    print("{0}, translated {1}%".format(locale, translatedCount / stringsCount * 100))
+        strings_count += s
+        translated_count += t
+    percent = translated_count / strings_count * 100
+    print("{0}, translated {1}%".format(locale, "%.2f" % percent))
     return
+
 
 def check_translations():
     """Checks existing translations and prints their summary to the output."""
@@ -418,7 +436,6 @@ def check_translations():
 
     print("Finished checking translations")
     return
-
 
 
 def print_usage():
