@@ -11,7 +11,11 @@ We use 'en' language as base language
 
 We also use 'localization.py' to import and export strings to [remote localization service](https://crowdin.com/project/adguard-applications)
 
+### Prerequisites
 
+```
+sudo pip3 install requests
+```
 
 
 ### Steps to export strings to localization service

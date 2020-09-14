@@ -372,6 +372,54 @@ def update_xibs():
     print("Finished updating .xib files")
     return
 
+def check_file_translations(path, locale):
+    """Loads all strings from the base file and compares them to 
+    the translated version of this file"""
+    
+    file_name = os.path.basename(path)
+    file_ext = os.path.splitext(file_name)[1][1:]
+    base_file = path
+    localized_file = path.replace("en.lproj", "{0}.lproj".format(locale))
+
+    if not os.path.exists(base_file):
+        raise FileNotFoundError(base_file)
+
+    if not os.path.exists(localized_file):
+        raise FileNotFoundError(localized_file)
+
+    # TODO: Read strings from base_file
+    # TODO: Read strings from localized_file
+    # TODO: Return two numbers: how many strings there are, how many of them are translated
+
+    return 100, 50
+
+def check_translation(locale):
+    """Loads all strings from the base file and compares them to 
+    the translated version of this file"""
+
+    stringsCount = 0
+    translatedCount = 0
+
+    for path in LOCALIZABLE_FILES:
+        s, t = check_file_translations(path, locale)
+        stringsCount += s
+        translatedCount += t
+
+    print("{0}, translated {1}%".format(locale, translatedCount / stringsCount * 100))
+    return
+
+def check_translations():
+    """Checks existing translations and prints their summary to the output."""
+    print("Start checking translations")
+
+    for language in TWOSKY_CONFIG["languages"]:
+        if language != "en":
+            check_translation(language)
+
+    print("Finished checking translations")
+    return
+
+
 
 def print_usage():
     print("Usage:")
@@ -379,6 +427,7 @@ def print_usage():
     print("commands:")
     print(" -e --export - export strings")
     print(" -i --import - import strings")
+    print(" -c --check - checks translations and prints status")
     print(" -s --generate-strings - generate strings filtes from .xib or .storyboard files")
     print(" -x --update-xibs - update .storyboard or .xib files with strings from .strings files")
     print("arguments:")
@@ -389,10 +438,10 @@ def print_usage():
 
 
 def main():
-
     parser = optparse.OptionParser(usage="%prog [options]. %prog -h for help.")
     parser.add_option("-i", "--import", action="store_true", dest="importMode")
     parser.add_option("-e", "--export", action="store_true", dest="exportMode")
+    parser.add_option("-c", "--check", action="store_true", dest="checkTranslations")
     parser.add_option("-x", "--update-xibs", action="store_true", dest="updateXibs")
     parser.add_option("-s", "--generate-strings", action="store_true", dest="generateStrings")
     parser.add_option("-l", "--lang", dest="lang", default='en')
@@ -408,12 +457,13 @@ def main():
             import_localizations()
         else:
             import_localization(options.lang)
-
     elif options.exportMode == True:
         if options.lang == 'all':
             export_all_translations()
         else:
             export_translations(options.lang)
+    elif options.checkTranslations == True:
+        check_translations()    
     elif options.updateXibs == True:
         update_xibs()
     elif options.generateStrings == True:
