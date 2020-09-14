@@ -474,6 +474,8 @@ def main():
             import_localizations()
         else:
             import_localization(options.lang)
+        # Print translations summary after import
+        check_translations()
     elif options.exportMode == True:
         if options.lang == 'all':
             export_all_translations()
