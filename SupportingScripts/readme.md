@@ -32,17 +32,13 @@ sudo pip3 install requests
 
 `python3 localization.py -i`
 
-5) check strings translation percentage for all languages
+5) check by `git diff` and merge our strings with strings from remote service
 
-`python3 localization.py -c`
-
-6) check by `git diff` and merge our strings with strings from remote service
-
-7) import strings from **.strings** to **.storyboard** files. It is necessary to avoid mistaken overwriting of current changes at first step
+6) import strings from **.strings** to **.storyboard** files. It is necessary to avoid mistaken overwriting of current changes at first step
 
 `python3 localization.py -x`
 
-9) export english strings to remote server
+7) export english strings to remote server
 
 `python3 localization.py -e`
 
@@ -87,6 +83,8 @@ Commands:
 
  -x --update-xibs - update .storyboard files with strings from .strings files
 
+ -c --check-translations-coverage - check percentage of translated strings for each language
+ 
 Arguments:
 
 -l --lang - language for export or import. Can be 'en', 'ru', etc for single locale or 'all' for all locales. Default value is 'en'. **NOTE: use '-export -lang all' only if you really understand what you want to do.**

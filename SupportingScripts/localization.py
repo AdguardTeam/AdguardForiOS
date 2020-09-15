@@ -399,7 +399,8 @@ def get_strings_number(file_path):
     """Returns number of strings in file"""
     file = open(file_path)
     file_string = file.read()
-    if os.path.splitext(file_path) == '.stringsdict':
+
+    if os.path.splitext(file_path)[1] == '.stringsdict':
         tree = ET.parse(file_path)
         root = tree.getroot()
         strings_keys = root[0]
