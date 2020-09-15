@@ -11,7 +11,11 @@ We use 'en' language as base language
 
 We also use 'localization.py' to import and export strings to [remote localization service](https://crowdin.com/project/adguard-applications)
 
+### Prerequisites
 
+```
+sudo pip3 install requests
+```
 
 
 ### Steps to export strings to localization service
@@ -34,7 +38,7 @@ We also use 'localization.py' to import and export strings to [remote localizati
 
 `python3 localization.py -x`
 
-8) export english strings to remote server
+7) export english strings to remote server
 
 `python3 localization.py -e`
 
@@ -79,6 +83,8 @@ Commands:
 
  -x --update-xibs - update .storyboard files with strings from .strings files
 
+ -c --check-translations-coverage - check percentage of translated strings for each language
+ 
 Arguments:
 
 -l --lang - language for export or import. Can be 'en', 'ru', etc for single locale or 'all' for all locales. Default value is 'en'. **NOTE: use '-export -lang all' only if you really understand what you want to do.**
