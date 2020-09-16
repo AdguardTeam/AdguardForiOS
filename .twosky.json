@@ -25,7 +25,12 @@
       "sk": "Slovak",
       "sl": "Slovenian",
       "tr": "Turkish",
-      "uk": "Ukrainian"
+      "uk": "Ukrainian",
+      "vi": "Vietnamese",
+      "nl": "Dutch",
+      "ro": "Romanian",
+      "id": "Indonesian",
+      "be": "Belarusian (Belarus)"
     },
     "localizable_files": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About/en.lproj/About.strings",
