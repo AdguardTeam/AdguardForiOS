@@ -84,6 +84,8 @@ Commands:
  -x --update-xibs - update .storyboard files with strings from .strings files
 
  -c --check-translations-coverage - check percentage of translated strings for each language
+
+ -d --get-missing-strings-diff - get missing strings keys for each language
  
 Arguments:
 

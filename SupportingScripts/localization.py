@@ -374,7 +374,8 @@ def update_xibs():
     print("Finished updating .xib files")
     return
 
-def check_file_translations(path, locale):
+
+def check_file_translations(path, locale, should_print_diff):
     """Loads all strings from the base file and compares them to 
     the translated version of this file"""
     
@@ -389,37 +390,57 @@ def check_file_translations(path, locale):
     if not os.path.exists(localized_file):
         raise FileNotFoundError(localized_file)
 
-    base_strings_count = get_strings_number(base_file)
-    localized_strings_count = get_strings_number(localized_file)
+    base_strings_set = get_strings_number(base_file)
+    localized_strings_set = get_strings_number(localized_file)
+
+    base_strings_count = len(base_strings_set)
+    localized_strings_count = len(localized_strings_set)
+
+    missed_strings = base_strings_set - localized_strings_set
+
+    if should_print_diff:
+        if len(missed_strings) == 0:
+            print("🗂 {0} is fully translated".format(file_name))
+        else:
+            missed_strings_string = '\n    '.join(missed_strings)
+            print("🗂 {0} missing translations for keys:\n    {1}".format(file_name, missed_strings_string))
 
     return base_strings_count, localized_strings_count
 
 
 def get_strings_number(file_path):
-    """Returns number of strings in file"""
+    """Returns set of string's keys in file"""
     file = open(file_path)
     file_string = file.read()
 
     if os.path.splitext(file_path)[1] == '.stringsdict':
         tree = ET.parse(file_path)
         root = tree.getroot()
-        strings_keys = root[0]
-        return len(strings_keys)
+        keys = root[0]
+        strings_keys = [element.text for element in keys.findall("./key")]
+        return set(strings_keys)
     else:
         split_result = re.findall(r'\"(.*)\"[ ]*=[ ]*\"(.*)\";', file_string)
-        return len(split_result)
+        strings_keys = [string[0] for string in split_result]
+        return set(strings_keys)
 
 
-
-def check_translation(locale):
-    """Loads all strings from the base file and compares them to 
-    the translated version of this file"""
+def check_translation(locale, should_print_diff):
+    """
+    Loads all strings from the base file and compares them to
+    the translated version of this file
+    If should_print_diff is true it will also print untranslated strings
+    """
 
     strings_count = 0
     translated_count = 0
 
+    if should_print_diff:
+        print("\n---------------------------------------------")
+        print("🚦 Files translations for {0}\n".format(locale))
+
     for path in LOCALIZABLE_FILES:
-        s, t = check_file_translations(path, locale)
+        s, t = check_file_translations(path, locale, should_print_diff)
         strings_count += s
         translated_count += t
     percent = translated_count / strings_count * 100
@@ -433,9 +454,21 @@ def check_translations():
 
     for language in TWOSKY_CONFIG["languages"]:
         if language != "en":
-            check_translation(language)
+            check_translation(language, False)
 
     print("Finished checking translations")
+    return
+
+
+def missing_strings_diff():
+    """Checks existing translations and prints missing string's keys to the output"""
+    print("Start creating diff")
+
+    for language in TWOSKY_CONFIG["languages"]:
+        if language != "en":
+            check_translation(language, True)
+
+    print("Finished creating diff")
     return
 
 
@@ -460,6 +493,7 @@ def main():
     parser.add_option("-i", "--import", action="store_true", dest="importMode")
     parser.add_option("-e", "--export", action="store_true", dest="exportMode")
     parser.add_option("-c", "--check", action="store_true", dest="checkTranslations")
+    parser.add_option("-d", "--diff", action="store_true", dest="missingStringsDiff")
     parser.add_option("-x", "--update-xibs", action="store_true", dest="updateXibs")
     parser.add_option("-s", "--generate-strings", action="store_true", dest="generateStrings")
     parser.add_option("-l", "--lang", dest="lang", default='en')
@@ -483,13 +517,16 @@ def main():
         else:
             export_translations(options.lang)
     elif options.checkTranslations == True:
-        check_translations()    
+        check_translations()
+    elif options.missingStringsDiff == True:
+        missing_strings_diff()
     elif options.updateXibs == True:
         update_xibs()
     elif options.generateStrings == True:
         update_strings()
     else:
         print_usage()
+
 
 # Entry point
 try:
