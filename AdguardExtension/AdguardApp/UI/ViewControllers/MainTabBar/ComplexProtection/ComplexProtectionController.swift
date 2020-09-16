@@ -123,7 +123,6 @@ class ComplexProtectionController: UITableViewController {
         
         freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()
-        titlImageView.image = UIImage(named: "apps")
     }
     
     override func viewWillAppear(_ animated: Bool) {
