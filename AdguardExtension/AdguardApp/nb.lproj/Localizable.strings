@@ -82,6 +82,9 @@
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
 "premium_expired_title" = "Oppmerksomhet";
 
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "En feil oppstod i forsøket på å gjenopprette kjøpet.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Ingen kjøp å gjenopprette";
 
@@ -505,6 +508,9 @@
 /*(DnsRequestDetailsController) action title for info alert  */
 "common_action_more" = "Mer";
 
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Du har forsøkt å legge til et duplikatfilter. Dette filteret er allerede på listen.";
+
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ regler er skrudd på";
 
@@ -625,6 +631,9 @@
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Krypterte forespørsler";
 
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Antallet krypterte DNS-forespørsler. Du må bruke en kryptert DNS-tjener for å filtrere DNS-trafikken din.";
+
 /* (ActivityViewController) - Average time title */
 "average_info_alert_title" = "Gjennomsnittstid";
 
@@ -681,8 +690,17 @@
 /* (MainPageController) DNS protection disabled title for VoiceOver*/
 "tracking_protection_disabled_voiceover" = "DNS-beskyttelse er skrudd av";
 
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Oppdater filtre";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Antall forespørsler";
+
 /* (MainPageController) blocked requests number title for VoiceOver*/
 "encrypted_number_voiceover" = "Antallet krypterte DNS-forespørsler";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Gjennomsnittstiden for å behandle en DNS-forespørsel";
 
 
 // MARK: - SystemProtectionEnablerController

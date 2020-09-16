@@ -1,90 +1,90 @@
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "ADD";
+"1rj-wD-aeH.normalTitle" = "THÊM";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "encrypted";
+"4IJ-xy-hky.normalTitle" = "được mã hóa";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
-"5bV-zZ-4dr.text" = "Activity";
+"5bV-zZ-4dr.text" = "Hoạt động";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
-"6xN-ij-jJj.normalTitle" = "TRY FOR FREE";
+/* 6xN-ij-jJj.normalTitle
+Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "DÙNG THỬ MIỄN PHÍ";
 
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
-"7mk-7J-iLD.normalTitle" = "EDIT";
+"7mk-7J-iLD.normalTitle" = "Chỉnh sửa";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
-"Asq-k8-hi1.text" = "Most active companies";
+"Asq-k8-hi1.text" = "Công ty nhiều hoạt động nhất";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
-"DCy-so-G1C.text" = "No recent activity tracked (we store only the last 1500 requests)";
+"DCy-so-G1C.text" = "Không có hoạt động gần đây được theo dõi (chúng tôi chỉ lưu trữ 1500 yêu cầu gần nhất)";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
-"Epn-q1-BdL.text" = "No recent activity tracked (we store only the last 1500 requests)";
+"Epn-q1-BdL.text" = "Không có hoạt động gần đây được theo dõi (chúng tôi chỉ lưu trữ 1500 yêu cầu gần nhất)";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
-"Hbu-Bm-HWZ.text" = "Activity";
+"Hbu-Bm-HWZ.text" = "Hoạt động";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
-"KXe-VX-Rq9.normalTitle" = "CANCEL";
+"KXe-VX-Rq9.normalTitle" = "Đóng";
 
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
-"M4r-q5-RXv.text" = "Domain name:";
+"M4r-q5-RXv.text" = "Tên miền:";
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
-"T0y-mr-Zwa.text" = "You can see who tries to track you, view stats and the log of DNS requests blocking";
+"T0y-mr-Zwa.text" = "Bạn có thể xem ai cố gắng theo dõi bạn, xem số liệu thống kê và nhật ký chặn yêu cầu DNS";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
-"X1F-2p-Xpe.text" = "DNS protection is disabled";
+"X1F-2p-Xpe.text" = "Bảo vệ qua DNS bị vô hiệu hóa";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "ENABLE";
+"XYE-JT-WSH.normalTitle" = "CHO PHÉP";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
-"Xgg-jX-hwe.normalTitle" = "Copied";
+"Xgg-jX-hwe.normalTitle" = "Đã sao chép";
 
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
-"Xj3-X8-fnq.normalTitle" = "companies";
+"Xj3-X8-fnq.normalTitle" = "công ty";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
-"ae4-WL-0pQ.text" = "Security filters, DNS privacy, custom filters, etc.";
+"ae4-WL-0pQ.text" = "Bộ lọc bảo vệ, DNS riêng tư, bộ lọc tùy chỉnh, khác.";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
-"hR9-Pm-Gq0.text" = "Recent activity";
+"hR9-Pm-Gq0.text" = "Hoạt động gần đây";
 
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "BACK";
+"hoI-YR-JcD.normalTitle" = "Trở lại";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
-"kX9-ZX-NOu.text" = "Recent activity";
+"kX9-ZX-NOu.text" = "Hoạt động gần đây";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
-"kwZ-Kw-f1R.text" = "Block request";
+"kwZ-Kw-f1R.text" = "Chặn yên cầu";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "ADD";
+"l5B-oj-DnW.normalTitle" = "THÊM";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
-"lKJ-8V-GJi.normalTitle" = "requests";
+"lKJ-8V-GJi.normalTitle" = "Yêu cầu";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
-"qPQ-vV-fXm.normalTitle" = "requests";
+"qPQ-vV-fXm.normalTitle" = "yêu cầu";
 
 /* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Choose the domain level:";
+"uj0-U3-Qfx.text" = "Chọn cấp độ miền";
 
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
-"uni-H6-XNc.text" = "Request details";
+"uni-H6-XNc.text" = "Chi tiết yêu cầu";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "encrypted";
+"wt5-4Q-CTq.normalTitle" = "được mã hóa";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
-"y8j-ib-ZgR.text" = "Block request";
+"y8j-ib-ZgR.text" = "Chặn yêu cầu";
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
-"yWy-kc-8Zg.text" = "Most active";
+"yWy-kc-8Zg.text" = "Tích cực nhất";
 
 /* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
-"yio-E8-cQV.normalTitle" = "avg. time";
+"yio-E8-cQV.normalTitle" = "avg. thời gian";

@@ -1,30 +1,29 @@
-
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "CANCEL";
+"5eU-q4-Xed.normalTitle" = "Annuleer";
 
 /* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "The rule has been added to the User rules";
+"BfI-YN-iXe.text" = "Deze regel is toegevoegd aan het gebruikersfilter.";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "SAVE";
+"Bvs-mI-vEr.normalTitle" = "Opslaan";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
-"EH6-Zr-YRP.text" = "Edit";
+"EH6-Zr-YRP.text" = "Bijwerken";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
-"HFf-Yp-hjB.normalTitle" = "Select";
+"HFf-Yp-hjB.normalTitle" = "Selecteren";
 
 /* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "REMOVE";
+"Tei-uI-6Gr.normalTitle" = "Verwijder";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "CANCEL";
+"U2P-9b-f6k.normalTitle" = "Annuleer";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "ADD";
+"fCd-gA-rXS.normalTitle" = "Toevoegen";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
-"x7r-Ln-XiZ.text" = "Domain:";
+"x7r-Ln-XiZ.text" = "Domein:";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
 "zRm-I7-37E.normalTitle" = "OK";

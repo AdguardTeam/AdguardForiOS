@@ -1,38 +1,35 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "An unexpected error occurred. Please contact the support team.";
+"support_unexpected_error" = "Er is een onverwachte fout opgetreden. Neem a.u.b. contact op met het support team.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Cannot convert rules due to an unexpected error. Please contact the support team.";
-
-/* (AEService) Service errors descriptions */
-"json_converting_error" = "Cannot initialize converter to JSON format.";
+"support_rule_converting_error" = "Regels kunnen niet geconverteerd worden. Er is een onverwachte fout opgetreden. Neem a. u. b. contact op met het support team.";
 
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
-"common_action_cancel" = "Cancel";
+"common_action_cancel" = "Annuleren";
 
 /* (AEService) Service errors descriptions */
-"rule_converting_error" = "Cannot convert the filter rule. Rule text is invalid.";
+"rule_converting_error" = "De filterregel kan niet geconverteerd worden. Regeltekst is ongeldig.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Cannot add these user rules to Safari";
+"filter_rules_converting_error" = "De gebruikers filterregel kan niet geconverteerd worden.";
 
 /* Alert title. On error. */
-"common_error_title" = "Error";
+"common_error_title" = "Fout";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
+"safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. De recente wijzigingen zijn daarom niet toegepast.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the Allowlist, or change the set of used filters.";
+"load_to_safari_error" = "Filters kunnen niet in Safari ingelezen worden. Probeer de regels en de toestemmingslijst te wissen of pas de gebruikte filters aan.";
 
 /* NO Button caption in alert */
-"common_action_no" = "NO";
+"common_action_no" = "NEE";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Allowlist (inverted)";
+"inverted_whitelist_title" = "Toestemmingslijst (geïnverteerd)";
 
 /* (MainPageController) Text to indicate changes processing */
-"applying_changes" = "Applying changes...";
+"applying_changes" = "Aanpassingen verwerken...";
 
 /* (MainPageController) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
@@ -53,655 +50,649 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (User Filter Screen) Title */
-"user_filter_title" = "User rules";
+"user_filter_title" = "Gebruikersfilter";
 
 /* (User Filter Screen) User Filter input helper */
-"user_filter_helper" = "Enter your own rules here, separated by line breaks";
+"user_filter_helper" = "Voer hier je gebruikersregels in, gescheiden door regeleindes";
 
 /* YES Button caption in alert */
-"common_action_yes" = "YES";
+"common_action_yes" = "JA";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Protection is enabled";
+"protection_enabled_caption" = "Bescherming is ingeschakeld";
 
 /* (MainController) login status caption on main screen */
-"protection_partly_enabled_caption" = "Some content blockers are disabled";
+"protection_partly_enabled_caption" = "Sommige inhoudsblokkeringen zijn uitgeschakeld";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Protection is disabled";
+"protection_disabled_caption" = "Bescherming is uitgeschakeld";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "START TRIAL";
+"upgrade_button_title" = "PROEFVERSIE STARTEN";
 
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "PURCHASE";
+"upgrade_lifetime_button_title" = "KOPEN";
 
 /* (LoginController) lost password button title */
-"lost_password" = "Lost password?";
+"lost_password" = "Wachtwoord vergeten?";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
-"premium_expired_message" = "Your Premium account has expired";
+"premium_expired_message" = "Uw premium abonnement is verlopen";
 
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
-"premium_expired_title" = "Attention";
+"premium_expired_title" = "Attentie";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "You have successfully logged into your AdGuard account, but there are no license keys that allow you to activate the Premium version.";
+"not_premium_message" = "U bent succesvol aangemeld met uw AdGuard account, maar er zijn geen licentie sleutels die het activeren van de premium versie toestaan.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "You have successfully logged into your AdGuard account! The Premium version of AdGuard for iOS has been activated.";
+"login_success_message" = "U bent succesvol aangemeld met uw AdGuard account! De premium versie van AdGuard voor iOS is geactiveerd.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "You have successfully logged into your AdGuard account, but the license keys that allow you to activate the Premium version have expired.";
+"login_premium_expired_message" = "U bent succesvol aangemeld met uw AdGuard account, maar de licentie sleutels die het activeren van de premium versie toestaan, zijn verlopen.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
-"restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
+"restore_purchases_failure_message" = "Er is een fout opgetreden bij het herstellen van de aankoop.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "The purchase has been restored! The Premium version of AdGuard for iOS has been activated.";
+"restore_success_message" = "De aankoop is hersteld. De premium versie van AdGuard voor iOS is geactiveerd.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
-"nothing_to_restore_message" = "No purchases to restore";
+"nothing_to_restore_message" = "Er is geen aankoop om te herstellen";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "The purchase has been successfully completed! The Premium version of AdGuard for iOS has been activated.";
+"purchase_success_message" = "De aankoop is succesvol afgerond. De premium versie van AdGuard voor iOS is geactiveerd.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
-"purchase_failure_message" = "An error occurred while processing your purchase.";
+"purchase_failure_message" = "Er is een fout opgetreden bij het afhandelen van uw aankoop.";
 
 /* (GroupsController) Custom filter group name */
-"custom_group_name" = "Custom";
+"custom_group_name" = "Aangepast";
 
 /* (GroupsController) Filter group filter count format */
-"filter_group_filters_count_format" = "Enabled filters: %d/%d";
+"filter_group_filters_count_format" = "Actieve filters: %d/%d";
 
 /* (GroupsController) Filters update time format */
-"filter_date_format" = "Filters updated: %@";
+"filter_date_format" = "Geüpdate filters: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "You can add your own rules here.<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
+"blacklist_text_format" = "Eigen regels kunnen hier toegevoegd worden<br>Lees deze <a href=\"%@\">informatie over de opbouw van regels</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains ignoring all other settings.";
+"whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter uitschakelen voor deze websites.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
+"inverted_whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter alleen inschakelen voor deze websites.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Enter here the domain names separated by line breaks. AdGuard will allow all connections to these domains.";
+"dns_whitelist_text" = "Vul per nieuwe regel een domeinaam in. AdGuard staat toegang tot deze domeinen toe.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "This Blocklist supports <a href=\"%@\">AdGuard's DNS syntax</a>. Enter here the rules separated by line breaks. AdGuard will block all connections to domains that match these rules.";
+"dns_blacklist_text_format" = "Deze lijst met blokkeringen ondersteunen de <a href=\"%@\">AdGuard's DNS syntax</a>. Voeg hier nieuwe regels toe en scheidt ze met een line-break. AdGuard zal alle connecties blokkeren naar domeinen die aan deze regels voldoen.";
 
 /* (MainController) message that appers when filters updating */
-"update_filter_start_message" = "Updating...";
+"update_filter_start_message" = "Bijwerken...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Add a rule";
+"add_blacklist_rule_title" = "Regel toevoegen";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Enter a domain";
-
-/* (UserFilterController) add blacklist rule placeholder */
-"add_blacklist_rule_placeholder" = "||example.org^";
-
-/* (UserFilterController) add whitelist domain placeholder */
-"add_whitelist_domain_placeholder" = "example.org";
+"add_whitelist_domain_title" = "Domein toevoegen";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "Your Wi-Fi name";
+"add_wifi_name_placeholder" = "De naam van je WiFi netwerk";
 
 /* (UserFilterController) add blacklist rule caption */
-"add_blacklist_rule_caption" = "Rule:";
+"add_blacklist_rule_caption" = "Regel:";
 
 /* (UserFilterController) add whitelist domain caption */
-"add_whitelist_domain_caption" = "Domain:";
+"add_whitelist_domain_caption" = "Domein:";
 
 /* (UserFilterController) add wifi name caption */
-"add_wifi_name_caption" = "Name:";
+"add_wifi_name_caption" = "Naam:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Cannot send a bug report. You may not have email configured on your device.";
+"bug_report_sending_error" = "Kan het rapport niet verzenden. Er is mogelijk geen mail account op dit apparaat ingesteld.";
 
 /* (MainController) Error on check filter uspdates */
-"filter_updates_error" = "Filter update error";
+"filter_updates_error" = "Filter update fout";
 
 /* (MainController) Message on main screen during update */
-"filters_noUpdates" = "No updates found";
+"filters_noUpdates" = "Geen updates gevonden";
 
 /* (MainController) Message on main screen during update - count of updated filters */
-"filters_updated_format" = "Filters updated: %lu ";
+"filters_updated_format" = "Bijgewerkte filters: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "version %@";
+"filter_version_format" = "versie %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Split-Tunnel, compatible with “Personal VPN” apps";
+"tunnel_mode_split_description" = "Split-Tunnel, compatibel met “Persoonlijke VPN” apps";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel, incompatible with other VPN apps";
+"tunnel_mode_full_description" = "Full-Tunnel, geen compatibiliteit met ander VPN apps";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (zonder VPN icon), geen compatibiliteit met andere VPN apps, minder stabiliteit";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
+"adguard_dns_description" = "blokkeert advertenties, trackers en phishing websites";
 
 /* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch and adult content blocking";
+"adguard_family_dns_description" = "blokkeert al het bovenstaande en pornografische websites";
 
 /* Google DNS server description */
-"google_dns_description" = "Free alternative DNS service by Google";
+"google_dns_description" = "wereldwijde DNS oplossingsservice van Google";
 
 /* Open DNS server description */
-"open_dns_description" = "DNS server that protects your device from phishing and scam";
+"open_dns_description" = "Aangepaste filtering en identiteitsdiefstal bescherming";
 
 /* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server with adult content blocking";
+"open_dns_familyshield_description" = "OpenDNS server met blokkering van volwassen inhoud";
 
 /* Quad9 DNS server description */
-"quad_nine_dns_description" = "Free alternative DNS service with protection from phishing and spyware";
+"quad_nine_dns_description" = "Gratis alternatieve DNS service met bescherming tegen phishing en spyware";
 
 /* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Free DNS service by Cloudflare";
+"cloudflare_public_dns_description" = "Gratis DNS service door Cloudflare";
 
 /* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS server by Cloudflare that blocks malicious domains";
+"cloudflare_anti_malware_dns_description" = "Anti-malware DNS-server via Cloudfare die kwaadaardige domeinen blokkeert";
 
 /* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare's blocking server that restricts access to malicious and 'adult' domains";
+"cloudflare_family_description" = "Cloudfare's blokkeringsserver die de toegang beperkt tot kwaadaardige en 'volwassen' domeinen";
 
 /* Safe DNS server description */
-"safe_dns_description" = "DNS service by SafeDNS";
+"safe_dns_description" = "DNS service door SafeDNS";
 
 /* Dns Feature Name */
-"dns_provider_secure_tag" = "Security";
+"dns_provider_secure_tag" = "Beveiliging";
 
 /* Dns Feature Name */
-"dns_provider_adult_tag" = "Adult content blocking";
+"dns_provider_adult_tag" = "Volwassen inhoud blokkeren";
 
 /* Dns Feature Name */
-"dns_provider_no_logs_tag" = "No logging policy";
+"dns_provider_no_logs_tag" = "Geen logboekbeleid";
 
 /* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Safe Search";
+"dns_provider_safe_search_tag" = "Veilig zoeken";
 
 /* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Ad Blocking";
+"dns_provider_ad_blocking_tag" = "Advertentie blokkering";
 
 /* Dns Feature description */
-"dns_provider_secure_summary" = "Blocks known phishing and other dangerous domains";
+"dns_provider_secure_summary" = "Blokkeert bekende phishing en andere gevaarlijke domeinen";
 
 /* Dns Feature description */
-"dns_provider_adult_summary" = "Blocks websites with adult content";
+"dns_provider_adult_summary" = "Blokkeert websites met volwassen inhoud";
 
 /* Dns Feature description */
-"dns_provider_no_logs_summary" = "Does not store your DNS query logs";
+"dns_provider_no_logs_summary" = "Bewaart je DNS-verzoeken logs niet";
 
 /* Dns Feature description */
-"dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
+"dns_provider_safe_search_summary" = "Wanneer mogelijk, wordt veilig zoeken geforceerd in de browser";
 
 /* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocks tracking systems";
+"dns_provider_ad_blocking_summary" = "Blokkeert traceer systemen";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "No encryption (System DNS)";
+"system_dns_server" = "Geen encryptie (Systeem DNS)";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "Enabled %1$d out of %2$d";
+"filters_description_format" = "%1$d van de %2$d ingeschakeld";
 
 /* DnsProviderDetailsController - regular dns protocol */
-"regular_dns_protocol" = "Regular";
+"regular_dns_protocol" = "Standaard";
 
 /* DnsProviderDetailsController - dns crypt protocol */
 "dns_crypt_protocol" = "DNSCrypt";
 
 /* DnsProviderDetailsController - dns over https protocol */
-"doh_protocol" = "DNS-over-HTTPS";
+"doh_protocol" = "DNS-via-HTTPS";
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
 /* GetProController - confirm logout text */
-"confirm_logout_text" = "Are you sure you want to log out?";
+"confirm_logout_text" = "Weet u zeker dat u wilt uit loggen?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "There was a problem with VPN configuration, please contact our support team.";
+"support_vpn_configuration_problem" = "Er was een probleem met de VPN configuratie, neem alstublieft contact op met ons support team.";
 
 /* login error message */
-"login_error_message" = "An error occurred while logging in";
+"login_error_message" = "Er is een fout opgetreden tijdens het aanmelden";
 
 /* purchase secription format */
-"purchase_description_format" = "About AdGuard Subscription:<br><br>• Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• The subscription is automatically renewed unless auto-renew is turned off at least 24-hours before the end of the current period.<br><br>• The subscription renewal fee will be charged within 24-hours prior to the end of the current period.<br><br>Your subscriptions may be managed and your auto-renewal may be turned off in your iTunes Account Settings after purchasing a subscription.<br><br><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"purchase_description_format" = "Over AdGuard abonnementen:<br><br>Betalingen worden gedaan via je iTunes account wanneer je je aankoop bevestigd.<br><br> Het abonnement wordt automatisch verlengd tenzij je dit uiterlijk 24 uur voor het einde van de abonnementsperiode uitzet.<br><br>De koen van het verlengen van het abonnement worden binnen 24 uur voor het einde van de lopende periode in rekening gebracht.<br><br>Je abonnementen kunnen worden beheerd en automatische verlengingen kunnen worden uitgeschakeld in de accountinstellingen van iTunes na aankoop van een abonnement.<br><br><a href=%2$@>Voorwaarden en condities</a> en <a href=%1$@>Privacybeleid</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"lifetime_purchase_description_format" = "<a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Gebruiksvoorwaarden</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"privacy_policy_action" = "Privacy Policy";
+"privacy_policy_action" = "Privacybeleid";
 
 /* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
-"vpn_confirm_title" = "A VPN will be created";
+"vpn_confirm_title" = "Er wordt een VPN gecreëerd";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "VPN is required to set up custom DNS settings. The created VPN is local, which means your traffic will not be routed through any servers.\nWe do not collect any data when you use this VPN profile.";
+"vpn_confirm_message" = "VPN is verplicht om aangepaste DNS instellingen te kunnen maken. Het gecreëerde VPN is lokaal, wat betekent dat je internetverkeer niet door servers wordt geleid.";
 
 /* this message is shown during the login on the license screen */
-"loading_message" = "Please wait...";
+"loading_message" = "Even geduld...";
 
 /* (AdvancedSettingsController) "Theme" header view title*/
-"theme_header_title" = "Theme";
+"theme_header_title" = "Thema";
 
 /* (AdvancedSettingsController) "Other" header view title*/
-"other_header_title" = "Other";
+"other_header_title" = "Overige";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filters:";
 
 /* (AdvancedSettingsController) Restart when network changes error */
-"general_settings_restart_tunnel_error" = "You need to enable VPN first";
+"general_settings_restart_tunnel_error" = "Je moet VPN eerst inschakelen";
 
 /* (AdvancedSettingsController) Reset statistics title */
-"reset_stat_title" = "Reset statistics";
+"reset_stat_title" = "Herstel statistieken";
 
 /* (AdvancedSettingsController) Reset statistics description */
-"reset_stat_descr" = "All statistics will be cleared!";
+"reset_stat_descr" = "Alle statistieken worden verwijderd!";
 
 /* (AdvancedSettingsController) Reset button title */
-"reset_title" = "Reset";
+"reset_title" = "Herstel";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Remove";
+"remove_title" = "Verwijderen";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
-"remove_vpn_profile_title" = "Remove VPN profile";
+"remove_vpn_profile_title" = "VPN-profiel verwijderen";
 
 /* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable DNS protection?";
+"remove_vpn_profile_message" = "Het VPN-profiel daadwerkelijk verwijderen en de DNS bescherming uitschakelen?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
-"remove_vpn_profile_error_title" = "An error occurred";
+"remove_vpn_profile_error_title" = "Er is een fout opgetreden";
 
 /* (AdvancedSettingsController) Remove Vpn profile error message */
-"remove_vpn_profile_error_message" = "Something went wrong while deleting your VPN profile";
+"remove_vpn_profile_error_message" = "Er ging iets fout bij het verwijderen van het VPN-profiel";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
-"enabled_current_content_blocker_state_label" = "%@ rules are being used";
+"enabled_current_content_blocker_state_label" = "%@ regels in gebruik";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
-"disabled_current_state_label" = "Disabled in Safari settings";
+"disabled_current_state_label" = "Uitgezet in Safari instellingen";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
-"update_current_state_label" = "Loading into Safari...";
+"update_current_state_label" = "Laden in Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
-"over_limit_current_state_label" = "The limit of %1$@ rules is reached. The app may not work correctly. Please disable the extra rules. Currently %2$@ out of %3$@ rules are being used; %4$@ rules are disabled.";
+"over_limit_current_state_label" = "De limiet van %1$@ is bereikt. De app kan mogelijk niet goed functioneren. Verwijder overtollige regels. Momenteel worden er %2$@ van de %3$@ gebruikt; %4$@ regels worden niet gebruikt.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
-"failed_updating_current_state_label" = "Filters have not been updated";
+"failed_updating_current_state_label" = "Filters zijn niet bijgewerkt";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "This license has been activated on the maximum number of devices.\nYou can unbind the license from unused devices in your personal account on the website: adguard.com";
+"login_max_computers_exceeded" = "Je licentie wordt momenteel gebruikt op het maximale aantal apparaten.\nJe kunt licenties vrij maken door ongebruikte apparaten te verwijderen uit je persoonlijke account op adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
-"action_extension_no_configuration_message_format" = "Before you can use this action extension, %1$@ has to perform an initial configuration. Launch the main %2$@ app to let it do so.";
+"action_extension_no_configuration_message_format" = "Voordat je deze uitbreiding kunt gebruiken moet %1$@ een initiële configuratie doen.\nStart de hoofd %2$@ app om dit te doen.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
-"content_blocker_disabled_format" = "Note that Content blocker is disabled. That means ads will not be filtered regardless of AdGuard settings. Please enable AdGuard Content blocker in Safari settings to start filtering.";
+"content_blocker_disabled_format" = "Het blokkeren van de inhoudt is gestopt. Dit betekent dat ads niet gefilterd worden ongeacht de AdGuard instellingen. Activeer AdGuard Content blocker in de Safari instellingen om filteren toe te staan.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "The hostname is not obtained. Perhaps the page has not been loaded yet.";
+"hostname_obtaining_error" = "Er is nog geen hostnaam bekend. Misschien is de pagina nog niet geladen.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
-"assistant_launching_unable" = "This website's security policy does not allow launching AdGuard Assistant.";
+"assistant_launching_unable" = "De beveiligingspolicy van deze website staat niet toe dat AdGuard Assistent wordt gestart.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "An unexpected error occurred while initializing Safari action extension. Please contact AdGuard Support if this happens again.";
+"support_error_safari_extension" = "Er is een onverwachte fout opgetreden bij het initiëren van de Safari uitbreiding. Neem contact op met AdGuard support indien dit weer gebeurt.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
-"common_warning_title" = "Warning";
+"common_warning_title" = "Waarschuwing";
 
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
-"filter_rules_maximum" = "You have exceeded the maximum number of filter rules.";
+"filter_rules_maximum" = "Het maximaal aantal filterregels is overschreden.";
 
 /* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Lifetime";
+"permanent_subscription_title" = "Permanent";
 
 /* (FiltersController) ON state in groups section */
-"on_state" = "ON";
+"on_state" = "Aan";
 
 /* (FiltersController) OFF state in groups section */
-"off_state" = "OFF";
+"off_state" = "Uit";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Homepage:";
+"homepage_title" = "Startpagina:";
 
 /* (FilterDetailsController) delete filter title */
-"delete_filter_title" = "Delete filter";
+"delete_filter_title" = "Filter verwijderen";
 
 /* (FilterDetailsController) delete filter message */
-"delete_filter_message" = "Are you sure you want to delete this filter?";
+"delete_filter_message" = "Ben je zeker om deze filter te verwijderen?";
 
 /* (AboutViewController) current app version format */
-"about_version_format" = "Version %@";
+"about_version_format" = "Versie %@";
 
 /* (AboutViewController) AdGuard copyright string */
-"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+"copyright_format" = "© 2009 – %@ Adguard Software Ltd.\nAlle rechten voorbehouden. AdGuard.com";
 
 /* (AboutViewController) Logout title */
-"common_logout" = "Logout";
+"common_logout" = "Afmelden";
 
 /* (AboutViewController) Login title */
-"common_license" = "License";
+"common_license" = "Licentie";
 
 /* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pay once and use AdGuard Premium features on all your iOS devices!";
+"getPro_screen_lifetime_text" = "Betaal eenmalig en gebruik AdGuard Premium functies op al je iOS toestellen!";
 
 /* (LoginController) incorrect email/passsword mesage */
-"bad_credentials_error" = "Incorrect email or password";
+"bad_credentials_error" = "Verkeerd email-adres of wachtwoord";
 
 /* (LoginController) disabled account mesage */
-"account_is_disabled_error" = "Account is blocked";
+"account_is_disabled_error" = "Account is geblokkeerd";
 
 /* (LoginController) locked account mesage */
-"account_is_locked_error" = "Account is temporarily locked";
+"account_is_locked_error" = "Account is tijdelijk geblokkeerd";
 
 /* (Confirm2faController) Invalid 2fa token on login */
-"invalid_2fa_code_error" = "Invalid 2FA token";
+"invalid_2fa_code_error" = "Ongeldig 2FA token";
 
 /* (NetworkSettingsController) title for wifi exceptions */
-"wifi_exceptions_title" = "Wi-Fi exceptions";
+"wifi_exceptions_title" = "Wifi uitzonderingen";
 
 /* (NetworkSettingsController) description for wifi exceptions */
-"wifi_exceptions_description" = "DNS protection will not work for Wi-Fi networks listed below";
+"wifi_exceptions_description" = "DNS bescherming werkt niet op de onderstaande wifi netwerken";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
-"add_exception_title" = "Add an exception";
+"add_exception_title" = "Voeg een uitzondering toe";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
-"filter_mobile_title" = "Filter Mobile data";
+"filter_mobile_title" = "Filter mobiele data";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
-"filter_wifi_title" = "Filter Wi-Fi";
+"filter_wifi_title" = "Filter wifi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "DNS protection while on Mobile data";
+"mobile_data_description" = "DNS bescherming wanneer je mobiele data gebruikt";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "DNS protection while on Wi-Fi";
+"wifi_data_description" = "DNS bescherming wanneer je op een wifi netwerk bent";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Allowlist";
+"allowlist_title" = "Toestemmingslijst";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Allowlist";
+"whitelist_title" = "Toestemmingslijst";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Blocklist";
+"dns_blacklist_title" = "Lijst met blokkeringen";
 
 /* (ListOfRulesModel) title for safari user filter */
-"safari_userfilter_title" = "Safari user rules";
+"safari_userfilter_title" = "Gebruiker regels in Safari";
 
 /* (ListOfRulesModel) title for export */
-"export" = "Export";
+"export" = "Exporteren";
 
 /* (ListOfRulesModel) title for Clear button*/
-"common_clear" = "Clear";
+"common_clear" = "Verwijder";
 
 /* (ListOfRulesModel) title for Save button */
-"common_save" = "Save";
+"common_save" = "Opslaan";
 
 /* (ListOfRulesModel) title for import */
-"import" = "Import";
+"import" = "Importeren";
 
 /* "Disabled" title */
-"disabled" = "Disabled";
+"disabled" = "Uitgeschakeld";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Remove from allowlist";
+"remove_from_whitelist" = "Verwijderen uit toestemmingslijst";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "Remove from blocklist";
+"remove_from_blacklist" = "Verwijderen uit blokkeringslijst";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Add to allowlist";
+"add_to_whitelist" = "Toevoegen aan toestemmingslijst";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "Add to blocklist";
+"add_to_blacklist" = "Toevoegen aan blokkeringslijst";
 
 /*(GroupsController) Security description without premium  */
-"security_description" = "Allow to block phishing sites and other dangerous domains. Available to Premium users";
+"security_description" = "Sta toe om phishing-sites en andere gevaarlijke domeinen te blokkeren. Beschikbaar voor Premium-gebruikers";
 
 /*(GroupsController) Custom filters description without premium  */
-"custom_description" = "Allows adding third-party filters. Available to Premium users";
+"custom_description" = "Mogelijkheid om filters van derden toe te voegen. Beschikbaar voor Premium-gebruikers";
 
 /*(LogCategory) audio video player category*/
-"audio_video_player" = "Audio and video players";
+"audio_video_player" = "Audio- en videospelers";
 
 /*(LogCategory) comments category*/
 "comments" = "Comments";
 
 /*(LogCategory) customer interaction category*/
-"customer_interaction" = "Customer interaction";
+"customer_interaction" = "Klanten interactie";
 
 /*(LogCategory) pornvertising category*/
 "pornvertising" = "Pornvertising";
 
 /*(LogCategory) advertising category*/
-"advertising" = "Advertising";
+"advertising" = "Advertenties";
 
 /*(LogCategory) essential category*/
-"essential" = "Essential";
+"essential" = "Essentiele";
 
 /*(LogCategory) site_analytics category*/
-"site_analytics" = "Site analytics";
+"site_analytics" = "Site gegevens";
 
 /*(LogCategory) social media category*/
 "social_media" = "Social media";
 
 /*(LogCategory) miscellaneous category*/
-"misc" = "Miscellaneous";
+"misc" = "Overig";
 
 /*(LogCategory) DNS category*/
 "cdn" = "CDN";
 
 /*(LogCategory) mobile analytics category*/
-"mobile_analytics" = "Mobile analytics";
+"mobile_analytics" = "Mobiele analyses";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
 
 /*(LogCategory) unknown category*/
-"unknown" = "Unknown";
+"unknown" = "Onbekend";
 
 /*(LogCategory) extensions category*/
-"extensions" = "Extensions";
+"extensions" = "Uitbreidingen";
 
 /*(ListOfRules) Select title */
-"common_select" = "Select";
+"common_select" = "Selecteren";
 
 /*(ListOfRules) Edit title */
-"common_edit" = "Edit";
+"common_edit" = "Bewerken";
 
 /*(ListOfRules) Delete title */
-"common_delete" = "Delete";
+"common_delete" = "Verwijderen";
 
 /*(ListOfRules) Select all title */
-"common_select_all" = "Select all";
+"common_select_all" = "Alles selecteren";
 
 /*(ListOfRules) Add domain title */
-"add_domain" = "Add a domain";
+"add_domain" = "Domein toevoegen";
 
 /*(ListOfRules) Add new rule title */
-"add_new_rule" = "Add a new rule";
+"add_new_rule" = "Nieuwe regel toevoegen";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
+"confirm_reset_text" = "Alle instellingen, inclusief gebruikersregels, DNS-beveiliging, interface en autorisatie-instellingen, worden gereset. Deze bewerking kan niet ongedaan worden gemaakt. Instellingen resetten?";
 
 /* (DnsLogContainerController) reset activity log title */
-"reset_activity_title" = "Reset activity log";
+"reset_activity_title" = "Activiteiten logboek resetten";
 
 /* (DnsLogContainerController) reset activity log message */
-"reset_activity_message" = "All activity records will be deleted!";
+"reset_activity_message" = "Alle activiteiten logs worden verwijderd!";
 
 /*(MainScreen) "24 hours" chart date type */
-"chart_24hours" = "24 hours";
+"chart_24hours" = "24 uren";
 
 /*(MainScreen) "today" chart date type */
-"chart_date_today" = "Today";
+"chart_date_today" = "Vandaag";
 
 /*(MainScreen) "7 days" chart date type */
-"chart_7days" = "7 days";
+"chart_7days" = "7 dagen";
 
 /*(MainScreen) "30 days" chart date type */
-"chart_30days" = "30 days";
+"chart_30days" = "30 dagen";
 
 /*(MainScreen) "all time" chart date type */
-"chart_alltime" = "All time";
+"chart_alltime" = "Totaal";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers are being updated ...";
+"loading_content_blockers" = "Content blockers worden bijgewerkt...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Loading filters ...";
+"loading_filters" = "Filters inlezen...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Rules are being converted  ...";
+"converting_rules" = "Regels worden geconverteerd...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
-"new_filter_title" = "New custom filter";
+"new_filter_title" = "Nieuw aangepaste filter";
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
-"new_dns_filter_title" = "New DNS filter";
+"new_dns_filter_title" = "Nieuw DNS filter";
 
 /*(NewCustomFilterDetailsController) title for editing custom filter */
-"edit_custom_filter_title" = "Edit custom filter";
+"edit_custom_filter_title" = "Aangepast filter bewerken";
 
 /*(NewCustomFilterDetailsController) add button title */
-"common_add" = "Add";
+"common_add" = "Toevoegen";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Protection is disabled";
+"protection_disabled" = "Bescherming is uitgeschakeld";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Protection is enabled";
+"protection_enabled" = "Bescherming is ingeschakeld";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and DNS protection";
+"complex_enabled" = "Safari en DNS bescherming";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari content blocking";
+"safari_enabled" = "Safari inhoud blocking";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "All protection modules are disabled";
+"complex_disabled" = "Alle beschermingsmodules zijn uitgezet";
 
 /*(TodayViewController) DNS protection is enabled text  */
-"system_enabled" = "DNS protection";
+"system_enabled" = "DNS bescherming";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d requests, %2$d encrypted";
+"widget_statistics" = "%1$d verzoeken, %2$d versleuteld";
 
 /*(DnsRequestDetailsController) message for info alert  */
-"whotrackme_message" = "This information was loaded from WhoTracksMe.com service";
+"whotrackme_message" = "Deze informatie is geladen vanuit de WhoTracksMe.com-service";
 
 /*(DnsRequestDetailsController) action title for info alert  */
-"common_action_more" = "More";
+"common_action_more" = "Meer";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "You've tried to add a duplicate filter. This filter is already on the list.";
+"filter_exists" = "Je hebt geprobeerd een filter twee keer toe te voegen. Dit filter staat al in de lijst.";
 
 /*(DnsFiltersController) DNS filters number title */
-"dns_filters_number_title" = "%@ rules are enabled";
+"dns_filters_number_title" = "%@ regels zijn ingeschakeld";
 
 /*(DnsFiltersController) DNS filters overlimit title */
-"dns_filters_overlimit_title" = "Too many rules are enabled: %@. Some of them will be disabled";
+"dns_filters_overlimit_title" = "Er zijn teveel regels ingeschakeld: %@. Enkele zullen worden uitgeschakeld";
 
 /*(DnsFiltersController) DNS filters overlimit title */
-"dns_filters_notification_title" = "Turn off some filters for correct work";
+"dns_filters_notification_title" = "Schakel enkele filters uit voor een goede werking";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_blocked" = "Blocked";
+"dns_request_status_blocked" = "Geblokkeerd";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_processed" = "Processed";
+"dns_request_status_processed" = "Verwerkt";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_encrypted" = "Encrypted";
+"dns_request_status_encrypted" = "Versleuteld";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_allowlisted" = "Allowed";
+"dns_request_status_allowlisted" = "Toegestaan";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "added to the Allowlist";
+"dns_request_user_status_added_to_whitelist" = "aan de toestemmingslijst toegevoegd";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "added to the Blocklist";
+"dns_request_user_status_added_to_blacklist" = "aan de blokkeerlijst toegevoegd";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "removed from the Allowlist";
+"dns_request_user_status_removed_from_whitelist" = "verwijderd van de toestemmingslijst";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "removed from the Blocklist";
+"dns_request_user_status_removed_from_blacklist" = "verwijderd van de blokkeerlijst";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Open the <b>settings</b>";
+"onboarding_first_step_text" = "Open de <b>instellingen</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>\"Content blockers\"</b> menu item";
+"onboarding_second_step_text" = "Tik op <b> Safari </b> en kies de <b> \"Content blockers\" </b> menu-item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and come back to our app!";
+"onboarding_third_step_text" = "<b> Schakel alle content blockers in </b> en keer terug naar onze app!";
 
 /* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "System DNS";
+"default_dns_server_name" = "Systeem DNS";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Use system default DNS servers provided by your Internet service provider";
+"default_dns_server_description" = "Gebruik de standaard DNS-servers van uw internetprovider";
 
 /* (BlockRequestController) Block request title */
-"block_request" = "Block request";
+"block_request" = "Verzoek blokkeren";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Add domain to the Allowlist";
+"whitelist_request" = "Voeg domein toe aan de Toestemmingslijst";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
-"video_tutorial_title" = "Video Tutorial";
+"video_tutorial_title" = "Video zelfstudie";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "You have entered the invalid upstream";
+"invalid_upstream_message" = "Je hebt een ongeldige upstream ingevoerd";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "System Blocklist";
+"system_blacklist" = "Systeem blokkeerlijst";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "System Allowlist";
+"system_whitelist" = "Systeem toestemmingslijst";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Details";
 
 /* (DnsRequestDetailsController) "General" title for section header */
-"general_header" = "General";
+"general_header" = "Algemeen";
 
 /* (DnsRequestDetailsController) "Filtering" title for section header */
-"filtering_header" = "Filtering";
+"filtering_header" = "Filteren";
 
 /* (DnsRequestDetailsController) "DNS" title for section header */
 "dns_header" = "DNS";
 
 /* (DnsRequestDetailsController) "Category" title for cell */
-"category_title" = "Category";
+"category_title" = "Categorie";
 
 /* (DnsRequestDetailsController) "Name" title for cell */
-"name_title" = "Name";
+"name_title" = "Naam";
 
 /* (DnsRequestDetailsController) "Website" title for cell */
 "website_title" = "Website";
 
 /* (DnsRequestDetailsController) "Domain" title for cell */
-"domain_title" = "Domain";
+"domain_title" = "Domein";
 
 /* (DnsRequestDetailsController) "Server" title for cell */
 "server_title" = "Server";
@@ -710,13 +701,13 @@
 "status_title" = "Status";
 
 /* (DnsRequestDetailsController) "Time" title for cell */
-"time_title" = "Time";
+"time_title" = "Tijd";
 
 /* (DnsRequestDetailsController) "Size" title for cell */
-"size_title" = "Size";
+"size_title" = "Grootte";
 
 /* (DnsRequestDetailsController) "Elapsed" title for cell */
-"elapsed_title" = "Elapsed";
+"elapsed_title" = "Verstreken";
 
 /* (DnsRequestDetailsController) "Type" title for cell */
 "type_title" = "Type";
@@ -728,70 +719,70 @@
 "dns_upstream_title" = "DNS upstream";
 
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
-"dns_answer_title" = "DNS answer";
+"dns_answer_title" = "DNS antwoord";
 
 /* (DnsRequestDetailsController) "Matched filter" title for cell */
-"matched_filter_title" = "Matched filter";
+"matched_filter_title" = "Overeenkomstige filter";
 
 /* (DnsRequestDetailsController) "Matched rules" title for cell */
-"matched_rule_title" = "Matched rule";
+"matched_rule_title" = "Overeenkomstige regel";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
-"original_answer_title" = "Original answer";
+"original_answer_title" = "Oorspronkelijk antwoord";
 
 /* (DnsRequestDetailsController) - empty dns answer title */
-"empty_dns_answer" = "Empty";
+"empty_dns_answer" = "Leeg";
 
 /* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Failed to send your feedback";
+"feedback_sending_failed_title" = "Feedback sturen mislukt";
 
 /* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Something went wrong";
+"feedback_sending_failed_message" = "Er ging iets verkeerd";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"introduction_license_agreement" = "Door het gebruik ga je akkoord met de<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
 /* (ActivityViewController) - Requests alert title */
-"requests_info_alert_title" = "Requests";
+"requests_info_alert_title" = "Verzoeken";
 
 /* (ActivityViewController) - Requests alert message */
-"requests_info_alert_message" = "Every time you visit a website, a request is sent. Websites might send hidden requests and leak personal data. It’s useful to know the total number of requests to realize the scope of this problem.";
+"requests_info_alert_message" = "Bij ieder website bezoek wordt een verzoek verstuurd. Websites kunnen verborgen verzoeken versturen en persoonlijke gegevens lekken. Het is nuttig om dit aantal verzoeken te kennen om de omvang van dit probleem te beseffen.";
 
 /* (ActivityViewController) - encrypted alert title */
-"encrypted_info_alert_title" = "Encrypted requests";
+"encrypted_info_alert_title" = "Versleutelde verzoeken";
 
 /* (ActivityViewController) - encrypted alert message */
-"encrypted_info_alert_message" = "The number of encrypted DNS requests. You need to use an encrypted DNS server to have your DNS traffic encrypted.";
+"encrypted_info_alert_message" = "Aantal versleutelde DNS verzoeken. Je moet een versleutelde DNS server gebruiken om je DNS verkeer te versleutelen.";
 
 /* (ActivityViewController) - Average time title */
-"average_info_alert_title" = "Average time";
+"average_info_alert_title" = "Gemiddelde tijd";
 
 /* (ActivityViewController) - Average time message */
-"average_info_alert_message" = "Average time it takes to process a DNS request. The faster DNS server you use, the lower this would be.";
+"average_info_alert_message" = "Gemiddelde tijd om een DNS verzoek te verwerken. Hoe sneller de gebruikte DNS server, hoe lager deze waarde.";
 
 /* (ActivityViewController) - Companies alert title */
-"companies_info_alert_title" = "Number of companies";
+"companies_info_alert_title" = "Aantal bedrijven";
 
 /* (ActivityViewController) - Companies alert message */
-"companies_info_alert_message" = "This is the number of companies to which requests have been forwarded.";
+"companies_info_alert_message" = "Dit is het aantal bedrijven waarnaar verzoeken zijn doorgestuurd.";
 
 /* (ActivityViewController) - All requests alert action */
-"all_requests_alert_action" = "All requests";
+"all_requests_alert_action" = "Alle verzoeken";
 
 /* (ActivityViewController) - Blocked only alert action */
-"blocked_only_alert_action" = "Blocked only";
+"blocked_only_alert_action" = "Alleen geblokkeerde";
 
 /* (ActivityViewController) - Allowed only alert action */
-"allowed_only_alert_action" = "Allowed only";
+"allowed_only_alert_action" = "Alleen toegestane";
 
 /* (ActivityViewController) - None message when there is no statistics */
-"none_message" = "None";
+"none_message" = "Geen";
 
 /* (DnsLogContainerController) - Activity title */
-"activity_title" = "Activity";
+"activity_title" = "Activiteit";
 
 /* (MostActiveCompaniesController) - Requests number label */
-"requests_number" = "%d requests";
+"requests_number" = "%d verzoeken";
 
 
 // MARK: - Strings for VoiceOver -
@@ -799,60 +790,60 @@
 /* (MainTabBarController) Main page tab for VoiceOver*/
 
 
-"main_page_tab" = "Main screen";
+"main_page_tab" = "Hoofdpagina";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
-"protection_page_tab" = "Protection screen";
+"protection_page_tab" = "Beschermingspagina";
 
 /* (MainTabBarController) Activity page tab for VoiceOver*/
-"activity_page_tab" = "Activity screen";
+"activity_page_tab" = "Activiteitspagina";
 
 /* (MainTabBarController) Settings page tab for VoiceOver*/
-"settings_page_tab" = "Settings screen";
+"settings_page_tab" = "Instellingen pagina";
 
 
 // MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
 
-"safari_protection_enabled_voiceover" = "Safari protection enabled";
+"safari_protection_enabled_voiceover" = "Safari bescherming ingeschakeld";
 
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
-"safari_protection_disabled_voiceover" = "Safari protection disabled";
+"safari_protection_disabled_voiceover" = "Safari bescherming uitgeschakeld";
 
 /* (MainPageController) DNS protection enabled title for VoiceOver*/
-"tracking_protection_enabled_voiceover" = "DNS protection enabled";
+"tracking_protection_enabled_voiceover" = "DNS bescherming ingeschakeld";
 
 /* (MainPageController) DNS protection disabled title for VoiceOver*/
-"tracking_protection_disabled_voiceover" = "DNS protection disabled";
+"tracking_protection_disabled_voiceover" = "DNS bescherming uitgeschakeld";
 
 /* (MainPageController) update filters title for VoiceOver*/
-"update_filters_voiceover" = "Update filters";
+"update_filters_voiceover" = "Filters updaten";
 
 /* (MainPageController) requests number title for VoiceOver*/
-"requests_number_voiceover" = "Requests number";
+"requests_number_voiceover" = "Aantal verzoeken";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"encrypted_number_voiceover" = "The number of encrypted DNS requests";
+"encrypted_number_voiceover" = "Aantal versleutelde verzoeken";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"elapsed_time_voiceover" = "Average time to process a DNS request";
+"elapsed_time_voiceover" = "Gemiddelde tijd om een DNS verzoek te verwerken";
 
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
-"enable_system_protection_voiceover" = "Enable DNS protection";
+"enable_system_protection_voiceover" = "DNS beveiliging inschakelen";
 
 
 // MARK: - GetProTableController
 /* (GetProTableController) Choose your subscription type for VoiceOver*/
 
-"choose_sub_voiceover" = "Choose your subscription type";
+"choose_sub_voiceover" = "Abonnement kiezen";
 
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
 
-"enter_email_voiceover" = "Enter your email here";
+"enter_email_voiceover" = "Email adres hier invoeren";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
-"enter_password_voiceover" = "Enter your password here";
+"enter_password_voiceover" = "Wachtwoord hier invoeren";

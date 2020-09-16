@@ -14,9 +14,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 rule enabled</string>
+        <string>1 regel ingesteld</string>
         <key>other</key>
-        <string>%d rules enabled</string>
+        <string>%d regels ingesteld</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -30,9 +30,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>1 filter enabled</string>
+        <string>1 filter ingesteld</string>
         <key>other</key>
-        <string>%d filters enabled</string>
+        <string>%d filters ingesteld</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>
@@ -46,9 +46,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One day free full access</string>
+        <string>1 dag volledig gratis toegang</string>
         <key>other</key>
-        <string>%d-day free full access</string>
+        <string>%d dagen volledig gratis toegang</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -62,9 +62,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One week free full access</string>
+        <string>1 week volledig gratis toegang</string>
         <key>other</key>
-        <string>%d-week free full access</string>
+        <string>%d weken volledig gratis toegang</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -78,9 +78,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One month free full access</string>
+        <string>1 maand volledig gratis toegang</string>
         <key>other</key>
-        <string>%d-months free full access</string>
+        <string>%d maanden volledig gratis toegang</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -94,9 +94,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One year free full access</string>
+        <string>1 jaar volledig gratis toegang</string>
         <key>other</key>
-        <string>%d-year free full access</string>
+        <string>%d jaar volledig gratis toegang</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -110,9 +110,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one day free trial</string>
+        <string>Start je eerste 1-dags gratis proefperiode</string>
         <key>other</key>
-        <string>Start your first %d days free trial</string>
+        <string>Start je eerste %d-daagse gratis proefperiode</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -126,9 +126,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one week free trial</string>
+        <string>Start je eerste 1 week gratis proefperiode</string>
         <key>other</key>
-        <string>Start your first %d weeks free trial</string>
+        <string>Start je eerste %d weken gratis proefperiode</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -142,9 +142,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one month free trial</string>
+        <string>Start je eerste 1 maand gratis proefperiode</string>
         <key>other</key>
-        <string>Start your first %d months free trial</string>
+        <string>Start je eerste %d maanden gratis proefperiode</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -158,9 +158,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start your first one year free trial</string>
+        <string>Start je eerste 1 jaar gratis proefperiode</string>
         <key>other</key>
-        <string>Start your first %d years free trial</string>
+        <string>Start je eerste %d jaar gratis proefperiode</string>
       </dict>
     </dict>
     <key>trial_period_days</key>
@@ -174,9 +174,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One day</string>
+        <string>Een dag</string>
         <key>other</key>
-        <string>%d days</string>
+        <string>%d dagen</string>
       </dict>
     </dict>
     <key>trial_period_weeks</key>
@@ -190,9 +190,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One week</string>
+        <string>Een week</string>
         <key>other</key>
-        <string>%d weeks</string>
+        <string>%d weken</string>
       </dict>
     </dict>
     <key>trial_period_months</key>
@@ -206,9 +206,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One month</string>
+        <string>Een maand</string>
         <key>other</key>
-        <string>%d months</string>
+        <string>%d maanden</string>
       </dict>
     </dict>
     <key>trial_period_years</key>
@@ -222,9 +222,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>One year</string>
+        <string>Een jaar</string>
         <key>other</key>
-        <string>%d years</string>
+        <string>%d jaren</string>
       </dict>
     </dict>
     <key>trial_description_label_days</key>
@@ -238,9 +238,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Then %2$@ per day</string>
+        <string>Daarna %1$@ per dag</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d days</string>
+        <string>Daarna %1$@ per %2$d dagen</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -254,9 +254,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Then %2$@ per week</string>
+        <string>Daarna %1$@ per week</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d weeks</string>
+        <string>Daarna %1$@ per %2$d weken</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -270,9 +270,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Then %2$@ per month</string>
+        <string>Daarna %2$@ per maand</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d months</string>
+        <string>Daarna %2$@ per %1$d maanden</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -286,9 +286,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Then %2$@ per year</string>
+        <string>Daarna %1$@ per jaar</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d years</string>
+        <string>Daarna %1$@ per %2$d jaren</string>
       </dict>
     </dict>
   </dict>

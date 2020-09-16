@@ -1,57 +1,56 @@
-
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Code from the authentication app:";
+"53G-qY-SZ5.text" = "Code van authenticatie app:";
 
 /* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
-"6P7-a5-VLL.text" = "Security filters";
+"6P7-a5-VLL.text" = "Beveiligingsfilters";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "Logout";
+"70b-CS-wqh.title" = "Uitloggen";
 
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "All Premium features are available";
+"FLH-Qd-Atk.text" = "Alle premium features zijn beschikbaar";
 
 /* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
-"J8s-sG-FKu.text" = "Login";
+"J8s-sG-FKu.text" = "Aanmelden";
 
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
-"KOP-vw-FG7.text" = "Set your own rules";
+"KOP-vw-FG7.text" = "Eigen regels instellen";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
-"LJj-cc-Ko5.text" = "Email:";
+"LJj-cc-Ko5.text" = "Voer hier je e-mailadres in";
 
 /* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOCK MORE\nADS & TRACKERS";
+"NlM-RH-NgY.text" = "BLOKKEER MEER\nADVERTENTIES & TRACKERS";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
-"P6N-OK-fHG.text" = "Password:";
+"P6N-OK-fHG.text" = "Wachtwoord:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "GO TO MY ACCOUNT";
+"Rxf-sg-Wfk.normalTitle" = "Ga naar mijn account";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Login";
+"UaA-JQ-kV4.title" = "Aanmelden";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Block phishing, scam and crypto-jacking";
+"YIm-R8-cxj.text" = "Blokkeer phishing, scams en crypto-jacking";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "LOGIN";
+"bUa-fF-AXO.normalTitle" = "AANMELDEN";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Value your privacy";
+"fwp-I7-Qtl.text" = "Neem je privacy serieus";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "DNS protection";
+"gLL-6o-GGa.text" = "DNS bescherming";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "Premium is activated";
+"hjF-1C-hFa.text" = "Premium is geactiveerd";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "Restore purchase";
+"mR4-EU-MFx.normalTitle" = "Aankopen herstellen";
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
-"ppx-jv-rek.text" = "Custom filters";
+"ppx-jv-rek.text" = "Aangepaste filters";
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
-"rrj-Gm-LCJ.normalTitle" = "CONFIRM";
+"rrj-Gm-LCJ.normalTitle" = "BEVESTIGEN";

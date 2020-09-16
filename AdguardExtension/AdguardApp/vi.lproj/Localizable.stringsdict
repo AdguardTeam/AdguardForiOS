@@ -13,10 +13,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>1 rule enabled</string>
         <key>other</key>
-        <string>%d rules enabled</string>
+        <string>Đã bật %d quy tắc</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -29,10 +27,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>1 filter enabled</string>
         <key>other</key>
-        <string>%d filters enabled</string>
+        <string>Đã bật %d bộ lọc</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>
@@ -45,10 +41,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One day free full access</string>
         <key>other</key>
-        <string>%d-day free full access</string>
+        <string>Miễn phí %d ngày truy cập mọi tính năng</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -61,10 +55,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One week free full access</string>
         <key>other</key>
-        <string>%d-week free full access</string>
+        <string>Miễn phí %d tuần truy cập mọi tính năng</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -77,10 +69,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One month free full access</string>
         <key>other</key>
-        <string>%d-months free full access</string>
+        <string>Miễn phí %d tháng truy cập mọi tính năng</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -93,10 +83,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One year free full access</string>
         <key>other</key>
-        <string>%d-year free full access</string>
+        <string>Miễn phí %d năm truy cập mọi tính năng</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -109,10 +97,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one day free trial</string>
         <key>other</key>
-        <string>Start your first %d days free trial</string>
+        <string>Bắt đầu dùng thử miễn phí trong %d ngày đầu tiên của bạn</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -125,10 +111,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one week free trial</string>
         <key>other</key>
-        <string>Start your first %d weeks free trial</string>
+        <string>Bắt đầu dùng thử miễn phí trong %d tuần đầu tiên của bạn</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -141,10 +125,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one month free trial</string>
         <key>other</key>
-        <string>Start your first %d months free trial</string>
+        <string>Bắt đầu dùng thử miễn phí trong %d tháng đầu tiên của bạn</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -157,10 +139,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one year free trial</string>
         <key>other</key>
-        <string>Start your first %d years free trial</string>
+        <string>Bắt đầu dùng thử miễn phí trong %d năm đầu tiên của bạn</string>
       </dict>
     </dict>
     <key>trial_period_days</key>
@@ -173,10 +153,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One day</string>
         <key>other</key>
-        <string>%d days</string>
+        <string>%d ngày</string>
       </dict>
     </dict>
     <key>trial_period_weeks</key>
@@ -189,10 +167,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One week</string>
         <key>other</key>
-        <string>%d weeks</string>
+        <string>%d tuần</string>
       </dict>
     </dict>
     <key>trial_period_months</key>
@@ -205,10 +181,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One month</string>
         <key>other</key>
-        <string>%d months</string>
+        <string>%d tháng</string>
       </dict>
     </dict>
     <key>trial_period_years</key>
@@ -221,10 +195,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One year</string>
         <key>other</key>
-        <string>%d years</string>
+        <string>%d/năm</string>
       </dict>
     </dict>
     <key>trial_description_label_days</key>
@@ -237,10 +209,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per day</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d days</string>
+        <string>Sau đó %2$@ trên %1$d ngày</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -253,10 +223,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per week</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d weeks</string>
+        <string>Sau đó %2$@ trên %1$d tuần</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -269,10 +237,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per month</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d months</string>
+        <string>Sau đó %2$@ trên %1$d tháng</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -285,10 +251,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per year</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d years</string>
+        <string>Sau đó %2$@ trên %1$d năm</string>
       </dict>
     </dict>
   </dict>

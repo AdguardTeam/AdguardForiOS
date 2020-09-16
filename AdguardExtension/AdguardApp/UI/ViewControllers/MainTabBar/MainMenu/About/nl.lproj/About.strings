@@ -1,15 +1,14 @@
-
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
-"Jbp-5W-y9v.normalTitle" = "Privacy Policy";
+"Jbp-5W-y9v.normalTitle" = "Privacybeleid";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
-"hE0-Ag-02J.text" = "About";
+"hE0-Ag-02J.text" = "Over";
 
 /* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
-"htU-yE-FEi.normalTitle" = "Read more about the product";
+"htU-yE-FEi.normalTitle" = "Meer lezen over het produkt";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
-"jMW-e4-GbU.title" = "Login";
+"jMW-e4-GbU.title" = "Aanmelden";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "EULA";

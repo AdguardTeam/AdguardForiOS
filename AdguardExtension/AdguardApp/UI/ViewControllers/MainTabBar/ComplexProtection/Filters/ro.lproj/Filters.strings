@@ -1,75 +1,74 @@
-
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
-"2wy-vg-qvr.text" = "Add a filter";
+"2wy-vg-qvr.text" = "Nou filtru";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
-"3WM-jW-br8.text" = "Add a filter";
+"3WM-jW-br8.text" = "Nou filtru";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
-"6WB-a0-8YE.text" = "Safari protection";
+"6WB-a0-8YE.text" = "Protecție Safari";
 
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
-"Cyn-cw-Zrm.text" = "Name:";
+"Cyn-cw-Zrm.text" = "Nume:";
 
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
-"Fwl-LI-5Fu.placeholder" = "https://example.com";
+"Fwl-LI-5Fu.placeholder" = "https://exemplu.com";
 
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard doesn’t work on the sites from this list";
+"Gg8-4u-qvU.text" = "AdGuard nu funcționează pe site-urile din această listă";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
-"Lq2-mi-McV.text" = "Filters";
+"Lq2-mi-McV.text" = "Filtre";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
-"NsT-wt-1hd.text" = "New custom filter";
+"NsT-wt-1hd.text" = "Filtru adaptat nou";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "CANCEL";
+"OpB-AR-Og7.normalTitle" = "ANULARE";
 
 /* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "This module blocks ads and tracking on websites opened in Safari";
+"QHZ-sJ-wTL.text" = "Acest modul blochează reclame și urmăriri pe site-uri deschise în Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Rules count: ";
+"RJU-32-r8h.text" = "Număr de reguli: ";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
-"UR2-d4-zYf.text" = "Updated";
+"UR2-d4-zYf.text" = "Actualizat";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
-"VCK-db-aeg.text" = "User rules";
+"VCK-db-aeg.text" = "Reguli utilizator";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
-"Ve5-DF-RNB.text" = "Website";
+"Ve5-DF-RNB.text" = "Site web";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
-"Z16-OR-tjl.text" = "Filter URL:";
+"Z16-OR-tjl.text" = "URL filtru:";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
-"cTI-39-Vwx.text" = "Version";
+"cTI-39-Vwx.text" = "Versiune";
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Add custom filter lists here";
+"eAd-RZ-bHN.text" = "Adaugă aici liste de filtre adaptate";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Allowlist";
+"f3z-Yh-zY2.text" = "Lista albă";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
-"kCb-lJ-BLL.normalTitle" = "ADD";
+"kCb-lJ-BLL.normalTitle" = "NOU";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "CANCEL";
+"mEm-ll-QZR.normalTitle" = "ANULARE";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
-"mTM-IO-iFw.text" = "Filters";
+"mTM-IO-iFw.text" = "Filtre";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "NEXT";
+"nch-wu-mKC.normalTitle" = "URMĂTOR";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
-"t8x-PU-hFK.text" = "Homepage: ";
+"t8x-PU-hFK.text" = "Pagină principală: ";
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
-"wzJ-ge-NyI.text" = "Rules count:";
+"wzJ-ge-NyI.text" = "Număr de reguli:";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Enter filter name:";
+"zcB-eh-Ou4.placeholder" = "Introduceți numele filtrului:";

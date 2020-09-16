@@ -1,18 +1,17 @@
-
 /* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
-"0yx-Eh-Ah4.text" = "Block an element on this page";
+"0yx-Eh-Ah4.text" = "Blocați un element din pagină";
 
 /* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
-"Wrl-xu-3kv.text" = "Contact Support";
+"Wrl-xu-3kv.text" = "Contactați Asistența";
 
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
-"Znm-Yl-fWN.text" = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page";
+"Znm-Yl-fWN.text" = "Tapați aici pentru a utiliza un instrument de eliminat reclame ratate sau orice element nedorit pe pagină";
 
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
-"eVN-fj-ATQ.text" = "Enable on this page";
+"eVN-fj-ATQ.text" = "Activați pe această pagină";
 
 /* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "CLOSE";
+"fxW-Cr-iPW.normalTitle" = "ÎNCHIDE";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
-"kuu-kI-Ott.text" = "Report an issue on this page";
+"kuu-kI-Ott.text" = "Raportați o problemă cu pagina";
