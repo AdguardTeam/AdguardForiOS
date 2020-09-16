@@ -204,13 +204,13 @@
                                                                     </constraint>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                <inset key="titleEdgeInsets" minX="8" minY="6" maxX="8" maxY="6"/>
+                                                                <inset key="titleEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
                                                                 <state key="normal" title="TRY FOR FREE">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                                 </state>
                                                                 <variation key="heightClass=regular-widthClass=compact">
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
