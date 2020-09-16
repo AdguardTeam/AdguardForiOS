@@ -1,0 +1,134 @@
+/* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
+"03E-rd-Slw.normalTitle" = "Obișnuit";
+
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
+"0ZJ-BI-849.text" = "Setări rețea";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
+"3BA-9g-I6J.placeholder" = "Nume";
+
+/* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
+"3lB-T7-fSO.text" = "Setare DNS personalizat";
+
+/* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
+"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
+"6e9-sP-YMb.normalTitle" = "SALVAȚI";
+
+/* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
+"84p-U2-sd8.text" = "AdGuard nu va bloca domeniile din această listă";
+
+/* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
+"AOm-kV-l4z.text" = "AdGuard va bloca domeniile din această listă";
+
+/* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
+"B2l-7z-M2N.normalTitle" = "SALVAȚI ȘI ALEGEȚI";
+
+/* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
+"DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
+
+/* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
+"FUx-XP-SzD.text" = "Setări rețea avansate";
+
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
+"LTC-71-V9S.text" = "Server DNS";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
+"NX4-vI-1WP.text" = "Nou filtru";
+
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Acest modul poate bloca domeniile de urmărire și cripta traficul dvs. DNS.";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
+"QYv-iX-uIo.text" = "Protecție DNS";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
+"Uem-fP-tai.normalTitle" = "ÎNCERCAȚI GRATUIT";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
+"Wml-J6-ced.text" = "Lista albă";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
+"ZdD-yx-6ph.normalTitle" = "ANULARE";
+
+/* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
+"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// or tls://";
+
+/* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
+"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
+
+/* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
+"c9G-jn-5ym.text" = "Server DNS";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
+"csw-3H-3tU.text" = "Server";
+
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
+"d1u-rO-z2K.text" = "Nou server DNS personalizat";
+
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
+"dW3-zk-BPr.text" = "Adresă server DNS";
+
+/* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
+"e4h-eF-AOa.text" = "Nume server";
+
+/* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
+"f57-S8-QfF.text" = "Editare DNS personalizat";
+
+/* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
+"hh1-EV-7KD.normalTitle" = "DNSCrypt";
+
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
+"iPl-vI-lX5.text" = "Setări rețea";
+
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Vă puteți îmbunătăți intimitatea online criptând traficul DNS. Pentru aceasta, alegeți unul din furnizorii DNS recomandați.";
+
+/* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
+"ihd-7R-RfE.text" = "Lista neagră";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
+"ks4-fm-Ctr.normalTitle" = "ANULARE";
+
+/* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
+"mBR-7g-DjT.placeholder" = "Nume";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
+"mN8-Uh-sLQ.text" = "Site web";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
+"oSP-2V-qCA.normalTitle" = "ȘTERGE";
+
+/* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
+"pC4-RU-DaD.text" = "Filtrare DNS";
+
+/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
+"pXa-VP-4yy.text" = "Filtre DNS";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
+"pY3-X6-fFy.text" = "Filtre de protecție, DNS privat, filtre adaptate etc.";
+
+/* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
+"plc-eu-aXh.text" = "Filtre DNS";
+
+/* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
+"pzP-ns-QSS.text" = "Nume de server";
+
+/* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Personalizați-vă traficul DNS aplicând reguli proprii.";
+
+/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
+"seX-mS-3mU.text" = "Adresă server DNS";
+
+/* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
+"uCw-Mi-HiJ.title" = "Alege";
+
+/* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
+"vDF-5j-uJn.text" = "Filtrare DNS";
+
+/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "Alege protocol";
+
+/* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
+"xiD-h8-XrC.text" = "Filtre și excepții";

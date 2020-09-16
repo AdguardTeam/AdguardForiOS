@@ -1,0 +1,74 @@
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
+"2wy-vg-qvr.text" = "Дадаць фільтр";
+
+/* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
+"3WM-jW-br8.text" = "Дадаць фільтр";
+
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "Абарона Safari";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
+"Cyn-cw-Zrm.text" = "Назва:";
+
+/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
+"Fwl-LI-5Fu.placeholder" = "https://example.com";
+
+/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard не працуе на сайтах з гэтага спіса";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
+"Lq2-mi-McV.text" = "Фільтры";
+
+/* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
+"NsT-wt-1hd.text" = "Новы фільтр";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "АДМЕНА";
+
+/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "Гэты модуль блакуе рэкламу і асочванне на сайтах, адкрытых у Safari";
+
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Колькасць правілаў: ";
+
+/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
+"UR2-d4-zYf.text" = "Абноўлена";
+
+/* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
+"VCK-db-aeg.text" = "Карыстацкія правілы";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
+"Ve5-DF-RNB.text" = "Ўэб-сайт";
+
+/* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
+"Z16-OR-tjl.text" = "URL фільтра:";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
+"cTI-39-Vwx.text" = "Версія";
+
+/* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
+"eAd-RZ-bHN.text" = "Дадайце тут уласныя спісы фільтраў";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "Белы спіс";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "ДАДАЦЬ";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "АДМЕНА";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
+"mTM-IO-iFw.text" = "Фільтры";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "ДАЛЕЙ";
+
+/* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
+"t8x-PU-hFK.text" = "Хатняя старонка: ";
+
+/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
+"wzJ-ge-NyI.text" = "Колькасць правілаў:";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Увядзіце назву фільтра:";

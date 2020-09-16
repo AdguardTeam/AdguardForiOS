@@ -2,7 +2,7 @@
 "1rj-wD-aeH.normalTitle" = "AGGIUNGI";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "crittografato";
+"4IJ-xy-hky.normalTitle" = "crittografate";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Attività";
@@ -78,7 +78,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "uni-H6-XNc.text" = "Dettagli richiesta";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
-"wt5-4Q-CTq.normalTitle" = "crittografato";
+"wt5-4Q-CTq.normalTitle" = "crittografate";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
 "y8j-ib-ZgR.text" = "Bloccare richiesta";

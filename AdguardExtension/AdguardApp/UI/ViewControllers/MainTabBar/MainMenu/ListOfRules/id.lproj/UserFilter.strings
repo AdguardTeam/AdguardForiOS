@@ -1,0 +1,29 @@
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "BATAL";
+
+/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "Aturan telah ditambahkan ke filter pengguna.";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "SIMPAN";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
+"EH6-Zr-YRP.text" = "Edit";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
+"HFf-Yp-hjB.normalTitle" = "Pilih";
+
+/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "BUANG";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
+"U2P-9b-f6k.normalTitle" = "BATAL";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "TAMBAH";
+
+/* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
+"x7r-Ln-XiZ.text" = "Domain:";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "OK";

@@ -1,0 +1,56 @@
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Mã từ ứng dụng xác thực:";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Bộ lọc bảo vệ";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Đăng xuất";
+
+/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Tất cả tính năng cao cấp đều khả dụng";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Đăng nhập";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Cài đặt luật của bạn";
+
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "Địa chỉ thư điện tử:";
+
+/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "Chặn thêm quảng cáo và theo dõi";
+
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "Mật khẩu:";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "Đi đến tài khoản của tôi";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Đăng nhập";
+
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Chặn hành vi lừa đảo, chiếm đoạt thông tin và khai thác tiền mã hóa trái phép";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "Đăng nhập";
+
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Bảo vệ khỏi sự theo dõi trên toàn hệ thống";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Bảo vệ DNS";
+
+/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Tính năng cao cấp được kích hoạt";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Khôi phục mua hàng";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Các bộ lọc tùy chỉnh";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Xác nhận";

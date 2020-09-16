@@ -1,0 +1,852 @@
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Terjadi kesalahan yang tidak terduga. Silakan hubungi tim dukungan.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Tidak dapat mengonversi aturan penyaring. Terjadi kesalahan yang tidak terduga. Silakan hubungi tim dukungan.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Tidak dapat menginisialisasi konverter ke format JSON!";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Batal";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "Tidak dapat mengonversi aturan penyaring. Teks aturan tidak valid.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Tidak dapat mengonversi aturan penyaring pengguna. Salah satu aturan mengandung kesalahan. Periksa aturan di sebelah posisi kursor saat ini.";
+
+/* Alert title. On error. */
+"common_error_title" = "Kesalahan";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Penyaring tidak dapat dimuat ke Safari. Oleh karena itu, perubahan terkini Anda tidak diterapkan.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Penyaring tidak dapat dimuat ke Safari. Cobalah untuk menghapus aturan Anda dan daftar putih, atau ubah set penyaring yang digunakan.";
+
+/* NO Button caption in alert */
+"common_action_no" = "TIDAK";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Daftar Putih (terbalik)";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Menerapkan perubahan...";
+
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ md";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ d";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@Jt";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@Rb";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100Jt";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10Rb";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Penyaring Pengguna";
+
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Masukkan aturan kustom Anda di sini, pisahkan dengan jeda baris";
+
+/* YES Button caption in alert */
+"common_action_yes" = "YA";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Perlindungan diaktifkan";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Beberapa pemblokir konten dinonaktifkan";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Perlindungan dinonaktifkan";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Dapatkan berlangganan";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "BELI";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Kehilangan kata sandi?";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "Akun premium Anda telah kedaluwarsa";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Perhatian";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "Anda telah berhasil masuk ke akun AdGuard Anda, tetapi tidak ada lisensi untuk mengaktivasi versi premium.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "Anda telah berhasil masuk ke akun AdGuard Anda, AdGuard for iOS premium sudah berhasil diaktifkan.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "Anda telah berhasil masuk ke akun AdGuard Anda, tetapi lisensi yang memungkinkan Anda untuk mengaktifkan versi premium telah kedaluwarsa.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "Terjadi kesalahan saat mencoba memulihkan pembelian.";
+
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Pembelian telah dipulihkan! Versi premium AdGuard untuk iOS telah diaktifkan.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "Tidak ada pembelian untuk dipulihkan";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Pembelian telah berhasil diselesaikan! Versi premium AdGuard untuk iOS telah diaktifkan.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "Terjadi kesalahan saat memproses pembelian Anda.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "Kustom";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "Filter diaktifkan: %d/%d";
+
+/* (GroupsController) Filters update time format */
+"filter_date_format" = "Filter diperbarui: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Masukkan aturan kustom Anda di sini<br>Baca <a href=\"%@\">catatan mengenai aturan syntax</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Masukkan nama domain di sini. AdGuard akan menonaktifkan pemfilteran di Safari untuk situs-situs web ini.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "Masukkan nama domain di sini. AdGuard akan mengaktifkan pemfilteran di Safari untuk situs-situs web ini.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Masukkan nama domain di sini pisahkan pakai jeda baris. AdGuard akan membolehkan semua koneksi ke domain-domain yang tertulis di sini.";
+
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Daftar Blokir ini mendukung <a href=\"%@\"> sintaks DNS AdGuard</a>. Masukkan di sini, pisahkan aturan dengan pemisah kalimat. AdGuard akan memblokir seluruh koneksi kepada domain yang sama dengan peraturan ini.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Memperbarui...";
+
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Tambah aturan";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Tambah domain";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Nama Wi-Fi Anda";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "Aturan:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "Domain:";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Nama:";
+
+/* (AESupport) Alert message if user have no e-mail account on device */
+"bug_report_sending_error" = "Tidak dapat mengirim laporan bug, mungkin karena tidak ada surel yang disiapkan di perangkat Anda.";
+
+/* (MainController) Error on check filter uspdates */
+"filter_updates_error" = "Kesalahan pembaruan penyaring";
+
+/* (MainController) Message on main screen during update */
+"filters_noUpdates" = "Tidak ditemukan pembaruan";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "Filter diperbarui: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "versi %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "Split-Tunnel, kompatibel dengan aplikasi \"VPN Personal\"";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "Split-Tunnel, tidak kompatibel dengan aplikasi \"VPN Personal\"";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (tanpa ikon VPN), tidak kompatibel dengan aplikasi VPN lain, kurang stabil";
+
+/* Adguard DNS server description */
+"adguard_dns_description" = "memblokir iklan, pelacak, dan situs web phishing";
+
+/* Adguard Family DNS server description */
+"adguard_family_dns_description" = "memblokir semua situs web di atas dan tambahan situs dewasa";
+
+/* Google DNS server description */
+"google_dns_description" = "layanan resolusi DNS global yang disediakan oleh Google";
+
+/* Open DNS server description */
+"open_dns_description" = "Server DNS yang melindungi perangkat Anda dari phishing dan scam";
+
+/* Open Family DNS server description */
+"open_dns_familyshield_description" = "Server OpenDNS dengan pemblokiran konten dewasa";
+
+/* Quad9 DNS server description */
+"quad_nine_dns_description" = "Layanan alternatif DNS gratis dengan perlindungan dari phishing dan spyware";
+
+/* Cloudfare DNS server description */
+"cloudflare_public_dns_description" = "Layanan DNS gratis dari Cloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware oleh Cloudflare yang memblokir domain berbahaya";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Server pemblokir Cloudflare yang membatasi akses ke domain berbahaya dan 'dewasa'";
+
+/* Safe DNS server description */
+"safe_dns_description" = "Layanan DNS dari SafeDNS";
+
+/* Dns Feature Name */
+"dns_provider_secure_tag" = "Keamanan";
+
+/* Dns Feature Name */
+"dns_provider_adult_tag" = "Blokir konten dewasa";
+
+/* Dns Feature Name */
+"dns_provider_no_logs_tag" = "Tidak ada kebijakan logging";
+
+/* Dns Feature Name */
+"dns_provider_safe_search_tag" = "Pencarian Aman";
+
+/* Dns Feature Name */
+"dns_provider_ad_blocking_tag" = "Pemblokiran Iklan";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "Memblokir phishing dan domain berbahaya lainnya";
+
+/* Dns Feature description */
+"dns_provider_adult_summary" = "Blokir situs web yang mengandung konten dewasa";
+
+/* Dns Feature description */
+"dns_provider_no_logs_summary" = "Tidak menyimpan log kueri DNS";
+
+/* Dns Feature description */
+"dns_provider_safe_search_summary" = "Kapan pun jika memungkinkan, Pencarian Aman diberlakukan di browser";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Blokir sistem pelacakan";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Tanpa enkripsi (Sistem DNS)";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "Diaktifkan %1$d dari %2$d";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Reguler";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "Apakah Anda yakin ingin keluar?";
+
+/* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
+"support_vpn_configuration_problem" = "Ada masalah dengan konfigurasi VPN, silakan hubungi tim dukungan kami.";
+
+/* login error message */
+"login_error_message" = "Terjadi kesalahan saat masuk";
+
+/* purchase secription format */
+"purchase_description_format" = "Tentang Berlangganan AdGuard:<br><br>• Pembayaran akan dibebankan ke Akun iTunes Anda saat konfirmasi pembelian.<br>• Langganan akan secara otomatis diperpanjang kecuali perpanjangan otomatis dimatikan setidaknya 24 jam sebelum akhir periode berjalan.<br>• Biaya perpanjang langganan akan dibebankan dalam 24 jam sebelum akhir periode berjalan. Langganan Anda dapat dikelola dan perpanjangan otomatis Anda dapat dimatikan di Pengaturan Akun iTunes Anda setelah membeli langganan.<br><br><a href=%1$@>Kebijakan privasi</a><br><br><a href=%2$@>Ketentuan Penggunaan</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Kebijakan Privasi</a> <br><br><a href=%2$@>Ketentuan Penggunaan</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "OK";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Kebijakan Privasi";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "VPN akan dibuat";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "VPN diperlukan untuk mengatur pengaturan kustom DNS. VPN yang dibuat adalah lokal, yang berarti lalu lintas Anda tidak akan dialihkan melalui server mana pun.\nKami tidak mengumpulkan data apa pun saat Anda menggunakan profil VPN ini.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Silahkan tunggu...";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Lainnya";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filter:";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Anda harus mengaktifkan VPN terlebih dahulu";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Reset statistik";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Semua data statistik akan dihapus!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Reset";
+
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Buang";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Hapus profil VPN";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Anda yakin ingin menghapus profil VPN Anda dan mematikan perlindungan DNS?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Terjadi kesalahan";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Terjadi kesalahan saat menghapus profil VPN Anda";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ aturan sedang digunakan";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Dinonaktifkan di pengaturan Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Memuat ke Safari...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Telah mencapai batas %1$@ aturan. Aplikasi mungkin tidak berfungsi dengan benar. Harap nonaktifkan aturan tambahan. Saat ini, %2$@ dari %3$@ aturan sedang digunakan; %4$@ aturan dinonaktifkan.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filter belum diperbarui";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Lisensi ini telah diaktifkan pada jumlah maksimum perangkat.\nAnda dapat melepas lisensi dari perangkat yang tidak digunakan di akun pribadi Anda di situs web: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Sebelum Anda dapat menggunakan ekstensi tindakan ini, %1$@ harus melakukan konfigurasi awal. Luncurkan aplikasi %2$@ utama untuk membiarkannya.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Perhatikan bahwa pemblokir konten dinonaktifkan. Itu berarti iklan tidak akan difilter terlepas dari pengaturan AdGuard. Harap aktifkan pemblokir Konten AdGuard dalam pengaturan Safari untuk mulai memfilter.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Nama host tidak diperoleh. Mungkin halaman belum dimuat.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Kebijakan keamanan situs web ini tidak mengizinkan peluncuran Asisten AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Terjadi kesalahan tak terduga saat menginisialisasi ekstensi tindakan Safari. Silakan hubungi Dukungan AdGuard jika ini terjadi lagi.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Peringatan";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Anda telah melampaui jumlah maksimum aturan penyaringan.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Permanen";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "HIDUP";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "MATI";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Halaman utama:";
+
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Hapus filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Apakah anda yakin ingin menghapus filter ini?";
+
+/* (AboutViewController) current app version format */
+"about_version_format" = "Versi %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 – %@. Adguard Software Ltd.\nSemua hak dilindungi. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Keluar";
+
+/* (AboutViewController) Login title */
+"common_license" = "Lisensi";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Bayar sekali dan gunakan fitur AdGuard Premium di semua perangkat iOS Anda!";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Email atau kata sandi salah";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Akun diblokir";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Akun dikunci sementara";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Token 2FA tidak valid";
+
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Pengecualian Wi-Fi";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "Proteksi DNS tidak akan bekerja di jaringan Wi-Fi di bawah ini";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Tambah pengecualian";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Penyaring data seluler";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Penyaring Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Perlindungan DNS saat memakai data Seluler";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Perlindungan DNS saat memakai Wi-Fi";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Daftar Putih";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Daftar Putih";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Daftar Hitam";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Aturan pengguna Safari";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Ekspor";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Bersihkan";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Simpan";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Impor";
+
+/* "Disabled" title */
+"disabled" = "Dimatikan";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Hapus dari daftar putih";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Hapus dari daftar hitam";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Tambah ke daftar putih";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Tambah ke daftar hitam";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Memblokir situs phishing dan domain berbahaya lainnya. Hanya untuk pengguna Premium";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Menambahkan filter pihak ketiga. Hanya tersedia untuk pengguna Premium";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Pemutar suara dan video";
+
+/*(LogCategory) comments category*/
+"comments" = "Komentar";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interaksi pelanggan";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Iklan dewasa";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Periklanan";
+
+/*(LogCategory) essential category*/
+"essential" = "Penting";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Analisis situs";
+
+/*(LogCategory) social media category*/
+"social_media" = "Media sosial";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Lainnya";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Analisis seluler";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Tidak dikenal";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Ekstensi";
+
+/*(ListOfRules) Select title */
+"common_select" = "Pilih";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Edit";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Hapus";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Pilih semua";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Tambah domain";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Tambah aturan baru";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "Semua pengaturan, termasuk aturan pengguna, perlindungan DNS, antarmuka dan otorisasi, akan diatur ulang. Operasi ini tidak dapat diurungkan. Setel ulang pengaturan?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Reset log aktivitas";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Semua catatan aktivitas akan dihapus!";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 jam";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Hari ini";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 hari";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 hari";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Semua waktu";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Pemblokir konten sedang diperbarui ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Memuat penyaring ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Aturan sedang dikonversi  ...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Kustom filter baru";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Filter DNS baru";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Edit filter buatan";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Tambah";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Perlindungan dimatikan";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Perlindungan diaktifkan";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Perlindungan Safari dan DNS";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Pemblokir konten Safari";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Semua modul perlindungan dimatikan";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Proteksi DNS";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d permintaan, %2$d terenkripsi";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Informasi ini diambil dari layanan WhoTracksMe.com";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "Lainnya";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Anda telah menambahkan duplikasi filter. Filter ini sudah ada dalam daftar.";
+
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ aturan diaktifkan";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Terlalu banyak aturan yang diaktifkan: %@. Sebagian akan matikan";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Matikan beberapa filter agar bekerja dengan benar";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Terblokir";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Terproses";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Terenkripsi";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Dibolehkan";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "tambah ke daftar Putih";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "tambah ke daftar Hitam";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "telah dihapus dari daftar Putih";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "buang dari daftar Diblok";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Buka <b>pengaturan</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Ketuk <b>Safari</b> dan pilih item menu <b>\"Pemblokir konten\"</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Nyalakan semua pemblokir konten</b> dan kembali ke aplikasi kami!";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "Sistem DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Gunakan server DNS bawaan sistem yang disediakan oleh penyedia Internet Anda";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Permintaan blokir";
+
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Tambah domain ke daftar putih";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Vidio Tutorial";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Kamu memasuki upstream yang tidak valid";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Daftar Hitam Sistem";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Daftar Putih Sistem";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Detail";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Umum";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Penyaringan";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategori";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Nama";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Situs";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Alamat";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Waktu";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Ukuran";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Berlalu";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tipe";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Status DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "Upstream DNS";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Penjawab DNS";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Penyaring cocok";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Aturan cocok";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Jawaban orisinil";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Kosong";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Gagal mengirim umpan balik Anda";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Ada yang salah";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Dengan lanjut memakainya, Anda menerima<br /><a href=%2$@> Syarat dan kondisi </a>dan<a href=%1$@>Kebijakan privasi</a>";
+
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Permintaan";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Setiap kali Anda mengunjungi situs, permintaan dikirim. Situs mungkin mengirim permintaan tersembunyi dan membocorkan data pribadi. Sangat berguna untuk mengetahui jumlah total permintaan untuk mewujudkan ruang lingkup masalah ini.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Permintaan terenkripsi";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Jumlah permintaan DNS terenkripsi. Anda perlu menggunakan server DNS terenkripsi agar lalu lintas DNS Anda dienkripsi.";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Waktu rerata";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Rerata waktu yang dibutuhkan untuk memproses permintaan DNS. Lebih cepat server DNS yang Anda gunakan, semakin rendah ini.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Jumlah perusahaan";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Ini adalah jumlah perusahaan yang permintaannya telah diteruskan.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Semua permintaan";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Terblokir saja";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Diijinkan saja";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Kosong";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivitas";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d permintaan";
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Layar utama";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Layar proteksi";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Layar aktivitas";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Layar pengaturan";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Proteksi Safari diaktifkan";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Proteksi Safari dimatikan";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Proteksi DNS diaktifkan";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Proteksi DNS dimatikan";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Perbarui penyaring";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Jumlah permintaan";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Jumlah permintaan DNS terenkripsi";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Waktu rerata memproses permintaan DNS";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Aktifkan proteksi DNS";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Pilih tipe berlangganan Anda";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Masukkan surel Anda disini";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Masukkan sandi Anda disini";

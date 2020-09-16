@@ -1,0 +1,29 @@
+/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
+"6jg-ji-JtC.text" = "Xin cảm ơn";
+
+/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
+"JEI-Pr-Mc2.text" = "vì phản hồi của bạn";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
+"JXu-e8-XCB.text" = "Phản hồi";
+
+/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
+"TBB-iF-qGA.text" = "Xin vui lòng, cho chúng tôi biết phản hồi của bạn";
+
+/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
+"XtG-5p-3KJ.text" = "Phản hồi";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
+"cJk-65-rg8.title" = "Phản hồi";
+
+/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
+"nIO-Sh-01f.normalTitle" = "GỬI";
+
+/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
+"oJi-EL-gWT.placeholder" = "Nhập email nếu bạn muốn chúng tôi trả lời";
+
+/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
+"tCN-dT-J7Y.normalTitle" = "Trang chủ";
+
+/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
+"zE7-4q-9oe.title" = "Phản hồi";

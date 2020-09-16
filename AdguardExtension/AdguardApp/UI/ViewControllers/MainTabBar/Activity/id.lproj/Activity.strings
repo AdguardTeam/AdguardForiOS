@@ -1,0 +1,90 @@
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "TAMBAH";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "terenkripsi";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "Aktivitas";
+
+/* 6xN-ij-jJj.normalTitle
+Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "COBA GRATIS";
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "EDIT";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "Perusahaan paling aktif";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Tidak ada aktivitas terbaru dilacak (kami menyimpan 1500 permintaan terakhir)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Tidak ada aktivitas terbaru dilacak (kami menyimpan 1500 permintaan terakhir)";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "Aktivitas";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
+"KXe-VX-Rq9.normalTitle" = "BATAL";
+
+/* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
+"M4r-q5-RXv.text" = "Nama domain:";
+
+/* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
+"T0y-mr-Zwa.text" = "Anda dapat melihat siapa yang mencoba melacak Anda, melihat statistik, dan log pemblokiran permintaan DNS";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "Perlindungan DNS dimatikan";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "AKTIFKAN";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
+"Xgg-jX-hwe.normalTitle" = "Tersalin";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "perusahaan";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "Filter keamanan, Privasi DNS, filter buatan, dll.";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "Riwayat aktivitas";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "KEMBALI";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "Riwayat aktivitas";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
+"kwZ-Kw-f1R.text" = "Permintaan blokir";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "TAMBAH";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "permintaan";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "permintaan";
+
+/* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Pilih level domain:";
+
+/* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
+"uni-H6-XNc.text" = "Detail permintaan";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "terenkripsi";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
+"y8j-ib-ZgR.text" = "Permintaan blokir";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "Paling aktif";
+
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "waktu rerata";

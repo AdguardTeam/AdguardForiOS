@@ -1,0 +1,122 @@
+/* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
+"0RM-mR-ikS.text" = "Instellingen herstellen";
+
+/* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
+"3zG-B5-jE5.text" = "Logboeken foutopsporing";
+
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "Toestemmingslijst omkeren";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "Niet compatibel met andere VPN apps, onstabiel";
+
+/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "VPN-profiel verwijderen";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
+"BOT-Ej-15M.text" = "Voortgangsbalk filter updates weergeven";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
+"BQY-q7-BQU.text" = "Inhoudsblokkeringen";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "Niet compatibel met andere VPN apps";
+
+/* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
+"FzS-e3-CK1.text" = "Donker";
+
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "Verander deze niet tenzij je weet wat dit inhoudt";
+
+/* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
+"GFO-xu-Bir.text" = "AdGuard zal meer details wegschrijven in de logboeken. Alleen inschakelen ten behoeve van foutopsporing";
+
+/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
+"GGp-kp-YJI.text" = "Split-Tunnel";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
+"H3Q-H6-YV0.text" = "Schakel deze optie in als je problemen ervaart met de internet verbinding terwijl AdGuard is ingeschakeld";
+
+/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
+"ILy-oL-9M6.text" = "Gebruik vereenvoudigde filters";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Hierdoor wordt het huidige VPN-profiel verwijderd en de DNS bescherming uitgeschakeld";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
+"Lig-ju-iTI.text" = "Geavanceerde instellingen";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
+"ObO-g4-VHL.text" = "Je hebt 6 filters voor het blokkeren van inhoud, die elk maximaal 50.000 regels kunnen bevatten";
+
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Geavanceerde mode";
+
+/* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
+"QEc-dY-TtB.text" = "Statistieken opnieuw instellen";
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "Standaard";
+
+/* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
+"Twq-5a-kOB.text" = "Deze optie zal alle instellingen herstellen";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "Thema";
+
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Automatisch updaten alleen via WiFi";
+
+/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
+"aIJ-gX-03k.text" = "Full-Tunnel";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
+"bnd-Eh-hpk.text" = "Tunnel modus";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "Bescherming opnieuw starten wanneer het netwerk verandert";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
+"eIa-RB-Phv.text" = "Geavanceerde instellingen";
+
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "Full-Tunnel (zonder VPN pictogram)";
+
+/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
+"gxl-pG-zh1.text" = "Compatibel met \"Personal VPN\" apps";
+
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
+"jmQ-ze-hFG.text" = "In de split-tunnel modus is AdGuard compatibel met zogenaamde \"persoonlijke VPN\" apps. In deze modus kan dit omzeilt worden door het systeem wanneer er een beperkte connectiviteit is.";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "Overige";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
+"nPj-OI-Pcb.text" = "Inhoudsblokkeringen";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "Licht";
+
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "Stel additionele instellingen in voor gevorderde gebruikers";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
+"qxo-YS-JWL.text" = "Statusbalk weergeven";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
+"rRz-nr-s4U.text" = "Tunnel modus";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
+"sc6-Tw-xnL.text" = "Instellingen";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "Als deze instelling is ingeschakeld, zal AdGuard alleen WiFi gebruiken voor het bijwerken van de filters";
+
+/* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
+"wYq-g0-5k6.text" = "Deze optie verwijdert alle statistische data, zoals aantal aanvragen, etc.";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "Sta advertenties toe, behalve bij websites van deze lijst";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
+"yvq-Cw-7Z6.text" = "Als deze optie is ingeschakeld, zal AdGuard algemene 'cosmetische' regels negeren. Dit zal het laden van pagina's versnellen in ruil voor kwaliteit van filteren";

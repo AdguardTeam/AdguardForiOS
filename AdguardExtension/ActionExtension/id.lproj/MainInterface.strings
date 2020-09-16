@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "Blok elemen iklan di halaman ini";
+
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "Kontak bagian bantuan";
+
+/* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
+"Znm-Yl-fWN.text" = "Tekan di sini untuk menggunakan alat untuk menghilangkan iklan yang terlewat atau elemen apa saja yang secara umum tak ingin kamu lihat di halaman ini";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "Aktifkan di halaman ini";
+
+/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "Tutup";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "Laporkan isu di halaman ini";

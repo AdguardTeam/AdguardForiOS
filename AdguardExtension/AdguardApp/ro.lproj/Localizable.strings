@@ -1,0 +1,858 @@
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "A apărut o eroare neașteptată. Contactați vă rog echipa de suport.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Nu pot converti regulile datorită unei erori neașteptate. Contactați echipa de suport.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Convertorul nu poate fi inițializat în format JSON.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Anulare";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "Nu pot converti regula filtrului. Invalid text al regulii.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Nu pot adăuga aceste reguli utilizator la Safari";
+
+/* Alert title. On error. */
+"common_error_title" = "Eroare";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Safari nu poate încărca filtrele. De aceea modificările dvs. recente nu s-au aplicat.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Safari nu poate încărca filtrele. Încercați să goliți regulile și lista albă sau înlocuiți setul de filtre utilizat.";
+
+/* NO Button caption in alert */
+"common_action_no" = "NU";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Lista albă (inversată)";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Aplicăm schimbări...";
+
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@K";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10K";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Reguli utilizator";
+
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Introduceți reguli proprii, separate cu pauze de linie";
+
+/* YES Button caption in alert */
+"common_action_yes" = "DA";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Protecția este activată";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Unii blocanți de conținut sunt dezactivați";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Protecția este dezactivată";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "ÎNCEPE TESTAREA";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "CUMPĂRĂ";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Parolă pierdută?";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "Contul dvs. Premium a expirat";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Atenție";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "V-ați conectat cu succes la contul dvs AdGuard, dar nu există chei de licență care să vă permită să activați versiunea Premium.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "V-ați conectat cu succes la contul dvs AdGuard! Versiunea Premium de AdGuard pentru iOS a fost activată.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "V-ați conectat cu succes la contul dvs AdGuard, dar cheile de licență care vă permit să activați versiunea Premium au expirat.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "Eroare la încercarea de restaurare a achiziției.";
+
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Achiziția a fost restaurată! Versiunea Premium de AdGuard pentru iOS a fost activată.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "Nicio achiziție de restaurat";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Achiziția a fost finalizată cu succes! Versiunea Premium de AdGuard pentru iOS a fost activată.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "A apărut o eroare la procesarea achiziției.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "Adaptat";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "Filtre activate: %d/%d";
+
+/* (GroupsController) Filters update time format */
+"filter_date_format" = "Filtre actualizate: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Puteți adăuga propriile reguli aici.<br>Citiți<a href=\"%@\">nota despre sintaxa regulii</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Introduceți aici numele de domenii. AdGuard nu va bloca accesul la ele ignorând toate celelalte setări.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "Introduceți aici numele de domenii. AdGuard va filtra în Safari doar pe aceste site-uri web.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Introduceți aici numele de domenii separate cu pauze de linie. AdGuard va permite toate conexiunile la ele.";
+
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Această listă neagră acceptă<a href=\"%@\">sintaxa DNS AdGuard</a>. Introduceți aici reguli separate cu pauze de linie. AdGuard va bloca orice conexiune la domeniile ce le corespund.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Actualizăm...";
+
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Regulă nouă";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Domeniu nou";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||exemplu.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "exemplu.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Numele rețelei Wi-Fi";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "Regulă:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "Domeniu:";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Name:";
+
+/* (AESupport) Alert message if user have no e-mail account on device */
+"bug_report_sending_error" = "Nu pot trimite raportul de eroare. Niciun e-mail nu este setat pe aparat.";
+
+/* (MainController) Error on check filter uspdates */
+"filter_updates_error" = "Eroare la actualizare filtru";
+
+/* (MainController) Message on main screen during update */
+"filters_noUpdates" = "Nicio actualizare găsită";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "Filtre actualizate: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "versiune %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "Split-Tunnel, compatibil cu aplicații \"VPN personal\"";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "Full-Tunnel, incompatibil cu alte aplicații VPN";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (fără pictogramă VPN), incompatibil cu alte aplicații VPN, instabil";
+
+/* Adguard DNS server description */
+"adguard_dns_description" = "AdGuard DNS este un mod alternativ de a vă proteja intimitatea de diferite contoare, sisteme analitice și site-uri de phishing";
+
+/* Adguard Family DNS server description */
+"adguard_family_dns_description" = "AdGuard DNS + Căutare în siguranță și blocare conținut adult";
+
+/* Google DNS server description */
+"google_dns_description" = "Serviciu gratis de DNS alternativ Google";
+
+/* Open DNS server description */
+"open_dns_description" = "Server DNS ce vă protejează aparatul de phishing și înșelătorie";
+
+/* Open Family DNS server description */
+"open_dns_familyshield_description" = "Server OpenDNS cu blocare de conținut adult";
+
+/* Quad9 DNS server description */
+"quad_nine_dns_description" = "Serviciu gratuit de DNS alternativ cu protecție de phishing și spyware";
+
+/* Cloudfare DNS server description */
+"cloudflare_public_dns_description" = "Serviciu DNS gratuit de Cloudflare";
+
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware de Cloudflare care blochează domenii dăunătoare";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Server de blocare Cloudflare ce limitează accesul la domenii dăunătoare și 'adult'";
+
+/* Safe DNS server description */
+"safe_dns_description" = "Serviciu DNS de SafeDNS";
+
+/* Dns Feature Name */
+"dns_provider_secure_tag" = "Securitate";
+
+/* Dns Feature Name */
+"dns_provider_adult_tag" = "Blocare conținut adult";
+
+/* Dns Feature Name */
+"dns_provider_no_logs_tag" = "Politică fără logări";
+
+/* Dns Feature Name */
+"dns_provider_safe_search_tag" = "Căutare Sigură";
+
+/* Dns Feature Name */
+"dns_provider_ad_blocking_tag" = "Blocare reclame";
+
+/* Dns Feature description */
+"dns_provider_secure_summary" = "Blochează phishing știut și alte domenii periculoase";
+
+/* Dns Feature description */
+"dns_provider_adult_summary" = "Blochează site-uri cu conținut adult";
+
+/* Dns Feature description */
+"dns_provider_no_logs_summary" = "Nu reține jurnale de interogări DNS";
+
+/* Dns Feature description */
+"dns_provider_safe_search_summary" = "Oricând e posibil, Căutarea Sigură se aplică în browsere";
+
+/* Dns Feature description */
+"dns_provider_ad_blocking_summary" = "Blochează sisteme de urmărire";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Fără criptare (Sistem DNS)";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "Activate %1$d din %2$d";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Obișnuit";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "Sigur vrei să te deconectezi?";
+
+/* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
+"support_vpn_configuration_problem" = "Problemă cu configurația VPN, contactați vă rog echipa noastră de asistență.";
+
+/* login error message */
+"login_error_message" = "A apărut o eroare la logare";
+
+/* purchase secription format */
+"purchase_description_format" = "Despre Abonamentul AdGuard:<br><br>• Plata se va face în contul dvs. iTunes la confirmarea achiziției.<br><br>• Dacă reînnoirea automată a abonamentului nu s-a dezactivat cu cel puțin 24 de ore înainte de sfârșitul perioadei curente, acesta se reînnoiește automat.<br><br>• Taxa de reînnoire a abonamentului se va percepe în 24 de ore înainte de sfârșitul perioadei curente.\n<br><br>Vă puteți gestiona abonamentele iar reînnoirea automată se poate dezactiva în Setările contului dvs. iTunes după achiziția unui abonament.<br><br><a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "OK";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Politică Intimitate";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "Un VPN va fi creat";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "Un VPN este necesar pentru a configura setări DNS personalizate. VPN-ul creat este local, deci traficul nu va fi distribuit prin niciun server.\nCând utilizați acest profil VPN, nu colectăm date.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Așteptați...";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Temă";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Altele";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filtre:";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Trebuie activat VPN mai întâi";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Resetați statisticile";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Toate statisticile vor fi șterse!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Resetare";
+
+/* (AdvancedSettingsController) Remove button title */
+"remove_title" = "Elimină";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Eliminare profil VPN";
+
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Sigur doriți să eliminați profilul dvs. VPN și să dezactivați protecția DNS?";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "A apărut o eroare";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Ceva nu a funcționat în timpul ștergerii profilului dvs. VPN";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ regulile sunt utilizate";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Dezactivat în setări Safari";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Se încarcă în Safari...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Limita de %1$@ reguli e atinsă. Aplicația poate să nu funcționeze corect. Dezactivați regulile extra. Actual %2$@ din %3$@ reguli sunt utilizate; %4$@ reguli sunt dezactivate.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filtrele nu au fost actualizate";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Această licență a fost activată pe numărul maxim de dispozitive.\nPuteți dezlega licența de pe dispozitivele neutilizate din contul personal pe site-ul web: adguard.com";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Înaintea folosirii acțiunii extensiei, %1$@ trebuie s-o configureze inițial. Lansați aplicația %2$@ principală ca să facă aceasta.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Blocantul de conținut este dezactivat. Deci reclamele nu vor fi filtrate indiferent de setările AdGuard. Activați Blocantul de conținut AdGuard în setări Safari ca să porniți filtrarea.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Nu s-a obținut numele de host. Poate că pagina nu a fost încărcată încă.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Politica de securitate a site-lui web nu permite lansarea Assistant AdGuard.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Eroare neașteptată la inițializarea extensiei Safari. Vă rugăm contactați asistența AdGuard dacă se întâmplă din nou.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Atenție";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Numărul maxim de reguli de filtrare a fost depășit.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Pe viață";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "ON";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "OFF";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Pagină de bază:";
+
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Șterge filtrul";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Vreți sigur să ștergeți acest filtru?";
+
+/* (AboutViewController) current app version format */
+"about_version_format" = "Versiune %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 – %@. AdGuard Software Ltd.\nToate drepturile rezervate. AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Deconectare";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licență";
+
+/* (GetProTableController) this text is shown when user choose lifetime license */
+"getPro_screen_lifetime_text" = "Plătiți o dată și folosiți funcții AdGuard Premium pe orice aparat!";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "E-mail sau parolă incorecte";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Contul este blocat";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Contul este blocat temporar";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Jeton 2FA invalid";
+
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Excepții Wi-Fi";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "Protecția sistemului nu va funcționa pe rețelele Wi-Fi de mai jos";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Adăugați o excepție";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filtrați data Mobile";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filtru Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Protecție DNS la folosire date Mobile";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Protecția DNS la folosire Wi-Fi";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Lista albă";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Lista albă";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Lista neagră";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Reguli utilizator Safari";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Export";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Șterge";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Salvați";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Import";
+
+/* "Disabled" title */
+"disabled" = "Dezactivat";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Șterge din lista albă";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Șterge din lista neagră";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Adaugă la lista albă";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Adaugă la lista neagră";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Poate bloca site-uri de phishing și a alte domenii riscante. Numai utilizatorilor Premium";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Permite adăugare de filtre părți-terțe. Numai utilizatorilor Premium";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Playere audio și video";
+
+/*(LogCategory) comments category*/
+"comments" = "Comentarii";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Interacțiune clienții";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Reclame porno";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Reclame";
+
+/*(LogCategory) essential category*/
+"essential" = "Esențial";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Analiza de site";
+
+/*(LogCategory) social media category*/
+"social_media" = "Media socială";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Diverse";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Analiză mobile";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Găzduire";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Necunoscut";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Extensii";
+
+/*(ListOfRules) Select title */
+"common_select" = "Alege";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Editare";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Șterge";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Selectați tot";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Domeniu nou";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Regulă nouă";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "Se vor reseta toate setările, inclusiv reguli utilizatori, protecție DNS, interfață și setări de autorizare. Operația nu poate fi anulată. Resetați setările?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Resetare jurnal activitate";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Toate intrările jurnal vor fi șterse!";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 ore";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Azi";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 zile";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 zile";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Tot timpul";
+
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Actualizăm blocantele de conținut...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Încărcăm filtrele...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Regulile se convertesc...";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Nou filtru personalizat";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Nou filtru DNS";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Editare filtru adaptat";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Adaugă";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Protecție este dezactivată";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Protecția este activată";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari și protecție DNS";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Blocare conținut Safari";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Toate modulele de protecție sunt dezactivate";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Protecție DNS";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d solicitări, %2$d criptate";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Informația a fost încărcată de la serviciul WhoTrackMe.com";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "Altele";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Încercați să adăugați un filtru în duplicat. Acest filtru este deja pe listă.";
+
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ reguli sunt activate";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Prea multe reguli activate: %@. Unele din ele vor fi dezactivate";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Opriți câteva filtre pentru a lucra corect";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blocat";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Procesat";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Criptat";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Permise";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "adăugat pe Lista albă";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "adăugat pe Lista neagră";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "eliminat din Lista albă";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "eliminat din Lista neagră";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Deschideți <b>setările</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Tapați pe <b>Safari</b> și alegeți <b>\"Blocant de conținut\"</b> în meniu";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Porniți toate blocante de conținut</b> și reveniți la aplicația noastră!";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "Sistem DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Utilizați servere DNS implicite de sistem oferite de furnizorul Internet";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Blocare cerere";
+
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Adăugați domeniul pe Lista albă";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Tutorial video";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Ați introdus un DNS de amonte invalid";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Lista neagră sistem";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Lista albă sistem";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Detalii";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "General";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtrarea";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Categorie";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Nume";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Site web";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domeniu";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Stare";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Timp";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Mărime";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Scurs";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Tip";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "Stare DNS";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS în amonte";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "Răspuns DNS";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Filtre ce corespund";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Reguli ce corespund";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Răspuns original";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Vid";
+
+/* (FeedbackController) - feedback sending failure title */
+"feedback_sending_failed_title" = "Trimiterea feedback-ului a eșuat";
+
+/* (FeedbackController) - feedback sending failure message */
+"feedback_sending_failed_message" = "Ceva nu a mers bine";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Folosindu-l în continuare, acceptați<br /><a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
+
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Solicitări";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Oricând vizitați un site web, o cerere este trimisă. Site-urile web pot trimite cereri ascunse și scurge date personale. Este util să știm numărul acestor solicitări pentru a înțelege amploarea problemei.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Solicitări criptate";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Numărul de solicitări DNS criptate. Trebuie să utilizați un server DNS criptat pentru a avea traficul DNS criptat.";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Timp mediu";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Timpul mediu necesar procesării unei interogări DNS. El este mai mic la serverele DNS mai rapide.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Numărul de companii";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Acesta este numărul de companii către care au fost trimise cererile.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Toate cererile";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Numai cele blocate";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Numai cele permise";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Niciuna";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Activitate";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d cereri";
+
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Ecran principal";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Ecran de protecție";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Ecran de activitate";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Ecran de setări";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Protecție Safari activată";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Protecție Safari dezactivată";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "Protecție DNS activată";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "Protecție DNS dezactivată";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Actualizare filtre";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Număr de solicitări";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Numărul de cereri criptate DNS";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Timpul mediu de a procesa o cerere DNS";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Activare protecție DNS";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Alegeți tipul abonamentului";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Introduceți adresa e-mail";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Introduceți parola aici";

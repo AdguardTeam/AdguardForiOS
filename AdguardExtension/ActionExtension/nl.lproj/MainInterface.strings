@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
+"0yx-Eh-Ah4.text" = "Een element op deze pagina blokkeren";
+
+/* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
+"Wrl-xu-3kv.text" = "Neem contact op met Support";
+
+/* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
+"Znm-Yl-fWN.text" = "Klik hier om de functionaliteit te gebruiken die overgebleven ads of alle elementen die je niet op deze pagina wil zien te verwijderen";
+
+/* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
+"eVN-fj-ATQ.text" = "Op deze pagina inschakelen";
+
+/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "SLUITEN";
+
+/* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
+"kuu-kI-Ott.text" = "Een probleem op deze pagina rapporteren";

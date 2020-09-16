@@ -629,7 +629,7 @@
 "dns_request_status_processed" = "Elaborato";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_encrypted" = "Crittografato";
+"dns_request_status_encrypted" = "Crittografata";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_allowlisted" = "Permesso";

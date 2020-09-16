@@ -248,7 +248,7 @@
 "system_dns_server" = "Şifreleme yok (Sistem DNS)";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "%2$d Üzerinden %1$d etkin";
+"filters_description_format" = "%2$d Filtreden %1$d etkin";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Normal";
@@ -671,7 +671,7 @@
 "video_tutorial_title" = "Eğitim Videosu";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "Geçersiz yukarı akışa girdiniz";
+"invalid_upstream_message" = "Geçersiz üst sunucu girdiniz";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistem Engelleme Listesi";
@@ -725,7 +725,7 @@
 "dns_status_title" = "DNS durumu";
 
 /* (DnsRequestDetailsController) "DNS upstream" title for cell */
-"dns_upstream_title" = "DNS yukarı akışı";
+"dns_upstream_title" = "DNS üst sunucusu";
 
 /* (DnsRequestDetailsController) "DNS answer" title for cell */
 "dns_answer_title" = "DNS yanıtı";

@@ -205,6 +205,12 @@
 /* Cloudfare DNS server description */
 "cloudflare_public_dns_description" = "由 Cloudflare 提供的免费 DNS 服务";
 
+/* Cloudfare Anti-Malware DNS server description */
+"cloudflare_anti_malware_dns_description" = "Cloudflare 的防恶意软件 DNS 服务器，拦截恶意域名";
+
+/* Cloudfare Family DNS server description */
+"cloudflare_family_description" = "Cloudflare 的拦截服务器，限制对恶意和成人内容网域的访问";
+
 /* Safe DNS server description */
 "safe_dns_description" = "由 SafeDNS 提供的 DNS 服务";
 
@@ -379,6 +385,18 @@
 /* (FilterDetailsController) delete filter message */
 "delete_filter_message" = "是否删除选中的过滤器？";
 
+/* (AboutViewController) current app version format */
+"about_version_format" = "版本 %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\n保留所有版权。AdGuard.com";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "注销";
+
+/* (AboutViewController) Login title */
+"common_license" = "许可";
+
 /* (GetProTableController) this text is shown when user choose lifetime license */
 "getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard 高级版！";
 
@@ -441,6 +459,18 @@
 
 /* "Disabled" title */
 "disabled" = "禁用";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "从白名单移除";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "从黑名单移除";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "添加到白名单";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "添加到黑名单";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "允许阻止钓鱼网站和其他危险域。高级用户可用。";

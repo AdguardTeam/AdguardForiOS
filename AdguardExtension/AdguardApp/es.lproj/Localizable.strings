@@ -287,7 +287,7 @@
 "vpn_confirm_title" = "Una VPN será creada";
 
 /* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
-"vpn_confirm_message" = "VPN es necesario para configurar la configuración del DNS personalizado. La VPN creada es local, lo que significa que tu tráfico no será enrutado a través de ningún servidor.\nNo recopilamos ningún dato cuando utilizas este perfil de VPN.";
+"vpn_confirm_message" = "VPN es necesario para configurar la configuración del DNS personalizado. La VPN creada es local, lo que significa que tu tráfico no será enrutado a través de ningún servidor.\nNo recopilamos ningún dato cuando utilizas este perfil VPN.";
 
 /* this message is shown during the login on the license screen */
 "loading_message" = "Por favor espere...";
