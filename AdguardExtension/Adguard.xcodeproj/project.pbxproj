@@ -2719,6 +2719,22 @@
 		7E3B3833251208BC0005EB9F /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/TodayExtension.strings"; sourceTree = "<group>"; };
 		7E3B3834251208BC0005EB9F /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "be-BY"; path = "be-BY.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7E3B3835251208BC0005EB9F /* be-BY */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "be-BY"; path = "be-BY.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		7E3B383625120D800005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/RateApp.strings"; sourceTree = "<group>"; };
+		7E3B383725120D800005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/MainPage.strings"; sourceTree = "<group>"; };
+		7E3B383825120D800005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/DnsSettings.strings"; sourceTree = "<group>"; };
+		7E3B383925120D810005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Filters.strings"; sourceTree = "<group>"; };
+		7E3B383A25120D810005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Protection.strings"; sourceTree = "<group>"; };
+		7E3B383B25120D810005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Activity.strings"; sourceTree = "<group>"; };
+		7E3B383C25120D820005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		7E3B383D25120D820005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Settings.strings"; sourceTree = "<group>"; };
+		7E3B383E25120D830005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/About.strings"; sourceTree = "<group>"; };
+		7E3B383F25120D830005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/License.strings"; sourceTree = "<group>"; };
+		7E3B384025120D830005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/UserFilter.strings"; sourceTree = "<group>"; };
+		7E3B384125120D830005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Onboarding.strings"; sourceTree = "<group>"; };
+		7E3B384225120D840005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		7E3B384325120D840005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/TodayExtension.strings"; sourceTree = "<group>"; };
+		7E3B384425120D840005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "id-ID"; path = "id-ID.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		7E3B384525120D840005EB9F /* id-ID */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "id-ID"; path = "id-ID.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		7E3BDEDF23A15709009492CE /* GetProDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProDialogView.swift; sourceTree = "<group>"; };
 		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
 		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
@@ -5695,6 +5711,7 @@
 				nl,
 				ro,
 				"be-BY",
+				"id-ID",
 			);
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
@@ -8490,6 +8507,7 @@
 				7E3B3814251202CE0005EB9F /* nl */,
 				7E3B3824251208590005EB9F /* ro */,
 				7E3B3834251208BC0005EB9F /* be-BY */,
+				7E3B384425120D840005EB9F /* id-ID */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -8525,6 +8543,7 @@
 				7E3B3812251202CE0005EB9F /* nl */,
 				7E3B3822251208580005EB9F /* ro */,
 				7E3B3832251208BC0005EB9F /* be-BY */,
+				7E3B384225120D840005EB9F /* id-ID */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -8568,6 +8587,7 @@
 				7E3B3813251202CE0005EB9F /* nl */,
 				7E3B3823251208590005EB9F /* ro */,
 				7E3B3833251208BC0005EB9F /* be-BY */,
+				7E3B384325120D840005EB9F /* id-ID */,
 			);
 			name = TodayExtension.storyboard;
 			sourceTree = "<group>";
@@ -8603,6 +8623,7 @@
 				7E3B38062512029B0005EB9F /* nl */,
 				7E3B3816251208540005EB9F /* ro */,
 				7E3B3826251208B90005EB9F /* be-BY */,
+				7E3B383625120D800005EB9F /* id-ID */,
 			);
 			name = RateApp.storyboard;
 			sourceTree = "<group>";
@@ -8638,6 +8659,7 @@
 				7E3B38072512029B0005EB9F /* nl */,
 				7E3B3817251208550005EB9F /* ro */,
 				7E3B3827251208B90005EB9F /* be-BY */,
+				7E3B383725120D800005EB9F /* id-ID */,
 			);
 			name = MainPage.storyboard;
 			sourceTree = "<group>";
@@ -8673,6 +8695,7 @@
 				7E3B380A251202CA0005EB9F /* nl */,
 				7E3B381A251208560005EB9F /* ro */,
 				7E3B382A251208BA0005EB9F /* be-BY */,
+				7E3B383A25120D810005EB9F /* id-ID */,
 			);
 			name = Protection.storyboard;
 			sourceTree = "<group>";
@@ -8708,6 +8731,7 @@
 				7E3B380B251202CA0005EB9F /* nl */,
 				7E3B381B251208560005EB9F /* ro */,
 				7E3B382B251208BA0005EB9F /* be-BY */,
+				7E3B383B25120D810005EB9F /* id-ID */,
 			);
 			name = Activity.storyboard;
 			sourceTree = "<group>";
@@ -8743,6 +8767,7 @@
 				7E3B3811251202CD0005EB9F /* nl */,
 				7E3B3821251208580005EB9F /* ro */,
 				7E3B3831251208BB0005EB9F /* be-BY */,
+				7E3B384125120D830005EB9F /* id-ID */,
 			);
 			name = Onboarding.storyboard;
 			sourceTree = "<group>";
@@ -8777,6 +8802,7 @@
 				7E3B3815251202CF0005EB9F /* nl */,
 				7E3B3825251208590005EB9F /* ro */,
 				7E3B3835251208BC0005EB9F /* be-BY */,
+				7E3B384525120D840005EB9F /* id-ID */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -8812,6 +8838,7 @@
 				7E3B38082512029C0005EB9F /* nl */,
 				7E3B3818251208550005EB9F /* ro */,
 				7E3B3828251208B90005EB9F /* be-BY */,
+				7E3B383825120D800005EB9F /* id-ID */,
 			);
 			name = DnsSettings.storyboard;
 			sourceTree = "<group>";
@@ -8847,6 +8874,7 @@
 				7E3B380E251202CB0005EB9F /* nl */,
 				7E3B381E251208580005EB9F /* ro */,
 				7E3B382E251208BB0005EB9F /* be-BY */,
+				7E3B383E25120D830005EB9F /* id-ID */,
 			);
 			name = About.storyboard;
 			sourceTree = "<group>";
@@ -8882,6 +8910,7 @@
 				7E3B3809251202CA0005EB9F /* nl */,
 				7E3B3819251208560005EB9F /* ro */,
 				7E3B3829251208B90005EB9F /* be-BY */,
+				7E3B383925120D810005EB9F /* id-ID */,
 			);
 			name = Filters.storyboard;
 			sourceTree = "<group>";
@@ -8917,6 +8946,7 @@
 				7E3B380F251202CB0005EB9F /* nl */,
 				7E3B381F251208580005EB9F /* ro */,
 				7E3B382F251208BB0005EB9F /* be-BY */,
+				7E3B383F25120D830005EB9F /* id-ID */,
 			);
 			name = License.storyboard;
 			sourceTree = "<group>";
@@ -8952,6 +8982,7 @@
 				7E3B380C251202CB0005EB9F /* nl */,
 				7E3B381C251208570005EB9F /* ro */,
 				7E3B382C251208BA0005EB9F /* be-BY */,
+				7E3B383C25120D820005EB9F /* id-ID */,
 			);
 			name = MainMenu.storyboard;
 			sourceTree = "<group>";
@@ -8987,6 +9018,7 @@
 				7E3B380D251202CB0005EB9F /* nl */,
 				7E3B381D251208570005EB9F /* ro */,
 				7E3B382D251208BA0005EB9F /* be-BY */,
+				7E3B383D25120D820005EB9F /* id-ID */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -9030,6 +9062,7 @@
 				7E3B3810251202CD0005EB9F /* nl */,
 				7E3B3820251208580005EB9F /* ro */,
 				7E3B3830251208BB0005EB9F /* be-BY */,
+				7E3B384025120D830005EB9F /* id-ID */,
 			);
 			name = UserFilter.storyboard;
 			sourceTree = "<group>";
