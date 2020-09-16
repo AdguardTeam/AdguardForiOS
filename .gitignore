@@ -14,6 +14,8 @@ Adguard.ipa
 # scan temporary files
 **/fastlane/test_output
 
+# vscode config
+.vscode
 
 # ------------------ OS X -----------------
 .DS_Store

@@ -27,6 +27,34 @@ API_DOWNLOAD_URL = "https://twosky.adtidy.org/api/v1/download"
 # Root directory of the project files (relative to this script)
 BASE_PATH = "../"
 
+# Strings hidden in Crowdin
+# Can be found here: https://crowdin.com/project/adguard-applications/settings#strings
+# Click on the "Filter" icon there and choose "Hidden"
+HIDDEN_STRINGS = [
+    "user_rules_format",
+    "json_converting_error",
+    "safari_filters_format",
+    "Fwl-LI-5Fu.placeholder",
+    "getPro_full_access_days",
+    "getPro_full_access_weeks",
+    "getPro_full_access_months",
+    "getPro_full_access_years",
+    "getPro_screen_days",
+    "getPro_screen_weeks",
+    "getPro_screen_months",
+    "getPro_screen_years",
+    "trial_period_days",
+    "trial_period_weeks",
+    "trial_period_months",
+    "trial_period_years",
+    "trial_description_label_days",
+    "trial_description_label_weeks",
+    "trial_description_label_months",
+    "trial_description_label_years",
+    "add_blacklist_rule_placeholder",
+    "add_whitelist_domain_placeholder",
+]
+
 # Loads twosky configuration from .twosky.json.
 # This configuration file contains:
 # * languages -- the list of languages we support
@@ -417,11 +445,11 @@ def get_strings_number(file_path):
         tree = ET.parse(file_path)
         root = tree.getroot()
         keys = root[0]
-        strings_keys = [element.text for element in keys.findall("./key")]
+        strings_keys = [element.text for element in keys.findall("./key") if element.text not in HIDDEN_STRINGS]
         return set(strings_keys)
     else:
         split_result = re.findall(r'\"(.*)\"[ ]*=[ ]*\"(.*)\";', file_string)
-        strings_keys = [string[0] for string in split_result]
+        strings_keys = [string[0] for string in split_result if string[0] not in HIDDEN_STRINGS]
         return set(strings_keys)
 
 
@@ -444,7 +472,7 @@ def check_translation(locale, should_print_diff):
         strings_count += s
         translated_count += t
     percent = translated_count / strings_count * 100
-    print("{0}, translated {1}%".format(locale, "%.2f" % percent))
+    print("{0}, translated {1}%, missing {2} translations".format(locale, "%.2f" % percent, strings_count - translated_count))
     return
 
 
