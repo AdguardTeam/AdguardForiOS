@@ -29,8 +29,8 @@
       "vi": "Vietnamese",
       "nl": "Dutch",
       "ro": "Romanian",
-      "id-ID": "Indonesian (Indonesia)",
-      "be-BY": "Belarusian (Belarus)"
+      "id": "Indonesian",
+      "be": "Belarusian"
     },
     "localizable_files": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About/en.lproj/About.strings",
