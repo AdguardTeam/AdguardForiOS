@@ -1,135 +1,134 @@
-
 /* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
-"03E-rd-Slw.normalTitle" = "Regular";
+"03E-rd-Slw.normalTitle" = "Reguler";
 
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
-"0ZJ-BI-849.text" = "Network settings";
+"0ZJ-BI-849.text" = "Pengaturan Jaringan";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
-"3BA-9g-I6J.placeholder" = "Name";
+"3BA-9g-I6J.placeholder" = "Nama";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Set custom DNS settings";
+"3lB-T7-fSO.text" = "Tetapkan pengaturan DNS kustom";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
+"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https://, atau tls://";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
-"6e9-sP-YMb.normalTitle" = "SAVE";
+"6e9-sP-YMb.normalTitle" = "SIMPAN";
 
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
-"84p-U2-sd8.text" = "AdGuard won't block the domains from this list";
+"84p-U2-sd8.text" = "Adguard tak akan memblokir domain dari daftar ini";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
-"AOm-kV-l4z.text" = "AdGuard will block the domains from this list";
+"AOm-kV-l4z.text" = "Adguard akan memblokir domain dari daftar ini";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
-"B2l-7z-M2N.normalTitle" = "SAVE AND SELECT";
+"B2l-7z-M2N.normalTitle" = "SIMPAN DAN PILIH";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
-"FUx-XP-SzD.text" = "Advanced network settings";
+"FUx-XP-SzD.text" = "Pengaturan jaringan lanjutan";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "DNS server";
+"LTC-71-V9S.text" = "Server DNS";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "Add a filter";
+"NX4-vI-1WP.text" = "Tambahkan filter";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Enable this module to enhance your privacy by encrypting your DNS traffic.";
+"PFY-Cq-NFN.text" = "Aktifkan modul ini untuk meningkatkan privasi dengan mengenkripsi trafik DNS Anda.";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "DNS protection";
+"QYv-iX-uIo.text" = "Proteksi DNS";
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
-"Uem-fP-tai.normalTitle" = "TRY FOR FREE";
+"Uem-fP-tai.normalTitle" = "COBA GRATIS";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Allowlist";
+"Wml-J6-ced.text" = "Daftar Putih";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
-"ZdD-yx-6ph.normalTitle" = "CANCEL";
+"ZdD-yx-6ph.normalTitle" = "BATAL";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
-"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// or tls://";
+"ZgC-4d-Peb.placeholder" = "IP, sdns://, https://, atau tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
-"c9G-jn-5ym.text" = "DNS server";
+"c9G-jn-5ym.text" = "Server DNS";
 
 /* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
 "csw-3H-3tU.text" = "Server";
 
 /* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "Add a custom DNS server";
+"d1u-rO-z2K.text" = "Tambah server DNS buatan";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
-"dW3-zk-BPr.text" = "DNS server address";
+"dW3-zk-BPr.text" = "Alamat DNS server";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
-"e4h-eF-AOa.text" = "Server name";
+"e4h-eF-AOa.text" = "Nama server";
 
 /* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Edit custom DNS settings";
+"f57-S8-QfF.text" = "Ubah pengaturan DNS kustom";
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
-"iPl-vI-lX5.text" = "Network settings";
+"iPl-vI-lX5.text" = "Pengaturan jaringan";
 
 /* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers.";
+"iaJ-tk-ohH.text" = "Anda dapat meningkatkan privasi daring Anda dengan mengenkripsi lalu lintas DNS. Untuk melakukannya, pilih salah satu penyedia DNS yang disarankan.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Blocklist";
+"ihd-7R-RfE.text" = "Daftar Hitam";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "CANCEL";
+"ks4-fm-Ctr.normalTitle" = "BATAL";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
-"mBR-7g-DjT.placeholder" = "Name";
+"mBR-7g-DjT.placeholder" = "Nama";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Website";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
-"oSP-2V-qCA.normalTitle" = "DELETE";
+"oSP-2V-qCA.normalTitle" = "HAPUS";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "DNS filtering";
+"pC4-RU-DaD.text" = "Penyaringan DNS";
 
 /* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
-"pXa-VP-4yy.text" = "DNS Filters";
+"pXa-VP-4yy.text" = "Penyaring DNS";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Security filters, DNS privacy, custom filters, etc.";
+"pY3-X6-fFy.text" = "Filter keamanan, Privasi DNS, filter kustom, dll.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "DNS filters";
+"plc-eu-aXh.text" = "Penyaring DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
-"pzP-ns-QSS.text" = "Server name";
+"pzP-ns-QSS.text" = "Nama server";
 
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Customize your DNS traffic by applying your own rules.";
+"qjN-LB-N3T.text" = "Sesuaikan trafik DNS dengan menerapkan aturan Anda sendiri.";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "DNS server address";
+"seX-mS-3mU.text" = "Alamat DNS server";
 
 /* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
-"uCw-Mi-HiJ.title" = "Select";
+"uCw-Mi-HiJ.title" = "Pilih";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "DNS filtering";
+"vDF-5j-uJn.text" = "Penyaringan DNS";
 
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
-"vJt-Jd-BI2.text" = "Select protocol";
+"vJt-Jd-BI2.text" = "Pilih protokol";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
-"xiD-h8-XrC.text" = "Filters and exceptions";
+"xiD-h8-XrC.text" = "Penyaring dan pengecualian";

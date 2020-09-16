@@ -13,10 +13,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>1 rule enabled</string>
         <key>other</key>
-        <string>%d rules enabled</string>
+        <string>%d aturan diaktifkan</string>
       </dict>
     </dict>
     <key>safari_filters_format</key>
@@ -29,10 +27,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>1 filter enabled</string>
         <key>other</key>
-        <string>%d filters enabled</string>
+        <string>%d penyaring diaktifkan</string>
       </dict>
     </dict>
     <key>getPro_full_access_days</key>
@@ -45,10 +41,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One day free full access</string>
         <key>other</key>
-        <string>%d-day free full access</string>
+        <string>%d-hari gratis akses penuh</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -61,10 +55,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One week free full access</string>
         <key>other</key>
-        <string>%d-week free full access</string>
+        <string>%d-minggu gratis akses penuh</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -77,10 +69,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One month free full access</string>
         <key>other</key>
-        <string>%d-months free full access</string>
+        <string>%d-bulan gratis akses penuh</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -93,10 +83,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One year free full access</string>
         <key>other</key>
-        <string>%d-year free full access</string>
+        <string>%d-tahun gratis akses penuh</string>
       </dict>
     </dict>
     <key>getPro_screen_days</key>
@@ -109,10 +97,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one day free trial</string>
         <key>other</key>
-        <string>Start your first %d days free trial</string>
+        <string>Mulai uji coba gratis %d hari pertama Anda.</string>
       </dict>
     </dict>
     <key>getPro_screen_weeks</key>
@@ -125,10 +111,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one week free trial</string>
         <key>other</key>
-        <string>Start your first %d weeks free trial</string>
+        <string>Mulai uji coba gratis %d minggu pertama Anda.</string>
       </dict>
     </dict>
     <key>getPro_screen_months</key>
@@ -141,10 +125,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one month free trial</string>
         <key>other</key>
-        <string>Start your first %d months free trial</string>
+        <string>Mulai uji coba gratis %d bulan pertama Anda.</string>
       </dict>
     </dict>
     <key>getPro_screen_years</key>
@@ -157,10 +139,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Start your first one year free trial</string>
         <key>other</key>
-        <string>Start your first %d years free trial</string>
+        <string>Mulai uji coba gratis %d tahun pertama Anda.</string>
       </dict>
     </dict>
     <key>trial_period_days</key>
@@ -173,10 +153,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One day</string>
         <key>other</key>
-        <string>%d days</string>
+        <string>%d hari</string>
       </dict>
     </dict>
     <key>trial_period_weeks</key>
@@ -189,10 +167,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One week</string>
         <key>other</key>
-        <string>%d weeks</string>
+        <string>%d minggu</string>
       </dict>
     </dict>
     <key>trial_period_months</key>
@@ -205,10 +181,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One month</string>
         <key>other</key>
-        <string>%d months</string>
+        <string>%d bulan</string>
       </dict>
     </dict>
     <key>trial_period_years</key>
@@ -221,10 +195,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>One year</string>
         <key>other</key>
-        <string>%d years</string>
+        <string>%d tahun</string>
       </dict>
     </dict>
     <key>trial_description_label_days</key>
@@ -237,10 +209,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per day</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d days</string>
+        <string>Selanjutnya %1$@ per %2$d hari</string>
       </dict>
     </dict>
     <key>trial_description_label_weeks</key>
@@ -253,10 +223,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per week</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d weeks</string>
+        <string>Selanjutnya %1$@ per %2$d minggu</string>
       </dict>
     </dict>
     <key>trial_description_label_months</key>
@@ -269,10 +237,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per month</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d months</string>
+        <string>Selanjutnya %1$@ per %2$d bulan</string>
       </dict>
     </dict>
     <key>trial_description_label_years</key>
@@ -285,10 +251,8 @@
         <string>NSStringPluralRuleType</string>
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
-        <key>one</key>
-        <string>Then %2$@ per year</string>
         <key>other</key>
-        <string>Then %2$@ per %1$d years</string>
+        <string>Selanjutnya %1$@ per %2$d tahun</string>
       </dict>
     </dict>
   </dict>

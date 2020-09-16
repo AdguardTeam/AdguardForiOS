@@ -1,21 +1,20 @@
-
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
-"884-Hm-mb6.text" = "Safari protection";
+"884-Hm-mb6.text" = "Proteksi Safari";
 
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
-"cnF-td-Ba1.text" = "DNS protection";
+"cnF-td-Ba1.text" = "Proteksi DNS";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
-"l1g-hs-4EK.text" = "free";
+"l1g-hs-4EK.text" = "gratis";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries.";
+"teo-vm-NRJ.text" = "Modul ini mengijinkan Anda untuk memakai server DNS khusus dan meningkatkan privasi Anda dengan mengenkripsi permintaan DNS Anda.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below";
+"vlx-BS-A2y.text" = "Modul ini memblokir iklan dan pelacak di situs yang dibuka Safari. Anda dapat memilih daftar penyaring berbeda atau menambah milik Anda dalam pengaturan di bawah";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
-"wyK-CX-EwT.text" = "Protection";
+"wyK-CX-EwT.text" = "Perlindungan";
