@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Protection is disabled";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "START TRIAL";
+"upgrade_button_title" = "Subscribe";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "PURCHASE";

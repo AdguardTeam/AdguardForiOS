@@ -25,6 +25,7 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var upgradeButton: RoundRectButton!
     @IBOutlet weak var restoreButton: RoundRectButton!
+    @IBOutlet weak var trialDescriptionLabel: ThemableLabel!
     @IBOutlet weak var periodButton: RoundRectButton!
     @IBOutlet weak var purchaseDescriptionTextView: UITextView!
     @IBOutlet weak var subscribedView: UIView!
@@ -159,6 +160,7 @@ class GetProTableController: UITableViewController {
         
         let lifetime = selectedProduct?.type == .some(.lifetime)
         
+        trialDescriptionLabel.text = getTrialDescriptionLabelString(product: selectedProduct)
         periodLabel.text = getPeriodString(product: selectedProduct)
         priceLabel.text = selectedProduct?.price
         upgradeButton.isEnabled = selectedProduct != nil
@@ -168,7 +170,8 @@ class GetProTableController: UITableViewController {
         setPurchaseDescription()
         
         upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
-
+        upgradeButton.makeTitleTextUppercased()
+        
         setCellsVisibility()
         
         tableView.reloadData()
@@ -252,6 +255,34 @@ class GetProTableController: UITableViewController {
         purchasedLogoCell.isHidden = !pro
         purchaseCell.isHidden = pro
         descriptionCell.isHidden = pro
+    }
+    
+    private func getTrialDescriptionLabelString(product: Product?) -> String {
+        if product?.type == .some(.lifetime) {
+            return ""
+        }
+        
+        guard let period = product?.trialPeriod else {return ""}
+        var formatString : String = ""
+        
+        switch period.unit {
+        case .day:
+            formatString = ACLocalizedString("trial_description_days", nil)
+        case .week:
+            if period.numberOfUnits == 1 {
+                formatString = ACLocalizedString("trial_description_days", nil)
+                return String.localizedStringWithFormat(formatString, 7)
+            }
+            formatString = ACLocalizedString("trial_description_weeks", nil)
+        case .month:
+            formatString = ACLocalizedString("trial_description_months", nil)
+        case .year:
+            formatString = ACLocalizedString("trial_description_years", nil)
+        }
+        
+        let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
+        
+        return resultString
     }
     
     private func getStartTrialDescriptionLabelString(product: Product?) -> String {
