@@ -213,7 +213,7 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 </variation>
                                                                 <connections>
                                                                     <segue destination="CPg-2F-2ec" kind="show" identifier="getProSegue" id="Qo1-ti-O1I"/>
