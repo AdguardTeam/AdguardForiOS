@@ -48,7 +48,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     private var nextUpstreamId: Int { upstreamsById.count }
     
-    private let workingQueue = DispatchQueue(label: "dns proxy service working queue")
     private let resolveQueue = DispatchQueue(label: "dns proxy resolve queue", attributes: [.concurrent])
     
     let events: AGDnsProxyEvents
@@ -162,21 +161,22 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     @objc func stop(callback:@escaping ()->Void) {
         DDLogInfo("(DnsProxyService) - stop")
         
-        resolveQueue.sync { [weak self] in
-            self?.workingQueue.sync { [weak self] in
-                self?.agproxy = nil
-            }
+        resolveQueue.async { [weak self] in
+            self?.agproxy = nil
+            self?.upstreamsById.removeAll()
+            
+            DDLogInfo("(DnsProxyService) - stopped")
+            
+            callback()
         }
-        
-        upstreamsById.removeAll()
-        callback()
         
         return
     }
     
     @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
-        resolveQueue.async { [weak self] in
-            let reply = self?.agproxy?.handlePacket(dnsRequest)
+        let proxy = self.agproxy
+        resolveQueue.async {
+            let reply = proxy?.handlePacket(dnsRequest)
             callback(reply)
         }
     }
