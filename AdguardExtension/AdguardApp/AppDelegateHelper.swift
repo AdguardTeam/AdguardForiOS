@@ -257,7 +257,14 @@ class AppDelegateHelper: NSObject {
                     let tabController = self?.getMainTabController()
                     let navController = tabController?.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController
                     tabController?.selectedViewController = navController
-                    navController?.popToRootViewController(animated: true)
+                    
+                    if let tabs = tabController?.viewControllers {
+                        for viewController in tabs {
+                            if let navController = viewController as? UINavigationController {
+                                navController.popToRootViewController(animated: false)
+                            }
+                        }
+                    }
                 }
             }
         }
