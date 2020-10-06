@@ -228,6 +228,7 @@ protocol DnsProvidersServiceProtocol {
     
     func reset() {
         customProvidersInternal = nil
+        predefinedProvidersInternal = nil
     }
     
     var adguardDohServer: DnsServerInfo? {
