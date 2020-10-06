@@ -9,6 +9,15 @@
           "revision": "8f81de8d81da8631fd95ff81a9db133b76e13ea4",
           "version": "3.1.6"
         }
+      },
+      {
+        "package": "Setapp",
+        "repositoryURL": "https://github.com/MacPaw/Setapp-framework.git",
+        "state": {
+          "branch": null,
+          "revision": "96e7721408c7fb362b0ed2e0b8726e9c3fbdc772",
+          "version": "0.0.3"
+        }
       }
     ]
   },

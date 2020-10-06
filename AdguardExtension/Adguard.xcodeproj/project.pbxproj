@@ -635,6 +635,8 @@
 		D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */; };
 		D02C493A21CA7E1800770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
+		D02CF39225270B2200F6EF14 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D02CF39125270B2200F6EF14 /* Setapp */; };
+		D02CF42F2527115D00F6EF14 /* setappPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */; };
 		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D02FABEC2164F52A00174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D02FABED2164F53300174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
@@ -3108,6 +3110,7 @@
 		D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceMock.swift; sourceTree = "<group>"; };
 		D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceMock.swift; sourceTree = "<group>"; };
 		D02C493921CA7E1800770AB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = setappPublicKey.pem; path = ../../../Downloads/setappPublicKey.pem; sourceTree = "<group>"; };
 		D02EFD061F7B9327006CDBD5 /* ABECServicesParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECServicesParser.h; sourceTree = "<group>"; };
 		D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECServicesParser.m; sourceTree = "<group>"; };
 		D0319F9D21947633002C17D9 /* RuleDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailsController.swift; sourceTree = "<group>"; };
@@ -3522,6 +3525,7 @@
 				D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */,
 				65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
+				D02CF39225270B2200F6EF14 /* Setapp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4181,6 +4185,7 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
+				D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */,
 				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
 				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
@@ -5175,6 +5180,7 @@
 				65F398591B7B689500ABCD39 /* Embed App Extensions */,
 				D0B923D6237C2E1B00A59A6A /* CopyFiles */,
 				D0C940F323EAF8D6008B85EC /* CopyFiles */,
+				D02CF3CA25270C0400F6EF14 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -5194,6 +5200,7 @@
 			name = Adguard;
 			packageProductDependencies = (
 				7E2522132408201700743648 /* Lottie */,
+				D02CF39125270B2200F6EF14 /* Setapp */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -5716,6 +5723,7 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -5837,6 +5845,7 @@
 				7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */,
+				D02CF42F2527115D00F6EF14 /* setappPublicKey.pem in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
 				7E12D50123EA9AAF0009108D /* adguard.json in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
@@ -6103,6 +6112,23 @@
 			shellPath = /bin/bash;
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		D02CF3CA25270C0400F6EF14 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n";
 		};
 		D067D90721428AA900ECDE6D /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -10736,6 +10762,14 @@
 				minimumVersion = 3.1.6;
 			};
 		};
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -10743,6 +10777,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D02CF39125270B2200F6EF14 /* Setapp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

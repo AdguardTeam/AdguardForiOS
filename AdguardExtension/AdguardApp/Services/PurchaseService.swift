@@ -19,6 +19,7 @@
 import Foundation
 import StoreKit
 import CommonCrypto
+import Setapp
 
 typealias Period = (unit: PurchasePeriod, numberOfUnits: Int)
 
@@ -207,10 +208,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private var purchasedThroughInApp: Bool {
         get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughInApp)
+            return resources.purchasedThroughInApp
         }
         set {
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughInApp)
+            resources.purchasedThroughInApp = newValue
         }
     }
     
@@ -219,6 +220,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let reachability = Reachability.forInternetConnection()
     
     private var notificationToken: NotificationToken?
+
+    private var setappObservation: NSKeyValueObservation?
     
     // MARK: - public properties
     
@@ -234,7 +237,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     @objc dynamic var isProPurchasedInternal: Bool {
         get {
-            return (purchasedThroughInApp) ||
+            return (purchasedThroughInApp) || resources.purchasedThroughSetapp ||
                 (loginService.loggedIn && loginService.hasPremiumLicense && loginService.active);
         }
     }
@@ -322,6 +325,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         loginService.activeChanged = { [weak self] in
             self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
         }
+        
+        updateSetappState(subscription: SetappManager.shared.subscription)
+        observeSetappLicense()
     }
     
     func start() {
@@ -803,5 +809,28 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private func isDiscountCurrencyLocale(locale: String)->Bool {
         return locale.contains("_RU") || locale.contains("_UA")
+    }
+    
+    // MARK: Setapp license
+    
+    private func observeSetappLicense() {
+        
+        setappObservation = SetappManager.shared.observe(\.subscription) { [weak self] (manager, change) in
+            
+            guard let self = self else { return }
+            DDLogInfo("(PurchaseService) setapp subscription changed")
+            
+            DDLogInfo("(PurchaseService) setapp new subscription is active: \(manager.subscription.isActive)")
+            
+            self.updateSetappState(subscription: manager.subscription)
+        }
+    }
+    
+    private func updateSetappState(subscription: SetappSubscription) {
+        if (subscription.isActive && !resources.purchasedThroughSetapp) ||
+            !subscription.isActive && resources.purchasedThroughSetapp {
+            resources.purchasedThroughSetapp = subscription.isActive
+            postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
+        }
     }
 }
