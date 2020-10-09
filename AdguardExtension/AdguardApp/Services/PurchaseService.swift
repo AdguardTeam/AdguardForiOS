@@ -237,8 +237,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     @objc dynamic var isProPurchasedInternal: Bool {
         get {
-            return (purchasedThroughInApp) || resources.purchasedThroughSetapp ||
-                (loginService.loggedIn && loginService.hasPremiumLicense && loginService.active);
+            return purchasedThroughInApp || resources.purchasedThroughSetapp || loginService.hasActiveLicense;
         }
     }
     
