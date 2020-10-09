@@ -48,48 +48,16 @@ ADS &amp; TRACKERS</string>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8E-wT-cRk" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="159.5" width="500" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8i-IF-fYV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="50" y="47" width="500" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    </variation>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="K8i-IF-fYV" firstAttribute="top" secondItem="y8E-wT-cRk" secondAttribute="bottom" constant="2" id="FBH-er-0ck"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="K8i-IF-fYV" secondAttribute="bottom" constant="20" id="JhN-kp-eI4">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="NlM-RH-NgY" secondAttribute="trailing" constant="24" id="LJX-d0-EqW"/>
-                                                <constraint firstItem="K8i-IF-fYV" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leadingMargin" constant="30" id="Nwf-bS-BKu"/>
-                                                <constraint firstItem="y8E-wT-cRk" firstAttribute="top" secondItem="NlM-RH-NgY" secondAttribute="bottom" constant="16" id="W9o-4g-rhy">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
                                                 <constraint firstItem="NlM-RH-NgY" firstAttribute="top" secondItem="MJx-iD-eXa" secondAttribute="top" id="a0k-14-4t4">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                                                 </constraint>
-                                                <constraint firstAttribute="trailingMargin" secondItem="y8E-wT-cRk" secondAttribute="trailing" constant="30" id="mte-bm-y7z"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="K8i-IF-fYV" secondAttribute="trailing" constant="30" id="nqF-ga-sh6"/>
+                                                <constraint firstAttribute="bottom" secondItem="NlM-RH-NgY" secondAttribute="bottom" constant="16" id="fUc-J7-33O">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                </constraint>
                                                 <constraint firstItem="NlM-RH-NgY" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leading" constant="24" id="t1M-lG-E0V"/>
-                                                <constraint firstItem="y8E-wT-cRk" firstAttribute="leading" secondItem="MJx-iD-eXa" secondAttribute="leadingMargin" constant="30" id="udP-VK-odX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -460,6 +428,24 @@ ADS &amp; TRACKERS</string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grP-hO-r5Q" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="568" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="h0S-hU-EPu">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    </variation>
+                                                </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85Z-Yj-BfW">
                                                     <rect key="frame" x="24" y="16" width="552" height="40"/>
                                                     <subviews>
@@ -616,6 +602,7 @@ ADS &amp; TRACKERS</string>
                                                 <constraint firstAttribute="trailing" secondItem="85Z-Yj-BfW" secondAttribute="trailing" constant="16" id="Aah-fk-ZUd">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="85Z-Yj-BfW" firstAttribute="top" secondItem="grP-hO-r5Q" secondAttribute="bottom" constant="8" id="Dr4-e2-Bj0"/>
                                                 <constraint firstItem="UbO-jW-NNO" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="16" id="Lxp-D2-xsr">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -628,10 +615,16 @@ ADS &amp; TRACKERS</string>
                                                 <constraint firstAttribute="trailing" secondItem="UbO-jW-NNO" secondAttribute="trailing" constant="16" id="USi-fX-ytg">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="mR4-EU-MFx" secondAttribute="trailing" id="qMQ-kV-Wq3"/>
-                                                <constraint firstItem="85Z-Yj-BfW" firstAttribute="top" secondItem="Fux-84-Tbi" secondAttribute="top" constant="16" id="rDm-Fq-ORc">
+                                                <constraint firstItem="grP-hO-r5Q" firstAttribute="leading" secondItem="Fux-84-Tbi" secondAttribute="leading" constant="16" id="WfS-dw-H92">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="grP-hO-r5Q" firstAttribute="top" secondItem="Fux-84-Tbi" secondAttribute="top" constant="16" id="e8F-65-SdJ">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="42"/>
                                                 </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="grP-hO-r5Q" secondAttribute="trailing" constant="16" id="hmf-Zf-jEd">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="mR4-EU-MFx" secondAttribute="trailing" id="qMQ-kV-Wq3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -691,14 +684,11 @@ ADS &amp; TRACKERS</string>
                         <outlet property="purchasedLogoCell" destination="Axd-Oi-fOF" id="aWI-wH-2EI"/>
                         <outlet property="restoreButton" destination="mR4-EU-MFx" id="PnI-t3-9SD"/>
                         <outlet property="securityFiltersImageView" destination="Q01-WA-AWw" id="Om9-UT-0VA"/>
-                        <outlet property="startTrialDescriptionLabel" destination="K8i-IF-fYV" id="d8x-rA-awc"/>
-                        <outlet property="startTrialTitleLable" destination="y8E-wT-cRk" id="4Bt-uI-biN"/>
                         <outlet property="subscribedView" destination="Ces-9Z-dBm" id="AJh-x7-EEV"/>
                         <outlet property="titleLabel" destination="NlM-RH-NgY" id="tfp-hk-PQC"/>
                         <outlet property="trackingProtectionImageView" destination="wnA-bD-irY" id="agK-9I-EXT"/>
+                        <outlet property="trialDescriptionLabel" destination="grP-hO-r5Q" id="Ekf-Td-132"/>
                         <outlet property="upgradeButton" destination="UbO-jW-NNO" id="fad-2o-KLY"/>
-                        <outletCollection property="themableLabels" destination="y8E-wT-cRk" collectionClass="NSMutableArray" id="M2P-8r-iqh"/>
-                        <outletCollection property="themableLabels" destination="K8i-IF-fYV" collectionClass="NSMutableArray" id="tgF-na-pWX"/>
                         <outletCollection property="themableLabels" destination="fro-u8-sGn" collectionClass="NSMutableArray" id="mpB-AU-PAE"/>
                         <outletCollection property="themableLabels" destination="fro-u8-sGn" collectionClass="NSMutableArray" id="qjF-bS-ke0"/>
                         <outletCollection property="themableLabels" destination="22t-pS-PjD" collectionClass="NSMutableArray" id="oaw-Qi-6LU"/>
@@ -711,6 +701,7 @@ ADS &amp; TRACKERS</string>
                         <outletCollection property="themableLabels" destination="KOP-vw-FG7" collectionClass="NSMutableArray" id="SMS-DN-9m3"/>
                         <outletCollection property="themableLabels" destination="hjF-1C-hFa" collectionClass="NSMutableArray" id="llD-q2-Fxp"/>
                         <outletCollection property="themableLabels" destination="FLH-Qd-Atk" collectionClass="NSMutableArray" id="O31-VL-MWy"/>
+                        <outletCollection property="themableLabels" destination="grP-hO-r5Q" collectionClass="NSMutableArray" id="OCy-Cd-fdL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mle-ng-eR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
