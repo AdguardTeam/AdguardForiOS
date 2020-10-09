@@ -1043,6 +1043,8 @@
 		D093719721B056BA004A24F1 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D093719821B056BB004A24F1 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
+		D093A97A2530A4020015351F /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
+		D093A97B2530A4020015351F /* AGDnsProxy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
@@ -2388,6 +2390,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D093A97C2530A4020015351F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D093A97B2530A4020015351F /* AGDnsProxy.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0B545222435C6BF002F0AEC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 8;
@@ -3564,6 +3577,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D093A97A2530A4020015351F /* AGDnsProxy.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5280,6 +5294,7 @@
 				D0288F4523069D7200A4EBEF /* Sources */,
 				D0288F4623069D7200A4EBEF /* Frameworks */,
 				D0288F4723069D7200A4EBEF /* Resources */,
+				D093A97C2530A4020015351F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -9227,6 +9242,7 @@
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -9288,7 +9304,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
-				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Debug;
@@ -9298,6 +9313,7 @@
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -9356,7 +9372,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
 			};
 			name = Release;
