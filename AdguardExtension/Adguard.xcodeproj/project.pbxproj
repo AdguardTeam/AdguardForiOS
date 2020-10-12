@@ -636,7 +636,6 @@
 		D02C493A21CA7E1800770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D02CF39225270B2200F6EF14 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D02CF39125270B2200F6EF14 /* Setapp */; };
-		D02CF42F2527115D00F6EF14 /* setappPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */; };
 		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D02FABEC2164F52A00174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D02FABED2164F53300174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
@@ -1047,6 +1046,7 @@
 		D093719921B06370004A24F1 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
 		D093A97A2530A4020015351F /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D093A97B2530A4020015351F /* AGDnsProxy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D093AA19253447940015351F /* setappPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = D093AA18253447940015351F /* setappPublicKey.pem */; };
 		D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
@@ -3123,7 +3123,6 @@
 		D02C080B21BEAC8600796714 /* ContentBlockerServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceMock.swift; sourceTree = "<group>"; };
 		D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceMock.swift; sourceTree = "<group>"; };
 		D02C493921CA7E1800770AB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = setappPublicKey.pem; path = ../../../Downloads/setappPublicKey.pem; sourceTree = "<group>"; };
 		D02EFD061F7B9327006CDBD5 /* ABECServicesParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECServicesParser.h; sourceTree = "<group>"; };
 		D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECServicesParser.m; sourceTree = "<group>"; };
 		D0319F9D21947633002C17D9 /* RuleDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailsController.swift; sourceTree = "<group>"; };
@@ -3242,6 +3241,7 @@
 		D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dns64Utils.swift; sourceTree = "<group>"; };
 		D093718721AEA770004A24F1 /* ContentBlockerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerTest.swift; sourceTree = "<group>"; };
 		D093718A21B0414A004A24F1 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
+		D093AA18253447940015351F /* setappPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setappPublicKey.pem; sourceTree = "<group>"; };
 		D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2FaController.swift; sourceTree = "<group>"; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
@@ -4199,7 +4199,7 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
-				D02CF42E2527115D00F6EF14 /* setappPublicKey.pem */,
+				D093AA18253447940015351F /* setappPublicKey.pem */,
 				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
 				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
@@ -5860,7 +5860,7 @@
 				7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */,
-				D02CF42F2527115D00F6EF14 /* setappPublicKey.pem in Resources */,
+				D093AA19253447940015351F /* setappPublicKey.pem in Resources */,
 				D0D6B9FC21A6AF57007360BC /* License.storyboard in Resources */,
 				7E12D50123EA9AAF0009108D /* adguard.json in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
