@@ -123,9 +123,14 @@ extern NSString * _Nonnull AEDefaultsLastBuildRateAppRequested;
 extern NSString * _Nonnull MinTimeIntervalToRate;
 
 /**
- User Defaults key, which defines that pro feature is purchased.
+ User Defaults key, which defines that pro feature is purchased through in app purchases.
  */
 extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughInApp;
+
+/**
+ User Defaults key, which defines that pro feature is purchased through Setapp framefork
+ */
+extern NSString* _Nonnull  AEDefaultsIsProPurchasedThroughSetapp;
 
 /**
  User Defaults key, which defines that pro feature is purchased.

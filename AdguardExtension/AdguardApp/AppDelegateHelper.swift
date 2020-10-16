@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import Setapp
 
 /**
  AppDelegateHelper is a helper class for AppDelegate
@@ -88,6 +89,15 @@ class AppDelegateHelper: NSObject {
     }
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
+        
+        if !Bundle.main.isPro {
+            SetappManager.shared.start(with: .default)
+            SetappManager.shared.logLevel = .debug
+            
+            SetappManager.shared.setLogHandle { (message: String, logLevel: SetappLogLevel) in
+              DDLogInfo("(Setapp) [\(logLevel)], \(message)")
+            }
+        }
         
         guard let mainTabBar = getMainTabController() else {
             assertionFailure("there is no MainTabBar")
@@ -350,6 +360,12 @@ class AppDelegateHelper: NSObject {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
+        
+        if !Bundle.main.isPro {
+            if SetappManager.shared.canOpen(url: url) {
+                return SetappManager.shared.open(url: url, options: options)
+            }
+        }
             
         /*
         When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.

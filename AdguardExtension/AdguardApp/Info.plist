@@ -60,6 +60,16 @@
 				<string>abp</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Setapp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.adguard.AdguardExtension</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>

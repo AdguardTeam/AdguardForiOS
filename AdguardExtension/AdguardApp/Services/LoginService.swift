@@ -28,6 +28,8 @@ protocol LoginServiceProtocol {
     // not expired
     var active: Bool { get }
     
+    var hasActiveLicense: Bool { get }
+    
     func checkStatus( callback: @escaping (Error?)->Void )
     func logout()->Bool
     
@@ -131,6 +133,10 @@ class LoginService: LoginServiceProtocol {
         set {
             defaults.set(newValue, forKey: AEDefaultsHasPremiumLicense)
         }
+    }
+    
+    var hasActiveLicense: Bool {
+        return loggedIn && hasPremiumLicense && active
     }
     
     // MARK: - public methods

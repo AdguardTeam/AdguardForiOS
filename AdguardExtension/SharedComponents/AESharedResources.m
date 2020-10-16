@@ -39,6 +39,7 @@ NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsAppEntryCount = @"AEDefaultsAppEntryCount";
 NSString *AEDefaultsLastBuildRateAppRequested = @"AEDefaultsLastBuildRateAppRequested";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
+NSString *AEDefaultsIsProPurchasedThroughSetapp = @"AEDefaultsIsProPurchasedThroughSetapp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
 NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
 NSString *AEDefaultsHasPremiumLicense = @"AEDefaultsHasPremiumLicense";

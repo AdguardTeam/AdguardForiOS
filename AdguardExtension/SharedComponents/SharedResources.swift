@@ -217,6 +217,24 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var purchasedThroughInApp: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughInApp)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughInApp)
+        }
+    }
+    
+    dynamic var purchasedThroughSetapp: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughSetapp)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughSetapp)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
