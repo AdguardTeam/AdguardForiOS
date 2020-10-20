@@ -42,9 +42,9 @@ class DomainsConverter: DomainsConverterProtocol {
         let end = rule.hasSuffix(whitelistSuffix) ? -whitelistSuffix.count : 0
         
         let startIndex = rule.index(rule.startIndex, offsetBy: start)
-        let endIndex = end > 0 ? rule.index(rule.endIndex, offsetBy: end - 1) : rule.endIndex
+        let endIndex = end != 0 ? rule.index(rule.endIndex, offsetBy: end) : rule.endIndex
         
-        let domain = rule[startIndex...endIndex]
+        let domain = rule[startIndex..<endIndex]
         return String(domain)
     }
     
