@@ -623,7 +623,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
         
         // run converter
-        let limit = UInt(resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
+        let limit = resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
         let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         
         let converter = ContentBlockerConverter()
@@ -631,7 +631,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         let ruleStrings = rules.compactMap{ (rule) -> String? in
             return rule.isEnabled.boolValue ? rule.ruleText : nil
         }
-        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: Int(limit), optimize: optimize, advancedBlocking: false) else {
+        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: limit, optimize: optimize, advancedBlocking: false) else {
             return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
         }
         
