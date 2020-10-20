@@ -19,25 +19,44 @@
 import Foundation
 
 // MARK: - data types -
-@objc enum DnsProtocol: Int {
+@objc enum DnsProtocol: Int, Codable {
     case dns = 0
     case dnsCrypt
     case doh
     case dot
+    case doq
+    
+    init(type: DnsType) {
+        switch (type) {
+        case .dns:
+            self = .dns
+        case .dnscrypt:
+            self = .dnsCrypt
+        case .doh:
+            self = .doh
+        case .dot:
+            self = .dot
+        case .doq:
+            self = .doq
+        }
+    }
     
     static let protocolByString: [String: DnsProtocol] = [ "dns": .dns,
                                                            "dnscrypt": .dnsCrypt,
                                                            "doh": .doh,
-                                                           "dot": .dot]
+                                                           "dot": .dot,
+                                                           "doq": .doq]
     
     static let stringIdByProtocol: [DnsProtocol: String] = [.dns: "regular_dns_protocol",
                                                             .dnsCrypt: "dns_crypt_protocol",
                                                             .doh: "doh_protocol",
-                                                            .dot: "dot_protocol"]
+                                                            .dot: "dot_protocol",
+                                                            .doq: "doq_protocol"]
     
     static let prefixByProtocol: [DnsProtocol: String] = [.dnsCrypt: "sdns://",
                                                           .doh: "https://",
-                                                          .dot: "tls://"]
+                                                          .dot: "tls://",
+                                                          .doq: "quic://"]
     
     static func getProtocolByUpstream(_ upstream: String) -> DnsProtocol {
         if let dohPrefix = DnsProtocol.prefixByProtocol[.doh], upstream.hasPrefix(dohPrefix) {
@@ -78,12 +97,11 @@ class DnsServerInfo : ACObject {
     
     // MARK: - initializers and NSCoding methods
     
-    init(dnsProtocol: DnsProtocol, serverId: String, name: String, upstreams: [String], anycast: Bool?) {
+    init(dnsProtocol: DnsProtocol, serverId: String, name: String, upstreams: [String]) {
         self.serverId = serverId
         self.dnsProtocol = dnsProtocol
         self.name = name
         self.upstreams = upstreams
-        self.anycast = anycast
         super.init()
     }
     

@@ -83,4 +83,39 @@ class DnsProvidersServiceTest: XCTestCase {
         XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider1")
         XCTAssertEqual(dnsProviders.customProviders[1].name, "test provider3")
     }
+    
+    func testServerMigration() {
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "adguard-dns", name: "Adguard", upstreams: ["0.0.0.0"])
+        
+        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertEqual(migrated?.serverId, "1")
+    }
+    
+    func testServerMigration2() {
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "test-server", name: "Adguard", upstreams: ["0.0.0.0"])
+        
+        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertEqual(migrated?.serverId, "test-server")
+    }
+    
+    func testServerMigration3() {
+        
+        resources.sharedDefaults().removeObject(forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertNil(migrated?.serverId)
+    }
 }

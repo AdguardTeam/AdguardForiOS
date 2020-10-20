@@ -211,7 +211,7 @@ class VpnManagerTest: XCTestCase {
         
         let configuration = NETunnelProviderProtocol()
         
-        let serverToSave = DnsServerInfo(dnsProtocol: .dnsCrypt, serverId: "test-server", name: "Test server", upstreams: ["0.0.0.0"], anycast: true)
+        let serverToSave = DnsServerInfo(dnsProtocol: .dnsCrypt, serverId: "test-server", name: "Test server", upstreams: ["0.0.0.0"])
         let serverDataToSave = NSKeyedArchiver.archivedData(withRootObject: serverToSave)
         configuration.providerConfiguration = [
             APVpnManagerParameterTunnelMode: APVpnManagerTunnelModeFull.rawValue,

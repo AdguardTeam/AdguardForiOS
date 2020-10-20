@@ -262,6 +262,9 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC";
+
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Are you sure you want to log out?";
 
