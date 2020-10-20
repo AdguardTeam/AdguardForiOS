@@ -946,6 +946,7 @@
 		D06DE02A2346298900A70D85 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
 		D06DE02D234792D200A70D85 /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
+		D06E2F21253EE064008BBD2D /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F20253EE064008BBD2D /* Setapp */; };
 		D06E2F8B253F0E24008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */; };
 		D06E2F9E253F123B008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F9D253F123B008BBD2D /* ContentBlockerConverter */; };
 		D06E2FA0253F1240008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F9F253F1240008BBD2D /* ContentBlockerConverter */; };
@@ -1044,7 +1045,6 @@
 		D093A97A2530A4020015351F /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D093A97B2530A4020015351F /* AGDnsProxy.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D093AA19253447940015351F /* setappPublicKey.pem in Resources */ = {isa = PBXBuildFile; fileRef = D093AA18253447940015351F /* setappPublicKey.pem */; };
-		D093AA6025344B4E0015351F /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D093AA5F25344B4E0015351F /* Setapp */; };
 		D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
@@ -1799,7 +1799,6 @@
 		D0C4EF2E23C8A27900C57E22 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		D0C940E423EABEFA008B85EC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
-		D0C940F023EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
 		D0C940F423EAF8F0008B85EC /* AGDnsProxy.framework.ios.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
 		D0C940FA23ED6073008B85EC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
 		D0C940FB23ED60A7008B85EC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
@@ -1846,8 +1845,6 @@
 		D0D7E52B24371859001801A5 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D0D7E52C24371871001801A5 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D0D7E52D24371886001801A5 /* AGDnsProxy.framework.ios.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
-		D0D7E52E24371886001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E52F24371886001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D0D7E53024371886001801A5 /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		D0D7E53224371896001801A5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
@@ -1889,8 +1886,6 @@
 		D0D7E56724377310001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E56824377311001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E56A243B0782001801A5 /* AGDnsProxy.framework.ios.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
-		D0D7E56B243B0782001801A5 /* (null) in CopyFiles */ = {isa = PBXBuildFile; };
-		D0D7E56C243B0782001801A5 /* (null) in CopyFiles */ = {isa = PBXBuildFile; };
 		D0D7E56E243B07B5001801A5 /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D0D7E570243B115C001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E571243B115C001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
@@ -1914,10 +1909,6 @@
 		D0D7E583243B1C14001801A5 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D50023EA9AAF0009108D /* adguard.json */; };
 		D0D7E584243B1C14001801A5 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D4FE23EA9A7B0009108D /* whotracksme.json */; };
 		D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
-		D0D7E586243B1C5F001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E587243B1C6A001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E588243B1C6A001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E589243B1C6A001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D0D7E58A243B1CB8001801A5 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
 		D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
 		D0D7E58C243B1CC2001801A5 /* safari_protection_step1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252218240821BE00743648 /* safari_protection_step1.json */; };
@@ -2002,11 +1993,7 @@
 		D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */; };
 		D0D7E62124445728001801A5 /* CompanyDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E51DBC52425077700594708 /* CompanyDetailedController.swift */; };
 		D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */; };
-		D0D7E62324445866001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E62424445885001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D0D7E62524445885001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E62724445887001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		D0D7E62824445888001801A5 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D0D7E6292444AF6E001801A5 /* ActivityStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEC43222428C35400F39C33 /* ActivityStatisticsService.swift */; };
 		D0D7E62A2444C2D1001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E62B2444C3DC001801A5 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */; };
@@ -2399,12 +2386,12 @@
 		};
 		D0B545222435C6BF002F0AEC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D0B923D6237C2E1B00A59A6A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -2442,8 +2429,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				D0D7E56A243B0782001801A5 /* AGDnsProxy.framework.ios.dSYM in CopyFiles */,
-				D0D7E56B243B0782001801A5 /* (null) in CopyFiles */,
-				D0D7E56C243B0782001801A5 /* (null) in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -3494,7 +3479,7 @@
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
 				659886A31CF74DE9003ECD1C /* SafariServices.framework in Frameworks */,
-				D093AA6025344B4E0015351F /* Setapp in Frameworks */,
+				D06E2F21253EE064008BBD2D /* Setapp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5131,6 +5116,7 @@
 				659886B31CF74DE9003ECD1C /* Embed App Extensions */,
 				D0D7E569243B077A001801A5 /* CopyFiles */,
 				D0D7E56D243B0795001801A5 /* CopyFiles */,
+				D06E2F33253EE126008BBD2D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -5191,7 +5177,7 @@
 				65F398591B7B689500ABCD39 /* Embed App Extensions */,
 				D0B923D6237C2E1B00A59A6A /* CopyFiles */,
 				D0C940F323EAF8D6008B85EC /* CopyFiles */,
-				D02CF3CA25270C0400F6EF14 /* ShellScript */,
+				D02CF3CA25270C0400F6EF14 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -5786,11 +5772,9 @@
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
 				D0D7E54C24371C8C001801A5 /* About.storyboard in Resources */,
 				D0D7E54824371C8C001801A5 /* Protection.storyboard in Resources */,
-				D0D7E586243B1C5F001801A5 /* (null) in Resources */,
 				D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */,
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
 				659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */,
-				D0D7E52F24371886001801A5 /* (null) in Resources */,
 				D0D7E590243B1D1D001801A5 /* LICENSE in Resources */,
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				D0D7E57E243B15DF001801A5 /* Localizable.stringsdict in Resources */,
@@ -5802,25 +5786,20 @@
 				D0D7E583243B1C14001801A5 /* adguard.json in Resources */,
 				D0D7E54E24371C8C001801A5 /* UserFilter.storyboard in Resources */,
 				D0D7E54F24371C8C001801A5 /* Onboarding.storyboard in Resources */,
-				D0D7E52E24371886001801A5 /* (null) in Resources */,
 				D0D7E584243B1C14001801A5 /* whotracksme.json in Resources */,
 				653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */,
 				D0D7E57F243B1BF5001801A5 /* providers.json in Resources */,
 				D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */,
-				D0D7E588243B1C6A001801A5 /* (null) in Resources */,
 				D0D7E54A24371C8C001801A5 /* MainMenu.storyboard in Resources */,
-				D0D7E62324445866001801A5 /* (null) in Resources */,
 				D0D891B8246520E40098487A /* public_suffix_list.dat in Resources */,
 				D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */,
 				D0D7E52D24371886001801A5 /* AGDnsProxy.framework.ios.dSYM in Resources */,
 				D0D7E54624371C8C001801A5 /* DnsSettings.storyboard in Resources */,
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
-				D0D7E589243B1C6A001801A5 /* (null) in Resources */,
 				D0D7E58F243B1CC3001801A5 /* safari_protection_step2.json in Resources */,
 				D04D743C24DBE34800CD74E9 /* providers_features.json in Resources */,
 				D0D7E54B24371C8C001801A5 /* Settings.storyboard in Resources */,
 				D0D7E54724371C8C001801A5 /* Filters.storyboard in Resources */,
-				D0D7E587243B1C6A001801A5 /* (null) in Resources */,
 				D0D7E55124373E89001801A5 /* Assets.xcassets in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
 			);
@@ -5869,7 +5848,6 @@
 				7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
-				D0C940F023EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM in Resources */,
 				7E4D203E22D71A5B003B0E75 /* LICENSE in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
 				7E952E9D23D5FFC400D89AE0 /* Onboarding.storyboard in Resources */,
@@ -5932,7 +5910,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */,
-				D0D7E62424445885001801A5 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6023,7 +6000,6 @@
 				D0B544272435C6B8002F0AEC /* TodayExtension.storyboard in Resources */,
 				D0B544282435C6B8002F0AEC /* Localizable.strings in Resources */,
 				D0B544292435C6B8002F0AEC /* todayExtensionAssets.xcassets in Resources */,
-				D0D7E62824445888001801A5 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6050,7 +6026,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B545212435C6BF002F0AEC /* tunnel.entitlements in Resources */,
-				D0D7E62724445887001801A5 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6129,7 +6104,7 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D02CF3CA25270C0400F6EF14 /* ShellScript */ = {
+		D02CF3CA25270C0400F6EF14 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6138,6 +6113,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -6206,6 +6182,23 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		D06E2F33253EE126008BBD2D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n\n";
+		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -6218,7 +6211,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi";
+			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D0B542FF2435C6A7002F0AEC /* Setting Required device capabilities */ = {
@@ -9135,6 +9128,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
@@ -9159,6 +9153,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
@@ -9403,7 +9398,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Adguard.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Apple Dev (GZ2LRR9R3N)";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -9433,7 +9427,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Adguard.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution: Performiks OOO (N33TQXN8C7)";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
@@ -9620,7 +9613,6 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = AdGuardTodayExtension/AdGuardTodayExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Apple Dev (GZ2LRR9R3N)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -9664,7 +9656,6 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = AdGuardTodayExtension/AdGuardTodayExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution: Performiks OOO (N33TQXN8C7)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10384,7 +10375,6 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdGuardProTodayExtension.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution: Performiks OOO (N33TQXN8C7)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

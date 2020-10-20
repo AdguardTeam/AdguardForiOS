@@ -31,6 +31,15 @@ class DomainsConverterTest: XCTestCase {
         XCTAssertEqual(domain, domainToCheck)
     }
     
+    func testEmptyWhitelistRule() {
+        let domain = ""
+        let whitelistRule = "@@||"
+        
+        let domainToCheck = converter.whitelistDomainFromRule(whitelistRule)
+        
+        XCTAssertEqual(domain, domainToCheck)
+    }
+    
     func testWhitelistDomainFromRuleWithDomain(){
         let domain = "www.google.com"
         let domainToCheck = converter.whitelistDomainFromRule(domain)
