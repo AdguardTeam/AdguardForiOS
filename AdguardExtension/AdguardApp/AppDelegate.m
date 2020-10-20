@@ -23,7 +23,6 @@
 #import "ADomain/ADomain.h"
 #import "AppDelegate.h"
 #import "AESAntibanner.h"
-#import "AESFilterConverter.h"
 #import "AESharedResources.h"
 #import "ACDnsUtils.h"
 #import "Adguard-Swift.h"

@@ -31,9 +31,6 @@ class ContentBlockerTest: XCTestCase {
         antibanner = AntibannerMock()
         
         contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner, safariProtection: SafariProtectionService(resources: resources))
-        contentBlocker.createConverter = {
-            return (ConverterMock(), nil)
-        }
     }
 
     override func tearDown() {
@@ -74,8 +71,8 @@ class ContentBlockerTest: XCTestCase {
             let dataOther = self.safari.jsons[ContentBlockerType.other]
             let jsonStringOther = String(data: dataOther!, encoding:.utf8)
             
-            XCTAssertTrue(jsonString == expectedJsonGeneral)
-            XCTAssertTrue(jsonStringOther == expectedJsonOther)
+            XCTAssertEqual(jsonString, expectedJsonGeneral)
+            XCTAssertEqual(jsonStringOther, expectedJsonOther)
             
             expectation.fulfill()
         }
@@ -87,7 +84,7 @@ class ContentBlockerTest: XCTestCase {
         let rules: [ASDFilterRule] = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.general.rawValue as NSNumber),
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: Affinity.general.rawValue as NSNumber)]
         
-        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonGeneral = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}},{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]";
         let jsonOther = "";
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
@@ -97,8 +94,8 @@ class ContentBlockerTest: XCTestCase {
         let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber),
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: (Affinity.general.rawValue + Affinity.other.rawValue) as NSNumber)]
         
-        let jsonGeneral = "[@@||example.org^\nexample.org##banner\n]";
-        let jsonOther = "[@@||example.org^\nexample.org##banner\n]";
+        let jsonGeneral = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}},{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]"
+        let jsonOther = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}},{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]"
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }
@@ -107,8 +104,8 @@ class ContentBlockerTest: XCTestCase {
         let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: Affinity.other.rawValue as NSNumber),
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: nil)]
         
-        let jsonGeneral = "[example.org##banner\n]";
-        let jsonOther = "[@@||example.org^\n]";
+        let jsonGeneral = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}}]"
+        let jsonOther = "[{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]"
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }
@@ -117,8 +114,8 @@ class ContentBlockerTest: XCTestCase {
         let rules = [ASDFilterRule(text: "@@||example.org^", enabled: true, affinity: 0 as NSNumber),
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: nil)]
         
-        let jsonGeneral = "[example.org##banner\n@@||example.org^\n]";
-        let jsonOther = "[@@||example.org^\n]";
+        let jsonGeneral = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}},{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]"
+        let jsonOther = "[{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org[/:&?]?\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]"
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }

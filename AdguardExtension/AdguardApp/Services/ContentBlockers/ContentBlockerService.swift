@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import ContentBlockerConverter
 
 // MARK: - service protocol
 /**
@@ -614,10 +615,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
         
-        var error: Error?
-        var converted = 0
         var overLimit = 0
-        var totalConverted = 0
         var rulesData: Data?
         
         if rules.count == 0 {
@@ -628,41 +626,20 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         let limit = UInt(resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
         let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         
-        let (converter, converterError) = createConverter()
-        if converterError != nil {
-            return (nil, 0, 0, 0, converterError)
+        let converter = ContentBlockerConverter()
+        
+        let ruleStrings = rules.compactMap{ (rule) -> String? in
+            return rule.isEnabled.boolValue ? rule.ruleText : nil
+        }
+        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: Int(limit), optimize: optimize, advancedBlocking: false) else {
+            return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
         }
         
-        if converter == nil {
-            error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                            code: ContentBlockerService.contentBlockerConverterErrorCode,
-                            userInfo: nil)
-            return (nil, 0, 0, 0, error)
-        }
+        overLimit = conversionResult.totalConvertedCount - conversionResult.convertedCount
         
-        let converterResult = converter!.json(fromRules: rules, upTo: limit, optimize: optimize) as? [String: Any]
+        rulesData = conversionResult.converted.data(using: .utf8)
         
-        error = converterResult?[AESFConvertedErrorKey] as? Error
-        if error != nil {
-            return (nil, 0, 0, 0, error)
-        }
-        
-        converted = converterResult?[AESFConvertedCountKey] as? Int ?? 0
-        totalConverted = converterResult?[AESFTotalConvertedCountKey] as? Int ?? 0
-        overLimit = totalConverted - converted
-        
-        // obtain rules
-        let jsonString = converterResult?[AESFConvertedRulesKey] as? String
-        if jsonString == nil || jsonString! == "undefined" {
-            error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                            code: ContentBlockerService.contentBlockerConverterErrorCode,
-                            userInfo: nil)
-            return (nil, 0, 0, 0, error)
-        }
-        
-        rulesData = jsonString?.data(using: .utf8)
-        
-        return (rulesData, converted, overLimit, totalConverted, error)
+        return (rulesData, conversionResult.convertedCount, overLimit, conversionResult.totalConvertedCount, nil)
     }
     
     func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
@@ -672,46 +649,5 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         return success ? nil : NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
                        code: ContentBlockerService.contentBlockerDBErrorCode,
                        userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
-    }
-    
-    func convertOneRule(_ rule: ASDFilterRule)->([String: Any]?, Error?) {
-        
-        let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
-                    
-        var convertResult: [String: Any]?
-        
-        let (converter, converterError) = createConverter()
-        if converterError != nil { return (nil, converterError) }
-        
-        convertResult = converter!.json(fromRules: [rule], upTo: 1, optimize: optimize) as? [String: Any]
-        
-        if let error = convertResult?[AESFConvertedErrorKey] as? Error { return (nil, error) }
-        
-        let convertedCount = convertResult?[AESFConvertedCountKey] as? Int
-        let errorsCount = convertResult?[AESErrorsCountKey] as? Int
-        
-        if convertedCount == 0 || errorsCount ?? 0 > 0 {
-            let errorDescription = ACLocalizedString("rule_converting_error", nil)
-            let error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: ContentBlockerService.contentBlockerConverterErrorCode,
-                            userInfo: [NSLocalizedDescriptionKey: errorDescription])
-            return(nil, error)
-        }
-        
-        return (convertResult, nil)
-    }
-    
-    var createConverter:()->(AESFilterConverterProtocol?, Error?) = {
-        
-        guard let converter = AESFilterConverter() else {
-            DDLogError("(ContentBlockerService) Can't initialize converter to JSON format!")
-            let errorDescription = ACLocalizedString("json_converting_error", nil)
-            let error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: ContentBlockerService.contentBlockerConverterErrorCode,
-                                userInfo: [NSLocalizedDescriptionKey: errorDescription])
-            return (nil, error)
-        }
-        
-        return (converter, nil)
     }
 }

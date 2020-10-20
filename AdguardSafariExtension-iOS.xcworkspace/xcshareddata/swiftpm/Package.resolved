@@ -18,6 +18,24 @@
           "revision": "96e7721408c7fb362b0ed2e0b8726e9c3fbdc772",
           "version": "0.0.3"
         }
+      },
+      {
+        "package": "Punycode",
+        "repositoryURL": "https://github.com/gumob/PunycodeSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "ContentBlockerConverter",
+        "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
+        "state": {
+          "branch": null,
+          "revision": "02d0cdde54e524a39d7b7638e034087ffddef83b",
+          "version": "1.0.0"
+        }
       }
     ]
   },
