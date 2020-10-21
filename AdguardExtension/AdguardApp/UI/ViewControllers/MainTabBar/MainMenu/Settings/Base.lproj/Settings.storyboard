@@ -403,7 +403,6 @@
                                                     <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="advancedModeAction:" destination="oKf-oS-AAR" eventType="valueChanged" id="7o8-c4-byJ"/>
-                                                        <action selector="toggleWifiOnly:" destination="oKf-oS-AAR" eventType="valueChanged" id="mC2-dS-uLu"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
