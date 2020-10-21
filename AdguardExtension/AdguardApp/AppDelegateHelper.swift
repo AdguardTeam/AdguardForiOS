@@ -49,7 +49,6 @@ class AppDelegateHelper: NSObject {
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
-    private var tunnelErrorCodeObserver: ObserverToken?
     
     private var statusBarWindow: UIWindow?
     private var statusBarIsShown = false
@@ -203,7 +202,11 @@ class AppDelegateHelper: NSObject {
             }
         })
         
-        tunnelErrorCodeObserver = resources.sharedDefaults().addObseverWithToken(self, keyPath: TunnelErrorCode, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
+    }
+    
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
     }
     
     // MARK: - Observing Values from User Defaults

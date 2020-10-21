@@ -84,6 +84,7 @@ class SafariProtectionController: UITableViewController {
         setupBackButton()
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
         
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
@@ -117,14 +118,15 @@ class SafariProtectionController: UITableViewController {
         updateTheme()
     }
     
-    deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
-    }
-    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == SafariProtectionState {
+        if keyPath == SafariProtectionState || keyPath == AEComplexProtectionEnabled {
             updateSafariProtectionInfo()
         }
+    }
+    
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
     }
 
     // MARK: - Table view data source

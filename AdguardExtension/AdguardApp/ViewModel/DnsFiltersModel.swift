@@ -32,13 +32,13 @@ protocol DnsFiltersModelProtocol {
     func refreshFilters()
 }
 
-protocol DnsFiltersChangedProtocol {
+protocol DnsFiltersChangedProtocol: class {
     func filtersChanged()
 }
 
 class DnsFiltersModel: DnsFiltersModelProtocol {
     
-    var delegate: DnsFiltersChangedProtocol?
+    weak var delegate: DnsFiltersChangedProtocol?
     
     private let filtersService: DnsFiltersServiceProtocol
     private let networking: ACNNetworkingProtocol

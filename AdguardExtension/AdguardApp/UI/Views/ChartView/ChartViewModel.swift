@@ -85,7 +85,6 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     private let resources: AESharedResourcesProtocol
     
     /* Observers */
-    private var defaultsObservations: [ObserverToken] = []
     private var resetSettingsToken: NotificationToken?
     
     private let chartProcessingQueue = DispatchQueue(label: "chart processing queue", qos: .userInitiated)
@@ -141,6 +140,10 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
                 self?.obtainStatistics(false) {}
             })
         }
+    }
+    
+    deinit {
+        removeObservers()
     }
     
     // MARK: - Observing Values from User Defaults
@@ -254,14 +257,16 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             self?.obtainStatistics(false) {}
         }
         
-        let observerToken1 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
-        let observerToken2 = resources.sharedDefaults().addObseverWithToken(self, keyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
         
-        let observerToken3 = resources.sharedDefaults().addObseverWithToken(self, keyPath: LastStatisticsSaveTime, options: .new, context: nil)
-        
-        defaultsObservations.append(observerToken1)
-        defaultsObservations.append(observerToken2)
-        defaultsObservations.append(observerToken3)
+        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
+    }
+    
+    private func removeObservers() {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsEncryptedRequests)
+        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime)
     }
 }

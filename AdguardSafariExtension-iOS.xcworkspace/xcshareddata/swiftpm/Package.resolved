@@ -6,8 +6,26 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios",
         "state": {
           "branch": null,
-          "revision": "8f81de8d81da8631fd95ff81a9db133b76e13ea4",
-          "version": "3.1.6"
+          "revision": "4e5877425dae5c10792fc9d22d53dc6bf6824dc1",
+          "version": "3.1.8"
+        }
+      },
+      {
+        "package": "Punycode",
+        "repositoryURL": "https://github.com/gumob/PunycodeSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "ContentBlockerConverter",
+        "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
+        "state": {
+          "branch": null,
+          "revision": "35f4ca2859c5491067d8d6dc309c432be6f5216c",
+          "version": "1.0.1"
         }
       },
       {

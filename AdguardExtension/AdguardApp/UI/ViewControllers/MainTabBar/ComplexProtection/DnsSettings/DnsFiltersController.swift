@@ -68,7 +68,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
     private var themeObservation: NotificationToken?
-    private var tunnelErrorCodeObserver: ObserverToken?
     
     private let filterDetailsControllerId = "FilterDetailsController"
     
@@ -89,7 +88,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
             self?.updateTheme()
         }
         
-        tunnelErrorCodeObserver = resources.sharedDefaults().addObseverWithToken(self, keyPath: TunnelErrorCode, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
         navigationItem.rightBarButtonItems = [searchButton]
         
@@ -108,6 +107,10 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.refreshFilters()
+    }
+    
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
     }
     
     // MARK: - Table view delegate methods

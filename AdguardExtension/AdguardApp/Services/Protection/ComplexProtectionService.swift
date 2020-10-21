@@ -148,8 +148,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
-        resources.safariProtectionEnabled = enabled
-        
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
             needsUpdateSystemProtection = resources.systemProtectionEnabled
@@ -158,6 +156,8 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         if !enabled && !systemProtectionEnabled {
             resources.complexProtectionEnabled = false
         }
+        
+        resources.safariProtectionEnabled = enabled
         
         updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
@@ -182,8 +182,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
-        resources.systemProtectionEnabled = enabled
-         
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
             needsUpdateSafari = resources.safariProtectionEnabled
@@ -192,6 +190,8 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         if !enabled && !safariProtection.safariProtectionEnabled {
             self.resources.complexProtectionEnabled = false
         }
+        
+        resources.systemProtectionEnabled = enabled
         
         updateProtections(safari: needsUpdateSafari, system: needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
