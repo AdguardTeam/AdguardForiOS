@@ -628,7 +628,6 @@
 		D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C080D21BEAD0F00796714 /* ConfigurationServiceMock.swift */; };
 		D02C493A21CA7E1800770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D02C493B21CA7F7100770AB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
-		D02CF39225270B2200F6EF14 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D02CF39125270B2200F6EF14 /* Setapp */; };
 		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D02FABEC2164F52A00174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		D02FABED2164F53300174676 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
@@ -947,7 +946,6 @@
 		D06DE02A2346298900A70D85 /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
 		D06DE02D234792D200A70D85 /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
-		D06E2F21253EE064008BBD2D /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F20253EE064008BBD2D /* Setapp */; };
 		D06E2F8B253F0E24008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */; };
 		D06E2F9E253F123B008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F9D253F123B008BBD2D /* ContentBlockerConverter */; };
 		D06E2FA0253F1240008BBD2D /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D06E2F9F253F1240008BBD2D /* ContentBlockerConverter */; };
@@ -1052,6 +1050,7 @@
 		D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
 		D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
+		D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D09E271A2541D00B002D6BC0 /* Setapp */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
@@ -3481,7 +3480,6 @@
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
 				659886A31CF74DE9003ECD1C /* SafariServices.framework in Frameworks */,
-				D06E2F21253EE064008BBD2D /* Setapp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3515,11 +3513,11 @@
 				D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */,
 				7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
+				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
 				D06E2F8B253F0E24008BBD2D /* ContentBlockerConverter in Frameworks */,
 				D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */,
 				65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
-				D02CF39225270B2200F6EF14 /* Setapp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5179,7 +5177,8 @@
 				65F398591B7B689500ABCD39 /* Embed App Extensions */,
 				D0B923D6237C2E1B00A59A6A /* CopyFiles */,
 				D0C940F323EAF8D6008B85EC /* CopyFiles */,
-				D02CF3CA25270C0400F6EF14 /* Run Script */,
+				D02CF3CA25270C0400F6EF14 /* Codesign frameworks */,
+				D09E277F2541D525002D6BC0 /* Remove setapp */,
 			);
 			buildRules = (
 			);
@@ -5199,8 +5198,8 @@
 			name = Adguard;
 			packageProductDependencies = (
 				7E2522132408201700743648 /* Lottie */,
-				D02CF39125270B2200F6EF14 /* Setapp */,
 				D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */,
+				D09E271A2541D00B002D6BC0 /* Setapp */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -6106,7 +6105,7 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D02CF3CA25270C0400F6EF14 /* Run Script */ = {
+		D02CF3CA25270C0400F6EF14 /* Codesign frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6115,7 +6114,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "Codesign frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -6200,6 +6199,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n\n";
+		};
+		D09E277F2541D525002D6BC0 /* Remove setapp */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove setapp";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -10788,11 +10805,6 @@
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
 		};
-		D02CF39125270B2200F6EF14 /* Setapp */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
-			productName = Setapp;
-		};
 		D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D06E2F89253F0E24008BBD2D /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
@@ -10819,6 +10831,11 @@
 			productName = ContentBlockerConverter;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			productName = Setapp;
+		};
+		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
