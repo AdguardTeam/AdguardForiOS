@@ -19,7 +19,7 @@
 import Foundation
 
 enum BlockedRecordType {
-    case normal, whitelisted, blocked, trackedAndBlocked
+    case normal, whitelisted, blocked
 }
 
 class ActivityTableViewCell: UITableViewCell {
@@ -81,15 +81,15 @@ class ActivityTableViewCell: UITableViewCell {
         
         // Setup cell background color
         let type: BlockedRecordType
-        switch (record.logRecord.status, record.category.categoryId ?? 0) {
-        case (.processed, _):
+        switch record.logRecord.status {
+        case .processed:
             type = .normal
-        case (.encrypted, _):
+        case .encrypted:
             type = .normal
-        case (.whitelistedByUserFilter, _), (.whitelistedByOtherFilter, _):
+        case .whitelistedByUserFilter, .whitelistedByOtherFilter:
             type = .whitelisted
-        case (.blacklistedByUserFilter, let catergoryId), (.blacklistedByOtherFilter, let catergoryId):
-            type = (catergoryId == 6 || catergoryId == 101) ? .trackedAndBlocked : .blocked
+        case .blacklistedByUserFilter, .blacklistedByOtherFilter:
+            type = .blocked
         }
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
         
@@ -133,9 +133,6 @@ class ActivityTableViewCell: UITableViewCell {
         case .whitelisted:
             logSelectedCellColor = UIColor(hexString: "#4D67b279")
             logBlockedCellColor = UIColor(hexString: "#3367b279")
-        case .trackedAndBlocked:
-            logSelectedCellColor = UIColor(hexString: "#4Df5a623")
-            logBlockedCellColor = UIColor(hexString: "#33f5a623")
         default:
             return
         }
