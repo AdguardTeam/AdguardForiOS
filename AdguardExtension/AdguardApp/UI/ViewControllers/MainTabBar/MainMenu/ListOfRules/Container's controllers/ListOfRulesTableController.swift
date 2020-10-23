@@ -57,14 +57,11 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         set {
             model?.rules.forEach({ $0.selected = false })
             
-            if newValue == .searching && state == .normal{
-                model?.state = newValue
+            if newValue == .searching && state == .normal {
                 deleteSections()
             } else if newValue == .normal && state == .searching {
-                model?.state = newValue
                 insertSections()
             } else {
-                model?.state = newValue
                 DispatchQueue.main.async {[weak self] in
                     self?.tableView.reloadData()
                 }
