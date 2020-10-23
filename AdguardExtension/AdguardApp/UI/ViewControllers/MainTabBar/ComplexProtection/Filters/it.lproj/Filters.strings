@@ -10,6 +10,9 @@
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Nome:";
 
+/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
+"Fwl-LI-5Fu.placeholder" = "https://esempio.it";
+
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
 "Gg8-4u-qvU.text" = "AdGuard non funziona sui siti web di questa lista";
 
@@ -26,7 +29,7 @@
 "QHZ-sJ-wTL.text" = "Questo modulo blocca gli annunci e il tracciamento sui siti web aperti con Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Conteggio Regole: ";
+"RJU-32-r8h.text" = "N. Regole: ";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "Aggiornato";
@@ -65,7 +68,7 @@
 "t8x-PU-hFK.text" = "Homepage: ";
 
 /* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
-"wzJ-ge-NyI.text" = "Quantità di regole:";
+"wzJ-ge-NyI.text" = "N. regole:";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
 "zcB-eh-Ou4.placeholder" = "Inserisci il nome del filtro:";

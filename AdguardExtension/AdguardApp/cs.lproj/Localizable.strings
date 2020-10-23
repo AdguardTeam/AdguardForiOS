@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Ochrana je vypnuta";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Získat předplatné";
+"upgrade_button_title" = "Odebírat";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "ZAKOUPIT";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licence";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Zaplaťte jedenkrát a používejte funkce AdGuard Premium na všech svých iOS zařízeních!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nesprávný e-mail nebo heslo";

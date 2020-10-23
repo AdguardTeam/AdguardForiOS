@@ -397,9 +397,6 @@
 /* (AboutViewController) Login title */
 "common_license" = "ライセンス";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "一度限りのお支払いで、お使いの全iOSデバイスでAdGuardプレミアム機能をご利用できます！";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "メールアドレスもしくはパスワードが間違っています";
 

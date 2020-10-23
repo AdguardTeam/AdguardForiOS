@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Захист вимкнено";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Отримати підписку";
+"upgrade_button_title" = "Передплатити";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "КУПИТИ";
@@ -390,9 +390,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Ліцензія";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Сплатіть один раз і користуйтесь функціями AdGuard Premium на всіх iOS пристроях!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Невірна електронна пошта або пароль";

@@ -44,7 +44,7 @@
 "gLL-6o-GGa.text" = "DNS 防護";
 
 /* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "高級版為已啟動的";
+"hjF-1C-hFa.text" = "高級版被啟動";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
 "mR4-EU-MFx.normalTitle" = "回復購買";

@@ -397,9 +397,6 @@
 /* (AboutViewController) Login title */
 "common_license" = "许可";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "只需支付一次便可在所有设备上使用 AdGuard 高级版！";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正确的邮箱或密码";
 

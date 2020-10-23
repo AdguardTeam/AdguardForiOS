@@ -70,9 +70,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Абарона выключана";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "ПАЧАЦЬ ПРОБНЫ ПЕРЫЯД";
-
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "КУПІЦЬ";
 
@@ -396,9 +393,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Ліцэнзія";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Зрабіце разавую плату і выкарыстоўвайце Прэміум-функцыі AdGuard на ўсіх сваіх iOS-прыладах!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Няслушны адрас пошты ці пароль";

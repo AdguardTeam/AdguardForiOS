@@ -68,7 +68,7 @@
 "protection_disabled_caption" = "Bescherming is uitgeschakeld";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "PROEFVERSIE STARTEN";
+"upgrade_button_title" = "Abonneren";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "KOPEN";
@@ -80,7 +80,7 @@
 "premium_expired_message" = "Uw premium abonnement is verlopen";
 
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
-"premium_expired_title" = "Attentie";
+"premium_expired_title" = "Opgelet";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
 "not_premium_message" = "U bent succesvol aangemeld met uw AdGuard account, maar er zijn geen licentie sleutels die het activeren van de premium versie toestaan.";
@@ -387,9 +387,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licentie";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Betaal eenmalig en gebruik AdGuard Premium functies op al je iOS toestellen!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Verkeerd email-adres of wachtwoord";

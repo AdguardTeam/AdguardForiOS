@@ -7,8 +7,7 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Atividade";
 
-/* 6xN-ij-jJj.normalTitle
-Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "6xN-ij-jJj.normalTitle" = "EXPERIMENTE";
 
 /* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
@@ -72,7 +71,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "qPQ-vV-fXm.normalTitle" = "solicitações";
 
 /* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
-"uj0-U3-Qfx.text" = "Escolha o nível de domínio";
+"uj0-U3-Qfx.text" = "Escolha o nível de domínio:";
 
 /* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
 "uni-H6-XNc.text" = "Detalhes da solicitação";
@@ -84,7 +83,7 @@ Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
 "y8j-ib-ZgR.text" = "Bloquear solicitação";
 
 /* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
-"yWy-kc-8Zg.text" = "Mais ativas";
+"yWy-kc-8Zg.text" = "Mais ativo";
 
 /* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
 "yio-E8-cQV.normalTitle" = "tempo médio";

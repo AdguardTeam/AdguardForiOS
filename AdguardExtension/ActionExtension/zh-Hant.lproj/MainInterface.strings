@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
-"0yx-Eh-Ah4.text" = "封鎖於該頁面上之元件";
+"0yx-Eh-Ah4.text" = "封鎖於此頁面上之元件";
 
 /* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
 "Wrl-xu-3kv.text" = "與支援聯繫";
@@ -8,10 +8,10 @@
 "Znm-Yl-fWN.text" = "輕觸這裡以使用工具來移除遺漏的廣告或任何的您一般不想於頁面上看到之元件";
 
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
-"eVN-fj-ATQ.text" = "於該頁面上啟用";
+"eVN-fj-ATQ.text" = "對此頁面啟用";
 
 /* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
 "fxW-Cr-iPW.normalTitle" = "關閉";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
-"kuu-kI-Ott.text" = "報告於該頁面上之問題";
+"kuu-kI-Ott.text" = "報告有關此頁面之問題";

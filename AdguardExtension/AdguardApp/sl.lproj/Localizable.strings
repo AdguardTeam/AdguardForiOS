@@ -68,7 +68,7 @@
 "protection_disabled_caption" = "Zaščita je onemogočena";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Pridobite naročnino";
+"upgrade_button_title" = "Naroči se";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "NAKUP";
@@ -275,7 +275,7 @@
 "lifetime_purchase_description_format" = "<a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "Vredu";
+"common_action_ok" = "VREDU";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Politika zasebnosti";
@@ -393,9 +393,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licenca";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Plačajte enkrat in uporabite funkcije AdGuard Premium na vseh vaših napravah iOS!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nepravilen e-poštni naslov ali geslo";

@@ -13,6 +13,9 @@
 /* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Logg inn";
 
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Bestem dine egne regler";
+
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-post:";
 

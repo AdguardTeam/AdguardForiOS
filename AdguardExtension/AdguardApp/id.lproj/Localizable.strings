@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Perlindungan dinonaktifkan";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Dapatkan berlangganan";
+"upgrade_button_title" = "Berlangganan";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "BELI";
@@ -390,9 +390,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Lisensi";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Bayar sekali dan gunakan fitur AdGuard Premium di semua perangkat iOS Anda!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Email atau kata sandi salah";

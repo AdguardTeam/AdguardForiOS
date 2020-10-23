@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Protección deshabilitada";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Obtener suscripción";
+"upgrade_button_title" = "Suscribirse";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "COMPRAR";
@@ -113,7 +113,7 @@
 "custom_group_name" = "Personalizado";
 
 /* (GroupsController) Filter group filter count format */
-"filter_group_filters_count_format" = "Filtros activados: %d/%d";
+"filter_group_filters_count_format" = "Filtros habilitados: %d/%d";
 
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtros actualizados: %@";
@@ -248,7 +248,7 @@
 "system_dns_server" = "Sin cifrado (DNS del sistema)";
 
 /* MainMenuController - filters menu description */
-"filters_description_format" = "Activados %1$de de %2$d";
+"filters_description_format" = "Habilitados %1$d de %2$d";
 
 /* DnsProviderDetailsController - regular dns protocol */
 "regular_dns_protocol" = "Regular";
@@ -278,7 +278,7 @@
 "lifetime_purchase_description_format" = "<a href=%2$@>Términos y condiciones</a> y <a href=%1$@>política de privacidad</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "Aceptar";
+"common_action_ok" = "ACEPTAR";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Política de privacidad";
@@ -338,7 +338,7 @@
 "update_current_state_label" = "Cargando en Safari...";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
-"over_limit_current_state_label" = "Se alcanza el límite de %1$@ reglas. Es posible que la aplicación no funcione correctamente. Por favor desactive las reglas adicionales. Actualmente se están utilizando %2$@ de %3$@ reglas; %4$@ reglas están desactivadas.";
+"over_limit_current_state_label" = "Se alcanza el límite de %1$@ reglas. Es posible que la aplicación no funcione correctamente. Por favor deshabilita las reglas adicionales. Actualmente se están utilizando %2$@ de %3$@ reglas; %4$@ reglas están deshabilitadas.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
 "failed_updating_current_state_label" = "Los filtros no se han actualizado";
@@ -371,10 +371,10 @@
 "permanent_subscription_title" = "Vitalicia";
 
 /* (FiltersController) ON state in groups section */
-"on_state" = "ACTIVADO";
+"on_state" = "ENCENDIDO";
 
 /* (FiltersController) OFF state in groups section */
-"off_state" = "DESACTIVADO";
+"off_state" = "APAGADO";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Página de inicio:";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licencia";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "¡Paga una vez y utiliza las características de AdGuard Premium en todos tus dispositivos iOS!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Correo electrónico o contraseña incorrectos";
@@ -620,7 +617,7 @@
 "dns_filters_overlimit_title" = "Demasiadas reglas están habilitadas: %@. Algunos de ellos serán deshabilitados";
 
 /*(DnsFiltersController) DNS filters overlimit title */
-"dns_filters_notification_title" = "Deshabilite algunos filtros para el trabajo correcto";
+"dns_filters_notification_title" = "Deshabilita algunos filtros para el trabajo correcto";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqueado";

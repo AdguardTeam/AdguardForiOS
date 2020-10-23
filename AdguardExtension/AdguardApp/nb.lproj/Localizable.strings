@@ -55,6 +55,9 @@
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";
 
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Skriv inn dine egne regler her, adskilt med linjebrytinger";
+
 /* YES Button caption in alert */
 "common_action_yes" = "JA";
 
@@ -68,7 +71,7 @@
 "protection_disabled_caption" = "Beskyttelse er skrudd av";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "BEGYNN PRØVEPERIODEN";
+"upgrade_button_title" = "Abonner";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "KJØP";
@@ -99,6 +102,9 @@
 
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtre oppdatert: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Du kan legge til dine egne regler her.<br>Les dette <a href=\"%@\">notatet om regelsyntaksen</a> .";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Oppdaterer…";
@@ -268,8 +274,14 @@
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
 
+/* (AdvancedSettingsController) Remove Vpn profile message */
+"remove_vpn_profile_message" = "Er du sikke på at du vil fjerne din VPN-profil og skru av DNS-beskyttelse?";
+
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "En feil oppstod";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Noe gikk galt under sletting av VPN-profilen din";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ regler blir benyttet";
@@ -424,6 +436,9 @@
 /*(LogCategory) mobile analytics category*/
 "mobile_analytics" = "Mobilanalyse";
 
+/*(LogCategory) hosting category*/
+"hosting" = "Vertskap";
+
 /*(LogCategory) unknown category*/
 "unknown" = "Ukjent";
 
@@ -544,6 +559,9 @@
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System-DNS";
 
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Bruk systemstandard-DNS-tjenerne som din ISP (internettleverandør) gir deg";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokker forespørsel";
 
@@ -552,6 +570,9 @@
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Videoveiledning";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Du har skrevet inn en ugyldig oppstrømstjener";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemets blokkeringsliste";
@@ -628,6 +649,9 @@
 /* (FeedbackController) - feedback sending failure message */
 "feedback_sending_failed_message" = "Noe gikk galt";
 
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Forespørsler";
+
 /* (ActivityViewController) - encrypted alert title */
 "encrypted_info_alert_title" = "Krypterte forespørsler";
 
@@ -639,6 +663,9 @@
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Antall firmaer";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Dette er antallet selskaper som forespørsler har blitt videresendt til.";
 
 /* (ActivityViewController) - All requests alert action */
 "all_requests_alert_action" = "Alle forespørsler";
