@@ -52,10 +52,11 @@ class ListOfRulesController: UIViewController {
             return model?.state ?? .normal
         }
         set {
-            tableController?.state = newValue
-    
+            model?.state = newValue
             if model?.type == .safariUserfilter  {
                 changeScreen()
+            } else {
+                tableController?.state = newValue
             }
             changeState()
         }
