@@ -325,7 +325,7 @@ class RulesProcessorTest: XCTestCase {
     }
     
     func testEmptyInvertedWhitelist(){
-        let rulePrefix = "@@||*$document,domain="
+        let rulePrefix = "@@||*$document"
         let rule = AEInvertedWhitelistDomainsObject(rules: []).rule.ruleText
         
         XCTAssertEqual(rulePrefix, rule)
