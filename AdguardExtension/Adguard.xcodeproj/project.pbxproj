@@ -1844,7 +1844,6 @@
 		D0D7E52A2437184F001801A5 /* APDnsLogTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BC23A8C5F200EDF107 /* APDnsLogTable.m */; };
 		D0D7E52B24371859001801A5 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		D0D7E52C24371871001801A5 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
-		D0D7E52D24371886001801A5 /* AGDnsProxy.framework.ios.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios.dSYM */; };
 		D0D7E53024371886001801A5 /* AGDnsProxy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; };
 		D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		D0D7E53224371896001801A5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205A22D71AE8003B0E75 /* Security.framework */; };
@@ -5795,7 +5794,6 @@
 				D0D7E54A24371C8C001801A5 /* MainMenu.storyboard in Resources */,
 				D0D891B8246520E40098487A /* public_suffix_list.dat in Resources */,
 				D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */,
-				D0D7E52D24371886001801A5 /* AGDnsProxy.framework.ios.dSYM in Resources */,
 				D0D7E54624371C8C001801A5 /* DnsSettings.storyboard in Resources */,
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
 				D0D7E58F243B1CC3001801A5 /* safari_protection_step2.json in Resources */,
@@ -6236,7 +6234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
