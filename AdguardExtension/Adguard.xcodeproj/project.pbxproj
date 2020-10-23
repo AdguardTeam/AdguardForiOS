@@ -5116,7 +5116,8 @@
 				659886B31CF74DE9003ECD1C /* Embed App Extensions */,
 				D0D7E569243B077A001801A5 /* CopyFiles */,
 				D0D7E56D243B0795001801A5 /* CopyFiles */,
-				D06E2F33253EE126008BBD2D /* ShellScript */,
+				D06E2F33253EE126008BBD2D /* Codesign frameworks */,
+				D09E28642542CA28002D6BC0 /* Remove setapp */,
 			);
 			buildRules = (
 			);
@@ -6183,7 +6184,7 @@
 			shellScript = "echo \"Action is '${ACTION}'\"\n\nif [ \"${ACTION}\" == 'install' ]; then\necho -n \"Setting Required device capabilities...\"\nplist=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Info.plist\"\ndefaults write \"${plist}\" UIRequiredDeviceCapabilities -array arm64\necho \" Done\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D06E2F33253EE126008BBD2D /* ShellScript */ = {
+		D06E2F33253EE126008BBD2D /* Codesign frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6192,6 +6193,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Codesign frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -6217,6 +6219,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
+		};
+		D09E28642542CA28002D6BC0 /* Remove setapp */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Remove setapp";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
