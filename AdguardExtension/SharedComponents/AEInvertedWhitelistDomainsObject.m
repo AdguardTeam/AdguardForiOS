@@ -67,17 +67,22 @@
 
 - (ASDFilterRule*) ruleFromRules:(NSArray<ASDFilterRule*>*) rules {
     
-    NSMutableString* ruleString = [[self rulePrefix] mutableCopy];
+    NSMutableString* ruleString = [[NSMutableString alloc] initWithString:@""];
     
-    for(int i = 0; i < rules.count; ++i) {
-        
-        if(rules[i].ruleText.length == 0 || rules[i].isEnabled.boolValue == NO)
-            continue;
-        
-        if(i > 0)
-            [ruleString appendString:@"|"];
-        
-        [ruleString appendFormat:@"~%@", rules[i].ruleText];
+    if (rules.count == 0) {
+        [ruleString appendString:@"@@||*$document"]; // Empty list rule
+    } else {
+        NSString* rulePrefix = [[self rulePrefix] mutableCopy];
+        [ruleString appendString: rulePrefix];
+        for(int i = 0; i < rules.count; ++i) {
+            if(rules[i].ruleText.length == 0 || rules[i].isEnabled.boolValue == NO)
+                continue;
+            
+            if(i > 0)
+                [ruleString appendString:@"|"];
+            
+            [ruleString appendFormat:@"~%@", rules[i].ruleText];
+        }
     }
     
     ASDFilterRule *rule = [ASDFilterRule new];
