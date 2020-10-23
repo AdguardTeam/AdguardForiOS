@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "防護被禁用";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "開始試用";
+"upgrade_button_title" = "訂閱";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "購買";
@@ -383,7 +383,7 @@
 "delete_filter_title" = "刪除過濾器";
 
 /* (FilterDetailsController) delete filter message */
-"delete_filter_message" = "您確定您想要刪除該過濾器嗎？";
+"delete_filter_message" = "您確定您想要刪除此過濾器嗎？";
 
 /* (AboutViewController) current app version format */
 "about_version_format" = "版本 %@";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "授權";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "付費一次，然後於所有您的 iOS 裝置上使用 AdGuard 高級版功能！";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "不正確的電子郵件位址或密碼";

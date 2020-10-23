@@ -23,7 +23,7 @@
 "oJi-EL-gWT.placeholder" = "Digite o e-mail se você gostaria que respondêssemos";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "VOLTAR";
+"tCN-dT-J7Y.normalTitle" = "INÍCIO";
 
 /* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
 "zE7-4q-9oe.title" = "Feedback";

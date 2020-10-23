@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Koruma devre dışı";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "DENEMEYİ BAŞLAT";
+"upgrade_button_title" = "Abone ol";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "SATIN AL";
@@ -260,7 +260,7 @@
 "doh_protocol" = "HTTPS üzerinden DNS";
 
 /* DnsProviderDetailsController - dns over https rotocol */
-"dot_protocol" = "TLS üzerinden DNS";
+"dot_protocol" = "DNS-over-TLS";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Çıkış yapmak istediğinize emin misiniz?";
@@ -397,9 +397,6 @@
 /* (AboutViewController) Login title */
 "common_license" = "Lisans";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Bir kez ödeme yapın ve tüm iOS cihazlarınızda AdGuard Premium özelliklerini kullanın!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Yanlış e-posta veya parola";
 
@@ -410,7 +407,7 @@
 "account_is_locked_error" = "Hesap geçici olarak kilitlenmiştir";
 
 /* (Confirm2faController) Invalid 2fa token on login */
-"invalid_2fa_code_error" = "Geçersiz 2FA anahtarı";
+"invalid_2fa_code_error" = "Geçersiz 2FA simgesi";
 
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi istisnaları";

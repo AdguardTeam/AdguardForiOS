@@ -70,9 +70,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection désactivée";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "COMMENCER L'ESSAI";
-
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "ACHETER";
 
@@ -396,9 +393,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licence";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Payez une fois et utilisez les fonctionnalités Premium d'AdGuard sur tous vos appareils iOS!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Adresse e-mail ou mot de passe incorrect";

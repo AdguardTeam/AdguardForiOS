@@ -56,7 +56,7 @@
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// veya tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
-"Zn0-J3-lVl.normalTitle" = "TLS üzerinden DNS";
+"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
 "c9G-jn-5ym.text" = "DNS sunucusu";

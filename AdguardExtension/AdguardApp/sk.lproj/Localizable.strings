@@ -397,9 +397,6 @@
 /* (AboutViewController) Login title */
 "common_license" = "Licencia";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Zaplaťte raz a používajte funkcie AdGuard Premium na všetkých svojich zariadeniach!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Nesprávna e-mail adresa alebo heslo";
 

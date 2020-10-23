@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Защита отключена";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "ПРОБНЫЙ ПЕРИОД";
+"upgrade_button_title" = "Подписаться";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "КУПИТЬ";
@@ -185,7 +185,7 @@
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без значка VPN), не совместим с другими VPN-приложениями, менее стабильный";
 
 /* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS – альтернативный способ защиты вашей конфиденциальности от всевозможных онлайн счетчиков и систем сбора данных, опасных и фишинговых сайтов";
+"adguard_dns_description" = "AdGuard DNS – альтернативный способ защитить вас от счётчиков, систем аналитики и фишинговых сайтов";
 
 /* Adguard Family DNS server description */
 "adguard_family_dns_description" = "AdGuard DNS + Безопасный поиск и блокировка контента для взрослых";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Лицензия";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Сделайте разовый платеж и используйте Премиум-функции AdGuard на всех своих iOS-устройствах!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Неверный адрес почты или пароль";

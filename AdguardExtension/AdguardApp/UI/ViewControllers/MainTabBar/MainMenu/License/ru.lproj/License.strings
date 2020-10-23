@@ -26,7 +26,7 @@
 "P6N-OK-fHG.text" = "Пароль:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "ВОЙТИ В МОЙ АККАУНТ";
+"Rxf-sg-Wfk.normalTitle" = "ЛИЧНЫЙ КАБИНЕТ";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Войти";

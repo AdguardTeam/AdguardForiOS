@@ -4,9 +4,6 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "Acerca de";
 
-/* Class = "UIButton"; normalTitle = "Read more about the product"; ObjectID = "htU-yE-FEi"; */
-"htU-yE-FEi.normalTitle" = "Más información sobre el producto";
-
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
 "jMW-e4-GbU.title" = "Iniciar sesión";
 

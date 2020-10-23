@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "A proteção está desativada";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Efetuar assinatura";
+"upgrade_button_title" = "Assinar";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "COMPRAR";
@@ -149,7 +149,7 @@
 "add_whitelist_domain_placeholder" = "exemplo.org";
 
 /* (UserFilterController) add wifi name placeholder */
-"add_wifi_name_placeholder" = "O nome do seu Wi-Fi";
+"add_wifi_name_placeholder" = "Nome do seu Wi-Fi";
 
 /* (UserFilterController) add blacklist rule caption */
 "add_blacklist_rule_caption" = "Regra:";
@@ -397,9 +397,6 @@
 /* (AboutViewController) Login title */
 "common_license" = "Licença";
 
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Pague uma vez e use os recursos do AdGuard Premium em todos os seus dispositivos!";
-
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail ou senha inválida";
 
@@ -425,13 +422,13 @@
 "filter_mobile_title" = "Filtrar dados móveis";
 
 /* (NetworkSettingsController) title for "Filter wi-fi data" */
-"filter_wifi_title" = "Filtro de Wi-Fi";
+"filter_wifi_title" = "Filtrar Wi-Fi";
 
 /* (NetworkSettingsController) description for mobile data */
-"mobile_data_description" = "Proteção contra rastreamento enquanto estiver conectado com dados móveis";
+"mobile_data_description" = "Proteção DNS durante dados móveis";
 
 /* (NetworkSettingsController) description for wi-fi data */
-"wifi_data_description" = "Proteção contra rastreamento enquanto estiver conectado com Wi-Fi";
+"wifi_data_description" = "Proteção DNS em Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
 "allowlist_title" = "Lista branca";
@@ -479,7 +476,7 @@
 "custom_description" = "Permite a adição de filtros de terceiros. Disponível para usuários Premium";
 
 /*(LogCategory) audio video player category*/
-"audio_video_player" = "Players de áudio e vídeo";
+"audio_video_player" = "Reprodutores de áudio e vídeo";
 
 /*(LogCategory) comments category*/
 "comments" = "Comentários";
@@ -488,7 +485,7 @@
 "customer_interaction" = "Interação com o cliente";
 
 /*(LogCategory) pornvertising category*/
-"pornvertising" = "Pornvertising";
+"pornvertising" = "Publicidade pornográfica";
 
 /*(LogCategory) advertising category*/
 "advertising" = "Publicidade";
@@ -497,7 +494,7 @@
 "essential" = "Essencial";
 
 /*(LogCategory) site_analytics category*/
-"site_analytics" = "Análise do site";
+"site_analytics" = "Sites de análises";
 
 /*(LogCategory) social media category*/
 "social_media" = "Rede social";
@@ -647,10 +644,10 @@
 "dns_request_user_status_removed_from_blacklist" = "removido da lista negra";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Abre as %@ <b>configurações</b>";
+"onboarding_first_step_text" = "Abre as <b>configurações</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Toque no %@ <b>Safari</b> e escolha<b> no menu \"bloqueadores de conteúdo\"</b>";
+"onboarding_second_step_text" = "Toque no <b>Safari</b> e escolha no menu <b>\"bloqueadores de conteúdo\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Ative em %@ todos os bloqueadores de conteúdo</b> e volte para o aplicativo!";

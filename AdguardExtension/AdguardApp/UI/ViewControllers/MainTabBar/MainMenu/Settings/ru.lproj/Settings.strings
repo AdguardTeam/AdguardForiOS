@@ -29,7 +29,7 @@
 "GBd-dx-t46.text" = "Изменяйте настройки, только если вы уверены в том, что делаете";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
-"GFO-xu-Bir.text" = "AdGuard будет записывать более подробную информацию в журнал. Не включайте эту опцию, только если вам не нужно отследить ошибку";
+"GFO-xu-Bir.text" = "AdGuard будет записывать более подробную информацию в журнал. Включите эту опцию, только если вам нужно отследить ошибку";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
 "GGp-kp-YJI.text" = "Split-Tunnel";

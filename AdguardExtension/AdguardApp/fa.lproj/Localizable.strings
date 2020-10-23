@@ -43,9 +43,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "حفاظت غيرفعال شده است";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "دریافت اشتراک";
-
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "خرید";
 
@@ -315,3 +312,81 @@
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "توکن احراز هویت دو مرحله ای نامعتبر است";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "دستورات کاربر سافاری";
+
+/* (ListOfRulesModel) title for export */
+"export" = "خروجيگيري";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "پاکسازی";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "ذخیره";
+
+/* (ListOfRulesModel) title for import */
+"import" = "وارد کردن";
+
+/* "Disabled" title */
+"disabled" = "غير فعال شده";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "حذف از لیست سفید";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "حذف از لیست سیاه";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "افزودن به لیست سفید";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "افزودن به لیست سیاه";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "اجازه مسدودسازی سایت های فیشینگ و سایر دامنه های خطرناک را میدهد. برای کاربران پریمیوم موجود است";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "اجازه افزودن فیلترهای ثالث را میدهد. برای کاربران پریمیوم موجود است";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "پخش کننده صوتی و صدا";
+
+/*(LogCategory) comments category*/
+"comments" = "نظرات";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "ارتباط با مشتری";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "تبلیغات ضد اخلاقی";
+
+/*(LogCategory) advertising category*/
+"advertising" = "تبلیغات";
+
+/*(LogCategory) essential category*/
+"essential" = "ضروری";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "آنالیزگر سایت";
+
+/*(LogCategory) social media category*/
+"social_media" = "رسانه اجتماعی";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "متفرقه";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "آنالیزگر موبایل";
+
+/*(LogCategory) hosting category*/
+"hosting" = "میزبانی";
+
+/*(LogCategory) unknown category*/
+"unknown" = "ناشناخته";
+
+/*(LogCategory) extensions category*/
+"extensions" = "افزونه ها";

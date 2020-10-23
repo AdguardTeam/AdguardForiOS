@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Inverter hvitelisten";
 
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "Inkompatibelt med andre VPN-apper, ustabil";
+
 /* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Fjern VPN-profil";
 
@@ -27,6 +30,9 @@
 
 /* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
 "ILy-oL-9M6.text" = "Bruk forenklede filtre";
+
+/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Dette vil fjerne din faktiske VPN-profil og skru av DNS-beskyttelse";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Avanserte innstillinger";
@@ -54,6 +60,9 @@
 
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
 "bnd-Eh-hpk.text" = "Tunnelmodus";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "Gjenoppta beskyttelsen når et annet nettverk blir koblet til";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Avanserte innstillinger";

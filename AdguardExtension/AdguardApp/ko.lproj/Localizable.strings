@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "보호가 비활성화 되었습니다.";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "평가판 시작";
+"upgrade_button_title" = "구독";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "구매";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "라이선스";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "한 번 구매하여 모든 iOS 기기에서 AdGuard 프리미엄 기능을 사용하세요!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "이메일 주소 또는 비밀번호가 올바르지 않습니다";

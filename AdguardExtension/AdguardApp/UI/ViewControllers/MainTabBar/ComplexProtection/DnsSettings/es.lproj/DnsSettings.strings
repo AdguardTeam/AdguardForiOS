@@ -11,7 +11,7 @@
 "3lB-T7-fSO.text" = "Establecer DNS personalizado";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
+"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// o tls://";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "GUARDAR";
@@ -53,7 +53,7 @@
 "ZdD-yx-6ph.normalTitle" = "CANCELAR";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
-"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// or tls://";
+"ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// o tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
 "Zn0-J3-lVl.normalTitle" = "DNS-por-TLS";

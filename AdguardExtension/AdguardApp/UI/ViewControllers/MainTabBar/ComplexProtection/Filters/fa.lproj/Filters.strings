@@ -4,11 +4,20 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "افزودن یک فیلتر";
 
+/* Class = "UILabel"; text = "Safari protection"; ObjectID = "6WB-a0-8YE"; */
+"6WB-a0-8YE.text" = "حفاظت سافاری";
+
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "نام:";
 
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
+
+/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard در سایت های این لیست کار نمی کند";
+
+/* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
+"Lq2-mi-McV.text" = "فیلترها";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "فیلتر دستی جدید";
@@ -16,11 +25,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "لغو";
 
+/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "این مدل تبلیغات و ردیابی را در سایت های بازشده در سافاری را فیلتر می کند";
+
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "تعداد دستور: ";
 
 /* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
 "UR2-d4-zYf.text" = "بروز رسانی شده";
+
+/* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
+"VCK-db-aeg.text" = "دستورات کاربر";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
 "Ve5-DF-RNB.text" = "وبسایت";
@@ -33,6 +48,9 @@
 
 /* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
 "eAd-RZ-bHN.text" = "از فیلترهای دستی خود در اینجا استفاده کنید";
+
+/* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
+"f3z-Yh-zY2.text" = "لیست سفید سافاری";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "افزودن";

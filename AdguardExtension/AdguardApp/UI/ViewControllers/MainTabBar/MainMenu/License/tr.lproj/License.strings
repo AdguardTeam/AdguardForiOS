@@ -47,7 +47,7 @@
 "hjF-1C-hFa.text" = "Premium etkinleştirildi";
 
 /* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "Satın almayı geri yükle";
+"mR4-EU-MFx.normalTitle" = "Satın alımı geri yükle";
 
 /* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
 "ppx-jv-rek.text" = "Özel filtreler";

@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Protecția este dezactivată";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "ÎNCEPE TESTAREA";
+"upgrade_button_title" = "Abonați-vă";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "CUMPĂRĂ";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licență";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Plătiți o dată și folosiți funcții AdGuard Premium pe orice aparat!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "E-mail sau parolă incorecte";

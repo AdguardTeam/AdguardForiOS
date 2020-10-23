@@ -67,9 +67,6 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Bảo vệ bị vô hiệu hóa";
 
-/* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Bắt đầu dùng thử";
-
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Trả phí";
 
@@ -387,9 +384,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Bản quyền";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Trả tiền một lần duy nhất để dùng những tính năng cao cấp của AdGuard trên tất cả thiết bị của bạn!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Email hoặc mật khẩu không đúng";

@@ -109,6 +109,9 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Tjenerens navn";
 
+/* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
+"qjN-LB-N3T.text" = "Tilpass din DNS-trafikk ved å benytte dine egne oppføringer.";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS-tjeneradresse";
 

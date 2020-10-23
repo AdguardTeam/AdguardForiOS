@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Védelem le van tiltva";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "PRÓBA INDÍTÁSA";
+"upgrade_button_title" = "Előfizetés";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "VÁSÁRLÁS";
@@ -390,9 +390,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licenc";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Fizessen egyszer és használja az AdGuard Prémium funkcióit az összes iOS eszközén!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Hibás email vagy jelszó";

@@ -71,7 +71,7 @@
 "protection_disabled_caption" = "Zaštita je isključena";
 
 /* (GetProTableController) upgrade button title */
-"upgrade_button_title" = "Započni probni period";
+"upgrade_button_title" = "Pretplati se";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kupi";
@@ -396,9 +396,6 @@
 
 /* (AboutViewController) Login title */
 "common_license" = "Licenca";
-
-/* (GetProTableController) this text is shown when user choose lifetime license */
-"getPro_screen_lifetime_text" = "Platite jednom i koristite AdGuard Premium na svim vašim uređajima!";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "Netačna adresa elektronske pošte ili lozinka";
