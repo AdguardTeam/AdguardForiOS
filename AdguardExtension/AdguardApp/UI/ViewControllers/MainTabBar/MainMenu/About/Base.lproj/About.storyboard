@@ -62,8 +62,13 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htU-yE-FEi">
-                                <rect key="frame" x="81" y="378.66666666666669" width="213" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htU-yE-FEi">
+                                <rect key="frame" x="116" y="410.66666666666669" width="143" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4oK-nl-mAQ">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Acknowlegdements">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,8 +80,13 @@
                                     <action selector="readMoreTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="9by-dr-X0A"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyB-mD-gtt">
-                                <rect key="frame" x="167.66666666666666" y="422.66666666666669" width="40" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyB-mD-gtt">
+                                <rect key="frame" x="167.66666666666666" y="442.66666666666669" width="40" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="x9E-pa-uaP">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="EULA">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,8 +98,13 @@
                                     <action selector="eulaTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="knv-0c-2Az"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbp-5W-y9v">
-                                <rect key="frame" x="137" y="466.66666666666669" width="101" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbp-5W-y9v">
+                                <rect key="frame" x="137" y="474.66666666666669" width="101" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="RF9-WM-mQm">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Privacy Policy">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,8 +116,13 @@
                                     <action selector="privacyPolicyTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="v16-JT-XYd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-hy-Fhk">
-                                <rect key="frame" x="172.66666666666666" y="510.66666666666674" width="30" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-hy-Fhk">
+                                <rect key="frame" x="172.66666666666666" y="506.66666666666674" width="30" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2HH-vT-DOj">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -114,6 +134,24 @@
                                     <action selector="loginLogoutTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="ZDE-Gh-f0l"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-oj-ZeJ">
+                                <rect key="frame" x="125" y="378.66666666666669" width="125" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="qdJ-me-M0A">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Discuss AdGuard">
+                                    <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                </variation>
+                                <connections>
+                                    <action selector="readMoreTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="q3o-8J-RSP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -121,9 +159,10 @@
                             <constraint firstItem="636-Zz-5HO" firstAttribute="height" secondItem="517-dV-Anx" secondAttribute="height" multiplier="0.2" id="6Io-ly-JpZ"/>
                             <constraint firstItem="Jbp-5W-y9v" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="8gY-B0-22A"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="hE0-Ag-02J" secondAttribute="trailing" constant="24" id="ATM-rC-GnS"/>
-                            <constraint firstItem="htU-yE-FEi" firstAttribute="top" secondItem="oLS-Tk-G1c" secondAttribute="bottom" constant="24" id="INN-Ii-tg4"/>
+                            <constraint firstItem="c73-ge-xtS" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vwj-hy-Fhk" secondAttribute="bottom" constant="12" id="Ccc-Vi-8P3"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="top" secondItem="636-Zz-5HO" secondAttribute="bottom" constant="36" id="IWg-2J-DJM"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="16" id="Ly8-QS-tHg"/>
+                            <constraint firstItem="htU-yE-FEi" firstAttribute="top" secondItem="oMX-oj-ZeJ" secondAttribute="bottom" constant="12" id="M0B-SI-tFz"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="V4V-p5-f0s"/>
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="16" id="W1o-BR-YZV"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="centerY" secondItem="c73-ge-xtS" secondAttribute="centerY" constant="-40" id="WA6-9k-tBW"/>
@@ -132,10 +171,12 @@
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="top" secondItem="dw2-f1-QbR" secondAttribute="bottom" constant="8" id="cWE-TL-gMP"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="dw2-f1-QbR" secondAttribute="trailing" constant="16" id="dYw-es-YSG"/>
                             <constraint firstItem="hE0-Ag-02J" firstAttribute="top" secondItem="c73-ge-xtS" secondAttribute="top" id="duc-bZ-lfu"/>
+                            <constraint firstItem="oMX-oj-ZeJ" firstAttribute="top" secondItem="oLS-Tk-G1c" secondAttribute="bottom" constant="24" id="jte-JS-sot"/>
                             <constraint firstItem="hE0-Ag-02J" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="24" id="qHy-1H-71f"/>
                             <constraint firstItem="uyB-mD-gtt" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="qy6-Rj-ocH"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="oLS-Tk-G1c" secondAttribute="trailing" constant="16" id="tdx-6n-Dxn"/>
                             <constraint firstItem="uyB-mD-gtt" firstAttribute="top" secondItem="htU-yE-FEi" secondAttribute="bottom" constant="12" id="wPe-GY-b0I"/>
+                            <constraint firstItem="oMX-oj-ZeJ" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="wzq-g0-uNe"/>
                             <constraint firstItem="htU-yE-FEi" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="xqY-Fn-vzi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
