@@ -51,6 +51,7 @@ class DnsSettingsController : UITableViewController {
     
     private var themeObserver: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
+    private var didBecomeActiveNotification: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     
     private var proStatus: Bool {
@@ -91,6 +92,10 @@ class DnsSettingsController : UITableViewController {
         vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in
             self?.updateVpnInfo()
         }
+        
+        didBecomeActiveNotification = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: .main, using: { [weak self] _ in
+            self?.updateVpnInfo()
+        })
         
         let product = purchaseService.standardProduct
         getPtoTitleLabel.text = getTitleString(product: product).uppercased()

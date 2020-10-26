@@ -157,6 +157,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         
         updateWidgetComplex()
+        updateWidgetSystem()
         updateWidgetSafari()
         
         if (activeDisplayMode == .compact) {
@@ -188,8 +189,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        
-        complexProtection.switchSystemProtection(state: enabled, for: nil) { _ in }
         
         let alpha: CGFloat = enabled ? 1.0 : 0.5
         systemImageView.alpha = alpha
