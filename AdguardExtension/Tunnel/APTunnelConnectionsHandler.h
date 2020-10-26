@@ -44,5 +44,7 @@
  */
 - (void)startHandlingPackets;
 
+- (void)stopPacketHandling;
+
 
 @end

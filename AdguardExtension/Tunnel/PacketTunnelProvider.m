@@ -438,12 +438,6 @@
     
     [_reachabilityHandler stopNotifier];
     
-    // https://forums.developer.apple.com/thread/73432
-    // reasseting shows "reconnecting" message in ios vpn settings
-    // Also, it stops processing traffic through the tunnel.
-    // Perhaps it will fix the internet connection failure https://github.com/AdguardTeam/AdguardForiOS/issues/772
-    self.reasserting = YES;
-    
     if(_restartByRechability) {
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
@@ -464,11 +458,12 @@
     
     [self.dnsProxy stopWithCallback:^{
         DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
-        
         ASSIGN_STRONG(self);
+        [USE_STRONG(self).connectionHandler stopPacketHandling];
+        
         [USE_STRONG(self) updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error, NSArray<NSString *> *systemDnsIps) {
-            self.reasserting = NO;
             [_reachabilityHandler startNotifier];
+            [USE_STRONG(self).connectionHandler startHandlingPackets];
             [USE_STRONG(self) startDnsProxyWithSystemDnsIps:systemDnsIps];
         }];
     }];
