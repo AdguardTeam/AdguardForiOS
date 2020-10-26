@@ -31,7 +31,6 @@ NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConverted
 NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
 NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
-NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";

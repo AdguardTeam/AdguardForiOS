@@ -50,7 +50,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 #define REPORT_PARAM_URL @"url"
 #define REPORT_PARAM_FILTERS @"filters"
 #define REPORT_PARAM_SYSTEM_WIDE @"ios.systemwide"
-#define REPORT_PARAM_SIMPLIFIED @"ios.simplified"
 #define REPORT_PARAM_CUSTOM_DNS @"ios.CustomDNS"
 #define REPORT_PARAM_DNS @"ios.DNS"
 
@@ -211,9 +210,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [filtersString appendFormat:format, filterId];
     }
     params[REPORT_PARAM_FILTERS] = filtersString.copy;
-    
-    params[REPORT_PARAM_SIMPLIFIED] =  [[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"true" : @"false";
-    
+        
     NSString* dnsServerParam = nil;
     BOOL custom = NO;
     
@@ -279,8 +276,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
         [sb appendFormat:@"\r\n\r\nLocale: %@", [ADLocales lang]];
         [sb appendFormat:@"\r\nRegion: %@", [ADLocales region]];
         
-        [sb appendFormat:@"\r\n\r\nOptimized enabled: %@", ([[_sharedResources sharedDefaults] boolForKey:AEDefaultsJSONConverterOptimize] ? @"YES" : @"NO")];
-    
         [sb appendFormat:@"\r\n\r\nAEDefaultsGeneralContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsGeneralContentBlockerRulesCount]];
         [sb appendFormat:@"\r\nAEDefaultsPrivacyContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsPrivacyContentBlockerRulesCount]];
         [sb appendFormat:@"\r\nAEDefaultsSocialContentBlockerRulesCount: %@",[[_sharedResources sharedDefaults] objectForKey:AEDefaultsSocialContentBlockerRulesCount]];

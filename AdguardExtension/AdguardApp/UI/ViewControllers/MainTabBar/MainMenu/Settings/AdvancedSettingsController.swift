@@ -21,7 +21,6 @@ import UIKit
 
 class AdvancedSettingsController: UITableViewController {
 
-    @IBOutlet weak var useSimplifiedFiltersSwitch: UISwitch!
     @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var debugLogsSwitch: UISwitch!
@@ -42,11 +41,10 @@ class AdvancedSettingsController: UITableViewController {
     
     private let segueIdentifier = "contentBlockersScreen"
     
-    private let useSimplifiedRow = 0
-    private let showStatusbarRow = 1
-    private let restartProtectionRow = 2
-    private let debugLogsRow = 3
-    private let removeVpnProfile = 6
+    private let showStatusbarRow = 0
+    private let restartProtectionRow = 1
+    private let debugLogsRow = 2
+    private let removeVpnProfile = 5
     
     private var themeObservation: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken?
@@ -56,8 +54,7 @@ class AdvancedSettingsController: UITableViewController {
         
         updateTheme()
         setupBackButton()
-        
-        useSimplifiedFiltersSwitch.isOn = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
+
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
@@ -90,10 +87,6 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     // MARK: - actions
-    
-    @IBAction func useSimplifiedFiltersAction(_ sender: UISwitch) {
-        change(senderSwitch: sender, forKey: AEDefaultsJSONConverterOptimize)
-    }
     
     @IBAction func showProgressbarAction(_ sender: UISwitch) {
         if !sender.isOn {
@@ -143,9 +136,6 @@ class AdvancedSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case useSimplifiedRow:
-            useSimplifiedFiltersSwitch.setOn(!useSimplifiedFiltersSwitch.isOn, animated: true)
-            useSimplifiedFiltersAction(useSimplifiedFiltersSwitch)
         case showStatusbarRow:
             showStatusbarSwitch.setOn(!showStatusbarSwitch.isOn, animated: true)
             showProgressbarAction(showStatusbarSwitch)
@@ -179,34 +169,12 @@ class AdvancedSettingsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func change(senderSwitch: UISwitch, forKey key: String) {
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        
-        let oldValue = resources.sharedDefaults().bool(forKey: key)
-        let newValue = senderSwitch.isOn
-        
-        if oldValue != newValue {
-            resources.sharedDefaults().set(newValue, forKey: key)
-            
-            contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
-                if error != nil {
-                    self?.resources.sharedDefaults().set(oldValue, forKey: key)
-                    DispatchQueue.main.async {
-                        senderSwitch.setOn(oldValue, animated: true)
-                    }
-                }
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
-            }
-        }
-    }
-    
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSeparators(separators)
-        theme.setupSwitch(useSimplifiedFiltersSwitch)
         theme.setupSwitch(showStatusbarSwitch)
         theme.setupSwitch(restartProtectionSwitch)
         theme.setupSwitch(debugLogsSwitch)
