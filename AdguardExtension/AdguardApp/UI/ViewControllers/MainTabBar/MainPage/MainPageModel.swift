@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol MainPageModelDelegate {
+protocol MainPageModelDelegate: class {
     func updateStarted()
     func updateFinished(message: String)
     func updateFailed(error: String)
@@ -31,7 +31,7 @@ protocol MainPageModelProtocol: class {
 
 class MainPageModel: MainPageModelProtocol {
     
-    var delegate: MainPageModelDelegate?
+    weak var delegate: MainPageModelDelegate?
     
     // MARK: - private members
     
