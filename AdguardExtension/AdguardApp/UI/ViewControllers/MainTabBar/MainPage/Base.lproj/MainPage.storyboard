@@ -1072,7 +1072,7 @@
         <scene sceneID="bA7-uX-8tw">
             <objects>
                 <navigationController id="oBM-uz-5je" customClass="MainNavigationController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="other-group-icon" id="o1g-zx-23d"/>
+                    <tabBarItem key="tabBarItem" title="" image="activity" id="o1g-zx-23d"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="Tcm-Rv-cqD">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1130,6 +1130,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="activity" width="24" height="25"/>
         <image name="adguard-small-icon" width="24" height="24"/>
         <image name="advanced-settings-icon" width="24" height="24"/>
         <image name="arrow_down" width="24" height="24"/>
@@ -1138,7 +1139,6 @@
         <image name="ic_adguard" width="24" height="24"/>
         <image name="man" width="320" height="213"/>
         <image name="nil" width="16" height="16"/>
-        <image name="other-group-icon" width="24" height="24"/>
         <image name="safari" width="24" height="24"/>
     </resources>
 </document>

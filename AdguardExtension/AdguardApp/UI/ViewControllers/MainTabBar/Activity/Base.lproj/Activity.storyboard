@@ -730,6 +730,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s4c-Cn-DYM">
                                 <rect key="frame" x="183" y="42" width="48" height="48"/>
+                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="s4c-Cn-DYM" secondAttribute="height" id="NUP-n0-bN8"/>
                                     <constraint firstAttribute="height" constant="48" id="lbN-mF-Sqv">
