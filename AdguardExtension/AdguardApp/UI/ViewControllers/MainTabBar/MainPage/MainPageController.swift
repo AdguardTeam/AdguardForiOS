@@ -174,8 +174,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     required init?(coder: NSCoder) {
         mainPageModel = MainPageModel(antibanner: ServiceLocator.shared.getService()!)
         super.init(coder: coder)
-        
-        mainPageModel.delegate = self
     }
     
     override func viewDidLoad() {
@@ -189,6 +187,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
         chartModel.chartPointsChangedDelegates.append(self)
         complexProtectionSwitch.delegate = self
+        mainPageModel.delegate = self
         
         dateTypeChanged(dateType: resources.chartDateType)
         
