@@ -25,6 +25,7 @@ class DnsSettingsController : UITableViewController {
     @IBOutlet weak var tryButton: UIButton!
     @IBOutlet weak var systemIcon: UIImageView!
     @IBOutlet weak var enabledSwitch: UISwitch!
+    @IBOutlet weak var implementationLabel: ThemableLabel!
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
@@ -71,8 +72,10 @@ class DnsSettingsController : UITableViewController {
     private let titleDescriptionCell = 0
     private let titleStateCell = 1
     
+    private let implementationRow = 0
+    private let dnsServerRow = 1
     private let dnsFilteringRow = 2
-    private let networkSettingsRow = 0
+    private let networkSettingsRow = 3
     
     // MARK: - View Controller life cycle
     
@@ -98,6 +101,7 @@ class DnsSettingsController : UITableViewController {
         updateVpnInfo()
         setupBackButton()
         updateTheme()
+        setCurrentImplementationText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,6 +146,10 @@ class DnsSettingsController : UITableViewController {
             cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
+            if indexPath.row == implementationRow && proStatus {
+                cell.isHidden = !configuration.advancedMode
+            }
+            
             if indexPath.row == dnsFilteringRow && proStatus {
                 cell.isHidden = !configuration.advancedMode
                 networkSettingsSeparator.isHidden = !configuration.advancedMode
@@ -161,6 +169,10 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             
+            if indexPath.row == implementationRow && !configuration.advancedMode {
+                return 0.0
+            }
+            
             if indexPath.row == dnsFilteringRow && !configuration.advancedMode {
                 return 0.0
             }
@@ -175,6 +187,13 @@ class DnsSettingsController : UITableViewController {
         }
         
         return normalHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == menuSection && indexPath.row == implementationRow && configuration.advancedMode {
+            presentChooseDnsImplementationController()
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -255,5 +274,23 @@ class DnsSettingsController : UITableViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, numberOfUnits)
         
         return resultString
+    }
+    
+    private func presentChooseDnsImplementationController() {
+        if let implementationVC = storyboard?.instantiateViewController(withIdentifier: "ChooseDnsImplementationController") as? ChooseDnsImplementationController {
+            implementationVC.delegate = self
+            present(implementationVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
+    func currentImplementationChanged() {
+        setCurrentImplementationText()
+    }
+    
+    private func setCurrentImplementationText() {
+        let stringKey = resources.dnsImplementation == .adGuard ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
+        implementationLabel.text = String.localizedString(stringKey)
     }
 }

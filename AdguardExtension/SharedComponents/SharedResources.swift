@@ -235,6 +235,18 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var dnsImplementation: DnsImplementation {
+        get {
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
+                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
+            }
+            return .adGuard
+        }
+        set {
+            sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
