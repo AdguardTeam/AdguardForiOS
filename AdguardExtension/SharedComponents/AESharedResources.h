@@ -83,11 +83,6 @@ extern NSString * _Nonnull AEDefaultsJSONConvertedRules;
 extern NSString * _Nonnull AEDefaultsJSONRulesOverlimitReached;
 
 /**
- User Defaults key that define optimized procedure of the convertion for JSON Converter.
- */
-extern NSString * _Nonnull AEDefaultsJSONConverterOptimize;
-
-/**
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
 extern NSString * _Nonnull AEDefaultsWifiOnlyUpdates;

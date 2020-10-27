@@ -39,10 +39,23 @@ class MigrationService: MigrationServiceProtocol {
     private let configurationService: ConfigurationServiceProtocol
     private let filtersService: FiltersServiceProtocol
     private let productInfo: ADProductInfoProtocol
+    private let contentBlockerService: ContentBlockerServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
-    init(vpnManager: VpnManagerProtocol, dnsProvidersService: DnsProvidersServiceProtocol, resources: AESharedResourcesProtocol, antibanner: AESAntibannerProtocol, dnsFiltersService: DnsFiltersServiceProtocol, networking: ACNNetworkingProtocol, activityStatisticsService: ActivityStatisticsServiceProtocol, dnsStatisticsService: DnsStatisticsServiceProtocol, dnsLogService: DnsLogRecordsServiceProtocol, configuration: ConfigurationServiceProtocol, filtersService: FiltersServiceProtocol, productInfo: ADProductInfoProtocol) {
+    init(vpnManager: VpnManagerProtocol,
+         dnsProvidersService: DnsProvidersServiceProtocol,
+         resources: AESharedResourcesProtocol,
+         antibanner: AESAntibannerProtocol,
+         dnsFiltersService: DnsFiltersServiceProtocol,
+         networking: ACNNetworkingProtocol,
+         activityStatisticsService: ActivityStatisticsServiceProtocol,
+         dnsStatisticsService: DnsStatisticsServiceProtocol,
+         dnsLogService: DnsLogRecordsServiceProtocol,
+         configuration: ConfigurationServiceProtocol,
+         filtersService: FiltersServiceProtocol,
+         productInfo: ADProductInfoProtocol,
+         contentBlockerService: ContentBlockerServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -55,6 +68,7 @@ class MigrationService: MigrationServiceProtocol {
         self.configurationService = configuration
         self.filtersService = filtersService
         self.productInfo = productInfo
+        self.contentBlockerService = contentBlockerService
     }
     
     func install() {
@@ -165,6 +179,17 @@ class MigrationService: MigrationServiceProtocol {
                 DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
                 resetStatistics()
             }
+        }
+        
+        /**
+        Migration:
+         In app version 4.1 (561) we've removed 'optimize' feature for filters, because it was confusing;
+         Now this feature is set to false by default and we need to reload JSON for content blockers.
+         Migration for AdGuard and AdGuard Pro
+        */
+        if lastBuildVersion < 561 {
+            DDLogInfo("(MigrationService) -  migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            removeOptimizeFeature()
         }
     }
     
@@ -332,6 +357,16 @@ class MigrationService: MigrationServiceProtocol {
         result = result && enableGroupsWithEnabledFilters()
         
         return result
+    }
+    
+    private func removeOptimizeFeature() {
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+        contentBlockerService.reloadJsons(backgroundUpdate: false) { error in
+            if let error = error {
+                DDLogError("Error while removing 'optimize' feature; Error = \(error.localizedDescription)")
+            }
+            UIApplication.shared.endBackgroundTask(backgroundTaskId)
+        }
     }
 }
 

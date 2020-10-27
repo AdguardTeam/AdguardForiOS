@@ -691,83 +691,6 @@
                             </tableViewSection>
                             <tableViewSection id="suv-lj-8Dy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="19a-tl-stm">
-                                        <rect key="frame" x="0.0" y="127" width="414" height="113"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="19a-tl-stm" id="VMQ-fm-TLi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use simplified filters" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILy-oL-9M6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="16" width="317" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvq-Cw-7Z6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="18" width="309" height="9.5"/>
-                                                    <string key="text">If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    </variation>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2D-gP-XfA">
-                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="g0p-up-Ao8"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <action selector="useSimplifiedFiltersAction:" destination="71r-k4-iOF" eventType="valueChanged" id="T5V-sY-1Br"/>
-                                                    </connections>
-                                                </switch>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GdD-8F-a2k">
-                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="5Rm-uK-b7E"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="yvq-Cw-7Z6" firstAttribute="top" secondItem="ILy-oL-9M6" secondAttribute="bottom" constant="2" id="1yO-eh-ROT"/>
-                                                <constraint firstAttribute="trailing" secondItem="k2D-gP-XfA" secondAttribute="trailing" constant="16" id="5Oq-wE-zTN">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="ILy-oL-9M6" firstAttribute="leading" secondItem="VMQ-fm-TLi" secondAttribute="leading" constant="16" id="Hi1-An-tNG">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="GdD-8F-a2k" secondAttribute="bottom" id="ahY-as-Jbj"/>
-                                                <constraint firstAttribute="trailing" secondItem="GdD-8F-a2k" secondAttribute="trailing" id="bH4-sy-iAE"/>
-                                                <constraint firstItem="GdD-8F-a2k" firstAttribute="top" secondItem="yvq-Cw-7Z6" secondAttribute="bottom" constant="16" id="dud-eH-0UX">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="yvq-Cw-7Z6" firstAttribute="leading" secondItem="ILy-oL-9M6" secondAttribute="leading" id="i2X-pw-A7T"/>
-                                                <constraint firstItem="k2D-gP-XfA" firstAttribute="leading" secondItem="ILy-oL-9M6" secondAttribute="trailing" constant="16" id="jLW-0V-txP">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="GdD-8F-a2k" firstAttribute="leading" secondItem="VMQ-fm-TLi" secondAttribute="leading" id="pag-we-OgY"/>
-                                                <constraint firstItem="ILy-oL-9M6" firstAttribute="top" secondItem="VMQ-fm-TLi" secondAttribute="top" constant="16" id="sjY-Rq-7ni">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="k2D-gP-XfA" firstAttribute="top" secondItem="VMQ-fm-TLi" secondAttribute="top" constant="16" id="vyW-Du-ig4">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="k2D-gP-XfA" firstAttribute="leading" secondItem="yvq-Cw-7Z6" secondAttribute="trailing" constant="24" id="yGz-Hi-enO"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="P00-SA-j02">
                                         <rect key="frame" x="0.0" y="240" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1219,10 +1142,7 @@
                         <outlet property="restartProtectionSwitch" destination="Imm-1j-t70" id="7QM-Lx-Do6"/>
                         <outlet property="showStatusbarSwitch" destination="ieW-uu-eVz" id="Mbp-L9-8ip"/>
                         <outlet property="tunnelModeDescription" destination="Ffu-IP-k8s" id="sxc-hs-Bn3"/>
-                        <outlet property="useSimplifiedFiltersSwitch" destination="k2D-gP-XfA" id="eJC-Oi-kJU"/>
                         <outletCollection property="themableLabels" destination="Lig-ju-iTI" collectionClass="NSMutableArray" id="VaJ-2a-V5b"/>
-                        <outletCollection property="themableLabels" destination="ILy-oL-9M6" collectionClass="NSMutableArray" id="Hyl-N7-Bnm"/>
-                        <outletCollection property="themableLabels" destination="yvq-Cw-7Z6" collectionClass="NSMutableArray" id="oDm-vE-eyk"/>
                         <outletCollection property="themableLabels" destination="qxo-YS-JWL" collectionClass="NSMutableArray" id="ihX-N4-9fO"/>
                         <outletCollection property="themableLabels" destination="BOT-Ej-15M" collectionClass="NSMutableArray" id="P2x-A1-VFn"/>
                         <outletCollection property="themableLabels" destination="dLN-5K-c1N" collectionClass="NSMutableArray" id="ViU-oB-eEb"/>
@@ -1237,7 +1157,6 @@
                         <outletCollection property="separators" destination="9jr-ep-Jso" collectionClass="NSMutableArray" id="bmH-Ra-XFi"/>
                         <outletCollection property="separators" destination="Wt4-db-etp" collectionClass="NSMutableArray" id="lIC-3L-ScL"/>
                         <outletCollection property="separators" destination="f8E-WC-3FZ" collectionClass="NSMutableArray" id="MoH-yk-wbJ"/>
-                        <outletCollection property="separators" destination="GdD-8F-a2k" collectionClass="NSMutableArray" id="O6Z-DD-MSL"/>
                         <outletCollection property="themableLabels" destination="3zG-B5-jE5" collectionClass="NSMutableArray" id="VkP-FJ-oZr"/>
                         <outletCollection property="themableLabels" destination="GFO-xu-Bir" collectionClass="NSMutableArray" id="FCW-Tl-T1q"/>
                         <outletCollection property="separators" destination="p0T-ub-wAj" collectionClass="NSMutableArray" id="14b-EF-EhL"/>
