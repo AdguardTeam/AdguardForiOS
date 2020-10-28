@@ -26,6 +26,7 @@ class DnsSettingsController : UITableViewController {
     @IBOutlet weak var systemIcon: UIImageView!
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet weak var implementationLabel: ThemableLabel!
+    @IBOutlet weak var implementationIcon: UIImageView!
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
@@ -63,6 +64,9 @@ class DnsSettingsController : UITableViewController {
     private let enabledColor = UIColor(hexString: "#67b279")
     private let disabledColor = UIColor(hexString: "#888888")
     
+    private let adguardImplementationIcon = UIImage(named: "ic_adguard")
+    private let nativeImplementationIcon = UIImage(named: "native")
+    
     // MARK: - Sections constants
     
     private let titleSection = 0
@@ -74,8 +78,8 @@ class DnsSettingsController : UITableViewController {
     
     private let implementationRow = 0
     private let dnsServerRow = 1
-    private let dnsFilteringRow = 2
-    private let networkSettingsRow = 3
+    private let networkSettingsRow = 2
+    private let dnsFilteringRow = 3
     
     // MARK: - View Controller life cycle
     
@@ -101,7 +105,7 @@ class DnsSettingsController : UITableViewController {
         updateVpnInfo()
         setupBackButton()
         updateTheme()
-        setCurrentImplementationText()
+        processCurrentImplementation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,13 +150,9 @@ class DnsSettingsController : UITableViewController {
             cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
             cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
-            if indexPath.row == implementationRow && proStatus {
-                cell.isHidden = !configuration.advancedMode
-            }
-            
             if indexPath.row == dnsFilteringRow && proStatus {
-                cell.isHidden = !configuration.advancedMode
-                networkSettingsSeparator.isHidden = !configuration.advancedMode
+                cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
+                networkSettingsSeparator.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
             }
         }
 
@@ -169,11 +169,7 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             
-            if indexPath.row == implementationRow && !configuration.advancedMode {
-                return 0.0
-            }
-            
-            if indexPath.row == dnsFilteringRow && !configuration.advancedMode {
+            if indexPath.row == dnsFilteringRow && (!configuration.advancedMode || resources.dnsImplementation == .native) {
                 return 0.0
             }
             
@@ -190,7 +186,7 @@ class DnsSettingsController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == menuSection && indexPath.row == implementationRow && configuration.advancedMode {
+        if indexPath.section == menuSection && indexPath.row == implementationRow {
             presentChooseDnsImplementationController()
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -286,11 +282,15 @@ class DnsSettingsController : UITableViewController {
 
 extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
     func currentImplementationChanged() {
-        setCurrentImplementationText()
+        DispatchQueue.main.async { [weak self] in
+            self?.processCurrentImplementation()
+            self?.tableView.reloadData()
+        }
     }
     
-    private func setCurrentImplementationText() {
+    private func processCurrentImplementation() {
         let stringKey = resources.dnsImplementation == .adGuard ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
         implementationLabel.text = String.localizedString(stringKey)
+        implementationIcon.image = resources.dnsImplementation == .adGuard ? adguardImplementationIcon : nativeImplementationIcon
     }
 }

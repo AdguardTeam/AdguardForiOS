@@ -203,7 +203,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6h-pf-wB3">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6h-pf-wB3">
                                                     <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -643,6 +643,7 @@
                         <outlet property="enabledSwitch" destination="d2y-PM-g5Z" id="x2G-ek-kwy"/>
                         <outlet property="getProCell" destination="N3C-lA-FCw" id="SUD-jH-MdZ"/>
                         <outlet property="getPtoTitleLabel" destination="YCi-pz-es6" id="b0H-XM-oqf"/>
+                        <outlet property="implementationIcon" destination="ssV-3F-pwg" id="Q6o-UF-3ox"/>
                         <outlet property="implementationLabel" destination="DdI-nz-n9N" id="RHT-VM-SeQ"/>
                         <outlet property="networkSettingsSeparator" destination="BlE-s9-qaB" id="O7s-bx-ySU"/>
                         <outlet property="requestBlockingStateLabel" destination="xiD-h8-XrC" id="p31-ja-EDp"/>
