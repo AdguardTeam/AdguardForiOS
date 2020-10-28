@@ -74,7 +74,6 @@ class ChooseDnsImplementationController: BottomAlertController {
         theme.setupLabels(themableLabels)
         theme.setupSeparator(separator)
         theme.setupPopupButtons(popupButtons)
-        theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
     private func processCurrentImplementation() {

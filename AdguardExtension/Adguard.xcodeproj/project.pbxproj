@@ -444,6 +444,10 @@
 		7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */; };
 		7E8C8C4224E19779000B4B9C /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */; };
 		7E8C8C4324E19779000B4B9C /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */; };
+		7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9082072549D5430048C4B0 /* HowToSetupController.swift */; };
+		7E9082092549D5430048C4B0 /* HowToSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9082072549D5430048C4B0 /* HowToSetupController.swift */; };
+		7E90821C2549E3B60048C4B0 /* UIApplication+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90821B2549E3B60048C4B0 /* UIApplication+Utils.swift */; };
+		7E90821D2549E3B60048C4B0 /* UIApplication+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E90821B2549E3B60048C4B0 /* UIApplication+Utils.swift */; };
 		7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */; };
 		7E952E9723D5FFB400D89AE0 /* Protection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9923D5FFB400D89AE0 /* Protection.storyboard */; };
 		7E952E9A23D5FFBA00D89AE0 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9C23D5FFBA00D89AE0 /* Activity.storyboard */; };
@@ -2882,6 +2886,8 @@
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		7E9082072549D5430048C4B0 /* HowToSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToSetupController.swift; sourceTree = "<group>"; };
+		7E90821B2549E3B60048C4B0 /* UIApplication+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Utils.swift"; sourceTree = "<group>"; };
 		7E952E9123D5FF8500D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainPage.storyboard; sourceTree = "<group>"; };
 		7E952E9823D5FFB400D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Protection.storyboard; sourceTree = "<group>"; };
 		7E952E9B23D5FFBA00D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -3897,6 +3903,7 @@
 				655A02081C6B7686000F00D7 /* ACSSystemUtils.h */,
 				655A02091C6B7686000F00D7 /* ACSSystemUtils.m */,
 				D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */,
+				7E90821B2549E3B60048C4B0 /* UIApplication+Utils.swift */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -4983,6 +4990,7 @@
 				7E15B65C234358C20048E63F /* DnsFiltersController.swift */,
 				7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */,
 				7EC67F6B2548301000FEEEE2 /* ChooseDnsImplementationController.swift */,
+				7E9082072549D5430048C4B0 /* HowToSetupController.swift */,
 			);
 			path = DnsSettings;
 			sourceTree = "<group>";
@@ -6442,6 +6450,7 @@
 				D0B5458A2435D630002F0AEC /* DnsStatisticsService.swift in Sources */,
 				D0B545ED2435D6AB002F0AEC /* AppDelegateHelper.swift in Sources */,
 				D0B545E52435D69B002F0AEC /* NetworkSettingsCells.swift in Sources */,
+				7E90821D2549E3B60048C4B0 /* UIApplication+Utils.swift in Sources */,
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
 				D0B5456A2435D5C9002F0AEC /* UserFilterModel.swift in Sources */,
 				D0D7E61E244456F2001801A5 /* ActivityStatisticsModel.swift in Sources */,
@@ -6641,6 +6650,7 @@
 				65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */,
 				D0B545AA2435D640002F0AEC /* DnsContainerController.swift in Sources */,
 				D0B545A82435D640002F0AEC /* DnsSettingsController.swift in Sources */,
+				7E9082092549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D0B545DC2435D69B002F0AEC /* GroupCell.swift in Sources */,
 				659886991CF74DE9003ECD1C /* Reachability.m in Sources */,
 				D0B545F12435D6AB002F0AEC /* SimpleConfiguration.swift in Sources */,
@@ -6780,6 +6790,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E90821C2549E3B60048C4B0 /* UIApplication+Utils.swift in Sources */,
 				D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */,
 				D0D7E55C24377280001801A5 /* Bundle+config.swift in Sources */,
 				D0A29F8723DF273B00D974CF /* ACNIPUtils.m in Sources */,
@@ -6931,6 +6942,7 @@
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
 				7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */,
+				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
 				7E4D205622D71A5B003B0E75 /* SSZipArchive.m in Sources */,

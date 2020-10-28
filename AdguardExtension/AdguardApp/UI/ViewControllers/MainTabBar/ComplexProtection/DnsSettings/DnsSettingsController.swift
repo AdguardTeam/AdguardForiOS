@@ -80,6 +80,7 @@ class DnsSettingsController : UITableViewController {
     private let dnsServerRow = 1
     private let networkSettingsRow = 2
     private let dnsFilteringRow = 3
+    private let howToSetupRow = 4
     
     // MARK: - View Controller life cycle
     
@@ -152,7 +153,12 @@ class DnsSettingsController : UITableViewController {
             
             if indexPath.row == dnsFilteringRow && proStatus {
                 cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
-                networkSettingsSeparator.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
+                networkSettingsSeparator.isHidden = (!configuration.advancedMode || resources.dnsImplementation == .native) && resources.dnsImplementation == .adGuard
+            }
+            
+            if indexPath.row == howToSetupRow && resources.dnsImplementation != .native {
+                cell.isHidden = true
+                dnsFilteringSeparator.isHidden = resources.dnsImplementation != .native
             }
         }
 
@@ -173,6 +179,10 @@ class DnsSettingsController : UITableViewController {
                 return 0.0
             }
             
+            if indexPath.row == howToSetupRow && resources.dnsImplementation != .native {
+                return 0.0
+            }
+            
             return proStatus ? normalHeight : 0.0
         }
         
@@ -189,6 +199,11 @@ class DnsSettingsController : UITableViewController {
         if indexPath.section == menuSection && indexPath.row == implementationRow {
             presentChooseDnsImplementationController()
         }
+        
+        if indexPath.section == menuSection && indexPath.row == howToSetupRow && resources.dnsImplementation == .native {
+            presentHowToSetupController()
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -276,6 +291,12 @@ class DnsSettingsController : UITableViewController {
         if let implementationVC = storyboard?.instantiateViewController(withIdentifier: "ChooseDnsImplementationController") as? ChooseDnsImplementationController {
             implementationVC.delegate = self
             present(implementationVC, animated: true, completion: nil)
+        }
+    }
+    
+    private func presentHowToSetupController() {
+        if let howToSetupVC = storyboard?.instantiateViewController(withIdentifier: "HowToSetupController") as? HowToSetupController {
+            present(howToSetupVC, animated: true, completion: nil)
         }
     }
 }
