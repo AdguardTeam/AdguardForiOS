@@ -32,7 +32,7 @@ class DnsProvidersServiceTest: XCTestCase {
         let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "0.0.0.0")
         XCTAssertNotNil(result)
         XCTAssert(dnsProviders.customProviders.count == 1)
-        XCTAssert(dnsProviders.allProviders.count == 1)
+        XCTAssert(dnsProviders.allProviders.count == dnsProviders.predefinedProviders.count + 1)
         
         guard let addedProvider = dnsProviders.customProviders.first else {
             XCTFail()
@@ -71,13 +71,13 @@ class DnsProvidersServiceTest: XCTestCase {
         _ = dnsProviders.addCustomProvider(name: "test provider3", upstream: "0.0.0.3")
         
         XCTAssert(dnsProviders.customProviders.count == 3)
-        XCTAssert(dnsProviders.allProviders.count == 3)
+        XCTAssert(dnsProviders.allProviders.count == 3 + dnsProviders.predefinedProviders.count)
         
         dnsProviders.deleteProvider(providerToRemove)
         
-        XCTAssert(dnsProviders.allProviders.count == 2)
-        XCTAssertEqual(dnsProviders.allProviders[0].name, "test provider1")
-        XCTAssertEqual(dnsProviders.allProviders[1].name, "test provider3")
+        XCTAssert(dnsProviders.allProviders.count == 2 + dnsProviders.predefinedProviders.count)
+        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 0].name, "test provider1")
+        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 1].name, "test provider3")
         
         XCTAssert(dnsProviders.customProviders.count == 2)
         XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider1")

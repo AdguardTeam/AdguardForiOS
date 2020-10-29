@@ -64,7 +64,8 @@ protocol DnsProvidersServiceProtocol {
      Some languages codes from json differ from apple ones
     */
     private var languageMap = ["es": "es-ES",
-                               "zh-Hans": "zh-CN"]
+                               "zh-Hans": "zh-CN",
+                               "zh-Hant:": "zh-TW"]
     
     private var currentLocaleCode: String
     
@@ -78,7 +79,7 @@ protocol DnsProvidersServiceProtocol {
         // now we use DnsProviderInfo
         NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
         
-        self.currentLocaleCode = Locale.current.languageCode ?? "en"
+        self.currentLocaleCode = Bundle.main.preferredLocaleCode
         
         super.init()
         
@@ -291,8 +292,6 @@ protocol DnsProvidersServiceProtocol {
                     let upstreams = serverJson["upstreams"] as? [String]
                 else { continue }
             
-            let anycast = serverJson["anycast"] as? Bool
-            
             let server = DnsServerInfo(dnsProtocol: DnsProtocol.protocolByString[serverProtocolId]!, serverId: serverId, name: name, upstreams: upstreams)
             
             servers.append(server)
@@ -402,6 +401,12 @@ protocol DnsProvidersServiceProtocol {
             
             providerInfo.servers = provider.provider.servers.map {
                 return DnsServerInfo(dnsProtocol: DnsProtocol(type: $0.type), serverId: String($0.id), name: "", upstreams: $0.upstreams)
+            }
+            
+            let protcol = providerInfo.getActiveProtocol(resources)
+            if protcol == nil {
+                let prot = defaultProtocol(providerInfo)
+                providerInfo.setActiveProtocol(resources, protcol: prot)
             }
             
             return providerInfo

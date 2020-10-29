@@ -50,7 +50,8 @@ extension DnsProvidersService {
     
     func migrateActiveServerIfNeeded() {
         guard let activeServer = self.activeDnsServer else {
-            // nothing to migrate
+            
+            DDLogInfo("(DnsProvidersMigration) - migrateActiveServerIfNeeded. Nothing to migrate")
             return
         }
         
@@ -61,7 +62,7 @@ extension DnsProvidersService {
             
             // search server with mappedId in prdefined servers
             for provider in self.predefinedProviders {
-                for server in provider.servers ?? [DnsServerInfo]() {
+                for server in provider.servers ?? [] {
                     if server.serverId == mappedIdString {
                         DDLogInfo("(DnsProvidersService) migration.  found new dns server with id = \(mappedId)")
                         

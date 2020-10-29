@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS is an alternative way to protect your privacy from different counters, analytical systems and phishing websites";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch and adult content blocking";
-
-/* Google DNS server description */
-"google_dns_description" = "Free alternative DNS service by Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS server that protects your device from phishing and scam";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server with adult content blocking";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Free alternative DNS service with protection from phishing and spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Free DNS service by Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS server by Cloudflare that blocks malicious domains";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare's blocking server that restricts access to malicious and 'adult' domains";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS service by SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Security";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Adult content blocking";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "No logging policy";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Safe Search";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Ad Blocking";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blocks known phishing and other dangerous domains";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blocks websites with adult content";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Does not store your DNS query logs";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Whenever possible, Safe Search is enforced in browsers";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocks tracking systems";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "No encryption (System DNS)";
 

@@ -1084,6 +1084,15 @@
 		D09E2A492549AC0D002D6BC0 /* providers_i18n.json in Resources */ = {isa = PBXBuildFile; fileRef = D06E30AD253F3181008BBD2D /* providers_i18n.json */; };
 		D09E2A5B2549B100002D6BC0 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = D005096A2201DA2F006BC10C /* providers.json */; };
 		D09E2A6D2549B14A002D6BC0 /* providers_i18n.json in Resources */ = {isa = PBXBuildFile; fileRef = D06E30AD253F3181008BBD2D /* providers_i18n.json */; };
+		D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A99254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9A254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9B254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9C254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9D254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9E254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2A9F254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2AB1254AC36B002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
@@ -3262,6 +3271,7 @@
 		D099DAF4228D816E007987F8 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D09E2A0B2549A2EA002D6BC0 /* DnsProvidersMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigration.swift; sourceTree = "<group>"; };
+		D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
@@ -4819,6 +4829,7 @@
 				7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */,
 				7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */,
 				7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */,
+				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6635,6 +6646,7 @@
 				D0B545A02435D63D002F0AEC /* DnsLogContainerController.swift in Sources */,
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				D0B545EE2435D6AB002F0AEC /* LoaderSegue.swift in Sources */,
+				D09E2A9C254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				659886951CF74DE9003ECD1C /* AESAntibanner.m in Sources */,
 				D0B5457F2435D62A002F0AEC /* NotEcapingJsonSerialization.swift in Sources */,
 				D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */,
@@ -6757,6 +6769,7 @@
 				D031A177219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				7E4D203D22D71A5B003B0E75 /* mz_zip.c in Sources */,
 				D02AC6F52295A0D900613589 /* DnsProvidersService.swift in Sources */,
+				D09E2A9A254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D08CE426240D37B200A70089 /* ComplexProtectionService.swift in Sources */,
 				7E4D204722D71A5B003B0E75 /* mz_crypt.c in Sources */,
 				7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */,
@@ -7051,6 +7064,7 @@
 				D03E532D21B6A3B400C62152 /* ConfigurationServiceProtocol.swift in Sources */,
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
 				7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */,
+				D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */,
 				7E822C0D2435EDD30015B4D0 /* Rule.swift in Sources */,
 				7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */,
@@ -7222,6 +7236,7 @@
 				7E8576652435F1F70055F63D /* RulesParser.swift in Sources */,
 				D091CB292245133E00972AF7 /* ConfigurationService.swift in Sources */,
 				D0E3A8571F94EC5500F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
+				D09E2AB1254AC36B002D6BC0 /* Bundle+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7376,6 +7391,7 @@
 				7ECD9C4D238D66780065E88D /* DDOSLogger.m in Sources */,
 				7ECD9C62238E6D630065E88D /* NSString+Utils.m in Sources */,
 				7ECD9C49238D65E30065E88D /* FMResultSet.m in Sources */,
+				D09E2A99254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				7E8576792435F57F0055F63D /* DomainsParserService.swift in Sources */,
 				7ECD9C61238E6C120065E88D /* SafariService.swift in Sources */,
 				7E334028239034CB00C39F62 /* ACLExecuteBlockDelayed.m in Sources */,
@@ -7424,6 +7440,7 @@
 				D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */,
 				D0569D3921F1C0A800985DA9 /* PacketTunnelProvider.m in Sources */,
 				7E50FC19238C0A0300F11722 /* DnsFiltersService.swift in Sources */,
+				D09E2A9B254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D0F36294220C009E0065BE8E /* Dns64Utils.swift in Sources */,
 				D09E2A0F2549A2EA002D6BC0 /* DnsProvidersMigration.swift in Sources */,
 				D0569D4721F1C0A800985DA9 /* NSURL+Utils.m in Sources */,
@@ -8102,6 +8119,7 @@
 				D0D7E5F524444EF4001801A5 /* BackgroundFetchState.swift in Sources */,
 				D0B544152435C6B8002F0AEC /* ADBTable.m in Sources */,
 				D0B544162435C6B8002F0AEC /* ACNNetworking.m in Sources */,
+				D09E2A9D254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D0B5454D2435D131002F0AEC /* DDContextFilterLogFormatter.m in Sources */,
 				D0D7E5ED24444ED9001801A5 /* RulesParser.swift in Sources */,
 				D0D7E5E024444D68001801A5 /* ChartDateType.swift in Sources */,
@@ -8229,6 +8247,7 @@
 				D0B5448A2435C6BC002F0AEC /* DDFileLogger.m in Sources */,
 				D0B5448B2435C6BC002F0AEC /* mz_zip.c in Sources */,
 				D0B5448C2435C6BC002F0AEC /* DnsProvidersService.swift in Sources */,
+				D09E2A9E254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D0B5448D2435C6BC002F0AEC /* ComplexProtectionService.swift in Sources */,
 				D0B5448E2435C6BC002F0AEC /* mz_crypt.c in Sources */,
 				D0B5448F2435C6BC002F0AEC /* URL+Utils.swift in Sources */,
@@ -8331,6 +8350,7 @@
 				D0D7E57C243B1179001801A5 /* Bundle+config.swift in Sources */,
 				D0D7E5EC24444ED6001801A5 /* RulesParser.swift in Sources */,
 				D0B544FA2435C6BF002F0AEC /* ASDFilterObjects.m in Sources */,
+				D09E2A9F254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D0B544FB2435C6BF002F0AEC /* ACObject.m in Sources */,
 				D0B544FC2435C6BF002F0AEC /* SimpleConfiguration.swift in Sources */,
 				D0D7E61C244456B4001801A5 /* DomainsParserService.swift in Sources */,
