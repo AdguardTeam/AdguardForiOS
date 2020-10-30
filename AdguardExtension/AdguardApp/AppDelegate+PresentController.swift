@@ -1,0 +1,416 @@
+/**
+    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+    Copyright © Adguard Software Limited. All rights reserved.
+ 
+    Adguard for iOS is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Adguard for iOS is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import Foundation
+
+extension AppDelegate {
+    
+    static let shared = UIApplication.shared.delegate as! AppDelegate
+    
+    /* returns launch screen from LaunchScreen.storyboard */
+    func getLaunchScreen() -> UIViewController? {
+        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
+        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
+        return launchScreenController
+    }
+    
+    /* Returns MainPageController from current navigation stack */
+    func getMainPageController() -> MainPageController? {
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return nil
+        }
+        
+        let mainPageController = navController.viewControllers.first as? MainPageController
+        return mainPageController
+    }
+    
+    /* Returns DnsLogContainerController from current navigation stack */
+    func getDnsLogContainerController() -> DnsLogContainerController? {
+        guard let navController = getNavigationController(for: .activityTab) else {
+            DDLogError("Navigation controller is nil")
+            return nil
+        }
+        
+        let dnsLogContainerController = navController.viewControllers.first as? DnsLogContainerController
+        return dnsLogContainerController
+    }
+    
+    /*
+     Presents UserFilterController
+     */
+    func presentUserFilterController(showLaunchScreen: Bool = false, _ model: ListOfRulesModelProtocol?, newRule rule: String?) {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return
+        }
+        
+        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
+        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else {
+            DDLogError("UserFilter.storyboard doesnt't have UserFilterController")
+            return
+        }
+        userFilterController.model = model
+        userFilterController.newRuleText = rule
+        
+        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
+            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
+            return
+        }
+        safariProtectionController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+    }
+    
+    /*
+     Presents DnsSettingsController
+     Returns true on success and false otherwise
+     */
+    func presentDnsSettingsController(showLaunchScreen: Bool = false, dnsProtectionIsEnabled enabled: Bool? = nil) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return false
+        }
+        
+        let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+        guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
+            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+            return false
+        }
+        dnsSettingsController.stateFromWidget = enabled
+        dnsSettingsController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainMenuController, dnsSettingsController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /*
+     Presents MainPageController
+     Returns true on success and false otherwise
+     */
+    func presentMainPageController(showLaunchScreen: Bool = false, complexProtectionIsEnabled enabled: Bool? = nil) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return false
+        }
+        mainPageController.stateFromWidget = enabled
+        mainPageController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainPageController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /*
+     Presents LoginController
+     Returns true on success and false otherwise
+     */
+    func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return false
+        }
+        
+        let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
+        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
+            DDLogError("License.storyboard doesnt't have GetProController")
+            return false
+        }
+        
+        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? LoginController else {
+            DDLogError("License.storyboard doesnt't have LoginController")
+            return false
+        }
+        loginController.licenseKey = key
+        loginController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainPageController, getProController, loginController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /*
+     Presents DnsProvidersController
+     Returns true on success and false otherwise
+     */
+    func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return false
+        }
+        
+        let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
+        guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
+            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+            return false
+        }
+        
+        guard let dnsProvidersController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsProvidersController") as? DnsProvidersController else {
+            DDLogError("DnsSettings.storyboard doesnt't have DnsProvidersController")
+            return false
+        }
+        dnsProvidersController.openUrl = url
+        dnsProvidersController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /*
+     Presents FiltersMasterController
+     Returns true on success and false otherwise
+     */
+    func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
+        
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return false
+        }
+        
+        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
+        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
+            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
+            return false
+        }
+        
+        guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else {
+            DDLogError("Filters.storyboard doesnt't have FiltersMasterController")
+            return false
+        }
+    
+        guard let groupsController = filtersMasterController.children.first(where: { $0 is GroupsController }) as? GroupsController else {
+            DDLogError("FiltersMasterController doesnt't have GroupsController")
+            return false
+        }
+        groupsController.openUrl = url
+        groupsController.openTitle = title
+        groupsController.loadViewIfNeeded()
+        
+        navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /*
+     Presents DnsFiltersController
+     Returns true on success and false otherwise
+     */
+    func presentDnsFiltersController(showLaunchScreen: Bool = false) -> Bool {
+        
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .protectionTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
+            DDLogError("Navigation controller first VC is not ComplexProtectionController")
+            return false
+        }
+        
+        let dnsSettingsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
+        guard let dnsSettingsController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
+            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+            return false
+        }
+        
+        guard let requestsBlockingController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "RequestsBlockingController") as? RequestsBlockingController else {
+            DDLogError("DnsSettings.storyboard doesnt't have RequestsBlockingController")
+            return false
+        }
+        
+        guard let dnsFiltersController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsFiltersController") as? DnsFiltersController else {
+            DDLogError("DnsSettings.storyboard doesnt't have DnsFiltersController")
+            return false
+        }
+        dnsFiltersController.loadViewIfNeeded()
+        
+        navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
+    /* Returns current view controller */
+    func getTopViewController() -> UIViewController? {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return nil
+        }
+        
+        if let selectedNavController = tabBar.selectedViewController as? MainNavigationController {
+            if let topVC = selectedNavController.topViewController {
+                return topVC
+            }
+        }
+        return nil
+    }
+    
+    /*
+     Sets main page as current
+     Finds all navigation controllers and calls 'popToRootViewController' for each
+     */
+    func setMainPageAsCurrentAndPopToRootControllersEverywhere() {
+        window.rootViewController?.dismiss(animated: true) { [weak self] in
+            guard let tabBar = self?.getMainTabController() else {
+                DDLogError("Tab bar is nil")
+                return
+            }
+            
+            guard let navController = self?.getNavigationController(for: .mainTab) else {
+                DDLogError("Navigation controller is nil")
+                return
+            }
+                        
+            if let tabs = tabBar.viewControllers {
+                for viewController in tabs {
+                    if let navController = viewController as? UINavigationController {
+                        navController.popToRootViewController(animated: false)
+                    }
+                }
+            }
+            
+            tabBar.selectedViewController = navController
+        }
+    }
+    
+    /* Returns navigation controller for certain tab */
+    private func getNavigationController(for tab: TabBarTabs) -> MainNavigationController? {
+        let tabBar = getMainTabController()
+        let navController = tabBar?.viewControllers?[tab.rawValue] as? MainNavigationController
+        assert(navController != nil, "Tab bar doesn't have navigation controller for tab = \(tab.rawValue)")
+        return navController
+    }
+    
+    /* Returns main tab bar controller */
+    private func getMainTabController() -> MainTabBarController? {
+        let mainTabBar = window.rootViewController as? MainTabBarController
+        assert(mainTabBar != nil, "Root view controller is not MainTabBarController")
+        return mainTabBar
+    }
+}

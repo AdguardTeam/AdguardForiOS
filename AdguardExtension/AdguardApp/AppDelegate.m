@@ -728,7 +728,8 @@ static NSTimeInterval lastCheckTime;
 }
 
 - (void)openDnsFiltersController{
-    [helper openDnsFiltersController];
+    BOOL success = [helper presentDnsFiltersController];
+    DDLogInfo(@"Presented DnsFiltersController successfully = %@", success ? @"Yes" : @"No");
 }
 
 

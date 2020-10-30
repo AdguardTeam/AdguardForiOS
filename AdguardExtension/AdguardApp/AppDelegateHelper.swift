@@ -98,33 +98,18 @@ class AppDelegateHelper: NSObject {
             }
         }
         
-        guard let mainTabBar = getMainTabController() else {
-            assertionFailure("there is no MainTabBar")
+        guard let mainPageController = appDelegate.getMainPageController() else {
+            DDLogError("mainPageController is nil")
             return
         }
         
-        guard let firstPageNavController = mainTabBar.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else {
-            assertionFailure("there is no navigation controller on first page")
-            return
-        }
-        
-        guard let mainPage = firstPageNavController.viewControllers.first as? MainPageController else {
-            assertionFailure("there is no MainPageController on first page")
-            return
-        }
-        
-        mainPage.onReady = { [weak self] in
+        mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
         }
         
-        guard let activityPageNavController = mainTabBar.viewControllers?[TabBarTabs.activityTab.rawValue] as? MainNavigationController else {
-            assertionFailure("there is no navigation controller on activity page")
-            return
-        }
-        
-        guard let dnsLogContainerVC = activityPageNavController.viewControllers.first as? DnsLogContainerController else {
-            assertionFailure("there is no ActivityViewController on activity page")
+        guard let dnsLogContainerVC = appDelegate.getDnsLogContainerController() else {
+            DDLogError("dnsLogContainerVC is nil")
             return
         }
         /**
@@ -221,6 +206,10 @@ class AppDelegateHelper: NSObject {
         addPurchaseStatusObserver()
     }
     
+    func presentDnsFiltersController() -> Bool {
+        return appDelegate.presentDnsFiltersController()
+    }
+    
     /** resets all settings. It removes database and reinit it from default database.
      Also it removes vpn profile. And reomves all keys from keychain (reset authorisation) */
     func resetAllSettings() {
@@ -266,72 +255,15 @@ class AppDelegateHelper: NSObject {
             NotificationCenter.default.post(name: NSNotification.resetSettings, object: self)
             
             DispatchQueue.main.async { [weak self] in
-                self?.appDelegate.window.rootViewController?.dismiss(animated: true) {
-                    let tabController = self?.getMainTabController()
-                    let navController = tabController?.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController
-                    tabController?.selectedViewController = navController
-                    
-                    if let tabs = tabController?.viewControllers {
-                        for viewController in tabs {
-                            if let navController = viewController as? UINavigationController {
-                                navController.popToRootViewController(animated: false)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    // MARK: - Open DnsFiltersController function
-    
-    func openDnsFiltersController(){
-        guard let tab = self.getMainTabController() else {
-            DDLogError("(AppDeegateHelper) openDnsFiltersController error. There is no tab controller")
-            return
-        }
-        
-        if tab.viewControllers?.count == 0 {
-            DDLogError("(AppDeegateHelper) openDnsFiltersController error. TabBar viewcontrollers number is 0")
-            return
-        }
-        
-        guard let navController = tab.viewControllers?[TabBarTabs.protectionTab.rawValue] as? MainNavigationController else {
-            DDLogError("(AppDeegateHelper) openDnsFiltersController error. Failed getting navigation controller from TabBar tab")
-            return
-        }
-        
-        if let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController {
-            DispatchQueue.main.async {[weak self] in
-                guard let self = self else { return }
-                
-                let dnsSettingsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
-                let dnsSettingsController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsSettingsController")
-                dnsSettingsController.loadViewIfNeeded()
-                
-                let requestsBlockingController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "RequestsBlockingController")
-                requestsBlockingController.loadViewIfNeeded()
-                
-                let dnsFiltersController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsFiltersController")
-                
-                navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
-                tab.selectedViewController = navController
-                self.appDelegate.window.rootViewController = tab
+                self?.appDelegate.setMainPageAsCurrentAndPopToRootControllersEverywhere()
             }
         }
     }
 
     func showCommonAlertForTopVc(_ body: String?, _ title: String?) {
         DispatchQueue.main.async {[weak self] in
-            guard let tab = self?.getMainTabController() else {
-                DDLogError("(AppDeegateHelper) showCommonAlertForTopVc error. There is no tab controller")
-                return
-            }
-            
-            if let selectedNavController = tab.selectedViewController as? MainNavigationController {
-                if let topVC = selectedNavController.topViewController {
-                    ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
-                }
+            if let topVC = self?.appDelegate.getTopViewController() {
+                ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
             }
         }
     }
@@ -339,26 +271,11 @@ class AppDelegateHelper: NSObject {
     // MARK: - private methods
     
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
-        guard let tab = self.getMainTabController() else {
-            DDLogError("(AppDeegateHelper) postDnsFiltersOverlimitNotificationIfNedeed error. There is no tab controller")
-            return
-        }
-        
-        if let selectedVC = tab.selectedViewController as? MainNavigationController {
-            if let _ = selectedVC.viewControllers.last as? DnsFiltersController {
-                return
-            }
-        }
-        
         let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
         let title = String.localizedString("dns_filters_notification_title")
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
-    }
-    
-    private func getMainTabController()->MainTabBarController? {
-        return appDelegate.window.rootViewController as? MainTabBarController
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -370,11 +287,6 @@ class AppDelegateHelper: NSObject {
             }
         }
             
-        /*
-        When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
-        https://github.com/AdguardTeam/AdguardForiOS/issues/1135
-        */
-        
         var command: String?
         var params: [String: String]?
         
@@ -386,194 +298,103 @@ class AppDelegateHelper: NSObject {
             params = result.params
         }
         
-        
-        guard let tab = getMainTabController() else {
-            DDLogError("(AppDeegate) application open url error. There is no tab controller")
-            return false
-        }
-
-        if tab.viewControllers?.count == 0 {
-            DDLogError("(AppDeegateHelper) applicationOpenUrl error. TabBar viewcontrollers number is 0")
-            return false
-        }
-        
         if command == activateLicense && Bundle.main.isPro {
             return false
         }
 
-        let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
-        let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense || command == subscribe {
-            appDelegate.window.rootViewController = launchScreenController
-        }
+        let success = process(url: url, command: command, params: params)
+        return success
+    }
+    
+    /*
+     Processes incoming URL scheme and presents appropriate view controller
+     Returns true on success and false otherwise
+     Must be executed on main thread
+     */
+    private func process(url: URL , command: String?, params: [String: String]?) -> Bool {
+        let scheme = url.scheme
         
-        // 4-th Navigation Controller is settings tab
-        guard let navController = tab.viewControllers?[TabBarTabs.settingTab.rawValue] as? MainNavigationController else {
-            DDLogError("(AppDeegateHelper) applicationOpenUrl error. Failed getting navigation controller from TabBar tab")
+        /*
+         When we open an app from action extension we show user a launch screen, while view controllers are being loaded, when they are, we show UserFilterController. It is done by changing app's window.
+         https://github.com/AdguardTeam/AdguardForiOS/issues/1135
+        */
+        switch (scheme, command) {
+        
+        // Adding new user rule from safari
+        case (AE_URLSCHEME, AE_URLSCHEME_COMMAND_ADD) :
+            antibannerController.onReady { antibanner in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService, productInfo: self.productInfo)
+                    let rule = String(url.path.suffix(url.path.count - 1))
+                    self.appDelegate.presentUserFilterController(showLaunchScreen: true, model, newRule: rule)
+                }
+            }
+            return true
+            
+        // Turning on/off DNS protection from widget
+        case (AE_URLSCHEME, openSystemProtection):
+            let suffix = String(url.path.suffix(url.path.count - 1))
+            let parameters = suffix.split(separator: "/")
+            
+            let enabledString = String(parameters.first ?? "")
+            let enabled = enabledString == "on"
+            
+            let success = self.appDelegate.presentDnsSettingsController(showLaunchScreen: true, dnsProtectionIsEnabled: enabled)
+            return success
+            
+        // Turning on/off complex protection from widget
+        case (AE_URLSCHEME, openComplexProtection):
+            let suffix = String(url.path.suffix(url.path.count - 1))
+            let parameters = suffix.split(separator: "/")
+            
+            let enabledString = String(parameters.first ?? "")
+            let enabled = enabledString == "on"
+            
+            let success = appDelegate.presentMainPageController(showLaunchScreen: true, complexProtectionIsEnabled: enabled)
+            return success
+        
+        // Activate license by URL
+        case (AE_URLSCHEME, activateLicense):
+            DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
+            let license = params?["license"]
+            
+            if license == nil || license!.isEmpty {
+                DDLogInfo("(AppDelegateHelper) - update license from openUrl")
+                purchaseService.checkLicenseStatus()
+                let success = appDelegate.presentMainPageController()
+                return success
+            } else {
+                DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
+                let success = appDelegate.presentLoginController(showLaunchScreen: true, withLicenseKey: license)
+                return success
+            }
+        
+        // Adding custom DNS server
+        case (AE_SDNS_SCHEME, _):
+            DDLogInfo("(AppDelegateHelper) openurl sdns: \(url.absoluteString)")
+            
+            if !configuration.proStatus {
+                let success = appDelegate.presentDnsSettingsController()
+                return success
+            } else {
+                let success = appDelegate.presentDnsProvidersController(url: url.absoluteString)
+                return success
+            }
+        
+        // Subscribe to custom filter
+        case (_, subscribe):
+            DDLogInfo("(AppDelegateHelper) openurl - subscribe filter")
+            
+            let url = params?["location"]
+            let title = params?["title"]
+            
+            let success = appDelegate.presentFiltersMasterController(showLaunchScreen: true, url: url, title: title)
+            return success
+            
+        default:
             return false
         }
-
-        if let mainMenuController = navController.viewControllers.first as? MainMenuController {
-            // Adding new user rule from safari
-            switch(url.scheme, command) {
-           
-            case (AE_URLSCHEME, AE_URLSCHEME_COMMAND_ADD) :
-                antibannerController.onReady { (antibanner) in
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self = self else { return }
-                        
-                        let path = String(url.path.suffix(url.path.count - 1))
-                        
-                        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
-                        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else { return }
-                        
-                        let model: ListOfRulesModelProtocol = UserFilterModel(resources: self.resources, contentBlockerService: self.contentBlockerService, antibanner: self.antibanner, theme: self.themeService, productInfo: self.productInfo)
-                        
-                        userFilterController.model = model
-                        userFilterController.newRuleText = path
-                        
-                        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-                        let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
-                        
-                        safariProtectionController.loadViewIfNeeded()
-                                                
-                        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
-                        
-                        tab.selectedViewController = navController
-                        self.appDelegate.window.rootViewController = tab
-                    }
-                }
-            
-            // Turning on/off DNS protection from widget
-            case (AE_URLSCHEME, openSystemProtection):
-                let suffix = String(url.path.suffix(url.path.count - 1))
-                let parameters = suffix.split(separator: "/")
-                
-                let enabledString = String(parameters.first ?? "")
-                let enabled = enabledString == "on"
-                
-                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
-                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
-                
-                dnsSettingsController.stateFromWidget = enabled
-                
-                navController.viewControllers = [mainMenuController, dnsSettingsController]
-                
-                tab.selectedViewController = navController
-                self.appDelegate.window.rootViewController = tab
-            
-            case (AE_URLSCHEME, openComplexProtection):
-             
-                guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
-                
-                let suffix = String(url.path.suffix(url.path.count - 1))
-                let parameters = suffix.split(separator: "/")
-                
-                let enabledString = String(parameters.first ?? "")
-                let enabled = enabledString == "on"
-                
-                let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
-                guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
-                
-                mainPageController.stateFromWidget = enabled
-                
-                mainTabNavController.viewControllers = [mainPageController]
-                
-                tab.selectedViewController = mainTabNavController
-                self.appDelegate.window.rootViewController = tab
-                
-            case (AE_URLSCHEME, activateLicense):
-                guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
-                
-                let license = params?["license"]
-                
-                DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
-                let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
-                guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
-                
-                
-                if license == nil || license!.isEmpty {
-                    DDLogInfo("(AppDelegateHelper) - update license from openUrl")
-                    
-                    mainTabNavController.viewControllers = [mainPageController]
-                    
-                    tab.selectedViewController = mainTabNavController
-                    self.appDelegate.window.rootViewController = tab
-                    
-                    purchaseService.checkLicenseStatus()
-                }
-                else {
-                    DDLogInfo("(AppDelegateHelper) - activate license key from openUrl")
-                    
-                    let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
-                    guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
-                        return false
-                    }
-                    
-                    guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? LoginController else { return false}
-                    
-                    loginController.licenseKey = license
-                    mainTabNavController.viewControllers = [mainPageController, getProController, loginController]
-                    
-                    tab.selectedViewController = mainTabNavController
-                    self.appDelegate.window.rootViewController = tab
-                }
-                
-            case (AE_SDNS_SCHEME, _):
-                DDLogInfo("(AppDelegateHelper) openurl sdns: \(url.absoluteString)");
-                
-                let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
-                guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else { return false }
-                
-                dnsSettingsController.loadViewIfNeeded()
-                
-                if !configuration.proStatus {
-                    navController.viewControllers = [mainMenuController, dnsSettingsController]
-                }
-                else {
-                    guard let dnsProvidersController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsProvidersController") as? DnsProvidersController else { return false }
-                    
-                    dnsProvidersController.loadViewIfNeeded()
-                    
-                    dnsProvidersController.openUrl = url.absoluteString
-                    navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
-                }
-                
-                tab.selectedViewController = navController
-                self.appDelegate.window.rootViewController = tab
-                
-            case (_, subscribe):
-                DDLogInfo("(AppDelegateHelper) openurl - subscribe filter")
-                
-                let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-                let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController")
-                
-                safariProtectionController.loadViewIfNeeded()
-                
-                guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else { return false }
-                
-                filtersMasterController.loadViewIfNeeded()
-            
-                let groupsController = filtersMasterController.children.first { $0 is GroupsController } as? GroupsController
-                
-                groupsController?.openUrl = params?["location"]
-                groupsController?.openTitle = params?["title"]
-                
-                navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
-                
-                tab.selectedViewController = navController
-                self.appDelegate.window.rootViewController = tab
-                
-            default:
-                break
-            }
-                
-            
-        } else {
-            DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
-        }
-        
-        return false
     }
     
     private func addPurchaseStatusObserver() {

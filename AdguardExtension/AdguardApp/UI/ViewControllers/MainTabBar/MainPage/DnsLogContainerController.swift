@@ -24,6 +24,7 @@ class DnsLogContainerController: UIViewController {
     @IBOutlet weak var systemProtectionEnablerContainerView: UIView!
     @IBOutlet weak var getProContainerView: UIView!
     @IBOutlet weak var dnsLogContainerView: UIView!
+    @IBOutlet weak var nativeDnsContainerView: UIView!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
@@ -76,29 +77,36 @@ class DnsLogContainerController: UIViewController {
         theme.setupNavigationBar(navigationController?.navigationBar)
     }
     
-    private func setCurrentContainerView(){
+    private func setCurrentContainerView() {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             let proStatus = self.configuration.proStatus
+            let nativeDnsImplementation = self.resources.dnsImplementation == .native
+            
+            self.getProContainerView.isHidden = true
+            self.systemProtectionEnablerContainerView.isHidden = true
+            self.dnsLogContainerView.isHidden = true
+            self.nativeDnsContainerView.isHidden = true
+            self.hideTitle()
             
             if proStatus {
+                
+                if nativeDnsImplementation {
+                    self.nativeDnsContainerView.isHidden = false
+                    return
+                }
+                
                 let systemProtectionEnabled = self.complexProtection.systemProtectionEnabled
                 let recordsAreEmpty = self.model.records.isEmpty
+                
                 if recordsAreEmpty && !systemProtectionEnabled {
-                    self.getProContainerView.isHidden = true
                     self.systemProtectionEnablerContainerView.isHidden = false
-                    self.dnsLogContainerView.isHidden = true
-                    self.hideTitle()
                 } else {
-                    self.getProContainerView.isHidden = true
-                    self.systemProtectionEnablerContainerView.isHidden = true
                     self.dnsLogContainerView.isHidden = false
+                    self.showTitle()
                 }
             } else {
                 self.getProContainerView.isHidden = false
-                self.systemProtectionEnablerContainerView.isHidden = true
-                self.dnsLogContainerView.isHidden = true
-                self.hideTitle()
             }
         }
     }
