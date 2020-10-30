@@ -251,6 +251,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dnsNameLabel" destination="Iwn-G2-Shg" id="Gev-ex-5V9"/>
+                        <outlet property="dnsProtocolLabel" destination="ceh-zv-HH4" id="JhU-F8-pDh"/>
+                        <outlet property="dnsStatusLabel" destination="fRq-kZ-Xd7" id="Zpp-Pr-UaL"/>
                         <outlet property="implementationButton" destination="1A6-DD-78f" id="BIP-64-rmM"/>
                         <outletCollection property="themableLabels" destination="mSj-Zz-Gm9" collectionClass="NSMutableArray" id="niR-TL-g9S"/>
                         <outletCollection property="themableLabels" destination="a0E-KM-oA3" collectionClass="NSMutableArray" id="cFV-eX-ESb"/>

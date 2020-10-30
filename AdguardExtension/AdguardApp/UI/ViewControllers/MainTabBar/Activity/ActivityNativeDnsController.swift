@@ -20,6 +20,9 @@ import UIKit
 
 class ActivityNativeDnsController: UIViewController {
 
+    @IBOutlet weak var dnsStatusLabel: ThemableLabel!
+    @IBOutlet weak var dnsNameLabel: ThemableLabel!
+    @IBOutlet weak var dnsProtocolLabel: ThemableLabel!
     @IBOutlet weak var implementationButton: UIButton!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
