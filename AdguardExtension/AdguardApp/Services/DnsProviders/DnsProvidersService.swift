@@ -71,7 +71,11 @@ protocol DnsProvidersServiceProtocol {
     
     private let systemDefaultProviderId = 10000
     
-    @objc init(resources: AESharedResourcesProtocol) {
+    @objc convenience init(resources: AESharedResourcesProtocol) {
+        self.init(resources: resources, locale: Bundle.main.preferredLocaleCode)
+    }
+    
+    @objc init(resources: AESharedResourcesProtocol, locale: String) {
         self.resources = resources
         
         // migration:
@@ -79,7 +83,7 @@ protocol DnsProvidersServiceProtocol {
         // now we use DnsProviderInfo
         NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
         
-        self.currentLocaleCode = Bundle.main.preferredLocaleCode
+        self.currentLocaleCode = locale
         
         super.init()
         
@@ -393,7 +397,7 @@ protocol DnsProvidersServiceProtocol {
             providerInfo.logo = provider.provider.logo
             providerInfo.logoDark = "\(provider.provider.logo)_dark"
             providerInfo.protocols = provider.provider.servers.map { DnsProtocol(type: $0.type) }
-            providerInfo.summary = provider.provider.providerDescription
+            providerInfo.summary = provider.localizedDescription
             
             providerInfo.features = provider.features?.map {
                 DnsProviderFeature(name: $0.featureId, title: $0.localizedName ?? "", summary: $0.localizedDescription ?? "", iconId: $0.logo ?? "")

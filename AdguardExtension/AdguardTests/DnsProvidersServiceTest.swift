@@ -118,4 +118,38 @@ class DnsProvidersServiceTest: XCTestCase {
         
         XCTAssertNil(migrated?.serverId)
     }
+    
+    func testMalware() {
+        
+        let providrsService = DnsProvidersService(resources: resources, locale: "en")
+        
+        for provider in providrsService.predefinedProviders {
+            let contains = provider.name.lowercased().contains("malware") || provider.summary?.lowercased().contains("malware") ?? false
+            if contains {
+                XCTFail("\(provider.name) \(provider.summary) contains 'malware'")
+            }
+            
+            for feature in provider.features ?? [] {
+                let contains = feature.title.lowercased().contains("malware") || feature.summary.lowercased().contains("malware")
+                
+                if contains {
+                    XCTFail("\(feature.title) \(feature.summary) contains 'malware'")
+                }
+            }
+        }
+    }
+    
+    func testStrings() {
+        let providrsService = DnsProvidersService(resources: resources, locale: "en")
+        
+        for provider in providrsService.predefinedProviders {
+            XCTAssertFalse(provider.name.isEmpty)
+            XCTAssertFalse(provider.summary?.isEmpty ?? true)
+            
+            for feature in provider.features ?? [] {
+                XCTAssertFalse(feature.title.isEmpty)
+                XCTAssertFalse(feature.summary.isEmpty)
+            }
+        }
+    }
 }
