@@ -102,7 +102,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
                 headerCell.logo.darkThemeImage = logoImageDark
             }
             
-            headerCell.summary.text = ACLocalizedString(provider?.summary, nil)
+            headerCell.summary.text = provider?.summary
             
             theme.setupLabel(headerCell.summary)
             theme.setupImage(headerCell.logo)
@@ -134,8 +134,8 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
             
             cell = featureCell
             featureCell.icon.image = UIImage(named: feature?.iconId ?? "")
-            featureCell.name.text = ACLocalizedString(feature?.title, nil)
-            featureCell.summary.text = ACLocalizedString(feature?.summary, nil)
+            featureCell.name.text = feature?.title
+            featureCell.summary.text = feature?.summary
             
             theme.setupLabels(featureCell.themableLabels)
             

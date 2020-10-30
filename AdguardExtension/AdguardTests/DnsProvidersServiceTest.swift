@@ -32,7 +32,7 @@ class DnsProvidersServiceTest: XCTestCase {
         let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "0.0.0.0")
         XCTAssertNotNil(result)
         XCTAssert(dnsProviders.customProviders.count == 1)
-        XCTAssert(dnsProviders.allProviders.count == 1)
+        XCTAssert(dnsProviders.allProviders.count == dnsProviders.predefinedProviders.count + 1)
         
         guard let addedProvider = dnsProviders.customProviders.first else {
             XCTFail()
@@ -71,16 +71,85 @@ class DnsProvidersServiceTest: XCTestCase {
         _ = dnsProviders.addCustomProvider(name: "test provider3", upstream: "0.0.0.3")
         
         XCTAssert(dnsProviders.customProviders.count == 3)
-        XCTAssert(dnsProviders.allProviders.count == 3)
+        XCTAssert(dnsProviders.allProviders.count == 3 + dnsProviders.predefinedProviders.count)
         
         dnsProviders.deleteProvider(providerToRemove)
         
-        XCTAssert(dnsProviders.allProviders.count == 2)
-        XCTAssertEqual(dnsProviders.allProviders[0].name, "test provider1")
-        XCTAssertEqual(dnsProviders.allProviders[1].name, "test provider3")
+        XCTAssert(dnsProviders.allProviders.count == 2 + dnsProviders.predefinedProviders.count)
+        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 0].name, "test provider1")
+        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 1].name, "test provider3")
         
         XCTAssert(dnsProviders.customProviders.count == 2)
         XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider1")
         XCTAssertEqual(dnsProviders.customProviders[1].name, "test provider3")
+    }
+    
+    func testServerMigration() {
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "adguard-dns", name: "Adguard", upstreams: ["0.0.0.0"])
+        
+        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertEqual(migrated?.serverId, "1")
+    }
+    
+    func testServerMigration2() {
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "test-server", name: "Adguard", upstreams: ["0.0.0.0"])
+        
+        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertEqual(migrated?.serverId, "test-server")
+    }
+    
+    func testServerMigration3() {
+        
+        resources.sharedDefaults().removeObject(forKey: AEDefaultsActiveDnsServer)
+        
+        let providersService = DnsProvidersService(resources: resources)
+        
+        let migrated = providersService.activeDnsServer
+        
+        XCTAssertNil(migrated?.serverId)
+    }
+    
+    func testMalware() {
+        
+        let providrsService = DnsProvidersService(resources: resources, locale: "en")
+        
+        for provider in providrsService.predefinedProviders {
+            let contains = provider.name.lowercased().contains("malware") || provider.summary?.lowercased().contains("malware") ?? false
+            if contains {
+                XCTFail("\(provider.name) \(provider.summary) contains 'malware'")
+            }
+            
+            for feature in provider.features ?? [] {
+                let contains = feature.title.lowercased().contains("malware") || feature.summary.lowercased().contains("malware")
+                
+                if contains {
+                    XCTFail("\(feature.title) \(feature.summary) contains 'malware'")
+                }
+            }
+        }
+    }
+    
+    func testStrings() {
+        let providrsService = DnsProvidersService(resources: resources, locale: "en")
+        
+        for provider in providrsService.predefinedProviders {
+            XCTAssertFalse(provider.name.isEmpty)
+            XCTAssertFalse(provider.summary?.isEmpty ?? true)
+            
+            for feature in provider.features ?? [] {
+                XCTAssertFalse(feature.title.isEmpty)
+                XCTAssertFalse(feature.summary.isEmpty)
+            }
+        }
     }
 }
