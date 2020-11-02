@@ -37,15 +37,23 @@ class DnsProvidersController: UITableViewController {
     
     var openUrl: String?
     
-    // MARK: - services
+    required init?(coder: NSCoder) {
+        model = DnsProvidersModel(dnsProvidersService: dnsProvidersService, nativeProvidersService: nativeProvidersService, resources: resources)
+        super.init(coder: coder)
+    }
     
+    // MARK: - services
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProvidersService: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
+    // View model
+    private let model: DnsProvidersModelProtocol
+    
     // MARK: Private properties
-    private lazy var providers = { self.dnsProvidersService.allProviders } ()
+    private var providers: [DnsProviderInfo] { model.providers }
     private var selectedCellTag = 0
     private var activeProviderObservation: NSKeyValueObservation?
     private var providersObservation: NSKeyValueObservation?
@@ -68,40 +76,15 @@ class DnsProvidersController: UITableViewController {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
         tableView.rowHeight = UITableView.automaticDimension
-        
-        let selectCellFunc = { [weak self] in
-            guard let self = self else { return }
-            if self.dnsProvidersService.activeDnsServer == nil || self.dnsProvidersService.activeDnsProvider == nil {
-                self.selectedCellTag = self.defaultProviderTag
-                return
-            }
-            else {
-                let row = self.providers.firstIndex { self.dnsProvidersService.isActiveProvider($0) }
-                self.selectedCellTag = row ?? 0
-            }
-        }
-        
-        selectCellFunc()
-        
-        activeProviderObservation = dnsProvidersService.observe(\.activeDnsServer) {[weak self]  (server, change)  in
-            DispatchQueue.main.async {
-                selectCellFunc()
-                self?.tableView.reloadData()
-            }
-        }
-        
-        providersObservation = dnsProvidersService.observe(\.allProviders) {[weak self]  (server, change)  in
-            DispatchQueue.main.async {
-                guard let sSelf = self else { return }
-                sSelf.providers = sSelf.dnsProvidersService.allProviders
-                sSelf.tableView.reloadData()
-            }
-        }
         
         setupBackButton()
         updateTheme()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        activeServerChanged()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -287,6 +270,39 @@ class DnsProvidersController: UITableViewController {
     private func showNewServer() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
         controller.openUrl = openUrl
+        controller.delegate = self
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func selectActiveServer() {
+        if dnsProvidersService.activeDnsServer == nil || dnsProvidersService.activeDnsProvider == nil {
+            selectedCellTag = defaultProviderTag
+        } else {
+            let row = providers.firstIndex { dnsProvidersService.isActiveProvider($0) }
+            selectedCellTag = row ?? 0
+        }
+    }
+    
+    private func activeServerChanged() {
+        DispatchQueue.main.async { [weak self] in
+            self?.selectActiveServer()
+            self?.tableView.reloadData()
+        }
+    }
+}
+
+extension DnsProvidersController: NewDnsServerControllerDelegate {
+    func providerAdded() {
+        activeServerChanged()
+    }
+    
+    func providerDeleted() {
+        activeServerChanged()
+    }
+    
+    func providerChanged() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

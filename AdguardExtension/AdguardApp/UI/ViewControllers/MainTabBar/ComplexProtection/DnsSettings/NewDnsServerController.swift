@@ -18,11 +18,18 @@
 
 import Foundation
 
+protocol NewDnsServerControllerDelegate: class {
+    func providerAdded()
+    func providerDeleted()
+    func providerChanged()
+}
 
 class NewDnsServerController: BottomAlertController {
     
     var provider: DnsProviderInfo?
     var openUrl: String?
+    
+    weak var delegate: NewDnsServerControllerDelegate?
     
     // MARK: - IB Outlets
     
@@ -47,10 +54,10 @@ class NewDnsServerController: BottomAlertController {
     
     // MARK: - services
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    let dnsProvidersService: DnsProvidersService =  ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersServiceProtocol =  ServiceLocator.shared.getService()!
     
     // MARK: - view controller lifecycle
     
@@ -84,47 +91,62 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func addAction(_ sender: Any) {
         checkUpstream { [weak self] in
             guard let self = self else { return }
-            let newProvider = self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: self.upstreamsField.text ?? "")
-            self.dnsProvidersService.activeDnsServer = newProvider.servers?.first
-            self.vpnManager.updateSettings(completion: nil)
-            self.dismiss(animated: true, completion: nil)
+            self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: self.upstreamsField.text ?? "") { [weak self] in
+                self?.vpnManager.updateSettings(completion: nil)
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.providerAdded()
+                    self?.dismiss(animated: true)
+                }
+            }
         }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @IBAction func deleteAction(_ sender: Any) {
         guard let provider = self.provider else { return }
         
-        dnsProvidersService.deleteProvider(provider)
-        
-        if dnsProvidersService.isActiveProvider(provider) {
-            dnsProvidersService.activeDnsServer = nil
-            vpnManager.updateSettings(completion: nil)
+        dnsProvidersService.deleteProvider(provider) { [weak self] in
+            guard let self = self else { return }
+            if self.dnsProvidersService.isActiveProvider(provider) {
+                self.dnsProvidersService.activeDnsServer = nil
+                self.vpnManager.updateSettings(completion: nil)
+            }
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.providerDeleted()
+                self?.dismiss(animated: true)
+            }
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveAction(_ sender: Any) {
         checkUpstream { [weak self] in
             guard let self = self else { return }
-            if self.provider == nil || self.provider?.servers?.first == nil { return }
+            
+            guard let provider = self.provider, let server = self.provider?.servers?.first else { return }
+            
             let upstream = self.upstreamsField.text ?? ""
-            self.provider!.name = self.nameField.text ?? ""
-            self.provider!.servers?.first!.upstreams = [upstream]
-            self.provider!.servers?.first!.name = self.provider!.name
-            self.provider!.servers?.first!.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-            self.dnsProvidersService.updateProvider(self.provider!)
+            provider.name = self.nameField.text ?? ""
+            server.upstreams = [upstream]
+            server.name = self.provider!.name
+            server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
             
-            if self.dnsProvidersService.isActiveProvider(self.provider!) {
-                self.dnsProvidersService.activeDnsServer = self.provider?.servers?.first
-                self.vpnManager.updateSettings(completion: nil)
+            self.dnsProvidersService.updateProvider(provider) { [weak self] in
+                guard let self = self else { return }
+                
+                if self.dnsProvidersService.isActiveProvider(provider) {
+                    self.dnsProvidersService.activeDnsServer = provider.servers?.first
+                    self.vpnManager.updateSettings(completion: nil)
+                }
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.providerChanged()
+                    self?.dismiss(animated: true, completion: nil)
+                }
             }
-            
-            self.dismiss(animated: true, completion: nil)
         }
     }
     

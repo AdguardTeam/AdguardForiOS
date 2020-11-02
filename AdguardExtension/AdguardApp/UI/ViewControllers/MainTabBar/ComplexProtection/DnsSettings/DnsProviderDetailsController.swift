@@ -32,7 +32,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     

@@ -56,8 +56,13 @@ class StartupService : NSObject{
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
         
-        let dnsProviders: DnsProvidersService = DnsProvidersService(resources: sharedResources)
+        let dnsProviders: DnsProvidersServiceProtocol = DnsProvidersService(resources: sharedResources)
         locator.addService(service: dnsProviders)
+        
+        if #available(iOS 14.0, *) {
+            let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders)
+            locator.addService(service: nativeProviders)
+        }
         
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)

@@ -135,6 +135,19 @@ class DnsServerInfo : ACObject {
     @objc var servers: [DnsServerInfo]?
     
     // MARK: - initializers and NSCoding methods
+    
+    init(name: String, logo: String?, logoDark: String?, summary: String?, protocols: [DnsProtocol]?, features: [DnsProviderFeature]?, website: String?, servers: [DnsServerInfo]?) {
+        self.name = name
+        self.logo = logo
+        self.logoDark = logoDark
+        self.summary = summary
+        self.protocols = protocols
+        self.features = features
+        self.website = website
+        self.servers = servers
+        super.init()
+    }
+    
     init(name: String) {
         self.name = name
         super.init()

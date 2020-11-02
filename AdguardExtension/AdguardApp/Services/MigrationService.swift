@@ -198,6 +198,9 @@ class MigrationService: MigrationServiceProtocol {
     private func setProtocolForCustomProviders(){
         let customProviders = dnsProvidersService.customProviders
         var changesCount = 0
+        
+        let group = DispatchGroup()
+        
         for provider in customProviders {
             if let server = provider.servers?.first, server.dnsProtocol == .dns, let upstream = server.upstreams.first {
                 let newProtocol = DnsProtocol.getProtocolByUpstream(upstream)
@@ -205,10 +208,13 @@ class MigrationService: MigrationServiceProtocol {
                     DDLogInfo("(MigrationService) - setProtocolForCustomProviders, name: \(server.name); upstream: \(upstream); oldProtocol: \(DnsProtocol.stringIdByProtocol[server.dnsProtocol] ?? "Unknown"); newProtocol: \(DnsProtocol.stringIdByProtocol[newProtocol] ?? "Unknown")")
                     changesCount += 1
                     server.dnsProtocol = newProtocol
-                    dnsProvidersService.updateProvider(provider)
+                    group.enter()
+                    dnsProvidersService.updateProvider(provider, { group.leave() })
                 }
             }
         }
+        
+        group.wait()
         
         /* If there were some changes, the VPN manager is to be reloaded to apply changes */
         if changesCount > 0 {
