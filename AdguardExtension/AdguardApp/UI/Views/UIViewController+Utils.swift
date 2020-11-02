@@ -93,4 +93,12 @@ extension UIViewController {
         navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
         navigationItem.title = ""
     }
+    
+    var ios14available: Bool {
+        if #available(iOS 14.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
