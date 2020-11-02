@@ -26,21 +26,17 @@ protocol SupportServiceProtocol {
 
 @objc
 class SupportService: NSObject, SupportServiceProtocol {
-    func test() -> String {
-        return ""
-    }
     
-    
-    let resources: AESharedResourcesProtocol
-    let configuration: ConfigurationServiceProtocol
-    let complexProtection: ComplexProtectionServiceProtocol
-    let dnsProviders: DnsProvidersServiceProtocol
-    let networkSettings: NetworkSettingsServiceProtocol
-    let dnsFilters: DnsFiltersServiceProtocol
-    let productInfo: ADProductInfoProtocol
-    let antibanner: AESAntibannerProtocol
-    
-    let reportUrl = "https://reports.adguard.com/new_issue.html"
+    private let resources: AESharedResourcesProtocol
+    private let configuration: ConfigurationServiceProtocol
+    private let complexProtection: ComplexProtectionServiceProtocol
+    private let dnsProviders: DnsProvidersServiceProtocol
+    private let networkSettings: NetworkSettingsServiceProtocol
+    private let dnsFilters: DnsFiltersServiceProtocol
+    private let productInfo: ADProductInfoProtocol
+    private let antibanner: AESAntibannerProtocol
+
+    private let reportUrl = "https://reports.adguard.com/new_issue.html"
     
     @objc
     init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, antibanner: AESAntibannerProtocol) {
