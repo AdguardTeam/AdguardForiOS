@@ -200,7 +200,6 @@
             "servers": [
                 {
                     "features": [
-                        "secure",
                         "no_logs"
                     ],
                     "upstreams": [
@@ -214,7 +213,6 @@
                 },
                 {
                     "features": [
-                        "secure",
                         "no_logs",
                         "encryption"
                     ],
@@ -228,7 +226,6 @@
                 },
                 {
                     "features": [
-                        "secure",
                         "no_logs",
                         "encryption"
                     ],
@@ -242,7 +239,6 @@
                 },
                 {
                     "features": [
-                        "secure",
                         "no_logs",
                         "encryption"
                     ],
@@ -256,7 +252,6 @@
                 },
                 {
                     "features": [
-                        "secure",
                         "no_logs",
                         "encryption"
                     ],
