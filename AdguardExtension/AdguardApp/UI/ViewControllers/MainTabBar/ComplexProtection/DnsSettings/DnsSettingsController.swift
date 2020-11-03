@@ -148,8 +148,6 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             cell.isHidden = !proStatus
-            cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
-            cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
             if indexPath.row == dnsFilteringRow && proStatus {
                 cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
