@@ -19,10 +19,14 @@
 import Foundation
 import SafariServices
 
+protocol DnsProviderDetailsControllerDelegate: class {
+    func activeServerChanged(_ newServer: DnsServerInfo, serverName: String?)
+}
+
 class DnsProviderDetailsController : UITableViewController,  ChooseProtocolControllerDelegate {
     
     // MARK: - public fields
-    
+    weak var delegate: DnsProviderDetailsControllerDelegate?
     var provider: DnsProviderInfo?
     private var selectedProtocol: DnsProtocol?
     
@@ -234,8 +238,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     }
     
     private func activateServer(_ server: DnsServerInfo) {
-        dnsProvidersService.activeDnsServer = server
-        vpnManager.updateSettings(completion: nil)
+        delegate?.activeServerChanged(server, serverName: provider?.name)
         dismiss(animated: true, completion: nil)
     }
 }

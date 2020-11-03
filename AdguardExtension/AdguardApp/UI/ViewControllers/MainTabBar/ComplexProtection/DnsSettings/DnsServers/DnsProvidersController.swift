@@ -38,7 +38,7 @@ class DnsProvidersController: UITableViewController {
     var openUrl: String?
     
     required init?(coder: NSCoder) {
-        model = DnsProvidersModel(dnsProvidersService: dnsProvidersService, nativeProvidersService: nativeProvidersService, resources: resources)
+        model = DnsProvidersModel(dnsProvidersService: dnsProvidersService, nativeProvidersService: nativeProvidersService, resources: resources, vpnManager: vpnManager)
         super.init(coder: coder)
     }
     
@@ -102,6 +102,7 @@ class DnsProvidersController: UITableViewController {
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderDetailsController
             controller.provider = providerToShow
+            controller.delegate = self
         }
     }
     
@@ -202,8 +203,7 @@ class DnsProvidersController: UITableViewController {
         switch indexPath.section {
         case defaultProviderSection:
             selectedCellTag = defaultProviderTag
-            dnsProvidersService.activeDnsServer = nil
-            vpnManager.updateSettings(completion: nil)
+            model.setServerAsActive(nil, serverName: nil)
             tableView.reloadData()
         case providerSection:
             if dnsProvidersService.isCustomProvider(providers[indexPath.row]) {
@@ -228,12 +228,13 @@ class DnsProvidersController: UITableViewController {
     
     @IBAction func selectProviderAction(_ sender: UIButton) {
         var server: DnsServerInfo?
+        // TODO: - Fix crash in native mode for system dns (tag = -1)
+        let provider = providers[sender.tag]
         
         if sender.tag == defaultProviderTag {
             server = nil
         }
         else {
-            let provider = providers[sender.tag]
             if let prot = provider.getActiveProtocol(resources) {
                 server = provider.serverByProtocol(dnsProtocol: prot)
             }
@@ -243,8 +244,7 @@ class DnsProvidersController: UITableViewController {
             }
         }
         
-        dnsProvidersService.activeDnsServer = server
-        vpnManager.updateSettings(completion: nil)
+        model.setServerAsActive(server, serverName: provider.name)
         
         selectedCellTag = sender.tag
         tableView.reloadData()
@@ -304,5 +304,12 @@ extension DnsProvidersController: NewDnsServerControllerDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
+    func activeServerChanged(_ newServer: DnsServerInfo, serverName: String?) {
+        model.setServerAsActive(newServer, serverName: serverName)
+        activeServerChanged()
     }
 }

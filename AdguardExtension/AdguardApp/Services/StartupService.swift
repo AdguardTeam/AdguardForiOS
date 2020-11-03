@@ -59,13 +59,13 @@ class StartupService : NSObject{
         let dnsProviders: DnsProvidersServiceProtocol = DnsProvidersService(resources: sharedResources)
         locator.addService(service: dnsProviders)
         
-        if #available(iOS 14.0, *) {
-            let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders)
-            locator.addService(service: nativeProviders)
-        }
-        
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)
+        
+        if #available(iOS 14.0, *) {
+            let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettingsService)
+            locator.addService(service: nativeProviders)
+        }
         
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService, dnsProviders: dnsProviders)
         locator.addService(service: vpnManager as VpnManagerProtocol)

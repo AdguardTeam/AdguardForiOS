@@ -18,18 +18,15 @@
 
 import Foundation
 
-extension Bundle {
+extension Array {
     /*
-     Returns locale code with script code
-     Example:
-        locale code = zh
-        script code = Hans
-     preferredLocaleCode = zh-Hans
+     Checks if all elements of array are equal
+     Returns false if array is empty
      */
-    dynamic var preferredLocaleCode: String {
-        if let localeCode = self.preferredLocalizations.first {
-            return localeCode
+    func allElementsAreEqual() -> Bool where Element: Equatable {
+        guard let firstElement = self.first else {
+            return false
         }
-        return Locale.current.languageCode ?? Locale.current.identifier
+        return self.allSatisfy { $0 == firstElement }
     }
 }
