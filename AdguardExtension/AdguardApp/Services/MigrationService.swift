@@ -147,16 +147,6 @@ class MigrationService: MigrationServiceProtocol {
         else {
             /**
             Migration:
-             In app version 4.0 (446) we began to inititalize custom dns servers with dns protocol
-             for previously added custom servers we set protocol here
-            */
-            if lastBuildVersion < 457 {
-                DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-                setProtocolForCustomProviders()
-            }
-            
-            /**
-            Migration:
              In app version 4.0 (448) we've begun reseting all statistics while resetting the settings;
              In early versions of 4.0 we were detecting blocked requests instead of encrypted;
              Early app version hasn't reached app store, so we just reset old statistics and db files.
@@ -165,6 +155,18 @@ class MigrationService: MigrationServiceProtocol {
                 DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
                 resetStatistics()
             }
+        }
+        
+        /**
+        Migration:
+         In app version 4.0 (446) we began to inititalize custom dns servers with dns protocol
+         for previously added custom servers we set protocol here
+         
+         In app version 4.0.4 (562) we set wrong protocol for custom dns providers
+        */
+        if lastBuildVersion < 563 {
+            DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            setProtocolForCustomProviders()
         }
     }
     
