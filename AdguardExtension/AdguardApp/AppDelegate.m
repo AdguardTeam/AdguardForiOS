@@ -574,7 +574,7 @@ static NSTimeInterval lastCheckTime;
     
     [ACSSystemUtils callOnMainQueue:^{
         
-        DDLogDebug(@"(AppDelegate) Started update process.");
+        DDLogInfo(@"(AppDelegate) Started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
     }];
 }
@@ -583,7 +583,7 @@ static NSTimeInterval lastCheckTime;
     
     [ACSSystemUtils callOnMainQueue:^{
         
-        DDLogDebug(@"(AppDelegate) Did not started update process.");
+        DDLogInfo(@"(AppDelegate) Did not started update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUpdateDidNotStartedNotification object:self];
     }];
 }
@@ -593,7 +593,7 @@ static NSTimeInterval lastCheckTime;
     
     [ACSSystemUtils callOnMainQueue:^{
         
-        DDLogDebug(@"(AppDelegate) Failured update process.");
+        DDLogInfo(@"(AppDelegate) Failured update process.");
         [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFailuredUpdateNotification object:self];
         
     }];
@@ -604,7 +604,7 @@ static NSTimeInterval lastCheckTime;
     
     [ACSSystemUtils callOnMainQueue:^{
         
-        DDLogDebug(@"(AppDelegate) Finished update process.");
+        DDLogInfo(@"(AppDelegate) Finished update process.");
         NSArray *metas = @[];
         
         if (_updatedFilters) {
@@ -630,20 +630,20 @@ static NSTimeInterval lastCheckTime;
 }
 
 - (void)antibanerUpdateFinished:(AEUpdateResult)result {
-    DDLogDebug(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
+    DDLogInfo(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
     self.antibanerUpdateResult = result;
     [self updateFinished];
 }
 
 - (void)blockingSubscriptionsUpdateFinished:(AEUpdateResult)result {
-    DDLogDebug(@"(AppDelegate) blockingSubscriptionsUpdateFinished with result: %@", [self resultDescription:result]);
+    DDLogInfo(@"(AppDelegate) blockingSubscriptionsUpdateFinished with result: %@", [self resultDescription:result]);
     self.blockingSubscriptionsUpdateResult = result;
     [self updateFinished];
 }
 
 - (void)updateFinished {
     
-    DDLogDebug(@"(AppDelegate) updateFinished");
+    DDLogInfo(@"(AppDelegate) updateFinished");
     
     if(self.antibanerUpdateResult == AEUpdateStarted || self.blockingSubscriptionsUpdateResult == AEUpdateStarted)
         return;
