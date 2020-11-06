@@ -60,6 +60,11 @@ protocol PurchaseServiceProtocol {
     var purchasedThroughLogin: Bool {get}
     
     /**
+     returns true if user has been logged in through Setapp
+     */
+    var purchasedThroughSetapp: Bool {get}
+    
+    /**
      returns true if premium expired. It works both for in-app purchases and for adguard licenses
      */
     func checkPremiumStatusChanged()
@@ -111,6 +116,9 @@ protocol PurchaseServiceProtocol {
     
     /** resets all login data */
     func reset(completion: @escaping ()->Void )
+    
+    /** handle setapp subscription changes */
+    func updateSetappState(subscription: SetappSubscription)
 }
 
 // MARK: - public constants -
@@ -221,8 +229,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private var notificationToken: NotificationToken?
 
-    private var setappObservation: NSKeyValueObservation?
-    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -233,6 +239,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         get {
             return loginService.loggedIn
         }
+    }
+    
+    var purchasedThroughSetapp: Bool {
+        return resources.purchasedThroughSetapp
     }
     
     @objc dynamic var isProPurchasedInternal: Bool {
@@ -324,9 +334,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         loginService.activeChanged = { [weak self] in
             self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
         }
-        
-        updateSetappState(subscription: SetappManager.shared.subscription)
-        observeSetappLicense()
     }
     
     func start() {
@@ -810,22 +817,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return locale.contains("_RU") || locale.contains("_UA")
     }
     
-    // MARK: Setapp license
-    
-    private func observeSetappLicense() {
-        
-        setappObservation = SetappManager.shared.observe(\.subscription) { [weak self] (manager, change) in
-            
-            guard let self = self else { return }
-            DDLogInfo("(PurchaseService) setapp subscription changed")
-            
-            DDLogInfo("(PurchaseService) setapp new subscription is active: \(manager.subscription.isActive)")
-            
-            self.updateSetappState(subscription: manager.subscription)
-        }
-    }
-    
-    private func updateSetappState(subscription: SetappSubscription) {
+    func updateSetappState(subscription: SetappSubscription) {
         if (subscription.isActive && !resources.purchasedThroughSetapp) ||
             !subscription.isActive && resources.purchasedThroughSetapp {
             resources.purchasedThroughSetapp = subscription.isActive
