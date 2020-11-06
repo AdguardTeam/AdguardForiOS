@@ -36,9 +36,9 @@ protocol SetappServiceProtocol {
 
 class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     
-    let purchaseService: PurchaseServiceProtocol
+    private let purchaseService: PurchaseServiceProtocol
     
-    var started = false
+    private var started = false
     
     init(purchaseService: PurchaseServiceProtocol) {
         self.purchaseService = purchaseService
@@ -79,7 +79,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     
     // MARK: -- private methods
     
-    func startManager() {
+    private func startManager() {
         
         if started {
             return
