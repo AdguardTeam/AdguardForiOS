@@ -474,10 +474,9 @@ static NSTimeInterval lastCheckTime;
                 // Success antibanner updated from backend
                 
                 [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
-                [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.");
                 
-                [self updateFinishedNotify];
+                [self updateFinishedNotify: NO];
             }
         }];
     }
@@ -524,7 +523,7 @@ static NSTimeInterval lastCheckTime;
                 [_antibanner endTransaction];
                 DDLogInfo(@"(AppDelegate) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.");
                 
-                [self updateFinishedNotify];
+                [self updateFinishedNotify: YES];
             }
             
             
@@ -600,19 +599,25 @@ static NSTimeInterval lastCheckTime;
     
 }
 
-- (void)updateFinishedNotify{
+- (void)updateFinishedNotify: (BOOL)filtersUpdated {
     
     [ACSSystemUtils callOnMainQueue:^{
         
         DDLogInfo(@"(AppDelegate) Finished update process.");
         NSArray *metas = @[];
         
-        if (_updatedFilters) {
-            metas = _updatedFilters;
-            _updatedFilters = nil;
+        NSMutableDictionary* userinfo = [NSMutableDictionary new];
+        if (filtersUpdated) {
+            
+            if (_updatedFilters) {
+                metas = _updatedFilters;
+                _updatedFilters = nil;
+            }
+            
+            userinfo[AppDelegateUpdatedFiltersKey] = metas;
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFinishedUpdateNotification object:self userInfo:@{AppDelegateUpdatedFiltersKey: metas}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFinishedUpdateNotification object:self userInfo:userinfo];
     }];
 }
 

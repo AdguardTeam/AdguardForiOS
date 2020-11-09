@@ -20,7 +20,7 @@ import Foundation
 
 protocol MainPageModelDelegate: class {
     func updateStarted()
-    func updateFinished(message: String)
+    func updateFinished(message: String?)
     func updateFailed(error: String)
 }
 
@@ -74,11 +74,13 @@ class MainPageModel: MainPageModelProtocol {
         
         let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
             
-            let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as! Array<Any>?
+            let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as? Array<Any>
             
-            let message: String
-            if updatedMetas != nil && updatedMetas!.count > 0 {
-                
+            let message: String?
+            if updatedMetas == nil {
+                message = nil
+            }
+            else if updatedMetas!.count > 0 {
                 let format = ACLocalizedString("filters_updated_format", nil);
                 message = String(format: format, updatedMetas!.count)
             } else {
