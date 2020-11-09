@@ -1095,6 +1095,7 @@
 		D09E2AB1254AC36B002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D09E2BCF25558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
 		D09E2BD025558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
+		D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
@@ -6449,6 +6450,7 @@
 				D0B0383C1FB487BA00A5EA3F /* CHCSVParser.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */,
+				D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */,
 				D0B545652435D137002F0AEC /* CocoaLumberjack.swift in Sources */,
 				D0B545732435D5D2002F0AEC /* SuccessFailureParser.swift in Sources */,
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
