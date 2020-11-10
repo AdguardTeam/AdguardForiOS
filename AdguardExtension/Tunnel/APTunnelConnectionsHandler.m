@@ -31,7 +31,6 @@
     BOOL _packetFlowObserver;
     dispatch_queue_t _readQueue;
     BOOL _packetHandling;
-    BOOL _shouldHandlePackets;
     id<DnsProxyServiceProtocol> _dnsProxy;
 }
 
@@ -62,8 +61,6 @@
 
 
 - (void)startHandlingPackets {
-
-    _shouldHandlePackets = YES;
     
     if (_provider.packetFlow) {
 
@@ -79,7 +76,7 @@
 
 - (void)stopPacketHandling {
     DDLogInfo(@"Stop packet handling");
-    _shouldHandlePackets = NO;
+    _packetHandling = NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -131,13 +128,6 @@
 
 /// Handle packets coming from the packet flow.
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
-
-    // Work here
-    
-    if (!_shouldHandlePackets) {
-        DDLogInfo(@"Drop packets now");
-        return;
-    }
 
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         
