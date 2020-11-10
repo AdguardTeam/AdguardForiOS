@@ -41,6 +41,10 @@ class DnsProvidersServiceMock: DnsProvidersServiceProtocol {
     
     var currentServerName: String = ""
     
+    init(allProviders: [DnsProviderInfo] = []) {
+        self.allProviders = allProviders
+    }
+    
     func isCustomServer(_ server: DnsServerInfo) -> Bool {
         return true
     }

@@ -302,6 +302,8 @@
 		7E3243DE25594BDB0058BCDF /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		7E3243F025594BDC0058BCDF /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		7E324448255A84C50058BCDF /* NativeProvidersServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E324447255A84C50058BCDF /* NativeProvidersServiceMock.swift */; };
+		7E3244C2255AC2F00058BCDF /* NativeProvidersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3244C1255AC2F00058BCDF /* NativeProvidersServiceTest.swift */; };
+		7E3244D5255AD4F20058BCDF /* NetworkSettingsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */; };
 		7E3340122390076800C39F62 /* todayExtensionAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */; };
 		7E33401A2390311B00C39F62 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		7E3340212390337600C39F62 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
@@ -2755,6 +2757,8 @@
 		7E2D978B24499E58000366B3 /* public_suffix_list.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public_suffix_list.dat; sourceTree = "<group>"; };
 		7E31217124DC028300642879 /* BottomAlertTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertTransition.swift; sourceTree = "<group>"; };
 		7E324447255A84C50058BCDF /* NativeProvidersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersServiceMock.swift; sourceTree = "<group>"; };
+		7E3244C1255AC2F00058BCDF /* NativeProvidersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersServiceTest.swift; sourceTree = "<group>"; };
+		7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceMock.swift; sourceTree = "<group>"; };
 		7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = todayExtensionAssets.xcassets; sourceTree = "<group>"; };
 		7E3B38062512029B0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RateApp.strings; sourceTree = "<group>"; };
 		7E3B38072512029B0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainPage.strings; sourceTree = "<group>"; };
@@ -4393,6 +4397,7 @@
 				7EEC432E242A0DED00F39C33 /* ActivityStatisticsServiceTest.swift */,
 				7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */,
 				7EA2163B24449EA700393949 /* MigrationServiceTest.swift */,
+				7E3244C1255AC2F00058BCDF /* NativeProvidersServiceTest.swift */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -5105,6 +5110,7 @@
 				7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */,
 				D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */,
 				7E324447255A84C50058BCDF /* NativeProvidersServiceMock.swift */,
+				7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -7201,6 +7207,7 @@
 				D03398072431929D00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D07A811223B501CD00181E54 /* SharedResources.swift in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
+				7E3244C2255AC2F00058BCDF /* NativeProvidersServiceTest.swift in Sources */,
 				7ED544F7243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */,
 				D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
@@ -7310,6 +7317,7 @@
 				7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */,
 				D0288F2D2305AEF900A4EBEF /* UIColorUtils.swift in Sources */,
 				D0C4EF2D23C8A1F700C57E22 /* DnsTrackerServiceTest.swift in Sources */,
+				7E3244D5255AD4F20058BCDF /* NetworkSettingsServiceMock.swift in Sources */,
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0D7E62C2444C405001801A5 /* APDnsServerAddress.m in Sources */,
 				D093718821AEA770004A24F1 /* ContentBlockerTest.swift in Sources */,

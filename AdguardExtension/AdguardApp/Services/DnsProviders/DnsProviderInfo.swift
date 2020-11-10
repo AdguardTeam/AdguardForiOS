@@ -19,12 +19,14 @@
 import Foundation
 
 // MARK: - data types -
-@objc enum DnsProtocol: Int, Codable {
+@objc enum DnsProtocol: Int, Codable, CaseIterable {
     case dns = 0
     case dnsCrypt
     case doh
     case dot
     case doq
+    
+    static var allCases: [DnsProtocol] = [DnsProtocol.dns, .dnsCrypt, .doh, .dot, .doq]
     
     init(type: DnsType) {
         switch (type) {
