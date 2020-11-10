@@ -247,7 +247,11 @@ class AppDelegateHelper: NSObject {
             
             let providersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
             providersService.reset()
-            // TODO: - Reset native dns providers!
+            
+            if #available(iOS 14.0, *) {
+                let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+                nativeProviders.reset()
+            }
             
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}

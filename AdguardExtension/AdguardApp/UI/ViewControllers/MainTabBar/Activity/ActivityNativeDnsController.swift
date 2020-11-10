@@ -30,19 +30,20 @@ class ActivityNativeDnsController: UIViewController {
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - observers
     private var themeObserver: NotificationToken?
+    private var currentDnsServerObserver: NotificationToken?
+    private var systemProtectionChangeObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         implementationButton.makeTitleTextUppercased()
         implementationButton.applyStandardGreenStyle()
         updateTheme()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
+        setupLabels()
+        addObservers()
     }
     
     @IBAction func implementationButtonTapped(_ sender: UIButton) {
@@ -53,5 +54,29 @@ class ActivityNativeDnsController: UIViewController {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupSeparators(separators)
+    }
+    
+    private func setupLabels() {
+        dnsStatusLabel.text = nativeProviders.managerIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        dnsNameLabel.text = nativeProviders.currentProvider?.name
+        
+        if let dnsProtocol = nativeProviders.currentServer?.dnsProtocol {
+            let stringId = DnsProtocol.stringIdByProtocol[dnsProtocol] ?? ""
+            dnsProtocolLabel.text = String.localizedString(stringId)
+        }
+    }
+    
+    private func addObservers() {
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+            self?.updateTheme()
+        }
+        
+        currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.setupLabels()
+        }
+        
+        systemProtectionChangeObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.setupLabels()
+        }
     }
 }

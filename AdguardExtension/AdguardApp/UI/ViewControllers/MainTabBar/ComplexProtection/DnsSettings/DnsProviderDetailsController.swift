@@ -20,7 +20,7 @@ import Foundation
 import SafariServices
 
 protocol DnsProviderDetailsControllerDelegate: class {
-    func activeServerChanged(_ newServer: DnsServerInfo, serverName: String?)
+    func activeServerChanged(_ newServer: DnsServerInfo)
 }
 
 class DnsProviderDetailsController : UITableViewController,  ChooseProtocolControllerDelegate {
@@ -238,7 +238,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     }
     
     private func activateServer(_ server: DnsServerInfo) {
-        delegate?.activeServerChanged(server, serverName: provider?.name)
+        delegate?.activeServerChanged(server)
         dismiss(animated: true, completion: nil)
     }
 }

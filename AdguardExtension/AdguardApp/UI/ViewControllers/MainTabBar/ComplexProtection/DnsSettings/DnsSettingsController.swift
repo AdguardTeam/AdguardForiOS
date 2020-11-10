@@ -50,6 +50,7 @@ class DnsSettingsController : UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
@@ -207,7 +208,7 @@ class DnsSettingsController : UITableViewController {
         }
         
         if indexPath.section == menuSection && indexPath.row == howToSetupRow && resources.dnsImplementation == .native {
-            presentHowToSetupController()
+            AppDelegate.shared.presentHowToSetupController()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -223,6 +224,28 @@ class DnsSettingsController : UITableViewController {
     
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
+        if resources.dnsImplementation == .native {
+            if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
+                nativeProviders.removeDnsManager { error in
+                    DDLogError("Error removing dns manager: \(error.debugDescription)")
+                    DispatchQueue.main.async { [weak self] in
+                        sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
+                    }
+                }
+            } else if #available(iOS 14.0, *) {
+                sender.isOn = complexProtection.systemProtectionEnabled
+                nativeProviders.saveDnsManager { error in
+                    if let error = error {
+                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                    }
+                    DispatchQueue.main.async {
+                        AppDelegate.shared.presentHowToSetupController()
+                    }
+                }
+            }
+            return
+        }
+        
         let enabled = sender.isOn
     
         complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
@@ -240,10 +263,17 @@ class DnsSettingsController : UITableViewController {
         enabledSwitch.isOn = enabled
         systemProtectionStateLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
-        
-        serverName.text = dnsProviders.currentServerName
-        
+    
+        updateServerName()
         tableView.reloadData()
+    }
+    
+    private func updateServerName() {
+        if resources.dnsImplementation == .adGuard {
+            serverName.text = dnsProviders.currentServerName
+        } else {
+            serverName.text = nativeProviders.serverName
+        }
     }
     
     private func observeProStatus(){
@@ -299,12 +329,6 @@ class DnsSettingsController : UITableViewController {
             present(implementationVC, animated: true, completion: nil)
         }
     }
-    
-    private func presentHowToSetupController() {
-        if let howToSetupVC = storyboard?.instantiateViewController(withIdentifier: "HowToSetupController") as? HowToSetupController {
-            present(howToSetupVC, animated: true, completion: nil)
-        }
-    }
 }
 
 extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
@@ -319,5 +343,6 @@ extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
         let stringKey = resources.dnsImplementation == .adGuard ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
         implementationLabel.text = String.localizedString(stringKey)
         implementationIcon.image = resources.dnsImplementation == .adGuard ? adguardImplementationIcon : nativeImplementationIcon
+        updateServerName()
     }
 }

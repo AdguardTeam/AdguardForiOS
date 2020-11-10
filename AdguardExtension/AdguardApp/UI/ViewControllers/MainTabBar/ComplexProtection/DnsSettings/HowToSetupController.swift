@@ -20,6 +20,8 @@ import UIKit
 
 class HowToSetupController: BottomAlertController {
 
+    @IBOutlet weak var titleLabel: ThemableLabel!
+    @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var openSettingsButton: UIButton!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -36,6 +38,7 @@ class HowToSetupController: BottomAlertController {
         openSettingsButton.applyStandardGreenStyle()
         
         updateTheme()
+        setupLabels()
         
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
             self?.updateTheme()
@@ -45,7 +48,6 @@ class HowToSetupController: BottomAlertController {
     // MARK: - Actions
     
     @IBAction func openSettingsTapped(_ sender: UIButton) {
-        UIApplication.openSystemSettings()
         dismiss(animated: true)
     }
     
@@ -54,5 +56,15 @@ class HowToSetupController: BottomAlertController {
     private func updateTheme() {
         contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
+    }
+    
+    private func setupLabels() {
+        let titleFormat = String.localizedString("native_dns_setup_title")
+        let title = String(format: titleFormat, Bundle.main.applicationName ?? "AdGuard")
+        titleLabel.text = title
+        
+        let descriptionFormat = String.localizedString("native_dns_setup_description")
+        let description = String(format: descriptionFormat, Bundle.main.applicationName ?? "AdGuard")
+        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil, textAlignment: .center)
     }
 }

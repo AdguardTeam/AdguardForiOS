@@ -25,7 +25,8 @@ class MainMenuController: UITableViewController {
     private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-    
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
@@ -47,7 +48,7 @@ class MainMenuController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
-        systemProtectionLabel.text = proStatus ? dnsProviders.currentServerName : String.localizedString("system_dns_server")
+        updateServerName()
     }
     
     override func viewDidLoad() {
@@ -111,6 +112,18 @@ class MainMenuController: UITableViewController {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
+        }
+    }
+    
+    private func updateServerName() {
+        if proStatus {
+            if resources.dnsImplementation == .adGuard {
+                systemProtectionLabel.text = dnsProviders.currentServerName
+            } else {
+                systemProtectionLabel.text = nativeProviders.serverName
+            }
+        } else {
+            systemProtectionLabel.text = String.localizedString("system_dns_server")
         }
     }
 }

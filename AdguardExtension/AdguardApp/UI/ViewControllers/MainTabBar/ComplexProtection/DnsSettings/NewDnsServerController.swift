@@ -57,7 +57,8 @@ class NewDnsServerController: BottomAlertController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersServiceProtocol =  ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - view controller lifecycle
     
@@ -91,7 +92,15 @@ class NewDnsServerController: BottomAlertController {
     @IBAction func addAction(_ sender: Any) {
         checkUpstream { [weak self] in
             guard let self = self else { return }
-            self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: self.upstreamsField.text ?? "") { [weak self] in
+            
+            let upstream = self.upstreamsField.text ?? ""
+            let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
+            
+            if !isValidProtocol {
+                return
+            }
+            
+            self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream) { [weak self] in
                 self?.vpnManager.updateSettings(completion: nil)
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.providerAdded()
@@ -134,6 +143,12 @@ class NewDnsServerController: BottomAlertController {
             server.name = self.provider!.name
             server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
             
+            let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
+            
+            if !isValidProtocol {
+                return
+            }
+            
             self.dnsProvidersService.updateProvider(provider) { [weak self] in
                 guard let self = self else { return }
                 
@@ -147,6 +162,22 @@ class NewDnsServerController: BottomAlertController {
                     self?.dismiss(animated: true, completion: nil)
                 }
             }
+        }
+    }
+    
+    private func checkForValidNativeImplementationProtocol(upstream: String) -> Bool {
+        if resources.dnsImplementation == .adGuard { return true }
+        
+        let dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
+        if NativeProvidersService.supportedProtocols.contains(dnsProtocol) {
+            return true
+        } else {
+            let title = String.localizedString("invalid_dns_protocol_title")
+            let messageFormat = String.localizedString("invalid_dns_protocol_message")
+            let dnsProtocolString = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
+            let message = String(format: messageFormat, dnsProtocolString)
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+            return false
         }
     }
     

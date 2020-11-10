@@ -243,7 +243,10 @@ extension AESharedResourcesProtocol {
             return .adGuard
         }
         set {
-            sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+            if dnsImplementation != newValue {
+                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+                NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
+            }
         }
     }
     
@@ -265,4 +268,8 @@ extension AESharedResourcesProtocol {
         
         return value
     }
+}
+
+extension Notification.Name {
+    static var dnsImplementationChanged: Notification.Name { return .init(rawValue: "dnsImplementationChanged") }
 }

@@ -188,8 +188,23 @@ class MigrationService: MigrationServiceProtocol {
          Migration for AdGuard and AdGuard Pro
         */
         if lastBuildVersion < 561 {
-            DDLogInfo("(MigrationService) -  migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            DDLogInfo("(MigrationService) -  removeOptimizeFeature started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             removeOptimizeFeature()
+        }
+        
+        /**
+        Migration:
+         In app version 4.1 (563) we've added AdGuard Dns repository support and begun to use
+         all information from providers.json
+         Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
+         isCustomProvider  property was added
+         providerId is not optional anymore
+        */
+        if lastBuildVersion < 563 {
+            DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            setProviderIdForCurrentDnsServer()
+            setBoolFlagForDnsProviders()
+            setIdsForCustomProviders()
         }
     }
     
@@ -373,6 +388,43 @@ class MigrationService: MigrationServiceProtocol {
             }
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
         }
+    }
+    
+    private func setProviderIdForCurrentDnsServer() {
+        DDLogInfo("Trying to set provider id for current DNS server")
+        
+        guard let currentServer = dnsProvidersService.activeDnsServer else {
+            DDLogInfo("Current DNS server is nil")
+            return
+        }
+        let serverId = currentServer.serverId
+        
+        guard let serverProvider = dnsProvidersService.allProviders.first(where: { provider in
+            provider.servers?.contains { $0.serverId == serverId } ?? false
+        }) else {
+            DDLogError("Failed to find provider for server with id = \(serverId)")
+            return
+        }
+        currentServer.providerId = serverProvider.providerId
+        dnsProvidersService.activeDnsServer = currentServer
+        
+        DDLogInfo("Finished setting provider id for current DNS server")
+    }
+    
+    private func setBoolFlagForDnsProviders() {
+        DDLogInfo("Setting isCustomProvider flag for custom providers")
+        dnsProvidersService.customProviders.forEach { $0.isCustomProvider = true }
+        DDLogInfo("Finished setting isCustomProvider flag")
+    }
+    
+    private func setIdsForCustomProviders() {
+        DDLogInfo("Setting providerId for custom providers")
+        dnsProvidersService.customProviders.forEach { provider in
+            let id = UUID().hashValue
+            provider.providerId = id
+            provider.servers?.forEach { $0.providerId = id }
+        }
+        DDLogInfo("Finished setting providerId")
     }
 }
 

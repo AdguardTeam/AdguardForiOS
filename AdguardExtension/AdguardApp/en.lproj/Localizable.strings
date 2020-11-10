@@ -619,6 +619,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "You have entered the invalid upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Invalid DNS protocol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "System Blocklist";
 
@@ -738,6 +744,12 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Please enable %@ in the system DNS settings";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>VPN & Network > DNS</b> and select <b>%@</b> there.";
 
 
 // MARK: - Strings for VoiceOver -

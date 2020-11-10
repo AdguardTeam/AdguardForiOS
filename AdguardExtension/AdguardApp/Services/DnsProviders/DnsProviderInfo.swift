@@ -84,10 +84,11 @@ struct DnsProviderFeature {
 
 @objc(DnsServerInfo)
 @objcMembers
-class DnsServerInfo : ACObject {
+class DnsServerInfo : ACObject, Codable {
     
     var dnsProtocol: DnsProtocol
     var serverId: String
+    var providerId: Int?
     var name: String
     var upstreams: [String]
     var anycast: Bool?
@@ -97,11 +98,12 @@ class DnsServerInfo : ACObject {
     
     // MARK: - initializers and NSCoding methods
     
-    init(dnsProtocol: DnsProtocol, serverId: String, name: String, upstreams: [String]) {
+    init(dnsProtocol: DnsProtocol, serverId: String, name: String, upstreams: [String], providerId: Int?) {
         self.serverId = serverId
         self.dnsProtocol = dnsProtocol
         self.name = name
         self.upstreams = upstreams
+        self.providerId = providerId
         super.init()
     }
     
@@ -110,6 +112,7 @@ class DnsServerInfo : ACObject {
         name = aDecoder.decodeObject(forKey: "name") as! String
         upstreams = aDecoder.decodeObject(forKey: "upstreams") as! [String]
         dnsProtocol = DnsProtocol(rawValue: aDecoder.decodeInteger(forKey: "dns_protocol")) ?? .dns
+        providerId = aDecoder.decodeInteger(forKey: "providerId")
         super.init(coder: aDecoder)
     }
     
@@ -132,11 +135,13 @@ class DnsServerInfo : ACObject {
     var protocols: [DnsProtocol]?
     var features: [DnsProviderFeature]?
     var website: String?
+    var providerId: Int
+    var isCustomProvider: Bool
     @objc var servers: [DnsServerInfo]?
     
     // MARK: - initializers and NSCoding methods
     
-    init(name: String, logo: String?, logoDark: String?, summary: String?, protocols: [DnsProtocol]?, features: [DnsProviderFeature]?, website: String?, servers: [DnsServerInfo]?) {
+    init(name: String, logo: String?, logoDark: String?, summary: String?, protocols: [DnsProtocol]?, features: [DnsProviderFeature]?, website: String?, servers: [DnsServerInfo]?, providerId: Int, isCustomProvider: Bool) {
         self.name = name
         self.logo = logo
         self.logoDark = logoDark
@@ -145,22 +150,30 @@ class DnsServerInfo : ACObject {
         self.features = features
         self.website = website
         self.servers = servers
+        self.providerId = providerId
+        self.isCustomProvider = isCustomProvider
         super.init()
     }
     
-    init(name: String) {
+    init(name: String, isCustomProvider: Bool, providerId: Int) {
         self.name = name
+        self.isCustomProvider = isCustomProvider
+        self.providerId = providerId
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
+        isCustomProvider = aDecoder.decodeBool(forKey: "isCustomProvider")
+        providerId = aDecoder.decodeInteger(forKey: "providerId")
         super.init(coder: aDecoder)
     }
     
     override func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(isCustomProvider, forKey: "isCustomProvider")
+        aCoder.encode(providerId, forKey: "providerId")
     }
     
     func serverByProtocol(dnsProtocol: DnsProtocol) -> DnsServerInfo? {

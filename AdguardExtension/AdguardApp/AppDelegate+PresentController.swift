@@ -399,6 +399,36 @@ extension AppDelegate {
         }
     }
     
+    /* Presents HowToSetupController for top view controller in navigation stack */
+    func presentHowToSetupController() {
+        let dnsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
+        guard let howToSetupVC = dnsStoryboard.instantiateViewController(withIdentifier: "HowToSetupController") as? HowToSetupController else {
+            DDLogError("DnsSettings.storyboard doesnt't have HowToSetupController")
+            return
+        }
+        guard let topVC = AppDelegate.topViewController() else {
+            DDLogError("Failed to get top view controller")
+            return
+        }
+        topVC.present(howToSetupVC, animated: true, completion: nil)
+    }
+    
+    /* Returns top view controller for controller  */
+    static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+    
     /* Returns navigation controller for certain tab */
     private func getNavigationController(for tab: TabBarTabs) -> MainNavigationController? {
         let tabBar = getMainTabController()

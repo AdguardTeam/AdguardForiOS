@@ -62,10 +62,9 @@ class StartupService : NSObject{
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)
         
-        if #available(iOS 14.0, *) {
-            let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettingsService)
-            locator.addService(service: nativeProviders)
-        }
+        let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettingsService, resources: sharedResources, configuration: configuration)
+        dnsProviders.delegate = nativeProviders as? NativeProvidersService
+        locator.addService(service: nativeProviders)
         
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService, dnsProviders: dnsProviders)
         locator.addService(service: vpnManager as VpnManagerProtocol)
@@ -74,7 +73,7 @@ class StartupService : NSObject{
         let safariProtection =  SafariProtectionService(resources: sharedResources)
         locator.addService(service: safariProtection)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection

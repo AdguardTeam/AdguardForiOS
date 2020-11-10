@@ -19,24 +19,41 @@
 import Foundation
 
 protocol DnsProvidersModelProtocol {
-    var providers: [DnsProviderInfo] { get }
+    var providers: [DnsProviderCellModel] { get }
     
-    func setServerAsActive(_ server: DnsServerInfo?, serverName: String?)
+    func setServerAsActive(_ server: DnsServerInfo?)
+    func getProvider(byId providerId: Int) -> DnsProviderInfo?
 }
 
 class DnsProvidersModel: DnsProvidersModelProtocol {
     
     // MARK: - Public properties
-    var providers: [DnsProviderInfo] {
+    var providers: [DnsProviderCellModel] {
         if #available(iOS 14.0, *), resources.dnsImplementation == .native {
-            return nativeProvidersService.providers
+            let providers = nativeProvidersService.providers
+            let currentProviderId = nativeProvidersService.currentServer?.providerId
+            return providers.map { DnsProviderCellModel(provider: $0, isCurrent: $0.providerId == currentProviderId, isDefaultProvider: false) }
         } else {
-            return dnsProvidersService.allProviders
+            let providers = dnsProvidersService.allProviders
+            let currentProviderId = dnsProvidersService.activeDnsServer?.providerId
+            var models: [DnsProviderCellModel] = []
+            models.append(systemDefaultProvider)
+            for provider in providers {
+                let isCurrent = currentProviderId == provider.providerId
+                let providerModel = DnsProviderCellModel(provider: provider, isCurrent: isCurrent, isDefaultProvider: false)
+                models.append(providerModel)
+            }
+            return models
         }
     }
     
     // MARK: - Private properties
-    
+    private var systemDefaultProvider: DnsProviderCellModel {
+        let name = String.localizedString("default_dns_server_name")
+        let description = String.localizedString("default_dns_server_description")
+        let isCurrent = dnsProvidersService.activeDnsServer == nil || dnsProvidersService.activeDnsProvider == nil
+        return DnsProviderCellModel(name: name, description: description, isCurrent: isCurrent, isDefaultProvider: true, isCustomProvider: false, providerId: DnsProvidersService.systemDefaultProviderId)
+    }
     
     // MARK: - Services
     private let dnsProvidersService: DnsProvidersServiceProtocol
@@ -57,19 +74,21 @@ class DnsProvidersModel: DnsProvidersModelProtocol {
     
     // MARK: - Public methods
     
-    func setServerAsActive(_ server: DnsServerInfo?, serverName: String?) {
+    func setServerAsActive(_ server: DnsServerInfo?) {
+        dnsProvidersService.activeDnsServer = server
         if #available(iOS 14.0, *), resources.dnsImplementation == .native {
-            // TODO: - Process nil server
-            if let server = server {
-                nativeProvidersService.setServerAsCurrent(server, name: serverName) { error in
-                    if let error = error {
-                        DDLogError("Error: \(error.localizedDescription)")
-                    }
+            nativeProvidersService.saveDnsManager { error in
+                if let error = error {
+                    DDLogError("Error: \(error.localizedDescription)")
                 }
             }
         } else {
-            dnsProvidersService.activeDnsServer = server
             vpnManager.updateSettings(completion: nil)
         }
+    }
+    
+    func getProvider(byId providerId: Int) -> DnsProviderInfo? {
+        let providers = resources.dnsImplementation == .adGuard ? dnsProvidersService.allProviders : nativeProvidersService.providers
+        return providers.first(where: { $0.providerId == providerId })
     }
 }

@@ -39,6 +39,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,9 @@ class ChooseDnsImplementationController: BottomAlertController {
         resources.dnsImplementation = .adGuard
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
+        if #available(iOS 14.0, *) {
+            nativeProviders.removeDnsManager { _ in }
+        }
         dismiss(animated: true)
     }
     
