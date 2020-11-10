@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios",
         "state": {
           "branch": null,
-          "revision": "4e5877425dae5c10792fc9d22d53dc6bf6824dc1",
-          "version": "3.1.8"
+          "revision": "e02e82c7c1b472e85e641a7624e99c855e21add1",
+          "version": "3.1.9"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
         "state": {
           "branch": null,
-          "revision": "35f4ca2859c5491067d8d6dc309c432be6f5216c",
-          "version": "1.0.1"
+          "revision": "110d3bd1e54dc970090a450727d23c14cd1a8966",
+          "version": "1.1.1"
         }
       },
       {

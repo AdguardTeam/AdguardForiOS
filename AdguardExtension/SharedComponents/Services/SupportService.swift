@@ -21,26 +21,33 @@ import Foundation
 @objc
 protocol SupportServiceProtocol {
     func proFeaturesStatus()->String
+    func composeWebReportUrl(_ site: NSURL?)->NSURL
 }
 
 @objc
 class SupportService: NSObject, SupportServiceProtocol {
     
-    let resources: AESharedResourcesProtocol
-    let configuration: ConfigurationServiceProtocol
-    let complexProtection: ComplexProtectionServiceProtocol
-    let dnsProviders: DnsProvidersServiceProtocol
-    let networkSettings: NetworkSettingsServiceProtocol
-    let dnsFilters: DnsFiltersServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    private let configuration: ConfigurationServiceProtocol
+    private let complexProtection: ComplexProtectionServiceProtocol
+    private let dnsProviders: DnsProvidersServiceProtocol
+    private let networkSettings: NetworkSettingsServiceProtocol
+    private let dnsFilters: DnsFiltersServiceProtocol
+    private let productInfo: ADProductInfoProtocol
+    private let antibanner: AESAntibannerProtocol
+
+    private let reportUrl = "https://reports.adguard.com/new_issue.html"
     
     @objc
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, antibanner: AESAntibannerProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
         self.networkSettings = networkSettings
         self.dnsFilters = dnsFilters
+        self.productInfo = productInfo
+        self.antibanner = antibanner
         super.init()
     }
     
@@ -96,5 +103,50 @@ class SupportService: NSObject, SupportServiceProtocol {
         }
         
         return resultString
+    }
+    
+    func composeWebReportUrl(_ site: NSURL?) -> NSURL {
+        
+        var params = [String: String]()
+        
+        if site != nil {
+            params["url"] = site!.absoluteString;
+        }
+        
+        params["product_type"] = "iOS";
+        params["product_version"] = productInfo.version();
+        params["browser"] = "Safari";
+        
+        let filterIDs:[String] = antibanner.activeFilterIDs().map { $0.stringValue }
+        let filtersString = filterIDs.joined(separator: ".")
+        
+        params["filters"] = filtersString
+        
+        params["ios.simplified"] = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize) ? "true" : "false"
+            
+        let dnsEnabled = complexProtection.systemProtectionEnabled;
+        
+        params["dns.enabled"] = dnsEnabled ? "true" : "false";
+        
+        if (dnsEnabled){
+            if let dnsServer = dnsProviders.activeDnsServer {
+                params["dns.servers"] = dnsServer.upstreams.joined(separator: ",")
+            }
+            
+            let filtersEnabled = configuration.advancedMode
+            
+            params["dns.filters_enabled"] = filtersEnabled ? "true" : "false"
+            
+            if filtersEnabled {
+                let filters = dnsFilters.filters.filter { $0.enabled }
+                let filterUrls = filters.compactMap { $0.subscriptionUrl }
+                params["dns.filters"] = filterUrls.joined(separator: ",")
+            }
+        }
+            
+        let paramsString = ABECRequest.createString(fromParameters: params)
+        let url = "\(reportUrl)?\(paramsString)"
+        
+        return URL(string: url)! as NSURL
     }
 }

@@ -45,11 +45,13 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet weak var dnscryptHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dohHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dotHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var quicHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var regularCheck: UIImageView!
     @IBOutlet weak var dnsCryptCheck: UIImageView!
     @IBOutlet weak var dohCheck: UIImageView!
     @IBOutlet weak var dotCheck: UIImageView!
+    @IBOutlet weak var quicCheck: UIImageView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var buttons: [RoundRectButton]!
@@ -98,6 +100,10 @@ class ChooseProtocolController: BottomAlertController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func quicAction(_ sender: Any) {
+        delegate?.protocolSelected(chosenProtocol: .doq)
+        dismiss(animated: true, completion: nil)
+    }
     // MARK: - Private methods
     
     func setupChecks() {
@@ -110,6 +116,7 @@ class ChooseProtocolController: BottomAlertController {
         dnsCryptCheck.isHidden = true
         dohCheck.isHidden = true
         dotCheck.isHidden = true
+        quicCheck.isHidden = true
         
         switch dnsProtocol {
         case .dns:
@@ -120,6 +127,8 @@ class ChooseProtocolController: BottomAlertController {
             dohCheck.isHidden = false
         case .dot:
             dotCheck.isHidden = false
+        case .doq:
+            quicCheck.isHidden = false
         }
     }
     
@@ -131,6 +140,7 @@ class ChooseProtocolController: BottomAlertController {
         dnscryptHeightConstraint.constant = 0
         dohHeightConstraint.constant = 0
         dotHeightConstraint.constant = 0
+        quicHeightConstraint.constant = 0
         
         for dnsProtocol in protocols {
             switch dnsProtocol {
@@ -142,6 +152,8 @@ class ChooseProtocolController: BottomAlertController {
                 dohHeightConstraint.constant = cellHeight
             case .dot:
                 dotHeightConstraint.constant = cellHeight
+            case .doq:
+                quicHeightConstraint.constant = cellHeight
             }
         }
     }
