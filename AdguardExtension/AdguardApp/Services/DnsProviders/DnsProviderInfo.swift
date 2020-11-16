@@ -73,6 +73,10 @@ import Foundation
             return .dnsCrypt
         }
         
+        if let doqPrefix = DnsProtocol.prefixByProtocol[.doq], upstream.hasPrefix(doqPrefix) {
+            return .doq
+        }
+        
         return .dns
     }
 }

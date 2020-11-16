@@ -144,81 +144,100 @@
                 "description": "Blocks known phishing and other dangerous domains"
             },
             "vi": {
-                "name": "Bảo mật"
+                "name": "Bảo mật",
+                "description": "Các dạng lừa đảo đã biết và các miền nguy hiểm khác"
             },
             "it": {
                 "name": "Sicuro",
                 "description": "Blocca i domini di phishing conosciuti e altri pericolosi"
             },
             "ar": {
-                "name": "الامان"
+                "name": "الامان",
+                "description": "حظر البرامج الضارة المعروفة ونطاقات التصيد الاحتيالي"
             },
             "cs": {
-                "name": "Zabezpečení"
+                "name": "Zabezpečení",
+                "description": "Blokuje nebezpečné a podvodné domény"
             },
             "sv-SE": {
-                "name": "Säkra"
+                "name": "Säkra",
+                "description": "Block kända phishing och andra farliga domäner"
             },
             "es-ES": {
-                "name": "Seguro"
+                "name": "Seguro",
+                "description": "Bloquea phishing conocido y otros dominios peligrosos"
             },
             "id": {
-                "name": "Aman"
+                "name": "Aman",
+                "description": "Memblokir phishing dan domain berbahaya lainnya"
             },
             "ru": {
                 "name": "Безопасный",
                 "description": "Блокирует известные фишинговые и другие опасные домены"
             },
             "nl": {
-                "name": "Beveiligen"
+                "name": "Beveiligen",
+                "description": "Blokkeert bekende phishing en andere gevaarlijke domeinen"
             },
             "no": {
-                "name": "Sikker"
+                "name": "Sikker",
+                "description": "Blokkerer gjenkjent phishing og andre farlige domener"
             },
             "tr": {
-                "name": "Güvenli"
+                "name": "Güvenli",
+                "description": "Bilinen kimlik avı ve diğer tehlikeli alan adlarını engeller"
             },
             "lt": {
-                "name": "Saugus"
+                "name": "Saugus",
+                "description": "Blokuoja žinomus sukčiavimo ir kitus pavojingus domenus"
             },
             "ro": {
-                "name": "Securizat"
+                "name": "Securizat",
+                "description": "Blochează phishing știut și alte domenii periculoase"
             },
             "pl": {
                 "name": "Bezpieczne",
                 "description": "Blokuje znane domeny phishingowe i inne niebezpieczne domeny"
             },
             "be": {
-                "name": "Бяспека"
+                "name": "Бяспека",
+                "description": "Блакуе вядомыя фішынгавыя і іншыя небяспечныя дамены"
             },
             "fr": {
                 "name": "Sûr",
                 "description": "Bloque les domaines d'hameçonnage connus et autres dangers"
             },
             "sr-CS": {
-                "name": "Bezbedno"
+                "name": "Bezbedno",
+                "description": "Blokira poznati štetni softver i fišing domene"
             },
             "hr": {
-                "name": "Sigurno"
+                "name": "Sigurno",
+                "description": "Blokira poznate domene za krađu identiteta kao i druge opasne domene"
             },
             "de": {
                 "name": "Sicher",
                 "description": "Blockiert bekannte Phishing- und andre gefährliche Domänen"
             },
             "da": {
-                "name": "Sikker"
+                "name": "Sikker",
+                "description": "Blokerer kendt phishing og andre farlige domæner"
             },
             "fa": {
-                "name": "اَمن"
+                "name": "اَمن",
+                "description": "مسدودسازی دامنه های بدافزار و فیشینگ شناخته شده"
             },
             "pt-BR": {
-                "name": "Seguro"
+                "name": "Seguro",
+                "description": "Bloqueia phishing conhecido e outros domínios perigosos"
             },
             "fi": {
-                "name": "Turvallinen"
+                "name": "Turvallinen",
+                "description": "Estää tunnettuja tietojenkalastelu- ja muita vaarallisia verkkotunnuksia"
             },
             "hu": {
-                "name": "Biztonságos"
+                "name": "Biztonságos",
+                "description": "Letiltja az ismert adathalász és más veszélyes domaineket"
             },
             "ja": {
                 "name": "安全",
@@ -228,7 +247,8 @@
                 "name": "מאובטח"
             },
             "pt-PT": {
-                "name": "Seguro"
+                "name": "Seguro",
+                "description": "Bloqueia phishing conhecido e outros domínios perigosos"
             },
             "zh-TW": {
                 "name": "安全的",
@@ -239,17 +259,20 @@
                 "description": "피싱 및 위험한 도메인을 차단합니다"
             },
             "sk": {
-                "name": "Bezpečný"
+                "name": "Bezpečný",
+                "description": "Blokuje známe podvodnícke a iné nebezpečné domény"
             },
             "zh-CN": {
                 "name": "安全",
                 "description": "拦截已知的网络钓鱼与其它危险域名"
             },
             "uk": {
-                "name": "Безпека"
+                "name": "Безпека",
+                "description": "Блокує відомі шкідливі та шахрайські домени"
             },
             "sl": {
-                "name": "Varno"
+                "name": "Varno",
+                "description": "Zavira znano lažno predstavljanje in druge nevarne domene"
             }
         },
         "encryption": {
@@ -820,23 +843,24 @@
                 "description": "AdGuard DNS + sicurezza di ricerca e blocco dei contenuti per adulti"
             },
             "ar": {
+                "name": "AdGuard DNS خدمة حماية الاسرة",
                 "description": "البحث الآمن وحظر محتوى البالغين + AdGuard DNS"
             },
             "cs": {
-                "description": "AdGuard DNS + bezpečné vyhledávání a blokování obsahu pro dospělé",
-                "name": "AdGuard DNS Ochrana rodiny"
+                "name": "AdGuard DNS Ochrana rodiny",
+                "description": "AdGuard DNS + bezpečné vyhledávání a blokování obsahu pro dospělé"
             },
             "sv-SE": {
-                "description": "AdGuard DNS + Säker surf och blockering av vuxeninnehåll",
-                "name": "AdGuard DNS Family Protection"
+                "name": "AdGuard DNS Family Protection",
+                "description": "AdGuard DNS + Säker surf och blockering av vuxeninnehåll"
             },
             "es-ES": {
                 "name": "AdGuard DNS Protección familiar",
                 "description": "AdGuard DNS + Búsqueda segura y bloqueo de contenido para adultos"
             },
             "id": {
-                "description": "AdGuard DNS + pencarian aman dan pemblokir konten dewasa",
-                "name": "AdGuard DNS Perlindungan Keluarga"
+                "name": "AdGuard DNS Perlindungan Keluarga",
+                "description": "AdGuard DNS + pencarian aman dan pemblokir konten dewasa"
             },
             "ru": {
                 "name": "AdGuard DNS Семейный режим",
@@ -847,16 +871,16 @@
                 "description": "AdGuard DNS met veilig-zoeken en blokkering van volwassen inhoud"
             },
             "no": {
-                "description": "AdGuard DNS + «Safe Search» og blokkering av voksent innhold",
-                "name": "AdGuard DNS med familiebeskyttelse"
+                "name": "AdGuard DNS med familiebeskyttelse",
+                "description": "AdGuard DNS + «Safe Search» og blokkering av voksent innhold"
             },
             "tr": {
                 "name": "AdGuard DNS Aile Koruması",
                 "description": "AdGuard DNS + Güvenli Arama ve yetişkin içerik engelleme"
             },
             "lt": {
-                "description": "AdGuard DNS + saugi paieška ir suaugusiųjų turinio blokavimas",
-                "name": "AdGuard DNS Šeimos apsauga"
+                "name": "AdGuard DNS Šeimos apsauga",
+                "description": "AdGuard DNS + saugi paieška ir suaugusiųjų turinio blokavimas"
             },
             "ro": {
                 "name": "AdGuard DNS Protecție Familială",
@@ -867,44 +891,44 @@
                 "description": "AdGuard DNS + bezpieczne wyszukiwanie i blokowanie treści dla dorosłych"
             },
             "be": {
-                "description": "AdGuard DNS + бяспечны пошук і блакаванне кантэнту для дарослых",
-                "name": "AdGuard DNS з сямейнай абаронай"
+                "name": "AdGuard DNS з сямейнай абаронай",
+                "description": "AdGuard DNS + бяспечны пошук і блакаванне кантэнту для дарослых"
             },
             "fr": {
                 "name": "AdGuard DNS Protection familiale",
                 "description": "DNS d'AdGuard + Recherche sécurisée et blocage du contenu pour adultes"
             },
             "sr-CS": {
-                "description": "AdGuard DNS + sigurno pretraživanje i blokiranje sadržaja za odrasle",
-                "name": "AdGuard porodična zaštita"
+                "name": "AdGuard porodična zaštita",
+                "description": "AdGuard DNS + sigurno pretraživanje i blokiranje sadržaja za odrasle"
             },
             "hr": {
-                "description": "AdGuard DNS + Sigurno surfanje uz blokiranje sadržaja za odrasle",
-                "name": "AdGuard DNS zaštita obitelji"
+                "name": "AdGuard DNS zaštita obitelji",
+                "description": "AdGuard DNS + Sigurno surfanje uz blokiranje sadržaja za odrasle"
             },
             "de": {
                 "name": "AdGuard DNS Familienschutz",
                 "description": "AdGuard DNS, SafeSearch und Blockierung von Inhalten für Erwachsene"
             },
             "da": {
-                "description": "AdGuard DNS + Sikker søgning og blokering af voksenindhold",
-                "name": "AdGuard DNS Familiebeskyttelse"
+                "name": "AdGuard DNS Familiebeskyttelse",
+                "description": "AdGuard DNS + Sikker søgning og blokering af voksenindhold"
             },
             "fa": {
                 "description": "AdGuard DNS + جستجوی اَمن و محدودسازی محتوای بزرگسال",
                 "name": "حفاظت خانواده AdGuard DNS"
             },
             "pt-BR": {
-                "description": "AdGuard DNS + pesquisa segura com bloqueio de conteúdo adulto",
-                "name": "AdGuard DNS Proteção Familiar"
+                "name": "AdGuard DNS Proteção Familiar",
+                "description": "AdGuard DNS + pesquisa segura com bloqueio de conteúdo adulto"
             },
             "fi": {
-                "description": "AdGuard DNS + Turvallinen haku ja aikuisviihteen suodatus",
-                "name": "AdGuard DNS Family Protection"
+                "name": "AdGuard DNS Family Protection",
+                "description": "AdGuard DNS + Turvallinen haku ja aikuisviihteen suodatus"
             },
             "hu": {
                 "name": "AdGuard DNS Családi védelem",
-                "description": "AdGuard DNS + SafeSearch és a felnőtt tartalom-blokkolása"
+                "description": "AdGuard DNS + SafeSearch és a felnőtteknek szóló tartalom blokkolása"
             },
             "ja": {
                 "name": "AdGuard DNS ファミリープロテクション",
@@ -914,28 +938,28 @@
                 "description": "AdGuard DNS + SafeSearch וחסימת תוכן למבוגרים"
             },
             "pt-PT": {
-                "description": "DNS AdGuard + Pesquisa de Segurança e bloqueio de conteúdo adulto",
-                "name": "AdGuard DNS Proteção Familiar"
+                "name": "AdGuard DNS Proteção Familiar",
+                "description": "DNS AdGuard + Pesquisa de Segurança e bloqueio de conteúdo adulto"
             },
             "zh-TW": {
-                "description": "AdGuard DNS + 安全搜尋和成人內容封鎖",
-                "name": "AdGuard DNS 家庭保護"
+                "name": "AdGuard DNS 家庭保護",
+                "description": "AdGuard DNS + 安全搜尋和成人內容封鎖"
             },
             "ko": {
                 "name": "AdGuard DNS 가족 보호",
                 "description": "AdGuard DNS + SafeSearch 및 성인 콘텐츠 차단"
             },
             "sk": {
-                "description": "AdGuard DNS + bezpečné vyhľadávanie a blokovanie obsahu pre dospelých",
-                "name": "AdGuard DNS s rodinnou ochranou"
+                "name": "AdGuard DNS s rodinnou ochranou",
+                "description": "AdGuard DNS + bezpečné vyhľadávanie a blokovanie obsahu pre dospelých"
             },
             "zh-CN": {
                 "name": "AdGuard DNS家庭保护",
                 "description": "AdGuard DNS + 安全搜索和成人内容屏蔽"
             },
             "uk": {
-                "description": "AdGuard DNS + безпечний пошук і блокування вмісту для дорослих",
-                "name": "AdGuard DNS з сімейним захистом"
+                "name": "AdGuard DNS з сімейним захистом",
+                "description": "AdGuard DNS + безпечний пошук і блокування вмісту для дорослих"
             },
             "sl": {
                 "name": "AdGuard DNS Zaščita družine",
@@ -956,28 +980,28 @@
                 "name": "Predefiniti di sistema"
             },
             "ar": {
-                "name": "النظام الافتراضي",
-                "description": "استخدام ملقمات DNS الافتراضية للنظام التي يوفرها ISP (موفر خدمه إنترنت)"
+                "description": "استخدام ملقمات DNS الافتراضية للنظام التي يوفرها ISP (موفر خدمه إنترنت)",
+                "name": "النظام الافتراضي"
             },
             "et": {
                 "name": "Süsteemi vaikeseade",
                 "description": "Kasuta vaike DNS serverit, mida pakub ISP (internetiteenuste pakkuja)."
             },
             "cs": {
-                "name": "Dle nastavení systému",
-                "description": "Použít výchozí DNS servery systému poskytnuté vaším poskytovatelem internetu"
+                "description": "Použít výchozí DNS servery systému poskytnuté vaším poskytovatelem internetu",
+                "name": "Dle nastavení systému"
             },
             "sv-SE": {
-                "name": "Systemstandard",
-                "description": "Använd de DNS-servrar som din internetoperatör angett."
+                "description": "Använd de DNS-servrar som din internetoperatör angett.",
+                "name": "Systemstandard"
             },
             "es-ES": {
                 "description": "Usar los servidores DNS predeterminados del sistema proporcionados por tu ISP (Proveedor de servicios de Internet)",
                 "name": "Predeterminado del sistema"
             },
             "id": {
-                "name": "Sistem standar",
-                "description": "Pakai server DNS standar system yang disediakan oleh ISP (Penyedia Layanan Internet) Anda"
+                "description": "Pakai server DNS standar system yang disediakan oleh ISP (Penyedia Layanan Internet) Anda",
+                "name": "Sistem standar"
             },
             "ru": {
                 "description": "Использовать DNS-серверы вашего интернет-провайдера",
@@ -988,16 +1012,16 @@
                 "name": "Systeem standaard"
             },
             "no": {
-                "name": "Systemstandard",
-                "description": "Bruk standard DNS-servere for systemet levert av Internett-leverandøren din"
+                "description": "Bruk standard DNS-servere for systemet levert av Internett-leverandøren din",
+                "name": "Systemstandard"
             },
             "tr": {
                 "description": "İnternet Servis Sağlayıcınız (ISS) tarafından sağlanan sistem varsayılan DNS sunucularını kullanın",
                 "name": "Sistem varsayılanı"
             },
             "lt": {
-                "name": "Nustatymai pagal nutylėjimą",
-                "description": "Naudoti ISP (Interneto paslaugų tiekėjo) pateiktus numatytuosius DNS serverius"
+                "description": "Naudoti ISP (Interneto paslaugų tiekėjo) pateiktus numatytuosius DNS serverius",
+                "name": "Nustatymai pagal nutylėjimą"
             },
             "th": {
                 "name": "ระบบเริ่มต้น",
@@ -1012,44 +1036,44 @@
                 "name": "Domyślne systemowe"
             },
             "be": {
-                "name": "Сістэмныя налады",
-                "description": "Скарыстаць сістэмныя DNS-сервера якія падаюцца вашым інтэрнэт-правайдарам."
+                "description": "Скарыстаць сістэмныя DNS-сервера якія падаюцца вашым інтэрнэт-правайдарам.",
+                "name": "Сістэмныя налады"
             },
             "fr": {
                 "description": "Utiliser le serveur DNS par défaut fourni par votre ISP (Fournisseur de Service Internet)",
                 "name": "Valeur du système"
             },
             "sr-CS": {
-                "name": "Sistemski podrazumevano",
-                "description": "Koristite sistemski podrazumevane DNS servere dobijene od vašeg ISP (dobavljača internet usluga)"
+                "description": "Koristite sistemski podrazumevane DNS servere dobijene od vašeg ISP (dobavljača internet usluga)",
+                "name": "Sistemski podrazumevano"
             },
             "hr": {
-                "name": "Sustavno zadano",
-                "description": "Koristi sustavno zadane DNS poslužitelje od vašeg ISP-a (davatelja internetskih usluga)"
+                "description": "Koristi sustavno zadane DNS poslužitelje od vašeg ISP-a (davatelja internetskih usluga)",
+                "name": "Sustavno zadano"
             },
             "de": {
                 "description": "Verwenden Sie die Systemstandard-DNS-Server Ihres ISP (Internet Service Provider)",
                 "name": "Systemvoreinstellung"
             },
             "da": {
-                "name": "Systemstandard",
-                "description": "Brug systemstandard DNS-servere leveret af din ISP (Internet Service Provider)"
+                "description": "Brug systemstandard DNS-servere leveret af din ISP (Internet Service Provider)",
+                "name": "Systemstandard"
             },
             "fa": {
                 "name": "پیش فرض سیستم",
                 "description": "از DNS پیش فرض ارائه شده توسط ISP استفاده کن (ارائه دهنده سرویس اینترنت)"
             },
             "pt-BR": {
-                "name": "Padrão do sistema",
-                "description": "Usar servidores de DNS padrão do sistema fornecidos pelo seu provedor de acesso à Internet (Internet Service Provider)"
+                "description": "Usar servidores de DNS padrão do sistema fornecidos pelo seu provedor de acesso à Internet (Internet Service Provider)",
+                "name": "Padrão do sistema"
             },
             "fi": {
-                "name": "Järjestelmän oletus",
-                "description": "Käytä internet-palveluntarjoajan DNS-palvelimia"
+                "description": "Käytä internet-palveluntarjoajan DNS-palvelimia",
+                "name": "Järjestelmän oletus"
             },
             "hu": {
                 "description": "Alapértelmezett DNS szerver használata, amit az internetszolgáltató biztosít",
-                "name": "Gyári alapértelmezett"
+                "name": "Rendszer alapértelmezett"
             },
             "ja": {
                 "description": "ISP(インターネットサービスプロバイダー)から提供されているシステムデフォルトDNSサーバーを使用します。",
@@ -1060,28 +1084,28 @@
                 "description": "השתמש בשרתי DNS ברירת מחדל של המערכת שמסופקים ע״י ספק שרותי האינטרנט שלך"
             },
             "pt-PT": {
-                "name": "Sistema padrão",
-                "description": "Use os servidores DNS padrão do sistema fornecidos pelo seu ISP (Internet Service Provider)"
+                "description": "Use os servidores DNS padrão do sistema fornecidos pelo seu ISP (Internet Service Provider)",
+                "name": "Sistema padrão"
             },
             "zh-TW": {
-                "name": "系統預設",
-                "description": "使用由您的 ISP（網際網路服務供應商）提供之系統預設 DNS 伺服器"
+                "description": "使用由您的 ISP（網際網路服務供應商）提供之系統預設 DNS 伺服器",
+                "name": "系統預設"
             },
             "ko": {
                 "description": "ISP(인터넷 서비스 제공자)에서 제공하는 시스템 기본 DNS 서버를 사용합니다.",
                 "name": "시스템 기본 설정"
             },
             "sk": {
-                "name": "Systémom predvolené",
-                "description": "Použiť systémom predvolené DNS servery poskytnuté Vašim poskytovateľom internetového pripojenia"
+                "description": "Použiť systémom predvolené DNS servery poskytnuté Vašim poskytovateľom internetového pripojenia",
+                "name": "Systémom predvolené"
             },
             "zh-CN": {
                 "description": "使用ISP(互联网服务供应商) 提供的系统默认DNS服务器",
                 "name": "系统默认"
             },
             "uk": {
-                "name": "Типовий системний",
-                "description": "Використовувати типові системні DNS-сервери, надані вашим ISP (Інтернет-провайдером)"
+                "description": "Використовувати типові системні DNS-сервери, надані вашим ISP (Інтернет-провайдером)",
+                "name": "Типовий системний"
             },
             "sl": {
                 "description": "Uporabite sistemske privzete strežnike DNS, ki jih ponuja vaš ISP (ponudnik internetnih storitev)",
@@ -1101,6 +1125,7 @@
                 "name": "AdGuard DNS"
             },
             "ar": {
+                "description": "يزيل الإعلانات ويحمي جهازك من البرامج الضارة",
                 "name": "AdGuard DNS"
             },
             "cs": {
@@ -1108,6 +1133,7 @@
                 "name": "AdGuard DNS"
             },
             "sv-SE": {
+                "description": "Tar bort annonser och skyddar din dator mot spårning",
                 "name": "AdGuard DNS"
             },
             "es-ES": {
@@ -1115,6 +1141,7 @@
                 "name": "AdGuard DNS"
             },
             "id": {
+                "description": "Buang iklan dan Lindungi Perangkat Anda dari pelacakan",
                 "name": "AdGuard DNS"
             },
             "ru": {
@@ -1146,6 +1173,7 @@
                 "name": "AdGuard DNS"
             },
             "be": {
+                "description": "Прыбірае рэкламу і бароніць прыладу ад асочвання",
                 "name": "AdGuard DNS"
             },
             "fr": {
@@ -1203,6 +1231,7 @@
                 "name": "AdGuard DNS"
             },
             "sk": {
+                "description": "Odstraňuje reklamy a chráni Vaše zariadenie pred sledovaním",
                 "name": "AdGuard DNS"
             },
             "zh-CN": {
@@ -1210,6 +1239,7 @@
                 "name": "AdGuardDNS"
             },
             "uk": {
+                "description": "Блокує рекламу і захищає пристрій від зловмисного програмного забезпечення",
                 "name": "AdGuard DNS"
             },
             "sl": {
@@ -1231,7 +1261,8 @@
                 "description": "Servizio DNS alternativo gratuito di Google"
             },
             "ar": {
-                "name": "Google DNS"
+                "name": "Google DNS",
+                "description": "خدمة DNS بديلة ومجانية من جوجل"
             },
             "cs": {
                 "name": "Google DNS",
@@ -1311,7 +1342,7 @@
             },
             "fi": {
                 "name": "Google DNS",
-                "description": "yleinen DNS-ratkaisupalvelu on Googlen tarjoama"
+                "description": "Ilmainen DNS-palvelin Googlelta"
             },
             "hu": {
                 "name": "Google DNS",
@@ -1368,24 +1399,24 @@
                 "name": "Quad9"
             },
             "ar": {
-                "name": "Quad9",
-                "description": "خدمة DNS بديلة مجانية مع الحماية من الخداع وبرامج التجسس"
+                "description": "خدمة DNS بديلة مجانية مع الحماية من الخداع وبرامج التجسس",
+                "name": "Quad9"
             },
             "cs": {
-                "name": "Quad9",
-                "description": "Volně dostupná alternativa pro DNS službu s ochranou před podvodnými weby a škodlivým software"
+                "description": "Volně dostupná alternativa pro DNS službu s ochranou před podvodnými weby a škodlivým software",
+                "name": "Quad9"
             },
             "sv-SE": {
-                "name": "Quad9",
-                "description": "Gratis alternativ DNS-tjänst med skydd mot nätfiske och spionprogram"
+                "description": "Gratis alternativ DNS-tjänst med skydd mot nätfiske och spionprogram",
+                "name": "Quad9"
             },
             "es-ES": {
                 "description": "Servicio DNS alternativo gratuito con protección contra phishing y spyware",
                 "name": "Quad9"
             },
             "id": {
-                "name": "Quad9",
-                "description": "Layanan alternatif DNS gratis dengan perlindungan dari phishing dan spyware"
+                "description": "Layanan alternatif DNS gratis dengan perlindungan dari phishing dan spyware",
+                "name": "Quad9"
             },
             "ru": {
                 "description": "Бесплатный альтернативный DNS-сервис с защитой от фишинга и шпионских программ",
@@ -1396,16 +1427,16 @@
                 "name": "Quad9"
             },
             "no": {
-                "name": "Quad9",
-                "description": "Gratis alternativ DNS-tjeneste med beskyttelse mot phishing og spionvare"
+                "description": "Gratis alternativ DNS-tjeneste med beskyttelse mot phishing og spionvare",
+                "name": "Quad9"
             },
             "tr": {
                 "description": "Kimlik avı ve casus yazılımlara karşı korumalı ücretsiz alternatif DNS hizmeti",
                 "name": "Quad9"
             },
             "lt": {
-                "name": "Quad9",
-                "description": "Nemokama alternatyvi DNS paslauga su apsauga nuo sukčiavimo ir šnipinėjimo programų"
+                "description": "Nemokama alternatyvi DNS paslauga su apsauga nuo sukčiavimo ir šnipinėjimo programų",
+                "name": "Quad9"
             },
             "ro": {
                 "description": "Serviciu DNS alternativ gratuit cu protecție de phishing și spyware",
@@ -1416,40 +1447,40 @@
                 "name": "Quad9"
             },
             "be": {
-                "name": "Quad9",
-                "description": "Бясплатны альтэрнатыўны DNS-сэрвіс з абаронай ад фішынгу і шпіёнскіх праграм"
+                "description": "Бясплатны альтэрнатыўны DNS-сэрвіс з абаронай ад фішынгу і шпіёнскіх праграм",
+                "name": "Quad9"
             },
             "fr": {
                 "description": "Service DNS alternatif gratuit avec protection contre le phishing et les logiciels espions",
                 "name": "Quad9"
             },
             "sr-CS": {
-                "name": "Quad9",
-                "description": "Besplatna alternativna DNS usluga sa zaštitom od fišinga i špijuna"
+                "description": "Besplatna alternativna DNS usluga sa zaštitom od fišinga i špijuna",
+                "name": "Quad9"
             },
             "hr": {
-                "name": "Quad9",
-                "description": "Besplatna, alternativna DNS usluga s zaštitom od krađe identiteta i špijunskih programa"
+                "description": "Besplatna, alternativna DNS usluga s zaštitom od krađe identiteta i špijunskih programa",
+                "name": "Quad9"
             },
             "de": {
                 "description": "Kostenloser alternativer DNS-Dienst mit Schutz vor Phishing und Spyware",
                 "name": "Quad9"
             },
             "da": {
-                "name": "Quad9",
-                "description": "Gratis alternativ DNS-tjeneste med beskyttelse mod phishing og spyware"
+                "description": "Gratis alternativ DNS-tjeneste med beskyttelse mod phishing og spyware",
+                "name": "Quad9"
             },
             "fa": {
                 "name": "Quad9",
                 "description": "سرویس DNS جایگزین رایگان برای حفاظت در برابر فیشینگ و جاسوس افزار"
             },
             "pt-BR": {
-                "name": "Quad9",
-                "description": "Serviço DNS gratuito com proteção contra phishing e spyware"
+                "description": "Serviço DNS gratuito com proteção contra phishing e spyware",
+                "name": "Quad9"
             },
             "fi": {
-                "name": "Quad9",
-                "description": "Ilmainen DNS-palvelu tietojenkalastelu- ja vakoiluohjelmien suodatuksella"
+                "description": "Ilmainen DNS-palvelu tietojenkalastelu- ja vakoiluohjelmien suodatuksella",
+                "name": "Quad9"
             },
             "hu": {
                 "description": "Ingyenes alternatív DNS-szolgáltatás, adathalászat és a kémprogramok elleni védelemmel",
@@ -1464,28 +1495,28 @@
                 "description": "שרות DNS חלופי חינמי עם הגנה מפני דיוג ותוכנות ריגול"
             },
             "pt-PT": {
-                "name": "Quad9",
-                "description": "Serviço DNS gratuito com protecção contra phishing e spyware"
+                "description": "Serviço DNS gratuito com protecção contra phishing e spyware",
+                "name": "Quad9"
             },
             "zh-TW": {
-                "name": "Quad9",
-                "description": "有免於網路釣魚和間諜軟體的防護之免費替代的 DNS 服務"
+                "description": "有免於網路釣魚和間諜軟體的防護之免費替代的 DNS 服務",
+                "name": "Quad9"
             },
             "ko": {
                 "description": "피싱과 스파이웨어로부터 보호해 주는 무료 DNS 서비스 대체재",
                 "name": "Quad9"
             },
             "sk": {
-                "name": "Quad9",
-                "description": "Bezplatná alternatívna služba DNS s ochranou pred podvodom a špehovaním"
+                "description": "Bezplatná alternatívna služba DNS s ochranou pred podvodom a špehovaním",
+                "name": "Quad9"
             },
             "zh-CN": {
                 "description": "可以防止网络钓鱼和间谍软件的免费备用 DNS 服务",
                 "name": "Quad9"
             },
             "uk": {
-                "name": "Quad9",
-                "description": "Безплатний альтернативний DNS із захистом від шахрайства і шпигунських програм"
+                "description": "Безплатний альтернативний DNS із захистом від шахрайства і шпигунських програм",
+                "name": "Quad9"
             },
             "sl": {
                 "description": "Brezplačna nadomestna storitev DNS z varstvom pred lažnim predstavljanjem in vohunskimi programi",
@@ -1497,21 +1528,32 @@
                 "description": "Provides a secure and reliable connection, but doesn't filter anything",
                 "name": "AdGuard DNS Non-filtering"
             },
+            "vi": {
+                "name": "AdGuard DNS Không lọc"
+            },
             "it": {
                 "description": "Fornisce una connessione sicura e affidabile, ma non filtra nulla",
                 "name": "DNS AdGuard non filtrato"
             },
+            "ar": {
+                "description": "يوفر اتصالا آمنا وموثوقا به ، ولكنه لا يقوم بتصفية أي شيء",
+                "name": "AdGuard DNS غير تصفية"
+            },
             "cs": {
-                "name": "AdGuard DNS \"Bez filtrování\"",
-                "description": "Poskytuje bezpečné a spolehlivé připojení, ale nic nefiltruje"
+                "description": "Poskytuje bezpečné a spolehlivé připojení, ale nic nefiltruje",
+                "name": "AdGuard DNS \"Bez filtrování\""
+            },
+            "sv-SE": {
+                "description": "Ger en säker och pålitlig anslutning, men filtrerar inte någonting",
+                "name": "Adguard DNS icke-filtrering"
             },
             "es-ES": {
                 "description": "Proporciona una conexión segura y confiable, pero no filtra nada",
                 "name": "AdGuard DNS Sin filtrado"
             },
             "id": {
-                "name": "Adguard DNS Tanpa penyaring",
-                "description": "Menyediakan koneksi yang aman dan andal, tetapi tidak memfilter apa pun"
+                "description": "Menyediakan koneksi yang aman dan andal, tetapi tidak memfilter apa pun",
+                "name": "Adguard DNS Tanpa penyaring"
             },
             "ru": {
                 "description": "\"Нефильтрующие\" DNS-серверы обеспечивают надёжное и безопасное соединение, но не фильтруют элементы",
@@ -1522,16 +1564,16 @@
                 "name": "AdGuard DNS niet gefilterd"
             },
             "no": {
-                "name": "AdGuard DNS uten filtrering",
-                "description": "Gir en sikker og pålitelig tilkobling, men filtrerer ikke noe"
+                "description": "Gir en sikker og pålitelig tilkobling, men filtrerer ikke noe",
+                "name": "AdGuard DNS uten filtrering"
             },
             "tr": {
                 "description": "Şüphesiz ve güvenilir bir bağlantı sağlar, ancak hiçbir şeyi filtrelemez",
                 "name": "AdGuard DNS Filtrelemeyen"
             },
             "lt": {
-                "name": "AdGuard DNS nefiltruojantis",
-                "description": "Užtikrina saugų ir patikimą ryšį, bet nieko nefiltruoja"
+                "description": "Užtikrina saugų ir patikimą ryšį, bet nieko nefiltruoja",
+                "name": "AdGuard DNS nefiltruojantis"
             },
             "ro": {
                 "description": "Oferă o conexiune sigură și fiabilă, dar nu filtrează nimic",
@@ -1542,20 +1584,20 @@
                 "name": "AdGuard DNS bez filtrowania"
             },
             "be": {
-                "name": "AdGuard DNS Без фільтрацыі",
-                "description": "Забяспечвае бяспечнае і надзейнае злучэнне, але нічога не фільтруе"
+                "description": "Забяспечвае бяспечнае і надзейнае злучэнне, але нічога не фільтруе",
+                "name": "AdGuard DNS Без фільтрацыі"
             },
             "fr": {
                 "description": "Établit une connexion sûre et fiable, mais ne filtre rien",
                 "name": "AdGuard DNS sans filtrage"
             },
             "sr-CS": {
-                "name": "AdGuard DNS bez filtriranja",
-                "description": "Nudi sigurnu i stabilnu vezu, ali ništa ne filtrira"
+                "description": "Nudi sigurnu i stabilnu vezu, ali ništa ne filtrira",
+                "name": "AdGuard DNS bez filtriranja"
             },
             "hr": {
-                "name": "AdGuard DNS Ne filtrirajući",
-                "description": "Pruža sigurnu i pouzdanu vezu, ali ne filtrira ništa"
+                "description": "Pruža sigurnu i pouzdanu vezu, ali ne filtrira ništa",
+                "name": "AdGuard DNS Ne filtrirajući"
             },
             "de": {
                 "description": "Stellt nur eine sichere und zuverlässige Verbindung zur Verfügung. Werbefilter werden nicht eingesetzt.",
@@ -1566,44 +1608,44 @@
                 "name": "AdGuard DNS Szűrés nélkül"
             },
             "pt-BR": {
-                "name": "AdGuard DNS não filtrado",
-                "description": "Fornece uma conexão segura e confiável, mas não filtra nada"
+                "description": "Fornece uma conexão segura e confiável, mas não filtra nada",
+                "name": "AdGuard DNS não filtrado"
             },
             "fi": {
-                "name": "AdGuard DNS Non-filtering",
-                "description": "Tarjoaa turvallisen ja luotettavan yhteyden, muttei suodata mitään"
+                "description": "Tarjoaa turvallisen ja luotettavan yhteyden, muttei suodata mitään",
+                "name": "AdGuard DNS Non-filtering"
             },
             "da": {
-                "name": "AdGuard DNS Ufiltreret",
-                "description": "Giver en sikker og pålidelig forbindelse, men filtrerer ikke noget"
+                "description": "Giver en sikker og pålidelig forbindelse, men filtrerer ikke noget",
+                "name": "AdGuard DNS Ufiltreret"
             },
             "ja": {
                 "description": "セキュアで安定した接続を提供しますが、フィルタリングは行いません。",
                 "name": "AdGuard DNS (フィルタリングなし)"
             },
             "pt-PT": {
-                "name": "AdGuard DNS não filtrado",
-                "description": "Fornece uma conexão segura e confiável, mas não filtra nada"
+                "description": "Fornece uma conexão segura e confiável, mas não filtra nada",
+                "name": "AdGuard DNS não filtrado"
             },
             "zh-TW": {
-                "name": "不過濾的 AdGuard DNS",
-                "description": "提供安全的和可靠的連線，但不過濾任何內容"
+                "description": "提供安全的和可靠的連線，但不過濾任何內容",
+                "name": "不過濾的 AdGuard DNS"
             },
             "ko": {
                 "description": "안전하고 안정적인 연결을 제공하지만 필터링하지 않습니다",
                 "name": "AdGuard DNS (필터링 없음)"
             },
             "sk": {
-                "name": "AdGuard DNS bez filtrácie",
-                "description": "Poskytuje bezpečné a spoľahlivé pripojenie, ale nič nefiltruje"
+                "description": "Poskytuje bezpečné a spoľahlivé pripojenie, ale nič nefiltruje",
+                "name": "AdGuard DNS bez filtrácie"
             },
             "zh-CN": {
                 "description": "提供安全可靠的连接，但不能过滤",
                 "name": "AdGuard DNS 无过滤"
             },
             "uk": {
-                "name": "AdGuard DNS без фільтрування",
-                "description": "Забезпечує надійне та безпечне з'єднання, але нічого не фільтрує"
+                "description": "Забезпечує надійне та безпечне з'єднання, але нічого не фільтрує",
+                "name": "AdGuard DNS без фільтрування"
             },
             "sl": {
                 "description": "Zagotavlja varno in stvarno povezavo toda ničesar ne filtrira",
@@ -1623,17 +1665,25 @@
                 "description": "Il server di blocco Cloudflare limita l'accesso a domini dannosi e \"per adulti\"",
                 "name": "DNS Famiglia Cloudflare"
             },
+            "ar": {
+                "description": "سيرفر Cloudflareالذي يقيد الوصول إلى النطاقات الخبيثة و محتوى\"البالغين\"",
+                "name": "Cloudflare Family DNS"
+            },
             "cs": {
-                "name": "DNS Rodina od Cloudflare",
-                "description": "DNS servery od Cloudflare, které omezují přístup na podvodné domény včetně domén s obsahem pro dospělé"
+                "description": "DNS servery od Cloudflare, které omezují přístup na podvodné domény včetně domén s obsahem pro dospělé",
+                "name": "DNS Rodina od Cloudflare"
+            },
+            "sv-SE": {
+                "description": "Cloudflare blockerar server som begränsar åtkomst till skadliga och \\\"vuxna\\\" domäner",
+                "name": "Cloudflare Family DNS"
             },
             "es-ES": {
                 "description": "Servidor de bloqueo de Cloudflare que restringe el acceso a dominios maliciosos y para adultos",
                 "name": "Cloudflare DNS familiar"
             },
             "id": {
-                "name": "Keluarga DNS Cloudflare",
-                "description": "Server pemblokiran Cloudflare yang membatasi akses ke domain berbahaya dan 'dewasa'"
+                "description": "Server pemblokiran Cloudflare yang membatasi akses ke domain berbahaya dan 'dewasa'",
+                "name": "Keluarga DNS Cloudflare"
             },
             "ru": {
                 "description": "Блокирующий сервер Cloudflare ограничивает доступ к вредоносным доменам и сайтам для взрослых",
@@ -1644,16 +1694,16 @@
                 "name": "Cloudflare Family DNS"
             },
             "no": {
-                "name": "Cloudflare Family DNS",
-                "description": "Cloudflare sin blokkeringstjener som begrenser tilgang til skadelige og \"voksne\" domener"
+                "description": "Cloudflare sin blokkeringstjener som begrenser tilgang til skadelige og \"voksne\" domener",
+                "name": "Cloudflare Family DNS"
             },
             "tr": {
                 "description": "Cloudflare'nın kötü amaçlı ve 'yetişkin' alan adlarına erişimi kısıtlayan engelleme sunucusu",
                 "name": "Cloudflare Aile DNS"
             },
             "lt": {
-                "name": "Cloudflare Family DNS",
-                "description": "Cloudflare blokuojantis serveris, ribojantis prieigą prie kenkėjiškų domenų ir svetainių „suaugusiesiems“"
+                "description": "Cloudflare blokuojantis serveris, ribojantis prieigą prie kenkėjiškų domenų ir svetainių „suaugusiesiems“",
+                "name": "Cloudflare Family DNS"
             },
             "ro": {
                 "description": "Server de blocare Cloudflare ce limitează accesul la domenii dăunătoare și 'adult'",
@@ -1664,20 +1714,20 @@
                 "name": "Cloudflare Family DNS"
             },
             "be": {
-                "name": "Cloudflare DNS Сямейны рэжым",
-                "description": "Блакавальны сервер Cloudflare, які абмяжоўвае доступ да шкоднасных і \"дарослых\" даменаў"
+                "description": "Блакавальны сервер Cloudflare, які абмяжоўвае доступ да шкоднасных і \"дарослых\" даменаў",
+                "name": "Cloudflare DNS Сямейны рэжым"
             },
             "fr": {
                 "description": "Serveur de blocage de Cloudflare qui restreint l’accès aux domaines malveillants et « adultes »",
                 "name": "DNS Cloudflare Family"
             },
             "sr-CS": {
-                "name": "Cloudflare porodični DNS",
-                "description": "Cloudflare's server koji ograničava pristup ka štetnim domenima i ka domenima za odrasle"
+                "description": "Cloudflare's server koji ograničava pristup ka štetnim domenima i ka domenima za odrasle",
+                "name": "Cloudflare porodični DNS"
             },
             "hr": {
-                "name": "Cloudflare Family DNS",
-                "description": "Blokirajući poslužitelj Cloudflare-a koji ograničava pristup zlonamjernim i 'odraslim' domenama"
+                "description": "Blokirajući poslužitelj Cloudflare-a koji ograničava pristup zlonamjernim i 'odraslim' domenama",
+                "name": "Cloudflare Family DNS"
             },
             "de": {
                 "description": "Der Sperrserver von Cloudflare, der den Zugriff auf schädliche und „jugendgefährdende“ Domains einschränkt",
@@ -1687,45 +1737,48 @@
                 "description": "A Cloudflare blokkoló szervere, amely letiltja a rosszindulatú és a 'felnőtt' domainek elérését",
                 "name": "Cloudflare Family DNS"
             },
+            "fa": {
+                "name": "DNS حفاظت از خانواده کلودفلر"
+            },
             "pt-BR": {
-                "name": "DNS do Cloudflare da família",
-                "description": "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\""
+                "description": "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\"",
+                "name": "DNS do Cloudflare da família"
             },
             "fi": {
-                "name": "Cloudflare Family DNS",
-                "description": "Cloudflaren DNS-palvelu, joka suodattaa aikuisviihde- ja muita vaarallisia sivustoja"
+                "description": "Cloudflaren DNS-palvelu, joka suodattaa aikuisviihde- ja muita vaarallisia sivustoja",
+                "name": "Cloudflare Family DNS"
             },
             "da": {
-                "name": "Cloudflare Familie DNS",
-                "description": "Cloudflares blokeringsserver, der begrænser adgangen til ondsindede og 'voksne' domæner"
+                "description": "Cloudflares blokeringsserver, der begrænser adgangen til ondsindede og 'voksne' domæner",
+                "name": "Cloudflare Familie DNS"
             },
             "ja": {
                 "description": "「アダルト」系と悪意のあるドメインへのアクセスを制限するCloudflareのブロッキングサーバー",
                 "name": "CloudflareファミリーDNS"
             },
             "pt-PT": {
-                "name": "DNS do Cloudflare da família",
-                "description": "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\""
+                "description": "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\"",
+                "name": "DNS do Cloudflare da família"
             },
             "zh-TW": {
-                "name": "Cloudflare 家庭 DNS",
-                "description": "限制對惡意的和'成人'網域之存取的 Cloudflare 的封鎖伺服器"
+                "description": "限制對惡意的和'成人'網域之存取的 Cloudflare 的封鎖伺服器",
+                "name": "Cloudflare 家庭 DNS"
             },
             "ko": {
                 "description": "Cloudflare 차단 서버는 악성 및 '성인' 도메인에 대한 액세스를 제한합니다",
                 "name": "Cloudflare 가족 DNS"
             },
             "sk": {
-                "name": "Cloudflare Family DNS",
-                "description": "Blokovací server of Cloudflare, ktorý obmedzuje prístup k škodlivým doménam a k doménam pre dospelých"
+                "description": "Blokovací server of Cloudflare, ktorý obmedzuje prístup k škodlivým doménam a k doménam pre dospelých",
+                "name": "Cloudflare Family DNS"
             },
             "zh-CN": {
                 "description": "Cloudflare 的拦截服务器，限制对恶意和成人内容网域的访问",
                 "name": "Cloudflare 家庭DNS"
             },
             "uk": {
-                "name": "Cloudflare Family DNS",
-                "description": "Сервер блокування Cloudflare, який обмежує доступ до зловмисних доменів та сайтів для дорослих"
+                "description": "Сервер блокування Cloudflare, який обмежує доступ до зловмисних доменів та сайтів для дорослих",
+                "name": "Cloudflare Family DNS"
             },
             "sl": {
                 "description": "Cloudflare zaviralni strežnik, ki omejuje dostop do zlonamernih in domen 'za odrasle'",
@@ -1746,6 +1799,7 @@
                 "name": "Cloudflare DNS"
             },
             "ar": {
+                "description": "خدمة DNS مجانية من Cloudflare",
                 "name": "Cloudflare DNS"
             },
             "cs": {
@@ -1870,65 +1924,129 @@
             }
         },
         "10024": {
-            "ru": {
-                "name": "Cloudflare DNS Безопасный",
-                "description": "Блокирует известные фишинговые и другие опасные домены"
-            },
-            "fr": {
-                "name": "DNS Cloudflare Sécurisé",
-                "description": "Bloque les domaines dangereux connus et ceux d'hameçonnage"
-            },
             "en": {
                 "name": "Cloudflare Secure DNS",
                 "description": "Blocks known phishing and other dangerous domains"
-            },
-            "nl": {
-                "name": "Cloudflare Secure DNS",
-                "description": "Blokkeert gekende phishing en andere gevaarlijke domeinen"
-            },
-            "tr": {
-                "name": "Cloudflare Güvenli DNS",
-                "description": "Bilinen kimlik avı ve diğer tehlikeli alan adlarını engeller"
-            },
-            "de": {
-                "name": "Cloudflare Sicheres DNS",
-                "description": "Blockiert bekannte Phishing- und andere gefährliche Domains"
-            },
-            "ko": {
-                "name": "Cloudflare 보안 DNS",
-                "description": "피싱 및 위험한 도메인을 차단합니다"
             },
             "it": {
                 "name": "DNS Sicuro di Cloudflare",
                 "description": "Blocca i domini di phishing noti e altri pericolosi"
             },
-            "hu": {
+            "ar": {
+                "name": "الDNS ومكافح البرامج الضارة من Cloudflare",
+                "description": "خادم DNS لمكافحة البرامج الضارة بواسطة Cloudflare الذي يمنع المجالات الخبيثة"
+            },
+            "cs": {
+                "name": "Zabezpečený DNS od Cloudflare",
+                "description": "Blokuje nebezpečné a podvodné domény"
+            },
+            "sv-SE": {
                 "name": "Cloudflare Secure DNS",
-                "description": "Letiltja az ismert adathalász és más veszélyes domaineket"
-            },
-            "zh-CN": {
-                "name": "Cloudflare 的安全 DNS",
-                "description": "拦截已知的网络钓鱼与其它危险域名"
-            },
-            "sl": {
-                "name": "Cloudflare varen DNS",
-                "description": "Zavira znano lažno predstavljanje in druge nevarne domene"
-            },
-            "ro": {
-                "name": "Cloudflare Secure DNS",
-                "description": "Blochează phishing știut și alte domenii periculoase"
+                "description": "Block kända phishing och andra farliga domäner"
             },
             "es-ES": {
                 "name": "Cloudflare DNS seguro",
                 "description": "Bloquea phishing conocido y otros dominios peligrosos"
             },
-            "ja": {
-                "name": "CloudflareセキュアDNS",
-                "description": "フィッシングや他の危険なドメインをブロックします"
+            "id": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Memblokir phishing dan domain berbahaya lainnya"
+            },
+            "ru": {
+                "name": "Cloudflare DNS Безопасный",
+                "description": "Блокирует известные фишинговые и другие опасные домены"
+            },
+            "nl": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blokkeert gekende phishing en andere gevaarlijke domeinen"
+            },
+            "no": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blokkerer gjenkjent phishing og andre farlige domener"
+            },
+            "tr": {
+                "name": "Cloudflare Güvenli DNS",
+                "description": "Bilinen kimlik avı ve diğer tehlikeli alan adlarını engeller"
+            },
+            "lt": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blokuoja žinomus sukčiavimo ir kitus pavojingus domenus"
+            },
+            "ro": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blochează phishing știut și alte domenii periculoase"
             },
             "pl": {
                 "name": "Bezpieczny DNS Cloudflare",
                 "description": "Blokuje znane domeny phishingowe i inne niebezpieczne domeny"
+            },
+            "be": {
+                "name": "Cloudflare DNS Бяспечны",
+                "description": "Блакуе вядомыя фішынгавыя і іншыя небяспечныя дамены"
+            },
+            "fr": {
+                "name": "DNS Cloudflare Sécurisé",
+                "description": "Bloque les domaines dangereux connus et ceux d'hameçonnage"
+            },
+            "sr-CS": {
+                "name": "Cloudflare Anti-malware DNS",
+                "description": "Blokira poznati fišing i druge opasne domene"
+            },
+            "hr": {
+                "name": "Cloudflare Segurno DNS",
+                "description": "Blokira poznate domene za krađu identiteta kao i druge opasne domene"
+            },
+            "de": {
+                "name": "Cloudflare Sicheres DNS",
+                "description": "Blockiert bekannte Phishing- und andere gefährliche Domains"
+            },
+            "hu": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Letiltja az ismert adathalász és más veszélyes domaineket"
+            },
+            "pt-BR": {
+                "name": "DNS seguro do Cloudflare",
+                "description": "Bloqueia phishing conhecido e outros domínios perigosos"
+            },
+            "fi": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Estää tunnettuja tietojenkalastelu- ja muita vaarallisia verkkotunnuksia"
+            },
+            "da": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blokerer kendt phishing og andre farlige domæner"
+            },
+            "ja": {
+                "name": "CloudflareセキュアDNS",
+                "description": "フィッシングや他の危険なドメインをブロックします"
+            },
+            "pt-PT": {
+                "name": "DNS seguro do Cloudflare",
+                "description": "Bloqueia phishing conhecido e outros domínios perigosos"
+            },
+            "zh-TW": {
+                "name": "Cloudflare 安全 DNS",
+                "description": "封鎖已知的網路釣魚和其它危險的網域"
+            },
+            "ko": {
+                "name": "Cloudflare 보안 DNS",
+                "description": "피싱 및 위험한 도메인을 차단합니다"
+            },
+            "sk": {
+                "name": "Cloudflare Secure DNS",
+                "description": "Blokuje známe podvodnícke a iné nebezpečné domény"
+            },
+            "zh-CN": {
+                "name": "Cloudflare 的安全 DNS",
+                "description": "拦截已知的网络钓鱼与其它危险域名"
+            },
+            "uk": {
+                "name": "Cloudflare DNS Безпечний",
+                "description": "Антивірусний DNS-сервер від Cloudflare, який блокує зловмисні домени"
+            },
+            "sl": {
+                "name": "Cloudflare varen DNS",
+                "description": "Zavira znano lažno predstavljanje in druge nevarne domene"
             }
         },
         "10017": {
@@ -1945,11 +2063,12 @@
                 "name": "OpenDNS Cisco con Protezione Famiglia"
             },
             "ar": {
-                "description": "خادم OpenDNS مع حظر محتوى البالغين"
+                "description": "خادم OpenDNS مع حظر محتوى البالغين",
+                "name": "Cisco OpenDNS مع درع العائلة"
             },
             "cs": {
-                "name": "Cisco OpenDNS s ochranou rodiny",
-                "description": "OpenDNS servery s blokováním obsahu pro dospělé"
+                "description": "OpenDNS servery s blokováním obsahu pro dospělé",
+                "name": "Cisco OpenDNS s ochranou rodiny"
             },
             "sv-SE": {
                 "description": "OpenDNS-server med blockering av vuxeninnehåll",
@@ -1972,16 +2091,16 @@
                 "name": "Cisco OpenDNS met familie bescherming"
             },
             "no": {
-                "name": "Cisco OpenDNS med Family Shield",
-                "description": "OpenDNS-tjener med blokkering av voksent innhold"
+                "description": "OpenDNS-tjener med blokkering av voksent innhold",
+                "name": "Cisco OpenDNS med Family Shield"
             },
             "tr": {
                 "description": "Yetişkin içerik engellemeli OpenDNS sunucusu",
                 "name": "Cisco OpenDNS with Family Shield"
             },
             "lt": {
-                "name": "Cisco OpenDNS with Family Shield",
-                "description": "OpenDNS serveris su suaugusiųjų turinio blokavimu"
+                "description": "OpenDNS serveris su suaugusiųjų turinio blokavimu",
+                "name": "Cisco OpenDNS with Family Shield"
             },
             "ro": {
                 "description": "Server OpenDNS cu blocare conținut adult",
@@ -2000,35 +2119,35 @@
                 "name": "Cisco OpenDNS avec Family Shield"
             },
             "sr-CS": {
-                "name": "Cisco OpenDNS with Family Shield",
-                "description": "OpenDNS server sa blokiranjem sadržaja za odrasle"
+                "description": "OpenDNS server sa blokiranjem sadržaja za odrasle",
+                "name": "Cisco OpenDNS with Family Shield"
             },
             "hr": {
-                "name": "Cisco OpenDNS s Family Shield-om",
-                "description": "OpenDNS poslužitelj s blokiranjem sadržaja za odrasle"
+                "description": "OpenDNS poslužitelj s blokiranjem sadržaja za odrasle",
+                "name": "Cisco OpenDNS s Family Shield-om"
             },
             "de": {
                 "description": "OpenDNS-Server mit Blockierung von Inhalten für Erwachsene",
                 "name": "Cisco OpenDNS mit Family Shield"
             },
             "da": {
-                "name": "Cisco OpenDNS med Familiebeskyttelse",
-                "description": "OpenDNS server med blokering af voksent indhold"
+                "description": "OpenDNS server med blokering af voksent indhold",
+                "name": "Cisco OpenDNS med Familiebeskyttelse"
             },
             "fa": {
                 "description": "سرور OpenDNS با مسدودسازی محتوای بزرگسال",
                 "name": "Cisco OpenDNS با حفاظت خانواده"
             },
             "pt-BR": {
-                "name": "Cisco OpenDNS com Family Shield",
-                "description": "Servidor OpenDNS com bloqueio de conteúdo adulto"
+                "description": "Servidor OpenDNS com bloqueio de conteúdo adulto",
+                "name": "Cisco OpenDNS com Family Shield"
             },
             "fi": {
-                "name": "Cisco OpenDNS with Family Shield",
-                "description": "Ciscon OpenDNS-palvelu aikuisviihteen suodatuksella"
+                "description": "Ciscon OpenDNS-palvelu aikuisviihteen suodatuksella",
+                "name": "Cisco OpenDNS with Family Shield"
             },
             "hu": {
-                "description": "OpenDNS szerver felnőtt tartalmú blokkolással",
+                "description": "OpenDNS szerver, amely blokkolja a felnőtteknek szóló tartalmakat",
                 "name": "Cisco OpenDNS családi védelemmel"
             },
             "ja": {
@@ -2039,12 +2158,12 @@
                 "description": "שרת OpenDNS עם חסימת תוכן למבוגרים"
             },
             "pt-PT": {
-                "name": "Cisco OpenDNS com Family Shield",
-                "description": "Servidor OpenDNS com bloqueio de conteúdo adulto"
+                "description": "Servidor OpenDNS com bloqueio de conteúdo adulto",
+                "name": "Cisco OpenDNS com Family Shield"
             },
             "zh-TW": {
-                "name": "有家庭保護之 Cisco OpenDNS",
-                "description": "有成人內容封鎖的 OpenDNS 伺服器"
+                "description": "有成人內容封鎖的 OpenDNS 伺服器",
+                "name": "有家庭保護之 Cisco OpenDNS"
             },
             "ko": {
                 "description": "OpenDNS server with adult content blocking",
@@ -2080,21 +2199,24 @@
                 "description": "Server DNS che proteggono il tuo dispositivo dal tracciamento"
             },
             "ar": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "خادمDNS الذي يحمي جهازك من البرامج الضارة"
             },
             "cs": {
                 "name": "Cisco OpenDNS",
                 "description": "DNS server, který chrání vaše zařízení před sledováním"
             },
             "sv-SE": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "DNS-server som skyddar din enhet mot spårning"
             },
             "es-ES": {
                 "name": "Cisco OpenDNS",
                 "description": "Servidor DNS que protege tu dispositivo del rastreo"
             },
             "id": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "Server DNS dengan penyaring buatan yang melindungi alat Anda dari pelacakan"
             },
             "ru": {
                 "name": "Cisco OpenDNS",
@@ -2125,7 +2247,8 @@
                 "description": "Serwer DNS, który chroni Twoje urządzenie przed śledzeniem"
             },
             "be": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "DNS-сервер, што бароніць прыладу ад пагроз з сеціва"
             },
             "fr": {
                 "name": "Cisco OpenDNS",
@@ -2182,14 +2305,16 @@
                 "description": "추적으로부터 기기를 보호해주는 DNS 서버입니다"
             },
             "sk": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "DNS server, ktorý chráni Vaše zariadenie pred sledovaním"
             },
             "zh-CN": {
                 "name": "思科OpenDNS",
                 "description": "保护您的设备免受跟踪器侵扰的 DNS 服务器"
             },
             "uk": {
-                "name": "Cisco OpenDNS"
+                "name": "Cisco OpenDNS",
+                "description": "DNS-сервер, що захищає пристрій від зловмисних програм"
             },
             "sl": {
                 "name": "Cisco OpenDNS",

@@ -437,8 +437,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         updateStartedInternal()
     }
     
-    func updateFinished(message: String) {
-        protectionStatusLabel.text = message
+    func updateFinished(message: String?) {
+        if message != nil {
+            protectionStatusLabel.text = message
+        }
         safariUpdateEnded = true
         endUpdate()
     }
