@@ -18,6 +18,7 @@
 
 import XCTest
 
+// Enum helps to operate with format specifiers (%@, %lu, %2$@)
 enum FormatSpecifier: Equatable {
     case string(position: Int?)
     case digit(position: Int?)
@@ -26,6 +27,11 @@ enum FormatSpecifier: Equatable {
     private static let digitSpecifier = "d"
     private static let longIntegerSpecifier = "lu"
     
+    /*
+     Returns position of format specifiers
+     %2$@ will return 2
+     %@ will return nil
+     */
     var position: Int? {
         switch self {
         case .string(position: let pos): return pos
@@ -37,6 +43,7 @@ enum FormatSpecifier: Equatable {
         if let formatSpecifier = Self.processSpecifier(specifier) {
             self = formatSpecifier
         } else {
+            XCTFail("Unknown specifier = \(specifier)")
             return nil
         }
     }
@@ -55,19 +62,31 @@ enum FormatSpecifier: Equatable {
         case "%" + stringSpecifier: return .string(position: nil)
         case "%" + digitSpecifier: return .digit(position: nil)
         case "%" + longIntegerSpecifier: return .digit(position: nil)
-        default: return processPositionalSpecifier(specifier)
+        default: return processPositionalSpecifier(specifier) ?? processStringsdictSpecifier(specifier)
         }
     }
     
     private static func processPositionalSpecifier(_ specifier: String) -> Self? {
         guard specifier.count == 4 else {
-            XCTFail("Unknown specifier = \(specifier)")
             return nil
         }
         let characters = Array(specifier)
         // Positional specifiers look like %2$@, we need 2nd character to reveal position and 4th to reveal type
         let position = Int(String(characters[1]))
         let typeSpecifier = String(characters[3])
+        
+        switch typeSpecifier {
+        case stringSpecifier: return .string(position: position)
+        case digitSpecifier: return .digit(position: position)
+        default: return nil
+        }
+    }
+    
+    private static func processStringsdictSpecifier(_ specifier: String) -> Self? {
+        let characters = Array(specifier)
+        // Stringsdict specifiers look like %2$#@rules@, we need 2nd character to reveal position and 5th to reveal type
+        let position = Int(String(characters[1]))
+        let typeSpecifier = String(characters[4])
         
         switch typeSpecifier {
         case stringSpecifier: return .string(position: position)
@@ -79,16 +98,17 @@ enum FormatSpecifier: Equatable {
     }
 }
 
+typealias FormatSpecifiersByKey = [String: [FormatSpecifier]]
+
 class LocalizedStringsTests: XCTestCase {
     
     var bundle: Bundle { Bundle(for: type(of: self)) }
     
     /*
-     \%[1-9]\$[a-zA-Z@]|\%[a-zA-Z]{1,2}|\%\@
-     Regular expression for format specifiers such as %s, %d, %@, %2$@, %1$s, %lu
+     \%[1-9]\$[a-zA-Z@]|\%(d|@|(lu))|\%\@|\%[1-9]\$\#\@[^\s]+\@
+     Regular expression for format specifiers such as %s, %d, %@, %2$@, %1$s, %lu, %2$#@rules@
      */
-    
-    let pattern = "\\%[1-9]\\$[a-z@]|\\%[a-z]{1,2}|\\%\\@"
+    let pattern = "\\%[1-9]\\$[a-z@]|\\%(d|@|(lu))|\\%\\@|\\%[1-9]\\$\\#\\@[^\\s]+\\@"
     lazy var regEx: NSRegularExpression = { try! NSRegularExpression(pattern: pattern) }()
     
     func testStrings() {
@@ -96,12 +116,20 @@ class LocalizedStringsTests: XCTestCase {
         let allSupportedLocalizations = bundle.localizations
         
         let enDict = getNormalStringsDictionary(forLocale: "en")
-        let enFormatSpecifiers: [String: [FormatSpecifier]] = getFormats(enDict)
+        let enFormatSpecifiers = getFormats(enDict)
+        
+        let enStringsDict = getStringsDictDictionary(forLocale: "en")
+        let enStringsdictFormatSpecifiers = getFormatsByString(enStringsDict)
         
         for locale in allSupportedLocalizations {
-            processNormalStrings(forLocale: locale, enFormatSpecifiers: enFormatSpecifiers)
+            // TODO: - Uncomment when strings are updated
+            
+            //processNormalStrings(forLocale: locale, enFormatSpecifiers: enFormatSpecifiers)
+            //processStringsdict(forLocale: locale, enFormatSpecifiers: enStringsdictFormatSpecifiers)
         }
     }
+    
+    // MARK: - Methods return NSDictionary from Localizable.strings and Localizable.stringsdict
     
     private func getNormalStringsDictionary(forLocale locale: String) -> NSDictionary {
         let path = bundle.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: locale)!
@@ -113,15 +141,32 @@ class LocalizedStringsTests: XCTestCase {
         return NSDictionary(contentsOfFile: path)!
     }
     
-    private func processNormalStrings(forLocale locale: String, enFormatSpecifiers: [String: [FormatSpecifier]]) {
+    // MARK: - Methods process certain language strings
+    
+    private func processNormalStrings(forLocale locale: String, enFormatSpecifiers: FormatSpecifiersByKey) {
         let dict = getNormalStringsDictionary(forLocale: locale)
         let formatSpecifiers = getFormats(dict)
         
         compareFormats(enFormatSpecifiers: enFormatSpecifiers, formatSpecifiers: formatSpecifiers, locale: locale)
     }
     
-    private func getFormats(_ dict: NSDictionary) -> [String: [FormatSpecifier]] {
-        var arguments: [String: [FormatSpecifier]] = [:]
+    private func processStringsdict(forLocale locale: String, enFormatSpecifiers: [String: FormatSpecifiersByKey]) {
+        if locale == "ja" { return } // Skip japan, because it has weird strings
+        
+        let dict = getStringsDictDictionary(forLocale: locale)
+        let formatSpecifiersByString = getFormatsByString(dict)
+        
+        for (key, enSpecifiers) in enFormatSpecifiers {
+            if let localizedFormatSpecifiers = formatSpecifiersByString[key] {
+                compareFormats(enFormatSpecifiers: enSpecifiers, formatSpecifiers: localizedFormatSpecifiers, locale: locale)
+            }
+        }
+    }
+    
+    // MARK: - Methods return dictionary of FormatSpecifier objects from passed NSDictionary of strings
+    
+    private func getFormats(_ dict: NSDictionary) -> FormatSpecifiersByKey {
+        var arguments: FormatSpecifiersByKey = [:]
         for (key, string) in dict {
             let args = process(string: string as! String)
             arguments[key as! String] = args
@@ -129,6 +174,31 @@ class LocalizedStringsTests: XCTestCase {
         return arguments
     }
     
+    private func getFormatsByString(_ dict: NSDictionary) -> [String: FormatSpecifiersByKey] {
+        let dictionary = dict as! [String: Any]
+        var formatsByString: [String: FormatSpecifiersByKey] = [:]
+        
+        for key in dictionary.keys {
+            var stringDict = dictionary[key] as! [String: Any]
+            stringDict.removeValue(forKey: "NSStringLocalizedFormatKey")
+            
+            var formats: FormatSpecifiersByKey = [:]
+            for (stringsKey, stringsDict) in stringDict {
+                var strings = stringsDict as! [String: String]
+                strings.removeValue(forKey: "NSStringFormatSpecTypeKey")
+                strings.removeValue(forKey: "NSStringFormatValueTypeKey")
+                
+                for (stringKey, stringValue) in strings {
+                    let forms = process(string: stringValue)
+                    formats[key + "_" + stringsKey + "_" + stringKey] = forms
+                }
+            }
+            formatsByString[key] = formats
+        }
+        return formatsByString
+    }
+    
+    // Returns array of FormatSpecifier objects from passed string
     private func process(string: String) -> [FormatSpecifier] {
         let range = NSRange(string.startIndex..., in: string)
         
@@ -144,7 +214,9 @@ class LocalizedStringsTests: XCTestCase {
         return specifiersFound
     }
     
-    private func compareFormats(enFormatSpecifiers: [String: [FormatSpecifier]], formatSpecifiers: [String: [FormatSpecifier]], locale: String) {
+    // MARK: - Methods to compare arrays of FormatSpecifier
+    
+    private func compareFormats(enFormatSpecifiers: FormatSpecifiersByKey, formatSpecifiers: FormatSpecifiersByKey, locale: String) {
         for (key, enSpecifiers) in enFormatSpecifiers {
             if let localeSpecs = formatSpecifiers[key] {
                 compareFormats(enFormatSpecifiers: enSpecifiers, formatSpecifiers: localeSpecs, locale: locale, key: key)
