@@ -706,6 +706,8 @@ class AppDelegateHelper: NSObject {
                 if !success {
                     // Try once more on failure
                     self.showRateAppDialogIfNedeed()
+                } else {
+                    self.resources.rateAppShown = true
                 }
             }
         }
