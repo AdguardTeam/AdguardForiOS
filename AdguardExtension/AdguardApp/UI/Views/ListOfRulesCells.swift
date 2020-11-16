@@ -136,7 +136,7 @@ class AddRuleCell: UITableViewCell {
             addRuleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
             addRuleLabel.text = type == .systemBlacklist ? String.localizedString("add_new_rule") : String.localizedString("add_domain")
         }
-        addRuleLabel.textColor = UIColor(hexString: "#67b279")
+        addRuleLabel.textColor = UIColor.AdGuardColor.green
     }
     
     private func updateTheme(){

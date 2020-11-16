@@ -149,7 +149,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 }
                 
             case .removeRuleFromUserFilter:
-                color = UIColor(hexString: "#67b279")
+                color = UIColor.AdGuardColor.green
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
@@ -161,7 +161,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 }
                 
             case .addDomainToWhitelist:
-                color = UIColor(hexString: "#67b279")
+                color = UIColor.AdGuardColor.green
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {
                         self.presentBlockRequestController(with: domain, type: type, delegate: self)

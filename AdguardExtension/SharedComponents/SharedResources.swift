@@ -80,12 +80,12 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var lastBuildRateAppRequested: Int {
+    dynamic var rateAppShown: Bool {
         get {
-            return sharedDefaults().integer(forKey: AEDefaultsLastBuildRateAppRequested)
+            return sharedDefaults().bool(forKey: AEDefaultsRateAppShown)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsLastBuildRateAppRequested)
+            sharedDefaults().set(newValue, forKey: AEDefaultsRateAppShown)
         }
     }
     

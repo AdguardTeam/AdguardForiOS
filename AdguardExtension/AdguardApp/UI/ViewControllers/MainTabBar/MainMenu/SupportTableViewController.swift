@@ -124,13 +124,7 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func showFeedbackController() {
-        let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
-        if let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController") as? UINavigationController {
-            if let feedbackController = controller.viewControllers.first as? FeedbackController {
-                feedbackController.simpleFeedback = false
-                present(controller, animated: true)
-            }
-        }
+        AppDelegate.shared.presentFeedbackController()
     }
 
     private func updateTheme() {

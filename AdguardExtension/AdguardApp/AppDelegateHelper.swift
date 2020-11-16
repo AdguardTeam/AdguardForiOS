@@ -45,6 +45,7 @@ class AppDelegateHelper: NSObject {
     lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -116,6 +117,9 @@ class AppDelegateHelper: NSObject {
         mainPage.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
+            
+            // Show rate app dialog when main page is initialized
+            self?.showRateAppDialogIfNedeed()
         }
         
         guard let activityPageNavController = mainTabBar.viewControllers?[TabBarTabs.activityTab.rawValue] as? MainNavigationController else {
@@ -692,6 +696,19 @@ class AppDelegateHelper: NSObject {
         self.dnsStatisticsService.startDb()
         
         self.dnsLogRecordsService.reset()
+    }
+    
+    private func showRateAppDialogIfNedeed() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { [weak self] in
+            guard let self = self else { return }
+            if self.rateService.shouldShowRateAppDialog {
+                let success = AppDelegate.shared.presentRateAppController()
+                if !success {
+                    // Try once more on failure
+                    self.showRateAppDialogIfNedeed()
+                }
+            }
+        }
     }
     
     private func parseCustomUrlScheme(_ url: URL)->(command: String?, params:[String: String]?) {

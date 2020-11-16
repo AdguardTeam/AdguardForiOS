@@ -191,6 +191,15 @@ class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) -  migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             removeOptimizeFeature()
         }
+        
+        /**
+        Migration:
+         In app version 4.1 (561) we've changed logic of showin rate app dialog
+         this flag is useless now
+        */
+        if lastBuildVersion < 561 {
+            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
+        }
     }
     
     // MARK: - Methods for migrations

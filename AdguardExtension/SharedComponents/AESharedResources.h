@@ -108,9 +108,9 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsAppEntryCount;
 
 /**
- User Defaults key, which defines last build version that Rate app dialog was requested.
+ User Defaults key, which defines whether rate app dialog was shown
  */
-extern NSString * _Nonnull AEDefaultsLastBuildRateAppRequested;
+extern NSString * _Nonnull AEDefaultsRateAppShown;
 
 /**
  User Defaults key, which defines the next minimum time to show rate app alert
