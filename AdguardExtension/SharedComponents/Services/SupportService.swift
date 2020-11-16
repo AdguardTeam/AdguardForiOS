@@ -121,8 +121,6 @@ class SupportService: NSObject, SupportServiceProtocol {
         let filtersString = filterIDs.joined(separator: ".")
         
         params["filters"] = filtersString
-        
-        params["ios.simplified"] = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize) ? "true" : "false"
             
         let dnsEnabled = complexProtection.systemProtectionEnabled;
         
