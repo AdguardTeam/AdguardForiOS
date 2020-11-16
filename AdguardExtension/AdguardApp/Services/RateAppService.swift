@@ -36,7 +36,7 @@ class RateAppService: RateAppServiceProtocol {
     }
     
     var shouldShowRateAppDialog: Bool {
-        if resources.appEntryCount > 3 && !resources.rateAppShown && configuration.allContentBlockersEnabled {
+        if resources.appEntryCount >= 3 && !resources.rateAppShown && configuration.allContentBlockersEnabled {
             resources.rateAppShown = true
             return true
         }
