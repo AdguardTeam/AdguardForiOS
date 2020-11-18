@@ -1834,6 +1834,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return result;
 }
 
+- (NSString*) nameForFilter:(NSNumber*)filterId {
+    // TODO: return localized name
+    return @"Adguard CB Filter";
+}
+
 - (BOOL)checkInstalledFiltersInDB{
     
     if (serviceInstalled)
@@ -2273,6 +2278,17 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     return filters;
 }
+
+- (ASDFilterMetadata*) filtterWithId:(NSNumber *)filterId fromDb: (FMDatabase *)db {
+    ASDFilterMetadata* meta;
+    FMResultSet *result = [db executeQuery: @"select * from filters where filter_id = ?" , filterId];
+    if ([result next]) {
+        meta = [[ASDFilterMetadata alloc] initFromDbResult:result];
+    }
+    [result close];
+    return  meta;
+}
+
 - (ASDFiltersI18n *)filtersI18nFromDb:(FMDatabase *)db {
     
     NSMutableArray <ASDFilterLocalization *> *localizations = [NSMutableArray array];

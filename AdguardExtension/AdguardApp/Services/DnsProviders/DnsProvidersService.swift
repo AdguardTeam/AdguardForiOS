@@ -49,6 +49,10 @@ protocol DnsProvidersServiceProtocol {
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
     
+    static let adguardId = 10001
+    static let adguardFamilyId = 10005
+    static let adguardNonFilteredId = 10028
+    
     private var predefinedProvidersInternal: [DnsProviderInfo]?
     private var customProvidersInternal: [DnsProviderInfo]?
     private let workingQueue = DispatchQueue(label: "dns providers queue")
@@ -160,7 +164,7 @@ protocol DnsProvidersServiceProtocol {
     private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
     
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        let provider = DnsProviderInfo(name: name)
+        let provider = DnsProviderInfo(id: 0, name: name)
         
         let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream])
         
@@ -392,7 +396,7 @@ protocol DnsProvidersServiceProtocol {
         let dnsProviders = getLocalizedProvidersForCurrentLocale(dnsProviders: dnsProviders, features: features, localizationsJson: json)
         
         self.predefinedProvidersInternal = dnsProviders.map{ (provider) -> DnsProviderInfo in
-            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "")
+            let providerInfo = DnsProviderInfo(id:provider.provider.providerId ,name: provider.localizedName ?? "")
             
             providerInfo.logo = provider.provider.logo
             providerInfo.logoDark = "\(provider.provider.logo)_dark"

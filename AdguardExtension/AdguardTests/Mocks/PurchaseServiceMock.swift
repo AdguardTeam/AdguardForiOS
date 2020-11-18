@@ -18,24 +18,50 @@
 
 import Foundation
 
-class ContentBlockerServiceMock: NSObject, ContentBlockerServiceProtocol {
+class PurchaseServiceMock: PurchaseServiceProtocol {
     
-    var whitelistDomains:[String] = []
+    var activateLicesnseCalled = false
     
-    func validateRule(_ ruleText: String) -> Bool {
+    func start() {
+    }
+    
+    func startProductRequest() {
+    }
+    
+    var isProPurchased: Bool = false
+    
+    var purchasedThroughLogin: Bool = false
+    
+    func checkPremiumStatusChanged() {
+    }
+    
+    var standardProduct: Product?
+    
+    var products: [Product] = []
+    
+    func login(withAccessToken token: String?, state: String?) {
+    }
+    
+    func login(withLicenseKey key: String) {
+        activateLicesnseCalled = true
+    }
+    
+    func login(name: String, password: String, code2fa: String?) {
+    }
+    
+    func checkLicenseStatus() {
+    }
+    
+    func logout() -> Bool {
         return true
     }
     
-    func reloadJsons(backgroundUpdate: Bool, completion: @escaping (Error?) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            completion(nil)
-        }
+    func requestPurchase(productId: String) {
     }
     
-    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [unowned self] in
-            self.whitelistDomains.append(domain)
-            completion(nil)
-        }
+    func requestRestore() {
+    }
+    
+    func reset(completion: @escaping () -> Void) {
     }
 }

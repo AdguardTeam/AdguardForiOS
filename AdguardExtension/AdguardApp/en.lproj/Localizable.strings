@@ -796,3 +796,28 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Enter your password here";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Add the custom content blocker filter \"%@\"";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Add the custom DNS filter \"%@\"";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_cb_filter_format" = "Enable filter %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Unsuccessful";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Select %@ DNS server";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Activate license with %@ license key";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Add User Rules";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Add DNS User Rules";
