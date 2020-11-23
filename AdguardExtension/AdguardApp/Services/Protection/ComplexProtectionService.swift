@@ -79,6 +79,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     private var vpnConfigurationObserver: NotificationToken!
     private var vpnStateChangeObserver: NotificationToken!
+    private var dnsImplementationObserver: NotificationToken!
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -95,31 +96,8 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         
         nativeProvidersService.delegate = self
         
-        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
-            guard let self = self else { return }
-            self.resources.systemProtectionEnabled = false
-            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
-        }
-        
-        vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
-            guard let self = self else { return }
-            if let enabled = note.object as? Bool {
-                self.resources.systemProtectionEnabled = enabled
-            }
-            
-            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
-        }
-        
-        vpnManager.checkVpnInstalled { (error) in
-            if error != nil {
-                DDLogError("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
-            }
-            else {
-                if !vpnManager.vpnInstalled {
-                    resources.systemProtectionEnabled = false
-                }
-            }
-        }
+        addObservers()
+        checkVpnInstalled()
     }
     
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
@@ -194,6 +172,12 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             return
         }
         
+        switchSystemProtectionInternal(state: enabled, for: VC, completion: completion)
+    }
+    
+    // MARK: - Private methods
+    
+    private func switchSystemProtectionInternal(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
@@ -213,8 +197,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             completion(systemError)
         }
     }
-    
-    // MARK: - Private methods
     
     private func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
         
@@ -308,6 +290,58 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 }
                 else {
                     completion(error)
+                }
+            }
+        }
+    }
+    
+    private func addObservers() {
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            self.resources.systemProtectionEnabled = false
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+        
+        vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            if let enabled = note.object as? Bool {
+                self.resources.systemProtectionEnabled = enabled
+            }
+            
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+        
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
+            guard let self = self else { return }
+        
+            if self.resources.dnsImplementation == .adGuard {
+                self.checkVpnInstalled()
+            } else {
+                self.switchSystemProtectionInternal(state: false, for: nil) { [weak self] error in
+                    guard let self = self else { return }
+                
+                    if let error = error {
+                        DDLogError("Failed to turn off system protection, error: \(error.localizedDescription)")
+                    }
+                
+                    let managerIsEnabled = self.nativeProvidersService.managerIsEnabled
+                    let _ = self.updateSystemProtectionResources(toEnabledState: managerIsEnabled)
+                    NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+                }
+            }
+        }
+    }
+    
+    private func checkVpnInstalled() {
+        vpnManager.checkVpnInstalled { [weak self] error in
+            guard let self = self else { return }
+            if error != nil {
+                DDLogError("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
+            }
+            else {
+                if !self.vpnManager.vpnInstalled {
+                    self.resources.systemProtectionEnabled = false
+                    NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
                 }
             }
         }

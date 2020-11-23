@@ -103,7 +103,6 @@ class DnsLogContainerController: UIViewController {
                     self.systemProtectionEnablerContainerView.isHidden = false
                 } else {
                     self.dnsLogContainerView.isHidden = false
-                    self.showTitle()
                 }
             } else {
                 self.getProContainerView.isHidden = false

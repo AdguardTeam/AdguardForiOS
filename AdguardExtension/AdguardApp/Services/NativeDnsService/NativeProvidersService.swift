@@ -41,10 +41,10 @@ protocol NativeProvidersServiceProtocol: class {
     var providers: [DnsProviderInfo] { get }
     
     @available(iOS 14.0, *)
-    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> ())
+    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
     
     @available(iOS 14.0, *)
-    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> ())
+    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
     
     /* Reinitializes all providers */
     func reinitializeProviders()
@@ -136,7 +136,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     // MARK: - Public methods
     
     @available(iOS 14.0, *)
-    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> ()) {
+    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         let server = dnsProvidersService.activeDnsServer ?? adguardDnsServer
         let dnsProtocols = server!.upstreams.map { DnsProtocol.getProtocolByUpstream($0) }
         guard dnsProtocols.allElementsAreEqual() else {
@@ -161,7 +161,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     }
     
     @available(iOS 14.0, *)
-    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> ()) {
+    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         loadDnsManager { [weak self] dnsManager in
             guard let dnsManager = dnsManager else {
                 DDLogError("Received nil DNS manager")

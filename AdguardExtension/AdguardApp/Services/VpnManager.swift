@@ -144,11 +144,6 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func updateSettings(completion: ((Error?) -> Void)?) {
-        // If system protection is turned off than do nothing
-        if complexProtection?.systemProtectionEnabled != true {
-            completion?(nil)
-            return
-        }
         
         workingQueue.async { [weak self] in
             guard let self = self else { return }
