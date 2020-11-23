@@ -58,19 +58,42 @@ protocol DnsProvidersServiceProtocol {
     
     private let APDefaultsCustomDnsProviders = "APDefaultsCustomDnsProviders"
     
-    @objc init(resources: AESharedResourcesProtocol) {
+    
+    /*
+     Language map for providers_i18n.json
+     Some languages codes from json differ from apple ones
+    */
+    private var languageMap = ["es": "es-ES",
+                               "zh-Hans": "zh-CN",
+                               "zh-Hant:": "zh-TW"]
+    
+    private var currentLocaleCode: String
+    
+    private let systemDefaultProviderId = 10000
+    
+    @objc convenience init(resources: AESharedResourcesProtocol) {
+        self.init(resources: resources, locale: Bundle.main.preferredLocaleCode)
+    }
+    
+    @objc init(resources: AESharedResourcesProtocol, locale: String) {
         self.resources = resources
         
         // migration:
         // in app version 3.1.4 and below we mistakenly used the name Adguard.DnsProviderInfo with namespace
         // now we use DnsProviderInfo
         NSKeyedUnarchiver.setClass(DnsProviderInfo.self, forClassName: "Adguard.DnsProviderInfo")
+        
+        self.currentLocaleCode = locale
+        
+        super.init()
+        
+        self.migrateActiveServerIfNeeded()
     }
     
     @objc var predefinedProviders: [DnsProviderInfo] {
         get {
             if predefinedProvidersInternal == nil {
-                self.readServersJson()
+                self.initializeDnsProviders()
             }
             
             return predefinedProvidersInternal ?? []
@@ -139,7 +162,7 @@ protocol DnsProvidersServiceProtocol {
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
         let provider = DnsProviderInfo(name: name)
         
-        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream], anycast: nil)
+        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream])
         
         server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         provider.servers = [server]
@@ -252,91 +275,6 @@ protocol DnsProvidersServiceProtocol {
         return nil
     }
     
-    private func readServersJson() {
-        
-        guard let providersPath = Bundle.main.path(forResource: "providers", ofType: "json"),
-                let featuresPath = Bundle.main.path(forResource: "providers_features", ofType: "json") else { return }
-        do {
-            let providersData = try Data(contentsOf: URL(fileURLWithPath: providersPath), options: .mappedIfSafe)
-            guard let providersJsonRoot = try JSONSerialization.jsonObject(with: providersData, options: .mutableLeaves) as? Dictionary<String, AnyObject> else { return }
-            
-            // parse features
-            let featuresData = try Data(contentsOf: URL(fileURLWithPath: featuresPath), options: .mappedIfSafe)
-            guard let featuresJsonRoot = try JSONSerialization.jsonObject(with: featuresData, options: .mutableLeaves) as? Dictionary<String, Any> else { return }
-            
-            guard let featuresJson = featuresJsonRoot["features"] as? Array<Dictionary<String, String>> else { return }
-            
-            var featuresMap = Dictionary<String, DnsProviderFeature>()
-            for featureJson in featuresJson {
-                guard   let name = featureJson["name"],
-                        let title = featureJson["title"],
-                        let summary = featureJson["summary"],
-                        let iconId = featureJson["icon_id"]
-                    else { return }
-                
-                let feature = DnsProviderFeature(name: name, title: title, summary: summary, iconId: iconId)
-                featuresMap[name] = feature
-            }
-            
-            // parse providers
-            guard let providersJson = providersJsonRoot["providers"] as? Array<Dictionary<String, Any>> else { return }
-            
-            var dnsProviders = [DnsProviderInfo]()
-            for providerJson in providersJson {
-                guard   let name = providerJson["name"] as? String,
-                        /*
-                            Skip DNS server if name contains 'malware' word
-                            Once we didn't passed the AppStore review
-                            because some descriptions contained 'malware' word
-                        */
-                        !name.lowercased().contains("malware"),
-                        let logo = providerJson["logo"] as? String,
-                        let summary = providerJson["description"] as? String,
-                        let website = providerJson["homepage"] as? String
-                    else { continue }
-                
-                guard let serversJson = providerJson["servers"] as? [[String: Any]] else { continue }
-                let servers = self.serversFromArray(serversJson)
-                
-                // parse features
-                var features = Set<String>()
-                for server in serversJson {
-                    guard let serverFeatures = server["features"] as? [String] else { continue }
-                    for feature in serverFeatures {
-                        features.insert(feature)
-                    }
-                 }
-                
-                let provider = DnsProviderInfo(name: name)
-                let logoDark = logo + "_white"
-                
-                let protocols = servers.map { $0.dnsProtocol }
-                
-                provider.logo = logo
-                provider.logoDark = logoDark
-                provider.summary = summary
-                provider.protocols = protocols
-                provider.features = features.compactMap { featuresMap[$0] }
-                provider.servers = servers
-                provider.website = website
-                
-                let protcol = provider.getActiveProtocol(resources)
-                if protcol == nil {
-                    let prot = defaultProtocol(provider)
-                    provider.setActiveProtocol(resources, protcol: prot)
-                }
-                
-                dnsProviders.append(provider)
-            }
-            
-            self.predefinedProvidersInternal = dnsProviders
-            self.missingProviderCheck()
-        }
-        catch {
-            DDLogError("Error with providers json; Error: \(error.localizedDescription) ")
-        }
-    }
-    
     func featuresFromArray(_ arr: [String], featuresMap: [String: DnsProviderFeature]) -> [DnsProviderFeature] {
         var features = [DnsProviderFeature]()
         
@@ -358,9 +296,7 @@ protocol DnsProvidersServiceProtocol {
                     let upstreams = serverJson["upstreams"] as? [String]
                 else { continue }
             
-            let anycast = serverJson["anycast"] as? Bool
-            
-            let server = DnsServerInfo(dnsProtocol: DnsProtocol.protocolByString[serverProtocolId]!, serverId: serverId, name: name, upstreams: upstreams, anycast: anycast)
+            let server = DnsServerInfo(dnsProtocol: DnsProtocol.protocolByString[serverProtocolId]!, serverId: serverId, name: name, upstreams: upstreams)
             
             servers.append(server)
         }
@@ -414,5 +350,169 @@ protocol DnsProvidersServiceProtocol {
         DDLogInfo("Setting active dns server to nil; Current active server id: \(activeDnsServer?.serverId ?? "nil")")
         activeDnsServer = nil
         vpnManager?.updateSettings(completion: nil)
+    }
+    
+    /* Initializes providers from providers.json */
+    private func initializeDnsProviders() {
+        guard  let jsonData = getData(forFileName: "providers") else {
+            DDLogError("Got nil json data")
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        do {
+            let decodedObject = try decoder.decode(DnsProviders.self, from: jsonData)
+            let dnsProviders = decodedObject.providers.filter { (provider) -> Bool in
+                provider.providerId != systemDefaultProviderId
+            }
+            let features = decodedObject.features
+            localize(dnsProviders: dnsProviders, features: features)
+        }
+        catch {
+            DDLogError("Failed to parse providers.json; error: \(error.localizedDescription)")
+        }
+    }
+    
+    /* Gets localizations for providers from providers_i18n.json */
+    private func localize(dnsProviders: [DnsProvider], features: [DnsFeature]) {
+        guard  let jsonData = getData(forFileName: "providers_i18n") else {
+            DDLogError("Got nil json data")
+            return
+        }
+        
+        var json: [String: Any] = [:]
+        do {
+            json = try JSONSerialization.jsonObject(with: jsonData) as! [String: Any]
+        } catch {
+            DDLogError(error.localizedDescription)
+            return
+        }
+        
+        // Fill providers from json
+        let dnsProviders = getLocalizedProvidersForCurrentLocale(dnsProviders: dnsProviders, features: features, localizationsJson: json)
+        
+        self.predefinedProvidersInternal = dnsProviders.map{ (provider) -> DnsProviderInfo in
+            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "")
+            
+            providerInfo.logo = provider.provider.logo
+            providerInfo.logoDark = "\(provider.provider.logo)_dark"
+            providerInfo.protocols = provider.provider.servers.map { DnsProtocol(type: $0.type) }
+            providerInfo.summary = provider.localizedDescription
+            
+            providerInfo.features = provider.features?.map {
+                DnsProviderFeature(name: $0.featureId, title: $0.localizedName ?? "", summary: $0.localizedDescription ?? "", iconId: $0.logo ?? "")
+            }
+            
+            providerInfo.servers = provider.provider.servers.map {
+                return DnsServerInfo(dnsProtocol: DnsProtocol(type: $0.type), serverId: String($0.id), name: "", upstreams: $0.upstreams)
+            }
+            
+            let protcol = providerInfo.getActiveProtocol(resources)
+            if protcol == nil {
+                let prot = defaultProtocol(providerInfo)
+                providerInfo.setActiveProtocol(resources, protcol: prot)
+            }
+            
+            return providerInfo
+        }
+    }
+    
+    /* Returns json Data from file name */
+    private func getData(forFileName fileName: String) -> Data? {
+        guard let pathString = Bundle.main.path(forResource: fileName, ofType: "json") else {
+            DDLogError("Failed to get \(fileName).json path")
+            return nil
+        }
+        
+        let pathUrl = URL(fileURLWithPath: pathString)
+        
+        guard let jsonData = try? Data(contentsOf: pathUrl) else {
+            DDLogError("Failed to get json data from path: \(pathString)")
+            return nil
+        }
+        
+        return jsonData
+    }
+    
+    /* Fills dns providers with localizations for current locale */
+    private func getLocalizedProvidersForCurrentLocale(dnsProviders: [DnsProvider], features: [DnsFeature], localizationsJson: [String: Any]) -> [LocalizedDnsProviderInfo] {
+        guard let providersJson = localizationsJson["providers"] as? [String: Any] else {
+            DDLogError("There is no field 'providers' in providers_i18n json")
+            return []
+        }
+        
+        guard let featuresLocalizationsJson = localizationsJson["features"] as? [String: Any] else {
+            DDLogError("There is no field 'features' in providers_i18n json")
+            return []
+        }
+        
+        let localizedDnsProviders = dnsProviders.compactMap { dnsProvider -> LocalizedDnsProviderInfo? in
+            return localize(dnsProvider: dnsProvider, features: features, fromJson: providersJson, featuresLocalizationsJson: featuresLocalizationsJson)
+        }
+        
+        return localizedDnsProviders
+    }
+    
+    /* Localizes dns provider from json with localizations */
+    private func localize(dnsProvider: DnsProvider, features:[DnsFeature], fromJson json: [String: Any], featuresLocalizationsJson: [String: Any]) -> LocalizedDnsProviderInfo? {
+        let localeCode = languageMap[currentLocaleCode] ?? currentLocaleCode
+        
+        let providerId = String(dnsProvider.providerId)
+        
+        guard let providerLocalizationsJson = json[providerId] as? [String: Any] else {
+            DDLogError("There is no json for provider with id = \(providerId)")
+            return nil
+        }
+        
+        let translation = getTranslation(fromJson: providerLocalizationsJson, forLocale: localeCode)
+        
+        let name = translation?.name
+        let description = translation?.description
+        
+        var featuresSet = Set<String>()
+        for server in dnsProvider.servers {
+            for feature in server.features {
+                featuresSet.insert(feature)
+            }
+        }
+        
+        let featuresArray = Array<String>(featuresSet)
+        
+        var featureLogos = [String:String]()
+        for featureInfo in features {
+            featureLogos[featureInfo.type] = featureInfo.logo
+        }
+        
+        let localizedFeatures = featuresArray.compactMap { (feature) -> LocalizedDnsFeature? in
+            guard let featureJson = featuresLocalizationsJson[feature] as? [String: Any] else {
+                DDLogError("There is no localization for reature with id = \(feature)")
+                return nil
+            }
+            let translation = getTranslation(fromJson: featureJson, forLocale: localeCode)
+            let localizedFeature = LocalizedDnsFeature(featureId: feature, name: translation?.name, description: translation?.description, logo: featureLogos[feature])
+            return localizedFeature
+        }
+        
+        return LocalizedDnsProviderInfo(provider: dnsProvider, name: name, description: description, features: localizedFeatures)
+    }
+    
+    private func getTranslation(fromJson json: [String: Any], forLocale locale: String) -> (name: String?, description: String?)? {
+        // Get english translations
+        guard let enLocaleJson = json["en"] as? [String: Any] else {
+            DDLogError("English description for provider is missing")
+            return nil
+        }
+        let enName = enLocaleJson["name"] as? String
+        let enDescription = enLocaleJson["description"] as? String
+        
+        guard let currentLocaleJson = json[locale] as? [String: Any] else {
+            // If json for current locale is missing return english translations
+            return (enName, enDescription)
+        }
+        
+        let nameForLocale = currentLocaleJson["name"] as? String
+        let descriptionForLocale = currentLocaleJson["description"] as? String
+        
+        return (nameForLocale ?? enName, descriptionForLocale ?? enDescription)
     }
 }

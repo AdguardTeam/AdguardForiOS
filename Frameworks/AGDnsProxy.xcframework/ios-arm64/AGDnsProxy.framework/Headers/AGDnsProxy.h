@@ -40,7 +40,8 @@ typedef NS_ENUM(NSInteger, AGListenerProtocol) {
  * Blocking modes
  */
 typedef NS_ENUM(NSInteger, AGBlockingMode) {
-    AGBM_DEFAULT, // AdBlock-style filters -> NXDOMAIN, hosts-style filters -> unspecified address
+    AGBM_DEFAULT, // AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address
+    AGBM_REFUSED, // Always return REFUSED
     AGBM_NXDOMAIN, // Always return NXDOMAIN
     AGBM_UNSPECIFIED_ADDRESS, // Always return unspecified address
     AGBM_CUSTOM_ADDRESS, // Always return custom configured IP address (see AGDnsProxyConfig)
@@ -95,12 +96,17 @@ typedef void (^logCallback)(const char *msg, int length);
  * User-provided ID for this upstream
  */
 @property(nonatomic, readonly) NSInteger id;
+/**
+ * Name of the network interface to route traffic through, nil is default
+ */
+@property(nonatomic, readonly) NSString *outboundInterfaceName;
 
 - (instancetype) initWithAddress: (NSString *) address
         bootstrap: (NSArray<NSString *> *) bootstrap
         timeoutMs: (NSInteger) timeoutMs
         serverIp: (NSData *) serverIp
-        id: (NSInteger) id;
+        id: (NSInteger) id
+        outboundInterfaceName: (NSString *) outboundInterfaceName;
 @end
 
 @interface AGDns64Settings : NSObject
@@ -161,6 +167,27 @@ typedef void (^logCallback)(const char *msg, int length);
 
 @end
 
+@interface AGDnsFilterParams : NSObject
+/**
+ * Filter identifier
+ */
+@property(nonatomic, readonly) NSInteger id;
+/**
+ * Filter data
+ * Either path to file with rules, or rules as a string
+ */
+@property(nonatomic, readonly) NSString *data;
+/**
+ * If YES, data is rules, otherwise data is path to file with rules
+ */
+@property(nonatomic, readonly) BOOL inMemory;
+
+- (instancetype) initWithId:(NSInteger)id
+                       data:(NSString *)data
+                   inMemory:(BOOL)inMemory;
+
+@end
+
 @interface AGDnsProxyConfig : NSObject
 /**
  * Upstreams settings
@@ -171,9 +198,9 @@ typedef void (^logCallback)(const char *msg, int length);
  */
 @property(nonatomic, readonly) NSArray<AGDnsUpstream *> *fallbacks;
 /**
- * Filter files with identifiers
+ * Filters
  */
-@property(nonatomic, readonly) NSDictionary<NSNumber *,NSString *> *filters;
+@property(nonatomic, readonly) NSArray<AGDnsFilterParams *> *filters;
 /**
  * TTL of the record for the blocked domains (in seconds)
  */
@@ -210,10 +237,14 @@ typedef void (^logCallback)(const char *msg, int length);
  * Maximum number of cached responses
  */
 @property(nonatomic, readonly) NSUInteger dnsCacheSize;
+/**
+ * Enable optimistic DNS caching
+ */
+@property(nonatomic, readonly) BOOL optimisticCache;
 
 - (instancetype) initWithUpstreams: (NSArray<AGDnsUpstream *> *) upstreams
         fallbacks: (NSArray<AGDnsUpstream *> *) fallbacks
-        filters: (NSDictionary<NSNumber *,NSString *> *) filters
+        filters: (NSArray<AGDnsFilterParams *> *) filters
         blockedResponseTtlSecs: (NSInteger) blockedResponseTtlSecs
         dns64Settings: (AGDns64Settings *) dns64Settings
         listeners: (NSArray<AGListenerSettings *> *) listeners
@@ -222,7 +253,8 @@ typedef void (^logCallback)(const char *msg, int length);
         blockingMode: (AGBlockingMode) blockingMode
         customBlockingIpv4: (NSString *) customBlockingIpv4
         customBlockingIpv6: (NSString *) customBlockingIpv6
-        dnsCacheSize: (NSUInteger) dnsCacheSize;
+        dnsCacheSize: (NSUInteger) dnsCacheSize
+        optimisticCache: (BOOL) optimisticCache;
 
 /**
  * @brief Get default DNS proxy settings
@@ -268,6 +300,8 @@ typedef NS_ENUM(NSInteger, AGStampProtoType) {
     AGSPT_DOH = 0x02,
     /** tls is DNS-over-TLS */
     AGSPT_TLS = 0x03,
+    /** doq is DNS-over-QUIC */
+    AGSPT_DOQ = 0x03,
 };
 
 @interface AGDnsStamp : NSObject

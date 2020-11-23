@@ -42,23 +42,6 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 @"LOG FILE:%@"\
 @"\r\n-------------------------------------------------------------\r\n"
 
-#define REPORT_URL @"https://reports.adguard.com/new_issue.html"
-
-#define REPORT_PARAM_PRODUCT @"product_type"
-#define REPORT_PARAM_VERSION @"product_version"
-#define REPORT_PARAM_BROWSER @"browser"
-#define REPORT_PARAM_URL @"url"
-#define REPORT_PARAM_FILTERS @"filters"
-#define REPORT_PARAM_SYSTEM_WIDE @"ios.systemwide"
-#define REPORT_PARAM_CUSTOM_DNS @"ios.CustomDNS"
-#define REPORT_PARAM_DNS @"ios.DNS"
-
-#define REPORT_PRODUCT @"iOS"
-#define REPORT_BROWSER @"Safari"
-
-#define REPORT_DNS_ADGUARD @"Default"
-#define REPORT_DNS_ADGUARD_FAMILY @"Family"
-#define REPORT_DNS_OTHER @"Other"
 
 @interface AESSupport() {
     AESharedResources *_sharedResources;
@@ -111,7 +94,9 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
                                            complexProtection:complexProtection
                                                 dnsProviders:dnsProviders
                                              networkSettings:networkSettings
-                                                  dnsFilters:dnsFiltersService];
+                                                  dnsFilters:dnsFiltersService
+                                                 productInfo:productInfo
+                                                  antibanner:antibanner];
     }
     
     return self;
@@ -190,56 +175,7 @@ NSString *AESSupportSubjectPrefixFormat = @"[%@ for iOS] Bug report";
 }
 
 - (NSURL *)composeWebReportUrlForSite:(nullable NSURL *)siteUrl {
-    
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    
-    if(siteUrl) {
-        params[REPORT_PARAM_URL] = siteUrl;
-    }
-    
-    params[REPORT_PARAM_PRODUCT] = REPORT_PRODUCT;
-    params[REPORT_PARAM_VERSION] = _productInfo.version;
-    params[REPORT_PARAM_BROWSER] = REPORT_BROWSER;
-    
-    NSMutableString *filtersString = [NSMutableString new];
-    NSArray* filterIDs = _antibanner.activeFilterIDs;
-    
-    for (NSNumber *filterId in filterIDs) {
-        
-        NSString* format = filterId == filterIDs.firstObject ? @"%@" : @".%@";
-        [filtersString appendFormat:format, filterId];
-    }
-    params[REPORT_PARAM_FILTERS] = filtersString.copy;
-        
-    NSString* dnsServerParam = nil;
-    BOOL custom = NO;
-    
-    DnsServerInfo * dnsServer = _dnsProviders.activeDnsServer;
-    if([DnsServerInfo.adguardDnsIds containsObject: dnsServer.serverId]) {
-        dnsServerParam = REPORT_DNS_ADGUARD;
-    }
-    else if ([DnsServerInfo.adguardFamilyDnsIds containsObject: dnsServer.serverId]) {
-        dnsServerParam = REPORT_DNS_ADGUARD_FAMILY;
-    }
-    else if(dnsServer) {
-        dnsServerParam = REPORT_DNS_OTHER;
-        custom = YES;
-    }
-    
-    if(dnsServerParam) {
-        params[REPORT_PARAM_DNS] = dnsServerParam;
-        
-        if(custom) {
-            params[REPORT_PARAM_CUSTOM_DNS] = dnsServer.name;
-        }
-    }
-    
-    params[REPORT_PARAM_SYSTEM_WIDE] = @"false";
-    
-    NSString *paramsString = [ABECRequest createStringFromParameters:params];
-    NSString *url = [NSString stringWithFormat:@"%@?%@", REPORT_URL, paramsString];
-    
-    return [NSURL URLWithString: url];
+    return [_support composeWebReportUrl:siteUrl];
 }
 
 

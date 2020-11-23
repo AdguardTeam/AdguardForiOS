@@ -61,7 +61,7 @@
 
 
 - (void)startHandlingPackets {
-
+    
     if (_provider.packetFlow) {
 
         [self startHandlingPacketsInternal];
@@ -72,6 +72,11 @@
         [_provider addObserver:self forKeyPath:@"packetFlow" options:0 context:NULL];
         _packetFlowObserver = YES;
     }
+}
+
+- (void)stopPacketHandling {
+    DDLogInfo(@"Stop packet handling");
+    _packetHandling = NO;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -123,8 +128,6 @@
 
 /// Handle packets coming from the packet flow.
 - (void)handlePackets:(NSArray<NSData *> *_Nonnull)packets protocols:(NSArray<NSNumber *> *_Nonnull)protocols {
-
-    // Work here
 
     [packets enumerateObjectsUsingBlock:^(NSData *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         
