@@ -137,8 +137,19 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     
     @available(iOS 14.0, *)
     func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
-        let server = dnsProvidersService.activeDnsServer ?? adguardDnsServer
-        let dnsProtocols = server!.upstreams.map { DnsProtocol.getProtocolByUpstream($0) }
+        let server: DnsServerInfo?
+        if let activeServer = dnsProvidersService.activeDnsServer {
+            server = Self.supportedProtocols.contains(activeServer.dnsProtocol) ? activeServer : adguardDnsServer
+        } else {
+            server = adguardDnsServer
+        }
+        
+        guard let activeServer = server else {
+            onErrorReceived(NativeDnsProviderError.failedToLoadManager)
+            return
+        }
+         
+        let dnsProtocols = activeServer.upstreams.map { DnsProtocol.getProtocolByUpstream($0) }
         guard dnsProtocols.allElementsAreEqual() else {
             onErrorReceived(NativeDnsProviderError.unsupportedProtocolsConfiguration)
             return
