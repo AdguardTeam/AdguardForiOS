@@ -306,42 +306,8 @@ class VpnManager: VpnManagerProtocol {
         
         manager.protocolConfiguration = protocolConfiguration
         
-        // Configure on demand rules
-        
-        var ondemandRules = [NEOnDemandRule]()
-        
-        let SSIDs = networkSettings.enabledExceptions.map{ $0.rule }
-        if SSIDs.count > 0 {
-            let disconnectRule = NEOnDemandRuleDisconnect()
-            disconnectRule.ssidMatch = SSIDs
-            ondemandRules.append(disconnectRule)
-        }
-        
-        let wifiEnabled = networkSettings.filterWifiDataEnabled
-        let mobileEnabled = networkSettings.filterMobileDataEnabled
-        
-        let disconnectRule = NEOnDemandRuleDisconnect()
-        
-        switch (wifiEnabled, mobileEnabled) {
-        case (false, false):
-            disconnectRule.interfaceTypeMatch = .any
-            ondemandRules.append(disconnectRule)
-        case (false, _):
-            disconnectRule.interfaceTypeMatch = .wiFi
-            ondemandRules.append(disconnectRule)
-        case (_, false):
-            disconnectRule.interfaceTypeMatch = .cellular
-            ondemandRules.append(disconnectRule)
-        default:
-            break
-        }
-        
-        let connectRule = NEOnDemandRuleConnect()
-        connectRule.interfaceTypeMatch = .any
-        
-        ondemandRules.append(connectRule)
-        
-        manager.onDemandRules = ondemandRules
+        let onDemandRuled = networkSettings.onDemandRules
+        manager.onDemandRules = onDemandRuled
         
         let enabled: Bool
         

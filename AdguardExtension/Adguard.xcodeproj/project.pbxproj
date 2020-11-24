@@ -328,27 +328,6 @@
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
-		7E473AB925516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABA25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABB25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABC25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABD25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABE25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ABF25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC025516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC125516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC225516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC325516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC425516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC525516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC625516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC725516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC825516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473AC925516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ACA25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ACB25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ACC25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
-		7E473ACD25516738006F8345 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E473AB825516738006F8345 /* Array+Utils.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -2834,7 +2813,6 @@
 		7E40799A231E7E4E007EFB26 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
-		7E473AB825516738006F8345 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
@@ -4917,7 +4895,6 @@
 				7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */,
 				7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */,
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
-				7E473AB825516738006F8345 /* Array+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6604,7 +6581,6 @@
 				D0B545C82435D669002F0AEC /* LoginController.swift in Sources */,
 				D0B545812435D62A002F0AEC /* CharacterSet+Utils.swift in Sources */,
 				D0B545432435CFF5002F0AEC /* AntibannerController.swift in Sources */,
-				7E473AC325516738006F8345 /* Array+Utils.swift in Sources */,
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				D0B545CC2435D692002F0AEC /* AddRuleController.swift in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
@@ -6855,7 +6831,6 @@
 				D0A29F8A23E053C300D974CF /* AESSupport.m in Sources */,
 				655A02A51C6B7686000F00D7 /* Reachability.m in Sources */,
 				7E4D205522D71A5B003B0E75 /* mz_strm.c in Sources */,
-				7E473AC125516738006F8345 /* Array+Utils.swift in Sources */,
 				655A027B1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				65EC9BD31BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
@@ -7128,7 +7103,6 @@
 				D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */,
-				7E473AB925516738006F8345 /* Array+Utils.swift in Sources */,
 				7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */,
 				D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */,
 				D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */,
@@ -7278,7 +7252,6 @@
 				7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */,
 				D0E84F0F242A32BF0000EEDB /* AEInvertedWhitelistDomainsObjectTest.swift in Sources */,
 				7EA2163F2444C76700393949 /* DnsFiltersServiceMock.swift in Sources */,
-				7E473ACD25516738006F8345 /* Array+Utils.swift in Sources */,
 				7E77144F2445F3670078CD6B /* DnsStatisticsServiceMock.swift in Sources */,
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0D5949A23AA3CAD0033CAF3 /* ADBTable.m in Sources */,
@@ -7376,7 +7349,6 @@
 				655A024D1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				655A02351C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				655A022F1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
-				7E473ABA25516738006F8345 /* Array+Utils.swift in Sources */,
 				655A027A1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				D07A811523B501D100181E54 /* SharedResources.swift in Sources */,
 				655A02921C6B7686000F00D7 /* ACNNetworking.m in Sources */,
@@ -7429,7 +7401,6 @@
 				7E06B66F22FB1606006859AC /* ACLWildcard.m in Sources */,
 				7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */,
 				7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */,
-				7E473ABF25516738006F8345 /* Array+Utils.swift in Sources */,
 				7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */,
 				D07A811A23B501D400181E54 /* SharedResources.swift in Sources */,
 				7E06B67322FB1606006859AC /* ACNNetworking.m in Sources */,
@@ -7510,7 +7481,6 @@
 				7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */,
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
 				7E5EA7AA239A381A00A07DE0 /* ComplexProtectionService.swift in Sources */,
-				7E473AC025516738006F8345 /* Array+Utils.swift in Sources */,
 				7ECD9C58238D67890065E88D /* ACLFileLogger.m in Sources */,
 				7ECD9C4D238D66780065E88D /* DDOSLogger.m in Sources */,
 				7ECD9C62238E6D630065E88D /* NSString+Utils.m in Sources */,
@@ -7650,7 +7620,6 @@
 				D04C2B7C2410E137009330A8 /* SafariService.swift in Sources */,
 				7E85766B2435F1FB0055F63D /* BasicRulesParser.swift in Sources */,
 				D0569E3921F1C7C400985DA9 /* AESharedResources.m in Sources */,
-				7E473AC225516738006F8345 /* Array+Utils.swift in Sources */,
 				D0AEC26E240947BE003E8FCC /* NotificationService+Utils.swift in Sources */,
 				7E8576782435F57F0055F63D /* DomainsParserService.swift in Sources */,
 				D0569DFA21F1C0A800985DA9 /* ABECFilter.m in Sources */,
@@ -7695,7 +7664,6 @@
 				D067D8E921428AA900ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D8EA21428AA900ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D8EB21428AA900ECDE6D /* NSException+Utils.m in Sources */,
-				7E473ABB25516738006F8345 /* Array+Utils.swift in Sources */,
 				D067D8EC21428AA900ECDE6D /* ACNNetworking.m in Sources */,
 				D07A811623B501D200181E54 /* SharedResources.swift in Sources */,
 				D067D8ED21428AA900ECDE6D /* ACLFileLocker.m in Sources */,
@@ -7748,7 +7716,6 @@
 				D067D91921428B4600ECDE6D /* ACLWildcard.m in Sources */,
 				D067D91A21428B4600ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D91B21428B4600ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				7E473ABC25516738006F8345 /* Array+Utils.swift in Sources */,
 				D067D91C21428B4600ECDE6D /* NSException+Utils.m in Sources */,
 				D07A811723B501D200181E54 /* SharedResources.swift in Sources */,
 				D067D91D21428B4600ECDE6D /* ACNNetworking.m in Sources */,
@@ -7801,7 +7768,6 @@
 				D067D94A21428B9100ECDE6D /* ACLWildcard.m in Sources */,
 				D067D94B21428B9100ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D94C21428B9100ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				7E473ABD25516738006F8345 /* Array+Utils.swift in Sources */,
 				D067D94D21428B9100ECDE6D /* NSException+Utils.m in Sources */,
 				D07A811823B501D300181E54 /* SharedResources.swift in Sources */,
 				D067D94E21428B9100ECDE6D /* ACNNetworking.m in Sources */,
@@ -7854,7 +7820,6 @@
 				D067D97B21428BB500ECDE6D /* ACLWildcard.m in Sources */,
 				D067D97C21428BB500ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D97D21428BB500ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				7E473ABE25516738006F8345 /* Array+Utils.swift in Sources */,
 				D067D97E21428BB500ECDE6D /* NSException+Utils.m in Sources */,
 				D07A811923B501D300181E54 /* SharedResources.swift in Sources */,
 				D067D97F21428BB500ECDE6D /* ACNNetworking.m in Sources */,
@@ -7907,7 +7872,6 @@
 				D0B5429F2435C6A3002F0AEC /* NSString+Utils.m in Sources */,
 				D0B542A02435C6A3002F0AEC /* DDFileLogger.m in Sources */,
 				D0B542A12435C6A3002F0AEC /* ACLWildcard.m in Sources */,
-				7E473AC425516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B542A22435C6A3002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B542A32435C6A3002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B542A42435C6A3002F0AEC /* NSException+Utils.m in Sources */,
@@ -7960,7 +7924,6 @@
 				D0B542D82435C6A7002F0AEC /* DDFileLogger.m in Sources */,
 				D0B542D92435C6A7002F0AEC /* ACLWildcard.m in Sources */,
 				D0B542DA2435C6A7002F0AEC /* ACLFileLogger.m in Sources */,
-				7E473AC525516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B542DB2435C6A7002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B542DC2435C6A7002F0AEC /* NSException+Utils.m in Sources */,
 				D0B542DD2435C6A7002F0AEC /* ACNNetworking.m in Sources */,
@@ -8013,7 +7976,6 @@
 				D0B543112435C6AA002F0AEC /* NSString+Utils.m in Sources */,
 				D0B543122435C6AA002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543132435C6AA002F0AEC /* ACLWildcard.m in Sources */,
-				7E473AC625516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B543142435C6AA002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B543152435C6AA002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543162435C6AA002F0AEC /* NSException+Utils.m in Sources */,
@@ -8066,7 +8028,6 @@
 				D0B5434A2435C6AE002F0AEC /* NSString+Utils.m in Sources */,
 				D0B5434B2435C6AE002F0AEC /* DDFileLogger.m in Sources */,
 				D0B5434C2435C6AE002F0AEC /* ACLWildcard.m in Sources */,
-				7E473AC725516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B5434D2435C6AE002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B5434E2435C6AE002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B5434F2435C6AE002F0AEC /* NSException+Utils.m in Sources */,
@@ -8119,7 +8080,6 @@
 				D0B543832435C6B1002F0AEC /* NSString+Utils.m in Sources */,
 				D0B543842435C6B1002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543852435C6B1002F0AEC /* ACLWildcard.m in Sources */,
-				7E473AC825516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B543862435C6B1002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B543872435C6B1002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543882435C6B1002F0AEC /* NSException+Utils.m in Sources */,
@@ -8172,7 +8132,6 @@
 				D0B543BC2435C6B5002F0AEC /* NSString+Utils.m in Sources */,
 				D0B543BD2435C6B5002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543BE2435C6B5002F0AEC /* ACLWildcard.m in Sources */,
-				7E473AC925516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B543BF2435C6B5002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B543C02435C6B5002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543C12435C6B5002F0AEC /* NSException+Utils.m in Sources */,
@@ -8277,7 +8236,6 @@
 				D0D7E5E024444D68001801A5 /* ChartDateType.swift in Sources */,
 				D06E3180253F342A008BBD2D /* DnsProviders.swift in Sources */,
 				D0B544172435C6B8002F0AEC /* ADLocales.m in Sources */,
-				7E473ACA25516738006F8345 /* Array+Utils.swift in Sources */,
 				D06E3286253F4777008BBD2D /* DnsProviderInfo.swift in Sources */,
 				D0B5454F2435D131002F0AEC /* DDMultiFormatter.m in Sources */,
 				D0B544192435C6B8002F0AEC /* Affinity.swift in Sources */,
@@ -8385,7 +8343,6 @@
 				D0B5447B2435C6BC002F0AEC /* FMDatabaseQueue.m in Sources */,
 				D0B5447C2435C6BC002F0AEC /* AESSupport.m in Sources */,
 				D0B5447D2435C6BC002F0AEC /* Reachability.m in Sources */,
-				7E473ACB25516738006F8345 /* Array+Utils.swift in Sources */,
 				D0B5447E2435C6BC002F0AEC /* mz_strm.c in Sources */,
 				D0B5447F2435C6BC002F0AEC /* NSException+Utils.m in Sources */,
 				D0B544802435C6BC002F0AEC /* ADProductInfo.m in Sources */,
@@ -8482,7 +8439,6 @@
 				D0B544E32435C6BF002F0AEC /* APDnsLogTable.m in Sources */,
 				D0B544E42435C6BF002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B544E52435C6BF002F0AEC /* FMDatabaseQueue.m in Sources */,
-				7E473ACC25516738006F8345 /* Array+Utils.swift in Sources */,
 				D01EA0E0248EAAEB00FBB365 /* Constants.m in Sources */,
 				D0B544E62435C6BF002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B544E72435C6BF002F0AEC /* ADLocales.m in Sources */,
@@ -9428,7 +9384,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = $inherited;
 			};

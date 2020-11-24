@@ -104,7 +104,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     private lazy var adguardDnsServer: DnsServerInfo? = {
         let adguardDnsProviderId = 10001
         let adguardProvider = providers.first(where: { $0.providerId == adguardDnsProviderId })
-        let dnsServer = adguardProvider?.servers?.first(where: { $0.dnsProtocol == .dns })
+        let dnsServer = adguardProvider?.servers?.first(where: { $0.dnsProtocol == .doh })
         return dnsServer
     }()
     
@@ -137,24 +137,17 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     
     @available(iOS 14.0, *)
     func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
-        let server: DnsServerInfo?
-        if let activeServer = dnsProvidersService.activeDnsServer {
-            server = Self.supportedProtocols.contains(activeServer.dnsProtocol) ? activeServer : adguardDnsServer
-        } else {
-            server = adguardDnsServer
-        }
-        
-        guard let activeServer = server else {
+        guard let server = currentServer else {
             onErrorReceived(NativeDnsProviderError.failedToLoadManager)
             return
         }
-         
-        let dnsProtocols = activeServer.upstreams.map { DnsProtocol.getProtocolByUpstream($0) }
-        guard dnsProtocols.allElementsAreEqual() else {
-            onErrorReceived(NativeDnsProviderError.unsupportedProtocolsConfiguration)
+
+        guard let upstream = server.upstreams.first else {
+            onErrorReceived(NativeDnsProviderError.unsupportedDnsProtocol)
             return
         }
-        let dnsProtocol = dnsProtocols.first!
+        
+        let dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         
         guard NativeProvidersService.supportedProtocols.contains(dnsProtocol) else {
             DDLogError("NativeProvidersService(setProvider) trying to add server with unsupported protocol")
@@ -167,7 +160,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
                 onErrorReceived(NativeDnsProviderError.failedToLoadManager)
                 return
             }
-            self?.saveDnsManager(dnsManager: manager, dnsProtocol: dnsProtocol, upstreams: server!.upstreams, onErrorReceived)
+            self?.saveDnsManager(dnsManager: manager, dnsProtocol: dnsProtocol, upstreams: server.upstreams, onErrorReceived)
         }
     }
     
@@ -295,41 +288,8 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     
     @available(iOS 14.0, *)
     private func setupDnsManager(dnsManager: NEDNSSettingsManager) {
-        
-        var ondemandRules = [NEOnDemandRule]()
-        
-        let SSIDs = networkSettingsService.enabledExceptions.map{ $0.rule }
-        if SSIDs.count > 0 {
-            let disconnectRule = NEOnDemandRuleDisconnect()
-            disconnectRule.ssidMatch = SSIDs
-            ondemandRules.append(disconnectRule)
-        }
-        
-        let wifiEnabled = networkSettingsService.filterWifiDataEnabled
-        let mobileEnabled = networkSettingsService.filterMobileDataEnabled
-        
-        let disconnectRule = NEOnDemandRuleDisconnect()
-        
-        switch (wifiEnabled, mobileEnabled) {
-        case (false, false):
-            disconnectRule.interfaceTypeMatch = .any
-            ondemandRules.append(disconnectRule)
-        case (false, _):
-            disconnectRule.interfaceTypeMatch = .wiFi
-            ondemandRules.append(disconnectRule)
-        case (_, false):
-            disconnectRule.interfaceTypeMatch = .cellular
-            ondemandRules.append(disconnectRule)
-        default:
-            break
-        }
-        
-        let connectRule = NEOnDemandRuleConnect()
-        connectRule.interfaceTypeMatch = .any
-        
-        ondemandRules.append(connectRule)
-        
-        dnsManager.onDemandRules = ondemandRules
+        let onDemandRuled = networkSettingsService.onDemandRules
+        dnsManager.onDemandRules = onDemandRuled
     }
 }
 

@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import NetworkExtension
 
 class NetworkSettingsServiceMock: NetworkSettingsServiceProtocol {
     var exceptions: [WifiException] = []
@@ -45,5 +46,5 @@ class NetworkSettingsServiceMock: NetworkSettingsServiceProtocol {
         return nil
     }
     
-    
+    var onDemandRules: [NEOnDemandRule] = []
 }
