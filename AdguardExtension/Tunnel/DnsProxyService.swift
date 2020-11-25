@@ -79,7 +79,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let dnsProxyUpstream = DnsProxyUpstream(upstream: upstream, isCrypto: isCrypto)
             upstreamsById[id] = dnsProxyUpstream
             
-            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+            return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
         
         let agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
@@ -88,7 +88,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
             upstreamsById[id] = dnsProxyUpstream
             
-            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
         
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
@@ -128,13 +128,12 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             let dnsProxyUpstream = DnsProxyUpstream(upstream: address, isCrypto: isCrypto)
             upstreamsById[id] = dnsProxyUpstream
             
-            return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+            return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id)
         }
         
-        let agFilters = filters.compactMap {
-            AGDnsFilterParams(id: Int($0.key), data: $0.value, inMemory: false)
-        }
-    
+        var agFilters: [NSNumber: String] = [:]
+        filters.forEach { agFilters[NSNumber(integerLiteral: $0)] = $1 }
+        
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
@@ -147,8 +146,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                                       blockingMode: .AGBM_DEFAULT,
                                       customBlockingIpv4: nil,
                                       customBlockingIpv6: nil,
-                                      dnsCacheSize: 128,
-                                      optimisticCache: false)
+                                      dnsCacheSize: 128)
 
         var error: NSError?
         agproxy = AGDnsProxy(config: config, handler: events, error: &error)
