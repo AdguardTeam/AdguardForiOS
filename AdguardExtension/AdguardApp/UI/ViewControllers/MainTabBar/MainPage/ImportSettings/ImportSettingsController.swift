@@ -20,6 +20,8 @@ import Foundation
 
 class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITableViewDataSource, ImportSettingsCellDelegate {
     
+    var settings: Settings?
+    
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var importButton: RoundRectButton!
@@ -27,16 +29,25 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    var model: ImportSettingsViewModelProtocol?
+    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
+    private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
+    private var model: ImportSettingsViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if settings != nil {
+            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner)
+        }
+        
         okButton.isHidden = true
         tableView.reloadData()
     }
     
     override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
         let contentHeight = tableView.contentSize.height
         let maxHeight = view.frame.size.height - 150
         tableViewHeightConstraint.constant = min(contentHeight, maxHeight)
@@ -78,40 +89,10 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
             return UITableViewCell()
         }
         
-        cell.title.text = row.title
-        cell.tag = indexPath.row
         cell.delegate = self
+        cell.tag = indexPath.row
         
-        if row.imported {
-            let image: UIImage?
-            switch (row.enabled, row.successful) {
-            case (_, true):
-                image = UIImage(named: "logocheck")
-            case (true, false):
-                image = UIImage(named: "errorAttention")
-            case (false, _):
-                image = UIImage(named: "cross")
-            }
-            
-            cell.check.image = image
-        } else {
-            cell.check.isHighlighted = row.enabled
-        }
-        
-        cell.subtitle.text = row.subtitle
-        
-        cell.subtitleTopConstraint.constant = row.subtitle.count > 0 ? 7 : 0
-        
-        if indexPath.row == (model?.rows.count ?? 0) - 1 {
-            cell.separator.isHidden = true
-        }
-        else {
-            cell.separator.isHidden = false
-        }
-        
-        theme.setupTableCell(cell)
-        theme.setupLabel(cell.title)
-        theme.setupSeparator(cell.separator)
+        cell.setup(model: row, lastRow: indexPath.row == (model?.rows.count ?? 0) - 1, theme: theme)
         
         return cell
     }
@@ -124,8 +105,8 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     
     // MARK: - privateMethods
     
-    func updateTheme() {
-        
+    private func updateTheme() {
+        self.contentView.backgroundColor = theme.backgroundColor
         tableView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
     }

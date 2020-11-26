@@ -37,4 +37,36 @@ class ImportSettingsCell: UITableViewCell {
         check.isHighlighted = newState
         delegate?.stateChanged(tag: self.tag, state: newState)
     }
+    
+    
+    func setup(model: SettingRow, lastRow: Bool,theme: ThemeServiceProtocol) {
+        
+        title.text = model.title
+        
+        if model.imported {
+            let image: UIImage?
+            switch (model.enabled, model.successful) {
+            case (_, true):
+                image = UIImage(named: "logocheck")
+            case (true, false):
+                image = UIImage(named: "errorAttention")
+            case (false, _):
+                image = UIImage(named: "cross")
+            }
+            
+            check.image = image
+        } else {
+            check.isHighlighted = model.enabled
+        }
+        
+        subtitle.text = model.subtitle
+        
+        subtitleTopConstraint.constant = model.subtitle.count > 0 ? 7 : 0
+        
+        separator.isHidden = lastRow
+        
+        theme.setupTableCell(self)
+        theme.setupLabel(title)
+        theme.setupSeparator(separator)
+    }
 }

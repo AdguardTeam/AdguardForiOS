@@ -854,8 +854,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         guard let settings = importSettings else { return }
         
-        let model = ImportSettingsViewModel(settings: settings, importSettingsService: importSettingsService, antibanner: antibanner)
-        importController.model = model
+        importController.settings = settings
         present(importController, animated: true, completion: nil)
     }
 }

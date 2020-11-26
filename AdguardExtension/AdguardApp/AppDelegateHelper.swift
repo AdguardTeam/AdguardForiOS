@@ -63,6 +63,7 @@ class AppDelegateHelper: NSObject {
     private let activateLicense = "license"
     private let subscribe = "subscribe"
     private let applySettings = "apply_settings"
+    private let commonUrlScheme = "adguard"
     
     private var firstRun: Bool {
         get {
@@ -565,7 +566,7 @@ class AppDelegateHelper: NSObject {
                 tab.selectedViewController = navController
                 self.appDelegate.window.rootViewController = tab
                 
-            case (AE_URLSCHEME, applySettings):
+            case (commonUrlScheme, applySettings):
                 DDLogInfo("(AppDelegateHelper) openurl - apply settings")
                 let params = parseCustomUrlScheme(url).params
                 guard let json = params?["json"] else {

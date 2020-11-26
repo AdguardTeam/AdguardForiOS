@@ -112,7 +112,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             
             let localizations = antibanner.filtersI18n()
             let metagata = antibanner.metadata(forSubscribe: false)
-            if let filterMeta = metagata?.filters?.first { Int($0.filterId) == filter.id } {
+            if let filterMeta = metagata?.filters?.first(where: { Int(truncating: $0.filterId) == filter.id }) {
                 let localization = localizations.localization(forFilter: filterMeta)
                 
                 let name = localization?.name ?? ""

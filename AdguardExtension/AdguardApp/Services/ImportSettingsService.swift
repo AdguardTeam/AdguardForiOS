@@ -29,13 +29,13 @@ protocol ImportSettingsServiceDelegate {
 
 class ImportSettingsService: ImportSettingsServiceProtocol {
     
-    let antibanner: AESAntibannerProtocol
-    let networking: ACNNetworkingProtocol
-    let filtersService: FiltersServiceProtocol
-    let dnsFiltersService: DnsFiltersServiceProtocol
-    let dnsProvidersService: DnsProvidersServiceProtocol
-    let purchaseService: PurchaseServiceProtocol
-    let contentBlockerService: ContentBlockerServiceProtocol
+    private let antibanner: AESAntibannerProtocol
+    private let networking: ACNNetworkingProtocol
+    private let filtersService: FiltersServiceProtocol
+    private let dnsFiltersService: DnsFiltersServiceProtocol
+    private let dnsProvidersService: DnsProvidersServiceProtocol
+    private let purchaseService: PurchaseServiceProtocol
+    private let contentBlockerService: ContentBlockerServiceProtocol
     
     init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol) {
         self.antibanner = antibanner
