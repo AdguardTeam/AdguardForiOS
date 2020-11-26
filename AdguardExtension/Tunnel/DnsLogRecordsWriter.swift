@@ -85,7 +85,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
         
         let answers = event.answer.split(separator: "\n")
-        let answerString = answers.count > 1 ? answers.first! + " total: \(answers.count)" : ""
+        let answerString = answers.count > 0 ? answers.first! + " total: \(answers.count)" : ""
         DDLogInfo("(DnsLogRecordsWriter) handleEvent \(event.type ?? "nil");\(domain);\(event.elapsed)ms;\(event.status ?? "nil");\(upstreamAddr ?? "nil");\(answerString)")
         
         let record = DnsLogRecord(
