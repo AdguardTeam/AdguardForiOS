@@ -64,7 +64,7 @@ class ActivityTableViewCell: UITableViewCell {
     // MARK: - Private variables
     
     private let redDotColor = UIColor(hexString: "#DF3812")
-    private let greenDotColor = UIColor(hexString: "#67B279")
+    private let greenDotColor = UIColor.AdGuardColor.green
     private let greyDotColor = UIColor(hexString: "#888888")
     
     // MARK: - Private methods

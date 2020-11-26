@@ -35,7 +35,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     private var bottomViewLeftAnchor: NSLayoutConstraint?
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var themeToken: NotificationToken?
     
@@ -79,12 +78,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
-            guard let self = self else { return }
-            self.rateService.showRateAppAlertIfNeeded()
-        }
-    
     }
 
     override var selectedViewController: UIViewController? {
@@ -141,7 +134,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         bottomView = UIView()
         bottomView?.isUserInteractionEnabled = false
         bottomView?.translatesAutoresizingMaskIntoConstraints = false
-        bottomView?.backgroundColor = UIColor(hexString: "#67b279")
+        bottomView?.backgroundColor = UIColor.AdGuardColor.green
         tabBar.addSubview(bottomView ?? UIView())
         
         let numberOfItems = CGFloat(tabBar.items!.count)

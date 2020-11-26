@@ -458,6 +458,31 @@
 		7E9B37F62391761F00053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
 		7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
 		7E9B37F8239176BA00053972 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
+		7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BB825627B5500F1999D /* RateAppController.swift */; };
+		7E9C0BBA25627B5500F1999D /* RateAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BB825627B5500F1999D /* RateAppController.swift */; };
+		7E9C0BCD25627E8D00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0BCE25627E8D00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0BF9256286A000F1999D /* AppDelegate+PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BF8256286A000F1999D /* AppDelegate+PresentController.swift */; };
+		7E9C0BFA256286A000F1999D /* AppDelegate+PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BF8256286A000F1999D /* AppDelegate+PresentController.swift */; };
+		7E9C0C1D256292DE00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C2F256292DF00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C30256292DF00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C31256292E000F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C32256292E000F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C33256292E100F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C34256292E100F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C35256292E100F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C36256292E200F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C37256292E300F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C38256292E400F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C39256292E500F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3A256292E600F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3B256292E600F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3C256292E700F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3D256292E700F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3E256292E800F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C3F256292E800F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E9C0C7525629DAB00F1999D /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
 		7E9D31C223A11BB60040AE4B /* ComplexProtectionSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */; };
 		7E9F3E1023CE08E300A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7E9F3E1123CE0FA700A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
@@ -3005,6 +3030,9 @@
 		7E952FA723D601F300D89AE0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		7E952FA923D601F400D89AE0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
+		7E9C0BB825627B5500F1999D /* RateAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppController.swift; sourceTree = "<group>"; };
+		7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		7E9C0BF8256286A000F1999D /* AppDelegate+PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+PresentController.swift"; sourceTree = "<group>"; };
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverter.swift; sourceTree = "<group>"; };
 		7EA216392444847700393949 /* MigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationService.swift; sourceTree = "<group>"; };
@@ -3734,7 +3762,6 @@
 				D0F91165212EDE45006DF0D3 /* ViewControllers */,
 				D0F91161212EDD51006DF0D3 /* Views */,
 				6578E3821BC5082000E2DFFD /* vendors */,
-				D044AF7121820AA700CD9E06 /* other */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4269,6 +4296,7 @@
 				65F398711B7C9C5000ABCD39 /* Adguard.entitlements */,
 				65F398171B7B684700ABCD39 /* AppDelegate.h */,
 				65F398181B7B684700ABCD39 /* AppDelegate.m */,
+				7E9C0BF8256286A000F1999D /* AppDelegate+PresentController.swift */,
 				D0667BCE22DC72FD0099C090 /* AppDelegateHelper.swift */,
 				65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */,
 				655AACD41D4233A000E316EA /* ProLaunchScreen.storyboard */,
@@ -4510,6 +4538,7 @@
 				7E7F990A241A98E400FC89DC /* RateApp.storyboard */,
 				7EAFC5C723FA8AE100DB8766 /* FeedbackController.swift */,
 				7EAFC5C923FA8CFD00DB8766 /* FeedbackCompletionController.swift */,
+				7E9C0BB825627B5500F1999D /* RateAppController.swift */,
 			);
 			path = RateApp;
 			sourceTree = "<group>";
@@ -4790,13 +4819,6 @@
 			path = ContentBlockers;
 			sourceTree = "<group>";
 		};
-		D044AF7121820AA700CD9E06 /* other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = other;
-			sourceTree = "<group>";
-		};
 		D04B97DE1F601D1900CE2E03 /* MGSwipeTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -5045,6 +5067,7 @@
 				7ECCCC172372B2AF00FA651F /* ChartView */,
 				7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */,
 				7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */,
+				7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6393,6 +6416,7 @@
 				659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */,
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
 				D0B545772435D5DA002F0AEC /* RequestSenderProtocol.swift in Sources */,
+				7E9C0BBA25627B5500F1999D /* RateAppController.swift in Sources */,
 				D0B545F82435D6CB002F0AEC /* Date+Utils.swift in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				D0B545962435D630002F0AEC /* ThemeService.swift in Sources */,
@@ -6583,11 +6607,13 @@
 				D0B545BF2435D65C002F0AEC /* MainMenuController.swift in Sources */,
 				659886811CF74DE9003ECD1C /* FMDatabaseAdditions.m in Sources */,
 				D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */,
+				7E9C0BCE25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 				D0B5456E2435D5CD002F0AEC /* DnsFiltersModel.swift in Sources */,
 				D0B545DB2435D69B002F0AEC /* RoundRectButton.swift in Sources */,
 				D0B545CE2435D692002F0AEC /* RuleAddedController.swift in Sources */,
 				D0B545FE2435D6D2002F0AEC /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D0B545C02435D65C002F0AEC /* CustomNavigationTransition.swift in Sources */,
+				7E9C0BFA256286A000F1999D /* AppDelegate+PresentController.swift in Sources */,
 				D0B545B92435D650002F0AEC /* ComplexProtectionController.swift in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
 				D0D7E53B24371AAB001801A5 /* mz_strm_mem.c in Sources */,
@@ -6706,6 +6732,7 @@
 				7E4D205322D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				65EC9CAF1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7E4D204322D71A5B003B0E75 /* mz_crypt_apple.c in Sources */,
+				7E9C0C36256292E200F1999D /* UIColor+Utils.swift in Sources */,
 				D08CE429240D389800A70089 /* KeychainService.swift in Sources */,
 				D0D7E5AD243C95C0001801A5 /* APDnsServerAddress.m in Sources */,
 				651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
@@ -6831,6 +6858,7 @@
 				D06E30E7253F323B008BBD2D /* DnsProviders.swift in Sources */,
 				D0923EA1220A017A009AA5F5 /* Dns64Utils.swift in Sources */,
 				7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */,
+				7E9C0BF9256286A000F1999D /* AppDelegate+PresentController.swift in Sources */,
 				7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */,
 				7ECCCC14237194B200FA651F /* ChartView.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
@@ -6985,6 +7013,7 @@
 				D067D9AD214693E200ECDE6D /* LoginController.swift in Sources */,
 				D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */,
 				7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */,
+				7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */,
 				7EB2F94D23F2B64500F9A544 /* RequestSenderProtocol.swift in Sources */,
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
 				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
@@ -7069,6 +7098,7 @@
 				7E822C0D2435EDD30015B4D0 /* Rule.swift in Sources */,
 				7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */,
 				D031A155219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
+				7E9C0BCD25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7226,6 +7256,7 @@
 				7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */,
 				D0AEC26A2409323C003E8FCC /* VpnManager.swift in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
+				7E9C0C7525629DAB00F1999D /* UIColor+Utils.swift in Sources */,
 				D0D033F02355EBF40056789B /* AntibannerController.swift in Sources */,
 				7E4AAD38242BC02100957122 /* ChartDateType.swift in Sources */,
 				D04C2B76240F9FF4009330A8 /* (null) in Sources */,
@@ -7255,6 +7286,7 @@
 				655A02801C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				D031A172219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				655A024D1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
+				7E9C0C1D256292DE00F1999D /* UIColor+Utils.swift in Sources */,
 				655A02351C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
 				655A022F1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				655A027A1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
@@ -7306,6 +7338,7 @@
 				7E06B66D22FB1606006859AC /* NSString+Utils.m in Sources */,
 				7E06B66E22FB1606006859AC /* DDFileLogger.m in Sources */,
 				7E06B66F22FB1606006859AC /* ACLWildcard.m in Sources */,
+				7E9C0C33256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */,
 				7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */,
 				7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */,
@@ -7413,6 +7446,7 @@
 				7E9A487E23A2815F00B89540 /* Affinity.swift in Sources */,
 				7E9A487A23A2803E00B89540 /* ABECFilter.m in Sources */,
 				7E334022239033CE00C39F62 /* ACNUrlUtils.m in Sources */,
+				7E9C0C34256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				7E80BF5724E18379002C6CDB /* VpnManager.swift in Sources */,
 				7EC635B6239EB29B003A5CE4 /* ConfigurationService.swift in Sources */,
 				7ECD9C47238D65D10065E88D /* ACLFileLocker.m in Sources */,
@@ -7531,6 +7565,7 @@
 				D0569E0221F1C0A800985DA9 /* APCommonSharedResources.m in Sources */,
 				D020B28E21FA12FE0075BB8D /* DnsProxyService.swift in Sources */,
 				D0569E0821F1C0A800985DA9 /* DDContextFilterLogFormatter.m in Sources */,
+				7E9C0C35256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				D0569E0921F1C0A800985DA9 /* CLIColor.m in Sources */,
 				D0569E0A21F1C0A800985DA9 /* FMResultSet.m in Sources */,
 				D0569E0E21F1C0A800985DA9 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -7563,6 +7598,7 @@
 				D031A173219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D067D8E821428AA900ECDE6D /* ACLWildcard.m in Sources */,
 				D067D8E921428AA900ECDE6D /* ACLFileLogger.m in Sources */,
+				7E9C0C2F256292DF00F1999D /* UIColor+Utils.swift in Sources */,
 				D067D8EA21428AA900ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D8EB21428AA900ECDE6D /* NSException+Utils.m in Sources */,
 				D067D8EC21428AA900ECDE6D /* ACNNetworking.m in Sources */,
@@ -7614,6 +7650,7 @@
 				D067D91821428B4600ECDE6D /* NSString+Utils.m in Sources */,
 				D031A174219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D067D91921428B4600ECDE6D /* ACLWildcard.m in Sources */,
+				7E9C0C30256292DF00F1999D /* UIColor+Utils.swift in Sources */,
 				D067D91A21428B4600ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D91B21428B4600ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D91C21428B4600ECDE6D /* NSException+Utils.m in Sources */,
@@ -7665,6 +7702,7 @@
 				D067D94921428B9100ECDE6D /* NSString+Utils.m in Sources */,
 				D031A175219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D067D94A21428B9100ECDE6D /* ACLWildcard.m in Sources */,
+				7E9C0C31256292E000F1999D /* UIColor+Utils.swift in Sources */,
 				D067D94B21428B9100ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D94C21428B9100ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D94D21428B9100ECDE6D /* NSException+Utils.m in Sources */,
@@ -7716,6 +7754,7 @@
 				D067D97A21428BB500ECDE6D /* NSString+Utils.m in Sources */,
 				D031A176219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D067D97B21428BB500ECDE6D /* ACLWildcard.m in Sources */,
+				7E9C0C32256292E000F1999D /* UIColor+Utils.swift in Sources */,
 				D067D97C21428BB500ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D97D21428BB500ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D97E21428BB500ECDE6D /* NSException+Utils.m in Sources */,
@@ -7767,6 +7806,7 @@
 				D0B5429D2435C6A3002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B5429E2435C6A3002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B5429F2435C6A3002F0AEC /* NSString+Utils.m in Sources */,
+				7E9C0C37256292E300F1999D /* UIColor+Utils.swift in Sources */,
 				D0B542A02435C6A3002F0AEC /* DDFileLogger.m in Sources */,
 				D0B542A12435C6A3002F0AEC /* ACLWildcard.m in Sources */,
 				D0B542A22435C6A3002F0AEC /* ACLFileLogger.m in Sources */,
@@ -7818,6 +7858,7 @@
 				D0B542D62435C6A7002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B542D72435C6A7002F0AEC /* NSString+Utils.m in Sources */,
 				D0B542D82435C6A7002F0AEC /* DDFileLogger.m in Sources */,
+				7E9C0C39256292E500F1999D /* UIColor+Utils.swift in Sources */,
 				D0B542D92435C6A7002F0AEC /* ACLWildcard.m in Sources */,
 				D0B542DA2435C6A7002F0AEC /* ACLFileLogger.m in Sources */,
 				D0B542DB2435C6A7002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
@@ -7869,6 +7910,7 @@
 				D0B5430F2435C6AA002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B543102435C6AA002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B543112435C6AA002F0AEC /* NSString+Utils.m in Sources */,
+				7E9C0C38256292E400F1999D /* UIColor+Utils.swift in Sources */,
 				D0B543122435C6AA002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543132435C6AA002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543142435C6AA002F0AEC /* ACLFileLogger.m in Sources */,
@@ -7920,6 +7962,7 @@
 				D0B543482435C6AE002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B543492435C6AE002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B5434A2435C6AE002F0AEC /* NSString+Utils.m in Sources */,
+				7E9C0C3A256292E600F1999D /* UIColor+Utils.swift in Sources */,
 				D0B5434B2435C6AE002F0AEC /* DDFileLogger.m in Sources */,
 				D0B5434C2435C6AE002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5434D2435C6AE002F0AEC /* ACLFileLogger.m in Sources */,
@@ -7971,6 +8014,7 @@
 				D0B543812435C6B1002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B543822435C6B1002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B543832435C6B1002F0AEC /* NSString+Utils.m in Sources */,
+				7E9C0C3B256292E600F1999D /* UIColor+Utils.swift in Sources */,
 				D0B543842435C6B1002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543852435C6B1002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543862435C6B1002F0AEC /* ACLFileLogger.m in Sources */,
@@ -8022,6 +8066,7 @@
 				D0B543BA2435C6B5002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B543BB2435C6B5002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B543BC2435C6B5002F0AEC /* NSString+Utils.m in Sources */,
+				7E9C0C3C256292E700F1999D /* UIColor+Utils.swift in Sources */,
 				D0B543BD2435C6B5002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543BE2435C6B5002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543BF2435C6B5002F0AEC /* ACLFileLogger.m in Sources */,
@@ -8129,6 +8174,7 @@
 				D0B5454F2435D131002F0AEC /* DDMultiFormatter.m in Sources */,
 				D0B544192435C6B8002F0AEC /* Affinity.swift in Sources */,
 				D0B5441A2435C6B8002F0AEC /* ABECFilter.m in Sources */,
+				7E9C0C3D256292E700F1999D /* UIColor+Utils.swift in Sources */,
 				D0B5441B2435C6B8002F0AEC /* ACNUrlUtils.m in Sources */,
 				D0D7E56824377311001801A5 /* Bundle+config.swift in Sources */,
 				D0B5441C2435C6B8002F0AEC /* ConfigurationService.swift in Sources */,
@@ -8184,6 +8230,7 @@
 				D0B544532435C6BC002F0AEC /* mz_strm_wzaes.c in Sources */,
 				D0B544542435C6BC002F0AEC /* RulesProcessor.swift in Sources */,
 				D0B544552435C6BC002F0AEC /* mz_strm_split.c in Sources */,
+				7E9C0C3E256292E800F1999D /* UIColor+Utils.swift in Sources */,
 				D0B544562435C6BC002F0AEC /* FMStatementQuotedRecogniser.m in Sources */,
 				D0B544572435C6BC002F0AEC /* mz_crypt_apple.c in Sources */,
 				D0B544582435C6BC002F0AEC /* KeychainService.swift in Sources */,
@@ -8317,6 +8364,7 @@
 				D0B544DE2435C6BF002F0AEC /* ADLocations.m in Sources */,
 				D06E3101253F3252008BBD2D /* LocalizedDnsProviders.swift in Sources */,
 				D0B544DF2435C6BF002F0AEC /* ACDnsUtils.m in Sources */,
+				7E9C0C3F256292E800F1999D /* UIColor+Utils.swift in Sources */,
 				D0B544E02435C6BF002F0AEC /* ASDatabase.m in Sources */,
 				D0B544E12435C6BF002F0AEC /* APTunnelConnectionsHandler.m in Sources */,
 				D0B544E22435C6BF002F0AEC /* ComplexProtectionService.swift in Sources */,

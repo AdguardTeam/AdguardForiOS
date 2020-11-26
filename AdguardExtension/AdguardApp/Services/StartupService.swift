@@ -121,7 +121,7 @@ class StartupService : NSObject{
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
-        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, productInfo: productInfo)
+        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
         
         let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()

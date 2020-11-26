@@ -733,6 +733,8 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
 
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "1. Make sure that you're using Safari browser. It's technically not possible to block content in other browsers.\n\n2. Enable necessary filter lists in the Safari protection settings.\n\n3. You may need to restart Safari. Quit and reopen it again.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

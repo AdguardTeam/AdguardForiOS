@@ -330,7 +330,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupSwitch(_ switchControl: UISwitch) {
-        switchControl.onTintColor = UIColor(hexString: "#67b279")
+        switchControl.onTintColor = UIColor.AdGuardColor.green
         switchControl.layer.cornerRadius = switchControl.frame.height / 2
     }
     
