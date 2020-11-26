@@ -73,9 +73,7 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         }
         
         let domain: String = event.domain.hasSuffix(".") ? String(event.domain.dropLast()) : event.domain
-        
-        DDLogInfo("(DnsLogRecordsWriter) handleEvent got answer for domain: \(domain) answer: \(event.answer == nil ? "nil" : "nonnil")")
-        
+    
         let dnsProxyUpstream = event.upstreamId == nil ? nil : dnsProxyService?.upstreamsById[event.upstreamId.intValue]
         let recordIsEncrypted = dnsProxyUpstream?.isCrypto ?? false
         let upstreamAddr = dnsProxyUpstream?.upstream
@@ -85,6 +83,10 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         let filterIds = event.filterListIds.map { $0.intValue }
         
         let date = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
+        
+        let answers = event.answer.split(separator: "\n")
+        let answerString = answers.count > 1 ? answers.first! + " total: \(answers.count)" : ""
+        DDLogInfo("(DnsLogRecordsWriter) handleEvent \(event.type ?? "nil");\(domain);\(event.elapsed)ms;\(event.status ?? "nil");\(upstreamAddr ?? "nil");\(answerString)")
         
         let record = DnsLogRecord(
             domain: domain,
