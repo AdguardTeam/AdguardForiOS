@@ -151,22 +151,21 @@ import Foundation
     
     func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void) {
         workingQueue.async { [weak self] in
-            let maxId = self?.allProviders.map{ $0.providerId }.max() ?? UUID().hashValue
+            guard let self = self else { return }
+            let maxId = self.customProviders.map{ $0.providerId }.max() ?? 0
             let providerId = maxId + 1
             let provider = DnsProviderInfo(name: name, isCustomProvider: true, providerId: providerId)
             let serverProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-            
-            let maxServerId = self?.allProviders
-                .flatMap{ $0.servers ?? [] }
-                .compactMap{ Int($0.serverId) }
-                .max() ?? UUID().hashValue
-            let server = DnsServerInfo(dnsProtocol: serverProtocol, serverId: String(maxServerId + 1), name: name, upstreams: [upstream], providerId: providerId)
+        
+            let customServersCount = self.customProviders.flatMap({ $0.servers ?? [] }).count
+            let serverId = String(customServersCount + 100000)
+            let server = DnsServerInfo(dnsProtocol: serverProtocol, serverId: serverId, name: name, upstreams: [upstream], providerId: providerId)
     
             provider.servers = [server]
             
-            self?.customProviders.append(provider)
-            self?.activeDnsServer = server
-            self?.delegate?.dnsProvidersChanged()
+            self.customProviders.append(provider)
+            self.activeDnsServer = server
+            self.delegate?.dnsProvidersChanged()
             onProviderAdded()
         }
     }

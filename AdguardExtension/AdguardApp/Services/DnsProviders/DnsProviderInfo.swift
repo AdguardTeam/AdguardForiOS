@@ -118,7 +118,7 @@ class DnsServerInfo : ACObject, Codable {
         name = aDecoder.decodeObject(forKey: "name") as! String
         upstreams = aDecoder.decodeObject(forKey: "upstreams") as! [String]
         dnsProtocol = DnsProtocol(rawValue: aDecoder.decodeInteger(forKey: "dns_protocol")) ?? .dns
-        providerId = aDecoder.decodeInteger(forKey: "providerId")
+        providerId = aDecoder.decodeObject(forKey: "providerId") as? Int
         super.init(coder: aDecoder)
     }
     
@@ -129,6 +129,7 @@ class DnsServerInfo : ACObject, Codable {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(upstreams, forKey: "upstreams")
         aCoder.encode(dnsProtocol.rawValue, forKey: "dns_protocol")
+        aCoder.encode(providerId, forKey: "providerId")
     }
 }
 
@@ -172,6 +173,7 @@ class DnsServerInfo : ACObject, Codable {
         name = aDecoder.decodeObject(forKey: "name") as! String
         isCustomProvider = aDecoder.decodeBool(forKey: "isCustomProvider")
         providerId = aDecoder.decodeInteger(forKey: "providerId")
+        servers = aDecoder.decodeObject(forKey: "servers") as? [DnsServerInfo]
         super.init(coder: aDecoder)
     }
     
@@ -180,6 +182,7 @@ class DnsServerInfo : ACObject, Codable {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(isCustomProvider, forKey: "isCustomProvider")
         aCoder.encode(providerId, forKey: "providerId")
+        aCoder.encode(servers, forKey: "servers")
     }
     
     func serverByProtocol(dnsProtocol: DnsProtocol) -> DnsServerInfo? {

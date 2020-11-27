@@ -429,7 +429,7 @@ class MigrationService: MigrationServiceProtocol {
     private func setIdsForCustomProviders() {
         DDLogInfo("Setting providerId for custom providers")
         dnsProvidersService.customProviders.forEach { provider in
-            let maxId = dnsProvidersService.allProviders.map{ $0.providerId }.max() ?? UUID().hashValue
+            let maxId = dnsProvidersService.customProviders.map{ $0.providerId }.max() ?? 0
             let id = maxId + 1
             provider.providerId = id
             provider.servers?.forEach { $0.providerId = id }
