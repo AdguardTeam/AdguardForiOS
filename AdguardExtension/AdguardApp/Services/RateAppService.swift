@@ -20,31 +20,22 @@ import Foundation
 import StoreKit
 
 @objc protocol RateAppServiceProtocol {
-    /* shows rate dialog if needed */
-    func showRateAppAlertIfNeeded()
+    var shouldShowRateAppDialog: Bool { get }
 }
 
 class RateAppService: RateAppServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
-    private let productInfo: ADProductInfoProtocol
+    private let configuration: ConfigurationServiceProtocol
     
-    init(resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol) {
         self.resources = resources
-        self.productInfo = productInfo
+        self.configuration = configuration
+        
+        resources.appEntryCount += 1
     }
     
-    func showRateAppAlertIfNeeded() {
-        if let currentBuild = Int(productInfo.buildNumber()) {
-            if currentBuild != resources.lastBuildRateAppRequested {
-                resources.appEntryCount += 1
-            }
-            
-            if currentBuild > resources.lastBuildRateAppRequested && resources.appEntryCount > 3, #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
-                resources.lastBuildRateAppRequested = currentBuild
-                resources.appEntryCount = 0
-            }
-        }
+    var shouldShowRateAppDialog: Bool {
+        resources.appEntryCount >= 3 && !resources.rateAppShown && configuration.allContentBlockersEnabled
     }
 }

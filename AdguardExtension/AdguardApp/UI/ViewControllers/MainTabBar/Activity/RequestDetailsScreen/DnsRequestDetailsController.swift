@@ -487,7 +487,7 @@ class DnsRequestDetailsController: UITableViewController {
         // Website model
         let website = record.category.url ?? ""
         let websiteTitle = String.localizedString("website_title")
-        let color: UIColor = UIColor(hexString: "#67b279")
+        let color: UIColor = UIColor.AdGuardColor.green
         let websiteModelIsNil = website.isEmpty
         let websiteModel = websiteModelIsNil ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoColor: color,  theme: theme)
         if !websiteModelIsNil {

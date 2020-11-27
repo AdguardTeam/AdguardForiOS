@@ -89,7 +89,7 @@ extension String {
         guard let searchStrings = strings else { return nil }
         
         let attributedString = NSMutableAttributedString(string: self)
-        let highlightColor = UIColor(hexString: "#67b279")
+        let highlightColor = UIColor.AdGuardColor.green
         
         for string in searchStrings {
             guard let searchString = string else { continue }

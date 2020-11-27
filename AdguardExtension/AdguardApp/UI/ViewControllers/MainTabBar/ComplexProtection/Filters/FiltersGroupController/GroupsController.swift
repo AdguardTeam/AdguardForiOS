@@ -157,9 +157,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
         } else {
             cell.enabledSwitch.isUserInteractionEnabled = true
-            cell.icon.tintColor = UIColor(hexString: "#67b279")
+            cell.icon.tintColor = UIColor.AdGuardColor.green
         }
-        
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
         

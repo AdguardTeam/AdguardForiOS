@@ -182,6 +182,15 @@ class MigrationService: MigrationServiceProtocol {
             removeOptimizeFeature()
         }
         
+        /*
+         In app version 4.1 (561) we've changed logic of showing rate app dialog
+         this flag is useless now
+        */
+        if lastBuildVersion < 561 {
+            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
+
+        }
+        
         /**
         Migration:
          In app version 4.0.4 (563) we began to inititalize custom dns servers with dns protocol

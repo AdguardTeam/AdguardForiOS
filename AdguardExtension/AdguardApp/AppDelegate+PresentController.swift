@@ -356,19 +356,40 @@ extension AppDelegate {
         return true
     }
     
-    /* Returns current view controller */
-    func getTopViewController() -> UIViewController? {
-        guard let tabBar = getMainTabController() else {
-            DDLogError("Tab bar is nil")
-            return nil
-        }
+    /* Presents FeedbackController */
+    func presentFeedbackController() {
+        let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
         
-        if let selectedNavController = tabBar.selectedViewController as? MainNavigationController {
-            if let topVC = selectedNavController.topViewController {
-                return topVC
+        if let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController") as? UINavigationController {
+            if let feedbackController = controller.viewControllers.first as? FeedbackController {
+                feedbackController.simpleFeedback = false
+                
+                let topVC = Self.topViewController()
+                topVC?.present(controller, animated: true)
             }
         }
-        return nil
+    }
+    
+    /*
+     Presents RateAppController
+     Returns true on success and false otherwise
+     */
+    func presentRateAppController() -> Bool {
+        guard let topVC = Self.topViewController() else {
+            DDLogError("Failed to get top view controller")
+            return false
+        }
+        let rateAppStoryboard = UIStoryboard(name: "RateApp", bundle: nil)
+        guard let rateAppController = rateAppStoryboard.instantiateViewController(withIdentifier: "RateAppController") as? RateAppController else {
+            DDLogError("RateApp.storyboard doesnt't have RateAppController")
+            return false
+        }
+        // Check if VC does not present any controller
+        if topVC.presentedViewController == nil {
+            topVC.present(rateAppController, animated: true)
+            return true
+        }
+        return false
     }
     
     /*

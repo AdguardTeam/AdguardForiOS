@@ -86,7 +86,7 @@ class ComplexProtectionController: UITableViewController {
         return configuration.proStatus
     }
     
-    private let enabledColor = UIColor(hexString: "#67B279")
+    private let enabledColor = UIColor.AdGuardColor.green
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
     private let titleSection = 0
