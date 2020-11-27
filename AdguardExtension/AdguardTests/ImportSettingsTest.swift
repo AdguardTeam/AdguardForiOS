@@ -68,6 +68,40 @@ class ImportSettingsTest: XCTestCase {
         XCTFail()
     }
     
+    func testDisableCBFilter() {
+        
+        var settings = Settings()
+        settings.defaultCbFilters = [DefaultCBFilterSettings(id: 2, enable: false)]
+        
+        // disable all filters
+        for group  in filtersService.groups {
+            for filter in group.filters {
+                filter.enabled = true
+            }
+        }
+        
+        // apply settings
+        let expectation = XCTestExpectation()
+        importService.applySettings(settings) { (settings) in
+            XCTAssertEqual(settings.defaultCbFilters?.first?.status, .successful)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+        
+        // check result
+        for group  in filtersService.groups {
+            for filter in group.filters {
+                
+                if filter.filterId == 2 {
+                    XCTAssertFalse(filter.enabled)
+                    return
+                }
+            }
+        }
+        XCTFail()
+    }
+    
     func testAddCustomFilter() {
         var settings = Settings()
         settings.customCbFilters = [CustomCBFilterSettings(name: "custom", url: "custom_url")]
@@ -83,6 +117,8 @@ class ImportSettingsTest: XCTestCase {
             
             let filter = customGroup.filters.first
             XCTAssertNotNil(filter)
+            XCTAssertEqual(filter?.enabled, true)
+            XCTAssertEqual(filter?.name, "custom")
             expectation.fulfill()
         }
         
@@ -111,7 +147,7 @@ class ImportSettingsTest: XCTestCase {
     
     func testSelectDnsServer() {
         var settings = Settings()
-        settings.dnsSetting = DnsFilteringSettings(name: DnsNameSetting(rawValue: "adguard-dns-family"), dnsProtocol: .doh)
+        settings.dnsServerId = 123
         
         let provider = DnsProviderInfo(id: DnsProvidersService.adguardFamilyId, name: "ag family")
         provider.servers = [DnsServerInfo(dnsProtocol: .doh, serverId: "123", name: "ag family test", upstreams: [])]
@@ -163,21 +199,6 @@ class ImportSettingsTest: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    func testAddallowRules() {
-        var settings = Settings()
-        settings.allowlistRules = ["rule"]
-        
-        let expectation = XCTestExpectation()
-        
-        importService.applySettings(settings) { [unowned self] (settings) in
-            
-            XCTAssertEqual(contentBlockerService.whitelistDomains.first, "rule")
-            expectation.fulfill()
-        }
-        
-        wait(for: [expectation], timeout: 1.0)
-    }
-    
     func testAddDnsRule() {
         var settings = Settings()
         settings.dnsUserRules = ["rule"]
@@ -187,6 +208,48 @@ class ImportSettingsTest: XCTestCase {
         importService.applySettings(settings) { [unowned self] (settings) in
             
             XCTAssertEqual(dnsFiltersService.userRules.first, "rule")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testOverrideDnsRules() {
+        var settings = Settings()
+        settings.overrideDnsUserRules = true
+        
+        settings.dnsUserRules = ["rule"]
+        
+        dnsFiltersService.userRules = ["old_rule"]
+        
+        let expectation = XCTestExpectation()
+        
+        importService.applySettings(settings) { [unowned self] (settings) in
+            XCTAssertEqual(dnsFiltersService.userRules.count, 1)
+            XCTAssertEqual(dnsFiltersService.userRules.first, "rule")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testOverrideCBRules() {
+        var settings = Settings()
+        settings.userRules = ["rule"]
+        settings.overrideUserRules = true
+        
+        antibanner.rules[ASDF_USER_FILTER_ID as NSNumber] = [ASDFilterRule(text: "old_rule", enabled: true)]
+        
+        let expectation = XCTestExpectation()
+        
+        importService.applySettings(settings) { [unowned self] (settings) in
+            
+            let userRules = antibanner.rules[ASDF_USER_FILTER_ID as NSNumber]
+            XCTAssertEqual(userRules?.count, 2)
+            XCTAssertEqual(userRules![0].ruleText, "old_rule")
+            XCTAssertEqual(userRules![0].isEnabled, false)
+            XCTAssertEqual(userRules![1].ruleText, "rule")
+            XCTAssertEqual(userRules![1].isEnabled, true)
             expectation.fulfill()
         }
         

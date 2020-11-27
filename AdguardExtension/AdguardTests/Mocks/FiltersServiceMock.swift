@@ -33,7 +33,7 @@ class FiltersServiceMock: FiltersServiceProtocol {
     func setFilter(_ filter: Filter, enabled: Bool) {
         let filter = groups.flatMap { $0.filters }
             .first { $0.filterId == filter.filterId }
-        filter?.enabled = true
+        filter?.enabled = enabled
     }
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
@@ -44,6 +44,8 @@ class FiltersServiceMock: FiltersServiceProtocol {
         }
         
         let filterObj = Filter(filterId: 0, groupId: FilterGroupId.custom)
+        filterObj.name = filter.meta.name
+        filterObj.enabled = true
         group!.filters.append(filterObj)
     }
     

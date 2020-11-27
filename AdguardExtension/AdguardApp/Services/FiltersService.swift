@@ -415,6 +415,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         guard let group = getGroup(filter.groupId) else { return }
         
+        if filter.enabled {
+            group.enabled = true
+        }
+        
         updateGroupSubtitle(group)
         notifyChange()
         processUpdate()
@@ -447,6 +451,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             updateGroupSubtitle(group)
             notifyChange()
         }
+        
+        enabledFilters[filter.meta.filterId.intValue] = true
         
         antibanner.subscribeCustomFilter(from: filter) {
             [weak self] in

@@ -116,6 +116,10 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func add(_ rule: ASDFilterRule) -> Bool {
+        var filterRules = rules[rule.filterId] ?? []
+        filterRules.append(rule)
+        rules[rule.filterId] = filterRules
+        
         return true
     }
     
@@ -205,4 +209,10 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     }
     
     func renameCustomFilter(_ filterId: NSNumber, newName: String) {}
+    
+    func disableUserRules() -> Bool {
+        rules[ASDF_USER_FILTER_ID as NSNumber]?.forEach { $0.isEnabled = false }
+        return true
+    }
+    
 }

@@ -31,13 +31,14 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
     private var model: ImportSettingsViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if settings != nil {
-            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner)
+            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner, dnsProvidersService: dnsProvidersService)
         }
         
         okButton.isHidden = true

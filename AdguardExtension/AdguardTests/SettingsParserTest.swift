@@ -31,49 +31,62 @@ class SettingsParserTest: XCTestCase {
         
         let json = """
                     {
+                      "version": 1,
                       "cb_filter_default": [
                         {
-                          "id": 2,
+                          "id": 1,
                           "enable": true
+                        },
+                        {
+                          "id": 2,
+                          "enable": false
                         }
                       ],
+                      "cb_filter_default_override": false,
                       "cb_filter_custom": [
                         {
                           "name": "custom",
                           "url": "custom_filter_url"
                         }
                       ],
+                      "cb_filter_custom_override": false,
                       "dns_filter_list": [
                         {
                           "name": "custom_dns_filter",
                           "url": "dns_filter_url"
                         }
                       ],
-                      "dns_filtering": {
-                        "name": "default",
-                        "protocol": "DOQ"
-                      },
+                      "dns_filter_list_override": false,
+                      "user_rules": [
+                        "rule1", "rule2"
+                      ],
+                      "user_rules_override": false,
+                      "dns_user_rules": [
+                          "dns_rule1", "dns_rule2"
+                      ],
+                      "dns_user_rules_override": true,
+                      "disabled_apps": [],
+                      "allowlist_rules": [],
                       "license": "LICENSE",
-                      "user_rules": ["rule1", "rule2"],
-                      "dns_user_rules": ["dns_rule1", "dns_rule2"],
-                      "allowlist_rules": ["allow_rule"]
+                      "dns_server_id": 33
                     }
         """
         let settings = parser.parse(querry: json)
         
         XCTAssertNotNil(settings)
         
-        XCTAssertEqual(settings?.defaultCbFilters?.first?.id, 2)
-        XCTAssertEqual(settings?.defaultCbFilters?.first?.enable, true)
+        XCTAssertEqual(settings?.defaultCbFilters?[0].id, 1)
+        XCTAssertEqual(settings?.defaultCbFilters?[0].enable, true)
+        XCTAssertEqual(settings?.defaultCbFilters?[1].id, 2)
+        XCTAssertEqual(settings?.defaultCbFilters?[1].enable, false)
         XCTAssertEqual(settings?.customCbFilters?.first?.name, "custom")
         XCTAssertEqual(settings?.customCbFilters?.first?.url, "custom_filter_url")
         XCTAssertEqual(settings?.dnsFilters?.first?.name, "custom_dns_filter")
         XCTAssertEqual(settings?.dnsFilters?.first?.url, "dns_filter_url")
-        XCTAssertEqual(settings?.dnsSetting?.name, DnsNameSetting.adguardDefault)
-        XCTAssertEqual(settings?.dnsSetting?.dnsProtocol, DnsProtocolSetting.doq)
         XCTAssertEqual(settings?.license, "LICENSE")
         XCTAssertEqual(settings?.userRules, ["rule1", "rule2"])
         XCTAssertEqual(settings?.dnsUserRules, ["dns_rule1", "dns_rule2"])
-        XCTAssertEqual(settings?.allowlistRules, ["allow_rule"])
+        XCTAssertEqual(settings?.dnsServerId, 33)
+        XCTAssertEqual(settings?.overrideDnsUserRules, true)
     }
 }

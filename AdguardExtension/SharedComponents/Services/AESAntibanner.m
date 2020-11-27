@@ -1834,6 +1834,35 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return result;
 }
 
+- (BOOL) disableUserRules {
+    __block BOOL result = NO;
+    
+    dispatch_sync(workQueue, ^{
+        
+        if (!_asDataBase.ready) {
+            return;
+        }
+        
+        [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
+            
+            *rollback = NO;
+            NSString *queryString = [NSString stringWithFormat:@"update filter_rules set is_enabled = %i where filter_id = %@", NO, @(ASDF_USER_FILTER_ID)];
+            [db executeUpdate:queryString];
+            
+            result = YES;
+        }];
+    });
+    
+    if (result) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerUpdateFilterRulesNotification object:self];
+        });
+    }
+    
+    return result;
+}
+
 - (NSString*) nameForFilter:(NSNumber*)filterId {
     // TODO: return localized name
     return @"Adguard CB Filter";

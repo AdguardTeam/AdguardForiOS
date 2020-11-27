@@ -53,11 +53,13 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
     private var settings: Settings
     private let importService: ImportSettingsServiceProtocol
     private let antibanner :AESAntibannerProtocol
+    private let dnsProvidersService: DnsProvidersServiceProtocol
     
-    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, antibanner: AESAntibannerProtocol) {
+    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, antibanner: AESAntibannerProtocol, dnsProvidersService: DnsProvidersServiceProtocol) {
         self.settings = settings
         self.importService = importSettingsService
         self.antibanner = antibanner
+        self.dnsProvidersService = dnsProvidersService
         
         rows = []
         fillRows(imported: false)
@@ -180,13 +182,22 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         
         // dns settings
         
-        if settings.dnsSetting != nil {
+        if settings.dnsServerId != nil {
             var row = SettingRow(type: .dnsSettings, index: 0)
             let format = String.localizedString("import_dns_settings_format")
             
-            // TODO: get dns server name
-            let name = "name"
-            row.title = String(format:format, name)
+            var server: DnsServerInfo? = nil
+            
+            for provider in dnsProvidersService.allProviders {
+                for dnsServer in provider.servers ?? [] {
+                    if Int(dnsServer.serverId) == settings.dnsServerId {
+                        server = dnsServer
+                        break
+                    }
+                }
+            }
+            
+            row.title = String(format:format, server?.name ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.successful = imported && settings.dnsStatus == .successful
@@ -218,8 +229,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         // user rules
         
         let userRulesCount = settings.userRules?.count ?? 0
-        let whitelistRulesCount = settings.allowlistRules?.count ?? 0
-        if userRulesCount + whitelistRulesCount > 0 {
+        if userRulesCount > 0 {
             var row = SettingRow(type: .userRules, index: 0)
             row.title = String.localizedString("import_user_rules")
             row.imported = imported

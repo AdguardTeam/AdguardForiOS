@@ -59,28 +59,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // cb filters
         
-        var resultFilters: [DefaultCBFilterSettings] = []
-        for var filter in settings.defaultCbFilters ?? [] {
-            if filter.status == .enabled {
-
-                let cbFilter = filtersService.groups.flatMap { (group) -> [Filter] in
-                    return group.filters
-                }.first {
-                    $0.filterId == filter.id
-                }
-                
-                if cbFilter != nil {
-                    filtersService.setFilter(cbFilter!, enabled: true)
-                }
-                else {
-                    filter.status = .unsuccessful
-                }
-            }
-            
-            filter.status = .successful
-            
-            resultFilters.append(filter)
-        }
+        var resultFilters = applyCBFilters(settings.defaultCbFilters)
         
         let group = DispatchGroup()
         
@@ -132,9 +111,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         resultSettings.dnsFilters = resultDnsFilters
         
         // set dns server
-        if let dnsSettings = settings.dnsSetting {
+        if let dnsServerId = settings.dnsServerId {
             if settings.dnsStatus == .enabled {
-                setDnsServer(dnsSettings: dnsSettings)
+                setDnsServer(serverId: dnsServerId)
             }
             
             resultSettings.dnsStatus = .successful
@@ -150,45 +129,50 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         }
         
         // user rules
-        if let rules = settings.userRules {
-            if settings.userRulesStatus == .enabled {
-                let agRules = rules.map { ASDFilterRule(text: $0, enabled: true) }
-                
-                antibanner.import(agRules, filterId: NSNumber(value: ASDF_USER_FILTER_ID))
-            }
-            
-            resultSettings.userRulesStatus = .successful
+        if settings.userRulesStatus == .enabled {
+            applyCbRules(settings.userRules, override: settings.overrideUserRules ?? false)
         }
         
-        // whitelistRules
-        if let rules = settings.allowlistRules {
-            if settings.userRulesStatus == .enabled {
-                for rule in rules {
-                    group.enter()
-                    contentBlockerService.addWhitelistDomain(rule) { (error) in
-                        group.leave()
-                    }
-                }
-                
-                group.wait()
-                
-                resultSettings.userRulesStatus = .successful
-            }
-        }
-        
-        
+        resultSettings.userRulesStatus = .successful
         
         // dns rules
-        if let dnsRules = settings.dnsUserRules, settings.dnsRulesStatus == .enabled {
-            for rule in dnsRules {
-                dnsFiltersService.addBlacklistRule(rule)
-            }
+        if settings.dnsRulesStatus == .enabled {
+            applyDnsRules(settings.dnsUserRules, override: settings.overrideDnsUserRules ?? false)
         }
         
         resultSettings.dnsRulesStatus = .successful
         
         // tada
         callback(resultSettings)
+    }
+    
+    private func applyCBFilters(_ filters: [DefaultCBFilterSettings]?)-> [DefaultCBFilterSettings]{
+        
+        var resultFilters: [DefaultCBFilterSettings] = []
+        
+        for var filter in filters ?? [] {
+            if filter.status == .enabled {
+
+                let cbFilter = filtersService.groups.flatMap { (group) -> [Filter] in
+                    return group.filters
+                }.first {
+                    $0.filterId == filter.id
+                }
+                
+                if cbFilter != nil {
+                    filtersService.setFilter(cbFilter!, enabled: filter.enable)
+                }
+                else {
+                    filter.status = .unsuccessful
+                }
+            }
+            
+            filter.status = .successful
+            
+            resultFilters.append(filter)
+        }
+        
+        return resultFilters
     }
     
     private func subscribeCustomCBFilter(_ filter: CustomCBFilterSettings, callback: @escaping (Bool)->Void) {
@@ -210,6 +194,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             }
 
             if let parserResult = result {
+                if filter.name.count > 0 {
+                    parserResult.meta.name = filter.name
+                }
                 self.filtersService.addCustomFilter(parserResult)
                 callback(true)
                 return
@@ -230,33 +217,45 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         }
     }
     
-    private func setDnsServer(dnsSettings: DnsFilteringSettings) {
-        let providerId: Int
-        switch dnsSettings.name ?? .adguardDefault {
-        case .adguardDefault:
-            providerId = DnsProvidersService.adguardId
-        case .adguardFamily:
-            providerId = DnsProvidersService.adguardFamilyId
-        case .adguardNonFiltering:
-            providerId = DnsProvidersService.adguardNonFilteredId
-        }
+    private func setDnsServer(serverId: Int) {
         
-        let dnsProtocol: DnsProtocol
-        switch dnsSettings.dnsProtocol ?? .doh {
-        case .dns:
-            dnsProtocol = .dns
-        case .dnsCrypt:
-            dnsProtocol = .dnsCrypt
-        case .doh:
-            dnsProtocol = .doh
-        case .doq:
-            dnsProtocol = .doq
-        case .dot:
-            dnsProtocol = .dot
+        var server: DnsServerInfo? = nil
+        
+        for provider in dnsProvidersService.allProviders {
+            for dnsServer in provider.servers ?? [] {
+                if Int(dnsServer.serverId) == serverId {
+                    server = dnsServer
+                    break
+                }
+            }
         }
-        let provider = dnsProvidersService.allProviders.first { $0.id == providerId }
-        let server = provider?.servers?.first { $0.dnsProtocol == dnsProtocol }
         
         dnsProvidersService.activeDnsServer = server
+    }
+    
+    func applyDnsRules(_ rules: [String]?, override: Bool) {
+        
+        if override {
+            dnsFiltersService.userRules = []
+        }
+        
+        if let dnsRules = rules {
+            for rule in dnsRules {
+                dnsFiltersService.addBlacklistRule(rule)
+            }
+        }
+    }
+    
+    func applyCbRules(_ rules: [String]?, override: Bool) {
+        
+        if override {
+            antibanner.disableUserRules()
+        }
+        
+        for rule in rules ?? [] {
+            let agRule = ASDFilterRule(text: rule, enabled: true)
+            agRule.filterId = ASDF_USER_FILTER_ID as NSNumber
+            antibanner.add(agRule)
+        }
     }
 }

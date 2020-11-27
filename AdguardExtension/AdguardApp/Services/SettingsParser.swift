@@ -59,16 +59,6 @@ struct DnsFilterSettings: Codable {
     }
 }
 
-struct DnsFilteringSettings: Codable {
-    var name: DnsNameSetting?
-    var dnsProtocol: DnsProtocolSetting?
-    
-    enum CodingKeys:String, CodingKey  {
-        case name
-        case dnsProtocol = "protocol"
-    }
-}
-
 enum DnsNameSetting: String, Codable {
     typealias RawValue = String
     
@@ -99,11 +89,10 @@ struct Settings: Codable {
     var defaultCbFilters:[DefaultCBFilterSettings]?
     var customCbFilters:[CustomCBFilterSettings]?
     var dnsFilters:[DnsFilterSettings]?
-    var dnsSetting: DnsFilteringSettings?
+    var dnsServerId: Int?
     var license: String?
     var userRules: [String]?
     var dnsUserRules: [String]?
-    var allowlistRules: [String]?
     
     // import statuses
     var dnsStatus: ImportSettingStatus = .enabled
@@ -119,11 +108,10 @@ struct Settings: Codable {
         case defaultCbFilters = "cb_filter_default"
         case customCbFilters = "cb_filter_custom"
         case dnsFilters = "dns_filter_list"
-        case dnsSetting = "dns_filtering"
+        case dnsServerId = "dns_server_id"
         case license = "license"
         case userRules = "user_rules"
         case dnsUserRules = "dns_user_rules"
-        case allowlistRules = "allowlist_rules"
     }
 }
 
