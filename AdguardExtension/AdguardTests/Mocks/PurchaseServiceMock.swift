@@ -17,8 +17,14 @@
 */
 
 import Foundation
+import Setapp
 
 class PurchaseServiceMock: PurchaseServiceProtocol {
+    
+    var purchasedThroughSetapp: Bool = false
+    
+    func updateSetappState(subscription: SetappSubscription) {
+    }
     
     var activateLicesnseCalled = false
     

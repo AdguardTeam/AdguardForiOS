@@ -606,6 +606,7 @@
 		D0249689256F9DFC000EED34 /* ImportSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D024968D256F9DFC000EED34 /* ImportSettings.storyboard */; };
 		D024968A256F9DFC000EED34 /* ImportSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D024968D256F9DFC000EED34 /* ImportSettings.storyboard */; };
 		D024968B256F9DFC000EED34 /* ImportSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D024968D256F9DFC000EED34 /* ImportSettings.storyboard */; };
+		D024973E25714928000EED34 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D024973D25714928000EED34 /* Setapp */; };
 		D0288F2D2305AEF900A4EBEF /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D0288F2E2306974F00A4EBEF /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
 		D0288F30230697BA00A4EBEF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
@@ -1108,13 +1109,13 @@
 		D09E2A9E254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D09E2A9F254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D09E2AB1254AC36B002D6BC0 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		D09E2BCF25558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
+		D09E2BD025558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
+		D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
 		D09E2D30255D6AFF002D6BC0 /* SettingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */; };
 		D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */; };
 		D09E2D32255D6AFF002D6BC0 /* SettingsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */; };
 		D09E2D56255D7633002D6BC0 /* SettingsParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2D55255D7633002D6BC0 /* SettingsParserTest.swift */; };
-		D09E2BCF25558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
-		D09E2BD025558075002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
-		D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2BCE25558075002D6BC0 /* SetappService.swift */; };
 		D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
 		D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */; };
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
@@ -3328,9 +3329,9 @@
 		D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D09E2A0B2549A2EA002D6BC0 /* DnsProvidersMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigration.swift; sourceTree = "<group>"; };
 		D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
+		D09E2BCE25558075002D6BC0 /* SetappService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetappService.swift; sourceTree = "<group>"; };
 		D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsParser.swift; sourceTree = "<group>"; };
 		D09E2D55255D7633002D6BC0 /* SettingsParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsParserTest.swift; sourceTree = "<group>"; };
-		D09E2BCE25558075002D6BC0 /* SetappService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetappService.swift; sourceTree = "<group>"; };
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
@@ -3651,6 +3652,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D06E2FD5253F162F008BBD2D /* ContentBlockerConverter in Frameworks */,
+				D024973E25714928000EED34 /* Setapp in Frameworks */,
 				D093A97A2530A4020015351F /* AGDnsProxy.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5400,6 +5402,7 @@
 			name = TestHostApp;
 			packageProductDependencies = (
 				D06E2FD4253F162F008BBD2D /* ContentBlockerConverter */,
+				D024973D25714928000EED34 /* Setapp */,
 			);
 			productName = TestHostApp;
 			productReference = D0288F4923069D7200A4EBEF /* TestHostApp.app */;
@@ -11012,6 +11015,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D024973D25714928000EED34 /* Setapp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			productName = Setapp;
 		};
 		D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */ = {
 			isa = XCSwiftPackageProductDependency;
