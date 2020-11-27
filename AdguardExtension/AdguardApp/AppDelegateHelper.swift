@@ -45,6 +45,7 @@ class AppDelegateHelper: NSObject {
     lazy var dnsLogRecordsService: DnsLogRecordsServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -92,12 +93,7 @@ class AppDelegateHelper: NSObject {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
         if !Bundle.main.isPro {
-            SetappManager.shared.start(with: .default)
-            SetappManager.shared.logLevel = .debug
-            
-            SetappManager.shared.setLogHandle { (message: String, logLevel: SetappLogLevel) in
-              DDLogInfo("(Setapp) [\(logLevel)], \(message)")
-            }
+            setappService.start()
         }
         
         guard let mainTabBar = getMainTabController() else {
@@ -367,8 +363,8 @@ class AppDelegateHelper: NSObject {
         DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
         
         if !Bundle.main.isPro {
-            if SetappManager.shared.canOpen(url: url) {
-                return SetappManager.shared.open(url: url, options: options)
+            if setappService.openUrl(url, options: options) {
+                return true
             }
         }
             
