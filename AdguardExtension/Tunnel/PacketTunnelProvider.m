@@ -45,11 +45,15 @@
 
 #define V_REMOTE_ADDRESS                        @"127.1.1.1"
 
-#define V_INTERFACE_IPV4_ADDRESS                @"172.16.209.2"
+#define V_INTERFACE_IPV4_FULL_TUNNEL            @"172.16.209.2"
+#define V_INTERFACE_IPV4_FULL_TUNNEL_NO_ICON    @"172.16.209.3"
+#define V_INTERFACE_IPV4_SPLIT_TUNNEL           @"172.16.209.4"
 #define V_INTERFACE_IPV4_MASK                   @"255.255.255.252"
 #define V_INTERFACE_IPV4_FULL_MASK              @"255.255.255.255"
 
-#define V_INTERFACE_IPV6_ADDRESS                @"fd12:1:1:1::2"
+#define V_INTERFACE_IPV6_FULL_TUNNEL            @"fd12:1:1:1::2"
+#define V_INTERFACE_IPV6_FULL_TUNNEL_NO_ICON    @"fd12:1:1:1::3"
+#define V_INTERFACE_IPV6_SPLIT_TUNNEL           @"fd12:1:1:1::4"
 #define V_INTERFACE_IPV6_MASK                   @(64)
 #define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
@@ -552,13 +556,30 @@
     
     // exclude routes
     
+    NSString* ipV4Address = @"";
+    NSString* ipV6Address = @"";
+    switch (_tunnelMode) {
+        case APVpnManagerTunnelModeFull:
+            ipV4Address = V_INTERFACE_IPV4_FULL_TUNNEL;
+            ipV6Address = V_INTERFACE_IPV6_FULL_TUNNEL;
+            break;
+        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+            ipV4Address = V_INTERFACE_IPV4_FULL_TUNNEL_NO_ICON;
+            ipV6Address = V_INTERFACE_IPV6_FULL_TUNNEL_NO_ICON;
+            break;
+        case APVpnManagerTunnelModeSplit:
+            ipV4Address = V_INTERFACE_IPV4_SPLIT_TUNNEL;
+            ipV6Address = V_INTERFACE_IPV6_SPLIT_TUNNEL;
+            break;
+    }
+    
     NEIPv4Settings *ipv4 = [[NEIPv4Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV4_ADDRESS]
+                            initWithAddresses:@[ipV4Address]
                             subnetMasks:@[V_INTERFACE_IPV4_MASK]];
     
     
     NEIPv6Settings *ipv6 = [[NEIPv6Settings alloc]
-                            initWithAddresses:@[V_INTERFACE_IPV6_ADDRESS]
+                            initWithAddresses:@[ipV6Address]
                             networkPrefixLengths:@[V_INTERFACE_IPV6_MASK]];
     
     

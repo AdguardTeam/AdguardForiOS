@@ -63,6 +63,7 @@ class AppDelegateHelper: NSObject {
     private let openComplexProtection = "complexProtection"
     private let activateLicense = "license"
     private let subscribe = "subscribe"
+    private let openTunnelModeSettings = "openTunnelModeSettings"
     
     private var firstRun: Bool {
         get {
@@ -560,11 +561,26 @@ class AppDelegateHelper: NSObject {
                 tab.selectedViewController = navController
                 self.appDelegate.window.rootViewController = tab
                 
+            case (_, openTunnelModeSettings):
+                DDLogInfo("(AppDelegateHelper) openurl - open tunnel mode settings")
+                configuration.advancedMode = true
+                let settingsStoryBoard = UIStoryboard(name: "Settings", bundle: .main)
+                guard let settingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController,
+                    let advancedSettingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "AdvancedSettingsController") as? AdvancedSettingsController,
+                    let dnsModeController = settingsStoryBoard.instantiateViewController(withIdentifier: "DnsModeController") as? DnsModeController
+                else { return false }
+ 
+                mainMenuController.loadViewIfNeeded()
+                settingsController.loadViewIfNeeded()
+                advancedSettingsController.loadViewIfNeeded()
+                
+                navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+                
             default:
                 break
             }
-                
-            
         } else {
             DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
         }
