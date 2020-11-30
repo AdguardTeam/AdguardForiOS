@@ -96,6 +96,7 @@ class DnsProvidersController: UITableViewController {
             DispatchQueue.main.async {
                 guard let sSelf = self else { return }
                 sSelf.providers = sSelf.dnsProvidersService.allProviders
+                selectCellFunc()
                 sSelf.tableView.reloadData()
             }
         }
