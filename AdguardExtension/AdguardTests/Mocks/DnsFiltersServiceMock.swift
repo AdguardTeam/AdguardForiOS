@@ -53,6 +53,10 @@ class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
         
     }
     
+    func deleteAllFilters() {
+        filters = []
+    }
+    
     func updateFilters(networking: ACNNetworkingProtocol, callback: (() -> Void)?) {
         
     }

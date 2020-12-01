@@ -36,6 +36,14 @@ class FiltersServiceMock: FiltersServiceProtocol {
         filter?.enabled = enabled
     }
     
+    func disableAllFilters() {
+        for group in groups {
+            for filter in group.filters {
+                filter.enabled = false
+            }
+        }
+    }
+    
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         var group = groups.first { $0.groupId == FilterGroupId.custom }
         if group == nil {

@@ -804,8 +804,11 @@
 /* (ImportSettingsController) add custom dns filter format */
 "import_dns_filter_format" = "Add the custom DNS filter \"%@\"";
 
-/* (ImportSettingsController) add custom dns filter format */
-"import_cb_filter_format" = "Enable filter %@";
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Enable filter %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Disable filter %@";
 
 /* (ImportSettingsController) Unsuccessful */
 "import_unseccuessful" = "Unsuccessful";

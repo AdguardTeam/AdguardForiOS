@@ -255,4 +255,58 @@ class ImportSettingsTest: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func testOverrideDnsFilter() {
+        var settings = Settings()
+        settings.dnsFilters = [DnsFilterSettings(name: "new_dns_filter_name", url: "new_dns_filter_url")]
+        settings.overrideDnsFilters = true
+        
+        dnsFiltersService.filters = [DnsFilter(subscriptionUrl: "old_url", name: "old_name", date: Date(), enabled: true, desc: nil, importantDesc: nil, version: nil, rulesCount: nil, homepage: nil)]
+        
+        let expectation = XCTestExpectation()
+        
+        importService.applySettings(settings) { [unowned self] (settings) in
+            
+            let filters = self.dnsFiltersService.filters
+            XCTAssertEqual(filters.count, 1)
+            XCTAssertEqual(filters[0].name, "new_dns_filter_name")
+            XCTAssertEqual(filters[0].subscriptionUrl, "new_dns_filter_url")
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testOverrideCBFilters() {
+        
+        // set old filters settings
+        let group = Group(1)
+        let filter1 = Filter(filterId: 1, groupId: 1)
+        filter1.enabled = true
+        let filter2 = Filter(filterId: 2, groupId: 1)
+        filter2.enabled = false
+        group.filters = [filter1, filter2]
+        group.enabled = true
+        
+        filtersService.groups = [group]
+        
+        // fill new settings
+        var settings = Settings()
+        settings.defaultCbFilters = [DefaultCBFilterSettings(id: 2, enable: true)] // enable filter2
+        settings.overrideCbFilters = true
+        
+        let expectation = XCTestExpectation()
+        
+        importService.applySettings(settings) { [unowned self] (settings) in
+            
+            let groups = self.filtersService.groups
+            
+            XCTAssertEqual(groups[0].filters[0].enabled, false) // override works
+            XCTAssertEqual(groups[0].filters[1].enabled, true) // apply filter settings works
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }

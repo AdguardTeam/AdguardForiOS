@@ -59,7 +59,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // cb filters
         
-        var resultFilters = applyCBFilters(settings.defaultCbFilters)
+        var resultFilters = applyCBFilters(settings.defaultCbFilters, override: settings.overrideCbFilters ?? false)
         
         let group = DispatchGroup()
         
@@ -88,27 +88,10 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // dns filters
         
-        var resultDnsFilters: [DnsFilterSettings] = []
-        
-        for var filter in settings.dnsFilters ?? [] {
-            
-            if filter.status == .enabled {
-                group.enter()
-                
-                subscribeDnsFilter(filter) { (success) in
-                    filter.status = success ? .successful : .unsuccessful
-                    resultDnsFilters.append(filter)
-                    group.leave()
-                }
-            }
-            else {
-                resultDnsFilters.append(filter)
-            }
+        if let dnsFilters = settings.dnsFilters {
+            let resultDnsFilters = applyDnsFilters(dnsFilters, override: settings.overrideDnsFilters ?? false)
+            resultSettings.dnsFilters = resultDnsFilters
         }
-        
-        group.wait()
-        
-        resultSettings.dnsFilters = resultDnsFilters
         
         // set dns server
         if let dnsServerId = settings.dnsServerId {
@@ -146,7 +129,11 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         callback(resultSettings)
     }
     
-    private func applyCBFilters(_ filters: [DefaultCBFilterSettings]?)-> [DefaultCBFilterSettings]{
+    private func applyCBFilters(_ filters: [DefaultCBFilterSettings]?, override: Bool)-> [DefaultCBFilterSettings]{
+        
+        if override {
+            filtersService.disableAllFilters()
+        }
         
         var resultFilters: [DefaultCBFilterSettings] = []
         
@@ -204,6 +191,36 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             
             callback(false)
         }
+    }
+    
+    private func applyDnsFilters(_ filters: [DnsFilterSettings], override: Bool)->[DnsFilterSettings] {
+        
+        if override {
+            dnsFiltersService.deleteAllFilters()
+        }
+        
+        var resultDnsFilters: [DnsFilterSettings] = []
+        
+        let group = DispatchGroup()
+        for var filter in filters {
+            
+            if filter.status == .enabled {
+                group.enter()
+                
+                subscribeDnsFilter(filter) { (success) in
+                    filter.status = success ? .successful : .unsuccessful
+                    resultDnsFilters.append(filter)
+                    group.leave()
+                }
+            }
+            else {
+                resultDnsFilters.append(filter)
+            }
+        }
+        
+        group.wait()
+        
+        return resultDnsFilters
     }
     
     private func subscribeDnsFilter(_ filter: DnsFilterSettings, callback: @escaping (Bool)->Void) {

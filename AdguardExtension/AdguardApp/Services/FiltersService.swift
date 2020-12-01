@@ -131,6 +131,9 @@ protocol FiltersServiceProtocol {
     /* enable/disable filter */
     func setFilter(_ filter: Filter, enabled: Bool)
     
+    /* disable all filters */
+    func disableAllFilters()
+    
     /* add custom filter */
     func addCustomFilter(_ filter: AASCustomFilterParserResult)
     
@@ -420,6 +423,24 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         
         updateGroupSubtitle(group)
+        notifyChange()
+        processUpdate()
+    }
+    
+    func disableAllFilters() {
+        updateQueue.sync { [weak self] in
+            for group in groups {
+                for filter in group.filters {
+                    filter.enabled = false
+                    self?.enabledFilters[filter.filterId] = false
+                }
+            }
+        }
+        
+        for group in groups {
+            updateGroupSubtitle(group)
+        }
+        
         notifyChange()
         processUpdate()
     }

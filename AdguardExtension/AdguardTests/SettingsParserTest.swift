@@ -56,7 +56,7 @@ class SettingsParserTest: XCTestCase {
                           "url": "dns_filter_url"
                         }
                       ],
-                      "dns_filter_list_override": false,
+                      "dns_filter_list_override": true,
                       "user_rules": [
                         "rule1", "rule2"
                       ],
@@ -88,5 +88,6 @@ class SettingsParserTest: XCTestCase {
         XCTAssertEqual(settings?.dnsUserRules, ["dns_rule1", "dns_rule2"])
         XCTAssertEqual(settings?.dnsServerId, 33)
         XCTAssertEqual(settings?.overrideDnsUserRules, true)
+        XCTAssertEqual(settings?.overrideDnsFilters, true)
     }
 }

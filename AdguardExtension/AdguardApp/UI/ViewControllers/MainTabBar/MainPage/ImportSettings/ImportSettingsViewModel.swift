@@ -110,7 +110,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         // cb Filters
         for filter in settings.defaultCbFilters ?? [] {
             var row = SettingRow(type: .cbFilter, index: index)
-            let format = String.localizedString("import_cb_filter_format")
+            let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
             
             let localizations = antibanner.filtersI18n()
             let metagata = antibanner.metadata(forSubscribe: false)

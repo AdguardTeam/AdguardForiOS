@@ -84,6 +84,7 @@ struct Settings: Codable {
     var overrideCustomFilters:Bool?
     var overrideUserRules:Bool?
     var overrideDnsUserRules:Bool?
+    var overrideDnsFilters:Bool?
     
     // settings
     var defaultCbFilters:[DefaultCBFilterSettings]?
@@ -112,6 +113,7 @@ struct Settings: Codable {
         case license = "license"
         case userRules = "user_rules"
         case dnsUserRules = "dns_user_rules"
+        case overrideDnsFilters = "dns_filter_list_override"
     }
 }
 

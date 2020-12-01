@@ -62,6 +62,10 @@ protocol DnsFiltersServiceProtocol {
     // automaticaly updates vpn settings when changed
     func deleteFilter(_ filter: DnsFilter)
     
+    // deletes all filters from array of filters
+    // automaticaly updates vpn settings when changed
+    func deleteAllFilters()
+    
     // Updates filters with new meta
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?)
     
@@ -353,6 +357,17 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 DDLogError("(DsnFiltersService) deleteFilter error: \(error!)")
             }
         }
+    }
+    
+    func deleteAllFilters() {
+        
+        DDLogInfo("(DsnFiltersService) remove all filters")
+        
+        for filter in filters {
+            resources.save(Data(), toFileRelativePath: filterFileName(filterId: filter.id))
+        }
+        filters.removeAll()
+        saveFiltersMeta()
     }
     
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
