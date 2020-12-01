@@ -19,6 +19,7 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    
     var vpnManager: VpnManagerProtocol?
     
     var adguardDohServer: DnsServerInfo? { return nil }
@@ -59,5 +60,18 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     
     func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
         return true
-    }    
+    }
+    
+    func getServer(serverId: Int) -> DnsServerInfo? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return server
+                }
+            }
+        }
+        
+        return nil
+    }
+    
 }
