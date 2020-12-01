@@ -105,82 +105,75 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         
         rows = []
         
-        var index = 0
+        fillCBFilters(imported)
         
-        // cb Filters
-        for filter in settings.defaultCbFilters ?? [] {
-            var row = SettingRow(type: .cbFilter, index: index)
-            let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
-            
-            let localizations = antibanner.filtersI18n()
-            let metagata = antibanner.metadata(forSubscribe: false)
-            if let filterMeta = metagata?.filters?.first(where: { Int(truncating: $0.filterId) == filter.id }) {
-                let localization = localizations.localization(forFilter: filterMeta)
-                
-                let name = localization?.name ?? ""
-                row.title = String(format: format, name)
-            }
-            else {
-                DDLogError("unknown filter")
-            }
-            
+        fillCustomCBFilters(imported)
+        
+        fillDnsFilters(imported)
+        
+        fillDns(imported)
+        
+        fillLicense(imported)
+        
+        fillUserRules(imported)
+        
+        fillDnsRules(imported)
+    }
+    
+    fileprivate func fillDnsRules(_ imported: Bool) {
+        
+        if settings.dnsUserRules?.count ?? 0 > 0 {
+            var row = SettingRow(type: .dnsRules, index: 0)
+            row.title = String.localizedString("import_dns_user_rules")
             row.imported = imported
-            row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
+            row.enabled = settings.dnsRulesStatus == .enabled
+            row.successful = imported && settings.dnsRulesStatus == .successful
             
-            if imported && filter.status == .unsuccessful {
+            if imported && settings.dnsRulesStatus == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
-            index += 1
         }
+    }
+    
+    private func fillUserRules(_ imported: Bool) {
         
-        // custom cb filters
-        
-        index = 0
-        for filter in settings.customCbFilters ?? [] {
-            let titleFormat = String.localizedString("import_custom_cb_filter_format")
-            let title = String(format: titleFormat, filter.name)
-            
-            var row = SettingRow(type: .customCbFilter, index: index)
-            
-            row.title = title
+        let userRulesCount = settings.userRules?.count ?? 0
+        if userRulesCount > 0 {
+            var row = SettingRow(type: .userRules, index: 0)
+            row.title = String.localizedString("import_user_rules")
             row.imported = imported
-            row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
+            row.enabled = settings.userRulesStatus == .enabled
+            row.successful = imported && settings.userRulesStatus == .successful
             
-            if imported && filter.status == .unsuccessful {
+            if imported && settings.userRulesStatus == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
-            index += 1
         }
+    }
+    
+    private func fillLicense(_ imported: Bool) {
         
-        // dns filters
-        
-        index = 0
-        for filter in settings.dnsFilters ?? [] {
-        
-            let titleFormat = String.localizedString("import_dns_filter_format")
-            let title = String(format: titleFormat, filter.name)
-            var row = SettingRow(type: .dnsFilter, index: index)
-        
-            row.title = title
+        if settings.license?.count ?? 0 > 0 {
+            var row = SettingRow(type: .license, index: 0)
+            let format = String.localizedString("import_license_format")
+            row.title = String(format: format, settings.license!)
             row.imported = imported
-            row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
-
-            if imported && filter.status == .unsuccessful {
+            row.enabled = settings.licenseStatus == .enabled
+            row.successful = imported && settings.licenseStatus == .successful
+            
+            if imported && settings.licenseStatus == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
-            index += 1
         }
-        
-        // dns settings
+    }
+    
+    private func fillDns(_ imported: Bool) {
         
         if settings.dnsServerId != nil {
             var row = SettingRow(type: .dnsSettings, index: 0)
@@ -208,55 +201,84 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             
             rows.append(row)
         }
+    }
+    
+    private func fillDnsFilters(_ imported: Bool) {
         
-        // license
-        
-        if settings.license?.count ?? 0 > 0 {
-            var row = SettingRow(type: .license, index: 0)
-            let format = String.localizedString("import_license_format")
-            row.title = String(format: format, settings.license!)
-            row.imported = imported
-            row.enabled = settings.licenseStatus == .enabled
-            row.successful = imported && settings.licenseStatus == .successful
+        var index = 0
+        for filter in settings.dnsFilters ?? [] {
             
-            if imported && settings.licenseStatus == .unsuccessful {
+            let titleFormat = String.localizedString("import_dns_filter_format")
+            let title = String(format: titleFormat, filter.name)
+            var row = SettingRow(type: .dnsFilter, index: index)
+            
+            row.title = title
+            row.imported = imported
+            row.enabled = filter.status == .enabled
+            row.successful = imported && filter.status == .successful
+            
+            if imported && filter.status == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
+            index += 1
         }
+    }
+    
+    private func fillCustomCBFilters(_ imported: Bool) {
         
-        // user rules
-        
-        let userRulesCount = settings.userRules?.count ?? 0
-        if userRulesCount > 0 {
-            var row = SettingRow(type: .userRules, index: 0)
-            row.title = String.localizedString("import_user_rules")
-            row.imported = imported
-            row.enabled = settings.userRulesStatus == .enabled
-            row.successful = imported && settings.userRulesStatus == .successful
+        var index = 0
+        for filter in settings.customCbFilters ?? [] {
+            let titleFormat = String.localizedString("import_custom_cb_filter_format")
+            let title = String(format: titleFormat, filter.name)
             
-            if imported && settings.userRulesStatus == .unsuccessful {
+            var row = SettingRow(type: .customCbFilter, index: index)
+            
+            row.title = title
+            row.imported = imported
+            row.enabled = filter.status == .enabled
+            row.successful = imported && filter.status == .successful
+            
+            if imported && filter.status == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
+            index += 1
         }
+    }
+    
+    fileprivate func fillCBFilters(_ imported: Bool) {
         
-        // dns rules
+        var index = 0
         
-        if settings.dnsUserRules?.count ?? 0 > 0 {
-            var row = SettingRow(type: .dnsRules, index: 0)
-            row.title = String.localizedString("import_dns_user_rules")
-            row.imported = imported
-            row.enabled = settings.dnsRulesStatus == .enabled
-            row.successful = imported && settings.dnsRulesStatus == .successful
+        for filter in settings.defaultCbFilters ?? [] {
+            var row = SettingRow(type: .cbFilter, index: index)
+            let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
             
-            if imported && settings.dnsRulesStatus == .unsuccessful {
+            let localizations = antibanner.filtersI18n()
+            let metagata = antibanner.metadata(forSubscribe: false)
+            if let filterMeta = metagata?.filters?.first(where: { Int(truncating: $0.filterId) == filter.id }) {
+                let localization = localizations.localization(forFilter: filterMeta)
+                
+                let name = localization?.name ?? ""
+                row.title = String(format: format, name)
+            }
+            else {
+                DDLogError("unknown filter")
+            }
+            
+            row.imported = imported
+            row.enabled = filter.status == .enabled
+            row.successful = imported && filter.status == .successful
+            
+            if imported && filter.status == .unsuccessful {
                 row.subtitle = String.localizedString("import_unseccuessful")
             }
             
             rows.append(row)
+            index += 1
         }
     }
 }

@@ -137,14 +137,11 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         var resultFilters: [DefaultCBFilterSettings] = []
         
+        let allFilters = filtersService.groups.flatMap { $0.filters }
         for var filter in filters ?? [] {
             if filter.status == .enabled {
 
-                let cbFilter = filtersService.groups.flatMap { (group) -> [Filter] in
-                    return group.filters
-                }.first {
-                    $0.filterId == filter.id
-                }
+                let cbFilter = allFilters.first { $0.filterId == filter.id }
                 
                 if cbFilter != nil {
                     filtersService.setFilter(cbFilter!, enabled: filter.enable)
@@ -236,17 +233,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     
     private func setDnsServer(serverId: Int) {
         
-        var server: DnsServerInfo? = nil
-        
-        for provider in dnsProvidersService.allProviders {
-            for dnsServer in provider.servers ?? [] {
-                if Int(dnsServer.serverId) == serverId {
-                    server = dnsServer
-                    break
-                }
-            }
-        }
-        
+        let server = dnsProvidersService.getServer(serverId: serverId)
         dnsProvidersService.activeDnsServer = server
     }
     

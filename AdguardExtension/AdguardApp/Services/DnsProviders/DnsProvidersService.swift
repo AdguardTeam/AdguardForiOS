@@ -43,6 +43,7 @@ protocol DnsProvidersServiceProtocol {
     func isCustomProvider(_ provider: DnsProviderInfo)->Bool
     func isCustomServer(_ server: DnsServerInfo)->Bool
     func isActiveProvider(_ provider: DnsProviderInfo)->Bool
+    func getServer(serverId: Int)->DnsServerInfo?
     
     func reset()
 }
@@ -251,6 +252,18 @@ protocol DnsProvidersServiceProtocol {
         
         let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
         return "\(provider?.name ?? server.name) (\(protocolName))"
+    }
+    
+    func getServer(serverId: Int) -> DnsServerInfo? {
+        for provider in allProviders {
+            for dnsServer in provider.servers ?? [] {
+                if Int(dnsServer.serverId) == serverId {
+                    return dnsServer
+                }
+            }
+        }
+        
+        return nil
     }
     
     func reset() {
