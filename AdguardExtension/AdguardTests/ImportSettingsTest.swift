@@ -268,9 +268,12 @@ class ImportSettingsTest: XCTestCase {
         importService.applySettings(settings) { [unowned self] (settings) in
             
             let filters = self.dnsFiltersService.filters
-            XCTAssertEqual(filters.count, 1)
-            XCTAssertEqual(filters[0].name, "new_dns_filter_name")
-            XCTAssertEqual(filters[0].subscriptionUrl, "new_dns_filter_url")
+            XCTAssertEqual(filters.count, 2)
+            XCTAssertEqual(filters[1].name, "new_dns_filter_name")
+            XCTAssertEqual(filters[1].subscriptionUrl, "new_dns_filter_url")
+            
+            XCTAssertFalse(filters[0].enabled)
+            
             expectation.fulfill()
         }
         

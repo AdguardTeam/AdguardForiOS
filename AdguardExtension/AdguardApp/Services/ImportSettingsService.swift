@@ -193,7 +193,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private func applyDnsFilters(_ filters: [DnsFilterSettings], override: Bool)->[DnsFilterSettings] {
         
         if override {
-            dnsFiltersService.deleteAllFilters()
+            dnsFiltersService.disableAllFilters()
         }
         
         var resultDnsFilters: [DnsFilterSettings] = []
