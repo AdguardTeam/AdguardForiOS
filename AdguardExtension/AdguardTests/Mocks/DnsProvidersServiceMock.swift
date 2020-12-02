@@ -74,4 +74,7 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
         return nil
     }
     
+    func getServerName(serverId: Int) -> String? {
+        return ""
+    }
 }
