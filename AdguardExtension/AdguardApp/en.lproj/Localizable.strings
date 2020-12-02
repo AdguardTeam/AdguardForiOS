@@ -817,7 +817,7 @@
 "import_dns_settings_format" = "Select %@ DNS server";
 
 /* (ImportSettingsController) activate license format */
-"import_license_format" = "Activate license with %@ license key";
+"import_license_format" = "Activate premium features with %@ license key";
 
 /* (ImportSettingsController) add user rules title */
 "import_user_rules" = "Add User Rules";

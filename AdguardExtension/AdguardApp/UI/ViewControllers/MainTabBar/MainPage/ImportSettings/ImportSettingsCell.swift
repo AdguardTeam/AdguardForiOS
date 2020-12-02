@@ -63,6 +63,8 @@ class ImportSettingsCell: UITableViewCell {
         
         subtitleTopConstraint.constant = model.subtitle.count > 0 ? 7 : 0
         
+        checkButton.isEnabled = !model.imported
+        
         separator.isHidden = lastRow
         
         theme.setupTableCell(self)

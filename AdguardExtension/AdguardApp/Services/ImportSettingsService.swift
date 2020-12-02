@@ -59,7 +59,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // cb filters
         
-        var resultFilters = applyCBFilters(settings.defaultCbFilters, override: settings.overrideCbFilters ?? false)
+        let resultFilters = applyCBFilters(settings.defaultCbFilters, override: settings.overrideCbFilters ?? false)
         
         let group = DispatchGroup()
         
@@ -97,33 +97,29 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         if let dnsServerId = settings.dnsServerId {
             if settings.dnsStatus == .enabled {
                 setDnsServer(serverId: dnsServerId)
+                resultSettings.dnsStatus = .successful
             }
-            
-            resultSettings.dnsStatus = .successful
         }
         
         // license
         if let license = settings.license {
             if settings.licenseStatus == .enabled {
                 purchaseService.login(withLicenseKey: license)
+                resultSettings.licenseStatus = .successful
             }
-            
-            resultSettings.licenseStatus = .successful
         }
         
         // user rules
         if settings.userRulesStatus == .enabled {
             applyCbRules(settings.userRules, override: settings.overrideUserRules ?? false)
+            resultSettings.userRulesStatus = .successful
         }
-        
-        resultSettings.userRulesStatus = .successful
         
         // dns rules
         if settings.dnsRulesStatus == .enabled {
             applyDnsRules(settings.dnsUserRules, override: settings.overrideDnsUserRules ?? false)
+            resultSettings.dnsRulesStatus = .successful
         }
-        
-        resultSettings.dnsRulesStatus = .successful
         
         // tada
         callback(resultSettings)
@@ -145,13 +141,12 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
                 
                 if cbFilter != nil {
                     filtersService.setFilter(cbFilter!, enabled: filter.enable)
+                    filter.status = .successful
                 }
                 else {
                     filter.status = .unsuccessful
                 }
             }
-            
-            filter.status = .successful
             
             resultFilters.append(filter)
         }

@@ -175,22 +175,13 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
     
     private func fillDns(_ imported: Bool) {
         
-        if settings.dnsServerId != nil {
+        if let serverId = settings.dnsServerId {
             var row = SettingRow(type: .dnsSettings, index: 0)
+            
             let format = String.localizedString("import_dns_settings_format")
+            let  serverName = dnsProvidersService.getServerName(serverId: serverId)
             
-            var server: DnsServerInfo? = nil
-            
-            for provider in dnsProvidersService.allProviders {
-                for dnsServer in provider.servers ?? [] {
-                    if Int(dnsServer.serverId) == settings.dnsServerId {
-                        server = dnsServer
-                        break
-                    }
-                }
-            }
-            
-            row.title = String(format:format, server?.name ?? "")
+            row.title = String(format:format, serverName ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.successful = imported && settings.dnsStatus == .successful

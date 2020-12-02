@@ -44,6 +44,7 @@ protocol DnsProvidersServiceProtocol {
     func isCustomServer(_ server: DnsServerInfo)->Bool
     func isActiveProvider(_ provider: DnsProviderInfo)->Bool
     func getServer(serverId: Int)->DnsServerInfo?
+    func getServerName(serverId: Int)->String?
     
     func reset()
 }
@@ -246,19 +247,26 @@ protocol DnsProvidersServiceProtocol {
         
         let provider = activeDnsProvider
         
-        if isCustomServer(server) {
-            return provider?.name ?? server.name
-        }
-        
-        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
-        return "\(provider?.name ?? server.name) (\(protocolName))"
+        return createServerName(server: server, provider: provider)
     }
     
     func getServer(serverId: Int) -> DnsServerInfo? {
         for provider in allProviders {
-            for dnsServer in provider.servers ?? [] {
-                if Int(dnsServer.serverId) == serverId {
-                    return dnsServer
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return server
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    func getServerName(serverId: Int) -> String? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return createServerName(server: server, provider: provider)
                 }
             }
         }
@@ -280,6 +288,15 @@ protocol DnsProvidersServiceProtocol {
     }
     
     // MARK: - private methods
+    
+    private func createServerName(server: DnsServerInfo, provider: DnsProviderInfo?)->String {
+        if isCustomServer(server) {
+            return provider?.name ?? server.name
+        }
+        
+        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
+        return "\(provider?.name ?? server.name) (\(protocolName))"
+    }
     
     private func serverWithId(_ id: String)->DnsServerInfo? {
         for provider in allProviders {
