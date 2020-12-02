@@ -190,6 +190,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     @IBOutlet weak var updatedLabel: ThemableLabel!
     @IBOutlet weak var rulesCountLabel: ThemableLabel!
     @IBOutlet weak var websiteLabel: ThemableLabel!
+    @IBOutlet weak var subscriptionURLLabel: ThemableLabel!
     @IBOutlet weak var tagsView: FilterTagsView!
     @IBOutlet weak var enabledLabel: ThemableLabel!
     
@@ -217,6 +218,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         updated,
         rulesCount,
         website,
+        subscriptionURL,
         tags
     }
     
@@ -284,6 +286,10 @@ class FilterDetailsTableCotroller : UITableViewController {
         case .website:
             return filter.homepage == nil || filter.homepage?.count == 0 ? 0.0 : calculatedHeight
             
+        case .subscriptionURL:
+            guard filter.editable && filter.removable else { return 0 }
+            return calculatedHeight
+            
         case .tags:
             if let safariFilter = filter as? Filter {
                 let tagsCount = (safariFilter.tags?.count ?? 0) + (safariFilter.langs?.count ?? 0)
@@ -344,6 +350,13 @@ class FilterDetailsTableCotroller : UITableViewController {
                 [.foregroundColor: theme.grayTextColor,
                  .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
+        }
+        
+        if filter.subscriptionURL != nil {
+            let subscriptionURL = NSAttributedString(string: filter.subscriptionURL!, attributes:
+                                                        [.foregroundColor: theme.grayTextColor,
+                                                         .underlineStyle: NSUnderlineStyle.single.rawValue])
+            subscriptionURLLabel.attributedText = subscriptionURL
         }
     }
 }

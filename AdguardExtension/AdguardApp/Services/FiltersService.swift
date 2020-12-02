@@ -28,6 +28,7 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     var version: String?
     var enabled: Bool = false
     var homepage: String?
+    var subscriptionURL: String?
     var tags:[(name: String,heighlighted: Bool)]?
     var langs:[(name: String, heighlighted: Bool)]?
     var rulesCount: Int?
@@ -62,6 +63,7 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
         copy.version = version
         copy.enabled = enabled
         copy.homepage = homepage
+        copy.subscriptionURL = subscriptionURL
         copy.tags = tags
         copy.langs = langs
         copy.rulesCount = rulesCount
@@ -434,6 +436,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             newFilter.name = filter.meta.name
             newFilter.desc = filter.meta.descr
             newFilter.homepage = filter.meta.homepage
+            newFilter.subscriptionURL = filter.meta.subscriptionUrl
             newFilter.version = filter.meta.version
             newFilter.enabled = true
             newFilter.rulesCount = filter.rules.count
@@ -569,6 +572,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.updateDate = filterMeta.updateDate
                 filter.enabled = group.enabled && filterMeta.enabled.boolValue
                 filter.homepage = filterMeta.homepage
+                filter.subscriptionURL = filterMeta.subscriptionUrl
                 filter.displayNumber = filterMeta.displayNumber.intValue
                 
                 if filter.groupId == FilterGroupId.custom {
