@@ -399,6 +399,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 
                 guard let url = URL(string: filter.subscriptionUrl ?? "") else { return }
                 
+                group.enter()
+                
                 self.getDnsFilter(name: filter.name, url: url, enabled: filter.enabled, networking: networking) { (dnsFilter, data) in
                     
                     defer {
