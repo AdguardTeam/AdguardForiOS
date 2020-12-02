@@ -138,5 +138,8 @@ class StartupService : NSObject{
         
         let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
         locator.addService(service: chartViewModel)
+        
+        let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService)
+        locator.addService(service: setappService)
     }
 }

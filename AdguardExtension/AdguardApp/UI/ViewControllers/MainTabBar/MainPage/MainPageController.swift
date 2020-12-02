@@ -179,6 +179,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateTheme()
         chartModel.chartView = chartView
         
         addObservers()
@@ -206,8 +207,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        updateTheme()
         observeProStatus()
         updateProtectionStates()
         updateProtectionStatusText()

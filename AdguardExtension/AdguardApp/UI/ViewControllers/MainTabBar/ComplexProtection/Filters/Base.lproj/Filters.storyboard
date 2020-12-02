@@ -1369,15 +1369,72 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="VyO-5G-9uw">
+                                        <rect key="frame" x="0.0" y="292" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VyO-5G-9uw" id="zzL-wD-bes">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subscription URL:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7x-wu-TBi" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="382" height="10"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhA-N3-gxe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="28" width="382" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="dhA-N3-gxe" firstAttribute="top" secondItem="O7x-wu-TBi" secondAttribute="bottom" constant="2" id="4jV-fn-CTS"/>
+                                                <constraint firstItem="O7x-wu-TBi" firstAttribute="leading" secondItem="zzL-wD-bes" secondAttribute="leading" constant="16" id="BHK-FI-rn5">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="dhA-N3-gxe" secondAttribute="bottom" constant="16" id="bG3-ao-1KR">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="dhA-N3-gxe" secondAttribute="trailing" constant="16" id="pGM-zM-cIo">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="O7x-wu-TBi" firstAttribute="top" secondItem="zzL-wD-bes" secondAttribute="top" constant="16" id="rUx-5c-del">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="dhA-N3-gxe" firstAttribute="leading" secondItem="zzL-wD-bes" secondAttribute="leading" constant="16" id="tE6-16-NAk">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="O7x-wu-TBi" secondAttribute="trailing" constant="16" id="weH-pl-2o0">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XO3-KH-ugR">
-                                        <rect key="frame" x="0.0" y="292" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="336" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XO3-KH-ugR" id="iEh-3y-D01">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view verifyAmbiguity="ignoreSizes" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BT-x0-ZWl" customClass="FilterTagsView" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="24" width="552" height="20"/>
+                                                    <rect key="frame" x="16" y="16" width="568" height="12"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
@@ -1412,6 +1469,7 @@
                         <outlet property="enabledLabel" destination="5YF-9b-NN6" id="L36-XP-dOk"/>
                         <outlet property="enabledSwitch" destination="pqR-bN-Obz" id="uXI-Wi-3uz"/>
                         <outlet property="rulesCountLabel" destination="iog-ge-WPs" id="mHC-2v-vIt"/>
+                        <outlet property="subscriptionURLLabel" destination="dhA-N3-gxe" id="uTb-zh-V8B"/>
                         <outlet property="tagsView" destination="4BT-x0-ZWl" id="05W-Yg-IVW"/>
                         <outlet property="updatedLabel" destination="aOk-ja-R8M" id="hEa-jd-LU4"/>
                         <outlet property="versionLabel" destination="Kj1-fo-RcS" id="lMW-Tc-222"/>
@@ -1427,6 +1485,8 @@
                         <outletCollection property="themableLabels" destination="iog-ge-WPs" collectionClass="NSMutableArray" id="QCT-2j-cJh"/>
                         <outletCollection property="themableLabels" destination="Ve5-DF-RNB" collectionClass="NSMutableArray" id="2cQ-fQ-EVb"/>
                         <outletCollection property="themableLabels" destination="hKk-Ss-A5t" collectionClass="NSMutableArray" id="6Aa-do-yd0"/>
+                        <outletCollection property="themableLabels" destination="O7x-wu-TBi" collectionClass="NSMutableArray" id="zQf-1B-Q8H"/>
+                        <outletCollection property="themableLabels" destination="dhA-N3-gxe" collectionClass="NSMutableArray" id="jRk-Y7-hn7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfi-tc-Bik" userLabel="First Responder" sceneMemberID="firstResponder"/>

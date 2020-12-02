@@ -46,6 +46,7 @@ class AppDelegateHelper: NSObject {
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
     lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -63,6 +64,7 @@ class AppDelegateHelper: NSObject {
     private let openComplexProtection = "complexProtection"
     private let activateLicense = "license"
     private let subscribe = "subscribe"
+    private let openTunnelModeSettings = "openTunnelModeSettings"
     
     private var firstRun: Bool {
         get {
@@ -91,12 +93,7 @@ class AppDelegateHelper: NSObject {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
         if !Bundle.main.isPro {
-            SetappManager.shared.start(with: .default)
-            SetappManager.shared.logLevel = .debug
-            
-            SetappManager.shared.setLogHandle { (message: String, logLevel: SetappLogLevel) in
-              DDLogInfo("(Setapp) [\(logLevel)], \(message)")
-            }
+            setappService.start()
         }
         
         guard let mainTabBar = getMainTabController() else {
@@ -369,8 +366,8 @@ class AppDelegateHelper: NSObject {
         DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
         
         if !Bundle.main.isPro {
-            if SetappManager.shared.canOpen(url: url) {
-                return SetappManager.shared.open(url: url, options: options)
+            if setappService.openUrl(url, options: options) {
+                return true
             }
         }
             
@@ -568,11 +565,26 @@ class AppDelegateHelper: NSObject {
                 tab.selectedViewController = navController
                 self.appDelegate.window.rootViewController = tab
                 
+            case (_, openTunnelModeSettings):
+                DDLogInfo("(AppDelegateHelper) openurl - open tunnel mode settings")
+                configuration.advancedMode = true
+                let settingsStoryBoard = UIStoryboard(name: "Settings", bundle: .main)
+                guard let settingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController,
+                    let advancedSettingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "AdvancedSettingsController") as? AdvancedSettingsController,
+                    let dnsModeController = settingsStoryBoard.instantiateViewController(withIdentifier: "DnsModeController") as? DnsModeController
+                else { return false }
+ 
+                mainMenuController.loadViewIfNeeded()
+                settingsController.loadViewIfNeeded()
+                advancedSettingsController.loadViewIfNeeded()
+                
+                navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
+                tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+                
             default:
                 break
             }
-                
-            
         } else {
             DDLogError("(AppDelegate) Can't add rule because mainController is not found.");
         }
