@@ -210,7 +210,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     // MARK: - constants
     
     // rows
-    enum Row: Int {
+    private enum Row: Int {
         
     case enabled = 0,
         description,
@@ -287,7 +287,7 @@ class FilterDetailsTableCotroller : UITableViewController {
             return filter.homepage == nil || filter.homepage?.count == 0 ? 0.0 : calculatedHeight
             
         case .subscriptionURL:
-            guard filter.editable && filter.removable else { return 0 }
+            guard filter.editable || filter.removable else { return 0 }
             return calculatedHeight
             
         case .tags:
@@ -309,6 +309,12 @@ class FilterDetailsTableCotroller : UITableViewController {
         guard let row = Row(rawValue: indexPath.row) else { return }
         if row == .website {
             if let url = URL(string: filter.homepage ?? "") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        if row == .subscriptionURL {
+            if let url = URL(string: filter.subscriptionUrl ?? "") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
@@ -345,18 +351,18 @@ class FilterDetailsTableCotroller : UITableViewController {
         theme.setupSeparators(separators)
         theme.setupSwitch(enabledSwitch)
         
-        if filter.homepage != nil {
-            let homepage = NSAttributedString(string: filter.homepage!, attributes:
+        if let homepage = filter.homepage {
+            let homepage = NSAttributedString(string: homepage, attributes:
                 [.foregroundColor: theme.grayTextColor,
                  .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
         }
         
-        if filter.subscriptionURL != nil {
-            let subscriptionURL = NSAttributedString(string: filter.subscriptionURL!, attributes:
+        if let subscriptionUrl = filter.subscriptionUrl {
+            let subscriptionUrl = NSAttributedString(string: subscriptionUrl, attributes:
                                                         [.foregroundColor: theme.grayTextColor,
                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])
-            subscriptionURLLabel.attributedText = subscriptionURL
+            subscriptionURLLabel.attributedText = subscriptionUrl
         }
     }
 }

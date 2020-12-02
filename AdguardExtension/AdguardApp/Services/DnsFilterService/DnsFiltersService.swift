@@ -110,7 +110,6 @@ class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
     var version: String?
     var rulesCount: Int?
     var homepage: String?
-    var subscriptionURL: String?
     var removable: Bool {
         get {
             // Check if filter id is in range of custom filters
