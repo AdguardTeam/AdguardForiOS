@@ -45,12 +45,12 @@ class ImportSettingsCell: UITableViewCell {
         
         if model.imported {
             let image: UIImage?
-            switch (model.enabled, model.successful) {
-            case (_, true):
+            switch (model.importStatus) {
+            case (.successfull):
                 image = UIImage(named: "logocheck")
-            case (true, false):
+            case (.unsucessfull):
                 image = UIImage(named: "errorAttention")
-            case (false, _):
+            case (.notImported):
                 image = UIImage(named: "cross")
             }
             

@@ -92,7 +92,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
         
         if licenseKey != nil && !licenseKey!.isEmpty {
-            purchaseService.login(withLicenseKey: licenseKey!)
+            purchaseService.login(withLicenseKey: licenseKey!) {_ in }
         }
     }
     
@@ -192,7 +192,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             purchaseService.login(name: name!, password: password!, code2fa: nil)
         }
         else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
-            purchaseService.login(withLicenseKey: name!)
+            purchaseService.login(withLicenseKey: name!) {_ in }
         }
         else {
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil), completion: nil)

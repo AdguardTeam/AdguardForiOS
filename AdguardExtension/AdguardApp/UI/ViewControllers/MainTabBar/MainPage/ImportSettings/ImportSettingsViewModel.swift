@@ -28,15 +28,47 @@ enum ImportRowType {
     case dnsRules
 }
 
+enum ImportStatus {
+    case notImported
+    case successfull
+    case unsucessfull
+}
+
 struct SettingRow {
     var enabled: Bool = true
     var imported: Bool = false
-    var successful: Bool = false
+    var importStatus: ImportStatus = .notImported
     var title: String = ""
     var subtitle: String = ""
     
     var type: ImportRowType
     var index: Int
+    
+    mutating func setImportStatus(imported: Bool, status: ImportSettingStatus) {
+        
+        var result: ImportStatus = .notImported
+        if imported {
+            switch status {
+            case .disabled:
+                result = .notImported
+            case .successful:
+                result = .successfull
+            case .unsuccessful:
+                result = .unsucessfull
+            default:
+                result = .notImported
+            }
+        }
+        else {
+            result = .notImported
+        }
+        
+        self.importStatus = result
+        
+        if result == .unsucessfull {
+            self.subtitle = String.localizedString("import_unseccuessful")
+        }
+    }
 }
 
 protocol ImportSettingsViewModelProtocol {
@@ -127,11 +159,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = String.localizedString("import_dns_user_rules")
             row.imported = imported
             row.enabled = settings.dnsRulesStatus == .enabled
-            row.successful = imported && settings.dnsRulesStatus == .successful
-            
-            if imported && settings.dnsRulesStatus == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: settings.dnsRulesStatus)
             
             rows.append(row)
         }
@@ -145,11 +173,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = String.localizedString("import_user_rules")
             row.imported = imported
             row.enabled = settings.userRulesStatus == .enabled
-            row.successful = imported && settings.userRulesStatus == .successful
-            
-            if imported && settings.userRulesStatus == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: settings.userRulesStatus)
             
             rows.append(row)
         }
@@ -163,11 +187,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = String(format: format, settings.license!)
             row.imported = imported
             row.enabled = settings.licenseStatus == .enabled
-            row.successful = imported && settings.licenseStatus == .successful
-            
-            if imported && settings.licenseStatus == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: settings.licenseStatus)
             
             rows.append(row)
         }
@@ -184,11 +204,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = String(format:format, serverName ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
-            row.successful = imported && settings.dnsStatus == .successful
-            
-            if imported && settings.dnsStatus == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: settings.dnsStatus)
             
             rows.append(row)
         }
@@ -206,11 +222,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
-            
-            if imported && filter.status == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: filter.status)
             
             rows.append(row)
             index += 1
@@ -229,11 +241,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
-            
-            if imported && filter.status == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: filter.status)
             
             rows.append(row)
             index += 1
@@ -262,11 +270,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             
             row.imported = imported
             row.enabled = filter.status == .enabled
-            row.successful = imported && filter.status == .successful
-            
-            if imported && filter.status == .unsuccessful {
-                row.subtitle = String.localizedString("import_unseccuessful")
-            }
+            row.setImportStatus(imported: imported, status: filter.status)
             
             rows.append(row)
             index += 1

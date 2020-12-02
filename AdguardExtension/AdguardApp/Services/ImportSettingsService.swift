@@ -104,8 +104,12 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         // license
         if let license = settings.license {
             if settings.licenseStatus == .enabled {
-                purchaseService.login(withLicenseKey: license)
-                resultSettings.licenseStatus = .successful
+                group.enter()
+                purchaseService.login(withLicenseKey: license) { (success) in
+                    resultSettings.licenseStatus = success ? .successful :.unsuccessful
+                    group.leave()
+                }
+                group.wait()
             }
         }
         
