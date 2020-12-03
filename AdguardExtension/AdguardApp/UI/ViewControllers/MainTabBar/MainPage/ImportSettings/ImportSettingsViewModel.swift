@@ -181,7 +181,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
     
     private func fillLicense(_ imported: Bool) {
         
-        if settings.license?.count ?? 0 > 0 {
+        if !Bundle.main.isPro && settings.license?.count ?? 0 > 0 {
             var row = SettingRow(type: .license, index: 0)
             let format = String.localizedString("import_license_format")
             row.title = String(format: format, settings.license!)
@@ -199,7 +199,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             var row = SettingRow(type: .dnsSettings, index: 0)
             
             let format = String.localizedString("import_dns_settings_format")
-            let  serverName = dnsProvidersService.getServerName(serverId: serverId)
+            let serverName = serverId == 0 ? String.localizedString("default_dns_server_name") : dnsProvidersService.getServerName(serverId: serverId)
             
             row.title = String(format:format, serverName ?? "")
             row.imported = imported

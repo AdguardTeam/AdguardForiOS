@@ -50,7 +50,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         super.viewDidLayoutSubviews()
         
         let contentHeight = tableView.contentSize.height
-        let maxHeight = view.frame.size.height - 150
+        let maxHeight = view.frame.size.height - 250
         tableViewHeightConstraint.constant = min(contentHeight, maxHeight)
     }
     

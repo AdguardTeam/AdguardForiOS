@@ -103,7 +103,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // license
         if let license = settings.license {
-            if settings.licenseStatus == .enabled {
+            if !Bundle.main.isPro && settings.licenseStatus == .enabled {
                 group.enter()
                 purchaseService.login(withLicenseKey: license) { (success) in
                     resultSettings.licenseStatus = success ? .successful :.unsuccessful
