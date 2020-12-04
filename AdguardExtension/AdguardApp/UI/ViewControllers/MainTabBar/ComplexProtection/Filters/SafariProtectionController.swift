@@ -62,6 +62,9 @@ class SafariProtectionController: UITableViewController {
     required init?(coder: NSCoder) {
         blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo)
         super.init(coder: coder)
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,9 +85,6 @@ class SafariProtectionController: UITableViewController {
         super.viewDidLoad()
         
         setupBackButton()
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
         
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }

@@ -130,6 +130,10 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
         
         if #available(iOS 14.0, *) {
             addObservers()
+            
+            getDnsManagerStatus({ [weak self] isInstalled, isEnabled in
+                self?.managerIsEnabled = isInstalled && isEnabled
+            })
         }
     }
     

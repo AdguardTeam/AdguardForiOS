@@ -45,6 +45,8 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var model: NetworkSettingsModelProtocol? = nil
 
@@ -52,7 +54,7 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        model = NetworkSettingsModel(networkSettingsService: networkSettingsService, vpnManager: vpnManager)
+        model = NetworkSettingsModel(networkSettingsService: networkSettingsService, vpnManager: vpnManager, resources: resources, nativeProviders: nativeProviders)
         model?.delegate = self
     }
     
@@ -78,7 +80,6 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         } else {
             model?.filterWifiDataEnabled = enabled
         }
-        vpnManager.updateSettings(completion: nil)
     }
     
     @IBAction func exeptionStateAction(_ sender: UIButton) {

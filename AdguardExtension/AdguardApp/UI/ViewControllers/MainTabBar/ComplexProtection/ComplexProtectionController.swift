@@ -100,6 +100,11 @@ class ComplexProtectionController: UITableViewController {
     
     // MARK: - View Controller life cycle
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -117,8 +122,6 @@ class ComplexProtectionController: UITableViewController {
         vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in
             self?.updateVpnInfo()
         }
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
         freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()

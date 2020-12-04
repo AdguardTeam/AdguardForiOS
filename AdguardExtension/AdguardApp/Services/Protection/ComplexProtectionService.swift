@@ -113,6 +113,17 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 resources.systemProtectionEnabled = proStatus
             }
         }
+        
+        if #available(iOS 14.0, *) {
+            if resources.dnsImplementation == .native {
+                if enabled {
+                    nativeProvidersService.saveDnsManager { _ in }
+                } else {
+                    nativeProvidersService.removeDnsManager { _ in }
+                }
+            }
+        }
+        
         // We can't control native DNS configuration, we can only check it's state
         let shouldUpdateSystemProtection = resources.dnsImplementation == .adGuard
         

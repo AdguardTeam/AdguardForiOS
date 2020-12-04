@@ -41,7 +41,13 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterWifiDataEnabled = newValue
-            vpnManager.updateSettings(completion: nil)
+            if resources.dnsImplementation == .adGuard {
+                vpnManager.updateSettings(completion: nil)
+            } else {
+                if #available(iOS 14.0, *) {
+                    nativeProviders.saveDnsManager { _ in }
+                }
+            }
         }
     }
     
@@ -51,7 +57,13 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterMobileDataEnabled = newValue
-            vpnManager.updateSettings(completion: nil)
+            if resources.dnsImplementation == .adGuard {
+                vpnManager.updateSettings(completion: nil)
+            } else {
+                if #available(iOS 14.0, *) {
+                    nativeProviders.saveDnsManager { _ in }
+                }
+            }
         }
     }
     
@@ -69,12 +81,16 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     
     // MARK: - Private variables
     
-    private var networkSettingsService: NetworkSettingsServiceProtocol
-    private var vpnManager: VpnManagerProtocol
+    private let networkSettingsService: NetworkSettingsServiceProtocol
+    private let vpnManager: VpnManagerProtocol
+    private let resources: AESharedResourcesProtocol
+    private let nativeProviders: NativeProvidersServiceProtocol
     
-    init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol) {
+    init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol, nativeProviders: NativeProvidersServiceProtocol) {
         self.networkSettingsService = networkSettingsService
         self.vpnManager = vpnManager
+        self.resources = resources
+        self.nativeProviders = nativeProviders
     }
     
     // MARK: - Global methods
