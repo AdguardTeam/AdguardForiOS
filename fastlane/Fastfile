@@ -9,6 +9,7 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+require 'spaceship'
 
 default_platform(:ios)
 
@@ -125,14 +126,33 @@ platform :ios do
 end
 
 lane :prepare do
-  match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
 end
 
 # Run this only if you need to generate certs and provisioning profiles
 lane :generate do
-  match(type: "development", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "appstore", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "adhoc", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  match(type: "development", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "appstore", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "adhoc", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+end
+
+# Prepare fastlane session for CI
+lane :auth do
+  desc "Authorize the apple ID in order to acquire new session"
+  Spaceship::SpaceauthRunner.new(username: ENV['APPLE_ID']).run
+
+  # It seems that the session that is printed by fastlane works for just 30 minutes
+  # The reason might be that only a limited set of cookies are printed by default.
+  # Instead, we're using all cookies obtained by spaceauth:
+  # https://github.com/fastlane/fastlane/issues/14301#issuecomment-479281223
+
+  UI.message("Reading the spaceship cookie value")
+  file_data = File.read("#{ENV['HOME']}/.fastlane/spaceship/#{ENV['APPLE_ID']}/cookie")
+  cookie = file_data.gsub("\n", "\\n")
+
+  UI.message("Ignore the previous FASTLANE_SESSION, use the new one below")
+  UI.message("Pass the following via the FASTLANE_SESSION environment variable:")
+  UI.message("#{cookie}".cyan.underline);
 end

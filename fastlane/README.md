@@ -25,6 +25,11 @@ fastlane prepare
 fastlane generate
 ```
 
+### auth
+```
+fastlane auth
+```
+
 
 ----
 
