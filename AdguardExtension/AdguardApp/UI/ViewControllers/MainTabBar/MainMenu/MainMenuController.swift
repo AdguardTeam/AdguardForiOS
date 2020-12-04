@@ -21,7 +21,7 @@ import Foundation
 class MainMenuController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
+    private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private var dnsProviders: DnsProvidersService = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!

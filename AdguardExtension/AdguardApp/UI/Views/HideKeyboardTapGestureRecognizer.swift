@@ -16,12 +16,23 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import UIKit
 
-extension UIColor {
-    struct AdGuardColor {
-        static let green = UIColor(hexString: "#67b279")
-        static let red = UIColor(hexString: "df3812")
-        static let yellow = UIColor(hexString: "#eb9300")
+/**
+ Custom gesture recognizer for hiding keyboard that can ignore some views
+ */
+class HideKeyboardTapGestureRecognizer: UITapGestureRecognizer, UIGestureRecognizerDelegate {
+    var viewsToIgnore: [UIView] = []
+    
+    override init(target: Any?, action: Selector?) {
+        super.init(target: target, action: action)
+        delegate = self
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchedView = touch.view {
+            return !viewsToIgnore.contains(touchedView)
+        }
+        return true
     }
 }

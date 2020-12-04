@@ -18,40 +18,6 @@
 
 import Foundation
 
-// CHANGE IT'S PLACE
-
-protocol FeedBackProtocol {
-    var applicationId: String? { get }
-    var version: String? { get }
-    var email: String? { get }
-    var language: String? { get }
-    var subject: String? { get }
-    var description: String? { get }
-    var applicationState: String? { get }
-    var appName: String { get }
-}
-
-class FeedBack: FeedBackProtocol {
-    var applicationId: String?
-    var version: String?
-    var email: String?
-    var language: String?
-    var subject: String?
-    var description: String?
-    var applicationState: String?
-    var appName: String = "adguard_ios"
-    
-    init(applicationId: String?, version: String?, email: String?, language: String?, subject: String?, description: String?, applicationState: String?) {
-        self.applicationId = applicationId
-        self.version = version
-        self.email = email
-        self.language = language
-        self.subject = subject
-        self.description = description
-        self.applicationState = applicationState
-    }
-}
-
 final class SendFeedbackRequest: RequestProtocol {
     
     private let feedBack: FeedBackProtocol
@@ -79,7 +45,8 @@ final class SendFeedbackRequest: RequestProtocol {
                 "subject" : feedBack.subject ?? "",
                 "description" : feedBack.description ?? "",
                 "applicationState" : feedBack.applicationState ?? "",
-                "app_name" : feedBack.appName
+                "app_name" : feedBack.appName,
+                "debugInfo" : feedBack.debugInfo ?? ""
             ]
             request.httpBody = parameters.percentEncoded()
             return request

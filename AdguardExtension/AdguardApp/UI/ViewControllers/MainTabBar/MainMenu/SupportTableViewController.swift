@@ -24,7 +24,8 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let support: AESSupportProtocol = ServiceLocator.shared.getService()!
+    private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Observers
     private var themeToken: NotificationToken?
@@ -35,11 +36,16 @@ class SupportTableViewController: UITableViewController {
     private let optionsSection = 1
     
     private let videoTutorialRow = 0
-    private let reportBugRow = 1
+    private let faqRow = 1
     private let reportIncorrectBlockingRow = 2
-    private let featureRequestRow = 3
-    private let rateAppRow = 4
-    private let exportLogsRow = 5
+    private let reportBugRow = 3
+    private let leaveFeedbackRow = 4
+    private let discussRow = 5
+    private let rateAppRow = 6
+    private let exportLogsRow = 7
+    
+    private let bugReportSegueId = "BugReportSegueId"
+    private var reportType: ReportType = .bugReport
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +55,12 @@ class SupportTableViewController: UITableViewController {
         
         themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
             self?.updateTheme()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == bugReportSegueId, let bugReportVC = segue.destination as? BugReportController {
+            bugReportVC.reportType = reportType
         }
     }
     
@@ -76,12 +88,17 @@ class SupportTableViewController: UITableViewController {
             break
         case (optionsSection, videoTutorialRow):
             showVideoTutorial()
-        case (optionsSection, reportBugRow):
-            reportBugRowTapped()
+        case (optionsSection, faqRow):
+            let faqUrl = URL(string: UIApplication.adguardFaqUrl)!
+            UIApplication.shared.open(faqUrl, options: [:], completionHandler: nil)
         case (optionsSection, reportIncorrectBlockingRow):
             reportIncorrectBlockingRowTapped()
-        case (optionsSection, featureRequestRow):
-            featureRequestRowTapped()
+        case (optionsSection, reportBugRow):
+            showBugReportController(.bugReport)
+        case (optionsSection, leaveFeedbackRow):
+            showBugReportController(.feedback)
+        case (optionsSection, discussRow):
+            UIApplication.shared.openAdguardUrl(action: "discuss", from: "support", buildVersion: productInfo.buildVersion())
         case (optionsSection, rateAppRow):
             rateAppRowTapped()
         case (optionsSection, exportLogsRow):
@@ -94,22 +111,14 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - private methods
     
-    private func reportBugRowTapped() {
-        // If user has setup his email in the settings than we will send email with logs to our mail
-        if MFMailComposeViewController.canSendMail() {
-            support.sendMailBugReport(withParentController: self)
-        } else {
-            showFeedbackController()
-        }
+    private func showBugReportController(_ type: ReportType) {
+        reportType = type
+        performSegue(withIdentifier: bugReportSegueId, sender: self)
     }
     
     private func reportIncorrectBlockingRowTapped() {
-        guard let reportUrl = support.composeWebReportUrl(forSite: nil) else { return }
+        let reportUrl = support.composeWebReportUrl(nil)
         UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
-    }
-    
-    private func featureRequestRowTapped() {
-        showFeedbackController()
     }
     
     private func rateAppRowTapped() {
@@ -120,13 +129,28 @@ class SupportTableViewController: UITableViewController {
         guard let exportLogsCell = tableView.cellForRow(at: IndexPath(row: exportLogsRow, section: optionsSection)) else {
             return
         }
-        support.exportLogs(withParentController: self, sourceView: exportLogsCell, sourceRect: exportLogsCell.bounds)
+        
+        guard let zipLog = support.exportLogs() else {
+            support.deleteLogsFiles()
+            return
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: [zipLog] as [Any], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {[weak self] _, _, _, error in
+            if let error = error {
+                DDLogError("Error exporting logs: \(error)")
+            }
+            self?.support.deleteLogsFiles()
+        }
+        
+        if let presenter = activityVC.popoverPresentationController {
+            presenter.sourceView = exportLogsCell
+            presenter.sourceRect = exportLogsCell.bounds
+        }
+        
+        present(activityVC, animated: true)
     }
     
-    private func showFeedbackController() {
-        AppDelegate.shared.presentFeedbackController()
-    }
-
     private func updateTheme() {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)

@@ -14,4 +14,8 @@ extension Bundle {
         }
         return Locale.current.languageCode ?? Locale.current.identifier
     }
+    
+    var applicationName: String {
+        return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
+    }
 }
