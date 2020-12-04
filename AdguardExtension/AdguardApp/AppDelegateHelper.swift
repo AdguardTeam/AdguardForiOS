@@ -64,6 +64,8 @@ class AppDelegateHelper: NSObject {
     private let activateLicense = "license"
     private let subscribe = "subscribe"
     private let openTunnelModeSettings = "openTunnelModeSettings"
+    private let applySettings = "apply_settings"
+    private let commonUrlScheme = "adguard"
     
     private var firstRun: Bool {
         get {
@@ -400,7 +402,7 @@ class AppDelegateHelper: NSObject {
 
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
         let launchScreenController = launchScreenStoryboard.instantiateViewController(withIdentifier: "LaunchScreen")
-        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense || command == subscribe {
+        if command == AE_URLSCHEME_COMMAND_ADD || command == openSystemProtection || command == openComplexProtection || command == activateLicense || command == subscribe || command == applySettings {
             appDelegate.window.rootViewController = launchScreenController
         }
         
@@ -576,6 +578,28 @@ class AppDelegateHelper: NSObject {
                 
                 navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
                 tab.selectedViewController = navController
+                self.appDelegate.window.rootViewController = tab
+                
+            case (commonUrlScheme, applySettings):
+                DDLogInfo("(AppDelegateHelper) openurl - apply settings")
+                let params = parseCustomUrlScheme(url).params
+                guard let json = params?["json"] else {
+                    DDLogError("(AppDelegateHelper) there is no param 'json' in url")
+                    break
+                }
+                let parser = SettingsParser()
+                let settings = parser.parse(querry: json)
+                
+                guard let mainTabNavController = tab.viewControllers?[TabBarTabs.mainTab.rawValue] as? MainNavigationController else { return false }
+                
+                let mainTabStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+                guard let mainPageController = mainTabStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else { return false }
+                
+                mainPageController.importSettings = settings
+                
+                mainTabNavController.viewControllers = [mainPageController]
+                
+                tab.selectedViewController = mainTabNavController
                 self.appDelegate.window.rootViewController = tab
                 
             default:

@@ -20,12 +20,21 @@ import Foundation
 
 class ContentBlockerServiceMock: NSObject, ContentBlockerServiceProtocol {
     
+    var whitelistDomains:[String] = []
+    
     func validateRule(_ ruleText: String) -> Bool {
         return true
     }
     
     func reloadJsons(backgroundUpdate: Bool, completion: @escaping (Error?) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion(nil)
+        }
+    }
+    
+    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [unowned self] in
+            self.whitelistDomains.append(domain)
             completion(nil)
         }
     }

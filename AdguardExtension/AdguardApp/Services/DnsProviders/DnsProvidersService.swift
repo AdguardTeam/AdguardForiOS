@@ -43,11 +43,17 @@ protocol DnsProvidersServiceProtocol {
     func isCustomProvider(_ provider: DnsProviderInfo)->Bool
     func isCustomServer(_ server: DnsServerInfo)->Bool
     func isActiveProvider(_ provider: DnsProviderInfo)->Bool
+    func getServer(serverId: Int)->DnsServerInfo?
+    func getServerName(serverId: Int)->String?
     
     func reset()
 }
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
+    
+    static let adguardId = 10001
+    static let adguardFamilyId = 10005
+    static let adguardNonFilteredId = 10028
     
     private var predefinedProvidersInternal: [DnsProviderInfo]?
     private var customProvidersInternal: [DnsProviderInfo]?
@@ -160,7 +166,7 @@ protocol DnsProvidersServiceProtocol {
     private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
     
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        let provider = DnsProviderInfo(name: name)
+        let provider = DnsProviderInfo(id: 0, name: name)
         
         let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream])
         
@@ -241,12 +247,31 @@ protocol DnsProvidersServiceProtocol {
         
         let provider = activeDnsProvider
         
-        if isCustomServer(server) {
-            return provider?.name ?? server.name
+        return createServerName(server: server, provider: provider)
+    }
+    
+    func getServer(serverId: Int) -> DnsServerInfo? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return server
+                }
+            }
         }
         
-        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
-        return "\(provider?.name ?? server.name) (\(protocolName))"
+        return nil
+    }
+    
+    func getServerName(serverId: Int) -> String? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return createServerName(server: server, provider: provider)
+                }
+            }
+        }
+        
+        return nil
     }
     
     func reset() {
@@ -263,6 +288,15 @@ protocol DnsProvidersServiceProtocol {
     }
     
     // MARK: - private methods
+    
+    private func createServerName(server: DnsServerInfo, provider: DnsProviderInfo?)->String {
+        if isCustomServer(server) {
+            return provider?.name ?? server.name
+        }
+        
+        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
+        return "\(provider?.name ?? server.name) (\(protocolName))"
+    }
     
     private func serverWithId(_ id: String)->DnsServerInfo? {
         for provider in allProviders {
@@ -392,7 +426,7 @@ protocol DnsProvidersServiceProtocol {
         let dnsProviders = getLocalizedProvidersForCurrentLocale(dnsProviders: dnsProviders, features: features, localizationsJson: json)
         
         self.predefinedProvidersInternal = dnsProviders.map{ (provider) -> DnsProviderInfo in
-            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "")
+            let providerInfo = DnsProviderInfo(id:provider.provider.providerId ,name: provider.localizedName ?? "")
             
             providerInfo.logo = provider.provider.logo
             providerInfo.logoDark = "\(provider.provider.logo)_dark"

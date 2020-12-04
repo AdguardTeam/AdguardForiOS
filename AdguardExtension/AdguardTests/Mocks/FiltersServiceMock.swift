@@ -21,9 +21,7 @@ import Foundation
 class FiltersServiceMock: FiltersServiceProtocol {
     var updateNotification: Notification.Name = Notification.Name("updateNotification")
     
-    var groups: [Group] {
-        return []
-    }
+    var groups: [Group] = []
     
     var activeFiltersCount: Int {
         return 0
@@ -33,9 +31,30 @@ class FiltersServiceMock: FiltersServiceProtocol {
     }
     
     func setFilter(_ filter: Filter, enabled: Bool) {
+        let filter = groups.flatMap { $0.filters }
+            .first { $0.filterId == filter.filterId }
+        filter?.enabled = enabled
+    }
+    
+    func disableAllFilters() {
+        for group in groups {
+            for filter in group.filters {
+                filter.enabled = false
+            }
+        }
     }
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
+        var group = groups.first { $0.groupId == FilterGroupId.custom }
+        if group == nil {
+            group = Group(FilterGroupId.custom)
+            groups.append(group!)
+        }
+        
+        let filterObj = Filter(filterId: 0, groupId: FilterGroupId.custom)
+        filterObj.name = filter.meta.name
+        filterObj.enabled = true
+        group!.filters.append(filterObj)
     }
     
     func deleteCustomFilter(_ filter: Filter) {

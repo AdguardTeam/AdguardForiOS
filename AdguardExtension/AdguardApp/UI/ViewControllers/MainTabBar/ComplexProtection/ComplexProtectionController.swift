@@ -135,7 +135,9 @@ class ComplexProtectionController: UITableViewController {
     }
     
     deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
+        if isViewLoaded {
+            resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
+        }
     }
     
     // MARK: - Actions

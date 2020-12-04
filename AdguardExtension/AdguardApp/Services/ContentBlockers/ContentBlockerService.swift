@@ -34,6 +34,13 @@ protocol ContentBlockerServiceProtocol {
      It returns true if rule can be converted to safari content blocker rule by converter, false for unsupported rules
      */
     func validateRule(_ ruleText: String)->Bool
+    
+    /**
+     Adds whitelist domain, modifies content blocking JSONs
+     and replaces these JSONs in shared resources asynchronously.
+     Method performs completionBlock when done on service working queue.
+     */
+    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void)
 }
 
 @objc
