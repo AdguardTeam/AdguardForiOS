@@ -55,6 +55,10 @@ extension AppDelegate {
      Presents UserFilterController
      */
     func presentUserFilterController(showLaunchScreen: Bool = false, _ model: ListOfRulesModelProtocol?, newRule rule: String?) {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return
@@ -63,10 +67,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .settingTab) else {
             DDLogError("Navigation controller is nil")
             return
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -99,6 +99,10 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentDnsSettingsController(showLaunchScreen: Bool = false, dnsProtectionIsEnabled enabled: Bool? = nil) -> Bool {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -107,10 +111,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .settingTab) else {
             DDLogError("Navigation controller is nil")
             return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -138,6 +138,10 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentMainPageController(showLaunchScreen: Bool = false, complexProtectionIsEnabled enabled: Bool? = nil) -> Bool {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -146,10 +150,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .mainTab) else {
             DDLogError("Navigation controller is nil")
             return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
@@ -172,6 +172,10 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -180,10 +184,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .mainTab) else {
             DDLogError("Navigation controller is nil")
             return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
@@ -217,6 +217,11 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -225,10 +230,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .settingTab) else {
             DDLogError("Navigation controller is nil")
             return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -261,6 +262,9 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
         
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -270,10 +274,6 @@ extension AppDelegate {
         guard let navController = getNavigationController(for: .settingTab) else {
             DDLogError("Navigation controller is nil")
             return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -390,6 +390,50 @@ extension AppDelegate {
             return true
         }
         return false
+    }
+    
+    /*
+     Presents DnsModeController
+     Returns true on success and false otherwise
+     */
+    func presentTunnelModeController(showLaunchScreen: Bool = false) -> Bool {
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return false
+        }
+        
+        let settingsStoryBoard = UIStoryboard(name: "Settings", bundle: .main)
+        guard let settingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "SettingsController") as? SettingsController,
+              let advancedSettingsController = settingsStoryBoard.instantiateViewController(withIdentifier: "AdvancedSettingsController") as? AdvancedSettingsController,
+              let dnsModeController = settingsStoryBoard.instantiateViewController(withIdentifier: "DnsModeController") as? DnsModeController
+        else {
+            DDLogError("Missing controller from Settings.storyboard")
+            return false
+        }
+     
+        mainMenuController.loadViewIfNeeded()
+        settingsController.loadViewIfNeeded()
+        advancedSettingsController.loadViewIfNeeded()
+                    
+        navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
     }
     
     /*

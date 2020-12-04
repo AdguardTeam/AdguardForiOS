@@ -67,9 +67,8 @@ class DnsProvidersController: UITableViewController {
         currentServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.tableView.reloadData()
         })
-        
+
         tableView.rowHeight = UITableView.automaticDimension
-        
         setupBackButton()
         updateTheme()
     }

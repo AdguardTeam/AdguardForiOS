@@ -76,7 +76,7 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func loginLogoutTapped(_ sender: UIButton) {
-        if configuration.proStatus {
+        if purchaseService.purchasedThroughLogin {
             showLogoutAlert()
         } else {
             performSegue(withIdentifier: loginSegueId, sender: self)
@@ -94,7 +94,7 @@ class AboutViewController: UIViewController {
     private func processProStatus() {
         navigationItem.rightBarButtonItems = configuration.proStatus ? [] : [loginButton]
         
-        if Bundle.main.isPro {
+        if Bundle.main.isPro || configuration.proStatus && !purchaseService.purchasedThroughLogin {
             loginLogoutButton.isHidden = true
             return
         }

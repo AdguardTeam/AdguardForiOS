@@ -190,6 +190,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     @IBOutlet weak var updatedLabel: ThemableLabel!
     @IBOutlet weak var rulesCountLabel: ThemableLabel!
     @IBOutlet weak var websiteLabel: ThemableLabel!
+    @IBOutlet weak var subscriptionURLLabel: ThemableLabel!
     @IBOutlet weak var tagsView: FilterTagsView!
     @IBOutlet weak var enabledLabel: ThemableLabel!
     
@@ -209,7 +210,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     // MARK: - constants
     
     // rows
-    enum Row: Int {
+    private enum Row: Int {
         
     case enabled = 0,
         description,
@@ -217,6 +218,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         updated,
         rulesCount,
         website,
+        subscriptionURL,
         tags
     }
     
@@ -284,6 +286,10 @@ class FilterDetailsTableCotroller : UITableViewController {
         case .website:
             return filter.homepage == nil || filter.homepage?.count == 0 ? 0.0 : calculatedHeight
             
+        case .subscriptionURL:
+            guard filter.editable || filter.removable else { return 0 }
+            return calculatedHeight
+            
         case .tags:
             if let safariFilter = filter as? Filter {
                 let tagsCount = (safariFilter.tags?.count ?? 0) + (safariFilter.langs?.count ?? 0)
@@ -303,6 +309,12 @@ class FilterDetailsTableCotroller : UITableViewController {
         guard let row = Row(rawValue: indexPath.row) else { return }
         if row == .website {
             if let url = URL(string: filter.homepage ?? "") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        if row == .subscriptionURL {
+            if let url = URL(string: filter.subscriptionUrl ?? "") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
@@ -339,11 +351,18 @@ class FilterDetailsTableCotroller : UITableViewController {
         theme.setupSeparators(separators)
         theme.setupSwitch(enabledSwitch)
         
-        if filter.homepage != nil {
-            let homepage = NSAttributedString(string: filter.homepage!, attributes:
+        if let homepage = filter.homepage {
+            let homepage = NSAttributedString(string: homepage, attributes:
                 [.foregroundColor: theme.grayTextColor,
                  .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
+        }
+        
+        if let subscriptionUrl = filter.subscriptionUrl {
+            let subscriptionUrl = NSAttributedString(string: subscriptionUrl, attributes:
+                                                        [.foregroundColor: theme.grayTextColor,
+                                                         .underlineStyle: NSUnderlineStyle.single.rawValue])
+            subscriptionURLLabel.attributedText = subscriptionUrl
         }
     }
 }

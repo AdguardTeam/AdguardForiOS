@@ -46,6 +46,7 @@ class AppDelegateHelper: NSObject {
     lazy var migrationService: MigrationServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
     lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -63,6 +64,7 @@ class AppDelegateHelper: NSObject {
     private let openComplexProtection = "complexProtection"
     private let activateLicense = "license"
     private let subscribe = "subscribe"
+    private let openTunnelModeSettings = "openTunnelModeSettings"
     
     private var firstRun: Bool {
         get {
@@ -91,19 +93,14 @@ class AppDelegateHelper: NSObject {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         
         if !Bundle.main.isPro {
-            SetappManager.shared.start(with: .default)
-            SetappManager.shared.logLevel = .debug
-            
-            SetappManager.shared.setLogHandle { (message: String, logLevel: SetappLogLevel) in
-              DDLogInfo("(Setapp) [\(logLevel)], \(message)")
-            }
+            setappService.start()
         }
         
         guard let mainPageController = appDelegate.getMainPageController() else {
             DDLogError("mainPageController is nil")
             return
         }
-        
+
         mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
@@ -270,7 +267,7 @@ class AppDelegateHelper: NSObject {
     }
 
     func showCommonAlertForTopVc(_ body: String?, _ title: String?) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async {
             if let topVC = AppDelegate.topViewController() {
                 ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
             }
@@ -291,8 +288,8 @@ class AppDelegateHelper: NSObject {
         DDLogError("(AppDelegate) application Open URL: \(url.absoluteURL)");
         
         if !Bundle.main.isPro {
-            if SetappManager.shared.canOpen(url: url) {
-                return SetappManager.shared.open(url: url, options: options)
+            if setappService.openUrl(url, options: options) {
+                return true
             }
         }
             
@@ -399,6 +396,12 @@ class AppDelegateHelper: NSObject {
             let title = params?["title"]
             
             let success = appDelegate.presentFiltersMasterController(showLaunchScreen: true, url: url, title: title)
+            return success
+            
+        case (_, openTunnelModeSettings):
+            DDLogInfo("(AppDelegateHelper) openurl - open tunnel mode settings")
+            configuration.advancedMode = true
+            let success = appDelegate.presentTunnelModeController()
             return success
             
         default:

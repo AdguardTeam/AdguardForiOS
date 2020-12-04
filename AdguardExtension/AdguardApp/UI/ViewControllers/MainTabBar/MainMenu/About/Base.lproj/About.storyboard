@@ -149,7 +149,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <action selector="readMoreTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="q3o-8J-RSP"/>
+                                    <action selector="discussAdguardTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="mMZ-RS-4K9"/>
                                 </connections>
                             </button>
                         </subviews>

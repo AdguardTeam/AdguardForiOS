@@ -484,9 +484,11 @@ static NSTimeInterval lastCheckTime;
     else if ([notification.name
               isEqualToString:ASAntibannerStartedUpdateNotification]) {
         
-        // turn on network activity indicator
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        [self updateStartedNotify];
+        if (!_background) {
+            // turn on network activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            [self updateStartedNotify];
+        }
     }
     // Update did not start
     else if ([notification.name

@@ -131,10 +131,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             return AGDnsUpstream(address: address, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
         }
         
-        let agFilters = filters.compactMap {
-            AGDnsFilterParams(id: Int($0.key), data: $0.value, inMemory: false)
-        }
-    
+        let agFilters = filters.compactMap { AGDnsFilterParams(id: Int($0.key), data: $0.value, inMemory: false) }
+        
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
