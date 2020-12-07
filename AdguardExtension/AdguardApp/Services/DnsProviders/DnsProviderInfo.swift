@@ -129,7 +129,6 @@ class DnsServerInfo : ACObject {
 
 @objc(DnsProviderInfo)
 @objcMembers class DnsProviderInfo : ACObject {
-    var id: Int
     var name: String
     var logo: String?
     var logoDark: String?
@@ -140,22 +139,19 @@ class DnsServerInfo : ACObject {
     @objc var servers: [DnsServerInfo]?
     
     // MARK: - initializers and NSCoding methods
-    init(id: Int, name: String) {
-        self.id = id
+    init(name: String) {
         self.name = name
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
-        id = aDecoder.decodeObject(forKey: "id") as? Int ?? DnsProvidersService.customDnsProviederId
         super.init(coder: aDecoder)
     }
     
     override func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         aCoder.encode(name, forKey: "name")
-        aCoder.encode(id, forKey: "id")
     }
     
     func serverByProtocol(dnsProtocol: DnsProtocol) -> DnsServerInfo? {
