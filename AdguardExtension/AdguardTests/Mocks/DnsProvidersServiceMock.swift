@@ -41,7 +41,7 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     var currentServerName: String = ""
     
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        return DnsProviderInfo(id: 1, name: "")
+        return DnsProviderInfo(name: "")
     }
     
     func deleteProvider(_ provider: DnsProviderInfo) {
