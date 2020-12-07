@@ -466,10 +466,10 @@
 		7EA3DBC524090D7B000D8D42 /* Animation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */; };
 		7EA3DBC72409367B000D8D42 /* IntroductionOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC62409367B000D8D42 /* IntroductionOnboardingController.swift */; };
 		7EA4183A239FEBE700CF517C /* AGDnsProxy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0D3377A23852A19000AC77D /* AGDnsProxy.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		7EA782DA2578D47500CA8889 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7EA782D92578D47500CA8889 /* Zip */; };
-		7EA782ED2578D48800CA8889 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7EA782EC2578D48800CA8889 /* Zip */; };
-		7EA783002578D60C00CA8889 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7EA782FF2578D60C00CA8889 /* Zip */; };
-		7EA783022578D61300CA8889 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7EA783012578D61300CA8889 /* Zip */; };
+		7EA782DA2578D47500CA8889 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		7EA782ED2578D48800CA8889 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		7EA783002578D60C00CA8889 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		7EA783022578D61300CA8889 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		7EA783142578E46400CA8889 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
 		7EA783262578E46500CA8889 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
 		7EA7834B2578E54500CA8889 /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
@@ -525,6 +525,10 @@
 		7EC635BA239EB2D2003A5CE4 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
 		7EC635BB239EB2E0003A5CE4 /* LoginResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */; };
 		7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
+		7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA27B257E4AAD004DA0D3 /* Zip */; };
+		7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA28E257E4ACB004DA0D3 /* Zip */; };
+		7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA290257E4AD4004DA0D3 /* Zip */; };
+		7ECAA293257E4ADB004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA292257E4ADB004DA0D3 /* Zip */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -3514,13 +3518,14 @@
 				D04820B125402270000FA31A /* Setapp in Frameworks */,
 				6598869F1CF74DE9003ECD1C /* Social.framework in Frameworks */,
 				D0D7E53024371886001801A5 /* AGDnsProxy.xcframework in Frameworks */,
-				7EA782ED2578D48800CA8889 /* Zip in Frameworks */,
+				7EA782ED2578D48800CA8889 /* (null) in Frameworks */,
 				D06E3083253F2F32008BBD2D /* ContentBlockerConverter in Frameworks */,
 				D0D7E53224371896001801A5 /* Security.framework in Frameworks */,
 				65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */,
 				D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */,
 				D0B546042435D740002F0AEC /* Lottie in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
+				7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
 				659886A31CF74DE9003ECD1C /* SafariServices.framework in Frameworks */,
@@ -3535,8 +3540,9 @@
 				65C12EF61BD7B01D00FFC71C /* JavaScriptCore.framework in Frameworks */,
 				7E4D205C22D71AFC003B0E75 /* Security.framework in Frameworks */,
 				65C12EF51BD7B01700FFC71C /* SafariServices.framework in Frameworks */,
-				7EA783002578D60C00CA8889 /* Zip in Frameworks */,
+				7EA783002578D60C00CA8889 /* (null) in Frameworks */,
 				65C12EF41BD7B00E00FFC71C /* libsqlite3.tbd in Frameworks */,
+				7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */,
 				D0AEC26F240947F5003E8FCC /* NetworkExtension.framework in Frameworks */,
 				7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */,
 				65C12EF31BD7B00200FFC71C /* libz.tbd in Frameworks */,
@@ -3554,13 +3560,14 @@
 				65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */,
 				656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */,
 				656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */,
-				7EA782DA2578D47500CA8889 /* Zip in Frameworks */,
+				7EA782DA2578D47500CA8889 /* (null) in Frameworks */,
 				65E5A09A1B8632F600319AA3 /* libz.tbd in Frameworks */,
 				D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */,
 				7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
 				D06E2F8B253F0E24008BBD2D /* ContentBlockerConverter in Frameworks */,
+				7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */,
 				D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */,
 				65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
@@ -3721,8 +3728,9 @@
 				D0B544A72435C6BC002F0AEC /* JavaScriptCore.framework in Frameworks */,
 				D0B544A82435C6BC002F0AEC /* Security.framework in Frameworks */,
 				D0B544A92435C6BC002F0AEC /* SafariServices.framework in Frameworks */,
-				7EA783022578D61300CA8889 /* Zip in Frameworks */,
+				7EA783022578D61300CA8889 /* (null) in Frameworks */,
 				D0B544AA2435C6BC002F0AEC /* libsqlite3.tbd in Frameworks */,
+				7ECAA293257E4ADB004DA0D3 /* Zip in Frameworks */,
 				D0B544AB2435C6BC002F0AEC /* NetworkExtension.framework in Frameworks */,
 				D0B544AC2435C6BC002F0AEC /* CoreServices.framework in Frameworks */,
 				D0B544AD2435C6BC002F0AEC /* libz.tbd in Frameworks */,
@@ -5154,7 +5162,7 @@
 				D0B546032435D740002F0AEC /* Lottie */,
 				D093AA5F25344B4E0015351F /* Setapp */,
 				D06E3082253F2F32008BBD2D /* ContentBlockerConverter */,
-				7EA782EC2578D48800CA8889 /* Zip */,
+				7ECAA28E257E4ACB004DA0D3 /* Zip */,
 			);
 			productName = AdguardExtension;
 			productReference = 659886B91CF74DE9003ECD1C /* Adguard Pro.app */;
@@ -5178,7 +5186,7 @@
 			name = ActionExtension;
 			packageProductDependencies = (
 				D06E2F9D253F123B008BBD2D /* ContentBlockerConverter */,
-				7EA782FF2578D60C00CA8889 /* Zip */,
+				7ECAA290257E4AD4004DA0D3 /* Zip */,
 			);
 			productName = ActionExtension;
 			productReference = 65C52B361B906105003AF42F /* ActionExtension.appex */;
@@ -5218,7 +5226,7 @@
 				7E2522132408201700743648 /* Lottie */,
 				D06E2F8A253F0E24008BBD2D /* ContentBlockerConverter */,
 				D09E271A2541D00B002D6BC0 /* Setapp */,
-				7EA782D92578D47500CA8889 /* Zip */,
+				7ECAA27B257E4AAD004DA0D3 /* Zip */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -5563,7 +5571,7 @@
 			name = ProActionExtension;
 			packageProductDependencies = (
 				D06E2F9F253F1240008BBD2D /* ContentBlockerConverter */,
-				7EA783012578D61300CA8889 /* Zip */,
+				7ECAA292257E4ADB004DA0D3 /* Zip */,
 			);
 			productName = ActionExtension;
 			productReference = D0B544BC2435C6BC002F0AEC /* ProActionExtension.appex */;
@@ -5752,7 +5760,7 @@
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
 				D06E2F89253F0E24008BBD2D /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
-				7EA782D82578D47500CA8889 /* XCRemoteSwiftPackageReference "Zip" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -6862,7 +6870,6 @@
 				7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */,
 				7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */,
 				D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */,
-				7E4D205222D71A5B003B0E75 /* mz_strm_split.c in Sources */,
 				7E822C0B2435EDD30015B4D0 /* DomainParser.swift in Sources */,
 				7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */,
 				7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */,
@@ -10888,12 +10895,12 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7EA782D82578D47500CA8889 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 2.1.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
 			};
 		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
@@ -10919,6 +10926,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		7ECAA27B257E4AAD004DA0D3 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+		7ECAA28E257E4ACB004DA0D3 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+		7ECAA290257E4AD4004DA0D3 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+		7ECAA292257E4ADB004DA0D3 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
