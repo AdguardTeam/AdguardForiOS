@@ -89,8 +89,7 @@ class SupportTableViewController: UITableViewController {
         case (optionsSection, videoTutorialRow):
             showVideoTutorial()
         case (optionsSection, faqRow):
-            let faqUrl = URL(string: UIApplication.adguardFaqUrl)!
-            UIApplication.shared.open(faqUrl, options: [:], completionHandler: nil)
+            UIApplication.shared.openAdguardUrl(action: "faq", from: "support", buildVersion: productInfo.buildVersion())
         case (optionsSection, reportIncorrectBlockingRow):
             reportIncorrectBlockingRowTapped()
         case (optionsSection, reportBugRow):

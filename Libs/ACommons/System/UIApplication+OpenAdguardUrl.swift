@@ -23,7 +23,6 @@ extension UIApplication {
     static let adguardUrl = "https://adguard.com/forward.html"
     static let rateAdGuardAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     static let rateAdGuardProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"
-    static let adguardFaqUrl = "https://adguard.com/en/support/adguard_for_ios.html"
     
     func openAdguardUrl(action: String, from: String, buildVersion: String) {
         
