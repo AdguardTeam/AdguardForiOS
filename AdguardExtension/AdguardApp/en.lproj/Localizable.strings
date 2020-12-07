@@ -819,10 +819,10 @@
 
 // MARK: = ImportSettingsController
 /* (ImportSettingsController) add custom content blocker filter format */
-"import_custom_cb_filter_format" = "Add the custom content blocker filter: \"%@\"";
+"import_custom_cb_filter_format" = "Add the custom content blocker filter: %@";
 
 /* (ImportSettingsController) add custom dns filter format */
-"import_dns_filter_format" = "Add the custom DNS filter: \"%@\"";
+"import_dns_filter_format" = "Add the custom DNS filter: %@";
 
 /* (ImportSettingsController) enable content blocker filter format */
 "enable_cb_filter_format" = "Enable filter: %@";
