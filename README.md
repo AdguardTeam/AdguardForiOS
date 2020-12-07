@@ -91,31 +91,23 @@ export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 
 Prepare and install Ruby bundler:
 
-```
-sudo gem install bundler
-```
+- `sudo gem install bundler`
 
 Then run bundle install:
 
-```
-bundle install
-```
+- `bundle install`
 
 **IMPORTANT:** before running Fastlane, you need to place the [App Store Connect API key](https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key) to `fastlane/AuthKey.p8`.
 
 Then you can run Fastlane using a command like this:
 
-```
-bundle exec fastlane [lane]
-```
+- `bundle exec fastlane [lane]`
 
 ### Codesigning
 
 Run this command to get proper codesigning certificates:
 
-```
-MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane prepare
-```
+- `bundle exec fastlane prepare`
 
 ### Actions
 
