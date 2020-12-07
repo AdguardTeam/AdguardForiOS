@@ -19,6 +19,7 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    
     var vpnManager: VpnManagerProtocol?
     
     var adguardDohServer: DnsServerInfo? { return nil }
@@ -40,7 +41,7 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     var currentServerName: String = ""
     
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        return DnsProviderInfo(name: "")
+        return DnsProviderInfo(id: 1, name: "")
     }
     
     func deleteProvider(_ provider: DnsProviderInfo) {
@@ -59,5 +60,21 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     
     func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
         return true
-    }    
+    }
+    
+    func getServer(serverId: Int) -> DnsServerInfo? {
+        for provider in allProviders {
+            for server in provider.servers ?? [] {
+                if Int(server.serverId) == serverId {
+                    return server
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    func getServerName(serverId: Int) -> String? {
+        return ""
+    }
 }

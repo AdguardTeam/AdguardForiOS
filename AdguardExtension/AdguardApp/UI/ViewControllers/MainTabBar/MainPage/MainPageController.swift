@@ -122,6 +122,8 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     var stateFromWidget: Bool?
     
+    var importSettings: Settings?
+    
     // MARK: - Variables
     
     private var iconButton: UIButton? = nil
@@ -156,11 +158,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     private let mainPageModel: MainPageModelProtocol
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
-    
     
     // MARK: - Observers
     
@@ -202,6 +205,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         if let stateFromWidget = self.stateFromWidget {
             complexProtection.switchComplexProtection(state: stateFromWidget, for: self) { (_, _) in
             }
+        }
+        
+        if importSettings != nil {
+            showImportSettings()
         }
     }
         
@@ -834,5 +841,19 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         default:
             break
         }
+    }
+    
+    private func showImportSettings() {
+        let storyboard = UIStoryboard(name: "ImportSettings", bundle: nil)
+        
+        guard let importController = storyboard.instantiateViewController(withIdentifier: "ImportSettingsController") as? ImportSettingsController else {
+            DDLogError("can not instantiate ImportSettingsController")
+            return
+        }
+        
+        guard let settings = importSettings else { return }
+        
+        importController.settings = settings
+        present(importController, animated: true, completion: nil)
     }
 }
