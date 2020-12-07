@@ -9,6 +9,7 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+require 'spaceship'
 
 default_platform(:ios)
 
@@ -47,6 +48,17 @@ def clean()
                                         end)
 end
 
+def prepare_key()
+  # https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key
+  app_store_connect_api_key(
+    key_id: "L856K7RA82",
+    issuer_id: "69a6de7f-6896-47e3-e053-5b8c7c11a4d1",
+    key_filepath: "fastlane/AuthKey.p8",
+    duration: 1200, # optional
+    in_house: false, # optional but may be required if using match/sigh
+  )
+end
+
 platform :ios do
   desc "Runs unit tests"
   lane :tests do
@@ -62,6 +74,7 @@ platform :ios do
   desc "Builds app for appstore"
   lane :build do
     clean()
+    prepare_key()
 
     match(type: "appstore", readonly: true)
     build_app(
@@ -82,6 +95,7 @@ platform :ios do
   desc "Builds adhoc build for inner testing"
   lane :adhoc do
     clean()
+    prepare_key()
 
     match(type: "adhoc", force_for_new_devices: true)
     build_app(
@@ -115,6 +129,8 @@ platform :ios do
 
   desc "Uploads the build to testflight"
   lane :testflight_beta do
+    prepare_key()
+
     # Uploads the build without actually submitting it
     upload_to_testflight(
       skip_submission: true,
@@ -125,14 +141,37 @@ platform :ios do
 end
 
 lane :prepare do
-  match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  prepare_key()
+
+  match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
 end
 
 # Run this only if you need to generate certs and provisioning profiles
 lane :generate do
-  match(type: "development", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "appstore", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
-  match(type: "adhoc", readonly: false, generate_apple_certs: true, platform: "ios", team_id: "N33TQXN8C7")
+  prepare_key()
+
+  match(type: "development", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "appstore", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+  match(type: "adhoc", readonly: false, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
+end
+
+# Prepare fastlane session for CI
+lane :auth do
+  desc "Authorize the apple ID in order to acquire new session"
+  Spaceship::SpaceauthRunner.new(username: ENV['APPLE_ID']).run
+
+  # It seems that the session that is printed by fastlane works for just 30 minutes
+  # The reason might be that only a limited set of cookies are printed by default.
+  # Instead, we're using all cookies obtained by spaceauth:
+  # https://github.com/fastlane/fastlane/issues/14301#issuecomment-479281223
+
+  UI.message("Reading the spaceship cookie value")
+  file_data = File.read("#{ENV['HOME']}/.fastlane/spaceship/#{ENV['APPLE_ID']}/cookie")
+  cookie = file_data.gsub("\n", "\\n")
+
+  UI.message("Ignore the previous FASTLANE_SESSION, use the new one below")
+  UI.message("Pass the following via the FASTLANE_SESSION environment variable:")
+  UI.message("#{cookie}".cyan.underline);
 end

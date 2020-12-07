@@ -91,33 +91,28 @@ export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"
 
 Prepare and install Ruby bundler:
 
-```
-sudo gem install bundler
-```
+- `sudo gem install bundler`
 
 Then run bundle install:
 
-```
-bundle install
-```
+- `bundle install`
+
+**IMPORTANT:** before running Fastlane, you need to place the [App Store Connect API key](https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key) to `fastlane/AuthKey.p8`.
 
 Then you can run Fastlane using a command like this:
 
-```
-bundle exec fastlane [lane]
-```
+- `bundle exec fastlane [lane]`
 
 ### Codesigning
 
-Run this command to get proper codesigning certificates: 
-```
-MATCH_KEYCHAIN_PASSWORD="YOUR_ACCOUNT_PASSWORD" bundle exec fastlane prepare
-```
+Run this command to get proper codesigning certificates:
+
+- `bundle exec fastlane prepare`
 
 ### Actions
 
 - `bundle exec fastlane tests` -- run tests
-- `bundle exec fastlane build` -- build version for appstore
+- `bundle exec fastlane build` -- build version for App Store
 
 Actions below are supposed to be used from CI only:
 
@@ -133,15 +128,23 @@ bundle exec fastlane match nuke distribution
 bundle exec fastlane generate
 ```
 
+In order for fastlane to work properly in CI environment, we use [spaceauth](https://docs.fastlane.tools/best-practices/continuous-integration/#use-of-application-specific-passwords-and-spaceauth).
+
+Run this command to generate `FASTLANE_SESSION` which you'll then need to use on the CI server:
+
+```
+bundle exec fastlane auth
+```
+
 ### Acknowledgments
 
 This software wouldn't have been possible without:
 
- * [Go](https://golang.org/dl/) and it's library:
-   * [dnsproxy](https://github.com/AdguardTeam/dnsproxy) v0.19.3
- * [StaticDataTableViewController](https://github.com/peterpaulis/StaticDataTableViewController) by peterpaulis
- * [GZIP](https://github.com/nicklockwood/GZIP) by nicklockwood
- * [Reachability component](https://github.com/tonymillion/Reachability) by Tony Million
- * [Fmdb](https://github.com/ccgus/fmdb) by August «Gus» Mueller
- * [NSStringPunycodeAdditions](https://github.com/Wevah/Punycode-Cocoa) by Nate Weaver
- * [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by Sam Soffes, Joshua Hudson and Antoine Cœur
+- [DnsLibs](https://github.com/AdguardTeam/DnsLibs)
+- [SafariConverterLib](https://github.com/AdguardTeam/SafariConverterLib)
+- [StaticDataTableViewController](https://github.com/peterpaulis/StaticDataTableViewController) by peterpaulis
+- [GZIP](https://github.com/nicklockwood/GZIP) by nicklockwood
+- [Reachability component](https://github.com/tonymillion/Reachability) by Tony Million
+- [Fmdb](https://github.com/ccgus/fmdb) by August «Gus» Mueller
+- [NSStringPunycodeAdditions](https://github.com/Wevah/Punycode-Cocoa) by Nate Weaver
+- [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by Sam Soffes, Joshua Hudson and Antoine Cœur

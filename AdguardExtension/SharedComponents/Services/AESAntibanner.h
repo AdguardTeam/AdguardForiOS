@@ -360,6 +360,9 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  */
 - (BOOL) enableGroupsWithEnabledFilters;
 
+/** disable all user rules */
+- (BOOL) disableUserRules;
+
 @end
 
 
