@@ -101,6 +101,8 @@ Then run bundle install:
 bundle install
 ```
 
+**IMPORTANT:** before running Fastlane, you need to place the [App Store Connect API key](https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key) to `fastlane/AuthKey.p8`.
+
 Then you can run Fastlane using a command like this:
 
 ```

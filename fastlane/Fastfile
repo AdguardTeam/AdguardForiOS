@@ -126,6 +126,15 @@ platform :ios do
 end
 
 lane :prepare do
+  # https://docs.fastlane.tools/app-store-connect-api/#using-an-app-store-connect-api-key
+  app_store_connect_api_key(
+    key_id: "L856K7RA82",
+    issuer_id: "69a6de7f-6896-47e3-e053-5b8c7c11a4d1",
+    key_filepath: "fastlane/AuthKey.p8",
+    duration: 1200, # optional
+    in_house: false, # optional but may be required if using match/sigh
+  )
+
   match(type: "development", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
   match(type: "appstore", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
   match(type: "adhoc", readonly: true, generate_apple_certs: true, platform: "ios", team_id: ENV['TEAM_ID'])
