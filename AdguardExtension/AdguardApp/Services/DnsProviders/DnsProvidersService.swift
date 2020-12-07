@@ -54,6 +54,7 @@ protocol DnsProvidersServiceProtocol {
     static let adguardId = 10001
     static let adguardFamilyId = 10005
     static let adguardNonFilteredId = 10028
+    static let customDnsProviederId = 0
     
     private var predefinedProvidersInternal: [DnsProviderInfo]?
     private var customProvidersInternal: [DnsProviderInfo]?
@@ -166,7 +167,7 @@ protocol DnsProvidersServiceProtocol {
     private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
     
     func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        let provider = DnsProviderInfo(id: 0, name: name)
+        let provider = DnsProviderInfo(id: Self.customDnsProviederId, name: name)
         
         let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream])
         

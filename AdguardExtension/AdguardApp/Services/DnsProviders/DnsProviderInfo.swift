@@ -148,7 +148,7 @@ class DnsServerInfo : ACObject {
     
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
-        id = aDecoder.decodeObject(forKey: "id") as! Int
+        id = aDecoder.decodeObject(forKey: "id") as? Int ?? DnsProvidersService.customDnsProviederId
         super.init(coder: aDecoder)
     }
     
