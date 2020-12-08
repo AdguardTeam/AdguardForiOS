@@ -19,6 +19,7 @@
 import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
+    var delegate: DnsProvidersServiceDelegate?
     
     var vpnManager: VpnManagerProtocol?
     
