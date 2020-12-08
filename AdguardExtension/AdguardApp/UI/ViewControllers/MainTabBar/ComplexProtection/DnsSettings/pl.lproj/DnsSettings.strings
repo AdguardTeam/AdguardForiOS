@@ -40,6 +40,9 @@
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Włącz ten moduł, aby blokować domeny śledzące i szyfrować swój ruch DNS";
 
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (eksperymentalne)";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Ochrona DNS";
 

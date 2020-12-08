@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 애플리케이션과 호환되지 않음, 불안정함";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS는 다양한 카운터, 분석 시스템 및 피싱 웹사이트로부터 개인 정보를 보호 할 수 있습니다";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch 및 성인 콘텐츠 차단";
-
-/* Google DNS server description */
-"google_dns_description" = "구글이 제공하는 글로벌 DNS 서비스";
-
-/* Open DNS server description */
-"open_dns_description" = "피싱 및 사기로부터 장치를 보호하는 DNS 서버입니다.";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "성인 콘텐츠를 차단해주는 OpenDNS 서버";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "피싱과 스파이웨어로부터 보호해 주는 무료 DNS 서비스 대체재";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Cloudflare에 의해 제공된 무료 DNS 서비스";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Cloudflare의 맬웨어 방지 DNS 서버가 악성 도메인을 차단합니다";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare 차단 서버는 악성 및 '성인' 도메인에 대한 접근을 제한합니다";
-
-/* Safe DNS server description */
-"safe_dns_description" = "SafeDNS로부터 제공된 DNS 서비스";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "보안";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "성인 콘텐츠 차단";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "로깅 정책 없음";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "세이프서치";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "광고 차단";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "알려진 피싱 사이트와 위험한 도메인들을 차단합니다";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "성인 콘텐츠가 포함된 웹사이트를 차단합니다";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "사용자의 DNS 쿼리 로그를 저장하지 않습니다.";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "가능하다면 언제나 세이프 서치를 브라우저에 강제로 적용시킵니다";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "추적 시스템을 차단합니다";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "암호화 없음 (시스템 DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (실험용)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "정말 로그아웃 하시겠습니까?";
@@ -644,13 +587,13 @@
 "dns_request_user_status_removed_from_blacklist" = "차단 목록에서 제거됨";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "%@<b>설정</b>을 엽니다";
+"onboarding_first_step_text" = "<b>설정</b>을 엽니다";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "%@<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
+"onboarding_second_step_text" = "<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 %@켭니다</b>";
+"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 켭니다</b>";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "시스템 DNS";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "비밀번호를 입력하세요";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "사용자 지정 콘텐츠 차단 필터 추가: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "사용자 정의 DNS 필터 추가: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "필터 활성화: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "필터 비활성화: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "가져오기 오류";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNS 서버 선택: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "%@ 라이선스 키로 프리미엄 기능 활성화";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "사용자 규칙 추가";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "DNS 사용자 규칙 추가";

@@ -5,7 +5,7 @@
 "Wrl-xu-3kv.text" = "Kapcsolatfelvétel";
 
 /* Class = "UILabel"; text = "Tap here to use the tool for removing missed ads or generally any element you don’t want to see on the page"; ObjectID = "Znm-Yl-fWN"; */
-"Znm-Yl-fWN.text" = "Koppintson ide az eszköz használatához a hiányzó hirdetések vagy további más elem eltávolításához, amelyet nem akar látni az oldalon";
+"Znm-Yl-fWN.text" = "Koppintson ide az eszköz használatához a kihagyott hirdetések vagy általában bármely olyan elem eltávolításához, amelyet nem szeretne látni az oldalon";
 
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Engedélyezés ezen az oldalon";

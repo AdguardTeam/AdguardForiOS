@@ -181,66 +181,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Poln-Tunel (brez ikone VPN), ki ni združljiv z drugimi aplikacijami VPN, manj stabilen";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS je nadomestni način za varovanje vaše zasebnosti pred različnimi števci, analitičnimi sistemi in lažnimi spletnimi stranmi";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Varno iskanje in zaviranje vsebin za odrasle";
-
-/* Google DNS server description */
-"google_dns_description" = "Googlova brezplačna nadomestna storitev DNS";
-
-/* Open DNS server description */
-"open_dns_description" = "Strežnik DNS, ki varuje vašo napravo pred lažnim predstavljanjem in prevarami";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS strežnik z zaviranjem vsebin za odrasle";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Brezplačna nadomestna storitev DNS z varstvom pred lažnim predstavljanjem in vohunskimi programi";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Brezplačna DNS storitev podjetja Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Cloudflare DNS proti zlonamernim programom, ki onemogoča zlonamerne domene";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare zaviralni strežnik, ki omejuje dostop do zlonamernih in domen 'za odrasle'";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS storitev podjetja SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Varnost";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Zaviranje vsebin za odrasle";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politika ne vodenja dnevnika";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Varno iskanje";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Zaviranje oglasov";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Zavira znane domene lažnega predstavljanja";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Zavira spletne strani z vsebinami za odrasle";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Ne shranjuje vaših Dnevnikov poizvedb DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Varno iskanje se izvaja v brskalnikih, kadarkoli je to mogoče";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Onemogoča sisteme za sledenje";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Brez šifriranja (Sistemski DNS)";
 
@@ -641,10 +581,10 @@
 "dns_request_user_status_removed_from_blacklist" = "odstranjeno s Seznama nedovoljenih";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Odpri %@ <b>nastavitve</b>";
+"onboarding_first_step_text" = "Odpri <b>nastavitve</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Tapnite na %@ <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
+"onboarding_second_step_text" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v našo aplikacijo!";

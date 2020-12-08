@@ -5,7 +5,7 @@
 "3zG-B5-jE5.text" = "Jurnale de depanare";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Listă albă inversată";
+"8ad-4w-rbs.text" = "Inversați lista de autorizări";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatibil cu alte aplicații VPN, instabil";

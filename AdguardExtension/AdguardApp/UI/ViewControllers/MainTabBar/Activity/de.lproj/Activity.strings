@@ -32,7 +32,7 @@
 "M4r-q5-RXv.text" = "Domainname:";
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
-"T0y-mr-Zwa.text" = "Sie können sich anzeigen lassen, wer versucht, Sie zu verfolgen und Statistiken und das Protokoll der Blockierung von DNS-Anfragen einsehen";
+"T0y-mr-Zwa.text" = "Sie können sich anzeigen lassen, wer versucht, Sie zu verfolgen und Statistiken und das Protokoll der Sperrungen von DNS-Anfragen einsehen";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "DNS-Schutz ist deaktiviert";

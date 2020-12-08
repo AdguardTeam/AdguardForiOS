@@ -142,57 +142,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "تونل-کامل(بدون آیکون VPN)،ناسازگار با سایر برنامه های VPN،کمتر پایدار";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "مسدودساز تبلیغ،وبسایت های رَدیاب و فیشینگ";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "مسدودسازی همه در بالا و وبسایت های غیراخلاقی";
-
-/* Google DNS server description */
-"google_dns_description" = "سرویس حل دی اِن اِس سراسری ارائه شده توسط گوگل";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS سروری که دستگاه شما را از تهدیدات آنلاین حفاظت می کند";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "سرور OpenDNS با مسدودسازی محتوای بزرگسال";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "سرویس DNS جایگزین رایگان برای حفاظت در برابر فیشینگ و جاسوس افزار";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "سرویس DNS رایگان با Cloudflare";
-
-/* Safe DNS server description */
-"safe_dns_description" = "سرویس DNS با SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "امنیتی";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "مسدودسازی محتوای غیر اخلاقی";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "سیاست عدم ذخیره وقایع";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "جستجوی اَمن";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "مسدودسازی تبلیغات";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "مسدودساز دامنه های فیشینگ و سایر دامنه های خطرناک";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "مسدودسازی وبسایت های محتوای غیراخلاقی";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "وقایع جستار DNS شما را ذخیره نمی کند";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "هر گاه امکان داشت،جستجوی اَمن در مرورگرها اعمال میشود";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "فعال شده %1$d از %2$d";
 
@@ -390,3 +339,6 @@
 
 /*(LogCategory) extensions category*/
 "extensions" = "افزونه ها";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "روی آیکون <b>سافاری</b> را ضربه زده و <b>\"مسدودساز محتوا\"</b> را از منو انتخاب کنید";

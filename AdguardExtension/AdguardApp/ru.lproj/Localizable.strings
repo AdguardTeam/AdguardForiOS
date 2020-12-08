@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без значка VPN), не совместим с другими VPN-приложениями, менее стабильный";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS – альтернативный способ защитить вас от счётчиков, систем аналитики и фишинговых сайтов";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Безопасный поиск и блокировка контента для взрослых";
-
-/* Google DNS server description */
-"google_dns_description" = "Бесплатный альтернативный DNS-сервис от Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS-сервер, защищающий устройство от фишинга и мошенничества";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Сервер OpenDNS с блокировкой контента для взрослых";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Бесплатный альтернативный DNS-сервис с защитой от фишинга и шпионских программ";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Бесплатный DNS сервис от Сloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Антивирусный DNS-сервер Cloudflare, который блокирует вредоносные домены";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Блокирующий сервер Cloudflare ограничивает доступ к вредоносным и \"взрослым\" доменам";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS-сервис от SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Безопасность";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Блокировка контента для взрослых";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Политика \"Без логов\"";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Безопасный поиск";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Блокировка рекламы";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Блокирует известные фишинговые и другие опасные домены";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Блокирует сайты с контентом для взрослых";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Не хранит журналы DNS-запросов";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Когда это возможно, безопасный поиск применяется в браузерах";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Блокирует системы отслеживания";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Без шифрования (Системный DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (экспериментальный)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Вы уверены, что хотите выйти?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Введите ваш пароль";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Добавить собственный фильтр для блокировки контента: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Добавить собственный DNS-фильтр: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Включить фильтр: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Отключить фильтр: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Неудачно";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Выбрать DNS-сервер: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Активировать премиум-функции %@ лицензионным ключом";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Добавить пользовательские правила";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Добавить пользовательские правила DNS";

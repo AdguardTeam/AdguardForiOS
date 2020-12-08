@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Úplný tunel (bez ikony VPN), nekompatibilní s jinými aplikacemi VPN, méně stabilní";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS je alternativní způsob ochrany vašeho soukromí před různými čítači, analytickými systémy a podvodnými stránkami";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + bezpečné vyhledávání a blokování obsahu pro dospělé";
-
-/* Google DNS server description */
-"google_dns_description" = "Volná alternativní DNS služba poskytovaná společností Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS servery, které chrání vaše zařízení před online hrozbami";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS servery s blokováním obsahu pro dospělé";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Volně dostupná alternativa pro DNS službu s ochranou před podvodnými weby a škodlivým software";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Volně dostupná alternativa DNS od Cloudfare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "DNS servery společnosti Cloudflare s ochranou proti podvodnému software a doménám";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Servery společnosti Cloudflare, které omezují přístup na podvodné domény včetně domén s obsahem pro dospělé";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS od SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Bezpečnost";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokování obsahu pro dospělé";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Žádné zásady protokolování";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Bezpečné vyhledávání";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blokování reklam";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokuje nebezpečné a podvodné domény";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokuje weby s obsahem pro dospělé";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Neukládá záznam Vašich DNS požadavků";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Pokud je to možné, je v prohlížeči vynuceno bezpečné vyhledávání";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokuje sledovací systémy";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Bez šifrování (Systémový DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS přes TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS skrze QUIC (experimentální)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Opravdu se chcete odhlásit?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Zde vložte své heslo";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Přidat vlastní filtr blokování obsahu: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Přidat vlastní DNS filtr: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Povolit filtr: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Zakázat filtr: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neúspěšné";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Vyberte DNS server: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivujte prémiové funkce s licenčním klíčem %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Přidat uživatelská pravidla";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Přidat uživatelská pravidla DNS";

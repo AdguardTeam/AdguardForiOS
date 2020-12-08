@@ -233,9 +233,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>%d teden</string>
+        <string>En teden</string>
         <key>two</key>
-        <string>%d tedna</string>
+        <string>Dva tedna</string>
         <key>few</key>
         <string>%d tednov</string>
         <key>other</key>
