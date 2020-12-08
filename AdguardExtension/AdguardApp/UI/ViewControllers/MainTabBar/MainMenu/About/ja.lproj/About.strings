@@ -4,8 +4,14 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "AdGuardについて";
 
+/* Class = "UIButton"; normalTitle = "Acknowlegdements"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "本製品についての詳細";
+
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
 "jMW-e4-GbU.title" = "ログイン";
+
+/* Class = "UIButton"; normalTitle = "Discuss AdGuard"; ObjectID = "oMX-oj-ZeJ"; */
+"oMX-oj-ZeJ.normalTitle" = "AdGuardについて話し合う (SNS・フォーラムなど)";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "利用許諾契約 (EULA)";

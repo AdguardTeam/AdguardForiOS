@@ -14,7 +14,7 @@
 "Em7-2h-SKs.text" = "Ayúdanos a mejorar AdGuard";
 
 /* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
-"GA6-E3-BcJ.text" = "Reportar un error";
+"GA6-E3-BcJ.text" = "Informar de un error";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Protección para Safari";

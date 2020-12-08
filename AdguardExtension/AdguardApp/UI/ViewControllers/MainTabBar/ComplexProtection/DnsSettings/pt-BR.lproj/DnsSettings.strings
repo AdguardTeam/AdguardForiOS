@@ -40,6 +40,9 @@
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Ative este módulo para melhorar sua privacidade e criptografar o seu tráfego DNS.";
 
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-sobre-QUIC (experimental)";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Proteção de DNS";
 
@@ -47,7 +50,7 @@
 "Uem-fP-tai.normalTitle" = "EXPERIMENTE GRATUITAMENTE";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Lista branca";
+"Wml-J6-ced.text" = "Lista de permissões";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "CANCELAR";
@@ -86,7 +89,7 @@
 "iaJ-tk-ohH.text" = "Você pode melhorar a sua privacidade online criptografando o tráfego DNS. Para isso, escolha um dos provedores de DNS recomendados.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Lista negra";
+"ihd-7R-RfE.text" = "Lista de bloqueio";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "CANCELAR";

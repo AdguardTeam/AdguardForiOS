@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "Não foi possível carregar os filtros no Safari. Portanto, as alterações recentes não foram aplicadas.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar as suas regras e a lista branca, ou alterar o conjunto de filtros utilizados.";
+"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar as suas regras e a lista de permissões, ou alterar o conjunto de filtros utilizados.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NÃO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Lista branca (invertida)";
+"inverted_whitelist_title" = "Lista de permissões (invertida)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplicando alterações...";
@@ -131,7 +131,7 @@
 "dns_whitelist_text" = "Digite aqui os nomes de domínio separados por quebras de linha. O AdGuard irá permitir todas as conexões para estes domínios.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Esta lista negra suporta a<a href=\"%@\">Sintaxe de DNS do AdGuard</a>. Digite aqui as regras separadas por quebras de linha. O AdGuard irá bloquear todas as conexões aos domínios que correspondem a estas regras.";
+"dns_blacklist_text_format" = "Esta lista de bloqueio suporta a<a href=\"%@\">Sintaxe de DNS do AdGuard</a>. Digite aqui as regras separadas por quebras de linha. O AdGuard irá bloquear todas as conexões aos domínios que correspondem a estas regras.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Atualizando...";
@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (sem o ícone VPN), incompatível com outros aplicativos VPN (instável)";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "O AdGuard DNS é uma forma alternativa de proteger a sua privacidade de diferentes contadores, sistemas analíticos, sites de phishing";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + pesquisa segura com bloqueio de conteúdo adulto";
-
-/* Google DNS server description */
-"google_dns_description" = "Serviço de DNS alternativo gratuito do Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Servidor DNS que protege o seu dispositivo contra phishing e fraudes";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Servidor OpenDNS com bloqueio de conteúdo adulto";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Serviço DNS gratuito com proteção contra phishing e spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Serviço de DNS gratuito do Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Servidor DNS anti-malware da Cloudflare que bloqueia domínios maliciosos";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Servidor de bloqueio do Cloudflare que restringe o acesso a domínios maliciosos e \"adultos\"";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Serviço de DNS do SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Segurança";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Bloqueio de conteúdo adulto";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Nenhuma política de registro";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Pesquisa segura";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Bloqueio de anúncios";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Bloqueia domínios conhecidos de phishing";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Bloqueia sites com conteúdo adulto";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Não armazena seus registros de consultas DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Sempre que possível, a pesquisa segura será imposta nos navegadores";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Bloqueia sistemas de rastreamento";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Sem criptografia (DNS do sistema)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-sobre-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-sobre-QUIC (experimental)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Você tem certeza que deseja encerrar a sessão?";
@@ -431,13 +374,13 @@
 "wifi_data_description" = "Proteção DNS em Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Lista branca";
+"allowlist_title" = "Lista de permissões";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Lista branca";
+"whitelist_title" = "Lista de permissões";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Lista negra";
+"dns_blacklist_title" = "Lista de bloqueio";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Regras de usuário do Safari";
@@ -458,16 +401,16 @@
 "disabled" = "Desativado";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Remover da lista branca";
+"remove_from_whitelist" = "Remover da lista de permissões";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "Remover da lista negra";
+"remove_from_blacklist" = "Remover da lista de bloqueio";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Adicionar na lista branca";
+"add_to_whitelist" = "Adicionar na lista de permissões";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "Adicionar na lista negra";
+"add_to_blacklist" = "Adicionar na lista de bloqueio";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Permite o bloqueio de sites de phishing e outros domínios perigosos. Disponível para usuários Premium";
@@ -596,7 +539,7 @@
 "complex_disabled" = "Todos os módulos de proteção está desativados";
 
 /*(TodayViewController) DNS protection is enabled text  */
-"system_enabled" = "Proteção contra rastreamento";
+"system_enabled" = "Proteção de DNS";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d solicitações, %2$d criptografado";
@@ -632,25 +575,25 @@
 "dns_request_status_allowlisted" = "Permitido";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "adicionado na lista branca";
+"dns_request_user_status_added_to_whitelist" = "adicionado na lista de permissões";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "adicionado na lista negra";
+"dns_request_user_status_added_to_blacklist" = "adicionado na lista de bloqueio";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "removido da lista branca";
+"dns_request_user_status_removed_from_whitelist" = "removido da lista de permissões";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "removido da lista negra";
+"dns_request_user_status_removed_from_blacklist" = "removido da lista de bloqueio";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Abre as <b>configurações</b>";
+"onboarding_first_step_text" = "Abre os <b>ajustes</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Toque no <b>Safari</b> e escolha no menu <b>\"bloqueadores de conteúdo\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Ative em %@ todos os bloqueadores de conteúdo</b> e volte para o aplicativo!";
+"onboarding_third_step_text" = "<b>Ative em todos os bloqueadores de conteúdo</b> e volte para o aplicativo!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS do sistema";
@@ -662,7 +605,7 @@
 "block_request" = "Bloquear solicitação";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Adicionar domínio na lista branca";
+"whitelist_request" = "Adicionar domínio na lista de permissões";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Tutorial em vídeo";
@@ -671,10 +614,10 @@
 "invalid_upstream_message" = "Você inseriu um upstream inválido";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Lista negra do sistema";
+"system_blacklist" = "Lista de bloqueio do sistema";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Lista branca do sistema";
+"system_whitelist" = "Lista de permissões do sistema";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Detalhes";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Digite a sua senha aqui";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Adicionar o filtro de bloqueador de conteúdo personalizado: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Adicionar o filtro DNS personalizado: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Ativar filtro %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Desativar filtro %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Mal sucedido";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Selecione o servidor DNS %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Ativar recursos premium com a chave de licença %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Adicionar regras de usuário";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Adicionar regras de DNS do usuário";

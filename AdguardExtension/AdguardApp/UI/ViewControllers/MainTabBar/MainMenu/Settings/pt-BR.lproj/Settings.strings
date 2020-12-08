@@ -5,7 +5,7 @@
 "3zG-B5-jE5.text" = "Registros de depuração";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Inverter lista branca";
+"8ad-4w-rbs.text" = "Inverter a lista de permissões";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatível com outros aplicativos VPN, instável";
@@ -32,7 +32,7 @@
 "GFO-xu-Bir.text" = "O AdGuard gravará mais detalhes no arquivo de registro. Não ative a menos que você precise rastrear um erro";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
-"GGp-kp-YJI.text" = "Split-Tunnel";
+"GGp-kp-YJI.text" = "Túnel dividido";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Ative esta opção se você tiver problemas com a conexão de internet enquanto o AdGuard estiver em execução";
@@ -68,7 +68,7 @@
 "X0A-gU-hzf.text" = "Atualização automática apenas por Wi-Fi";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
-"aIJ-gX-03k.text" = "Full-Tunnel";
+"aIJ-gX-03k.text" = "Túnel completo";
 
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
 "bnd-Eh-hpk.text" = "Modo túnel";
@@ -80,7 +80,7 @@
 "eIa-RB-Phv.text" = "Configurações avançadas";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
-"eiP-yl-Xb3.text" = "Full-Tunnel (sem ícone de VPN)";
+"eiP-yl-Xb3.text" = "Túnel completo (sem ícone de VPN)";
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatível com aplicativos de \"VPN Pessoal\"";

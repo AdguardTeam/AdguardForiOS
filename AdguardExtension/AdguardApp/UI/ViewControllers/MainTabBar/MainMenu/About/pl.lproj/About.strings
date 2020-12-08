@@ -4,8 +4,14 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "O programie";
 
+/* Class = "UIButton"; normalTitle = "Acknowlegdements"; ObjectID = "htU-yE-FEi"; */
+"htU-yE-FEi.normalTitle" = "Podziękowanie";
+
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
 "jMW-e4-GbU.title" = "Zaloguj się";
+
+/* Class = "UIButton"; normalTitle = "Discuss AdGuard"; ObjectID = "oMX-oj-ZeJ"; */
+"oMX-oj-ZeJ.normalTitle" = "Porozmawiaj o AdGuard";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "EULA";

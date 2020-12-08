@@ -20,7 +20,7 @@
 "nIO-Sh-01f.normalTitle" = "傳送";
 
 /* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "如果您想要收到我們的回覆，輸入電子郵件地址";
+"oJi-EL-gWT.placeholder" = "如果您想要收到我們的回覆，輸入電子郵件位址";
 
 /* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
 "tCN-dT-J7Y.normalTitle" = "首頁";

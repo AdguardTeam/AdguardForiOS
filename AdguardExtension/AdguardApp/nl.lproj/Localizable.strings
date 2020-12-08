@@ -175,66 +175,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (zonder VPN icon), geen compatibiliteit met andere VPN apps, minder stabiliteit";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "blokkeert advertenties, trackers en phishing websites";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "blokkeert al het bovenstaande en pornografische websites";
-
-/* Google DNS server description */
-"google_dns_description" = "wereldwijde DNS oplossingsservice van Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Aangepaste filtering en identiteitsdiefstal bescherming";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server met blokkering van volwassen inhoud";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Gratis alternatieve DNS service met bescherming tegen phishing en spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Gratis DNS service door Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS-server via Cloudfare die kwaadaardige domeinen blokkeert";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudfare's blokkeringsserver die de toegang beperkt tot kwaadaardige en 'volwassen' domeinen";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS service door SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Beveiliging";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Volwassen inhoud blokkeren";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Geen logboekbeleid";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Veilig zoeken";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Advertentie blokkering";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokkeert bekende phishing en andere gevaarlijke domeinen";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokkeert websites met volwassen inhoud";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Bewaart je DNS-verzoeken logs niet";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Wanneer mogelijk, wordt veilig zoeken geforceerd in de browser";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokkeert traceer systemen";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Geen encryptie (Systeem DNS)";
 
@@ -251,7 +191,10 @@
 "doh_protocol" = "DNS-via-HTTPS";
 
 /* DnsProviderDetailsController - dns over https rotocol */
-"dot_protocol" = "DNS-over-TLS";
+"dot_protocol" = "DNS-via-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-via-QUIC (experimenteel)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Weet u zeker dat u wilt uit loggen?";
@@ -440,7 +383,7 @@
 "common_clear" = "Verwijder";
 
 /* (ListOfRulesModel) title for Save button */
-"common_save" = "Opslaan";
+"common_save" = "Bewaren";
 
 /* (ListOfRulesModel) title for import */
 "import" = "Importeren";
@@ -844,3 +787,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Wachtwoord hier invoeren";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Het aangepaste filter voor inhoudsblokkering toevoegen: \"%@\"";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Het aangepaste DNS-filter toevoegen: %@\"";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Filter inschakelen: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Filter uitschakelen: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Mislukt";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNS-server selecteren: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Premium functies activeren met %@ licentie sleutel";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Gebruikersregels toevoegen";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "DNS gebruikersregels toevoegen";
