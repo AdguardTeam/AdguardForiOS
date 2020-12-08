@@ -29,6 +29,7 @@ protocol FilterDetailedInterface {
     var updateDate: Date? { get set }
     var rulesCount: Int? { get set }
     var homepage: String? { get set }
+    var subscriptionUrl: String? { get set }
     var removable: Bool { get }
     var editable: Bool { get }
 }

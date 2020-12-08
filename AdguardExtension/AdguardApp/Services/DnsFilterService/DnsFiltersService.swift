@@ -54,9 +54,17 @@ protocol DnsFiltersServiceProtocol {
     // automaticaly updates vpn settings when changed
     func addFilter(_ filter: DnsFilter, data: Data?)
     
+    // adds filter by url
+    // automaticaly updates vpn settings when changed
+    func addFilter(name: String, url: URL, networking: ACNNetworkingProtocol, callback: ((Bool)->Void)?)
+    
     // deletes filter from array of filters
     // automaticaly updates vpn settings when changed
     func deleteFilter(_ filter: DnsFilter)
+    
+    // disable all filters from array of filters
+    // automaticaly updates vpn settings when changed
+    func disableAllFilters()
     
     // Updates filters with new meta
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?)
@@ -351,6 +359,23 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
     }
     
+    func disableAllFilters() {
+        
+        DDLogInfo("(DsnFiltersService) disable all filters")
+        
+        for filter in filters {
+            filter.enabled = false
+        }
+        
+        saveFiltersMeta()
+        
+        vpnManager?.updateSettings{ error in
+            if error != nil {
+                DDLogError("(DsnFiltersService) disableAllFilters error: \(error!)")
+            }
+        }
+    }
+    
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
         
         if !configuration.proStatus {
@@ -371,38 +396,33 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             let group = DispatchGroup()
             
             for (i,filter) in self.filters.enumerated() {
+                
                 guard let url = URL(string: filter.subscriptionUrl ?? "") else { return }
                 
                 group.enter()
                 
-                self.parser.parse(from: url, networking: networking) {[weak self] (result, error) in
+                self.getDnsFilter(name: filter.name, url: url, enabled: filter.enabled, networking: networking) { (dnsFilter, data) in
                     
                     defer {
                         group.leave()
                     }
                     
-                    guard let self = self else { return }
+                    guard let dnsFilter = dnsFilter else { return }
                     
-                    if let parserError = error {
-                        DDLogError("Failed updating dns filters with error: \(parserError)")
-                        return
+                    dnsFilter.id = filter.id
+                    dnsFilter.importantDesc = filter.importantDesc
+                    if filter.desc != nil {
+                        dnsFilter.desc = filter.desc
                     }
-                    if let parserResult = result {
-                        let meta = parserResult.meta
-                        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: filter.name ?? meta.name, date: meta.updateDate ?? Date(), enabled: filter.enabled, desc: filter.desc ?? meta.descr, importantDesc: filter.importantDesc, version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
-                        dnsFilter.id = filter.id
-                            
-                        self.filters[i] = dnsFilter
-                        
-                        if let dataToSave = parserResult.filtersData {
-                            let fileName = self.filterFileName(filterId: dnsFilter.id)
-                            self.resources.save(dataToSave, toFileRelativePath: fileName)
-                        }
-                        
-                        self.saveFiltersMeta()
-                                                    
-                        return
+
+                    self.filters[i] = dnsFilter
+
+                    if let dataToSave = data {
+                        let fileName = self.filterFileName(filterId: dnsFilter.id)
+                        self.resources.save(dataToSave, toFileRelativePath: fileName)
                     }
+
+                    self.saveFiltersMeta()
                 }
             }
             
@@ -413,6 +433,27 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             }
             
             self.filtersAreUpdating = false
+        }
+    }
+    
+    func addFilter(name: String, url: URL, networking: ACNNetworkingProtocol, callback: ((Bool) -> Void)?) {
+        
+        getDnsFilter(name: name, url: url, enabled: true, networking: networking) { [weak self] (dnsFilter, data) in
+            guard let self = self, let dnsFilter = dnsFilter, let data = data else {
+                callback?(false)
+                return
+            }
+            
+            self.filters.append(dnsFilter)
+            
+            dnsFilter.id = self.idCounter
+            
+            let fileName = self.filterFileName(filterId: dnsFilter.id)
+            self.resources.save(data, toFileRelativePath: fileName)
+            
+            self.saveFiltersMeta()
+            
+            callback?(true)
         }
     }
     
@@ -509,6 +550,25 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             if let filter = filters.first(where: { (filter) -> Bool in
                 return filter.id == predefined }) {
                 deleteFilter(filter)
+            }
+        }
+    }
+    
+    private func getDnsFilter(name: String?, url: URL, enabled:Bool, networking: ACNNetworkingProtocol, callback: @escaping ((DnsFilter?, Data?) -> Void)) {
+        self.parser.parse(from: url, networking: networking) { (result, error) in
+            var filter: DnsFilter? = nil
+            
+            if let parserError = error {
+                callback(nil, nil)
+                DDLogError("Failed updating dns filters with error: \(parserError)")
+                return
+            }
+            if let parserResult = result {
+                let meta = parserResult.meta
+                filter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: name ?? meta.name, date: meta.updateDate ?? Date(), enabled: enabled, desc: meta.descr, importantDesc: "", version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+                    
+                callback(filter, parserResult.filtersData)
+                return
             }
         }
     }

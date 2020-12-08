@@ -70,6 +70,9 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection désactivée";
 
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "M'abonner";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "ACHETER";
 
@@ -181,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-tunnel (sans icône VPN), incompatible avec d'autres applications VPN, moins stable";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS est un moyen alternatif de protéger votre confidentialité des différents compteurs, systèmes d'analyse et des sites d'hameçonnage.";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "DNS d'AdGuard + Recherche sécurisée et blocage du contenu pour adultes";
-
-/* Google DNS server description */
-"google_dns_description" = "Service de DNS gratuit de Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Serveur DNS qui protège votre appareil de l'hameçonnage et des escrocs";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Serveur OpenDNS avec blocage du contenu réservé aux adultes";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Service DNS alternatif gratuit avec protection contre le phishing et les logiciels espions";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Service DNS gratuit par Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Serveur DNS anti-maliciel de Cloudflare qui bloque les domaines malveillants";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Serveur de blocage de Cloudflare qui restreint l’accès aux domaines malveillants et « adultes »";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Service DNS par SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sécuritée";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blocage de contenu pour adultes";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politique no logging";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Recherche sécurisée";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blocage des publicités";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Bloque les domaines d'hameçonnage connus";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Bloque les sites Web ayant des contenus pour adultes";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Ne stocke pas les journaux de vos requêtes DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Dans la mesure du possible, la recherche sécurisée est appliquée dans les navigateurs";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Bloque les annonces et les serveurs de suivi";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Aucun chiffrage (DNS du système)";
 
@@ -258,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (expérimental)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Êtes-vous sûr de vouloir quitter ?";
@@ -850,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Saisissez votre mot de passe ici";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Ajouter le filtre de blocage de contenu personnalisé : %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Ajouter le filtre DNS personnalisé : %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Activer le filtre : %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Désactiver le filtre : %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Échec";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Choisir le serveur DNS : %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Activer les fonctionnalités premium avec la clef de licence %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Ajouter les Règles Utilisateur";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Ajouter les Règles Utilisateur DNS";

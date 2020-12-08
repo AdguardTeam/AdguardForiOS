@@ -181,66 +181,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без значка VPN), не стасуем з іншымі VPN-дадаткамі, менш стабільны";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS – альтэрнатыўны спосаб абароны вашай прыватнасці ад разнастайных анлайн лічыльнікаў і сістэм збору дадзеных, небяспечных і фішынгавых сайтаў";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + бяспечны пошук і блакаванне кантэнту для дарослых";
-
-/* Google DNS server description */
-"google_dns_description" = "Бясплатная альтэрнатыўная паслуга DNS ад Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS-сервер з наладжвальнай фільтрацыяй, што бароніць вашу прыладу ад шкоднага ПА";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Сервер OpenDNS з блакаваннем кантэнту для дарослых";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Бясплатны альтэрнатыўны DNS-сэрвіс з абаронай ад фішынгу і шпіёнскіх праграм";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Бясплатны сэрвіс DNS ад Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "DNS-сервер ад Cloudflare, які дазваляе блакаваць шкоднасныя дамены";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Блакавальны сервер Cloudflare, які абмяжоўвае доступ да шкоднасных і \"дарослых\" даменаў";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS-сэрвіс ад SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Бяспека";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Блакаванне кантэнту для дарослых";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Палітыка \"Без логаў\"";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Бяспечны пошук";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Блакаванне рэкламы";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Блакуе вядомыя фішынгавыя і іншыя небяспечныя дамены";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Блакуе сайты з кантэнтам для дарослых";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Не захоўвае часопісы DNS-запытаў";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Калі гэта магчыма, бяспечны пошук ужываецца ў браўзарах";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Блакуе сістэмы асочвання";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Без шыфравання (Сістэмны DNS)";
 

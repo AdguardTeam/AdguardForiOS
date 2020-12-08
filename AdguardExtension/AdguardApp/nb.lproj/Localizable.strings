@@ -151,63 +151,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-tunnel (uten VPN-ikon), inkompatibel med andre VPN-apper, mindre stabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "blokkerer annonser, sporinger og nettfisking";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "blokkerer alt over og voksne nettsider";
-
-/* Google DNS server description */
-"google_dns_description" = "global dns-oppløsningstjeneste levert av Google";
-
-/* Open DNS server description */
-"open_dns_description" = "egendefinert filtrering og beskyttelse mot identitetstyveri";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS-tjener med blokkering av voksent innhold";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Gratis alternativ DNS-tjeneste med beskyttelse mot phishing og spionvare";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Gratis DNS-tjeneste fra Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-skadevare-DNS-tjener fra Cloudflare som blokkerer skadelige domener";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare sin blokkeringstjener som begrenser tilgang til skadelige og \"voksne\" domener";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS-tjeneste fra SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sikkerhet";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokkering av voksent innhold";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Ingen loggføringsretningslinjer";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Trygge søk";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Reklameblokkering";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokkerer gjenkjent phishing og andre farlige domener";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokkerer nettsteder med voksent innhold";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Lagrer ikke dine DNS-forespørselslogger";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokkerer sporingssystemer";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Ingen kryptering (System-DNS)";
 
@@ -234,6 +177,9 @@
 
 /* login error message */
 "login_error_message" = "En feil oppstod under pålogging";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Vilkår og betingelser</a> og <a href=%1$@>personvernsretningslinjer</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
@@ -466,6 +412,9 @@
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Tilbakestill aktivitetsloggen";
 
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Alle aktivitetsloggføringer vil bli slettet!";
+
 /*(MainScreen) "24 hours" chart date type */
 "chart_24hours" = "24 timer";
 
@@ -495,6 +444,9 @@
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nytt DNS-filter";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Rediger tilpasset filter";
 
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Legg til";
@@ -528,6 +480,9 @@
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ regler er skrudd på";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Skru av noen filtre for at det skal fungere riktig";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokkert";

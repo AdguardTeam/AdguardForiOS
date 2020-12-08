@@ -60,6 +60,11 @@ protocol PurchaseServiceProtocol {
     var purchasedThroughLogin: Bool {get}
     
     /**
+     returns true if user has been logged in through Setapp
+     */
+    var purchasedThroughSetapp: Bool {get}
+    
+    /**
      returns true if premium expired. It works both for in-app purchases and for adguard licenses
      */
     func checkPremiumStatusChanged()
@@ -82,7 +87,7 @@ protocol PurchaseServiceProtocol {
         2) login directly with license key. In this case we immediately send status request with this license key
      */
     func login(withAccessToken token: String?, state: String?)
-    func login(withLicenseKey key: String)
+    func login(withLicenseKey key: String, completion: @escaping (Bool)->Void)
     
     /**
      Log with name and password
@@ -111,6 +116,9 @@ protocol PurchaseServiceProtocol {
     
     /** resets all login data */
     func reset(completion: @escaping ()->Void )
+    
+    /** handle setapp subscription changes */
+    func updateSetappState(subscription: SetappSubscription)
 }
 
 // MARK: - public constants -
@@ -221,8 +229,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     private var notificationToken: NotificationToken?
 
-    private var setappObservation: NSKeyValueObservation?
-    
     // MARK: - public properties
     
     var isProPurchased: Bool {
@@ -233,6 +239,10 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         get {
             return loginService.loggedIn
         }
+    }
+    
+    var purchasedThroughSetapp: Bool {
+        return resources.purchasedThroughSetapp
     }
     
     @objc dynamic var isProPurchasedInternal: Bool {
@@ -324,9 +334,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         loginService.activeChanged = { [weak self] in
             self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
         }
-        
-        updateSetappState(subscription: SetappManager.shared.subscription)
-        observeSetappLicense()
     }
     
     func start() {
@@ -337,13 +344,14 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     @objc
     func checkLicenseStatus() {
         loginService.checkStatus { [weak self] (error) in
-            self?.processLoginResult(error)
+            _ = self?.processLoginResult(error)
         }
     }   
     
-    func login(withLicenseKey key: String) {
+    func login(withLicenseKey key: String, completion: @escaping (Bool)->Void) {
         loginService.login(licenseKey: key){ [weak self] (error) in
-            self?.processLoginResult(error)
+            let result = self?.processLoginResult(error) ?? false
+            completion(result)
         }
     }
     
@@ -652,26 +660,27 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
      
     // MARK: helper methods
     
-    private func processLoginResult(_ error: Error?) {
+    private func processLoginResult(_ error: Error?)->Bool {
         
         DDLogInfo("(PurchaseService) processLoginResult")
         if error != nil {
             
             DDLogError("(PurchaseService) processLoginResult error \(error!.localizedDescription)")
             postNotification(PurchaseService.kPSNotificationLoginFailure, error)
-            return
+            return false
         }
         
         // check state
         if !loginService.hasPremiumLicense {
             postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
-            return
+            return false
         }
         
         let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
                         PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
         
         NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+        return true
     }
     
     private func isInAppPurchaseActive()->Bool {
@@ -810,22 +819,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         return locale.contains("_RU") || locale.contains("_UA")
     }
     
-    // MARK: Setapp license
-    
-    private func observeSetappLicense() {
-        
-        setappObservation = SetappManager.shared.observe(\.subscription) { [weak self] (manager, change) in
-            
-            guard let self = self else { return }
-            DDLogInfo("(PurchaseService) setapp subscription changed")
-            
-            DDLogInfo("(PurchaseService) setapp new subscription is active: \(manager.subscription.isActive)")
-            
-            self.updateSetappState(subscription: manager.subscription)
-        }
-    }
-    
-    private func updateSetappState(subscription: SetappSubscription) {
+    func updateSetappState(subscription: SetappSubscription) {
         if (subscription.isActive && !resources.purchasedThroughSetapp) ||
             !subscription.isActive && resources.purchasedThroughSetapp {
             resources.purchasedThroughSetapp = subscription.isActive

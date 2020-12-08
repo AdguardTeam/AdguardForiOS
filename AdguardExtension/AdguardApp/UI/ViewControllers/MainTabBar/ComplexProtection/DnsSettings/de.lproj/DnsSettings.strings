@@ -17,10 +17,10 @@
 "6e9-sP-YMb.normalTitle" = "SPEICHERN";
 
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
-"84p-U2-sd8.text" = "AdGuard blockiert keine Domains aus dieser Liste";
+"84p-U2-sd8.text" = "AdGuard sperrt keine Domains die in dieser Liste enthalten sind";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
-"AOm-kV-l4z.text" = "AdGuard blockiert die Domains aus dieser Liste";
+"AOm-kV-l4z.text" = "AdGuard sperrt Domains die in dieser Liste enthalten sind";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "SPEICHERN UND AUSWÄHLEN";
@@ -39,6 +39,9 @@
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Aktivieren Sie dieses Modul, um Tracking-Domains zu sperren und Ihren DNS-Datenverkehr zu verschlüsseln.";
+
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (experimentell)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS-Schutz";
@@ -116,7 +119,7 @@
 "pzP-ns-QSS.text" = "Servername";
 
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Passen Sie Ihren DNS-Verkehr an - fügen Sie Ihre eigenen Regeln hinzu.";
+"qjN-LB-N3T.text" = "Passen Sie Ihren DNS-Verkehr an durch das Hinzufügen Ihre eigenen Regeln.";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Adresse des DNS-Servers";

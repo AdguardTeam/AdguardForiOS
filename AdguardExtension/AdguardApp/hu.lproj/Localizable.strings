@@ -122,10 +122,10 @@
 "blacklist_text_format" = "Itt tudja megadni az egyedi szabályait.<br>Olvassa el <a href=\"%@\">a szűrőszabályok dokumentációját</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard letiltja a szűrést a Safari webhelyen.";
+"whitelist_text" = "Itt írja be a domain neveket. Az AdGuard nem fogja tiltani a hozzáférést ezekhez a domainekhez, figyelmen kívül hagyva az összes többi beállítást.";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "Itt adja meg a domain neveket. Az AdGuard engedélyezi a szűrést a Safari-ban csak ezeken a webhelyeken.";
+"inverted_whitelist_text" = "Ide írja be a domain neveket. Az AdGuard csak ezeken a webhelyeken engedélyezi a szűrést a Safari-ban.";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "Adja meg a domain neveket enterekkel elválasztva. Az AdGuard engedélyezni fogja a kapcsolódást ezekhez a domainekhez.";
@@ -178,66 +178,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "A Full-Tunnel (VPN ikon nélkül), más VPN-alkalmazásokkal összeegyeztethetetlen, kevésbé stabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "Az AdGuard DNS egy alternatív módja annak, hogy megvédje a magánéletét a analitikai számlálóktól és rendszerektől, és adathalász webhelyekről";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch és a felnőtt tartalom-blokkolása";
-
-/* Google DNS server description */
-"google_dns_description" = "Google Ingyenes, alternatív DNS szolgáltatása";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS kiszolgáló, amely megvédi a készüléket az online fenyegetésektől";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS szerver felnőtt tartalmú blokkolással";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Ingyenes alternatív DNS-szolgáltatás, adathalászat és a kémprogramok elleni védelemmel";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Cloudflare ingyenes DNS szolgáltatása";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Malware elleni DNS-kiszolgáló a Cloudflaretől, amely blokkolja a rosszindulatú domaineket";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "A Cloudflare blokkoló szervere, amely letiltja a rosszindulatú és a 'felnőtt' domainek elérését";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS szolgáltatás a SafeDNS által";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Biztonság";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Felnőtt tartalom blokkolása";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Nincs naplózási irányelv";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Biztonságos keresés";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Hirdetésszűrés";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokkolja az ismert adathalász domaineket";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokkolja a felnőtt tartalmú webhelyeket";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Nem tárolja a DNS lekérdezési naplóit";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Amikor csak lehetséges, a Biztonságos keresés kényszerítése a böngészőkben";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokkolja a hirdetéseket és a nyomkövető szervereket";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Nincs titkosítás (rendszer DNS)";
 
@@ -255,6 +195,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (kísérleti)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Biztosan kijelentkezik?";
@@ -847,3 +790,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Adja meg a jelszavát";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Egyéni tartalomblokkoló szűrő hozzáadása: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Egyéni DNS szűrő hozzáadása: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Szűrő engedélyezése: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Szűrő kikapcsolása: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Sikertelen";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNS szerver választása: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Prémium funkciók engedélyezése a(z) %@ licenckulccsal";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Saját szabályok hozzáadása";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Saját DNS szabályok hozzáadása";

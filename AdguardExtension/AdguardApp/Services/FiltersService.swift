@@ -28,6 +28,7 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     var version: String?
     var enabled: Bool = false
     var homepage: String?
+    var subscriptionUrl: String?
     var tags:[(name: String,heighlighted: Bool)]?
     var langs:[(name: String, heighlighted: Bool)]?
     var rulesCount: Int?
@@ -62,6 +63,7 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
         copy.version = version
         copy.enabled = enabled
         copy.homepage = homepage
+        copy.subscriptionUrl = subscriptionUrl
         copy.tags = tags
         copy.langs = langs
         copy.rulesCount = rulesCount
@@ -130,6 +132,9 @@ protocol FiltersServiceProtocol {
     
     /* enable/disable filter */
     func setFilter(_ filter: Filter, enabled: Bool)
+    
+    /* disable all filters */
+    func disableAllFilters()
     
     /* add custom filter */
     func addCustomFilter(_ filter: AASCustomFilterParserResult)
@@ -415,7 +420,29 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         guard let group = getGroup(filter.groupId) else { return }
         
+        if filter.enabled {
+            group.enabled = true
+        }
+        
         updateGroupSubtitle(group)
+        notifyChange()
+        processUpdate()
+    }
+    
+    func disableAllFilters() {
+        updateQueue.sync { [weak self] in
+            for group in groups {
+                for filter in group.filters {
+                    filter.enabled = false
+                    self?.enabledFilters[filter.filterId] = false
+                }
+            }
+        }
+        
+        for group in groups {
+            updateGroupSubtitle(group)
+        }
+        
         notifyChange()
         processUpdate()
     }
@@ -434,6 +461,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             newFilter.name = filter.meta.name
             newFilter.desc = filter.meta.descr
             newFilter.homepage = filter.meta.homepage
+            newFilter.subscriptionUrl = filter.meta.subscriptionUrl
             newFilter.version = filter.meta.version
             newFilter.enabled = true
             newFilter.rulesCount = filter.rules.count
@@ -447,6 +475,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             updateGroupSubtitle(group)
             notifyChange()
         }
+        
+        enabledFilters[filter.meta.filterId.intValue] = true
         
         antibanner.subscribeCustomFilter(from: filter) {
             [weak self] in
@@ -569,6 +599,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.updateDate = filterMeta.updateDate
                 filter.enabled = group.enabled && filterMeta.enabled.boolValue
                 filter.homepage = filterMeta.homepage
+                filter.subscriptionUrl = filterMeta.subscriptionUrl
                 filter.displayNumber = filterMeta.displayNumber.intValue
                 
                 if filter.groupId == FilterGroupId.custom {
