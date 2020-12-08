@@ -122,10 +122,9 @@ class LocalizedStringsTests: XCTestCase {
         let enStringsdictFormatSpecifiers = getFormatsByString(enStringsDict)
         
         for locale in allSupportedLocalizations {
-            // TODO: - Uncomment when strings are updated
-            
-            //processNormalStrings(forLocale: locale, enFormatSpecifiers: enFormatSpecifiers)
-            //processStringsdict(forLocale: locale, enFormatSpecifiers: enStringsdictFormatSpecifiers)
+            if locale == "Base" { continue }
+            processNormalStrings(forLocale: locale, enFormatSpecifiers: enFormatSpecifiers)
+            processStringsdict(forLocale: locale, enFormatSpecifiers: enStringsdictFormatSpecifiers)
         }
     }
     
