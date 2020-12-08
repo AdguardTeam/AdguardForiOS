@@ -232,7 +232,7 @@ extension DnsProvidersController: NewDnsServerControllerDelegate {
 extension DnsProvidersController: DnsProviderCellDelegate {
     func selectedProvider(withTag tag: Int) {
         let provider = providers[tag]
-        guard let id = provider.providerId, let providerInfo = model.getProvider(byId: id) else {
+        guard let id = provider.providerId else {
             DDLogError("Error finding provider with id = \(provider.providerId ?? 0)")
             return
         }
@@ -241,7 +241,8 @@ extension DnsProvidersController: DnsProviderCellDelegate {
         
         if provider.isDefaultProvider {
             server = nil
-        } else {
+        } else if let providerInfo = model.getProvider(byId: id) {
+            
             if let prot = providerInfo.getActiveProtocol(resources) {
                 server = providerInfo.serverByProtocol(dnsProtocol: prot)
             }

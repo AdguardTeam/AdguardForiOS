@@ -90,6 +90,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - Native DNS view
     
+    @IBOutlet weak var nativeDnsTitleLabel: ThemableLabel!
     @IBOutlet weak var nativeDnsView: UIView!
     @IBOutlet weak var dnsProviderNameLabel: ThemableLabel!
     @IBOutlet weak var dnsProtocolNameLabel: ThemableLabel!
@@ -704,6 +705,8 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         protectionStatusLabel.text = complexText
         complexProtectionSwitch.accessibilityLabel = complexText
+        
+        nativeDnsTitleLabel.text = complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
     }
     
     private func updateProtectionStates() {

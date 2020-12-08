@@ -88,6 +88,9 @@ class DnsProvidersModel: DnsProvidersModelProtocol {
     }
     
     func getProvider(byId providerId: Int) -> DnsProviderInfo? {
+        if providerId == DnsProvidersService.systemDefaultProviderId {
+            return nil
+        }
         let providers = resources.dnsImplementation == .adGuard ? dnsProvidersService.allProviders : nativeProvidersService.providers
         return providers.first(where: { $0.providerId == providerId })
     }

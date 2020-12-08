@@ -794,6 +794,7 @@
                         <outlet property="getProView" destination="jbE-Rs-Ce2" id="JHN-OU-mFW"/>
                         <outlet property="manDialogText" destination="3qN-uj-pOb" id="Xx6-Hj-Nz6"/>
                         <outlet property="manDialogView" destination="lIg-oL-XNY" id="Lpd-HJ-n8A"/>
+                        <outlet property="nativeDnsTitleLabel" destination="8Z0-0U-Hfk" id="sly-Jg-F1s"/>
                         <outlet property="nativeDnsView" destination="W8L-FJ-MBf" id="d9R-Gx-Z6R"/>
                         <outlet property="protectionStateLabel" destination="lYA-et-eyV" id="NvP-jE-EWB"/>
                         <outlet property="protectionStatusLabel" destination="0R2-2n-Sft" id="Fxw-FL-fcy"/>

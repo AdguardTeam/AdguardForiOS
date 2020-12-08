@@ -62,9 +62,6 @@ class SafariProtectionController: UITableViewController {
     required init?(coder: NSCoder) {
         blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo)
         super.init(coder: coder)
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,6 +97,9 @@ class SafariProtectionController: UITableViewController {
             self?.updateTheme()
         }
         
+        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
+        
         updateSafariProtectionInfo()
         updateFilters()
     }
@@ -125,8 +125,10 @@ class SafariProtectionController: UITableViewController {
     }
     
     deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
+        if isViewLoaded{
+            resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
+            resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
+        }
     }
 
     // MARK: - Table view data source

@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Native DNS is working";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Native DNS is not working";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
