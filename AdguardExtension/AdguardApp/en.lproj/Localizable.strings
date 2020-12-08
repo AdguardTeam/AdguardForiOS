@@ -685,8 +685,14 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Failed to send bug report, please try again";
 
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Failed to send feedback, please try again";
+
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Your bug report was successfully sent!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Your feedback was successfully sent!";
 
 /* (BugReportController) title for bug report */
 "bug_report_title" = "Report a bug";

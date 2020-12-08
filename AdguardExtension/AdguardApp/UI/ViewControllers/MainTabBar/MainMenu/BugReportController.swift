@@ -156,12 +156,12 @@ class BugReportController: UIViewController {
     }
     
     private func showBugReportFailedAlert() {
-        let message = String.localizedString("bug_report_failed_message")
+        let message = String.localizedString(reportType == .bugReport ? "bug_report_failed_message" : "feedback_failed_message")
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
     }
     
     private func showBugReportSuccessAlert() {
-        let message = String.localizedString("bug_report_successed_message")
+        let message = String.localizedString(reportType == .bugReport ? "bug_report_successed_message" : "feedback_successed_message")
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
