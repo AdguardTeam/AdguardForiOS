@@ -590,7 +590,7 @@
 "onboarding_first_step_text" = "打开<b>设置</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "点击%@ <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
+"onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>开启 所有内容拦截器</b>后返回AdGuard 应用！";
