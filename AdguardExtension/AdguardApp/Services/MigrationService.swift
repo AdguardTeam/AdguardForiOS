@@ -168,6 +168,16 @@ class MigrationService: MigrationServiceProtocol {
             DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             setProtocolForCustomProviders()
         }
+        
+        /**
+        Migration:
+         In app version 4.0.4 (585) we changed PacketTunnelProvider ip adresses for identifying tunnel mode in AdGuard VPN
+         Restart tunnel to update ip addresses
+        */
+        if lastBuildVersion < 585 {
+            DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            vpnManager.updateSettings(completion: nil)
+        }
     }
     
     // MARK: - Methods for migrations
