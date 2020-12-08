@@ -65,6 +65,8 @@ class AppDelegateHelper: NSObject {
     private let activateLicense = "license"
     private let subscribe = "subscribe"
     private let openTunnelModeSettings = "openTunnelModeSettings"
+    private let applySettings = "apply_settings"
+    private let commonUrlScheme = "adguard"
     
     private var firstRun: Bool {
         get {
@@ -379,7 +381,6 @@ class AppDelegateHelper: NSObject {
         // Adding custom DNS server
         case (AE_SDNS_SCHEME, _):
             DDLogInfo("(AppDelegateHelper) openurl sdns: \(url.absoluteString)")
-            
             if !configuration.proStatus {
                 let success = appDelegate.presentDnsSettingsController()
                 return success
@@ -387,6 +388,18 @@ class AppDelegateHelper: NSObject {
                 let success = appDelegate.presentDnsProvidersController(url: url.absoluteString)
                 return success
             }
+            
+        case (commonUrlScheme, applySettings):
+            DDLogInfo("(AppDelegateHelper) openurl - apply settings")
+            let params = parseCustomUrlScheme(url).params
+            guard let json = params?["json"] else {
+                DDLogError("(AppDelegateHelper) there is no param 'json' in url")
+                return false
+            }
+            let parser = SettingsParser()
+            let settings = parser.parse(querry: json)
+            let success = appDelegate.presentImportSettingsController(showLaunchScreen: true, settings: settings)
+            return success
         
         // Subscribe to custom filter
         case (_, subscribe):
@@ -404,8 +417,7 @@ class AppDelegateHelper: NSObject {
             let success = appDelegate.presentTunnelModeController()
             return success
             
-        default:
-            return false
+        default: return false
         }
     }
     

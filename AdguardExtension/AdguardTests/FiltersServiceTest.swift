@@ -84,7 +84,7 @@ class FiltersServiceTest: XCTestCase {
         
         XCTAssertFalse(service.groups[0].enabled)
         service.setFilter(service.groups[0].filters[0], enabled: true)
-        XCTAssertFalse(service.groups[0].enabled)
+        XCTAssertTrue(service.groups[0].enabled)
     }
     
     func testEnableGroup() {
@@ -171,7 +171,7 @@ class FiltersServiceTest: XCTestCase {
         
         sleep(1)
         
-        XCTAssertFalse(service.groups[0].enabled)
+        XCTAssertTrue(service.groups[0].enabled)
         XCTAssertTrue(service.groups[0].filters[0].enabled)
         XCTAssertTrue(service.groups[0].filters[1].enabled)
     }

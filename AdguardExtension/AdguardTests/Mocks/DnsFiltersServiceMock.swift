@@ -19,6 +19,14 @@
 import Foundation
 
 class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
+    
+    func addFilter(name: String, url: URL, networking: ACNNetworkingProtocol, callback: ((Bool) -> Void)?) {
+        let filter = DnsFilter(subscriptionUrl: url.absoluteString, name: name, date: Date(), enabled: true, desc: nil, importantDesc: nil, version: nil, rulesCount: nil, homepage: nil)
+        filters.append(filter)
+        
+        callback?(true)
+    }
+    
     var filters: [DnsFilter] = []
     
     var enabledFiltersCount: Int = 0
@@ -45,6 +53,12 @@ class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
         
     }
     
+    func disableAllFilters() {
+        for filter in filters {
+            filter.enabled = false
+        }
+    }
+    
     func updateFilters(networking: ACNNetworkingProtocol, callback: (() -> Void)?) {
         
     }
@@ -58,7 +72,7 @@ class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
     }
     
     func addBlacklistRule(_ rule: String) {
-        
+        userRules.append(rule)
     }
     
     func removeWhitelistRules(_ rules: [String]) {

@@ -479,6 +479,39 @@ extension AppDelegate {
         topVC.present(howToSetupVC, animated: true, completion: nil)
     }
     
+    /*
+     Presents DnsModeController
+     Returns true on success and false otherwise
+     */
+    func presentImportSettingsController(showLaunchScreen: Bool = false, settings: Settings?) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+            window.rootViewController = launchScreen
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return false
+        }
+        mainPageController.importSettings = settings
+        
+        navController.viewControllers = [mainPageController]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
+        
+        return true
+    }
+    
     /* Returns top view controller for controller  */
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

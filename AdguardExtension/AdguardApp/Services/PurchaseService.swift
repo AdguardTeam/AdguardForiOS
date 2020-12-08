@@ -87,7 +87,7 @@ protocol PurchaseServiceProtocol {
         2) login directly with license key. In this case we immediately send status request with this license key
      */
     func login(withAccessToken token: String?, state: String?)
-    func login(withLicenseKey key: String)
+    func login(withLicenseKey key: String, completion: @escaping (Bool)->Void)
     
     /**
      Log with name and password
@@ -344,13 +344,14 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     @objc
     func checkLicenseStatus() {
         loginService.checkStatus { [weak self] (error) in
-            self?.processLoginResult(error)
+            _ = self?.processLoginResult(error)
         }
     }   
     
-    func login(withLicenseKey key: String) {
+    func login(withLicenseKey key: String, completion: @escaping (Bool)->Void) {
         loginService.login(licenseKey: key){ [weak self] (error) in
-            self?.processLoginResult(error)
+            let result = self?.processLoginResult(error) ?? false
+            completion(result)
         }
     }
     
@@ -659,26 +660,27 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
      
     // MARK: helper methods
     
-    private func processLoginResult(_ error: Error?) {
+    private func processLoginResult(_ error: Error?)->Bool {
         
         DDLogInfo("(PurchaseService) processLoginResult")
         if error != nil {
             
             DDLogError("(PurchaseService) processLoginResult error \(error!.localizedDescription)")
             postNotification(PurchaseService.kPSNotificationLoginFailure, error)
-            return
+            return false
         }
         
         // check state
         if !loginService.hasPremiumLicense {
             postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
-            return
+            return false
         }
         
         let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
                         PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
         
         NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+        return true
     }
     
     private func isInAppPurchaseActive()->Bool {

@@ -133,6 +133,9 @@ protocol FiltersServiceProtocol {
     /* enable/disable filter */
     func setFilter(_ filter: Filter, enabled: Bool)
     
+    /* disable all filters */
+    func disableAllFilters()
+    
     /* add custom filter */
     func addCustomFilter(_ filter: AASCustomFilterParserResult)
     
@@ -417,7 +420,29 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         guard let group = getGroup(filter.groupId) else { return }
         
+        if filter.enabled {
+            group.enabled = true
+        }
+        
         updateGroupSubtitle(group)
+        notifyChange()
+        processUpdate()
+    }
+    
+    func disableAllFilters() {
+        updateQueue.sync { [weak self] in
+            for group in groups {
+                for filter in group.filters {
+                    filter.enabled = false
+                    self?.enabledFilters[filter.filterId] = false
+                }
+            }
+        }
+        
+        for group in groups {
+            updateGroupSubtitle(group)
+        }
+        
         notifyChange()
         processUpdate()
     }
@@ -450,6 +475,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             updateGroupSubtitle(group)
             notifyChange()
         }
+        
+        enabledFilters[filter.meta.filterId.intValue] = true
         
         antibanner.subscribeCustomFilter(from: filter) {
             [weak self] in
