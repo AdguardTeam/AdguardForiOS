@@ -54,6 +54,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         
         if type == .safariUserfilter {
             ruleTextView.font = UIFont(name: "PTMono-Regular", size: 14.0)
+            ruleTextView.sizeToFit()
         }
                 
         updateTheme()
