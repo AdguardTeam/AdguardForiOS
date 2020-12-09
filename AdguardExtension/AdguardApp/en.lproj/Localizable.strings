@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Native DNS is working";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Native DNS is not working";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Native";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "No encryption (System DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "You have entered the invalid upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Invalid DNS protocol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "System Blocklist";
 
@@ -732,6 +750,12 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Please enable %@ in the system DNS settings";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>VPN & Network > DNS</b> and select <b>%@</b> there.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "1. Make sure that you're using Safari browser. It's technically not possible to block content in other browsers.\n\n2. Enable necessary filter lists in the Safari protection settings.\n\n3. You may need to restart Safari. Quit and reopen it again.";

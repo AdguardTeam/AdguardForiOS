@@ -58,9 +58,12 @@ class VpnManagerTest: XCTestCase {
 
     var vpnManager: VpnManager!
     var dnsProviders: DnsProvidersServiceProtocol = DnsProvidersServiceMock()
+    var complexProtection: ComplexProtectionServiceProtocol!
     
     override func setUp() {
         vpnManager = VpnManager(resources: SharedResourcesMock(), configuration: ConfigurationServiceMock(), networkSettings: NetworkSettingsService(resources: SharedResourcesMock()), dnsProviders: dnsProviders)
+        complexProtection = ComplexProtectionServiceMock()
+        vpnManager.complexProtection = complexProtection
         
         vpnManager.providerManagerType = ProviderMock.self
         
@@ -145,7 +148,6 @@ class VpnManagerTest: XCTestCase {
     }
     
     func testManyConfigurations(){
-        
         let expectation = XCTestExpectation()
         
         ProviderMock.savedProviders = [ProviderMock(), ProviderMock(), ProviderMock()]
@@ -211,7 +213,7 @@ class VpnManagerTest: XCTestCase {
         
         let configuration = NETunnelProviderProtocol()
         
-        let serverToSave = DnsServerInfo(dnsProtocol: .dnsCrypt, serverId: "test-server", name: "Test server", upstreams: ["0.0.0.0"])
+        let serverToSave = DnsServerInfo(dnsProtocol: .dnsCrypt, serverId: "test-server", name: "Test server", upstreams: ["0.0.0.0"], providerId: 0)
         let serverDataToSave = NSKeyedArchiver.archivedData(withRootObject: serverToSave)
         configuration.providerConfiguration = [
             APVpnManagerParameterTunnelMode: APVpnManagerTunnelModeFull.rawValue,

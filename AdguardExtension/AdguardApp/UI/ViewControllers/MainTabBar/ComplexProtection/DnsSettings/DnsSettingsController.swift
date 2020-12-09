@@ -25,6 +25,8 @@ class DnsSettingsController : UITableViewController {
     @IBOutlet weak var tryButton: UIButton!
     @IBOutlet weak var systemIcon: UIImageView!
     @IBOutlet weak var enabledSwitch: UISwitch!
+    @IBOutlet weak var implementationLabel: ThemableLabel!
+    @IBOutlet weak var implementationIcon: UIImageView!
     @IBOutlet weak var serverName: ThemableLabel!
     @IBOutlet weak var systemProtectionStateLabel: ThemableLabel!
     @IBOutlet weak var requestBlockingStateLabel: ThemableLabel!
@@ -44,10 +46,11 @@ class DnsSettingsController : UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
-    private var dnsProviders: DnsProvidersService = ServiceLocator.shared.getService()!
+    private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeObserver: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
@@ -63,6 +66,9 @@ class DnsSettingsController : UITableViewController {
     private let enabledColor = UIColor.AdGuardColor.green
     private let disabledColor = UIColor(hexString: "#888888")
     
+    private let adguardImplementationIcon = UIImage(named: "ic_adguard")
+    private let nativeImplementationIcon = UIImage(named: "native")
+    
     // MARK: - Sections constants
     
     private let titleSection = 0
@@ -72,8 +78,11 @@ class DnsSettingsController : UITableViewController {
     private let titleDescriptionCell = 0
     private let titleStateCell = 1
     
-    private let dnsFilteringRow = 2
-    private let networkSettingsRow = 0
+    private let implementationRow = 0
+    private let dnsServerRow = 1
+    private let networkSettingsRow = 2
+    private let dnsFilteringRow = 3
+    private let howToSetupRow = 4
     
     // MARK: - View Controller life cycle
     
@@ -103,6 +112,7 @@ class DnsSettingsController : UITableViewController {
         updateVpnInfo()
         setupBackButton()
         updateTheme()
+        processCurrentImplementation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,12 +154,19 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             cell.isHidden = !proStatus
-            cell.contentView.alpha = complexProtection.systemProtectionEnabled ? 1.0 : 0.5
-            cell.isUserInteractionEnabled = complexProtection.systemProtectionEnabled
             
             if indexPath.row == dnsFilteringRow && proStatus {
-                cell.isHidden = !configuration.advancedMode
-                networkSettingsSeparator.isHidden = !configuration.advancedMode
+                cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
+                networkSettingsSeparator.isHidden = (!configuration.advancedMode || resources.dnsImplementation == .native) && resources.dnsImplementation == .adGuard
+            }
+            
+            if indexPath.row == howToSetupRow && (resources.dnsImplementation != .native || !ios14available) {
+                cell.isHidden = true
+                dnsFilteringSeparator.isHidden = resources.dnsImplementation != .native
+            }
+            
+            if !ios14available && indexPath.row == implementationRow {
+                cell.isHidden = true
             }
         }
 
@@ -166,7 +183,15 @@ class DnsSettingsController : UITableViewController {
         
         if indexPath.section == menuSection {
             
-            if indexPath.row == dnsFilteringRow && !configuration.advancedMode {
+            if indexPath.row == dnsFilteringRow && (!configuration.advancedMode || resources.dnsImplementation == .native) {
+                return 0.0
+            }
+            
+            if indexPath.row == howToSetupRow && (resources.dnsImplementation != .native || !ios14available) {
+                return 0.0
+            }
+            
+            if !ios14available && indexPath.row == implementationRow {
                 return 0.0
             }
             
@@ -182,6 +207,18 @@ class DnsSettingsController : UITableViewController {
         return normalHeight
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == menuSection && indexPath.row == implementationRow {
+            presentChooseDnsImplementationController()
+        }
+        
+        if indexPath.section == menuSection && indexPath.row == howToSetupRow && resources.dnsImplementation == .native {
+            AppDelegate.shared.presentHowToSetupController()
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == 0 ? 32.0 : 0.1
     }
@@ -192,6 +229,28 @@ class DnsSettingsController : UITableViewController {
     
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
+        if resources.dnsImplementation == .native {
+            if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
+                nativeProviders.removeDnsManager { error in
+                    DDLogError("Error removing dns manager: \(error.debugDescription)")
+                    DispatchQueue.main.async { [weak self] in
+                        sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
+                    }
+                }
+            } else if #available(iOS 14.0, *) {
+                sender.isOn = complexProtection.systemProtectionEnabled
+                nativeProviders.saveDnsManager { error in
+                    if let error = error {
+                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                    }
+                    DispatchQueue.main.async {
+                        AppDelegate.shared.presentHowToSetupController()
+                    }
+                }
+            }
+            return
+        }
+        
         let enabled = sender.isOn
     
         complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
@@ -209,10 +268,17 @@ class DnsSettingsController : UITableViewController {
         enabledSwitch.isOn = enabled
         systemProtectionStateLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
-        
-        serverName.text = dnsProviders.currentServerName
-        
+    
+        updateServerName()
         tableView.reloadData()
+    }
+    
+    private func updateServerName() {
+        if resources.dnsImplementation == .adGuard {
+            serverName.text = dnsProviders.currentServerName
+        } else {
+            serverName.text = nativeProviders.serverName
+        }
     }
     
     private func observeProStatus(){
@@ -260,5 +326,28 @@ class DnsSettingsController : UITableViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, numberOfUnits)
         
         return resultString
+    }
+    
+    private func presentChooseDnsImplementationController() {
+        if let implementationVC = storyboard?.instantiateViewController(withIdentifier: "ChooseDnsImplementationController") as? ChooseDnsImplementationController {
+            implementationVC.delegate = self
+            present(implementationVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
+    func currentImplementationChanged() {
+        DispatchQueue.main.async { [weak self] in
+            self?.processCurrentImplementation()
+            self?.tableView.reloadData()
+        }
+    }
+    
+    private func processCurrentImplementation() {
+        let stringKey = resources.dnsImplementation == .adGuard ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
+        implementationLabel.text = String.localizedString(stringKey)
+        implementationIcon.image = resources.dnsImplementation == .adGuard ? adguardImplementationIcon : nativeImplementationIcon
+        updateServerName()
     }
 }

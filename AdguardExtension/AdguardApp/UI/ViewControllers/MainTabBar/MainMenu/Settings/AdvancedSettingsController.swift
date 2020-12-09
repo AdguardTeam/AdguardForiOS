@@ -126,7 +126,7 @@ class AdvancedSettingsController: UITableViewController {
             cell.isHidden = true
         }
         
-        if indexPath.row == removeVpnProfile && !vpnManager.vpnInstalled {
+        if indexPath.row == removeVpnProfile && (!vpnManager.vpnInstalled || resources.dnsImplementation == .native) {
             cell.isHidden = true
         }
         
@@ -159,7 +159,7 @@ class AdvancedSettingsController: UITableViewController {
             return 0.0
         }
         
-        if indexPath.row == removeVpnProfile && !vpnManager.vpnInstalled {
+        if indexPath.row == removeVpnProfile && (!vpnManager.vpnInstalled || resources.dnsImplementation == .native) {
             lastSeparator.isHidden = true
             return 0.0
         }

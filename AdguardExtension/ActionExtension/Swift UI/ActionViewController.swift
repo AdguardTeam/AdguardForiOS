@@ -97,8 +97,10 @@ class ActionViewController: UIViewController {
 
         let vpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettings, dnsProviders: dnsProviders)
         
-        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo)
-
+        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettings, resources: sharedResources, configuration: configuration)
+        
+        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo, nativeProvidersService: nativeProviders)
+ 
         contentBlockerService = ContentBlockerService(resources: sharedResources,
                                                       safariService: safariService,
                                                       antibanner: antibanner,
