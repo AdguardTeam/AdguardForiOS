@@ -56,11 +56,15 @@ class StartupService : NSObject{
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
         
-        let dnsProviders: DnsProvidersService = DnsProvidersService(resources: sharedResources)
+        let dnsProviders: DnsProvidersServiceProtocol = DnsProvidersService(resources: sharedResources)
         locator.addService(service: dnsProviders)
         
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)
+        
+        let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettingsService, resources: sharedResources, configuration: configuration)
+        dnsProviders.delegate = nativeProviders as? NativeProvidersService
+        locator.addService(service: nativeProviders)
         
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService, dnsProviders: dnsProviders)
         locator.addService(service: vpnManager as VpnManagerProtocol)
@@ -69,7 +73,7 @@ class StartupService : NSObject{
         let safariProtection =  SafariProtectionService(resources: sharedResources)
         locator.addService(service: safariProtection)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection

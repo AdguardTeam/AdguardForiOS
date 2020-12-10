@@ -94,6 +94,14 @@ extension UIViewController {
         navigationItem.title = ""
     }
     
+    var ios14available: Bool {
+        if #available(iOS 14.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func setupToHideKeyboardOnTapOnView(ignoringViews views: [UIView] = []) {
         let tap = HideKeyboardTapGestureRecognizer(
             target: self,

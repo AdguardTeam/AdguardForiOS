@@ -18,6 +18,7 @@
 
 import Foundation
 import SystemConfiguration.CaptiveNetwork
+import NetworkExtension
 
 @objcMembers class WifiException: NSObject, Codable {
     @objc var rule: String
@@ -48,6 +49,7 @@ protocol NetworkSettingsServiceProtocol {
     var filterWifiDataEnabled: Bool { get set }
     var filterMobileDataEnabled: Bool { get set }
     var delegate: NetworkSettingsChangedDelegate? { get set }
+    var onDemandRules: [NEOnDemandRule] { get }
     
     func add(exception: WifiException)
     func delete(exception: WifiException)
@@ -87,6 +89,41 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
             if filterMobileDataEnabled != newValue {
                 resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
             }
+        }
+    }
+    
+    var onDemandRules: [NEOnDemandRule] {
+        get {
+            var onDemandRules = [NEOnDemandRule]()
+            
+            let SSIDs = enabledExceptions.map{ $0.rule }
+            if SSIDs.count > 0 {
+                let disconnectRule = NEOnDemandRuleDisconnect()
+                disconnectRule.ssidMatch = SSIDs
+                onDemandRules.append(disconnectRule)
+            }
+            
+            let disconnectRule = NEOnDemandRuleDisconnect()
+            
+            switch (filterWifiDataEnabled, filterMobileDataEnabled) {
+            case (false, false):
+                disconnectRule.interfaceTypeMatch = .any
+                onDemandRules.append(disconnectRule)
+            case (false, _):
+                disconnectRule.interfaceTypeMatch = .wiFi
+                onDemandRules.append(disconnectRule)
+            case (_, false):
+                disconnectRule.interfaceTypeMatch = .cellular
+                onDemandRules.append(disconnectRule)
+            default:
+                break
+            }
+            
+            let connectRule = NEOnDemandRuleConnect()
+            connectRule.interfaceTypeMatch = .any
+            
+            onDemandRules.append(connectRule)
+            return onDemandRules
         }
     }
     

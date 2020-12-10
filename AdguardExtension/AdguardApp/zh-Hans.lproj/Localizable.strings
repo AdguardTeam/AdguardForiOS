@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全隧道（不显示 VPN 图标），与其他 VPN 应用程序不兼容，不太稳定";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS 是又一种可以保护您的隐私免受各类计数器、跟踪系统与钓鱼网站侵害的替代方案";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + 安全搜索和拦截成人内容";
-
-/* Google DNS server description */
-"google_dns_description" = "由 Google 提供的免费备用 DNS 服务";
-
-/* Open DNS server description */
-"open_dns_description" = "能够保护您的设备远离网络威胁的 DNS 服务器";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "具有成人内容阻止功能的 OpenDNS 服务器";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "可防止网络钓鱼和间谍软件的免费替代 DNS 服务";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "由 Cloudflare 提供的免费 DNS 服务";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Cloudflare 的防恶意软件 DNS 服务器，拦截恶意域名";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare 的拦截服务器，限制对恶意和成人内容网域的访问";
-
-/* Safe DNS server description */
-"safe_dns_description" = "由 SafeDNS 提供的 DNS 服务";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "安全";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "拦截成人内容";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "不记录策略";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "安全搜索";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "广告拦截";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "拦截已知的网络钓鱼与其它危险域名";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "拦截包含成人内容的网站";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "不存储您的 DNS 查询日志";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "只要有可能，安全搜索就会在浏览器中强制执行";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "阻止追踪系统";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "无加密（系统DNS）";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC（实验性的）";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "您确定要注销吗？";
@@ -644,13 +587,13 @@
 "dns_request_user_status_removed_from_blacklist" = "已从黑名单移除";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "打开%@ <b>设置</b>";
+"onboarding_first_step_text" = "打开<b>设置</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "点击%@ <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
+"onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>开启 %@ 所有内容拦截器</b>后返回AdGuard 应用！";
+"onboarding_third_step_text" = "<b>开启 所有内容拦截器</b>后返回AdGuard 应用！";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系统DNS";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "请在这儿输入您的密码";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "添加自定义内容拦截的过滤器：%@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "添加自定义 DNS 过滤器：%@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "启用过滤器：%@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "禁用过滤器：%@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "失败";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "选择 DNS 服务器：%@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "用许可密钥 %@ 激活高级版功能";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "添加用户规则";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "添加 DNS 用户规则";

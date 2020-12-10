@@ -172,66 +172,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (không có biểu tượng VPN), không tương thích với các ứng dụng VPN khác, ít ổn định hơn";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS là một phương án khác để bảo vệ sự riêng tư từ những cuộc tấn công khác nhau, các hệ thống thu thập thông tin và các trang mạng lừa đảo";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + SafeSearch và chặn nội dung khiêu dâm";
-
-/* Google DNS server description */
-"google_dns_description" = "Dịch vụ DNS thay thế miễn phí của Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Máy chủ DNS với tuỳ chọn lọc, giúp bảo vệ thiết bị của bạn khỏi phần mềm độc hại";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Máy chủ OpenDNS với chức năng chặn nội dung người lớn";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Dịch vụ DNS thay thế miễn phí với sự bảo vệ khỏi lừa đảo và phần mềm gián điệp";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Dịch vụ DNS miễn phí của Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Máy chủ DNS chống phần mềm độc hại của Cloudflare chặn các tên miền độc hại";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Máy chủ của Cloudflare chặn và hạn chế quyền truy cập vào các miền độc hại và 'người lớn'";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Dịch vụ DNS của SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Bảo mật";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Chặn nội dung người lớn";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Không có chính sách đăng nhập";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Tìm kiếm an toàn";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Chặn quảng cáo";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Các dạng lừa đảo đã biết và các miền nguy hiểm khác";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Chặn các trang web có nội dung người lớn";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Không lưu trữ nhật kí truy vấn DNS của bạn";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Bất cứ khi nào có thể, Tìm kiếm an toàn được kích hoạt trong các trình duyệt";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Chặn các hệ thống theo dõi";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Không mã hóa (DNS hệ thống)";
 
@@ -632,13 +572,13 @@
 "dns_request_user_status_removed_from_blacklist" = "xóa khỏi danh sách chặn";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Mở %@ <b>cài đặt</b>";
+"onboarding_first_step_text" = "Mở <b>cài đặt</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Nhấn vào %@ <b>Safari</b> và chọn <b> \"Bộ chặn thành phần\"</b> mục bảng chọn";
+"onboarding_second_step_text" = "Nhấn vào <b>Safari</b> và chọn <b> \"Bộ chặn thành phần\"</b> mục bảng chọn";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Mở %@ tất cả bộ chặn thành phần</b> và trở lại với ứng dụng của chúng tôi!";
+"onboarding_third_step_text" = "<b>Mở tất cả bộ chặn thành phần</b> và trở lại với ứng dụng của chúng tôi!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS hệ thống";

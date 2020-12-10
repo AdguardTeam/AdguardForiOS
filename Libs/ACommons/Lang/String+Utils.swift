@@ -28,10 +28,10 @@ extension NSMutableAttributedString {
         self.addAttributes(attributes, range: NSRange(location: 0, length: length))
     }
     
-    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentImage: UIImage?)->NSMutableAttributedString? {
+    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentImage: UIImage?, textAlignment: NSTextAlignment = .left) -> NSMutableAttributedString? {
         
         let style = NSMutableParagraphStyle()
-        style.alignment = .left
+        style.alignment = textAlignment
         
         let format = NSMutableString(string: html)
         let wrapped = "<span style=\"font-family: -apple-system; font-size: \(fontSize); color: \(color.hex())\">\(format)</span>"

@@ -235,6 +235,21 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var dnsImplementation: DnsImplementation {
+        get {
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
+                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
+            }
+            return .adGuard
+        }
+        set {
+            if dnsImplementation != newValue {
+                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+                NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
+            }
+        }
+    }
+    
     // MARK: - Content blockers rules count
     
     dynamic var generalContentBlockerRulesCount : Int {
@@ -309,4 +324,8 @@ extension AESharedResourcesProtocol {
         
         return value
     }
+}
+
+extension Notification.Name {
+    static var dnsImplementationChanged: Notification.Name { return .init(rawValue: "dnsImplementationChanged") }
 }

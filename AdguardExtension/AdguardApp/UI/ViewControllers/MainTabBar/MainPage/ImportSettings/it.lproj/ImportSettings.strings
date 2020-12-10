@@ -1,12 +1,8 @@
-
 /* Class = "UIButton"; normalTitle = "IMPORT"; ObjectID = "EFE-OP-v8S"; */
-"EFE-OP-v8S.normalTitle" = "IMPORT";
-
-/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "aeV-dB-grs"; */
-"aeV-dB-grs.normalTitle" = "Button";
+"EFE-OP-v8S.normalTitle" = "IMPORTA";
 
 /* Class = "UILabel"; text = "Import settings"; ObjectID = "fry-VW-ub3"; */
-"fry-VW-ub3.text" = "Import settings";
+"fry-VW-ub3.text" = "Importa impostazioni";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "ktl-xf-pyK"; */
 "ktl-xf-pyK.normalTitle" = "OK";

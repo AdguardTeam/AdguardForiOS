@@ -330,6 +330,11 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
  */
 extern NSString* _Nonnull NeedToUpdateFiltersKey;
 
+/**
+ User defaults key for storing current DNS implementation.
+ */
+extern NSString* _Nonnull DnsImplementationKey;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

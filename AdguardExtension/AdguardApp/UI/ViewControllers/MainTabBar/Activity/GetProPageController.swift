@@ -33,7 +33,7 @@ class GetProPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityImage.image = UIImage(named: "other-group-icon")
+        activityImage.image = UIImage(named: "activity")
         
         let product = purchaseService.standardProduct
     

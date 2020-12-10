@@ -178,9 +178,10 @@ class MigrationService: MigrationServiceProtocol {
          Migration for AdGuard and AdGuard Pro
         */
         if lastBuildVersion < 561 {
-            DDLogInfo("(MigrationService) -  migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            DDLogInfo("(MigrationService) -  removeOptimizeFeature started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             removeOptimizeFeature()
         }
+        
         
         /**
         Migration:
@@ -194,11 +195,35 @@ class MigrationService: MigrationServiceProtocol {
         
         /**
         Migration:
-         In app version 4.1 (561) we've changed logic of showing rate app dialog
+         In app version 4.0.4 (585) we changed PacketTunnelProvider ip adresses for identifying tunnel mode in AdGuard VPN
+         Restart tunnel to update ip addresses
+        */
+        if lastBuildVersion < 585 {
+            DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            vpnManager.updateSettings(completion: nil)
+        }
+        
+        /*
+         In app version 4.1 (590) we've changed logic of showing rate app dialog
          this flag is useless now
         */
-        if lastBuildVersion < 561 {
+        if lastBuildVersion < 590 {
             resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
+        }
+        
+        /**
+        Migration:
+         In app version 4.1 (590) we've added AdGuard Dns repository support and begun to use
+         all information from providers.json
+         Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
+         isCustomProvider  property was added
+         providerId is not optional anymore
+        */
+        if lastBuildVersion < 590 {
+            DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            setProviderIdForCurrentDnsServer()
+            setBoolFlagForDnsProviders()
+            setIdsForCustomProviders()
         }
     }
     
@@ -207,6 +232,9 @@ class MigrationService: MigrationServiceProtocol {
     private func setProtocolForCustomProviders(){
         let customProviders = dnsProvidersService.customProviders
         var changesCount = 0
+        
+        let group = DispatchGroup()
+        
         for provider in customProviders {
             if let server = provider.servers?.first, server.dnsProtocol == .dns, let upstream = server.upstreams.first {
                 let newProtocol = DnsProtocol.getProtocolByUpstream(upstream)
@@ -214,10 +242,13 @@ class MigrationService: MigrationServiceProtocol {
                     DDLogInfo("(MigrationService) - setProtocolForCustomProviders, name: \(server.name); upstream: \(upstream); oldProtocol: \(DnsProtocol.stringIdByProtocol[server.dnsProtocol] ?? "Unknown"); newProtocol: \(DnsProtocol.stringIdByProtocol[newProtocol] ?? "Unknown")")
                     changesCount += 1
                     server.dnsProtocol = newProtocol
-                    dnsProvidersService.updateProvider(provider)
+                    group.enter()
+                    dnsProvidersService.updateProvider(provider, { group.leave() })
                 }
             }
         }
+        
+        group.wait()
         
         /* If there were some changes, the VPN manager is to be reloaded to apply changes */
         if changesCount > 0 {
@@ -376,6 +407,44 @@ class MigrationService: MigrationServiceProtocol {
             }
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
         }
+    }
+    
+    private func setProviderIdForCurrentDnsServer() {
+        DDLogInfo("Trying to set provider id for current DNS server")
+        
+        guard let currentServer = dnsProvidersService.activeDnsServer else {
+            DDLogInfo("Current DNS server is nil")
+            return
+        }
+        let serverId = currentServer.serverId
+        
+        guard let serverProvider = dnsProvidersService.allProviders.first(where: { provider in
+            provider.servers?.contains { $0.serverId == serverId } ?? false
+        }) else {
+            DDLogError("Failed to find provider for server with id = \(serverId)")
+            return
+        }
+        currentServer.providerId = serverProvider.providerId
+        dnsProvidersService.activeDnsServer = currentServer
+        
+        DDLogInfo("Finished setting provider id for current DNS server")
+    }
+    
+    private func setBoolFlagForDnsProviders() {
+        DDLogInfo("Setting isCustomProvider flag for custom providers")
+        dnsProvidersService.customProviders.forEach { $0.isCustomProvider = true }
+        DDLogInfo("Finished setting isCustomProvider flag")
+    }
+    
+    private func setIdsForCustomProviders() {
+        DDLogInfo("Setting providerId for custom providers")
+        dnsProvidersService.customProviders.forEach { provider in
+            let maxId = dnsProvidersService.customProviders.map{ $0.providerId }.max() ?? 0
+            let id = maxId + 1
+            provider.providerId = id
+            provider.servers?.forEach { $0.providerId = id }
+        }
+        DDLogInfo("Finished setting providerId")
     }
 }
 

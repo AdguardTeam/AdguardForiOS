@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (VPNアイコンなし)、他のVPNアプリと互換性なし、安定度:低い";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNSは、さまざまなカウンタ、分析システム、フィッシングWebサイトからあなたのプライバシーを保護するための代替手段です。";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + セーフサーチ + アダルトコンテンツブロック";
-
-/* Google DNS server description */
-"google_dns_description" = "Google提供の無料代替DNSサービス";
-
-/* Open DNS server description */
-"open_dns_description" = "お使いのデバイスをオンライン詐欺とフィッシングから保護するDNSサーバー";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "アダルトコンテンツブロッキング搭載のOpenDNSサーバー";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "フィッシングやスパイウェアからの保護付き無料の代替DNSサービス";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Cloudflareによる無料の代替DNSサービス";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Cloudflare提供の、悪意のあるドメインをブロックするマルウェア対策DNSサーバー";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare提供の、悪意のある「アダルト系」ドメインへのアクセスを制限するブロッキングサーバー";
-
-/* Safe DNS server description */
-"safe_dns_description" = "SafeDNS提供のDNSサービス";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "セキュリティ";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "アダルトコンテンツのブロック";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "ログなしポリシー";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "セーフサーチ";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "広告ブロック";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "既知のフィッシングとその他の危険ドメインをブロック";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "アダルトコンテンツを含むサイトをブロック";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "DNSクエリのログを保存しない";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "可能な限り、セーフサーチはブラウザに適用されます。";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "あらゆる追跡システムをブロックします。";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "暗号化なし（システムDNS）";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (実験的)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "ログアウトをしてもよろしいですか？";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "パスワードを入力してください";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "カスタムコンテンツブロッカーフィルタ「%@」を追加する";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "カスタムDNSフィルタ「%@」を追加する";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "フィルタ「%@」を有効にする";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "フィルタ「%@」を無効にする";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "インポート失敗";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNSサーバー「%@」を選択する";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "ライセンスキー「%@」でプレミアム版を有効化する";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "ユーザールールを追加する";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "DNSユーザールールを追加する";
