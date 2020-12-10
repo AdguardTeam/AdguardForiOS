@@ -249,6 +249,85 @@ extension AESharedResourcesProtocol {
             }
         }
     }
+            
+    dynamic var customFallbackServers: [String]? {
+           get {
+               return sharedDefaults().array(forKey: CustomFallbackServers) as? [String]
+           }
+           
+           set {
+               sharedDefaults().setValue(newValue, forKey: CustomFallbackServers)
+           }
+       }
+       
+       dynamic var customBootstrapServers: [String]? {
+           get {
+               return sharedDefaults().array(forKey: CustomBootstrapServers) as? [String]
+           }
+           
+           set {
+               sharedDefaults().setValue(newValue, forKey: CustomBootstrapServers)
+           }
+       }
+    
+    dynamic var blockingMode: AGBlockingMode  {
+        get {
+            guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
+                return .AGBM_DEFAULT
+            }
+            
+            return AGBlockingMode(rawValue: value)!
+        }
+        set {
+            sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
+        }
+    }
+    
+    dynamic var blockedResponseTtlSecs: Int {
+        get {
+            return sharedDefaults().integer(forKey: BlockedResponseTtlSecs)
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: BlockedResponseTtlSecs)
+        }
+    }
+    
+    dynamic var customBlockingIp: [String]? {
+        get {
+            return sharedDefaults().array(forKey: CustomBlockingIp) as? [String]
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIp)
+        }
+    }
+    
+    dynamic var customBlockingIpv4: String? {
+        get {
+            return sharedDefaults().string(forKey: CustomBlockingIpv4)
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIpv4)
+        }
+    }
+    
+    dynamic var customBlockingIpv6: String? {
+        get {
+            return sharedDefaults().string(forKey: CustomBlockingIpv6)
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIpv6)
+        }
+    }
+    
+    dynamic var blockIpv6: Bool {
+        get {
+            return sharedDefaults().bool(forKey: BlockIpv6)
+        }
+        
+        set {
+            sharedDefaults().setValue(newValue, forKey: BlockIpv6)
+        }
+    }
     
     // MARK: - private methods
     

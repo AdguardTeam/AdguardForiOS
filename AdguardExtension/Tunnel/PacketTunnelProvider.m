@@ -680,8 +680,44 @@
     
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
     
+    NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
+    NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
+    AGBlockingMode blockingMode = [_resources.sharedDefaults integerForKey: BlockingMode];
+    NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
+    NSArray<NSString *> *customBlockingIp;
+    NSString *customBlockingIpv4;
+    NSString *customBlockingIpv6;
+    
+    if (blockingMode == AGBM_CUSTOM_ADDRESS) {
+        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp];
+        for (NSString* ip in customBlockingIp) {
+            if ([ACNUrlUtils isIPv4:ip]) {
+                customBlockingIpv4 = ip;
+            } else if ([ACNUrlUtils isIPv6:ip]) {
+                customBlockingIpv6 = ip;
+            }
+        }
+    }
+
+    BOOL blockIpv6 = [_resources.sharedDefaults boolForKey:BlockIpv6];
+    
+    
     // Using system DNS servers as bootstraps and fallbacks
-    return [self.dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
+    //    return [self.dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
+    
+    return [self.dnsProxy startWithUpstreams:upstreams
+                                bootstrapDns:customBootstraps ?: systemDnsServers
+                                   fallbacks:customFallbacks ?: systemDnsServers
+                                  serverName:serverName
+                                 filtersJson:filtersJson
+                                userFilterId:userFilterId
+                           whitelistFilterId:whitelistFilterId
+                               ipv6Available:ipv6Available
+                                blockingMode:blockingMode
+                      blockedResponseTtlSecs:blockedResponseTtlSecs
+                          customBlockingIpv4:customBlockingIpv4
+                          customBlockingIpv6:customBlockingIpv6
+                                   blockIpv6: blockIpv6];
 }
 
 @end
