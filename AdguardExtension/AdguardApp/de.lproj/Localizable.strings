@@ -131,7 +131,7 @@
 "dns_whitelist_text" = "Geben Sie hier die Domain-Namen ein, getrennt durch Zeilenumbrüche. AdGuard lässt alle Verbindungen zu diesen Domains zu.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Diese Blockliste unterstützt <a href=\"%@\">AdGuard's DNS-Syntax</a>. Geben Sie hier die durch Zeilenumbrüche getrennten Regeln ein. AdGuard blockiert alle Verbindungen zu Domains, die diesen Regeln entsprechen.";
+"dns_blacklist_text_format" = "Diese Sperrliste unterstützt <a href=\"%@\">AdGuard's DNS-Syntax</a>. Geben Sie hier die durch Zeilenumbrüche getrennten Regeln ein. AdGuard sperrt alle Verbindungen zu Domains, die diesen Regeln entsprechen.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Wird aktualisiert …";
@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (ohne VPN-Symbol), inkompatibel mit anderen VPN-Apps, weniger stabil ";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS ist eine alternative Möglichkeit, Ihre Privatsphäre vor verschiedenen Trackern, Analysesystemen und Phishing-Webseiten zu schützen.";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Sichere Suche und Blockierung von Inhalten für Erwachsene";
-
-/* Google DNS server description */
-"google_dns_description" = "Freier alternativer DNS-Service von Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS-Server, der Ihr Gerät vor Phishing und Online-Betrug schützt";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS-Server mit Blockierung von Inhalten für Erwachsene";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Kostenloser alternativer DNS-Service mit Schutz vor Phishing und Spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Kostenloser DNS-Service von Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-Malware-DNS-Server von Cloudflare, der bösartige Domains sperrt";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Der Sperrserver von Cloudflare, der den Zugriff auf bösartige und „jugendgefährdende” Domains einschränkt";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS-Service von SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sicherheit";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blockierung von Inhalten für Erwachsene";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Keine Protokollierung";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Sichere Suche";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Werbeblockierung";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blockiert bekannte Phishing- und andere gefährliche Domains";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blockiert Webseiten mit Inhalten für Erwachsene";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Speichert Ihre DNS-Abfrageprotokolle nicht";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Wenn möglich, wird die Sichere Suche in Browsern erzwungen";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blockiert Tracking-Systeme";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Keine Verschlüsselung (System DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (experimentell)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Möchten Sie sich wirklich abmelden?";
@@ -590,7 +533,7 @@
 "complex_enabled" = "Safari- und DNS-Schutz";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari-Inhaltsblockierung";
+"safari_enabled" = "Safari-Inhaltssperren";
 
 /*(TodayViewController) All protection is disabled text  */
 "complex_disabled" = "Alle Schutz-Module sind deaktiviert";
@@ -599,7 +542,7 @@
 "system_enabled" = "DNS-Schutz";
 
 /*(TodayViewController) Statistics format text  */
-"widget_statistics" = "%1$d Anfragen, %2$d verschlüsselt";
+"widget_statistics" = "%1$d Anfragen • %2$d verschlüsselt";
 
 /*(DnsRequestDetailsController) message for info alert  */
 "whotrackme_message" = "Diese Informationen wurden vom WhoTrackMe.com-Dienst geladen";
@@ -620,7 +563,7 @@
 "dns_filters_notification_title" = "Einige Filter für optimale Funktion ausschalten";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_blocked" = "Blockiert";
+"dns_request_status_blocked" = "Gesperrt";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_processed" = "Verarbeitet";
@@ -647,7 +590,7 @@
 "onboarding_first_step_text" = "Öffnen Sie die <b>Einstellungen</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Klicken Sie auf %@ <b>Safari</b> und wählen Sie den Menüpunkt <b>\"Inhaltsblocker\"</b>";
+"onboarding_second_step_text" = "Klicken Sie auf <b>Safari</b> und wählen Sie den Menüpunkt <b>\"Inhaltsblocker\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Aktivieren Sie alle Inhaltsblocker</b> und gehen Sie zurück zu unserer App!";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Geben Sie hier Ihr Passwort ein";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Benutzerdefinierten Inhaltsfilter %@ hinzufügen";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Benutzerdefinierten DNS-Filter %@ hinzufügen";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Aktivierte Filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Filter deaktivieren: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Fehlgeschlagen";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNS-Server auswählen: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Premium-Funktionen mit %@ Lizenzschlüssel aktivieren";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Benutzerdefinierte Regeln hinzufügen";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Benutzerdefinierte DNS-Regeln hinzufügen";

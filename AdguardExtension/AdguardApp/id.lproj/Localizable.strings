@@ -178,66 +178,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (tanpa ikon VPN), tidak kompatibel dengan aplikasi VPN lain, kurang stabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "memblokir iklan, pelacak, dan situs web phishing";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "memblokir semua situs web di atas dan tambahan situs dewasa";
-
-/* Google DNS server description */
-"google_dns_description" = "layanan resolusi DNS global yang disediakan oleh Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Server DNS yang melindungi perangkat Anda dari phishing dan scam";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Server OpenDNS dengan pemblokiran konten dewasa";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Layanan alternatif DNS gratis dengan perlindungan dari phishing dan spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Layanan DNS gratis dari Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware oleh Cloudflare yang memblokir domain berbahaya";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Server pemblokir Cloudflare yang membatasi akses ke domain berbahaya dan 'dewasa'";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Layanan DNS dari SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Keamanan";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokir konten dewasa";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Tidak ada kebijakan logging";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Pencarian Aman";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Pemblokiran Iklan";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Memblokir phishing dan domain berbahaya lainnya";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokir situs web yang mengandung konten dewasa";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Tidak menyimpan log kueri DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Kapan pun jika memungkinkan, Pencarian Aman diberlakukan di browser";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokir sistem pelacakan";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Tanpa enkripsi (Sistem DNS)";
 

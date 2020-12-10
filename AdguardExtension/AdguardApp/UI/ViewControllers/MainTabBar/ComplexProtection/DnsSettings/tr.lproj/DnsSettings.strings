@@ -40,6 +40,9 @@
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "DNS trafiğinizi şifreleyerek gizliliğinizi artırmak için bu modülü etkinleştirin.";
 
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (deneysel)";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS koruması";
 
@@ -86,7 +89,7 @@
 "iaJ-tk-ohH.text" = "DNS akışını şifreleyerek çevrimiçi gizliliğinizi artırabilirsiniz. Bunu yapmak için önerilen DNS sağlayıcılarından birini seçin.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Engellenen listesi";
+"ihd-7R-RfE.text" = "Engelleme listesi";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "İPTAL";

@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖像），與其它的 VPN 應用程式不相容，較不穩定的";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS 是一種保護您的隱私免於不同的計數器、分析的系統及網路釣魚的網站之替代的方式";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + 安全搜尋和成人內容封鎖";
-
-/* Google DNS server description */
-"google_dns_description" = "由 Google 提供之免費替代的 DNS 服務";
-
-/* Open DNS server description */
-"open_dns_description" = "保護您的裝置免於網路釣魚和詐騙之 DNS 伺服器";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "有成人內容封鎖的 OpenDNS 伺服器";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "有免於網路釣魚和間諜軟體的防護之免費替代的 DNS 服務";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "由 Cloudflare 提供之免費的 DNS 服務";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "由 Cloudflare 提供之反惡意軟體 DNS 伺服器，其封鎖惡意的網域";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "限制對惡意的和'成人'網域之存取的 Cloudflare 的封鎖伺服器";
-
-/* Safe DNS server description */
-"safe_dns_description" = "由 SafeDNS 提供之 DNS 服務";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "安全性";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "成人內容封鎖";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "無記錄政策";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "安全搜尋";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "廣告封鎖";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "封鎖已知的網路釣魚和其它危險的網域";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "封鎖有成人內容之網站";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "不儲存您的 DNS 查詢記錄";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "無論何時盡可能，安全搜尋在瀏覽器中被強制執行";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "封鎖追蹤系統";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "無加密（系統 DNS）";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC（實驗性的）";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "您確定您想要登出嗎？";
@@ -849,7 +792,35 @@
 // MARK: - LoginController
 /* (LoginController) Enter your email here title for VoiceOver*/
 
-"enter_email_voiceover" = "於此輸入您的電子郵件地址";
+"enter_email_voiceover" = "於此輸入您的電子郵件位址";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "於此輸入您的密碼";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "增加自訂的內容阻擋器過濾器：%@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "增加自訂的 DNS 過濾器：%@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "啟用過濾器：%@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "禁用過濾器：%@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "未成功的";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "選擇 DNS 伺服器：%@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "以 %@ 授權金鑰啟動高級版功能";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "增加使用者規則";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "增加 DNS 使用者規則";

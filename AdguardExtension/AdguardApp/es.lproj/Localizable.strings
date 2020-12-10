@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Túnel completo (sin icono de VPN), incompatible con otras apps de VPN, menos estable";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS es una forma alternativa de proteger tu privacidad de sistemas analíticos y sitios web de phishing";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Búsqueda segura y bloqueo de contenido para adultos";
-
-/* Google DNS server description */
-"google_dns_description" = "servicio de dns global ofrecido por Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Servidor DNS que protege tu dispositivo de phishing y estafas";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Servidor OpenDNS con bloqueo de contenido para adultos";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Servicio DNS gratis alternativo con protección de phishing y spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Servicio DNS gratis de Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Servidor DNS contra malware de Cloudflare que bloquea dominios maliciosos";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "El servidor de bloqueo de Cloudflare que restringe el acceso a dominios maliciosos y para \"adultos\"";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Servicio DNS de SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Seguridad";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Bloqueo de contenido para adultos";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "No hay registros recopilados";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Búsqueda segura";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Bloqueo de Anuncios";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Bloquea los dominos de phishing";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Bloquea sitios web con contenido para adultos";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "No almacena tus registros de consultas DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Siempre que sea posible, la búsqueda segura se aplicará a los navegadores";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Bloquea sistemas de rastreo";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Sin cifrado (DNS del sistema)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS mediante TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS mediante QUIC (experimental)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "¿Está seguro de que desea cerrar sesión?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Ingresa tu contraseña aquí";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Añadir filtro bloqueador de contenido personalizado: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Añadir filtro DNS personalizado: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Habilitar filtro: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Deshabilitar filtro: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "No correctamente";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Seleccionar servidor DNS: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Activar funciones premium con la clave de licencia %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Añadir reglas del usuario";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Añadir reglas del usuario DNS";

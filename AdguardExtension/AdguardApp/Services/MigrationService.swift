@@ -203,6 +203,16 @@ class MigrationService: MigrationServiceProtocol {
         
         /**
         Migration:
+         In app version 4.0.4 (585) we changed PacketTunnelProvider ip adresses for identifying tunnel mode in AdGuard VPN
+         Restart tunnel to update ip addresses
+        */
+        if lastBuildVersion < 585 {
+            DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            vpnManager.updateSettings(completion: nil)
+        }
+        
+        /**
+        Migration:
          In app version 4.1 (563) we've added AdGuard Dns repository support and begun to use
          all information from providers.json
          Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
