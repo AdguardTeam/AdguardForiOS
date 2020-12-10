@@ -66,7 +66,7 @@ class ActionViewController: UIViewController {
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
     private let antibannerController: AntibannerControllerProtocol
-    private let support: AESSupport
+    private let support: SupportServiceProtocol
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
     private let productInfo: ADProductInfoProtocol
@@ -105,15 +105,20 @@ class ActionViewController: UIViewController {
                                                       safariService: safariService,
                                                       antibanner: antibanner,
                                                       safariProtection: safariProtection)
-        support = AESSupport(resources: sharedResources,
-                             safariSevice: safariService,
-                             antibanner: antibanner,
-                             dnsFiltersService: dnsFiltersService,
-                             dnsProviders: dnsProviders,
-                             configuration: configuration,
-                             complexProtection: complexProtection,
-                             networtkSettings: networkSettings,
-                             productInfo: productInfo)
+        
+        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
+        
+        support = SupportService(resources: sharedResources,
+                                 configuration: configuration,
+                                 complexProtection: complexProtection,
+                                 dnsProviders: dnsProviders,
+                                 networkSettings: networkSettings,
+                                 dnsFilters: dnsFiltersService,
+                                 productInfo: productInfo,
+                                 antibanner: antibanner,
+                                 requestsService: HttpRequestService(),
+                                 keyChainService: keyChainService,
+                                 safariService: safariService)
         
         super.init(coder: coder)
     }

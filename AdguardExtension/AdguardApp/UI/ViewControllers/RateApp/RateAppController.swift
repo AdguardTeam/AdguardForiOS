@@ -59,7 +59,7 @@ class RateAppController: BottomAlertController {
     
     @IBAction func leaveFeedbackTapped(_ sender: UIButton) {
         dismiss(animated: true) {
-            AppDelegate.shared.presentFeedbackController()
+            AppDelegate.shared.presentBugReportController(withType: .feedback)
         }
     }
     

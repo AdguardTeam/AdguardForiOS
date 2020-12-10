@@ -98,17 +98,14 @@ class StartupService : NSObject{
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources,
-                                                    safariSevice: safariService,
-                                                    antibanner: antibanner,
-                                                    dnsFiltersService: dnsFiltersService,
-                                                    dnsProviders: dnsProviders,
-                                                    configuration: configuration,
-                                                    complexProtection: complexProtection,
-                                                    networtkSettings: networkSettingsService,
-                                                    productInfo: productInfo)
+        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
+        locator.addService(service: httpRequestService)
         
-        locator.addService(service: supportService as AESSupportProtocol)
+        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
+        locator.addService(service: keyChainService)
+        
+        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, dnsProviders: dnsProviders, networkSettings: networkSettingsService, dnsFilters: dnsFiltersService, productInfo: productInfo, antibanner: antibanner, requestsService: httpRequestService, keyChainService: keyChainService, safariService: safariService)
+        locator.addService(service: supportService)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
@@ -127,12 +124,6 @@ class StartupService : NSObject{
         
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
-        
-        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
-        locator.addService(service: httpRequestService)
-        
-        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
-        locator.addService(service: keyChainService)
         
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)

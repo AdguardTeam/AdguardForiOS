@@ -182,14 +182,6 @@ class MigrationService: MigrationServiceProtocol {
             removeOptimizeFeature()
         }
         
-        /*
-         In app version 4.1 (561) we've changed logic of showing rate app dialog
-         this flag is useless now
-        */
-        if lastBuildVersion < 561 {
-            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
-
-        }
         
         /**
         Migration:
@@ -211,15 +203,23 @@ class MigrationService: MigrationServiceProtocol {
             vpnManager.updateSettings(completion: nil)
         }
         
+        /*
+         In app version 4.1 (590) we've changed logic of showing rate app dialog
+         this flag is useless now
+        */
+        if lastBuildVersion < 590 {
+            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
+        }
+        
         /**
         Migration:
-         In app version 4.1 (563) we've added AdGuard Dns repository support and begun to use
+         In app version 4.1 (590) we've added AdGuard Dns repository support and begun to use
          all information from providers.json
          Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
          isCustomProvider  property was added
          providerId is not optional anymore
         */
-        if lastBuildVersion < 563 {
+        if lastBuildVersion < 590 {
             DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             setProviderIdForCurrentDnsServer()
             setBoolFlagForDnsProviders()
