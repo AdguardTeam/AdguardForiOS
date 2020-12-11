@@ -357,20 +357,6 @@ extension AppDelegate {
         return true
     }
     
-    /* Presents FeedbackController */
-    func presentFeedbackController() {
-        let storyboard = UIStoryboard(name: "RateApp", bundle: nil)
-        
-        if let controller = storyboard.instantiateViewController(withIdentifier: "FeedbackController") as? UINavigationController {
-            if let feedbackController = controller.viewControllers.first as? FeedbackController {
-                feedbackController.simpleFeedback = false
-                
-                let topVC = Self.topViewController()
-                topVC?.present(controller, animated: true)
-            }
-        }
-    }
-    
     /*
      Presents RateAppController
      Returns true on success and false otherwise
@@ -391,6 +377,41 @@ extension AppDelegate {
             return true
         }
         return false
+    }
+    
+    func presentBugReportController(withType type: ReportType) {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return
+        }
+        
+        guard let navController = getNavigationController(for: .settingTab) else {
+            DDLogError("Navigation controller is nil")
+            return
+        }
+        
+        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
+            DDLogError("Navigation controller first VC is not MainMenuController")
+            return
+        }
+        
+        let mainMenuStoryBoard = UIStoryboard(name: "MainMenu", bundle: nil)
+        guard let supportVC = mainMenuStoryBoard.instantiateViewController(withIdentifier: "SupportTableViewController") as? SupportTableViewController else {
+            DDLogError("MainMenu.storyboard doesnt't have SupportTableViewController")
+            return
+        }
+        
+        guard let bugReportVC = mainMenuStoryBoard.instantiateViewController(withIdentifier: "BugReportController") as? BugReportController else {
+            DDLogError("MainMenu.storyboard doesnt't have BugReportController")
+            return
+        }
+        
+        supportVC.loadViewIfNeeded()
+        bugReportVC.reportType = type
+        
+        navController.viewControllers = [mainMenuController, supportVC, bugReportVC]
+        tabBar.selectedViewController = navController
+        window.rootViewController = tabBar
     }
     
     /*
