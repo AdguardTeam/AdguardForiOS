@@ -874,3 +874,29 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Add DNS User Rules";
+
+/* (LowLevelSettingsController) Low level settings description */
+"low_level_description" = "<b style=color:\%@\>WARNING!</b> Enabling these features may break the Internet connection or compromise your security and privacy.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Interested in cool new AdGuard features? Try our <a href=\"%@\">beta channel.</a>";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "List of plain DNS servers to be used to resolve DOH/DOT hostnames (if any)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstraps IP address";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream address";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";
+
+

@@ -26,9 +26,11 @@ class LowLevelSettingsController: UITableViewController {
     @IBOutlet weak var blockimgModeDescription: ThemableLabel!
     @IBOutlet weak var blockingResponseTtlDescription: ThemableLabel!
     @IBOutlet weak var customAddressCell: UITableViewCell!
-    @IBOutlet weak var warningLabel: ThemableLabel!
+    @IBOutlet weak var warningTextView: UITextView!
+    @IBOutlet weak var betaChannelTextView: UITextView!
     @IBOutlet weak var customAddressDescription: ThemableLabel!
     @IBOutlet weak var fallbacksDescription: ThemableLabel!
+    @IBOutlet weak var bootstrapsDescription: ThemableLabel!
     
     @IBOutlet weak var lastSeparator: UIView!
     
@@ -38,6 +40,7 @@ class LowLevelSettingsController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private let customAddress = 2
     private let blockIpv6 = 3
@@ -57,12 +60,8 @@ class LowLevelSettingsController: UITableViewController {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-        
-        
         setupBackButton()
         updateTheme()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +69,7 @@ class LowLevelSettingsController: UITableViewController {
         setTunnelModeDescription()
         setBlockingModeDescription()
         setBlockedResponseTllDescription()
+        setBootstrapsDescription()
         setCustomAddressDescription()
         setFallbacksDescription()
         tableView.reloadData()
@@ -111,6 +111,12 @@ class LowLevelSettingsController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        theme.setupTableCell(cell)
+        return cell
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
@@ -124,11 +130,15 @@ class LowLevelSettingsController: UITableViewController {
     // MARK: - Private methods
     
     private func updateTheme() {
+        setupBetaChnnelTextView()
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSeparators(separators)
+        theme.setupSwitch(blockIpv6Switch)
+        theme.setupTextView(betaChannelTextView)
+        setupWarningDescriptionTextView()
         
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
@@ -168,7 +178,7 @@ class LowLevelSettingsController: UITableViewController {
     }
     
     private func setBlockedResponseTllDescription() {
-        blockingResponseTtlDescription.text = String(resources.blockedResponseTtlSecs) + " sec"
+        blockingResponseTtlDescription.text = String(format: String.localizedString("s_unit"), String(resources.blockedResponseTtlSecs))
     }
     
     private func setCustomAddressDescription() {
@@ -177,6 +187,14 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setFallbacksDescription() {
         fallbacksDescription.text = resources.customFallbackServers?.joined(separator: ", ")
+    }
+    
+    private func setBootstrapsDescription() {
+        guard let string = resources.customBootstrapServers?.joined(separator: ", "), string.count > 0 else {
+            bootstrapsDescription.text = String.localizedString("low_level_bootstraps_placeholder")
+            return
+        }
+        bootstrapsDescription.text = string
     }
 
 
@@ -190,6 +208,7 @@ class LowLevelSettingsController: UITableViewController {
     private func showBottstrapsAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
         controller.upstreamType = .Bootstrap
+        controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
     
@@ -206,16 +225,51 @@ class LowLevelSettingsController: UITableViewController {
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
+    
+    private func setupBetaChnnelTextView() {
+        let betaLinkFormat = ACLocalizedString("low_level_beta_link", nil)
+        let url = UIApplication.shared.adguardUrl(action: "beta_channel", from: "low_level_settings", buildVersion: productInfo.buildVersion())
+        let betaLink = String(format: betaLinkFormat, url)
+        setBetaChannelLink(betaLink)
+    }
+    
+    private func setupWarningDescriptionTextView() {
+        let warningDescriptionFormat = ACLocalizedString("low_level_description", nil)
+        let warningDescription = String(format: warningDescriptionFormat, theme.errorRedColor.hex())
+        warningTextView.attributedText = NSMutableAttributedString.fromHtml(warningDescription, fontSize: warningTextView.font!.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
+    }
+    
+    private func setBetaChannelLink(_ text: String){
+        if let headerText = text.attributedStringFromHtml() {
+            let font = betaChannelTextView.font ?? UIFont.systemFont(ofSize: 16.0)
+            betaChannelTextView.text = ""
+            let style = NSMutableParagraphStyle()
+            style.alignment = .center
+            
+            headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor , range: NSRange(location: 0, length: headerText.length))
+            headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
+            headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
+            betaChannelTextView.attributedText = headerText
+        }
+    }
 
 }
 
 extension LowLevelSettingsController: BlockedResponseTtlDelegate {
     func setTtlDescription(ttl: String) {
-        blockingResponseTtlDescription.text = String(resources.blockedResponseTtlSecs) + " sec"
+        blockingResponseTtlDescription.text = String(format: String.localizedString("s_unit"), ttl)
     }
 }
 
 extension LowLevelSettingsController: UpstreamsControllerDelegate {
+    func updateBootstrapsDescriptionLabel(text: String) {
+        guard text.count > 0 else {
+            bootstrapsDescription.text = String.localizedString("low_level_bootstraps_placeholder")
+            return
+        }
+        bootstrapsDescription.text = text
+    }
+    
     func updateCustomAddressDescriptionLabel(text: String) {
         customAddressDescription.text = text
         let indexPath = IndexPath(row: customAddress, section: 1)

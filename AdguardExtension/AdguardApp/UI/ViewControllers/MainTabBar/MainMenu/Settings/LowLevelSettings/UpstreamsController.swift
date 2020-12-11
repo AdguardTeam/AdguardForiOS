@@ -27,6 +27,7 @@ enum UpstreamType {
 protocol UpstreamsControllerDelegate: class {
     func updateCustomAddressDescriptionLabel(text: String)
     func updateFallbacksDescriptionLabel(text: String)
+    func updateBootstrapsDescriptionLabel(text: String)
 }
 
 class UpstreamsController: BottomAlertController {
@@ -133,15 +134,14 @@ class UpstreamsController: BottomAlertController {
     private func prepareTextFieldDescription() {
         switch upstreamType {
         case .Bootstrap:
-            upstreamTypeLabel.text = "Bootstraps"
-            textFieldDesciptionLabel.text = "Bootstraps IP address"
-            
+            upstreamTypeLabel.text = String.localizedString("upstreams_bootstraps_title")
+            textFieldDesciptionLabel.text = String.localizedString("upstreams_bootstraps_description")
         case .Fallback:
-            upstreamTypeLabel.text = "Fallbacks"
-            textFieldDesciptionLabel.text = "Upstream address"
+            upstreamTypeLabel.text = String.localizedString("upstreams_fallbacks_title")
+            textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
         case .CustomAddress:
-            upstreamTypeLabel.text = "Upstreams"
-            textFieldDesciptionLabel.text = "Upstream address"
+            upstreamTypeLabel.text = String.localizedString("upstreams_custom_address_title")
+            textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
         default:
             break
         }
@@ -161,6 +161,7 @@ class UpstreamsController: BottomAlertController {
         switch upstreamType {
         case .Bootstrap:
             resources.customBootstrapServers = address
+            delegate?.updateBootstrapsDescriptionLabel(text: text)
         case .Fallback:
             resources.customFallbackServers = address
             delegate?.updateFallbacksDescriptionLabel(text: text)

@@ -1231,28 +1231,13 @@
                         <sections>
                             <tableViewSection id="8JK-tN-wpf">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="212" id="hxC-8V-zJg">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="212"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="113" id="hxC-8V-zJg">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hxC-8V-zJg" id="DtI-Tk-0MI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYd-TA-CBH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="44" y="47" width="326" height="76.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <string key="text">WARNING By enabling these features, you could broke internet compromise your security of privacy.Interested in cool new AdGuard features? Try our beta channel.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    </variation>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low level Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvJ-Oi-vGF" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="10" width="366" height="29"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
@@ -1265,32 +1250,41 @@
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Interested in cool new AdGuard features? Try our beta channel." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q80-4w-lvo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="44" y="131" width="326" height="76.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                    </variation>
-                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YQG-PN-8AY">
+                                                    <rect key="frame" x="24" y="41" width="366" height="33"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqa-UQ-bSi">
+                                                    <rect key="frame" x="0.0" y="112.5" width="414" height="0.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="kMP-fM-SUY"/>
+                                                    </constraints>
+                                                </view>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2F0-3Q-d3Q">
+                                                    <rect key="frame" x="24" y="79" width="366" height="33"/>
+                                                    <color key="tintColor" red="0.52941176469999995" green="0.73333333329999995" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="q80-4w-lvo" secondAttribute="bottom" constant="4.5" id="2B4-Xm-1th"/>
-                                                <constraint firstItem="q80-4w-lvo" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" constant="44" id="4eK-LX-aMV"/>
-                                                <constraint firstAttribute="trailing" secondItem="IvJ-Oi-vGF" secondAttribute="trailing" constant="24" id="DkG-vD-52i"/>
-                                                <constraint firstAttribute="trailing" secondItem="q80-4w-lvo" secondAttribute="trailing" constant="44" id="IMF-4v-pr4"/>
-                                                <constraint firstItem="FYd-TA-CBH" firstAttribute="top" secondItem="IvJ-Oi-vGF" secondAttribute="bottom" constant="8" symbolic="YES" id="Rt7-7I-Whw"/>
-                                                <constraint firstItem="IvJ-Oi-vGF" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" constant="24" id="SNg-1k-h5d"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="FYd-TA-CBH" secondAttribute="trailing" constant="24" id="cnG-Ii-5UO"/>
-                                                <constraint firstItem="IvJ-Oi-vGF" firstAttribute="top" secondItem="DtI-Tk-0MI" secondAttribute="top" constant="10" id="daj-fU-G6o"/>
-                                                <constraint firstItem="FYd-TA-CBH" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leadingMargin" constant="24" id="o6G-Cs-KCb"/>
-                                                <constraint firstItem="q80-4w-lvo" firstAttribute="top" secondItem="FYd-TA-CBH" secondAttribute="bottom" constant="7.5" id="plr-2Q-LV1"/>
+                                                <constraint firstItem="2F0-3Q-d3Q" firstAttribute="top" secondItem="YQG-PN-8AY" secondAttribute="bottom" constant="5" id="1nZ-A6-6n1"/>
+                                                <constraint firstItem="qqa-UQ-bSi" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" id="675-lY-OWt"/>
+                                                <constraint firstItem="IvJ-Oi-vGF" firstAttribute="top" secondItem="DtI-Tk-0MI" secondAttribute="top" constant="10" id="GMw-8j-L4E"/>
+                                                <constraint firstItem="YQG-PN-8AY" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" constant="24" id="GWH-CU-TmH"/>
+                                                <constraint firstItem="qqa-UQ-bSi" firstAttribute="top" secondItem="2F0-3Q-d3Q" secondAttribute="bottom" constant="0.5" id="I6d-2q-PM4"/>
+                                                <constraint firstAttribute="trailing" secondItem="2F0-3Q-d3Q" secondAttribute="trailing" constant="24" id="OEy-ag-gWT"/>
+                                                <constraint firstAttribute="bottom" secondItem="qqa-UQ-bSi" secondAttribute="bottom" id="Q18-bv-Yrc"/>
+                                                <constraint firstItem="YQG-PN-8AY" firstAttribute="top" secondItem="IvJ-Oi-vGF" secondAttribute="bottom" constant="2" id="TH1-iT-WEA"/>
+                                                <constraint firstItem="2F0-3Q-d3Q" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" constant="24" id="XX8-u4-mR9"/>
+                                                <constraint firstAttribute="trailing" secondItem="qqa-UQ-bSi" secondAttribute="trailing" id="gIs-sI-4WS"/>
+                                                <constraint firstItem="IvJ-Oi-vGF" firstAttribute="leading" secondItem="DtI-Tk-0MI" secondAttribute="leading" constant="24" id="hu3-Hs-MrN"/>
+                                                <constraint firstAttribute="trailing" secondItem="IvJ-Oi-vGF" secondAttribute="trailing" constant="24" id="mGp-jZ-GWC"/>
+                                                <constraint firstAttribute="trailing" secondItem="YQG-PN-8AY" secondAttribute="trailing" constant="24" id="vKN-G3-zMJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1703,8 +1697,8 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="List of plain DNS servers to be used to resolve DOH/DOT hostnames (if any)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKz-Xt-gcS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="18" width="342" height="9.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKz-Xt-gcS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="27.5" width="342" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1846,14 +1840,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="PyJ-e2-N0U"/>
                     <connections>
+                        <outlet property="betaChannelTextView" destination="2F0-3Q-d3Q" id="9MK-JH-rSx"/>
                         <outlet property="blockIpv6Switch" destination="cDr-EJ-PdZ" id="u27-Y3-tiI"/>
                         <outlet property="blockimgModeDescription" destination="cpw-mb-YNa" id="gcX-9Z-VPK"/>
                         <outlet property="blockingResponseTtlDescription" destination="Uo0-5A-TN9" id="H8u-bL-HHv"/>
+                        <outlet property="bootstrapsDescription" destination="UKz-Xt-gcS" id="weS-oY-tca"/>
                         <outlet property="customAddressCell" destination="jvg-U0-mrK" id="q0l-ex-0wv"/>
                         <outlet property="customAddressDescription" destination="fjj-BC-wmQ" id="guB-Wg-YcD"/>
                         <outlet property="fallbacksDescription" destination="JUk-Yd-xIl" id="oNw-pe-o3Y"/>
                         <outlet property="lastSeparator" destination="pb0-Zi-9Aa" id="DPS-yC-kYM"/>
                         <outlet property="tunnelModeDescription" destination="AnG-OB-1EY" id="CUK-qo-Nai"/>
+                        <outlet property="warningTextView" destination="YQG-PN-8AY" id="xdO-4S-21t"/>
                         <outletCollection property="themableLabels" destination="IvJ-Oi-vGF" collectionClass="NSMutableArray" id="96O-49-HbE"/>
                         <outletCollection property="separators" destination="RlQ-VQ-Kxy" collectionClass="NSMutableArray" id="7bo-PN-fWH"/>
                         <outletCollection property="themableLabels" destination="AnG-OB-1EY" collectionClass="NSMutableArray" id="7xK-Yd-gmb"/>
@@ -1873,11 +1870,10 @@
                         <outletCollection property="separators" destination="pb0-Zi-9Aa" collectionClass="NSMutableArray" id="e2k-CP-SiD"/>
                         <outletCollection property="themableLabels" destination="k0U-fn-m9X" collectionClass="NSMutableArray" id="A3Y-kO-IyE"/>
                         <outletCollection property="themableLabels" destination="JUk-Yd-xIl" collectionClass="NSMutableArray" id="HYI-uW-0Pw"/>
-                        <outletCollection property="themableLabels" destination="FYd-TA-CBH" collectionClass="NSMutableArray" id="dWY-Ok-cyM"/>
-                        <outletCollection property="themableLabels" destination="q80-4w-lvo" collectionClass="NSMutableArray" id="lLg-i3-L8u"/>
                         <outletCollection property="themableLabels" destination="ipc-iu-k4i" collectionClass="NSMutableArray" id="E1X-sE-EUf"/>
                         <outletCollection property="themableLabels" destination="fjj-BC-wmQ" collectionClass="NSMutableArray" id="fuS-gC-QgL"/>
                         <outletCollection property="separators" destination="a2f-XZ-Rj2" collectionClass="NSMutableArray" id="Ubz-pT-CDE"/>
+                        <outletCollection property="separators" destination="qqa-UQ-bSi" collectionClass="NSMutableArray" id="geW-SF-I7e"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BrB-e2-mx7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2306,7 +2302,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always return custom configured IP address (see AGDnsProxyConfig)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huN-t2-HHo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always return custom configured IP address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huN-t2-HHo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="28" width="342" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -2784,7 +2780,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLm-6n-xCk" userLabel="Scroll Content View">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="217.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIme in seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2A9-hH-oY3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time in seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2A9-hH-oY3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="32" y="16" width="350" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3223,6 +3219,9 @@
         <image name="arrow_right" width="24" height="24"/>
         <image name="bullet" width="24" height="24"/>
         <image name="bulletnone" width="24" height="24"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
