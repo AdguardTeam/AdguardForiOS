@@ -7,8 +7,8 @@
 /* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
 "3zG-B5-jE5.text" = "Debug logs";
 
-/* Class = "UILabel"; text = "Blocked response Ttl"; ObjectID = "7nl-3p-BP2"; */
-"7nl-3p-BP2.text" = "Blocked response Ttl";
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
+"7nl-3p-BP2.text" = "Blocked response TTL";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Invert the Allowlist";
@@ -22,8 +22,8 @@
 /* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Remove VPN profile";
 
-/* Class = "UILabel"; text = "Bootstraps IP address"; ObjectID = "A89-2M-jqd"; */
-"A89-2M-jqd.text" = "Bootstraps IP address";
+/* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
+"A89-2M-jqd.text" = "Bootstrap IP address";
 
 /* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
 "AtW-mH-6ja.text" = "Always return REFUSED";
@@ -61,8 +61,8 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Enable this option if you experience issues with the Internet connection while AdGuard is running";
 
-/* Class = "UILabel"; text = "Low level Settings"; ObjectID = "IvJ-Oi-vGF"; */
-"IvJ-Oi-vGF.text" = "Low level Settings";
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
+"IvJ-Oi-vGF.text" = "Low-level settings";
 
 /* Class = "UILabel"; text = "Bootstraps"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Bootstraps";
@@ -175,8 +175,8 @@
 /* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
 "rDk-OP-kAS.text" = "Always return unspecified_address";
 
-/* Class = "UILabel"; text = "Low level Settings"; ObjectID = "reQ-4X-84i"; */
-"reQ-4X-84i.text" = "Low level Settings";
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
+"reQ-4X-84i.text" = "Low-level settings";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "SAVE";
