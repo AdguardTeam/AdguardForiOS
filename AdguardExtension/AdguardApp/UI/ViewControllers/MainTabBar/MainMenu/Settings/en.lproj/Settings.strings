@@ -187,8 +187,8 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates";
 
-/* Class = "UILabel"; text = "Blocked Response Ttl"; ObjectID = "uRk-qq-TJH"; */
-"uRk-qq-TJH.text" = "Blocked Response Ttl";
+/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "Blocked Response TTL";
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "Are you a developer?";
