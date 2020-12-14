@@ -18,12 +18,6 @@
 
 import UIKit
 
-enum UpstreamType {
-    case Bootstrap
-    case Fallback
-    case CustomAddress
-}
-
 protocol UpstreamsControllerDelegate: class {
     func updateCustomAddressDescriptionLabel(text: String)
     func updateFallbacksDescriptionLabel(text: String)
@@ -94,9 +88,11 @@ class UpstreamsController: BottomAlertController {
         
         
         checkUpstream(upstreams: upstreams) { [weak self] in
-            self?.saveUpstream(text: text)
-            self?.vpnManager.updateSettings(completion: nil)
-            self?.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self?.saveUpstream(text: text)
+                self?.vpnManager.updateSettings(completion: nil)
+                self?.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -115,15 +111,15 @@ class UpstreamsController: BottomAlertController {
     private func prepareUpstreamTextField() {
         
         switch upstreamType {
-        case .Bootstrap:
+        case .bootstrap:
             let bootstrapString = resources.customBootstrapServers?.joined(separator: ", ")
             upstreamsTextField.text = bootstrapString
             
-        case .Fallback:
+        case .fallback:
             let fallbackString = resources.customFallbackServers?.joined(separator: ", ")
             upstreamsTextField.text = fallbackString
             
-        case .CustomAddress:
+        case .customAddress:
             let ipAddress = resources.customBlockingIp?.joined(separator: ", ")
             upstreamsTextField.text = ipAddress
         default:
@@ -133,13 +129,13 @@ class UpstreamsController: BottomAlertController {
     
     private func prepareTextFieldDescription() {
         switch upstreamType {
-        case .Bootstrap:
+        case .bootstrap:
             upstreamTypeLabel.text = String.localizedString("upstreams_bootstraps_title")
             textFieldDesciptionLabel.text = String.localizedString("upstreams_bootstraps_description")
-        case .Fallback:
+        case .fallback:
             upstreamTypeLabel.text = String.localizedString("upstreams_fallbacks_title")
             textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
-        case .CustomAddress:
+        case .customAddress:
             upstreamTypeLabel.text = String.localizedString("upstreams_custom_address_title")
             textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
         default:
@@ -148,9 +144,9 @@ class UpstreamsController: BottomAlertController {
     }
     
     private func transformToArray(address: String) -> [String] {
-        let trimmedAddress = address.trimmingCharacters(in: .whitespaces)
-        let ipAddress = trimmedAddress.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
-        return ipAddress
+        let trimmedAddresses = address.trimmingCharacters(in: .whitespaces)
+        let ipAddresses = trimmedAddresses.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
+        return ipAddresses
     }
     
     private func saveUpstream(text: String) {
@@ -159,13 +155,13 @@ class UpstreamsController: BottomAlertController {
             address = transformToArray(address: text)
         }
         switch upstreamType {
-        case .Bootstrap:
+        case .bootstrap:
             resources.customBootstrapServers = address
             delegate?.updateBootstrapsDescriptionLabel(text: text)
-        case .Fallback:
+        case .fallback:
             resources.customFallbackServers = address
             delegate?.updateFallbacksDescriptionLabel(text: text)
-        case .CustomAddress:
+        case .customAddress:
             resources.customBlockingIp = address
             delegate?.updateCustomAddressDescriptionLabel(text: text)
         default:

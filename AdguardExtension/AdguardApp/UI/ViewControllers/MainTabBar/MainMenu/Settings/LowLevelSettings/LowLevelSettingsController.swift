@@ -25,7 +25,6 @@ class LowLevelSettingsController: UITableViewController {
     @IBOutlet weak var tunnelModeDescription: ThemableLabel!
     @IBOutlet weak var blockimgModeDescription: ThemableLabel!
     @IBOutlet weak var blockingResponseTtlDescription: ThemableLabel!
-    @IBOutlet weak var customAddressCell: UITableViewCell!
     @IBOutlet weak var warningTextView: UITextView!
     @IBOutlet weak var betaChannelTextView: UITextView!
     @IBOutlet weak var customAddressDescription: ThemableLabel!
@@ -78,8 +77,8 @@ class LowLevelSettingsController: UITableViewController {
     // MARK: - actions
     
     @IBAction func blockIpv6Action(_ sender: UISwitch) {
-        vpnManager.updateSettings(completion: nil)
         resources.blockIpv6 = sender.isOn
+        vpnManager.updateSettings(completion: nil)
     }
     
     // MARK: - Table view data source
@@ -102,7 +101,7 @@ class LowLevelSettingsController: UITableViewController {
         case blockResponseTtl:
             showBlockedResponseTtlAlert()
         case boostraps:
-            showBottstrapsAlert()
+            showBootstrapsAlert()
         case fallbacks:
             showFallbacksAlert()
         default:
@@ -119,9 +118,7 @@ class LowLevelSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
-        if cell == self.customAddressCell && resources.blockingMode != .AGBM_CUSTOM_ADDRESS {
+        if indexPath.row == customAddress && resources.blockingMode != .agCustomAddress {
             return 0
         }
         return tableView.rowHeight
@@ -139,11 +136,7 @@ class LowLevelSettingsController: UITableViewController {
         theme.setupSwitch(blockIpv6Switch)
         theme.setupTextView(betaChannelTextView)
         setupWarningDescriptionTextView()
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     private func setTunnelModeDescription() {
@@ -162,18 +155,16 @@ class LowLevelSettingsController: UITableViewController {
     private func setBlockingModeDescription() {
         
         switch resources.blockingMode {
-        case .AGBM_DEFAULT:
+        case .agDefault:
             blockimgModeDescription.text = "Default"
-        case .AGBM_REFUSED:
+        case .agRefused:
             blockimgModeDescription.text = "REFUSED"
-        case .AGBM_NXDOMAIN:
+        case .agNxdomain:
             blockimgModeDescription.text = "NXDOMAIN"
-        case .AGBM_UNSPECIFIED_ADDRESS:
+        case .agUnspecifiedAddress:
             blockimgModeDescription.text = "UNSPECIFIED_ADDRESS"
-        case .AGBM_CUSTOM_ADDRESS:
+        case .agCustomAddress:
             blockimgModeDescription.text = "CUSTOM_ADDRESS"
-        default:
-            break
         }
     }
     
@@ -205,23 +196,23 @@ class LowLevelSettingsController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func showBottstrapsAlert() {
+    private func showBootstrapsAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .Bootstrap
+        controller.upstreamType = .bootstrap
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
     
     private func showFallbacksAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .Fallback
+        controller.upstreamType = .fallback
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
     
     private func showCustomAddressAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .CustomAddress
+        controller.upstreamType = .customAddress
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
@@ -235,7 +226,7 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setupWarningDescriptionTextView() {
         let warningDescriptionFormat = ACLocalizedString("low_level_description", nil)
-        let warningDescription = String(format: warningDescriptionFormat, theme.errorRedColor.hex())
+        let warningDescription = String(format: warningDescriptionFormat)
         warningTextView.attributedText = NSMutableAttributedString.fromHtml(warningDescription, fontSize: warningTextView.font!.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
     }
     
@@ -263,7 +254,7 @@ extension LowLevelSettingsController: BlockedResponseTtlDelegate {
 
 extension LowLevelSettingsController: UpstreamsControllerDelegate {
     func updateBootstrapsDescriptionLabel(text: String) {
-        guard text.count > 0 else {
+        guard !text.isEmpty else {
             bootstrapsDescription.text = String.localizedString("low_level_bootstraps_placeholder")
             return
         }

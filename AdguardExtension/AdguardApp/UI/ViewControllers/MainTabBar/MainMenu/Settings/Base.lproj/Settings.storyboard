@@ -1845,7 +1845,6 @@
                         <outlet property="blockimgModeDescription" destination="cpw-mb-YNa" id="gcX-9Z-VPK"/>
                         <outlet property="blockingResponseTtlDescription" destination="Uo0-5A-TN9" id="H8u-bL-HHv"/>
                         <outlet property="bootstrapsDescription" destination="UKz-Xt-gcS" id="weS-oY-tca"/>
-                        <outlet property="customAddressCell" destination="jvg-U0-mrK" id="q0l-ex-0wv"/>
                         <outlet property="customAddressDescription" destination="fjj-BC-wmQ" id="guB-Wg-YcD"/>
                         <outlet property="fallbacksDescription" destination="JUk-Yd-xIl" id="oNw-pe-o3Y"/>
                         <outlet property="lastSeparator" destination="pb0-Zi-9Aa" id="DPS-yC-kYM"/>
@@ -2018,7 +2017,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hon-wj-cSO">
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hon-wj-cSO">
                                                     <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="QAd-wN-vll">
@@ -2104,7 +2103,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnh-6A-cMg">
+                                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nnh-6A-cMg">
                                                     <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="ANW-NW-xeJ">
@@ -2190,7 +2189,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r90-Gc-4wu">
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r90-Gc-4wu">
                                                     <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="Pgp-f3-sgR">
@@ -2276,7 +2275,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTo-Hp-fRU">
+                                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTo-Hp-fRU">
                                                     <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="RZZ-Ut-w6u">
@@ -2355,11 +2354,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="7Cy-Wo-iN8"/>
                     <connections>
-                        <outlet property="customAddressModeButton" destination="TTo-Hp-fRU" id="mXI-un-VGm"/>
-                        <outlet property="defaultModeButton" destination="6hc-Xh-iz8" id="B8f-LI-w3L"/>
-                        <outlet property="nxDomainModeButton" destination="nnh-6A-cMg" id="dLq-YO-9fV"/>
-                        <outlet property="refusedModeButton" destination="Hon-wj-cSO" id="cTc-V6-KAm"/>
-                        <outlet property="unspecifiedAddressModeButton" destination="r90-Gc-4wu" id="uLE-YC-u7d"/>
                         <outletCollection property="themableLabels" destination="BPj-Fi-8mA" collectionClass="NSMutableArray" id="ohG-4E-7eJ"/>
                         <outletCollection property="themableLabels" destination="cgV-he-JNk" collectionClass="NSMutableArray" id="RZh-Cg-uA4"/>
                         <outletCollection property="themableLabels" destination="Lgb-zJ-9va" collectionClass="NSMutableArray" id="qOe-hr-dCf"/>
@@ -2374,6 +2368,11 @@
                         <outletCollection property="separators" destination="l4r-jZ-IlA" collectionClass="NSMutableArray" id="B0Y-DZ-uuB"/>
                         <outletCollection property="separators" destination="KV8-L0-tYw" collectionClass="NSMutableArray" id="NRp-GW-MI0"/>
                         <outletCollection property="separators" destination="JJj-ke-d2Z" collectionClass="NSMutableArray" id="4lU-KX-65T"/>
+                        <outletCollection property="buttons" destination="6hc-Xh-iz8" collectionClass="NSMutableArray" id="PFf-A4-VcW"/>
+                        <outletCollection property="buttons" destination="Hon-wj-cSO" collectionClass="NSMutableArray" id="R2q-a9-gSd"/>
+                        <outletCollection property="buttons" destination="nnh-6A-cMg" collectionClass="NSMutableArray" id="HIy-6h-3cI"/>
+                        <outletCollection property="buttons" destination="r90-Gc-4wu" collectionClass="NSMutableArray" id="zfa-FU-q56"/>
+                        <outletCollection property="buttons" destination="TTo-Hp-fRU" collectionClass="NSMutableArray" id="YqE-SD-5Tx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqR-Qa-C7v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

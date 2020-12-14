@@ -220,6 +220,9 @@ class SupportService: SupportServiceProtocol {
             tunnelMode = "UNKNOWN"
         }
         
+        let customBootstraps = resources.customBootstrapServers?.joined(separator: ", ") ?? ""
+        let customFallbacks = resources.customFallbackServers?.joined(separator: ", ") ?? ""
+        
         var resultString = """
         Application version: \(productInfo.buildVersion() ?? "Unknown")
         
@@ -252,6 +255,8 @@ class SupportService: SupportServiceProtocol {
         Filter wi-fi data: \(networkSettings.filterWifiDataEnabled)
 
         Dns server id: \(server?.serverId ?? "")
+        Dns custom bootstrap servers: \(customBootstraps)"
+        Dns custom fallback servers: \(customFallbacks)"
         """
         
         for upstream in server?.upstreams ?? [] {

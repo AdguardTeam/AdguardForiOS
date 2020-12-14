@@ -875,8 +875,8 @@
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Add DNS User Rules";
 
-/* (LowLevelSettingsController) Low level settings description */
-"low_level_description" = "<b style=color:\%@\>WARNING!</b> Enabling these features may break the Internet connection or compromise your security and privacy.";
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>WARNING!</b> Enabling these features may break the Internet connection or compromise your security and privacy.";
 
 /* (LowLevelSettingsController) Low level settings beta channel link */
 "low_level_beta_link" = "Interested in cool new AdGuard features? Try our <a href=\"%@\">beta channel.</a>";

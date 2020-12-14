@@ -682,9 +682,29 @@
     
     NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
     NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
-    AGBlockingMode blockingMode = [_resources.sharedDefaults integerForKey: BlockingMode];
+    BlockingModeSettings blockingModeSettings = [_resources.sharedDefaults integerForKey: BlockingMode];
     NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
-    NSArray<NSString *> *customBlockingIp;
+    AGBlockingMode blockingMode;
+    
+    switch (blockingModeSettings) {
+        case BlockingModeSettingsAgDefault:
+            blockingMode = AGBM_DEFAULT;
+            break;
+        case BlockingModeSettingsAgRefused:
+            blockingMode = AGBM_REFUSED;
+            break;
+        case BlockingModeSettingsAgNxdomain:
+            blockingMode = AGBM_NXDOMAIN;
+            break;
+        case BlockingModeSettingsAgUnspecifiedAddress:
+            blockingMode = AGBM_UNSPECIFIED_ADDRESS;
+            break;
+        case BlockingModeSettingsAgCustomAddress:
+            blockingMode = AGBM_CUSTOM_ADDRESS;
+            break;
+    }
+    
+    NSArray<NSString *> *customBlockingIp = @[@"127.0.0.1", @"::1"];
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;
     
@@ -703,8 +723,6 @@
     
     
     // Using system DNS servers as bootstraps and fallbacks
-    //    return [self.dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
-    
     return [self.dnsProxy startWithUpstreams:upstreams
                                 bootstrapDns:customBootstraps ?: systemDnsServers
                                    fallbacks:customFallbacks ?: systemDnsServers

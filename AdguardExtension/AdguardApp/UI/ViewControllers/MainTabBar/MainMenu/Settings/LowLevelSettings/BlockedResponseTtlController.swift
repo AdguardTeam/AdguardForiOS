@@ -40,9 +40,6 @@ class BlockedResponseTtlController: BottomAlertController {
     
     weak var delegate: BlockedResponseTtlDelegate?
 
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,9 +53,6 @@ class BlockedResponseTtlController: BottomAlertController {
         
         updateSaveButton()
         updateTheme()
-        
-        cancelButton?.makeTitleTextUppercased()
-        saveButton?.makeTitleTextUppercased()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,8 +71,8 @@ class BlockedResponseTtlController: BottomAlertController {
     }
     
     @IBAction func saveAction(_ sender: UIButton) {
-        guard let text = ttlTextField.text, text.count > 0 else { return }
-        guard let numeric = transformToInt(value: text), numeric >= 0 else { return }
+        guard let text = ttlTextField.text, !text.isEmpty else { return }
+        guard let numeric = Int(text), numeric >= 0 else { return }
         resources.blockedResponseTtlSecs = numeric
         vpnManager.updateSettings(completion: nil)
         delegate?.setTtlDescription(ttl: text)
@@ -98,21 +92,12 @@ class BlockedResponseTtlController: BottomAlertController {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(ttlTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
+        theme.setupSeparators(separators)
     }
-    
     
     private func updateSaveButton() {
         let ttl = ttlTextField.text ?? ""
-        let enabled = ttl.count > 0 && (transformToInt(value: ttl) != nil)
-        
-        saveButton?.isEnabled = enabled
+        guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
+        saveButton?.isEnabled = true
     }
-    
-    private func transformToInt(value: String) -> Int? {
-        return Int(value)
-    }
-
 }

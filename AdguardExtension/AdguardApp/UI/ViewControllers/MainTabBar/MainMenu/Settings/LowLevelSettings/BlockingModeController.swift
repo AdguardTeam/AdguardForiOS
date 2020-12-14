@@ -20,27 +20,17 @@ import UIKit
 
 class BlockingModeController: UITableViewController {
     
-    @IBOutlet weak var defaultModeButton: UIButton!
-    @IBOutlet weak var refusedModeButton: UIButton!
-    @IBOutlet weak var nxDomainModeButton: UIButton!
-    @IBOutlet weak var unspecifiedAddressModeButton: UIButton!
-    @IBOutlet weak var customAddressModeButton: UIButton!
-    
+    @IBOutlet var buttons: [UIButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
 
     private var notificationToken: NotificationToken?
-
+    private var selectedCell = 0
     
     // MARK: - services
-    
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-
-    
-    var selectedCell = 0
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,18 +44,16 @@ class BlockingModeController: UITableViewController {
         let mode = resources.blockingMode
         
         switch mode {
-        case .AGBM_DEFAULT:
+        case .agDefault:
             selectedCell = 0
-        case .AGBM_REFUSED:
+        case .agRefused:
             selectedCell = 1
-        case .AGBM_NXDOMAIN:
+        case .agNxdomain:
             selectedCell = 2
-        case .AGBM_UNSPECIFIED_ADDRESS:
+        case .agUnspecifiedAddress:
             selectedCell = 3
-        case .AGBM_CUSTOM_ADDRESS:
+        case .agCustomAddress:
             selectedCell = 4
-        default:
-            break
         }
         
         updateButtons()
@@ -86,20 +74,20 @@ class BlockingModeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var mode = AGBlockingMode.AGBM_DEFAULT
+        let mode: BlockingModeSettings
         switch indexPath.row {
         case 0:
-            mode = .AGBM_DEFAULT
+            mode = .agDefault
         case 1:
-            mode = .AGBM_REFUSED
+            mode = .agRefused
         case 2:
-            mode = .AGBM_NXDOMAIN
+            mode = .agNxdomain
         case 3:
-            mode = .AGBM_UNSPECIFIED_ADDRESS
+            mode = .agUnspecifiedAddress
         case 4:
-            mode = .AGBM_CUSTOM_ADDRESS
+            mode = .agCustomAddress
         default:
-            break
+            mode = .agDefault
         }
         
         resources.blockingMode = mode
@@ -116,35 +104,12 @@ class BlockingModeController: UITableViewController {
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
         theme.setupLabels(themableLabels)
-        separators.forEach { $0.backgroundColor = theme.separatorColor }
+        theme.setupSeparators(separators)
     }
     
     private func updateButtons() {
-        
-        defaultModeButton.isSelected = false
-        refusedModeButton.isSelected = false
-        nxDomainModeButton.isSelected = false
-        unspecifiedAddressModeButton.isSelected = false
-        customAddressModeButton.isSelected = false
-        
-        switch selectedCell {
-        case 0:
-            defaultModeButton.isSelected = true
-        case 1:
-            refusedModeButton.isSelected = true
-        case 2:
-            nxDomainModeButton.isSelected = true
-        case 3:
-            unspecifiedAddressModeButton.isSelected = true
-        case 4:
-            customAddressModeButton.isSelected = true
-        default:
-            break
-        }
+        buttons.forEach { $0.isSelected = $0.tag == selectedCell }
     }
 }
