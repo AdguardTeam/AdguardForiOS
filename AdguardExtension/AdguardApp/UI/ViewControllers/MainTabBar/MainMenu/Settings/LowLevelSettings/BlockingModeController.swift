@@ -66,11 +66,7 @@ class BlockingModeController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        guard let mode = BlockingModeSettings(rawValue: sender.tag) else { return }
-        resources.blockingMode = mode
-        selectedCell = sender.tag
-        updateButtons(by: selectedCell)
-        vpnManager.updateSettings(completion: nil)
+        updateBlockingMode(index: sender.tag)
     }
     
     // MARK: - Table view data source
@@ -83,29 +79,7 @@ class BlockingModeController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let mode: BlockingModeSettings
-        switch indexPath.row {
-        case 0:
-            mode = .agDefault
-        case 1:
-            mode = .agRefused
-        case 2:
-            mode = .agNxdomain
-        case 3:
-            mode = .agUnspecifiedAddress
-        case 4:
-            mode = .agCustomAddress
-        default:
-            mode = .agDefault
-        }
-        
-        resources.blockingMode = mode
-        vpnManager.updateSettings(completion: nil)
-        
-        selectedCell = indexPath.row
-        updateButtons(by: selectedCell)
-        
+        updateBlockingMode(index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -121,5 +95,28 @@ class BlockingModeController: UITableViewController {
     
     private func updateButtons(by index: Int) {
         buttons.forEach { $0.isSelected = $0.tag == index }
+    }
+    
+    private func updateBlockingMode(index: Int) {
+        let mode: BlockingModeSettings
+        switch index {
+        case 0:
+            mode = .agDefault
+        case 1:
+            mode = .agRefused
+        case 2:
+            mode = .agNxdomain
+        case 3:
+            mode = .agUnspecifiedAddress
+        case 4:
+            mode = .agCustomAddress
+        default:
+            mode = .agDefault
+        }
+        
+        resources.blockingMode = mode
+        selectedCell = index
+        updateButtons(by: selectedCell)
+        vpnManager.updateSettings(completion: nil)
     }
 }
