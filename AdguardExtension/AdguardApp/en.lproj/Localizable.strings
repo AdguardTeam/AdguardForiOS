@@ -888,7 +888,7 @@
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
-"upstreams_bootstraps_description" = "Bootstraps IP address";
+"upstreams_bootstraps_description" = "Bootstrap IP address";
 
 /* (UpstreamsController) Fallbacks and Custom address description */
 "upstreams_description" = "Upstream address";
