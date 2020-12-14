@@ -56,11 +56,21 @@ class BlockingModeController: UITableViewController {
             selectedCell = 4
         }
         
-        updateButtons()
+        updateButtons(by: selectedCell)
         setupBackButton()
         
         updateTheme()
 
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        guard let mode = BlockingModeSettings(rawValue: sender.tag) else { return }
+        resources.blockingMode = mode
+        selectedCell = sender.tag
+        updateButtons(by: selectedCell)
+        vpnManager.updateSettings(completion: nil)
     }
     
     // MARK: - Table view data source
@@ -94,7 +104,7 @@ class BlockingModeController: UITableViewController {
         vpnManager.updateSettings(completion: nil)
         
         selectedCell = indexPath.row
-        updateButtons()
+        updateButtons(by: selectedCell)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -109,7 +119,7 @@ class BlockingModeController: UITableViewController {
         theme.setupSeparators(separators)
     }
     
-    private func updateButtons() {
-        buttons.forEach { $0.isSelected = $0.tag == selectedCell }
+    private func updateButtons(by index: Int) {
+        buttons.forEach { $0.isSelected = $0.tag == index }
     }
 }

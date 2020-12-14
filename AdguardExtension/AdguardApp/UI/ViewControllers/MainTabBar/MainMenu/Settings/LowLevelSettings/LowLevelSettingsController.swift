@@ -177,11 +177,15 @@ class LowLevelSettingsController: UITableViewController {
     }
     
     private func setFallbacksDescription() {
-        fallbacksDescription.text = resources.customFallbackServers?.joined(separator: ", ")
+        guard let string = resources.customFallbackServers?.joined(separator: ", "), !string.isEmpty else {
+            fallbacksDescription.text = String.localizedString("low_level_bootstraps_placeholder")
+            return
+        }
+        fallbacksDescription.text = string
     }
     
     private func setBootstrapsDescription() {
-        guard let string = resources.customBootstrapServers?.joined(separator: ", "), string.count > 0 else {
+        guard let string = resources.customBootstrapServers?.joined(separator: ", "), !string.isEmpty else {
             bootstrapsDescription.text = String.localizedString("low_level_bootstraps_placeholder")
             return
         }
@@ -268,9 +272,10 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
     }
     
     func updateFallbacksDescriptionLabel(text: String) {
+        guard !text.isEmpty else {
+            fallbacksDescription.text = String.localizedString("low_level_bootstraps_placeholder")
+            return
+        }
         fallbacksDescription.text = text
-        let indexPath = IndexPath(row: fallbacks, section: 1)
-        tableView.reloadRows(at: [indexPath], with: .none)
-
     }
 }

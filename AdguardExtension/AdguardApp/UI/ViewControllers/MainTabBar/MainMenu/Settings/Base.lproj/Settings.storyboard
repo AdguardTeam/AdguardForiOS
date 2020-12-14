@@ -1944,6 +1944,9 @@
                                                     <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="B51-gs-hNh" eventType="touchUpInside" id="Tle-gz-dD4"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPj-Fi-8mA" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="342" height="10"/>
@@ -2030,6 +2033,9 @@
                                                     <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="B51-gs-hNh" eventType="touchUpInside" id="GRY-MF-JhC"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refused" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgb-zJ-9va" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="342" height="0.0"/>
@@ -2116,6 +2122,9 @@
                                                     <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="B51-gs-hNh" eventType="touchUpInside" id="P9j-yN-ZsW"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="NxDomain" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsy-DV-b67" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="342" height="10"/>
@@ -2202,6 +2211,9 @@
                                                     <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="B51-gs-hNh" eventType="touchUpInside" id="BWS-pw-hAZ"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="UNSPECIFIED_ADDRESS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBi-rt-m64" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="342" height="10"/>
@@ -2288,6 +2300,9 @@
                                                     <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="bulletnone"/>
                                                     <state key="selected" image="bullet"/>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="B51-gs-hNh" eventType="touchUpInside" id="Jzb-dr-V6f"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="CUSTOM_ADDRESS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xa4-8g-dtT" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="342" height="10"/>
