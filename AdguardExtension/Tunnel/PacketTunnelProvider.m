@@ -704,12 +704,12 @@
             break;
     }
     
-    NSArray<NSString *> *customBlockingIp = @[@"127.0.0.1", @"::1"];
+    NSArray<NSString *> *customBlockingIp;
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;
     
     if (blockingMode == AGBM_CUSTOM_ADDRESS) {
-        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp];
+        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
         for (NSString* ip in customBlockingIp) {
             if ([ACNUrlUtils isIPv4:ip]) {
                 customBlockingIpv4 = ip;
