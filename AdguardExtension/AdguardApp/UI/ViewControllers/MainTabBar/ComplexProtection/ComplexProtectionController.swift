@@ -76,6 +76,7 @@ class ComplexProtectionController: UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var themeNotification: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
@@ -85,7 +86,7 @@ class ComplexProtectionController: UITableViewController {
         return configuration.proStatus
     }
     
-    private let enabledColor = UIColor(hexString: "#67B279")
+    private let enabledColor = UIColor.AdGuardColor.green
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
     private let titleSection = 0
@@ -149,6 +150,28 @@ class ComplexProtectionController: UITableViewController {
     }
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
+        if resources.dnsImplementation == .native {
+            if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
+                nativeProviders.removeDnsManager { error in
+                    DDLogError("Error removing dns manager: \(error.debugDescription)")
+                    DispatchQueue.main.async { [weak self] in
+                        sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
+                    }
+                }
+            } else if #available(iOS 14.0, *) {
+                sender.isOn = complexProtection.systemProtectionEnabled
+                nativeProviders.saveDnsManager { error in
+                    if let error = error {
+                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                    }
+                    DispatchQueue.main.async {
+                        AppDelegate.shared.presentHowToSetupController()
+                    }
+                }
+            }
+            return
+        }
+        
         let enabled = sender.isOn
         if enabled && !configuration.proStatus {
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)

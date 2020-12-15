@@ -67,6 +67,9 @@ class SupportService: NSObject, SupportServiceProtocol {
         
         let server = dnsProviders.activeDnsServer
         
+        let customBootstraps = resources.customBootstrapServers?.joined(separator: ", ") ?? ""
+        let customFallbacks = resources.customFallbackServers?.joined(separator: ", ") ?? ""
+        
         var resultString = """
         
         
@@ -81,6 +84,8 @@ class SupportService: NSObject, SupportServiceProtocol {
         Filter wi-fi data: \(networkSettings.filterWifiDataEnabled)
 
         Dns server id: \(server?.serverId ?? "")
+        Dns custom bootstrap servers: \(customBootstraps)"
+        Dns custom fallback servers: \(customFallbacks)"
         """
         
         for upstream in server?.upstreams ?? [] {
@@ -121,8 +126,6 @@ class SupportService: NSObject, SupportServiceProtocol {
         let filtersString = filterIDs.joined(separator: ".")
         
         params["filters"] = filtersString
-        
-        params["ios.simplified"] = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize) ? "true" : "false"
             
         let dnsEnabled = complexProtection.systemProtectionEnabled;
         

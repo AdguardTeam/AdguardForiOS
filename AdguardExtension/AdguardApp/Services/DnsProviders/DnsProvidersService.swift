@@ -23,8 +23,9 @@ import Foundation
 /**
  DnsProvidersService is responsible for managing dns providers
  */
-@objc
-protocol DnsProvidersServiceProtocol {
+@objc protocol DnsProvidersServiceProtocol {
+    var delegate: DnsProvidersServiceDelegate? { get set }
+    
     var vpnManager: VpnManagerProtocol? { get set }
     
     var allProviders: [DnsProviderInfo] { get }
@@ -37,29 +38,34 @@ protocol DnsProvidersServiceProtocol {
     var activeDnsProvider: DnsProviderInfo? { get }
     var currentServerName: String { get }
     
-    func addCustomProvider(name: String, upstream: String)->DnsProviderInfo
-    func deleteProvider(_ provider: DnsProviderInfo)
-    func updateProvider(_ provider: DnsProviderInfo)
-    func isCustomProvider(_ provider: DnsProviderInfo)->Bool
-    func isCustomServer(_ server: DnsServerInfo)->Bool
-    func isActiveProvider(_ provider: DnsProviderInfo)->Bool
-    func getServer(serverId: Int)->DnsServerInfo?
-    func getServerName(serverId: Int)->String?
+    func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void)
+    func deleteProvider(_ provider: DnsProviderInfo, _ onProviderDeleted: @escaping () -> Void)
+    func updateProvider(_ provider: DnsProviderInfo, _ onProviderUpdated: @escaping () -> Void)
+    func isCustomServer(_ server: DnsServerInfo) -> Bool
+    func isActiveProvider(_ provider: DnsProviderInfo) -> Bool
+    func getServer(serverId: Int) -> DnsServerInfo?
+    func getServerName(serverId: Int) -> String?
     
     func reset()
 }
 
+@objc protocol DnsProvidersServiceDelegate: class {
+    func dnsProvidersChanged()
+}
+
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
+    
+    static let systemDefaultProviderId = 10000
     
     private var predefinedProvidersInternal: [DnsProviderInfo]?
     private var customProvidersInternal: [DnsProviderInfo]?
     private let workingQueue = DispatchQueue(label: "dns providers queue")
     
     @objc private let resources: AESharedResourcesProtocol
+    weak var delegate: DnsProvidersServiceDelegate?
     weak var vpnManager: VpnManagerProtocol?
     
     private let APDefaultsCustomDnsProviders = "APDefaultsCustomDnsProviders"
-    
     
     /*
      Language map for providers_i18n.json
@@ -70,8 +76,6 @@ protocol DnsProvidersServiceProtocol {
                                "zh-Hant:": "zh-TW"]
     
     private var currentLocaleCode: String
-    
-    private let systemDefaultProviderId = 10000
     
     @objc convenience init(resources: AESharedResourcesProtocol) {
         self.init(resources: resources, locale: Bundle.main.preferredLocaleCode)
@@ -114,46 +118,32 @@ protocol DnsProvidersServiceProtocol {
         }
         
         set {
-            willChangeValue(for: \.allProviders)
             customProvidersInternal = newValue
             if customProvidersInternal != nil {
                 let data = NSKeyedArchiver.archivedData(withRootObject: customProvidersInternal!)
                 resources.sharedDefaults().set(data, forKey: APDefaultsCustomDnsProviders)
                 resources.sharedDefaults().synchronize()
             }
-            didChangeValue(for: \.allProviders)
         }
     }
     
-    @objc var allProviders: [DnsProviderInfo] {
+    var allProviders: [DnsProviderInfo] {
         return predefinedProviders + customProviders
     }
     
     @objc var activeDnsServer: DnsServerInfo? {
         get {
-            guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else { return nil }
-            return NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
-            
+            return resources.currentAdGuardImplementationDnsServer
         }
         set {
-            guard let server = newValue else {
-                resources.sharedDefaults().removeObject(forKey: AEDefaultsActiveDnsServer)
-                return
-            }
-            
-            let data = NSKeyedArchiver.archivedData(withRootObject:server)
-            
-            willChangeValue(for: \.activeDnsServer)
-            resources.sharedDefaults().set(data, forKey: AEDefaultsActiveDnsServer)
-            didChangeValue(for: \.activeDnsServer)
+            resources.currentAdGuardImplementationDnsServer = newValue
         }
     }
     
     var activeDnsProvider: DnsProviderInfo? {
         get {
-            let activeServer = activeDnsServer
-            return allProviders.first { (provider) in
-                provider.servers?.contains { $0.serverId == activeServer?.serverId } ?? false
+            return allProviders.first { provider in
+                provider.providerId == activeDnsServer?.providerId
             }
         }
     }
@@ -161,77 +151,71 @@ protocol DnsProvidersServiceProtocol {
     /* True if there is no saved server id among fetched providers */
     private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
     
-    func addCustomProvider(name: String, upstream: String) -> DnsProviderInfo {
-        let provider = DnsProviderInfo(name: name)
+    func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void) {
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            let maxId = self.customProviders.map{ $0.providerId }.max() ?? 0
+            let providerId = maxId + 1
+            let provider = DnsProviderInfo(name: name, isCustomProvider: true, providerId: providerId)
+            let serverProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         
-        let server = DnsServerInfo(dnsProtocol: .dns, serverId: UUID().uuidString, name: name, upstreams: [upstream])
-        
-        server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-        provider.servers = [server]
-        
-        workingQueue.sync { [weak self] in
-            self?.customProviders.append(provider)
+            let customServersCount = self.customProviders.flatMap({ $0.servers ?? [] }).count
+            let serverId = String(customServersCount + 100000)
+            let server = DnsServerInfo(dnsProtocol: serverProtocol, serverId: serverId, name: name, upstreams: [upstream], providerId: providerId)
+    
+            provider.servers = [server]
+            
+            self.customProviders.append(provider)
+            self.activeDnsServer = server
+            self.delegate?.dnsProvidersChanged()
+            onProviderAdded()
         }
-        
-        return provider
     }
     
-    func deleteProvider(_ provider: DnsProviderInfo)  {
-        
-        workingQueue.sync { [weak self] in
+    func deleteProvider(_ provider: DnsProviderInfo, _ onProviderDeleted: @escaping () -> Void)  {
+        workingQueue.async { [weak self] in
             guard let self = self else { return }
 
-            self.willChangeValue(forKey: "allProviders")
-            
             // search provider by server id.
-            customProviders = customProviders.filter {
+            self.customProviders = self.customProviders.filter {
                 $0.servers?.first?.serverId != provider.servers?.first?.serverId
             }
-            
-            self.didChangeValue(forKey: "allProviders")
+            self.delegate?.dnsProvidersChanged()
+            onProviderDeleted()
         }
     }
     
-    func updateProvider(_ provider: DnsProviderInfo)  {
-        workingQueue.sync { [weak self] in
+    func updateProvider(_ provider: DnsProviderInfo, _ onProviderUpdated: @escaping () -> Void) {
+        workingQueue.async { [weak self] in
             guard let self = self else { return }
-
-            self.willChangeValue(forKey: "allProviders")
             
             // search provider by server id.
-            customProviders = customProviders.map { (currentProvider)->DnsProviderInfo in
+            self.customProviders = self.customProviders.map { currentProvider -> DnsProviderInfo in
                 guard let server = currentProvider.servers?.first else { return currentProvider }
                 if server.serverId == provider.servers?.first?.serverId {
                     server.name = provider.servers?.first?.name ?? ""
                     server.upstreams = provider.servers?.first?.upstreams ?? []
                     server.dnsProtocol = provider.servers?.first?.dnsProtocol ?? .dns
                     
-                    if server.serverId == activeDnsServer?.serverId {
-                        activeDnsServer = server
+                    if server.serverId == self.activeDnsServer?.serverId {
+                        self.activeDnsServer = server
                     }
                 }
-                
                 return currentProvider
             }
-            
-            self.didChangeValue(forKey: "allProviders")
-        }
-    }
-    
-    func isCustomProvider(_ provider: DnsProviderInfo)->Bool {
-        return customProviders.contains {
-            $0.servers?.first?.serverId == provider.servers?.first?.serverId
+            self.delegate?.dnsProvidersChanged()
+            onProviderUpdated()
         }
     }
     
     @objc
-    func isCustomServer(_ server: DnsServerInfo)->Bool {
+    func isCustomServer(_ server: DnsServerInfo) -> Bool {
         return customProviders.contains {
             $0.servers?.first?.serverId == server.serverId
         }
     }
     
-    func isActiveProvider(_ provider: DnsProviderInfo)->Bool {
+    func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
         guard let server = activeDnsServer else { return false }
         return provider.servers?.contains { $0.serverId == server.serverId } ?? false
     }
@@ -294,7 +278,7 @@ protocol DnsProvidersServiceProtocol {
         return "\(provider?.name ?? server.name) (\(protocolName))"
     }
     
-    private func serverWithId(_ id: String)->DnsServerInfo? {
+    private func serverWithId(_ id: String) -> DnsServerInfo? {
         for provider in allProviders {
             for server in provider.servers ?? [] {
                 if server.serverId == id {
@@ -303,35 +287,6 @@ protocol DnsProvidersServiceProtocol {
             }
         }
         return nil
-    }
-    
-    func featuresFromArray(_ arr: [String], featuresMap: [String: DnsProviderFeature]) -> [DnsProviderFeature] {
-        var features = [DnsProviderFeature]()
-        
-        for featureName in arr {
-            features.append(featuresMap[featureName]!)
-        }
-        
-        return features
-    }
-    
-    private func serversFromArray(_ arr:[[String: Any]]) -> [DnsServerInfo] {
-        
-        var servers = [DnsServerInfo]()
-        
-        for serverJson in arr {
-            guard   let serverProtocolId = serverJson["type"] as? String,
-                    let serverId = serverJson["id"] as? String,
-                    let name = serverJson["name"] as? String,
-                    let upstreams = serverJson["upstreams"] as? [String]
-                else { continue }
-            
-            let server = DnsServerInfo(dnsProtocol: DnsProtocol.protocolByString[serverProtocolId]!, serverId: serverId, name: name, upstreams: upstreams)
-            
-            servers.append(server)
-        }
-        
-        return servers
     }
     
     private func defaultProtocol(_ provider: DnsProviderInfo) -> DnsProtocol {
@@ -371,17 +326,6 @@ protocol DnsProvidersServiceProtocol {
         return provider.servers?.first?.dnsProtocol ?? .dns
     }
     
-    /*
-     Check if provider exists for selected server
-     If not, set active server to nil
-     */
-    private func missingProviderCheck() {
-        if !providerIsMissing { return }
-        DDLogInfo("Setting active dns server to nil; Current active server id: \(activeDnsServer?.serverId ?? "nil")")
-        activeDnsServer = nil
-        vpnManager?.updateSettings(completion: nil)
-    }
-    
     /* Initializes providers from providers.json */
     private func initializeDnsProviders() {
         guard  let jsonData = getData(forFileName: "providers") else {
@@ -393,7 +337,7 @@ protocol DnsProvidersServiceProtocol {
         do {
             let decodedObject = try decoder.decode(DnsProviders.self, from: jsonData)
             let dnsProviders = decodedObject.providers.filter { (provider) -> Bool in
-                provider.providerId != systemDefaultProviderId
+                provider.providerId != DnsProvidersService.systemDefaultProviderId
             }
             let features = decodedObject.features
             localize(dnsProviders: dnsProviders, features: features)
@@ -421,8 +365,8 @@ protocol DnsProvidersServiceProtocol {
         // Fill providers from json
         let dnsProviders = getLocalizedProvidersForCurrentLocale(dnsProviders: dnsProviders, features: features, localizationsJson: json)
         
-        self.predefinedProvidersInternal = dnsProviders.map{ (provider) -> DnsProviderInfo in
-            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "")
+        self.predefinedProvidersInternal = dnsProviders.map { provider -> DnsProviderInfo in
+            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "", isCustomProvider: false, providerId: provider.provider.providerId)
             
             providerInfo.logo = provider.provider.logo
             providerInfo.logoDark = "\(provider.provider.logo)_dark"
@@ -434,7 +378,7 @@ protocol DnsProvidersServiceProtocol {
             }
             
             providerInfo.servers = provider.provider.servers.map {
-                return DnsServerInfo(dnsProtocol: DnsProtocol(type: $0.type), serverId: String($0.id), name: "", upstreams: $0.upstreams)
+                return DnsServerInfo(dnsProtocol: DnsProtocol(type: $0.type), serverId: String($0.id), name: "", upstreams: $0.upstreams, providerId: $0.providerId)
             }
             
             let protcol = providerInfo.getActiveProtocol(resources)
@@ -545,4 +489,33 @@ protocol DnsProvidersServiceProtocol {
         
         return (nameForLocale ?? enName, descriptionForLocale ?? enDescription)
     }
+}
+
+// MARK: - AESharedResourcesProtocol extension
+
+extension AESharedResourcesProtocol {
+    dynamic var currentAdGuardImplementationDnsServer: DnsServerInfo? {
+        get {
+            if let serverData = sharedDefaults().data(forKey: AEDefaultsActiveDnsServer) {
+                let decoder = JSONDecoder()
+                let serverInfo = try? decoder.decode(DnsServerInfo.self, from: serverData)
+                return serverInfo
+            }
+            return nil
+        }
+        set {
+            var dataToSave: Data?
+            if let serverToSave = newValue {
+                let encoder = JSONEncoder()
+                let serverData = try? encoder.encode(serverToSave)
+                dataToSave = serverData
+            }
+            sharedDefaults().setValue(dataToSave, forKey: AEDefaultsActiveDnsServer)
+            NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
+        }
+    }
+}
+
+extension Notification.Name {
+    static var currentDnsServerChanged: Notification.Name { return .init(rawValue: "currentDnsServerChanged") }
 }

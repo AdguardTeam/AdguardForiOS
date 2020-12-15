@@ -35,10 +35,10 @@ class ActionExtensionMainController: UITableViewController {
     var domainEnabled: Bool = false
     var injectScriptSupported: Bool = false
     
-    var resources: AESharedResourcesProtocol? = nil
-    var safariService: SafariServiceProtocol? = nil
-    var contentBlockerService: ContentBlockerService? = nil
-    var support: AESSupportProtocol? = nil
+    var resources: AESharedResourcesProtocol?
+    var safariService: SafariServiceProtocol?
+    var contentBlockerService: ContentBlockerService?
+    var support: SupportServiceProtocol?
     var theme: ThemeServiceProtocol?
     var configuration: SimpleConfigurationSwift?
     
@@ -190,7 +190,7 @@ class ActionExtensionMainController: UITableViewController {
     }
     
     @IBAction func clickedMissedAd(_ sender: UITapGestureRecognizer) {
-        guard let url = support!.composeWebReportUrl(forSite: self.url) else { return }
+        guard let url = support?.composeWebReportUrl(self.url) else { return }
         openWithUrl(url)
     }
     

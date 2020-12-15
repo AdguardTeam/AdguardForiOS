@@ -52,7 +52,7 @@ class SafariProtectionController: UITableViewController {
     
     private var notificationToken: NotificationToken?
     
-    private let enabledColor = UIColor(hexString: "#67b279")
+    private let enabledColor = UIColor.AdGuardColor.green
     private let disabledColor = UIColor(hexString: "#888888")
     
     private let blacklistModel: ListOfRulesModelProtocol
@@ -83,9 +83,6 @@ class SafariProtectionController: UITableViewController {
         
         setupBackButton()
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
-        
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
             let safariFiltersTextFormat = String.localizedString("safari_filters_format")
@@ -99,6 +96,9 @@ class SafariProtectionController: UITableViewController {
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
+        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
         
         updateSafariProtectionInfo()
         updateFilters()
@@ -125,8 +125,10 @@ class SafariProtectionController: UITableViewController {
     }
     
     deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
+        if isViewLoaded{
+            resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
+            resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
+        }
     }
 
     // MARK: - Table view data source

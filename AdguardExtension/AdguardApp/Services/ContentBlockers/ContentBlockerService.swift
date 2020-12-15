@@ -478,7 +478,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var savedDatas:[ContentBlockerType: Data] = [:]
             var savedRules:[ASDFilterRule] = []
             
-            var rollback: ()->Void = {
+            let rollback: ()->Void = {
                 for (_, obj) in savedDatas.enumerated() {
                     sSelf.safariService.save(json: obj.value, type: obj.key)
                     sSelf.resources.whitelistContentBlockingRules = (savedRules as NSArray).mutableCopy() as? NSMutableArray
@@ -548,7 +548,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             var savedDatas:[ContentBlockerType: Data] = [:]
             let invertedObject = sSelf.resources.invertedWhitelistContentBlockingObject
             
-            var rollback: ()->Void = {
+            let rollback: ()->Void = {
                 for (_, obj) in savedDatas.enumerated() {
                     sSelf.safariService.save(json: obj.value, type: obj.key)
                     sSelf.resources.invertedWhitelistContentBlockingObject = invertedObject
@@ -631,14 +631,15 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // run converter
         let limit = resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-        let optimize = resources.sharedDefaults().bool(forKey: AEDefaultsJSONConverterOptimize)
         
         let converter = ContentBlockerConverter()
         
         let ruleStrings = rules.compactMap{ (rule) -> String? in
             return rule.isEnabled.boolValue ? rule.ruleText : nil
         }
-        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: limit, optimize: optimize, advancedBlocking: false) else {
+        
+        // Removed 'optimize' feature in 561 build
+        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: limit, optimize: false, advancedBlocking: false) else {
             return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
         }
         

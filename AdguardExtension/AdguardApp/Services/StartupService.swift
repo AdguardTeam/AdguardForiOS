@@ -56,11 +56,15 @@ class StartupService : NSObject{
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
         locator.addService(service: configuration)
         
-        let dnsProviders: DnsProvidersService = DnsProvidersService(resources: sharedResources)
+        let dnsProviders: DnsProvidersServiceProtocol = DnsProvidersService(resources: sharedResources)
         locator.addService(service: dnsProviders)
         
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         ServiceLocator.shared.addService(service: networkSettingsService)
+        
+        let nativeProviders: NativeProvidersServiceProtocol = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettingsService, resources: sharedResources, configuration: configuration)
+        dnsProviders.delegate = nativeProviders as? NativeProvidersService
+        locator.addService(service: nativeProviders)
         
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService, dnsProviders: dnsProviders)
         locator.addService(service: vpnManager as VpnManagerProtocol)
@@ -69,7 +73,7 @@ class StartupService : NSObject{
         let safariProtection =  SafariProtectionService(resources: sharedResources)
         locator.addService(service: safariProtection)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection
@@ -94,17 +98,14 @@ class StartupService : NSObject{
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
-        let supportService: AESSupport = AESSupport(resources: sharedResources,
-                                                    safariSevice: safariService,
-                                                    antibanner: antibanner,
-                                                    dnsFiltersService: dnsFiltersService,
-                                                    dnsProviders: dnsProviders,
-                                                    configuration: configuration,
-                                                    complexProtection: complexProtection,
-                                                    networtkSettings: networkSettingsService,
-                                                    productInfo: productInfo)
+        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
+        locator.addService(service: httpRequestService)
         
-        locator.addService(service: supportService as AESSupportProtocol)
+        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
+        locator.addService(service: keyChainService)
+        
+        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, dnsProviders: dnsProviders, networkSettings: networkSettingsService, dnsFilters: dnsFiltersService, productInfo: productInfo, antibanner: antibanner, requestsService: httpRequestService, keyChainService: keyChainService, safariService: safariService)
+        locator.addService(service: supportService)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
@@ -121,19 +122,13 @@ class StartupService : NSObject{
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
-        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, productInfo: productInfo)
+        let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
-        
-        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
-        locator.addService(service: httpRequestService)
-        
-        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
-        locator.addService(service: keyChainService)
         
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)
         
-        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo)
+        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService)
         locator.addService(service: migrationService)
         
         let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)

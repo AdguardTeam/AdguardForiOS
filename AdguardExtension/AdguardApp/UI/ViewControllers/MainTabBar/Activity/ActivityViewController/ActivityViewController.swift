@@ -454,7 +454,7 @@ class ActivityViewController: UITableViewController {
         var buttonColor: UIColor
         switch buttonType {
         case .addDomainToWhitelist:
-            buttonColor = UIColor(hexString: "#67b279")
+            buttonColor = UIColor.AdGuardColor.green
         case .addRuleToUserFlter:
             buttonColor = UIColor(hexString: "#c23814")
         default:

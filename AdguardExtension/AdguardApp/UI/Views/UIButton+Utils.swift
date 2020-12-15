@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import UIKit
 
 extension UIButton {
     /**
@@ -25,5 +26,31 @@ extension UIButton {
     func makeTitleTextUppercased(for state: UIControl.State = .normal){
         let buttonTitle = title(for: state)
         setTitle(buttonTitle?.uppercased(), for: state)
+    }
+    
+    /*
+     Makes button look like standard AdGuard green button
+     with green background, no border and white text
+     */
+    func applyStandardGreenStyle() {
+        let greenColor = UIColor.AdGuardColor.green
+        self.layer.cornerRadius = 8.0
+        self.backgroundColor = greenColor
+        self.setTitleColor(.white, for: .normal)
+        self.layer.borderWidth = 0.0
+        self.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    /*
+     Makes button look like standard AdGuard button
+     with opaque background, green borders and text
+     */
+    func applyStandardOpaqueStyle() {
+        let greenColor = UIColor.AdGuardColor.green
+        self.layer.cornerRadius = 8.0
+        self.backgroundColor = .clear
+        self.setTitleColor(greenColor, for: .normal)
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = greenColor.cgColor
     }
 }

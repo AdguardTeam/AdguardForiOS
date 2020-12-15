@@ -100,7 +100,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
         
         let safariProtection = SafariProtectionService(resources: resources)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo)
+        let networkSettings = NetworkSettingsService(resources: resources)
+        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: configuration)
+        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
         
         super.init(coder: coder)
         
@@ -157,6 +159,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         
         updateWidgetComplex()
+        updateWidgetSystem()
         updateWidgetSafari()
         
         if (activeDisplayMode == .compact) {
@@ -188,8 +191,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        
-        complexProtection.switchSystemProtection(state: enabled, for: nil) { _ in }
         
         let alpha: CGFloat = enabled ? 1.0 : 0.5
         systemImageView.alpha = alpha

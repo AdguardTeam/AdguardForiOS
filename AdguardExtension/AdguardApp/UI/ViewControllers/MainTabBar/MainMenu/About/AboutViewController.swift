@@ -100,7 +100,7 @@ class AboutViewController: UIViewController {
         }
         
         let redColor = UIColor(hexString: "#DF3812")
-        let greenColor = UIColor(hexString: "#67B279")
+        let greenColor = UIColor.AdGuardColor.green
         
         let color = configuration.proStatus ? redColor : greenColor
         let title = configuration.proStatus ? String.localizedString("common_logout") : String.localizedString("common_license")

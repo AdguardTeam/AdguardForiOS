@@ -35,24 +35,29 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let toView = transitionContext.view(forKey: .to)
-        
-        guard let contentView = toView?.subviews.first else {
+        guard let toVc = transitionContext.viewController(forKey: .to) as? BottomAlertController,
+            let bottomConstraint = toVc.keyboardHeightLayoutConstraint,
+            let toView = toVc.view
+        else {
+            DDLogError("Animation without Content view")
             return
         }
     
-        contentView.frame.origin.y += contentView.frame.height
-        
-        if toView != nil {
-            transitionContext.containerView.addSubview(toView!)
-        }
-        
+        /*
+         We need to hide view and layout it
+         Otherwise it will layout it while appearing
+        */
+        bottomConstraint.constant = -toView.frame.height
+        toView.layoutIfNeeded()
+        bottomConstraint.constant = 0.0
+               
+        transitionContext.containerView.addSubview(toView)
         let duration = transitionDuration(using: transitionContext)
         
         UIView.animate(withDuration: duration, animations: { [weak self] in
             guard let self = self else { return }
-            toView?.backgroundColor = self.targetColor
-            toView?.layoutIfNeeded()
+            toView.backgroundColor = self.targetColor
+            toView.layoutIfNeeded()
         }, completion: { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })

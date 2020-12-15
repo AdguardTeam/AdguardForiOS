@@ -66,7 +66,7 @@ class OnboardingAnimationsController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         nextButton.layer.cornerRadius = nextButton.frame.height / 2
-        nextButton.layer.borderColor  = UIColor(hexString: "#67b279").cgColor
+        nextButton.layer.borderColor  = UIColor.AdGuardColor.green.cgColor
         nextButton.layer.borderWidth = 1.0
     }
     

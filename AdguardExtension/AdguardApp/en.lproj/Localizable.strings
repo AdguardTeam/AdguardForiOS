@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Native DNS is working";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Native DNS is not working";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (without VPN icon), incompatible with other VPN apps, less stable";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Native";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "No encryption (System DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "You have entered the invalid upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Invalid DNS protocol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "System Blocklist";
 
@@ -682,11 +700,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Empty";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Failed to send your feedback";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Failed to send bug report, please try again";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Something went wrong";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Failed to send feedback, please try again";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Your bug report was successfully sent!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Your feedback was successfully sent!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Report a bug";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Leave feedback";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Please include the problem description (did it start after an update?) and info about other software you have (VPN/AV/extension)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Tell us what you think about %@ — what you like or don't like, which features you'd like to suggest";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Send report";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
@@ -733,6 +775,14 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requests";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Please enable %@ in the system DNS settings";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>VPN & Network > DNS</b> and select <b>%@</b> there.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "1. Make sure that you're using Safari browser. It's technically not possible to block content in other browsers.\n\n2. Enable necessary filter lists in the Safari protection settings.\n\n3. You may need to restart Safari. Quit and reopen it again.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +874,29 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Add DNS User Rules";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>WARNING!</b> Enabling these features may break the Internet connection or compromise your security and privacy.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Interested in cool new AdGuard features? Try our <a href=\"%@\">beta channel.</a>";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "List of plain DNS servers to be used to resolve DOH/DOT hostnames (if any)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP address";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream address";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";
+
+

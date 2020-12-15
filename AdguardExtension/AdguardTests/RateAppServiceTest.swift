@@ -22,68 +22,40 @@ class RateAppServiceTest: XCTestCase {
 
     private var resources: AESharedResourcesProtocol!
     private var rateAppService: RateAppServiceProtocol!
-    private var productInfo: ADProductInfoProtocol!
-    
-    private var currentBuild: Int {
-        get {
-            if let currentBuild = Int(productInfo.buildNumber()) {
-                return currentBuild
-            }
-            return 0
-        }
-    }
+    private var configuration: ConfigurationServiceMock!
     
     override func setUp() {
         resources = SharedResourcesMock()
-        productInfo = ProductInfoMock()
-        rateAppService = RateAppService(resources: resources, productInfo: productInfo)
+        configuration = ConfigurationServiceMock()
+        rateAppService = RateAppService(resources: resources, configuration: configuration)
     }
     
     // MARK: - showRateAppAlertIfNeeded test
     
     func testAppEntryCountWillIncrement() {
-        XCTAssert(resources.appEntryCount == 0)
-        
-        let lastBuildRateAppRequested = currentBuild - 1
-        resources.lastBuildRateAppRequested = lastBuildRateAppRequested
-        
-        rateAppService.showRateAppAlertIfNeeded()
-        
+        // It must be 1 after initialization
         XCTAssert(resources.appEntryCount == 1)
     }
     
-    func testAppEntryCountWillNotIncrement() {
-        resources.appEntryCount = 1
-        
-        let lastBuildRateAppRequested = currentBuild
-        resources.lastBuildRateAppRequested = lastBuildRateAppRequested
-        
-        rateAppService.showRateAppAlertIfNeeded()
-        
-        XCTAssert(resources.appEntryCount == 1)
-    }
-    
-    func testWillCallRequestReview() {
-        resources.appEntryCount = 4
-        
-        let lastBuildRateAppRequested = currentBuild - 1
-        resources.lastBuildRateAppRequested = lastBuildRateAppRequested
-        
-        rateAppService.showRateAppAlertIfNeeded()
-        
-        XCTAssert(resources.appEntryCount == 0)
-        XCTAssertEqual(resources.lastBuildRateAppRequested, currentBuild)
-    }
-    
-    func testWillNotCallRequestReview() {
+    func testShouldShowRateAppDialog() {
         resources.appEntryCount = 2
+        resources.rateAppShown = false
+        configuration.allContentBlockersEnabled = true
+        XCTAssertFalse(rateAppService.shouldShowRateAppDialog)
         
-        let lastBuildRateAppRequested = currentBuild - 1
-        resources.lastBuildRateAppRequested = lastBuildRateAppRequested
+        resources.appEntryCount = 4
+        resources.rateAppShown = false
+        configuration.allContentBlockersEnabled = true
+        XCTAssert(rateAppService.shouldShowRateAppDialog)
         
-        rateAppService.showRateAppAlertIfNeeded()
+        resources.appEntryCount = 4
+        resources.rateAppShown = true
+        configuration.allContentBlockersEnabled = true
+        XCTAssertFalse(rateAppService.shouldShowRateAppDialog)
         
-        XCTAssert(resources.appEntryCount == 3)
-        XCTAssertNotEqual(resources.lastBuildRateAppRequested, currentBuild)
+        resources.appEntryCount = 4
+        resources.rateAppShown = false
+        configuration.allContentBlockersEnabled = false
+        XCTAssertFalse(rateAppService.shouldShowRateAppDialog)
     }
 }

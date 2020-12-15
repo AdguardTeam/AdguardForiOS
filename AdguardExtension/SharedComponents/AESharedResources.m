@@ -31,13 +31,12 @@ NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConverted
 NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
 NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
-NSString *AEDefaultsJSONConverterOptimize = @"AEDefaultsJSONConverterOptimize";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
 NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
 NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsAppEntryCount = @"AEDefaultsAppEntryCount";
-NSString *AEDefaultsLastBuildRateAppRequested = @"AEDefaultsLastBuildRateAppRequested";
+NSString *AEDefaultsRateAppShown = @"AEDefaultsRateAppShown";
 NSString *AEDefaultsIsProPurchasedThroughInApp = @"AEDefaultsIsProPurchasedThroughInApp";
 NSString *AEDefaultsIsProPurchasedThroughSetapp = @"AEDefaultsIsProPurchasedThroughSetapp";
 NSString *AEDefaultsIsProPurchasedThroughLogin = @"AEDefaultsIsProPurchasedThroughLogin";
@@ -113,6 +112,24 @@ NSString *TunnelErrorCode = @"TunnelErrorCode";
 NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 
 NSString *NeedToUpdateFiltersKey = @"NeedToUpdateFiltersKey";
+
+NSString *DnsImplementationKey = @"DnsImplementationKey";
+
+NSString *CustomFallbackServers = @"CustomFallbackServers";
+
+NSString *CustomBootstrapServers = @"CustomBootstrapServers";
+
+NSString *BlockingMode = @"BlockingMode";
+
+NSString *BlockedResponseTtlSecs = @"BlockedResponseTtlSecs";
+
+NSString *CustomBlockingIp = @"CustomBlockingIp";
+
+NSString *CustomBlockingIpv4 = @"CustomBlockingIpv4";
+
+NSString *CustomBlockingIpv6 = @"CustomBlockingIpv6";
+
+NSString *BlockIpv6 = @"BlockIpv6";
 
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"

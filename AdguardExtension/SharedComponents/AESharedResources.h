@@ -83,11 +83,6 @@ extern NSString * _Nonnull AEDefaultsJSONConvertedRules;
 extern NSString * _Nonnull AEDefaultsJSONRulesOverlimitReached;
 
 /**
- User Defaults key that define optimized procedure of the convertion for JSON Converter.
- */
-extern NSString * _Nonnull AEDefaultsJSONConverterOptimize;
-
-/**
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
 extern NSString * _Nonnull AEDefaultsWifiOnlyUpdates;
@@ -113,9 +108,9 @@ extern NSString * _Nonnull AEDefaultsInvertedWhitelist;
 extern NSString * _Nonnull AEDefaultsAppEntryCount;
 
 /**
- User Defaults key, which defines last build version that Rate app dialog was requested.
+ User Defaults key, which defines whether rate app dialog was shown
  */
-extern NSString * _Nonnull AEDefaultsLastBuildRateAppRequested;
+extern NSString * _Nonnull AEDefaultsRateAppShown;
 
 /**
  User Defaults key, which defines the next minimum time to show rate app alert
@@ -334,6 +329,51 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
  User defaults key for migrations.
  */
 extern NSString* _Nonnull NeedToUpdateFiltersKey;
+
+/**
+ User defaults key for storing current DNS implementation.
+ */
+extern NSString* _Nonnull DnsImplementationKey;
+
+/**
+ User defaults key for custom fallback server.
+ */
+extern NSString* _Nonnull CustomFallbackServers;
+
+/**
+ User defaults key for custom bootstrap server.
+ */
+extern NSString* _Nonnull CustomBootstrapServers;
+
+/**
+ User defaults key for blocking mode.
+ */
+extern NSString* _Nonnull BlockingMode;
+
+/**
+ User defaults key for blocked response Ttl in secs.
+ */
+extern NSString* _Nonnull BlockedResponseTtlSecs;
+
+/**
+ User defaults key for custom blocking Ipv4.
+ */
+extern NSString* _Nonnull CustomBlockingIp;
+
+/**
+ User defaults key for custom blocking Ipv4.
+ */
+extern NSString* _Nonnull CustomBlockingIpv4;
+
+/**
+ User defaults key for custom blocking Ipv6
+ */
+extern NSString* _Nonnull CustomBlockingIpv6;
+
+/**
+ User defaults key for block Ipv6
+ */
+extern NSString* _Nonnull BlockIpv6;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

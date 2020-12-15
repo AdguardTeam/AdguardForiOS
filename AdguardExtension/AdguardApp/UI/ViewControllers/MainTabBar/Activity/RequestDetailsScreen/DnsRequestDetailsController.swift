@@ -271,6 +271,7 @@ class DnsRequestDetailsController: UITableViewController {
         if needsButton {
             let image = UIImage(named: "question") ?? UIImage()
             let imageView = UIImageView(image: image)
+            imageView.tintColor = UIColor(hexString: "#888888")
             let imageViewFrame = CGRect(x: tableWidth - 48.0, y: label.frame.midY - 12.0, width: 24.0, height: 24.0)
             imageView.frame = imageViewFrame
             
@@ -486,7 +487,7 @@ class DnsRequestDetailsController: UITableViewController {
         // Website model
         let website = record.category.url ?? ""
         let websiteTitle = String.localizedString("website_title")
-        let color: UIColor = UIColor(hexString: "#67b279")
+        let color: UIColor = UIColor.AdGuardColor.green
         let websiteModelIsNil = website.isEmpty
         let websiteModel = websiteModelIsNil ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoColor: color,  theme: theme)
         if !websiteModelIsNil {

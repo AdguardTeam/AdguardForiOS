@@ -40,7 +40,7 @@ class DnsProxyTest: XCTestCase {
     let request = Data(base64Encoded: "RQAAQkGPAAD/ETb1rBDRAsYSAAHOlAA1AC47HU+xAQAAAQAAAAAAAAdjbGllbnRzAWwGZ29vZ2xlA2NvbQAAAQAB")
 
     override func setUp() {
-        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true))
+        XCTAssert(proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false))
     }
 
     func testResolve() {
@@ -71,7 +71,7 @@ class DnsProxyTest: XCTestCase {
         
         proxyService.stop() { [unowned self]  in
             
-            XCTAssertTrue(self.proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true))
+            XCTAssertTrue(self.proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false))
             
             proxyService.resolve(dnsRequest: self.request!) { (response) in
                 XCTAssertNotNil(response)
@@ -119,7 +119,7 @@ class DnsProxyTest: XCTestCase {
     func testUpstreamsById(){
         proxyService.stop() { [unowned self] in
             let ipV6Adress = "0000:0000:0000:0000:0000:0000:0000:0000"
-            let isSuccess = self.proxyService.start(upstreams: ["1.1.1.1", "2.2.2.2", "3.3.3.3"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8", ipV6Adress], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true)
+            let isSuccess = self.proxyService.start(upstreams: ["1.1.1.1", "2.2.2.2", "3.3.3.3"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8", ipV6Adress], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false)
             
             XCTAssert(isSuccess)
             
