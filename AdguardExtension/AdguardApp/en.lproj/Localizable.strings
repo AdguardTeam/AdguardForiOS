@@ -701,7 +701,7 @@
 "empty_dns_answer" = "Empty";
 
 /* (BugReportController) Message when bug report failed */
-"bug_report_failed_message" = "Failed to send bug report, please try again";
+"bug_report_failed_message" = "Failed to submit a bug report, please try again";
 
 /* (BugReportController) Message when leaving feedback failed */
 "feedback_failed_message" = "Failed to send feedback, please try again";
@@ -725,7 +725,7 @@
 "leave_feedback_description_format" = "Tell us what you think about %@ — what you like or don't like, which features you'd like to suggest";
 
 /* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Send report";
+"bug_report_button_title" = "Send a report";
 
 /* (BugReportController) button title for leaving feedback */
 "leave_feedback_button_title" = "Send feedback";
@@ -782,7 +782,7 @@
 "native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>VPN & Network > DNS</b> and select <b>%@</b> there.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
-"rate_app_description" = "1. Make sure that you're using Safari browser. It's technically not possible to block content in other browsers.\n\n2. Enable necessary filter lists in the Safari protection settings.\n\n3. You may need to restart Safari. Quit and reopen it again.";
+"rate_app_description" = "1. Make sure that you're using the Safari browser. It's technically not possible to block content in other browsers.\n\n2. Enable necessary filter lists in the Safari protection settings.\n\n3. You may need to restart Safari. Quit and reopen it again.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
