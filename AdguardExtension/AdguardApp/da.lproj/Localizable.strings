@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (uden VPN-ikon), inkompatibel med andre VPN-apps, mindre stabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS er en alternativ måde at beskytte dit privatliv på mod forskellige counters, analytiske systemer og phishing hjemmesider";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Beskyttet søgning og voksent indholdsblokering";
-
-/* Google DNS server description */
-"google_dns_description" = "Gratis alternativ DNS tjeneste af Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS-server der beskytter din enhed mod phishing og svindel";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server med voksent indholdsblokering";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Gratis alternativ DNS-tjeneste med beskyttelse mod phishing og spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Gratis DNS-tjeneste af Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS-server af Cloudflare, der blokerer ondsindede domæner";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflares blokeringsserver, der begrænser adgangen til ondsindede og 'voksne' domæner";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS-tjeneste af SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sikkerhed";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokering af voksenindhold";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "No logging politik";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Sikker søgning";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Annonceblokering";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokerer kendte phishing domæner";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokerer hjemmesider med voksenindhold";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Gemmer ikke logs for dine DNS-forespørgsler";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Når det er muligt, håndhæves Sikker søgning i browserne";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokerer sporingssystemer";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Ingen kryptering (System DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-Quic (eksperimentel)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Er du sikker på, at du vil logge ud?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Indtast din adgangskode her";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Tilføj det tilpassede indholdsblokerende filter: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Tilføj det tilpassede DNS-filter: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Aktivér filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Deaktiver filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Mislykket";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Vælg DNS-server: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivér premiumfunktioner med %@ licensnøgle";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Tilføj Brugerregler";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Tilføj DNS-Brugerregler";

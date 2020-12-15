@@ -2,6 +2,70 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>trial_description_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Commencer avec une journée d'essai gratuit</string>
+        <key>other</key>
+        <string>Commencer avec un essai gratuit de %d jours</string>
+      </dict>
+    </dict>
+    <key>trial_description_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Commencer avec une semaine d'essai gratuit</string>
+        <key>other</key>
+        <string>Commencer avec un essai gratuit de %d semaines</string>
+      </dict>
+    </dict>
+    <key>trial_description_months</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@months@</string>
+      <key>months</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Commencer avec un mois d'essai gratuit </string>
+        <key>other</key>
+        <string>Commencer avec un essai gratuit de %d mois </string>
+      </dict>
+    </dict>
+    <key>trial_description_years</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@years@</string>
+      <key>years</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Commencer avec un an d'essai gratuit </string>
+        <key>other</key>
+        <string>Commencer avec un essai gratuit de %d ans </string>
+      </dict>
+    </dict>
     <key>user_rules_format</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>

@@ -88,6 +88,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     @IBOutlet weak var manDialogText: ThemableLabel!
     @IBOutlet weak var getProButton: UIButton!
     
+    // MARK: - Native DNS view
+    
+    @IBOutlet weak var nativeDnsTitleLabel: ThemableLabel!
+    @IBOutlet weak var nativeDnsView: UIView!
+    @IBOutlet weak var dnsProviderNameLabel: ThemableLabel!
+    @IBOutlet weak var dnsProtocolNameLabel: ThemableLabel!
     
     // MARK: - Content blockers view
     
@@ -158,6 +164,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     
@@ -166,11 +173,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
-    
     private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
+    private var dnsImplementationObserver: NotificationToken?
+    private var currentDnsServerObserver: NotificationToken?
     
     // MARK: - View Controller life cycle
     
@@ -210,11 +218,13 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         if importSettings != nil {
             showImportSettings()
         }
+        
+        processDnsServerChange()
     }
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        observeProStatus()
+        processState()
         updateProtectionStates()
         updateProtectionStatusText()
     }
@@ -295,6 +305,29 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     }
     
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
+        if resources.dnsImplementation == .native {
+            if systemProtectionButton.buttonIsOn {
+                if #available(iOS 14.0, *) {
+                    nativeProviders.removeDnsManager { error in
+                        DDLogError("Error removing dns manager: \(error.debugDescription)")
+                    }
+                }
+            } else if #available(iOS 14.0, *) {
+                nativeProviders.saveDnsManager { error in
+                    if let error = error {
+                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
+                    }
+                    DispatchQueue.main.async {
+                        AppDelegate.shared.presentHowToSetupController()
+                    }
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.updateProtectionStates()
+            }
+            return
+        }
+        
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         if configuration.proStatus {
             applyingChangesStarted()
@@ -441,6 +474,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         getProView.backgroundColor = theme.backgroundColor
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
+        nativeDnsView.backgroundColor = theme.backgroundColor
     }
     
     /**
@@ -534,18 +568,17 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      */
     private func addObservers(){
 
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: nil, using: {[weak self] (notification) in
+        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
         })
         
-        let proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeProStatus()
+        let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
+            self?.processState()
         }
         
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
@@ -553,11 +586,18 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             self.observeContentBlockersState()
         }
         
-        vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: nil) { [weak self] (note) in
-            DispatchQueue.main.async {
-                self?.updateProtectionStates()
-                self?.updateProtectionStatusText()
-            }
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.updateProtectionStates()
+            self?.updateProtectionStatusText()
+        }
+        
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.processState()
+            self?.processDnsServerChange()
+        }
+        
+        currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.processDnsServerChange()
         }
 
         observations.append(proObservation)
@@ -605,17 +645,38 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         updateProtectionStates()
     }
     
-    /**
-     States views by pro status
-     */
-    private func observeProStatus(){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            
-            self.getProView.isHidden = self.proStatus
-            self.statisticsStackView.isHidden = !self.proStatus
-            self.changeStatisticsDatesButton.isHidden = !self.proStatus
-            self.systemProtectionButton.buttonIsOn = self.complexProtection.systemProtectionEnabled
+    /* States views by pro status and dns implementation */
+    private func processState() {
+        let isNativeImplementation = resources.dnsImplementation == .native
+        
+        getProView.isHidden = true
+        statisticsStackView.isHidden = true
+        nativeDnsView.isHidden = true
+        changeStatisticsDatesButton.isHidden = true
+        
+        if proStatus {
+            if isNativeImplementation {
+                nativeDnsView.isHidden = false
+            } else {
+                statisticsStackView.isHidden = false
+                changeStatisticsDatesButton.isHidden = false
+            }
+        } else {
+            getProView.isHidden = false
+        }
+        systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
+    }
+    
+    private func processDnsServerChange() {
+        guard resources.dnsImplementation == .native else {
+            return
+        }
+        if let provider = nativeProviders.currentProvider, let dnsProtocol = nativeProviders.currentServer?.dnsProtocol {
+            dnsProviderNameLabel.text = provider.name
+            dnsProtocolNameLabel.text = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
+        } else {
+            dnsProviderNameLabel.text = nil
+            dnsProtocolNameLabel.text = nil
         }
     }
     
@@ -644,10 +705,11 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         protectionStatusLabel.text = complexText
         complexProtectionSwitch.accessibilityLabel = complexText
+        
+        nativeDnsTitleLabel.text = complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
     }
     
-    private func updateProtectionStates(){
-            
+    private func updateProtectionStates() {
         let enabledText = complexProtection.complexProtectionEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
         protectionStateLabel.text = enabledText
         

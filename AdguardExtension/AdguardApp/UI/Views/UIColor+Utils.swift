@@ -21,5 +21,7 @@ import Foundation
 extension UIColor {
     struct AdGuardColor {
         static let green = UIColor(hexString: "#67b279")
+        static let red = UIColor(hexString: "df3812")
+        static let yellow = UIColor(hexString: "#eb9300")
     }
 }

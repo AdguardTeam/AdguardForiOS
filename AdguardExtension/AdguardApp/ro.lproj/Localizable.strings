@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "Safari nu poate încărca filtrele. De aceea modificările dvs. recente nu s-au aplicat.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Safari nu poate încărca filtrele. Încercați să goliți regulile și lista albă sau înlocuiți setul de filtre utilizat.";
+"load_to_safari_error" = "Safari nu poate încărca filtrele. Încercați să goliți regulile și lista autorizărilor sau înlocuiți setul de filtre utilizat.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NU";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Lista albă (inversată)";
+"inverted_whitelist_title" = "Listă autorizări (inversată)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplicăm schimbări...";
@@ -131,7 +131,7 @@
 "dns_whitelist_text" = "Introduceți aici numele de domenii separate cu pauze de linie. AdGuard va permite toate conexiunile la ele.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Această listă neagră acceptă<a href=\"%@\">sintaxa DNS AdGuard</a>. Introduceți aici reguli separate cu pauze de linie. AdGuard va bloca orice conexiune la domeniile ce le corespund.";
+"dns_blacklist_text_format" = "Această Listă de blocări acceptă<a href=\"%@\">sintaxa DNS AdGuard</a>. Introduceți aici reguli separate cu pauze de linie. AdGuard va bloca orice conexiune la domeniile ce le corespund.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Actualizăm...";
@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (fără pictogramă VPN), incompatibil cu alte aplicații VPN, instabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS este un mod alternativ de a vă proteja intimitatea de diferite contoare, sisteme analitice și site-uri de phishing";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Căutare în siguranță și blocare conținut adult";
-
-/* Google DNS server description */
-"google_dns_description" = "Serviciu gratis de DNS alternativ Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Server DNS ce vă protejează aparatul de phishing și înșelătorie";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Server OpenDNS cu blocare de conținut adult";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Serviciu gratuit de DNS alternativ cu protecție de phishing și spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Serviciu DNS gratuit de Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware de Cloudflare care blochează domenii dăunătoare";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Server de blocare Cloudflare ce limitează accesul la domenii dăunătoare și 'adult'";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Serviciu DNS de SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Securitate";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blocare conținut adult";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politică fără logări";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Căutare Sigură";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blocare reclame";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blochează phishing știut și alte domenii periculoase";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blochează site-uri cu conținut adult";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Nu reține jurnale de interogări DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Oricând e posibil, Căutarea Sigură se aplică în browsere";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blochează sisteme de urmărire";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Fără criptare (Sistem DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (experimental)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Sigur vrei să te deconectezi?";
@@ -431,13 +374,13 @@
 "wifi_data_description" = "Protecția DNS la folosire Wi-Fi";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Lista albă";
+"allowlist_title" = "Listă autorizări";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Lista albă";
+"whitelist_title" = "Listă autorizări";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Lista neagră";
+"dns_blacklist_title" = "Lista de blocări";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Reguli utilizator Safari";
@@ -458,16 +401,16 @@
 "disabled" = "Dezactivat";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Șterge din lista albă";
+"remove_from_whitelist" = "Șterge din lista de autorizări";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "Șterge din lista neagră";
+"remove_from_blacklist" = "Șterge din lista de blocări";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Adaugă la lista albă";
+"add_to_whitelist" = "Adaugă la lista de autorizări";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "Adaugă la lista neagră";
+"add_to_blacklist" = "Adaugă la lista de blocări";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Poate bloca site-uri de phishing și a alte domenii riscante. Numai utilizatorilor Premium";
@@ -632,16 +575,16 @@
 "dns_request_status_allowlisted" = "Permise";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "adăugat pe Lista albă";
+"dns_request_user_status_added_to_whitelist" = "adăugat pe lista de autorizări";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "adăugat pe Lista neagră";
+"dns_request_user_status_added_to_blacklist" = "adăugat pe Lista de blocări";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "eliminat din Lista albă";
+"dns_request_user_status_removed_from_whitelist" = "eliminat din lista de autorizări";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "eliminat din Lista neagră";
+"dns_request_user_status_removed_from_blacklist" = "eliminat din Lista de blocări";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "Deschideți <b>setările</b>";
@@ -662,7 +605,7 @@
 "block_request" = "Blocare cerere";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Adăugați domeniul pe Lista albă";
+"whitelist_request" = "Adăugați domeniul în lista de autorizări";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Tutorial video";
@@ -671,10 +614,10 @@
 "invalid_upstream_message" = "Ați introdus un DNS de amonte invalid";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Lista neagră sistem";
+"system_blacklist" = "Lista de blocări sistem";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Lista albă sistem";
+"system_whitelist" = "Listă autorizări sistem";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Detalii";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Introduceți parola aici";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Adăugați filtrul personalizat de blocare conținut: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Adăugați filtrul personalizat DNS: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Activați filtrul: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Dezactivați filtrul: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Nereușit";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Selectați serverul DNS: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Activați funcțiile premium cu cheia de licență %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Adăugați Reguli Utilizator";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Adăugați Reguli Utilizator DNS";

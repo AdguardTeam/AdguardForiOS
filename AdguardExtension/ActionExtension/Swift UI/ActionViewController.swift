@@ -66,7 +66,7 @@ class ActionViewController: UIViewController {
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
     private let antibannerController: AntibannerControllerProtocol
-    private let support: AESSupport
+    private let support: SupportServiceProtocol
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
     private let productInfo: ADProductInfoProtocol
@@ -97,21 +97,28 @@ class ActionViewController: UIViewController {
 
         let vpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettings, dnsProviders: dnsProviders)
         
-        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo)
-
+        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettings, resources: sharedResources, configuration: configuration)
+        
+        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo, nativeProvidersService: nativeProviders)
+ 
         contentBlockerService = ContentBlockerService(resources: sharedResources,
                                                       safariService: safariService,
                                                       antibanner: antibanner,
                                                       safariProtection: safariProtection)
-        support = AESSupport(resources: sharedResources,
-                             safariSevice: safariService,
-                             antibanner: antibanner,
-                             dnsFiltersService: dnsFiltersService,
-                             dnsProviders: dnsProviders,
-                             configuration: configuration,
-                             complexProtection: complexProtection,
-                             networtkSettings: networkSettings,
-                             productInfo: productInfo)
+        
+        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
+        
+        support = SupportService(resources: sharedResources,
+                                 configuration: configuration,
+                                 complexProtection: complexProtection,
+                                 dnsProviders: dnsProviders,
+                                 networkSettings: networkSettings,
+                                 dnsFilters: dnsFiltersService,
+                                 productInfo: productInfo,
+                                 antibanner: antibanner,
+                                 requestsService: HttpRequestService(),
+                                 keyChainService: keyChainService,
+                                 safariService: safariService)
         
         super.init(coder: coder)
     }

@@ -86,13 +86,13 @@
 "premium_expired_title" = "Dikkat";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü etkinleştirmenize izin veren lisans anahtarı yok.";
+"not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarı yok.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü etkinleştirmenize izin veren lisans anahtarlarının süresi doldu.";
+"login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarlarının süresi doldu.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Satın alma işlemini geri yüklemeye çalışırken bir hata oluştu.";
@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Tam-Tünel (VPN simgesi olmadan), diğer VPN uygulamalarıyla uyumsuz, daha az stabil";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS gizliliğinizi çeşitli sayaçlardan ve analitik sistemlerden, kimlik avı web sitelerinden korumak için alternatif bir yoldur";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Güvenli Arama ve yetişkin içerik engelleme";
-
-/* Google DNS server description */
-"google_dns_description" = "Google'dan ücretsiz alternatif DNS hizmeti";
-
-/* Open DNS server description */
-"open_dns_description" = "Cihazınızı kimlik avı ve sahtecilikten koruyan DNS sunucusu";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Yetişkin içerik engellemeli OpenDNS sunucusu";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Kimlik avı ve casus yazılımlara karşı korumalı ücretsiz alternatif DNS hizmeti";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Cloudflare tarafından ücretsiz DNS hizmeti";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Cloudflare tarafından kötü amaçlı yazılımdan koruyan zararlı alan adlarını engelleyen DNS sunucusu";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Cloudflare'nın kötü amaçlı ve 'yetişkin' alan adlarına erişimi kısıtlayan engelleme sunucusu";
-
-/* Safe DNS server description */
-"safe_dns_description" = "SafeDNS tarafından DNS hizmeti";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Güvenlik";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Yetişkin içeriği engelleme";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Günlük tutma politikası yok";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Güvenli Arama";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Reklam Engelleme";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Bilinen kimlik avı ve diğer tehlikeli alan adlarını engeller";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Yetişkinlere yönelik web sitelerini engeller";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "DNS sorgu günlüklerinizi saklamaz";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Mümkün olduğunda tarayıcılar Güvenli Arama yapmaya zorlanacaktır.";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "İzleme sistemlerini engeller";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Şifreleme yok (Sistem DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (deneysel)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Çıkış yapmak istediğinize emin misiniz?";
@@ -344,7 +287,7 @@
 "failed_updating_current_state_label" = "Filtreler güncellenmedi";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Bu lisans, maksimum sayıda cihazda etkinleştirilmiştir.\nWeb sitesindeki kişisel hesabınızdaki kullanılmayan cihazlardan lisansı çıkarabilirsiniz: adguard.com";
+"login_max_computers_exceeded" = "Bu lisans, maksimum sayıda cihazda aktifleştirilmiştir.\nWeb sitesindeki kişisel hesabınızdaki kullanılmayan cihazlardan lisansı çıkarabilirsiniz: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Bu işlem uzantısını kullanabilmeniz için önce, %1$@ ilk yapılandırmayı gerçekleştirmek zorundadır. Bunu yapmak için ana %2$@ uygulamasını başlatın.";
@@ -473,7 +416,7 @@
 "security_description" = "Kimlik avı sitelerinin ve diğer tehlikeli alan adlarının engellenmesine izin verin. Premium kullanıcılar tarafından kullanılabilir";
 
 /*(GroupsController) Custom filters description without premium  */
-"custom_description" = "Üçüncü taraf filtreleri eklemeye izin verir. Premium kullanıcılar tarafından kullanılabilir";
+"custom_description" = "Üçüncü parti filtreleri eklemeye izin verir. Premium kullanıcılar için kullanılabilir";
 
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "Ses ve video oynatıcılar";
@@ -647,7 +590,7 @@
 "onboarding_first_step_text" = "<b>Ayarları</b> aç";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "<b>Safari'ye</b> %@ dokunun ve <b>\"İçerik Engelleyiciler\"</b> menü öğesini seçin";
+"onboarding_second_step_text" = "<b>Safari'ye</b> dokunun ve <b>\"İçerik Engelleyiciler\"</b> menü öğesini seçin";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Tüm içerik engelleyicilerini açın</b> ve uygulamamıza geri dönün!";
@@ -659,7 +602,7 @@
 "default_dns_server_description" = "İnternet servis sağlayıcınız tarafından sağlanan sistem varsayılan DNS sunucularını kullanın";
 
 /* (BlockRequestController) Block request title */
-"block_request" = "Talep engelleme";
+"block_request" = "İsteği engelle";
 
 /* (BlockRequestController) Allowlist request title */
 "whitelist_request" = "İzin verilen listesine alan adı ekle";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Parolanızı buraya girin";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Özel içerik engelleyici filtresi ekle: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Özel DNS filtresi ekle: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Filtreyi etkinleştir: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Filtreyi devre dışı bırak: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Başarısız";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "DNS sunucusu seç: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Premium özelliklerini %@ lisans anahtarıyla aktifleştir";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Kullanıcı Kuralı Ekle";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "DNS Kullanıcı Kuralı Ekle";

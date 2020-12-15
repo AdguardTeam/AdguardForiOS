@@ -33,7 +33,7 @@ class ComplexProtectionServiceTest: XCTestCase {
         configuration = ConfigurationServiceMock()
         vpnManager = VpnManagerMock()
         let safariProtection = SafariProtectionService(resources: resources)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safari, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: ProductInfoMock())
+        complexProtection = ComplexProtectionService(resources: resources, safariService: safari, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: ProductInfoMock(), nativeProvidersService: NativeProvidersServiceMock())
     }
 
     override func tearDown() {

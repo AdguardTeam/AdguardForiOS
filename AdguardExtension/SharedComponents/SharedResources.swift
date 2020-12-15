@@ -235,6 +235,157 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var dnsImplementation: DnsImplementation {
+        get {
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
+                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
+            }
+            return .adGuard
+        }
+        set {
+            if dnsImplementation != newValue {
+                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+                NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
+            }
+        }
+    }
+            
+    dynamic var customFallbackServers: [String]? {
+           get {
+               return sharedDefaults().array(forKey: CustomFallbackServers) as? [String]
+           }
+           
+           set {
+               sharedDefaults().setValue(newValue, forKey: CustomFallbackServers)
+           }
+       }
+       
+       dynamic var customBootstrapServers: [String]? {
+           get {
+               return sharedDefaults().array(forKey: CustomBootstrapServers) as? [String]
+           }
+           
+           set {
+               sharedDefaults().setValue(newValue, forKey: CustomBootstrapServers)
+           }
+       }
+    
+    dynamic var blockingMode: BlockingModeSettings  {
+        get {
+            guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
+                return .agDefault
+            }
+            
+            return BlockingModeSettings(rawValue: value)!
+        }
+        set {
+            sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
+        }
+    }
+    
+    dynamic var blockedResponseTtlSecs: Int {
+        get {
+            guard let ttl = sharedDefaults().object(forKey: BlockedResponseTtlSecs) as? Int else { return 2 }
+            return ttl
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: BlockedResponseTtlSecs)
+        }
+    }
+    
+    dynamic var customBlockingIp: [String]? {
+        get {
+            return sharedDefaults().array(forKey: CustomBlockingIp) as? [String]
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIp)
+        }
+    }
+    
+    dynamic var customBlockingIpv4: String? {
+        get {
+            return sharedDefaults().string(forKey: CustomBlockingIpv4)
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIpv4)
+        }
+    }
+    
+    dynamic var customBlockingIpv6: String? {
+        get {
+            return sharedDefaults().string(forKey: CustomBlockingIpv6)
+        }
+        set {
+            sharedDefaults().setValue(newValue, forKey: CustomBlockingIpv6)
+        }
+    }
+    
+    dynamic var blockIpv6: Bool {
+        get {
+            return sharedDefaults().bool(forKey: BlockIpv6)
+        }
+        
+        set {
+            sharedDefaults().setValue(newValue, forKey: BlockIpv6)
+        }
+    }
+    
+    // MARK: - Content blockers rules count
+    
+    dynamic var generalContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsGeneralContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsGeneralContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var privacyContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsPrivacyContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsPrivacyContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var socialContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsSocialContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsSocialContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var otherContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsOtherContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsOtherContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var customContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsCustomContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsCustomContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var securityContentBlockerRulesCount : Int {
+        get {
+            sharedDefaults().integer(forKey: AEDefaultsSecurityContentBlockerRulesCount)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsSecurityContentBlockerRulesCount)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
@@ -253,4 +404,8 @@ extension AESharedResourcesProtocol {
         
         return value
     }
+}
+
+extension Notification.Name {
+    static var dnsImplementationChanged: Notification.Name { return .init(rawValue: "dnsImplementationChanged") }
 }

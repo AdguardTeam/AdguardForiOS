@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (senza icona VPN), incompatibile con altre app VPN, meno stabile";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "blocca annunci, tracker e siti di phishing";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "blocca tutti quelli sopra e siti per adulti";
-
-/* Google DNS server description */
-"google_dns_description" = "servizio di risoluzione dns globale fornito da Google";
-
-/* Open DNS server description */
-"open_dns_description" = "Server DNS che protegge il tuo dispositivo da phishing e truffe";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "Server OpenDNS con blocco dei contenuti per adulti";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Servizio DNS alternativo gratuito con protezione da phishing e spyware";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Servizio DNS gratuito di Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Server DNS anti-malware di Cloudflare che blocca i domini malevoli";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Il server di blocco Cloudflare limita l'accesso ai domini malevoli e per adulti";
-
-/* Safe DNS server description */
-"safe_dns_description" = "Servizio DNS di SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sicurezza";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blocco dei contenuti per adulti";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Nessuna politica di registrazione eventi";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Ricerca sicura";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blocco annunci";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blocca il phishing noto e altri domini pericolosi";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blocca i siti web con contenuti per adulti";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Non memorizza le richieste di registrazione del tuo DNS";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Quando possibile, viene forzata la ricerca sicura nei browser";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blocca gli annunci e i server di tracciamento";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Nessuna crittografia (DNS di sistema)";
 
@@ -257,10 +197,13 @@
 "dns_crypt_protocol" = "DNSCrypt";
 
 /* DnsProviderDetailsController - dns over https protocol */
-"doh_protocol" = "DNS-over-HTTPS";
+"doh_protocol" = "DNS su HTTPS";
 
 /* DnsProviderDetailsController - dns over https rotocol */
-"dot_protocol" = "DNS-over-TLS";
+"dot_protocol" = "DNS su TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS su QUIC (sperimentale)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Sei sicuro di voler uscire?";
@@ -644,7 +587,7 @@
 "dns_request_user_status_removed_from_blacklist" = "rimosso dalla Lista Nera";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Apri le %@ <b>impostazioni</b>";
+"onboarding_first_step_text" = "Apri le <b>impostazioni</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tocchi su <b>Safari</b> e scegli la voce <b>\"Blocchi di contenuti\"</b> dal menù";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Inserisci la tua password qui";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Aggiungi filtro di blocco personalizzato: \"%@\"";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Aggiungi filtro DNS personalizzato: \"%@\"";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Attiva filtro: \"%@\"";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Disattiva filtro: \"%@\"";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Non riuscito";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Seleziona server DNS: \"%@\"";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Attiva funzionalità premium con chiave di licenza %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Aggiungi Regole Utente";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Aggiungi Regole Utente DNS";

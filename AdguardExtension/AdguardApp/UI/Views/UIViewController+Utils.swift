@@ -93,4 +93,25 @@ extension UIViewController {
         navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
         navigationItem.title = ""
     }
+    
+    var ios14available: Bool {
+        if #available(iOS 14.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func setupToHideKeyboardOnTapOnView(ignoringViews views: [UIView] = []) {
+        let tap = HideKeyboardTapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        tap.viewsToIgnore = views
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

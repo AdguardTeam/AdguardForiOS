@@ -31,7 +31,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersService = ServiceLocator.shared.getService()!
+    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private var model: ImportSettingsViewModelProtocol?
     
     override func viewDidLoad() {
@@ -43,6 +43,10 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         
         okButton.isHidden = true
         tableView.reloadData()
+    }
+    
+    deinit {
+        print("kek")
     }
     
     override func viewDidLayoutSubviews() {

@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Plný tunel (bez ikony VPN), nekompatibilný s inými VPN aplikáciami, menej stabilný";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS je alternatívny spôsob ochrany Vášho súkromia pred rôznymi počítadlami, analytickými systémami a podvodnými webovými stránkami";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + bezpečné vyhľadávanie a blokovanie obsahu pre dospelých";
-
-/* Google DNS server description */
-"google_dns_description" = "Bezplatná alternatíva služby DNS od Google";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS server, ktorý ochraňuje Vaše zariadenie pred online hrozbami";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS server s blokovaním obsahu pre dospelých";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Bezplatná alternatívna služba DNS s ochranou pred podvodom a špehovaním";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Bezplatná DNS služba od Cloudflare";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS server od spoločnosti Cloudflare, ktorý blokuje domény šíriace škodlivý kód";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Blokovací server Cloudflare, ktorý obmedzuje prístup do škodlivých domén a domén pre dospelých";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS služba od SafeDNS";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Bezpečnosť";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokovanie obsahu pre dospelých";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politika nevytvárania denníkov";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Bezpečné vyhľadávanie";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blokovanie reklamy";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokuje známe podvodné domény";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokuje stránky s obsahom pre dospelých";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Neuchováva denníky DNS dopytov";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Keď je to možné, v prehliadačoch sa vynucuje bezpečné vyhľadávanie";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokuje sledovacie systémy";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Bez šifrovania (systémové DNS)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (experimentálne)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Naozaj sa chcete odhlásiť?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Sem zadajte svoje heslo";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Pridať vlastný filter pre blokovanie obsahu: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Pridať vlastný DNS filter: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Zapnúť filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Vypnúť filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neúspešne";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Vybrať DNS server: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivovať prémiové funkcie licenčným kľúčom %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Pridať používateľské pravidlá";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Pridať DNS používateľské pravidlá";

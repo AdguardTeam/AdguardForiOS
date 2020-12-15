@@ -26,7 +26,7 @@
 "B2l-7z-M2N.normalTitle" = "SALVA E SELEZIONA";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
-"DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
+"DrO-hc-ilW.normalTitle" = "DNS su HTTPS";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Impostazioni avanzate di rete";
@@ -39,6 +39,9 @@
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Attiva questo modulo per migliorare la tua privacy crittografando il traffico DNS.";
+
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS su QUIC (sperimentale)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Protezione DNS";
@@ -56,7 +59,7 @@
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// oppure tls://";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
-"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
+"Zn0-J3-lVl.normalTitle" = "DNS su TLS";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
 "c9G-jn-5ym.text" = "Server DNS";

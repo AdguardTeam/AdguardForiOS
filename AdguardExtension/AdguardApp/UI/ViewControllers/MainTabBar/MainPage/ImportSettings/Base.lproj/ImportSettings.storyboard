@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jTK-rf-JcU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -12,16 +12,28 @@
         <!--Import Settings Controller-->
         <scene sceneID="Nq9-Fb-X9Q">
             <objects>
-                <viewController storyboardIdentifier="ImportSettingsController" id="jTK-rf-JcU" customClass="ImportSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImportSettingsController" modalPresentationStyle="fullScreen" id="jTK-rf-JcU" customClass="ImportSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6tQ-WQ-rtZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajP-RU-eeM">
-                                <rect key="frame" x="0.0" y="497" width="414" height="365"/>
+                                <rect key="frame" x="0.0" y="529" width="414" height="367"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JI-qd-Ee9">
+                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="Vrx-yC-Y2s">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="2" id="h2W-3W-ObA">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="3"/>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fry-VW-ub3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="32" width="382" height="29"/>
+                                        <rect key="frame" x="16" y="34" width="382" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="ZZI-VN-4Fu"/>
                                         </constraints>
@@ -33,7 +45,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y74-mN-QHt">
-                                        <rect key="frame" x="0.0" y="77" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="79" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="c3h-ka-TcE"/>
@@ -122,7 +134,7 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFE-OP-v8S" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="293" width="382" height="40"/>
+                                        <rect key="frame" x="16" y="295" width="382" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="lCC-Pq-03n"/>
                                         </constraints>
@@ -145,7 +157,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ktl-xf-pyK" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="293" width="382" height="40"/>
+                                        <rect key="frame" x="16" y="295" width="382" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="f05-cM-WpB"/>
                                         </constraints>
@@ -174,9 +186,9 @@
                                     <constraint firstItem="EFE-OP-v8S" firstAttribute="top" secondItem="Y74-mN-QHt" secondAttribute="bottom" constant="16" id="8gT-uw-10d"/>
                                     <constraint firstAttribute="bottom" secondItem="EFE-OP-v8S" secondAttribute="bottom" constant="32" id="97t-PP-U0W"/>
                                     <constraint firstAttribute="trailing" secondItem="fry-VW-ub3" secondAttribute="trailing" constant="16" id="CYW-eB-7G7"/>
-                                    <constraint firstItem="fry-VW-ub3" firstAttribute="top" secondItem="ajP-RU-eeM" secondAttribute="top" constant="32" id="Dyx-nI-AoE"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="leading" secondItem="EFE-OP-v8S" secondAttribute="leading" id="Egz-Q9-eJA"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="bottom" secondItem="EFE-OP-v8S" secondAttribute="bottom" id="GKl-ue-x1f"/>
+                                    <constraint firstItem="fry-VW-ub3" firstAttribute="top" secondItem="7JI-qd-Ee9" secondAttribute="bottom" constant="24" id="NzG-xh-qPd"/>
                                     <constraint firstItem="Y74-mN-QHt" firstAttribute="leading" secondItem="ajP-RU-eeM" secondAttribute="leading" id="QBQ-MJ-0bz"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="centerX" secondItem="EFE-OP-v8S" secondAttribute="centerX" id="Y3Y-Ji-Uei"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="trailing" secondItem="EFE-OP-v8S" secondAttribute="trailing" id="ZL8-zX-g7Z"/>
@@ -184,6 +196,8 @@
                                     <constraint firstItem="EFE-OP-v8S" firstAttribute="leading" secondItem="ajP-RU-eeM" secondAttribute="leading" constant="16" id="euQ-2L-fK3"/>
                                     <constraint firstItem="fry-VW-ub3" firstAttribute="leading" secondItem="ajP-RU-eeM" secondAttribute="leading" constant="16" id="fKy-Vq-c0l"/>
                                     <constraint firstItem="Y74-mN-QHt" firstAttribute="top" secondItem="fry-VW-ub3" secondAttribute="bottom" constant="16" id="hFU-KX-JnF"/>
+                                    <constraint firstItem="7JI-qd-Ee9" firstAttribute="centerX" secondItem="ajP-RU-eeM" secondAttribute="centerX" id="irB-0y-63S"/>
+                                    <constraint firstItem="7JI-qd-Ee9" firstAttribute="top" secondItem="ajP-RU-eeM" secondAttribute="top" constant="8" id="oAR-j7-OL8"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="centerY" secondItem="EFE-OP-v8S" secondAttribute="centerY" id="rgg-ag-eue"/>
                                     <constraint firstItem="ktl-xf-pyK" firstAttribute="top" secondItem="EFE-OP-v8S" secondAttribute="top" id="xDe-jY-Q9a"/>
                                 </constraints>
@@ -194,7 +208,7 @@
                         <constraints>
                             <constraint firstItem="ajP-RU-eeM" firstAttribute="leading" secondItem="6tQ-WQ-rtZ" secondAttribute="leading" id="P1A-Q0-r3k"/>
                             <constraint firstAttribute="trailing" secondItem="ajP-RU-eeM" secondAttribute="trailing" id="Wk3-hZ-akD"/>
-                            <constraint firstItem="wzp-kF-ntV" firstAttribute="bottom" secondItem="ajP-RU-eeM" secondAttribute="bottom" id="js8-SE-QYV"/>
+                            <constraint firstAttribute="bottom" secondItem="ajP-RU-eeM" secondAttribute="bottom" id="js8-SE-QYV"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="896"/>

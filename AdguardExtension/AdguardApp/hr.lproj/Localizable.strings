@@ -184,66 +184,6 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Potpuno tuneliranje (bez VPN ikone), nije podržano s drugim VPN aplikacijama, manje stabilno";
 
-/* Adguard DNS server description */
-"adguard_dns_description" = "AdGuard DNS je alternativni način zaštite vaše privatnosti od različitih brojača, analitičkih sustava i web stranica za krađu identiteta";
-
-/* Adguard Family DNS server description */
-"adguard_family_dns_description" = "AdGuard DNS + Sigurno surfanje uz blokiranje sadržaja za odrasle";
-
-/* Google DNS server description */
-"google_dns_description" = "Besplatna alternativna DNS usluga od Google-a";
-
-/* Open DNS server description */
-"open_dns_description" = "DNS poslužitelj koji štiti vaš uređaj od krađe identiteta i prijevara";
-
-/* Open Family DNS server description */
-"open_dns_familyshield_description" = "OpenDNS poslužitelj s blokiranjem sadržaja za odrasle";
-
-/* Quad9 DNS server description */
-"quad_nine_dns_description" = "Besplatna, alternativna DNS usluga s zaštitom od krađe identiteta i špijunskih programa";
-
-/* Cloudfare DNS server description */
-"cloudflare_public_dns_description" = "Besplatna DNS usluga od Cloudflarea";
-
-/* Cloudfare Anti-Malware DNS server description */
-"cloudflare_anti_malware_dns_description" = "Anti-malware DNS poslužitelj od Cloudflare-a koji blokira zlonamjerne domene";
-
-/* Cloudfare Family DNS server description */
-"cloudflare_family_description" = "Blokirajući poslužitelj Cloudflare-a koji ograničava pristup zlonamjernim i 'odraslim' domenama";
-
-/* Safe DNS server description */
-"safe_dns_description" = "DNS usluga od SafeDNS-a";
-
-/* Dns Feature Name */
-"dns_provider_secure_tag" = "Sigurnost";
-
-/* Dns Feature Name */
-"dns_provider_adult_tag" = "Blokiranje sadržaja za odrasle";
-
-/* Dns Feature Name */
-"dns_provider_no_logs_tag" = "Politika ne spremanja zapisnika";
-
-/* Dns Feature Name */
-"dns_provider_safe_search_tag" = "Sigurno pretraživanje";
-
-/* Dns Feature Name */
-"dns_provider_ad_blocking_tag" = "Blokiranje oglasa";
-
-/* Dns Feature description */
-"dns_provider_secure_summary" = "Blokira poznate domene za krađu identiteta kao i druge opasne domene";
-
-/* Dns Feature description */
-"dns_provider_adult_summary" = "Blokira stranice s sadržajem za odrasle";
-
-/* Dns Feature description */
-"dns_provider_no_logs_summary" = "Ne pohranjuje vaše DNS zapise upita";
-
-/* Dns Feature description */
-"dns_provider_safe_search_summary" = "Kad god je to moguće, Sigurna pretraga se provodi u preglednicima";
-
-/* Dns Feature description */
-"dns_provider_ad_blocking_summary" = "Blokira sustave za praćenje";
-
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Bez šifriranja (DNS sustava)";
 
@@ -261,6 +201,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (eksperimentalno)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Sigurno se želite odjaviti?";
@@ -853,3 +796,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Unesite svoju lozinku ovdje";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Dodajte prilagođeni filtar za blokiranje sadržaja: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Dodaj prilagođeni DNS filtar: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Omogući filtar: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Onemogući filtar: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neuspješno";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Odaberi DNS poslužitelja: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivirajte premium značajke s %@ licencnim ključem";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Dodaj korisnička pravila";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Dodaj DNS korisnička pravila";

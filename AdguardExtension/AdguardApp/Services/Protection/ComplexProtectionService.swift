@@ -41,6 +41,7 @@ protocol ComplexProtectionServiceProtocol: class {
 
 enum ComplexProtectionError: Error {
     case cancelledAddingVpnConfiguration
+    case invalidDnsImplementation
 }
 
 // MARK: - Complex protection class -
@@ -55,10 +56,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     let safariProtection: SafariProtectionServiceProtocol
     
     var systemProtectionEnabled: Bool {
-        return configuration.proStatus
-            && resources.systemProtectionEnabled
-            && resources.complexProtectionEnabled
-            && vpnManager.vpnInstalled
+        if resources.dnsImplementation == .adGuard {
+            return proStatus
+                && resources.systemProtectionEnabled
+                && resources.complexProtectionEnabled
+                && vpnManager.vpnInstalled
+        } else {
+            return nativeProvidersService.managerIsEnabled
+        }
     }
     
     var complexProtectionEnabled: Bool {
@@ -70,47 +75,29 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     private let configuration: ConfigurationServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let productInfo: ADProductInfoProtocol
+    private let nativeProvidersService: NativeProvidersServiceProtocol
     
     private var vpnConfigurationObserver: NotificationToken!
     private var vpnStateChangeObserver: NotificationToken!
+    private var dnsImplementationObserver: NotificationToken!
     
     private var proStatus: Bool {
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService, productInfo: ADProductInfoProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService, productInfo: ADProductInfoProtocol, nativeProvidersService: NativeProvidersServiceProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.configuration = configuration
         self.vpnManager = vpnManager
         self.safariProtection = safariProtection
         self.productInfo = productInfo
+        self.nativeProvidersService = nativeProvidersService
         
-        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
-            guard let self = self else { return }
-            self.resources.systemProtectionEnabled = false
-            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
-        }
+        nativeProvidersService.delegate = self
         
-        vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
-            guard let self = self else { return }
-            if let enabled = note.object as? Bool {
-                self.resources.systemProtectionEnabled = enabled
-            }
-            
-            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
-        }
-        
-        vpnManager.checkVpnInstalled { (error) in
-            if error != nil {
-                DDLogError("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
-            }
-            else {
-                if !vpnManager.vpnInstalled {
-                    resources.systemProtectionEnabled = false
-                }
-            }
-        }
+        addObservers()
+        checkVpnInstalled()
     }
     
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
@@ -122,10 +109,25 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         
         if enabled && !safariEnabled && !systemEnabled {
             resources.safariProtectionEnabled = true
-            resources.systemProtectionEnabled = configuration.proStatus
+            if resources.dnsImplementation == .adGuard {
+                resources.systemProtectionEnabled = proStatus
+            }
         }
         
-        updateProtections(safari: true, system: true, vc: VC) { [weak self] (safariError, systemError) in
+        if #available(iOS 14.0, *) {
+            if resources.dnsImplementation == .native {
+                if enabled {
+                    nativeProvidersService.saveDnsManager { _ in }
+                } else {
+                    nativeProvidersService.removeDnsManager { _ in }
+                }
+            }
+        }
+        
+        // We can't control native DNS configuration, we can only check it's state
+        let shouldUpdateSystemProtection = resources.dnsImplementation == .adGuard
+        
+        updateProtections(safari: true, system: shouldUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
             
             if safariError != nil {
@@ -175,25 +177,24 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
+        // We can't control native DNS configuration, we can only check it's state
+        if resources.dnsImplementation == .native {
+            completion(ComplexProtectionError.invalidDnsImplementation)
+            return
+        }
         
-        var needsUpdateSafari = false
-        let needsUpdateSystem = resources.systemProtectionEnabled != enabled
-        
+        switchSystemProtectionInternal(state: enabled, for: VC, completion: completion)
+    }
+    
+    // MARK: - Private methods
+    
+    private func switchSystemProtectionInternal(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
-        if enabled && !resources.complexProtectionEnabled {
-            resources.complexProtectionEnabled = true
-            needsUpdateSafari = resources.safariProtectionEnabled
-        }
+        let needsUpdate = updateSystemProtectionResources(toEnabledState: enabled)
         
-        if !enabled && !safariProtection.safariProtectionEnabled {
-            self.resources.complexProtectionEnabled = false
-        }
-        
-        resources.systemProtectionEnabled = enabled
-        
-        updateProtections(safari: needsUpdateSafari, system: needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
+        updateProtections(safari: needsUpdate.needsUpdateSafari, system: needsUpdate.needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
             
             if safariError != nil {
@@ -208,9 +209,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
     
-    // MARK: - Private methods
-    
-    func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
+    private func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
         
         DispatchQueue(label: "complex protection queue").async { [weak self] in
             guard let self = self else { return }
@@ -241,6 +240,24 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
     
+    private func updateSystemProtectionResources(toEnabledState enabled: Bool) -> (needsUpdateSafari: Bool, needsUpdateSystem: Bool){
+        var needsUpdateSafari = false
+        let needsUpdateSystem = resources.systemProtectionEnabled != enabled
+        
+        if enabled && !resources.complexProtectionEnabled {
+            resources.complexProtectionEnabled = true
+            needsUpdateSafari = resources.safariProtectionEnabled
+        }
+        
+        if !enabled && !safariProtection.safariProtectionEnabled {
+            self.resources.complexProtectionEnabled = false
+        }
+        
+        resources.systemProtectionEnabled = enabled
+        
+        return (needsUpdateSafari, needsUpdateSystem)
+    }
+    
     /**
      This method invalidates blocking json
      */
@@ -256,7 +273,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {
-        if !configuration.proStatus {
+        if !proStatus {
             completion(nil)
             return
         }
@@ -284,6 +301,58 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 }
                 else {
                     completion(error)
+                }
+            }
+        }
+    }
+    
+    private func addObservers() {
+        vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            self.resources.systemProtectionEnabled = false
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+        
+        vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            if let enabled = note.object as? Bool {
+                self.resources.systemProtectionEnabled = enabled
+            }
+            
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+        
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
+            guard let self = self else { return }
+        
+            if self.resources.dnsImplementation == .adGuard {
+                self.checkVpnInstalled()
+            } else {
+                self.switchSystemProtectionInternal(state: false, for: nil) { [weak self] error in
+                    guard let self = self else { return }
+                
+                    if let error = error {
+                        DDLogError("Failed to turn off system protection, error: \(error.localizedDescription)")
+                    }
+                
+                    let managerIsEnabled = self.nativeProvidersService.managerIsEnabled
+                    let _ = self.updateSystemProtectionResources(toEnabledState: managerIsEnabled)
+                    NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+                }
+            }
+        }
+    }
+    
+    private func checkVpnInstalled() {
+        vpnManager.checkVpnInstalled { [weak self] error in
+            guard let self = self else { return }
+            if error != nil {
+                DDLogError("(ComplexProtectionService) checkVpnInstalled error: \(error!)")
+            }
+            else {
+                if !self.vpnManager.vpnInstalled {
+                    self.resources.systemProtectionEnabled = false
+                    NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
                 }
             }
         }
@@ -323,4 +392,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
 #endif
+}
+
+extension ComplexProtectionService: NativeProvidersServiceDelegate {
+    func dnsManagerStatusChanged() {
+        if resources.dnsImplementation == .native {
+            let managerIsEnabled = nativeProvidersService.managerIsEnabled
+            let _ = updateSystemProtectionResources(toEnabledState: managerIsEnabled)
+            NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
+        }
+    }
 }

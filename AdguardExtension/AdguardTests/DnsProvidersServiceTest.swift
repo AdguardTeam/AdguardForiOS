@@ -29,8 +29,13 @@ class DnsProvidersServiceTest: XCTestCase {
     }
     
     func testAddCustomServer() {
-        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "0.0.0.0")
-        XCTAssertNotNil(result)
+        let expectation = XCTestExpectation()
+        
+        dnsProviders.addCustomProvider(name: "test provider", upstream: "0.0.0.0", {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1.0)
+        
         XCTAssert(dnsProviders.customProviders.count == 1)
         XCTAssert(dnsProviders.allProviders.count == dnsProviders.predefinedProviders.count + 1)
         
@@ -45,49 +50,70 @@ class DnsProvidersServiceTest: XCTestCase {
     }
     
     func testCustomServerProtocolDohType() {
-        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "https://server")
-        XCTAssertNotNil(result)
+        let expectation = XCTestExpectation()
+        dnsProviders.addCustomProvider(name: "test provider", upstream: "https://server", {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1.0)
+        
         let server = dnsProviders.customProviders[0].servers?.first
         XCTAssertEqual(server?.dnsProtocol, .doh)
     }
     
     func testCustomServerProtocolDotType() {
-        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "tls://server")
-        XCTAssertNotNil(result)
+        let expectation = XCTestExpectation()
+        dnsProviders.addCustomProvider(name: "test provider", upstream: "tls://server", {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1.0)
+  
         let server = dnsProviders.customProviders[0].servers?.first
         XCTAssertEqual(server?.dnsProtocol, .dot)
     }
     
     func testCustomServerProtocolDnsCryptType() {
-        let result = dnsProviders.addCustomProvider(name: "test provider", upstream: "sdns://server")
-        XCTAssertNotNil(result)
+        let expectation = XCTestExpectation()
+        dnsProviders.addCustomProvider(name: "test provider", upstream: "sdns://server", {
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 1.0)
+        
         let server = dnsProviders.customProviders[0].servers?.first
         XCTAssertEqual(server?.dnsProtocol, .dnsCrypt)
     }
     
     func testRemoveServer() {
-        _ = dnsProviders.addCustomProvider(name: "test provider1", upstream: "0.0.0.1")
-        let providerToRemove = dnsProviders.addCustomProvider(name: "test provider2", upstream: "0.0.0.2")
-        _ = dnsProviders.addCustomProvider(name: "test provider3", upstream: "0.0.0.3")
+        let expectation1 = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
+        let expectation3 = XCTestExpectation()
+        
+        dnsProviders.addCustomProvider(name: "test provider1", upstream: "0.0.0.1", { expectation1.fulfill() })
+        dnsProviders.addCustomProvider(name: "test provider2", upstream: "0.0.0.2", { expectation2.fulfill() })
+        dnsProviders.addCustomProvider(name: "test provider3", upstream: "0.0.0.3", { expectation3.fulfill() })
+        
+        wait(for: [expectation1, expectation2, expectation3], timeout: 1.0)
         
         XCTAssert(dnsProviders.customProviders.count == 3)
         XCTAssert(dnsProviders.allProviders.count == 3 + dnsProviders.predefinedProviders.count)
         
-        dnsProviders.deleteProvider(providerToRemove)
+        let expectation4 = XCTestExpectation()
+        let providerToDelete = dnsProviders.customProviders.first!
+        dnsProviders.deleteProvider(providerToDelete, { expectation4.fulfill() })
+        wait(for: [expectation4], timeout: 1.0)
         
         XCTAssert(dnsProviders.allProviders.count == 2 + dnsProviders.predefinedProviders.count)
-        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 0].name, "test provider1")
+        XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 0].name, "test provider2")
         XCTAssertEqual(dnsProviders.allProviders[dnsProviders.predefinedProviders.count + 1].name, "test provider3")
         
         XCTAssert(dnsProviders.customProviders.count == 2)
-        XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider1")
+        XCTAssertEqual(dnsProviders.customProviders[0].name, "test provider2")
         XCTAssertEqual(dnsProviders.customProviders[1].name, "test provider3")
     }
     
     func testServerMigration() {
-        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "adguard-dns", name: "Adguard", upstreams: ["0.0.0.0"])
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "adguard-dns", name: "Adguard", upstreams: ["0.0.0.0"], providerId: nil)
         
-        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        resources.currentAdGuardImplementationDnsServer = oldServer
         
         let providersService = DnsProvidersService(resources: resources)
         
@@ -97,9 +123,9 @@ class DnsProvidersServiceTest: XCTestCase {
     }
     
     func testServerMigration2() {
-        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "test-server", name: "Adguard", upstreams: ["0.0.0.0"])
+        let oldServer = DnsServerInfo(dnsProtocol: .dns, serverId: "test-server", name: "Adguard", upstreams: ["0.0.0.0"], providerId: nil)
         
-        resources.sharedDefaults().set(NSKeyedArchiver.archivedData(withRootObject:oldServer), forKey: AEDefaultsActiveDnsServer)
+        resources.currentAdGuardImplementationDnsServer = oldServer
         
         let providersService = DnsProvidersService(resources: resources)
         
@@ -126,7 +152,7 @@ class DnsProvidersServiceTest: XCTestCase {
         for provider in providrsService.predefinedProviders {
             let contains = provider.name.lowercased().contains("malware") || provider.summary?.lowercased().contains("malware") ?? false
             if contains {
-                XCTFail("\(provider.name) \(provider.summary) contains 'malware'")
+                XCTFail("\(provider.name) \(String(describing: provider.summary)) contains 'malware'")
             }
             
             for feature in provider.features ?? [] {

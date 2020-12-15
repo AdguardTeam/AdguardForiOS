@@ -40,6 +40,9 @@
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "이 모듈을 활성화하면 DNS 트래픽을 암호화하여 개인정보 보호 기능을 향상시킬 수 있습니다.";
 
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (실험용)";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS 보호";
 

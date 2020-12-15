@@ -330,6 +330,51 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
  */
 extern NSString* _Nonnull NeedToUpdateFiltersKey;
 
+/**
+ User defaults key for storing current DNS implementation.
+ */
+extern NSString* _Nonnull DnsImplementationKey;
+
+/**
+ User defaults key for custom fallback server.
+ */
+extern NSString* _Nonnull CustomFallbackServers;
+
+/**
+ User defaults key for custom bootstrap server.
+ */
+extern NSString* _Nonnull CustomBootstrapServers;
+
+/**
+ User defaults key for blocking mode.
+ */
+extern NSString* _Nonnull BlockingMode;
+
+/**
+ User defaults key for blocked response Ttl in secs.
+ */
+extern NSString* _Nonnull BlockedResponseTtlSecs;
+
+/**
+ User defaults key for custom blocking Ipv4.
+ */
+extern NSString* _Nonnull CustomBlockingIp;
+
+/**
+ User defaults key for custom blocking Ipv4.
+ */
+extern NSString* _Nonnull CustomBlockingIpv4;
+
+/**
+ User defaults key for custom blocking Ipv6
+ */
+extern NSString* _Nonnull CustomBlockingIpv6;
+
+/**
+ User defaults key for block Ipv6
+ */
+extern NSString* _Nonnull BlockIpv6;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

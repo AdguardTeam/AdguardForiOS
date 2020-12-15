@@ -45,15 +45,15 @@
 
 #define V_REMOTE_ADDRESS                        @"127.1.1.1"
 
-#define V_INTERFACE_IPV4_FULL_TUNNEL            @"172.16.209.2"
-#define V_INTERFACE_IPV4_FULL_TUNNEL_NO_ICON    @"172.16.209.3"
-#define V_INTERFACE_IPV4_SPLIT_TUNNEL           @"172.16.209.4"
+#define V_INTERFACE_IPV4_FULL_TUNNEL            @"172.16.209.3"
+#define V_INTERFACE_IPV4_FULL_TUNNEL_NO_ICON    @"172.16.209.4"
+#define V_INTERFACE_IPV4_SPLIT_TUNNEL           @"172.16.209.5"
 #define V_INTERFACE_IPV4_MASK                   @"255.255.255.252"
 #define V_INTERFACE_IPV4_FULL_MASK              @"255.255.255.255"
 
-#define V_INTERFACE_IPV6_FULL_TUNNEL            @"fd12:1:1:1::2"
-#define V_INTERFACE_IPV6_FULL_TUNNEL_NO_ICON    @"fd12:1:1:1::3"
-#define V_INTERFACE_IPV6_SPLIT_TUNNEL           @"fd12:1:1:1::4"
+#define V_INTERFACE_IPV6_FULL_TUNNEL            @"fd12:1:1:1::3"
+#define V_INTERFACE_IPV6_FULL_TUNNEL_NO_ICON    @"fd12:1:1:1::4"
+#define V_INTERFACE_IPV6_SPLIT_TUNNEL           @"fd12:1:1:1::5"
 #define V_INTERFACE_IPV6_MASK                   @(64)
 #define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
@@ -680,8 +680,62 @@
     
     NSString* serverName = _currentServer.name ?: ACLocalizedString(@"default_dns_server_name", nil);
     
+    NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
+    NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
+    BlockingModeSettings blockingModeSettings = [_resources.sharedDefaults integerForKey: BlockingMode];
+    NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
+    AGBlockingMode blockingMode;
+    
+    switch (blockingModeSettings) {
+        case BlockingModeSettingsAgDefault:
+            blockingMode = AGBM_DEFAULT;
+            break;
+        case BlockingModeSettingsAgRefused:
+            blockingMode = AGBM_REFUSED;
+            break;
+        case BlockingModeSettingsAgNxdomain:
+            blockingMode = AGBM_NXDOMAIN;
+            break;
+        case BlockingModeSettingsAgUnspecifiedAddress:
+            blockingMode = AGBM_UNSPECIFIED_ADDRESS;
+            break;
+        case BlockingModeSettingsAgCustomAddress:
+            blockingMode = AGBM_CUSTOM_ADDRESS;
+            break;
+    }
+    
+    NSArray<NSString *> *customBlockingIp;
+    NSString *customBlockingIpv4;
+    NSString *customBlockingIpv6;
+    
+    if (blockingMode == AGBM_CUSTOM_ADDRESS) {
+        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
+        for (NSString* ip in customBlockingIp) {
+            if ([ACNUrlUtils isIPv4:ip]) {
+                customBlockingIpv4 = ip;
+            } else if ([ACNUrlUtils isIPv6:ip]) {
+                customBlockingIpv6 = ip;
+            }
+        }
+    }
+
+    BOOL blockIpv6 = [_resources.sharedDefaults boolForKey:BlockIpv6];
+    
+    
     // Using system DNS servers as bootstraps and fallbacks
-    return [self.dnsProxy startWithUpstreams:upstreams bootstrapDns: systemDnsServers  fallbacks: systemDnsServers serverName: serverName filtersJson: filtersJson userFilterId: userFilterId whitelistFilterId: whitelistFilterId ipv6Available:ipv6Available];
+    return [self.dnsProxy startWithUpstreams:upstreams
+                                bootstrapDns:customBootstraps ?: systemDnsServers
+                                   fallbacks:customFallbacks ?: systemDnsServers
+                                  serverName:serverName
+                                 filtersJson:filtersJson
+                                userFilterId:userFilterId
+                           whitelistFilterId:whitelistFilterId
+                               ipv6Available:ipv6Available
+                                blockingMode:blockingMode
+                      blockedResponseTtlSecs:blockedResponseTtlSecs
+                          customBlockingIpv4:customBlockingIpv4
+                          customBlockingIpv6:customBlockingIpv6
+                                   blockIpv6: blockIpv6];
 }
 
 @end
