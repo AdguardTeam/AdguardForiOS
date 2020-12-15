@@ -78,6 +78,7 @@ class BugReportController: UIViewController {
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
         sendButton.startIndicator()
+        sendButton.isEnabled = false
         
         let email = emailAddressTextField.text ?? ""
         let isValidEmail = email.isValidEmail() || email.isEmpty
@@ -97,6 +98,7 @@ class BugReportController: UIViewController {
         guard isValidEmail && isValidDescription else {
             DDLogDebug("Mail: \(email); description: \(description)")
             sendButton.stopIndicator()
+            sendButton.isEnabled = true
             return
         }
         
@@ -105,6 +107,7 @@ class BugReportController: UIViewController {
         supportService.sendFeedback(email, description: description, reportType: reportType, sendLogs: shouldSendLogs) { logsSentSuccessfully in
             DispatchQueue.main.async { [weak self] in
                 self?.sendButton.stopIndicator()
+                self?.sendButton.isEnabled = true
                 
                 if logsSentSuccessfully {
                     self?.showBugReportSuccessAlert()

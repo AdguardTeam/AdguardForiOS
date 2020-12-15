@@ -32,7 +32,7 @@ import Foundation
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     var upstreamsById: [Int: DnsProxyUpstream] { get }
     
-    func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String,  userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool
+    func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -71,7 +71,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     var agproxy: AGDnsProxy?
     
-    @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool) -> Bool {
+    @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
            
         let isCrypto = upstreamIsCrypto()
         let agUpstreams = upstreams.map {(upstream) -> AGDnsUpstream in
@@ -137,14 +137,14 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
                                       filters: agFilters,
-                                      blockedResponseTtlSecs: 2,
+                                      blockedResponseTtlSecs: blockedResponseTtlSecs,
                                       dns64Settings: dns64Settings,
                                       listeners: nil,
                                       ipv6Available: ipv6Available,
-                                      blockIpv6: false,
-                                      blockingMode: .AGBM_DEFAULT,
-                                      customBlockingIpv4: nil,
-                                      customBlockingIpv6: nil,
+                                      blockIpv6: blockIpv6,
+                                      blockingMode: blockingMode,
+                                      customBlockingIpv4: customBlockingIpv4,
+                                      customBlockingIpv6: customBlockingIpv6,
                                       dnsCacheSize: 128,
                                       optimisticCache: false)
 

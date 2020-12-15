@@ -24,7 +24,6 @@ class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var debugLogsSwitch: UISwitch!
-    @IBOutlet weak var tunnelModeDescription: ThemableLabel!
     @IBOutlet weak var lastSeparator: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -67,12 +66,6 @@ class AdvancedSettingsController: UITableViewController {
             self?.lastSeparator.isHidden = false
             self?.tableView.reloadData()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setTunnelModeDescription()
-        tableView.reloadData()
     }
     
     // MARK: - Prepare for segue
@@ -182,19 +175,6 @@ class AdvancedSettingsController: UITableViewController {
         DispatchQueue.main.async { [weak self] in
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
-        }
-    }
-    
-    private func setTunnelModeDescription() {
-        switch resources.tunnelMode {
-        case APVpnManagerTunnelModeSplit:
-            tunnelModeDescription.text = String.localizedString("tunnel_mode_split_description")
-        case APVpnManagerTunnelModeFull:
-            tunnelModeDescription.text = String.localizedString("tunnel_mode_full_description")
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
-            tunnelModeDescription.text = String.localizedString("tunnel_mode_full_without_icon_description")
-        default:
-            break
         }
     }
     
