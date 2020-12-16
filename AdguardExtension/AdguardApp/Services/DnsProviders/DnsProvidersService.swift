@@ -30,7 +30,7 @@ import Foundation
     
     var allProviders: [DnsProviderInfo] { get }
     var predefinedProviders: [DnsProviderInfo] { get }
-    var customProviders: [DnsProviderInfo] { get }
+    var customProviders: [DnsProviderInfo] { get set }
     var adguardDohServer: DnsServerInfo? { get }
     var adguardFamilyDohServer: DnsServerInfo? { get }
     
