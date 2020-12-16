@@ -455,7 +455,7 @@ class MigrationService: MigrationServiceProtocol {
             DDLogInfo("New provider id = \(id)")
             provider.providerId = id
             provider.servers?.forEach { $0.providerId = id }
-            DDLogInfo("servers: \(provider.servers?.map { $0.serverId }.joined(separator: "; "))")
+            DDLogInfo("servers: \(provider.servers?.map { String($0.providerId ?? -1) }.joined(separator: "; "))")
             DDLogInfo("------------------------------------------------")
         }
         DDLogInfo("Finished setting providerId")
