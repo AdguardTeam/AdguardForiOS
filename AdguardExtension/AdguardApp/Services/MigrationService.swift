@@ -218,7 +218,12 @@ class MigrationService: MigrationServiceProtocol {
         */
         if lastBuildVersion < 593 {
             DDLogInfo("(MigrationService) - Migrate AEDefaultsActiveDnsServer key. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-            
+            guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else {
+                DDLogWarn("Nil data for current DNS Server")
+                return
+            }
+            let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
+            dnsProvidersService.activeDnsServer = dnsServer
         }
         
         /**
