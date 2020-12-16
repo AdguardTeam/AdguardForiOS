@@ -40,6 +40,7 @@ class MigrationService: MigrationServiceProtocol {
     private let filtersService: FiltersServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let contentBlockerService: ContentBlockerServiceProtocol
+    private let nativeProviders: NativeProvidersServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
@@ -55,7 +56,8 @@ class MigrationService: MigrationServiceProtocol {
          configuration: ConfigurationServiceProtocol,
          filtersService: FiltersServiceProtocol,
          productInfo: ADProductInfoProtocol,
-         contentBlockerService: ContentBlockerServiceProtocol) {
+         contentBlockerService: ContentBlockerServiceProtocol,
+         nativeProviders: NativeProvidersServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -69,6 +71,7 @@ class MigrationService: MigrationServiceProtocol {
         self.filtersService = filtersService
         self.productInfo = productInfo
         self.contentBlockerService = contentBlockerService
+        self.nativeProviders = nativeProviders
     }
     
     func install() {
@@ -211,20 +214,6 @@ class MigrationService: MigrationServiceProtocol {
             resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
         }
         
-        /**
-        Migration:
-         In app version 4.1 (593) we've rewritten some code from objc to swift and began to use JSONDecoder instead of NSKeyedUnarchver
-         So we need to get Data with NSKeyedUnarchver and resave it with JSONEncoder
-        */
-        if lastBuildVersion < 593 {
-            DDLogInfo("(MigrationService) - Migrate AEDefaultsActiveDnsServer key. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-            guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else {
-                DDLogWarn("Nil data for current DNS Server")
-                return
-            }
-            let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
-            dnsProvidersService.activeDnsServer = dnsServer
-        }
         
         /**
         Migration:
@@ -233,12 +222,17 @@ class MigrationService: MigrationServiceProtocol {
          Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
          isCustomProvider  property was added
          providerId is not optional anymore
+         
+         we've also rewritten some code from objc to swift and began to use JSONDecoder instead of NSKeyedUnarchver
+         So we need to get Data with NSKeyedUnarchver and resave it with JSONEncoder
         */
-        if lastBuildVersion < 593 {
+        if lastBuildVersion < 592 {
             DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            migrateCurrentDnsServerInUserDefaults()
             setIdsForCustomProviders()
             setProviderIdForCurrentDnsServer()
             setBoolFlagForDnsProviders()
+            nativeProviders.reinitializeProviders()
         }
     }
     
@@ -422,6 +416,16 @@ class MigrationService: MigrationServiceProtocol {
             }
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
         }
+    }
+    
+    private func migrateCurrentDnsServerInUserDefaults() {
+        DDLogInfo("Get Data with NSKeyedUnarchver and resave it with JSONEncoder for AEDefaultsActiveDnsServer")
+        guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else {
+            DDLogWarn("Nil data for current DNS Server")
+            return
+        }
+        let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
+        dnsProvidersService.activeDnsServer = dnsServer
     }
     
     private func setIdsForCustomProviders() {
