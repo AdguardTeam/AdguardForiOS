@@ -417,6 +417,13 @@ class MigrationService: MigrationServiceProtocol {
             return
         }
         let serverId = currentServer.serverId
+        DDLogInfo("Current server id = \(serverId)")
+        DDLogInfo("All providers ids: \(dnsProvidersService.allProviders.map { String($0.providerId) }.joined(separator: "; "))")
+        for provider in dnsProvidersService.allProviders {
+            DDLogInfo("Provider id = \(provider.providerId)")
+            DDLogInfo("Provider server ids: \(provider.servers?.map { $0.serverId }.joined(separator: "; "))")
+            DDLogInfo("----------------------------------------------------------------")
+        }
         
         guard let serverProvider = dnsProvidersService.allProviders.first(where: { provider in
             provider.servers?.contains { $0.serverId == serverId } ?? false
@@ -424,6 +431,7 @@ class MigrationService: MigrationServiceProtocol {
             DDLogError("Failed to find provider for server with id = \(serverId)")
             return
         }
+        DDLogInfo("Server provider id = \(serverProvider.providerId); servers: \(serverProvider.servers?.map { $0.serverId }.joined(separator: "; "))")
         currentServer.providerId = serverProvider.providerId
         dnsProvidersService.activeDnsServer = currentServer
         
@@ -432,17 +440,23 @@ class MigrationService: MigrationServiceProtocol {
     
     private func setBoolFlagForDnsProviders() {
         DDLogInfo("Setting isCustomProvider flag for custom providers")
+        DDLogInfo("\(dnsProvidersService.customProviders.map { "privider id = \(String($0.providerId)); isCustom = \(String($0.isCustomProvider))" }.joined(separator: ";") )")
         dnsProvidersService.customProviders.forEach { $0.isCustomProvider = true }
+        DDLogInfo("\(dnsProvidersService.customProviders.map { "privider id = \(String($0.providerId)); isCustom = \(String($0.isCustomProvider))" }.joined(separator: ";") )")
         DDLogInfo("Finished setting isCustomProvider flag")
     }
     
     private func setIdsForCustomProviders() {
         DDLogInfo("Setting providerId for custom providers")
         dnsProvidersService.customProviders.forEach { provider in
+            DDLogInfo("Provider id = \(provider.providerId)")
             let maxId = dnsProvidersService.customProviders.map{ $0.providerId }.max() ?? 0
             let id = maxId + 1
+            DDLogInfo("New provider id = \(id)")
             provider.providerId = id
             provider.servers?.forEach { $0.providerId = id }
+            DDLogInfo("servers: \(provider.servers?.map { $0.serverId }.joined(separator: "; "))")
+            DDLogInfo("------------------------------------------------")
         }
         DDLogInfo("Finished setting providerId")
     }
