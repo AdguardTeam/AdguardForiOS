@@ -213,13 +213,23 @@ class MigrationService: MigrationServiceProtocol {
         
         /**
         Migration:
-         In app version 4.1 (590) we've added AdGuard Dns repository support and begun to use
+         In app version 4.1 (593) we've rewritten some code from objc to swift and began to use JSONDecoder instead of NSKeyedUnarchver
+         So we need to get Data with NSKeyedUnarchver and resave it with JSONEncoder
+        */
+        if lastBuildVersion < 593 {
+            DDLogInfo("(MigrationService) - Migrate AEDefaultsActiveDnsServer key. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            
+        }
+        
+        /**
+        Migration:
+         In app version 4.1 (593) we've added AdGuard Dns repository support and begun to use
          all information from providers.json
          Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
          isCustomProvider  property was added
          providerId is not optional anymore
         */
-        if lastBuildVersion < 590 {
+        if lastBuildVersion < 593 {
             DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
             setProviderIdForCurrentDnsServer()
             setBoolFlagForDnsProviders()
