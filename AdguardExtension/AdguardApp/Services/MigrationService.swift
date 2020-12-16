@@ -436,6 +436,11 @@ class MigrationService: MigrationServiceProtocol {
             provider.providerId = id
             provider.servers?.forEach { $0.providerId = id }
         }
+        
+        /*
+         When provider ids were set customProviders setter wasn't called and after reentering the app ids will be erased
+         To save providers with new ids we forcibly call customProviders setter
+         */
         dnsProvidersService.customProviders = dnsProvidersService.customProviders
         DDLogInfo("Finished setting providerId")
     }
