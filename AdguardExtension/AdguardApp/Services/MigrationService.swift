@@ -40,6 +40,7 @@ class MigrationService: MigrationServiceProtocol {
     private let filtersService: FiltersServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let contentBlockerService: ContentBlockerServiceProtocol
+    private let nativeProviders: NativeProvidersServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
@@ -55,7 +56,8 @@ class MigrationService: MigrationServiceProtocol {
          configuration: ConfigurationServiceProtocol,
          filtersService: FiltersServiceProtocol,
          productInfo: ADProductInfoProtocol,
-         contentBlockerService: ContentBlockerServiceProtocol) {
+         contentBlockerService: ContentBlockerServiceProtocol,
+         nativeProviders: NativeProvidersServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -69,6 +71,7 @@ class MigrationService: MigrationServiceProtocol {
         self.filtersService = filtersService
         self.productInfo = productInfo
         self.contentBlockerService = contentBlockerService
+        self.nativeProviders = nativeProviders
     }
     
     func install() {
@@ -211,19 +214,25 @@ class MigrationService: MigrationServiceProtocol {
             resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
         }
         
+        
         /**
         Migration:
-         In app version 4.1 (590) we've added AdGuard Dns repository support and begun to use
+         In app version 4.1 (593) we've added AdGuard Dns repository support and begun to use
          all information from providers.json
          Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
          isCustomProvider  property was added
          providerId is not optional anymore
+         
+         we've also rewritten some code from objc to swift and began to use JSONDecoder instead of NSKeyedUnarchver
+         So we need to get Data with NSKeyedUnarchver and resave it with JSONEncoder
         */
-        if lastBuildVersion < 590 {
+        if lastBuildVersion < 592 {
             DDLogInfo("(MigrationService) - DNS providers migrations started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            migrateCurrentDnsServerInUserDefaults()
+            setIdsForCustomProviders()
             setProviderIdForCurrentDnsServer()
             setBoolFlagForDnsProviders()
-            setIdsForCustomProviders()
+            nativeProviders.reinitializeProviders()
         }
     }
     
@@ -409,6 +418,33 @@ class MigrationService: MigrationServiceProtocol {
         }
     }
     
+    private func migrateCurrentDnsServerInUserDefaults() {
+        DDLogInfo("Get Data with NSKeyedUnarchver and resave it with JSONEncoder for AEDefaultsActiveDnsServer")
+        guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else {
+            DDLogWarn("Nil data for current DNS Server")
+            return
+        }
+        let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
+        dnsProvidersService.activeDnsServer = dnsServer
+    }
+    
+    private func setIdsForCustomProviders() {
+        DDLogInfo("Setting providerId for custom providers")
+        dnsProvidersService.customProviders.forEach { provider in
+            let maxId = dnsProvidersService.customProviders.map{ $0.providerId }.max() ?? 0
+            let id = maxId + 1
+            provider.providerId = id
+            provider.servers?.forEach { $0.providerId = id }
+        }
+        
+        /*
+         When provider ids were set customProviders setter wasn't called and after reentering the app ids will be erased
+         To save providers with new ids we forcibly call customProviders setter
+         */
+        dnsProvidersService.customProviders = dnsProvidersService.customProviders
+        DDLogInfo("Finished setting providerId")
+    }
+    
     private func setProviderIdForCurrentDnsServer() {
         DDLogInfo("Trying to set provider id for current DNS server")
         
@@ -417,7 +453,7 @@ class MigrationService: MigrationServiceProtocol {
             return
         }
         let serverId = currentServer.serverId
-        
+    
         guard let serverProvider = dnsProvidersService.allProviders.first(where: { provider in
             provider.servers?.contains { $0.serverId == serverId } ?? false
         }) else {
@@ -434,17 +470,6 @@ class MigrationService: MigrationServiceProtocol {
         DDLogInfo("Setting isCustomProvider flag for custom providers")
         dnsProvidersService.customProviders.forEach { $0.isCustomProvider = true }
         DDLogInfo("Finished setting isCustomProvider flag")
-    }
-    
-    private func setIdsForCustomProviders() {
-        DDLogInfo("Setting providerId for custom providers")
-        dnsProvidersService.customProviders.forEach { provider in
-            let maxId = dnsProvidersService.customProviders.map{ $0.providerId }.max() ?? 0
-            let id = maxId + 1
-            provider.providerId = id
-            provider.servers?.forEach { $0.providerId = id }
-        }
-        DDLogInfo("Finished setting providerId")
     }
 }
 
