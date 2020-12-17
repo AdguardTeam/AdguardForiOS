@@ -54,6 +54,8 @@ import Foundation
     func setupLabels(_ labels: [ThemableLabel])
     func setupButton(_ button: ThemableButton)
     func setupButtons(_ buttons: [ThemableButton])
+    func setupButtonImage(_ button: ThemableButton)
+    func setupButtonsImage(_ button: [ThemableButton])
     func setupPopupLabel(_ label: ThemableLabel)
     func setupPopupLabels(_ labels: [ThemableLabel])
     func setupPopupButton(_ button: RoundRectButton)
@@ -206,6 +208,15 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupButtons(_ buttons: [ThemableButton]) {
         buttons.forEach({ setupButton($0) })
+    }
+    
+    func setupButtonImage(_ button: ThemableButton) {
+        let image = configuration.darkTheme ? button.lightThemeImage : button.darkThemeImage
+        button.setImage(image, for: .normal)
+    }
+    
+    func setupButtonsImage(_ buttons: [ThemableButton]) {
+        buttons.forEach({ setupButtonImage($0) })
     }
     
     func setupPopupLabel(_ label: ThemableLabel) {

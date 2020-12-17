@@ -24,6 +24,11 @@ import Setapp
  all new functions we must write in this swift class instead of old obj-c AppDelegate
  */
 
+private enum SchemeType: String {
+    case auth
+    case other
+}
+
 @objcMembers
 class AppDelegateHelper: NSObject {
     
@@ -300,8 +305,12 @@ class AppDelegateHelper: NSObject {
         
         if url.host != nil {
             command = url.host!
+            if command == SchemeType.auth.rawValue {
+                let result = parseCustomUrlScheme(url, scheme: .auth)
+                params = result.params
+            }
         } else {
-            let result = parseCustomUrlScheme(url)
+            let result = parseCustomUrlScheme(url, scheme: .other)
             command = result.command
             params = result.params
         }
@@ -391,7 +400,7 @@ class AppDelegateHelper: NSObject {
             
         case (commonUrlScheme, applySettings):
             DDLogInfo("(AppDelegateHelper) openurl - apply settings")
-            let params = parseCustomUrlScheme(url).params
+            let params = parseCustomUrlScheme(url, scheme: .other).params
             guard let json = params?["json"] else {
                 DDLogError("(AppDelegateHelper) there is no param 'json' in url")
                 return false
@@ -416,6 +425,14 @@ class AppDelegateHelper: NSObject {
             configuration.advancedMode = true
             let success = appDelegate.presentTunnelModeController()
             return success
+            
+        // Log in by social networks
+        case (commonUrlScheme, SchemeType.auth.rawValue):
+            DDLogInfo("(AppDelegateHelper) openurl - Log in by social networks")
+            let token = params?["access_token"]
+            let state = params?["state"]
+            purchaseService.login(withAccessToken: token, state: state)
+            return true
             
         default: return false
         }
@@ -554,12 +571,20 @@ class AppDelegateHelper: NSObject {
         }
     }
     
-    private func parseCustomUrlScheme(_ url: URL)->(command: String?, params:[String: String]?) {
+    private func parseCustomUrlScheme(_ url: URL, scheme: SchemeType)->(command: String?, params:[String: String]?) {
         
-        let components = url.absoluteString.split(separator: ":", maxSplits: 1)
+        var components = url.absoluteString.split(separator: ":", maxSplits: 1)
         if components.count != 2 {
             DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
             return (nil, nil)
+        }
+        
+        if scheme == .auth {
+            components = url.absoluteString.split(separator: "#", maxSplits: 1)
+            if components.count != 2 {
+                DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
+                return (nil, nil)
+            }
         }
      
         let querry = components.last

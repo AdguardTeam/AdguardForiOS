@@ -236,7 +236,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
 
     private func loginSuccess() {
         let body = ACLocalizedString("login_success_message", nil)
-        navigationController?.popViewController(animated: true)
+        guard let count = navigationController?.viewControllers.count else  { return }
+        let controller: UIViewController
+        if count >= 2 {
+            controller = navigationController!.viewControllers[1]
+            navigationController?.popToViewController(controller, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
         notificationService.postNotificationInForeground(body: body, title: "")
     }
     
@@ -259,6 +266,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             let message = ACLocalizedString("login_error_message", nil)
             
             notificationService.postNotificationInForeground(body: message, title: "")
+            return
         }
         
         // some errors we show as red text below password text field, some in alert dialog

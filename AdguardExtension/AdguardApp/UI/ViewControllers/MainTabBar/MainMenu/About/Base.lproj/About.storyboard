@@ -205,10 +205,10 @@
             </objects>
             <point key="canvasLocation" x="-362" y="1222"/>
         </scene>
-        <!--LoginScene-->
+        <!--SignInScene-->
         <scene sceneID="DsR-vJ-L0J">
             <objects>
-                <viewControllerPlaceholder storyboardName="License" referencedIdentifier="LoginScene" id="FPy-fH-q4F" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="License" referencedIdentifier="SignInScene" id="FPy-fH-q4F" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Ibg-eu-nrd"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNg-aH-uKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
