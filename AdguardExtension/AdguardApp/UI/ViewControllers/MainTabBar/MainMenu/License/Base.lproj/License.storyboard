@@ -794,7 +794,7 @@ ADS &amp; TRACKERS</string>
                     <color key="tintColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="loginAction:" destination="gVb-oh-MXP" id="kO5-dl-Y2g"/>
-                        <segue destination="YAD-0P-paW" kind="show" id="XHd-Jk-4yR"/>
+                        <segue destination="feC-dX-1xt" kind="show" id="YHg-68-TSP"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Logout" id="70b-CS-wqh">
