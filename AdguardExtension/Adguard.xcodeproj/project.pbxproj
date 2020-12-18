@@ -19,6 +19,8 @@
 		244339A82580EA2600AB4F26 /* BlockedResponseTtlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */; };
 		244339DE2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
 		244339DF2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
+		24551E27258C98C900E485DB /* SigninHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24551E26258C98C900E485DB /* SigninHelper.swift */; };
+		24551E28258C98C900E485DB /* SigninHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24551E26258C98C900E485DB /* SigninHelper.swift */; };
 		249606BD258B831000C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		249606CF258B831100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		249606D0258B831900C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
@@ -2584,6 +2586,7 @@
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
 		244339DD2581092900AB4F26 /* UpstreamsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpstreamsController.swift; sourceTree = "<group>"; };
+		24551E26258C98C900E485DB /* SigninHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninHelper.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconButton.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
@@ -5060,6 +5063,7 @@
 				D0BA620F224A8547005CF278 /* GetProTableController.swift */,
 				D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */,
 				242B9144258A0D3E00A39E19 /* SigninController.swift */,
+				24551E26258C98C900E485DB /* SigninHelper.swift */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -6594,6 +6598,7 @@
 				D0B545D52435D697002F0AEC /* OnboardingAnimationsController.swift in Sources */,
 				D0D7E61024445018001801A5 /* ActivityStatisticsService.swift in Sources */,
 				D0D7E5E524444EBD001801A5 /* ParsedHost.swift in Sources */,
+				24551E28258C98C900E485DB /* SigninHelper.swift in Sources */,
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
 				D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */,
 				D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */,
@@ -7096,6 +7101,7 @@
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
 				7EF75A6D234B6010006ED3E5 /* DnsTrackerService.swift in Sources */,
 				D09E2A0C2549A2EA002D6BC0 /* DnsProvidersMigration.swift in Sources */,
+				24551E27258C98C900E485DB /* SigninHelper.swift in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */,

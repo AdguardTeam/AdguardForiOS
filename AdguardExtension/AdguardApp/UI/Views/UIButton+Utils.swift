@@ -53,4 +53,13 @@ extension UIButton {
         self.layer.borderWidth = 1.0
         self.layer.borderColor = greenColor.cgColor
     }
+    
+    /*
+     Makes button look like standart AdGuard Sing in button
+     */
+    func applySigninButtonStyle(color: CGColor) {
+        self.layer.cornerRadius = self.frame.height / 4
+        self.layer.borderWidth = 1.5
+        self.layer.borderColor = color
+    }
 }

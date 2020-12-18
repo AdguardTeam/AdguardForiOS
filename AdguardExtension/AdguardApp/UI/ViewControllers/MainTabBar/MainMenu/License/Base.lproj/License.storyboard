@@ -1295,7 +1295,6 @@ ADS &amp; TRACKERS</string>
                     </view>
                     <navigationItem key="navigationItem" id="MLR-gq-0tv"/>
                     <connections>
-                        <outlet property="appleLoginButton" destination="PSE-uk-lAE" id="bqj-xr-JTz"/>
                         <outletCollection property="buttons" destination="PSE-uk-lAE" collectionClass="NSMutableArray" id="Kfk-PH-E2H"/>
                         <outletCollection property="buttons" destination="t9V-eQ-pZp" collectionClass="NSMutableArray" id="ehN-sl-V24"/>
                         <outletCollection property="buttons" destination="Z9l-1b-Wa8" collectionClass="NSMutableArray" id="6sH-1B-CzN"/>

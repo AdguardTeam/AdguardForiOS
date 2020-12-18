@@ -18,23 +18,16 @@
 
 import UIKit
 
-private enum SocialProvider: String {
-    case google
-    case apple
-    case facebook
-}
-
 class SigninController: UIViewController {
-    @IBOutlet weak var appleLoginButton: ThemableButton!
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
-
+    
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-
+    
     
     private var notificationToken: NotificationToken?
     private var notificationObserver: Any?
@@ -47,7 +40,7 @@ class SigninController: UIViewController {
         }
         
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: nil)
+                                                                      object: nil, queue: .main)
         { [weak self](notification) in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -60,15 +53,15 @@ class SigninController: UIViewController {
     
     
     // MARK: - Actions
-
+    
     @IBAction func appleLoginButtonTapped(_ sender: UIButton) {
         makeLogin(with: .apple)
-
+        
     }
     
     @IBAction func googleLoginButtonTapped(_ sender: UIButton) {
         makeLogin(with: .google)
-
+        
     }
     
     @IBAction func facebookLoginButtonTapped(_ sender: UIButton) {
@@ -78,11 +71,7 @@ class SigninController: UIViewController {
     // MARK: - Private methods
     
     private func prepareButtons() {
-        buttons.forEach {
-            $0.layer.cornerRadius = $0.frame.height / 4
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = theme.lightGrayTextColor.cgColor
-        }
+        buttons.forEach { $0.applySigninButtonStyle(color: theme.lightGrayTextColor.cgColor ) }
     }
     
     private func updateTheme() {
@@ -95,48 +84,34 @@ class SigninController: UIViewController {
     }
     
     private func makeLogin(with socialProvider: SocialProvider) {
-        let uuid = UUID().uuidString
-        let params =
-            ["response_type" : "token",
-            "client_id" : "adguard-ios",
-            "scope" : "trust",
-            "redirect_uri" : "adguard://auth",
-            "state" : uuid,
-            "social_provider" : socialProvider.rawValue]
-        
-        resources.sharedDefaults().setValue(uuid, forKey: AEDefaultsAuthStateString)
-        guard let request = ABECRequest.getFor(URL(string: "https://auth.adguard.com/oauth/authorize")!, parameters: params) as? URLRequest else { return }
-        guard let url = request.url else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let state = UUID().uuidString
+        resources.sharedDefaults().setValue(state, forKey: AEDefaultsAuthStateString)
+        SigninHelper.openBrowser(with: socialProvider, state: state)
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+        // skip notification if this controler is not placed on top of navigation stack
+        if self.navigationController?.viewControllers.last != self {
+            return
+        }
+        
+        let type = info[PurchaseService.kPSNotificationTypeKey] as? String
+        let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+        
+        switch type {
+        
+        case PurchaseService.kPSNotificationLoginSuccess:
+            self.loginSuccess()
+        case PurchaseService.kPSNotificationLoginFailure:
+            self.loginFailure(error)
+        case PurchaseService.kPSNotificationLoginPremiumExpired:
+            self.premiumExpired()
+        case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+            self.notPremium()
             
-            // skip notification if this controler is not placed on top of navigation stack
-            if self.navigationController?.viewControllers.last != self {
-                return
-            }
-            
-            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-            
-            switch type {
-                
-            case PurchaseService.kPSNotificationLoginSuccess:
-                self.loginSuccess()
-            case PurchaseService.kPSNotificationLoginFailure:
-                self.loginFailure(error)
-            case PurchaseService.kPSNotificationLoginPremiumExpired:
-                self.premiumExpired()
-            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
-                self.notPremium()
-                
-            default:
-                break
-            }
+        default:
+            break
         }
     }
     
@@ -162,7 +137,7 @@ class SigninController: UIViewController {
         var alertMessage: String?
         
         switch error!.code {
-            
+        
         case LoginService.loginBadCredentials:
             alertMessage = ACLocalizedString("bad_credentials_error", nil)
         case LoginService.accountIsDisabled:
