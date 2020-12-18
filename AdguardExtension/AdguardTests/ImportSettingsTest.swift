@@ -149,7 +149,7 @@ class ImportSettingsTest: XCTestCase {
         var settings = Settings()
         settings.dnsServerId = 123
         
-        let provider = DnsProviderInfo(name: "ag family", isCustomProvider: false, providerId: 100)
+        let provider = DnsProviderInfo(name: "ag family", providerId: 100)
         provider.servers = [DnsServerInfo(dnsProtocol: .doh, serverId: "123", name: "ag family test", upstreams: [], providerId: 100)]
         dnsProviders.allProviders = [provider]
         

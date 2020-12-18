@@ -211,7 +211,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
             }
             
             let protocols = supportedServers.map { $0.dnsProtocol }
-            let nativeProvider = DnsProviderInfo(name: provider.name, logo: provider.logo, logoDark: provider.logoDark, summary: provider.summary, protocols: protocols, features: provider.features, website: provider.website, servers: supportedServers, providerId: provider.providerId, isCustomProvider: provider.isCustomProvider)
+            let nativeProvider = DnsProviderInfo(name: provider.name, logo: provider.logo, logoDark: provider.logoDark, summary: provider.summary, protocols: protocols, features: provider.features, website: provider.website, servers: supportedServers, providerId: provider.providerId)
             nativerProviders.append(nativeProvider)
         }
         return nativerProviders

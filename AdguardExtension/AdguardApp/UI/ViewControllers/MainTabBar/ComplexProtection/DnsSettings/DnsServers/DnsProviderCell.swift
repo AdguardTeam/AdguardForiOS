@@ -65,7 +65,7 @@ struct DnsProviderCellModel {
     init(provider: DnsProviderInfo, isCurrent: Bool, isDefaultProvider: Bool) {
         self.name = provider.name
         self.providerDescription = provider.summary
-        self.isCustomProvider = provider.isCustomProvider ?? false
+        self.isCustomProvider = provider.isCustomProvider
         self.providerId = provider.providerId
         self.isCurrent = isCurrent
         self.isDefaultProvider = isDefaultProvider

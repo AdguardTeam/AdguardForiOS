@@ -84,7 +84,6 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
         migrateCurrentDnsServerInUserDefaults(resources: resources)
         setIdsForCustomProviders()
         setProviderIdForCurrentDnsServer()
-        setBoolFlagForDnsProviders()
     }
     
     private func migrateCurrentDnsServerInUserDefaults(resources: AESharedResourcesProtocol) {
@@ -134,11 +133,5 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
         activeDnsServer = currentServer
         
         DDLogInfo("Finished setting provider id for current DNS server")
-    }
-    
-    private func setBoolFlagForDnsProviders() {
-        DDLogInfo("Setting isCustomProvider flag for custom providers")
-        customProviders.forEach { $0.isCustomProvider = true }
-        DDLogInfo("Finished setting isCustomProvider flag")
     }
 }
