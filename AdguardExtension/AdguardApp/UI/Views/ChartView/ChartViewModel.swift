@@ -109,9 +109,10 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->()) {
         obtainStatisticsQueue.async { [weak self] in
             guard let self = self else { return }
-            
-            self.timer?.invalidate()
-            self.timer = nil
+            DispatchQueue.main.async {
+                self.timer?.invalidate()
+                self.timer = nil
+            }
             
             if fromUI {
                 /*
@@ -135,10 +136,11 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             self.changeChart {
                 completion()
             }
-            
-            self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-                self?.obtainStatistics(false) {}
-            })
+            DispatchQueue.main.async {
+                self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
+                    self?.obtainStatistics(false) {}
+                })
+            }
         }
     }
     
