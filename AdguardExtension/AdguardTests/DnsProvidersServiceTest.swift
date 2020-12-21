@@ -136,7 +136,7 @@ class DnsProvidersServiceTest: XCTestCase {
     
     func testServerMigration3() {
         
-        resources.sharedDefaults().removeObject(forKey: AEDefaultsActiveDnsServer)
+        resources.sharedDefaults().removeObject(forKey: ActiveDnsServer)
         
         let providersService = DnsProvidersService(resources: resources)
         

@@ -26,7 +26,7 @@ class DnsProvidersMigrationsTest: XCTestCase {
         
         // Save server like it was saved before 593 build
         let serverData = NSKeyedArchiver.archivedData(withRootObject: currentServer!)
-        resources.sharedDefaults().setValue(serverData, forKey: AEDefaultsActiveDnsServer)
+        resources.sharedDefaults().setValue(serverData, forKey: "AEDefaultsActiveDnsServer")
         
         let dnsProvidersMigratable = dnsProviders as! DnsProvidersServiceMigratable
         dnsProvidersMigratable.reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: resources)
