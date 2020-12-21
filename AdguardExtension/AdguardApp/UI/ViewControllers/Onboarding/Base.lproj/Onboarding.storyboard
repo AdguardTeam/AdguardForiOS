@@ -58,11 +58,22 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
-                                <rect key="frame" x="24" y="734.33333333333337" width="366" height="31.666666666666629"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
+                                <rect key="frame" x="50" y="315" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="eTR-e9-Jvq"/>
+                                    <constraint firstAttribute="height" constant="24" id="iCl-ew-uFV"/>
+                                </constraints>
+                                <state key="normal" image="check-off"/>
+                                <state key="selected" image="check-on"/>
+                                <connections>
+                                    <action selector="checkBoxTapped:" destination="e6X-5r-5Vh" eventType="touchUpInside" id="ruy-Su-2oa"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
+                                <rect key="frame" x="82" y="307" width="196" height="32"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -70,30 +81,31 @@
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="bzE-5b-o1U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="24" id="18V-IF-PeJ"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="1Iu-vQ-YEF"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="cMV-qC-ZdE" secondAttribute="centerX" constant="20" id="2yu-gF-WO9"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="-100" id="8Im-ur-4u7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
                             </constraint>
-                            <constraint firstItem="cMV-qC-ZdE" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="bottom" constant="32" id="8zc-5z-dLU">
-                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                            </constraint>
                             <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.8" id="Hgl-nq-rcG"/>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="8" id="Ixo-7d-cjU"/>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="50" id="Jzk-wG-0Sf"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="bottom" secondItem="cMV-qC-ZdE" secondAttribute="bottom" constant="24" id="KDB-AA-ymW"/>
                             <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="Llk-Ue-xSr"/>
                             <constraint firstItem="kaF-eB-tBX" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="OQI-C1-zfb"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="Vov-t2-XTH" secondAttribute="trailing" constant="8" id="kD7-8I-2hD"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="hak-o1-HWp" secondAttribute="trailing" constant="24" id="kqU-iI-zpx"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="top" secondItem="kaF-eB-tBX" secondAttribute="bottom" constant="24" id="mms-Cm-RJW"/>
+                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="42" id="p9S-W2-i9d"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="p9T-sb-r3y"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="q3H-VP-2Fe"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="szy-0O-XCQ"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="cMV-qC-ZdE" secondAttribute="trailing" constant="24" id="uvM-PD-nh6"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="wFe-YT-FFj"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.4" id="y9Q-Av-vlJ"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="top" secondItem="hak-o1-HWp" secondAttribute="bottom" constant="93" id="yaV-TS-lm2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="bzE-5b-o1U"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="kqU-iI-zpx"/>
@@ -127,6 +139,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ofe-T6-OfJ"/>
                     <connections>
+                        <outlet property="eulaAndPrivacyCheckBox" destination="Vov-t2-XTH" id="W0w-mm-6TD"/>
                         <outlet property="licenseTextView" destination="ido-Ag-IK7" id="A1V-Ii-26Q"/>
                         <outlet property="nextButton" destination="cMV-qC-ZdE" id="93K-L6-kGt"/>
                         <outlet property="titleLabel" destination="hak-o1-HWp" id="vXr-x0-p2B"/>
@@ -876,17 +889,25 @@
             <point key="canvasLocation" x="-2054" y="78"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eyE-5U-rZR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="LoadScreen" width="64" height="64"/>
         <image name="arrow" width="45" height="60"/>
+        <image name="check-off" width="24" height="24"/>
+        <image name="check-on" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
         <image name="icon_play" width="16" height="16"/>
         <image name="nil" width="16" height="16"/>
         <image name="safari_onboarding" width="24" height="24"/>
         <image name="settings" width="24" height="24"/>
         <image name="switch" width="41" height="24"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="eyE-5U-rZR"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -131,6 +131,8 @@ NSString *CustomBlockingIpv6 = @"CustomBlockingIpv6";
 
 NSString *BlockIpv6 = @"BlockIpv6";
 
+NSString *EulaAndPrivcayAcceptance = @"EulaAndPrivcayAcceptance";
+
 #define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
 #define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
 #define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"

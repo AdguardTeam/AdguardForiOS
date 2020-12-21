@@ -23,9 +23,11 @@ class IntroductionOnboardingController: UIViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var licenseTextView: UITextView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var eulaAndPrivacyCheckBox: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private var themeToken: NotificationToken?
     
     var delegate: OnboardingControllerDelegate?
@@ -34,7 +36,6 @@ class IntroductionOnboardingController: UIViewController {
         super.viewDidLoad()
         
         updateTheme()
-        
         setupBackButton()
         
         if let navController = navigationController as? MainNavigationController {
@@ -49,6 +50,7 @@ class IntroductionOnboardingController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? OnboardingAnimationsController {
             controller.delegate = delegate
+            resources.eulaAndPrivcayAcceptance = eulaAndPrivacyCheckBox.isSelected
         }
     }
     
@@ -61,6 +63,14 @@ class IntroductionOnboardingController: UIViewController {
         nextButton.layer.cornerRadius = nextButton.frame.height / 2
     }
     
+    //MARK: - Actions
+    
+    @IBAction func checkBoxTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        updateNextButton(state: sender.isSelected)
+    }
+    
+    //MARK: - Private mathods
     private func setupLicenseTextView() {
         let format = String.localizedString("introduction_license_agreement")
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
@@ -68,21 +78,9 @@ class IntroductionOnboardingController: UIViewController {
         let htmlString = String(format: format, privacy, eula)
         
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .left)
         
-        let style = NSMutableParagraphStyle()
-        style.alignment = .center
-        
-        guard let data = htmlString.data(using: .utf8) else { return }
-        guard let attributedString = try? NSMutableAttributedString(
-            data: data,
-            options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
-                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
-            documentAttributes: nil) else { return }
-        
-        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: theme.grayTextColor, NSAttributedString.Key.paragraphStyle : style], range: NSRange(location: 0, length: attributedString.length))
-        attributedString.addAttributes([NSAttributedString.Key.font: font], range: NSRange(location: 0, length: attributedString.length))
-        
-        licenseTextView.attributedText = attributedString
+        licenseTextView.attributedText = attributeString
     }
     
     private func updateTheme() {
@@ -91,5 +89,16 @@ class IntroductionOnboardingController: UIViewController {
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
+        updateNextButton(state: resources.eulaAndPrivcayAcceptance)
+    }
+    
+    private func updateNextButton(state: Bool) {
+        nextButton.isEnabled = state
+        
+        if nextButton.isEnabled {
+            nextButton.applyStandardGreenStyle()
+        } else {
+            nextButton.applyStandardOpaqueStyle()
+        }
     }
 }

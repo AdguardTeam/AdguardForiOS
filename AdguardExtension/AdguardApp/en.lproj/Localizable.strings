@@ -731,7 +731,7 @@
 "leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"introduction_license_agreement" = "I have read and agree with <br /><a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Requests";
