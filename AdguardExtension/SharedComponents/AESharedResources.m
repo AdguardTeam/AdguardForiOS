@@ -99,7 +99,7 @@ NSString *StatisticsSaveTime = @"StatisticsSaveTime";
 
 NSString *DnsActiveProtocols = @"DnsActiveProtocols";
 
-NSString* AEDefaultsActiveDnsServer = @"AEDefaultsActiveDnsServer";
+NSString* ActiveDnsServer = @"ActiveDnsServer";
 
 NSString* AESystemProtectionEnabled = @"AESystemProtectionEnabled";
 

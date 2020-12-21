@@ -497,7 +497,7 @@ import Foundation
 extension AESharedResourcesProtocol {
     dynamic var currentAdGuardImplementationDnsServer: DnsServerInfo? {
         get {
-            if let serverData = sharedDefaults().data(forKey: AEDefaultsActiveDnsServer) {
+            if let serverData = sharedDefaults().data(forKey: ActiveDnsServer) {
                 let decoder = JSONDecoder()
                 let serverInfo = try? decoder.decode(DnsServerInfo.self, from: serverData)
                 return serverInfo
@@ -511,7 +511,7 @@ extension AESharedResourcesProtocol {
                 let serverData = try? encoder.encode(serverToSave)
                 dataToSave = serverData
             }
-            sharedDefaults().setValue(dataToSave, forKey: AEDefaultsActiveDnsServer)
+            sharedDefaults().setValue(dataToSave, forKey: ActiveDnsServer)
             NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
         }
     }

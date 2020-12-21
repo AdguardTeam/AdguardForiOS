@@ -88,12 +88,18 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
     
     private func migrateCurrentDnsServerInUserDefaults(resources: AESharedResourcesProtocol) {
         DDLogInfo("Get Data with NSKeyedUnarchver and resave it with JSONEncoder for AEDefaultsActiveDnsServer")
-        guard let data = resources.sharedDefaults().object(forKey:AEDefaultsActiveDnsServer) as? Data else {
+        
+        defer {
+            resources.sharedDefaults().removeObject(forKey: "AEDefaultsActiveDnsServer")
+        }
+        
+        guard let data = resources.sharedDefaults().object(forKey: "AEDefaultsActiveDnsServer") as? Data else {
             DDLogWarn("Nil data for current DNS Server")
             return
         }
-        let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo
-        activeDnsServer = dnsServer
+        if let dnsServer = NSKeyedUnarchiver.unarchiveObject(with: data) as? DnsServerInfo {
+            activeDnsServer = dnsServer
+        }
     }
     
     private func setIdsForCustomProviders() {
