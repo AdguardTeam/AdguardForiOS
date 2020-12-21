@@ -227,6 +227,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         processState()
         updateProtectionStates()
         updateProtectionStatusText()
+        chartModel.obtainStatistics(false) {}
     }
     
     override func viewWillDisappear(_ animated: Bool) {
