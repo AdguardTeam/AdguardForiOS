@@ -31,6 +31,12 @@ enum ProductType {
     case subscription, lifetime
 }
 
+enum SocialProvider: String {
+    case google
+    case apple
+    case facebook
+}
+
 typealias Product = (type: ProductType, price: String, period: Period?, trialPeriod: Period?, productId: String)
 
 // MARK:  service protocol -
@@ -119,6 +125,10 @@ protocol PurchaseServiceProtocol {
     
     /** handle setapp subscription changes */
     func updateSetappState(subscription: SetappSubscription)
+
+    /** generate URL for OAUTH */
+    func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL?
+
 }
 
 // MARK: - public constants -
@@ -198,6 +208,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let PRODUCT_ID_PARAM = "product_id"
     private let PREMIUM_STATUS_PARAM = "premium_status"
     private let EXPIRATION_DATE_PARAM = "expiration_date"
+    
+    private let AUTH_RESPONSE_TYPE_PARAM = "response_type"
+    private let AUTH_CLIENT_ID_PARAM = "client_id"
+    private let AUTH_SCOPE_PARAM = "scope"
+    private let AUTH_REDIRECT_URI_PARAM = "redirect_uri"
+    private let AUTH_STATE_PARAM = "state"
+    private let AUTH_SOCIAL_PROVIDER = "social_provider"
     
     private let authUrl = "https://auth.adguard.com/oauth/authorize"
     
@@ -502,6 +519,19 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
                 }
             }
         }
+    }
+    
+    func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL? {
+        let params =
+            [AUTH_RESPONSE_TYPE_PARAM : "token",
+            AUTH_CLIENT_ID_PARAM : "adguard-ios",
+            AUTH_SCOPE_PARAM : "trust",
+            AUTH_REDIRECT_URI_PARAM : "adguard://auth",
+            AUTH_STATE_PARAM : state,
+            AUTH_SOCIAL_PROVIDER : socialProvider.rawValue]
+        guard let urlString = params.constructLink(url: authUrl) else { return nil }
+        guard let url = URL(string: urlString) else { return nil }
+        return url
     }
     
     // MARK: - private methods

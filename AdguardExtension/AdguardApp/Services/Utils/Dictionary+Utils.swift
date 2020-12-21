@@ -29,7 +29,7 @@ extension Dictionary {
         .data(using: .utf8)
     }
     
-    func parceParamsWith(url: String) -> String? {
+    func constructLink(url: String) -> String? {
         guard let data = self.percentEncoded() else { return nil }
         guard let params = String(data: data, encoding: .utf8) else { return nil }
         return url + "?" + params

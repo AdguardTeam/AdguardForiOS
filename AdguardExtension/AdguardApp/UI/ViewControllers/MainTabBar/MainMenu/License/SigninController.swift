@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import SafariServices
 
 class SigninController: UIViewController {
     
@@ -27,10 +28,13 @@ class SigninController: UIViewController {
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     
     private var notificationToken: NotificationToken?
-    private var notificationObserver: Any?
+    private var notificationObserver: NotificationToken?
+    
+    private var sfSafariViewController: SFSafariViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +43,7 @@ class SigninController: UIViewController {
             self?.updateTheme()
         }
         
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                                      object: nil, queue: .main)
-        { [weak self](notification) in
+        notificationObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
             }
@@ -86,7 +88,9 @@ class SigninController: UIViewController {
     private func makeLogin(with socialProvider: SocialProvider) {
         let state = UUID().uuidString
         resources.sharedDefaults().setValue(state, forKey: AEDefaultsAuthStateString)
-        SigninHelper.openBrowser(with: socialProvider, state: state)
+        guard let url = purchaseService.generateAuthURL(state: state, socialProvider: socialProvider) else { return }
+        sfSafariViewController = SFSafariViewController(url: url)
+        present(sfSafariViewController!, animated: true, completion: nil)
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
@@ -116,9 +120,8 @@ class SigninController: UIViewController {
     }
     
     private func loginSuccess() {
-        let body = ACLocalizedString("login_success_message", nil)
-        navigationController?.popViewController(animated: true)
-        notificationService.postNotificationInForeground(body: body, title: "")
+        let message = ACLocalizedString("login_success_message", nil)
+        dissmisController(message: message)
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -153,17 +156,24 @@ class SigninController: UIViewController {
         }
         
         if alertMessage != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
+            dissmisController(message: alertMessage!)
         }
     }
     
     private func premiumExpired() {
         let body = ACLocalizedString("login_premium_expired_message", nil)
-        notificationService.postNotificationInForeground(body: body, title: "")
+        dissmisController(message: body)
     }
     
     private func notPremium() {
         let body = ACLocalizedString("not_premium_message", nil)
-        notificationService.postNotificationInForeground(body: body, title: "")
+        dissmisController(message: body)
+    }
+    
+    private func dissmisController(message: String) {
+        sfSafariViewController?.dismiss(animated: true, completion: {
+            self.notificationService.postNotificationInForeground(body: message, title: "")
+        })
+        self.navigationController?.popViewController(animated: false)
     }
 }
