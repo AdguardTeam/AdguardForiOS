@@ -20,6 +20,9 @@ Adguard.ipa
 # vscode config
 .vscode
 
+# idea files
+.idea
+
 # ------------------ OS X -----------------
 .DS_Store
 
