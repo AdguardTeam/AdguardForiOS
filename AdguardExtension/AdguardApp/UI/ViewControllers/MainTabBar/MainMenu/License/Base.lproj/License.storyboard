@@ -811,19 +811,19 @@ ADS &amp; TRACKERS</string>
             </objects>
             <point key="canvasLocation" x="2760" y="3569"/>
         </scene>
-        <!--Login Controller-->
+        <!--Email Sign In Controller-->
         <scene sceneID="Dmi-cL-90j">
             <objects>
-                <viewController storyboardIdentifier="LoginScene" id="YAD-0P-paW" customClass="LoginController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailSignInScene" id="YAD-0P-paW" customClass="EmailSignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gvD-Ne-xOz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWX-pJ-1zR">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WT-eT-xqR">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJj-cc-Ko5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="61" width="382" height="17"/>
