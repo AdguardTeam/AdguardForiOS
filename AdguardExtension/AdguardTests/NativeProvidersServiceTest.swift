@@ -41,7 +41,7 @@ class NativeProvidersServiceTest: XCTestCase {
             let providerId = i
             let servers = generateServers(providerId: providerId)
             let protocols = servers.map { $0.dnsProtocol }
-            let provider = DnsProviderInfo(name: "name\(i)", logo: "logo\(i)", logoDark: "logoDark\(i)", summary: "summary\(i)", protocols: protocols, features: [], website: "website\(i)", servers: servers, providerId: providerId, isCustomProvider: i % 5 == 0)
+            let provider = DnsProviderInfo(name: "name\(i)", logo: "logo\(i)", logoDark: "logoDark\(i)", summary: "summary\(i)", protocols: protocols, features: [], website: "website\(i)", servers: servers, providerId: providerId)
             adguardProviders.append(provider)
         }
         return adguardProviders

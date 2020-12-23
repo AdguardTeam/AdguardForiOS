@@ -304,7 +304,7 @@ extern NSString* _Nonnull DnsActiveProtocols;
 /**
  User defaults key for active dns server
  */
-extern NSString* _Nonnull AEDefaultsActiveDnsServer;
+extern NSString* _Nonnull ActiveDnsServer;
 
 /**
 User defaults key for complex protection state

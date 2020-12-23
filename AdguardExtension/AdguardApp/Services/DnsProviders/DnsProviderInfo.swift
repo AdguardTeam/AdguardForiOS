@@ -143,12 +143,12 @@ class DnsServerInfo : ACObject, Codable {
     var features: [DnsProviderFeature]?
     var website: String?
     var providerId: Int
-    var isCustomProvider: Bool
+    var isCustomProvider: Bool { providerId <= DnsProvidersService.customProviderIdUpperRange }
     @objc var servers: [DnsServerInfo]?
     
     // MARK: - initializers and NSCoding methods
     
-    init(name: String, logo: String?, logoDark: String?, summary: String?, protocols: [DnsProtocol]?, features: [DnsProviderFeature]?, website: String?, servers: [DnsServerInfo]?, providerId: Int, isCustomProvider: Bool) {
+    init(name: String, logo: String?, logoDark: String?, summary: String?, protocols: [DnsProtocol]?, features: [DnsProviderFeature]?, website: String?, servers: [DnsServerInfo]?, providerId: Int) {
         self.name = name
         self.logo = logo
         self.logoDark = logoDark
@@ -158,20 +158,17 @@ class DnsServerInfo : ACObject, Codable {
         self.website = website
         self.servers = servers
         self.providerId = providerId
-        self.isCustomProvider = isCustomProvider
         super.init()
     }
     
-    init(name: String, isCustomProvider: Bool, providerId: Int) {
+    init(name: String, providerId: Int) {
         self.name = name
-        self.isCustomProvider = isCustomProvider
         self.providerId = providerId
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "name") as! String
-        isCustomProvider = aDecoder.decodeBool(forKey: "isCustomProvider")
         providerId = aDecoder.decodeInteger(forKey: "providerId")
         servers = aDecoder.decodeObject(forKey: "servers") as? [DnsServerInfo]
         super.init(coder: aDecoder)
@@ -180,7 +177,6 @@ class DnsServerInfo : ACObject, Codable {
     override func encode(with aCoder: NSCoder) {
         super.encode(with: aCoder)
         aCoder.encode(name, forKey: "name")
-        aCoder.encode(isCustomProvider, forKey: "isCustomProvider")
         aCoder.encode(providerId, forKey: "providerId")
         aCoder.encode(servers, forKey: "servers")
     }

@@ -879,7 +879,7 @@
 "low_level_description" = "<b style=color:#c23814ff>WARNING!</b> Enabling these features may break the Internet connection or compromise your security and privacy.";
 
 /* (LowLevelSettingsController) Low level settings beta channel link */
-"low_level_beta_link" = "Interested in cool new AdGuard features? Try our <a href=\"%@\">beta channel.</a>";
+"low_level_beta_link" = "Interested in cool new AdGuard features? Try our <a href=\"%@\">beta channel</a>.";
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "List of plain DNS servers to be used to resolve DOH/DOT hostnames (if any)";

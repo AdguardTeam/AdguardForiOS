@@ -76,8 +76,8 @@
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Advanced settings";
 
-/* Class = "UILabel"; text = "Block Ipv6"; ObjectID = "NC2-8A-E6f"; */
-"NC2-8A-E6f.text" = "Block Ipv6";
+/* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
+"NC2-8A-E6f.text" = "Block IPv6";
 
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
 "ObO-g4-VHL.text" = "You have 6 content blockers, each of them can contain up to 50,000 rules";

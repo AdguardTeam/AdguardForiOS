@@ -55,6 +55,7 @@ import Foundation
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
     
+    static let customProviderIdUpperRange = 9999
     static let systemDefaultProviderId = 10000
     
     private var predefinedProvidersInternal: [DnsProviderInfo]?
@@ -156,7 +157,7 @@ import Foundation
             guard let self = self else { return }
             let maxId = self.customProviders.map{ $0.providerId }.max() ?? 0
             let providerId = maxId + 1
-            let provider = DnsProviderInfo(name: name, isCustomProvider: true, providerId: providerId)
+            let provider = DnsProviderInfo(name: name, providerId: providerId)
             let serverProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         
             let customServersCount = self.customProviders.flatMap({ $0.servers ?? [] }).count
@@ -366,7 +367,7 @@ import Foundation
         let dnsProviders = getLocalizedProvidersForCurrentLocale(dnsProviders: dnsProviders, features: features, localizationsJson: json)
         
         self.predefinedProvidersInternal = dnsProviders.map { provider -> DnsProviderInfo in
-            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "", isCustomProvider: false, providerId: provider.provider.providerId)
+            let providerInfo = DnsProviderInfo(name: provider.localizedName ?? "", providerId: provider.provider.providerId)
             
             providerInfo.logo = provider.provider.logo
             providerInfo.logoDark = "\(provider.provider.logo)_dark"
@@ -496,7 +497,7 @@ import Foundation
 extension AESharedResourcesProtocol {
     dynamic var currentAdGuardImplementationDnsServer: DnsServerInfo? {
         get {
-            if let serverData = sharedDefaults().data(forKey: AEDefaultsActiveDnsServer) {
+            if let serverData = sharedDefaults().data(forKey: ActiveDnsServer) {
                 let decoder = JSONDecoder()
                 let serverInfo = try? decoder.decode(DnsServerInfo.self, from: serverData)
                 return serverInfo
@@ -510,7 +511,7 @@ extension AESharedResourcesProtocol {
                 let serverData = try? encoder.encode(serverToSave)
                 dataToSave = serverData
             }
-            sharedDefaults().setValue(dataToSave, forKey: AEDefaultsActiveDnsServer)
+            sharedDefaults().setValue(dataToSave, forKey: ActiveDnsServer)
             NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
         }
     }
