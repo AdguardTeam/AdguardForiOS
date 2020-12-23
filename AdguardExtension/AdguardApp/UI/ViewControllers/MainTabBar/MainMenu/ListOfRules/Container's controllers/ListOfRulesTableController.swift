@@ -50,22 +50,24 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     var model: ListOfRulesModelProtocol? = nil
     
+    private var oldState: ControllerState = .normal
+    
     var state: ControllerState {
         get {
             return model?.state ?? .normal
         }
         set {
             model?.rules.forEach({ $0.selected = false })
-            
-            if newValue == .searching && state == .normal {
+            if newValue == .searching && oldState == .normal {
                 deleteSections()
-            } else if newValue == .normal && state == .searching {
+            } else if newValue == .normal && oldState == .searching {
                 insertSections()
             } else {
                 DispatchQueue.main.async {[weak self] in
                     self?.tableView.reloadData()
                 }
             }
+            oldState = state
         }
     }
     

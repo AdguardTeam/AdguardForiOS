@@ -46,6 +46,8 @@ class ListOfRulesController: UIViewController {
     private var tableController: ListOfRulesTableController?
     private var textViewController: EditingUserFilterController?
     private var keyboardMover: KeyboardMover?
+    
+    private var isSafariUserFilterScreenShowed = false
 
     private var state: ControllerState {
         get {
@@ -83,6 +85,9 @@ class ListOfRulesController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableViewContainer.isHidden = false
+        listOfRulesContainer.isHidden = true
         
         if newRuleText != nil && newRuleText!.count > 0 {
             tableController?.addRule(rule: newRuleText!)
@@ -144,24 +149,34 @@ class ListOfRulesController: UIViewController {
     }
     
     @IBAction func searchButtonAction(_ sender: UIBarButtonItem) {
-        navigationItem.setHidesBackButton(true, animated:true)
-        navigationItem.rightBarButtonItems = [cancelButton]
-        
+        changeNavigationItems(isHidden: true, items: [cancelButton])
         state = .searching
     }
     
     @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
-        navigationItem.setHidesBackButton(false, animated:true)
-        navigationItem.rightBarButtonItems = [searchButton]
-        
-        state = .normal
-    }
-    
-    @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
+        changeNavigationItems(isHidden: false, items: [searchButton])
         state = .normal
     }
     
     // MARK: - Private methods -
+    
+    private func changeNavigationItems(isHidden: Bool, items:[UIBarButtonItem]) {
+        navigationItem.setHidesBackButton(isHidden, animated: true)
+        navigationItem.rightBarButtonItems = items
+    }
+    
+    private func cancelByNormalState() {
+        if state == .normal {
+            navigationController?.popViewController(animated: true)
+        } else {
+            if let item = navigationItem.rightBarButtonItem {
+                cancelButtonAction(item)
+            } else {
+                changeNavigationItems(isHidden: false, items: [searchButton])
+                state = .normal
+            }
+        }
+    }
     
     // MARK: - Update theme
     
@@ -175,24 +190,27 @@ class ListOfRulesController: UIViewController {
     // MARK: - Change main screen
     
     private func changeScreen(){
-        if state == .editing  {
+        switch state {
+        case .editing:
             textViewController?.textView.text = model?.rules.map { $0.rule }.joined(separator: "\n")
             textViewController?.helperLabel.isHidden = !(textViewController?.textView.text == "")
-            showSafariUserFilterScreen()
+            prepareForShowingSubscreens()
             textViewController?.textView.becomeFirstResponder()
-        } else {
-            showInitialTable()
+        case .searching:
+            tableController?.state = state
+        case .normal:
+            if !isSafariUserFilterScreenShowed {
+                tableController?.state = state
+            } else {
+                prepareForShowingSubscreens()
+            }
         }
     }
     
-    private func showSafariUserFilterScreen(){
-        tableViewContainer.isHidden = true
-        listOfRulesContainer.isHidden = false
-    }
-    
-    private func showInitialTable(){
-        listOfRulesContainer.isHidden = true
-        tableViewContainer.isHidden = false
+    private func prepareForShowingSubscreens() {
+        tableViewContainer.isHidden = !tableViewContainer.isHidden
+        listOfRulesContainer.isHidden = !listOfRulesContainer.isHidden
+        isSafariUserFilterScreenShowed = !isSafariUserFilterScreenShowed
     }
     
     // MARK: - Change buttons titles, colors and actions
@@ -282,7 +300,7 @@ class ListOfRulesController: UIViewController {
             ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: nil, message: error)
         })
         
-        navigationItem.rightBarButtonItems = [searchButton]
+        changeNavigationItems(isHidden: false, items: [searchButton])
         state = .normal
     }
     
@@ -290,7 +308,7 @@ class ListOfRulesController: UIViewController {
         model?.deleteSelectedRules(completionHandler: { rulesWereDeleted in
             DispatchQueue.main.async { [weak self] in
                 self?.tableController?.tableView.reloadData()
-                if rulesWereDeleted { self?.state = .normal }
+                if rulesWereDeleted { self?.cancelByNormalState() }
             }
             }, errorHandler: {[weak self] (error) in
                 guard let sSelf = self else { return }
@@ -305,10 +323,6 @@ class ListOfRulesController: UIViewController {
     }
     
     @objc func backButtonPressed(sender: UIBarButtonItem){
-        if state == .normal {
-            navigationController?.popViewController(animated: true)
-        } else {
-            state = .normal
-        }
+       cancelByNormalState()
     }
 }
