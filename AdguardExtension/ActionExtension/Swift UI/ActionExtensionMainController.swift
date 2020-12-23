@@ -192,6 +192,7 @@ class ActionExtensionMainController: UITableViewController {
     @IBAction func clickedMissedAd(_ sender: UITapGestureRecognizer) {
         guard let url = support?.composeWebReportUrl(self.url) else { return }
         openWithUrl(url)
+        self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
     
     @IBAction func clickedBlockElement(_ sender: UITapGestureRecognizer) {
