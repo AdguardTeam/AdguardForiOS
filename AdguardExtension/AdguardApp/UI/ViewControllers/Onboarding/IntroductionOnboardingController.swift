@@ -22,7 +22,7 @@ class IntroductionOnboardingController: UIViewController {
     
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var licenseTextView: UITextView!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var eulaAndPrivacyCheckBox: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -67,7 +67,7 @@ class IntroductionOnboardingController: UIViewController {
     
     @IBAction func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        updateNextButton(state: sender.isSelected)
+        nextButton.isEnabled = sender.isSelected
     }
     
     //MARK: - Private mathods
@@ -89,16 +89,6 @@ class IntroductionOnboardingController: UIViewController {
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
-        updateNextButton(state: resources.eulaAndPrivcayAcceptance)
-    }
-    
-    private func updateNextButton(state: Bool) {
-        nextButton.isEnabled = state
-        
-        if nextButton.isEnabled {
-            nextButton.applyStandardGreenStyle()
-        } else {
-            nextButton.applyStandardOpaqueStyle()
-        }
+        nextButton.isEnabled = eulaAndPrivacyCheckBox.isSelected
     }
 }
