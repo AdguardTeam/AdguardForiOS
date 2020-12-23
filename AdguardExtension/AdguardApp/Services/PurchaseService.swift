@@ -44,7 +44,7 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  PurchaseService is a service responsible for all purchases.
  The user can get professional status through renewable subscriptions(in-app purchases) or through an Adguard license.
  In-app purchases are carried out directly in this service.
- Work with Adguard Licenses is delegated to LoginController
+ Work with Adguard Licenses is delegated to EmailSignInController
  */
 
 protocol PurchaseServiceProtocol {

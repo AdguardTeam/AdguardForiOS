@@ -19,7 +19,7 @@
 import UIKit
 import SafariServices
 
-class SigninController: UIViewController {
+class SignInController: UIViewController {
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -31,19 +31,23 @@ class SigninController: UIViewController {
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     
-    private var notificationToken: NotificationToken?
-    private var notificationObserver: NotificationToken?
+    private var notificationThemeObserve: NotificationToken?
+    private var notificationSignInObserver: NotificationToken?
     
     private var sfSafariViewController: SFSafariViewController?
+    
+    private var signInFailureHandler: SignInFailureHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
+        
+        notificationThemeObserve = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         
-        notificationObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
+        notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
             }
@@ -73,7 +77,7 @@ class SigninController: UIViewController {
     // MARK: - Private methods
     
     private func prepareButtons() {
-        buttons.forEach { $0.applySigninButtonStyle(color: theme.lightGrayTextColor.cgColor ) }
+        buttons.forEach { $0.applyRoundRectStyle(color: theme.lightGrayTextColor.cgColor ) }
     }
     
     private func updateTheme() {
@@ -125,38 +129,8 @@ class SigninController: UIViewController {
     }
     
     private func loginFailure(_ error: NSError?) {
-        
-        if error == nil || error!.domain != LoginService.loginErrorDomain {
-            // unknown error
-            let errorDescription = error?.localizedDescription ?? "nil"
-            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
-            let message = ACLocalizedString("login_error_message", nil)
-            
-            notificationService.postNotificationInForeground(body: message, title: "")
-            return
-        }
-        
-        // errors we show in alert dialog
-        var alertMessage: String?
-        
-        switch error!.code {
-        
-        case LoginService.loginBadCredentials:
-            alertMessage = ACLocalizedString("bad_credentials_error", nil)
-        case LoginService.accountIsDisabled:
-            alertMessage = ACLocalizedString("account_is_disabled_error", nil)
-        case LoginService.accountIsLocked:
-            alertMessage = ACLocalizedString("account_is_locked_error", nil)
-        case LoginService.loginMaxComputersExceeded:
-            alertMessage = ACLocalizedString("login_max_computers_exceeded", nil)
-        case LoginService.loginError:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        default:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        }
-        
-        if alertMessage != nil {
-            dissmisController(message: alertMessage!)
+        if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
+            dissmisController(message: alertMessage)
         }
     }
     

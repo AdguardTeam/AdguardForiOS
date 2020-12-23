@@ -146,7 +146,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
             guard let sSelf = self else { return }
             var toController: UIViewController?
             for controller in sSelf.navigationController!.viewControllers {
-                if controller.isKind(of: LoginController.self) || controller.isKind(of: Confirm2FaController.self) {
+                if controller.isKind(of: EmailSignInController.self) || controller.isKind(of: Confirm2FaController.self) {
                     break;
                 }
                 toController = controller

@@ -168,7 +168,7 @@ extension AppDelegate {
     }
     
     /*
-     Presents LoginController
+     Presents EmailSignInController
      Returns true on success and false otherwise
      */
     func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
@@ -198,8 +198,8 @@ extension AppDelegate {
             return false
         }
         
-        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? LoginController else {
-            DDLogError("License.storyboard doesnt't have LoginController")
+        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? EmailSignInController else {
+            DDLogError("License.storyboard doesnt't have EmailSignInController")
             return false
         }
         loginController.licenseKey = key

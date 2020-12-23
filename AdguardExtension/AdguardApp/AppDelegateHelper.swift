@@ -24,11 +24,6 @@ import Setapp
  all new functions we must write in this swift class instead of old obj-c AppDelegate
  */
 
-private enum SchemeType: String {
-    case auth
-    case other
-}
-
 @objcMembers
 class AppDelegateHelper: NSObject {
     
@@ -53,6 +48,8 @@ class AppDelegateHelper: NSObject {
     lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
     
+    lazy var customSchemeParser: CustomSchemeURLParserProtocol = CustomSchemeURLPareser()
+    
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
@@ -72,6 +69,7 @@ class AppDelegateHelper: NSObject {
     private let openTunnelModeSettings = "openTunnelModeSettings"
     private let applySettings = "apply_settings"
     private let commonUrlScheme = "adguard"
+    private let authScheme = "auth"
     
     private var firstRun: Bool {
         get {
@@ -305,12 +303,12 @@ class AppDelegateHelper: NSObject {
         
         if url.host != nil {
             command = url.host!
-            if command == SchemeType.auth.rawValue {
-                let result = parseCustomUrlScheme(url, scheme: .auth)
+            if command == authScheme {
+                let result = customSchemeParser.parceAuthUrl(url)
                 params = result.params
             }
         } else {
-            let result = parseCustomUrlScheme(url, scheme: .other)
+            let result = customSchemeParser.parceUrl(url)
             command = result.command
             params = result.params
         }
@@ -400,7 +398,7 @@ class AppDelegateHelper: NSObject {
             
         case (commonUrlScheme, applySettings):
             DDLogInfo("(AppDelegateHelper) openurl - apply settings")
-            let params = parseCustomUrlScheme(url, scheme: .other).params
+            let params = customSchemeParser.parceUrl(url).params
             guard let json = params?["json"] else {
                 DDLogError("(AppDelegateHelper) there is no param 'json' in url")
                 return false
@@ -427,7 +425,7 @@ class AppDelegateHelper: NSObject {
             return success
             
         // Log in by social networks
-        case (commonUrlScheme, SchemeType.auth.rawValue):
+        case (commonUrlScheme, authScheme):
             DDLogInfo("(AppDelegateHelper) openurl - Log in by social networks")
             let token = params?["access_token"]
             let state = params?["state"]
@@ -569,43 +567,5 @@ class AppDelegateHelper: NSObject {
                 }
             }
         }
-    }
-    
-    private func parseCustomUrlScheme(_ url: URL, scheme: SchemeType)->(command: String?, params:[String: String]?) {
-        
-        var components = url.absoluteString.split(separator: ":", maxSplits: 1)
-        if components.count != 2 {
-            DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
-            return (nil, nil)
-        }
-        
-        if scheme == .auth {
-            components = url.absoluteString.split(separator: "#", maxSplits: 1)
-            if components.count != 2 {
-                DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
-                return (nil, nil)
-            }
-        }
-     
-        let querry = components.last
-        
-        // try to parse url with question (adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList)
-        let questionComponents = querry?.split(separator: "?", maxSplits: 1)
-        
-        if questionComponents?.count == 2 {
-            let command = String((questionComponents?.first)!)
-            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
-            
-            return (command, params)
-        }
-        else if questionComponents?.count == 1 {
-            // try to parse url without question (adguard:license=AAAA)
-            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
-            let command = String(params.first!.key)
-            return (command, params)
-        }
-        
-        DDLogError("(AppDelegateHelper) parseCustomUrlScheme error - unsopported url format")
-        return (nil, nil)
     }
 }

@@ -211,7 +211,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupButtonImage(_ button: ThemableButton) {
-        let image = configuration.darkTheme ? button.lightThemeImage : button.darkThemeImage
+        let image = configuration.darkTheme ? button.darkThemeImage : button.lightThemeImage
         button.setImage(image, for: .normal)
     }
     
