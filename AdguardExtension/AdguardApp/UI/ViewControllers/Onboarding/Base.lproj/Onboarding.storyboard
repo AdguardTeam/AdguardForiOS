@@ -101,15 +101,14 @@
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="-100" id="8Im-ur-4u7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
                             </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" constant="16.5" id="96H-gH-wCP"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="24" id="9DW-3J-8hY">
                                 <variation key="widthClass=regular" constant="277"/>
                             </constraint>
                             <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="7" id="Bwp-dN-q6I">
                                 <variation key="widthClass=regular" constant="9"/>
                             </constraint>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="top" secondItem="hak-o1-HWp" secondAttribute="bottom" constant="140" id="ELd-ow-eQ2">
-                                <variation key="widthClass=regular" constant="139"/>
-                            </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.236979" constant="63" id="CtA-Xf-NWW"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="bottom" secondItem="cMV-qC-ZdE" secondAttribute="bottom" constant="24" id="KDB-AA-ymW"/>
                             <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="LRZ-OD-7Ds">
                                 <variation key="widthClass=regular" constant="277"/>
@@ -123,6 +122,7 @@
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="p9T-sb-r3y"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="q3H-VP-2Fe"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="cMV-qC-ZdE" secondAttribute="trailing" constant="24" id="uvM-PD-nh6"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="92.5" id="uxr-NS-cQX"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="wFe-YT-FFj"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.4" id="y9Q-Av-vlJ"/>
                         </constraints>
@@ -131,9 +131,19 @@
                                 <exclude reference="kqU-iI-zpx"/>
                                 <exclude reference="uvM-PD-nh6"/>
                                 <exclude reference="wFe-YT-FFj"/>
+                                <exclude reference="96H-gH-wCP"/>
+                                <exclude reference="CtA-Xf-NWW"/>
                                 <exclude reference="1Iu-vQ-YEF"/>
                                 <exclude reference="p9T-sb-r3y"/>
                                 <exclude reference="y9Q-Av-vlJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="9DW-3J-8hY"/>
+                                <include reference="96H-gH-wCP"/>
+                                <include reference="CtA-Xf-NWW"/>
+                                <exclude reference="LRZ-OD-7Ds"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
