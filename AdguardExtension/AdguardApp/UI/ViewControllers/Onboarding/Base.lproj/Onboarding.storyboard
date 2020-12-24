@@ -30,13 +30,13 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
-                                        <color key="value" red="0.47058823529411764" green="0.74117647058823533" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="customDisabledBackgroundColor">
-                                        <color key="value" red="0.47058823529411764" green="0.74117647058823533" blue="0.5490196078431373" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
-                                        <color key="value" red="0.47058823529411764" green="0.74117647058823533" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">

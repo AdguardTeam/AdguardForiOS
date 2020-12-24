@@ -63,13 +63,6 @@ class OnboardingAnimationsController: UIViewController {
         })
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        nextButton.layer.cornerRadius = nextButton.frame.height / 2
-        nextButton.layer.borderColor  = UIColor.AdGuardColor.green.cgColor
-        nextButton.layer.borderWidth = 1.0
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return theme.statusbarStyle()
     }
@@ -126,6 +119,7 @@ class OnboardingAnimationsController: UIViewController {
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
+        nextButton.applyStandardOpaqueStyle()
     }
     
     private func setupScrollViews() {

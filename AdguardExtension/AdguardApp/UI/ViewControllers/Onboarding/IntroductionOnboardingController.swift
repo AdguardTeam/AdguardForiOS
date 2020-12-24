@@ -58,11 +58,6 @@ class IntroductionOnboardingController: UIViewController {
         return theme.statusbarStyle()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        nextButton.layer.cornerRadius = nextButton.frame.height / 2
-    }
-    
     //MARK: - Actions
     
     @IBAction func checkBoxTapped(_ sender: UIButton) {
@@ -89,6 +84,7 @@ class IntroductionOnboardingController: UIViewController {
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
+        nextButton.applyStandardGreenStyle()
         nextButton.isEnabled = eulaAndPrivacyCheckBox.isSelected
     }
 }

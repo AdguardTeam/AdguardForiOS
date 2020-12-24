@@ -72,13 +72,6 @@ class OnboardingController: UIViewController {
         updateTheme()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        watchManualButtonIpad.layer.cornerRadius = watchManualButtonIpad.frame.height / 2
-        watchManualButtonIpad.layer.borderColor  = UIColor.AdGuardColor.green.cgColor
-        watchManualButtonIpad.layer.borderWidth = 1.0
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let getProController = segue.destination as? GetProController {
             navigationController?.setNavigationBarHidden(false, animated: true)
@@ -127,6 +120,7 @@ class OnboardingController: UIViewController {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
+        watchManualButtonIpad.applyStandardOpaqueStyle()
         tableView.reloadData()
     }
     
