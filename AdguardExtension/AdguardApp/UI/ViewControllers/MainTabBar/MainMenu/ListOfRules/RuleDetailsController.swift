@@ -84,7 +84,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     // MARK: - UITExtViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+        guard text != "\n" else {
+            textView.resignFirstResponder()
+            return false
+        }
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
