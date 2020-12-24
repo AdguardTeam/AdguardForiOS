@@ -69,20 +69,9 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
-                                <rect key="frame" x="50" y="315" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="eTR-e9-Jvq"/>
-                                    <constraint firstAttribute="height" constant="24" id="iCl-ew-uFV"/>
-                                </constraints>
-                                <state key="normal" image="check-off"/>
-                                <state key="selected" image="check-on"/>
-                                <connections>
-                                    <action selector="checkBoxTapped:" destination="e6X-5r-5Vh" eventType="touchUpInside" id="ruy-Su-2oa"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
-                                <rect key="frame" x="82" y="307" width="196" height="32"/>
+                                <rect key="frame" x="309" y="522" width="182" height="37.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -91,39 +80,57 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 </variation>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
+                                <rect key="frame" x="277" y="531" width="24" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="UdC-Z1-cVq"/>
+                                    <constraint firstAttribute="height" constant="24" id="WkF-oY-L6B"/>
+                                </constraints>
+                                <state key="normal" image="check-off"/>
+                                <state key="selected" image="check-on"/>
+                                <connections>
+                                    <action selector="checkBoxTapped:" destination="e6X-5r-5Vh" eventType="touchUpInside" id="ruy-Su-2oa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bzE-5b-o1U"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="1Iu-vQ-YEF"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="cMV-qC-ZdE" secondAttribute="centerX" constant="20" id="2yu-gF-WO9"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="-100" id="8Im-ur-4u7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
                             </constraint>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.8" id="Hgl-nq-rcG"/>
-                            <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="8" id="Ixo-7d-cjU"/>
-                            <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="50" id="Jzk-wG-0Sf"/>
+                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="24" id="9DW-3J-8hY">
+                                <variation key="widthClass=regular" constant="277"/>
+                            </constraint>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="7" id="Bwp-dN-q6I">
+                                <variation key="widthClass=regular" constant="9"/>
+                            </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="top" secondItem="hak-o1-HWp" secondAttribute="bottom" constant="140" id="ELd-ow-eQ2">
+                                <variation key="widthClass=regular" constant="139"/>
+                            </constraint>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="bottom" secondItem="cMV-qC-ZdE" secondAttribute="bottom" constant="24" id="KDB-AA-ymW"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="Llk-Ue-xSr"/>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="LRZ-OD-7Ds">
+                                <variation key="widthClass=regular" constant="277"/>
+                            </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="Vov-t2-XTH" secondAttribute="trailing" constant="8" id="OJC-Xf-rr4">
+                                <variation key="widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstItem="kaF-eB-tBX" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="OQI-C1-zfb"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="Vov-t2-XTH" secondAttribute="trailing" constant="8" id="kD7-8I-2hD"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="hak-o1-HWp" secondAttribute="trailing" constant="24" id="kqU-iI-zpx"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="top" secondItem="kaF-eB-tBX" secondAttribute="bottom" constant="24" id="mms-Cm-RJW"/>
-                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="42" id="p9S-W2-i9d"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="p9T-sb-r3y"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="q3H-VP-2Fe"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="cMV-qC-ZdE" secondAttribute="trailing" constant="24" id="uvM-PD-nh6"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="wFe-YT-FFj"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.4" id="y9Q-Av-vlJ"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="top" secondItem="hak-o1-HWp" secondAttribute="bottom" constant="93" id="yaV-TS-lm2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="kqU-iI-zpx"/>
                                 <exclude reference="uvM-PD-nh6"/>
                                 <exclude reference="wFe-YT-FFj"/>
-                                <exclude reference="Hgl-nq-rcG"/>
-                                <exclude reference="Llk-Ue-xSr"/>
                                 <exclude reference="1Iu-vQ-YEF"/>
                                 <exclude reference="p9T-sb-r3y"/>
                                 <exclude reference="y9Q-Av-vlJ"/>
@@ -139,10 +146,6 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <exclude reference="18V-IF-PeJ"/>
-                                <include reference="Hgl-nq-rcG"/>
-                                <include reference="Llk-Ue-xSr"/>
-                                <exclude reference="szy-0O-XCQ"/>
                                 <include reference="1Iu-vQ-YEF"/>
                                 <include reference="y9Q-Av-vlJ"/>
                             </mask>
