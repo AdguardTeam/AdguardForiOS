@@ -68,6 +68,7 @@ class OnboardingController: UIViewController {
             self?.observeContentBlockersState()
         }
         
+        watchManualButtonIpad.applyStandardOpaqueStyle()
         setupLabels()
         updateTheme()
     }
@@ -120,7 +121,6 @@ class OnboardingController: UIViewController {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
-        watchManualButtonIpad.applyStandardOpaqueStyle()
         tableView.reloadData()
     }
     

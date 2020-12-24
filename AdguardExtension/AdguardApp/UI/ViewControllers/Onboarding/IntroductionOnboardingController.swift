@@ -35,6 +35,7 @@ class IntroductionOnboardingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nextButton.applyStandardGreenStyle()
         updateTheme()
         setupBackButton()
         
@@ -84,7 +85,6 @@ class IntroductionOnboardingController: UIViewController {
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
-        nextButton.applyStandardGreenStyle()
         nextButton.isEnabled = eulaAndPrivacyCheckBox.isSelected
     }
 }
