@@ -55,8 +55,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     private var notificationToken: NotificationToken?
     
-    private var signInHelper: SignInFailureHandler!
-    
     private var isKeyboardNextButtonEnabled = true
 
     
@@ -64,8 +62,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        signInHelper = SignInFailureHandler(notificationService: notificationService)
         
         setupBackButton()
         
@@ -275,6 +271,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     private func loginFailure(_ error: NSError?) {
         
+        let signInHelper = SignInFailureHandler(notificationService: notificationService)
         let messages = signInHelper.loginFailure(error, auth2Fa: { [unowned self] in
             self.performSegue(withIdentifier: self.confirm2faSegue, sender: self)
         })

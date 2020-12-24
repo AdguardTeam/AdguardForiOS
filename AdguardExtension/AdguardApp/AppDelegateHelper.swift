@@ -48,8 +48,6 @@ class AppDelegateHelper: NSObject {
     lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    lazy var customSchemeParser: CustomSchemeURLParserProtocol = CustomSchemeURLPareser()
-    
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
@@ -304,11 +302,11 @@ class AppDelegateHelper: NSObject {
         if url.host != nil {
             command = url.host!
             if command == authScheme {
-                let result = customSchemeParser.parceAuthUrl(url)
+                let result = url.parceAuthUrl()
                 params = result.params
             }
         } else {
-            let result = customSchemeParser.parceUrl(url)
+            let result = url.parceUrl()
             command = result.command
             params = result.params
         }
@@ -398,7 +396,7 @@ class AppDelegateHelper: NSObject {
             
         case (commonUrlScheme, applySettings):
             DDLogInfo("(AppDelegateHelper) openurl - apply settings")
-            let params = customSchemeParser.parceUrl(url).params
+            let params = url.parceUrl().params
             guard let json = params?["json"] else {
                 DDLogError("(AppDelegateHelper) there is no param 'json' in url")
                 return false

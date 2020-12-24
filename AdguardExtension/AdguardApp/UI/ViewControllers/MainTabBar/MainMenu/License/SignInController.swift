@@ -31,7 +31,7 @@ class SignInController: UIViewController {
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     
-    private var notificationThemeObserve: NotificationToken?
+    private var notificationThemeObserver: NotificationToken?
     private var notificationSignInObserver: NotificationToken?
     
     private var sfSafariViewController: SFSafariViewController?
@@ -43,7 +43,7 @@ class SignInController: UIViewController {
         
         signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
         
-        notificationThemeObserve = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
+        notificationThemeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
         

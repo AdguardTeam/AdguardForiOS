@@ -19,34 +19,38 @@
 import Foundation
 
 protocol CustomSchemeURLParserProtocol {
-    func parceAuthUrl(_ url: URL) -> (command: String?, params:[String: String]?)
-    func parceUrl(_ url: URL) -> (command: String?, params:[String: String]?)
+    func parceAuthUrl() -> URLParserResult
+    func parceUrl() -> URLParserResult
 }
 
-class CustomSchemeURLPareser: CustomSchemeURLParserProtocol {
+struct URLParserResult {
+    var command: String?
+    var params: [String: String]?
+}
+
+extension URL: CustomSchemeURLParserProtocol {
     
-    //MARK: - Methods
-    func parceAuthUrl(_ url: URL) -> (command: String?, params:[String: String]?) {
-        guard let components = splitURLByChar(url, separator: "#") else { return (nil, nil) }
+    func parceAuthUrl() -> URLParserResult {
+        guard let components = splitURLByChar(separator: "#") else { return URLParserResult() }
         return prepareParams(components: components)
     }
     
-    func parceUrl(_ url: URL) -> (command: String?, params:[String: String]?) {
-        guard let components = splitURLByChar(url, separator: ":") else { return (nil, nil) }
+    func parceUrl() -> URLParserResult {
+        guard let components = splitURLByChar(separator: ":") else { return URLParserResult() }
         return prepareParams(components: components)
     }
     
     //MARK: - Private methods
-    private func splitURLByChar(_ url: URL, separator: Character) -> [String.SubSequence]? {
-        let components = url.absoluteString.split(separator: separator, maxSplits: 1)
+    private func splitURLByChar(separator: Character) -> [String]? {
+        let components = self.absoluteString.split(separator: separator, maxSplits: 1)
         if components.count != 2 {
-            DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsopported url format")
+            DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
             return nil
         }
-        return components
+        return components.compactMap { String($0) }
     }
     
-    private func prepareParams(components: [String.SubSequence]) -> (command: String?, params:[String: String]?) {
+    private func prepareParams(components: [String]) -> URLParserResult {
         let querry = components.last
         
         // try to parse url with question (adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList)
@@ -54,18 +58,20 @@ class CustomSchemeURLPareser: CustomSchemeURLParserProtocol {
         
         if questionComponents?.count == 2 {
             let command = String((questionComponents?.first)!)
-            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
+            let queryString = String((questionComponents?.last)!)
+            let params = queryString.getQueryParametersFromQueryString()
             
-            return (command, params)
+            return URLParserResult(command: command, params: params)
         }
         else if questionComponents?.count == 1 {
             // try to parse url without question (adguard:license=AAAA)
-            let params = ACNUrlUtils.parameters(fromQueryString: String((questionComponents?.last)!))
-            let command = String(params.first!.key)
-            return (command, params)
+            let queryString = String((questionComponents?.last)!)
+            let params = queryString.getQueryParametersFromQueryString()
+            let command = params?.first?.key != nil ? params?.first!.key : nil
+            return URLParserResult(command: command, params: params)
         }
         
-        DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsopported url format")
-        return (nil, nil)
+        DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
+        return URLParserResult()
     }
 }
