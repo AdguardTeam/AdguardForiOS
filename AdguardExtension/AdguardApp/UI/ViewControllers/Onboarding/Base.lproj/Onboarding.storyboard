@@ -70,22 +70,26 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
-                                <rect key="frame" x="309" y="522" width="182" height="37.5"/>
+                                <rect key="frame" x="282" y="745.5" width="493" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 </variation>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
-                                <rect key="frame" x="277" y="531" width="24" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
+                                <rect key="frame" x="239" y="754.5" width="35" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="UdC-Z1-cVq"/>
-                                    <constraint firstAttribute="height" constant="24" id="WkF-oY-L6B"/>
+                                    <constraint firstAttribute="width" constant="24" id="UdC-Z1-cVq">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="24" id="WkF-oY-L6B">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                    </constraint>
                                 </constraints>
                                 <state key="normal" image="check-off"/>
                                 <state key="selected" image="check-on"/>
@@ -108,7 +112,7 @@
                             <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="7" id="Bwp-dN-q6I">
                                 <variation key="widthClass=regular" constant="9"/>
                             </constraint>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.236979" constant="63" id="CtA-Xf-NWW"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.236979" constant="250" id="CtA-Xf-NWW"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="bottom" secondItem="cMV-qC-ZdE" secondAttribute="bottom" constant="24" id="KDB-AA-ymW"/>
                             <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="LRZ-OD-7Ds">
                                 <variation key="widthClass=regular" constant="277"/>
@@ -131,19 +135,19 @@
                                 <exclude reference="kqU-iI-zpx"/>
                                 <exclude reference="uvM-PD-nh6"/>
                                 <exclude reference="wFe-YT-FFj"/>
-                                <exclude reference="96H-gH-wCP"/>
-                                <exclude reference="CtA-Xf-NWW"/>
                                 <exclude reference="1Iu-vQ-YEF"/>
                                 <exclude reference="p9T-sb-r3y"/>
                                 <exclude reference="y9Q-Av-vlJ"/>
+                                <exclude reference="96H-gH-wCP"/>
+                                <exclude reference="CtA-Xf-NWW"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="9DW-3J-8hY"/>
+                                <exclude reference="LRZ-OD-7Ds"/>
                                 <include reference="96H-gH-wCP"/>
                                 <include reference="CtA-Xf-NWW"/>
-                                <exclude reference="LRZ-OD-7Ds"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
