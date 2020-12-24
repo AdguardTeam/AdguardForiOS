@@ -169,6 +169,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             self?.upstreamsById.removeAll()
             
             DDLogInfo("(DnsProxyService) - stopped")
+            self?.dnsRecordsWriter.flush()
             
             callback()
         }

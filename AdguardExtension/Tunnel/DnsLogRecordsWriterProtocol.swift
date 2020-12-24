@@ -8,4 +8,5 @@ import Foundation
     var whitelistFilterId: NSNumber? {get set }
     var otherFilterIds: [NSNumber]? { get set }
     func handleEvent(_ event: AGDnsRequestProcessedEvent)
+    func flush()
 }

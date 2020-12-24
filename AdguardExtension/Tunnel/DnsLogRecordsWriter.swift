@@ -62,10 +62,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         self.loadStatisticsHead()
     }
     
-    deinit {
-        flush()
-    }
-    
     func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         if event.error != nil && event.error != "" {
             DDLogError("(DnsLogRecordsWriter) handle event error occured - \(event.error!)")
@@ -110,6 +106,16 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         addActivityRecord(domain: domain, isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
         addDnsStatisticsRecord(isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
     }
+    
+    func flush() {
+        save()
+        saveStatistics()
+        saveActivityStatistics()
+        
+        resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
+        resources.sharedDefaults().set(0, forKey: AEDefaultsEncryptedRequests)
+        resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
+   }
     
     private func addDnsStatisticsRecord(isEncrypted: Bool, elapsed: Int) {
         /* If elapsed time is greater than timeout, than we do not add it to statistics */
@@ -176,16 +182,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
             self.save()
             self.nextSaveTime = now + self.saveRecordsMinimumTime
         }
-    }
-    
-    private func flush() {
-        save()
-        saveStatistics()
-        saveActivityStatistics()
-        
-        resources.sharedDefaults().set(0, forKey: AEDefaultsRequests)
-        resources.sharedDefaults().set(0, forKey: AEDefaultsEncryptedRequests)
-        resources.sharedDefaults().set(Date(), forKey: LastStatisticsSaveTime)
     }
     
     private func save() {

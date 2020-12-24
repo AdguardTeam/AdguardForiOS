@@ -32,6 +32,10 @@ class LogWriterMock: NSObject, DnsLogRecordsWriterProtocol {
     func handleEvent(_ event: AGDnsRequestProcessedEvent) {
         
     }
+    
+    func flush() {
+        
+    }
 }
 
 class DnsProxyTest: XCTestCase {

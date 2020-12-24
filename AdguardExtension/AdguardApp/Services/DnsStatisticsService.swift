@@ -264,7 +264,9 @@ class DnsStatisticsService: NSObject, DnsStatisticsServiceProtocol {
             
             if let result = db.executeQuery("SELECT count(*) AS count FROM DnsStatisticsTable", withArgumentsIn: []), result.next() == true {
                 recordsCount = Int(result.int(forColumn: "count"))
+                result.close()
             }
+            rollback?.pointee = ObjCBool(false)
         })
         return recordsCount
     }
