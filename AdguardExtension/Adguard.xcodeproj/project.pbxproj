@@ -11226,7 +11226,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
+				minimumVersion = 1.1.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
