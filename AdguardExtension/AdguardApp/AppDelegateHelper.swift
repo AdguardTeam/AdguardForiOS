@@ -302,11 +302,11 @@ class AppDelegateHelper: NSObject {
         if url.host != nil {
             command = url.host!
             if command == authScheme {
-                let result = url.parceAuthUrl()
+                let result = url.parseAuthUrl()
                 params = result.params
             }
         } else {
-            let result = url.parceUrl()
+            let result = url.parseUrl()
             command = result.command
             params = result.params
         }
@@ -396,7 +396,7 @@ class AppDelegateHelper: NSObject {
             
         case (commonUrlScheme, applySettings):
             DDLogInfo("(AppDelegateHelper) openurl - apply settings")
-            let params = url.parceUrl().params
+            let params = url.parseUrl().params
             guard let json = params?["json"] else {
                 DDLogError("(AppDelegateHelper) there is no param 'json' in url")
                 return false
