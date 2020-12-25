@@ -386,6 +386,15 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var eulaAndPrivcayAcceptance : Bool {
+        get {
+            sharedDefaults().bool(forKey: EulaAndPrivcayAcceptance)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: EulaAndPrivcayAcceptance)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {

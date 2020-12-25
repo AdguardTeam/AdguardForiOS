@@ -13,12 +13,12 @@
             <objects>
                 <viewController storyboardIdentifier="IntroductionOnboardingController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="e6X-5r-5Vh" customClass="IntroductionOnboardingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qv4-4I-Crz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMV-qC-ZdE">
-                                <rect key="frame" x="24" y="798" width="366" height="40"/>
-                                <color key="backgroundColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMV-qC-ZdE" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="504" width="272" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="SNA-7Z-koC">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -28,6 +28,17 @@
                                 <state key="normal" title="NEXT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="customDisabledBackgroundColor">
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
+                                        <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 </variation>
@@ -58,52 +69,85 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
-                                <rect key="frame" x="24" y="734.33333333333337" width="366" height="31.666666666666629"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
+                                <rect key="frame" x="282" y="745.5" width="493" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 </variation>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vov-t2-XTH">
+                                <rect key="frame" x="239" y="754.5" width="35" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="UdC-Z1-cVq">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="24" id="WkF-oY-L6B">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal" image="check-off"/>
+                                <state key="selected" image="check-on"/>
+                                <connections>
+                                    <action selector="checkBoxTapped:" destination="e6X-5r-5Vh" eventType="touchUpInside" id="ruy-Su-2oa"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="bzE-5b-o1U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="24" id="18V-IF-PeJ"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="1Iu-vQ-YEF"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="-100" id="8Im-ur-4u7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
                             </constraint>
-                            <constraint firstItem="cMV-qC-ZdE" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="bottom" constant="32" id="8zc-5z-dLU">
-                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" constant="16.5" id="96H-gH-wCP"/>
+                            <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="ido-Ag-IK7" secondAttribute="trailing" constant="24" id="9DW-3J-8hY">
+                                <variation key="widthClass=regular" constant="277"/>
                             </constraint>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.8" id="Hgl-nq-rcG"/>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="top" secondItem="ido-Ag-IK7" secondAttribute="top" constant="7" id="Bwp-dN-q6I">
+                                <variation key="widthClass=regular" constant="9"/>
+                            </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.236979" constant="250" id="CtA-Xf-NWW"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="bottom" secondItem="cMV-qC-ZdE" secondAttribute="bottom" constant="24" id="KDB-AA-ymW"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="Llk-Ue-xSr"/>
+                            <constraint firstItem="Vov-t2-XTH" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="LRZ-OD-7Ds">
+                                <variation key="widthClass=regular" constant="277"/>
+                            </constraint>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="Vov-t2-XTH" secondAttribute="trailing" constant="8" id="OJC-Xf-rr4">
+                                <variation key="widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstItem="kaF-eB-tBX" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="OQI-C1-zfb"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="hak-o1-HWp" secondAttribute="trailing" constant="24" id="kqU-iI-zpx"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="top" secondItem="kaF-eB-tBX" secondAttribute="bottom" constant="24" id="mms-Cm-RJW"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="p9T-sb-r3y"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="centerX" secondItem="bzE-5b-o1U" secondAttribute="centerX" id="q3H-VP-2Fe"/>
-                            <constraint firstItem="ido-Ag-IK7" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="szy-0O-XCQ"/>
                             <constraint firstItem="bzE-5b-o1U" firstAttribute="trailing" secondItem="cMV-qC-ZdE" secondAttribute="trailing" constant="24" id="uvM-PD-nh6"/>
+                            <constraint firstItem="ido-Ag-IK7" firstAttribute="centerY" secondItem="bzE-5b-o1U" secondAttribute="centerY" constant="92.5" id="uxr-NS-cQX"/>
                             <constraint firstItem="hak-o1-HWp" firstAttribute="leading" secondItem="bzE-5b-o1U" secondAttribute="leading" constant="24" id="wFe-YT-FFj"/>
                             <constraint firstItem="cMV-qC-ZdE" firstAttribute="width" secondItem="Qv4-4I-Crz" secondAttribute="width" multiplier="0.4" id="y9Q-Av-vlJ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="bzE-5b-o1U"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="kqU-iI-zpx"/>
                                 <exclude reference="uvM-PD-nh6"/>
                                 <exclude reference="wFe-YT-FFj"/>
-                                <exclude reference="Hgl-nq-rcG"/>
-                                <exclude reference="Llk-Ue-xSr"/>
                                 <exclude reference="1Iu-vQ-YEF"/>
                                 <exclude reference="p9T-sb-r3y"/>
                                 <exclude reference="y9Q-Av-vlJ"/>
+                                <exclude reference="96H-gH-wCP"/>
+                                <exclude reference="CtA-Xf-NWW"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="9DW-3J-8hY"/>
+                                <exclude reference="LRZ-OD-7Ds"/>
+                                <include reference="96H-gH-wCP"/>
+                                <include reference="CtA-Xf-NWW"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -116,10 +160,6 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <exclude reference="18V-IF-PeJ"/>
-                                <include reference="Hgl-nq-rcG"/>
-                                <include reference="Llk-Ue-xSr"/>
-                                <exclude reference="szy-0O-XCQ"/>
                                 <include reference="1Iu-vQ-YEF"/>
                                 <include reference="y9Q-Av-vlJ"/>
                             </mask>
@@ -127,6 +167,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ofe-T6-OfJ"/>
                     <connections>
+                        <outlet property="eulaAndPrivacyCheckBox" destination="Vov-t2-XTH" id="W0w-mm-6TD"/>
                         <outlet property="licenseTextView" destination="ido-Ag-IK7" id="A1V-Ii-26Q"/>
                         <outlet property="nextButton" destination="cMV-qC-ZdE" id="93K-L6-kGt"/>
                         <outlet property="titleLabel" destination="hak-o1-HWp" id="vXr-x0-p2B"/>
@@ -876,17 +917,25 @@
             <point key="canvasLocation" x="-2054" y="78"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="eyE-5U-rZR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="LoadScreen" width="64" height="64"/>
         <image name="arrow" width="45" height="60"/>
+        <image name="check-off" width="24" height="24"/>
+        <image name="check-on" width="24" height="24"/>
         <image name="cross" width="24" height="24"/>
         <image name="icon_play" width="16" height="16"/>
         <image name="nil" width="16" height="16"/>
         <image name="safari_onboarding" width="24" height="24"/>
         <image name="settings" width="24" height="24"/>
         <image name="switch" width="41" height="24"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="eyE-5U-rZR"/>
-    </inferredMetricsTieBreakers>
 </document>

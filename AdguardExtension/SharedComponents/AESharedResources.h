@@ -375,6 +375,11 @@ extern NSString* _Nonnull CustomBlockingIpv6;
  */
 extern NSString* _Nonnull BlockIpv6;
 
+/**
+ User defaults key for eula and privacy acceptance value
+ */
+extern NSString* _Nonnull EulaAndPrivcayAcceptance;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

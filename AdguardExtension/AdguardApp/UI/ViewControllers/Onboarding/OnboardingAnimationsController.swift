@@ -47,6 +47,7 @@ class OnboardingAnimationsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        nextButton.applyStandardOpaqueStyle()
         updateTheme()
         setupAnimationViews()
         addGestureRecognizers()
@@ -61,13 +62,6 @@ class OnboardingAnimationsController: UIViewController {
                 self?.setupScrollViews()
             }
         })
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        nextButton.layer.cornerRadius = nextButton.frame.height / 2
-        nextButton.layer.borderColor  = UIColor.AdGuardColor.green.cgColor
-        nextButton.layer.borderWidth = 1.0
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
