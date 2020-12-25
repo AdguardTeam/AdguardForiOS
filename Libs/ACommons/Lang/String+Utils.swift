@@ -231,4 +231,21 @@ extension String {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
     }
+    
+    func getQueryParametersFromQueryString() -> [String: String]? {
+        var params: [String: String] = [:]
+        let pairs = self.components(separatedBy: "&")
+        for pair in pairs {
+            let values = pair.components(separatedBy: "=")
+            if values.count == 2 {
+                params[values[0]] = values[1]
+            }
+            
+            if values.count == 1 {
+                continue
+            }
+        }
+        
+        return params.count > 0 ? params : nil
+    }
 }

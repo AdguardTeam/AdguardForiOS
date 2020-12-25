@@ -45,10 +45,6 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         tableView.reloadData()
     }
     
-    deinit {
-        print("kek")
-    }
-    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()

@@ -794,7 +794,7 @@ ADS &amp; TRACKERS</string>
                     <color key="tintColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="loginAction:" destination="gVb-oh-MXP" id="kO5-dl-Y2g"/>
-                        <segue destination="YAD-0P-paW" kind="show" id="XHd-Jk-4yR"/>
+                        <segue destination="feC-dX-1xt" kind="show" id="YHg-68-TSP"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Logout" id="70b-CS-wqh">
@@ -811,19 +811,19 @@ ADS &amp; TRACKERS</string>
             </objects>
             <point key="canvasLocation" x="2760" y="3569"/>
         </scene>
-        <!--Login Controller-->
+        <!--Email Sign In Controller-->
         <scene sceneID="Dmi-cL-90j">
             <objects>
-                <viewController storyboardIdentifier="LoginScene" id="YAD-0P-paW" customClass="LoginController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailSignInScene" id="YAD-0P-paW" customClass="EmailSignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gvD-Ne-xOz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWX-pJ-1zR">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WT-eT-xqR">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="343"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJj-cc-Ko5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="61" width="382" height="17"/>
@@ -1185,11 +1185,141 @@ ADS &amp; TRACKERS</string>
             </objects>
             <point key="canvasLocation" x="3643" y="4706"/>
         </scene>
+        <!--Sign In Controller-->
+        <scene sceneID="eSG-aF-bm5">
+            <objects>
+                <viewController storyboardIdentifier="SignInScene" id="feC-dX-1xt" customClass="SignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oLe-jr-YMA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxK-6y-LB6" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="12" width="560" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with your AdGuard account or with connected social networks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuM-Nn-uXv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="36" y="65" width="528" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9V-eQ-pZp" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="245.5" width="560" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qW2-bl-zRS"/>
+                                </constraints>
+                                <state key="normal" title="Continue with Google">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="lightThemeImage" value="google-icon"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="darkThemeImage" value="google-icon"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="googleLoginButtonTapped:" destination="feC-dX-1xt" eventType="touchUpInside" id="p2U-Ir-CYf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9l-1b-Wa8" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="375" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="iK7-eL-rz6"/>
+                                </constraints>
+                                <state key="normal" title="Continue with Facebook">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="lightThemeImage" value="facebook-3"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="darkThemeImage" value="facebook-3"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="facebookLoginButtonTapped:" destination="feC-dX-1xt" eventType="touchUpInside" id="fAc-yZ-yVc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-Vc-Pfi" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="180" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="foD-Fk-JsG"/>
+                                </constraints>
+                                <state key="normal" title="Use AdGuard account">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="lightThemeImage" value="AdGuardShield"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="darkThemeImage" value="AdGuardShield"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="YAD-0P-paW" kind="show" id="2id-dd-nA6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-uk-lAE" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="245" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="yRj-fz-TUe"/>
+                                </constraints>
+                                <state key="normal" title="Continue with Apple">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="lightThemeImage" value="apple-black"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="darkThemeImage" value="apple-white"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="appleLoginButtonTapped:" destination="feC-dX-1xt" eventType="touchUpInside" id="rqE-ko-qWr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bvh-PD-3nC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="t9V-eQ-pZp" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="57X-BF-2TA"/>
+                            <constraint firstItem="fxK-6y-LB6" firstAttribute="top" secondItem="Bvh-PD-3nC" secondAttribute="top" constant="12" id="8SS-jh-JYb"/>
+                            <constraint firstItem="1AU-Vc-Pfi" firstAttribute="top" secondItem="ZuM-Nn-uXv" secondAttribute="bottom" constant="30" id="9rt-Tx-Sqq"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="PSE-uk-lAE" secondAttribute="trailing" constant="20" id="BT6-Zl-NVW"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="Z9l-1b-Wa8" secondAttribute="trailing" constant="20" id="CXs-l5-mfO"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="t9V-eQ-pZp" secondAttribute="trailing" constant="20" id="DJ6-aU-AOc"/>
+                            <constraint firstItem="Z9l-1b-Wa8" firstAttribute="top" secondItem="t9V-eQ-pZp" secondAttribute="bottom" constant="15" id="MSj-YS-w2n"/>
+                            <constraint firstItem="ZuM-Nn-uXv" firstAttribute="top" secondItem="fxK-6y-LB6" secondAttribute="bottom" constant="24" id="RNH-8Q-HqV"/>
+                            <constraint firstItem="1AU-Vc-Pfi" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="bsA-Vq-9Nn"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="1AU-Vc-Pfi" secondAttribute="trailing" constant="20" id="dLL-Ih-Zg9"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="ZuM-Nn-uXv" secondAttribute="trailing" constant="36" id="dch-Yt-zh0"/>
+                            <constraint firstItem="Bvh-PD-3nC" firstAttribute="trailing" secondItem="fxK-6y-LB6" secondAttribute="trailing" constant="20" id="ezf-Jy-ajv"/>
+                            <constraint firstItem="Z9l-1b-Wa8" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="hqU-0Z-9lN"/>
+                            <constraint firstItem="PSE-uk-lAE" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="mb7-Yd-z63"/>
+                            <constraint firstItem="PSE-uk-lAE" firstAttribute="top" secondItem="1AU-Vc-Pfi" secondAttribute="bottom" constant="15" id="pak-9F-Zmd"/>
+                            <constraint firstItem="ZuM-Nn-uXv" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="36" id="rII-WZ-P2m"/>
+                            <constraint firstItem="t9V-eQ-pZp" firstAttribute="top" secondItem="PSE-uk-lAE" secondAttribute="bottom" constant="15" id="vHl-Wt-smE"/>
+                            <constraint firstItem="fxK-6y-LB6" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="vbE-92-8XP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MLR-gq-0tv"/>
+                    <connections>
+                        <outletCollection property="buttons" destination="PSE-uk-lAE" collectionClass="NSMutableArray" id="Kfk-PH-E2H"/>
+                        <outletCollection property="buttons" destination="t9V-eQ-pZp" collectionClass="NSMutableArray" id="ehN-sl-V24"/>
+                        <outletCollection property="buttons" destination="Z9l-1b-Wa8" collectionClass="NSMutableArray" id="6sH-1B-CzN"/>
+                        <outletCollection property="buttons" destination="1AU-Vc-Pfi" collectionClass="NSMutableArray" id="btt-3Y-N4U"/>
+                        <outletCollection property="themableLabels" destination="ZuM-Nn-uXv" collectionClass="NSMutableArray" id="q2b-in-IlD"/>
+                        <outletCollection property="themableLabels" destination="fxK-6y-LB6" collectionClass="NSMutableArray" id="F7L-Pe-iUH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Jg-DY-EwV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2008.6956521739132" y="4705.5803571428569"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="AdGuardShield" width="16" height="16"/>
         <image name="adguard-premium-logo" width="220" height="68"/>
         <image name="adguard-premium-logo-dark" width="220" height="68"/>
+        <image name="apple-black" width="13" height="16"/>
+        <image name="apple-white" width="13" height="16"/>
         <image name="bottom-chevrone" width="14" height="8"/>
         <image name="cross" width="24" height="24"/>
+        <image name="facebook-3" width="16" height="16"/>
+        <image name="google-icon" width="16" height="16"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

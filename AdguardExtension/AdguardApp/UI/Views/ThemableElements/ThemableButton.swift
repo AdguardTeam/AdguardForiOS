@@ -21,4 +21,6 @@ import UIKit
 class ThemableButton: UIButton {
     @IBInspectable var greyText: Bool = false
     @IBInspectable var lightGreyText: Bool = false
+    @IBInspectable var lightThemeImage: UIImage?
+    @IBInspectable var darkThemeImage: UIImage?
 }

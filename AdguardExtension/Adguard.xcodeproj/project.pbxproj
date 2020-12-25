@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
+		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
+		2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D6A9258F8C430037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D6CC258F8C6C0037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D6F0258F8C720037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D702258F8CE50037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D714258F8CE60037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D715258F8CEC0037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D716258F8CEC0037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		2425D728258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
+		2425D73A258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
+		2425D73B258F8D1E0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
+		2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
+		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
+		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -17,6 +33,22 @@
 		244339A82580EA2600AB4F26 /* BlockedResponseTtlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */; };
 		244339DE2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
 		244339DF2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
+		247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F32594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F42594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F52594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F62594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F72594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F82594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521F92594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		247521FA2594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
+		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
+		249606BD258B831000C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
+		249606CF258B831100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
+		249606D0258B831900C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
+		249606E2258B832100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
+		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24F55248258753C900AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24F5525A258753CB00AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24F5525B258753CB00AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
@@ -323,7 +355,6 @@
 		7E1AB64625824A6600519B2B /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
 		7E1AB65825824A6F00519B2B /* SuccessFailureParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95723F2C28E00F9A544 /* SuccessFailureParser.swift */; };
 		7E1AB66A25824A8C00519B2B /* SendFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */; };
-		7E1AB67C25824ABA00519B2B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */; };
 		7E1AB68E25824ABD00519B2B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7E1BAE72233A1AFF00F1EBEB /* SafariProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BAE71233A1AFF00F1EBEB /* SafariProtectionController.swift */; };
 		7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
@@ -564,8 +595,6 @@
 		7EABA62A2578F5DA001E52BC /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */; };
 		7EABA63C2578F636001E52BC /* SendFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */; };
 		7EABA64E2578F638001E52BC /* SendFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */; };
-		7EABA6602578F710001E52BC /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */; };
-		7EABA6722578F711001E52BC /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */; };
 		7EABA6A62578F8B2001E52BC /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7EABA6B82578F8B3001E52BC /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7EB2F94823F2B64500F9A544 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
@@ -574,7 +603,6 @@
 		7EB2F94D23F2B64500F9A544 /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94623F2B64400F9A544 /* RequestSenderProtocol.swift */; };
 		7EB2F94E23F2B64500F9A544 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94723F2B64400F9A544 /* RequestFactory.swift */; };
 		7EB2F95023F2B7C700F9A544 /* SendFeedbackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */; };
-		7EB2F95423F2B95800F9A544 /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */; };
 		7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7EB2F95823F2C28E00F9A544 /* SuccessFailureParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95723F2C28E00F9A544 /* SuccessFailureParser.swift */; };
 		7EB2F95A23F2C56300F9A544 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
@@ -1080,7 +1108,7 @@
 		D067D9A92142A20000ECDE6D /* AdguardBlockingExtensionAnnoyances.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D067D9AA2142A20000ECDE6D /* AdguardBlockingExtensionOther.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D067D9AB2142A20000ECDE6D /* AdguardBlockingExtensionCustom.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D067D99E21428BB500ECDE6D /* AdguardBlockingExtensionCustom.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D067D9AD214693E200ECDE6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D9AC214693E200ECDE6D /* LoginController.swift */; };
+		D067D9AD214693E200ECDE6D /* EmailSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D9AC214693E200ECDE6D /* EmailSignInController.swift */; };
 		D06ACB6F2146AF1700D2A37D /* LongLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */; };
 		D06BB37E238BC2030000075E /* DnsLogRecordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */; };
 		D06DE0292346296B00A70D85 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
@@ -1811,7 +1839,6 @@
 		D0B5457D2435D62A002F0AEC /* RulesProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */; };
 		D0B5457E2435D62A002F0AEC /* SafariRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07427F2232B97040019AAF4 /* SafariRule.swift */; };
 		D0B5457F2435D62A002F0AEC /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
-		D0B545802435D62A002F0AEC /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */; };
 		D0B545812435D62A002F0AEC /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		D0B545822435D62A002F0AEC /* Animation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */; };
 		D0B545832435D62A002F0AEC /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
@@ -1879,7 +1906,7 @@
 		D0B545C42435D663002F0AEC /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
 		D0B545C52435D663002F0AEC /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
 		D0B545C62435D663002F0AEC /* ContentBlockerStateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */; };
-		D0B545C82435D669002F0AEC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D9AC214693E200ECDE6D /* LoginController.swift */; };
+		D0B545C82435D669002F0AEC /* EmailSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D9AC214693E200ECDE6D /* EmailSignInController.swift */; };
 		D0B545C92435D669002F0AEC /* GetProController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D077D5F0213974FC00D3D5B3 /* GetProController.swift */; };
 		D0B545CA2435D669002F0AEC /* GetProTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA620F224A8547005CF278 /* GetProTableController.swift */; };
 		D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
@@ -2574,10 +2601,17 @@
 
 /* Begin PBXFileReference section */
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
+		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
+		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
+		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
 		244339DD2581092900AB4F26 /* UpstreamsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpstreamsController.swift; sourceTree = "<group>"; };
+		247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+CustomSchemeURLParserProtocol.swift"; sourceTree = "<group>"; };
+		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
+		249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconButton.swift; sourceTree = "<group>"; };
+		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -3109,7 +3143,6 @@
 		7EB2F94623F2B64400F9A544 /* RequestSenderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSenderProtocol.swift; sourceTree = "<group>"; };
 		7EB2F94723F2B64400F9A544 /* RequestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		7EB2F94F23F2B7C700F9A544 /* SendFeedbackRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFeedbackRequest.swift; sourceTree = "<group>"; };
-		7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		7EB2F95723F2C28E00F9A544 /* SuccessFailureParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessFailureParser.swift; sourceTree = "<group>"; };
 		7EB2F95923F2C56200F9A544 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
@@ -3311,7 +3344,7 @@
 		D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionAnnoyances.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionOther.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067D99E21428BB500ECDE6D /* AdguardBlockingExtensionCustom.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionCustom.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D067D9AC214693E200ECDE6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D067D9AC214693E200ECDE6D /* EmailSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInController.swift; sourceTree = "<group>"; };
 		D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongLabelCell.swift; sourceTree = "<group>"; };
 		D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsService.swift; sourceTree = "<group>"; };
 		D06DE02B2347769200A70D85 /* AntibannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerController.swift; sourceTree = "<group>"; };
@@ -4448,6 +4481,8 @@
 				D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */,
 				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 				D02C080121BEAA2100796714 /* FiltersServiceTest.swift */,
+				24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */,
+				241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */,
 				D0249571256BD0E4000EED34 /* ImportSettingsTest.swift */,
 				D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */,
 				D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */,
@@ -4941,11 +4976,12 @@
 				D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */,
 				D07427F2232B97040019AAF4 /* SafariRule.swift */,
 				D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */,
-				7EB2F95323F2B95800F9A544 /* Dictionary+Utils.swift */,
 				7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */,
 				7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */,
 				7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */,
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
+				2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */,
+				247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5050,10 +5086,12 @@
 			isa = PBXGroup;
 			children = (
 				D0D6B9FE21A6AF57007360BC /* License.storyboard */,
-				D067D9AC214693E200ECDE6D /* LoginController.swift */,
+				D067D9AC214693E200ECDE6D /* EmailSignInController.swift */,
 				D077D5F0213974FC00D3D5B3 /* GetProController.swift */,
 				D0BA620F224A8547005CF278 /* GetProTableController.swift */,
 				D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */,
+				242B9144258A0D3E00A39E19 /* SignInController.swift */,
+				248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -5170,6 +5208,7 @@
 				D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */,
 				D07A164121678EA5008BB432 /* RoundrectView.swift */,
 				7EB552682422439E000498CC /* ThemableElements */,
+				249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */,
 				65EBC24F1BC2D25E00788D98 /* AEUILongLabelViewCell.h */,
 				65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */,
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
@@ -6539,6 +6578,7 @@
 				D0B545B22435D649002F0AEC /* FilterTagsButtons.swift in Sources */,
 				659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */,
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
+				2425D6A9258F8C430037AEBE /* Dictionary+Utils.swift in Sources */,
 				244339DF2581092900AB4F26 /* UpstreamsController.swift in Sources */,
 				D0B545772435D5DA002F0AEC /* RequestSenderProtocol.swift in Sources */,
 				7E9C0BBA25627B5500F1999D /* RateAppController.swift in Sources */,
@@ -6548,6 +6588,7 @@
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
 				D0D7E6302446E186001801A5 /* UIBezierPath+Utils.swift in Sources */,
 				D0B545D62435D697002F0AEC /* IntroductionOnboardingController.swift in Sources */,
+				242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */,
 				7E8C8C4324E19779000B4B9C /* UIImage+Utils.swift in Sources */,
 				D0D7E5EE24444EEF001801A5 /* BackgroundFetchState.swift in Sources */,
 				659886591CF74DE9003ECD1C /* ACLLogger.m in Sources */,
@@ -6585,6 +6626,7 @@
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				D0B545D52435D697002F0AEC /* OnboardingAnimationsController.swift in Sources */,
 				D0D7E61024445018001801A5 /* ActivityStatisticsService.swift in Sources */,
+				248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
 				D0D7E5E524444EBD001801A5 /* ParsedHost.swift in Sources */,
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
 				D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */,
@@ -6611,6 +6653,7 @@
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
 				D0B5456A2435D5C9002F0AEC /* UserFilterModel.swift in Sources */,
 				7EA45506254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */,
+				247521F62594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				D0D7E61E244456F2001801A5 /* ActivityStatisticsModel.swift in Sources */,
 				D0B545F62435D6C4002F0AEC /* AffinityRulesParser.swift in Sources */,
 				D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
@@ -6656,7 +6699,7 @@
 				D00E448A25650084002DDE98 /* ImportSettingsService.swift in Sources */,
 				D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */,
 				7E473B7825559469006F8345 /* DnsProviderCell.swift in Sources */,
-				D0B545C82435D669002F0AEC /* LoginController.swift in Sources */,
+				D0B545C82435D669002F0AEC /* EmailSignInController.swift in Sources */,
 				D0B545812435D62A002F0AEC /* CharacterSet+Utils.swift in Sources */,
 				D0B545432435CFF5002F0AEC /* AntibannerController.swift in Sources */,
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
@@ -6765,7 +6808,6 @@
 				D0B545C12435D660002F0AEC /* SettingsController.swift in Sources */,
 				D0B5456C2435D5C9002F0AEC /* InvertedSafariWhitelistModel.swift in Sources */,
 				D0B5456D2435D5C9002F0AEC /* SystemBlacklistModel.swift in Sources */,
-				D0B545802435D62A002F0AEC /* Dictionary+Utils.swift in Sources */,
 				D0B545B52435D650002F0AEC /* GroupsController.swift in Sources */,
 				D0B545862435D62A002F0AEC /* SafariProtectionService.swift in Sources */,
 				D0D7E52C24371871001801A5 /* AASFilterSubscriptionParser.m in Sources */,
@@ -6809,6 +6851,7 @@
 				7EBEC6DF25501A89004A753D /* DnsProvidersModel.swift in Sources */,
 				D0B546002435D6D2002F0AEC /* SharedResources.swift in Sources */,
 				65B4F0351D5C829200893BA0 /* ADBTableRow.m in Sources */,
+				249606CF258B831100C747BA /* LeftAlignedIconButton.swift in Sources */,
 				D0B545AA2435D640002F0AEC /* DnsContainerController.swift in Sources */,
 				D00E441C2562A4B0002DDE98 /* ImportSettingsCell.swift in Sources */,
 				D0B545A82435D640002F0AEC /* DnsSettingsController.swift in Sources */,
@@ -6828,6 +6871,7 @@
 			files = (
 				7E407999231E7CA3007EFB26 /* SimpleConfiguration.swift in Sources */,
 				65EC9C9B1BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
+				247521F42594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				D0D33BBC23102CB5009082CE /* Affinity.swift in Sources */,
 				D0A29F8B23E053CC00D974CF /* DnsFiltersService.swift in Sources */,
 				65EC9CAB1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
@@ -6835,7 +6879,6 @@
 				65EC9BCB1BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D031A131219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				D06DE02D234792D200A70D85 /* AntibannerController.swift in Sources */,
-				7EABA6602578F710001E52BC /* Dictionary+Utils.swift in Sources */,
 				655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D0D33BB623102444009082CE /* AffinityRulesParser.swift in Sources */,
 				D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
@@ -6914,6 +6957,8 @@
 				65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D05CA86F1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D08CE427240D37D600A70089 /* ConfigurationService.swift in Sources */,
+				249606BD258B831000C747BA /* LeftAlignedIconButton.swift in Sources */,
+				2425D6F0258F8C720037AEBE /* Dictionary+Utils.swift in Sources */,
 				655A02931C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				7EB5526B2422441F000498CC /* ThemableButton.swift in Sources */,
 				D06E30E8253F323B008BBD2D /* DnsProviders.swift in Sources */,
@@ -6959,6 +7004,7 @@
 				D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
+				242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */,
 				D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */,
 				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
@@ -7026,6 +7072,7 @@
 				D0DE8DAF23607A010073B163 /* NotificationService+Utils.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				D0D7E59A243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */,
+				249606E2258B832100C747BA /* LeftAlignedIconButton.swift in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
 				7EC67FC8254843CA00FEEEE2 /* DnsImplementation.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
@@ -7064,6 +7111,7 @@
 				7E8C8C4224E19779000B4B9C /* UIImage+Utils.swift in Sources */,
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
+				248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
 				D0702B3F2188859D0051669A /* FileShareService.swift in Sources */,
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
@@ -7087,7 +7135,6 @@
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */,
-				7EB2F95423F2B95800F9A544 /* Dictionary+Utils.swift in Sources */,
 				65EC9BD81BB9824C00F53F3B /* ASDatabase.m in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				D081FC2B2418EB38000A10DA /* SafariProtectionService.swift in Sources */,
@@ -7120,6 +7167,7 @@
 				65F398161B7B684700ABCD39 /* main.m in Sources */,
 				7EA45505254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
+				247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,
 				7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */,
@@ -7137,7 +7185,7 @@
 				7EEC43252428EFB100F39C33 /* ActivityStatisticsRecord.swift in Sources */,
 				D0CDD56A2344E066000584EF /* DnsFiltersService.swift in Sources */,
 				655611761E5C485000F39A7C /* NSData+GZIP.m in Sources */,
-				D067D9AD214693E200ECDE6D /* LoginController.swift in Sources */,
+				D067D9AD214693E200ECDE6D /* EmailSignInController.swift in Sources */,
 				D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */,
 				7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */,
 				7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */,
@@ -7154,6 +7202,7 @@
 				7E53455722FC2296008DA7FF /* FiltersAndGroupsViewModel.swift in Sources */,
 				D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */,
 				7E9B37F62391761F00053972 /* FilterDetailedInterface.swift in Sources */,
+				2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */,
 				7EA7834B2578E54500CA8889 /* SupportService+Feedback.swift in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
 				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
@@ -7254,11 +7303,11 @@
 				D0D5949923AA3C330033CAF3 /* DnsLogRecord.swift in Sources */,
 				D03398072431929D00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				D07A811223B501CD00181E54 /* SharedResources.swift in Sources */,
+				247521FA2594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				7E3244C2255AC2F00058BCDF /* NativeProvidersServiceTest.swift in Sources */,
 				7ED544F7243B4FDE004563DA /* DnsStatisticsRecord.swift in Sources */,
 				D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */,
-				7E1AB67C25824ABA00519B2B /* Dictionary+Utils.swift in Sources */,
 				65E9E7B31BBD96DF00AE8DDF /* ABECFilterParsers.m in Sources */,
 				65EC9C8D1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D093718921AEA7CB004A24F1 /* ContentBlockerService.swift in Sources */,
@@ -7269,7 +7318,9 @@
 				7E85765F2435F1EC0055F63D /* DomainParser.swift in Sources */,
 				D0288F3A230698DB00A4EBEF /* ACNNetworking.m in Sources */,
 				D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */,
+				2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */,
 				7EA2163D24449EEC00393949 /* MigrationService.swift in Sources */,
+				24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */,
 				7E2D05B223CE22F8006A141C /* DomainsConverter.swift in Sources */,
 				D0D33BBB23102CB4009082CE /* Affinity.swift in Sources */,
 				D0288F33230697E000A4EBEF /* AASFilterSubscriptionParser.m in Sources */,
@@ -7313,6 +7364,7 @@
 				7E8D423E258CC52100B6300E /* DnsProviders+Migrations.swift in Sources */,
 				7E8576632435F1F70055F63D /* RuleLabel.swift in Sources */,
 				D081FC16241250D9000A10DA /* ComplexProtectionServiceTest.swift in Sources */,
+				241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */,
 				D0288F31230697C800A4EBEF /* ACLFileLocker.m in Sources */,
 				653B4CEB1DA5051200B1FF54 /* AEBlacklistDomainObject.m in Sources */,
 				7E50FC1A238C0AB400F11722 /* DnsFiltersService.swift in Sources */,
@@ -7543,6 +7595,7 @@
 				7ECD9C44238D65960065E88D /* DDLog.m in Sources */,
 				D06E316E253F3428008BBD2D /* DnsProviders.swift in Sources */,
 				7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */,
+				2425D728258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				7E9A487B23A2810B00B89540 /* DnsLogRecord.swift in Sources */,
 				7E9A487D23A2815400B89540 /* AffinityRulesParser.swift in Sources */,
 				7E9A487D23A2815400B89540 /* AffinityRulesParser.swift in Sources */,
@@ -7577,6 +7630,7 @@
 				D0C940E423EABEFA008B85EC /* NetworkSettingsService.swift in Sources */,
 				7E334029239036D500C39F62 /* APCommonSharedResources.m in Sources */,
 				7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */,
+				247521F32594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */,
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
 				7E5EA7AA239A381A00A07DE0 /* ComplexProtectionService.swift in Sources */,
@@ -7605,6 +7659,7 @@
 				7ECD9C4A238D65F00065E88D /* ADBTable.m in Sources */,
 				7E33402A23903A4000C39F62 /* ACNNetworking.m in Sources */,
 				7E334023239033E500C39F62 /* ADLocales.m in Sources */,
+				2425D702258F8CE50037AEBE /* Dictionary+Utils.swift in Sources */,
 				7E9A487E23A2815F00B89540 /* Affinity.swift in Sources */,
 				7E9A487A23A2803E00B89540 /* ABECFilter.m in Sources */,
 				7E334022239033CE00C39F62 /* ACNUrlUtils.m in Sources */,
@@ -7652,8 +7707,10 @@
 				7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */,
 				D0D33BB823102BC5009082CE /* AffinityRulesParser.swift in Sources */,
 				7E85766C2435F1FB0055F63D /* ParsedHost.swift in Sources */,
+				2425D73A258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D06DE02A2346298900A70D85 /* UIColorUtils.swift in Sources */,
 				D0569D6121F1C0A800985DA9 /* DDFileLogger.m in Sources */,
+				247521F52594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E85766A2435F1FB0055F63D /* RulesParser.swift in Sources */,
 				D0EC86C123A8D24900EDF107 /* DnsStatisticsService.swift in Sources */,
 				D081FC342418EB76000A10DA /* SafariProtectionService.swift in Sources */,
@@ -7673,6 +7730,7 @@
 				7EEC432A24290C4800F39C33 /* Date+Utils.swift in Sources */,
 				D0569D8821F1C0A800985DA9 /* AERDomainFilterRule.m in Sources */,
 				D0569D8A21F1C0A800985DA9 /* NSStringPunycodeAdditions.m in Sources */,
+				2425D714258F8CE60037AEBE /* Dictionary+Utils.swift in Sources */,
 				D0569D8E21F1C0A800985DA9 /* ADLocations.m in Sources */,
 				D0F36295220C09760065BE8E /* ACDnsUtils.m in Sources */,
 				D0569D9521F1C0A800985DA9 /* ASDatabase.m in Sources */,
@@ -8295,6 +8353,7 @@
 			files = (
 				D0B543EB2435C6B8002F0AEC /* DDLog.m in Sources */,
 				D0B543EC2435C6B8002F0AEC /* Date+Utils.swift in Sources */,
+				2425D73B258F8D1E0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D0B543ED2435C6B8002F0AEC /* DnsLogRecord.swift in Sources */,
 				D0B543EE2435C6B8002F0AEC /* AffinityRulesParser.swift in Sources */,
 				D0D7E5A4243C94E2001801A5 /* APDnsServerObject.m in Sources */,
@@ -8302,6 +8361,7 @@
 				D0B543EF2435C6B8002F0AEC /* ACObject.m in Sources */,
 				D0B543F02435C6B8002F0AEC /* ACLLogger.m in Sources */,
 				D0B543F12435C6B8002F0AEC /* CocoaLumberjack.swift in Sources */,
+				2425D715258F8CEC0037AEBE /* Dictionary+Utils.swift in Sources */,
 				D0B543F22435C6B8002F0AEC /* ABECRequest.m in Sources */,
 				D0B543F32435C6B8002F0AEC /* FMDatabaseQueue.m in Sources */,
 				D0B543F42435C6B8002F0AEC /* ASDFilterObjects.m in Sources */,
@@ -8309,6 +8369,7 @@
 				D0B543F62435C6B8002F0AEC /* DDTTYLogger.m in Sources */,
 				D0B543F72435C6B8002F0AEC /* KeychainService.swift in Sources */,
 				D0B543F82435C6B8002F0AEC /* TodayViewController.swift in Sources */,
+				247521F72594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				D0B543F92435C6B8002F0AEC /* LoginResponseParser.swift in Sources */,
 				D0B543FA2435C6B8002F0AEC /* (null) in Sources */,
 				D0B543FB2435C6B8002F0AEC /* ACNHttpUtils.m in Sources */,
@@ -8387,6 +8448,7 @@
 			files = (
 				D0B544352435C6BC002F0AEC /* SimpleConfiguration.swift in Sources */,
 				D0B544362435C6BC002F0AEC /* FMDatabasePool.m in Sources */,
+				247521F82594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7EABA6162578F5CC001E52BC /* SuccessFailureParser.swift in Sources */,
 				D0D891B624651E3F0098487A /* SupportService.swift in Sources */,
 				D0B544392435C6BC002F0AEC /* Affinity.swift in Sources */,
@@ -8407,7 +8469,6 @@
 				D0B544482435C6BC002F0AEC /* RoundRectButton.swift in Sources */,
 				D0B544492435C6BC002F0AEC /* ActionViewController.swift in Sources */,
 				D0B5444A2435C6BC002F0AEC /* PurchaseService.swift in Sources */,
-				7EABA6722578F711001E52BC /* Dictionary+Utils.swift in Sources */,
 				D0B5444B2435C6BC002F0AEC /* DDLog.m in Sources */,
 				D0B5444C2435C6BC002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5444D2435C6BC002F0AEC /* NSStringPunycodeAdditions.m in Sources */,
@@ -8473,6 +8534,8 @@
 				D0B544832435C6BC002F0AEC /* APCommonSharedResources.m in Sources */,
 				D0B544842435C6BC002F0AEC /* ConfigurationService.swift in Sources */,
 				D0B544852435C6BC002F0AEC /* ACNNetworking.m in Sources */,
+				249606D0258B831900C747BA /* LeftAlignedIconButton.swift in Sources */,
+				2425D6CC258F8C6C0037AEBE /* Dictionary+Utils.swift in Sources */,
 				D06E30EA253F323B008BBD2D /* DnsProviders.swift in Sources */,
 				D0B544862435C6BC002F0AEC /* ABECFilterParsers.m in Sources */,
 				D0B544872435C6BC002F0AEC /* LoginResponseParser.swift in Sources */,
@@ -8540,6 +8603,7 @@
 				D0B544D72435C6BF002F0AEC /* APDnsServerAddress.m in Sources */,
 				D0D7E61924445673001801A5 /* ActivityStatisticsService.swift in Sources */,
 				D0B544D82435C6BF002F0AEC /* FMDatabase.m in Sources */,
+				247521F92594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E473B3F25540E62006F8345 /* NativeProvidersService.swift in Sources */,
 				D0B544D92435C6BF002F0AEC /* CocoaLumberjack.swift in Sources */,
 				D0D7E60024444F98001801A5 /* DnsStatisticsRecord.swift in Sources */,
@@ -8573,6 +8637,7 @@
 				D0B544EB2435C6BF002F0AEC /* LoginService.swift in Sources */,
 				D0B544EC2435C6BF002F0AEC /* FMDatabasePool.m in Sources */,
 				D0B544ED2435C6BF002F0AEC /* DDLoggerNames.m in Sources */,
+				2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D0B544EE2435C6BF002F0AEC /* (null) in Sources */,
 				D0B544EF2435C6BF002F0AEC /* ACLFileLocker.m in Sources */,
 				D0B544F02435C6BF002F0AEC /* String+Utils.swift in Sources */,
@@ -8585,6 +8650,7 @@
 				D0B544F62435C6BF002F0AEC /* ADProductInfo.m in Sources */,
 				D0B544F72435C6BF002F0AEC /* DDMultiFormatter.m in Sources */,
 				D0B544F82435C6BF002F0AEC /* FilterDetailedInterface.swift in Sources */,
+				2425D716258F8CEC0037AEBE /* Dictionary+Utils.swift in Sources */,
 				D0B544F92435C6BF002F0AEC /* KeychainService.swift in Sources */,
 				D0D7E57C243B1179001801A5 /* Bundle+config.swift in Sources */,
 				D0D7E5EC24444ED6001801A5 /* RulesParser.swift in Sources */,
