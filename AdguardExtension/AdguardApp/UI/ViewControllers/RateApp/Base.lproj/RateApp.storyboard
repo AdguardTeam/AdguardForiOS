@@ -14,34 +14,34 @@
             <objects>
                 <viewController storyboardIdentifier="RateAppController" id="CNv-Rb-w1l" customClass="RateAppController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o4r-wn-WEe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyI-jv-Crn">
-                                <rect key="frame" x="0.0" y="581.33333333333337" width="375" height="230.66666666666663"/>
+                                <rect key="frame" x="0.0" y="308.5" width="320" height="259.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhP-9I-o1V">
-                                        <rect key="frame" x="16" y="158.66666666666663" width="343" height="40"/>
+                                        <rect key="frame" x="16" y="187.5" width="288" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ZGp-Us-Ff5"/>
                                         </constraints>
-                                        <state key="normal" title="No, leave feedback"/>
+                                        <state key="normal" title="No, i have a problem"/>
                                         <connections>
-                                            <action selector="leaveFeedbackTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="rFA-tC-mqO"/>
+                                            <action selector="haveAProblemTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="rFA-tC-mqO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCD-6t-VdZ">
-                                        <rect key="frame" x="16" y="102.66666666666663" width="343" height="40"/>
+                                        <rect key="frame" x="16" y="131.5" width="288" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pIQ-iD-ufI"/>
                                         </constraints>
-                                        <state key="normal" title="Yes, it works"/>
+                                        <state key="normal" title="Yes, rate it"/>
                                         <connections>
-                                            <action selector="itWorksTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="4O6-hK-RwQ"/>
+                                            <action selector="rateAppTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="4O6-hK-RwQ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-47-2Mg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="70.666666666666629" width="343" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-47-2Mg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="99.5" width="288" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -102,9 +102,9 @@
                     <connections>
                         <outlet property="contentView" destination="OyI-jv-Crn" id="PxZ-Kl-L94"/>
                         <outlet property="descriptionLabel" destination="m5W-47-2Mg" id="w38-Pt-pmh"/>
-                        <outlet property="itWorksButton" destination="XCD-6t-VdZ" id="CzS-4e-ZvS"/>
+                        <outlet property="haveAProblemButton" destination="OhP-9I-o1V" id="6IR-nx-bxT"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="zBK-0B-0Jg" id="k9x-im-qIw"/>
-                        <outlet property="leaveFeedbackButton" destination="OhP-9I-o1V" id="6IR-nx-bxT"/>
+                        <outlet property="rateAppButton" destination="XCD-6t-VdZ" id="CzS-4e-ZvS"/>
                         <outletCollection property="themableLabels" destination="9GR-EN-yP2" collectionClass="NSMutableArray" id="y53-QE-Mdz"/>
                         <outletCollection property="themableLabels" destination="m5W-47-2Mg" collectionClass="NSMutableArray" id="ufC-3G-hBC"/>
                     </connections>
@@ -113,8 +113,111 @@
             </objects>
             <point key="canvasLocation" x="696" y="-395"/>
         </scene>
+        <!--Rate App Problem Controller-->
+        <scene sceneID="AM1-QV-1FZ">
+            <objects>
+                <viewController storyboardIdentifier="RateAppProblemController" id="P0O-Up-KHN" customClass="RateAppProblemController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z9o-FJ-LhD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZV-gK-Wqa">
+                                <rect key="frame" x="0.0" y="307" width="320" height="261"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3v5-h9-5E9">
+                                        <rect key="frame" x="16" y="189" width="288" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="6Xg-K2-Zeh"/>
+                                        </constraints>
+                                        <state key="normal" title="Problem remains"/>
+                                        <connections>
+                                            <action selector="problemRemains:" destination="P0O-Up-KHN" eventType="touchUpInside" id="KhD-qM-NXO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-Qh-0t0">
+                                        <rect key="frame" x="16" y="133" width="288" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Nxu-LI-Wo8"/>
+                                        </constraints>
+                                        <state key="normal" title="Got it, this helps"/>
+                                        <connections>
+                                            <action selector="problemIsDoneTapped:" destination="P0O-Up-KHN" eventType="touchUpInside" id="Jul-uw-Xhm"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check this instruction:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yq-tf-ruv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="26" width="288" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BbB-7k-lfe">
+                                        <rect key="frame" x="148" y="8" width="24" height="2"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="Ibb-xz-nE1">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="2" id="l47-y1-yuF">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="3"/>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qK9-TS-hXq">
+                                        <rect key="frame" x="16" y="89" width="288" height="35.5"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2yq-tf-ruv" secondAttribute="trailing" constant="16" id="0Mm-Kc-Y4A"/>
+                                    <constraint firstAttribute="trailing" secondItem="3v5-h9-5E9" secondAttribute="trailing" constant="16" id="BcG-Ja-FTi"/>
+                                    <constraint firstItem="XGH-Qh-0t0" firstAttribute="leading" secondItem="DZV-gK-Wqa" secondAttribute="leading" constant="16" id="CGJ-hp-3QT"/>
+                                    <constraint firstAttribute="trailing" secondItem="qK9-TS-hXq" secondAttribute="trailing" constant="16" id="Uog-AM-fct"/>
+                                    <constraint firstItem="3v5-h9-5E9" firstAttribute="leading" secondItem="DZV-gK-Wqa" secondAttribute="leading" constant="16" id="XaR-bA-xjj"/>
+                                    <constraint firstItem="qK9-TS-hXq" firstAttribute="top" secondItem="2yq-tf-ruv" secondAttribute="bottom" constant="5.5" id="ZOI-eN-6LU"/>
+                                    <constraint firstItem="BbB-7k-lfe" firstAttribute="top" secondItem="DZV-gK-Wqa" secondAttribute="top" constant="8" id="bjD-O4-Hwz"/>
+                                    <constraint firstItem="2yq-tf-ruv" firstAttribute="top" secondItem="BbB-7k-lfe" secondAttribute="bottom" constant="16" id="cxv-MO-wvf"/>
+                                    <constraint firstItem="3v5-h9-5E9" firstAttribute="top" secondItem="XGH-Qh-0t0" secondAttribute="bottom" constant="16" id="eUu-QX-gaj"/>
+                                    <constraint firstItem="BbB-7k-lfe" firstAttribute="centerX" secondItem="DZV-gK-Wqa" secondAttribute="centerX" id="eqY-GE-T5F"/>
+                                    <constraint firstItem="XGH-Qh-0t0" firstAttribute="top" secondItem="qK9-TS-hXq" secondAttribute="bottom" constant="8.5" id="sXj-Oh-w2n"/>
+                                    <constraint firstAttribute="trailing" secondItem="XGH-Qh-0t0" secondAttribute="trailing" constant="16" id="vLk-l7-12c"/>
+                                    <constraint firstItem="2yq-tf-ruv" firstAttribute="leading" secondItem="DZV-gK-Wqa" secondAttribute="leading" constant="16" id="vpd-5J-Vlt"/>
+                                    <constraint firstAttribute="bottom" secondItem="3v5-h9-5E9" secondAttribute="bottom" constant="32" id="wVY-OH-0Pi"/>
+                                    <constraint firstItem="qK9-TS-hXq" firstAttribute="leading" secondItem="DZV-gK-Wqa" secondAttribute="leading" constant="16" id="wYG-qb-i1N"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MPI-eA-tR7"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DZV-gK-Wqa" firstAttribute="leading" secondItem="MPI-eA-tR7" secondAttribute="leading" id="FYt-sn-2Sy"/>
+                            <constraint firstAttribute="bottom" secondItem="DZV-gK-Wqa" secondAttribute="bottom" id="OYw-pT-uLL"/>
+                            <constraint firstItem="MPI-eA-tR7" firstAttribute="trailing" secondItem="DZV-gK-Wqa" secondAttribute="trailing" id="bOF-IG-Ql8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="DZV-gK-Wqa" id="gi5-FT-pw5"/>
+                        <outlet property="descriptionTextView" destination="qK9-TS-hXq" id="SPv-cZ-zoq"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="OYw-pT-uLL" id="x7z-Kk-MTX"/>
+                        <outlet property="problemIsDoneButton" destination="XGH-Qh-0t0" id="tic-mN-x85"/>
+                        <outlet property="problemRemainsButton" destination="3v5-h9-5E9" id="swk-cO-2lo"/>
+                        <outletCollection property="themableLabels" destination="2yq-tf-ruv" collectionClass="NSMutableArray" id="zmS-Yb-itv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fzq-DP-zNa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1740" y="-395.07042253521126"/>
+        </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

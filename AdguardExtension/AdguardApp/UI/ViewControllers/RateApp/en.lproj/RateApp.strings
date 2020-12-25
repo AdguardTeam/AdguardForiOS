@@ -1,8 +1,17 @@
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Please check this instruction:";
+
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "Problem remains";
+
 /* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
 "9GR-EN-yP2.text" = "Are you happy with AdGuard?";
 
-/* Class = "UIButton"; normalTitle = "No, leave feedback"; ObjectID = "OhP-9I-o1V"; */
-"OhP-9I-o1V.normalTitle" = "No, leave feedback";
+/* Class = "UIButton"; normalTitle = "No, i have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "No, i have a problem";
 
-/* Class = "UIButton"; normalTitle = "Yes, it works"; ObjectID = "XCD-6t-VdZ"; */
-"XCD-6t-VdZ.normalTitle" = "Yes, it works";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Yes, rate it";
+
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Got it, this helps";

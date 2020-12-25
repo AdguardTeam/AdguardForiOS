@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
+		240F1E5E2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
+		240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -2574,6 +2576,7 @@
 
 /* Begin PBXFileReference section */
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
+		240F1E5D2595D03000580102 /* RateAppProblemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppProblemController.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -4602,6 +4605,7 @@
 			children = (
 				7E7F990A241A98E400FC89DC /* RateApp.storyboard */,
 				7E9C0BB825627B5500F1999D /* RateAppController.swift */,
+				240F1E5D2595D03000580102 /* RateAppProblemController.swift */,
 			);
 			path = RateApp;
 			sourceTree = "<group>";
@@ -6737,6 +6741,7 @@
 				244339722580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
 				D0B545CE2435D692002F0AEC /* RuleAddedController.swift in Sources */,
 				D0B545FE2435D6D2002F0AEC /* UIApplication+OpenAdguardUrl.swift in Sources */,
+				240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */,
 				D0B545C02435D65C002F0AEC /* CustomNavigationTransition.swift in Sources */,
 				7E9C0BFA256286A000F1999D /* AppDelegate+PresentController.swift in Sources */,
 				D0B545B92435D650002F0AEC /* ComplexProtectionController.swift in Sources */,
@@ -7080,6 +7085,7 @@
 				7EB2F95A23F2C56300F9A544 /* NetworkingService.swift in Sources */,
 				7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */,
 				7E49DBBC22DDC25000027E93 /* Constants.m in Sources */,
+				240F1E5E2595D03000580102 /* RateAppProblemController.swift in Sources */,
 				244339DE2581092900AB4F26 /* UpstreamsController.swift in Sources */,
 				7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */,
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
