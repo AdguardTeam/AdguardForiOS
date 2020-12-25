@@ -121,7 +121,7 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func rateAppRowTapped() {
-        UIApplication.shared.openAppStoreToRateApp()
+        AppDelegate.shared.presentRateAppController()
     }
     
     private func exportLogsTapped() {

@@ -21,8 +21,8 @@ import UIKit
 class RateAppController: BottomAlertController {
 
     @IBOutlet weak var descriptionLabel: ThemableLabel!
-    @IBOutlet weak var itWorksButton: UIButton!
-    @IBOutlet weak var leaveFeedbackButton: UIButton!
+    @IBOutlet weak var rateAppButton: UIButton!
+    @IBOutlet weak var haveAProblemButton: UIButton!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -37,11 +37,11 @@ class RateAppController: BottomAlertController {
         
         descriptionLabel.text = String.localizedString("rate_app_description")
         
-        itWorksButton.makeTitleTextUppercased()
-        itWorksButton.applyStandardGreenStyle()
+        rateAppButton.makeTitleTextUppercased()
+        rateAppButton.applyStandardGreenStyle()
         
-        leaveFeedbackButton.makeTitleTextUppercased()
-        leaveFeedbackButton.applyStandardOpaqueStyle()
+        haveAProblemButton.makeTitleTextUppercased()
+        haveAProblemButton.applyStandardOpaqueStyle()
         
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
@@ -51,15 +51,15 @@ class RateAppController: BottomAlertController {
     
     // MARK: - Actions
     
-    @IBAction func itWorksTapped(_ sender: UIButton) {
+    @IBAction func rateAppTapped(_ sender: UIButton) {
         dismiss(animated: true) {
             UIApplication.shared.openAppStoreToRateApp()
         }
     }
     
-    @IBAction func leaveFeedbackTapped(_ sender: UIButton) {
+    @IBAction func haveAProblemTapped(_ sender: UIButton) {
         dismiss(animated: true) {
-            AppDelegate.shared.presentBugReportController(withType: .feedback)
+            AppDelegate.shared.presentRateAppProblemController()
         }
     }
     

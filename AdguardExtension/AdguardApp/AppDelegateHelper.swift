@@ -553,16 +553,11 @@ class AppDelegateHelper: NSObject {
     }
     
     private func showRateAppDialogIfNedeed() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             guard let self = self else { return }
             if self.rateService.shouldShowRateAppDialog {
-                let success = AppDelegate.shared.presentRateAppController()
-                if !success {
-                    // Try once more on failure
-                    self.showRateAppDialogIfNedeed()
-                } else {
-                    self.resources.rateAppShown = true
-                }
+                AppDelegate.shared.presentRateAppController()
+                self.resources.rateAppShown = true
             }
         }
     }
