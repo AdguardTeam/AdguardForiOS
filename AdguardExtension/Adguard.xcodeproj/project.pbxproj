@@ -48,7 +48,7 @@
 		249606CF258B831100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		249606D0258B831900C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		249606E2258B832100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
-		24CBA66225939CC200E28308 /* CustomSchemeURLParecerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParecerTest.swift */; };
+		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24F55248258753C900AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24F5525A258753CB00AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24F5525B258753CB00AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
@@ -2611,7 +2611,7 @@
 		247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+CustomSchemeURLParserProtocol.swift"; sourceTree = "<group>"; };
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconButton.swift; sourceTree = "<group>"; };
-		24CBA66125939CC200E28308 /* CustomSchemeURLParecerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParecerTest.swift; sourceTree = "<group>"; };
+		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -4481,7 +4481,7 @@
 				D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */,
 				7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */,
 				D02C080121BEAA2100796714 /* FiltersServiceTest.swift */,
-				24CBA66125939CC200E28308 /* CustomSchemeURLParecerTest.swift */,
+				24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */,
 				241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */,
 				D0249571256BD0E4000EED34 /* ImportSettingsTest.swift */,
 				D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */,
@@ -7320,7 +7320,7 @@
 				D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */,
 				2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */,
 				7EA2163D24449EEC00393949 /* MigrationService.swift in Sources */,
-				24CBA66225939CC200E28308 /* CustomSchemeURLParecerTest.swift in Sources */,
+				24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */,
 				7E2D05B223CE22F8006A141C /* DomainsConverter.swift in Sources */,
 				D0D33BBB23102CB4009082CE /* Affinity.swift in Sources */,
 				D0288F33230697E000A4EBEF /* AASFilterSubscriptionParser.m in Sources */,

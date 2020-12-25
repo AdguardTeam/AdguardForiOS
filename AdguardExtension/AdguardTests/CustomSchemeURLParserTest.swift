@@ -18,7 +18,7 @@
 
 import XCTest
 
-class CustomSchemeURLParecerTest: XCTestCase {
+class CustomSchemeURLParserTest: XCTestCase {
 
     override func setUpWithError() throws {
     }
@@ -26,9 +26,9 @@ class CustomSchemeURLParecerTest: XCTestCase {
     override func tearDownWithError() throws {
     }
     
-    func testParceURL() {
+    func testParseURL() {
         let url = URL(string: "adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList")!
-        let result = url.parceUrl()
+        let result = url.parseUrl()
         
         
         let locationValue = result.params?["location"]
@@ -41,9 +41,9 @@ class CustomSchemeURLParecerTest: XCTestCase {
         XCTAssertEqual(titleValue, "EasyList")
     }
     
-    func testParceAuthURL() {
+    func testParseAuthURL() {
         let url = URL(string: "adguard://auth#some_token=123&foo=321&bar=qwerty")!
-        let result = url.parceAuthUrl()
+        let result = url.parseAuthUrl()
         
         let tokenValue = result.params?["some_token"]
         let fooValue = result.params?["foo"]
@@ -58,9 +58,9 @@ class CustomSchemeURLParecerTest: XCTestCase {
         XCTAssertEqual(barValue, "qwerty")
     }
     
-    func testParceIncorectParamsOfURL() {
+    func testParseIncorectParamsOfURL() {
         let url = URL(string: "adguard:subscribe?&location=&&&=&")!
-        let result = url.parceUrl()
+        let result = url.parseUrl()
         
         let locationValue = result.params?["location"]
         let emptyValue = result.params?[""]
@@ -72,9 +72,9 @@ class CustomSchemeURLParecerTest: XCTestCase {
         XCTAssertEqual(emptyValue, "")
     }
     
-    func testParceIncorectParamsOfAuthURL() {
+    func testParseIncorectParamsOfAuthURL() {
         let url = URL(string: "adguard:subscribe#location=&&&=&")!
-        let result = url.parceAuthUrl()
+        let result = url.parseAuthUrl()
         
         let locationValue = result.params?["location"]
         let emptyValue = result.params?[""]

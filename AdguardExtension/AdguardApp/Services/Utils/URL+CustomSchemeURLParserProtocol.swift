@@ -19,8 +19,8 @@
 import Foundation
 
 protocol CustomSchemeURLParserProtocol {
-    func parceAuthUrl() -> URLParserResult
-    func parceUrl() -> URLParserResult
+    func parseAuthUrl() -> URLParserResult
+    func parseUrl() -> URLParserResult
 }
 
 struct URLParserResult {
@@ -30,12 +30,12 @@ struct URLParserResult {
 
 extension URL: CustomSchemeURLParserProtocol {
     
-    func parceAuthUrl() -> URLParserResult {
+    func parseAuthUrl() -> URLParserResult {
         guard let components = splitURLByChar(separator: "#") else { return URLParserResult() }
         return prepareParams(components: components)
     }
     
-    func parceUrl() -> URLParserResult {
+    func parseUrl() -> URLParserResult {
         guard let components = splitURLByChar(separator: ":") else { return URLParserResult() }
         return prepareParams(components: components)
     }
