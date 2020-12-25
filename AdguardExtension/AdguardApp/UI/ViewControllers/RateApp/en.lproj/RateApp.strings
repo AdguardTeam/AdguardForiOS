@@ -7,8 +7,8 @@
 /* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
 "9GR-EN-yP2.text" = "Are you happy with AdGuard?";
 
-/* Class = "UIButton"; normalTitle = "No, i have a problem"; ObjectID = "OhP-9I-o1V"; */
-"OhP-9I-o1V.normalTitle" = "No, i have a problem";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "No, I have a problem";
 
 /* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
 "XCD-6t-VdZ.normalTitle" = "Yes, rate it";

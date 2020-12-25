@@ -25,7 +25,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ZGp-Us-Ff5"/>
                                         </constraints>
-                                        <state key="normal" title="No, i have a problem"/>
+                                        <state key="normal" title="No, I have a problem"/>
                                         <connections>
                                             <action selector="haveAProblemTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="rFA-tC-mqO"/>
                                         </connections>
