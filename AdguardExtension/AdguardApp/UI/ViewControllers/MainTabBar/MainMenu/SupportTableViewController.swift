@@ -121,7 +121,7 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func rateAppRowTapped() {
-        let _ = AppDelegate.shared.presentRateAppController()
+        AppDelegate.shared.presentRateAppController()
     }
     
     private func exportLogsTapped() {

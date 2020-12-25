@@ -67,6 +67,7 @@ class RateAppProblemController: BottomAlertController {
         contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTextView(descriptionTextView)
+        setupDescriptionTextView()
     }
     
     private func setupDescriptionTextView() {

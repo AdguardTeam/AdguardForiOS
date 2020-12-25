@@ -59,7 +59,7 @@ class RateAppController: BottomAlertController {
     
     @IBAction func haveAProblemTapped(_ sender: UIButton) {
         dismiss(animated: true) {
-            let _ = AppDelegate.shared.presentRateAppProblemController()
+            AppDelegate.shared.presentRateAppProblemController()
         }
     }
     
