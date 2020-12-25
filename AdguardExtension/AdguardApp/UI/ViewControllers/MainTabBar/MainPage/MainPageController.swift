@@ -578,7 +578,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         })
         
         let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
-            self?.processState()
+            DispatchQueue.main.async {
+                self?.processState()
+            }
         }
         
         let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
@@ -733,7 +735,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
         
         if !onBoardingIsInProcess {
-            if !onboardingShown && !configuration.someContentBlockersEnabled && !configuration.proStatus{
+            if !onboardingShown && !resources.eulaAndPrivcayAcceptance{
                 showOnboarding()
             } else {
                 processContentBlockersHelper()

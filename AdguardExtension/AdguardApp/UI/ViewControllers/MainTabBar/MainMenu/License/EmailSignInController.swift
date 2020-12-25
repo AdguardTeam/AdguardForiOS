@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class LoginController: UIViewController, UITextFieldDelegate {
+class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
     
@@ -54,6 +54,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private var keyboardMover: KeyboardMover!
     
     private var notificationToken: NotificationToken?
+    
+    private var isKeyboardNextButtonEnabled = true
+
     
     // MARK: - VC lifecycle
     
@@ -137,7 +140,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
             passwordEdit.becomeFirstResponder()
         }
         else if (nameEdit.text?.count ?? 0) > 0 &&
-            (passwordEdit.text?.count ?? 0) > 0 {
+            (passwordEdit.text?.count ?? 0) > 0 && isKeyboardNextButtonEnabled {
+            isKeyboardNextButtonEnabled = false
             login()
         }
         return true
@@ -183,6 +187,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     private func login(){
         loginButton.startIndicator()
         loginButton.isEnabled = false
+        isKeyboardNextButtonEnabled = false
         
         let name = nameEdit.text
         let password = passwordEdit.text
@@ -213,6 +218,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             
             self.loginButton.stopIndicator()
             self.loginButton.isEnabled = true
+            self.isKeyboardNextButtonEnabled = true
             
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
@@ -234,9 +240,22 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    
+    /*
+        If we open this controller from AboutViewController then we must return to AboutViewController after successful login
+        If we open this controller from GetProController or from AboutViewController -> GetProController we must return to GetProController after successful login
+    */
     private func loginSuccess() {
         let body = ACLocalizedString("login_success_message", nil)
-        navigationController?.popViewController(animated: true)
+        if let controllers = navigationController?.viewControllers.filter({ $0 is GetProController || $0 is AboutViewController }), !controllers.isEmpty {
+            if controllers.count > 1, let vc = controllers.first(where: { $0 is GetProController }) {
+                navigationController?.popToViewController(vc, animated: true)
+            } else {
+                navigationController?.popToViewController(controllers.first!, animated: true)
+            }
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
         notificationService.postNotificationInForeground(body: body, title: "")
     }
     
@@ -252,49 +271,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     private func loginFailure(_ error: NSError?) {
         
-        if error == nil || error!.domain != LoginService.loginErrorDomain {
-            // unknown error
-            let errorDescription = error?.localizedDescription ?? "nil"
-            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
-            let message = ACLocalizedString("login_error_message", nil)
-            
-            notificationService.postNotificationInForeground(body: message, title: "")
+        let signInHelper = SignInFailureHandler(notificationService: notificationService)
+        let messages = signInHelper.loginFailure(error, auth2Fa: { [unowned self] in
+            self.performSegue(withIdentifier: self.confirm2faSegue, sender: self)
+        })
+ 
+        if messages?.alertMessage != nil {
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: messages?.alertMessage, completion: nil)
         }
         
-        // some errors we show as red text below password text field, some in alert dialog
-        var errorMessage: String?
-        var alertMessage: String?
-        
-        switch error!.code {
-            
-        // errors to be shown in red label
-        case LoginService.loginBadCredentials:
-            errorMessage = ACLocalizedString("bad_credentials_error", nil)
-        case LoginService.accountIsDisabled:
-            errorMessage = ACLocalizedString("account_is_disabled_error", nil)
-        case LoginService.accountIsLocked:
-            errorMessage = ACLocalizedString("account_is_locked_error", nil)
-        
-        // errors to be show as alert
-        case LoginService.loginMaxComputersExceeded:
-            alertMessage = ACLocalizedString("login_max_computers_exceeded", nil)
-        case LoginService.loginError:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        
-        // 2fa required
-        case LoginService.auth2FaRequired:
-            performSegue(withIdentifier: confirm2faSegue, sender: self)
-            
-        default:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        }
-        
-        if alertMessage != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
-        }
-        
-        if errorMessage != nil {
-            errorLabel.text = errorMessage
+        if messages?.errorMessage != nil {
+            errorLabel.text = messages?.errorMessage
             nameLine.backgroundColor = theme.errorRedColor
             passwordLine.backgroundColor = theme.errorRedColor
         }

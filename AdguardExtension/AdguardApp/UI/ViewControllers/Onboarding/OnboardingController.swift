@@ -68,15 +68,9 @@ class OnboardingController: UIViewController {
             self?.observeContentBlockersState()
         }
         
+        watchManualButtonIpad.applyStandardOpaqueStyle()
         setupLabels()
         updateTheme()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        watchManualButtonIpad.layer.cornerRadius = watchManualButtonIpad.frame.height / 2
-        watchManualButtonIpad.layer.borderColor  = UIColor.AdGuardColor.green.cgColor
-        watchManualButtonIpad.layer.borderWidth = 1.0
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

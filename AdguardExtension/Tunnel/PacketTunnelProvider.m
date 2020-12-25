@@ -152,16 +152,11 @@
             ^(const char *msg, int length) {
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
-#if DEBUG
-                    [[ACLLogger singleton] flush];
-#endif
+                    if (isDebugLogs) {
+                        [[ACLLogger singleton] flush];
+                    }
                 }
             }];
-
-#if DEBUG
-        [AGLogger setLevel: AGLL_DEBUG];
-        [[ACLLogger singleton] setLogLevel: ACLLDebugLevel];
-#endif
         
         _dnsTrackerService = [DnsTrackerService new];
         _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
