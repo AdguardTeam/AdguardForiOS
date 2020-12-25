@@ -85,7 +85,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard text != "\n" else {
-            textView.resignFirstResponder()
+            if type == .wifiExceptions { textView.resignFirstResponder() }
             return false
         }
         let currentText = textView.text ?? ""

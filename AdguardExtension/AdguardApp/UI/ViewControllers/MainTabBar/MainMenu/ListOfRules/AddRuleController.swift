@@ -78,8 +78,7 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
-        
-        ruleTextView.returnKeyType = .done
+        changeKeyboardReturnKeyTypeIfNeeded()
     }
     
     deinit {
@@ -231,10 +230,16 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     }
     
     private func saveIfNeeded(text: String) {
-        if !text.isEmpty {
+        if !text.isEmpty, type == .wifiExceptions {
             ruleTextView.resignFirstResponder()
             delegate?.addRule(rule: text)
             dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    private func changeKeyboardReturnKeyTypeIfNeeded() {
+        if type == .wifiExceptions {
+            ruleTextView.returnKeyType = .done
         }
     }
 }
