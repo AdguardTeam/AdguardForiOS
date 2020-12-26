@@ -735,7 +735,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
         
         if !onBoardingIsInProcess {
-            if !onboardingShown && !resources.eulaAndPrivcayAcceptance{
+            if !onboardingShown {
                 showOnboarding()
             } else {
                 processContentBlockersHelper()
