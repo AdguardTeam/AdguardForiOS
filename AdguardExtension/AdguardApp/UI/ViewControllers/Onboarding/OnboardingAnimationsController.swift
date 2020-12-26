@@ -43,7 +43,7 @@ class OnboardingAnimationsController: UIViewController {
     
     private var currentStep = 1
     
-    private let showLicenseByCloseSegue = "showLicenseByClose"
+    private let showLicenseScreenSegue = "showLicenseScreenSegue"
     private let showOnboardingControllerSegue = "ShowOnboardingController"
     
     override func viewDidLoad() {
@@ -119,7 +119,7 @@ class OnboardingAnimationsController: UIViewController {
             let isJapanesse = Locale.current.languageCode == "ja"
             
            if !configuration.proStatus && !isJapanesse{
-                performSegue(withIdentifier: self.showLicenseByCloseSegue, sender: self)
+                performSegue(withIdentifier: self.showLicenseScreenSegue, sender: self)
             } else {
                 dismiss(animated: true) { [weak self] in
                     self?.delegate?.onboardingDidFinish()
