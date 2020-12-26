@@ -341,5 +341,6 @@ extension NativeProvidersService {
 extension NativeProvidersService: DnsProvidersServiceDelegate {
     func dnsProvidersChanged() {
         reinitializeProviders()
+        NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
 }
