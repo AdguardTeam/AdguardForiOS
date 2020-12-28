@@ -18,47 +18,30 @@
 
 protocol SignInProtocol {}
 extension SignInProtocol where Self: UIViewController {
-    
-    func dismissController(message: String, toMainPage: Bool = true, sfSafariViewController: UIViewController? = nil, notificationService: UserNotificationServiceProtocol?) {
-        /*
-          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-         */
+    /*
+     If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
+     */
+    func dismissController(toMainPage: Bool = true,
+                           sfSafariViewController: UIViewController? = nil,
+                           toController: (() -> ())? = nil,
+                           complition: (() -> ())? = nil) {
+        
         if let _ = self.tabBarController {
             sfSafariViewController?.dismiss(animated: true, completion: {
-                notificationService?.postNotificationInForeground(body: message, title: "")
+                complition?()
             })
             
-            if toMainPage {
-                let controller = self.tabBarController?.viewControllers?.first
-                    self.tabBarController?.selectedViewController = controller
-                    self.navigationController?.popToRootViewController(animated: false)
-            } else {
-                self.navigationController?.popViewController(animated: false)
-            }
-        } else {
-            self.presentingViewController?.dismiss(animated: true, completion: {
-                notificationService?.postNotificationInForeground(body: message, title: "")
-            })
-        }
-    }
-    
-    func dismissEmailController(message: String, toMainPage: Bool = true, notificationService: UserNotificationServiceProtocol?) {
-        /*
-          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-         */
-        if let _ = tabBarController {
             if toMainPage {
                 let controller = self.tabBarController?.viewControllers?.first
                 self.tabBarController?.selectedViewController = controller
                 self.navigationController?.popToRootViewController(animated: false)
             } else {
-                guard let controllers = navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
-                navigationController?.popToViewController(controller, animated: false)
+                toController?()
             }
-            notificationService?.postNotificationInForeground(body: message, title: "")
+            (sfSafariViewController != nil) ? () : complition?()
         } else {
             self.presentingViewController?.dismiss(animated: true, completion: {
-                notificationService?.postNotificationInForeground(body: message, title: "")
+                complition?()
             })
         }
     }

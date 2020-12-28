@@ -238,18 +238,36 @@ class EmailSignInController: UIViewController, UITextFieldDelegate, SignInProtoc
     }
 
     private func loginSuccess() {
+        guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
         let body = String.localizedString("login_success_message")
-        dismissEmailController(message: body, notificationService: notificationService)
+
+        dismissController { [weak self] in
+            self?.navigationController?.popToViewController(controller, animated: false)
+        } complition: { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: body, title: "")
+        }
     }
     
     private func premiumExpired() {
+        guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
         let body = String.localizedString("login_premium_expired_message")
-        dismissEmailController(message: body, toMainPage: false, notificationService: notificationService)
+        
+        dismissController(toMainPage: false) { [weak self] in
+            self?.navigationController?.popToViewController(controller, animated: false)
+        } complition: { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: body, title: "")
+        }
     }
     
     private func notPremium() {
+        guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
         let body = String.localizedString("not_premium_message")
-        dismissEmailController(message: body, toMainPage: false, notificationService: notificationService)
+        
+        dismissController(toMainPage: false) { [weak self] in
+            self?.navigationController?.popToViewController(controller, animated: false)
+        } complition: { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: body, title: "")
+        }
     }
     
     private func loginFailure(_ error: NSError?) {
