@@ -261,7 +261,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
         }
         dnsManager.dnsSettings = settings
         
-        dnsManager.localizedDescription = Bundle.main.applicationName ?? "AdGuard"
+        dnsManager.localizedDescription = Bundle.main.applicationName
         dnsManager.saveToPreferences(completionHandler: onErrorReceived)
     }
     
