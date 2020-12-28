@@ -261,7 +261,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
         }
         dnsManager.dnsSettings = settings
         
-        dnsManager.localizedDescription = Bundle.main.applicationName ?? "AdGuard"
+        dnsManager.localizedDescription = Bundle.main.applicationName
         dnsManager.saveToPreferences(completionHandler: onErrorReceived)
     }
     
@@ -341,5 +341,6 @@ extension NativeProvidersService {
 extension NativeProvidersService: DnsProvidersServiceDelegate {
     func dnsProvidersChanged() {
         reinitializeProviders()
+        NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
 }

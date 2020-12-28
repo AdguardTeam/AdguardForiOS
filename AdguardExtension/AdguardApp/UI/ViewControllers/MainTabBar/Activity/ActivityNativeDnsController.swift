@@ -47,7 +47,7 @@ class ActivityNativeDnsController: UIViewController {
     }
     
     @IBAction func implementationButtonTapped(_ sender: UIButton) {
-        _ = AppDelegate.shared.presentDnsSettingsController()
+        AppDelegate.shared.presentDnsSettingsController()
     }
     
     private func updateTheme() {

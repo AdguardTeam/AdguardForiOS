@@ -295,10 +295,7 @@ class DnsSettingsController : UITableViewController {
         theme.setupSwitch(enabledSwitch)
         theme.setupSeparators(separators)
         theme.setupNavigationBar(navigationController?.navigationBar)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     private func getTitleString(product: Product?) -> String {

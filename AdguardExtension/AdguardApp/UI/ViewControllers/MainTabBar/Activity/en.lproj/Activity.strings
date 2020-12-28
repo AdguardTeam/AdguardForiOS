@@ -1,5 +1,5 @@
-/* Class = "UIButton"; normalTitle = "Enable Activity"; ObjectID = "1A6-DD-78f"; */
-"1A6-DD-78f.normalTitle" = "Enable Activity";
+/* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
+"1A6-DD-78f.normalTitle" = "Switch mode";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "ADD";
@@ -82,8 +82,8 @@
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "requests";
 
-/* Class = "UILabel"; text = "Native DNS is enabled"; ObjectID = "mSj-Zz-Gm9"; */
-"mSj-Zz-Gm9.text" = "Native DNS is enabled";
+/* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
+"mSj-Zz-Gm9.text" = "Native DNS";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "requests";

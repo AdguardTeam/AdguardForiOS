@@ -98,7 +98,7 @@ extension AppDelegate {
      Presents DnsSettingsController
      Returns true on success and false otherwise
      */
-    func presentDnsSettingsController(showLaunchScreen: Bool = false, dnsProtectionIsEnabled enabled: Bool? = nil) -> Bool {
+    @discardableResult func presentDnsSettingsController(showLaunchScreen: Bool = false, dnsProtectionIsEnabled enabled: Bool? = nil) -> Bool {
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -248,9 +248,9 @@ extension AppDelegate {
             return false
         }
         dnsProvidersController.openUrl = url
-        dnsProvidersController.loadViewIfNeeded()
         
         navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
+        dnsProvidersController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window.rootViewController = tabBar
         
