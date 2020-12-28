@@ -19,7 +19,7 @@
 import UIKit
 import SafariServices
 
-class SignInController: UIViewController {
+class SignInController: UIViewController, SignInProtocol {
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -125,45 +125,22 @@ class SignInController: UIViewController {
     
     private func loginSuccess() {
         let message = String.localizedString("login_success_message")
-        dismissController(message: message)
+        dismissController(message: message, sfSafariViewController: sfSafariViewController, notificationService: notificationService)
     }
     
     private func loginFailure(_ error: NSError?) {
         if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
-            dismissController(message: alertMessage, toMainPage: false)
+            dismissController(message: alertMessage, toMainPage: false, sfSafariViewController: sfSafariViewController, notificationService: notificationService)
         }
     }
     
     private func premiumExpired() {
         let body = String.localizedString("login_premium_expired_message")
-        dismissController(message: body, toMainPage: false)
+        dismissController(message: body, toMainPage: false, sfSafariViewController: sfSafariViewController, notificationService: notificationService)
     }
     
     private func notPremium() {
         let body = String.localizedString("not_premium_message")
-        dismissController(message: body, toMainPage: false)
-    }
-    
-    private func dismissController(message: String, toMainPage: Bool = true) {
-        /*
-          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-         */
-        if let _ = self.tabBarController {
-            sfSafariViewController?.dismiss(animated: true, completion: {
-                self.notificationService.postNotificationInForeground(body: message, title: "")
-            })
-            
-            if toMainPage {
-                let controller = self.tabBarController?.viewControllers?.first
-                    self.tabBarController?.selectedViewController = controller
-                    self.navigationController?.popToRootViewController(animated: false)
-            } else {
-                self.navigationController?.popViewController(animated: false)
-            }
-        } else {
-            self.presentingViewController?.dismiss(animated: true, completion: {
-                self.notificationService.postNotificationInForeground(body: message, title: "")
-            })
-        }
+        dismissController(message: body, toMainPage: false, sfSafariViewController: sfSafariViewController, notificationService: notificationService)
     }
 }

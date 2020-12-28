@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class EmailSignInController: UIViewController, UITextFieldDelegate {
+class EmailSignInController: UIViewController, UITextFieldDelegate, SignInProtocol {
     
     // MARK: - properties
     
@@ -239,17 +239,17 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     private func loginSuccess() {
         let body = String.localizedString("login_success_message")
-        dismissController(message: body)
+        dismissEmailController(message: body, notificationService: notificationService)
     }
     
     private func premiumExpired() {
         let body = String.localizedString("login_premium_expired_message")
-        dismissController(message: body, toMainPage: false)
+        dismissEmailController(message: body, toMainPage: false, notificationService: notificationService)
     }
     
     private func notPremium() {
         let body = String.localizedString("not_premium_message")
-        dismissController(message: body, toMainPage: false)
+        dismissEmailController(message: body, toMainPage: false, notificationService: notificationService)
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -288,26 +288,5 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         attributedString.addAttribute(.font, value: font!, range: nsRange)
         
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
-    }
-    
-    private func dismissController(message: String, toMainPage: Bool = true) {
-        /*
-          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-         */
-        if let _ = tabBarController {
-            if toMainPage {
-                let controller = self.tabBarController?.viewControllers?.first
-                self.tabBarController?.selectedViewController = controller
-                self.navigationController?.popToRootViewController(animated: false)
-            } else {
-                guard let controllers = navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
-                navigationController?.popToViewController(controller, animated: false)
-            }
-            notificationService.postNotificationInForeground(body: message, title: "")
-        } else {
-            self.presentingViewController?.dismiss(animated: true, completion: {
-                self.notificationService.postNotificationInForeground(body: message, title: "")
-            })
-        }
     }
 }
