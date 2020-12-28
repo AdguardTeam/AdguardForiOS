@@ -124,30 +124,46 @@ class SignInController: UIViewController {
     }
     
     private func loginSuccess() {
-        let message = ACLocalizedString("login_success_message", nil)
-        dissmisController(message: message)
+        let message = String.localizedString("login_success_message")
+        dismissController(message: message)
     }
     
     private func loginFailure(_ error: NSError?) {
         if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
-            dissmisController(message: alertMessage)
+            dismissController(message: alertMessage, toMainPage: false)
         }
     }
     
     private func premiumExpired() {
-        let body = ACLocalizedString("login_premium_expired_message", nil)
-        dissmisController(message: body)
+        let body = String.localizedString("login_premium_expired_message")
+        dismissController(message: body, toMainPage: false)
     }
     
     private func notPremium() {
-        let body = ACLocalizedString("not_premium_message", nil)
-        dissmisController(message: body)
+        let body = String.localizedString("not_premium_message")
+        dismissController(message: body, toMainPage: false)
     }
     
-    private func dissmisController(message: String) {
-        sfSafariViewController?.dismiss(animated: true, completion: {
-            self.notificationService.postNotificationInForeground(body: message, title: "")
-        })
-        self.navigationController?.popViewController(animated: false)
+    private func dismissController(message: String, toMainPage: Bool = true) {
+        /*
+          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
+         */
+        if let _ = self.tabBarController {
+            sfSafariViewController?.dismiss(animated: true, completion: {
+                self.notificationService.postNotificationInForeground(body: message, title: "")
+            })
+            
+            if toMainPage {
+                let controller = self.tabBarController?.viewControllers?.first
+                    self.tabBarController?.selectedViewController = controller
+                    self.navigationController?.popToRootViewController(animated: false)
+            } else {
+                self.navigationController?.popViewController(animated: false)
+            }
+        } else {
+            self.presentingViewController?.dismiss(animated: true, completion: {
+                self.notificationService.postNotificationInForeground(body: message, title: "")
+            })
+        }
     }
 }

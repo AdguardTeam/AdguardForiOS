@@ -27,6 +27,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     // MARK: - services
     
+    private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -58,6 +59,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         updateUI()
         updateTheme()
         setupBackButton()
+        confirmButton.applyStandardGreenStyle()
         
         configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -71,11 +73,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         codeTextField.becomeFirstResponder()
         super.viewDidAppear(animated)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        confirmButton.layer.cornerRadius = confirmButton.frame.height / 2
     }
     
     // MARK: - textView methods
@@ -96,6 +93,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     @IBAction func confirmAction(_ sender: Any) {
         if credentials != nil {
             confirmButton.isEnabled = false
+            confirmButton.startIndicator()
             purchaseService.login(name: credentials!.name, password: credentials!.password, code2fa: codeTextField.text)
         }
     }
@@ -119,6 +117,8 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async { [weak self] in
             
             self?.confirmButton.isEnabled = true
+            self?.confirmButton.stopIndicator()
+
             
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
@@ -141,72 +141,30 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     }
     
     private func loginSuccess() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_success_message", nil)) { [weak self] in
-            
-            guard let sSelf = self else { return }
-            var toController: UIViewController?
-            for controller in sSelf.navigationController!.viewControllers {
-                if controller.isKind(of: EmailSignInController.self) || controller.isKind(of: Confirm2FaController.self) {
-                    break;
-                }
-                toController = controller
-            }
-            
-            if toController != nil {
-                self?.navigationController?.popToViewController(toController!, animated: true)
-            }
-        }
+        let body = String.localizedString("login_success_message")
+        dismissController(message: body)
     }
     
     private func premiumExpired() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_premium_expired_message", nil), completion: nil)
+        let body = String.localizedString("login_premium_expired_message")
+        dismissController(message: body, toMainPage: false)
     }
     
     private func notPremium() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("not_premium_message", nil), completion: nil)
+        let body = String.localizedString("not_premium_message")
+        dismissController(message: body, toMainPage: false)
     }
     
     private func loginFailure(_ error: NSError?) {
+        let signInHelper = SignInFailureHandler(notificationService: notificationService)
+        let messages = signInHelper.loginFailure(error)
         
-        if error == nil || error!.domain != LoginService.loginErrorDomain {
-            // unknown error
-            let errorDescription = error?.localizedDescription ?? "nil"
-            DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
-            let message = ACLocalizedString("login_error_message", nil)
-            
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message, completion: nil)
+        if let message = messages?.alertMessage {
+            notificationService.postNotificationInForeground(body: message, title: "")
         }
         
-        // some errors we show as red text below password text field, some in alert dialog
-        var errorMessage: String?
-        var alertMessage: String?
-        
-        switch error!.code {
-            
-        // errors to be shown in red label
-        case LoginService.outh2FAInvalid:
-            errorMessage = ACLocalizedString("invalid_2fa_code_error", nil)
-        case LoginService.accountIsDisabled:
-            errorMessage = ACLocalizedString("account_is_disabled_error", nil)
-        case LoginService.accountIsLocked:
-            errorMessage = ACLocalizedString("account_is_locked_error", nil)
-            
-        // errors to be show as alert
-        case LoginService.loginMaxComputersExceeded:
-            alertMessage = ACLocalizedString("login_max_computers_exceeded", nil)
-        case LoginService.loginError:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        
-        default:
-            alertMessage = ACLocalizedString("login_error_message", nil)
-        }
-        
-        if alertMessage != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: alertMessage, completion: nil)
-        }
-        
-        if errorMessage != nil {
-            errorLabel.text = errorMessage
+        if let message = messages?.errorMessage {
+            errorLabel.text = message
             codeLine.backgroundColor = theme.errorRedColor
         }
         else {
@@ -218,5 +176,27 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     private func updateControls() {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
         codeLine.backgroundColor = codeTextField.isEditing ? theme.editLineSelectedColor : theme.editLineColor
+    }
+    
+    private func dismissController(message: String, toMainPage: Bool = true) {
+        /*
+          If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
+         */
+        if let _ = tabBarController {
+            if toMainPage {
+                let controller = self.tabBarController?.viewControllers?.first
+                self.tabBarController?.selectedViewController = controller
+                self.navigationController?.popToRootViewController(animated: false)
+            } else {
+                guard let controllers = navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
+                navigationController?.popToViewController(controller, animated: false)
+            }
+            notificationService.postNotificationInForeground(body: message, title: "")
+        } else {
+            self.presentingViewController?.dismiss(animated: true, completion: {
+                self.notificationService.postNotificationInForeground(body: message, title: "")
+            })
+        }
+
     }
 }

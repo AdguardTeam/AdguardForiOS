@@ -92,13 +92,13 @@
 "premium_expired_title" = "Attention";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "You have successfully logged into your AdGuard account, but there are no license keys that allow you to activate the Premium version.";
+"not_premium_message" = "You have successfully logged into your AdGuard account, but there is no active subscription that allow you to activate the Premium version.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "You have successfully logged into your AdGuard account! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "You have successfully logged into your AdGuard account, but the license keys that allow you to activate the Premium version have expired.";
+"login_premium_expired_message" = "You have successfully logged into your AdGuard account, but active subscription that allow you to activate the Premium version have expired.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
