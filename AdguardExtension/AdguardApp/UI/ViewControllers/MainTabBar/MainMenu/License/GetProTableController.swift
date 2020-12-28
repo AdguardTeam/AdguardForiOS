@@ -93,6 +93,7 @@ class GetProTableController: UITableViewController {
         }
         
         upgradeButton.makeTitleTextUppercased()
+        upgradeButton.applyStandardGreenStyle()
         titleLabel.text = titleLabel.text?.uppercased()
         
         periodButton.accessibilityLabel = String.localizedString("choose_sub_voiceover")
@@ -105,7 +106,6 @@ class GetProTableController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        upgradeButton.layer.cornerRadius = upgradeButton.frame.height / 2
         periodButton.layer.cornerRadius = periodButton.frame.height / 2
     }
     

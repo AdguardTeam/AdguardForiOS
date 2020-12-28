@@ -21,14 +21,15 @@ extension SignInProtocol where Self: UIViewController {
     /*
      If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
      */
-    func dismissController(toMainPage: Bool = true,
+    func dismissController(toMainPage: Bool = false,
                            sfSafariViewController: UIViewController? = nil,
-                           toController: (() -> ())? = nil,
-                           complition: (() -> ())? = nil) {
+                           onControllerPresentation: (() -> Void)? = nil,
+                           onControllerDismiss: (() -> Void)? = nil) {
         
         if let _ = self.tabBarController {
+            
             sfSafariViewController?.dismiss(animated: true, completion: {
-                complition?()
+                onControllerDismiss?()
             })
             
             if toMainPage {
@@ -36,12 +37,12 @@ extension SignInProtocol where Self: UIViewController {
                 self.tabBarController?.selectedViewController = controller
                 self.navigationController?.popToRootViewController(animated: false)
             } else {
-                toController?()
+                onControllerPresentation?()
             }
-            (sfSafariViewController != nil) ? () : complition?()
+            (sfSafariViewController != nil) ? () : onControllerDismiss?()
         } else {
             self.presentingViewController?.dismiss(animated: true, completion: {
-                complition?()
+                onControllerDismiss?()
             })
         }
     }

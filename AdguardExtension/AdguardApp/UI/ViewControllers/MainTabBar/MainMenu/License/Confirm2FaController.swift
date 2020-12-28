@@ -142,35 +142,20 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate, SignInProtoc
     
     private func loginSuccess() {
         guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
-        let body = String.localizedString("login_success_message")
-        
-        dismissController { [weak self] in
-            self?.navigationController?.popToViewController(controller, animated: false)
-        } complition: { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: body, title: "")
-        }
+        let message = String.localizedString("login_success_message")
+        dismiss(message: message,toMainPage: true, controller: controller)
     }
     
     private func premiumExpired() {
         guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
-        let body = String.localizedString("login_premium_expired_message")
-        
-        dismissController(toMainPage: false) { [weak self] in
-            self?.navigationController?.popToViewController(controller, animated: false)
-        } complition: { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: body, title: "")
-        }
+        let message = String.localizedString("login_premium_expired_message")
+        dismiss(message: message, controller: controller)
     }
     
     private func notPremium() {
         guard let controllers = self.navigationController?.viewControllers.filter ({ $0 is GetProController }), let controller = controllers.first else { return }
-        let body = String.localizedString("not_premium_message")
-        
-        dismissController(toMainPage: false) { [weak self] in
-            self?.navigationController?.popToViewController(controller, animated: false)
-        } complition: { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: body, title: "")
-        }
+        let message = String.localizedString("not_premium_message")
+        dismiss(message: message, controller: controller)
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -194,5 +179,13 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate, SignInProtoc
     private func updateControls() {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
         codeLine.backgroundColor = codeTextField.isEditing ? theme.editLineSelectedColor : theme.editLineColor
+    }
+    
+    private func dismiss(message: String, toMainPage: Bool = false, controller: UIViewController) {
+        dismissController(toMainPage: toMainPage) { [weak self] in
+            self?.navigationController?.popToViewController(controller, animated: false)
+        } onControllerDismiss: { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
 }
