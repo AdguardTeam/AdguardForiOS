@@ -37,11 +37,13 @@ class OnboardingAnimationsController: UIViewController {
     
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private var themeToken: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
     
     private var currentStep = 1
     
+    private let showLicenseScreenSegue = "showLicenseScreenSegue"
     private let showOnboardingControllerSegue = "ShowOnboardingController"
     
     override func viewDidLoad() {
@@ -72,12 +74,18 @@ class OnboardingAnimationsController: UIViewController {
         if let controller = segue.destination as? OnboardingController {
             controller.delegate = delegate
             controller.needsShowingPremium = true
+        } else if let getProController = segue.destination as? GetProController {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            getProController.needsShowingExitButton = true
+            if let getProControllerDelegate = delegate as? GetProControllerDelegate {
+                getProController.getProControllerDelegate = getProControllerDelegate
+            }
         }
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         if currentStep == 3 {
-            performSegue(withIdentifier: showOnboardingControllerSegue, sender: self)
+            makeRedirect()
             return
         }
         
@@ -99,6 +107,26 @@ class OnboardingAnimationsController: UIViewController {
         }
     }
     
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        makeRedirect()
+    }
+    
+    private func makeRedirect() {
+        if !configuration.someContentBlockersEnabled {
+            performSegue(withIdentifier: showOnboardingControllerSegue, sender: self)
+        } else {
+            // We mustn't show License screen for japannese in onboarding
+            let isJapanesse = Locale.current.languageCode == "ja"
+            
+            if !configuration.proStatus && !isJapanesse{
+                performSegue(withIdentifier: self.showLicenseScreenSegue, sender: self)
+            } else {
+                dismiss(animated: true) { [weak self] in
+                    self?.delegate?.onboardingDidFinish()
+                }
+            }
+        }
+    }
     private func setupAnimationViews() {
         if let firstAnimation = Animation.onboardingFirstStep {
             firstAnimationView.animation = firstAnimation

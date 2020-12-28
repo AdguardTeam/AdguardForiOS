@@ -23,7 +23,6 @@ class IntroductionOnboardingController: UIViewController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var licenseTextView: UITextView!
     @IBOutlet weak var nextButton: RoundRectButton!
-    @IBOutlet weak var eulaAndPrivacyCheckBox: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
@@ -51,7 +50,6 @@ class IntroductionOnboardingController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? OnboardingAnimationsController {
             controller.delegate = delegate
-            resources.eulaAndPrivcayAcceptance = eulaAndPrivacyCheckBox.isSelected
         }
     }
     
@@ -60,12 +58,6 @@ class IntroductionOnboardingController: UIViewController {
     }
     
     //MARK: - Actions
-    
-    @IBAction func checkBoxTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        nextButton.isEnabled = sender.isSelected
-    }
-    
     //MARK: - Private mathods
     private func setupLicenseTextView() {
         let format = String.localizedString("introduction_license_agreement")
@@ -74,7 +66,7 @@ class IntroductionOnboardingController: UIViewController {
         let htmlString = String(format: format, privacy, eula)
         
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
-        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .left)
+        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
         
         licenseTextView.attributedText = attributeString
     }
@@ -85,6 +77,5 @@ class IntroductionOnboardingController: UIViewController {
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
-        nextButton.isEnabled = eulaAndPrivacyCheckBox.isSelected
     }
 }
