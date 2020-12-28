@@ -248,9 +248,9 @@ extension AppDelegate {
             return false
         }
         dnsProvidersController.openUrl = url
-        dnsProvidersController.loadViewIfNeeded()
         
         navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
+        dnsProvidersController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window.rootViewController = tabBar
         

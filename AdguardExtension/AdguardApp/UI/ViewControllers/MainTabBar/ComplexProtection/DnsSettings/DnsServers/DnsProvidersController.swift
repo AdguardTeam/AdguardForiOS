@@ -186,10 +186,8 @@ class DnsProvidersController: UITableViewController {
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        tableView.reloadData()
     }
     
     private func editProvider(_ provider: DnsProviderCellModel) {
