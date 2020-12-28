@@ -293,15 +293,15 @@ typedef void (^logCallback)(const char *msg, int length);
 
 typedef NS_ENUM(NSInteger, AGStampProtoType) {
     /** plain is plain DNS */
-    AGSPT_PLAIN = 0x00,
+    AGSPT_PLAIN,
     /** dnscrypt is DNSCrypt */
-    AGSPT_DNSCRYPT = 0x01,
+    AGSPT_DNSCRYPT,
     /** doh is DNS-over-HTTPS */
-    AGSPT_DOH = 0x02,
+    AGSPT_DOH,
     /** tls is DNS-over-TLS */
-    AGSPT_TLS = 0x03,
+    AGSPT_TLS,
     /** doq is DNS-over-QUIC */
-    AGSPT_DOQ = 0x03,
+    AGSPT_DOQ,
 };
 
 @interface AGDnsStamp : NSObject
