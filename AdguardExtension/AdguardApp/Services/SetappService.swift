@@ -61,7 +61,14 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
             startManager()
             
             if SetappManager.shared.canOpen(url: url) {
-                return SetappManager.shared.open(url: url, options: options)
+                return SetappManager.shared.open(url: url, options: options) { result in
+                    switch result {
+                    case .success(let subscription):
+                        DDLogInfo("Successfully logged in with setapp, current subscription: \(subscription.description)")
+                    case .failure(let error):
+                        DDLogError("Error while logging in with setapp: \(error)")
+                    }
+                }
             }
         }
         
@@ -88,10 +95,10 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         DDLogInfo("(SetappService) - start manager")
         
         SetappManager.shared.start(with: .default)
-        SetappManager.shared.logLevel = .debug
+        SetappManager.logLevel = .debug
         SetappManager.shared.delegate = self
         
-        SetappManager.shared.setLogHandle { (message: String, logLevel: SetappLogLevel) in
+        SetappManager.setLogHandle { (message: String, logLevel: SetappLogLevel) in
             DDLogInfo("(Setapp) [\(logLevel)], \(message)")
         }
         
