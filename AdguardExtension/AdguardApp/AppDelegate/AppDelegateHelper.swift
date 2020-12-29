@@ -390,7 +390,11 @@ class AppDelegateHelper: NSObject {
                 let success = appDelegate.presentDnsSettingsController()
                 return success
             } else {
-                let success = appDelegate.presentDnsProvidersController(url: url.absoluteString)
+                let dnsInfo = DnsResolver.resolve(upstream: url.absoluteString)
+                guard let dnsServer = dnsInfo.dnsServer else {
+                    return false
+                }
+                let success = appDelegate.presentDnsProvidersController(url: dnsServer)
                 return success
             }
             
