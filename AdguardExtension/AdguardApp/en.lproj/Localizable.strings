@@ -785,7 +785,7 @@
 "rate_app_description" = "Tell us whether you are satisfied with ad blocking experience so far";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
-"rate_app_problem_description" = "Make sure you are using <b>Safari browser.</b><br> Currently it's technically impossible to block content in other browsers.<br> Proceed to Safari protection settings and enable all necessary filter lists.<br> Restart Safari app: quit and open again.";
+"rate_app_problem_description" = "Make sure you are using <b>Safari browser</b>.<br>Currently it's technically impossible to block content in other browsers.<br>Proceed to Safari protection settings and enable all necessary filter lists.<br>Restart Safari app: quit and open again.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
