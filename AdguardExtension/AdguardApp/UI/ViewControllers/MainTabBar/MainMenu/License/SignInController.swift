@@ -149,7 +149,7 @@ class SignInController: UIViewController, SignInResultProcessor {
             self?.navigationController?.popViewController(animated: false)
         } onControllerDismiss: {
             /*
-                We need a reference to the Notification Service to avoid retain cycle
+                After calling dismiss sfSafariviewController is deiniting and self == nil, to avoid strong self we get Network Service from Service Locator
              */
             let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
             notificationService.postNotificationInForeground(body: message, title: "")
