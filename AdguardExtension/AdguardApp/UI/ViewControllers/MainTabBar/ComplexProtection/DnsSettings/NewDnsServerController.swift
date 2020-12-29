@@ -74,7 +74,12 @@ class NewDnsServerController: BottomAlertController {
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
         }
         else if openUrl != nil {
-            upstreamsField.text = openUrl
+            if resources.dnsImplementation == .adGuard {
+                upstreamsField.text = openUrl
+            } else {
+                // Native DNS implementation doesn't support port syntax
+                upstreamsField.text = openUrl?.discardPortFromIpAddress()
+            }
         }
         
         nameField.becomeFirstResponder()

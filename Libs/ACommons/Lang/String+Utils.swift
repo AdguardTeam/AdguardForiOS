@@ -120,7 +120,37 @@ extension String {
         let charSet = CharacterSet(charactersIn: self)
         var validCharsSet = CharacterSet.urlPathAllowed
         validCharsSet.insert("%")
+        validCharsSet.insert("[")
+        validCharsSet.insert("]")
         return charSet.isSubset(of: validCharsSet) && self.count > 0
+    }
+    
+    /*
+     Discards port from IP address
+     94.140.14.15:52 -> 94.140.14.15
+     [2a10:50c0::bad1:ff]:53 -> 2a10:50c0::bad1:ff
+     Returns initial string if fails to fetch IP address
+     */
+    func discardPortFromIpAddress() -> String {
+        if self.contains("[") && self.contains("]") {
+            let leftQuotePosition = self.firstIndex(of: "[")!
+            let rightQuotePosition = self.firstIndex(of: "]")!
+            
+            let leftQuoteIndex = self.index(leftQuotePosition, offsetBy: 1)
+            let rightQuoteIndex = self.index(rightQuotePosition, offsetBy: -1)
+            
+            guard leftQuoteIndex < rightQuoteIndex else {
+                return self
+            }
+            let ipAddress = self[leftQuoteIndex...rightQuoteIndex]
+            return String(ipAddress)
+        } else {
+            let parts = self.split(separator: ":")
+            guard parts.count == 2 else {
+                return self
+            }
+            return String(parts[0])
+        }
     }
     
     static func localizedString(_ key: String)->String {

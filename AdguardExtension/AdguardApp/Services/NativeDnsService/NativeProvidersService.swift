@@ -342,5 +342,12 @@ extension NativeProvidersService: DnsProvidersServiceDelegate {
     func dnsProvidersChanged() {
         reinitializeProviders()
         NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
+        if resources.dnsImplementation == .native, #available(iOS 14.0, *) {
+            saveDnsManager { error in
+                if let error = error {
+                    DDLogError("Error saving DNS when providers changed: \(error)")
+                }
+            }
+        }
     }
 }
