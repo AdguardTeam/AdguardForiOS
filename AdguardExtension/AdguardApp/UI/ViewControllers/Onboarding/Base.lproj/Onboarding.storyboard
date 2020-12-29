@@ -471,7 +471,7 @@
                         <outletCollection property="themableLabels" destination="FDG-As-HDY" collectionClass="NSMutableArray" id="vbQ-R8-lB6"/>
                         <outletCollection property="themableLabels" destination="Mzf-WJ-CpC" collectionClass="NSMutableArray" id="KuG-Tm-Hqc"/>
                         <segue destination="eQY-Hl-hIc" kind="show" identifier="ShowOnboardingController" id="eyE-5U-rZR"/>
-                        <segue destination="CxR-gs-ONl" kind="show" identifier="showLicenseByClose" id="ugT-pj-gtx"/>
+                        <segue destination="CxR-gs-ONl" kind="show" identifier="showLicenseScreenSegue" id="ugT-pj-gtx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1R-EZ-26a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
