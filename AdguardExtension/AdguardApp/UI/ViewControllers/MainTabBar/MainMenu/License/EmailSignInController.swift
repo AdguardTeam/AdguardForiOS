@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class EmailSignInController: UIViewController, UITextFieldDelegate, SignInProtocol {
+class EmailSignInController: UIViewController, UITextFieldDelegate, SignInResultProcessor {
     
     // MARK: - properties
     

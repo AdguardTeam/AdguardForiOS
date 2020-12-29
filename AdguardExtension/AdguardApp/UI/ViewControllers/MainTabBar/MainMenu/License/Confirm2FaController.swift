@@ -19,7 +19,7 @@
 import Foundation
 
 
-class Confirm2FaController : UIViewController, UITextFieldDelegate, SignInProtocol {
+class Confirm2FaController : UIViewController, UITextFieldDelegate, SignInResultProcessor {
     
     // MARK: - public properties
     

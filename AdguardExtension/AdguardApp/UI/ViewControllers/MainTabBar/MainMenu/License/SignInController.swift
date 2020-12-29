@@ -19,7 +19,7 @@
 import UIKit
 import SafariServices
 
-class SignInController: UIViewController, SignInProtocol {
+class SignInController: UIViewController, SignInResultProcessor {
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -148,6 +148,9 @@ class SignInController: UIViewController, SignInProtocol {
         dismissController(toMainPage: toMainPage, sfSafariViewController: sfSafariViewController) { [weak self] in
             self?.navigationController?.popViewController(animated: false)
         } onControllerDismiss: {
+            /*
+                We need a reference to the Notification Service to avoid retain cycle
+             */
             let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
             notificationService.postNotificationInForeground(body: message, title: "")
         }

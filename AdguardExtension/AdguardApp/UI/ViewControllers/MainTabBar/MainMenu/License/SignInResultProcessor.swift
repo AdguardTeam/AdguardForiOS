@@ -16,8 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol SignInProtocol {}
-extension SignInProtocol where Self: UIViewController {
+protocol SignInResultProcessor {}
+extension SignInResultProcessor where Self: UIViewController {
     /*
      If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
      */
