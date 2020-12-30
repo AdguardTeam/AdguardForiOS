@@ -28,6 +28,7 @@ class ActivityViewController: UITableViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var activityTitle: ThemableLabel!
+    @IBOutlet weak var activityImage: UIImageView!
     
     @IBOutlet weak var changePeriodTypeButton: UIButton!
     
@@ -112,6 +113,7 @@ class ActivityViewController: UITableViewController {
         requestsModel?.delegate = self
         statisticsModel.chartPointsChangedDelegates.append(self)
         
+        activityImage.tintColor = UIColor.AdGuardColor.green
         updateTheme()
         setupTableView()
         dateTypeChanged(dateType: resources.activityStatisticsType)
