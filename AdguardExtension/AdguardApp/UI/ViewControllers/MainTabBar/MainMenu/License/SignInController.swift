@@ -147,11 +147,7 @@ class SignInController: UIViewController, SignInResultProcessor {
     private func dismiss(message: String, toMainPage: Bool = false, sfSafariViewController: UIViewController?) {
         dismissController(toMainPage: toMainPage, sfSafariViewController: sfSafariViewController) { [weak self] in
             self?.navigationController?.popViewController(animated: false)
-        } onControllerDismiss: {
-            /*
-                After calling dismiss SignInController is deiniting and self == nil, to avoid strong self we get Network Service from Service Locator
-             */
-            let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
+        } onControllerDismiss: { [notificationService] in
             notificationService.postNotificationInForeground(body: message, title: "")
         }
     }
