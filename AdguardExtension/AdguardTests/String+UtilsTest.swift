@@ -62,4 +62,16 @@ class StringUtilsTest: XCTestCase {
         let subDomainsToCheck = String.generateSubDomains(from: domain)
         XCTAssertEqual(subdomains, subDomainsToCheck)
     }
+    
+    func testDiscardPortFromIpAddress() {
+        let testCases = ["2a10:50c0::bad1:ff:53": "2a10:50c0::bad1:ff:53",
+                         "94.140.14.15:543": "94.140.14.15",
+                         "77.88.8.8:3323": "77.88.8.8",
+                         "2a10:50c0::1:ffhheu": "2a10:50c0::1:ffhheu",
+                         "[2a10:50c0::bad1:ff]:53": "2a10:50c0::bad1:ff"]
+        
+        for (testCase, result) in testCases {
+            XCTAssertEqual(testCase.discardPortFromIpAddress(), result)
+        }
+    }
 }
