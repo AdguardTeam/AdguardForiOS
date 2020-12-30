@@ -62,11 +62,16 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         model?.applySettings() {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
-                self?.importButton.stopIndicator()
-                self?.importButton.isHidden = true
-                self?.okButton.isHidden = false
-                self?.tableView.alpha = 1.0
-                self?.tableView.isUserInteractionEnabled = true
+                let number = self?.tableView.numberOfRows(inSection: 0)
+                if number ?? 0 > 0 {
+                    self?.importButton.stopIndicator()
+                    self?.importButton.isHidden = true
+                    self?.okButton.isHidden = false
+                    self?.tableView.alpha = 1.0
+                    self?.tableView.isUserInteractionEnabled = true
+                } else {
+                    self?.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

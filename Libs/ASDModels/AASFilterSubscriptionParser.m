@@ -210,9 +210,14 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                      return;
                                  }
                              }
-
+                             
+                             NSString *filterPath = response.URL.absoluteString;
+                             if (! [url.absoluteString isEqual:filterPath]) {
+                                 filterPath = url.absoluteString;
+                             }
+                             
                              [self parseRulesWithContext:context content:content];
-                             [self setPropertiesForContext:context filterPath:response.URL.absoluteString];
+                             [self setPropertiesForContext:context filterPath:filterPath];
 
                              //Main return
                              @synchronized(self) {

@@ -18,6 +18,10 @@
 
 import Foundation
 
+protocol CustomFilterSettingsProtocol {
+    var url: String { get }
+}
+
 enum ImportSettingStatus: Int, Codable {
     typealias RawValue = Int
     
@@ -35,7 +39,7 @@ struct DefaultCBFilterSettings: Codable {
     }
 }
 
-struct CustomCBFilterSettings: Codable {
+struct CustomCBFilterSettings: Codable, CustomFilterSettingsProtocol {
     var name: String
     var url: String
     
@@ -47,7 +51,7 @@ struct CustomCBFilterSettings: Codable {
     }
 }
 
-struct DnsFilterSettings: Codable {
+struct DnsFilterSettings: Codable, CustomFilterSettingsProtocol {
     var name: String
     var url: String
     
