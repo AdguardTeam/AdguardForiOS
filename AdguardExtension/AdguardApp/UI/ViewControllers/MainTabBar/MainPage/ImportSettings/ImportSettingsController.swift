@@ -62,8 +62,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         model?.applySettings() {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
-                let number = self?.tableView.numberOfRows(inSection: 0)
-                if number ?? 0 > 0 {
+                if self?.model?.rows.count ?? 0 > 0 {
                     self?.importButton.stopIndicator()
                     self?.importButton.isHidden = true
                     self?.okButton.isHidden = false
