@@ -304,6 +304,9 @@ class AppDelegateHelper: NSObject {
             if command == authScheme {
                 let result = url.parseAuthUrl()
                 params = result.params
+            } else if command == subscribe {
+                let result = url.parseUrl()
+                params = result.params
             }
         } else {
             let result = url.parseUrl()
@@ -414,8 +417,8 @@ class AppDelegateHelper: NSObject {
         case (_, subscribe):
             DDLogInfo("(AppDelegateHelper) openurl - subscribe filter")
             
-            let url = params?["location"]
-            let title = params?["title"]
+            let url = params?["location"]?.removingPercentEncoding
+            let title = params?["title"]?.removingPercentEncoding
             
             let success = appDelegate.presentFiltersMasterController(showLaunchScreen: true, url: url, title: title)
             return success
