@@ -459,7 +459,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             if let matchFilter = group.filters.first(where: { $0.subscriptionUrl == filter.meta.subscriptionUrl }) {
                 update(filterId: matchFilter.filterId, enabled: true)
-                antibanner.unsubscribeFilter(matchFilter.filterId as NSNumber)
+                setFilter(matchFilter, enabled: true)
             } else {
                 let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
                 newFilter.name = filter.meta.name
@@ -478,17 +478,17 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 
                 updateGroupSubtitle(group)
                 notifyChange()
+                
+                antibanner.subscribeCustomFilter(from: filter) {
+                    [weak self] in
+                    self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
+                    }
+                }
             }
         }
         
         enabledFilters[filter.meta.filterId.intValue] = true
-        
-        antibanner.subscribeCustomFilter(from: filter) {
-            [weak self] in
-            self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-                UIApplication.shared.endBackgroundTask(backgroundTaskID)
-            }
-        }
     }
     
     func renameCustomFilter(_ filterId: Int, _ newName: String) {
