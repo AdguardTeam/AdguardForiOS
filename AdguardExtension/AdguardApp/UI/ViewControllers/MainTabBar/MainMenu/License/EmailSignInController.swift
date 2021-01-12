@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class EmailSignInController: UIViewController, UITextFieldDelegate {
+class EmailSignInController: UIViewController, UITextFieldDelegate, SignInResultProcessor {
     
     // MARK: - properties
     
@@ -90,6 +90,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         updateTheme()
         
         loginButton.makeTitleTextUppercased()
+        loginButton.applyStandardGreenStyle()
         
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
@@ -106,11 +107,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        loginButton.layer.cornerRadius = loginButton.frame.height / 2
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -200,7 +196,8 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
             purchaseService.login(withLicenseKey: name!) {_ in }
         }
         else {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("login_error_message", nil), completion: nil)
+            let body = String.localizedString("login_error_message")
+            notificationService.postNotificationInForeground(body: body, title: "")
             loginButton.stopIndicator()
             loginButton.isEnabled = true
         }
@@ -240,33 +237,22 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    
-    /*
-        If we open this controller from AboutViewController then we must return to AboutViewController after successful login
-        If we open this controller from GetProController or from AboutViewController -> GetProController we must return to GetProController after successful login
-    */
     private func loginSuccess() {
-        let body = ACLocalizedString("login_success_message", nil)
-        if let controllers = navigationController?.viewControllers.filter({ $0 is GetProController || $0 is AboutViewController }), !controllers.isEmpty {
-            if controllers.count > 1, let vc = controllers.first(where: { $0 is GetProController }) {
-                navigationController?.popToViewController(vc, animated: true)
-            } else {
-                navigationController?.popToViewController(controllers.first!, animated: true)
-            }
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
-        notificationService.postNotificationInForeground(body: body, title: "")
+        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
+        let message = String.localizedString("login_success_message")
+        dismiss(message: message, toMainPage: true, controller: controller)
     }
     
     private func premiumExpired() {
-        let body = ACLocalizedString("login_premium_expired_message", nil)
-        notificationService.postNotificationInForeground(body: body, title: "")
+        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
+        let message = String.localizedString("login_premium_expired_message")
+        dismiss(message: message, controller: controller)
     }
     
     private func notPremium() {
-        let body = ACLocalizedString("not_premium_message", nil)
-        notificationService.postNotificationInForeground(body: body, title: "")
+        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
+        let message = String.localizedString("not_premium_message")
+        dismiss(message: message, controller: controller)
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -276,12 +262,12 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: self.confirm2faSegue, sender: self)
         })
  
-        if messages?.alertMessage != nil {
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: messages?.alertMessage, completion: nil)
+        if let message = messages?.alertMessage {
+            notificationService.postNotificationInForeground(body: message, title: "")
         }
         
-        if messages?.errorMessage != nil {
-            errorLabel.text = messages?.errorMessage
+        if let message = messages?.errorMessage {
+            errorLabel.text = message
             nameLine.backgroundColor = theme.errorRedColor
             passwordLine.backgroundColor = theme.errorRedColor
         }
@@ -293,7 +279,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     }
     
     private func setupLostPasswordButton(){
-        let title = ACLocalizedString("lost_password", nil)
+        let title = String.localizedString("lost_password")
         let color = UIColor(hexString: "#888888")
         let nsRange = NSRange(location: 0, length: title.count)
         let font = lostPasswordButton.titleLabel?.font
@@ -305,5 +291,13 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         attributedString.addAttribute(.font, value: font!, range: nsRange)
         
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
+    }
+    
+    private func dismiss(message: String, toMainPage: Bool = false, controller: UIViewController) {
+        dismissController(toMainPage: toMainPage) { [weak self] in
+            self?.navigationController?.popToViewController(controller, animated: false)
+        } onControllerDismiss: { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
 }
