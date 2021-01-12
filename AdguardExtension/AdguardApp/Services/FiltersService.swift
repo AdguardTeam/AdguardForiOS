@@ -481,7 +481,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 
                 antibanner.subscribeCustomFilter(from: filter) {
                     [weak self] in
-                    self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
+                    self?.contentBlocker.reloadJsons(backgroundUpdate: false) { _ in
                         UIApplication.shared.endBackgroundTask(backgroundTaskID)
                     }
                 }
