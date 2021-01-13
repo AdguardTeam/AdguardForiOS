@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-class EmailSignInController: UIViewController, UITextFieldDelegate, SignInResultProcessor {
+class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     // MARK: - properties
     
@@ -238,21 +238,40 @@ class EmailSignInController: UIViewController, UITextFieldDelegate, SignInResult
     }
 
     private func loginSuccess() {
-        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
         let message = String.localizedString("login_success_message")
-        dismiss(message: message, toMainPage: true, controller: controller)
+        /*
+            If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
+        */
+
+        if let _ = self.tabBarController {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dismissToMainPage(animated: true)
+            notificationService.postNotificationInForeground(body: message, title: "")
+
+        } else {
+            let proController = self.navigationController?.viewControllers.first { $0 is GetProController } as? GetProController
+            self.navigationController?.dismiss(animated: true) { [weak self] in
+                self?.notificationService.postNotificationInForeground(body: message, title: "")
+                proController?.getProControllerDelegate?.getProControllerClosed()
+            }
+        }
+
     }
     
     private func premiumExpired() {
         guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
         let message = String.localizedString("login_premium_expired_message")
-        dismiss(message: message, controller: controller)
+        self.navigationController?.popToViewController(controller, animated: true) { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
     
     private func notPremium() {
         guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
         let message = String.localizedString("not_premium_message")
-        dismiss(message: message, controller: controller)
+        self.navigationController?.popToViewController(controller, animated: true) { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
     
     private func loginFailure(_ error: NSError?) {
@@ -291,13 +310,5 @@ class EmailSignInController: UIViewController, UITextFieldDelegate, SignInResult
         attributedString.addAttribute(.font, value: font!, range: nsRange)
         
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
-    }
-    
-    private func dismiss(message: String, toMainPage: Bool = false, controller: UIViewController) {
-        dismissController(toMainPage: toMainPage) { [weak self] in
-            self?.navigationController?.popToViewController(controller, animated: false)
-        } onControllerDismiss: { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: message, title: "")
-        }
     }
 }
