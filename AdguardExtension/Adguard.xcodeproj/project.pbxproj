@@ -9,15 +9,6 @@
 /* Begin PBXBuildFile section */
 		24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
-		2406504025AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504125AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504225AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504325AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504425AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504525AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504625AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504725AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
-		2406504825AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */; };
 		240F1E5E2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
@@ -2614,7 +2605,6 @@
 
 /* Begin PBXFileReference section */
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
-		2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Utils.swift"; sourceTree = "<group>"; };
 		240F1E5D2595D03000580102 /* RateAppProblemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppProblemController.swift; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
@@ -5008,7 +4998,6 @@
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
 				2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */,
 				247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */,
-				2406503F25AF1AA700F6A045 /* UINavigationController+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6783,7 +6772,6 @@
 				6598867C1CF74DE9003ECD1C /* AESharedResources.m in Sources */,
 				6598867D1CF74DE9003ECD1C /* FMResultSet.m in Sources */,
 				7E8D423D258CC52100B6300E /* DnsProviders+Migrations.swift in Sources */,
-				2406504425AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				D0B5459F2435D63D002F0AEC /* GetProDialogView.swift in Sources */,
 				6598867E1CF74DE9003ECD1C /* main.m in Sources */,
 				D0B5458D2435D630002F0AEC /* KeychainService.swift in Sources */,
@@ -6972,7 +6960,6 @@
 				D0227DD5244D50EC009B7579 /* SupportService.swift in Sources */,
 				65FAB33B1D6C576900A0706B /* ACObject.m in Sources */,
 				D0D7E5652437730D001801A5 /* Bundle+config.swift in Sources */,
-				2406504225AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				D07A811323B501CE00181E54 /* SharedResources.swift in Sources */,
 				655A02301C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				7EABA6A62578F8B2001E52BC /* CharacterSet+Utils.swift in Sources */,
@@ -7183,7 +7170,6 @@
 				D0EC86BE23A8C5F300EDF107 /* APDnsLogTable.m in Sources */,
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
-				2406504025AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */,
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */,
@@ -7497,7 +7483,6 @@
 				7E9C0C7525629DAB00F1999D /* UIColor+Utils.swift in Sources */,
 				D0D033F02355EBF40056789B /* AntibannerController.swift in Sources */,
 				7E473B2D25540E5C006F8345 /* NativeProvidersService.swift in Sources */,
-				2406504825AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				7E4AAD38242BC02100957122 /* ChartDateType.swift in Sources */,
 				7E1AB62225824A0C00519B2B /* RequestSenderProtocol.swift in Sources */,
 				D04C2B76240F9FF4009330A8 /* (null) in Sources */,
@@ -7672,7 +7657,6 @@
 				7ECD9C58238D67890065E88D /* ACLFileLogger.m in Sources */,
 				7ECD9C4D238D66780065E88D /* DDOSLogger.m in Sources */,
 				7ECD9C62238E6D630065E88D /* NSString+Utils.m in Sources */,
-				2406504125AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				7ECD9C49238D65E30065E88D /* FMResultSet.m in Sources */,
 				D09E2A99254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				7E8576792435F57F0055F63D /* DomainsParserService.swift in Sources */,
@@ -7779,7 +7763,6 @@
 				D0569DA521F1C0A800985DA9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D0569DA621F1C0A800985DA9 /* ADLocales.m in Sources */,
 				D0569DAE21F1C0A800985DA9 /* Reachability.m in Sources */,
-				2406504325AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				7E50FC18238C09F000F11722 /* AASFilterSubscriptionParser.m in Sources */,
 				D06E3114253F3254008BBD2D /* LocalizedDnsProviders.swift in Sources */,
 				D0569DB321F1C0A800985DA9 /* ADBTableRow.m in Sources */,
@@ -8464,7 +8447,6 @@
 				7E9C0C3D256292E700F1999D /* UIColor+Utils.swift in Sources */,
 				D0B5441B2435C6B8002F0AEC /* ACNUrlUtils.m in Sources */,
 				D0D7E56824377311001801A5 /* Bundle+config.swift in Sources */,
-				2406504525AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				D0B5441C2435C6B8002F0AEC /* ConfigurationService.swift in Sources */,
 				D0B5441D2435C6B8002F0AEC /* ACLFileLocker.m in Sources */,
 				7E80BF5624E18378002C6CDB /* VpnManager.swift in Sources */,
@@ -8558,7 +8540,6 @@
 				D0B544762435C6BC002F0AEC /* SafariProtectionService.swift in Sources */,
 				D0B544772435C6BC002F0AEC /* CocoaLumberjack.swift in Sources */,
 				D0B544782435C6BC002F0AEC /* ACObject.m in Sources */,
-				2406504625AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				D0D7E5662437730E001801A5 /* Bundle+config.swift in Sources */,
 				D0B544792435C6BC002F0AEC /* SharedResources.swift in Sources */,
 				D0B5447A2435C6BC002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
@@ -8647,7 +8628,6 @@
 				D0B544D92435C6BF002F0AEC /* CocoaLumberjack.swift in Sources */,
 				D0D7E60024444F98001801A5 /* DnsStatisticsRecord.swift in Sources */,
 				7EC67FED254843F800FEEEE2 /* DnsImplementation.swift in Sources */,
-				2406504725AF1AA700F6A045 /* UINavigationController+Utils.swift in Sources */,
 				D0B544DA2435C6BF002F0AEC /* FMSQLStatementSplitter.m in Sources */,
 				D0B544DB2435C6BF002F0AEC /* DnsLogRecordsWriter.swift in Sources */,
 				D0B544DC2435C6BF002F0AEC /* AERDomainFilterRule.m in Sources */,

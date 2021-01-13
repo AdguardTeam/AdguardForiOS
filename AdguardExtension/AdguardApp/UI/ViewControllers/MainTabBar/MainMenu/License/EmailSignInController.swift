@@ -24,6 +24,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     // MARK: - properties
     
     var licenseKey: String?
+    var fromOnboarding = false
     
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -62,6 +63,8 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fromOnboarding = self.tabBarController == nil
         
         setupBackButton()
         
@@ -243,7 +246,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
             If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
         */
 
-        if let _ = self.tabBarController {
+        if !fromOnboarding {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.dismissToMainPage(animated: true)
             notificationService.postNotificationInForeground(body: message, title: "")
@@ -261,17 +264,15 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     private func premiumExpired() {
         guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
         let message = String.localizedString("login_premium_expired_message")
-        self.navigationController?.popToViewController(controller, animated: true) { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: message, title: "")
-        }
+        self.navigationController?.popToViewController(controller, animated: true)
+        notificationService.postNotificationInForeground(body: message, title: "")
     }
     
     private func notPremium() {
         guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
         let message = String.localizedString("not_premium_message")
-        self.navigationController?.popToViewController(controller, animated: true) { [weak self] in
-            self?.notificationService.postNotificationInForeground(body: message, title: "")
-        }
+        self.navigationController?.popToViewController(controller, animated: true)
+        notificationService.postNotificationInForeground(body: message, title: "")
     }
     
     private func loginFailure(_ error: NSError?) {
