@@ -19,7 +19,7 @@
 import UIKit
 import SafariServices
 
-class SignInController: UIViewController {
+class SignInController: UIViewController, SignInResultProcessor {
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -124,30 +124,31 @@ class SignInController: UIViewController {
     }
     
     private func loginSuccess() {
-        let message = ACLocalizedString("login_success_message", nil)
-        dissmisController(message: message)
+        let message = String.localizedString("login_success_message")
+        dismiss(message: message, toMainPage: true, sfSafariViewController: sfSafariViewController)
     }
     
     private func loginFailure(_ error: NSError?) {
         if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
-            dissmisController(message: alertMessage)
+            dismiss(message: alertMessage, sfSafariViewController: sfSafariViewController)
         }
     }
     
     private func premiumExpired() {
-        let body = ACLocalizedString("login_premium_expired_message", nil)
-        dissmisController(message: body)
+        let body = String.localizedString("login_premium_expired_message")
+        dismiss(message: body, sfSafariViewController: sfSafariViewController)
     }
     
     private func notPremium() {
-        let body = ACLocalizedString("not_premium_message", nil)
-        dissmisController(message: body)
+        let body = String.localizedString("not_premium_message")
+        dismiss(message: body, sfSafariViewController: sfSafariViewController)
     }
     
-    private func dissmisController(message: String) {
-        sfSafariViewController?.dismiss(animated: true, completion: {
-            self.notificationService.postNotificationInForeground(body: message, title: "")
-        })
-        self.navigationController?.popViewController(animated: false)
+    private func dismiss(message: String, toMainPage: Bool = false, sfSafariViewController: UIViewController?) {
+        dismissController(toMainPage: toMainPage, sfSafariViewController: sfSafariViewController) { [weak self] in
+            self?.navigationController?.popViewController(animated: false)
+        } onControllerDismiss: { [notificationService] in
+            notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
 }
