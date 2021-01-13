@@ -20,7 +20,7 @@ import Foundation
 
 
 extension Array {
-    func uniqueElements<T:Hashable>(map: (Element) -> (T))  -> [Element] {
+    func uniqueElements<T:Hashable>(map: (Element) -> T)  -> [Element] {
         var set = Set<T>()
         var array = [Element]()
         for value in self {
