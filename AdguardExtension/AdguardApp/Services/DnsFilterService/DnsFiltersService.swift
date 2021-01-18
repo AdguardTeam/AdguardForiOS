@@ -427,10 +427,6 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             }
             
             group.wait()
-            if self.complexProtection?.systemProtectionEnabled ?? false {
-                DDLogInfo("(DsnFiltersService) updateFilters - filters are updated. Start updating vpn settings")
-                self.vpnManager?.updateSettings(completion: nil)
-            }
             
             self.filtersAreUpdating = false
         }
