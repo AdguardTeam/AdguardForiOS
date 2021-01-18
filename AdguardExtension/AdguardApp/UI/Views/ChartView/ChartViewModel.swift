@@ -249,7 +249,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             elapsedSumm += record.elapsedSumm
         }
         
-        let averageElapsedTime = Double(elapsedSumm) / Double(requestsNumber)
+        let averageElapsedTime = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
 
         return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
     }
