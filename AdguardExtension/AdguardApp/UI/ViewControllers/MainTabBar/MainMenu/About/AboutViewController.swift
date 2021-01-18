@@ -64,7 +64,7 @@ class AboutViewController: UIViewController {
     }
     
     @IBAction func readMoreTapped(_ sender: UIButton) {
-        UIApplication.shared.openAdguardUrl(action: "home", from: "about", buildVersion: productInfo.buildVersion())
+        UIApplication.shared.openAdguardUrl(action: "acknowledgments", from: "about", buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func eulaTapped(_ sender: UIButton) {
