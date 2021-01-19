@@ -249,7 +249,6 @@ class ActivityViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
@@ -268,7 +267,6 @@ class ActivityViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [])
     }
     
-    @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
@@ -451,7 +449,6 @@ class ActivityViewController: UITableViewController {
         }
     }
     
-    @available(iOS 11.0, *)
     private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecordExtended) -> UISwipeActionsConfiguration {
         var buttonColor: UIColor
         switch buttonType {

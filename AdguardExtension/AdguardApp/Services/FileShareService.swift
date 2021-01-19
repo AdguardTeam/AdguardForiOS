@@ -61,11 +61,7 @@ class FileShareService : NSObject, UIDocumentPickerDelegate, FileShareServicePro
         
         let controller = UIDocumentPickerViewController(documentTypes: ["public.text"], in: .open)
         controller.delegate = self
-        if #available(iOS 11.0, *) {
-            controller.allowsMultipleSelection = false
-        } else {
-            // Fallback on earlier versions
-        }
+        controller.allowsMultipleSelection = false
         importCompletionHandler = completionHandler
         parentController.present(controller, animated: true, completion: nil)
     }

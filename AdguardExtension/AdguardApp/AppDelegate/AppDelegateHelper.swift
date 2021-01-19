@@ -473,9 +473,7 @@ class AppDelegateHelper: NSObject {
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
         var bottomSafeAreaInset: CGFloat = 0.0
         
-        if #available(iOS 11.0, *) {
-            bottomSafeAreaInset = keyWindow.safeAreaInsets.bottom / 2.0
-        }
+        bottomSafeAreaInset = keyWindow.safeAreaInsets.bottom / 2.0
                 
         let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
         
