@@ -32,7 +32,7 @@
 
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
-<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS2.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOS3.png" width="280">&nbsp;<img src="https://cdn.adguard.com/public/Adguard/iOS/screenshots/iOSD.png" width="280">
+<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="230"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="230"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="230"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="230">
 
 <a id="contribution"></a>
 
@@ -138,13 +138,4 @@ bundle exec fastlane auth
 
 ### Acknowledgments
 
-This software wouldn't have been possible without:
-
-- [DnsLibs](https://github.com/AdguardTeam/DnsLibs)
-- [SafariConverterLib](https://github.com/AdguardTeam/SafariConverterLib)
-- [StaticDataTableViewController](https://github.com/peterpaulis/StaticDataTableViewController) by peterpaulis
-- [GZIP](https://github.com/nicklockwood/GZIP) by nicklockwood
-- [Reachability component](https://github.com/tonymillion/Reachability) by Tony Million
-- [Fmdb](https://github.com/ccgus/fmdb) by August «Gus» Mueller
-- [NSStringPunycodeAdditions](https://github.com/Wevah/Punycode-Cocoa) by Nate Weaver
-- [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by Sam Soffes, Joshua Hudson and Antoine Cœur
+Please visit the acknowledgements [page](https://kb.adguard.com/en/miscellaneous/acknowledgments#ios)
