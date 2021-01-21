@@ -63,14 +63,14 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htU-yE-FEi">
-                                <rect key="frame" x="116" y="410.66666666666669" width="143" height="20"/>
+                                <rect key="frame" x="120.66666666666669" y="410.66666666666669" width="134" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="4oK-nl-mAQ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Acknowlegdements">
+                                <state key="normal" title="Acknowledgments">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">

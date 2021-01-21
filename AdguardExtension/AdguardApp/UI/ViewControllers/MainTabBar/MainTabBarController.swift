@@ -151,11 +151,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func resizeIndicator(){
-        var bottomInset: CGFloat = 0.0
-        
-        if #available(iOS 11.0, *) {
-            bottomInset = tabBar.safeAreaInsets.bottom
-        }
+        let bottomInset = tabBar.safeAreaInsets.bottom
         
         if bottomInset != 0.0 {
             bottomView?.isHidden = true

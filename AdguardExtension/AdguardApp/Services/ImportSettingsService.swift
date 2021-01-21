@@ -67,8 +67,22 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         var resultCbFilters:[CustomCBFilterSettings] = []
         
+        let customFilters = filtersService.groups.filter { $0.groupId == FilterGroupId.custom }.flatMap { $0.filters }
+        let customDnsFilters = dnsFiltersService.filters
+        
+        let customCbFilters = settings.customCbFilters?.uniqueElements { $0.url }
+        let dnsCustomFilters = settings.dnsFilters?.uniqueElements { $0.url }
+
+        var uniqueCBFilterSettings = [CustomCBFilterSettings]()
+        var uniqueCustomDnsFilterSettings = [DnsFilterSettings]()
+        
         // custom cb filters
-        for var filter in settings.customCbFilters ?? [] {
+        if let cbFilters = customCbFilters {
+            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customFilters, filterSettings: cbFilters) as? [CustomCBFilterSettings] else { return }
+            uniqueCBFilterSettings = uniqueFilters
+        }
+    
+        for var filter in uniqueCBFilterSettings {
             if filter.status == .enabled {
                 group.enter()
                 subscribeCustomCBFilter(filter) { (success) in
@@ -86,12 +100,16 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         resultSettings.customCbFilters = resultCbFilters
         
-        // dns filters
+        // custom dns filters
         
-        if let dnsFilters = settings.dnsFilters {
-            let resultDnsFilters = applyDnsFilters(dnsFilters, override: settings.overrideDnsFilters ?? false)
-            resultSettings.dnsFilters = resultDnsFilters
+        if let dnsFilters = dnsCustomFilters {
+            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customDnsFilters, filterSettings: dnsFilters) as? [DnsFilterSettings] else { return }
+            uniqueCustomDnsFilterSettings = uniqueFilters
         }
+        
+        
+        let resultDnsFilters = applyDnsFilters(uniqueCustomDnsFilterSettings, override: settings.overrideDnsFilters ?? false)
+        resultSettings.dnsFilters = resultDnsFilters
         
         // set dns server
         if let dnsServerId = settings.dnsServerId {
@@ -177,7 +195,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             }
 
             if let parserResult = result {
-                if filter.name.count > 0 {
+                if !filter.name.isEmpty {
                     parserResult.meta.name = filter.name
                 }
                 self.filtersService.addCustomFilter(parserResult)
@@ -260,5 +278,15 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             agRule.filterId = ASDF_USER_FILTER_ID as NSNumber
             antibanner.add(agRule)
         }
+    }
+    
+    private func uniqueCustomFilterSettings(filters: [FilterDetailedInterface], filterSettings: [CustomFilterSettingsProtocol] ) -> [Any] {
+        var result = [CustomFilterSettingsProtocol]()
+            for cbFilter in filterSettings {
+                if !filters.contains(where: { $0.subscriptionUrl == cbFilter.url }) {
+                    result.append(cbFilter)
+                }
+            }
+        return result
     }
 }

@@ -796,24 +796,13 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func periodOfProduct(_ product: SKProduct)->Period {
-        
-        if #available(iOS 11.2, *) {
-            return getPeriod(product.subscriptionPeriod)
-        } else {
-            return standardPeriod
-        }
+        return getPeriod(product.subscriptionPeriod)
     }
     
     func trialPeriodOfProduct(_ product: SKProduct)->Period {
-        
-        if #available(iOS 11.2, *) {
-            return getPeriod(product.introductoryPrice?.subscriptionPeriod)
-        } else {
-            return standardPeriod
-        }
+        return getPeriod(product.introductoryPrice?.subscriptionPeriod)
     }
     
-    @available(iOS 11.2, *)
     private func getPeriod(_ period: SKProductSubscriptionPeriod?)-> Period {
         
         guard let periodUnit = period?.unit else { return standardPeriod }

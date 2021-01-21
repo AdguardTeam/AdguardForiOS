@@ -457,33 +457,38 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         for group in groups {
             if group.groupId != FilterGroupId.custom { continue }
             
-            let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
-            newFilter.name = filter.meta.name
-            newFilter.desc = filter.meta.descr
-            newFilter.homepage = filter.meta.homepage
-            newFilter.subscriptionUrl = filter.meta.subscriptionUrl
-            newFilter.version = filter.meta.version
-            newFilter.enabled = true
-            newFilter.rulesCount = filter.rules.count
-            
-            group.filters = [newFilter] + group.filters
-
-            if !group.enabled {
-                setGroup(group.groupId, enabled: true)
+            if let matchFilter = group.filters.first(where: { $0.subscriptionUrl == filter.meta.subscriptionUrl }) {
+                update(filterId: matchFilter.filterId, enabled: true)
+                setFilter(matchFilter, enabled: true)
+            } else {
+                let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
+                newFilter.name = filter.meta.name
+                newFilter.desc = filter.meta.descr
+                newFilter.homepage = filter.meta.homepage
+                newFilter.subscriptionUrl = filter.meta.subscriptionUrl
+                newFilter.version = filter.meta.version
+                newFilter.enabled = true
+                newFilter.rulesCount = filter.rules.count
+                
+                group.filters = [newFilter] + group.filters
+                
+                if !group.enabled {
+                    setGroup(group.groupId, enabled: true)
+                }
+                
+                updateGroupSubtitle(group)
+                notifyChange()
+                
+                antibanner.subscribeCustomFilter(from: filter) {
+                    [weak self] in
+                    self?.contentBlocker.reloadJsons(backgroundUpdate: false) { _ in
+                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
+                    }
+                }
             }
-            
-            updateGroupSubtitle(group)
-            notifyChange()
         }
         
         enabledFilters[filter.meta.filterId.intValue] = true
-        
-        antibanner.subscribeCustomFilter(from: filter) {
-            [weak self] in
-            self?.contentBlocker.reloadJsons(backgroundUpdate: false) { (error) in
-                UIApplication.shared.endBackgroundTask(backgroundTaskID)
-            }
-        }
     }
     
     func renameCustomFilter(_ filterId: Int, _ newName: String) {

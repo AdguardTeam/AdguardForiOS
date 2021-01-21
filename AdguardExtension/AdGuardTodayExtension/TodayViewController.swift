@@ -416,18 +416,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
  */
 extension UIColor {
     @objc class var widgetTextColor: UIColor {
-        if #available(iOS 11.0, *) {
-            return UIColor(named: "widgetTextColor")!
-        } else {
-            return UIColor(hexString: "#515353")
-        }
+        return UIColor(named: "widgetTextColor")!
     }
     
     @objc class var widgetTitleColor: UIColor {
-        if #available(iOS 11.0, *) {
-            return UIColor(named: "widgetTitleColor")!
-        } else {
-            return UIColor(hexString: "#131313")
-        }
+        return UIColor(named: "widgetTitleColor")!
     }
 }
