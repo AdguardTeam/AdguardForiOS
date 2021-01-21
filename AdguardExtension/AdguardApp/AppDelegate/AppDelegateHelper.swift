@@ -450,10 +450,9 @@ class AppDelegateHelper: NSObject {
     
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
-        DDLogInfo("(AppDelegateHelper) Social login error")
+        DDLogInfo("(AppDelegateHelper) Social login error: \(error)")
         switch error {
         case socialErrorUserNotFound:
-            DDLogInfo("(AppDelegateHelper) Social login error: User not found")
             userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
             userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
             
