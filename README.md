@@ -32,7 +32,9 @@
 
 AdGuard for iOS is an app that blocks ads in Safari browser at exceptional level, and also provides additional Premium features like configurable DNS settings, encrypted DNS support (DOH, DOT, DNSCrypt), and custom ad blocking subscriptions. To get more information and to download AdGuard for iOS, [visit our website](https://adguard.com/adguard-ios/overview.html).
 
-<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="225"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="225"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="225"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="225">
+<p align="center">
+<img src="https://user-images.githubusercontent.com/17472907/105178597-4b542000-5b39-11eb-86ed-136f0697bcec.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178604-4f803d80-5b39-11eb-9381-24682e06b8d8.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339304-93347f00-5bed-11eb-99b6-ab438b34eb34.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178609-50b16a80-5b39-11eb-9723-5179fb811b65.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105339299-92035200-5bed-11eb-87ef-a7171432fe5d.png" width="250"> <img src="https://user-images.githubusercontent.com/17472907/105178607-5018d400-5b39-11eb-97d6-9dc792b28654.png" width="250">
+</p>
 
 <a id="contribution"></a>
 
