@@ -51,6 +51,15 @@
 		249606D0258B831900C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		249606E2258B832100C747BA /* LeftAlignedIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
+		24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98C7259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98C8259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98C9259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98CA259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98CB259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98CC259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98CD259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
+		24ED98CE259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
 		24D6DFD52599E77100BD6583 /* SignInResultProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6DFD42599E77100BD6583 /* SignInResultProcessor.swift */; };
 		24D6DFD62599E77100BD6583 /* SignInResultProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6DFD42599E77100BD6583 /* SignInResultProcessor.swift */; };
 		24F55248258753C900AF1D3B /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
@@ -2619,6 +2628,7 @@
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* LeftAlignedIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedIconButton.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
+		24ED98C5259B78DF00A73B17 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		24D6DFD42599E77100BD6583 /* SignInResultProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResultProcessor.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
@@ -5001,6 +5011,7 @@
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
 				2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */,
 				247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */,
+				24ED98C5259B78DF00A73B17 /* Array+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6764,6 +6775,7 @@
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
 				6518BD861DABBE6900FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
 				D031A108219EFC99002C17D9 /* CLIColor.m in Sources */,
+				24ED98CA259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0B5459B2435D636002F0AEC /* MainTabBarController.swift in Sources */,
 				D0B545682435D5C9002F0AEC /* ListOfRulesModel.swift in Sources */,
 				D0D7E5F724444F05001801A5 /* RuleLabel.swift in Sources */,
@@ -6910,6 +6922,7 @@
 				D03E533121B6A49000C62152 /* RoundRectButton.swift in Sources */,
 				7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */,
 				D08CE428240D37E300A70089 /* PurchaseService.swift in Sources */,
+				24ED98C8259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D031A14D219EFC99002C17D9 /* DDLog.m in Sources */,
 				655A024E1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D051B05C233101C6008A9A0F /* NSStringPunycodeAdditions.m in Sources */,
@@ -7180,6 +7193,7 @@
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0D33BB423101A87009082CE /* AffinityRulesParser.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */,
@@ -7412,6 +7426,7 @@
 				7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */,
 				D0E84F0F242A32BF0000EEDB /* AEInvertedWhitelistDomainsObjectTest.swift in Sources */,
 				24F5528D258753F400AF1D3B /* DNSSettings.swift in Sources */,
+				24ED98CE259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				7EA2163F2444C76700393949 /* DnsFiltersServiceMock.swift in Sources */,
 				7E77144F2445F3670078CD6B /* DnsStatisticsServiceMock.swift in Sources */,
 				7E1AB61025824A0200519B2B /* ParserProtocol.swift in Sources */,
@@ -7677,6 +7692,7 @@
 				7E85766F2435F1FC0055F63D /* RulesParser.swift in Sources */,
 				D0339810243192AB00F6B9DE /* BackgroundFetchState.swift in Sources */,
 				7EC6801B254843FF00FEEEE2 /* DnsImplementation.swift in Sources */,
+				24ED98C7259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				7EC635BC239EB2E5003A5CE4 /* NotificationService+Utils.swift in Sources */,
 				7E9A487F23A2817900B89540 /* ACIOUtils.m in Sources */,
 				7E33401A2390311B00C39F62 /* String+Utils.swift in Sources */,
@@ -7796,6 +7812,7 @@
 				7E9F3E1123CE0FA700A7BDA2 /* DomainsConverter.swift in Sources */,
 				D0569DD621F1C0A800985DA9 /* DDOSLogger.m in Sources */,
 				7E8576692435F1FB0055F63D /* Rule.swift in Sources */,
+				24ED98C9259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0569DDF21F1C0A800985DA9 /* ABECRequest.m in Sources */,
 				7EC6801A254843FF00FEEEE2 /* DnsImplementation.swift in Sources */,
 				D033980F243192A500F6B9DE /* BackgroundFetchState.swift in Sources */,
@@ -8387,6 +8404,7 @@
 				D0B543EF2435C6B8002F0AEC /* ACObject.m in Sources */,
 				D0B543F02435C6B8002F0AEC /* ACLLogger.m in Sources */,
 				D0B543F12435C6B8002F0AEC /* CocoaLumberjack.swift in Sources */,
+				24ED98CB259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				2425D715258F8CEC0037AEBE /* Dictionary+Utils.swift in Sources */,
 				D0B543F22435C6B8002F0AEC /* ABECRequest.m in Sources */,
 				D0B543F32435C6B8002F0AEC /* FMDatabaseQueue.m in Sources */,
@@ -8491,6 +8509,7 @@
 				7EABA5342578F3D5001E52BC /* RequestFactory.swift in Sources */,
 				D0B544442435C6BC002F0AEC /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0B544462435C6BC002F0AEC /* LoginService.swift in Sources */,
+				24ED98CC259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0B544472435C6BC002F0AEC /* ACIOUtils.m in Sources */,
 				D0B544482435C6BC002F0AEC /* RoundRectButton.swift in Sources */,
 				D0B544492435C6BC002F0AEC /* ActionViewController.swift in Sources */,
@@ -8658,6 +8677,7 @@
 				7E4B0EDE258CF9CC00A52099 /* DnsProvidersService.swift in Sources */,
 				D0B544EA2435C6BF002F0AEC /* ADBTableRow.m in Sources */,
 				7E4B0EDF258CF9D600A52099 /* DnsProviders+Migrations.swift in Sources */,
+				24ED98CD259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D06E3100253F3252008BBD2D /* DnsProviders.swift in Sources */,
 				D0D7E5F824444F06001801A5 /* RuleLabel.swift in Sources */,
 				D0B544EB2435C6BF002F0AEC /* LoginService.swift in Sources */,
