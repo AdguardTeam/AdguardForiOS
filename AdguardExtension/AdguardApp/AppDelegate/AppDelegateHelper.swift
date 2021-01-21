@@ -69,6 +69,8 @@ class AppDelegateHelper: NSObject {
     private let commonUrlScheme = "adguard"
     private let authScheme = "auth"
     
+    private let socialErrorUserNotFound = "user_not_found"
+    
     private var firstRun: Bool {
         get {
             resources.sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
@@ -429,14 +431,38 @@ class AppDelegateHelper: NSObject {
         // Log in by social networks
         case (commonUrlScheme, authScheme):
             DDLogInfo("(AppDelegateHelper) openurl - Log in by social networks")
-            let token = params?["access_token"]
-            let state = params?["state"]
-            purchaseService.login(withAccessToken: token, state: state)
-            return true
+            let error = params?["error"]
+            if let error = error {
+                socialLoginErrorProcessor(error: error)
+                return false
+            } else {
+                let token = params?["access_token"]
+                let state = params?["state"]
+                purchaseService.login(withAccessToken: token, state: state)
+                return true
+            }
+
             
         default: return false
         }
     }
+    
+    private func socialLoginErrorProcessor(error: String) {
+        var userInfo = [AnyHashable: Any]()
+
+        switch error {
+        case socialErrorUserNotFound:
+            userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
+            userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
+            
+        default:
+            break
+        }
+        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+
+    }
+    
+
     
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {

@@ -117,6 +117,9 @@ class SignInController: UIViewController {
             self.premiumExpired()
         case PurchaseService.kPSNotificationLoginNotPremiumAccount:
             self.notPremium()
+        case PurchaseService.kPSNotificationLoginUserNotFound:
+            self.userNotFound()
+
             
         default:
             break
@@ -142,6 +145,13 @@ class SignInController: UIViewController {
     private func notPremium() {
         let body = String.localizedString("not_premium_message")
         dismiss(toMainPage: false, message: body)
+    }
+    
+    private func userNotFound() {
+        let message = String.localizedString("user_not_found_message")
+        dismiss(animated: true) { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
+        }
     }
     
     private func dismiss(toMainPage: Bool, message: String) {

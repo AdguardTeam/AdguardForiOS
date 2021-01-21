@@ -76,6 +76,7 @@ class LoginService: LoginServiceProtocol {
     static let compromissedPassword = -10
     static let emailAllreadyUsed = -11
     static let accountIsLocked = -12
+    static let socialUserNotFound = -13
     
     static let errorDescription = "error_description"
     
