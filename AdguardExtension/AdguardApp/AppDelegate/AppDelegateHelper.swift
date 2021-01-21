@@ -68,7 +68,6 @@ class AppDelegateHelper: NSObject {
     private let applySettings = "apply_settings"
     private let commonUrlScheme = "adguard"
     private let authScheme = "auth"
-    
     private let socialErrorUserNotFound = "user_not_found"
     
     private var firstRun: Bool {
@@ -434,8 +433,7 @@ class AppDelegateHelper: NSObject {
         // Log in by social networks
         case (commonUrlScheme, authScheme):
             DDLogInfo("(AppDelegateHelper) openurl - Log in by social networks")
-            let error = params?["error"]
-            if let error = error {
+            if let error = params?["error"] {
                 socialLoginErrorProcessor(error: error)
                 return false
             } else {
@@ -452,9 +450,10 @@ class AppDelegateHelper: NSObject {
     
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
-
+        DDLogInfo("(AppDelegateHelper) Social login error")
         switch error {
         case socialErrorUserNotFound:
+            DDLogInfo("(AppDelegateHelper) Social login error: User not found")
             userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
             userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
             
