@@ -125,22 +125,8 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         let corners: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         let radius: CGFloat = 10.0
         
-        if #available(iOS 11, *) {
-            contentView.layer.cornerRadius = radius
-            contentView.layer.maskedCorners = corners
-        } else {
-            var cornerMask = UIRectCorner()
-            
-            cornerMask.insert(.topLeft)
-            cornerMask.insert(.topRight)
-            
-            let path = UIBezierPath(roundedRect: contentView.bounds, byRoundingCorners: cornerMask, cornerRadii: CGSize(width: radius, height: radius))
-            let mask = CAShapeLayer()
-            mask.path = path.cgPath
-            contentView.layer.mask = mask
-        }
-        
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = radius
+        contentView.layer.maskedCorners = corners
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOffset = CGSize(width: 0, height: 0)
         contentView.layer.shadowRadius = 3
