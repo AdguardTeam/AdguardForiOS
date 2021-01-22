@@ -293,6 +293,7 @@ class AppDelegateHelper: NSObject {
             NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
                 guard let manager = managers?.first else { return }
                 let enabled = manager.isEnabled && (manager.connection.status == .connected || manager.connection.status == .connecting)
+                DDLogInfo("(AppDelegate) Vpn status: \(enabled)")
                 NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: enabled)
             }
     }
