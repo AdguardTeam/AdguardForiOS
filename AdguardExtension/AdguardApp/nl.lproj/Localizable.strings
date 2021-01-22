@@ -49,6 +49,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Oorspronkelijke DNS werkt";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Oorspronkelijke DNS werkt niet";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Gebruikersfilter";
 
@@ -174,6 +180,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (zonder VPN icon), geen compatibiliteit met andere VPN apps, minder stabiliteit";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Oorspronkelijk";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Geen encryptie (Systeem DNS)";
@@ -383,7 +395,7 @@
 "common_clear" = "Verwijder";
 
 /* (ListOfRulesModel) title for Save button */
-"common_save" = "Bewaren";
+"common_save" = "Opslaan";
 
 /* (ListOfRulesModel) title for import */
 "import" = "Importeren";
@@ -590,7 +602,7 @@
 "default_dns_server_name" = "Systeem DNS";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Gebruik de standaard DNS-servers van uw internetprovider";
+"default_dns_server_description" = "Gebruik de standaard DNS-servers van je internetprovider";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Verzoek blokkeren";
@@ -603,6 +615,12 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Je hebt een ongeldige upstream ingevoerd";
+
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Ongeldig DNS-protocol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ wordt nog niet ondersteund door iOS. Probeer andere upstream toe te voegen.";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systeem blokkeerlijst";
@@ -673,14 +691,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Leeg";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Feedback sturen mislukt";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Het verzenden van het foutrapport is mislukt. Probeer het ajb later opnieuw";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Er ging iets verkeerd";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Het verzenden van feedback is mislukt. Probeer het ajb later opnieuw";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Je foutrapport is succesvol verzonden!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Je feedback is succesvol verzonden!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Een fout rapporteren";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Feedback geven";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Voeg alsjeblieft de probleemomschrijving toe (begon het na een update?) en informatie over andere software die je hebt (VPN/AV/uitbreiding)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Vertel ons wat je vindt van %@ - wat je wel of niet leuk vindt, welke functies je zou willen voorstellen";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Rapport verzenden";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Feedback verzenden";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Door het gebruik ga je akkoord met de<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"introduction_license_agreement" = "Door het verder gebruik ga je akkoord met de <br /><a href=%2$@>Richtlijnen en condities</a> en <a href=%1$@>Privacybeleid</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Verzoeken";
@@ -724,6 +766,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d verzoeken";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Schakel ajb %@ in de DNS-instellingen van het systeem in";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Om oorspronkelijke DNS in te schakelen, moet je <b>Systeeminstellingen</b> openen, naar <b>VPN en netwerk > DNS</b> gaan en daar <b>%@</b> selecteren.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Vertel ons of je tevreden bent over het blokkeren van advertenties";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Zorg ervoor dat je de <b>Safari-browser</b> gebruikt.<br>Momenteel is het technisch onmogelijk om inhoud in andere browsers te blokkeren.<br>Ga naar de beveiligingsinstellingen van Safari en schakel alle benodigde filterlijsten in.<br>Start de Safari-app opnieuw: afsluiten en weer openen.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -815,3 +868,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "DNS gebruikersregels toevoegen";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>WAARSCHUWING!</b>Het inschakelen van deze functies kan de internetverbinding verbreken of je veiligheid en privacy in gevaar brengen.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Geïnteresseerd in leuke nieuwe AdGuard-functies? Probeer ons <a href=\"%@\">betakanaal</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Lijst met gewone DNS-servers die moeten worden gebruikt om DOH/DOT-hostnamen om te zetten (indien aanwezig)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP-adres";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream adres";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

@@ -1,29 +1,17 @@
-/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "Teşekkür ederiz";
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Lütfen bu talimatı kontrol edin:";
 
-/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "geri bildiriminiz için";
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "Sorun devam ediyor";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "Geri Bildirim";
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "AdGuard'dan memnun musunuz?";
 
-/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Lütfen, bize deneyiminizden bahsedin";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "Hayır, bir sorunum var";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "Geri Bildirim";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Evet, değerlendir";
 
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "Geri Bildirim";
-
-/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "GÖNDER";
-
-/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Cevap vermemizi istiyorsanız e-posta adresinizi girin";
-
-/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "ANASAYFA";
-
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "Geri Bildirim";
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Anladım, bu yardımcı oluyor";

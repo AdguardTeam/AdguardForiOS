@@ -1,29 +1,17 @@
-/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "Děkujeme";
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Zkontrolujte prosím tento návod:";
 
-/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "za vaši zpětnou vazbu";
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "Problém přetrvává";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "Zpětná vazba";
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "Jste s AdGuardem spokojeni?";
 
-/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Prosím, sdělte nám svůj názor";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "Ne, mám problém";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "Zpětná vazba";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Ano, ohodnotím to";
 
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "Zpětná vazba";
-
-/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "ODESLAT";
-
-/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Pokud chcete, abychom vám odpověděli, zadejte e-mail";
-
-/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "DOMŮ";
-
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "Zpětná vazba";
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Rozumím, pomohlo to";

@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@ k";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Le DNS natif fonctionne";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Le DNS natif ne fonctionne pas";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Règles d'utilisateur";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-tunnel (sans icône VPN), incompatible avec d'autres applications VPN, moins stable";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Natif";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Aucun chiffrage (DNS du système)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Vous avez saisi l’amont invalide";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Protocole DNS non valide";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ n'est pas encore pris en charge par iOS. Essayez d'en ajouter d'autres en amont.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Liste Noire du système";
 
@@ -682,11 +700,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vide";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Échec de l’envoi de vos commentaires";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Échec d'envoi du rapport de bogue, veuillez réessayer";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Une erreur est survenue";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Échec d'envoi de commentaire, veuillez réessayer";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Votre rapport de bogue a été envoyé !";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Votre commentaire a été envoyé !";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Signaler un bogue";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Laisser un commentaire";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Veuillez inclure la description du problème (a-t-il commencé après une mise à jour ?) et les informations sur les autres logiciels dont vous disposez (VPN/AV/extension)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Dites-nous ce que vous pensez de %@ - ce que vous aimez ou n'aimez pas, les fonctionnalités que vous aimeriez suggérer";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Envoyer un rapport";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Envoyer un commentaire";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "En continuant à l’utiliser, vous acceptez les <br/><a href=%2$@>Conditions générales</a> et la <a href=%1$@>Politique de confidentialité</a>";
@@ -733,6 +775,14 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d requêtes";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Veuillez activer %@ dans les paramètres DNS du système";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Pour activer le DNS natif, vous devez ouvrir <b>Paramètres système</b>, aller à <b>VPN & Réseau > DNS</b> et là, sélectionner <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Dites nous si vous êtes satisfait(e) de votre expérience de blocage de pub à présent";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +874,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Ajouter les Règles Utilisateur DNS";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>ATTENTION !</b> L'activation de ces fonctions peut interrompre la connexion Internet ou compromettre votre sécurité et votre confidentialité.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Vous êtes intéressé par les nouvelles fonctionnalités d'AdGuard ? Essayez notre <a href=\"%@\">canal bêta</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Liste des serveurs DNS simples à utiliser pour résoudre les noms d'hôtes DOH/DOT (le cas échéant)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Adresse IP bootstrap";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Adresse en amont";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Solutions de secours";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "En amont";

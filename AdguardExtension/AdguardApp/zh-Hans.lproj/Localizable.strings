@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "本地 DNS 正在运行";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "本地 DNS 不在运行";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "用户过滤器";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全隧道（不显示 VPN 图标），与其他 VPN 应用程序不兼容，不太稳定";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "本地";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "无加密（系统DNS）";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "您输入了非法的上游服务器";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "无效的 DNS 协议";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "iOS 尚未支持 %@。请尝试添加其他上游。";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "系统黑名单";
 
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "空";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "反馈发送失败";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "无法提交错误报告。请稍后再试";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "发生错误";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "无法提交意见反馈。请稍后再试";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "已成功发送您的错误报告！";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "已成功发送您的意见反馈！";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "报告错误";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "留下反馈";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "请在此输入问题描述（该问题是否在更新后出现?）以及其他您正在使用的软件信息（VPN/反病毒/扩展）";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "请告诉我们您对 %@ 的看法。您对什么满意或不满意，推荐我们添加哪些功能";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "发送报告";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "发送反馈";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "使用AdGuard，即代表你同意<br /><a href=%2$@>条款和条件</a> 和 <a href=%1$@>隐私策略</a>";
+"introduction_license_agreement" = "继续使用 AdGuard，即代表您同意<br /><a href=%2$@>条款和条件</a> 和 <a href=%1$@>隐私政策</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "请求";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d请求";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "请在系统 DNS 设置开启 %@";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "以开启本地 DNS 请您打开<b>系统设置 </b>，前往 <b>VPN 和网络 > DNS</b> 并选择 <b>%@</b>。";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "请告诉我们您对广告拦截体验是否满意";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "请确认一下您使用的是 <b>Safari 浏览器。</b><br> 就技术层面，目前我们无法在其他浏览器中拦截内容。<br>请前往 Safari 保护设置并开启所需要的过滤器列表。<br>重启 Safari 应用程序：关闭后再重新打开。";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "添加 DNS 用户规则";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>警告！</b>开启以下功能将会导致网络连接中断或您的安全与隐私受到损害。";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "对 AdGuard 炫酷新功能感兴趣吗？尝试我们的<a href=\"%@\">最新测试版</a>。";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "用于解析 DOH/DOT 主机名字（如有的话）的本机 DNS 服务器列表";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP 地址";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "上游地址";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "上游";

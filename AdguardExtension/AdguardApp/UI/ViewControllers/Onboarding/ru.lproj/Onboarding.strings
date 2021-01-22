@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Чтобы пользоваться AdGuard в Safari, выполните несколько простых шагов:";
 
-/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "DNS-защита";
+/* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "Блокируйте отслеживание";
 
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "ВИДЕОИНСТРУКЦИЯ";
@@ -14,7 +14,7 @@
 "Mzf-WJ-CpC.text" = "AdGuard борется с тысячей корпораций, которые отслеживают ваш каждый клик, и делает все, чтобы ваши персональные данные были в безопасности.";
 
 /* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Нажмите на Safari и выберите раздел \"Блокировщики контента\"";
+"QL3-U7-vA8.text" = "Нажмите на Safari и выберите раздел \"Правила блокирования контента\"";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "ДАЛЕЕ";
@@ -22,14 +22,14 @@
 /* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
 "eyJ-Xh-OdS.text" = "Включите все блокировщики контента и возвращайтесь в приложение!";
 
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
-"hXU-wD-fbI.text" = "Защита Safari";
+/* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Блокируйте рекламу";
 
 /* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
 "hak-o1-HWp.text" = "Спасибо, что установили AdGuard!";
 
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
-"hf9-6r-TUk.text" = "Защита Safari";
+/* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Блокируйте раздражители";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "ДАЛЕЕ";

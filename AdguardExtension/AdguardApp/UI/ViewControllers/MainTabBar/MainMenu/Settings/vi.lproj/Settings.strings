@@ -37,9 +37,6 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Bật cài đặt này nếu bạn gặp phải lỗi kết nối khi AdGuard đang chạy";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
-"ILy-oL-9M6.text" = "Sử dụng bộ lọc đơn giản";
-
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Thao tác này sẽ xóa cấu hình VPN thực tế của bạn và tắt tính năng bảo vệ DNS";
 
@@ -103,9 +100,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Hiện thị thanh trạng thái";
 
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
-"rRz-nr-s4U.text" = "Chế độ đường hầm";
-
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "Cài đặt";
 
@@ -117,6 +111,3 @@
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Bỏ chặn tất cả quảng cáo trừ các trang trong danh sách này";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
-"yvq-Cw-7Z6.text" = "Nếu cài đặt này được bật, AdGuard sẽ bỏ qua các quy tắc chung. Điều này sẽ tăng tốc độ hiển thị trang đánh đổi bằng chất lượng lọc";

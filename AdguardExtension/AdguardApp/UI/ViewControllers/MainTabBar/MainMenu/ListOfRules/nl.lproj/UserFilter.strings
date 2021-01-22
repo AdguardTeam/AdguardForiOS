@@ -5,7 +5,7 @@
 "BfI-YN-iXe.text" = "Deze regel is toegevoegd aan het gebruikersfilter.";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "BEWAREN";
+"Bvs-mI-vEr.normalTitle" = "OPSLAAN";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Bijwerken";

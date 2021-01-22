@@ -1,3 +1,6 @@
+/* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
+"1A6-DD-78f.normalTitle" = "모드 전환";
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "추가";
 
@@ -46,8 +49,20 @@
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "기업";
 
+/* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
+"a0E-KM-oA3.text" = "AdGuard는 이 모드에서 DNS 쿼리를 볼 수 없습니다. 기기의 DNS 활동을 확인하기 위해 AdGuard 구현을 사용하세요.";
+
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "보안 필터, DNS 보호, 사용자 정의 필터, 기타.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "서버";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "상태";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "프로토콜";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "최근 활동";
@@ -66,6 +81,9 @@
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "요청";
+
+/* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
+"mSj-Zz-Gm9.text" = "기본 DNS";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "요청";

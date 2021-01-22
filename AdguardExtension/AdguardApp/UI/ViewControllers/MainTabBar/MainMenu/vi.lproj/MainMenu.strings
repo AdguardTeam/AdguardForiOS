@@ -1,3 +1,4 @@
+
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Hỗ trợ";
 
@@ -28,9 +29,6 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Cài đặt";
 
-/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "Có một ý tưởng tuyệt vời?";
-
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Cài đặt";
 
@@ -57,9 +55,6 @@
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "Bảo vệ hệ thống";
-
-/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "Yêu cầu tính năng";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Đăng ký và tài khoản";

@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10E";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Natív DNS működik";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Natív DNS nem működik";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Felhasználói szűrő";
 
@@ -177,6 +183,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "A Full-Tunnel (VPN ikon nélkül), más VPN-alkalmazásokkal összeegyeztethetetlen, kevésbé stabil";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Natív";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Nincs titkosítás (rendszer DNS)";
@@ -607,6 +619,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Érvénytelen DNS upstream lett megadva";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Érvénytelen DNS protokoll";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "Az iOS még nem támogatja a(z) %@ lehetőséget. Próbáljon meg másik upstream-et hozzáadni.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Rendszer tiltólista";
 
@@ -676,11 +694,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Üres";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Nem sikerült elküldeni a visszajelzést";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Nem sikerült a hibajelentés elküldése, kérjük, hogy próbálja később";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Valami hiba történt";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Nem sikerült a visszajelzés elküldése, kérjük, hogy próbálja később";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "A hibajelentés sikeresen el lett küldve!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "A visszajelzés sikeresen el lett küldve!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Hiba jelentése";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Visszajelzés küldése";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Kérjük, hogy mellékelje a probléma leírását (egy frissítés után jelentkezett?), valamint információkat arról, hogy milyen egyéb szoftvereket használ (VPN/vírusirtó/kiegészítő)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Mondja el nekünk, mi a véleménye erről: %@ — mi az amit szeret, mi az, amit nem, illetve milyen új funkciókat szeretne";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Jelentés küldése";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Visszajelzés küldése";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "A használat folytatásával Ön elfogadja a <br /><a href=%2$@>Felhasználási feltételeket</a> és az <a href=%1$@>Adatvédelmi irányelveket</a>";
@@ -727,6 +769,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d kérés";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Kérjük, engedélyezze a(z) %@ lehetőséget a DNS beállításokban";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "A natív DNS engedélyezéséhez nyissa meg a <b>Rendszerbeállításokat</b>, menjen a <b>VPN & Hálózat > DNS</b> részhez, ott pedig válassza ki ezt: <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Mondja el, hogy elégedett-e a hirdetések eddigi blokkolásával";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Győződjön meg arról, hogy <b>Safari böngészőt</b> használ.<br>Jelenleg a tartalomblokkolás technikailag lehetetlen más böngészőkben.<br>Folytassa a Safari védelmi beállításaival, és engedélyezze az összes szükséges szűrőlistát.<br>Indítsa újra a Safari alkalmazást: lépjen ki és nyissa meg újra.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -818,3 +871,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Saját DNS szabályok hozzáadása";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>FIGYELEM!</b> Ezen funkciók helytelen beállítása tönkreteheti az internetkapcsolatot vagy veszélyeztetheti a biztonságot és az adatvédelmet.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Érdeklik az új AdGuard funkciók? Próbálja ki a <a href=\"%@\">béta csatornánkat</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "A DOH/DOT hosztnevek feloldásához használható sima DNS kiszolgálók listája (ha vannak)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap-ek";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP cím";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream cím";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Tartalékok";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstream-ek";

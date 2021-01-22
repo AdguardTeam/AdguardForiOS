@@ -1,3 +1,4 @@
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "ДОДАТИ";
 
@@ -46,8 +47,20 @@
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "компаній";
 
+/* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
+"a0E-KM-oA3.text" = "AdGuard не може дивитися запити DNS у цьому режимі. Якщо ви хочете бачити DNS-активність вашого пристрою, використовуйте впровадження AdGuard.";
+
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Фільтри безпеки, DNS-приватність, власні фільтри та ін.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "Сервер";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "Стан";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "Протокол";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Нещодавня активність";

@@ -69,7 +69,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>Miễn phí %d tháng truy cập mọi tính năng</string>
+        <string>Miễn phí %d ngày truy cập mọi tính năng</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>

@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Yerel DNS çalışıyor";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Yerel DNS çalışmıyor";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı kuralları";
 
@@ -176,13 +182,19 @@
 "filter_version_format" = "sürüm %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Bölünmüş-Tünel, “Kişisel VPN” uygulamaları ile uyumlu";
+"tunnel_mode_split_description" = "\"Kişisel VPN\" uygulamalarıyla uyumlu Bölünmüş Tünel";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Tam-Tünel, diğer VPN uygulamalarıyla uyumsuz";
+"tunnel_mode_full_description" = "Diğer VPN uygulamalarıyla uyumlu olmayan Tam Tünel";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Tam-Tünel (VPN simgesi olmadan), diğer VPN uygulamalarıyla uyumsuz, daha az stabil";
+"tunnel_mode_full_without_icon_description" = "Tam Tünel (VPN simgesi olmadan), diğer VPN uygulamalarıyla uyumsuz, daha az kararlı";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Yerel";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Şifreleme yok (Sistem DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Geçersiz üst sunucu girdiniz";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Geçersiz DNS protokolü";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ henüz iOS tarafından desteklenmiyor. Farklı üst kaynak eklemeyi deneyin.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistem Engelleme Listesi";
 
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Boş";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Geribildirim gönderilemedi";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Hata bildiriminiz gönderilemedi, lütfen tekrar deneyin";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Bir şeyler ters gitti";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Geri bildiriminiz gönderilemedi, lütfen tekrar deneyin";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Hata bildiriminiz başarıyla gönderildi!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Geri bildiriminiz başarıyla gönderildi!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Hata bildir";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Geri bildirimde bulunun";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Lütfen sorun açıklamasını (bir güncellemeden sonra mı başladı?) ve sahip olduğunuz diğer yazılımlarla ilgili bilgileri (VPN/AV/eklenti) ekleyin";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "%@ hakkında ne düşündüğünüzü bize söyleyin — neyi sevip sevmediğiniz, hangi özellikleri önermek istersiniz";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Raporu gönder";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Geri bildirim gönder";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Kullanmaya devam ederek<br /><a href=%2$@>Kullanım koşullarını</a> ve <a href=%1$@>Gizlilik politikasını</a> kabul etmiş olursunuz";
+"introduction_license_agreement" = "Kullanmaya devam ederek,<br /><a href=%2$@>Şartlar ve koşullar</a> ile <a href=%1$@>Gizlilik politikasını</a> kabul etmiş olursunuz";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "İstekler";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d istek";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Lütfen sistem DNS ayarlarında %@'i etkinleştirin";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Yerel DNS'yi etkinleştirmek için <b>Sistem ayarlarını</b> açmanız, <b>VPN ve Ağ > DNS'ye</b> gitmeniz ve orada <b>%@</b> öğesini seçmeniz gerekir.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Şimdiye kadarki reklam engelleme deneyiminden memnun olup olmadığınızı bize söyleyin";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "<b>Safari tarayıcısını</b> kullandığınızdan emin olun.<br>Şu anda diğer tarayıcılarda içeriği engellemek teknik olarak imkansızdır.<br>Safari koruma ayarlarına ilerleyin ve gerekli tüm filtre listelerini etkinleştirin.<br>Safari uygulamasını yeniden başlatın: çıkın ve tekrar açın.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "DNS Kullanıcı Kuralı Ekle";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>UYARI!</b> Bu özelliklerin etkinleştirilmesi İnternet bağlantısını kesebilir veya güvenliğinizi ve gizliliğinizi tehlikeye atabilir.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Harika yeni AdGuard özellikleriyle ilgileniyor musunuz? <a href=\"%@\">Beta kanalımızı</a> deneyin.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "DOH/DOT ana bilgisayar adlarını (varsa) çözmek için kullanılacak düz DNS sunucularının listesi";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP adresi";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Üst kaynak adresi";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Yedeklemeler";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Üst kaynak";

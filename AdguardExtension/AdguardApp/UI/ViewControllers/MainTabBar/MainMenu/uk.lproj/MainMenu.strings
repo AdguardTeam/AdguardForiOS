@@ -1,3 +1,9 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "Адреса е-пошти неправильна";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
+"5nl-wn-tlv.text" = "Опис:";
+
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Підтримка";
 
@@ -22,14 +28,23 @@
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Загальні";
 
+/* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
+"LHx-0a-FxM.text" = "Надсилати детальну системну інформацію про виконувані процеси та журнал програми";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Що таке AdGuard?";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "Pb4-Gm-t4i"; Note = "(Main Menu) Advanced Settings caption"; */
+"Pb4-Gm-t4i.text" = "Часті питання";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Параметри";
 
-/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "Маєте гарну ідею?";
+/* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Надіслати детальний звіт про систему";
+
+/* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Обговорити на нашому форумі, в соціальних мережах чи GitHub";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Параметри";
@@ -42,6 +57,15 @@
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "Ви можете оцінити програму в App Store";
+
+/* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
+"dNj-vb-TQe.text" = "Часті запитання";
+
+/* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
+"fva-Rp-ExO.text" = "Подавайте запити нових функцій та пропозиції";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
+"gap-Uy-5ka.placeholder" = "Адреса е-пошти";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Як блокувати рекламу з AdGuard";
@@ -58,14 +82,23 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS-захист";
 
-/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "Запит нової функції";
+/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Ваша адреса е-пошти (необов'язково):";
+
+/* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "Обговорення";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Обліковий запис і передплата";
 
+/* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
+"srJ-sd-sZF.text" = "Повідомлення";
+
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "Про програму";
+
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "xJd-fJ-cmx"; Note = "(Main Menu) Advanced Settings caption"; */
+"xJd-fJ-cmx.text" = "Залишити відгук";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "Зовнішній вигляд та інше";

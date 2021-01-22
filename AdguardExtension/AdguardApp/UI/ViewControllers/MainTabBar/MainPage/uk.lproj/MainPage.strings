@@ -10,6 +10,9 @@
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Період";
 
+/* Class = "UILabel"; text = "Native DNS is working"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "Працює вбудований DNS";
+
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "запитів";
 

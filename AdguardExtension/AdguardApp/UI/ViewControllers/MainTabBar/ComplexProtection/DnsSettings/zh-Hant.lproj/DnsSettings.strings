@@ -16,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "儲存";
 
+/* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
+"7H8-Df-Igr.text" = "如何設置它呢？";
+
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
 "84p-U2-sd8.text" = "AdGuard 將不封鎖來自此清單中的網域";
 
@@ -43,6 +46,9 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC（實驗性的）";
 
+/* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
+"QD7-ng-Xb6.text" = "AdGuard";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS 防護";
 
@@ -51,6 +57,9 @@
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "允許清單";
+
+/* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
+"Xa6-wl-aOE.text" = "DNS 執行";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "取消";
@@ -100,6 +109,9 @@
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "網站";
 
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
+"o1z-O6-Bk9.normalTitle" = "確定";
+
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "刪除";
 
@@ -133,5 +145,11 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "選擇協定";
 
+/* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
+"xgN-x2-EfQ.text" = "執行";
+
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "過濾器和例外";
+
+/* Class = "UILabel"; text = "About iOS settings"; ObjectID = "xyt-oO-rhI"; */
+"xyt-oO-rhI.text" = "關於 iOS 設定";
