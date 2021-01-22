@@ -132,7 +132,7 @@ class VpnManager: VpnManagerProtocol {
                 guard let self = self else { return }
                 let (manager, _) = self.loadManager()
                 if let manager = manager {
-                    self.checkVpnStatus(manager)
+                    self.checkState(manager)
                 }
             }
         }
@@ -398,21 +398,20 @@ class VpnManager: VpnManagerProtocol {
     private func checkState(_ manager: NETunnelProviderManager) {
         
         let savedEnabled = self.complexProtection?.systemProtectionEnabled ?? false
-        let actualEnabled = manager.isEnabled && manager.isOnDemandEnabled
+        var actualEnabled = false
+        if manager.isEnabled && manager.isOnDemandEnabled {
+            actualEnabled = true
+        } else if manager.isEnabled && !manager.isOnDemandEnabled {
+            if manager.connection.status == .connected || manager.connection.status == .connecting {
+                actualEnabled = true
+            }
+        }
         
         DDLogInfo("(VpnManager) savedState: \(savedEnabled) actual: \(actualEnabled)")
         
         if actualEnabled != savedEnabled {
             DDLogInfo("(VpnManager) vpn anabled state was changed outside the application to state: \(actualEnabled)")
             NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
-        }
-    }
-    
-    private func checkVpnStatus(_ manager: NETunnelProviderManager) {
-        let enabled = manager.isEnabled && (manager.connection.status == .connected || manager.connection.status == .connecting)
-        DDLogInfo("(VpnManager) Vpn status: \(enabled)")
-        if enabled != self.resources.systemProtectionEnabled {
-            NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: enabled)
         }
     }
 }
