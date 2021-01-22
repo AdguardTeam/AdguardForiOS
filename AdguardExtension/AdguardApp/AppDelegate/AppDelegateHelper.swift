@@ -18,6 +18,7 @@
 
 import Foundation
 import Setapp
+import NetworkExtension
 
 /**
  AppDelegateHelper is a helper class for AppDelegate
@@ -192,6 +193,7 @@ class AppDelegateHelper: NSObject {
         })
         
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
+        checkVpnStatus()
     }
     
     deinit {
@@ -285,6 +287,14 @@ class AppDelegateHelper: NSObject {
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+    }
+    
+    private func checkVpnStatus() {
+            NETunnelProviderManager.loadAllFromPreferences { (managers, error) in
+                guard let manager = managers?.first else { return }
+                let enabled = manager.isEnabled && (manager.connection.status == .connected || manager.connection.status == .connecting)
+                NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: enabled)
+            }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
