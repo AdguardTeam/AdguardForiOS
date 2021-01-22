@@ -65,6 +65,7 @@ class VpnManager: VpnManagerProtocol {
     
     private var configurationObserver: NotificationToken?
     private var configurationObserver2: NotificationToken?
+    private var didBecomeActiveObserver: NotificationToken?
     private var dnsProviders: DnsProvidersServiceProtocol
     
     weak var complexProtection: ComplexProtectionServiceProtocol?
@@ -120,6 +121,18 @@ class VpnManager: VpnManagerProtocol {
                 let (manager, _) = self.loadManager()
                 if let manager = manager {
                     self.checkState(manager)
+                }
+            }
+        }
+        
+        didBecomeActiveObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (note) in
+            guard let self = self else { return }
+            
+            self.workingQueue.async { [weak self] in
+                guard let self = self else { return }
+                let (manager, _) = self.loadManager()
+                if let manager = manager {
+                    self.checkVpnStatus(manager)
                 }
             }
         }
@@ -392,6 +405,14 @@ class VpnManager: VpnManagerProtocol {
         if actualEnabled != savedEnabled {
             DDLogInfo("(VpnManager) vpn anabled state was changed outside the application to state: \(actualEnabled)")
             NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
+        }
+    }
+    
+    private func checkVpnStatus(_ manager: NETunnelProviderManager) {
+        let enabled = manager.isEnabled && (manager.connection.status == .connected || manager.connection.status == .connecting)
+        DDLogInfo("(VpnManager) Vpn status: \(enabled)")
+        if enabled != self.resources.systemProtectionEnabled {
+            NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: enabled)
         }
     }
 }
