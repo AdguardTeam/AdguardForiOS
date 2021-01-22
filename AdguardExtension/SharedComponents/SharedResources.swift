@@ -153,7 +153,7 @@ extension AESharedResourcesProtocol {
     dynamic var restartByReachability: Bool {
         get {
             guard let value = sharedDefaults().object(forKey: AEDefaultsRestartByReachability) as? Bool else {
-                return true
+                return false
             }
             return value
         }
