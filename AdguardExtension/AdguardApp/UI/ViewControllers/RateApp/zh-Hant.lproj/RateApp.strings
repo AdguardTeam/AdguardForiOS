@@ -1,29 +1,17 @@
-/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "感謝您";
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "請查看此用法說明：";
 
-/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "由於您的回饋意見";
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "問題繼續存在";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "回饋意見";
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "您對 AdGuard 滿意嗎？";
 
-/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "請告訴我們有關您的體驗";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "否，我有問題";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "回饋意見";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "是，對它評分";
 
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "回饋意見";
-
-/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "傳送";
-
-/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "如果您想要收到我們的回覆，輸入電子郵件位址";
-
-/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "首頁";
-
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "回饋意見";
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "了解，這有幫助";

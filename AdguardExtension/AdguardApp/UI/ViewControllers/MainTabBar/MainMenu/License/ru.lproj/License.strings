@@ -1,3 +1,6 @@
+/* Class = "UIButton"; normalTitle = "Use AdGuard account"; ObjectID = "1AU-Vc-Pfi"; */
+"1AU-Vc-Pfi.normalTitle" = "Использовать учетную запись AdGuard";
+
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Код из приложения для аутентификации:";
 
@@ -25,6 +28,9 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Пароль:";
 
+/* Class = "UIButton"; normalTitle = "Continue with Apple"; ObjectID = "PSE-uk-lAE"; */
+"PSE-uk-lAE.normalTitle" = "Продолжить с Apple";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "ЛИЧНЫЙ КАБИНЕТ";
 
@@ -34,11 +40,20 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Блокируйте фишинг, мошенничество и криптоджекинг";
 
+/* Class = "UIButton"; normalTitle = "Continue with Facebook"; ObjectID = "Z9l-1b-Wa8"; */
+"Z9l-1b-Wa8.normalTitle" = "Продолжить с Facebook";
+
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "Войти через учетную запись AdGuard или подключенные социальные сети";
+
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ВОЙТИ";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Позаботьтесь о ваших данных";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "Вход в систему";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "DNS-защита";
@@ -54,3 +69,6 @@
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "ПОДТВЕРДИТЬ";
+
+/* Class = "UIButton"; normalTitle = "Continue with Google"; ObjectID = "t9V-eQ-pZp"; */
+"t9V-eQ-pZp.normalTitle" = "Продолжить с Google";

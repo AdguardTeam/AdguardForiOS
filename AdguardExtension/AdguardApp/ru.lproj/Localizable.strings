@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Нативный DNS работает";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Нативный DNS не работает";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Пользовательские правила";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (без значка VPN), не совместим с другими VPN-приложениями, менее стабильный";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Нативный";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Без шифрования (Системный DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Вы ввели некорректный upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Недействительный DNS-протокол";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ пока не поддерживается iOS. Попробуйте добавить другой upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Общий черный список";
 
@@ -682,11 +700,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Пусто";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Не удалось отправить ваш отзыв";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Не удалось отправить отчет об ошибке. Пожалуйста, повторите попытку позже.";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Что-то пошло не так";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Не удалось отправить отзыв. Пожалуйста, повторите попытку позже.";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Ваш отчет об ошибке успешно отправлен!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Ваш отзыв успешно отправлен!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Сообщить об ошибке";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Оставить отзыв";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Пожалуйста, опишите проблему (она возникла после обновления?) и информацию о другом ПО, которое у вас установлено (VPN/антивирус/расширение)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Расскажите нам, что вы думаете о %@ – что вам нравится и не нравится, какие функции вы хотели бы видеть";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Отправить отчет";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Отправить отзыв";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Продолжая использование, вы принимаете <br /><a href=%2$@>Положения и условия</a> и <a href=%1$@>Политику конфиденциальности</a>";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d запросов";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Пожалуйста, включите %@ в системных DNS-настройках";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Чтобы включить нативный DNS, откройте <b>Системные настройки</b>, перейдите в раздел <b>\"VPN и сеть\" > DNS</b> и выберите там <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Расскажите нам, довольны ли вы блокировкой рекламы";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Убедитесь, что вы используете <b>браузер Safari.</b><br> Сейчас технически невозможно блокировать контент в других браузерах.<br> Перейдите в настройки \"Защита Safari\" и включите все необходимые фильтры.<br> Перезапустите приложение Safari: выйдите из него, а затем откройте снова.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Добавить пользовательские правила DNS";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>Внимание!</b> Включение этих функций может нарушить интернет-соединение и подвергнуть риску вашу безопасность и конфиденциальность. ";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Вам интересны новые функции AdGuard? Попробуйте наш <a href=\"%@\">бета-канал</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Список DNS-серверов, используемых для преобразования имен хоста DOH/DOT";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP-адрес";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream-адрес";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

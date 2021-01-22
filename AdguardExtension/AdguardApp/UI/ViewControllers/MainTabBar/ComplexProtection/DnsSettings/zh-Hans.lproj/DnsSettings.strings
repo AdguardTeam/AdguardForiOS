@@ -16,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "保存";
 
+/* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
+"7H8-Df-Igr.text" = "如何设置它?";
+
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
 "84p-U2-sd8.text" = "AdGuard不会拦截列表中的域名";
 
@@ -34,6 +37,9 @@
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS服务器";
 
+/* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
+"Mxf-0w-5MP.text" = "由操作系统自身提供。在该模式下无法查询 DNS 活动。\n\n";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "添加过滤器";
 
@@ -43,6 +49,9 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC（实验性的）";
 
+/* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
+"QD7-ng-Xb6.text" = "AdGuard";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS保护功能";
 
@@ -51,6 +60,9 @@
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "白名单";
+
+/* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
+"Xa6-wl-aOE.text" = "DNS 执行情况";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "取消";
@@ -94,11 +106,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "取消";
 
+/* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
+"lEg-oH-oxd.text" = "作为一个本地 \"伪\" VPN 运行。支持任何 DNS 协议，允许您检查您的设备的 DNS 活动。";
+
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "名称";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "网站";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
+"o1z-O6-Bk9.normalTitle" = "确定";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "删除";
@@ -121,6 +139,9 @@
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
 "qjN-LB-N3T.text" = "应用自己的规则，自定义DNS流量。";
 
+/* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
+"sQQ-5p-EfW.text" = "本地";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS 服务器地址";
 
@@ -133,5 +154,11 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "选择协议";
 
+/* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
+"xgN-x2-EfQ.text" = "执行情况";
+
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "过滤器与特例";
+
+/* Class = "UILabel"; text = "About iOS settings"; ObjectID = "xyt-oO-rhI"; */
+"xyt-oO-rhI.text" = "关于 iOS 设置";

@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "DNS nativ funcționează";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "DNS nativ nu funcționează";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reguli utilizator";
 
@@ -184,6 +190,12 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (fără pictogramă VPN), incompatibil cu alte aplicații VPN, instabil";
 
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Nativ";
+
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Fără criptare (Sistem DNS)";
 
@@ -272,7 +284,7 @@
 "remove_vpn_profile_error_message" = "Ceva nu a funcționat în timpul ștergerii profilului dvs. VPN";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
-"enabled_current_content_blocker_state_label" = "%@ regulile sunt utilizate";
+"enabled_current_content_blocker_state_label" = "%@ reguli sunt utilizate";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Dezactivat în setări Safari";
@@ -611,7 +623,13 @@
 "video_tutorial_title" = "Tutorial video";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "Ați introdus un DNS de amonte invalid";
+"invalid_upstream_message" = "Ați introdus un DNS în amonte invalid";
+
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Protocol DNS nevalid";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ nu este acceptat încă de iOS. Încercați să adăugați un upstream diferit.";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de blocări sistem";
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vid";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Trimiterea feedback-ului a eșuat";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Nu s-a putut trimite raportul de eroare, încercați din nou";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Ceva nu a mers bine";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Nu s-a putut trimite feedbackul, încercați din nou";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Raportul dvs. de eroare a fost trimis cu succes!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Feedbackul dvs. a fost trimis cu succes!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Raportați o eroare";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Lasă-ți un feedback";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Vă rugăm să includeți descrierea problemei (a început după o actualizare?) și info despre alte software pe care le aveți (VPN/AV/extensie)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Spuneți-ne ce credeți despre %@ — ce vă place sau nu vă place, ce caracteristici doriți să sugerați";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Trimiteți un raport";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Trimiteți un feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Folosindu-l în continuare, acceptați<br /><a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
+"introduction_license_agreement" = "Continuând să îl utilizați, acceptați <br/><a href=%2$@>Termenii și condițiile</a> și <a href=%1$@>Politica de confidențialitate</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Solicitări";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d cereri";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Vă rugăm să activați %@ în setările DNS ale sistemului";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Pentru a activa DNS nativ, trebuie să deschideți <b>Setări de sistem</b>, accesați <b>VPN & Rețea > DNS</b>și acolo selectați <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Spuneți-ne dacă sunteți mulțumit de experiența de blocare a reclamelor până acum";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Asigurați-vă că utilizați <b>browserul Safari</b>.<br>În prezent, din punct de vedere tehnic, este imposibil să blocați conținutul din alte browsere.<br>Mergeți la setările de protecție Safari și activați toate listele de filtrare necesare.<br>Reporniți aplicația Safari: ieșiți și deschideți din nou.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Adăugați Reguli Utilizator DNS";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>AVERTISMENT!</b> Activarea acestor funcții poate întrerupe conexiunea la Internet sau vă poate compromite securitatea și confidențialitatea.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Interesat de noi funcții cool ale AdGuard? Încercați <a href=\"%@\">canalul beta</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Lista de servere DNS simple, de utilizat pentru a rezolva numele de gazdă DOH/DOT (dacă există)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Adresa IP bootstrap";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Adresă upstream";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

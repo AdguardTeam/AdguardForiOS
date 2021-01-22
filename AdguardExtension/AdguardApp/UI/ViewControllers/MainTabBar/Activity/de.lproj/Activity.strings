@@ -1,3 +1,4 @@
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "Hinzufügen";
 
@@ -46,8 +47,20 @@
 /* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
 "Xj3-X8-fnq.normalTitle" = "Unternehmen";
 
+/* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
+"a0E-KM-oA3.text" = "AdGuard kann in diesem Modus keine DNS-Anfragen erkennen. Wenn Sie die DNS-Aktivität Ihres Geräts angezeigt bekommen möchten, verwenden Sie die AdGuard-Implementierung.";
+
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Sicherheitsfilter, DNS-Datenschutz, benutzerdefinierte Filter usw.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "Server";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "Status";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "Protokoll";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Letzte Aktivität";
@@ -66,6 +79,9 @@
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "Anfragen";
+
+/* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
+"mSj-Zz-Gm9.text" = "Nativer DNS ist aktiviert";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "Anfragen";

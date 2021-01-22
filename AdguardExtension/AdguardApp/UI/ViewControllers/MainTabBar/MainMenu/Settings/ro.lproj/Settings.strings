@@ -1,8 +1,14 @@
 /* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
 "0RM-mR-ikS.text" = "Resetare setări";
 
+/* Class = "UILabel"; text = "Time in seconds"; ObjectID = "2A9-hH-oY3"; */
+"2A9-hH-oY3.text" = "Timp în secunde";
+
 /* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
 "3zG-B5-jE5.text" = "Jurnale de depanare";
+
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
+"7nl-3p-BP2.text" = "Răspuns blocat TTL";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
 "8ad-4w-rbs.text" = "Inversați lista de autorizări";
@@ -10,14 +16,32 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatibil cu alte aplicații VPN, instabil";
 
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
+"95J-h1-QgG.normalTitle" = "SALVAȚI";
+
 /* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Eliminare profil VPN";
+
+/* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
+"A89-2M-jqd.text" = "Adresa IP bootstrap";
+
+/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "Întoarce întotdeauna REFUSED";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Arată progresul actualizării filtrului";
 
+/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
+"BPj-Fi-8mA.text" = "Implicit";
+
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Blocante conținut";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+"Dfm-If-1AX.normalTitle" = "ANULARE";
+
+/* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
+"ESe-CM-On1.text" = "Modul de blocare";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
 "EbM-k3-HW8.text" = "Incompatibil cu alte aplicații VPN";
@@ -37,14 +61,23 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Activați această opțiune dacă întâmpinați probleme cu conexiunea la Internet în timp ce AdGuard rulează";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
-"ILy-oL-9M6.text" = "Folosiți filtre simplificate";
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
+"IvJ-Oi-vGF.text" = "Setări la nivel scăzut";
+
+/* Class = "UILabel"; text = "Bootstraps"; ObjectID = "JQH-8J-wY8"; */
+"JQH-8J-wY8.text" = "Bootstraps";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Aceasta va elimina profilul dvs. VPN actual și va dezactiva protecția DNS";
 
+/* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
+"Lgb-zJ-9va.text" = "Refused";
+
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Setări avansate";
+
+/* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
+"NC2-8A-E6f.text" = "Blocați IPv6";
 
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
 "ObO-g4-VHL.text" = "Aveți 6 blocante de conținut, ce pot avea fiecare până la 50.000 de reguli";
@@ -55,6 +88,9 @@
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "Resetare statistici";
 
+/* Class = "UILabel"; text = "Block AAAA requests"; ObjectID = "Rmq-30-7hJ"; */
+"Rmq-30-7hJ.text" = "Blocați cererile AAAA";
+
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Implicită de sistem";
 
@@ -64,17 +100,38 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Temă";
 
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+"WUY-Cq-SPm.normalTitle" = "ANULARE";
+
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Actualizare automată doar prin Wi-Fi";
+
+/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
+"Zsy-DV-b67.text" = "NxDomain";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
 
+/* Class = "UILabel"; text = "DNS Servers"; ObjectID = "bRu-jJ-qsB"; */
+"bRu-jJ-qsB.text" = "Servere DNS";
+
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
 "bnd-Eh-hpk.text" = "Modul Tunel";
 
+/* Class = "UILabel"; text = "Blocking mode"; ObjectID = "cXx-vF-2MX"; */
+"cXx-vF-2MX.text" = "Modul de blocare";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
+"cdQ-kW-CG7.text" = "Modul Tunel";
+
+/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Filtre stil-AdBlock -> REFUSED, filtre stil-gazde -> adresă specificată de regulă sau nespecificată";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Reporniți protecția la modificarea rețelei";
+
+/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "Întoarce întotdeauna NXDOMAIN";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Setări avansate";
@@ -85,8 +142,20 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatibil cu aplicații “VPN Personal“";
 
+/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
+"huN-t2-HHo.text" = "Întoarce întotdeauna adresa IP configurată personalizat";
+
+/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
+"ipc-iu-k4i.text" = "CUSTOM_ADDRESS";
+
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "AdGuard în mod Split-Tunnel este compatibil cu aplicații așa-numite \"VPN Personal\". Ca un compromis, în acest mod poate fi ocolit de sistem în caz de conecții defectuoase.";
+
+/* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
+"k0U-fn-m9X.text" = "Fallbacks";
+
+/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "ADRESĂ_NESPECIFICATĂ";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Altele";
@@ -103,8 +172,14 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Arată bara de stare";
 
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
-"rRz-nr-s4U.text" = "Modul Tunel";
+/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Întoarce întotdeauna adresa_nespecificată";
+
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
+"reQ-4X-84i.text" = "Setări la nivel scăzut";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
+"sNF-Hy-NdB.normalTitle" = "SALVAȚI";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "Setări";
@@ -112,11 +187,17 @@
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
 "tTY-BW-QcN.text" = "Cu setarea activată, AdGuard va folosi numai Wi-Fi la actualizări de filtre în fundal";
 
+/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "Răspuns blocat TTL";
+
+/* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
+"wPe-ae-X0G.text" = "Sunteți un dezvoltator?";
+
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Această opțiune va șterge toate datele statistice, cum ar fi numărul de solicitări etc.";
 
+/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "CUSTOM_ADDRESS";
+
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Deblochează reclame oriunde cu excepția site-urilor din această listă";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
-"yvq-Cw-7Z6.text" = "Cu această setare activată, AdGuard va ignora reguli cosmetice generice. Aceasta va accelera redarea paginilor în schimbul calității filtrării";

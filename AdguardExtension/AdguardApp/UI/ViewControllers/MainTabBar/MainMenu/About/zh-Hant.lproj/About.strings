@@ -4,7 +4,7 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "關於";
 
-/* Class = "UIButton"; normalTitle = "Acknowlegdements"; ObjectID = "htU-yE-FEi"; */
+/* Class = "UIButton"; normalTitle = "Acknowledgments"; ObjectID = "htU-yE-FEi"; */
 "htU-yE-FEi.normalTitle" = "致謝";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */

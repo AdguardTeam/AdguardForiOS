@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10tis";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Nativni DNS radi";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Nativni DNS ne radi";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Korisnička pravila";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Potpuno tuneliranje (bez VPN ikone), nije podržano s drugim VPN aplikacijama, manje stabilno";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Nativno";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Bez šifriranja (DNS sustava)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Unijeli ste nevažeći upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Nevažeći DNS protokol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ još ne podržava iOS. Pokušajte dodati različite upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistemski popis nedopuštenih";
 
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Neuspješno slanje vaše povratne informacije";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Neuspješno slanje izvještaja o pogrešci, pokušajte ponovno kasnije";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Nešto je pošlo po zlu";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Neuspješno slanje povratne informacije, pokušajte ponovno kasnije";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Vaš izvještaj o pogrešci je uspješno poslan!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Vaša povratna informacija je uspješno poslan!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Prijavite pogrešku";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Ostavite povratnu informaciju";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Dodajte opis problema (je li započeo nakon ažuriranja?) i informacije o drugom softveru koji imate (VPN/AV/proširenje)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Recite nam što mislite o %@ - što volite ili ne, koje značajke želite predložiti";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Pošalji izvještaj";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Pošalji povratnu informaciju";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Nastavljanjem s upotrebom, prihvaćate<br /><a href=%2$@>Uvjete i odredbe</a> i <a href=%1$@>Pravila privatnosti</a>";
+"introduction_license_agreement" = "Nastavljanjem, prihvaćate<br /><a href=%2$@>Uvjete i odredbe</a> i <a href=%1$@>Pravila privatnosti</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Zahtjevi";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d zahtjeva";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Molimo omogućite %@ u DNS postavkama sustava";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Da biste omogućili izvorni DNS, morate otvoriti <b>Postavke sustava</b>, idite na <b>VPN i mreža > DNS</b> i tamo odaberite <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Recite nam jeste li zadovoljni dosadašnjim iskustvom blokiranja oglasa";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Obavezno koristite <b>preglednik Safari</b>.<br> Trenutno je tehnički nemoguće blokirati sadržaj u drugim preglednicima. <br>Nastavite u Safari postavke zaštite i omogućite sve potrebne popise filtara.<br>Ponovo pokrenite Safari: zatvorite i ponovo otvorite.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Dodaj DNS korisnička pravila";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>UPOZORENJE!</b> Omogućavanje ovih značajki može prekinuti internetsku vezu ili ugroziti vašu sigurnost i privatnost.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Zanimaju vas nove značajke AdGuarda? Isprobajte naš <a href=\"%@\">beta kanal</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Popis običnih DNS poslužitelja koji će se koristiti za rješavanje DOH/DOT imena hostova (ako postoje)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP adresa";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream adresa";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

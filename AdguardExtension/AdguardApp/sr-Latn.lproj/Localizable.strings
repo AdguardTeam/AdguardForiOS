@@ -202,6 +202,9 @@
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
 
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (experimentalno)";
+
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Jeste li sigurni da želite da se odjavite?";
 
@@ -679,15 +682,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Slanje vaših povratnih informacija nije uspelo";
-
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Nešto je pošlo naopako";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Ako nastavite sa korišćenjem, prihvatate<br /><a href=%2$@>Uslove korišćenja</a> i <a href=%1$@>Politiku privatnosti</a>";
-
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Zahtevi";
 
@@ -729,7 +723,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d zahteva";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -793,3 +786,31 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Ovde unesite vašu lozinku";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Dodaj korisnički filter blokiranja: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Dodaj prilagođeni DNS filter: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Omogući filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Onemogući filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neuspelo";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Izaberi DNS server: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivirajte premium mogućnosti sa %@ licenčnim ključem";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Dodaj korisnička pravila";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Dodaj DNS korisnička pravila";

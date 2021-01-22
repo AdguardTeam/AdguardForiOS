@@ -4,9 +4,6 @@
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Để sử dụng AdGuard trong Safari, hãy làm theo một số bước đơn giản";
 
-/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "Bảo Vệ Theo Dõi";
-
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "Xem hướng dẫn";
 
@@ -22,14 +19,8 @@
 /* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
 "eyJ-Xh-OdS.text" = "Bật tất cả các trình chặn nội dung và quay lại ứng dụng của chúng tôi!";
 
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
-"hXU-wD-fbI.text" = "Bảo vệ Safari";
-
 /* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
 "hak-o1-HWp.text" = "Cảm ơn bạn vì đã cài đặt AdGuard!";
-
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
-"hf9-6r-TUk.text" = "Bảo vệ Safari";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "Tiếp theo";

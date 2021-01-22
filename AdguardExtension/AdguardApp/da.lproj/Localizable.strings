@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Den oprindelige DNS fungerer";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Den oprindelige DNS fungerer ikke";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerregler";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (uden VPN-ikon), inkompatibel med andre VPN-apps, mindre stabil";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Oprindelig";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Ingen kryptering (System DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Du har indtastet en ugyldig upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Ugyldig DNS-protokol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ understøttes ikke af denne iOS endnu. Prøv at tilføje en anden upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "System-Blokeringsliste";
 
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Tom";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Kunne ikke sende din feedback";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Kunne ikke sende fejlrapporten. Prøv igen senere";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Noget gik galt";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Kunne ikke sende feedbacken. Prøv igen senere";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Din fejlrapport blev sendt!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Din feedback blev sendt!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Rapporter en fejl";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Giv feedback";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Medtag venligst problembeskrivelsen (startede det efter en opdatering?) og info om anden software, du har (VPN/AV/udvidelse)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Fortæl os, hvad du synes om %@ — hvad du kan lide eller ikke kan lide, hvilke funktioner du vil foreslå";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Send en rapport";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Ved at fortsætte med at bruge den accepterer du<br /> <a href=%2$@>Vilkår og betingelser</a> og <a href=%1$@>Privatlivspolitik</a>";
+"introduction_license_agreement" = "Ved at fortsætte med at bruge den accepterer du<br /><a href=%2$@>Vilkår og betingelser</a> og <a href=%1$@>Privatlivspolitik</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Forespørgsler";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d forespørgsler";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Aktivér %@ i systemets DNS-indstillinger";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "For at aktivere den oprindelige DNS skal du åbne <b>Systemindstillingerne</b>, gå til <b>VPN og Netværk > DNS</b> og vælg <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Fortæl os, om du indtil nu har været tilfreds med dine oplevelser med annonceblokeringen";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Sørg for, at du bruger <b>Safari-browser</b>.<br>I øjeblikket er det teknisk umuligt at blokere indhold i andre browsere.<br>Fortsæt til Safari-beskyttelsesindstillingerne, og aktiver alle nødvendige filterlister.<br>Genstart Safari-appen: afslut og åbn igen.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Tilføj DNS-Brugerregler";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>ADVARSEL!</b> Aktivering af disse funktioner kan muligvis bryde internetforbindelsen eller kompromittere din sikkerhed og dit privatliv.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Er du interesseret i seje nye AdGuard-funktioner? Prøv vores <a href=\"%@\">beta-kanal</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Liste over almindelige DNS-servere, der skal bruges til at løse DOH/DOT-værtsnavne (hvis nogen)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP-adresse";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream adresse";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

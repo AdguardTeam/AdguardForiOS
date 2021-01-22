@@ -184,6 +184,12 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "전체 터널 (VPN 아이콘 없음), 다른 VPN 애플리케이션과 호환되지 않음, 불안정함";
 
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "기본";
+
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "암호화 없음 (시스템 DNS)";
 
@@ -613,6 +619,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "유효하지 않는 업스트림입니다";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "잘못된 DNS 프로토콜";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@은 아직 iOS에서 지원되지 않습니다. 다른 업스트림을 추가해 보십시오.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "시스템 차단 목록";
 
@@ -682,11 +694,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "비어있음";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "피드백을 보내지 못했습니다";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "버그 보고서 전송에 실패했습니다. 다시 시도해주세요";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "무엇인가 잘못되었습니다";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "피드백을 보내지 못했습니다. 다시 시도해주세요";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "버그 신고가 성공적으로 전송되었습니다!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "피드백이 성공적으로 전송되었습니다!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "버그 신고";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "피드백 남기기";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "문제가 언제부터 발생했는지 (업데이트 후 발생한 문제인지?), 다른 소프트웨어(VPN/안티바이러스/확장 프로그램 등)를 사용하시는지에 대해 자세히 알려주세요.";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "%@에 대해 어떻게 생각하는지 알려주세요. 마음에 드는 점이나 개선할 점, 제안하고 싶은 기능이 있나요?";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "제보 전송";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "피드백 전송";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "계속하면, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인정보취급방침</a>에 동의하는 것입니다";
@@ -733,6 +769,11 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d 요청";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "시스템 DNS 설정에서 %@을(를) 활성화하십시오";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "지금까지의 광고 차단이 만족스러웠는지 알려주세요";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +865,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "DNS 사용자 규칙 추가";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>경고!</b> 이러한 기능을 활성화하면 인터넷 연결이 끊어지거나 보안 및 개인 정보 보호에 문제가 생길 수 있습니다.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "새 AdGuard 기능에 관심이 있으신가요? <a href=\"%@\">베타 채널을</a> 사용해보십시오.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "DOH/DOT 호스트 이름 확인에 사용할 일반 DNS 서버 목록입니다 (존재하는 경우 표시됨)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "부트스트랩";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "부트스트랩 IP 주소";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "업스트림 주소";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "업스트림";

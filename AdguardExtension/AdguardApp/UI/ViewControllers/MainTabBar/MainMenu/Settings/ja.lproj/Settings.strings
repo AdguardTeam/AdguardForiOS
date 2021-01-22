@@ -37,9 +37,6 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "AdGuard実行中にインターネット接続の問題が発生している場合は、このオプションをONにしてください。";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
-"ILy-oL-9M6.text" = "シンプル化されたフィルタを使用する";
-
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "実際のVPNプロファイルが除去され、「DNS通信を保護」がオフになります。";
 
@@ -73,6 +70,9 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
 "bnd-Eh-hpk.text" = "Tunnelモード";
 
+/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "AdBlock系フィルタ -> REFUSED、hosts系フィルタ -> ルール指定アドレスまたは不特定アドレス";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "ネットワーク変更時に保護を再起動する";
 
@@ -103,9 +103,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "ステータスバーを表示する";
 
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
-"rRz-nr-s4U.text" = "Tunnelモード";
-
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "設定";
 
@@ -117,6 +114,3 @@
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "通常とは逆に、このリストのサイトのみで広告をブロックする";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
-"yvq-Cw-7Z6.text" = "この設定をONにすると、AdGuardは汎用の“整形”ルールを無視します。フィルタリングの外見的な質は多少下がりますが、ページの読み込みは高速化します。";

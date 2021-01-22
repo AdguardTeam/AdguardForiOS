@@ -151,6 +151,12 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-tunnel (uten VPN-ikon), inkompatibel med andre VPN-apper, mindre stabil";
 
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Morsmål";
+
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Ingen kryptering (System-DNS)";
 
@@ -598,11 +604,17 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Tomt innhold";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Mislyktes i å sende tilbakemeldingen din";
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Feilrapporten din ble vellykket sendt!";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Noe gikk galt";
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Meld inn en feil";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Gi tilbakemelding";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Send tilbakemelding";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Forespørsler";
@@ -639,7 +651,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d forespørsler";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -703,3 +714,6 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Skriv inn passordet ditt her";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Oppstrømstjenere";

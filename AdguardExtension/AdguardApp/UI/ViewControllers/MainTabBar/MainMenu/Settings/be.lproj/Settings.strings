@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Уключыце гэту опцыю, калі падчас працы AdGuard паўстануць праблемы з падлучэннем";
 
-/* Class = "UILabel"; text = "Use simplified filters"; ObjectID = "ILy-oL-9M6"; */
-"ILy-oL-9M6.text" = "Выкарыстаць спрошчаныя фільтры";
-
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Выдаленне вашага VPN-профіля дэактывуе абарону ад асочвання";
 
@@ -94,9 +91,6 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Паказваць радок бягучага стану";
 
-/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "rRz-nr-s4U"; */
-"rRz-nr-s4U.text" = "Тунэльны рэжым";
-
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "Налады";
 
@@ -108,6 +102,3 @@
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Адблакаваць рэкламу ўсюды, апроч сайтаў з гэтага спіса";
-
-/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will ignore generic cosmetic rules. This will speed up pages rendering in exchange for filtering quality"; ObjectID = "yvq-Cw-7Z6"; */
-"yvq-Cw-7Z6.text" = "Калі гэта опцыя ўлучана, AdGuard не стане ўжываць агульныя касметычныя правілы фільтрацыі. Гэта паскорыць загрузку старонак, але панізіць якасць фільтрацыі";

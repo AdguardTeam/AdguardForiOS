@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Per utilizzare AdGuard in Safari segui alcuni semplici passi";
 
-/* Class = "UILabel"; text = "DNS Protection"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "Protezione DNS";
+/* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "Blocco Tracciamento";
 
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "LEGGI IL MANUALE";
@@ -22,14 +22,14 @@
 /* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
 "eyJ-Xh-OdS.text" = "Attiva tutti i blocchi di contenuti e torna sulla nostra app!";
 
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hXU-wD-fbI"; */
-"hXU-wD-fbI.text" = "Protezione Safari";
+/* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
+"hXU-wD-fbI.text" = "Blocco Pubblicitario";
 
 /* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
 "hak-o1-HWp.text" = "Ti ringraziamo per aver installato AdGuard!";
 
-/* Class = "UILabel"; text = "Safari Protection"; ObjectID = "hf9-6r-TUk"; */
-"hf9-6r-TUk.text" = "Protezione Safari";
+/* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
+"hf9-6r-TUk.text" = "Blocco Disturbatori";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "PROSSIMO";

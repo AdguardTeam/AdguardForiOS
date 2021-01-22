@@ -682,15 +682,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "未定義";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "フィードバックを送れませんでした";
-
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "恐れ入りますが、なにかの問題が発生しました。";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "本アプリを引き続き使用することにより、<a href=%2$@>利用規約</a>および<a href=%1$@>プライバシーポリシー</a>に同意したことになります。";
-
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "リクエスト数";
 
@@ -732,7 +723,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "リクエスト数: %d";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
