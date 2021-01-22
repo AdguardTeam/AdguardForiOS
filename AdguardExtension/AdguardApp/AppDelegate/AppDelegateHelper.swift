@@ -18,7 +18,6 @@
 
 import Foundation
 import Setapp
-import NetworkExtension
 
 /**
  AppDelegateHelper is a helper class for AppDelegate
