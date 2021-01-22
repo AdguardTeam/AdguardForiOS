@@ -5121,7 +5121,6 @@
 				D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */,
 				D067D9AC214693E200ECDE6D /* EmailSignInController.swift */,
 				242B9144258A0D3E00A39E19 /* SignInController.swift */,
-				24D6DFD42599E77100BD6583 /* SignInResultProcessor.swift */,
 				248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */,
 			);
 			path = License;
@@ -6661,7 +6660,6 @@
 				D0D7E5E524444EBD001801A5 /* ParsedHost.swift in Sources */,
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
 				D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */,
-				24D6DFD62599E77100BD6583 /* SignInResultProcessor.swift in Sources */,
 				D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */,
 				6598865F1CF74DE9003ECD1C /* ABECFilterParsers.m in Sources */,
 				D0B545C92435D669002F0AEC /* GetProController.swift in Sources */,
@@ -7050,7 +7048,6 @@
 				655A028E1C6B7686000F00D7 /* ACNHttpUtils.m in Sources */,
 				65EC9BC81BB9824C00F53F3B /* ADLocales.m in Sources */,
 				7EA3DBC72409367B000D8D42 /* IntroductionOnboardingController.swift in Sources */,
-				24D6DFD52599E77100BD6583 /* SignInResultProcessor.swift in Sources */,
 				D06E30EB253F323B008BBD2D /* LocalizedDnsProviders.swift in Sources */,
 				D06ACB6F2146AF1700D2A37D /* LongLabelCell.swift in Sources */,
 				D00E448925650084002DDE98 /* ImportSettingsService.swift in Sources */,
