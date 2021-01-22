@@ -473,9 +473,10 @@
         DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
         ASSIGN_STRONG(self);
         [USE_STRONG(self) updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error, NSArray<NSString *> *systemDnsIps) {
-            USE_STRONG(self).reasserting = NO;
+            DDLogError(@"Received error when updating setting, error: %@)", error);
             [_reachabilityHandler startNotifier];
             [USE_STRONG(self) startDnsProxyWithSystemDnsIps:systemDnsIps];
+            USE_STRONG(self).reasserting = NO;
         }];
     }];
 }
