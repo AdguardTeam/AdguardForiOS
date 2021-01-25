@@ -86,7 +86,7 @@
 "lost_password" = "Lost password?";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "No user with this email address has been found";
+"user_not_found_message" = "No user with this email address found. Please sign up at https://my.adguard.com first.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
