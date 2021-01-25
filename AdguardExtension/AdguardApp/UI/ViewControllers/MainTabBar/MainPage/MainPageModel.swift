@@ -67,22 +67,19 @@ class MainPageModel: MainPageModelProtocol {
     // MARK: - private methods
     
     private func observeAntibanerState(){
-        let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: .main) { [weak self] (note) in
             self?.delegate?.updateStarted()
         }
         observers.append(observer1)
         
-        let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: .main) { [weak self] (note) in
             
-            let updatedMetas: Array<Any>? = (note.userInfo?[AppDelegateUpdatedFiltersKey]) as? Array<Any>
+            let updatedMetas: Int = (note.userInfo?[AppDelegateUpdatedFiltersKey] as? Int) ?? 0
             
             let message: String?
-            if updatedMetas == nil {
-                message = nil
-            }
-            else if updatedMetas!.count > 0 {
+            if updatedMetas > 0 {
                 let format = ACLocalizedString("filters_updated_format", nil);
-                message = String(format: format, updatedMetas!.count)
+                message = String(format: format, updatedMetas)
             } else {
                 message = ACLocalizedString("filters_noUpdates", nil);
             }
@@ -91,14 +88,14 @@ class MainPageModel: MainPageModelProtocol {
         }
         observers.append(observer2)
         
-        let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: nil) { [weak self] (note) in
+        let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: .main) { [weak self] (note) in
             guard let self = self else { return }
             
             self.delegate?.updateFailed(error: ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)
         
-        let observer4 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateUpdateDidNotStarted, object: nil, queue: nil) { [weak self] (note) in
+        let observer4 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateUpdateDidNotStarted, object: nil, queue: .main) { [weak self] (note) in
             guard let self = self else { return }
             DDLogInfo("(MainPageModel) update did not start")
             self.delegate?.updateFinished(message: String.localizedString("filters_noUpdates"))

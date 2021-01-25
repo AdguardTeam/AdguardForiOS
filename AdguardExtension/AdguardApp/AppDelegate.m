@@ -572,55 +572,29 @@ static NSTimeInterval lastCheckTime;
 /////////////////////////////////////////////////////////////////////
 
 - (void)updateStartedNotify{
-    
-    [ACSSystemUtils callOnMainQueue:^{
-        
-        DDLogInfo(@"(AppDelegate) Started update process.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateStartedUpdateNotification object:self];
-    }];
+    [helper updateStartedNotify];
 }
 
 - (void)updateDidNotStartNotify{
-    
-    [ACSSystemUtils callOnMainQueue:^{
-        
-        DDLogInfo(@"(AppDelegate) Did not started update process.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateUpdateDidNotStartedNotification object:self];
-    }];
+    [helper updateDidNotStartNotify];
 }
 
 - (void)updateFailuredNotify{
-    
-    
-    [ACSSystemUtils callOnMainQueue:^{
-        
-        DDLogInfo(@"(AppDelegate) Failured update process.");
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFailuredUpdateNotification object:self];
-        
-    }];
-    
+    [helper updateFailuredNotify];
 }
 
 - (void)updateFinishedNotify: (BOOL)filtersUpdated {
+    DDLogInfo(@"(AppDelegate) Finished update process.");
     
-    [ACSSystemUtils callOnMainQueue:^{
-        
-        DDLogInfo(@"(AppDelegate) Finished update process.");
-        NSArray *metas = @[];
-        
-        NSMutableDictionary* userinfo = [NSMutableDictionary new];
-        if (filtersUpdated) {
-            
-            if (_updatedFilters) {
-                metas = _updatedFilters;
-                _updatedFilters = nil;
-            }
-            
-            userinfo[AppDelegateUpdatedFiltersKey] = metas;
+    NSArray *metas = @[];
+    
+    if (filtersUpdated) {
+        if (_updatedFilters) {
+            metas = _updatedFilters;
+            _updatedFilters = nil;
         }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:AppDelegateFinishedUpdateNotification object:self userInfo:userinfo];
-    }];
+    }
+    [helper updateFinishedNotifyWithUpdatedFiltersNumber: [metas count]];
 }
 
 /**
