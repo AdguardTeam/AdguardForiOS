@@ -86,7 +86,7 @@
 "lost_password" = "Lost password?";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "User not found";
+"user_not_found_message" = "No user with this email address has been found";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
