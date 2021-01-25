@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "DNS nativo está funcionando";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "DNS nativo não está funcionando";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regras de usuário";
 
@@ -176,13 +182,19 @@
 "filter_version_format" = "versão %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Slit-Tunnel, compatível com aplicativos \"VPN Pessoal\"";
+"tunnel_mode_split_description" = "Túnel dividido, compatível com aplicativos \"VPN Pessoal\"";
 
 /* (DnsSettingController) Full tunel mode description */
-"tunnel_mode_full_description" = "Full-Tunnel, incompativel com outros aplicativos VPN";
+"tunnel_mode_full_description" = "Túnel completo, incompatível com outros aplicativos VPN";
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
-"tunnel_mode_full_without_icon_description" = "Full-Tunnel (sem o ícone VPN), incompatível com outros aplicativos VPN (instável)";
+"tunnel_mode_full_without_icon_description" = "Túnel completo (sem o ícone VPN), incompatível com outros aplicativos VPN (instável)";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Nativo";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Sem criptografia (DNS do sistema)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Você inseriu um upstream inválido";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Protocolo DNS inválido";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ ainda não é compatível com iOS. Tente adicionar um servidor DNS primário diferente.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de bloqueio do sistema";
 
@@ -682,11 +700,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vazio";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Ocorreu um erro ao enviar seu feedback";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Falha ao enviar um relatório de erros, tente novamente";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Algo deu errado";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Falha ao enviar feedback, tente novamente";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Seu relatório de erro foi enviado com sucesso!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "O seu feedback foi enviado com sucesso!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Reportar um problema";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Deixar feedback";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Inclua a descrição do problema (começou após uma atualização?) E informações sobre outro software que você possui (VPN/AV/extensão)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Diga-nos o que você pensa sobre %@ — o que você gosta ou não gosta, quais recursos gostaria de sugerir";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Enviar um relatório";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Enviar feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Ao continuar a usá-lo, você aceita os<br /><a href=%2$@>Termos e condições</a> e a nossa <a href=%1$@>Política de privacidade</a>";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d solicitações";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Ativar %@ nas configurações de DNS do sistema";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Para ativar o DNS nativo, você precisa abrir os <b>ajustes do sistema</b>, vá para <b>VPN e Rede > DNS</b>e selecione <b>%@</b> lá.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Diga-nos se você está satisfeito com a experiência de bloqueio de anúncios até agora";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Certifique-se de usar o <b>navegador Safari</b>.<br>Atualmente é tecnicamente impossível bloquear conteúdo em outros navegadores.<br>Prossiga para as configurações de proteção do Safari e ative todas as listas de filtros necessárias. <br>Reinicie o aplicativo Safari: feche e abra novamente.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Adicionar regras de DNS do usuário";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>ATENÇÃO!</b> A ativação desses recursos pode interromper a conexão com a Internet ou comprometer sua segurança e privacidade.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Interessado em novos recursos interessantes do AdGuard? Tente nosso <a href=\"%@\">canal beta.</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Lista de servidores DNS simples a serem usados para resolver nomes de host DOH/DOT (se houver)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap endereço de IP";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Endereço de upstream";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams";

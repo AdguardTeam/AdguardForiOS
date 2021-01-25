@@ -49,6 +49,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Izvorni DNS deluje";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Izvorni DNS ne deluje";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Uporabniška pravila";
 
@@ -181,6 +187,12 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Poln-Tunel (brez ikone VPN), ki ni združljiv z drugimi aplikacijami VPN, manj stabilen";
 
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Izvorni";
+
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Brez šifriranja (Sistemski DNS)";
 
@@ -198,6 +210,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-prek-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-prek-QUIC (poskusno)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Ali ste prepričani, da se želite odjaviti?";
@@ -607,6 +622,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Vnesli ste neveljaven upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Neveljaven protokol DNS";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "iOS še ne podpira %@. poskusite dodati drugačen tok.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistemski seznam nedovoljenih";
 
@@ -676,14 +697,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prazno";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Ni uspelo pošiljanje vaših povratnih informacij";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Poročila o napaki ni bilo mogoče poslati. Prosimo, poskusite kasneje";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Nekaj je šlo narobe";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Povratnih informacij ni bilo mogoče poslati. Prosimo, poskusite kasneje";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Vaše poročilo o programski napaki je bilo uspešno poslano!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Vaše povratne informacije so bile uspešno poslane!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Prijavi napako";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Pošlji povratne informacije";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Vključite opis težave (ali se je začela po posodobitvi?) in podatke o drugem programu, ki ga imate (VPN/protivirusni program/razširitev)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Povejte nam, kaj mislite o %@ — kaj vam je všeč ali ne. Katere funkcije bi radi predlagali";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Pošlji poročilo";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Pošlji povratne informacije";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Z nadaljujevanjem njegove uporabe, sprejemate<br /><a href=%2$@>Pogoje in določila</a> in <a href=%1$@>Politiko zasebnosti</a>";
+"introduction_license_agreement" = "Z nadaljevanjem uporabe sprejemate<br /><a href=%2$@>Pogoje in določila</a> in <a href=%1$@>Licenco za končnega uporabnika</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Zahteve";
@@ -727,6 +772,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d zahtev";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Prosimo, omogočite %@ v nastavitvah sistemskega DNS";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Da omogočite izvorni DNS, morate odpreti <b>Nastavitve sistema</b>, pojdite na <b>VPN in Omrežje -> DNS</b> in tam izberite <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Povejte nam, ali ste zadovoljni z dosedanjo izkušnjo zaviranja oglasov";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Prepričajte se, da uporabljate <b>brskalnik Safari</b>.<br> Trenutno je tehnično nemogoče zavirati vsebino v drugih brskalnikih.<br> Nadaljujte z nastavitvami zaščite Safari in omogočite vse potrebne sezname filtrov.<br> Znova zaženite aplikacijo Safari: zaprite jo in odprite znova.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -790,3 +846,55 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Tukaj vnesite geslo";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Dodaj filter zaviranje vsebine po meri: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Dodaj filter DNS po meri: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Omogoči filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Onemogoči filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neuspešno";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Izberi strežnik DNS: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktiviraj premium funkcije z licenčnim ključem %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Dodaj uporabniška pravila";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Dodaj uporabniška pravila DNS";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>OPOZORILO!</b> Omogočanje teh funkcij lahko prekine internetno povezavo ali ogrozi vašo varnost in zasebnost.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Vas zanimajo nove nove funkcije AdGuarda? Preizkusite naš <a href=\"%@\">kanal Beta</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Seznam navadnih strežnikov DNS, ki se uporabljajo za razreševanje imen gostiteljev DOH/DOT (če obstajajo)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Zagonski trakovi";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Naslov IP zagonskega traku";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Naslov toka navzgor";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Zamenjave";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Tokovi navzgor";

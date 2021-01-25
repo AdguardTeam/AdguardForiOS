@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Natívna DNS funguje";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Natívna DNS nefunguje";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Používateľský filter";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Plný tunel (bez ikony VPN), nekompatibilný s inými VPN aplikáciami, menej stabilný";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Natívna";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Bez šifrovania (systémové DNS)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Zadali ste neplatný upstream";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Neplatný DNS protokol";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ zatiaľ nie je podporovaný systémom iOS. Skúste pridať rôzne upstream.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systémový zoznam blokovaní";
 
@@ -682,11 +700,35 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Prázdna";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Nepodarilo sa poslať spätnú väzbu";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Nepodarilo sa odoslať hlásenie o chybe, skúste to znova";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Niečo sa pokazilo";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Odoslanie spätnej väzby zlyhalo, skúste to znova";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Vaše hlásenie chyby bolo úspešne odoslané!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Vaša spätná väzba bola úspešne odoslaná!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Nahlásiť chybu";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Poslať spätnú väzbu";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Uveďte popis problému (začal sa po aktualizácii?) A informácie o ďalšom softvéri, ktorý máte (VPN/AV/rozšírenie)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Povedzte nám, čo si myslíte o %@ - čo sa vám páči alebo nepáči, ktoré funkcie by ste chceli navrhnúť";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Odoslať hlásenie";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Poslať spätnú väzbu";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Pokračovaním v používaní akceptujete<br /><a href=%2$@>Zmluvné podmienky</a> a <a href=%1$@>Zásady ochrany osobných údajov</a>";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d dopytov";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Zapnite %@ v nastaveniach DNS systému";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Ak chcete povoliť natívne DNS, musíte otvoriť <b>Nastavenia systému</b>, prejsť na <b>VPN a sieť > DNS</b> a tam zvoliť <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Povedzte nám, či ste spokojný s blokovaním reklám";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Uistite sa, že používate <b>prehliadač Safari.</b> <br> V súčasnosti je technicky nemožné blokovať obsah v iných prehliadačoch.<br> Pokračujte na nastavenia ochrany Safari a povoľte všetky potrebné zoznamy filtrov.<br> Reštartujte aplikáciu Safari: ukončite ju a znova otvorte.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Pridať DNS používateľské pravidlá";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>UPOZORNENIE!</b> Povolenie týchto funkcií môže prerušiť internetové pripojenie alebo narušiť Vašu bezpečnosť a ochranu súkromia.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Máte záujem o nové super funkcie AdGuard? Vyskúšajte náš <a href=\"%@\">beta kanál.</a>";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Zoznam štandardných DNS serverov, ktoré sa majú použiť na rozlíšenie názvov DOH/DOT hostiteľov (ak existujú)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP adresa";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Adresa upstream";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Zálohy";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstream";

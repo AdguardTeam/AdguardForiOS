@@ -4,11 +4,14 @@
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "Vizitka";
 
-/* Class = "UIButton"; normalTitle = "Acknowlegdements"; ObjectID = "htU-yE-FEi"; */
+/* Class = "UIButton"; normalTitle = "Acknowledgments"; ObjectID = "htU-yE-FEi"; */
 "htU-yE-FEi.normalTitle" = "Zahvala";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
 "jMW-e4-GbU.title" = "Prijava";
+
+/* Class = "UIButton"; normalTitle = "Discuss AdGuard"; ObjectID = "oMX-oj-ZeJ"; */
+"oMX-oj-ZeJ.normalTitle" = "Pogovor z AdGuardom";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "Licenčna pogodba za končnega uporabnika";

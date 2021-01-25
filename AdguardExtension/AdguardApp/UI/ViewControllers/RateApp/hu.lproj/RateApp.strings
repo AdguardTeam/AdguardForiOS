@@ -1,29 +1,17 @@
-/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "Köszönjük";
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Kérjük ellenőrizze ezt az útmutatót:";
 
-/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "a visszajelzését";
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "A probléma továbbra is fennáll";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "Visszajelzés";
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "Elégedett az AdGuarddal?";
 
-/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Kérjük, ossza meg tapasztalatait";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "Nem, van egy problémám";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "Visszajelzés";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Igen, értékelem";
 
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "Visszajelzés";
-
-/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "KÜLDÉS";
-
-/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Adja meg az e-mail címét, ha szeretné, hogy válaszoljunk";
-
-/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "WEBOLDALUNK";
-
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "Visszajelzés";
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Megvan, ez segít";

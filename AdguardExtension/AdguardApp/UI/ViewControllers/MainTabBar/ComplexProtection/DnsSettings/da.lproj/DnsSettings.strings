@@ -16,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "GEM";
 
+/* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
+"7H8-Df-Igr.text" = "Hvordan opsættes det?";
+
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
 "84p-U2-sd8.text" = "AdGuard vil ikke blokere domænerne fra denne liste";
 
@@ -34,6 +37,9 @@
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS-server";
 
+/* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
+"Mxf-0w-5MP.text" = "Leveres af selve operativsystemet. Inspektion af DNS-aktivitet er ikke mulig i denne tilstand.\n\n";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Tilføj et filter";
 
@@ -43,6 +49,9 @@
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-Quic (eksperimentel)";
 
+/* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
+"QD7-ng-Xb6.text" = "AdGuard";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS-beskyttelse";
 
@@ -51,6 +60,9 @@
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Liste over tilladte";
+
+/* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
+"Xa6-wl-aOE.text" = "DNS-implementering";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "ANNULLER";
@@ -94,11 +106,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "ANNULLER";
 
+/* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
+"lEg-oH-oxd.text" = "Fungerer som en lokal \"pseudo\" VPN. Understøtter enhver DNS-protokol, giver dig mulighed for at inspicere din enheds DNS-aktivitet.";
+
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Navn";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Hjemmeside";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
+"o1z-O6-Bk9.normalTitle" = "OK";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "SLET";
@@ -121,6 +139,9 @@
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
 "qjN-LB-N3T.text" = "Tilpas din DNS-trafik ved at anvende dine egne regler.";
 
+/* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
+"sQQ-5p-EfW.text" = "Oprindelig";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS-serveradresse";
 
@@ -133,5 +154,11 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Vælg protokol";
 
+/* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
+"xgN-x2-EfQ.text" = "Implementering";
+
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtre og undtagelser";
+
+/* Class = "UILabel"; text = "About iOS settings"; ObjectID = "xyt-oO-rhI"; */
+"xyt-oO-rhI.text" = "Om iOS-indstillinger";

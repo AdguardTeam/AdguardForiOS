@@ -673,15 +673,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Kosong";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Gagal mengirim umpan balik Anda";
-
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Ada yang salah";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Dengan lanjut memakainya, Anda menerima<br /><a href=%2$@> Syarat dan kondisi </a>dan<a href=%1$@>Kebijakan privasi</a>";
-
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Permintaan";
 
@@ -723,7 +714,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d permintaan";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

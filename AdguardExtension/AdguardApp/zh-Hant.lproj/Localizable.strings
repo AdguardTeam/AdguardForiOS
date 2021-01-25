@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10k";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "原生的 DNS 正在運作";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "原生的 DNS 未正在運作";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "使用者規則";
 
@@ -131,7 +137,7 @@
 "dns_whitelist_text" = "於此輸入被換行分隔的域名。AdGuard 將允許所有至這些網域的連線。";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "此封鎖清單支援 <a href=\"%@\">AdGuard 的 DNS 語法</a>。於此輸入被換行分隔的規則。AdGuard 將封鎖所有與這些規則相符之網域的連線。";
+"dns_blacklist_text_format" = "此封鎖清單支援 <a href=\"%@\">AdGuard 的 DNS 語法</a>。於此輸入被換行分隔的規則。AdGuard 將封鎖所有與這些規則相符的網域之連線。";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "正在更新…";
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "完全的隧道（無 VPN 圖像），與其它的 VPN 應用程式不相容，較不穩定的";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "原生的";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "無加密（系統 DNS）";
@@ -299,7 +311,7 @@
 "hostname_obtaining_error" = "該主機名稱未被獲得。也許該頁面尚未被載入。";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
-"assistant_launching_unable" = "該網站的安全性政策不允許發動 AdGuard 助理。";
+"assistant_launching_unable" = "此網站的安全性政策不允許發動 AdGuard 助理。";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
 "support_error_safari_extension" = "當初始 Safari 動作延伸功能時，非預期性的錯誤已發生。如果這個再次發生，請與 AdGuard 支援聯繫。";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "您已輸入無效的上游";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "無效的 DNS 協定";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試加入不同的上游。";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "系統封鎖清單";
 
@@ -682,11 +700,32 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "空無的";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "未能傳送您的回饋意見";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "未能提交程式錯誤報告，請再次嘗試";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "某事物出現問題";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "未能傳送回饋意見，請再次嘗試";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "您的程式錯誤報告已被成功地傳送！";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "您的回饋意見已被成功地傳送！";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "報告程式錯誤";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "留下回饋意見";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "請包括該問題說明（問題在更新之後發生？）及關於其它您有的軟體（VPN/防毒軟體/擴充功能）之資訊";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "傳送報告";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "傳送回饋意見";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "透過繼續使用它，您接受該<br /><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
@@ -733,6 +772,14 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d 項請求";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "請在系統 DNS 設定中啟用 %@";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "告訴我們到目前為止您是否對廣告封鎖體驗感到滿意";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "確保您正在使用 <b>Safari 瀏覽器</b>。<br>目前在技術上不可能封鎖在其它瀏覽器中的內容。<br>前往 Safari 防護設定並啟用所有必要的過濾器清單。<br>重新啟動 Safari 應用程式：退出然後再次開啟。";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +871,12 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "增加 DNS 使用者規則";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "上游的位址";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "應變";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "上游";

@@ -676,15 +676,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Пуста";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Не атрымалася адправіць ваш водгук";
-
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Нешта пайшло не так";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Працягваючы выкарыстанне, вы прымаеце <br /><a href=%2$@>Становішчы і ўмовы</a> і <a href=%1$@>Палітыку прыватнасці</a>";
-
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Запыты";
 
@@ -726,7 +717,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d запытаў";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

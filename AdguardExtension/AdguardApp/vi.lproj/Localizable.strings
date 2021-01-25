@@ -667,15 +667,6 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Rỗng";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Không gửi được phản hồi của bạn";
-
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Đã xảy ra lỗi";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Bằng cách tiếp tục sử dụng, bạn chấp nhận <br /> <a href=%2$@> Điều khoản và điều kiện </a> và <a href=%1$@> Chính sách quyền riêng tư </a>";
-
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Yêu cầu";
 
@@ -717,7 +708,6 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d yêu cầu";
-
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

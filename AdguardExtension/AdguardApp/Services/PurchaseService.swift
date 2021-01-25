@@ -153,6 +153,7 @@ extension PurchaseService {
     static let kPSNotificationLoginFailure = "kPSNotificationLoginFailure"
     static let kPSNotificationLoginPremiumExpired = "kPSNotificationLoginPremiumExpired"
     static let kPSNotificationLoginNotPremiumAccount = "kPSNotificationLoginNotPremiumAccount"
+    static let kPSNotificationLoginUserNotFound = "kPSNotificationLoginUserNotFound"
     static let kPSNotificationReadyToPurchase = "kPSNotificationReadyToPurchase"
     static let kPSNotificationPremiumExpired = "kPSNotificationPremiumExpired"
     
@@ -215,6 +216,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let AUTH_REDIRECT_URI_PARAM = "redirect_uri"
     private let AUTH_STATE_PARAM = "state"
     private let AUTH_SOCIAL_PROVIDER = "social_provider"
+    private let AUTH_REG_MODE = "reg_mode"
     
     private let authUrl = "https://auth.adguard.com/oauth/authorize"
     
@@ -528,7 +530,9 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             AUTH_SCOPE_PARAM : "trust",
             AUTH_REDIRECT_URI_PARAM : "adguard://auth",
             AUTH_STATE_PARAM : state,
-            AUTH_SOCIAL_PROVIDER : socialProvider.rawValue]
+            AUTH_SOCIAL_PROVIDER : socialProvider.rawValue,
+            AUTH_REG_MODE: "NEVER"]
+
         guard let urlString = params.constructLink(url: authUrl) else { return nil }
         guard let url = URL(string: urlString) else { return nil }
         return url

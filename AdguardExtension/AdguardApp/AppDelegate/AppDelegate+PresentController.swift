@@ -478,30 +478,36 @@ extension AppDelegate {
     
     /*
      Sets main page as current
-     Finds all navigation controllers and calls 'popToRootViewController' for each
      */
     func setMainPageAsCurrentAndPopToRootControllersEverywhere() {
         window.rootViewController?.dismiss(animated: true) { [weak self] in
-            guard let tabBar = self?.getMainTabController() else {
-                DDLogError("Tab bar is nil")
-                return
-            }
-            
-            guard let navController = self?.getNavigationController(for: .mainTab) else {
-                DDLogError("Navigation controller is nil")
-                return
-            }
-                        
-            if let tabs = tabBar.viewControllers {
-                for viewController in tabs {
-                    if let navController = viewController as? UINavigationController {
-                        navController.popToRootViewController(animated: false)
-                    }
+            self?.dismissToMainPage()
+        }
+    }
+    
+    /*
+     Finds all navigation controllers and calls 'popToRootViewController' for each
+     */
+    func dismissToMainPage(animated: Bool = false) {
+        guard let tabBar = self.getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return
+        }
+        
+        guard let navController = self.getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return
+        }
+                    
+        if let tabs = tabBar.viewControllers {
+            for viewController in tabs {
+                if let navController = viewController as? UINavigationController {
+                    navController.popToRootViewController(animated: animated)
                 }
             }
-            
-            tabBar.selectedViewController = navController
         }
+        
+        tabBar.selectedViewController = navController
     }
     
     /* Presents HowToSetupController for top view controller in navigation stack */

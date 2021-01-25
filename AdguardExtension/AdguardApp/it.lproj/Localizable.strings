@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Il DNS nativo sta funzionando";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Il DNS nativo non funziona";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regole utente";
 
@@ -183,6 +189,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (senza icona VPN), incompatibile con altre app VPN, meno stabile";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Nativo";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Nessuna crittografia (DNS di sistema)";
@@ -613,6 +625,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Hai inserito il upstream non valido";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Protocollo DNS non valido";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ non è ancora supportato da iOS. Prova ad aggiungere un upstream differente.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista Nera di sistema";
 
@@ -682,14 +700,38 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Vuoto";
 
-/* (FeedbackController) - feedback sending failure title */
-"feedback_sending_failed_title" = "Invio del feedback non riuscito";
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Errore nell\'invio della segnalazione bug, ti preghiamo di riprovare";
 
-/* (FeedbackController) - feedback sending failure message */
-"feedback_sending_failed_message" = "Qualcosa è andato storto";
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Errore nell\'invio del feedback, ti preghiamo di riprovare";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "La tua segnalazione bug è stata correttamente inviata!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "La tua segnalazione bug è stata correttamente inviata!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Segnala un bug";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Invia feedback";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Si prega di includere la descrizione del problema (è iniziato dopo un aggiornamento?) e le informazioni su altri software in tuo possesso (VPN/AV/estensione)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Dicci cosa pensi di %@: cosa ti piace o cosa non ti piace, quali caratteristiche vorresti suggerire";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Invia segnalazione";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Invia feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Procedendo nel relativo utilizzo, accetti i<br /><a href=%2$@>Termini e condizioni</a> e la <a href=%1$@>Politica sulla riservatezza</a>";
+"introduction_license_agreement" = "Proseguendo con l\'utilizzo, accetterai i <a href=%2$@>Termini e condizioni</a> e la <a href=%1$@>Politica sulla riservatezza</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Richieste";
@@ -733,6 +775,17 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d richieste";
 
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Ti preghiamo di attivare %@ dalle impostazioni DNS di sistema";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Per attivare il DNS nativo, dovrai aprire <b>Impostazioni di sistema</b>, dirigerti su <b>VPN e rete > DNS</b> e selezionare <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Comunicaci il tuo grado di soddisfazione finora raggiunto in merito all\'esperienza di blocco degli annunci";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Assicurati di utilizzare il <b>browser Safari</b>.<br> Attualmente è tecnicamente impossibile bloccare i contenuti in altri browser.<br> Accedi alle impostazioni di protezione di Safari e attiva tutti gli elenchi dei filtri necessari.<br> Riavvia l\'app Safari: esci e riaprila.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -824,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Aggiungi Regole Utente DNS";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>AVVISO!</b> L\'attivazione di queste funzionalità potrebbe interrompere la connessione a Internet o compromettere la sicurezza e la privacy.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Sei interessato alle nuove fantastiche funzionalità di AdGuard? Prova il nostro <a href=\"%@\">canale beta.</a>.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Elenco server DNS semplici, da utilizzare per risolvere i nomi host DOH/DOT (se presenti)";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Indirizzo IP bootstrap";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Indirizzi upstream";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallback";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstream";

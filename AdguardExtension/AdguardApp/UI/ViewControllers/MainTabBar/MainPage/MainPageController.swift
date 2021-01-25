@@ -737,6 +737,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      and updates UI
     */
     private func observeContentBlockersState() {
+        DDLogInfo("Content blockers states changed; allContentBlockersEnabled = \(configuration.allContentBlockersEnabled)")
         if configuration.allContentBlockersEnabled {
             hideContentBlockersInfo()
         } else {
@@ -745,6 +746,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
         
+        DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
         if !onBoardingIsInProcess {
             if !onboardingShown {
                 showOnboarding()

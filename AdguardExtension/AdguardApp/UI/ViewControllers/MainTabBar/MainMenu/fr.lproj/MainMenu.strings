@@ -1,3 +1,9 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "L'adresse de courriel incorrecte";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
+"5nl-wn-tlv.text" = "Description :";
+
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Assistance";
 
@@ -22,14 +28,23 @@
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Paramètres généraux";
 
+/* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
+"LHx-0a-FxM.text" = "Envoyer les informations détaillées du système, les processus en cours et le journal des applications";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard : qu'est ce que c'est ?";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "Pb4-Gm-t4i"; Note = "(Main Menu) Advanced Settings caption"; */
+"Pb4-Gm-t4i.text" = "FAQ";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Paramètres";
 
-/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "Vous avez une super idée ?";
+/* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Envoie des informations détaillées du système";
+
+/* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Discutez sur notre forum, dans les réseaux sociaux ou sur GitHub";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Paramètres";
@@ -42,6 +57,15 @@
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "Vous pouvez noter l'app dans l'App Store";
+
+/* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
+"dNj-vb-TQe.text" = "Foire aux questions";
+
+/* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
+"fva-Rp-ExO.text" = "Soumettre des demandes et des suggestions de fonctionnalités";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
+"gap-Uy-5ka.placeholder" = "Courriel";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Comment bloquer les pubs avec AdGuard";
@@ -58,14 +82,23 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "Protection DNS";
 
-/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "Demande de fonctionnalité";
+/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Votre courriel (optionnel) :";
+
+/* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "Discuter";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Abonnements et compte";
 
+/* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
+"srJ-sd-sZF.text" = "Message";
+
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "À propos";
+
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "xJd-fJ-cmx"; Note = "(Main Menu) Advanced Settings caption"; */
+"xJd-fJ-cmx.text" = "Envoyer un commentaire";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "Apparence et autres réglages";

@@ -19,7 +19,7 @@
 import UIKit
 import SafariServices
 
-class SignInController: UIViewController, SignInResultProcessor {
+class SignInController: UIViewController {
     
     @IBOutlet var buttons: [LeftAlignedIconButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -117,6 +117,9 @@ class SignInController: UIViewController, SignInResultProcessor {
             self.premiumExpired()
         case PurchaseService.kPSNotificationLoginNotPremiumAccount:
             self.notPremium()
+        case PurchaseService.kPSNotificationLoginUserNotFound:
+            self.userNotFound()
+
             
         default:
             break
@@ -125,30 +128,42 @@ class SignInController: UIViewController, SignInResultProcessor {
     
     private func loginSuccess() {
         let message = String.localizedString("login_success_message")
-        dismiss(message: message, toMainPage: true, sfSafariViewController: sfSafariViewController)
+        dismiss(toMainPage: true, message: message)
     }
     
     private func loginFailure(_ error: NSError?) {
         if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
-            dismiss(message: alertMessage, sfSafariViewController: sfSafariViewController)
+            dismiss(toMainPage: false, message: alertMessage)
         }
     }
     
     private func premiumExpired() {
         let body = String.localizedString("login_premium_expired_message")
-        dismiss(message: body, sfSafariViewController: sfSafariViewController)
+        dismiss(toMainPage: false, message: body)
     }
     
     private func notPremium() {
         let body = String.localizedString("not_premium_message")
-        dismiss(message: body, sfSafariViewController: sfSafariViewController)
+        dismiss(toMainPage: false, message: body)
     }
     
-    private func dismiss(message: String, toMainPage: Bool = false, sfSafariViewController: UIViewController?) {
-        dismissController(toMainPage: toMainPage, sfSafariViewController: sfSafariViewController) { [weak self] in
-            self?.navigationController?.popViewController(animated: false)
-        } onControllerDismiss: { [notificationService] in
-            notificationService.postNotificationInForeground(body: message, title: "")
+    private func userNotFound() {
+        let message = String.localizedString("user_not_found_message")
+        dismiss(animated: true) { [weak self] in
+            self?.notificationService.postNotificationInForeground(body: message, title: "")
         }
     }
-}
+    
+    private func dismiss(toMainPage: Bool, message: String) {
+        sfSafariViewController?.dismiss(animated: true, completion: { [notificationService] in
+            notificationService.postNotificationInForeground(body: message, title: "")
+        })
+        
+        if toMainPage {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.dismissToMainPage()
+        } else {
+            self.navigationController?.popViewController(animated: false)
+        }
+    }
+ }

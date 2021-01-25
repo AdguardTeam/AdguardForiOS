@@ -1,3 +1,9 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "電子郵件位址為不正確的";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
+"5nl-wn-tlv.text" = "說明：";
+
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "支援";
 
@@ -22,14 +28,23 @@
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "一般的";
 
+/* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
+"LHx-0a-FxM.text" = "傳送有關正在執行的程序和應用程式記錄之詳細的系統資訊";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "AdGuard 是什麼？";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "Pb4-Gm-t4i"; Note = "(Main Menu) Advanced Settings caption"; */
+"Pb4-Gm-t4i.text" = "常見問答集";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "設定";
 
-/* Class = "UILabel"; text = "Got a great idea?"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "有個很棒的主意嗎？";
+/* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "傳送詳細的系統資訊";
+
+/* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "於我們的論壇、社群網路或 GitHub 上討論";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "設定";
@@ -42,6 +57,15 @@
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "您可於 App Store 上評論該應用程式";
+
+/* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
+"dNj-vb-TQe.text" = "常見問答集";
+
+/* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
+"fva-Rp-ExO.text" = "提交功能請求和建議";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
+"gap-Uy-5ka.placeholder" = "電子郵件位址";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "如何用 AdGuard 封鎖廣告";
@@ -58,14 +82,23 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS 防護";
 
-/* Class = "UILabel"; text = "Feature request"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
-"rlh-5H-fPk.text" = "功能請求";
+/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "您的電子郵件位址（選填的）：";
+
+/* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "討論";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "訂閱和帳戶";
 
+/* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
+"srJ-sd-sZF.text" = "訊息";
+
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "關於";
+
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "xJd-fJ-cmx"; Note = "(Main Menu) Advanced Settings caption"; */
+"xJd-fJ-cmx.text" = "留下回饋意見";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "外觀和其它的";

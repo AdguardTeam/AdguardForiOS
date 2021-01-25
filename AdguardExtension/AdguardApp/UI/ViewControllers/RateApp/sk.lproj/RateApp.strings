@@ -1,29 +1,17 @@
-/* Class = "UILabel"; text = "Thank you"; ObjectID = "6jg-ji-JtC"; */
-"6jg-ji-JtC.text" = "Ďakujeme";
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Pozrite si prosím tieto pokyny:";
 
-/* Class = "UILabel"; text = "for your feedback"; ObjectID = "JEI-Pr-Mc2"; */
-"JEI-Pr-Mc2.text" = "pre Vašu spätnú väzbu";
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "Problém pretrváva";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "JXu-e8-XCB"; */
-"JXu-e8-XCB.text" = "Spätná väzba";
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "Ste spokojný s AdGuard?";
 
-/* Class = "UILabel"; text = "Please, tell us about your experience"; ObjectID = "TBB-iF-qGA"; */
-"TBB-iF-qGA.text" = "Povedzte nám, prosím, o Vašej skúsenosti";
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "Nie, mám problém";
 
-/* Class = "UILabel"; text = "Feedback"; ObjectID = "XtG-5p-3KJ"; */
-"XtG-5p-3KJ.text" = "Spätná väzba";
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Áno, ohodnotiť";
 
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "cJk-65-rg8"; */
-"cJk-65-rg8.title" = "Spätná väzba";
-
-/* Class = "UIButton"; normalTitle = "SEND"; ObjectID = "nIO-Sh-01f"; */
-"nIO-Sh-01f.normalTitle" = "POSLAŤ";
-
-/* Class = "UITextField"; placeholder = "Enter email if you'd like us to answer"; ObjectID = "oJi-EL-gWT"; */
-"oJi-EL-gWT.placeholder" = "Zadajte e-mail adresu, na ktorú by sme mali poslať odpoveď";
-
-/* Class = "UIButton"; normalTitle = "HOME"; ObjectID = "tCN-dT-J7Y"; */
-"tCN-dT-J7Y.normalTitle" = "DOMOV";
-
-/* Class = "UINavigationItem"; title = "Feedback"; ObjectID = "zE7-4q-9oe"; */
-"zE7-4q-9oe.title" = "Spätná väzba";
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Rozumiem, toto pomohlo";

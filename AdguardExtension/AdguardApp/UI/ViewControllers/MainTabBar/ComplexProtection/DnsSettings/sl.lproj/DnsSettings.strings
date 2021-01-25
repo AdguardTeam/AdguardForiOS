@@ -16,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "SHRANI";
 
+/* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
+"7H8-Df-Igr.text" = "Kako nastaviti?";
+
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
 "84p-U2-sd8.text" = "AdGuard ne bo onemogočil domen s tega seznama";
 
@@ -34,11 +37,20 @@
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "Strežnik DNS";
 
+/* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
+"Mxf-0w-5MP.text" = "Zagotavlja sam OS. Pregled aktivnosti DNS v tem načinu ne bo mogoč.\n\n";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Dodaj filter";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
 "PFY-Cq-NFN.text" = "Omogočite ta modul, da izboljšate svojo zasebnost s šifriranjem vašega prometa DNS.";
+
+/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
+"PYL-vX-Dge.normalTitle" = "DNS-prek-QUIC (poskusno)";
+
+/* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
+"QD7-ng-Xb6.text" = "AdGuard";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Zaščita DNS";
@@ -48,6 +60,9 @@
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Sistemski seznam dovoljenih";
+
+/* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
+"Xa6-wl-aOE.text" = "Druge izvedbe DNS";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
 "ZdD-yx-6ph.normalTitle" = "PREKLIČI";
@@ -91,11 +106,17 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "PREKLIČI";
 
+/* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
+"lEg-oH-oxd.text" = "Deluje kot lokalni \"psevdo\" VPN. Podpira kateri koli protokol DNS in vam omogoča pregledovanje aktivnosti DNS naprave.";
+
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Ime";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Spletna stran";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
+"o1z-O6-Bk9.normalTitle" = "VREDU";
 
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
 "oSP-2V-qCA.normalTitle" = "IZBRIŠI";
@@ -118,6 +139,9 @@
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
 "qjN-LB-N3T.text" = "Prilagodite svoj promet DNS s svojimi pravili.";
 
+/* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
+"sQQ-5p-EfW.text" = "Izvorni";
+
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "Naslov DNS strežnika";
 
@@ -130,5 +154,11 @@
 /* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "Izberi protokol";
 
+/* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
+"xgN-x2-EfQ.text" = "Druge izvedbe";
+
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtri in izjeme";
+
+/* Class = "UILabel"; text = "About iOS settings"; ObjectID = "xyt-oO-rhI"; */
+"xyt-oO-rhI.text" = "O nastavitvah iOS";
