@@ -20,6 +20,7 @@ import Foundation
 
 extension UIApplication {
     
+    static let adguardSigninURL = "https://my.adguard.com"
     static let adguardUrl = "https://adguard.com/forward.html"
     static let rateAdGuardAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
     static let rateAdGuardProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"

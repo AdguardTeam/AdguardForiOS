@@ -148,7 +148,7 @@ class SignInController: UIViewController {
     }
     
     private func userNotFound() {
-        let message = String.localizedString("user_not_found_message")
+        let message = String(format: String.localizedString("user_not_found_message"), UIApplication.adguardSigninURL)
         dismiss(animated: true) { [weak self] in
             self?.notificationService.postNotificationInForeground(body: message, title: "")
         }
