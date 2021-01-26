@@ -248,11 +248,14 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
             dohSettings.serverURL = URL(string: serverUrl)
             settings = dohSettings
         case .dot:
-            guard upstreams.count == 1, let serverUrl = upstreams.first else {
+            guard upstreams.count == 1, var serverUrl = upstreams.first else {
                 onErrorReceived(NativeDnsProviderError.invalidUpstreamsNumber)
                 return
             }
             let dotSettings = NEDNSOverTLSSettings(servers: [])
+            if let range = serverUrl.range(of: "tls://") {
+                serverUrl.removeSubrange(range)
+            }
             dotSettings.serverName = serverUrl
             settings = dotSettings
         default:
@@ -317,9 +320,15 @@ extension NativeProvidersService {
         
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
             if self?.resources.dnsImplementation == .native {
-                self?.saveDnsManager({ _ in })
+                self?.saveDnsManager({ error in
+                    guard let error = error else { return }
+                    DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                })
             } else {
-                self?.removeDnsManager({ _ in })
+                self?.removeDnsManager({ error in
+                    guard let error = error else { return }
+                    DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                })
             }
         }
         
@@ -327,9 +336,15 @@ extension NativeProvidersService {
             proObservation = config.observe(\.proStatus) {[weak self] (_, _) in
                 guard let self = self else { return }
                 if !self.configuration.proStatus {
-                    self.removeDnsManager({ _ in })
+                    self.removeDnsManager({ error in
+                        guard let error = error else { return }
+                        DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                    })
                 } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
-                    self.saveDnsManager({ _ in })
+                    self.saveDnsManager({ error in
+                        guard let error = error else { return }
+                        DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                    })
                 }
             }
         }

@@ -124,9 +124,9 @@ extension AppDelegate {
             return false
         }
         dnsSettingsController.stateFromWidget = enabled
-        dnsSettingsController.loadViewIfNeeded()
-        
         navController.viewControllers = [mainMenuController, dnsSettingsController]
+        
+        dnsSettingsController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window.rootViewController = tabBar
         

@@ -30,16 +30,12 @@ class SystemProtectionEnablerController: UIViewController {
         super.viewDidLoad()
         
         enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
+        enableButton.applyStandardGreenStyle()
         updateTheme()
         
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        enableButton.layer.cornerRadius = enableButton.frame.height / 2
     }
 
     private func updateTheme(){
