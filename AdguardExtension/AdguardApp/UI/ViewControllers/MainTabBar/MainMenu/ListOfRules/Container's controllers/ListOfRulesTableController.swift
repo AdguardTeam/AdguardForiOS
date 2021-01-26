@@ -323,9 +323,9 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
             } else {
                 cell.ruleNameLabel.attributedText = nil
                 cell.rule = rule
-                cell.type = model?.type
             }
             
+            cell.type = model?.type
             cell.ruleState = rule.enabled
             cell.changeRuleStateButton.tag = row
             cell.separatorView.isHidden = row + 1 == model?.rules.count
