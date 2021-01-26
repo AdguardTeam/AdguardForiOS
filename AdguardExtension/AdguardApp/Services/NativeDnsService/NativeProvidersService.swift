@@ -321,13 +321,15 @@ extension NativeProvidersService {
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
             if self?.resources.dnsImplementation == .native {
                 self?.saveDnsManager({ error in
-                    guard let error = error else { return }
-                    DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                    if let error = error {
+                        DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")                        
+                    }
                 })
             } else {
                 self?.removeDnsManager({ error in
-                    guard let error = error else { return }
-                    DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                    if let error = error {
+                        DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                    }
                 })
             }
         }
@@ -337,13 +339,15 @@ extension NativeProvidersService {
                 guard let self = self else { return }
                 if !self.configuration.proStatus {
                     self.removeDnsManager({ error in
-                        guard let error = error else { return }
-                        DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                        if let error = error {
+                            DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                        }
                     })
                 } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
                     self.saveDnsManager({ error in
-                        guard let error = error else { return }
-                        DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                        if let error = error {
+                            DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
+                        }
                     })
                 }
             }
