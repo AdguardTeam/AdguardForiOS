@@ -98,14 +98,14 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     func addException(rule: String) {
         let exception = WifiException(rule: rule, enabled: true)
         networkSettingsService.add(exception: exception)
-        vpnManager.updateSettings(completion: nil)
+        updateVpnSetingsIfNeeded()
     }
     
     func delete(rule: String) {
         for exception in exceptions {
             if exception.rule == rule {
                 networkSettingsService.delete(exception: exception)
-                vpnManager.updateSettings(completion: nil)
+                updateVpnSetingsIfNeeded()
             }
         }
     }
@@ -115,7 +115,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
             if exception.rule == rule {
                 let newException = WifiException(rule: newRule, enabled: exception.enabled)
                 networkSettingsService.change(oldException: exception, newException: newException)
-                vpnManager.updateSettings(completion: nil)
+                updateVpnSetingsIfNeeded()
             }
         }
     }
@@ -125,11 +125,16 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
             if exception.rule == rule {
                 let newException = WifiException(rule: exception.rule, enabled: newEnabled)
                 networkSettingsService.change(oldException: exception, newException: newException)
-                vpnManager.updateSettings(completion: nil)
+                updateVpnSetingsIfNeeded()
             }
         }
     }
     
     // MARK: - Private methods
-
+    
+    private func updateVpnSetingsIfNeeded() {
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
+    }
 }
