@@ -157,34 +157,37 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func updateSettings(completion: ((Error?) -> Void)?) {
-        if resources.dnsImplementation == .adGuard {
-            workingQueue.async { [weak self] in
-                guard let self = self else { return }
-                
-                DDLogInfo("(VpnManager) updateSettings")
-                
-                let (manager, error) = self.loadManager()
-                
-                if error != nil {
-                    completion?(error!)
-                    return
-                }
-                
-                if manager == nil {
-                    DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
-                    let error = VpnManagerError.managerNotInstalled
-                    completion?(error)
-                    
-                    return
-                }
-                
-                self.setupConfiguration(manager!)
-                
-                let saveError = self.saveManager(manager!)
-                completion?(saveError)
-                
-                self.restartTunnel(manager!)
+        if resources.dnsImplementation == .native {
+            DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
+            return
+        }
+        
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            DDLogInfo("(VpnManager) updateSettings")
+            
+            let (manager, error) = self.loadManager()
+            
+            if error != nil {
+                completion?(error!)
+                return
             }
+            
+            if manager == nil {
+                DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
+                let error = VpnManagerError.managerNotInstalled
+                completion?(error)
+                
+                return
+            }
+            
+            self.setupConfiguration(manager!)
+            
+            let saveError = self.saveManager(manager!)
+            completion?(saveError)
+            
+            self.restartTunnel(manager!)
         }
     }
     
