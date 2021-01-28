@@ -159,6 +159,7 @@ class VpnManager: VpnManagerProtocol {
     func updateSettings(completion: ((Error?) -> Void)?) {
         if resources.dnsImplementation == .native {
             DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
+            completion?(nil)
             return
         }
         
