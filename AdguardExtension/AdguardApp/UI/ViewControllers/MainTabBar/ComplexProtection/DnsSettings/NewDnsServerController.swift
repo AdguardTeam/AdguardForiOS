@@ -106,7 +106,7 @@ class NewDnsServerController: BottomAlertController {
             }
             
             self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream) { [weak self] in
-                self?.vpnManager.updateSettings(completion: nil)
+                self?.updateVpnSettingsIfNeeded()
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.providerAdded()
                     self?.dismiss(animated: true)
@@ -126,7 +126,7 @@ class NewDnsServerController: BottomAlertController {
             guard let self = self else { return }
             if self.dnsProvidersService.isActiveProvider(provider) {
                 self.dnsProvidersService.activeDnsServer = nil
-                self.vpnManager.updateSettings(completion: nil)
+                self.updateVpnSettingsIfNeeded()
             }
             
             DispatchQueue.main.async { [weak self] in
@@ -159,7 +159,7 @@ class NewDnsServerController: BottomAlertController {
                 
                 if self.dnsProvidersService.isActiveProvider(provider) {
                     self.dnsProvidersService.activeDnsServer = provider.servers?.first
-                    self.vpnManager.updateSettings(completion: nil)
+                    self.updateVpnSettingsIfNeeded()
                 }
                 
                 DispatchQueue.main.async { [weak self] in
@@ -272,5 +272,11 @@ class NewDnsServerController: BottomAlertController {
         
         addButton?.isEnabled = enabled
         saveButton?.isEnabled = enabled
+    }
+    
+    private func updateVpnSettingsIfNeeded() {
+        if resources.dnsImplementation == .adGuard {
+            self.vpnManager.updateSettings(completion: nil)
+        }
     }
 }
