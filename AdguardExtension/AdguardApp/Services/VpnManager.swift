@@ -157,33 +157,34 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func updateSettings(completion: ((Error?) -> Void)?) {
-        
-        workingQueue.async { [weak self] in
-            guard let self = self else { return }
-            
-            DDLogInfo("(VpnManager) updateSettings")
-            
-            let (manager, error) = self.loadManager()
-            
-            if error != nil {
-                completion?(error!)
-                return
-            }
-            
-            if manager == nil {
-                DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
-                let error = VpnManagerError.managerNotInstalled
-                completion?(error)
+        if resources.dnsImplementation == .adGuard {
+            workingQueue.async { [weak self] in
+                guard let self = self else { return }
                 
-                return
+                DDLogInfo("(VpnManager) updateSettings")
+                
+                let (manager, error) = self.loadManager()
+                
+                if error != nil {
+                    completion?(error!)
+                    return
+                }
+                
+                if manager == nil {
+                    DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
+                    let error = VpnManagerError.managerNotInstalled
+                    completion?(error)
+                    
+                    return
+                }
+                
+                self.setupConfiguration(manager!)
+                
+                let saveError = self.saveManager(manager!)
+                completion?(saveError)
+                
+                self.restartTunnel(manager!)
             }
-            
-            self.setupConfiguration(manager!)
-            
-            let saveError = self.saveManager(manager!)
-            completion?(saveError)
-            
-            self.restartTunnel(manager!)
         }
     }
     
