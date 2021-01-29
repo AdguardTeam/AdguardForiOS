@@ -37,8 +37,14 @@
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
 "LTC-71-V9S.text" = "DNS-tjener";
 
+/* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
+"Mxf-0w-5MP.text" = "Håndtert av selve OS-et. Å inspisere DNS-aktivitet vil ikke være mulig i denne modusen.\n\n";
+
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Legg til et filter";
+
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Skru på denne modulen for å forbedre personvernet ditt ved å kryptere DNS-trafikken din.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (eksperimentell)";
@@ -91,11 +97,17 @@
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
 "iPl-vI-lX5.text" = "Nettverksinnstillinger";
 
+/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
+"iaJ-tk-ohH.text" = "Du kan forbedre personvernet ditt på nettet ved å kryptere DNS-trafikk. For å gjøre det, velg en av de anbefalte DNS-leverandørene.";
+
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Blokkeringsliste";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
 "ks4-fm-Ctr.normalTitle" = "AVBRYT";
+
+/* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
+"lEg-oH-oxd.text" = "Fungerer som en lokal pseudo-VPN. Støtter enhver DNS-protokoll, lar deg inspisere enhetens DNS-aktivitet.";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Navn";
@@ -147,3 +159,6 @@
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filtre og unntak";
+
+/* Class = "UILabel"; text = "About iOS settings"; ObjectID = "xyt-oO-rhI"; */
+"xyt-oO-rhI.text" = "Om iOS-innstillinger";

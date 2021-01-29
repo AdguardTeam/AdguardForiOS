@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Passwort vergessen?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Es wurde kein Benutzer mit dieser E-Mail-Adresse gefunden. Bitte melden Sie sich zuerst bei %@ an.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Ihr Premium-Account ist abgelaufen";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Bitte aktivieren Sie %@ in den systemweiten DNS-Einstellungen";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Um DNS zu aktivieren, öffnen Sie die <b>Systemeinstellungen</b> ➜ <b>VPN & Netzwerk</b> ➜ <b>DNS</b> und wählen dort „<b>%@</b>”.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Wie würden Sie Ihre Erfahrung mit AdGuard beschreiben?";

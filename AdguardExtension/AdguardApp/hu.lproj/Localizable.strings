@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Elfelejtette a jelszót?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Nem található felhasználó ezzel az e-mail címmel. Kérjük, először jelentkezzen be itt: %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium fiókja lejárt";
 
@@ -771,9 +774,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Kérjük, engedélyezze a(z) %@ lehetőséget a DNS beállításokban";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "A natív DNS engedélyezéséhez nyissa meg a <b>Rendszerbeállításokat</b>, menjen a <b>VPN & Hálózat > DNS</b> részhez, ott pedig válassza ki ezt: <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Mondja el, hogy elégedett-e a hirdetések eddigi blokkolásával";

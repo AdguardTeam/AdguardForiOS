@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Parolă pierdută?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Niciun utilizator găsit cu această adresă de e-mail. Vă rugăm să vă înscrieți mai întâi la %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Contul dvs. Premium a expirat";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Vă rugăm să activați %@ în setările DNS ale sistemului";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Pentru a activa DNS nativ, trebuie să deschideți <b>Setări de sistem</b>, accesați <b>VPN & Rețea > DNS</b>și acolo selectați <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Spuneți-ne dacă sunteți mulțumit de experiența de blocare a reclamelor până acum";

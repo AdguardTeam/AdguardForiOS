@@ -26,6 +26,9 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Passord:";
 
+/* Class = "UIButton"; normalTitle = "Continue with Apple"; ObjectID = "PSE-uk-lAE"; */
+"PSE-uk-lAE.normalTitle" = "Fortsett med Apple";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "GÅ TIL KONTOEN MIN";
 
@@ -35,11 +38,17 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Blokker phishing, svindel og kryptoutvinnings-overtak";
 
+/* Class = "UIButton"; normalTitle = "Continue with Facebook"; ObjectID = "Z9l-1b-Wa8"; */
+"Z9l-1b-Wa8.normalTitle" = "Fortsett med Facebook";
+
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "LOGG INN";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "Verdsett privatlivet ditt";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "Logg på";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "DNS-beskyttelse";
@@ -55,3 +64,6 @@
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "BEKREFT";
+
+/* Class = "UIButton"; normalTitle = "Continue with Google"; ObjectID = "t9V-eQ-pZp"; */
+"t9V-eQ-pZp.normalTitle" = "Fortsett med Google";

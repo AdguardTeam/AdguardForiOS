@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Glemt adgangskode?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Ingen bruger blev fundet med denne e-mailadresse. Tilmeld dig først på %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Din Premium konto er udløbet";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Aktivér %@ i systemets DNS-indstillinger";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "For at aktivere den oprindelige DNS skal du åbne <b>Systemindstillingerne</b>, gå til <b>VPN og Netværk > DNS</b> og vælg <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Fortæl os, om du indtil nu har været tilfreds med dine oplevelser med annonceblokeringen";

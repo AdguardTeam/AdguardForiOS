@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Забыли пароль?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Пользователь с таким email не найден. Пожалуйста, вначале зарегистрируйтесь на %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Пожалуйста, включите %@ в системных DNS-настройках";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Чтобы включить нативный DNS, откройте <b>Системные настройки</b>, перейдите в раздел <b>\"VPN и сеть\" > DNS</b> и выберите там <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Расскажите нам, довольны ли вы блокировкой рекламы";

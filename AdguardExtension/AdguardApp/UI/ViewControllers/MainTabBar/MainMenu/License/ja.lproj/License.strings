@@ -1,3 +1,5 @@
+/* Class = "UIButton"; normalTitle = "Use AdGuard account"; ObjectID = "1AU-Vc-Pfi"; */
+"1AU-Vc-Pfi.normalTitle" = "AdGuardアカウントを使う";
 
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "認証アプリからのコード：";
@@ -26,6 +28,9 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "パスワード：";
 
+/* Class = "UIButton"; normalTitle = "Continue with Apple"; ObjectID = "PSE-uk-lAE"; */
+"PSE-uk-lAE.normalTitle" = "Appleで続ける";
+
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "マイ・アカウントへ行く";
 
@@ -35,11 +40,20 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "オンライン詐欺、フィッシング、クリプトジャッキングをブロック";
 
+/* Class = "UIButton"; normalTitle = "Continue with Facebook"; ObjectID = "Z9l-1b-Wa8"; */
+"Z9l-1b-Wa8.normalTitle" = "Facebookで続ける";
+
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "お持ちのAdGuardアカウントやSNSアカウントでログイン";
+
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ログイン";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
 "fwp-I7-Qtl.text" = "個人情報追跡を防止しプライバシーを保護";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "ログイン";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "DNS通信を保護";
@@ -55,3 +69,6 @@
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "確認";
+
+/* Class = "UIButton"; normalTitle = "Continue with Google"; ObjectID = "t9V-eQ-pZp"; */
+"t9V-eQ-pZp.normalTitle" = "Googleで続ける";
