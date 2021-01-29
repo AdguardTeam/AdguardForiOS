@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "弄丟了密碼嗎？";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "未找到具有此電子郵件地址的使用者。請您首先透過 %@ 註冊。";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
 
@@ -721,6 +724,9 @@
 /* (BugReportController) description for bug report */
 "bug_report_description" = "請包括該問題說明（問題在更新之後發生？）及關於其它您有的軟體（VPN/防毒軟體/擴充功能）之資訊";
 
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "告訴我們您對於 %@ 有什麼想法 — 您喜歡或不喜歡的東西，您想要建議哪些功能";
+
 /* (BugReportController) button title for bug report */
 "bug_report_button_title" = "傳送報告";
 
@@ -871,6 +877,21 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "增加 DNS 使用者規則";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>警告！</b>啟用這些功能可能破壞網際網路連線或危害您的安全性及隱私。";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "對 AdGuard 酷炫的新功能感到興趣嗎？嘗試我們的<a href=\"%@\">測試版管道</a>。";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "（若有的話）要被用於解析 DoH/DoT 主機名稱之完全的 DNS 伺服器清單";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps（自我啟動）";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "自我啟動 IP 位址";
 
 /* (UpstreamsController) Fallbacks and Custom address description */
 "upstreams_description" = "上游的位址";

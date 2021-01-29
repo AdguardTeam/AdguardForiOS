@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Parolanızı mı unuttunuz?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Bu e-posta adresine sahip kullanıcı bulunamadı. Lütfen önce %@ adresinden kaydolun.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium hesabınızın süresi doldu";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Lütfen sistem DNS ayarlarında %@'i etkinleştirin";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Yerel DNS'yi etkinleştirmek için <b>Sistem ayarlarını</b> açmanız, <b>VPN ve Ağ > DNS'ye</b> gitmeniz ve orada <b>%@</b> öğesini seçmeniz gerekir.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Şimdiye kadarki reklam engelleme deneyiminden memnun olup olmadığınızı bize söyleyin";

@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Mot de passe oublié ?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Aucun utilisateur trouvé avec cette adresse e-mail. Veuillez d'abord créer un compte sur %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Votre compte Premium à expiré";
 
@@ -778,11 +781,11 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Veuillez activer %@ dans les paramètres DNS du système";
 
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Pour activer le DNS natif, vous devez ouvrir <b>Paramètres système</b>, aller à <b>VPN & Réseau > DNS</b> et là, sélectionner <b>%@</b>.";
-
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Dites nous si vous êtes satisfait(e) de votre expérience de blocage de pub à présent";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Assurez-vous que vous utilisez le <b>navigateur Safari.</b><br> Actuellement, il est techniquement impossible de bloquer le contenu dans d’autres navigateurs.<br> Accédez aux paramètres de protection dans Safari et activez toutes les listes de filtres nécessaires.<br> Redémarrez l’application Safari : fermez-la et puis relancez à nouveau.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

@@ -778,9 +778,6 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Molimo omogućite %@ u DNS postavkama sustava";
 
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Da biste omogućili izvorni DNS, morate otvoriti <b>Postavke sustava</b>, idite na <b>VPN i mreža > DNS</b> i tamo odaberite <b>%@</b>.";
-
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Recite nam jeste li zadovoljni dosadašnjim iskustvom blokiranja oglasa";
 

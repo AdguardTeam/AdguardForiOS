@@ -82,6 +82,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Wachtwoord vergeten?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Geen gebruiker gevonden met dit e-mailadres. Registreer je eerst bij %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Uw premium abonnement is verlopen";
 
@@ -768,9 +771,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Schakel ajb %@ in de DNS-instellingen van het systeem in";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Om oorspronkelijke DNS in te schakelen, moet je <b>Systeeminstellingen</b> openen, naar <b>VPN en netwerk > DNS</b> gaan en daar <b>%@</b> selecteren.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Vertel ons of je tevreden bent over het blokkeren van advertenties";

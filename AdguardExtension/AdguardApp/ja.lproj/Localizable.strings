@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "ネイティブDNSはオンです。";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "ネイティブDNSはオフです。";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
 
@@ -78,6 +84,9 @@
 
 /* (LoginController) lost password button title */
 "lost_password" = "パスワードをお忘れですか？";
+
+/* (SignInController) user not found message */
+"user_not_found_message" = "このメールアドレスを持つユーザーは見つかりませんでした。%@でアカウントを登録してください。";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
@@ -183,6 +192,12 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (VPNアイコンなし)、他のVPNアプリと互換性なし、安定度:低い";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "ネイティブ";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "暗号化なし（システムDNS）";
@@ -613,6 +628,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "入力されたアップストリームは無効です";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "無効なDNSプロトコル";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ はまだiOSでサポートされておりません。別のアップストリームの追加を試してください。";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "システム・ブラックリスト";
 
@@ -682,6 +703,39 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "未定義";
 
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "不具合報告の送信が失敗しました。もう一度お試しください。";
+
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "フィードバックが送信できませんでした。もう一度送信してください。";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "お客様の不具合報告は送信完了しました！";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "お客様のフィードバックは送信完了しました！";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "不具合を報告する";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "フィードバックを記入";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "問題の説明（アップデート後に発生するゆになったかどうかなど）と、他にお使いのソフトウェア（VPN/アンチウイルス/拡張機能）についての情報を含めてください。";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "%@についての考えをお聞かせください。（気に入ったところ、改善すべき点、機能提案など）";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "報告を送信する";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "送信する";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "本アプリを引き続き使用することにより、<a href=%2$@>利用規約</a>および<br /><a href=%1$@>プライバシーポリシー</a>に同意したことになります。";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "リクエスト数";
 
@@ -723,6 +777,15 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "リクエスト数: %d";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "iOSのDNS設定で「%@」を有効にしてください。";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "これまでのAdGuardによる広告ブロックに満足しているかどうかを教えてください。";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "1. ブラウザは<b>Safari</b>を使用していることを確認してください。他のブラウザでコンテンツブロックすることは現在技術的に難しいです。<br>\n2. 「Safariでブロック」設定で必要なフィルターを有効にしてください。<br>\n3. Safariの再起動が必要な場合もあります。アプリを終了して再び開いてください。";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -814,3 +877,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "DNSユーザールールを追加する";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>【警告】</b> これらの機能を有効にすると、インターネット接続が切断されたり、セキュリティー、プライバシーが危険に晒される可能性があります。";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "新しくてクールなAdGuard機能に興味ありますか？ぜひ <a href=\"%@\">ベータチャンネル</a>をお試しください。";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "DOH/DOTホストネーム（あれば）を解決するのに使うべき簡潔なDNSサーバーのリスト";
+
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstraps（ブートストラップ）";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap IP address";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Upstream address";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Fallbacks (フォールバック)";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Upstreams（アップストリーム）";

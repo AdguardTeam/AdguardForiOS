@@ -52,6 +52,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10T";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Standard DNS fungerer";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";
 
@@ -105,6 +108,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Du kan legge til dine egne regler her.<br>Les dette <a href=\"%@\">notatet om regelsyntaksen</a> .";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Skriv inn domenenavnene her. AdGuard vil ikke blokkere tilgang til disse domenene, og hopper dermed over alle andre innstillinger.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Oppdaterer…";
@@ -174,6 +180,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (eksperimentell)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Er du sikker på at du vil logge ut?";
@@ -535,6 +544,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Du har skrevet inn en ugyldig oppstrømstjener";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Ugyldig DNS-protokoll";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemets blokkeringsliste";
 
@@ -604,6 +616,12 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Tomt innhold";
 
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Mislyktes i å sende inn feilrapporten, vennligst prøv igjen";
+
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Mislyktes i å sende inn tilbakemeldingen, vennligst prøv igjen";
+
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Feilrapporten din ble vellykket sendt!";
 
@@ -612,6 +630,9 @@
 
 /* (BugReportController) title for leaving feedback */
 "leave_feedback_title" = "Gi tilbakemelding";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Send en rapport";
 
 /* (BugReportController) button title for leaving feedback */
 "leave_feedback_button_title" = "Send tilbakemelding";
@@ -714,6 +735,27 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Skriv inn passordet ditt her";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Skru på filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Skru av filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Mislyktes";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Velg DNS-tjener: %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Legg til brukerregler";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Legg til DNS-brukerregler";
+
+/* (UpstreamsController) Fallbacks and Custom address description */
+"upstreams_description" = "Oppstrømsadresse";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Oppstrømstjenere";

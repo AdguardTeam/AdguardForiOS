@@ -142,6 +142,9 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Совместим с персональными VPN-приложениями";
 
+/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
+"huN-t2-HHo.text" = "Всегда возвращать настроенный IP-адрес";
+
 /* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
 "ipc-iu-k4i.text" = "CUSTOM_ADDRESS";
 
