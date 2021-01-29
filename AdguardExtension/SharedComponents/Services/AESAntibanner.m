@@ -1433,6 +1433,7 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     DDLogInfo(@"(ASAntibanner) Didn't start update process.");
+                    [_resources.sharedDefaults setObject:[NSDate date] forKey:AEDefaultsCheckFiltersLastDate];
                     [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerDidntStartUpdateNotification object:self];
                 });
             }
