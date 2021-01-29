@@ -23,7 +23,7 @@
 #define AS_EXECUTION_LEEWAY                                5 // 5 seconds
 #define AS_EXECUTION_DELAY                                 2 // 2 seconds
 
-#define AS_CHECK_FILTERS_UPDATES_PERIOD                    AS_EXECUTION_PERIOD_TIME*6
+#define AS_CHECK_FILTERS_UPDATES_PERIOD                    600
 #define AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY             AS_EXECUTION_DELAY
 #define AS_CHECK_FILTERS_UPDATES_LEEWAY                    AS_EXECUTION_LEEWAY
 #define AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD            AS_EXECUTION_PERIOD_TIME*6
