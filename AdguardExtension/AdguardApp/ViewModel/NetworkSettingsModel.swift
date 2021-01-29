@@ -131,5 +131,4 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     }
     
     // MARK: - Private methods
-
 }
