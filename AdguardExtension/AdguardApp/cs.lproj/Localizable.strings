@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Zapomněli jste heslo?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "S touto e-mailovou adresou nebyl nalezen žádný uživatel. Nejprve se prosím zaregistrujte na %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš prémiový účet vypršel";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Povolte %@ v nastavení DNS systému";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Chcete-li povolit nativní DNS, musíte otevřít <b>Nastavení systému</b>, přejít na <b>VPN a síť > DNS</b> a zde vybrat <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Sdělte nám, zda jste s blokováním reklam zatím spokojeni";

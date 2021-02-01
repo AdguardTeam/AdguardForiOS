@@ -47,6 +47,7 @@ class AppDelegateHelper: NSObject {
     lazy var productInfo: ADProductInfoProtocol = { ServiceLocator.shared.getService()! }()
     lazy var rateService: RateAppServiceProtocol = { ServiceLocator.shared.getService()! }()
     lazy var setappService: SetappServiceProtocol = { ServiceLocator.shared.getService()! }()
+    lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     private var showStatusBarNotification: NotificationToken?
     private var hideStatusBarNotification: NotificationToken?
@@ -586,6 +587,66 @@ class AppDelegateHelper: NSObject {
                 AppDelegate.shared.presentRateAppController()
                 self.resources.rateAppShown = true
             }
+        }
+    }
+}
+
+// MARK: - Filter updates methods
+
+extension AppDelegateHelper {
+    func updateStartedNotify() {
+        ACSSystemUtils.call {
+            let appState = UIApplication.shared.applicationState
+            DDLogInfo("(AppDelegateHelper) Started update process. AppState = \(appState.rawValue)")
+            
+            NotificationCenter.default.post(name: .AppDelegateStartedUpdate, object: self)
+        }
+    }
+    
+    func updateDidNotStartNotify() {
+        ACSSystemUtils.call { [weak self] in
+            let appState = UIApplication.shared.applicationState
+            DDLogInfo("(AppDelegateHelper) Did not started update process. AppState = \(appState.rawValue)")
+            
+            NotificationCenter.default.post(name: .AppDelegateUpdateDidNotStarted, object: self)
+            
+            self?.updateTunnelSettingsIfAppropriate()
+        }
+    }
+    
+    func updateFailuredNotify() {
+        ACSSystemUtils.call { [weak self] in
+            let appState = UIApplication.shared.applicationState
+            DDLogInfo("(AppDelegateHelper) Failured update process. AppState = \(appState.rawValue)")
+            
+            NotificationCenter.default.post(name: .AppDelegateFailuredUpdate, object: self)
+            
+            self?.updateTunnelSettingsIfAppropriate()
+        }
+    }
+    
+    func updateFinishedNotify(updatedFiltersNumber: Int) {
+        ACSSystemUtils.call { [weak self] in
+            let appState = UIApplication.shared.applicationState
+            DDLogInfo("(AppDelegateHelper) Finished update process, updated filters = \(updatedFiltersNumber). AppState = \(appState.rawValue)")
+            
+            let userInfo = [AppDelegateUpdatedFiltersKey: updatedFiltersNumber]
+            NotificationCenter.default.post(name: .AppDelegateFinishedUpdate, object: self, userInfo: userInfo)
+            
+            self?.updateTunnelSettingsIfAppropriate()
+        }
+    }
+    
+    /**
+     Do not update VPN configuration if:
+     1. System protection is disabled
+     2. DNS implementation is native
+     3. Application is in background state (we are not sure if VPN configuration is active)
+     */
+    private func updateTunnelSettingsIfAppropriate() {
+        let appState = UIApplication.shared.applicationState
+        if complexProtection.systemProtectionEnabled, resources.dnsImplementation == .adGuard, appState != .background  {
+            vpnManager.updateSettings(completion: nil)
         }
     }
 }

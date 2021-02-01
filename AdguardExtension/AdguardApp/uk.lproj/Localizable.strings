@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Забули пароль?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Не знайдено коричтувача з такою електронною адресою. Зареєструйтесь спершу на %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Термін дії Преміум завершився";
 
@@ -771,9 +774,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Увімкніть %@ в системних параметрах DNS";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Щоб увімкнути вбудований DNS, вам необхідно відкрити <b>Параметри системи</b>, перейти до <b>VPN і мережа > DNS</b>, та вибрати там <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Розкажіть нам чи задоволені ви роботою блокування реклами";

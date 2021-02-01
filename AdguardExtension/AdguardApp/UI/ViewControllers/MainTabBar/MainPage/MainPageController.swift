@@ -167,7 +167,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var vpnManagerService: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     private let mainPageModel: MainPageModelProtocol
@@ -452,22 +451,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
         safariUpdateEnded = true
         endUpdate()
-        
-        if complexProtection.systemProtectionEnabled {
-            DDLogInfo("(MainPageController) updateFilters - filters are updated. Start updating vpn settings")
-            vpnManagerService.updateSettings(completion: nil)
-        }
     }
     
     func updateFailed(error: String) {
         protectionStatusLabel.text = error
         safariUpdateEnded = true
         endUpdate()
-        
-        if complexProtection.systemProtectionEnabled {
-            DDLogInfo("(MainPageController) updateFilters - filters are updated. Start updating vpn settings")
-            vpnManagerService.updateSettings(completion: nil)
-        }
     }
     
     // MARK: - Private methods

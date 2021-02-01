@@ -1,3 +1,5 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "E-postadressen er feil";
 
 /* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
 "5nl-wn-tlv.text" = "Beskrivelse:";
@@ -70,6 +72,9 @@
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "DNS-beskyttelse";
+
+/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "E-postadressen din (valgfritt):";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Abonnementer og konto";

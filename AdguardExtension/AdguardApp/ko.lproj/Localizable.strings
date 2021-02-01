@@ -52,6 +52,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@만";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "기본 DNS가 작동 중입니다";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "기본 DNS가 작동하지 않습니다";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "사용자 규칙";
 
@@ -78,6 +84,9 @@
 
 /* (LoginController) lost password button title */
 "lost_password" = "비밀번호를 잊어버렸나요?";
+
+/* (SignInController) user not found message */
+"user_not_found_message" = "이 이메일 주소로 사용자를 찾을 수 없습니다. %@에서 계정을 만드십시오.";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
@@ -774,6 +783,9 @@
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "지금까지의 광고 차단이 만족스러웠는지 알려주세요";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "<b>Safari 브라우저를</b><br> 사용하고 있는지 확인하십시오. 현재 다른 브라우저에서 콘텐츠를 차단하는 것은 기술적으로 불가능합니다.<br> Safari 보호 설정으로 이동하여 필요한 필터 목록을 활성화하십시오. <br>Safari 앱을 다시 시작합니다. 종료한 후 다시 여십시오.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

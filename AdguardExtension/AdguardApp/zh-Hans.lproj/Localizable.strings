@@ -85,6 +85,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "忘记密码？";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "未找到具有该电子邮件地址的用户。请您首先通过 %@ 注册。";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高级版账户已经过期";
 
@@ -777,9 +780,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "请在系统 DNS 设置开启 %@";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "以开启本地 DNS 请您打开<b>系统设置 </b>，前往 <b>VPN 和网络 > DNS</b> 并选择 <b>%@</b>。";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "请告诉我们您对广告拦截体验是否满意";

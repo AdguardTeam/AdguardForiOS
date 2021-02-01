@@ -82,6 +82,9 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Izgubljeno geslo?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "S tem e-poštnim naslovom ni bilo mogoče najti uporabnika. Najprej se prijavite na %@.";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je potekel";
 
@@ -774,9 +777,6 @@
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Prosimo, omogočite %@ v nastavitvah sistemskega DNS";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Da omogočite izvorni DNS, morate odpreti <b>Nastavitve sistema</b>, pojdite na <b>VPN in Omrežje -> DNS</b> in tam izberite <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Povejte nam, ali ste zadovoljni z dosedanjo izkušnjo zaviranja oglasov";
