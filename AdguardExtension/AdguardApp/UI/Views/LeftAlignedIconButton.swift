@@ -19,11 +19,11 @@
 class LeftAlignedIconButton: ThemableButton {
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentHorizontalAlignment = .left
-        let availableSpace = bounds.inset(by: contentEdgeInsets)
-        let availableWidth = availableSpace.width - imageEdgeInsets.right - (imageView?.frame.width ?? 0) - (titleLabel?.frame.width ?? 0)
-        imageEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        titleEdgeInsets = UIEdgeInsets(top: 0, left: availableWidth / 2, bottom: 0, right: 0)
+        self.titleLabel?.textAlignment = .center
+        self.titleLabel?.numberOfLines = 2
+        self.titleLabel?.lineBreakMode = .byWordWrapping
+        setConstraints(imageViewOffset: 20)
+        
     }
     
     override var isHighlighted: Bool {
@@ -34,4 +34,15 @@ class LeftAlignedIconButton: ThemableButton {
             }, completion: nil)
         }
     }
+    
+    private func  setConstraints(imageViewOffset: CGFloat) {
+        self.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
+        self.imageView?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: imageViewOffset).isActive = true
+        self.imageView?.widthAnchor.constraint(equalToConstant: self.imageView?.frame.width ?? 0.0).isActive = true
+        
+        self.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
+        self.titleLabel?.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
+        self.titleLabel?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
+     }
 }
