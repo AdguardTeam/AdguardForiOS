@@ -29,7 +29,7 @@ class SocialSignInButton: ThemableButton {
     
     override var isHighlighted: Bool {
         didSet {
-            updateBackground()
+            self.backgroundColor = isHighlighted ? theme.lightGrayTextColor : .clear
         }
     }
     
@@ -43,13 +43,4 @@ class SocialSignInButton: ThemableButton {
         self.titleLabel?.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
         self.titleLabel?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
      }
-    
-    private func updateBackground() {
-        if isHighlighted {
-            self.backgroundColor = theme.lightGrayTextColor
-        }
-        else {
-            self.backgroundColor = .clear
-        }
-    }
 }
