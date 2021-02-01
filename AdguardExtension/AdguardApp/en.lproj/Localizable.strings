@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "No user found with this email address. Please sign up at %@ first.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Use AdGuard account";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Continue with Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Continue with Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Continue with Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Your Premium account has expired";
 
