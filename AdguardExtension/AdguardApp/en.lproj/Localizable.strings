@@ -890,6 +890,8 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "List of plain DNS servers to be used to resolve DOH/DOT hostnames (if any)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "A fallback DNS resolver that will be used when the configured server is not available. An empty string means using the system DNS as a fallback.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
@@ -903,4 +905,4 @@
 "upstreams_fallbacks_title" = "Fallbacks";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";
+"upstreams_custom_address_title" = "Custom address";
