@@ -910,11 +910,14 @@
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP address";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream address";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Custom address";
+"upstreams_custom_address_title" = "Custom IP";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP address";

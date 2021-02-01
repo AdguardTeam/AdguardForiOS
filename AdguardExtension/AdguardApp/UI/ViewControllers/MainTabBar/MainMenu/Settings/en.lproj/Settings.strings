@@ -145,8 +145,8 @@
 /* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
 "huN-t2-HHo.text" = "Always return custom configured IP address";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "CUSTOM_ADDRESS";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
+"ipc-iu-k4i.text" = "Custom IP";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity.";
@@ -154,8 +154,8 @@
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";
 
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "UNSPECIFIED_ADDRESS";
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "Null IP";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Other";
@@ -172,8 +172,8 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Show status bar";
 
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Always return unspecified_address";
+/* Class = "UILabel"; text = "Always return null IP"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Always return null IP";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Low-level settings";
@@ -196,8 +196,8 @@
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "This option will clear all statistical data, such as number of requests, etc.";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "CUSTOM_ADDRESS";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "Custom IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Unblock ads everywhere except for the websites from this list";

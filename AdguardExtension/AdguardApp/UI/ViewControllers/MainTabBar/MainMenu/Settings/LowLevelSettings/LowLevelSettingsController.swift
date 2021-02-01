@@ -162,9 +162,9 @@ class LowLevelSettingsController: UITableViewController {
         case .agNxdomain:
             blockimgModeDescription.text = "NXDOMAIN"
         case .agUnspecifiedAddress:
-            blockimgModeDescription.text = "UNSPECIFIED_ADDRESS"
+            blockimgModeDescription.text = "Null IP"
         case .agCustomAddress:
-            blockimgModeDescription.text = "CUSTOM_ADDRESS"
+            blockimgModeDescription.text = "Custom IP"
         }
     }
     

@@ -137,7 +137,7 @@ class UpstreamsController: BottomAlertController {
             textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
         case .customAddress:
             upstreamTypeLabel.text = String.localizedString("upstreams_custom_address_title")
-            textFieldDesciptionLabel.text = String.localizedString("upstreams_description")
+            textFieldDesciptionLabel.text = String.localizedString("upstreams_custom_address_description")
         default:
             break
         }
