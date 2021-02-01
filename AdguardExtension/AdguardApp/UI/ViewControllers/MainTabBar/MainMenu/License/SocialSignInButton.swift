@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class LeftAlignedIconButton: ThemableButton {
+class SocialSignInButton: ThemableButton {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     override func layoutSubviews() {

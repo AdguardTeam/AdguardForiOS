@@ -21,7 +21,7 @@ import SafariServices
 
 class SignInController: UIViewController {
     
-    @IBOutlet var buttons: [LeftAlignedIconButton]!
+    @IBOutlet var buttons: [SocialSignInButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -171,7 +171,7 @@ class SignInController: UIViewController {
     
     private func setupButtonTitles() {
         buttons.forEach {
-            var text = ""
+            let text: String
             switch $0.tag {
             case 0:
                 text = String.localizedString("sign_in_via_adguard_title")
@@ -182,7 +182,7 @@ class SignInController: UIViewController {
             case 3:
                 text = String.localizedString("sign_in_via_facebook_title")
             default:
-                break
+                text = ""
             }
             $0.setTitle(text, for: .normal)
         }
