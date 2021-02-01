@@ -17,21 +17,19 @@
  */
 
 class LeftAlignedIconButton: ThemableButton {
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.numberOfLines = 2
         self.titleLabel?.lineBreakMode = .byWordWrapping
         setConstraints(imageViewOffset: 20)
-        
     }
     
     override var isHighlighted: Bool {
         didSet {
-            guard oldValue != self.isHighlighted else { return }
-            UIView.animate(withDuration: 0.10, delay: 0, options: [.beginFromCurrentState, .allowUserInteraction], animations: {
-                self.alpha = self.isHighlighted ? 0.5 : 1
-            }, completion: nil)
+            updateBackground()
         }
     }
     
@@ -45,4 +43,13 @@ class LeftAlignedIconButton: ThemableButton {
         self.titleLabel?.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
         self.titleLabel?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
      }
+    
+    private func updateBackground() {
+        if isHighlighted {
+            self.backgroundColor = theme.lightGrayTextColor
+        }
+        else {
+            self.backgroundColor = .clear
+        }
+    }
 }

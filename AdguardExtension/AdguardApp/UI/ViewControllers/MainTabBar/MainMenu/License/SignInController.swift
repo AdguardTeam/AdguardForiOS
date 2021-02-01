@@ -156,6 +156,7 @@ class SignInController: UIViewController {
     }
     
     private func dismiss(toMainPage: Bool, message: String) {
+        guard self.presentedViewController == self.sfSafariViewController else { return }
         sfSafariViewController?.dismiss(animated: true, completion: { [notificationService] in
             notificationService.postNotificationInForeground(body: message, title: "")
         })
