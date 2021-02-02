@@ -917,7 +917,7 @@
 "upstreams_fallbacks_title" = "Fallbacks";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Custom IP";
+"upstreams_custom_address_title" = "Add custom IP";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP address";
