@@ -124,8 +124,8 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Tunnel mode";
 
-/* Class = "UILabel"; text = "Respond with REFUSED code when blocked by AdBlock-style filters; responde with the specified or unspecified address in the rule when blocked by hosts-style filters"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Respond with REFUSED code when blocked by AdBlock-style filters; responde with the specified or unspecified address in the rule when blocked by hosts-style filters";
+/* Class = "UILabel"; text = "Respond with REFUSED code when blocked by AdBlock-style filters; respond with the specified or unspecified address in the rule when blocked by hosts-style filters"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Respond with REFUSED code when blocked by AdBlock-style filters; respond with the specified or unspecified address in the rule when blocked by hosts-style filters";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Restart protection when network changes";
