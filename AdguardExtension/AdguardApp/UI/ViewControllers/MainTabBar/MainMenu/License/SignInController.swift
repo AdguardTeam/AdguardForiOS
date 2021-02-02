@@ -21,7 +21,7 @@ import SafariServices
 
 class SignInController: UIViewController {
     
-    @IBOutlet var buttons: [LeftAlignedIconButton]!
+    @IBOutlet var buttons: [SocialSignInButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -55,6 +55,7 @@ class SignInController: UIViewController {
         
         setupBackButton()
         updateTheme()
+        setupButtonTitles()
     }
     
     
@@ -155,6 +156,7 @@ class SignInController: UIViewController {
     }
     
     private func dismiss(toMainPage: Bool, message: String) {
+        guard self.presentedViewController == self.sfSafariViewController else { return }
         sfSafariViewController?.dismiss(animated: true, completion: { [notificationService] in
             notificationService.postNotificationInForeground(body: message, title: "")
         })
@@ -164,6 +166,25 @@ class SignInController: UIViewController {
             appDelegate.dismissToMainPage()
         } else {
             self.navigationController?.popViewController(animated: false)
+        }
+    }
+    
+    private func setupButtonTitles() {
+        buttons.forEach {
+            let text: String
+            switch $0.tag {
+            case 0:
+                text = String.localizedString("sign_in_via_adguard_title")
+            case 1:
+                text = String.localizedString("sign_in_via_apple_title")
+            case 2:
+                text = String.localizedString("sign_in_via_google_title")
+            case 3:
+                text = String.localizedString("sign_in_via_facebook_title")
+            default:
+                text = ""
+            }
+            $0.setTitle(text, for: .normal)
         }
     }
  }

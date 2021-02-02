@@ -1205,12 +1205,12 @@ ADS &amp; TRACKERS</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9V-eQ-pZp" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9V-eQ-pZp" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="20" y="245.5" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="qW2-bl-zRS"/>
                                 </constraints>
-                                <state key="normal" title="Continue with Google">
+                                <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1221,12 +1221,12 @@ ADS &amp; TRACKERS</string>
                                     <action selector="googleLoginButtonTapped:" destination="feC-dX-1xt" eventType="touchUpInside" id="p2U-Ir-CYf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9l-1b-Wa8" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="375" width="374" height="50"/>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9l-1b-Wa8" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="310.5" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="iK7-eL-rz6"/>
                                 </constraints>
-                                <state key="normal" title="Continue with Facebook">
+                                <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1237,12 +1237,12 @@ ADS &amp; TRACKERS</string>
                                     <action selector="facebookLoginButtonTapped:" destination="feC-dX-1xt" eventType="touchUpInside" id="fAc-yZ-yVc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-Vc-Pfi" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="180" width="374" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AU-Vc-Pfi" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="115.5" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="foD-Fk-JsG"/>
                                 </constraints>
-                                <state key="normal" title="Use AdGuard account">
+                                <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1253,12 +1253,12 @@ ADS &amp; TRACKERS</string>
                                     <segue destination="YAD-0P-paW" kind="show" id="2id-dd-nA6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-uk-lAE" customClass="LeftAlignedIconButton" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="20" y="245" width="374" height="50"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSE-uk-lAE" customClass="SocialSignInButton" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="20" y="180.5" width="560" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="yRj-fz-TUe"/>
                                 </constraints>
-                                <state key="normal" title="Continue with Apple">
+                                <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
