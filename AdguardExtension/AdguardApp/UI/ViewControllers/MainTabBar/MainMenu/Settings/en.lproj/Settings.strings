@@ -124,8 +124,8 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Tunnel mode";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address";
+/* Class = "UILabel"; text = "Respond with REFUSED code when blocked by AdBlock-style filters; responde with the specified or unspecified address in the rule when blocked by hosts-style filters"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Respond with REFUSED code when blocked by AdBlock-style filters; responde with the specified or unspecified address in the rule when blocked by hosts-style filters";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Restart protection when network changes";
@@ -172,8 +172,8 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Show status bar";
 
-/* Class = "UILabel"; text = "Always return null IP"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Always return null IP";
+/* Class = "UILabel"; text = "Always return zero IP"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Always return zero IP";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Low-level settings";
