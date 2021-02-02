@@ -162,9 +162,9 @@ class LowLevelSettingsController: UITableViewController {
         case .agNxdomain:
             blockimgModeDescription.text = "NXDOMAIN"
         case .agUnspecifiedAddress:
-            blockimgModeDescription.text = "UNSPECIFIED_ADDRESS"
+            blockimgModeDescription.text = "Null IP"
         case .agCustomAddress:
-            blockimgModeDescription.text = "CUSTOM_ADDRESS"
+            blockimgModeDescription.text = "Custom IP"
         }
     }
     
@@ -178,7 +178,7 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setFallbacksDescription() {
         guard let string = resources.customFallbackServers?.joined(separator: ", "), !string.isEmpty else {
-            fallbacksDescription.text = String.localizedString("low_level_bootstraps_placeholder")
+            fallbacksDescription.text = String.localizedString("low_level_fallbacks_placeholder")
             return
         }
         fallbacksDescription.text = string
