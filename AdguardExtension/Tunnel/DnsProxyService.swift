@@ -92,7 +92,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
         resolveQueue.async { [weak self] in
-            DDLogInfo("DnsProxyService resolve called")
             let reply = self?.agproxy?.handlePacket(dnsRequest)
             callback(reply)
         }
@@ -116,13 +115,19 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
         }
         
-        let agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
-            let id = nextUpstreamId
-            let isCrypto = false
-            let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
-            upstreamsById[id] = dnsProxyUpstream
-            
-            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+        /// If fallback is set to none than we set empty upstreams list
+        let agFallbacks: [AGDnsUpstream]
+        if fallbacks.first == "none" {
+            agFallbacks = []
+        } else {
+            agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
+                let id = nextUpstreamId
+                let isCrypto = false
+                let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
+                upstreamsById[id] = dnsProxyUpstream
+                
+                return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+            }
         }
         
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()

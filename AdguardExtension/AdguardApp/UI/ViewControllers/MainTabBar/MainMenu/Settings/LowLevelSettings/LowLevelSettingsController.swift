@@ -94,16 +94,16 @@ class LowLevelSettingsController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case customAddress:
-            showCustomAddressAlert()
+            showAlert(forType: .customAddress)
         case blockIpv6:
             blockIpv6Switch.setOn(!blockIpv6Switch.isOn, animated: true)
             blockIpv6Action(blockIpv6Switch)
         case blockResponseTtl:
             showBlockedResponseTtlAlert()
         case boostraps:
-            showBootstrapsAlert()
+            showAlert(forType: .bootstrap)
         case fallbacks:
-            showFallbacksAlert()
+            showAlert(forType: .fallback)
         default:
             break
         }
@@ -191,8 +191,6 @@ class LowLevelSettingsController: UITableViewController {
         }
         bootstrapsDescription.text = string
     }
-
-
     
     private func showBlockedResponseTtlAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "BlockedResponseTtlController") as? BlockedResponseTtlController else { return }
@@ -200,23 +198,9 @@ class LowLevelSettingsController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func showBootstrapsAlert() {
+    private func showAlert(forType type: UpstreamType) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .bootstrap
-        controller.delegate = self
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func showFallbacksAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .fallback
-        controller.delegate = self
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func showCustomAddressAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
-        controller.upstreamType = .customAddress
+        controller.upstreamType = type
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
