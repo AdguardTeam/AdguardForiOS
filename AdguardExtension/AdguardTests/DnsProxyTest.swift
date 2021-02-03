@@ -73,15 +73,14 @@ class DnsProxyTest: XCTestCase {
         
         let expectation2 = XCTestExpectation(description: "expectation2")
         
-        proxyService.stop() { [unowned self]  in
-            
-            XCTAssertTrue(self.proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false))
-            
-            proxyService.resolve(dnsRequest: self.request!) { (response) in
-                XCTAssertNotNil(response)
-                XCTAssert(response!.count > 0)
-                expectation2.fulfill()
-            }
+        proxyService.stop() {}
+        
+        XCTAssertTrue(self.proxyService.start(upstreams: ["1.1.1.1"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8"], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false))
+        
+        proxyService.resolve(dnsRequest: self.request!) { (response) in
+            XCTAssertNotNil(response)
+            XCTAssert(response!.count > 0)
+            expectation2.fulfill()
         }
         
         wait(for: [expectation2], timeout: 15)
@@ -121,22 +120,22 @@ class DnsProxyTest: XCTestCase {
     }
     
     func testUpstreamsById(){
-        proxyService.stop() { [unowned self] in
-            let ipV6Adress = "0000:0000:0000:0000:0000:0000:0000:0000"
-            let isSuccess = self.proxyService.start(upstreams: ["1.1.1.1", "2.2.2.2", "3.3.3.3"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8", ipV6Adress], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false)
-            
-            XCTAssert(isSuccess)
-            
-            let upstreams = self.proxyService.upstreamsById
-            /* 3 upstreams, 2 fallbacks, 1 ipV6 fallback */
-            XCTAssert(upstreams.count == 6)
-            
-            XCTAssertEqual(upstreams[0]!.upstream, "1.1.1.1")
-            XCTAssertEqual(upstreams[1]!.upstream, "2.2.2.2")
-            XCTAssertEqual(upstreams[2]!.upstream, "3.3.3.3")
-            XCTAssertEqual(upstreams[3]!.upstream, "8.8.8.8")
-            XCTAssertEqual(upstreams[4]!.upstream, ipV6Adress)
-            XCTAssertEqual(upstreams[5]!.upstream, ipV6Adress)
-        }
+        proxyService.stop() {}
+        
+        let ipV6Adress = "0000:0000:0000:0000:0000:0000:0000:0000"
+        let isSuccess = self.proxyService.start(upstreams: ["1.1.1.1", "2.2.2.2", "3.3.3.3"], bootstrapDns: ["8.8.8.8"], fallbacks: ["8.8.8.8", ipV6Adress], serverName: "cloudflare", filtersJson: "", userFilterId: 1, whitelistFilterId: 2, ipv6Available: true, blockingMode: .AGBM_DEFAULT, blockedResponseTtlSecs: 3, customBlockingIpv4: nil, customBlockingIpv6: nil, blockIpv6: false)
+        
+        XCTAssert(isSuccess)
+        
+        let upstreams = self.proxyService.upstreamsById
+        /* 3 upstreams, 2 fallbacks, 1 ipV6 fallback */
+        XCTAssert(upstreams.count == 6)
+        
+        XCTAssertEqual(upstreams[0]!.upstream, "1.1.1.1")
+        XCTAssertEqual(upstreams[1]!.upstream, "2.2.2.2")
+        XCTAssertEqual(upstreams[2]!.upstream, "3.3.3.3")
+        XCTAssertEqual(upstreams[3]!.upstream, "8.8.8.8")
+        XCTAssertEqual(upstreams[4]!.upstream, ipV6Adress)
+        XCTAssertEqual(upstreams[5]!.upstream, ipV6Adress)
     }
 }

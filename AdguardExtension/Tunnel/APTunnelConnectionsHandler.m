@@ -74,11 +74,6 @@
     }
 }
 
-- (void)stopPacketHandling {
-    DDLogInfo(@"Stop packet handling");
-    _packetHandling = NO;
-}
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark KVO
 

@@ -357,10 +357,8 @@
             
             [USE_STRONG(self) readSettings];
             
-            [USE_STRONG(self).dnsProxy stopWithCallback:^{
-                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
-                    completionHandler(error, allSystemDnsIps);
-                }];
+            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+                completionHandler(error, allSystemDnsIps);
             }];
         });
     }];
@@ -437,6 +435,20 @@
     
     [_reachabilityHandler stopNotifier];
     
+    /** https://forums.developer.apple.com/thread/73432
+        reasseting shows "reconnecting" message in ios vpn settings
+        Also, it stops processing traffic through the tunnel.
+        Perhaps it will fix the internet connection failure https://github.com/AdguardTeam/AdguardForiOS/issues/772
+     
+        We were trying not to set reasseting flag, because users complained that they were seeing tunnel restart
+        When removing this flag on tunnel restart we set nil settings to reveal system DNS
+        Our packets were leaking and we couldn't control it
+        So we decided to leave this flag
+        Packets leakage is worse problem then bleaking VPN icon
+        https://github.com/AdguardTeam/AdguardForiOS/issues/1692
+     */
+    self.reasserting = YES;
+    
     if(_restartByRechability) {
         
         DDLogInfo(@"(PacketTunnelProvider) stop tunnel");
@@ -458,12 +470,11 @@
     [self.dnsProxy stopWithCallback:^{
         DDLogInfo(@"(PacketTunnelProvider) updateSettings - update tunnel settings");
         ASSIGN_STRONG(self);
-        [USE_STRONG(self).connectionHandler stopPacketHandling];
-        
         [USE_STRONG(self) updateTunnelSettingsWithCompletionHandler:^(NSError * _Nullable error, NSArray<NSString *> *systemDnsIps) {
+            DDLogError(@"Received error when updating setting, error: %@)", error);
             [_reachabilityHandler startNotifier];
-            [USE_STRONG(self).connectionHandler startHandlingPackets];
             [USE_STRONG(self) startDnsProxyWithSystemDnsIps:systemDnsIps];
+            USE_STRONG(self).reasserting = NO;
         }];
     }];
 }

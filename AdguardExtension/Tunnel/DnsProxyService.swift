@@ -72,7 +72,40 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     var agproxy: AGDnsProxy?
     
     @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
-           
+        resolveQueue.sync(flags: .barrier) {
+            return self.startInternal(upstreams: upstreams, bootstrapDns: bootstrapDns, fallbacks: fallbacks, serverName: serverName, filtersJson: filtersJson, userFilterId: userFilterId, whitelistFilterId: whitelistFilterId, ipv6Available: ipv6Available, blockingMode: blockingMode, blockedResponseTtlSecs: blockedResponseTtlSecs, customBlockingIpv4: customBlockingIpv4, customBlockingIpv6: customBlockingIpv6, blockIpv6: blockIpv6)
+        }
+    }
+    
+    @objc func stop(callback:@escaping ()->Void) {
+        resolveQueue.sync(flags: .barrier) { [weak self] in
+            DDLogInfo("(DnsProxyService) - stop")
+            self?.agproxy = nil
+            self?.upstreamsById.removeAll()
+            
+            DDLogInfo("(DnsProxyService) - stopped")
+            self?.dnsRecordsWriter.flush()
+            
+            callback()
+        }
+    }
+    
+    @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
+        resolveQueue.async { [weak self] in
+            let reply = self?.agproxy?.handlePacket(dnsRequest)
+            callback(reply)
+        }
+    }
+    
+    private func upstreamIsCrypto() -> Bool {
+        if let activeDnsServer = dnsProvidersService.activeDnsServer {
+            return activeDnsServer.dnsProtocol != .dns
+        }
+        return false
+    }
+    
+    private func startInternal(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
+        
         let isCrypto = upstreamIsCrypto()
         let agUpstreams = upstreams.map {(upstream) -> AGDnsUpstream in
             let id = nextUpstreamId
@@ -82,13 +115,19 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             return AGDnsUpstream(address: upstream, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
         }
         
-        let agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
-            let id = nextUpstreamId
-            let isCrypto = false
-            let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
-            upstreamsById[id] = dnsProxyUpstream
-            
-            return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+        /// If fallback is set to none than we set empty upstreams list
+        let agFallbacks: [AGDnsUpstream]
+        if fallbacks.first == "none" {
+            agFallbacks = []
+        } else {
+            agFallbacks = fallbacks.map { (fallback) -> AGDnsUpstream in
+                let id = nextUpstreamId
+                let isCrypto = false
+                let dnsProxyUpstream = DnsProxyUpstream(upstream: fallback, isCrypto: isCrypto)
+                upstreamsById[id] = dnsProxyUpstream
+                
+                return AGDnsUpstream(address: fallback, bootstrap: bootstrapDns, timeoutMs: timeout, serverIp: nil, id: id, outboundInterfaceName: nil)
+            }
         }
         
         let filterFiles = (try? JSONSerialization.jsonObject(with: filtersJson.data(using: .utf8)! , options: []) as? Array<[String:Any]>) ?? Array<Dictionary<String, Any>>()
@@ -159,36 +198,5 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         }
         
         return agproxy != nil
-    }
-    
-    @objc func stop(callback:@escaping ()->Void) {
-        DDLogInfo("(DnsProxyService) - stop")
-        
-        resolveQueue.async { [weak self] in
-            self?.agproxy = nil
-            self?.upstreamsById.removeAll()
-            
-            DDLogInfo("(DnsProxyService) - stopped")
-            self?.dnsRecordsWriter.flush()
-            
-            callback()
-        }
-        
-        return
-    }
-    
-    @objc func resolve(dnsRequest: Data, callback: @escaping (Data?) -> Void) {
-        let proxy = self.agproxy
-        resolveQueue.async {
-            let reply = proxy?.handlePacket(dnsRequest)
-            callback(reply)
-        }
-    }
-    
-    private func upstreamIsCrypto() -> Bool {
-        if let activeDnsServer = dnsProvidersService.activeDnsServer {
-            return activeDnsServer.dnsProtocol != .dns
-        }
-        return false
     }
 }

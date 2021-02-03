@@ -45,10 +45,8 @@ class UpstreamsController: BottomAlertController {
     weak var delegate: UpstreamsControllerDelegate?
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -84,14 +82,20 @@ class UpstreamsController: BottomAlertController {
     @IBAction func saveAction(_ sender: UIButton) {
         guard let text = upstreamsTextField.text else { return }
         
-        let upstreams = transformToArray(address: text)
+        if upstreamType == .fallback, text == "none" {
+            saveUpstreams(upstreams: [text], upstreamsText: text)
+            vpnManager.updateSettings(completion: nil)
+            dismiss(animated: true)
+            return
+        }
         
+        let upstreams = transformToArray(address: text)
         
         checkUpstream(upstreams: upstreams) { [weak self] in
             DispatchQueue.main.async {
-                self?.saveUpstream(text: text)
+                self?.saveUpstreams(upstreams: upstreams, upstreamsText: text)
                 self?.vpnManager.updateSettings(completion: nil)
-                self?.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: true)
             }
         }
     }
@@ -109,7 +113,6 @@ class UpstreamsController: BottomAlertController {
     }
     
     private func prepareUpstreamTextField() {
-        
         switch upstreamType {
         case .bootstrap:
             let bootstrapString = resources.customBootstrapServers?.joined(separator: ", ")
@@ -149,11 +152,9 @@ class UpstreamsController: BottomAlertController {
         return ipAddresses
     }
     
-    private func saveUpstream(text: String) {
-        var address: [String]?
-        if text.count > 0 {
-            address = transformToArray(address: text)
-        }
+    private func saveUpstreams(upstreams: [String], upstreamsText text: String) {
+        let address: [String]? = upstreams.isEmpty ? nil : upstreams
+        
         switch upstreamType {
         case .bootstrap:
             resources.customBootstrapServers = address
