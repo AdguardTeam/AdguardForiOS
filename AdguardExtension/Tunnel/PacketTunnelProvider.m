@@ -357,10 +357,8 @@
             
             [USE_STRONG(self) readSettings];
             
-            [USE_STRONG(self).dnsProxy stopWithCallback:^{
-                [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
-                    completionHandler(error, allSystemDnsIps);
-                }];
+            [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+                completionHandler(error, allSystemDnsIps);
             }];
         });
     }];
