@@ -25,9 +25,6 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "부트스트랩 IP 주소";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "항상 REFUSED 반환";
-
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "필터 업데이트 진행 상황 표시";
 
@@ -124,14 +121,8 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "터널 모드";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "광고 차단 스타일 필터-> REFUSED, 호스트 스타일 필터-> 규칙 지정 또는 지정되지 않은 주소";
-
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "네트워크가 변경되면 보호를 다시 시작합니다";
-
-/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "항상 NXDOMAIN 반환";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "고급 설정";
@@ -142,20 +133,11 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "\"개인 VPN\"앱과 호환됩니다";
 
-/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "항상 사용자 지정으로 구성된 IP 주소 반환";
-
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "CUSTOM_ADDRESS";
-
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "분할 터널 모드에서 AdGuard는 \"개인 VPN\"앱과 호환됩니다. 이 모드에서는 연결 불량 시 시스템에 의해 우회될 수 있습니다.";
 
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";
-
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "UNSPECIFIED_ADDRESS";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "기타";
@@ -171,9 +153,6 @@
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "상태 바 표시";
-
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "항상 unspecified_address 반환";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "로우 레벨 설정";
@@ -195,9 +174,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "이 옵션은 요청 수 등과 같은 모든 통계 데이터를 삭제합니다.";
-
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "CUSTOM_ADDRESS";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "이 목록에 있는 웹사이트를 제외한 모든 곳의 광고를 차단 해제";

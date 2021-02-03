@@ -886,18 +886,14 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Liste des serveurs DNS simples à utiliser pour résoudre les noms d'hôtes DOH/DOT (le cas échéant)";
-
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Adresse IP bootstrap";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Adresse en amont";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Solutions de secours";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "En amont";

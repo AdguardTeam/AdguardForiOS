@@ -14,7 +14,7 @@
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
 
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard ne rad na stranicama s ove liste";
+"Gg8-4u-qvU.text" = "AdGuard ne radi na stranicama s ove liste";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtri";

@@ -25,8 +25,8 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Naslov IP zagonskega traku";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Vedno vrni ZAVRNJENO";
+/* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "Odgovori s kodo REFUSED";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Prikaži vrstico napredka posodobitev filtrov";
@@ -124,14 +124,14 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Tunelski način";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Filtri v slogu Zaviranja oglasov -> ZAVRNJENI, filtri v slogu gostitelja -> naslov, določen s pravilom ali nedoločen";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Odgovori z ničelnim naslovom IP (0.0.0.0 za A; :: for AAAA) , ko je zaviran s pravilom v slogu AdBlocka; odgovori z naslovom IP , določenem v pravilu, ko je zaviran z /etc/pravilom v slogu gostiteljev";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Znova zaženi zaščito ob spremembi omrežja";
 
-/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "Vedno vrni NXDOMENO";
+/* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "Odgovori s kodo NXDOMAIN";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Napredne nastavitve";
@@ -142,10 +142,10 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Združljiv z aplikacijami 'Osebni VPN'";
 
-/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "Vedno vrni po meri nastavljen naslov IP";
+/* Class = "UILabel"; text = "Respond with a manually set IP address"; ObjectID = "huN-t2-HHo"; */
+"huN-t2-HHo.text" = "Odgovori z ročno nastavljenim naslovom IP";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
 "ipc-iu-k4i.text" = "NASLOV_PO_MERI";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
@@ -154,8 +154,8 @@
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Zamenjave";
 
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "NEDOLOČEN:_NASLOV";
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "Prazen IP";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Drugo";
@@ -172,8 +172,8 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Prikaži statusno vrstico";
 
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Vedno vrni nedoločen_naslov";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Odgovori z ničelnim naslovom IP (0.0.0.0 za A; :: for AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Nastavitve nizke stopnje";
@@ -196,8 +196,8 @@
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Ta možnost bo izbrisala vse statistične podatke, na primer število zahtev itn.";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "NASLOV_PO_MERI";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "IP po meri";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Omogočite oglase povsod, razen na spletnih straneh s tega seznama";

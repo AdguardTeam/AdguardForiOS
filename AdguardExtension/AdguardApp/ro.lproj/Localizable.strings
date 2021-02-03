@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Niciun utilizator găsit cu această adresă de e-mail. Vă rugăm să vă înscrieți mai întâi la %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Utilizați contul AdGuard";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Continuați cu Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Continuați cu Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Continuați cu Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Contul dvs. Premium a expirat";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Vă rugăm să activați %@ în setările DNS ale sistemului";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Pentru a activa DNS nativ, trebuie să deschideți <b>Setări de sistem</b>, accesați <b>General > VPN & Rețea > DNS</b> și selectați <b>%@</b> acolo.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Spuneți-ne dacă sunteți mulțumit de experiența de blocare a reclamelor până acum";
 
@@ -887,17 +902,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lista de servere DNS simple, de utilizat pentru a rezolva numele de gazdă DOH/DOT (dacă există)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Un resolver DNS de rezervă care va fi utilizat atunci când serverul configurat nu este disponibil. Un șir gol înseamnă utilizarea DNS-ului sistemului ca rezervă. Iar un șir \"none\" înseamnă că nu există nicio rezervă.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Adresa IP bootstrap";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Adresă upstream";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";
+"upstreams_custom_address_title" = "Adăugare de IP personalizat";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "Adresa IP";

@@ -880,18 +880,14 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "A DOH/DOT hosztnevek feloldásához használható sima DNS kiszolgálók listája (ha vannak)";
-
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap-ek";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP cím";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream cím";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Tartalékok";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstream-ek";

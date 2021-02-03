@@ -25,9 +25,6 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Indirizzo IP bootstrap";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Restituisci sempre RIFIUTATO";
-
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Mostra progresso aggiornamento filtro";
 
@@ -124,14 +121,8 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Modalità tunnel";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Filtri simil-AdBlock -> RIFIUTATO, filtri simil-host -> indirizzo specificato dalla regola o non specificato";
-
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Riavvia protezione al cambio di rete";
-
-/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "Restituisci sempre NXDOMAIN";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Impostazioni avanzate";
@@ -142,20 +133,11 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatibile con le app \"VPN Personali\"";
 
-/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "Restituisci sempre la configurazione personalizzata dell\'indirizzo IP";
-
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "INDIRIZZO_PERSONALIZZATO";
-
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "Nella modalità Split-Tunnel, AdGuard è compatibile con le cosiddette app \"VPN Personali\". Come compromesso, in questa modalità potrebbe essere bypassato dal sistema in caso di connettività errata.";
 
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallback";
-
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "INDIRIZZO_NON_SPECIFICATO";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Altri";
@@ -171,9 +153,6 @@
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Mostra barra di stato";
-
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Restituisci sempre indirizzo_non_specificato";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Impostazioni di basso livello";
@@ -195,9 +174,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Questa opzione cancellerà tutti i dati statistici, come il numero di richieste, ecc.";
-
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "INDIRIZZO_PERSONALIZZATO";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Sblocca gli annunci ovunque tranne che per i siti web di questo elenco";

@@ -85,6 +85,21 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Zaboravljena lozinka?";
 
+/* (SignInController) user not found message */
+"user_not_found_message" = "Ne postoji korisnik s ovom e-mail adresom. Pvijavite se na %@.";
+
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Koristite AdGuard račun";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Nastavite sa Apple računom";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Nastavite koristeći Google račun";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Nastavite koristeći Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je istekao";
 
@@ -778,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Molimo omogućite %@ u DNS postavkama sustava";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Da biste omogućili izvorni DNS, morate otvoriti <b>Postavke sustava</b>, idite na <b>VPN i mreža > DNS</b> i tamo odaberite <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Recite nam jeste li zadovoljni dosadašnjim iskustvom blokiranja oglasa";
 
@@ -884,13 +902,15 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Popis običnih DNS poslužitelja koji će se koristiti za rješavanje DOH/DOT imena hostova (ako postoje)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Alternativni DNS razrješivač koji će se koristiti kada glavni DNS poslužitelj nije dostupan. Prazan niz znakova znači da će se koristiti DNS poslužitelj određen u sustavn.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adresa";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream adresa";
 
 /* (UpstreamsController) Fallbacks title */
@@ -898,3 +918,6 @@
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Upstreams";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP adresa";

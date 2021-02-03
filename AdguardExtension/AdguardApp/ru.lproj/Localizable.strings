@@ -886,18 +886,14 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Список DNS-серверов, используемых для преобразования имен хоста DOH/DOT";
-
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-адрес";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream-адрес";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";

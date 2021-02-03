@@ -19,9 +19,6 @@
 /* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Fjern VPN-profil";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Returner alltid med REFUSED";
-
 /* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
 "BPj-Fi-8mA.text" = "Standard";
 

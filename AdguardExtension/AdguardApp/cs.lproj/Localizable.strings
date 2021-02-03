@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "S touto e-mailovou adresou nebyl nalezen žádný uživatel. Nejprve se prosím zaregistrujte na %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Použít AdGuard účet";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Pokračovat s Apple účtem";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Pokračovat s Google účtem";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Pokračovat s Facebook účtem";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Váš prémiový účet vypršel";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Povolte %@ v nastavení DNS systému";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Chcete-li povolit nativní DNS, musíte otevřít <b>Nastavení systému</b>, přejít na <b>VPN a síť > DNS</b> a zde vybrat <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Sdělte nám, zda jste s blokováním reklam zatím spokojeni";
 
@@ -887,17 +902,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Seznam jednoduchých DNS serverů, které se mají použít k rozlišení názvů hostitelů DOH/DOT (pokud existují)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Záložní DNS, který se použije, když není k dispozici nakonfigurovaný server. Prázdný řetězec znamená, použití DNS ze systému. Řetězec \"žádný\" neznamená vůbec žádnou hodnotu.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adresa";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream adresa";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Záložní";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";
+"upstreams_custom_address_title" = "Přidat vlastní IP";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP adresa";

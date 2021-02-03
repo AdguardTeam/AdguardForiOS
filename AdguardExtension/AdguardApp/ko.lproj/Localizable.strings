@@ -781,6 +781,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "시스템 DNS 설정에서 %@을(를) 활성화하십시오";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "기본 DNS를 활성화하려면 <b>시스템 설정을</b> 열고 <b>VPN 및 네트워크 > DNS로</b> 이동한 후 <b>%@</b>을(를) 선택해야 합니다.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "지금까지의 광고 차단이 만족스러웠는지 알려주세요";
 
@@ -886,18 +889,14 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOT 호스트 이름 확인에 사용할 일반 DNS 서버 목록입니다 (존재하는 경우 표시됨)";
-
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "부트스트랩";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "부트스트랩 IP 주소";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "업스트림 주소";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "업스트림";

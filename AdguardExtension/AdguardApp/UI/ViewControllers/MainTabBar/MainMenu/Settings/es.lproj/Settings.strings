@@ -25,8 +25,8 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Dirección IP de arranque";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Siempre devolver REFUSED";
+/* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "Responde con el código REFUSED";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Mostrar barra de progreso para actualizaciones de filtros";
@@ -121,14 +121,14 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Modo túnel";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Filtros de estilo Adblock -> REFUSED, filtros estilo hosts -> regla de dirección especificada o no especificada";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Responde con dirección IP cero (0.0.0.0 para A; :: para AAAA) cuando está bloqueado por la regla de estilo Adblock; responde con la dirección IP especificada en la regla cuando está bloqueado por una regla de estilo /etc/hosts";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Reiniciar la protección cuando la red cambie";
 
-/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "Siempre devolver NXDOMAIN";
+/* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "Responde con el código NXDOMAIN";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Configuración avanzada";
@@ -139,11 +139,11 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatible con apps \"VPN personales\"";
 
-/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "Siempre devolver la dirección IP personalizada";
+/* Class = "UILabel"; text = "Respond with a manually set IP address"; ObjectID = "huN-t2-HHo"; */
+"huN-t2-HHo.text" = "Responde con una dirección IP establecida manualmente";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "DIRECCIÓN_PERSONALIZADA";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
+"ipc-iu-k4i.text" = "IP personalizada";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "En el modo de túnel dividido, AdGuard es compatible con las apps llamadas \"VPN personales\". Como compensación, en este modo puede ser eludido por el sistema en caso de mala conectividad.";
@@ -151,8 +151,8 @@
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Alternativos";
 
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "DIRECCIÓN_NO_ESPECIFICADA";
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "IP nulo";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Otros";
@@ -169,8 +169,8 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "Mostrar barra de estado";
 
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Siempre devolver dirección_no_especificada";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Responde con dirección IP cero (0.0.0.0 para A; :: para AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Opciones de bajo nivel";
@@ -193,8 +193,8 @@
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Esta opción borrará todos los datos estadísticos, como el número de peticiones, etc.";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "DIRECCIÓN_PERSONALIZADA";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "IP personalizada";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Desbloquea anuncios en todas partes excepto en los sitios web de esta lista";
