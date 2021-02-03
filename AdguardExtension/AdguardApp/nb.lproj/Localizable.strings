@@ -754,8 +754,5 @@
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Legg til DNS-brukerregler";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Oppstrømsadresse";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Oppstrømstjenere";

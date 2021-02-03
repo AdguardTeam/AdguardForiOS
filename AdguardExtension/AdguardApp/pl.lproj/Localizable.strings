@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Nie znaleziono użytkownika z tym adresem e-mail. Zarejestruj się najpierw na %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Użyj konta AdGuard";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Kontynuuj z Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Kontynuuj z Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Kontynuuj z Facebookiem";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Twoje konto Premium wygasło";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Włącz %@ w ustawieniach DNS systemu";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Aby włączyć natywny DNS, musisz otworzyć <b>Ustawienia systemu</b>, przejść do <b>Ogólne > VPN & Sieć > DNS</b> i wybrać tam <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Powiedz nam, czy jesteś zadowolony z dotychczasowego blokowania reklam";
 
@@ -887,17 +902,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lista zwykłych serwerów DNS używanych do rozwiązywania nazw hostów DOH/DOT (jeśli istnieją)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Rezerwowy program do rozpoznawania nazw DNS, który będzie używany, gdy skonfigurowany serwer będzie niedostępny. Pusty ciąg oznacza, że ​​domyślny DNS systemu jest używany jako rezerwa. Ścisłe „brak” oznacza w ogóle brak powrotu.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adres";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream adres";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Awaryjne";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";
+"upstreams_custom_address_title" = "Dodaj niestandardowy adres IP";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "Adres IP";

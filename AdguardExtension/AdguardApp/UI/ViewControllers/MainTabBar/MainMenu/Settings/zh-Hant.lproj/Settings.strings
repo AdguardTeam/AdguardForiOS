@@ -25,8 +25,8 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "自我啟動 IP 位址";
 
-/* Class = "UILabel"; text = "Always return REFUSED"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "總是返回 REFUSED";
+/* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "以 REFUSED 碼回覆";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "顯示過濾器更新進度列";
@@ -65,7 +65,7 @@
 "IvJ-Oi-vGF.text" = "底層設定";
 
 /* Class = "UILabel"; text = "Bootstraps"; ObjectID = "JQH-8J-wY8"; */
-"JQH-8J-wY8.text" = "Bootstraps";
+"JQH-8J-wY8.text" = "自我啟動（Bootstraps）";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "這將實際上移除您的 VPN 設定檔並禁用 DNS 防護";
@@ -124,14 +124,14 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "隧道模式";
 
-/* Class = "UILabel"; text = "AdBlock-style filters -> REFUSED, hosts-style filters -> rule-specified or unspecified address"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "廣告封鎖樣式的過濾器 -> REFUSED（已拒絕），主機（hosts）樣式的過濾器 -> 已指定的規則或未指定的位址";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "當被 AdBlock 樣式的規則封鎖時，以零值 IP 位址（0.0.0.0 供 A；:: 供 AAAA）回覆；當被 /etc/hosts 樣式的規則封鎖時，以在該規則中之已明確指定的 IP 位址回覆";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "當網路更改時，重新啟動防護";
 
-/* Class = "UILabel"; text = "Always return NXDOMAIN"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "總是返回 NXDOMAIN";
+/* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "以 NXDOMAIN 碼回覆";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "進階的設定";
@@ -142,20 +142,20 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "與\"個人級 VPN\"應用程式相容";
 
-/* Class = "UILabel"; text = "Always return custom configured IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "總是返回自訂配置的 IP 位址";
+/* Class = "UILabel"; text = "Respond with a manually set IP address"; ObjectID = "huN-t2-HHo"; */
+"huN-t2-HHo.text" = "以一組手動地被設定的 IP 位址回覆";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "CUSTOM_ADDRESS（自訂的位址）";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
+"ipc-iu-k4i.text" = "自訂的 IP";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "在分離的隧道模式下，AdGuard 與所謂的\"個人級 VPN\"應用程式相容。作為交換，在這種模式下，若發生不良的連線，它可能被系統繞過。";
 
 /* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "應變";
+"k0U-fn-m9X.text" = "應變（Fallbacks）";
 
-/* Class = "UILabel"; text = "UNSPECIFIED_ADDRESS"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "UNSPECIFIED_ADDRESS（未指定的位址）";
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "無效的 IP";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其它的";
@@ -172,8 +172,8 @@
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "顯示狀態列";
 
-/* Class = "UILabel"; text = "Always return unspecified_address"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "總是返回 unspecified_address";
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "以零值 IP 位址（0.0.0.0 供 A；:: 供 AAAA）回覆";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "底層設定";
@@ -196,8 +196,8 @@
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "此選項將清除所有的統計資料，諸如請求之數量等等";
 
-/* Class = "UILabel"; text = "CUSTOM_ADDRESS"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "CUSTOM_ADDRESS";
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "自訂的 IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "除來自該清單中的網站之外，解除封鎖各處廣告";

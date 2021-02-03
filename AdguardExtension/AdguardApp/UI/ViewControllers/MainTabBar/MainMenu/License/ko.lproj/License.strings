@@ -1,6 +1,3 @@
-/* Class = "UIButton"; normalTitle = "Use AdGuard account"; ObjectID = "1AU-Vc-Pfi"; */
-"1AU-Vc-Pfi.normalTitle" = "AdGuard 계정 사용";
-
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "인증 앱의 코드:";
 
@@ -28,9 +25,6 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "비밀번호:";
 
-/* Class = "UIButton"; normalTitle = "Continue with Apple"; ObjectID = "PSE-uk-lAE"; */
-"PSE-uk-lAE.normalTitle" = "Apple 계정으로 진행";
-
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
 
@@ -39,9 +33,6 @@
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "온라인 사기, 피싱 및 크립토재킹을 차단합니다";
-
-/* Class = "UIButton"; normalTitle = "Continue with Facebook"; ObjectID = "Z9l-1b-Wa8"; */
-"Z9l-1b-Wa8.normalTitle" = "Facebook 계정으로 진행";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "AdGuard 계정 또는 연결된 SNS로 로그인합니다";
@@ -69,6 +60,3 @@
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "확인";
-
-/* Class = "UIButton"; normalTitle = "Continue with Google"; ObjectID = "t9V-eQ-pZp"; */
-"t9V-eQ-pZp.normalTitle" = "Google 계정으로 진행";

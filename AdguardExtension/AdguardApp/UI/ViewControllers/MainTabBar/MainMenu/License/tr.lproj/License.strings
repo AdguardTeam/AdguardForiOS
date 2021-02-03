@@ -1,6 +1,3 @@
-/* Class = "UIButton"; normalTitle = "Use AdGuard account"; ObjectID = "1AU-Vc-Pfi"; */
-"1AU-Vc-Pfi.normalTitle" = "AdGuard hesabını kullan";
-
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Yetkilendirme uygulamasından gelen kod:";
 
@@ -28,9 +25,6 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Parola:";
 
-/* Class = "UIButton"; normalTitle = "Continue with Apple"; ObjectID = "PSE-uk-lAE"; */
-"PSE-uk-lAE.normalTitle" = "Apple ile devam edin";
-
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
 "Rxf-sg-Wfk.normalTitle" = "HESABIMA GİT";
 
@@ -39,9 +33,6 @@
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Kimlik avı, dolandırıcılık ve kripto madenciliği engelleyin";
-
-/* Class = "UIButton"; normalTitle = "Continue with Facebook"; ObjectID = "Z9l-1b-Wa8"; */
-"Z9l-1b-Wa8.normalTitle" = "Facebook ile devam edin";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "AdGuard hesabınızla veya bağlı sosyal ağlarla giriş yapın";
@@ -69,6 +60,3 @@
 
 /* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "DOĞRULA";
-
-/* Class = "UIButton"; normalTitle = "Continue with Google"; ObjectID = "t9V-eQ-pZp"; */
-"t9V-eQ-pZp.normalTitle" = "Google ile devam edin";

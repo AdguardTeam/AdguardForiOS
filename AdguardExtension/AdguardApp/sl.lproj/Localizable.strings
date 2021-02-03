@@ -85,6 +85,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "S tem e-poštnim naslovom ni bilo mogoče najti uporabnika. Najprej se prijavite na %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Uporabi račun AdGuarda";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Nadaljuj z Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Nadaljuj z Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Nadaljuj s Facebookom";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Vaš Premium račun je potekel";
 
@@ -778,6 +790,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Prosimo, omogočite %@ v nastavitvah sistemskega DNS";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Da omogočite izvorni DNS, morate odpreti <b>Nastavitve sistema</b>, pojdite na <b>Splošno > VPN in omrežje > DNS</b> in tam izberite <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Povejte nam, ali ste zadovoljni z dosedanjo izkušnjo zaviranja oglasov";
 
@@ -884,17 +899,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Seznam navadnih strežnikov DNS, ki se uporabljajo za razreševanje imen gostiteljev DOH/DOT (če obstajajo)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Pomožni reševalnik DNS, ki bo uporabljen, ko ni na voljo nastavljen strežnik. Prazen niz pomeni uporabo sistemsko privzetega DNS kot nadomestnega. Niz \"brez\" pomeni, da sploh ni nadomestnega.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Zagonski trakovi";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Naslov IP zagonskega traku";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Naslov toka navzgor";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Zamenjave";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Tokovi navzgor";
+"upstreams_custom_address_title" = "Dodaj IP po meri";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP naslov";

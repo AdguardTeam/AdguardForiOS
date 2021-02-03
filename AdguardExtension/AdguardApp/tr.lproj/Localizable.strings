@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Bu e-posta adresine sahip kullanıcı bulunamadı. Lütfen önce %@ adresinden kaydolun.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "AdGuard hesabını kullan";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Apple ile devam edin";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Google ile devam edin";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Facebook ile devam edin";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium hesabınızın süresi doldu";
 
@@ -539,7 +551,7 @@
 "common_add" = "Ekle";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Koruma devre dışı bırakıldı";
+"protection_disabled" = "Koruma devre dışı";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Koruma etkinleştirildi";
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Lütfen sistem DNS ayarlarında %@'i etkinleştirin";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Yerel DNS'yi etkinleştirmek için <b>Sistem ayarlarını</b> açmanız, <b>Genel > VPN ve Ağ > DNS'ye</b> gitmeniz ve orada <b>%@</b> öğesini seçmeniz gerekir.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Şimdiye kadarki reklam engelleme deneyiminden memnun olup olmadığınızı bize söyleyin";
 
@@ -887,17 +902,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOT ana bilgisayar adlarını (varsa) çözmek için kullanılacak düz DNS sunucularının listesi";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"Yok\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adresi";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Üst kaynak adresi";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Yedeklemeler";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Üst kaynak";
+"upstreams_custom_address_title" = "Özel bir IP ekle";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP adresi";

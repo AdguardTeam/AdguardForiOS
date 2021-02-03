@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Nessun utente é stato trovato con questa email. Si prega di iscriversi prima su %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Utilizza account AdGuard";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Continua con Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Continua con Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Continua con Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Il tuo account Premium è scaduto";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Ti preghiamo di attivare %@ dalle impostazioni DNS di sistema";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Per attivare il DNS nativo, dovrai aprire le <b>Impostazioni di sistema</b>, dirigerti su <b>Generale > VPN e rete > DNS</b> e selezionare <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Comunicaci il tuo grado di soddisfazione finora raggiunto in merito all\'esperienza di blocco degli annunci";
 
@@ -886,18 +901,14 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Elenco server DNS semplici, da utilizzare per risolvere i nomi host DOH/DOT (se presenti)";
-
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Indirizzo IP bootstrap";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Indirizzi upstream";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallback";
-
-/* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstream";

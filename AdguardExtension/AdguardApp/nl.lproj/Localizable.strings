@@ -85,6 +85,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Geen gebruiker gevonden met dit e-mailadres. Registreer je eerst bij %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "AdGuard account gebruiken";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Doorgaan met Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Doorgaan met Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Doorgaan met Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Uw premium abonnement is verlopen";
 
@@ -772,6 +784,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Schakel ajb %@ in de DNS-instellingen van het systeem in";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Om oorspronkelijke DNS in te schakelen, moet je <b>Systeeminstellingen</b> openen, naar <b>Algemeen > VPN en netwerk > DNS</b> gaan en daar <b>%@</b> selecteren.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Vertel ons of je tevreden bent over het blokkeren van advertenties";
 
@@ -878,17 +893,22 @@
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Lijst met gewone DNS-servers die moeten worden gebruikt om DOH/DOT-hostnamen om te zetten (indien aanwezig)";
 
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Een reserve DNS-oplossing die zal worden gebruikt als de geconfigureerde server niet beschikbaar is. Een lege string betekent het gebruik van de DNS van je systeem als reserve. Een \"geen\" string betekent geen fallback.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-adres";
 
-/* (UpstreamsController) Fallbacks and Custom address description */
+/* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Upstream adres";
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Upstreams";
+"upstreams_custom_address_title" = "Aangepast IP-adres toevoegen";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP-adres";
