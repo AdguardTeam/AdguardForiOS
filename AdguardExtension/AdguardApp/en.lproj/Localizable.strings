@@ -905,7 +905,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "A fallback DNS resolver that will be used when the configured server is not available. An empty string means using the system DNS as a fallback. A string \"none\" means no fallback at all.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP address";
@@ -914,7 +914,7 @@
 "upstreams_description" = "Upstream address";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback servers";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Add a custom IP";
