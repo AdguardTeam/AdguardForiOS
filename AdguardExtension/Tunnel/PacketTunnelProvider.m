@@ -340,6 +340,17 @@
 
 - (void) updateTunnelSettingsWithCompletionHandler:(nonnull void (^)( NSError * __nullable error, NSArray <NSString*> * systemDnsIps))completionHandler {
     
+    [self readSettings];
+    NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
+    NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
+    
+    if (customFallbacks.count > 0 && customBootstraps.count > 0 && _currentServer.upstreams.count > 0) {
+        [self updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+            completionHandler(error, nil);
+        }];
+        return;
+    }
+    
     // we need to reset network settings to remove our dns servers and read system default dns servers
     ASSIGN_WEAK(self);
     [self setTunnelNetworkSettings:nil completionHandler:^(NSError * _Nullable error) {
@@ -354,8 +365,6 @@
             // we must obtain system dns ip addreses before setting real tunnel settings
             // otherwise we will receive only our fake dns addresses
             NSMutableArray<NSString *> * allSystemDnsIps = [USE_STRONG(self) getSysstemDnsIps];
-            
-            [USE_STRONG(self) readSettings];
             
             [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
                 completionHandler(error, allSystemDnsIps);
