@@ -345,15 +345,25 @@
     NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
     
     if (customFallbacks.count > 0 && customBootstraps.count > 0 && _currentServer.upstreams.count > 0) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - custom bootrap and fallback servers are set -> Set new tunnel settings without reading system DNS");
         [self updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
             completionHandler(error, nil);
         }];
         return;
     }
     
+    DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - custom bootrap or fallback server is not set -> Set empty tunnel settings");
     // we need to reset network settings to remove our dns servers and read system default dns servers
     ASSIGN_WEAK(self);
     [self setTunnelNetworkSettings:nil completionHandler:^(NSError * _Nullable error) {
+        
+        if (error) {
+            DDLogError(@"(PacketTunnelProvider) updateTunnelSettings - set empty settings error: %@", error.localizedDescription);
+        }
+        else {
+            DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - empty settings is set");
+        }
         
         // https://github.com/AdguardTeam/AdguardForiOS/issues/1499
         // sometimes we get empty list of system dns servers.
