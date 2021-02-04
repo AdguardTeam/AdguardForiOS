@@ -140,21 +140,15 @@ class BlockingModeController: UITableViewController {
 
 extension BlockingModeController: UpstreamsControllerDelegate {
     func updateDescriptionLabel(type: UpstreamType, text: String) {
-        switch type {
-        case .bootstrap:
-            break
-        case .customAddress:
-            var string = text
-            if text.isEmpty {
-                string = String.localizedString("custom_ip_description")
-                updateBlockingMode(index: 0)
-            } else {
-                updateButtons(by: selectedCell)
-            }
-            customIPDescriptionLabel.text = string
-            
-        case .fallback:
-            break
+        assert(type == .customAddress)
+        
+        var string = text
+        if text.isEmpty {
+            string = String.localizedString("custom_ip_description")
+            updateBlockingMode(index: 0)
+        } else {
+            updateButtons(by: selectedCell)
         }
+        customIPDescriptionLabel.text = string
     }
 }
