@@ -64,9 +64,9 @@ class BlockingModeController: UITableViewController {
         
         var text = ""
         if let customBlockingIp = resources.customBlockingIp?.joined(separator: ", ") {
-            text = customBlockingIp.isEmpty ? "" : customBlockingIp
+            text = customBlockingIp
         }
-        updateCustomAddressDescriptionLabel(text: text)
+        updateDescriptionLabel(type: .customAddress, text: text)
     }
     
     // MARK: - Actions
@@ -139,18 +139,22 @@ class BlockingModeController: UITableViewController {
 }
 
 extension BlockingModeController: UpstreamsControllerDelegate {
-    func updateFallbacksDescriptionLabel(text: String) {}
-    
-    func updateBootstrapsDescriptionLabel(text: String) {}
-    
-    func updateCustomAddressDescriptionLabel(text: String) {
-        var string = text
-        if text.isEmpty {
-            string = String.localizedString("custom_ip_description")
-            updateBlockingMode(index: 0)
-        } else {
-            updateButtons(by: selectedCell)
+    func updateDescriptionLabel(type: UpstreamType, text: String) {
+        switch type {
+        case .bootstrap:
+            break
+        case .customAddress:
+            var string = text
+            if text.isEmpty {
+                string = String.localizedString("custom_ip_description")
+                updateBlockingMode(index: 0)
+            } else {
+                updateButtons(by: selectedCell)
+            }
+            customIPDescriptionLabel.text = string
+            
+        case .fallback:
+            break
         }
-        customIPDescriptionLabel.text = string
     }
 }

@@ -225,21 +225,19 @@ extension LowLevelSettingsController: BlockedResponseTtlDelegate {
 }
 
 extension LowLevelSettingsController: UpstreamsControllerDelegate {
-    func updateBootstrapsDescriptionLabel(text: String) {
-        guard !text.isEmpty else {
-            bootstrapsDescription.text = String.localizedString("low_level_bootstraps_placeholder")
-            return
+    func updateDescriptionLabel(type: UpstreamType, text: String) {
+        let isEmptyText = text.isEmpty
+        switch type {
+        case .bootstrap:
+            bootstrapsDescription.text = isEmptyText ? String.localizedString("low_level_bootstraps_placeholder") : text
+            
+        case .customAddress:
+            break
+            
+        case .fallback:
+            fallbacksDescription.text = isEmptyText ? String.localizedString("low_level_fallbacks_placeholder"): text
         }
-        bootstrapsDescription.text = text
-    }
-    
-    func updateCustomAddressDescriptionLabel(text: String) {}
-    
-    func updateFallbacksDescriptionLabel(text: String) {
-        guard !text.isEmpty else {
-            fallbacksDescription.text = String.localizedString("low_level_bootstraps_placeholder")
-            return
-        }
-        fallbacksDescription.text = text
+        
+        tableView.reloadData()
     }
 }

@@ -19,9 +19,7 @@
 import UIKit
 
 protocol UpstreamsControllerDelegate: class {
-    func updateCustomAddressDescriptionLabel(text: String)
-    func updateFallbacksDescriptionLabel(text: String)
-    func updateBootstrapsDescriptionLabel(text: String)
+    func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
 class UpstreamsController: BottomAlertController {
@@ -158,13 +156,13 @@ class UpstreamsController: BottomAlertController {
         switch upstreamType {
         case .bootstrap:
             resources.customBootstrapServers = address
-            delegate?.updateBootstrapsDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .bootstrap, text: text)
         case .fallback:
             resources.customFallbackServers = address
-            delegate?.updateFallbacksDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .fallback, text: text)
         case .customAddress:
             resources.customBlockingIp = address
-            delegate?.updateCustomAddressDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .customAddress, text: text)
         default:
             break
         }
