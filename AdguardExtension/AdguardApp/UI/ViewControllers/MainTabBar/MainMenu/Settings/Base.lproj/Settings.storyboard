@@ -1440,84 +1440,8 @@
                                             <segue destination="B51-gs-hNh" kind="show" id="3tc-MH-3QN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jvg-U0-mrK">
-                                        <rect key="frame" x="0.0" y="285" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jvg-U0-mrK" id="xDZ-32-exs">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom IP" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipc-iu-k4i" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="16" width="342" height="9.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjj-BC-wmQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="27.5" width="342" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    </variation>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-3b-C0j">
-                                                    <rect key="frame" x="374" y="10" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="i1V-Es-qJg">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                        </constraint>
-                                                        <constraint firstAttribute="height" constant="24" id="kvF-y6-RZM">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                        </constraint>
-                                                    </constraints>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2f-XZ-Rj2">
-                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="RFQ-dS-rq2"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="fjj-BC-wmQ" firstAttribute="leading" secondItem="ipc-iu-k4i" secondAttribute="leading" id="20Q-87-6nE"/>
-                                                <constraint firstItem="ipc-iu-k4i" firstAttribute="top" secondItem="xDZ-32-exs" secondAttribute="top" constant="16" id="2AN-nq-hgN">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="hrc-3b-C0j" secondAttribute="trailing" constant="16" id="3qm-dL-heO">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="hrc-3b-C0j" firstAttribute="leading" secondItem="ipc-iu-k4i" secondAttribute="trailing" constant="16" id="4LF-DB-fEF">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="fjj-BC-wmQ" firstAttribute="trailing" secondItem="ipc-iu-k4i" secondAttribute="trailing" id="4Nh-TZ-Ppa"/>
-                                                <constraint firstItem="fjj-BC-wmQ" firstAttribute="top" secondItem="ipc-iu-k4i" secondAttribute="bottom" constant="2" id="NaB-dD-DHv"/>
-                                                <constraint firstAttribute="bottom" secondItem="a2f-XZ-Rj2" secondAttribute="bottom" id="RfP-2z-baj"/>
-                                                <constraint firstItem="ipc-iu-k4i" firstAttribute="leading" secondItem="xDZ-32-exs" secondAttribute="leading" constant="16" id="SO2-cX-EOw">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="hrc-3b-C0j" firstAttribute="centerY" secondItem="xDZ-32-exs" secondAttribute="centerY" id="b8C-1F-Tpg"/>
-                                                <constraint firstItem="a2f-XZ-Rj2" firstAttribute="top" secondItem="fjj-BC-wmQ" secondAttribute="bottom" constant="16" id="bZP-eY-JGp">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="a2f-XZ-Rj2" firstAttribute="leading" secondItem="xDZ-32-exs" secondAttribute="leading" id="kJf-gW-ERC"/>
-                                                <constraint firstAttribute="trailing" secondItem="a2f-XZ-Rj2" secondAttribute="trailing" id="x1H-P0-2zJ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ExK-ut-hG1">
-                                        <rect key="frame" x="0.0" y="329" width="414" height="95"/>
+                                        <rect key="frame" x="0.0" y="285" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ExK-ut-hG1" id="ohV-RH-O5c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
@@ -1835,7 +1759,6 @@
                         <outlet property="blockimgModeDescription" destination="cpw-mb-YNa" id="gcX-9Z-VPK"/>
                         <outlet property="blockingResponseTtlDescription" destination="Uo0-5A-TN9" id="H8u-bL-HHv"/>
                         <outlet property="bootstrapsDescription" destination="UKz-Xt-gcS" id="weS-oY-tca"/>
-                        <outlet property="customAddressDescription" destination="fjj-BC-wmQ" id="guB-Wg-YcD"/>
                         <outlet property="fallbacksDescription" destination="JUk-Yd-xIl" id="oNw-pe-o3Y"/>
                         <outlet property="lastSeparator" destination="pb0-Zi-9Aa" id="DPS-yC-kYM"/>
                         <outlet property="tunnelModeDescription" destination="AnG-OB-1EY" id="CUK-qo-Nai"/>
@@ -1859,9 +1782,6 @@
                         <outletCollection property="separators" destination="pb0-Zi-9Aa" collectionClass="NSMutableArray" id="e2k-CP-SiD"/>
                         <outletCollection property="themableLabels" destination="k0U-fn-m9X" collectionClass="NSMutableArray" id="A3Y-kO-IyE"/>
                         <outletCollection property="themableLabels" destination="JUk-Yd-xIl" collectionClass="NSMutableArray" id="HYI-uW-0Pw"/>
-                        <outletCollection property="themableLabels" destination="ipc-iu-k4i" collectionClass="NSMutableArray" id="E1X-sE-EUf"/>
-                        <outletCollection property="themableLabels" destination="fjj-BC-wmQ" collectionClass="NSMutableArray" id="fuS-gC-QgL"/>
-                        <outletCollection property="separators" destination="a2f-XZ-Rj2" collectionClass="NSMutableArray" id="Ubz-pT-CDE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BrB-e2-mx7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2306,7 +2226,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Respond with a manually set IP address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huN-t2-HHo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huN-t2-HHo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="28" width="342" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -2359,6 +2279,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="7Cy-Wo-iN8"/>
                     <connections>
+                        <outlet property="customIPDescriptionLabel" destination="huN-t2-HHo" id="oNd-ic-gwz"/>
                         <outletCollection property="themableLabels" destination="BPj-Fi-8mA" collectionClass="NSMutableArray" id="ohG-4E-7eJ"/>
                         <outletCollection property="themableLabels" destination="cgV-he-JNk" collectionClass="NSMutableArray" id="RZh-Cg-uA4"/>
                         <outletCollection property="themableLabels" destination="Lgb-zJ-9va" collectionClass="NSMutableArray" id="qOe-hr-dCf"/>

@@ -142,12 +142,6 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatible with “Personal VPN” apps";
 
-/* Class = "UILabel"; text = "Respond with a manually set IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "Respond with a manually set IP address";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "Custom IP";
-
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity.";
 

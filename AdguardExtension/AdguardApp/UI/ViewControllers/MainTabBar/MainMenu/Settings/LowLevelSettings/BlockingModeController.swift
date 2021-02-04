@@ -23,6 +23,7 @@ class BlockingModeController: UITableViewController {
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
+    @IBOutlet var customIPDescriptionLabel: UILabel!
 
     private var notificationToken: NotificationToken?
     private var selectedCell = 0
@@ -60,7 +61,12 @@ class BlockingModeController: UITableViewController {
         setupBackButton()
         
         updateTheme()
-
+        
+        var text = ""
+        if let customBlockingIp = resources.customBlockingIp?.joined(separator: ", ") {
+            text = customBlockingIp.isEmpty ? "" : customBlockingIp
+        }
+        updateCustomAddressDescriptionLabel(text: text)
     }
     
     // MARK: - Actions
@@ -110,13 +116,41 @@ class BlockingModeController: UITableViewController {
             mode = .agUnspecifiedAddress
         case 4:
             mode = .agCustomAddress
+            showCustomIPAlert()
         default:
             mode = .agDefault
         }
         
         resources.blockingMode = mode
         selectedCell = index
-        updateButtons(by: selectedCell)
-        vpnManager.updateSettings(completion: nil)
+        
+        if mode != .agCustomAddress {
+            updateButtons(by: selectedCell)
+            vpnManager.updateSettings(completion: nil)
+        }
+    }
+    
+    private func showCustomIPAlert() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
+        controller.upstreamType = .customAddress
+        controller.delegate = self
+        present(controller, animated: true, completion: nil)
+    }
+}
+
+extension BlockingModeController: UpstreamsControllerDelegate {
+    func updateFallbacksDescriptionLabel(text: String) {}
+    
+    func updateBootstrapsDescriptionLabel(text: String) {}
+    
+    func updateCustomAddressDescriptionLabel(text: String) {
+        var string = text
+        if text.isEmpty {
+            string = String.localizedString("custom_ip_description")
+            updateBlockingMode(index: 0)
+        } else {
+            updateButtons(by: selectedCell)
+        }
+        customIPDescriptionLabel.text = string
     }
 }

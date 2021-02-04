@@ -27,7 +27,6 @@ class LowLevelSettingsController: UITableViewController {
     @IBOutlet weak var blockingResponseTtlDescription: ThemableLabel!
     @IBOutlet weak var warningTextView: UITextView!
     @IBOutlet weak var betaChannelTextView: UITextView!
-    @IBOutlet weak var customAddressDescription: ThemableLabel!
     @IBOutlet weak var fallbacksDescription: ThemableLabel!
     @IBOutlet weak var bootstrapsDescription: ThemableLabel!
     
@@ -41,11 +40,11 @@ class LowLevelSettingsController: UITableViewController {
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
-    private let customAddress = 2
-    private let blockIpv6 = 3
-    private let blockResponseTtl = 4
-    private let boostraps = 5
-    private let fallbacks = 6
+    private let customAddress = 1
+    private let blockIpv6 = 2
+    private let blockResponseTtl = 3
+    private let boostraps = 4
+    private let fallbacks = 5
     
     private var notificationToken: NotificationToken?
     
@@ -69,7 +68,6 @@ class LowLevelSettingsController: UITableViewController {
         setBlockingModeDescription()
         setBlockedResponseTllDescription()
         setBootstrapsDescription()
-        setCustomAddressDescription()
         setFallbacksDescription()
         tableView.reloadData()
     }
@@ -93,8 +91,6 @@ class LowLevelSettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case customAddress:
-            showAlert(forType: .customAddress)
         case blockIpv6:
             blockIpv6Switch.setOn(!blockIpv6Switch.isOn, animated: true)
             blockIpv6Action(blockIpv6Switch)
@@ -114,14 +110,6 @@ class LowLevelSettingsController: UITableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == customAddress && resources.blockingMode != .agCustomAddress {
-            return 0
-        }
-        return tableView.rowHeight
     }
     
     // MARK: - Private methods
@@ -171,11 +159,7 @@ class LowLevelSettingsController: UITableViewController {
     private func setBlockedResponseTllDescription() {
         blockingResponseTtlDescription.text = String(format: String.localizedString("s_unit"), String(resources.blockedResponseTtlSecs))
     }
-    
-    private func setCustomAddressDescription() {
-        customAddressDescription.text = resources.customBlockingIp?.joined(separator: ", ")
-    }
-    
+
     private func setFallbacksDescription() {
         guard let string = resources.customFallbackServers?.joined(separator: ", "), !string.isEmpty else {
             fallbacksDescription.text = String.localizedString("low_level_fallbacks_placeholder")
@@ -249,11 +233,7 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
         bootstrapsDescription.text = text
     }
     
-    func updateCustomAddressDescriptionLabel(text: String) {
-        customAddressDescription.text = text
-        let indexPath = IndexPath(row: customAddress, section: 1)
-        tableView.reloadRows(at: [indexPath], with: .none)
-    }
+    func updateCustomAddressDescriptionLabel(text: String) {}
     
     func updateFallbacksDescriptionLabel(text: String) {
         guard !text.isEmpty else {

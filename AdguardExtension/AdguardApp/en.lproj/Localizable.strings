@@ -921,3 +921,6 @@
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP address";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Respond with a manually set IP address";
