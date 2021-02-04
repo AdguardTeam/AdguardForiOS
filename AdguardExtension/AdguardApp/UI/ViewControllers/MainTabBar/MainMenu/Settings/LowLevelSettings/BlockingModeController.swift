@@ -28,6 +28,12 @@ class BlockingModeController: UITableViewController {
     private var notificationToken: NotificationToken?
     private var selectedCell = 0
     
+    private let defaultMode = 0
+    private let refusedMode = 1
+    private let nxDomainMode = 2
+    private let unspecifiedAddressMode = 3
+    private let customAddressMode = 4
+    
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
@@ -46,15 +52,15 @@ class BlockingModeController: UITableViewController {
         
         switch mode {
         case .agDefault:
-            selectedCell = 0
+            selectedCell = defaultMode
         case .agRefused:
-            selectedCell = 1
+            selectedCell = refusedMode
         case .agNxdomain:
-            selectedCell = 2
+            selectedCell = nxDomainMode
         case .agUnspecifiedAddress:
-            selectedCell = 3
+            selectedCell = unspecifiedAddressMode
         case .agCustomAddress:
-            selectedCell = 4
+            selectedCell = customAddressMode
         }
         
         updateButtons(by: selectedCell)
@@ -106,27 +112,25 @@ class BlockingModeController: UITableViewController {
     private func updateBlockingMode(index: Int) {
         let mode: BlockingModeSettings
         switch index {
-        case 0:
+        case defaultMode:
             mode = .agDefault
-        case 1:
+        case refusedMode:
             mode = .agRefused
-        case 2:
+        case nxDomainMode:
             mode = .agNxdomain
-        case 3:
+        case unspecifiedAddressMode:
             mode = .agUnspecifiedAddress
-        case 4:
+        case customAddressMode:
             mode = .agCustomAddress
             showCustomIPAlert()
         default:
             mode = .agDefault
         }
         
-        resources.blockingMode = mode
         selectedCell = index
         
         if mode != .agCustomAddress {
-            updateButtons(by: selectedCell)
-            vpnManager.updateSettings(completion: nil)
+            setupMode(mode: mode)
         }
     }
     
@@ -136,18 +140,25 @@ class BlockingModeController: UITableViewController {
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
+    
+    private func setupMode(mode: BlockingModeSettings) {
+        resources.blockingMode = mode
+        vpnManager.updateSettings(completion: nil)
+        updateButtons(by: selectedCell)
+    }
 }
 
 extension BlockingModeController: UpstreamsControllerDelegate {
     func updateDescriptionLabel(type: UpstreamType, text: String) {
         assert(type == .customAddress)
-        
         var string = text
         if text.isEmpty {
             string = String.localizedString("custom_ip_description")
-            updateBlockingMode(index: 0)
-        } else {
-            updateButtons(by: selectedCell)
+            if selectedCell == customAddressMode {
+                updateBlockingMode(index: defaultMode)
+            }
+        } else if !text.isEmpty && selectedCell == customAddressMode && resources.blockingMode != .agCustomAddress {
+            setupMode(mode: .agCustomAddress)
         }
         customIPDescriptionLabel.text = string
     }
