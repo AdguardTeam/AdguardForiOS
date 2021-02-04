@@ -340,9 +340,30 @@
 
 - (void) updateTunnelSettingsWithCompletionHandler:(nonnull void (^)( NSError * __nullable error, NSArray <NSString*> * systemDnsIps))completionHandler {
     
+    [self readSettings];
+    NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
+    NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
+    
+    if (customFallbacks.count > 0 && customBootstraps.count > 0 && _currentServer.upstreams.count > 0) {
+        
+        DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - custom bootrap and fallback servers are set -> Set new tunnel settings without reading system DNS");
+        [self updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
+            completionHandler(error, nil);
+        }];
+        return;
+    }
+    
+    DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - custom bootrap or fallback server is not set -> Set empty tunnel settings");
     // we need to reset network settings to remove our dns servers and read system default dns servers
     ASSIGN_WEAK(self);
     [self setTunnelNetworkSettings:nil completionHandler:^(NSError * _Nullable error) {
+        
+        if (error) {
+            DDLogError(@"(PacketTunnelProvider) updateTunnelSettings - set empty settings error: %@", error.localizedDescription);
+        }
+        else {
+            DDLogInfo(@"(PacketTunnelProvider) updateTunnelSettings - empty settings is set");
+        }
         
         // https://github.com/AdguardTeam/AdguardForiOS/issues/1499
         // sometimes we get empty list of system dns servers.
@@ -354,8 +375,6 @@
             // we must obtain system dns ip addreses before setting real tunnel settings
             // otherwise we will receive only our fake dns addresses
             NSMutableArray<NSString *> * allSystemDnsIps = [USE_STRONG(self) getSysstemDnsIps];
-            
-            [USE_STRONG(self) readSettings];
             
             [USE_STRONG(self) updateTunnelSettingsInternalWithCompletionHandler:^(NSError * _Nullable error) {
                 completionHandler(error, allSystemDnsIps);
