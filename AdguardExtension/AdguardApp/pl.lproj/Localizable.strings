@@ -905,7 +905,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Rezerwowy program do rozpoznawania nazw DNS, który będzie używany, gdy skonfigurowany serwer będzie niedostępny. Pusty ciąg oznacza, że ​​domyślny DNS systemu jest używany jako rezerwa. Ścisłe „brak” oznacza w ogóle brak powrotu.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Serwery Bootstrap";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adres";
@@ -914,10 +914,13 @@
 "upstreams_description" = "Upstream adres";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Awaryjne";
+"upstreams_fallbacks_title" = "Serwery rezerwowe";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Dodaj niestandardowy adres IP";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "Adres IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Odpowiedz, podając ręcznie ustawiony adres IP";

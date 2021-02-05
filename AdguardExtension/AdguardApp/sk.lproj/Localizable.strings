@@ -905,7 +905,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Záložný DNS prekladač, ktorý sa použije, keď nakonfigurovaný server nie je k dispozícii. Prázdny reťazec znamená použitie systémového DNS ako záložného riešenia. Reťazec \"none“ znamená žiadne záložné riešenie.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstrap";
+"upstreams_bootstraps_title" = "Bootstrap servery";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adresa";
@@ -914,10 +914,13 @@
 "upstreams_description" = "Adresa upstream";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Zálohy";
+"upstreams_fallbacks_title" = "Záložné servery";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Pridať vlastnú IP adresu";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP adresa";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Odpovedať s manuálne nastavenou IP adresou";

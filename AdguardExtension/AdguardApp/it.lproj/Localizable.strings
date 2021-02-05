@@ -901,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Elenco server DNS semplici, da utilizzare per risolvere i nomi host DOH/DOT (se presenti)";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Quando il server configurato non è disponibile verrà utilizzato un fallback DNS resolver. Con la stringa 'nessuno' verrà utilizzato il DNS preimpostato come fallback.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstrap";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Indirizzo IP bootstrap";
@@ -911,4 +914,13 @@
 "upstreams_description" = "Indirizzi upstream";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallback";
+"upstreams_fallbacks_title" = "Fallback servers";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Aggiungi un indirizzo IP personalizzato";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "Indirizzo IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Restituisci sempre indirizzo IP impostato manualmente";

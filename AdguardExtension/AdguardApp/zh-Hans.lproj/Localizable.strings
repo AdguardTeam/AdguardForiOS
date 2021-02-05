@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "未找到具有该电子邮件地址的用户。请您首先通过 %@ 注册。";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "使用 AdGuard 账号";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "使用 Apple 继续";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "使用 Google 继续";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "使用 Facebook 继续";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高级版账户已经过期";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "请在系统 DNS 设置开启 %@";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "以开启本地 DNS 请您打开<b>系统设置 </b>，前往 <b>通用 > VPN 和网络 > DNS</b> 并选择 <b>%@</b>。";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "请告诉我们您对广告拦截体验是否满意";
 
@@ -886,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "用于解析 DOH/DOT 主机名字（如有的话）的本机 DNS 服务器列表";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "后备 DNS 解析器是在配置的服务器不可用时使用。空字符串表示系统的 DNS 将作为后备。“无”字符串即表示无后备。";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstrap";
+"upstreams_bootstraps_title" = "Bootstrap 服务器";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP 地址";
@@ -896,4 +914,13 @@
 "upstreams_description" = "上游地址";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback 服务器";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "添加自定义 IP";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP 地址";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "以手动设置的 IP 地址响应";

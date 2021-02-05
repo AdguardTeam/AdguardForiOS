@@ -905,19 +905,22 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Um resolvedor de DNS reserva que será usado quando o servidor configurado não estiver disponível. Se você deixar este campo vazio, irá significar que o DNS do sistema será utilizado como DNS reserva.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Servidores de inicialização";
 
 /* (UpstreamsController) bootstraps description */
-"upstreams_bootstraps_description" = "Bootstrap endereço de IP";
+"upstreams_bootstraps_description" = "Endereço de IP de inicialização";
 
 /* (UpstreamsController) Fallbacks description */
-"upstreams_description" = "Endereço de upstream";
+"upstreams_description" = "Endereço de DNS primário";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Servidores alternativos";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Adicionar um IP personalizado";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "Endereço de IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Responder com um endereço IP definido manualmente";

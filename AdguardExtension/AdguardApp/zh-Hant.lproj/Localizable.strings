@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "未找到具有此電子郵件地址的使用者。請您首先透過 %@ 註冊。";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "使用 AdGuard 帳戶";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "用 Apple 繼續";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "用 Google 繼續";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "用 Facebook 繼續";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "您的高級版帳戶已到期";
 
@@ -889,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "（若有的話）要被用於解析 DoH/DoT 主機名稱之完全的 DNS 伺服器清單";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "當已配置的伺服器為不可用時，將被使用之應變的 DNS 解析器。空白的字串表示使用系統 DNS 作為應變。字串 \"none\" 表示完全沒有應變。";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "自我啟動（Bootstraps）";
+"upstreams_bootstraps_title" = "自我啟動（Bootstrap）伺服器";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "自我啟動 IP 位址";
@@ -899,10 +914,13 @@
 "upstreams_description" = "上游的位址";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "應變（Fallbacks）";
+"upstreams_fallbacks_title" = "應變（Fallback）伺服器";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "增加一組自訂的 IP";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP 位址";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "以一組手動地被設定的 IP 位址回覆";
