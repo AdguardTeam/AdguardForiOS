@@ -87,13 +87,18 @@ class UpstreamsController: BottomAlertController {
             return
         }
         
-        let upstreams = transformToArray(address: text)
-        
-        checkUpstream(upstreams: upstreams) { [weak self] in
-            DispatchQueue.main.async {
-                self?.saveUpstreams(upstreams: upstreams, upstreamsText: text)
-                self?.vpnManager.updateSettings(completion: nil)
-                self?.dismiss(animated: true)
+        if upstreamType == .customAddress {
+            let ipAddresses = transformToArray(address: text)
+            checkCustomIPAddresses(addresses: ipAddresses, addressesText: text)
+        } else {
+            let upstreams = transformToArray(address: text)
+            
+            checkUpstream(upstreams: upstreams) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.saveUpstreams(upstreams: upstreams, upstreamsText: text)
+                    self?.vpnManager.updateSettings(completion: nil)
+                    self?.dismiss(animated: true)
+                }
             }
         }
     }
@@ -202,6 +207,19 @@ class UpstreamsController: BottomAlertController {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
                 }
             }
+        }
+    }
+    
+    private func checkCustomIPAddresses(addresses: [String], addressesText: String) {
+        let validAdrresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
+        if !validAdrresses.isEmpty || addressesText.isEmpty {
+            saveUpstreams(upstreams: addresses, upstreamsText: addressesText)
+            vpnManager.updateSettings(completion: nil)
+            dismiss(animated: true)
+            return
+        } else {
+            DDLogError("(UppstreamsController) saveAction error - custom ip invalid addresses)")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_ip_message"))
         }
     }
 }
