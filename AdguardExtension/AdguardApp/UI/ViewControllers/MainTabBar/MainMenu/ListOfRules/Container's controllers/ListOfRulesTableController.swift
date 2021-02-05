@@ -48,6 +48,8 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private var themeObserver: NotificationToken?
     private var conficurationObservation: NSKeyValueObservation?
     
+    private var timer: Timer?
+    
     var model: ListOfRulesModelProtocol? = nil
     
     private var oldState: ControllerState = .normal
@@ -107,7 +109,10 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     // MARK: - Searchbar delegate methods
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        model?.searchString = searchText
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { [weak self] (_) in
+            self?.model?.searchString = searchText
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
