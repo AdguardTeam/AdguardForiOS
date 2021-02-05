@@ -78,7 +78,7 @@ class UpstreamsController: BottomAlertController {
     }
     
     @IBAction func saveAction(_ sender: UIButton) {
-        guard let text = upstreamsTextField.text else { return }
+        guard let text = upstreamsTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
         
         if upstreamType == .fallback, text == "none" {
             saveUpstreams(upstreams: [text], upstreamsText: text)
