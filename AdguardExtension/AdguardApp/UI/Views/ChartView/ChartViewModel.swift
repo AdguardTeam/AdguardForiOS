@@ -87,9 +87,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     /* Observers */
     private var resetSettingsToken: NotificationToken?
     
-    private let chartProcessingQueue = DispatchQueue(label: "chart processing queue", qos: .userInitiated)
-    private let activityStatisticsCountQueue = DispatchQueue(label: "activity statistics count queue", qos: .userInitiated)
-    private let obtainStatisticsQueue = DispatchQueue(label: "obtainStatistics queue", qos: .userInitiated)
+    private let statisticsQueue = DispatchQueue(label: "statistics queue", qos: .userInitiated)
     
     // MARK: - init
     init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, resources: AESharedResourcesProtocol) {
@@ -107,7 +105,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     }
     
     func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->()) {
-        obtainStatisticsQueue.async { [weak self] in
+        statisticsQueue.async { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.timer?.invalidate()
@@ -171,7 +169,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     // MARK: - private methods
     
     private func countInfoNumbers() {
-        activityStatisticsCountQueue.async { [weak self] in
+        statisticsQueue.async { [weak self] in
             guard let self = self, let records = self.recordsByType[self.chartDateTypeActivity] else { return }
             
             var requestsNumber: Int = 0
@@ -196,7 +194,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     }
     
     private func changeChart(_ completion: @escaping ()->()){
-        chartProcessingQueue.async { [weak self] in
+        statisticsQueue.async { [weak self] in
             guard let self = self, let records = self.recordsByType[self.chartDateType] else { return }
             let requestsInfo = self.getInfo(from: records)
 
