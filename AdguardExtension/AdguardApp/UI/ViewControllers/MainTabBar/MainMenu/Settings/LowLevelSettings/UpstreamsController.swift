@@ -95,7 +95,7 @@ class UpstreamsController: BottomAlertController {
             
             checkUpstream(upstreams: upstreams) { [weak self] in
                 DispatchQueue.main.async {
-                    self?.saveUpstreams(upstreams: upstreams, upstreamsText: text)
+                    self?.saveUpstreams(upstreams: upstreams, upstreamsText: upstreams.joined(separator: ", "))
                     self?.vpnManager.updateSettings(completion: nil)
                     self?.dismiss(animated: true)
                 }
@@ -211,9 +211,9 @@ class UpstreamsController: BottomAlertController {
     }
     
     private func checkCustomIPAddresses(addresses: [String], addressesText: String) {
-        let validAdrresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
-        if !validAdrresses.isEmpty || addressesText.isEmpty {
-            saveUpstreams(upstreams: addresses, upstreamsText: addressesText)
+        let validAdвresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
+        if !validAdвresses.isEmpty || addressesText.isEmpty {
+            saveUpstreams(upstreams: validAdвresses, upstreamsText: validAdвresses.joined(separator: ", "))
             vpnManager.updateSettings(completion: nil)
             dismiss(animated: true)
             return

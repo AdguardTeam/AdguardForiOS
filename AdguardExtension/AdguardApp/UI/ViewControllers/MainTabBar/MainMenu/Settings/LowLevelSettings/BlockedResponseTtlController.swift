@@ -75,7 +75,7 @@ class BlockedResponseTtlController: BottomAlertController {
         guard let numeric = Int(text), numeric >= 0 else { return }
         resources.blockedResponseTtlSecs = numeric
         vpnManager.updateSettings(completion: nil)
-        delegate?.setTtlDescription(ttl: text)
+        delegate?.setTtlDescription(ttl: String(numeric))
         dismiss(animated: true)
     }
     
