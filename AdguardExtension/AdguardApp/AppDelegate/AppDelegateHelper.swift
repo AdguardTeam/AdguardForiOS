@@ -609,8 +609,6 @@ extension AppDelegateHelper {
             DDLogInfo("(AppDelegateHelper) Did not started update process. AppState = \(appState.rawValue)")
             
             NotificationCenter.default.post(name: .AppDelegateUpdateDidNotStarted, object: self)
-            
-            self?.updateTunnelSettingsIfAppropriate()
         }
     }
     
@@ -645,7 +643,7 @@ extension AppDelegateHelper {
      */
     private func updateTunnelSettingsIfAppropriate() {
         let appState = UIApplication.shared.applicationState
-        if complexProtection.systemProtectionEnabled, resources.dnsImplementation == .adGuard, appState != .background  {
+        if complexProtection.systemProtectionEnabled, resources.dnsImplementation == .adGuard, appState != .background, dnsFiltersService.enabledFiltersCount > 0 {
             vpnManager.updateSettings(completion: nil)
         }
     }

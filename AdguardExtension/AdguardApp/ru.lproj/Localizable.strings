@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Пользователь с таким email не найден. Пожалуйста, вначале зарегистрируйтесь на %@.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Использовать учетную запись AdGuard";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Продолжить с Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Продолжить с Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Продолжить с Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Срок действия Премиум-аккаунта истек";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Пожалуйста, включите %@ в системных DNS-настройках";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Чтобы включить собственный DNS, откройте <b>Системные настройки</b>, перейдите в раздел <b>Основные > VPN и сеть > DNS</b> и выберите там <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Расскажите нам, довольны ли вы блокировкой рекламы";
 
@@ -886,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Список DNS-серверов, используемых для преобразования имен хоста DOH/DOT";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Резервный DNS-сервер, который будет использоваться, когда настроенный сервер недоступен. Пустая строка означает использование системного DNS как запасного. Строка \"none\" означает отсутствие резервного сервера.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Bootstrap-серверы";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-адрес";
@@ -896,4 +914,13 @@
 "upstreams_description" = "Upstream-адрес";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback-серверы";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Добавить свой IP-адрес";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP-адрес";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Отвечает с вручную настроенным IP-адресом";

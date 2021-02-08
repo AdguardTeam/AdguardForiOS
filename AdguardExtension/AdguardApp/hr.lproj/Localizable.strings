@@ -905,7 +905,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Alternativni DNS razrješivač koji će se koristiti kada glavni DNS poslužitelj nije dostupan. Prazan niz znakova znači da će se koristiti DNS poslužitelj određen u sustavn.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP adresa";
@@ -914,10 +914,13 @@
 "upstreams_description" = "Upstream adresa";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback servers";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Upstreams";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP adresa";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Uvijek vrati postavljenu prilagođenu IP adresu";

@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "Es wurde kein Benutzer mit dieser E-Mail-Adresse gefunden. Bitte melden Sie sich zuerst bei %@ an.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "AdGuard-Konto verwenden";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Mit Apple fortfahren";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Mit Google fortfahren";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Mit Facebook fortfahren";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Ihr Premium-Account ist abgelaufen";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "Bitte aktivieren Sie %@ in den systemweiten DNS-Einstellungen";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Um DNS zu aktivieren, öffnen Sie die <b>Systemeinstellungen</b>, <b>Allgemein >  VPN & Netzwerk > DNS</b> und wählen dort <b>%@</b>.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Wie würden Sie Ihre Erfahrung mit AdGuard beschreiben?";
 
@@ -886,6 +901,9 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "Liste unverschlüsselter DNS-Server, die für die Auflösung der „DNS über HTTPS”/„DNS über TLS” verwendet werden sollen (falls vorhanden)";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Ein Fallback-DNS-Resolver, der verwendet wird, wenn der konfigurierte Server nicht verfügbar ist. Eine leere Zeile bedeutet, dass das Standard-DNS des Systems als Fallback verwendet wird. Eine Zeile \"Keine\" bedeutet überhaupt keinen Fallback.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstraps";
 
@@ -897,3 +915,12 @@
 
 /* (UpstreamsController) Fallbacks title */
 "upstreams_fallbacks_title" = "Fallbacks";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Eigene IP hinzufügen";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP-Adresse";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Mit einer manuell festgelegten IP-Adresse antworten";

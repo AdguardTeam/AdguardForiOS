@@ -64,8 +64,8 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
 "IvJ-Oi-vGF.text" = "Setări la nivel scăzut";
 
-/* Class = "UILabel"; text = "Bootstraps"; ObjectID = "JQH-8J-wY8"; */
-"JQH-8J-wY8.text" = "Bootstraps";
+/* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
+"JQH-8J-wY8.text" = "Servere Bootstrap";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Aceasta va elimina profilul dvs. VPN actual și va dezactiva protecția DNS";
@@ -142,17 +142,11 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatibil cu aplicații “VPN Personal“";
 
-/* Class = "UILabel"; text = "Respond with a manually set IP address"; ObjectID = "huN-t2-HHo"; */
-"huN-t2-HHo.text" = "Răspunde cu o adresă IP setată manual";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "ipc-iu-k4i"; */
-"ipc-iu-k4i.text" = "IP personalizat";
-
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "AdGuard în mod Split-Tunnel este compatibil cu aplicații așa-numite \"VPN Personal\". Ca un compromis, în acest mod poate fi ocolit de sistem în caz de conecții defectuoase.";
 
-/* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "Fallbacks";
+/* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
+"k0U-fn-m9X.text" = "Servere Fallback";
 
 /* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
 "lBi-rt-m64.text" = "IP nul";

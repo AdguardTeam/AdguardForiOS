@@ -901,17 +901,12 @@
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Pomožni reševalnik DNS, ki bo uporabljen, ko ni na voljo nastavljen strežnik. Prazen niz pomeni uporabo sistemsko privzetega DNS kot nadomestnega. Niz \"brez\" pomeni, da sploh ni nadomestnega.";
-/* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Zagonski trakovi";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Naslov IP zagonskega traku";
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Naslov toka navzgor";
-
-/* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Zamenjave";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Dodaj IP po meri";

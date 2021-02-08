@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "이 이메일 주소로 사용자를 찾을 수 없습니다. %@에서 계정을 만드십시오.";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "AdGuard 계정 사용";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Apple 계정으로 진행";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Google 계정으로 진행";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Facebook 계정으로 진행";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "귀하의 프리미엄 보호 서비스가 만료되었습니다.";
 
@@ -889,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOT 호스트 이름 확인에 사용할 일반 DNS 서버 목록입니다 (존재하는 경우 표시됨)";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "구성된 서버를 사용할 수 없는 경우 대체 DNS 리졸버가 사용됩니다. 빈 문자열은 시스템 기본 DNS를 폴백으로 사용하는 것을 의미합니다. 'none'라는 문자열은 대체가 없다는 것을 의미합니다.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "부트스트랩";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "부트스트랩 IP 주소";
@@ -899,4 +914,13 @@
 "upstreams_description" = "업스트림 주소";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback servers";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "사용자 지정 IP 추가";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP 주소";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "직접 설정한 IP 주소로 응답합니다";
