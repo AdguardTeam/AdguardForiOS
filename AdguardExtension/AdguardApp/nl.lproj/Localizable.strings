@@ -631,6 +631,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Je hebt een ongeldige upstream ingevoerd";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Je hebt een ongeldig IP-adres ingevoerd";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Ongeldig DNS-protocol";
 

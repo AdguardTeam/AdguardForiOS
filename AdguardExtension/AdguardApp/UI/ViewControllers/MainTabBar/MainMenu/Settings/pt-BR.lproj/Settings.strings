@@ -124,7 +124,7 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Modo túnel";
 
-/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
 "cgV-he-JNk.text" = "Responder com endereço IP zero (0.0.0.0 para A; :: para AAAA) quando bloqueado pela regra do estilo AdBlock; responder com o endereço IP especificado na regra quando bloqueado pela regra de estilo /etc/hosts-style";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */

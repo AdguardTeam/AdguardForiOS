@@ -637,6 +637,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Vnesli ste neveljaven upstream";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Vnesli ste neveljaven naskov IP";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Neveljaven protokol DNS";
 
@@ -901,6 +904,8 @@
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Pomožni reševalnik DNS, ki bo uporabljen, ko ni na voljo nastavljen strežnik. Prazen niz pomeni uporabo sistemsko privzetega DNS kot nadomestnega. Niz \"brez\" pomeni, da sploh ni nadomestnega.";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Zagonski strežniki";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Naslov IP zagonskega traku";
@@ -908,8 +913,14 @@
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Naslov toka navzgor";
 
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Nadomestni strežniki";
+
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Dodaj IP po meri";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP naslov";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Odgovori z ročno nastavljenim naslovom IP";

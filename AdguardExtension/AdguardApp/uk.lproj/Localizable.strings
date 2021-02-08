@@ -634,6 +634,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Ви ввели недійсний upstream";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Ви ввели неправильну IP-адресу";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Недійсний DNS-протокол";
 

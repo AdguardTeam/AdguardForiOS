@@ -49,6 +49,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "DNS gốc đang hoạt động";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "DNS gốc hiện không hoạt động";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Quy tắc người dùng";
 
@@ -67,11 +73,29 @@
 /* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Bảo vệ bị vô hiệu hóa";
 
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Đăng ký";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Trả phí";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Mất mật khẩu?";
+
+/* (SignInController) user not found message */
+"user_not_found_message" = "Không tìm thấy người dùng với địa chỉ email này. Vui lòng đăng ký tại %@ trước.";
+
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Sử dụng tài khoản AdGuard";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Đăng nhập bằng Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Đăng nhập bằng Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Đăng nhập bằng Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Tài khoản cao cấp của bạn đã hết hạn";
@@ -172,6 +196,12 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (không có biểu tượng VPN), không tương thích với các ứng dụng VPN khác, ít ổn định hơn";
 
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Gốc";
+
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Không mã hóa (DNS hệ thống)";
 
@@ -189,6 +219,9 @@
 
 /* DnsProviderDetailsController - dns over https rotocol */
 "dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (thử nghiệm)";
 
 /* GetProController - confirm logout text */
 "confirm_logout_text" = "Bạn có chắc muốn đăng xuất?";
@@ -598,6 +631,12 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Bạn đã nhập đầu vào không hợp lệ";
 
+/* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_title" = "Giao thức DNS không hợp lệ";
+
+/* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
+"invalid_dns_protocol_message" = "%@ chưa được iOS hỗ trợ. Hãy thêm địa chỉ ngược dòng khác.";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Danh sách đen hệ thống";
 
@@ -667,6 +706,39 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Rỗng";
 
+/* (BugReportController) Message when bug report failed */
+"bug_report_failed_message" = "Không gửi được báo cáo lỗi. Vui lòng thử lại";
+
+/* (BugReportController) Message when leaving feedback failed */
+"feedback_failed_message" = "Không gửi được phản hồi, vui lòng thử lại";
+
+/* (BugReportController) Message when bug report successed */
+"bug_report_successed_message" = "Báo cáo lỗi của bạn đã được gửi thành công!";
+
+/* (BugReportController) Message when feedback leaving successed */
+"feedback_successed_message" = "Phản hồi của bạn đã được gửi thành công!";
+
+/* (BugReportController) title for bug report */
+"bug_report_title" = "Báo cáo lỗi";
+
+/* (BugReportController) title for leaving feedback */
+"leave_feedback_title" = "Để lại phản hồi";
+
+/* (BugReportController) description for bug report */
+"bug_report_description" = "Vui lòng bao gồm mô tả sự cố (sự cố có bắt đầu sau khi cập nhật không?) Và thông tin về phần mềm khác mà bạn có (VPN/AV/Extension)";
+
+/* (BugReportController) description for leaving feedback */
+"leave_feedback_description_format" = "Hãy cho chúng tôi biết suy nghĩ của bạn về %@ — điều bạn thích hoặc không thích, tính năng nào bạn muốn đề xuất";
+
+/* (BugReportController) button title for bug report */
+"bug_report_button_title" = "Gửi báo cáo";
+
+/* (BugReportController) button title for leaving feedback */
+"leave_feedback_button_title" = "Gửi phản hồi";
+
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Bằng cách tiếp tục sử dụng, bạn chấp nhận <br /><a href=%2$@>Điều khoản và điều kiện</a> và <a href=%1$@>Chính sách quyền riêng tư</a>";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Yêu cầu";
 
@@ -708,6 +780,18 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d yêu cầu";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Vui lòng bật %@ trong cài đặt DNS hệ thống";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Để bật DNS gốc, bạn cần mở <b> Cài đặt hệ thống </b>, đi tới <b> Chung> VPN & Mạng> DNS </b> và chọn <b>%@</b>.";
+
+/* (RateAppController) Rate app description text (\n) stands for new line */
+"rate_app_description" = "Cho chúng tôi biết liệu bạn có hài lòng với trải nghiệm chặn quảng cáo cho đến nay hay không";
+
+/* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
+"rate_app_problem_description" = "Đảm bảo rằng bạn đang sử dụng <b> trình duyệt Safari </b>. <br> Hiện tại, về mặt kỹ thuật không thể chặn nội dung trong các trình duyệt khác. <br> Tiếp tục cài đặt bảo vệ Safari và bật tất cả danh sách bộ lọc cần thiết. <br> Khởi động lại ứng dụng Safari: thoát và mở lại.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -771,3 +855,63 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Nhập mật khẩu của bạn ở đây";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Thêm bộ lọc trình chặn nội dung tùy chỉnh: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Thêm bộ lọc DNS tùy chỉnh: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Kích hoạt bộ lọc: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Vô hiệu hóa bộ lọc: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Không thành công";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Chọn máy chủ DNS: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Kích hoạt các tính năng cao cấp với mã bản quyền %@";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Thêm quy tắc người dùng";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Thêm quy tắc DNS của người dùng";
+
+/* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
+"low_level_description" = "<b style=color:#c23814ff>CẢNH BÁO!</b> Việc bật các tính năng này có thể phá vỡ kết nối Internet hoặc ảnh hưởng đến bảo mật và quyền riêng tư của bạn.";
+
+/* (LowLevelSettingsController) Low level settings beta channel link */
+"low_level_beta_link" = "Quan tâm đến các tính năng AdGuard mới thú vị? Hãy dùng thử <a href=\"%@\">kênh beta</a> của chúng tôi.";
+
+/* (LowLevelSettingsController) Low level bootstraps placeholder */
+"low_level_bootstraps_placeholder" = "Danh sách máy chủ DNS thuần túy sẽ được sử dụng để phân giải tên máy chủ DOH/DOT (nếu có)";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "Trình phân giải DNS dự phòng sẽ được sử dụng khi máy chủ đã định cấu hình không khả dụng. Một chuỗi trống có nghĩa là sử dụng DNS hệ thống làm dự phòng. Một chuỗi \"none\" có nghĩa là không có dự phòng nào cả.";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Máy chủ Bootstrap";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Địa chỉ IP Bootstrap";
+
+/* (UpstreamsController) Fallbacks description */
+"upstreams_description" = "Địa chỉ ngược dòng";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Máy chủ dự phòng";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "Thêm IP tùy chỉnh";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "Địa chỉ IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Phản hồi với địa chỉ IP đã được tiết lập";

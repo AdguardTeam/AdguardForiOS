@@ -542,7 +542,7 @@
 "new_filter_title" = "Novo filtro personalizado";
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
-"new_dns_filter_title" = "Novo filtro de DNS";
+"new_dns_filter_title" = "Novo filtro DNS";
 
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Editar filtro personalizado";
@@ -639,6 +639,9 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Você inseriu um upstream inválido";
+
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Você inseriu um endereço IP inválido";
 
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Protocolo DNS inválido";

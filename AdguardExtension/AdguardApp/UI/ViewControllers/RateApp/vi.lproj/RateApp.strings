@@ -1,0 +1,17 @@
+/* Class = "UILabel"; text = "Please check this instruction:"; ObjectID = "2yq-tf-ruv"; */
+"2yq-tf-ruv.text" = "Vui lòng kiểm tra hướng dẫn này:";
+
+/* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
+"3v5-h9-5E9.normalTitle" = "Vấn đề còn lại";
+
+/* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
+"9GR-EN-yP2.text" = "Bạn có hài lòng với AdGuard không?";
+
+/* Class = "UIButton"; normalTitle = "No, I have a problem"; ObjectID = "OhP-9I-o1V"; */
+"OhP-9I-o1V.normalTitle" = "Không, tôi gặp vấn đề";
+
+/* Class = "UIButton"; normalTitle = "Yes, rate it"; ObjectID = "XCD-6t-VdZ"; */
+"XCD-6t-VdZ.normalTitle" = "Đúng, hãy đánh giá đi";
+
+/* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
+"XGH-Qh-0t0.normalTitle" = "Hiểu rồi, điều này sẽ giúp bạn";

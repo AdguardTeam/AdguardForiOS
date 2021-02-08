@@ -124,7 +124,7 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Режим тунелю";
 
-/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
 "cgV-he-JNk.text" = "Стиль фільтрів AdBlock -> REFUSED, фільтри hosts-style -> адреса вказана чи невказана в правилі";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */

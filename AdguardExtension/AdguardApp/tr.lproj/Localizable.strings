@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Geçersiz üst sunucu girdiniz";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Geçersiz bir IP adresi girdiniz";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Geçersiz DNS protokolü";
 
@@ -904,12 +907,17 @@
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"Yok\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Önyükleme sunucuları";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "IP adresi önyükleme";
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Üst kaynak adresi";
+
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Yedek sunucular";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Özel bir IP ekle";

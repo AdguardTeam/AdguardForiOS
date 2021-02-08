@@ -64,6 +64,9 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
 "IvJ-Oi-vGF.text" = "Nastavitve nizke stopnje";
 
+/* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
+"JQH-8J-wY8.text" = "Zagonski strežniki";
+
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "S tem boste odstranili vaš dejanski profil VPN in onemogočili zaščito DNS";
 
@@ -121,7 +124,7 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Tunelski način";
 
-/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
 "cgV-he-JNk.text" = "Odgovori z ničelnim naslovom IP (0.0.0.0 za A; :: for AAAA) , ko je zaviran s pravilom v slogu AdBlocka; odgovori z naslovom IP , določenem v pravilu, ko je zaviran z /etc/pravilom v slogu gostiteljev";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
@@ -141,6 +144,9 @@
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "V načinu 'Razdeljen-Predor' je AdGuard združljiv s tako imenovanimi aplikacijami 'Osebni VPN'. Kot kompromis, je lahko v tem načinu, sistem zaobiden v primeru slabe povezljivosti.";
+
+/* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
+"k0U-fn-m9X.text" = "Nadomestni strežniki";
 
 /* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
 "lBi-rt-m64.text" = "Prazen IP";
