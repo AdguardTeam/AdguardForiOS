@@ -68,7 +68,10 @@ class StringUtilsTest: XCTestCase {
                          "94.140.14.15:543": "94.140.14.15",
                          "77.88.8.8:3323": "77.88.8.8",
                          "2a10:50c0::1:ffhheu": "2a10:50c0::1:ffhheu",
-                         "[2a10:50c0::bad1:ff]:53": "2a10:50c0::bad1:ff"]
+                         "[2a10:50c0::bad1:ff]:53": "2a10:50c0::bad1:ff",
+                         "tls://dns-unfiltered.adguard.com": "tls://dns-unfiltered.adguard.com",
+                         "https://dns.adguard.com/dns-query": "https://dns.adguard.com/dns-query",
+                         "sdns://AAAAAAAAAAAACTc3Ljg4LjguOA": "sdns://AAAAAAAAAAAACTc3Ljg4LjguOA"]
         
         for (testCase, result) in testCases {
             XCTAssertEqual(testCase.discardPortFromIpAddress(), result)
