@@ -19,9 +19,7 @@
 import UIKit
 
 protocol UpstreamsControllerDelegate: class {
-    func updateCustomAddressDescriptionLabel(text: String)
-    func updateFallbacksDescriptionLabel(text: String)
-    func updateBootstrapsDescriptionLabel(text: String)
+    func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
 class UpstreamsController: BottomAlertController {
@@ -80,22 +78,32 @@ class UpstreamsController: BottomAlertController {
     }
     
     @IBAction func saveAction(_ sender: UIButton) {
-        guard let text = upstreamsTextField.text else { return }
+        guard let text = upstreamsTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let type = upstreamType else { return }
         
-        if upstreamType == .fallback, text == "none" {
-            saveUpstreams(upstreams: [text], upstreamsText: text)
-            vpnManager.updateSettings(completion: nil)
-            dismiss(animated: true)
+        if type == .fallback, text == "none" {
+            applyChanges(addresses: [text])
             return
         }
         
-        let upstreams = transformToArray(address: text)
+        let addresses = transformToArray(address: text)
+        let validAddresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
         
-        checkUpstream(upstreams: upstreams) { [weak self] in
-            DispatchQueue.main.async {
-                self?.saveUpstreams(upstreams: upstreams, upstreamsText: text)
-                self?.vpnManager.updateSettings(completion: nil)
-                self?.dismiss(animated: true)
+        if validAddresses.count != addresses.count && !text.isEmpty {
+            DDLogError("(UppstreamsController) saveAction error - invalid addresses)")
+            let messsage = type == .customAddress ? String.localizedString("invalid_ip_message") : String.localizedString("invalid_upstream_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: messsage)
+            return
+        }
+        
+        switch type {
+        case .customAddress:
+            applyChanges(addresses: validAddresses)
+        case .bootstrap, .fallback:
+            checkUpstream(upstreams: validAddresses) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.applyChanges(addresses: validAddresses)
+                }
             }
         }
     }
@@ -152,19 +160,26 @@ class UpstreamsController: BottomAlertController {
         return ipAddresses
     }
     
-    private func saveUpstreams(upstreams: [String], upstreamsText text: String) {
+    private func applyChanges(addresses: [String]) {
+        saveUpstreams(upstreams: addresses)
+        vpnManager.updateSettings(completion: nil)
+        dismiss(animated: true)
+    }
+    
+    private func saveUpstreams(upstreams: [String]) {
         let address: [String]? = upstreams.isEmpty ? nil : upstreams
+        let text = upstreams.joined(separator: ", ")
         
         switch upstreamType {
         case .bootstrap:
             resources.customBootstrapServers = address
-            delegate?.updateBootstrapsDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .bootstrap, text: text)
         case .fallback:
             resources.customFallbackServers = address
-            delegate?.updateFallbacksDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .fallback, text: text)
         case .customAddress:
             resources.customBlockingIp = address
-            delegate?.updateCustomAddressDescriptionLabel(text: text)
+            delegate?.updateDescriptionLabel(type: .customAddress, text: text)
         default:
             break
         }
