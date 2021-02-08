@@ -39,7 +39,7 @@ class UpstreamsController: BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
-    var upstreamType: UpstreamType!
+    var upstreamType: UpstreamType?
     weak var delegate: UpstreamsControllerDelegate?
     
     
@@ -79,25 +79,30 @@ class UpstreamsController: BottomAlertController {
     
     @IBAction func saveAction(_ sender: UIButton) {
         guard let text = upstreamsTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
+        guard let type = upstreamType else { return }
         
-        if upstreamType == .fallback, text == "none" {
-            saveUpstreams(upstreams: [text], upstreamsText: text)
-            vpnManager.updateSettings(completion: nil)
-            dismiss(animated: true)
+        if type == .fallback, text == "none" {
+            applyChanges(addresses: [text])
             return
         }
         
-        if upstreamType == .customAddress {
-            let ipAddresses = transformToArray(address: text)
-            checkCustomIPAddresses(addresses: ipAddresses, addressesText: text)
-        } else {
-            let upstreams = transformToArray(address: text)
-            
-            checkUpstream(upstreams: upstreams) { [weak self] in
+        let addresses = transformToArray(address: text)
+        let validAddresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
+        
+        if validAddresses.count != addresses.count && !text.isEmpty {
+            DDLogError("(UppstreamsController) saveAction error - invalid addresses)")
+            let messsage = type == .customAddress ? String.localizedString("invalid_ip_message") : String.localizedString("invalid_upstream_message")
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: messsage)
+            return
+        }
+        
+        switch type {
+        case .customAddress:
+            applyChanges(addresses: validAddresses)
+        case .bootstrap, .fallback:
+            checkUpstream(upstreams: validAddresses) { [weak self] in
                 DispatchQueue.main.async {
-                    self?.saveUpstreams(upstreams: upstreams, upstreamsText: upstreams.joined(separator: ", "))
-                    self?.vpnManager.updateSettings(completion: nil)
-                    self?.dismiss(animated: true)
+                    self?.applyChanges(addresses: validAddresses)
                 }
             }
         }
@@ -155,8 +160,15 @@ class UpstreamsController: BottomAlertController {
         return ipAddresses
     }
     
-    private func saveUpstreams(upstreams: [String], upstreamsText text: String) {
+    private func applyChanges(addresses: [String]) {
+        saveUpstreams(upstreams: addresses)
+        vpnManager.updateSettings(completion: nil)
+        dismiss(animated: true)
+    }
+    
+    private func saveUpstreams(upstreams: [String]) {
         let address: [String]? = upstreams.isEmpty ? nil : upstreams
+        let text = upstreams.joined(separator: ", ")
         
         switch upstreamType {
         case .bootstrap:
@@ -207,19 +219,6 @@ class UpstreamsController: BottomAlertController {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
                 }
             }
-        }
-    }
-    
-    private func checkCustomIPAddresses(addresses: [String], addressesText: String) {
-        let validAdвresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
-        if !validAdвresses.isEmpty || addressesText.isEmpty {
-            saveUpstreams(upstreams: validAdвresses, upstreamsText: validAdвresses.joined(separator: ", "))
-            vpnManager.updateSettings(completion: nil)
-            dismiss(animated: true)
-            return
-        } else {
-            DDLogError("(UppstreamsController) saveAction error - custom ip invalid addresses)")
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_ip_message"))
         }
     }
 }
