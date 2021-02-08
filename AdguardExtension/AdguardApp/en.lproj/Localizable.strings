@@ -641,7 +641,7 @@
 "invalid_upstream_message" = "You have entered the invalid upstream";
 
 /* (UpstreamsController) error message text */
-"invalid_ip_message" = "You have entered the invalid IP";
+"invalid_ip_message" = "You have entered an invalid IP address";
 
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Invalid DNS protocol";
