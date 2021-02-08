@@ -39,7 +39,7 @@ class UpstreamsController: BottomAlertController {
     
     private var notificationToken: NotificationToken?
     
-    var upstreamType: UpstreamType?
+    var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
     
     
