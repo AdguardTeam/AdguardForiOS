@@ -904,20 +904,18 @@
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Yapılandırılmış sunucu mevcut olmadığında kullanılacak olan bir DNS çözümleyicisi. Boş bırakırsanız, yedek olarak sistem DNS'sini kullanmak anlamına gelir. \"Yok\" ifadesi, hiçbir şekilde geri dönüş olmadığı anlamına gelir.";
-/* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
 
 /* (UpstreamsController) bootstraps description */
-"upstreams_bootstraps_description" = "Bootstrap IP adresi";
+"upstreams_bootstraps_description" = "IP adresi önyükleme";
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Üst kaynak adresi";
-
-/* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Yedeklemeler";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Özel bir IP ekle";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP adresi";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "El ile ayarlanmış bir IP adresi ile yanıt verin";

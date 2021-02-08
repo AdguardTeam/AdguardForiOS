@@ -905,7 +905,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Un resolver DNS de rezervă care va fi utilizat atunci când serverul configurat nu este disponibil. Un șir gol înseamnă utilizarea DNS-ului sistemului ca rezervă. Iar un șir \"none\" înseamnă că nu există nicio rezervă.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Servere Bootstrap";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Adresa IP bootstrap";
@@ -914,10 +914,13 @@
 "upstreams_description" = "Adresă upstream";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Servere Fallback";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Adăugare de IP personalizat";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "Adresa IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Răspunde cu o adresă IP setată manual";

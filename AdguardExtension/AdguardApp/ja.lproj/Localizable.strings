@@ -88,6 +88,18 @@
 /* (SignInController) user not found message */
 "user_not_found_message" = "このメールアドレスを持つユーザーは見つかりませんでした。%@でアカウントを登録してください。";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "AdGuardアカウントを使う";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Appleで続ける";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Googleで続ける";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Facebookで続ける";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "プレミアムアカウントが有効期限切れです。";
 
@@ -781,6 +793,9 @@
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
 "native_dns_setup_title" = "iOSのDNS設定で「%@」を有効にしてください。";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "ネイティブDNSを有効には、 <b>設定</b>アプリ → <b>一般</b> → <b>VPN & ネットワーク</b> → <b>DNS</b> へ移動して「<b>%@</b>」を選択してください。";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "これまでのAdGuardによる広告ブロックに満足しているかどうかを教えてください。";
 
@@ -886,8 +901,11 @@
 
 /* (LowLevelSettingsController) Low level bootstraps placeholder */
 "low_level_bootstraps_placeholder" = "DOH/DOTホストネーム（あれば）を解決するのに使うべき簡潔なDNSサーバーのリスト";
+
+/* (LowLevelSettingsController) Low level fallbacks placeholder */
+"low_level_fallbacks_placeholder" = "設定されたサーバーが利用できない場合に使用されるフォールバックDNSリゾルバ。空の文字列は、システムデフォルトDNSをフォールバックとして使用することを意味します。 文字列「none」は、フォールバックが一切ないことを意味します。";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps（ブートストラップ）";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP address";
@@ -896,4 +914,13 @@
 "upstreams_description" = "Upstream address";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks (フォールバック)";
+"upstreams_fallbacks_title" = "Fallback servers";
+
+/* (UpstreamsController) Custom address title */
+"upstreams_custom_address_title" = "カスタムIPを追加する";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IPアドレス";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "手動で設定されたIPアドレスで応答します";

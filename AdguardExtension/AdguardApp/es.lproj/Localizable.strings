@@ -904,6 +904,8 @@
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Resolutor DNS alternativo que se usará cuando el servidor configurado no esté disponible. Una cadena vacía significa usar el DNS del sistema como reserva. Una cadena \"ninguno\" significa que no hay reserva en absoluto.";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Dirección IP de arranque";
@@ -912,10 +914,13 @@
 "upstreams_description" = "Dirección del DNS de subida";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Alternativos";
+"upstreams_fallbacks_title" = "Fallback servers";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Añadir IP personalizada";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "Dirección IP";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Responde con una dirección IP establecida manualmente";

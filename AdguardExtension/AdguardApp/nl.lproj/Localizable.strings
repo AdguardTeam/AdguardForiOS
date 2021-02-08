@@ -896,7 +896,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Een reserve DNS-oplossing die zal worden gebruikt als de geconfigureerde server niet beschikbaar is. Een lege string betekent het gebruik van de DNS van je systeem als reserve. Een \"geen\" string betekent geen fallback.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstraps";
+"upstreams_bootstraps_title" = "Bootstrap servers";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-adres";
@@ -905,10 +905,13 @@
 "upstreams_description" = "Upstream adres";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallbacks";
+"upstreams_fallbacks_title" = "Fallback servers";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Aangepast IP-adres toevoegen";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-adres";
+
+/* (BlockingModeController) Custom ip description text */
+"custom_ip_description" = "Reageren met een handmatig ingesteld IP-adres";

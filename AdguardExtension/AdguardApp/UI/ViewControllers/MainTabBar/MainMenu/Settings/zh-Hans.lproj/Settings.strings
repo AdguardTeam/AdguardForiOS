@@ -25,6 +25,9 @@
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Bootstrap IP 地址";
 
+/* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "返回 REFUSED 码响应";
+
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "显示过滤器更新进度条";
 
@@ -61,8 +64,8 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
 "IvJ-Oi-vGF.text" = "低级设置";
 
-/* Class = "UILabel"; text = "Bootstraps"; ObjectID = "JQH-8J-wY8"; */
-"JQH-8J-wY8.text" = "Bootstrap";
+/* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
+"JQH-8J-wY8.text" = "Bootstrap 服务器";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "这个要移除您的VPN配置文件并禁用DNS防护";
@@ -121,8 +124,14 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "隧道模式";
 
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "被 Adblock 规则拦截时反应为零 IP 地址（A记录：0.0.0.0；AAAA记录：::）；被/etc/hosts 规则拦截时反应为规则中指定 IP 地址";
+
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "在网络更改时重启防护";
+
+/* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "返回 NXDOMAIN 应答";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "高级设置";
@@ -136,8 +145,11 @@
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
 "jmQ-ze-hFG.text" = "在半隧道模式中AdGuard与“Personal VPN”应用相兼容。作为权衡，在该模式下，若连接不佳，系统可能会绕过它。";
 
-/* Class = "UILabel"; text = "Fallbacks"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "Fallbacks";
+/* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
+"k0U-fn-m9X.text" = "Fallback 服务器";
+
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "Null IP";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其他";
@@ -153,6 +165,9 @@
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
 "qxo-YS-JWL.text" = "显示状态栏";
+
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "以零 IP 地址响应（A记录 0.0.0.0；AAAA记录 ::）";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "低级设置";
@@ -174,6 +189,9 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "此选项会清除所有的统计数据，例如访问次数等等";
+
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "自定义 IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "除此列表中的网站之外取消屏蔽所有的网站广告";
