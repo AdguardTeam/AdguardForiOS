@@ -132,6 +132,11 @@ extension String {
      Returns initial string if fails to fetch IP address
      */
     func discardPortFromIpAddress() -> String {
+        /// Check if string looks like ip address
+        guard let firstChar = self.first, firstChar == "[" || firstChar.isNumber else {
+            return self
+        }
+        
         if self.contains("[") && self.contains("]") {
             let leftQuotePosition = self.firstIndex(of: "[")!
             let rightQuotePosition = self.firstIndex(of: "]")!
