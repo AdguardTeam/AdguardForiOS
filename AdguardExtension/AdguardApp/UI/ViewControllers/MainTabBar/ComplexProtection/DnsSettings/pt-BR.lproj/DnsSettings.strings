@@ -125,13 +125,13 @@
 "pC4-RU-DaD.text" = "Filtragem de DNS";
 
 /* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
-"pXa-VP-4yy.text" = "Filtros de DNS";
+"pXa-VP-4yy.text" = "Filtros DNS";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "Filtros de segurança, privacidade do DNS, filtros personalizados, etc.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "Filtros de DNS";
+"plc-eu-aXh.text" = "Filtros DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "Nome do servidor";

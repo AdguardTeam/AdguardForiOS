@@ -124,7 +124,7 @@
 /* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
 "cdQ-kW-CG7.text" = "Modo túnel";
 
-/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address in specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
 "cgV-he-JNk.text" = "Responde con dirección IP cero (0.0.0.0 para A; :: para AAAA) cuando está bloqueado por la regla de estilo Adblock; responde con la dirección IP especificada en la regla cuando está bloqueado por una regla de estilo /etc/hosts";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
@@ -146,7 +146,7 @@
 "jmQ-ze-hFG.text" = "En el modo de túnel dividido, AdGuard es compatible con las apps llamadas \"VPN personales\". Como compensación, en este modo puede ser eludido por el sistema en caso de mala conectividad.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "Fallback servers";
+"k0U-fn-m9X.text" = "Servidores alternativos";
 
 /* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
 "lBi-rt-m64.text" = "IP nulo";

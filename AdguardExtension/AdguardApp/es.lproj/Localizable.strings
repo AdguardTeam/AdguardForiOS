@@ -914,7 +914,7 @@
 "upstreams_description" = "Dirección del DNS de subida";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallback servers";
+"upstreams_fallbacks_title" = "Servidores alternativos";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "Añadir IP personalizada";

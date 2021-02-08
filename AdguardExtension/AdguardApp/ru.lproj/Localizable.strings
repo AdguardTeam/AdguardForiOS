@@ -209,7 +209,7 @@
 "adguard_dns_implementation_title" = "AdGuard";
 
 /* (DnsSettingController) Native DNS implementation title */
-"native_dns_implementation_title" = "Нативный";
+"native_dns_implementation_title" = "Нативное";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Без шифрования (Системный DNS)";
@@ -639,6 +639,9 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Вы ввели некорректный upstream";
+
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Вы ввели недействительный IP-адрес";
 
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Недействительный DNS-протокол";
