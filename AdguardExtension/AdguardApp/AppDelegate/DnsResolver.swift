@@ -35,7 +35,14 @@ extension DnsResolverProtocol {
             }
         case .AGSPT_TLS:
             prot = .dot
-            dnsServer = dnsStamp?.providerName
+            let dotPrefix = DnsProtocol.prefixByProtocol[.dot]!
+            guard let dotServer = dnsStamp?.providerName else { break }
+            
+            if dotServer.hasPrefix(dotPrefix) {
+                dnsServer = dotServer
+            } else {
+                dnsServer = dotPrefix + dotServer
+            }
         case .AGSPT_DNSCRYPT:
             prot = .dnsCrypt
             let dnsCryptPrefix = DnsProtocol.prefixByProtocol[.dnsCrypt]!
