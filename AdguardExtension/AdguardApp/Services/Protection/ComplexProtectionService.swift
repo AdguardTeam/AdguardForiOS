@@ -177,12 +177,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
-        // We can't control native DNS configuration, we can only check it's state
-        if resources.dnsImplementation == .native {
-            completion(ComplexProtectionError.invalidDnsImplementation)
-            return
-        }
-        
         switchSystemProtectionInternal(state: enabled, for: VC, completion: completion)
     }
     
