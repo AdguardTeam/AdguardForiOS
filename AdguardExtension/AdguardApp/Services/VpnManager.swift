@@ -60,6 +60,8 @@ class VpnManager: VpnManagerProtocol {
     
     private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
+    private var timer: Timer?
+    
     // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
@@ -396,7 +398,17 @@ class VpnManager: VpnManagerProtocol {
             }
         }
         
-        manager.connection.stopVPNTunnel()
+        /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
+         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
+        DispatchQueue.main.async { [weak self] in
+            self?.timer?.invalidate()
+            self?.timer = nil
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                manager.connection.stopVPNTunnel()
+                self?.timer?.invalidate()
+                self?.timer = nil
+            })
+        }
     }
     
     // check if vpn enabled state was changed outside the application
