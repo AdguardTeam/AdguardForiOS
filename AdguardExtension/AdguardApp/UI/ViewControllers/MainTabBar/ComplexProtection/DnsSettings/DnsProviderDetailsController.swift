@@ -37,6 +37,7 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviderService: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -232,8 +233,12 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     }
     
     private func updateProtocol() {
-        if let prot = provider?.getActiveProtocol(resources) {
-            selectedProtocol = prot
+        if resources.dnsImplementation == .native {
+            selectedProtocol = nativeProviderService.currentServer?.dnsProtocol
+        } else {
+            if let prot = provider?.getActiveProtocol(resources) {
+                selectedProtocol = prot
+            }
         }
     }
     

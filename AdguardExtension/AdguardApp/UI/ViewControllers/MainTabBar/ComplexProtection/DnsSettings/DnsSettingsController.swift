@@ -121,7 +121,9 @@ class DnsSettingsController : UITableViewController {
         if let enabled = stateFromWidget {
             // We set a small delay to show user a state change
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                self?.complexProtection.switchSystemProtection(state: enabled, for: self) { _ in }
+                guard let systemProtectionSwitch = self?.enabledSwitch else { return }
+                systemProtectionSwitch.isOn = enabled
+                self?.toggleEnableSwitch(systemProtectionSwitch)
                 self?.stateFromWidget = nil
                 self?.updateVpnInfo()
             }
