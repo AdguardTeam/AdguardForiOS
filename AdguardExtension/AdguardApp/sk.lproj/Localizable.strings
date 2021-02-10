@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Zadali ste neplatný upstream";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Zadali ste neplatnú IP adresu";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Neplatný DNS protokol";
 

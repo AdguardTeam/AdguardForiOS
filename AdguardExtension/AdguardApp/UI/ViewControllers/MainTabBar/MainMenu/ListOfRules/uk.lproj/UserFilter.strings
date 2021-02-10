@@ -2,7 +2,7 @@
 "5eU-q4-Xed.normalTitle" = "СКАСУВАТИ";
 
 /* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "Правило додано до правил користувача";
+"BfI-YN-iXe.text" = "Правило додано до Правил користувача";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "ЗБЕРЕГТИ";

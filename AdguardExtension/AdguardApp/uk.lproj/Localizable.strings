@@ -14,7 +14,7 @@
 "rule_converting_error" = "Неможливо конвертувати правило. Неправильний текст правила.";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "Не вдається додати ці правила користувача до Safari";
+"filter_rules_converting_error" = "Не вдається додати Правила користувача до Safari";
 
 /* Alert title. On error. */
 "common_error_title" = "Помилка";
@@ -308,7 +308,7 @@
 "failed_updating_current_state_label" = "Фільтри не були оновлені";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Цю ліцензію було активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з невикористовуваних пристроїв у своєму особистому кабінеті на: adguard.com";
+"login_max_computers_exceeded" = "Цю ліцензію активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з пристроїв, якими не користуєтесь, у своєму особистому кабінеті на: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Перед тим, як використовувати це розширення, %1$@ повинен виконати початкову конфігурацію. Відкрийте основну програму %2$@, щоб дозволити зробити це.";
@@ -317,7 +317,7 @@
 "content_blocker_disabled_format" = "Зверніть увагу, що блокувальник вмісту вимкнено. Це означає, що реклама не буде фільтруватися незалежно від налаштувань AdGuard. Щоб почати фільтрування, увімкніть блокувальник вмісту для AdGuard в налаштуваннях Safari.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не була завантажена.";
+"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не завантажено.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Політика безпеки цього сайту не дозволяє запускати помічника AdGuard.";
@@ -404,7 +404,7 @@
 "dns_blacklist_title" = "Список блокування";
 
 /* (ListOfRulesModel) title for safari user filter */
-"safari_userfilter_title" = "Користувацькі правила Safari";
+"safari_userfilter_title" = "Правила користувача для Safari";
 
 /* (ListOfRulesModel) title for export */
 "export" = "Експорт";
