@@ -398,8 +398,8 @@ class VpnManager: VpnManagerProtocol {
             }
         }
         
-        // Resolving problem when user produce multiple restart VPN and broke vpn connection (connection status always "connecting")
-        // https://github.com/AdguardTeam/AdguardForiOS/issues/1719
+        /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
+         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
         DispatchQueue.main.async { [weak self] in
             self?.timer?.invalidate()
             self?.timer = nil
