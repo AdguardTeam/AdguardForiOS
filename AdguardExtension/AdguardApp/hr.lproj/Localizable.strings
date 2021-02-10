@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Unijeli ste nevažeći upstream";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Upisali ste nepravilnu IP adresu";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Nevažeći DNS protokol";
 

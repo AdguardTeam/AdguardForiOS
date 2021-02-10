@@ -575,7 +575,7 @@
 "whotrackme_message" = "Bu bilgi WhoTrackMe.com hizmetinden yüklendi";
 
 /*(DnsRequestDetailsController) action title for info alert  */
-"common_action_more" = "Daha";
+"common_action_more" = "Daha fazla";
 
 /*(DnsFiltersController) action title adding existing filter  */
 "filter_exists" = "Yinelenen bir filtre eklemeye çalıştınız. Bu filtre zaten listede.";
@@ -614,7 +614,7 @@
 "dns_request_user_status_removed_from_blacklist" = "Engelleme listesinden silindi";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "<b>Ayarları</b> aç";
+"onboarding_first_step_text" = "<b>Ayarları</b> açın";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari'ye</b> dokunun ve <b>\"İçerik Engelleyiciler\"</b> menü öğesini seçin";
