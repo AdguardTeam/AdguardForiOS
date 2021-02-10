@@ -365,6 +365,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Gets current server name from vpnManager
      */
     private func getServerName() -> String {
+        
+        if resources.dnsImplementation == .native {
+            return complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
+        }
         guard let server = dnsProvidersService.activeDnsServer else {
             return String.localizedString("system_dns_server")
         }
