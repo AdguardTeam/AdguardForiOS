@@ -60,6 +60,8 @@ class VpnManager: VpnManagerProtocol {
     
     private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
+    private var timer: Timer?
+    
     // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
@@ -396,7 +398,17 @@ class VpnManager: VpnManagerProtocol {
             }
         }
         
-        manager.connection.stopVPNTunnel()
+        // Resolving problem when user produce multiple restart VPN and broke vpn connection (connection status always "connecting")
+        // https://github.com/AdguardTeam/AdguardForiOS/issues/1719
+        DispatchQueue.main.async { [weak self] in
+            self?.timer?.invalidate()
+            self?.timer = nil
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                manager.connection.stopVPNTunnel()
+                self?.timer?.invalidate()
+                self?.timer = nil
+            })
+        }
     }
     
     // check if vpn enabled state was changed outside the application
