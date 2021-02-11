@@ -247,6 +247,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         */
 
         if !fromOnboarding {
+            self.navigationController?.popToRootViewController(animated: false)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.dismissToMainPage(animated: true)
             notificationService.postNotificationInForeground(body: message, title: "")
