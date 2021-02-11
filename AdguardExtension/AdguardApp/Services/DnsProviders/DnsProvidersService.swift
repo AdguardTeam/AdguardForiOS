@@ -74,7 +74,7 @@ import Foundation
     */
     private var languageMap = ["es": "es-ES",
                                "zh-Hans": "zh-CN",
-                               "zh-Hant:": "zh-TW"]
+                               "zh-Hant": "zh-TW"]
     
     private var currentLocaleCode: String
     
