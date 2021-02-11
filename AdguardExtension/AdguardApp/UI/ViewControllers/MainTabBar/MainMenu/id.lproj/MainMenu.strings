@@ -1,3 +1,8 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "Alamat email salah";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
+"5nl-wn-tlv.text" = "Deskripsi:";
 
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Dukungan";
@@ -23,11 +28,23 @@
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Pengaturan";
 
+/* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
+"LHx-0a-FxM.text" = "Kirim detail informasi sistem tentang proses yang berjalan dan log aplikasi";
+
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Apa itu AdGuard?";
 
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "Pb4-Gm-t4i"; Note = "(Main Menu) Advanced Settings caption"; */
+"Pb4-Gm-t4i.text" = "FAQ";
+
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Pengaturan";
+
+/* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Kirim detail info sistem";
+
+/* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
+"W6h-Gt-MMt.text" = "Diskusikan di forum kami, di jejaring sosial, atau di GitHub";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Pengaturan";
@@ -40,6 +57,15 @@
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "Anda dapat mengulas aplikasi di App Store";
+
+/* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
+"dNj-vb-TQe.text" = "Pertanyaan yang sering diajukan";
+
+/* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
+"fva-Rp-ExO.text" = "Kirimkan permintaan fitur dan saran";
+
+/* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
+"gap-Uy-5ka.placeholder" = "Alamat email";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Cara blokir iklan dengan AdGuard";
@@ -56,11 +82,23 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
 "r4M-ec-gKY.text" = "Proteksi DNS";
 
+/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Alamat email Anda (opsional):";
+
+/* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
+"rlh-5H-fPk.text" = "Diskusi";
+
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
 "se6-jk-4Az.text" = "Langganan dan akun";
 
+/* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
+"srJ-sd-sZF.text" = "Pesan";
+
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "Tentang";
+
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "xJd-fJ-cmx"; Note = "(Main Menu) Advanced Settings caption"; */
+"xJd-fJ-cmx.text" = "Beri umpan balik";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "Tampilan dan lainnya";
