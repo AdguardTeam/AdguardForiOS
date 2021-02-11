@@ -43,24 +43,27 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     init(purchaseService: PurchaseServiceProtocol) {
         self.purchaseService = purchaseService
         
+        DDLogInfo("(SetappService) - init; purchasedThroughSetapp = \(purchaseService.purchasedThroughSetapp)")
         if purchaseService.purchasedThroughSetapp {
             purchaseService.updateSetappState(subscription: SetappManager.shared.subscription)
         }
     }
     
     func start() {
+        DDLogInfo("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); purchasedThroughSetapp = \(purchaseService.purchasedThroughSetapp)")
         if purchaseService.purchasedThroughSetapp {
             startManager()
         }
     }
     
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
-        
         if url.scheme == Bundle.main.bundleIdentifier {
             
             startManager()
             
             if SetappManager.shared.canOpen(url: url) {
+                DDLogInfo("(SetappService) - Setapp can openUrl; url: \(url)")
+                
                 return SetappManager.shared.open(url: url, options: options) { result in
                     switch result {
                     case .success(let subscription):
@@ -87,12 +90,11 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     // MARK: -- private methods
     
     private func startManager() {
+        DDLogInfo("(SetappService) - startManager; start = \(started)")
         
         if started {
             return
         }
-        
-        DDLogInfo("(SetappService) - start manager")
         
         SetappManager.shared.start(with: .default)
         SetappManager.logLevel = .debug

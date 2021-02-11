@@ -464,13 +464,13 @@ class AppDelegateHelper: NSObject {
 
     }
     
-
-    
     private func addPurchaseStatusObserver() {
         if purchaseObservation == nil {
             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
                 guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-                        
+                
+                DDLogInfo("(AppDelegateHelper) - Received notification type = \(type)")
+                
                 if type == PurchaseService.kPSNotificationPremiumExpired {
                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
                 }
