@@ -694,7 +694,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
      
     // MARK: helper methods
     
-    private func processLoginResult(_ error: Error?)->Bool {
+    @discardableResult private func processLoginResult(_ error: Error?)->Bool {
         
         DDLogInfo("(PurchaseService) processLoginResult")
         if error != nil {
@@ -843,6 +843,8 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func updateSetappState(subscription: SetappSubscription) {
+        DDLogInfo("(PurchaseService) - updateSetappState; sub is active = \(subscription.isActive); saved state = \(resources.purchasedThroughSetapp)")
+        
         if (subscription.isActive && !resources.purchasedThroughSetapp) ||
             !subscription.isActive && resources.purchasedThroughSetapp {
             resources.purchasedThroughSetapp = subscription.isActive

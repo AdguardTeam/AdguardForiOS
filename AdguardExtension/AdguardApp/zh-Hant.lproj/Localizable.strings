@@ -86,7 +86,7 @@
 "lost_password" = "弄丟了密碼嗎？";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "未找到具有此電子郵件地址的使用者。請您首先透過 %@ 註冊。";
+"user_not_found_message" = "未找到符合此電子郵件地址的用戶。請先在 %@ 註冊。";
 
 /* (SignInController) SignIn via AdGuard account title */
 "sign_in_via_adguard_title" = "使用 AdGuard 帳戶";
@@ -626,7 +626,7 @@
 "default_dns_server_name" = "系統 DNS";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "使用由您的 ISP（網際網路服務供應商）提供之系統預設 DNS 伺服器";
+"default_dns_server_description" = "使用由您的網際網路服務供應商提供之系統預設 DNS 伺服器";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "封鎖該請求";
