@@ -147,7 +147,9 @@ class DnsRequestLogViewModel {
      */
     var records: [DnsLogRecordExtended] {
         get {
-            return searchString.count > 0 ? searchRecords : allRecords
+            workingQueue.sync {
+                return searchString.count > 0 ? searchRecords : allRecords
+            }
         }
     }
     
