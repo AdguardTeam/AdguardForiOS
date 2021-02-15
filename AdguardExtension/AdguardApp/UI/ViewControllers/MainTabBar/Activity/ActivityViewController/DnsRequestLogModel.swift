@@ -209,12 +209,12 @@ class DnsRequestLogViewModel {
     }
     
     func clearRecords(){
-        workingQueue.async { [weak self] in
+        workingQueue.sync { [weak self] in
             self?.dnsLogService.clearLog()
             self?.allRecords = []
             self?.searchRecords = []
-            self?.delegate?.requestsCleared()
         }
+        delegate?.requestsCleared()
     }
     
     private func obtainRecordsInternal(for type: ChartDateType, domains: Set<String>? = nil) {
