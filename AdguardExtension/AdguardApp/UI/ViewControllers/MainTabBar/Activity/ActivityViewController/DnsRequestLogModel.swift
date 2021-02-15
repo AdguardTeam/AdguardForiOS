@@ -168,7 +168,7 @@ class DnsRequestLogViewModel {
      */
     var searchString: String {
         didSet {
-            workingQueue.async { [weak self] in
+            workingQueue.sync { [weak self] in
                 guard let searchLowercased = self?.searchString.lowercased() else { return }
                 guard let allRecords = self?.allRecords else { return }
                 self?.searchRecords = allRecords.filter { $0.logRecord.domain.lowercased().contains( searchLowercased ) }
