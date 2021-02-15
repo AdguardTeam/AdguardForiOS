@@ -168,9 +168,12 @@ class DnsRequestLogViewModel {
      */
     var searchString: String {
         didSet {
-            let searchLowercased = searchString.lowercased()
-            searchRecords = allRecords.filter { $0.logRecord.domain.lowercased().contains( searchLowercased ) }
-            recordsObserver?(self.records)
+            workingQueue.sync { [weak self] in
+                guard let searchLowercased = self?.searchString.lowercased() else { return }
+                guard let allRecords = self?.allRecords else { return }
+                self?.searchRecords = allRecords.filter { $0.logRecord.domain.lowercased().contains( searchLowercased ) }
+            }
+            recordsObserver?(records)
         }
     }
     
@@ -206,10 +209,12 @@ class DnsRequestLogViewModel {
     }
     
     func clearRecords(){
-        dnsLogService.clearLog()
-        allRecords = []
-        searchRecords = []
-        delegate?.requestsCleared()
+        workingQueue.async { [weak self] in
+            self?.dnsLogService.clearLog()
+            self?.allRecords = []
+            self?.searchRecords = []
+            self?.delegate?.requestsCleared()
+        }
     }
     
     private func obtainRecordsInternal(for type: ChartDateType, domains: Set<String>? = nil) {
