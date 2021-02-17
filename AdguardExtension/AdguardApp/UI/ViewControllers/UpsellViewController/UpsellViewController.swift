@@ -25,6 +25,7 @@ class UpsellViewController: UIViewController {
     
     @IBAction func installButtonTapped(_ sender: UIButton) {
         UIApplication.openAdGuardVpnAppStorePage()
+        dismiss(animated: true)
     }
     
     // MARK: - Private methods
