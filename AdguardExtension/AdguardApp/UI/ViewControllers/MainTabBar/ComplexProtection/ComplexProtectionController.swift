@@ -66,21 +66,42 @@ class ComplexProtectionController: UITableViewController {
     @IBOutlet weak var premiumTextViewHeight: NSLayoutConstraint!
     @IBOutlet weak var premiumTextViewSpacing: NSLayoutConstraint!
     
+    // MARK: - AdGuard VPN upsell outlets
+    
+    @IBOutlet weak var adguardVpnIcon: UIImageView!
+    @IBOutlet weak var notIntalledTextView: UITextView! {
+        didSet{
+            notIntalledTextView.text = notIntalledTextView.text.uppercased()
+            notIntalledTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+            
+            notIntalledTextView.layer.borderColor = UIColor(hexString: "#a4a4a4").cgColor
+            notIntalledTextView.layer.borderWidth = 1.0
+            
+            notIntalledTextView.clipsToBounds = true
+            notIntalledTextView.layer.cornerRadius = 4.0
+        }
+    }
+    
+    @IBOutlet weak var notInstalledTextViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var notInstalledTextViewSpacing: NSLayoutConstraint!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
     // MARK: - Variables
     
+    // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
+    // Observers
     private var themeNotification: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
     private var proObservation: NSKeyValueObservation?
+    private var appWillEnterForegroundObservation: NotificationToken?
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -94,6 +115,7 @@ class ComplexProtectionController: UITableViewController {
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
+    private let adguardVpnCell = 2
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -105,18 +127,8 @@ class ComplexProtectionController: UITableViewController {
     
         updateTheme()
 
-        themeNotification = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeProStatus()
-        }
-        
-        vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in
-            self?.updateVpnInfo()
-        }
+        addObservers()
+        updateAdGuardVpnStatus()
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
@@ -209,6 +221,17 @@ class ComplexProtectionController: UITableViewController {
         return UIView()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == protectionSection, indexPath.row == adguardVpnCell {
+            if UIApplication.adGuardVpnIsInstalled {
+                UIApplication.openAdGuardVpnAppIfInstalled()
+            } else {
+                presentUpsellScreen()
+            }
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: - Observer
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -234,6 +257,25 @@ class ComplexProtectionController: UITableViewController {
         theme.setupLabels(themableLabels)
         
         tableView.reloadData()
+    }
+    
+    private func addObservers() {
+        themeNotification = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
+            self?.updateTheme()
+        }
+        
+        proObservation = configuration.observe(\.proStatus) {[weak self] _, _ in
+            guard let self = self else { return }
+            self.observeProStatus()
+        }
+        
+        vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.updateVpnInfo()
+        }
+        
+        appWillEnterForegroundObservation = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: { [weak self] _ in
+            self?.updateAdGuardVpnStatus()
+        })
     }
     
     /**
@@ -270,5 +312,18 @@ class ComplexProtectionController: UITableViewController {
         let protectionEnabled = complexProtection.safariProtectionEnabled
         safariProtectionSwitch.isOn = protectionEnabled
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+    }
+    
+    private func updateAdGuardVpnStatus() {
+        let installed = UIApplication.adGuardVpnIsInstalled
+        adguardVpnIcon.tintColor = installed ? enabledColor : disabledColor
+        
+        let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
+        let height: CGFloat = isBigScreen ? 26.0 : 18.0
+        
+        notInstalledTextViewHeight.constant = installed ? 0.0 : height
+        notInstalledTextViewSpacing.constant = installed ? 0.0 : 12.0
+        
+        tableView.reloadData()
     }
 }

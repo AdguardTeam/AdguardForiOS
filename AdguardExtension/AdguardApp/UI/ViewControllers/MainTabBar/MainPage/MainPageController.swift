@@ -49,6 +49,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     @IBOutlet weak var safariProtectionButton: RoundRectButton!
     @IBOutlet weak var systemProtectionButton: RoundRectButton!
+    @IBOutlet weak var vpnUpsellButton: RoundRectButton!
     
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
     @IBOutlet weak var protectionStatusLabel: ThemableLabel!
@@ -220,6 +221,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
         
         processDnsServerChange()
+        checkAdGuardVpnIsInstalled()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -346,6 +348,14 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             performSegue(withIdentifier: getProSegueId, sender: self)
         }
         updateProtectionStates()
+    }
+    
+    @IBAction func vpnUpsellTapped(_ sender: RoundRectButton) {
+        if UIApplication.adGuardVpnIsInstalled {
+            UIApplication.openAdGuardVpnAppIfInstalled()
+        } else {
+            presentUpsellScreen()
+        }
     }
     
     // MARK: - Complex protection switch action
@@ -564,6 +574,13 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     }
     
     /**
+    Checks if AdGuard VPN is installed and changes VPN upsell button color
+    */
+    private func checkAdGuardVpnIsInstalled() {
+        vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsInstalled
+    }
+    
+    /**
      Adds observers to controller
      */
     private func addObservers(){
@@ -575,6 +592,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
+            self?.checkAdGuardVpnIsInstalled()
         })
         
         let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
@@ -866,7 +884,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         systemIconWidth.constant = 24.0
         systemIconHeight.constant = 24.0
         
-        safariIconCenterSpace.constant = -20.0
+        safariIconCenterSpace.constant = 20.0
         systemIconCenterSpace.constant = 20.0
         
         protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)

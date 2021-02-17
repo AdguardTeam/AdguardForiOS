@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UpsellViewController" customModule="Adguard" customModuleProvider="target">
+            <connections>
+                <outlet property="installButton" destination="QUd-Cq-s4r" id="kJ5-pf-Yfb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVS-yh-bFk">
+                    <rect key="frame" x="772" y="16" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="lOH-Og-90B">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="24" id="qF3-Bj-ENM">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                    </constraints>
+                    <state key="normal" backgroundImage="cross"/>
+                    <connections>
+                        <action selector="crossTapped:" destination="-1" eventType="touchUpInside" id="Wy6-ks-1WV"/>
+                    </connections>
+                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vpn_big_logo" translatesAutoresizingMaskIntoConstraints="NO" id="1Wd-Wp-frH">
+                    <rect key="frame" x="287" y="808.5" width="246" height="47.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="1Wd-Wp-frH" secondAttribute="height" multiplier="31:6" id="CcL-Hi-fnH"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="755" text="Boost your privacy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F39-yu-JFf">
+                    <rect key="frame" x="48" y="904" width="724" height="48"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="755" text="No compromises! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mC8-Ix-Hei">
+                    <rect key="frame" x="48" y="960" width="724" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    </variation>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUd-Cq-s4r">
+                    <rect key="frame" x="48" y="1072" width="724" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="4b1-hK-QAn"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="Install"/>
+                    <connections>
+                        <action selector="installButtonTapped:" destination="-1" eventType="touchUpInside" id="Wi4-hh-0Xh"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="QtV-dU-M5N">
+                    <rect key="frame" x="0.0" y="48" width="820" height="760.5"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upsell" translatesAutoresizingMaskIntoConstraints="NO" id="KAw-Nx-OcZ">
+                            <rect key="frame" x="164" y="170.5" width="492" height="419.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="KAw-Nx-OcZ" secondAttribute="height" multiplier="129:110" id="gAz-pw-HhX"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="KAw-Nx-OcZ" secondAttribute="bottom" constant="48" id="GYg-FK-pGT"/>
+                        <constraint firstItem="KAw-Nx-OcZ" firstAttribute="width" secondItem="QtV-dU-M5N" secondAttribute="width" multiplier="0.9" id="GnQ-7i-9Xk"/>
+                        <constraint firstItem="KAw-Nx-OcZ" firstAttribute="centerY" secondItem="QtV-dU-M5N" secondAttribute="centerY" id="HcP-Oc-c0I"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KAw-Nx-OcZ" secondAttribute="bottom" constant="48" id="PPc-ou-jqT"/>
+                        <constraint firstItem="KAw-Nx-OcZ" firstAttribute="centerX" secondItem="QtV-dU-M5N" secondAttribute="centerX" id="U0L-cd-Z67"/>
+                        <constraint firstItem="KAw-Nx-OcZ" firstAttribute="width" secondItem="QtV-dU-M5N" secondAttribute="width" multiplier="0.6" priority="750" id="VJC-IR-uuK"/>
+                        <constraint firstItem="KAw-Nx-OcZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QtV-dU-M5N" secondAttribute="top" constant="48" id="siz-I9-8hL"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="GYg-FK-pGT"/>
+                            <exclude reference="GnQ-7i-9Xk"/>
+                            <exclude reference="PPc-ou-jqT"/>
+                            <exclude reference="VJC-IR-uuK"/>
+                            <exclude reference="siz-I9-8hL"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="GnQ-7i-9Xk"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="PPc-ou-jqT"/>
+                            <include reference="VJC-IR-uuK"/>
+                            <include reference="siz-I9-8hL"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="F39-yu-JFf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="13z-xT-HtX">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QtV-dU-M5N" secondAttribute="trailing" id="2eS-zK-Hgj"/>
+                <constraint firstItem="QtV-dU-M5N" firstAttribute="top" secondItem="KVS-yh-bFk" secondAttribute="bottom" id="55F-mu-7gw"/>
+                <constraint firstItem="QUd-Cq-s4r" firstAttribute="top" secondItem="mC8-Ix-Hei" secondAttribute="bottom" constant="32" id="9Gh-Zd-gtW">
+                    <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                </constraint>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="F39-yu-JFf" secondAttribute="trailing" constant="24" id="9MZ-Du-X8J">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="1Wd-Wp-frH" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="9ua-OP-6Jz"/>
+                <constraint firstItem="mC8-Ix-Hei" firstAttribute="top" secondItem="F39-yu-JFf" secondAttribute="bottom" constant="8" id="EhT-Vl-UKR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QUd-Cq-s4r" secondAttribute="trailing" constant="16" id="Gpi-pe-ycV">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="1Wd-Wp-frH" firstAttribute="top" secondItem="QtV-dU-M5N" secondAttribute="bottom" id="Q2g-7n-ye1"/>
+                <constraint firstItem="1Wd-Wp-frH" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="Rik-KN-OBe"/>
+                <constraint firstItem="1Wd-Wp-frH" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="SPK-XX-fYQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mC8-Ix-Hei" secondAttribute="trailing" constant="24" id="V1A-CX-rPy">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="F39-yu-JFf" firstAttribute="top" secondItem="1Wd-Wp-frH" secondAttribute="bottom" constant="24" id="bB4-h5-LgX">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KVS-yh-bFk" secondAttribute="trailing" constant="16" id="bQ8-6E-Jty"/>
+                <constraint firstItem="mC8-Ix-Hei" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cWS-yr-cBZ">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="QtV-dU-M5N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="d1d-kC-M3i"/>
+                <constraint firstItem="QUd-Cq-s4r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="jFj-JN-hVv">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QUd-Cq-s4r" secondAttribute="bottom" constant="32" id="mf2-Qa-oC7">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="KVS-yh-bFk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="q9c-XN-qUG"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="9ua-OP-6Jz"/>
+                    <exclude reference="Rik-KN-OBe"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="9ua-OP-6Jz"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="Rik-KN-OBe"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="137.68115942028987" y="153.34821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cross" width="24" height="24"/>
+        <image name="upsell" width="258" height="220"/>
+        <image name="vpn_big_logo" width="124" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
