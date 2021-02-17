@@ -49,7 +49,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/Onboarding/en.lproj/Onboarding.strings",
         "AdguardExtension/AdGuardTodayExtension/en.lproj/TodayExtension.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/en.lproj/RateApp.strings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings/en.lproj/ImportSettings.strings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings/en.lproj/ImportSettings.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController/en.lproj/UpsellViewController.strings"
     ],
     "storyboard_dirs": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
@@ -66,7 +67,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/Settings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules",
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController"
     ]
   }
 ]
