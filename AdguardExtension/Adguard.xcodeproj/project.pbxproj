@@ -11245,8 +11245,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.3;
+				branch = adguard;
+				kind = branch;
 			};
 		};
 		D06E2F89253F0E24008BBD2D /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
