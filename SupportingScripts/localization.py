@@ -82,7 +82,7 @@ for path in TWOSKY_CONFIG["storyboard_dirs"]:
     print(path)
 
     localisationFiles = os.listdir(path)
-    localisationFiles = filter(lambda x: x.endswith('.storyboard'), localisationFiles)
+    localisationFiles = filter(lambda x: x.endswith('.storyboard') or x.endswith('.xib'), localisationFiles)
     for xibFile in localisationFiles:
         xibFilePath = os.path.join(path, xibFile)
         stringsFile = os.path.splitext(xibFile)[0] + ".strings"
