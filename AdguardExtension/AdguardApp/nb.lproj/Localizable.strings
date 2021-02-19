@@ -82,6 +82,18 @@
 /* (LoginController) lost password button title */
 "lost_password" = "Har du glemt passordet?";
 
+/* (SignInController) SignIn via AdGuard account title */
+"sign_in_via_adguard_title" = "Bruk AdGuard-konto";
+
+/* (SignInController) SignIn via Apple account title */
+"sign_in_via_apple_title" = "Fortsett med Apple";
+
+/* (SignInController) SignIn via Google account title */
+"sign_in_via_google_title" = "Fortsett med Google";
+
+/* (SignInController) SignIn via Facebook account title */
+"sign_in_via_facebook_title" = "Fortsett med Facebook";
+
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Premium-kontoen din har utløpt";
 
@@ -756,3 +768,6 @@
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Oppstrømsadresse";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP-adresse";

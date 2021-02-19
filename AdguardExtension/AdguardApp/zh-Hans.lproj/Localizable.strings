@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "您输入了非法的上游服务器";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "您输入的 IP 地址无效";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "无效的 DNS 协议";
 

@@ -1,9 +1,8 @@
-
 /* Class = "UILabel"; text = "Boost your privacy"; ObjectID = "F39-yu-JFf"; */
-"F39-yu-JFf.text" = "Boost your privacy";
+"F39-yu-JFf.text" = "Posilnite svoje súkromie";
 
 /* Class = "UIButton"; normalTitle = "Install"; ObjectID = "QUd-Cq-s4r"; */
-"QUd-Cq-s4r.normalTitle" = "Install";
+"QUd-Cq-s4r.normalTitle" = "Inštalovať";
 
-/* Class = "UILabel"; text = "No compromises! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!"; ObjectID = "mC8-Ix-Hei"; */
-"mC8-Ix-Hei.text" = "No compromises! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!";
+/* Class = "UILabel"; text = "No compromise! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!"; ObjectID = "mC8-Ix-Hei"; */
+"mC8-Ix-Hei.text" = "Žiadny kompromis! S AdGuard VPN môžete zostať 100% anonymný a zároveň si užívať výhody blokovača reklám!";

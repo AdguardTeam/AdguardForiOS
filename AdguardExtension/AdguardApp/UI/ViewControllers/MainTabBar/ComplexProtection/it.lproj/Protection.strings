@@ -4,11 +4,20 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
+"Xkp-BS-f97.text" = "Non installata";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Protezione DNS";
 
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "AdGuard VPN";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";
+
+/* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
+"lJO-ae-oJu.text" = "Un servizio VPN veloce e affidabile che funzionerà perfettamente insieme al blocco degli annunci AdGuard.";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "Questo modulo ti consente di utilizzare un DNS personalizzato e di migliorare la tua privacy crittografando le tue richieste DNS.";

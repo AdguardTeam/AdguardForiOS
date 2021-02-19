@@ -4,11 +4,20 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "프리미엄";
 
+/* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
+"Xkp-BS-f97.text" = "설치되지 않음";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS 보호";
 
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "AdGuard VPN";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "무료";
+
+/* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
+"lJO-ae-oJu.text" = "AdGuard 광고 차단기와 완벽히 호환되며 빠르고 안정적인 VPN 서비스.";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "이 모듈을 사용하면 사용자 정의 DNS 서버를 사용할 수 있으며 DNS 쿼리를 암호화하여 개인정보 보호 기능을 향상시킬 수 있습니다.";

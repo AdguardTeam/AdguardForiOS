@@ -110,7 +110,7 @@
 "not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarı yok.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard premium sürümü etkinleştirildi.";
+"login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarlarının süresi doldu.";
@@ -125,7 +125,7 @@
 "nothing_to_restore_message" = "Geri yüklenecek satın alma yok";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Satın alma başarıyla tamamlandı! iOS için AdGuard premium sürümü etkinleştirildi.";
+"purchase_success_message" = "Satın alma işlemi başarıyla tamamlandı! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Satın alma işleminiz gerçekleştirilirken bir hata oluştu.";
