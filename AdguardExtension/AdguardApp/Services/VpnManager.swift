@@ -165,9 +165,11 @@ class VpnManager: VpnManagerProtocol {
             self?.timer?.invalidate()
             self?.timer = nil
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                self?.makeUpdateSettings(completion: completion)
-                self?.timer?.invalidate()
-                self?.timer = nil
+                self?.makeUpdateSettings { error in
+                    completion?(error)
+                    self?.timer?.invalidate()
+                    self?.timer = nil
+                }
             })
         }
     }
