@@ -23,7 +23,7 @@
 "teo-vm-NRJ.text" = "Questo modulo ti consente di utilizzare un DNS personalizzato e di migliorare la tua privacy crittografando le tue richieste DNS.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Questo modulo blocca gli annunci ed i tracciatori sui siti web aperti in Safari. È possibile scegliere tra diverse liste di filtri o aggiungere i propri nelle impostazioni seguenti";
+"vlx-BS-A2y.text" = "Questo modulo blocca annunci e traccianti sui siti web aperti in Safari. È possibile scegliere tra diverse liste di filtri o aggiungere i propri nelle impostazioni seguenti";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Protezione";

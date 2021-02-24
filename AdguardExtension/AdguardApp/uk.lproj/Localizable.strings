@@ -86,7 +86,7 @@
 "lost_password" = "Забули пароль?";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "Не знайдено коричтувача з такою електронною адресою. Зареєструйтесь спершу на %@.";
+"user_not_found_message" = "Не знайдено користувача з такою адресою е-пошти. Спочатку зареєструйтесь на %@.";
 
 /* (SignInController) SignIn via AdGuard account title */
 "sign_in_via_adguard_title" = "Обліковий запис AdGuard";
@@ -317,7 +317,7 @@
 "content_blocker_disabled_format" = "Зверніть увагу, що блокувальник вмісту вимкнено. Це означає, що реклама не буде фільтруватися незалежно від налаштувань AdGuard. Щоб почати фільтрування, увімкніть блокувальник вмісту для AdGuard в налаштуваннях Safari.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не завантажено.";
+"hostname_obtaining_error" = "Ім'я домену не отримано. Можливо, ця сторінка ще не була завантажена.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Політика безпеки цього сайту не дозволяє запускати помічника AdGuard.";
@@ -902,7 +902,7 @@
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
 "low_level_fallbacks_placeholder" = "Резервний сервер DNS, що буде використовуватись якщо налаштований сервер недоступний. Порожній рядок означає, що використовуватиметься системний DNS, як резервний. Рядок \"none\" означає, що резервний сервер DNS не використовується взагалі.";
 /* (UpstreamsController) bootstraps title */
-"upstreams_bootstraps_title" = "Bootstrap servers";
+"upstreams_bootstraps_title" = "Bootstrap сервери";
 
 /* (UpstreamsController) bootstraps description */
 "upstreams_bootstraps_description" = "Bootstrap IP-адреса";
@@ -911,13 +911,13 @@
 "upstreams_description" = "Upstream-адреса";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallback servers";
+"upstreams_fallbacks_title" = "Fallback сервери";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "Додати власний IP";
+"upstreams_custom_address_title" = "Додати власну IP-адресу";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-адреса";
 
 /* (BlockingModeController) Custom ip description text */
-"custom_ip_description" = "Відповісти із вручну встановленою IP-адресою";
+"custom_ip_description" = "Відповідати з встановленою вручну IP-адресою";

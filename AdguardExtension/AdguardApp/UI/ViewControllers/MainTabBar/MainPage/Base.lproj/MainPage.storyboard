@@ -833,6 +833,8 @@
                         <outlet property="systemIconWidth" destination="2j6-wO-ZJl" id="Ets-n2-dCj"/>
                         <outlet property="systemProtectionButton" destination="OPP-0X-avj" id="1dQ-4g-bzx"/>
                         <outlet property="updateButton" destination="mZo-6k-bpe" id="SrB-0p-XgZ"/>
+                        <outlet property="vpnPromoIconHeight" destination="kQi-5a-Zqu" id="fSx-Mt-9tg"/>
+                        <outlet property="vpnPromoIconWidth" destination="ZGQ-eN-i0f" id="GXD-GR-uN7"/>
                         <outlet property="vpnUpsellButton" destination="zlh-1r-bOU" id="nCR-72-eBX"/>
                         <outletCollection property="themableLabels" destination="lYA-et-eyV" collectionClass="NSMutableArray" id="bFH-X3-4x4"/>
                         <outletCollection property="themableLabels" destination="0R2-2n-Sft" collectionClass="NSMutableArray" id="DHV-K7-bLW"/>

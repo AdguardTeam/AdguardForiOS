@@ -118,6 +118,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
     @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var vpnPromoIconWidth: NSLayoutConstraint!
+    @IBOutlet weak var vpnPromoIconHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
     @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
     
@@ -883,6 +886,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         systemIconWidth.constant = 24.0
         systemIconHeight.constant = 24.0
+        
+        vpnPromoIconWidth.constant = 24.0
+        vpnPromoIconHeight.constant = 24.0
         
         safariIconCenterSpace.constant = 20.0
         systemIconCenterSpace.constant = 20.0
