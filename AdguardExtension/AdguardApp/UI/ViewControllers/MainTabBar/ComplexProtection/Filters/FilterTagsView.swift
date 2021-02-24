@@ -154,7 +154,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         setNeedsLayout()
     }
     
-    private func setupLangButton(lang: (name: String, heighlighted: Bool)){
+    private func setupLangButton(lang: (name: String, highlighted: Bool)){
         let langButton = TagButton()
         langButton.delegate = self.delegate
         
@@ -162,7 +162,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         langButton.setImage(UIImage(named: lang.name), for: .normal)
         langButton.imageView?.contentMode = .scaleAspectFill
         if highlightIsOn{
-            langButton.alpha = lang.heighlighted ? 0.3 : 1.0
+            langButton.alpha = lang.highlighted ? 0.3 : 1.0
         }
         langButton.layer.cornerRadius = tagCornerRadius
         langButton.layer.masksToBounds = true
@@ -173,7 +173,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         addSubview(langButton)
     }
     
-    private func setupTagButton(tag: (name: String,heighlighted: Bool)){
+    private func setupTagButton(tag: (name: String, highlighted: Bool)){
         let tagButton = TagButton()
         tagButton.delegate = self.delegate
         
@@ -185,7 +185,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         tagButton.titleLabel?.font = tagFont
         tagButton.layer.cornerRadius = tagCornerRadius
         if highlightIsOn{
-            tagButton.alpha = tag.heighlighted ? 0.3 : 1.0
+            tagButton.alpha = tag.highlighted ? 0.3 : 1.0
         }
         tagButton.name = tag.name
         theme.setupTagButton(tagButton)
