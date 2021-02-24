@@ -73,7 +73,7 @@ class BugReportController: UIViewController {
     // MARK: - Actions
     
     @IBAction func detailedInfoButtonTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
+        detailedInfoButton.isSelected = !detailedInfoButton.isSelected
     }
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
