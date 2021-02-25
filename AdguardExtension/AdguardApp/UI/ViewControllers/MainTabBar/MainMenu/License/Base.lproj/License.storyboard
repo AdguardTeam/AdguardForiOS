@@ -838,14 +838,14 @@ ADS &amp; TRACKERS</string>
                                                 </variation>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3iu-SA-2Ay">
-                                                <rect key="frame" x="28" y="97" width="712" height="26"/>
+                                                <rect key="frame" x="28" y="96" width="358" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="pNP-oN-fyq">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="26"/>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>

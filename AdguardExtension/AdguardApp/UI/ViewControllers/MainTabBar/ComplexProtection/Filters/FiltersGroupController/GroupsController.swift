@@ -147,7 +147,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
         cell.icon.image = UIImage(named: group.iconName ?? "")
-        
+        theme.setupSeparator(cell.separator)
         theme.setupLabels(cell.themableLabels)
         
         if group.proOnly && !configuration.proStatus {
@@ -161,6 +161,10 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         }
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
+        
+        if let lastIndex = viewModel?.constantAllGroups.count, indexPath.row == lastIndex - 1 {
+            cell.separator.isHidden = true
+        }
         
         return cell
     }

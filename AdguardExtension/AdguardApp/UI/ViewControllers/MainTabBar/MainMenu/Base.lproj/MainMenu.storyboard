@@ -1367,6 +1367,12 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEP-so-w07">
                                                 <rect key="frame" x="0.0" y="256.5" width="414" height="0.0"/>
                                                 <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEv-9b-V2b">
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="0.0"/>
+                                                        <connections>
+                                                            <action selector="detailedInfoButtonTapped:" destination="dW7-TV-Sn0" eventType="touchUpInside" id="I95-h3-7ED"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send detailed system info" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7E-QE-uIA" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="56" y="0.0" width="342" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1404,13 +1410,17 @@
                                                     <constraint firstItem="LHx-0a-FxM" firstAttribute="top" secondItem="V7E-QE-uIA" secondAttribute="bottom" constant="2" id="E93-ZV-z2b"/>
                                                     <constraint firstItem="BGH-o7-f2B" firstAttribute="leading" secondItem="zEP-so-w07" secondAttribute="leading" constant="16" id="HrB-i2-kTa"/>
                                                     <constraint firstAttribute="trailing" secondItem="V7E-QE-uIA" secondAttribute="trailing" constant="16" id="MQv-tQ-kN3"/>
+                                                    <constraint firstItem="sEv-9b-V2b" firstAttribute="top" secondItem="zEP-so-w07" secondAttribute="top" id="Qmp-1W-DWk"/>
                                                     <constraint firstAttribute="bottom" secondItem="LHx-0a-FxM" secondAttribute="bottom" id="ZIm-4s-m0X"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sEv-9b-V2b" secondAttribute="trailing" constant="16" id="Zfw-EV-y3N"/>
                                                     <constraint firstItem="LHx-0a-FxM" firstAttribute="trailing" secondItem="V7E-QE-uIA" secondAttribute="trailing" id="djP-UI-JQr"/>
                                                     <constraint firstItem="V7E-QE-uIA" firstAttribute="leading" secondItem="BGH-o7-f2B" secondAttribute="trailing" constant="16" id="gxQ-pL-MnK"/>
+                                                    <constraint firstItem="sEv-9b-V2b" firstAttribute="leading" secondItem="zEP-so-w07" secondAttribute="leading" constant="16" id="hyq-UC-ow9"/>
                                                     <constraint firstAttribute="height" id="nf2-ka-ega"/>
                                                     <constraint firstItem="LHx-0a-FxM" firstAttribute="leading" secondItem="V7E-QE-uIA" secondAttribute="leading" id="ohB-uZ-F5W"/>
                                                     <constraint firstItem="V7E-QE-uIA" firstAttribute="top" secondItem="zEP-so-w07" secondAttribute="top" id="u0l-Ne-YQi"/>
                                                     <constraint firstItem="BGH-o7-f2B" firstAttribute="top" secondItem="zEP-so-w07" secondAttribute="top" id="x4y-DD-rb1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sEv-9b-V2b" secondAttribute="bottom" id="xbJ-W4-y8S"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJU-2c-JHy" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
