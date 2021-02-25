@@ -11,7 +11,7 @@
 "3lB-T7-fSO.text" = "Établir des paramètres personnels du DNS";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
+"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// ou tls://";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
 "6e9-sP-YMb.normalTitle" = "SAUVEGARDER";

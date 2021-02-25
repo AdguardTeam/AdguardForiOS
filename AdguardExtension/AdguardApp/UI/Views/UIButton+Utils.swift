@@ -42,6 +42,19 @@ extension UIButton {
     }
     
     /*
+     Makes button look like standard AdGuard VPN green button
+     with green background, no border and white text
+     */
+    func applyStandardAdGuardVPNGreenStyle() {
+        let greenColor = UIColor.AdGuardVpnColor.green
+        self.layer.cornerRadius = 8.0
+        self.backgroundColor = greenColor
+        self.setTitleColor(.white, for: .normal)
+        self.layer.borderWidth = 0.0
+        self.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    /*
      Makes button look like standard AdGuard button
      with opaque background, green borders and text
      */

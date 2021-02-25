@@ -134,7 +134,7 @@
 "custom_group_name" = "Personalizado";
 
 /* (GroupsController) Filter group filter count format */
-"filter_group_filters_count_format" = "Filtros habilitados: %d/%d";
+"filter_group_filters_count_format" = "Filtros ativados: %d/%d";
 
 /* (GroupsController) Filters update time format */
 "filter_date_format" = "Filtros atualizados: %@";

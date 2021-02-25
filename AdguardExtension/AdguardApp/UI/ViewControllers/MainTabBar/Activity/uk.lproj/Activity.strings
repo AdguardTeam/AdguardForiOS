@@ -83,7 +83,7 @@
 "lKJ-8V-GJi.normalTitle" = "запитів";
 
 /* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
-"mSj-Zz-Gm9.text" = "Native DNS";
+"mSj-Zz-Gm9.text" = "Вбудований DNS";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
 "qPQ-vV-fXm.normalTitle" = "запитів";

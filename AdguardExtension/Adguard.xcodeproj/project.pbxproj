@@ -341,6 +341,10 @@
 		7E06B68C22FB1606006859AC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		7E06B68E22FB1606006859AC /* Extension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65AD3BB71B7CA4FE00004A02 /* Extension.entitlements */; };
 		7E06B69B22FB1955006859AC /* AdguardBlockingExtensionSecurity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
+		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
+		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
+		7E0B226225DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
 		7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */; };
 		7E103A4B23B60B7800C0C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
@@ -396,6 +400,10 @@
 		7E334029239036D500C39F62 /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		7E33402A23903A4000C39F62 /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
 		7E33402B23903B5300C39F62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		7E3556D625DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */; };
+		7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */; };
+		7E3556E925DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
+		7E3556EA25DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3BDEE023A15709009492CE /* GetProDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BDEDF23A15709009492CE /* GetProDialogView.swift */; };
 		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
 		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
@@ -2818,6 +2826,8 @@
 		7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionPrivacy.plist; sourceTree = "<group>"; };
 		7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionSecurity.plist; sourceTree = "<group>"; };
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
+		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E12D4FE23EA9A7B0009108D /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
@@ -2843,6 +2853,36 @@
 		7E3244C1255AC2F00058BCDF /* NativeProvidersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersServiceTest.swift; sourceTree = "<group>"; };
 		7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceMock.swift; sourceTree = "<group>"; };
 		7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = todayExtensionAssets.xcassets; sourceTree = "<group>"; };
+		7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Present.swift"; sourceTree = "<group>"; };
+		7E3556EB25DD02E800CB2A8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UpsellViewController.xib; sourceTree = "<group>"; };
+		7E3556FF25DD02F000CB2A8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570125DD02F200CB2A8D /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570325DD02F400CB2A8D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UpsellViewController.strings"; sourceTree = "<group>"; };
+		7E35570525DD02F600CB2A8D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UpsellViewController.strings"; sourceTree = "<group>"; };
+		7E35570725DD02F700CB2A8D /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570925DD02F900CB2A8D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570B25DD02FB00CB2A8D /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570D25DD02FC00CB2A8D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35570F25DD02FD00CB2A8D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571125DD02FF00CB2A8D /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571325DD030000CB2A8D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571525DD030100CB2A8D /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571725DD030200CB2A8D /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571925DD030400CB2A8D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571B25DD030500CB2A8D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571D25DD030600CB2A8D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35571F25DD030800CB2A8D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572125DD030A00CB2A8D /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572325DD030B00CB2A8D /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/UpsellViewController.strings"; sourceTree = "<group>"; };
+		7E35572525DD030D00CB2A8D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572725DD030E00CB2A8D /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/UpsellViewController.strings"; sourceTree = "<group>"; };
+		7E35572925DD030F00CB2A8D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572B25DD031100CB2A8D /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572D25DD031200CB2A8D /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35572F25DD031400CB2A8D /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35573125DD031800CB2A8D /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35573325DD031900CB2A8D /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
+		7E35573525DD031A00CB2A8D /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/UpsellViewController.strings; sourceTree = "<group>"; };
 		7E3B38062512029B0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/RateApp.strings; sourceTree = "<group>"; };
 		7E3B38072512029B0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MainPage.strings; sourceTree = "<group>"; };
 		7E3B38082512029C0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -3927,6 +3967,7 @@
 				D0F91165212EDE45006DF0D3 /* ViewControllers */,
 				D0F91161212EDD51006DF0D3 /* Views */,
 				6578E3821BC5082000E2DFFD /* vendors */,
+				7E0B227425DBBB4300AF88BB /* Utils */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4546,6 +4587,24 @@
 				656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */,
 			);
 			name = "Linked Frameworks/Libraries";
+			sourceTree = "<group>";
+		};
+		7E0B223D25DBB3D200AF88BB /* UpsellViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */,
+				7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */,
+			);
+			path = UpsellViewController;
+			sourceTree = "<group>";
+		};
+		7E0B227425DBBB4300AF88BB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */,
+				7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7E15720622DF32B7007060D7 /* Content Blocker State  */ = {
@@ -5255,6 +5314,7 @@
 				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
 				D0EDE45422A9288E00086C00 /* Tutorial */,
 				7E31217024DC024E00642879 /* BottomAlertController */,
+				7E0B223D25DBB3D200AF88BB /* UpsellViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -6024,6 +6084,7 @@
 				D0D7E57E243B15DF001801A5 /* Localizable.stringsdict in Resources */,
 				D0D7E54424371C8C001801A5 /* RateApp.storyboard in Resources */,
 				D0D7E58E243B1CC2001801A5 /* safari_protection_step1.json in Resources */,
+				7E3556EA25DD02E800CB2A8D /* UpsellViewController.xib in Resources */,
 				D0CDABB02484ECB700663E88 /* ContentBlockerStateCell.xib in Resources */,
 				D0D7E54D24371C8C001801A5 /* License.storyboard in Resources */,
 				D0D7E54924371C8C001801A5 /* Activity.storyboard in Resources */,
@@ -6081,6 +6142,7 @@
 				659E59771BC6D82700FA2384 /* Localizable.strings in Resources */,
 				7E952E9A23D5FFBA00D89AE0 /* Activity.storyboard in Resources */,
 				7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */,
+				7E3556E925DD02E800CB2A8D /* UpsellViewController.xib in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */,
 				D093AA19253447940015351F /* setappPublicKey.pem in Resources */,
@@ -6658,6 +6720,7 @@
 				D0B545C92435D669002F0AEC /* GetProController.swift in Sources */,
 				D0B0383C1FB487BA00A5EA3F /* CHCSVParser.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
+				7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */,
 				D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */,
 				D0B545652435D137002F0AEC /* CocoaLumberjack.swift in Sources */,
@@ -6681,6 +6744,7 @@
 				D0B545F62435D6C4002F0AEC /* AffinityRulesParser.swift in Sources */,
 				D05CA8701F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				655AACB61D3CD38000E316EA /* ACObject.m in Sources */,
+				7E0B226225DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				D0B545CA2435D669002F0AEC /* GetProTableController.swift in Sources */,
 				D0D7E61F24445707001801A5 /* MostActiveCompaniesController.swift in Sources */,
 				D0B5458F2435D630002F0AEC /* LoginService.swift in Sources */,
@@ -6825,6 +6889,7 @@
 				D0D7E52B24371859001801A5 /* (null) in Sources */,
 				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				D031A0D0219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
+				7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */,
 				D0B545C22435D660002F0AEC /* AdvancedSettingsController.swift in Sources */,
 				D0D7E5E224444D81001801A5 /* BasicRulesParser.swift in Sources */,
 				7E4CC0532577E8C1005ADBCA /* HideKeyboardTapGestureRecognizer.swift in Sources */,
@@ -7060,6 +7125,7 @@
 				7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */,
 				D09E2BCF25558075002D6BC0 /* SetappService.swift in Sources */,
 				D0667BCD22DC67430099C090 /* UserNotificationService.swift in Sources */,
+				7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */,
 				7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */,
 				D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
@@ -7161,6 +7227,7 @@
 				65EC9AF41BB9824C00F53F3B /* ABECRequest.m in Sources */,
 				D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */,
 				65EC9BD81BB9824C00F53F3B /* ASDatabase.m in Sources */,
+				7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				D081FC2B2418EB38000A10DA /* SafariProtectionService.swift in Sources */,
 				7E51DBC62425077700594708 /* CompanyDetailedController.swift in Sources */,
@@ -7303,6 +7370,7 @@
 				7E822C0D2435EDD30015B4D0 /* Rule.swift in Sources */,
 				7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */,
 				D031A155219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
+				7E3556D625DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				7E9C0BCD25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9020,6 +9088,42 @@
 				D0D6BB5121A6C62B007360BC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E3556EB25DD02E800CB2A8D /* Base */,
+				7E3556FF25DD02F000CB2A8D /* en */,
+				7E35570125DD02F200CB2A8D /* be */,
+				7E35570325DD02F400CB2A8D /* zh-Hans */,
+				7E35570525DD02F600CB2A8D /* zh-Hant */,
+				7E35570725DD02F700CB2A8D /* hr */,
+				7E35570925DD02F900CB2A8D /* cs */,
+				7E35570B25DD02FB00CB2A8D /* da */,
+				7E35570D25DD02FC00CB2A8D /* fr */,
+				7E35570F25DD02FD00CB2A8D /* nl */,
+				7E35571125DD02FF00CB2A8D /* hu */,
+				7E35571325DD030000CB2A8D /* de */,
+				7E35571525DD030100CB2A8D /* it */,
+				7E35571725DD030200CB2A8D /* id */,
+				7E35571925DD030400CB2A8D /* ko */,
+				7E35571B25DD030500CB2A8D /* ja */,
+				7E35571D25DD030600CB2A8D /* es */,
+				7E35571F25DD030800CB2A8D /* sl */,
+				7E35572125DD030A00CB2A8D /* sk */,
+				7E35572325DD030B00CB2A8D /* sr-Latn */,
+				7E35572525DD030D00CB2A8D /* ru */,
+				7E35572725DD030E00CB2A8D /* pt-BR */,
+				7E35572925DD030F00CB2A8D /* pl */,
+				7E35572B25DD031100CB2A8D /* fa */,
+				7E35572D25DD031200CB2A8D /* nb */,
+				7E35572F25DD031400CB2A8D /* ro */,
+				7E35573125DD031800CB2A8D /* tr */,
+				7E35573325DD031900CB2A8D /* uk */,
+				7E35573525DD031A00CB2A8D /* vi */,
+			);
+			name = UpsellViewController.xib;
 			sourceTree = "<group>";
 		};
 		7E536C6B238D2AC400A83A79 /* TodayExtension.storyboard */ = {

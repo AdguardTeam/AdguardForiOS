@@ -117,26 +117,48 @@
                                                     <action selector="changeSystemProtectionState:" destination="T6V-s9-cBk" eventType="touchUpInside" id="9Kb-vL-4fV"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlh-1r-bOU" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="251" y="153.5" width="32" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="32" id="ZGQ-eN-i0f">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="32"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="42"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="32" id="kQi-5a-Zqu">
+                                                        <variation key="heightClass=regular-widthClass=compact" constant="32"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="42"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <color key="tintColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" backgroundImage="vpn_logo"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                        <color key="value" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="offTintColor">
+                                                        <color key="value" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="vpnUpsellTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="n6P-Bw-lQF"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="zlh-1r-bOU" firstAttribute="centerY" secondItem="OPP-0X-avj" secondAttribute="centerY" id="4OS-eE-8Bd"/>
                                             <constraint firstItem="0R2-2n-Sft" firstAttribute="top" secondItem="lYA-et-eyV" secondAttribute="bottom" constant="8" id="EaA-Fy-zQn"/>
                                             <constraint firstItem="lYA-et-eyV" firstAttribute="leading" secondItem="0R2-2n-Sft" secondAttribute="leading" id="HhC-FV-vcY"/>
+                                            <constraint firstItem="zlh-1r-bOU" firstAttribute="leading" secondItem="OPP-0X-avj" secondAttribute="trailing" constant="28" id="OLV-Od-iVb"/>
                                             <constraint firstAttribute="bottom" secondItem="0R2-2n-Sft" secondAttribute="bottom" constant="32" id="OYQ-np-gFs"/>
-                                            <constraint firstItem="OPP-0X-avj" firstAttribute="centerX" secondItem="VqG-vP-HUd" secondAttribute="centerX" constant="28" id="SoA-hb-6d3">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="28"/>
-                                                <variation key="heightClass=regular-widthClass=regular" constant="34"/>
-                                            </constraint>
-                                            <constraint firstItem="PJh-s4-9Wf" firstAttribute="centerX" secondItem="VqG-vP-HUd" secondAttribute="centerX" constant="-28" id="Wil-zs-PzL">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="-28"/>
-                                                <variation key="heightClass=regular-widthClass=regular" constant="-34"/>
-                                            </constraint>
+                                            <constraint firstItem="OPP-0X-avj" firstAttribute="leading" secondItem="PJh-s4-9Wf" secondAttribute="trailing" constant="28" id="XtT-Al-CwZ"/>
                                             <constraint firstItem="0R2-2n-Sft" firstAttribute="leading" secondItem="VqG-vP-HUd" secondAttribute="leading" constant="24" id="Ywj-nc-TRJ"/>
                                             <constraint firstItem="PJh-s4-9Wf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VqG-vP-HUd" secondAttribute="top" constant="20" id="c8q-oE-3NX"/>
                                             <constraint firstAttribute="trailing" secondItem="0R2-2n-Sft" secondAttribute="trailing" constant="24" id="dcn-qQ-76T"/>
                                             <constraint firstItem="lYA-et-eyV" firstAttribute="trailing" secondItem="0R2-2n-Sft" secondAttribute="trailing" id="e00-Wd-uzi"/>
                                             <constraint firstItem="OPP-0X-avj" firstAttribute="centerY" secondItem="PJh-s4-9Wf" secondAttribute="centerY" id="eql-SV-bSr"/>
                                             <constraint firstItem="lYA-et-eyV" firstAttribute="top" secondItem="PJh-s4-9Wf" secondAttribute="bottom" constant="16" id="jXt-WZ-avs"/>
+                                            <constraint firstItem="OPP-0X-avj" firstAttribute="centerX" secondItem="VqG-vP-HUd" secondAttribute="centerX" id="kLY-3z-Zcc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfD-f2-PUd">
@@ -801,16 +823,19 @@
                         <outlet property="requestsButton" destination="nTP-os-Pis" id="wog-jc-J3E"/>
                         <outlet property="requestsNumberLabel" destination="eIf-j0-9oP" id="v5s-uG-OZy"/>
                         <outlet property="requestsTextLabel" destination="Btd-nN-zLO" id="HlN-1k-8GQ"/>
-                        <outlet property="safariIconCenterSpace" destination="Wil-zs-PzL" id="7JF-te-B7h"/>
+                        <outlet property="safariIconCenterSpace" destination="XtT-Al-CwZ" id="IaP-UX-HSB"/>
                         <outlet property="safariIconHeight" destination="34J-F7-rcO" id="Cz7-ix-qf9"/>
                         <outlet property="safariIconWidth" destination="bab-dY-c7I" id="MXM-Uw-JU5"/>
                         <outlet property="safariProtectionButton" destination="PJh-s4-9Wf" id="Gm9-fV-NM2"/>
                         <outlet property="statisticsStackView" destination="m7T-1D-DMy" id="sf8-hg-Vaw"/>
-                        <outlet property="systemIconCenterSpace" destination="SoA-hb-6d3" id="4sX-ck-7DU"/>
+                        <outlet property="systemIconCenterSpace" destination="OLV-Od-iVb" id="Ls4-ma-qAY"/>
                         <outlet property="systemIconHeight" destination="lm7-2c-0i9" id="SCH-d3-1mE"/>
                         <outlet property="systemIconWidth" destination="2j6-wO-ZJl" id="Ets-n2-dCj"/>
                         <outlet property="systemProtectionButton" destination="OPP-0X-avj" id="1dQ-4g-bzx"/>
                         <outlet property="updateButton" destination="mZo-6k-bpe" id="SrB-0p-XgZ"/>
+                        <outlet property="vpnPromoIconHeight" destination="kQi-5a-Zqu" id="fSx-Mt-9tg"/>
+                        <outlet property="vpnPromoIconWidth" destination="ZGQ-eN-i0f" id="GXD-GR-uN7"/>
+                        <outlet property="vpnUpsellButton" destination="zlh-1r-bOU" id="nCR-72-eBX"/>
                         <outletCollection property="themableLabels" destination="lYA-et-eyV" collectionClass="NSMutableArray" id="bFH-X3-4x4"/>
                         <outletCollection property="themableLabels" destination="0R2-2n-Sft" collectionClass="NSMutableArray" id="DHV-K7-bLW"/>
                         <outletCollection property="themableLabels" destination="eIf-j0-9oP" collectionClass="NSMutableArray" id="qxd-v1-mtd"/>
@@ -1205,18 +1230,7 @@
         <image name="man" width="320" height="213"/>
         <image name="nil" width="16" height="16"/>
         <image name="safari" width="24" height="24"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="vpn_logo" width="24" height="24"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

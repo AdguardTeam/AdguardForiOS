@@ -4,11 +4,20 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "高級版";
 
+/* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
+"Xkp-BS-f97.text" = "未被安裝";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS 防護";
 
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "AdGuard VPN";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "免費版";
+
+/* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
+"lJO-ae-oJu.text" = "一項快速的且可靠的 VPN 服務，其將與 AdGuard 廣告封鎖器無縫地一起運作。";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "此模組允許您使用自訂的 DNS 伺服器，並透過加密您的 DNS 查詢來增強您的隱私。";

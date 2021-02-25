@@ -112,6 +112,9 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Kompatibel med «Personlig VPN»-apper";
 
+/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
+"lBi-rt-m64.text" = "Null-IP";
+
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Andre";
 
@@ -138,3 +141,6 @@
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "Er du en utvikler?";
+
+/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
+"xa4-8g-dtT.text" = "Tilpasset IP";

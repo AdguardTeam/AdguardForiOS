@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Vous avez saisi l’amont invalide";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Vous avez saisi une adresse IP invalide";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Protocole DNS non valide";
 

@@ -26,7 +26,7 @@
 "A89-2M-jqd.text" = "Bootstrap IP-адреса";
 
 /* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Завжди повертати REFUSED";
+"AtW-mH-6ja.text" = "Відповідати з кодом REFUSED";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Показувати панель стану оновлення фільтрів";
@@ -65,7 +65,7 @@
 "IvJ-Oi-vGF.text" = "Низькорівневі параметри";
 
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
-"JQH-8J-wY8.text" = "Bootstrap servers";
+"JQH-8J-wY8.text" = "Bootstrap сервери";
 
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Ця дія вилучить ваш актуальний VPN-профіль та вимкне DNS-захист";
@@ -125,13 +125,13 @@
 "cdQ-kW-CG7.text" = "Режим тунелю";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Стиль фільтрів AdBlock -> REFUSED, фільтри hosts-style -> адреса вказана чи невказана в правилі";
+"cgV-he-JNk.text" = "Відповідати з нульовою IP-адресою (0.0.0.0 для A; :: для AAAA) при блокуванні правилом стилю AdBlock; відповідати з IP-адресою, вказаною в правилі при блокуванні правилом стилю /etc/hosts";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Перезапуск захисту при зміні мережі";
 
 /* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "Завжди повертати NXDOMAIN";
+"dsw-Ub-m4M.text" = "Відповідати з кодом NXDOMAIN";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Розширені параметри";
@@ -146,10 +146,10 @@
 "jmQ-ze-hFG.text" = "В режимі Split-Tunnel, AdGuard сумісний із так-званими “Personal VPN” програмами. Недоліком цього режиму є те, що він може бути заміщений системою у випадку поганої якості з'єднання.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
-"k0U-fn-m9X.text" = "Fallback servers";
+"k0U-fn-m9X.text" = "Fallback сервери";
 
 /* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "UNSPECIFIED_ADDRESS";
+"lBi-rt-m64.text" = "Нульова IP-адреса";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Інше";
@@ -167,7 +167,7 @@
 "qxo-YS-JWL.text" = "Показувати панель стану";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
-"rDk-OP-kAS.text" = "Завжди повертати unspecified_address (0.0.0.0 для A; :: for AAAA)";
+"rDk-OP-kAS.text" = "Відповідати з нульовою IP-адресою (0.0.0.0 для A; :: для AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Низькорівневі параметри";
@@ -191,7 +191,7 @@
 "wYq-g0-5k6.text" = "Ця опція зітре усі статистичні дані, наприклад, кількість запитів та ін.";
 
 /* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "Custom IP";
+"xa4-8g-dtT.text" = "Власна IP-адреса";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Розблокувати рекламу всюди, окрім вебсайтів з цього списку";

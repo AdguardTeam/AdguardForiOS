@@ -5,7 +5,7 @@
 "F7O-MB-LHu.text" = "Щоб активувати AdGuard в Safari, виконайте кілька простих кроків";
 
 /* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "Блокирувати від стеження";
+"FDG-As-HDY.text" = "Блокування стеження";
 
 /* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "ПЕРЕГЛЯНУТИ ІНСТРУКЦІЮ";
@@ -23,13 +23,13 @@
 "eyJ-Xh-OdS.text" = "Увімкніть всі блокувальники вмісту й повертайтеся до нашої програми!";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
-"hXU-wD-fbI.text" = "Блокувати рекламу";
+"hXU-wD-fbI.text" = "Блокування реклами";
 
 /* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
 "hak-o1-HWp.text" = "Дякуємо за встановлення AdGuard!";
 
 /* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
-"hf9-6r-TUk.text" = "Захист роздратування";
+"hf9-6r-TUk.text" = "Захист від подразників";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "ДАЛІ";

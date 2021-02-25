@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "유효하지 않는 업스트림입니다";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "유효하지 않은 IP 주소입니다";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "잘못된 DNS 프로토콜";
 

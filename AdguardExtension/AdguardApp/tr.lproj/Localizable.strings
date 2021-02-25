@@ -110,7 +110,7 @@
 "not_premium_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarı yok.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard premium sürümü etkinleştirildi.";
+"login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
 "login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü aktifleştirmenize izin veren lisans anahtarlarının süresi doldu.";
@@ -125,7 +125,7 @@
 "nothing_to_restore_message" = "Geri yüklenecek satın alma yok";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Satın alma başarıyla tamamlandı! iOS için AdGuard premium sürümü etkinleştirildi.";
+"purchase_success_message" = "Satın alma işlemi başarıyla tamamlandı! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Satın alma işleminiz gerçekleştirilirken bir hata oluştu.";
@@ -314,7 +314,7 @@
 "failed_updating_current_state_label" = "Filtreler güncellenmedi";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Bu lisans, maksimum sayıda cihazda aktifleştirilmiştir.\nWeb sitesindeki kişisel hesabınızdaki kullanılmayan cihazlardan lisansı çıkarabilirsiniz: adguard.com";
+"login_max_computers_exceeded" = "Bu lisans, çok fazla cihazda etkinleştirildi.\nLisansın kullanılmayan cihazlarla olan bağlantısını sitedeki kişisel hesabınızda kaldırabilirsiniz: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Bu işlem uzantısını kullanabilmeniz için önce, %1$@ ilk yapılandırmayı gerçekleştirmek zorundadır. Bunu yapmak için ana %2$@ uygulamasını başlatın.";
