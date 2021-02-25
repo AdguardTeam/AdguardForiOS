@@ -175,7 +175,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
                         foundFiltersSet.insert(filter)
                     }
                 }
-                let foundFilters = Array(foundFiltersSet)
+                let foundFilters = order(filtersSet: foundFiltersSet, inGroup: group)
                 if foundFilters.count > 0 {
                     guard let searchGroup = group.copy() as? Group else { return }
                     searchGroup.filters = foundFilters
@@ -287,16 +287,31 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     // MARK: - Private methods
     
+    /* Preserves initial filters order in a specific filters group */
+    private func order(filtersSet: Set<Filter>, inGroup group: Group) -> [Filter] {
+        var foundFilters = Array(filtersSet)
+        let filters = group.filters
+        foundFilters.sort { filter1, filter2 -> Bool in
+            if let pos1 = filters.firstIndex(of: filter1),
+               let pos2 = filters.firstIndex(of: filter2) {
+                return pos1 < pos2
+            } else {
+                return true
+            }
+        }
+        return foundFilters
+    }
+    
     private func callAllCallbacks(){
         callbacksByKey.forEach({ $0.value() })
     }
     
     private func highlight(filter: Filter, tags: Set<String>){
         for i in 0..<(filter.tags?.count ?? 0) {
-            filter.tags![i].heighlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
+            filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
         }
         for i in 0..<(filter.langs?.count ?? 0) {
-            filter.langs![i].heighlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+            filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
         }
     }
     
@@ -305,11 +320,11 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
             let filters = group.filters
             for filter in filters {
                 for i in 0..<(filter.tags?.count ?? 0) {
-                    filter.tags![i].heighlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
+                    filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
                 }
                 
                 for i in 0..<(filter.langs?.count ?? 0) {
-                    filter.langs![i].heighlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+                    filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
                 }
             }
         }

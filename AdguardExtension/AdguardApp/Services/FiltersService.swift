@@ -29,8 +29,8 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     var enabled: Bool = false
     var homepage: String?
     var subscriptionUrl: String?
-    var tags:[(name: String,heighlighted: Bool)]?
-    var langs:[(name: String, heighlighted: Bool)]?
+    var tags:[(name: String, highlighted: Bool)]?
+    var langs:[(name: String, highlighted: Bool)]?
     var rulesCount: Int?
     var groupId: Int
     var displayNumber: Int?
