@@ -159,38 +159,18 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func updateSettings(completion: ((Error?) -> Void)?) {
-        if resources.dnsImplementation == .native {
-            DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
-            completion?(nil)
-            return
-        }
-        
-        workingQueue.async { [weak self] in
-            guard let self = self else { return }
-            
-            DDLogInfo("(VpnManager) updateSettings")
-            
-            let (manager, error) = self.loadManager()
-            
-            if error != nil {
-                completion?(error!)
-                return
-            }
-            
-            if manager == nil {
-                DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
-                let error = VpnManagerError.managerNotInstalled
-                completion?(error)
-                
-                return
-            }
-            
-            self.setupConfiguration(manager!)
-            
-            let saveError = self.saveManager(manager!)
-            completion?(saveError)
-            
-            self.restartTunnel(manager!)
+        /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
+         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
+        DispatchQueue.main.async { [weak self] in
+            self?.timer?.invalidate()
+            self?.timer = nil
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                self?.updateSettingsInternal { error in
+                    completion?(error)
+                    self?.timer?.invalidate()
+                    self?.timer = nil
+                }
+            })
         }
     }
     
@@ -257,6 +237,42 @@ class VpnManager: VpnManagerProtocol {
     }
     
     // MARK: - private methods
+    
+    private func updateSettingsInternal(completion: ((Error?) -> Void)?) {
+        if resources.dnsImplementation == .native {
+            DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
+            completion?(nil)
+            return
+        }
+        
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            DDLogInfo("(VpnManager) updateSettings")
+            
+            let (manager, error) = self.loadManager()
+            
+            if error != nil {
+                completion?(error!)
+                return
+            }
+            
+            if manager == nil {
+                DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
+                let error = VpnManagerError.managerNotInstalled
+                completion?(error)
+                
+                return
+            }
+            
+            self.setupConfiguration(manager!)
+            
+            let saveError = self.saveManager(manager!)
+            completion?(saveError)
+            
+            self.restartTunnel(manager!)
+        }
+    }
     
     private func loadManager()->(NETunnelProviderManager?, Error?) {
         DDLogInfo("(VpnManager) loadManager ")
@@ -397,18 +413,7 @@ class VpnManager: VpnManagerProtocol {
                 DDLogError("(VpnManager) - start tunnel error: \(error.localizedDescription)")
             }
         }
-        
-        /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
-         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
-        DispatchQueue.main.async { [weak self] in
-            self?.timer?.invalidate()
-            self?.timer = nil
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                manager.connection.stopVPNTunnel()
-                self?.timer?.invalidate()
-                self?.timer = nil
-            })
-        }
+        manager.connection.stopVPNTunnel()
     }
     
     // check if vpn enabled state was changed outside the application
