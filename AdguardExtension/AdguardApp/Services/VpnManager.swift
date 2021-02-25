@@ -165,7 +165,7 @@ class VpnManager: VpnManagerProtocol {
             self?.timer?.invalidate()
             self?.timer = nil
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                self?.makeUpdateSettings { error in
+                self?.updateSettingsInternal { error in
                     completion?(error)
                     self?.timer?.invalidate()
                     self?.timer = nil
@@ -238,7 +238,7 @@ class VpnManager: VpnManagerProtocol {
     
     // MARK: - private methods
     
-    private func makeUpdateSettings(completion: ((Error?) -> Void)?) {
+    private func updateSettingsInternal(completion: ((Error?) -> Void)?) {
         if resources.dnsImplementation == .native {
             DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
             completion?(nil)
