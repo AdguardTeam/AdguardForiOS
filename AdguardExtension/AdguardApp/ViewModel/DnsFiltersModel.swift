@@ -85,8 +85,11 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
     }
     
     func refreshFilters() {
-        allFilters = filtersService.filters
-        delegate?.filtersChanged()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.allFilters = self.filtersService.filters
+            self.delegate?.filtersChanged()
+        }
     }
     
     func updateFilters(completion: @escaping (Bool)->()){
@@ -96,9 +99,11 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
         }
         
         filtersService.updateFilters(networking: networking) {[weak self] in
-            self?.filtersService.readFiltersMeta()
-            self?.allFilters = self?.filtersService.filters ?? []
-            completion(true)
+            DispatchQueue.main.async { [weak self] in
+                self?.filtersService.readFiltersMeta()
+                self?.allFilters = self?.filtersService.filters ?? []
+                completion(true)
+            }
         }
     }
     
