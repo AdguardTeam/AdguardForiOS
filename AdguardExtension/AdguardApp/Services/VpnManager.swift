@@ -239,11 +239,6 @@ class VpnManager: VpnManagerProtocol {
     // MARK: - private methods
     
     private func updateSettingsInternal(completion: ((Error?) -> Void)?) {
-        if resources.dnsImplementation == .native {
-            DDLogInfo("(VpnManager) Update settings NOT started because native mode enabled")
-            completion?(nil)
-            return
-        }
         
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -354,8 +349,12 @@ class VpnManager: VpnManagerProtocol {
            enabled = self.complexProtection?.systemProtectionEnabled ?? false || !vpnInstalled
         }
         
-        manager.isEnabled = enabled
-        manager.isOnDemandEnabled = enabled
+        if resources.dnsImplementation == .native {
+            DDLogInfo("(VpnManager) set manager isEnabled = false because native mode is enabled ")
+        }
+
+        manager.isEnabled = resources.dnsImplementation == .native ? false : enabled
+        manager.isOnDemandEnabled = resources.dnsImplementation == .native ? false : enabled
         
         manager.localizedDescription = Constants.aeProductName()
     }
