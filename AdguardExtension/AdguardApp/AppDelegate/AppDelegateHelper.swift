@@ -324,6 +324,26 @@ class AppDelegateHelper: NSObject {
         return success
     }
     
+    /**
+     Do not update VPN configuration if:
+     1. System protection is disabled
+     2. DNS implementation is native
+     3. Application is in background state (we are not sure if VPN configuration is active)
+     */
+    func updateTunnelSettingsIfAppropriate(callback: @escaping ()->Void ) {
+        vpnManager.getConfigurationStatus { [weak self] (status) in
+            guard let self = self else { return }
+            if self.complexProtection.systemProtectionEnabled, self.resources.dnsImplementation == .adGuard, status.configurationIsActive, self.dnsFiltersService.enabledFiltersCount > 0 {
+                self.vpnManager.updateSettings { _ in
+                    callback()
+                }
+            }
+            else {
+                callback()
+            }
+        }
+    }
+    
     /*
      Processes incoming URL scheme and presents appropriate view controller
      Returns true on success and false otherwise
@@ -618,8 +638,6 @@ extension AppDelegateHelper {
             DDLogInfo("(AppDelegateHelper) Failured update process. AppState = \(appState.rawValue)")
             
             NotificationCenter.default.post(name: .AppDelegateFailuredUpdate, object: self)
-            
-            self?.updateTunnelSettingsIfAppropriate()
         }
     }
     
@@ -630,21 +648,6 @@ extension AppDelegateHelper {
             
             let userInfo = [AppDelegateUpdatedFiltersKey: updatedFiltersNumber]
             NotificationCenter.default.post(name: .AppDelegateFinishedUpdate, object: self, userInfo: userInfo)
-            
-            self?.updateTunnelSettingsIfAppropriate()
-        }
-    }
-    
-    /**
-     Do not update VPN configuration if:
-     1. System protection is disabled
-     2. DNS implementation is native
-     3. Application is in background state (we are not sure if VPN configuration is active)
-     */
-    private func updateTunnelSettingsIfAppropriate() {
-        let appState = UIApplication.shared.applicationState
-        if complexProtection.systemProtectionEnabled, resources.dnsImplementation == .adGuard, appState != .background, dnsFiltersService.enabledFiltersCount > 0 {
-            vpnManager.updateSettings(completion: nil)
         }
     }
 }

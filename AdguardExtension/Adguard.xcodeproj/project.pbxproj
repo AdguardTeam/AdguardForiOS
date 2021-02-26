@@ -1161,6 +1161,12 @@
 		D06E3181253F342C008BBD2D /* DnsProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E30E5253F323B008BBD2D /* DnsProviders.swift */; };
 		D06E3274253F4775008BBD2D /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
 		D06E3286253F4777008BBD2D /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
+		D06E6BD325E8F6000069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D06E6BD425E8F6000069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D06E6BD625E8F6000069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D06E6BE825E8F6900069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D06E6BFA25E8F6910069013C /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
 		D0702B3F2188859D0051669A /* FileShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0702B3E2188859D0051669A /* FileShareService.swift */; };
 		D071EFFE23D8781500111D06 /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
 		D071EFFF23D878C200111D06 /* SimpleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */; };
@@ -2204,6 +2210,8 @@
 		D0F3034A238C1E1D0007EC1A /* DnsLogRecordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */; };
 		D0F36294220C009E0065BE8E /* Dns64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */; };
 		D0F36295220C09760065BE8E /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
+		D0F5F84025E8FA0A004E4A82 /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
+		D0F5F85225E8FA0C004E4A82 /* VpnConfigurationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */; };
 		D0F60DB11F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
 		D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */; };
@@ -3404,6 +3412,7 @@
 		D06E30AD253F3181008BBD2D /* providers_i18n.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = providers_i18n.json; sourceTree = "<group>"; };
 		D06E30E5253F323B008BBD2D /* DnsProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsProviders.swift; sourceTree = "<group>"; };
 		D06E30E6253F323B008BBD2D /* LocalizedDnsProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedDnsProviders.swift; sourceTree = "<group>"; };
+		D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VpnConfigurationStatus.swift; sourceTree = "<group>"; };
 		D0702B3E2188859D0051669A /* FileShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareService.swift; sourceTree = "<group>"; };
 		D07427F2232B97040019AAF4 /* SafariRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRule.swift; sourceTree = "<group>"; };
 		D077D5F0213974FC00D3D5B3 /* GetProController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProController.swift; sourceTree = "<group>"; };
@@ -5360,6 +5369,7 @@
 				D09E9643216CB14A00313AB1 /* ThemeService.swift */,
 				D0667BCC22DC67430099C090 /* UserNotificationService.swift */,
 				D090FC942407E53700A0C026 /* VpnManager.swift */,
+				D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */,
 				7EEC43222428C35400F39C33 /* ActivityStatisticsService.swift */,
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
@@ -6813,6 +6823,7 @@
 				D0B545DE2435D69B002F0AEC /* CustomFilterCell.swift in Sources */,
 				D0D7E55D243772E6001801A5 /* Bundle+config.swift in Sources */,
 				D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */,
+				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
 				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
 				D0B545C62435D663002F0AEC /* ContentBlockerStateDataSource.swift in Sources */,
 				D0D7E53324371A63001801A5 /* ACDnsUtils.m in Sources */,
@@ -6972,6 +6983,7 @@
 				655A02181C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D0D33BB623102444009082CE /* AffinityRulesParser.swift in Sources */,
 				D0F60DB31F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m in Sources */,
+				D0F5F84025E8FA0A004E4A82 /* VpnConfigurationStatus.swift in Sources */,
 				7EABA5222578F3D4001E52BC /* RequestFactory.swift in Sources */,
 				D08CE42A240D38A000A70089 /* LoginService.swift in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
@@ -7338,6 +7350,7 @@
 				D0EC86C023A8D15B00EDF107 /* DnsStatisticsService.swift in Sources */,
 				7E31217224DC028300642879 /* BottomAlertTransition.swift in Sources */,
 				D0C940FA23ED6073008B85EC /* DnsProviderInfo.swift in Sources */,
+				D06E6BD325E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
 				655A029D1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				D031A12B219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				7EB55270242247E2000498CC /* ActivityStatisticsModel.swift in Sources */,
@@ -7731,6 +7744,7 @@
 				247521F32594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */,
 				7ECD9C4F238D66E80065E88D /* DDLoggerNames.m in Sources */,
+				D06E6BD425E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
 				7E5EA7AA239A381A00A07DE0 /* ComplexProtectionService.swift in Sources */,
 				7ECD9C58238D67890065E88D /* ACLFileLogger.m in Sources */,
 				7ECD9C4D238D66780065E88D /* DDOSLogger.m in Sources */,
@@ -7824,6 +7838,7 @@
 				D0569D7721F1C0A800985DA9 /* FMSQLStatementSplitter.m in Sources */,
 				24F5528A258753F000AF1D3B /* DNSSettings.swift in Sources */,
 				7E85765D2435F1DA0055F63D /* Constant.swift in Sources */,
+				D06E6BE825E8F6900069013C /* VpnConfigurationStatus.swift in Sources */,
 				D08187C02260A69200E961B5 /* DnsLogRecordsWriter.swift in Sources */,
 				7E8576682435F1FB0055F63D /* RuleLabel.swift in Sources */,
 				7EEC432A24290C4800F39C33 /* Date+Utils.swift in Sources */,
@@ -8506,6 +8521,7 @@
 				D0B5440F2435C6B8002F0AEC /* (null) in Sources */,
 				D0B544102435C6B8002F0AEC /* FMDatabase.m in Sources */,
 				D0B544112435C6B8002F0AEC /* PurchaseService.swift in Sources */,
+				D06E6BD625E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
 				D0B544122435C6B8002F0AEC /* NotificationService+Utils.swift in Sources */,
 				D0B544132435C6B8002F0AEC /* ACIOUtils.m in Sources */,
 				D0D7E61B244456B2001801A5 /* DomainsParserService.swift in Sources */,
@@ -8560,6 +8576,7 @@
 				D0B5443D2435C6BC002F0AEC /* ADLocales.m in Sources */,
 				7EABA6042578F5BD001E52BC /* ParserProtocol.swift in Sources */,
 				D0B5443E2435C6BC002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */,
+				D0F5F85225E8FA0C004E4A82 /* VpnConfigurationStatus.swift in Sources */,
 				D0B5443F2435C6BC002F0AEC /* AntibannerController.swift in Sources */,
 				D0B544412435C6BC002F0AEC /* ACFFileUtils.m in Sources */,
 				D0B544432435C6BC002F0AEC /* AffinityRulesParser.swift in Sources */,
@@ -8705,6 +8722,7 @@
 				D0D7E61924445673001801A5 /* ActivityStatisticsService.swift in Sources */,
 				D0B544D82435C6BF002F0AEC /* FMDatabase.m in Sources */,
 				247521F92594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
+				D06E6BFA25E8F6910069013C /* VpnConfigurationStatus.swift in Sources */,
 				7E473B3F25540E62006F8345 /* NativeProvidersService.swift in Sources */,
 				D0B544D92435C6BF002F0AEC /* CocoaLumberjack.swift in Sources */,
 				D0D7E60024444F98001801A5 /* DnsStatisticsRecord.swift in Sources */,

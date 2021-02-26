@@ -39,6 +39,9 @@ protocol VpnManagerProtocol {
     /** checks vpn cpnfiguration is installed */
     func checkVpnInstalled(completion: @escaping (Error?)->Void)
     
+    /** returns actual state of vpn configuration */
+    func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus)->Void)
+    
     /** migrate settings pro 2.1.2 and freee 3.0 settings to universal app v4.0 */
     func migrateOldVpnSettings(completion: @escaping (Error?)->Void)
 }
@@ -220,6 +223,15 @@ class VpnManager: VpnManagerProtocol {
     
     var vpnInstalled: Bool {
         return vpnInstalledValue ?? true
+    }
+    
+    func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus) -> Void) {
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            let (manager, _) = self.loadManager()
+            let status = VpnConfigurationStatus(vpnManager: manager, isInstalled: manager != nil)
+            callback(status)
+        }
     }
     
     func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
