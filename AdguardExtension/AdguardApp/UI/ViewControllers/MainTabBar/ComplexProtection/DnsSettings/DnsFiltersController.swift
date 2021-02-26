@@ -19,7 +19,7 @@
 import UIKit
 
 protocol DnsFiltersControllerDelegate: AnyObject {
-    func refreshFiltersUI()
+    func filtersStateWasChanged()
 }
 
 class DnsFilterTitleCell: UITableViewCell {
@@ -337,7 +337,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
 }
 
 extension DnsFiltersController: DnsFiltersControllerDelegate {
-    func refreshFiltersUI() {
+    func filtersStateWasChanged() {
         model.refreshFilters()
     }
 }

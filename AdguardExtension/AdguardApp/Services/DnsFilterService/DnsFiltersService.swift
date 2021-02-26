@@ -358,8 +358,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             
             DDLogInfo("(DsnFiltersService) deleteFilter - update vpn settings")
             self.vpnManager?.updateSettings{ error in
-                if error != nil {
-                    DDLogError("(DsnFiltersService) deleteFilter error: \(error!)")
+                if let error = error  {
+                    DDLogError("(DsnFiltersService) deleteFilter error: \(error)")
                 }
             }
         }
@@ -403,9 +403,12 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
                 guard let url = URL(string: filter.subscriptionUrl ?? "") else { return }
                 group.enter()
                 self.getDnsFilter(name: filter.name, url: url, enabled: filter.enabled, networking: networking) { [weak self] (dnsFilter, data) in
-                    self?.updateDnsFilterInternal(filter: filter, dnsFilter: dnsFilter, data: data) {
+                    defer {
                         group.leave()
                     }
+                    
+                    guard let dnsFilter = dnsFilter else { return }
+                    self?.updateDnsFilterInternal(filter: filter, dnsFilter: dnsFilter, data: data)
                 }
             }
             
@@ -474,14 +477,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     // MARK: - private methods
     
-    private func updateDnsFilterInternal(filter: DnsFilter, dnsFilter: DnsFilter?, data: Data?, completionHandler: (() -> Void)?) {
+    private func updateDnsFilterInternal(filter: DnsFilter, dnsFilter: DnsFilter, data: Data?) {
         workingQueue.async {
-            
-            defer {
-                completionHandler?()
-            }
-            
-            guard let dnsFilter = dnsFilter else { return }
             
             dnsFilter.id = filter.id
             dnsFilter.importantDesc = filter.importantDesc

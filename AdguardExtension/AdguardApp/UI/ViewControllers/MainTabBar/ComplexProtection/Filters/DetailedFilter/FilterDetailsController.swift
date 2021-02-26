@@ -25,7 +25,6 @@ protocol FilterDetailsControllerAnimationDelegate {
 
 protocol FilterDetailsControllerTableViewDelegate {
     func tableViewWasLoaded(with contentSizeHeight: CGFloat)
-    func refreshFiltersUI()
 }
 
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate {
@@ -66,6 +65,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             guard let tableController = segue.destination as? FilterDetailsTableCotroller else { return }
             tableController.animationDelegate = self
             tableController.tableViewDelegate = self
+            tableController.delegate = delegate
             tableController.filter = filter
         }
     }
@@ -124,7 +124,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             
             if let dnsFilter = self.filter as? DnsFilter {
                 self.dnsFiltersService.deleteFilter(dnsFilter) { [weak self] in
-                    self?.delegate?.refreshFiltersUI()
+                    self?.delegate?.filtersStateWasChanged()
                 }
             }
             
@@ -174,10 +174,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         }
     }
     
-    func refreshFiltersUI() {
-        delegate?.refreshFiltersUI()
-    }
-    
     // MARK: - EditFilterDelegate
     
     func renameFilter(newName: String) {
@@ -211,6 +207,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
+    weak var delegate: DnsFiltersControllerDelegate?
     
     private var notificationToken: NotificationToken?
     
@@ -262,6 +259,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     override func viewDidLayoutSubviews() {
         tableViewDelegate?.tableViewWasLoaded(with: tableView.contentSize.height)
+        tableViewDelegate = nil
     }
     
     // MARK: - table view delegate and datasource methods
@@ -347,7 +345,7 @@ class FilterDetailsTableCotroller : UITableViewController {
             dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
         }
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
-        tableViewDelegate?.refreshFiltersUI()
+        delegate?.filtersStateWasChanged()
     }
     
     // MARK: - private methods
