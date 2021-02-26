@@ -25,6 +25,7 @@ protocol FilterDetailsControllerAnimationDelegate {
 
 protocol FilterDetailsControllerTableViewDelegate {
     func tableViewWasLoaded(with contentSizeHeight: CGFloat)
+    func refreshFiltersUI()
 }
 
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate {
@@ -42,6 +43,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationToken: NotificationToken?
+    
+    weak var delegate: DnsFiltersControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +123,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             }
             
             if let dnsFilter = self.filter as? DnsFilter {
-                self.dnsFiltersService.deleteFilter(dnsFilter)
+                self.dnsFiltersService.deleteFilter(dnsFilter) { [weak self] in
+                    self?.delegate?.refreshFiltersUI()
+                }
             }
             
             self.navigationController?.popViewController(animated: true)
@@ -167,6 +172,10 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         if containerView.frame.height <= contentSizeHeight {
             shadowView.animateAppearingOfShadow()
         }
+    }
+    
+    func refreshFiltersUI() {
+        delegate?.refreshFiltersUI()
     }
     
     // MARK: - EditFilterDelegate
@@ -253,7 +262,6 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     override func viewDidLayoutSubviews() {
         tableViewDelegate?.tableViewWasLoaded(with: tableView.contentSize.height)
-        tableViewDelegate = nil
     }
     
     // MARK: - table view delegate and datasource methods
@@ -339,6 +347,7 @@ class FilterDetailsTableCotroller : UITableViewController {
             dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
         }
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+        tableViewDelegate?.refreshFiltersUI()
     }
     
     // MARK: - private methods
