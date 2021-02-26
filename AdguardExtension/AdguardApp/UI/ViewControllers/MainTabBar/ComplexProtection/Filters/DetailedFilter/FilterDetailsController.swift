@@ -43,6 +43,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     private var notificationToken: NotificationToken?
     
+    weak var delegate: DnsFiltersControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,6 +65,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             guard let tableController = segue.destination as? FilterDetailsTableCotroller else { return }
             tableController.animationDelegate = self
             tableController.tableViewDelegate = self
+            tableController.delegate = delegate
             tableController.filter = filter
         }
     }
@@ -120,7 +123,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             }
             
             if let dnsFilter = self.filter as? DnsFilter {
-                self.dnsFiltersService.deleteFilter(dnsFilter)
+                self.dnsFiltersService.deleteFilter(dnsFilter) { [weak self] in
+                    self?.delegate?.filtersStateWasChanged()
+                }
             }
             
             self.navigationController?.popViewController(animated: true)
@@ -202,6 +207,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
+    weak var delegate: DnsFiltersControllerDelegate?
     
     private var notificationToken: NotificationToken?
     
@@ -339,6 +345,7 @@ class FilterDetailsTableCotroller : UITableViewController {
             dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
         }
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+        delegate?.filtersStateWasChanged()
     }
     
     // MARK: - private methods

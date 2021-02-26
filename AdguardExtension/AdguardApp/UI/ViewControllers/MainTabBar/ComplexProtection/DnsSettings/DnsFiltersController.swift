@@ -18,6 +18,10 @@
 
 import UIKit
 
+protocol DnsFiltersControllerDelegate: AnyObject {
+    func filtersStateWasChanged()
+}
+
 class DnsFilterTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var rulesNumberLabel: ThemableLabel!
@@ -104,10 +108,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         updateTheme()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        model.refreshFilters()
-    }
     
     deinit {
         resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
@@ -297,6 +297,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     private func showFilterDetailsController(with filter: FilterDetailedInterface) {
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
+        controller.delegate = self
         
         controller.filter = filter
         
@@ -332,5 +333,11 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
                 self?.refreshControl?.endRefreshing()
             }
         }
+    }
+}
+
+extension DnsFiltersController: DnsFiltersControllerDelegate {
+    func filtersStateWasChanged() {
+        model.refreshFilters()
     }
 }

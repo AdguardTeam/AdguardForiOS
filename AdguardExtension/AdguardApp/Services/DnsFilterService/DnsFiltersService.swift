@@ -60,7 +60,7 @@ protocol DnsFiltersServiceProtocol {
     
     // deletes filter from array of filters
     // automaticaly updates vpn settings when changed
-    func deleteFilter(_ filter: DnsFilter)
+    func deleteFilter(_ filter: DnsFilter, completionHandler: (() -> Void)?)
     
     // disable all filters from array of filters
     // automaticaly updates vpn settings when changed
@@ -209,6 +209,8 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let configuration: ConfigurationServiceProtocol
     private let parser = AASFilterSubscriptionParser()
     private let complexProtection: ComplexProtectionServiceProtocol?
+    
+    private let workingQueue = DispatchQueue(label: "Dns filtres queue")
         
     init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol?) {
         self.resources = resources
@@ -339,22 +341,26 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
         }
     }
     
-    func deleteFilter(_ filter: DnsFilter) {
-        let fileName = filterFileName(filterId: filter.id)
-        
-        for (i, filt) in filters.enumerated(){
-            if filt.id == filter.id {
-                filters.remove(at: i)
-                resources.save(Data(), toFileRelativePath: fileName)
-                saveFiltersMeta()
-                return
+    func deleteFilter(_ filter: DnsFilter, completionHandler: (() -> Void)?) {
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            let fileName = self.filterFileName(filterId: filter.id)
+            
+            for (i, filt) in self.filters.enumerated(){
+                if filt.id == filter.id {
+                    self.filters.remove(at: i)
+                    self.resources.save(Data(), toFileRelativePath: fileName)
+                    self.saveFiltersMeta()
+                }
             }
-        }
-        
-        DDLogInfo("(DsnFiltersService) deleteFilter - update vpn settings")
-        vpnManager?.updateSettings{ error in
-            if error != nil {
-                DDLogError("(DsnFiltersService) deleteFilter error: \(error!)")
+            
+            completionHandler?()
+            
+            DDLogInfo("(DsnFiltersService) deleteFilter - update vpn settings")
+            self.vpnManager?.updateSettings{ error in
+                if let error = error  {
+                    DDLogError("(DsnFiltersService) deleteFilter error: \(error)")
+                }
             }
         }
     }
@@ -392,42 +398,21 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             guard let self = self else { return }
             
             self.filtersAreUpdating = true
-            
             let group = DispatchGroup()
-            
-            for (i,filter) in self.filters.enumerated() {
-                
+            for filter in self.filters {
                 guard let url = URL(string: filter.subscriptionUrl ?? "") else { return }
-                
                 group.enter()
-                
-                self.getDnsFilter(name: filter.name, url: url, enabled: filter.enabled, networking: networking) { (dnsFilter, data) in
-                    
+                self.getDnsFilter(name: filter.name, url: url, enabled: filter.enabled, networking: networking) { [weak self] (dnsFilter, data) in
                     defer {
                         group.leave()
                     }
                     
                     guard let dnsFilter = dnsFilter else { return }
-                    
-                    dnsFilter.id = filter.id
-                    dnsFilter.importantDesc = filter.importantDesc
-                    if filter.desc != nil {
-                        dnsFilter.desc = filter.desc
-                    }
-
-                    self.filters[i] = dnsFilter
-
-                    if let dataToSave = data {
-                        let fileName = self.filterFileName(filterId: dnsFilter.id)
-                        self.resources.save(dataToSave, toFileRelativePath: fileName)
-                    }
-
-                    self.saveFiltersMeta()
+                    self?.updateDnsFilterInternal(filter: filter, dnsFilter: dnsFilter, data: data)
                 }
             }
             
             group.wait()
-            
             self.filtersAreUpdating = false
         }
     }
@@ -492,6 +477,29 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     // MARK: - private methods
     
+    private func updateDnsFilterInternal(filter: DnsFilter, dnsFilter: DnsFilter, data: Data?) {
+        workingQueue.async {
+            
+            dnsFilter.id = filter.id
+            dnsFilter.importantDesc = filter.importantDesc
+            if filter.desc != nil {
+                dnsFilter.desc = filter.desc
+            }
+            
+            let index = self.filters.firstIndex { $0.id == dnsFilter.id }
+            if let index = index {
+                self.filters[index] = dnsFilter
+                
+                if let dataToSave = data {
+                    let fileName = self.filterFileName(filterId: dnsFilter.id)
+                    self.resources.save(dataToSave, toFileRelativePath: fileName)
+                }
+                
+                self.saveFiltersMeta()
+            }
+        }
+    }
+    
     private func saveFiltersMeta() {
         let dataToSave = filters.map { NSKeyedArchiver.archivedData(withRootObject: $0) }
         resources.sharedDefaults().set(dataToSave, forKey: kSharedDefaultsDnsFiltersMetaKey)
@@ -545,7 +553,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
             
             if let filter = filters.first(where: { (filter) -> Bool in
                 return filter.id == predefined }) {
-                deleteFilter(filter)
+                deleteFilter(filter, completionHandler: nil)
             }
         }
     }

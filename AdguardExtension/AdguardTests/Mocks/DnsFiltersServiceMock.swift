@@ -49,7 +49,7 @@ class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
         
     }
     
-    func deleteFilter(_ filter: DnsFilter) {
+    func deleteFilter(_ filter: DnsFilter, completionHandler: (() -> Void)?) {
         
     }
     
