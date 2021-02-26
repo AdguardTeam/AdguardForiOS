@@ -613,13 +613,10 @@ static NSTimeInterval lastCheckTime;
 - (void)antibanerUpdateFinished:(AEUpdateResult)result {
     DDLogInfo(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
     self.antibanerUpdateResult = result;
-    [self updateFinished];
-}
-
-- (void)blockingSubscriptionsUpdateFinished:(AEUpdateResult)result {
-    DDLogInfo(@"(AppDelegate) blockingSubscriptionsUpdateFinished with result: %@", [self resultDescription:result]);
-    self.blockingSubscriptionsUpdateResult = result;
-    [self updateFinished];
+    
+    [helper updateTunnelSettingsIfAppropriateWithCallback:^{
+        [self updateFinished];
+    }];
 }
 
 - (void)updateFinished {

@@ -43,5 +43,9 @@ class VpnManagerMock: NSObject, VpnManagerProtocol {
         completion(nil)
     }
     
+    func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus)->Void) {
+        callback(VpnConfigurationStatus(isInstalled: true, isSelected: true, onDemandEnabled: true, connectionStatus: .enabled))
+    }
+    
     var vpnInstalled: Bool = true
 }
