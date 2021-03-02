@@ -8,7 +8,7 @@
 "3BA-9g-I6J.placeholder" = "Navn";
 
 /* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Indstil brugerdefinerede DNS-indstillinger";
+"3lB-T7-fSO.text" = "Opsæt tilpassede DNS-indstillinger";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// eller tls://";
@@ -20,10 +20,10 @@
 "7H8-Df-Igr.text" = "Hvordan opsættes det?";
 
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
-"84p-U2-sd8.text" = "AdGuard vil ikke blokere domænerne fra denne liste";
+"84p-U2-sd8.text" = "AdGuard blokerer ikke domænerne på denne liste";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
-"AOm-kV-l4z.text" = "AdGuard vil blokere domænerne fra denne liste";
+"AOm-kV-l4z.text" = "AdGuard blokerer domænerne på denne liste";
 
 /* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
 "B2l-7z-M2N.normalTitle" = "GEM OG VÆLG";
@@ -38,13 +38,13 @@
 "LTC-71-V9S.text" = "DNS-server";
 
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
-"Mxf-0w-5MP.text" = "Leveres af selve operativsystemet. Inspektion af DNS-aktivitet er ikke mulig i denne tilstand.\n\n";
+"Mxf-0w-5MP.text" = "Leveres af selve OS'et. Inspektion af DNS-aktivitet er ikke mulig i denne tilstand.\n\n";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Tilføj et filter";
 
 /* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Aktivér dette modul for at forbedre dit privatliv ved at kryptere din DNS-trafik.";
+"PFY-Cq-NFN.text" = "Aktivér dette modul for at forbedre din fortrolighed ved at kryptere din DNS-trafik.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-Quic (eksperimentel)";
@@ -59,13 +59,13 @@
 "Uem-fP-tai.normalTitle" = "PRØV GRATIS";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "Liste over tilladte";
+"Wml-J6-ced.text" = "Hvidliste";
 
 /* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
 "Xa6-wl-aOE.text" = "DNS-implementering";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
-"ZdD-yx-6ph.normalTitle" = "ANNULLER";
+"ZdD-yx-6ph.normalTitle" = "ANNULLÉR";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// eller tls://";
@@ -80,7 +80,7 @@
 "csw-3H-3tU.text" = "Server";
 
 /* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "Tilføj en brugerdefineret DNS-server";
+"d1u-rO-z2K.text" = "Tilføj en tilpasset DNS-server";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS-serveradresse";
@@ -89,7 +89,7 @@
 "e4h-eF-AOa.text" = "Servernavn";
 
 /* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Rediger brugerdefinerede DNS-indstillinger";
+"f57-S8-QfF.text" = "Redigér tilpassede DNS-indstillinger";
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
@@ -98,22 +98,22 @@
 "iPl-vI-lX5.text" = "Netværksindstillinger";
 
 /* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "Du kan forbedre dit online privatliv ved at kryptere DNS-trafik. For at gøre dette skal du vælge en af de anbefalede DNS-udbydere.";
+"iaJ-tk-ohH.text" = "Du kan forbedre dit onlinefortrolighed ved at kryptere DNS-trafik. For at gøre dette, så vælg en af de anbefalede DNS-udbydere.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Blokeringsliste";
+"ihd-7R-RfE.text" = "Sortliste";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "ANNULLER";
+"ks4-fm-Ctr.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
-"lEg-oH-oxd.text" = "Fungerer som en lokal \"pseudo\" VPN. Understøtter enhver DNS-protokol, giver dig mulighed for at inspicere din enheds DNS-aktivitet.";
+"lEg-oH-oxd.text" = "Fungerer som et lokalt \"pseudo\" VPN. Understøtter enhver DNS-protokol, giver dig mulighed for at inspicere din enheds DNS-aktivitet.";
 
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
 "mBR-7g-DjT.placeholder" = "Navn";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
-"mN8-Uh-sLQ.text" = "Hjemmeside";
+"mN8-Uh-sLQ.text" = "Websted";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "OK";
@@ -125,10 +125,10 @@
 "pC4-RU-DaD.text" = "DNS-filtrering";
 
 /* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
-"pXa-VP-4yy.text" = "DNS-Filtre";
+"pXa-VP-4yy.text" = "DNS-filtre";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Sikkerhedsfiltre, DNS-privatliv, tilpassede filtre osv.";
+"pY3-X6-fFy.text" = "Sikkerhedsfiltre, DNS-fortrolighed, tilpassede filtre mv.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "DNS-filtre";
@@ -137,10 +137,10 @@
 "pzP-ns-QSS.text" = "Servernavn";
 
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "Tilpas din DNS-trafik ved at anvende dine egne regler.";
+"qjN-LB-N3T.text" = "Tilpas din DNS-trafik ved brug af egne regler.";
 
 /* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
-"sQQ-5p-EfW.text" = "Oprindelig";
+"sQQ-5p-EfW.text" = "Indbygget";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
 "seX-mS-3mU.text" = "DNS-serveradresse";

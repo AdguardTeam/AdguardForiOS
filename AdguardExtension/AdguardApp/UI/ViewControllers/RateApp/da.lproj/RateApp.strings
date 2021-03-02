@@ -2,7 +2,7 @@
 "2yq-tf-ruv.text" = "Tjek denne instruktion:";
 
 /* Class = "UIButton"; normalTitle = "Problem remains"; ObjectID = "3v5-h9-5E9"; */
-"3v5-h9-5E9.normalTitle" = "Problemet eksisterer stadig";
+"3v5-h9-5E9.normalTitle" = "Problem resterer";
 
 /* Class = "UILabel"; text = "Are you happy with AdGuard?"; ObjectID = "9GR-EN-yP2"; */
 "9GR-EN-yP2.text" = "Er du tilfreds med AdGuard?";
@@ -14,4 +14,4 @@
 "XCD-6t-VdZ.normalTitle" = "Ja, bedøm den";
 
 /* Class = "UIButton"; normalTitle = "Got it, this helps"; ObjectID = "XGH-Qh-0t0"; */
-"XGH-Qh-0t0.normalTitle" = "Ok, det hjælper";
+"XGH-Qh-0t0.normalTitle" = "OK, det hjælper";

@@ -5,13 +5,13 @@
 "2A9-hH-oY3.text" = "Tid i sekunder";
 
 /* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
-"3zG-B5-jE5.text" = "Debug-logfiler";
+"3zG-B5-jE5.text" = "Fejlfindingslogfiler";
 
 /* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
 "7nl-3p-BP2.text" = "Blokeret svar TTL";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Inverter listen over tilladte";
+"8ad-4w-rbs.text" = "Invertér hvidlisten";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Inkompatibel med andre VPN-apps, ustabil";
@@ -26,10 +26,10 @@
 "A89-2M-jqd.text" = "Bootstrap IP-adresse";
 
 /* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "Svar med en REFUSED kode";
+"AtW-mH-6ja.text" = "Svar med en REFUSED-kode";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
-"BOT-Ej-15M.text" = "Vis statuslinjen for filteropdateringer";
+"BOT-Ej-15M.text" = "Vis statuslinje for filteropdateringer";
 
 /* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
 "BPj-Fi-8mA.text" = "Standard";
@@ -38,7 +38,7 @@
 "BQY-q7-BQU.text" = "Indholdsblockere";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
-"Dfm-If-1AX.normalTitle" = "ANNULLER";
+"Dfm-If-1AX.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
 "ESe-CM-On1.text" = "Blokeringstilstand";
@@ -47,7 +47,7 @@
 "EbM-k3-HW8.text" = "Inkompatibel med andre VPN-apps";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
-"FzS-e3-CK1.text" = "Mørk";
+"FzS-e3-CK1.text" = "Mørkt";
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "Ændre dem ikke, medmindre du ved, hvad du laver";
@@ -62,7 +62,7 @@
 "H3Q-H6-YV0.text" = "Aktivér denne indstilling, hvis du oplever problemer med internetforbindelsen, mens AdGuard kører";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
-"IvJ-Oi-vGF.text" = "Lavt Niveau indstillinger";
+"IvJ-Oi-vGF.text" = "Lavniveauindstillinger";
 
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Bootstrap-servere";
@@ -71,16 +71,16 @@
 "Jnb-4w-9NY.text" = "Dette fjerner din aktuelle VPN-profil og deaktiverer DNS-beskyttelsen";
 
 /* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
-"Lgb-zJ-9va.text" = "Refused";
+"Lgb-zJ-9va.text" = "Nægtet";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Avancerede indstillinger";
 
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
-"NC2-8A-E6f.text" = "Bloker IPv6";
+"NC2-8A-E6f.text" = "Blokér IPv6";
 
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
-"ObO-g4-VHL.text" = "Du har 6 indholdsblockere, hver af dem kan indeholde op til 50.000 regler";
+"ObO-g4-VHL.text" = "Du har 6 indholdsblockere, som hver kan indeholde op til 50.000 regler";
 
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Avanceret tilstand";
@@ -89,7 +89,7 @@
 "QEc-dY-TtB.text" = "Nulstil statistikker";
 
 /* Class = "UILabel"; text = "Block AAAA requests"; ObjectID = "Rmq-30-7hJ"; */
-"Rmq-30-7hJ.text" = "Bloker AAAA-anmodninger";
+"Rmq-30-7hJ.text" = "Blokér AAAA-forespørgsler";
 
 /* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
 "TX9-Md-Qzr.text" = "Systemstandard";
@@ -101,10 +101,10 @@
 "Vtx-vp-WIV.headerTitle" = "Tema";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
-"WUY-Cq-SPm.normalTitle" = "ANNULLER";
+"WUY-Cq-SPm.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
-"X0A-gU-hzf.text" = "Opdater kun automatisk via Wi-Fi";
+"X0A-gU-hzf.text" = "Auto-opdatér kun via Wi-Fi";
 
 /* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
 "Zsy-DV-b67.text" = "NxDomain";
@@ -125,7 +125,7 @@
 "cdQ-kW-CG7.text" = "Tunnel-tilstand";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Svar med en nul IP-adresse (0.0.0.0 for A; :: for AAAA), når den blokeres af Adblock-stil-reglen; svar med den IP-adresse, der er angivet i reglen, når den blokeres af /etc/hosts-style-reglen";
+"cgV-he-JNk.text" = "Svar med nul IP-adresse (0.0.0.0 for A; :: for AAAA), når blokeret af Adblock-lignende regel; svar med den i i reglen anførte IP-adresse, når blokeret af /etc/hosts-style-reglen";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Genstart beskyttelsen, når netværket ændres";
@@ -140,10 +140,10 @@
 "eiP-yl-Xb3.text" = "Full-Tunnel (uden VPN-ikon)";
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
-"gxl-pG-zh1.text" = "Kompatibel med \"Personlige VPN\" apps";
+"gxl-pG-zh1.text" = "Kompatibel med \"Personlige VPN\"-apps";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "I Split-Tunnel-tilstanden er AdGuard kompatibel med såkaldte \"Personlige VPN\" -apps. I bytte kan den i denne tilstand blive omgået af systemet i tilfælde af dårlig forbindelse.";
+"jmQ-ze-hFG.text" = "I tilstanden Split-Tunnel er AdGuard kompatibel med såkaldte \"Personlige VPN\"-apps. Som et kompromis, vil den i denne tilstand kunne omgås af systemet ifm. dårlig konnetivitet.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallback-servere";
@@ -158,19 +158,19 @@
 "nPj-OI-Pcb.text" = "Indholdsblockere";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
-"ocH-QT-NRZ.text" = "Lys";
+"ocH-QT-NRZ.text" = "Lyst";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "Aktiverer ekstra indstillinger for avancerede brugere";
 
 /* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
-"qxo-YS-JWL.text" = "Vis statuslinje";
+"qxo-YS-JWL.text" = "Vis statusbjælke";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
 "rDk-OP-kAS.text" = "Svar med nul IP-adresse (0.0.0.0 for A; :: for AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
-"reQ-4X-84i.text" = "Lavt niveau indstillinger";
+"reQ-4X-84i.text" = "Lavniveauindstillinger";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "GEM";
@@ -179,7 +179,7 @@
 "sc6-Tw-xnL.text" = "Indstillinger";
 
 /* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
-"tTY-BW-QcN.text" = "Hvis denne indstilling er aktiveret, vil AdGuard kun bruge Wi-Fi til filteropdateringer i baggrunden";
+"tTY-BW-QcN.text" = "Er denne indstilling aktiveret, bruger AdGuard kun Wi-Fi til baggrundsfilteropdateringer";
 
 /* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
 "uRk-qq-TJH.text" = "Blokeret Svar TTL";
@@ -188,10 +188,10 @@
 "wPe-ae-X0G.text" = "Er du udvikler?";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Denne indstilling vil rydde alle statistiske data, f. eks. Antal anmodninger osv.";
+"wYq-g0-5k6.text" = "Denne indstilling vil rydde alle statistiske data, f. eks. Antal forespørgsler mv.";
 
 /* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "Brugerdefineret IP";
+"xa4-8g-dtT.text" = "Tilpasset IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
-"yBG-d2-ebt.text" = "Fjerner blokering af annoncer overalt undtagen på webstederne fra denne liste";
+"yBG-d2-ebt.text" = "Afblokér annoncer overalt undtagen på webstederne fra denne liste";

@@ -11,7 +11,7 @@
 "B4f-Bt-0w6.text" = "Bedøm app";
 
 /* Class = "UILabel"; text = "Missed ads or broken sites"; ObjectID = "Con-9Z-LDc"; */
-"Con-9Z-LDc.text" = "Oversete annoncer eller ødelagte sider";
+"Con-9Z-LDc.text" = "Oversete annoncer eller ødelagte websteder";
 
 /* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
 "Ebc-Lf-9R1.text" = "Licens";
@@ -20,7 +20,7 @@
 "Em7-2h-SKs.text" = "Hjælp os med at gøre AdGuard bedre";
 
 /* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
-"GA6-E3-BcJ.text" = "Rapporter en fejl";
+"GA6-E3-BcJ.text" = "Rapportér en fejl";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Safari-beskyttelse";
@@ -29,7 +29,7 @@
 "L2l-pO-K3q.text" = "Generelt";
 
 /* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
-"LHx-0a-FxM.text" = "Send detaljeret systeminformation om kørende processer og applikationslog";
+"LHx-0a-FxM.text" = "Indsend detaljeret systeminformation om kørende processer og app-log";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Hvad er AdGuard?";
@@ -41,10 +41,10 @@
 "UJb-NW-d5B.text" = "Indstillinger";
 
 /* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
-"V7E-QE-uIA.text" = "Send detaljeret systeminformation";
+"V7E-QE-uIA.text" = "Indsend detaljeret systeminformation";
 
 /* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
-"W6h-Gt-MMt.text" = "Diskuter på vores forum, på sociale netværk eller på GitHub";
+"W6h-Gt-MMt.text" = "Debattér på vores forum, sociale netværk eller GitHub";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "bEE-nS-r3u"; */
 "bEE-nS-r3u.title" = "Indstillinger";
@@ -53,7 +53,7 @@
 "cOi-GX-KAC.text" = "Support";
 
 /* Class = "UILabel"; text = "Export logs"; ObjectID = "cWE-CY-2xl"; Note = "(Main Menu) Advanced Settings caption"; */
-"cWE-CY-2xl.text" = "Eksporter logs";
+"cWE-CY-2xl.text" = "Eksportere logs";
 
 /* Class = "UILabel"; text = "You can review the app in the App Store"; ObjectID = "csx-k8-Qg7"; */
 "csx-k8-Qg7.text" = "Du kan bedømme appen i App Store";
@@ -62,16 +62,16 @@
 "dNj-vb-TQe.text" = "Ofte stillede spørgsmål";
 
 /* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
-"fva-Rp-ExO.text" = "Indsend funktionsanmodninger og forslag";
+"fva-Rp-ExO.text" = "Indsend funktionsanmodninger og -forslag";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
 "gap-Uy-5ka.placeholder" = "E-mailadresse";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
-"iwI-Gm-rAp.text" = "Sådan blokerer du annoncer med AdGuard";
+"iwI-Gm-rAp.text" = "Sådan blokeres annoncer med AdGuard";
 
 /* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
-"ow5-MW-Ued.text" = "Hjælp os med at forbedre vores app";
+"ow5-MW-Ued.text" = "Hjælp os med at forbedre appen";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Rapporter fejlagtig blokering";
@@ -104,4 +104,4 @@
 "xb2-Gf-9h7.text" = "Udseende og andet";
 
 /* Class = "UILabel"; text = "Watch video tutorial"; ObjectID = "yDj-tf-86u"; Note = "(Main Menu) Advanced Settings caption"; */
-"yDj-tf-86u.text" = "Se videovejledning";
+"yDj-tf-86u.text" = "Kig videovejledning";

@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "Jbp-5W-y9v"; */
-"Jbp-5W-y9v.normalTitle" = "Privatlivspolitik";
+"Jbp-5W-y9v.normalTitle" = "Fortrolighedspolitik";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "hE0-Ag-02J"; */
 "hE0-Ag-02J.text" = "Om";
@@ -11,7 +11,7 @@
 "jMW-e4-GbU.title" = "Log ind";
 
 /* Class = "UIButton"; normalTitle = "Discuss AdGuard"; ObjectID = "oMX-oj-ZeJ"; */
-"oMX-oj-ZeJ.normalTitle" = "Diskuter AdGuard";
+"oMX-oj-ZeJ.normalTitle" = "Debattér AdGuard";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */
 "uyB-mD-gtt.normalTitle" = "EULA";

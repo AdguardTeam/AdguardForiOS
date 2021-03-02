@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
-"5dK-DT-TDt.text" = "Indirizzo Email errato";
+"5dK-DT-TDt.text" = "Indirizzo e-mail errato";
 
 /* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
 "5nl-wn-tlv.text" = "Descrizione:";
@@ -65,7 +65,7 @@
 "fva-Rp-ExO.text" = "Invia richieste di funzionalità e suggerimenti";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
-"gap-Uy-5ka.placeholder" = "Indirizzo Email";
+"gap-Uy-5ka.placeholder" = "Indirizzo e-mail";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Come bloccare gli annunci con AdGuard";
@@ -89,7 +89,7 @@
 "rlh-5H-fPk.text" = "Richiedi funzionalità";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
-"se6-jk-4Az.text" = "Sottoscrizioni e account";
+"se6-jk-4Az.text" = "Abbonamenti e profilo";
 
 /* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
 "srJ-sd-sZF.text" = "Messaggio";

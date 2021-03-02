@@ -3,3 +3,6 @@
 
 /* Class = "UIButton"; normalTitle = "Install"; ObjectID = "QUd-Cq-s4r"; */
 "QUd-Cq-s4r.normalTitle" = "安装";
+
+/* Class = "UILabel"; text = "No compromise! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!"; ObjectID = "mC8-Ix-Hei"; */
+"mC8-Ix-Hei.text" = "不妥协！使用 AdGuard VPN ，保持100%的匿名性并同时享受广告拦截程序的好处！";

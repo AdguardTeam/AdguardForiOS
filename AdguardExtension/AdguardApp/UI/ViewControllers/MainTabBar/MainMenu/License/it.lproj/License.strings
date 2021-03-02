@@ -26,7 +26,7 @@
 "P6N-OK-fHG.text" = "Password:";
 
 /* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "VAI AL MIO ACCOUNT";
+"Rxf-sg-Wfk.normalTitle" = "VAI AL MIO PROFILO";
 
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
 "UaA-JQ-kV4.title" = "Accedi";
@@ -35,7 +35,7 @@
 "YIm-R8-cxj.text" = "Bloccare phishing, truffe e cripto-jacking";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Accedi con il tuo account AdGuard o tramite reti social";
+"ZuM-Nn-uXv.text" = "Accedi con il tuo profilo AdGuard o tramite reti social";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "ACCEDI";

@@ -10,23 +10,26 @@
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "Navn:";
 
+/* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
+"Fwl-LI-5Fu.placeholder" = "https://eksempel.dk";
+
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard fungerer ikke på siderne fra denne liste";
+"Gg8-4u-qvU.text" = "AdGuard fungerer ikke på webstederne fra denne liste";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtre";
 
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
-"NsT-wt-1hd.text" = "Nyt brugerdefineret filter";
+"NsT-wt-1hd.text" = "Nyt tilpasset filter";
 
 /* Class = "UILabel"; text = "Subscription URL:"; ObjectID = "O7x-wu-TBi"; */
-"O7x-wu-TBi.text" = "Abonnement URL:";
+"O7x-wu-TBi.text" = "Abonnements-URL:";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "ANNULLER";
+"OpB-AR-Og7.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Dette modul blokerer annoncer og sporing på websteder, der åbnes i Safari";
+"QHZ-sJ-wTL.text" = "Dette modul blokerer annoncer og sporing på websteder åbnet i Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Antal regler: ";
@@ -38,10 +41,10 @@
 "VCK-db-aeg.text" = "Brugerregler";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
-"Ve5-DF-RNB.text" = "Hjemmeside";
+"Ve5-DF-RNB.text" = "Websted";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
-"Z16-OR-tjl.text" = "Filter URL:";
+"Z16-OR-tjl.text" = "Filter-URL:";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
 "cTI-39-Vwx.text" = "Version";
@@ -50,13 +53,13 @@
 "eAd-RZ-bHN.text" = "Tilføj tilpassede filterlister her";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Liste over tilladte";
+"f3z-Yh-zY2.text" = "Hvidliste";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "TILFØJ";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "ANNULLER";
+"mEm-ll-QZR.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
 "mTM-IO-iFw.text" = "Filtre";
@@ -71,4 +74,4 @@
 "wzJ-ge-NyI.text" = "Antal regler:";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Indtast filternavn:";
+"zcB-eh-Ou4.placeholder" = "Angiv filternavn:";

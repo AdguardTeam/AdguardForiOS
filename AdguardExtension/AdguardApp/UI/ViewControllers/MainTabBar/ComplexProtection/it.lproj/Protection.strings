@@ -17,7 +17,7 @@
 "l1g-hs-4EK.text" = "gratis";
 
 /* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
-"lJO-ae-oJu.text" = "Un servizio VPN veloce e affidabile che funzionerà perfettamente insieme al blocco degli annunci AdGuard.";
+"lJO-ae-oJu.text" = "Un servizio VPN veloce e affidabile che funzionerà perfettamente insieme al blocca-annunci AdGuard.";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "Questo modulo ti consente di utilizzare un DNS personalizzato e di migliorare la tua privacy crittografando le tue richieste DNS.";

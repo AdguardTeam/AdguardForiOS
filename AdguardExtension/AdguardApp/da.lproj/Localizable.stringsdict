@@ -13,9 +13,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis prøveperiode på en dag</string>
+        <string>Start med en gratis éndags prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis prøveperiode på %d dage</string>
+        <string>Start med en gratis %d-dages prøveperiode</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -29,9 +29,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis prøveperiode på en uge</string>
+        <string>Start med en gratis énuges prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis prøveperiode på %d uger</string>
+        <string>Start med en gratis %d-ugers prøveperiode</string>
       </dict>
     </dict>
     <key>trial_description_months</key>
@@ -45,9 +45,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis prøveperiode på en måned </string>
+        <string>Start med en gratis énmåneds prøveperiode </string>
         <key>other</key>
-        <string>Start med en gratis prøveperiode på %d måneder </string>
+        <string>Start med en gratis %d-måneders prøveperiode </string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -61,9 +61,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis prøveperiode på et år </string>
+        <string>Start med en gratis étårs prøveperiode </string>
         <key>other</key>
-        <string>Start med en gratis prøveperiode på %d år </string>
+        <string>Start med en gratis %d-års prøveperiode </string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -109,9 +109,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En dag med gratis fuld adgang</string>
+        <string>Éndags gratis fuld adgang</string>
         <key>other</key>
-        <string>%d-dage med gratis fuld adgang</string>
+        <string>%d-dages gratis fuld adgang</string>
       </dict>
     </dict>
     <key>getPro_full_access_weeks</key>
@@ -125,9 +125,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En uge med gratis fuld adgang</string>
+        <string>Énuges gratis fuld adgang</string>
         <key>other</key>
-        <string>%d-uger med gratis fuld adgang</string>
+        <string>%d-ugers gratis fuld adgang</string>
       </dict>
     </dict>
     <key>getPro_full_access_months</key>
@@ -141,9 +141,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En måned med gratis fuld adgang</string>
+        <string>Énmåneds gratis fuld adgang</string>
         <key>other</key>
-        <string>%d-måneder med gratis fuld adgang</string>
+        <string>%d-måneders gratis fuld adgang</string>
       </dict>
     </dict>
     <key>getPro_full_access_years</key>
@@ -157,9 +157,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Et år med gratis fuld adgang</string>
+        <string>Étårs gratis fuld adgang</string>
         <key>other</key>
-        <string>%d-år med gratis fuld adgang</string>
+        <string>%d-års gratis fuld adgang</string>
       </dict>
     </dict>
     <key>trial_period_days</key>
@@ -173,9 +173,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En dag</string>
+        <string>Éndags</string>
         <key>other</key>
-        <string>%d dage</string>
+        <string>%d-dages</string>
       </dict>
     </dict>
     <key>trial_period_weeks</key>
@@ -189,9 +189,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En uge</string>
+        <string>Énuges</string>
         <key>other</key>
-        <string>%d uger</string>
+        <string>%d-ugers</string>
       </dict>
     </dict>
     <key>trial_period_months</key>
@@ -205,9 +205,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>En måned</string>
+        <string>Énmåneds</string>
         <key>other</key>
-        <string>%d måneder</string>
+        <string>%d-måneders</string>
       </dict>
     </dict>
     <key>trial_period_years</key>
@@ -221,9 +221,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Et år</string>
+        <string>Étårs</string>
         <key>other</key>
-        <string>%d år</string>
+        <string>%d-års</string>
       </dict>
     </dict>
   </dict>
