@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
-"53G-qY-SZ5.text" = "Kode fra autentificerings-appen:";
+"53G-qY-SZ5.text" = "Kode fra godkendelses-appen:";
 
 /* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
 "6P7-a5-VLL.text" = "Sikkerhedsfiltre";
@@ -8,19 +8,19 @@
 "70b-CS-wqh.title" = "Log ud";
 
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "Alle Premium-funktionerne er tilgængelige";
+"FLH-Qd-Atk.text" = "Alle Premium-funktioner er tilgængelige";
 
 /* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Log ind";
 
 /* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
-"KOP-vw-FG7.text" = "Lav dine egne regler";
+"KOP-vw-FG7.text" = "Indstil egne regler";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-mail:";
 
 /* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOKER FLERE\nANNONCER & TRACKERS";
+"NlM-RH-NgY.text" = "BLOKÉR FLERE\nANNONCER OG TRACKERS";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Adgangskode:";
@@ -32,16 +32,16 @@
 "UaA-JQ-kV4.title" = "Log ind";
 
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Bloker phishing, svindel og crypto-jacking";
+"YIm-R8-cxj.text" = "Blokér phishing, svindel og crypto-jacking";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Log ind med din AdGuard-konto eller med forbundne sociale netværker";
+"ZuM-Nn-uXv.text" = "Log ind med din AdGuard-konto eller med forbundne sociale netværk";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "LOG IND";
 
 /* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Værdsæt dit privatliv";
+"fwp-I7-Qtl.text" = "Værdsæt din fortrolighed";
 
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Log ind";

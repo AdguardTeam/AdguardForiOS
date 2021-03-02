@@ -11,7 +11,7 @@
 "7nl-3p-BP2.text" = "Risposta TTL bloccata";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Inverti Lista Bianca";
+"8ad-4w-rbs.text" = "Inverti Lista bianca";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Non compatibile con altre app VPN,  instabile";
@@ -125,7 +125,7 @@
 "cdQ-kW-CG7.text" = "Modalità tunnel";
 
 /* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
-"cgV-he-JNk.text" = "Rispondi con indirizzo IP zero (0.0.0.0 per A; :: per AAAA) quando bloccato da una regola in stile Adblock; rispondi con l'indirizzo IP specificato nella regola quando bloccato dalla regola di stile /etc/hosts";
+"cgV-he-JNk.text" = "Risponde con un indirizzo IP pari a zero (0.0.0.0 per A; :: per AAAA) quando bloccato da una regola in stile Blocca-annunci; risponde con l\'indirizzo IP specificato nella regola quando bloccato da una regola in stile /etc/hosts";
 
 /* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
 "dLN-5K-c1N.text" = "Riavvia protezione al cambio di rete";

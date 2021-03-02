@@ -2,7 +2,7 @@
 "884-Hm-mb6.text" = "Safari-beskyttelse";
 
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
-"P9C-72-GAw.text" = "premium";
+"P9C-72-GAw.text" = "Premium";
 
 /* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
 "Xkp-BS-f97.text" = "Ikke installeret";
@@ -20,10 +20,10 @@
 "lJO-ae-oJu.text" = "En hurtig og pålidelig VPN-tjeneste, der fungerer problemfrit sammen med AdGuard-adblocker.";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Dette modul giver dig mulighed for at bruge en brugerdefineret DNS-server og forbedrer dit privatliv ved at kryptere dine DNS-forespørgsler.";
+"teo-vm-NRJ.text" = "Dette modul lader dig bruge en tilpasset DNS-server og forbedrer din fortrolighed ved at kryptere dine DNS-forespørgsler.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Dette modul blokerer annoncer og trackere på websteder der åbnes i Safari. Du kan vælge mellem forskellige filterlister eller tilføje dine egne i nedenstående indstillinger";
+"vlx-BS-A2y.text" = "Dette modul blokerer annoncer og trackere på websteder åbnet i Safari. Du kan vælge mellem forskellige filterlister eller tilføje dine egne i nedenstående indstillinger";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Beskyttelse";

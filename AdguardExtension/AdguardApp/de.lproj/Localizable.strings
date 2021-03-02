@@ -640,6 +640,9 @@
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Sie haben eine ungültigen Upstream eingegeben";
 
+/* (UpstreamsController) error message text */
+"invalid_ip_message" = "Sie haben eine ungültige IP-Adresse eingegeben";
+
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Ungültiges DNS-Protokoll";
 

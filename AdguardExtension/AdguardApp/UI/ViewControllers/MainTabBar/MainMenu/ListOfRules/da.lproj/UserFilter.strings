@@ -1,14 +1,14 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "ANNULLER";
+"5eU-q4-Xed.normalTitle" = "ANNULLÉR";
 
 /* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "Reglen er blevet tilføjet til Brugerreglerne";
+"BfI-YN-iXe.text" = "Reglen er føjet til Brugerregler";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "GEM";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
-"EH6-Zr-YRP.text" = "Rediger";
+"EH6-Zr-YRP.text" = "Redigér";
 
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
 "HFf-Yp-hjB.normalTitle" = "Vælg";
@@ -17,7 +17,7 @@
 "Tei-uI-6Gr.normalTitle" = "FJERN";
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "ANNULLER";
+"U2P-9b-f6k.normalTitle" = "ANNULLÉR";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "TILFØJ";

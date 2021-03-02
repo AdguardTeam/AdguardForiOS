@@ -1,8 +1,8 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "Si è verificato un errore inaspettato. Contatta il supporto.";
+"support_unexpected_error" = "Si è verificato un errore inaspettato. Contatta il team di supporto.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Non posso convertire le regole. Si è verificato un errore imprevisto. Contatta la squadra di supporto.";
+"support_rule_converting_error" = "Non è possibile convertire le regole. Si è verificato un errore imprevisto. Contatta il team di supporto.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Impossibile inizializzare il convertitore al formato JSON!";
@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Di conseguenza, i tuoi cambiamenti recenti non sono stati applicati.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "I filtro non possono essere caricati in Safari. Prova ad azzerare le tue regole e la Lista Bianca, o cambia la lista dei filtri utilizzati.";
+"load_to_safari_error" = "I filtri non possono essere caricati in Safari. Prova a rimuovere le tue regole e la Lista bianca, o cambia la lista dei filtri utilizzati.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Lista Bianca (invertita)";
+"inverted_whitelist_title" = "Lista bianca (inversa)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applicazione dei cambiamenti...";
@@ -89,7 +89,7 @@
 "user_not_found_message" = "Nessun utente é stato trovato con questa email. Si prega di iscriversi prima su %@.";
 
 /* (SignInController) SignIn via AdGuard account title */
-"sign_in_via_adguard_title" = "Utilizza account AdGuard";
+"sign_in_via_adguard_title" = "Utilizza profilo AdGuard";
 
 /* (SignInController) SignIn via Apple account title */
 "sign_in_via_apple_title" = "Continua con Apple";
@@ -101,19 +101,19 @@
 "sign_in_via_facebook_title" = "Continua con Facebook";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
-"premium_expired_message" = "Il tuo account Premium è scaduto";
+"premium_expired_message" = "Il tuo profilo Premium è scaduto";
 
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
 "premium_expired_title" = "Attenzione";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Hai effettuato correttamente l'accesso al tuo account AdGuard, ma non esistono chiavi di licenza che ti consentano di attivare la versione premium.";
+"not_premium_message" = "Hai effettuato correttamente l\'accesso al tuo profilo AdGuard, ma non esistono chiavi di licenza che ti consentano di attivare la versione premium.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
-"login_success_message" = "Hai effettuato correttamente l'accesso al tuo account AdGuard! La versione premium di AdGuard per iOS è stata attivata.";
+"login_success_message" = "Hai effettuato correttamente l'accesso al tuo profilo AdGuard! La versione premium di AdGuard per iOS è stata attivata.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Hai effettuato correttamente l'accesso al tuo account AdGuard, ma le chiavi di licenza che ti consentono di attivare la versione premium sono scadute.";
+"login_premium_expired_message" = "Hai effettuato correttamente l'accesso al tuo profilo AdGuard, ma le chiavi di licenza che ti consentono di attivare la versione premium sono scadute.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Si è verificato un errore durante il tentativo di ripristinare l'acquisto.";
@@ -149,10 +149,10 @@
 "inverted_whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard abiliterà il filtraggio in Safari solo per questi siti web.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Inserire qui i nomi dei domini separati da interruzioni di riga. AdGuard permetterà tutte le connessioni a questi domini.";
+"dns_whitelist_text" = "Inserisci qui i nomi di dominio separati da interruzioni di riga. AdGuard consentirà tutte le connessioni a questi domini.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Questa Lista Nera supporta la <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
+"dns_blacklist_text_format" = "Questa Lista nera supporta la <a href=\"%@\">Sintassi DNS di AdGuard</a>. Inserisci qui le regole separate da interruzioni di riga. AdGuard bloccherà tutte le connessioni ai domini che corrispondono a queste regole.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Aggiornamento...";
@@ -161,7 +161,7 @@
 "add_blacklist_rule_title" = "Aggiungi una regola";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Aggiungi un dominio";
+"add_whitelist_domain_title" = "Inserisci un dominio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||esempio.org^";
@@ -182,7 +182,7 @@
 "add_wifi_name_caption" = "Nome:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
-"bug_report_sending_error" = "Non posso inviare il rapporto di bug poiché non hai configurato alcun account email.";
+"bug_report_sending_error" = "Non posso inviare la segnalazione bug poiché non hai configurato alcun indirizzo e-mail.";
 
 /* (MainController) Error on check filter uspdates */
 "filter_updates_error" = "Errore nell'aggiornamento dei filtri";
@@ -236,13 +236,13 @@
 "confirm_logout_text" = "Sei sicuro di voler uscire?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "C'è stato un problema con la configurazione del VPN, contatta la nostra squadra di supporto.";
+"support_vpn_configuration_problem" = "C\'è stato un problema con la configurazione della VPN, contatta il nostro team di supporto.";
 
 /* login error message */
 "login_error_message" = "Si è verificato un errore durante l'accesso";
 
 /* purchase secription format */
-"purchase_description_format" = "Informazioni sull'abbonamento AdGuard:<br><br>• Il pagamento verrà addebitato sul tuo account iTunes alla conferma dell'acquisto.<br><br>• L'abbonamento viene rinnovato automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente.<br><br>• Il canone di rinnovo dell'abbonamento verrà addebitato entro 24 ore prima della fine del periodo corrente.<br><br> Gli abbonamenti possono essere gestiti e il rinnovo automatico può essere disattivato nelle impostazioni dell'account iTunes dopo l'acquisto di un abbonamento.<br><br><a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla riservatezza</a>";
+"purchase_description_format" = "Informazioni sull'abbonamento AdGuard:<br><br>• Il pagamento verrà addebitato sul tuo profilo iTunes alla conferma dell'acquisto.<br><br>• L'abbonamento viene rinnovato automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo corrente.<br><br>• Il canone di rinnovo dell'abbonamento verrà addebitato entro 24 ore prima della fine del periodo corrente.<br><br> Gli abbonamenti possono essere gestiti e il rinnovo automatico può essere disattivato dalle impostazioni del profilo iTunes dopo l'acquisto di un abbonamento.<br><br><a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla riservatezza</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Termini di utilizzo</a> e <a href=%1$@>Politica sulla riservatezza</a>";
@@ -314,13 +314,13 @@
 "failed_updating_current_state_label" = "I filtri non sono stati aggiornati";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Questa licenza è stata attivata sul numero massimo di dispositivi.\nÈ possibile scollegare la licenza dai dispositivi non utilizzati nel proprio account sul sito web: adguard.com";
+"login_max_computers_exceeded" = "Questa licenza è stata attivata sul numero massimo di dispositivi.\nÈ possibile scollegare la licenza dai dispositivi non utilizzati dal proprio profilo sul sito web: adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Prima di poter utilizzare questa estensione dell'azione, %1$@ deve eseguire una configurazione iniziale. Avvia l'applicazione principale %2$@ per consentirle di farlo.";
 
 /* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
-"content_blocker_disabled_format" = "Si osservi che il Blocco contenuti è disattivato. Ciò significa che gli annunci non saranno filtrati indipendentemente dalle impostazioni di AdGuard. Attiva il Blocco contenuti AdGuard nelle impostazioni Safari per avviare il filtraggio.";
+"content_blocker_disabled_format" = "Si osservi che il Blocco contenuti è disattivato. Ciò significa che gli annunci non saranno filtrati indipendentemente dalle impostazioni di AdGuard. Attiva il Blocco contenuti AdGuard dalle impostazioni Safari per avviare il filtraggio.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
 "hostname_obtaining_error" = "L'hostname non è ottenuto. Forse la pagina non è stata ancora caricata.";
@@ -371,10 +371,10 @@
 "bad_credentials_error" = "E-mail o password errate";
 
 /* (LoginController) disabled account mesage */
-"account_is_disabled_error" = "L'account è bloccato";
+"account_is_disabled_error" = "Il profilo è bloccato";
 
 /* (LoginController) locked account mesage */
-"account_is_locked_error" = "Il account è temporaneamente bloccato";
+"account_is_locked_error" = "Il profilo è temporaneamente bloccato";
 
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "Token 2FA non valido";
@@ -401,13 +401,13 @@
 "wifi_data_description" = "Protezione DNS con Wi-Fi in uso";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Lista Bianca";
+"allowlist_title" = "Lista bianca";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Lista Bianca";
+"whitelist_title" = "Lista bianca";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Lista Nera";
+"dns_blacklist_title" = "Lista nera";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Regole utente Safari";
@@ -464,7 +464,7 @@
 "essential" = "Essenziale";
 
 /*(LogCategory) site_analytics category*/
-"site_analytics" = "Dati analitici del sito";
+"site_analytics" = "Analitici del sito";
 
 /*(LogCategory) social media category*/
 "social_media" = "Social media";
@@ -476,7 +476,7 @@
 "cdn" = "CDN";
 
 /*(LogCategory) mobile analytics category*/
-"mobile_analytics" = "Dati analitici cellullari";
+"mobile_analytics" = "Analitici mobili";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
@@ -599,19 +599,19 @@
 "dns_request_status_encrypted" = "Crittografata";
 
 /*(DnsLogController) status of dns request */
-"dns_request_status_allowlisted" = "Permesso";
+"dns_request_status_allowlisted" = "Consentito";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "aggiunto alla Lista Bianca";
+"dns_request_user_status_added_to_whitelist" = "aggiunto alla Lista bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "aggiunto alla Lista Nera";
+"dns_request_user_status_added_to_blacklist" = "aggiunto alla Lista nera";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Lista Bianca";
+"dns_request_user_status_removed_from_whitelist" = "rimosso dalla Lista bianca";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Lista Nera";
+"dns_request_user_status_removed_from_blacklist" = "rimosso dalla Lista nera";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "Apri le <b>impostazioni</b>";
@@ -632,7 +632,7 @@
 "block_request" = "Bloccare richiesta";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Aggiungi dominio alla Lista Bianca";
+"whitelist_request" = "Aggiungi dominio alla Lista bianca";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video Tutorial";
@@ -650,10 +650,10 @@
 "invalid_dns_protocol_message" = "%@ non è ancora supportato da iOS. Prova ad aggiungere un upstream differente.";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "Lista Nera di sistema";
+"system_blacklist" = "Lista nera di sistema";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Lista Bianca di Sistema";
+"system_whitelist" = "Lista bianca di Sistema";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Dettagli";
@@ -719,10 +719,10 @@
 "empty_dns_answer" = "Vuoto";
 
 /* (BugReportController) Message when bug report failed */
-"bug_report_failed_message" = "Errore nell\'invio della segnalazione bug, ti preghiamo di riprovare";
+"bug_report_failed_message" = "Errore nell\'invio della segnalazione bug, si prega di riprovare";
 
 /* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Errore nell\'invio del feedback, ti preghiamo di riprovare";
+"feedback_failed_message" = "Errore nell\'invio del feedback, si prega di riprovare";
 
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "La tua segnalazione bug è stata correttamente inviata!";
@@ -800,7 +800,7 @@
 "native_dns_setup_description" = "Per attivare il DNS nativo, dovrai aprire le <b>Impostazioni di sistema</b>, dirigerti su <b>Generale > VPN e rete > DNS</b> e selezionare <b>%@</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
-"rate_app_description" = "Comunicaci il tuo grado di soddisfazione finora raggiunto in merito all\'esperienza di blocco degli annunci";
+"rate_app_description" = "Comunicaci il tuo grado di soddisfazione fin'ora raggiunto con l\'esperienza del blocca-annunci";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Assicurati di utilizzare il <b>browser Safari</b>.<br> Attualmente è tecnicamente impossibile bloccare i contenuti in altri browser.<br> Accedi alle impostazioni di protezione di Safari e attiva tutti gli elenchi dei filtri necessari.<br> Riavvia l\'app Safari: esci e riaprila.";

@@ -11,7 +11,7 @@
 "7nl-3p-BP2.text" = "Заблокована відповідь TTL";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Інвертувати список дозволів";
+"8ad-4w-rbs.text" = "Інвертувати Список дозволів";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Несумісний з іншими VPN-програмами, нестабільний";

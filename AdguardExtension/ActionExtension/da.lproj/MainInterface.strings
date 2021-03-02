@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Block an element on this page"; ObjectID = "0yx-Eh-Ah4"; */
-"0yx-Eh-Ah4.text" = "Bloker et element på denne side";
+"0yx-Eh-Ah4.text" = "Blokér et element på denne side";
 
 /* Class = "UILabel"; text = "Contact Support"; ObjectID = "Wrl-xu-3kv"; */
 "Wrl-xu-3kv.text" = "Kontakt Support";
@@ -8,10 +8,10 @@
 "Znm-Yl-fWN.text" = "Tryk her for at bruge værktøjet til at fjerne oversete annoncer eller generelt ethvert element, du ikke ønsker at se på siden";
 
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
-"eVN-fj-ATQ.text" = "Aktiver på denne side";
+"eVN-fj-ATQ.text" = "Aktivér på denne side";
 
 /* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
 "fxW-Cr-iPW.normalTitle" = "LUK";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
-"kuu-kI-Ott.text" = "Rapporter et problem på denne side";
+"kuu-kI-Ott.text" = "Rapportér et problem på denne side";

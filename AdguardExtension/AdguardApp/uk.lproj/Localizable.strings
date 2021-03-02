@@ -23,7 +23,7 @@
 "safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Отже, ваші останні зміни не були застосовані.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та список дозволів, або змініть набір використовуваних фільтрів.";
+"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та Список дозволів або вимкніть деякі фільтри.";
 
 /* NO Button caption in alert */
 "common_action_no" = "НІ";
@@ -422,13 +422,13 @@
 "disabled" = "Вимкнено";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Вилучити зі списку дозволів";
+"remove_from_whitelist" = "Вилучити зі Списку дозволів";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Вилучити зі списку блокування";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Додати до списку дозволів";
+"add_to_whitelist" = "Додати до Списку дозволів";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Додати до списку блокування";
@@ -596,13 +596,13 @@
 "dns_request_status_allowlisted" = "Дозволено";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "додано до списку дозволів";
+"dns_request_user_status_added_to_whitelist" = "додано до Списку дозволів";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_blacklist" = "додано до списку блокування";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "вилучено зі списку дозволів";
+"dns_request_user_status_removed_from_whitelist" = "вилучено зі Списку дозволів";
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "вилучено зі списку блокування";
@@ -626,7 +626,7 @@
 "block_request" = "Блокувати запит";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Додати домен до списку дозволів";
+"whitelist_request" = "Додати домен до Списку дозволів";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Відеоінструкція";
@@ -647,7 +647,7 @@
 "system_blacklist" = "Системний список блокування";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "Системний список дозволів";
+"system_whitelist" = "Системний Список дозволів";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Подробиці";
