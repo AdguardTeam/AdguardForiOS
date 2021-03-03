@@ -608,11 +608,12 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="L9c-wF-saA" secondAttribute="bottom" constant="4.5" id="91j-th-Kb8"/>
+                                        <constraint firstAttribute="bottom" secondItem="L9c-wF-saA" secondAttribute="bottom" id="91j-th-Kb8"/>
                                         <constraint firstItem="zg2-3c-MAw" firstAttribute="leading" secondItem="r8F-TE-LIb" secondAttribute="trailing" constant="16" id="9mx-mC-MsC">
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
                                         <constraint firstItem="cWA-U7-chb" firstAttribute="leading" secondItem="zg2-3c-MAw" secondAttribute="leading" id="I36-2I-7SM"/>
+                                        <constraint firstItem="Sos-fZ-ghh" firstAttribute="top" secondItem="zg2-3c-MAw" secondAttribute="top" id="KMv-6Z-B20"/>
                                         <constraint firstItem="r8F-TE-LIb" firstAttribute="top" secondItem="zg2-3c-MAw" secondAttribute="top" constant="4" id="OZ5-1A-7l8"/>
                                         <constraint firstItem="L9c-wF-saA" firstAttribute="leading" secondItem="vsZ-zL-SRj" secondAttribute="leading" id="OfK-fc-vJr"/>
                                         <constraint firstItem="Sos-fZ-ghh" firstAttribute="leading" secondItem="cWA-U7-chb" secondAttribute="trailing" constant="16" id="Qjd-iW-pgR">
@@ -638,7 +639,6 @@
                                             <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                         </constraint>
                                         <constraint firstItem="lBi-dZ-EUJ" firstAttribute="top" secondItem="vsZ-zL-SRj" secondAttribute="top" id="qXu-08-1Vs"/>
-                                        <constraint firstItem="Sos-fZ-ghh" firstAttribute="top" secondItem="zg2-3c-MAw" secondAttribute="top" id="xOV-a4-f13"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
