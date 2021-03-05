@@ -31,8 +31,6 @@
 #define SAFARI_BUNDLE_ID                        @"com.apple.mobilesafari"
 #define SAFARI_VC_BUNDLE_ID                     @"com.apple.SafariViewService"
 
-#define DNS_FILTERS_CHECK_LIMIT                 21600 // 6 hours
-
 NSString *AppDelegateStartedUpdateNotification = @"AppDelegateStartedUpdateNotification";
 NSString *AppDelegateUpdateDidNotStartedNotification = @"AppDelegateUpdateDidNotStartedNotification";
 NSString *AppDelegateFinishedUpdateNotification = @"AppDelegateFinishedUpdateNotification";
@@ -50,8 +48,6 @@ typedef enum : NSUInteger {
     AEUpdateFailed,
     AEUpdateNoData
 } AEUpdateResult;
-
-static NSTimeInterval lastCheckTime;
 
 @interface AppDelegate (){
     
@@ -248,7 +244,7 @@ static NSTimeInterval lastCheckTime;
             }
             
             //Entry point for updating of the filters
-            if ([self checkAutoUpdateConditions]) {
+            if ([helper checkAutoUpdateConditions]) {
                 [self invalidateAntibanner:NO interactive:YES];
             }
         }];
@@ -281,7 +277,7 @@ static NSTimeInterval lastCheckTime;
             return;
         }
         
-        BOOL checkResult = [self checkAutoUpdateConditions];
+        BOOL checkResult = [helper checkAutoUpdateConditions];
         
         //Entry point for updating of the filters
         _fetchCompletion = completionHandler;
@@ -349,14 +345,6 @@ static NSTimeInterval lastCheckTime;
             
             [_purchaseService checkPremiumStatusChanged];
         }];
-        
-        // Update dns filters
-        NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-        if (!_dnsFiltersService.filtersAreUpdating && now - lastCheckTime > DNS_FILTERS_CHECK_LIMIT && checkResult && _configuration.proStatus && checkResult){
-            lastCheckTime = now;
-            [_dnsFiltersService updateFiltersWithNetworking:_networking callback:nil];
-            DDLogInfo(@"(AppDelegate - Background Fetch) Dns filters were updated");
-        }
     }
 }
 
@@ -408,6 +396,8 @@ static NSTimeInterval lastCheckTime;
         }
         
         DDLogInfo(@"(AppDelegate) Update process NOT started by timer. Time period from previous update too small.");
+        
+        [self antibanerUpdateFinished:AEUpdateFailed];
         
         return NO;
     }
@@ -614,7 +604,7 @@ static NSTimeInterval lastCheckTime;
     DDLogInfo(@"(AppDelegate) antibanerUpdateFinished with result: %@", [self resultDescription:result]);
     self.antibanerUpdateResult = result;
     
-    [helper updateTunnelSettingsIfAppropriateWithCallback:^{
+    [helper updateDnsFiltersIfNeededWithCallback:^{
         [self updateFinished];
     }];
 }
@@ -665,27 +655,6 @@ static NSTimeInterval lastCheckTime;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helpper Methods (private)
 /////////////////////////////////////////////////////////////////////
-
-- (BOOL)checkAutoUpdateConditions {
-
-    BOOL result = YES;
-    
-    NSNumber* wifiOnlyObject = [_resources.sharedDefaults objectForKey:AEDefaultsWifiOnlyUpdates];
-    BOOL wifiOnly = wifiOnlyObject ? wifiOnlyObject.boolValue : YES;
-    
-    if (wifiOnly) {
-        
-        Reachability *reach = [Reachability reachabilityForInternetConnection];
-        
-        result = [reach isReachableViaWiFi];
-        
-        if (! result) {
-            DDLogInfo(@"(AppDelegate - checkAutoUpdateConditions) App settings permit updates only over WiFi.");
-        }
-    }
-    
-    return result;
-}
 
 - (UINavigationController*) getNavigationController {
     

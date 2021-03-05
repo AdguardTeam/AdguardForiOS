@@ -71,6 +71,8 @@ class AppDelegateHelper: NSObject {
     private let authScheme = "auth"
     private let socialErrorUserNotFound = "user_not_found"
     
+    private let dnsFiltersCheckInterval = 21600 // 6 hours
+    
     private var firstRun: Bool {
         get {
             resources.sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
@@ -324,13 +326,52 @@ class AppDelegateHelper: NSObject {
         return success
     }
     
+    func updateDnsFiltersIfNeeded( callback: @escaping ()->Void) {
+        let lastCheckTime = resources.lastDnsFiltersUpdateTime ?? Date(timeIntervalSince1970: 0)
+        let interval = Date().timeIntervalSince(lastCheckTime)
+        let checkResult = checkAutoUpdateConditions()
+        if !dnsFiltersService.filtersAreUpdating
+            && Int(interval) > dnsFiltersCheckInterval
+            && configuration.proStatus
+            && checkResult {
+            resources.lastDnsFiltersUpdateTime = Date()
+            
+            DDLogInfo("(AppDelegateHelper) updateDnsFiltersIfNeeded - update dns filters")
+            dnsFiltersService.updateFilters(networking: networking) { [weak self] in
+                
+                DDLogInfo("(AppDelegateHelper) updateDnsFiltersIfNeeded - dns filters are updeted")
+                self?.updateTunnelSettingsIfAppropriate {
+                    callback()
+                }
+            }
+        }
+        else {
+            DDLogInfo("(AppDelegateHelper) updateDnsFiltersIfNeeded - not all conditions are met")
+            callback()
+        }
+    }
+    
+    func checkAutoUpdateConditions()->Bool {
+        
+        if !resources.wifiOnlyUpdates {
+            return true
+        }
+        
+        let reachability = Reachability.forInternetConnection()
+        let reachable = reachability?.isReachableViaWiFi() ?? false
+        if !reachable {
+            DDLogInfo("(AppDelegateHelper - checkAutoUpdateConditions) App settings permit updates only over WiFi.")
+        }
+        return reachable
+    }
+    
     /**
      Do not update VPN configuration if:
      1. System protection is disabled
      2. DNS implementation is native
      3. Application is in background state (we are not sure if VPN configuration is active)
      */
-    func updateTunnelSettingsIfAppropriate(callback: @escaping ()->Void ) {
+    private func updateTunnelSettingsIfAppropriate(callback: @escaping ()->Void ) {
         vpnManager.getConfigurationStatus { [weak self] (status) in
             guard let self = self else { return }
             if self.complexProtection.systemProtectionEnabled, self.resources.dnsImplementation == .adGuard, status.configurationIsActive, self.dnsFiltersService.enabledFiltersCount > 0 {
