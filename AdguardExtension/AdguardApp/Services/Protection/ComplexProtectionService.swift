@@ -102,29 +102,28 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
-        DDLogInfo("(ComplexProtectionService) - start \(#function)")
-        resources.complexProtectionEnabled = enabled
-                    
+        let complexEnabled = resources.complexProtectionEnabled
         let safariEnabled = resources.safariProtectionEnabled
         let systemEnabled = resources.systemProtectionEnabled
+        resources.complexProtectionEnabled = enabled
+        
+        DDLogInfo("(ComplexProtectionService) - complexProtection state: \(complexEnabled)")
+        DDLogInfo("(ComplexProtectionService) - safariEnabled state: \(safariEnabled)")
+        DDLogInfo("(ComplexProtectionService) - systemProtection state: \(systemEnabled)")
+        DDLogInfo("(ComplexProtectionService) - switchComplexProtection to state: \(enabled)")
         
         if enabled && !safariEnabled && !systemEnabled {
-            DDLogInfo("(ComplexProtectionService) - Select all protections to enable")
             resources.safariProtectionEnabled = true
-            DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - true")
             if resources.dnsImplementation == .adGuard {
                 resources.systemProtectionEnabled = proStatus
-                DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - \(proStatus)")
             }
         }
         
         if #available(iOS 14.0, *) {
             if resources.dnsImplementation == .native {
                 if enabled {
-                    DDLogInfo("(ComplexProtectionService) - In native mode save dns manager")
                     nativeProvidersService.saveDnsManager { _ in }
                 } else {
-                    DDLogInfo("(ComplexProtectionService) - In native mode remove dns manager")
                     nativeProvidersService.removeDnsManager { _ in }
                 }
             }
@@ -149,30 +148,30 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void){
-        DDLogInfo("(ComplexProtectionService) - start \(#function)")
         let needsUpdateSystemProtection = false
         let needsUpdateSafari = true
         
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
+        DDLogInfo("(ComplexProtectionService) - complexProtection state: \(resources.complexProtectionEnabled)")
+        DDLogInfo("(ComplexProtectionService) - systemProtection state: \(systemOld)")
+        DDLogInfo("(ComplexProtectionService) - safariProtection state: \(safariOld)")
+        DDLogInfo("(ComplexProtectionService) - switchSafariProtection to state: \(enabled)")
+        
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - true")
             
             if resources.systemProtectionEnabled {
                 resources.systemProtectionEnabled = false
-                DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - true")
             }
         }
 
         if !enabled && !systemProtectionEnabled {
             resources.complexProtectionEnabled = false
-            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - false")
         }
         
         resources.safariProtectionEnabled = enabled
-        DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - \(enabled)")
         
         updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
@@ -196,7 +195,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     // MARK: - Private methods
     
     private func switchSystemProtectionInternal(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
-        DDLogInfo("(ComplexProtectionService) - start \(#function)")
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
@@ -256,22 +254,23 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         let needsUpdateSafari = false
         let needsUpdateSystem = true
         
+        DDLogInfo("(ComplexProtectionService) - complexProtection state: \(resources.complexProtectionEnabled)")
+        DDLogInfo("(ComplexProtectionService) - systemProtection state: \(resources.systemProtectionEnabled)")
+        DDLogInfo("(ComplexProtectionService) - safariProtection state: \(resources.safariProtectionEnabled)")
+        DDLogInfo("(ComplexProtectionService) - switchSystemProtection to state: \(enabled)")
+        
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - true")
             if resources.safariProtectionEnabled {
                 resources.safariProtectionEnabled = false
-                DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - false")
             }
         }
         
         if !enabled && !safariProtection.safariProtectionEnabled {
             self.resources.complexProtectionEnabled = false
-            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - false")
         }
         
         resources.systemProtectionEnabled = enabled
-        DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - \(enabled)")
         
         return (needsUpdateSafari, needsUpdateSystem)
     }

@@ -423,8 +423,6 @@ class VpnManager: VpnManagerProtocol {
             actualEnabled = true
         } else if manager.isEnabled && !manager.isOnDemandEnabled {
             actualEnabled = manager.connection.status == .connected || manager.connection.status == .connecting
-        } else if !manager.isEnabled && savedEnabled {
-            actualEnabled = savedEnabled ? savedEnabled : false
         }
         
         DDLogInfo("(VpnManager) savedState: \(savedEnabled) actual: \(actualEnabled)")
