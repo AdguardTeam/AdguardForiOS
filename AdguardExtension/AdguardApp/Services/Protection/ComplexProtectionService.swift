@@ -337,7 +337,10 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             guard let self = self else { return }
             if let enabled = note.object as? Bool {
                 self.resources.systemProtectionEnabled = enabled
-                if !self.complexProtectionEnabled { self.resources.complexProtectionEnabled = enabled }
+                // if safariProtection is disabled we must update complex protection state
+                if !self.safariProtectionEnabled {
+                    self.resources.complexProtectionEnabled = enabled
+                }
             }
             
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
