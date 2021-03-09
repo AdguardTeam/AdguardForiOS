@@ -98,27 +98,33 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         
         addObservers()
         checkVpnInstalled()
+        DDLogInfo("(ComplexProtectionService) - ComplexProtectionService was initialized")
     }
     
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
-        
+        DDLogInfo("(ComplexProtectionService) - start \(#function)")
         resources.complexProtectionEnabled = enabled
                     
         let safariEnabled = resources.safariProtectionEnabled
         let systemEnabled = resources.systemProtectionEnabled
         
         if enabled && !safariEnabled && !systemEnabled {
+            DDLogInfo("(ComplexProtectionService) - Select all protections to enable")
             resources.safariProtectionEnabled = true
+            DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - true")
             if resources.dnsImplementation == .adGuard {
                 resources.systemProtectionEnabled = proStatus
+                DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - \(proStatus)")
             }
         }
         
         if #available(iOS 14.0, *) {
             if resources.dnsImplementation == .native {
                 if enabled {
+                    DDLogInfo("(ComplexProtectionService) - In native mode save dns manager")
                     nativeProvidersService.saveDnsManager { _ in }
                 } else {
+                    DDLogInfo("(ComplexProtectionService) - In native mode remove dns manager")
                     nativeProvidersService.removeDnsManager { _ in }
                 }
             }
@@ -143,23 +149,30 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void){
-        
-        var needsUpdateSystemProtection = false
-        let needsUpdateSafari = resources.safariProtectionEnabled != enabled
+        DDLogInfo("(ComplexProtectionService) - start \(#function)")
+        let needsUpdateSystemProtection = false
+        let needsUpdateSafari = true
         
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-            needsUpdateSystemProtection = resources.systemProtectionEnabled
+            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - true")
+            
+            if resources.systemProtectionEnabled {
+                resources.systemProtectionEnabled = false
+                DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - true")
+            }
         }
 
         if !enabled && !systemProtectionEnabled {
             resources.complexProtectionEnabled = false
+            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - false")
         }
         
         resources.safariProtectionEnabled = enabled
+        DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - \(enabled)")
         
         updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
@@ -183,6 +196,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     // MARK: - Private methods
     
     private func switchSystemProtectionInternal(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void) {
+        DDLogInfo("(ComplexProtectionService) - start \(#function)")
         let systemOld = resources.systemProtectionEnabled
         let safariOld = resources.safariProtectionEnabled
         
@@ -213,17 +227,21 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             
             let group = DispatchGroup()
             if safari {
+                DDLogInfo("(ComplexProtectionService) - Begining updating safari protection")
                 group.enter()
                 self.safariInvalidateJson { error in
                     safariError = error
+                    DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
                     group.leave()
                 }
             }
             
             if system {
+                DDLogInfo("(ComplexProtectionService) - Begining updating dns protection")
                 group.enter()
                 self.updateVpnSettings(vc: vc) { error in
                     systemError = error
+                    DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
                     group.leave()
                 }
             }
@@ -235,19 +253,25 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     private func updateSystemProtectionResources(toEnabledState enabled: Bool) -> (needsUpdateSafari: Bool, needsUpdateSystem: Bool){
-        var needsUpdateSafari = false
-        let needsUpdateSystem = resources.systemProtectionEnabled != enabled
+        let needsUpdateSafari = false
+        let needsUpdateSystem = true
         
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-            needsUpdateSafari = resources.safariProtectionEnabled
+            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - true")
+            if resources.safariProtectionEnabled {
+                resources.safariProtectionEnabled = false
+                DDLogInfo("(ComplexProtectionService) - safariProtectionEnabled resource set with value - false")
+            }
         }
         
         if !enabled && !safariProtection.safariProtectionEnabled {
             self.resources.complexProtectionEnabled = false
+            DDLogInfo("(ComplexProtectionService) - complexProtectionEnabled resource set with value - false")
         }
         
         resources.systemProtectionEnabled = enabled
+        DDLogInfo("(ComplexProtectionService) - systemProtectionEnabled resource set with value - \(enabled)")
         
         return (needsUpdateSafari, needsUpdateSystem)
     }
@@ -268,6 +292,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {
         if !proStatus {
+            DDLogInfo("(ComplexProtectionService) Failed \(#function) with reason: proStatus - \(proStatus)")
             completion(nil)
             return
         }
@@ -302,12 +327,14 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     private func addObservers() {
         vpnConfigurationObserver = NotificationCenter.default.observe(name: VpnManager.configurationRemovedNotification, object: nil, queue: nil) { [weak self] (note) in
+            DDLogInfo("(ComplexProtectionService) configurationRemovedNotification called")
             guard let self = self else { return }
             self.resources.systemProtectionEnabled = false
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }
         
         vpnStateChangeObserver = NotificationCenter.default.observe(name: VpnManager.stateChangedNotification, object: nil, queue: nil) { [weak self] (note) in
+            DDLogInfo("(ComplexProtectionService) stateChangedNotification called")
             guard let self = self else { return }
             if let enabled = note.object as? Bool {
                 self.resources.systemProtectionEnabled = enabled
@@ -317,6 +344,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
         
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: nil) { [weak self] _ in
+            DDLogInfo("(ComplexProtectionService) dnsImplementationChanged called")
             guard let self = self else { return }
         
             if self.resources.dnsImplementation == .adGuard {
