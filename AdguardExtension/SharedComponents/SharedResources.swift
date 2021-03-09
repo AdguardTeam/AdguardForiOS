@@ -386,6 +386,26 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var lastDnsFiltersUpdateTime: Date? {
+        get {
+            sharedDefaults().object(forKey: AEDefaultsSecurityContentBlockerRulesCount) as? Date
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsSecurityContentBlockerRulesCount)
+        }
+    }
+    
+    dynamic var wifiOnlyUpdates: Bool {
+        get {
+            let wifiOnlyObject = sharedDefaults().object(forKey: AEDefaultsWifiOnlyUpdates) as? NSNumber
+            return wifiOnlyObject?.boolValue ?? true
+        }
+        
+        set {
+            sharedDefaults().set(NSNumber(value: newValue), forKey: AEDefaultsWifiOnlyUpdates)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
