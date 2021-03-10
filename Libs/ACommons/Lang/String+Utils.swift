@@ -242,7 +242,21 @@ extension String {
         }
         
         let thousands = decimalNumber / 1000
+        
         if thousands > 100 {
+            formatter.maximumFractionDigits = 0
+            let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
+            return String(format: String.localizedString("thousands_unit"), thousandsString)
+        }
+        
+        if thousands > 10 {
+            formatter.maximumFractionDigits = 1
+            let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
+            return String(format: String.localizedString("thousands_unit"), thousandsString)
+        }
+        
+        if thousands > 1 {
+            formatter.maximumFractionDigits = 2
             let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
             return String(format: String.localizedString("thousands_unit"), thousandsString)
         }
