@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Prikaži vrstico napredka posodobitev filtrov";
 
-/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
-"BPj-Fi-8mA.text" = "Privzeto";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Zaviralci vsebine";
 
@@ -70,9 +67,6 @@
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "S tem boste odstranili vaš dejanski profil VPN in onemogočili zaščito DNS";
 
-/* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
-"Lgb-zJ-9va.text" = "Zavrnjeno";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Napredne nastavitve";
 
@@ -105,9 +99,6 @@
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Samodejno posodobi samo prek omrežja Wi-Fi";
-
-/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
-"Zsy-DV-b67.text" = "NxDomena";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Polni-Predor";
@@ -148,9 +139,6 @@
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Nadomestni strežniki";
 
-/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "Prazen IP";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Drugo";
 
@@ -189,9 +177,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Ta možnost bo izbrisala vse statistične podatke, na primer število zahtev itn.";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "IP po meri";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Omogočite oglase povsod, razen na spletnih straneh s tega seznama";

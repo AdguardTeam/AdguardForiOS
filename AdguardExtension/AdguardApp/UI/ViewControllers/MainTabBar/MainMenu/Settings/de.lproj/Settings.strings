@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Fortschrittsanzeige bei Filteraktualisierungen anzeigen";
 
-/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
-"BPj-Fi-8mA.text" = "Standard";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Inhaltsblocker";
 
@@ -70,9 +67,6 @@
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Dadurch wird Ihr aktuelles VPN-Profil entfernt und der DNS-Schutz deaktiviert";
 
-/* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
-"Lgb-zJ-9va.text" = "Verweigert";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Erweiterte Einstellungen";
 
@@ -105,9 +99,6 @@
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Auto-Update nur über WLAN";
-
-/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
-"Zsy-DV-b67.text" = "NxDomain (Nicht existierende Domäne)";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
@@ -148,9 +139,6 @@
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";
 
-/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "Null-IP-Adresse";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Sonstiges";
 
@@ -189,9 +177,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Diese Funktion entfernt alle statistischen Daten wie Anzahl der Anfragen usw.";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "Benutzerdefinierte IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Werbung überall zulassen, außer auf Websites auf dieser Liste";

@@ -19,9 +19,6 @@
 /* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Fjern VPN-profil";
 
-/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
-"BPj-Fi-8mA.text" = "Standard";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Innholdsblokkerere";
 
@@ -82,9 +79,6 @@
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Kun oppdater automatisk over Wi-Fi";
 
-/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
-"Zsy-DV-b67.text" = "NxDomain";
-
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-tunnel";
 
@@ -112,9 +106,6 @@
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Kompatibel med «Personlig VPN»-apper";
 
-/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "Null-IP";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Andre";
 
@@ -141,6 +132,3 @@
 
 /* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
 "wPe-ae-X0G.text" = "Er du en utvikler?";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "Tilpasset IP";
