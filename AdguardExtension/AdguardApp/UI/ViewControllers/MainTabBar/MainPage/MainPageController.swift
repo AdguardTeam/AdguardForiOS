@@ -580,7 +580,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     Checks if AdGuard VPN is installed and changes VPN upsell button color
     */
     private func checkAdGuardVpnIsInstalled() {
-        vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsInstalled
+        vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsActive
     }
     
     /**

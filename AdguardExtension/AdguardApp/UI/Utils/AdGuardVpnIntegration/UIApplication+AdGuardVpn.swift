@@ -8,6 +8,12 @@ extension UIApplication {
         return shared.canOpenURL(appUrl)
     }
     
+    /* Checks if AdGuard VPN tunnel is running */
+    static var adGuardVpnIsActive: Bool {
+        let activeNetworkInterfaces = NetworkManager.networkInterfaces
+        return AdGuardVpnOperatingMode.containsAdGuardVpnInterface(activeNetworkInterfaces)
+    }
+    
     /* AdGuard VPN app scheme */
     static let adguardVpnScheme = "adguard-vpn"
     
