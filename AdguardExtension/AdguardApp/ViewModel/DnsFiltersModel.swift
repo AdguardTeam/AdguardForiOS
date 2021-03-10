@@ -25,14 +25,18 @@ protocol DnsFiltersModelProtocol {
     var enabledRulesCount: Int { get }
     var isSearchActive: Bool { get set }
     
+    /* this methods must be called on main queue */
     func setFilter(index: Int, enabled: Bool)
     func addFilter(_ filter: DnsFilter, data: Data?) -> Bool
     func searchFilter(by string: String?)
+    
+    /* completion ewill be called on main queue */
     func updateFilters(completion: @escaping (Bool)->())
     func refreshFilters()
 }
 
 protocol DnsFiltersChangedProtocol: class {
+    /** must be called on main queue */
     func filtersChanged()
 }
 

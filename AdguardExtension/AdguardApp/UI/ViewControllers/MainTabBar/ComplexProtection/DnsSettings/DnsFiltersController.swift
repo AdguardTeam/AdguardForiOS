@@ -249,9 +249,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     // MARK: - DnsFiltersChangedProtocol method
     
     func filtersChanged() {
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
     // MARK: - NewCustomFilter delegate
@@ -325,13 +323,11 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     }
     
     @objc private func updateFilters(sender: UIRefreshControl) {
-        model.updateFilters { (success) in
-            DispatchQueue.main.async {[weak self] in
-                if success {
-                    self?.tableView.reloadData()
-                }
-                self?.refreshControl?.endRefreshing()
+        model.updateFilters { [weak self] (success) in
+            if success {
+                self?.tableView.reloadData()
             }
+            self?.refreshControl?.endRefreshing()
         }
     }
 }
