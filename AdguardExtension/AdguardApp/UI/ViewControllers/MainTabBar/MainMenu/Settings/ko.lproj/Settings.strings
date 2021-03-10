@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "필터 업데이트 진행 상황 표시";
 
-/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
-"BPj-Fi-8mA.text" = "기본";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "콘텐츠 차단기";
 
@@ -70,9 +67,6 @@
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "실제 VPN 프로필이 제거되고 DNS보호가 비활성화됩니다.";
 
-/* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
-"Lgb-zJ-9va.text" = "Refused";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "고급 설정";
 
@@ -105,9 +99,6 @@
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Wi-Fi 환경에서만 자동 업데이트";
-
-/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
-"Zsy-DV-b67.text" = "NxDomain";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "풀 터널";
@@ -148,9 +139,6 @@
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallback servers";
 
-/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "Null IP";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "기타";
 
@@ -189,9 +177,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "이 옵션은 요청 수 등과 같은 모든 통계 데이터를 삭제합니다.";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "사용자 지정 IP";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "이 목록에 있는 웹사이트를 제외한 모든 곳의 광고를 차단 해제";

@@ -209,7 +209,7 @@
 "adguard_dns_implementation_title" = "AdGuard";
 
 /* (DnsSettingController) Native DNS implementation title */
-"native_dns_implementation_title" = "Нативное";
+"native_dns_implementation_title" = "Нативная";
 
 /* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
 "system_dns_server" = "Без шифрования (Системный DNS)";

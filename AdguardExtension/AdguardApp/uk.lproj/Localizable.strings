@@ -20,7 +20,7 @@
 "common_error_title" = "Помилка";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Отже, ваші останні зміни не були застосовані.";
+"safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Тому ваші останні зміни не вдалось застосувати.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та Список дозволів або вимкніть деякі фільтри.";
@@ -149,10 +149,10 @@
 "inverted_whitelist_text" = "Вводьте тут назви доменів. AdGuard увімкне фільтрування в Safari лише для цих вебсайтів.";
 
 /* (UserFilterController) dns whitelist description */
-"dns_whitelist_text" = "Введіть тут назви доменів, розділені новими рядками. AdGuard дозволить всі з'єднання для цих доменів.";
+"dns_whitelist_text" = "AdGuard дозволить всі з'єднання для доменів з цього списку.";
 
 /* (UserFilterController) dns blocklist description */
-"dns_blacklist_text_format" = "Цей список блокування підтримує <a href=\"%@\">DNS-синтаксис AdGuard</a>. Введіть тут правила, розділені новими рядками. AdGuard заблокує всі з'єднання, що відповідають цим правилам.";
+"dns_blacklist_text_format" = "Цей список блокування підтримує <a href=\"%@\">DNS-синтаксис AdGuard</a>. AdGuard заблокує всі з'єднання, що відповідають правилам зі списку.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Оновлення...";
@@ -305,7 +305,7 @@
 "over_limit_current_state_label" = "Досягнуто обмеження %1$@ правил. Програма може працювати неправильно. Будь ласка, вимкніть зайві правила. Зараз використовуються %2$@ з %3$@ правил; %4$@ правил вимкнено.";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
-"failed_updating_current_state_label" = "Фільтри не були оновлені";
+"failed_updating_current_state_label" = "Не вдалось оновити фільтри";
 
 /* (GetProController) login error message text */
 "login_max_computers_exceeded" = "Цю ліцензію активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з пристроїв, якими не користуєтесь, у своєму особистому кабінеті на: adguard.com";

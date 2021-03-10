@@ -141,19 +141,7 @@ class LowLevelSettingsController: UITableViewController {
     }
     
     private func setBlockingModeDescription() {
-        
-        switch resources.blockingMode {
-        case .agDefault:
-            blockimgModeDescription.text = "Default"
-        case .agRefused:
-            blockimgModeDescription.text = "REFUSED"
-        case .agNxdomain:
-            blockimgModeDescription.text = "NXDOMAIN"
-        case .agUnspecifiedAddress:
-            blockimgModeDescription.text = "Null IP"
-        case .agCustomAddress:
-            blockimgModeDescription.text = "Custom IP"
-        }
+        blockimgModeDescription.text  = resources.blockingMode.name
     }
     
     private func setBlockedResponseTllDescription() {

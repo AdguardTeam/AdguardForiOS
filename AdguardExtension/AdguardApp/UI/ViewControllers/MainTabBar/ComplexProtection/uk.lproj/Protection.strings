@@ -20,10 +20,10 @@
 "lJO-ae-oJu.text" = "Швидкий та надійний сервіс VPN, який стабільно працюватиме разом з блокувальником реклами AdGuard.";
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Цей модуль дозволяє використовувати власний DNS-сервер та вдосконалює вашу приватність, шифруючи DNS-запити.";
+"teo-vm-NRJ.text" = "Дозволяє використовувати власний DNS-сервер та вдосконалює вашу приватність, шифруючи DNS-запити.";
 
 /* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Цей модуль блокує рекламу й стеження на вебсайтах в Safari. Ви можете обрати різні списки фільтрів, або додати власні в параметрах нижче";
+"vlx-BS-A2y.text" = "Блокує рекламу й стеження на вебсайтах в Safari. Ви можете обрати різні списки фільтрів, або додати власні в параметрах нижче";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Захист";

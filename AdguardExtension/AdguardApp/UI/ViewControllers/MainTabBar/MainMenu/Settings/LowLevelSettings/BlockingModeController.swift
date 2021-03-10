@@ -24,7 +24,12 @@ class BlockingModeController: UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     @IBOutlet var customIPDescriptionLabel: UILabel!
-
+    @IBOutlet weak var defaultHeaderLabel: ThemableLabel!
+    @IBOutlet weak var refusedHeaderLabel: ThemableLabel!
+    @IBOutlet weak var nxDomainHeaderLabel: ThemableLabel!
+    @IBOutlet weak var nullIPHeaderLabel: ThemableLabel!
+    @IBOutlet weak var customIPHeaderLabel: ThemableLabel!
+    
     private var notificationToken: NotificationToken?
     private var selectedCell = 0
     
@@ -73,6 +78,12 @@ class BlockingModeController: UITableViewController {
             text = customBlockingIp
         }
         updateDescriptionLabel(type: .customAddress, text: text)
+        
+        defaultHeaderLabel.text = BlockingModeSettings.agDefault.name
+        refusedHeaderLabel.text = BlockingModeSettings.agRefused.name
+        nxDomainHeaderLabel.text = BlockingModeSettings.agNxdomain.name
+        nullIPHeaderLabel.text = BlockingModeSettings.agUnspecifiedAddress.name
+        customIPHeaderLabel.text = BlockingModeSettings.agCustomAddress.name
     }
     
     // MARK: - Actions
