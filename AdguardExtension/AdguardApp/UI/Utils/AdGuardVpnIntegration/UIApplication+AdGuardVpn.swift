@@ -11,7 +11,18 @@ extension UIApplication {
     /* Checks if AdGuard VPN tunnel is running */
     static var adGuardVpnIsActive: Bool {
         let activeNetworkInterfaces = NetworkManager.networkInterfaces
-        return AdGuardVpnOperatingMode.containsAdGuardVpnInterface(activeNetworkInterfaces)
+        
+        /// Checks if there is AdGuard VPN tunnel interface among all active interfaces
+        for adgInterface in AdGuardVpnOperatingMode.allAvailableInterfaces {
+            for interface in activeNetworkInterfaces {
+                guard let cidrRange = ACNCidrRange(cidrString: interface) else { continue }
+                
+                if adgInterface.contains(cidrRange) {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     /* AdGuard VPN app scheme */

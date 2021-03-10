@@ -14,18 +14,4 @@ enum AdGuardVpnOperatingMode: CaseIterable {
     
     /* All available AdGuard VPN network interfaces */
     static var allAvailableInterfaces: [ACNCidrRange] { AdGuardVpnOperatingMode.allCases.flatMap { $0.networkInterfaces } }
-    
-    /* Checks if there is AdGuard VPN tunnel interface among all active interfaces */
-    static func containsAdGuardVpnInterface(_ allInterfaces: Set<String>) -> Bool {
-        for adgInterface in allAvailableInterfaces {
-            for interface in allInterfaces {
-                guard let cidrRange = ACNCidrRange(cidrString: interface) else { continue }
-                
-                if adgInterface.contains(cidrRange) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
 }
