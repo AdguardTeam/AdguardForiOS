@@ -36,6 +36,8 @@ typedef enum{
 
 //---------------------------------------------------
 
+#define LOG_ASYNC_ENABLED false
+
 #define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, DDLogFlagVerbose, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
 #define DDLogVerboseTrace(fmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, ddLogLevel, DDLogFlagVerbose,   0, nil, __PRETTY_FUNCTION__, @"(%@[%p]: %@) " fmt, THIS_FILE, self, THIS_METHOD,  ##__VA_ARGS__)
