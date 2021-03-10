@@ -150,17 +150,26 @@ class VpnManager: VpnManagerProtocol {
     
     func updateSettings(completion: ((Error?) -> Void)?) {
         /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
-         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
-        DispatchQueue.main.async { [weak self] in
-            self?.timer?.invalidate()
-            self?.timer = nil
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                self?.updateSettingsInternal { error in
-                    completion?(error)
-                    self?.timer?.invalidate()
-                    self?.timer = nil
-                }
-            })
+         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719
+         Use processInfo for handling that application entered in background
+         */
+        ProcessInfo().performExpiringActivity(withReason: "vpn updating in background") { exprired in
+            if exprired { return }
+            let group = DispatchGroup()
+            group.enter()
+            DispatchQueue.main.async { [weak self] in
+                self?.timer?.invalidate()
+                self?.timer = nil
+                self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                    self?.updateSettingsInternal { error in
+                        completion?(error)
+                        self?.timer?.invalidate()
+                        self?.timer = nil
+                        group.leave()
+                    }
+                })
+            }
+            group.wait()
         }
     }
     
