@@ -373,6 +373,10 @@
 		7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
 		7E1E41572424BFD100567C8D /* MostActiveCompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */; };
 		7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */; };
+		7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBA725F918FA00A5A735 /* NetworkManager.swift */; };
+		7E21CBA925F918FA00A5A735 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBA725F918FA00A5A735 /* NetworkManager.swift */; };
+		7E21CBDE25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */; };
+		7E21CBDF25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */; };
 		7E2522142408201700743648 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2522132408201700743648 /* Lottie */; };
 		7E2522162408207A00743648 /* OnboardingAnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2522152408207A00743648 /* OnboardingAnimationsController.swift */; };
 		7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
@@ -2851,6 +2855,8 @@
 		7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
+		7E21CBA725F918FA00A5A735 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdGuardVpnOperatingMode.swift; sourceTree = "<group>"; };
 		7E2522152408207A00743648 /* OnboardingAnimationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimationsController.swift; sourceTree = "<group>"; };
 		7E252217240821BE00743648 /* safari_tracking_protection_step3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_tracking_protection_step3.json; sourceTree = "<group>"; };
 		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
@@ -4611,7 +4617,7 @@
 		7E0B227425DBBB4300AF88BB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */,
+				7E21CBF125F91B3700A5A735 /* AdGuardVpnIntegration */,
 				7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */,
 			);
 			path = Utils;
@@ -4635,6 +4641,15 @@
 				7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */,
 			);
 			path = MostActiveCompaniesController;
+			sourceTree = "<group>";
+		};
+		7E21CBF125F91B3700A5A735 /* AdGuardVpnIntegration */ = {
+			isa = PBXGroup;
+			children = (
+				7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */,
+				7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */,
+			);
+			path = AdGuardVpnIntegration;
 			sourceTree = "<group>";
 		};
 		7E31217024DC024E00642879 /* BottomAlertController */ = {
@@ -5372,6 +5387,7 @@
 				D090FC942407E53700A0C026 /* VpnManager.swift */,
 				D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */,
 				7EEC43222428C35400F39C33 /* ActivityStatisticsService.swift */,
+				7E21CBA725F918FA00A5A735 /* NetworkManager.swift */,
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
@@ -6669,6 +6685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E21CBDF25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */,
 				D0B5457A2435D5E4002F0AEC /* DnsProviderInfo.swift in Sources */,
 				D0B545E72435D6A1002F0AEC /* UIButton+Utils.swift in Sources */,
 				D0B545B22435D649002F0AEC /* FilterTagsButtons.swift in Sources */,
@@ -6866,6 +6883,7 @@
 				D0B545B42435D650002F0AEC /* SearchFilterController.swift in Sources */,
 				659886801CF74DE9003ECD1C /* AEUILongLabelViewCell.m in Sources */,
 				D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */,
+				7E21CBA925F918FA00A5A735 /* NetworkManager.swift in Sources */,
 				D0B545E42435D69B002F0AEC /* StatusView.swift in Sources */,
 				D0B545F72435D6C4002F0AEC /* UIView+Utils.swift in Sources */,
 				2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */,
@@ -7220,6 +7238,7 @@
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				D07A811123B4FBB500181E54 /* SharedResources.swift in Sources */,
+				7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */,
 				7E822C0F2435EDD30015B4D0 /* BasicRulesParser.swift in Sources */,
 				7EC67F91254842B800FEEEE2 /* NativeProvidersService.swift in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
@@ -7315,6 +7334,7 @@
 				D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7EB5526D24224755000498CC /* ActivityViewController.swift in Sources */,
+				7E21CBDE25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */,
 				7ED3D36E23CCD5480014734A /* BlockRequestController.swift in Sources */,
 				7E8576762435F57F0055F63D /* DomainsParserService.swift in Sources */,
 				7E4E411D24D80D5200250D15 /* SupportTableViewController.swift in Sources */,
