@@ -64,7 +64,9 @@ class VpnManager: VpnManagerProtocol {
     private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
     private var timer: Timer?
-    private var callBack: ((Error?) -> Void)?
+    
+    // Save callback from updateSettings func to prevent memory leaks in queue that waiting this callback
+    private var updateSettingsCallback: ((Error?) -> Void)?
     
     // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
@@ -165,15 +167,15 @@ class VpnManager: VpnManagerProtocol {
             self?.timer?.invalidate()
             self?.timer = nil
             // Call and save completion to prevent memory leaks in queue that waiting this completion
-            self?.callBack?(nil)
-            self?.callBack = completion
+            self?.updateSettingsCallback?(nil)
+            self?.updateSettingsCallback = completion
             
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 self?.updateSettingsInternal { error in
                     self?.timer?.invalidate()
                     self?.timer = nil
-                    self?.callBack?(error)
-                    self?.callBack = nil
+                    self?.updateSettingsCallback?(error)
+                    self?.updateSettingsCallback = nil
                 }
             })
         }
