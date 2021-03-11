@@ -26,7 +26,7 @@
 "OpB-AR-Og7.normalTitle" = "СКАСУВАТИ";
 
 /* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Цей модуль блокує рекламу й стеження на вебсайтах в Safari";
+"QHZ-sJ-wTL.text" = "Блокує рекламу й стеження на вебсайтах в Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Лічильник правил: ";

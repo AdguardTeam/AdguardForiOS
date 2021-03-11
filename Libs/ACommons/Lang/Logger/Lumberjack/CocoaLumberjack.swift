@@ -83,22 +83,22 @@ public func _DDLogMessage(_ message: @autoclosure () -> String, level: DDLogLeve
 
 
 @inlinable
-public func DDLogDebug(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = true, ddlog: DDLog = DDLog.sharedInstance) {
+public func DDLogDebug(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = false, ddlog: DDLog = DDLog.sharedInstance) {
     _DDLogMessage(message(), level: level, flag: .debug, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
 }
 
 @inlinable
-public func DDLogInfo(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = true, ddlog: DDLog = DDLog.sharedInstance) {
+public func DDLogInfo(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = false, ddlog: DDLog = DDLog.sharedInstance) {
     _DDLogMessage(message(), level: level, flag: .info, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
 }
 
 @inlinable
-public func DDLogWarn(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = true, ddlog: DDLog = DDLog.sharedInstance) {
+public func DDLogWarn(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = false, ddlog: DDLog = DDLog.sharedInstance) {
     _DDLogMessage(message(), level: level, flag: .warning, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
 }
 
 @inlinable
-public func DDLogVerbose(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = true, ddlog: DDLog = DDLog.sharedInstance) {
+public func DDLogVerbose(_ message: @autoclosure () -> String, level: DDLogLevel = DDDefaultLogLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: Any? = nil, asynchronous async: Bool = false, ddlog: DDLog = DDLog.sharedInstance) {
     _DDLogMessage(message(), level: level, flag: .verbose, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
 }
 

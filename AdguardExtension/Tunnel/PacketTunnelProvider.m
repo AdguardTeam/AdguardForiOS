@@ -153,9 +153,6 @@
             ^(const char *msg, int length) {
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
-                    if (isDebugLogs) {
-                        [[ACLLogger singleton] flush];
-                    }
                 }
             }];
         

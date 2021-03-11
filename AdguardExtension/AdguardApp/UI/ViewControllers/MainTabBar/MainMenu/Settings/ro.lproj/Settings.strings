@@ -31,9 +31,6 @@
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Arată progresul actualizării filtrului";
 
-/* Class = "UILabel"; text = "Default"; ObjectID = "BPj-Fi-8mA"; */
-"BPj-Fi-8mA.text" = "Implicit";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Blocante conținut";
 
@@ -70,9 +67,6 @@
 /* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Aceasta va elimina profilul dvs. VPN actual și va dezactiva protecția DNS";
 
-/* Class = "UILabel"; text = "Refused"; ObjectID = "Lgb-zJ-9va"; */
-"Lgb-zJ-9va.text" = "Refused";
-
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Setări avansate";
 
@@ -105,9 +99,6 @@
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Actualizare automată doar prin Wi-Fi";
-
-/* Class = "UILabel"; text = "NxDomain"; ObjectID = "Zsy-DV-b67"; */
-"Zsy-DV-b67.text" = "NxDomain";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
@@ -148,9 +139,6 @@
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Servere Fallback";
 
-/* Class = "UILabel"; text = "Null IP"; ObjectID = "lBi-rt-m64"; */
-"lBi-rt-m64.text" = "IP nul";
-
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Altele";
 
@@ -189,9 +177,6 @@
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
 "wYq-g0-5k6.text" = "Această opțiune va șterge toate datele statistice, cum ar fi numărul de solicitări etc.";
-
-/* Class = "UILabel"; text = "Custom IP"; ObjectID = "xa4-8g-dtT"; */
-"xa4-8g-dtT.text" = "IP personalizat";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Deblochează reclame oriunde cu excepția site-urilor din această listă";
