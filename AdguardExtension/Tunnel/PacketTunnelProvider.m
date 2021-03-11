@@ -147,14 +147,11 @@
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
         [[ACLLogger singleton] setLogLevel: isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel];
         
-        [AGLogger setLevel:  isDebugLogs ? AGLL_TRACE : AGLL_WARN];
+        [AGLogger setLevel:  isDebugLogs ? AGLL_DEBUG : AGLL_WARN];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
-                    if (isDebugLogs) {
-                        [[ACLLogger singleton] flush];
-                    }
                 }
             }];
         
