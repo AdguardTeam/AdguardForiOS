@@ -146,6 +146,7 @@ class VpnManager: VpnManagerProtocol {
     // MARK: - VpnManagerProtocol methods
     
     func checkVpnInstalled(completion: @escaping (Error?)->Void) {
+        DDLogInfo("(VpnManager) checkVpnInstalled called")
         
         workingQueue.async { [weak self] in
             guard let self = self else { return }
@@ -162,12 +163,15 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func updateSettings(completion: ((Error?) -> Void)?) {
+        DDLogInfo("(VpnManager) updateSettings called waiting for 1 second before restart")
+        
         /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
          Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
         DispatchQueue.main.async { [weak self] in
             self?.timer?.invalidate()
             self?.timer = nil
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                DDLogInfo("(VpnManager) 1 second passed calling updateSettings now")
                 self?.updateSettingsInternal { error in
                     completion?(error)
                     self?.timer?.invalidate()
@@ -178,6 +182,8 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func removeVpnConfiguration(completion: @escaping (Error?) -> Void) {
+        DDLogInfo("(VpnManager) removeVpnConfiguration called")
+        
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -226,6 +232,8 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus) -> Void) {
+        DDLogInfo("(VpnManager) getConfigurationStatus called")
+        
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             let (manager, _) = self.loadManager()
@@ -235,6 +243,8 @@ class VpnManager: VpnManagerProtocol {
     }
     
     func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
+        DDLogInfo("(VpnManager) migrateOldVpnSettings called")
+        
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -283,6 +293,7 @@ class VpnManager: VpnManagerProtocol {
     
     private func loadManager()->(NETunnelProviderManager?, Error?) {
         DDLogInfo("(VpnManager) loadManager ")
+        
         var manager: NETunnelProviderManager?
         var resultError: Error?
         let group = DispatchGroup()
@@ -336,6 +347,7 @@ class VpnManager: VpnManagerProtocol {
     }
     
     private func setupConfiguration(_ manager: NETunnelProviderManager) {
+        DDLogInfo("(VpnManager) setupConfiguration called")
         
         // do not update configuration for not premium users
         if !appConfiguration.proStatus {
@@ -418,6 +430,7 @@ class VpnManager: VpnManagerProtocol {
         
         // Assigning start tunnel function to call it in observer
         startTunnel = {
+            DDLogInfo("(VpnManager) - Trying to start VPN tunnel after restart")
             do {
                 try manager.connection.startVPNTunnel()
             } catch {

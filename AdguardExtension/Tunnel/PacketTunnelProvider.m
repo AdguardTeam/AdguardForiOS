@@ -143,9 +143,10 @@
         
         // Init Logger
         BOOL isDebugLogs = [_resources.sharedDefaults boolForKey: AEDefaultsDebugLogs];
-        DDLogInfo(@"Init tunnel with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         [[ACLLogger singleton] initLogger:[_resources sharedAppLogsURL]];
         [[ACLLogger singleton] setLogLevel: isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel];
+        
+        DDLogInfo(@"Init tunnel with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         
         [AGLogger setLevel:  isDebugLogs ? AGLL_TRACE : AGLL_WARN];
         [AGLogger setCallback:
@@ -172,6 +173,7 @@
         self.dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources dnsProvidersService:_providersService];
         logWriter.dnsProxyService = self.dnsProxy;
         self.connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:self.dnsProxy];
+        DDLogInfo(@"(PacketTunnelProvider) init finished");
     }
     return self;
 }
