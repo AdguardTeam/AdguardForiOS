@@ -148,7 +148,7 @@
         
         DDLogInfo(@"Init tunnel with loglevel %s", isDebugLogs ? "DEBUG" : "NORMAL");
         
-        [AGLogger setLevel:  isDebugLogs ? AGLL_TRACE : AGLL_WARN];
+        [AGLogger setLevel:  isDebugLogs ? AGLL_DEBUG : AGLL_WARN];
         [AGLogger setCallback:
             ^(const char *msg, int length) {
                 @autoreleasepool {
