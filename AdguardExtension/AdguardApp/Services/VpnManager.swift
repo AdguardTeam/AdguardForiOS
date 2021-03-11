@@ -160,7 +160,7 @@ class VpnManager: VpnManagerProtocol {
         ProcessInfo().performExpiringActivity(withReason: "vpn updating in background") { exprired in
             if exprired { return }
             // Sleep com.apple.expiringTaskExecutionQueue (concurrent) for updating settings if application entered in background
-            sleep(1)
+            sleep(2)
         }
         
         DispatchQueue.main.async { [weak self] in
@@ -172,10 +172,12 @@ class VpnManager: VpnManagerProtocol {
             
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 self?.updateSettingsInternal { error in
-                    self?.timer?.invalidate()
-                    self?.timer = nil
-                    self?.updateSettingsCallback?(error)
-                    self?.updateSettingsCallback = nil
+                    DispatchQueue.main.async {
+                        self?.timer?.invalidate()
+                        self?.timer = nil
+                        self?.updateSettingsCallback?(error)
+                        self?.updateSettingsCallback = nil                        
+                    }
                 }
             })
         }
