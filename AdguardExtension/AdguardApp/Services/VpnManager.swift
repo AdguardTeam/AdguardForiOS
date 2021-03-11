@@ -64,6 +64,7 @@ class VpnManager: VpnManagerProtocol {
     private let workingQueue = DispatchQueue(label: "vpn manager queue")
     
     private var timer: Timer?
+    private var callBack: ((Error?) -> Void)?
     
     // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
@@ -153,23 +154,28 @@ class VpnManager: VpnManagerProtocol {
          Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719
          Use processInfo for handling that application entered in background
          */
+        
         ProcessInfo().performExpiringActivity(withReason: "vpn updating in background") { exprired in
             if exprired { return }
-            let group = DispatchGroup()
-            group.enter()
-            DispatchQueue.main.async { [weak self] in
-                self?.timer?.invalidate()
-                self?.timer = nil
-                self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
-                    self?.updateSettingsInternal { error in
-                        completion?(error)
-                        self?.timer?.invalidate()
-                        self?.timer = nil
-                        group.leave()
-                    }
-                })
-            }
-            group.wait()
+            // Sleep com.apple.expiringTaskExecutionQueue (concurrent) for updating settings if application entered in background
+            sleep(1)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.timer?.invalidate()
+            self?.timer = nil
+            // Call and save completion to prevent memory leaks in queue that waiting this completion
+            self?.callBack?(nil)
+            self?.callBack = completion
+            
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                self?.updateSettingsInternal { error in
+                    self?.timer?.invalidate()
+                    self?.timer = nil
+                    self?.callBack?(error)
+                    self?.callBack = nil
+                }
+            })
         }
     }
     
