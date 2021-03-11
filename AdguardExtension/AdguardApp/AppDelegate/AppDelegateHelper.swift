@@ -57,6 +57,9 @@ class AppDelegateHelper: NSObject {
     private var statusBarIsShown = false
     private let statusView = StatusView()
     
+    /* if this value is false, it means that the application is open from the widget switch */
+    private var isBecomeActiveFromSuspend: Bool = true
+    
     var purchaseObservation: Any?
     var proStatusObservation: Any?
     
@@ -149,6 +152,13 @@ class AppDelegateHelper: NSObject {
     var statusViewCounter = 0
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        if isBecomeActiveFromSuspend {
+            vpnManager.checkVpnInstalled { _ in }
+        } else {
+            isBecomeActiveFromSuspend = true
+        }
+        
         application.applicationIconBadgeNumber = 0
         createStatusBarWindow()
         
@@ -420,6 +430,7 @@ class AppDelegateHelper: NSObject {
             let enabled = enabledString == "on"
             
             let success = self.appDelegate.presentDnsSettingsController(showLaunchScreen: true, dnsProtectionIsEnabled: enabled)
+            isBecomeActiveFromSuspend = false
             return success
             
         // Turning on/off complex protection from widget
@@ -431,6 +442,7 @@ class AppDelegateHelper: NSObject {
             let enabled = enabledString == "on"
             
             let success = appDelegate.presentMainPageController(showLaunchScreen: true, complexProtectionIsEnabled: enabled)
+            isBecomeActiveFromSuspend = false
             return success
         
         // Activate license by URL

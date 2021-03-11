@@ -42,7 +42,7 @@ class ComplexProtectionServiceTest: XCTestCase {
     let safariEnableCases = [
                               ((false, false, false), (true, false, true)),
                               ((false, false, true), (true, false, true)),
-                              ((false, true, false), (true, true, true)),
+                              ((false, true, false), (true, false, true)),
                               ((false, true, true), (true, true, true)),
                               ((true, false, false), (true, false, true)),
     ]
@@ -61,7 +61,7 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((false, false, true), (false, true, true)),
                               ((false, true, false), (false, true, true)),
                               ((false, true, true), (false, true, true)),
-                              ((true, false, false), (true, true, true)),
+                              ((true, false, false), (false, true, true)),
     ]
     
     let systemDisableCases = [ ((false, true, false), (false, false, false)),

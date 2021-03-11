@@ -65,12 +65,14 @@ class VpnManager: VpnManagerProtocol {
     
     private var timer: Timer?
     
+    // Save callback from updateSettings func to prevent memory leaks in queue that waiting this callback
+    private var updateSettingsCallback: ((Error?) -> Void)?
+    
     // this property is public only for tests
     var providerManagerType: NETunnelProviderManager.Type = NETunnelProviderManager.self
     
     private var configurationObserver: NotificationToken?
     private var configurationObserver2: NotificationToken?
-    private var didBecomeActiveObserver: NotificationToken?
     private var dnsProviders: DnsProvidersServiceProtocol
     
     weak var complexProtection: ComplexProtectionServiceProtocol?
@@ -129,18 +131,6 @@ class VpnManager: VpnManagerProtocol {
                 }
             }
         }
-        
-        didBecomeActiveObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] (note) in
-            guard let self = self else { return }
-            
-            self.workingQueue.async { [weak self] in
-                guard let self = self else { return }
-                let (manager, _) = self.loadManager()
-                if let manager = manager {
-                    self.checkState(manager)
-                }
-            }
-        }
     }
     
     // MARK: - VpnManagerProtocol methods
@@ -166,16 +156,32 @@ class VpnManager: VpnManagerProtocol {
         DDLogInfo("(VpnManager) updateSettings called waiting for 1 second before restart")
         
         /* There was a problem when user could produce lots of VPN restarts in a row. To avoid multiple restarts for every user action we wait for 1 second for next restart, if there weren't any than we restart it.
-         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719 */
+         Issue link: https://github.com/AdguardTeam/AdguardForiOS/issues/1719
+         Use processInfo for handling that application entered in background
+         */
+        
+        ProcessInfo().performExpiringActivity(withReason: "vpn updating in background") { exprired in
+            if exprired { return }
+            // Sleep com.apple.expiringTaskExecutionQueue (concurrent) for updating settings if application entered in background
+            sleep(2)
+        }
+        
         DispatchQueue.main.async { [weak self] in
             self?.timer?.invalidate()
             self?.timer = nil
+            // Call and save completion to prevent memory leaks in queue that waiting this completion
+            self?.updateSettingsCallback?(nil)
+            self?.updateSettingsCallback = completion
+            
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 DDLogInfo("(VpnManager) 1 second passed calling updateSettings now")
                 self?.updateSettingsInternal { error in
-                    completion?(error)
-                    self?.timer?.invalidate()
-                    self?.timer = nil
+                    DispatchQueue.main.async {
+                        self?.timer?.invalidate()
+                        self?.timer = nil
+                        self?.updateSettingsCallback?(error)
+                        self?.updateSettingsCallback = nil                        
+                    }
                 }
             })
         }
@@ -454,7 +460,7 @@ class VpnManager: VpnManagerProtocol {
         DDLogInfo("(VpnManager) savedState: \(savedEnabled) actual: \(actualEnabled)")
         
         if actualEnabled != savedEnabled {
-            DDLogInfo("(VpnManager) vpn anabled state was changed outside the application to state: \(actualEnabled)")
+            DDLogInfo("(VpnManager) vpn enabled state was changed outside the application to state: \(actualEnabled)")
             NotificationCenter.default.post(name:VpnManager.stateChangedNotification, object: actualEnabled)
         }
     }
