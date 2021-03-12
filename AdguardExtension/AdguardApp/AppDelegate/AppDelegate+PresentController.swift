@@ -66,7 +66,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -91,7 +91,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
     }
     
     /*
@@ -110,7 +110,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -128,7 +128,7 @@ extension AppDelegate {
         
         dnsSettingsController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -149,7 +149,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
@@ -162,7 +162,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainPageController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -183,7 +183,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
@@ -207,7 +207,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainPageController, getProController, loginController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -229,7 +229,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -252,7 +252,7 @@ extension AppDelegate {
         navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
         dnsProvidersController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -273,7 +273,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -303,7 +303,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -325,7 +325,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
@@ -352,7 +352,7 @@ extension AppDelegate {
         
         navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -429,7 +429,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainMenuController, supportVC, bugReportVC]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
     }
     
     /*
@@ -448,7 +448,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
@@ -471,7 +471,7 @@ extension AppDelegate {
                     
         navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -480,7 +480,7 @@ extension AppDelegate {
      Sets main page as current
      */
     func setMainPageAsCurrentAndPopToRootControllersEverywhere() {
-        window.rootViewController?.dismiss(animated: true) { [weak self] in
+        window?.rootViewController?.dismiss(animated: true) { [weak self] in
             self?.dismissToMainPage()
         }
     }
@@ -540,7 +540,7 @@ extension AppDelegate {
         }
         
         if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window.rootViewController = launchScreen
+            window?.rootViewController = launchScreen
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
@@ -552,7 +552,7 @@ extension AppDelegate {
         
         navController.viewControllers = [mainPageController]
         tabBar.selectedViewController = navController
-        window.rootViewController = tabBar
+        window?.rootViewController = tabBar
         
         return true
     }
@@ -583,7 +583,7 @@ extension AppDelegate {
     
     /* Returns main tab bar controller */
     private func getMainTabController() -> MainTabBarController? {
-        let mainTabBar = window.rootViewController as? MainTabBarController
+        let mainTabBar = window?.rootViewController as? MainTabBarController
         assert(mainTabBar != nil, "Root view controller is not MainTabBarController")
         return mainTabBar
     }

@@ -23,7 +23,6 @@
 #import "AERDomainFilterRule.h"
 #import "ASDatabase.h"
 #import "Reachability.h"
-#import "AppDelegate.h"
 #import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"
 #import "ADBTable.h"
