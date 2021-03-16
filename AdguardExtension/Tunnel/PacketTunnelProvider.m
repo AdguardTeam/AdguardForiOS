@@ -48,13 +48,13 @@
 #define V_INTERFACE_IPV4_FULL_TUNNEL            @"172.16.209.3"
 #define V_INTERFACE_IPV4_FULL_TUNNEL_NO_ICON    @"172.16.209.4"
 #define V_INTERFACE_IPV4_SPLIT_TUNNEL           @"172.16.209.5"
-#define V_INTERFACE_IPV4_MASK                   @"255.255.255.255"
+#define V_INTERFACE_IPV4_MASK                   @"255.255.255.252"
 #define V_INTERFACE_IPV4_FULL_MASK              @"255.255.255.255"
 
 #define V_INTERFACE_IPV6_FULL_TUNNEL            @"fd12:1:1:1::3"
 #define V_INTERFACE_IPV6_FULL_TUNNEL_NO_ICON    @"fd12:1:1:1::4"
 #define V_INTERFACE_IPV6_SPLIT_TUNNEL           @"fd12:1:1:1::5"
-#define V_INTERFACE_IPV6_MASK                   @(128)
+#define V_INTERFACE_IPV6_MASK                   @(127)
 #define V_INTERFACE_IPV6_FULL_MASK              @(128)
 
 #define V_DNS_IPV6_ADDRESS                      @"2001:ad00:ad00::ad00"
