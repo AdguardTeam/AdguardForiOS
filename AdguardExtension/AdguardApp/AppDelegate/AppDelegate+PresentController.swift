@@ -198,7 +198,7 @@ extension AppDelegate {
             return false
         }
         
-        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "LoginScene") as? EmailSignInController else {
+        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "EmailSignInScene") as? EmailSignInController else {
             DDLogError("License.storyboard doesnt't have EmailSignInController")
             return false
         }
