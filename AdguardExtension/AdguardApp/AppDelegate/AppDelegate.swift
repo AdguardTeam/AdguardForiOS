@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Properties
     var window: UIWindow?
     
-    private let statusBarProcessor: IStatusBarProcessor
+    private let statusBarProcessor: IStatusBarWindow
     private var appDelegateHelper: IAppDelegateHelper?
 
     //MARK: - Services
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Application init
     override init() {
         StartupService.start()
-        self.statusBarProcessor = StatusBarProcessor()
+        self.statusBarProcessor = StatusBarWindow()
         super.init()
         
         appDelegateHelper = AppDelegateHelper(resources: resources,
@@ -76,14 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    deinit {
+        resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
+    }
+    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         //------------- Preparing for start application. Stage 1. -----------------
         appDelegateHelper?.willFinishLaunching()
+        
+        initLogger()
+        DDLogInfo("(AppDelegateHelper) Preparing for start application. Stage 1.")
 
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
-
 
         if (application.applicationState != .background) {
             purchaseService.checkPremiumStatusChanged()
@@ -99,6 +105,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
         appDelegateHelper?.didFinishLaunching()
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
             self?.window?.backgroundColor = self?.themeService.backgroundColor
@@ -128,9 +136,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
         antibanner.applicationWillEnterForeground()
-        
-        
-        let configuration = ServiceLocator.shared.getSetvice(typeName: "ConfigurationService") as! ConfigurationService
         configuration.checkContentBlockerEnabled()
     }
     
@@ -154,24 +159,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogError("(AppDelegate) application Open URL.")
         appDelegateHelper?.activateWithOpenUrl = true
         
-        let processor = URLSchemeProcessor(appDelegate: self,
-                           antibannerController: antibannerController,
-                           resources: resources,
-                           contentBlockerService: contentBlockerService,
-                           antibanner: antibanner,
-                           themeService: themeService,
-                           productInfo: productInfo,
-                           purchaseService: purchaseService,
-                           configuration: configuration,
-                           setappService: setappService)
+        let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
+                                                          configurationService: configuration)
         
-        return processor.proccess(url: url, options: options)
+        return urlParser.parse(url: url)
     }
     
     //MARK: - Public methods
     
     func resetAllSettings() {
-        let resetProcessor = ResetSettingsAndStatisticsProcessor(appDelegate: self,
+        let resetProcessor = ResetSettings(appDelegate: self,
                                             dnsFiltersService: dnsFiltersService,
                                             filtersService: filtersService,
                                             antibannerController: antibannerController,
@@ -188,16 +185,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             guard let window = self.window else { return }
-            let configuration = ServiceLocator.shared.getSetvice(typeName: "ConfigurationService") as! ConfigurationService
             if #available(iOS 13.0, *) {
                 switch (window.traitCollection.userInterfaceStyle) {
                 case .dark:
-                    configuration.systemAppearenceIsDark = true
+                    self.configuration.systemAppearenceIsDark = true
                 default:
-                    configuration.systemAppearenceIsDark = false
+                    self.configuration.systemAppearenceIsDark = false
                 }
             } else {
-                configuration.systemAppearenceIsDark = false
+                self.configuration.systemAppearenceIsDark = false
             }
         }
     }
@@ -217,7 +213,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             setappService.start()
         }
         
-        guard let mainPageController = getMainPageController() else {
+        guard let mainPageController = getMainPageController() as? MainPageController else {
             DDLogError("mainPageController is nil")
             return
         }
@@ -257,6 +253,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.resources.rateAppShown = true
             }
         }
+    }
+    
+    //MARK: - Init logger
+    
+    private func initLogger() {
+        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
+        DDLogInfo("(AppDelegateHelper) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        
+        #if DEBUG
+        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+        #endif
+        
+        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
     }
 }
 

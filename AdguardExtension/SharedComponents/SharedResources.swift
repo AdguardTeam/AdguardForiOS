@@ -406,6 +406,15 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var firstRun: Bool {
+        get {
+            sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsFirstRunKey)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {

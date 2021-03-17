@@ -16,9 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IStatusBarProcessor: AnyObject {
-    var statusBarIsShown: Bool { get set }
-    var statusViewCounter: Int { get set }
+protocol IStatusBarWindow: AnyObject {
     var statusBarWindowIsHidden: Bool { get set }
     func createStatusBarWindow()
     func showStatusViewIfNeeded(configuration: ConfigurationServiceProtocol, notification: Notification)
@@ -27,11 +25,8 @@ protocol IStatusBarProcessor: AnyObject {
     func changeTextForStatusView(text: String)
 }
 
-final class StatusBarProcessor: IStatusBarProcessor {
+final class StatusBarWindow: IStatusBarWindow {
     //MARK: - Properties
-    
-    var statusBarIsShown = false
-    var statusViewCounter = 0
     
     var statusBarWindowIsHidden: Bool {
         get {
@@ -43,10 +38,13 @@ final class StatusBarProcessor: IStatusBarProcessor {
         }
     }
     
+    private var statusBarIsShown = false
+    private var statusViewCounter = 0
+    
     private let statusView = StatusView()
     private var statusBarWindow: UIWindow?
     
-    //MARK: - IStatusBarProcessor methods
+    //MARK: - IStatusBarWindow methods
     
     func createStatusBarWindow() {
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
@@ -55,7 +53,7 @@ final class StatusBarProcessor: IStatusBarProcessor {
         let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
         
         let bannerWindow = UIWindow(frame: frame)
-        bannerWindow.backgroundColor = UIColor(hexString: "#d8d8d8")
+        bannerWindow.backgroundColor = UIColor.AdGuardColor.lightGray
         bannerWindow.windowLevel = UIWindow.Level.statusBar
         bannerWindow.addSubview(statusView)
         bannerWindow.isHidden = false
@@ -70,46 +68,54 @@ final class StatusBarProcessor: IStatusBarProcessor {
     }
     
     func showStatusViewIfNeeded(configuration: ConfigurationServiceProtocol, notification: Notification) {
-        self.statusViewCounter += 1
-        
-        if !configuration.showStatusBar {
-            return
-        }
-        
-        guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
-        
-        
-        if !statusBarIsShown {
-            statusBarIsShown = true
-            showStatusView(with: text)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.statusViewCounter += 1
             
-        } else {
-            changeTextForStatusView(text: text)
+            if !configuration.showStatusBar {
+                return
+            }
+            
+            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
+            
+            
+            if !self.statusBarIsShown {
+                self.statusBarIsShown = true
+                self.showStatusView(with: text)
+                
+            } else {
+                self.changeTextForStatusView(text: text)
+            }
         }
     }
     
     func hideStatusViewIfNeeded() {
-        if self.statusViewCounter > 0{
-            self.statusViewCounter -= 1
-        }
-        
-        if self.statusViewCounter == 0 {
-            self.hideStatusView()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.statusViewCounter > 0{
+                self.statusViewCounter -= 1
+            }
+            
+            if self.statusViewCounter == 0 {
+                self.hideStatusView()
+            }
         }
     }
     
     func changeOrientation() {
-        UIView.animate(withDuration: 0.5) { [weak self] in
-            guard let self = self else { return }
-            guard let keyWindow = UIApplication.shared.keyWindow else { return }
-            let height = self.statusBarWindow?.frame.height ?? 0.0
-            
-            if self.statusBarIsShown {
-                let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY - height, width: keyWindow.frame.width, height: height)
-                self.statusBarWindow?.frame = frame
-            } else {
-                let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: height)
-                self.statusBarWindow?.frame = frame
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5) { [weak self] in
+                guard let self = self else { return }
+                guard let keyWindow = UIApplication.shared.keyWindow else { return }
+                let height = self.statusBarWindow?.frame.height ?? 0.0
+                
+                if self.statusBarIsShown {
+                    let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY - height, width: keyWindow.frame.width, height: height)
+                    self.statusBarWindow?.frame = frame
+                } else {
+                    let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: height)
+                    self.statusBarWindow?.frame = frame
+                }
             }
         }
     }

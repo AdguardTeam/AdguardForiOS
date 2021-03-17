@@ -16,11 +16,12 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IResetSettingsAndStatisticsProcessor {
+protocol IResetSettings {
     func resetAllSettings()
 }
 
-struct ResetSettingsAndStatisticsProcessor: IResetSettingsAndStatisticsProcessor {
+// Reset statistics and settings
+struct ResetSettings: IResetSettings {
     
     //MARK: - Properties
     
@@ -60,20 +61,13 @@ struct ResetSettingsAndStatisticsProcessor: IResetSettingsAndStatisticsProcessor
         self.dnsLogRecordsService = dnsLogRecordsService
     }
     
-    //MARK: - IResetSettingsAndStatisticsProcessor methods
+    //MARK: - IResetSettings methods
     
     func resetAllSettings() {
-        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        appDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        presentAlert()
         
         DispatchQueue(label: "reset_queue").async {
-            DDLogInfo("(AppDelegate) resetAllSettings")
+            DDLogInfo("(ResetSettings) resetAllSettings")
 
             self.filtersService.reset()
             self.antibannerController.reset()
@@ -105,10 +99,11 @@ struct ResetSettingsAndStatisticsProcessor: IResetSettingsAndStatisticsProcessor
             self.filtersService.load(refresh: true) {}
             
             // Notify that settings were reset
-            NotificationCenter.default.post(name: NSNotification.resetSettings, object: self)
+            NotificationCenter.default.post(name: .resetSettings, object: self)
             
             DispatchQueue.main.async {
                 appDelegate.setMainPageAsCurrentAndPopToRootControllersEverywhere()
+                DDLogInfo("(ResetSettings) Reseting is over")
             }
         }
     }
@@ -122,12 +117,28 @@ struct ResetSettingsAndStatisticsProcessor: IResetSettingsAndStatisticsProcessor
         
         // delete database file
         let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
-        try? FileManager.default.removeItem(atPath: url.path)
+        do {
+            try FileManager.default.removeItem(atPath: url.path)
+            DDLogInfo("(ResetSettings) Statistics removed successfully")
+        } catch {
+            DDLogInfo("(ResetSettings) Statistics removing error: \(error.localizedDescription)")
+        }
         
         /* Reseting statistics end */
         self.activityStatisticsService.startDb()
         self.dnsStatisticsService.startDb()
         
         self.dnsLogRecordsService.reset()
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        appDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }

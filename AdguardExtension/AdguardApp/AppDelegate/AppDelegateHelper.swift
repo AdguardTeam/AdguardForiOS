@@ -6,31 +6,31 @@ protocol IAppDelegateHelper {
     func didBecomeActive(_ application: UIApplication)
 }
 
-fileprivate enum AEUpdateResult: UInt {
-    case AEUpdateNotStarted,
-         AEUpdateStarted,
-         AEUpdateNewData,
-         AEUpdateFailed,
-         AEUpdateNoData
+fileprivate enum UpdateResult: UInt {
+    case updateNotStarted,
+         updateStarted,
+         updateNewData,
+         updateFailed,
+         updateNoData
 }
 
 //MARK: - Constants
-private let AS_EXECUTION_PERIOD_TIME: Double = 3600 // 1 hours
-private let AS_EXECUTION_LEEWAY: Double = 5 // 5 seconds
-private let AS_EXECUTION_DELAY: Double = 2 // 2 seconds
+private let executionPeriodTime: Double = 3600 // 1 hours
+private let executionLeeway: Double = 5 // 5 seconds
+private let executionDelay: Double = 2 // 2 seconds
 
-private let AS_CHECK_FILTERS_UPDATES_PERIOD: Double = AS_EXECUTION_PERIOD_TIME * 6
-private let AS_CHECK_FILTERS_UPDATES_FROM_UI_DELAY: Double = AS_EXECUTION_DELAY
-private let AS_CHECK_FILTERS_UPDATES_LEEWAY: Double = AS_EXECUTION_LEEWAY
-private let AS_CHECK_FILTERS_UPDATES_DEFAULT_PERIOD: Double = AS_EXECUTION_PERIOD_TIME * 6
+private let checkFiltersUpdatesPeriod: Double = executionPeriodTime * 6
+private let checkFiltersUpdatesFromUiDelay: Double = executionDelay
+private let checkFiltersUpdatesLeeway: Double = executionLeeway
+private let checkFiltersUpdatesDefaultPeriod: Double = executionPeriodTime * 6
 
-private let AS_FETCH_UPDATE_STATUS_PERIOD: Double = AS_CHECK_FILTERS_UPDATES_PERIOD / 6
+private let fetchUpdateStatusPeriod: Double = executionPeriodTime / 6
 
 /// Timeout for downloading of data from the remote services
-private let AS_URL_LOAD_TIMEOUT: Double = 60
+private let urlLoadTimeout: Double = 60
 // ----------------------------------
 
-private let DNS_FILTERS_CHECK_LIMIT:Double = 21600 // 6 hours
+private let dnsFiltersCheckLimit:Double = 21600 // 6 hours
 
 final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     //MARK: - Init
@@ -48,7 +48,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
          networking: ACNNetworking,
          productInfo: ADProductInfoProtocol,
          antibannerController: AntibannerControllerProtocol,
-         statusBarProcessor: IStatusBarProcessor,
+         statusBarProcessor: IStatusBarWindow,
          appDelegate: AppDelegate) {
         
         self.resources = resources
@@ -70,20 +70,6 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     }
     
     //MARK: - Properties
-    private let ASAntibannerUpdatedFiltersKey = "ASAntibannerUpdatedFiltersKey"
-    private let ASAntibannerInstalledNotification = "ASAntibannerInstalledNotification"
-    private let ASAntibannerNotInstalledNotification = "ASAntibannerNotInstalledNotification"
-    private let ASAntibannerReadyNotification = "ASAntibannerReadyNotification"
-    private let ASAntibannerUpdateFilterRulesNotification = "ASAntibannerUpdateFilterRulesNotification"
-    private let ASAntibannerStartedUpdateNotification = "ASAntibannerStartedUpdateNotification"
-    private let ASAntibannerDidntStartUpdateNotification = "ASAntibannerDidntStartUpdateNotification"
-    private let ASAntibannerFinishedUpdateNotification = "ASAntibannerFinishedUpdateNotification"
-    private let ASAntibannerFailuredUpdateNotification = "ASAntibannerFailuredUpdateNotification"
-    private let ASAntibannerUpdateFilterFromUINotification = "ASAntibannerUpdateFilterFromUINotification"
-    private let ASAntibannerUpdatePartCompletedNotification = "ASAntibannerUpdatePartCompletedNotification"
-    private let ASAntibannerFilterEnabledNotification = "ASAntibannerFilterEnabledNotification"
-    
-    private let appDelegateUpdatedFiltersKey = "AppDelegateUpdatedFiltersKey"
     
     private let resources: AESharedResourcesProtocol
     private let migrationService: MigrationServiceProtocol
@@ -98,15 +84,15 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     private let safariService: SafariServiceProtocol
     private let networking: ACNNetworking
     private let productInfo: ADProductInfoProtocol
-    private let statusBarProcessor: IStatusBarProcessor
+    private let statusBarProcessor: IStatusBarWindow
     private let appDelegate: AppDelegate
     
     private var fetchCompletion: ((UIBackgroundFetchResult) -> Void)?
     private var downloadCompletion: (() -> Void)?
     private var updatedFilters = [ASDFilterMetadata]()
     
-    private var antibanerUpdateResult: AEUpdateResult?
-    private var blockingSubscriptionsUpdateResult: AEUpdateResult?
+    private var antibanerUpdateResult: UpdateResult?
+    private var blockingSubscriptionsUpdateResult: UpdateResult?
     
     private var purchaseObservation: Any?
     private var proStatusObservation: Any?
@@ -117,10 +103,10 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     
     private var firstRun: Bool {
         get {
-            resources.sharedDefaults().object(forKey: AEDefaultsFirstRunKey) as? Bool ?? true
+            resources.firstRun
         }
         set {
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsFirstRunKey)
+            resources.firstRun = newValue
         }
     }
     
@@ -159,21 +145,6 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
             
             self.migrationService.migrateIfNeeded(inBackground: self.isBackground)
         }
-        
-        // Init Logger
-        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        DDLogInfo("(AppDelegateHelper) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
-        
-        
-        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
-        
-        DDLogInfo("(AppDelegateHelper) Preparing for start application. Stage 1.")
         
         fetchCompletion = nil
         downloadCompletion = nil
@@ -222,9 +193,9 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
                 
                 if !checkResult {
                     DDLogInfo("(AppDelegateHelper - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.")
-                    self.antibanerUpdateResult = AEUpdateResult(rawValue: UIBackgroundFetchResult.noData.rawValue)
+                    self.antibanerUpdateResult = UpdateResult(rawValue: UIBackgroundFetchResult.noData.rawValue)
                 } else {
-                    self.antibanerUpdateResult = .AEUpdateStarted
+                    self.antibanerUpdateResult = .updateStarted
                 }
                 
                 switch self.fetchState {
@@ -233,7 +204,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
                     
                     if !(checkResult && self.invalidateAntibanner(fromUI: false, interactive: false)) {
                         self.fetchState = .notStarted
-                        self.antibanerUpdateFinished(result: .AEUpdateNoData)
+                        self.antibanerUpdateFinished(result: .updateNoData)
                     }
                 case .filtersupdated, .contentBlockersUpdating:
                     self.fetchState = .contentBlockersUpdating
@@ -243,16 +214,16 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
                         } else {
                             self?.fetchState = .contentBlockersUpdated
                         }
-                        self?.antibanerUpdateFinished(result: .AEUpdateNoData)
+                        self?.antibanerUpdateFinished(result: .updateNoData)
                     }
                 case .contentBlockersUpdated, .safariUpdating:
                     self.fetchState = .safariUpdating
                     self.safariService.invalidateBlockingJsons { [weak self] _ in
                         self?.fetchState = .notStarted
-                        self?.antibanerUpdateFinished(result: .AEUpdateNoData)
+                        self?.antibanerUpdateFinished(result: .updateNoData)
                     }
                 default:
-                    self.antibanerUpdateFinished(result: .AEUpdateNoData)
+                    self.antibanerUpdateFinished(result: .updateNoData)
                 }
             }
             
@@ -296,34 +267,20 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
         statusBarProcessor.createStatusBarWindow()
         statusBarProcessor.statusBarWindowIsHidden = true
         
-        showStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.ShowStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
+        showStatusBarNotification = NotificationCenter.default.observe(name: .ShowStatusView, object: nil, queue: nil, using: { [weak self] (notification) in
             guard let self = self else { return }
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.statusBarProcessor.showStatusViewIfNeeded(configuration: self.configuration, notification: notification)
-            }
+            self.statusBarProcessor.showStatusViewIfNeeded(configuration: self.configuration, notification: notification)
         })
         
-        hideStatusBarNotification = NotificationCenter.default.observe(name: NSNotification.Name.HideStatusView, object: nil, queue: nil, using: {[weak self] (notification) in
+        hideStatusBarNotification = NotificationCenter.default.observe(name: .HideStatusView, object: nil, queue: nil, using: { [weak self] (notification) in
             guard let self = self else { return }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.statusBarProcessor.hideStatusViewIfNeeded()
-            }
+            self.statusBarProcessor.hideStatusViewIfNeeded()
         })
         
-        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
-            DispatchQueue.main.async { [weak self] in
-                self?.statusBarProcessor.changeOrientation()
-            }
+        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: { [weak self] (notification) in
+            self?.statusBarProcessor.changeOrientation()
         })
         
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
-    }
-    
-    deinit {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
     }
     
     //MARK: - Antibanner methods
@@ -331,7 +288,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
         
         DispatchQueue(label: "AppDelegateHelper-queue").sync {
             guard let lastCheck = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? NSDate else { return false }
-            if fromUI || (lastCheck.timeIntervalSinceNow * -1.0) >= AS_CHECK_FILTERS_UPDATES_PERIOD {
+            if fromUI || (lastCheck.timeIntervalSinceNow * -1.0) >= checkFiltersUpdatesPeriod {
                 
                 if fromUI {
                     DDLogInfo("(AppDelegateHelper) Update process started from UI.")
@@ -357,7 +314,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
             
             DDLogInfo("(AppDelegateHelper) Update process NOT started by timer. Time period from previous update too small.")
             
-            antibanerUpdateFinished(result: .AEUpdateFailed)
+            antibanerUpdateFinished(result: .updateFailed)
             
             return false
         }
@@ -444,14 +401,14 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
             }
             // Special update case.
             fetchState = .notStarted
-            self.antibanerUpdateFinished(result: .AEUpdateFailed)
+            self.antibanerUpdateFinished(result: .updateFailed)
         }
         // Update performed
         else if notification.name == .ASAntibannerFinishedUpdate {
             if isBackground {
                 fetchState = .filtersupdated
                 antibanner.endTransaction()
-                self.antibanerUpdateFinished(result: .AEUpdateNewData)
+                self.antibanerUpdateFinished(result: .updateNewData)
                 return
             }
             
@@ -470,7 +427,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
                 }
                 
                 // Special update case (in background).
-                self.antibanerUpdateFinished(result: .AEUpdateNewData)
+                self.antibanerUpdateFinished(result: .updateNewData)
             }
             
             // turn off network activity indicator
@@ -488,7 +445,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
             
             // Special update case.
             fetchState = .notStarted
-            self.antibanerUpdateFinished(result: .AEUpdateFailed)
+            self.antibanerUpdateFinished(result: .updateFailed)
             
             // turn off network activity indicator
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -570,17 +527,17 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
         }
     }
     
-    private func resultDescription(result: AEUpdateResult) -> String {
-        let names = ["AEUpdateNotStarted",
-                     "AEUpdateStarted",
-                     "AEUpdateNewData",
-                     "AEUpdateFailed",
-                     "AEUpdateNoData"]
+    private func resultDescription(result: UpdateResult) -> String {
+        let names = ["UpdateNotStarted",
+                     "UpdateStarted",
+                     "UpdateNewData",
+                     "UpdateFailed",
+                     "UpdateNoData"]
         
         return names[Int(result.rawValue)]
     }
     
-    private func antibanerUpdateFinished(result: AEUpdateResult) {
+    private func antibanerUpdateFinished(result: UpdateResult) {
         DDLogInfo("(AppDelegateHelper) antibanerUpdateFinished with result: \(self.resultDescription(result: result))")
         self.antibanerUpdateResult = result
         
@@ -593,15 +550,15 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
         
         DDLogInfo("(AppDelegateHelper) updateFinished")
         
-        if(self.antibanerUpdateResult == .AEUpdateStarted || self.blockingSubscriptionsUpdateResult == .AEUpdateStarted) {
+        if(self.antibanerUpdateResult == .updateStarted || self.blockingSubscriptionsUpdateResult == .updateStarted) {
             return
         }
         
         var result: UIBackgroundFetchResult!
         
-        if(self.antibanerUpdateResult == .AEUpdateNewData || self.blockingSubscriptionsUpdateResult == .AEUpdateNewData) {
+        if(self.antibanerUpdateResult == .updateNewData || self.blockingSubscriptionsUpdateResult == .updateNewData) {
             result = .newData
-        } else if (self.antibanerUpdateResult == .AEUpdateNoData && self.blockingSubscriptionsUpdateResult == .AEUpdateNoData) {
+        } else if (self.antibanerUpdateResult == .updateNoData && self.blockingSubscriptionsUpdateResult == .updateNoData) {
             result = .noData
         } else {
             result = .failed
@@ -632,7 +589,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     
     private func setPeriodForCheckingFilters() {
         
-        var interval: TimeInterval = TimeInterval(AS_FETCH_UPDATE_STATUS_PERIOD)
+        var interval: TimeInterval = TimeInterval(fetchUpdateStatusPeriod)
         if (interval < UIApplication.backgroundFetchIntervalMinimum) {
             interval = UIApplication.backgroundFetchIntervalMinimum
         }
@@ -645,18 +602,18 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
     //MARK: - Notification subscription
     
     private func subscribeToAntibannerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerFailuredUpdateNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerFinishedUpdateNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerStartedUpdateNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerDidntStartUpdateNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerUpdateFilterRulesNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerUpdatePartCompletedNotification), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: NSNotification.Name(rawValue: ASAntibannerInstalledNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerFailuredUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerFinishedUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerStartedUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerDidntStartUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerUpdateFilterRules, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerUpdatePartCompleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(antibannerNotify(notification:)), name: .ASAntibannerInstalled, object: nil)
     }
     
     private func subscribeToOtherNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(showAlertNotification(notification:)), name: NSNotification.showCommonAlert, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(openDnsFiltersController(notification:)), name: NSNotification.showDnsFiltersController, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlertNotification(notification:)), name: .showCommonAlert, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(openDnsFiltersController(notification:)), name: .showDnsFiltersController, object: nil)
     }
     
     //MARK: - Update tunnel
@@ -665,7 +622,7 @@ final class AppDelegateHelper: NSObject, IAppDelegateHelper {
             let interval = Date().timeIntervalSince(lastCheckTime)
             let checkResult = checkAutoUpdateConditions()
             if !dnsFiltersService.filtersAreUpdating
-                && Int(interval) > Int(DNS_FILTERS_CHECK_LIMIT)
+                && Int(interval) > Int(dnsFiltersCheckLimit)
                 && configuration.proStatus
                 && checkResult {
                 resources.lastDnsFiltersUpdateTime = Date()
