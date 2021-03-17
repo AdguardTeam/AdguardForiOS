@@ -56,8 +56,8 @@ class URLSchemeParcerTest: XCTestCase {
         
         XCTAssertTrue(systemProtectionUrlOnResult)
         XCTAssertTrue(systemProtectionUrlOffResult)
-        XCTAssertFalse(systemProtectionUrlEmptyResult)
-        XCTAssertFalse(incorrectSystemProtectionUrlResult)
+        XCTAssertTrue(systemProtectionUrlEmptyResult)
+        XCTAssertTrue(incorrectSystemProtectionUrlResult)
         
         let complexProtectionUrlOn = URL(string: "adguard://complexProtection/on")!
         let complexProtectionUrlOff = URL(string: "adguard://complexProtection/off")!
@@ -71,8 +71,8 @@ class URLSchemeParcerTest: XCTestCase {
         
         XCTAssertTrue(complexProtectionUrlOnResult)
         XCTAssertTrue(complexProtectionUrlOffResult)
-        XCTAssertFalse(complexProtectionUrlEmptyResult)
-        XCTAssertFalse(incorrectComplexProtectionUrlResult)
+        XCTAssertTrue(complexProtectionUrlEmptyResult)
+        XCTAssertTrue(incorrectComplexProtectionUrlResult)
         
         let customDnsUrl = URL(string: "sdns://fooBar")!
         let emptyCustomDnsUrl = URL(string: "sdns://")!

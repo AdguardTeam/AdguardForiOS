@@ -16,16 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenMainPageControllerProcessor: IURLSchemeParametersProcessor {
-    private let executor: IURLSchemeExecutor
-    
-    init(executor: IURLSchemeExecutor) {
-        self.executor = executor
-    }
-    
-    func process(parameters: [String : Any]) -> Bool {
-        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        let complexProtectionIsEnabled = parameters["complexProtectionIsEnabled"] as? Bool
-        return executor.openMainPageController(showLaunchScreen: showLaunchScreen, complexProtectionIsEnabled: complexProtectionIsEnabled)
-    }
+protocol IURLSchemeParametersParser {
+    func parse(parameters: [String: Any]) -> Bool
 }

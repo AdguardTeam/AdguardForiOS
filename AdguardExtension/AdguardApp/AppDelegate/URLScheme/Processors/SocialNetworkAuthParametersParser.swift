@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct SocialNetworkAuthParametersProcessor: IURLSchemeParametersProcessor {
+struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     private let socialErrorUserNotFound = "user_not_found"
     
@@ -25,13 +25,16 @@ struct SocialNetworkAuthParametersProcessor: IURLSchemeParametersProcessor {
     }
     
     
-    func process(parameters: [String : Any]) -> Bool {
-        if let error = parameters["error"] as? String {
+    func parse(parameters: [String : Any]) -> Bool {
+        guard let url = parameters["url"] as? URL else { return false }
+        guard let params = url.parseAuthUrl().params else { return false }
+        
+        if let error = params["error"] {
             socialLoginErrorProcessor(error: error)
             return false
         } else {
-            guard let token = parameters["access_token"] as? String, !token.isEmpty else { return false }
-            guard let state = parameters["state"] as? String, !state.isEmpty else { return false }
+            guard let token = params["access_token"], !token.isEmpty else { return false }
+            guard let state = params["state"], !state.isEmpty else { return false }
             return executor.login(withAccessToken: token, state: state)
         }
     }

@@ -11,7 +11,7 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
         true
     }
     
-    func openLoginController(showLaunchScreen: Bool, license: String?) -> Bool {
+    func openLoginController(license: String?) -> Bool {
         true
     }
     

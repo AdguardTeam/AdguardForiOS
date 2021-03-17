@@ -16,16 +16,18 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenDnsProvidersControllerProcessor: IURLSchemeParametersProcessor {
+struct OpenLoginControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func process(parameters: [String : Any]) -> Bool {
-        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let absoluteString = parameters["UrlAbsoluteString"] as? String else { return false }
-        return executor.openDnsProvidersController(showLaunchScreen: showLaunchScreen, urlAbsoluteString: absoluteString)
+    func parse(parameters: [String : Any]) -> Bool {
+//        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
+        guard let url = parameters["url"] as? URL else { return false }
+        guard let license = url.parseAuthUrl().params?["license"], !license.isEmpty else { return false }
+        return executor.openLoginController(license: license)
     }
+    
 }

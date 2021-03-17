@@ -1,4 +1,3 @@
-
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
@@ -17,19 +16,30 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenImportSettingsControllerProcessor: IURLSchemeParametersProcessor {
+struct OpenDnsSettingsControllerParser: IURLSchemeParametersParser {
+
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func process(parameters: [String : Any]) -> Bool {
+    func parse(parameters: [String : Any]) -> Bool {
         guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let json = parameters["json"] as? String else { return false }
-        let parser = SettingsParser()
-        let settings = parser.parse(querry: json)
+        guard let url = parameters["url"] as? URL else { return false }
+        let dnsProtectionIsEnabled = protectionStateIsEnabled(url: url)
+        return executor.openDnsSettingsController(showLaunchScreen: showLaunchScreen, dnsProtectionIsEnabled: dnsProtectionIsEnabled)
+    }
+    
+    private func protectionStateIsEnabled(url: URL) -> Bool? {
+        let suffix = String(url.path.suffix(url.path.count - 1))
+        let parameters = suffix.split(separator: "/")
         
-        return executor.openImportSettingsController(showLaunchScreen: showLaunchScreen, settings: settings)
+        let enabledString = String(parameters.first ?? "")
+        let isSufixValid = enabledString == "on" || enabledString == "off"
+        if isSufixValid {
+            return enabledString == "on"
+        }
+        return nil
     }
 }

@@ -16,6 +16,15 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IURLSchemeParametersProcessor {
-    func process(parameters: [String: Any]) -> Bool
+struct OpenTunnelModeControllerParser: IURLSchemeParametersParser {
+    private let executor: IURLSchemeExecutor
+    
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
+    }
+    
+    func parse(parameters: [String : Any]) -> Bool {
+        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
+        return executor.openTunnelModeController(showLaunchScreen: showLaunchScreen)
+    }
 }

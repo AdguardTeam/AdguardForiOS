@@ -5,7 +5,6 @@ extension AppDelegate: IURLSchemeExecutor {
         let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
         let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-//        let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
         let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
         let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
         
@@ -31,8 +30,8 @@ extension AppDelegate: IURLSchemeExecutor {
         self.presentMainPageController(showLaunchScreen: showLaunchScreen, complexProtectionIsEnabled: complexProtectionIsEnabled)
     }
     
-    func openLoginController(showLaunchScreen: Bool, license: String?) -> Bool {
-        self.presentLoginController(showLaunchScreen: showLaunchScreen, withLicenseKey: license)
+    func openLoginController(license: String?) -> Bool {
+        self.presentLoginController(showLaunchScreen: true, withLicenseKey: license)
     }
     
     func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool {

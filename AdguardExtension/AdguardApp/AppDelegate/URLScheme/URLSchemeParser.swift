@@ -47,6 +47,17 @@ fileprivate enum StringConstants: String {
     case sdnsScheme = "sdns"
     case urlScheme = "adguardScheme"
     case urlSchemeCommandAdd = "add"
+    
+    static func getStringConstant(string: String?) -> StringConstants? {
+        guard let string = string else { return nil }
+        
+        if string == "adguard" || string == "adguard-pro" {
+            return .urlScheme
+        }
+        
+        guard let const = StringConstants(rawValue: string) else { return nil }
+        return const
+    }
 }
 
 struct URLSchemeParser: IURLSchemeParser {
@@ -60,24 +71,10 @@ struct URLSchemeParser: IURLSchemeParser {
     }
     
     func parse(url: URL) -> Bool {
-        var command: StringConstants!
-        var params: [String: Any]?
-        let scheme = getStringConstant(string: url.scheme)
-        
-        if let host = url.host {
-            if scheme == .sdnsScheme {
-                command = .sdnsScheme
-            } else {
-                guard let const = getStringConstant(string: host) else { return false }
-                command = const
-            }
-            params = getParameters(from: url, for: command)
-            
-        } else {
-            let result = url.parseUrl()
-            guard let const = getStringConstant(string: result.command) else { return false }
-            command = const
-            params = result.params
+        let scheme = StringConstants.getStringConstant(string: url.scheme)
+        var command = StringConstants.getStringConstant(string: url.host)
+        if command == nil {
+            command = StringConstants.getStringConstant(string: url.parseUrl().command)
         }
         
         if command == .activateLicense && Bundle.main.isPro {
@@ -87,121 +84,76 @@ struct URLSchemeParser: IURLSchemeParser {
         switch (scheme, command) {
         // Adding new user rule from safari
         case (.urlScheme, .urlSchemeCommandAdd):
-            let rule = String(url.path.suffix(url.path.count - 1))
-            guard !rule.isEmpty else { return false }
-            let processor = OpenUserFilterControllerProcessor(executor: executor)
-            return processor.process(parameters: ["rule": rule])
+            let processor = OpenUserFilterControllerParser(executor: executor)
+            return processor.parse(parameters: ["url": url])
             
         // Turning on/off DNS protection from widget
         case (.urlScheme, .openSystemProtection):
             let showLaunchScreen = true
-            guard let enabled = protectionStateIsEnabled(url: url) else { return false }
-            let processor = OpenDnsSettingsControllerProcessor(executor: executor)
-            return processor.process(parameters: ["showLaunchScreen": showLaunchScreen, "dnsProtectionIsEnabled": enabled])
+            let processor = OpenDnsSettingsControllerParser(executor: executor)
+            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
             
         // Turning on/off complex protection from widget
         case (.urlScheme, .openComplexProtection):
             let showLaunchScreen = true
-            guard let enabled = protectionStateIsEnabled(url: url) else { return false }
-            let processor = OpenMainPageControllerProcessor(executor: executor)
-            return processor.process(parameters: ["showLaunchScreen": showLaunchScreen, "complexProtectionIsEnabled": enabled])
+            let processor = OpenMainPageControllerParser(executor: executor)
+            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
             
         // Activate license by URL
         case (.urlScheme, .activateLicense):
             DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
-            if let license = params?["license"] as? String, !license.isEmpty {
-                DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
-                let showLaunchScreen = true
-                let processor = OpenLoginControllerProcessor(executor: executor)
-                return processor.process(parameters: ["showLaunchScreen": showLaunchScreen, "license": license])
-            } else {
-                DDLogInfo("(URLSchemeParser) - update license from openUrl")
-                let showLaunchScreen = false
-                let processor = OpenMainPageControllerProcessor(executor: executor)
-                return processor.process(parameters: ["showLaunchScreen": showLaunchScreen])
+            var showLaunchScreen = true
+            let loginParser = OpenLoginControllerParser(executor: executor)
+            if loginParser.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url]) {
+               return true
             }
+            
+            DDLogInfo("(URLSchemeParser) - update license from openUrl")
+            showLaunchScreen = false
+            let mainPageParser = OpenMainPageControllerParser(executor: executor)
+            return mainPageParser.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
             
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
             if !configurationService.proStatus {
                 let showLaunchScreen = false
-                let processor = OpenDnsSettingsControllerProcessor(executor: executor)
-                return processor.process(parameters: ["showLaunchScreen": showLaunchScreen])
+                let processor = OpenDnsSettingsControllerParser(executor: executor)
+                return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
             } else {
                 let showLaunchScreen = false
-                let processor = OpenDnsProvidersControllerProcessor(executor: executor)
-                return processor.process(parameters: ["showLaunchScreen": showLaunchScreen ,"UrlAbsoluteString": url.absoluteString])
+                let processor = OpenDnsProvidersControllerParser(executor: executor)
+                return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen ,"url": url])
             }
         
         // Import settings
         case (.urlScheme, .applySettings):
             DDLogInfo("(URLSchemeParser) openurl - apply settings")
-            guard let json = params?["json"] as? String, !json.isEmpty else {
-                DDLogError("(URLSchemeParser) there is no param 'json' in url")
-                return false
-            }
             let showLaunchScreen = true
-            let processor = OpenImportSettingsControllerProcessor(executor: executor)
-            return processor.process(parameters: ["showLaunchScreen": showLaunchScreen, "json": json])
+            let processor = OpenImportSettingsControllerParser(executor: executor)
+            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
             
         // Subscribe to custom safari filter
         case (_, .subscribe):
             DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
-            guard var params = params else { return false }
             let showLaunchScreen = true
-            params["showLaunchScreen"] = showLaunchScreen
-            let processor = OpenFiltersMasterControllerProcessor(executor: executor)
-            return processor.process(parameters: params)
+            let processor = OpenFiltersMasterControllerParser(executor: executor)
+            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
         
         // Open Tunnel Mode settings
         case (_, .openTunnelModeSettings):
             DDLogInfo("(URLSchemeParser) openurl - open tunnel mode settings")
             let showLaunchScreen = false
-            let processor = OpenTunnelModeControllerProcessor(executor: executor)
-            return processor.process(parameters: ["showLaunchScreen": showLaunchScreen])
+            let processor = OpenTunnelModeControllerParser(executor: executor)
+            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen])
 
         // Log in by social networks
         case (.urlScheme, .authScheme):
             DDLogInfo("(URLSchemeParser) openurl - Log in by social networks")
-            guard let params = params else { return false }
-            let processor = SocialNetworkAuthParametersProcessor(executor: executor)
-            return processor.process(parameters: params)
+            let processor = SocialNetworkAuthParametersParser(executor: executor)
+            return processor.parse(parameters: ["url": url])
             
         default: return false
         }
     }
-    
-    private func getParameters(from url: URL, for command: StringConstants) -> [String: Any]? {
-        switch command {
-        case .authScheme:
-            return url.parseAuthUrl().params
-        default:
-            return url.parseUrl().params
-        }
-    }
-    
-    private func getStringConstant(string: String?) -> StringConstants? {
-        guard let string = string else { return nil }
-        
-        if string == "adguard" || string == "adguard-pro" {
-            return .urlScheme
-        }
-        
-        guard let const = StringConstants(rawValue: string) else { return nil }
-        return const
-    }
-    
-    private func protectionStateIsEnabled(url: URL) -> Bool? {
-        let suffix = String(url.path.suffix(url.path.count - 1))
-        let parameters = suffix.split(separator: "/")
-        
-        let enabledString = String(parameters.first ?? "")
-        let isSufixValid = enabledString == "on" || enabledString == "off"
-        if isSufixValid {
-            return enabledString == "on"
-        }
-        return nil
-    }
-    
 }

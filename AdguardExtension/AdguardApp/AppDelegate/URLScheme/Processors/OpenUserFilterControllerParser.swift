@@ -1,4 +1,3 @@
-
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
@@ -17,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenFiltersMasterControllerProcessor: IURLSchemeParametersProcessor {
+struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
     
     private let executor: IURLSchemeExecutor
     
@@ -25,11 +24,12 @@ struct OpenFiltersMasterControllerProcessor: IURLSchemeParametersProcessor {
         self.executor = executor
     }
     
-    func process(parameters: [String : Any]) -> Bool {
-        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let url = (parameters["location"] as? String)?.removingPercentEncoding, !url.isEmpty else { return false }
-        guard let title = (parameters["title"] as? String)?.removingPercentEncoding, !title.isEmpty else { return false}
-        
-        return executor.openFiltersMasterController(showLaunchScreen: showLaunchScreen, url: url, title: title)
+    func parse(parameters: [String : Any]) -> Bool {
+        guard let url = parameters["url"] as? URL else { return false }
+        let rule = String(url.path.suffix(url.path.count - 1))
+        if rule.isEmpty { return false }
+        return executor.openUserFilterController(rule: rule)
     }
+
+    
 }

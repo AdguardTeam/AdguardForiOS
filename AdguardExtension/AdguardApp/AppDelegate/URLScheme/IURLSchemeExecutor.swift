@@ -20,7 +20,7 @@ protocol IURLSchemeExecutor {
     func openUserFilterController(rule: String) -> Bool
     func openDnsSettingsController(showLaunchScreen: Bool, dnsProtectionIsEnabled: Bool?) -> Bool
     func openMainPageController(showLaunchScreen: Bool, complexProtectionIsEnabled: Bool?) -> Bool
-    func openLoginController(showLaunchScreen: Bool, license: String?) -> Bool
+    func openLoginController(license: String?) -> Bool
     func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool
     func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool
     func openFiltersMasterController(showLaunchScreen: Bool, url: String?, title: String?) -> Bool

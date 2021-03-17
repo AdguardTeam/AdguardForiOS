@@ -16,12 +16,12 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IResetSettings {
+protocol ISettingsResetor {
     func resetAllSettings()
 }
 
 // Reset statistics and settings
-struct ResetSettings: IResetSettings {
+struct SettingsResetor: ISettingsResetor {
     
     //MARK: - Properties
     

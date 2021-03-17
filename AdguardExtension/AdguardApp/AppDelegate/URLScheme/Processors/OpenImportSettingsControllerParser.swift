@@ -1,3 +1,4 @@
+
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
@@ -16,18 +17,19 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenDnsSettingsControllerProcessor: IURLSchemeParametersProcessor {
-
+struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func process(parameters: [String : Any]) -> Bool {
+    func parse(parameters: [String : Any]) -> Bool {
         guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        let dnsProtectionIsEnabled = parameters["dnsProtectionIsEnabled"] as? Bool
-        return executor.openDnsSettingsController(showLaunchScreen: showLaunchScreen, dnsProtectionIsEnabled: dnsProtectionIsEnabled)
+        guard let url = parameters["url"] as? URL else { return false }
+        guard let json = url.parseUrl().params?["json"], !json.isEmpty else { return false }
+        let parser = SettingsParser()
+        let settings = parser.parse(querry: json)
+        return executor.openImportSettingsController(showLaunchScreen: showLaunchScreen, settings: settings)
     }
-    
 }
