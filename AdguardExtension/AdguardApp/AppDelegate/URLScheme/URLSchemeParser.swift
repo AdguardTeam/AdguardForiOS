@@ -84,74 +84,68 @@ struct URLSchemeParser: IURLSchemeParser {
         switch (scheme, command) {
         // Adding new user rule from safari
         case (.urlScheme, .urlSchemeCommandAdd):
+            DDLogInfo("(URLSchemeParser) openurl - adding new user rule from safari")
             let processor = OpenUserFilterControllerParser(executor: executor)
-            return processor.parse(parameters: ["url": url])
+            return processor.parse(url)
             
         // Turning on/off DNS protection from widget
         case (.urlScheme, .openSystemProtection):
-            let showLaunchScreen = true
-            let processor = OpenDnsSettingsControllerParser(executor: executor)
-            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+            DDLogInfo("(URLSchemeParser) openurl - turning on/off DNS protection from widget")
+            let processor = OpenDnsSettingsControllerWithLaunchScreenParser(executor: executor)
+            return processor.parse(url)
             
         // Turning on/off complex protection from widget
         case (.urlScheme, .openComplexProtection):
-            let showLaunchScreen = true
-            let processor = OpenMainPageControllerParser(executor: executor)
-            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+            DDLogInfo("(URLSchemeParser) openurl - turning on/off complex protection from widget")
+            let processor = OpenMainPageControllerControllerWithLaunchScreenParser(executor: executor)
+            return processor.parse(url)
             
         // Activate license by URL
         case (.urlScheme, .activateLicense):
             DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
-            var showLaunchScreen = true
             let loginParser = OpenLoginControllerParser(executor: executor)
-            if loginParser.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url]) {
+            if loginParser.parse(url) {
                return true
             }
             
             DDLogInfo("(URLSchemeParser) - update license from openUrl")
-            showLaunchScreen = false
             let mainPageParser = OpenMainPageControllerParser(executor: executor)
-            return mainPageParser.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+            return mainPageParser.parse(url)
             
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
             if !configurationService.proStatus {
-                let showLaunchScreen = false
                 let processor = OpenDnsSettingsControllerParser(executor: executor)
-                return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+                return processor.parse(url)
             } else {
-                let showLaunchScreen = false
                 let processor = OpenDnsProvidersControllerParser(executor: executor)
-                return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen ,"url": url])
+                return processor.parse(url)
             }
         
         // Import settings
         case (.urlScheme, .applySettings):
             DDLogInfo("(URLSchemeParser) openurl - apply settings")
-            let showLaunchScreen = true
             let processor = OpenImportSettingsControllerParser(executor: executor)
-            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+            return processor.parse(url)
             
         // Subscribe to custom safari filter
         case (_, .subscribe):
             DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
-            let showLaunchScreen = true
             let processor = OpenFiltersMasterControllerParser(executor: executor)
-            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen, "url": url])
+            return processor.parse(url)
         
         // Open Tunnel Mode settings
         case (_, .openTunnelModeSettings):
             DDLogInfo("(URLSchemeParser) openurl - open tunnel mode settings")
-            let showLaunchScreen = false
             let processor = OpenTunnelModeControllerParser(executor: executor)
-            return processor.parse(parameters: ["showLaunchScreen": showLaunchScreen])
+            return processor.parse(url)
 
         // Log in by social networks
         case (.urlScheme, .authScheme):
             DDLogInfo("(URLSchemeParser) openurl - Log in by social networks")
             let processor = SocialNetworkAuthParametersParser(executor: executor)
-            return processor.parse(parameters: ["url": url])
+            return processor.parse(url)
             
         default: return false
         }

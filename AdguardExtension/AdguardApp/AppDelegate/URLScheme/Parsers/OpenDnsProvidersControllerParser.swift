@@ -16,20 +16,15 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
-    
+struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func parse(parameters: [String : Any]) -> Bool {
-        guard let url = parameters["url"] as? URL else { return false }
-        let rule = String(url.path.suffix(url.path.count - 1))
-        if rule.isEmpty { return false }
-        return executor.openUserFilterController(rule: rule)
+    func parse(_ url: URL) -> Bool {
+        guard let _ = url.host else { return false }
+        return executor.openDnsProvidersController(showLaunchScreen: false, urlAbsoluteString: url.absoluteString)
     }
-
-    
 }

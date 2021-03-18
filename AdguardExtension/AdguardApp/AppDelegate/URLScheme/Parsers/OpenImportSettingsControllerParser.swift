@@ -1,3 +1,4 @@
+
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
@@ -16,21 +17,17 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IURLSchemeParametersParser {
-    func parse(_ url: URL) -> Bool
-}
-
-extension IURLSchemeParametersParser {
-    func protectionStateIsEnabled(url: URL) -> Bool? {
-        if url.path.isEmpty { return nil }
-        let suffix = String(url.path.suffix(url.path.count - 1))
-        let parameters = suffix.split(separator: "/")
-        
-        let enabledString = String(parameters.first ?? "")
-        let isSufixValid = enabledString == "on" || enabledString == "off"
-        if isSufixValid {
-            return enabledString == "on"
-        }
-        return nil
+struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
+    private let executor: IURLSchemeExecutor
+    
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
+    }
+    
+    func parse(_ url: URL) -> Bool {
+        guard let json = url.parseUrl().params?["json"], !json.isEmpty else { return false }
+        let parser = SettingsParser()
+        let settings = parser.parse(querry: json)
+        return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
     }
 }

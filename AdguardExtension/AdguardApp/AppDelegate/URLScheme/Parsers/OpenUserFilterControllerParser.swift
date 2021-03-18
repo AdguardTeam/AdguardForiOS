@@ -16,21 +16,19 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IURLSchemeParametersParser {
-    func parse(_ url: URL) -> Bool
-}
-
-extension IURLSchemeParametersParser {
-    func protectionStateIsEnabled(url: URL) -> Bool? {
-        if url.path.isEmpty { return nil }
-        let suffix = String(url.path.suffix(url.path.count - 1))
-        let parameters = suffix.split(separator: "/")
-        
-        let enabledString = String(parameters.first ?? "")
-        let isSufixValid = enabledString == "on" || enabledString == "off"
-        if isSufixValid {
-            return enabledString == "on"
-        }
-        return nil
+struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
+    
+    private let executor: IURLSchemeExecutor
+    
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
     }
+    
+    func parse(_ url: URL) -> Bool {
+        let rule = String(url.path.suffix(url.path.count - 1))
+        if rule.isEmpty { return false }
+        return executor.openUserFilterController(rule: rule)
+    }
+
+    
 }

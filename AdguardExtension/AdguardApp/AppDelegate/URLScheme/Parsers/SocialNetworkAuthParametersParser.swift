@@ -25,8 +25,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     }
     
     
-    func parse(parameters: [String : Any]) -> Bool {
-        guard let url = parameters["url"] as? URL else { return false }
+    func parse(_ url: URL) -> Bool {
         guard let params = url.parseAuthUrl().params else { return false }
         
         if let error = params["error"] {

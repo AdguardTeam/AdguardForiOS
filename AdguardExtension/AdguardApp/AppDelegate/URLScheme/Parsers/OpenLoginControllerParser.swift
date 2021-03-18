@@ -23,11 +23,8 @@ struct OpenLoginControllerParser: IURLSchemeParametersParser {
         self.executor = executor
     }
     
-    func parse(parameters: [String : Any]) -> Bool {
-//        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let url = parameters["url"] as? URL else { return false }
+    func parse(_ url: URL) -> Bool {
         guard let license = url.parseAuthUrl().params?["license"], !license.isEmpty else { return false }
         return executor.openLoginController(license: license)
     }
-    
 }

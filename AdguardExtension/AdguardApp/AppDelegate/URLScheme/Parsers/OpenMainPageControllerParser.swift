@@ -16,30 +16,15 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenDnsSettingsControllerParser: IURLSchemeParametersParser {
-
+struct OpenMainPageControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func parse(parameters: [String : Any]) -> Bool {
-        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let url = parameters["url"] as? URL else { return false }
-        let dnsProtectionIsEnabled = protectionStateIsEnabled(url: url)
-        return executor.openDnsSettingsController(showLaunchScreen: showLaunchScreen, dnsProtectionIsEnabled: dnsProtectionIsEnabled)
-    }
-    
-    private func protectionStateIsEnabled(url: URL) -> Bool? {
-        let suffix = String(url.path.suffix(url.path.count - 1))
-        let parameters = suffix.split(separator: "/")
-        
-        let enabledString = String(parameters.first ?? "")
-        let isSufixValid = enabledString == "on" || enabledString == "off"
-        if isSufixValid {
-            return enabledString == "on"
-        }
-        return nil
+    func parse(_ url: URL) -> Bool {
+        let complexProtectionIsEnabled = protectionStateIsEnabled(url: url)
+        return executor.openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: complexProtectionIsEnabled)
     }
 }

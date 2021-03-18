@@ -16,17 +16,14 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
+struct OpenTunnelModeControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
     
-    func parse(parameters: [String : Any]) -> Bool {
-        guard let showLaunchScreen = parameters["showLaunchScreen"] as? Bool else { return false }
-        guard let url = parameters["url"] as? URL else { return false }
-        guard let _ = url.host else { return false }
-        return executor.openDnsProvidersController(showLaunchScreen: showLaunchScreen, urlAbsoluteString: url.absoluteString)
+    func parse(_ url: URL) -> Bool {
+        return executor.openTunnelModeController(showLaunchScreen: false)
     }
 }
