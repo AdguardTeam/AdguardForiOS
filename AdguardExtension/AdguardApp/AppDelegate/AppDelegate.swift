@@ -24,9 +24,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Properties
     var window: UIWindow?
     
-    private let statusBarProcessor: IStatusBarWindow
-    private var appDelegateHelper: IAppDelegateHelper?
-
+    private let statusBarWindow: IStatusBarWindow
+    private var fetchProcessor: IAppDelegateFetchProcessor?
+    private lazy var antibannerNotificationProcessor: IAntibannerNotificationProcessor? = {
+        guard let fetchProcessor = fetchProcessor else { return nil }
+        guard let window = window else { return nil }
+        return AntibannerNotificationProcessor(fetchProcessor: fetchProcessor,
+                                               appDelegateWindow: window,
+                                               antibanner: antibanner,
+                                               contentBlockerService: contentBlockerService,
+                                               resources: resources)
+    }()
+    
+    private lazy var appDelegateProcessor: IAppDelegateProcessor? = {
+        guard let fetchProcessor = fetchProcessor else { return nil }
+        return AppDelegateProcessor(appDelegate: self,
+                                    fetchProcessor: fetchProcessor,
+                                    statusBarWindow: statusBarWindow,
+                                    antibannerController: antibannerController,
+                                    migrationService: migrationService,
+                                    purchaseService: purchaseService,
+                                    configuration: configuration,
+                                    resources: resources)
+        
+    }()
+    
     //MARK: - Services
     private lazy var resources: AESharedResourcesProtocol =  { ServiceLocator.shared.getService()! }()
     private lazy var antibannerController: AntibannerControllerProtocol = { ServiceLocator.shared.getService()! }()
@@ -49,31 +71,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var themeService: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
-
+    
     //MARK: - Application init
     override init() {
         StartupService.start()
-        self.statusBarProcessor = StatusBarWindow()
+        self.statusBarWindow = StatusBarWindow()
         super.init()
         
-        appDelegateHelper = AppDelegateHelper(resources: resources,
-                                          migrationService: migrationService,
-                                          purchaseService: purchaseService,
-                                          configuration: configuration,
-                                          vpnManager: vpnManager,
-                                          userNotificationService: userNotificationService,
-                                          contentBlockerService: contentBlockerService,
-                                          antibanner: antibanner,
-                                          complexProtection: complexProtection,
-                                          dnsFiltersService: dnsFiltersService,
-                                          safariService: safariService,
-                                          networking: networking,
-                                          productInfo: productInfo,
-                                          antibannerController: antibannerController,
-                                          statusBarProcessor: statusBarProcessor,
-                                          appDelegate: self)
-        
-        
+        fetchProcessor = AppDelegateFetchProcessor(resources: resources,
+                                                   purchaseService: purchaseService,
+                                                   configuration: configuration,
+                                                   vpnManager: vpnManager,
+                                                   userNotificationService: userNotificationService,
+                                                   contentBlockerService: contentBlockerService,
+                                                   antibanner: antibanner,
+                                                   complexProtection: complexProtection,
+                                                   dnsFiltersService: dnsFiltersService,
+                                                   safariService: safariService,
+                                                   networking: networking,
+                                                   antibannerController: antibannerController)
     }
     
     deinit {
@@ -83,19 +99,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         //------------- Preparing for start application. Stage 1. -----------------
-        appDelegateHelper?.willFinishLaunching()
+        let success = appDelegateProcessor?.willFinishLaunching(with: launchOptions, application: application)
         
         initLogger()
-        DDLogInfo("(AppDelegateHelper) Preparing for start application. Stage 1.")
-
+        DDLogInfo("(AppDelegate) Preparing for start application. Stage 1.")
+        
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
-
+        
         if (application.applicationState != .background) {
             purchaseService.checkPremiumStatusChanged()
         }
-
-        return true
+        
+        return success ?? false
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -104,7 +120,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
-        appDelegateHelper?.didFinishLaunching()
+        //------------ Subscribe to Antibanner notifications -----------------------------
+        antibannerNotificationProcessor?.subscribeToAntibannerNotifications()
+        
+        let success = appDelegateProcessor?.didFinishLaunching(with: launchOptions, application: application)
         
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
@@ -112,12 +131,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.window?.backgroundColor = self?.themeService.backgroundColor
         }
         
-        return true
+        return success ?? false
     }
     
     
     //MARK: - Application Delegate Methods
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillResignActive.")
     }
@@ -134,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        appDelegateHelper?.didBecomeActive(application)
+        appDelegateProcessor?.applicationDidBecomeActive(application)
     }
     
     
@@ -144,12 +163,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        appDelegateHelper?.performFetch(with: completionHandler)
+        fetchProcessor?.performFetch(with: completionHandler)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         DDLogError("(AppDelegate) application Open URL.")
-        appDelegateHelper?.activateWithOpenUrl = true
+        appDelegateProcessor?.activateWithOpenUrl = true
         
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
                                                           configurationService: configuration)
@@ -161,15 +180,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
-                                            dnsFiltersService: dnsFiltersService,
-                                            filtersService: filtersService,
-                                            antibannerController: antibannerController,
-                                            vpnManager: vpnManager,
-                                            resources: resources,
-                                            purchaseService: purchaseService,
-                                            activityStatisticsService: activityStatisticsService,
-                                            dnsStatisticsService: dnsStatisticsService,
-                                            dnsLogRecordsService: dnsLogRecordsService)
+                                             dnsFiltersService: dnsFiltersService,
+                                             filtersService: filtersService,
+                                             antibannerController: antibannerController,
+                                             vpnManager: vpnManager,
+                                             resources: resources,
+                                             purchaseService: purchaseService,
+                                             activityStatisticsService: activityStatisticsService,
+                                             dnsStatisticsService: dnsStatisticsService,
+                                             dnsLogRecordsService: dnsLogRecordsService)
         resetProcessor.resetAllSettings()
     }
     
@@ -191,15 +210,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Observing Values from User Defaults
-       
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == TunnelErrorCode, resources.tunnelErrorCode == 3 {
             postDnsFiltersOverlimitNotificationIfNedeed()
         }
     }
-
+    
     //MARK: - Private methods
-
+    
     private func prepareControllers() {
         setappService.start()
         
@@ -207,7 +226,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DDLogError("mainPageController is nil")
             return
         }
-
+        
         mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
@@ -249,7 +268,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func initLogger() {
         let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        DDLogInfo("(AppDelegateHelper) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
+        DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
         

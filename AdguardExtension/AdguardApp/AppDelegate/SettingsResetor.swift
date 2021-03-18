@@ -25,7 +25,7 @@ struct SettingsResetor: ISettingsResetor {
     
     //MARK: - Properties
     
-    private let appDelegate: AppDelegate
+    private weak var appDelegate: AppDelegate?
     private let dnsFiltersService: DnsFiltersServiceProtocol
     private let filtersService: FiltersServiceProtocol
     private let antibannerController: AntibannerControllerProtocol
@@ -85,7 +85,7 @@ struct SettingsResetor: ISettingsResetor {
             
             self.dnsFiltersService.reset()
             
-            appDelegate.setAppInterfaceStyle()
+            appDelegate?.setAppInterfaceStyle()
             
             let providersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
             providersService.reset()
@@ -102,7 +102,7 @@ struct SettingsResetor: ISettingsResetor {
             NotificationCenter.default.post(name: .resetSettings, object: self)
             
             DispatchQueue.main.async {
-                appDelegate.setMainPageAsCurrentAndPopToRootControllersEverywhere()
+                appDelegate?.setMainPageAsCurrentAndPopToRootControllersEverywhere()
                 DDLogInfo("(ResetSettings) Reseting is over")
             }
         }
@@ -139,6 +139,6 @@ struct SettingsResetor: ISettingsResetor {
         loadingIndicator.startAnimating();
 
         alert.view.addSubview(loadingIndicator)
-        appDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        appDelegate?.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }
