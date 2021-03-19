@@ -19,7 +19,7 @@
 protocol IStatusBarWindow: AnyObject {
     var statusBarWindowIsHidden: Bool { get set }
     func createStatusBarWindow()
-    func showStatusViewIfNeeded(configuration: ConfigurationServiceProtocol, notification: Notification)
+    func showStatusViewIfNeeded(notification: Notification)
     func hideStatusViewIfNeeded()
     func changeOrientation()
     func changeTextForStatusView(text: String)
@@ -43,6 +43,11 @@ final class StatusBarWindow: IStatusBarWindow {
     
     private let statusView = StatusView()
     private var statusBarWindow: UIWindow?
+    private let configuration: ConfigurationServiceProtocol
+    
+    init(configuration: ConfigurationServiceProtocol) {
+        self.configuration = configuration
+    }
     
     //MARK: - IStatusBarWindow methods
     
@@ -67,12 +72,12 @@ final class StatusBarWindow: IStatusBarWindow {
         self.statusBarWindow = bannerWindow
     }
     
-    func showStatusViewIfNeeded(configuration: ConfigurationServiceProtocol, notification: Notification) {
+    func showStatusViewIfNeeded(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.statusViewCounter += 1
             
-            if !configuration.showStatusBar {
+            if !self.configuration.showStatusBar {
                 return
             }
             

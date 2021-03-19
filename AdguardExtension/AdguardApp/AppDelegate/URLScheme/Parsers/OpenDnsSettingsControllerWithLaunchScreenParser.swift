@@ -25,7 +25,7 @@ struct OpenDnsSettingsControllerWithLaunchScreenParser: IURLSchemeParametersPars
     }
     
     func parse(_ url: URL) -> Bool {
-        let dnsProtectionIsEnabled = protectionStateIsEnabled(url: url)
+        let dnsProtectionIsEnabled = url.protectionStateIsEnabled()
         return executor.openDnsSettingsController(showLaunchScreen: true, dnsProtectionIsEnabled: dnsProtectionIsEnabled)
     }
 }

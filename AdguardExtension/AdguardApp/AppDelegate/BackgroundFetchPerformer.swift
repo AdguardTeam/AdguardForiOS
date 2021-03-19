@@ -16,16 +16,14 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-protocol IAppDelegateFetchProcessor: AnyObject {
+protocol IBackgroundFetchPerformer: AnyObject {
     var fetchCompletion: ((UIBackgroundFetchResult) -> Void)? { get set }
     var isBackground: Bool { get }
     var fetchState: BackgroundFetchState { get set }
     
     func antibanerUpdateFinished(result: UpdateResult)
-    func addPurchaseStatusObserver()
-    func checkAutoUpdateConditions() -> Bool
     func invalidateAntibannerIfNeeded()
-    func setBackgroundStatusDefault()
+    func setBackgroundStatusToDefault()
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 }
 
@@ -35,9 +33,24 @@ enum UpdateResult: UInt {
          updateNewData,
          updateFailed,
          updateNoData
+    
+    var stringValue: String {
+        switch self {
+        case .updateNotStarted:
+            return "updateNotStarted"
+        case .updateStarted:
+            return "updateStarted"
+        case .updateNewData:
+            return "updateNewData"
+        case .updateFailed:
+            return "updateFailed"
+        case .updateNoData:
+            return "updateNoData"
+        }
+    }
 }
 
-final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
+final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
     //MARK: - Properties
     private let resources: AESharedResourcesProtocol
     private let purchaseService: PurchaseServiceProtocol
@@ -57,9 +70,22 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
     private var antibanerUpdateResult: UpdateResult?
     private var blockingSubscriptionsUpdateResult: UpdateResult?
     
-    private var purchaseObservation: Any?
-    private var proStatusObservation: Any?
+    private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
     
+    private let workingQueue = DispatchQueue(label: "BackgroundFetchPerformer-queue")
+    
+    private var shouldUpdateFilters: Bool {
+        if !resources.wifiOnlyUpdates {
+            return true
+        }
+        
+        let reachability = Reachability.forInternetConnection()
+        let reachable = reachability?.isReachableViaWiFi() ?? false
+        if !reachable {
+            DDLogInfo("(BackgroundFetchPerformer) App settings permit updates only over WiFi.")
+        }
+        return reachable
+    }
     
     var fetchCompletion: ((UIBackgroundFetchResult) -> Void)?
     
@@ -102,12 +128,19 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
         self.safariService = safariService
         self.networking = networking
         self.antibannerController = antibannerController
+         
+        defer {
+            self.fetchNotificationHandler = BackgroundFetchNotificationHandler(fetchPerformer: self,
+                                                                          antibanner: antibanner,
+                                                                          contentBlockerService: contentBlockerService,
+                                                                          resources: resources)
+        }
     }
     
     //MARK: - IAppDelegateHelp methods
     
     func antibanerUpdateFinished(result: UpdateResult) {
-        DDLogInfo("(AppDelegateFetchProcessor) antibanerUpdateFinished with result: \(self.resultDescription(result: result))")
+        DDLogInfo("(BackgroundFetchPerformer) antibanerUpdateFinished with result: \(result.stringValue)")
         self.antibanerUpdateResult = result
         
         updateDnsFiltersIfNeeded { [weak self] in
@@ -115,66 +148,23 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
         }
     }
     
-    func addPurchaseStatusObserver() {
-        if purchaseObservation == nil {
-            purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
-                guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-                
-                DDLogInfo("(AppDelegateFetchProcessor) - Received notification type = \(type)")
-                
-                if type == PurchaseService.kPSNotificationPremiumExpired {
-                    self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
-                }
-            }
-        }
-        
-        if proStatusObservation == nil {
-            proStatusObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
-                guard let self = self else { return }
-                if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
-                    DDLogInfo("(AppDelegateFetchProcessor) Remove vpn configuration")
-                    self.vpnManager.removeVpnConfiguration { (error) in
-                        if error != nil {
-                            DDLogError("(AppDelegateFetchProcessor) Remove vpn configuration failed: \(error!)")
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func checkAutoUpdateConditions() -> Bool {
-        
-        if !resources.wifiOnlyUpdates {
-            return true
-        }
-        
-        let reachability = Reachability.forInternetConnection()
-        let reachable = reachability?.isReachableViaWiFi() ?? false
-        if !reachable {
-            DDLogInfo("(AppDelegateFetchProcessor - checkAutoUpdateConditions) App settings permit updates only over WiFi.")
-        }
-        return reachable
-    }
-    
     func invalidateAntibannerIfNeeded() {
-        if checkAutoUpdateConditions() {
+        if shouldUpdateFilters {
             let _ = invalidateAntibanner(fromUI: false, interactive: true)
         }
     }
     
-    func setBackgroundStatusDefault() {
+    func setBackgroundStatusToDefault() {
         fetchCompletion = nil
         downloadCompletion = nil
     }
     
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        addPurchaseStatusObserver()
-        DDLogInfo("(AppDelegateFetchProcessor) application perform Fetch.")
+        DDLogInfo("(BackgroundFetchPerformer) application perform Fetch.")
         
         if fetchCompletion != nil {
             // In this case we receive fetch event when previous event still not processed.
-            DDLogInfo("(AppDelegateFetchProcessor) Previous Fetch still not processed.")
+            DDLogInfo("(BackgroundFetchPerformer) Previous Fetch still not processed.")
             
             // handle new completion handler
             fetchCompletion = completionHandler
@@ -182,7 +172,7 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
             return
         }
         
-        let checkResult = self.checkAutoUpdateConditions()
+        let checkResult = shouldUpdateFilters
         
         //Entry point for updating of the filters
         fetchCompletion = completionHandler
@@ -193,12 +183,12 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
             guard let self = self else { return }
             self.antibanner.repairUpdateState {
                 if self.antibanner.updatesRightNow {
-                    DDLogInfo("(AppDelegateFetchProcessor) Update process did not start because it is performed right now.")
+                    DDLogInfo("(BackgroundFetchPerformer) Update process did not start because it is performed right now.")
                     return
                 }
                 
                 if !checkResult {
-                    DDLogInfo("(AppDelegateFetchProcessor - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.")
+                    DDLogInfo("(BackgroundFetchPerformer - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.")
                     self.antibanerUpdateResult = UpdateResult(rawValue: UIBackgroundFetchResult.noData.rawValue)
                 } else {
                     self.antibanerUpdateResult = .updateStarted
@@ -238,35 +228,35 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
     }
     
     //MARK: - Private methods
+    
     private func invalidateAntibanner(fromUI: Bool, interactive: Bool) -> Bool {
-        
-        DispatchQueue(label: "AppDelegateFetchProcessor-queue").sync {
+        workingQueue.sync {
             guard let lastCheck = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? NSDate else { return false }
             if fromUI || (lastCheck.timeIntervalSinceNow * -1.0) >= FiltersUpdatesConstants.checkFiltersUpdatesPeriod {
                 
                 if fromUI {
-                    DDLogInfo("(AppDelegateFetchProcessor) Update process started from UI.")
+                    DDLogInfo("(BackgroundFetchPerformer) Update process started from UI.")
                 } else {
-                    DDLogInfo("(AppDelegateFetchProcessor) Update process started by timer.")
+                    DDLogInfo("(BackgroundFetchPerformer) Update process started by timer.")
                 }
                 
                 var result = false;
                 
                 antibanner.beginTransaction()
-                DDLogInfo("(AppDelegateFetchProcessor) Begin of the Update Transaction from - invalidateAntibanner.")
+                DDLogInfo("(BackgroundFetchPerformer) Begin of the Update Transaction from - invalidateAntibanner.")
                 
                 result = antibanner.startUpdatingForced(fromUI, interactive: interactive)
                 
                 if !result {
-                    DDLogInfo("(AppDelegateFetchProcessor) Update process did not start because [antibanner startUpdatingForced] return NO.")
+                    DDLogInfo("(BackgroundFetchPerformer) Update process did not start because antibanner.startUpdatingForced return false.")
                     antibanner.rollbackTransaction()
-                    DDLogInfo("(AppDelegateFetchProcessor) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.")
+                    DDLogInfo("(BackgroundFetchPerformer) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.")
                 }
                 
                 return result
             }
             
-            DDLogInfo("(AppDelegateFetchProcessor) Update process NOT started by timer. Time period from previous update too small.")
+            DDLogInfo("(BackgroundFetchPerformer) Update process NOT started by timer. Time period from previous update too small.")
             
             antibanerUpdateFinished(result: .updateFailed)
             
@@ -274,29 +264,19 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
         }
     }
     
-    private func resultDescription(result: UpdateResult) -> String {
-        let names = ["UpdateNotStarted",
-                     "UpdateStarted",
-                     "UpdateNewData",
-                     "UpdateFailed",
-                     "UpdateNoData"]
-        
-        return names[Int(result.rawValue)]
-    }
-    
     private func updateFinished() {
         
-        DDLogInfo("(AppDelegateFetchProcessor) updateFinished")
+        DDLogInfo("(BackgroundFetchPerformer) updateFinished")
         
-        if(self.antibanerUpdateResult == .updateStarted || self.blockingSubscriptionsUpdateResult == .updateStarted) {
+        if self.antibanerUpdateResult == .updateStarted || self.blockingSubscriptionsUpdateResult == .updateStarted {
             return
         }
         
-        var result: UIBackgroundFetchResult!
+        let result: UIBackgroundFetchResult!
         
-        if(self.antibanerUpdateResult == .updateNewData || self.blockingSubscriptionsUpdateResult == .updateNewData) {
+        if self.antibanerUpdateResult == .updateNewData || self.blockingSubscriptionsUpdateResult == .updateNewData {
             result = .newData
-        } else if (self.antibanerUpdateResult == .updateNoData && self.blockingSubscriptionsUpdateResult == .updateNoData) {
+        } else if self.antibanerUpdateResult == .updateNoData && self.blockingSubscriptionsUpdateResult == .updateNoData {
             result = .noData
         } else {
             result = .failed
@@ -306,19 +286,14 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
     }
     
     private func callCompletionHandler(result: UIBackgroundFetchResult) {
-        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if self.fetchCompletion != nil {
-                let resultName = [
-                    "NewData",
-                    "NoData",
-                    "Failed"]
-                DDLogInfo("(AppDelegateFetchProcessor - Background Fetch) Call fetch Completion. With result: \(resultName[Int(result.rawValue)])")
+                DDLogInfo("(BackgroundFetchPerformer - Background Fetch) Call fetch Completion. With result: \(UpdateResult(rawValue: result.rawValue)?.stringValue ?? "nil")")
                 self.fetchCompletion?(result)
                 self.fetchCompletion = nil
             } else if self.downloadCompletion != nil {
-                DDLogInfo("(AppDelegateFetchProcessor - Background update downloads) Call Completion.")
+                DDLogInfo("(BackgroundFetchPerformer - Background update downloads) Call Completion.")
                 self.downloadCompletion?()
                 self.downloadCompletion = nil
             }
@@ -329,24 +304,24 @@ final class AppDelegateFetchProcessor: IAppDelegateFetchProcessor {
     private func updateDnsFiltersIfNeeded( callback: @escaping ()->Void) {
         let lastCheckTime = resources.lastDnsFiltersUpdateTime ?? Date(timeIntervalSince1970: 0)
         let interval = Date().timeIntervalSince(lastCheckTime)
-        let checkResult = checkAutoUpdateConditions()
+        let checkResult = shouldUpdateFilters
         if !dnsFiltersService.filtersAreUpdating
             && Int(interval) > Int(FiltersUpdatesConstants.dnsFiltersCheckLimit)
             && configuration.proStatus
             && checkResult {
             resources.lastDnsFiltersUpdateTime = Date()
             
-            DDLogInfo("(AppDelegateFetchProcessor) updateDnsFiltersIfNeeded - update dns filters")
+            DDLogInfo("(BackgroundFetchPerformer) updateDnsFiltersIfNeeded - update dns filters")
             dnsFiltersService.updateFilters(networking: networking) { [weak self] in
                 
-                DDLogInfo("(AppDelegateFetchProcessor) updateDnsFiltersIfNeeded - dns filters are updeted")
+                DDLogInfo("(BackgroundFetchPerformer) updateDnsFiltersIfNeeded - dns filters are updeted")
                 self?.updateTunnelSettingsIfAppropriate {
                     callback()
                 }
             }
         }
         else {
-            DDLogInfo("(AppDelegateFetchProcessor) updateDnsFiltersIfNeeded - not all conditions are met")
+            DDLogInfo("(BackgroundFetchPerformer) updateDnsFiltersIfNeeded - not all conditions are met")
             callback()
         }
     }

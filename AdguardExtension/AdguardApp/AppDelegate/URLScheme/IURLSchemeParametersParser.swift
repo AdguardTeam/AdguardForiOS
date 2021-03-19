@@ -19,18 +19,3 @@
 protocol IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool
 }
-
-extension IURLSchemeParametersParser {
-    func protectionStateIsEnabled(url: URL) -> Bool? {
-        if url.path.isEmpty { return nil }
-        let suffix = String(url.path.suffix(url.path.count - 1))
-        let parameters = suffix.split(separator: "/")
-        
-        let enabledString = String(parameters.first ?? "")
-        let isSufixValid = enabledString == "on" || enabledString == "off"
-        if isSufixValid {
-            return enabledString == "on"
-        }
-        return nil
-    }
-}

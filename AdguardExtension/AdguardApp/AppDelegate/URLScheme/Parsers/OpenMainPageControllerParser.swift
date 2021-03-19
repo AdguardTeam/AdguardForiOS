@@ -24,7 +24,7 @@ struct OpenMainPageControllerParser: IURLSchemeParametersParser {
     }
     
     func parse(_ url: URL) -> Bool {
-        let complexProtectionIsEnabled = protectionStateIsEnabled(url: url)
+        let complexProtectionIsEnabled = url.protectionStateIsEnabled()
         return executor.openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: complexProtectionIsEnabled)
     }
 }
