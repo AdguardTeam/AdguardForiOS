@@ -25,7 +25,8 @@ extension AppDelegate {
         
         showStatusBarNotification = NotificationCenter.default.observe(name: .ShowStatusView, object: nil, queue: nil, using: { [weak self] (notification) in
             guard let self = self else { return }
-            self.statusBarWindow.showStatusViewIfNeeded(notification: notification)
+            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
+            self.statusBarWindow.showStatusViewIfNeeded(text: text)
         })
         
         hideStatusBarNotification = NotificationCenter.default.observe(name: .HideStatusView, object: nil, queue: nil, using: { [weak self] (notification) in

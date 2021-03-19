@@ -19,7 +19,7 @@
 protocol IStatusBarWindow: AnyObject {
     var statusBarWindowIsHidden: Bool { get set }
     func createStatusBarWindow()
-    func showStatusViewIfNeeded(notification: Notification)
+    func showStatusViewIfNeeded(text: String)
     func hideStatusViewIfNeeded()
     func changeOrientation()
     func changeTextForStatusView(text: String)
@@ -72,7 +72,7 @@ final class StatusBarWindow: IStatusBarWindow {
         self.statusBarWindow = bannerWindow
     }
     
-    func showStatusViewIfNeeded(notification: Notification) {
+    func showStatusViewIfNeeded(text: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.statusViewCounter += 1
@@ -80,9 +80,6 @@ final class StatusBarWindow: IStatusBarWindow {
             if !self.configuration.showStatusBar {
                 return
             }
-            
-            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
-            
             
             if !self.statusBarIsShown {
                 self.statusBarIsShown = true

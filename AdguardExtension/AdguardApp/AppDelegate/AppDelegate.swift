@@ -22,15 +22,20 @@ import Foundation
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: - Properties
+    let statusBarWindow: IStatusBarWindow
     var window: UIWindow?
     
+    // AppDelegate+StatusBarWindow notifications
     var showStatusBarNotification: NotificationToken?
     var hideStatusBarNotification: NotificationToken?
     var orientationChangeNotification: NotificationToken?
+    // AppDelegate addPurchaseStatusObserver notifications
+    private var purchaseObservation: NotificationToken?
+    private var proStatusObservation: NSKeyValueObservation?
     
-    let statusBarWindow: IStatusBarWindow
     
     private var fetchPerformer: IBackgroundFetchPerformer?
+    private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
     private var firstRun: Bool {
         get {
             resources.firstRun
@@ -40,8 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     private var activateWithOpenUrl: Bool = false
-    private var purchaseObservation: Any?
-    private var proStatusObservation: Any?
 
     //MARK: - Services
     private var resources: AESharedResourcesProtocol
@@ -94,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
         super.init()
         
-        fetchPerformer = BackgroundFetchPerformer(resources: resources,
+        self.fetchPerformer = BackgroundFetchPerformer(resources: resources,
                                                    purchaseService: purchaseService,
                                                    configuration: configuration,
                                                    vpnManager: vpnManager,
@@ -106,6 +109,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                    safariService: safariService,
                                                    networking: networking,
                                                    antibannerController: antibannerController)
+        
+        self.fetchNotificationHandler = BackgroundFetchNotificationHandler(fetchPerformer: fetchPerformer!,
+                                                                           antibanner: antibanner,
+                                                                           contentBlockerService: contentBlockerService,
+                                                                           resources: resources)
     }
     
     deinit {
@@ -141,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
         subscribeToUserNotificationServiceNotifications()
-        setPeriodForCheckingFilters()
+        AppDelegate.setPeriodForCheckingFilters()
         subscribeToNotifications()
         
         return true
@@ -288,14 +296,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         antibannerController.onReady { [weak self] (_) in
             guard let self = self else { return }
-            guard let fetchProcessor = self.fetchPerformer else { return }
+            guard let fetchPerformer = self.fetchPerformer else { return }
             if (self.firstRun) {
                 self.migrationService.install()
                 self.purchaseService.checkLicenseStatus()
                 self.firstRun = false
             }
             
-            self.migrationService.migrateIfNeeded(inBackground: fetchProcessor.isBackground)
+            self.migrationService.migrateIfNeeded(inBackground: fetchPerformer.isBackground)
         }
     }
     

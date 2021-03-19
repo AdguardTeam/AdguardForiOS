@@ -69,9 +69,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
     
     private var antibanerUpdateResult: UpdateResult?
     private var blockingSubscriptionsUpdateResult: UpdateResult?
-    
-    private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
-    
+        
     private let workingQueue = DispatchQueue(label: "BackgroundFetchPerformer-queue")
     
     private var shouldUpdateFilters: Bool {
@@ -128,13 +126,6 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
         self.safariService = safariService
         self.networking = networking
         self.antibannerController = antibannerController
-         
-        defer {
-            self.fetchNotificationHandler = BackgroundFetchNotificationHandler(fetchPerformer: self,
-                                                                          antibanner: antibanner,
-                                                                          contentBlockerService: contentBlockerService,
-                                                                          resources: resources)
-        }
     }
     
     //MARK: - IAppDelegateHelp methods

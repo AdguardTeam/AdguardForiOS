@@ -18,7 +18,9 @@
 
 import Foundation
 
-final class BackgroundFetchNotificationHandler {
+protocol IBackgroundFetchNotificationHandler {}
+
+final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHandler {
     
     //MARK:  - Properties
     private weak var fetchPerformer: IBackgroundFetchPerformer?
