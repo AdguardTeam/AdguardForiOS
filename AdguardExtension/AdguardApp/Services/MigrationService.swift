@@ -25,7 +25,7 @@ protocol MigrationServiceProtocol {
 
 class MigrationService: MigrationServiceProtocol {
     
-    private let currentSchemaVersion = 4
+    private let currentSchemaVersion = 5
     
     private let vpnManager: VpnManagerProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
@@ -111,6 +111,11 @@ class MigrationService: MigrationServiceProtocol {
                     result = result && enableGroupsWithEnabledFilters()
                     result = result && migrateVpnSettingsFromTunnelconfiguration()
                 }
+            }
+            
+            if savedSchemaVersion < 5 {
+                let storage = FiltersStorage()
+                result = result && self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: storage)
             }
             
             /* If all migrations are successfull, than save current schema version */
@@ -291,15 +296,11 @@ class MigrationService: MigrationServiceProtocol {
     
     private func updateAntibanner() {
         // removing malware filter with antibanner
-        antibanner.repairUpdateState { [weak self] in
-            guard let self = self else { return }
-            if self.antibanner.filters().contains(where: { $0.filterId == 208 }) {
-                self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
-            }
-            
-            self.antibanner.beginTransaction()
-            self.antibanner.startUpdatingForced(true, interactive: true)
+        if self.antibanner.filters().contains(where: { $0.filterId == 208 }) {
+            self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
         }
+            
+        filtersService.load(refresh: true) {}
     }
     
     private func updateDnsFilters() {

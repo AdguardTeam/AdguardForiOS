@@ -18,23 +18,15 @@
 
 import Foundation
 
-protocol HttpRequestServiceProtocol {
-    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->())
-}
-
-class HttpRequestService: HttpRequestServiceProtocol {
-
-    private let requestSender: RequestSenderProtocol = RequestSender()
+@objc
+@objcMembers
+class BuilderHelper: NSObject {
+    private let networking = HttpRequestService()
+    func loadFiltersMetadata(completion: @escaping (ABECFilterClientMetadata?)->Void) {
+        networking.loadFiltersMetadata(completion: completion)
+    }
     
-    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (Bool) -> ()) {
-        let config = RequestFactory.sendFeedbackConfig(feedback)
-        requestSender.send(requestConfig: config) { (result: Result<Bool>) in
-            switch result{
-            case .success(let isSuccess):
-                completion(isSuccess)
-            case .error:
-                completion(false)
-            }
-        }
+    func loadFiltersLocalizations(completion: @escaping (ABECFilterClientLocalization?)->Void) {
+        networking.loadFiltersLocalizations(completion: completion)
     }
 }

@@ -91,7 +91,7 @@ class StartupService : NSObject{
         let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
         locator.addService(service: contentBlockerService)
         
-        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService)
+        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService, resources: sharedResources)
         
         locator.addService(service: filtersService)
         

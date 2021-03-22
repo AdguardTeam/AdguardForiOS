@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,8 +55,28 @@
 		659C60D11B8B4F200081EBE3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 659C60D01B8B4F200081EBE3 /* libz.tbd */; };
 		65FAB33A1D6C572200A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FAB3391D6C572200A0706B /* ACObject.m */; };
 		D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A18E219F0811002C17D9 /* DDLoggerNames.m */; };
-		D0D33BC023102D64009082CE /* Affinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BBF23102D64009082CE /* Affinity.swift */; };
-		D0D33BC223102DA9009082CE /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */; };
+		D07D33DD26121BBB00213A5A /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C426121AF100213A5A /* NetworkingService.swift */; };
+		D07D33DF26121BC400213A5A /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C626121AF100213A5A /* RequestSender.swift */; };
+		D07D33E026121BC600213A5A /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C726121AF100213A5A /* RequestSenderProtocol.swift */; };
+		D07D33E426121BCD00213A5A /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C026121AF100213A5A /* RequestProtocol.swift */; };
+		D07D33E626121BD100213A5A /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C326121AF100213A5A /* FiltersMetadataRequest.swift */; };
+		D07D33E726121BD100213A5A /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C226121AF100213A5A /* FiltersLocalizationsRequest.swift */; };
+		D07D33E926121BDC00213A5A /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33BB26121AF100213A5A /* ParserProtocol.swift */; };
+		D07D33EA26121BDC00213A5A /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33BC26121AF100213A5A /* FiltersMetadataParser.swift */; };
+		D07D33EB26121BDC00213A5A /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33BD26121AF100213A5A /* FiltersLocalizationsParser.swift */; };
+		D07D33ED26121C6B00213A5A /* SuccessFailureParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33BE26121AF100213A5A /* SuccessFailureParser.swift */; };
+		D07D341126121F6F00213A5A /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D341026121F6900213A5A /* Dictionary+Utils.swift */; };
+		D07D341426121FCF00213A5A /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D341326121FCF00213A5A /* CharacterSet+Utils.swift */; };
+		D07D34582612214400213A5A /* NetworkingService-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D34562612214400213A5A /* NetworkingService-Common.swift */; };
+		D07D34AD2612222A00213A5A /* RequestFactory-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D34AC2612222A00213A5A /* RequestFactory-Common.swift */; };
+		D07D34AF2612223B00213A5A /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C826121AF100213A5A /* RequestFactory.swift */; };
+		D07D3505261229DA00213A5A /* BuilderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D3504261229DA00213A5A /* BuilderHelper.swift */; };
+		D0EF344926086342000A55F0 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344526086342000A55F0 /* AffinityRulesParser.swift */; };
+		D0EF344A26086342000A55F0 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344626086342000A55F0 /* FiltersConverter.swift */; };
+		D0EF344B26086342000A55F0 /* FiltersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344726086342000A55F0 /* FiltersStorage.swift */; };
+		D0EF344C26086342000A55F0 /* SafariFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344826086342000A55F0 /* SafariFilter.swift */; };
+		D0F284C42608795C002AAC7B /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D0F284C32608795C002AAC7B /* ContentBlockerConverter */; };
+		D0F284D826087A46002AAC7B /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F284D726087A46002AAC7B /* CocoaLumberjack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,12 +207,34 @@
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
 		D070CAAC22F489910061D9FC /* schema0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
 		D070CAAD22F489910061D9FC /* update0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
+		D07D33BB26121AF100213A5A /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
+		D07D33BC26121AF100213A5A /* FiltersMetadataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetadataParser.swift; sourceTree = "<group>"; };
+		D07D33BD26121AF100213A5A /* FiltersLocalizationsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersLocalizationsParser.swift; sourceTree = "<group>"; };
+		D07D33BE26121AF100213A5A /* SuccessFailureParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessFailureParser.swift; sourceTree = "<group>"; };
+		D07D33C026121AF100213A5A /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		D07D33C126121AF100213A5A /* SendFeedbackRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendFeedbackRequest.swift; sourceTree = "<group>"; };
+		D07D33C226121AF100213A5A /* FiltersLocalizationsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersLocalizationsRequest.swift; sourceTree = "<group>"; };
+		D07D33C326121AF100213A5A /* FiltersMetadataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetadataRequest.swift; sourceTree = "<group>"; };
+		D07D33C426121AF100213A5A /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		D07D33C626121AF100213A5A /* RequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSender.swift; sourceTree = "<group>"; };
+		D07D33C726121AF100213A5A /* RequestSenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSenderProtocol.swift; sourceTree = "<group>"; };
+		D07D33C826121AF100213A5A /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
+		D07D340F26121F6900213A5A /* UIColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorUtils.swift; sourceTree = "<group>"; };
+		D07D341026121F6900213A5A /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
+		D07D341326121FCF00213A5A /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Utils.swift"; sourceTree = "<group>"; };
+		D07D34552612214400213A5A /* NetworkingService-AdGuard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkingService-AdGuard.swift"; sourceTree = "<group>"; };
+		D07D34562612214400213A5A /* NetworkingService-Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkingService-Common.swift"; sourceTree = "<group>"; };
+		D07D34AC2612222A00213A5A /* RequestFactory-Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RequestFactory-Common.swift"; sourceTree = "<group>"; };
+		D07D3504261229DA00213A5A /* BuilderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderHelper.swift; sourceTree = "<group>"; };
 		D0C4EF2B23C758A600C57E22 /* DDLogMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
 		D0D33BBE23102D63009082CE /* Builder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Builder-Bridging-Header.h"; sourceTree = "<group>"; };
-		D0D33BBF23102D64009082CE /* Affinity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
-		D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D0EF344526086342000A55F0 /* AffinityRulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
+		D0EF344626086342000A55F0 /* FiltersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersConverter.swift; sourceTree = "<group>"; };
+		D0EF344726086342000A55F0 /* FiltersStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersStorage.swift; sourceTree = "<group>"; };
+		D0EF344826086342000A55F0 /* SafariFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariFilter.swift; sourceTree = "<group>"; };
+		D0F284D726087A46002AAC7B /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +244,7 @@
 			files = (
 				659C60D11B8B4F200081EBE3 /* libz.tbd in Frameworks */,
 				659C60CF1B8B4F040081EBE3 /* libsqlite3.tbd in Frameworks */,
+				D0F284C42608795C002AAC7B /* ContentBlockerConverter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +263,9 @@
 		655A04A21C6B7790000F00D7 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				D07D340E26121F6900213A5A /* Utils */,
+				D07D33B926121AF100213A5A /* Networking */,
+				D0EF344426086342000A55F0 /* sdk */,
 				659491B41C6C839F00E501BA /* ASConstants.h */,
 				655A04A31C6B7790000F00D7 /* ABackEndClients */,
 				655A04AB1C6B7790000F00D7 /* ACommons */,
@@ -235,8 +281,6 @@
 		655A04A31C6B7790000F00D7 /* ABackEndClients */ = {
 			isa = PBXGroup;
 			children = (
-				D0D33BC123102DA9009082CE /* AffinityRulesParser.swift */,
-				D0D33BBF23102D64009082CE /* Affinity.swift */,
 				655A04A41C6B7790000F00D7 /* ABECConstants.h */,
 				655A04A51C6B7790000F00D7 /* ABECFilter.h */,
 				655A04A61C6B7790000F00D7 /* ABECFilter.m */,
@@ -326,6 +370,7 @@
 		655A04E21C6B7790000F00D7 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
+				D0F284D726087A46002AAC7B /* CocoaLumberjack.swift */,
 				D031A18E219F0811002C17D9 /* DDLoggerNames.m */,
 				655A04E31C6B7790000F00D7 /* CLI */,
 				655A04E61C6B7790000F00D7 /* DDAbstractDatabaseLogger.h */,
@@ -509,6 +554,7 @@
 				659C5FCB1B8B4DC90081EBE3 /* main.m */,
 				659C60D21B8B50200081EBE3 /* Resources */,
 				65DAE6E01B8B69A10020BC3C /* clean-script.sh */,
+				D07D3504261229DA00213A5A /* BuilderHelper.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -529,6 +575,62 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D07D33B926121AF100213A5A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D07D34AC2612222A00213A5A /* RequestFactory-Common.swift */,
+				D07D33C426121AF100213A5A /* NetworkingService.swift */,
+				D07D34552612214400213A5A /* NetworkingService-AdGuard.swift */,
+				D07D34562612214400213A5A /* NetworkingService-Common.swift */,
+				D07D33C826121AF100213A5A /* RequestFactory.swift */,
+				D07D33BA26121AF100213A5A /* Parsers */,
+				D07D33BF26121AF100213A5A /* Requests */,
+				D07D33C526121AF100213A5A /* RequestManager */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D07D33BA26121AF100213A5A /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				D07D33BB26121AF100213A5A /* ParserProtocol.swift */,
+				D07D33BC26121AF100213A5A /* FiltersMetadataParser.swift */,
+				D07D33BD26121AF100213A5A /* FiltersLocalizationsParser.swift */,
+				D07D33BE26121AF100213A5A /* SuccessFailureParser.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		D07D33BF26121AF100213A5A /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				D07D33C026121AF100213A5A /* RequestProtocol.swift */,
+				D07D33C126121AF100213A5A /* SendFeedbackRequest.swift */,
+				D07D33C226121AF100213A5A /* FiltersLocalizationsRequest.swift */,
+				D07D33C326121AF100213A5A /* FiltersMetadataRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		D07D33C526121AF100213A5A /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				D07D33C626121AF100213A5A /* RequestSender.swift */,
+				D07D33C726121AF100213A5A /* RequestSenderProtocol.swift */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
+		D07D340E26121F6900213A5A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D07D341326121FCF00213A5A /* CharacterSet+Utils.swift */,
+				D07D340F26121F6900213A5A /* UIColorUtils.swift */,
+				D07D341026121F6900213A5A /* Dictionary+Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		D0D561772191F6EB00A35DEC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -536,6 +638,18 @@
 				D0D561782191F6EB00A35DEC /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0EF344426086342000A55F0 /* sdk */ = {
+			isa = PBXGroup;
+			children = (
+				D0EF344526086342000A55F0 /* AffinityRulesParser.swift */,
+				D0EF344626086342000A55F0 /* FiltersConverter.swift */,
+				D0EF344726086342000A55F0 /* FiltersStorage.swift */,
+				D0EF344826086342000A55F0 /* SafariFilter.swift */,
+			);
+			name = sdk;
+			path = ../AdguardExtension/sdk;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,6 +686,9 @@
 				65DAE6DF1B8B693B0020BC3C /* PBXTargetDependency */,
 			);
 			name = Builder;
+			packageProductDependencies = (
+				D0F284C32608795C002AAC7B /* ContentBlockerConverter */,
+			);
 			productName = Builder;
 			productReference = 659C5FC81B8B4DC90081EBE3 /* Builder */;
 			productType = "com.apple.product-type.tool";
@@ -605,6 +722,9 @@
 				Base,
 			);
 			mainGroup = 659C5FBF1B8B4DC90081EBE3;
+			packageReferences = (
+				D0F284C22608795C002AAC7B /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
+			);
 			productRefGroup = 659C5FC91B8B4DC90081EBE3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -641,26 +761,36 @@
 				6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */,
 				655A05B01C6B7790000F00D7 /* NSURL+Utils.m in Sources */,
 				655A05A31C6B7790000F00D7 /* DDLog.m in Sources */,
-				D0D33BC223102DA9009082CE /* AffinityRulesParser.swift in Sources */,
+				D0EF344A26086342000A55F0 /* FiltersConverter.swift in Sources */,
 				655A05A51C6B7790000F00D7 /* DDContextFilterLogFormatter.m in Sources */,
+				D07D3505261229DA00213A5A /* BuilderHelper.swift in Sources */,
 				655A05A61C6B7790000F00D7 /* DDDispatchQueueLogFormatter.m in Sources */,
 				655A058C1C6B7790000F00D7 /* ACFFileUtils.m in Sources */,
+				D07D33E626121BD100213A5A /* FiltersMetadataRequest.swift in Sources */,
+				D07D34AF2612223B00213A5A /* RequestFactory.swift in Sources */,
+				D07D34AD2612222A00213A5A /* RequestFactory-Common.swift in Sources */,
 				D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */,
 				655A05891C6B7790000F00D7 /* ABECRequest.m in Sources */,
 				655A05AC1C6B7790000F00D7 /* NSException+Utils.m in Sources */,
 				655A05BF1C6B7790000F00D7 /* ASDFilterObjects.m in Sources */,
+				D07D33DD26121BBB00213A5A /* NetworkingService.swift in Sources */,
 				655A05AE1C6B7790000F00D7 /* NSString+Utils.m in Sources */,
 				655A05DC1C6B7790000F00D7 /* FMSQLStatementSplitter.m in Sources */,
 				655A05AB1C6B7790000F00D7 /* NSDate+Utils.m in Sources */,
 				655A05BB1C6B7790000F00D7 /* ADLocales.m in Sources */,
 				655A05D91C6B7790000F00D7 /* FMDatabasePool.m in Sources */,
+				D07D33ED26121C6B00213A5A /* SuccessFailureParser.swift in Sources */,
 				655A05A01C6B7790000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
 				655A05961C6B7790000F00D7 /* ACLFileLogger.m in Sources */,
 				65FAB33A1D6C572200A0706B /* ACObject.m in Sources */,
 				655A059F1C6B7790000F00D7 /* CLIColor.m in Sources */,
 				655A05D61C6B7790000F00D7 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				D0EF344926086342000A55F0 /* AffinityRulesParser.swift in Sources */,
 				655A05921C6B7790000F00D7 /* ACIOUtils.m in Sources */,
 				655A05F51C6B7E63000F00D7 /* ACSSystemUtils.m in Sources */,
+				D0EF344C26086342000A55F0 /* SafariFilter.swift in Sources */,
+				D07D33E426121BCD00213A5A /* RequestProtocol.swift in Sources */,
+				D07D34582612214400213A5A /* NetworkingService-Common.swift in Sources */,
 				655A05911C6B7790000F00D7 /* ACIOStream.m in Sources */,
 				655A05D71C6B7790000F00D7 /* FMDatabase.m in Sources */,
 				655A05DB1C6B7790000F00D7 /* FMResultSet.m in Sources */,
@@ -671,10 +801,15 @@
 				651F5F131E2564F400E22157 /* ACNUrlUtils.m in Sources */,
 				655A05941C6B7790000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				655A05D81C6B7790000F00D7 /* FMDatabaseAdditions.m in Sources */,
+				D07D341426121FCF00213A5A /* CharacterSet+Utils.swift in Sources */,
 				655A05BC1C6B7790000F00D7 /* ADLocations.m in Sources */,
 				655A05991C6B7790000F00D7 /* ACLLogger.m in Sources */,
+				D07D33DF26121BC400213A5A /* RequestSender.swift in Sources */,
+				D07D33E726121BD100213A5A /* FiltersLocalizationsRequest.swift in Sources */,
+				D0F284D826087A46002AAC7B /* CocoaLumberjack.swift in Sources */,
+				D07D33E926121BDC00213A5A /* ParserProtocol.swift in Sources */,
+				D07D33E026121BC600213A5A /* RequestSenderProtocol.swift in Sources */,
 				655A05F41C6B7A09000F00D7 /* ADProductInfo.m in Sources */,
-				D0D33BC023102D64009082CE /* Affinity.swift in Sources */,
 				655A05871C6B7790000F00D7 /* ABECFilter.m in Sources */,
 				655A05B41C6B7790000F00D7 /* ACNNetworking.m in Sources */,
 				655A05951C6B7790000F00D7 /* ACLFileLocker.m in Sources */,
@@ -683,9 +818,13 @@
 				655A05A21C6B7790000F00D7 /* DDFileLogger.m in Sources */,
 				655A05DD1C6B7790000F00D7 /* FMStatementKeywordRecogniser.m in Sources */,
 				655A05A71C6B7790000F00D7 /* DDMultiFormatter.m in Sources */,
+				D07D341126121F6F00213A5A /* Dictionary+Utils.swift in Sources */,
+				D07D33EB26121BDC00213A5A /* FiltersLocalizationsParser.swift in Sources */,
 				655A05A41C6B7790000F00D7 /* DDTTYLogger.m in Sources */,
 				655A05BA1C6B7790000F00D7 /* Reachability.m in Sources */,
+				D07D33EA26121BDC00213A5A /* FiltersMetadataParser.swift in Sources */,
 				655A05DE1C6B7790000F00D7 /* FMStatementQuotedRecogniser.m in Sources */,
+				D0EF344B26086342000A55F0 /* FiltersStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +889,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 			};
 			name = Debug;
 		};
@@ -796,6 +936,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 			};
 			name = Release;
 		};
@@ -807,7 +948,11 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -827,7 +972,11 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -892,6 +1041,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D0F284C22608795C002AAC7B /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.12;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D0F284C32608795C002AAC7B /* ContentBlockerConverter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0F284C22608795C002AAC7B /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
+			productName = ContentBlockerConverter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 659C5FC01B8B4DC90081EBE3 /* Project object */;
 }

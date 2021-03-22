@@ -417,7 +417,7 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     NSArray<NSString*> *lines = [content componentsSeparatedByCharactersInSet: NSCharacterSet.newlineCharacterSet];
     AffinityRulesParser* rulesParse = [AffinityRulesParser new];
     
-    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines filterId:@(0)]];
+    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines]];
 }
 
 /**

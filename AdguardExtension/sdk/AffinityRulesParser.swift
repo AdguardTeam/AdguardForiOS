@@ -31,13 +31,11 @@ class AffinityRulesParser: NSObject {
     private let affinitySuffix = "!#safari_cb_affinity"
     
     /**
-     convert array of plain strings to array of ASDFilterRule
-     fill ruleText, ruleId,filterId and affinity properties
-     set enabled to true
-    
+     convert array of plain strings to array of FilterRule
      */
-    func parseStrings(_ strings: [String], filterId: NSNumber)->[ASDFilterRule] {
-        var rules = [ASDFilterRule]()
+    @objc
+    func parseStrings(_ strings: [String])->[FilterRule] {
+        var rules = [FilterRule]()
         
         var firstLine = true
         var count = 0
@@ -65,20 +63,33 @@ class AffinityRulesParser: NSObject {
                 continue
             }
 
-            let rule = ASDFilterRule(text: line, enabled: true)
+            let rule = FilterRule(text: line, affinity: affinityMask)
             
             count += 1
-            rule.ruleId = count as NSNumber
-
-            rule.ruleText = line
-            rule.isEnabled = true
-            rule.filterId = filterId
-            rule.affinity =  affinityMask?.rawValue as NSNumber?
                 
             rules.append(rule)
         }
         
         return rules
+    }
+    
+    static func ruleWithAffinity(_ rule: String, affinity: Affinity?)->String {
+        
+        guard let affinity = affinity else {
+            return rule
+        }
+
+        var affinityValues = [String]()
+
+        if affinity.contains(.general) { affinityValues.append("general") }
+        if affinity.contains(.custom) { affinityValues.append("custom") }
+        if affinity.contains(.other) { affinityValues.append("other") }
+        if affinity.contains(.privacy) { affinityValues.append("privacy") }
+        if affinity.contains(.security) { affinityValues.append("security") }
+        if affinity.contains(.socialWidgetsAndAnnoyances) { affinityValues.append("social") }
+        if affinity.rawValue == 0 { affinityValues.append("all") }
+        
+        return "!#safari_cb_affinity(\(affinityValues.joined(separator: ","))\n\(rule)\n!#safari_cb_affinity"
     }
     
     // MARK: - private methods

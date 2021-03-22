@@ -25,10 +25,6 @@
 #pragma mark -  JSON Parsers implementation
 /////////////////////////////////////////////////////////////////////
 
-@interface ABECFilterMetadata : ASDFilterMetadata
-
-@end
-
 @implementation ABECFilterMetadata
 
 #pragma mark Supporting set object from dictionary
@@ -349,7 +345,7 @@
     [stream close];
     
     AffinityRulesParser* rulesParser = [AffinityRulesParser new];
-    filter.rules = [rulesParser parseStrings:ruleStrings filterId: self.filterId];
+    filter.rules = [rulesParser parseStrings:ruleStrings];
     
     return YES;
 }

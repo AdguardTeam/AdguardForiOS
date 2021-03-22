@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ASDFilterMetadata, ASDFilterRule;
+@class ASDFilterMetadata, FilterRule;
 @protocol ACNNetworkingProtocol;
 
 /////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@
 
 @property (nonatomic, nullable) NSData *filtersData;
 @property (nonatomic, nonnull) ASDFilterMetadata *meta;
-@property (nonatomic, nonnull) NSMutableArray <ASDFilterRule *> *rules;
+@property (nonatomic, nonnull) NSMutableArray <FilterRule *> *rules;
 
 @end
 

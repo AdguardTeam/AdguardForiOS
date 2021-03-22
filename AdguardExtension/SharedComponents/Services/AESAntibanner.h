@@ -66,7 +66,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  for Ad Blocker (the same Antibanner, requestFilter), and so on..
  */
 
-@protocol AESAntibannerProtocol <NSObject>
+@protocol AESAntibannerProtocol <NSObject> 
 
 /////////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
@@ -87,15 +87,6 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (void) stop;
 
 /**
- Obtain rules for active (enabled) filters.
- Rules from USER filter will be returned last in list.
- 
- @return Array of ASDFilterRule objects that represent rules of filtering.
- Returns empty array if receiver property "enabled" equal NO.
- */
-- (nonnull NSMutableArray *)activeRules;
-
-/**
  Obtain active rules for active (enabled) filter.
  
  @param filterId    Filter Id, which will be checked
@@ -112,12 +103,28 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  all stored in database groups.
  */
 - (nonnull NSArray<ASDFilterGroup*> *)groups;
+
+/**
+ Obtain groups information.
+ @return Array of ASDFilterGroup objects that contains
+ all stored in default database groups.
+ */
+- (nonnull NSArray<ASDFilterGroup*> *)defaultDbGroups;
+
 /**
  Obtains groups localization information.
  @return ASDGroupsI18n object that contains data from database.
  */
 - (nonnull ASDGroupsI18n *)groupsI18n;
 /**
+ 
+ /**
+  Obtains groups localization information.
+  @return ASDGroupsI18n object that contains data from default database.
+  */
+ - (nonnull ASDGroupsI18n *)defaultDbGroupsI18n;
+ /**
+  
  Checks if specified filter was installed.
 
  @param filterId Filter id.
@@ -130,6 +137,13 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  all stored in database antibanner filters.
  */
 - (nonnull NSArray<ASDFilterMetadata*> *)filters;
+
+/**
+ Obtain filters information.
+ @return Array of ASDFilterMetadata objects that contains
+ all stored in default database(stored in app bundle) antibanner filters.
+ */
+- (nonnull NSArray<ASDFilterMetadata*> *)defaultDbFilters;
 
 /**
  Obtain filters information.
@@ -174,6 +188,12 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  @return ASDFiltersI18n object that contains data from database.
  */
 - (nonnull ASDFiltersI18n *)filtersI18n;
+
+/**
+ Obtains filters localization information.
+ @return ASDFiltersI18n object that contains data from default database.
+ */
+- (nonnull ASDFiltersI18n *)defaultDbFiltersI18n;
 
 /**
  Obtain rules for filter.
@@ -246,15 +266,13 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (BOOL)importRules:(nonnull NSArray <ASDFilterRule *> *)rules filterId:(nonnull NSNumber *)filterId;
 
 /**
- Checks that antibanner filter is editable,
- and then removes rules for antibanner filter from DB.
+ Removes rules for antibanner filter from DB.
  
- @param ruleIds     List of NSNumber objects. Identificators of rules.
  @param filterId    Identificator of filter (filter Id).
  
  @return YES if success.
  */
-- (BOOL)removeRules:(nonnull NSArray *)ruleIds filterId:(nonnull NSNumber *)filterId;
+- (BOOL)removeRulesForFilter:(nonnull NSNumber *)filterId;
 
 /**
  Retuns metadata.
@@ -304,18 +322,18 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  
  @return Return YES if update process started.
  */
-- (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive;
+//- (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive;
 /**
  Call this method after starting of the app, from 'handleEventsForBackgroundURLSession' app delegate.
  This must adjust right processing for backgound downloads of the filter updates.
  */
-- (void)repairUpdateStateForBackground;
+//- (void)repairUpdateStateForBackground;
 
 /**
  Call this method after starting of the app,
  that must adjust right processing for backgound downloads of the filter updates.
  */
-- (void)repairUpdateStateWithCompletionBlock:(nullable void (^)(void))block;
+//- (void)repairUpdateStateWithCompletionBlock:(nullable void (^)(void))block;
 
 /**
  last filters update time of nil
@@ -366,7 +384,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 @end
 
 
-@interface AESAntibanner : NSObject <AESAntibannerProtocol, ABECFilterAsyncDelegateProtocol>
+@interface AESAntibanner : NSObject <AESAntibannerProtocol>
 
 /**
  init

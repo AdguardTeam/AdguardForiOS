@@ -259,77 +259,98 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         DDLogInfo("(ContentBlockerService) updateContentBlockers")
         let filtersByGroup = activeGroups()
-        let allFilters = filtersByGroup.flatMap { $0.value }
-        let rulesByFilter = rules(forFilters: allFilters)
         
-        // get map of rules by content blocker
-        var rulesByContentBlocker = [ContentBlockerType: [ASDFilterRule]]()
-        var rulesByAffinityBlocks = [ContentBlockerType: [ASDFilterRule]]()
+        let storage = FiltersStorage()
         
-        for (contentBlocker, groups) in ContentBlockerService.groupsByContentBlocker {
-            var contentBlockerRules = [ASDFilterRule]()
-            for groupID in groups {
-                
-                guard let filters = filtersByGroup[groupID as NSNumber] else { continue }
-                for filterID in filters {
-                    
-                    guard let filterRules = rulesByFilter[filterID] else { continue }
-                    sortWithAffinityBlocks(filterRules: filterRules, contentBlockerRules: &contentBlockerRules, rulesByAffinityBlocks: &rulesByAffinityBlocks)
-                }
-            }
+        var agFilters = [AdGuardFilter]()
+        
+        for (groupId, filterIds) in filtersByGroup {
+            let filterIds = filterIds.map { $0.intValue }
+            let filters = storage.getFilters(identifiers: filterIds)
             
-            rulesByContentBlocker[contentBlocker] = contentBlockerRules
-        }
-        
-        for type in ContentBlockerType.allCases {
-            if rulesByContentBlocker[type] == nil {
-                rulesByContentBlocker[type] = [ASDFilterRule]()
+            for (_, content) in filters {
+                agFilters.append(AdGuardFilter(text: content, group: AdGuardFilterGroup(rawValue: groupId.intValue) ?? .ads))
             }
-            rulesByContentBlocker[type]?.append(contentsOf: rulesByAffinityBlocks[type] ?? [])
         }
         
-        return convertRulesAndInvalidateSafari(background: background,rulesByContentBlocker: rulesByContentBlocker)
+        return convertRulesAndInvalidateSafari(background: background, filters: agFilters)
     }
     
-    private func convertRulesAndInvalidateSafari(background: Bool, rulesByContentBlocker: [ContentBlockerType: [ASDFilterRule]])->Error? {
+    private func convertRulesAndInvalidateSafari(background: Bool, filters: [AdGuardFilter])->Error? {
         var resultError: Error?
+        let converter = FiltersConverter()
         
-        let concurrentQueue = DispatchQueue(label: "update_cb", attributes: DispatchQueue.Attributes.concurrent)
+        let safariProtectionEnabled = safariProtection.safariProtectionEnabled
+
+        if !safariProtectionEnabled {
+            DDLogInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
+            
+            for type in ContentBlockerType.allCases {
+                safariService.save(json: Data(), type: type)
+            }
+            return nil
+        }
+        
+        // get user rules
+        
+        let userFilterEnabled = resources.safariUserFilterEnabled
+        
+        let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
+        
+        
+        // get whitelist rules
+        
+        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        
+        let whitelistEnabled = resources.safariWhitelistEnabled
+        
+        var allowlistRules: [ASDFilterRule]?
+        
+        if whitelistEnabled {
+            if inverted {
+                
+                if resources.invertedWhitelistContentBlockingObject == nil {
+                    resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: [])
+                }
+                
+                if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
+                    DDLogInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
+                    allowlistRules = [invertedRule]
+                }
+            }
+            else {
+                if let whitelistRules = resources.whitelistContentBlockingRules {
+                    DDLogInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
+                    allowlistRules = whitelistRules as? [ASDFilterRule]
+                }
+            }
+        }
+        
+        let allowlist = allowlistRules?.map { $0.ruleText }.joined(separator: "/n")
+        let blocklist = userRules.map { $0.ruleText }.joined(separator: "/n")
+        
+        let converted = converter.convertFilters(filters, allowlist: allowlist, blocklist: blocklist, invert: inverted)
+        
         let group = DispatchGroup()
-        
-        // run conversion to jsons in concurrent queue.
-        for type in ContentBlockerType.allCases {
+        for filter in converted ?? [] {
+            // todo: process errors
+            guard let data = filter.jsonString?.data(using: .utf8) else {
+                DDLogError("convertRulesAndInvalidateSafari - can not get filter data for filter")
+                continue
+            }
+            safariService.save(json: data, type: filter.type)
             group.enter()
-            concurrentQueue.async { [weak self] in
-                guard let self = self else { return }
-                
-                let error = self.updateJson(blockerRules: rulesByContentBlocker[type]!, forContentBlocker: type)
-                
-                if error == nil {
-                    if background {
-                        group.leave()
-                    }
-                    else {
-                        // immediately update the safari without waiting for the conversion of other jsons
-                        self.safariService.invalidateBlockingJson(type: type) { (error) in
-                            if error != nil {
-                                resultError = error
-                            }
-                            group.leave()
-                        }
-                    }
-                }
-                else {
+            safariService.invalidateBlockingJson(type: filter.type) { (error) in
+                if error != nil {
+                    DDLogError("Invalidate Saferi Error: \(error!)")
                     resultError = error
-                    group.leave()
                 }
+                
+                group.leave()
             }
         }
         
         group.wait()
-        
-        let result = resultError == nil ? "SUCCCESS" : "FAILURE"
-        DDLogInfo("(ContentBlockerService) convertRulesAndInvalidateSafari - all content blockers are updated. Result - \(result)")
         
         return resultError
     }
@@ -442,16 +463,16 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    /** returns map [filterID: [Rule]]*/
-    private func rules(forFilters filterIDs: [NSNumber]) -> [NSNumber: [ASDFilterRule]] {
-        var rulesByFilter = [NSNumber: [ASDFilterRule]]()
-        
-        for filterID in filterIDs {
-            rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
-        }
-        
-        return rulesByFilter
-    }
+//    /** returns map [filterID: [Rule]]*/
+//    private func rules(forFilters filterIDs: [NSNumber]) -> [NSNumber: [ASDFilterRule]] {
+//        var rulesByFilter = [NSNumber: [ASDFilterRule]]()
+//
+//        for filterID in filterIDs {
+//            rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
+//        }
+//
+//        return rulesByFilter
+//    }
     
     /** returns map [groupId: [filterId]] */
     private func activeGroups()->[NSNumber: [NSNumber]] {

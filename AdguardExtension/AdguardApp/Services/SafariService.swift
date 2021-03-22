@@ -19,16 +19,6 @@
 import Foundation
 import SafariServices
 
-// MARK: - data types -
-enum ContentBlockerType: Int, CaseIterable {
-    case general
-    case privacy
-    case socialWidgetsAndAnnoyances
-    case other
-    case custom
-    case security
-}
-
 // MARK: - protocol -
 
 /**

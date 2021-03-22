@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct RequestFactory {
+extension RequestFactory {
     static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
         return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
     }

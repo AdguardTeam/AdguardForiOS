@@ -59,8 +59,10 @@ class MainPageModel: MainPageModelProtocol {
      */
     func updateFilters() {
         
-        antibanner.beginTransaction()
-        antibanner.startUpdatingForced(true, interactive: true)
+//        antibanner.beginTransaction()
+//        antibanner.startUpdatingForced(true, interactive: true)
+        
+        // TODO: updateFilters via FiltersService
     }
     
     

@@ -18,104 +18,6 @@
 
 import Foundation
 
-// MARK: - data types -
-class Filter: NSObject, NSCopying, FilterDetailedInterface {
-    
-    let filterId: Int
-    
-    var name: String?
-    var desc: String?
-    var version: String?
-    var enabled: Bool = false
-    var homepage: String?
-    var subscriptionUrl: String?
-    var tags:[(name: String, highlighted: Bool)]?
-    var langs:[(name: String, highlighted: Bool)]?
-    var rulesCount: Int?
-    var groupId: Int
-    var displayNumber: Int?
-    var updateDate: Date?
-    var searchAttributedString: NSAttributedString?
-    var removable: Bool {
-        get {
-            return groupId == FilterGroupId.custom
-        }
-    }
-    var editable: Bool {
-        get {
-            return groupId == FilterGroupId.custom
-        }
-    }
-    
-    init(filterId: Int, groupId: Int) {
-        self.filterId = filterId
-        self.groupId = groupId
-        super.init()
-    }
-    
-    // MARK: - NSCopying protocol
-    /* Creates copy of a class with another reference */
-    func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Filter(filterId: filterId, groupId: groupId)
-        
-        copy.name = name
-        copy.desc = desc
-        copy.version = version
-        copy.enabled = enabled
-        copy.homepage = homepage
-        copy.subscriptionUrl = subscriptionUrl
-        copy.tags = tags
-        copy.langs = langs
-        copy.rulesCount = rulesCount
-        copy.displayNumber = displayNumber
-        copy.updateDate = updateDate
-        copy.searchAttributedString = searchAttributedString
-        
-        return copy
-    }
-}
-
-class Group: Hashable, NSCopying {
-    
-    let groupId: Int
-    
-    var name: String?
-    var subtitle: String?
-    var enabled: Bool = false
-    var iconName: String?
-    var disabledIconName: String?
-    var proOnly: Bool = false
-    
-    var filters: [Filter] = [Filter]()
-    
-    init(_ groupId: Int) {
-        self.groupId = groupId
-    }
-    
-    // MARK: - Hashable protocol
-    static func == (lhs: Group, rhs: Group) -> Bool {
-        return lhs.groupId == rhs.groupId
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(groupId)
-    }
-
-    // MARK: - NSCopying protocol
-    /* Creates copy of a class with another reference */
-    func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Group(groupId)
-        copy.name = name
-        copy.subtitle = subtitle
-        copy.enabled = enabled
-        copy.iconName = iconName
-        copy.disabledIconName = disabledIconName
-        copy.proOnly = proOnly
-        copy.filters = filters
-        return copy
-    }
-    
-}
 
 // MARK: - service protocol -
 /**
@@ -170,7 +72,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     var groups = [Group]()
     
-    private var antibanner: AESAntibannerProtocol?
+    var antibanner: AESAntibannerProtocol?
     private let antibannerController: AntibannerControllerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
@@ -182,6 +84,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private var proStatusObservation: NSKeyValueObservation?
     
     private let groupsQueue = DispatchQueue(label: "load_filter_grops_queue")
+    
+    var resources: AESharedResourcesProtocol
     
     // exception languages
     private let langFlags = [
@@ -225,10 +129,11 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol) {
+    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
+        self.resources = resources
         
         super.init()
         
@@ -279,14 +184,14 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         antibannerController.onReady {[weak self] antibanner in
             self?.groupsQueue.async { [weak self] in
-                guard let sSelf = self else { return }
+                guard let self = self else { return }
                 
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("loading_filters", nil)])
                 }
                 
-                guard let metadata = antibanner.metadata(forSubscribe: refresh),
-                    let i18n = antibanner.i18n(forSubscribe: refresh),
+                guard let metadata = self.metadata(refresh: refresh),
+                      let i18n = self.filtersI18n(refresh: refresh),
                     var filters = metadata.filters else {
                         DispatchQueue.main.async {
                             NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
@@ -343,33 +248,33 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 
                 disabledFilters.forEach({$0.enabled = false})
                             
-                let groupInfos = sSelf.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
+                let groupInfos = self.obtainGroupsFromMetadatas(antibanner: antibanner, filterMetas: filters, groupMetas: groups, i18n: i18n)
                 
                 // set real enabled statuses
                 groupInfos?.forEach({ (group) in
-                    guard let storedGroup = (sSelf.groups.first { $0.groupId == group.groupId }) else { return }
+                    guard let storedGroup = (self.groups.first { $0.groupId == group.groupId }) else { return }
                     group.enabled = storedGroup.enabled
                 })
                 
-                if sSelf.enabledFilters.count == 0 {
+                if self.enabledFilters.count == 0 {
                     for filterMeta in installedFilters {
-                        sSelf.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
+                        self.enabledFilters[filterMeta.filterId.intValue] = filterMeta.enabled.boolValue
                     }
                 }
                 
                 groupInfos?.forEach({ (group) in
                     for filter in group.filters {
-                        filter.enabled = sSelf.enabledFilters[filter.filterId] ?? false
+                        filter.enabled = self.enabledFilters[filter.filterId] ?? false
                     }
-                    sSelf.updateGroupSubtitle(group)
+                    self.updateGroupSubtitle(group)
                 })
                 
-                self?.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
+                self.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
                 
                 DispatchQueue.main.async {
-                    sSelf.groups = groupInfos ?? [Group]()
-                    sSelf.filterMetas = filters
-                    sSelf.notifyChange()
+                    self.groups = groupInfos ?? [Group]()
+                    self.filterMetas = filters
+                    self.notifyChange()
                     completion()
                     DispatchQueue.main.async {
                         NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)

@@ -25,6 +25,7 @@
 #import "FMDatabase+InMemoryOnDiskIO.h"
 #import "FMSQLStatementSplitter.h"
 #import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
+#import "Adguard-Swift.h"
 
 #define DB_SCHEME_FILE_NAME     @"schema.sql"
 #define DB_SCHEME_PATTERN       @"schema*.sql"
@@ -36,7 +37,7 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         
         ASDatabase *asDataBase = [ASDatabase new];
-        
+        BuilderHelper *helper = [BuilderHelper new];
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -111,18 +112,31 @@ int main(int argc, const char * argv[])
             if ([asDataBase createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]]){
 
 #pragma mark *** Get filters data from backend and insert to DB
-                ABECFilterClientMetadata *metadata = [[ABECFilterClient singleton] loadMetadataWithTimeoutInterval:nil];
-                if (!metadata) {
+                
+                __block ABECFilterClientMetadata *metadata;
+                __block ABECFilterClientLocalization *i18n;
+                
+                dispatch_group_t group = dispatch_group_create();
+                dispatch_group_enter(group);
+                [helper loadFiltersMetadataWithCompletion:^(ABECFilterClientMetadata * _Nullable meta) {
+                    metadata = meta;
+                    dispatch_group_leave(group);
+                }];
+                
+                dispatch_group_enter(group);
+                [helper loadFiltersLocalizationsWithCompletion:^(ABECFilterClientLocalization * _Nullable localizations) {
+                                    i18n = localizations;
+                                    dispatch_group_leave(group);
+                }];
+                
+                dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+                
+                if (!metadata || !i18n) {
                     
-                    NSLog(@"Error creating DB: Can't load filters/groups metadata from backend service.");
+                    NSLog(@"Error creating DB: Can't load filters/groups or i18n metadata from backend service.");
                     exit(1);
                 }
-                ABECFilterClientLocalization *i18n = [[ABECFilterClient singleton] loadI18nWithTimeoutInterval:nil];
-                if (!i18n) {
-                    
-                    NSLog(@"Error creating DB: Can't load filters/groups i18n data from backend service.");
-                    exit(1);
-                }
+                
                 
                 for (ASDFilterGroup *item in metadata.groups) {
                     
@@ -158,13 +172,13 @@ int main(int argc, const char * argv[])
                 
                 ASDFilter *filterData;
                 for (ASDFilterMetadata *version in metadata.filters) {
-                    
-                    filterData = [[ABECFilterClient singleton] filterWithFilterId:version.filterId];
-                    
-                    if (filterData && filterData.rules.count)
-                        for (ASDFilterRule *rule in filterData.rules)
-                            [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, affinity) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.affinity];
-                    
+                    // TODO: load filters via FiltersStorage
+//                    filterData = [[ABECFilterClient singleton] filterWithFilterId:version.filterId];
+//
+//                    if (filterData && filterData.rules.count)
+//                        for (ASDFilterRule *rule in filterData.rules)
+//                            [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, affinity) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.affinity];
+//
                 }
                 
                 [db writeToFile:dbPath];
