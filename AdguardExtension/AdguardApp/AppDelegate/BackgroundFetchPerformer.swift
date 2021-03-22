@@ -50,6 +50,7 @@ enum UpdateResult: UInt {
     }
 }
 
+// Perform background fetches, update dns filters, safari filters and content blockers
 final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
     //MARK: - Properties
     private let resources: AESharedResourcesProtocol
@@ -128,7 +129,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
         self.antibannerController = antibannerController
     }
     
-    //MARK: - IAppDelegateHelp methods
+    //MARK: - IBackgroundFetchPerformer methods
     
     func antibanerUpdateFinished(result: UpdateResult) {
         DDLogInfo("(BackgroundFetchPerformer) antibanerUpdateFinished with result: \(result.stringValue)")

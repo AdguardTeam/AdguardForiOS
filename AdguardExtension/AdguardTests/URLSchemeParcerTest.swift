@@ -16,7 +16,7 @@ class URLSchemeParcerTest: XCTestCase {
         urlParcer = nil
     }
     
-    func testProcess() {
+    func testAddLicenceUrl() {
         let urlParcer = self.urlParcer!
         let emptyLicenseUrl = URL(string: "adguard:license=")!
         let incorrectLicenseUrl = URL(string: "adguard:lic")!
@@ -29,8 +29,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertTrue(emptyLicenseUrlResult)
         XCTAssertFalse(incorrectLicenseUrlResult)
         XCTAssertTrue(licenseUrlResult)
-        
-        
+    }
+    
+    func testAddSafariRuleUrl() {
+        let urlParcer = self.urlParcer!
         let safariRuleUrl = URL(string: "adguard://add/foo")!
         let safariEmptyRuleUrl = URL(string: "adguard://add/")!
         let incorrectCommand = URL(string: "adguard://ad")!
@@ -42,8 +44,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertTrue(safariRuleUrlResult)
         XCTAssertFalse(safariEmptyRuleUrlResult)
         XCTAssertFalse(incorrectCommandResult)
-        
-        
+    }
+    
+    func testWidgetSystemProtectionChangedUrl() {
+        let urlParcer = self.urlParcer!
         let systemProtectionUrlOn = URL(string: "adguard://systemProtection/on")!
         let systemProtectionUrlOff = URL(string: "adguard://systemProtection/off")!
         let systemProtectionUrlEmpty = URL(string: "adguard://systemProtection/")!
@@ -58,7 +62,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertTrue(systemProtectionUrlOffResult)
         XCTAssertTrue(systemProtectionUrlEmptyResult)
         XCTAssertTrue(incorrectSystemProtectionUrlResult)
-        
+    }
+    
+    func testWidgetComplexProtectionCangedUrl() {
+        let urlParcer = self.urlParcer!
         let complexProtectionUrlOn = URL(string: "adguard://complexProtection/on")!
         let complexProtectionUrlOff = URL(string: "adguard://complexProtection/off")!
         let complexProtectionUrlEmpty = URL(string: "adguard://complexProtection/")!
@@ -73,7 +80,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertTrue(complexProtectionUrlOffResult)
         XCTAssertTrue(complexProtectionUrlEmptyResult)
         XCTAssertTrue(incorrectComplexProtectionUrlResult)
-        
+    }
+    
+    func testAddDnsUrl() {
+        let urlParcer = self.urlParcer!
         let customDnsUrl = URL(string: "sdns://fooBar")!
         let emptyCustomDnsUrl = URL(string: "sdns://")!
         let incorrectSchemeUrl = URL(string: "sdddns://fooBar")!
@@ -85,6 +95,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertTrue(customDnsUrlResult)
         XCTAssertFalse(emptyCustomDnsUrlResult)
         XCTAssertFalse(incorrectSchemeUrlResult)
+    }
+    
+    func testImportSettingsUrl() {
+        let urlParcer = self.urlParcer!
         // %7B == {   %7D == }
         let importSettingsUrl = URL(string: "adguard://apply_settings?json=%7Bfoo:bar%7D")!
         let emptyImportSetingsUrl = URL(string: "adguard://apply_settings?json=")!
@@ -100,7 +114,10 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertFalse(emptyImportSetingsUrlResult)
         XCTAssertTrue(emptyJsonImportSettingsUrlResult)
         XCTAssertFalse(incorrectImportSettingsUrlResult)
-        
+    }
+    
+    func testSubscribeUrl() {
+        let urlParcer = self.urlParcer!
         let subscribeUrl = URL(string: "abp://subscribe?location=https://FOO.bar&title=Foo")!
         let emptyParamsSubscriptionUrl = URL(string: "abp://subscribe?location=&title=")!
         
@@ -109,7 +126,10 @@ class URLSchemeParcerTest: XCTestCase {
         
         XCTAssertTrue(subscribeUrlResult)
         XCTAssertFalse(emptyParamsSubscriptionUrlResult)
-        
+    }
+    
+    func testOpenTunnelUrl() {
+        let urlParcer = self.urlParcer!
         let openTunnelUrl = URL(string: "adguard://openTunnelModeSettings")!
         let incorrectOpenTunnelUrl = URL(string: "adguard://openTunnelModeSettingsFoo")!
         
@@ -118,7 +138,10 @@ class URLSchemeParcerTest: XCTestCase {
         
         XCTAssertTrue(openTunnelUrlResult)
         XCTAssertFalse(incorrectOpenTunnelUrlResult)
-        
+    }
+    
+    func testAuthUrl() {
+        let urlParcer = self.urlParcer!
         let authUrl = URL(string: "adguard://auth#access_token=Foo&token_type=bar&state=123&expires_in=321")!
         let emptyAuthUrl = URL(string: "adguard://auth#access_token=&token_type=&state=&expires_in=")!
         let incorrectAuthUrl = URL(string: "adguard://auth#")!
@@ -134,5 +157,4 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertFalse(incorrectAuthUrlResult)
         XCTAssertFalse(errorAuthResult)
     }
-
 }
