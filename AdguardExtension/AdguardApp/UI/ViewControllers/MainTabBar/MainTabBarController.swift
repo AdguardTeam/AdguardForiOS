@@ -179,6 +179,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         return CustomNavigationTransitionAnimator(presenting: edge == .left)
     }
+    
+    // Set transitionCoordinator to nil to prevent controllers disappearing
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return transitionCoordinator == nil
+    }
 }
 
 extension UITabBar {
