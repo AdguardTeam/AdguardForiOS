@@ -26,7 +26,7 @@ struct FiltersUpdatesConstants {
     static let checkFiltersUpdatesLeeway: Double = executionLeeway
     static let checkFiltersUpdatesDefaultPeriod: Double = executionPeriodTime * 6
     
-    static let fetchUpdateStatusPeriod: Double = executionPeriodTime / 6
+    static let fetchUpdateStatusPeriod: Double = checkFiltersUpdatesPeriod / 6
     static let dnsFiltersCheckLimit: Double = 21600 // 6 hours
     
     /// Timeout for downloading of data from the remote services
