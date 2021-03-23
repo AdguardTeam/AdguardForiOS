@@ -1,0 +1,241 @@
+{
+    "stories": [
+        {
+            "category": "WhatsNew",
+            "tokens": [
+                {
+                    "image": "whatsNew1",
+                    "title": "story_whats_new_1_title",
+                    "description": "story_whats_new_1_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "whatsNew2",
+                    "title": "story_whats_new_2_title",
+                    "description": "story_whats_new_2_description",
+                    "action": "READ_CHANGELOG",
+                    "action_title": "story_whats_new_2_button_title"
+                }
+            ]
+        },
+        {
+            "category": "DnsProtection",
+            "tokens": [
+                {
+                    "image": "DNSProtection1",
+                    "title": "story_dns_protection_1_title",
+                    "description": "story_dns_protection_1_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSProtection2",
+                    "title": "story_dns_protection_2_title",
+                    "description": "story_dns_protection_2_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSProtection3",
+                    "title": "story_dns_protection_3_title",
+                    "description": "story_dns_protection_3_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSProtection4",
+                    "title": "story_dns_protection_4_title",
+                    "description": "story_dns_protection_4_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSProtection5",
+                    "title": "story_dns_protection_5_title",
+                    "description": "story_dns_protection_5_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSProtection6",
+                    "title": "story_dns_protection_6_title",
+                    "description": "story_dns_protection_6_description",
+                    "action": "ACTIVATE_LICENSE",
+                    "action_title": "story_dns_protection_6_button_title"
+                }
+            ]
+        },
+        {
+            "category": "VpnProtection",
+            "tokens": [
+                {
+                    "image": "VPNProtection1",
+                    "title": "story_vpn_protection_1_title",
+                    "description": "story_vpn_protection_1_description",
+                    "action": "DOWNLOAD_ADGUARD_VPN",
+                    "action_title": "story_vpn_protection_1_button_title"
+                },
+                {
+                    "image": "VPNProtection2",
+                    "title": "story_vpn_protection_2_title",
+                    "description": "story_vpn_protection_2_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "VPNProtection3",
+                    "title": "story_vpn_protection_3_title",
+                    "description": "story_vpn_protection_3_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "VPNProtection4",
+                    "title": "story_vpn_protection_4_title",
+                    "description": "story_vpn_protection_4_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "VPNProtection5",
+                    "title": "story_vpn_protection_5_title",
+                    "description": "story_vpn_protection_5_description",
+                    "action": "DOWNLOAD_ADGUARD_VPN",
+                    "action_title": "story_vpn_protection_5_button_title"
+                }
+            ]
+        },
+        {
+            "category": "SafariProtection",
+            "tokens": [
+                {
+                    "image": "SafariProtection1",
+                    "title": "story_safari_protection_1_title",
+                    "description": "story_safari_protection_1_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "SafariProtection2",
+                    "title": "story_safari_protection_2_title",
+                    "description": "story_safari_protection_2_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "SafariProtection3",
+                    "title": "story_safari_protection_3_title",
+                    "description": "story_safari_protection_3_description",
+                    "action": "MORE_ON_DNS",
+                    "action_title": "story_safari_protection_3_button_title"
+                }
+            ]
+        },
+        {
+            "category": "YouTubeAds",
+            "tokens": [
+                {
+                    "image": "YouTubeAds1",
+                    "title": "story_youtube_ads_1_title",
+                    "description": "story_youtube_ads_1_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "YouTubeAds2",
+                    "title": "story_youtube_ads_2_title",
+                    "description": "story_youtube_ads_2_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "YouTubeAds3",
+                    "title": "story_youtube_ads_3_title",
+                    "description": "story_youtube_ads_3_description",
+                    "action": "MORE_ON_DNS",
+                    "action_title": "story_youtube_ads_3_button_title"
+                }
+            ]
+        },
+        {
+            "category": "DnsServers",
+            "tokens": [
+                {
+                    "image": "DNSServers1",
+                    "title": "story_dns_servers_1_title",
+                    "description": "story_dns_servers_1_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSServers2",
+                    "title": "story_dns_servers_2_title",
+                    "description": "story_dns_servers_2_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSServers3",
+                    "title": "story_dns_servers_3_title",
+                    "description": "story_dns_servers_3_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSServers4",
+                    "title": "story_dns_servers_4_title",
+                    "description": "story_dns_servers_4_description",
+                    "action": null,
+                    "action_title": null
+                },
+                {
+                    "image": "DNSServers5",
+                    "title": "story_dns_servers_5_title",
+                    "description": "story_dns_servers_5_description",
+                    "action": "ENABLE_ADGUARD_DNS",
+                    "action_title": "story_dns_servers_5_button_title"
+                },
+                {
+                    "image": "DNSServers6",
+                    "title": "story_dns_servers_6_title",
+                    "description": "story_dns_servers_6_description",
+                    "action": "ENABLE_GOOGLE_DNS",
+                    "action_title": "story_dns_servers_6_button_title"
+                },
+                {
+                    "image": "DNSServers7",
+                    "title": "story_dns_servers_7_title",
+                    "description": "story_dns_servers_7_description",
+                    "action": "ENABLE_CLOUDFLARE_DNS",
+                    "action_title": "story_dns_servers_7_button_title"
+                },
+                {
+                    "image": "DNSServers8",
+                    "title": "story_dns_servers_8_title",
+                    "description": "story_dns_servers_8_description",
+                    "action": "ADD_CUSTOM_DNS",
+                    "action_title": "story_dns_servers_8_button_title"
+                }
+            ]
+        }
+    ],
+    "categories": [
+        "WhatsNew",
+        "DnsProtection",
+        "VpnProtection",
+        "SafariProtection",
+        "YouTubeAds",
+        "DnsServers"
+    ],
+    "actions": [
+        "READ_CHANGELOG",
+        "ACTIVATE_LICENSE",
+        "DOWNLOAD_ADGUARD_VPN",
+        "MORE_ON_DNS",
+        "ENABLE_ADGUARD_DNS",
+        "ENABLE_GOOGLE_DNS",
+        "ENABLE_CLOUDFLARE_DNS",
+        "ADD_CUSTOM_DNS"
+    ]
+}
