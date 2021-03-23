@@ -94,7 +94,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var popupBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor(hexString: "#000000") : .white
     }
     
     var bottomBarBackgroundColor: UIColor {

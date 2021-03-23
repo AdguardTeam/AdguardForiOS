@@ -49,7 +49,7 @@ class OnboardingAnimationsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nextButton.applyStandardOpaqueStyle()
+        nextButton.applyStandardOpaqueGreenStyle()
         updateTheme()
         setupAnimationViews()
         addGestureRecognizers()

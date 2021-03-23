@@ -23,10 +23,8 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var deleteRuleButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
     private let textViewCharectersLimit = 50
@@ -59,9 +57,15 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         updateTheme()
         
         saveButton.makeTitleTextUppercased()
-        removeButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
+        deleteRuleButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
+        saveButton.applyStandardGreenStyle()
+        deleteRuleButton.applyStandardOpaqueRedStyle()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ruleTextView.becomeFirstResponder()
     }
     
     // MARK: - Actions
@@ -110,7 +114,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
-        theme.setupSeparators(separators)
     }
     
     private func getEditCaptionText() -> String {
