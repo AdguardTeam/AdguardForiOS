@@ -3568,6 +3568,7 @@
                         <outlet property="nameField" destination="mBR-7g-DjT" id="LEp-rB-OjV"/>
                         <outlet property="saveButton" destination="6e9-sP-YMb" id="JLp-uK-pwG"/>
                         <outlet property="scrollContentView" destination="fCW-83-W1d" id="AE5-pi-j2H"/>
+                        <outlet property="titleLabel" destination="f57-S8-QfF" id="nuE-qj-x0b"/>
                         <outlet property="upstreamsField" destination="6Tx-Oh-hyu" id="9EU-gZ-KIV"/>
                         <outletCollection property="themableLabels" destination="seX-mS-3mU" collectionClass="NSMutableArray" id="hNZ-ox-C1H"/>
                         <outletCollection property="themableLabels" destination="e4h-eF-AOa" collectionClass="NSMutableArray" id="7KD-St-zqt"/>

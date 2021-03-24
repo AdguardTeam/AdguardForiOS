@@ -33,6 +33,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private var model: ImportSettingsViewModelProtocol?
+    private var themeObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,11 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
             model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner, dnsProvidersService: dnsProvidersService)
         }
         
+        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
+            self?.updateTheme()
+            self?.tableView.reloadData()
+        }
+        updateTheme()
         okButton.isHidden = true
         tableView.reloadData()
     }
@@ -111,7 +117,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     // MARK: - privateMethods
     
     private func updateTheme() {
-        tableView.backgroundColor = theme.backgroundColor
+        tableView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
     }
     

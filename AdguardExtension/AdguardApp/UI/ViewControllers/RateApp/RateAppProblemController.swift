@@ -20,11 +20,10 @@ import UIKit
 
 class RateAppProblemController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var problemIsDoneButton: UIButton!
     @IBOutlet weak var problemRemainsButton: UIButton!
-    
-    @IBOutlet var themableLabels: [ThemableLabel]!
     
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -64,7 +63,7 @@ class RateAppProblemController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
-        theme.setupLabels(themableLabels)
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupTextView(descriptionTextView)
         setupDescriptionTextView()
     }

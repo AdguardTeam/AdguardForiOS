@@ -20,6 +20,7 @@ import UIKit
 
 class RateAppController: BottomAlertController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBOutlet weak var haveAProblemButton: UIButton!
@@ -66,6 +67,7 @@ class RateAppController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupLabels(themableLabels)
     }
 }

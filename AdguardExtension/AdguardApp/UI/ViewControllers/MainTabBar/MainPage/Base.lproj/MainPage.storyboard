@@ -1002,14 +1002,14 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Period" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pX-mg-2fq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="24" y="42" width="366" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -1032,7 +1032,7 @@
                                     <constraint firstItem="5pX-mg-2fq" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" constant="24" id="VKn-Aa-Ipm"/>
                                     <constraint firstItem="VRw-EP-ZlF" firstAttribute="top" secondItem="Roe-x7-9e8" secondAttribute="bottom" constant="1" id="XtP-Lw-zSd"/>
                                     <constraint firstItem="Roe-x7-9e8" firstAttribute="leading" secondItem="pWB-sb-M6q" secondAttribute="leading" id="Znx-Lz-ZdF"/>
-                                    <constraint firstAttribute="bottom" secondItem="gDb-ep-jQg" secondAttribute="bottom" id="Zqn-Em-56v"/>
+                                    <constraint firstAttribute="bottom" secondItem="gDb-ep-jQg" secondAttribute="bottom" constant="30" id="Zqn-Em-56v"/>
                                     <constraint firstItem="Nel-Z3-aJ4" firstAttribute="centerX" secondItem="pWB-sb-M6q" secondAttribute="centerX" id="bh5-yb-jTF"/>
                                     <constraint firstAttribute="trailing" secondItem="gu3-as-BZN" secondAttribute="trailing" id="d2i-jH-fAY"/>
                                     <constraint firstItem="gu3-as-BZN" firstAttribute="top" secondItem="iEN-CP-sJr" secondAttribute="bottom" id="hJc-Y3-M2l"/>
@@ -1231,6 +1231,18 @@
         <image name="nil" width="16" height="16"/>
         <image name="safari" width="24" height="24"/>
         <image name="vpn_logo" width="24" height="24"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

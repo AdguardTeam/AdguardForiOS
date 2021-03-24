@@ -89,6 +89,8 @@ class NewCustomFilterDetailsController : BottomAlertController {
         }
         
         updateTheme()
+        addButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: .gray)
         cancelButton.makeTitleTextUppercased()
     }
     
@@ -143,6 +145,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - private methods
     
     private func updateTheme() {
+        newFilterTitle.textColor = theme.popupTitleTextColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
     }

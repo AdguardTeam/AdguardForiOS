@@ -26,6 +26,7 @@ class AddCustomFilterController: BottomAlertController {
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
@@ -128,6 +129,7 @@ class AddCustomFilterController: BottomAlertController {
     // MARK: - private method
     
     private func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
         nextButton.indicatorStyle = theme.indicatorStyle

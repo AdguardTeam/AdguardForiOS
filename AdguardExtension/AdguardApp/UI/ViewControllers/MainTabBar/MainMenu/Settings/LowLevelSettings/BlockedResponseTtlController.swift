@@ -24,6 +24,7 @@ protocol BlockedResponseTtlDelegate: class {
 
 class BlockedResponseTtlController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var ttlTextField: UITextField!
@@ -88,6 +89,7 @@ class BlockedResponseTtlController: BottomAlertController {
     // MARK: - Private methods
     
     private func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(ttlTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle

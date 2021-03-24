@@ -247,6 +247,7 @@ class NewDnsServerController: BottomAlertController {
     // MARK: - private methods
     
     private func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)

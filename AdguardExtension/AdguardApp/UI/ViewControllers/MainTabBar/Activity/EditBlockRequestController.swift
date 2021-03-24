@@ -76,6 +76,7 @@ class EditBlockRequestController: BottomAlertController {
     
     // MARK: - private methods
     private func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupTextField(domainNameTextField)
         theme.setupPopupLabels(themableLabels)
     }
