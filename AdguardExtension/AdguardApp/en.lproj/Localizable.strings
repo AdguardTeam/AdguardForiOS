@@ -161,7 +161,7 @@
 "add_blacklist_rule_title" = "Add a new rule";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Enter a domain";
+"add_whitelist_domain_title" = "Add a domain";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
