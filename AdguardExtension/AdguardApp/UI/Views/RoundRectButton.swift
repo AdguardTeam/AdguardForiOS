@@ -171,9 +171,6 @@ class RoundRectButton: UIButton {
         else if let backgroundColor = customBackgroundColor {
             self.backgroundColor = backgroundColor
         }
-        else {
-            return
-        }
     }
     
     private func updateTints(){
