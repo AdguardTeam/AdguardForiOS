@@ -18,8 +18,8 @@
 
 
 class RadioButton: UIButton {
-    @IBInspectable var stateOn: UIImage?
-    @IBInspectable var stateOff: UIImage?
+    @IBInspectable var stateOn: UIImage? = UIImage(named: "bullet")
+    @IBInspectable var stateOff: UIImage? = UIImage(named: "bulletnone")
     
     
     override var isSelected: Bool {
@@ -29,6 +29,7 @@ class RadioButton: UIButton {
         
         set {
             self.setImage(newValue ? stateOn : stateOff, for: .normal)
+            super.isSelected = newValue
         }
     }
 }

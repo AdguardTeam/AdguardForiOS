@@ -54,6 +54,11 @@ class BlockedResponseTtlController: BottomAlertController {
         
         updateSaveButton()
         updateTheme()
+        
+        saveButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
+        saveButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

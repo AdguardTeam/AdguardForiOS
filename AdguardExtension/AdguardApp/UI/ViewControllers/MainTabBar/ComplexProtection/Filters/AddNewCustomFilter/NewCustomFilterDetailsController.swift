@@ -89,8 +89,9 @@ class NewCustomFilterDetailsController : BottomAlertController {
         }
         
         updateTheme()
+        addButton.makeTitleTextUppercased()
         addButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: .gray)
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
         cancelButton.makeTitleTextUppercased()
     }
     

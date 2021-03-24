@@ -172,7 +172,7 @@ class RoundRectButton: UIButton {
             self.backgroundColor = backgroundColor
         }
         else {
-            self.backgroundColor = nil
+            return
         }
     }
     

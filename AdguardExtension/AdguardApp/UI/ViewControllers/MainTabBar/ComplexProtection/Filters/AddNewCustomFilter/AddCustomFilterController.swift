@@ -49,6 +49,8 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = false
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
+        nextButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.green)
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()

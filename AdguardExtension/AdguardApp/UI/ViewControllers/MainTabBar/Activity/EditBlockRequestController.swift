@@ -55,6 +55,8 @@ class EditBlockRequestController: BottomAlertController {
         
         addButton.makeTitleTextUppercased()
         backButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        backButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
     }
     
     // MARK: - Actions

@@ -112,6 +112,8 @@ class BlockRequestController: BottomAlertController {
         
         addButton.makeTitleTextUppercased()
         editButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        editButton.applyStandardGreenStyle()
     }
     
     // MARK: - Actions

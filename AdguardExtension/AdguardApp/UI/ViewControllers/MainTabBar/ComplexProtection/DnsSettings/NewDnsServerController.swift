@@ -90,6 +90,11 @@ class NewDnsServerController: BottomAlertController {
         cancelButton?.makeTitleTextUppercased()
         deleteButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
+        
+        addButton?.applyStandardGreenStyle()
+        cancelButton?.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
+        saveButton?.applyStandardGreenStyle()
+        deleteButton?.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
     }
     
     // MARK: - Actions

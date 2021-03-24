@@ -61,12 +61,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         deleteRuleButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         saveButton.applyStandardGreenStyle()
-        deleteRuleButton.applyStandardOpaqueStyle(color: .red)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        deleteRuleButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
+        
         ruleTextView.becomeFirstResponder()
+
     }
     
     // MARK: - Actions

@@ -59,6 +59,8 @@ class UpstreamsController: BottomAlertController {
         
         cancelButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
+        cancelButton.applyStandardOpaqueStyle(color: .gray)
+        saveButton.applyStandardGreenStyle()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

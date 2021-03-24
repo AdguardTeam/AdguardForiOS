@@ -58,12 +58,12 @@ extension UIButton {
      Makes button look like standard AdGuard button
      with opaque background, selected color for borders and text
      */
-    func applyStandardOpaqueStyle(color: AdGuardColors) {
+    func applyStandardOpaqueStyle(color: UIColor) {
         self.layer.cornerRadius = 8.0
         self.backgroundColor = .clear
-        self.setTitleColor(color.color, for: .normal)
+        self.setTitleColor(color, for: .normal)
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = color.color.cgColor
+        self.layer.borderColor = color.cgColor
     }
     
     /*

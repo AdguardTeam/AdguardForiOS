@@ -1595,9 +1595,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="CANCEL">
-                                                            <color key="titleColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
+                                                        <state key="normal" title="CANCEL"/>
                                                         <attributedString key="userComments">
                                                             <fragment content="(NewCustomFilterDetailsController) CANCEL button"/>
                                                         </attributedString>
@@ -1640,7 +1638,7 @@
                                                             <outlet property="delegate" destination="iY4-7b-KHH" id="9pp-9h-ViR"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zco-NT-vBm">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zco-NT-vBm">
                                                         <rect key="frame" x="32" y="51" width="350" height="0.5"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -1682,6 +1680,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="mEm-ll-QZR" secondAttribute="bottom" constant="24" id="44T-or-81u"/>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="top" secondItem="tDs-5f-dGf" secondAttribute="bottom" id="6vQ-9H-4jB"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" id="7ES-bD-aHs"/>
+                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="trailing" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="7JU-Zr-JjM"/>
                                                     <constraint firstItem="mEm-ll-QZR" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="8Vp-b4-QrM"/>
                                                     <constraint firstItem="tDs-5f-dGf" firstAttribute="centerY" secondItem="RJU-32-r8h" secondAttribute="centerY" id="BNy-bm-fs6"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="leading" secondItem="Cyn-cw-Zrm" secondAttribute="leading" id="DjU-ic-knU"/>
@@ -2002,14 +2001,6 @@
                                                         <state key="disabled">
                                                             <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
-                                                                <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="8"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
@@ -2025,26 +2016,10 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="CANCEL">
-                                                            <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
+                                                        <state key="normal" title="CANCEL"/>
                                                         <attributedString key="userComments">
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
-                                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="1"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="8"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
