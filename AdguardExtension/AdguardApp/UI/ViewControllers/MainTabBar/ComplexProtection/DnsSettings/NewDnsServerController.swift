@@ -32,7 +32,7 @@ class NewDnsServerController: BottomAlertController {
     weak var delegate: NewDnsServerControllerDelegate?
     
     // MARK: - IB Outlets
-    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     @IBOutlet weak var addButton: RoundRectButton?
@@ -247,7 +247,6 @@ class NewDnsServerController: BottomAlertController {
     // MARK: - private methods
     
     private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)

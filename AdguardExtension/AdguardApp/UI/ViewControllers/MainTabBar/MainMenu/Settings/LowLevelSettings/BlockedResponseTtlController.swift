@@ -88,7 +88,6 @@ class BlockedResponseTtlController: BottomAlertController {
     // MARK: - Private methods
     
     private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(ttlTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle

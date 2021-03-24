@@ -148,7 +148,6 @@ class BlockRequestController: BottomAlertController {
     // MARK: - Private methods
     
     private func updateTheme(){
-        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         tableView.reloadData()
     }

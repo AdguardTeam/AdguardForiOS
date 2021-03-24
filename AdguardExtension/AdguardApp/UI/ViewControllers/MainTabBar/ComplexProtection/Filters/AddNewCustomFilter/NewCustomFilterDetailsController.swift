@@ -143,7 +143,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - private methods
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
     }

@@ -72,7 +72,6 @@ class ChartDateTypeController: BottomAlertController {
     }
     
     private func updateTheme(){
-        content.backgroundColor = theme.popupBackgroundColor
         theme.setupLabel(periodLabel)
         theme.setupSeparators(separators)
         for button in buttons {

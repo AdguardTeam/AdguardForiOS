@@ -111,7 +111,6 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     // MARK: - privateMethods
     
     private func updateTheme() {
-        self.contentView.backgroundColor = theme.backgroundColor
         tableView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
     }

@@ -111,7 +111,6 @@ class UpstreamsController: BottomAlertController {
     // MARK: - Private methods
     
     private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(upstreamsTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle

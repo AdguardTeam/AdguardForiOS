@@ -80,7 +80,7 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         cancelButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         addButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle()
+        cancelButton.applyStandardOpaqueStyle(color: .gray)
     }
     
     deinit {
@@ -162,8 +162,8 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     // MARK: - private methods
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
         rulePlaceholderLabel.textColor = theme.placeholderTextColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
     }

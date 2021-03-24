@@ -128,7 +128,6 @@ class AddCustomFilterController: BottomAlertController {
     // MARK: - private method
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
         nextButton.indicatorStyle = theme.indicatorStyle

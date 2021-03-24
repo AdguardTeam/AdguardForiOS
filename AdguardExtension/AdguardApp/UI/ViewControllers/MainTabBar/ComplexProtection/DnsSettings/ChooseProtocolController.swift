@@ -47,13 +47,18 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet weak var dotHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var quicHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var regularCheck: UIImageView!
-    @IBOutlet weak var dnsCryptCheck: UIImageView!
-    @IBOutlet weak var dohCheck: UIImageView!
-    @IBOutlet weak var dotCheck: UIImageView!
-    @IBOutlet weak var quicCheck: UIImageView!
+    @IBOutlet weak var regularRadioButton: RadioButton!
+    @IBOutlet weak var dnsCryptRadioButton: RadioButton!
+    @IBOutlet weak var dohRadioButton: RadioButton!
+    @IBOutlet weak var dotRadioButton: RadioButton!
+    @IBOutlet weak var quicRadioButton: RadioButton!
     
-    @IBOutlet var themableLabels: [ThemableLabel]!
+    @IBOutlet weak var regularSeparator: UIView!
+    @IBOutlet weak var dnsCryptSeparator: UIView!
+    @IBOutlet weak var dohSeparator: UIView!
+    @IBOutlet weak var dotSeparator: UIView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var buttons: [RoundRectButton]!
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
@@ -106,33 +111,33 @@ class ChooseProtocolController: BottomAlertController {
     }
     // MARK: - Private methods
     
-    func setupChecks() {
+    private func setupChecks() {
         
         guard let dnsProtocol = selectedProtocol else {
             return
         }
         
-        regularCheck.isHidden = true
-        dnsCryptCheck.isHidden = true
-        dohCheck.isHidden = true
-        dotCheck.isHidden = true
-        quicCheck.isHidden = true
+        regularRadioButton.isSelected = false
+        dnsCryptRadioButton.isSelected = false
+        dohRadioButton.isSelected = false
+        dotRadioButton.isSelected = false
+        quicRadioButton.isSelected = false
         
         switch dnsProtocol {
         case .dns:
-            regularCheck.isHidden = false
+            regularRadioButton.isSelected = true
         case .dnsCrypt:
-            dnsCryptCheck.isHidden = false
+            dnsCryptRadioButton.isSelected = true
         case .doh:
-            dohCheck.isHidden = false
+            dohRadioButton.isSelected = true
         case .dot:
-            dotCheck.isHidden = false
+            dotRadioButton.isSelected = true
         case .doq:
-            quicCheck.isHidden = false
+            quicRadioButton.isSelected = true
         }
     }
     
-    func setupAvailibleProtocols() {
+    private func setupAvailibleProtocols() {
         
         guard  let protocols = provider?.protocols else { return }
         
@@ -142,16 +147,27 @@ class ChooseProtocolController: BottomAlertController {
         dotHeightConstraint.constant = 0
         quicHeightConstraint.constant = 0
         
-        for dnsProtocol in protocols {
+        regularSeparator.isHidden = true
+        dnsCryptSeparator.isHidden = true
+        dohSeparator.isHidden = true
+        dotSeparator.isHidden = true
+        
+        let lastElementIndex = protocols.count - 1
+        
+        for (index, dnsProtocol) in protocols.enumerated() {
             switch dnsProtocol {
             case .dns:
                 regularHeightConstraint.constant = cellHeight
+                regularSeparator.isHidden = index == lastElementIndex
             case .dnsCrypt:
                 dnscryptHeightConstraint.constant = cellHeight
+                dnsCryptSeparator.isHidden = index == lastElementIndex
             case .doh:
                 dohHeightConstraint.constant = cellHeight
+                   dohSeparator.isHidden = index == lastElementIndex
             case .dot:
                 dotHeightConstraint.constant = cellHeight
+                    dotSeparator.isHidden = index == lastElementIndex
             case .doq:
                 quicHeightConstraint.constant = cellHeight
             }
@@ -159,8 +175,7 @@ class ChooseProtocolController: BottomAlertController {
     }
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
     }

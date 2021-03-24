@@ -20,6 +20,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: IB outlets
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
@@ -60,7 +61,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         deleteRuleButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         saveButton.applyStandardGreenStyle()
-        deleteRuleButton.applyStandardOpaqueRedStyle()
+        deleteRuleButton.applyStandardOpaqueStyle(color: .red)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +112,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     // MARK: - private methods
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
     }

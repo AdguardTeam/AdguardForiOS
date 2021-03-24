@@ -27,6 +27,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     @IBOutlet weak var adGuardButton: UIButton!
     @IBOutlet weak var nativeButton: UIButton!
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var popupButtons: [RoundRectButton]!
@@ -74,7 +75,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupLabels(themableLabels)
         theme.setupSeparator(separator)
         theme.setupPopupButtons(popupButtons)

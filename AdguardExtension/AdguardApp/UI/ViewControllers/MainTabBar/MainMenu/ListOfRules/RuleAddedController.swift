@@ -20,8 +20,8 @@ import Foundation
 
 class RuleAddedController: BottomAlertController {
     
+    @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var okButton: UIButton!
-    @IBOutlet var themableLabels: [ThemableLabel]!
     
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -45,7 +45,6 @@ class RuleAddedController: BottomAlertController {
     }
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupLabels(themableLabels)
+        titleLable.textColor = theme.popupTitleTextColor
     }
 }

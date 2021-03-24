@@ -534,21 +534,21 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EH6-Zr-YRP" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="32" y="42" width="350" height="29"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjm-Pt-dMF">
-                                        <rect key="frame" x="0.0" y="103" width="414" height="223"/>
+                                        <rect key="frame" x="0.0" y="103" width="414" height="213"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNd-Na-vMx">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="223"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="213"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Domain:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7r-Ln-XiZ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="32" y="0.0" width="350" height="17"/>
@@ -583,9 +583,9 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvs-mI-vEr">
-                                                        <rect key="frame" x="16" y="93" width="382" height="45"/>
+                                                        <rect key="frame" x="16" y="93" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="brZ-dP-kXb">
+                                                            <constraint firstAttribute="height" constant="40" id="brZ-dP-kXb">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
@@ -604,9 +604,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tei-uI-6Gr">
-                                                        <rect key="frame" x="16" y="154" width="382" height="45"/>
+                                                        <rect key="frame" x="16" y="149" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="pjC-I1-yHA">
+                                                            <constraint firstAttribute="height" constant="40" id="pjC-I1-yHA">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
@@ -677,12 +677,12 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="wj1-WF-JvD"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fTd-kl-89E" firstAttribute="leading" secondItem="CHu-rj-9iN" secondAttribute="leading" id="8Gd-iX-Py8"/>
                             <constraint firstAttribute="trailing" secondItem="fTd-kl-89E" secondAttribute="trailing" id="Gi4-S6-4Jc"/>
                             <constraint firstAttribute="bottom" secondItem="fTd-kl-89E" secondAttribute="bottom" id="cdI-yJ-XA7"/>
-                            <constraint firstItem="fTd-kl-89E" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SoH-nC-h5A" secondAttribute="top" constant="20" id="hX4-pn-5yT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -693,8 +693,8 @@
                         <outlet property="ruleTextView" destination="P3J-h6-fpx" id="cFZ-5y-1Fc"/>
                         <outlet property="saveButton" destination="Bvs-mI-vEr" id="Gki-zo-1J8"/>
                         <outlet property="textUnderline" destination="qz4-TZ-Jh0" id="c61-9g-6QT"/>
+                        <outlet property="titleLabel" destination="EH6-Zr-YRP" id="ZgQ-5Y-SlH"/>
                         <outletCollection property="themableLabels" destination="x7r-Ln-XiZ" collectionClass="NSMutableArray" id="ltD-f1-DmE"/>
-                        <outletCollection property="themableLabels" destination="EH6-Zr-YRP" collectionClass="NSMutableArray" id="cvB-ih-Ly3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0l-gT-MeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -726,8 +726,8 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8X-4z-jzB" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="24" y="42" width="366" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                        <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                         <attributedString key="userComments">
                                             <fragment content="(Add user filter rule) &quot;Add a domain&quot; caption"/>
@@ -736,14 +736,14 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RqY-h5-YwS">
-                                        <rect key="frame" x="0.0" y="74" width="414" height="233"/>
+                                        <rect key="frame" x="0.0" y="74" width="414" height="241.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wr2-gy-Jd9">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="241.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZN-ZW-fP8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="32" y="48" width="350" height="0.0"/>
@@ -774,9 +774,9 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCd-gA-rXS">
-                                                        <rect key="frame" x="16" y="121.5" width="382" height="45"/>
+                                                        <rect key="frame" x="16" y="121.5" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="j2e-jc-CQV">
+                                                            <constraint firstAttribute="height" constant="40" id="j2e-jc-CQV">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
@@ -795,9 +795,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eU-q4-Xed">
-                                                        <rect key="frame" x="16" y="182.5" width="382" height="45"/>
+                                                        <rect key="frame" x="16" y="177.5" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="Dx3-Th-EEa">
+                                                            <constraint firstAttribute="height" constant="40" id="Dx3-Th-EEa">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
@@ -906,7 +906,6 @@
                         <outlet property="ruleTextView" destination="BIv-Tu-Ma6" id="uH8-XQ-IPM"/>
                         <outlet property="titleLabel" destination="g8X-4z-jzB" id="Pa0-Xu-axm"/>
                         <outletCollection property="themableLabels" destination="oZN-ZW-fP8" collectionClass="NSMutableArray" id="a7m-jX-rww"/>
-                        <outletCollection property="themableLabels" destination="g8X-4z-jzB" collectionClass="NSMutableArray" id="t0i-f6-vVR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3R-qz-U9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -938,20 +937,20 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The rule has been added to the User rules" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfI-YN-iXe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="32" y="42" width="350" height="57.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRm-I7-37E">
-                                        <rect key="frame" x="16" y="115.5" width="382" height="45"/>
+                                        <rect key="frame" x="16" y="115.5" width="382" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="vt4-hJ-CdT">
+                                            <constraint firstAttribute="height" constant="40" id="vt4-hJ-CdT">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                             </constraint>
                                         </constraints>
@@ -1000,7 +999,7 @@
                         <outlet property="contentView" destination="Std-34-cUz" id="Ypc-T2-fiH"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="ijW-UC-jyg" id="wP1-iR-TVS"/>
                         <outlet property="okButton" destination="zRm-I7-37E" id="yeR-eo-j5p"/>
-                        <outletCollection property="themableLabels" destination="BfI-YN-iXe" collectionClass="NSMutableArray" id="9zy-YI-eWc"/>
+                        <outlet property="titleLable" destination="BfI-YN-iXe" id="ILA-dE-ZKx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2m-vh-YiW" userLabel="First Responder" sceneMemberID="firstResponder"/>

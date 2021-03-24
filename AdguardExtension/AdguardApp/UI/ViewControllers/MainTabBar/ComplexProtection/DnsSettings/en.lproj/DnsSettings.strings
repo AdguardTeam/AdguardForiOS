@@ -7,8 +7,8 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Name";
 
-/* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Set custom DNS settings";
+/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "3lB-T7-fSO"; */
+"3lB-T7-fSO.text" = "Add a custom DNS server";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
 "6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// or tls://";
@@ -88,8 +88,8 @@
 /* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
 "e4h-eF-AOa.text" = "Server name";
 
-/* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Edit custom DNS settings";
+/* Class = "UILabel"; text = "Edit custom DNS server"; ObjectID = "f57-S8-QfF"; */
+"f57-S8-QfF.text" = "Edit custom DNS server";
 
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
@@ -103,9 +103,6 @@
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Blocklist";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "CANCEL";
-
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
 "lEg-oH-oxd.text" = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity.";
 
@@ -118,8 +115,8 @@
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "OK";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
-"oSP-2V-qCA.normalTitle" = "DELETE";
+/* Class = "UIButton"; normalTitle = "DELETE SERVER"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
+"oSP-2V-qCA.normalTitle" = "DELETE SERVER";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "DNS filtering";
@@ -151,8 +148,8 @@
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS filtering";
 
-/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
-"vJt-Jd-BI2.text" = "Select protocol";
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "Protocol";
 
 /* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
 "xgN-x2-EfQ.text" = "Implementation";

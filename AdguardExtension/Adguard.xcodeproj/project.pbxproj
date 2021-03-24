@@ -48,6 +48,8 @@
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
+		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
 		24ED98C7259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
@@ -2644,6 +2646,7 @@
 		247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+CustomSchemeURLParserProtocol.swift"; sourceTree = "<group>"; };
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
+		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24ED98C5259B78DF00A73B17 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
@@ -5306,6 +5309,7 @@
 		D0F91161212EDD51006DF0D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				24AD872C260A247B0034D402 /* RadioButton.swift */,
 				7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */,
 				D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */,
 				D0F91163212EDD71006DF0D3 /* FilterCell.swift */,
@@ -6734,6 +6738,7 @@
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
 				D0B545B32435D650002F0AEC /* FiltersMasterController.swift in Sources */,
 				D0D7E5EB24444ED5001801A5 /* RulesParser.swift in Sources */,
+				24AD872E260A247B0034D402 /* RadioButton.swift in Sources */,
 				7EC67FC9254843CA00FEEEE2 /* DnsImplementation.swift in Sources */,
 				D0B545BD2435D659002F0AEC /* EditBlockRequestController.swift in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
@@ -7398,6 +7403,7 @@
 				7EA2163A2444847700393949 /* MigrationService.swift in Sources */,
 				D03E532D21B6A3B400C62152 /* ConfigurationServiceProtocol.swift in Sources */,
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
+				24AD872D260A247B0034D402 /* RadioButton.swift in Sources */,
 				7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */,
 				D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */,

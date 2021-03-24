@@ -18,6 +18,28 @@
 
 import Foundation
 
+enum AdGuardColors {
+    case green
+    case red
+    case yellow
+    case gray
+}
+
+extension AdGuardColors {
+    var color: UIColor {
+        switch self {
+        case .green:
+            return UIColor.AdGuardColor.green
+        case .red:
+            return UIColor.AdGuardColor.red
+        case .yellow:
+            return UIColor.AdGuardColor.yellow
+        case .gray:
+            return UIColor.AdGuardColor.gray
+        }
+    }
+}
+
 extension UIColor {
     struct AdGuardColor {
         static let green = UIColor(hexString: "#67b279")

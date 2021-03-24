@@ -27,6 +27,7 @@ import Foundation
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
+    var popupTitleTextColor: UIColor { get }
     var bottomBarBackgroundColor: UIColor { get }
     var blackTextColor: UIColor { get }
     var lightGrayTextColor: UIColor { get }
@@ -95,6 +96,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var popupBackgroundColor: UIColor {
         return configuration.darkTheme ? UIColor(hexString: "#000000") : .white
+    }
+    
+    var popupTitleTextColor: UIColor {
+        return configuration.darkTheme ? .white : UIColor(hexString: "#4D4D4D")
     }
     
     var bottomBarBackgroundColor: UIColor {
