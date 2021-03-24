@@ -18,6 +18,7 @@
 
 import Foundation
 
+/* StoryGroup is a model for multiple stories */
 struct StoryGroup: Decodable {
     let groupType: StoryGroupType
     let storyTokens: [StoryToken]

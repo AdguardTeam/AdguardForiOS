@@ -18,11 +18,16 @@
 
 import Foundation
 
+/* StoriesProvider contains all information about stories */
 struct StoriesProvider {
+    
+    // MARK: - Public properties
     
     static let stories: [StoryGroup] = { storiesContext?.stories ?? [] }()
     static let allCategories: [StoryGroupType] = { storiesContext?.categories ?? [] }()
     static let allActions = { storiesContext?.actions ?? [] }()
+    
+    // MARK: - Private properties
     
     private static let storiesContext: StoriesContext? = {
         storiesQueue.sync {
@@ -31,6 +36,8 @@ struct StoriesProvider {
     }()
     
     private static let storiesQueue = DispatchQueue(label: "stories.init.queue")
+    
+    // MARK: - Private methods
     
     private static func generateStoriesFromFile() -> StoriesContext? {
         guard let pathString = Bundle.main.path(forResource: "stories", ofType: "json") else {
@@ -58,7 +65,11 @@ struct StoriesProvider {
 
 // MARK: - StoriesContext
 
-struct StoriesContext: Decodable {
+/*
+ StoriesContext is a helper for StoriesProvider
+ It helps to decode stories.json in a convenient way
+ */
+fileprivate struct StoriesContext: Decodable {
     let stories: [StoryGroup]
     let categories: [StoryGroupType]
     let actions: [StoryActionType]

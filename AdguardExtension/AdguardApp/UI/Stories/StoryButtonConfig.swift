@@ -18,7 +18,7 @@
 
 import Foundation
 
-enum StoryActionType: String {
+enum StoryActionType: String, CaseIterable {
     case readChangeLog = "READ_CHANGELOG"
     case activateLicense = "ACTIVATE_LICENSE"
     case downloadAdguardVpn = "DOWNLOAD_ADGUARD_VPN"
@@ -29,12 +29,7 @@ enum StoryActionType: String {
     case addCustomDns = "ADD_CUSTOM_DNS"
 }
 
-protocol IStoryButtonConfig {
-    var title: String? { get }
-    var performAction: (() -> Void)? { get }
-}
-
-struct StoryButtonConfig: IStoryButtonConfig, Decodable {
+struct StoryButtonConfig: Decodable {
     var title: String?
     var performAction: (() -> Void)?
     

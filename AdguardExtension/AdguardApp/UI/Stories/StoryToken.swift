@@ -18,6 +18,7 @@
 
 import Foundation
 
+/* StoryToken is a model for one story */
 struct StoryToken: Decodable {
     let image: UIImage?
     let title: String?

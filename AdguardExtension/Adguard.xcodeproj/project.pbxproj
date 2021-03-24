@@ -4742,9 +4742,9 @@
 			children = (
 				7EF0BA0D2609E956005805C4 /* stories.json */,
 				7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */,
-				7E54212F2608E3B6008ACC3C /* StoryGroup.swift */,
-				7EF0BA44260A0B62005805C4 /* StoryGroupType.swift */,
 				7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */,
+				7EF0BA44260A0B62005805C4 /* StoryGroupType.swift */,
+				7E54212F2608E3B6008ACC3C /* StoryGroup.swift */,
 				7E5421432608E3C7008ACC3C /* StoryToken.swift */,
 				7E5421722608E6AF008ACC3C /* StoryViewController */,
 			);
