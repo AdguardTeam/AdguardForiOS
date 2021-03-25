@@ -87,11 +87,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var backgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.backgroundColor : .white
     }
     
     var invertedBackgroundColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor(hexString: "#131313")
+        return configuration.darkTheme ? .white : UIColor.AdGuardColor.backgroundColor
     }
     
     var popupBackgroundColor: UIColor {
@@ -103,7 +103,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var bottomBarBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : UIColor(hexString: "#F3F3F3")
+        return configuration.darkTheme ? UIColor.AdGuardColor.backgroundColor : UIColor(hexString: "#F3F3F3")
     }
     
     var blackTextColor: UIColor {
@@ -151,7 +151,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var tabBarColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.backgroundColor : .white
     }
     
     var ruleTextColor: UIColor {

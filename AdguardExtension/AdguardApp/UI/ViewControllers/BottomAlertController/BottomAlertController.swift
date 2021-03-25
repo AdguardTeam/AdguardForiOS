@@ -127,7 +127,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     
     private func makeRoundCorners(){
         let corners: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        let radius: CGFloat = 10.0
+        let radius: CGFloat = 24.0
         
         contentView.layer.cornerRadius = radius
         contentView.layer.maskedCorners = corners

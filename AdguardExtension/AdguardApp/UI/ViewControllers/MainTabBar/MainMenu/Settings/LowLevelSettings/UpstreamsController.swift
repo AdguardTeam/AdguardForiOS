@@ -63,17 +63,6 @@ class UpstreamsController: BottomAlertController {
         saveButton.applyStandardGreenStyle()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
-    
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

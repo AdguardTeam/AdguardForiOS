@@ -95,18 +95,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
         cancelButton.makeTitleTextUppercased()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView, controllerModeType == .addingFilter {
-            navigationController?.dismiss(animated: true, completion: nil)
-        } else if touch.view != contentView, controllerModeType == .editingFilter {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
     // MARK: - Actions
     @IBAction func AddAction(_ sender: Any) {
         if controllerModeType == .addingFilter {

@@ -13,8 +13,8 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
 "HFf-Yp-hjB.normalTitle" = "Select";
 
-/* Class = "UIButton"; normalTitle = "DELETE RULE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "DELETE RULE";
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "DELETE";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "ADD";

@@ -593,9 +593,6 @@
                                                         <state key="normal" title="SAVE">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
-                                                        <state key="disabled">
-                                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
@@ -611,7 +608,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="DELETE RULE">
+                                                        <state key="normal" title="DELETE">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -687,7 +684,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="fTd-kl-89E" id="hLY-yc-lER"/>
-                        <outlet property="deleteRuleButton" destination="Tei-uI-6Gr" id="u5B-Lt-A95"/>
+                        <outlet property="deleteButton" destination="Tei-uI-6Gr" id="u5B-Lt-A95"/>
                         <outlet property="domainOrRuleLabel" destination="x7r-Ln-XiZ" id="LiX-rj-Qot"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="cdI-yJ-XA7" id="PfQ-o9-pUe"/>
                         <outlet property="ruleTextView" destination="P3J-h6-fpx" id="cFZ-5y-1Fc"/>
@@ -784,9 +781,6 @@
                                                         <state key="normal" title="ADD">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
-                                                        <state key="disabled">
-                                                            <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
@@ -851,7 +845,7 @@
                                                     <constraint firstItem="cEh-Sj-zqF" firstAttribute="bottom" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="qoS-B0-Atp"/>
                                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="leading" secondItem="fCd-gA-rXS" secondAttribute="leading" id="rFr-E1-Twr"/>
                                                     <constraint firstAttribute="trailing" secondItem="oZN-ZW-fP8" secondAttribute="trailing" constant="32" id="sHO-tK-GCY"/>
-                                                    <constraint firstItem="oZN-ZW-fP8" firstAttribute="top" secondItem="wr2-gy-Jd9" secondAttribute="top" constant="48" id="slI-1R-NIG"/>
+                                                    <constraint firstItem="oZN-ZW-fP8" firstAttribute="top" secondItem="wr2-gy-Jd9" secondAttribute="top" id="slI-1R-NIG"/>
                                                     <constraint firstAttribute="bottom" secondItem="5eU-q4-Xed" secondAttribute="bottom" constant="24" id="tAa-uv-cT8"/>
                                                     <constraint firstItem="ovF-SA-Xg2" firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" id="urZ-Fz-5LE"/>
                                                     <constraint firstItem="ovF-SA-Xg2" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="v4M-c5-Qu7"/>

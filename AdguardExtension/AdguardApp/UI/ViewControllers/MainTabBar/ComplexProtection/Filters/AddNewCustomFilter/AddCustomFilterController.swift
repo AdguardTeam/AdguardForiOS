@@ -50,7 +50,7 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         nextButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.green)
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -68,16 +68,6 @@ class AddCustomFilterController: BottomAlertController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            navigationController?.dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {

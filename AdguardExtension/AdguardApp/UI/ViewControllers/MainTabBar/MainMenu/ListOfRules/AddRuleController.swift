@@ -93,16 +93,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         rulePlaceholderLabel.text = getPlaceholderText()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
     @objc func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue

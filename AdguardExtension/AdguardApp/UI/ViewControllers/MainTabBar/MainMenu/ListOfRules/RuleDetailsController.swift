@@ -24,7 +24,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: UIView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var deleteRuleButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
@@ -58,10 +58,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         updateTheme()
         
         saveButton.makeTitleTextUppercased()
-        deleteRuleButton.makeTitleTextUppercased()
+        deleteButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         saveButton.applyStandardGreenStyle()
-        deleteRuleButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
+        deleteButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
         
         ruleTextView.becomeFirstResponder()
 
