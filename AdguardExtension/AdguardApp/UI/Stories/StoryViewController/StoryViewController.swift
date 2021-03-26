@@ -169,6 +169,7 @@ final class StoryViewController: UIViewController {
             changeContent()
             progressView.previous()
         } else {
+            progressView.start()
             delegate?.previousStoriesAreOver()
         }
     }
