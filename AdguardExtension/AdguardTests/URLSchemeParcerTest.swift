@@ -7,8 +7,9 @@ class URLSchemeParcerTest: XCTestCase {
     override func setUpWithError() throws {
         let executor = URLSchemeExecutorMock()
         let configuration = ConfigurationServiceMock()
+        let purchaseService = PurchaseServiceMock()
 
-        urlParcer = URLSchemeParser(executor: executor, configurationService: configuration)
+        urlParcer = URLSchemeParser(executor: executor, configurationService: configuration, purchaseService: purchaseService)
 
     }
 
