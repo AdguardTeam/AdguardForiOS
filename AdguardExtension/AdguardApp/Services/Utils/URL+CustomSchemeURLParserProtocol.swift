@@ -30,6 +30,19 @@ struct URLParserResult {
 
 extension URL: CustomSchemeURLParserProtocol {
     
+    func protectionStateIsEnabled() -> Bool? {
+        if self.path.isEmpty { return nil }
+        let suffix = String(self.path.suffix(self.path.count - 1))
+        let parameters = suffix.split(separator: "/")
+        
+        let enabledString = String(parameters.first ?? "")
+        let isSufixValid = enabledString == "on" || enabledString == "off"
+        if isSufixValid {
+            return enabledString == "on"
+        }
+        return nil
+    }
+    
     func parseAuthUrl() -> URLParserResult {
         guard let components = splitURLByChar(separator: "#") else { return URLParserResult() }
         return prepareParams(components: components)
