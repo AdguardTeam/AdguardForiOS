@@ -757,7 +757,6 @@
 		7EF0BADC260A2155005805C4 /* stories.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF0BA0D2609E956005805C4 /* stories.json */; };
 		7EF0BAEF260B2EA2005805C4 /* StoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */; };
 		7EF0BAF0260B2EA2005805C4 /* StoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */; };
-		7EF0BAF1260B2EA2005805C4 /* StoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */; };
 		7EF0BB26260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
 		7EF0BB27260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
 		7EF0BB96260B8BAC005805C4 /* StoriesProgressComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB95260B8BAB005805C4 /* StoriesProgressComponentView.swift */; };
@@ -7701,7 +7700,6 @@
 				7EA2163C24449EA700393949 /* MigrationServiceTest.swift in Sources */,
 				D06E315C253F331E008BBD2D /* LocalizedDnsProviders.swift in Sources */,
 				D0288F4423069ACB00A4EBEF /* NSDate+Utils.m in Sources */,
-				7EF0BAF1260B2EA2005805C4 /* StoriesManager.swift in Sources */,
 				7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */,
 				D0AEC26A2409323C003E8FCC /* VpnManager.swift in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
