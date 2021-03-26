@@ -16,12 +16,10 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import UIKit
+import Foundation
 
-extension UIViewController {
-    func presentUpsellScreen() {
-        let upsellVC = UpsellViewController(nibName: "UpsellViewController", bundle: nil)
-        upsellVC.modalPresentationStyle = .overFullScreen
-        self.present(upsellVC, animated: true)
+extension UITraitEnvironment {
+    var isIpadTrait: Bool {
+        return traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
     }
 }

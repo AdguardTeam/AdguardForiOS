@@ -16,12 +16,14 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import UIKit
 
-extension UIViewController {
-    func presentUpsellScreen() {
-        let upsellVC = UpsellViewController(nibName: "UpsellViewController", bundle: nil)
-        upsellVC.modalPresentationStyle = .overFullScreen
-        self.present(upsellVC, animated: true)
+import Foundation
+
+struct StoriesManager {
+    static func showStories(forVC vc: UIViewController, fromGroup group: StoryGroupType) {
+        let stories = StoriesProvider.stories
+        let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startGroup: group)
+        storiesPageVC.modalPresentationStyle = .fullScreen
+        vc.present(storiesPageVC, animated: true)
     }
 }

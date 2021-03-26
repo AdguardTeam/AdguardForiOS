@@ -17,7 +17,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTk-rx-c08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1583" y="-178"/>
+            <point key="canvasLocation" x="2643" y="125"/>
         </scene>
         <!--AdGuard-->
         <scene sceneID="zqJ-IQ-lJU">
@@ -854,7 +854,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bb-EW-EVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="939.84375" y="-196.2890625"/>
+            <point key="canvasLocation" x="2025" y="161"/>
         </scene>
         <!--Onboarding-->
         <scene sceneID="bKG-ij-XYW">
@@ -862,7 +862,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="t6s-y4-WsD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WRc-rS-l2D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1602" y="-211"/>
+            <point key="canvasLocation" x="2662" y="92"/>
         </scene>
         <!--Chart Date Type Controller-->
         <scene sceneID="47Z-dA-g5p">
@@ -1100,7 +1100,7 @@
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="T6V-s9-cBk" kind="relationship" relationship="rootViewController" id="G6h-Cy-8QC"/>
+                        <segue destination="abp-Dl-IQR" kind="relationship" relationship="rootViewController" id="OOy-Ko-jxJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iqv-uM-icn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1217,6 +1217,80 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PI5-bZ-F0P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="619" y="-923"/>
+        </scene>
+        <!--Main Page View Controller-->
+        <scene sceneID="ur6-fC-bxD">
+            <objects>
+                <viewController id="abp-Dl-IQR" customClass="MainPageViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z6T-C3-W12">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nr-my-Yng">
+                                <rect key="frame" x="86.5" y="285.5" width="81" height="30"/>
+                                <state key="normal" title="What's new"/>
+                                <connections>
+                                    <action selector="whatsNew:" destination="abp-Dl-IQR" eventType="touchUpInside" id="ibS-DG-GIk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK1-uX-qNs">
+                                <rect key="frame" x="234" y="285.5" width="106" height="30"/>
+                                <state key="normal" title="DNS protection"/>
+                                <connections>
+                                    <action selector="dnsProtection:" destination="abp-Dl-IQR" eventType="touchUpInside" id="BFG-yr-LOf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owh-cl-enn">
+                                <rect key="frame" x="74.5" y="347.5" width="105" height="30"/>
+                                <state key="normal" title="VPN protection"/>
+                                <connections>
+                                    <action selector="vpnProtection:" destination="abp-Dl-IQR" eventType="touchUpInside" id="arL-DE-DE6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fi-pN-1QU">
+                                <rect key="frame" x="230" y="347.5" width="114" height="30"/>
+                                <state key="normal" title="Safari protection"/>
+                                <connections>
+                                    <action selector="safariProtection:" destination="abp-Dl-IQR" eventType="touchUpInside" id="w6o-mv-Gxs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsP-QK-QAx">
+                                <rect key="frame" x="83.5" y="409.5" width="87" height="30"/>
+                                <state key="normal" title="YouTube ads"/>
+                                <connections>
+                                    <action selector="youtubeAds:" destination="abp-Dl-IQR" eventType="touchUpInside" id="E5v-DI-Yog"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEZ-HC-d7Z">
+                                <rect key="frame" x="244" y="409.5" width="86" height="30"/>
+                                <state key="normal" title="DNS servers"/>
+                                <connections>
+                                    <action selector="dnsServers:" destination="abp-Dl-IQR" eventType="touchUpInside" id="jb5-8b-ePe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gje-R9-bB4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pEZ-HC-d7Z" firstAttribute="centerX" secondItem="8fi-pN-1QU" secondAttribute="centerX" id="0AH-XS-Woy"/>
+                            <constraint firstItem="bsP-QK-QAx" firstAttribute="centerX" secondItem="owh-cl-enn" secondAttribute="centerX" id="7i1-s0-0E7"/>
+                            <constraint firstItem="8fi-pN-1QU" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" constant="80" id="HOx-H0-m2h"/>
+                            <constraint firstItem="8fi-pN-1QU" firstAttribute="top" secondItem="bK1-uX-qNs" secondAttribute="bottom" constant="32" id="QAL-De-6S4"/>
+                            <constraint firstItem="3Nr-my-Yng" firstAttribute="centerX" secondItem="owh-cl-enn" secondAttribute="centerX" id="SbH-wz-7Oz"/>
+                            <constraint firstItem="owh-cl-enn" firstAttribute="centerY" secondItem="Gje-R9-bB4" secondAttribute="centerY" id="ZRI-5k-k3m"/>
+                            <constraint firstItem="bsP-QK-QAx" firstAttribute="top" secondItem="owh-cl-enn" secondAttribute="bottom" constant="32" id="dTu-fE-m7I"/>
+                            <constraint firstItem="8fi-pN-1QU" firstAttribute="centerY" secondItem="Gje-R9-bB4" secondAttribute="centerY" id="fvR-Q4-r24"/>
+                            <constraint firstItem="pEZ-HC-d7Z" firstAttribute="top" secondItem="8fi-pN-1QU" secondAttribute="bottom" constant="32" id="gCx-Wv-cVN"/>
+                            <constraint firstItem="owh-cl-enn" firstAttribute="top" secondItem="3Nr-my-Yng" secondAttribute="bottom" constant="32" id="o5D-Cj-snX"/>
+                            <constraint firstItem="bK1-uX-qNs" firstAttribute="centerX" secondItem="8fi-pN-1QU" secondAttribute="centerX" id="t5i-oK-UGE"/>
+                            <constraint firstItem="owh-cl-enn" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" constant="-80" id="vrX-FI-nXY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WE9-Oi-jHf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vnk-by-3Me" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="862" y="-196"/>
         </scene>
     </scenes>
     <resources>

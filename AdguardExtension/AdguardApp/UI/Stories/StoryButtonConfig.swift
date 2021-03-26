@@ -30,71 +30,25 @@ enum StoryActionType: String, CaseIterable {
 }
 
 struct StoryButtonConfig: Decodable {
-    var title: String?
-    var performAction: (() -> Void)?
+    let title: String
+    let actionType: StoryActionType
     
     private enum CodingKeys: String, CodingKey {
         case title = "action_title"
-        case performAction = "action"
+        case actionType = "action"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         let buttonTitleKey = try container.decode(String.self, forKey: .title)
-        let buttonActionKey = try container.decode(String.self, forKey: .performAction)
+        let buttonActionKey = try container.decode(String.self, forKey: .actionType)
         
         guard let actionType = StoryActionType(rawValue: buttonActionKey) else {
-            return
+            throw DecodingError.dataCorruptedError(forKey: .actionType, in: container, debugDescription: "Unknown action type")
         }
         
         self.title = String.localizedString(buttonTitleKey)
-        
-        let action: () -> Void
-        switch actionType {
-        case .readChangeLog: action = { [self] in self.readChangeLog() }
-        case .activateLicense: action = { [self] in self.activateLicense() }
-        case .downloadAdguardVpn: action = { [self] in self.downloadAdguardVpn() }
-        case .moreOnDns: action = { [self] in self.moreOnDns() }
-        case .enableAdguardDns: action = { [self] in self.enableAdguardDns() }
-        case .enableGoogleDns: action = { [self] in self.enableGoogleDns() }
-        case .enableCloudflareDns: action = { [self] in self.enableCloudflareDns() }
-        case .addCustomDns: action = { [self] in self.addCustomDns() }
-        }
-        self.performAction = action
-    }
-    
-    // MARK: - Private methods
-    
-    private func readChangeLog() {
-        
-    }
-
-    private func activateLicense() {
-        
-    }
-    
-    private func downloadAdguardVpn() {
-        
-    }
-    
-    private func moreOnDns() {
-        
-    }
-    
-    private func enableAdguardDns() {
-        
-    }
-    
-    private func enableGoogleDns() {
-        
-    }
-    
-    private func enableCloudflareDns() {
-        
-    }
-    
-    private func addCustomDns() {
-        
+        self.actionType = actionType
     }
 }

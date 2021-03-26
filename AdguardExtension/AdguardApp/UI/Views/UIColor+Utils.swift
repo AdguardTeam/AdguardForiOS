@@ -23,6 +23,7 @@ extension UIColor {
         static let green = UIColor(hexString: "#67b279")
         static let red = UIColor(hexString: "df3812")
         static let yellow = UIColor(hexString: "#eb9300")
+        static let disabledGreenColor = UIColor(hexString: "#539e65")
     }
     
     struct AdGuardVpnColor {

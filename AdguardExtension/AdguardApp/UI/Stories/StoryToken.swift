@@ -25,6 +25,18 @@ struct StoryToken: Decodable {
     let description: String?
     let buttonConfig: StoryButtonConfig?
     
+    private enum LocalizedStringKeysWithFormat: String, CaseIterable {
+        case whatsNewDescription = "story_whats_new_1_description"
+        
+        var localizedString: String {
+            switch self {
+            case .whatsNewDescription:
+                let version = ADProductInfo().version() ?? ""
+                return String(format: String.localizedString(self.rawValue), version)
+            }
+        }
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case image = "image"
         case title = "title"
@@ -39,8 +51,19 @@ struct StoryToken: Decodable {
         let descKey = try container.decode(String.self, forKey: .description)
         
         self.image = UIImage(named: imageName)
-        self.title = String.localizedString(titleKey)
-        self.description = String.localizedString(descKey)
+        
+        if let titleFormat = LocalizedStringKeysWithFormat(rawValue: titleKey) {
+            self.title = titleFormat.localizedString
+        } else {
+            self.title = String.localizedString(titleKey)
+        }
+        
+        if let descFormat = LocalizedStringKeysWithFormat(rawValue: descKey) {
+            self.description = descFormat.localizedString
+        } else {
+            self.description = String.localizedString(descKey)
+        }
+        
         self.buttonConfig = try? StoryButtonConfig(from: decoder)
     }
 }

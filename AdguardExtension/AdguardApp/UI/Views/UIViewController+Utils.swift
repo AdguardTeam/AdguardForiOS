@@ -20,6 +20,14 @@ import Foundation
 
 extension UIViewController {
     
+    var ios14available: Bool {
+        if #available(iOS 14.0, *) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func showVideoTutorial(){
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
@@ -92,14 +100,6 @@ extension UIViewController {
 
         navigationController?.navigationBar.layer.add(fadeTextAnimation, forKey: "fadeText")
         navigationItem.title = ""
-    }
-    
-    var ios14available: Bool {
-        if #available(iOS 14.0, *) {
-            return true
-        } else {
-            return false
-        }
     }
     
     func setupToHideKeyboardOnTapOnView(ignoringViews views: [UIView] = []) {

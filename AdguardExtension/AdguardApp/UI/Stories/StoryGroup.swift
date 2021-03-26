@@ -28,6 +28,11 @@ struct StoryGroup: Decodable {
         case storyTokens = "tokens"
     }
     
+    init(groupType: StoryGroupType, storyTokens: [StoryToken]) {
+        self.groupType = groupType
+        self.storyTokens = storyTokens
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

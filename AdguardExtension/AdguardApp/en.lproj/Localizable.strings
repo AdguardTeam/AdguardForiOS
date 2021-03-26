@@ -927,3 +927,209 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Respond with a manually set IP address";
+
+// MARK: - Stories
+
+// ----- What's new -----
+
+/* First what's new story title */
+"story_whats_new_1_title" = "The app was updated!";
+
+/* First what's new story description, %@ stands for app version */
+"story_whats_new_1_description" = "Meet AdGuard %@ for iOS!\nLet’s see what nice changes it brings.";
+
+/* Second what's new story title */
+"story_whats_new_2_title" = "Want to know more?";
+
+/* Second what's new story description */
+"story_whats_new_2_description" = "We have an in-depth overview with all details.";
+
+/* Second what's new story button title */
+"story_whats_new_2_button_title" = "READ NOW";
+
+// ----- DNS protection -----
+
+/* First DNS protection story title */
+"story_dns_protection_1_title" = "What is DNS protection?";
+
+/* First DNS protection story descriptions */
+"story_dns_protection_1_description" = "This is a set of advanced tools to help protect your data.";
+
+/* Second DNS protection story title */
+"story_dns_protection_2_title" = "Will it protect my personal data?";
+
+/* Second DNS protection story descriptions */
+"story_dns_protection_2_description" = "Yes, DNS protection won’t allow advertisers or fraudsters to collect your browsing history or any other information.";
+
+/* Third DNS protection story title */
+"story_dns_protection_3_title" = "All statistics at hand";
+
+/* Third DNS protection story descriptions */
+"story_dns_protection_3_description" = "In the Statistics section you will see the information on companies trying to get to your personal data.";
+
+/* Fourth DNS protection story title */
+"story_dns_protection_4_title" = "Will the Internet be faster?";
+
+/* Fourth DNS protection story descriptions */
+"story_dns_protection_4_description" = "Probably. Choosing one of the fast DNS servers we offer instead of a server from your ISP may speed up the loading.";
+
+/* Fifth DNS protection story title */
+"story_dns_protection_5_title" = "What are DNS servers?";
+
+/* Fifth DNS protection story descriptions */
+"story_dns_protection_5_description" = "They are being requested to by your device every time you use the Internet.\nThere are different kinds of them. For example, choosing the AdGuard Family server will protect your kids from inappropriate 18+ content.";
+
+/* Sixth DNS protection story title */
+"story_dns_protection_6_title" = "Is it free?";
+
+/* Sixth DNS protection story descriptions */
+"story_dns_protection_6_description" = "Yes, it is for the first seven days.\nActivate the trial period and decide for yourself whether it's worth paying for the full version.";
+
+/* Sixth DNS protection story button title */
+"story_dns_protection_6_button_title" = "ACTIVATE";
+
+// ----- VPN protection -----
+
+/* First VPN protection story title */
+"story_vpn_protection_1_title" = "AdGuard VPN app";
+
+/* First VPN protection story descriptions */
+"story_vpn_protection_1_description" = "Another app to protect your personal data. It works great alongside AdGuard.";
+
+/* First VPN protection story button title */
+"story_vpn_protection_1_button_title" = "DOWNLOAD";
+
+/* Second VPN protection story title */
+"story_vpn_protection_2_title" = "How does VPN work?";
+
+/* Second VPN protection story descriptions */
+"story_vpn_protection_2_description" = "VPN apps make you anonymous and hide your physical address. Site owners will see the location that you choose in the application.";
+
+/* Third VPN protection story title */
+"story_vpn_protection_3_title" = "Why AdGuard VPN?";
+
+/* Third VPN protection story descriptions */
+"story_vpn_protection_3_description" = "We have fast servers in more than 40 locations around the world, our own unique encryption algorithm, and we also do not keep the logs of your actions.";
+
+/* Fourth VPN protection story title */
+"story_vpn_protection_4_title" = "Compatibility with AdGuard";
+
+/* Fourth VPN protection story descriptions */
+"story_vpn_protection_4_description" = "Our VPN works seamlessly together with AdGuard ad blocker. You don’t need to configure anything, just install both apps!";
+
+/* Fifth VPN protection story title */
+"story_vpn_protection_5_title" = "It’s free!";
+
+/* Fifth VPN protection story descriptions */
+"story_vpn_protection_5_description" = "Yes, the full version of the app is paid, but the basic functionality to protect personal data is absolutely free of charge.";
+
+/* Fifth VPN protection story button title */
+"story_vpn_protection_5_button_title" = "DOWNLOAD";
+
+// ----- Safari protection -----
+
+/* First Safari protection story title */
+"story_safari_protection_1_title" = "Why does AdGuard block ads only in Safari?";
+
+/* First Safari protection story descriptions */
+"story_safari_protection_1_description" = "Of all the browsers for iOS, only Safari provides developers with ad blocking tools.";
+
+/* Second Safari protection story title */
+"story_safari_protection_2_title" = "How to deal with ads in apps?";
+
+/* Second Safari protection story descriptions */
+"story_safari_protection_2_description" = "Many services like Twitch, YouTube or Facebook can be used in a browser. Open them in Safari, and there will be no ads.";
+
+/* Third Safari protection story title */
+"story_safari_protection_3_title" = "What about DNS?";
+
+/* Third Safari protection story descriptions */
+"story_safari_protection_3_description" = "DNS servers can indeed have additional features, including the ad blocking.";
+
+/* Third Safari protection story button title */
+"story_safari_protection_3_button_title" = "MORE ON DNS";
+
+// ----- YouTube ads -----
+
+/* First YouTube ads story title */
+"story_youtube_ads_1_title" = "Why does YouTube have ads?";
+
+/* First YouTube ads story descriptions */
+"story_youtube_ads_1_description" = "iOS devices do not allow apps to interfere with each other's work. Therefore, AdGuard cannot block ads in the YouTube app.";
+
+/* Second YouTube ads story title */
+"story_youtube_ads_2_title" = "How to get rid of ads on YouTube?";
+
+/* Second YouTube ads story descriptions */
+"story_youtube_ads_2_description" = "Fortunately, Safari provides ad blocking capabilities. Thus, the easiest option is to watch YouTube in this browser.";
+
+/* Third YouTube ads story title */
+"story_youtube_ads_3_title" = "What about DNS?";
+
+/* Third YouTube ads story descriptions */
+"story_youtube_ads_3_description" = "Yes, DNS servers work with requests outside the device and partially cope with ads and tracking in general. See a dedicated story about this.";
+
+/* Third YouTube ads story button title */
+"story_youtube_ads_3_button_title" = "MORE ON DNS";
+
+// ----- DNS servers -----
+
+/* First DNS servers story title */
+"story_dns_servers_1_title" = "What is a DNS?";
+
+/* First DNS servers story descriptions */
+"story_dns_servers_1_description" = "DNS is a domain name storage system, a notebook that stores the addresses of all sites. This data is stored on special DNS servers.";
+
+/* Second DNS servers story title */
+"story_dns_servers_2_title" = "Why do you need a DNS server?";
+
+/* Second DNS servers story descriptions */
+"story_dns_servers_2_description" = "It tells you which IP address you need to connect to, when you click or perform any other action online.";
+
+/* Third DNS servers story title */
+"story_dns_servers_3_title" = "What's the catch?";
+
+/* Third DNS servers story descriptions */
+"story_dns_servers_3_description" = "By default, your ISP chooses the DNS server for you, which means it is aware of your every action. Fraudsters can gain access to this information too.";
+
+/* Fourth DNS servers story title */
+"story_dns_servers_4_title" = "What to do?";
+
+/* Fourth DNS servers story descriptions */
+"story_dns_servers_4_description" = "AdGuard gives you the opportunity to choose absolutely any DNS server that is not controlled by the provider and is protected from fraudsters. For example, our own AdGuard DNS.";
+
+/* Fifth DNS servers story title */
+"story_dns_servers_5_title" = "AdGuard DNS";
+
+/* Fifth DNS servers story descriptions */
+"story_dns_servers_5_description" = "In addition to strong encryption, AdGuard DNS also blocks ads, tracking, and fraudulent sites.";
+
+/* Fifth DNS servers story button title */
+"story_dns_servers_5_button_title" = "ENABLE";
+
+/* Sixth DNS servers story title */
+"story_dns_servers_6_title" = "Google DNS";
+
+/* Sixth DNS servers story descriptions */
+"story_dns_servers_6_description" = "One of the most widely used high-speed DNS servers.";
+
+/* Sixth DNS servers story button title */
+"story_dns_servers_6_button_title" = "ENABLE";
+
+/* Seventh DNS servers story title */
+"story_dns_servers_7_title" = "Cloudflare DNS";
+
+/* Seventh DNS servers story descriptions */
+"story_dns_servers_7_description" = "Also extremely popular, fast and reliable DNS server. Does not store your browsing history.";
+
+/* Seventh DNS servers story button title */
+"story_dns_servers_7_button_title" = "ENABLE";
+
+/* Eighth DNS servers story title */
+"story_dns_servers_8_title" = "For advanced users";
+
+/* Eighth DNS servers story descriptions */
+"story_dns_servers_8_description" = "You can manually add any DNS server.";
+
+/* Eighth DNS servers story button title */
+"story_dns_servers_8_button_title" = "GO TO SETTINGS";

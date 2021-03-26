@@ -18,14 +18,22 @@
 
 import UIKit
 
-class StoriesProgressView: UIView {
+final class StoriesProgressView: UIView {
+    
+    weak var delegate: StoriesProgressComponentViewDelegate? {
+        didSet {
+            components.forEach { $0.delegate = delegate }
+        }
+    }
+    
+    private let stackView = UIStackView()
+    private var components: [StoriesProgressComponentView] { stackView.arrangedSubviews.map { $0 as! StoriesProgressComponentView } }
     
     private let numberOfStories: Int
-    private let storyDuration: Float
-    private var currentSegment = 0
+    private let storyDuration: Double
+    private var currentComponentIndex = 0
     
-    
-    init(numberOfStories: Int, storyDuration: Float) {
+    init(numberOfStories: Int, storyDuration: Double) {
         self.numberOfStories = numberOfStories
         self.storyDuration = storyDuration
         super.init(frame: .zero)
@@ -39,20 +47,50 @@ class StoriesProgressView: UIView {
         setupUI()
     }
     
+    // MARK: - Public methods
+    
     func next() {
-        
+        if currentComponentIndex < numberOfStories - 1 {
+            let currentComponent = components[currentComponentIndex]
+            let nextComponent = components[currentComponentIndex + 1]
+             
+            currentComponent.setFullProgress()
+            nextComponent.startFromBeginning()
+            
+            currentComponentIndex += 1
+        }
     }
     
     func previous() {
-        
+        if currentComponentIndex > 0 {
+            let currentComponent = components[currentComponentIndex]
+            let previousComponent = components[currentComponentIndex - 1]
+             
+            currentComponent.setZeroProgress()
+            previousComponent.startFromBeginning()
+            
+            currentComponentIndex -= 1
+        }
     }
     
     func start() {
-        
+        let currentComponent = components[currentComponentIndex]
+        currentComponent.startFromBeginning()
+    }
+    
+    func pause() {
+        let currentComponent = components[currentComponentIndex]
+        currentComponent.pause()
+    }
+    
+    func resume() {
+        let currentComponent = components[currentComponentIndex]
+        currentComponent.resume()
     }
     
     func stop() {
-        
+        let currentComponent = components[currentComponentIndex]
+        currentComponent.setZeroProgress()
     }
 }
 
@@ -60,6 +98,22 @@ class StoriesProgressView: UIView {
 
 extension StoriesProgressView {
     fileprivate func setupUI() {
-        backgroundColor = .red
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = isIpadTrait ? 6.0 : 3.0
+        
+        for _ in 1...numberOfStories {
+            let componentView = StoriesProgressComponentView(animationDuration: storyDuration)
+            componentView.delegate = delegate
+            stackView.addArrangedSubview(componentView)
+        }
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }

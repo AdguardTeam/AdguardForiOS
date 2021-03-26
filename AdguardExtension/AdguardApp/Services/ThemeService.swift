@@ -76,7 +76,7 @@ import Foundation
     func setupSeparators(_ separators: [UIView])
 }
 
-class ThemeService : NSObject, ThemeServiceProtocol {
+final class ThemeService : NSObject, ThemeServiceProtocol {
     
     let configuration: ConfigurationServiceProtocol
     
