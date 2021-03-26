@@ -154,7 +154,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         view.layoutIfNeeded()
         
         let percent = 1.0 + resultSpace / contentView.frame.height
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5 * percent)
+        view.backgroundColor = UIColor.AdGuardColor.darkBackgroundColor.withAlphaComponent(0.5 * percent)
         
         if recognizer.state == .ended {
             if velocity.y < 0 {
