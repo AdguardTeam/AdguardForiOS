@@ -14,12 +14,18 @@
 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
-#import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+ */
 
-int main(int argc, char * argv[]) {
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
+    private let executor: IURLSchemeExecutor
+    
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
+    }
+    
+    func parse(_ url: URL) -> Bool {
+        // If host is nil than there is no data in URL (sdns://<DATA>)
+        guard let _ = url.host else { return false }
+        return executor.openDnsProvidersController(showLaunchScreen: false, urlAbsoluteString: url.absoluteString)
     }
 }

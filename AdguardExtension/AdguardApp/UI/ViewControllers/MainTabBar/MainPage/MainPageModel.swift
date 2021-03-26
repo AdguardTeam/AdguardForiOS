@@ -67,14 +67,14 @@ class MainPageModel: MainPageModelProtocol {
     // MARK: - private methods
     
     private func observeAntibanerState(){
-        let observer1 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateStartedUpdate, object: nil, queue: .main) { [weak self] (note) in
+        let observer1 = NotificationCenter.default.observe(name: .appDelegateStartedUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
             self?.delegate?.updateStarted()
         }
         observers.append(observer1)
         
-        let observer2 = NotificationCenter.default.observe(name: Notification.Name.AppDelegateFinishedUpdate, object: nil, queue: .main) { [weak self] (note) in
+        let observer2 = NotificationCenter.default.observe(name: .appDelegateFinishedUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
             
-            let updatedMetas: Int = (note.userInfo?[AppDelegateUpdatedFiltersKey] as? Int) ?? 0
+            let updatedMetas: Int = (note.userInfo?[Notification.Name.appDelegateUpdatedFiltersKey] as? Int) ?? 0
             
             let message: String?
             if updatedMetas > 0 {
@@ -88,14 +88,14 @@ class MainPageModel: MainPageModelProtocol {
         }
         observers.append(observer2)
         
-        let observer3 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateFailuredUpdate, object: nil, queue: .main) { [weak self] (note) in
+        let observer3 = NotificationCenter.default.observe(name: .appDelegateFailuredUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
             guard let self = self else { return }
             
             self.delegate?.updateFailed(error: ACLocalizedString("filter_updates_error", nil))
         }
         observers.append(observer3)
         
-        let observer4 = NotificationCenter.default.observe(name: NSNotification.Name.AppDelegateUpdateDidNotStarted, object: nil, queue: .main) { [weak self] (note) in
+        let observer4 = NotificationCenter.default.observe(name: .appDelegateUpdateDidNotStartedNotification, object: nil, queue: .main) { [weak self] (note) in
             guard let self = self else { return }
             DDLogInfo("(MainPageModel) update did not start")
             self.delegate?.updateFinished(message: String.localizedString("filters_noUpdates"))
