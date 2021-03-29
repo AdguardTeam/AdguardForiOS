@@ -25,6 +25,6 @@ extension AppDelegate {
         }
         
         UIApplication.shared.setMinimumBackgroundFetchInterval(interval)
-        DDLogInfo("(AppDelegateProcessor) Set background fetch interval: \(interval)")
+        DDLogInfo("(AppDelegate) Set background fetch interval: \(interval)")
     }
 }

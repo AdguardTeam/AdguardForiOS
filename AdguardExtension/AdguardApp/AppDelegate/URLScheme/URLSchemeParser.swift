@@ -64,10 +64,12 @@ struct URLSchemeParser: IURLSchemeParser {
     
     private let executor: IURLSchemeExecutor
     private let configurationService: ConfigurationServiceProtocol
+    private let purchaseService: PurchaseServiceProtocol
     
-    init(executor: IURLSchemeExecutor, configurationService: ConfigurationServiceProtocol) {
+    init(executor: IURLSchemeExecutor, configurationService: ConfigurationServiceProtocol, purchaseService: PurchaseServiceProtocol) {
         self.executor = executor
         self.configurationService = configurationService
+        self.purchaseService = purchaseService
     }
     
     func parse(url: URL) -> Bool {
@@ -103,9 +105,11 @@ struct URLSchemeParser: IURLSchemeParser {
         // Activate license by URL
         case (.urlScheme, .activateLicense):
             DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
-            let loginParser = OpenLoginControllerParser(executor: executor)
-            if loginParser.parse(url) {
-               return true
+            if !purchaseService.isProPurchased {
+                let loginParser = OpenLoginControllerParser(executor: executor)
+                if loginParser.parse(url) {
+                    return true
+                }
             }
             
             DDLogInfo("(URLSchemeParser) - update license from openUrl")
