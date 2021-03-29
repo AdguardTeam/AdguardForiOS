@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Save and select";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Save";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Cancel";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Delete";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Add a custom DNS server";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Edit custom DNS server";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "System Blocklist";
 

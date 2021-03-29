@@ -2744,15 +2744,15 @@
                                                             <outlet property="delegate" destination="ted-HM-sBA" id="4ds-u2-fbN"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-ii-xvc">
-                                                        <rect key="frame" x="32" y="67" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-ii-xvc" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="67" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="8sD-GI-gmK"/>
+                                                            <constraint firstAttribute="height" constant="1" id="8sD-GI-gmK"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-Hy-NdB" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="91.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="92" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="66k-NL-hIB">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -2796,15 +2796,15 @@
                                                     <constraint firstItem="Dfm-If-1AX" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="4wz-Hm-uhU"/>
                                                     <constraint firstItem="Dfm-If-1AX" firstAttribute="top" secondItem="sNF-Hy-NdB" secondAttribute="bottom" constant="16" id="6ZM-53-0ig"/>
                                                     <constraint firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" constant="32" id="90p-At-U7H"/>
+                                                    <constraint firstAttribute="trailing" secondItem="cMm-ii-xvc" secondAttribute="trailing" constant="24" id="C3K-iE-ncO"/>
+                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="24" id="E5r-95-Zmk"/>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" id="HEl-iu-RGP"/>
                                                     <constraint firstItem="sNF-Hy-NdB" firstAttribute="top" secondItem="cMm-ii-xvc" secondAttribute="bottom" constant="24" id="HLC-SV-Ds1"/>
                                                     <constraint firstItem="2A9-hH-oY3" firstAttribute="top" secondItem="oLm-6n-xCk" secondAttribute="top" constant="16" id="KRc-e4-NZi"/>
                                                     <constraint firstAttribute="trailing" secondItem="sNF-Hy-NdB" secondAttribute="trailing" constant="16" id="PcT-kY-y1f"/>
-                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="trailing" secondItem="PQ9-qY-pkX" secondAttribute="trailing" id="UAZ-Kx-ri6"/>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="leading" secondItem="2A9-hH-oY3" secondAttribute="leading" id="bUL-iD-qnW"/>
                                                     <constraint firstItem="2A9-hH-oY3" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="32" id="eH1-u9-nVg"/>
                                                     <constraint firstItem="cMm-ii-xvc" firstAttribute="top" secondItem="PQ9-qY-pkX" secondAttribute="bottom" id="ehq-mg-Omi"/>
-                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="leading" secondItem="PQ9-qY-pkX" secondAttribute="leading" id="mtI-f3-C1T"/>
                                                     <constraint firstAttribute="bottom" secondItem="Dfm-If-1AX" secondAttribute="bottom" constant="24" id="pIF-Of-74l"/>
                                                     <constraint firstAttribute="trailing" secondItem="Dfm-If-1AX" secondAttribute="trailing" constant="16" id="tJg-H1-hif"/>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="top" secondItem="2A9-hH-oY3" secondAttribute="bottom" constant="16" id="usu-IE-2Rt">
@@ -2858,6 +2858,7 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="49P-Mi-Ltn" id="Q6l-F4-p5R"/>
                         <outlet property="saveButton" destination="sNF-Hy-NdB" id="ir8-AG-MWE"/>
                         <outlet property="scrollContentView" destination="G4l-zc-GgF" id="fbd-GU-aA4"/>
+                        <outlet property="textViewUnderline" destination="cMm-ii-xvc" id="2Hx-hf-Vzw"/>
                         <outlet property="titleLabel" destination="uRk-qq-TJH" id="A2b-B7-WHZ"/>
                         <outlet property="ttlTextField" destination="PQ9-qY-pkX" id="e2f-5w-vaM"/>
                         <outletCollection property="separators" destination="cMm-ii-xvc" collectionClass="NSMutableArray" id="c1v-8v-1RZ"/>
@@ -2942,15 +2943,15 @@
                                                             <outlet property="delegate" destination="SZa-Ac-cS3" id="i1i-fb-KEg"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTT-mb-hJC">
-                                                        <rect key="frame" x="32" y="67" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTT-mb-hJC" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="67" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="aW1-pD-cMN"/>
+                                                            <constraint firstAttribute="height" constant="1" id="aW1-pD-cMN"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95J-h1-QgG" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="91.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="92" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Mxo-1J-qWI">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -2996,15 +2997,15 @@
                                                     <constraint firstItem="bTT-mb-hJC" firstAttribute="top" secondItem="7SC-Bu-Ro1" secondAttribute="bottom" id="EJd-zb-ecV"/>
                                                     <constraint firstItem="95J-h1-QgG" firstAttribute="top" secondItem="bTT-mb-hJC" secondAttribute="bottom" constant="24" id="JfH-kd-kwW"/>
                                                     <constraint firstAttribute="bottom" secondItem="WUY-Cq-SPm" secondAttribute="bottom" constant="24" id="KcE-cu-h5h"/>
-                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="trailing" secondItem="7SC-Bu-Ro1" secondAttribute="trailing" id="Qa3-n1-cMr"/>
                                                     <constraint firstItem="7SC-Bu-Ro1" firstAttribute="top" secondItem="A89-2M-jqd" secondAttribute="bottom" constant="16" id="RIV-zR-1wC">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="22"/>
                                                     </constraint>
                                                     <constraint firstItem="A89-2M-jqd" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="32" id="Tfh-n0-Txm"/>
                                                     <constraint firstItem="WUY-Cq-SPm" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="YP5-Xa-RQM"/>
                                                     <constraint firstItem="7SC-Bu-Ro1" firstAttribute="leading" secondItem="A89-2M-jqd" secondAttribute="leading" id="ezL-IV-7bz"/>
-                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="leading" secondItem="7SC-Bu-Ro1" secondAttribute="leading" id="gJK-7e-g92"/>
+                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="24" id="fmo-Dm-Evw"/>
                                                     <constraint firstAttribute="trailing" secondItem="95J-h1-QgG" secondAttribute="trailing" constant="16" id="h8l-3B-Zb7"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bTT-mb-hJC" secondAttribute="trailing" constant="24" id="kfv-d2-dPJ"/>
                                                     <constraint firstItem="A89-2M-jqd" firstAttribute="top" secondItem="FsP-cI-lzI" secondAttribute="top" constant="16" id="m9C-0O-Pk2"/>
                                                     <constraint firstAttribute="trailing" secondItem="WUY-Cq-SPm" secondAttribute="trailing" constant="16" id="rDW-Us-8uu"/>
                                                     <constraint firstItem="WUY-Cq-SPm" firstAttribute="top" secondItem="95J-h1-QgG" secondAttribute="bottom" constant="16" id="vVm-Bi-MLx"/>
@@ -3057,6 +3058,7 @@
                         <outlet property="saveButton" destination="95J-h1-QgG" id="jJ7-be-4ow"/>
                         <outlet property="scrollContentView" destination="r6T-bT-aoz" id="A4D-kM-fBB"/>
                         <outlet property="textFieldDesciptionLabel" destination="A89-2M-jqd" id="RxC-Nt-Png"/>
+                        <outlet property="textViewUnderline" destination="bTT-mb-hJC" id="nQn-Nb-slm"/>
                         <outlet property="upstreamTypeLabel" destination="bRu-jJ-qsB" id="nJB-Ns-oIG"/>
                         <outlet property="upstreamsTextField" destination="7SC-Bu-Ro1" id="5N5-yA-bXe"/>
                         <outletCollection property="separators" destination="bTT-mb-hJC" collectionClass="NSMutableArray" id="Obz-YI-Oce"/>

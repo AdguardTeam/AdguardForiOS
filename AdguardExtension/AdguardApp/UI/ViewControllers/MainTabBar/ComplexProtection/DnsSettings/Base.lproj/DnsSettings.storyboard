@@ -2330,15 +2330,15 @@
                                                             <outlet property="delegate" destination="rrq-5g-czh" id="5us-Ko-I5y"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-ls-3uJ">
-                                                        <rect key="frame" x="32" y="51" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-ls-3uJ" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="51" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="c26-BT-Zi3"/>
+                                                            <constraint firstAttribute="height" constant="1" id="c26-BT-Zi3"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS server address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dW3-zk-BPr" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="91.5" width="350" height="17"/>
+                                                        <rect key="frame" x="32" y="92" width="350" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2371,41 +2371,37 @@
                                                             <outlet property="delegate" destination="rrq-5g-czh" id="gcm-lc-rjc"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ko3-HW-YZi">
-                                                        <rect key="frame" x="32" y="146.5" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ko3-HW-YZi" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="147" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="Zrd-oN-roy"/>
+                                                            <constraint firstAttribute="height" constant="1" id="Zrd-oN-roy"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2l-7z-M2N" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="179" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="180" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="AzJ-5V-ZFs">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
-                                                        <state key="normal" title="SAVE AND SELECT">
+                                                        <state key="normal">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <state key="disabled">
-                                                            <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                         <connections>
-                                                            <action selector="addAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="vac-5U-Djv"/>
+                                                            <action selector="saveOrAddAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="aSn-pN-lub"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdD-yx-6ph" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="235" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="236" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="pRu-aG-zpL">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
-                                                        <state key="normal" title="CANCEL"/>
                                                         <attributedString key="userComments">
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
@@ -2413,27 +2409,27 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                         <connections>
-                                                            <action selector="cancelAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="LhE-O3-WPi"/>
+                                                            <action selector="cancelOrDeleteAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="Ntq-by-Sru"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="Ko3-HW-YZi" firstAttribute="trailing" secondItem="ZgC-4d-Peb" secondAttribute="trailing" id="FEx-5d-nfe"/>
+                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="24" id="2Qa-at-9R4"/>
+                                                    <constraint firstItem="Ko3-HW-YZi" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="24" id="46Q-HR-8Bl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pWW-ls-3uJ" secondAttribute="trailing" constant="24" id="5xN-Qa-T8a"/>
                                                     <constraint firstAttribute="trailing" secondItem="pzP-ns-QSS" secondAttribute="trailing" constant="32" id="GUM-Xp-eIF"/>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="trailing" secondItem="3BA-9g-I6J" secondAttribute="trailing" id="LR8-qP-EIC"/>
                                                     <constraint firstItem="3BA-9g-I6J" firstAttribute="leading" secondItem="pzP-ns-QSS" secondAttribute="leading" id="Lju-40-e3e"/>
                                                     <constraint firstItem="pzP-ns-QSS" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="32" id="Qef-jX-Tm7"/>
                                                     <constraint firstItem="ZdD-yx-6ph" firstAttribute="top" secondItem="B2l-7z-M2N" secondAttribute="bottom" constant="16" id="XDq-pT-ZYp"/>
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="YAi-vB-VA4"/>
                                                     <constraint firstItem="ZgC-4d-Peb" firstAttribute="leading" secondItem="dW3-zk-BPr" secondAttribute="leading" id="YRO-PD-VS4"/>
-                                                    <constraint firstItem="Ko3-HW-YZi" firstAttribute="leading" secondItem="ZgC-4d-Peb" secondAttribute="leading" id="a1G-g4-r3Y"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ko3-HW-YZi" secondAttribute="trailing" constant="24" id="ZXp-Vq-NSr"/>
                                                     <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" id="aiN-So-OEt"/>
                                                     <constraint firstAttribute="trailing" secondItem="B2l-7z-M2N" secondAttribute="trailing" constant="16" id="bq0-17-fUv"/>
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="top" secondItem="Ko3-HW-YZi" secondAttribute="bottom" constant="32" id="cRk-zo-3Nz">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="leading" secondItem="3BA-9g-I6J" secondAttribute="leading" id="dGP-qR-7Yn"/>
                                                     <constraint firstItem="dW3-zk-BPr" firstAttribute="leading" secondItem="3BA-9g-I6J" secondAttribute="leading" id="dfd-mH-VRX"/>
                                                     <constraint firstAttribute="trailing" secondItem="ZdD-yx-6ph" secondAttribute="trailing" constant="16" id="eWc-TT-VST"/>
                                                     <constraint firstItem="3BA-9g-I6J" firstAttribute="trailing" secondItem="pzP-ns-QSS" secondAttribute="trailing" id="eex-c5-PVc"/>
@@ -2463,8 +2459,8 @@
                                             <constraint firstAttribute="height" secondItem="5bW-bv-vhg" secondAttribute="height" priority="250" id="wqk-1F-L3z"/>
                                         </constraints>
                                     </scrollView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a custom DNS server" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lB-T7-fSO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="29" y="42" width="356" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3lB-T7-fSO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="29" y="42" width="356" height="0.0"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2506,19 +2502,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="kMp-cf-f1o"/>
                     <connections>
-                        <outlet property="addButton" destination="B2l-7z-M2N" id="2C5-9g-9I3"/>
-                        <outlet property="cancelButton" destination="ZdD-yx-6ph" id="tcB-Ju-cvA"/>
+                        <outlet property="cancelOrDeleteButton" destination="ZdD-yx-6ph" id="95G-aq-MW2"/>
                         <outlet property="contentView" destination="cSo-DU-Zta" id="arK-A7-0Vz"/>
                         <outlet property="dnsSeparator" destination="Ko3-HW-YZi" id="oiu-Ef-Weu"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="yOt-65-2su" id="SP7-t3-XV1"/>
                         <outlet property="nameField" destination="3BA-9g-I6J" id="OkL-FE-VKE"/>
+                        <outlet property="nameFieldSeparator" destination="pWW-ls-3uJ" id="4Nq-9R-WEM"/>
+                        <outlet property="saveOrAddButton" destination="B2l-7z-M2N" id="j2y-5j-zKG"/>
                         <outlet property="scrollContentView" destination="cSo-DU-Zta" id="FDb-A7-W4s"/>
                         <outlet property="titleLabel" destination="3lB-T7-fSO" id="zVb-8R-QjS"/>
                         <outlet property="upstreamsField" destination="ZgC-4d-Peb" id="o6x-Np-x0q"/>
                         <outletCollection property="themableLabels" destination="pzP-ns-QSS" collectionClass="NSMutableArray" id="CFN-wk-wWM"/>
                         <outletCollection property="themableLabels" destination="dW3-zk-BPr" collectionClass="NSMutableArray" id="fdv-x8-AkB"/>
-                        <outletCollection property="separators" destination="Ko3-HW-YZi" collectionClass="NSMutableArray" id="PBb-3U-xOS"/>
-                        <outletCollection property="separators" destination="pWW-ls-3uJ" collectionClass="NSMutableArray" id="n8O-sE-aKN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqV-df-Uiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3266,268 +3261,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehj-Jx-SeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5631.884057971015" y="-137.27678571428569"/>
-        </scene>
-        <!--New Dns Server Controller-->
-        <scene sceneID="mWe-nU-eSS">
-            <objects>
-                <viewController storyboardIdentifier="EditDnsServerController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="overFullScreen" id="hcw-1r-hqB" customClass="NewDnsServerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lF1-xa-hDx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCW-83-W1d">
-                                <rect key="frame" x="0.0" y="457.5" width="414" height="438.5"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="099-0c-yCe">
-                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="4Ec-BM-fJ9">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                            </constraint>
-                                            <constraint firstAttribute="height" constant="2" id="tUj-rb-DTa">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="3"/>
-                                            </constraint>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit custom DNS server" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f57-S8-QfF" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="42" width="366" height="29"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                        </variation>
-                                    </label>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="596-lg-yqi">
-                                        <rect key="frame" x="0.0" y="103" width="414" height="271"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1J-fm-o48" userLabel="Scroll Content View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="271"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4h-eF-AOa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="0.0" width="350" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        </variation>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBR-7g-DjT">
-                                                        <rect key="frame" x="32" y="33" width="350" height="18"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="SHk-aI-Khh">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
-                                                            </constraint>
-                                                        </constraints>
-                                                        <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                                        <attributedString key="userComments">
-                                                            <fragment content="(Add Custom Filter) url hint"/>
-                                                        </attributedString>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        </variation>
-                                                        <connections>
-                                                            <action selector="editingChanged:" destination="hcw-1r-hqB" eventType="editingChanged" id="883-So-4aL"/>
-                                                            <outlet property="delegate" destination="hcw-1r-hqB" id="xeD-Fd-J41"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ce-pv-RZx">
-                                                        <rect key="frame" x="32" y="51" width="350" height="0.5"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="eY2-3l-9f4"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS server address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seX-mS-3mU" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="83.5" width="350" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        </variation>
-                                                    </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="IP, sdns://, https:// or tls://" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Tx-Oh-hyu">
-                                                        <rect key="frame" x="32" y="116.5" width="350" height="18"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="D3e-Id-SQp">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
-                                                            </constraint>
-                                                        </constraints>
-                                                        <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                                        <attributedString key="userComments">
-                                                            <fragment content="(Add Custom Filter) url hint"/>
-                                                        </attributedString>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        </variation>
-                                                        <connections>
-                                                            <action selector="editingChanged:" destination="hcw-1r-hqB" eventType="editingChanged" id="Hve-pk-8Ji"/>
-                                                            <outlet property="delegate" destination="hcw-1r-hqB" id="hGp-q6-2Ad"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elc-gn-3jn">
-                                                        <rect key="frame" x="32" y="134.5" width="350" height="0.5"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="vmN-J9-4bG"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6e9-sP-YMb" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="151" width="382" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="5vK-cM-VVw">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                            </constraint>
-                                                        </constraints>
-                                                        <state key="normal" title="SAVE"/>
-                                                        <state key="disabled">
-                                                            <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        </variation>
-                                                        <connections>
-                                                            <action selector="saveAction:" destination="hcw-1r-hqB" eventType="touchUpInside" id="2an-ql-ngW"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSP-2V-qCA" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="207" width="382" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="wvK-Sf-bOd">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
-                                                            </constraint>
-                                                        </constraints>
-                                                        <state key="normal" title="DELETE SERVER"/>
-                                                        <attributedString key="userComments">
-                                                            <fragment content="(AddCustomFilterController) cancel button"/>
-                                                        </attributedString>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        </variation>
-                                                        <connections>
-                                                            <action selector="deleteAction:" destination="hcw-1r-hqB" eventType="touchUpInside" id="ePf-po-6y4"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="3Ce-pv-RZx" firstAttribute="leading" secondItem="mBR-7g-DjT" secondAttribute="leading" id="3Ak-5a-8rD"/>
-                                                    <constraint firstItem="6Tx-Oh-hyu" firstAttribute="trailing" secondItem="seX-mS-3mU" secondAttribute="trailing" id="3Es-Sd-hkg"/>
-                                                    <constraint firstItem="elc-gn-3jn" firstAttribute="trailing" secondItem="6Tx-Oh-hyu" secondAttribute="trailing" id="6Kw-Qf-KX8"/>
-                                                    <constraint firstItem="seX-mS-3mU" firstAttribute="trailing" secondItem="mBR-7g-DjT" secondAttribute="trailing" id="6ZL-tH-HWA"/>
-                                                    <constraint firstAttribute="bottom" secondItem="oSP-2V-qCA" secondAttribute="bottom" constant="24" id="9Ef-xl-GfZ"/>
-                                                    <constraint firstItem="seX-mS-3mU" firstAttribute="top" secondItem="3Ce-pv-RZx" secondAttribute="bottom" constant="32" id="9eG-pc-4mB"/>
-                                                    <constraint firstItem="elc-gn-3jn" firstAttribute="leading" secondItem="6Tx-Oh-hyu" secondAttribute="leading" id="E6v-G3-5tf"/>
-                                                    <constraint firstItem="3Ce-pv-RZx" firstAttribute="top" secondItem="mBR-7g-DjT" secondAttribute="bottom" id="Ih6-IU-maO"/>
-                                                    <constraint firstItem="mBR-7g-DjT" firstAttribute="trailing" secondItem="e4h-eF-AOa" secondAttribute="trailing" id="JBR-yD-z8X"/>
-                                                    <constraint firstAttribute="trailing" secondItem="6e9-sP-YMb" secondAttribute="trailing" constant="16" id="JyK-cl-d0j"/>
-                                                    <constraint firstItem="6e9-sP-YMb" firstAttribute="leading" secondItem="E1J-fm-o48" secondAttribute="leading" constant="16" id="N4K-SW-vvY"/>
-                                                    <constraint firstItem="oSP-2V-qCA" firstAttribute="top" secondItem="6e9-sP-YMb" secondAttribute="bottom" constant="16" id="PnW-m1-9dL"/>
-                                                    <constraint firstItem="mBR-7g-DjT" firstAttribute="top" secondItem="e4h-eF-AOa" secondAttribute="bottom" constant="16" id="Q8c-4n-5aC">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
-                                                    </constraint>
-                                                    <constraint firstAttribute="trailing" secondItem="oSP-2V-qCA" secondAttribute="trailing" constant="16" id="U5F-KG-YS4"/>
-                                                    <constraint firstItem="6e9-sP-YMb" firstAttribute="top" secondItem="elc-gn-3jn" secondAttribute="bottom" constant="16" id="VMe-Zl-X6f">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                                    </constraint>
-                                                    <constraint firstItem="oSP-2V-qCA" firstAttribute="leading" secondItem="E1J-fm-o48" secondAttribute="leading" constant="16" id="X0W-gt-S2g"/>
-                                                    <constraint firstItem="3Ce-pv-RZx" firstAttribute="trailing" secondItem="mBR-7g-DjT" secondAttribute="trailing" id="YCI-uW-zMG"/>
-                                                    <constraint firstItem="6Tx-Oh-hyu" firstAttribute="top" secondItem="seX-mS-3mU" secondAttribute="bottom" constant="16" id="aom-Ib-xBQ">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
-                                                    </constraint>
-                                                    <constraint firstItem="elc-gn-3jn" firstAttribute="top" secondItem="6Tx-Oh-hyu" secondAttribute="bottom" id="mUK-CX-Lb9"/>
-                                                    <constraint firstItem="e4h-eF-AOa" firstAttribute="leading" secondItem="E1J-fm-o48" secondAttribute="leading" constant="32" id="r5d-jR-kbb"/>
-                                                    <constraint firstItem="e4h-eF-AOa" firstAttribute="top" secondItem="E1J-fm-o48" secondAttribute="top" id="wi1-Lh-Ym4"/>
-                                                    <constraint firstItem="seX-mS-3mU" firstAttribute="leading" secondItem="mBR-7g-DjT" secondAttribute="leading" id="wz7-i6-Abo"/>
-                                                    <constraint firstItem="mBR-7g-DjT" firstAttribute="leading" secondItem="e4h-eF-AOa" secondAttribute="leading" id="x0q-An-o8o"/>
-                                                    <constraint firstItem="6Tx-Oh-hyu" firstAttribute="leading" secondItem="seX-mS-3mU" secondAttribute="leading" id="ycT-ju-Rwi"/>
-                                                    <constraint firstAttribute="trailing" secondItem="e4h-eF-AOa" secondAttribute="trailing" constant="32" id="z4c-sr-Zow"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="E1J-fm-o48" secondAttribute="bottom" id="NNb-mE-acg"/>
-                                            <constraint firstItem="E1J-fm-o48" firstAttribute="leading" secondItem="596-lg-yqi" secondAttribute="leading" id="SSo-Te-Slu"/>
-                                            <constraint firstAttribute="height" secondItem="E1J-fm-o48" secondAttribute="height" priority="250" id="Sr5-dr-fcv"/>
-                                            <constraint firstAttribute="trailing" secondItem="E1J-fm-o48" secondAttribute="trailing" id="UQD-Ci-NjZ"/>
-                                            <constraint firstItem="E1J-fm-o48" firstAttribute="top" secondItem="596-lg-yqi" secondAttribute="top" id="kc5-b2-zrp"/>
-                                        </constraints>
-                                    </scrollView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="099-0c-yCe" firstAttribute="centerX" secondItem="fCW-83-W1d" secondAttribute="centerX" id="3eN-Kj-42D"/>
-                                    <constraint firstItem="f57-S8-QfF" firstAttribute="leading" secondItem="fCW-83-W1d" secondAttribute="leading" constant="24" id="5IM-0X-PEs"/>
-                                    <constraint firstItem="099-0c-yCe" firstAttribute="top" secondItem="fCW-83-W1d" secondAttribute="top" constant="8" id="C8b-HE-7mc"/>
-                                    <constraint firstAttribute="bottom" secondItem="596-lg-yqi" secondAttribute="bottom" id="DeU-I7-EQH"/>
-                                    <constraint firstItem="596-lg-yqi" firstAttribute="leading" secondItem="fCW-83-W1d" secondAttribute="leading" id="LVP-wx-rgr"/>
-                                    <constraint firstAttribute="trailing" secondItem="596-lg-yqi" secondAttribute="trailing" id="PPM-Is-ppC"/>
-                                    <constraint firstItem="f57-S8-QfF" firstAttribute="top" secondItem="099-0c-yCe" secondAttribute="bottom" constant="32" id="Z7F-F5-D3A">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                    </constraint>
-                                    <constraint firstItem="596-lg-yqi" firstAttribute="top" secondItem="f57-S8-QfF" secondAttribute="bottom" constant="32" id="aWQ-ma-fdA">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                    </constraint>
-                                    <constraint firstItem="E1J-fm-o48" firstAttribute="width" secondItem="fCW-83-W1d" secondAttribute="width" id="bg5-JL-NCs"/>
-                                    <constraint firstAttribute="trailing" secondItem="f57-S8-QfF" secondAttribute="trailing" constant="24" id="uj3-xz-Pdr"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Ocf-xA-sn4"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="fCW-83-W1d" firstAttribute="leading" secondItem="Ocf-xA-sn4" secondAttribute="leading" id="QOZ-hC-vgN"/>
-                            <constraint firstAttribute="trailing" secondItem="fCW-83-W1d" secondAttribute="trailing" id="e15-NH-mXJ"/>
-                            <constraint firstItem="fCW-83-W1d" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ocf-xA-sn4" secondAttribute="top" constant="20" id="fnf-mI-niT"/>
-                            <constraint firstAttribute="bottom" secondItem="fCW-83-W1d" secondAttribute="bottom" id="rOD-tm-UZd"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Lac-xw-w8S"/>
-                    <connections>
-                        <outlet property="contentView" destination="fCW-83-W1d" id="gJb-6u-jkS"/>
-                        <outlet property="deleteButton" destination="oSP-2V-qCA" id="Jcg-ML-kxJ"/>
-                        <outlet property="dnsSeparator" destination="elc-gn-3jn" id="Mym-Q2-BDy"/>
-                        <outlet property="keyboardHeightLayoutConstraint" destination="rOD-tm-UZd" id="IHp-dl-b0f"/>
-                        <outlet property="nameField" destination="mBR-7g-DjT" id="LEp-rB-OjV"/>
-                        <outlet property="saveButton" destination="6e9-sP-YMb" id="JLp-uK-pwG"/>
-                        <outlet property="scrollContentView" destination="fCW-83-W1d" id="AE5-pi-j2H"/>
-                        <outlet property="titleLabel" destination="f57-S8-QfF" id="nuE-qj-x0b"/>
-                        <outlet property="upstreamsField" destination="6Tx-Oh-hyu" id="9EU-gZ-KIV"/>
-                        <outletCollection property="themableLabels" destination="seX-mS-3mU" collectionClass="NSMutableArray" id="hNZ-ox-C1H"/>
-                        <outletCollection property="themableLabels" destination="e4h-eF-AOa" collectionClass="NSMutableArray" id="7KD-St-zqt"/>
-                        <outletCollection property="separators" destination="elc-gn-3jn" collectionClass="NSMutableArray" id="2vn-6w-bHv"/>
-                        <outletCollection property="separators" destination="3Ce-pv-RZx" collectionClass="NSMutableArray" id="RNu-XL-nnd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Sa-nl-JqT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="987-74-r93">
-                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <action selector="toggleEnableSwitch:" destination="So5-wP-aAQ" eventType="valueChanged" id="B5q-IQ-uaX"/>
-                    </connections>
-                </switch>
-            </objects>
-            <point key="canvasLocation" x="5632" y="734"/>
         </scene>
         <!--License-->
         <scene sceneID="YTP-Ek-qXw">

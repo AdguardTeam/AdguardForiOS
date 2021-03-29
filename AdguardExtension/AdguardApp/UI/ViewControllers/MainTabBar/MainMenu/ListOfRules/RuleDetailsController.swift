@@ -22,7 +22,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ruleTextView: UITextView!
-    @IBOutlet weak var textUnderline: UIView!
+    @IBOutlet weak var textUnderline: TextFieldIndicatorView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -85,7 +85,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - UITExtViewDelegate
+    // MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard text != "\n" else {
@@ -105,6 +105,14 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
             return false
         }
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textUnderline.state = .enabled
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textUnderline.state = .disabled
     }
     
     // MARK: - private methods

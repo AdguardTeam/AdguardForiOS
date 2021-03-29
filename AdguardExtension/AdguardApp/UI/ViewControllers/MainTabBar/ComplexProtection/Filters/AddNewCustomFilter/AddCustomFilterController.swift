@@ -30,6 +30,7 @@ class AddCustomFilterController: BottomAlertController {
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -64,6 +65,7 @@ class AddCustomFilterController: BottomAlertController {
         }
         
         updateTheme()
+        ruleTextChanged(urlTextField)
     }
     
     deinit {
@@ -75,6 +77,13 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = enabled
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
     
     // MARK: - Actions
     

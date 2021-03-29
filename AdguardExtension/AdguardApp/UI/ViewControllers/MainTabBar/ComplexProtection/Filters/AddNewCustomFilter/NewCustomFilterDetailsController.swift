@@ -64,6 +64,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -129,6 +130,14 @@ class NewCustomFilterDetailsController : BottomAlertController {
             return false
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
     }
     
     // MARK: - private methods

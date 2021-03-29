@@ -29,6 +29,7 @@ class UpstreamsController: BottomAlertController {
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var upstreamsTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -97,6 +98,14 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
     }
     
     // MARK: - Private methods

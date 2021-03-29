@@ -1366,15 +1366,15 @@
                                             <outlet property="delegate" destination="QSc-py-R8e" id="eFy-nh-B6V"/>
                                         </connections>
                                     </textField>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAJ-10-TeO">
-                                        <rect key="frame" x="25" y="161" width="364" height="0.5"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAJ-10-TeO" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="161" width="366" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="0.5" id="8LF-mv-Ljr"/>
+                                            <constraint firstAttribute="height" constant="1" id="8LF-mv-Ljr"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rj-wD-aeH" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="181.5" width="382" height="40"/>
+                                        <rect key="frame" x="16" y="182" width="382" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="aZB-vk-So3"/>
                                         </constraints>
@@ -1412,18 +1412,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lAJ-10-TeO" secondAttribute="trailing" constant="25" id="2VZ-nI-Yyk"/>
+                                    <constraint firstAttribute="trailing" secondItem="lAJ-10-TeO" secondAttribute="trailing" constant="24" id="2VZ-nI-Yyk"/>
                                     <constraint firstItem="hoI-YR-JcD" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="16" id="CIn-Kv-w9U"/>
                                     <constraint firstItem="1rj-wD-aeH" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="16" id="FOn-J3-C2a"/>
-                                    <constraint firstAttribute="trailing" secondItem="M4r-q5-RXv" secondAttribute="trailing" constant="25" id="FnA-KI-qks"/>
+                                    <constraint firstAttribute="trailing" secondItem="M4r-q5-RXv" secondAttribute="trailing" constant="32" id="FnA-KI-qks"/>
                                     <constraint firstItem="M4r-q5-RXv" firstAttribute="top" secondItem="y8j-ib-ZgR" secondAttribute="bottom" constant="32" id="GAs-Y2-PAS">
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="1rj-wD-aeH" secondAttribute="trailing" constant="16" id="IV8-4y-KhC"/>
                                     <constraint firstItem="hoI-YR-JcD" firstAttribute="top" secondItem="1rj-wD-aeH" secondAttribute="bottom" constant="16" id="IhF-LA-rvg"/>
-                                    <constraint firstItem="lAJ-10-TeO" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="25" id="SzP-lg-U2t"/>
+                                    <constraint firstItem="lAJ-10-TeO" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="24" id="SzP-lg-U2t"/>
                                     <constraint firstItem="1rj-wD-aeH" firstAttribute="top" secondItem="lAJ-10-TeO" secondAttribute="bottom" constant="20" id="Tph-cc-4eG"/>
-                                    <constraint firstAttribute="trailing" secondItem="y8j-ib-ZgR" secondAttribute="trailing" constant="25" id="UhJ-Pz-Vzy"/>
+                                    <constraint firstAttribute="trailing" secondItem="y8j-ib-ZgR" secondAttribute="trailing" constant="32" id="UhJ-Pz-Vzy"/>
                                     <constraint firstItem="ShZ-0e-9AG" firstAttribute="top" secondItem="M4r-q5-RXv" secondAttribute="bottom" constant="15" id="XzZ-Mr-GKf"/>
                                     <constraint firstAttribute="trailing" secondItem="hoI-YR-JcD" secondAttribute="trailing" constant="16" id="b1P-DM-MF0"/>
                                     <constraint firstItem="y8j-ib-ZgR" firstAttribute="top" secondItem="GoR-QU-5cA" secondAttribute="bottom" constant="32" id="cSz-IT-VWv">
@@ -1435,8 +1435,8 @@
                                     <constraint firstItem="ShZ-0e-9AG" firstAttribute="leading" secondItem="y8j-ib-ZgR" secondAttribute="leading" id="oce-Hc-Q8S"/>
                                     <constraint firstItem="GoR-QU-5cA" firstAttribute="top" secondItem="dgc-l5-iRo" secondAttribute="top" constant="8" id="pb3-ao-7fO"/>
                                     <constraint firstItem="ShZ-0e-9AG" firstAttribute="trailing" secondItem="y8j-ib-ZgR" secondAttribute="trailing" id="rjy-iP-whs"/>
-                                    <constraint firstItem="M4r-q5-RXv" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="25" id="tDo-wA-NZk"/>
-                                    <constraint firstItem="y8j-ib-ZgR" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="25" id="xba-Tp-3Pv"/>
+                                    <constraint firstItem="M4r-q5-RXv" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="32" id="tDo-wA-NZk"/>
+                                    <constraint firstItem="y8j-ib-ZgR" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="32" id="xba-Tp-3Pv"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1456,6 +1456,7 @@
                         <outlet property="descriptionLabel" destination="M4r-q5-RXv" id="MUm-fV-bM4"/>
                         <outlet property="domainNameTextField" destination="ShZ-0e-9AG" id="u9C-mz-uFM"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="15l-j3-GWo" id="Kpk-G9-D5S"/>
+                        <outlet property="textViewUnderline" destination="lAJ-10-TeO" id="F0o-a8-dZg"/>
                         <outlet property="titleLabel" destination="y8j-ib-ZgR" id="vdv-Ys-YlZ"/>
                         <outletCollection property="themableLabels" destination="M4r-q5-RXv" collectionClass="NSMutableArray" id="fQ1-zw-avy"/>
                     </connections>

@@ -23,6 +23,7 @@ class EditBlockRequestController: BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var domainNameTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var backButton: RoundRectButton!
@@ -74,6 +75,14 @@ class EditBlockRequestController: BottomAlertController {
             guard let self = self else { return }
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
     }
     
     // MARK: - private methods

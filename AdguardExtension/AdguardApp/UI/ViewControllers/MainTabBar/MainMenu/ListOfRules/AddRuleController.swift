@@ -33,6 +33,7 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var editCaption: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -147,6 +148,14 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
             return false
         }
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textViewUnderline.state = .disabled
     }
 
     // MARK: - private methods

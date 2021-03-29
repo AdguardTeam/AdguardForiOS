@@ -575,15 +575,15 @@
                                                             <outlet property="delegate" destination="z6B-hl-n8M" id="QMA-rw-yEL"/>
                                                         </connections>
                                                     </textView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qz4-TZ-Jh0">
-                                                        <rect key="frame" x="32" y="68.5" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qz4-TZ-Jh0" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="68.5" width="366" height="1"/>
                                                         <color key="backgroundColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="3QW-ay-mn2"/>
+                                                            <constraint firstAttribute="height" constant="1" id="3QW-ay-mn2"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvs-mI-vEr">
-                                                        <rect key="frame" x="16" y="93" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="93.5" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="brZ-dP-kXb">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -632,15 +632,15 @@
                                                     <constraint firstItem="Bvs-mI-vEr" firstAttribute="leading" secondItem="FNd-Na-vMx" secondAttribute="leading" constant="16" id="MgW-Cu-bbI"/>
                                                     <constraint firstAttribute="trailing" secondItem="Bvs-mI-vEr" secondAttribute="trailing" constant="16" id="QHK-Fv-VAk"/>
                                                     <constraint firstItem="Tei-uI-6Gr" firstAttribute="top" secondItem="Bvs-mI-vEr" secondAttribute="bottom" constant="16" id="UGT-aI-KWT"/>
-                                                    <constraint firstItem="qz4-TZ-Jh0" firstAttribute="leading" secondItem="P3J-h6-fpx" secondAttribute="leading" id="WAD-Lg-TwV"/>
                                                     <constraint firstItem="Tei-uI-6Gr" firstAttribute="leading" secondItem="FNd-Na-vMx" secondAttribute="leading" constant="16" id="XKg-vS-eZL"/>
                                                     <constraint firstItem="Bvs-mI-vEr" firstAttribute="top" secondItem="qz4-TZ-Jh0" secondAttribute="bottom" constant="24" id="ZI2-rk-TjF">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
                                                     <constraint firstAttribute="trailing" secondItem="Tei-uI-6Gr" secondAttribute="trailing" constant="16" id="dAc-Qs-5K7"/>
                                                     <constraint firstItem="P3J-h6-fpx" firstAttribute="trailing" secondItem="x7r-Ln-XiZ" secondAttribute="trailing" id="e5l-0X-11b"/>
-                                                    <constraint firstItem="qz4-TZ-Jh0" firstAttribute="trailing" secondItem="P3J-h6-fpx" secondAttribute="trailing" id="hEP-b4-kFn"/>
+                                                    <constraint firstItem="qz4-TZ-Jh0" firstAttribute="leading" secondItem="FNd-Na-vMx" secondAttribute="leading" constant="24" id="fNX-91-JWP"/>
                                                     <constraint firstItem="x7r-Ln-XiZ" firstAttribute="leading" secondItem="FNd-Na-vMx" secondAttribute="leading" constant="32" id="jst-qF-1Pn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qz4-TZ-Jh0" secondAttribute="trailing" constant="24" id="qmg-fh-Gdy"/>
                                                     <constraint firstItem="P3J-h6-fpx" firstAttribute="leading" secondItem="x7r-Ln-XiZ" secondAttribute="leading" id="rdL-lt-HNc"/>
                                                 </constraints>
                                             </view>
@@ -763,15 +763,15 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovF-SA-Xg2">
-                                                        <rect key="frame" x="32" y="97" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovF-SA-Xg2" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="49" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="J1L-VW-pXl"/>
+                                                            <constraint firstAttribute="height" constant="1" id="J1L-VW-pXl"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCd-gA-rXS">
-                                                        <rect key="frame" x="16" y="121.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="74" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="j2e-jc-CQV">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -836,18 +836,18 @@
                                                     <constraint firstItem="cEh-Sj-zqF" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="top" constant="8" id="SVK-D8-7yE"/>
                                                     <constraint firstItem="BIv-Tu-Ma6" firstAttribute="trailing" secondItem="oZN-ZW-fP8" secondAttribute="trailing" id="TbQ-5M-9bI"/>
                                                     <constraint firstItem="oZN-ZW-fP8" firstAttribute="leading" secondItem="wr2-gy-Jd9" secondAttribute="leading" constant="32" id="ZAk-qJ-3ty"/>
-                                                    <constraint firstItem="ovF-SA-Xg2" firstAttribute="leading" secondItem="BIv-Tu-Ma6" secondAttribute="leading" id="akN-oa-wCs"/>
                                                     <constraint firstItem="cEh-Sj-zqF" firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" id="eLp-cM-zmE"/>
                                                     <constraint firstItem="cEh-Sj-zqF" firstAttribute="leading" secondItem="BIv-Tu-Ma6" secondAttribute="leading" id="kDZ-0i-jN1"/>
                                                     <constraint firstItem="fCd-gA-rXS" firstAttribute="top" secondItem="ovF-SA-Xg2" secondAttribute="bottom" constant="24" id="kp1-aW-DYy">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
+                                                    <constraint firstItem="ovF-SA-Xg2" firstAttribute="leading" secondItem="wr2-gy-Jd9" secondAttribute="leading" constant="24" id="lw8-ez-NUW"/>
                                                     <constraint firstItem="cEh-Sj-zqF" firstAttribute="bottom" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="qoS-B0-Atp"/>
                                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="leading" secondItem="fCd-gA-rXS" secondAttribute="leading" id="rFr-E1-Twr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ovF-SA-Xg2" secondAttribute="trailing" constant="24" id="sCu-pa-flQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="oZN-ZW-fP8" secondAttribute="trailing" constant="32" id="sHO-tK-GCY"/>
                                                     <constraint firstItem="oZN-ZW-fP8" firstAttribute="top" secondItem="wr2-gy-Jd9" secondAttribute="top" id="slI-1R-NIG"/>
                                                     <constraint firstAttribute="bottom" secondItem="5eU-q4-Xed" secondAttribute="bottom" constant="24" id="tAa-uv-cT8"/>
-                                                    <constraint firstItem="ovF-SA-Xg2" firstAttribute="trailing" secondItem="BIv-Tu-Ma6" secondAttribute="trailing" id="urZ-Fz-5LE"/>
                                                     <constraint firstItem="ovF-SA-Xg2" firstAttribute="top" secondItem="BIv-Tu-Ma6" secondAttribute="bottom" id="v4M-c5-Qu7"/>
                                                     <constraint firstItem="5eU-q4-Xed" firstAttribute="top" secondItem="fCd-gA-rXS" secondAttribute="bottom" constant="16" id="y5O-Ke-w4I"/>
                                                 </constraints>
@@ -898,6 +898,7 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="WiU-BS-ehO" id="2Os-oZ-tLG"/>
                         <outlet property="rulePlaceholderLabel" destination="cEh-Sj-zqF" id="JXR-fF-VH2"/>
                         <outlet property="ruleTextView" destination="BIv-Tu-Ma6" id="uH8-XQ-IPM"/>
+                        <outlet property="textViewUnderline" destination="ovF-SA-Xg2" id="ax1-E1-vYo"/>
                         <outlet property="titleLabel" destination="g8X-4z-jzB" id="Pa0-Xu-axm"/>
                         <outletCollection property="themableLabels" destination="oZN-ZW-fP8" collectionClass="NSMutableArray" id="a7m-jX-rww"/>
                     </connections>

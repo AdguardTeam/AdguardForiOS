@@ -1638,15 +1638,15 @@
                                                             <outlet property="delegate" destination="iY4-7b-KHH" id="9pp-9h-ViR"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zco-NT-vBm">
-                                                        <rect key="frame" x="32" y="51" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zco-NT-vBm" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="51" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="OKf-24-CHb"/>
+                                                            <constraint firstAttribute="height" constant="1" id="OKf-24-CHb"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aS-KK-N0G">
-                                                        <rect key="frame" x="32" y="92.5" width="350" height="30"/>
+                                                        <rect key="frame" x="32" y="93" width="350" height="30"/>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
@@ -1680,7 +1680,6 @@
                                                     <constraint firstAttribute="bottom" secondItem="mEm-ll-QZR" secondAttribute="bottom" constant="24" id="44T-or-81u"/>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="top" secondItem="tDs-5f-dGf" secondAttribute="bottom" id="6vQ-9H-4jB"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" id="7ES-bD-aHs"/>
-                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="trailing" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="7JU-Zr-JjM"/>
                                                     <constraint firstItem="mEm-ll-QZR" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="8Vp-b4-QrM"/>
                                                     <constraint firstItem="tDs-5f-dGf" firstAttribute="centerY" secondItem="RJU-32-r8h" secondAttribute="centerY" id="BNy-bm-fs6"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="leading" secondItem="Cyn-cw-Zrm" secondAttribute="leading" id="DjU-ic-knU"/>
@@ -1692,11 +1691,11 @@
                                                     <constraint firstItem="tDs-5f-dGf" firstAttribute="trailing" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="Mbs-d6-LXn"/>
                                                     <constraint firstItem="RJU-32-r8h" firstAttribute="leading" secondItem="zcB-eh-Ou4" secondAttribute="leading" id="PX2-wh-RF8"/>
                                                     <constraint firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" constant="32" id="PkY-mZ-DsS"/>
-                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="leading" secondItem="Cyn-cw-Zrm" secondAttribute="leading" id="SGs-cg-zqn"/>
                                                     <constraint firstItem="tDs-5f-dGf" firstAttribute="leading" secondItem="RJU-32-r8h" secondAttribute="trailing" constant="5" id="YuO-NP-LL8"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="top" secondItem="Cyn-cw-Zrm" secondAttribute="bottom" constant="16" id="b3E-s0-VPn">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="22"/>
                                                     </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="zco-NT-vBm" secondAttribute="trailing" constant="24" id="d21-6u-z5b"/>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="leading" secondItem="RJU-32-r8h" secondAttribute="leading" id="dAf-q9-z0U"/>
                                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="top" secondItem="t8x-PU-hFK" secondAttribute="bottom" constant="24" id="dsH-aw-gew">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
@@ -1706,6 +1705,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
                                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="m8G-1h-1n1"/>
+                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="24" id="oXv-Bf-gMg"/>
                                                     <constraint firstAttribute="trailing" secondItem="mEm-ll-QZR" secondAttribute="trailing" constant="16" id="omO-od-nuo"/>
                                                     <constraint firstItem="Cyn-cw-Zrm" firstAttribute="top" secondItem="uWd-ZI-H88" secondAttribute="top" id="rXi-RV-lal"/>
                                                     <constraint firstItem="zco-NT-vBm" firstAttribute="top" secondItem="zcB-eh-Ou4" secondAttribute="bottom" id="sSE-rr-iRT"/>
@@ -1762,6 +1762,7 @@
                         <outlet property="name" destination="zcB-eh-Ou4" id="jmi-1i-u3J"/>
                         <outlet property="newFilterTitle" destination="NsT-wt-1hd" id="iin-wz-aeA"/>
                         <outlet property="rulesCount" destination="tDs-5f-dGf" id="lCX-Yz-OIf"/>
+                        <outlet property="textViewUnderline" destination="zco-NT-vBm" id="Owy-Ny-vvB"/>
                         <outletCollection property="themableLabels" destination="tDs-5f-dGf" collectionClass="NSMutableArray" id="997-nl-ZtB"/>
                         <outletCollection property="themableLabels" destination="RJU-32-r8h" collectionClass="NSMutableArray" id="bzX-FW-T4D"/>
                     </connections>
@@ -1980,15 +1981,15 @@
                                                             <outlet property="delegate" destination="GjI-Il-1rN" id="c98-ub-W24"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rt-gr-8A6">
-                                                        <rect key="frame" x="32" y="51" width="350" height="0.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rt-gr-8A6" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="51" width="366" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="0.5" id="Lbe-kc-p8W"/>
+                                                            <constraint firstAttribute="height" constant="1" id="Lbe-kc-p8W"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nch-wu-mKC" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="75.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="76" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="i3H-wW-sb3">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -2027,6 +2028,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstItem="9rt-gr-8A6" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="24" id="0WB-wE-o3F"/>
                                                     <constraint firstAttribute="trailing" secondItem="Z16-OR-tjl" secondAttribute="trailing" constant="32" id="7wN-kc-WCE"/>
                                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="top" secondItem="oG1-6A-zBh" secondAttribute="top" id="Bxl-et-pzZ"/>
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="trailing" secondItem="Z16-OR-tjl" secondAttribute="trailing" id="EIP-4M-vkW"/>
@@ -2035,16 +2037,15 @@
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="top" secondItem="Z16-OR-tjl" secondAttribute="bottom" constant="16" id="R0f-Uu-rqR">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="22"/>
                                                     </constraint>
-                                                    <constraint firstItem="9rt-gr-8A6" firstAttribute="leading" secondItem="Fwl-LI-5Fu" secondAttribute="leading" id="Sbl-N7-8u3"/>
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="leading" secondItem="Z16-OR-tjl" secondAttribute="leading" id="U6f-yQ-8yO"/>
                                                     <constraint firstAttribute="trailing" secondItem="nch-wu-mKC" secondAttribute="trailing" constant="16" id="WYc-DB-CgL"/>
                                                     <constraint firstItem="9rt-gr-8A6" firstAttribute="top" secondItem="Fwl-LI-5Fu" secondAttribute="bottom" id="XDn-qo-IRL"/>
-                                                    <constraint firstItem="9rt-gr-8A6" firstAttribute="trailing" secondItem="Fwl-LI-5Fu" secondAttribute="trailing" id="cAl-tf-aaB"/>
                                                     <constraint firstItem="nch-wu-mKC" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="dRM-r7-Lrc"/>
                                                     <constraint firstItem="nch-wu-mKC" firstAttribute="top" secondItem="9rt-gr-8A6" secondAttribute="bottom" constant="24" id="iG4-ud-Z2F">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
                                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="32" id="j14-jb-Gg5"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9rt-gr-8A6" secondAttribute="trailing" constant="24" id="jlC-nf-hv3"/>
                                                     <constraint firstAttribute="bottom" secondItem="OpB-AR-Og7" secondAttribute="bottom" constant="24" id="qAD-Yc-Gk3"/>
                                                     <constraint firstAttribute="trailing" secondItem="OpB-AR-Og7" secondAttribute="trailing" constant="16" id="y9g-te-YAc"/>
                                                 </constraints>
@@ -2106,6 +2107,7 @@
                         <outlet property="contentView" destination="haK-hy-gSQ" id="Jen-p8-V8h"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="5AJ-Bq-SNY" id="nmf-Ol-Qvl"/>
                         <outlet property="nextButton" destination="nch-wu-mKC" id="UQb-xc-grG"/>
+                        <outlet property="textViewUnderline" destination="9rt-gr-8A6" id="KIv-GD-dfj"/>
                         <outlet property="titleLabel" destination="3WM-jW-br8" id="GtS-rf-zdn"/>
                         <outlet property="urlTextField" destination="Fwl-LI-5Fu" id="jrV-59-Gt7"/>
                         <outletCollection property="themableLabels" destination="Z16-OR-tjl" collectionClass="NSMutableArray" id="bW8-cO-TAQ"/>

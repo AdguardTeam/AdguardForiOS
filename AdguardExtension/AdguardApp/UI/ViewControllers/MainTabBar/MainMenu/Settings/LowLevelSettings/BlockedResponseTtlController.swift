@@ -29,6 +29,7 @@ class BlockedResponseTtlController: BottomAlertController {
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var ttlTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -78,6 +79,14 @@ class BlockedResponseTtlController: BottomAlertController {
     
     @IBAction func ttlChangedAction(_ sender: UITextField) {
         updateSaveButton()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
     }
     
 
