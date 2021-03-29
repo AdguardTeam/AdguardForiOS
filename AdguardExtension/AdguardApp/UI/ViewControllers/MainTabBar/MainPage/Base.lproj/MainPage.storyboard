@@ -1015,10 +1015,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Roe-x7-9e8" firstAttribute="top" secondItem="Oez-VU-4fi" secondAttribute="bottom" constant="1" id="1PF-dM-ZyV"/>
                                     <constraint firstItem="63U-tt-p8p" firstAttribute="top" secondItem="gu3-as-BZN" secondAttribute="bottom" id="3Ae-2B-ynN"/>
                                     <constraint firstItem="5pX-mg-2fq" firstAttribute="top" secondItem="Nel-Z3-aJ4" secondAttribute="bottom" constant="32" id="5uy-tg-gzR">
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
+                                    <constraint firstItem="gDb-ep-jQg" firstAttribute="top" secondItem="gu3-as-BZN" secondAttribute="bottom" constant="1" id="6Gd-5a-ggD"/>
                                     <constraint firstAttribute="trailing" secondItem="gDb-ep-jQg" secondAttribute="trailing" id="7HH-GM-VMZ"/>
                                     <constraint firstAttribute="trailing" secondItem="VRw-EP-ZlF" secondAttribute="trailing" id="7gs-qB-bsD"/>
                                     <constraint firstItem="VRw-EP-ZlF" firstAttribute="top" secondItem="TXG-kf-jTm" secondAttribute="bottom" id="9eO-o5-IXZ"/>
