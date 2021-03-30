@@ -11,7 +11,6 @@ extension AppDelegate {
     
     private func recursiveThemeUpdate(vc: UIViewController?) {
         if vc == nil { return }
-        print("TEST - ", vc)
         recursiveThemeUpdate(vc: vc?.presentedViewController)
         recursiveChieldThemeUpdate(chields: vc?.children)
         (vc as? ThemableProtocol)?.themeNeedUpdate()
@@ -19,9 +18,7 @@ extension AppDelegate {
     
     private func recursiveChieldThemeUpdate(chields: [UIViewController]?) {
         if let chields = chields, chields.isEmpty { return }
-        print("TEST - chields", chields)
         chields?.forEach {
-            print("TEST - chield", $0)
             recursiveChieldThemeUpdate(chields: $0.children)
             ($0 as? ThemableProtocol)?.themeNeedUpdate()
         }
