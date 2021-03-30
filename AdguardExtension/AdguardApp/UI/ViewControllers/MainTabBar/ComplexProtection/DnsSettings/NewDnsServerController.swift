@@ -48,8 +48,6 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
     
-    private var notificationToken: NotificationToken?
-    
     private let textFieldCharectersLimit = 50
     
     // MARK: - services
@@ -64,11 +62,7 @@ class NewDnsServerController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
+
         if provider != nil {
             nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
@@ -272,5 +266,11 @@ class NewDnsServerController: BottomAlertController {
         
         addButton?.isEnabled = enabled
         saveButton?.isEnabled = enabled
+    }
+}
+
+extension NewDnsServerController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

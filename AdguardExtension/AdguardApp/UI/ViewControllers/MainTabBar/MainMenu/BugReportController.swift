@@ -50,8 +50,6 @@ class BugReportController: UIViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let supportService: SupportServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var themeToken: NotificationToken?
-    
     var reportType: ReportType = .bugReport
     
     override func viewDidLoad() {
@@ -62,10 +60,7 @@ class BugReportController: UIViewController {
         setupToHideKeyboardOnTapOnView() // Tap anywhere to hide keyboard
         setupTextView()
         processReportType()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
+
         updateTheme()
         setupBackButton()
     }
@@ -231,5 +226,11 @@ extension BugReportController: UITextViewDelegate {
         if textView.text.isEmpty {
             showTextViewPlaceholder()
         }
+    }
+}
+
+extension BugReportController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

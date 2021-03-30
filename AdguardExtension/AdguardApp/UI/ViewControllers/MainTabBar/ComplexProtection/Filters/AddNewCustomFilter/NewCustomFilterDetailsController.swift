@@ -70,8 +70,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
     
-    private var notificationToken: NotificationToken?
-    
     private let textFieldCharectersLimit = 50
     
     // MARK: - View Controller life cycle
@@ -82,10 +80,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
             setupAddingNewFilter()
         } else {
             setupEditingFilter()
-        }
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
         }
         
         updateTheme()
@@ -205,5 +199,11 @@ class NewCustomFilterDetailsController : BottomAlertController {
         returnString.append(urlAttributedString)
         
         return returnString
+    }
+}
+
+extension NewCustomFilterDetailsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

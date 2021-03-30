@@ -45,7 +45,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var themeObserver: Any? = nil
     private var advancedModeToken: NSKeyValueObservation?
     
     private var detailsController: DnsRequestDetailsController?
@@ -63,10 +62,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             DispatchQueue.main.async {[weak self] in
@@ -176,5 +171,11 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
         }
         
         shadowView.buttons = buttons
+    }
+}
+
+extension DnsContainerController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

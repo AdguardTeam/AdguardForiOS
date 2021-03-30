@@ -95,7 +95,6 @@ class BlockRequestController: BottomAlertController {
     private let editDomainSegueId = "EditDomainSegueId"
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,10 +102,6 @@ class BlockRequestController: BottomAlertController {
         titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
         
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         tableViewHeight.constant = rowHeight * CGFloat(subDomains.count)
         tableView.layoutIfNeeded()
@@ -177,5 +172,11 @@ extension BlockRequestController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.reloadData()
+    }
+}
+
+extension BlockRequestController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

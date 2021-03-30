@@ -26,9 +26,6 @@ class HowToSetupController: BottomAlertController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    // MARK: - Observers
-    private var themeObserver: NotificationToken?
-    
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -39,10 +36,6 @@ class HowToSetupController: BottomAlertController {
         
         updateTheme()
         setupLabels()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Actions
@@ -66,5 +59,11 @@ class HowToSetupController: BottomAlertController {
         let descriptionFormat = String.localizedString("native_dns_setup_description")
         let description = String(format: descriptionFormat, Bundle.main.applicationName ?? "AdGuard")
         descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil, textAlignment: .center)
+    }
+}
+
+extension HowToSetupController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

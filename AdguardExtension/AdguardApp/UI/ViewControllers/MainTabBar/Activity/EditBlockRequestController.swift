@@ -35,7 +35,6 @@ class EditBlockRequestController: BottomAlertController {
     var delegate: AddDomainToListDelegate?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +47,6 @@ class EditBlockRequestController: BottomAlertController {
         domainNameTextField.becomeFirstResponder()
         
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         addButton.makeTitleTextUppercased()
         backButton.makeTitleTextUppercased()
@@ -82,3 +77,8 @@ class EditBlockRequestController: BottomAlertController {
     }
 }
 
+extension EditBlockRequestController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
+}

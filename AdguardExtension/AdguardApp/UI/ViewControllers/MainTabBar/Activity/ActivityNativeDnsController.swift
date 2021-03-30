@@ -33,7 +33,6 @@ class ActivityNativeDnsController: UIViewController {
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - observers
-    private var themeObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var systemProtectionChangeObserver: NotificationToken?
     
@@ -67,9 +66,6 @@ class ActivityNativeDnsController: UIViewController {
     }
     
     private func addObservers() {
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.setupLabels()
@@ -78,5 +74,11 @@ class ActivityNativeDnsController: UIViewController {
         systemProtectionChangeObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.setupLabels()
         }
+    }
+}
+
+extension ActivityNativeDnsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

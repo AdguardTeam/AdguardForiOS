@@ -56,16 +56,10 @@ class SettingsController: UITableViewController {
     
     private var headersTitles: [String] = []
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
 
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
@@ -355,4 +349,10 @@ extension Notification.Name {
 @objc extension NSNotification {
     public static let resetStatistics = Notification.Name.resetStatistics
     public static let resetSettings = Notification.Name.resetSettings
+}
+
+extension SettingsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
 }

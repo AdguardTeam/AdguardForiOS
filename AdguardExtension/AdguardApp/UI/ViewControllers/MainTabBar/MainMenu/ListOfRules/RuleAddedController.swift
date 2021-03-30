@@ -25,16 +25,9 @@ class RuleAddedController: BottomAlertController {
     @IBOutlet var separators: [UIView]!
     @IBOutlet var themableButtons: [RoundRectButton]!
     
-    
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     override func viewDidLoad() {
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         super.viewDidLoad()
         updateTheme()
@@ -50,5 +43,11 @@ class RuleAddedController: BottomAlertController {
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(themableButtons)
         theme.setupSeparators(separators)
+    }
+}
+
+extension RuleAddedController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

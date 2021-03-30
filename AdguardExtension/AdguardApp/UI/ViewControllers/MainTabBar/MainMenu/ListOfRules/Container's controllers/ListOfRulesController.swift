@@ -64,8 +64,6 @@ class ListOfRulesController: UIViewController {
         }
     }
     
-    private var themeObserver: Any? = nil
-    
     // MARK: - View Controller life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -104,10 +102,6 @@ class ListOfRulesController: UIViewController {
         changeRightButtton()
         changeMiddleButton()
         changeLeftButton()
-        
-        themeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-        }
         
         updateTheme()
     }
@@ -324,5 +318,11 @@ class ListOfRulesController: UIViewController {
     
     @objc func backButtonPressed(sender: UIBarButtonItem){
        cancelByNormalState()
+    }
+}
+
+extension ListOfRulesController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

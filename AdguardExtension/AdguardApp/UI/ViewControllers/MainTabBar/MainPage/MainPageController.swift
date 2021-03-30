@@ -177,7 +177,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
-    private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
@@ -587,10 +586,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      Adds observers to controller
      */
     private func addObservers(){
-
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
@@ -945,5 +940,11 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         importController.settings = settings
         present(importController, animated: true, completion: nil)
+    }
+}
+
+extension MainPageController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

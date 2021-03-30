@@ -33,7 +33,6 @@ class DnsLogContainerController: UIViewController {
     
     private let model = DnsRequestLogViewModel(dnsLogService: ServiceLocator.shared.getService()!, dnsTrackerService: ServiceLocator.shared.getService()!, dnsFiltersService: ServiceLocator.shared.getService()!)
     
-    private var themeNotificationToken: NotificationToken?
     private var resetSettingsToken: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     
@@ -45,10 +44,6 @@ class DnsLogContainerController: UIViewController {
         super.viewDidLoad()
         
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
             self?.setCurrentContainerView()
@@ -118,5 +113,11 @@ extension DnsLogContainerController: ActivityViewControllerDelegate {
     
     func showTitle() {
         animateShowingTitleInNavBar(String.localizedString("activity_title"))
+    }
+}
+
+extension DnsLogContainerController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

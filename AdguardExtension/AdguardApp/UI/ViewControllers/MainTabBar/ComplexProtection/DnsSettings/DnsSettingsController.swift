@@ -52,7 +52,6 @@ class DnsSettingsController : UITableViewController {
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var themeObserver: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
     private var didBecomeActiveNotification: NotificationToken?
     private var proObservation: NSKeyValueObservation?
@@ -88,10 +87,6 @@ class DnsSettingsController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -348,5 +343,11 @@ extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
         implementationLabel.text = String.localizedString(stringKey)
         implementationIcon.image = resources.dnsImplementation == .adGuard ? adguardImplementationIcon : nativeImplementationIcon
         updateServerName()
+    }
+}
+
+extension DnsSettingsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

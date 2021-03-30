@@ -360,6 +360,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
             self?.window?.backgroundColor = self?.themeService.backgroundColor
+            self?.themeChange()
         }
     }
     

@@ -42,7 +42,6 @@ class DnsRequestDetailsController: UITableViewController {
     private let activityTitleCellId = "ActivityTitleCell"
     
     // MARK: - Notifications
-    private var notificationToken: NotificationToken?
     private var configurationToken: NSKeyValueObservation?
     
     // MARK: - Services
@@ -78,10 +77,6 @@ class DnsRequestDetailsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -577,3 +572,8 @@ class DnsRequestDetailsController: UITableViewController {
     }
 }
 
+extension DnsRequestDetailsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
+}

@@ -68,16 +68,10 @@ class GetProTableController: UITableViewController {
     
     var selectedProduct: Product?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         updateTheme()
         
@@ -315,5 +309,11 @@ class GetProTableController: UITableViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
         
         return resultString
+    }
+}
+
+extension GetProTableController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

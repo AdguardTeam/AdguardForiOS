@@ -36,16 +36,10 @@ class BlockedResponseTtlController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     weak var delegate: BlockedResponseTtlDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
@@ -99,5 +93,11 @@ class BlockedResponseTtlController: BottomAlertController {
         let ttl = ttlTextField.text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
         saveButton?.isEnabled = true
+    }
+}
+
+extension BlockedResponseTtlController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

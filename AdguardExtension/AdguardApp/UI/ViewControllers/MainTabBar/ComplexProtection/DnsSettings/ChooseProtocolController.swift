@@ -58,8 +58,6 @@ class ChooseProtocolController: BottomAlertController {
     @IBOutlet var separators: [UIView]!
     @IBOutlet weak var scrollContentView: UIView!
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -68,10 +66,6 @@ class ChooseProtocolController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         setupAvailibleProtocols()
         setupChecks()
@@ -163,5 +157,11 @@ class ChooseProtocolController: BottomAlertController {
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
+    }
+}
+
+extension ChooseProtocolController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

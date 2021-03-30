@@ -46,18 +46,11 @@ class LowLevelSettingsController: UITableViewController {
     private let boostraps = 4
     private let fallbacks = 5
     
-    private var notificationToken: NotificationToken?
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         setupBackButton()
         updateTheme()
     }
@@ -227,5 +220,11 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
         }
         
         tableView.reloadData()
+    }
+}
+
+extension LowLevelSettingsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

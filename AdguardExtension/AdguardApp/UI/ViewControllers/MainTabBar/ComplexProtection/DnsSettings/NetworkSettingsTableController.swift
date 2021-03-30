@@ -20,9 +20,6 @@ import UIKit
 
 class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, RuleDetailsControllerDelegate, NetworkSettingsChangedDelegate {
     
-    /* Variables */
-    private var themeObserver: Any? = nil
-    
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
     private let filterDataCellReuseId = "FilterDataCell"
@@ -60,10 +57,6 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         updateTheme()
         setupBackButton()
@@ -275,5 +268,11 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+extension NetworkSettingsTableController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

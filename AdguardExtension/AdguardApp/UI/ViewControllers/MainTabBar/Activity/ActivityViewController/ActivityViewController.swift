@@ -70,8 +70,6 @@ class ActivityViewController: UITableViewController {
     private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
-    
-    private var themeToken: NotificationToken?
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
@@ -418,9 +416,6 @@ class ActivityViewController: UITableViewController {
      Adds observers to controller
      */
     private func addObservers(){
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
@@ -640,5 +635,11 @@ extension ActivityViewController: AddDomainToListDelegate {
         dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
         swipedRecord.logRecord.userStatus = status
         tableView.reloadRows(at: [swipedIndexPath], with: .fade)
+    }
+}
+
+extension ActivityViewController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

@@ -35,7 +35,6 @@ class RequestsBlockingController: UITableViewController {
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
-    private var notificationToken: NotificationToken?
     private var configurationToken: NSKeyValueObservation?
     
     private let headerSection = 0
@@ -63,10 +62,6 @@ class RequestsBlockingController: UITableViewController {
         super.viewDidLoad()
         
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -107,4 +102,10 @@ class RequestsBlockingController: UITableViewController {
         }
     }
     
+}
+
+extension RequestsBlockingController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
 }

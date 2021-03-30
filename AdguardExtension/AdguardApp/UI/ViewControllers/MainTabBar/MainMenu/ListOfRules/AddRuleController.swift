@@ -37,7 +37,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var notificationToken: NotificationToken?
     
     private let textViewCharectersLimit = 50
     
@@ -71,10 +70,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
@@ -241,5 +236,11 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension AddRuleController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

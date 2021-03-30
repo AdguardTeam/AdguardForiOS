@@ -34,16 +34,10 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     private var selectedGroup: Int = 0
     private var selectedFilter: Int = 0
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-            }
         
         tableView.tableHeaderView = searchView
         tableView.rowHeight = UITableView.automaticDimension
@@ -244,3 +238,8 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
 }
 
+extension SearchFilterController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
+}

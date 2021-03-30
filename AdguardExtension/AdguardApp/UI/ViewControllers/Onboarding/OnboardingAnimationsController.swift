@@ -38,7 +38,6 @@ class OnboardingAnimationsController: UIViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private var themeToken: NotificationToken?
     private var orientationChangeNotification: NotificationToken?
     
     private var currentStep = 1
@@ -54,10 +53,6 @@ class OnboardingAnimationsController: UIViewController {
         setupAnimationViews()
         addGestureRecognizers()
         firstAnimationView.play()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
             DispatchQueue.main.async {
@@ -222,5 +217,11 @@ class OnboardingAnimationsController: UIViewController {
             thirdAnimationView.play()
             return
         }
+    }
+}
+
+extension OnboardingAnimationsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

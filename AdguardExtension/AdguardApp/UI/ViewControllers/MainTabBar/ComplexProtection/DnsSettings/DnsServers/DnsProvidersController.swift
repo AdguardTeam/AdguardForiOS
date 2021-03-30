@@ -48,7 +48,6 @@ class DnsProvidersController: UITableViewController {
     private var providerToShow: DnsProviderCellModel?
     
     // MARK: - Observers
-    private var notificationToken: NotificationToken?
     private var currentServerObserver: NotificationToken?
     
     private let descriptionSection = 0
@@ -59,10 +58,6 @@ class DnsProvidersController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         currentServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.tableView.reloadData()
@@ -257,5 +252,11 @@ extension DnsProvidersController: DnsProviderCellDelegate {
 extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
     func activeServerChanged(_ newServer: DnsServerInfo) {
         model.setServerAsActive(newServer)
+    }
+}
+
+extension DnsProvidersController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

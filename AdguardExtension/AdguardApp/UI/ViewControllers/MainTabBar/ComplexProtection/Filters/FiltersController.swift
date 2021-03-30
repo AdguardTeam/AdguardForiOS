@@ -69,8 +69,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
     @IBOutlet weak var headerLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
@@ -78,10 +76,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 118.0
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         // Add callback to viewModel
         let filtersChangedCallback = { [weak self] in
@@ -355,5 +349,11 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
                 self?.tableView.refreshControl?.endRefreshing()
             }
         }
+    }
+}
+
+extension FiltersController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

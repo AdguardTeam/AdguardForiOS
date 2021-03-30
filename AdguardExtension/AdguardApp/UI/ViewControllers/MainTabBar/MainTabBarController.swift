@@ -36,8 +36,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    private var themeToken: NotificationToken?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -74,10 +72,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         updateTheme()
         createSelectionIndicator()
         addTabBarShadow()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
 
     override var selectedViewController: UIViewController? {
@@ -192,6 +186,12 @@ extension UITabBar {
             return UITraitCollection(horizontalSizeClass: .compact)
         }
         return super.traitCollection
+    }
+}
+
+extension MainTabBarController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }
 

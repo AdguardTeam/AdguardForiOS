@@ -36,10 +36,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         domainOrRuleLabel.text = getEditCaptionText()
 
         
@@ -142,5 +138,11 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension RuleDetailsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

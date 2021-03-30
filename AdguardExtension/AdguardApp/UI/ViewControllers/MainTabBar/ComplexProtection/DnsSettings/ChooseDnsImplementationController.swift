@@ -33,9 +33,6 @@ class ChooseDnsImplementationController: BottomAlertController {
     
     weak var delegate: ChooseDnsImplementationControllerDelegate?
     
-    // MARK: - Observers
-    private var themeObserver: NotificationToken?
-    
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -46,10 +43,6 @@ class ChooseDnsImplementationController: BottomAlertController {
         
         processCurrentImplementation()
         updateTheme()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Private methods
@@ -85,5 +78,11 @@ class ChooseDnsImplementationController: BottomAlertController {
         
         adGuardButton.isSelected = implementation == .adGuard
         nativeButton.isSelected = implementation == .native
+    }
+}
+
+extension ChooseDnsImplementationController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

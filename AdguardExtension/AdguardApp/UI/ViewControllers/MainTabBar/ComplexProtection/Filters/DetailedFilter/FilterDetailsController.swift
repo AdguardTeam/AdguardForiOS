@@ -41,8 +41,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     weak var delegate: DnsFiltersControllerDelegate?
     
     override func viewDidLoad() {
@@ -52,11 +50,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         setupButtons()
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         setupBackItem()
     }
 
@@ -209,8 +202,6 @@ class FilterDetailsTableCotroller : UITableViewController {
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
     weak var delegate: DnsFiltersControllerDelegate?
     
-    private var notificationToken: NotificationToken?
-    
     private let zeroVersion = "0.0.0.0"
     
     // MARK: - constants
@@ -249,11 +240,6 @@ class FilterDetailsTableCotroller : UITableViewController {
         }
         
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         setupBackButton()
     }
     
@@ -371,5 +357,17 @@ class FilterDetailsTableCotroller : UITableViewController {
                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])
             subscriptionURLLabel.attributedText = subscriptionUrl
         }
+    }
+}
+
+extension FilterDetailsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
+}
+
+extension FilterDetailsTableCotroller: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

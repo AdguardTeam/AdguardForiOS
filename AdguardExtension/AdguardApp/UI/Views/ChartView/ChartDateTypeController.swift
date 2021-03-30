@@ -33,7 +33,6 @@ class ChartDateTypeController: BottomAlertController {
     weak var delegate: DateTypeChangedProtocol?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     private let todayTag = 0
     private let oneDayTag = 1
@@ -45,10 +44,6 @@ class ChartDateTypeController: BottomAlertController {
         super.viewDidLoad()
         
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     @IBAction func charDataTypeAction(_ sender: UIButton) {
@@ -78,5 +73,11 @@ class ChartDateTypeController: BottomAlertController {
         for button in buttons {
             button.setTitleColor(theme.grayTextColor, for: .normal)
         }
+    }
+}
+
+extension ChartDateTypeController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

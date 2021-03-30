@@ -51,7 +51,6 @@ class CompanyDetailedController: UITableViewController {
     
     // MARK: - Notifications
     
-    private var themeToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
     private var keyboardShowToken: NotificationToken?
     
@@ -97,10 +96,6 @@ class CompanyDetailedController: UITableViewController {
         
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             self?.observeAdvancedMode()
@@ -227,10 +222,6 @@ class CompanyDetailedController: UITableViewController {
     }
     
     private func addObservers(){
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
         }
@@ -367,5 +358,11 @@ extension CompanyDetailedController: DnsRequestsDelegateProtocol {
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+extension CompanyDetailedController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

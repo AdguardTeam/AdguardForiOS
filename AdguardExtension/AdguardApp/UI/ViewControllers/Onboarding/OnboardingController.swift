@@ -36,7 +36,6 @@ class OnboardingController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var themeToken: NotificationToken?
     private var contenBlockerObservation: NSKeyValueObservation?
     
     private let showLicenseSegue = "ShowLicenseSegue"
@@ -58,11 +57,6 @@ class OnboardingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-            self?.setupLabels()
-        }
         
         contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
             self?.observeContentBlockersState()
@@ -160,5 +154,12 @@ extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+}
+
+extension OnboardingController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+        setupLabels()
     }
 }

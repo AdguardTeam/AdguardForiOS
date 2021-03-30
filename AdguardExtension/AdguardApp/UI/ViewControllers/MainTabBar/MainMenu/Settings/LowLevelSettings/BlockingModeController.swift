@@ -30,7 +30,6 @@ class BlockingModeController: UITableViewController {
     @IBOutlet weak var nullIPHeaderLabel: ThemableLabel!
     @IBOutlet weak var customIPHeaderLabel: ThemableLabel!
     
-    private var notificationToken: NotificationToken?
     private var selectedCell = 0
     
     private let defaultMode = 0
@@ -46,10 +45,6 @@ class BlockingModeController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -172,5 +167,11 @@ extension BlockingModeController: UpstreamsControllerDelegate {
             setupMode(mode: .agCustomAddress)
         }
         customIPDescriptionLabel.text = string
+    }
+}
+
+extension BlockingModeController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

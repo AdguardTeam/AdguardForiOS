@@ -71,8 +71,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
-    private var themeObservation: NotificationToken?
-    
     private let filterDetailsControllerId = "FilterDetailsController"
     
     private let titleCellReuseId = "DnsFilterTitleCell"
@@ -87,10 +85,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
@@ -335,5 +329,11 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
 extension DnsFiltersController: DnsFiltersControllerDelegate {
     func filtersStateWasChanged() {
         model.refreshFilters()
+    }
+}
+
+extension DnsFiltersController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

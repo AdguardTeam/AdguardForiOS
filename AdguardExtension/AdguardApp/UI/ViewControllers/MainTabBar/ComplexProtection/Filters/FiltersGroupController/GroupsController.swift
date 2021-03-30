@@ -53,16 +53,10 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         viewModel?.load() {[weak self] () in
             DispatchQueue.main.async {
@@ -253,5 +247,11 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             
             openUrl = nil
         }
+    }
+}
+
+extension GroupsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

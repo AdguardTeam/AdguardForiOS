@@ -38,8 +38,6 @@ class AddCustomFilterController: BottomAlertController {
     private var filter : AASCustomFilterParserResult?
     var delegate: AddNewFilterDelegate?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -48,10 +46,7 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = false
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
+
         if openUrl != nil {
             urlTextField.text = openUrl
             continueAction(self)
@@ -163,5 +158,11 @@ enum NewFilterType {
         case .dnsCustom:
             return String.localizedString("new_dns_filter_title")
         }
+    }
+}
+
+extension AddCustomFilterController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

@@ -28,9 +28,6 @@ class RateAppProblemController: BottomAlertController {
     
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    // Theme observer
-    private var themeObserver: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +41,6 @@ class RateAppProblemController: BottomAlertController {
         problemRemainsButton.applyStandardOpaqueStyle()
         
         updateTheme()
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Actions
@@ -73,5 +67,11 @@ class RateAppProblemController: BottomAlertController {
     private func setupDescriptionTextView() {
         let problemDescription = String.localizedString("rate_app_problem_description")
         descriptionTextView.attributedText = NSMutableAttributedString.fromHtml(problemDescription, fontSize: descriptionTextView.font!.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
+    }
+}
+
+extension RateAppProblemController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

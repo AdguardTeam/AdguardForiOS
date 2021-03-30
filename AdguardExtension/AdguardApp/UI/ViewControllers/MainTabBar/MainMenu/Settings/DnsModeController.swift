@@ -42,16 +42,10 @@ class DnsModeController: UITableViewController {
     
     var selectedCell = 0
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -136,5 +130,11 @@ class DnsModeController: UITableViewController {
         default:
             break
         }
+    }
+}
+
+extension DnsModeController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

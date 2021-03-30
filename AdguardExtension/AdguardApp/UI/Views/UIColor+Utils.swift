@@ -41,7 +41,7 @@ extension UIColor {
         static let orange2: UIColor = #colorLiteral(red: 0.5568627451, green: 0.1725490196, blue: 0.07450980392, alpha: 1)         //hex = #8e2c13
         static let orange3: UIColor = #colorLiteral(red: 0.4509803922, green: 0.1490196078, blue: 0.07450980392, alpha: 1)         //hex = #732613
         static let yellow1: UIColor = #colorLiteral(red: 0.8352941176, green: 0.5215686275, blue: 0, alpha: 1)         //hex = #d58500
-        static let yellow2 = #colorLiteral(red: 0.9215686275, green: 0.5764705882, blue: 0, alpha: 1)                  //hex = #eb9300
+        static let yellow2: UIColor = #colorLiteral(red: 0.9215686275, green: 0.5764705882, blue: 0, alpha: 1)         //hex = #eb9300
         static let yellow3: UIColor = #colorLiteral(red: 0.7058823529, green: 0.3725490196, blue: 0, alpha: 1)         //hex = #b45f00
         static let yellow4: UIColor = #colorLiteral(red: 0.6078431373, green: 0.262745098, blue: 0, alpha: 1)         //hex = #9b4300
         

@@ -45,7 +45,6 @@ class AdvancedSettingsController: UITableViewController {
     private let debugLogsRow = 2
     private let removeVpnProfile = 5
     
-    private var themeObservation: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken?
     
     override func viewDidLoad() {
@@ -57,10 +56,6 @@ class AdvancedSettingsController: UITableViewController {
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
-        
-        themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] (note) in
             self?.lastSeparator.isHidden = false
@@ -209,4 +204,10 @@ class AdvancedSettingsController: UITableViewController {
         self.present(alert, animated: true)
     }
 
+}
+
+extension AdvancedSettingsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
 }

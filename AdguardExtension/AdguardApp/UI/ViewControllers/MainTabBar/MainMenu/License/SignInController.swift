@@ -30,8 +30,6 @@ class SignInController: UIViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
-    
-    private var notificationThemeObserver: NotificationToken?
     private var notificationSignInObserver: NotificationToken?
     
     private var sfSafariViewController: SFSafariViewController?
@@ -42,11 +40,7 @@ class SignInController: UIViewController {
         super.viewDidLoad()
         
         signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
-        
-        notificationThemeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
+
         notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -188,3 +182,9 @@ class SignInController: UIViewController {
         }
     }
  }
+
+extension SignInController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
+    }
+}

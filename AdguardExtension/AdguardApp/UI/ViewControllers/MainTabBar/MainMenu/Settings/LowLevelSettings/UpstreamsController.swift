@@ -37,18 +37,12 @@ class UpstreamsController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -220,5 +214,11 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
+    }
+}
+
+extension UpstreamsController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

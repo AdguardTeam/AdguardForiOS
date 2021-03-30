@@ -24,7 +24,6 @@ class SystemProtectionEnablerController: UIViewController {
     @IBOutlet weak var enableButton: UIButton!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +31,16 @@ class SystemProtectionEnablerController: UIViewController {
         enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
         enableButton.applyStandardGreenStyle()
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
 
     private func updateTheme(){
         view.backgroundColor = theme.backgroundColor
         theme.setupLabel(titleLabel)
+    }
+}
+
+extension SystemProtectionEnablerController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }

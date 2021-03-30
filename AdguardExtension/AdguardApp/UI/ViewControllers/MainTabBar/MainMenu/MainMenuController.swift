@@ -37,7 +37,6 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    private var themeObserver: NotificationToken?
     private var filtersCountObservation: Any?
     private var activeFiltersCountObservation: Any?
     
@@ -57,10 +56,6 @@ class MainMenuController: UITableViewController {
         super.viewDidLoad()
         
         settingsImageView.image = UIImage(named: "advanced-settings-icon")
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
@@ -127,5 +122,11 @@ class MainMenuController: UITableViewController {
         } else {
             systemProtectionLabel.text = String.localizedString("system_dns_server")
         }
+    }
+}
+
+extension MainMenuController: ThemableProtocol {
+    func themeNeedUpdate() {
+        updateTheme()
     }
 }
