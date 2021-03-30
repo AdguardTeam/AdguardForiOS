@@ -40,14 +40,14 @@ extension AppDelegate {
     private func recursiveThemeUpdate(vc: UIViewController?) {
         if vc == nil { return }
         recursiveThemeUpdate(vc: vc?.presentedViewController)
-        recursiveChieldThemeUpdate(chields: vc?.children)
+        recursiveChildrenThemeUpdate(children: vc?.children)
         (vc as? ThemableProtocol)?.updateTheme()
     }
     
-    private func recursiveChieldThemeUpdate(chields: [UIViewController]?) {
-        if let chields = chields, chields.isEmpty { return }
-        chields?.forEach {
-            recursiveChieldThemeUpdate(chields: $0.children)
+    private func recursiveChildrenThemeUpdate(children: [UIViewController]?) {
+        if let children = children, children.isEmpty { return }
+        children?.forEach {
+            recursiveChildrenThemeUpdate(children: $0.children)
             ($0 as? ThemableProtocol)?.updateTheme()
         }
     }
