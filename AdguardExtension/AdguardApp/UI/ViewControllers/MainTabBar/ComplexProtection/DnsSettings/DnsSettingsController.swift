@@ -63,7 +63,7 @@ class DnsSettingsController : UITableViewController {
     
     var stateFromWidget: Bool?
     
-    private let enabledColor = UIColor.AdGuardColor.green
+    private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor(hexString: "#888888")
     
     private let adguardImplementationIcon = UIImage(named: "ic_adguard")

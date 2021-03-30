@@ -113,7 +113,7 @@ class ActivityViewController: UITableViewController {
         requestsModel?.delegate = self
         statisticsModel.chartPointsChangedDelegates.append(self)
         
-        activityImage.tintColor = UIColor.AdGuardColor.green
+        activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
         dateTypeChanged(dateType: resources.activityStatisticsType)
@@ -453,7 +453,7 @@ class ActivityViewController: UITableViewController {
         var buttonColor: UIColor
         switch buttonType {
         case .addDomainToWhitelist:
-            buttonColor = UIColor.AdGuardColor.green
+            buttonColor = UIColor.AdGuardColor.lightGreen1
         case .addRuleToUserFlter:
             buttonColor = UIColor(hexString: "#c23814")
         default:

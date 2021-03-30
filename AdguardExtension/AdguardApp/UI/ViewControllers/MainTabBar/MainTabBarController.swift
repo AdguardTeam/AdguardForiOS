@@ -134,7 +134,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         bottomView = UIView()
         bottomView?.isUserInteractionEnabled = false
         bottomView?.translatesAutoresizingMaskIntoConstraints = false
-        bottomView?.backgroundColor = UIColor.AdGuardColor.green
+        bottomView?.backgroundColor = UIColor.AdGuardColor.lightGreen1
         tabBar.addSubview(bottomView ?? UIView())
         
         let numberOfItems = CGFloat(tabBar.items!.count)

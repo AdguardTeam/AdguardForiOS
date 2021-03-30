@@ -194,7 +194,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
         
         let urlStringRange = NSRange(location: 0, length: url.count)
         
-        let highlightColor = UIColor.AdGuardColor.green
+        let highlightColor = UIColor.AdGuardColor.lightGreen1
         
         urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
         urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)

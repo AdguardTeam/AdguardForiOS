@@ -36,7 +36,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             updateButton.accessibilityLabel = String.localizedString("update_filters_voiceover")
             let icon = UIImage(named: "refresh-icon")
             let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
-            let tintColor = UIColor.AdGuardColor.green
+            let tintColor = UIColor.AdGuardColor.lightGreen1
             iconButton = UIButton(frame: iconSize)
             iconButton?.setBackgroundImage(icon, for: .normal)
             iconButton?.tintColor = tintColor

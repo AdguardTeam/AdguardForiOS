@@ -33,7 +33,7 @@ extension UIButton {
      with green background, no border and white text
      */
     func applyStandardGreenStyle() {
-        let greenColor = UIColor.AdGuardColor.green
+        let greenColor = UIColor.AdGuardColor.lightGreen1
         self.layer.cornerRadius = 8.0
         self.backgroundColor = greenColor
         self.setTitleColor(.white, for: .normal)
@@ -46,7 +46,7 @@ extension UIButton {
      with green background, no border and white text
      */
     func applyStandardAdGuardVPNGreenStyle() {
-        let greenColor = UIColor.AdGuardVpnColor.green
+        let greenColor = UIColor.AdGuardColor.vpnLightGreen
         self.layer.cornerRadius = 8.0
         self.backgroundColor = greenColor
         self.setTitleColor(.white, for: .normal)
@@ -59,7 +59,7 @@ extension UIButton {
      with opaque background, green borders and text
      */
     func applyStandardOpaqueStyle() {
-        let greenColor = UIColor.AdGuardColor.green
+        let greenColor = UIColor.AdGuardColor.lightGreen1
         self.layer.cornerRadius = 8.0
         self.backgroundColor = .clear
         self.setTitleColor(greenColor, for: .normal)

@@ -38,7 +38,7 @@ enum DnsLogRecordStatus: Int {
     }
     
     var textColor: UIColor {
-        let allowedColor = UIColor.AdGuardColor.green
+        let allowedColor = UIColor.AdGuardColor.lightGreen1
         let blockedColor = UIColor(hexString: "#df3812")
         let processedColor = UIColor(hexString: "#EB9300")
         
