@@ -303,19 +303,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         }
     }
     
-    private func updateTheme() {
-        theme.setupTable(tableView)
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupSearchBar(searchBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
     @objc private func updateFilters(sender: UIRefreshControl) {
         model.updateFilters { [weak self] (success) in
             if success {
@@ -333,7 +320,16 @@ extension DnsFiltersController: DnsFiltersControllerDelegate {
 }
 
 extension DnsFiltersController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        theme.setupTable(tableView)
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupSearchBar(searchBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

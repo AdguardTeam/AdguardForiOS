@@ -122,13 +122,6 @@ class AddCustomFilterController: BottomAlertController {
     
     // MARK: - private method
     
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(urlTextField)
-        nextButton.indicatorStyle = theme.indicatorStyle
-    }
-    
     private func presentNewCustomFilterDetailsController() {
         let presenter = presentingViewController
         dismiss(animated: true) {[weak self] in
@@ -162,7 +155,10 @@ enum NewFilterType {
 }
 
 extension AddCustomFilterController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(urlTextField)
+        nextButton.indicatorStyle = theme.indicatorStyle
     }
 }

@@ -206,18 +206,6 @@ class GetProTableController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.setPurchaseDescription()
-            self.tableView.reloadData()
-        }
-        theme.setupLabels(themableLabels)
-        theme.setupImage(logoImage)
-    }
-    
     private func setPurchaseDescription() {
         
         let stringKey = selectedProduct?.type == .some(.lifetime) ? "lifetime_purchase_description_format" : "purchase_description_format"
@@ -313,7 +301,15 @@ class GetProTableController: UITableViewController {
 }
 
 extension GetProTableController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.setPurchaseDescription()
+            self.tableView.reloadData()
+        }
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logoImage)
     }
 }

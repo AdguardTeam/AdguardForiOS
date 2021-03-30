@@ -102,14 +102,6 @@ class BlockingModeController: UITableViewController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        tableView.reloadData()
-        theme.setupLabels(themableLabels)
-        theme.setupSeparators(separators)
-    }
     
     private func updateButtons(by index: Int) {
         buttons.forEach { $0.isSelected = $0.tag == index }
@@ -171,7 +163,11 @@ extension BlockingModeController: UpstreamsControllerDelegate {
 }
 
 extension BlockingModeController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        tableView.reloadData()
+        theme.setupLabels(themableLabels)
+        theme.setupSeparators(separators)
     }
 }

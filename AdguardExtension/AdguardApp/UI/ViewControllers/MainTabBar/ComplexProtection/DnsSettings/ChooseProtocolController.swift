@@ -151,17 +151,13 @@ class ChooseProtocolController: BottomAlertController {
             }
         }
     }
-    
-    private func updateTheme() {
+}
+
+extension ChooseProtocolController: ThemableProtocol {
+    func updateTheme() {
         contentView.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(buttons)
         theme.setupSeparators(separators)
-    }
-}
-
-extension ChooseProtocolController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

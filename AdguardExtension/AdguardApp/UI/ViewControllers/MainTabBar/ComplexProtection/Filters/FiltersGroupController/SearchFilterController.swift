@@ -198,16 +198,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
-        theme.setupSearchBar(searchBar)
-    }
-    
     @objc private func segueButtonTapped(_ sender: UIButton){
         selectedGroup = sender.tag
         performSegue(withIdentifier: showGroupSegue, sender: self)
@@ -239,7 +229,13 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
 }
 
 extension SearchFilterController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+        theme.setupSearchBar(searchBar)
     }
 }

@@ -216,15 +216,6 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.view.backgroundColor = self.theme.backgroundColor
-            self.tableView.reloadData()
-        }
-    }
-    
     /**
      Returns view model for specific cell
      */
@@ -573,7 +564,12 @@ class DnsRequestDetailsController: UITableViewController {
 }
 
 extension DnsRequestDetailsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.view.backgroundColor = self.theme.backgroundColor
+            self.tableView.reloadData()
+        }
     }
 }

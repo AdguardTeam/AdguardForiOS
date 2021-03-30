@@ -103,18 +103,6 @@ class DnsModeController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-        theme.setupLabels(themableLabels)
-        separator1.backgroundColor = theme.separatorColor
-        separator2.backgroundColor = theme.separatorColor
-    }
-    
     private func updateButtons() {
         splitButton.isSelected = false
         fullButton.isSelected = false
@@ -134,7 +122,15 @@ class DnsModeController: UITableViewController {
 }
 
 extension DnsModeController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
+        theme.setupLabels(themableLabels)
+        separator1.backgroundColor = theme.separatorColor
+        separator2.backgroundColor = theme.separatorColor
     }
 }

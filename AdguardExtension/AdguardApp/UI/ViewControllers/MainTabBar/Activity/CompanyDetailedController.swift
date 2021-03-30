@@ -207,19 +207,6 @@ class CompanyDetailedController: UITableViewController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme(){
-        tableView.reloadData()
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        tableHeaderView.backgroundColor = theme.backgroundColor
-        sectionHeaderView.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupSearchBar(searchBar)
-        theme.setupLabels(themableLabels)
-        theme.setupButtons(themableButtons)
-        theme.setupLabel(recentActivityLabel)
-    }
     
     private func addObservers(){
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
@@ -362,7 +349,16 @@ extension CompanyDetailedController: DnsRequestsDelegateProtocol {
 }
 
 extension CompanyDetailedController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        tableView.reloadData()
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupSearchBar(searchBar)
+        theme.setupLabels(themableLabels)
+        theme.setupButtons(themableButtons)
+        theme.setupLabel(recentActivityLabel)
     }
 }

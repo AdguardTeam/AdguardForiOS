@@ -93,12 +93,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        view.backgroundColor = theme.backgroundColor
-        shadowView.updateTheme()
-    }
-    
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
         dnsLogService.set(rowId: self.logRecord.logRecord.rowid!, status: status, userRule: rule)
         logRecord.logRecord.userStatus = status
@@ -175,7 +169,9 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
 }
 
 extension DnsContainerController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        view.backgroundColor = theme.backgroundColor
+        shadowView.updateTheme()
     }
 }

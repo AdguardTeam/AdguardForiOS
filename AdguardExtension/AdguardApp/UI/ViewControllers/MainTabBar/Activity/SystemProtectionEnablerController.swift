@@ -32,15 +32,11 @@ class SystemProtectionEnablerController: UIViewController {
         enableButton.applyStandardGreenStyle()
         updateTheme()
     }
-
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabel(titleLabel)
-    }
 }
 
 extension SystemProtectionEnablerController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabel(titleLabel)
     }
 }

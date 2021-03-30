@@ -81,14 +81,6 @@ class BlockedResponseTtlController: BottomAlertController {
 
     // MARK: - Private methods
     
-    private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(ttlTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        theme.setupSeparators(separators)
-    }
-    
     private func updateSaveButton() {
         let ttl = ttlTextField.text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
@@ -97,7 +89,11 @@ class BlockedResponseTtlController: BottomAlertController {
 }
 
 extension BlockedResponseTtlController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(ttlTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        theme.setupSeparators(separators)
     }
 }

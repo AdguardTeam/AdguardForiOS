@@ -56,13 +56,6 @@ class RateAppProblemController: BottomAlertController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupTextView(descriptionTextView)
-        setupDescriptionTextView()
-    }
     
     private func setupDescriptionTextView() {
         let problemDescription = String.localizedString("rate_app_problem_description")
@@ -71,7 +64,10 @@ class RateAppProblemController: BottomAlertController {
 }
 
 extension RateAppProblemController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupTextView(descriptionTextView)
+        setupDescriptionTextView()
     }
 }

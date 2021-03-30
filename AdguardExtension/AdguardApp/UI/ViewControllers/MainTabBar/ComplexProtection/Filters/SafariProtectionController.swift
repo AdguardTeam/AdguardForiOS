@@ -150,18 +150,6 @@ class SafariProtectionController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupSwitch(protectionStateSwitch)
-        theme.setupTable(tableView)
-        theme.setupLabels(themableLabels)
-        theme.setupSeparators(separators)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-    }
-    
     private func updateSafariProtectionInfo(){
         let protectionEnabled = complexProtection.safariProtectionEnabled
         protectionStateSwitch.isOn = protectionEnabled
@@ -172,7 +160,15 @@ class SafariProtectionController: UITableViewController {
 }
 
 extension SafariProtectionController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupSwitch(protectionStateSwitch)
+        theme.setupTable(tableView)
+        theme.setupLabels(themableLabels)
+        theme.setupSeparators(separators)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
 }

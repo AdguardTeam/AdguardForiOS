@@ -221,12 +221,6 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        tableView.reloadData()
-    }
-    
     private func updateProtocol() {
         if resources.dnsImplementation == .native {
             selectedProtocol = nativeProviderService.currentServer?.dnsProtocol
@@ -276,7 +270,9 @@ class DnsProviderWebsiteCell: UITableViewCell {
 }
 
 extension DnsProviderDetailsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        tableView.reloadData()
     }
 }

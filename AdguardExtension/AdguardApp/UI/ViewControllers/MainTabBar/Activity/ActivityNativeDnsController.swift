@@ -49,12 +49,6 @@ class ActivityNativeDnsController: UIViewController {
         AppDelegate.shared.presentDnsSettingsController()
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupSeparators(separators)
-    }
-    
     private func setupLabels() {
         dnsStatusLabel.text = nativeProviders.managerIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
         dnsNameLabel.text = nativeProviders.currentProvider?.name
@@ -78,7 +72,9 @@ class ActivityNativeDnsController: UIViewController {
 }
 
 extension ActivityNativeDnsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupSeparators(separators)
     }
 }

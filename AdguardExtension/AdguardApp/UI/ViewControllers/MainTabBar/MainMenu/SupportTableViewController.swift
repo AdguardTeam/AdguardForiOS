@@ -142,18 +142,14 @@ class SupportTableViewController: UITableViewController {
         
         present(activityVC, animated: true)
     }
-    
-    private func updateTheme() {
+}
+
+extension SupportTableViewController: ThemableProtocol {
+    func updateTheme() {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         tableView.reloadData()
-    }
-}
-
-extension SupportTableViewController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

@@ -75,15 +75,6 @@ class SignInController: UIViewController {
         buttons.forEach { $0.applyRoundRectStyle(color: theme.lightGrayTextColor.cgColor ) }
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        prepareButtons()
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupButtons(buttons)
-        theme.setupButtonsImage(buttons)
-        theme.setupLabels(themableLabels)
-    }
-    
     private func makeLogin(with socialProvider: SocialProvider) {
         let state = UUID().uuidString
         resources.sharedDefaults().setValue(state, forKey: AEDefaultsAuthStateString)
@@ -184,7 +175,12 @@ class SignInController: UIViewController {
  }
 
 extension SignInController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        prepareButtons()
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupButtons(buttons)
+        theme.setupButtonsImage(buttons)
+        theme.setupLabels(themableLabels)
     }
 }

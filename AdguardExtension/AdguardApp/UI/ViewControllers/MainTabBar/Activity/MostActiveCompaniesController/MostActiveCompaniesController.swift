@@ -56,15 +56,6 @@ class MostActiveCompaniesController: UIViewController {
             }
         }
     }
-    
-    // MARK: - Private methods
-
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupLabels(themableLabels)
-        tableView.reloadData()
-    }
 }
 
 extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDelegate {
@@ -105,7 +96,10 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
 }
 
 extension MostActiveCompaniesController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupLabels(themableLabels)
+        tableView.reloadData()
     }
 }

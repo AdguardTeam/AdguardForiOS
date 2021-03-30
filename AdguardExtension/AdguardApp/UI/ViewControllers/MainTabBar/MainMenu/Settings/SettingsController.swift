@@ -254,19 +254,6 @@ class SettingsController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSwitch(wifiUpdateSwitch)
-        theme.setupSwitch(invertedSwitch)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.updateUI()
-        }
-    }
-    
     private func updateUI() {
         themeButtons.forEach({ $0.isSelected = false })
         switch configuration.userThemeMode {
@@ -352,7 +339,16 @@ extension Notification.Name {
 }
 
 extension SettingsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSwitch(wifiUpdateSwitch)
+        theme.setupSwitch(invertedSwitch)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+            self?.updateUI()
+        }
     }
 }

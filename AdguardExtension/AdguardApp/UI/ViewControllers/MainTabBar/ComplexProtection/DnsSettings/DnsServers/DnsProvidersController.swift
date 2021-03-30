@@ -176,14 +176,7 @@ class DnsProvidersController: UITableViewController {
         }
     }
         
-    // MARK: private methods
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        tableView.reloadData()
-    }
+    // MARK: - private methods
     
     private func editProvider(_ provider: DnsProviderCellModel) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditDnsServerController") as? NewDnsServerController else { return }
@@ -256,7 +249,10 @@ extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
 }
 
 extension DnsProvidersController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        tableView.reloadData()
     }
 }

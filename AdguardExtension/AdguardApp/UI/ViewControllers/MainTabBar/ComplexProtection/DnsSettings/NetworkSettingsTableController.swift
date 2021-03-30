@@ -258,21 +258,15 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
             
         present(controller, animated: true, completion: nil)
     }
-    
-    // MARK: - Update theme
-    
-    private func updateTheme(){
+}
+
+extension NetworkSettingsTableController: ThemableProtocol {
+    func updateTheme(){
         view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
-    }
-}
-
-extension NetworkSettingsTableController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

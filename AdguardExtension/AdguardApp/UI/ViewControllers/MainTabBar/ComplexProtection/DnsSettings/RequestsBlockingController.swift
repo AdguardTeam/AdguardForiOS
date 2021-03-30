@@ -91,8 +91,10 @@ class RequestsBlockingController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == headerSection ? 0.1 : 0.0
     }
-    
-    private func updateTheme() {
+}
+
+extension RequestsBlockingController: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
@@ -100,12 +102,5 @@ class RequestsBlockingController: UITableViewController {
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
         }
-    }
-    
-}
-
-extension RequestsBlockingController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

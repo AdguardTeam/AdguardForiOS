@@ -355,15 +355,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          }
      }
     
-    private func subscribeToNotifications() {
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
-            self?.window?.backgroundColor = self?.themeService.backgroundColor
-            self?.themeChange()
-        }
-    }
-    
     //MARK: - Init logger
     
     private func initLogger() {

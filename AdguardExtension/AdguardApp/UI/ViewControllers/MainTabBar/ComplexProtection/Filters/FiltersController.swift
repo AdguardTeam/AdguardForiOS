@@ -305,20 +305,6 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-        theme.setupSearchBar(searchBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-        theme.setupLabels(themableLabels)
-    }
-    
     private func updateBarButtons() {
         if viewModel!.isSearchActive {
             navigationItem.rightBarButtonItems = [cancelButton]
@@ -353,7 +339,17 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
 }
 
 extension FiltersController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
+        theme.setupSearchBar(searchBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
+        theme.setupLabels(themableLabels)
     }
 }

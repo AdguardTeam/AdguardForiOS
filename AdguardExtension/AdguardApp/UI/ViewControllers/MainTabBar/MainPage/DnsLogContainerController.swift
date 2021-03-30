@@ -67,11 +67,6 @@ class DnsLogContainerController: UIViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-    }
-    
     private func setCurrentContainerView() {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
@@ -117,7 +112,8 @@ extension DnsLogContainerController: ActivityViewControllerDelegate {
 }
 
 extension DnsLogContainerController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
 }

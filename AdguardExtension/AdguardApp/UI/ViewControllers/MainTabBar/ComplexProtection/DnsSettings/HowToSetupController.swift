@@ -45,11 +45,6 @@ class HowToSetupController: BottomAlertController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-    }
     
     private func setupLabels() {
         let titleFormat = String.localizedString("native_dns_setup_title")
@@ -63,7 +58,8 @@ class HowToSetupController: BottomAlertController {
 }
 
 extension HowToSetupController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
     }
 }

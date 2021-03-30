@@ -259,19 +259,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         })
     }
     
-    
-    // MARK: - Update theme
-    
-    private func updateTheme(){
-        theme.setupTable(tableView)
-        tableView.backgroundColor = theme.backgroundColor
-        view.backgroundColor = theme.backgroundColor
-        theme.setupSearchBar(searchBar)
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
     // MARK: - Cells setup functions
     
     private func setupTitleListOfRulesCell() -> UITableViewCell {
@@ -406,7 +393,13 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
 }
 
 extension ListOfRulesTableController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        theme.setupTable(tableView)
+        tableView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
+        theme.setupSearchBar(searchBar)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

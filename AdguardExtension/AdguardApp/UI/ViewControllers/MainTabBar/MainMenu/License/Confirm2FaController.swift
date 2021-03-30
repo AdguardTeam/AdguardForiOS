@@ -102,14 +102,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
     }
     
-    func updateTheme() {
-        theme.setupLabels(themableLabels)
-        theme.setupTextField(codeTextField)
-        theme.setupSeparator(codeLine)
-        view.backgroundColor = theme.backgroundColor
-        updateControls()
-    }
-    
     private func processNotification(info: [AnyHashable: Any]) {
                 
         DispatchQueue.main.async { [weak self] in
@@ -198,7 +190,11 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
 }
 
 extension Confirm2FaController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        theme.setupLabels(themableLabels)
+        theme.setupTextField(codeTextField)
+        theme.setupSeparator(codeLine)
+        view.backgroundColor = theme.backgroundColor
+        updateControls()
     }
 }

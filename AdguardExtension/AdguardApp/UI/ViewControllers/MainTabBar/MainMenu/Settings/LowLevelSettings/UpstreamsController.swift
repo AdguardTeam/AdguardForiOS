@@ -104,16 +104,6 @@ class UpstreamsController: BottomAlertController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(upstreamsTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
-    }
-    
     private func prepareUpstreamTextField() {
         switch upstreamType {
         case .bootstrap:
@@ -218,7 +208,13 @@ class UpstreamsController: BottomAlertController {
 }
 
 extension UpstreamsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(upstreamsTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        for separator in separators {
+            separator.backgroundColor = theme.separatorColor
+        }
     }
 }

@@ -284,16 +284,6 @@ class DnsSettingsController : UITableViewController {
             self.tableView.reloadData()
         }
     }
-
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupTable(tableView)
-        theme.setupSwitch(enabledSwitch)
-        theme.setupSeparators(separators)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        tableView.reloadData()
-    }
     
     private func getTitleString(product: Product?) -> String {
         
@@ -347,7 +337,13 @@ extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
 }
 
 extension DnsSettingsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupTable(tableView)
+        theme.setupSwitch(enabledSwitch)
+        theme.setupSeparators(separators)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        tableView.reloadData()
     }
 }

@@ -107,19 +107,6 @@ class LowLevelSettingsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        setupBetaChnnelTextView()
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSeparators(separators)
-        theme.setupSwitch(blockIpv6Switch)
-        theme.setupTextView(betaChannelTextView)
-        setupWarningDescriptionTextView()
-        tableView.reloadData()
-    }
-    
     private func setTunnelModeDescription() {
         switch resources.tunnelMode {
         case APVpnManagerTunnelModeSplit:
@@ -224,7 +211,16 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
 }
 
 extension LowLevelSettingsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        setupBetaChnnelTextView()
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSeparators(separators)
+        theme.setupSwitch(blockIpv6Switch)
+        theme.setupTextView(betaChannelTextView)
+        setupWarningDescriptionTextView()
+        tableView.reloadData()
     }
 }

@@ -160,20 +160,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
     }
     
-    private func updateTheme() {
-        
-        view.backgroundColor = theme.backgroundColor
-        
-        theme.setupTextField(nameEdit)
-        theme.setupTextField(passwordEdit)
-        
-        separators.forEach { $0.backgroundColor = theme.separatorColor }
-        
-        theme.setupLabels(themableLabels)
-        
-        updateLines()
-    }
-    
     private func isLicenseKey(text: String)->Bool {
         return !text.isEmpty && text.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
     }
@@ -311,7 +297,14 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 }
 
 extension EmailSignInController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        
+        theme.setupTextField(nameEdit)
+        theme.setupTextField(passwordEdit)
+        
+        separators.forEach { $0.backgroundColor = theme.separatorColor }
+        theme.setupLabels(themableLabels)
+        updateLines()
     }
 }

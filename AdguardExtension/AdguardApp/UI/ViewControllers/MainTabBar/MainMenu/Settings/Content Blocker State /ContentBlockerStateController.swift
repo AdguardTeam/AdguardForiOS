@@ -108,15 +108,6 @@ class ContentBlockerStateController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme!.backgroundColor
-        theme!.setupNavigationBar(navigationController?.navigationBar)
-        theme!.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
     private var safariObserver1: NotificationToken?
     private var safariObserver2: NotificationToken?
     private var contentBlockerObserver: NotificationToken?
@@ -174,7 +165,12 @@ class ContentBlockerStateController: UITableViewController {
 }
 
 extension ContentBlockerStateController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme!.backgroundColor
+        theme!.setupNavigationBar(navigationController?.navigationBar)
+        theme!.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

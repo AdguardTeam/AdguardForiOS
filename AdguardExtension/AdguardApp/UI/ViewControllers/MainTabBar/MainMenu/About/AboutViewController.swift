@@ -79,13 +79,7 @@ class AboutViewController: UIViewController {
     }
     
     // MARK: - private methods
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupImage(logoImageView)
-    }
-    
+
     private func processProStatus() {
         navigationItem.rightBarButtonItems = configuration.proStatus ? [] : [loginButton]
         
@@ -142,7 +136,9 @@ class AboutViewController: UIViewController {
 }
 
 extension AboutViewController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logoImageView)
     }
 }

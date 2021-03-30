@@ -68,17 +68,12 @@ class EditBlockRequestController: BottomAlertController {
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
     }
-    
-    // MARK: - private methods
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupTextField(domainNameTextField)
-        theme.setupPopupLabels(themableLabels)
-    }
 }
 
 extension EditBlockRequestController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(domainNameTextField)
+        theme.setupPopupLabels(themableLabels)
     }
 }

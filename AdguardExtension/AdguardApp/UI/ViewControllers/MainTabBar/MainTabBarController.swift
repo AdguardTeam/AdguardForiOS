@@ -93,11 +93,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         changeLeftAnchor(for: item)
     }
     
-    private func updateTheme(){
-        tabBar.backgroundColor = theme.tabBarColor
-        tabBar.barTintColor = theme.tabBarColor
-    }
-    
     private func changeLeftAnchor(for item: UITabBarItem){
         let numberOfItems = CGFloat(tabBar.items!.count)
         let width: CGFloat = tabBar.frame.width / numberOfItems
@@ -190,8 +185,9 @@ extension UITabBar {
 }
 
 extension MainTabBarController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        tabBar.backgroundColor = theme.tabBarColor
+        tabBar.barTintColor = theme.tabBarColor
     }
 }
 

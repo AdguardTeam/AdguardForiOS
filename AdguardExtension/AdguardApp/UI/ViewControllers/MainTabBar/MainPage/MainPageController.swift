@@ -474,22 +474,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - Private methods
     
     /**
-     Updates theme when notification is observed
-     */
-    private func updateTheme(){
-        navigationController?.view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        
-        chartView.updateTheme()
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        getProView.backgroundColor = theme.backgroundColor
-        
-        contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
-        nativeDnsView.backgroundColor = theme.backgroundColor
-    }
-    
-    /**
      Presents ChartDateTypeController
      */
     private func showChartDateTypeController(){
@@ -944,7 +928,16 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
 }
 
 extension MainPageController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        navigationController?.view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        
+        chartView.updateTheme()
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        getProView.backgroundColor = theme.backgroundColor
+        
+        contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
+        nativeDnsView.backgroundColor = theme.backgroundColor
     }
 }

@@ -157,22 +157,6 @@ class AdvancedSettingsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSeparators(separators)
-        theme.setupSwitch(showStatusbarSwitch)
-        theme.setupSwitch(restartProtectionSwitch)
-        theme.setupSwitch(debugLogsSwitch)
-
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-    }
-    
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
         let alert = UIAlertController(title: String.localizedString("remove_vpn_profile_title"), message: String.localizedString("remove_vpn_profile_message"), preferredStyle: .actionSheet)
         
@@ -207,7 +191,19 @@ class AdvancedSettingsController: UITableViewController {
 }
 
 extension AdvancedSettingsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSeparators(separators)
+        theme.setupSwitch(showStatusbarSwitch)
+        theme.setupSwitch(restartProtectionSwitch)
+        theme.setupSwitch(debugLogsSwitch)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
     }
 }

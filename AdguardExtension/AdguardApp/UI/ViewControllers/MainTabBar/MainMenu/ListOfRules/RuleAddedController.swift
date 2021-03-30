@@ -37,17 +37,13 @@ class RuleAddedController: BottomAlertController {
     @IBAction func okAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    private func updateTheme() {
+}
+
+extension RuleAddedController: ThemableProtocol {
+    func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
         theme.setupPopupButtons(themableButtons)
         theme.setupSeparators(separators)
-    }
-}
-
-extension RuleAddedController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

@@ -71,15 +71,11 @@ class GetProPageController: UIViewController {
         
         return resultString
     }
-    
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-    }
 }
 
 extension GetProPageController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
     }
 }

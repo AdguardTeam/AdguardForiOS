@@ -65,13 +65,6 @@ class ChooseDnsImplementationController: BottomAlertController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupSeparator(separator)
-        theme.setupPopupButtons(popupButtons)
-    }
     
     private func processCurrentImplementation() {
         let implementation = resources.dnsImplementation
@@ -82,7 +75,10 @@ class ChooseDnsImplementationController: BottomAlertController {
 }
 
 extension ChooseDnsImplementationController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupSeparator(separator)
+        theme.setupPopupButtons(popupButtons)
     }
 }

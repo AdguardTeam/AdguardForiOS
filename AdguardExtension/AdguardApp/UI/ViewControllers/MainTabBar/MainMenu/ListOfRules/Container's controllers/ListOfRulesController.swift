@@ -172,15 +172,6 @@ class ListOfRulesController: UIViewController {
         }
     }
     
-    // MARK: - Update theme
-    
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        bottomBar.backgroundColor = theme.bottomBarBackgroundColor
-        changeState()
-    }
-    
     // MARK: - Change main screen
     
     private func changeScreen(){
@@ -322,7 +313,10 @@ class ListOfRulesController: UIViewController {
 }
 
 extension ListOfRulesController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        bottomBar.backgroundColor = theme.bottomBarBackgroundColor
+        changeState()
     }
 }

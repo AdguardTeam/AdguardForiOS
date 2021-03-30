@@ -65,12 +65,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     // MARK: - Private methods
     
-    private func updateTheme () {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        shadowView.updateTheme()
-    }
-    
     private func setupButtons(){
         var buttons: [BottomShadowButton] = []
         
@@ -333,11 +327,18 @@ class FilterDetailsTableCotroller : UITableViewController {
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         delegate?.filtersStateWasChanged()
     }
-    
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        
+}
+
+extension FilterDetailsController: ThemableProtocol {
+    func updateTheme () {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        shadowView.updateTheme()
+    }
+}
+
+extension FilterDetailsTableCotroller: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
@@ -346,8 +347,8 @@ class FilterDetailsTableCotroller : UITableViewController {
         
         if let homepage = filter.homepage {
             let homepage = NSAttributedString(string: homepage, attributes:
-                [.foregroundColor: theme.grayTextColor,
-                 .underlineStyle: NSUnderlineStyle.single.rawValue])
+                                                [.foregroundColor: theme.grayTextColor,
+                                                 .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
         }
         
@@ -357,17 +358,5 @@ class FilterDetailsTableCotroller : UITableViewController {
                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])
             subscriptionURLLabel.attributedText = subscriptionUrl
         }
-    }
-}
-
-extension FilterDetailsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
-    }
-}
-
-extension FilterDetailsTableCotroller: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

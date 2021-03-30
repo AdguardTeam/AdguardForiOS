@@ -139,14 +139,6 @@ class BlockRequestController: BottomAlertController {
         subDomains[tag].isSelected = true
         tableView.reloadData()
     }
-    
-    // MARK: - Private methods
-    
-    private func updateTheme(){
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        tableView.reloadData()
-    }
 }
 
 
@@ -176,7 +168,9 @@ extension BlockRequestController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension BlockRequestController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        tableView.reloadData()
     }
 }

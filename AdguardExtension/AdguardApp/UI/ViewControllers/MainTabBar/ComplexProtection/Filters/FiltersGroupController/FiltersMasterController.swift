@@ -119,14 +119,6 @@ class FiltersMasterController: UIViewController {
             }
         }
     }
-    
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-    }
-    
 }
 
 protocol FilterMasterControllerDelegate: class {
@@ -135,7 +127,10 @@ protocol FilterMasterControllerDelegate: class {
 }
 
 extension FiltersMasterController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
     }
 }

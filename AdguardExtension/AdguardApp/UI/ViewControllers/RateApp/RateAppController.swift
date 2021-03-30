@@ -56,17 +56,11 @@ class RateAppController: BottomAlertController {
             AppDelegate.shared.presentRateAppProblemController()
         }
     }
-    
-    // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-    }
 }
 
 extension RateAppController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
     }
 }

@@ -299,20 +299,6 @@ class ActivityViewController: UITableViewController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme(){
-        tableView.reloadData()
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        sectionHeaderView.backgroundColor = theme.backgroundColor
-        tableHeaderView.backgroundColor = theme.backgroundColor
-        theme.setupLabel(recentActivityLabel)
-        theme.setupTable(tableView)
-        theme.setupSearchBar(searchBar)
-        theme.setupLabels(themableLabels)
-        theme.setupButtons(themableButtons)
-        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
-    }
     
     private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
@@ -639,7 +625,17 @@ extension ActivityViewController: AddDomainToListDelegate {
 }
 
 extension ActivityViewController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        tableView.reloadData()
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
+        theme.setupLabel(recentActivityLabel)
+        theme.setupTable(tableView)
+        theme.setupSearchBar(searchBar)
+        theme.setupLabels(themableLabels)
+        theme.setupButtons(themableButtons)
+        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
     }
 }

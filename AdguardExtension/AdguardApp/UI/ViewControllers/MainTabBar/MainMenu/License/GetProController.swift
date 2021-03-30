@@ -204,12 +204,6 @@ class GetProController: UIViewController {
         getProTableController?.enablePurchaseButtons(true)
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        separator2.backgroundColor = theme.separatorColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-    }
-    
     private func updateViews() {
         
         switch (configurationService.proStatus, configurationService.purchasedThroughLogin) {
@@ -229,7 +223,9 @@ class GetProController: UIViewController {
 }
 
 extension GetProController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        separator2.backgroundColor = theme.separatorColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
 }

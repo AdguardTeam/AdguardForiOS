@@ -136,12 +136,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupTextField(name)
-        theme.setupPopupLabels(themableLabels)
-    }
-    
     private func setupAddingNewFilter() {
         newFilterTitle.text = filterType.getTitleText()
         
@@ -203,7 +197,9 @@ class NewCustomFilterDetailsController : BottomAlertController {
 }
 
 extension NewCustomFilterDetailsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(name)
+        theme.setupPopupLabels(themableLabels)
     }
 }

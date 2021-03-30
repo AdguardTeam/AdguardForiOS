@@ -111,13 +111,6 @@ class OnboardingController: UIViewController {
         switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupTable(tableView)
-        tableView.reloadData()
-    }
-    
     private func observeContentBlockersState(){
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
@@ -158,8 +151,11 @@ extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension OnboardingController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupTable(tableView)
+        tableView.reloadData()
         setupLabels()
     }
 }

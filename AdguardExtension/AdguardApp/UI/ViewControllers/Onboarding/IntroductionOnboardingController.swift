@@ -65,18 +65,14 @@ class IntroductionOnboardingController: UIViewController {
         
         licenseTextView.attributedText = attributeString
     }
-    
-    private func updateTheme() {
+}
+
+extension IntroductionOnboardingController: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabel(titleLabel)
         theme.setupTextView(licenseTextView)
         setupLicenseTextView()
         theme.setupNavigationBar(navigationController?.navigationBar)
-    }
-}
-
-extension IntroductionOnboardingController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

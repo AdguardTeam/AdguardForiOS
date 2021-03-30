@@ -102,13 +102,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-        theme.setupSeparators(separators)
-    }
-    
     private func getEditCaptionText() -> String {
         switch type {
         case .safariUserfilter:
@@ -142,7 +135,10 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
 }
 
 extension RuleDetailsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
+        theme.setupSeparators(separators)
     }
 }

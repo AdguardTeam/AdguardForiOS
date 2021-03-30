@@ -140,11 +140,6 @@ class OnboardingAnimationsController: UIViewController {
         }
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-    }
-    
     private func setupScrollViews() {
         var offset: CGFloat = 0.0
         
@@ -221,7 +216,8 @@ class OnboardingAnimationsController: UIViewController {
 }
 
 extension OnboardingAnimationsController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
     }
 }

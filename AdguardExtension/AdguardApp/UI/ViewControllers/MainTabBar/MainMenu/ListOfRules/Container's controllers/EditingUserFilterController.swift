@@ -48,19 +48,13 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         helperLabel.isHidden = !(textView.text.count == 0)
     }
-    
-    // MARK: - Private methods
-    
-    private func updateTheme(){
+}
+
+extension EditingUserFilterController: ThemableProtocol {
+    func updateTheme(){
         textView.backgroundColor = theme.backgroundColor
         view.backgroundColor = theme.backgroundColor
         theme.setupTextView(textView)
         theme.setupLabel(helperLabel)
-    }
-}
-
-extension EditingUserFilterController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

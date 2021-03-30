@@ -154,13 +154,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
 
     // MARK: - private methods
     
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        rulePlaceholderLabel.textColor = theme.placeholderTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-    }
-    
     private func fillTextViewWithCurrentWiFiName() {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
         let ssid = networkSettingsService.getCurrentWiFiName()
@@ -240,7 +233,10 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
 }
 
 extension AddRuleController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        rulePlaceholderLabel.textColor = theme.placeholderTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
     }
 }

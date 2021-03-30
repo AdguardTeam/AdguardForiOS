@@ -240,18 +240,6 @@ class NewDnsServerController: BottomAlertController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(nameField)
-        theme.setupTextField(upstreamsField)
-        addButton?.indicatorStyle = theme.indicatorStyle
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
-    }
-    
     private func updateSaveButton() {
         let dnsName = nameField.text ?? ""
         let dnsUrl = upstreamsField.text ?? ""
@@ -270,7 +258,15 @@ class NewDnsServerController: BottomAlertController {
 }
 
 extension NewDnsServerController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(nameField)
+        theme.setupTextField(upstreamsField)
+        addButton?.indicatorStyle = theme.indicatorStyle
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        for separator in separators {
+            separator.backgroundColor = theme.separatorColor
+        }
     }
 }

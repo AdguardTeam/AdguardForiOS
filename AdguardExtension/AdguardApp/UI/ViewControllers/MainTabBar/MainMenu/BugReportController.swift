@@ -164,15 +164,6 @@ class BugReportController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
     }
-    
-    private func updateTheme() {
-        view.backgroundColor = themeService.backgroundColor
-        themeService.setupLabels(themableLabels)
-        themeService.setupNavigationBar(navigationController?.navigationBar)
-        themeService.setupTextField(emailAddressTextField)
-        themeService.setupTextView(descriptionTextView)
-        textViewPlaceholder.textColor = themeService.placeholderTextColor
-    }
 }
 
 extension BugReportController: UITextFieldDelegate {
@@ -230,7 +221,12 @@ extension BugReportController: UITextViewDelegate {
 }
 
 extension BugReportController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme() {
+        view.backgroundColor = themeService.backgroundColor
+        themeService.setupLabels(themableLabels)
+        themeService.setupNavigationBar(navigationController?.navigationBar)
+        themeService.setupTextField(emailAddressTextField)
+        themeService.setupTextView(descriptionTextView)
+        textViewPlaceholder.textColor = themeService.placeholderTextColor
     }
 }

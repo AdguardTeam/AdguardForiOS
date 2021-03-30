@@ -65,19 +65,15 @@ class ChartDateTypeController: BottomAlertController {
         
         dismiss(animated: true, completion: nil)
     }
-    
-    private func updateTheme(){
+}
+
+extension ChartDateTypeController: ThemableProtocol {
+    func updateTheme(){
         content.backgroundColor = theme.popupBackgroundColor
         theme.setupLabel(periodLabel)
         theme.setupSeparators(separators)
         for button in buttons {
             button.setTitleColor(theme.grayTextColor, for: .normal)
         }
-    }
-}
-
-extension ChartDateTypeController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
     }
 }

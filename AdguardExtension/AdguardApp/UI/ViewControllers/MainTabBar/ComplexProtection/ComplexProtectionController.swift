@@ -241,23 +241,6 @@ class ComplexProtectionController: UITableViewController {
     
     // MARK: - Private methods
     
-    /**
-     Updates theme
-     */
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        premiumTextView.backgroundColor = theme.invertedBackgroundColor
-        premiumTextView.textColor = theme.backgroundColor
-
-        theme.setupSwitch(safariProtectionSwitch)
-        theme.setupSwitch(systemProtectionSwitch)
-        theme.setupTable(tableView)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupLabels(themableLabels)
-        
-        tableView.reloadData()
-    }
-    
     private func addObservers() {
         
         proObservation = configuration.observe(\.proStatus) {[weak self] _, _ in
@@ -325,7 +308,17 @@ class ComplexProtectionController: UITableViewController {
 }
 
 extension ComplexProtectionController: ThemableProtocol {
-    func themeNeedUpdate() {
-        updateTheme()
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        premiumTextView.backgroundColor = theme.invertedBackgroundColor
+        premiumTextView.textColor = theme.backgroundColor
+
+        theme.setupSwitch(safariProtectionSwitch)
+        theme.setupSwitch(systemProtectionSwitch)
+        theme.setupTable(tableView)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupLabels(themableLabels)
+        
+        tableView.reloadData()
     }
 }
