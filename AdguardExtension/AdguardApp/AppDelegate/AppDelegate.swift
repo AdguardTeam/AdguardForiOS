@@ -150,7 +150,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         subscribeToUserNotificationServiceNotifications()
         AppDelegate.setPeriodForCheckingFilters()
-        subscribeToNotifications()
+        subscribeToThemeChangeNotification()
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
         return true
     }

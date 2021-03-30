@@ -22,10 +22,8 @@ protocol ThemableProtocol {
 
 extension AppDelegate {
     
-    func subscribeToNotifications() {
-        let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    func subscribeToThemeChangeNotification() {
         let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
             self?.window?.backgroundColor = themeService.backgroundColor
             self?.themeChange()
@@ -45,8 +43,8 @@ extension AppDelegate {
     }
     
     private func recursiveChildrenThemeUpdate(children: [UIViewController]?) {
-        if let children = children, children.isEmpty { return }
-        children?.forEach {
+        guard let children = children, !children.isEmpty else { return }
+        children.forEach {
             recursiveChildrenThemeUpdate(children: $0.children)
             ($0 as? ThemableProtocol)?.updateTheme()
         }
