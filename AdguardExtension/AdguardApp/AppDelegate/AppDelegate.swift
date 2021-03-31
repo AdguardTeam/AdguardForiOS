@@ -310,21 +310,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func updateAntibannerContoller() {
         antibannerController.onReady { antibanner in
-            antibanner.repairUpdateState { [weak self] in
-                guard let self = self else { return }
-                if self.activateWithOpenUrl {
-                    self.activateWithOpenUrl = false
-                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.")
-                    return
-                }
-                
-                if antibanner.updatesRightNow {
-                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.")
-                    return
-                }
-                
-                self.fetchPerformer?.invalidateAntibannerIfNeeded()
+            if self.activateWithOpenUrl {
+                self.activateWithOpenUrl = false
+                DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.")
+                return
             }
+            
+            if antibanner.updatesRightNow {
+                DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.")
+                return
+            }
+            
+            self.fetchPerformer?.invalidateAntibannerIfNeeded()
         }
     }
     

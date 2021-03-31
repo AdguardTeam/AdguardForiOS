@@ -173,46 +173,44 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
         
         antibannerController.onReady { [weak self] antibaner in
             guard let self = self else { return }
-            self.antibanner.repairUpdateState {
-                if self.antibanner.updatesRightNow {
-                    DDLogInfo("(BackgroundFetchPerformer) Update process did not start because it is performed right now.")
-                    return
-                }
+            if self.antibanner.updatesRightNow {
+                DDLogInfo("(BackgroundFetchPerformer) Update process did not start because it is performed right now.")
+                return
+            }
+            
+            if !checkResult {
+                DDLogInfo("(BackgroundFetchPerformer - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.")
+                self.antibanerUpdateResult = UpdateResult(rawValue: UIBackgroundFetchResult.noData.rawValue)
+            } else {
+                self.antibanerUpdateResult = .updateStarted
+            }
+            
+            switch self.fetchState {
+            case .notStarted, .filtersupdating:
+                self.fetchState = .filtersupdating
                 
-                if !checkResult {
-                    DDLogInfo("(BackgroundFetchPerformer - Background Fetch) Cancel fetch. App settings permit updates only over WiFi.")
-                    self.antibanerUpdateResult = UpdateResult(rawValue: UIBackgroundFetchResult.noData.rawValue)
-                } else {
-                    self.antibanerUpdateResult = .updateStarted
-                }
-                
-                switch self.fetchState {
-                case .notStarted, .filtersupdating:
-                    self.fetchState = .filtersupdating
-                    
-                    if !(checkResult && self.invalidateAntibanner(fromUI: false, interactive: false)) {
-                        self.fetchState = .notStarted
-                        self.antibanerUpdateFinished(result: .updateNoData)
-                    }
-                case .filtersupdated, .contentBlockersUpdating:
-                    self.fetchState = .contentBlockersUpdating
-                    self.contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] error in
-                        if let _ = error {
-                            self?.fetchState = .notStarted
-                        } else {
-                            self?.fetchState = .contentBlockersUpdated
-                        }
-                        self?.antibanerUpdateFinished(result: .updateNoData)
-                    }
-                case .contentBlockersUpdated, .safariUpdating:
-                    self.fetchState = .safariUpdating
-                    self.safariService.invalidateBlockingJsons { [weak self] _ in
-                        self?.fetchState = .notStarted
-                        self?.antibanerUpdateFinished(result: .updateNoData)
-                    }
-                default:
+                if !(checkResult && self.invalidateAntibanner(fromUI: false, interactive: false)) {
+                    self.fetchState = .notStarted
                     self.antibanerUpdateFinished(result: .updateNoData)
                 }
+            case .filtersupdated, .contentBlockersUpdating:
+                self.fetchState = .contentBlockersUpdating
+                self.contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] error in
+                    if let _ = error {
+                        self?.fetchState = .notStarted
+                    } else {
+                        self?.fetchState = .contentBlockersUpdated
+                    }
+                    self?.antibanerUpdateFinished(result: .updateNoData)
+                }
+            case .contentBlockersUpdated, .safariUpdating:
+                self.fetchState = .safariUpdating
+                self.safariService.invalidateBlockingJsons { [weak self] _ in
+                    self?.fetchState = .notStarted
+                    self?.antibanerUpdateFinished(result: .updateNoData)
+                }
+            default:
+                self.antibanerUpdateFinished(result: .updateNoData)
             }
             
             self.purchaseService.checkPremiumStatusChanged()
@@ -232,20 +230,10 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
                     DDLogInfo("(BackgroundFetchPerformer) Update process started by timer.")
                 }
                 
-                var result = false;
-                
                 antibanner.beginTransaction()
                 DDLogInfo("(BackgroundFetchPerformer) Begin of the Update Transaction from - invalidateAntibanner.")
                 
-                result = antibanner.startUpdatingForced(fromUI, interactive: interactive)
-                
-                if !result {
-                    DDLogInfo("(BackgroundFetchPerformer) Update process did not start because antibanner.startUpdatingForced return false.")
-                    antibanner.rollbackTransaction()
-                    DDLogInfo("(BackgroundFetchPerformer) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.")
-                }
-                
-                return result
+                return true
             }
             
             DDLogInfo("(BackgroundFetchPerformer) Update process NOT started by timer. Time period from previous update too small.")
