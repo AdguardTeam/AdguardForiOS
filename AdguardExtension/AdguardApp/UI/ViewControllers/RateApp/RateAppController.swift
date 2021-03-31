@@ -20,6 +20,7 @@ import UIKit
 
 class RateAppController: BottomAlertController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBOutlet weak var haveAProblemButton: UIButton!
@@ -41,7 +42,7 @@ class RateAppController: BottomAlertController {
         rateAppButton.applyStandardGreenStyle()
         
         haveAProblemButton.makeTitleTextUppercased()
-        haveAProblemButton.applyStandardOpaqueStyle()
+        haveAProblemButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.green)
         
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
@@ -66,7 +67,7 @@ class RateAppController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupLabels(themableLabels)
     }
 }

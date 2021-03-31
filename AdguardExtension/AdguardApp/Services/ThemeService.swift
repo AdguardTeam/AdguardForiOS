@@ -27,6 +27,7 @@ import Foundation
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
+    var popupTitleTextColor: UIColor { get }
     var bottomBarBackgroundColor: UIColor { get }
     var blackTextColor: UIColor { get }
     var lightGrayTextColor: UIColor { get }
@@ -86,19 +87,23 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var backgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackgroundColor : .white
     }
     
     var invertedBackgroundColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor(hexString: "#131313")
+        return configuration.darkTheme ? .white : UIColor.AdGuardColor.darkBackgroundColor
     }
     
     var popupBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor(hexString: "#000000") : .white
+    }
+    
+    var popupTitleTextColor: UIColor {
+        return configuration.darkTheme ? .white : UIColor(hexString: "#4D4D4D")
     }
     
     var bottomBarBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : UIColor(hexString: "#F3F3F3")
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackgroundColor : UIColor(hexString: "#F3F3F3")
     }
     
     var blackTextColor: UIColor {
@@ -146,7 +151,7 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var tabBarColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackgroundColor : .white
     }
     
     var ruleTextColor: UIColor {

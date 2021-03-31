@@ -67,7 +67,7 @@ class ImportSettingsCell: UITableViewCell {
         
         separator.isHidden = lastRow
         
-        theme.setupTableCell(self)
+        self.backgroundColor = theme.popupBackgroundColor
         theme.setupLabel(title)
         theme.setupSeparator(separator)
     }
