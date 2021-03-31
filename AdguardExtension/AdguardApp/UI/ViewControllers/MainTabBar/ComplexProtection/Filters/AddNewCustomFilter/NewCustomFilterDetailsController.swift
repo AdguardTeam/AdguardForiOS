@@ -64,6 +64,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -89,19 +90,10 @@ class NewCustomFilterDetailsController : BottomAlertController {
         }
         
         updateTheme()
+        addButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
         cancelButton.makeTitleTextUppercased()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView, controllerModeType == .addingFilter {
-            navigationController?.dismiss(animated: true, completion: nil)
-        } else if touch.view != contentView, controllerModeType == .editingFilter {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     // MARK: - Actions
@@ -140,10 +132,18 @@ class NewCustomFilterDetailsController : BottomAlertController {
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+    
     // MARK: - private methods
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
+        newFilterTitle.textColor = theme.popupTitleTextColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
     }

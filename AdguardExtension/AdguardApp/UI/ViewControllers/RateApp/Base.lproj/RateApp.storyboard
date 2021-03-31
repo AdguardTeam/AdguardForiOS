@@ -105,7 +105,7 @@
                         <outlet property="haveAProblemButton" destination="OhP-9I-o1V" id="6IR-nx-bxT"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="zBK-0B-0Jg" id="k9x-im-qIw"/>
                         <outlet property="rateAppButton" destination="XCD-6t-VdZ" id="CzS-4e-ZvS"/>
-                        <outletCollection property="themableLabels" destination="9GR-EN-yP2" collectionClass="NSMutableArray" id="y53-QE-Mdz"/>
+                        <outlet property="titleLabel" destination="9GR-EN-yP2" id="Em6-Di-fOd"/>
                         <outletCollection property="themableLabels" destination="m5W-47-2Mg" collectionClass="NSMutableArray" id="ufC-3G-hBC"/>
                     </connections>
                 </viewController>
@@ -206,7 +206,7 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="OYw-pT-uLL" id="x7z-Kk-MTX"/>
                         <outlet property="problemIsDoneButton" destination="XGH-Qh-0t0" id="tic-mN-x85"/>
                         <outlet property="problemRemainsButton" destination="3v5-h9-5E9" id="swk-cO-2lo"/>
-                        <outletCollection property="themableLabels" destination="2yq-tf-ruv" collectionClass="NSMutableArray" id="zmS-Yb-itv"/>
+                        <outlet property="titleLabel" destination="2yq-tf-ruv" id="oNx-yl-LSS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzq-DP-zNa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

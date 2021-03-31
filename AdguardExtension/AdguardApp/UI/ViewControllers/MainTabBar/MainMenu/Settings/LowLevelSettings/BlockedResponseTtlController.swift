@@ -24,10 +24,12 @@ protocol BlockedResponseTtlDelegate: class {
 
 class BlockedResponseTtlController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var ttlTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -53,16 +55,11 @@ class BlockedResponseTtlController: BottomAlertController {
         
         updateSaveButton()
         updateTheme()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
+        
+        saveButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
+        saveButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
     }
     
     // MARK: - Actions
@@ -84,11 +81,19 @@ class BlockedResponseTtlController: BottomAlertController {
         updateSaveButton()
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+    
 
     // MARK: - Private methods
     
     private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(ttlTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle

@@ -23,6 +23,8 @@ extension UIColor {
         static let green = UIColor(hexString: "#67b279")
         static let red = UIColor(hexString: "df3812")
         static let yellow = UIColor(hexString: "#eb9300")
+        static let gray = UIColor(hexString: "#a4a4a4")
+        static let darkBackgroundColor = UIColor(hexString: "#131313")
         static let lightGray = UIColor(hexString: "#d8d8d8")
     }
     

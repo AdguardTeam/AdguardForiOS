@@ -54,7 +54,7 @@ class HowToSetupController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupLabels(themableLabels)
     }
     

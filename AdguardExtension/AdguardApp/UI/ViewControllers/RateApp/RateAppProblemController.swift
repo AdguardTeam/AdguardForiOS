@@ -20,11 +20,10 @@ import UIKit
 
 class RateAppProblemController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var problemIsDoneButton: UIButton!
     @IBOutlet weak var problemRemainsButton: UIButton!
-    
-    @IBOutlet var themableLabels: [ThemableLabel]!
     
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -41,7 +40,7 @@ class RateAppProblemController: BottomAlertController {
         problemIsDoneButton.applyStandardGreenStyle()
         
         problemRemainsButton.makeTitleTextUppercased()
-        problemRemainsButton.applyStandardOpaqueStyle()
+        problemRemainsButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.green)
         
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
@@ -64,8 +63,7 @@ class RateAppProblemController: BottomAlertController {
     // MARK: - Private methods
 
     private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupTextView(descriptionTextView)
         setupDescriptionTextView()
     }

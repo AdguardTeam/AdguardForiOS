@@ -26,9 +26,11 @@ class AddCustomFilterController: BottomAlertController {
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -48,6 +50,8 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = false
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
+        nextButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
         
         notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
             self?.updateTheme()
@@ -61,20 +65,11 @@ class AddCustomFilterController: BottomAlertController {
         }
         
         updateTheme()
+        ruleTextChanged(urlTextField)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            navigationController?.dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
@@ -82,6 +77,13 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = enabled
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
     
     // MARK: - Actions
     
@@ -128,7 +130,7 @@ class AddCustomFilterController: BottomAlertController {
     // MARK: - private method
     
     private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
         nextButton.indicatorStyle = theme.indicatorStyle
