@@ -179,8 +179,9 @@ class DnsProvidersController: UITableViewController {
     // MARK: - private methods
     
     private func editProvider(_ provider: DnsProviderCellModel) {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "EditDnsServerController") as? NewDnsServerController else { return }
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
         if let id = provider.providerId, let providerInfo = model.getProvider(byId: id) {
+            controller.controllerType = .edit
             controller.provider = providerInfo
             controller.delegate = self
             present(controller, animated: true, completion: nil)

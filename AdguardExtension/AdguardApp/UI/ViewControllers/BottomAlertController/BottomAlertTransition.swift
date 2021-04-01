@@ -28,7 +28,7 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
         super.init()
     }
     
-    private let targetColor = UIColor.black.withAlphaComponent(0.5)
+    private let targetColor = UIColor.AdGuardColor.darkBackground.withAlphaComponent(0.5)
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration

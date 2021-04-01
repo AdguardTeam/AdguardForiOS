@@ -61,7 +61,6 @@ class BlockRequestController: BottomAlertController {
         
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var editButton: RoundRectButton!
-    @IBOutlet weak var cancelButton: RoundRectButton!
     
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
@@ -108,7 +107,8 @@ class BlockRequestController: BottomAlertController {
         
         addButton.makeTitleTextUppercased()
         editButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        editButton.applyStandardGreenStyle()
     }
     
     // MARK: - Actions
@@ -126,10 +126,6 @@ class BlockRequestController: BottomAlertController {
             let selectedDomain = self.subDomains.first(where: { $0.isSelected })?.domain ?? ""
             presenter?.presentEditBlockRequestController(with: selectedDomain, originalDomain: self.fullDomain, type: self.type, delegate: self.delegate)
         }
-    }
-    
-    @IBAction func cancelTapped(_ sender: UIButton) {
-        dismiss(animated: true)
     }
 
     @IBAction func checkBoxTapped(_ sender: UIButton) {
@@ -169,6 +165,7 @@ extension BlockRequestController: UITableViewDelegate, UITableViewDataSource {
 
 extension BlockRequestController: ThemableProtocol {
     func updateTheme(){
+        titleLabel.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         tableView.reloadData()

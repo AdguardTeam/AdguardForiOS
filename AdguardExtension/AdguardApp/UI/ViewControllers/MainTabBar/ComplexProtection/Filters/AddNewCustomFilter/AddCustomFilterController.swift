@@ -26,9 +26,11 @@ class AddCustomFilterController: BottomAlertController {
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -46,6 +48,8 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = false
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
+        nextButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGray4)
 
         if openUrl != nil {
             urlTextField.text = openUrl
@@ -56,20 +60,11 @@ class AddCustomFilterController: BottomAlertController {
         }
         
         updateTheme()
+        ruleTextChanged(urlTextField)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            navigationController?.dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
@@ -77,6 +72,13 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = enabled
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
     
     // MARK: - Actions
     
@@ -156,6 +158,7 @@ enum NewFilterType {
 
 extension AddCustomFilterController: ThemableProtocol {
     func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)

@@ -29,6 +29,7 @@ class UpstreamsController: BottomAlertController {
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var upstreamsTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -53,18 +54,9 @@ class UpstreamsController: BottomAlertController {
         
         cancelButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
+        cancelButton.applyStandardOpaqueStyle(color: .gray)
+        saveButton.applyStandardGreenStyle()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
     
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -100,6 +92,14 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
     }
     
     // MARK: - Private methods
@@ -209,7 +209,8 @@ class UpstreamsController: BottomAlertController {
 
 extension UpstreamsController: ThemableProtocol {
     func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
+        upstreamTypeLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(upstreamsTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle

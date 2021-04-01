@@ -68,9 +68,9 @@ class ChartDateTypeController: BottomAlertController {
 }
 
 extension ChartDateTypeController: ThemableProtocol {
-    func updateTheme(){
-        content.backgroundColor = theme.popupBackgroundColor
-        theme.setupLabel(periodLabel)
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        periodLabel.textColor = theme.popupTitleTextColor
         theme.setupSeparators(separators)
         for button in buttons {
             button.setTitleColor(theme.grayTextColor, for: .normal)

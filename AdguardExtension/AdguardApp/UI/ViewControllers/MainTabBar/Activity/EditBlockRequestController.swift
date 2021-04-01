@@ -23,6 +23,7 @@ class EditBlockRequestController: BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var domainNameTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var backButton: RoundRectButton!
@@ -50,6 +51,8 @@ class EditBlockRequestController: BottomAlertController {
         
         addButton.makeTitleTextUppercased()
         backButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        backButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGray4)
     }
     
     // MARK: - Actions
@@ -68,10 +71,19 @@ class EditBlockRequestController: BottomAlertController {
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
 }
 
 extension EditBlockRequestController: ThemableProtocol {
     func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(domainNameTextField)
         theme.setupPopupLabels(themableLabels)

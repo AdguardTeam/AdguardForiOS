@@ -62,7 +62,7 @@ class OnboardingController: UIViewController {
             self?.observeContentBlockersState()
         }
         
-        watchManualButtonIpad.applyStandardOpaqueStyle()
+        watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         setupLabels()
         updateTheme()
     }

@@ -59,7 +59,8 @@ class HowToSetupController: BottomAlertController {
 
 extension HowToSetupController: ThemableProtocol {
     func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
     }
 }

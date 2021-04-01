@@ -20,6 +20,7 @@ import UIKit
 
 class RateAppController: BottomAlertController {
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBOutlet weak var haveAProblemButton: UIButton!
@@ -38,7 +39,7 @@ class RateAppController: BottomAlertController {
         rateAppButton.applyStandardGreenStyle()
         
         haveAProblemButton.makeTitleTextUppercased()
-        haveAProblemButton.applyStandardOpaqueStyle()
+        haveAProblemButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         
         updateTheme()
     }
@@ -60,7 +61,8 @@ class RateAppController: BottomAlertController {
 
 extension RateAppController: ThemableProtocol {
     func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
     }
 }

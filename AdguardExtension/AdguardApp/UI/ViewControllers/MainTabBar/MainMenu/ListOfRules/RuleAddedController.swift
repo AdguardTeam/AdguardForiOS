@@ -20,10 +20,8 @@ import Foundation
 
 class RuleAddedController: BottomAlertController {
     
-    @IBOutlet weak var okButton: RoundRectButton!
-    @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
-    @IBOutlet var themableButtons: [RoundRectButton]!
+    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var okButton: UIButton!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -32,6 +30,7 @@ class RuleAddedController: BottomAlertController {
         super.viewDidLoad()
         updateTheme()
         okButton.makeTitleTextUppercased()
+        okButton.applyStandardGreenStyle()
     }
     
     @IBAction func okAction(_ sender: Any) {
@@ -42,8 +41,6 @@ class RuleAddedController: BottomAlertController {
 extension RuleAddedController: ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupPopupButtons(themableButtons)
-        theme.setupSeparators(separators)
+        titleLable.textColor = theme.popupTitleTextColor
     }
 }

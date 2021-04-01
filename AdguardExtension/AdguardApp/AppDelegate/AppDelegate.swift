@@ -175,7 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        DDLogInfo("(AppDelegateProcessor) applicationDidBecomeActive.")
+        DDLogInfo("(AppDelegate) applicationDidBecomeActive.")
         initStatusBarNotifications(application)
         
         // If theme mode is System Default gets current style
@@ -199,7 +199,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         activateWithOpenUrl = true
         
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
-                                                          configurationService: configuration)
+                                                          configurationService: configuration,
+                                                          purchaseService: purchaseService)
         
         return urlParser.parse(url: url)
     }

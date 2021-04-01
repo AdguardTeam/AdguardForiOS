@@ -28,7 +28,7 @@ extension UIColor {
         static let vpnGreen: UIColor = #colorLiteral(red: 0.337254902, green: 0.5019607843, blue: 0.2509803922, alpha: 1)        //hex = #568040
         static let vpnDarkGreen: UIColor = #colorLiteral(red: 0.2431372549, green: 0.3607843137, blue: 0.1803921569, alpha: 1)    //hex = 3e5c2e
         
-        static let darkBlackground: UIColor = #colorLiteral(red: 0.07450980392, green: 0.07450980392, blue: 0.07450980392, alpha: 1) //hex = #131313
+        static let darkBackground: UIColor = #colorLiteral(red: 0.07450980392, green: 0.07450980392, blue: 0.07450980392, alpha: 1) //hex = #131313
         static let lightGray1: UIColor = #colorLiteral(red: 0.1647058824, green: 0.1647058824, blue: 0.1647058824, alpha: 1)      //hex = #2a2a2a
         static let lightGray2: UIColor = #colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)      //hex = #4d4d4d
         static let lightGray3: UIColor = #colorLiteral(red: 0.5333333333, green: 0.5333333333, blue: 0.5333333333, alpha: 1)      //hex = #888888

@@ -33,6 +33,7 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var editCaption: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -74,6 +75,8 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
+        addButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGray4)
     }
     
     deinit {
@@ -84,16 +87,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         super.viewDidAppear(animated)
         ruleTextView.becomeFirstResponder()
         rulePlaceholderLabel.text = getPlaceholderText()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @objc func keyboardNotification(notification: NSNotification) {
@@ -150,6 +143,14 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
             return false
         }
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textViewUnderline.state = .disabled
     }
 
     // MARK: - private methods
@@ -234,8 +235,9 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
 
 extension AddRuleController: ThemableProtocol {
     func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
         rulePlaceholderLabel.textColor = theme.placeholderTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
         theme.setupPopupLabels(themableLabels)
         theme.setupTextView(ruleTextView)
     }
