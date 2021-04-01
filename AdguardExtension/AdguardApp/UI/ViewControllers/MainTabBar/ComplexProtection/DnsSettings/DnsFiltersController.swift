@@ -215,9 +215,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         model.isSearchActive = true
         navigationItem.rightBarButtonItems = [cancelButton]
         navigationItem.title = String.localizedString("navigation_item_dns_filters_title")
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(hexString: "#4d4d4d"),
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
         navigationItem.setHidesBackButton(true, animated:true)
         tableView.tableHeaderView = searchView
         searchBar.becomeFirstResponder()
