@@ -14,43 +14,42 @@
             <objects>
                 <viewController storyboardIdentifier="RateAppController" id="CNv-Rb-w1l" customClass="RateAppController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o4r-wn-WEe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyI-jv-Crn">
-                                <rect key="frame" x="0.0" y="308.5" width="320" height="259.5"/>
+                                <rect key="frame" x="0.0" y="536" width="1024" height="232"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhP-9I-o1V">
-                                        <rect key="frame" x="16" y="187.5" width="288" height="40"/>
+                                        <rect key="frame" x="16" y="160" width="992" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ZGp-Us-Ff5"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="No, I have a problem"/>
                                         <connections>
                                             <action selector="haveAProblemTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="rFA-tC-mqO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCD-6t-VdZ">
-                                        <rect key="frame" x="16" y="131.5" width="288" height="40"/>
+                                        <rect key="frame" x="16" y="104" width="992" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="pIQ-iD-ufI"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Yes, rate it"/>
                                         <connections>
                                             <action selector="rateAppTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="4O6-hK-RwQ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-47-2Mg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="99.5" width="288" height="0.0"/>
+                                        <rect key="frame" x="16" y="72" width="992" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you happy with AdGuard?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-EN-yP2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="26" width="343" height="28.666666666666671"/>
+                                        <rect key="frame" x="16" y="27" width="992" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -118,34 +117,36 @@
             <objects>
                 <viewController storyboardIdentifier="RateAppProblemController" id="P0O-Up-KHN" customClass="RateAppProblemController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z9o-FJ-LhD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZV-gK-Wqa">
-                                <rect key="frame" x="0.0" y="307" width="320" height="261"/>
+                                <rect key="frame" x="0.0" y="534.5" width="1024" height="233.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3v5-h9-5E9">
-                                        <rect key="frame" x="16" y="189" width="288" height="40"/>
+                                        <rect key="frame" x="16" y="161.5" width="992" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6Xg-K2-Zeh"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Problem remains"/>
                                         <connections>
                                             <action selector="problemRemains:" destination="P0O-Up-KHN" eventType="touchUpInside" id="KhD-qM-NXO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGH-Qh-0t0">
-                                        <rect key="frame" x="16" y="133" width="288" height="40"/>
+                                        <rect key="frame" x="16" y="105.5" width="992" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Nxu-LI-Wo8"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Got it, this helps"/>
                                         <connections>
                                             <action selector="problemIsDoneTapped:" destination="P0O-Up-KHN" eventType="touchUpInside" id="Jul-uw-Xhm"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check this instruction:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2yq-tf-ruv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="26" width="288" height="57.5"/>
+                                        <rect key="frame" x="16" y="27" width="992" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
