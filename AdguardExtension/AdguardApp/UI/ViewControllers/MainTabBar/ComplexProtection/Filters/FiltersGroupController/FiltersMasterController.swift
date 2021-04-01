@@ -104,6 +104,10 @@ class FiltersMasterController: UIViewController {
             self?.searchContainerView.isHidden = false
             self?.searchContainerView.alpha = 1.0
             self?.groupsContainerView.alpha = 0.0
+            self?.navigationItem.title = String.localizedString("navigation_item_filters_title")
+            self?.navigationController?.navigationBar.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor(hexString: "#4d4d4d"),
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
             self?.navigationItem.rightBarButtonItems = [self?.cancelButton ?? UIBarButtonItem()]
         }) {[weak self] (success) in
             if success{
@@ -117,6 +121,7 @@ class FiltersMasterController: UIViewController {
             self?.groupsContainerView.isHidden = false
             self?.groupsContainerView.alpha = 1.0
             self?.searchContainerView.alpha = 0.0
+            self?.navigationItem.title = nil
             self?.navigationItem.rightBarButtonItems = [self?.searchButton ?? UIBarButtonItem()]
         }) {[weak self] (success) in
             if success{
