@@ -197,6 +197,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogError("(AppDelegate) application Open URL.")
         activateWithOpenUrl = true
         
+        if setappService.openUrl(url, options: options) {
+            return true
+        }
+        
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
                                                           configurationService: configuration,
                                                           purchaseService: purchaseService)
@@ -361,6 +365,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
             self?.window?.backgroundColor = self?.themeService.backgroundColor
+        }
+        
+        NotificationCenter.default.addObserver(forName: .setappDeviceLimitReched, object: nil, queue: nil) {[weak self] _ in
+            DispatchQueue.main.async {
+                if let vc = self?.window?.rootViewController {
+                    ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
+                    
+                }
+            }
         }
     }
     

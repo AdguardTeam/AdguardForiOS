@@ -134,7 +134,7 @@ class StartupService : NSObject{
         let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
         locator.addService(service: chartViewModel)
         
-        let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService)
+        let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
         
         let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(antibanner: antibanner, networking: networkService, filtersService: filtersService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, contentBlockerService: contentBlockerService)

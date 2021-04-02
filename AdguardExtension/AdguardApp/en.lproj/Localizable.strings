@@ -945,3 +945,6 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Respond with a manually set IP address";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "The maximum number of devices connected to the setapp account";
