@@ -92,8 +92,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         makeRoundCorners()
-        subscribeToThemeNotification()
-        updateTheme()
         
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.bottomViewPulled(_:)))
         contentView.addGestureRecognizer(gestureRecognizer)
