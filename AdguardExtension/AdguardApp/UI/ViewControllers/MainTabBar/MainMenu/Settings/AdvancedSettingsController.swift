@@ -179,7 +179,7 @@ class AdvancedSettingsController: UITableViewController {
     }
     
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
-        let alert = UIAlertController(title: String.localizedString("remove_vpn_profile_title"), message: String.localizedString("remove_vpn_profile_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: String.localizedString("remove_vpn_profile_title"), message: String.localizedString("remove_vpn_profile_message"), preferredStyle: .deviceAlertStyle)
         
         let removeAction = UIAlertAction(title: String.localizedString("remove_title").uppercased(), style: .destructive) {[weak self] _ in
             guard let self = self else { return }

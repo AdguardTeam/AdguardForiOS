@@ -116,7 +116,7 @@ class GetProController: UIViewController {
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {
         
-        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .deviceAlertStyle)
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         alert.addAction(cancelAction)

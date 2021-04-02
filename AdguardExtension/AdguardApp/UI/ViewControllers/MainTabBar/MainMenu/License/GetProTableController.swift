@@ -189,7 +189,7 @@ class GetProTableController: UITableViewController {
     }
     
     @IBAction func choosePeriodAction(_ sender: Any) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
         
         for product in purchaseService.products {
             let title = "\(getPeriodString(product: product)) - \(product.price)"
