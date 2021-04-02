@@ -33,6 +33,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private var model: ImportSettingsViewModelProtocol?
+    private var themeObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
