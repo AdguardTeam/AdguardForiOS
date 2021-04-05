@@ -40,12 +40,6 @@ class RoundRectButton: UIButton {
         }
     }
     
-    @IBInspectable var isHighlightable: Bool  = true {
-        didSet {
-            updateBackground()
-        }
-    }
-    
     @IBInspectable var customHighlightedBackgroundColor: UIColor? {
         didSet{
             updateBackground()
@@ -164,7 +158,7 @@ class RoundRectButton: UIButton {
             let disabledColor = customDisabledBackgroundColor {
             self.backgroundColor = disabledColor
         }
-        else if isHighlighted, isHighlightable,
+        else if isHighlighted,
             let highlightedColor = customHighlightedBackgroundColor {
             self.backgroundColor = highlightedColor
         }
