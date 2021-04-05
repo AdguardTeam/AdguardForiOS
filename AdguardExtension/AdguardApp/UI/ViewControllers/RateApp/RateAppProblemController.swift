@@ -37,11 +37,7 @@ class RateAppProblemController: BottomAlertController {
         problemIsDoneButton.applyStandardGreenStyle()
         
         problemRemainsButton.makeTitleTextUppercased()
-<<<<<<< HEAD
-        problemRemainsButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
-=======
-        problemRemainsButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
->>>>>>> master
+        problemRemainsButton.applyStandardOpaqueStyle()
         
         updateTheme()
     }
