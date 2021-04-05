@@ -378,7 +378,7 @@ extern NSString* _Nonnull BlockIpv6;
 /**
  User defaults key for last dns filters update time
  */
-extern NSString* _Nonnull lastDnsFiltersUpdateTime;
+extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

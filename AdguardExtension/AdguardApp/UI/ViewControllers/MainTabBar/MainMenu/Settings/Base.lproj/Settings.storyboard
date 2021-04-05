@@ -1085,7 +1085,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove VPN profile" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hH-ca-VHY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete VPN profile" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hH-ca-VHY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="16" width="382" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -1097,7 +1097,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="This will remove your actual VPN profile and disable DNS protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-4w-9NY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="This will delete your actual VPN profile and disable DNS protection" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jnb-4w-9NY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="18" width="382" height="10"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -2804,7 +2804,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="sNF-Hy-NdB" secondAttribute="trailing" constant="16" id="PcT-kY-y1f"/>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="leading" secondItem="2A9-hH-oY3" secondAttribute="leading" id="bUL-iD-qnW"/>
                                                     <constraint firstItem="2A9-hH-oY3" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="32" id="eH1-u9-nVg"/>
-                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="top" secondItem="PQ9-qY-pkX" secondAttribute="bottom" id="ehq-mg-Omi"/>
+                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="top" secondItem="PQ9-qY-pkX" secondAttribute="bottom" constant="4" id="ehq-mg-Omi"/>
                                                     <constraint firstAttribute="bottom" secondItem="Dfm-If-1AX" secondAttribute="bottom" constant="24" id="pIF-Of-74l"/>
                                                     <constraint firstAttribute="trailing" secondItem="Dfm-If-1AX" secondAttribute="trailing" constant="16" id="tJg-H1-hif"/>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="top" secondItem="2A9-hH-oY3" secondAttribute="bottom" constant="16" id="usu-IE-2Rt">
@@ -2994,7 +2994,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" constant="32" id="95u-ba-Pyf"/>
                                                     <constraint firstItem="95J-h1-QgG" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="C0k-g3-ci7"/>
                                                     <constraint firstItem="7SC-Bu-Ro1" firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" id="DFf-QR-ErF"/>
-                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="top" secondItem="7SC-Bu-Ro1" secondAttribute="bottom" id="EJd-zb-ecV"/>
+                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="top" secondItem="7SC-Bu-Ro1" secondAttribute="bottom" constant="4" id="EJd-zb-ecV"/>
                                                     <constraint firstItem="95J-h1-QgG" firstAttribute="top" secondItem="bTT-mb-hJC" secondAttribute="bottom" constant="24" id="JfH-kd-kwW"/>
                                                     <constraint firstAttribute="bottom" secondItem="WUY-Cq-SPm" secondAttribute="bottom" constant="24" id="KcE-cu-h5h"/>
                                                     <constraint firstItem="7SC-Bu-Ro1" firstAttribute="top" secondItem="A89-2M-jqd" secondAttribute="bottom" constant="16" id="RIV-zR-1wC">

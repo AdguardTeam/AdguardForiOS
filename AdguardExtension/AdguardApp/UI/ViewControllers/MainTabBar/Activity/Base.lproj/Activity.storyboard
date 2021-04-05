@@ -1216,8 +1216,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -1424,13 +1424,13 @@
                                     <constraint firstItem="lAJ-10-TeO" firstAttribute="leading" secondItem="dgc-l5-iRo" secondAttribute="leading" constant="24" id="SzP-lg-U2t"/>
                                     <constraint firstItem="1rj-wD-aeH" firstAttribute="top" secondItem="lAJ-10-TeO" secondAttribute="bottom" constant="20" id="Tph-cc-4eG"/>
                                     <constraint firstAttribute="trailing" secondItem="y8j-ib-ZgR" secondAttribute="trailing" constant="32" id="UhJ-Pz-Vzy"/>
-                                    <constraint firstItem="ShZ-0e-9AG" firstAttribute="top" secondItem="M4r-q5-RXv" secondAttribute="bottom" constant="15" id="XzZ-Mr-GKf"/>
+                                    <constraint firstItem="ShZ-0e-9AG" firstAttribute="top" secondItem="M4r-q5-RXv" secondAttribute="bottom" constant="16" id="XzZ-Mr-GKf"/>
                                     <constraint firstAttribute="trailing" secondItem="hoI-YR-JcD" secondAttribute="trailing" constant="16" id="b1P-DM-MF0"/>
                                     <constraint firstItem="y8j-ib-ZgR" firstAttribute="top" secondItem="GoR-QU-5cA" secondAttribute="bottom" constant="32" id="cSz-IT-VWv">
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstItem="GoR-QU-5cA" firstAttribute="centerX" secondItem="dgc-l5-iRo" secondAttribute="centerX" id="em0-Ju-iTE"/>
-                                    <constraint firstItem="lAJ-10-TeO" firstAttribute="top" secondItem="ShZ-0e-9AG" secondAttribute="bottom" constant="-4" id="fFF-eD-CEJ"/>
+                                    <constraint firstItem="lAJ-10-TeO" firstAttribute="top" secondItem="ShZ-0e-9AG" secondAttribute="bottom" constant="4" id="fFF-eD-CEJ"/>
                                     <constraint firstAttribute="bottom" secondItem="hoI-YR-JcD" secondAttribute="bottom" constant="30" id="iAV-hO-RvL"/>
                                     <constraint firstItem="ShZ-0e-9AG" firstAttribute="leading" secondItem="y8j-ib-ZgR" secondAttribute="leading" id="oce-Hc-Q8S"/>
                                     <constraint firstItem="GoR-QU-5cA" firstAttribute="top" secondItem="dgc-l5-iRo" secondAttribute="top" constant="8" id="pb3-ao-7fO"/>
