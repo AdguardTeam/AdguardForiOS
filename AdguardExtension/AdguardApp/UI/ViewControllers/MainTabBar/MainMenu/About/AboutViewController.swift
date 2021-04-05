@@ -137,11 +137,6 @@ class AboutViewController: UIViewController {
         }
         alert.addAction(okAction)
         
-        if let presenter = alert.popoverPresentationController{
-            presenter.sourceView = loginLogoutButton
-            presenter.sourceRect = loginLogoutButton.bounds
-        }
-        
         self.present(alert, animated: true, completion: nil)
     }
 }

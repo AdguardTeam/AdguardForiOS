@@ -303,11 +303,6 @@ class DnsRequestDetailsController: UITableViewController {
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
         
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
-        
         present(alert, animated: true, completion: nil)
     }
     

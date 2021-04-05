@@ -203,9 +203,6 @@ class GetProTableController: UITableViewController {
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
-        actionSheet.popoverPresentationController?.sourceView = periodButton
-        actionSheet.popoverPresentationController?.sourceRect = periodButton.bounds
-        
         self.present(actionSheet, animated: true, completion: nil)
     }
     

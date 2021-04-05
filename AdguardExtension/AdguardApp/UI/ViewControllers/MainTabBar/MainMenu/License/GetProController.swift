@@ -131,10 +131,6 @@ class GetProController: UIViewController {
         }
         alert.addAction(okAction)
         
-        if let presenter = alert.popoverPresentationController{
-            presenter.barButtonItem = sender
-        }
-        
         self.present(alert, animated: true, completion: nil)
     }
     

@@ -173,11 +173,6 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }
@@ -197,11 +192,6 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }

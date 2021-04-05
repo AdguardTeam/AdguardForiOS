@@ -340,11 +340,6 @@ class ActivityViewController: UITableViewController {
         
         alert.addAction(cancelAction)
         
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
-        
         present(alert, animated: true)
     }
     
@@ -380,11 +375,6 @@ class ActivityViewController: UITableViewController {
         alert.addAction(blockedOnlyAction)
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true)
     }

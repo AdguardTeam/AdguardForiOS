@@ -312,11 +312,6 @@ class CompanyDetailedController: UITableViewController {
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
         
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
-        
         present(alert, animated: true)
     }
     
