@@ -49,7 +49,7 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         nextButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGray4)
+        cancelButton.applyStandardOpaqueStyle()
 
         if openUrl != nil {
             urlTextField.text = openUrl

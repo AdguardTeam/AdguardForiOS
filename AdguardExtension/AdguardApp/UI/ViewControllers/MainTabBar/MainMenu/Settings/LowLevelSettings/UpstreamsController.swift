@@ -54,7 +54,7 @@ class UpstreamsController: BottomAlertController {
         
         cancelButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
-        cancelButton.applyStandardOpaqueStyle(color: .gray)
+        cancelButton.applyStandardOpaqueStyle()
         saveButton.applyStandardGreenStyle()
     }
     

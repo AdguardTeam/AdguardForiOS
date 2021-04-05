@@ -53,7 +53,7 @@ class BlockedResponseTtlController: BottomAlertController {
         saveButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         saveButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGray4)
+        cancelButton.applyStandardOpaqueStyle()
     }
     
     // MARK: - Actions
