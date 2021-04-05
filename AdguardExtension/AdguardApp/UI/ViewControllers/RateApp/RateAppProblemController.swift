@@ -40,7 +40,7 @@ class RateAppProblemController: BottomAlertController {
         problemIsDoneButton.applyStandardGreenStyle()
         
         problemRemainsButton.makeTitleTextUppercased()
-        problemRemainsButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.green)
+        problemRemainsButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
         
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in

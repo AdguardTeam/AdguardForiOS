@@ -120,7 +120,7 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var placeholderTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#888888") : UIColor.init(hexString: "#D8D8D8")
+        return configuration.darkTheme ? UIColor.init(hexString: "#4D4D4D") : UIColor.init(hexString: "#D8D8D8")
     }
     
     var separatorColor: UIColor {
@@ -128,7 +128,7 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var selectedCellColor: UIColor {
-         return configuration.darkTheme ?  UIColor(hexString: "#4D4D4D") : UIColor.init(hexString: "#F3F3F3")
+         return configuration.darkTheme ?  UIColor(hexString: "#2A2A2A") : UIColor.init(hexString: "#F3F3F3")
     }
     
     var errorRedColor: UIColor {
@@ -226,12 +226,7 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupPopupLabel(_ label: ThemableLabel) {
-        if configuration.darkTheme {
-            label.textColor = label.greyText ? UIColor(hexString: "#888888") : UIColor(hexString: "#F3F3F3")
-        }
-        else {
-            label.textColor = label.greyText ? UIColor(hexString: "#494949") : UIColor(hexString: "#888888")
-        }
+        label.textColor = label.greyText ? grayTextColor : label.lightGreyText ? lightGrayTextColor : blackTextColor
     }
     
     func setupPopupLabels(_ labels: [ThemableLabel]) {

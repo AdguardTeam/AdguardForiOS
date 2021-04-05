@@ -2425,7 +2425,7 @@
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="YAi-vB-VA4"/>
                                                     <constraint firstItem="ZgC-4d-Peb" firstAttribute="leading" secondItem="dW3-zk-BPr" secondAttribute="leading" id="YRO-PD-VS4"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ko3-HW-YZi" secondAttribute="trailing" constant="24" id="ZXp-Vq-NSr"/>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" id="aiN-So-OEt"/>
+                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" constant="4" id="aiN-So-OEt"/>
                                                     <constraint firstAttribute="trailing" secondItem="B2l-7z-M2N" secondAttribute="trailing" constant="16" id="bq0-17-fUv"/>
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="top" secondItem="Ko3-HW-YZi" secondAttribute="bottom" constant="32" id="cRk-zo-3Nz">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
@@ -2464,9 +2464,6 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                        </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
@@ -3292,12 +3289,6 @@
         <image name="plus" width="26" height="26"/>
         <image name="question" width="20" height="20"/>
         <image name="whitelist-icon" width="24" height="24"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

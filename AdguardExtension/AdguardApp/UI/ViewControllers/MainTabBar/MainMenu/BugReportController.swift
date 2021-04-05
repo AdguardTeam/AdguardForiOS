@@ -70,6 +70,11 @@ class BugReportController: UIViewController {
         setupBackButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailAddressTextField.becomeFirstResponder()
+    }
+    
     // MARK: - Actions
     
     @IBAction func detailedInfoButtonTapped(_ sender: UIButton) {
