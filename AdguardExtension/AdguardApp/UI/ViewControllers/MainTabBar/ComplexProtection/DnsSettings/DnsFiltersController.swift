@@ -214,6 +214,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     @IBAction func searchAction(_ sender: UIBarButtonItem) {
         model.isSearchActive = true
         navigationItem.rightBarButtonItems = [cancelButton]
+        navigationItem.title = String.localizedString("navigation_item_dns_filters_title")
         navigationItem.setHidesBackButton(true, animated:true)
         tableView.tableHeaderView = searchView
         searchBar.becomeFirstResponder()
@@ -225,6 +226,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         model.isSearchActive = false
         navigationItem.setHidesBackButton(false, animated:true)
         navigationItem.rightBarButtonItems = [searchButton]
+        navigationItem.title = nil
         tableView.tableHeaderView = nil
         searchBar.text = nil
         

@@ -945,3 +945,9 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Respond with a manually set IP address";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filters";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS Filters";
