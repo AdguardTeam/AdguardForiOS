@@ -637,5 +637,6 @@ extension ActivityViewController: ThemableProtocol {
         theme.setupLabels(themableLabels)
         theme.setupButtons(themableButtons)
         mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
+        mostActiveButton.customBackgroundColor = theme.backgroundColor
     }
 }
