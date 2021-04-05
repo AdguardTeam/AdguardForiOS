@@ -32,6 +32,13 @@ final class StoryViewController: UIViewController {
     
     private var currentStory: StoryToken { storyGroup.storyTokens[currentStoryIndex] }
     
+    /*
+     We need to know when controller becomes visible in UIWindow,
+     otherwise all animations will immediately call their's completions
+     and that will lead to undefined behaviour
+     */
+    private var controllerIsVisible: Bool = false
+    
     // MARK: -  UI elements
     
     private lazy var progressView: StoriesProgressView = {
@@ -109,10 +116,20 @@ final class StoryViewController: UIViewController {
             self?.updateTheme()
         }
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !controllerIsVisible {
+            progressView.start()
+        }
+        controllerIsVisible = true
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        progressView.start()
+        if controllerIsVisible {
+            progressView.start()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
