@@ -24,6 +24,18 @@ final class StoriesPageViewController: UIPageViewController {
     private let startGroup: StoryGroupType
     private lazy var groupIndex: Int = { storiesGroups.firstIndex(where: { startGroup == $0.groupType }) ?? 0 }()
     
+    // UI elements
+    private lazy var crossButton: UIButton = {
+        let button = UIButton()
+        let crossImage = UIImage(named: "cross")
+        button.setBackgroundImage(crossImage, for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private lazy var contentViewControllers: [StoryViewController] = {
         storiesGroups.map { group in
             let storyVC = StoryViewController(storyGroup: group)
@@ -162,15 +174,6 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
 
 extension StoriesPageViewController {
     private func setupCrossButton() {
-        let crossButton = UIButton()
-        
-        let crossImage = UIImage(named: "cross")
-        crossButton.setBackgroundImage(crossImage, for: .normal)
-        crossButton.contentVerticalAlignment = .fill
-        crossButton.contentHorizontalAlignment = .fill
-        crossButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
-        crossButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(crossButton)
         view.bringSubviewToFront(crossButton)
         crossButton.widthAnchor.constraint(equalToConstant: isIpadTrait ? 48.0 : 32.0).isActive = true

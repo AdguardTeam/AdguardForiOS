@@ -20,7 +20,9 @@ import Foundation
 
 /* StoryToken is a model for one story */
 struct StoryToken: Decodable {
-    let image: UIImage?
+    let image: UIImage? // UIImage for light theme
+    let darkImage: UIImage? // UIImage for dark theme
+    
     let title: String?
     let description: String?
     let buttonConfig: StoryButtonConfig?
@@ -51,6 +53,7 @@ struct StoryToken: Decodable {
         let descKey = try container.decode(String.self, forKey: .description)
         
         self.image = UIImage(named: imageName)
+        self.darkImage = UIImage(named: imageName + "_dark")
         
         if let titleFormat = LocalizedStringKeysWithFormat(rawValue: titleKey) {
             self.title = titleFormat.localizedString

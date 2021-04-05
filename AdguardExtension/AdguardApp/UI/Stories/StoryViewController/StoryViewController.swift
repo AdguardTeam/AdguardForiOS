@@ -40,32 +40,42 @@ final class StoryViewController: UIViewController {
         return progress
     }()
     
-    private lazy var imageView: UIImageView = {
-        let imgView = UIImageView()
+    private lazy var categoryTitleLabel: ThemableLabel = {
+        let label = ThemableLabel()
+        label.lightGreyText = true
+        label.textAlignment = .left
+        label.text = storyGroup.title
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var imageView: ThemeableImageView = {
+        let imgView = ThemeableImageView()
         imgView.contentMode = .scaleAspectFit
         imgView.translatesAutoresizingMaskIntoConstraints = false
         return imgView
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var titleLabel: ThemableLabel = {
+        let label = ThemableLabel()
+        label.greyText = true
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = theme.grayTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
-        let font = UIFont.systemFont(ofSize: isIpadTrait ? 36.0 : 24.0, weight: .bold)
-        label.font = font
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 36.0 : 24.0, weight: .bold)
         return label
     }()
     
-    private lazy var descLabel: UILabel = {
-        let label = UILabel()
+    private lazy var descLabel: ThemableLabel = {
+        let label = ThemableLabel()
+        label.greyText = true
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = theme.grayTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
-        let font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16, weight: .regular)
-        label.font = font
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16, weight: .regular)
         return label
     }()
     
@@ -86,7 +96,7 @@ final class StoryViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.storyGroup = StoryGroup(groupType: .whatsNew, storyTokens: [])
+        self.storyGroup = StoryGroup(title: "", groupType: .whatsNew, storyTokens: [])
         super.init(coder: coder)
         setupUI()
     }
@@ -203,10 +213,13 @@ extension StoryViewController {
     }
     
     private func changeContent() {
-        let image = currentStory.image
         let title = currentStory.title ?? ""
         let description = currentStory.description ?? ""
-        imageView.image = image
+        
+        imageView.lightThemeImage = currentStory.image
+        imageView.darkThemeImage = currentStory.darkImage
+        theme.setupImage(imageView)
+        
         titleLabel.text = title
         descLabel.text = description
         
@@ -217,6 +230,12 @@ extension StoryViewController {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descLabel)
+        view.addSubview(categoryTitleLabel)
+        
+        // Category label
+        categoryTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
+        categoryTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: isIpadTrait ? -80.0 : -64.0).isActive = true
+        categoryTitleLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: isIpadTrait ? 64.0 : 32.0).isActive = true
         
         // Image view
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0).isActive = true
@@ -283,8 +302,8 @@ extension StoryViewController {
     
     private func updateTheme() {
         view.backgroundColor = theme.backgroundColor
-        titleLabel.textColor = theme.grayTextColor
-        descLabel.textColor = theme.grayTextColor
+        theme.setupImage(imageView)
+        theme.setupLabels([categoryTitleLabel, titleLabel, descLabel])
     }
     
     @objc private func buttonTapped() {

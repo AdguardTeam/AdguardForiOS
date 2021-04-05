@@ -22,26 +22,35 @@ protocol StoriesProgressComponentViewDelegate: AnyObject {
     func segmentFullyFilled()
 }
 
-final class StoriesProgressComponentView: UIProgressView {
+final class StoriesProgressComponentView: ThemableProgressView {
 
     weak var delegate: StoriesProgressComponentViewDelegate?
-    
+        
     private let animationDuration: Double
-    
-    private let activeColor = UIColor(hexString: "#B0B0B0")
-    private let inactiveColor = UIColor(hexString: "#D8D8D8")
     
     private var animator: UIViewPropertyAnimator?
 
     init(animationDuration: Double) {
         self.animationDuration = animationDuration
         super.init(frame: .zero)
+        
+        self.lightThemeActiveColor = UIColor(hexString: "#B0B0B0")
+        self.lightThemeInactiveColor = UIColor(hexString: "#D8D8D8")
+        self.darkThemeActiveColor = UIColor(hexString: "#939393")
+        self.darkThemeInactiveColor = UIColor(hexString: "#414141")
+        
         setupView()
     }
     
     required init?(coder: NSCoder) {
         self.animationDuration = 0.0
         super.init(coder: coder)
+        
+        self.lightThemeActiveColor = UIColor(hexString: "#B0B0B0")
+        self.lightThemeInactiveColor = UIColor(hexString: "#D8D8D8")
+        self.darkThemeActiveColor = UIColor(hexString: "#939393")
+        self.darkThemeInactiveColor = UIColor(hexString: "#414141")
+        
         setupView()
     }
     
@@ -92,8 +101,6 @@ final class StoriesProgressComponentView: UIProgressView {
     // MARK: - Private methods
     
     private func setupView() {
-        trackTintColor = inactiveColor
-        progressTintColor = activeColor
         layer.cornerRadius = 1.0
         setProgress(0.0, animated: false)
     }

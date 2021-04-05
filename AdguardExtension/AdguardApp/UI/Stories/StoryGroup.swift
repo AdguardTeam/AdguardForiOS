@@ -20,15 +20,18 @@ import Foundation
 
 /* StoryGroup is a model for multiple stories */
 struct StoryGroup: Decodable {
+    let title: String
     let groupType: StoryGroupType
     let storyTokens: [StoryToken]
     
     private enum CodingKeys: String, CodingKey {
+        case title = "category_title"
         case groupType = "category"
         case storyTokens = "tokens"
     }
     
-    init(groupType: StoryGroupType, storyTokens: [StoryToken]) {
+    init(title: String, groupType: StoryGroupType, storyTokens: [StoryToken]) {
+        self.title = title
         self.groupType = groupType
         self.storyTokens = storyTokens
     }
@@ -36,6 +39,7 @@ struct StoryGroup: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
+        let titleKey = try container.decode(String.self, forKey: .title)
         let groupKey = try container.decode(String.self, forKey: .groupType)
         let tokens = try container.decode([StoryToken].self, forKey: .storyTokens)
         
@@ -44,6 +48,7 @@ struct StoryGroup: Decodable {
             throw error
         }
         
+        self.title = String.localizedString(titleKey)
         self.groupType = grType
         self.storyTokens = tokens
     }

@@ -26,6 +26,12 @@ final class StoriesProgressView: UIView {
         }
     }
     
+    // Services
+    private let theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    
+    // Observers
+    private var themeNotificationToken: NotificationToken?
+    
     private let stackView = UIStackView()
     private var components: [StoriesProgressComponentView] { stackView.arrangedSubviews.map { $0 as! StoriesProgressComponentView } }
     
@@ -37,14 +43,18 @@ final class StoriesProgressView: UIView {
         self.numberOfStories = numberOfStories
         self.storyDuration = storyDuration
         super.init(frame: .zero)
+        addThemeObserver()
         setupUI()
+        updateTheme()
     }
     
     required init?(coder: NSCoder) {
         self.numberOfStories = 0
         self.storyDuration = 0.0
         super.init(coder: coder)
+        addThemeObserver()
         setupUI()
+        updateTheme()
     }
     
     // MARK: - Public methods
@@ -115,5 +125,15 @@ extension StoriesProgressView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    private func addThemeObserver() {
+        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+        }
+    }
+    
+    private func updateTheme() {
+        components.forEach { theme.setupProgressView($0) }
     }
 }

@@ -75,6 +75,7 @@ import Foundation
     func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
     func setupSeparator(_ separator: UIView)
     func setupSeparators(_ separators: [UIView])
+    func setupProgressView(_ progressView: ThemableProgressView)
 }
 
 final class ThemeService : NSObject, ThemeServiceProtocol {
@@ -369,5 +370,9 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
             setupSeparator(separator)
         }
     }
-
+    
+    func setupProgressView(_ progressView: ThemableProgressView) {
+        progressView.progressTintColor = configuration.darkTheme ? progressView.darkThemeActiveColor : progressView.lightThemeActiveColor
+        progressView.trackTintColor = configuration.darkTheme ? progressView.darkThemeInactiveColor : progressView.lightThemeInactiveColor
+    }
 }

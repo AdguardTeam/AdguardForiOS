@@ -92,12 +92,12 @@
 		249E11B22600D3CD003A5FBD /* IURLSchemeParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5182600ADD30047974C /* IURLSchemeParametersParser.swift */; };
 		249E124C2600FF73003A5FBD /* URLSchemeParcerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */; };
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
+		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24BD325C2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD3292260346B300CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
-		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
-		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
@@ -595,6 +595,10 @@
 		7E8576792435F57F0055F63D /* DomainsParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8576752435F57F0055F63D /* DomainsParserService.swift */; };
 		7E88A64023E8361A00A10F3A /* SystemProtectionEnablerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */; };
 		7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */; };
+		7E8B7A2B261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */; };
+		7E8B7A2C261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */; };
+		7E8B7A2D261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */; };
+		7E8B7A2E261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */; };
 		7E8C8C4224E19779000B4B9C /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */; };
 		7E8C8C4324E19779000B4B9C /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */; };
 		7E8D423C258CC52100B6300E /* DnsProviders+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */; };
@@ -2753,11 +2757,11 @@
 		247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkAuthParametersParser.swift; sourceTree = "<group>"; };
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
+		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchNotificationHandler.swift; sourceTree = "<group>"; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
-		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
 		24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResetor.swift; sourceTree = "<group>"; };
@@ -3185,6 +3189,7 @@
 		7E8576752435F57F0055F63D /* DomainsParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsParserService.swift; sourceTree = "<group>"; };
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableProgressView.swift; sourceTree = "<group>"; };
 		7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProviders+Migrations.swift"; sourceTree = "<group>"; };
 		7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigrationsTest.swift; sourceTree = "<group>"; };
@@ -5084,6 +5089,7 @@
 				D09E9647216CE5E400313AB1 /* ThemableLabel.swift */,
 				D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */,
 				7EB55269242243C1000498CC /* ThemableButton.swift */,
+				7E8B7A2A261B2CFE0047EF5F /* ThemableProgressView.swift */,
 			);
 			path = ThemableElements;
 			sourceTree = "<group>";
@@ -6948,6 +6954,7 @@
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
 				7EF0BAF0260B2EA2005805C4 /* StoriesManager.swift in Sources */,
+				7E8B7A2D261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */,
 				D0B545B32435D650002F0AEC /* FiltersMasterController.swift in Sources */,
 				D0D7E5EB24444ED5001801A5 /* RulesParser.swift in Sources */,
 				24AD872E260A247B0034D402 /* RadioButton.swift in Sources */,
@@ -7342,6 +7349,7 @@
 				D093718C21B0557C004A24F1 /* SafariService.swift in Sources */,
 				D08CE430240D4B0C00A70089 /* String+Utils.swift in Sources */,
 				7EA783DB2578E93600CA8889 /* SupportService+Feedback.swift in Sources */,
+				7E8B7A2C261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */,
 				D03E532E21B6A42D00C62152 /* ConfigurationServiceProtocol.swift in Sources */,
 				D031A15B219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D03E532B21B6A16C00C62152 /* ThemeService.swift in Sources */,
@@ -7524,6 +7532,7 @@
 				7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
 				D081FC2B2418EB38000A10DA /* SafariProtectionService.swift in Sources */,
+				7E8B7A2B261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */,
 				7E51DBC62425077700594708 /* CompanyDetailedController.swift in Sources */,
 				D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */,
 				65CB60331D7488B7005A3C04 /* AEWhitelistDomainObject.m in Sources */,
@@ -8994,6 +9003,7 @@
 				D0B544952435C6BC002F0AEC /* String+Utils.swift in Sources */,
 				7EA783ED2578E93700CA8889 /* SupportService+Feedback.swift in Sources */,
 				D0B544962435C6BC002F0AEC /* ConfigurationServiceProtocol.swift in Sources */,
+				7E8B7A2E261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */,
 				D0B544972435C6BC002F0AEC /* DDLoggerNames.m in Sources */,
 				D0B544982435C6BC002F0AEC /* ThemeService.swift in Sources */,
 				D0B544992435C6BC002F0AEC /* NSData+GZIP.m in Sources */,

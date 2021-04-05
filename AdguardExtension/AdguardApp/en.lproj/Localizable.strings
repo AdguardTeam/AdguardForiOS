@@ -950,6 +950,9 @@
 
 // ----- What's new -----
 
+/* What's new category title */
+"whats_new_category_title" = "What’s new?";
+
 /* First what's new story title */
 "story_whats_new_1_title" = "The app was updated!";
 
@@ -966,6 +969,9 @@
 "story_whats_new_2_button_title" = "READ NOW";
 
 // ----- DNS protection -----
+
+/* DNS protection category title */
+"dns_protection_category_title" = "DNS protection";
 
 /* First DNS protection story title */
 "story_dns_protection_1_title" = "What is DNS protection?";
@@ -1008,6 +1014,9 @@
 
 // ----- VPN protection -----
 
+/* VPN protection category title */
+"vpn_protection_category_title" = "VPN app";
+
 /* First VPN protection story title */
 "story_vpn_protection_1_title" = "AdGuard VPN app";
 
@@ -1046,6 +1055,9 @@
 
 // ----- Safari protection -----
 
+/* Safari protection category title */
+"safari_protection_category_title" = "Ads in Safari";
+
 /* First Safari protection story title */
 "story_safari_protection_1_title" = "Why does AdGuard block ads only in Safari?";
 
@@ -1069,6 +1081,9 @@
 
 // ----- YouTube ads -----
 
+/* YouTube ads category title */
+"youtube_ads_category_title" = "Ads in YouTube";
+
 /* First YouTube ads story title */
 "story_youtube_ads_1_title" = "Why does YouTube have ads?";
 
@@ -1091,6 +1106,9 @@
 "story_youtube_ads_3_button_title" = "MORE ON DNS";
 
 // ----- DNS servers -----
+
+/* DNS servers category title */
+"dns_servers_category_title" = "DNS servers";
 
 /* First DNS servers story title */
 "story_dns_servers_1_title" = "What is a DNS?";
