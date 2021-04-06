@@ -24,10 +24,12 @@ protocol BlockedResponseTtlDelegate: class {
 
 class BlockedResponseTtlController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var ttlTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -36,16 +38,10 @@ class BlockedResponseTtlController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     weak var delegate: BlockedResponseTtlDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
@@ -53,16 +49,11 @@ class BlockedResponseTtlController: BottomAlertController {
         
         updateSaveButton()
         updateTheme()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
+        
+        saveButton.makeTitleTextUppercased()
+        cancelButton.makeTitleTextUppercased()
+        saveButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle()
     }
     
     // MARK: - Actions
@@ -84,20 +75,31 @@ class BlockedResponseTtlController: BottomAlertController {
         updateSaveButton()
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+    
 
     // MARK: - Private methods
-    
-    private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(ttlTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        theme.setupSeparators(separators)
-    }
     
     private func updateSaveButton() {
         let ttl = ttlTextField.text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
         saveButton?.isEnabled = true
+    }
+}
+
+extension BlockedResponseTtlController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(ttlTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        theme.setupSeparators(separators)
     }
 }

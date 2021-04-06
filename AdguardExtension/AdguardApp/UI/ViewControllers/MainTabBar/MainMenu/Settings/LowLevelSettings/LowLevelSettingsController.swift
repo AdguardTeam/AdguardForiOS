@@ -46,18 +46,11 @@ class LowLevelSettingsController: UITableViewController {
     private let boostraps = 4
     private let fallbacks = 5
     
-    private var notificationToken: NotificationToken?
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         setupBackButton()
         updateTheme()
     }
@@ -113,19 +106,6 @@ class LowLevelSettingsController: UITableViewController {
     }
     
     // MARK: - Private methods
-    
-    private func updateTheme() {
-        setupBetaChnnelTextView()
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSeparators(separators)
-        theme.setupSwitch(blockIpv6Switch)
-        theme.setupTextView(betaChannelTextView)
-        setupWarningDescriptionTextView()
-        tableView.reloadData()
-    }
     
     private func setTunnelModeDescription() {
         switch resources.tunnelMode {
@@ -226,6 +206,21 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
             fallbacksDescription.text = isEmptyText ? String.localizedString("low_level_fallbacks_placeholder"): text
         }
         
+        tableView.reloadData()
+    }
+}
+
+extension LowLevelSettingsController: ThemableProtocol {
+    func updateTheme() {
+        setupBetaChnnelTextView()
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSeparators(separators)
+        theme.setupSwitch(blockIpv6Switch)
+        theme.setupTextView(betaChannelTextView)
+        setupWarningDescriptionTextView()
         tableView.reloadData()
     }
 }

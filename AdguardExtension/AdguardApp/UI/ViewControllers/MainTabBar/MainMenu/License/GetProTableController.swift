@@ -68,16 +68,10 @@ class GetProTableController: UITableViewController {
     
     var selectedProduct: Product?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         updateTheme()
         
@@ -189,7 +183,7 @@ class GetProTableController: UITableViewController {
     }
     
     @IBAction func choosePeriodAction(_ sender: Any) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
         
         for product in purchaseService.products {
             let title = "\(getPeriodString(product: product)) - \(product.price)"
@@ -203,26 +197,11 @@ class GetProTableController: UITableViewController {
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
-        actionSheet.popoverPresentationController?.sourceView = periodButton
-        actionSheet.popoverPresentationController?.sourceRect = periodButton.bounds
-        
         self.present(actionSheet, animated: true, completion: nil)
     }
     
     
     // MARK: - private methods
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.setPurchaseDescription()
-            self.tableView.reloadData()
-        }
-        theme.setupLabels(themableLabels)
-        theme.setupImage(logoImage)
-    }
     
     private func setPurchaseDescription() {
         
@@ -315,5 +294,19 @@ class GetProTableController: UITableViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
         
         return resultString
+    }
+}
+
+extension GetProTableController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.setPurchaseDescription()
+            self.tableView.reloadData()
+        }
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logoImage)
     }
 }

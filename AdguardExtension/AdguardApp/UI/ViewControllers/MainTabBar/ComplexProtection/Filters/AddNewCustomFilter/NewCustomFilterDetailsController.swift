@@ -64,13 +64,12 @@ class NewCustomFilterDetailsController : BottomAlertController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
-    
-    private var notificationToken: NotificationToken?
     
     private let textFieldCharectersLimit = 50
     
@@ -84,24 +83,11 @@ class NewCustomFilterDetailsController : BottomAlertController {
             setupEditingFilter()
         }
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         updateTheme()
+        addButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle()
         cancelButton.makeTitleTextUppercased()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView, controllerModeType == .addingFilter {
-            navigationController?.dismiss(animated: true, completion: nil)
-        } else if touch.view != contentView, controllerModeType == .editingFilter {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     // MARK: - Actions
@@ -140,13 +126,15 @@ class NewCustomFilterDetailsController : BottomAlertController {
         return true
     }
     
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupTextField(name)
-        theme.setupPopupLabels(themableLabels)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+    
+    // MARK: - private methods
     
     private func setupAddingNewFilter() {
         newFilterTitle.text = filterType.getTitleText()
@@ -194,7 +182,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
         
         let urlStringRange = NSRange(location: 0, length: url.count)
         
-        let highlightColor = UIColor.AdGuardColor.green
+        let highlightColor = UIColor.AdGuardColor.lightGreen1
         
         urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
         urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)
@@ -205,5 +193,14 @@ class NewCustomFilterDetailsController : BottomAlertController {
         returnString.append(urlAttributedString)
         
         return returnString
+    }
+}
+
+extension NewCustomFilterDetailsController: ThemableProtocol {
+    func updateTheme() {
+        newFilterTitle.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(name)
+        theme.setupPopupLabels(themableLabels)
     }
 }

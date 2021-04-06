@@ -36,7 +36,6 @@ class OnboardingController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var themeToken: NotificationToken?
     private var contenBlockerObservation: NSKeyValueObservation?
     
     private let showLicenseSegue = "ShowLicenseSegue"
@@ -59,16 +58,11 @@ class OnboardingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-            self?.setupLabels()
-        }
-        
         contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
             self?.observeContentBlockersState()
         }
         
-        watchManualButtonIpad.applyStandardOpaqueStyle()
+        watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         setupLabels()
         updateTheme()
     }
@@ -117,13 +111,6 @@ class OnboardingController: UIViewController {
         switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupTable(tableView)
-        tableView.reloadData()
-    }
-    
     private func observeContentBlockersState(){
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
@@ -160,5 +147,15 @@ extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+}
+
+extension OnboardingController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupTable(tableView)
+        tableView.reloadData()
+        setupLabels()
     }
 }

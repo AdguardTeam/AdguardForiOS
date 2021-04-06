@@ -29,6 +29,7 @@ class UpstreamsController: BottomAlertController {
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var upstreamsTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -37,18 +38,12 @@ class UpstreamsController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -59,18 +54,9 @@ class UpstreamsController: BottomAlertController {
         
         cancelButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
+        cancelButton.applyStandardOpaqueStyle()
+        saveButton.applyStandardGreenStyle()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
-    }
-    
     
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
@@ -108,17 +94,15 @@ class UpstreamsController: BottomAlertController {
         }
     }
     
-    // MARK: - Private methods
-    
-    private func updateTheme() {
-        scrollContentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(upstreamsTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+    
+    // MARK: - Private methods
     
     private func prepareUpstreamTextField() {
         switch upstreamType {
@@ -219,6 +203,19 @@ class UpstreamsController: BottomAlertController {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
                 }
             }
+        }
+    }
+}
+
+extension UpstreamsController: ThemableProtocol {
+    func updateTheme() {
+        upstreamTypeLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(upstreamsTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        for separator in separators {
+            separator.backgroundColor = theme.separatorColor
         }
     }
 }

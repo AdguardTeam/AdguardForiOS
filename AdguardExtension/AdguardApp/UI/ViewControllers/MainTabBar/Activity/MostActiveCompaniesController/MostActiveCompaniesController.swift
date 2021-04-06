@@ -27,9 +27,6 @@ class MostActiveCompaniesController: UIViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-
-    // MARK: - Notifications
-    private var themeToken: NotificationToken?
     
     // MARK: - Public variables
 
@@ -49,10 +46,6 @@ class MostActiveCompaniesController: UIViewController {
         
         updateTheme()
         setupBackButton()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,15 +55,6 @@ class MostActiveCompaniesController: UIViewController {
                 controller.chartDateType = chartDateType
             }
         }
-    }
-    
-    // MARK: - Private methods
-
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupLabels(themableLabels)
-        tableView.reloadData()
     }
 }
 
@@ -108,5 +92,14 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+}
+
+extension MostActiveCompaniesController: ThemableProtocol {
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupLabels(themableLabels)
+        tableView.reloadData()
     }
 }

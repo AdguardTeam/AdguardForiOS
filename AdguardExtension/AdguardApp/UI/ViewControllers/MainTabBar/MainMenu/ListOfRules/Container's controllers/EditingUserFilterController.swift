@@ -27,8 +27,6 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
     
     // MARK: - Private variables
     
-    private var themeObserver: Any? = nil
-    
     /* Services */
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -40,10 +38,6 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
         textView.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         textView.textContainer.lineFragmentPadding = 0.0
         
-        themeObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-        }
-        
         helperLabel.text = model?.helperLabelText
         
         updateTheme()
@@ -54,10 +48,10 @@ class EditingUserFilterController: UIViewController, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         helperLabel.isHidden = !(textView.text.count == 0)
     }
-    
-    // MARK: - Private methods
-    
-    private func updateTheme(){
+}
+
+extension EditingUserFilterController: ThemableProtocol {
+    func updateTheme(){
         textView.backgroundColor = theme.backgroundColor
         view.backgroundColor = theme.backgroundColor
         theme.setupTextView(textView)

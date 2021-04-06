@@ -16,27 +16,20 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import UIKit
 
-class SystemProtectionEnablerController: UIViewController {
-
-    @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var enableButton: UIButton!
+class RadioButton: UIButton {
+    @IBInspectable var stateOn: UIImage? = UIImage(named: "bullet")
+    @IBInspectable var stateOff: UIImage? = UIImage(named: "bulletnone")
     
-    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override var isSelected: Bool {
+        get {
+            return super.isSelected
+        }
         
-        enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
-        enableButton.applyStandardGreenStyle()
-        updateTheme()
-    }
-}
-
-extension SystemProtectionEnablerController: ThemableProtocol {
-    func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabel(titleLabel)
+        set {
+            self.setImage(newValue ? stateOn : stateOff, for: .normal)
+            super.isSelected = newValue
+        }
     }
 }

@@ -26,9 +26,11 @@ class AddCustomFilterController: BottomAlertController {
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -38,8 +40,6 @@ class AddCustomFilterController: BottomAlertController {
     private var filter : AASCustomFilterParserResult?
     var delegate: AddNewFilterDelegate?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -48,10 +48,9 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = false
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
+        nextButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle()
+
         if openUrl != nil {
             urlTextField.text = openUrl
             continueAction(self)
@@ -61,20 +60,11 @@ class AddCustomFilterController: BottomAlertController {
         }
         
         updateTheme()
+        ruleTextChanged(urlTextField)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            navigationController?.dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
@@ -82,6 +72,13 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = enabled
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
     
     // MARK: - Actions
     
@@ -127,13 +124,6 @@ class AddCustomFilterController: BottomAlertController {
     
     // MARK: - private method
     
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(urlTextField)
-        nextButton.indicatorStyle = theme.indicatorStyle
-    }
-    
     private func presentNewCustomFilterDetailsController() {
         let presenter = presentingViewController
         dismiss(animated: true) {[weak self] in
@@ -163,5 +153,15 @@ enum NewFilterType {
         case .dnsCustom:
             return String.localizedString("new_dns_filter_title")
         }
+    }
+}
+
+extension AddCustomFilterController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(urlTextField)
+        nextButton.indicatorStyle = theme.indicatorStyle
     }
 }

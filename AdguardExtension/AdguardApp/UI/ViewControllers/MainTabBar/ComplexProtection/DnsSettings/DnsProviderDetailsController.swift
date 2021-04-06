@@ -53,16 +53,11 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     // MARK: - private fields
     
     private var dnsServerObservetion: NSKeyValueObservation?
-    private var notificationToken: NotificationToken?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         updateProtocol()
         updateTheme()
@@ -226,12 +221,6 @@ class DnsProviderDetailsController : UITableViewController,  ChooseProtocolContr
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        tableView.reloadData()
-    }
-    
     private func updateProtocol() {
         if resources.dnsImplementation == .native {
             selectedProtocol = nativeProviderService.currentServer?.dnsProtocol
@@ -278,4 +267,12 @@ class DnsProviderWebsiteCell: UITableViewCell {
     
     @IBOutlet weak var website: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
+}
+
+extension DnsProviderDetailsController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        tableView.reloadData()
+    }
 }

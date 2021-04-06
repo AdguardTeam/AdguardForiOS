@@ -20,13 +20,12 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: IB outlets
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ruleTextView: UITextView!
-    @IBOutlet weak var textUnderline: UIView!
+    @IBOutlet weak var textUnderline: TextFieldIndicatorView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
     private let textViewCharectersLimit = 50
@@ -35,10 +34,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         domainOrRuleLabel.text = getEditCaptionText()
 
@@ -59,9 +54,13 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         updateTheme()
         
         saveButton.makeTitleTextUppercased()
-        removeButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
+        deleteButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
+        saveButton.applyStandardGreenStyle()
+        deleteButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
+        
+        ruleTextView.becomeFirstResponder()
+
     }
     
     // MARK: - Actions
@@ -82,7 +81,7 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - UITExtViewDelegate
+    // MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard text != "\n" else {
@@ -104,14 +103,15 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         return true
     }
     
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-        theme.setupSeparators(separators)
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textUnderline.state = .enabled
     }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textUnderline.state = .disabled
+    }
+    
+    // MARK: - private methods
     
     private func getEditCaptionText() -> String {
         switch type {
@@ -142,5 +142,14 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension RuleDetailsController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
     }
 }

@@ -33,11 +33,11 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var editCaption: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var notificationToken: NotificationToken?
     
     private let textViewCharectersLimit = 50
     
@@ -72,13 +72,11 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         
         updateTheme()
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
+        addButton.applyStandardGreenStyle()
+        cancelButton.applyStandardOpaqueStyle()
     }
     
     deinit {
@@ -89,16 +87,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         super.viewDidAppear(animated)
         ruleTextView.becomeFirstResponder()
         rulePlaceholderLabel.text = getPlaceholderText()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        if touch.view != contentView {
-            dismiss(animated: true, completion: nil)
-        }
-        else {
-            super.touchesBegan(touches, with: event)
-        }
     }
     
     @objc func keyboardNotification(notification: NSNotification) {
@@ -156,15 +144,16 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         }
         return true
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textViewUnderline.state = .disabled
+    }
 
     // MARK: - private methods
-    
-    private func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        rulePlaceholderLabel.textColor = theme.placeholderTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-    }
     
     private func fillTextViewWithCurrentWiFiName() {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
@@ -241,5 +230,15 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension AddRuleController: ThemableProtocol {
+    func updateTheme() {
+        rulePlaceholderLabel.textColor = theme.placeholderTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
     }
 }

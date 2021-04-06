@@ -41,7 +41,12 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
             model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner, dnsProvidersService: dnsProvidersService)
         }
         
+        updateTheme()
         okButton.isHidden = true
+        okButton.makeTitleTextUppercased()
+        okButton.applyStandardGreenStyle()
+        importButton.makeTitleTextUppercased()
+        importButton.applyStandardGreenStyle()
         tableView.reloadData()
     }
     
@@ -107,13 +112,13 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     func stateChanged(tag: Int, state: Bool) {
         model?.setState(state, forRow: tag)
     }
-    
-    // MARK: - privateMethods
-    
-    private func updateTheme() {
-        self.contentView.backgroundColor = theme.backgroundColor
-        tableView.backgroundColor = theme.backgroundColor
+}
+
+extension ImportSettingsController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        tableView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
+        tableView.reloadData()
     }
-    
 }

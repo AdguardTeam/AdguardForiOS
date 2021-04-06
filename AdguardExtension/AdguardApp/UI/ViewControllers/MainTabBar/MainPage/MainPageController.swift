@@ -36,7 +36,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             updateButton.accessibilityLabel = String.localizedString("update_filters_voiceover")
             let icon = UIImage(named: "refresh-icon")
             let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
-            let tintColor = UIColor.AdGuardColor.green
+            let tintColor = UIColor.AdGuardColor.lightGreen1
             iconButton = UIButton(frame: iconSize)
             iconButton?.setBackgroundImage(icon, for: .normal)
             iconButton?.tintColor = tintColor
@@ -177,7 +177,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
-    private var themeNotificationToken: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
@@ -475,22 +474,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - Private methods
     
     /**
-     Updates theme when notification is observed
-     */
-    private func updateTheme(){
-        navigationController?.view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        
-        chartView.updateTheme()
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        getProView.backgroundColor = theme.backgroundColor
-        
-        contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
-        nativeDnsView.backgroundColor = theme.backgroundColor
-    }
-    
-    /**
      Presents ChartDateTypeController
      */
     private func showChartDateTypeController(){
@@ -587,10 +570,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      Adds observers to controller
      */
     private func addObservers(){
-
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
@@ -945,5 +924,20 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         importController.settings = settings
         present(importController, animated: true, completion: nil)
+    }
+}
+
+extension MainPageController: ThemableProtocol {
+    func updateTheme(){
+        navigationController?.view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        
+        chartView.updateTheme()
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        getProView.backgroundColor = theme.backgroundColor
+        
+        contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
+        nativeDnsView.backgroundColor = theme.backgroundColor
     }
 }

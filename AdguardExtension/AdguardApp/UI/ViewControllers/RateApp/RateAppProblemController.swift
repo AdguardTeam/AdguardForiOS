@@ -20,17 +20,13 @@ import UIKit
 
 class RateAppProblemController: BottomAlertController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var problemIsDoneButton: UIButton!
     @IBOutlet weak var problemRemainsButton: UIButton!
     
-    @IBOutlet var themableLabels: [ThemableLabel]!
-    
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    // Theme observer
-    private var themeObserver: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +40,6 @@ class RateAppProblemController: BottomAlertController {
         problemRemainsButton.applyStandardOpaqueStyle()
         
         updateTheme()
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Actions
@@ -62,16 +55,18 @@ class RateAppProblemController: BottomAlertController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupTextView(descriptionTextView)
-        setupDescriptionTextView()
-    }
     
     private func setupDescriptionTextView() {
         let problemDescription = String.localizedString("rate_app_problem_description")
         descriptionTextView.attributedText = NSMutableAttributedString.fromHtml(problemDescription, fontSize: descriptionTextView.font!.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
+    }
+}
+
+extension RateAppProblemController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextView(descriptionTextView)
+        setupDescriptionTextView()
     }
 }

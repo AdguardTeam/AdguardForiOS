@@ -56,16 +56,10 @@ class SettingsController: UITableViewController {
     
     private var headersTitles: [String] = []
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
 
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
@@ -157,7 +151,7 @@ class SettingsController: UITableViewController {
     }
     
     private func resetStatistics(_ indexPath: IndexPath){
-        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
@@ -173,17 +167,12 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }
     
     private func resetSettings(_ indexPath: IndexPath) {
-        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
             alert.dismiss(animated: true, completion: nil)
@@ -197,11 +186,6 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }
@@ -259,19 +243,6 @@ class SettingsController: UITableViewController {
     }
     
     // MARK: - private methods
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSwitch(wifiUpdateSwitch)
-        theme.setupSwitch(invertedSwitch)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.updateUI()
-        }
-    }
     
     private func updateUI() {
         themeButtons.forEach({ $0.isSelected = false })
@@ -355,4 +326,19 @@ extension Notification.Name {
 @objc extension NSNotification {
     public static let resetStatistics = Notification.Name.resetStatistics
     public static let resetSettings = Notification.Name.resetSettings
+}
+
+extension SettingsController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSwitch(wifiUpdateSwitch)
+        theme.setupSwitch(invertedSwitch)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+            self?.updateUI()
+        }
+    }
 }

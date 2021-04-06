@@ -388,10 +388,10 @@ extension AESharedResourcesProtocol {
     
     dynamic var lastDnsFiltersUpdateTime: Date? {
         get {
-            sharedDefaults().object(forKey: AEDefaultsSecurityContentBlockerRulesCount) as? Date
+            sharedDefaults().object(forKey: LastDnsFiltersUpdateTime) as? Date
         }
         set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsSecurityContentBlockerRulesCount)
+            sharedDefaults().set(newValue, forKey: LastDnsFiltersUpdateTime)
         }
     }
     

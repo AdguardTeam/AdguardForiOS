@@ -27,14 +27,12 @@ class ChooseDnsImplementationController: BottomAlertController {
     @IBOutlet weak var adGuardButton: UIButton!
     @IBOutlet weak var nativeButton: UIButton!
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var popupButtons: [RoundRectButton]!
     
     weak var delegate: ChooseDnsImplementationControllerDelegate?
-    
-    // MARK: - Observers
-    private var themeObserver: NotificationToken?
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -46,10 +44,6 @@ class ChooseDnsImplementationController: BottomAlertController {
         
         processCurrentImplementation()
         updateTheme()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Private methods
@@ -72,18 +66,21 @@ class ChooseDnsImplementationController: BottomAlertController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme() {
-        contentView.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupSeparator(separator)
-        theme.setupPopupButtons(popupButtons)
-    }
     
     private func processCurrentImplementation() {
         let implementation = resources.dnsImplementation
         
         adGuardButton.isSelected = implementation == .adGuard
         nativeButton.isSelected = implementation == .native
+    }
+}
+
+extension ChooseDnsImplementationController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupSeparator(separator)
+        theme.setupPopupButtons(popupButtons)
     }
 }

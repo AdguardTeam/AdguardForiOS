@@ -45,7 +45,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private let ruleReuseId = "ruleCell"
     private let selectRuleReuseId = "selectRuleCell"
     
-    private var themeObserver: NotificationToken?
     private var conficurationObservation: NSKeyValueObservation?
     
     private var timer: Timer?
@@ -75,10 +74,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-        }
         
         conficurationObservation = configuration.observe(\.advancedMode) { [weak self] (_, _) in
             self?.tableView.reloadData()
@@ -264,19 +259,6 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
         })
     }
     
-    
-    // MARK: - Update theme
-    
-    private func updateTheme(){
-        theme.setupTable(tableView)
-        tableView.backgroundColor = theme.backgroundColor
-        view.backgroundColor = theme.backgroundColor
-        theme.setupSearchBar(searchBar)
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
     // MARK: - Cells setup functions
     
     private func setupTitleListOfRulesCell() -> UITableViewCell {
@@ -406,6 +388,18 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
                 self?.tableView.insertSections([0,1], with: .fade)
                 self?.tableView.endUpdates()
             }
+        }
+    }
+}
+
+extension ListOfRulesTableController: ThemableProtocol {
+    func updateTheme(){
+        theme.setupTable(tableView)
+        tableView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.backgroundColor
+        theme.setupSearchBar(searchBar)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
         }
     }
 }

@@ -61,7 +61,6 @@ class BlockRequestController: BottomAlertController {
         
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var editButton: RoundRectButton!
-    @IBOutlet weak var cancelButton: RoundRectButton!
     
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
@@ -95,7 +94,6 @@ class BlockRequestController: BottomAlertController {
     private let editDomainSegueId = "EditDomainSegueId"
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,16 +102,13 @@ class BlockRequestController: BottomAlertController {
         
         updateTheme()
         
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         tableViewHeight.constant = rowHeight * CGFloat(subDomains.count)
         tableView.layoutIfNeeded()
         
         addButton.makeTitleTextUppercased()
         editButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        editButton.applyStandardGreenStyle()
     }
     
     // MARK: - Actions
@@ -132,24 +127,12 @@ class BlockRequestController: BottomAlertController {
             presenter?.presentEditBlockRequestController(with: selectedDomain, originalDomain: self.fullDomain, type: self.type, delegate: self.delegate)
         }
     }
-    
-    @IBAction func cancelTapped(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
 
     @IBAction func checkBoxTapped(_ sender: UIButton) {
         let tag = sender.tag
         
         subDomains.forEach({ $0.isSelected = false })
         subDomains[tag].isSelected = true
-        tableView.reloadData()
-    }
-    
-    // MARK: - Private methods
-    
-    private func updateTheme(){
-        contentView.backgroundColor = theme.popupBackgroundColor
-        theme.setupPopupLabels(themableLabels)
         tableView.reloadData()
     }
 }
@@ -176,6 +159,15 @@ extension BlockRequestController: UITableViewDelegate, UITableViewDataSource {
         subDomains[indexPath.row].isSelected = true
         
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
+    }
+}
+
+extension BlockRequestController: ThemableProtocol {
+    func updateTheme(){
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
         tableView.reloadData()
     }
 }

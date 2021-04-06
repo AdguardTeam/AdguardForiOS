@@ -89,21 +89,28 @@ extension String {
         guard let searchStrings = strings else { return nil }
         
         let attributedString = NSMutableAttributedString(string: self)
-        let highlightColor = UIColor.AdGuardColor.green
+        let highlightColor = UIColor.AdGuardColor.lightGreen1
         
         for string in searchStrings {
             guard let searchString = string else { continue }
-            let nsString = self.lowercased() as NSString
-            let nsRange = nsString.localizedStandardRange(of: searchString)
-
-            if nsRange.location + nsRange.length > self.count{
-                continue
+            let nsRanges = ranges(of: searchString, options: [.caseInsensitive])
+            nsRanges.forEach {
+                attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: $0)
             }
-            
-            attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: nsRange)
         }
         
         return attributedString
+    }
+    
+    // NSRanges of all substring in string
+    func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [NSRange] {
+        var searchRange: Range<Index>?
+        var result = [NSRange]()
+        while let range = range(of: substring, options: options, range: (searchRange?.upperBound ?? startIndex)..<endIndex, locale: locale) {
+            searchRange = range
+            result.append(self.nsRange(from: range))
+        }
+        return result
     }
     
     // Adds space every 3 symbols

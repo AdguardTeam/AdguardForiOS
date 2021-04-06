@@ -36,8 +36,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    private var themeToken: NotificationToken?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -74,10 +72,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         updateTheme()
         createSelectionIndicator()
         addTabBarShadow()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
 
     override var selectedViewController: UIViewController? {
@@ -97,11 +91,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         guard let item = tabBar.selectedItem else { return }
         resizeIndicator()
         changeLeftAnchor(for: item)
-    }
-    
-    private func updateTheme(){
-        tabBar.backgroundColor = theme.tabBarColor
-        tabBar.barTintColor = theme.tabBarColor
     }
     
     private func changeLeftAnchor(for item: UITabBarItem){
@@ -134,7 +123,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         bottomView = UIView()
         bottomView?.isUserInteractionEnabled = false
         bottomView?.translatesAutoresizingMaskIntoConstraints = false
-        bottomView?.backgroundColor = UIColor.AdGuardColor.green
+        bottomView?.backgroundColor = UIColor.AdGuardColor.lightGreen1
         tabBar.addSubview(bottomView ?? UIView())
         
         let numberOfItems = CGFloat(tabBar.items!.count)
@@ -192,6 +181,13 @@ extension UITabBar {
             return UITraitCollection(horizontalSizeClass: .compact)
         }
         return super.traitCollection
+    }
+}
+
+extension MainTabBarController: ThemableProtocol {
+    func updateTheme(){
+        tabBar.backgroundColor = theme.tabBarColor
+        tabBar.barTintColor = theme.tabBarColor
     }
 }
 

@@ -23,6 +23,7 @@ class EditBlockRequestController: BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var domainNameTextField: UITextField!
+    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
     
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var backButton: RoundRectButton!
@@ -35,7 +36,6 @@ class EditBlockRequestController: BottomAlertController {
     var delegate: AddDomainToListDelegate?
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +49,10 @@ class EditBlockRequestController: BottomAlertController {
         
         updateTheme()
         
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         addButton.makeTitleTextUppercased()
         backButton.makeTitleTextUppercased()
+        addButton.applyStandardGreenStyle()
+        backButton.applyStandardOpaqueStyle()
     }
     
     // MARK: - Actions
@@ -74,11 +72,20 @@ class EditBlockRequestController: BottomAlertController {
         }
     }
     
-    // MARK: - private methods
-    private func updateTheme() {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewUnderline.state = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textViewUnderline.state = .disabled
+    }
+}
+
+extension EditBlockRequestController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(domainNameTextField)
         theme.setupPopupLabels(themableLabels)
     }
 }
-

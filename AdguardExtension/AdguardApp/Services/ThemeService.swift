@@ -27,6 +27,7 @@ import Foundation
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
     var popupBackgroundColor: UIColor { get }
+    var popupTitleTextColor: UIColor { get }
     var bottomBarBackgroundColor: UIColor { get }
     var blackTextColor: UIColor { get }
     var lightGrayTextColor: UIColor { get }
@@ -86,83 +87,87 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var backgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackground : .white
     }
     
     var invertedBackgroundColor: UIColor {
-        return configuration.darkTheme ? .white : UIColor(hexString: "#131313")
+        return configuration.darkTheme ? .white : UIColor.AdGuardColor.darkBackground
     }
     
     var popupBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.black1 : .white
+    }
+    
+    var popupTitleTextColor: UIColor {
+        return configuration.darkTheme ? .white : UIColor.AdGuardColor.lightGray2
     }
     
     var bottomBarBackgroundColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : UIColor(hexString: "#F3F3F3")
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackground : UIColor.AdGuardColor.lightGray6
     }
     
     var blackTextColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#F3F3F3") : UIColor.init(hexString: "#4D4D4D")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray6 : UIColor.AdGuardColor.lightGray2
     }
     
     var grayTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#D8D8D8") : UIColor.init(hexString: "#4D4D4D")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray2
     }
 
     var lightGrayTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#a4a4a4") : UIColor.init(hexString: "#888888")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray4 : UIColor.AdGuardColor.lightGray3
     }
     
     var placeholderTextColor: UIColor {
-        return configuration.darkTheme ? UIColor.init(hexString: "#888888") : UIColor.init(hexString: "#D8D8D8")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5
     }
     
     var separatorColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "4D4D4D") : UIColor(hexString: "D8D8D8")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5
     }
     
     var selectedCellColor: UIColor {
-         return configuration.darkTheme ?  UIColor(hexString: "#4D4D4D") : UIColor.init(hexString: "#F3F3F3")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray1 : UIColor.AdGuardColor.lightGray6
     }
     
     var errorRedColor: UIColor {
-        return UIColor(hexString: "#C23814")
+        return UIColor.AdGuardColor.errorRedColor
     }
     
     var editLineColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#d8d8d8")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5
     }
     
     var editLineSelectedColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#d8d8d8") : UIColor(hexString: "#4d4d4d")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray2
     }
     
     var logBlockedCellColor: UIColor {
-        return UIColor(hexString: "#33DF3812")
+        return UIColor.AdGuardColor.logBlockedCellColor
     }
     
     var logSelectedCellColor: UIColor {
-        return UIColor(hexString: "#4DDF3812")
+        return UIColor.AdGuardColor.logSelectedCellColor
     }
     
     var tabBarColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#131313") : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackground : .white
     }
     
     var ruleTextColor: UIColor {
-        return configuration.darkTheme ? grayTextColor : UIColor.init(hexString: "#4D4D4D")
+        return configuration.darkTheme ? grayTextColor : UIColor.AdGuardColor.lightGray2
     }
     
     var navigationBarColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#F3F3F3") : UIColor(hexString: "4D4D4D")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray6 : UIColor.AdGuardColor.lightGray2
     }
     
     var notificationWindowColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#4d4d4d") : UIColor(hexString: "#f3f3f3")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray6
     }
     
     var chartViewTextColor: UIColor {
-        return configuration.darkTheme ? UIColor(hexString: "#4D4D4D") : UIColor(hexString: "#d8d8d8")
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5
     }
     
     var indicatorStyle: UIActivityIndicatorView.Style {
@@ -174,8 +179,8 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupTagButton(_ button: RoundRectButton) {
-        button.customBackgroundColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#4D4D4D")
-        button.setTitleColor(configuration.darkTheme ? UIColor.init(hexString: "#4D4D4D") : UIColor.init(hexString: "#D8D8D8"), for: .normal)
+        button.customBackgroundColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2
+        button.setTitleColor(configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5, for: .normal)
     }
     
     func setupImage(_ imageView: ThemeableImageView) {
@@ -188,7 +193,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     func setupLabelInverted(_ label: ThemableLabel) {
         if configuration.darkTheme {
-            label.textColor = UIColor.init(hexString: "#4A4A4A")
+            label.textColor = UIColor.AdGuardColor.lightGray8
         }
         else {
             label.textColor = .white
@@ -220,12 +225,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupPopupLabel(_ label: ThemableLabel) {
-        if configuration.darkTheme {
-            label.textColor = label.greyText ? UIColor(hexString: "#888888") : UIColor(hexString: "#F3F3F3")
-        }
-        else {
-            label.textColor = label.greyText ? UIColor(hexString: "#494949") : UIColor(hexString: "#888888")
-        }
+        label.textColor = label.greyText ? grayTextColor : label.lightGreyText ? lightGrayTextColor : blackTextColor
     }
     
     func setupPopupLabels(_ labels: [ThemableLabel]) {
@@ -252,13 +252,13 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
         navBar.titleTextAttributes = textAttributes
         navBar.barTintColor = backgroundColor
-        navBar.tintColor = UIColor(hexString: "#888888")
+        navBar.tintColor = UIColor.AdGuardColor.lightGray3
         navBar.barStyle = dark ? .black : .default
     }
     
     func setupSearchBar(_ searchBar: UISearchBar) {
         let textField = searchBar.value(forKey: "searchField") as? UITextField
-        let textFieldColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        let textFieldColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6 : UIColor.AdGuardColor.black2
         
         textField?.textColor = textFieldColor
         searchBar.tintColor = textFieldColor
@@ -270,7 +270,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
         
         if let iconView = textField?.leftView as? UIImageView {
-            iconView.tintColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+            iconView.tintColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6 : UIColor.AdGuardColor.black2
         }
         
         textField?.keyboardAppearance = configuration.darkTheme ? .dark : .light
@@ -341,13 +341,13 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupSwitch(_ switchControl: UISwitch) {
-        switchControl.onTintColor = UIColor.AdGuardColor.green
+        switchControl.onTintColor = UIColor.AdGuardColor.lightGreen1
         switchControl.layer.cornerRadius = switchControl.frame.height / 2
     }
     
     func setupSegmentedControl(_ segmentedControl: UISegmentedControl) {
         segmentedControl.backgroundColor = notificationWindowColor
-        let textColor = configuration.darkTheme ? UIColor.init(hexString: "#F3F3F3") : UIColor.init(hexString: "#222222")
+        let textColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6 : UIColor.AdGuardColor.black2
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: textColor], for: .normal)
         segmentedControl.tintColor = textColor
         if #available(iOS 13.0, *) {

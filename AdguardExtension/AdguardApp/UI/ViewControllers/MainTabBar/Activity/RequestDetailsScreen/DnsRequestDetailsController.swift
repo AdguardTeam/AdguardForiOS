@@ -42,7 +42,6 @@ class DnsRequestDetailsController: UITableViewController {
     private let activityTitleCellId = "ActivityTitleCell"
     
     // MARK: - Notifications
-    private var notificationToken: NotificationToken?
     private var configurationToken: NSKeyValueObservation?
     
     // MARK: - Services
@@ -78,10 +77,6 @@ class DnsRequestDetailsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             guard let self = self else { return }
@@ -221,15 +216,6 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.view.backgroundColor = self.theme.backgroundColor
-            self.tableView.reloadData()
-        }
-    }
-    
     /**
      Returns view model for specific cell
      */
@@ -292,7 +278,7 @@ class DnsRequestDetailsController: UITableViewController {
      Creates alert for additional info about whoTracksMe json
      */
     private func showAlert(_ sender: UIButton) {
-        let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .deviceAlertStyle)
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
             guard let self = self else { return }
@@ -302,11 +288,6 @@ class DnsRequestDetailsController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true, completion: nil)
     }
@@ -487,7 +468,7 @@ class DnsRequestDetailsController: UITableViewController {
         // Website model
         let website = record.category.url ?? ""
         let websiteTitle = String.localizedString("website_title")
-        let color: UIColor = UIColor.AdGuardColor.green
+        let color: UIColor = UIColor.AdGuardColor.lightGreen1
         let websiteModelIsNil = website.isEmpty
         let websiteModel = websiteModelIsNil ? nil : LogCellModel(copiedString: website, title: websiteTitle, info: website, infoColor: color,  theme: theme)
         if !websiteModelIsNil {
@@ -577,3 +558,13 @@ class DnsRequestDetailsController: UITableViewController {
     }
 }
 
+extension DnsRequestDetailsController: ThemableProtocol {
+    func updateTheme() {
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.view.backgroundColor = self.theme.backgroundColor
+            self.tableView.reloadData()
+        }
+    }
+}
