@@ -54,8 +54,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     private var keyboardMover: KeyboardMover!
     
-    private var notificationToken: NotificationToken?
-    
     private var isKeyboardNextButtonEnabled = true
 
     
@@ -70,9 +68,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         
         let tabBar = tabBarController?.tabBar
         keyboardMover = KeyboardMover(bottomConstraint: bottomConstraint, view: scrollView, tabBar: tabBar)
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            self?.updateTheme()
-        }
         
         // setup activity indicator in login button
         loginButton.indicatorStyle = .white
@@ -163,20 +158,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     
     private func updateLoginButton() {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
-    }
-    
-    private func updateTheme() {
-        
-        view.backgroundColor = theme.backgroundColor
-        
-        theme.setupTextField(nameEdit)
-        theme.setupTextField(passwordEdit)
-        
-        separators.forEach { $0.backgroundColor = theme.separatorColor }
-        
-        theme.setupLabels(themableLabels)
-        
-        updateLines()
     }
     
     private func isLicenseKey(text: String)->Bool {
@@ -312,5 +293,18 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         attributedString.addAttribute(.font, value: font!, range: nsRange)
         
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
+    }
+}
+
+extension EmailSignInController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        
+        theme.setupTextField(nameEdit)
+        theme.setupTextField(passwordEdit)
+        
+        separators.forEach { $0.backgroundColor = theme.separatorColor }
+        theme.setupLabels(themableLabels)
+        updateLines()
     }
 }

@@ -38,18 +38,12 @@ class UpstreamsController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -60,7 +54,7 @@ class UpstreamsController: BottomAlertController {
         
         cancelButton?.makeTitleTextUppercased()
         saveButton?.makeTitleTextUppercased()
-        cancelButton.applyStandardOpaqueStyle(color: .gray)
+        cancelButton.applyStandardOpaqueStyle()
         saveButton.applyStandardGreenStyle()
     }
     
@@ -109,16 +103,6 @@ class UpstreamsController: BottomAlertController {
     }
     
     // MARK: - Private methods
-    
-    private func updateTheme() {
-        upstreamTypeLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(upstreamsTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
-    }
     
     private func prepareUpstreamTextField() {
         switch upstreamType {
@@ -219,6 +203,19 @@ class UpstreamsController: BottomAlertController {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
                 }
             }
+        }
+    }
+}
+
+extension UpstreamsController: ThemableProtocol {
+    func updateTheme() {
+        upstreamTypeLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(upstreamsTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        for separator in separators {
+            separator.backgroundColor = theme.separatorColor
         }
     }
 }

@@ -51,7 +51,6 @@ class CompanyDetailedController: UITableViewController {
     
     // MARK: - Notifications
     
-    private var themeToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
     private var keyboardShowToken: NotificationToken?
     
@@ -97,10 +96,6 @@ class CompanyDetailedController: UITableViewController {
         
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             self?.observeAdvancedMode()
@@ -212,25 +207,8 @@ class CompanyDetailedController: UITableViewController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme(){
-        tableView.reloadData()
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        tableHeaderView.backgroundColor = theme.backgroundColor
-        sectionHeaderView.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupSearchBar(searchBar)
-        theme.setupLabels(themableLabels)
-        theme.setupButtons(themableButtons)
-        theme.setupLabel(recentActivityLabel)
-    }
     
     private func addObservers(){
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
         }
@@ -274,7 +252,7 @@ class CompanyDetailedController: UITableViewController {
     }
     
     private func showGroupsAlert(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
         
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
@@ -311,11 +289,6 @@ class CompanyDetailedController: UITableViewController {
         alert.addAction(blockedOnlyAction)
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true)
     }
@@ -367,5 +340,20 @@ extension CompanyDetailedController: DnsRequestsDelegateProtocol {
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+extension CompanyDetailedController: ThemableProtocol {
+    func updateTheme(){
+        tableView.reloadData()
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        theme.setupSearchBar(searchBar)
+        theme.setupLabels(themableLabels)
+        theme.setupButtons(themableButtons)
+        theme.setupLabel(recentActivityLabel)
     }
 }

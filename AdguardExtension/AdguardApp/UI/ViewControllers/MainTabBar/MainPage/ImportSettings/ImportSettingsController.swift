@@ -33,7 +33,6 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private var model: ImportSettingsViewModelProtocol?
-    private var themeObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +41,6 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
             model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner, dnsProvidersService: dnsProvidersService)
         }
         
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-            self?.tableView.reloadData()
-        }
         updateTheme()
         okButton.isHidden = true
         okButton.makeTitleTextUppercased()
@@ -117,12 +112,13 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     func stateChanged(tag: Int, state: Bool) {
         model?.setState(state, forRow: tag)
     }
-    
-    // MARK: - privateMethods
-    
-    private func updateTheme() {
+}
+
+extension ImportSettingsController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
         tableView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
+        tableView.reloadData()
     }
-    
 }

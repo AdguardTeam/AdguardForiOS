@@ -37,8 +37,6 @@ class FiltersMasterController: UIViewController {
     private let groupsControllerSegue = "groupsControllerSegue"
     private var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - Initializer
     
     required init?(coder: NSCoder) {
@@ -51,9 +49,6 @@ class FiltersMasterController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItems = [searchButton]
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-        }
         
         searchContainerView.alpha = 0.0
         setupBackButton()
@@ -104,6 +99,7 @@ class FiltersMasterController: UIViewController {
             self?.searchContainerView.isHidden = false
             self?.searchContainerView.alpha = 1.0
             self?.groupsContainerView.alpha = 0.0
+            self?.navigationItem.title = String.localizedString("navigation_item_filters_title")
             self?.navigationItem.rightBarButtonItems = [self?.cancelButton ?? UIBarButtonItem()]
         }) {[weak self] (success) in
             if success{
@@ -117,6 +113,7 @@ class FiltersMasterController: UIViewController {
             self?.groupsContainerView.isHidden = false
             self?.groupsContainerView.alpha = 1.0
             self?.searchContainerView.alpha = 0.0
+            self?.navigationItem.title = nil
             self?.navigationItem.rightBarButtonItems = [self?.searchButton ?? UIBarButtonItem()]
         }) {[weak self] (success) in
             if success{
@@ -124,17 +121,18 @@ class FiltersMasterController: UIViewController {
             }
         }
     }
-    
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-    }
-    
 }
 
 protocol FilterMasterControllerDelegate: class {
     func cancelButtonTapped()
     func searchButtonTapped()
+}
+
+extension FiltersMasterController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
+    }
 }

@@ -148,7 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
-        subscribeToUserNotificationServiceNotifications()
         AppDelegate.setPeriodForCheckingFilters()
         subscribeToNotifications()
         
@@ -361,11 +360,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      }
     
     private func subscribeToNotifications() {
+        
+        subscribeToUserNotificationServiceNotifications()
+        
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
-            self?.window?.backgroundColor = self?.themeService.backgroundColor
-        }
+        subscribeToThemeChangeNotification()
         
         NotificationCenter.default.addObserver(forName: .setappDeviceLimitReched, object: nil, queue: nil) {[weak self] _ in
             DispatchQueue.main.async {

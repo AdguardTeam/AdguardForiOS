@@ -50,9 +50,7 @@ class SafariProtectionController: UITableViewController {
     private let whiteListSegue = "whiteListSegue"
     private let blackListSegue = "blackListSegue"
     
-    private var notificationToken: NotificationToken?
-    
-    private let enabledColor = UIColor.AdGuardColor.green
+    private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor(hexString: "#888888")
     
     private let blacklistModel: ListOfRulesModelProtocol
@@ -91,10 +89,6 @@ class SafariProtectionController: UITableViewController {
         
         activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
             updateFilters()
-        }
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
         }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
@@ -156,7 +150,17 @@ class SafariProtectionController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
+    private func updateSafariProtectionInfo(){
+        let protectionEnabled = complexProtection.safariProtectionEnabled
+        protectionStateSwitch.isOn = protectionEnabled
+        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        
+        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+    }
+}
+
+extension SafariProtectionController: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
@@ -166,13 +170,5 @@ class SafariProtectionController: UITableViewController {
             guard let sSelf = self else { return }
             sSelf.tableView.reloadData()
         }
-    }
-    
-    private func updateSafariProtectionInfo(){
-        let protectionEnabled = complexProtection.safariProtectionEnabled
-        protectionStateSwitch.isOn = protectionEnabled
-        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
-        
-        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
 }

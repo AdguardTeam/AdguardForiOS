@@ -38,7 +38,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var notificationToken: NotificationToken?
     
     private let textViewCharectersLimit = 50
     
@@ -73,15 +72,11 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         
         updateTheme()
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         addButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         addButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
+        cancelButton.applyStandardOpaqueStyle()
     }
     
     deinit {
@@ -160,13 +155,6 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
 
     // MARK: - private methods
     
-    private func updateTheme() {
-        rulePlaceholderLabel.textColor = theme.placeholderTextColor
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-    }
-    
     private func fillTextViewWithCurrentWiFiName() {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
         let ssid = networkSettingsService.getCurrentWiFiName()
@@ -242,5 +230,15 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension AddRuleController: ThemableProtocol {
+    func updateTheme() {
+        rulePlaceholderLabel.textColor = theme.placeholderTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
     }
 }

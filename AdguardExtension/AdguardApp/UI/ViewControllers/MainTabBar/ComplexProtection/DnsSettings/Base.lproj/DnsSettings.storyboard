@@ -2378,7 +2378,7 @@
                                                             <constraint firstAttribute="height" constant="1" id="Zrd-oN-roy"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2l-7z-M2N" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2l-7z-M2N" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="180" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="AzJ-5V-ZFs">
@@ -2395,13 +2395,16 @@
                                                             <action selector="saveOrAddAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="aSn-pN-lub"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdD-yx-6ph" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdD-yx-6ph" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="236" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="pRu-aG-zpL">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                                             </constraint>
                                                         </constraints>
+                                                        <state key="normal">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
                                                         <attributedString key="userComments">
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
@@ -2425,7 +2428,7 @@
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="YAi-vB-VA4"/>
                                                     <constraint firstItem="ZgC-4d-Peb" firstAttribute="leading" secondItem="dW3-zk-BPr" secondAttribute="leading" id="YRO-PD-VS4"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ko3-HW-YZi" secondAttribute="trailing" constant="24" id="ZXp-Vq-NSr"/>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" id="aiN-So-OEt"/>
+                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" constant="4" id="aiN-So-OEt"/>
                                                     <constraint firstAttribute="trailing" secondItem="B2l-7z-M2N" secondAttribute="trailing" constant="16" id="bq0-17-fUv"/>
                                                     <constraint firstItem="B2l-7z-M2N" firstAttribute="top" secondItem="Ko3-HW-YZi" secondAttribute="bottom" constant="32" id="cRk-zo-3Nz">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
@@ -2464,9 +2467,6 @@
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
-                                        </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
@@ -2893,9 +2893,6 @@
                                                                 <state key="normal" title="Regular">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isNeedHighlight" value="NO"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 </variation>
@@ -2951,9 +2948,6 @@
                                                                 <state key="normal" title="DNSCrypt">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isNeedHighlight" value="NO"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 </variation>
@@ -3010,9 +3004,6 @@
                                                                 <state key="normal" title="DNS-over-HTTPS">
                                                                     <color key="titleColor" systemColor="darkTextColor"/>
                                                                 </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isNeedHighlight" value="NO"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 </variation>
@@ -3069,9 +3060,6 @@
                                                                 <state key="normal" title="DNS-over-TLS">
                                                                     <color key="titleColor" systemColor="darkTextColor"/>
                                                                 </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isNeedHighlight" value="NO"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 </variation>
@@ -3128,9 +3116,6 @@
                                                                 <state key="normal" title="DNS-over-QUIC (experimental)">
                                                                     <color key="titleColor" systemColor="darkTextColor"/>
                                                                 </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isNeedHighlight" value="NO"/>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 </variation>
@@ -3292,12 +3277,6 @@
         <image name="plus" width="26" height="26"/>
         <image name="question" width="20" height="20"/>
         <image name="whitelist-icon" width="24" height="24"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

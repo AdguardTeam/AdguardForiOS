@@ -284,13 +284,13 @@
 "reset_title" = "Reset";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Remove";
+"delete_title" = "Delete";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Remove VPN profile";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Are you sure you want to remove your VPN profile and disable DNS protection?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Are you sure you want to delete your VPN profile and disable DNS protection?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "An error occurred";
@@ -945,6 +945,12 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Respond with a manually set IP address";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filters";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS Filters";
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "The maximum number of devices connected to the setapp account";

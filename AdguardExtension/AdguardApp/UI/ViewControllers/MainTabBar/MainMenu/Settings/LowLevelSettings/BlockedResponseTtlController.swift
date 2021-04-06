@@ -38,16 +38,10 @@ class BlockedResponseTtlController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     weak var delegate: BlockedResponseTtlDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
@@ -59,7 +53,7 @@ class BlockedResponseTtlController: BottomAlertController {
         saveButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         saveButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
+        cancelButton.applyStandardOpaqueStyle()
     }
     
     // MARK: - Actions
@@ -92,17 +86,20 @@ class BlockedResponseTtlController: BottomAlertController {
 
     // MARK: - Private methods
     
-    private func updateTheme() {
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(ttlTextField)
-        saveButton?.indicatorStyle = theme.indicatorStyle
-        theme.setupSeparators(separators)
-    }
-    
     private func updateSaveButton() {
         let ttl = ttlTextField.text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
         saveButton?.isEnabled = true
+    }
+}
+
+extension BlockedResponseTtlController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(ttlTextField)
+        saveButton?.indicatorStyle = theme.indicatorStyle
+        theme.setupSeparators(separators)
     }
 }

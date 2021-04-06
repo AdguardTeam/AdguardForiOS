@@ -94,7 +94,6 @@ class BlockRequestController: BottomAlertController {
     private let editDomainSegueId = "EditDomainSegueId"
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeNotificationToken: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,10 +101,6 @@ class BlockRequestController: BottomAlertController {
         titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
         
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         tableViewHeight.constant = rowHeight * CGFloat(subDomains.count)
         tableView.layoutIfNeeded()
@@ -140,14 +135,6 @@ class BlockRequestController: BottomAlertController {
         subDomains[tag].isSelected = true
         tableView.reloadData()
     }
-    
-    // MARK: - Private methods
-    
-    private func updateTheme(){
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        tableView.reloadData()
-    }
 }
 
 
@@ -172,6 +159,15 @@ extension BlockRequestController: UITableViewDelegate, UITableViewDataSource {
         subDomains[indexPath.row].isSelected = true
         
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
+    }
+}
+
+extension BlockRequestController: ThemableProtocol {
+    func updateTheme(){
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
         tableView.reloadData()
     }
 }
