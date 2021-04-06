@@ -68,16 +68,10 @@ class GetProTableController: UITableViewController {
     
     var selectedProduct: Product?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View controller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         updateTheme()
         
@@ -212,18 +206,6 @@ class GetProTableController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.setPurchaseDescription()
-            self.tableView.reloadData()
-        }
-        theme.setupLabels(themableLabels)
-        theme.setupImage(logoImage)
-    }
-    
     private func setPurchaseDescription() {
         
         let stringKey = selectedProduct?.type == .some(.lifetime) ? "lifetime_purchase_description_format" : "purchase_description_format"
@@ -315,5 +297,19 @@ class GetProTableController: UITableViewController {
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
         
         return resultString
+    }
+}
+
+extension GetProTableController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.setPurchaseDescription()
+            self.tableView.reloadData()
+        }
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logoImage)
     }
 }

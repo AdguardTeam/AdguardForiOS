@@ -23,16 +23,9 @@ class RuleAddedController: BottomAlertController {
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var okButton: UIButton!
     
-    
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     override func viewDidLoad() {
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         super.viewDidLoad()
         updateTheme()
@@ -43,8 +36,11 @@ class RuleAddedController: BottomAlertController {
     @IBAction func okAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    private func updateTheme() {
+}
+
+extension RuleAddedController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
         titleLable.textColor = theme.popupTitleTextColor
     }
 }

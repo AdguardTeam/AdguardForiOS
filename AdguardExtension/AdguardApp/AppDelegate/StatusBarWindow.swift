@@ -58,7 +58,7 @@ final class StatusBarWindow: IStatusBarWindow {
         let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY, width: keyWindow.frame.width, height: 16.0 + bottomSafeAreaInset)
         
         let bannerWindow = UIWindow(frame: frame)
-        bannerWindow.backgroundColor = UIColor.AdGuardColor.lightGray
+        bannerWindow.backgroundColor = UIColor.AdGuardColor.lightGray5
         bannerWindow.windowLevel = UIWindow.Level.statusBar
         bannerWindow.addSubview(statusView)
         bannerWindow.isHidden = false

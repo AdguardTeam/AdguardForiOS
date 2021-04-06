@@ -70,8 +70,6 @@ class ActivityViewController: UITableViewController {
     private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
-    
-    private var themeToken: NotificationToken?
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
@@ -113,7 +111,7 @@ class ActivityViewController: UITableViewController {
         requestsModel?.delegate = self
         statisticsModel.chartPointsChangedDelegates.append(self)
         
-        activityImage.tintColor = UIColor.AdGuardColor.green
+        activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
         dateTypeChanged(dateType: resources.activityStatisticsType)
@@ -301,20 +299,6 @@ class ActivityViewController: UITableViewController {
     }
     
     // MARK: - Private methods
-
-    private func updateTheme(){
-        tableView.reloadData()
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        sectionHeaderView.backgroundColor = theme.backgroundColor
-        tableHeaderView.backgroundColor = theme.backgroundColor
-        theme.setupLabel(recentActivityLabel)
-        theme.setupTable(tableView)
-        theme.setupSearchBar(searchBar)
-        theme.setupLabels(themableLabels)
-        theme.setupButtons(themableButtons)
-        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
-    }
     
     private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
@@ -418,9 +402,6 @@ class ActivityViewController: UITableViewController {
      Adds observers to controller
      */
     private func addObservers(){
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
@@ -453,7 +434,7 @@ class ActivityViewController: UITableViewController {
         var buttonColor: UIColor
         switch buttonType {
         case .addDomainToWhitelist:
-            buttonColor = UIColor.AdGuardColor.green
+            buttonColor = UIColor.AdGuardColor.lightGreen1
         case .addRuleToUserFlter:
             buttonColor = UIColor(hexString: "#c23814")
         default:
@@ -640,5 +621,22 @@ extension ActivityViewController: AddDomainToListDelegate {
         dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
         swipedRecord.logRecord.userStatus = status
         tableView.reloadRows(at: [swipedIndexPath], with: .fade)
+    }
+}
+
+extension ActivityViewController: ThemableProtocol {
+    func updateTheme(){
+        tableView.reloadData()
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        sectionHeaderView.backgroundColor = theme.backgroundColor
+        tableHeaderView.backgroundColor = theme.backgroundColor
+        theme.setupLabel(recentActivityLabel)
+        theme.setupTable(tableView)
+        theme.setupSearchBar(searchBar)
+        theme.setupLabels(themableLabels)
+        theme.setupButtons(themableButtons)
+        mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
+        mostActiveButton.customBackgroundColor = theme.backgroundColor
     }
 }

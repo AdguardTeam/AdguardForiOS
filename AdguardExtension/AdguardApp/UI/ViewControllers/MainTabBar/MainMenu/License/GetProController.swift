@@ -55,16 +55,11 @@ class GetProController: UIViewController {
     private let getProSegueIdentifier = "getProSegue"
     private var getProTableController: GetProTableController? = nil
     
-    private var сonfigurationObserver: NotificationToken?
     private var purchaseObserver: NotificationToken?
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        сonfigurationObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                object: nil, queue: nil)
@@ -209,12 +204,6 @@ class GetProController: UIViewController {
         getProTableController?.enablePurchaseButtons(true)
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        separator2.backgroundColor = theme.separatorColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-    }
-    
     private func updateViews() {
         
         switch (configurationService.proStatus, configurationService.purchasedThroughLogin) {
@@ -230,5 +219,13 @@ class GetProController: UIViewController {
         }
         
         (children.first as? UITableViewController)?.tableView.reloadData()
+    }
+}
+
+extension GetProController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        separator2.backgroundColor = theme.separatorColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
     }
 }

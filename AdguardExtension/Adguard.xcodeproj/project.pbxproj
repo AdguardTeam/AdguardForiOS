@@ -12,6 +12,8 @@
 		240F1E5E2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
+		241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
 		242576FA25FB53A500D47119 /* BackgroundFetchPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445D17F25FB519B0019AFBF /* BackgroundFetchPerformer.swift */; };
 		2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
@@ -2715,6 +2717,7 @@
 /* Begin PBXFileReference section */
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
 		240F1E5D2595D03000580102 /* RateAppProblemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppProblemController.swift; sourceTree = "<group>"; };
+		241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Themable.swift"; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
@@ -4119,6 +4122,7 @@
 				24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */,
 				24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */,
 				24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */,
+				241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -7092,6 +7096,7 @@
 				D031A0D0219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */,
 				D0B545C22435D660002F0AEC /* AdvancedSettingsController.swift in Sources */,
+				241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
 				D0D7E5E224444D81001801A5 /* BasicRulesParser.swift in Sources */,
 				7E4CC0532577E8C1005ADBCA /* HideKeyboardTapGestureRecognizer.swift in Sources */,
 				D0B545852435D62A002F0AEC /* ComplexProtectionService.swift in Sources */,
@@ -7467,6 +7472,7 @@
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,
 				24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */,
 				D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */,
+				241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
 				7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */,
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D06DE02C2347769200A70D85 /* AntibannerController.swift in Sources */,

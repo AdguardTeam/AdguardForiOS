@@ -150,7 +150,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         subscribeToUserNotificationServiceNotifications()
         AppDelegate.setPeriodForCheckingFilters()
-        subscribeToNotifications()
+        subscribeToThemeChangeNotification()
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
         return true
     }
@@ -355,14 +356,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              }
          }
      }
-    
-    private func subscribeToNotifications() {
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
-            self?.window?.backgroundColor = self?.themeService.backgroundColor
-        }
-    }
     
     //MARK: - Init logger
     

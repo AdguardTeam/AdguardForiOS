@@ -27,7 +27,6 @@ class IntroductionOnboardingController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private var themeToken: NotificationToken?
     
     var delegate: OnboardingControllerDelegate?
     
@@ -40,10 +39,6 @@ class IntroductionOnboardingController: UIViewController {
         
         if let navController = navigationController as? MainNavigationController {
             navController.removeGestureRecognizer()
-        }
-                
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
         }
     }
     
@@ -70,8 +65,10 @@ class IntroductionOnboardingController: UIViewController {
         
         licenseTextView.attributedText = attributeString
     }
-    
-    private func updateTheme() {
+}
+
+extension IntroductionOnboardingController: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabel(titleLabel)
         theme.setupTextView(licenseTextView)

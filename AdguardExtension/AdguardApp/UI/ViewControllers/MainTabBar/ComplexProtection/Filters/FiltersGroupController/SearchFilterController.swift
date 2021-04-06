@@ -34,16 +34,10 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     private var selectedGroup: Int = 0
     private var selectedFilter: Int = 0
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-            }
         
         tableView.tableHeaderView = searchView
         tableView.rowHeight = UITableView.automaticDimension
@@ -204,16 +198,6 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
-        theme.setupSearchBar(searchBar)
-    }
-    
     @objc private func segueButtonTapped(_ sender: UIButton){
         selectedGroup = sender.tag
         performSegue(withIdentifier: showGroupSegue, sender: self)
@@ -244,3 +228,14 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
     }
 }
 
+extension SearchFilterController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+        theme.setupSearchBar(searchBar)
+    }
+}

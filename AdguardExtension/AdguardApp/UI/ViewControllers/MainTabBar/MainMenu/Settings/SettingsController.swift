@@ -56,16 +56,10 @@ class SettingsController: UITableViewController {
     
     private var headersTitles: [String] = []
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - ViewController life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
 
         fillHeaderTitles()
         tableView.sectionHeaderHeight = 40
@@ -260,19 +254,6 @@ class SettingsController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSwitch(wifiUpdateSwitch)
-        theme.setupSwitch(invertedSwitch)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.updateUI()
-        }
-    }
-    
     private func updateUI() {
         themeButtons.forEach({ $0.isSelected = false })
         switch configuration.userThemeMode {
@@ -355,4 +336,19 @@ extension Notification.Name {
 @objc extension NSNotification {
     public static let resetStatistics = Notification.Name.resetStatistics
     public static let resetSettings = Notification.Name.resetSettings
+}
+
+extension SettingsController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSwitch(wifiUpdateSwitch)
+        theme.setupSwitch(invertedSwitch)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+            self?.updateUI()
+        }
+    }
 }

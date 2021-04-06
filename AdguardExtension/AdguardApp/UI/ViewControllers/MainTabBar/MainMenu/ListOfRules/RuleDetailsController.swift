@@ -35,10 +35,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(forName: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         domainOrRuleLabel.text = getEditCaptionText()
 
         
@@ -117,12 +113,6 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextView(ruleTextView)
-    }
-    
     private func getEditCaptionText() -> String {
         switch type {
         case .safariUserfilter:
@@ -152,5 +142,14 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         if type == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
+    }
+}
+
+extension RuleDetailsController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextView(ruleTextView)
     }
 }

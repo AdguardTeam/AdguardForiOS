@@ -45,7 +45,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var themeObserver: Any? = nil
     private var advancedModeToken: NSKeyValueObservation?
     
     private var detailsController: DnsRequestDetailsController?
@@ -63,10 +62,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             DispatchQueue.main.async {[weak self] in
@@ -97,12 +92,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     }
     
     // MARK: - private methods
-    
-    private func updateTheme() {
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        view.backgroundColor = theme.backgroundColor
-        shadowView.updateTheme()
-    }
     
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
         dnsLogService.set(rowId: self.logRecord.logRecord.rowid!, status: status, userRule: rule)
@@ -149,7 +138,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 }
                 
             case .removeRuleFromUserFilter:
-                color = UIColor.AdGuardColor.green
+                color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
@@ -161,7 +150,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 }
                 
             case .addDomainToWhitelist:
-                color = UIColor.AdGuardColor.green
+                color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
                     if let domain = self.logRecord?.logRecord.domain {
                         self.presentBlockRequestController(with: domain, type: type, delegate: self)
@@ -176,5 +165,13 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
         }
         
         shadowView.buttons = buttons
+    }
+}
+
+extension DnsContainerController: ThemableProtocol {
+    func updateTheme() {
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        view.backgroundColor = theme.backgroundColor
+        shadowView.updateTheme()
     }
 }

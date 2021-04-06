@@ -32,7 +32,7 @@ class ComplexProtectionSwitch: UIControl {
     
     // MARK: - Private variables
     
-    private let onColor = UIColor.AdGuardColor.green
+    private let onColor = UIColor.AdGuardColor.lightGreen1
     private let offColor = UIColor(hexString: "#df3812")
     private let thumbColor = UIColor.white
     

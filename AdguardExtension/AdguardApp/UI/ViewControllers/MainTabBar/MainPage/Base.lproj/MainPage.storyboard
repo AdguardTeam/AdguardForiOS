@@ -278,6 +278,7 @@
                                                                     <constraint firstAttribute="height" constant="40" id="3E7-jt-e9m">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                                     </constraint>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="141" id="wm1-FY-Jwj"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <inset key="titleEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>

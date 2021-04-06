@@ -33,17 +33,12 @@ class AboutViewController: UIViewController {
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
-    private var themeToken: NotificationToken?
     private var proStatusObservation: NSKeyValueObservation?
     
     private let loginSegueId = "loginSegueId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        themeToken =  NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         proStatusObservation = configuration.observe(\.proStatus) {(_, _) in
             DispatchQueue.main.async {[weak self] in
@@ -84,13 +79,7 @@ class AboutViewController: UIViewController {
     }
     
     // MARK: - private methods
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupImage(logoImageView)
-    }
-    
+
     private func processProStatus() {
         navigationItem.rightBarButtonItems = configuration.proStatus ? [] : [loginButton]
         
@@ -100,7 +89,7 @@ class AboutViewController: UIViewController {
         }
         
         let redColor = UIColor(hexString: "#DF3812")
-        let greenColor = UIColor.AdGuardColor.green
+        let greenColor = UIColor.AdGuardColor.lightGreen1
         
         let color = configuration.proStatus ? redColor : greenColor
         let title = configuration.proStatus ? String.localizedString("common_logout") : String.localizedString("common_license")
@@ -143,5 +132,13 @@ class AboutViewController: UIViewController {
         }
         
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension AboutViewController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupImage(logoImageView)
     }
 }

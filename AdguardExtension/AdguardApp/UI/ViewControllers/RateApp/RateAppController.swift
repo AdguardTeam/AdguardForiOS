@@ -30,9 +30,6 @@ class RateAppController: BottomAlertController {
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    // Theme observer
-    private var themeObserver: NotificationToken?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,12 +39,9 @@ class RateAppController: BottomAlertController {
         rateAppButton.applyStandardGreenStyle()
         
         haveAProblemButton.makeTitleTextUppercased()
-        haveAProblemButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
+        haveAProblemButton.applyStandardOpaqueStyle()
         
         updateTheme()
-        themeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
     }
     
     // MARK: - Actions
@@ -63,11 +57,12 @@ class RateAppController: BottomAlertController {
             AppDelegate.shared.presentRateAppProblemController()
         }
     }
-    
-    // MARK: - Private methods
+}
 
-    private func updateTheme() {
+extension RateAppController: ThemableProtocol {
+    func updateTheme() {
         titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
     }
 }

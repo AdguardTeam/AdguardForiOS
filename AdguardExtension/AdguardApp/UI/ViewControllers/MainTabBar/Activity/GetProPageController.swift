@@ -28,8 +28,6 @@ class GetProPageController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var themeNotificationToken: NotificationToken?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,10 +38,6 @@ class GetProPageController: UIViewController {
         titleLabel.text = getTitleString(product: product).uppercased()
     
         updateTheme()
-        
-        themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,8 +71,10 @@ class GetProPageController: UIViewController {
         
         return resultString
     }
-    
-    private func updateTheme(){
+}
+
+extension GetProPageController: ThemableProtocol {
+    func updateTheme(){
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
     }

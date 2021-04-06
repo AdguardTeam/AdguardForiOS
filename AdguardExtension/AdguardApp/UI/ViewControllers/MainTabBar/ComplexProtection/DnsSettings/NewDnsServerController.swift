@@ -52,8 +52,6 @@ class NewDnsServerController: BottomAlertController {
     
     @IBOutlet weak var scrollContentView: UIView!
     
-    private var notificationToken: NotificationToken?
-    
     private let textFieldCharectersLimit = 50
     
     // MARK: - services
@@ -68,11 +66,7 @@ class NewDnsServerController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
+
         if provider != nil {
             nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
@@ -199,14 +193,6 @@ class NewDnsServerController: BottomAlertController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(nameField)
-        theme.setupTextField(upstreamsField)
-        saveOrAddButton.indicatorStyle = theme.indicatorStyle
-    }
-    
     private func updateSaveButton() {
         let dnsName = nameField.text ?? ""
         let dnsUrl = upstreamsField.text ?? ""
@@ -230,7 +216,7 @@ class NewDnsServerController: BottomAlertController {
         case .add:
             saveOrAddButtonTitle = String.localizedString("save_and_select_button_title")
             cancelOrDeleteButtonTitle = String.localizedString("cancel_button_title")
-            cancelOrDeleteButtonColor = UIColor.AdGuardColor.gray
+            cancelOrDeleteButtonColor = UIColor.AdGuardColor.lightGray4
             alertTitle = String.localizedString("add_dns_server_alert_title")
         case .edit:
             saveOrAddButtonTitle = String.localizedString("save_button_title")
@@ -323,5 +309,16 @@ class NewDnsServerController: BottomAlertController {
                 }
             }
         }
+    }
+}
+
+extension NewDnsServerController: ThemableProtocol {
+    func updateTheme() {
+        contentView.backgroundColor = theme.popupBackgroundColor
+        titleLabel.textColor = theme.popupTitleTextColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(nameField)
+        theme.setupTextField(upstreamsField)
+        saveOrAddButton.indicatorStyle = theme.indicatorStyle
     }
 }
