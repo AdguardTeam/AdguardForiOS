@@ -54,9 +54,6 @@ class LowLevelSettingsController: UITableViewController {
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
 
-        if resources.dnsImplementation == .native {
-            setupNotSupportedLabels()
-        }
         updateTheme()
     }
     
@@ -68,6 +65,10 @@ class LowLevelSettingsController: UITableViewController {
         setBootstrapsDescription()
         setFallbacksDescription()
         tableView.reloadData()
+        
+        if resources.dnsImplementation == .native {
+            setupNotSupportedLabels()
+        }
     }
     
     // MARK: - actions
