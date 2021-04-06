@@ -98,7 +98,6 @@ class ComplexProtectionController: UITableViewController {
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     // Observers
-    private var themeNotification: NotificationToken?
     private var vpnChangeObservation: NotificationToken?
     private var proObservation: NSKeyValueObservation?
     private var appWillEnterForegroundObservation: NotificationToken?
@@ -107,7 +106,7 @@ class ComplexProtectionController: UITableViewController {
         return configuration.proStatus
     }
     
-    private let enabledColor = UIColor.AdGuardColor.green
+    private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor(hexString: "#D8D8D8")
     
     private let titleSection = 0
@@ -242,27 +241,7 @@ class ComplexProtectionController: UITableViewController {
     
     // MARK: - Private methods
     
-    /**
-     Updates theme
-     */
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        premiumTextView.backgroundColor = theme.invertedBackgroundColor
-        premiumTextView.textColor = theme.backgroundColor
-
-        theme.setupSwitch(safariProtectionSwitch)
-        theme.setupSwitch(systemProtectionSwitch)
-        theme.setupTable(tableView)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupLabels(themableLabels)
-        
-        tableView.reloadData()
-    }
-    
     private func addObservers() {
-        themeNotification = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
         
         proObservation = configuration.observe(\.proStatus) {[weak self] _, _ in
             guard let self = self else { return }
@@ -323,6 +302,22 @@ class ComplexProtectionController: UITableViewController {
         
         notInstalledTextViewHeight.constant = installed ? 0.0 : height
         notInstalledTextViewSpacing.constant = installed ? 0.0 : 12.0
+        
+        tableView.reloadData()
+    }
+}
+
+extension ComplexProtectionController: ThemableProtocol {
+    func updateTheme(){
+        view.backgroundColor = theme.backgroundColor
+        premiumTextView.backgroundColor = theme.invertedBackgroundColor
+        premiumTextView.textColor = theme.backgroundColor
+
+        theme.setupSwitch(safariProtectionSwitch)
+        theme.setupSwitch(systemProtectionSwitch)
+        theme.setupTable(tableView)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupLabels(themableLabels)
         
         tableView.reloadData()
     }

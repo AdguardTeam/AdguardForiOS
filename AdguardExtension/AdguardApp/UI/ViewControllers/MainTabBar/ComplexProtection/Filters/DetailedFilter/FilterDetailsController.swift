@@ -41,8 +41,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     weak var delegate: DnsFiltersControllerDelegate?
     
     override func viewDidLoad() {
@@ -52,11 +50,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         
         setupButtons()
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         setupBackItem()
     }
 
@@ -71,12 +64,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     // MARK: - Private methods
-    
-    private func updateTheme () {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        shadowView.updateTheme()
-    }
     
     private func setupButtons(){
         var buttons: [BottomShadowButton] = []
@@ -113,7 +100,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     private func showAlert(_ sender: UIButton){
-        let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
@@ -136,12 +123,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in }
         
         alert.addAction(cancelAction)
-        
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true)
     }
@@ -209,8 +190,6 @@ class FilterDetailsTableCotroller : UITableViewController {
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
     weak var delegate: DnsFiltersControllerDelegate?
     
-    private var notificationToken: NotificationToken?
-    
     private let zeroVersion = "0.0.0.0"
     
     // MARK: - constants
@@ -249,11 +228,6 @@ class FilterDetailsTableCotroller : UITableViewController {
         }
         
         updateTheme()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         setupBackButton()
     }
     
@@ -347,11 +321,18 @@ class FilterDetailsTableCotroller : UITableViewController {
         enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         delegate?.filtersStateWasChanged()
     }
-    
-    // MARK: - private methods
-    
-    private func updateTheme() {
-        
+}
+
+extension FilterDetailsController: ThemableProtocol {
+    func updateTheme () {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        shadowView.updateTheme()
+    }
+}
+
+extension FilterDetailsTableCotroller: ThemableProtocol {
+    func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
@@ -360,8 +341,8 @@ class FilterDetailsTableCotroller : UITableViewController {
         
         if let homepage = filter.homepage {
             let homepage = NSAttributedString(string: homepage, attributes:
-                [.foregroundColor: theme.grayTextColor,
-                 .underlineStyle: NSUnderlineStyle.single.rawValue])
+                                                [.foregroundColor: theme.grayTextColor,
+                                                 .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
         }
         

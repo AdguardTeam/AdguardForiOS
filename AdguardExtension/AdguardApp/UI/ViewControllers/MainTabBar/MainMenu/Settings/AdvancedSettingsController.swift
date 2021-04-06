@@ -45,7 +45,6 @@ class AdvancedSettingsController: UITableViewController {
     private let debugLogsRow = 2
     private let removeVpnProfile = 5
     
-    private var themeObservation: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken?
     
     override func viewDidLoad() {
@@ -57,10 +56,6 @@ class AdvancedSettingsController: UITableViewController {
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
-        
-        themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] (note) in
             self?.lastSeparator.isHidden = false
@@ -162,24 +157,8 @@ class AdvancedSettingsController: UITableViewController {
     
     // MARK: - Private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupLabels(themableLabels)
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        theme.setupSeparators(separators)
-        theme.setupSwitch(showStatusbarSwitch)
-        theme.setupSwitch(restartProtectionSwitch)
-        theme.setupSwitch(debugLogsSwitch)
-
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-    }
-    
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
-        let alert = UIAlertController(title: nil, message: String.localizedString("delete_vpn_profile_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: String.localizedString("delete_vpn_profile_message"), preferredStyle: .deviceAlertStyle)
         
         let removeAction = UIAlertAction(title: String.localizedString("delete_title").uppercased(), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
@@ -200,13 +179,26 @@ class AdvancedSettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }
 
+}
+
+extension AdvancedSettingsController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupLabels(themableLabels)
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        theme.setupSeparators(separators)
+        theme.setupSwitch(showStatusbarSwitch)
+        theme.setupSwitch(restartProtectionSwitch)
+        theme.setupSwitch(debugLogsSwitch)
+
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
+    }
 }

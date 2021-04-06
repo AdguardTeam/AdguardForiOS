@@ -53,16 +53,10 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         viewModel?.load() {[weak self] () in
             DispatchQueue.main.async {
@@ -157,7 +151,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
         } else {
             cell.enabledSwitch.isUserInteractionEnabled = true
-            cell.icon.tintColor = UIColor.AdGuardColor.green
+            cell.icon.tintColor = UIColor.AdGuardColor.lightGreen1
         }
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
@@ -214,16 +208,6 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         }
     }
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-    }
-    
     @objc private func refresh() {
         viewModel?.refresh { [weak self] in
             // Delay to show user that filters update is called
@@ -252,6 +236,18 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             }
             
             openUrl = nil
+        }
+    }
+}
+
+extension GroupsController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
         }
     }
 }

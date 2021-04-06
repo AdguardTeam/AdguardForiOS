@@ -30,8 +30,6 @@ class SignInController: UIViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
-    
-    private var notificationThemeObserver: NotificationToken?
     private var notificationSignInObserver: NotificationToken?
     
     private var sfSafariViewController: SFSafariViewController?
@@ -42,11 +40,7 @@ class SignInController: UIViewController {
         super.viewDidLoad()
         
         signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
-        
-        notificationThemeObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
+
         notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
@@ -79,15 +73,6 @@ class SignInController: UIViewController {
     
     private func prepareButtons() {
         buttons.forEach { $0.applyRoundRectStyle(color: theme.lightGrayTextColor.cgColor ) }
-    }
-    
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        prepareButtons()
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupButtons(buttons)
-        theme.setupButtonsImage(buttons)
-        theme.setupLabels(themableLabels)
     }
     
     private func makeLogin(with socialProvider: SocialProvider) {
@@ -188,3 +173,14 @@ class SignInController: UIViewController {
         }
     }
  }
+
+extension SignInController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        prepareButtons()
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupButtons(buttons)
+        theme.setupButtonsImage(buttons)
+        theme.setupLabels(themableLabels)
+    }
+}

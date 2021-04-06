@@ -37,8 +37,6 @@ class FiltersMasterController: UIViewController {
     private let groupsControllerSegue = "groupsControllerSegue"
     private var viewModel: FiltersAndGroupsViewModelProtocol? = nil
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - Initializer
     
     required init?(coder: NSCoder) {
@@ -51,9 +49,6 @@ class FiltersMasterController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItems = [searchButton]
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                self?.updateTheme()
-        }
         
         searchContainerView.alpha = 0.0
         setupBackButton()
@@ -126,17 +121,18 @@ class FiltersMasterController: UIViewController {
             }
         }
     }
-    
-    private func updateTheme(){
-        view.backgroundColor = theme.backgroundColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-    }
-    
 }
 
 protocol FilterMasterControllerDelegate: class {
     func cancelButtonTapped()
     func searchButtonTapped()
+}
+
+extension FiltersMasterController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
+    }
 }

@@ -74,8 +74,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
     
-    private var notificationToken: NotificationToken?
-    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var keyboardMover: KeyboardMover!
     
     private var statusBarHeight: CGFloat {
@@ -94,8 +92,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         makeRoundCorners()
-        subscribeToThemeNotification()
-        updateTheme()
         
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.bottomViewPulled(_:)))
         contentView.addGestureRecognizer(gestureRecognizer)
@@ -154,7 +150,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
         view.layoutIfNeeded()
         
         let percent = 1.0 + resultSpace / contentView.frame.height
-        view.backgroundColor = UIColor.AdGuardColor.darkBackgroundColor.withAlphaComponent(0.5 * percent)
+        view.backgroundColor = UIColor.AdGuardColor.darkBackground.withAlphaComponent(0.5 * percent)
         
         if recognizer.state == .ended {
             if velocity.y < 0 {
@@ -166,16 +162,6 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
                 dismiss(animated: true, completion: nil)
             }
         }
-    }
-    
-    private func subscribeToThemeNotification() {
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) { [weak self] _ in
-            self?.updateTheme()
-        }
-    }
-    
-    private func updateTheme() {
-        contentView.backgroundColor = themeService.popupBackgroundColor
     }
 }
 

@@ -71,8 +71,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
     
-    private var notificationToken: NotificationToken?
-    
     private let textFieldCharectersLimit = 50
     
     // MARK: - View Controller life cycle
@@ -85,14 +83,10 @@ class NewCustomFilterDetailsController : BottomAlertController {
             setupEditingFilter()
         }
         
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
-        
         updateTheme()
         addButton.makeTitleTextUppercased()
         addButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
+        cancelButton.applyStandardOpaqueStyle()
         cancelButton.makeTitleTextUppercased()
     }
     
@@ -142,12 +136,6 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        newFilterTitle.textColor = theme.popupTitleTextColor
-        theme.setupTextField(name)
-        theme.setupPopupLabels(themableLabels)
-    }
-    
     private func setupAddingNewFilter() {
         newFilterTitle.text = filterType.getTitleText()
         
@@ -194,7 +182,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
         
         let urlStringRange = NSRange(location: 0, length: url.count)
         
-        let highlightColor = UIColor.AdGuardColor.green
+        let highlightColor = UIColor.AdGuardColor.lightGreen1
         
         urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
         urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)
@@ -205,5 +193,14 @@ class NewCustomFilterDetailsController : BottomAlertController {
         returnString.append(urlAttributedString)
         
         return returnString
+    }
+}
+
+extension NewCustomFilterDetailsController: ThemableProtocol {
+    func updateTheme() {
+        newFilterTitle.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupTextField(name)
+        theme.setupPopupLabels(themableLabels)
     }
 }

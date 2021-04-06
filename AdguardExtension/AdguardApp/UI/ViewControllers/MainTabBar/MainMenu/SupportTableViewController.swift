@@ -27,9 +27,6 @@ class SupportTableViewController: UITableViewController {
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
-    // MARK: - Observers
-    private var themeToken: NotificationToken?
-    
     // MARK: - Sections and Rows
     
     private let titleSection = 0
@@ -52,10 +49,6 @@ class SupportTableViewController: UITableViewController {
 
         updateTheme()
         setupBackButton()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,8 +142,10 @@ class SupportTableViewController: UITableViewController {
         
         present(activityVC, animated: true)
     }
-    
-    private func updateTheme() {
+}
+
+extension SupportTableViewController: ThemableProtocol {
+    func updateTheme() {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         view.backgroundColor = theme.backgroundColor

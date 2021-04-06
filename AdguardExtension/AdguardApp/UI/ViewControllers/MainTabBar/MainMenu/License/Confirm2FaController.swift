@@ -43,7 +43,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     // MARK: - private properties
     
     private var purchaseObserver: NotificationToken?
-    private var configurationObserver: NotificationToken?
  
     // MARK: - VC lifecycle
     
@@ -63,10 +62,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         updateTheme()
         setupBackButton()
         confirmButton.applyStandardGreenStyle()
-        
-        configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         confirmButton.makeTitleTextUppercased()
         
@@ -105,14 +100,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     
     func updateUI() {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
-    }
-    
-    func updateTheme() {
-        theme.setupLabels(themableLabels)
-        theme.setupTextField(codeTextField)
-        theme.setupSeparator(codeLine)
-        view.backgroundColor = theme.backgroundColor
-        updateControls()
     }
     
     private func processNotification(info: [AnyHashable: Any]) {
@@ -199,5 +186,15 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     private func updateControls() {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
         codeLine.backgroundColor = codeTextField.isEditing ? theme.editLineSelectedColor : theme.editLineColor
+    }
+}
+
+extension Confirm2FaController: ThemableProtocol {
+    func updateTheme() {
+        theme.setupLabels(themableLabels)
+        theme.setupTextField(codeTextField)
+        theme.setupSeparator(codeLine)
+        view.backgroundColor = theme.backgroundColor
+        updateControls()
     }
 }

@@ -40,8 +40,6 @@ class AddCustomFilterController: BottomAlertController {
     private var filter : AASCustomFilterParserResult?
     var delegate: AddNewFilterDelegate?
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - View Controller life cycle
     
     override func viewDidLoad() {
@@ -51,11 +49,8 @@ class AddCustomFilterController: BottomAlertController {
         nextButton.makeTitleTextUppercased()
         cancelButton.makeTitleTextUppercased()
         nextButton.applyStandardGreenStyle()
-        cancelButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.gray)
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
+        cancelButton.applyStandardOpaqueStyle()
+
         if openUrl != nil {
             urlTextField.text = openUrl
             continueAction(self)
@@ -129,13 +124,6 @@ class AddCustomFilterController: BottomAlertController {
     
     // MARK: - private method
     
-    private func updateTheme() {
-        titleLabel.textColor = theme.popupTitleTextColor
-        theme.setupPopupLabels(themableLabels)
-        theme.setupTextField(urlTextField)
-        nextButton.indicatorStyle = theme.indicatorStyle
-    }
-    
     private func presentNewCustomFilterDetailsController() {
         let presenter = presentingViewController
         dismiss(animated: true) {[weak self] in
@@ -165,5 +153,15 @@ enum NewFilterType {
         case .dnsCustom:
             return String.localizedString("new_dns_filter_title")
         }
+    }
+}
+
+extension AddCustomFilterController: ThemableProtocol {
+    func updateTheme() {
+        titleLabel.textColor = theme.popupTitleTextColor
+        contentView.backgroundColor = theme.popupBackgroundColor
+        theme.setupPopupLabels(themableLabels)
+        theme.setupTextField(urlTextField)
+        nextButton.indicatorStyle = theme.indicatorStyle
     }
 }

@@ -282,8 +282,8 @@ extension StoryViewController {
         let button = RoundRectButton()
         button.applyStandardGreenStyle()
         button.makeTitleTextUppercased()
-        button.customBackgroundColor = UIColor.AdGuardColor.green
-        button.customHighlightedBackgroundColor = UIColor.AdGuardColor.disabledGreenColor
+        button.customBackgroundColor = UIColor.AdGuardColor.lightGreen1
+        button.customHighlightedBackgroundColor = UIColor.AdGuardColor.green
         button.setTitle(buttonConfig.title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)

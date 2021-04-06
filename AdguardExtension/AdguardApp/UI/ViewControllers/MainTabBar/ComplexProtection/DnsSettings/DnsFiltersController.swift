@@ -48,8 +48,9 @@ class DnsFilterCell: UITableViewCell {
             
             let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes() ?? ""
             let dateFormatedString = String(format: ACLocalizedString("filter_date_format", nil), dateString)
-            
-            descriptionLabel.text = (filter?.desc == nil || filter?.desc?.isEmpty ?? true) ? dateFormatedString : filter!.desc! + "\n" + dateFormatedString
+            let description = (filter?.desc == nil || filter?.desc?.isEmpty ?? true) ? dateFormatedString : filter!.desc! + "\n" + dateFormatedString
+            let trimmedDescription = description.trimmingCharacters(in: .whitespaces)
+            descriptionLabel.text = trimmedDescription
             importantDescriptionLabel.text = filter?.importantDesc
             
             filterSwitch.isOn = filter?.enabled ?? false
@@ -71,8 +72,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     private var model: DnsFiltersModelProtocol = DnsFiltersModel(filtersService: ServiceLocator.shared.getService()!, networking: ServiceLocator.shared.getService()!)
     
-    private var themeObservation: NotificationToken?
-    
     private let filterDetailsControllerId = "FilterDetailsController"
     
     private let titleCellReuseId = "DnsFilterTitleCell"
@@ -87,10 +86,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        themeObservation = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
@@ -311,19 +306,6 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         }
     }
     
-    private func updateTheme() {
-        theme.setupTable(tableView)
-        view.backgroundColor = theme.backgroundColor
-        refreshControl?.tintColor = theme.grayTextColor
-        theme.setupNavigationBar(navigationController?.navigationBar)
-        theme.setupSearchBar(searchBar)
-        theme.setubBarButtonItem(searchButton)
-        theme.setubBarButtonItem(cancelButton)
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
     @objc private func updateFilters(sender: UIRefreshControl) {
         model.updateFilters { [weak self] (success) in
             if success {
@@ -337,5 +319,20 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
 extension DnsFiltersController: DnsFiltersControllerDelegate {
     func filtersStateWasChanged() {
         model.refreshFilters()
+    }
+}
+
+extension DnsFiltersController: ThemableProtocol {
+    func updateTheme() {
+        theme.setupTable(tableView)
+        view.backgroundColor = theme.backgroundColor
+        refreshControl?.tintColor = theme.grayTextColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupSearchBar(searchBar)
+        theme.setubBarButtonItem(searchButton)
+        theme.setubBarButtonItem(cancelButton)
+        DispatchQueue.main.async {[weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

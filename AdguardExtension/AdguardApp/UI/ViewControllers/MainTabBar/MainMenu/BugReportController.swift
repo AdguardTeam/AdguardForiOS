@@ -50,8 +50,6 @@ class BugReportController: UIViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let supportService: SupportServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var themeToken: NotificationToken?
-    
     var reportType: ReportType = .bugReport
     
     override func viewDidLoad() {
@@ -62,10 +60,7 @@ class BugReportController: UIViewController {
         setupToHideKeyboardOnTapOnView() // Tap anywhere to hide keyboard
         setupTextView()
         processReportType()
-        
-        themeToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: .main) {[weak self] _ in
-            self?.updateTheme()
-        }
+
         updateTheme()
         setupBackButton()
     }
@@ -174,15 +169,6 @@ class BugReportController: UIViewController {
             self?.navigationController?.popViewController(animated: true)
         }
     }
-    
-    private func updateTheme() {
-        view.backgroundColor = themeService.backgroundColor
-        themeService.setupLabels(themableLabels)
-        themeService.setupNavigationBar(navigationController?.navigationBar)
-        themeService.setupTextField(emailAddressTextField)
-        themeService.setupTextView(descriptionTextView)
-        textViewPlaceholder.textColor = themeService.placeholderTextColor
-    }
 }
 
 extension BugReportController: UITextFieldDelegate {
@@ -236,5 +222,16 @@ extension BugReportController: UITextViewDelegate {
         if textView.text.isEmpty {
             showTextViewPlaceholder()
         }
+    }
+}
+
+extension BugReportController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = themeService.backgroundColor
+        themeService.setupLabels(themableLabels)
+        themeService.setupNavigationBar(navigationController?.navigationBar)
+        themeService.setupTextField(emailAddressTextField)
+        themeService.setupTextView(descriptionTextView)
+        textViewPlaceholder.textColor = themeService.placeholderTextColor
     }
 }

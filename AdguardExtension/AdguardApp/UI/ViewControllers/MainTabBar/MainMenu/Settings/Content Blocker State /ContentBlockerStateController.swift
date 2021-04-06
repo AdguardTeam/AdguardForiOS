@@ -108,24 +108,11 @@ class ContentBlockerStateController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme!.backgroundColor
-        theme!.setupNavigationBar(navigationController?.navigationBar)
-        theme!.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    private var configurationObserver: NotificationToken?
     private var safariObserver1: NotificationToken?
     private var safariObserver2: NotificationToken?
     private var contentBlockerObserver: NotificationToken?
     
     private func addObservers(){
-        // User interface style observer
-        configurationObserver =  NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-                   self?.updateTheme()
-               }
         
         // Start of filter update observing
         safariObserver1 = NotificationCenter.default.observe(name: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
@@ -174,5 +161,16 @@ class ContentBlockerStateController: UITableViewController {
         self.tableView.register(nib, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200
+    }
+}
+
+extension ContentBlockerStateController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme!.backgroundColor
+        theme!.setupNavigationBar(navigationController?.navigationBar)
+        theme!.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

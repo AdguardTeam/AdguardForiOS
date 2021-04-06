@@ -42,16 +42,10 @@ class DnsModeController: UITableViewController {
     
     var selectedCell = 0
     
-    private var notificationToken: NotificationToken?
-    
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notificationToken = NotificationCenter.default.observe(name: NSNotification.Name( ConfigurationService.themeChangeNotification), object: nil, queue: OperationQueue.main) {[weak self] (notification) in
-            self?.updateTheme()
-        }
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -109,18 +103,6 @@ class DnsModeController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
-        theme.setupLabels(themableLabels)
-        separator1.backgroundColor = theme.separatorColor
-        separator2.backgroundColor = theme.separatorColor
-    }
-    
     private func updateButtons() {
         splitButton.isSelected = false
         fullButton.isSelected = false
@@ -136,5 +118,19 @@ class DnsModeController: UITableViewController {
         default:
             break
         }
+    }
+}
+
+extension DnsModeController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupTable(tableView)
+        DispatchQueue.main.async { [weak self] in
+            guard let sSelf = self else { return }
+            sSelf.tableView.reloadData()
+        }
+        theme.setupLabels(themableLabels)
+        separator1.backgroundColor = theme.separatorColor
+        separator2.backgroundColor = theme.separatorColor
     }
 }
