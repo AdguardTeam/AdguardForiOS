@@ -59,6 +59,9 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         }
     }
     
+    /**
+     checks if the url belongs to the setapp and processes it through the setup api
+     */
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         if url.scheme == Bundle.main.bundleIdentifier {
             

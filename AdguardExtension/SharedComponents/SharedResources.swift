@@ -444,7 +444,7 @@ extension AESharedResourcesProtocol {
     }
 }
 
-extension AESharedResourcesProtocol {
+fileprivate extension AESharedResourcesProtocol {
     var setAppUsedKey: String { "setAppActivatedKey" }
 }
 

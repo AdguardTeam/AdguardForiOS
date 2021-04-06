@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
     private var proStatusObservation: NSKeyValueObservation?
-    
+    private var setappObservation: NotificationToken?
     
     private var fetchPerformer: IBackgroundFetchPerformer?
     private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
@@ -360,19 +360,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      }
     
     private func subscribeToNotifications() {
-        
         subscribeToUserNotificationServiceNotifications()
         
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
         
         subscribeToThemeChangeNotification()
         
-        NotificationCenter.default.addObserver(forName: .setappDeviceLimitReched, object: nil, queue: nil) {[weak self] _ in
-            DispatchQueue.main.async {
+        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { [weak self] _ in
                 if let vc = self?.window?.rootViewController {
                     ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
                     
-                }
             }
         }
     }
