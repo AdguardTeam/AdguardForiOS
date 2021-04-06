@@ -951,3 +951,6 @@
 
 /* (DnsFiltersController) Header DNS Filters title */
 "navigation_item_dns_filters_title" = "DNS Filters";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "This option is incompatible with native DNS mode";
