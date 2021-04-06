@@ -16,13 +16,11 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import UIKit
+import Foundation
 
-final class MainPageViewController: PullableContainerController {
+final class MainPageExtraInfoController: PullableContentController {
     
     override func viewDidLoad() {
-        let mainPageExtraInfoVC = storyboard?.instantiateViewController(withIdentifier: "MainPageExtraInfoController") as! MainPageExtraInfoController
-        self.contentController = mainPageExtraInfoVC
         super.viewDidLoad()
     }
 }

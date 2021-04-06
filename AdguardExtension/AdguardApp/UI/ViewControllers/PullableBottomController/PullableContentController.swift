@@ -18,11 +18,29 @@
 
 import UIKit
 
-final class MainPageViewController: PullableContainerController {
-    
+class PullableContentController: UIViewController {
+
     override func viewDidLoad() {
-        let mainPageExtraInfoVC = storyboard?.instantiateViewController(withIdentifier: "MainPageExtraInfoController") as! MainPageExtraInfoController
-        self.contentController = mainPageExtraInfoVC
         super.viewDidLoad()
+    }
+    
+    func parentViewWillTransitionToCompactSize() {
+        
+    }
+    
+    func parentViewDidTransitionToCompactSize() {
+        
+    }
+    
+    func parentViewWillTransitionToFullSize() {
+        
+    }
+    
+    func parentViewDidTransitionToFullSize() {
+        
+    }
+    
+    func parentViewIsTransitioning(percent: CGFloat) {
+        
     }
 }

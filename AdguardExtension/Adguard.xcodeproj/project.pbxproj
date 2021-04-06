@@ -466,6 +466,12 @@
 		7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252218240821BE00743648 /* safari_protection_step1.json */; };
 		7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252219240821BF00743648 /* safari_protection_step2.json */; };
 		7E279F5B243C9C09006AF0D6 /* DnsStatisticsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */; };
+		7E28E99E261C626400179FC8 /* MainPageExtraInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E99D261C626400179FC8 /* MainPageExtraInfoController.swift */; };
+		7E28E99F261C626400179FC8 /* MainPageExtraInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E99D261C626400179FC8 /* MainPageExtraInfoController.swift */; };
+		7E28E9C3261C648900179FC8 /* PullableContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E9C2261C648900179FC8 /* PullableContainerController.swift */; };
+		7E28E9C4261C648900179FC8 /* PullableContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E9C2261C648900179FC8 /* PullableContainerController.swift */; };
+		7E28E9FA261C64F100179FC8 /* PullableContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E9F9261C64F100179FC8 /* PullableContentController.swift */; };
+		7E28E9FB261C64F100179FC8 /* PullableContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E28E9F9261C64F100179FC8 /* PullableContentController.swift */; };
 		7E2D05B223CE22F8006A141C /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7E2D978C24499E58000366B3 /* public_suffix_list.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7E2D978B24499E58000366B3 /* public_suffix_list.dat */; };
 		7E31217224DC028300642879 /* BottomAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31217124DC028300642879 /* BottomAlertTransition.swift */; };
@@ -3006,6 +3012,9 @@
 		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
 		7E252219240821BF00743648 /* safari_protection_step2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step2.json; sourceTree = "<group>"; };
 		7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsServiceTest.swift; sourceTree = "<group>"; };
+		7E28E99D261C626400179FC8 /* MainPageExtraInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageExtraInfoController.swift; sourceTree = "<group>"; };
+		7E28E9C2261C648900179FC8 /* PullableContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullableContainerController.swift; sourceTree = "<group>"; };
+		7E28E9F9261C64F100179FC8 /* PullableContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullableContentController.swift; sourceTree = "<group>"; };
 		7E2D978B24499E58000366B3 /* public_suffix_list.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public_suffix_list.dat; sourceTree = "<group>"; };
 		7E31217124DC028300642879 /* BottomAlertTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertTransition.swift; sourceTree = "<group>"; };
 		7E324447255A84C50058BCDF /* NativeProvidersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersServiceMock.swift; sourceTree = "<group>"; };
@@ -4853,6 +4862,15 @@
 			path = AdGuardVpnIntegration;
 			sourceTree = "<group>";
 		};
+		7E28E9D6261C648D00179FC8 /* PullableBottomController */ = {
+			isa = PBXGroup;
+			children = (
+				7E28E9C2261C648900179FC8 /* PullableContainerController.swift */,
+				7E28E9F9261C64F100179FC8 /* PullableContentController.swift */,
+			);
+			path = PullableBottomController;
+			sourceTree = "<group>";
+		};
 		7E31217024DC024E00642879 /* BottomAlertController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4969,6 +4987,7 @@
 			children = (
 				D09E2D9F255E6141002D6BC0 /* ImportSettings */,
 				7E74FCAF239F9C96006C0990 /* MainPageModel.swift */,
+				7E28E99D261C626400179FC8 /* MainPageExtraInfoController.swift */,
 				7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */,
 				7E74FCAB239F9BF7006C0990 /* MainPageController.swift */,
 				7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */,
@@ -5577,6 +5596,7 @@
 				D0EDE45422A9288E00086C00 /* Tutorial */,
 				7E31217024DC024E00642879 /* BottomAlertController */,
 				7E0B223D25DBB3D200AF88BB /* UpsellViewController */,
+				7E28E9D6261C648D00179FC8 /* PullableBottomController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -7080,6 +7100,7 @@
 				D0B545432435CFF5002F0AEC /* AntibannerController.swift in Sources */,
 				659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */,
 				D0B545CC2435D692002F0AEC /* AddRuleController.swift in Sources */,
+				7E28E9FB261C64F100179FC8 /* PullableContentController.swift in Sources */,
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
 				D0D7E61A244456B0001801A5 /* DomainsParserService.swift in Sources */,
 				D0B5458B2435D630002F0AEC /* FileShareService.swift in Sources */,
@@ -7174,6 +7195,7 @@
 				247CB5C62600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
 				7EA4551A254ABEDE002B69C6 /* AppDelegate+PresentController.swift in Sources */,
+				7E28E9C4261C648900179FC8 /* PullableContainerController.swift in Sources */,
 				D0B545F92435D6CB002F0AEC /* ACLLogFileManagerDefault.swift in Sources */,
 				D0B545C52435D663002F0AEC /* ContentBlockerStateCell.swift in Sources */,
 				D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */,
@@ -7234,6 +7256,7 @@
 				D0B545A02435D63D002F0AEC /* DnsLogContainerController.swift in Sources */,
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				D0B545EE2435D6AB002F0AEC /* LoaderSegue.swift in Sources */,
+				7E28E99F261C626400179FC8 /* MainPageExtraInfoController.swift in Sources */,
 				D09E2A9C254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				659886951CF74DE9003ECD1C /* AESAntibanner.m in Sources */,
 				D0B5457F2435D62A002F0AEC /* NotEcapingJsonSerialization.swift in Sources */,
@@ -7421,6 +7444,7 @@
 				D06ACB6F2146AF1700D2A37D /* LongLabelCell.swift in Sources */,
 				D00E448925650084002DDE98 /* ImportSettingsService.swift in Sources */,
 				7EF0BA45260A0B62005805C4 /* StoryCategory.swift in Sources */,
+				7E28E9C3261C648900179FC8 /* PullableContainerController.swift in Sources */,
 				7EE3427224D84A7600A8C0E6 /* AboutViewController.swift in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
 				7E1104F922DE27C700720501 /* StartupService.swift in Sources */,
@@ -7675,6 +7699,7 @@
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
+				7E28E9FA261C64F100179FC8 /* PullableContentController.swift in Sources */,
 				2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */,
 				D0EC86C023A8D15B00EDF107 /* DnsStatisticsService.swift in Sources */,
 				7E31217224DC028300642879 /* BottomAlertTransition.swift in Sources */,
@@ -7692,6 +7717,7 @@
 				7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */,
 				7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */,
 				7EEF93F22360365300F5856A /* NetworkSettingsService.swift in Sources */,
+				7E28E99E261C626400179FC8 /* MainPageExtraInfoController.swift in Sources */,
 				D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */,
 				24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */,
 				7E9F3E1023CE08E300A7BDA2 /* DomainsConverter.swift in Sources */,
