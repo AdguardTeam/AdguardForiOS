@@ -183,7 +183,7 @@ class GetProTableController: UITableViewController {
     }
     
     @IBAction func choosePeriodAction(_ sender: Any) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
         
         for product in purchaseService.products {
             let title = "\(getPeriodString(product: product)) - \(product.price)"
@@ -196,9 +196,6 @@ class GetProTableController: UITableViewController {
         
         let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
-        
-        actionSheet.popoverPresentationController?.sourceView = periodButton
-        actionSheet.popoverPresentationController?.sourceRect = periodButton.bounds
         
         self.present(actionSheet, animated: true, completion: nil)
     }

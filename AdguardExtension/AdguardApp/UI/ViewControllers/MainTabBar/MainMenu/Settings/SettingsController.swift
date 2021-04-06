@@ -151,7 +151,7 @@ class SettingsController: UITableViewController {
     }
     
     private func resetStatistics(_ indexPath: IndexPath){
-        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
@@ -167,17 +167,12 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }
     
     private func resetSettings(_ indexPath: IndexPath) {
-        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_reset_text"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { _ in
             alert.dismiss(animated: true, completion: nil)
@@ -191,11 +186,6 @@ class SettingsController: UITableViewController {
         }
         
         alert.addAction(cancelAction)
-
-        if let presenter = alert.popoverPresentationController, let cell = tableView.cellForRow(at: indexPath) {
-            presenter.sourceView = cell
-            presenter.sourceRect = cell.bounds
-        }
 
         self.present(alert, animated: true)
     }

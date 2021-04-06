@@ -278,7 +278,7 @@ class DnsRequestDetailsController: UITableViewController {
      Creates alert for additional info about whoTracksMe json
      */
     private func showAlert(_ sender: UIButton) {
-        let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .deviceAlertStyle)
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
             guard let self = self else { return }
@@ -288,11 +288,6 @@ class DnsRequestDetailsController: UITableViewController {
         }))
         
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true, completion: nil)
     }

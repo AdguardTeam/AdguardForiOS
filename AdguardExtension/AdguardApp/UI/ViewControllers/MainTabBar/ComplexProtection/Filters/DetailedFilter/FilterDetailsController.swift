@@ -100,7 +100,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     }
     
     private func showAlert(_ sender: UIButton){
-        let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: String.localizedString("delete_filter_title"), message: String.localizedString("delete_filter_message"), preferredStyle: .deviceAlertStyle)
         
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
@@ -123,12 +123,6 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in }
         
         alert.addAction(cancelAction)
-        
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true)
     }

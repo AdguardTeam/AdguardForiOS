@@ -252,7 +252,7 @@ class CompanyDetailedController: UITableViewController {
     }
     
     private func showGroupsAlert(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
         
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
@@ -289,11 +289,6 @@ class CompanyDetailedController: UITableViewController {
         alert.addAction(blockedOnlyAction)
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
-        
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = sender
-            presenter.sourceRect = sender.bounds
-        }
         
         present(alert, animated: true)
     }
