@@ -24,7 +24,7 @@ struct StoriesProvider {
     // MARK: - Public properties
     
     static let stories: [StoryGroup] = { storiesContext?.stories ?? [] }()
-    static let allCategories: [StoryGroupType] = { storiesContext?.categories ?? [] }()
+    static let allCategories: [StoryCategory] = { storiesContext?.categories ?? [] }()
     static let allActions = { storiesContext?.actions ?? [] }()
     
     // MARK: - Private properties
@@ -52,7 +52,6 @@ struct StoriesProvider {
             return nil
         }
             
-            
         let decoder = JSONDecoder()
         guard let decodedContext = try? decoder.decode(StoriesContext.self, from: jsonData) else {
             DDLogError("Failed to decode data from stories.json")
@@ -71,7 +70,7 @@ struct StoriesProvider {
  */
 fileprivate struct StoriesContext: Decodable {
     let stories: [StoryGroup]
-    let categories: [StoryGroupType]
+    let categories: [StoryCategory]
     let actions: [StoryActionType]
     
     private enum CodingKeys: String, CodingKey {
@@ -83,11 +82,23 @@ fileprivate struct StoriesContext: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
     
-        let categoriesKeys = try container.decode([String].self, forKey: .categories)
         let actionsKeys = try container.decode([String].self, forKey: .actions)
         
-        self.stories = try container.decode([StoryGroup].self, forKey: .stories)
-        self.categories = categoriesKeys.compactMap { StoryGroupType(rawValue: $0) }
+        self.categories = try container.decode([StoryCategory].self, forKey: .categories)
         self.actions = actionsKeys.compactMap { StoryActionType(rawValue: $0) }
+        
+        let stories = try container.decode([StoryGroup].self, forKey: .stories)
+        self.stories = Self.setCategoriesForStories(self.categories, stories)
+    }
+    
+    private static func setCategoriesForStories(_ categories: [StoryCategory], _ stories: [StoryGroup]) -> [StoryGroup] {
+        var storiesWithCategory: [StoryGroup] = []
+        for story in stories {
+            let storyType = story.category.type
+            let category = categories.first(where: { $0.type == storyType })!
+            let newStory = StoryGroup(category: category, storyTokens: story.storyTokens)
+            storiesWithCategory.append(newStory)
+        }
+        return storiesWithCategory
     }
 }

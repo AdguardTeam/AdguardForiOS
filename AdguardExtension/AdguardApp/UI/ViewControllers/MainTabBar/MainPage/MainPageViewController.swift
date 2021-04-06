@@ -25,26 +25,26 @@ class MainPageViewController: UIViewController {
     }
     
     @IBAction func whatsNew(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .whatsNew)
+        StoriesManager.showStories(forVC: self, fromCategory: .whatsNew)
     }
     
     @IBAction func dnsProtection(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .dnsProtection)
+        StoriesManager.showStories(forVC: self, fromCategory: .dnsProtection)
     }
     
     @IBAction func vpnProtection(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .vpnProtection)
+       StoriesManager.showStories(forVC: self, fromCategory: .vpnProtection)
     }
     
     @IBAction func safariProtection(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .safariProtection)
+        StoriesManager.showStories(forVC: self, fromCategory: .safariProtection)
     }
     
     @IBAction func youtubeAds(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .youtubeAds)
+        StoriesManager.showStories(forVC: self, fromCategory: .youtubeAds)
     }
     
     @IBAction func dnsServers(_ sender: UIButton) {
-        StoriesManager.showStories(forVC: self, fromGroup: .dnsServers)
+        StoriesManager.showStories(forVC: self, fromCategory: .dnsServers)
     }
 }

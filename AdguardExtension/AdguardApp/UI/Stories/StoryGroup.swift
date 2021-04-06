@@ -20,36 +20,27 @@ import Foundation
 
 /* StoryGroup is a model for multiple stories */
 struct StoryGroup: Decodable {
-    let title: String
-    let groupType: StoryGroupType
+    let category: StoryCategory
     let storyTokens: [StoryToken]
     
     private enum CodingKeys: String, CodingKey {
-        case title = "category_title"
-        case groupType = "category"
+        case category
         case storyTokens = "tokens"
     }
     
-    init(title: String, groupType: StoryGroupType, storyTokens: [StoryToken]) {
-        self.title = title
-        self.groupType = groupType
+    init(category: StoryCategory, storyTokens: [StoryToken]) {
+        self.category = category
         self.storyTokens = storyTokens
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        let titleKey = try container.decode(String.self, forKey: .title)
-        let groupKey = try container.decode(String.self, forKey: .groupType)
+        let typeKey = try container.decode(String.self, forKey: .category)
         let tokens = try container.decode([StoryToken].self, forKey: .storyTokens)
         
-        guard let grType = StoryGroupType(rawValue: groupKey) else {
-            let error = DecodingError.dataCorruptedError(forKey: CodingKeys.groupType, in: container, debugDescription: "")
-            throw error
-        }
-        
-        self.title = String.localizedString(titleKey)
-        self.groupType = grType
+        let type = StoryCategory.CategoryType(rawValue: typeKey)!
+        self.category = StoryCategory(type: type)
         self.storyTokens = tokens
     }
 }

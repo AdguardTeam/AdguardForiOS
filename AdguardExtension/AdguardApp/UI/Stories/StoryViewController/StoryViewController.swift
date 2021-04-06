@@ -51,7 +51,7 @@ final class StoryViewController: UIViewController {
         let label = ThemableLabel()
         label.lightGreyText = true
         label.textAlignment = .left
-        label.text = storyGroup.title
+        label.text = storyGroup.category.title
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
         label.numberOfLines = 0
@@ -103,7 +103,7 @@ final class StoryViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.storyGroup = StoryGroup(title: "", groupType: .whatsNew, storyTokens: [])
+        self.storyGroup = StoryGroup(category: StoryCategory(title: "", type: .dnsProtection, buttonColor: .clear, buttonFigureColor: .clear), storyTokens: [])
         super.init(coder: coder)
         setupUI()
     }

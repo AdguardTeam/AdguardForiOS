@@ -2,7 +2,6 @@
     "stories": [
         {
             "category": "WhatsNew",
-            "category_title": "whats_new_category_title",
             "tokens": [
                 {
                     "image": "whatsNew1",
@@ -22,7 +21,6 @@
         },
         {
             "category": "DnsProtection",
-            "category_title": "dns_protection_category_title",
             "tokens": [
                 {
                     "image": "DNSProtection1",
@@ -70,7 +68,6 @@
         },
         {
             "category": "VpnProtection",
-            "category_title": "vpn_protection_category_title",
             "tokens": [
                 {
                     "image": "VPNProtection1",
@@ -111,7 +108,6 @@
         },
         {
             "category": "SafariProtection",
-            "category_title": "safari_protection_category_title",
             "tokens": [
                 {
                     "image": "SafariProtection1",
@@ -138,7 +134,6 @@
         },
         {
             "category": "YouTubeAds",
-            "category_title": "youtube_ads_category_title",
             "tokens": [
                 {
                     "image": "YouTubeAds1",
@@ -165,7 +160,6 @@
         },
         {
             "category": "DnsServers",
-            "category_title": "dns_servers_category_title",
             "tokens": [
                 {
                     "image": "DNSServers1",
@@ -227,12 +221,42 @@
         }
     ],
     "categories": [
-        "WhatsNew",
-        "DnsProtection",
-        "VpnProtection",
-        "SafariProtection",
-        "YouTubeAds",
-        "DnsServers"
+        {
+            "type": "WhatsNew",
+            "title": "whats_new_category_title",
+            "button_background_color": "#677BB2",
+            "button_figure_color": "#4B67B2"
+        },
+        {
+            "type": "DnsProtection",
+            "title": "dns_protection_category_title",
+            "button_background_color": "#5DAD23",
+            "button_figure_color": "#46A75D"
+        },
+        {
+            "type": "VpnProtection",
+            "title": "vpn_protection_category_title",
+            "button_background_color": "#5DAD23",
+            "button_figure_color": "#54A01D"
+        },
+        {
+            "type": "SafariProtection",
+            "title": "safari_protection_category_title",
+            "button_background_color": "#94B5CF",
+            "button_figure_color": "#5892BC"
+        },
+        {
+            "type": "YouTubeAds",
+            "title": "youtube_ads_category_title",
+            "button_background_color": "#C58170",
+            "button_figure_color": "#B03030"
+        },
+        {
+            "type": "DnsServers",
+            "title": "dns_servers_category_title",
+            "button_background_color": "#BE90B4",
+            "button_figure_color": "#AF4D98"
+        }
     ],
     "actions": [
         "READ_CHANGELOG",

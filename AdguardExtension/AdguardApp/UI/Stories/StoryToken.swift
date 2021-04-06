@@ -40,9 +40,9 @@ struct StoryToken: Decodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case image = "image"
-        case title = "title"
-        case description = "description"
+        case image
+        case title
+        case description
     }
     
     init(from decoder: Decoder) throws {

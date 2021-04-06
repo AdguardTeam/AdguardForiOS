@@ -21,8 +21,8 @@ import UIKit
 final class StoriesPageViewController: UIPageViewController {
         
     private let storiesGroups: [StoryGroup]
-    private let startGroup: StoryGroupType
-    private lazy var groupIndex: Int = { storiesGroups.firstIndex(where: { startGroup == $0.groupType }) ?? 0 }()
+    private let startCategory: StoryCategory.CategoryType
+    private lazy var groupIndex: Int = { storiesGroups.firstIndex(where: { startCategory == $0.category.type }) ?? 0 }()
     
     // UI elements
     private lazy var crossButton: UIButton = {
@@ -52,9 +52,9 @@ final class StoriesPageViewController: UIPageViewController {
     
     // MARK: - UIPageViewController lifecycle
     
-    init(storiesGroups: [StoryGroup], startGroup: StoryGroupType) {
+    init(storiesGroups: [StoryGroup], startCategory: StoryCategory.CategoryType) {
         self.storiesGroups = storiesGroups
-        self.startGroup = startGroup
+        self.startCategory = startCategory
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
         self.delegate = self
@@ -63,7 +63,7 @@ final class StoriesPageViewController: UIPageViewController {
     
     required init?(coder: NSCoder) {
         self.storiesGroups = []
-        self.startGroup = .whatsNew
+        self.startCategory = .whatsNew
         super.init(coder: coder)
         
         self.delegate = self

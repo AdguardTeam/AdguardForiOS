@@ -20,9 +20,9 @@
 import Foundation
 
 struct StoriesManager {
-    static func showStories(forVC vc: UIViewController, fromGroup group: StoryGroupType) {
+    static func showStories(forVC vc: UIViewController, fromCategory category: StoryCategory.CategoryType) {
         let stories = StoriesProvider.stories
-        let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startGroup: group)
+        let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startCategory: category)
         storiesPageVC.modalPresentationStyle = .fullScreen
         vc.present(storiesPageVC, animated: true)
     }
