@@ -1411,9 +1411,9 @@
 		D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
 		D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
-		D0984F9A2608866900703DB2 /* AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* AntibannerMigration.swift */; };
-		D0984F9B2608866900703DB2 /* AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* AntibannerMigration.swift */; };
-		D0984F9C2608866900703DB2 /* AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* AntibannerMigration.swift */; };
+		D0984F9A2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
+		D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
+		D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
 		D0984FC9260A21CA00703DB2 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FC8260A21CA00703DB2 /* FilterInfo.swift */; };
 		D0984FCA260A21CA00703DB2 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FC8260A21CA00703DB2 /* FilterInfo.swift */; };
 		D0984FCB260A21CA00703DB2 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FC8260A21CA00703DB2 /* FilterInfo.swift */; };
@@ -3740,7 +3740,7 @@
 		D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2FaController.swift; sourceTree = "<group>"; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
-		D0984F992608866900703DB2 /* AntibannerMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerMigration.swift; sourceTree = "<group>"; };
+		D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MigrationService+AntibannerMigration.swift"; sourceTree = "<group>"; };
 		D0984FC8260A21CA00703DB2 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
 		D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersService+metadata.swift"; sourceTree = "<group>"; };
 		D0985014260B504F00703DB2 /* FiltersMetadataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetadataRequest.swift; sourceTree = "<group>"; };
@@ -5745,7 +5745,7 @@
 				7E21CBA725F918FA00A5A735 /* NetworkManager.swift */,
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
-				D0984F992608866900703DB2 /* AntibannerMigration.swift */,
+				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
 			);
 			path = Services;
@@ -7261,7 +7261,7 @@
 				7EC67F6D2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
 				D0B545D22435D692002F0AEC /* EditingUserFilterController.swift in Sources */,
 				D0B545DE2435D69B002F0AEC /* CustomFilterCell.swift in Sources */,
-				D0984F9B2608866900703DB2 /* AntibannerMigration.swift in Sources */,
+				D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D0D7E55D243772E6001801A5 /* Bundle+config.swift in Sources */,
 				D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */,
 				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
@@ -7703,7 +7703,7 @@
 				247CB6262600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */,
 				248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
 				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
-				D0984F9A2608866900703DB2 /* AntibannerMigration.swift in Sources */,
+				D0984F9A2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D0702B3F2188859D0051669A /* FileShareService.swift in Sources */,
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
@@ -8098,7 +8098,7 @@
 				D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */,
 				D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */,
 				D0DE8DB1236093820073B163 /* NotificationService+Utils.swift in Sources */,
-				D0984F9C2608866900703DB2 /* AntibannerMigration.swift in Sources */,
+				D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D00E67512473C97C00161A74 /* ProSubscriptionsMigrationService.swift in Sources */,
 				7EA2163C24449EA700393949 /* MigrationServiceTest.swift in Sources */,
 				D06E315C253F331E008BBD2D /* LocalizedDnsProviders.swift in Sources */,

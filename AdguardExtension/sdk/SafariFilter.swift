@@ -3,11 +3,6 @@ import Foundation
 public struct AdGuardFilter {
     let text: String
     let group: AdGuardFilterGroup
-
-    public init(text: String, group: AdGuardFilterGroup) {
-        self.text = text
-        self.group = group
-    }
 }
 
 public enum AdGuardFilterGroup: Int {

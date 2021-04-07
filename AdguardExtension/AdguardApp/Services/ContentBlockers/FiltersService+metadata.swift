@@ -24,12 +24,13 @@ extension FiltersService {
     
     func metadata(refresh: Bool)->ABECFilterClientMetadata? {
         var savedMeta = resources.filtersMetadataCache
-        if savedMeta == nil || refresh || Int(savedMeta!.date.timeIntervalSinceNow) * -1 > FiltersService.updatePeriod  {
+        let lastUpdate = savedMeta?.date ?? Date(timeIntervalSince1970: 0)
+        if savedMeta == nil || refresh || Int(lastUpdate.timeIntervalSinceNow) * -1 > FiltersService.updatePeriod  {
             DDLogInfo("FiltersService - start updating metadata")
             
             let group = DispatchGroup()
             group.enter()
-            HttpRequestService().loadFiltersMetadata { [weak self] metadata in
+            httpRequestService.loadFiltersMetadata { [weak self] metadata in
                 if metadata != nil {
                     DDLogInfo("FiltersService - metadata loaded successfull")
                     self?.resources.filtersMetadataCache = metadata
@@ -59,8 +60,8 @@ extension FiltersService {
     func filtersI18n(refresh: Bool)->ABECFilterClientLocalization? {
         
         var savedI18n = resources.i18nCacheForFilterSubscription
-        
-        if savedI18n == nil || refresh || Int(savedI18n!.date.timeIntervalSinceNow) * -1 > FiltersService.updatePeriod {
+        let lastUpdate = savedI18n?.date ?? Date(timeIntervalSince1970: 0)
+        if savedI18n == nil || refresh || Int(lastUpdate.timeIntervalSinceNow * -1) > FiltersService.updatePeriod {
             
             // trying load i18n from backend service.
             
@@ -68,7 +69,7 @@ extension FiltersService {
             
             let group = DispatchGroup()
             group.enter()
-            HttpRequestService().loadFiltersLocalizations { [weak self] i18n in
+            httpRequestService.loadFiltersLocalizations { [weak self] i18n in
                 if i18n != nil {
                     DDLogInfo("FiltersService - i18n loaded successfull")
                     self?.resources.i18nCacheForFilterSubscription = i18n
@@ -81,7 +82,7 @@ extension FiltersService {
         }
         
         if savedI18n != nil {
-            return savedI18n;
+            return savedI18n
         }
             
         // Trying obtain filters metadata from default DB.
@@ -89,6 +90,6 @@ extension FiltersService {
         i18n.filters = antibanner?.defaultDbFiltersI18n()
         i18n.groups = antibanner?.defaultDbGroupsI18n()
         
-        return i18n;
+        return i18n
     }
 }

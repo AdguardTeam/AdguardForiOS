@@ -29,46 +29,6 @@
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ABECFilterAsyncProtocol
 
-//@protocol ABECFilterAsyncDelegateProtocol <NSObject>
-//
-///**
-// Calls this method when downloading filters/groups metadata completed.
-//
-// @param client Object of the client for backend server
-// @param metadata Metadata object
-// */
-//- (void)filterClient:(nonnull ABECFilterClient *)client metadata:(nonnull ABECFilterClientMetadata *)metadata;
-//
-///**
-// Calls this method when downloading filters/groups localizations completed
-//
-// @param client Object of the client for backend server
-// @param i18n Localizations
-// */
-//- (void)filterClient:(nonnull ABECFilterClient *)client localizations:(nonnull ABECFilterClientLocalization *)i18n;
-//
-///**
-// Calls this method when downloading filter rules completed.
-//
-// @param client Object of the client for backend server.
-// @param filterId Filter id of the downloaded filter.
-// @param filter Filter object, may be nil if error occurs.
-//
-// @return Must return YES when all requested filter rules were obtained, otherwise NO.
-// */
-//- (BOOL)filterClient:(nonnull ABECFilterClient *)client filterId:(nonnull NSNumber *)filterId filter:(nullable ASDFilter *)filter;
-//
-//
-///**
-// Calls this method when all background downloading tasks were completed.
-//
-// @param client Object of the client for backend server.
-// @param error If error occurs, contains error object, otherwise nil.
-// */
-//- (void)filterClientFinishedDownloading:(nonnull ABECFilterClient *)client error:(nullable NSError *)error;
-//
-//@end
-
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ABECFilterClientMetadata
@@ -90,7 +50,7 @@
 /**
  metadata update date
  */
-@property (nonatomic, nonnull) NSDate* date;
+@property (nonatomic, nullable) NSDate* date;
 
 @end
 
@@ -114,81 +74,6 @@
 /**
  i18n update date
  */
-@property (nonatomic, nonnull) NSDate* date;
+@property (nonatomic, nullable) NSDate* date;
 
 @end
-
-///////////////////////////////////////////////////////////////////////
-//#pragma mark - ABECFilterClient
-///////////////////////////////////////////////////////////////////////
-//
-//extern NSString * _Nonnull ABECFilterError;
-//#define ABECFILTER_ERROR_ASYNC_NOTINIT          300
-//
-//
-///**
-//    Backend client for retrieve filters data
-// */
-//@interface ABECFilterClient : NSObject <NSURLSessionDownloadDelegate>
-//
-///////////////////////////////////////////////////////////////////////
-//#pragma mark  Init and Class methods
-//
-///**
-// This class has singleton object.
-// */
-//+ (nonnull ABECFilterClient *)singleton;
-//
-///**
-// Returns hostname for checking of connection to backend service.
-// */
-//+ (nonnull NSString *)reachabilityHost;
-//
-///////////////////////////////////////////////////////////////////////
-//#pragma mark  Properties and public methods
-//
-///**
-// Add download tasks for obtaining last version of filters from backend.
-// 
-// @param filterIds List of the filter ids for downloading.
-// @return Returns nil on success.
-// */
-//- (nullable NSError *)filtersRequestWithFilterIds:(nonnull NSArray <NSNumber *>*)filterIds;
-//
-///**
-// Returns last version of filter from backend.
-// Request to backend is performed synchronous.
-// 
-// @return ASDFilter object or nil if error occurs
-// */
-//- (nullable ASDFilter *)filterWithFilterId:(nonnull NSNumber *)filterId;
-//
-///////////////////////////////////////////////////////////////////////
-//#pragma mark  Async support methods
-//
-//@property (weak, nullable) id <ABECFilterAsyncDelegateProtocol> delegate;
-//
-///**
-// Resets async session.
-//
-// @param sessionId Session id.
-// @param updateTimeout Timeout for download tasks.
-// @param block Completion block, which is called on session serial queue. 
-// */
-//- (void)resetSession:(nonnull NSString *)sessionId
-//       updateTimeout:(NSTimeInterval)updateTimeout
-//            delegate:(nullable id<ABECFilterAsyncDelegateProtocol>)delegate
-//     completionBlock:(nullable void (^)(BOOL updateInProgress))block;
-//
-///**
-// This method needs call when App is launched from background downloads event.
-//
-// @param sessionId Session id.
-// @param updateTimeout Timeout for download tasks.
-// @param delegate Delegate object, which will be notifed about new data.
-// */
-//- (void)handleBackgroundWithSessionId:(nonnull NSString *)sessionId
-//                        updateTimeout:(NSTimeInterval)updateTimeout
-//                             delegate:(nullable id<ABECFilterAsyncDelegateProtocol>)delegate;
-//
-//@end

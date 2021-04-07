@@ -115,7 +115,7 @@ class MigrationService: MigrationServiceProtocol {
             
             if savedSchemaVersion < 5 {
                 let storage = FiltersStorage()
-                result = result && self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: storage)
+                self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: storage)
             }
             
             /* If all migrations are successfull, than save current schema version */

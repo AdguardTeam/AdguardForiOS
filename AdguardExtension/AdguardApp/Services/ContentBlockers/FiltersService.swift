@@ -73,6 +73,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     var groups = [Group]()
     
     var antibanner: AESAntibannerProtocol?
+    let httpRequestService: HttpRequestServiceProtocol
     private let antibannerController: AntibannerControllerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
@@ -129,11 +130,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol) {
+    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
         self.resources = resources
+        self.httpRequestService = httpRequestService
         
         super.init()
         

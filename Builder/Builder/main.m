@@ -170,15 +170,11 @@ int main(int argc, const char * argv[])
                     [db executeUpdate:@"insert into filter_localizations (filter_id, lang, name, description) values (?, ?, ?, ?)",
                      locale.filterId, locale.lang, locale.name, locale.descr];
                 
-                ASDFilter *filterData;
                 for (ASDFilterMetadata *version in metadata.filters) {
-                    // TODO: load filters via FiltersStorage
-//                    filterData = [[ABECFilterClient singleton] filterWithFilterId:version.filterId];
-//
-//                    if (filterData && filterData.rules.count)
-//                        for (ASDFilterRule *rule in filterData.rules)
-//                            [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, affinity) values (?, ?, ?, ?)", rule.filterId, rule.ruleId, rule.ruleText, rule.affinity];
-//
+                    if ([MainHelper downloadFilterSyncWithIdentifier:version.filterId.intValue] != nil) {
+                        NSLog(@"Error downloading filter");
+                        exit(1);
+                    }
                 }
                 
                 [db writeToFile:dbPath];

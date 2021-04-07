@@ -91,15 +91,15 @@ class StartupService : NSObject{
         let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection)
         locator.addService(service: contentBlockerService)
         
-        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService, resources: sharedResources)
+        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
+        locator.addService(service: httpRequestService)
+        
+        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService, resources: sharedResources, httpRequestService: httpRequestService)
         
         locator.addService(service: filtersService)
         
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
-        
-        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
-        locator.addService(service: httpRequestService)
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)

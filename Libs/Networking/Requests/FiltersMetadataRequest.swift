@@ -39,9 +39,8 @@ class FiltersMetadataRequest: RequestProtocol {
             return nil
         }
         
-        var request = URLRequest(url: resultUrl)//, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: TimeInterval(ABEC_BACKEND_READ_TIMEOUT))
+        var request = URLRequest(url: resultUrl)
         request.httpMethod = "GET"
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
         return request
     }

@@ -71,6 +71,7 @@
 		D07D34AD2612222A00213A5A /* RequestFactory-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D34AC2612222A00213A5A /* RequestFactory-Common.swift */; };
 		D07D34AF2612223B00213A5A /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C826121AF100213A5A /* RequestFactory.swift */; };
 		D07D3505261229DA00213A5A /* BuilderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D3504261229DA00213A5A /* BuilderHelper.swift */; };
+		D092DDC6261DE1C300B3CBAF /* MainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D092DDC5261DE1C300B3CBAF /* MainHelper.swift */; };
 		D0EF344926086342000A55F0 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344526086342000A55F0 /* AffinityRulesParser.swift */; };
 		D0EF344A26086342000A55F0 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344626086342000A55F0 /* FiltersConverter.swift */; };
 		D0EF344B26086342000A55F0 /* FiltersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF344726086342000A55F0 /* FiltersStorage.swift */; };
@@ -226,6 +227,7 @@
 		D07D34562612214400213A5A /* NetworkingService-Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkingService-Common.swift"; sourceTree = "<group>"; };
 		D07D34AC2612222A00213A5A /* RequestFactory-Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RequestFactory-Common.swift"; sourceTree = "<group>"; };
 		D07D3504261229DA00213A5A /* BuilderHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderHelper.swift; sourceTree = "<group>"; };
+		D092DDC5261DE1C300B3CBAF /* MainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHelper.swift; sourceTree = "<group>"; };
 		D0C4EF2B23C758A600C57E22 /* DDLogMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
 		D0D33BBE23102D63009082CE /* Builder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Builder-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -552,6 +554,7 @@
 			children = (
 				65DAE6E21B8B73E50020BC3C /* builder.xcconfig */,
 				659C5FCB1B8B4DC90081EBE3 /* main.m */,
+				D092DDC5261DE1C300B3CBAF /* MainHelper.swift */,
 				659C60D21B8B50200081EBE3 /* Resources */,
 				65DAE6E01B8B69A10020BC3C /* clean-script.sh */,
 				D07D3504261229DA00213A5A /* BuilderHelper.swift */,
@@ -760,6 +763,7 @@
 			files = (
 				6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */,
 				655A05B01C6B7790000F00D7 /* NSURL+Utils.m in Sources */,
+				D092DDC6261DE1C300B3CBAF /* MainHelper.swift in Sources */,
 				655A05A31C6B7790000F00D7 /* DDLog.m in Sources */,
 				D0EF344A26086342000A55F0 /* FiltersConverter.swift in Sources */,
 				655A05A51C6B7790000F00D7 /* DDContextFilterLogFormatter.m in Sources */,

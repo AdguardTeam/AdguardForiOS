@@ -42,7 +42,7 @@ class FiltersStorage: FiltersStorageProtocol {
                 continue
             }
             guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-                DDLogError("FiltersStorage getFilters error. Can not rea filter with url: \(fileUrl)")
+                DDLogError("FiltersStorage getFilters error. Can not read filter with url: \(fileUrl)")
                 continue
             }
             result[id] = content

@@ -316,26 +316,6 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (BOOL)unsubscribeFilter:(nonnull NSNumber *)filterId;
 
 /**
- Starts updating of filters from Backend service.
-
- @param forced If set to YES, method ignores filter update periods.
- 
- @return Return YES if update process started.
- */
-//- (BOOL)startUpdatingForced:(BOOL)forced interactive:(BOOL)interactive;
-/**
- Call this method after starting of the app, from 'handleEventsForBackgroundURLSession' app delegate.
- This must adjust right processing for backgound downloads of the filter updates.
- */
-//- (void)repairUpdateStateForBackground;
-
-/**
- Call this method after starting of the app,
- that must adjust right processing for backgound downloads of the filter updates.
- */
-//- (void)repairUpdateStateWithCompletionBlock:(nullable void (^)(void))block;
-
-/**
  last filters update time of nil
  */
 - (nullable NSDate*) filtersLastUpdateTime;

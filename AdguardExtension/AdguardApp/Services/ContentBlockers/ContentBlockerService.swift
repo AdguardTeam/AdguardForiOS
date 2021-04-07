@@ -333,7 +333,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         let group = DispatchGroup()
         for filter in converted ?? [] {
-            // todo: process errors
             guard let data = filter.jsonString?.data(using: .utf8) else {
                 DDLogError("convertRulesAndInvalidateSafari - can not get filter data for filter")
                 continue
@@ -462,17 +461,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             return nil
         }
     }
-    
-//    /** returns map [filterID: [Rule]]*/
-//    private func rules(forFilters filterIDs: [NSNumber]) -> [NSNumber: [ASDFilterRule]] {
-//        var rulesByFilter = [NSNumber: [ASDFilterRule]]()
-//
-//        for filterID in filterIDs {
-//            rulesByFilter[filterID] = antibanner.activeRules(forFilter: filterID)
-//        }
-//
-//        return rulesByFilter
-//    }
+
     
     /** returns map [groupId: [filterId]] */
     private func activeGroups()->[NSNumber: [NSNumber]] {

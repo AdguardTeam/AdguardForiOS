@@ -14,12 +14,24 @@
 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
+import Foundation
 
-#import "ABECFilter.h"
-
-@implementation ABECFilterClientMetadata
-@end
-@implementation ABECFilterClientLocalization
-@end
+@objc
+@objcMembers
+class MainHelper: NSObject {
+    
+    @objc static func downloadFilterSync(identifier: Int)->Error? {
+        let group = DispatchGroup()
+        group.enter()
+        let storage = FiltersStorage()
+        var resultError: Error? = nil
+        storage.downloadFilter(identifier: identifier) { error in
+            resultError = error
+            group.leave()
+        }
+        group.wait()
+        return resultError
+    }
+}

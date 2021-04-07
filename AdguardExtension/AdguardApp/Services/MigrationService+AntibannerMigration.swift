@@ -21,7 +21,7 @@ import Foundation
 
 extension MigrationService {
     
-    func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol)->Bool {
+    func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol) {
         
         let activeFilterIds = antibanner.activeFilterIDs()
         for filterId in activeFilterIds {
@@ -47,7 +47,5 @@ extension MigrationService {
             // remove rules from database
             antibanner.removeRules(forFilter: filterId)
         }
-        
-        return true
     }
 }

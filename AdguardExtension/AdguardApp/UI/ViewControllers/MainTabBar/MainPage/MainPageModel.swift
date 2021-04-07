@@ -35,13 +35,13 @@ class MainPageModel: MainPageModelProtocol {
     
     // MARK: - private members
     
-    private let antibanner: AESAntibannerProtocol
+    private let filtersService: FiltersServiceProtocol
     private var observers = [NSObjectProtocol]()
     
     // MARK: - init
     
-    init(antibanner: AESAntibannerProtocol) {
-        self.antibanner = antibanner
+    init(filtersService: FiltersServiceProtocol) {
+        self.filtersService = filtersService
         self.observeAntibanerState()
     }
     
@@ -58,13 +58,8 @@ class MainPageModel: MainPageModelProtocol {
      updates filters. calls callback during updating process
      */
     func updateFilters() {
-        
-//        antibanner.beginTransaction()
-//        antibanner.startUpdatingForced(true, interactive: true)
-        
-        // TODO: updateFilters via FiltersService
+        filtersService.load(refresh: true) {}
     }
-    
     
     // MARK: - private methods
     

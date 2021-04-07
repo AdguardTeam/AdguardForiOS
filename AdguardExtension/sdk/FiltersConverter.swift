@@ -7,9 +7,7 @@ public protocol FiltersConverterProtocol {
 
 public class FiltersConverter: FiltersConverterProtocol {
 
-	public init() { }
-    
-    public func convertFilters(_ filters: [AdGuardFilter], allowlist: String?, blocklist: String?, invert: Bool) -> [SafariFilter]? {
+	public func convertFilters(_ filters: [AdGuardFilter], allowlist: String?, blocklist: String?, invert: Bool) -> [SafariFilter]? {
         
         var filterRules = parseFilters(filters)
         

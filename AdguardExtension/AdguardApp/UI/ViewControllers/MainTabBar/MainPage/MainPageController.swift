@@ -186,7 +186,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - View Controller life cycle
     
     required init?(coder: NSCoder) {
-        mainPageModel = MainPageModel(antibanner: ServiceLocator.shared.getService()!)
+        mainPageModel = MainPageModel(filtersService: ServiceLocator.shared.getService()!)
         super.init(coder: coder)
     }
     
