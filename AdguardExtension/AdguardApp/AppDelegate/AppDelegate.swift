@@ -366,8 +366,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         subscribeToThemeChangeNotification()
         
-        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { [weak self] _ in
-                if let vc = self?.window?.rootViewController {
+        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
+            if let vc = Self.topViewController() {
                     ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
                     
             }
