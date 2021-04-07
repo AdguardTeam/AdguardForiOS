@@ -3612,7 +3612,7 @@
 		D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
 		D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriterProtocol.swift; sourceTree = "<group>"; };
 		D0C4EF2C23C8A1F700C57E22 /* DnsTrackerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerServiceTest.swift; sourceTree = "<group>"; };
-		D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios-arm64.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = "AGDnsProxy.framework.ios-arm64.dSYM"; path = "SourcePackages/artifacts/AGDnsProxy/AGDnsProxy.dSYMs/AGDnsProxy.framework.ios-arm64.dSYM"; sourceTree = BUILD_ROOT; };
+		D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios-arm64.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = "AGDnsProxy.framework.ios-arm64.dSYM"; path = "../SourcePackages/artifacts/AGDnsProxy/AGDnsProxy.dSYMs/AGDnsProxy.framework.ios-arm64.dSYM"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderInfo.swift; sourceTree = "<group>"; };
 		D0C99119238FDB8700C9123F /* SafariServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariServiceTest.swift; sourceTree = "<group>"; };
 		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
