@@ -34,6 +34,7 @@ class LowLevelSettingsController: UITableViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
+    @IBOutlet var notSupportedLabels: [UILabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -52,6 +53,7 @@ class LowLevelSettingsController: UITableViewController {
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
+
         updateTheme()
     }
     
@@ -63,6 +65,10 @@ class LowLevelSettingsController: UITableViewController {
         setBootstrapsDescription()
         setFallbacksDescription()
         tableView.reloadData()
+        
+        if resources.dnsImplementation == .native {
+            setupNotSupportedLabels()
+        }
     }
     
     // MARK: - actions
@@ -181,6 +187,12 @@ class LowLevelSettingsController: UITableViewController {
             headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
             betaChannelTextView.attributedText = headerText
+        }
+    }
+    
+    private func setupNotSupportedLabels() {
+        for label in notSupportedLabels {
+            label.text = String.localizedString("unsupported_setting")
         }
     }
 
