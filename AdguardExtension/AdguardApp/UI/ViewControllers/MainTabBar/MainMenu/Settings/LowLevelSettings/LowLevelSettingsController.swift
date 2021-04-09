@@ -47,14 +47,22 @@ class LowLevelSettingsController: UITableViewController {
     private let boostraps = 4
     private let fallbacks = 5
     
+    private var dnsImplementationObserver: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
-
         updateTheme()
+        
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.setupNotSupportedLabels(isNative: self.resources.dnsImplementation == .native)
+        }
+        
+        setupNotSupportedLabels(isNative: resources.dnsImplementation == .native)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +73,6 @@ class LowLevelSettingsController: UITableViewController {
         setBootstrapsDescription()
         setFallbacksDescription()
         tableView.reloadData()
-        
-        setupNotSupportedLabels(isNative: resources.dnsImplementation == .native)
     }
     
     // MARK: - actions
@@ -190,7 +196,7 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setupNotSupportedLabels(isNative: Bool) {
         if isNative {
-            notSupportedLabels.forEach { $0.text = String.localizedString("unsupported_setting")}
+            notSupportedLabels.forEach { $0.text = String.localizedString("unsupported_setting") }
         } else {
             notSupportedLabels.forEach { $0.text = nil }
         }
