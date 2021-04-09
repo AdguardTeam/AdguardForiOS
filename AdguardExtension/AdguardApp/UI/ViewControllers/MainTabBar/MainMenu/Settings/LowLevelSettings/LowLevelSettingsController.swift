@@ -66,9 +66,7 @@ class LowLevelSettingsController: UITableViewController {
         setFallbacksDescription()
         tableView.reloadData()
         
-        if resources.dnsImplementation == .native {
-            setupNotSupportedLabels()
-        }
+        setupNotSupportedLabels(isNative: resources.dnsImplementation == .native)
     }
     
     // MARK: - actions
@@ -190,9 +188,12 @@ class LowLevelSettingsController: UITableViewController {
         }
     }
     
-    private func setupNotSupportedLabels() {
-        for label in notSupportedLabels {
-            label.text = String.localizedString("unsupported_setting")
+    private func setupNotSupportedLabels(isNative: Bool) {
+        if isNative {
+            notSupportedLabels.forEach { $0.text = String.localizedString("unsupported_setting")}
+        } else {
+            if notSupportedLabels.first?.text == nil { return }
+            notSupportedLabels.forEach { $0.text = nil }
         }
     }
 

@@ -120,6 +120,7 @@ class UpstreamsController: BottomAlertController {
         default:
             break
         }
+        upstreamsTextField.placeholder = "IP"
     }
     
     private func prepareTextFieldDescription() {
