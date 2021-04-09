@@ -37,25 +37,31 @@ protocol SetappServiceProtocol {
 class SetappService: SetappServiceProtocol, SetappManagerDelegate {
     
     private let purchaseService: PurchaseServiceProtocol
+    private let resources: AESharedResourcesProtocol
     
+    private let deviceLimitErrorCode = 1703
     private var started = false
     
-    init(purchaseService: PurchaseServiceProtocol) {
+    init(purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol) {
         self.purchaseService = purchaseService
+        self.resources = resources
         
-        DDLogInfo("(SetappService) - init; purchasedThroughSetapp = \(purchaseService.purchasedThroughSetapp)")
-        if purchaseService.purchasedThroughSetapp {
+        DDLogInfo("(SetappService) - init; setappUsed  = \(resources.setappUsed )")
+        if resources.setappUsed {
             purchaseService.updateSetappState(subscription: SetappManager.shared.subscription)
         }
     }
     
     func start() {
-        DDLogInfo("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); purchasedThroughSetapp = \(purchaseService.purchasedThroughSetapp)")
-        if purchaseService.purchasedThroughSetapp {
+        DDLogInfo("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
+        if resources.setappUsed {
             startManager()
         }
     }
     
+    /**
+     checks if the url belongs to the setapp and processes it through the setup api
+     */
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         if url.scheme == Bundle.main.bundleIdentifier {
             
@@ -64,12 +70,16 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
             if SetappManager.shared.canOpen(url: url) {
                 DDLogInfo("(SetappService) - Setapp can openUrl; url: \(url)")
                 
-                return SetappManager.shared.open(url: url, options: options) { result in
+                return SetappManager.shared.open(url: url, options: options) { [weak self] result in
                     switch result {
                     case .success(let subscription):
                         DDLogInfo("Successfully logged in with setapp, current subscription: \(subscription.description)")
+                        self?.resources.setappUsed = true
                     case .failure(let error):
                         DDLogError("Error while logging in with setapp: \(error)")
+                        if (error as NSError).code == self?.deviceLimitErrorCode {
+                            NotificationCenter.default.post(Notification(name: .setappDeviceLimitReched))
+                        }
                     }
                 }
             }
@@ -85,6 +95,7 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         DDLogInfo("(SetappService) setapp new subscription is active: \(manager.subscription.isActive)")
         
         purchaseService.updateSetappState(subscription: manager.subscription)
+        resources.setappUsed = true
     }
     
     // MARK: -- private methods
@@ -106,4 +117,8 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
         
         started = true
     }
+}
+
+extension Notification.Name {
+    static var setappDeviceLimitReched: Notification.Name { return .init(rawValue: "setappDeviceLimitReched") }
 }

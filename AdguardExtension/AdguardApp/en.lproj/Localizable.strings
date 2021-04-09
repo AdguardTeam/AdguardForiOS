@@ -954,3 +954,6 @@
 
 /* (LowLevelSettingsController) - title for unsupported options */
 "unsupported_setting" = "This option is incompatible with native DNS mode";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
