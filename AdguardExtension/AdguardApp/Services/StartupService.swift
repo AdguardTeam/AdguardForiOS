@@ -139,5 +139,8 @@ class StartupService : NSObject{
         
         let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(antibanner: antibanner, networking: networkService, filtersService: filtersService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, contentBlockerService: contentBlockerService)
         locator.addService(service: importSettings)
+        
+        let webReporter: ActionWebReporterProtocol = ActionWebReporter(productInfo: productInfo, antibanner: antibanner, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService)
+        locator.addService(service: webReporter)
     }
 }
