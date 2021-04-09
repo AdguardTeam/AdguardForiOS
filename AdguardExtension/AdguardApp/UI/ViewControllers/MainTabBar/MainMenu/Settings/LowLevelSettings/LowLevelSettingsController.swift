@@ -192,7 +192,6 @@ class LowLevelSettingsController: UITableViewController {
         if isNative {
             notSupportedLabels.forEach { $0.text = String.localizedString("unsupported_setting")}
         } else {
-            if notSupportedLabels.first?.text == nil { return }
             notSupportedLabels.forEach { $0.text = nil }
         }
     }
