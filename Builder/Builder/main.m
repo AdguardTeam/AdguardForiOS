@@ -37,7 +37,6 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         
         ASDatabase *asDataBase = [ASDatabase new];
-        BuilderHelper *helper = [BuilderHelper new];
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -52,6 +51,8 @@ int main(int argc, const char * argv[])
             configuration = [NSString stringWithCString:argv[1] encoding:NSUTF8StringEncoding];
             
         }
+        
+        BuilderHelper *helper = [[BuilderHelper alloc] initWithDirectory:productPath];
         
         
 #pragma mark Creating default DB and filling of this db to data from Backend service
@@ -171,7 +172,7 @@ int main(int argc, const char * argv[])
                      locale.filterId, locale.lang, locale.name, locale.descr];
                 
                 for (ASDFilterMetadata *version in metadata.filters) {
-                    if ([MainHelper downloadFilterSyncWithIdentifier:version.filterId.intValue] != nil) {
+                    if ([helper downloadFilterSyncWithIdentifier:version.filterId.intValue] != nil) {
                         NSLog(@"Error downloading filter");
                         exit(1);
                     }

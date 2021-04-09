@@ -21,6 +21,12 @@ import Foundation
 @objc
 @objcMembers
 class BuilderHelper: NSObject {
+    
+    let directory: String
+    init (directory: String) {
+        self.directory = directory
+    }
+    
     private let networking = HttpRequestService()
     func loadFiltersMetadata(completion: @escaping (ABECFilterClientMetadata?)->Void) {
         networking.loadFiltersMetadata(completion: completion)
@@ -28,5 +34,18 @@ class BuilderHelper: NSObject {
     
     func loadFiltersLocalizations(completion: @escaping (ABECFilterClientLocalization?)->Void) {
         networking.loadFiltersLocalizations(completion: completion)
+    }
+    
+    func downloadFilterSync(identifier: Int)->Error? {
+        let group = DispatchGroup()
+        group.enter()
+        let storage = FiltersStorage(filtersDirectory: directory)
+        var resultError: Error? = nil
+        storage.updateFilter(identifier: identifier) { error in
+            resultError = error
+            group.leave()
+        }
+        group.wait()
+        return resultError
     }
 }

@@ -15,6 +15,19 @@ enum FiltersStorageError: Error {
 
 class FiltersStorage: FiltersStorageProtocol {
     
+    let filtersDirectory: String
+    
+    init(filtersDirectory: String? = nil) {
+        if filtersDirectory == nil {
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentDir = urls.first
+            self.filtersDirectory = documentDir?.path ?? ""
+        }
+        else {
+            self.filtersDirectory = filtersDirectory!
+        }
+    }
+    
     func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
         
         guard let url = urlForFilter(identifier) else {
@@ -88,9 +101,8 @@ class FiltersStorage: FiltersStorageProtocol {
     }
     
     private func fileUrlForFilter(_ identifier: Int)->URL? {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDir = urls.first
-        let fileUrl = documentDir?.appendingPathComponent("\(identifier).txt")
+        let dirUrl = URL(fileURLWithPath: filtersDirectory)
+        let fileUrl = dirUrl.appendingPathComponent("\(identifier).txt")
         return fileUrl
     }
 }
