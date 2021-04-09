@@ -259,6 +259,11 @@ class SupportService: SupportServiceProtocol {
         Dns server id: \(server?.serverId ?? "")
         Dns custom bootstrap servers: \(customBootstraps)"
         Dns custom fallback servers: \(customFallbacks)"
+
+        VPN application info:
+
+        AdGuard VPN is installed on device: \(UIApplication.adGuardVpnIsInstalled)
+        AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
         """
         
         for upstream in server?.upstreams ?? [] {

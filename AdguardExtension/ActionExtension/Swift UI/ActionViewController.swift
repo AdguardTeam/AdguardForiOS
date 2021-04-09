@@ -66,7 +66,7 @@ class ActionViewController: UIViewController {
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
     private let antibannerController: AntibannerControllerProtocol
-    private let support: SupportServiceProtocol
+    private let webReporter: ActionWebReporterProtocol
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
     private let productInfo: ADProductInfoProtocol
@@ -106,19 +106,12 @@ class ActionViewController: UIViewController {
                                                       antibanner: antibanner,
                                                       safariProtection: safariProtection)
         
-        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
-        
-        support = SupportService(resources: sharedResources,
-                                 configuration: configuration,
-                                 complexProtection: complexProtection,
-                                 dnsProviders: dnsProviders,
-                                 networkSettings: networkSettings,
-                                 dnsFilters: dnsFiltersService,
-                                 productInfo: productInfo,
-                                 antibanner: antibanner,
-                                 requestsService: HttpRequestService(),
-                                 keyChainService: keyChainService,
-                                 safariService: safariService)
+        webReporter = ActionWebReporter(productInfo: productInfo,
+                                    antibanner: antibanner,
+                                    complexProtection: complexProtection,
+                                    dnsProviders: dnsProviders,
+                                    configuration: configuration,
+                                    dnsFilters: dnsFiltersService)
         
         super.init(coder: coder)
     }
@@ -201,7 +194,7 @@ class ActionViewController: UIViewController {
             mainVC.resources = sharedResources
             mainVC.safariService = safariService
             mainVC.contentBlockerService = contentBlockerService
-            mainVC.support = support
+            mainVC.webReporter = webReporter
             mainVC.domainName = host
             mainVC.iconUrl = iconUrl
             mainVC.domainEnabled = enabled
