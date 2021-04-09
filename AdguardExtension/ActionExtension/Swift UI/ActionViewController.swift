@@ -104,7 +104,8 @@ class ActionViewController: UIViewController {
         contentBlockerService = ContentBlockerService(resources: sharedResources,
                                                       safariService: safariService,
                                                       antibanner: antibanner,
-                                                      safariProtection: safariProtection)
+                                                      safariProtection: safariProtection,
+                                                      filtersStorage: FiltersStorage())
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         

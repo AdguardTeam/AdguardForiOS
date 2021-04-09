@@ -27,7 +27,7 @@ class MainHelper: NSObject {
         group.enter()
         let storage = FiltersStorage()
         var resultError: Error? = nil
-        storage.downloadFilter(identifier: identifier) { error in
+        storage.updateFilter(identifier: identifier) { error in
             resultError = error
             group.leave()
         }

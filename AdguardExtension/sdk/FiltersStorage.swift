@@ -3,35 +3,31 @@ import Foundation
 
 protocol FiltersStorageProtocol {
     
-    func downloadFilter(identifier: Int, completion:@escaping (Error?)->Void)
     func updateFilter(identifier: Int, completion:@escaping (Error?)->Void)
+    func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion:@escaping (Error?)->Void)
     func getFilters(identifiers:[Int])->[Int: String]
     func saveFilter(identifier: Int, content: String)->Error?
 }
 
+enum FiltersStorageError: Error {
+    case updateError
+}
+
 class FiltersStorage: FiltersStorageProtocol {
     
-    func downloadFilter(identifier: Int, completion: @escaping (Error?) -> Void) {
-        guard let url = urlForFilter(identifier), let saveUrl = fileUrlForFilter(identifier) else {
-            DDLogError("FiltersStorage downloadFilter - can not generate urls for filter with id: \(identifier)")
+    func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
+        
+        guard let url = urlForFilter(identifier) else {
+            DDLogError("FiltersStorage downloadFilter - can not generate url for filter with id: \(identifier)")
+            completion(FiltersStorageError.updateError)
             return
         }
         
-        DispatchQueue(label: "download filter").async {
-            do {
-                let content = try String(contentsOf: url)
-                try content.write(to: saveUrl, atomically: true, encoding: .utf8)
-                completion(nil)
-            }
-            catch {
-                DDLogError("FiltersStorage downloadFilter - download error: \(error)")
-                completion(error)
-            }
-        }
+        downloadFilter(url: url, identifier: identifier, completion: completion)
     }
     
-    func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
-        downloadFilter(identifier: identifier, completion: completion)
+    func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion: @escaping (Error?) -> Void) {
+        downloadFilter(url: subscriptionUrl, identifier: identifier, completion: completion)
     }
     
     func getFilters(identifiers:[Int])->[Int: String] {
@@ -64,6 +60,27 @@ class FiltersStorage: FiltersStorageProtocol {
     }
     
     // MARK: - private methods
+    
+    private func downloadFilter(url: URL, identifier: Int, completion: @escaping (Error?) -> Void) {
+        
+        guard let saveUrl = fileUrlForFilter(identifier) else {
+            DDLogError("FiltersStorage downloadFilter - can not generate file url for filter with id: \(identifier)")
+            completion(FiltersStorageError.updateError)
+            return
+        }
+        
+        DispatchQueue(label: "download filter").async {
+            do {
+                let content = try String(contentsOf: url)
+                try content.write(to: saveUrl, atomically: true, encoding: .utf8)
+                completion(nil)
+            }
+            catch {
+                DDLogError("FiltersStorage downloadFilter - download error: \(error)")
+                completion(error)
+            }
+        }
+    }
     
     private func urlForFilter(_ identifier: Int)->URL? {
         let url = "https://filters.adtidy.org/ios/filters/\(identifier)_optimized.txt"

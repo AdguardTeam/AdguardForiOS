@@ -77,6 +77,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private let antibannerController: AntibannerControllerProtocol
     private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
+    private var filtersStorage: FiltersStorageProtocol
     
     private var filterMetas = [ASDFilterMetadata]()
     private var proGroups: Set<Int> = [FilterGroupId.security, FilterGroupId.custom]
@@ -130,12 +131,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol) {
+    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
         self.resources = resources
         self.httpRequestService = httpRequestService
+        self.filtersStorage = filtersStorage
         
         super.init()
         
@@ -223,10 +225,19 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 })
                 
                 var meta: ASDFilterMetadata
+                var filtersNeededUpdate = [Int]()
+                
                 for item in installedFilters {
                     let index = filters.firstIndex(of: item)
                     if index != nil {
                         meta = filters[index!]
+                        
+                        if let oldVersion = item.version,
+                           let newVersion = meta.version,
+                           newVersion.compare(oldVersion, options: .numeric, range: nil, locale: nil) == .orderedDescending {
+                            filtersNeededUpdate.append(meta.filterId.intValue)
+                        }
+                        
                         let values = item.dictionaryWithValues(forKeys: [
                             "updateDate",
                             "updateDateString",
@@ -272,6 +283,20 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 })
                 
                 self.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
+                
+                // update filter rules
+                if refresh {
+                    self.updateFilterRulesSync(identifiers: filtersNeededUpdate)
+                    
+                    let customFilters = installedFilters.filter { $0.groupId.intValue == FilterGroupId.custom }
+                    let filterUrls = customFilters.compactMap { (meta) -> (Int, URL)? in
+                        if let url = URL(string: meta.subscriptionUrl) {
+                            return (meta.filterId.intValue, url)
+                        }
+                        return nil
+                    }
+                    self.updateCustomFiltersSync(filterUrls: filterUrls)
+                }
                 
                 DispatchQueue.main.async {
                     self.groups = groupInfos ?? [Group]()
@@ -386,10 +411,15 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 updateGroupSubtitle(group)
                 notifyChange()
                 
-                antibanner.subscribeCustomFilter(from: filter) {
-                    [weak self] in
-                    self?.contentBlocker.reloadJsons(backgroundUpdate: false) { _ in
-                        UIApplication.shared.endBackgroundTask(backgroundTaskID)
+                antibanner.subscribeCustomFilter(from: filter) { [weak self] in
+                    guard let url = URL(string: newFilter.subscriptionUrl ?? "") else {
+                        DDLogError("(FiltersService) error - can not get url from string: \(newFilter.subscriptionUrl ?? "nil")")
+                        return
+                    }
+                    self?.filtersStorage.updateCustomFilter(identifier: newFilter.filterId, subscriptionUrl: url) { (error) in
+                        self?.contentBlocker.reloadJsons(backgroundUpdate: false) { _ in
+                            UIApplication.shared.endBackgroundTask(backgroundTaskID)
+                        }
                     }
                 }
             }
@@ -719,5 +749,27 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         for filter in filtersToRemove {
             antibanner?.unsubscribeFilter(filter.filterId)
         }
+    }
+    
+    private func updateFilterRulesSync(identifiers: [Int]) {
+        let group = DispatchGroup()
+        for id in identifiers {
+            group.enter()
+            filtersStorage.updateFilter(identifier: id) { (_) in
+                group.leave()
+            }
+        }
+        group.wait()
+    }
+    
+    private func updateCustomFiltersSync(filterUrls: [(Int, URL)]) {
+        let group = DispatchGroup()
+        for filter in filterUrls {
+            group.enter()
+            filtersStorage.updateCustomFilter(identifier: filter.0, subscriptionUrl: filter.1) { (_) in
+                group.leave()
+            }
+        }
+        group.wait()
     }
 }

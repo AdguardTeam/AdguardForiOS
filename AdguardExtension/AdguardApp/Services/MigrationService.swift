@@ -41,6 +41,7 @@ class MigrationService: MigrationServiceProtocol {
     private let productInfo: ADProductInfoProtocol
     private let contentBlockerService: ContentBlockerServiceProtocol
     private let nativeProviders: NativeProvidersServiceProtocol
+    private let filtersStorage: FiltersStorageProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
@@ -57,7 +58,8 @@ class MigrationService: MigrationServiceProtocol {
          filtersService: FiltersServiceProtocol,
          productInfo: ADProductInfoProtocol,
          contentBlockerService: ContentBlockerServiceProtocol,
-         nativeProviders: NativeProvidersServiceProtocol) {
+         nativeProviders: NativeProvidersServiceProtocol,
+         filtersStorage: FiltersStorageProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -72,6 +74,7 @@ class MigrationService: MigrationServiceProtocol {
         self.productInfo = productInfo
         self.contentBlockerService = contentBlockerService
         self.nativeProviders = nativeProviders
+        self.filtersStorage = filtersStorage
     }
     
     func install() {
@@ -114,8 +117,7 @@ class MigrationService: MigrationServiceProtocol {
             }
             
             if savedSchemaVersion < 5 {
-                let storage = FiltersStorage()
-                self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: storage)
+                self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: filtersStorage)
             }
             
             /* If all migrations are successfull, than save current schema version */
