@@ -149,7 +149,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <action selector="moreInfoTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="mMZ-RS-4K9"/>
+                                    <action selector="moreInfoTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="w90-1L-GPs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -180,7 +180,6 @@
                             <constraint firstItem="oMX-oj-ZeJ" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="wzq-g0-uNe"/>
                             <constraint firstItem="htU-yE-FEi" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="xqY-Fn-vzi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
