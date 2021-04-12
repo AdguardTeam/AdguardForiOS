@@ -4610,8 +4610,6 @@
 		65C12EE41BD4D29F00FFC71C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */,
-				65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */,
 				7EA783382578E52400CA8889 /* Support */,
 				D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */,
 			);
@@ -5392,8 +5390,6 @@
 		D033980224318C1900F6B9DE /* ContentBlockers */ = {
 			isa = PBXGroup;
 			children = (
-				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
-				D03398052431927200F6B9DE /* BackgroundFetchState.swift */,
 				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
 				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
 				D03E537321BA82BD00C62152 /* FiltersService.swift */,
@@ -5405,10 +5401,10 @@
 		D048A33825FA4F85008CEC80 /* sdk */ = {
 			isa = PBXGroup;
 			children = (
-				D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */,
-				D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */,
-				D048A38025FA50D7008CEC80 /* SafariFilter.swift */,
-				D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */,
+				D09B63ED2624A68B00F60AF7 /* FiltersStorage */,
+				D09B63EC2624A63700F60AF7 /* FiltersConvertation */,
+				D09B63EB2624A61E00F60AF7 /* FiltersMetadata */,
+				D033980224318C1900F6B9DE /* ContentBlockers */,
 			);
 			path = sdk;
 			sourceTree = "<group>";
@@ -5448,6 +5444,34 @@
 				24ED98C5259B78DF00A73B17 /* Array+Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		D09B63EB2624A61E00F60AF7 /* FiltersMetadata */ = {
+			isa = PBXGroup;
+			children = (
+				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
+				65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */,
+				65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */,
+			);
+			path = FiltersMetadata;
+			sourceTree = "<group>";
+		};
+		D09B63EC2624A63700F60AF7 /* FiltersConvertation */ = {
+			isa = PBXGroup;
+			children = (
+				D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */,
+				D048A38025FA50D7008CEC80 /* SafariFilter.swift */,
+				D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */,
+			);
+			path = FiltersConvertation;
+			sourceTree = "<group>";
+		};
+		D09B63ED2624A68B00F60AF7 /* FiltersStorage */ = {
+			isa = PBXGroup;
+			children = (
+				D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */,
+			);
+			path = FiltersStorage;
 			sourceTree = "<group>";
 		};
 		D09CB60123ABB5BF008C9FF7 /* Onboarding */ = {
@@ -5716,7 +5740,6 @@
 		D0F9117421303E00006DF0D3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D033980224318C1900F6B9DE /* ContentBlockers */,
 				D0C940F823ED5FF7008B85EC /* DnsProviders */,
 				7EF75A69234B5FD2006ED3E5 /* DnsTrackerService */,
 				D07427F1232B96CB0019AAF4 /* Utils */,
@@ -5725,6 +5748,7 @@
 				7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */,
 				D0EC86BD23A8C5F300EDF107 /* APDnsLogTable.h */,
 				D0EC86BC23A8C5F200EDF107 /* APDnsLogTable.m */,
+				D03398052431927200F6B9DE /* BackgroundFetchState.swift */,
 				D0CB347A212DD1AB003B650E /* ConfigurationService.swift */,
 				D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */,
 				D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */,
@@ -9204,8 +9228,6 @@
 				D0B544362435C6BC002F0AEC /* FMDatabasePool.m in Sources */,
 				247521F82594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7EABA6162578F5CC001E52BC /* SuccessFailureParser.swift in Sources */,
-				D0B544392435C6BC002F0AEC /* Affinity.swift in Sources */,
-				D0D891B624651E3F0098487A /* SupportService.swift in Sources */,
 				D0D7E616244455CB001801A5 /* ThemableButton.swift in Sources */,
 				D0B5443A2435C6BC002F0AEC /* DnsFiltersService.swift in Sources */,
 				D0B5443B2435C6BC002F0AEC /* FMStatementKeywordRecogniser.m in Sources */,
