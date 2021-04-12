@@ -172,7 +172,7 @@ class ActionViewController: UIViewController {
             }
             
             if error != nil {
-                DDLogError("(ActionViewController) Error of obtaining page url from Safari:\(String(describing: error?.localizedDescription))" )
+                DDLogError("(ActionViewController) Error of obtaining page url from Safari:\(error?.localizedDescription ?? "nil")" )
             } else if self.host?.isEmpty ?? true || self.host == nil {
                 DDLogError("(ActionViewController) Error of obtaining page url from Safari: url is empty.")
                 errorMessage = ACLocalizedString("hostname_obtaining_error", "(Action Extension - ActionViewController) Can't obtain hostname when starting.")
