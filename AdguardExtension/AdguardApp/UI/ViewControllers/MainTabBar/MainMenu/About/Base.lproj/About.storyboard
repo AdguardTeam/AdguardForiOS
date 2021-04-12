@@ -135,25 +135,26 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-oj-ZeJ">
-                                <rect key="frame" x="125" y="378.66666666666669" width="125" height="20"/>
+                                <rect key="frame" x="153" y="378.66666666666669" width="69" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="qdJ-me-M0A">
                                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Discuss AdGuard">
+                                <state key="normal" title="More info">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <action selector="discussAdguardTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="mMZ-RS-4K9"/>
+                                    <action selector="moreInfoTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="mMZ-RS-4K9"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vwj-hy-Fhk" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="1Aq-Re-tKi"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="height" secondItem="517-dV-Anx" secondAttribute="height" multiplier="0.2" id="6Io-ly-JpZ"/>
