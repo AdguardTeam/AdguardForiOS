@@ -32,7 +32,7 @@ class FiltersServiceTest: XCTestCase {
         let contentBlocker = ContentBlockerServiceMock()
         let configuration = ConfigurationServiceMock()
         
-        let service = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker)
+        let service = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: HttpRequestServiceMock(), filtersStorage: FiltersStorageMock())
         
         var groupMetas = [ASDFilterGroup]()
         

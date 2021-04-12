@@ -215,4 +215,23 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
         return true
     }
     
+    func defaultDbGroups() -> [ASDFilterGroup] {
+        return []
+    }
+    
+    func defaultDbGroupsI18n() -> ASDGroupsI18n {
+        return ASDGroupsI18n()
+    }
+    
+    func defaultDbFilters() -> [ASDFilterMetadata] {
+        return []
+    }
+    
+    func defaultDbFiltersI18n() -> ASDFiltersI18n {
+        return ASDFiltersI18n()
+    }
+    
+    func removeRules(forFilter filterId: NSNumber) -> Bool {
+        return true
+    }
 }

@@ -79,10 +79,10 @@ class AASFilterSubscriptionParserTest: XCTestCase {
             
             var allUsed = Affinity()
             
-            for rule in (result.rules as! [ASDFilterRule])  {
+            for rule in (result.rules as! [FilterRule])  {
                 
-                let affinity = rule.affinity == nil ? nil : Affinity(rawValue: rule.affinity!.uint8Value)
-                switch rule.ruleText {
+                let affinity = rule.affinity
+                switch rule.text {
                 case "||general.com^":
                     XCTAssertTrue(affinity == .general)
                     allUsed.insert(.general)

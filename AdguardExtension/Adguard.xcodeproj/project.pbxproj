@@ -1435,6 +1435,11 @@
 		D0985074260B8AC800703DB2 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0985014260B504F00703DB2 /* FiltersMetadataRequest.swift */; };
 		D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43941E8902F4008DAA59 /* AERDomainFilterRule.m */; };
+		D09B64422624AD9200F60AF7 /* FiltersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */; };
+		D09B64782624AFED00F60AF7 /* FiltersStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64772624AFED00F60AF7 /* FiltersStorageMock.swift */; };
+		D09B649B2624B0E000F60AF7 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */; };
+		D09B64AE2624B14200F60AF7 /* HttpRequestServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64AD2624B14200F60AF7 /* HttpRequestServiceMock.swift */; };
+		D09B64D12624B29300F60AF7 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */; };
 		D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
 		D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D09E271A2541D00B002D6BC0 /* Setapp */; };
 		D09E2A372549AC05002D6BC0 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = D005096A2201DA2F006BC10C /* providers.json */; };
@@ -3768,6 +3773,8 @@
 		D099DAF2228D8168007987F8 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D099DAF3228D816C007987F8 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D099DAF4228D816E007987F8 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/DnsSettings.strings; sourceTree = "<group>"; };
+		D09B64772624AFED00F60AF7 /* FiltersStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersStorageMock.swift; sourceTree = "<group>"; };
+		D09B64AD2624B14200F60AF7 /* HttpRequestServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestServiceMock.swift; sourceTree = "<group>"; };
 		D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Utils.swift"; sourceTree = "<group>"; };
 		D09E2BCE25558075002D6BC0 /* SetappService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetappService.swift; sourceTree = "<group>"; };
@@ -5672,6 +5679,8 @@
 				7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */,
 				7E7F9940241B7A1E00FC89DC /* DnsProvidersServiceMock.swift */,
 				D0F97576247EA87800B9DF19 /* FiltersServiceMock.swift */,
+				D09B64772624AFED00F60AF7 /* FiltersStorageMock.swift */,
+				D09B64AD2624B14200F60AF7 /* HttpRequestServiceMock.swift */,
 				D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */,
 				D0249584256BD1FD000EED34 /* PurchaseServiceMock.swift */,
 				D02C080521BEAB2900796714 /* SafariServiceMock.swift */,
@@ -7937,6 +7946,7 @@
 				D0EC86C223A8D24E00EDF107 /* DnsStatisticsService.swift in Sources */,
 				D032D174232BA9A1001E7BF1 /* NotEcapingJsonSerialization.swift in Sources */,
 				7E324448255A84C50058BCDF /* NativeProvidersServiceMock.swift in Sources */,
+				D09B649B2624B0E000F60AF7 /* FiltersConverter.swift in Sources */,
 				D0288F32230697D400A4EBEF /* ACObject.m in Sources */,
 				249E11462600D389003A5FBD /* OpenDnsProvidersControllerParser.swift in Sources */,
 				D0288F41230699A900A4EBEF /* ACLFileLogger.m in Sources */,
@@ -8003,6 +8013,7 @@
 				D0EFBF5922BA62E800D2D391 /* String+Utils.swift in Sources */,
 				65EC9CA11BB9824C00F53F3B /* FMResultSet.m in Sources */,
 				7E1AB5FE258249FD00519B2B /* RequestProtocol.swift in Sources */,
+				D09B64D12624B29300F60AF7 /* AffinityRulesParser.swift in Sources */,
 				D07C58A3230C1FF5002CD427 /* LoginResponseParserTest.swift in Sources */,
 				7E5844DC23FD890700BAD052 /* UserNotificationService.swift in Sources */,
 				D04C2B77240FA18E009330A8 /* ComplexProtectionService.swift in Sources */,
@@ -8010,6 +8021,7 @@
 				D0D5949723AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift in Sources */,
 				65EC9CAD1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				D0288F3C2306991F00A4EBEF /* NSString+Utils.m in Sources */,
+				D09B64422624AD9200F60AF7 /* FiltersStorage.swift in Sources */,
 				D03E532921B412FA00C62152 /* SafariService.swift in Sources */,
 				D0ABE0D42230FD5500771635 /* Constants.swift in Sources */,
 				7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */,
@@ -8078,6 +8090,7 @@
 				D0D7E62B2444C3DC001801A5 /* APDnsServerObject.m in Sources */,
 				D0D5949823AA3B8F0033CAF3 /* DnsLogRecordsService.swift in Sources */,
 				D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */,
+				D09B64AE2624B14200F60AF7 /* HttpRequestServiceMock.swift in Sources */,
 				D06E3181253F342C008BBD2D /* DnsProviders.swift in Sources */,
 				7E7F9941241B7A1E00FC89DC /* DnsProvidersServiceMock.swift in Sources */,
 				D0AEC26B24093364003E8FCC /* APCommonSharedResources.m in Sources */,
@@ -8103,6 +8116,7 @@
 				D0288F2D2305AEF900A4EBEF /* UIColorUtils.swift in Sources */,
 				D0C4EF2D23C8A1F700C57E22 /* DnsTrackerServiceTest.swift in Sources */,
 				7E3244D5255AD4F20058BCDF /* NetworkSettingsServiceMock.swift in Sources */,
+				D09B64782624AFED00F60AF7 /* FiltersStorageMock.swift in Sources */,
 				65EC9C9D1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0D7E62C2444C405001801A5 /* APDnsServerAddress.m in Sources */,
 				D07D34432612207700213A5A /* NetworkingService-AdGuard.swift in Sources */,
