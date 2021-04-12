@@ -52,6 +52,13 @@ class FiltersStorage: FiltersStorageProtocol {
             }
             guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
                 DDLogError("FiltersStorage getFilters error. Can not read filter with url: \(fileUrl)")
+                
+                // try to get presaved filter file
+                if  let defaulUrl = defaultFileUrlForFilter(id),
+                    let content = try? String.init(contentsOf: defaulUrl, encoding: .utf8) {
+                    DDLogInfo("FiltersStorage return default filter")
+                    result[id] = content
+                }
                 continue
             }
             result[id] = content
@@ -104,5 +111,9 @@ class FiltersStorage: FiltersStorageProtocol {
         let dirUrl = URL(fileURLWithPath: filtersDirectory)
         let fileUrl = dirUrl.appendingPathComponent("\(identifier).txt")
         return fileUrl
+    }
+    
+    private func defaultFileUrlForFilter(_ identifier: Int)->URL? {
+        return Bundle.main.url(forResource: "\(identifier)", withExtension: "txt")
     }
 }

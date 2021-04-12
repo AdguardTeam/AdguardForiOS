@@ -152,7 +152,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         
         proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
             // enable/disable pro groups
             let proEnabled = configuration.proStatus
@@ -163,13 +163,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 return
             }
             
-            for group in sSelf.groups {
-                if sSelf.proGroups.contains(group.groupId) {
-                    sSelf.setGroup(group.groupId, enabled: proEnabled)
+            for group in self.groups {
+                if self.proGroups.contains(group.groupId) {
+                    self.setGroup(group.groupId, enabled: proEnabled)
                 }
             }
             
-            sSelf.processUpdate()
+            self.processUpdate()
         }
         
         antibannerController.onReady { [weak self] (antibanner) in
@@ -298,7 +298,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     self.updateCustomFiltersSync(filterUrls: filterUrls)
                 }
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
                     self.groups = groupInfos ?? [Group]()
                     self.filterMetas = filters
                     self.notifyChange()
@@ -659,42 +660,42 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
         
         workQueue.async { [weak self] in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
         
-            let diff = sSelf.getDiff()
+            let diff = self.getDiff()
             
             if diff.filters.count == 0 && diff.groups.count == 0 {
-                sSelf.endUpdate(taskId: backgroundTaskID)
+                self.endUpdate(taskId: backgroundTaskID)
                 return
             }
             
             DDLogInfo("DIFF: \(diff)")
             
             diff.filters.forEach({ (filterId: Int, enabled: Bool) in
-                sSelf.antibannerSetFilter(filterId: filterId, enabled: enabled)
+                self.antibannerSetFilter(filterId: filterId, enabled: enabled)
                 DDLogInfo("Process update filter: \(filterId) enabled: \(enabled)")
             })
             
             diff.groups.forEach{ (groupId: Int, enabled: Bool) in
-                sSelf.antibanner?.setFiltersGroup(groupId as NSNumber, enabled: enabled)
+                self.antibanner?.setFiltersGroup(groupId as NSNumber, enabled: enabled)
                 DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
             }
             
-            sSelf.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
-                sSelf.endUpdate(taskId: backgroundTaskID)
+            self.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
+                self.endUpdate(taskId: backgroundTaskID)
             })
         }
     }
     
     private func endUpdate(taskId: UIBackgroundTaskIdentifier) {
         updateQueue.async { [weak self] in
-            guard let sSelf = self else { return }
+            guard let self = self else { return }
             
-            sSelf.updateInProcess = false
+            self.updateInProcess = false
             
-            if sSelf.needUpdate {
+            if self.needUpdate {
                 DispatchQueue.main.async {
-                    self?.processUpdate()
+                    self.processUpdate()
                 }
             }
             

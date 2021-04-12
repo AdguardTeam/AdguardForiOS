@@ -257,8 +257,8 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
             
             let localizations = antibanner.filtersI18n()
-            let metagata = antibanner.metadata(forSubscribe: false)
-            if let filterMeta = metagata?.filters?.first(where: { Int(truncating: $0.filterId) == filter.id }) {
+            let filters = antibanner.filters()
+            if let filterMeta = filters.first(where: { Int(truncating: $0.filterId) == filter.id }) {
                 let localization = localizations.localization(forFilter: filterMeta)
                 
                 let name = localization?.name ?? ""

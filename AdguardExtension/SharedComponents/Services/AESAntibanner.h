@@ -275,32 +275,6 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 - (BOOL)removeRulesForFilter:(nonnull NSNumber *)filterId;
 
 /**
- Retuns metadata.
- Gets fresh metadata.
- Tries load metadata from backend service if need it
- or obtains metadata from default DB.
- Request to backend is performed synchronous.
- 
- @param refresh Makes attempting to download metadata from the backend forced.
- 
- @return ABECFilterClientMetadata object or nil if error occurs.
- */
-- (nullable ABECFilterClientMetadata *)metadataForSubscribe:(BOOL)refresh;
-
-/**
- Retuns localizations.
- Gets fresh localizations.
- Tries load localizations from backend service if need it
- or obtains localizations from default DB.
- Request to backend is performed synchronous.
- 
- @param refresh Makes attempting to download localizations from the backend forced.
- 
- @return ABECFilterClientLocalization object or nil if error occurs.
- */
-- (nullable ABECFilterClientLocalization *)i18nForSubscribe:(BOOL)refresh;
-
-/**
  Performs subscription to filters.
  Inserts filter metadata from filters parameter into production DB.
  Copies the rules from default DB into production DB if they present,

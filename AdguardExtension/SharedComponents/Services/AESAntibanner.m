@@ -327,6 +327,43 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     return filters;
 }
 
+- (NSArray<ASDFilterMetadata *> *)defaultDbFilters {
+    
+    __block NSArray<ASDFilterMetadata *> *result;
+    [_asDataBase queryDefaultDB:^(FMDatabase *db) {
+        result = [self filtersFromDb:db];
+    }];
+    
+    return result;
+}
+
+- (NSArray<ASDFilterGroup *> *)defaultDbGroups {
+    __block NSArray<ASDFilterGroup *> *result;
+    [_asDataBase queryDefaultDB:^(FMDatabase *db) {
+        result = [self groupsFromDb:db];
+    }];
+    
+    return result;
+}
+
+-(ASDGroupsI18n *)defaultDbGroupsI18n {
+    __block ASDGroupsI18n *result;
+    [_asDataBase queryDefaultDB:^(FMDatabase *db) {
+        result = [self groupsI18nFromDb:db];
+    }];
+    
+    return result;
+}
+
+- (ASDFiltersI18n *)defaultDbFiltersI18n {
+    __block ASDFiltersI18n *result;
+    [_asDataBase queryDefaultDB:^(FMDatabase *db) {
+        result = [self filtersI18nFromDb:db];
+    }];
+    
+    return result;
+}
+
 - (NSArray<ASDFilterMetadata*> *)activeFilters{
     
     __block NSArray *filters;

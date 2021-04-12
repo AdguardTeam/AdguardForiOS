@@ -265,11 +265,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var agFilters = [AdGuardFilter]()
         
         for (groupId, filterIds) in filtersByGroup {
-            let filterIds = filterIds.map { $0.intValue }
             let filters = filtersStorage.getFilters(identifiers: filterIds)
             
             for (_, content) in filters {
-                agFilters.append(AdGuardFilter(text: content, group: AdGuardFilterGroup(rawValue: groupId.intValue) ?? .ads))
+                agFilters.append(AdGuardFilter(text: content, group: AdGuardFilterGroup(rawValue: groupId) ?? .ads))
             }
         }
         
@@ -464,14 +463,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
 
     
     /** returns map [groupId: [filterId]] */
-    private func activeGroups()->[NSNumber: [NSNumber]] {
-        var filterByGroup = [NSNumber:[NSNumber]]()
+    private func activeGroups()->[Int: [Int]] {
+        var filterByGroup = [Int:[Int]]()
         
         let groupIDs = antibanner.activeGroupIDs()
         
         for groupID in groupIDs {
             let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
-            filterByGroup[groupID] = filterIDs
+            filterByGroup[groupID.intValue] = filterIDs.map { $0.intValue }
         }
         
         return filterByGroup
