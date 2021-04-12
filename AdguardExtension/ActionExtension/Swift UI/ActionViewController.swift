@@ -66,7 +66,7 @@ class ActionViewController: UIViewController {
     private let contentBlockerService: ContentBlockerService
     private let networking = ACNNetworking()
     private let antibannerController: AntibannerControllerProtocol
-    private let support: SupportServiceProtocol
+    private let webReporter: ActionWebReporterProtocol
     private var theme: ThemeServiceProtocol?
     private let asDataBase = ASDatabase()
     private let productInfo: ADProductInfoProtocol
@@ -106,19 +106,12 @@ class ActionViewController: UIViewController {
                                                       antibanner: antibanner,
                                                       safariProtection: safariProtection)
         
-        let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
-        
-        support = SupportService(resources: sharedResources,
-                                 configuration: configuration,
-                                 complexProtection: complexProtection,
-                                 dnsProviders: dnsProviders,
-                                 networkSettings: networkSettings,
-                                 dnsFilters: dnsFiltersService,
-                                 productInfo: productInfo,
-                                 antibanner: antibanner,
-                                 requestsService: HttpRequestService(),
-                                 keyChainService: keyChainService,
-                                 safariService: safariService)
+        webReporter = ActionWebReporter(productInfo: productInfo,
+                                    antibanner: antibanner,
+                                    complexProtection: complexProtection,
+                                    dnsProviders: dnsProviders,
+                                    configuration: configuration,
+                                    dnsFilters: dnsFiltersService)
         
         super.init(coder: coder)
     }
@@ -140,52 +133,73 @@ class ActionViewController: UIViewController {
         guard let item: NSExtensionItem = self.extensionContext?.inputItems.first as? NSExtensionItem else { return }
         guard let itemProvider: NSItemProvider = item.attachments?.first else { return }
         
-        if itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypePropertyList)) {
-            itemProvider .loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) {[weak self] (results, error) in
-                guard let sSelf = self else { return }
-                guard let dictResult = results as? NSDictionary else { return }
-                guard let theDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary else { return }
-                if let urlString = theDict["urlString"] as? String {
-                    sSelf.url = URL(string: urlString)
+        if !itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypePropertyList)) {
+            DDLogError("(ActionViewController) Error  - itemProvider does not conform to type \(String(kUTTypePropertyList))")
+            stopProcessing(with: errorMessage)
+            return
+        }
+        
+        itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) {[weak self] (results, error) in
+            
+            var succeed = false
+            
+            defer {
+                if !succeed {
+                    self?.stopProcessing(with: errorMessage)
                 }
+            }
+            
+            guard let self = self else { return }
+            
+            guard let dictResult = results as? Dictionary<String, Any> else {
+                DDLogError("(ActionViewController) Error - result dict incorrect. Results: \(results.debugDescription )")
+                return
+            }
+            
+            guard let theDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? Dictionary<String, Any> else {
+                DDLogError("(ActionViewController) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
+                return
+            }
+            
+            if let urlString = theDict["urlString"] as? String {
+                self.url = URL(string: urlString)
+            }
+            
+            self.host = self.url?.hostWithPort()
+            
+            if let supported = theDict["injectScriptSupported"] as? Int {
+                self.injectScriptSupported = supported == 0 ? false : true
+            }
+            
+            if error != nil {
+                DDLogError("(ActionViewController) Error of obtaining page url from Safari:\(error?.localizedDescription ?? "nil")" )
+            } else if self.host?.isEmpty ?? true || self.host == nil {
+                DDLogError("(ActionViewController) Error of obtaining page url from Safari: url is empty.")
+                errorMessage = ACLocalizedString("hostname_obtaining_error", "(Action Extension - ActionViewController) Can't obtain hostname when starting.")
+            } else {
                 
-                sSelf.host = sSelf.url?.hostWithPort()
-                
-                if let supported = theDict["injectScriptSupported"] as? Int {
-                    sSelf.injectScriptSupported = supported == 0 ? false : true
-                }
+                let error = self.prepareDataModel()
                 
                 if error != nil {
-                    DDLogError("(ActionViewController) Error of obtaining page url from Safari:\(String(describing: error?.localizedDescription))" )
-                } else if sSelf.host?.isEmpty ?? true || sSelf.host == nil {
-                    DDLogError("(ActionViewController) Error of obtaining page url from Safari: url is empty.")
-                    errorMessage = ACLocalizedString("hostname_obtaining_error", "(Action Extension - ActionViewController) Can't obtain hostname when starting.")
+                    DDLogError("(ActionViewController) can not prepare data model. \(error!.localizedDescription)")
+                    if error?.code == self.AEActionErrorNoDb {
+                        errorMessage = error?.localizedDescription ?? ""
+                    }
                 } else {
+                    succeed = true
                     
-                    let error = sSelf.prepareDataModel()
-                    
-                    if error != nil {
-                        if error?.code == sSelf.AEActionErrorNoDb {
-                            errorMessage = error?.localizedDescription ?? ""
-                        }
-                    } else {
-                        sSelf.antibannerController.onReady { (antibanner) in
-                            // Add observers for application notifications
-                            sSelf.addObservers()
-                            
-                            let formattedString = String(format: "%@://%@/favicon.ico", sSelf.url?.scheme ?? "", sSelf.url?.hostWithPort() ?? "")
-                            sSelf.iconUrl = URL(string: formattedString)
-                            
-                            sSelf.startProcessing()
-                        }
+                    self.antibannerController.onReady { (antibanner) in
+                        // Add observers for application notifications
+                        self.addObservers()
+                        
+                        let formattedString = String(format: "%@://%@/favicon.ico", self.url?.scheme ?? "", self.url?.hostWithPort() ?? "")
+                        self.iconUrl = URL(string: formattedString)
+                        
+                        self.startProcessing()
                     }
                 }
-                //done on error
-                sSelf.stopProcessing(with: errorMessage)
             }
         }
-        //done on error
-        stopProcessing(with: errorMessage)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -201,7 +215,7 @@ class ActionViewController: UIViewController {
             mainVC.resources = sharedResources
             mainVC.safariService = safariService
             mainVC.contentBlockerService = contentBlockerService
-            mainVC.support = support
+            mainVC.webReporter = webReporter
             mainVC.domainName = host
             mainVC.iconUrl = iconUrl
             mainVC.domainEnabled = enabled

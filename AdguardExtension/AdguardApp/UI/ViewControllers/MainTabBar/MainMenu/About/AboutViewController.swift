@@ -42,8 +42,8 @@ class AboutViewController: UIViewController {
 
     // MARK: - Actions
     
-    @IBAction func discussAdguardTapped(_ sender: UIButton) {
-        UIApplication.shared.openAdguardUrl(action: "discuss", from: "about", buildVersion: productInfo.buildVersion())
+    @IBAction func moreInfoTapped(_ sender: UIButton) {
+        UIApplication.shared.openAdguardUrl(action: "more_info", from: "about", buildVersion: productInfo.buildVersion())
     }
     
     @IBAction func readMoreTapped(_ sender: UIButton) {

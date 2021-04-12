@@ -124,14 +124,14 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Discuss AdGuard">
+                                <state key="normal" title="More info">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <action selector="discussAdguardTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="mMZ-RS-4K9"/>
+                                    <action selector="moreInfoTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="w90-1L-GPs"/>
                                 </connections>
                             </button>
                         </subviews>
