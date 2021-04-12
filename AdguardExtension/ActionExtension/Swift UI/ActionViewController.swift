@@ -151,12 +151,12 @@ class ActionViewController: UIViewController {
             
             guard let self = self else { return }
             
-            guard let dictResult = results as? NSDictionary else {
+            guard let dictResult = results as? Dictionary<String, Any> else {
                 DDLogError("(ActionViewController) Error - result dict incorrect. Results: \(results.debugDescription )")
                 return
             }
             
-            guard let theDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary else {
+            guard let theDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? Dictionary<String, Any> else {
                 DDLogError("(ActionViewController) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
                 return
             }
