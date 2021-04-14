@@ -24,13 +24,15 @@ class ContentBlockerTest: XCTestCase {
     var safari: SafariServiceMock!
     var contentBlocker: ContentBlockerService!
     var antibanner: AntibannerMock!
+    var filtersStorage: FiltersStorageMock!
     
     override func setUp() {
         resources = SharedResourcesMock()
         safari = SafariServiceMock()
         antibanner = AntibannerMock()
+        filtersStorage = FiltersStorageMock()
         
-        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner, safariProtection: SafariProtectionService(resources: resources), filtersStorage: FiltersStorageMock())
+        contentBlocker = ContentBlockerService(resources: resources, safariService: safari, antibanner: antibanner, safariProtection: SafariProtectionService(resources: resources), filtersStorage: filtersStorage)
     }
 
     override func tearDown() {
@@ -58,8 +60,14 @@ class ContentBlockerTest: XCTestCase {
         
         XCTAssertNil(contentBlocker.replaceUserFilter([]))
         
-        XCTAssertTrue(antibanner.import(rules, filterId: ASDF_ENGLISH_FILTER_ID as NSNumber))
-        XCTAssertEqual(antibanner.activeRules(forFilter: ASDF_ENGLISH_FILTER_ID as NSNumber), rules)
+        let rulesTexts = rules.map({ (r) -> String in
+            let rule: ASDFilterRule = r
+            let affinity = rule.affinity == nil ? nil : Affinity(rawValue: rule.affinity!.uint8Value)
+            return AffinityRulesParser.ruleWithAffinity(rule.ruleText, affinity: affinity)
+        })
+        
+        let filterText = rulesTexts.joined(separator: "\n")
+        filtersStorage.filters = [Int(ASDF_ENGLISH_FILTER_ID): filterText]
         
         let expectation = XCTestExpectation(description: "reload jsons")
         
@@ -67,9 +75,9 @@ class ContentBlockerTest: XCTestCase {
             XCTAssertNil(error)
             
             let dataGeneral = self.safari.jsons[ContentBlockerType.general]
-            let jsonString = String(data: dataGeneral!, encoding:.utf8)
+            let jsonString = String(data: dataGeneral ?? Data(), encoding:.utf8)
             let dataOther = self.safari.jsons[ContentBlockerType.other]
-            let jsonStringOther = String(data: dataOther!, encoding:.utf8)
+            let jsonStringOther = String(data: dataOther ?? Data(), encoding:.utf8)
             
             XCTAssertEqual(jsonString, expectedJsonGeneral)
             XCTAssertEqual(jsonStringOther, expectedJsonOther)

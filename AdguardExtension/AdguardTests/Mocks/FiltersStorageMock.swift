@@ -19,6 +19,9 @@
 import Foundation
 
 class FiltersStorageMock: FiltersStorageProtocol {
+    
+    var filters: [Int: String]?
+    
     func updateFilter(identifier: Int, completion: @escaping (Error?) -> Void) {
             
     }
@@ -28,7 +31,7 @@ class FiltersStorageMock: FiltersStorageProtocol {
     }
     
     func getFilters(identifiers: [Int]) -> [Int : String] {
-        return [:]
+        return filters ?? [:]
     }
     
     func saveFilter(identifier: Int, content: String) -> Error? {

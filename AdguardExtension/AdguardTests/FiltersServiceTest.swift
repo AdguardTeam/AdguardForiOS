@@ -31,8 +31,10 @@ class FiltersServiceTest: XCTestCase {
         let antibannerController = AntibannerControllerMock(antibanner)
         let contentBlocker = ContentBlockerServiceMock()
         let configuration = ConfigurationServiceMock()
+        let httpRequestService = HttpRequestServiceMock()
+        let requestSender = httpRequestService.requestSender as! RequestSenderMock
         
-        let service = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: HttpRequestServiceMock(), filtersStorage: FiltersStorageMock())
+        let service = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: httpRequestService, filtersStorage: FiltersStorageMock())
         
         var groupMetas = [ASDFilterGroup]()
         
@@ -61,7 +63,7 @@ class FiltersServiceTest: XCTestCase {
         
         antibanner.storedGroups = groupMetas
         antibanner.storedFilters = filterMetas
-        antibanner.metadata = metadata
+        requestSender.result = metadata
         
         let expectation = XCTestExpectation(description: "load filters")
         service.load(refresh: false) {

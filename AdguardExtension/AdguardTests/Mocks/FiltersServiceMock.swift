@@ -20,6 +20,7 @@ import Foundation
 
 class FiltersServiceMock: FiltersServiceProtocol {
     var updateNotification: Notification.Name = Notification.Name("updateNotification")
+    var updateStarted = false
     
     var groups: [Group] = []
     
@@ -61,6 +62,7 @@ class FiltersServiceMock: FiltersServiceProtocol {
     }
     
     func load(refresh: Bool, _ completion: @escaping () -> Void) {
+        updateStarted = true
     }
     
     func reset() {

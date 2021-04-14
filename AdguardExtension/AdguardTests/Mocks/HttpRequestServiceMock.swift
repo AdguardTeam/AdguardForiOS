@@ -23,7 +23,20 @@ class HttpRequestServiceMock: HttpRequestServiceProtocol {
 }
 
 class RequestSenderMock: RequestSenderProtocol {
+    
+    var result: Any?
+    
     func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
-        
+        DispatchQueue(label: "").async {
+            if let typedResult = self.result as? Parser.Model {
+                completionHandler(.success(typedResult))
+            }
+            else {
+                completionHandler(.error(RequestSenderMockError()))
+            }
+        }
     }
+}
+
+class RequestSenderMockError : Error {
 }

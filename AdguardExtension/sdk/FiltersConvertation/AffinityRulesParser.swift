@@ -89,7 +89,7 @@ class AffinityRulesParser: NSObject {
         if affinity.contains(.socialWidgetsAndAnnoyances) { affinityValues.append("social") }
         if affinity.rawValue == 0 { affinityValues.append("all") }
         
-        return "!#safari_cb_affinity(\(affinityValues.joined(separator: ","))\n\(rule)\n!#safari_cb_affinity"
+        return "!#safari_cb_affinity(\(affinityValues.joined(separator: ",")))\n\(rule)\n!#safari_cb_affinity"
     }
     
     // MARK: - private methods

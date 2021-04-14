@@ -148,11 +148,6 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
         return true
     }
     
-    func startUpdatingForced(_ forced: Bool, interactive: Bool) -> Bool {
-        updateStarted = true
-        return true
-    }
-    
     func repairUpdateStateForBackground() {
         
     }

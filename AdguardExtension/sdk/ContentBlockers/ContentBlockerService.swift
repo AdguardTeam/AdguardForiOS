@@ -331,14 +331,20 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         let converted = converter.convertFilters(filters, allowlist: allowlist, blocklist: blocklist, invert: inverted)
         
         let group = DispatchGroup()
-        for filter in converted ?? [] {
-            guard let data = filter.jsonString?.data(using: .utf8) else {
-                DDLogError("convertRulesAndInvalidateSafari - can not get filter data for filter")
-                continue
+        for type in ContentBlockerType.allCases {
+            let filter = converted?.first { $0.type == type }
+            
+            let data: Data
+            if filter == nil {
+                data = Data()
             }
-            safariService.save(json: data, type: filter.type)
+            else {
+                data = (filter?.jsonString ?? "" ).data(using: .utf8) ?? Data()
+            }
+            
+            safariService.save(json: data, type: type)
             group.enter()
-            safariService.invalidateBlockingJson(type: filter.type) { (error) in
+            safariService.invalidateBlockingJson(type: type) { (error) in
                 if error != nil {
                     DDLogError("Invalidate Saferi Error: \(error!)")
                     resultError = error
