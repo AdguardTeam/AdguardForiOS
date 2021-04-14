@@ -120,6 +120,7 @@ class UpstreamsController: BottomAlertController {
         default:
             break
         }
+        upstreamsTextField.placeholder = String.localizedString("upstreams_custom_address_description")
     }
     
     private func prepareTextFieldDescription() {
