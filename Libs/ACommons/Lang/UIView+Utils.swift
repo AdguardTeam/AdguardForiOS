@@ -43,26 +43,26 @@ extension UIView {
         }
     }
     
-    func fadeIn(_ duration: TimeInterval? = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
+    func fadeIn(_ duration: TimeInterval = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
         self.isHidden = false
-        UIView.animate(withDuration: duration!,
+        UIView.animate(withDuration: duration,
                        delay: delay,
                        options: [.curveEaseIn],
                        animations: { self.alpha = 1 },
-                       completion: { (value: Bool) in
-                          if let complete = onCompletion { complete() }
+                       completion: { _ in
+                            onCompletion?()
                        }
         )
     }
 
-    func fadeOut(_ duration: TimeInterval? = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: duration!,
+    func fadeOut(_ duration: TimeInterval = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: duration,
                        delay: delay,
                        options: [.beginFromCurrentState, .curveEaseIn],
                        animations: { self.alpha = 0 },
-                       completion: { (value: Bool) in
+                       completion: { _ in
                            self.isHidden = true
-                           if let complete = onCompletion { complete() }
+                           onCompletion?()
                        }
         )
     }

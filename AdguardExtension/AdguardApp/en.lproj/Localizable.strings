@@ -70,6 +70,9 @@
 /* (NativeImplementationView) Format for DNS server %1$@ stands for DNS provider name, %2$@ stands for protocol name, i.e AdGuard DNS (regular) */
 "dns_server_info_format" = "%1$@ (%2$@)";
 
+/* (ContentBlockersNoteView) Title for view, when some content blockers are disabled. <u style=color:%@> It is a color for 'Fix it'*/
+"disabled_content_blockers_note" = "Some content blockers are disabled. <u style=color:%@>Fix it</u>";
+
 /* (StatisticsCollectionViewCell) Statisctics title */
 "statistics_title" = "Statistics";
 

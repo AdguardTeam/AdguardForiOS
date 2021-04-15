@@ -1040,7 +1040,7 @@
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="OjK-AE-DPG" secondAttribute="bottom" id="GKw-JZ-IeP"/>
                             <constraint firstItem="OjK-AE-DPG" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" id="K88-5I-D5J"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="b38-gh-HpL" secondAttribute="bottom" constant="116" id="XIk-Xj-Fv7">
-                                <variation key="heightClass=regular-widthClass=regular" constant="162"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="182"/>
                             </constraint>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="kec-6l-uNY"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="pcA-d3-Z5F"/>

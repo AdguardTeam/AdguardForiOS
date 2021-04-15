@@ -24,6 +24,14 @@ final class MainPageViewController: PullableContainerController {
     
     @IBOutlet weak var chooseStatisticsDateTypeButton: UIButton!
     
+    private lazy var contentBlockersView: ContentBlockersNoteView = {
+        let view = ContentBlockersNoteView()
+        view.onViewTapped = { [weak self] in
+            self?.showContentBlockersHelperController()
+        }
+        return view
+    }()
+    
     // MARK: - Private properties
     
     /* Services */
@@ -33,6 +41,7 @@ final class MainPageViewController: PullableContainerController {
     /* Models */
     private let model: MainPageModelProtocol
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
+    private let contentBlockersModel: ContentBlockersStateModelProtocol
     
     /* Helper variables */
     
@@ -40,9 +49,11 @@ final class MainPageViewController: PullableContainerController {
     
     required init?(coder: NSCoder) {
         model = MainPageModel(resources: resources, configuration: configuration)
+        contentBlockersModel = ContentBlockersStateModel(configuration: configuration)
         super.init(coder: coder)
         
         (model as! MainPageModel).delegate = self
+        (contentBlockersModel as! ContentBlockersStateModel).delegate = self
     }
     
     override func viewDidLoad() {
@@ -53,6 +64,7 @@ final class MainPageViewController: PullableContainerController {
         statisticsModel.observers.append(self)
         setStatisticsDateButtonTitle()
         chooseStatisticsDateTypeButton.isHidden = !model.shouldShowDateTypePicker
+        contentBlockersStateChanged()
     }
     
     // MARK: - Actions
@@ -95,6 +107,32 @@ extension MainPageViewController: StatisticsModelObserver {
     }
 }
 
+// MARK: - MainPageViewController + ContentBlockersStateModelDelegate
+
+extension MainPageViewController: ContentBlockersStateModelDelegate {
+    func contentBlockersStateChanged() {
+        if contentBlockersModel.shouldShowContentBlockersView {
+            showContentBlockersView()
+        } else {
+            contentBlockersView.dismiss()
+        }
+    }
+    
+    private func showContentBlockersView() {
+        contentBlockersView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(contentBlockersView, belowSubview: pullableView)
+        
+        contentBlockersView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: isIpadTrait ? -182.0 : -116.0).isActive = true
+        if isIpadTrait {
+            contentBlockersView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            contentBlockersView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        } else {
+            contentBlockersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0).isActive = true
+            contentBlockersView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0).isActive = true
+        }
+    }
+}
+
 // MARK: - MainPageViewController + UIGestureRecognizerDelegate
 
 extension MainPageViewController {
@@ -112,5 +150,29 @@ extension MainPageViewController {
             collectionView.isScrollEnabled = true
         }
         return false
+    }
+}
+
+// MARK: - MainPageViewController + ShowContentBlockersHelperController
+
+fileprivate extension UIViewController {
+    func showContentBlockersHelperController() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        guard let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController,
+              let controller = storyboard.instantiateViewController(withIdentifier: "OnboardingController") as? OnboardingController else {
+            return
+        }
+        navController.viewControllers = [controller]
+        controller.delegate = self as? OnboardingControllerDelegate
+        controller.needsShowingPremium = false
+        present(navController, animated: true)
+    }
+}
+
+// MARK: - MainPageViewController + OnboardingControllerDelegate
+
+extension MainPageViewController: OnboardingControllerDelegate {
+    func onboardingDidFinish() {
+        // TODO: - Process it
     }
 }
