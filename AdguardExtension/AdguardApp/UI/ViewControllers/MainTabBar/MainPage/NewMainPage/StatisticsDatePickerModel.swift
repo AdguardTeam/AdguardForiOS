@@ -18,19 +18,19 @@
 
 import Foundation
 
-protocol MainPageModelDelegate: AnyObject {
+protocol StatisticsDatePickerModelDelegate: AnyObject {
     func shouldShowDateTypePickerChanged()
 }
 
-protocol MainPageModelProtocol: AnyObject {
+protocol StatisticsDatePickerModelProtocol: AnyObject {
     var shouldShowDateTypePicker: Bool { get }
 }
 
-final class MainPageModel: MainPageModelProtocol {
+final class StatisticsDatePickerModel: StatisticsDatePickerModelProtocol {
     
     // MARK: - Public properties
     
-    weak var delegate: MainPageModelDelegate?
+    weak var delegate: StatisticsDatePickerModelDelegate?
     
     private(set) var shouldShowDateTypePicker: Bool = false {
         didSet {
@@ -48,7 +48,6 @@ final class MainPageModel: MainPageModelProtocol {
     
     /* Observers */
     private var dnsImplementationObserver: NotificationToken?
-    private var systemProtectionObserver: NotificationToken?
     private var proStatusObserver: NSKeyValueObservation?
     
     init(resources: AESharedResourcesProtocol, configuration: ConfigurationService) {
@@ -67,15 +66,10 @@ final class MainPageModel: MainPageModelProtocol {
             self?.processShouldShowDateTypePicker()
         }
         
-        systemProtectionObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
-            DDLogDebug("(MainPageModel) - Received system protection change notification")
-            self?.processShouldShowDateTypePicker()
-        }
-        
         proStatusObserver = configuration.observe(\.proStatus) { (_, _) in
             DDLogDebug("(MainPageModel) - Received Pro status change notification")
             DispatchQueue.main.async { [weak self] in
-                
+                self?.processShouldShowDateTypePicker()
             }
         }
     }

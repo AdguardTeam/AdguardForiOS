@@ -39,7 +39,7 @@ final class MainPageViewController: PullableContainerController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
     /* Models */
-    private let model: MainPageModelProtocol
+    private let datePickerModel: StatisticsDatePickerModelProtocol
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
     private let contentBlockersModel: ContentBlockersStateModelProtocol
     
@@ -48,11 +48,11 @@ final class MainPageViewController: PullableContainerController {
     // MARK: - ViewController lifecycle
     
     required init?(coder: NSCoder) {
-        model = MainPageModel(resources: resources, configuration: configuration)
+        datePickerModel = StatisticsDatePickerModel(resources: resources, configuration: configuration)
         contentBlockersModel = ContentBlockersStateModel(configuration: configuration)
         super.init(coder: coder)
         
-        (model as! MainPageModel).delegate = self
+        (datePickerModel as! StatisticsDatePickerModel).delegate = self
         (contentBlockersModel as! ContentBlockersStateModel).delegate = self
     }
     
@@ -63,7 +63,7 @@ final class MainPageViewController: PullableContainerController {
         
         statisticsModel.observers.append(self)
         setStatisticsDateButtonTitle()
-        chooseStatisticsDateTypeButton.isHidden = !model.shouldShowDateTypePicker
+        chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
         contentBlockersStateChanged()
     }
     
@@ -83,11 +83,11 @@ final class MainPageViewController: PullableContainerController {
     }
 }
 
-// MARK: - MainPageViewController + MainPageModelDelegate
+// MARK: - MainPageViewController + StatisticsDatePickerModelDelegate
 
-extension MainPageViewController: MainPageModelDelegate {
+extension MainPageViewController: StatisticsDatePickerModelDelegate {
     func shouldShowDateTypePickerChanged() {
-        chooseStatisticsDateTypeButton.isHidden = !model.shouldShowDateTypePicker
+        chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
     }
 }
 
