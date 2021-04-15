@@ -19,7 +19,6 @@
 import Foundation
 
 enum ChartDateType: Int, CaseIterable {
-    typealias RawValue = Int
     
     case alltime = 0, month, week, day, today
     
@@ -87,9 +86,5 @@ enum ChartDateType: Int, CaseIterable {
         case .alltime:
             return String.localizedString("chart_alltime")
         }
-    }
-    
-    private func now() -> Date {
-        return Date()
     }
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="StoryCollectionViewCell" customModule="Adguard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="449" height="238"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="449" height="238"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yMQ-Wh-VNX">
+                        <rect key="frame" x="0.0" y="44" width="449" height="160"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jH-Fa-JWG">
+                        <rect key="frame" x="16" y="60" width="417" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                        </variation>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ad_info" translatesAutoresizingMaskIntoConstraints="NO" id="Wb7-rY-qq9">
+                        <rect key="frame" x="425" y="180" width="16" height="16"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="Uf3-2E-wJx">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="16" id="Vel-Od-tLV">
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="yMQ-Wh-VNX" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="9qI-4c-XhX"/>
+                <constraint firstItem="3jH-Fa-JWG" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="16" id="HiL-Ua-luI"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="3jH-Fa-JWG" secondAttribute="trailing" constant="16" id="QjS-VL-72s"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="yMQ-Wh-VNX" secondAttribute="bottom" id="WZp-9R-zAO"/>
+                <constraint firstItem="Wb7-rY-qq9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3jH-Fa-JWG" secondAttribute="bottom" constant="8" id="YQx-aF-uqJ"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="yMQ-Wh-VNX" secondAttribute="trailing" id="dcY-0o-hdG"/>
+                <constraint firstItem="3jH-Fa-JWG" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" constant="16" id="faM-YY-Lah"/>
+                <constraint firstItem="yMQ-Wh-VNX" firstAttribute="top" secondItem="ZTg-uK-7eu" secondAttribute="top" id="jdu-tb-6y9"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="Wb7-rY-qq9" secondAttribute="trailing" constant="8" id="qcx-o9-5MA"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="Wb7-rY-qq9" secondAttribute="bottom" constant="8" id="sBe-OD-Zc8"/>
+            </constraints>
+            <size key="customSize" width="805" height="559"/>
+            <connections>
+                <outlet property="backgroundImageView" destination="yMQ-Wh-VNX" id="q8Q-bx-GvJ"/>
+                <outlet property="storyShownImageView" destination="Wb7-rY-qq9" id="JK2-Oo-fWq"/>
+                <outlet property="storyTitleLabel" destination="3jH-Fa-JWG" id="CDb-kt-87M"/>
+            </connections>
+            <point key="canvasLocation" x="640" y="280"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ad_info" width="14" height="14"/>
+    </resources>
+</document>

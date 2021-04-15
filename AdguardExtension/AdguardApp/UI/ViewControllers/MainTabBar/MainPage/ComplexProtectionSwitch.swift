@@ -22,7 +22,7 @@ protocol ComplexSwitchDelegate {
     func beginTracking()
 }
 
-class ComplexProtectionSwitch: UIControl {
+final class ComplexProtectionSwitch: UIControl {
     
     private(set) var isOn = false
     
@@ -96,9 +96,7 @@ class ComplexProtectionSwitch: UIControl {
     
     func setOn(on: Bool){
         isOn = on
-        animate(on: on) {[weak self] in
-            
-        }
+        animate(on: on)
     }
     
     // MARK: - UIControl Delegate method
@@ -226,10 +224,10 @@ class ComplexProtectionSwitch: UIControl {
     /**
      Animates switch position
      */
-    private func animate(on:Bool, completion:@escaping () -> ()) {
+    private func animate(on:Bool, completion: (() -> Void)? = nil) {
         
         if isAnimating && isOn == on {
-            completion()
+            completion?()
             return
         }
         
@@ -241,7 +239,7 @@ class ComplexProtectionSwitch: UIControl {
         }, completion: {[weak self] _ in
             guard let self = self else { return }
             self.isAnimating = false
-            completion()
+            completion?()
         })
     }
     

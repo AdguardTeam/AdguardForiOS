@@ -71,9 +71,7 @@ class ActivityViewController: UITableViewController {
     
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
-    private var resetStatisticsToken: NotificationToken?
     private var advancedModeToken: NSKeyValueObservation?
-    private var resetSettingsToken: NotificationToken?
     
     // MARK: - Public variables
     
@@ -85,7 +83,7 @@ class ActivityViewController: UITableViewController {
     private var titleInNavBarIsShown = false
     
     private let activityModel: ActivityStatisticsModelProtocol
-    private var statisticsModel: ChartViewModelProtocol = ServiceLocator.shared.getService()!
+    private var statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
     
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -109,12 +107,12 @@ class ActivityViewController: UITableViewController {
         super.viewDidLoad()
         
         requestsModel?.delegate = self
-        statisticsModel.chartPointsChangedDelegates.append(self)
+        statisticsModel.observers.append(self)
         
         activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
-        dateTypeChanged(dateType: resources.activityStatisticsType)
+        activityPageDateTypeChanged()
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
     }
@@ -162,7 +160,9 @@ class ActivityViewController: UITableViewController {
     // MARK: - Actions
     
     @IBAction func changePeriodTypeAction(_ sender: UIButton) {
-        showChartDateTypeController()
+        presentChooseStatisticsDateAlert { [weak self] dateType in
+            self?.statisticsModel.activityPageDateType = dateType
+        }
     }
     
     @IBAction func infoAction(_ sender: UIButton) {
@@ -363,16 +363,6 @@ class ActivityViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    /**
-     Presents ChartDateTypeController
-     */
-    private func showChartDateTypeController(){
-        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
-        controller.delegate = self
-        present(controller, animated: true, completion: nil)
-    }
-    
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
@@ -399,14 +389,6 @@ class ActivityViewController: UITableViewController {
         
         advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
             self?.observeAdvancedMode()
-        }
-        
-        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
-        }
-        
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
         
         requestsModel?.recordsObserver = { [weak self] (records) in
@@ -463,10 +445,44 @@ class ActivityViewController: UITableViewController {
         set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
     }
     
+    private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
+        let companiesAreEmpty = companiesInfo.mostRequested.isEmpty
+        
+        mostActiveButton.alpha = companiesAreEmpty ? 0.5 : 1.0
+        mostActiveLabel.alpha = companiesAreEmpty ? 0.5 : 1.0
+        mostActiveCompany.alpha = companiesAreEmpty ? 0.5 : 1.0
+        rightArrowImageView.alpha = companiesAreEmpty ? 0.5 : 1.0
+        mostActiveButton.isEnabled = !companiesAreEmpty
+        mostActiveCompany.text = companiesAreEmpty ? String.localizedString("none_message") :  companiesInfo.mostRequested[0].key
+        
+        companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
+        mostRequestedCompanies = companiesInfo.mostRequested
+        companiesNumber = companiesInfo.companiesNumber
+    }
+    
     @objc func updateTableView(sender: UIRefreshControl) {
-        dateTypeChanged(dateType: resources.activityStatisticsType)
-        statisticsModel.obtainStatistics(true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
+        let dateType = statisticsModel.activityPageDateType
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        statisticsModel.updateStatistics(for: dateType) {
+            group.leave()
+        }
+        
+        var companiesInfo: CompaniesInfo?
+        group.enter()
+        activityModel.getCompanies(for: dateType) { info in
+            companiesInfo = info
+            group.leave()
+        }
+        requestsModel?.obtainRecords(for: dateType)
+        
+        group.notify(queue: .main) { [weak self] in
+            if let info = companiesInfo {
+                self?.processCompaniesInfo(info)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self?.refreshControl?.endRefreshing()
             }
         }
@@ -515,71 +531,31 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
     }
 }
 
-// MARK: - DateTypeChangedProtocol
-
-extension ActivityViewController: DateTypeChangedProtocol {
-    func dateTypeChanged(dateType: ChartDateType) {
-        resources.activityStatisticsType = dateType
-        changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
-        statisticsModel.chartDateTypeActivity = dateType
-        
-        activityModel.getCompanies(for: dateType) {[weak self] (info) in
-            self?.processCompaniesInfo(info)
-        }
-        requestsModel?.obtainRecords(for: dateType)
-    }
-    
-    private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
-        DispatchQueue.main.async {[weak self] in
-            if !companiesInfo.mostRequested.isEmpty {
-                self?.mostActiveButton.alpha = 1.0
-                self?.mostActiveLabel.alpha = 1.0
-                self?.mostActiveCompany.alpha = 1.0
-                self?.rightArrowImageView.alpha = 1.0
-                self?.mostActiveButton.isEnabled = true
-                let record = companiesInfo.mostRequested[0]
-                self?.mostActiveCompany.text = record.key
-            } else {
-                self?.mostActiveButton.alpha = 0.5
-                self?.mostActiveLabel.alpha = 0.5
-                self?.mostActiveCompany.alpha = 0.5
-                self?.rightArrowImageView.alpha = 0.5
-                self?.mostActiveButton.isEnabled = false
-                self?.mostActiveCompany.text = String.localizedString("none_message")
-            }
-            
-            self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
-            
-            self?.mostRequestedCompanies = companiesInfo.mostRequested
-            self?.companiesNumber = companiesInfo.companiesNumber
-        }
-    }
-}
-
 // MARK: - NumberOfRequestsChangedDelegate
 
-extension ActivityViewController: NumberOfRequestsChangedDelegate {
-    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
-        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
+extension ActivityViewController: StatisticsModelObserver {
+    func statisticsChanged() {
+        let statistics = statisticsModel.statistics(for: statisticsModel.activityPageDateType)
+        self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: statistics.allRequests))
+        self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: statistics.encryptedRequests))
+        self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: statistics.averageElapsedTimeMs))
     }
     
-    /**
-    Changes number of requests for all buttons
-    */
-    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else { return }
-            
-            let requestsNumberDefaults = self.resources.tempRequestsCount
-            let requestsNumber = requestsCount + requestsNumberDefaults
-            
-            let ecnryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
-            let ecnryptedNumber = encryptedCount + ecnryptedNumberDefaults
-            
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedNumber))
-            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+    func mainPageDateTypeChanged() {
+        // Unimplemented
+    }
+    
+    func activityPageDateTypeChanged() {
+        let dateType = statisticsModel.activityPageDateType
+        changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
+        statisticsChanged()
+        
+        activityModel.getCompanies(for: dateType) { [weak self] info in
+            DispatchQueue.main.async {
+                self?.processCompaniesInfo(info)
+            }
         }
+        requestsModel?.obtainRecords(for: dateType)
     }
 }
 

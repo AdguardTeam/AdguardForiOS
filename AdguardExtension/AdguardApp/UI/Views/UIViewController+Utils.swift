@@ -20,6 +20,36 @@ import Foundation
 
 extension UIViewController {
     
+    /* Presents Alert with provided title and message */
+    func presentSimpleAlert(title: String?, message: String?, onOkButtonTapped: (() -> Void)? = nil) {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: String.localizedString("common_action_ok"), style: .default) { _ in
+                onOkButtonTapped?()
+            }
+            alert.addAction(okAction)
+            
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    /* Presents date type picker */
+    func presentChooseStatisticsDateAlert(_ onDateTypePicked: @escaping (_ type: ChartDateType) -> Void) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
+        
+        ChartDateType.allCases.forEach { dateType in
+            let action = UIAlertAction(title: dateType.getDateTypeString(), style: .default) { _ in
+                onDateTypePicked(dateType)
+            }
+            alert.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("cancel_button_title"), style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     var ios14available: Bool {
         if #available(iOS 14.0, *) {
             return true

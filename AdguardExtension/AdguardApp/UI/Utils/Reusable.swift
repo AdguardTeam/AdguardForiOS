@@ -14,17 +14,14 @@
 
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
+ */
 
 import Foundation
 
-struct StoriesManager {
-    static func showStories<StoriesPresentor: UIViewController>(forVC vc: StoriesPresentor, fromCategory category: StoryCategory.CategoryType) where StoriesPresentor: StoriesPageViewControllerDelegate {
-        let stories = StoriesProvider.stories
-        let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startCategory: category)
-        storiesPageVC.storiesDelegate = vc
-        storiesPageVC.modalPresentationStyle = .fullScreen
-        vc.present(storiesPageVC, animated: true)
-    }
+protocol Reusable: AnyObject {
+    static var reuseIdentifier: String { get }
+}
+
+extension Reusable {
+    static var reuseIdentifier: String { return "\(self)" }
 }

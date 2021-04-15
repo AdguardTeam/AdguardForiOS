@@ -25,7 +25,12 @@ protocol StoryViewControllerDelegate: AnyObject {
 
 final class StoryViewController: UIViewController {
     
+    // MARK: - Public properties
+    
     weak var delegate: StoryViewControllerDelegate?
+    var category: StoryCategory.CategoryType { storyGroup.category.type }
+    
+    // MARK: - Private properties
     
     private let storyGroup: StoryGroup
     private var currentStoryIndex = 0
@@ -58,7 +63,7 @@ final class StoryViewController: UIViewController {
         return label
     }()
     
-    private lazy var imageView: ThemeableImageView = {
+    private let imageView: ThemeableImageView = {
         let imgView = ThemeableImageView()
         imgView.contentMode = .scaleAspectFit
         imgView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +108,7 @@ final class StoryViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.storyGroup = StoryGroup(category: StoryCategory(title: "", type: .dnsProtection, buttonColor: .clear, buttonFigureColor: .clear), storyTokens: [])
+        self.storyGroup = StoryGroup(category: StoryCategory(title: "", type: .dnsProtection, categoryImage: nil), storyTokens: [])
         super.init(coder: coder)
         setupUI()
     }

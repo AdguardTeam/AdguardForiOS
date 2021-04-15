@@ -18,16 +18,13 @@
 
 import UIKit
 
-struct Point: Equatable {
-    var x: CGFloat
-    var y: CGFloat
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
+final class ChartView: UIView {
+        
+    enum ChartRequestType {
+        case requests, encrypted
     }
-}
 
-class ChartView: UIView {
+    // MARK: - Public variables
     
     var isEnabled: Bool = true {
         didSet{
@@ -37,20 +34,38 @@ class ChartView: UIView {
     
     var activeChart: ChartRequestType = .requests {
         didSet {
-            drawChart()
+            if activeChart != oldValue {
+                drawChart()
+            }
         }
     }
     
-    var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
+    var chartPoints: StatisticsChartModel.Points = StatisticsChartModel.Points(requestsPoints: [], encryptedPoints: []) {
         didSet {
-            let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
-            let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
+            var maxXrequests: CGFloat = 0.0
+            var maxYrequests: CGFloat = 0.0
+            chartPoints.requestsPoints.forEach { point in
+                if point.x > maxXrequests {
+                    maxXrequests = point.x
+                }
+                if point.y > maxYrequests {
+                    maxYrequests = point.y
+                }
+            }
             
-            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0.0
-            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0.0
+            var maxXencrypted: CGFloat = 0.0
+            var maxYencrypted: CGFloat = 0.0
+            chartPoints.encryptedPoints.forEach { point in
+                if point.x > maxXrequests {
+                    maxXencrypted = point.x
+                }
+                if point.y > maxYrequests {
+                    maxYencrypted = point.y
+                }
+            }
             
-            maxXelement = max(maxXrequests, maxXblocked)
-            maxYelement = max(maxYrequests, maxYblocked)
+            maxXelement = max(maxXrequests, maxXencrypted)
+            maxYelement = max(maxYrequests, maxYencrypted)
             
             DispatchQueue.main.async {[weak self] in
                 self?.drawChart()
@@ -70,22 +85,22 @@ class ChartView: UIView {
         }
     }
     
+    /* UI elements */
     private var leftDateLabel = UILabel()
     private var rightDateLabel = UILabel()
     
     private var bottomBorderLabel = UILabel()
     private var topBorderLabel = UILabel()
     
-    private var requestsLineColor = UIColor(hexString: "67b279")
-    private var requestsShadowColor = UIColor(hexString: "67b279")
+    /* Colors */
+    private var requestsLineColor = UIColor.AdGuardColor.lightGreen1
+    private var requestsShadowColor = UIColor.AdGuardColor.lightGreen1
+    private var encryptedLineColor = UIColor.AdGuardColor.lightBlue
+    private var encryptedShadowColor = UIColor.AdGuardColor.lightBlue
+    private let gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    private let offColor = UIColor.AdGuardColor.lightGray3
     
-    private var encryptedLineColor = UIColor(hexString: "#677bb2")
-    private var encryptedShadowColor = UIColor(hexString: "677bb2")
-    
-    private var gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
-    
-    private let offColor = UIColor(hexString: "#888888")
-    
+    /* View configuration */
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2
     private var gridLineWidth: CGFloat = 2.0
@@ -129,7 +144,7 @@ class ChartView: UIView {
     
     private func enabledStateChanged() {
         let requestsColor = theme.grayTextColor
-        let encryptedColor = UIColor(hexString: "67b279")
+        let encryptedColor = UIColor.AdGuardColor.lightGreen1
         
         requestsLineColor = isEnabled ? requestsColor : offColor
         requestsShadowColor = isEnabled ? requestsColor : offColor
@@ -233,17 +248,17 @@ class ChartView: UIView {
         let requestLineLayer = CAShapeLayer()
         let encryptedLineLayer = CAShapeLayer()
         
-        var requestPoints = convertPoints(points: chartPoints.requests)
-        var encryptedPoints = convertPoints(points: chartPoints.encrypted)
+        var requestPoints = convertPoints(points: chartPoints.requestsPoints)
+        var encryptedPoints = convertPoints(points: chartPoints.encryptedPoints)
         
         if requestPoints.count < 3 {
             maxXelement = 10.0
-            requestPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+            requestPoints = convertPoints(points: [CGPoint(x: 0.0, y: 0.0), CGPoint(x: 10.0, y: 0.0)])
         }
         
         if encryptedPoints.count < 3 {
             maxXelement = 10.0
-            encryptedPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+            encryptedPoints = convertPoints(points: [CGPoint(x: 0.0, y: 0.0), CGPoint(x: 10.0, y: 0.0)])
         }
         
         guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
@@ -288,7 +303,7 @@ class ChartView: UIView {
         }
     }
     
-    private func convertPoints(points: [Point]) -> [CGPoint] {
+    private func convertPoints(points: [CGPoint]) -> [CGPoint] {
         let preparedPoints = preparePoints(points: points)
         var newPoints = [CGPoint]()
                 
@@ -309,15 +324,15 @@ class ChartView: UIView {
     }
     
     /* This function is needed to avoid points overlay */
-    private func preparePoints(points: [Point]) -> [Point] {
+    private func preparePoints(points: [CGPoint]) -> [CGPoint] {
         let minimumSpacing: CGFloat = 10.0
-        var newPoints = [Point]()
+        var newPoints = [CGPoint]()
         
         for point in points {
             let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
             let newX = (frame.width * ratioX)
             
-            var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
+            var lastPoint = newPoints.last ?? CGPoint(x: 0.0, y: 0.0)
             if  newX - lastPoint.x < minimumSpacing && points.last != point {
                 newPoints = newPoints.dropLast()
                 lastPoint.y = lastPoint.y + point.y
@@ -326,7 +341,7 @@ class ChartView: UIView {
                     maxYelement = lastPoint.y
                 }
             } else {
-                newPoints.append(Point(x: newX, y: point.y))
+                newPoints.append(CGPoint(x: newX, y: point.y))
             }
         }
         

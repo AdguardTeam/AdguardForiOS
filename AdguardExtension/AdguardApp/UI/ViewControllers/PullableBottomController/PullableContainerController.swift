@@ -27,10 +27,25 @@ class PullableContainerController: UIViewController {
         }
     }
     
+    /*
+     This constraint is used to make pullable view static when screen size changes
+     For example: iPad orientation change, app entering background, etc.
+     */
+    private lazy var topConstraint: NSLayoutConstraint = {
+        return pullableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: maxSpaceToTop)
+    }()
+    
     // MARK: - Public properties
     
     var contentController: PullableContentController!
     var maxSpaceToTop: CGFloat = 72.0
+    
+    /*
+     True if pullable view is in the lowest positiion
+     False if pullable view is in the highest position
+     Nil if pullable view is in the process of transition between states
+     */
+    private(set) var isCompact: Bool? = true
     
     // MARK: - Private properties
     
@@ -39,13 +54,6 @@ class PullableContainerController: UIViewController {
     
     /* Used to reveal current pullable view height */
     private var heightBeforePull: CGFloat = 0.0
-    
-    /*
-     True if pullable view is in the lowest positiion
-     False if pullable view is in the highest position
-     Nil if pullable view is in the process of transition between states
-     */
-    private var isCompact: Bool? = true
     
     /* Initial pullable view height. It will be taken from height constraint when it is set */
     private var pullableViewCompactHeight: CGFloat = 0.0
@@ -79,8 +87,8 @@ class PullableContainerController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
@@ -146,6 +154,7 @@ extension PullableContainerController {
     /* Adds pan gesture recognizer to pullable view */
     private func addPanGestureRecognizerToPullableView() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(processPanGesture(_:)))
+        panGesture.delegate = self
         pullableView.addGestureRecognizer(panGesture)
     }
     
@@ -177,6 +186,18 @@ extension PullableContainerController {
     @objc private func processPanGesture(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: view)
         let velocity = recognizer.velocity(in: view)
+        
+        // Return if view is already im compact state and user swipes down
+        if isCompact == true && velocity.y > 0 {
+            return
+        }
+        
+        // Return if view is already im full state and user swipes up
+        if isCompact == false && velocity.y <= 0 {
+            return
+        }
+        
+        topConstraint.isActive = false
         
         // User began to pull
         if recognizer.state == .began {
@@ -238,6 +259,7 @@ extension PullableContainerController {
             self?.pullableViewTapGesture.isEnabled = false
             self?.screenCoverViewTapGesture.isEnabled = true
             self?.screenCoverView.isUserInteractionEnabled = true
+            self?.topConstraint.isActive = true
             self?.contentController.parentViewDidTransitionToFullSize()
         }
     }
@@ -245,9 +267,10 @@ extension PullableContainerController {
     /* Animates view transition to compact height */
     private func hideFullView() {
         if isCompact == true { return }
-        pullableViewHeightConstraint.constant = pullableViewCompactHeight
         contentController.parentViewWillTransitionToCompactSize()
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState, .preferredFramesPerSecond60], animations: {[weak self] in
+            self?.pullableViewHeightConstraint.constant = self?.pullableViewCompactHeight ?? 100.0
+            self?.topConstraint.isActive = false
             self?.view.layoutIfNeeded()
             self?.screenCoverView.backgroundColor = .clear
         }) {[weak self] _ in
@@ -268,11 +291,20 @@ extension PullableContainerController {
     private func setupScreenCoverView() {
         screenCoverView.backgroundColor = .clear
         screenCoverView.translatesAutoresizingMaskIntoConstraints = false
+        screenCoverView.isUserInteractionEnabled = false
         view.insertSubview(screenCoverView, belowSubview: pullableView)
         
         screenCoverView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         screenCoverView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         screenCoverView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         screenCoverView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+}
+
+// MARK: - PullableContainerController + UIGestureRecognizerDelegate
+
+extension PullableContainerController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

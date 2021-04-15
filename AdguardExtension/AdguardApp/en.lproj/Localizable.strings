@@ -34,10 +34,19 @@
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Applying changes...";
 
-/* (MainPageController) Text for seconds units (ms) milliseconds */
+/* (StatisticsInfoView) Requests title */
+"requests_title" = "requests";
+
+/* (StatisticsInfoView) Encrypted title */
+"encrypted_title" = "encrypted";
+
+/* (StatisticsInfoView) Average time title */
+"average_time_title" = "avg. time";
+
+/* (StatisticsInfoView) Text for seconds units (ms) milliseconds */
 "ms_unit" = "%@ ms";
 
-/* (MainPageController) Text for seconds units (s) seconds */
+/* (StatisticsInfoView) Text for seconds units (s) seconds */
 "s_unit" = "%@ s";
 
 /* (MainPageController) Text for data units (M) Millions */
@@ -52,11 +61,17 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Native DNS is working";
+/* (NativeImplementationView) Native DNS is working title. <span style=color:%@> It is a color for 'is working' */
+"native_dns_working" = "Native DNS <span style=color:%@>is working</span>";
 
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Native DNS is not working";
+/* (NativeImplementationView) Native DNS is not working title. <span style=color:%@> It is a color for 'is not working' */
+"native_dns_not_working" = "Native DNS <span style=color:%@>is not working</span>";
+
+/* (NativeImplementationView) Format for DNS server %1$@ stands for DNS provider name, %2$@ stands for protocol name, i.e AdGuard DNS (regular) */
+"dns_server_info_format" = "%1$@ (%2$@)";
+
+/* (StatisticsCollectionViewCell) Statisctics title */
+"statistics_title" = "Statistics";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";

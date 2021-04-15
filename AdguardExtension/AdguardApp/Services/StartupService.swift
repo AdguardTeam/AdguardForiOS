@@ -131,8 +131,8 @@ class StartupService : NSObject{
         let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders)
         locator.addService(service: migrationService)
         
-        let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
-        locator.addService(service: chartViewModel)
+        let statisticsModel: StatisticsModelProtocol = StatisticsModel(dnsStatistics: dnsStatisticsService, resources: sharedResources)
+        locator.addService(service: statisticsModel)
         
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService)
         locator.addService(service: setappService)

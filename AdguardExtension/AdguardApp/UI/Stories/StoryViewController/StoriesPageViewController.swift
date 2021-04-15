@@ -18,14 +18,24 @@
 
 import UIKit
 
+protocol StoriesPageViewControllerDelegate: AnyObject {
+    func allStoriesInCategoryWereWatched(_ category: StoryCategory.CategoryType)
+}
+
 final class StoriesPageViewController: UIPageViewController {
-        
+    
+    // MARK: - Public properties
+    
+    weak var storiesDelegate: StoriesPageViewControllerDelegate?
+    
+    // MARK: - Private properties
+    
     private let storiesGroups: [StoryGroup]
     private let startCategory: StoryCategory.CategoryType
     private lazy var groupIndex: Int = { storiesGroups.firstIndex(where: { startCategory == $0.category.type }) ?? 0 }()
     
     // UI elements
-    private lazy var crossButton: UIButton = {
+    private let crossButton: UIButton = {
         let button = UIButton()
         let crossImage = UIImage(named: "cross")
         button.setBackgroundImage(crossImage, for: .normal)
@@ -46,6 +56,7 @@ final class StoriesPageViewController: UIPageViewController {
     
     // Services
     private let theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private let resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     
     // Observers
     private var themeNotificationToken: NotificationToken?
@@ -158,7 +169,16 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
         }
     }
     
+    /* Delegate method is called when stories in category's ended up */
     func nextStoriesAreOver() {
+        if let currentViewController = viewControllers?.first as? StoryViewController {
+            let category = currentViewController.category
+            if !resources.watchedStoriesCategories.contains(category) {
+                resources.watchedStoriesCategories.insert(category)
+                storiesDelegate?.allStoriesInCategoryWereWatched(category)
+            }
+        }
+        
         if let next = nextStoryVC {
             view.isUserInteractionEnabled = false
             setViewControllers([next], direction: .forward, animated: true) { [weak self] _ in

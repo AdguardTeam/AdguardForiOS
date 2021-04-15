@@ -19,25 +19,32 @@
 import UIKit
 
 class PullableContentController: UIViewController {
+    
+    /*
+     True if pullable view is in the lowest positiion
+     False if pullable view is in the highest position
+     Nil if pullable view is in the process of transition between states
+     */
+    private(set) var isCompact: Bool? = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     func parentViewWillTransitionToCompactSize() {
-        
+        isCompact = nil
     }
     
     func parentViewDidTransitionToCompactSize() {
-        
+        isCompact = true
     }
     
     func parentViewWillTransitionToFullSize() {
-        
+        isCompact = nil
     }
     
     func parentViewDidTransitionToFullSize() {
-        
+        isCompact = false
     }
     
     func parentViewIsTransitioning(percent: CGFloat) {

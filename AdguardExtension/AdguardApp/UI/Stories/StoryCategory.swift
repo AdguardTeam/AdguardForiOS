@@ -20,7 +20,7 @@ import Foundation
 
 struct StoryCategory: Decodable {
     
-    enum CategoryType: String, CaseIterable {
+    enum CategoryType: String, CaseIterable, Codable {
         case whatsNew = "WhatsNew"
         case dnsProtection = "DnsProtection"
         case vpnProtection = "VpnProtection"
@@ -31,28 +31,24 @@ struct StoryCategory: Decodable {
     
     let title: String
     let type: CategoryType
-    let buttonColor: UIColor
-    let buttonFigureColor: UIColor
+    let categoryImage: UIImage?
     
     init(type: CategoryType) {
         self.type = type
         self.title = ""
-        self.buttonColor = .clear
-        self.buttonFigureColor = .clear
+        self.categoryImage = nil
     }
     
-    init(title: String, type: StoryCategory.CategoryType, buttonColor: UIColor, buttonFigureColor: UIColor) {
+    init(title: String, type: StoryCategory.CategoryType, categoryImage: UIImage?) {
         self.title = title
         self.type = type
-        self.buttonColor = buttonColor
-        self.buttonFigureColor = buttonFigureColor
+        self.categoryImage = categoryImage
     }
     
     private enum CodingKeys: String, CodingKey {
         case type
         case title
-        case buttonColor = "button_background_color"
-        case buttonFigureColor = "button_figure_color"
+        case categoryImage = "category_image"
     }
     
     init(from decoder: Decoder) throws {
@@ -60,12 +56,35 @@ struct StoryCategory: Decodable {
         
         let typeKey = try container.decode(String.self, forKey: .type)
         let titleKey = try container.decode(String.self, forKey: .title)
-        let buttonBackgroundColorHex = try container.decode(String.self, forKey: .buttonColor)
-        let buttonFigureColorHex = try container.decode(String.self, forKey: .buttonFigureColor)
+        let imageKey = try container.decode(String.self, forKey: .categoryImage)
         
         self.type = CategoryType(rawValue: typeKey)!
         self.title = String.localizedString(titleKey)
-        self.buttonColor = UIColor(hexString: buttonBackgroundColorHex)
-        self.buttonFigureColor = UIColor(hexString: buttonFigureColorHex)
+        self.categoryImage = UIImage(named: imageKey)
+    }
+}
+
+// MARK: - AESharedResourcesProtocol + watchedStoriesCategories
+
+fileprivate extension AESharedResourcesProtocol {
+    var watchedStoriesCategoriesKey: String { "watchedStoriesCategoriesKey" }
+}
+
+extension AESharedResourcesProtocol {
+    dynamic var watchedStoriesCategories: Set<StoryCategory.CategoryType> {
+        get {
+            if let savedSetDate = sharedDefaults().object(forKey: watchedStoriesCategoriesKey) as? Data {
+                let decoder = JSONDecoder()
+                let savedSet = try? decoder.decode(Set<StoryCategory.CategoryType>.self, from: savedSetDate)
+                return savedSet ?? Set()
+            }
+            return Set()
+        }
+        set {
+            let encoder = JSONEncoder()
+            if let encodedSet = try? encoder.encode(newValue) {
+                sharedDefaults().set(encodedSet, forKey: watchedStoriesCategoriesKey)
+            }
+        }
     }
 }

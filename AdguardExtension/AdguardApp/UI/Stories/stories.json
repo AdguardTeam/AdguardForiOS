@@ -224,38 +224,32 @@
         {
             "type": "WhatsNew",
             "title": "whats_new_category_title",
-            "button_background_color": "#677BB2",
-            "button_figure_color": "#4B67B2"
+            "category_image": "WhatsNew"
         },
         {
             "type": "DnsProtection",
             "title": "dns_protection_category_title",
-            "button_background_color": "#5DAD23",
-            "button_figure_color": "#46A75D"
+            "category_image": "DnsProtection"
         },
         {
             "type": "VpnProtection",
             "title": "vpn_protection_category_title",
-            "button_background_color": "#5DAD23",
-            "button_figure_color": "#54A01D"
+            "category_image": "VpnProtection"
         },
         {
             "type": "SafariProtection",
             "title": "safari_protection_category_title",
-            "button_background_color": "#94B5CF",
-            "button_figure_color": "#5892BC"
+            "category_image": "SafariProtection"
         },
         {
             "type": "YouTubeAds",
             "title": "youtube_ads_category_title",
-            "button_background_color": "#C58170",
-            "button_figure_color": "#B03030"
+            "category_image": "YouTubeAds"
         },
         {
             "type": "DnsServers",
             "title": "dns_servers_category_title",
-            "button_background_color": "#BE90B4",
-            "button_figure_color": "#AF4D98"
+            "category_image": "DnsServers"
         }
     ],
     "actions": [

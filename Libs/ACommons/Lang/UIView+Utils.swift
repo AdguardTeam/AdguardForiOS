@@ -42,4 +42,39 @@ extension UIView {
             $0.removeFromSuperview()
         }
     }
+    
+    func fadeIn(_ duration: TimeInterval? = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
+        self.isHidden = false
+        UIView.animate(withDuration: duration!,
+                       delay: delay,
+                       options: [.curveEaseIn],
+                       animations: { self.alpha = 1 },
+                       completion: { (value: Bool) in
+                          if let complete = onCompletion { complete() }
+                       }
+        )
+    }
+
+    func fadeOut(_ duration: TimeInterval? = 0.3, _ delay: TimeInterval = 0.0, onCompletion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: duration!,
+                       delay: delay,
+                       options: [.beginFromCurrentState, .curveEaseIn],
+                       animations: { self.alpha = 0 },
+                       completion: { (value: Bool) in
+                           self.isHidden = true
+                           if let complete = onCompletion { complete() }
+                       }
+        )
+    }
+    
+    /* Finds the view controller responsible for a view */
+    var responsibleViewController: UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.responsibleViewController
+        } else {
+            return nil
+        }
+    }
 }
