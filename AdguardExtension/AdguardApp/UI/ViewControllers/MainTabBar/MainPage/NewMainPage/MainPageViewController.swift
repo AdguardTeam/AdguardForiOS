@@ -111,6 +111,12 @@ final class MainPageViewController: PullableContainerController {
      */
     var onReady: (() -> Void)?
     
+    /*
+     When complex protection is switched from widget this variable will become non optional
+     We should process this variable when view is loaded
+     */
+    var complexProtectionStateFromWidget: Bool?
+    
     // MARK: - Private properties
     
     /* Services */
