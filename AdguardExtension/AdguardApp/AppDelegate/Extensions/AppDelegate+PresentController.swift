@@ -156,7 +156,7 @@ extension AppDelegate {
             DDLogError("MainPage.storyboard doesnt't have MainPageViewController")
             return false
         }
-        mainPageController.stateFromWidget = enabled
+        mainPageController.complexProtectionStateFromWidget = enabled
         mainPageController.loadViewIfNeeded()
         
         navController.viewControllers = [mainPageController]
