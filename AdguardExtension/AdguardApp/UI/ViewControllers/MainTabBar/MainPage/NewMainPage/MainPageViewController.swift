@@ -103,6 +103,14 @@ final class MainPageViewController: PullableContainerController {
         return view
     }()
     
+    // MARK: - Public properties
+    
+    /*
+     Sometimes we need to show onboarding and maybe other controllers in the future
+     onReady closure will be called when controller presented all the controllers
+     */
+    var onReady: (() -> Void)?
+    
     // MARK: - Private properties
     
     /* Services */
@@ -149,6 +157,12 @@ final class MainPageViewController: PullableContainerController {
         contentBlockersStateChanged()
         protectionStateChanged()
         processProtectionButtons()
+        
+        if resources.onboardingWasShown {
+            onReady?()
+        } else {
+            showOnboarding()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -394,7 +408,7 @@ extension MainPageViewController {
     }
 }
 
-// MARK: - MainPageViewController + ShowContentBlockersHelperController
+// MARK: - MainPageViewController + Show controllers
 
 fileprivate extension UIViewController {
     func showContentBlockersHelperController() {
@@ -406,6 +420,18 @@ fileprivate extension UIViewController {
         navController.viewControllers = [controller]
         controller.delegate = self as? OnboardingControllerDelegate
         controller.needsShowingPremium = false
+        present(navController, animated: true)
+    }
+    
+    func showOnboarding() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        guard let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController,
+              let controller = navController.viewControllers.first as? IntroductionOnboardingController
+        else {
+            return
+        }
+        controller.delegate = self as? OnboardingControllerDelegate
+       
         present(navController, animated: true)
     }
 }
@@ -424,7 +450,16 @@ extension MainPageViewController: ComplexSwitchDelegate {
 
 extension MainPageViewController: OnboardingControllerDelegate {
     func onboardingDidFinish() {
-        // TODO: - Process it
+        resources.onboardingWasShown = true
+        onReady?()
+    }
+}
+
+// MARK: - MainPageViewController + GetProControllerDelegate
+
+extension MainPageViewController: GetProControllerDelegate {
+    func getProControllerClosed() {
+        onboardingDidFinish()
     }
 }
 

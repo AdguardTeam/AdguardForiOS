@@ -29,15 +29,14 @@ extension AppDelegate {
         return launchScreenController
     }
     
-    /* Returns MainPageController from current navigation stack */
-    func getMainPageController() -> MainPageController? {
+    /* Returns MainPageViewController from current navigation stack */
+    func getMainPageController() -> MainPageViewController? {
         guard let navController = getNavigationController(for: .mainTab) else {
             DDLogError("Navigation controller is nil")
             return nil
         }
-        
-        let mainPageController = navController.viewControllers.first as? MainPageController
-        return mainPageController
+
+        return navController.viewControllers.first as? MainPageViewController
     }
     
     /* Returns DnsLogContainerController from current navigation stack */
@@ -134,7 +133,7 @@ extension AppDelegate {
     }
     
     /*
-     Presents MainPageController
+     Presents MainPageViewController
      Returns true on success and false otherwise
      */
     func presentMainPageController(showLaunchScreen: Bool = false, complexProtectionIsEnabled enabled: Bool? = nil) -> Bool {
@@ -153,8 +152,8 @@ extension AppDelegate {
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
-        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
-            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageViewController")
             return false
         }
         mainPageController.stateFromWidget = enabled
@@ -187,7 +186,7 @@ extension AppDelegate {
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
-        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
             DDLogError("MainPage.storyboard doesnt't have MainPageController")
             return false
         }
@@ -544,7 +543,7 @@ extension AppDelegate {
         }
         
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
-        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
             DDLogError("MainPage.storyboard doesnt't have MainPageController")
             return false
         }

@@ -415,6 +415,15 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var onboardingWasShown: Bool {
+        get {
+            return sharedDefaults().bool(forKey: OnboardingWasShown)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: OnboardingWasShown)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
