@@ -29,6 +29,7 @@ class MainNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomTransitioning()
+        setupNavigationBarUI()
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -54,6 +55,18 @@ class MainNavigationController: UINavigationController {
         for gesture in gestures {
             view.removeGestureRecognizer(gesture)
         }
+    }
+    
+    private func setupNavigationBarUI() {
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+        navigationBar.tintColor = UIColor.AdGuardColor.lightGray3
+        view.backgroundColor = .clear
+        navigationBar.isTranslucent = true
+        
+        let backImage = UIImage(named: "arrow_right")?.withHorizontallyFlippedOrientation() ?? UIImage()
+        navigationBar.backIndicatorImage = backImage
+        navigationBar.backIndicatorTransitionMaskImage = backImage
     }
     
     private func addCustomTransitioning() {

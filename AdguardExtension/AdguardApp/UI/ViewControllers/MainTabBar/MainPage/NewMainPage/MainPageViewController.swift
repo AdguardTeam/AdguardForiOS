@@ -22,7 +22,78 @@ final class MainPageViewController: PullableContainerController {
     
     // MARK: - UI Elements
     
+    private let refreshIconButton: UIButton = {
+        let button = UIButton()
+        let icon = UIImage(named: "refresh-icon")
+        let iconSize = CGRect(origin: .zero, size: CGSize(width: 24.0, height: 24.0))
+        let tintColor = UIColor.AdGuardColor.lightGreen1
+        button.frame = iconSize
+        button.setBackgroundImage(icon, for: .normal)
+        button.tintColor = tintColor
+        button.addTarget(self, action: #selector(updateFilters), for: .touchUpInside)
+        return button
+    }()
+    @IBOutlet weak var updateFiltersButton: UIBarButtonItem! {
+        didSet{
+            updateFiltersButton.accessibilityLabel = String.localizedString("update_filters_voiceover")
+            updateFiltersButton.customView = refreshIconButton
+        }
+    }
     @IBOutlet weak var chooseStatisticsDateTypeButton: UIButton!
+    @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch! {
+        didSet {
+            complexProtectionSwitch.delegate = self
+        }
+    }
+    @IBOutlet weak var protectionStateLabel: ThemableLabel!
+    @IBOutlet weak var protectionStatusLabel: ThemableLabel!
+    
+    /* Icons stack view */
+    @IBOutlet weak var iconsStackView: UIStackView!
+    @IBOutlet weak var iconsStackViewWidthConstraint: NSLayoutConstraint!
+    private var stackViewWidth: CGFloat {
+        let iconsCount = CGFloat(iconsStackView.arrangedSubviews.count)
+        let itemSize: CGFloat = isIpadTrait ? 40.0 : 32.0
+        let spacing: CGFloat = 24.0
+        return itemSize * iconsCount + spacing * (iconsCount - 1)
+    }
+    
+    /* Protection buttons */
+    private lazy var safariProtectionButton: RoundRectButton = {
+        let button = RoundRectButton()
+        button.addTarget(self, action: #selector(safariProtectionTapped), for: .touchUpInside)
+        button.onTintColor = UIColor.AdGuardColor.lightGreen1
+        button.offTintColor = UIColor.AdGuardColor.lightGray4
+        let safariImage = UIImage(named: "safari")
+        button.setBackgroundImage(safariImage, for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        return button
+    }()
+    
+    private lazy var systemProtectionButton: RoundRectButton = {
+        let button = RoundRectButton()
+        button.addTarget(self, action: #selector(systemProtectionTapped), for: .touchUpInside)
+        button.onTintColor = UIColor.AdGuardColor.lightGreen1
+        button.offTintColor = UIColor.AdGuardColor.lightGray4
+        let safariImage = UIImage(named: "ic_adguard")
+        button.setBackgroundImage(safariImage, for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        return button
+    }()
+    
+    private lazy var vpnProtectionButton: RoundRectButton = {
+        let button = RoundRectButton()
+        button.addTarget(self, action: #selector(vpnProtectionTapped), for: .touchUpInside)
+        button.onTintColor = UIColor.AdGuardColor.lightGreen1
+        button.offTintColor = UIColor.AdGuardColor.lightGray4
+        let safariImage = UIImage(named: "vpn_logo")
+        button.setBackgroundImage(safariImage, for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        return button
+    }()
     
     private lazy var contentBlockersView: ContentBlockersNoteView = {
         let view = ContentBlockersNoteView()
@@ -35,25 +106,34 @@ final class MainPageViewController: PullableContainerController {
     // MARK: - Private properties
     
     /* Services */
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     /* Models */
     private let datePickerModel: StatisticsDatePickerModelProtocol
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
     private let contentBlockersModel: ContentBlockersStateModelProtocol
-    
+    private let protectionModel: MainPageProtectionModelProtocol
+
     /* Helper variables */
+    private let getProSegueId = "getProSegue"
     
     // MARK: - ViewController lifecycle
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { theme.statusbarStyle() }
     
     required init?(coder: NSCoder) {
         datePickerModel = StatisticsDatePickerModel(resources: resources, configuration: configuration)
         contentBlockersModel = ContentBlockersStateModel(configuration: configuration)
+        protectionModel = MainPageProtectionModel(resources: resources, complexProtection: complexProtection, nativeProviders: nativeProviders)
         super.init(coder: coder)
         
         (datePickerModel as! StatisticsDatePickerModel).delegate = self
         (contentBlockersModel as! ContentBlockersStateModel).delegate = self
+        (protectionModel as! MainPageProtectionModel).delegate = self
     }
     
     override func viewDidLoad() {
@@ -62,12 +142,69 @@ final class MainPageViewController: PullableContainerController {
         super.viewDidLoad()
         
         statisticsModel.observers.append(self)
+        
+        /* Initial UI setup */
         setStatisticsDateButtonTitle()
         chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
         contentBlockersStateChanged()
+        protectionStateChanged()
+        processProtectionButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        protectionModel.checkProtectionsState()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let nav = navigationController as? MainNavigationController {
+            nav.addGestureRecognizer()
+        }
     }
     
     // MARK: - Actions
+    
+    @objc private func updateFilters() {
+        
+    }
+    
+    @objc private func safariProtectionTapped() {
+        do {
+            try protectionModel.turnSafariProtection(to: !safariProtectionButton.buttonIsOn)
+            safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
+        } catch {
+            DDLogDebug("(MainPageViewController) - error: \(error.localizedDescription)")
+        }
+    }
+    
+    @objc private func systemProtectionTapped() {
+        if !configuration.proStatus {
+            performSegue(withIdentifier: getProSegueId, sender: self)
+            return
+        }
+        do {
+            try protectionModel.turnSystemProtection(to: !systemProtectionButton.buttonIsOn, for: self)
+        } catch {
+            DDLogDebug("(MainPageViewController) - error: \(error.localizedDescription)")
+        }
+    }
+    
+    @objc private func vpnProtectionTapped() {
+        if UIApplication.adGuardVpnIsInstalled {
+            UIApplication.openAdGuardVpnAppIfInstalled()
+        } else {
+            presentUpsellScreen()
+        }
+    }
+    
+    @IBAction func complexProtectionSwitched(_ sender: ComplexProtectionSwitch) {
+        do {
+            try protectionModel.turnComplexPtotection(to: complexProtectionSwitch.isOn, for: self)
+        } catch {
+            DDLogDebug("(MainPageViewController) - error: \(error.localizedDescription)")
+        }
+    }
     
     @IBAction func chooseStatisticsDateTapped(_ sender: UIButton) {
         presentChooseStatisticsDateAlert { [weak self] dateType in
@@ -80,6 +217,110 @@ final class MainPageViewController: PullableContainerController {
     private func setStatisticsDateButtonTitle() {
         let statisticsButtonTitle = statisticsModel.mainPageDateType.getDateTypeString()
         chooseStatisticsDateTypeButton.setTitle(statisticsButtonTitle, for: .normal)
+    }
+    
+    private func processProtectionButtons() {
+        /* Safari icon */
+        let safariIconIsInStack = iconsStackView.arrangedSubviews.contains(safariProtectionButton)
+        if protectionModel.visibleProtectionButtons.safariProtectionIsVisible {
+            if !safariIconIsInStack {
+                iconsStackView.addArrangedSubview(safariProtectionButton)
+            }
+        } else {
+            if safariIconIsInStack {
+                iconsStackView.removeArrangedSubview(safariProtectionButton)
+            }
+        }
+        
+        /* DNS icon */
+        let dnsIconIsInStack = iconsStackView.arrangedSubviews.contains(systemProtectionButton)
+        if protectionModel.visibleProtectionButtons.systemProtectionIsVisible {
+            if !dnsIconIsInStack {
+                iconsStackView.addArrangedSubview(systemProtectionButton)
+            }
+        } else {
+            if dnsIconIsInStack {
+                iconsStackView.removeArrangedSubview(systemProtectionButton)
+            }
+        }
+        
+        /* VPN icon */
+        let vpnIconIsInStack = iconsStackView.arrangedSubviews.contains(vpnProtectionButton)
+        if protectionModel.visibleProtectionButtons.vpnProtectionIsVisible {
+            if !vpnIconIsInStack {
+                iconsStackView.addArrangedSubview(vpnProtectionButton)
+            }
+        } else {
+            if vpnIconIsInStack {
+                iconsStackView.removeArrangedSubview(vpnProtectionButton)
+            }
+        }
+        
+        iconsStackViewWidthConstraint.constant = stackViewWidth
+    }
+}
+
+// MARK: - MainPageViewController + MainPageProtectionModelDelegate
+
+extension MainPageViewController: MainPageProtectionModelDelegate {
+    func protectionStateChanged() {
+        safariProtectionButton.buttonIsOn = protectionModel.protection.safariProtectionEnabled
+        systemProtectionButton.buttonIsOn = protectionModel.protection.systemProtectionEnabled
+        vpnProtectionButton.buttonIsOn = protectionModel.protection.vpnProtectionEnabled
+        complexProtectionSwitch.setOn(on: protectionModel.protection.complexProtectionEnabled)
+        protectionStateLabel.text = protectionModel.protection.protectionState
+        DDLogError("🦬 saf=\(protectionModel.protection.safariProtectionEnabled); sys=\(protectionModel.protection.systemProtectionEnabled); com=\(protectionModel.protection.complexProtectionEnabled)")
+        if !protectionModel.protectionsAreUpdating {
+            protectionStatusLabel.text = protectionModel.protection.protectionStatus
+        }
+    }
+    
+    func safariProtectionStateUpdateStarted() {
+        protectionsUpdateStarted()
+    }
+    
+    func safariProtectionStateUpdateFinished(withError error: Error?) {
+        protectionsUpdateFinished()
+        if let error = error {
+            presentSimpleAlert(title: nil, message: error.localizedDescription)
+        }
+    }
+    
+    func systemProtectionStateUpdateStarted() {
+        protectionsUpdateStarted()
+    }
+    
+    func systemProtectionStateUpdateFinished(withError error: Error?) {
+        protectionsUpdateFinished()
+        if let error = error {
+            presentSimpleAlert(title: nil, message: error.localizedDescription)
+        }
+    }
+    
+    func complexProtectionStateUpdateStarted() {
+        protectionsUpdateStarted()
+    }
+    
+    func complexProtectionStateUpdateFinished(_ safariError: Error?, _ systemError: Error?) {
+        if let safariError = safariError {
+            presentSimpleAlert(title: nil, message: safariError.localizedDescription)
+        }
+        
+        if let systemError = systemError {
+            presentSimpleAlert(title: nil, message: systemError.localizedDescription)
+        }
+        
+        protectionsUpdateFinished()
+    }
+    
+    private func protectionsUpdateStarted() {
+        if !protectionModel.protectionsAreUpdating { return }
+        protectionStatusLabel.text = String.localizedString("applying_changes")
+    }
+    
+    private func protectionsUpdateFinished() {
+        if protectionModel.protectionsAreUpdating { return }
+        protectionStatusLabel.text = protectionModel.protection.protectionStatus
     }
 }
 
@@ -169,10 +410,30 @@ fileprivate extension UIViewController {
     }
 }
 
+// MARK: - MainPageViewController + ComplexSwitchDelegate
+
+extension MainPageViewController: ComplexSwitchDelegate {
+    func beginTracking() {
+        if let nav = navigationController as? MainNavigationController {
+            nav.removeGestureRecognizer()
+        }
+    }
+}
+
 // MARK: - MainPageViewController + OnboardingControllerDelegate
 
 extension MainPageViewController: OnboardingControllerDelegate {
     func onboardingDidFinish() {
         // TODO: - Process it
+    }
+}
+
+// MARK: - MainPageViewController + ThemableProtocol
+
+extension MainPageViewController: ThemableProtocol {
+    func updateTheme() {
+        view.backgroundColor = theme.backgroundColor
+        theme.setupNavigationBar(navigationController?.navigationBar)
+        theme.setupLabels([protectionStateLabel, protectionStatusLabel])
     }
 }

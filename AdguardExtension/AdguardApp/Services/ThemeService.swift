@@ -252,8 +252,6 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
         let dark = configuration.darkTheme
         let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
         navBar.titleTextAttributes = textAttributes
-        navBar.barTintColor = backgroundColor
-        navBar.tintColor = UIColor.AdGuardColor.lightGray3
         navBar.barStyle = dark ? .black : .default
     }
     

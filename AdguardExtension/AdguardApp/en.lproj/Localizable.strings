@@ -89,9 +89,6 @@
 "protection_enabled_caption" = "Protection is enabled";
 
 /* (MainController) login status caption on main screen */
-"protection_partly_enabled_caption" = "Some content blockers are disabled";
-
-/* (MainController) login status caption on main screen */
 "protection_disabled_caption" = "Protection is disabled";
 
 /* (GetProTableController) upgrade button title */

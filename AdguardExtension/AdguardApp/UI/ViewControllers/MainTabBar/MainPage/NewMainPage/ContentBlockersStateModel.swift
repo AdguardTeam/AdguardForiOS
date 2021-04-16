@@ -30,7 +30,7 @@ final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
     
     weak var delegate: ContentBlockersStateModelDelegate?
     
-    private(set) var shouldShowContentBlockersView: Bool = false {
+    private(set) var shouldShowContentBlockersView: Bool {
         didSet {
             if oldValue != shouldShowContentBlockersView {
                 delegate?.contentBlockersStateChanged()
@@ -43,6 +43,8 @@ final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
     
     init(configuration: ConfigurationService) {
         self.configuration = configuration
+        self.shouldShowContentBlockersView = !configuration.allContentBlockersEnabled
+        
         configuration.checkContentBlockerEnabled()
         
         contentBlockersStateObserver = configuration.observe(\.contentBlockerEnabled) { (_, _) in
@@ -50,7 +52,5 @@ final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
                 self?.shouldShowContentBlockersView = !configuration.allContentBlockersEnabled
             }
         }
-        
-        shouldShowContentBlockersView = !configuration.allContentBlockersEnabled
     }
 }

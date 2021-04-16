@@ -17,7 +17,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTk-rx-c08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2643" y="125"/>
+            <point key="canvasLocation" x="1385" y="-196"/>
         </scene>
         <!--AdGuard-->
         <scene sceneID="zqJ-IQ-lJU">
@@ -292,9 +292,6 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 </variation>
-                                                                <connections>
-                                                                    <segue destination="CPg-2F-2ec" kind="show" identifier="getProSegue" id="Qo1-ti-O1I"/>
-                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -850,20 +847,11 @@
                         <outletCollection property="themableLabels" destination="8Z0-0U-Hfk" collectionClass="NSMutableArray" id="LR4-Nd-3q1"/>
                         <outletCollection property="themableLabels" destination="QpX-nI-9LE" collectionClass="NSMutableArray" id="IRm-EE-p4U"/>
                         <outletCollection property="themableLabels" destination="7df-sN-Luj" collectionClass="NSMutableArray" id="Q0G-6b-22U"/>
-                        <segue destination="t6s-y4-WsD" kind="presentation" identifier="showOnboardingSegue" modalPresentationStyle="fullScreen" id="SIK-gU-Bfj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bb-EW-EVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2728.985507246377" y="510.9375"/>
-        </scene>
-        <!--Onboarding-->
-        <scene sceneID="bKG-ij-XYW">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Onboarding" id="t6s-y4-WsD" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WRc-rS-l2D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2662" y="92"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="deN-PW-Mlk">
@@ -996,7 +984,7 @@
             </objects>
             <point key="canvasLocation" x="619" y="-923"/>
         </scene>
-        <!--Main Page View Controller-->
+        <!--AdGuard-->
         <scene sceneID="ur6-fC-bxD">
             <objects>
                 <viewController id="abp-Dl-IQR" customClass="MainPageViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
@@ -1033,30 +1021,122 @@
                                     <action selector="chooseStatisticsDateTapped:" destination="abp-Dl-IQR" eventType="touchUpInside" id="edt-dL-1U3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F1-al-rZI" customClass="ComplexProtectionSwitch" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="153.5" y="318" width="107" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="40c-bW-dxP">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="80" id="oWT-II-eIY">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="107"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="120"/>
+                                    </constraint>
+                                </constraints>
+                                <connections>
+                                    <action selector="complexProtectionState:" destination="T6V-s9-cBk" eventType="valueChanged" id="Tze-d1-TXn"/>
+                                    <action selector="complexProtectionSwitched:" destination="abp-Dl-IQR" eventType="valueChanged" id="y5u-5y-buC"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttf-uM-oMJ">
+                                <rect key="frame" x="0.0" y="8" width="414" height="302"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdi-RN-fam" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="151" width="382" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        </variation>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="PJp-st-9AK">
+                                        <rect key="frame" x="135" y="103" width="144" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="4hq-xh-ydt">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="144" id="hvt-aR-qCx">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="168"/>
+                                            </constraint>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lM-f7-rPq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="159" width="382" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PJp-st-9AK" firstAttribute="centerX" secondItem="Ttf-uM-oMJ" secondAttribute="centerX" id="4hS-gF-zcz"/>
+                                    <constraint firstItem="7lM-f7-rPq" firstAttribute="top" secondItem="pdi-RN-fam" secondAttribute="bottom" constant="8" id="DFB-gW-qJU"/>
+                                    <constraint firstItem="pdi-RN-fam" firstAttribute="top" secondItem="PJp-st-9AK" secondAttribute="bottom" constant="16" id="DUc-ez-tFz"/>
+                                    <constraint firstAttribute="trailing" secondItem="pdi-RN-fam" secondAttribute="trailing" constant="16" id="TyX-Mf-kaq"/>
+                                    <constraint firstItem="pdi-RN-fam" firstAttribute="leading" secondItem="Ttf-uM-oMJ" secondAttribute="leading" constant="16" id="VRS-T1-XkJ"/>
+                                    <constraint firstItem="pdi-RN-fam" firstAttribute="centerY" secondItem="Ttf-uM-oMJ" secondAttribute="centerY" id="Zda-yS-y0r"/>
+                                    <constraint firstItem="7lM-f7-rPq" firstAttribute="trailing" secondItem="pdi-RN-fam" secondAttribute="trailing" id="gkF-aP-uxB"/>
+                                    <constraint firstItem="7lM-f7-rPq" firstAttribute="leading" secondItem="pdi-RN-fam" secondAttribute="leading" id="soI-Gj-C17"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gje-R9-bB4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ttf-uM-oMJ" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" id="BbR-s8-dOq"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="OjK-AE-DPG" secondAttribute="bottom" id="GKw-JZ-IeP"/>
                             <constraint firstItem="OjK-AE-DPG" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" id="K88-5I-D5J"/>
+                            <constraint firstItem="Ttf-uM-oMJ" firstAttribute="top" secondItem="Gje-R9-bB4" secondAttribute="top" constant="8" id="PrE-rR-BiO"/>
+                            <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="Ttf-uM-oMJ" secondAttribute="trailing" id="RyA-d1-YZx"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="b38-gh-HpL" secondAttribute="bottom" constant="116" id="XIk-Xj-Fv7">
                                 <variation key="heightClass=regular-widthClass=regular" constant="182"/>
                             </constraint>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="kec-6l-uNY"/>
+                            <constraint firstItem="3F1-al-rZI" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="lFf-lC-SHE"/>
+                            <constraint firstItem="3F1-al-rZI" firstAttribute="top" secondItem="Ttf-uM-oMJ" secondAttribute="bottom" constant="8" id="pbU-1O-1AX"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="pcA-d3-Z5F"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="OjK-AE-DPG" secondAttribute="trailing" id="umG-Ax-olY"/>
+                            <constraint firstItem="3F1-al-rZI" firstAttribute="centerY" secondItem="Gje-R9-bB4" secondAttribute="centerY" id="wEi-cA-pLX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="WE9-Oi-jHf"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="AdGuard" id="WE9-Oi-jHf">
+                        <barButtonItem key="rightBarButtonItem" id="uNk-sK-NFe">
+                            <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chooseStatisticsDateTypeButton" destination="b38-gh-HpL" id="Iu5-Xn-8sp"/>
+                        <outlet property="complexProtectionSwitch" destination="3F1-al-rZI" id="uFu-3H-B62"/>
+                        <outlet property="iconsStackView" destination="PJp-st-9AK" id="0x4-QY-1Eg"/>
+                        <outlet property="iconsStackViewWidthConstraint" destination="hvt-aR-qCx" id="NnA-gA-auv"/>
+                        <outlet property="protectionStateLabel" destination="pdi-RN-fam" id="wQg-XG-2WE"/>
+                        <outlet property="protectionStatusLabel" destination="7lM-f7-rPq" id="IbR-jz-LUN"/>
                         <outlet property="pullableView" destination="OjK-AE-DPG" id="hIl-R4-iUL"/>
                         <outlet property="pullableViewHeightConstraint" destination="aRa-Ve-wu7" id="ZXS-Px-tVM"/>
+                        <outlet property="updateFiltersButton" destination="uNk-sK-NFe" id="duN-YP-8Va"/>
+                        <segue destination="CPg-2F-2ec" kind="show" identifier="getProSegue" id="lcP-ih-xXn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vnk-by-3Me" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862" y="-196"/>
+            <point key="canvasLocation" x="860.86956521739137" y="-196.20535714285714"/>
         </scene>
         <!--Main Page Extra Info Controller-->
         <scene sceneID="vQ6-9w-2FV">

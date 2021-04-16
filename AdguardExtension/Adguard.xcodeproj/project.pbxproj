@@ -394,6 +394,8 @@
 		7E0344D02628A38300AB0719 /* ContentBlockersNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0344CE2628A38300AB0719 /* ContentBlockersNoteView.swift */; };
 		7E0344E32628AB4000AB0719 /* ContentBlockersStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0344E22628AB4000AB0719 /* ContentBlockersStateModel.swift */; };
 		7E0344E42628AB4000AB0719 /* ContentBlockersStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0344E22628AB4000AB0719 /* ContentBlockersStateModel.swift */; };
+		7E0345082628C24300AB0719 /* MainPageProtectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0345072628C24300AB0719 /* MainPageProtectionModel.swift */; };
+		7E0345092628C24300AB0719 /* MainPageProtectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0345072628C24300AB0719 /* MainPageProtectionModel.swift */; };
 		7E06B66522FB1606006859AC /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACB51D3CD38000E316EA /* ACObject.m */; };
 		7E06B66622FB1606006859AC /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		7E06B66722FB1606006859AC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B8219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m */; };
@@ -3012,6 +3014,7 @@
 		7E034451262853B700AB0719 /* StatisticsDatePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsDatePickerModel.swift; sourceTree = "<group>"; };
 		7E0344CE2628A38300AB0719 /* ContentBlockersNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersNoteView.swift; sourceTree = "<group>"; };
 		7E0344E22628AB4000AB0719 /* ContentBlockersStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersStateModel.swift; sourceTree = "<group>"; };
+		7E0345072628C24300AB0719 /* MainPageProtectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageProtectionModel.swift; sourceTree = "<group>"; };
 		7E06B63522FB0313006859AC /* AdguardBlockingExtensionCustom.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionCustom.plist; sourceTree = "<group>"; };
 		7E06B63622FB0313006859AC /* AdguardBlockingExtensionOther.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionOther.plist; sourceTree = "<group>"; };
 		7E06B63722FB0313006859AC /* AdguardBlockingExtensionAnnoyances.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionAnnoyances.plist; sourceTree = "<group>"; };
@@ -4881,6 +4884,7 @@
 				7E034451262853B700AB0719 /* StatisticsDatePickerModel.swift */,
 				7E0344CE2628A38300AB0719 /* ContentBlockersNoteView.swift */,
 				7E0344E22628AB4000AB0719 /* ContentBlockersStateModel.swift */,
+				7E0345072628C24300AB0719 /* MainPageProtectionModel.swift */,
 			);
 			path = NewMainPage;
 			sourceTree = "<group>";
@@ -7081,6 +7085,7 @@
 				D0B545D82435D69B002F0AEC /* ListOfRulesCells.swift in Sources */,
 				D0D7E5A2243C84F1001801A5 /* APDnsServerObject.m in Sources */,
 				D0B5456B2435D5C9002F0AEC /* SafariWhitelistModel.swift in Sources */,
+				7E0345092628C24300AB0719 /* MainPageProtectionModel.swift in Sources */,
 				D0B545FB2435D6CB002F0AEC /* URL+Utils.swift in Sources */,
 				D0D7E61D244456D2001801A5 /* ActivityViewController.swift in Sources */,
 				D0B5457C2435D5ED002F0AEC /* DnsTrackerService.swift in Sources */,
@@ -7557,6 +7562,7 @@
 				7EB2F94823F2B64500F9A544 /* ParserProtocol.swift in Sources */,
 				D0DB1B062148DB35006EB991 /* SettingsController.swift in Sources */,
 				7E1E41572424BFD100567C8D /* MostActiveCompaniesController.swift in Sources */,
+				7E0345082628C24300AB0719 /* MainPageProtectionModel.swift in Sources */,
 				7E51018F2355A6D900935FE9 /* NetworkSettingsTableController.swift in Sources */,
 				655A024C1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				D06E30E7253F323B008BBD2D /* DnsProviders.swift in Sources */,

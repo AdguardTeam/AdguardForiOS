@@ -46,6 +46,8 @@ final class ContentBlockersNoteView: UIView {
         let button = UIButton()
         let crossImage = UIImage(named: "cross")
         button.setBackgroundImage(crossImage, for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
         button.addTarget(self, action: #selector(crossButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

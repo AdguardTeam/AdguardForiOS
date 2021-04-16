@@ -203,11 +203,11 @@ extension MainPageExtraInfoController: MainPageExtraInfoModelDelegate {
     }
     
     func dnsServerChanged() {
-        processNativeImplementationInfo()
+        processCompactView()
     }
     
     func systemProtectionChanged() {
-        processNativeImplementationInfo()
+        processCompactView()
     }
     
     func proStatusChanged() {
