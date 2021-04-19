@@ -571,6 +571,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         var purchased = false
         
         for transaction in transactions {
+            
             let error = transaction.error as NSError?
             
             if let error = error {

@@ -33,7 +33,6 @@ class AffinityRulesParser: NSObject {
     /**
      convert array of plain strings to array of FilterRule
      */
-    @objc
     func parseStrings(_ strings: [String])->[FilterRule] {
         var rules = [FilterRule]()
         

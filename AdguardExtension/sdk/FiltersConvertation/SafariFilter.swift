@@ -16,12 +16,18 @@ public enum AdGuardFilterGroup: Int {
     case custom = 101
 }
 
+@objc class AdGuardFilterGroupObjWrapper: NSObject{
+    @objc static let customGroupId = AdGuardFilterGroup.custom.rawValue
+    @objc static let enabledGroupIds: Set<Int> = [AdGuardFilterGroup.ads.rawValue,
+                                            AdGuardFilterGroup.privacy.rawValue,
+                                            AdGuardFilterGroup.languageSpecific.rawValue]
+}
+
 public struct SafariFilter {
     public let type: ContentBlockerType
     public let jsonString: String?
     public let totalRules: Int?
     public let totalConverted: Int?
-    public let error: Error?
 }
 
 public enum ContentBlockerType: Int, CaseIterable {

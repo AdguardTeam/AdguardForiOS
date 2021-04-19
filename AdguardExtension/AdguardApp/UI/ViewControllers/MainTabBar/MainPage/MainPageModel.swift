@@ -58,7 +58,10 @@ class MainPageModel: MainPageModelProtocol {
      updates filters. calls callback during updating process
      */
     func updateFilters() {
-        filtersService.load(refresh: true) {}
+        delegate?.updateStarted()
+        filtersService.load(refresh: true) {
+            
+        }
     }
     
     // MARK: - private methods

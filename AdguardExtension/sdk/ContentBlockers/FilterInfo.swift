@@ -38,12 +38,12 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     var searchAttributedString: NSAttributedString?
     var removable: Bool {
         get {
-            return groupId == FilterGroupId.custom
+            return groupId == AdGuardFilterGroup.custom.rawValue
         }
     }
     var editable: Bool {
         get {
-            return groupId == FilterGroupId.custom
+            return groupId == AdGuardFilterGroup.custom.rawValue
         }
     }
     

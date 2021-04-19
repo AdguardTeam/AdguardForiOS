@@ -35,6 +35,11 @@ public class FiltersConverter: FiltersConverterProtocol {
                 assertionFailure("can not resolve content blocker type")
                 continue
             }
+            
+            for type in ContentBlockerType.allCases {
+                rulesByCBType[type] = []
+            }
+            
             sortWithAffinityBlocks(filterRules: rules, defaultCBType: cbType, rulesByAffinityBlocks: &rulesByCBType)
         }
         
@@ -45,23 +50,16 @@ public class FiltersConverter: FiltersConverterProtocol {
         
         for rule in filterRules {
             if let ruleAffinity = rule.affinity {
-                
                 for type in ContentBlockerType.allCases {
                     if let affinity = affinityMaskByContentBlockerType[type] {
-                        if (ruleAffinity.rawValue == 0 || ruleAffinity.contains(affinity)) {
-                            if rulesByAffinityBlocks[type] == nil {
-                                rulesByAffinityBlocks[type] = [String]()
-                            }
+                        if (ruleAffinity == .all || ruleAffinity.contains(affinity)) {
                             rulesByAffinityBlocks[type]?.append(rule.text)
                         }
                     }
                 }
                 
             } else {
-                if rulesByAffinityBlocks[defaultCBType] == nil {
-                    rulesByAffinityBlocks[defaultCBType] = [String]()
-                }
-                rulesByAffinityBlocks[defaultCBType]?.append(rule.text)
+               rulesByAffinityBlocks[defaultCBType]?.append(rule.text)
             }
         }
     }
@@ -71,10 +69,14 @@ public class FiltersConverter: FiltersConverterProtocol {
         var resultFilters = [SafariFilter]()
         let converter = ContentBlockerConverter()
         for filter in filters {
-            let result = converter.convertArray(rules: filter.value, limit: 50000, optimize: false, advancedBlocking: false)
-            let safariFilter = SafariFilter(type: filter.key, jsonString: result?.converted, totalRules: result?.totalConvertedCount, totalConverted: result?.convertedCount, error: nil)
             
-            resultFilters.append(safariFilter)
+            if let result = converter.convertArray(rules: filter.value, limit: 50000, optimize: false, advancedBlocking: false) {
+                let safariFilter = SafariFilter(type: filter.key, jsonString: result.converted, totalRules: result.totalConvertedCount, totalConverted: result.convertedCount)
+                resultFilters.append(safariFilter)
+            }
+            else {
+                DDLogError("FiltersCoverter error - can not convert filter with type: \(filter.key)")
+            }
         }
         return resultFilters
     }
@@ -167,6 +169,7 @@ struct Affinity: OptionSet {
     static let other = Affinity(rawValue: 1 << 3)
     static let custom = Affinity(rawValue: 1 << 4)
     static let security = Affinity(rawValue: 1 << 5)
+    static let all = Affinity([])
 }
 
 @objc

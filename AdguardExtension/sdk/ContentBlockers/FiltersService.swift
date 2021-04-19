@@ -80,7 +80,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private var filtersStorage: FiltersStorageProtocol
     
     private var filterMetas = [ASDFilterMetadata]()
-    private var proGroups: Set<Int> = [FilterGroupId.security, FilterGroupId.custom]
+    private var proGroups: Set<Int> = [AdGuardFilterGroup.security.rawValue, AdGuardFilterGroup.custom.rawValue]
     
     private var notificationObserver: Any?
     private var proStatusObservation: NSKeyValueObservation?
@@ -215,13 +215,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 var groups = antibanner.groups()
                 
                 // set localized name for custom group. We don't store it in database
-                if let customGroup = groups.first(where: { $0.groupId.intValue == FilterGroupId.custom }) {
+                if let customGroup = groups.first(where: { $0.groupId.intValue == AdGuardFilterGroup.custom.rawValue }) {
                     customGroup.name = ACLocalizedString("custom_group_name", nil);
                 }
                 
                 // remove user group
                 groups = groups.filter({ (group) -> Bool in
-                    return group.groupId.intValue != FilterGroupId.user
+                    return group.groupId.intValue != 0
                 })
                 
                 var meta: ASDFilterMetadata
@@ -288,7 +288,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 if refresh {
                     self.updateFilterRulesSync(identifiers: filtersNeededUpdate)
                     
-                    let customFilters = installedFilters.filter { $0.groupId.intValue == FilterGroupId.custom }
+                    let customFilters = installedFilters.filter { $0.groupId.intValue == AdGuardFilterGroup.custom.rawValue }
                     let filterUrls = customFilters.compactMap { (meta) -> (Int, URL)? in
                         if let url = URL(string: meta.subscriptionUrl) {
                             return (meta.filterId.intValue, url)
@@ -304,9 +304,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     self.filterMetas = filters
                     self.notifyChange()
                     completion()
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-                    }
+                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
             }
         }
@@ -388,13 +386,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         filter.meta.filterId = antibanner.nextCustomFilterId() as NSNumber
         
         for group in groups {
-            if group.groupId != FilterGroupId.custom { continue }
+            if group.groupId != AdGuardFilterGroup.custom.rawValue { continue }
             
             if let matchFilter = group.filters.first(where: { $0.subscriptionUrl == filter.meta.subscriptionUrl }) {
                 update(filterId: matchFilter.filterId, enabled: true)
                 setFilter(matchFilter, enabled: true)
             } else {
-                let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: FilterGroupId.custom)
+                let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: AdGuardFilterGroup.custom.rawValue)
                 newFilter.name = filter.meta.name
                 newFilter.desc = filter.meta.descr
                 newFilter.homepage = filter.meta.homepage
@@ -431,7 +429,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     func renameCustomFilter(_ filterId: Int, _ newName: String) {
         for group in groups {
-            if group.groupId != FilterGroupId.custom { continue }
+            if group.groupId != AdGuardFilterGroup.custom.rawValue { continue }
             
             for filter in group.filters {
                 if filter.filterId == filterId {
@@ -453,7 +451,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         antibanner.unsubscribeFilter(filterId as NSNumber)
         
         for group in groups {
-            if group.groupId != FilterGroupId.custom { continue }
+            if group.groupId != AdGuardFilterGroup.custom.rawValue { continue }
             
             group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
             
@@ -545,7 +543,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 filter.subscriptionUrl = filterMeta.subscriptionUrl
                 filter.displayNumber = filterMeta.displayNumber.intValue
                 
-                if filter.groupId == FilterGroupId.custom {
+                if filter.groupId == AdGuardFilterGroup.custom.rawValue {
                     filter.rulesCount = Int(antibanner.rulesCount(forFilter: NSNumber(value: filter.filterId)))
                 }
                 
@@ -584,21 +582,21 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private func setGroupsIconAndCount(_ groups: [Group])->[Group] {
         for group in groups {
             switch group.groupId {
-            case FilterGroupId.ads:
+            case AdGuardFilterGroup.ads.rawValue:
                 group.iconName = "ads-group-icon"
-            case FilterGroupId.socialWidgets:
+            case AdGuardFilterGroup.socialWidgets.rawValue:
                 group.iconName = "social-group-icon"
-            case FilterGroupId.annoyances:
+            case AdGuardFilterGroup.annoyances.rawValue:
                 group.iconName = "annoyances-group-icon"
-            case FilterGroupId.languageSpecific:
+            case AdGuardFilterGroup.languageSpecific.rawValue:
                 group.iconName = "language-group-icon"
-            case FilterGroupId.security:
+            case AdGuardFilterGroup.security.rawValue:
                 group.iconName = "security-group-icon"
-            case FilterGroupId.custom:
+            case AdGuardFilterGroup.custom.rawValue:
                 group.iconName = "custom"
-            case FilterGroupId.other:
+            case AdGuardFilterGroup.other.rawValue:
                 group.iconName = "other-group-icon"
-            case FilterGroupId.privacy:
+            case AdGuardFilterGroup.privacy.rawValue:
                 group.iconName = "prvacy-group-icon"
                 
             default:
@@ -740,7 +738,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 return false
             }
             
-            if filter.groupId.intValue == FilterGroupId.custom || filter.groupId.intValue == FilterGroupId.user {
+            if filter.groupId.intValue == AdGuardFilterGroup.custom.rawValue || filter.groupId.intValue == 0 {
                 return false
             }
             

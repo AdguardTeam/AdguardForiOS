@@ -69,7 +69,9 @@ class ContentBlocker: ContentBlockerStateProtocol {
         get {
             var returnString = ""
             let groupIds = ContentBlockerService.groupsByContentBlocker[contentBlockerType!]
-            let groups = filterService.groups.filter({ groupIds!.contains($0.groupId) })
+            let groups = filterService.groups.filter({ (filter)->Bool in groupIds!.contains { (groupId) -> Bool in
+                groupId.rawValue == filter.groupId
+            }})
             let enabledGroups = groups.filter({ $0.enabled })
             for group in enabledGroups {
                 let filters = group.filters.filter({ $0.enabled == true })

@@ -67,7 +67,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         var resultCbFilters:[CustomCBFilterSettings] = []
         
-        let customFilters = filtersService.groups.filter { $0.groupId == FilterGroupId.custom }.flatMap { $0.filters }
+        let customFilters = filtersService.groups.filter { $0.groupId == AdGuardFilterGroup.custom.rawValue }.flatMap { $0.filters }
         let customDnsFilters = dnsFiltersService.filters
         
         let customCbFilters = settings.customCbFilters?.uniqueElements { $0.url }

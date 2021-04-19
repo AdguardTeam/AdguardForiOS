@@ -62,13 +62,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
-    static let groupsByContentBlocker: [ContentBlockerType: [Int]] =
-            [.general:                      [FilterGroupId.ads, FilterGroupId.languageSpecific, FilterGroupId.user],
-             .privacy:                      [FilterGroupId.privacy, FilterGroupId.user],
-             .socialWidgetsAndAnnoyances:   [FilterGroupId.socialWidgets, FilterGroupId.annoyances, FilterGroupId.user],
-             .other:                        [FilterGroupId.other, FilterGroupId.user],
-             .custom:                       [FilterGroupId.custom, FilterGroupId.user],
-             .security:                     [FilterGroupId.security, FilterGroupId.user]
+    static let groupsByContentBlocker: [ContentBlockerType: [AdGuardFilterGroup]] =
+        [.general:                      [.ads, .languageSpecific],
+         .privacy:                      [.privacy],
+         .socialWidgetsAndAnnoyances:   [.socialWidgets, .annoyances],
+         .other:                        [.other],
+         .custom:                       [.custom],
+         .security:                     [.security]
             ]
     
     static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
@@ -264,11 +264,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         var agFilters = [AdGuardFilter]()
         
-        for (groupId, filterIds) in filtersByGroup {
+        for (group, filterIds) in filtersByGroup {
             let filters = filtersStorage.getFilters(identifiers: filterIds)
             
             for (_, content) in filters {
-                agFilters.append(AdGuardFilter(text: content, group: AdGuardFilterGroup(rawValue: groupId) ?? .ads))
+                agFilters.append(AdGuardFilter(text: content, group: group))
             }
         }
         
@@ -469,14 +469,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
 
     
     /** returns map [groupId: [filterId]] */
-    private func activeGroups()->[Int: [Int]] {
-        var filterByGroup = [Int:[Int]]()
+    private func activeGroups()->[AdGuardFilterGroup: [Int]] {
+        var filterByGroup = [AdGuardFilterGroup:[Int]]()
         
         let groupIDs = antibanner.activeGroupIDs()
         
         for groupID in groupIDs {
             let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
-            filterByGroup[groupID.intValue] = filterIDs.map { $0.intValue }
+            filterByGroup[AdGuardFilterGroup(rawValue: groupID.intValue) ?? .ads] = filterIDs.map { $0.intValue }
         }
         
         return filterByGroup

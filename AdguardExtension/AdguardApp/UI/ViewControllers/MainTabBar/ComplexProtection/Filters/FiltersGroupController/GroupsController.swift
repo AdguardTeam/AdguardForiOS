@@ -146,7 +146,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
         
         if group.proOnly && !configuration.proStatus {
             cell.enabledSwitch.isUserInteractionEnabled = false
-            cell.descriptionLabel.text = group.groupId == FilterGroupId.security ? String.localizedString("security_description") : String.localizedString("custom_description")
+            cell.descriptionLabel.text = group.groupId == AdGuardFilterGroup.security.rawValue ? String.localizedString("security_description") : String.localizedString("custom_description")
             cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
             cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
         } else {
@@ -226,7 +226,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             else {
                 var index = 0
                 viewModel?.groups?.forEach{ (group) in
-                    if group.groupId == FilterGroupId.custom {
+                    if group.groupId == AdGuardFilterGroup.custom.rawValue {
                         selectedIndex = index
                     }
                     index += 1

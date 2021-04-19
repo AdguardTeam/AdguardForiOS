@@ -185,7 +185,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
             
         case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
-            cell?.isHidden = group?.groupId == FilterGroupId.custom ? false : true
+            cell?.isHidden = group?.groupId == AdGuardFilterGroup.custom.rawValue ? false : true
             return cell!
             
         case filtersSection:
@@ -228,21 +228,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         case groupSection:
             return viewModel?.isSearchActive ?? true ? 0.0 : 72.0
         case addFilterSection:
-            return group?.groupId == FilterGroupId.custom ? 60 : 0
+            return group?.groupId == AdGuardFilterGroup.custom.rawValue ? 60 : 0
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !(group?.groupId == FilterGroupId.custom) {
+        if !(group?.groupId == AdGuardFilterGroup.custom.rawValue) {
             return nil
         }
         return section == addFilterSection ? headerView : nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !(group?.groupId == FilterGroupId.custom) {
+        if !(group?.groupId == AdGuardFilterGroup.custom.rawValue) {
             return 0.0
         }
         return section == addFilterSection ? 72.0 : 0.0
