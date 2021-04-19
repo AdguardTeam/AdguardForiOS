@@ -78,7 +78,7 @@ class ActionViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         safariService = SafariService(resources: sharedResources)
-        let antibanner = AESAntibanner(networking: networking, resources: sharedResources)
+        let antibanner = AESAntibanner(resources: sharedResources)
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
         productInfo = ADProductInfo()

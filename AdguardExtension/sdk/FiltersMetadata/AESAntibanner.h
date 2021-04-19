@@ -343,7 +343,7 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  init
  */
-- (_Nonnull instancetype)initWithNetworking:(nonnull id<ACNNetworkingProtocol>)networking resources: (nonnull id<AESharedResourcesProtocol>) resources;
+- (_Nonnull instancetype)initWithResources: (nonnull id<AESharedResourcesProtocol>) resources;
 
 /**
  Indicator that metadata and count of filters are out of date.
