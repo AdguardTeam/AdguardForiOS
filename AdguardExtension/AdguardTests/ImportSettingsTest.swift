@@ -106,7 +106,7 @@ class ImportSettingsTest: XCTestCase {
         var settings = Settings()
         settings.customCbFilters = [CustomCBFilterSettings(name: "custom", url: "custom_url")]
         
-        let customGroup = Group(FilterGroupId.custom)
+        let customGroup = Group(AdGuardFilterGroup.custom.rawValue)
         filtersService.groups = [customGroup]
         
         networking.response = URLResponse(url: URL(string: "custom_url")!, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)

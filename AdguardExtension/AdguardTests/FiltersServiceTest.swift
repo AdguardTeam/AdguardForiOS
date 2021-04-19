@@ -182,7 +182,7 @@ class FiltersServiceTest: XCTestCase {
         let filterIdToRename = 100
         let newName = "new name"
         
-        let service = initService(groups: [(FilterGroupId.custom, true)], filters: [("filter name 1", 321, FilterGroupId.custom, false), ("filter name 2", filterIdToRename, FilterGroupId.custom, true)])
+        let service = initService(groups: [(AdGuardFilterGroup.custom.rawValue, true)], filters: [("filter name 1", 321, AdGuardFilterGroup.custom.rawValue, false), ("filter name 2", filterIdToRename, AdGuardFilterGroup.custom.rawValue, true)])
         
         service.renameCustomFilter(filterIdToRename, newName)
         

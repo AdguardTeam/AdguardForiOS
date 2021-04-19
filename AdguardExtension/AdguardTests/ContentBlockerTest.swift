@@ -93,7 +93,7 @@ class ContentBlockerTest: XCTestCase {
                      ASDFilterRule(text: "example.org##banner", enabled: true, affinity: Affinity.general.rawValue as NSNumber)]
         
         let jsonGeneral = "[{\"trigger\":{\"url-filter\":\".*\",\"if-domain\":[\"*example.org\"]},\"action\":{\"type\":\"css-display-none\",\"selector\":\"banner\"}},{\"trigger\":{\"url-filter\":\"^[htpsw]+:\\\\/\\\\/([a-z0-9-]+\\\\.)?example\\\\.org([\\\\/:&\\\\?].*)?$\"},\"action\":{\"type\":\"ignore-previous-rules\"}}]";
-        let jsonOther = "";
+        let jsonOther = "[]";
         
         testAffinityBlocks(rules: rules, expectedJsonGeneral: jsonGeneral, expectedJsonOther: jsonOther);
     }

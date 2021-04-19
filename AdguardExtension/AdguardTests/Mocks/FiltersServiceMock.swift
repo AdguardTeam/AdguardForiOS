@@ -46,13 +46,13 @@ class FiltersServiceMock: FiltersServiceProtocol {
     }
     
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
-        var group = groups.first { $0.groupId == FilterGroupId.custom }
+        var group = groups.first { $0.groupId == AdGuardFilterGroup.custom.rawValue }
         if group == nil {
-            group = Group(FilterGroupId.custom)
+            group = Group(AdGuardFilterGroup.custom.rawValue)
             groups.append(group!)
         }
         
-        let filterObj = Filter(filterId: 0, groupId: FilterGroupId.custom)
+        let filterObj = Filter(filterId: 0, groupId: AdGuardFilterGroup.custom.rawValue)
         filterObj.name = filter.meta.name
         filterObj.enabled = true
         group!.filters.append(filterObj)
