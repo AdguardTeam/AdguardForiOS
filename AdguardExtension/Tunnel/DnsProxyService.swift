@@ -175,6 +175,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
+                                      handleDNSSuffixes: true,
+                                      userDNSSuffixes: nil,
                                       filters: agFilters,
                                       blockedResponseTtlSecs: blockedResponseTtlSecs,
                                       dns64Settings: dns64Settings,
@@ -185,7 +187,8 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                                       customBlockingIpv4: customBlockingIpv4,
                                       customBlockingIpv6: customBlockingIpv6,
                                       dnsCacheSize: 128,
-                                      optimisticCache: false)
+                                      optimisticCache: false,
+                                      helperPath: nil)
 
         var error: NSError?
         agproxy = AGDnsProxy(config: config, handler: events, error: &error)
