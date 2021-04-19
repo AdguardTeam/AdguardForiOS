@@ -110,13 +110,7 @@ final class MainPageViewController: PullableContainerController {
      onReady closure will be called when controller presented all the controllers
      */
     var onReady: (() -> Void)?
-    
-    /*
-     When complex protection is switched from widget this variable will become non optional
-     We should process this variable when view is loaded
-     */
-    var complexProtectionStateFromWidget: Bool?
-    
+        
     // MARK: - Private properties
     
     /* Services */
@@ -127,8 +121,8 @@ final class MainPageViewController: PullableContainerController {
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     /* Models */
-    private let datePickerModel: StatisticsDatePickerModelProtocol
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
+    private let datePickerModel: StatisticsDatePickerModelProtocol
     private let contentBlockersModel: ContentBlockersStateModelProtocol
     private let protectionModel: MainPageProtectionModelProtocol
 
@@ -144,10 +138,6 @@ final class MainPageViewController: PullableContainerController {
         contentBlockersModel = ContentBlockersStateModel(configuration: configuration)
         protectionModel = MainPageProtectionModel(resources: resources, complexProtection: complexProtection, nativeProviders: nativeProviders)
         super.init(coder: coder)
-        
-        (datePickerModel as! StatisticsDatePickerModel).delegate = self
-        (contentBlockersModel as! ContentBlockersStateModel).delegate = self
-        (protectionModel as! MainPageProtectionModel).delegate = self
     }
     
     override func viewDidLoad() {
@@ -155,6 +145,10 @@ final class MainPageViewController: PullableContainerController {
         self.contentController = mainPageExtraInfoVC
         super.viewDidLoad()
         
+        /* Setting delegates */
+        (datePickerModel as! StatisticsDatePickerModel).delegate = self
+        (contentBlockersModel as! ContentBlockersStateModel).delegate = self
+        (protectionModel as! MainPageProtectionModel).delegate = self
         statisticsModel.observers.append(self)
         
         /* Initial UI setup */
@@ -164,6 +158,7 @@ final class MainPageViewController: PullableContainerController {
         protectionStateChanged()
         processProtectionButtons()
         
+        /* Process onboarding */
         if resources.onboardingWasShown {
             onReady?()
         } else {
@@ -180,6 +175,23 @@ final class MainPageViewController: PullableContainerController {
         super.viewWillDisappear(animated)
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
+        }
+    }
+    
+    // MARK: - Public methods
+    
+    /* Process complex protection state from widget */
+    func turnComplexProtection(_ state: Bool) {
+        DDLogDebug("(MainPageViewController) - turning complex protection from widget to \(state); actual state = \(complexProtection.complexProtectionEnabled)")
+        // A small delay to show user the process of turning the protection
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            
+            do {
+                try self.protectionModel.turnComplexPtotection(to: state, for: self)
+            } catch {
+                DDLogDebug("(MainPageViewController) - error: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -289,7 +301,6 @@ extension MainPageViewController: MainPageProtectionModelDelegate {
         vpnProtectionButton.buttonIsOn = protectionModel.protection.vpnProtectionEnabled
         complexProtectionSwitch.setOn(on: protectionModel.protection.complexProtectionEnabled)
         protectionStateLabel.text = protectionModel.protection.protectionState
-        DDLogError("🦬 saf=\(protectionModel.protection.safariProtectionEnabled); sys=\(protectionModel.protection.systemProtectionEnabled); com=\(protectionModel.protection.complexProtectionEnabled)")
         if !protectionModel.protectionsAreUpdating {
             protectionStatusLabel.text = protectionModel.protection.protectionStatus
         }

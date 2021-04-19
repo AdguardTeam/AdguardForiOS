@@ -156,7 +156,14 @@ extension AppDelegate {
             DDLogError("MainPage.storyboard doesnt't have MainPageViewController")
             return false
         }
-        mainPageController.complexProtectionStateFromWidget = enabled
+        
+        /*
+         When complex protection is switched from widget this variable will become non optional
+         We should process this variable when presenting controller
+         */
+        if let complexProtectionState = enabled {
+            mainPageController.turnComplexProtection(complexProtectionState)
+        }
         mainPageController.loadViewIfNeeded()
         
         navController.viewControllers = [mainPageController]

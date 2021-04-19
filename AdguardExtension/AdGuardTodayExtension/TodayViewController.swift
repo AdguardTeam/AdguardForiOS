@@ -202,14 +202,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func complexSwitch(_ sender: UISwitch) {
-        let enabled = sender.isOn
-        
-        let systemEnabledOldValue = complexProtection.systemProtectionEnabled
-        complexProtection.switchComplexProtection(state: enabled, for: nil) { (_, _) in }
-        
-        if systemEnabledOldValue != complexProtection.systemProtectionEnabled {
-            turnProtection(.complex, to: complexProtection.systemProtectionEnabled)
-        }
+        let enabled = complexProtection.complexProtectionEnabled
+        DDLogDebug("(TodayViewController) - turning complex protection to \(!enabled)")
+        turnProtection(.complex, to: !enabled)
         updateWidgetComplex()
     }
     
