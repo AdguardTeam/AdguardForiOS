@@ -28,6 +28,8 @@ final class MainPageExtraInfoController: PullableContentController {
     
     private let statisticsInfoView = StatisticsInfoView(clickableButtons: false)
     private let nativeImplementationView = NativeImplementationView()
+    private let getProView = GetProCompactView()
+    private let unreadStoriesView = UnreadStoriesView()
     
     private let vibrationGenerator = UIImpactFeedbackGenerator(style: .light)
     
@@ -75,32 +77,32 @@ final class MainPageExtraInfoController: PullableContentController {
     
     override func parentViewWillTransitionToFullSize() {
         super.parentViewWillTransitionToFullSize()
-        
-        if model.compactViewType != .none {
-            fullView.fadeIn(0.3, 0.1)
-            compactView.fadeOut(0.1)
-        }
+        fullView.fadeIn(0.3, 0.1)
+        compactView.fadeOut(0.1)
         vibrationGenerator.impactOccurred()
     }
     
     override func parentViewWillTransitionToCompactSize() {
         super.parentViewWillTransitionToCompactSize()
         
-        if model.compactViewType != .none {
-            compactView.fadeIn(0.1, 0.3)
-            fullView.fadeOut(0.3)
+        // Check if we need to change unread stories number
+        if case let MainPageExtraInfoModel.CompactViewType.unreadStories(unreadStoriesCount: unread) = model.compactViewType {
+            unreadStoriesView.unreadStoriesCount = unread
         }
+        
+        // Check if we've watched all stories and need to set Get PRO view
+        if model.compactViewType == .getPro && getProView.superview == nil {
+            processCompactView()
+        }
+        
+        compactView.fadeIn(0.1, 0.3)
+        fullView.fadeOut(0.3)
         vibrationGenerator.impactOccurred()
     }
     
     override func parentViewIsTransitioning(percent: CGFloat) {
         super.parentViewIsTransitioning(percent: percent)
-        
-        // We don't need to animate views change if compact view is none
-        if model.compactViewType == .none {
-            return
-        }
-        
+    
         /*
          Between 0% and 30% of bottom view transition to full height
          we are hiding compact view and changing it's alpha to 0.0
@@ -136,42 +138,36 @@ final class MainPageExtraInfoController: PullableContentController {
     /* Provides compact view with actual info */
     private func processCompactView() {
         switch model.compactViewType {
-        case .none:
-            processEmptyCompactView()
+        case .getPro:
+            setCompactView(getProView)
+        case .unreadStories(unreadStoriesCount: let unread):
+            setCompactView(unreadStoriesView)
+            unreadStoriesView.unreadStoriesCount = unread
         case .nativeImplementationInfo:
+            setCompactView(nativeImplementationView)
             processNativeImplementationInfo()
         case .statisticsInfo:
+            setCompactView(statisticsInfoView)
             processStatisticsInfo()
         }
     }
     
-    private func processEmptyCompactView() {
+    private func setCompactView(_ view: UIView) {
         compactView.removeAllSubviews()
-        compactView.alpha = 0.0
-        compactView.isHidden = true
-        fullView.alpha = 1.0
-        fullView.isHidden = false
+        compactView.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.topAnchor.constraint(equalTo: compactView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: compactView.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: compactView.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: compactView.trailingAnchor).isActive = true
     }
     
     private func processNativeImplementationInfo() {
-        compactView.removeAllSubviews()
-        compactView.addSubview(nativeImplementationView)
-        
-        nativeImplementationView.translatesAutoresizingMaskIntoConstraints = false
-        nativeImplementationView.topAnchor.constraint(equalTo: compactView.topAnchor).isActive = true
-        nativeImplementationView.bottomAnchor.constraint(equalTo: compactView.bottomAnchor).isActive = true
-        nativeImplementationView.leadingAnchor.constraint(equalTo: compactView.leadingAnchor).isActive = true
-        nativeImplementationView.trailingAnchor.constraint(equalTo: compactView.trailingAnchor).isActive = true
-        
         let dnsProtocol = nativeProviders.currentServer?.dnsProtocol ?? .doh
         nativeImplementationView.dnsProtocol = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
         nativeImplementationView.dnsIsWorking = complexProtection.systemProtectionEnabled
         nativeImplementationView.dnsProviderName = nativeProviders.currentProvider?.name ?? ""
-        
-        if isCompact == true {
-            compactView.alpha = 1.0
-            compactView.isHidden = false
-        }
     }
     
     private func processStatisticsInfo() {
@@ -186,11 +182,6 @@ final class MainPageExtraInfoController: PullableContentController {
         
         let statistics = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
         statisticsInfoView.statisticsModel = statistics
-        
-        if isCompact == true {
-            compactView.alpha = 1.0
-            compactView.isHidden = false
-        }
     }
 }
 
@@ -251,6 +242,8 @@ extension MainPageExtraInfoController: ThemableProtocol {
         collectionView.backgroundColor = theme.backgroundColor
         statisticsInfoView.updateTheme(theme)
         nativeImplementationView.updateTheme(theme)
+        getProView.updateTheme(theme)
+        unreadStoriesView.updateTheme(theme)
         dataSource.updateTheme()
     }
 }

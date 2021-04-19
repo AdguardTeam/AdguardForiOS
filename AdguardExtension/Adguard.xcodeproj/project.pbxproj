@@ -896,6 +896,12 @@
 		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
 		7EF75A6D234B6010006ED3E5 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
+		7EFF1031262D928800E22152 /* MainPageCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1030262D928800E22152 /* MainPageCompactView.swift */; };
+		7EFF1032262D928800E22152 /* MainPageCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1030262D928800E22152 /* MainPageCompactView.swift */; };
+		7EFF1045262D94C600E22152 /* UnreadStoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1044262D94C600E22152 /* UnreadStoriesView.swift */; };
+		7EFF1046262D94C600E22152 /* UnreadStoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1044262D94C600E22152 /* UnreadStoriesView.swift */; };
+		7EFF106A262DADBD00E22152 /* GetProCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1069262DADBD00E22152 /* GetProCompactView.swift */; };
+		7EFF106B262DADBD00E22152 /* GetProCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF1069262DADBD00E22152 /* GetProCompactView.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		D005096B2201DA2F006BC10C /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = D005096A2201DA2F006BC10C /* providers.json */; };
@@ -3487,6 +3493,9 @@
 		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
 		7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerService.swift; sourceTree = "<group>"; };
 		7EF9189122F05F8A00427A61 /* FilterTagsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsView.swift; sourceTree = "<group>"; };
+		7EFF1030262D928800E22152 /* MainPageCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCompactView.swift; sourceTree = "<group>"; };
+		7EFF1044262D94C600E22152 /* UnreadStoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadStoriesView.swift; sourceTree = "<group>"; };
+		7EFF1069262DADBD00E22152 /* GetProCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProCompactView.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -5081,6 +5090,9 @@
 			children = (
 				7E7C9DCE261F2CE9006D418C /* StatisticsInfoView.swift */,
 				7E7C9E05261F2D09006D418C /* NativeImplementationView.swift */,
+				7EFF1044262D94C600E22152 /* UnreadStoriesView.swift */,
+				7EFF1069262DADBD00E22152 /* GetProCompactView.swift */,
+				7EFF1030262D928800E22152 /* MainPageCompactView.swift */,
 			);
 			path = MainPageHelperViews;
 			sourceTree = "<group>";
@@ -7047,6 +7059,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E21CBDF25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */,
+				7EFF106B262DADBD00E22152 /* GetProCompactView.swift in Sources */,
 				D0B5457A2435D5E4002F0AEC /* DnsProviderInfo.swift in Sources */,
 				D0B545E72435D6A1002F0AEC /* UIButton+Utils.swift in Sources */,
 				D0B545B22435D649002F0AEC /* FilterTagsButtons.swift in Sources */,
@@ -7094,6 +7107,7 @@
 				D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
 				D0D7E61224445085001801A5 /* ActivityStatisticsRecord.swift in Sources */,
+				7EFF1032262D928800E22152 /* MainPageCompactView.swift in Sources */,
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
@@ -7244,6 +7258,7 @@
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
+				7EFF1046262D94C600E22152 /* UnreadStoriesView.swift in Sources */,
 				D0B545A42435D640002F0AEC /* (null) in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
 				6518BD861DABBE6900FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
@@ -7632,6 +7647,7 @@
 				247CB5C52600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
 				D031A10F219EFC99002C17D9 /* CocoaLumberjack.swift in Sources */,
+				7EFF1031262D928800E22152 /* MainPageCompactView.swift in Sources */,
 				247CB6122600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */,
 				D031A0D7219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */,
@@ -7773,6 +7789,7 @@
 				7E9B37F62391761F00053972 /* FilterDetailedInterface.swift in Sources */,
 				2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */,
 				7EA7834B2578E54500CA8889 /* SupportService+Feedback.swift in Sources */,
+				7EFF1045262D94C600E22152 /* UnreadStoriesView.swift in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
 				7EE169062625CD4F006B8ECE /* StatisticsChartModel.swift in Sources */,
 				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
@@ -7811,6 +7828,7 @@
 				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,
 				7E7C9DCF261F2CE9006D418C /* StatisticsInfoView.swift in Sources */,
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
+				7EFF106A262DADBD00E22152 /* GetProCompactView.swift in Sources */,
 				7EF0BA5A260A0C6A005805C4 /* StoriesProvider.swift in Sources */,
 				D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */,
 				7E49EB5C2442435D00911AB1 /* UIBezierPath+Utils.swift in Sources */,

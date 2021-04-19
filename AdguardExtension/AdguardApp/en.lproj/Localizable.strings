@@ -62,13 +62,22 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (NativeImplementationView) Native DNS is working title. <span style=color:%@> It is a color for 'is working' */
-"native_dns_working" = "Native DNS <span style=color:%@>is working</span>";
+"native_dns_working" = "<b>Native DNS <span style=color:%@>is working</span></b>";
 
 /* (NativeImplementationView) Native DNS is not working title. <span style=color:%@> It is a color for 'is not working' */
-"native_dns_not_working" = "Native DNS <span style=color:%@>is not working</span>";
+"native_dns_not_working" = "<b>Native DNS <span style=color:%@>is not working</span></b>";
 
 /* (NativeImplementationView) Format for DNS server %1$@ stands for DNS provider name, %2$@ stands for protocol name, i.e AdGuard DNS (regular) */
 "dns_server_info_format" = "%1$@ (%2$@)";
+
+/* (UnreadStoriesView) - Description for unread stories */
+"unread_stories_desc" = "Swipe it up to look them!";
+
+/* (GetProCompactView) - Title for PRO status view. <span style=color:%@> It is a color for 'PRO' */
+"get_pro_title" = "<b>Get the <span style=color:%@>PRO</span> version!</b>";
+
+/* (GetProCompactView) - Description for PRO status view */
+"get_pro_description" = "Tap to read about benefits";
 
 /* (ContentBlockersNoteView) Title for view, when some content blockers are disabled. <u style=color:%@> It is a color for 'Fix it'*/
 "disabled_content_blockers_note" = "Some content blockers are disabled. <u style=color:%@>Fix it</u>";

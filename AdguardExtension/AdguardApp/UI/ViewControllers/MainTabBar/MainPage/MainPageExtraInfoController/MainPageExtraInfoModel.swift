@@ -45,14 +45,23 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
                 return .nativeImplementationInfo
             }
             return .statisticsInfo
+        } else {
+            let watched = resources.watchedStoriesCategories.count
+            let all = StoriesProvider.allCategories.count
+            // It means that all stories are watched
+            if watched == all {
+                return .getPro
+            } else {
+                return .unreadStories(unreadStoriesCount: all - watched)
+            }
         }
-        return .none
     }
     
-    enum CompactViewType {
+    enum CompactViewType: Equatable {
         case nativeImplementationInfo
         case statisticsInfo
-        case none
+        case unreadStories(unreadStoriesCount: Int)
+        case getPro
     }
     
     var fullViewType: MainPageExtraInfoModel.FullViewType {

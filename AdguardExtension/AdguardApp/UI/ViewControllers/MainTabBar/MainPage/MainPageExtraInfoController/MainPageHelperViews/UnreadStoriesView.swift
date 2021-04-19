@@ -16,33 +16,15 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import UIKit
+import Foundation
 
-final class NativeImplementationView: MainPageCompactView {
+final class UnreadStoriesView: MainPageCompactView {
     
     // MARK: - Public properties
     
-    var dnsIsWorking = false {
+    var unreadStoriesCount: Int = 0 {
         didSet {
-            if oldValue != dnsIsWorking {
-                processDnsStatus()
-            }
-        }
-    }
-    
-    var dnsProviderName: String = "" {
-        didSet {
-            if oldValue != dnsProviderName {
-                processDnsServer()
-            }
-        }
-    }
-    
-    var dnsProtocol: String = "" {
-        didSet {
-            if oldValue != dnsProtocol {
-                processDnsServer()
-            }
+            processTitleLabel()
         }
     }
     
@@ -50,42 +32,37 @@ final class NativeImplementationView: MainPageCompactView {
     
     override init() {
         super.init()
-        processDnsStatus()
-        processDnsServer()
+        processTitleLabel()
+        descriptionLabel.text = String.localizedString("unread_stories_desc")
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        processDnsStatus()
-        processDnsServer()
+        processTitleLabel()
+        descriptionLabel.text = String.localizedString("unread_stories_desc")
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        processDnsStatus()
-        processDnsServer()
+        processTitleLabel()
+        descriptionLabel.text = String.localizedString("unread_stories_desc")
     }
     
     // MARK: - Public methods
     
     override func updateTheme(_ themeService: ThemeServiceProtocol) {
         super.updateTheme(themeService)
-        processDnsStatus()
+        processTitleLabel()
     }
     
     // MARK: - Private methods
     
-    private func processDnsStatus() {
-        let format = String.localizedString(dnsIsWorking ? "native_dns_working" : "native_dns_not_working")
-        let colorHex = dnsIsWorking ? UIColor.AdGuardColor.lightGreen2.hex() : UIColor.AdGuardColor.yellow2.hex()
-        let status = String(format: format, colorHex)
+    private func processTitleLabel() {
+        let format = String.localizedString("unread_stories")
+        let numberColorHex = UIColor.AdGuardColor.errorRedColor.hex()
+        let string = String.localizedStringWithFormat(format, unreadStoriesCount, numberColorHex)//String(format: format, unreadStoriesCount, numberColorHex)
         let fontSize = titleLabel.font.pointSize
         let fontColor = titleLabel.textColor ?? .clear
-        titleLabel.attributedText = NSMutableAttributedString.fromHtml(status, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
-    }
-    
-    private func processDnsServer() {
-        let format = String.localizedString("dns_server_info_format")
-        descriptionLabel.text = String(format: format, dnsProviderName, dnsProtocol)
+        titleLabel.attributedText = NSMutableAttributedString.fromHtml(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
     }
 }
