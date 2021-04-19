@@ -186,13 +186,17 @@ final class MainPageViewController: PullableContainerController {
         // A small delay to show user the process of turning the protection
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-            
             do {
                 try self.protectionModel.turnComplexPtotection(to: state, for: self)
             } catch {
                 DDLogDebug("(MainPageViewController) - error: \(error.localizedDescription)")
             }
         }
+    }
+    
+    /* This method is called when user wants to import settings */
+    func showImportSettings(_ settings: Settings) {
+        showImportSettingsInternal(settings)
     }
     
     // MARK: - Actions
@@ -450,6 +454,18 @@ fileprivate extension UIViewController {
         controller.delegate = self as? OnboardingControllerDelegate
        
         present(navController, animated: true)
+    }
+    
+    func showImportSettingsInternal(_ settings: Settings) {
+        let storyboard = UIStoryboard(name: "ImportSettings", bundle: nil)
+        
+        guard let importController = storyboard.instantiateViewController(withIdentifier: "ImportSettingsController") as? ImportSettingsController else {
+            DDLogError("can not instantiate ImportSettingsController")
+            return
+        }
+        
+        importController.settings = settings
+        present(importController, animated: true, completion: nil)
     }
 }
 

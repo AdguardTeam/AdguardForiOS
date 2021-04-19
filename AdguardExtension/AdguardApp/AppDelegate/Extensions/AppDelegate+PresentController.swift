@@ -554,7 +554,11 @@ extension AppDelegate {
             DDLogError("MainPage.storyboard doesnt't have MainPageController")
             return false
         }
-        mainPageController.importSettings = settings
+        
+        mainPageController.loadViewIfNeeded()
+        if let importSettings = settings {
+            mainPageController.showImportSettings(importSettings)
+        }
         
         navController.viewControllers = [mainPageController]
         tabBar.selectedViewController = navController
