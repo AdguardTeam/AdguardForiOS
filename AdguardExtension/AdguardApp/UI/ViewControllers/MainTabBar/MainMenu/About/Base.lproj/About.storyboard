@@ -116,26 +116,8 @@
                                     <action selector="privacyPolicyTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="v16-JT-XYd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-hy-Fhk">
-                                <rect key="frame" x="172.66666666666666" y="506.66666666666674" width="30" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="2HH-vT-DOj">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="30"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                </variation>
-                                <connections>
-                                    <action selector="loginLogoutTapped:" destination="Cgm-Dr-44X" eventType="touchUpInside" id="ZDE-Gh-f0l"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-oj-ZeJ">
-                                <rect key="frame" x="153" y="378.66666666666669" width="69" height="20"/>
+                                <rect key="frame" x="97.5" y="251.5" width="125" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="qdJ-me-M0A">
                                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
@@ -156,18 +138,15 @@
                         <viewLayoutGuide key="safeArea" id="c73-ge-xtS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vwj-hy-Fhk" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="1Aq-Re-tKi"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="height" secondItem="517-dV-Anx" secondAttribute="height" multiplier="0.2" id="6Io-ly-JpZ"/>
                             <constraint firstItem="Jbp-5W-y9v" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="8gY-B0-22A"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="hE0-Ag-02J" secondAttribute="trailing" constant="24" id="ATM-rC-GnS"/>
-                            <constraint firstItem="c73-ge-xtS" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vwj-hy-Fhk" secondAttribute="bottom" constant="12" id="Ccc-Vi-8P3"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="top" secondItem="636-Zz-5HO" secondAttribute="bottom" constant="36" id="IWg-2J-DJM"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="16" id="Ly8-QS-tHg"/>
                             <constraint firstItem="htU-yE-FEi" firstAttribute="top" secondItem="oMX-oj-ZeJ" secondAttribute="bottom" constant="12" id="M0B-SI-tFz"/>
                             <constraint firstItem="636-Zz-5HO" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="V4V-p5-f0s"/>
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="leading" secondItem="c73-ge-xtS" secondAttribute="leading" constant="16" id="W1o-BR-YZV"/>
                             <constraint firstItem="dw2-f1-QbR" firstAttribute="centerY" secondItem="c73-ge-xtS" secondAttribute="centerY" constant="-40" id="WA6-9k-tBW"/>
-                            <constraint firstItem="vwj-hy-Fhk" firstAttribute="top" secondItem="Jbp-5W-y9v" secondAttribute="bottom" constant="12" id="ahb-3E-sjM"/>
                             <constraint firstItem="Jbp-5W-y9v" firstAttribute="top" secondItem="uyB-mD-gtt" secondAttribute="bottom" constant="12" id="bKW-dW-HQD"/>
                             <constraint firstItem="oLS-Tk-G1c" firstAttribute="top" secondItem="dw2-f1-QbR" secondAttribute="bottom" constant="8" id="cWE-TL-gMP"/>
                             <constraint firstItem="c73-ge-xtS" firstAttribute="trailing" secondItem="dw2-f1-QbR" secondAttribute="trailing" constant="16" id="dYw-es-YSG"/>
@@ -186,7 +165,6 @@
                     <connections>
                         <outlet property="copyrightLabel" destination="oLS-Tk-G1c" id="FBI-6f-d0I"/>
                         <outlet property="loginButton" destination="jMW-e4-GbU" id="cYh-g1-R46"/>
-                        <outlet property="loginLogoutButton" destination="vwj-hy-Fhk" id="mZ2-VD-Ada"/>
                         <outlet property="logoImageView" destination="636-Zz-5HO" id="sqy-JW-LAG"/>
                         <outlet property="versionLabel" destination="dw2-f1-QbR" id="vxx-0e-B4W"/>
                         <outletCollection property="themableLabels" destination="hE0-Ag-02J" collectionClass="NSMutableArray" id="l2J-BW-U19"/>
@@ -198,22 +176,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qR5-hz-sPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Login" id="jMW-e4-GbU">
                     <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <segue destination="FPy-fH-q4F" kind="show" id="JOD-nZ-C7k"/>
-                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-362" y="1222"/>
-        </scene>
-        <!--SignInScene-->
-        <scene sceneID="DsR-vJ-L0J">
-            <objects>
-                <viewControllerPlaceholder storyboardName="License" referencedIdentifier="SignInScene" id="FPy-fH-q4F" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ibg-eu-nrd"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XNg-aH-uKo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="345" y="1203"/>
         </scene>
         <!--License-->
         <scene sceneID="wcA-DJ-Qv7">
