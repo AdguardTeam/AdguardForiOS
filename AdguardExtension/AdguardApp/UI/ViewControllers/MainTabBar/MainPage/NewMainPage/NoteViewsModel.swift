@@ -18,17 +18,19 @@
 
 import Foundation
 
-protocol ContentBlockersStateModelDelegate: AnyObject {
+protocol NoteViewsModelDelegate: AnyObject {
     func contentBlockersStateChanged()
+    func proStatusChanged()
 }
 
-protocol ContentBlockersStateModelProtocol: AnyObject {
+protocol NoteViewsModelProtocol: AnyObject {
     var shouldShowContentBlockersView: Bool { get }
+    var shouldShowGetProView: Bool { get }
 }
 
-final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
+final class NoteViewsModel: NoteViewsModelProtocol {
     
-    weak var delegate: ContentBlockersStateModelDelegate?
+    weak var delegate: NoteViewsModelDelegate?
     
     private(set) var shouldShowContentBlockersView: Bool {
         didSet {
@@ -38,12 +40,22 @@ final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
         }
     }
     
+    private(set) var shouldShowGetProView: Bool {
+        didSet {
+            if oldValue != shouldShowGetProView {
+                delegate?.proStatusChanged()
+            }
+        }
+    }
+    
     private var contentBlockersStateObserver: NSKeyValueObservation?
+    private var proStatusObserver: NSKeyValueObservation?
     private let configuration: ConfigurationService
     
     init(configuration: ConfigurationService) {
         self.configuration = configuration
         self.shouldShowContentBlockersView = !configuration.allContentBlockersEnabled
+        self.shouldShowGetProView = !configuration.proStatus
         
         configuration.checkContentBlockerEnabled()
         
@@ -51,6 +63,20 @@ final class ContentBlockersStateModel: ContentBlockersStateModelProtocol {
             DispatchQueue.main.async { [weak self] in
                 self?.shouldShowContentBlockersView = !configuration.allContentBlockersEnabled
             }
+        }
+        
+        proStatusObserver =  configuration.observe(\.proStatus) { (_, _) in
+            DispatchQueue.main.async { [weak self] in
+                self?.shouldShowGetProView = !configuration.proStatus
+            }
+        }
+    }
+    
+    deinit {
+        if let contentBlockersStateObserver = contentBlockersStateObserver,
+           let proStatusObserver = proStatusObserver {
+            NotificationCenter.default.removeObserver(contentBlockersStateObserver)
+            NotificationCenter.default.removeObserver(proStatusObserver)
         }
     }
 }

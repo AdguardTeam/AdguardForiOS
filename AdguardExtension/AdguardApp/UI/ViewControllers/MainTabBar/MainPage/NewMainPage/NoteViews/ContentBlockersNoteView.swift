@@ -18,11 +18,7 @@
 
 import Foundation
 
-final class ContentBlockersNoteView: UIView {
-    
-    // MARK: - Public properties
-    
-    var onViewTapped: (() -> Void)?
+final class ContentBlockersNoteView: MainPageNoteView {
     
     // MARK: - UI elements
     
@@ -42,21 +38,10 @@ final class ContentBlockersNoteView: UIView {
         return label
     }()
     
-    private let crossButton: UIButton = {
-        let button = UIButton()
-        let crossImage = UIImage(named: "cross")
-        button.setBackgroundImage(crossImage, for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.addTarget(self, action: #selector(crossButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     // MARK: - initialization
     
-    init() {
-        super.init(frame: .zero)
+    override init() {
+        super.init()
         initialize()
     }
     
@@ -71,52 +56,11 @@ final class ContentBlockersNoteView: UIView {
     }
     
     private func initialize() {
-        layer.cornerRadius = 4.0
-        layer.masksToBounds = true
-        backgroundColor = UIColor.AdGuardColor.lightGray6
-    
-        // Cross button
-        let side: CGFloat = isIpadTrait ? 32.0 : 24.0
-        addSubview(crossButton)
-        crossButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0).isActive = true
-        crossButton.widthAnchor.constraint(equalToConstant: side).isActive = true
-        crossButton.heightAnchor.constraint(equalToConstant: side).isActive = true
-        crossButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
         // Title label
         addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0).isActive = true
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8.0).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: crossButton.leadingAnchor, constant: -16.0).isActive = true
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        guard let touch = touches.first else {
-            return
-        }
-        
-        let location = touch.location(in: self)
-        
-        if crossButton.frame.contains(location) {
-            return
-        }
-        
-        onViewTapped?()
-    }
-    
-    // MARK: - Public methods
-    
-    func dismiss() {
-        removeFromSuperview()
-    }
-    
-    // MARK: - Private methods
-    
-    @objc
-    private func crossButtonTapped() {
-        dismiss()
     }
 }

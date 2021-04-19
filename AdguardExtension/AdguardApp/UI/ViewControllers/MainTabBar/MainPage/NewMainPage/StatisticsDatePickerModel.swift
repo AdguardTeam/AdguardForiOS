@@ -58,6 +58,12 @@ final class StatisticsDatePickerModel: StatisticsDatePickerModelProtocol {
         processShouldShowDateTypePicker()
     }
     
+    deinit {
+        if let proStatusObserver = proStatusObserver {
+            NotificationCenter.default.removeObserver(proStatusObserver)
+        }
+    }
+    
     // MARK: - Private methods
     
     private func addObservers() {

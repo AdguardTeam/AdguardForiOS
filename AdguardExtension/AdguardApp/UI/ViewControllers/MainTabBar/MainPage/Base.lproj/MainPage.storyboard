@@ -1094,25 +1094,60 @@
                                     <constraint firstItem="7lM-f7-rPq" firstAttribute="leading" secondItem="pdi-RN-fam" secondAttribute="leading" id="soI-Gj-C17"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-j7-akf">
+                                <rect key="frame" x="8" y="520" width="398" height="56"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gje-R9-bB4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ttf-uM-oMJ" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" id="BbR-s8-dOq"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="OjK-AE-DPG" secondAttribute="bottom" id="GKw-JZ-IeP"/>
+                            <constraint firstItem="TKh-j7-akf" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="Jfg-QL-3eP"/>
                             <constraint firstItem="OjK-AE-DPG" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" id="K88-5I-D5J"/>
                             <constraint firstItem="Ttf-uM-oMJ" firstAttribute="top" secondItem="Gje-R9-bB4" secondAttribute="top" constant="8" id="PrE-rR-BiO"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="Ttf-uM-oMJ" secondAttribute="trailing" id="RyA-d1-YZx"/>
+                            <constraint firstItem="TKh-j7-akf" firstAttribute="leading" secondItem="Gje-R9-bB4" secondAttribute="leading" constant="8" id="Vbk-dq-mn5"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="b38-gh-HpL" secondAttribute="bottom" constant="116" id="XIk-Xj-Fv7">
+                                <variation key="heightClass=regular-widthClass=regular" constant="182"/>
+                            </constraint>
+                            <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="TKh-j7-akf" secondAttribute="trailing" constant="8" id="dcV-0O-BxQ"/>
+                            <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="TKh-j7-akf" secondAttribute="bottom" constant="116" id="hz7-BA-LEl">
                                 <variation key="heightClass=regular-widthClass=regular" constant="182"/>
                             </constraint>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="kec-6l-uNY"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="lFf-lC-SHE"/>
+                            <constraint firstItem="TKh-j7-akf" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="oJL-MX-TRc"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="top" secondItem="Ttf-uM-oMJ" secondAttribute="bottom" constant="8" id="pbU-1O-1AX"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="pcA-d3-Z5F"/>
+                            <constraint firstItem="TKh-j7-akf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3F1-al-rZI" secondAttribute="bottom" constant="16" id="sbA-7g-g4i"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="OjK-AE-DPG" secondAttribute="trailing" id="umG-Ax-olY"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="centerY" secondItem="Gje-R9-bB4" secondAttribute="centerY" id="wEi-cA-pLX"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dcV-0O-BxQ"/>
+                                <exclude reference="Vbk-dq-mn5"/>
+                                <exclude reference="oJL-MX-TRc"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="dcV-0O-BxQ"/>
+                                <include reference="Vbk-dq-mn5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="dcV-0O-BxQ"/>
+                                <include reference="Vbk-dq-mn5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="oJL-MX-TRc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="AdGuard" id="WE9-Oi-jHf">
@@ -1126,6 +1161,7 @@
                         <outlet property="complexProtectionSwitch" destination="3F1-al-rZI" id="uFu-3H-B62"/>
                         <outlet property="iconsStackView" destination="PJp-st-9AK" id="0x4-QY-1Eg"/>
                         <outlet property="iconsStackViewWidthConstraint" destination="hvt-aR-qCx" id="NnA-gA-auv"/>
+                        <outlet property="notesStackView" destination="TKh-j7-akf" id="64b-Q3-MUS"/>
                         <outlet property="protectionStateLabel" destination="pdi-RN-fam" id="wQg-XG-2WE"/>
                         <outlet property="protectionStatusLabel" destination="7lM-f7-rPq" id="IbR-jz-LUN"/>
                         <outlet property="pullableView" destination="OjK-AE-DPG" id="hIl-R4-iUL"/>

@@ -95,10 +95,23 @@ final class MainPageViewController: PullableContainerController {
         return button
     }()
     
+    
+    @IBOutlet weak var notesStackView: UIStackView!
     private lazy var contentBlockersView: ContentBlockersNoteView = {
         let view = ContentBlockersNoteView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.onViewTapped = { [weak self] in
             self?.showContentBlockersHelperController()
+        }
+        return view
+    }()
+    
+    private lazy var getProNoteView: GetProNoteView = {
+        let view = GetProNoteView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.onViewTapped = { [weak self] in
+            guard let self = self else { return }
+            self.performSegue(withIdentifier: self.getProSegueId, sender: self)
         }
         return view
     }()
@@ -123,7 +136,7 @@ final class MainPageViewController: PullableContainerController {
     /* Models */
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
     private let datePickerModel: StatisticsDatePickerModelProtocol
-    private let contentBlockersModel: ContentBlockersStateModelProtocol
+    private let contentBlockersModel: NoteViewsModelProtocol
     private let protectionModel: MainPageProtectionModelProtocol
 
     /* Helper variables */
@@ -135,7 +148,7 @@ final class MainPageViewController: PullableContainerController {
     
     required init?(coder: NSCoder) {
         datePickerModel = StatisticsDatePickerModel(resources: resources, configuration: configuration)
-        contentBlockersModel = ContentBlockersStateModel(configuration: configuration)
+        contentBlockersModel = NoteViewsModel(configuration: configuration)
         protectionModel = MainPageProtectionModel(resources: resources, complexProtection: complexProtection, nativeProviders: nativeProviders)
         super.init(coder: coder)
     }
@@ -147,7 +160,7 @@ final class MainPageViewController: PullableContainerController {
         
         /* Setting delegates */
         (datePickerModel as! StatisticsDatePickerModel).delegate = self
-        (contentBlockersModel as! ContentBlockersStateModel).delegate = self
+        (contentBlockersModel as! NoteViewsModel).delegate = self
         (protectionModel as! MainPageProtectionModel).delegate = self
         statisticsModel.observers.append(self)
         
@@ -155,6 +168,7 @@ final class MainPageViewController: PullableContainerController {
         setStatisticsDateButtonTitle()
         chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
         contentBlockersStateChanged()
+        proStatusChanged()
         protectionStateChanged()
         processProtectionButtons()
         
@@ -385,26 +399,20 @@ extension MainPageViewController: StatisticsModelObserver {
 
 // MARK: - MainPageViewController + ContentBlockersStateModelDelegate
 
-extension MainPageViewController: ContentBlockersStateModelDelegate {
+extension MainPageViewController: NoteViewsModelDelegate {
     func contentBlockersStateChanged() {
         if contentBlockersModel.shouldShowContentBlockersView {
-            showContentBlockersView()
+            notesStackView.addArrangedSubview(contentBlockersView)
         } else {
             contentBlockersView.dismiss()
         }
     }
     
-    private func showContentBlockersView() {
-        contentBlockersView.translatesAutoresizingMaskIntoConstraints = false
-        view.insertSubview(contentBlockersView, belowSubview: pullableView)
-        
-        contentBlockersView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: isIpadTrait ? -182.0 : -116.0).isActive = true
-        if isIpadTrait {
-            contentBlockersView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            contentBlockersView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.5).isActive = true
+    func proStatusChanged() {
+        if contentBlockersModel.shouldShowGetProView {
+            notesStackView.addArrangedSubview(getProNoteView)
         } else {
-            contentBlockersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0).isActive = true
-            contentBlockersView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0).isActive = true
+            getProNoteView.dismiss()
         }
     }
 }

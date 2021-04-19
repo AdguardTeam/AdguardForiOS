@@ -849,9 +849,8 @@
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
+
 /* (MainTabBarController) Main page tab for VoiceOver*/
-
-
 "main_page_tab" = "Main screen";
 
 /* (MainTabBarController) Protection page tab for VoiceOver*/
@@ -863,10 +862,9 @@
 /* (MainTabBarController) Settings page tab for VoiceOver*/
 "settings_page_tab" = "Settings screen";
 
+// MARK: - MainPageViewController
 
-// MARK: - MainPageController
 /* (MainPageController) safari content blocking enabled title for VoiceOver*/
-
 "safari_protection_enabled_voiceover" = "Safari protection enabled";
 
 /* (MainPageController) safari content blocking disabled title for VoiceOver*/
@@ -890,21 +888,22 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Average time to process a DNS request";
 
+/* (GetProNoteView) title for small view on main page. %@ stands for AdGuard or AdGuard Pro */
+"get_pro_note_view_title" = "Be stronger with %@!";
 
 // MARK: - SystemProtectionEnablerController
-/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
 "enable_system_protection_voiceover" = "Enable DNS protection";
 
-
 // MARK: - GetProTableController
-/* (GetProTableController) Choose your subscription type for VoiceOver*/
 
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
 "choose_sub_voiceover" = "Choose your subscription type";
 
 // MARK: - LoginController
-/* (LoginController) Enter your email here title for VoiceOver*/
 
+/* (LoginController) Enter your email here title for VoiceOver*/
 "enter_email_voiceover" = "Enter your email here";
 
 /* (LoginController) Enter your password here title for VoiceOver*/
