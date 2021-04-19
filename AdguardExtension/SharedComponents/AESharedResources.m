@@ -20,20 +20,13 @@
 #import "ABECFilter.h"
 
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
-NSString *AE_URLSCHEME_COMMAND_ADD = @"add";
-NSString *AE_SDNS_SCHEME = @"sdns";
 
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
 NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
 NSString *AEDefaultsCheckFiltersLastDate = @"AEDefaultsCheckFiltersLastDate";
 NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";
-NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
-NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
-NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
 NSString *AEDefaultsWifiOnlyUpdates = @"AEDefaultsWifiOnlyUpdates";
-NSString *AEDefaultsHideVideoTutorial = @"AEDefaultsHideVideoTutorialCell";
-NSString *AEDefaultsHideSafariVideoTutorial = @"AEDefaultsHideSafariVideoTutorialCell";
 NSString *AEDefaultsInvertedWhitelist = @"AEDefaultsInvertedWhitelist";
 NSString *AEDefaultsAppEntryCount = @"AEDefaultsAppEntryCount";
 NSString *AEDefaultsRateAppShown = @"AEDefaultsRateAppShown";
@@ -44,10 +37,8 @@ NSString *AEDefaultsPremiumExpirationDate = @"AEDefaultsPremiumExpirationDate";
 NSString *AEDefaultsHasPremiumLicense = @"AEDefaultsHasPremiumLicense";
 NSString *AEDefaultsRenewableSubscriptionExpirationDate = @"AEDefaultsRenewableSubscriptionExpirationDate";
 NSString* AEDefaultsNonConsumableItemPurchased = @"AEDefaultsNonConsumableItemPurchased";
-NSString* AEDefaultsPremiumExpiredMessageShowed = @"AEDefaultsPremiumExpiredMessageShowed";
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsSystemAppearenceStyle = @"AEDefaultsSystemAppearenceStyle";
-NSString* AEDefaultsAppRated = @"AEDefaultsAppRated";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
@@ -71,7 +62,6 @@ NSString* AEDefaultsOtherContentBlockerRulesOverLimitCount = @"AEDefaultsOtherCo
 NSString* AEDefaultsCustomContentBlockerRulesOverLimitCount = @"AEDefaultsCustomContentBlockerRulesOverLimitCount";
 NSString* AEDefaultsSecurityContentBlockerRulesOverLimitCount = @"AEDefaultsSecurityContentBlockerRulesOverLimitCount";
 
-NSString* AEDefaultsVPNEnabled = @"AEDefaultsVPNEnabled";
 NSString* AEDefaultsRestartByReachability = @"AEDefaultsRestartByReachability";
 NSString* AEDefaultsDebugLogs = @"AEDefaultsDebugLogs";
 NSString* AEDefaultsVPNTunnelMode = @"AEDefaultsVPNTunnelMode";

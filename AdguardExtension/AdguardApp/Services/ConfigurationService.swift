@@ -55,19 +55,6 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     // MARK: - puplic fields
     
     /**
-     indicates that user has allready rated app in appstore. Actually we can not know this information.
-     This flag shows that we have ollready sent the user to appstore to rate the app.
-     */
-    @objc dynamic var appRated: Bool {
-        set {
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsAppRated)
-        }
-        get {
-            return resources.sharedDefaults().bool(forKey: AEDefaultsAppRated)
-        }
-    }
-    
-    /**
      this flag indicates that pro fetures are purchased
     */
     @objc dynamic var proStatus : Bool {

@@ -39,8 +39,6 @@ typedef enum : NSUInteger {
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
 extern NSString * _Nonnull AE_URLSCHEME;
-extern NSString * _Nonnull AE_URLSCHEME_COMMAND_ADD;
-extern NSString * _Nonnull AE_SDNS_SCHEME;
 
 /**
  User Defaults key that defines app performs first start or not.
@@ -68,34 +66,9 @@ extern NSString * _Nonnull AEDefaultsCheckFiltersLastDate;
 extern NSString * _Nonnull AEDefaultsJSONMaximumConvertedRules;
 
 /**
- User Defaults key that define current count of the rules, which put into converter.
- */
-extern NSString * _Nonnull AEDefaultsJSONRulesForConvertion;
-
-/**
- User Defaults key that define current count of the converted rules.
- */
-extern NSString * _Nonnull AEDefaultsJSONConvertedRules;
-
-/**
- User Defaults key, which define that overlimit of rules was reached.
- */
-extern NSString * _Nonnull AEDefaultsJSONRulesOverlimitReached;
-
-/**
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
 extern NSString * _Nonnull AEDefaultsWifiOnlyUpdates;
-
-/**
- User Defaults key, which defines that video tutorial cell must be hidden.
- */
-extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
-
-/**
- User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
- */
-extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 
 /**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
@@ -111,11 +84,6 @@ extern NSString * _Nonnull AEDefaultsAppEntryCount;
  User Defaults key, which defines whether rate app dialog was shown
  */
 extern NSString * _Nonnull AEDefaultsRateAppShown;
-
-/**
- User Defaults key, which defines the next minimum time to show rate app alert
- */
-extern NSString * _Nonnull MinTimeIntervalToRate;
 
 /**
  User Defaults key, which defines that pro feature is purchased through in app purchases.
@@ -149,20 +117,12 @@ extern NSString* _Nonnull AEDefaultsRenewableSubscriptionExpirationDate;
 extern NSString* _Nonnull AEDefaultsNonConsumableItemPurchased;
 
 /**
- User defaults key, which defines that "pro expired" message showed */
-extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
-
-/**
  User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
 /**
  User defaults key, which defines system appearence style */
 extern NSString* _Nonnull AEDefaultsSystemAppearenceStyle;
-
-/**
- User defaults key, which defines dark theme is on */
-extern NSString*  _Nonnull AEDefaultsAppRated;
 
 /**
  User defaults key, which defines dark theme is on */
@@ -219,10 +179,6 @@ extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 /**
  User default key, which indicates whether safari protection is enabled*/
 extern NSString* _Nonnull SafariProtectionState;
-
-/**
- User defaults key, which defines, whether vpn is enabled */
-extern NSString* _Nonnull AEDefaultsVPNEnabled;
 
 /**
  User defaults key, which defines, whether restart by reachability is enabled */
