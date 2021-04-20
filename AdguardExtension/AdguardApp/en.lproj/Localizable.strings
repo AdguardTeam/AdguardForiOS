@@ -61,6 +61,9 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
 
+/* (MainPageViewController) Title for bottom button on main page */
+"dns_statistics_promo_title" = "DNS statistic can be here";
+
 /* (NativeImplementationView) Native DNS is working title. <span style=color:%@> It is a color for 'is working' */
 "native_dns_working" = "<b>Native DNS <span style=color:%@>is working</span></b>";
 

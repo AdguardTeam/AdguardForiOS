@@ -39,7 +39,7 @@ final class MainPageViewController: PullableContainerController {
             updateFiltersButton.customView = refreshIconButton
         }
     }
-    @IBOutlet weak var chooseStatisticsDateTypeButton: UIButton!
+    @IBOutlet weak var bottomHelperButton: UIButton!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch! {
         didSet {
             complexProtectionSwitch.delegate = self
@@ -135,7 +135,7 @@ final class MainPageViewController: PullableContainerController {
     
     /* Models */
     private let statisticsModel: StatisticsModelProtocol = ServiceLocator.shared.getService()!
-    private let datePickerModel: StatisticsDatePickerModelProtocol
+    private let bottomHelperButtonModel: BottomHelperButtonModelProtocol
     private let contentBlockersModel: NoteViewsModelProtocol
     private let protectionModel: MainPageProtectionModelProtocol
 
@@ -147,7 +147,7 @@ final class MainPageViewController: PullableContainerController {
     override var preferredStatusBarStyle: UIStatusBarStyle { theme.statusbarStyle() }
     
     required init?(coder: NSCoder) {
-        datePickerModel = StatisticsDatePickerModel(resources: resources, configuration: configuration)
+        bottomHelperButtonModel = BottomHelperButtonModel(resources: resources, configuration: configuration)
         contentBlockersModel = NoteViewsModel(configuration: configuration)
         protectionModel = MainPageProtectionModel(resources: resources, complexProtection: complexProtection, nativeProviders: nativeProviders)
         super.init(coder: coder)
@@ -159,14 +159,13 @@ final class MainPageViewController: PullableContainerController {
         super.viewDidLoad()
         
         /* Setting delegates */
-        (datePickerModel as! StatisticsDatePickerModel).delegate = self
+        (bottomHelperButtonModel as! BottomHelperButtonModel).delegate = self
         (contentBlockersModel as! NoteViewsModel).delegate = self
         (protectionModel as! MainPageProtectionModel).delegate = self
         statisticsModel.observers.append(self)
         
         /* Initial UI setup */
-        setStatisticsDateButtonTitle()
-        chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
+        processBottomButton()
         contentBlockersStateChanged()
         proStatusChanged()
         protectionStateChanged()
@@ -256,9 +255,13 @@ final class MainPageViewController: PullableContainerController {
         }
     }
     
-    @IBAction func chooseStatisticsDateTapped(_ sender: UIButton) {
-        presentChooseStatisticsDateAlert { [weak self] dateType in
-            self?.statisticsModel.mainPageDateType = dateType
+    @IBAction func bottomHelperButtonTapped(_ sender: UIButton) {
+        if bottomHelperButtonModel.buttonType == .datePicker {
+            presentChooseStatisticsDateAlert { [weak self] dateType in
+                self?.statisticsModel.mainPageDateType = dateType
+            }
+        } else {
+            performSegue(withIdentifier: getProSegueId, sender: self)
         }
     }
     
@@ -266,7 +269,7 @@ final class MainPageViewController: PullableContainerController {
     
     private func setStatisticsDateButtonTitle() {
         let statisticsButtonTitle = statisticsModel.mainPageDateType.getDateTypeString()
-        chooseStatisticsDateTypeButton.setTitle(statisticsButtonTitle, for: .normal)
+        bottomHelperButton.setTitle(statisticsButtonTitle, for: .normal)
     }
     
     private func processProtectionButtons() {
@@ -373,11 +376,29 @@ extension MainPageViewController: MainPageProtectionModelDelegate {
     }
 }
 
-// MARK: - MainPageViewController + StatisticsDatePickerModelDelegate
+// MARK: - MainPageViewController + BottomHelperButtonModelDelegate
 
-extension MainPageViewController: StatisticsDatePickerModelDelegate {
-    func shouldShowDateTypePickerChanged() {
-        chooseStatisticsDateTypeButton.isHidden = !datePickerModel.shouldShowDateTypePicker
+extension MainPageViewController: BottomHelperButtonModelDelegate {
+    func bottomButtonTypeChanged() {
+        processBottomButton()
+    }
+    
+    func bottomButtonVisibilityChanged() {
+        processBottomButton()
+    }
+    
+    private func processBottomButton() {
+        if bottomHelperButtonModel.buttonType == .datePicker {
+            let image = UIImage(named: "arrow_down")
+            bottomHelperButton.setImage(image, for: .normal)
+            setStatisticsDateButtonTitle()
+        } else {
+            let image = UIImage(named: "question")
+            let text = String.localizedString("dns_statistics_promo_title")
+            bottomHelperButton.setImage(image, for: .normal)
+            bottomHelperButton.setTitle(text, for: .normal)
+        }
+        bottomHelperButton.isHidden = !bottomHelperButtonModel.shouldShowBottomButton
     }
 }
 
@@ -385,11 +406,11 @@ extension MainPageViewController: StatisticsDatePickerModelDelegate {
 
 extension MainPageViewController: StatisticsModelObserver {
     func statisticsChanged() {
-        setStatisticsDateButtonTitle()
+        processBottomButton()
     }
     
     func mainPageDateTypeChanged() {
-        setStatisticsDateButtonTitle()
+        processBottomButton()
     }
     
     func activityPageDateTypeChanged() {

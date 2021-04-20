@@ -18,24 +18,39 @@
 
 import Foundation
 
-protocol StatisticsDatePickerModelDelegate: AnyObject {
-    func shouldShowDateTypePickerChanged()
+protocol BottomHelperButtonModelDelegate: AnyObject {
+    func bottomButtonTypeChanged()
+    func bottomButtonVisibilityChanged()
 }
 
-protocol StatisticsDatePickerModelProtocol: AnyObject {
-    var shouldShowDateTypePicker: Bool { get }
+protocol BottomHelperButtonModelProtocol: AnyObject {
+    var buttonType: BottomHelperButtonModel.ButtonType { get }
+    var shouldShowBottomButton: Bool { get }
 }
 
-final class StatisticsDatePickerModel: StatisticsDatePickerModelProtocol {
+final class BottomHelperButtonModel: BottomHelperButtonModelProtocol {
+    
+    enum ButtonType {
+        case datePicker
+        case proStatusPromotion
+    }
     
     // MARK: - Public properties
     
-    weak var delegate: StatisticsDatePickerModelDelegate?
+    weak var delegate: BottomHelperButtonModelDelegate?
     
-    private(set) var shouldShowDateTypePicker: Bool = false {
+    private(set) var buttonType: ButtonType = .proStatusPromotion {
         didSet {
-            if oldValue != shouldShowDateTypePicker {
-                delegate?.shouldShowDateTypePickerChanged()
+            if oldValue != buttonType {
+                delegate?.bottomButtonTypeChanged()
+            }
+        }
+    }
+    
+    private(set) var shouldShowBottomButton: Bool = false {
+        didSet {
+            if oldValue != shouldShowBottomButton {
+                delegate?.bottomButtonVisibilityChanged()
             }
         }
     }
@@ -55,7 +70,7 @@ final class StatisticsDatePickerModel: StatisticsDatePickerModelProtocol {
         self.configuration = configuration
         
         addObservers()
-        processShouldShowDateTypePicker()
+        processBottomButton()
     }
     
     deinit {
@@ -69,18 +84,27 @@ final class StatisticsDatePickerModel: StatisticsDatePickerModelProtocol {
     private func addObservers() {
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
             DDLogDebug("(MainPageModel) - Received DNS implementation change notification")
-            self?.processShouldShowDateTypePicker()
+            self?.processBottomButton()
         }
         
         proStatusObserver = configuration.observe(\.proStatus) { (_, _) in
             DDLogDebug("(MainPageModel) - Received Pro status change notification")
             DispatchQueue.main.async { [weak self] in
-                self?.processShouldShowDateTypePicker()
+                self?.processBottomButton()
             }
         }
     }
     
-    private func processShouldShowDateTypePicker() {
-        shouldShowDateTypePicker = resources.dnsImplementation == .adGuard && configuration.proStatus
+    private func processBottomButton() {
+        let buttonType: ButtonType = configuration.proStatus ? .datePicker : .proStatusPromotion
+        self.buttonType = buttonType
+        
+        if buttonType == .datePicker {
+            let shouldShowDateTypePicker = resources.dnsImplementation == .adGuard && configuration.proStatus
+            self.shouldShowBottomButton = shouldShowDateTypePicker
+        } else {
+            let shouldShowDnsStatistics = !configuration.proStatus
+            self.shouldShowBottomButton = shouldShowDnsStatistics
+        }
     }
 }

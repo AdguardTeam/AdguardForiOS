@@ -1003,12 +1003,14 @@
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b38-gh-HpL">
                                 <rect key="frame" x="103.5" y="569" width="207" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nEV-mx-lM1">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="arrow_down">
                                     <color key="titleColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1017,8 +1019,8 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 </variation>
                                 <connections>
+                                    <action selector="bottomHelperButtonTapped:" destination="abp-Dl-IQR" eventType="touchUpInside" id="edt-dL-1U3"/>
                                     <action selector="changeStatisticDates:" destination="T6V-s9-cBk" eventType="touchUpInside" id="fA6-ds-pzp"/>
-                                    <action selector="chooseStatisticsDateTapped:" destination="abp-Dl-IQR" eventType="touchUpInside" id="edt-dL-1U3"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F1-al-rZI" customClass="ComplexProtectionSwitch" customModule="Adguard" customModuleProvider="target">
@@ -1115,7 +1117,6 @@
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="bottom" secondItem="TKh-j7-akf" secondAttribute="bottom" constant="116" id="hz7-BA-LEl">
                                 <variation key="heightClass=regular-widthClass=regular" constant="182"/>
                             </constraint>
-                            <constraint firstItem="b38-gh-HpL" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="kec-6l-uNY"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="lFf-lC-SHE"/>
                             <constraint firstItem="TKh-j7-akf" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="oJL-MX-TRc"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="top" secondItem="Ttf-uM-oMJ" secondAttribute="bottom" constant="8" id="pbU-1O-1AX"/>
@@ -1157,7 +1158,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="chooseStatisticsDateTypeButton" destination="b38-gh-HpL" id="Iu5-Xn-8sp"/>
+                        <outlet property="bottomHelperButton" destination="b38-gh-HpL" id="Iu5-Xn-8sp"/>
                         <outlet property="complexProtectionSwitch" destination="3F1-al-rZI" id="uFu-3H-B62"/>
                         <outlet property="iconsStackView" destination="PJp-st-9AK" id="0x4-QY-1Eg"/>
                         <outlet property="iconsStackViewWidthConstraint" destination="hvt-aR-qCx" id="NnA-gA-auv"/>
