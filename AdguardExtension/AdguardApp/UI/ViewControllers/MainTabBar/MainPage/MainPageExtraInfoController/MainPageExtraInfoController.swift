@@ -203,6 +203,7 @@ extension MainPageExtraInfoController: MainPageExtraInfoModelDelegate {
     
     func systemProtectionChanged() {
         processCompactView()
+        dataSource.systemProtectionChanged()
     }
     
     func proStatusChanged() {

@@ -72,7 +72,7 @@ final class NativeImplementationView: MainPageCompactView {
         let status = String(format: format, colorHex)
         let fontSize = titleLabel.font.pointSize
         let fontColor = titleLabel.textColor ?? .clear
-        titleLabel.attributedText = NSMutableAttributedString.fromHtml(status, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
+        titleLabel.setAttributedTitle(status, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
     }
     
     private func processDnsServer() {

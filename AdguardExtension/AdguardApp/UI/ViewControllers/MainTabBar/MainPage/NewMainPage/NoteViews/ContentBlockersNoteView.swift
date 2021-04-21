@@ -33,7 +33,7 @@ final class ContentBlockersNoteView: MainPageNoteView {
         let fontHintColor = UIColor.AdGuardColor.errorRedColor
         let format = String.localizedString("disabled_content_blockers_note")
         let text = String(format: format, fontHintColor.hex())
-        label.attributedText = NSMutableAttributedString.fromHtml(text, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .left)
+        label.setAttributedTitle(text, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .left)
         
         return label
     }()

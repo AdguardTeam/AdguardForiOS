@@ -48,8 +48,12 @@ final class StatisticsCollectionReusableView: UICollectionViewCell, Reusable, Ni
             chartView.leftDateLabelText = chartViewConfig.leftBorderText
             chartView.rightDateLabelText = chartViewConfig.rightBorderText
             chartView.activeChart = statisticsInfoView.currentType
-            // TODO: - process
-            chartView.isEnabled = true
+        }
+    }
+    
+    var chartViewIsEnabled: Bool = false {
+        didSet {
+            chartView.isEnabled = chartViewIsEnabled
         }
     }
     

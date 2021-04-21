@@ -30,6 +30,7 @@ protocol MainPageExtraInfoModelProtocol {
     var storiesModels: [StoryCollectionViewModel] { get }
     var compactViewType: MainPageExtraInfoModel.CompactViewType { get }
     var nativeViewModel: NativeImplementationView.Model { get }
+    var systemProtectionIsEnabled: Bool { get }
     
     func categoryWasWatched(_ category: StoryCategory.CategoryType)
 }
@@ -88,6 +89,8 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
         case storiesWithNativeDns
         case storiesWithProStatusPromotion
     }
+    
+    var systemProtectionIsEnabled: Bool { complexProtection.systemProtectionEnabled }
     
     // MARK: - Services
     

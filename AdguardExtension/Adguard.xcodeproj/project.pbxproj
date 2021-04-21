@@ -616,6 +616,10 @@
 		7E7C8CBA26302B280036030B /* ProStatusPromotionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */; };
 		7E7C8CBB26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */; };
 		7E7C8CBC26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */; };
+		7E7C8D40263079170036030B /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D3F263079170036030B /* UILabel+Utils.swift */; };
+		7E7C8D41263079170036030B /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D3F263079170036030B /* UILabel+Utils.swift */; };
+		7E7C8D57263079310036030B /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D56263079310036030B /* UITextView+Utils.swift */; };
+		7E7C8D58263079310036030B /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D56263079310036030B /* UITextView+Utils.swift */; };
 		7E7C9DAA261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C9DA9261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift */; };
 		7E7C9DAB261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C9DA9261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift */; };
 		7E7C9DCF261F2CE9006D418C /* StatisticsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C9DCE261F2CE9006D418C /* StatisticsInfoView.swift */; };
@@ -3214,6 +3218,8 @@
 		7E7C8C7F26301DEC0036030B /* StatisticsCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsCollectionReusableView.xib; sourceTree = "<group>"; };
 		7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProStatusPromotionCollectionReusableView.swift; sourceTree = "<group>"; };
 		7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProStatusPromotionCollectionReusableView.xib; sourceTree = "<group>"; };
+		7E7C8D3F263079170036030B /* UILabel+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Utils.swift"; sourceTree = "<group>"; };
+		7E7C8D56263079310036030B /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
 		7E7C9DA9261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageExtraInfoCollectionDelegate.swift; sourceTree = "<group>"; };
 		7E7C9DCE261F2CE9006D418C /* StatisticsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsInfoView.swift; sourceTree = "<group>"; };
 		7E7C9E05261F2D09006D418C /* NativeImplementationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeImplementationView.swift; sourceTree = "<group>"; };
@@ -4871,6 +4877,8 @@
 				247432DD261731C00025C7B8 /* UIAlerController+Style.swift */,
 				7E28EBA2261CA60E00179FC8 /* Reusable.swift */,
 				7E7C8BB3262F65780036030B /* NibInitializable.swift */,
+				7E7C8D3F263079170036030B /* UILabel+Utils.swift */,
+				7E7C8D56263079310036030B /* UITextView+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -7097,6 +7105,7 @@
 				D0B5457A2435D5E4002F0AEC /* DnsProviderInfo.swift in Sources */,
 				D0B545E72435D6A1002F0AEC /* UIButton+Utils.swift in Sources */,
 				D0B545B22435D649002F0AEC /* FilterTagsButtons.swift in Sources */,
+				7E7C8D41263079170036030B /* UILabel+Utils.swift in Sources */,
 				659886531CF74DE9003ECD1C /* ACLFileLocker.m in Sources */,
 				659886541CF74DE9003ECD1C /* NSException+Utils.m in Sources */,
 				2425D6A9258F8C430037AEBE /* Dictionary+Utils.swift in Sources */,
@@ -7278,6 +7287,7 @@
 				7EC67F6D2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
 				D0B545D22435D692002F0AEC /* EditingUserFilterController.swift in Sources */,
 				D0B545DE2435D69B002F0AEC /* CustomFilterCell.swift in Sources */,
+				7E7C8D58263079310036030B /* UITextView+Utils.swift in Sources */,
 				D0D7E55D243772E6001801A5 /* Bundle+config.swift in Sources */,
 				D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */,
 				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
@@ -7814,6 +7824,7 @@
 				D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */,
 				7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */,
 				7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */,
+				7E7C8D57263079310036030B /* UITextView+Utils.swift in Sources */,
 				7E4CC0192577DE47005ADBCA /* BugReportController.swift in Sources */,
 				247CB64E2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */,
 				7EB2F94D23F2B64500F9A544 /* RequestSenderProtocol.swift in Sources */,
@@ -7882,6 +7893,7 @@
 				247CB5EA2600C1B10047974C /* OpenLoginControllerParser.swift in Sources */,
 				7E7C8BB4262F65780036030B /* NibInitializable.swift in Sources */,
 				655A022E1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
+				7E7C8D40263079170036030B /* UILabel+Utils.swift in Sources */,
 				D03E537421BA82BE00C62152 /* FiltersService.swift in Sources */,
 				D044AF752183098A00CD9E06 /* AddRuleController.swift in Sources */,
 				7E28E9FA261C64F100179FC8 /* PullableContentController.swift in Sources */,

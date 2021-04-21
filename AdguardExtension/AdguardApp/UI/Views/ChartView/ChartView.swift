@@ -123,7 +123,7 @@ final class ChartView: UIView {
     }
     
     func updateTheme(){
-        backgroundColor = theme.backgroundColor
+        backgroundColor = theme.popupBackgroundColor
         
         leftDateLabel.backgroundColor = theme.backgroundColor
         rightDateLabel.backgroundColor = theme.backgroundColor

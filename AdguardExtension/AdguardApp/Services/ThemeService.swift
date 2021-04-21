@@ -152,7 +152,7 @@ final class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     var tabBarColor: UIColor {
-        return configuration.darkTheme ? UIColor.AdGuardColor.darkBackground : .white
+        return configuration.darkTheme ? UIColor.AdGuardColor.black1 : .white
     }
     
     var ruleTextColor: UIColor {

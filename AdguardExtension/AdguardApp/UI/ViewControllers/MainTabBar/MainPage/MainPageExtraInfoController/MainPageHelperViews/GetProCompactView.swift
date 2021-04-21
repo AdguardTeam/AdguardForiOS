@@ -55,6 +55,6 @@ final class GetProCompactView: MainPageCompactView {
         let string = String(format: format, colorHex)
         let fontSize = titleLabel.font.pointSize
         let fontColor = titleLabel.textColor ?? .clear
-        titleLabel.attributedText = NSMutableAttributedString.fromHtml(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
+        titleLabel.setAttributedTitle(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
     }
 }

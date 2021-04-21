@@ -209,6 +209,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             
             if systemError != nil {
                 self.resources.systemProtectionEnabled = systemOld
+            } else {
+                DDLogDebug("(ComplexProtectionService) - System protection was updated successfully, post note now")
+                NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
             }
             
             completion(systemError)

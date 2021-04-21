@@ -59,11 +59,8 @@ class IntroductionOnboardingController: UIViewController {
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license", buildVersion: productInfo.buildVersion())
         let htmlString = String(format: format, privacy, eula)
-        
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
-        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
-        
-        licenseTextView.attributedText = attributeString
+        licenseTextView.setAttributedTitle(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
     }
 }
 

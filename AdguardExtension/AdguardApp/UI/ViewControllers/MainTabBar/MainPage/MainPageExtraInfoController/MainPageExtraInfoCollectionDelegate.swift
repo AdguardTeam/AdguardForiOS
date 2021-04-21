@@ -62,9 +62,9 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
         case .storiesWithStatistics: headerView = StatisticsCollectionReusableView.fromNib
         case .storiesWithProStatusPromotion: headerView = ProStatusPromotionCollectionReusableView.fromNib
         }
-        headerView.translatesAutoresizingMaskIntoConstraints = true
-        headerView.widthAnchor.constraint(equalToConstant: collectionView.frame.width).isActive = true
-        return headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        var targetSize = UIView.layoutFittingCompressedSize
+        targetSize.width = collectionView.frame.width
+        return headerView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .defaultLow)
     }
     
     // MARK: - Private methods

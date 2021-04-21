@@ -38,6 +38,12 @@ final class MainPageExtraInfoCollectionDataSource: NSObject, UICollectionViewDat
         registerCells()
     }
     
+    // MARK: - Public methods
+    
+    func systemProtectionChanged() {
+        statisticsHeader?.chartViewIsEnabled = model.systemProtectionIsEnabled
+    }
+    
     // MARK: - Data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -88,6 +94,7 @@ final class MainPageExtraInfoCollectionDataSource: NSObject, UICollectionViewDat
             headerView.chartDateType = statisticsModel.mainPageDateType
             headerView.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
             headerView.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
+            headerView.chartViewIsEnabled = model.systemProtectionIsEnabled
             headerView.updateTheme(theme)
             statisticsHeader = headerView
             return headerView

@@ -65,11 +65,13 @@ class MainPageCompactView: UIView {
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabel.font.pointSize + 4.0).isActive = true
         
         descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4.0).isActive = true
         descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor).isActive = true
+        descriptionLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionLabel.font.pointSize + 4.0).isActive = true
     }
     
     // MARK: - Public methods

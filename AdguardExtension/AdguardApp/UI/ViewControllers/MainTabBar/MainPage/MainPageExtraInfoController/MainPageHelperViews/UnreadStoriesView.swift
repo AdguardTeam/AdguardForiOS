@@ -63,6 +63,6 @@ final class UnreadStoriesView: MainPageCompactView {
         let string = String.localizedStringWithFormat(format, unreadStoriesCount, numberColorHex)//String(format: format, unreadStoriesCount, numberColorHex)
         let fontSize = titleLabel.font.pointSize
         let fontColor = titleLabel.textColor ?? .clear
-        titleLabel.attributedText = NSMutableAttributedString.fromHtml(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
+        titleLabel.setAttributedTitle(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .center)
     }
 }

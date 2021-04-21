@@ -19,6 +19,11 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have no responses data in case you use Native DNS. To see statistics switch it to AdGuard DNS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5l-2f-sM5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                     <rect key="frame" x="16" y="347.5" width="622" height="33.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="MyW-BL-uVx">
+                            <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                        </constraint>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
