@@ -75,7 +75,7 @@ class MainPageCompactView: UIView {
     // MARK: - Public methods
     
     func updateTheme(_ themeService: ThemeServiceProtocol) {
-        backgroundColor = themeService.backgroundColor
+        backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabels([titleLabel, descriptionLabel])
     }
 }

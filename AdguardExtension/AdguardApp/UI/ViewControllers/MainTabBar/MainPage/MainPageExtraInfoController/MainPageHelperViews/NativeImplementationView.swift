@@ -20,32 +20,23 @@ import UIKit
 
 final class NativeImplementationView: MainPageCompactView {
     
+    struct Model: Equatable {
+        var dnsIsWorking: Bool = false
+        var dnsProviderName: String = ""
+        var dnsProtocol: String = ""
+    }
+    
     // MARK: - Public properties
     
-    var dnsIsWorking = false {
+    var model = Model() {
         didSet {
-            if oldValue != dnsIsWorking {
+            if oldValue != model {
                 processDnsStatus()
-            }
-        }
-    }
-    
-    var dnsProviderName: String = "" {
-        didSet {
-            if oldValue != dnsProviderName {
                 processDnsServer()
             }
         }
     }
-    
-    var dnsProtocol: String = "" {
-        didSet {
-            if oldValue != dnsProtocol {
-                processDnsServer()
-            }
-        }
-    }
-    
+
     // MARK: - Initializer
     
     override init() {
@@ -76,8 +67,8 @@ final class NativeImplementationView: MainPageCompactView {
     // MARK: - Private methods
     
     private func processDnsStatus() {
-        let format = String.localizedString(dnsIsWorking ? "native_dns_working" : "native_dns_not_working")
-        let colorHex = dnsIsWorking ? UIColor.AdGuardColor.lightGreen2.hex() : UIColor.AdGuardColor.yellow2.hex()
+        let format = String.localizedString(model.dnsIsWorking ? "native_dns_working" : "native_dns_not_working")
+        let colorHex = model.dnsIsWorking ? UIColor.AdGuardColor.lightGreen2.hex() : UIColor.AdGuardColor.yellow2.hex()
         let status = String(format: format, colorHex)
         let fontSize = titleLabel.font.pointSize
         let fontColor = titleLabel.textColor ?? .clear
@@ -86,6 +77,6 @@ final class NativeImplementationView: MainPageCompactView {
     
     private func processDnsServer() {
         let format = String.localizedString("dns_server_info_format")
-        descriptionLabel.text = String(format: format, dnsProviderName, dnsProtocol)
+        descriptionLabel.text = String(format: format, model.dnsProviderName, model.dnsProtocol)
     }
 }

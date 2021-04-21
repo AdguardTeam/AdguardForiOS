@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="ProStatusPromotionCollectionReusableView" customModule="Adguard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="510" height="223"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Stories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-sl-Sav" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="16" y="44" width="478" height="29"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This short narratives tell you about AdGuard benefits and abilities" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWa-eO-Qur" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="16" y="77" width="478" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    </variation>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orQ-xy-Lse">
+                    <rect key="frame" x="8" y="129" width="494" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="T6J-2j-UW2">
+                            <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                        </constraint>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" backgroundImage="pro_status_promo"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    </variation>
+                    <connections>
+                        <action selector="proButtonTouchCanceled:" destination="U6b-Vx-4bR" eventType="touchCancel" id="Hib-3i-Jeb"/>
+                        <action selector="proButtonTouched:" destination="U6b-Vx-4bR" eventType="touchDown" id="FXa-ep-ypi"/>
+                        <action selector="proButtonUntouched:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="s2q-AZ-v8u"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="orQ-xy-Lse" secondAttribute="bottom" id="1GN-Dl-4is"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="kWa-eO-Qur" secondAttribute="trailing" constant="16" id="B4p-u6-qWM"/>
+                <constraint firstItem="wxI-sl-Sav" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="16" id="JJX-na-zNj"/>
+                <constraint firstItem="orQ-xy-Lse" firstAttribute="top" secondItem="kWa-eO-Qur" secondAttribute="bottom" constant="24" id="JJd-92-qWu">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
+                <constraint firstItem="kWa-eO-Qur" firstAttribute="top" secondItem="wxI-sl-Sav" secondAttribute="bottom" constant="4" id="NFy-dc-aPf">
+                    <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                </constraint>
+                <constraint firstItem="wxI-sl-Sav" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" id="V8v-BI-bHv"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="orQ-xy-Lse" secondAttribute="trailing" constant="8" id="WLR-Fm-td8"/>
+                <constraint firstItem="kWa-eO-Qur" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="16" id="ZDO-ax-pbU"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="wxI-sl-Sav" secondAttribute="trailing" constant="16" id="sAI-dH-iYG"/>
+                <constraint firstItem="orQ-xy-Lse" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="8" id="xPG-q0-STT"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionLabel" destination="kWa-eO-Qur" id="eDs-AW-2OZ"/>
+                <outlet property="proButton" destination="orQ-xy-Lse" id="6Jb-xh-x6O"/>
+                <outlet property="titleLabel" destination="wxI-sl-Sav" id="yzx-j5-FSb"/>
+            </connections>
+            <point key="canvasLocation" x="585.50724637681162" y="189.84375"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="pro_status_promo" width="304" height="56"/>
+    </resources>
+</document>

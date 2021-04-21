@@ -29,6 +29,7 @@ protocol MainPageExtraInfoModelProtocol {
     var delegate: MainPageExtraInfoModelDelegate? { get set }
     var storiesModels: [StoryCollectionViewModel] { get }
     var compactViewType: MainPageExtraInfoModel.CompactViewType { get }
+    var nativeViewModel: NativeImplementationView.Model { get }
     
     func categoryWasWatched(_ category: StoryCategory.CategoryType)
 }
@@ -57,6 +58,16 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
         }
     }
     
+    var nativeViewModel: NativeImplementationView.Model {
+        let dnsProtocol = nativeProviders.currentServer?.dnsProtocol ?? .doh
+        let dnsProtocolString = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
+        let dnsIsWorking = complexProtection.systemProtectionEnabled
+        let dnsProviderName = nativeProviders.currentProvider?.name ?? ""
+        return NativeImplementationView.Model(dnsIsWorking: dnsIsWorking,
+                                              dnsProviderName: dnsProviderName,
+                                              dnsProtocol: dnsProtocolString)
+    }
+    
     enum CompactViewType: Equatable {
         case nativeImplementationInfo
         case statisticsInfo
@@ -66,21 +77,24 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
     
     var fullViewType: MainPageExtraInfoModel.FullViewType {
         if configuration.proStatus {
-            return resources.dnsImplementation == .native ? .stories : .storiesWithStatistics
+            return resources.dnsImplementation == .native ? .storiesWithNativeDns : .storiesWithStatistics
         } else {
-            return .stories
+            return .storiesWithProStatusPromotion
         }
     }
     
     enum FullViewType {
-        case stories
         case storiesWithStatistics
+        case storiesWithNativeDns
+        case storiesWithProStatusPromotion
     }
     
     // MARK: - Services
     
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationService
+    private let complexProtection: ComplexProtectionServiceProtocol
+    private let nativeProviders: NativeProvidersServiceProtocol
     
     // MARK: - Observers
     
@@ -89,9 +103,11 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
     private var systemProtectionObserver: NotificationToken?
     private var proStatusObserver: NSKeyValueObservation?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationService) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationService, complexProtection: ComplexProtectionServiceProtocol, nativeProviders: NativeProvidersServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
+        self.complexProtection = complexProtection
+        self.nativeProviders = nativeProviders
         
         addObservers()
     

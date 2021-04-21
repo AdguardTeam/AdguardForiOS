@@ -1206,7 +1206,6 @@
                                         <cells/>
                                     </collectionView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="9Rp-o6-kWx" secondAttribute="trailing" id="Oue-Ye-0xK"/>
                                     <constraint firstAttribute="bottom" secondItem="9Rp-o6-kWx" secondAttribute="bottom" id="X8O-CR-mF0"/>
@@ -1268,9 +1267,6 @@
         <image name="vpn_logo" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

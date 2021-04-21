@@ -21,16 +21,14 @@ import Foundation
 final class MainPageExtraInfoCollectionDataSource: NSObject, UICollectionViewDataSource {
     
     private let collectionView: UICollectionView
-    private unowned let controller: MainPageExtraInfoController // TODO: - maybe unneeded
     private let theme: ThemeServiceProtocol
     private let model: MainPageExtraInfoModel
     private let statisticsModel: StatisticsModelProtocol
     
-    private var statisticsCell: StatisticsCollectionViewCell?
+    private var statisticsHeader: StatisticsCollectionReusableView?
     
-    init(controller: MainPageExtraInfoController, theme: ThemeServiceProtocol, model: MainPageExtraInfoModel, statisticsModel: StatisticsModelProtocol) {
-        self.collectionView = controller.collectionView
-        self.controller = controller
+    init(collectionView: UICollectionView, theme: ThemeServiceProtocol, model: MainPageExtraInfoModel, statisticsModel: StatisticsModelProtocol) {
+        self.collectionView = collectionView
         self.theme = theme
         self.model = model
         self.statisticsModel = statisticsModel
@@ -43,53 +41,28 @@ final class MainPageExtraInfoCollectionDataSource: NSObject, UICollectionViewDat
     // MARK: - Data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        switch model.fullViewType {
-        case .stories: return 1
-        case .storiesWithStatistics: return 2
-        }
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch (model.fullViewType, section) {
-        case (.stories, 0): return model.storiesModels.count
-        case (.storiesWithStatistics, 0): return 1
-        case (.storiesWithStatistics, 1): return model.storiesModels.count
-        default: return 0
-        }
+        return model.storiesModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return storyCell(forIndexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch model.fullViewType {
-        case .stories: return storyCell(forIndexPath: indexPath)
-        case .storiesWithStatistics: return storiesWithStatistics(forIndexPath: indexPath)
+        case .storiesWithNativeDns: return nativeDnsHeaderView(indexPath)
+        case .storiesWithStatistics: return statisticsHeaderView(indexPath)
+        case .storiesWithProStatusPromotion: return proStatusPromotionHeaderView(indexPath)
         }
     }
     
     // MARK: - Private methods
     
-    /* Returns cell for collection view modification with stories and statistics */
-    private func storiesWithStatistics(forIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            let cell: StatisticsCollectionViewCell
-            if statisticsCell != nil {
-                cell = statisticsCell!
-            } else {
-                cell = collectionView.dequeueReusableCell(withReuseIdentifier: StatisticsCollectionViewCell.reuseIdentifier, for: indexPath) as! StatisticsCollectionViewCell
-                statisticsCell = cell
-                cell.delegate = self
-            }
-
-            cell.updateTheme(theme)
-            cell.chartDateType = statisticsModel.mainPageDateType
-            cell.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
-            return cell
-        } else if indexPath.section == 1 {
-            return storyCell(forIndexPath: indexPath)
-        }
-        return UICollectionViewCell()
-    }
-    
-    /* Returns story cell for index path, it will return story cell from cache if it was already created */
+    /* Returns story cell for index path */
     private func storyCell(forIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryCollectionViewCell.reuseIdentifier, for: indexPath) as! StoryCollectionViewCell
         let model = self.model.storiesModels[indexPath.row]
@@ -97,15 +70,48 @@ final class MainPageExtraInfoCollectionDataSource: NSObject, UICollectionViewDat
         return cell
     }
     
+    /* Returns header view for native DNS implementation config */
+    private func nativeDnsHeaderView(_ indexPath: IndexPath) -> NativeDnsCollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NativeDnsCollectionReusableView.reuseIdentifier, for: indexPath) as! NativeDnsCollectionReusableView
+        headerView.nativeDnsModel = model.nativeViewModel
+        headerView.updateTheme(theme)
+        return headerView
+    }
+    
+    /* Returns header view with requests chart and statistics */
+    private func statisticsHeaderView(_ indexPath: IndexPath) -> StatisticsCollectionReusableView {
+        if let statisticsHeader = statisticsHeader {
+            return statisticsHeader
+        } else {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: StatisticsCollectionReusableView.reuseIdentifier, for: indexPath) as! StatisticsCollectionReusableView
+            headerView.delegate = self
+            headerView.chartDateType = statisticsModel.mainPageDateType
+            headerView.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
+            headerView.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
+            headerView.updateTheme(theme)
+            statisticsHeader = headerView
+            return headerView
+        }
+    }
+    
+    /* Returns header view with PRO status promotion */
+    private func proStatusPromotionHeaderView(_ indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProStatusPromotionCollectionReusableView.reuseIdentifier, for: indexPath) as! ProStatusPromotionCollectionReusableView
+        headerView.updateTheme(theme)
+        return headerView
+    }
+    
     private func registerCells() {
+        collectionView.register(UINib(nibName: "NativeDnsCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NativeDnsCollectionReusableView.reuseIdentifier)
+        collectionView.register(UINib(nibName: "StatisticsCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: StatisticsCollectionReusableView.reuseIdentifier)
+        collectionView.register(UINib(nibName: "ProStatusPromotionCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ProStatusPromotionCollectionReusableView.reuseIdentifier)
         collectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: StoryCollectionViewCell.reuseIdentifier)
-        collectionView.register(UINib(nibName: "StatisticsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: StatisticsCollectionViewCell.reuseIdentifier)
     }
 }
 
-// MARK: - MainPageExtraInfoCollectionDataSource + StatisticsCollectionViewCellDelegate
+// MARK: - MainPageExtraInfoCollectionDataSource + StatisticsCollectionReusableViewDelegate
 
-extension MainPageExtraInfoCollectionDataSource: StatisticsCollectionViewCellDelegate {
+extension MainPageExtraInfoCollectionDataSource: StatisticsCollectionReusableViewDelegate {
     func newDateTypeSelected(_ newDateType: ChartDateType) {
         statisticsModel.mainPageDateType = newDateType
     }
@@ -115,15 +121,15 @@ extension MainPageExtraInfoCollectionDataSource: StatisticsCollectionViewCellDel
 
 extension MainPageExtraInfoCollectionDataSource: StatisticsModelObserver {
     func statisticsChanged() {
-        statisticsCell?.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
-        statisticsCell?.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
-        statisticsCell?.chartDateType = statisticsModel.mainPageDateType
+        statisticsHeader?.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
+        statisticsHeader?.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
+        statisticsHeader?.chartDateType = statisticsModel.mainPageDateType
     }
     
     func mainPageDateTypeChanged() {
-        statisticsCell?.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
-        statisticsCell?.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
-        statisticsCell?.chartDateType = statisticsModel.mainPageDateType
+        statisticsHeader?.chartViewConfig = statisticsModel.chartViewConfig(for: statisticsModel.mainPageDateType)
+        statisticsHeader?.statisticsModel = statisticsModel.statistics(for: statisticsModel.mainPageDateType)
+        statisticsHeader?.chartDateType = statisticsModel.mainPageDateType
     }
     
     func activityPageDateTypeChanged() {

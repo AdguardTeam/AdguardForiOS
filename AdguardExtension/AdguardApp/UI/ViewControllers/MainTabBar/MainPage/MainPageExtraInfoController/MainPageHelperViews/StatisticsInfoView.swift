@@ -170,7 +170,7 @@ final class StatisticsInfoView: UIView {
     // MARK: - Public methods
     
     func updateTheme(_ themeService: ThemeServiceProtocol) {
-        backgroundColor = themeService.backgroundColor
+        backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabels([requestsLabel, requestsTitleLabel, encryptedLabel, encryptedTitleLabel, avgTimeLabel, avgTimeTitleLabel])
     }
     

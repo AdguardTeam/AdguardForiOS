@@ -85,6 +85,9 @@
 /* (ContentBlockersNoteView) Title for view, when some content blockers are disabled. <u style=color:%@> It is a color for 'Fix it'*/
 "disabled_content_blockers_note" = "Some content blockers are disabled. <u style=color:%@>Fix it</u>";
 
+/* (ProStatusPromotionCollectionReusableView) - Button title for PRO status promotion */
+"header_pro_status_promo_title" = "Why should I have a <b>Pro version</b>?";
+
 /* (StatisticsCollectionViewCell) Statisctics title */
 "statistics_title" = "Statistics";
 

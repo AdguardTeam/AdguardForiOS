@@ -79,4 +79,11 @@ final class StoryCollectionViewCell: UICollectionViewCell, Reusable {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        UIView.animate(withDuration: 0.1) {
+            self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="StatisticsCollectionReusableView" customModule="Adguard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="660" height="339"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jM9-Zm-Ekl">
+                    <rect key="frame" x="604" y="40" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="8U9-EY-sD6">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                        <constraint firstAttribute="width" constant="24" id="oOu-gI-7yZ">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                    </constraints>
+                    <state key="normal" backgroundImage="statistics_arrow_right"/>
+                    <connections>
+                        <action selector="nextTimePeriod:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="m52-5M-Lxz"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7h-Rb-mBP" customClass="StatisticsInfoView" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="176" width="660" height="129"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pf-Zm-QzF">
+                    <rect key="frame" x="32" y="40" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="1Go-iS-hvm">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                        <constraint firstAttribute="width" constant="24" id="ASp-ME-3c1">
+                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                        </constraint>
+                    </constraints>
+                    <state key="normal" backgroundImage="statistics_arrow_left"/>
+                    <connections>
+                        <action selector="previousTimePeriod:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="31z-Tt-Vgf"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbG-dG-Cv3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="64" y="52" width="532" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48m-w2-8XG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="64" y="52" width="532" height="0.0"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                    </variation>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vt-RW-cEh" customClass="ChartView" customModule="Adguard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="76" width="660" height="100"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="OdW-pQ-3Qg">
+                            <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                        </constraint>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstItem="1pf-Zm-QzF" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="32" id="11g-Rt-fDq"/>
+                <constraint firstItem="a7h-Rb-mBP" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="59b-OC-nTO"/>
+                <constraint firstItem="48m-w2-8XG" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" constant="8" id="6Sx-FT-dnS"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="0Vt-RW-cEh" secondAttribute="trailing" id="7UY-l2-lqW"/>
+                <constraint firstItem="0Vt-RW-cEh" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="B6x-T2-IcR"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="a7h-Rb-mBP" secondAttribute="trailing" id="Jl7-j7-EIq"/>
+                <constraint firstItem="rbG-dG-Cv3" firstAttribute="trailing" secondItem="48m-w2-8XG" secondAttribute="trailing" id="KyR-zk-ZZP"/>
+                <constraint firstItem="rbG-dG-Cv3" firstAttribute="leading" secondItem="48m-w2-8XG" secondAttribute="leading" id="LVy-aX-wvh"/>
+                <constraint firstItem="jM9-Zm-Ekl" firstAttribute="centerY" secondItem="48m-w2-8XG" secondAttribute="centerY" id="PVG-Zy-oAv"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="a7h-Rb-mBP" secondAttribute="bottom" id="Siu-1x-MNx"/>
+                <constraint firstItem="rbG-dG-Cv3" firstAttribute="top" secondItem="48m-w2-8XG" secondAttribute="bottom" id="XiA-U4-UjR"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="jM9-Zm-Ekl" secondAttribute="trailing" constant="32" id="b7W-vA-pfU"/>
+                <constraint firstItem="jM9-Zm-Ekl" firstAttribute="leading" secondItem="48m-w2-8XG" secondAttribute="trailing" constant="8" id="bdq-A9-o37"/>
+                <constraint firstItem="0Vt-RW-cEh" firstAttribute="top" secondItem="rbG-dG-Cv3" secondAttribute="bottom" constant="24" id="jVc-YD-BVA"/>
+                <constraint firstItem="1pf-Zm-QzF" firstAttribute="centerY" secondItem="48m-w2-8XG" secondAttribute="centerY" id="loR-YY-fxC"/>
+                <constraint firstItem="48m-w2-8XG" firstAttribute="leading" secondItem="1pf-Zm-QzF" secondAttribute="trailing" constant="8" id="oY9-LL-Pmp"/>
+                <constraint firstItem="a7h-Rb-mBP" firstAttribute="top" secondItem="0Vt-RW-cEh" secondAttribute="bottom" id="yVk-75-JYA"/>
+            </constraints>
+            <connections>
+                <outlet property="chartView" destination="0Vt-RW-cEh" id="8Aq-Av-092"/>
+                <outlet property="statisticsInfoView" destination="a7h-Rb-mBP" id="90e-3t-9AI"/>
+                <outlet property="statisticsTitleLabel" destination="48m-w2-8XG" id="U4u-bm-a1f"/>
+                <outlet property="timePeriodLabel" destination="rbG-dG-Cv3" id="md4-Nm-spn"/>
+            </connections>
+            <point key="canvasLocation" x="384.05797101449281" y="250.11160714285714"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="statistics_arrow_left" width="24" height="24"/>
+        <image name="statistics_arrow_right" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

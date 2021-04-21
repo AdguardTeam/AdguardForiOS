@@ -18,11 +18,11 @@
 
 import UIKit
 
-protocol StatisticsCollectionViewCellDelegate: AnyObject {
+protocol StatisticsCollectionReusableViewDelegate: AnyObject {
     func newDateTypeSelected(_ newDateType: ChartDateType)
 }
 
-final class StatisticsCollectionViewCell: UICollectionViewCell, Reusable {
+final class StatisticsCollectionReusableView: UICollectionViewCell, Reusable, NibInitializable {
     
     // MARK: - UI Elements
     
@@ -34,7 +34,7 @@ final class StatisticsCollectionViewCell: UICollectionViewCell, Reusable {
     
     // MARK: - Public variables
     
-    weak var delegate: StatisticsCollectionViewCellDelegate?
+    weak var delegate: StatisticsCollectionReusableViewDelegate?
         
     var chartDateType = ChartDateType.alltime {
         didSet {
@@ -64,6 +64,7 @@ final class StatisticsCollectionViewCell: UICollectionViewCell, Reusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         statisticsTitleLabel.text = String.localizedString("statistics_title")
+        timePeriodLabel.text = chartDateType.getDateTypeString()
         statisticsInfoView.delegate = self
         chartView.activeChart = statisticsInfoView.currentType
     }
@@ -71,7 +72,7 @@ final class StatisticsCollectionViewCell: UICollectionViewCell, Reusable {
     // MARK: - Public methods
     
     func updateTheme(_ theme: ThemeServiceProtocol) {
-        backgroundColor = theme.backgroundColor
+        backgroundColor = theme.popupBackgroundColor
         theme.setupLabels([statisticsTitleLabel, timePeriodLabel])
         statisticsInfoView.updateTheme(theme)
         chartView.updateTheme()
@@ -105,9 +106,9 @@ final class StatisticsCollectionViewCell: UICollectionViewCell, Reusable {
     }
 }
 
-// MARK: - StatisticsCollectionViewCell + StatisticsInfoViewDelegate
+// MARK: - StatisticsCollectionReusableView + StatisticsInfoViewDelegate
 
-extension StatisticsCollectionViewCell: StatisticsInfoViewDelegate {
+extension StatisticsCollectionReusableView: StatisticsInfoViewDelegate {
     func activeTypeChanged() {
         chartView.activeChart = statisticsInfoView.currentType
     }

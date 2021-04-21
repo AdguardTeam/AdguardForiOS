@@ -218,6 +218,41 @@ extension AppDelegate {
         return true
     }
     
+    func presentLicenseScreen() {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return
+        }
+        
+        let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
+        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
+            DDLogError("License.storyboard doesnt't have GetProController")
+            return
+        }
+        getProController.loadViewIfNeeded()
+        
+        if navController.topViewController is MainPageViewController {
+            navController.pushViewController(getProController, animated: true)
+            tabBar.selectedViewController = navController
+            return
+        }
+        
+        navController.viewControllers = [mainPageController, getProController]
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+    }
+    
     /*
      Presents DnsProvidersController
      Returns true on success and false otherwise

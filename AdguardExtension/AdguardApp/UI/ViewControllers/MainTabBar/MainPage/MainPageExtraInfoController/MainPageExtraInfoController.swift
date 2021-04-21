@@ -36,12 +36,12 @@ final class MainPageExtraInfoController: PullableContentController {
     // MARK: - Helper models
     
     private lazy var model: MainPageExtraInfoModel = {
-        let md = MainPageExtraInfoModel(resources: resources, configuration: configuration)
+        let md = MainPageExtraInfoModel(resources: resources, configuration: configuration, complexProtection: complexProtection, nativeProviders: nativeProviders)
         md.delegate = self
         return md
     }()
     private lazy var dataSource: MainPageExtraInfoCollectionDataSource = {
-        return MainPageExtraInfoCollectionDataSource(controller: self, theme: theme, model: model, statisticsModel: statisticsModel)
+        return MainPageExtraInfoCollectionDataSource(collectionView: collectionView, theme: theme, model: model, statisticsModel: statisticsModel)
     }()
     private lazy var delegate: MainPageExtraInfoCollectionDelegate = {
         return MainPageExtraInfoCollectionDelegate(controller: self, model: model)
@@ -73,6 +73,13 @@ final class MainPageExtraInfoController: PullableContentController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { context in
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }, completion: nil)
     }
     
     override func parentViewWillTransitionToFullSize() {
@@ -164,10 +171,7 @@ final class MainPageExtraInfoController: PullableContentController {
     }
     
     private func processNativeImplementationInfo() {
-        let dnsProtocol = nativeProviders.currentServer?.dnsProtocol ?? .doh
-        nativeImplementationView.dnsProtocol = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
-        nativeImplementationView.dnsIsWorking = complexProtection.systemProtectionEnabled
-        nativeImplementationView.dnsProviderName = nativeProviders.currentProvider?.name ?? ""
+        nativeImplementationView.model = model.nativeViewModel
     }
     
     private func processStatisticsInfo() {
@@ -238,8 +242,8 @@ extension MainPageExtraInfoController: StoriesPageViewControllerDelegate {
 
 extension MainPageExtraInfoController: ThemableProtocol {
     func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        collectionView.backgroundColor = theme.backgroundColor
+        view.backgroundColor = theme.popupBackgroundColor
+        collectionView.backgroundColor = theme.popupBackgroundColor
         statisticsInfoView.updateTheme(theme)
         nativeImplementationView.updateTheme(theme)
         getProView.updateTheme(theme)
