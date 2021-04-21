@@ -96,7 +96,7 @@ struct SettingsResetor: ISettingsResetor {
             }
             
             // force load filters to fill database
-            self.filtersService.load(refresh: true) {}
+            self.filtersService.load(refresh: true) {_,_ in }
             
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)

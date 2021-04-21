@@ -53,7 +53,7 @@ protocol FiltersAndGroupsViewModelProtocol: class {
     func load(_ completion: @escaping ()->Void)
     
     /* refresh filters list*/
-    func refresh(_ complition: @escaping()->Void)
+    func refresh(_ completion: @escaping()->Void)
     
     /* sets groups change observer */
     func bind(groupChanged: @escaping (_ index: Int)->Void)
@@ -225,14 +225,16 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
 
     func load(_ completion: @escaping () -> Void) {
-        filtersService.load(refresh: false, completion)
+        filtersService.load(refresh: false) {_,_ in
+            completion()
+        }
     }
     
-    func refresh(_ complition: @escaping () -> Void) {
-        filtersService.load(refresh: true) { [weak self] in
+    func refresh(_ completion: @escaping () -> Void) {
+        filtersService.load(refresh: true) { [weak self] _,_  in
             self?.updateAllGroups()
             self?.updateCurrentGroup()
-            complition()
+            completion()
         }
     }
 

@@ -401,12 +401,6 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 @property (nullable) AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
 
 /**
- Filter metadata from last filter update process.
- We need it because filter update process is performed in two steps.
- */
-@property (nullable) ABECFilterClientMetadata *lastUpdateFilterMetadata;
-
-/**
  Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
  */
 @property (nullable) ABECFilterClientMetadata *filtersMetadataCache;
@@ -415,16 +409,6 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
  Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
  */
 @property (nullable) ABECFilterClientLocalization *i18nCacheForFilterSubscription;
-
-/**
- Filter Ids from last filter update process.
- */
-@property (nullable) NSArray <NSNumber *> *lastUpdateFilterIds;
-/**
- Filter rules from last filter update process.
- We need it because filter update process is performed in two steps.
- */
-@property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 

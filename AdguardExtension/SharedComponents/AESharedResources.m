@@ -123,9 +123,6 @@ NSString *BlockIpv6 = @"BlockIpv6";
 
 NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
-#define AES_LAST_UPDATE_FILTERS_META            @"lastupdate-metadata.data"
-#define AES_LAST_UPDATE_FILTER_IDS              @"lastupdate-filter-ids.data"
-#define AES_LAST_UPDATE_FILTERS                 @"lastupdate-filters-v2.data"
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 #define AES_SAFARI_WHITELIST_RULES              @"safari-whitelist-rules.data"
 #define AES_SAFARI_INVERTED_WHITELIST_RULES     @"safari-inverdet-whitelist-rules.data"
@@ -238,32 +235,6 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
     }
 }
 
-
-- (ABECFilterClientMetadata *)lastUpdateFilterMetadata {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setLastUpdateFilterMetadata:(ABECFilterClientMetadata *)lastUpdateFilterMetadata {
-    
-    if (lastUpdateFilterMetadata == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilterMetadata];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERS_META];
-    }
-}
-
 - (ABECFilterClientMetadata *)filtersMetadataCache {
     
     NSData *data = [self loadDataFromFileRelativePath:AES_FILTERS_META_CACHE];
@@ -311,56 +282,6 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
         }
         
         [self saveData:data toFileRelativePath:AES_FILTERS_I18_CACHE];
-    }
-}
-
-- (NSDictionary <NSNumber *, ASDFilter *> *)lastUpdateFilters {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTERS];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setLastUpdateFilters:(NSDictionary <NSNumber *, ASDFilter *> *)lastUpdateFilters {
-    
-    if (lastUpdateFilters == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTERS];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilters];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTERS];
-    }
-}
-
-- (NSArray <NSNumber *> *)lastUpdateFilterIds {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setLastUpdateFilterIds:(NSArray<NSNumber *> *)lastUpdateFilterIds {
-    
-    if (lastUpdateFilterIds == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:lastUpdateFilterIds];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_LAST_UPDATE_FILTER_IDS];
     }
 }
 

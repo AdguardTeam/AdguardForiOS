@@ -28,17 +28,17 @@ extern NSString * _Nonnull ASAntibannerNotInstalledNotification;
 extern NSString * _Nonnull ASAntibannerReadyNotification;
 
 /// When antibanner filter rules updated
-extern NSString * _Nonnull ASAntibannerUpdateFilterRulesNotification;
+//extern NSString * _Nonnull ASAntibannerUpdateFilterRulesNotification;
 
 /// When anitbanner started update process
-extern NSString * _Nonnull ASAntibannerStartedUpdateNotification;
+//extern NSString * _Nonnull ASAntibannerStartedUpdateNotification;
 /// When antibanner does not start update process, according to internal reason.
-extern NSString * _Nonnull ASAntibannerDidntStartUpdateNotification;
+//extern NSString * _Nonnull ASAntibannerDidntStartUpdateNotification;
 /// When some part of the update process completed
-extern NSString * _Nonnull ASAntibannerUpdatePartCompletedNotification;
+//extern NSString * _Nonnull ASAntibannerUpdatePartCompletedNotification;
 
 /// When anitbanner finished update process
-extern NSString * _Nonnull ASAntibannerFinishedUpdateNotification;
+//extern NSString * _Nonnull ASAntibannerFinishedUpdateNotification;
 
 /// Key for userInfo of ASAntibannerFinishedUpdateNotification that defines
 /// array of metadata objects of updated filters.
@@ -116,9 +116,8 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  @return ASDGroupsI18n object that contains data from database.
  */
 - (nonnull ASDGroupsI18n *)groupsI18n;
-/**
  
- /**
+/**
   Obtains groups localization information.
   @return ASDGroupsI18n object that contains data from default database.
   */
@@ -277,9 +276,6 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 /**
  Performs subscription to filters.
  Inserts filter metadata from filters parameter into production DB.
- Copies the rules from default DB into production DB if they present,
- or tries to obtain the rules from backend server.
- 
  @param filters         List of the ASDFilterMetadata objects, which will be save into DB.
  */
 - (BOOL)subscribeFilters:(nonnull NSArray<ASDFilterMetadata*>*) filters;
@@ -293,6 +289,19 @@ extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
  last filters update time of nil
  */
 - (nullable NSDate*) filtersLastUpdateTime;
+
+/** update fiters meta in database */
+- (BOOL)updateFilters: (nonnull NSArray<ASDFilterMetadata*>*) filters;
+
+/** update groups meta in database */
+- (BOOL)updateGroups: (nonnull NSArray<ASDFilterGroup*>*) groups;
+
+/** update fiters internalizations in database */
+- (BOOL)updateFiltersI18n: (nonnull ASDFiltersI18n*) filters;
+
+/** update groups internalizations in database */
+- (BOOL)updateGroupsI18n: (nonnull ASDGroupsI18n*) groups;
+
 
 /**
  transaction support

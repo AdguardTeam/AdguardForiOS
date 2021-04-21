@@ -229,4 +229,26 @@ class AntibannerMock: NSObject, AESAntibannerProtocol {
     func removeRules(forFilter filterId: NSNumber) -> Bool {
         return true
     }
+    
+    func update(_ filters: ASDFiltersI18n) -> Bool {
+        return true
+    }
+    
+    func update(_ groups: ASDGroupsI18n) -> Bool {
+        return true
+    }
+    
+    func updateFilters(_ filters: [ASDFilterMetadata], overwriteEnabled: Bool) -> Bool {
+        storedFilters = storedFilters.filter({ (filter) -> Bool in
+            !filters.contains { $0.filterId == filter.filterId}
+        })
+        
+        storedFilters.append(contentsOf: filters)
+        
+        return true
+    }
+    
+    func update(_ groups: [ASDFilterGroup], overwriteEnabled: Bool) -> Bool {
+        return true
+    }
 }

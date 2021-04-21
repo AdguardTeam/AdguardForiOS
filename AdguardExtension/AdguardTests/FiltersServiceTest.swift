@@ -190,4 +190,40 @@ class FiltersServiceTest: XCTestCase {
         let filter = group.filters[1]
         XCTAssertEqual(filter.name, newName)
     }
+    
+    func testUpdateFilters() {
+        
+        let antibanner = AntibannerMock()
+        let antibannerController = AntibannerControllerMock(antibanner)
+        let contentBlocker = ContentBlockerServiceMock()
+        let configuration = ConfigurationServiceMock()
+        let httpRequestService = HttpRequestServiceMock()
+        let requestSender = httpRequestService.requestSender as! RequestSenderMock
+        
+        let metadata = ABECFilterClientMetadata()
+        let group = ASDFilterGroup()
+        group.groupId = 1
+        metadata.groups = [group]
+        let filter = ASDFilterMetadata()
+        filter.filterId = 2
+        metadata.filters = [filter]
+        requestSender.result = metadata
+              
+        let fitlersService = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: httpRequestService, filtersStorage: FiltersStorageMock())
+        
+        let expectation = XCTestExpectation()
+        
+        fitlersService.load(refresh: true) {
+            
+            XCTAssertTrue(requestSender.sendCalled)
+            
+            let filters = antibanner.filters()
+            XCTAssert(filters.count > 0)
+            XCTAssert(filters.first?.filterId == 2)
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2.0)
+    }
 }

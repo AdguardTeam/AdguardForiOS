@@ -47,7 +47,7 @@ protocol FiltersServiceProtocol {
     /** load filters metadata.
      @refresh - if yes - force load metadata from server. Ignore update timeout.
      */
-    func load(refresh: Bool, _ completion: @escaping () -> Void)
+    func load(refresh: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void)
     
     /* reser service */
     func reset()
@@ -174,7 +174,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         antibannerController.onReady { [weak self] (antibanner) in
             self?.antibanner = antibanner
-            self?.load(refresh: false){}
+            self?.load(refresh: false){_,_ in }
         }
     }
     
@@ -184,7 +184,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - public methods
     
-    func load(refresh: Bool, _ completion: @escaping () -> Void){
+    func load(refresh: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void){
         
         antibannerController.onReady {[weak self] antibanner in
             self?.groupsQueue.async { [weak self] in
@@ -197,11 +197,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 guard let metadata = self.metadata(refresh: refresh),
                       let i18n = self.filtersI18n(refresh: refresh),
                     var filters = metadata.filters else {
-                        DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-                        }
-                        completion()
-                        return
+                        // todo: move this to model
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                    }
+                    completion(0, FiltersServiceErrors.metadataUpdateError)
+                    return
                 }
                 
                 // remove "Malware Domains" filter from filters list.
@@ -285,10 +286,12 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 self.removeObsoleteFilter(metadata: metadata, dbFilters: filters)
                 
                 // update filter rules
+                
+                let customFilters = installedFilters.filter { $0.groupId.intValue == AdGuardFilterGroup.custom.rawValue }
+                
                 if refresh {
                     self.updateFilterRulesSync(identifiers: filtersNeededUpdate)
                     
-                    let customFilters = installedFilters.filter { $0.groupId.intValue == AdGuardFilterGroup.custom.rawValue }
                     let filterUrls = customFilters.compactMap { (meta) -> (Int, URL)? in
                         if let url = URL(string: meta.subscriptionUrl) {
                             return (meta.filterId.intValue, url)
@@ -298,12 +301,28 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     self.updateCustomFiltersSync(filterUrls: filterUrls)
                 }
                 
+                // save filtersMetadata in database
+                if let filters = metadata.filters {
+                    antibanner.updateFilters(filters)
+                }
+                if let groups = metadata.groups {
+                    antibanner.update(groups)
+                }
+                if let filters = i18n.filters {
+                    antibanner.update(filters)
+                }
+                if let groups = i18n.groups {
+                    antibanner.update(groups)
+                }
+                
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.groups = groupInfos ?? [Group]()
                     self.filterMetas = filters
                     self.notifyChange()
-                    completion()
+                    
+                    let updatedFiltersCount = filtersNeededUpdate.count + customFilters.count
+                    completion(updatedFiltersCount, nil)
                     NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
             }
@@ -703,6 +722,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     private func notifyChange() {
         DispatchQueue.main.async {
+            // todo: maybe remove this notification
             NotificationCenter.default.post(Notification(name: self.updateNotification))
             self.willChangeValue(for: \.activeFiltersCount)
             self.didChangeValue(for: \.activeFiltersCount)
@@ -771,4 +791,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         group.wait()
     }
+}
+
+enum FiltersServiceErrors: Error {
+    case metadataUpdateError
 }

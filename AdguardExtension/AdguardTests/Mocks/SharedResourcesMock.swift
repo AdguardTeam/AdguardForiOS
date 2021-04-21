@@ -77,16 +77,11 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
     
     var i18nCacheForFilterSubscription: ABECFilterClientLocalization?
     
-    var lastUpdateFilterIds: [NSNumber]?
-    
-    var lastUpdateFilters: [NSNumber : ASDFilter]?
-    
     var activeDnsServer: DnsServerInfo? = nil
     
     func path(forRelativePath relativePath: String) -> String {
         return "test_domain\(relativePath)"
     }
-    
     
     override init() {
         super.init()

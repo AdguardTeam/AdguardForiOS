@@ -302,7 +302,7 @@ class MigrationService: MigrationServiceProtocol {
             self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
         }
             
-        filtersService.load(refresh: true) {}
+        filtersService.load(refresh: true) {_,_ in }
     }
     
     private func updateDnsFilters() {
