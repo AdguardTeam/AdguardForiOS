@@ -20,7 +20,6 @@ import Foundation
 import Zip
 
 protocol SupportServiceProtocol {
-    func composeWebReportUrl(_ site: URL?) -> URL
     func exportLogs() -> URL?
     func deleteLogsFiles()
     func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
@@ -67,48 +66,6 @@ class SupportService: SupportServiceProtocol {
         self.requestsService = requestsService
         self.keyChainService = keyChainService
         self.safariService = safariService
-    }
-    
-    func composeWebReportUrl(_ site: URL?) -> URL {
-        var params: [String: String] = [:]
-        
-        if let site = site {
-            params["url"] = site.absoluteString
-        }
-        
-        params["product_type"] = "iOS"
-        params["product_version"] = productInfo.version()
-        params["browser"] = "Safari"
-        
-        let filterIDs = antibanner.activeFilterIDs().map { $0.stringValue }
-        let filtersString = filterIDs.joined(separator: ".")
-        
-        params["filters"] = filtersString
-            
-        let dnsEnabled = complexProtection.systemProtectionEnabled
-    
-        params["dns.enabled"] = dnsEnabled ? "true" : "false"
-        
-        if (dnsEnabled){
-            if let dnsServer = dnsProviders.activeDnsServer {
-                params["dns.servers"] = dnsServer.upstreams.joined(separator: ",")
-            }
-            
-            let filtersEnabled = configuration.advancedMode
-            
-            params["dns.filters_enabled"] = filtersEnabled ? "true" : "false"
-            
-            if filtersEnabled {
-                let filters = dnsFilters.filters.filter { $0.enabled }
-                let filterUrls = filters.compactMap { $0.subscriptionUrl }
-                params["dns.filters"] = filterUrls.joined(separator: ",")
-            }
-        }
-            
-        let paramsString = ABECRequest.createString(fromParameters: params)
-        let url = "\(reportUrl)?\(paramsString)"
-        
-        return URL(string: url)!
     }
     
     func exportLogs() -> URL? {
@@ -259,6 +216,11 @@ class SupportService: SupportServiceProtocol {
         Dns server id: \(server?.serverId ?? "")
         Dns custom bootstrap servers: \(customBootstraps)"
         Dns custom fallback servers: \(customFallbacks)"
+
+        VPN application info:
+
+        AdGuard VPN is installed on device: \(UIApplication.adGuardVpnIsInstalled)
+        AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
         """
         
         for upstream in server?.upstreams ?? [] {

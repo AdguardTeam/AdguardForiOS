@@ -424,6 +424,15 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var setappUsed: Bool {
+        get {
+            sharedDefaults().bool(forKey: setAppUsedKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: setAppUsedKey)
+        }
+    }
+    
     // MARK: - private methods
     
     private func filterEnabled(defaultsKey: String)->Bool {
@@ -442,6 +451,10 @@ extension AESharedResourcesProtocol {
         
         return value
     }
+}
+
+fileprivate extension AESharedResourcesProtocol {
+    var setAppUsedKey: String { "setAppActivatedKey" }
 }
 
 extension Notification.Name {

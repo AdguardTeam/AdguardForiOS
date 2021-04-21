@@ -34,6 +34,7 @@ class LowLevelSettingsController: UITableViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
+    @IBOutlet var notSupportedLabels: [UILabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -46,6 +47,8 @@ class LowLevelSettingsController: UITableViewController {
     private let boostraps = 4
     private let fallbacks = 5
     
+    private var dnsImplementationObserver: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +56,13 @@ class LowLevelSettingsController: UITableViewController {
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
         updateTheme()
+        
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.setupNotSupportedLabels(isNative: self.resources.dnsImplementation == .native)
+        }
+        
+        setupNotSupportedLabels(isNative: resources.dnsImplementation == .native)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,6 +191,14 @@ class LowLevelSettingsController: UITableViewController {
             headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
             betaChannelTextView.attributedText = headerText
+        }
+    }
+    
+    private func setupNotSupportedLabels(isNative: Bool) {
+        if isNative {
+            notSupportedLabels.forEach { $0.text = String.localizedString("unsupported_setting") }
+        } else {
+            notSupportedLabels.forEach { $0.text = nil }
         }
     }
 

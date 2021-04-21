@@ -152,14 +152,14 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     }
     
     private func premiumExpired() {
-        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
+        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController }) else { return }
         let message = String.localizedString("login_premium_expired_message")
         self.navigationController?.popToViewController(controller, animated: true)
         notificationService.postNotificationInForeground(body: message, title: "")
     }
     
     private func notPremium() {
-        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController || $0 is AboutViewController }) else { return }
+        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController }) else { return }
         let message = String.localizedString("not_premium_message")
         self.navigationController?.popToViewController(controller, animated: true)
         notificationService.postNotificationInForeground(body: message, title: "")

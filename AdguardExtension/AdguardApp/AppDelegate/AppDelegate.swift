@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
     private var proStatusObservation: NSKeyValueObservation?
-    
+    private var setappObservation: NotificationToken?
     
     private var fetchPerformer: IBackgroundFetchPerformer?
     private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
@@ -148,10 +148,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
-        subscribeToUserNotificationServiceNotifications()
         AppDelegate.setPeriodForCheckingFilters()
-        subscribeToThemeChangeNotification()
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
+        subscribeToNotifications()
         
         return true
     }
@@ -197,6 +195,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         DDLogError("(AppDelegate) application Open URL.")
         activateWithOpenUrl = true
+        
+        if setappService.openUrl(url, options: options) {
+            return true
+        }
         
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
                                                           configurationService: configuration,
@@ -356,6 +358,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              }
          }
      }
+    
+    private func subscribeToNotifications() {
+        subscribeToUserNotificationServiceNotifications()
+        
+        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
+        
+        subscribeToThemeChangeNotification()
+        
+        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
+            if let vc = Self.topViewController() {
+                    ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
+                    
+            }
+        }
+    }
     
     //MARK: - Init logger
     

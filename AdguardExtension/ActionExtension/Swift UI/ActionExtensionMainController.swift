@@ -38,7 +38,7 @@ class ActionExtensionMainController: UITableViewController {
     var resources: AESharedResourcesProtocol?
     var safariService: SafariServiceProtocol?
     var contentBlockerService: ContentBlockerService?
-    var support: SupportServiceProtocol?
+    var webReporter: ActionWebReporterProtocol?
     var theme: ThemeServiceProtocol?
     var configuration: SimpleConfigurationSwift?
     
@@ -190,7 +190,7 @@ class ActionExtensionMainController: UITableViewController {
     }
     
     @IBAction func clickedMissedAd(_ sender: UITapGestureRecognizer) {
-        guard let url = support?.composeWebReportUrl(self.url) else { return }
+        guard let url = webReporter?.composeWebReportUrl(self.url) else { return }
         openWithUrl(url)
         self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
