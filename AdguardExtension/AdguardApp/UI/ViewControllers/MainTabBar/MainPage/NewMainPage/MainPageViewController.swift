@@ -215,7 +215,7 @@ final class MainPageViewController: PullableContainerController {
     // MARK: - Actions
     
     @objc private func updateFilters() {
-        
+        // TODO: - Implement when SDK is finished
     }
     
     @objc private func safariProtectionTapped() {

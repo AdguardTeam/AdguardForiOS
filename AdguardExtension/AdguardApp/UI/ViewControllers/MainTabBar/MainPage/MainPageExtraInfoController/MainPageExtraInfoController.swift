@@ -86,6 +86,7 @@ final class MainPageExtraInfoController: PullableContentController {
         super.parentViewWillTransitionToFullSize()
         fullView.fadeIn(0.3, 0.1)
         compactView.fadeOut(0.1)
+        collectionView.isScrollEnabled = true
         vibrationGenerator.impactOccurred()
     }
     
@@ -104,6 +105,7 @@ final class MainPageExtraInfoController: PullableContentController {
         
         compactView.fadeIn(0.1, 0.3)
         fullView.fadeOut(0.3)
+        collectionView.isScrollEnabled = false
         vibrationGenerator.impactOccurred()
     }
     
