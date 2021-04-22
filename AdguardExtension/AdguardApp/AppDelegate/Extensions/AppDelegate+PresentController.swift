@@ -157,6 +157,11 @@ extension AppDelegate {
             return false
         }
         
+        mainPageController.loadViewIfNeeded()
+        navController.viewControllers = [mainPageController]
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+        
         /*
          When complex protection is switched from widget this variable will become non optional
          We should process this variable when presenting controller
@@ -164,11 +169,6 @@ extension AppDelegate {
         if let complexProtectionState = enabled {
             mainPageController.turnComplexProtection(complexProtectionState)
         }
-        mainPageController.loadViewIfNeeded()
-        
-        navController.viewControllers = [mainPageController]
-        tabBar.selectedViewController = navController
-        window?.rootViewController = tabBar
         
         return true
     }
@@ -591,13 +591,13 @@ extension AppDelegate {
         }
         
         mainPageController.loadViewIfNeeded()
-        if let importSettings = settings {
-            mainPageController.showImportSettings(importSettings)
-        }
-        
         navController.viewControllers = [mainPageController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
+        
+        if let importSettings = settings {
+            mainPageController.showImportSettings(importSettings)
+        }
         
         return true
     }
