@@ -3205,8 +3205,6 @@
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
-		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
-		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
 		7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsServiceMock.swift; sourceTree = "<group>"; };
 		7E7C8BB3262F65780036030B /* NibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibInitializable.swift; sourceTree = "<group>"; };
@@ -5070,10 +5068,8 @@
 			isa = PBXGroup;
 			children = (
 				D09E2D9F255E6141002D6BC0 /* ImportSettings */,
-				7E74FCAF239F9C96006C0990 /* MainPageModel.swift */,
 				7E28EB2E261C9FA800179FC8 /* MainPageExtraInfoController */,
 				7E133BF4262842AC002867E8 /* NewMainPage */,
-				7E74FCAB239F9BF7006C0990 /* MainPageController.swift */,
 				7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */,
 				7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */,
 				7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */,
