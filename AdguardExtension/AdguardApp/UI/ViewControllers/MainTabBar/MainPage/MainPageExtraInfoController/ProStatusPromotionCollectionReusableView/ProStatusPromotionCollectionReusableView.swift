@@ -65,7 +65,6 @@ final class ProStatusPromotionCollectionReusableView: UICollectionReusableView, 
         let string = String.localizedString("header_pro_status_promo_title")
         let fontSize = proButton.titleLabel?.font.pointSize ?? 16.0
         let fontColor = proButton.titleColor(for: .normal) ?? .white
-        let attrText = NSMutableAttributedString.fromHtml(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .left)
-        proButton.setAttributedTitle(attrText, for: .normal)
+        proButton.setAttributedTitle(string, fontSize: fontSize, color: fontColor, attachmentImage: nil, textAlignment: .left)
     }
 }

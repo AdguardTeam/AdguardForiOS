@@ -1120,6 +1120,15 @@
 /* Third Safari protection story button title */
 "story_safari_protection_3_button_title" = "MORE ON DNS";
 
+/* Fourth Safari protection story title */
+"story_safari_protection_4_title" = "Are there other options?";
+
+/* Fourth Safari protection story descriptions */
+"story_safari_protection_4_description" = "Yes, but they are a bit more complicated and don't fit the stories format. Tap the button to dive deeper into them.";
+
+/* Fourth Safari protection story button title */
+"story_safari_protection_4_button_title" = "LEARN MORE";
+
 // ----- YouTube ads -----
 
 /* YouTube ads category title */

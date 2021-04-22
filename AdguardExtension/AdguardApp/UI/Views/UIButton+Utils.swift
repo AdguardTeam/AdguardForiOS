@@ -20,6 +20,19 @@ import Foundation
 import UIKit
 
 extension UIButton {
+    /*
+     Should be used to set attributed text
+     When app goes to background, setting attributedText will crash the app
+     It looks like Swift bug https://developer.apple.com/forums/thread/115405
+     */
+    func setAttributedTitle(_ html: String, fontSize: CGFloat, color: UIColor, attachmentImage: UIImage?, textAlignment: NSTextAlignment = .left) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            let text = NSMutableAttributedString.fromHtml(html, fontSize: fontSize, color: color, attachmentImage: attachmentImage, textAlignment: textAlignment)
+            self.setAttributedTitle(text, for: .normal)
+        }
+    }
+    
     /**
      Makes button's title uppercased for paticular state (default is normal)
      */

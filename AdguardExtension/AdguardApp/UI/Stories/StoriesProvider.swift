@@ -18,28 +18,118 @@
 
 import Foundation
 
+protocol StoriesProviderDelegate: AnyObject {
+    func storiesChanged()
+}
+
+protocol StoriesProviderProtocol: AnyObject {
+    var stories: [StoryGroup] { get }
+    var categories: [StoryCategory] { get }
+    var actions: [StoryActionType] { get }
+    var unwatchedStories: Set<StoryCategory.CategoryType> { get }
+    var unwatchedStoriesCount: Int { get }
+}
+
 /* StoriesProvider contains all information about stories */
-struct StoriesProvider {
+final class StoriesProvider: StoriesProviderProtocol {
     
     // MARK: - Public properties
     
-    static let stories: [StoryGroup] = { storiesContext?.stories ?? [] }()
-    static let allCategories: [StoryCategory] = { storiesContext?.categories ?? [] }()
-    static let allActions = { storiesContext?.actions ?? [] }()
+    weak var delegate: StoriesProviderDelegate?
+    
+    var unwatchedStoriesCount: Int { unwatchedStories.count }
+    
+    var unwatchedStories: Set<StoryCategory.CategoryType> {
+        let watchedStories = resources.watchedStoriesCategories
+        var allAvailableStories: Set<StoryCategory.CategoryType> = Set(stories.map { $0.category.type })
+        allAvailableStories.subtract(watchedStories)
+        return allAvailableStories
+    }
+    
+    private(set) var stories: [StoryGroup] = []
+    private(set) lazy var categories: [StoryCategory] = { storiesContext?.categories ?? [] }()
+    private(set) lazy var actions: [StoryActionType] = { storiesContext?.actions ?? [] }()
     
     // MARK: - Private properties
     
-    private static let storiesContext: StoriesContext? = {
-        storiesQueue.sync {
+    private lazy var allStories = { storiesContext?.stories ?? [] }()
+    
+    private lazy var storiesContext: StoriesContext? = {
+        storiesInitQueue.sync {
             return generateStoriesFromFile()
         }
     }()
     
-    private static let storiesQueue = DispatchQueue(label: "stories.init.queue")
+    private let storiesInitQueue = DispatchQueue(label: "stories.init.queue")
+    private let workingQueue = DispatchQueue(label: "stories.working.queue")
+    
+    /* Services */
+    private let configuration: ConfigurationService
+    private let resources: AESharedResourcesProtocol
+    
+    /* Observers */
+    private var appWillEnterForegroundObserver: NotificationToken?
+    private var proStatusObserver: NSKeyValueObservation?
+    
+    // MARK: - Initializer
+    
+    init(configuration: ConfigurationService, resources: AESharedResourcesProtocol) {
+        self.configuration = configuration
+        self.resources = resources
+        processStories()
+        addObservers()
+    }
+    
+    deinit {
+        if let proStatusObserver = proStatusObserver {
+            NotificationCenter.default.removeObserver(proStatusObserver)
+        }
+    }
     
     // MARK: - Private methods
     
-    private static func generateStoriesFromFile() -> StoriesContext? {
+    private func addObservers() {
+        proStatusObserver = configuration.observe(\.proStatus) { [weak self] (_, _) in
+            DDLogDebug("(StoriesProvider) - Received Pro status change notification")
+            self?.processStories()
+        }
+        
+        appWillEnterForegroundObserver = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.processStories()
+        }
+    }
+    
+    private func processStories() {
+        workingQueue.async { [weak self] in
+            self?.processStoriesSync()
+        }
+    }
+    
+    private func processStoriesSync() {
+        var newStories = allStories
+        
+        /* Do not show stories about license activation for premium users */
+        if configuration.proStatus {
+            let dnsProtectionStoriesIndex = newStories.firstIndex(where: { $0.category.type == .dnsProtection })!
+            let activateLicenseStoryIndex = newStories[dnsProtectionStoriesIndex].storyTokens.firstIndex(where: { $0.buttonConfig?.actionType == .activateLicense })!
+            newStories[dnsProtectionStoriesIndex].storyTokens.remove(at: activateLicenseStoryIndex)
+        }
+        
+        /* Do not show stories about VPN  */
+        if UIApplication.adGuardVpnIsInstalled {
+            let adguardVpnStoriesIndex = newStories.firstIndex(where: { $0.category.type == .vpnProtection })!
+            newStories.remove(at: adguardVpnStoriesIndex)
+        }
+        
+        if stories != newStories {
+            DispatchQueue.main.async { [weak self] in
+                self?.stories = newStories
+                self?.delegate?.storiesChanged()
+            }
+        }
+    }
+    
+    private func generateStoriesFromFile() -> StoriesContext? {
         guard let pathString = Bundle.main.path(forResource: "stories", ofType: "json") else {
             DDLogError("Failed to get data from stories.json")
             return nil

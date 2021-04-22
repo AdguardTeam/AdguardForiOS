@@ -343,6 +343,8 @@ extension StoryViewController {
             dismiss(animated: true)
         case .moreOnDns:
             dismiss(animated: true)
+        case .moreOnSafari:
+            dismiss(animated: true)
         case .enableAdguardDns:
             dismiss(animated: true)
         case .enableGoogleDns:

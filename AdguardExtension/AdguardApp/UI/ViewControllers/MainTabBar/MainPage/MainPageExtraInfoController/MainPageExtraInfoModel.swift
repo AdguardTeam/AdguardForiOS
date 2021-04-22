@@ -19,6 +19,7 @@
 import Foundation
 
 protocol MainPageExtraInfoModelDelegate: AnyObject {
+    func storiesChanged()
     func dnsImplementationChanged()
     func dnsServerChanged()
     func systemProtectionChanged()
@@ -27,6 +28,7 @@ protocol MainPageExtraInfoModelDelegate: AnyObject {
 
 protocol MainPageExtraInfoModelProtocol {
     var delegate: MainPageExtraInfoModelDelegate? { get set }
+    var storiesProvider: StoriesProviderProtocol { get }
     var storiesModels: [StoryCollectionViewModel] { get }
     var compactViewType: MainPageExtraInfoModel.CompactViewType { get }
     var nativeViewModel: NativeImplementationView.Model { get }
@@ -39,6 +41,8 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
     
     weak var delegate: MainPageExtraInfoModelDelegate?
     
+    let storiesProvider: StoriesProviderProtocol
+    
     var storiesModels: [StoryCollectionViewModel] = []
     
     var compactViewType: MainPageExtraInfoModel.CompactViewType {
@@ -48,13 +52,11 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
             }
             return .statisticsInfo
         } else {
-            let watched = resources.watchedStoriesCategories.count
-            let all = StoriesProvider.allCategories.count
-            // It means that all stories are watched
-            if watched == all {
+            let unwatched = storiesProvider.unwatchedStoriesCount
+            if unwatched == 0 {
                 return .getPro
             } else {
-                return .unreadStories(unreadStoriesCount: all - watched)
+                return .unreadStories(unreadStoriesCount: unwatched)
             }
         }
     }
@@ -111,16 +113,17 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
         self.configuration = configuration
         self.complexProtection = complexProtection
         self.nativeProviders = nativeProviders
-        
+        self.storiesProvider = StoriesProvider(configuration: configuration, resources: resources)
+        (self.storiesProvider as! StoriesProvider).delegate = self
         addObservers()
     
         // Initialize stories models
-        let stories = StoriesProvider.stories
-        self.storiesModels = stories.map {
-            StoryCollectionViewModel(title: $0.category.title,
-                                     storyIsWatched: resources.watchedStoriesCategories.contains($0.category.type),
-                                     category: $0.category.type,
-                                     backGroundImage: $0.category.categoryImage)
+        generateStoriesModels()
+    }
+    
+    deinit {
+        if let proStatusObserver = proStatusObserver {
+            NotificationCenter.default.removeObserver(proStatusObserver)
         }
     }
     
@@ -134,6 +137,16 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
     }
     
     // MARK: - Private methods
+    
+    private func generateStoriesModels() {
+        let stories = storiesProvider.stories
+        self.storiesModels = stories.map {
+            StoryCollectionViewModel(title: $0.category.title,
+                                     storyIsWatched: resources.watchedStoriesCategories.contains($0.category.type),
+                                     category: $0.category.type,
+                                     backGroundImage: $0.category.categoryImage)
+        }
+    }
     
     private func addObservers() {
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
@@ -157,5 +170,14 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
                 self?.delegate?.proStatusChanged()
             }
         }
+    }
+}
+
+// MARK: - MainPageExtraInfoModel + StoriesProviderDelegate
+
+extension MainPageExtraInfoModel: StoriesProviderDelegate {
+    func storiesChanged() {
+        generateStoriesModels()
+        delegate?.storiesChanged()
     }
 }

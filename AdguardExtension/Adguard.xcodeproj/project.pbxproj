@@ -896,8 +896,6 @@
 		7EF0BAB7260A1BE4005805C4 /* StoryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E54212F2608E3B6008ACC3C /* StoryGroup.swift */; };
 		7EF0BACA260A1F35005805C4 /* StoriesProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAC9260A1F35005805C4 /* StoriesProviderTest.swift */; };
 		7EF0BADC260A2155005805C4 /* stories.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF0BA0D2609E956005805C4 /* stories.json */; };
-		7EF0BAEF260B2EA2005805C4 /* StoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */; };
-		7EF0BAF0260B2EA2005805C4 /* StoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */; };
 		7EF0BB26260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
 		7EF0BB27260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
 		7EF0BB96260B8BAC005805C4 /* StoriesProgressComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB95260B8BAB005805C4 /* StoriesProgressComponentView.swift */; };
@@ -3477,7 +3475,6 @@
 		7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProvider.swift; sourceTree = "<group>"; };
 		7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryButtonConfig.swift; sourceTree = "<group>"; };
 		7EF0BAC9260A1F35005805C4 /* StoriesProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProviderTest.swift; sourceTree = "<group>"; };
-		7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesManager.swift; sourceTree = "<group>"; };
 		7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		7EF0BB95260B8BAB005805C4 /* StoriesProgressComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProgressComponentView.swift; sourceTree = "<group>"; };
 		7EF0BBA9260B8DF7005805C4 /* UITraitEnvironment+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitEnvironment+Utils.swift"; sourceTree = "<group>"; };
@@ -5023,7 +5020,6 @@
 		7E5421722608E6AF008ACC3C /* StoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				7EF0BAEE260B2EA2005805C4 /* StoriesManager.swift */,
 				7EF0B9E82609D7EF005805C4 /* StoriesPageViewController.swift */,
 				7E54215B2608E6A7008ACC3C /* StoryViewController.swift */,
 				7EF0B9AE2608EE20005805C4 /* StoriesProgressView.swift */,
@@ -7156,7 +7152,6 @@
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
-				7EF0BAF0260B2EA2005805C4 /* StoriesManager.swift in Sources */,
 				7E8B7A2D261B2CFE0047EF5F /* ThemableProgressView.swift in Sources */,
 				7EFF1090262DBF9B00E22152 /* MainPageNoteView.swift in Sources */,
 				D0B545B32435D650002F0AEC /* FiltersMasterController.swift in Sources */,
@@ -7911,7 +7906,6 @@
 				24BD325C2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */,
 				7ED595D9259B263C00608222 /* DnsResolver.swift in Sources */,
 				7EF005E3239929FC00047073 /* ComplexProtectionService.swift in Sources */,
-				7EF0BAEF260B2EA2005805C4 /* StoriesManager.swift in Sources */,
 				7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */,
 				7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */,
 				7EEF93F22360365300F5856A /* NetworkSettingsService.swift in Sources */,

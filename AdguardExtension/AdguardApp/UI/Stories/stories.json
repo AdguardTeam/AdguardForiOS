@@ -129,6 +129,13 @@
                     "description": "story_safari_protection_3_description",
                     "action": "MORE_ON_DNS",
                     "action_title": "story_safari_protection_3_button_title"
+                },
+                {
+                    "image": "SafariProtection4",
+                    "title": "story_safari_protection_4_title",
+                    "description": "story_safari_protection_4_description",
+                    "action": "MORE_ON_SAFARI",
+                    "action_title": "story_safari_protection_4_button_title"
                 }
             ]
         },
@@ -257,6 +264,7 @@
         "ACTIVATE_LICENSE",
         "DOWNLOAD_ADGUARD_VPN",
         "MORE_ON_DNS",
+        "MORE_ON_SAFARI",
         "ENABLE_ADGUARD_DNS",
         "ENABLE_GOOGLE_DNS",
         "ENABLE_CLOUDFLARE_DNS",

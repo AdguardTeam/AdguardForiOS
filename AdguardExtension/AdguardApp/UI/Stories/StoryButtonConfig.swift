@@ -18,18 +18,19 @@
 
 import Foundation
 
-enum StoryActionType: String, CaseIterable {
+enum StoryActionType: String, CaseIterable, Equatable {
     case readChangeLog = "READ_CHANGELOG"
     case activateLicense = "ACTIVATE_LICENSE"
     case downloadAdguardVpn = "DOWNLOAD_ADGUARD_VPN"
     case moreOnDns = "MORE_ON_DNS"
+    case moreOnSafari = "MORE_ON_SAFARI"
     case enableAdguardDns = "ENABLE_ADGUARD_DNS"
     case enableGoogleDns = "ENABLE_GOOGLE_DNS"
     case enableCloudflareDns = "ENABLE_CLOUDFLARE_DNS"
     case addCustomDns = "ADD_CUSTOM_DNS"
 }
 
-struct StoryButtonConfig: Decodable {
+struct StoryButtonConfig: Decodable, Equatable {
     let title: String
     let actionType: StoryActionType
     

@@ -94,7 +94,7 @@ final class MainPageExtraInfoController: PullableContentController {
         
         // Check if we need to change unread stories number
         if case let MainPageExtraInfoModel.CompactViewType.unreadStories(unreadStoriesCount: unread) = model.compactViewType {
-            unreadStoriesView.unreadStoriesCount = unread
+            processUnreadStories(unread)
         }
         
         // Check if we've watched all stories and need to set Get PRO view
@@ -149,7 +149,7 @@ final class MainPageExtraInfoController: PullableContentController {
             setCompactView(getProView)
         case .unreadStories(unreadStoriesCount: let unread):
             setCompactView(unreadStoriesView)
-            unreadStoriesView.unreadStoriesCount = unread
+            processUnreadStories(unread)
         case .nativeImplementationInfo:
             setCompactView(nativeImplementationView)
             processNativeImplementationInfo()
@@ -168,6 +168,10 @@ final class MainPageExtraInfoController: PullableContentController {
         view.bottomAnchor.constraint(equalTo: compactView.bottomAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: compactView.leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: compactView.trailingAnchor).isActive = true
+    }
+    
+    private func processUnreadStories(_ unread: Int) {
+        unreadStoriesView.unreadStoriesCount = unread
     }
     
     private func processNativeImplementationInfo() {
@@ -209,6 +213,14 @@ extension MainPageExtraInfoController: MainPageExtraInfoModelDelegate {
     func proStatusChanged() {
         processCompactView()
         collectionView.reloadData()
+    }
+    
+    func storiesChanged() {
+        collectionView.reloadData()
+        // Check if we need to change unread stories number
+        if case let MainPageExtraInfoModel.CompactViewType.unreadStories(unreadStoriesCount: unread) = model.compactViewType {
+            processUnreadStories(unread)
+        }
     }
 }
 

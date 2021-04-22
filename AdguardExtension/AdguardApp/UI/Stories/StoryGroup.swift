@@ -19,9 +19,9 @@
 import Foundation
 
 /* StoryGroup is a model for multiple stories */
-struct StoryGroup: Decodable {
+struct StoryGroup: Decodable, Equatable {
     let category: StoryCategory
-    let storyTokens: [StoryToken]
+    var storyTokens: [StoryToken]
     
     private enum CodingKeys: String, CodingKey {
         case category

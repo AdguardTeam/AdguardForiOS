@@ -19,7 +19,7 @@
 import Foundation
 
 /* StoryToken is a model for one story */
-struct StoryToken: Decodable {
+struct StoryToken: Decodable, Equatable {
     let image: UIImage? // UIImage for light theme
     let darkImage: UIImage? // UIImage for dark theme
     

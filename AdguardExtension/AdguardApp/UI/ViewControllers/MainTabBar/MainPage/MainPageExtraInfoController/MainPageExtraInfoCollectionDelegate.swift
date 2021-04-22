@@ -33,7 +33,7 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = self.model.storiesModels[indexPath.row]
-        StoriesManager.showStories(forVC: controller, fromCategory: model.category)
+        showStories(forVC: controller, fromCategory: model.category)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 
@@ -74,5 +74,13 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
         let totalSpacing = (2 * itemSpacing) + ((numberOfItemsPerRow - 1) * itemSpacing)
         let cellWidth = (width - totalSpacing ) / numberOfItemsPerRow
         return CGSize(width: cellWidth, height: cellWidth * 2 / 3)
+    }
+    
+    private func showStories<StoriesPresentor: UIViewController>(forVC vc: StoriesPresentor, fromCategory category: StoryCategory.CategoryType) where StoriesPresentor: StoriesPageViewControllerDelegate {
+        let stories = model.storiesProvider.stories
+        let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startCategory: category)
+        storiesPageVC.storiesDelegate = vc
+        storiesPageVC.modalPresentationStyle = .fullScreen
+        vc.present(storiesPageVC, animated: true)
     }
 }

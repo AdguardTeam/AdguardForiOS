@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct StoryCategory: Decodable {
+struct StoryCategory: Decodable, Equatable {
     
     enum CategoryType: String, CaseIterable, Codable {
         case whatsNew = "WhatsNew"
