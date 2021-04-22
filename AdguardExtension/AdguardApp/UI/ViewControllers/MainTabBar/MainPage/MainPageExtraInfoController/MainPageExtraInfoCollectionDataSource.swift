@@ -148,6 +148,7 @@ extension MainPageExtraInfoCollectionDataSource: StatisticsModelObserver {
 
 extension MainPageExtraInfoCollectionDataSource: ThemableProtocol {
     func updateTheme() {
+        statisticsHeader?.updateTheme(theme)
         collectionView.reloadData()
     }
 }
