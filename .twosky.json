@@ -70,7 +70,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/ProStatusPromotionCollectionReusableView"
     ]
   }
 ]

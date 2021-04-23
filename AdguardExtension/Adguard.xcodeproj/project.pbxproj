@@ -612,8 +612,6 @@
 		7E7C8C8326301DEC0036030B /* StatisticsCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C8C7F26301DEC0036030B /* StatisticsCollectionReusableView.xib */; };
 		7E7C8CB926302B280036030B /* ProStatusPromotionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */; };
 		7E7C8CBA26302B280036030B /* ProStatusPromotionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */; };
-		7E7C8CBB26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */; };
-		7E7C8CBC26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */; };
 		7E7C8D40263079170036030B /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D3F263079170036030B /* UILabel+Utils.swift */; };
 		7E7C8D41263079170036030B /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D3F263079170036030B /* UILabel+Utils.swift */; };
 		7E7C8D57263079310036030B /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C8D56263079310036030B /* UITextView+Utils.swift */; };
@@ -772,6 +770,8 @@
 		7EB2F95A23F2C56300F9A544 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
 		7EB432A7263309CD00997131 /* NativeDnsCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB432AA263309CD00997131 /* NativeDnsCollectionReusableView.xib */; };
 		7EB432A8263309CD00997131 /* NativeDnsCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB432AA263309CD00997131 /* NativeDnsCollectionReusableView.xib */; };
+		7EB4330B26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB4330E26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib */; };
+		7EB4330C26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB4330E26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib */; };
 		7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */; };
 		7EB5526A242243C1000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
 		7EB5526B2422441F000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
@@ -3212,7 +3212,6 @@
 		7E7C8C7E26301DEC0036030B /* StatisticsCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionReusableView.swift; sourceTree = "<group>"; };
 		7E7C8C7F26301DEC0036030B /* StatisticsCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsCollectionReusableView.xib; sourceTree = "<group>"; };
 		7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProStatusPromotionCollectionReusableView.swift; sourceTree = "<group>"; };
-		7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProStatusPromotionCollectionReusableView.xib; sourceTree = "<group>"; };
 		7E7C8D3F263079170036030B /* UILabel+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Utils.swift"; sourceTree = "<group>"; };
 		7E7C8D56263079310036030B /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
 		7E7C9DA9261F1557006D418C /* MainPageExtraInfoCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageExtraInfoCollectionDelegate.swift; sourceTree = "<group>"; };
@@ -3437,6 +3436,35 @@
 		7EB432F2263309FC00997131 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/NativeDnsCollectionReusableView.strings"; sourceTree = "<group>"; };
 		7EB432F4263309FD00997131 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NativeDnsCollectionReusableView.strings"; sourceTree = "<group>"; };
 		7EB432F6263309FE00997131 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/NativeDnsCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4330D26330BD600997131 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProStatusPromotionCollectionReusableView.xib; sourceTree = "<group>"; };
+		7EB4332426330BDC00997131 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4332626330BDD00997131 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4332826330BDE00997131 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ProStatusPromotionCollectionReusableView.strings"; sourceTree = "<group>"; };
+		7EB4332A26330BDF00997131 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ProStatusPromotionCollectionReusableView.strings"; sourceTree = "<group>"; };
+		7EB4332C26330BE000997131 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4332E26330BE100997131 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333026330BE200997131 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333226330BE300997131 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333426330BE400997131 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333626330BE500997131 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333826330BEA00997131 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333A26330BEB00997131 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333C26330BEC00997131 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4333E26330BED00997131 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334026330BEF00997131 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334226330BF200997131 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334426330BF300997131 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334626330BF500997131 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334826330BF600997131 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ProStatusPromotionCollectionReusableView.strings"; sourceTree = "<group>"; };
+		7EB4334A26330BF700997131 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334C26330BF800997131 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4334E26330BF900997131 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/ProStatusPromotionCollectionReusableView.strings"; sourceTree = "<group>"; };
+		7EB4335026330BFB00997131 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4335226330BFC00997131 /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4335426330BFC00997131 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4335626330BFD00997131 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4335826330BFE00997131 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
+		7EB4335A26330C0000997131 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/ProStatusPromotionCollectionReusableView.strings; sourceTree = "<group>"; };
 		7EB55269242243C1000498CC /* ThemableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableButton.swift; sourceTree = "<group>"; };
 		7EB5526C24224755000498CC /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsModel.swift; sourceTree = "<group>"; };
@@ -5118,7 +5146,7 @@
 			isa = PBXGroup;
 			children = (
 				7E7C8CB726302B280036030B /* ProStatusPromotionCollectionReusableView.swift */,
-				7E7C8CB826302B280036030B /* ProStatusPromotionCollectionReusableView.xib */,
+				7EB4330E26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib */,
 			);
 			path = ProStatusPromotionCollectionReusableView;
 			sourceTree = "<group>";
@@ -6539,7 +6567,7 @@
 				7E7C8C8326301DEC0036030B /* StatisticsCollectionReusableView.xib in Resources */,
 				D0CDABB02484ECB700663E88 /* ContentBlockerStateCell.xib in Resources */,
 				D0D7E54D24371C8C001801A5 /* License.storyboard in Resources */,
-				7E7C8CBC26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */,
+				7EB4330C26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib in Resources */,
 				D0D7E54924371C8C001801A5 /* Activity.storyboard in Resources */,
 				7EB432A8263309CD00997131 /* NativeDnsCollectionReusableView.xib in Resources */,
 				D06E30B0253F3182008BBD2D /* providers_i18n.json in Resources */,
@@ -6602,7 +6630,7 @@
 				7E7C8C8226301DEC0036030B /* StatisticsCollectionReusableView.xib in Resources */,
 				7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */,
 				7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */,
-				7E7C8CBB26302B280036030B /* ProStatusPromotionCollectionReusableView.xib in Resources */,
+				7EB4330B26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib in Resources */,
 				D093AA19253447940015351F /* setappPublicKey.pem in Resources */,
 				7EB432A7263309CD00997131 /* NativeDnsCollectionReusableView.xib in Resources */,
 				D06E30AE253F3182008BBD2D /* providers_i18n.json in Resources */,
@@ -10014,6 +10042,42 @@
 				7EB432F6263309FE00997131 /* be */,
 			);
 			name = NativeDnsCollectionReusableView.xib;
+			sourceTree = "<group>";
+		};
+		7EB4330E26330BD600997131 /* ProStatusPromotionCollectionReusableView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EB4330D26330BD600997131 /* Base */,
+				7EB4332426330BDC00997131 /* en */,
+				7EB4332626330BDD00997131 /* be */,
+				7EB4332826330BDE00997131 /* zh-Hans */,
+				7EB4332A26330BDF00997131 /* zh-Hant */,
+				7EB4332C26330BE000997131 /* hr */,
+				7EB4332E26330BE100997131 /* cs */,
+				7EB4333026330BE200997131 /* da */,
+				7EB4333226330BE300997131 /* fr */,
+				7EB4333426330BE400997131 /* nl */,
+				7EB4333626330BE500997131 /* hu */,
+				7EB4333826330BEA00997131 /* de */,
+				7EB4333A26330BEB00997131 /* ja */,
+				7EB4333C26330BEC00997131 /* it */,
+				7EB4333E26330BED00997131 /* id */,
+				7EB4334026330BEF00997131 /* ko */,
+				7EB4334226330BF200997131 /* nb */,
+				7EB4334426330BF300997131 /* fa */,
+				7EB4334626330BF500997131 /* pl */,
+				7EB4334826330BF600997131 /* pt-BR */,
+				7EB4334A26330BF700997131 /* ro */,
+				7EB4334C26330BF800997131 /* ru */,
+				7EB4334E26330BF900997131 /* sr-Latn */,
+				7EB4335026330BFB00997131 /* sk */,
+				7EB4335226330BFC00997131 /* sl */,
+				7EB4335426330BFC00997131 /* es */,
+				7EB4335626330BFD00997131 /* tr */,
+				7EB4335826330BFE00997131 /* uk */,
+				7EB4335A26330C0000997131 /* vi */,
+			);
+			name = ProStatusPromotionCollectionReusableView.xib;
 			sourceTree = "<group>";
 		};
 		7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */ = {
