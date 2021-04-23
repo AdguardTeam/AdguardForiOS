@@ -53,13 +53,13 @@ class FiltersMetadataParser: ParserProtocol {
     func parse(data: Data, response: URLResponse?) -> FiltersMetadataParser.Model? {
         if let response = response as? HTTPURLResponse {
             if response.statusCode != 200 {
-                DDLogError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
+                Logger.logError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
                 return nil
             }
             
             let jsonParser = JSONMetadataParser()
             guard jsonParser.parse(with: data) else {
-                DDLogError("FiltersMetadataParser parse failed")
+                Logger.logError("FiltersMetadataParser parse failed")
                 return nil
             }
             

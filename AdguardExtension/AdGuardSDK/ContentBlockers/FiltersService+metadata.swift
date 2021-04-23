@@ -26,13 +26,13 @@ extension FiltersService {
         var savedMeta = resources.filtersMetadataCache
         let lastUpdate = savedMeta?.date ?? Date(timeIntervalSince1970: 0)
         if savedMeta == nil || refresh || Int(lastUpdate.timeIntervalSinceNow) * -1 > FiltersService.updatePeriod  {
-            DDLogInfo("FiltersService - start updating metadata")
+            Logger.logInfo("FiltersService - start updating metadata")
             
             let group = DispatchGroup()
             group.enter()
-            httpRequestService.loadFiltersMetadata { [weak self] metadata in
+            httpRequestService.loadFiltersMetadata(version: version, id: id, cid: cid, lang: lang) { [weak self] metadata in
                 if metadata != nil {
-                    DDLogInfo("FiltersService - metadata loaded successfull")
+                    Logger.logInfo("FiltersService - metadata loaded successfull")
                     self?.resources.filtersMetadataCache = metadata
                     savedMeta = metadata
                 }
@@ -48,7 +48,7 @@ extension FiltersService {
         
         // get metadata from database
         
-        DDLogInfo("FiltersService - can not obtain filters metadata. Get metadata from default database")
+        Logger.logInfo("FiltersService - can not obtain filters metadata. Get metadata from default database")
         
         let meta = ABECFilterClientMetadata()
         meta.filters = antibanner?.defaultDbFilters()
@@ -65,13 +65,13 @@ extension FiltersService {
             
             // trying load i18n from backend service.
             
-            DDLogInfo("FiltersService - start updating i18n")
+            Logger.logInfo("FiltersService - start updating i18n")
             
             let group = DispatchGroup()
             group.enter()
             httpRequestService.loadFiltersLocalizations { [weak self] i18n in
                 if i18n != nil {
-                    DDLogInfo("FiltersService - i18n loaded successfull")
+                    Logger.logInfo("FiltersService - i18n loaded successfull")
                     self?.resources.i18nCacheForFilterSubscription = i18n
                     savedI18n = i18n
                 }

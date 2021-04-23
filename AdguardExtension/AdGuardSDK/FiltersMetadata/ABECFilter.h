@@ -16,11 +16,11 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 #import <Foundation/Foundation.h>
-#import "ACommons/ACLang.h"
-#import "ABECConstants.h"
+//#import "ACObject.h"
+//#import "ABECConstants.h"
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-#import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 #endif
 
 

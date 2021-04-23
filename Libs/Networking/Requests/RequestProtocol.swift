@@ -21,3 +21,7 @@ import Foundation
 protocol RequestProtocol {
     var urlRequest: URLRequest? { get }
 }
+
+extension RequestProtocol {
+    var urlBase: String { "https://filters.adtidy.org/ios/" }
+}

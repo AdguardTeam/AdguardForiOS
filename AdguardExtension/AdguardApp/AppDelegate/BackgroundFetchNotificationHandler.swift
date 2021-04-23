@@ -107,21 +107,21 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
 //        }
 //    }
     
-    private func contentBlockerServiceErrorHandler() {
-        self.antibanner.rollbackTransaction()
-        DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.")
-        
-        self.updateFailuredNotify()
-        
-        DispatchQueue.main.async {
-            guard let nav = self.getNavigationController() else { return }
-            if let topViewController = nav.topViewController, UIApplication.shared.applicationState != .background {
-                ACSSystemUtils.showSimpleAlert(for: topViewController,
-                                               withTitle: ACLocalizedString("common_error_title", "(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating."),
-                                               message: ACLocalizedString("load_to_safari_error", "(BackgroundFetchNotificationHandler) Alert message. When converting rules process finished in foreground updating."))
-            }
-        }
-    }
+//    private func contentBlockerServiceErrorHandler() {
+//        self.antibanner.rollbackTransaction()
+//        DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.")
+//
+//        self.updateFailuredNotify()
+//
+//        DispatchQueue.main.async {
+//            guard let nav = self.getNavigationController() else { return }
+//            if let topViewController = nav.topViewController, UIApplication.shared.applicationState != .background {
+//                ACSSystemUtils.showSimpleAlert(for: topViewController,
+//                                               withTitle: ACLocalizedString("common_error_title", "(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating."),
+//                                               message: ACLocalizedString("load_to_safari_error", "(BackgroundFetchNotificationHandler) Alert message. When converting rules process finished in foreground updating."))
+//            }
+//        }
+//    }
     
     
     //MARK: - AntibannerStartedUpdate
@@ -169,21 +169,21 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
 //        UIApplication.shared.isNetworkActivityIndicatorVisible = false
 //    }
     
-    private func reloadContentBlockerJson() {
-        contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] _ in
-            guard let self = self else { return }
-            if self.antibanner.inTransaction() {
-                // Success antibanner updated from backend
-                self.resources.sharedDefaults().setValue(Date(), forKey: AEDefaultsCheckFiltersLastDate)
-                self.antibanner.endTransaction()
-                DDLogInfo("(BackgroundFetchNotificationHandler) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.")
-                self.updateFinishedNotify(filtersUpdated: true)
-            }
-            
-            // Special update case (in background).
-            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
-        }
-    }
+//    private func reloadContentBlockerJson() {
+//        contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] _ in
+//            guard let self = self else { return }
+//            if self.antibanner.inTransaction() {
+//                // Success antibanner updated from backend
+//                self.resources.sharedDefaults().setValue(Date(), forKey: AEDefaultsCheckFiltersLastDate)
+//                self.antibanner.endTransaction()
+//                DDLogInfo("(BackgroundFetchNotificationHandler) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.")
+//                self.updateFinishedNotify(filtersUpdated: true)
+//            }
+//            
+//            // Special update case (in background).
+//            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
+//        }
+//    }
     
     //MARK: - AntibannerFailuredUpdate
 //    private func antibannerFailuredUpdate() {

@@ -68,9 +68,9 @@ class RulesProcessor : RulesProcessorProtocol {
     
     func removeWhitelistDomain(domain: String, jsonData: Data) -> (Data?, NSError?) {
         
-        DDLogInfo("(RulesConverter) removeWhitelistRule")
+        Logger.logInfo("(RulesConverter) removeWhitelistRule")
         if jsonData.count == 0 {
-            DDLogError("(RulesConverter) removeWhitelistRule error. jsonData is empty")
+            Logger.logError("(RulesConverter) removeWhitelistRule error. jsonData is empty")
             return (nil, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
         }
         
@@ -95,11 +95,11 @@ class RulesProcessor : RulesProcessorProtocol {
         }
         
         if foundIndex == nil {
-            DDLogInfo("(RulesConverter) can not find expectedData")
+            Logger.logInfo("(RulesConverter) can not find expectedData")
             return (jsonData, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
         }
         
-        DDLogInfo("(RulesConverter) removeWhitelistRule expectedData is found")
+        Logger.logInfo("(RulesConverter) removeWhitelistRule expectedData is found")
         
         json?.remove(at: foundIndex!)
         
@@ -107,7 +107,7 @@ class RulesProcessor : RulesProcessorProtocol {
     }
     
     func addDomainToInvertedWhitelist(rule: String, jsonData: Data, overlimit: Bool) -> (Data?, NSError?) {
-        DDLogInfo("(RulesConverter) addDomainToInvertedWhitelist")
+        Logger.logInfo("(RulesConverter) addDomainToInvertedWhitelist")
         
         var (json, error) = prepareJson(jsonData: jsonData, overlimit: overlimit)
         if error != nil { return (nil, error)}
@@ -116,7 +116,7 @@ class RulesProcessor : RulesProcessorProtocol {
         if json!.count > 0 {
             if let lastRule = SafariRule(object: (json?.last)!) {
                 if lastRule.action == .invertedWhitelist {
-                    DDLogInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule exists. Add domainto it")
+                    Logger.logInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule exists. Add domainto it")
                     lastRule.appendDomain(rule)
                     found = true
                     
@@ -127,7 +127,7 @@ class RulesProcessor : RulesProcessorProtocol {
         }
         
         if !found {
-            DDLogInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule does not exist. Create new one")
+            Logger.logInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule does not exist. Create new one")
             let newRule = SafariRule(domains: [rule], action: .invertedWhitelist)
             json?.append(newRule.json())
         }
@@ -136,7 +136,7 @@ class RulesProcessor : RulesProcessorProtocol {
     }
     
     func removeInvertedWhitelistDomain(rule: String, jsonData: Data) -> (Data?, NSError?) {
-        DDLogInfo("(RulesConverter) removeInvertedWhitelistDomain")
+        Logger.logInfo("(RulesConverter) removeInvertedWhitelistDomain")
         var (json, error) = prepareJson(jsonData: jsonData, overlimit: false)
         if error != nil { return (nil, error)}
         
@@ -144,7 +144,7 @@ class RulesProcessor : RulesProcessorProtocol {
         if json!.count > 0 {
             if let lastRule = SafariRule(object: (json?.last)!) {
                 if lastRule.action == .invertedWhitelist {
-                    DDLogInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule exists. Add domainto it")
+                    Logger.logInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule exists. Add domainto it")
                     found = lastRule.removeDomain(rule)
                     
                     json!.removeLast()
@@ -154,7 +154,7 @@ class RulesProcessor : RulesProcessorProtocol {
         }
         
         if !found {
-            DDLogInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule does not exist. Create new one")
+            Logger.logInfo("(RulesConverter) addDomainToInvertedWhitelist - inverted rule does not exist. Create new one")
             let newRule = SafariRule(domains: [rule], action: .invertedWhitelist)
             json?.append(newRule.json())
         }
@@ -178,7 +178,7 @@ class RulesProcessor : RulesProcessorProtocol {
             return(returnData, nil)
         }
         else {
-            DDLogError("(RulesProcessor) convertObejctToData error - can not convert result data to json")
+            Logger.logInfo("(RulesProcessor) convertObejctToData error - can not convert result data to json")
             return (nil, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
         }
     }
@@ -195,12 +195,12 @@ class RulesProcessor : RulesProcessorProtocol {
     }
     
     private func prepareJson (jsonData: Data, overlimit: Bool)->([Any]?, NSError?) {
-        DDLogInfo("(RulesConverter) add whilist domain")
+        Logger.logInfo("(RulesConverter) add whilist domain")
         
         var json: [Any]?
         
         if jsonData.count == 0 {
-            DDLogInfo("(RulesConverter) jsonData is empty.")
+            Logger.logInfo("(RulesConverter) jsonData is empty.")
             json = [Any]()
             return(json, nil)
         }
@@ -228,7 +228,7 @@ class RulesProcessor : RulesProcessorProtocol {
 
             // if there is not blocking rule, we can not add new whitelist rule
             if indexToDelete == nil {
-                DDLogError("(RulesProcessor) addWhitelist error - can not add a whitelist rule because the limit of 50000 rules is reached and there is not any rules to remove")
+                Logger.logError("(RulesProcessor) addWhitelist error - can not add a whitelist rule because the limit of 50000 rules is reached and there is not any rules to remove")
                 return (nil, NSError(domain: RulesProcessor.errorDomain, code: RulesProcessor.errorCode, userInfo: nil))
             }
 

@@ -20,22 +20,34 @@ import Foundation
 
 class FiltersMetadataRequest: RequestProtocol {
     
+    let version: String
+    let id: String
+    let cid: String
+    let lang: String
+    
+    init(version: String, id: String, cid: String, lang: String) {
+        self.version = version
+        self.id = id
+        self.cid = cid
+        self.lang = lang
+    }
+    
     var urlRequest: URLRequest? {
-        let path = "\(ABEC_FILTER_URL_BASE)filters.js"
+        let path = "\(urlBase)filters.js"
         
         var params: [String: Any] = [
-            "v": ADProductInfo().version() ?? "",
-            "lang": "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+            "v": version, //ADProductInfo().version() ?? "",
+            "lang": lang //"\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
         ]
         
 #if os(iOS)
-        params["id"] = Bundle.main.isPro ? "ios_pro" : "ios"
-        params["cid"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        params["id"] = id //Bundle.main.isPro ? "ios_pro" : "ios"
+        params["cid"] = cid //UIDevice.current.identifierForVendor?.uuidString ?? ""
 #endif
 
         guard let resultStr = params.constructLink(url: path),
             let resultUrl = URL(string: resultStr) else  {
-            DDLogError("FiltersMetadataRequest errror - can not construct url" )
+            Logger.logError("FiltersMetadataRequest errror - can not construct url" )
             return nil
         }
         

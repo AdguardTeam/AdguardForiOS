@@ -75,9 +75,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     var antibanner: AESAntibannerProtocol?
     let httpRequestService: HttpRequestServiceProtocol
     private let antibannerController: AntibannerControllerProtocol
-    private var configuration: ConfigurationServiceProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
     private var filtersStorage: FiltersStorageProtocol
+    
+    let version: String
+    let id: String
+    let cid: String
+    let lang: String
     
     private var filterMetas = [ASDFilterMetadata]()
     private var proGroups: Set<Int> = [AdGuardFilterGroup.security.rawValue, AdGuardFilterGroup.custom.rawValue]
@@ -131,13 +135,17 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibannerController: AntibannerControllerProtocol, configuration: ConfigurationServiceProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol) {
+    init(antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String) {
         self.configuration = configuration
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
         self.resources = resources
         self.httpRequestService = httpRequestService
         self.filtersStorage = filtersStorage
+        self.version = version
+        self.id = id
+        self.cid = cid
+        self.lang = lang
         
         super.init()
         
@@ -151,26 +159,27 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             }
         }
         
-        proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
-            guard let self = self else { return }
-            
-            // enable/disable pro groups
-            let proEnabled = configuration.proStatus
-        
-            // If we've turned off pro groups we don't need them to turn on while background fetches are checking license status
-            //https://github.com/AdguardTeam/AdguardForiOS/issues/1263
-            if proEnabled {
-                return
-            }
-            
-            for group in self.groups {
-                if self.proGroups.contains(group.groupId) {
-                    self.setGroup(group.groupId, enabled: proEnabled)
-                }
-            }
-            
-            self.processUpdate()
-        }
+        //  todo: move this to main app
+//        proStatusObservation = (self.configuration as? ConfigurationService)?.observe(\.proStatus) {[weak self] (_, _) in
+//            guard let self = self else { return }
+//
+//            // enable/disable pro groups
+//            let proEnabled = configuration.proStatus
+//
+//            // If we've turned off pro groups we don't need them to turn on while background fetches are checking license status
+//            //https://github.com/AdguardTeam/AdguardForiOS/issues/1263
+//            if proEnabled {
+//                return
+//            }
+//
+//            for group in self.groups {
+//                if self.proGroups.contains(group.groupId) {
+//                    self.setGroup(group.groupId, enabled: proEnabled)
+//                }
+//            }
+//
+//            self.processUpdate()
+//        }
         
         antibannerController.onReady { [weak self] (antibanner) in
             self?.antibanner = antibanner
@@ -686,16 +695,16 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 return
             }
             
-            DDLogInfo("DIFF: \(diff)")
+            Logger.logInfo("DIFF: \(diff)")
             
             diff.filters.forEach({ (filterId: Int, enabled: Bool) in
                 self.antibannerSetFilter(filterId: filterId, enabled: enabled)
-                DDLogInfo("Process update filter: \(filterId) enabled: \(enabled)")
+                Logger.logInfo("Process update filter: \(filterId) enabled: \(enabled)")
             })
             
             diff.groups.forEach{ (groupId: Int, enabled: Bool) in
                 self.antibanner?.setFiltersGroup(groupId as NSNumber, enabled: enabled)
-                DDLogInfo("Process update group: \(groupId) enabled: \(enabled)")
+                Logger.logInfo("Process update group: \(groupId) enabled: \(enabled)")
             }
             
             self.contentBlocker.reloadJsons(backgroundUpdate: false, completion: { (error) in
@@ -734,13 +743,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         guard let antibanner = self.antibanner else { return }
         if !antibanner.checkIfFilterInstalled(filterId as NSNumber) {
             guard let filterMeta = (filterMetas.first { $0.filterId.intValue == filterId }) else {
-                DDLogInfo("Failed to find meta for filter with filterId = \(filterId)")
+                Logger.logInfo("Failed to find meta for filter with filterId = \(filterId)")
                 return
             }
             filterMeta.enabled = true
             antibanner.subscribeFilters([filterMeta])
         } else {
-            DDLogInfo("Filter with filterId = \(filterId) is not installed")
+            Logger.logInfo("Filter with filterId = \(filterId) is not installed")
         }
 
         antibanner.setFilter(filterId as NSNumber, enabled: enabled, fromUI: true)
@@ -748,7 +757,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     private func removeObsoleteFilter(metadata: ABECFilterClientMetadata, dbFilters: [ASDFilterMetadata]) {
         guard let newFilters: [ASDFilterMetadata] = metadata.filters else {
-            DDLogError("(FiltersService) - metadata.filters == nil")
+            Logger.logError("(FiltersService) - metadata.filters == nil")
             return
         }
         let newFiltersIds = newFilters.map { $0.filterId }

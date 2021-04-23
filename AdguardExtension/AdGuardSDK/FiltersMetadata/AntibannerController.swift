@@ -60,13 +60,13 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     private var database: ASDatabase
     private let resources: AESharedResourcesProtocol
-    private let productInfo: ADProductInfoProtocol
+    private let version: String
     
-    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
+    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, version: String) {
         self.antibanner = antibanner
         self.database = ASDatabase()
         self.resources = resources
-        self.productInfo = productInfo
+        self.version = version
         super.init()
         
         self.initDatabase()
@@ -81,7 +81,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
             if sSelf.database.ready {
                 sSelf.antibanner.start()
                 sSelf.started = true
-                DDLogInfo("(AntibannerController) DB service ready. Antibanner service started.");
+                Logger.logInfo("(AntibannerController) DB service ready. Antibanner service started.");
             }
             else {
                 sSelf.setupDatabaseObserver()
@@ -129,7 +129,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
             startQueue.async { [weak self] in
                 self?.antibanner.start()
                 self?.started = true
-                DDLogInfo("(AntibannerController) DB service ready. Antibanner service started.");
+                Logger.logInfo("(AntibannerController) DB service ready. Antibanner service started.");
             }
             
             return
@@ -142,7 +142,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     private func initDatabase() {
         let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
         self.antibanner.setDatabase(self.database)
-        self.database.initDb(with: url, upgradeDefaultDb: true, buildVersion: productInfo.buildVersion())
+        self.database.initDb(with: url, upgradeDefaultDb: true, buildVersion: version)
     }
     
     private func setupDatabaseObserver() {

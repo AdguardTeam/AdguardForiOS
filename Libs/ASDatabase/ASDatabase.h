@@ -24,7 +24,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "vendors/fmdb/FMDB.h"
+#import "FMDB.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ASDatabase Constants

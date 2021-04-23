@@ -53,7 +53,6 @@
 		659C5FCC1B8B4DC90081EBE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 659C5FCB1B8B4DC90081EBE3 /* main.m */; };
 		659C60CF1B8B4F040081EBE3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 659C60CE1B8B4F040081EBE3 /* libsqlite3.tbd */; };
 		659C60D11B8B4F200081EBE3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 659C60D01B8B4F200081EBE3 /* libz.tbd */; };
-		65FAB33A1D6C572200A0706B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FAB3391D6C572200A0706B /* ACObject.m */; };
 		D031A18F219F0811002C17D9 /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A18E219F0811002C17D9 /* DDLoggerNames.m */; };
 		D07D33DD26121BBB00213A5A /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C426121AF100213A5A /* NetworkingService.swift */; };
 		D07D33DF26121BC400213A5A /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33C626121AF100213A5A /* RequestSender.swift */; };
@@ -200,8 +199,6 @@
 		65D59F8E1BC2FE5700E7B8BF /* update0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.100.sql; sourceTree = "<group>"; };
 		65DAE6E01B8B69A10020BC3C /* clean-script.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		65DAE6E21B8B73E50020BC3C /* builder.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = builder.xcconfig; sourceTree = "<group>"; };
-		65FAB3381D6C572200A0706B /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
-		65FAB3391D6C572200A0706B /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		D031A18E219F0811002C17D9 /* DDLoggerNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoggerNames.m; sourceTree = "<group>"; };
 		D067D8CD213EC8A900ECDE6D /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
@@ -351,8 +348,6 @@
 				655A04D61C6B7790000F00D7 /* ACLLogger.m */,
 				655A04DF1C6B7790000F00D7 /* ACLWildcard.h */,
 				655A04E01C6B7790000F00D7 /* ACLWildcard.m */,
-				65FAB3381D6C572200A0706B /* ACObject.h */,
-				65FAB3391D6C572200A0706B /* ACObject.m */,
 				655A04E11C6B7790000F00D7 /* Logger */,
 				655A04FF1C6B7790000F00D7 /* NSDate+Utils.h */,
 				655A05001C6B7790000F00D7 /* NSDate+Utils.m */,
@@ -829,7 +824,6 @@
 				D07D33ED26121C6B00213A5A /* SuccessFailureParser.swift in Sources */,
 				655A05A01C6B7790000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
 				655A05961C6B7790000F00D7 /* ACLFileLogger.m in Sources */,
-				65FAB33A1D6C572200A0706B /* ACObject.m in Sources */,
 				655A059F1C6B7790000F00D7 /* CLIColor.m in Sources */,
 				655A05D61C6B7790000F00D7 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				655A05921C6B7790000F00D7 /* ACIOUtils.m in Sources */,

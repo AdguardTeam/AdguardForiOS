@@ -25,13 +25,13 @@ class FiltersLocalizationsParser: ParserProtocol {
     func parse(data: Data, response: URLResponse?) -> FiltersLocalizationsParser.Model? {
         if let response = response as? HTTPURLResponse {
             if response.statusCode != 200 {
-                DDLogError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
+                Logger.logError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
                 return nil
             }
             
             let jsonParser = JSONI18nParser()
             guard jsonParser.parse(with: data) else {
-                DDLogError("FiltersMetadataParser parse failed")
+                Logger.logError("FiltersMetadataParser parse failed")
                 return nil
             }
             

@@ -75,7 +75,7 @@ public class FiltersConverter: FiltersConverterProtocol {
                 resultFilters.append(safariFilter)
             }
             else {
-                DDLogError("FiltersCoverter error - can not convert filter with type: \(filter.key)")
+                Logger.logError("FiltersCoverter error - can not convert filter with type: \(filter.key)")
             }
         }
         return resultFilters

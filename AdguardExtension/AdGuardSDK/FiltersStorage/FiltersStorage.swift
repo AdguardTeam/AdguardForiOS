@@ -31,7 +31,7 @@ class FiltersStorage: FiltersStorageProtocol {
     func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
         
         guard let url = urlForFilter(identifier) else {
-            DDLogError("FiltersStorage downloadFilter - can not generate url for filter with id: \(identifier)")
+            Logger.logError("FiltersStorage downloadFilter - can not generate url for filter with id: \(identifier)")
             completion(FiltersStorageError.updateError)
             return
         }
@@ -47,16 +47,16 @@ class FiltersStorage: FiltersStorageProtocol {
         var result = [Int: String]()
         for id in identifiers {
             guard let fileUrl = fileUrlForFilter(id) else {
-                DDLogError("FiltersStorage getFilters error. Can not generate url for filter with id: \(id)")
+                Logger.logError("FiltersStorage getFilters error. Can not generate url for filter with id: \(id)")
                 continue
             }
             guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-                DDLogError("FiltersStorage getFilters error. Can not read filter with url: \(fileUrl)")
+                Logger.logError("FiltersStorage getFilters error. Can not read filter with url: \(fileUrl)")
                 
                 // try to get presaved filter file
                 if  let defaulUrl = defaultFileUrlForFilter(id),
                     let content = try? String.init(contentsOf: defaulUrl, encoding: .utf8) {
-                    DDLogInfo("FiltersStorage return default filter")
+                    Logger.logInfo("FiltersStorage return default filter")
                     result[id] = content
                 }
                 continue
@@ -84,7 +84,7 @@ class FiltersStorage: FiltersStorageProtocol {
     private func downloadFilter(url: URL, identifier: Int, completion: @escaping (Error?) -> Void) {
         
         guard let saveUrl = fileUrlForFilter(identifier) else {
-            DDLogError("FiltersStorage downloadFilter - can not generate file url for filter with id: \(identifier)")
+            Logger.logError("FiltersStorage downloadFilter - can not generate file url for filter with id: \(identifier)")
             completion(FiltersStorageError.updateError)
             return
         }
@@ -96,7 +96,7 @@ class FiltersStorage: FiltersStorageProtocol {
                 completion(nil)
             }
             catch {
-                DDLogError("FiltersStorage downloadFilter - download error: \(error)")
+                Logger.logError("FiltersStorage downloadFilter - download error: \(error)")
                 completion(error)
             }
         }

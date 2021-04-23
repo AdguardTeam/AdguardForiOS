@@ -16,14 +16,23 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+#import <Foundation/Foundation.h>
+#import "ACObject.h"
+#import "ABECFilter.h"
+#import "AESAntibanner.h"
+#import "AESharedResources.h"
+#import "ABECFilterParsers.h"
+#import "ASDatabase.h"
+#import "NSStringPunycodeAdditions.h"
+#import "AEFilterRuleSyntaxConstants.h"
+#import "AEWhitelistDomainObject.h"
 
-extension RequestFactory {
-    static func loadFiltersMetadataConfig(version: String, id: String, cid: String, lang: String)->RequestConfig<FiltersMetadataParser> {
-        return RequestConfig<FiltersMetadataParser>(request: FiltersMetadataRequest(version: version, id: id, cid: cid, lang: lang), parser: FiltersMetadataParser())
-    }
-    
-    static func loadFiltersLocalizationsConfig()->RequestConfig<FiltersLocalizationsParser> {
-        return RequestConfig<FiltersLocalizationsParser>(request: FiltersLocalizationsRequest(), parser: FiltersLocalizationsParser())
-    }
-}
+//! Project version number for AdGuardSDK.
+FOUNDATION_EXPORT double AdGuardSDKVersionNumber;
+
+//! Project version string for AdGuardSDK.
+FOUNDATION_EXPORT const unsigned char AdGuardSDKVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <AdGuardSDK/PublicHeader.h>
+
+

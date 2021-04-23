@@ -20,30 +20,6 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
-    dynamic var activityStatisticsType: ChartDateType {
-        get {
-            let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
-        }
-        set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: ActivityStatisticsPeriodType)
-        }
-    }
-    
-    dynamic var chartDateType: ChartDateType {
-        get {
-            let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
-        }
-        set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: StatisticsPeriodType)
-        }
-    }
-    
     dynamic var tempRequestsCount: Int {
         get {
             return sharedDefaults().integer(forKey: AEDefaultsRequests)
@@ -186,19 +162,6 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var backgroundFetchState: BackgroundFetchState {
-        get {
-            guard let value = sharedDefaults().object(forKey: BackgroundFetchStateKey) as? Int else {
-                return .notStarted
-            }
-            return BackgroundFetchState(rawValue: value)!
-        }
-        set {
-            DDLogInfo("(SharedResources) set background fetch state: \(newValue.rawValue)")
-            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchStateKey)
-        }
-    }
-    
     dynamic var needUpdateFilters: Bool {
         get {
             return sharedDefaults().bool(forKey: NeedToUpdateFiltersKey)
@@ -234,21 +197,6 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughSetapp)
         }
     }
-    
-    dynamic var dnsImplementation: DnsImplementation {
-        get {
-            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
-                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
-            }
-            return .adGuard
-        }
-        set {
-            if dnsImplementation != newValue {
-                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
-                NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
-            }
-        }
-    }
             
     dynamic var customFallbackServers: [String]? {
            get {
@@ -270,18 +218,7 @@ extension AESharedResourcesProtocol {
            }
        }
     
-    dynamic var blockingMode: BlockingModeSettings  {
-        get {
-            guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
-                return .agDefault
-            }
-            
-            return BlockingModeSettings(rawValue: value)!
-        }
-        set {
-            sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
-        }
-    }
+    
     
     dynamic var blockedResponseTtlSecs: Int {
         get {

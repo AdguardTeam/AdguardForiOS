@@ -19,8 +19,8 @@
 import Foundation
 
 extension HttpRequestServiceProtocol {
-    func loadFiltersMetadata(completion: @escaping (ABECFilterClientMetadata?)->Void) {
-        let config = RequestFactory.loadFiltersMetadataConfig()
+    func loadFiltersMetadata(version: String, id: String, cid: String, lang: String, completion: @escaping (ABECFilterClientMetadata?)->Void) {
+        let config = RequestFactory.loadFiltersMetadataConfig(version: version, id: id, cid: cid, lang: lang)
         requestSender.send(requestConfig: config) { (result: Result<ABECFilterClientMetadata>) in
             switch result {
             case .success(let metadata):

@@ -27,7 +27,7 @@ protocol ContentBlockerServiceProtocol {
     /**
      recompile all content blocker files and reloads it to safari
     */
-    func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void)
+    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, completion:@escaping (Error?)->Void)
     
     /**
      validates rule text
@@ -57,7 +57,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
     private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
-    private var safariProtection: SafariProtectionServiceProtocol
     private var filtersStorage: FiltersStorageProtocol
     
     private let workQueue = DispatchQueue(label: "content_blocker")
@@ -90,19 +89,18 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, safariProtection: SafariProtectionServiceProtocol, filtersStorage: FiltersStorageProtocol) {
+    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FiltersStorageProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.antibanner = antibanner
-        self.safariProtection = safariProtection
         self.filtersStorage = filtersStorage
         super.init()
     }
     
     // MARK: - public methods
     @objc
-    func reloadJsons(backgroundUpdate: Bool, completion:@escaping (Error?)->Void) {
-        DDLogInfo("(ContentBlockerService) reloadJsons")
+    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, completion:@escaping (Error?)->Void) {
+        Logger.logInfo("(ContentBlockerService) reloadJsons")
         
 #if !APP_EXTENSION
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
@@ -111,7 +109,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         workQueue.async { [weak self] in
             guard let self = self else { return }
             
-            let error = self.updateContentBlockers(background: backgroundUpdate)
+            let error = self.updateContentBlockers(background: backgroundUpdate, protectionEnabled: protectionEnabled)
 #if !APP_EXTENSION
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
@@ -257,9 +255,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - private methods
     
-    private func updateContentBlockers(background: Bool)->Error? {
+    private func updateContentBlockers(background: Bool, protectionEnabled: Bool)->Error? {
         
-        DDLogInfo("(ContentBlockerService) updateContentBlockers")
+        Logger.logInfo("(ContentBlockerService) updateContentBlockers")
         let filtersByGroup = activeGroups()
         
         var agFilters = [AdGuardFilter]()
@@ -272,17 +270,15 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             }
         }
         
-        return convertRulesAndInvalidateSafari(background: background, filters: agFilters)
+        return convertRulesAndInvalidateSafari(background: background, protectionEnabled: protectionEnabled ,filters: agFilters)
     }
     
-    private func convertRulesAndInvalidateSafari(background: Bool, filters: [AdGuardFilter])->Error? {
+    private func convertRulesAndInvalidateSafari(background: Bool, protectionEnabled: Bool, filters: [AdGuardFilter])->Error? {
         var resultError: Error?
         let converter = FiltersConverter()
         
-        let safariProtectionEnabled = safariProtection.safariProtectionEnabled
-
-        if !safariProtectionEnabled {
-            DDLogInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
+        if !protectionEnabled {
+            Logger.logInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
             
             for type in ContentBlockerType.allCases {
                 safariService.save(json: Data(), type: type)
@@ -313,13 +309,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 }
                 
                 if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                    DDLogInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
+                    Logger.logInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
                     allowlistRules = [invertedRule]
                 }
             }
             else {
                 if let whitelistRules = resources.whitelistContentBlockingRules {
-                    DDLogInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
+                    Logger.logInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
                     allowlistRules = whitelistRules as? [ASDFilterRule]
                 }
             }
@@ -391,7 +387,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .security: Affinity.security ]
     
     private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
-        DDLogInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
+        Logger.logInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
         let safariProtectionEnabled = safariProtection.safariProtectionEnabled
         
@@ -406,7 +402,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
                 
                 
-                DDLogInfo("(ContentBlockerService) updateJson append \(userRules.count) user rules")
+                Logger.logInfo("(ContentBlockerService) updateJson append \(userRules.count) user rules")
                 
                 rules = userRules + rules
                 
@@ -424,13 +420,13 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                         }
                         
                         if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                            DDLogInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
+                            Logger.logInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
                             rules.append(invertedRule)
                         }
                     }
                     else {
                         if let whitelistRules = resources.whitelistContentBlockingRules {
-                            DDLogInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
+                            Logger.logInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
                             rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
                         }
                     }
@@ -439,7 +435,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 var resultData = Data()
                 var resultError: Error?
                 if rules.count != 0 {
-                    DDLogInfo("(ContentBlockerService) updateJson - convert \(rules.count) rules")
+                    Logger.logInfo("(ContentBlockerService) updateJson - convert \(rules.count) rules")
                     let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
                     resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                     
@@ -448,10 +444,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                     
                     resultError = error
                     if error != nil {
-                        DDLogError("(ContentBlockerService) updateJson - error converting rules - \(error!.localizedDescription)")
+                        Logger.logInfo("(ContentBlockerService) updateJson - error converting rules - \(error!.localizedDescription)")
                     }
                 } else {
-                    DDLogInfo("(ContentBlockerService) updateJson - no rules to convert")
+                    Logger.logInfo("(ContentBlockerService) updateJson - no rules to convert")
                     resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                     resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 }
@@ -461,7 +457,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return resultError
             }
         } else {
-            DDLogInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
+            Logger.logInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
             safariService.save(json: Data(), type: contentBlocker)
             return nil
         }

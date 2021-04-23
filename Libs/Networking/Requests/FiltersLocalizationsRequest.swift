@@ -21,10 +21,10 @@ import Foundation
 class FiltersLocalizationsRequest: RequestProtocol {
     
     var urlRequest: URLRequest? {
-        let path = "\(ABEC_FILTER_URL_BASE)filters_i18n.js"
+        let path = "\(urlBase)filters_i18n.js"
         guard let url = URL(string: path) else { return nil }
         
-        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: TimeInterval(ABEC_BACKEND_READ_TIMEOUT))
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: TimeInterval(30))
         request.httpMethod = "GET"
         
         return request
