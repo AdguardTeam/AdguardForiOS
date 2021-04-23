@@ -340,25 +340,32 @@ extension StoryViewController {
             return
         }
         
-        switch actionType {
-        case .readChangeLog:
-            dismiss(animated: true)
-        case .activateLicense:
-            dismiss(animated: true)
-        case .downloadAdguardVpn:
-            dismiss(animated: true)
-        case .moreOnDns:
-            dismiss(animated: true)
-        case .moreOnSafari:
-            dismiss(animated: true)
-        case .enableAdguardDns:
-            dismiss(animated: true)
-        case .enableGoogleDns:
-            dismiss(animated: true)
-        case .enableCloudflareDns:
-            dismiss(animated: true)
-        case .addCustomDns:
-            dismiss(animated: true)
+        // TODO: - TDS links need to be added
+        dismiss(animated: true) {
+            switch actionType {
+            case .readChangeLog:
+                return
+            case .activateLicense:
+                AppDelegate.shared.presentLicenseScreen()
+            case .downloadAdguardVpn:
+                if UIApplication.adGuardVpnIsInstalled {
+                    UIApplication.openAdGuardVpnAppIfInstalled()
+                } else {
+                    UIApplication.openAdGuardVpnAppStorePage()
+                }
+            case .moreOnDns:
+                return
+            case .moreOnSafari:
+                return
+            case .enableAdguardDns:
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
+            case .enableGoogleDns:
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
+            case .enableCloudflareDns:
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
+            case .addCustomDns:
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
+            }
         }
     }
 }
