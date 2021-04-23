@@ -180,6 +180,12 @@ extension PullableContainerController {
         let translation = recognizer.translation(in: view)
         let velocity = recognizer.velocity(in: view)
         
+        // User began to pull
+        if recognizer.state == .began {
+            // saving the height before being pulled up to modify it later
+            heightBeforePull = pullableViewHeightConstraint.constant
+        }
+        
         // Return if view is already in compact state and user swipes down
         if isCompact == true && velocity.y > 0 {
             return
@@ -190,25 +196,20 @@ extension PullableContainerController {
             return
         }
         
-        topConstraint.isActive = false
-        
-        // User began to pull
-        if recognizer.state == .began {
-            // we do not know the exact state of pullable view so it is nil
-            isCompact = nil
-            // saving the height before being pulled up to modify it later
-            heightBeforePull = pullableViewHeightConstraint.constant
-        }
-        
         // Current heigth of view while user is pulling up the view
         let resultHeight = heightBeforePull - translation.y
+        
         // Maximum height of pullable view
         let fullViewHeight = calculateMaxPullableViewHeight()
         
         // If current view height is between lowest and highest border than we can modify it
         if resultHeight >= pullableViewCompactHeight && resultHeight <= fullViewHeight {
-            pullableViewHeightConstraint.constant = resultHeight
             
+            // we do not know the exact state of pullable view so it is nil
+            isCompact = nil
+            
+            pullableViewHeightConstraint.constant = resultHeight
+            topConstraint.isActive = false
             if velocity.y < 0 {
                 pullableView.layoutIfNeeded()
             }
@@ -229,7 +230,7 @@ extension PullableContainerController {
          When user removes his finger from the screen we get his finger direction
          and decide to make view compact or show it in full height
          */
-        if recognizer.state == .ended {
+        if recognizer.state == .ended || recognizer.state == .cancelled || recognizer.state == .failed {
             if velocity.y > 0 {
                 hideFullView()
             } else {

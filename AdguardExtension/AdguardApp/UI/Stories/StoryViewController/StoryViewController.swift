@@ -96,6 +96,7 @@ final class StoryViewController: UIViewController {
     
     // Services
     private let theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private let configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
     
     // Observers
     private var themeNotificationToken: NotificationToken?
@@ -341,7 +342,9 @@ extension StoryViewController {
         }
         
         // TODO: - TDS links need to be added
-        dismiss(animated: true) {
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            
             switch actionType {
             case .readChangeLog:
                 return
@@ -358,13 +361,29 @@ extension StoryViewController {
             case .moreOnSafari:
                 return
             case .enableAdguardDns:
-                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
+                if self.configuration.proStatus {
+                    AppDelegate.shared.presentLicenseScreen()
+                } else {
+                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
+                }
             case .enableGoogleDns:
-                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
+                if self.configuration.proStatus {
+                    AppDelegate.shared.presentLicenseScreen()
+                } else {
+                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
+                }
             case .enableCloudflareDns:
-                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
+                if self.configuration.proStatus {
+                    AppDelegate.shared.presentLicenseScreen()
+                } else {
+                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
+                }
             case .addCustomDns:
-                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
+                if self.configuration.proStatus {
+                    AppDelegate.shared.presentLicenseScreen()
+                } else {
+                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
+                }
             }
         }
     }
