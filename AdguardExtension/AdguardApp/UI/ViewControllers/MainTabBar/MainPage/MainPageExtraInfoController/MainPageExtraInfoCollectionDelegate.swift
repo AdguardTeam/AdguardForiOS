@@ -80,7 +80,7 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
         return CGSize(width: cellWidth, height: cellWidth * 2 / 3)
     }
     
-    private func showStories<StoriesPresentor: UIViewController>(forVC vc: StoriesPresentor, fromCategory category: StoryCategory.CategoryType) where StoriesPresentor: StoriesPageViewControllerDelegate {
+    private func showStories(forVC vc: UIViewController & StoriesPageViewControllerDelegate, fromCategory category: StoryCategory.CategoryType) {
         let stories = model.storiesProvider.stories
         let storiesPageVC = StoriesPageViewController(storiesGroups: stories, startCategory: category)
         storiesPageVC.storiesDelegate = vc

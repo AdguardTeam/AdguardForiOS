@@ -71,13 +71,6 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
                                               dnsProtocol: dnsProtocolString)
     }
     
-    enum CompactViewType: Equatable {
-        case nativeImplementationInfo
-        case statisticsInfo
-        case unreadStories(unreadStoriesCount: Int)
-        case getPro
-    }
-    
     var fullViewType: MainPageExtraInfoModel.FullViewType {
         if configuration.proStatus {
             return resources.dnsImplementation == .native ? .storiesWithNativeDns : .storiesWithStatistics
@@ -86,13 +79,22 @@ final class MainPageExtraInfoModel: MainPageExtraInfoModelProtocol {
         }
     }
     
+    var systemProtectionIsEnabled: Bool { complexProtection.systemProtectionEnabled }
+    
+    // MARK: - Public enums
+    
+    enum CompactViewType: Equatable {
+        case nativeImplementationInfo
+        case statisticsInfo
+        case unreadStories(unreadStoriesCount: Int)
+        case getPro
+    }
+    
     enum FullViewType {
         case storiesWithStatistics
         case storiesWithNativeDns
         case storiesWithProStatusPromotion
     }
-    
-    var systemProtectionIsEnabled: Bool { complexProtection.systemProtectionEnabled }
     
     // MARK: - Services
     

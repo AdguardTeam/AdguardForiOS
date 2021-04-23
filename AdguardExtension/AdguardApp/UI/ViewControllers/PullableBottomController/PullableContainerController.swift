@@ -20,12 +20,15 @@ import UIKit
 
 class PullableContainerController: UIViewController {
     
-    @IBOutlet weak var pullableView: UIView!
-    @IBOutlet weak var pullableViewHeightConstraint: NSLayoutConstraint! {
+    @IBOutlet weak var pullableView: UIView! {
         didSet {
-            pullableViewCompactHeight = pullableViewHeightConstraint.constant
+            let height: CGFloat = isIpadTrait ? 150.0 : 100.0
+            pullableViewHeightConstraint = NSLayoutConstraint(item: pullableView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: height)
+            pullableViewCompactHeight = height
+            pullableView.addConstraint(pullableViewHeightConstraint)
         }
     }
+    private var pullableViewHeightConstraint: NSLayoutConstraint!
     
     /*
      This constraint is used to make pullable view static when screen size changes
@@ -177,12 +180,12 @@ extension PullableContainerController {
         let translation = recognizer.translation(in: view)
         let velocity = recognizer.velocity(in: view)
         
-        // Return if view is already im compact state and user swipes down
+        // Return if view is already in compact state and user swipes down
         if isCompact == true && velocity.y > 0 {
             return
         }
         
-        // Return if view is already im full state and user swipes up
+        // Return if view is already in full state and user swipes up
         if isCompact == false && velocity.y <= 0 {
             return
         }

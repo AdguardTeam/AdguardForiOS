@@ -158,17 +158,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjK-AE-DPG">
-                                <rect key="frame" x="0.0" y="625" width="414" height="100"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OjK-AE-DPG">
+                                <rect key="frame" x="0.0" y="576" width="414" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="100" id="aRa-Ve-wu7">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="150"/>
-                                    </constraint>
-                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b38-gh-HpL">
-                                <rect key="frame" x="103.5" y="569" width="207" height="40"/>
+                                <rect key="frame" x="103.5" y="520" width="207" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nEV-mx-lM1">
@@ -331,7 +326,6 @@
                         <outlet property="protectionStateLabel" destination="pdi-RN-fam" id="wQg-XG-2WE"/>
                         <outlet property="protectionStatusLabel" destination="7lM-f7-rPq" id="IbR-jz-LUN"/>
                         <outlet property="pullableView" destination="OjK-AE-DPG" id="hIl-R4-iUL"/>
-                        <outlet property="pullableViewHeightConstraint" destination="aRa-Ve-wu7" id="ZXS-Px-tVM"/>
                         <outlet property="updateFiltersButton" destination="uNk-sK-NFe" id="duN-YP-8Va"/>
                         <segue destination="CPg-2F-2ec" kind="show" identifier="getProSegue" id="lcP-ih-xXn"/>
                     </connections>
