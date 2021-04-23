@@ -51,7 +51,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/en.lproj/RateApp.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings/en.lproj/ImportSettings.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController/en.lproj/UpsellViewController.strings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView/en.lproj/NativeDnsCollectionReusableView.strings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView/en.lproj/NativeDnsCollectionReusableView.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/ProStatusPromotionCollectionReusableView/en.lproj/ProStatusPromotionCollectionReusableView.strings"
     ],
     "storyboard_dirs": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
