@@ -1,0 +1,5 @@
+/* Class = "UIButton"; normalTitle = "Switch DNS implementation"; ObjectID = "OK8-mF-uYG"; */
+"OK8-mF-uYG.normalTitle" = "Switch DNS implementation";
+
+/* Class = "UILabel"; text = "We have no responses data in case you use Native DNS. To see statistics switch it to AdGuard DNS"; ObjectID = "h5l-2f-sM5"; */
+"h5l-2f-sM5.text" = "We have no responses data in case you use Native DNS. To see statistics switch it to AdGuard DNS";

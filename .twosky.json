@@ -50,7 +50,8 @@
         "AdguardExtension/AdGuardTodayExtension/en.lproj/TodayExtension.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp/en.lproj/RateApp.strings",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings/en.lproj/ImportSettings.strings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController/en.lproj/UpsellViewController.strings"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController/en.lproj/UpsellViewController.strings",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView/en.lproj/NativeDnsCollectionReusableView.strings"
     ],
     "storyboard_dirs": [
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/About",
@@ -68,7 +69,8 @@
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainMenu/ListOfRules",
         "AdguardExtension/AdguardApp/UI/ViewControllers/RateApp",
         "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/ImportSettings",
-        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController"
+        "AdguardExtension/AdguardApp/UI/ViewControllers/UpsellViewController",
+        "AdguardExtension/AdguardApp/UI/ViewControllers/MainTabBar/MainPage/MainPageExtraInfoController/NativeDnsCollectionReusableView"
     ]
   }
 ]

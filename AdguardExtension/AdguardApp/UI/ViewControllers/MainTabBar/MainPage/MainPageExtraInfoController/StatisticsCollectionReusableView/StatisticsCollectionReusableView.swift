@@ -75,7 +75,7 @@ final class StatisticsCollectionReusableView: UICollectionViewCell, Reusable, Ni
         /*
          There is a bug 🐞 in iOS 12 and earlier
          All subviews appeared under content view
-         Maybe it's xib bug, because it doesn'g show content view 🤷‍♂️
+         Maybe it's xib bug, because it doesn't show content view 🤷‍♂️
          */
         contentView.isUserInteractionEnabled = false
     }
