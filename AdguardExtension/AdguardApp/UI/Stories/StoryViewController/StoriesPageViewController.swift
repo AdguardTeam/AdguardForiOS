@@ -175,7 +175,6 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
             let category = currentViewController.category
             if !resources.watchedStoriesCategories.contains(category) {
                 resources.watchedStoriesCategories.insert(category)
-                storiesDelegate?.allStoriesInCategoryWereWatched(category)
             }
         }
         
@@ -186,6 +185,13 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
             }
         } else {
             dismiss(animated: true)
+        }
+    }
+    
+    func lastStoryInCategoryWasWatched() {
+        if let currentViewController = viewControllers?.first as? StoryViewController {
+            let category = currentViewController.category
+            storiesDelegate?.allStoriesInCategoryWereWatched(category)
         }
     }
 }

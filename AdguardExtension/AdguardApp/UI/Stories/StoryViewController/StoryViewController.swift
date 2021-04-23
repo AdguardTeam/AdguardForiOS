@@ -21,6 +21,7 @@ import UIKit
 protocol StoryViewControllerDelegate: AnyObject {
     func previousStoriesAreOver()
     func nextStoriesAreOver()
+    func lastStoryInCategoryWasWatched()
 }
 
 final class StoryViewController: UIViewController {
@@ -188,6 +189,11 @@ final class StoryViewController: UIViewController {
             currentStoryIndex += 1
             changeContent()
             progressView.next()
+            
+            /* Next story is last so we can say that all stories in category were watched */
+            if currentStoryIndex == storyGroup.storyTokens.count - 1 {
+                delegate?.lastStoryInCategoryWasWatched()
+            }
         } else {
             delegate?.nextStoriesAreOver()
         }
