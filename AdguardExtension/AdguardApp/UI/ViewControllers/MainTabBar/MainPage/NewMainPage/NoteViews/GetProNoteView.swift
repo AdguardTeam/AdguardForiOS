@@ -76,5 +76,8 @@ final class GetProNoteView: MainPageNoteView {
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8.0).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8.0).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: crossButton.leadingAnchor, constant: -16.0).isActive = true
+        
+        let minHeight: CGFloat = isIpadTrait ? 36.0 : 30.0
+        heightAnchor.constraint(equalToConstant: minHeight).isActive = true
     }
 }

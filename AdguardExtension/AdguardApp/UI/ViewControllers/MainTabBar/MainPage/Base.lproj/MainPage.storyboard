@@ -277,7 +277,7 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="182"/>
                             </constraint>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="lFf-lC-SHE"/>
-                            <constraint firstItem="TKh-j7-akf" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="oJL-MX-TRc"/>
+                            <constraint firstItem="TKh-j7-akf" firstAttribute="width" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.6" id="oJL-MX-TRc"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="top" secondItem="Ttf-uM-oMJ" secondAttribute="bottom" constant="8" id="pbU-1O-1AX"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="pcA-d3-Z5F"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="width" relation="greaterThanOrEqual" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="sY7-p4-eHr"/>
