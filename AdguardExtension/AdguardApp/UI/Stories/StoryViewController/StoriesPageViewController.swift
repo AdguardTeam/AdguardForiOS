@@ -171,13 +171,6 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
     
     /* Delegate method is called when stories in category's ended up */
     func nextStoriesAreOver() {
-        if let currentViewController = viewControllers?.first as? StoryViewController {
-            let category = currentViewController.category
-            if !resources.watchedStoriesCategories.contains(category) {
-                resources.watchedStoriesCategories.insert(category)
-            }
-        }
-        
         if let next = nextStoryVC {
             view.isUserInteractionEnabled = false
             setViewControllers([next], direction: .forward, animated: true) { [weak self] _ in
@@ -191,7 +184,10 @@ extension StoriesPageViewController: StoryViewControllerDelegate {
     func lastStoryInCategoryWasWatched() {
         if let currentViewController = viewControllers?.first as? StoryViewController {
             let category = currentViewController.category
-            storiesDelegate?.allStoriesInCategoryWereWatched(category)
+            if !resources.watchedStoriesCategories.contains(category) {
+                resources.watchedStoriesCategories.insert(category)
+                storiesDelegate?.allStoriesInCategoryWereWatched(category)
+            }
         }
     }
 }

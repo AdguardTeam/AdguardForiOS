@@ -219,10 +219,7 @@ extension MainPageExtraInfoController: MainPageExtraInfoModelDelegate {
     
     func storiesChanged() {
         collectionView.reloadData()
-        // Check if we need to change unread stories number
-        if case let MainPageExtraInfoModel.CompactViewType.unreadStories(unreadStoriesCount: unread) = model.compactViewType {
-            processUnreadStories(unread)
-        }
+        processCompactView()
     }
 }
 
