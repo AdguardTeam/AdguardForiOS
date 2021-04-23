@@ -888,13 +888,11 @@
 		7EF0BA47260A0B62005805C4 /* StoryCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA44260A0B62005805C4 /* StoryCategory.swift */; };
 		7EF0BA5A260A0C6A005805C4 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */; };
 		7EF0BA5B260A0C6A005805C4 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */; };
-		7EF0BA5C260A0C6A005805C4 /* StoriesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */; };
 		7EF0BA80260A1122005805C4 /* StoryButtonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */; };
 		7EF0BA81260A1122005805C4 /* StoryButtonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */; };
 		7EF0BA82260A1122005805C4 /* StoryButtonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */; };
 		7EF0BAB6260A1BE4005805C4 /* StoryToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5421432608E3C7008ACC3C /* StoryToken.swift */; };
 		7EF0BAB7260A1BE4005805C4 /* StoryGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E54212F2608E3B6008ACC3C /* StoryGroup.swift */; };
-		7EF0BACA260A1F35005805C4 /* StoriesProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BAC9260A1F35005805C4 /* StoriesProviderTest.swift */; };
 		7EF0BADC260A2155005805C4 /* stories.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EF0BA0D2609E956005805C4 /* stories.json */; };
 		7EF0BB26260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
 		7EF0BB27260B37D3005805C4 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */; };
@@ -3528,7 +3526,6 @@
 		7EF0BA44260A0B62005805C4 /* StoryCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCategory.swift; sourceTree = "<group>"; };
 		7EF0BA59260A0C6A005805C4 /* StoriesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProvider.swift; sourceTree = "<group>"; };
 		7EF0BA7F260A1122005805C4 /* StoryButtonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryButtonConfig.swift; sourceTree = "<group>"; };
-		7EF0BAC9260A1F35005805C4 /* StoriesProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProviderTest.swift; sourceTree = "<group>"; };
 		7EF0BB25260B37D3005805C4 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		7EF0BB95260B8BAB005805C4 /* StoriesProgressComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesProgressComponentView.swift; sourceTree = "<group>"; };
 		7EF0BBA9260B8DF7005805C4 /* UITraitEnvironment+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitEnvironment+Utils.swift"; sourceTree = "<group>"; };
@@ -4873,7 +4870,6 @@
 				7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */,
 				7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */,
 				7E4FEA90259B3933008CF061 /* DnsResolverTest.swift */,
-				7EF0BAC9260A1F35005805C4 /* StoriesProviderTest.swift */,
 				24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */,
 			);
 			path = AdguardTests;
@@ -8198,13 +8194,11 @@
 				7E9B37F7239176B800053972 /* FilterDetailedInterface.swift in Sources */,
 				D0AEC26A2409323C003E8FCC /* VpnManager.swift in Sources */,
 				65EC9CA51BB9824C00F53F3B /* FMSQLStatementSplitter.m in Sources */,
-				7EF0BA5C260A0C6A005805C4 /* StoriesProvider.swift in Sources */,
 				7E9C0C7525629DAB00F1999D /* UIColor+Utils.swift in Sources */,
 				D0D033F02355EBF40056789B /* AntibannerController.swift in Sources */,
 				7E473B2D25540E5C006F8345 /* NativeProvidersService.swift in Sources */,
 				24441A432614CF34009555F3 /* String+NSRange.swift in Sources */,
 				7E4AAD38242BC02100957122 /* ChartDateType.swift in Sources */,
-				7EF0BACA260A1F35005805C4 /* StoriesProviderTest.swift in Sources */,
 				7E1AB62225824A0C00519B2B /* RequestSenderProtocol.swift in Sources */,
 				D04C2B76240F9FF4009330A8 /* (null) in Sources */,
 				D0288F352306981C00A4EBEF /* ACNUrlUtils.m in Sources */,
