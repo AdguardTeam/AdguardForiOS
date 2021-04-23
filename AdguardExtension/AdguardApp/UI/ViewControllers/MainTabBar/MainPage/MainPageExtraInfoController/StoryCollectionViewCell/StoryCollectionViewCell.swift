@@ -34,7 +34,16 @@ final class StoryCollectionViewCell: UICollectionViewCell, Reusable {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var storyTitleLabel: UILabel!
-    @IBOutlet weak var storyShownImageView: UIImageView!
+    @IBOutlet weak var storyShownImageView: UIImageView! {
+        didSet {
+            /*
+             It is done for devices under iOS 12
+             They don't accept tint color and just set original image
+             */
+            storyShownImageView.isHighlighted = true
+            storyShownImageView.isHighlighted = false
+        }
+    }
     
     var model: StoryCollectionViewModel! {
         didSet {

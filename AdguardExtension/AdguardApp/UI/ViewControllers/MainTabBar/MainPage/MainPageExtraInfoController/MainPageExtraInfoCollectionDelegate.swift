@@ -45,7 +45,8 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let spaceToHeader: CGFloat
         switch model.fullViewType {
-        case .storiesWithNativeDns, .storiesWithStatistics: spaceToHeader = 40.0
+        case .storiesWithNativeDns: spaceToHeader = 40.0
+        case .storiesWithStatistics: spaceToHeader = 24.0
         case .storiesWithProStatusPromotion: spaceToHeader = 16.0
         }
         return UIEdgeInsets(top: spaceToHeader, left: itemSpacing, bottom: 0.0, right: itemSpacing)
@@ -59,7 +60,10 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
         let headerView: UICollectionReusableView
         switch model.fullViewType {
         case .storiesWithNativeDns: headerView = NativeDnsCollectionReusableView.fromNib
-        case .storiesWithStatistics: headerView = StatisticsCollectionReusableView.fromNib
+        case .storiesWithStatistics:
+            headerView = StatisticsCollectionReusableView.fromNib
+            let height: CGFloat = headerView.isIpadTrait ? 350.0 : 250.0
+            return CGSize(width: collectionView.frame.width, height: height)
         case .storiesWithProStatusPromotion: headerView = ProStatusPromotionCollectionReusableView.fromNib
         }
         var targetSize = UIView.layoutFittingCompressedSize

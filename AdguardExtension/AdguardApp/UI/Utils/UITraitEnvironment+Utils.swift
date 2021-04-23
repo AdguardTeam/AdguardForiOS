@@ -20,6 +20,9 @@ import Foundation
 
 extension UITraitEnvironment {
     var isIpadTrait: Bool {
-        return traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
+        if #available(iOS 13, *) {
+            return traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
+        }
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
 }

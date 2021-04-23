@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +15,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jM9-Zm-Ekl">
-                    <rect key="frame" x="604" y="40" width="24" height="24"/>
+                    <rect key="frame" x="604" y="10" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="8U9-EY-sD6">
                             <variation key="heightClass=regular-widthClass=regular" constant="32"/>
@@ -31,11 +30,11 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7h-Rb-mBP" customClass="StatisticsInfoView" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="176" width="660" height="129"/>
+                    <rect key="frame" x="0.0" y="204" width="660" height="135"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pf-Zm-QzF">
-                    <rect key="frame" x="32" y="40" width="24" height="24"/>
+                    <rect key="frame" x="32" y="10" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="1Go-iS-hvm">
                             <variation key="heightClass=regular-widthClass=regular" constant="32"/>
@@ -50,7 +49,12 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbG-dG-Cv3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="64" y="52" width="532" height="0.0"/>
+                    <rect key="frame" x="64" y="36" width="532" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="RhO-sY-mkH">
+                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                        </constraint>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -62,7 +66,12 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48m-w2-8XG" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="64" y="52" width="532" height="0.0"/>
+                    <rect key="frame" x="64" y="8" width="532" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="Yck-2v-Cpn">
+                            <variation key="heightClass=regular-widthClass=regular" constant="44"/>
+                        </constraint>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -74,7 +83,7 @@
                     </variation>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vt-RW-cEh" customClass="ChartView" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="76" width="660" height="100"/>
+                    <rect key="frame" x="0.0" y="80" width="660" height="100"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="OdW-pQ-3Qg">
@@ -83,25 +92,24 @@
                     </constraints>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <constraints>
-                <constraint firstItem="1pf-Zm-QzF" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="32" id="11g-Rt-fDq"/>
-                <constraint firstItem="a7h-Rb-mBP" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="59b-OC-nTO"/>
-                <constraint firstItem="48m-w2-8XG" firstAttribute="top" secondItem="VXr-Tz-HHm" secondAttribute="top" constant="8" id="6Sx-FT-dnS"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="0Vt-RW-cEh" secondAttribute="trailing" id="7UY-l2-lqW"/>
-                <constraint firstItem="0Vt-RW-cEh" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="B6x-T2-IcR"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="a7h-Rb-mBP" secondAttribute="trailing" id="Jl7-j7-EIq"/>
+                <constraint firstItem="1pf-Zm-QzF" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="32" id="11g-Rt-fDq"/>
+                <constraint firstItem="a7h-Rb-mBP" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="59b-OC-nTO"/>
+                <constraint firstItem="48m-w2-8XG" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="8" id="6Sx-FT-dnS"/>
+                <constraint firstAttribute="trailing" secondItem="0Vt-RW-cEh" secondAttribute="trailing" id="7UY-l2-lqW"/>
+                <constraint firstItem="0Vt-RW-cEh" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="B6x-T2-IcR"/>
+                <constraint firstAttribute="trailing" secondItem="a7h-Rb-mBP" secondAttribute="trailing" id="Jl7-j7-EIq"/>
                 <constraint firstItem="rbG-dG-Cv3" firstAttribute="trailing" secondItem="48m-w2-8XG" secondAttribute="trailing" id="KyR-zk-ZZP"/>
                 <constraint firstItem="rbG-dG-Cv3" firstAttribute="leading" secondItem="48m-w2-8XG" secondAttribute="leading" id="LVy-aX-wvh"/>
                 <constraint firstItem="jM9-Zm-Ekl" firstAttribute="centerY" secondItem="48m-w2-8XG" secondAttribute="centerY" id="PVG-Zy-oAv"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="a7h-Rb-mBP" secondAttribute="bottom" id="Siu-1x-MNx"/>
+                <constraint firstAttribute="bottom" secondItem="a7h-Rb-mBP" secondAttribute="bottom" id="Siu-1x-MNx"/>
                 <constraint firstItem="rbG-dG-Cv3" firstAttribute="top" secondItem="48m-w2-8XG" secondAttribute="bottom" id="XiA-U4-UjR"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="jM9-Zm-Ekl" secondAttribute="trailing" constant="32" id="b7W-vA-pfU"/>
+                <constraint firstAttribute="trailing" secondItem="jM9-Zm-Ekl" secondAttribute="trailing" constant="32" id="b7W-vA-pfU"/>
                 <constraint firstItem="jM9-Zm-Ekl" firstAttribute="leading" secondItem="48m-w2-8XG" secondAttribute="trailing" constant="8" id="bdq-A9-o37"/>
                 <constraint firstItem="0Vt-RW-cEh" firstAttribute="top" secondItem="rbG-dG-Cv3" secondAttribute="bottom" constant="24" id="jVc-YD-BVA"/>
                 <constraint firstItem="1pf-Zm-QzF" firstAttribute="centerY" secondItem="48m-w2-8XG" secondAttribute="centerY" id="loR-YY-fxC"/>
                 <constraint firstItem="48m-w2-8XG" firstAttribute="leading" secondItem="1pf-Zm-QzF" secondAttribute="trailing" constant="8" id="oY9-LL-Pmp"/>
-                <constraint firstItem="a7h-Rb-mBP" firstAttribute="top" secondItem="0Vt-RW-cEh" secondAttribute="bottom" id="yVk-75-JYA"/>
+                <constraint firstItem="a7h-Rb-mBP" firstAttribute="top" secondItem="0Vt-RW-cEh" secondAttribute="bottom" constant="24" id="yVk-75-JYA"/>
             </constraints>
             <connections>
                 <outlet property="chartView" destination="0Vt-RW-cEh" id="8Aq-Av-092"/>

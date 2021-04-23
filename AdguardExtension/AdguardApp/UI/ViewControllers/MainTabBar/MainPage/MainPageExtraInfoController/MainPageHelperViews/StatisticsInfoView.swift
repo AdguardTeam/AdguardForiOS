@@ -156,7 +156,7 @@ final class StatisticsInfoView: UIView {
         setConstraints(forView: encryptedButton, numbersLabel: encryptedLabel, titleLabel: encryptedTitleLabel)
         stackView.addArrangedSubview(encryptedButton)
         
-        setConstraints(forView: avgTimeButton, numbersLabel: avgTimeLabel, titleLabel: avgTimeTitleLabel)
+        let minHeight = setConstraints(forView: avgTimeButton, numbersLabel: avgTimeLabel, titleLabel: avgTimeTitleLabel)
         stackView.addArrangedSubview(avgTimeButton)
         
         addSubview(stackView)
@@ -165,6 +165,7 @@ final class StatisticsInfoView: UIView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor).isActive = true
+        stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight).isActive = true
     }
     
     // MARK: - Public methods
@@ -200,22 +201,27 @@ final class StatisticsInfoView: UIView {
         return label
     }
     
-    private func setConstraints(forView view: UIView, numbersLabel: UILabel, titleLabel: UILabel) {
+    @discardableResult
+    private func setConstraints(forView view: UIView, numbersLabel: UILabel, titleLabel: UILabel) -> CGFloat {
         view.addSubview(numbersLabel)
         view.addSubview(titleLabel)
         
-        let numbersLabelHeight = numbersLabel.font.pointSize
-        numbersLabel.heightAnchor.constraint(equalToConstant: numbersLabelHeight + 4.0).isActive = true
+        let numbersLabelHeight = numbersLabel.font.pointSize + 4.0
+        numbersLabel.heightAnchor.constraint(equalToConstant: numbersLabelHeight).isActive = true
         numbersLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         numbersLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         numbersLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         
-        let titleLabelHeight =  titleLabel.font.pointSize
-        titleLabel.heightAnchor.constraint(equalToConstant: titleLabelHeight + 4.0).isActive = true
+        let titleLabelHeight =  titleLabel.font.pointSize + 4.0
+        titleLabel.heightAnchor.constraint(equalToConstant: titleLabelHeight).isActive = true
         titleLabel.topAnchor.constraint(equalTo: numbersLabel.bottomAnchor, constant: 2.0).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         titleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        let viewMinHeight = numbersLabelHeight + 2.0 + titleLabelHeight
+        view.heightAnchor.constraint(greaterThanOrEqualToConstant: viewMinHeight).isActive = true
+        return viewMinHeight
     }
     
     // MARK: - Buttons actions

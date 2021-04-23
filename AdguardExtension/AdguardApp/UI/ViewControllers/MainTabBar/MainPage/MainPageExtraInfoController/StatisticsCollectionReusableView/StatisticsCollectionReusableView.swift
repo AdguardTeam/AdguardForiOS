@@ -71,6 +71,13 @@ final class StatisticsCollectionReusableView: UICollectionViewCell, Reusable, Ni
         timePeriodLabel.text = chartDateType.getDateTypeString()
         statisticsInfoView.delegate = self
         chartView.activeChart = statisticsInfoView.currentType
+        
+        /*
+         There is a bug 🐞 in iOS 12 and earlier
+         All subviews appeared under content view
+         Maybe it's xib bug, because it doesn'g show content view 🤷‍♂️
+         */
+        contentView.isUserInteractionEnabled = false
     }
     
     // MARK: - Public methods
