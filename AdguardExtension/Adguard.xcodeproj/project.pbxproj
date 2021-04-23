@@ -920,7 +920,6 @@
 		7EFF10C6262DC1F600E22152 /* GetProNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF10C5262DC1F600E22152 /* GetProNoteView.swift */; };
 		7EFF10C7262DC1F600E22152 /* GetProNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF10C5262DC1F600E22152 /* GetProNoteView.swift */; };
 		A5E0261C261E31FA00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E0261B261E31FA00198396 /* AGDnsProxy */; };
-		A5E0262F261E328D00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E0262E261E328D00198396 /* AGDnsProxy */; };
 		A5E02631261E330900198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
 		A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02632261E331E00198396 /* AGDnsProxy */; };
 		A5E02635261E334700198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02634261E334700198396 /* AGDnsProxy */; };
@@ -2170,6 +2169,7 @@
 		D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */; };
 		D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA620F224A8547005CF278 /* GetProTableController.swift */; };
+		D0BA7FE2263387ED0097029B /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = D0BA7FE1263387ED0097029B /* AGDnsProxy */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D0BDDD14215933D6000C85F1 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */; };
 		D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */; };
@@ -4096,8 +4096,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0569E2221F1C0A800985DA9 /* libz.tbd in Frameworks */,
+				D0BA7FE2263387ED0097029B /* AGDnsProxy in Frameworks */,
 				D0569E2521F1C0A800985DA9 /* NetworkExtension.framework in Frameworks */,
-				A5E0262F261E328D00198396 /* AGDnsProxy in Frameworks */,
 				D0569E2621F1C0A800985DA9 /* libsqlite3.tbd in Frameworks */,
 				D0569E2721F1C0A800985DA9 /* libresolv.tbd in Frameworks */,
 			);
@@ -6084,7 +6084,7 @@
 			);
 			name = Tunnel;
 			packageProductDependencies = (
-				A5E0262E261E328D00198396 /* AGDnsProxy */,
+				D0BA7FE1263387ED0097029B /* AGDnsProxy */,
 			);
 			productName = tunnel;
 			productReference = D0569E2F21F1C0A800985DA9 /* Tunnel.appex */;
@@ -7013,7 +7013,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/tunnel.appex/Frameworks\"\n";
 		};
 		D09E28642542CA28002D6BC0 /* Remove setapp */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7031,7 +7031,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/protunnel.appex/Frameworks\"\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12134,11 +12134,6 @@
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
 		};
-		A5E0262E261E328D00198396 /* AGDnsProxy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
-			productName = AGDnsProxy;
-		};
 		A5E02630261E330900198396 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
@@ -12203,6 +12198,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		D0BA7FE1263387ED0097029B /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
