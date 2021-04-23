@@ -361,25 +361,25 @@ extension StoryViewController {
             case .moreOnSafari:
                 return
             case .enableAdguardDns:
-                if self.configuration.proStatus {
+                if !self.configuration.proStatus {
                     AppDelegate.shared.presentLicenseScreen()
                 } else {
                     _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
                 }
             case .enableGoogleDns:
-                if self.configuration.proStatus {
+                if !self.configuration.proStatus {
                     AppDelegate.shared.presentLicenseScreen()
                 } else {
                     _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
                 }
             case .enableCloudflareDns:
-                if self.configuration.proStatus {
+                if !self.configuration.proStatus {
                     AppDelegate.shared.presentLicenseScreen()
                 } else {
                     _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
                 }
             case .addCustomDns:
-                if self.configuration.proStatus {
+                if !self.configuration.proStatus {
                     AppDelegate.shared.presentLicenseScreen()
                 } else {
                     _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
