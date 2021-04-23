@@ -25,7 +25,7 @@ protocol DnsProvidersModelProtocol {
     func getProvider(byId providerId: Int) -> DnsProviderInfo?
 }
 
-class DnsProvidersModel: DnsProvidersModelProtocol {
+final class DnsProvidersModel: DnsProvidersModelProtocol {
     
     // MARK: - Public properties
     var providers: [DnsProviderCellModel] {

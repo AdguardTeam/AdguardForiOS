@@ -102,7 +102,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     
     // Use it as default if selected is not supported
     private lazy var adguardDnsServer: DnsServerInfo? = {
-        let adguardDnsProviderId = 10001
+        let adguardDnsProviderId = DnsProvidersService.ProviderId.adGuard.rawValue
         let adguardProvider = providers.first(where: { $0.providerId == adguardDnsProviderId })
         let dnsServer = adguardProvider?.servers?.first(where: { $0.dnsProtocol == .doh })
         return dnsServer

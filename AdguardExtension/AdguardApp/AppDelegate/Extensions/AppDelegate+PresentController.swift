@@ -257,7 +257,7 @@ extension AppDelegate {
      Presents DnsProvidersController
      Returns true on success and false otherwise
      */
-    func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+    func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil, providerToSelect: DnsProvidersController.ProviderToSelectType? = nil) -> Bool {
         
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -294,6 +294,10 @@ extension AppDelegate {
         dnsProvidersController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
+        
+        if let providerToSelect = providerToSelect {
+            dnsProvidersController.selectProviderWhenViewIsLoaded(providerToSelect)
+        }
         
         return true
     }

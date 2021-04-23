@@ -23,9 +23,10 @@ class DescriptionCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 }
 
-class DnsProvidersController: UITableViewController {
+final class DnsProvidersController: UITableViewController {
     
     // MARK: - public fields
+    
     var openUrl: String?
     
     required init?(coder: NSCoder) {
@@ -85,6 +86,27 @@ class DnsProvidersController: UITableViewController {
             if let selectedProvider = providerToShow, let id = selectedProvider.providerId, let provider = model.getProvider(byId: id) {
                 controller.provider = provider
                 controller.delegate = self
+            }
+        }
+    }
+    
+    // MARK: - Publice methods
+    
+    enum ProviderToSelectType {
+        case adguard
+        case google
+        case cloudflare
+        case addNewCustom
+    }
+    
+    /* Should be called when we want to select an exact provider when view is loaded */
+    func selectProviderWhenViewIsLoaded(_ provider: ProviderToSelectType) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            switch provider {
+            case .addNewCustom: self?.showNewServer()
+            case .adguard: self?.selectProvider(byId: DnsProvidersService.ProviderId.adGuard.rawValue)
+            case .google: self?.selectProvider(byId: DnsProvidersService.ProviderId.google.rawValue)
+            case .cloudflare: self?.selectProvider(byId: DnsProvidersService.ProviderId.cloudflare.rawValue)
             }
         }
     }
@@ -223,12 +245,18 @@ extension DnsProvidersController: DnsProviderCellDelegate {
             DDLogError("Error finding provider with id = \(provider.providerId ?? 0)")
             return
         }
+        if provider.isDefaultProvider {
+            model.setServerAsActive(nil)
+            return
+        }
         
+        selectProvider(byId: id)
+    }
+    
+    private func selectProvider(byId providerId: Int) {
         var server: DnsServerInfo?
         
-        if provider.isDefaultProvider {
-            server = nil
-        } else if let providerInfo = model.getProvider(byId: id) {
+        if let providerInfo = model.getProvider(byId: providerId) {
             
             if let prot = providerInfo.getActiveProtocol(resources) {
                 server = providerInfo.serverByProtocol(dnsProtocol: prot)
@@ -238,7 +266,6 @@ extension DnsProvidersController: DnsProviderCellDelegate {
                 server = customServer
             }
         }
-        
         model.setServerAsActive(server)
     }
 }

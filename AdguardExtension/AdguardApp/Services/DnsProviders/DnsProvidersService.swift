@@ -55,6 +55,12 @@ import Foundation
 
 @objc class DnsProvidersService: NSObject, DnsProvidersServiceProtocol {
     
+    enum ProviderId: Int {
+        case adGuard = 10001
+        case google = 10009
+        case cloudflare = 10012
+    }
+    
     static let customProviderIdUpperRange = 9999
     static let systemDefaultProviderId = 10000
     
