@@ -5,7 +5,12 @@ extension UIApplication {
     /* Checks if AdGuard VPN is installed on device */
     static var adGuardVpnIsInstalled: Bool {
         let appUrl = URL(string: "\(adguardVpnScheme)://")!
-        return shared.canOpenURL(appUrl)
+        
+        if Thread.isMainThread {
+            return shared.canOpenURL(appUrl)
+        } else {
+            return DispatchQueue.main.sync { return shared.canOpenURL(appUrl) }
+        }
     }
     
     /* Checks if AdGuard VPN tunnel is running */

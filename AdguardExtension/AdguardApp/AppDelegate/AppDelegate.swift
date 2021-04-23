@@ -288,6 +288,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showRateAppDialogIfNedeed() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             guard let self = self else { return }
+            
+            /* Do not show Rate app dialog while stories are in process */
+            if Self.topViewController() is StoriesPageViewController {
+                return
+            }
+            
             if self.rateService.shouldShowRateAppDialog {
                 AppDelegate.shared.presentRateAppController()
                 self.resources.rateAppShown = true
