@@ -15,7 +15,12 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Stories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-sl-Sav" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="16" y="44" width="478" height="29"/>
+                    <rect key="frame" x="16" y="44" width="478" height="39"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="ZnI-dx-Wib">
+                            <variation key="heightClass=regular-widthClass=regular" constant="44"/>
+                        </constraint>
+                    </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -27,7 +32,12 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This short narratives tell you about AdGuard benefits and abilities" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWa-eO-Qur" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                    <rect key="frame" x="16" y="77" width="478" height="17"/>
+                    <rect key="frame" x="16" y="87" width="478" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="BXq-GD-4eV">
+                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                        </constraint>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>

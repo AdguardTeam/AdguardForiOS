@@ -109,7 +109,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>One day free full access</string>
+			<string>One-day free full access</string>
 			<key>other</key>
 			<string>%d-day free full access</string>
 		</dict>
@@ -125,7 +125,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>One week free full access</string>
+			<string>One-week free full access</string>
 			<key>other</key>
 			<string>%d-week free full access</string>
 		</dict>
@@ -141,7 +141,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>One month free full access</string>
+			<string>One-month free full access</string>
 			<key>other</key>
 			<string>%d-months free full access</string>
 		</dict>
@@ -157,7 +157,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>One year free full access</string>
+			<string>One-year free full access</string>
 			<key>other</key>
 			<string>%d-year free full access</string>
 		</dict>
