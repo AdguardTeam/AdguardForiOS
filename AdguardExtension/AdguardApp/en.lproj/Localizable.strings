@@ -64,11 +64,17 @@
 /* (MainPageViewController) Title for bottom button on main page */
 "dns_statistics_promo_title" = "DNS statistics can be seen here";
 
-/* (NativeImplementationView) Native DNS is working title. <span style=color:%@> It is a color for 'is working' */
-"native_dns_working" = "<b>Native DNS <span style=color:%@>is working</span></b>";
+/* (NativeImplementationView) Native DNS is working attributed title. <span style=color:%@> It is a color for 'is working' */
+"native_dns_working_attributed" = "<b>Native DNS <span style=color:%@>is working</span></b>";
 
-/* (NativeImplementationView) Native DNS is not working title. <span style=color:%@> It is a color for 'is not working' */
-"native_dns_not_working" = "<b>Native DNS <span style=color:%@>is not working</span></b>";
+/* (NativeImplementationView) Native DNS is not working attributed title. <span style=color:%@> It is a color for 'is not working' */
+"native_dns_not_working_attributed" = "<b>Native DNS <span style=color:%@>is not working</span></b>";
+
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Native DNS is working";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Native DNS is not working";
 
 /* (NativeImplementationView) Format for DNS server %1$@ stands for DNS provider name, %2$@ stands for protocol name, i.e AdGuard DNS (regular) */
 "dns_server_info_format" = "%1$@ (%2$@)";

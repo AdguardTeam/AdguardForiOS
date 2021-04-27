@@ -78,11 +78,13 @@ final class StoriesProgressComponentView: ThemableProgressView {
     
     func pause() {
         if animator?.isRunning == true {
+            animator?.pausesOnCompletion = true
             animator?.pauseAnimation()
         }
     }
     
     func resume() {
+        animator?.pausesOnCompletion = false
         animator?.continueAnimation(withTimingParameters: nil, durationFactor: 0.0)
     }
     

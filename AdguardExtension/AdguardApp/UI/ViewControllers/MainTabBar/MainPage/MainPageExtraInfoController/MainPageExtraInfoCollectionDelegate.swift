@@ -64,7 +64,13 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
             headerView = StatisticsCollectionReusableView.fromNib
             let height: CGFloat = headerView.isIpadTrait ? 350.0 : 250.0
             return CGSize(width: collectionView.frame.width, height: height)
-        case .storiesWithProStatusPromotion: headerView = ProStatusPromotionCollectionReusableView.fromNib
+        case .storiesWithProStatusPromotion:
+            headerView = ProStatusPromotionCollectionReusableView.fromNib
+            if #available(iOS 13, *) {
+            } else if headerView.isIpadTrait {
+                let height = headerView.frame.height
+                return CGSize(width: collectionView.frame.width, height: height)
+            }
         }
         var targetSize = UIView.layoutFittingCompressedSize
         targetSize.width = collectionView.frame.width
