@@ -2242,7 +2242,6 @@
 		D0D7E5662437730E001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E56724377310001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E56824377311001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
-		D0D7E56A243B0782001801A5 /* AGDnsProxy.framework.ios-arm64.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0C940ED23EAF742008B85EC /* AGDnsProxy.framework.ios-arm64.dSYM */; };
 		D0D7E570243B115C001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E571243B115C001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E572243B115C001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
@@ -2764,7 +2763,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				D0D7E56A243B0782001801A5 /* AGDnsProxy.framework.ios-arm64.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -12081,8 +12079,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				kind = exactVersion;
-				version = 1.5.7;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.7;
 			};
 		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
