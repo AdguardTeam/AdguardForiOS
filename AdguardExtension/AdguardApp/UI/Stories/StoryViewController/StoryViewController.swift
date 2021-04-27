@@ -180,6 +180,15 @@ final class StoryViewController: UIViewController {
         
         pauseStory()
     }
+    //MARK: - Public methods
+    
+    func appWillResignActive() {
+        progressView.pause()
+    }
+    
+    func appDidBecomeActive() {
+        progressView.resume()
+    }
     
     // MARK: - Private methods
     

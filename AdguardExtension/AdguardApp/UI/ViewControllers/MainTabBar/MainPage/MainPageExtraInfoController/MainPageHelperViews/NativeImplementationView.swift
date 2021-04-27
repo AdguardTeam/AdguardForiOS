@@ -67,7 +67,7 @@ final class NativeImplementationView: MainPageCompactView {
     // MARK: - Private methods
     
     private func processDnsStatus() {
-        let format = String.localizedString(model.dnsIsWorking ? "native_dns_working" : "native_dns_not_working")
+        let format = String.localizedString(model.dnsIsWorking ? "native_dns_working_attributed" : "native_dns_not_working_attributed")
         let colorHex = model.dnsIsWorking ? UIColor.AdGuardColor.lightGreen2.hex() : UIColor.AdGuardColor.yellow2.hex()
         let status = String(format: format, colorHex)
         let fontSize = titleLabel.font.pointSize

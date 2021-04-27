@@ -60,6 +60,8 @@ final class StoriesPageViewController: UIPageViewController {
     
     // Observers
     private var themeNotificationToken: NotificationToken?
+    private var willResignActiveObserver: NotificationToken?
+    private var didBecomeActiveObserver: NotificationToken?
     
     // MARK: - UIPageViewController lifecycle
     
@@ -90,6 +92,14 @@ final class StoriesPageViewController: UIPageViewController {
         themeNotificationToken = NotificationCenter.default.observe(name: NSNotification.Name(ConfigurationService.themeChangeNotification), object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
+        
+        willResignActiveObserver = NotificationCenter.default.observe(name: UIApplication.willResignActiveNotification, object: nil, queue: .main, using: { [weak self] (_) in
+            self?.onWillResignActiveAction()
+        })
+
+        didBecomeActiveObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: .main, using: { [weak self] (_) in
+            self?.onDidBecomeActiveAction()
+        })
     }
     
     override var prefersStatusBarHidden: Bool { true }
@@ -98,6 +108,16 @@ final class StoriesPageViewController: UIPageViewController {
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissVC))
         swipeGesture.direction = .down
         view.addGestureRecognizer(swipeGesture)
+    }
+    
+    private func onWillResignActiveAction() {
+        guard let controller = viewControllers?.first as? StoryViewController else { return }
+        controller.appWillResignActive()
+    }
+    
+    private func onDidBecomeActiveAction() {
+        guard let controller = viewControllers?.first as? StoryViewController else { return }
+        controller.appDidBecomeActive()
     }
 }
 
