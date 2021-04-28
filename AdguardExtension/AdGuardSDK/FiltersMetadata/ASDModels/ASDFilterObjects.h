@@ -17,6 +17,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "ACObject.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  Filtering constants

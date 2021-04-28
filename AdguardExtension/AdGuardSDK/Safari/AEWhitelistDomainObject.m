@@ -17,8 +17,9 @@
 */
 #import "AEWhitelistDomainObject.h"
 #import "AEFilterRuleSyntaxConstants.h"
-#import "ACommons/ACLang.h"
+//#import "ACommons/ACLang.h"
 #import "ASDFilterObjects.h"
+#import "NSString+Utils.h"
 
 @implementation AEWhitelistDomainObject
 

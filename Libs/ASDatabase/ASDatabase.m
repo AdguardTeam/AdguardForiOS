@@ -16,10 +16,11 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "ASDatabase.h"
-#import "ACommons/ACLang.h"
-#import "ADomain/ADomain.h"
-#import "ACommons/vendor/NSDataGZip/NSData+GZIP.h"
+//#import "ACommons/ACLang.h"
+//#import "ADomain/ADomain.h"
+#import "NSData+GZIP.h"
 #import "FMSQLStatementSplitter.h"
+#import "NSString+Utils.h"
 
 #define DB_SCHEME_FILE_FORMAT       @"%@/schema%@.sql"
 #define DB_SCHEME_UPDATE_FORMAT     @"%@/update%@.sql"
@@ -141,7 +142,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
             if (result == NO) {
                 self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseInitDefaultDbErrorCode
                                              userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
-                DDLogError(@"Error init default DB.");
+                // todo:
+//                DDLogErrsor(@"Error init default DB.");
                 
                 return;
             }
@@ -167,7 +169,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
                 else{
                     
                     sSelf.error = [db lastError];
-                    DDLogError(@"Error selecting scheme_version from default DB: %@", [[db lastError] localizedDescription]);
+                    //todo:
+//                    DDLogError(@"Error selecting scheme_version from default DB: %@", [[db lastError] localizedDescription]);
                 }
             }];
         }
@@ -229,7 +232,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
                     else{
                         
                         self.error = [db lastError];
-                        DDLogError(@"Error selecting scheme_version from production DB: %@", [[db lastError] localizedDescription]);
+//                    todo:
+//                        DDLogError(@"Error selecting scheme_version from production DB: %@", [[db lastError] localizedDescription]);
                     }
                     [result close];
                 }];
@@ -256,7 +260,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
                         
                         self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
                                                          userInfo:@{NSLocalizedDescriptionKey : @"Error testing connection to production DB."}];
-                        DDLogError(@"Error testing connection to production DB.");
+//                    todo:
+//                        DDLogError(@"Error testing connection to production DB.");
                     }
                 }];
             }
@@ -264,7 +269,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
                 
                 self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
                                                  userInfo:@{NSLocalizedDescriptionKey : @"Error opening production DB."}];
-                DDLogError(@"Error opening production DB.");
+                //todo:
+//                DDLogError(@"Error opening production DB.");
             }
         }
         
@@ -299,8 +305,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
             }
         }];
     }
-    else
-        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    else {
+        // todo:
+//        DDLogWarsn(@"Database service not ready. Not possible execute query in production DB.");
+    }
 }
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
@@ -320,8 +328,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
         [execQueue inSavePoint:block];
     }
-    else
-        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    else {
+        // todo:
+//        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    }
     
     [self endBackgroubdTaskWithId:identifier];
 }
@@ -342,8 +352,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
         
         [execQueue inDatabase:block];
     }
-    else
-        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    else {
+        //todo:
+//        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
+    }
     
     [self endBackgroubdTaskWithId:identifier];
 }
@@ -354,8 +366,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
     
     if (self.ready)
         [defaultDbQueue inDatabase:block];
-    else
-        DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
+    else {
+        // todo:
+//        DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
+    }
     
     [self endBackgroubdTaskWithId:identifier];
 }
@@ -431,8 +445,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
         NSString *dbCreateScript = [NSString stringWithContentsOfFile:scriptPath encoding:NSUTF8StringEncoding error:&err];
         
         if (err) {
-            
-            DDLogError(@"Error reading file with db creation script: %@", [err localizedDescription]);
+//        todo:
+//            DDLogError(@"Error reading file with db creation script: %@", [err localizedDescription]);
             self.error = err;
             return NO;
         }
@@ -469,8 +483,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
             NSString *dbUpdateScript = [NSString stringWithContentsOfFile:updateScriptPath encoding:NSUTF8StringEncoding error:&err];
             
             if (err) {
-                
-                DDLogError(@"Error reading file with db update script: %@", [err localizedDescription]);
+//            todo:
+//                DDLogError(@"Error reading file with db update script: %@", [err localizedDescription]);
                 self.error = err;
                 return NO;
             }
@@ -483,7 +497,8 @@ static void isolateQueueReleaseFunc(void *dQueue){
                 if (![NSString isNullOrEmpty:query]){
                     if (![db executeUpdate:query]){
                         
-                        DDLogError(@"Error in update script: %@", updateScriptPath);
+                        // todo:
+//                        DDLogError(@"Error in update script: %@", updateScriptPath);
                         return NO;
                     }
                     else

@@ -16,16 +16,19 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <UIKit/UIApplication.h>
-#import "ACommons/ACLang.h"
-#import "ACommons/ACNetwork.h"
-#import "ADomain/ADomain.h"
+//#import "ACommons/ACLang.h"
+//#import "ACommons/ACNetwork.h"
+//#import "ADomain/ADomain.h"
 #import "AESAntibanner.h"
-#import "ASDatabase/ASDatabase.h"
-#import "ASDModels/ASDFilterObjects.h"
+#import "ASDatabase.h"
+#import "ASDFilterObjects.h"
 #import "AESharedResources.h"
 #import "AASFilterSubscriptionParser.h"
-#import "Adguard-Swift.h"
+//#import "Adguard-Swift.h"
 #import "ASConstants.h"
+#import "NSException+Utils.h"
+#import "NSDate+Utils.h"
+#import "NSString+Utils.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
 #define UPDATE_METADATA_TIMEOUT           3.0
@@ -64,8 +67,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     BOOL    observingDbStatus;
     
-    Reachability    *reach;
-    
     BOOL    serviceReady;
     BOOL    serviceInstalled; // true if at least one antibanner filter installed in DB
     
@@ -101,10 +102,6 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         observingDbStatus = NO;
         
         workQueue = dispatch_queue_create("ASAntibanner", DISPATCH_QUEUE_SERIAL);
-        
-        // set Reachability
-        NSURL* url = [NSURL URLWithString:ABEC_FILTER_URL_BASE];
-        reach = [Reachability reachabilityWithHostname: [url host]];
         
         [self initParams];
     }
@@ -454,7 +451,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             *rollback = NO;
             result = [db executeUpdate:@"update filters set is_enabled = ? where filter_id = ?", @(enabled), filterId];
-            DDLogInfo(@"Filter with filterId = %@ , and expected enabled state = %d, was added to db with result = %d", filterId, (int)enabled, (int)result);
+            // todo:
+//            DDLogInfo(@"Filter with filterId = %@ , and expected enabled state = %d, was added to db with result = %d", filterId, (int)enabled, (int)result);
             
             [NSNotificationCenter.defaultCenter postNotificationName:ASAntibannerFilterEnabledNotification object:nil userInfo:@{@"filter_id":filterId, @"enabled":@(enabled)}];
         }];
@@ -546,8 +544,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     }
                     else{
                         
-                        DDLogError(@"Can't add rule: \"%@\", for filter Id: %@", rule.ruleText, rule.filterId);
-                        DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
+                        // todo:
+//                        DDLogError(@"Can't add rule: \"%@\", for filter Id: %@", rule.ruleText, rule.filterId);
+//                        DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
 //                        DDLogErrorTrace();
                     }
                 }
@@ -593,8 +592,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 }
                 else{
                     
-                    DDLogError(@"Can't update rule: filterId-%@, ruleId-%@, ruleText-\"%@\"", rule.filterId, rule.ruleId, rule.ruleText);
-                    DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
+                    // todo:
+//                    DDLogError(@"Can't update rule: filterId-%@, ruleId-%@, ruleText-\"%@\"", rule.filterId, rule.ruleId, rule.ruleText);
+//                    DDLogError(@"Database error: %@", [[db lastError] localizedDescription]);
 //                    DDLogErrorTrace();
                 }
             }
@@ -792,7 +792,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         return;
     }
 
-    parserResult.meta.groupId = @(AdGuardFilterGroupObjWrapper.customGroupId);
+    // todo: magic number
+    parserResult.meta.groupId = @(101);
 
     if(completionBlock){
         completionBlock();
@@ -893,8 +894,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         else{
             [result close];
-            DDLogError(@"Error of removing antibanner filter (filterId=%@): Can't remove stable filter.", filterId);
-            DDLogErrorTrace();
+            // todo:
+//            DDLogError(@"Error of removing antibanner filter (filterId=%@): Can't remove stable filter.", filterId);
+//            DDLogErrorTrace();
         }
 
     }];
@@ -994,7 +996,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         [self beginBackgroundTaskWithExpirationHandler:^{
-            DDLogError(@"(AESAntibanner) beginTransaction - expiration handler fired");
+            // todo:
+//            DDLogError(@"(AESAntibanner) beginTransaction - expiration handler fired");
             
             // unlocks database file to prevent crashes
             [_asDataBase resetIsolationQueue:workQueue];
@@ -1071,7 +1074,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 - (void)finishUpdateInBackgroundMode {
     
     [self beginTransaction];
-    DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
+    // todo:
+//    DDLogInfo(@"(AESAntibanner) Begin of the Update Transaction from final stage of the update process (before DB updates).");
 
     dispatch_sync(workQueue, ^{
         [self updateStart];
@@ -1085,7 +1089,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
     
     self.updatesRightNow = YES;
-    DDLogInfo(@"(ASAntibanner) Started update process.");
+    // todo:
+//    DDLogInfo(@"(ASAntibanner) Started update process.");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -1099,13 +1104,15 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         self.updatesRightNow = NO;
     }
     
-    DDLogInfo(@"(ASAntibanner) Finished update process.");
+//todo:
+//    DDLogInfo(@"(ASAntibanner) Finished update process.");
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
+//    todo:
+//        DDLogInfo(@"Filters updated count: %lu", updatedVersions.count);
         for (ASDFilterMetadata *meta in updatedVersions) {
-            DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
+//        todo:
+//            DDLogInfo(@"Filter id: %@, version: %@, updated: %@.", meta.filterId, meta.version, meta.updateDateString);
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerFinishedUpdateNotification object:self userInfo:@{ASAntibannerUpdatedFiltersKey : updatedVersions}];
     });
@@ -1118,8 +1125,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         self.updatesRightNow = NO;
     }
-
-    DDLogInfo(@"(ASAntibanner) update process failure.");
+//todo:
+//    DDLogInfo(@"(ASAntibanner) update process failure.");
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -1205,11 +1212,11 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     if (serviceInstalled)
         return YES;
     
-    ASSIGN_WEAK(self);
+    __weak typeof(self) wSelf = self;
     
     dispatch_async(workQueue, ^{ @autoreleasepool {
         
-        ASSIGN_STRONG(self);
+        typeof(self) sSelf = wSelf;
         
         if (_asDataBase.ready){
             
@@ -1221,21 +1228,22 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 if (![result next]) {
                     
                     // install default filters
-                    if ([USE_STRONG(self) installFiltersIntoDb:db])
+                    if ([sSelf installFiltersIntoDb:db]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
+                            //todo:
+//                            DDLogDebug(@"(ASAntibanner) ASAntibannerInstalledNotification");
                             
-                            DDLogDebug(@"(ASAntibanner) ASAntibannerInstalledNotification");
-                            
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object: sSelf];
                         });
-                    
+                    }
                     else{
                         
                         // Can't install filters metadata into DB.
-                        DDLogError(@"Can't install filters metadata into DB.");
-                        DDLogErrorTrace();
+                        // todo:
+//                        DDLogError(@"Can't install filters metadata into DB.");
+//                        DDLogErrorTrace();
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object:USE_STRONG(self)];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerNotInstalledNotification object: sSelf];
                         });
                         
                         return;
@@ -1243,24 +1251,25 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                 }
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        DDLogDebug(@"(ASAntibanner) antibanner has been allready installed.");
-                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:USE_STRONG(self)];
+//                    todo:
+//                        DDLogDebug(@"(ASAntibanner) antibanner has been allready installed.");
+                        [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerInstalledNotification object:sSelf];
                    });
                 }
                 
                 [result close];
-                USE_STRONG(self)->serviceInstalled = YES;
+                sSelf->serviceInstalled = YES;
                 *rollback = NO;
-                [USE_STRONG(self) setServiceToReady];
+                [sSelf setServiceToReady];
             }];
             
-            [USE_STRONG(self) addCustomGroupIfNeeded];
-            [USE_STRONG(self) updateUserfilterMetadata];
+            [sSelf addCustomGroupIfNeeded];
+            [sSelf updateUserfilterMetadata];
         }
         else if (!observingDbStatus){
             
-            USE_STRONG(self)->observingDbStatus = YES;
-            [_asDataBase addObserver:USE_STRONG(self) forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
+            sSelf->observingDbStatus = YES;
+            [_asDataBase addObserver:sSelf forKeyPath:@"ready" options:NSKeyValueObservingOptionNew context:nil];
             
         }
         
@@ -1301,7 +1310,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         
         // Get suitable filters.
         NSMutableArray *sFilters = [NSMutableArray arrayWithCapacity:4];
-        NSString *langString = [NSString stringWithFormat:@"%@|%@", [ADLocales lang], [ADLocales region]];
+        // todo:
+//        NSString *langString = [NSString stringWithFormat:@"%@|%@", [ADLocales lang], [ADLocales region]];
         for (ASDFilterMetadata *filter in filters){
             BOOL recomended = NO;
             for (ASDFilterTagMeta* tagMeta in filter.tags) {
@@ -1310,10 +1320,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
                     break;
                 }
             }
-            
-            if (recomended && ([langString containsAny:filter.langs] || filter.langs.count == 0)) {
-                [sFilters addObject:filter];
-            }
+//        todo:
+//            if (recomended && ([langString containsAny:filter.langs] || filter.langs.count == 0)) {
+//                [sFilters addObject:filter];
+//            }
         }
         
         if (!sFilters)
@@ -1330,8 +1340,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         }
         
         for(NSNumber* groupId in groupIds) {
-            if ([AdGuardFilterGroupObjWrapper.enabledGroupIds containsObject:groupId])
-                [self setGroupEnabled:productionDb enabled:YES groupId:groupId];
+//        todo:
+//            if ([AdGuardFilterGroupObjWrapper.enabledGroupIds containsObject:groupId])
+//                [self setGroupEnabled:productionDb enabled:YES groupId:groupId];
         }
     }
     
@@ -1350,13 +1361,15 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         result = [db executeUpdate:@"insert or replace into filters (filter_id, version, editable, display_number, group_id, name, description, homepage, is_enabled, last_update_time, last_check_time, removable, expires, subscriptionUrl) values (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime(?), datetime(?), ?, ?, ?)",
                   meta.filterId, meta.version, meta.editable, meta.displayNumber, meta.groupId, meta.name, meta.descr, meta.homepage, meta.enabled, meta.updateDateString, meta.checkDateString, meta.removable, meta.expires, meta.subscriptionUrl];
         if (!result) {
-            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filters");
+//        todo:
+//            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filters");
             break;
         }
         
         result = [db executeUpdate:@"delete from filter_langs where filter_id = ?", meta.filterId];
         if (!result) {
-            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not delete filter %d from filter_langs", meta.filterId.intValue);
+//        todo:
+//            DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not delete filter %d from filter_langs", meta.filterId.intValue);
             break;
         }
         
@@ -1364,7 +1377,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             result = [db executeUpdate:@"insert into filter_langs (filter_id, lang) values (?, ?)", meta.filterId, lang];
             if (!result) {
-                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter into filter_langs");
+//            todo:
+//                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter into filter_langs");
                 break;
             }
         }
@@ -1372,7 +1386,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         for (ASDFilterTagMeta *tag in meta.tags) {
             result = [db executeUpdate:@"insert or replace into filter_tags (filter_id, tag_id, type, name) values (?, ?, ?, ?)", meta.filterId, @(tag.tagId), @(tag.type), tag.name];
             if (!result) {
-                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter_tags");
+//            todo:
+//                DDLogError(@"(AESAntibanner) insertMetadataIntoDb error. Can not insert filter_tags");
                 break;
             }
         }
@@ -1380,8 +1395,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         if (!result) break;
     }
     
-    if (!result)
-        DDLogError(@"Error updating metadata in production DB: %@", [[db lastError] localizedDescription]);
+    if (!result) {
+//    todo:
+//        DDLogError(@"Error updating metadata in production DB: %@", [[db lastError] localizedDescription]);
+    }
     
     return result;
 }
@@ -1396,8 +1413,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         if (!result) break;
     }
     
-    if (!result)
-        DDLogError(@"Error updating group metadata in production DB: %@", [[db lastError] localizedDescription]);
+    if (!result) {
+//    todo:
+//        DDLogError(@"Error updating group metadata in production DB: %@", [[db lastError] localizedDescription]);
+    }
     
     return result;
 }
@@ -1423,8 +1442,9 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     }
     
     if (!result){
-        DDLogError(@"Error updating i18n in production DB: %@", [[db lastError] localizedDescription]);
-        DDLogErrorTrace();
+//    todo:
+//        DDLogError(@"Error updating i18n in production DB: %@", [[db lastError] localizedDescription]);
+//        DDLogErrorTrace();
     }
     
     return result;
@@ -1440,8 +1460,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             
             result = [db executeUpdate:@"insert into filter_rules (filter_id, rule_id, rule_text, is_enabled, affinity) values (?, ?, ?, ?, ?)",
                       item.filterId, item.ruleId, item.ruleText, item.isEnabled, item.affinity];
-            if (!result)
-                DDLogError(@"Error install filter rules from default DB: %@", [[db lastError] localizedDescription]);
+            if (!result) {
+//            todo:
+//                DDLogError(@"Error install filter rules from default DB: %@", [[db lastError] localizedDescription]);
+            }
         }
     }
     
@@ -1461,7 +1483,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         while ([result next]) {
             
             groupMetadata = [[ASDFilterGroup alloc] initFromDbResult:result];
-            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %@", groupMetadata.groupId, groupMetadata.enabled.boolValue ? @"enabled" : @"disabled");
+//        todo:
+//            DDLogInfo(@"Group with groupId = %@, was fetched from db with enabled state = %@", groupMetadata.groupId, groupMetadata.enabled.boolValue ? @"enabled" : @"disabled");
             [groups addObject:groupMetadata];
         }
         [result close];
@@ -1502,7 +1525,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     NSMutableArray *filters = [NSMutableArray array];
     
     if (!db){
-        DDLogError(@"NULL was passed instead of db property, filtersFromDb function in AESAntibanner");
+//    todo:
+//        DDLogError(@"NULL was passed instead of db property, filtersFromDb function in AESAntibanner");
         return filters;
     }
     
@@ -1672,7 +1696,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
  - (BOOL)insertCustomGroupInDb: (FMDatabase*) db {
     
     ASDFilterGroup *customGroup = [ASDFilterGroup new];
-    customGroup.groupId = [NSNumber numberWithInteger: AdGuardFilterGroupObjWrapper.customGroupId];
+     // todo: magic number
+    customGroup.groupId = [NSNumber numberWithInteger: 101];
     customGroup.enabled = [NSNumber numberWithBool:YES];
     
     return [self insertMetadataIntoDb:db groups:@[customGroup]];
@@ -1682,7 +1707,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
     
     __block BOOL groupExists = NO;
     [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
-        FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(AdGuardFilterGroupObjWrapper.customGroupId)];
+        // todo: magic
+        FMResultSet *result = [db executeQuery:@"select * from filter_groups where group_id = ? limit 1", @(101)];
         groupExists = [result next];
         [result close];
     }];
@@ -1711,47 +1737,52 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         userFilter.editable = @(1);
         userFilter.removable = @(0);
         
-        NSDictionary *localizationResources = [ADLocales localizationsOfFilter:ASDF_USER_FILTER_ID];
+        // todo:
+//        NSDictionary *localizationResources = [ADLocales localizationsOfFilter:ASDF_USER_FILTER_ID];
         
-        NSDictionary *description = localizationResources[ADL_DEFAULT_LANG];
-        if (!([description isKindOfClass:[NSDictionary class]]
-              && description[ADL_FILTER_NAME]
-              && description[ADL_FILTER_DESCRIPTION])){
-            
-            DDLogError(@"Error obtaining localization for \"User Antibanner Filter\"");
-            DDLogErrorTrace();
-            [[NSException appResourceUnavailableException:@"Localization of User Antibanner Filter"] raise];
-        }
-        
-        userFilter.name = description[ADL_FILTER_NAME];
-        userFilter.descr = description[ADL_FILTER_DESCRIPTION];
+//        NSDictionary *description = localizationResources[ADL_DEFAULT_LANG];
+//        if (!([description isKindOfClass:[NSDictionary class]]
+//              && description[ADL_FILTER_NAME]
+//              && description[ADL_FILTER_DESCRIPTION])){
+//
+//            DDLogError(@"Error obtaining localization for \"User Antibanner Filter\"");
+//            DDLogErrorTrace();
+//            [[NSException appResourceUnavailableException:@"Localization of User Antibanner Filter"] raise];
+//        }
+//
+//        userFilter.name = description[ADL_FILTER_NAME];
+//        userFilter.descr = description[ADL_FILTER_DESCRIPTION];
         userFilter.langs = @[];
         
         ASDFilterLocalization *filterLocalization;
         NSString *string;
         NSMutableArray *localizations = [NSMutableArray array];
-        for (NSString *locale in [localizationResources allKeys]) {
-            
-            description = localizationResources[locale];
-            if (![description isKindOfClass:[NSDictionary class]]){
+//    todo:
+//        for (NSString *locale in [localizationResources allKeys]) {
+//
+//            description = localizationResources[locale];
+//            if (![description isKindOfClass:[NSDictionary class]]){
                 
-                DDLogError(@"Error obtaining localization for \"User Antibanner Filter\"");
-                DDLogErrorTrace();
-                [[NSException appResourceUnavailableException:@"Localization of User Antibanner Filter"] raise];
-            }
+                // todo:
+//                DDLogError(@"Error obtaining localization for \"User Antibanner Filter\"");
+//                DDLogErrorTrace();
+//                [[NSException appResourceUnavailableException:@"Localization of User Antibanner Filter"] raise];
+//            }
             
-            filterLocalization = [ASDFilterLocalization new];
-            filterLocalization.filterId = userFilter.filterId;
-            filterLocalization.lang = locale;
+//            filterLocalization = [ASDFilterLocalization new];
+//            filterLocalization.filterId = userFilter.filterId;
+//            filterLocalization.lang = locale;
             
-            string = description[ADL_FILTER_NAME];
-            filterLocalization.name = string ? string : userFilter.name;
+            // todo:
+//            string = description[ADL_FILTER_NAME];
+//            filterLocalization.name = string ? string : userFilter.name;
             
-            string = description[ADL_FILTER_DESCRIPTION];
-            filterLocalization.descr = string ? string : userFilter.descr;
-            
-            [localizations addObject:filterLocalization];
-        }
+            // todo:
+//            string = description[ADL_FILTER_DESCRIPTION];
+//            filterLocalization.descr = string ? string : userFilter.descr;
+//            
+//            [localizations addObject:filterLocalization];
+//        }
         
         //generate group metadata
         ASDFilterGroup *group = [ASDFilterGroup new];
@@ -1763,10 +1794,12 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         __block BOOL result = NO;
         [_asDataBase exec:^(FMDatabase *db, BOOL *rollback) {
             
-            BOOL result = [self insertI18nIntoDb:db filters:[[ASDFiltersI18n alloc] initWithLocalizations:localizations] groups:nil];
+            // todo:
+//            BOOL result = [self insertI18nIntoDb:db filters:[[ASDFiltersI18n alloc] initWithLocalizations:localizations] groups:nil];
             
             if (result) {
-                result = [self insertMetadataIntoDb:db filters:@[userFilter]];
+                // todo:
+//                result = [self insertMetadataIntoDb:db filters:@[userFilter]];
             }
             
             if (result) {
@@ -1800,7 +1833,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
         serviceReady = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            DDLogDebug(@"(AESAntibanner) ASAntibannerReadyNotification");
+//        todo:
+//            DDLogDebug(@"(AESAntibanner) ASAntibannerReadyNotification");
             [[NSNotificationCenter defaultCenter] postNotificationName:ASAntibannerReadyNotification object:self];
         });
     }
@@ -1815,8 +1849,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 }
 
 - (void) beginBackgroundTaskWithExpirationHandler:(void (^)(void))expirationBlock {
-    
-    DDLogInfo(@"(AESAntibanner) begin background task");
+//todo:
+//    DDLogInfo(@"(AESAntibanner) begin background task");
 #ifndef APP_EXTENSION
     _transactionBackroundTaskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:AES_TRANSACTION_TASK_NAME expirationHandler:^{
         
@@ -1827,8 +1861,8 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
 }
 
 - (void) endBackgroundTask {
-    
-    DDLogInfo(@"(AESAntibanner) end background task");
+//todo:
+//    DDLogInfo(@"(AESAntibanner) end background task");
 #ifndef APP_EXTENSION
     [[UIApplication sharedApplication] endBackgroundTask:_transactionBackroundTaskID];
     _transactionBackroundTaskID = UIBackgroundTaskInvalid;
@@ -1851,8 +1885,10 @@ NSString *ASAntibannerFilterEnabledNotification = @"ASAntibannerFilterEnabledNot
             [_asDataBase removeObserver:self forKeyPath:@"ready"];
             observingDbStatus = NO;
             
-            if (serviceInstalled)
-                DDLogInfo(@"AESAntibanner - antibanner ready");
+            if (serviceInstalled) {
+//            todo:
+//                DDLogInfo(@"AESAntibanner - antibanner ready");
+            }
             else
                 [self checkInstalledFiltersInDB];
         });

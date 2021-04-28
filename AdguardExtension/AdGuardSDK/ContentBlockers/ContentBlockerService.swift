@@ -342,7 +342,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             group.enter()
             safariService.invalidateBlockingJson(type: type) { (error) in
                 if error != nil {
-                    DDLogError("Invalidate Saferi Error: \(error!)")
+                    Logger.logError("Invalidate Saferi Error: \(error!)")
                     resultError = error
                 }
                 
@@ -386,10 +386,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .custom: Affinity.custom,
          .security: Affinity.security ]
     
-    private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType)->Error? {
+    private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType, enabled: Bool)->Error? {
         Logger.logInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
-        let safariProtectionEnabled = safariProtection.safariProtectionEnabled
+        let safariProtectionEnabled = enabled
         
         if safariProtectionEnabled{
             return autoreleasepool {
@@ -524,9 +524,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             (whitelistRules, succeded) = processRules(whitelistRules)
             
             if !succeded {
+                // todo: use "support_unexpected_error" string in main app
                 error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                               code: ContentBlockerService.contentBlockerDBErrorCode,
-                               userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
+                               code: ContentBlockerService.contentBlockerDBErrorCode)
                 return
             }
             
@@ -588,9 +588,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             (rules, succeded) = processRules(rules)
             
             if !succeded {
+                // todo: use "support_unexpected_error" string in main app
                 error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: ContentBlockerService.contentBlockerDBErrorCode,
-                                userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
+                                code: ContentBlockerService.contentBlockerDBErrorCode)
                 return
             }
             
@@ -627,7 +627,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     private func convertRulesToJson(_ rules: [ASDFilterRule])->(data: Data?, converted: Int, overlimit: Int, totalConverted: Int, error: Error?) {
         
-        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self, userInfo: [AEDefaultsShowStatusViewInfo : ACLocalizedString("converting_rules", nil)])
+        // todo: use "converting_rules" string in main app
+        // we must send only status key from framework
+        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
         
         defer {
             NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
@@ -665,8 +667,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         let success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
         
+        // todo: use "support_unexpected_error" in main app
         return success ? nil : NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                       code: ContentBlockerService.contentBlockerDBErrorCode,
-                       userInfo: [NSLocalizedDescriptionKey: ACLocalizedString("support_unexpected_error", "")])
+                       code: ContentBlockerService.contentBlockerDBErrorCode)
     }
 }

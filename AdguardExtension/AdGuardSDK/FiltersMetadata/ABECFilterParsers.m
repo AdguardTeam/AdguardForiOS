@@ -17,9 +17,9 @@
  */
 
 #import "ABECFilterParsers.h"
-#import "ACommons/ACLang.h"
-#import "ACommons/ACIO.h"
-#import "Adguard-Swift.h"
+//#import "ACommons/ACLang.h"
+#import "ACIOUtils.h"
+//#import "Adguard-Swift.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark -  JSON Parsers implementation
@@ -33,16 +33,19 @@
     
     if ([key isEqualToString:@"timeUpdated"]) {
         self.updateDateString = [self dateStringConvertFrom:value];
-        self.updateDate = [NSDate dateWithISO8601String:self.updateDateString];
+        // todo:
+        //self.updateDate = [NSDate dateWithISO8601String:self.updateDateString];
         if (! self.updateDate) {
             // If can't convert, set update date to current datetime
             self.updateDate = [NSDate date];
-            self.updateDateString = [[NSDate date] iso8601String];
+            // todo:
+            //self.updateDateString = [[NSDate date] iso8601String];
         }
         
         // last_check_time creating
         self.checkDate = [NSDate date];
-        self.checkDateString = [[NSDate date] iso8601String];
+        // todo:
+        //self.checkDateString = [[NSDate date] iso8601String];
         //--
         
     }
@@ -134,10 +137,11 @@
     
     if (error) {
         
-        DDLogError(
-                   @"(ABECFilterParsers) Error when parsing groups/filters metadata JSON:\n%@",
-                   [error localizedDescription]);
-        DDLogErrorTrace();
+        // todo:
+//        DDLogError(
+//                   @"(ABECFilterParsers) Error when parsing groups/filters metadata JSON:\n%@",
+//                   [error localizedDescription]);
+//        DDLogErrorTrace();
         return NO;
     }
     
@@ -148,9 +152,10 @@
     
     if (!([metaDict isKindOfClass:[NSDictionary class]] && metaDict[@"filters"] && metaDict[@"groups"] && metaDict[@"tags"])) {
         
-        DDLogError(@"(ABECFilterParsers) Error when parsing groups/filters metadata "
-                   @"JSON:\nReturned object is not valid dictionary.");
-        DDLogErrorTrace();
+        // todo:
+//        DDLogError(@"(ABECFilterParsers) Error when parsing groups/filters metadata "
+//                   @"JSON:\nReturned object is not valid dictionary.");
+//        DDLogErrorTrace();
         return NO;
     }
     
@@ -243,10 +248,11 @@
     
     if (error) {
         
-        DDLogError(
-                   @"(ABECFilterParsers) Error when parsing i18n JSON:\n%@",
-                   [error localizedDescription]);
-        DDLogErrorTrace();
+        // todo:
+//        DDLogError(
+//                   @"(ABECFilterParsers) Error when parsing i18n JSON:\n%@",
+//                   [error localizedDescription]);
+//        DDLogErrorTrace();
         return NO;
     }
     
@@ -257,16 +263,18 @@
     
     if (!([dataDict isKindOfClass:[NSDictionary class]] && dataDict[@"groups"] && dataDict[@"filters"])) {
         
-        DDLogError(@"(ABECFilterParsers) Error when parsing groups/filters i18n JSON:\nReturned object is not valid dictionary.");
-        DDLogErrorTrace();
+        // todo:
+//        DDLogError(@"(ABECFilterParsers) Error when parsing groups/filters i18n JSON:\nReturned object is not valid dictionary.");
+        // todo:
+//        DDLogErrorTrace();
         return NO;
     }
     
     NSDictionary *filters = dataDict[@"filters"];
-    ASSIGN_WEAK(self);
+    __weak typeof(self) wSelf = self;
     [filters enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
-        ASSIGN_STRONG(self);
+        typeof(self) sSelf = wSelf;
         NSNumber *filterId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -283,13 +291,13 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        USE_STRONG(self)->_filtersI18nDict[filterId] = [targetLangs copy];
+        sSelf->_filtersI18nDict[filterId] = [targetLangs copy];
     }];
     
     NSDictionary *groups = dataDict[@"groups"];
     [groups enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
-        ASSIGN_STRONG(self);
+        typeof(self) sSelf = wSelf;
         NSNumber *groupId = @([key intValue]);
         NSDictionary <NSString *, NSDictionary *>*langs = obj;
         
@@ -305,7 +313,7 @@
             targetLangs[localization.lang] = localization;
         }];
         
-        USE_STRONG(self)->_groupsI18nDict[groupId] = [targetLangs copy];
+        sSelf->_groupsI18nDict[groupId] = [targetLangs copy];
     }];
     
     return YES;
@@ -344,8 +352,9 @@
     }
     [stream close];
     
-    AffinityRulesParser* rulesParser = [AffinityRulesParser new];
-    filter.rules = [rulesParser parseStrings:ruleStrings];
+    // todo:
+//    AffinityRulesParser* rulesParser = [AffinityRulesParser new];
+//    filter.rules = [rulesParser parseStrings:ruleStrings];
     
     return YES;
 }

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
-#import "ACommons/ACLang.h"
+#import "ACLang.h"
 #import "ACNHttpUtils.h"
 
 @implementation ACNHttpUtils

@@ -26,6 +26,8 @@
 #import "NSStringPunycodeAdditions.h"
 #import "AEFilterRuleSyntaxConstants.h"
 #import "AEWhitelistDomainObject.h"
+#import "AEInvertedWhitelistDomainsObject.h"
+#import "AASFilterSubscriptionParser.h"
 
 //! Project version number for AdGuardSDK.
 FOUNDATION_EXPORT double AdGuardSDKVersionNumber;

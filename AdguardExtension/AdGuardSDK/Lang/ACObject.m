@@ -20,8 +20,8 @@
 #import "NSString+Utils.h"
 #import "ACObject.h"
 #import "DDLogMacros.h"
-#import "ACommons/ACLang.h"
-#import "ACommons/ACIO.h"
+//#import "ACommons/ACLang.h"
+//#import "ACommons/ACIO.h"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -127,7 +127,8 @@ static dispatch_queue_t workingQueue;
                     if (obj)
                         propertiesDict[key] = obj;
                 } @catch (NSException *exception) {
-                    DDLogError(@"An error occurred, while decoding object (initWithCoder initializer,  ACObject class), exception : %@", exception);
+                    // todo: make logger available from objc code
+//                    DDLogError(@"An error occurred, while decoding object (initWithCoder initializer,  ACObject class), exception : %@", exception);
                 }
                 
             }

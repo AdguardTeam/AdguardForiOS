@@ -7,12 +7,13 @@
 //
 
 #import "AASFilterSubscriptionParser.h"
-#import "ACommons/ACLang.h"
-#import "ACommons/ACNetwork.h"
+//#import "ACommons/ACLang.h"
+//#import "ACommons/ACNetwork.h"
 #import "ASDFilterObjects.h"
 #import "ACNNetworking.h"
 #import "ACIOUtils.h"
-#import "Adguard-Swift.h"
+#import "NSString+Utils.h"
+//#import "AdGuardSDK-Swift.h"
 
 #define AAS_EXECUTION_PERIOD_TIME                           3600 // 1 hours
 #define AAS_EXECUTION_LEEWAY                                5 // 5 seconds
@@ -118,8 +119,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
             }
             return;
         }
-
-        DDLogInfo(@"(AASFilterSubscriptionParser) Begin parse custom filter for url:\n %@", url);
+        // todo:
+        //DDLogInfo(@"(AASFilterSubscriptionParser) Begin parse custom filter for url:\n %@", url);
         ParsingContext *context = [ParsingContext new];
         context.redirect = NO;
         context.result = [AASCustomFilterParserResult new];
@@ -139,7 +140,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                  error = nil;
                              }
                              else{
-                                 DDLogError(@"(AASFilterSubscriptionParser) Can't load filter content:\n%@", error);
+                                 // todo:
+                                 //DDLogError(@"(AASFilterSubscriptionParser) Can't load filter content:\n%@", error);
                              }
                              break;
                          }
@@ -159,7 +161,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                  content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                  if (content == nil) {
                                      //Convert to string error
-                                     DDLogWarn(@"(AASFilterSubscriptionParser) Can't convert url content to string.");
+                                     // todo:
+                                     //DDLogWarn(@"(AASFilterSubscriptionParser) Can't convert url content to string.");
                                      error = [NSError errorWithDomain:AASFilterSubscriptionParserErrorDomain
                                                                  code:AASFilterSubscriptionParserErrorConvertToString
                                                              userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
@@ -176,7 +179,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 
                              // Checking contant validity
                              if (! [self isValidContent:content]) {
-                                 DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of invalid filter content.");
+                                 // todo:
+//                                 DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of invalid filter content.");
                                  error = [NSError errorWithDomain:AASFilterSubscriptionParserErrorDomain
                                                              code:AASFilterSubscriptionParserErrorNotValidContent
                                                          userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
@@ -205,7 +209,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                  if (subscriptionUrl
                                      && ! response.URL.fileURL
                                      && ! [subscriptionUrl isEqual:response.URL]) {
-                                     DDLogInfo(@"(AASFilterSubscriptionParser) Custom filter redirection.");
+                                     // todo:
+//                                     DDLogInfo(@"(AASFilterSubscriptionParser) Custom filter redirection.");
                                      [self parseFromUrl:subscriptionUrl networking:networking completion:completion];
                                      return;
                                  }
@@ -226,10 +231,12 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
                                      completion(context.result, error);
                                  }
                              }
-                             DDLogInfo(@"(AASFilterSubscriptionParser) End parse custom filter for url:\n %@", response.URL);
+//                         todo:
+//                             DDLogInfo(@"(AASFilterSubscriptionParser) End parse custom filter for url:\n %@", response.URL);
                              return;
                          }
-                         DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of no response object.");
+//                     todo:
+//                         DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of no response object.");
                          error = [NSError errorWithDomain:AASFilterSubscriptionParserErrorDomain
                                                      code:AASFilterSubscriptionParserErrorNoResponse
                                                  userInfo:@{NSLocalizedDescriptionKey: errorMessage}];
@@ -255,7 +262,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     
     // Checking content validity
     if (! [self isValidContent:content]) {
-        DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of invalid filter content.");
+        // todo:
+//        DDLogWarn(@"(AASFilterSubscriptionParser) Can't parse filter, because of invalid filter content.");
     }
     
     //Main work
@@ -333,7 +341,8 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
         }
     }
     
-    DDLogWarn(@"(AASFilterSubscriptionParser) Can't transform Expires: %@ to valid time. Set default.", value);
+    // todo:
+//    DDLogWarn(@"(AASFilterSubscriptionParser) Can't transform Expires: %@ to valid time. Set default.", value);
     return @(timeToUpdate);
 }
 
@@ -345,9 +354,11 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
     context.result.meta.displayNumber = @(1);
     context.result.meta.subscriptionUrl = filterPath;
     context.result.meta.checkDate = [NSDate date];
-    context.result.meta.checkDateString = [context.result.meta.checkDate iso8601String];
+    // todo:
+//    context.result.meta.checkDateString = [context.result.meta.checkDate iso8601String];
     context.result.meta.updateDate = [NSDate date];
-    context.result.meta.updateDateString = [context.result.meta.updateDate iso8601String];
+    // todo:
+//    context.result.meta.updateDateString = [context.result.meta.updateDate iso8601String];
     context.result.meta.groupId = @(0);
     
     if ([NSString isNullOrEmpty:context.result.meta.name]) {
@@ -415,9 +426,11 @@ static NSDictionary <NSString *, ParserActionType> *_parserActions;
 - (void)parseRulesWithContext:(ParsingContext *)context content:(NSString *)content {
     
     NSArray<NSString*> *lines = [content componentsSeparatedByCharactersInSet: NSCharacterSet.newlineCharacterSet];
-    AffinityRulesParser* rulesParse = [AffinityRulesParser new];
+    // todo: add rules with affinity
+//    AffinityRulesParser* rulesParse = [AffinityRulesParser new];
     
-    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines]];
+//    [context.result.rules addObjectsFromArray: [rulesParse parseStrings:lines]];
+    
 }
 
 /**

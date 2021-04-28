@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 #import <Foundation/Foundation.h>
-//#import "ACObject.h"
+#import "ACObject.h"
 //#import "ABECConstants.h"
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS

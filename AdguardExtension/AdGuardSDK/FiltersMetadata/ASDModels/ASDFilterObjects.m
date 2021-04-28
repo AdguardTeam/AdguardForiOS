@@ -17,10 +17,13 @@
  */
 
 #import "ASDFilterObjects.h"
-#import "ACommons/ACSystem.h"
-#import "ADomain/ADomain.h"
-#import "vendors/fmdb/FMResultSet.h"
+//#import "ACommons/ACSystem.h"
+//#import "ADomain/ADomain.h"
+#import "FMResultSet.h"
 #import "ASConstants.h"
+#import "ADLocales.h"
+#import "NSDate+Utils.h"
+#import "NSString+Utils.h"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -419,16 +422,16 @@
     
     //Do nothing
     // this is prevents raising exception when key is invalid.
-    
-    DDLogDebug(@"(ASDFilterMetadata) Can't set undefine key \"%@\" to value: %@", key, value);
+//todo:
+//    DDLogDebug(@"(ASDFilterMetadata) Can't set undefine key \"%@\" to value: %@", key, value);
 }
 
 - (id)valueForUndefinedKey:(NSString *)key {
     
     return nil;
     // this is prevents raising exception when key is invalid.
-    
-    DDLogDebug(@"(ASDFilterMetadata) Can't get undefine key \"%@\"", key);
+//todo:
+//    DDLogDebug(@"(ASDFilterMetadata) Can't get undefine key \"%@\"", key);
     
 }
 

@@ -16,7 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "ADLocales.h"
-#import "ACommons/ACLang.h"
+#import "NSException+Utils.h"
+//#import "ACommons/ACLang.h"
+
 
 #define RESOURCE_FILE_NAME                                      @"stringUIResources"
 #define RESOURCE_FILTERS_DESCRIPTION                            @"FilterDescription"

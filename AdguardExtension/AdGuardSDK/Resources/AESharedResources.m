@@ -16,8 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "AESharedResources.h"
-#import "ACommons/ACLang.h"
+//#import "ACommons/ACLang.h"
 #import "ABECFilter.h"
+#import "NSString+Utils.h"
 
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
 
@@ -286,8 +287,9 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 }
 
 - (void)reset {
+    // todo: maybe move this code to swift
     // clear user defaults
-    DDLogInfo(@"(AESharedResources) reset settings");
+//    DDLogInfo(@"(AESharedResources) reset settings");
     
     for (NSString* key in _sharedUserDefaults.dictionaryRepresentation.allKeys) {
         [_sharedUserDefaults removeObjectForKey:key];
@@ -304,7 +306,8 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
         if ([file contains:@".db"]) continue;
         BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
         if (!success || error) {
-            DDLogError(@"(AEsharedResources) reset. Error - can not delete file. Error: %@", error.localizedDescription);
+            // todo:
+            //DDLogError(@"(AEsharedResources) reset. Error - can not delete file. Error: %@", error.localizedDescription);
         }
     }
 }
@@ -344,7 +347,8 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath{
     
     if (!relativePath) {
-        [[NSException argumentException:@"relativePath"] raise];
+        // todo:
+//        [[NSException argumentException:@"relativePath"] raise];
     }
     
     @autoreleasepool {
@@ -352,15 +356,16 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
             
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
-                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
-                if ([locker waitLock]) {
+                // todo:
+//                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
+//                if ([locker waitLock]) {
                     
                     NSData *data = [NSData dataWithContentsOfURL:dataUrl];
                     
-                    [locker unlock];
+//                    [locker unlock];
                     
                     return data;
-                }
+//                }
             }
         }
         
@@ -371,7 +376,8 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 - (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath{
 
     if (!(data && relativePath)) {
-        [[NSException argumentException:@"data/relativePath"] raise];
+        //todo:
+//        [[NSException argumentException:@"data/relativePath"] raise];
     }
     
     @autoreleasepool {
@@ -379,15 +385,16 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
             
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
-                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
-                if ([locker lock]) {
+                // todo:
+//                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
+//                if ([locker lock]) {
                     
                     BOOL result = [data writeToURL:dataUrl atomically:YES];
                     
-                    [locker unlock];
+//                    [locker unlock];
                     
                     return result;
-                }
+//                }
             }
         }
         
