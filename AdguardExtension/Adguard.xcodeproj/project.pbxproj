@@ -12079,8 +12079,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.7;
+				kind = exactVersion;
+				version = 1.5.20;
 			};
 		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
