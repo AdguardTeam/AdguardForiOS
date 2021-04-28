@@ -94,11 +94,11 @@ final class StoriesPageViewController: UIPageViewController {
         }
         
         willResignActiveObserver = NotificationCenter.default.observe(name: UIApplication.willResignActiveNotification, object: nil, queue: .main, using: { [weak self] (_) in
-            self?.onWillResignActiveAction()
+            self?.pauseStory()
         })
 
         didBecomeActiveObserver = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: .main, using: { [weak self] (_) in
-            self?.onDidBecomeActiveAction()
+            self?.resumeStory()
         })
     }
     
@@ -110,14 +110,14 @@ final class StoriesPageViewController: UIPageViewController {
         view.addGestureRecognizer(swipeGesture)
     }
     
-    private func onWillResignActiveAction() {
+    private func pauseStory() {
         guard let controller = viewControllers?.first as? StoryViewController else { return }
-        controller.appWillResignActive()
+        controller.pauseStory()
     }
     
-    private func onDidBecomeActiveAction() {
+    private func resumeStory() {
         guard let controller = viewControllers?.first as? StoryViewController else { return }
-        controller.appDidBecomeActive()
+        controller.resumeStory()
     }
 }
 

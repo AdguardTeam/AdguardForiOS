@@ -66,8 +66,8 @@ final class MainPageExtraInfoCollectionDelegate: NSObject, UICollectionViewDeleg
             return CGSize(width: collectionView.frame.width, height: height)
         case .storiesWithProStatusPromotion:
             headerView = ProStatusPromotionCollectionReusableView.fromNib
-            if #available(iOS 13, *) {
-            } else if headerView.isIpadTrait {
+            if headerView.isIpadTrait {
+                if #available(iOS 13, *) { break }
                 let height = headerView.frame.height
                 return CGSize(width: collectionView.frame.width, height: height)
             }

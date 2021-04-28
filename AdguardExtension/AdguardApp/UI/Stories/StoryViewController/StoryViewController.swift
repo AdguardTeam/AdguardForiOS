@@ -182,11 +182,13 @@ final class StoryViewController: UIViewController {
     }
     //MARK: - Public methods
     
-    func appWillResignActive() {
+    func pauseStory() {
+        DDLogDebug("Pause story; Story group = \(storyGroup); current story index = \(currentStoryIndex)")
         progressView.pause()
     }
     
-    func appDidBecomeActive() {
+    func resumeStory() {
+        DDLogDebug("Resume story; Story group = \(storyGroup); current story index = \(currentStoryIndex)")
         progressView.resume()
     }
     
@@ -220,16 +222,6 @@ final class StoryViewController: UIViewController {
             progressView.start()
             delegate?.previousStoriesAreOver()
         }
-    }
-    
-    private func pauseStory() {
-        DDLogDebug("Pause story; Story group = \(storyGroup); current story index = \(currentStoryIndex)")
-        progressView.pause()
-    }
-    
-    private func resumeStory() {
-        DDLogDebug("Resume story; Story group = \(storyGroup); current story index = \(currentStoryIndex)")
-        progressView.resume()
     }
 }
 
