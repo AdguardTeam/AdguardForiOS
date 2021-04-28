@@ -80,7 +80,7 @@
 "dns_server_info_format" = "%1$@ (%2$@)";
 
 /* (UnreadStoriesView) - Description for unread stories */
-"unread_stories_desc" = "Swipe up to look them!";
+"unread_stories_desc" = "Swipe up to see them!";
 
 /* (GetProCompactView) - Title for premium status view. <span style=color:%@> It is a color for 'premium' */
 "get_pro_title" = "<b>Get the <span style=color:%@>premium</span> version!</b>";
@@ -1225,3 +1225,6 @@
 
 /* Eighth DNS servers story button title */
 "story_dns_servers_8_button_title" = "GO TO SETTINGS";
+
+/* Try trial free button title */
+"story_dns_servers_try_trial_free_title" = "Try for free";

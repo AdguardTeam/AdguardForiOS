@@ -237,9 +237,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>&lt;b&gt;You have &lt;span style=color:%2$@&gt;%1$d&lt;/span&gt; unread story&lt;/b&gt;</string>
+			<string>&lt;b&gt;You have &lt;span style=color:%2$@&gt;%1$d&lt;/span&gt; unviewed story&lt;/b&gt;</string>
 			<key>other</key>
-			<string>&lt;b&gt;You have &lt;span style=color:%2$@&gt;%1$d&lt;/span&gt; unread stories&lt;/b&gt;</string>
+			<string>&lt;b&gt;You have &lt;span style=color:%2$@&gt;%1$d&lt;/span&gt; unviewed stories&lt;/b&gt;</string>
 		</dict>
 	</dict>
 </dict>

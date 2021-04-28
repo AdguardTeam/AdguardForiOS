@@ -285,18 +285,25 @@ extension StoryViewController {
     }
     
     private func processContentForButton() {
-        guard let buttonConfig = currentStory.buttonConfig else {
+        guard let buttonConfig = currentStory.getConfig(configuration.proStatus) else {
             self.button?.removeFromSuperview()
             self.button = nil
             descLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor, constant: -24.0).isActive = true
             return
         }
         
-        let button = RoundRectButton()
-        button.applyStandardGreenStyle()
-        button.makeTitleTextUppercased()
-        button.customBackgroundColor = UIColor.AdGuardColor.lightGreen1
+        let button = self.button == nil ? RoundRectButton() : self.button!
+        switch buttonConfig.style {
+        case .standard:
+            button.applyStandardGreenStyle()
+            button.customBackgroundColor = UIColor.AdGuardColor.lightGreen1
+        case .opaque:
+            button.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
+            button.customBackgroundColor = .clear
+        }
+        
         button.customHighlightedBackgroundColor = UIColor.AdGuardColor.green
+        button.makeTitleTextUppercased()
         button.setTitle(buttonConfig.title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -308,6 +315,7 @@ extension StoryViewController {
             }
         }
         
+        guard self.button == nil else { return }
         view.addSubview(button)
         
         button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0).isActive = true
@@ -337,19 +345,19 @@ extension StoryViewController {
     }
     
     @objc private func buttonTapped() {
-        guard let actionType = currentStory.buttonConfig?.actionType else {
-            DDLogError("(StoryViewController) Action type in nil")
+        guard let buttonConfig = currentStory.getConfig(configuration.proStatus) else {
+            DDLogError("(StoryViewController) There is no config for this story: \(currentStory.title ?? "")")
             return
         }
+        let actionType = buttonConfig.actionType
         
         // TODO: - TDS links need to be added
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
+        dismiss(animated: true) {
             
             switch actionType {
             case .readChangeLog:
                 return
-            case .activateLicense:
+            case .activateLicense, .tryTrialFree:
                 AppDelegate.shared.presentLicenseScreen()
             case .downloadAdguardVpn:
                 if UIApplication.adGuardVpnIsInstalled {
@@ -362,29 +370,13 @@ extension StoryViewController {
             case .moreOnSafari:
                 return
             case .enableAdguardDns:
-                if !self.configuration.proStatus {
-                    AppDelegate.shared.presentLicenseScreen()
-                } else {
-                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
-                }
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .adguard)
             case .enableGoogleDns:
-                if !self.configuration.proStatus {
-                    AppDelegate.shared.presentLicenseScreen()
-                } else {
-                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
-                }
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .google)
             case .enableCloudflareDns:
-                if !self.configuration.proStatus {
-                    AppDelegate.shared.presentLicenseScreen()
-                } else {
-                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
-                }
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .cloudflare)
             case .addCustomDns:
-                if !self.configuration.proStatus {
-                    AppDelegate.shared.presentLicenseScreen()
-                } else {
-                    _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
-                }
+                _ = AppDelegate.shared.presentDnsProvidersController(providerToSelect: .addNewCustom)
             }
         }
     }

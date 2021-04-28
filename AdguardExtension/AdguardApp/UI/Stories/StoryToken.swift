@@ -23,10 +23,11 @@ struct StoryToken: Decodable, Equatable {
     let image: UIImage? // UIImage for light theme
     let darkImage: UIImage? // UIImage for dark theme
     
+    //decodable fields
     let title: String?
     let description: String?
-    let buttonConfig: StoryButtonConfig?
-    
+    let configs: [StoryButtonConfig]?
+        
     private enum LocalizedStringKeysWithFormat: String, CaseIterable {
         case whatsNewDescription = "story_whats_new_1_description"
         
@@ -43,6 +44,7 @@ struct StoryToken: Decodable, Equatable {
         case image
         case title
         case description
+        case configs = "action_config"
     }
     
     init(from decoder: Decoder) throws {
@@ -67,6 +69,24 @@ struct StoryToken: Decodable, Equatable {
             self.description = String.localizedString(descKey)
         }
         
-        self.buttonConfig = try? StoryButtonConfig(from: decoder)
+        self.configs = try? container.decode([StoryButtonConfig].self, forKey: .configs)
+    }
+    
+    
+    func getConfig(_ isPro: Bool) -> StoryButtonConfig? {
+        
+        if let forAll = configs?.first(where: { $0.status == .forAll }) {
+            return forAll
+        }
+        
+        if isPro, let forPro = configs?.first(where: { $0.status == .forPro }) {
+            return forPro
+        }
+        
+        if !isPro, let forFree = configs?.first(where: { $0.status == .forFree }) {
+            return forFree
+        }
+        
+        return nil
     }
 }

@@ -111,7 +111,10 @@ final class StoriesProvider: StoriesProviderProtocol {
         /* Do not show stories about license activation for premium users */
         if configuration.proStatus {
             let dnsProtectionStoriesIndex = newStories.firstIndex(where: { $0.category.type == .dnsProtection })!
-            let activateLicenseStoryIndex = newStories[dnsProtectionStoriesIndex].storyTokens.firstIndex(where: { $0.buttonConfig?.actionType == .activateLicense })!
+            let activateLicenseStoryIndex = newStories[dnsProtectionStoriesIndex].storyTokens.firstIndex {
+                guard let configs = $0.configs else { return false }
+                return configs.contains { $0.actionType == .activateLicense }
+            }!
             newStories[dnsProtectionStoriesIndex].storyTokens.remove(at: activateLicenseStoryIndex)
         }
         
