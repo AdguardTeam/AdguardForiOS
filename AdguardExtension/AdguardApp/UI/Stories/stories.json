@@ -83,7 +83,7 @@
                     "image": "VPNProtection1",
                     "title": "story_vpn_protection_1_title",
                     "description": "story_vpn_protection_1_description",
-                    "scope": "FOR_ALL",
+                    "scope": "FOR_VPN_APP_PROMOTION",
                     "button_config":
                     {
                         "action": "DOWNLOAD_ADGUARD_VPN",
@@ -95,28 +95,28 @@
                     "image": "VPNProtection2",
                     "title": "story_vpn_protection_2_title",
                     "description": "story_vpn_protection_2_description",
-                    "scope": "FOR_ALL",
+                    "scope": "FOR_VPN_APP_PROMOTION",
                     "button_config": null
                 },
                 {
                     "image": "VPNProtection3",
                     "title": "story_vpn_protection_3_title",
                     "description": "story_vpn_protection_3_description",
-                    "scope": "FOR_ALL",
+                    "scope": "FOR_VPN_APP_PROMOTION",
                     "button_config": null
                 },
                 {
                     "image": "VPNProtection4",
                     "title": "story_vpn_protection_4_title",
                     "description": "story_vpn_protection_4_description",
-                    "scope": "FOR_ALL",
+                    "scope": "FOR_VPN_APP_PROMOTION",
                     "button_config": null
                 },
                 {
                     "image": "VPNProtection5",
                     "title": "story_vpn_protection_5_title",
                     "description": "story_vpn_protection_5_description",
-                    "scope": "FOR_ALL",
+                    "scope": "FOR_VPN_APP_PROMOTION",
                     "button_config":
                     {
                         "action": "DOWNLOAD_ADGUARD_VPN",
@@ -380,6 +380,7 @@
     "scopes": [
         "FOR_PRO",
         "FOR_FREE",
+        "FOR_VPN_APP_PROMOTION",
         "FOR_ALL"
     ]
 }

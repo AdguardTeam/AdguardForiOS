@@ -115,12 +115,6 @@ final class StoriesProvider: StoriesProviderProtocol {
             newStories = excludeStoriesWithScope(.forPro, stories: newStories)
         }
         
-        /* Do not show stories about VPN  */
-        if UIApplication.adGuardVpnIsInstalled {
-            let adguardVpnStoriesIndex = newStories.firstIndex(where: { $0.category.type == .vpnProtection })!
-            newStories.remove(at: adguardVpnStoriesIndex)
-        }
-        
         if stories != newStories {
             DispatchQueue.main.async { [weak self] in
                 self?.stories = newStories
@@ -153,12 +147,17 @@ final class StoriesProvider: StoriesProviderProtocol {
     
     private func excludeStoriesWithScope(_ scope: StoryScope, stories: [StoryGroup]) -> [StoryGroup] {
         var newStories = stories
+        var vpnProtectionCategoryIndex: Int?
         newStories.enumerated().forEach {
+            if $0.element.category.type == .vpnProtection && UIApplication.adGuardVpnIsInstalled {
+                vpnProtectionCategoryIndex = $0.offset
+            }
             let categoryIndex = $0.offset
             newStories[categoryIndex].storyTokens = $0.element.storyTokens.filter {
                 $0.scope != scope
             }
         }
+        if let index = vpnProtectionCategoryIndex { newStories.remove(at: index) }
         return newStories
     }
 }

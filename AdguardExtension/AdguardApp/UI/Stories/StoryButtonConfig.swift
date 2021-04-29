@@ -30,12 +30,6 @@ enum StoryActionType: String, CaseIterable, Equatable {
     case addCustomDns = "ADD_CUSTOM_DNS"
 }
 
-enum StoryScope: String, Decodable, CaseIterable, Equatable {
-    case forPro = "FOR_PRO"
-    case forFree = "FOR_FREE"
-    case forAll = "FOR_ALL"
-}
-
 enum StoryButtonStyle: String, Decodable, CaseIterable, Equatable {
     case standard = "STANDARD"
     case opaque = "OPAQUE"

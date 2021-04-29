@@ -18,6 +18,13 @@
 
 import Foundation
 
+enum StoryScope: String, Decodable, CaseIterable, Equatable {
+    case forPro = "FOR_PRO"
+    case forFree = "FOR_FREE"
+    case forVpnAppPromotion = "FOR_VPN_APP_PROMOTION"
+    case forAll = "FOR_ALL"
+}
+
 /* StoryToken is a model for one story */
 struct StoryToken: Decodable, Equatable {
     let image: UIImage? // UIImage for light theme
