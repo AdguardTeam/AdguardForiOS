@@ -90,7 +90,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DDLogInfo("(TodayViewController) - init start")
         ACLLogger.singleton()?.flush()
         
-        safariService = SafariService(resources: resources)
+        // todo:
+        safariService = SafariService(bundleId: Bundle.main.bundleIdentifier!)
         
         productInfo = ADProductInfo()
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)

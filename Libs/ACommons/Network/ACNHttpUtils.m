@@ -17,6 +17,7 @@
 */
 #import "ACLang.h"
 #import "ACNHttpUtils.h"
+#import "NSString+Utils.h"
 
 @implementation ACNHttpUtils
 

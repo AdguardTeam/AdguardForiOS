@@ -21,7 +21,7 @@ import Foundation
 /**
  Interface for FilterDetailsController
  */
-protocol FilterDetailedInterface {
+public protocol FilterDetailedInterface {
     var name: String? { get set }
     var enabled: Bool { get set }
     var desc: String? { get set }

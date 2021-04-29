@@ -20,7 +20,6 @@
 #import "ACObject.h"
 #import "ABECFilter.h"
 #import "AESAntibanner.h"
-#import "AESharedResources.h"
 #import "ABECFilterParsers.h"
 #import "ASDatabase.h"
 #import "NSStringPunycodeAdditions.h"

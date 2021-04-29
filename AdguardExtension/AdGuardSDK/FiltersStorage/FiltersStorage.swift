@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol FiltersStorageProtocol {
+public protocol FiltersStorageProtocol {
     
     func updateFilter(identifier: Int, completion:@escaping (Error?)->Void)
     func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion:@escaping (Error?)->Void)
@@ -13,11 +13,11 @@ enum FiltersStorageError: Error {
     case updateError
 }
 
-class FiltersStorage: FiltersStorageProtocol {
+public class FiltersStorage: FiltersStorageProtocol {
     
     let filtersDirectory: String
     
-    init(filtersDirectory: String? = nil) {
+    public init(filtersDirectory: String? = nil) {
         if filtersDirectory == nil {
             let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentDir = urls.first
@@ -28,7 +28,7 @@ class FiltersStorage: FiltersStorageProtocol {
         }
     }
     
-    func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
+    public func updateFilter(identifier: Int, completion:@escaping (Error?)->Void) {
         
         guard let url = urlForFilter(identifier) else {
             Logger.logError("FiltersStorage downloadFilter - can not generate url for filter with id: \(identifier)")
@@ -39,11 +39,11 @@ class FiltersStorage: FiltersStorageProtocol {
         downloadFilter(url: url, identifier: identifier, completion: completion)
     }
     
-    func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion: @escaping (Error?) -> Void) {
+    public func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion: @escaping (Error?) -> Void) {
         downloadFilter(url: subscriptionUrl, identifier: identifier, completion: completion)
     }
     
-    func getFilters(identifiers:[Int])->[Int: String] {
+    public func getFilters(identifiers:[Int])->[Int: String] {
         var result = [Int: String]()
         for id in identifiers {
             guard let fileUrl = fileUrlForFilter(id) else {
@@ -66,7 +66,7 @@ class FiltersStorage: FiltersStorageProtocol {
         return result
     }
     
-    func saveFilter(identifier: Int, content: String) -> Error? {
+    public func saveFilter(identifier: Int, content: String) -> Error? {
         guard let url = fileUrlForFilter(identifier) else { return NSError(domain: "com.adguard.FiltersStorage", code: 0, userInfo: nil)}
         
         do {

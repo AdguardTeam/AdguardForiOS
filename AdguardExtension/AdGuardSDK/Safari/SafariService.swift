@@ -24,7 +24,7 @@ import SafariServices
 /**
  SafariService is responsible for save/load content blocker rules files and for invalidating safari content blockers
  */
-protocol SafariServiceProtocol : NSObjectProtocol {
+public protocol SafariServiceProtocol : NSObjectProtocol {
     /** invalidates all content blockers
      */
     func invalidateBlockingJsons(completion: @escaping (Error?) -> Void)
@@ -63,24 +63,24 @@ protocol SafariServiceProtocol : NSObjectProtocol {
 /**
  this protocol is used for testing
  */
-protocol SFContentBlockerManagerProtocol {
+public protocol SFContentBlockerManagerProtocol {
     func reloadContentBlocker(withIdentifier identifier: String, completionHandler: ((Error?) -> Void)?)
     func getStateOfContentBlocker(withIdentifier identifier: String, completionHandler: @escaping (SFContentBlockerState?, Error?) -> Void)
 }
 
 // MARK: - SafariService -
 
-class SafariService: NSObject, SafariServiceProtocol {
+public class SafariService: NSObject, SafariServiceProtocol {
     
     static let safariServiceErrorDomain = "SafariServiceErrorDomain"
     static let safariServiceErrorCode = -1
     
-    private let bundleId: String
+    private let mainAppBundleId: String
     
     /** SFContentBlockerManager wrapper
        it is used for testing
     */
-    var contentBlockerManager: SFContentBlockerManagerProtocol = {
+    public var contentBlockerManager: SFContentBlockerManagerProtocol = {
         class Manager: SFContentBlockerManagerProtocol {
             func getStateOfContentBlocker(withIdentifier identifier: String, completionHandler: @escaping (SFContentBlockerState?, Error?) -> Void) {
                 SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: identifier, completionHandler: completionHandler)
@@ -94,15 +94,13 @@ class SafariService: NSObject, SafariServiceProtocol {
         return Manager()
     }()
     
-    private var resources: AESharedResourcesProtocol
-    
     var contenBlockerBundleIdByType: [ContentBlockerType: String] {
-        return [.general : "\(bundleId).extension",
-                .privacy: "\(bundleId).extensionPrivacy",
-                .socialWidgetsAndAnnoyances: "\(bundleId).extensionAnnoyances",
-                .other: "\(bundleId).extensionOther",
-                .custom: "\(bundleId).extensionCustom",
-                .security: "\(bundleId).extensionSecurity"]
+        return [.general : "\(mainAppBundleId).extension",
+                .privacy: "\(mainAppBundleId).extensionPrivacy",
+                .socialWidgetsAndAnnoyances: "\(mainAppBundleId).extensionAnnoyances",
+                .other: "\(mainAppBundleId).extensionOther",
+                .custom: "\(mainAppBundleId).extensionCustom",
+                .security: "\(mainAppBundleId).extensionSecurity"]
     }
     
     private let fileNames: [ContentBlockerType: String] = [
@@ -127,16 +125,15 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: - initializers
     @objc
-    init(resources: AESharedResourcesProtocol, bundleId: String) {
-        self.resources = resources
-        self.bundleId = bundleId
+    public init(mainAppBundleId: String) {
+        self.mainAppBundleId = mainAppBundleId
     }
     
     // MARK: public methods
     
     let updateQueue = DispatchQueue(label: "safari_update", attributes: .concurrent)
     
-    @objc func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
+    @objc public func invalidateBlockingJsons(completion: @escaping (Error?) -> Void) {
     
         updateQueue.async { [weak self] in
             guard let self = self else { return }
@@ -189,23 +186,23 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: save/load files
     
-    func save(json: Data, type: ContentBlockerType) {
+    public func save(json: Data, type: ContentBlockerType) {
         Logger.logInfo("(SafariService) save \(json.count) bytes to \(contentBlockersEnabled) )")
         if let fileName = fileNames[type] {
-            resources.save(json, toFileRelativePath: fileName)
+            saveData(json, relativePath: fileName)
         }
     }
     
-    func readJson(forType type: ContentBlockerType) -> Data? {
+    public func readJson(forType type: ContentBlockerType) -> Data? {
         if let fileName = fileNames[type] {
-            return resources.loadData(fromFileRelativePath: fileName)
+            return loadDataFrom(fileName)
         }
         
         return nil
     }
     
     @objc
-    func allBlockingContentRules()->[String : Data] {
+    public func allBlockingContentRules()->[String : Data] {
         var datas = [String : Data]()
         ContentBlockerType.allCases.forEach { (type) in
             let data = self.readJson(forType: type)
@@ -216,7 +213,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     // MARK: - safari content blocker status
     
-    func checkStatus(completion:@escaping (_ enabled: [ContentBlockerType : Bool])->Void) {
+    public func checkStatus(completion:@escaping (_ enabled: [ContentBlockerType : Bool])->Void) {
         let checkQueue = DispatchQueue(label: "safari_check", attributes: DispatchQueue.Attributes.concurrent)
         
         checkQueue.async {
@@ -246,7 +243,7 @@ class SafariService: NSObject, SafariServiceProtocol {
         }
     }
     
-    func getContentBlockerEnabled(type: ContentBlockerType) -> Bool {
+    public func getContentBlockerEnabled(type: ContentBlockerType) -> Bool {
         if let enabled = contentBlockersEnabled[type] {
             return enabled
         } else {
@@ -258,7 +255,7 @@ class SafariService: NSObject, SafariServiceProtocol {
     
     private let invalidateQueue = DispatchQueue(label: "invalidate queue")
     
-    func invalidateBlockingJson(type: ContentBlockerType, completion: @escaping (Error?)->Void) {
+    public func invalidateBlockingJson(type: ContentBlockerType, completion: @escaping (Error?)->Void) {
         
         invalidateQueue.async { [weak self] in
             guard let self = self else { return }
@@ -312,7 +309,8 @@ class SafariService: NSObject, SafariServiceProtocol {
             group.wait()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                // todo:
+//                NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
             }
         }
     }
@@ -348,5 +346,18 @@ class SafariService: NSObject, SafariServiceProtocol {
             
             group.wait()
         }
+    }
+    
+    // todo: we must get this url from main app or write migration(copy files from app group dir to documents dir)
+    let containerUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    private func loadDataFrom(_ relativePath: String)->Data?{
+        let dataUrl = containerUrl.appendingPathComponent(relativePath)
+        return try? Data(contentsOf: dataUrl)
+    }
+    
+    private func saveData(_ data: Data, relativePath: String) {
+        let dataUrl = containerUrl.appendingPathComponent(relativePath)
+        try? data.write(to: dataUrl)
     }
 }

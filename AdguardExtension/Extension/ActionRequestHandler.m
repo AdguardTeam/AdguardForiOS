@@ -71,7 +71,7 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         DDLogInfo(@"(ActionRequestHandler) start content blocker loading - %@. filteringEnabled = %@", NSBundle.mainBundle.bundleIdentifier, filteringEnabled ? @"TRUE" : @"FALSE");
         
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
-        SafariService* safariService = [[SafariService alloc] initWithResources:resources];
+        SafariService* safariService = [[SafariService alloc] initWithBundleId: NSBundle.mainBundle.bundleIdentifier];
         NSString* filename = [safariService filenameById: NSBundle.mainBundle.bundleIdentifier];
         NSString* path = [resources pathForRelativePath:filename];
         NSURL* fileUrl = [NSURL fileURLWithPath:path];

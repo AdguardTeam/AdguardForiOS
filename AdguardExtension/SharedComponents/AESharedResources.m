@@ -125,10 +125,6 @@ NSString *BlockIpv6 = @"BlockIpv6";
 NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
-#define AES_SAFARI_WHITELIST_RULES              @"safari-whitelist-rules.data"
-#define AES_SAFARI_INVERTED_WHITELIST_RULES     @"safari-inverdet-whitelist-rules.data"
-#define AES_FILTERS_META_CACHE                  @"metadata-cache.data"
-#define AES_FILTERS_I18_CACHE                   @"i18-cache.data"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -186,105 +182,57 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
 }
 
-- (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setWhitelistContentBlockingRules:(NSMutableArray<ASDFilterRule *> *)whitelistContentBlockingRules {
-    
-    if (whitelistContentBlockingRules == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:whitelistContentBlockingRules];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-    }
-}
-
--(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setInvertedWhitelistContentBlockingObject:(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject{
-    
-    if (invertedWhitelistContentBlockingObject == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:invertedWhitelistContentBlockingObject];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-    }
-}
-
-- (ABECFilterClientMetadata *)filtersMetadataCache {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_FILTERS_META_CACHE];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setFiltersMetadataCache:(ABECFilterClientMetadata *)filtersMetadataCache {
-    
-    if (filtersMetadataCache == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_FILTERS_META_CACHE];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:filtersMetadataCache];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_FILTERS_META_CACHE];
-    }
-}
-
-- (ABECFilterClientLocalization *)i18nCacheForFilterSubscription {
-    
-    NSData *data = [self loadDataFromFileRelativePath:AES_FILTERS_I18_CACHE];
-    if (data.length) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    return nil;
-}
-
-- (void)setI18nCacheForFilterSubscription:(ABECFilterClientLocalization *)i18nCacheForFilterSubscription {
-    
-    if (i18nCacheForFilterSubscription == nil) {
-        [self saveData:[NSData data] toFileRelativePath:AES_FILTERS_I18_CACHE];
-    }
-    else {
-        
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:i18nCacheForFilterSubscription];
-        if (!data) {
-            data = [NSData data];
-        }
-        
-        [self saveData:data toFileRelativePath:AES_FILTERS_I18_CACHE];
-    }
-}
+//- (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
+//
+//    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+//    if (data.length) {
+//        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    return nil;
+//}
+//
+//- (void)setWhitelistContentBlockingRules:(NSMutableArray<ASDFilterRule *> *)whitelistContentBlockingRules {
+//
+//    if (whitelistContentBlockingRules == nil) {
+//        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+//    }
+//    else {
+//
+//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:whitelistContentBlockingRules];
+//        if (!data) {
+//            data = [NSData data];
+//        }
+//
+//        [self saveData:data toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
+//    }
+//}
+//
+//-(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject {
+//
+//    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
+//    if (data.length) {
+//        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    return nil;
+//}
+//
+//- (void)setInvertedWhitelistContentBlockingObject:(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject{
+//
+//    if (invertedWhitelistContentBlockingObject == nil) {
+//        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
+//    }
+//    else {
+//
+//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:invertedWhitelistContentBlockingObject];
+//        if (!data) {
+//            data = [NSData data];
+//        }
+//
+//        [self saveData:data toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
+//    }
+//}
+//
+//
 
 - (void)reset {
     // todo: maybe move this code to swift
@@ -347,8 +295,7 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath{
     
     if (!relativePath) {
-        // todo:
-//        [[NSException argumentException:@"relativePath"] raise];
+         [[NSException argumentException:@"relativePath"] raise];
     }
     
     @autoreleasepool {
@@ -356,16 +303,15 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
             
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
-                // todo:
-//                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
-//                if ([locker waitLock]) {
+                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
+                if ([locker waitLock]) {
                     
                     NSData *data = [NSData dataWithContentsOfURL:dataUrl];
                     
-//                    [locker unlock];
+                    [locker unlock];
                     
                     return data;
-//                }
+                }
             }
         }
         
@@ -376,8 +322,7 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 - (BOOL)saveData:(NSData *)data toFileRelativePath:(NSString *)relativePath{
 
     if (!(data && relativePath)) {
-        //todo:
-//        [[NSException argumentException:@"data/relativePath"] raise];
+        [[NSException argumentException:@"data/relativePath"] raise];
     }
     
     @autoreleasepool {
@@ -385,16 +330,15 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
             
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
-                // todo:
-//                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
-//                if ([locker lock]) {
+                ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
+                if ([locker lock]) {
                     
                     BOOL result = [data writeToURL:dataUrl atomically:YES];
                     
-//                    [locker unlock];
+                    [locker unlock];
                     
                     return result;
-//                }
+                }
             }
         }
         

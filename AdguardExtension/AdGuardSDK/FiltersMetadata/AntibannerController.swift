@@ -20,7 +20,7 @@ import Foundation
 
 /** AntibannerController this class is responsible for Antibanner life cycle */
 @objc
-protocol AntibannerControllerProtocol {
+public protocol AntibannerControllerProtocol {
     
     // start antibanner
     func start()
@@ -45,7 +45,7 @@ struct ReadyFlag: OptionSet {
     static let ready = installed.union(databaseReady)
 }
 
-class AntibannerController: NSObject, AntibannerControllerProtocol {
+public class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     private let startQueue = DispatchQueue(label: "antibanner controller start")
     private let readyQueue = DispatchQueue(label: "antibanner controller ready")
@@ -59,13 +59,11 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     private var installedObservation: Any?
     
     private var database: ASDatabase
-    private let resources: AESharedResourcesProtocol
     private let version: String
     
-    init(antibanner: AESAntibannerProtocol, resources: AESharedResourcesProtocol, version: String) {
+    public init(antibanner: AESAntibannerProtocol, version: String) {
         self.antibanner = antibanner
         self.database = ASDatabase()
-        self.resources = resources
         self.version = version
         super.init()
         
@@ -73,7 +71,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
         self.setupAntibannerObserver()
     }
     
-    func start() {
+    public func start() {
         startQueue.async { [weak self] in
             guard let sSelf = self else { return }
             if sSelf.started { return }
@@ -89,7 +87,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
         }
     }
     
-    func onReady(_ block: @escaping (_ antibanner: AESAntibannerProtocol) -> Void) {
+    public func onReady(_ block: @escaping (_ antibanner: AESAntibannerProtocol) -> Void) {
         
         readyQueue.async { [weak self] in
             guard let sSelf = self else { return }
@@ -102,15 +100,15 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
         }
     }
     
-    func reset() {
+    public func reset() {
         
         self.started = false
         
         database.stop()
         antibanner.stop()
         // delete database file
-        let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
-        try? FileManager.default.removeItem(atPath: url.path)
+        
+        try? FileManager.default.removeItem(atPath: dbUrl.path)
         
         self.database = ASDatabase()
         self.initDatabase()
@@ -120,7 +118,7 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     // MARK: - observe
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if object as? ASDatabase == database && keyPath == "ready" && database.ready {
             
@@ -139,10 +137,15 @@ class AntibannerController: NSObject, AntibannerControllerProtocol {
     
     // MARK: - private methods
     
+    private var dbUrl: URL {
+        let containerUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // todo: move db name to params or another place
+        return  containerUrl.appendingPathComponent("adguard.db")
+    }
+    
     private func initDatabase() {
-        let url = resources.sharedResuorcesURL().appendingPathComponent(AE_PRODUCTION_DB)
         self.antibanner.setDatabase(self.database)
-        self.database.initDb(with: url, upgradeDefaultDb: true, buildVersion: version)
+        self.database.initDb(with: dbUrl, upgradeDefaultDb: true, buildVersion: version)
     }
     
     private func setupDatabaseObserver() {

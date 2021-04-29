@@ -23,11 +23,11 @@ import ContentBlockerConverter
 /**
  ContentBlockerService is responsible for the composition of safari content blocker rules files
  */
-protocol ContentBlockerServiceProtocol {
+public protocol ContentBlockerServiceProtocol {
     /**
      recompile all content blocker files and reloads it to safari
     */
-    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, completion:@escaping (Error?)->Void)
+    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertWhitelist: Bool, completion:@escaping (Error?)->Void)
     
     /**
      validates rule text
@@ -44,7 +44,7 @@ protocol ContentBlockerServiceProtocol {
 }
 
 @objc
-class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
+public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     var antibanner: AESAntibannerProtocol
     
@@ -54,10 +54,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     static let contentBlockerDBErrorCode = 2
     
     // MARK: - private properties
-    private var resources: AESharedResourcesProtocol
     private var safariService: SafariServiceProtocol
     private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
     private var filtersStorage: FiltersStorageProtocol
+    private var resources: ResourcesProtocol
     
     private let workQueue = DispatchQueue(label: "content_blocker")
     
@@ -70,26 +70,27 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .security:                     [.security]
             ]
     
-    static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
-        .general:                       AEDefaultsGeneralContentBlockerRulesCount,
-        .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
-        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
-        .other:                         AEDefaultsOtherContentBlockerRulesCount,
-        .custom:                        AEDefaultsCustomContentBlockerRulesCount,
-        .security:                      AEDefaultsSecurityContentBlockerRulesCount
-    ]
-    
-    static let defaultsOverLimitCountKeyByBlocker: [ContentBlockerType: String] = [
-        .general:                       AEDefaultsGeneralContentBlockerRulesOverLimitCount,
-        .privacy:                       AEDefaultsPrivacyContentBlockerRulesOverLimitCount,
-        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesOverLimitCount,
-        .other:                         AEDefaultsOtherContentBlockerRulesOverLimitCount,
-        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount,
-        .security:                      AEDefaultsSecurityContentBlockerRulesOverLimitCount
-    ]
+    // todo: return conversion result directly to caller
+//    static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
+//        .general:                       AEDefaultsGeneralContentBlockerRulesCount,
+//        .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
+//        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
+//        .other:                         AEDefaultsOtherContentBlockerRulesCount,
+//        .custom:                        AEDefaultsCustomContentBlockerRulesCount,
+//        .security:                      AEDefaultsSecurityContentBlockerRulesCount
+//    ]
+//
+//    static let defaultsOverLimitCountKeyByBlocker: [ContentBlockerType: String] = [
+//        .general:                       AEDefaultsGeneralContentBlockerRulesOverLimitCount,
+//        .privacy:                       AEDefaultsPrivacyContentBlockerRulesOverLimitCount,
+//        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesOverLimitCount,
+//        .other:                         AEDefaultsOtherContentBlockerRulesOverLimitCount,
+//        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount,
+//        .security:                      AEDefaultsSecurityContentBlockerRulesOverLimitCount
+//    ]
     
     // MARK: - init
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FiltersStorageProtocol) {
+    public init(resources: ResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FiltersStorageProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.antibanner = antibanner
@@ -99,7 +100,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - public methods
     @objc
-    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, completion:@escaping (Error?)->Void) {
+    public func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertWhitelist: Bool, completion:@escaping (Error?)->Void) {
         Logger.logInfo("(ContentBlockerService) reloadJsons")
         
 #if !APP_EXTENSION
@@ -109,7 +110,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         workQueue.async { [weak self] in
             guard let self = self else { return }
             
-            let error = self.updateContentBlockers(background: backgroundUpdate, protectionEnabled: protectionEnabled)
+            let error = self.updateContentBlockers(background: backgroundUpdate, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertWhitelist)
 #if !APP_EXTENSION
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
 #endif
@@ -118,7 +119,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    func validateRule(_ ruleText: String) -> Bool {
+    public func validateRule(_ ruleText: String) -> Bool {
         
         let trimmedRule = ruleText.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedRule.count == 0 {
@@ -143,7 +144,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
      and replaces these JSONs in shared resources asynchronously.
      Method performs completionBlock when done on service working queue.
      */
-    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
+    public func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
         processWhitelistDomain(domain, enabled: true, completion: completion, processRules: {(rules) in
             let rule = AEWhitelistDomainObject(domain: domain).rule
@@ -153,9 +154,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }, processData: { [weak self] (jsonData, jsonRuleData, contentBlocker) in
             guard let sSelf = self else { return Data() }
             
-            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-            let overlimit = converted == limit
+            //  todo: make oit another way
+//            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+//            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+//            let overlimit = converted == limit
+            let overlimit = false
                 
             let (resultData, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: domain, enabled: true, jsonData: jsonData as Data, overlimit: overlimit)
             
@@ -165,7 +168,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     
     
-    func removeWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
+    public func removeWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
         processWhitelistDomain(domain, enabled: false, completion: completion, processRules: {(rules) in
             var found = false
@@ -187,7 +190,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         })
     }
     
-    func replaceWhitelistDomain(_ domain: String, with newDomain: String, enabled: Bool, completion: @escaping (Error?)->Void) {
+    public func replaceWhitelistDomain(_ domain: String, with newDomain: String, enabled: Bool, completion: @escaping (Error?)->Void) {
         processWhitelistDomain(domain, enabled: enabled, completion: completion, processRules: {(rules) in
             var found = false
             let rule = AEWhitelistDomainObject(domain: domain).rule
@@ -214,7 +217,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - inverted whitelist rules
     
-    func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
+    public func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
         
         processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
             var newRules = rules
@@ -222,9 +225,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             return (newRules, true)
         }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
             guard let self = self else { return Data() }
-            let converted = self.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-            let limit = self.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-            let overlimit = converted == limit
+            // todo:
+//            let converted = self.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+//            let limit = self.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+//            let overlimit = converted == limit
+            let overlimit = false
             
             let (data, _) = self.rulesProcessor.addDomainToInvertedWhitelist(rule: domain, jsonData: jsonData, overlimit: overlimit)
             
@@ -235,7 +240,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
     }
     
-    func removeInvertedWhitelistDomain(_ ruleToRemove: String, completion: @escaping (Error?)->Void) {
+    public func removeInvertedWhitelistDomain(_ ruleToRemove: String, completion: @escaping (Error?)->Void) {
     
         processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
             let filteredDomains = rules.filter({ (rule) -> Bool in
@@ -255,7 +260,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     
     // MARK: - private methods
     
-    private func updateContentBlockers(background: Bool, protectionEnabled: Bool)->Error? {
+    private func updateContentBlockers(background: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)->Error? {
         
         Logger.logInfo("(ContentBlockerService) updateContentBlockers")
         let filtersByGroup = activeGroups()
@@ -270,10 +275,10 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             }
         }
         
-        return convertRulesAndInvalidateSafari(background: background, protectionEnabled: protectionEnabled ,filters: agFilters)
+        return convertRulesAndInvalidateSafari(background: background, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist, filters: agFilters)
     }
     
-    private func convertRulesAndInvalidateSafari(background: Bool, protectionEnabled: Bool, filters: [AdGuardFilter])->Error? {
+    private func convertRulesAndInvalidateSafari(background: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, filters: [AdGuardFilter])->Error? {
         var resultError: Error?
         let converter = FiltersConverter()
         
@@ -288,21 +293,14 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // get user rules
         
-        let userFilterEnabled = resources.safariUserFilterEnabled
-        
         let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
         
-        
         // get whitelist rules
-        
-        let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-        
-        let whitelistEnabled = resources.safariWhitelistEnabled
         
         var allowlistRules: [ASDFilterRule]?
         
         if whitelistEnabled {
-            if inverted {
+            if invertedWhitelist {
                 
                 if resources.invertedWhitelistContentBlockingObject == nil {
                     resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: [])
@@ -324,7 +322,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         let allowlist = allowlistRules?.map { $0.ruleText }.joined(separator: "/n")
         let blocklist = userRules.map { $0.ruleText }.joined(separator: "/n")
         
-        let converted = converter.convertFilters(filters, allowlist: allowlist, blocklist: blocklist, invert: inverted)
+        let converted = converter.convertFilters(filters, allowlist: allowlist, blocklist: blocklist, invert: invertedWhitelist)
         
         let group = DispatchGroup()
         for type in ContentBlockerType.allCases {
@@ -386,7 +384,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
          .custom: Affinity.custom,
          .security: Affinity.security ]
     
-    private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType, enabled: Bool)->Error? {
+    private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType, enabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)->Error? {
         Logger.logInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
         
         let safariProtectionEnabled = enabled
@@ -397,8 +395,6 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 // add user rules
                 
-                let userFilterEnabled = resources.safariUserFilterEnabled
-                
                 let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
                 
                 
@@ -408,9 +404,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 
                 // add whitelist rules
                 
-                let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                
-                let whitelistEnabled = resources.safariWhitelistEnabled
+                let inverted = invertedWhitelist
                 
                 if whitelistEnabled {
                     if inverted {
@@ -437,10 +431,12 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 if rules.count != 0 {
                     Logger.logInfo("(ContentBlockerService) updateJson - convert \(rules.count) rules")
                     let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
-                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+                    // todo:
+//                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
                     
                     if jsonData != nil { resultData = jsonData! }
-                    resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+//                    todo:
+//                    resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                     
                     resultError = error
                     if error != nil {
@@ -448,8 +444,9 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                     }
                 } else {
                     Logger.logInfo("(ContentBlockerService) updateJson - no rules to convert")
-                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
+                    // todo:
+//                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
+//                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
                 }
                 
                 safariService.save(json: resultData, type: contentBlocker)
@@ -492,7 +489,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
             let rollback: ()->Void = {
                 for (_, obj) in savedDatas.enumerated() {
                     sSelf.safariService.save(json: obj.value, type: obj.key)
-                    sSelf.resources.whitelistContentBlockingRules = (savedRules as NSArray).mutableCopy() as? NSMutableArray
+                    sSelf.resources.whitelistContentBlockingRules = savedRules as [ASDFilterRule]
                 }
             }
             
@@ -530,7 +527,7 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
                 return
             }
             
-            sSelf.resources.whitelistContentBlockingRules = (whitelistRules as NSArray).mutableCopy() as? NSMutableArray
+            sSelf.resources.whitelistContentBlockingRules = whitelistRules as? [ASDFilterRule]
             
             // change all content blocker jsons
             ContentBlockerType.allCases.forEach { (type) in
@@ -629,10 +626,11 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         
         // todo: use "converting_rules" string in main app
         // we must send only status key from framework
-        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
+//        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
         
         defer {
-            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+            // todo:
+//            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
         
         var overLimit = 0
@@ -643,7 +641,8 @@ class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }
         
         // run converter
-        let limit = resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
+        // todo:
+        let limit = 50000
         
         let converter = ContentBlockerConverter()
         

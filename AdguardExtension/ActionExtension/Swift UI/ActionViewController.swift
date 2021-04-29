@@ -77,13 +77,13 @@ class ActionViewController: UIViewController {
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
-        safariService = SafariService(resources: sharedResources)
+        safariService = SafariService(bundleId: Bundle.main.bundleIdentifier!)
         let antibanner = AESAntibanner(resources: sharedResources)
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
         productInfo = ADProductInfo()
         
-        self.antibannerController = AntibannerController(antibanner: antibanner, resources: sharedResources, productInfo: productInfo)
+        self.antibannerController = AntibannerController(antibanner: antibanner, version: productInfo.version())
         
         let safariProtectoin = SafariProtectionService(resources: sharedResources)
         
@@ -101,10 +101,11 @@ class ActionViewController: UIViewController {
         
         let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo, nativeProvidersService: nativeProviders)
  
-        contentBlockerService = ContentBlockerService(resources: sharedResources,
+        // todo: we need another place for it
+        let sdkResources = Resources(contentFolder: sharedResources.sharedResuorcesURL())
+        contentBlockerService = ContentBlockerService(resources: sdkResources,
                                                       safariService: safariService,
                                                       antibanner: antibanner,
-                                                      safariProtection: safariProtection,
                                                       filtersStorage: FiltersStorage())
         
         webReporter = ActionWebReporter(productInfo: productInfo,

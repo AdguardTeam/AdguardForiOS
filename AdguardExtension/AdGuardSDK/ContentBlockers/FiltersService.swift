@@ -30,25 +30,25 @@ protocol FiltersServiceProtocol {
     var activeFiltersCount: Int { get }
     
     /* enable/disable group of filters */
-    func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool)
+    func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)
     
     /* enable/disable filter */
-    func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool)
+    func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)
     
     /* disable all filters */
-    func disableAllFilters(protectionEnabled: Bool)
+    func disableAllFilters(protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)
     
     /* add custom filter */
     // todo: we shoud parse filters throgh framework. AASCustomFilterParserResult must be internal fw class
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool)
+    func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)
     
     /* delete custom filter */
-    func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool)
+    func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)
     
     /** load filters metadata.
      @refresh - if yes - force load metadata from server. Ignore update timeout.
      */
-    func load(refresh: Bool, protectionEnabled: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void)
+    func load(refresh: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void)
     
     /* reser service */
     func reset()
@@ -75,6 +75,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     var antibanner: AESAntibannerProtocol?
     let httpRequestService: HttpRequestServiceProtocol
+    var resources: ResourcesProtocol
     private let antibannerController: AntibannerControllerProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
     private var filtersStorage: FiltersStorageProtocol
@@ -91,9 +92,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private var proStatusObservation: NSKeyValueObservation?
     
     private let groupsQueue = DispatchQueue(label: "load_filter_grops_queue")
-    
-    var resources: AESharedResourcesProtocol
-    
+   
     // exception languages
     private let langFlags = [
         "en":"gb",
@@ -136,10 +135,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool) {
+    init(resources: ResourcesProtocol, antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+        self.resources = resources
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
-        self.resources = resources
         self.httpRequestService = httpRequestService
         self.filtersStorage = filtersStorage
         self.version = version
@@ -183,7 +182,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         antibannerController.onReady { [weak self] (antibanner) in
             self?.antibanner = antibanner
-            self?.load(refresh: false, protectionEnabled: protectionEnabled){_,_ in }
+            self?.load(refresh: false, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist){_,_ in }
         }
     }
     
@@ -193,7 +192,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - public methods
     
-    func load(refresh: Bool, protectionEnabled: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void){
+    func load(refresh: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void){
         
         antibannerController.onReady {[weak self] antibanner in
             self?.groupsQueue.async { [weak self] in
@@ -201,7 +200,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 
                 DispatchQueue.main.async {
                     // todo: use "loading_filters" in main app
-                    NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
+//                    NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
                 }
                 
                 guard let metadata = self.metadata(refresh: refresh),
@@ -209,7 +208,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     var filters = metadata.filters else {
                         // todo: move this to model
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                        // todo:
+//                        NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                     }
                     completion(0, FiltersServiceErrors.metadataUpdateError)
                     return
@@ -334,7 +334,8 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                     
                     let updatedFiltersCount = filtersNeededUpdate.count + customFilters.count
                     completion(updatedFiltersCount, nil)
-                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
+                    // todo:
+//                    NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
                 }
             }
         }
@@ -361,7 +362,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         enabledFilters = [Int: Bool]()
     }
     
-    func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool) {
+    func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         
         guard let group = getGroup(groupId) else { return }
         group.enabled = enabled
@@ -370,10 +371,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         notifyChange()
         
-        processUpdate(protectionEnabled: protectionEnabled)
+        processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool) {
+    func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         updateQueue.sync { [weak self] in
             filter.enabled = enabled
             self?.enabledFilters[filter.filterId] = enabled
@@ -387,10 +388,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         
         updateGroupSubtitle(group)
         notifyChange()
-        processUpdate(protectionEnabled: protectionEnabled)
+        processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func disableAllFilters(protectionEnabled: Bool) {
+    func disableAllFilters(protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         updateQueue.sync { [weak self] in
             for group in groups {
                 for filter in group.filters {
@@ -405,10 +406,10 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
         
         notifyChange()
-        processUpdate(protectionEnabled: protectionEnabled)
+        processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool) {
+    func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
         
@@ -420,7 +421,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             if let matchFilter = group.filters.first(where: { $0.subscriptionUrl == filter.meta.subscriptionUrl }) {
                 update(filterId: matchFilter.filterId, enabled: true)
-                setFilter(matchFilter, enabled: true, protectionEnabled: protectionEnabled)
+                setFilter(matchFilter, enabled: true, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
             } else {
                 let newFilter = Filter(filterId: filter.meta.filterId as! Int, groupId: AdGuardFilterGroup.custom.rawValue)
                 newFilter.name = filter.meta.name
@@ -434,7 +435,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 group.filters = [newFilter] + group.filters
                 
                 if !group.enabled {
-                    setGroup(group.groupId, enabled: true, protectionEnabled: protectionEnabled)
+                    setGroup(group.groupId, enabled: true, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
                 }
                 
                 updateGroupSubtitle(group)
@@ -446,7 +447,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                         return
                     }
                     self?.filtersStorage.updateCustomFilter(identifier: newFilter.filterId, subscriptionUrl: url) { (error) in
-                        self?.contentBlocker.reloadJsons(backgroundUpdate: false, protectionEnabled: protectionEnabled) { _ in
+                        self?.contentBlocker.reloadJsons(backgroundUpdate: false, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertWhitelist: invertedWhitelist) { _ in
                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
                         }
                     }
@@ -471,11 +472,11 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         antibanner?.renameCustomFilter(NSNumber(integerLiteral: filterId), newName: newName)
     }
     
-    func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool) {
-        deleteCustomFilterWithId(filter.filterId as NSNumber, protectionEnabled: protectionEnabled)
+    func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+        deleteCustomFilterWithId(filter.filterId as NSNumber, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func deleteCustomFilterWithId(_ filterId: NSNumber, protectionEnabled: Bool) {
+    func deleteCustomFilterWithId(_ filterId: NSNumber, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         guard let antibanner = self.antibanner else { return }
             
         antibanner.unsubscribeFilter(filterId as NSNumber)
@@ -486,7 +487,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             group.filters = group.filters.filter({ $0.filterId != Int(truncating: filterId) })
             
             if group.enabled && group.filters.count == 0 {
-                setGroup(group.groupId, enabled: false, protectionEnabled: protectionEnabled)
+                setGroup(group.groupId, enabled: false, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
             }
             notifyChange()
         }
@@ -670,7 +671,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         notifyChange()
     }
     
-    private func processUpdate(protectionEnabled: Bool) {
+    private func processUpdate(protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         
         updateQueue.sync {
             
@@ -695,7 +696,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             let diff = self.getDiff()
             
             if diff.filters.count == 0 && diff.groups.count == 0 {
-                self.endUpdate(taskId: backgroundTaskID, protectionEnabled: protectionEnabled)
+                self.endUpdate(taskId: backgroundTaskID, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
                 return
             }
             
@@ -711,13 +712,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
                 Logger.logInfo("Process update group: \(groupId) enabled: \(enabled)")
             }
             
-            self.contentBlocker.reloadJsons(backgroundUpdate: false, protectionEnabled: protectionEnabled, completion: { (error) in
-                self.endUpdate(taskId: backgroundTaskID, protectionEnabled: protectionEnabled)
+            self.contentBlocker.reloadJsons(backgroundUpdate: false, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertWhitelist: invertedWhitelist, completion: { (error) in
+                self.endUpdate(taskId: backgroundTaskID, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
             })
         }
     }
     
-    private func endUpdate(taskId: UIBackgroundTaskIdentifier, protectionEnabled: Bool) {
+    private func endUpdate(taskId: UIBackgroundTaskIdentifier, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         updateQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -725,7 +726,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
             
             if self.needUpdate {
                 DispatchQueue.main.async {
-                    self.processUpdate(protectionEnabled: protectionEnabled)
+                    self.processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
                 }
             }
             
