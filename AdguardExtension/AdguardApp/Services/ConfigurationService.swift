@@ -145,6 +145,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
      */
     @objc dynamic var systemAppearenceIsDark: Bool {
         set {
+            if systemAppearenceIsDark == newValue { return }
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsSystemAppearenceStyle)
             NotificationCenter.default.post(name: Notification.Name(ConfigurationService.themeChangeNotification), object: self)
         }

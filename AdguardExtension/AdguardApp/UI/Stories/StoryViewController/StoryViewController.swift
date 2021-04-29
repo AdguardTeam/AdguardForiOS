@@ -285,7 +285,7 @@ extension StoryViewController {
     }
     
     private func processContentForButton() {
-        guard let buttonConfig = currentStory.getConfig(configuration.proStatus) else {
+        guard let buttonConfig = currentStory.buttonConfig else {
             self.button?.removeFromSuperview()
             self.button = nil
             descLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor, constant: -24.0).isActive = true
@@ -293,7 +293,7 @@ extension StoryViewController {
         }
         
         let button = self.button == nil ? RoundRectButton() : self.button!
-        switch buttonConfig.style {
+        switch buttonConfig.buttonStyle {
         case .standard:
             button.applyStandardGreenStyle()
             button.customBackgroundColor = UIColor.AdGuardColor.lightGreen1
@@ -345,7 +345,7 @@ extension StoryViewController {
     }
     
     @objc private func buttonTapped() {
-        guard let buttonConfig = currentStory.getConfig(configuration.proStatus) else {
+        guard let buttonConfig = currentStory.buttonConfig else {
             DDLogError("(StoryViewController) There is no config for this story: \(currentStory.title ?? "")")
             return
         }
@@ -357,7 +357,7 @@ extension StoryViewController {
             switch actionType {
             case .readChangeLog:
                 return
-            case .activateLicense, .tryTrialFree:
+            case .activateLicense:
                 AppDelegate.shared.presentLicenseScreen()
             case .downloadAdguardVpn:
                 if UIApplication.adGuardVpnIsInstalled {

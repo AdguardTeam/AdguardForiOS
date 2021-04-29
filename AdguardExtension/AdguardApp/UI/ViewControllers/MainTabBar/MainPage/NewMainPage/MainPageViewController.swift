@@ -177,6 +177,8 @@ final class MainPageViewController: PullableContainerController {
         } else {
             showOnboarding()
         }
+        
+        updateTheme()
     }
     
     override func viewWillAppear(_ animated: Bool) {

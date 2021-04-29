@@ -26,7 +26,8 @@ struct StoryToken: Decodable, Equatable {
     //decodable fields
     let title: String?
     let description: String?
-    let configs: [StoryButtonConfig]?
+    let scope: StoryScope?
+    let buttonConfig: StoryButtonConfig?
         
     private enum LocalizedStringKeysWithFormat: String, CaseIterable {
         case whatsNewDescription = "story_whats_new_1_description"
@@ -44,7 +45,8 @@ struct StoryToken: Decodable, Equatable {
         case image
         case title
         case description
-        case configs = "action_config"
+        case scope
+        case buttonConfig = "button_config"
     }
     
     init(from decoder: Decoder) throws {
@@ -69,24 +71,7 @@ struct StoryToken: Decodable, Equatable {
             self.description = String.localizedString(descKey)
         }
         
-        self.configs = try? container.decode([StoryButtonConfig].self, forKey: .configs)
-    }
-    
-    
-    func getConfig(_ isPro: Bool) -> StoryButtonConfig? {
-        
-        if let forAll = configs?.first(where: { $0.status == .forAll }) {
-            return forAll
-        }
-        
-        if isPro, let forPro = configs?.first(where: { $0.status == .forPro }) {
-            return forPro
-        }
-        
-        if !isPro, let forFree = configs?.first(where: { $0.status == .forFree }) {
-            return forFree
-        }
-        
-        return nil
+        self.scope = try? container.decode(StoryScope.self, forKey: .scope)
+        self.buttonConfig = try? container.decode(StoryButtonConfig.self, forKey: .buttonConfig)
     }
 }

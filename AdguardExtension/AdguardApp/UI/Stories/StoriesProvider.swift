@@ -108,14 +108,11 @@ final class StoriesProvider: StoriesProviderProtocol {
     private func processStoriesSync() {
         var newStories = allStories
         
-        /* Do not show stories about license activation for premium users */
         if configuration.proStatus {
-            let dnsProtectionStoriesIndex = newStories.firstIndex(where: { $0.category.type == .dnsProtection })!
-            let activateLicenseStoryIndex = newStories[dnsProtectionStoriesIndex].storyTokens.firstIndex {
-                guard let configs = $0.configs else { return false }
-                return configs.contains { $0.actionType == .activateLicense }
-            }!
-            newStories[dnsProtectionStoriesIndex].storyTokens.remove(at: activateLicenseStoryIndex)
+            newStories = excludeStoriesWithScope(.forFree, stories: newStories)
+        } else {
+            /* Do not show stories about license activation for premium users */
+            newStories = excludeStoriesWithScope(.forPro, stories: newStories)
         }
         
         /* Do not show stories about VPN  */
@@ -153,6 +150,17 @@ final class StoriesProvider: StoriesProviderProtocol {
 
         return decodedContext
     }
+    
+    private func excludeStoriesWithScope(_ scope: StoryScope, stories: [StoryGroup]) -> [StoryGroup] {
+        var newStories = stories
+        newStories.enumerated().forEach {
+            let categoryIndex = $0.offset
+            newStories[categoryIndex].storyTokens = $0.element.storyTokens.filter {
+                $0.scope != scope
+            }
+        }
+        return newStories
+    }
 }
 
 // MARK: - StoriesContext
@@ -165,20 +173,28 @@ fileprivate struct StoriesContext: Decodable {
     let stories: [StoryGroup]
     let categories: [StoryCategory]
     let actions: [StoryActionType]
+    let buttonStyles: [StoryButtonStyle]
+    let storyScopes: [StoryScope]
     
     private enum CodingKeys: String, CodingKey {
         case stories = "stories"
         case categories = "categories"
         case actions = "actions"
+        case buttonStyles = "button_styles"
+        case storyScopes = "scopes"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
     
         let actionsKeys = try container.decode([String].self, forKey: .actions)
+        let buttonStylesKeys = try container.decode([String].self, forKey: .buttonStyles)
+        let storyScopesKeys = try container.decode([String].self, forKey: .storyScopes)
         
         self.categories = try container.decode([StoryCategory].self, forKey: .categories)
         self.actions = actionsKeys.compactMap { StoryActionType(rawValue: $0) }
+        self.buttonStyles = buttonStylesKeys.compactMap{ StoryButtonStyle(rawValue: $0) }
+        self.storyScopes = storyScopesKeys.compactMap { StoryScope(rawValue: $0) }
         
         let stories = try container.decode([StoryGroup].self, forKey: .stories)
         self.stories = Self.setCategoriesForStories(self.categories, stories)
