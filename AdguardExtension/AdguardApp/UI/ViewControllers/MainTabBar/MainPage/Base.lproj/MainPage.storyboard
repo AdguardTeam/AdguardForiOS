@@ -255,7 +255,7 @@
                                     <constraint firstItem="7lM-f7-rPq" firstAttribute="leading" secondItem="pdi-RN-fam" secondAttribute="leading" id="soI-Gj-C17"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-j7-akf">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="TKh-j7-akf">
                                 <rect key="frame" x="8" y="520" width="398" height="56"/>
                             </stackView>
                         </subviews>
@@ -281,7 +281,6 @@
                             <constraint firstItem="3F1-al-rZI" firstAttribute="top" secondItem="Ttf-uM-oMJ" secondAttribute="bottom" constant="8" id="pbU-1O-1AX"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="centerX" secondItem="Gje-R9-bB4" secondAttribute="centerX" id="pcA-d3-Z5F"/>
                             <constraint firstItem="b38-gh-HpL" firstAttribute="width" relation="greaterThanOrEqual" secondItem="z6T-C3-W12" secondAttribute="width" multiplier="0.5" id="sY7-p4-eHr"/>
-                            <constraint firstItem="TKh-j7-akf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3F1-al-rZI" secondAttribute="bottom" constant="16" id="sbA-7g-g4i"/>
                             <constraint firstItem="Gje-R9-bB4" firstAttribute="trailing" secondItem="OjK-AE-DPG" secondAttribute="trailing" id="umG-Ax-olY"/>
                             <constraint firstItem="3F1-al-rZI" firstAttribute="centerY" secondItem="Gje-R9-bB4" secondAttribute="centerY" id="wEi-cA-pLX"/>
                         </constraints>
