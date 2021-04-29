@@ -107,18 +107,20 @@ final class StoriesProvider: StoriesProviderProtocol {
     
     private func processStoriesSync() {
         var newStories = allStories
-        
-        if configuration.proStatus {
-            newStories = excludeStoriesWithScope(.forFree, stories: newStories)
-        } else {
-            /* Do not show stories about license activation for premium users */
-            newStories = excludeStoriesWithScope(.forPro, stories: newStories)
-        }
-        
+        var exclusionList: [StoryScope] = []
+
         /* Do not show stories about VPN  */
         if UIApplication.adGuardVpnIsInstalled {
-            newStories = excludeStoryCategoriesWithScopes([.forVpnAppPromotion], stories: newStories)
+            exclusionList.append(.forVpnAppPromotion)
         }
+        
+        if configuration.proStatus {
+            exclusionList.append(.forFree)
+        } else {
+            exclusionList.append(.forPro)
+        }
+        
+        newStories = excludeStoriesWith(exclusionList, stories: newStories)
         
         if stories != newStories {
             DispatchQueue.main.async { [weak self] in
@@ -150,28 +152,21 @@ final class StoriesProvider: StoriesProviderProtocol {
         return decodedContext
     }
     
-    private func excludeStoriesWithScope(_ scope: StoryScope, stories: [StoryGroup]) -> [StoryGroup] {
-        var newStories = stories
-        newStories.enumerated().forEach {
-            let categoryIndex = $0.offset
-            newStories[categoryIndex].storyTokens = $0.element.storyTokens.filter {
-                $0.scope != scope
+    private func excludeStoriesWith(_ scopes: [StoryScope], stories: [StoryGroup]) -> [StoryGroup] {
+        stories.compactMap {
+            var group = $0
+            let filtered = $0.storyTokens.filter { token in
+                guard let inScope = token.scope else  { return false }
+                return !scopes.contains(inScope)
+            }
+            
+            if filtered.isEmpty {
+                return nil
+            } else {
+                group.storyTokens = filtered
+                return group
             }
         }
-        return newStories
-    }
-    
-    private func excludeStoryCategoriesWithScopes(_ scopes: [StoryScope], stories: [StoryGroup]) -> [StoryGroup] {
-        let newStories = stories.filter {
-            let numberOfTokensInCategory = $0.storyTokens.count
-            var count = 0
-            $0.storyTokens.forEach { token in
-                guard let scope = token.scope else { return }
-                if scopes.contains(scope) { count += 1 }
-            }
-            return count != numberOfTokensInCategory
-        }
-        return newStories
     }
 }
 
