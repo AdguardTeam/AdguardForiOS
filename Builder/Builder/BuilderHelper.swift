@@ -29,7 +29,7 @@ class BuilderHelper: NSObject {
     
     private let networking = HttpRequestService()
     func loadFiltersMetadata(completion: @escaping (ABECFilterClientMetadata?)->Void) {
-        networking.loadFiltersMetadata(completion: completion)
+        networking.loadFiltersMetadata(version: "1.0", id: "builder", cid: "none", lang: "en", completion: completion)
     }
     
     func loadFiltersLocalizations(completion: @escaping (ABECFilterClientLocalization?)->Void) {

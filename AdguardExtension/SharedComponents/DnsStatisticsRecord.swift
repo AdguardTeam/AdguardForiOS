@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 class DnsStatisticsRecord: CustomDebugStringConvertible {
     var date: Date

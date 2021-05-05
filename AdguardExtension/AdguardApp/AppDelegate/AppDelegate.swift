@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private var rateService: RateAppServiceProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
-    private var safariProtection: SafariProtectionServiceProtocol
+    private var safariProtection: SafariProtectionService
     private var themeService: ThemeServiceProtocol
     private var filtersService: FiltersServiceProtocol
     

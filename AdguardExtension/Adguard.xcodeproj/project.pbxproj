@@ -4902,7 +4902,6 @@
 				D00E674E2472EA2D00161A74 /* Common-Config.xcconfig */,
 				65F398131B7B684700ABCD39 /* AdguardApp */,
 				659886E91CF8315F003ECD1C /* AdguardPro */,
-				D048A33825FA4F85008CEC80 /* sdk */,
 				65F3985F1B7B6A5300ABCD39 /* Extension */,
 				65C52B371B906105003AF42F /* ActionExtension */,
 				65EC9A021BB9824C00F53F3B /* Libs */,
@@ -5519,13 +5518,6 @@
 				D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */,
 			);
 			path = ContentBlockers;
-			sourceTree = "<group>";
-		};
-		D048A33825FA4F85008CEC80 /* sdk */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = sdk;
 			sourceTree = "<group>";
 		};
 		D04B97DE1F601D1900CE2E03 /* MGSwipeTableCell */ = {
@@ -11984,7 +11976,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12033,7 +12025,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;

@@ -171,7 +171,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var safariProtection: SafariProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var safariProtection: SafariProtectionService = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, filtersService: filtersService, safariProtection: safariProtection) }()
