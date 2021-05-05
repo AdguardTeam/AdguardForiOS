@@ -36,10 +36,10 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let purchaseService: PurchaseServiceProtocol
     private let contentBlockerService: ContentBlockerServiceProtocol
-    private let resources: AESharedResources
+    private let resources: AESharedResourcesProtocol
     private let safariProtection: SafariProtectionServiceProtocol
     
-    init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol, resources: AESharedResources, safariProtection: SafariProtectionServiceProtocol) {
+    init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionServiceProtocol) {
         self.antibanner = antibanner
         self.networking = networking
         self.filtersService = filtersService

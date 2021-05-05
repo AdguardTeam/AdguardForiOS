@@ -135,7 +135,7 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    init(resources: ResourcesProtocol, antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public init(resources: ResourcesProtocol, antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         self.resources = resources
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController

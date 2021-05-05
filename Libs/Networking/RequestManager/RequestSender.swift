@@ -18,11 +18,11 @@
 
 import Foundation
 
-final class RequestSender: RequestSenderProtocol{
+public final class RequestSender: RequestSenderProtocol{
     
     let session = URLSession.shared
     
-    func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
+    public func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
         
         guard let urlRequest = requestConfig.request.urlRequest else {
             completionHandler(Result.error(RequestSenderErrors.stringToUrlError))

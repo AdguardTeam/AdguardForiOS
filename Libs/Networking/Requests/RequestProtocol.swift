@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol RequestProtocol {
+public protocol RequestProtocol {
     var urlRequest: URLRequest? { get }
 }
 

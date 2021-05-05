@@ -18,22 +18,27 @@
 
 import Foundation
 
-struct RequestConfig<Parser> where Parser: ParserProtocol {
-    let request: RequestProtocol
-    let parser: Parser
+public struct RequestConfig<Parser> where Parser: ParserProtocol {
+    public let request: RequestProtocol
+    public let parser: Parser
+    
+    public init(request: RequestProtocol, parser: Parser) {
+        self.request = request
+        self.parser = parser
+    }
 }
 
-enum RequestSenderErrors: Error {
+public enum RequestSenderErrors: Error {
     case stringToUrlError
     case receivedDataParsingError
 }
 
-enum Result<Model> {
+public enum Result<Model> {
     case success(Model)
     case error(Error)
 }
 
-protocol RequestSenderProtocol {
+public protocol RequestSenderProtocol {
     func send<Parser>(requestConfig: RequestConfig<Parser>,
                       completionHandler: @escaping(Result<Parser.Model>) -> Void)
 }

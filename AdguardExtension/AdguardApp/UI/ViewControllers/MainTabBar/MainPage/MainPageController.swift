@@ -174,7 +174,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private lazy var safariProtection: SafariProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
-    private let mainPageModel: MainPageModelProtocol
+    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, filtersService: filtersService, safariProtection: safariProtection) }()
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
@@ -187,7 +187,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - View Controller life cycle
     
     required init?(coder: NSCoder) {
-        mainPageModel = MainPageModel(resource: resources, filtersService: filtersService, safariProtection: safariProtection)
         super.init(coder: coder)
     }
     

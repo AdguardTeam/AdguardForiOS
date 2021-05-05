@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol ParserProtocol {
+public protocol ParserProtocol {
     associatedtype Model
     func parse(data: Data, response: URLResponse?) -> Model?
 }

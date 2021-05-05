@@ -50,7 +50,7 @@ class StartupService : NSObject{
         purchaseService.start()
         locator.addService(service: purchaseService)
         
-        let safariService = SafariService(resources: sharedResources)
+        let safariService = SafariService(mainAppBundleId: Bundle.main.bundleIdentifier!)
         locator.addService(service: safariService)
     
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
@@ -85,19 +85,25 @@ class StartupService : NSObject{
         let antibanner: AESAntibannerProtocol = AESAntibanner(resources: sharedResources)
         locator.addService(service: antibanner)
         
-        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, resources: sharedResources, productInfo: productInfo)
+        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, version: productInfo.version())
         locator.addService(service: antibannerController)
         
         let filtersStorage: FiltersStorageProtocol = FiltersStorage()
         locator.addService(service: filtersStorage)
         
-        let contentBlockerService = ContentBlockerService(resources: sharedResources, safariService: safariService, antibanner: antibanner, safariProtection: safariProtection, filtersStorage: filtersStorage)
+        let sdkResources = Resources(contentFolder: sharedResources.sharedResuorcesURL())
+        let contentBlockerService = ContentBlockerService(resources: sdkResources, safariService: safariService, antibanner: antibanner, filtersStorage: filtersStorage)
         locator.addService(service: contentBlockerService)
         
         let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
         locator.addService(service: httpRequestService)
         
-        let filtersService: FiltersServiceProtocol = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlockerService, resources: sharedResources, httpRequestService: httpRequestService, filtersStorage: filtersStorage)
+        let version = productInfo.version() ?? ""
+        let lang = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+        let id = Bundle.main.isPro ? "ios_pro" : "ios"
+        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
+
+        let filtersService: FiltersServiceProtocol = FiltersService(resources: sdkResources, antibannerController: antibannerController, contentBlocker: contentBlockerService, httpRequestService: httpRequestService, filtersStorage: filtersStorage, version: version, id: id, cid: cid, lang: lang, protectionEnabled: sharedResources.safariProtectionEnabled, userFilterEnabled: sharedResources.safariUserFilterEnabled, whitelistEnabled: sharedResources.safariWhitelistEnabled, invertedWhitelist: sharedResources.invertedWhitelist)
         
         locator.addService(service: filtersService)
         
@@ -131,7 +137,7 @@ class StartupService : NSObject{
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)
         
-        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage)
+        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
         locator.addService(service: migrationService)
         
         let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
@@ -140,7 +146,7 @@ class StartupService : NSObject{
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
         
-        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(antibanner: antibanner, networking: networkService, filtersService: filtersService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, contentBlockerService: contentBlockerService)
+        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(antibanner: antibanner, networking: networkService, filtersService: filtersService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, contentBlockerService: contentBlockerService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: importSettings)
         
         let webReporter: ActionWebReporterProtocol = ActionWebReporter(productInfo: productInfo, antibanner: antibanner, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService)

@@ -18,10 +18,10 @@
 
 import Foundation
 
-protocol HttpRequestServiceProtocol {
+public protocol HttpRequestServiceProtocol {
     var requestSender: RequestSenderProtocol { get }
 }
 
-class HttpRequestService: NSObject, HttpRequestServiceProtocol {
-    var requestSender: RequestSenderProtocol = RequestSender()
+public class HttpRequestService: NSObject, HttpRequestServiceProtocol {
+    public var requestSender: RequestSenderProtocol = RequestSender()
 }

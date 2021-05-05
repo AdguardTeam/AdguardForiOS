@@ -18,6 +18,6 @@
 
 import Foundation
 
-struct RequestFactory {
+public struct RequestFactory {
     
 }
