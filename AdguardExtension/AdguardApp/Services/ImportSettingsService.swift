@@ -36,8 +36,10 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let purchaseService: PurchaseServiceProtocol
     private let contentBlockerService: ContentBlockerServiceProtocol
+    private let resources: AESharedResources
+    private let safariProtection: SafariProtectionServiceProtocol
     
-    init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol) {
+    init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol, resources: AESharedResources, safariProtection: SafariProtectionServiceProtocol) {
         self.antibanner = antibanner
         self.networking = networking
         self.filtersService = filtersService
@@ -45,6 +47,8 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         self.dnsProvidersService = dnsProvidersService
         self.purchaseService = purchaseService
         self.contentBlockerService = contentBlockerService
+        self.resources = resources
+        self.safariProtection = safariProtection
     }
     
     func applySettings(_ settings: Settings, callback: @escaping (Settings) -> Void) {
@@ -150,7 +154,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private func applyCBFilters(_ filters: [DefaultCBFilterSettings]?, override: Bool)-> [DefaultCBFilterSettings]{
         
         if override {
-            filtersService.disableAllFilters()
+            filtersService.disableAllFilters(protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
         }
         
         var resultFilters: [DefaultCBFilterSettings] = []
@@ -162,7 +166,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
                 let cbFilter = allFilters.first { $0.filterId == filter.id }
                 
                 if cbFilter != nil {
-                    filtersService.setFilter(cbFilter!, enabled: filter.enable)
+                    filtersService.setFilter(cbFilter!, enabled: filter.enable, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
                     filter.status = .successful
                 }
                 else {
@@ -198,7 +202,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
                 if !filter.name.isEmpty {
                     parserResult.meta.name = filter.name
                 }
-                self.filtersService.addCustomFilter(parserResult)
+                self.filtersService.addCustomFilter(parserResult, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertedWhitelist: self.resources.invertedWhitelist)
                 callback(true)
                 return
             }

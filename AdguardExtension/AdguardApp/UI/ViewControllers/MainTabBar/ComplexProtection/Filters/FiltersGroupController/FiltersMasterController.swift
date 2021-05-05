@@ -29,6 +29,8 @@ class FiltersMasterController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
+    private let resources: AESharedResources = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     weak var searchDelegate: FilterMasterControllerDelegate?
     weak var groupsDelegate: FilterMasterControllerDelegate?
@@ -41,7 +43,7 @@ class FiltersMasterController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        viewModel = FiltersAndGroupsViewModel(filtersService: filtersService, configurationService: configurationService)
+        viewModel = FiltersAndGroupsViewModel(filtersService: filtersService, configurationService: configurationService, resources: resources, safariProtection: safariProtection)
     }
     
     

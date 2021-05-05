@@ -98,6 +98,8 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     private var groupsObserver: ((_ index: Int)->Void)?
     private var filtersService: FiltersServiceProtocol
     private var configurationService: ConfigurationService
+    private var resources: AESharedResources
+    private var safariProtection: SafariProtectionServiceProtocol
     
     
     // MARK: - Callbacks
@@ -109,9 +111,11 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     // MARK: - initializers
     
-    init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService) {
+    init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService, resources: AESharedResources, safariProtection: SafariProtectionServiceProtocol) {
         self.configurationService = configurationService
         self.filtersService = filtersService
+        self.resources = resources
+        self.safariProtection = safariProtection
         super.init()
         
         updateAllGroups()
@@ -215,23 +219,23 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func set(filter: Filter, enabled: Bool) {
-        filtersService.setFilter(filter, enabled: enabled)
+        filtersService.setFilter(filter, enabled: enabled, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
     }
     
     func set(groupId: Int, enabled: Bool) {
-        filtersService.setGroup(groupId, enabled: enabled)
+        filtersService.setGroup(groupId, enabled: enabled, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
         guard let group = getGroupFromSearchGroups(by: groupId) else { return }
         group.enabled = enabled
     }
 
     func load(_ completion: @escaping () -> Void) {
-        filtersService.load(refresh: false) {_,_ in
+        filtersService.load(refresh: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in
             completion()
         }
     }
     
     func refresh(_ completion: @escaping () -> Void) {
-        filtersService.load(refresh: true) { [weak self] _,_  in
+        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) { [weak self] _,_  in
             self?.updateAllGroups()
             self?.updateCurrentGroup()
             completion()
@@ -243,7 +247,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func addCustomFilter(filter: AASCustomFilterParserResult, completion: @escaping (Bool) -> Void) {
-        filtersService.addCustomFilter(filter)
+        filtersService.addCustomFilter(filter, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
         updateAllGroups()
         completion(true)
         callAllCallbacks()

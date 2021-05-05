@@ -42,6 +42,7 @@ class MigrationService: MigrationServiceProtocol {
     private let contentBlockerService: ContentBlockerServiceProtocol
     private let nativeProviders: NativeProvidersServiceProtocol
     private let filtersStorage: FiltersStorageProtocol
+    private let safariProtection: SafariProtectionServiceProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
     
@@ -59,7 +60,8 @@ class MigrationService: MigrationServiceProtocol {
          productInfo: ADProductInfoProtocol,
          contentBlockerService: ContentBlockerServiceProtocol,
          nativeProviders: NativeProvidersServiceProtocol,
-         filtersStorage: FiltersStorageProtocol) {
+         filtersStorage: FiltersStorageProtocol,
+         safariProtection: SafariProtectionServiceProtocol) {
         self.vpnManager = vpnManager
         self.dnsProvidersService = dnsProvidersService
         self.resources = resources
@@ -75,6 +77,7 @@ class MigrationService: MigrationServiceProtocol {
         self.contentBlockerService = contentBlockerService
         self.nativeProviders = nativeProviders
         self.filtersStorage = filtersStorage
+        self.safariProtection = safariProtection
     }
     
     func install() {
@@ -302,7 +305,7 @@ class MigrationService: MigrationServiceProtocol {
             self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
         }
             
-        filtersService.load(refresh: true) {_,_ in }
+        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in }
     }
     
     private func updateDnsFilters() {
@@ -411,7 +414,7 @@ class MigrationService: MigrationServiceProtocol {
     
     private func removeOptimizeFeature() {
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        contentBlockerService.reloadJsons(backgroundUpdate: false) { error in
+        contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) { error in
             if let error = error {
                 DDLogError("Error while removing 'optimize' feature; Error = \(error.localizedDescription)")
             }

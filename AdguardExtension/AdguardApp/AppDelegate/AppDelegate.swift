@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private var rateService: RateAppServiceProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
+    private var safariProtection: SafariProtectionServiceProtocol
     private var themeService: ThemeServiceProtocol
     private var filtersService: FiltersServiceProtocol
     
@@ -93,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
         self.filtersService = ServiceLocator.shared.getService()!
+        self.safariProtection = ServiceLocator.shared.getService()!
         
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
         super.init()
@@ -105,6 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                    contentBlockerService: contentBlockerService,
                                                    antibanner: antibanner,
                                                    complexProtection: complexProtection,
+                                                   safariProtection: safariProtection,
                                                    dnsFiltersService: dnsFiltersService,
                                                    safariService: safariService,
                                                    networking: networking,
@@ -219,7 +222,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                              purchaseService: purchaseService,
                                              activityStatisticsService: activityStatisticsService,
                                              dnsStatisticsService: dnsStatisticsService,
-                                             dnsLogRecordsService: dnsLogRecordsService)
+                                             dnsLogRecordsService: dnsLogRecordsService,
+                                             safariProtection: safariProtection)
         resetProcessor.resetAllSettings()
     }
     

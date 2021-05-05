@@ -19,35 +19,35 @@
 import Foundation
 
 // MARK: - data types -
-class Filter: NSObject, NSCopying, FilterDetailedInterface {
+public class Filter: NSObject, NSCopying, FilterDetailedInterface {
     
-    let filterId: Int
+    public let filterId: Int
     
-    var name: String?
-    var desc: String?
-    var version: String?
-    var enabled: Bool = false
-    var homepage: String?
-    var subscriptionUrl: String?
-    var tags:[(name: String, highlighted: Bool)]?
-    var langs:[(name: String, highlighted: Bool)]?
-    var rulesCount: Int?
-    var groupId: Int
-    var displayNumber: Int?
-    var updateDate: Date?
-    var searchAttributedString: NSAttributedString?
-    var removable: Bool {
+    public var name: String?
+    public var desc: String?
+    public var version: String?
+    public var enabled: Bool = false
+    public var homepage: String?
+    public var subscriptionUrl: String?
+    public var tags:[(name: String, highlighted: Bool)]?
+    public var langs:[(name: String, highlighted: Bool)]?
+    public var rulesCount: Int?
+    public var groupId: Int
+    public var displayNumber: Int?
+    public var updateDate: Date?
+    public var searchAttributedString: NSAttributedString?
+    public var removable: Bool {
         get {
             return groupId == AdGuardFilterGroup.custom.rawValue
         }
     }
-    var editable: Bool {
+    public var editable: Bool {
         get {
             return groupId == AdGuardFilterGroup.custom.rawValue
         }
     }
     
-    init(filterId: Int, groupId: Int) {
+    public init(filterId: Int, groupId: Int) {
         self.filterId = filterId
         self.groupId = groupId
         super.init()
@@ -55,7 +55,7 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     
     // MARK: - NSCopying protocol
     /* Creates copy of a class with another reference */
-    func copy(with zone: NSZone? = nil) -> Any {
+    public func copy(with zone: NSZone? = nil) -> Any {
         let copy = Filter(filterId: filterId, groupId: groupId)
         
         copy.name = name
@@ -75,35 +75,35 @@ class Filter: NSObject, NSCopying, FilterDetailedInterface {
     }
 }
 
-class Group: Hashable, NSCopying {
+public class Group: Hashable, NSCopying {
     
-    let groupId: Int
+    public let groupId: Int
     
-    var name: String?
-    var subtitle: String?
-    var enabled: Bool = false
-    var iconName: String?
-    var disabledIconName: String?
-    var proOnly: Bool = false
+    public var name: String?
+    public var subtitle: String?
+    public var enabled: Bool = false
+    public var iconName: String?
+    public var disabledIconName: String?
+    public var proOnly: Bool = false
     
-    var filters: [Filter] = [Filter]()
+    public var filters: [Filter] = [Filter]()
     
     init(_ groupId: Int) {
         self.groupId = groupId
     }
     
     // MARK: - Hashable protocol
-    static func == (lhs: Group, rhs: Group) -> Bool {
+    public static func == (lhs: Group, rhs: Group) -> Bool {
         return lhs.groupId == rhs.groupId
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(groupId)
     }
 
     // MARK: - NSCopying protocol
     /* Creates copy of a class with another reference */
-    func copy(with zone: NSZone? = nil) -> Any {
+    public func copy(with zone: NSZone? = nil) -> Any {
         let copy = Group(groupId)
         copy.name = name
         copy.subtitle = subtitle

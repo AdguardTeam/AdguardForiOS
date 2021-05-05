@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "Lang/NSException+Utils.h"
-//#import "Lang/NSString+Utils.h"
+#import "Lang/NSString+Utils.h"
 #import "Lang/NSURL+Utils.h"
 #import "Lang/ACLLogger.h"
 #import "Lang/ACLFileLogger.h"

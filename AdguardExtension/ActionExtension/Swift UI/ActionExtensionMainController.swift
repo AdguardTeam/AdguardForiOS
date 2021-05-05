@@ -65,7 +65,7 @@ class ActionExtensionMainController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = LocalizationNotNeeded(Constants.aeProductName())
+        title = Constants.aeProductName()
         
         configuration = SimpleConfigurationSwift(withResources: resources!, systemAppearenceIsDark: systemStyleIsDark)
         self.theme = ThemeService(configuration!)
@@ -82,7 +82,7 @@ class ActionExtensionMainController: UITableViewController {
             if (!enabled){
                 DispatchQueue.main.async{[weak self] in
                     guard let sSelf = self else { return }
-                    ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: ACLocalizedString("common_warning_title", nil), message: ACLocalizedString("content_blocker_disabled_format", nil))
+                    ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: String.localizedString("common_warning_title"), message: String.localizedString("content_blocker_disabled_format"))
                 }
             }
         }
@@ -124,7 +124,7 @@ class ActionExtensionMainController: UITableViewController {
                 //check rule overlimit
                 if !(sSelf.enableChangeDomainFilteringStatus) {
                     DispatchQueue.main.async {
-                        ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: ACLocalizedString("common_error_title", nil), message: ACLocalizedString("filter_rules_maximum", nil))
+                        ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: String.localizedString("common_error_title"), message: String.localizedString("filter_rules_maximum"))
                         sSelf.enabledSwitch.isOn = sSelf.domainEnabled
                     }
                     return
@@ -211,7 +211,7 @@ class ActionExtensionMainController: UITableViewController {
             }
         }
         else{
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: ACLocalizedString("common_error_title", nil), message: ACLocalizedString("assistant_launching_unable", nil))
+            ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("assistant_launching_unable"))
             enabledSwitch.isOn = domainEnabled
         }
     }

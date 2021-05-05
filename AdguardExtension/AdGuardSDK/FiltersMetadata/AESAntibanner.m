@@ -29,6 +29,7 @@
 #import "NSException+Utils.h"
 #import "NSDate+Utils.h"
 #import "NSString+Utils.h"
+#import "ABECFilter.h"
 
 #define MAX_SQL_IN_STATEMENT_COUNT        100
 #define UPDATE_METADATA_TIMEOUT           3.0

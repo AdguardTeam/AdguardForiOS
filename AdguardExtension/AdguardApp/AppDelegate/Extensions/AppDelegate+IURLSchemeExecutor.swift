@@ -25,6 +25,7 @@ extension AppDelegate: IURLSchemeExecutor {
         let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
         let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
         let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+        let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
         
         antibannerController.onReady { antibanner in
             DispatchQueue.main.async {
@@ -32,7 +33,8 @@ extension AppDelegate: IURLSchemeExecutor {
                                                                       contentBlockerService: contentBlockerService,
                                                                       antibanner: antibanner,
                                                                       theme: themeService,
-                                                                      productInfo: productInfo)
+                                                                      productInfo: productInfo,
+                                                                      safariProtection: safariProtection)
                 
                 self.presentUserFilterController(showLaunchScreen: true, model, newRule: rule)
             }

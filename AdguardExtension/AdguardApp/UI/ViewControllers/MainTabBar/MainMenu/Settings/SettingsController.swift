@@ -26,6 +26,7 @@ class SettingsController: UITableViewController {
     private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
     private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
@@ -304,7 +305,7 @@ class SettingsController: UITableViewController {
         if oldValue != newValue {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
             
-            contentBlockerService.reloadJsons(backgroundUpdate: false) { [weak self] (error) in
+            contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) { [weak self] (error) in
                 if error != nil {
                     self?.resources.sharedDefaults().set(oldValue, forKey: AEDefaultsInvertedWhitelist)
                     DispatchQueue.main.async {

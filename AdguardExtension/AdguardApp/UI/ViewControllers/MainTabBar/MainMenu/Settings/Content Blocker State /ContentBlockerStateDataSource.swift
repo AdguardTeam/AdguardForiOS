@@ -52,39 +52,45 @@ class ContentBlocker: ContentBlockerStateProtocol {
     
     var numberOfRules: Int {
         get {
-            guard let key = ContentBlockerService.defaultsCountKeyByBlocker[contentBlockerType!] else { return 0}
-            let number = resources.sharedDefaults().integer(forKey: key)
-            return number
+            //todo:
+//
+//            guard let key = ContentBlockerService.defaultsCountKeyByBlocker[contentBlockerType!] else { return 0}
+//            let number = resources.sharedDefaults().integer(forKey: key)
+//            return number
+            return 0
         }
     }
     
     var numberOfOverlimitedRules: Int {
         get {
-            let number = resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlockerType!]!)
-            return number
+            // todo:
+//            let number = resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlockerType!]!)
+//            return number
+            return 0
         }
     }
     
     var filters: String {
         get {
             var returnString = ""
-            let groupIds = ContentBlockerService.groupsByContentBlocker[contentBlockerType!]
-            let groups = filterService.groups.filter({ (filter)->Bool in groupIds!.contains { (groupId) -> Bool in
-                groupId.rawValue == filter.groupId
-            }})
-            let enabledGroups = groups.filter({ $0.enabled })
-            for group in enabledGroups {
-                let filters = group.filters.filter({ $0.enabled == true })
-                let filterNames = filters.map({ $0.name })
-                filterNames.forEach({ returnString += $0! + "\n"})
-            }
-            
-            returnString += userFilterString ?? ""
-            
-            if returnString.count > 0{
-                returnString.removeLast(1)
-                returnString = ACLocalizedString("content_blocker_filters", nil) + "\n" + returnString
-            }
+//            todo:
+//            let groupIds = ContentBlockerService.groupsByContentBlocker[contentBlockerType!]
+//            let groups = filterService.groups.filter({ (filter)->Bool in groupIds!.contains { (groupId) -> Bool in
+//                groupId.rawValue == filter.groupId
+//            }})
+//            let enabledGroups = groups.filter({ $0.enabled })
+//            for group in enabledGroups {
+//                let filters = group.filters.filter({ $0.enabled == true })
+//                let filterNames = filters.map({ $0.name })
+//                filterNames.forEach({ returnString += $0! + "\n"})
+//            }
+//
+//            returnString += userFilterString ?? ""
+//
+//            if returnString.count > 0{
+//                returnString.removeLast(1)
+//                returnString = ACLocalizedString("content_blocker_filters", nil) + "\n" + returnString
+//            }
             return returnString
         }
     }

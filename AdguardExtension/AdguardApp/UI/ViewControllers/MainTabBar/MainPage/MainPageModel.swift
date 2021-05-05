@@ -18,13 +18,13 @@
 
 import Foundation
 
-protocol MainPageModelDelegate: class {
+protocol MainPageModelDelegate: AnyObject {
     func updateStarted()
     func updateFinished(message: String?)
     func updateFailed(error: String)
 }
 
-protocol MainPageModelProtocol: class {
+protocol MainPageModelProtocol: AnyObject {
     func updateFilters()
     var delegate: MainPageModelDelegate? { get set }
 }
@@ -36,11 +36,15 @@ class MainPageModel: MainPageModelProtocol {
     // MARK: - private members
     
     private let filtersService: FiltersServiceProtocol
+    private let safariProtection: SafariProtectionServiceProtocol
+    private let resources: AESharedResourcesProtocol
     
     // MARK: - init
     
-    init(filtersService: FiltersServiceProtocol) {
+    init(resource: AESharedResourcesProtocol, filtersService: FiltersServiceProtocol, safariProtection: SafariProtectionServiceProtocol) {
+        self.resources = resource
         self.filtersService = filtersService
+        self.safariProtection = safariProtection
     }
     
     // MARK: - public methods
@@ -50,7 +54,7 @@ class MainPageModel: MainPageModelProtocol {
      */
     func updateFilters() {
         delegate?.updateStarted()
-        filtersService.load(refresh: true) { [weak delegate] filtersCount, error in
+        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) { [weak delegate] filtersCount, error in
             
             if error != nil {
                 delegate?.updateFailed(error: String.localizedString("filter_updates_error"))

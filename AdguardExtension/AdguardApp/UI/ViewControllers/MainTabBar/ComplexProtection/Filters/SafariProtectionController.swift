@@ -37,6 +37,7 @@ class SafariProtectionController: UITableViewController {
     private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     private var filtersCountObservation: Any?
     private var activeFiltersCountObservation: Any?
@@ -58,7 +59,7 @@ class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     
     required init?(coder: NSCoder) {
-        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo)
+        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
         super.init(coder: coder)
     }
     
@@ -66,7 +67,7 @@ class SafariProtectionController: UITableViewController {
         if segue.identifier == whiteListSegue {
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme)
+                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection)
                 controller.model = model
             }
         } else if segue.identifier == blackListSegue {

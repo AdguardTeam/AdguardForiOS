@@ -16,8 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "AESharedResources.h"
-//#import "ACommons/ACLang.h"
-#import "ABECFilter.h"
+#import "ACommons/ACLang.h"
+//#import "ABECFilter.h"
 #import "NSString+Utils.h"
 
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;

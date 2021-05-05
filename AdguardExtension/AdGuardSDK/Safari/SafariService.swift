@@ -70,7 +70,7 @@ public protocol SFContentBlockerManagerProtocol {
 
 // MARK: - SafariService -
 
-public class SafariService: NSObject, SafariServiceProtocol {
+@objc public class SafariService: NSObject, SafariServiceProtocol {
     
     static let safariServiceErrorDomain = "SafariServiceErrorDomain"
     static let safariServiceErrorCode = -1
@@ -114,12 +114,12 @@ public class SafariService: NSObject, SafariServiceProtocol {
     
     private let workQueue = DispatchQueue(label: "safari_service")
     
-    static let filterBeganUpdating = Notification.Name("filterBeganUpdating")
-    static let filterFinishedUpdating = Notification.Name("filterFinishedUpdating")
-    static let contentBlcokersChecked = Notification.Name("contentBlcokersChecked")
-    static let contentBlcokersUpdating = Notification.Name("contentBlcokersUpdating")
-    static let contentBlockerTypeString = "contentBlockerType"
-    static let successString = "success"
+    public static let filterBeganUpdating = Notification.Name("filterBeganUpdating")
+    public static let filterFinishedUpdating = Notification.Name("filterFinishedUpdating")
+    public static let contentBlcokersChecked = Notification.Name("contentBlcokersChecked")
+    public static let contentBlcokersUpdating = Notification.Name("contentBlcokersUpdating")
+    public static let contentBlockerTypeString = "contentBlockerType"
+    public static let successString = "success"
     
     private var contentBlockersEnabled = [ContentBlockerType : Bool]()
     
@@ -171,17 +171,21 @@ public class SafariService: NSObject, SafariServiceProtocol {
             completion(resultError)
         }
     }
+    
+    @objc public func ttt() {
+        print("ttt")
+    }
 
     @objc
-    func filenameById(_ contentBlockerId: String) -> String? {
+    public func filenameById(_ contentBlockerId: String) -> String {
         
         for (type, blockerId) in contenBlockerBundleIdByType {
             if blockerId == contentBlockerId {
-                return fileNames[type]
+                return fileNames[type] ?? ""
             }
         }
         
-        return nil
+        return ""
     }
     
     // MARK: save/load files

@@ -40,6 +40,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResources = ServiceLocator.shared.getService()!
     
     weak var delegate: DnsFiltersControllerDelegate?
     
@@ -106,7 +108,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             guard let self = self else { return }
             
             if let customFilter = self.filter as? Filter {
-                self.filtersService.deleteCustomFilter(customFilter)
+                self.filtersService.deleteCustomFilter(customFilter, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertedWhitelist: self.resources.invertedWhitelist)
             }
             
             if let dnsFilter = self.filter as? DnsFilter {
@@ -185,6 +187,8 @@ class FilterDetailsTableCotroller : UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResources = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
     
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
@@ -313,7 +317,7 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         if let safariFilter = filter as? Filter {
-            filtersService.setFilter(safariFilter, enabled: sender.isOn)
+            filtersService.setFilter(safariFilter, enabled: sender.isOn, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
         }
         if let dnsFilter = filter as? DnsFilter {
             dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)

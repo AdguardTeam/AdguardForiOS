@@ -21,31 +21,32 @@ import Foundation
 
 extension MigrationService {
     
+    // todo: move it to sdk?
     func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol) {
-        
-        let activeFilterIds = antibanner.activeFilterIDs()
-        for filterId in activeFilterIds {
-            let rules = antibanner.activeRules(forFilter: filterId)
-            
-            // already converted or empty filter
-            if rules.count == 0 { continue }
-            
-            let ruleTexts = rules.map { (rule) -> String in
-                // add affinity comments to rule
-                let rule = rule as ASDFilterRule
-                let affinity = rule.affinity == nil ? nil : Affinity(rawValue: rule.affinity!.uint8Value)
-                return AffinityRulesParser.ruleWithAffinity(rule.ruleText, affinity: affinity)
-            }
-            
-            let text = ruleTexts.joined(separator: "/n")
-            
-            if let error = storage.saveFilter(identifier: filterId.intValue, content: text) {
-                DDLogError("migrateFilterRulesIfNeeded - save filter error: \(error)")
-                continue
-            }
-            
-            // remove rules from database
-            antibanner.removeRules(forFilter: filterId)
-        }
+//
+//        let activeFilterIds = antibanner.activeFilterIDs()
+//        for filterId in activeFilterIds {
+//            let rules = antibanner.activeRules(forFilter: filterId)
+//
+//            // already converted or empty filter
+//            if rules.count == 0 { continue }
+//
+//            let ruleTexts = rules.map { (rule) -> String in
+//                // add affinity comments to rule
+//                let rule = rule as ASDFilterRule
+//                let affinity = rule.affinity == nil ? nil : Affinity(rawValue: rule.affinity!.uint8Value)
+//                return AffinityRulesParser.ruleWithAffinity(rule.ruleText, affinity: affinity)
+//            }
+//
+//            let text = ruleTexts.joined(separator: "/n")
+//
+//            if let error = storage.saveFilter(identifier: filterId.intValue, content: text) {
+//                DDLogError("migrateFilterRulesIfNeeded - save filter error: \(error)")
+//                continue
+//            }
+//
+//            // remove rules from database
+//            antibanner.removeRules(forFilter: filterId)
+//        }
     }
 }

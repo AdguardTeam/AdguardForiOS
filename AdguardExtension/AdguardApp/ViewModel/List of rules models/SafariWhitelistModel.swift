@@ -55,7 +55,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue {
                 resources.safariWhitelistEnabled = newValue
-                contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
+                contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {_ in }
             }
         }
     }
@@ -99,6 +99,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     private let antibanner: AESAntibannerProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
+    private let safariProtection: SafariProtectionServiceProtocol
     
     /* Variables */
     private var ruleObjects = [ASDFilterRule]()
@@ -108,11 +109,12 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, safariProtection: SafariProtectionServiceProtocol) {
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.theme = theme
+        self.safariProtection = safariProtection
         
         ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
         allRules = ruleObjects.map({
@@ -133,12 +135,12 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     
     func importList(parentController: UIViewController){
         fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             if errorMessage != nil {
                 ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
             }
             else {
-                strongSelf.importRules(text) { errorMessage in
+                self.importRules(text) { errorMessage in
                     ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
                 }
             }
@@ -229,14 +231,14 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         let newRuleObjects = ruleObjects + [AEWhitelistDomainObject(domain: domain).rule]
            
         DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
                
-            strongSelf.allRules = newRules
-            strongSelf.ruleObjects = newRuleObjects
+            self.allRules = newRules
+            self.ruleObjects = newRuleObjects
                
-            strongSelf.delegate?.listOfRulesChanged()
+            self.delegate?.listOfRulesChanged()
            
-            strongSelf.contentBlockerService.addWhitelistDomain(domain) { [weak self] (error) in
+            self.contentBlockerService.addWhitelistDomain(domain) { [weak self] (error) in
                 DispatchQueue.main.async {
                     if error == nil {
                         completionHandler()
@@ -288,21 +290,21 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
         DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
         
-            strongSelf.allRules = ruleInfos
-            strongSelf.ruleObjects = newRuleObjects
+            self.allRules = ruleInfos
+            self.ruleObjects = newRuleObjects
             
-            strongSelf.delegate?.listOfRulesChanged()
+            self.delegate?.listOfRulesChanged()
             
             DispatchQueue.global().async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
-                strongSelf.resources.whitelistContentBlockingRules = (strongSelf.ruleObjects as NSArray).mutableCopy() as? NSMutableArray
+                self.resources.whitelistContentBlockingRules = (self.ruleObjects as NSArray).mutableCopy() as? NSMutableArray
   
                 completionHandler()
                 
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                self.contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { (error) in
                     
                     if error != nil {
                         DDLogError("(SafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")

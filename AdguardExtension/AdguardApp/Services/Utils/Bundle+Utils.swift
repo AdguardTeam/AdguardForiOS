@@ -36,4 +36,9 @@ extension Bundle {
     var applicationName: String {
         return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
     }
+    
+    var hostAppBundleId: String {
+        // do not foget to add "HostAppBundleId" key to target info.plist file
+        return Bundle.main.infoDictionary?["HostAppBundleId"] as? String ?? "com.adguard.AdguardExtension"
+    }
 }

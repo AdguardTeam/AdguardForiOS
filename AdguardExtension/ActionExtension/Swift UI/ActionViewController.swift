@@ -77,7 +77,7 @@ class ActionViewController: UIViewController {
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
-        safariService = SafariService(bundleId: Bundle.main.bundleIdentifier!)
+        safariService = SafariService(mainAppBundleId: Bundle.main.hostAppBundleId as! String)
         let antibanner = AESAntibanner(resources: sharedResources)
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
@@ -130,8 +130,8 @@ class ActionViewController: UIViewController {
         
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        title = LocalizationNotNeeded(Constants.aeProductName())
-        var errorMessage = ACLocalizedString("support_error_safari_extension", nil)
+        title = Constants.aeProductName()
+        var errorMessage = String.localizedString("support_error_safari_extension")
         guard let item: NSExtensionItem = self.extensionContext?.inputItems.first as? NSExtensionItem else { return }
         guard let itemProvider: NSItemProvider = item.attachments?.first else { return }
         
@@ -177,7 +177,7 @@ class ActionViewController: UIViewController {
                 DDLogError("(ActionViewController) Error of obtaining page url from Safari:\(error?.localizedDescription ?? "nil")" )
             } else if self.host?.isEmpty ?? true || self.host == nil {
                 DDLogError("(ActionViewController) Error of obtaining page url from Safari: url is empty.")
-                errorMessage = ACLocalizedString("hostname_obtaining_error", "(Action Extension - ActionViewController) Can't obtain hostname when starting.")
+                errorMessage = String.localizedString("hostname_obtaining_error")
             } else {
                 
                 let error = self.prepareDataModel()
@@ -352,7 +352,7 @@ class ActionViewController: UIViewController {
         
         if asDataBase.error != nil {
             DDLogError("(ActionViewController) production DB was not created before.")
-            let messageFormat = ACLocalizedString("action_extension_no_configuration_message_format", nil)
+            let messageFormat = String.localizedString("action_extension_no_configuration_message_format")
             let formattedString = String(format: messageFormat, Constants.aeProductName(), Constants.aeProductName())
             let userInfo = [NSLocalizedDescriptionKey : formattedString]
             return NSError.init(domain: AEActionErrorDomain, code: AEActionErrorNoDb, userInfo: userInfo)

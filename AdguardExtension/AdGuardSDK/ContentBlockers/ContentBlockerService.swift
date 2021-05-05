@@ -662,7 +662,7 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         return (rulesData, conversionResult.convertedCount, overLimit, conversionResult.totalConvertedCount, nil)
     }
     
-    func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
+    public func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
         
         let success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
         

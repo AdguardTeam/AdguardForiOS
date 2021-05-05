@@ -20,6 +20,7 @@
 #import "AESharedResources.h"
 #import "ACLLogger.h"
 #import "Adguard-Swift.h"
+#import <AdGuardSDK/AdGuardSDK-Swift.h>
 
 #define AE_BLOCKLIST_NAME       @"blockerList.json"
 
@@ -71,7 +72,8 @@ NSString const *AEFakeBlockinRule = @"[{\"trigger\": {\"url-filter\": \".*\",\"i
         DDLogInfo(@"(ActionRequestHandler) start content blocker loading - %@. filteringEnabled = %@", NSBundle.mainBundle.bundleIdentifier, filteringEnabled ? @"TRUE" : @"FALSE");
         
         NSURL *jsonURL = [[ADLocations productDataDirectory] URLByAppendingPathComponent:AE_BLOCKLIST_NAME];
-        SafariService* safariService = [[SafariService alloc] initWithBundleId: NSBundle.mainBundle.bundleIdentifier];
+        SafariService* safariService = [[SafariService alloc] initWithMainAppBundleId: NSBundle.mainBundle.infoDictionary[@"HostAppBundleId"]];
+        
         NSString* filename = [safariService filenameById: NSBundle.mainBundle.bundleIdentifier];
         NSString* path = [resources pathForRelativePath:filename];
         NSURL* fileUrl = [NSURL fileURLWithPath:path];

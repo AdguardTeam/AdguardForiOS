@@ -35,6 +35,7 @@ struct SettingsResetor: ISettingsResetor {
     private let activityStatisticsService: ActivityStatisticsServiceProtocol
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
+    private let safariProtection: SafariProtectionServiceProtocol
     
     //MARK: - Init
     
@@ -47,7 +48,8 @@ struct SettingsResetor: ISettingsResetor {
          purchaseService: PurchaseServiceProtocol,
          activityStatisticsService: ActivityStatisticsServiceProtocol,
          dnsStatisticsService: DnsStatisticsServiceProtocol,
-         dnsLogRecordsService: DnsLogRecordsServiceProtocol) {
+         dnsLogRecordsService: DnsLogRecordsServiceProtocol,
+         safariProtection: SafariProtectionServiceProtocol) {
         
         self.appDelegate = appDelegate
         self.dnsFiltersService = dnsFiltersService
@@ -59,6 +61,7 @@ struct SettingsResetor: ISettingsResetor {
         self.activityStatisticsService = activityStatisticsService
         self.dnsStatisticsService = dnsStatisticsService
         self.dnsLogRecordsService = dnsLogRecordsService
+        self.safariProtection = safariProtection
     }
     
     //MARK: - IResetSettings methods
@@ -96,7 +99,7 @@ struct SettingsResetor: ISettingsResetor {
             }
             
             // force load filters to fill database
-            self.filtersService.load(refresh: true) {_,_ in }
+            self.filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in }
             
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)

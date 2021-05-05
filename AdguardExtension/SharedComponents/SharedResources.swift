@@ -86,6 +86,15 @@ extension AESharedResourcesProtocol {
         }
     }
     
+    dynamic var invertedWhitelist: Bool {
+        get {
+            sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
+        }
+    }
+    
     dynamic var safariUserFilterEnabled: Bool {
         get {
             filterEnabled(defaultsKey: AEDefaultsUserFilterEnabled)

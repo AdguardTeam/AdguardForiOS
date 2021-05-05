@@ -91,7 +91,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.flush()
         
         // todo:
-        safariService = SafariService(bundleId: Bundle.main.bundleIdentifier!)
+        safariService = SafariService(mainAppBundleId: Bundle.main.hostAppBundleId)
         
         productInfo = ADProductInfo()
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
@@ -250,7 +250,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         if let lastUpdateDate = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? Date {
     
             let dateString = lastUpdateDate.formatedString() ?? ""
-            safariTextLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            safariTextLabel.text = String(format: String.localizedString("filter_date_format"), dateString)
         }
     }
     
@@ -278,7 +278,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let systemEnabled = complexProtection.systemProtectionEnabled
         let complexEnabled = complexProtection.complexProtectionEnabled
                 
-        let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
+        let enabledText = complexEnabled ? String.localizedString("protection_enabled") : String.localizedString("protection_disabled")
         
         self.complexSwitchOutlet.isOn = complexEnabled
         self.complexProtectionTitle.text = enabledText
@@ -286,17 +286,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         var complexText = ""
         
         if safariEnabled && systemEnabled {
-            complexText = ACLocalizedString("complex_enabled", nil)
+            complexText = String.localizedString("complex_enabled")
         } else if !complexEnabled{
-            complexText = ACLocalizedString("complex_disabled", nil)
+            complexText = String.localizedString("complex_disabled")
         } else if safariEnabled {
-            complexText = ACLocalizedString("safari_enabled", nil)
+            complexText = String.localizedString("safari_enabled")
         } else if systemEnabled {
-            complexText = ACLocalizedString("system_enabled", nil)
+            complexText = String.localizedString("system_enabled")
         }
         self.complexStatusLabel.text = complexText
         
-        self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.encryptedNumber)
+        self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), self.requestNumber, self.encryptedNumber)
     }
     
     /**

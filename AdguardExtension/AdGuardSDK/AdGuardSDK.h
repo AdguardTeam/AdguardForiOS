@@ -27,6 +27,7 @@
 #import "AEWhitelistDomainObject.h"
 #import "AEInvertedWhitelistDomainsObject.h"
 #import "AASFilterSubscriptionParser.h"
+#import "ASDFilterObjects.h"
 
 //! Project version number for AdGuardSDK.
 FOUNDATION_EXPORT double AdGuardSDKVersionNumber;

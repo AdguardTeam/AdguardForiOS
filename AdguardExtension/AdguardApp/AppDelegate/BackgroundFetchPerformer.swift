@@ -61,6 +61,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
     private let contentBlockerService: ContentBlockerServiceProtocol
     private let antibanner: AESAntibannerProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
+    private let safariProtection: SafariProtectionServiceProtocol
     private let dnsFiltersService: DnsFiltersServiceProtocol
     private let safariService: SafariServiceProtocol
     private let networking: ACNNetworking
@@ -110,6 +111,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
          contentBlockerService: ContentBlockerServiceProtocol,
          antibanner: AESAntibannerProtocol,
          complexProtection: ComplexProtectionServiceProtocol,
+         safariProtection: SafariProtectionServiceProtocol,
          dnsFiltersService: DnsFiltersServiceProtocol,
          safariService: SafariServiceProtocol,
          networking: ACNNetworking,
@@ -123,6 +125,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.complexProtection = complexProtection
+        self.safariProtection = safariProtection
         self.dnsFiltersService = dnsFiltersService
         self.safariService = safariService
         self.networking = networking
@@ -195,7 +198,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
                 }
             case .filtersupdated, .contentBlockersUpdating:
                 self.fetchState = .contentBlockersUpdating
-                self.contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] error in
+                self.contentBlockerService.reloadJsons(backgroundUpdate: true, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { [weak self] error in
                     if let _ = error {
                         self?.fetchState = .notStarted
                     } else {

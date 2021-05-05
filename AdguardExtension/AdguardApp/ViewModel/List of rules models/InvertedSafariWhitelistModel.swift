@@ -55,7 +55,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue {
                 resources.safariWhitelistEnabled = newValue
-                contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
+                contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {_ in }
             }
         }
     }
@@ -99,6 +99,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     private let antibanner: AESAntibannerProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
+    private let safariProtection: SafariProtectionServiceProtocol
     
     /* Variables */
     private var allRules = [RuleInfo]()
@@ -106,11 +107,12 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, safariProtection: SafariProtectionServiceProtocol) {
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.theme = theme
+        self.safariProtection = safariProtection
         
         let invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
         allRules = invertedWhitelistObject?.rules.map({ (rule) -> RuleInfo in
@@ -293,7 +295,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 
                 completionHandler()
                 
-                self.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                self.contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { (error) in
                     if error != nil {
                         DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
                         // do not rollback changes and do not show any alert to user in this case
@@ -320,7 +322,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
         resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
         
-        contentBlockerService.reloadJsons(backgroundUpdate: false) {(error)  in
+        contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {(error)  in
             
             DispatchQueue.main.async {
                 if error != nil {

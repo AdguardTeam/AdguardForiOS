@@ -23,7 +23,7 @@ import Foundation
 /**
  FiltersService is responsible for obtaining and manage filters data and metadata
  */
-protocol FiltersServiceProtocol {
+public protocol FiltersServiceProtocol {
     
     // MARK: - public fields
     var groups: [Group] { get }
@@ -67,11 +67,11 @@ protocol FiltersServiceProtocol {
     var updateNotification: Notification.Name { get }
 }
 
-class FiltersService: NSObject, FiltersServiceProtocol {
+public class FiltersService: NSObject, FiltersServiceProtocol {
     
-    var updateNotification: Notification.Name = Notification.Name("FiltersServiceUpdateNotification")
+    public var updateNotification: Notification.Name = Notification.Name("FiltersServiceUpdateNotification")
     
-    var groups = [Group]()
+    public var groups = [Group]()
     
     var antibanner: AESAntibannerProtocol?
     let httpRequestService: HttpRequestServiceProtocol
@@ -116,7 +116,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     private var updateInProcess = false
     private var enabledFilters = [Int: Bool]()
     
-    @objc dynamic var activeFiltersCount: Int {
+    @objc dynamic public var activeFiltersCount: Int {
         get {
             var count = 0
             for group in groups {
@@ -192,7 +192,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - public methods
     
-    func load(refresh: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void){
+    public func load(refresh: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, _ completion: @escaping (_ updatedCount: Int, _ error: Error?) -> Void){
         
         antibannerController.onReady {[weak self] antibanner in
             self?.groupsQueue.async { [weak self] in
@@ -341,7 +341,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
     }
     
-    func updateGroups() {
+    public func updateGroups() {
         groupsQueue.async { [weak self] in
             guard let self = self else { return }
             
@@ -356,13 +356,13 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
     }
     
-    func reset() {
+    public func reset() {
         groups = [Group]()
         filterMetas = [ASDFilterMetadata]()
         enabledFilters = [Int: Bool]()
     }
     
-    func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public func setGroup(_ groupId: Int, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         
         guard let group = getGroup(groupId) else { return }
         group.enabled = enabled
@@ -374,7 +374,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public func setFilter(_ filter: Filter, enabled: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         updateQueue.sync { [weak self] in
             filter.enabled = enabled
             self?.enabledFilters[filter.filterId] = enabled
@@ -391,7 +391,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func disableAllFilters(protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public func disableAllFilters(protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         updateQueue.sync { [weak self] in
             for group in groups {
                 for filter in group.filters {
@@ -409,7 +409,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         processUpdate(protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
-    func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public func addCustomFilter(_ filter: AASCustomFilterParserResult, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         
         let backgroundTaskID = UIApplication.shared.beginBackgroundTask { }
         
@@ -458,7 +458,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         enabledFilters[filter.meta.filterId.intValue] = true
     }
     
-    func renameCustomFilter(_ filterId: Int, _ newName: String) {
+    public func renameCustomFilter(_ filterId: Int, _ newName: String) {
         for group in groups {
             if group.groupId != AdGuardFilterGroup.custom.rawValue { continue }
             
@@ -472,7 +472,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         antibanner?.renameCustomFilter(NSNumber(integerLiteral: filterId), newName: newName)
     }
     
-    func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public func deleteCustomFilter(_ filter: Filter, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         deleteCustomFilterWithId(filter.filterId as NSNumber, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist)
     }
     
@@ -493,7 +493,7 @@ class FiltersService: NSObject, FiltersServiceProtocol {
         }
     }
     
-    func getGroup(_ groupId: Int)->Group? {
+    public func getGroup(_ groupId: Int)->Group? {
         return groups.first {$0.groupId == groupId }
     }
     

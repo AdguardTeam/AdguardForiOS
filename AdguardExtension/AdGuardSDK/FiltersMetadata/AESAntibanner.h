@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-#import "ABECFilter.h"
+//#import "ABECFilter.h"
 
 /// When anitbanner service installed
 extern NSString * _Nonnull ASAntibannerInstalledNotification;
@@ -53,7 +53,7 @@ extern NSString * _Nonnull ASAntibannerUpdateFilterFromUINotification;
 /// When filter enable status did change
 extern NSString * _Nonnull ASAntibannerFilterEnabledNotification;
 
-@class Reachability, ASDFilterRule, ACLExecuteBlockDelayed, ASDatabase;
+@class Reachability, ASDFilterRule, ACLExecuteBlockDelayed, ASDatabase, ASDFilterGroup, ASDGroupsI18n, ASDFilterMetadata, ASDFiltersI18n;
 @class AASCustomFilterParserResult;
 @protocol ACNNetworkingProtocol, AESharedResourcesProtocol;
 

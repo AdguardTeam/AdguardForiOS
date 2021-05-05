@@ -58,7 +58,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue {
                 resources.safariUserFilterEnabled = newValue
-                contentBlockerService.reloadJsons(backgroundUpdate: false) {_ in }
+                contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {_ in }
             }
         }
     }
@@ -105,6 +105,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
     private let productInfo: ADProductInfoProtocol
+    private let safariProtection: SafariProtectionServiceProtocol
     
     private var ruleObjects: [ASDFilterRule] = [ASDFilterRule]()
     
@@ -113,12 +114,13 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, productInfo: ADProductInfoProtocol) {
+    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, productInfo: ADProductInfoProtocol, safariProtection: SafariProtectionServiceProtocol) {
         self.resources = resources
         self.contentBlockerService = contentBlockerService
         self.antibanner = antibanner
         self.theme = theme
         self.productInfo = productInfo
+        self.safariProtection = safariProtection
         
         ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
         for ruleObject in ruleObjects {
@@ -284,18 +286,18 @@ class UserFilterModel: ListOfRulesModelProtocol {
             strongSelf.delegate?.listOfRulesChanged()
             
             DispatchQueue.global().async { [weak self] in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
                     DispatchQueue.main.async {
-                        strongSelf.allRules = rulesCopy
-                        strongSelf.ruleObjects = objectsCopy
-                        strongSelf.delegate?.listOfRulesChanged()
+                        self.allRules = rulesCopy
+                        self.ruleObjects = objectsCopy
+                        self.delegate?.listOfRulesChanged()
                         errorHandler(error.localizedDescription)
                     }
                 }
                 completionHandler()
                 
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { (error) in
                     
                     if error != nil {
                         DDLogError("(UserFilterModel) Error occured during content blocker reloading - \(error!.localizedDescription)")

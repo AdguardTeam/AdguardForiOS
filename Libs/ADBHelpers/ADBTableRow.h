@@ -17,6 +17,7 @@
  */
 
 #import "ACommons/ACLang.h"
+#import <AdGuardSDK/ACObject.h>
 
 @class FMResultSet;
 
