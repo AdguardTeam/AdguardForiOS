@@ -116,7 +116,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         self.safariProtection = safariProtection
         
-        ruleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
+        ruleObjects = contentBlockerService.whitelistRules()
         allRules = ruleObjects.map({
             let domainObject = AEWhitelistDomainObject(rule: $0)
             return RuleInfo(domainObject?.domain ?? "", false, domainObject?.rule.isEnabled.boolValue ?? true, theme)
@@ -300,7 +300,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
             DispatchQueue.global().async { [weak self] in
                 guard let self = self else { return }
                 
-                self.resources.whitelistContentBlockingRules = (self.ruleObjects as NSArray).mutableCopy() as? NSMutableArray
+                self.contentBlockerService.setWhitelistRules(self.ruleObjects)
   
                 completionHandler()
                 

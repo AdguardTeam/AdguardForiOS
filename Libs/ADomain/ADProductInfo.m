@@ -125,8 +125,8 @@ static NSDictionary *persistentProductInfo;
         
         NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
         
-        userAgentString = [NSString stringWithFormat:@"%@/%@ (%@; %@ %ld_%ld_%ld)",
-                           DEFAULT_PRODUCT_NAME, [ADProductInfo version], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemName], (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
+        userAgentString = [NSString stringWithFormat:@"%@/%ld (%@; %@ %ld_%ld_%ld)",
+                           DEFAULT_PRODUCT_NAME, (long)[ADProductInfo version], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemName], (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
         
 #elif TARGET_OS_MAC
         

@@ -67,7 +67,7 @@ class AdvancedSettingsController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier{
-            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService, antibanner: antibanner)
+            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService, antibanner: antibanner, contentBlockerService: contentBlockerService)
             let destinationVC = segue.destination as? ContentBlockerStateController
             destinationVC?.contentBlockersDataSource = contentBlockersDataSource
             destinationVC?.theme = theme

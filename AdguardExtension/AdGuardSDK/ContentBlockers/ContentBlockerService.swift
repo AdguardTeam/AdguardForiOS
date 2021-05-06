@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import ContentBlockerConverter
+@_implementationOnly import ContentBlockerConverter
 
 // MARK: - service protocol
 /**
@@ -41,6 +41,11 @@ public protocol ContentBlockerServiceProtocol {
      Method performs completionBlock when done on service working queue.
      */
     func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void)
+    
+    func whitelistRules()->[ASDFilterRule]
+    func invertedWhitelistRules()->[ASDFilterRule]
+    func setInvertedWhitelistRules(_ rules: [ASDFilterRule])
+    func setWhitelistRules(_ rules: [ASDFilterRule])
 }
 
 @objc
@@ -215,6 +220,14 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         })
     }
     
+    public func whitelistRules() -> [ASDFilterRule] {
+        return resources.whitelistContentBlockingRules ?? []
+    }
+    
+    public func setWhitelistRules(_ rules: [ASDFilterRule]) {
+        resources.whitelistContentBlockingRules = rules
+    }
+    
     // MARK: - inverted whitelist rules
     
     public func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
@@ -256,6 +269,15 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         }) { (error) in
             completion(error)
         }
+    }
+    
+    public func invertedWhitelistRules() -> [ASDFilterRule] {
+        let object = resources.invertedWhitelistContentBlockingObject
+        return object?.rules ?? []
+    }
+    
+    public func setInvertedWhitelistRules(_ rules: [ASDFilterRule]) {
+        resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: rules)
     }
     
     // MARK: - private methods

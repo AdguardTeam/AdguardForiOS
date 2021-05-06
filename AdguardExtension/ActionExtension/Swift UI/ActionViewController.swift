@@ -279,8 +279,7 @@ class ActionViewController: UIViewController {
     }
     
     private func isHostInInvertedWhitelist(host: String) -> Bool {
-        let invertedDomainsObj = sharedResources.invertedWhitelistContentBlockingObject
-        guard let rules = invertedDomainsObj?.rules else { return false }
+        let rules = contentBlockerService.invertedWhitelistRules()
         
         for rule in rules{
             if rule.ruleText.caseInsensitiveCompare(host) == ComparisonResult.orderedSame && rule.isEnabled.boolValue {
@@ -293,23 +292,18 @@ class ActionViewController: UIViewController {
     
     private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> AEWhitelistDomainObject? {
         DDLogDebug("(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\(host)")
-        guard let rules = sharedResources.whitelistContentBlockingRules else { return nil }
+        let rules = contentBlockerService.whitelistRules()
         return domainObjectIfExists(host: host, rules: rules)
     }
     
-    private func domainObjectIfExists(host: String, rules: NSArray) -> AEWhitelistDomainObject? {
-        let predicate = NSPredicate(format: "ruleText CONTAINS[cd] %@", host)
-        let filteredRules = rules.filtered(using: predicate)
+    private func domainObjectIfExists(host: String, rules: [ASDFilterRule]) -> AEWhitelistDomainObject? {
+        let filteredRules = rules.filter { $0.ruleText.localizedCaseInsensitiveContains(host) }
         
         if filteredRules.count > 0 {
             var obj: AEWhitelistDomainObject? = AEWhitelistDomainObject()
             for rule in filteredRules {
-                guard let safeRule = rule as? ASDFilterRule else {
-                    obj = nil
-                    continue
-                }
-                obj = AEWhitelistDomainObject.init(rule: safeRule)
-                if let _ = AEWhitelistDomainObject.init(rule: safeRule) {
+                obj = AEWhitelistDomainObject.init(rule: rule)
+                if obj != nil {
                     break
                 }
             }

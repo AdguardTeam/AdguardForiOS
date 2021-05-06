@@ -390,26 +390,6 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
  */
 - (nullable NSData *)loadDataFromFileRelativePath:(nonnull NSString *)relativePath;
 
-/**
- Rules from whitelist, which used for Safari content-blocking.
- */
-@property (nullable) NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
-
- /**
- Rules from inverted whitelist, which used for Safari content-blocking.
- */
-@property (nullable) AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
-
-/**
- Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
- */
-@property (nullable) ABECFilterClientMetadata *filtersMetadataCache;
-
-/**
- Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
- */
-@property (nullable) ABECFilterClientLocalization *i18nCacheForFilterSubscription;
-
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
 @property BOOL safariProtectionEnabled;

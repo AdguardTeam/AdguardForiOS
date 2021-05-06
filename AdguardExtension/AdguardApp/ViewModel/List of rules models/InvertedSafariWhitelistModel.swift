@@ -114,10 +114,10 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         self.safariProtection = safariProtection
         
-        let invertedWhitelistObject = resources.invertedWhitelistContentBlockingObject
-        allRules = invertedWhitelistObject?.rules.map({ (rule) -> RuleInfo in
+        let invertedRules = contentBlockerService.invertedWhitelistRules()
+        allRules = invertedRules.map({ (rule) -> RuleInfo in
             RuleInfo(rule.ruleText, false, rule.isEnabled.boolValue, theme)
-        }) ?? [RuleInfo]()
+        })
     }
     
     // MARK: - Main functions
@@ -290,8 +290,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 guard let self = self else { return }
 
                 let objects = self.rulesToObjectsConverter(rules: self.allRules)
-                let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
-                self.resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
+                self.contentBlockerService.setInvertedWhitelistRules(objects)
                 
                 completionHandler()
                 
@@ -319,8 +318,7 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         delegate?.listOfRulesChanged()
         
         let objects = rulesToObjectsConverter(rules: allRules)
-        let invertedWhitelistObject = AEInvertedWhitelistDomainsObject(rules: objects)
-        resources.invertedWhitelistContentBlockingObject = invertedWhitelistObject
+        contentBlockerService.setInvertedWhitelistRules(objects)
         
         contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {(error)  in
             

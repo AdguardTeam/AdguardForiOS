@@ -26,11 +26,11 @@ enum NativeDnsProviderError: Error {
     case invalidUpstreamsNumber
 }
 
-protocol NativeProvidersServiceDelegate: class {
+protocol NativeProvidersServiceDelegate: AnyObject {
     func dnsManagerStatusChanged()
 }
 
-protocol NativeProvidersServiceProtocol: class {
+protocol NativeProvidersServiceProtocol: AnyObject {
     var delegate: NativeProvidersServiceDelegate? { get set }
     
     var managerIsEnabled: Bool { get }

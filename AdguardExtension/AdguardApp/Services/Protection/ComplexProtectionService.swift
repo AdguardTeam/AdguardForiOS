@@ -23,7 +23,7 @@ import NetworkExtension
 // MARK: - Complex protection Interface -
 
 @objc
-protocol ComplexProtectionServiceProtocol: class {
+protocol ComplexProtectionServiceProtocol: AnyObject {
     
     // Turns on/off complex protection
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?,  completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void)

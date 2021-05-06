@@ -2029,7 +2029,7 @@
 		D0BA7D522631C1F00097029B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
 		D0BA7D532631C1F00097029B /* FMStatementKeywordRecogniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AEC1BB9824C00F53F3B /* FMStatementKeywordRecogniser.m */; };
 		D0BA7D542631C1F10097029B /* FMStatementQuotedRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9AED1BB9824C00F53F3B /* FMStatementQuotedRecogniser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA7D552631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9ADB1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0BA7D552631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9ADB1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.h */; };
 		D0BA7D562631C1F10097029B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE21BB9824C00F53F3B /* FMDatabasePool.m */; };
 		D0BA7D572631C1F10097029B /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9AE31BB9824C00F53F3B /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7D582631C1F10097029B /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9ADF1BB9824C00F53F3B /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2062,7 +2062,7 @@
 		D0BA80C42636EE7D0097029B /* AASFilterSubscriptionParser.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA80C52636EE7D0097029B /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D0BA812C263712C30097029B /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
-		D0BA812D263712C30097029B /* ACIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01B11C6B7686000F00D7 /* ACIOUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0BA812D263712C30097029B /* ACIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01B11C6B7686000F00D7 /* ACIOUtils.h */; };
 		D0BA8156263713580097029B /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
 		D0BA8157263713580097029B /* NSException+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01ED1C6B7686000F00D7 /* NSException+Utils.h */; };
 		D0BDB3FA263064FF007D9BC6 /* AdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BDB3F8263064FF007D9BC6 /* AdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };

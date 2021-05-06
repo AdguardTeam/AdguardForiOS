@@ -72,7 +72,6 @@ class DnsLogRecordsService: NSObject, DnsLogRecordsServiceProtocol {
         
         var records: [DnsLogRecord] = []
         for row in result ?? [] {
-            if row.record == nil { continue }
             let record = row.record
             record.rowid = row.rowid
             records.append(record)

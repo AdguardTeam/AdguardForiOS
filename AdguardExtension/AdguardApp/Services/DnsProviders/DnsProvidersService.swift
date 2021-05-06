@@ -49,7 +49,7 @@ import Foundation
     func reset()
 }
 
-@objc protocol DnsProvidersServiceDelegate: class {
+@objc protocol DnsProvidersServiceDelegate: AnyObject {
     func dnsProvidersChanged()
 }
 

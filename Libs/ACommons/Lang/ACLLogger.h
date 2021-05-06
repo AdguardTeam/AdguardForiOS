@@ -36,6 +36,7 @@ typedef enum{
 
 //---------------------------------------------------
 
+#undef LOG_ASYNC_ENABLED
 #define LOG_ASYNC_ENABLED false
 
 #define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, DDLogFlagVerbose, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)

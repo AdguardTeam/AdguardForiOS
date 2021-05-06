@@ -111,6 +111,7 @@ class ContentBlockersDataSource {
     private let resources: AESharedResourcesProtocol
     private let filterService: FiltersServiceProtocol
     private let antibanner: AESAntibannerProtocol
+    private let contentBlockerService: ContentBlockerServiceProtocol
     
     var contentBlockers = [ContentBlockerType : ContentBlocker]()
     
@@ -118,11 +119,12 @@ class ContentBlockersDataSource {
        return getUserFilterStringIfNedeed()
     }()
     
-    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibanner: AESAntibannerProtocol) {
+    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibanner: AESAntibannerProtocol, contentBlockerService: ContentBlockerServiceProtocol) {
         self.safariService = safariService
         self.resources = resources
         self.filterService = filterService
         self.antibanner = antibanner
+        self.contentBlockerService = contentBlockerService
         self.updateContentBlockersArray()
     }
     
@@ -138,7 +140,7 @@ class ContentBlockersDataSource {
         var result = ""
         let userTitleString = ACLocalizedString("user_filter_title", nil)
         let blacklistRuleObjects = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-        let whitelistRuleObjects = resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? [ASDFilterRule]()
+        let whitelistRuleObjects = contentBlockerService.whitelistRules()
         let userFilterEnabled = resources.safariUserFilterEnabled
         let whitelistEnabled = resources.safariWhitelistEnabled
         
