@@ -188,6 +188,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                                       customBlockingIpv6: customBlockingIpv6,
                                       dnsCacheSize: 128,
                                       optimisticCache: false,
+                                      enableDNSSECOK: false,
                                       helperPath: nil)
 
         var error: NSError?

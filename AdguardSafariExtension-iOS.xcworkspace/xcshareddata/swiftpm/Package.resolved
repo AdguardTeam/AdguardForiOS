@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
         "state": {
           "branch": null,
-          "revision": "4ebcbe6f4e21242f1a921b6f0c740c312d729748",
-          "version": "1.5.7"
+          "revision": "dda5b6105dd11a3eee6c8a1128c6033046223ee6",
+          "version": "1.5.26"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios",
         "state": {
           "branch": null,
-          "revision": "b3c60ba1716baab6faeeb217d8ce1da336f92718",
-          "version": "3.2.1"
+          "revision": "e428f89675588f2fe58891eac5f7c971098cf1a0",
+          "version": "3.2.2"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
         "state": {
           "branch": null,
-          "revision": "c4063acb0942f46e8bb9ec1e635e6686d202ad0e",
-          "version": "1.1.12"
+          "revision": "92480fad14014c5bd8f84010cf74e27bf23436c8",
+          "version": "1.1.14"
         }
       },
       {
