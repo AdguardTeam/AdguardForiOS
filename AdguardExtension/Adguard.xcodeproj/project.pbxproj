@@ -2392,6 +2392,20 @@
 			remoteGlobalIDString = D0288F4823069D7200A4EBEF;
 			remoteInfo = TestHostApp;
 		};
+		D04510002643EADB00CA2110 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
+			remoteInfo = "Run Builder";
+		};
+		D04510022643EB6500CA2110 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65B40D2A1BDE520500A9C595;
+			remoteInfo = "Run Builder";
+		};
 		D04B49C22639A0CE00815F30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -6049,6 +6063,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D04510012643EADB00CA2110 /* PBXTargetDependency */,
 				D0B545392435C795002F0AEC /* PBXTargetDependency */,
 				D0B545292435C77F002F0AEC /* PBXTargetDependency */,
 				D0B5452B2435C77F002F0AEC /* PBXTargetDependency */,
@@ -6114,6 +6129,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D04510032643EB6500CA2110 /* PBXTargetDependency */,
 				7E06B69A22FB193C006859AC /* PBXTargetDependency */,
 				D0569E3F21F1CDBE00985DA9 /* PBXTargetDependency */,
 				D067D9A12142A1DC00ECDE6D /* PBXTargetDependency */,
@@ -9610,6 +9626,16 @@
 			isa = PBXTargetDependency;
 			target = D0288F4823069D7200A4EBEF /* TestHostApp */;
 			targetProxy = D0288F5B23069DC500A4EBEF /* PBXContainerItemProxy */;
+		};
+		D04510012643EADB00CA2110 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
+			targetProxy = D04510002643EADB00CA2110 /* PBXContainerItemProxy */;
+		};
+		D04510032643EB6500CA2110 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65B40D2A1BDE520500A9C595 /* Run Builder */;
+			targetProxy = D04510022643EB6500CA2110 /* PBXContainerItemProxy */;
 		};
 		D04B49C32639A0CE00815F30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

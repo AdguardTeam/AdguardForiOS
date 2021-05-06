@@ -68,23 +68,23 @@ int main(int argc, const char * argv[])
             [fileManager removeItemAtPath:dbPath error:&err];
         }
         else{
-            
+
             // If DB version is changed, remove DB
-            
+
             NSString *currentVersion, *newVersion;
             db = [FMDatabase databaseWithPath:dbPath];
             if ([db open]) {
-                
+
                 FMResultSet *result = [db executeQuery:@"select schema_version from version"];
                 if ([result next])
                     currentVersion = [result stringForColumnIndex:0];
                 [result close];
                 [db close];
-                
+
                 db = [FMDatabase databaseWithPath:nil];
-                
+
                 if ([db open]) {
-                    
+
                     [asDataBase createDefaultDB:db scriptPath:[productPath stringByAppendingPathComponent:DB_SCHEME_FILE_NAME]];
                     FMResultSet *result = [db executeQuery:@"select schema_version from version"];
                     if ([result next])
@@ -93,11 +93,11 @@ int main(int argc, const char * argv[])
                     [db close];
                 }
                 if (!([NSString isNullOrEmpty:newVersion] || [currentVersion isEqualToString:newVersion])) {
-                    
+
                     [fileManager removeItemAtPath:dbPath error:&err];
                 }
             }
-            
+
         }
         
         if (![fileManager fileExistsAtPath:dbPath]){

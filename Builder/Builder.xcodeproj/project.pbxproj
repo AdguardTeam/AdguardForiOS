@@ -63,6 +63,7 @@
 		D0450FFC2642EE1F00CA2110 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04B91C6B7790000F00D7 /* ACFFileUtils.m */; };
 		D0450FFD2642EE6900CA2110 /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04D61C6B7790000F00D7 /* ACLLogger.m */; };
 		D0450FFE2642EEBE00CA2110 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A05061C6B7790000F00D7 /* NSString+Utils.m */; };
+		D0450FFF2643E81A00CA2110 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A05001C6B7790000F00D7 /* NSDate+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -889,6 +890,7 @@
 				D0450FFD2642EE6900CA2110 /* ACLLogger.m in Sources */,
 				D0450FF42642EC1100CA2110 /* ABECFilter.m in Sources */,
 				655A05D91C6B7790000F00D7 /* FMDatabasePool.m in Sources */,
+				D0450FFF2643E81A00CA2110 /* NSDate+Utils.m in Sources */,
 				D0450FF32642EBB600CA2110 /* ASDFilterObjects.m in Sources */,
 				655A05A01C6B7790000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
 				D0450FED2642EAC900CA2110 /* RequestSenderProtocol.swift in Sources */,
