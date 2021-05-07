@@ -3,11 +3,14 @@ import XCTest
 class DnsProvidersMigrationsTest: XCTestCase {
     
     var resources: AESharedResourcesProtocol!
+    var vpnManager: VpnManagerMock!
     var dnsProviders: DnsProvidersServiceProtocol?
     
     override func setUp() {
         resources = SharedResourcesMock()
         dnsProviders = DnsProvidersService(resources: resources)
+        vpnManager = VpnManagerMock()
+        dnsProviders?.vpnManager = vpnManager
     }
     
     func testReinitializeDnsProvidersObjectsAndSetIdsAndFlags() {
@@ -55,6 +58,44 @@ class DnsProvidersMigrationsTest: XCTestCase {
             provider.servers?.forEach { XCTAssert($0.providerId == provider.providerId) }
         }
     }
+    
+    // MARK: - test changeQuicCustomServersPort
+    
+    func testChangeQuicCustomServersPort() {
+        let group = DispatchGroup()
+        group.enter()
+        group.enter()
+        group.enter()
+        
+        dnsProviders!.addCustomProvider(name: "Test Provider 1", upstream: "quic://doh.tiar.app") {
+            group.leave()
+        }
+        dnsProviders!.addCustomProvider(name: "Test Provider 2", upstream: "quic://dns.adguard.com") {
+            group.leave()
+        }
+        dnsProviders!.addCustomProvider(name: "Test Provider 3", upstream: "quic://doh.tiar.app:333") {
+            group.leave()
+        }
+        group.wait()
+        
+        XCTAssertEqual(dnsProviders!.customProviders.count, 3)
+        
+        let dnsProvidersMigratable = dnsProviders as! DnsProvidersServiceMigratable
+        dnsProvidersMigratable.changeQuicCustomServersPort()
+        
+        XCTAssertEqual(dnsProviders!.customProviders[0].name, "Test Provider 1")
+        XCTAssertEqual(dnsProviders!.customProviders[0].servers![0].upstreams[0], "quic://doh.tiar.app:784")
+        
+        XCTAssertEqual(dnsProviders!.customProviders[1].name, "Test Provider 2")
+        XCTAssertEqual(dnsProviders!.customProviders[1].servers![0].upstreams[0], "quic://dns.adguard.com")
+        
+        XCTAssertEqual(dnsProviders!.customProviders[2].name, "Test Provider 3")
+        XCTAssertEqual(dnsProviders!.customProviders[2].servers![0].upstreams[0], "quic://doh.tiar.app:333")
+        
+        XCTAssert(vpnManager.updateCalled)
+    }
+    
+    // MARK: - Private methods
     
     private func fillCustomProviders() {
         let group = DispatchGroup()
