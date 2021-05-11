@@ -18,11 +18,11 @@
 
 import UIKit
 
-protocol TagButtonTappedDelegate: class {
+protocol TagButtonTappedDelegate: AnyObject {
     func tagButtonTapped(_ sender: TagButton)
 }
 
-protocol FilterTagsViewModel: class {
+protocol FilterTagsViewModel: AnyObject {
     var delegate: TagButtonTappedDelegate? { get set }
 }
 

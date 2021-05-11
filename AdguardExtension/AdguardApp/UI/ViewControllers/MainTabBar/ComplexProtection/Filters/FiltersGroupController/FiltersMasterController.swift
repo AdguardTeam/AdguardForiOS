@@ -125,7 +125,7 @@ class FiltersMasterController: UIViewController {
     }
 }
 
-protocol FilterMasterControllerDelegate: class {
+protocol FilterMasterControllerDelegate: AnyObject {
     func cancelButtonTapped()
     func searchButtonTapped()
 }

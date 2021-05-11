@@ -19,7 +19,7 @@
 import Foundation
 import SafariServices
 
-protocol DnsProviderDetailsControllerDelegate: class {
+protocol DnsProviderDetailsControllerDelegate: AnyObject {
     func activeServerChanged(_ newServer: DnsServerInfo)
 }
 

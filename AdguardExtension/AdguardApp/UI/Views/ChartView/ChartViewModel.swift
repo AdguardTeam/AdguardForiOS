@@ -29,7 +29,7 @@ protocol ChartViewModelProtocol {
     func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->())
 }
 
-protocol NumberOfRequestsChangedDelegate: class {
+protocol NumberOfRequestsChangedDelegate: AnyObject {
     func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double)
 }
 
