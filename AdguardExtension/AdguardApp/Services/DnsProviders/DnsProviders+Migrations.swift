@@ -121,8 +121,19 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                 }
             }
             // Process sdns link
-            else if serverToMigrate.dnsProtocol == .dnsCrypt {
+            else if serverToMigrate.dnsProtocol == .dnsCrypt,
+                    let sdnsUpstream = serverToMigrate.upstreams.first,
+                    let decodedServerUpstream = DnsResolver.resolve(upstream: sdnsUpstream).dnsServer {
                 
+                let upstreamProtocol = DnsProtocol.getProtocolByUpstream(decodedServerUpstream)
+                if upstreamProtocol == .doq {
+                    let newUpstream = addPortToUpstreamIfNeeded(decodedServerUpstream)
+                    if newUpstream != decodedServerUpstream {
+                        // TODO: - encode upstream to sdns
+                        serverToMigrate.upstreams = [decodedServerUpstream]
+                        vpnManager?.updateSettings(completion: nil)
+                    }
+                }
             }
             else {
                 continue

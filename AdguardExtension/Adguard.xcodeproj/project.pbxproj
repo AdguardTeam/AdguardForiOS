@@ -717,6 +717,16 @@
 		7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7EB2F95823F2C28E00F9A544 /* SuccessFailureParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95723F2C28E00F9A544 /* SuccessFailureParser.swift */; };
 		7EB2F95A23F2C56300F9A544 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
+		7EB3E217264A72DC00C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E218264A72DD00C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E219264A72DF00C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E21A264A72E000C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E21B264A734800C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E21C264A734A00C460FA /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
+		7EB3E21E264A73B700C460FA /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB3E21D264A73B700C460FA /* AGDnsProxy */; };
+		7EB3E220264A73C000C460FA /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB3E21F264A73C000C460FA /* AGDnsProxy */; };
+		7EB3E222264A75D000C460FA /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB3E221264A75D000C460FA /* AGDnsProxy */; };
+		7EB3E224264A75D600C460FA /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB3E223264A75D600C460FA /* AGDnsProxy */; };
 		7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */; };
 		7EB5526A242243C1000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
 		7EB5526B2422441F000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
@@ -3836,6 +3846,7 @@
 				7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */,
 				D0AEC26F240947F5003E8FCC /* NetworkExtension.framework in Frameworks */,
 				7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */,
+				7EB3E222264A75D000C460FA /* AGDnsProxy in Frameworks */,
 				65C12EF31BD7B00200FFC71C /* libz.tbd in Frameworks */,
 				D06E2F9E253F123B008BBD2D /* ContentBlockerConverter in Frameworks */,
 			);
@@ -3895,6 +3906,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB3E220264A73C000C460FA /* AGDnsProxy in Frameworks */,
 				7E536C67238D2AC400A83A79 /* NotificationCenter.framework in Frameworks */,
 				7EC1F9E32391175600210959 /* NetworkExtension.framework in Frameworks */,
 			);
@@ -4006,6 +4018,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB3E21E264A73B700C460FA /* AGDnsProxy in Frameworks */,
 				D0B544242435C6B8002F0AEC /* NotificationCenter.framework in Frameworks */,
 				D0B544252435C6B8002F0AEC /* NetworkExtension.framework in Frameworks */,
 			);
@@ -4024,6 +4037,7 @@
 				7ECAA293257E4ADB004DA0D3 /* Zip in Frameworks */,
 				D0B544AB2435C6BC002F0AEC /* NetworkExtension.framework in Frameworks */,
 				D0B544AC2435C6BC002F0AEC /* CoreServices.framework in Frameworks */,
+				7EB3E224264A75D600C460FA /* AGDnsProxy in Frameworks */,
 				D0B544AD2435C6BC002F0AEC /* libz.tbd in Frameworks */,
 				D06E2FA0253F1240008BBD2D /* ContentBlockerConverter in Frameworks */,
 			);
@@ -5617,6 +5631,7 @@
 			packageProductDependencies = (
 				D06E2F9D253F123B008BBD2D /* ContentBlockerConverter */,
 				7ECAA290257E4AD4004DA0D3 /* Zip */,
+				7EB3E221264A75D000C460FA /* AGDnsProxy */,
 			);
 			productName = ActionExtension;
 			productReference = 65C52B361B906105003AF42F /* ActionExtension.appex */;
@@ -5735,6 +5750,9 @@
 			dependencies = (
 			);
 			name = AdGuardTodayExtension;
+			packageProductDependencies = (
+				7EB3E21F264A73C000C460FA /* AGDnsProxy */,
+			);
 			productName = AdGuardTodayExtension;
 			productReference = 7E536C66238D2AC400A83A79 /* AdGuardTodayExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -5985,6 +6003,9 @@
 			dependencies = (
 			);
 			name = AdGuardProTodayExtension;
+			packageProductDependencies = (
+				7EB3E21D264A73B700C460FA /* AGDnsProxy */,
+			);
 			productName = AdGuardTodayExtension;
 			productReference = D0B5442D2435C6B8002F0AEC /* AdGuardProTodayExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -6008,6 +6029,7 @@
 			packageProductDependencies = (
 				D06E2F9F253F1240008BBD2D /* ContentBlockerConverter */,
 				7ECAA292257E4ADB004DA0D3 /* Zip */,
+				7EB3E223264A75D600C460FA /* AGDnsProxy */,
 			);
 			productName = ActionExtension;
 			productReference = D0B544BC2435C6BC002F0AEC /* ProActionExtension.appex */;
@@ -7190,6 +7212,7 @@
 				7E9C0C36256292E200F1999D /* UIColor+Utils.swift in Sources */,
 				D08CE429240D389800A70089 /* KeychainService.swift in Sources */,
 				244419EC2614CF0F009555F3 /* String+NSRange.swift in Sources */,
+				7EB3E217264A72DC00C460FA /* DnsResolver.swift in Sources */,
 				D0D7E5AD243C95C0001801A5 /* APDnsServerAddress.m in Sources */,
 				651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
 				655A02361C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
@@ -7985,6 +8008,7 @@
 				7ECD9C62238E6D630065E88D /* NSString+Utils.m in Sources */,
 				7ECD9C49238D65E30065E88D /* FMResultSet.m in Sources */,
 				D09E2A99254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
+				7EB3E21C264A734A00C460FA /* DnsResolver.swift in Sources */,
 				7E8576792435F57F0055F63D /* DomainsParserService.swift in Sources */,
 				7ECD9C61238E6C120065E88D /* SafariService.swift in Sources */,
 				7E334028239034CB00C39F62 /* ACLExecuteBlockDelayed.m in Sources */,
@@ -8046,6 +8070,7 @@
 				D0569D5221F1C0A800985DA9 /* ACLWildcard.m in Sources */,
 				D0569D5321F1C0A800985DA9 /* ACIOUtils.m in Sources */,
 				D0CA61812203489A005CAAA4 /* DnsProvidersService.swift in Sources */,
+				7EB3E218264A72DD00C460FA /* DnsResolver.swift in Sources */,
 				D0569D5521F1C0A800985DA9 /* NSException+Utils.m in Sources */,
 				D0C9410323ED60B2008B85EC /* DnsProviderInfo.swift in Sources */,
 				D06E3113253F3254008BBD2D /* DnsProviders.swift in Sources */,
@@ -8802,6 +8827,7 @@
 				D0B544222435C6B8002F0AEC /* ADBTableRow.m in Sources */,
 				D0B5454C2435D131002F0AEC /* CLIColor.m in Sources */,
 				D0D7E5AA243C9593001801A5 /* ACSSystemUtils.m in Sources */,
+				7EB3E21B264A734800C460FA /* DnsResolver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8845,6 +8871,7 @@
 				7E9C0C3E256292E800F1999D /* UIColor+Utils.swift in Sources */,
 				24441A302614CF2E009555F3 /* String+NSRange.swift in Sources */,
 				D0B544562435C6BC002F0AEC /* FMStatementQuotedRecogniser.m in Sources */,
+				7EB3E219264A72DF00C460FA /* DnsResolver.swift in Sources */,
 				D0B544582435C6BC002F0AEC /* KeychainService.swift in Sources */,
 				D0D7E5AE243C95C0001801A5 /* APDnsServerAddress.m in Sources */,
 				D0B544592435C6BC002F0AEC /* ACNUrlUtils.m in Sources */,
@@ -8968,6 +8995,7 @@
 				D0B544D72435C6BF002F0AEC /* APDnsServerAddress.m in Sources */,
 				D0D7E61924445673001801A5 /* ActivityStatisticsService.swift in Sources */,
 				D0B544D82435C6BF002F0AEC /* FMDatabase.m in Sources */,
+				7EB3E21A264A72E000C460FA /* DnsResolver.swift in Sources */,
 				247521F92594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				D06E6BFA25E8F6910069013C /* VpnConfigurationStatus.swift in Sources */,
 				7E473B3F25540E62006F8345 /* NativeProvidersService.swift in Sources */,
@@ -11642,6 +11670,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		7EB3E21D264A73B700C460FA /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
+		};
+		7EB3E21F264A73C000C460FA /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
+		};
+		7EB3E221264A75D000C460FA /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
+		};
+		7EB3E223264A75D600C460FA /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
 		};
 		7ECAA27B257E4AAD004DA0D3 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
