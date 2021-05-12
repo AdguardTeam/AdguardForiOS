@@ -41,13 +41,13 @@ protocol FilterMetadataParserProtocol {
      
      Filter example: https://easylist.to/easylist/easylist.txt
      */
-    static func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata
+    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata
 }
 
 // MARK: - FilterMetadataParserProtocol + default implementation
 
 extension FilterMetadataParserProtocol {
-    static func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata {
+    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata {
         
         // Check if file's content is valid
         guard !isInvalid(content: filterFileContentString) else {
@@ -72,7 +72,7 @@ extension FilterMetadataParserProtocol {
         var rulesCount: Int = 0
         
         // Iterating over file's content line by line
-        filterFileContentString.enumerateLines { line, shouldStop in
+        filterFileContentString.enumerateLines { line, _ in
             
             // Filter's header can begin with it's name in brackets, for example: [Adblock Plus 2.0]
             if line.first == "[" && line.last == "]" && !headerWasParsed {
@@ -137,7 +137,7 @@ extension FilterMetadataParserProtocol {
      For example: ! Title: AdGuard Turkish filter (Optimized)
      Line will be processed and description variable will be set to: description = "AdGuard Turkish filter (Optimized)"
      */
-    private static func processHeader(line: String,
+    private func processHeader(line: String,
                                       _ title: inout String?,
                                       _ description: inout String?,
                                       _ version: inout String?,
@@ -179,7 +179,7 @@ extension FilterMetadataParserProtocol {
      For example: "11 May 2021 12:36 UTC" -> Date
      Returns Date object on success or nil if failed to parse date string
      */
-    private static func processUpdateDate(_ dateString: String) -> Date? {
+    private func processUpdateDate(_ dateString: String) -> Date? {
         let possibleDateFormats = ["d MMM yyyy HH:mm Z", "yyyy-MM-dd'T'HH:mm:ssZ", "yyyy-MM-dd'T'HH:mm:ss.SSSZ"]
         let dateFormatter = DateFormatter()
         
@@ -197,7 +197,7 @@ extension FilterMetadataParserProtocol {
      For example: "4 days (update frequency)" -> 345 600
      Returns update frequency in seconds or nil if failed to parse string
      */
-    private static func processUpdateFrequency(_ frequencyString: String) -> Int? {
+    private func processUpdateFrequency(_ frequencyString: String) -> Int? {
         if let dayWordRange = frequencyString.range(of: "day"), frequencyString.startIndex < dayWordRange.lowerBound {
             let daysString = frequencyString[frequencyString.startIndex ..< dayWordRange.lowerBound].trimmingCharacters(in: .whitespaces)
             if let daysNumber = Int(daysString) {
@@ -220,7 +220,7 @@ extension FilterMetadataParserProtocol {
      Returns true if first 256 chars of content are empty or contain some HTML's tags
      Returns false if content is correct
      */
-    private static func isInvalid(content: String) -> Bool {
+    private func isInvalid(content: String) -> Bool {
         let nsContent = content as NSString
         var contentBeginsWith = nsContent.substring(to: nsContent.length > 256 ? 256 : nsContent.length)
         contentBeginsWith = contentBeginsWith.lowercased()

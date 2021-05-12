@@ -19,15 +19,15 @@
 import Foundation
 
 struct FilterMetadata {
-    let title: String?
-    let description: String?
-    let version: String? // Filter version
-    let lastUpdateDate: Date? // The date when the filter was last updated on the server-side
-    let updateFrequency: Int? // Filter update frequency in seconds, shows how often we should update it
-    let homePage: String?
-    let licensePage: String?
-    let issuesReportPage: String?
-    let communityPage: String?
-    let filterDownloadPage: String?
+    let title: String? // key: 'Title'
+    let description: String? // key: 'Description'
+    let version: String? // key: 'Version'; Filter version
+    let lastUpdateDate: Date? // keys: 'Last Modified', 'TimeUpdated'; The date when the filter was last updated on the server-side
+    let updateFrequency: Int? // key: 'Expires' Filter update frequency in seconds, shows how often we should update it
+    let homePage: String? // key: 'Homepage'
+    let licensePage: String? // keys: 'Licence', 'License'
+    let issuesReportPage: String? // key: 'Reporting Issues'
+    let communityPage: String? // key: 'Community'
+    let filterDownloadPage: String? // key: 'Download'
     let rulesCount: Int
 }
