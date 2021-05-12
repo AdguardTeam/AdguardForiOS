@@ -1,0 +1,65 @@
+[Adblock Plus 2.0]
+! Version: 202105121116
+! Title: EasyList
+! Last modified: 12 May 2021 11:16 UTC
+! Expires: 4 days (update frequency)
+! Homepage: https://easylist.to/
+! Licence: https://easylist.to/pages/licence.html
+! !
+! Please report any unblocked adverts or problems
+! in the forums (https://forums.lanik.us/)
+! or via e-mail (easylist@protonmail.com).
+! GitHub issues: https://github.com/easylist/easylist/issues
+! GitHub pull requests: https://github.com/easylist/easylist/pulls
+! 
+! -----------------------General advert blocking filters-----------------------!
+! *** easylist:easylist/easylist_general_block.txt ***
+.video.ads.
+.videoad3.
+.videoad4.
+.weborama.js
+.widgets.ad?
+.win/ads/
+.ws/ads/
+.xinhuanetAD.
+.xxx/ads/
+.xyz/ads/
+&ad_network_
+&ad_number=
+&ad_slot=
+&ad_sub=
+&ad_time=
+&ad_type=
+&ad_type_
+&ad_url=
+&ad_zones=
+&adbannerid=
+&adclient=
+! yahoo
+-adtopbanner-
+-adtrack.
+-adv-v1/
+-adv.jpg
+-adv.js
+-advert-100x100.
+-Advert-Banner-
+-Advert-JPEG-
+-advert-label-
+-advert-placeholder.
+-advert.jpg?
+-advert.swf
+-advert1.
+-advert2.
+/ad.asp?
+/ad.aspx?
+/ad.cgi?
+/ad.code?
+@@||t8premium.com/signup/signup.php?$popup,domain=tube8.com|tube8.es|tube8.fr
+@@||t8premium.com/track/*/join?$popup,domain=tube8.com|tube8.es|tube8.fr
+@@||tube8live.com/?AFNO=$popup,domain=tube8.com|tube8.es|tube8.fr
+@@||tumblr.com^$popup,domain=pornhub.com|pornhubthbh7ap3u.onion
+@@||twitter.com^$popup,domain=pornhub.com|pornhubthbh7ap3u.onion
+orgasm.com##.horizontal-banner-module
+orgasm.com##.horizontal-banner-module-small
+eporner.com##.hptab
+pornanal.net##.i_br
