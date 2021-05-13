@@ -1,0 +1,31 @@
+!
+! Title: AdGuard DNS filter
+! Description: Filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile ads filter, EasyList, EasyPrivacy, etc) and simplified specifically to be better compatible with DNS-level ad blocking.
+! Homepage: https://github.com/AdguardTeam/AdguardSDNSFilter
+! License: https://github.com/AdguardTeam/AdguardSDNSFilter/blob/master/LICENSE
+! Last modified: 2021-05-12T12:06:56.118Z
+!
+! Compiled by @adguard/hostlist-compiler v1.0.12
+!
+!
+! Source name: AdGuard Base filter ad servers
+! Source: https://raw.githubusercontent.com/AdguardTeam/AdguardFilters/master/EnglishFilter/sections/adservers.txt
+!
+!
+! Section contains list of advertising networks
+!
+! The rules with hints are at the end of file
+!
+!! https://a.bestcontentitem.top/warp/*?r=
+!
+||plainwrk.name^
+||dedicatedfraudulent.com^
+||nyjixoco.com^
+||behalfplead.com^
+||trodpigbays.com^
+! https://github.com/AdguardTeam/AdguardFilters/issues/27196
+@@||a.adwolf.ru^|
+! https://github.com/AdguardTeam/AdguardFilters/issues/26607
+@@||imasdk.googleapis.com^|
+! https://github.com/AdguardTeam/AdguardFilters/issues/23929
+# a comment
