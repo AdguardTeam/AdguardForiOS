@@ -1,8 +1,8 @@
 import XCTest
 
-class FilterMetadataParserTest: XCTestCase {
+class CustomFilterMetaParserTest: XCTestCase {
     
-    let parser: FilterMetadataParserProtocol = FilterMetadataParser()
+    let parser: CustomFilterMetaParserProtocol = CustomFilterMetaParser()
     
     // MARK: - Safari filters test
     
@@ -59,7 +59,7 @@ class FilterMetadataParserTest: XCTestCase {
     
     func testEmptyFileContent() {
         XCTAssertThrowsError(try parser.parse("", for: .safari)) { error in
-            XCTAssertEqual(error as! FilterMetadataParserError, FilterMetadataParserError.invalidFileContent)
+            XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
     
@@ -73,7 +73,7 @@ class FilterMetadataParserTest: XCTestCase {
                         </html>
                         """
         XCTAssertThrowsError(try parser.parse(htmlContent, for: .safari)) { error in
-            XCTAssertEqual(error as! FilterMetadataParserError, FilterMetadataParserError.invalidFileContent)
+            XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
     

@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct FilterMetadata {
+struct CustomFilterMeta {
     let title: String? // key: 'Title'
     let description: String? // key: 'Description'
     let version: String? // key: 'Version'; Filter version

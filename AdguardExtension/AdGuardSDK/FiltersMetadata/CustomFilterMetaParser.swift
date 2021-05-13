@@ -18,22 +18,22 @@
 
 import Foundation
 
-// MARK: - FilterMetadataParserError
+// MARK: - CustomFilterMetaParserError
 
-enum FilterMetadataParserError: Error {
+enum CustomFilterMetaParserError: Error {
     case invalidFileContent
 }
 
-// MARK: - FilterMetadataParserType
+// MARK: - CustomFilterMetaParserType
 
-enum FilterMetadataParserType {
+enum CustomFilterMetaParserType {
     case safari
     case system
 }
 
-// MARK: - FilterMetadataParserProtocol
+// MARK: - CustomFilterMetaParserProtocol
 
-protocol FilterMetadataParserProtocol {
+protocol CustomFilterMetaParserProtocol {
     /**
      Parses filter's file content and converts content to FilterMetadata object
      Parsing can differ for system and safary filters, specify the needed one with parserType
@@ -41,17 +41,17 @@ protocol FilterMetadataParserProtocol {
      
      Filter example: https://easylist.to/easylist/easylist.txt
      */
-    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> CustomFilterMeta
 }
 
-// MARK: - FilterMetadataParserProtocol + default implementation
+// MARK: - CustomFilterMetaParserProtocol + default implementation
 
-extension FilterMetadataParserProtocol {
-    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata {
+extension CustomFilterMetaParserProtocol {
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> CustomFilterMeta {
         
         // Check if file's content is valid
         guard !isInvalid(content: filterFileContentString) else {
-            throw FilterMetadataParserError.invalidFileContent
+            throw CustomFilterMetaParserError.invalidFileContent
         }
         
         // When header is parsed we suppose that lines started with '!' and in case of system protection filters '#'
@@ -118,7 +118,7 @@ extension FilterMetadataParserProtocol {
         }
         
         // Return result object when all lines are parsed
-        return FilterMetadata(title: title,
+        return CustomFilterMeta(title: title,
                               description: description,
                               version: version,
                               lastUpdateDate: lastUpdateDate,
@@ -234,4 +234,4 @@ extension FilterMetadataParserProtocol {
 
 // MARK: - FilterMetadataParser
 
-struct FilterMetadataParser: FilterMetadataParserProtocol {}
+struct CustomFilterMetaParser: CustomFilterMetaParserProtocol {}
