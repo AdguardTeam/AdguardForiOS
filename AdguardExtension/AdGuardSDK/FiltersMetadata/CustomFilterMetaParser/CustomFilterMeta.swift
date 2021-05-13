@@ -18,8 +18,15 @@
 
 import Foundation
 
-struct CustomFilterMeta {
-    let title: String? // key: 'Title'
+protocol ExtendedCustomFilterMetaProtocol: FilterMetaProtocol {
+    var licensePage: String? { get }
+    var issuesReportPage: String? { get }
+    var communityPage: String? { get }
+    var rulesCount: Int { get }
+}
+
+struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {
+    let name: String? // key: 'Title'
     let description: String? // key: 'Description'
     let version: String? // key: 'Version'; Filter version
     let lastUpdateDate: Date? // keys: 'Last Modified', 'TimeUpdated'; The date when the filter was last updated on the server-side

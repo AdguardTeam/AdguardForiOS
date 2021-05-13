@@ -10,7 +10,7 @@ class CustomFilterMetaParserTest: XCTestCase {
         let fileContent = getStringFromFile("EasyListTest")
         let result = try! parser.parse(fileContent, for: .safari)
         
-        XCTAssertEqual(result.title, "EasyList")
+        XCTAssertEqual(result.name, "EasyList")
         XCTAssertNil(result.description)
         XCTAssertEqual(result.version, "202105121116")
         XCTAssertNotNil(result.lastUpdateDate)
@@ -27,7 +27,7 @@ class CustomFilterMetaParserTest: XCTestCase {
         let fileContent = getStringFromFile("AdblockIcelandicFilterTest")
         let result = try! parser.parse(fileContent, for: .safari)
         
-        XCTAssertNil(result.title)
+        XCTAssertNil(result.name)
         XCTAssertNil(result.description)
         XCTAssertNil(result.version)
         XCTAssertNil(result.lastUpdateDate)
@@ -44,7 +44,7 @@ class CustomFilterMetaParserTest: XCTestCase {
         let fileContent = getStringFromFile("AdGuardBaseFilterTest")
         let result = try! parser.parse(fileContent, for: .safari)
         
-        XCTAssertEqual(result.title, "AdGuard Base filter")
+        XCTAssertEqual(result.name, "AdGuard Base filter")
         XCTAssertEqual(result.description, "EasyList + AdGuard English filter. This filter is necessary for quality ad blocking.")
         XCTAssertEqual(result.version, "2.1.75.96")
         XCTAssertNotNil(result.lastUpdateDate)
@@ -83,7 +83,7 @@ class CustomFilterMetaParserTest: XCTestCase {
         let fileContent = getStringFromFile("AdGuardSDNSFilterTest")
         let result = try! parser.parse(fileContent, for: .system)
         
-        XCTAssertEqual(result.title, "AdGuard DNS filter")
+        XCTAssertEqual(result.name, "AdGuard DNS filter")
         XCTAssertEqual(result.description, "Filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile ads filter, EasyList, EasyPrivacy, etc) and simplified specifically to be better compatible with DNS-level ad blocking.")
         XCTAssertNil(result.version)
         XCTAssertNotNil(result.lastUpdateDate)

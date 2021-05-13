@@ -459,6 +459,9 @@
 		7E3556E925DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3556EA25DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3BDEE023A15709009492CE /* GetProDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BDEDF23A15709009492CE /* GetProDialogView.swift */; };
+		7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3D541B264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift */; };
+		7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E257264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift */; };
+		7E3D5420264D782700169E37 /* filters_i18n_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E3D541F264D782700169E37 /* filters_i18n_test.json */; };
 		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
 		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
 		7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
@@ -661,6 +664,13 @@
 		7EB3E243264BFA1500C460FA /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3E242264BFA1400C460FA /* AdblockIcelandicFilterTest.txt */; };
 		7EB3E245264BFFAB00C460FA /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3E244264BFFAB00C460FA /* AdGuardBaseFilterTest.txt */; };
 		7EB3E247264C01F700C460FA /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3E246264C01F700C460FA /* AdGuardSDNSFilterTest.txt */; };
+		7EB3E258264D2AEF00C460FA /* ExtendedFiltersMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E255264D2AEE00C460FA /* ExtendedFiltersMeta.swift */; };
+		7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */; };
+		7EB3E25A264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E257264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift */; };
+		7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */; };
+		7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E25D264D34DF00C460FA /* ExtendedFiltersMetaTest.swift */; };
+		7EB3E261264D353200C460FA /* filters_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EB3E260264D353200C460FA /* filters_test.json */; };
+		7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3E255264D2AEE00C460FA /* ExtendedFiltersMeta.swift */; };
 		7EB444BC23B64E94005E015F /* DnsStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */; };
 		7EB5526A242243C1000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
 		7EB5526B2422441F000498CC /* ThemableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB55269242243C1000498CC /* ThemableButton.swift */; };
@@ -3377,6 +3387,8 @@
 		7E3B386425120FAB0005EB9F /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E3B386525120FAC0005EB9F /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = be; path = be.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7E3BDEDF23A15709009492CE /* GetProDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProDialogView.swift; sourceTree = "<group>"; };
+		7E3D541B264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedFiltersMetaLocalizationsTest.swift; sourceTree = "<group>"; };
+		7E3D541F264D782700169E37 /* filters_i18n_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filters_i18n_test.json; sourceTree = "<group>"; };
 		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
 		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
 		7E3F118F2350624900D1D17E /* UserFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterModel.swift; sourceTree = "<group>"; };
@@ -3639,6 +3651,11 @@
 		7EB3E242264BFA1400C460FA /* AdblockIcelandicFilterTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AdblockIcelandicFilterTest.txt; sourceTree = "<group>"; };
 		7EB3E244264BFFAB00C460FA /* AdGuardBaseFilterTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AdGuardBaseFilterTest.txt; sourceTree = "<group>"; };
 		7EB3E246264C01F700C460FA /* AdGuardSDNSFilterTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AdGuardSDNSFilterTest.txt; sourceTree = "<group>"; };
+		7EB3E255264D2AEE00C460FA /* ExtendedFiltersMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedFiltersMeta.swift; sourceTree = "<group>"; };
+		7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterMetaProtocol.swift; sourceTree = "<group>"; };
+		7EB3E257264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedFiltersMetaLocalizations.swift; sourceTree = "<group>"; };
+		7EB3E25D264D34DF00C460FA /* ExtendedFiltersMetaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedFiltersMetaTest.swift; sourceTree = "<group>"; };
+		7EB3E260264D353200C460FA /* filters_test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filters_test.json; sourceTree = "<group>"; };
 		7EB55269242243C1000498CC /* ThemableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableButton.swift; sourceTree = "<group>"; };
 		7EB5526C24224755000498CC /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsModel.swift; sourceTree = "<group>"; };
@@ -5162,6 +5179,15 @@
 			path = BottomAlertController;
 			sourceTree = "<group>";
 		};
+		7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */ = {
+			isa = PBXGroup;
+			children = (
+				7E3D541F264D782700169E37 /* filters_i18n_test.json */,
+				7E3D541B264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift */,
+			);
+			path = ExtendedFiltersMetaLocalizationsTest;
+			sourceTree = "<group>";
+		};
 		7E3F118C2350620900D1D17E /* List of rules models */ = {
 			isa = PBXGroup;
 			children = (
@@ -5390,9 +5416,11 @@
 		7EB3E22E264BEDAA00C460FA /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				7EB3E231264BEDAA00C460FA /* Info.plist */,
+				7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */,
+				7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */,
 				7EB3E23D264BEE6400C460FA /* FilterMetadataParserTest */,
 				7EB3E238264BEE4800C460FA /* AdGuardSDKTests-Bridging-Header.h */,
+				7EB3E231264BEDAA00C460FA /* Info.plist */,
 			);
 			path = AdGuardSDKTests;
 			sourceTree = "<group>";
@@ -5431,6 +5459,24 @@
 				7EB3E246264C01F700C460FA /* AdGuardSDNSFilterTest.txt */,
 			);
 			path = System;
+			sourceTree = "<group>";
+		};
+		7EB3E25C264D2F0200C460FA /* CustomFilterMetaParser */ = {
+			isa = PBXGroup;
+			children = (
+				7EB3E225264AB27100C460FA /* CustomFilterMetaParser.swift */,
+				7EB3E227264AB2E400C460FA /* CustomFilterMeta.swift */,
+			);
+			path = CustomFilterMetaParser;
+			sourceTree = "<group>";
+		};
+		7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */ = {
+			isa = PBXGroup;
+			children = (
+				7EB3E260264D353200C460FA /* filters_test.json */,
+				7EB3E25D264D34DF00C460FA /* ExtendedFiltersMetaTest.swift */,
+			);
+			path = ExtendedFiltersMetaTest;
 			sourceTree = "<group>";
 		};
 		7EB552682422439E000498CC /* ThemableElements */ = {
@@ -5663,8 +5709,10 @@
 				65EC9A051BB9824C00F53F3B /* ABECFilter.h */,
 				65EC9A061BB9824C00F53F3B /* ABECFilter.m */,
 				65EC9A041BB9824C00F53F3B /* ABECConstants.h */,
-				7EB3E225264AB27100C460FA /* CustomFilterMetaParser.swift */,
-				7EB3E227264AB2E400C460FA /* CustomFilterMeta.swift */,
+				7EB3E25C264D2F0200C460FA /* CustomFilterMetaParser */,
+				7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */,
+				7EB3E255264D2AEE00C460FA /* ExtendedFiltersMeta.swift */,
+				7EB3E257264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift */,
 			);
 			path = FiltersMetadata;
 			sourceTree = "<group>";
@@ -7058,9 +7106,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EB3E243264BFA1500C460FA /* AdblockIcelandicFilterTest.txt in Resources */,
+				7EB3E261264D353200C460FA /* filters_test.json in Resources */,
 				7EB3E247264C01F700C460FA /* AdGuardSDNSFilterTest.txt in Resources */,
 				7EB3E23F264BF33700C460FA /* EasyListTest.txt in Resources */,
 				7EB3E245264BFFAB00C460FA /* AdGuardBaseFilterTest.txt in Resources */,
+				7E3D5420264D782700169E37 /* filters_i18n_test.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8634,8 +8684,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
+				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7EB3E23B264BEE5E00C460FA /* CustomFilterMeta.swift in Sources */,
+				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
+				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				7EB3E23C264BEE5E00C460FA /* CustomFilterMetaParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9642,6 +9697,7 @@
 				D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */,
 				D0BA7C6D2631B5810097029B /* RequestFactory-Common.swift in Sources */,
 				D031303E2639685100A5C1D5 /* NSDate+Utils.m in Sources */,
+				7EB3E25A264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				D0BA7C262631B5540097029B /* RequestSenderProtocol.swift in Sources */,
 				D0BDB4212630651D007D9BC6 /* AESAntibanner.m in Sources */,
 				D0BA7C112631B53B0097029B /* NetworkingService.swift in Sources */,
@@ -9655,6 +9711,7 @@
 				D0BA7C562631B56D0097029B /* RequestProtocol.swift in Sources */,
 				D0BA7D632631C1F10097029B /* FMSQLStatementSplitter.m in Sources */,
 				D0BA7BE62631B5030097029B /* NetworkManager.swift in Sources */,
+				7EB3E258264D2AEF00C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
@@ -9679,6 +9736,7 @@
 				D0BDB4172630651D007D9BC6 /* FiltersService+metadata.swift in Sources */,
 				D0BA7DB62631C2A20097029B /* NotificationService+Utils.swift in Sources */,
 				D0BA7C542631B56D0097029B /* FiltersMetadataRequest.swift in Sources */,
+				7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */,
 				D0BA7E6F263316E90097029B /* SafariRule.swift in Sources */,
 				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FiltersStorage.swift in Sources */,

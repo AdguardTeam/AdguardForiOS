@@ -41,13 +41,13 @@ protocol CustomFilterMetaParserProtocol {
      
      Filter example: https://easylist.to/easylist/easylist.txt
      */
-    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> CustomFilterMeta
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol
 }
 
 // MARK: - CustomFilterMetaParserProtocol + default implementation
 
 extension CustomFilterMetaParserProtocol {
-    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> CustomFilterMeta {
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol {
         
         // Check if file's content is valid
         guard !isInvalid(content: filterFileContentString) else {
@@ -59,7 +59,7 @@ extension CustomFilterMetaParserProtocol {
         var headerWasParsed = false
         
         // Header possible values
-        var title: String?
+        var name: String?
         var description: String?
         var version: String?
         var lastUpdateDate: Date?
@@ -82,7 +82,7 @@ extension CustomFilterMetaParserProtocol {
             // Process line as header if it starts with '!' and header wasn't parsed yet
             if line.first == "!" && !headerWasParsed {
                 processHeader(line: line,
-                              &title,
+                              &name,
                               &description,
                               &version,
                               &lastUpdateDate,
@@ -118,7 +118,7 @@ extension CustomFilterMetaParserProtocol {
         }
         
         // Return result object when all lines are parsed
-        return CustomFilterMeta(title: title,
+        return CustomFilterMeta(name: name,
                               description: description,
                               version: version,
                               lastUpdateDate: lastUpdateDate,
@@ -138,7 +138,7 @@ extension CustomFilterMetaParserProtocol {
      Line will be processed and description variable will be set to: description = "AdGuard Turkish filter (Optimized)"
      */
     private func processHeader(line: String,
-                                      _ title: inout String?,
+                                      _ name: inout String?,
                                       _ description: inout String?,
                                       _ version: inout String?,
                                       _ lastUpdateDate: inout Date?,
@@ -157,7 +157,7 @@ extension CustomFilterMetaParserProtocol {
             if let tagRange = lowercasedLine.range(of: tag + ":"), tagRange.upperBound < line.endIndex {
                 let tagValue = line[tagRange.upperBound ..< line.endIndex].trimmingCharacters(in: .whitespacesAndNewlines)
                 switch tag {
-                case "title": title = tagValue
+                case "title": name = tagValue
                 case "description": description = tagValue
                 case "version": version = tagValue
                 case "last modified", "timeupdated": lastUpdateDate = processUpdateDate(tagValue)

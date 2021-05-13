@@ -47,7 +47,7 @@ enum FilterTagType {
     }
 }
 
-class FiltersMetadataParser: ParserProtocol {
+struct FiltersMetadataParser: ParserProtocol {
     typealias Model = ABECFilterClientMetadata
     
     func parse(data: Data, response: URLResponse?) -> FiltersMetadataParser.Model? {
