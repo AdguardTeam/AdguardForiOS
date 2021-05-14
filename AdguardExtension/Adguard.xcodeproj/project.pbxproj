@@ -459,6 +459,8 @@
 		7E3556E925DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3556EA25DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3BDEE023A15709009492CE /* GetProDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BDEDF23A15709009492CE /* GetProDialogView.swift */; };
+		7E3D5423264E6BFA00169E37 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 7E3D5422264E6BFA00169E37 /* SQLite */; };
+		7E3D5425264E6D7300169E37 /* FiltersMetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3D5424264E6D7300169E37 /* FiltersMetaStorage.swift */; };
 		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
 		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
 		7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
@@ -3377,6 +3379,7 @@
 		7E3B386425120FAB0005EB9F /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E3B386525120FAC0005EB9F /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = be; path = be.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7E3BDEDF23A15709009492CE /* GetProDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProDialogView.swift; sourceTree = "<group>"; };
+		7E3D5424264E6D7300169E37 /* FiltersMetaStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorage.swift; sourceTree = "<group>"; };
 		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
 		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
 		7E3F118F2350624900D1D17E /* UserFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterModel.swift; sourceTree = "<group>"; };
@@ -4432,6 +4435,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E3D5423264E6BFA00169E37 /* SQLite in Frameworks */,
 				D0BDB5F8263073C8007D9BC6 /* ContentBlockerConverter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5665,6 +5669,7 @@
 				65EC9A041BB9824C00F53F3B /* ABECConstants.h */,
 				7EB3E225264AB27100C460FA /* FilterMetadataParser.swift */,
 				7EB3E227264AB2E400C460FA /* FilterMetadata.swift */,
+				7E3D5424264E6D7300169E37 /* FiltersMetaStorage.swift */,
 			);
 			path = FiltersMetadata;
 			sourceTree = "<group>";
@@ -6700,6 +6705,7 @@
 			name = AdGuardSDK;
 			packageProductDependencies = (
 				D0BDB5F7263073C8007D9BC6 /* ContentBlockerConverter */,
+				7E3D5422264E6BFA00169E37 /* SQLite */,
 			);
 			productName = AdGuardSDK;
 			productReference = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */;
@@ -6879,6 +6885,7 @@
 				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				D0BDB5F6263073C8007D9BC6 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
+				7E3D5421264E6BFA00169E37 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -9655,6 +9662,7 @@
 				D0BA7C562631B56D0097029B /* RequestProtocol.swift in Sources */,
 				D0BA7D632631C1F10097029B /* FMSQLStatementSplitter.m in Sources */,
 				D0BA7BE62631B5030097029B /* NetworkManager.swift in Sources */,
+				7E3D5425264E6D7300169E37 /* FiltersMetaStorage.swift in Sources */,
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
@@ -12528,6 +12536,14 @@
 				minimumVersion = 3.1.6;
 			};
 		};
+		7E3D5421264E6BFA00169E37 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.12.2;
+			};
+		};
 		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
@@ -12567,6 +12583,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		7E3D5422264E6BFA00169E37 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E3D5421264E6BFA00169E37 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
 		};
 		7ECAA27B257E4AAD004DA0D3 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
