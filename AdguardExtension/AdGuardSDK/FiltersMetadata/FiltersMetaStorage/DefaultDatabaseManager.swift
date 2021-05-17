@@ -18,8 +18,15 @@
 
 import Foundation
 import Zip
+import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
+    // default.db schema version
+    var defaultDbSchemaVersion: String? { get }
+    
+    // default.db file URL
+    var defaultDbFileUrl: URL { get }
+    
     /*
      Unarchives default.db and places it to the specified folder
      Returns true if update was successful
@@ -30,6 +37,18 @@ protocol DefaultDatabaseManagerProtocol {
 final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     // MARK: - Public properties
+    
+    var defaultDbSchemaVersion: String? {
+        guard let db = try? Connection(defaultDbFileUrl.path) else {
+            return nil
+        }
+        
+        let versionTable = Table("version")
+        let versionColumn = Expression<String>("schema_version")
+        return try? db.pluck(versionTable)?.get(versionColumn)
+    }
+    
+    lazy var defaultDbFileUrl: URL = { dbContainerUrl.appendingPathComponent(dbFile) }()
     
     // MARK: - Private properties
     
@@ -56,15 +75,13 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
             return false
         }
         
-        let defaultDbTargetUrl = dbContainerUrl.appendingPathComponent(dbFile)
-        
         do {
-            let _ = try FileManager.default.replaceItemAt(defaultDbTargetUrl, withItemAt: dbFileUrl)
+            let _ = try FileManager.default.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)
             try FileManager.default.removeItem(at: dbFileUrl)
             
             return true
         } catch {
-            Logger.logError("Error replacinf default.db file from URL = \(defaultDbTargetUrl); to URL = \(dbFileUrl); error: \(error)")
+            Logger.logError("Error replacinf default.db file from URL = \(defaultDbFileUrl); to URL = \(dbFileUrl); error: \(error)")
             return false
         }
     }
