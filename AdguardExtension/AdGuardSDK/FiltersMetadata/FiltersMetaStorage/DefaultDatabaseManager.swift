@@ -65,6 +65,12 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     init(dbContainerUrl: URL) {
         self.dbContainerUrl = dbContainerUrl
+        
+        // Create default.db file if missing
+        if !FileManager.default.fileExists(atPath: defaultDbFileUrl.path) {
+            let success = updateDefaultDb()
+            Logger.logInfo("default.db file was missing, created new one with success = \(success)")
+        }
     }
     
     // MARK: - Public methods
