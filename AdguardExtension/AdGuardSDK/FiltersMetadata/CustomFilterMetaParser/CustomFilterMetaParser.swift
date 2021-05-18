@@ -18,22 +18,22 @@
 
 import Foundation
 
-// MARK: - FilterMetadataParserError
+// MARK: - CustomFilterMetaParserError
 
-enum FilterMetadataParserError: Error {
+enum CustomFilterMetaParserError: Error {
     case invalidFileContent
 }
 
-// MARK: - FilterMetadataParserType
+// MARK: - CustomFilterMetaParserType
 
-enum FilterMetadataParserType {
+enum CustomFilterMetaParserType {
     case safari
     case system
 }
 
-// MARK: - FilterMetadataParserProtocol
+// MARK: - CustomFilterMetaParserProtocol
 
-protocol FilterMetadataParserProtocol {
+protocol CustomFilterMetaParserProtocol {
     /**
      Parses filter's file content and converts content to FilterMetadata object
      Parsing can differ for system and safary filters, specify the needed one with parserType
@@ -41,17 +41,17 @@ protocol FilterMetadataParserProtocol {
      
      Filter example: https://easylist.to/easylist/easylist.txt
      */
-    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol
 }
 
-// MARK: - FilterMetadataParserProtocol + default implementation
+// MARK: - CustomFilterMetaParserProtocol + default implementation
 
-extension FilterMetadataParserProtocol {
-    func parse(_ filterFileContentString: String, for parserType: FilterMetadataParserType) throws -> FilterMetadata {
+extension CustomFilterMetaParserProtocol {
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol {
         
         // Check if file's content is valid
         guard !isInvalid(content: filterFileContentString) else {
-            throw FilterMetadataParserError.invalidFileContent
+            throw CustomFilterMetaParserError.invalidFileContent
         }
         
         // When header is parsed we suppose that lines started with '!' and in case of system protection filters '#'
@@ -59,7 +59,7 @@ extension FilterMetadataParserProtocol {
         var headerWasParsed = false
         
         // Header possible values
-        var title: String?
+        var name: String?
         var description: String?
         var version: String?
         var lastUpdateDate: Date?
@@ -82,7 +82,7 @@ extension FilterMetadataParserProtocol {
             // Process line as header if it starts with '!' and header wasn't parsed yet
             if line.first == "!" && !headerWasParsed {
                 processHeader(line: line,
-                              &title,
+                              &name,
                               &description,
                               &version,
                               &lastUpdateDate,
@@ -118,7 +118,7 @@ extension FilterMetadataParserProtocol {
         }
         
         // Return result object when all lines are parsed
-        return FilterMetadata(title: title,
+        return CustomFilterMeta(name: name,
                               description: description,
                               version: version,
                               lastUpdateDate: lastUpdateDate,
@@ -138,7 +138,7 @@ extension FilterMetadataParserProtocol {
      Line will be processed and description variable will be set to: description = "AdGuard Turkish filter (Optimized)"
      */
     private func processHeader(line: String,
-                                      _ title: inout String?,
+                                      _ name: inout String?,
                                       _ description: inout String?,
                                       _ version: inout String?,
                                       _ lastUpdateDate: inout Date?,
@@ -157,7 +157,7 @@ extension FilterMetadataParserProtocol {
             if let tagRange = lowercasedLine.range(of: tag + ":"), tagRange.upperBound < line.endIndex {
                 let tagValue = line[tagRange.upperBound ..< line.endIndex].trimmingCharacters(in: .whitespacesAndNewlines)
                 switch tag {
-                case "title": title = tagValue
+                case "title": name = tagValue
                 case "description": description = tagValue
                 case "version": version = tagValue
                 case "last modified", "timeupdated": lastUpdateDate = processUpdateDate(tagValue)
@@ -234,4 +234,4 @@ extension FilterMetadataParserProtocol {
 
 // MARK: - FilterMetadataParser
 
-struct FilterMetadataParser: FilterMetadataParserProtocol {}
+struct CustomFilterMetaParser: CustomFilterMetaParserProtocol {}

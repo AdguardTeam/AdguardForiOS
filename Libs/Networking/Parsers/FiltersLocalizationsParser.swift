@@ -19,7 +19,7 @@
 
 import Foundation
 
-class FiltersLocalizationsParser: ParserProtocol {
+struct FiltersLocalizationsParser: ParserProtocol {
     typealias Model = ABECFilterClientLocalization
     
     func parse(data: Data, response: URLResponse?) -> FiltersLocalizationsParser.Model? {

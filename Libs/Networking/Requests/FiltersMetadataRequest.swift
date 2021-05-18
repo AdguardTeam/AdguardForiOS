@@ -18,7 +18,7 @@
 
 import Foundation
 
-class FiltersMetadataRequest: RequestProtocol {
+struct FiltersMetadataRequest: RequestProtocol {
     
     let version: String
     let id: String
@@ -36,13 +36,13 @@ class FiltersMetadataRequest: RequestProtocol {
         let path = "\(urlBase)filters.js"
         
         var params: [String: Any] = [
-            "v": version, //ADProductInfo().version() ?? "",
-            "lang": lang //"\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+            "v": version,
+            "lang": lang
         ]
         
 #if os(iOS)
-        params["id"] = id //Bundle.main.isPro ? "ios_pro" : "ios"
-        params["cid"] = cid //UIDevice.current.identifierForVendor?.uuidString ?? ""
+        params["id"] = id
+        params["cid"] = cid
 #endif
 
         guard let resultStr = params.constructLink(url: path),

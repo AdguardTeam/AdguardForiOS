@@ -18,7 +18,7 @@
 
 import Foundation
 
-class FiltersLocalizationsRequest: RequestProtocol {
+struct FiltersLocalizationsRequest: RequestProtocol {
     
     var urlRequest: URLRequest? {
         let path = "\(urlBase)filters_i18n.js"
