@@ -429,6 +429,9 @@
 		7E1C34702653C5B600A4490E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDB5CC263071FC007D9BC6 /* Logger.swift */; };
 		7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C346C2653C57B00A4490E /* CustomFilterMeta.swift */; };
 		7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C346E2653C58000A4490E /* CustomFilterMetaParser.swift */; };
+		7E1C34742653C77000A4490E /* FiltersMetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C34732653C77000A4490E /* FiltersMetaStorage.swift */; };
+		7E1C34762653CB5800A4490E /* GroupMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C34752653CB5800A4490E /* GroupMetaProtocol.swift */; };
+		7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C34752653CB5800A4490E /* GroupMetaProtocol.swift */; };
 		7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
 		7E1E41572424BFD100567C8D /* MostActiveCompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */; };
 		7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */; };
@@ -3286,6 +3289,8 @@
 		7E1C346A265296F700A4490E /* ProductionDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDatabaseManager.swift; sourceTree = "<group>"; };
 		7E1C346C2653C57B00A4490E /* CustomFilterMeta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFilterMeta.swift; sourceTree = "<group>"; };
 		7E1C346E2653C58000A4490E /* CustomFilterMetaParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFilterMetaParser.swift; sourceTree = "<group>"; };
+		7E1C34732653C77000A4490E /* FiltersMetaStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorage.swift; sourceTree = "<group>"; };
+		7E1C34752653CB5800A4490E /* GroupMetaProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMetaProtocol.swift; sourceTree = "<group>"; };
 		7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesController.swift; sourceTree = "<group>"; };
 		7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
@@ -5213,6 +5218,7 @@
 			children = (
 				7E3D542D26526F3500169E37 /* DefaultDatabaseManager.swift */,
 				7E1C346A265296F700A4490E /* ProductionDatabaseManager.swift */,
+				7E1C34732653C77000A4490E /* FiltersMetaStorage.swift */,
 			);
 			path = FiltersMetaStorage;
 			sourceTree = "<group>";
@@ -5742,6 +5748,7 @@
 				7E3D542C26526F1700169E37 /* FiltersMetaStorage */,
 				7EB3E25C264D2F0200C460FA /* CustomFilterMetaParser */,
 				7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */,
+				7E1C34752653CB5800A4490E /* GroupMetaProtocol.swift */,
 				7EB3E255264D2AEE00C460FA /* ExtendedFiltersMeta.swift */,
 				7EB3E257264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift */,
 			);
@@ -8728,6 +8735,7 @@
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 			);
@@ -9743,6 +9751,7 @@
 				D0BA7CFE2631C0DC0097029B /* CharacterSet+Utils.swift in Sources */,
 				D0BA7D522631C1F00097029B /* FMResultSet.m in Sources */,
 				D0BA7D132631C12B0097029B /* AntibannerController.swift in Sources */,
+				7E1C34742653C77000A4490E /* FiltersMetaStorage.swift in Sources */,
 				D0BDB6CC26319E5C007D9BC6 /* ABECFilter.m in Sources */,
 				D0BA7C3E2631B5680097029B /* SuccessFailureParser.swift in Sources */,
 				D0BA7C102631B53B0097029B /* NetworkingService-Common.swift in Sources */,
@@ -9781,6 +9790,7 @@
 				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FiltersStorage.swift in Sources */,
 				D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */,
+				7E1C34762653CB5800A4490E /* GroupMetaProtocol.swift in Sources */,
 				D0BA7C552631B56D0097029B /* FiltersLocalizationsRequest.swift in Sources */,
 				D0CD6022263967540022D0C3 /* NSData+GZIP.m in Sources */,
 				D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */,
