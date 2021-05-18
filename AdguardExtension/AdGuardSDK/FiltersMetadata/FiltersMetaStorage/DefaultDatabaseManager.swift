@@ -21,36 +21,40 @@ import Zip
 import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
+    
+    // Checks if default.db file exists
+    var defaultDbFileExists: Bool { get }
+    
     // default.db schema version
-    var defaultDbSchemaVersion: String? { get }
+    var defaultDbSchemaVersion: Int? { get }
     
-    // default.db file URL
-    var defaultDbFileUrl: URL { get }
+    // Unarchives default.db and places it to the specified folder
+    func updateDefaultDb() throws
     
-    /*
-     Unarchives default.db and places it to the specified folder
-     Returns true if update was successful
-     */
-    func updateDefaultDb() -> Bool
+    // Removes default.db file
+    func removeDefaultDb() throws
 }
 
 final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     // MARK: - Public properties
     
-    var defaultDbSchemaVersion: String? {
+    var defaultDbFileExists: Bool { fileManager.fileExists(atPath: defaultDbFileUrl.path) }
+    
+    lazy var defaultDbSchemaVersion: Int? = {
         guard let db = try? Connection(defaultDbFileUrl.path) else {
             return nil
         }
         
         let versionTable = Table("version")
-        let versionColumn = Expression<String>("schema_version")
+        let versionColumn = Expression<Int>("schema_version")
         return try? db.pluck(versionTable)?.get(versionColumn)
-    }
-    
-    lazy var defaultDbFileUrl: URL = { dbContainerUrl.appendingPathComponent(dbFile) }()
-    
+    }()
+        
     // MARK: - Private properties
+    
+    // default.db file URL
+    private let defaultDbFileUrl: URL
     
     // Default database archive file name
     private let defaultDbArchiveFile = "default.db.zip"
@@ -61,54 +65,46 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // URL where db files should be located
     private let dbContainerUrl: URL
     
+    private let fileManager = FileManager.default
+    
     // MARK: - Initialization
     
     init(dbContainerUrl: URL) {
+        self.defaultDbFileUrl = dbContainerUrl.appendingPathComponent(dbFile)
         self.dbContainerUrl = dbContainerUrl
-        
-        // Create default.db file if missing
-        if !FileManager.default.fileExists(atPath: defaultDbFileUrl.path) {
-            let success = updateDefaultDb()
-            Logger.logInfo("default.db file was missing, created new one with success = \(success)")
-        }
     }
     
     // MARK: - Public methods
     
-    func updateDefaultDb() -> Bool {
-        guard let dbFileUrl = getDefaultDbUnzippedData() else {
+    func updateDefaultDb() throws {
+        guard let dbFileUrl = try getDefaultDbUnzippedData() else {
             Logger.logError("Failed to unarchive default.db")
-            return false
+            throw NSError(domain: "default.db.unarchive.failed", code: 1, userInfo: nil)
         }
         
-        do {
-            let _ = try FileManager.default.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)
-            try FileManager.default.removeItem(at: dbFileUrl)
-            
-            return true
-        } catch {
-            Logger.logError("Error replacinf default.db file from URL = \(defaultDbFileUrl); to URL = \(dbFileUrl); error: \(error)")
-            return false
+        let _ = try fileManager.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)
+        try fileManager.removeItem(at: dbFileUrl)
+    }
+    
+    func removeDefaultDb() throws {
+        guard defaultDbFileExists else {
+            Logger.logError("default.db file is missing, nothing to delete")
+            return
         }
+        
+        try fileManager.removeItem(atPath: defaultDbFileUrl.path)
     }
     
     // MARK: - Private methods
     
     // Unarchives default database archive and returns an URL of default.db file
-    private func getDefaultDbUnzippedData() -> URL? {
+    private func getDefaultDbUnzippedData() throws -> URL? {
         guard let resourcesUrl = Bundle(for: type(of: self)).resourceURL else {
             return nil
         }
         let defaultDbArchiveUrl = resourcesUrl.appendingPathComponent(defaultDbArchiveFile)
         let targetDbFileUrl = resourcesUrl.appendingPathComponent(dbFile)
-        do {
-            try Zip.unzipFile(defaultDbArchiveUrl, destination: resourcesUrl, overwrite: true, password: nil)
-            try FileManager.default.removeItem(at: defaultDbArchiveUrl)
-            
-            return targetDbFileUrl
-        } catch {
-            Logger.logError("Error unarchiving default.db file from URL = \(defaultDbArchiveUrl.path); error: \(error)")
-            return nil
-        }
+        try Zip.unzipFile(defaultDbArchiveUrl, destination: resourcesUrl, overwrite: true, password: nil)
+        return targetDbFileUrl
     }
 }
