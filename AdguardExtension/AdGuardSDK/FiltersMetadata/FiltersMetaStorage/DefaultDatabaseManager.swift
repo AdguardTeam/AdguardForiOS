@@ -21,6 +21,8 @@ import Zip
 import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
+    // default.db file URL
+    var defaultDbFileUrl: URL { get }
     
     // Checks if default.db file exists
     var defaultDbFileExists: Bool { get }
@@ -37,7 +39,19 @@ protocol DefaultDatabaseManagerProtocol {
 
 final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
+    enum ManagerError: Error, CustomDebugStringConvertible {
+        case invalidResourcePath
+        
+        var debugDescription: String {
+            switch self {
+            case .invalidResourcePath: return "Bundle.resourceURL is nil"
+            }
+        }
+    }
+    
     // MARK: - Public properties
+    
+    let defaultDbFileUrl: URL
     
     var defaultDbFileExists: Bool { fileManager.fileExists(atPath: defaultDbFileUrl.path) }
     
@@ -52,9 +66,6 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     }()
         
     // MARK: - Private properties
-    
-    // default.db file URL
-    private let defaultDbFileUrl: URL
     
     // Default database archive file name
     private let defaultDbArchiveFile = "default.db.zip"
@@ -77,11 +88,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // MARK: - Public methods
     
     func updateDefaultDb() throws {
-        guard let dbFileUrl = try getDefaultDbUnzippedData() else {
-            Logger.logError("Failed to unarchive default.db")
-            throw NSError(domain: "default.db.unarchive.failed", code: 1, userInfo: nil)
-        }
-        
+        let dbFileUrl = try getDefaultDbUnzippedData()
         let _ = try fileManager.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)
         try fileManager.removeItem(at: dbFileUrl)
     }
@@ -98,9 +105,9 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // MARK: - Private methods
     
     // Unarchives default database archive and returns an URL of default.db file
-    private func getDefaultDbUnzippedData() throws -> URL? {
+    private func getDefaultDbUnzippedData() throws -> URL {
         guard let resourcesUrl = Bundle(for: type(of: self)).resourceURL else {
-            return nil
+            throw ManagerError.invalidResourcePath
         }
         let defaultDbArchiveUrl = resourcesUrl.appendingPathComponent(defaultDbArchiveFile)
         let targetDbFileUrl = resourcesUrl.appendingPathComponent(dbFile)
