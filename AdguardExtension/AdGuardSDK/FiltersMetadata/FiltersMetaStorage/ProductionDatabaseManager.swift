@@ -79,8 +79,14 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         let productionDbExists = fileManager.fileExists(atPath: productionDbFileUrl.path)
         
         if !productionDbExists {
+            
+            //Check if default.db existed and if not then create it
+            if !defaultDatabaseManager.defaultDbFileExists {
+                try defaultDatabaseManager.updateDefaultDb()
+            }
+            
             // When adguard.db is missing we rename default.db -> adguard.db
-            let _ = try fileManager.replaceItemAt(defaultDatabaseManager.defaultDbFileUrl, withItemAt: productionDbFileUrl)
+            let _ = try fileManager.replaceItemAt(productionDbFileUrl, withItemAt: defaultDatabaseManager.defaultDbFileUrl)
         }
         
         /*
@@ -89,11 +95,6 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
          SQLite will attempt to create the database file if it does not already exist"
          */
         self.filtersDb = try Connection(productionDbFileUrl.path)
-        
-        // Create adguard.db from schema if it was missing
-        if !productionDbExists {
-            try createProductionDb()
-        }
     }
     
     // MARK: - Public methods
@@ -116,11 +117,11 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     
     /*
      Compares schema version of default.db and adguard.db
-     Returns true if adguard.db schema is lower than default.db, alse returns default.db schma version
+     Returns true if adguard.db schema is lower than default.db, else returns default.db schema version
      */
-    private func shouldUpgradeDbScheme() throws -> (Bool, Int) {
+    private func shouldUpgradeDbScheme() throws -> (Bool, String) {
         let versionTable = Table("version")
-        let versionColumn = Expression<Int>("schema_version")
+        let versionColumn = Expression<String>("schema_version")
         
         guard let productionDbSchemaVersion = try filtersDb.pluck(versionTable)?.get(versionColumn),
               let defaultDbSchemaVersion = defaultDatabaseManager.defaultDbSchemaVersion
@@ -128,27 +129,17 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
             throw ManagerError.unknownDbVersion
         }
         
-        return (productionDbSchemaVersion < defaultDbSchemaVersion, defaultDbSchemaVersion)
+        return (defaultDbSchemaVersion.isGreaterThan(value: productionDbSchemaVersion), defaultDbSchemaVersion)
     }
     
-    // Creates production database from schema file
-    private func createProductionDb() throws {
+    // Updates production database to the specified version
+    private func updateProductionDb(toVersion version: String) throws {
         guard let resourcesUrl = Bundle(for: type(of: self)).resourceURL else {
             throw ManagerError.invalidResourcePath
         }
         
-        let dbSchemeFileFormat = "schema%@.sql" // %@ stands for schema version
-        let version = ""
-        let schemaFileName = String(format: dbSchemeFileFormat, version)
-        let latestSchemaUrl = resourcesUrl.appendingPathComponent(schemaFileName)
-        let schemaQuery = try String(contentsOf: latestSchemaUrl)
-        try filtersDb.execute(schemaQuery)
-    }
-    
-    // Updates production database to the specified version
-    private func updateProductionDb(toVersion version: Int) throws {
-        guard let resourcesUrl = Bundle(for: type(of: self)).resourceURL else {
-            throw ManagerError.invalidResourcePath
+        guard let version = versionToUpdate(newVersion: version) else {
+            throw ManagerError.unknownDbVersion
         }
         
         let dbUpdateFileFormat = "update%@.sql" // %@ stands for update version
@@ -156,5 +147,11 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         let updateFileUrl = resourcesUrl.appendingPathComponent(updateFileName)
         let updateQuery = try String(contentsOf: updateFileUrl)
         try filtersDb.execute(updateQuery)
+    }
+    
+    private func versionToUpdate(newVersion: String) -> String? {
+        //TODO: Calculate all versions for update
+        guard let result = Double(newVersion) else { return nil }
+        return String(result - 0.001)
     }
 }
