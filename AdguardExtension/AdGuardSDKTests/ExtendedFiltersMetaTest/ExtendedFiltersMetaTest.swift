@@ -10,7 +10,7 @@ class ExtendedFiltersMetaTest: XCTestCase {
             let decoder = JSONDecoder()
             let extendedFiltersMeta = try decoder.decode(ExtendedFiltersMeta.self, from: jsonData)
             
-            XCTAssertEqual(extendedFiltersMeta.tags.count, 64)
+            XCTAssertEqual(extendedFiltersMeta.tags.count, 51)
             extendedFiltersMeta.tags.forEach { tag in
                 XCTAssertFalse(tag.tagName.isEmpty)
             }

@@ -17,11 +17,21 @@
 */
 
 import Foundation
+import SQLite
 
 protocol FiltersMetaStorageProtocol: AnyObject {
-    
+    var filtersDb: Connection { get }
 }
 
 final class FiltersMetaStorage: FiltersMetaStorageProtocol {
     
+    // MARK: - Public properties
+    
+    let filtersDb: Connection
+    
+    // MARK: - Initialization
+    
+    init(productionDbManager: ProductionDatabaseManagerProtocol) {
+        self.filtersDb = productionDbManager.filtersDb
+    }
 }
