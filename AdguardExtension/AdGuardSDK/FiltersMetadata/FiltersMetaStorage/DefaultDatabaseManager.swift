@@ -55,7 +55,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     var defaultDbFileExists: Bool { fileManager.fileExists(atPath: defaultDbFileUrl.path) }
     
-    lazy var defaultDbSchemaVersion: String? = {
+    var defaultDbSchemaVersion: String? {
         guard let db = try? Connection(defaultDbFileUrl.path) else {
             return nil
         }
@@ -63,7 +63,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
         let versionTable = Table("version")
         let versionColumn = Expression<String>("schema_version")
         return try? db.pluck(versionTable)?.get(versionColumn)
-    }()
+    }
         
     // MARK: - Private properties
     

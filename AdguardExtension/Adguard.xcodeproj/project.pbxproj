@@ -142,8 +142,6 @@
 		24BD3292260346B300CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
-		24C0004F265505BE00F46373 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C0004E265505BE00F46373 /* String+Utils.swift */; };
-		24C000502655088C00F46373 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C0004E265505BE00F46373 /* String+Utils.swift */; };
 		24C0005226550A9000F46373 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 24C0005126550A9000F46373 /* default.db.zip */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D59C572653C9CE00B92379 /* ProductionDatabaseManagerTest.swift */; };
@@ -3099,7 +3097,6 @@
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchNotificationHandler.swift; sourceTree = "<group>"; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
-		24C0004E265505BE00F46373 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		24C0005126550A9000F46373 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
@@ -4542,14 +4539,6 @@
 			path = Parsers;
 			sourceTree = "<group>";
 		};
-		24C0004D265505AE00F46373 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				24C0004E265505BE00F46373 /* String+Utils.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		24D6A9CB25FB60A200674D11 /* URLScheme */ = {
 			isa = PBXGroup;
 			children = (
@@ -5881,7 +5870,6 @@
 			isa = PBXGroup;
 			children = (
 				242F69E426540F4F00B9DAD4 /* SQLScripts */,
-				24C0004D265505AE00F46373 /* Utils */,
 				D0BA7E5926330D9A0097029B /* Safari */,
 				D0BA7B7C2631A8910097029B /* Resources */,
 				D0BDB622263075C6007D9BC6 /* Lang */,
@@ -8802,7 +8790,6 @@
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
-				24C000502655088C00F46373 /* String+Utils.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */,
@@ -9859,7 +9846,6 @@
 				D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */,
 				D0BA7C552631B56D0097029B /* FiltersLocalizationsRequest.swift in Sources */,
 				D0CD6022263967540022D0C3 /* NSData+GZIP.m in Sources */,
-				24C0004F265505BE00F46373 /* String+Utils.swift in Sources */,
 				D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */,
 				D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */,
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
