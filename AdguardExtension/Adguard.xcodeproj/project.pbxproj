@@ -484,7 +484,6 @@
 		7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E40799D231E7E8C007EFB26 /* CoreServices.framework */; };
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
-		7E4120AF2652855F0092F726 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7E4120AE2652855F0092F726 /* Zip */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -553,6 +552,16 @@
 		7E69C4FD26554CD200EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4FC26554CD200EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift */; };
 		7E69C4FF26554CE200EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4FE26554CE200EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift */; };
 		7E69C501265559CC00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C500265559CC00EA9DBA /* FiltersMetaStorage+FitlerRules.swift */; };
+		7E69C5022656617C00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C500265559CC00EA9DBA /* FiltersMetaStorage+FitlerRules.swift */; };
+		7E69C5032656617C00EA9DBA /* FiltersMetaStorage+Langs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4FA2655465F00EA9DBA /* FiltersMetaStorage+Langs.swift */; };
+		7E69C5042656617C00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4F626550C9F00EA9DBA /* FiltersMetaStorage+Groups.swift */; };
+		7E69C5052656617C00EA9DBA /* FiltersMetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C34732653C77000A4490E /* FiltersMetaStorage.swift */; };
+		7E69C5062656617C00EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4F426550C9300EA9DBA /* FiltersMetaStorage+Filters.swift */; };
+		7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4F82655109600EA9DBA /* FiltersMetaStorage+Tags.swift */; };
+		7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C346A265296F700A4490E /* ProductionDatabaseManager.swift */; };
+		7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4FE26554CE200EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift */; };
+		7E69C50A2656617C00EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4FC26554CD200EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift */; };
+		7E69C50C265666A600EA9DBA /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7E69C50B265666A600EA9DBA /* Zip */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
@@ -735,9 +744,6 @@
 		7EC6801F2548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680312548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680322548440200FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
-		7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA27B257E4AAD004DA0D3 /* Zip */; };
-		7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA28E257E4ACB004DA0D3 /* Zip */; };
-		7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA290257E4AD4004DA0D3 /* Zip */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -4227,7 +4233,6 @@
 				D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */,
 				D0B546042435D740002F0AEC /* Lottie in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
-				7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */,
 				D04B49EC2639A10100815F30 /* AdGuardSDK.framework in Frameworks */,
@@ -4245,7 +4250,6 @@
 				65C12EF51BD7B01700FFC71C /* SafariServices.framework in Frameworks */,
 				7EA783002578D60C00CA8889 /* (null) in Frameworks */,
 				65C12EF41BD7B00E00FFC71C /* libsqlite3.tbd in Frameworks */,
-				7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */,
 				D0AEC26F240947F5003E8FCC /* NetworkExtension.framework in Frameworks */,
 				7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */,
 				D04B49E32639A0EE00815F30 /* AdGuardSDK.framework in Frameworks */,
@@ -4270,7 +4274,6 @@
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
 				D0BDB3FD263064FF007D9BC6 /* AdGuardSDK.framework in Frameworks */,
-				7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */,
 				D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */,
 				65E5A0981B8632DD00319AA3 /* libsqlite3.tbd in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
@@ -4480,7 +4483,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E4120AF2652855F0092F726 /* Zip in Frameworks */,
+				7E69C50C265666A600EA9DBA /* Zip in Frameworks */,
 				7E3D5423264E6BFA00169E37 /* SQLite in Frameworks */,
 				D0BDB5F8263073C8007D9BC6 /* ContentBlockerConverter in Frameworks */,
 			);
@@ -6274,7 +6277,6 @@
 			packageProductDependencies = (
 				D0B546032435D740002F0AEC /* Lottie */,
 				D093AA5F25344B4E0015351F /* Setapp */,
-				7ECAA28E257E4ACB004DA0D3 /* Zip */,
 				A5E02630261E330900198396 /* AGDnsProxy */,
 			);
 			productName = AdguardExtension;
@@ -6300,7 +6302,6 @@
 			);
 			name = ActionExtension;
 			packageProductDependencies = (
-				7ECAA290257E4AD4004DA0D3 /* Zip */,
 			);
 			productName = ActionExtension;
 			productReference = 65C52B361B906105003AF42F /* ActionExtension.appex */;
@@ -6340,7 +6341,6 @@
 			packageProductDependencies = (
 				7E2522132408201700743648 /* Lottie */,
 				D09E271A2541D00B002D6BC0 /* Setapp */,
-				7ECAA27B257E4AAD004DA0D3 /* Zip */,
 				A5E0261B261E31FA00198396 /* AGDnsProxy */,
 			);
 			productName = AdguardExtension;
@@ -6813,7 +6813,7 @@
 			packageProductDependencies = (
 				D0BDB5F7263073C8007D9BC6 /* ContentBlockerConverter */,
 				7E3D5422264E6BFA00169E37 /* SQLite */,
-				7E4120AE2652855F0092F726 /* Zip */,
+				7E69C50B265666A600EA9DBA /* Zip */,
 			);
 			productName = AdGuardSDK;
 			productReference = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */;
@@ -8752,16 +8752,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E1C34692652940400A4490E /* DefaultDatabaseManager.swift in Sources */,
+				7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */,
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				7E69C5052656617C00EA9DBA /* FiltersMetaStorage.swift in Sources */,
+				7E69C50A2656617C00EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */,
 				7E1C3468265290F300A4490E /* DefaultDatabaseManagerTest.swift in Sources */,
+				7E69C5022656617C00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */,
 				7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
+				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
+				7E69C5042656617C00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */,
+				7E69C5062656617C00EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
+				7E69C5032656617C00EA9DBA /* FiltersMetaStorage+Langs.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
+				7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 			);
@@ -12727,27 +12736,12 @@
 			package = 7E3D5421264E6BFA00169E37 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
-		7E4120AE2652855F0092F726 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
-		};
 		7E69C4F22655017400EA9DBA /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
-		7ECAA27B257E4AAD004DA0D3 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
-		};
-		7ECAA28E257E4ACB004DA0D3 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
-		};
-		7ECAA290257E4AD4004DA0D3 /* Zip */ = {
+		7E69C50B265666A600EA9DBA /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;

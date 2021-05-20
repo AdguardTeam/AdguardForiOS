@@ -79,7 +79,7 @@ fileprivate struct FiltersTable {
 
 extension FiltersMetaStorageProtocol {
     
-    // All filters from database (they aren't localized)
+    // Returns all filters from database (they aren't localized)
     var allFilters: [ExtendedFilterMetaProtocol] {
         // Query: select * from filters order by group_id, display_number, filter_id
         let query = FiltersTable.table.select([])
