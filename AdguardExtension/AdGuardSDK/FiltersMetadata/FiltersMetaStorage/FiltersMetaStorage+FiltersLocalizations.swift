@@ -50,13 +50,13 @@ fileprivate struct FilterLocalizationsTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns localized strings for specified filter and language
-    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) -> ExtendedFiltersMetaLocalizations.FilterLocalization {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> ExtendedFiltersMetaLocalizations.FilterLocalization {
         // Query: select * from filter_localizations where filter_id = id and lang = lang
         let query = FilterLocalizationsTable.table
                                             .select([])
                                             .filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
         
-        let dbFilterLocalization = try? filtersDb.pluck(query)
+        let dbFilterLocalization = try filtersDb.pluck(query)
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
         Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
