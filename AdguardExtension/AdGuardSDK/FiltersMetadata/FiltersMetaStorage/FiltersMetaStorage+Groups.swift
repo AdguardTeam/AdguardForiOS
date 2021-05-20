@@ -78,6 +78,7 @@ extension FiltersMetaStorageProtocol {
             let dbGroup = FilterGroupsTable(dbGroup: group)
             return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: dbGroup.name ?? "", displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
+        Logger.logDebug("(FiltersMetaStorage) - allGroups returning \(result?.count ?? 0) groups objects")
         return result ?? []
     }
     
@@ -91,6 +92,7 @@ extension FiltersMetaStorageProtocol {
             let localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang).name
             return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: localizedName, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
+        Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result?.count ?? 0) groups objects for lang=\(lang)")
         return result ?? []
     }
 }

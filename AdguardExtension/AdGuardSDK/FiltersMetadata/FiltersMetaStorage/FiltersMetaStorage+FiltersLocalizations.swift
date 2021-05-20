@@ -58,6 +58,7 @@ extension FiltersMetaStorageProtocol {
         
         let dbFilterLocalization = try? filtersDb.pluck(query)
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
+        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
     }
 }

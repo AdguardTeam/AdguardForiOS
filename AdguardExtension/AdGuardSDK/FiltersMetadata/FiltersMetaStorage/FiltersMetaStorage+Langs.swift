@@ -52,6 +52,7 @@ extension FiltersMetaStorageProtocol {
             let dbLang = FilterLangsTable(dbLang: lang)
             return dbLang.lang
         }
+        Logger.logDebug("(FiltersMetaStorage) - getLangsForFilter returning \(result?.count ?? 0) langs objects for filter with id=\(id)")
         return result ?? []
     }
 }

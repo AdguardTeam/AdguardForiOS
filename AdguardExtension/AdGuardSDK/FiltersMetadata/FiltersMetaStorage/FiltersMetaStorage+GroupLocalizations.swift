@@ -55,6 +55,7 @@ extension FiltersMetaStorageProtocol {
         
         let dbGroulLocalization = try? filtersDb.pluck(query)
         let groupLocalization = FilterGroupLocalizationsTable(dbGroupLocalization: dbGroulLocalization)
+        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return ExtendedFiltersMetaLocalizations.GroupLocalization(name: groupLocalization.name ?? "")
     }
 }

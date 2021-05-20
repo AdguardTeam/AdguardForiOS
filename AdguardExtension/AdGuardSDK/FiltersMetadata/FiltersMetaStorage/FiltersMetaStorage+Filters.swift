@@ -87,8 +87,7 @@ extension FiltersMetaStorageProtocol {
         
         let dbFilters: [FiltersTable] = (try? filtersDb.prepare(query).map { FiltersTable(dbFilter: $0) }) ?? []
         let groups = allGroups
-        
-        return dbFilters.map { dbFilter in
+        let filters: [ExtendedFilterMetaProtocol] = dbFilters.map { dbFilter in
             let tags = getTagsForFilter(withId: dbFilter.filterId)
             let langs = getLangsForFilter(withId: dbFilter.filterId)
             let group = groups.first(where: { $0.groupId == dbFilter.groupId })!
@@ -108,6 +107,8 @@ extension FiltersMetaStorageProtocol {
                                             languages: langs,
                                             tags: tags)
         }
+        Logger.logDebug("(FiltersMetaStorage) - allFilters returning \(filters.count) filter objects")
+        return filters
     }
     
     // Returns all filters from database with localizations for specified language
@@ -118,8 +119,7 @@ extension FiltersMetaStorageProtocol {
         
         let dbFilters: [FiltersTable] = (try? filtersDb.prepare(query).map { FiltersTable(dbFilter: $0) }) ?? []
         let groups = getAllLocalizedGroups(forLanguage: lang)
-        
-        return dbFilters.map { dbFilter in
+        let filters: [ExtendedFilterMetaProtocol] = dbFilters.map { dbFilter in
             let tags = getTagsForFilter(withId: dbFilter.filterId)
             let langs = getLangsForFilter(withId: dbFilter.filterId)
             let group = groups.first(where: { $0.groupId == dbFilter.groupId })!
@@ -140,5 +140,7 @@ extension FiltersMetaStorageProtocol {
                                             languages: langs,
                                             tags: tags)
         }
+        Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedFilters returning \(filters.count) filter objects for lang=\(lang)")
+        return filters
     }
 }

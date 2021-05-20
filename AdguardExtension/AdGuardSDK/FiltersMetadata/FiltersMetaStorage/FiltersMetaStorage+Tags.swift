@@ -58,6 +58,7 @@ extension FiltersMetaStorageProtocol {
             let dbTag = FilterTagsTable(dbTag: tag)
             return ExtendedFiltersMeta.Tag(tagId: dbTag.tagId, tagTypeId: dbTag.type, tagName: dbTag.name)
         }
+        Logger.logDebug("(FiltersMetaStorage) - allTags returning \(result?.count ?? 0) tags objects")
         return result ?? []
     }
     
@@ -72,6 +73,7 @@ extension FiltersMetaStorageProtocol {
             let dbTag = FilterTagsTable(dbTag: tag)
             return ExtendedFiltersMeta.Tag(tagId: dbTag.tagId, tagTypeId: dbTag.type, tagName: dbTag.name)
         }
+        Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result?.count ?? 0) tags objects for filter with id=\(id)")
         return result ?? []
     }
 }
