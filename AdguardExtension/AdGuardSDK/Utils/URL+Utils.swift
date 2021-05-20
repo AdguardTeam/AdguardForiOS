@@ -19,7 +19,7 @@
 import Foundation
 
 extension URL {
-    var isDirectoryExists: Bool {
+    var isDirectory: Bool {
        return (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
     }
 }

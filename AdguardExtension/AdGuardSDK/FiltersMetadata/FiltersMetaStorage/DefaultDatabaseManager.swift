@@ -88,7 +88,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // MARK: - Public methods
     
     func updateDefaultDb() throws {
-        if !dbContainerUrl.isDirectoryExists {
+        if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(atPath: dbContainerUrl.path, withIntermediateDirectories: true, attributes: nil)
         }
         

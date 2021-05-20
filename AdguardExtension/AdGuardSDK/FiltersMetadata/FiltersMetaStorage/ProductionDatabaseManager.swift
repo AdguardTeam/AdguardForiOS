@@ -71,7 +71,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Initialization
     
     init(dbContainerUrl: URL) throws {
-        if !dbContainerUrl.isDirectoryExists {
+        if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(at: dbContainerUrl, withIntermediateDirectories: true, attributes: nil)
         }
         self.productionDbFileUrl = dbContainerUrl.appendingPathComponent(dbFile)
