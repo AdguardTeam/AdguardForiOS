@@ -45,8 +45,7 @@ fileprivate struct FilterTagsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Tags
-
+// MARK: - FiltersMetaStorageProtocol + Tags methods
 
 extension FiltersMetaStorageProtocol {
     

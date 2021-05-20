@@ -45,7 +45,7 @@ fileprivate struct FilterLocalizationsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + FiltersLocalizations
+// MARK: - FiltersMetaStorageProtocol + FiltersLocalizations methods
  
 extension FiltersMetaStorageProtocol {
     

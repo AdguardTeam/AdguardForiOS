@@ -100,7 +100,9 @@ extension FiltersMetaStorageProtocol {
     
     // Enables or disables a group with specified id
     func setGroup(withId id: Int, enabled: Bool) throws {
+        // Query: update filter_groups set is_enabled = enabled where group_id = id
         let group = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
-        
+        try filtersDb.run(group.update(FilterGroupsTable.isEnabled <- enabled))
+        Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
     }
 }

@@ -77,6 +77,8 @@ fileprivate struct FiltersTable {
     }
 }
 
+// MARK: - FiltersMetaStorageProtocol + Filters methods
+
 extension FiltersMetaStorageProtocol {
     
     // Returns all filters from database (they aren't localized)
@@ -142,5 +144,13 @@ extension FiltersMetaStorageProtocol {
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedFilters returning \(filters.count) filter objects for lang=\(lang)")
         return filters
+    }
+    
+    // Enables or disables a filter with specified id
+    func setFilter(withId id: Int, enabled: Bool) throws {
+        // Query: update filters set is_enabled = enabled where filter_id = id
+        let filter = FiltersTable.table.filter(FiltersTable.filterId == id)
+        try filtersDb.run(filter.update(FiltersTable.isEnabled <- enabled))
+        Logger.logDebug("(FiltersMetaStorage) - setFilter filter with id=\(id) was set to enabled=\(enabled)")
     }
 }
