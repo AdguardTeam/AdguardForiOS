@@ -28,7 +28,7 @@ protocol DefaultDatabaseManagerProtocol {
     var defaultDbFileExists: Bool { get }
     
     // default.db schema version
-    var defaultDbSchemaVersion: Int? { get }
+    var defaultDbSchemaVersion: String? { get }
     
     // Unarchives default.db and places it to the specified folder
     func updateDefaultDb() throws
@@ -55,15 +55,15 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     var defaultDbFileExists: Bool { fileManager.fileExists(atPath: defaultDbFileUrl.path) }
     
-    lazy var defaultDbSchemaVersion: Int? = {
+    var defaultDbSchemaVersion: String? {
         guard let db = try? Connection(defaultDbFileUrl.path) else {
             return nil
         }
         
         let versionTable = Table("version")
-        let versionColumn = Expression<Int>("schema_version")
+        let versionColumn = Expression<String>("schema_version")
         return try? db.pluck(versionTable)?.get(versionColumn)
-    }()
+    }
         
     // MARK: - Private properties
     
@@ -88,9 +88,13 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // MARK: - Public methods
     
     func updateDefaultDb() throws {
+        if !dbContainerUrl.isDirectory {
+            try fileManager.createDirectory(atPath: dbContainerUrl.path, withIntermediateDirectories: true, attributes: nil)
+        }
+        
         let dbFileUrl = try getDefaultDbUnzippedData()
+        guard dbFileUrl != defaultDbFileUrl else { return }
         let _ = try fileManager.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)
-        try fileManager.removeItem(at: dbFileUrl)
     }
     
     func removeDefaultDb() throws {
