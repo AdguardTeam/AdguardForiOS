@@ -18,12 +18,8 @@
 
 import Foundation
 
-protocol FilterMetaProtocol: Decodable {
-    var name: String? { get }
-    var description: String? { get }
-    var version: String? { get }
-    var lastUpdateDate: Date? { get }
-    var updateFrequency: Int? { get }
-    var homePage: String? { get }
-    var filterDownloadPage: String? { get }
+protocol GroupMetaProtocol: Decodable {
+    var groupId: Int { get }
+    var groupName: String { get }
+    var displayNumber: Int { get }
 }

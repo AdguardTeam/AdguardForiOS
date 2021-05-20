@@ -17,11 +17,21 @@
 */
 
 import Foundation
+import SQLite
 
-public typealias LogMessage = (_ message: String) -> Void
+protocol FiltersMetaStorageProtocol: AnyObject {
+    var filtersDb: Connection { get }
+}
 
-public class Logger {
-    public static var logInfo: LogMessage = { _ in }
-    public static var logError: LogMessage = { _ in }
-    public static var logDebug: LogMessage = { _ in }
+final class FiltersMetaStorage: FiltersMetaStorageProtocol {
+    
+    // MARK: - Public properties
+    
+    let filtersDb: Connection
+    
+    // MARK: - Initialization
+    
+    init(productionDbManager: ProductionDatabaseManagerProtocol) {
+        self.filtersDb = productionDbManager.filtersDb
+    }
 }
