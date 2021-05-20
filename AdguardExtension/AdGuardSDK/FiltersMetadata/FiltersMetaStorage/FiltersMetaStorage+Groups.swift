@@ -69,30 +69,38 @@ fileprivate struct FilterGroupsTable {
 
 extension FiltersMetaStorageProtocol {
     
-    var allGroups: [ExtendedGroupMetaProtocol] {
+    // Returns all groups from database
+    func getAllGroups() throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
         let query = FilterGroupsTable.table.select([])
                                            .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta]? = try? filtersDb.prepare(query).map { group in
+        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
             return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: dbGroup.name ?? "", displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
-        Logger.logDebug("(FiltersMetaStorage) - allGroups returning \(result?.count ?? 0) groups objects")
-        return result ?? []
+        Logger.logDebug("(FiltersMetaStorage) - allGroups returning \(result.count) groups objects")
+        return result
     }
     
-    func getAllLocalizedGroups(forLanguage lang: String) -> [ExtendedGroupMetaProtocol] {
+    // Returns all groups with localization for specified language from database
+    func getAllLocalizedGroups(forLanguage lang: String) throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
         let query = FilterGroupsTable.table.select([])
                                            .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta]? = try? filtersDb.prepare(query).map { group in
+        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
             let localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang).name
             return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: localizedName, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
-        Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result?.count ?? 0) groups objects for lang=\(lang)")
-        return result ?? []
+        Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
+        return result
+    }
+    
+    // Enables or disables a group with specified id
+    func setGroup(withId id: Int, enabled: Bool) throws {
+        let group = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
+        
     }
 }

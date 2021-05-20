@@ -80,16 +80,16 @@ fileprivate struct FiltersTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns all filters from database (they aren't localized)
-    var allFilters: [ExtendedFilterMetaProtocol] {
+    func getAllFilters() throws -> [ExtendedFilterMetaProtocol] {
         // Query: select * from filters order by group_id, display_number, filter_id
         let query = FiltersTable.table.select([])
                                       .order(FiltersTable.groupId, FiltersTable.displayNumber, FiltersTable.filterId)
         
         let dbFilters: [FiltersTable] = (try? filtersDb.prepare(query).map { FiltersTable(dbFilter: $0) }) ?? []
-        let groups = allGroups
-        let filters: [ExtendedFilterMetaProtocol] = dbFilters.map { dbFilter in
-            let tags = getTagsForFilter(withId: dbFilter.filterId)
-            let langs = getLangsForFilter(withId: dbFilter.filterId)
+        let groups = try getAllGroups()
+        let filters: [ExtendedFilterMetaProtocol] = try dbFilters.map { dbFilter in
+            let tags = try getTagsForFilter(withId: dbFilter.filterId)
+            let langs = try getLangsForFilter(withId: dbFilter.filterId)
             let group = groups.first(where: { $0.groupId == dbFilter.groupId })!
             
             return ExtendedFiltersMeta.Meta(filterId: dbFilter.filterId,
@@ -112,18 +112,18 @@ extension FiltersMetaStorageProtocol {
     }
     
     // Returns all filters from database with localizations for specified language
-    func getAllLocalizedFilters(forLanguage lang: String) -> [ExtendedFilterMetaProtocol] {
+    func getAllLocalizedFilters(forLanguage lang: String) throws -> [ExtendedFilterMetaProtocol] {
         // Query: select * from filters order by group_id, display_number, filter_id
         let query = FiltersTable.table.select([])
                                       .order(FiltersTable.groupId, FiltersTable.displayNumber, FiltersTable.filterId)
         
-        let dbFilters: [FiltersTable] = (try? filtersDb.prepare(query).map { FiltersTable(dbFilter: $0) }) ?? []
-        let groups = getAllLocalizedGroups(forLanguage: lang)
-        let filters: [ExtendedFilterMetaProtocol] = dbFilters.map { dbFilter in
-            let tags = getTagsForFilter(withId: dbFilter.filterId)
-            let langs = getLangsForFilter(withId: dbFilter.filterId)
+        let dbFilters: [FiltersTable] = try filtersDb.prepare(query).map { FiltersTable(dbFilter: $0) }
+        let groups = try getAllLocalizedGroups(forLanguage: lang)
+        let filters: [ExtendedFilterMetaProtocol] = try dbFilters.map { dbFilter in
+            let tags = try getTagsForFilter(withId: dbFilter.filterId)
+            let langs = try getLangsForFilter(withId: dbFilter.filterId)
             let group = groups.first(where: { $0.groupId == dbFilter.groupId })!
-            let filterLocalization = getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: lang)
+            let filterLocalization = try getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: lang)
             
             return ExtendedFiltersMeta.Meta(filterId: dbFilter.filterId,
                                             name: filterLocalization.name,
