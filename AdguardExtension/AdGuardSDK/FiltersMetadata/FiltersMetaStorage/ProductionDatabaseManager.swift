@@ -71,6 +71,9 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Initialization
     
     init(dbContainerUrl: URL) throws {
+        if !dbContainerUrl.isDirectoryExists {
+            try fileManager.createDirectory(at: dbContainerUrl, withIntermediateDirectories: true, attributes: nil)
+        }
         self.productionDbFileUrl = dbContainerUrl.appendingPathComponent(dbFile)
         self.dbContainerUrl = dbContainerUrl
         self.defaultDatabaseManager = DefaultDatabaseManager(dbContainerUrl: dbContainerUrl)
@@ -103,10 +106,12 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         
         try defaultDatabaseManager.updateDefaultDb()
         
-        let (shouldUpgradeDb, defaultDbSchemaVersion) = try shouldUpgradeDbScheme()
+        let (shouldUpgradeDb, updateVersions) = try shouldUpgradeDbScheme()
         
         if shouldUpgradeDb {
-            try updateProductionDb(toVersion: defaultDbSchemaVersion)
+            for version in updateVersions {
+                try updateProductionDb(toVersion: version)
+            }
         }
         
         // Remove default.db when update finished
@@ -119,7 +124,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
      Compares schema version of default.db and adguard.db
      Returns true if adguard.db schema is lower than default.db and string of version number
      */
-    private func shouldUpgradeDbScheme() throws -> (Bool, String) {
+    private func shouldUpgradeDbScheme() throws -> (Bool, [String]) {
         let versionTable = Table("version")
         let versionColumn = Expression<String>("schema_version")
         
@@ -130,7 +135,10 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         }
         
         let shouldUpdate = defaultDbSchemaVersion.compare(productionDbSchemaVersion, options: .numeric) == .orderedDescending
-        return (shouldUpdate, defaultDbSchemaVersion)
+        if shouldUpdate {
+            return (shouldUpdate, calculateUpdateVersions(toVersion: defaultDbSchemaVersion, fromVersion: productionDbSchemaVersion))
+        }
+        return (shouldUpdate, [])
     }
     
     // Updates production database to the specified version
@@ -139,15 +147,23 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
             throw ManagerError.invalidResourcePath
         }
         
-        guard let version = Double(version) else {
-            throw ManagerError.unknownDbVersion
-        }
-        
         let dbUpdateFileFormat = "update%@.sql" // %@ stands for update version
-        //TODO: Change version number calculation
-        let updateFileName = String(format: dbUpdateFileFormat, String(version - 0.001))
+        let updateFileName = String(format: dbUpdateFileFormat, version)
         let updateFileUrl = resourcesUrl.appendingPathComponent(updateFileName)
         let updateQuery = try String(contentsOf: updateFileUrl)
         try filtersDb.execute(updateQuery)
+    }
+    
+    private func calculateUpdateVersions(toVersion: String, fromVersion: String) -> [String] {
+        guard let toVersion = Double(toVersion) else { return [] }
+        guard var fromVersion = Double(fromVersion) else { return [] }
+        
+        var result = [String]()
+        
+        repeat {
+            result.append(String(format: "%.3f", fromVersion))
+            fromVersion += 0.001
+        } while fromVersion < toVersion
+        return result
     }
 }

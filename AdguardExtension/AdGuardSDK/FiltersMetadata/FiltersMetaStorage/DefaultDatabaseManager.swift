@@ -88,7 +88,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     // MARK: - Public methods
     
     func updateDefaultDb() throws {
-        if !directoryIsExist(dbContainerUrl) {
+        if !dbContainerUrl.isDirectoryExists {
             try fileManager.createDirectory(atPath: dbContainerUrl.path, withIntermediateDirectories: true, attributes: nil)
         }
         
@@ -117,11 +117,5 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
         let targetDbFileUrl = resourcesUrl.appendingPathComponent(dbFile)
         try Zip.unzipFile(defaultDbArchiveUrl, destination: resourcesUrl, overwrite: true, password: nil)
         return targetDbFileUrl
-    }
-    
-    private func directoryIsExist(_ direcotryUrl: URL) -> Bool {
-        var isDirectory = ObjCBool(true)
-        let exist = fileManager.fileExists(atPath: direcotryUrl.path, isDirectory: &isDirectory)
-        return isDirectory.boolValue && exist
     }
 }

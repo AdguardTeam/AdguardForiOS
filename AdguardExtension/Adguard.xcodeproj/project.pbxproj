@@ -35,6 +35,8 @@
 		2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
+		242CD70D265655F00010A2C0 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD70C265655F00010A2C0 /* URL+Utils.swift */; };
+		242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CD70C265655F00010A2C0 /* URL+Utils.swift */; };
 		242F69EC26540F6300B9DAD4 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69E526540F6200B9DAD4 /* update0.102.sql */; };
 		242F69ED26540F6300B9DAD4 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69E526540F6200B9DAD4 /* update0.102.sql */; };
 		242F69EE26540F6300B9DAD4 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69E626540F6200B9DAD4 /* update0.101.sql */; };
@@ -3061,6 +3063,7 @@
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		242CD70C265655F00010A2C0 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		242F69E526540F6200B9DAD4 /* update0.102.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
 		242F69E626540F6200B9DAD4 /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
 		242F69E726540F6200B9DAD4 /* update0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.100.sql; sourceTree = "<group>"; };
@@ -4495,6 +4498,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		242CD70B2656559C0010A2C0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				242CD70C265655F00010A2C0 /* URL+Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		242F69E426540F4F00B9DAD4 /* SQLScripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -5869,6 +5880,7 @@
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
+				242CD70B2656559C0010A2C0 /* Utils */,
 				242F69E426540F4F00B9DAD4 /* SQLScripts */,
 				D0BA7E5926330D9A0097029B /* Safari */,
 				D0BA7B7C2631A8910097029B /* Resources */,
@@ -8789,6 +8801,7 @@
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
+				242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
@@ -9815,6 +9828,7 @@
 				D0BA7BE62631B5030097029B /* NetworkManager.swift in Sources */,
 				7EB3E258264D2AEF00C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
+				242CD70D265655F00010A2C0 /* URL+Utils.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
 				D0BA7D292631C1B20097029B /* ASDatabase.m in Sources */,

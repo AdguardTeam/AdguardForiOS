@@ -80,6 +80,7 @@ class ProductionDatabaseManagerTest: XCTestCase {
             let filtersDb = try Connection(workingUrl.appendingPathComponent(adguardDbFileName).path)
             let version = try filtersDb.pluck(versionTable)?.get(versionColumn)
             XCTAssertTrue(try exists(column: "affinity", inTable: "filter_rules", forDB: filtersDb))
+            XCTAssertTrue(try exists(column: "subscriptionUrl", inTable: "filters", forDB: filtersDb))
             XCTAssertNotNil(version)
             XCTAssertNotEqual(version, "0.100")
         } catch {
@@ -96,17 +97,33 @@ class ProductionDatabaseManagerTest: XCTestCase {
         do {
             let _ = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
             
+            let pruductionDb = try Connection(workingUrl.appendingPathComponent(adguardDbFileName).path)
+            XCTAssertTrue(try exists(column: "schema_version", inTable: "version", forDB: pruductionDb))
+            
+            let versionTable = Table("version")
+            let versionColumn = Expression<String>("schema_version")
+            let version = try pruductionDb.pluck(versionTable)?.get(versionColumn)
+            XCTAssertNotNil(version)
+            
+            let filterTagsTable = Table("filter_tags")
+            let filterTagsColumn = Expression<String>("name")
+            let name = try pruductionDb.pluck(filterTagsTable)?.get(filterTagsColumn)
+            XCTAssertNotNil(name)
+            
             XCTAssertFalse(fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path))
             XCTAssertFalse(fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path))
             XCTAssertTrue(fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbArchiveFileName).path))
             XCTAssertTrue(fileManager.fileExists(atPath: workingUrl.appendingPathComponent(adguardDbFileName).path))
             XCTAssertFalse(fileManager.fileExists(atPath: workingUrl.appendingPathComponent(defaultDbFileName).path))
             
+            
+            
         } catch {
             XCTFail("\(error)")
         }
     }
         
+    //TODO: This method init empty adGuard.db. Add some SQL scripts to update data
     private func applySchemeToDefaultDb(db: Connection) throws {
         let dbSchemeFileFormat = "schema%@.sql" // %@ stands for schema version
         let version = "0.100" //old version

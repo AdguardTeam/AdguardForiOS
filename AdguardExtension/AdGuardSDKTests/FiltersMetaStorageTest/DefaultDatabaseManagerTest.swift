@@ -128,6 +128,29 @@ class DefaultDatabaseManagerTest: XCTestCase {
         }
     }
     
+    func testDefaultDbFileExistsWithSuccess() {
+        do {
+            let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+            XCTAssertFalse(manager.defaultDbFileExists)
+            try manager.updateDefaultDb()
+            XCTAssertTrue(manager.defaultDbFileExists)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDefaultDbSchemaVersionWithSuccess() {
+        do {
+            let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+            XCTAssertNil(manager.defaultDbSchemaVersion)
+            try manager.updateDefaultDb()
+            XCTAssertNotNil(manager.defaultDbSchemaVersion)
+            
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
     private func deleteTestFolder() -> Bool {
         do {
             try fileManager.removeItem(atPath: workingUrl.path)
