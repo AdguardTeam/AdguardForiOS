@@ -45,8 +45,7 @@ extension FiltersMetaStorageProtocol {
     // Returns array of languages for filter with specified id
     func getLangsForFilter(withId id: Int) throws -> [String] {
         // Query: select * from filter_langs where filter_id = id
-        let query = FilterLangsTable.table.select([])
-                                         .filter(id == FilterLangsTable.filterId)
+        let query = FilterLangsTable.table.filter(id == FilterLangsTable.filterId)
         
         let result: [String] = try filtersDb.prepare(query).compactMap { lang in
             let dbLang = FilterLangsTable(dbLang: lang)

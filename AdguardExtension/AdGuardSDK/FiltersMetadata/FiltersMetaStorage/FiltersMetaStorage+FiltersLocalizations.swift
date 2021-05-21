@@ -52,13 +52,25 @@ extension FiltersMetaStorageProtocol {
     // Returns localized strings for specified filter and language
     func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> ExtendedFiltersMetaLocalizations.FilterLocalization {
         // Query: select * from filter_localizations where filter_id = id and lang = lang
-        let query = FilterLocalizationsTable.table
-                                            .select([])
-                                            .filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
+        let query = FilterLocalizationsTable.table.filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
         
-        let dbFilterLocalization = try filtersDb.pluck(query)
+        var dbFilterLocalization = try filtersDb.pluck(query)
+        if dbFilterLocalization == nil {
+            Logger.logDebug("(FiltersMetaStorage) - dbFilterLocalization returning nil for filter with id=\(id) for lang=\(lang)")
+            dbFilterLocalization = try getDefaultFilterLocalization(withId: id)
+        }
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
         Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
         return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
+    }
+    
+    //Return default en filter localization
+    private func getDefaultFilterLocalization(withId id: Int) throws -> Row? {
+        let query = FilterLocalizationsTable.table.filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == "en")
+        let filterLocalization = try filtersDb.pluck(query)
+        if filterLocalization == nil {
+            throw NSError(domain: "Wrong id: \(id)", code: 1, userInfo: nil)
+        }
+        return filterLocalization
     }
 }

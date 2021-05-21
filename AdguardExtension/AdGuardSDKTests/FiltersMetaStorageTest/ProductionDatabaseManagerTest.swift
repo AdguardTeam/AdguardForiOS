@@ -178,16 +178,11 @@ class ProductionDatabaseManagerTest: XCTestCase {
         let fileManager = FileManager.default
         
         let defaultDbFileName = "default.db"
-        let defaultDbArchiveFileName = "default.db.zip"
         let adguardDbFileName = "adguard.db"
         
         do {
             if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path) {
                 try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbFileName))
-            }
-            
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbArchiveFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbArchiveFileName))
             }
             
             if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path) {

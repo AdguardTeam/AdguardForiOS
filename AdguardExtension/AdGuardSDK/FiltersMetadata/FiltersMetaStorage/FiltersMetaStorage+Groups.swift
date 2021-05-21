@@ -72,8 +72,7 @@ extension FiltersMetaStorageProtocol {
     // Returns all groups from database
     func getAllGroups() throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
-        let query = FilterGroupsTable.table.select([])
-                                           .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
+        let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
@@ -86,12 +85,11 @@ extension FiltersMetaStorageProtocol {
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
-        let query = FilterGroupsTable.table.select([])
-                                           .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
+        let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
+        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
-            let localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang).name
+            guard let localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name else { return nil }
             return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: localizedName, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
