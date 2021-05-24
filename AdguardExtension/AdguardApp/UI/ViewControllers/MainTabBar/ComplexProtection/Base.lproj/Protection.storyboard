@@ -539,17 +539,15 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="yRg-Fe-A5t" firstAttribute="leading" secondItem="XXP-EO-M4h" secondAttribute="trailing" constant="16" id="1xa-jF-I9Z"/>
-                                                    <constraint firstItem="yRg-Fe-A5t" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="top" constant="12" id="2D6-Uh-TYj"/>
                                                     <constraint firstItem="XXP-EO-M4h" firstAttribute="leading" secondItem="evM-3E-PdJ" secondAttribute="leading" constant="16" id="6pA-9w-9Ww"/>
-                                                    <constraint firstAttribute="bottom" secondItem="yRg-Fe-A5t" secondAttribute="bottom" constant="12" id="I5d-dM-7KF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="XXP-EO-M4h" secondAttribute="bottom" constant="13" id="FFx-Iz-Ed6"/>
                                                     <constraint firstItem="yRg-Fe-A5t" firstAttribute="centerY" secondItem="evM-3E-PdJ" secondAttribute="centerY" id="aDI-9h-acH"/>
-                                                    <constraint firstAttribute="bottom" secondItem="XXP-EO-M4h" secondAttribute="bottom" constant="9.5" id="dLa-KK-OUm"/>
-                                                    <constraint firstItem="XXP-EO-M4h" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="top" constant="9.5" id="jdZ-kd-clU"/>
+                                                    <constraint firstItem="XXP-EO-M4h" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="top" constant="13" id="jlk-aF-V2a"/>
                                                     <constraint firstAttribute="trailing" secondItem="yRg-Fe-A5t" secondAttribute="trailing" constant="12" id="owa-ck-cak"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads will be perfectly blocked until you refresh the page (then you just need to follow the instructions again)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuB-Tv-hsa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="215" width="366" height="57.5"/>
+                                                <rect key="frame" x="24" y="210" width="366" height="57.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -565,14 +563,14 @@
                                         <constraints>
                                             <constraint firstItem="wuB-Tv-hsa" firstAttribute="leading" secondItem="evM-3E-PdJ" secondAttribute="leading" id="230-v3-fi1"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="top" secondItem="Qh1-Xk-Ldn" secondAttribute="bottom" constant="20" id="AfC-J1-4VX"/>
-                                            <constraint firstAttribute="trailing" secondItem="AZY-QZ-8d9" secondAttribute="trailing" constant="50" id="Gii-XM-hg7"/>
+                                            <constraint firstAttribute="trailing" secondItem="AZY-QZ-8d9" secondAttribute="trailing" constant="24" id="Gii-XM-hg7"/>
                                             <constraint firstAttribute="bottom" secondItem="wuB-Tv-hsa" secondAttribute="bottom" constant="42" id="Ke7-cc-yiq"/>
                                             <constraint firstAttribute="trailing" secondItem="Qh1-Xk-Ldn" secondAttribute="trailing" constant="24" id="QKy-eV-LDa"/>
                                             <constraint firstItem="AZY-QZ-8d9" firstAttribute="top" secondItem="qFd-Hd-Bhv" secondAttribute="top" constant="10" id="TNE-4E-Xus"/>
                                             <constraint firstItem="Qh1-Xk-Ldn" firstAttribute="top" secondItem="AZY-QZ-8d9" secondAttribute="bottom" constant="24" id="Tha-M8-Q7L"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="trailing" secondItem="Qh1-Xk-Ldn" secondAttribute="trailing" id="eHC-V8-wyh"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="leading" secondItem="Qh1-Xk-Ldn" secondAttribute="leading" id="jO2-lw-cT4"/>
-                                            <constraint firstItem="AZY-QZ-8d9" firstAttribute="leading" secondItem="qFd-Hd-Bhv" secondAttribute="leading" constant="50" id="pTe-Av-60j"/>
+                                            <constraint firstItem="AZY-QZ-8d9" firstAttribute="leading" secondItem="qFd-Hd-Bhv" secondAttribute="leading" constant="24" id="pTe-Av-60j"/>
                                             <constraint firstItem="wuB-Tv-hsa" firstAttribute="trailing" secondItem="evM-3E-PdJ" secondAttribute="trailing" id="sVB-q8-wer"/>
                                             <constraint firstItem="Qh1-Xk-Ldn" firstAttribute="leading" secondItem="qFd-Hd-Bhv" secondAttribute="leading" constant="24" id="yDe-DH-gyl"/>
                                             <constraint firstItem="wuB-Tv-hsa" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="bottom" constant="20" id="yOB-GF-xkV"/>

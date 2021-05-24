@@ -40,12 +40,12 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     
     //MARK: - Private methods
     private func setupShadow() {
-        blockYouTubeView.backgroundColor = themeService.backgroundColor
+        blockYouTubeView.backgroundColor = configuration.darkTheme ? UIColor.AdGuardColor.black3 : .white
         blockYouTubeView.layer.cornerRadius = 8.0
-        blockYouTubeView.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(0.15).cgColor : UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
+        blockYouTubeView.layer.shadowColor = configuration.darkTheme ? UIColor.white.withAlphaComponent(0.1).cgColor : UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.15).cgColor
         blockYouTubeView.layer.shadowOpacity = 1.0
         blockYouTubeView.layer.shadowOffset = CGSize(width: 0.0, height: 4.0)
-        blockYouTubeView.layer.shadowRadius = 16.0
+        blockYouTubeView.layer.shadowRadius = 8
     }
     
     private func setupMainText() {
