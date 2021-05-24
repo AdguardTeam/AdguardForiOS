@@ -58,7 +58,7 @@ class RateAppProblemController: BottomAlertController {
     
     private func setupDescriptionTextView() {
         let problemDescription = String.localizedString("rate_app_problem_description")
-        descriptionTextView.attributedText = NSMutableAttributedString.fromHtml(problemDescription, fontSize: descriptionTextView.font!.pointSize, color: theme.blackTextColor, attachmentImage: nil, textAlignment: .center)
+        descriptionTextView.attributedText = NSMutableAttributedString.fromHtml(problemDescription, fontSize: descriptionTextView.font!.pointSize, color: theme.blackTextColor, attachmentSettings: nil, textAlignment: .center)
     }
 }
 

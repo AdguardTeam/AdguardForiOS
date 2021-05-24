@@ -53,7 +53,7 @@ class HowToSetupController: BottomAlertController {
         
         let descriptionFormat = String.localizedString("native_dns_setup_description")
         let description = String(format: descriptionFormat, Bundle.main.applicationName ?? "AdGuard")
-        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil, textAlignment: .center)
+        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, attachmentSettings: nil, textAlignment: .center)
     }
 }
 

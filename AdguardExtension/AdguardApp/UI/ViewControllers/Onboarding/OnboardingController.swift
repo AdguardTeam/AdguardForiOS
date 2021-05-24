@@ -104,11 +104,11 @@ class OnboardingController: UIViewController {
     // MARK: - Private methods
     
     private func setupLabels() {
-        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor, attachmentSettings: nil)
         
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor, attachmentSettings: nil)
         
-        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentSettings: nil)
     }
     
     private func observeContentBlockersState(){
