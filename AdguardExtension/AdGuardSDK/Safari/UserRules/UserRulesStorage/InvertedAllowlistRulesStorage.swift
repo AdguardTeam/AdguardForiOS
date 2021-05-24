@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct InvertedAllowlistRulesStorage: UserRulesStorageProtocol {
+final class InvertedAllowlistRulesStorage: UserRulesStorageProtocol {
     typealias Rule = UserRule<InvertedAllowlistRuleConverter>
     
     // MARK: - Public properties

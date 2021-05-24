@@ -18,7 +18,19 @@
 
 import Foundation
 
-protocol UserRulesStorageProtocol {
+enum UserRulesStorageError: Error, CustomDebugStringConvertible {
+    case ruleAlreadyExists(ruleString: String)
+    case ruleDoesNotExist(ruleString: String)
+    
+    var debugDescription: String {
+        switch self {
+        case .ruleAlreadyExists(let rule): return "Rule '\(rule)' already exists in rules list"
+        case .ruleDoesNotExist(let rule): return "Rule '\(rule)' doest not exist in rules list"
+        }
+    }
+}
+
+protocol UserRulesStorageProtocol: AnyObject {
     associatedtype Rule: UserRuleProtocol
     
     /* String representation of all enabled rules */
@@ -28,14 +40,14 @@ protocol UserRulesStorageProtocol {
     var allRules: [Rule] { get }
     
     /* Adds new rule to the user rule's list */
-    func add(rule: Rule)
+    func add(rule: Rule) throws
     
     /* Adds new rules to the user rule's list */
-    func add(rules: [Rule])
+    func add(rules: [Rule]) throws
     
     /* Modifies rule in the user rule's list */
-    func modifyRule(_ oldRuleDomain: String, _ newRule: Rule)
+    func modifyRule(_ oldRuleDomain: String, _ newRule: Rule) throws
     
     /* Removes rule from the user rule's list */
-    func removeRule(withDomain domain: String)
+    func removeRule(withDomain domain: String) throws
 }

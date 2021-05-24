@@ -540,6 +540,7 @@
 		7E69C5232657E16100EA9DBA /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5222657E16100EA9DBA /* AllowlistRulesStorage.swift */; };
 		7E69C5252657E17E00EA9DBA /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */; };
 		7E69C5272657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5262657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift */; };
+		7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
@@ -3465,6 +3466,7 @@
 		7E69C5222657E16100EA9DBA /* AllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
 		7E69C5262657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
+		7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
@@ -5822,6 +5824,7 @@
 			isa = PBXGroup;
 			children = (
 				D04B4A1D263ADACF00815F30 /* Resources.swift */,
+				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -9806,6 +9809,7 @@
 				D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */,
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
 				7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */,
+				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
 				D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */,
 				D0BDB6F526319F56007D9BC6 /* FilterDetailedInterface.swift in Sources */,
 				D0BA7D562631C1F10097029B /* FMDatabasePool.m in Sources */,

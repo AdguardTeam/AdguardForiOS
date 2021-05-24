@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct BlocklistRulesStorage: UserRulesStorageProtocol {
+final class BlocklistRulesStorage: UserRulesStorageProtocol {
     typealias Rule = UserRule<BlocklistRuleConverter>
     
     // MARK: - Public properties

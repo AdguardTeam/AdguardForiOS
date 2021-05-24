@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol UserRuleProtocol {
+protocol UserRuleProtocol: Codable {
     associatedtype Converter: UserRuleConverterProtocol
     
     /* Domain is a string that user did enter in the rule field */
