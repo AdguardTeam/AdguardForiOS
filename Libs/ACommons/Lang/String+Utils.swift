@@ -18,19 +18,18 @@
 
 import Foundation
 
-enum AttachmentSize {
-    case defaultSize
-    case customSize(width: CGFloat, height: CGFloat)
-}
-
-struct AttachmentSettings {
-    let image: UIImage
-    let topEdge: CGFloat
-    let leftEdge: CGFloat
-    let size: AttachmentSize
-}
-
 extension NSMutableAttributedString {
+    enum AttachmentSize {
+        case defaultSize
+        case customSize(width: CGFloat, height: CGFloat)
+    }
+
+    struct AttachmentSettings {
+        let image: UIImage
+        let topEdge: CGFloat
+        let leftEdge: CGFloat
+        let size: AttachmentSize
+    }
     
     func alignCenter(){
         let paragraph = NSMutableParagraphStyle()
@@ -40,7 +39,7 @@ extension NSMutableAttributedString {
         self.addAttributes(attributes, range: NSRange(location: 0, length: length))
     }
     
-    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentSettings: AttachmentSettings?, textAlignment: NSTextAlignment = .left) -> NSMutableAttributedString? {
+    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentSettings: AttachmentSettings? = nil, textAlignment: NSTextAlignment = .left) -> NSMutableAttributedString? {
         
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment

@@ -22,11 +22,11 @@
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "free";
 
-/* Class = "UILabel"; text = "Works along with AdGuard adblocker"; ObjectID = "tKQ-Yn-fgL"; */
-"tKQ-Yn-fgL.text" = "Works along with AdGuard adblocker";
+/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Works along with AdGuard ad blocker";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on domains level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Blocks ads and trackers on domains level and encrypts your queries";
+/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Blocks ads and trackers on domain level and encrypts your queries";
 
 /* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Not installed";

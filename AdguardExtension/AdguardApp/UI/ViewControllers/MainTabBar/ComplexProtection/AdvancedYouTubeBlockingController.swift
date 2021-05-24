@@ -35,7 +35,6 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackButton()
-        setupGestureRecognizer()
         updateTheme()
     }
     
@@ -52,24 +51,14 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     private func setupMainText() {
         guard let image = UIImage(named: "share") else { return }
         let text = String.localizedString("block_youtube_ads_instructions")
-        let attachmentSetttings = AttachmentSettings(image: image,
+        let attachmentSetttings = NSMutableAttributedString.AttachmentSettings(image: image,
                                                      topEdge: 2.5,
                                                      leftEdge: 5,
-                                                     size: .customSize(width: CGFloat(image.size.width), height: CGFloat(image.size.height)))
+                                                     size: .customSize(width: image.size.width, height: image.size.height))
         
         let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
         let attributedText = NSMutableAttributedString.fromHtml(text, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSetttings, textAlignment: .left)
         mainTextView.attributedText = attributedText
-    }
-    
-    private func setupGestureRecognizer() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(blockYouTubeTapped(_:)))
-        blockYouTubeView.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc
-    private func blockYouTubeTapped(_ sender: UITapGestureRecognizer) {
-        //TODO: Add blocking method
     }
 }
 
