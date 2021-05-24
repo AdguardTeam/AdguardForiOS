@@ -24,6 +24,8 @@
 	<string></string>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).ActionRequestHandler</string>
 		<key>NSExtensionActionWantsFullScreenPresentation</key>
 		<false/>
 		<key>NSExtensionAttributes</key>
@@ -34,12 +36,10 @@
 				<integer>1</integer>
 			</dict>
 			<key>NSExtensionJavaScriptPreprocessingFile</key>
-			<string>$(ACTION_EXTENSION_PREPROCESSING_FILENAME)</string>
+			<string>BlockYouTubeAds</string>
 		</dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>none</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.ui-services</string>
+		<string>com.apple.services</string>
 	</dict>
 </dict>
 </plist>

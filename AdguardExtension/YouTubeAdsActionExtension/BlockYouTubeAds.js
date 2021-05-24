@@ -15,7 +15,7 @@
  * along with AdGuard's Block YouTube Ads.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global Response, window, document, MutationObserver, completion */
+/* global Response, window, navigator, document, MutationObserver, completion */
 
 /**
  * Note that Shortcut scripts are executed in their own context (window)
@@ -33,14 +33,100 @@
         finish = completion;
     }
 
+    const locales = {
+        en: {
+            logo: 'with&nbsp;AdGuard',
+            alreadyExecuted: 'The shortcut has already been executed.',
+            wrongDomain: 'This shortcut is supposed to be launched only on YouTube.',
+            success: 'YouTube is now ad-free! Please note that you need to run this shortcut again if you reload the page.',
+        },
+        ru: {
+            logo: 'с&nbsp;AdGuard',
+            alreadyExecuted: 'Быстрая команда уже выполнена.',
+            wrongDomain: 'Эта быстрая команда предназначена для использования только на YouTube.',
+            success: 'Теперь YouTube без рекламы! Важно: при перезагрузке страницы вам нужно будет заново запустить команду.',
+        },
+        es: {
+            logo: 'con&nbsp;AdGuard',
+            alreadyExecuted: 'El atajo ya ha sido ejecutado.',
+            wrongDomain: 'Se supone que este atajo se lanza sólo en YouTube.',
+            success: '¡YouTube está ahora libre de anuncios! Ten en cuenta que tienes que volver a ejecutar este atajo si recargas la página.',
+        },
+        de: {
+            logo: 'mit&nbsp;AdGuard',
+            alreadyExecuted: 'Der Kurzbefehl wurde bereits ausgeführt.',
+            wrongDomain: 'Dieser Kurzbefehl soll nur auf YouTube gestartet werden.',
+            success: 'YouTube ist jetzt werbefrei! Bitte beachten Sie, dass Sie diesen Kurzbefehl erneut ausführen müssen, wenn Sie die Seite neu laden.',
+        },
+        fr: {
+            logo: 'avec&nbsp;AdGuard',
+            alreadyExecuted: 'Le raccourci a déjà été exécuté.',
+            wrongDomain: 'Ce raccourci est censé d’être lancé uniquement sur YouTube.',
+            success: 'YouTube est maintenant libre de pub ! Veuillez noter qu’il faudra rééxecuter le raccourci si vous rechargez la page.',
+        },
+        it: {
+            logo: 'con&nbsp;AdGuard',
+            alreadyExecuted: 'Il comando è già stato eseguito.',
+            wrongDomain: 'Questa scorciatoia dovrebbe essere lanciata solo su YouTube.',
+            success: 'YouTube è ora libero da pubblicità! Si prega di notare che è necessario eseguire nuovamente questa scorciatoia se ricarichi la pagina.',
+        },
+        'zh-cn': {
+            logo: '使用&nbsp;AdGuard',
+            alreadyExecuted: '快捷指令已在运行',
+            wrongDomain: '快捷指令只能在 YouTube 上被启用。',
+            success: '现在您的 YouTube 没有广告！请注意：当您重新加载页面时，您需要重新启用快捷指令。',
+        },
+        'zh-tw': {
+            logo: '使用&nbsp;AdGuard',
+            alreadyExecuted: '捷徑已在運行。',
+            wrongDomain: '捷徑只能在 YouTube 上被啟動。',
+            success: '現在您的 YouTube 沒有廣告！請注意：當您重新載入頁面時，您需要重新啟動捷徑。',
+        },
+        ko: {
+            logo: 'AdGuard&nbsp;사용',
+            alreadyExecuted: '단축어가 이미 실행되었습니다.',
+            wrongDomain: '이 단축어는 YouTube에서만 사용 가능합니다.',
+            success: '이제 광고없이 YouTube를 시청할 수 있습니다. 페이지를 새로고침 할 경우, 이 단축어를 다시 실행해야 합니다.',
+        },
+        ja: {
+            logo: 'AdGuard作動中',
+            alreadyExecuted: 'ショートカットは既に実行されています。',
+            wrongDomain: '※このショートカットは、YouTubeでのみ適用されることを想定しています。',
+            success: 'YouTubeが広告なしになりました！※YouTubeページを再読み込みした場合は、このショートカットを再度実行する必要がありますのでご注意ください。',
+        },
+    };
+
+    /**
+     * Gets a localized message for the specified key
+     *
+     * @param {string} key message key
+     * @returns {string} message for that key
+     */
+    const getMessage = (key) => {
+        try {
+            let locale = locales[navigator.language.toLowerCase()];
+            if (!locale) {
+                const lang = navigator.language.split('-')[0];
+                locale = locales[lang];
+            }
+            if (!locale) {
+                locale = locales.en;
+            }
+
+            return locale[key];
+        } catch (ex) {
+            return locales.en[key];
+        }
+    };
+
     if (document.getElementById('block-youtube-ads-logo')) {
-        finish('The shortcut has been already executed');
+        finish(getMessage('alreadyExecuted'));
         return;
     }
 
     if (window.location.hostname !== 'www.youtube.com'
         && window.location.hostname !== 'm.youtube.com') {
-        finish('This shortcut is supposed to be launched only on YouTube');
+        finish(getMessage('wrongDomain'));
         return;
     }
 
@@ -135,13 +221,14 @@
 
         /**
          * Adds CSS to the page
-         * @param {String} hostname hostname
+         * @param {string} hostname hostname
          */
         const hideElements = (hostname) => {
-            if (!hiddenCSS[hostname]) {
+            const selectors = hiddenCSS[hostname];
+            if (!selectors) {
                 return;
             }
-            const rule = `${hiddenCSS[hostname].join(', ')} { display: none!important; }`;
+            const rule = `${selectors.join(', ')} { display: none!important; }`;
             const style = document.createElement('style');
             style.innerHTML = rule;
             document.head.appendChild(style);
@@ -156,7 +243,7 @@
                 callback(mutations);
             });
 
-            domMutationObserver.observe(document, {
+            domMutationObserver.observe(document.documentElement, {
                 childList: true,
                 subtree: true,
             });
@@ -172,7 +259,7 @@
             }
             elements.forEach((el) => {
                 const parent = el.parentNode?.parentNode;
-                if (parent && parent.localName === 'ytd-rich-item-renderer') {
+                if (parent?.localName === 'ytd-rich-item-renderer') {
                     parent.style.display = 'none';
                 }
             });
@@ -186,13 +273,14 @@
             // If there's a video that plays the ad at this moment, scroll this ad
             if (document.querySelector('.ad-showing')) {
                 const video = document.querySelector('video');
-                if (video) {
+                if (video && video.duration) {
                     video.currentTime = video.duration;
                     // Skip button should appear after that,
                     // now simply click it automatically
                     setTimeout(() => {
-                        if (document.querySelector('button.ytp-ad-skip-button')) {
-                            document.querySelector('button.ytp-ad-skip-button').click();
+                        const skipBtn = document.querySelector('button.ytp-ad-skip-button');
+                        if (skipBtn) {
+                            skipBtn.click();
                         }
                     }, 100);
                 }
@@ -202,8 +290,8 @@
         /**
          * This function overrides a property on the specified object.
          *
-         * @param {Object} obj object to look for properties in
-         * @param {String} propertyName property to override
+         * @param {object} obj object to look for properties in
+         * @param {string} propertyName property to override
          * @param {*} overrideValue value to set
          */
         const overrideObject = (obj, propertyName, overrideValue) => {
@@ -235,7 +323,7 @@
          * Examines these functions arguments, looks for properties with the specified name there
          * and if it exists, changes it's value to what was specified.
          *
-         * @param {String} propertyName name of the property
+         * @param {string} propertyName name of the property
          * @param {*} overrideValue new value for the property
          */
         const jsonOverride = (propertyName, overrideValue) => {
@@ -274,7 +362,8 @@
 
             const style = document.createElement('style');
             style.innerHTML = `[data-mode="watch"] #${LOGO_ID} { color: #fff; }
-[data-mode="searching"] #${LOGO_ID}, [data-mode="search"] #${LOGO_ID} { display: none; }`;
+[data-mode="searching"] #${LOGO_ID}, [data-mode="search"] #${LOGO_ID} { display: none; }
+#${LOGO_ID} { white-space: nowrap; }`;
             document.head.appendChild(style);
         };
 
@@ -284,7 +373,7 @@
             }
 
             const logo = document.createElement('span');
-            logo.innerHTML = 'with&nbsp;AdGuard';
+            logo.innerHTML = '__logo_text__';
             logo.setAttribute('id', LOGO_ID);
 
             if (window.location.hostname === 'm.youtube.com') {
@@ -325,9 +414,11 @@
     };
 
     const script = document.createElement('script');
-    script.innerHTML = `(${pageScript.toString()})();`;
+    const scriptText = pageScript.toString().replace('__logo_text__', getMessage('logo'));
+    script.innerHTML = `(${scriptText})();`;
     document.head.appendChild(script);
     document.head.removeChild(script);
 
-    finish('YouTube is now ad free! Please note, that you need to run this shortcut again if you reload the page.');
+    finish(getMessage('success'));
 })();
+
