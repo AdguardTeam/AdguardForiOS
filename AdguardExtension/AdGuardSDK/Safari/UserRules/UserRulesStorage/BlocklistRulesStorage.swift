@@ -18,6 +18,7 @@
 
 import Foundation
 
+/* This class manages blocklist rules storage */
 final class BlocklistRulesStorage: UserRulesStorageProtocol {
     typealias Rule = UserRule<BlocklistRuleConverter>
     

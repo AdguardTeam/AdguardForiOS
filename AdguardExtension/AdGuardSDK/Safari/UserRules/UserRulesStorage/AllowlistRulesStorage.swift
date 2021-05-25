@@ -18,6 +18,7 @@
 
 import Foundation
 
+/* This class manages allowlist rules storage */
 final class AllowlistRulesStorage: UserRulesStorageProtocol {
     typealias Rule = UserRule<AllowlistRuleConverter>
     
