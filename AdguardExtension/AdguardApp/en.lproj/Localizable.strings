@@ -959,4 +959,4 @@
 "setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br> 1. Open youtube.com in Safari<br><br> 2. Click %@ the Share button in the toolbar<br><br> 3. Click “Block YouTube ads (by AdGuard)”";
+"block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br> 1. Open youtube.com in Safari.<br><br> 2. Click %@ the Share button.<br><br> 3. Click “Block YouTube Ads (by AdGuard)“.";

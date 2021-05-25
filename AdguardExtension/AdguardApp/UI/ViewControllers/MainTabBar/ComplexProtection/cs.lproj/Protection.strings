@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS ochrana";
 
-/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "kDM-2d-bRK"; */
-"kDM-2d-bRK.text" = "AdGuard VPN";
-
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "zdarma";
 
