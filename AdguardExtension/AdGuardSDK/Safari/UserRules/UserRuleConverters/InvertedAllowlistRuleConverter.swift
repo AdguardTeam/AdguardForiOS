@@ -19,12 +19,21 @@
 import Foundation
 
 struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
+    
+    private static let invertedAllowlistPrefix = "~"
+    
     /*
      This function converts domain to inverted allowlist rule ~domain
      If passed domain already contains '~' it won't be repeated
      */
     static func convertDomainToRule(_ domain: String) -> String {
-        return ""
+        var rule = domain
+        
+        if !rule.hasPrefix(invertedAllowlistPrefix) {
+            rule = invertedAllowlistPrefix + rule
+        }
+        
+        return rule
     }
     
     /*
@@ -32,6 +41,12 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      If passed rule doesn't contain '~' prefix the function will return rule without modifying it
      */
     static func convertRuleToDomain(_ rule: String) -> String {
-        return ""
+        var domain = rule
+        
+        if domain.hasPrefix(invertedAllowlistPrefix) {
+            domain.removeFirst(invertedAllowlistPrefix.count)
+        }
+        
+        return domain
     }
 }

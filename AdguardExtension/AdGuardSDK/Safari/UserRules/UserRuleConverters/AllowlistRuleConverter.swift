@@ -19,12 +19,26 @@
 import Foundation
 
 struct AllowlistRuleConverter: UserRuleConverterProtocol {
+    
+    private static let allowlistPrefix = "@@||"
+    private static let allowlistSuffix = "^$document"
+    
     /*
      This function converts domain to allowlist rule @@||domain^$document
      If passed domain already contains '@@||' or '^$document' they won't be repeated
      */
     static func convertDomainToRule(_ domain: String) -> String {
-        return ""
+        var rule = domain
+        
+        if !rule.hasPrefix(allowlistPrefix) {
+            rule = allowlistPrefix + rule
+        }
+        
+        if !rule.hasSuffix(allowlistSuffix) {
+            rule += allowlistSuffix
+        }
+        
+        return rule
     }
     
     /*
@@ -33,6 +47,16 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      the function will return rule without modifying it
      */
     static func convertRuleToDomain(_ rule: String) -> String {
-        return ""
+        var domain = rule
+        
+        if domain.hasPrefix(allowlistPrefix) {
+            domain.removeFirst(allowlistPrefix.count)
+        }
+        
+        if domain.hasSuffix(allowlistSuffix) {
+            domain.removeLast(allowlistSuffix.count)
+        }
+        
+        return domain
     }
 }
