@@ -21,7 +21,8 @@ import Foundation
 extension URL {
     //Return true if URL is directory and if it exists
     var isDirectory: Bool {
-        return FileManager.default.fileExists(atPath: self.path) &&
-            (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
+        var urlIsDirectory = ObjCBool(true)
+        let urlIsValid = FileManager.default.fileExists(atPath: self.path, isDirectory: &urlIsDirectory)
+        return urlIsValid && urlIsDirectory.boolValue
     }
 }
