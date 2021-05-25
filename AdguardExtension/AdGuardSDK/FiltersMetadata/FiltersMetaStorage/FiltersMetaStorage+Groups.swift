@@ -89,8 +89,14 @@ extension FiltersMetaStorageProtocol {
         
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
-            guard let localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name else { return nil }
-            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: localizedName, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
+            
+            var localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+            if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
+                localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+            }
+            guard let name = localizedName else { return nil }
+            
+            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: name, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
         return result

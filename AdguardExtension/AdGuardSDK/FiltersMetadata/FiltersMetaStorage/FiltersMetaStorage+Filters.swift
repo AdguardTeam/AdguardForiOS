@@ -122,15 +122,23 @@ extension FiltersMetaStorageProtocol {
             groups = try getAllGroups()
         }
         
-        let filters: [ExtendedFilterMetaProtocol] = try dbFilters.map { dbFilter in
+        let filters: [ExtendedFilterMetaProtocol] = try dbFilters.compactMap { dbFilter in
             let tags = try getTagsForFilter(withId: dbFilter.filterId)
             let langs = try getLangsForFilter(withId: dbFilter.filterId)
             let group = groups.first(where: { $0.groupId == dbFilter.groupId })!
-            let filterLocalization = try getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: lang)
+            
+            /*
+                If there is no localized filter we trying to get default english localization and if it is steel nil return nil
+             */
+            var filterLocalization = try getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: lang)
+            if filterLocalization == nil && lang != FiltersMetaStorage.defaultDbLanguage {
+                filterLocalization = try getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: FiltersMetaStorage.defaultDbLanguage)
+            }
+            guard let _ = filterLocalization else { return nil }
             
             return ExtendedFiltersMeta.Meta(filterId: dbFilter.filterId,
-                                            name: filterLocalization.name,
-                                            description: filterLocalization.description,
+                                            name: filterLocalization?.name,
+                                            description: filterLocalization?.description,
                                             timeAdded: nil,
                                             homePage: dbFilter.homePage,
                                             updateFrequency: dbFilter.expires,

@@ -20,18 +20,20 @@ import Foundation
 import SQLite
 
 protocol FiltersMetaStorageProtocol: AnyObject {
+    static var defaultDbLanguage: String { get }
     var filtersDb: Connection { get }
 }
 
 final class FiltersMetaStorage: FiltersMetaStorageProtocol {
-    
     // MARK: - Public properties
+    static var defaultDbLanguage: String = "en"
     
     let filtersDb: Connection
     
     // MARK: - Initialization
     
-    init(productionDbManager: ProductionDatabaseManagerProtocol) {
+    init(productionDbManager: ProductionDatabaseManagerProtocol, sqlDateFormat: String? = nil) {
         self.filtersDb = productionDbManager.filtersDb
+        dateFormatter.dateFormat = sqlDateFormat ?? "yyyy-MM-dd HH:mm:ss" //TODO: Fix global dateFormatter variable for SQLite.swift
     }
 }

@@ -71,7 +71,6 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Initialization
     
     init(dbContainerUrl: URL) throws {
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" //TODO: Fix global dateFormatter variable for SQLite.swift
         if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(at: dbContainerUrl, withIntermediateDirectories: true, attributes: nil)
         }

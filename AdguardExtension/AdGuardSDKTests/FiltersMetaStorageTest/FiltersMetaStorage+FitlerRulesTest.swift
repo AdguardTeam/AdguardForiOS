@@ -1,56 +1,31 @@
 import XCTest
 
 class FiltersMetaStorage_FitlerRulesTest: XCTestCase {
-    let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-    let workingUrl = Bundle(for: DefaultDatabaseManager.self).resourceURL!.appendingPathComponent("testFolder")
+    
+    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
+    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
-
-    let defaultDbFileName = "default.db"
-    let defaultDbArchiveFileName = "default.db.zip"
-    let adguardDbFileName = "adguard.db"
-
-    override func tearDownWithError() throws {
-        let _ = deleteTestFolder()
+    
+    var productionDbManager: ProductionDatabaseManager?
+    var filtersStorage: FiltersMetaStorage?
+    
+    override func setUpWithError() throws {
+        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
+        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
     }
-
+    
+    override class func setUp() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
+    }
+    
     override class func tearDown() {
-        clearRootDirectory()
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
-
-    func test() {
-        do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
-
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-
-    private func deleteTestFolder() -> Bool {
-        do {
-            try fileManager.removeItem(atPath: workingUrl.path)
-            return true
-        } catch {
-            return false
-        }
-    }
-
-    private static func clearRootDirectory() {
-        let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-        let fileManager = FileManager.default
-
-        let defaultDbFileName = "default.db"
-        let adguardDbFileName = "adguard.db"
-
-        do {
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbFileName))
-            }
-
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(adguardDbFileName))
-            }
-        } catch {}
+    
+    override func tearDown() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
 }

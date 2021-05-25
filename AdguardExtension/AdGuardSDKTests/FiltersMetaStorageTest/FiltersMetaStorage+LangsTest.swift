@@ -2,38 +2,67 @@ import XCTest
 
 class FiltersMetaStorage_LangsTest: XCTestCase {
 
-    let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-    let workingUrl = Bundle(for: DefaultDatabaseManager.self).resourceURL!.appendingPathComponent("testFolder")
+    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
+    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    let defaultDbFileName = "default.db"
-    let defaultDbArchiveFileName = "default.db.zip"
-    let adguardDbFileName = "adguard.db"
+    var productionDbManager: ProductionDatabaseManager?
+    var filtersStorage: FiltersMetaStorage?
+    var setOfTestableLangs: Set<String> = Set()
     
-    override func tearDownWithError() throws {
-        let _ = deleteTestFolder()
+    override func setUpWithError() throws {
+        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
+        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        
+        let lang = try filtersStorage!.getLangsForFilter(withId: 1)
+        lang.forEach { setOfTestableLangs.insert($0) }
+    }
+    
+    override class func setUp() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        clearRootDirectory()
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
+    }
+    
+    override func tearDown() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
     
     func testGetLangsForFilterWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return }
         do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
             let lang = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertTrue(lang.contains { $0 == "ru"} )
-            
+            XCTAssertFalse(lang.isEmpty)
+            lang.forEach {
+                XCTAssertFalse($0.isEmpty)
+            }
         } catch {
             XCTFail("\(error)")
         }
     }
     
-    func testGetLangsForFilterWithNonExistsId() {
+    func testGetLangsForFilterWithDifferentLocalization() {
+        guard let filtersStorage = filtersStorage else { return }
         do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
+            let lang = try filtersStorage.getLangsForFilter(withId: 8)
+            XCTAssertFalse(lang.isEmpty)
+            lang.forEach {
+                XCTAssertFalse($0.isEmpty)
+                XCTAssertFalse(setOfTestableLangs.contains($0))
+            }
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testGetLangsForFilterWithNonExistingId() {
+        guard let filtersStorage = filtersStorage else { return }
+        do {
             var lang = try filtersStorage.getLangsForFilter(withId: 123456789)
             XCTAssertTrue(lang.isEmpty)
             
@@ -43,32 +72,5 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
         } catch {
             XCTFail("\(error)")
         }
-    }
-
-    private func deleteTestFolder() -> Bool {
-        do {
-            try fileManager.removeItem(atPath: workingUrl.path)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
-    private static func clearRootDirectory() {
-        let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-        let fileManager = FileManager.default
-        
-        let defaultDbFileName = "default.db"
-        let adguardDbFileName = "adguard.db"
-        
-        do {
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbFileName))
-            }
-            
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(adguardDbFileName))
-            }
-        } catch {}
     }
 }

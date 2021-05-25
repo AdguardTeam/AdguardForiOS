@@ -57,6 +57,7 @@
 		2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E72657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift */; };
 		2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */; };
 		2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */; };
+		2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -3101,6 +3102,7 @@
 		2434A3E72657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+GroupLocalizationsTest.swift"; sourceTree = "<group>"; };
 		2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FiltersLocalizationsTest.swift"; sourceTree = "<group>"; };
 		2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FitlerRulesTest.swift"; sourceTree = "<group>"; };
+		2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorageTestProcessor.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -5293,6 +5295,7 @@
 		7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */ = {
 			isa = PBXGroup;
 			children = (
+				2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */,
 				7E1C3467265290F300A4490E /* DefaultDatabaseManagerTest.swift */,
 				24D59C572653C9CE00B92379 /* ProductionDatabaseManagerTest.swift */,
 				24B7FE102656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift */,
@@ -8850,6 +8853,7 @@
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
 				24D59C592654019300B92379 /* ProductionDatabaseManager.swift in Sources */,
+				2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */,
 				2422D3242652F92800C1FD5A /* Logger.swift in Sources */,
 				2434A3E42657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift in Sources */,
 				7E69C5052656617C00EA9DBA /* FiltersMetaStorage.swift in Sources */,

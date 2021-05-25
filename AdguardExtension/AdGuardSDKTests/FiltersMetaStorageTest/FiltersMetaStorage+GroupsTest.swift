@@ -2,31 +2,52 @@ import XCTest
 
 class FiltersMetaStorage_GroupsTest: XCTestCase {
 
-    let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-    let workingUrl = Bundle(for: DefaultDatabaseManager.self).resourceURL!.appendingPathComponent("testFolder")
+    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
+    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    let defaultDbFileName = "default.db"
-    let defaultDbArchiveFileName = "default.db.zip"
-    let adguardDbFileName = "adguard.db"
+    var productionDbManager: ProductionDatabaseManager?
+    var filtersStorage: FiltersMetaStorage?
+    var setOfDefaultLocalizedGroups: Set<String?> = Set()
     
-    override func tearDownWithError() throws {
-        let _ = deleteTestFolder()
+    override func setUpWithError() throws {
+        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
+        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        
+        setOfDefaultLocalizedGroups.removeAll()
+        let groups = try filtersStorage?.getAllGroups()
+        groups?.forEach {
+            setOfDefaultLocalizedGroups.insert($0.groupName)
+        }
+    }
+    
+    override class func setUp() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        clearRootDirectory()
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
     
+    override func tearDown() {
+        FiltersMetaStorageTestProcessor.deleteTestFolder()
+        FiltersMetaStorageTestProcessor.clearRootDirectory()
+    }
     
     func testGetAllGroupsWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return }
         do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
             let groups = try filtersStorage.getAllGroups()
-            XCTAssertNotNil(groups)
-            XCTAssertTrue(groups.contains { $0.groupName == "Security"})
-            XCTAssertFalse(groups.contains { $0.groupName == "Autres" })
+            XCTAssertFalse(groups.isEmpty)
+            groups.forEach {
+                XCTAssertNotNil($0.isEnabled)
+                XCTAssertNotNil($0.displayNumber)
+                XCTAssertNotNil($0.groupId)
+                XCTAssertNotNil($0.groupName)
+                XCTAssertFalse($0.groupName.isEmpty)
+            }
 
         } catch {
             XCTFail("\(error)")
@@ -34,55 +55,43 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllLocalizedGroupsWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return }
         do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
-            XCTAssertNotNil(groups)
-            XCTAssertFalse(groups.contains { $0.groupName == "Security"})
-            XCTAssertTrue(groups.contains { $0.groupName == "Autres" })
+            XCTAssertFalse(groups.isEmpty)
+            groups.forEach {
+                XCTAssertNotNil($0.isEnabled)
+                XCTAssertNotNil($0.displayNumber)
+                XCTAssertNotNil($0.groupId)
+                XCTAssertNotNil($0.groupName)
+                XCTAssertFalse($0.groupName.isEmpty)
+                
+                XCTAssertFalse(setOfDefaultLocalizedGroups.contains($0.groupName))
+            }
 
         } catch {
             XCTFail("\(error)")
         }
     }
     
-    func testGetAllLocalizedGroupsWithNonExistsLanguage() {
+    func testGetAllLocalizedGroupsWithNonExistingLanguage() {
+        guard let filtersStorage = filtersStorage else { return }
         do {
-            let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            let filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager)
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "123")
             XCTAssertTrue(groups.isEmpty)
+            XCTAssertNotNil(groups)
+            groups.forEach {
+                XCTAssertNotNil($0.isEnabled)
+                XCTAssertNotNil($0.displayNumber)
+                XCTAssertNotNil($0.groupId)
+                XCTAssertNotNil($0.groupName)
+                XCTAssertFalse($0.groupName.isEmpty)
+                
+                XCTAssertFalse(setOfDefaultLocalizedGroups.contains($0.groupName))
+            }
 
         } catch {
             XCTFail("\(error)")
         }
-    }
-    
-    private func deleteTestFolder() -> Bool {
-        do {
-            try fileManager.removeItem(atPath: workingUrl.path)
-            return true
-        } catch {
-            return false
-        }
-    }
-    
-    private static func clearRootDirectory() {
-        let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-        let fileManager = FileManager.default
-        
-        let defaultDbFileName = "default.db"
-        let adguardDbFileName = "adguard.db"
-        
-        do {
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbFileName))
-            }
-            
-            if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path) {
-                try fileManager.removeItem(at: rootDirectory.appendingPathComponent(adguardDbFileName))
-            }
-        } catch {}
     }
 }
