@@ -23,28 +23,29 @@ final class AllowlistRulesStorage: UserRulesStorageProtocol {
     
     // MARK: - Public properties
     
-    var rulesString: String { allRules.filter { $0.isEnabled }.map { $0.rule }.joined(separator: "/n") }
-    var allRules: [Rule] { rulesCacheQueue.sync { _allRules } }
+    var rulesString: String { allRulesAtomic.value.filter { $0.isEnabled }.map { $0.rule }.joined(separator: "/n") }
+    var allRules: [Rule] { allRulesAtomic.value }
     
     // MARK: - Private properties
     
     // Helper varible to make allRules thread safe
-    private var _allRules: [Rule]
+    private var allRulesAtomic: Atomic<[Rule]>
     
+    // UserDefaults storage
     private let storage: UserDefaultsStorageProtocol
+    
     // Queue for saving rules to storage
     private let storageSaveQueue = DispatchQueue(label: "AdGuardSDK.AllowlistRulesStorage.storageSaveQueue", qos: .background)
-    // Queue for modifying and accessing rules to be sure in allRules thread safety
-    private let rulesCacheQueue = DispatchQueue(label: "AdGuardSDK.AllowlistRulesStorage.storageSaveQueue", qos: .userInitiated)
+    
     // Used to quickly check domain uniqueness
-    private var domainsSet: Set<String>
+    private var domainsSet: Atomic<Set<String>>
     
     // MARK: - Initialization
     
     init(storage: UserDefaultsStorageProtocol) {
         self.storage = storage
-        self._allRules = storage.allowlistRules
-        self.domainsSet = Set(allRules.map { $0.domain })
+        self.allRulesAtomic = Atomic(storage.allowlistRules)
+        self.domainsSet = Atomic(Set(allRulesAtomic.value.map { $0.domain }))
     }
     
     deinit {
@@ -56,14 +57,12 @@ final class AllowlistRulesStorage: UserRulesStorageProtocol {
     // MARK: - Public methods
     
     func add(rule: Rule) throws {
-        guard !domainsSet.contains(rule.domain) else {
+        guard !domainsSet.value.contains(rule.domain) else {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.domain)
         }
         
-        rulesCacheQueue.sync {
-            _allRules.append(rule)
-            domainsSet.insert(rule.domain)
-        }
+        allRulesAtomic.modify { $0.append(rule) }
+        domainsSet.modify { $0.insert(rule.domain) }
         
         storageSaveQueue.async { [weak self] in
             self?.storage.allowlistRules.append(rule)
@@ -72,21 +71,26 @@ final class AllowlistRulesStorage: UserRulesStorageProtocol {
     
     func add(rules: [Rule]) throws {
         try rules.forEach { rule in
-            if !domainsSet.contains(rule.domain) {
+            if !domainsSet.value.contains(rule.domain) {
                 try add(rule: rule)
             }
         }
     }
     
     func modifyRule(_ oldRuleDomain: String, _ newRule: Rule) throws {
-        guard !domainsSet.contains(newRule.domain) else {
+        guard !domainsSet.value.contains(newRule.domain) else {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.domain)
         }
-        guard let ruleIndex = allRules.firstIndex(where: { $0.domain == oldRuleDomain }) else {
+        guard let ruleIndex = allRulesAtomic.value.firstIndex(where: { $0.domain == oldRuleDomain }) else {
             throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleDomain)
         }
         
-        allRules[ruleIndex] = newRule
+        allRulesAtomic.modify { $0[ruleIndex] = newRule }
+        domainsSet.modify {
+            $0.remove(oldRuleDomain)
+            $0.insert(newRule.domain)
+        }
+        
         storageSaveQueue.async { [weak self] in
             self?.storage.allowlistRules[ruleIndex] = newRule
         }
@@ -96,7 +100,10 @@ final class AllowlistRulesStorage: UserRulesStorageProtocol {
         guard let ruleIndex = allRules.firstIndex(where: { $0.domain == domain }) else {
             throw UserRulesStorageError.ruleDoesNotExist(ruleString: domain)
         }
-        allRules.remove(at: ruleIndex)
+        
+        allRulesAtomic.modify { $0.remove(at: ruleIndex) }
+        domainsSet.modify { $0.remove(domain) }
+        
         storageSaveQueue.async { [weak self] in
             self?.storage.allowlistRules.remove(at: ruleIndex)
         }
@@ -105,9 +112,9 @@ final class AllowlistRulesStorage: UserRulesStorageProtocol {
 
 // MARK: - ResourcesProtocol + allowlist rules storage
 
-fileprivate extension UserDefaultsStorageProtocol {
+extension UserDefaultsStorageProtocol {
     
-    private var allowlistRulesKey: String { "allowlistRulesKey" }
+    private var allowlistRulesKey: String { "AdGuardSDK.allowlistRulesKey" }
     
     var allowlistRules: [UserRule<AllowlistRuleConverter>] {
         get {

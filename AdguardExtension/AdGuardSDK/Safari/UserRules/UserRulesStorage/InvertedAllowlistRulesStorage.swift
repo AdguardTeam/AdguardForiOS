@@ -24,7 +24,18 @@ final class InvertedAllowlistRulesStorage: UserRulesStorageProtocol {
     // MARK: - Public properties
     
     var rulesString: String = ""
-    var allRules: [Rule] = []
+    var allRules: [Rule]
+    
+    // MARK: - Private properties
+    
+    private let allowlistRulesStorage: AllowlistRulesStorage
+    
+    // MARK: - Initialization
+    
+    init(allowlistRulesStorage: AllowlistRulesStorage) {
+        self.allowlistRulesStorage = allowlistRulesStorage
+        
+    }
     
     // MARK: - Public methods
     

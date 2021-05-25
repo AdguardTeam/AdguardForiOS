@@ -541,6 +541,7 @@
 		7E69C5252657E17E00EA9DBA /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */; };
 		7E69C5272657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5262657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift */; };
 		7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
+		7E69C5E1265BFE2700EA9DBA /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5E0265BFE2700EA9DBA /* Atomic.swift */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
@@ -3467,6 +3468,7 @@
 		7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
 		7E69C5262657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
+		7E69C5E0265BFE2700EA9DBA /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
@@ -5292,10 +5294,18 @@
 			children = (
 				7E69C5132657A4BD00EA9DBA /* UserRulesStorageProtocol.swift */,
 				7E69C5222657E16100EA9DBA /* AllowlistRulesStorage.swift */,
-				7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */,
 				7E69C5262657E18E00EA9DBA /* InvertedAllowlistRulesStorage.swift */,
+				7E69C5242657E17E00EA9DBA /* BlocklistRulesStorage.swift */,
 			);
 			path = UserRulesStorage;
+			sourceTree = "<group>";
+		};
+		7E69C5E2265BFE2E00EA9DBA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7E69C5E0265BFE2700EA9DBA /* Atomic.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7E6D962423E172D1006202C2 /* RequestDetailsScreen */ = {
@@ -5849,6 +5859,7 @@
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7E69C5E2265BFE2E00EA9DBA /* Utils */,
 				D0BA7E5926330D9A0097029B /* Safari */,
 				D0BA7B7C2631A8910097029B /* Resources */,
 				D0BDB622263075C6007D9BC6 /* Lang */,
@@ -9803,6 +9814,7 @@
 				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FiltersStorage.swift in Sources */,
 				D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */,
+				7E69C5E1265BFE2700EA9DBA /* Atomic.swift in Sources */,
 				D0BA7C552631B56D0097029B /* FiltersLocalizationsRequest.swift in Sources */,
 				D0CD6022263967540022D0C3 /* NSData+GZIP.m in Sources */,
 				D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */,
