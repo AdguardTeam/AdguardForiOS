@@ -114,7 +114,8 @@ class ComplexProtectionController: UITableViewController {
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
-    private let adguardVpnCell = 2
+    private let advancedYouTubeAdsBlockingCell = 2
+    private let adguardVpnCell = 3
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
