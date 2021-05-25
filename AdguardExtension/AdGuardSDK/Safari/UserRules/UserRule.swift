@@ -35,12 +35,11 @@ protocol UserRuleProtocol: Codable {
 }
 
 struct UserRule<Converter: UserRuleConverterProtocol>: UserRuleProtocol {
-    var rule: String
     var domain: String
+    var rule: String { Converter.convertDomainToRule(domain) }
     var isEnabled: Bool
     
     init(domain: String, isEnabled: Bool = true) {
-        self.rule = Converter.convertDomainToRule(domain)
         self.domain = domain
         self.isEnabled = isEnabled
     }

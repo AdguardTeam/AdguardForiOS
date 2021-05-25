@@ -34,7 +34,7 @@ final class InvertedAllowlistRulesStorage: UserRulesStorageProtocol {
     
     init(allowlistRulesStorage: AllowlistRulesStorage) {
         self.allowlistRulesStorage = allowlistRulesStorage
-        
+        self.allRules = []
     }
     
     // MARK: - Public methods
@@ -54,4 +54,8 @@ final class InvertedAllowlistRulesStorage: UserRulesStorageProtocol {
     func removeRule(withDomain domain: String) {
         
     }
+    
+    // MARK: - Private methods
+    
+    
 }
