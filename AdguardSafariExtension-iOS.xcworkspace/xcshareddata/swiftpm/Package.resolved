@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios",
         "state": {
           "branch": null,
-          "revision": "e428f89675588f2fe58891eac5f7c971098cf1a0",
-          "version": "3.2.2"
+          "revision": "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
+          "version": "3.2.3"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/MacPaw/Setapp-framework.git",
         "state": {
           "branch": null,
-          "revision": "6238b5a173c33337c4efc2029481d9209af4c39d",
-          "version": "0.1.0"
+          "revision": "afcde544e849e27993a6d2aef8d7534c5bf94b8c",
+          "version": "0.2.1"
         }
       },
       {
