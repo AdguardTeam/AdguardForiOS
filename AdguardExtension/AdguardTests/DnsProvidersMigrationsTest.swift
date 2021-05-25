@@ -66,6 +66,7 @@ class DnsProvidersMigrationsTest: XCTestCase {
         group.enter()
         group.enter()
         group.enter()
+        group.enter()
         
         dnsProviders!.addCustomProvider(name: "Test Provider 1", upstream: "quic://doh.tiar.app") {
             group.leave()
@@ -76,9 +77,15 @@ class DnsProvidersMigrationsTest: XCTestCase {
         dnsProviders!.addCustomProvider(name: "Test Provider 3", upstream: "quic://doh.tiar.app:333") {
             group.leave()
         }
+        
+        // quic://doh.tiar.apps encoded to sdns
+        dnsProviders!.addCustomProvider(name: "Test Provider 4", upstream: "sdns://BAcAAAAAAAAAAAAMZG9oLnRpYXIuYXBw") {
+            group.leave()
+        }
+        
         group.wait()
         
-        XCTAssertEqual(dnsProviders!.customProviders.count, 3)
+        XCTAssertEqual(dnsProviders!.customProviders.count, 4)
         
         let dnsProvidersMigratable = dnsProviders as! DnsProvidersServiceMigratable
         dnsProvidersMigratable.changeQuicCustomServersPort()
@@ -91,6 +98,9 @@ class DnsProvidersMigrationsTest: XCTestCase {
         
         XCTAssertEqual(dnsProviders!.customProviders[2].name, "Test Provider 3")
         XCTAssertEqual(dnsProviders!.customProviders[2].servers![0].upstreams[0], "quic://doh.tiar.app:333")
+        
+        XCTAssertEqual(dnsProviders!.customProviders[3].name, "Test Provider 4")
+        XCTAssertEqual(dnsProviders!.customProviders[3].servers![0].upstreams[0], "sdns://BAcAAAAAAAAAAAAQZG9oLnRpYXIuYXBwOjc4NA" /*quic://doh.tiar.app:784*/)
         
         XCTAssert(vpnManager.updateCalled)
     }

@@ -123,14 +123,14 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
             // Process sdns link
             else if serverToMigrate.dnsProtocol == .dnsCrypt,
                     let sdnsUpstream = serverToMigrate.upstreams.first,
-                    let decodedServerUpstream = DnsResolver.resolve(upstream: sdnsUpstream).dnsServer {
+                    let stamp = AGDnsStamp(string: sdnsUpstream, error: nil) {
                 
-                let upstreamProtocol = DnsProtocol.getProtocolByUpstream(decodedServerUpstream)
-                if upstreamProtocol == .doq {
-                    let newUpstream = addPortToUpstreamIfNeeded(decodedServerUpstream)
-                    if newUpstream != decodedServerUpstream {
-                        // TODO: - encode upstream to sdns
-                        serverToMigrate.upstreams = [decodedServerUpstream]
+                if stamp.proto == .AGSPT_DOQ && !stamp.providerName.contains(":") {
+                    let newUpstream = stamp.providerName + ":784"
+                    if newUpstream != stamp.providerName {
+                        
+                        stamp.providerName = newUpstream
+                        serverToMigrate.upstreams = [stamp.stringValue]
                         vpnManager?.updateSettings(completion: nil)
                     }
                 }
