@@ -19,7 +19,7 @@
 import UIKit
 import MobileCoreServices
 
-class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
+class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
 
     var extensionContext: NSExtensionContext?
     

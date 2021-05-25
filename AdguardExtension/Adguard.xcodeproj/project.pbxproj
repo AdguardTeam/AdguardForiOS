@@ -571,13 +571,13 @@
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
 		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
 		7E69C533265BA53400EA9DBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C532265BA53400EA9DBA /* Media.xcassets */; };
-		7E69C535265BA53400EA9DBA /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C534265BA53400EA9DBA /* ActionRequestHandler.swift */; };
+		7E69C535265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C534265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift */; };
 		7E69C53B265BA53400EA9DBA /* YouTubeAdsActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E69C530265BA53400EA9DBA /* YouTubeAdsActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E69C541265BA8E400EA9DBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C543265BA8E400EA9DBA /* InfoPlist.strings */; };
 		7E69C56C265BC2B900EA9DBA /* BlockYouTubeAds.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C56B265BC2B800EA9DBA /* BlockYouTubeAds.js */; };
 		7E69C5D8265BE6E100EA9DBA /* ProYouTubeAdsActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E69C5CD265BE6E100EA9DBA /* ProYouTubeAdsActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E69C5DC265BE6FC00EA9DBA /* BlockYouTubeAds.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C56B265BC2B800EA9DBA /* BlockYouTubeAds.js */; };
-		7E69C5DD265BE70700EA9DBA /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C534265BA53400EA9DBA /* ActionRequestHandler.swift */; };
+		7E69C5DD265BE70700EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C534265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift */; };
 		7E69C5DE265BE70D00EA9DBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C532265BA53400EA9DBA /* Media.xcassets */; };
 		7E69C5DF265BE71B00EA9DBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C543265BA8E400EA9DBA /* InfoPlist.strings */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
@@ -3130,7 +3130,7 @@
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
 		7E69C530265BA53400EA9DBA /* YouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E69C532265BA53400EA9DBA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		7E69C534265BA53400EA9DBA /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		7E69C534265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeAdsRequestHandler.swift; sourceTree = "<group>"; };
 		7E69C538265BA53400EA9DBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E69C542265BA8E400EA9DBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E69C544265BA8E900EA9DBA /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -4921,7 +4921,7 @@
 			children = (
 				7E69C56B265BC2B800EA9DBA /* BlockYouTubeAds.js */,
 				7E69C532265BA53400EA9DBA /* Media.xcassets */,
-				7E69C534265BA53400EA9DBA /* ActionRequestHandler.swift */,
+				7E69C534265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift */,
 				7E69C538265BA53400EA9DBA /* Info.plist */,
 				7E69C543265BA8E400EA9DBA /* InfoPlist.strings */,
 			);
@@ -8179,7 +8179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E69C535265BA53400EA9DBA /* ActionRequestHandler.swift in Sources */,
+				7E69C535265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8187,7 +8187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E69C5DD265BE70700EA9DBA /* ActionRequestHandler.swift in Sources */,
+				7E69C5DD265BE70700EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
