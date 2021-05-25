@@ -5,8 +5,8 @@ class DnsResolverTest: XCTestCase {
     var testCases: [String: DnsResolverProtocol.DnsResolverResult] = [
         // dot servers
         "sdns://AwMAAAAAAAAAAAAPZG5zLmFkZ3VhcmQuY29t": ("tls://dns.adguard.com", .dot),
-        "sdns://AwAAAAAAAAAAAAAgdGxzOi8vZG5zLXVuZmlsdGVyZWQuYWRndWFyZC5jb20": ("tls://dns-unfiltered.adguard.com", .dot),
-        "sdns://AwAAAAAAAAAAAAApdGxzOi8vZmFtaWx5LWZpbHRlci1kbnMuY2xlYW5icm93c2luZy5vcmc": ("tls://family-filter-dns.cleanbrowsing.org", .dot),
+        "sdns://AwcAAAAAAAAAAAAaZG5zLXVuZmlsdGVyZWQuYWRndWFyZC5jb20": ("tls://dns-unfiltered.adguard.com", .dot),
+        "sdns://AwAAAAAAAAAAAAAjZmFtaWx5LWZpbHRlci1kbnMuY2xlYW5icm93c2luZy5vcmc": ("tls://family-filter-dns.cleanbrowsing.org", .dot),
         "sdns://AwAAAAAAAAAAAAAKZG5zLmdvb2dsZQ": ("tls://dns.google", .dot),
         "sdns://AwAAAAAAAAAAAAAPb25lLm9uZS5vbmUub25l": ("tls://one.one.one.one", .dot),
         "sdns://AwAAAAAAAAAAAAANZG5zLnF1YWQ5Lm5ldA": ("tls://dns.quad9.net", .dot),
