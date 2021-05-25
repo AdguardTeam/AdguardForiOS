@@ -1,6 +1,6 @@
 import XCTest
 
-class UtilsTest: XCTestCase {
+class URL_UtilsTest: XCTestCase {
     
     override class func setUp() {
         FiltersMetaStorageTestProcessor.deleteTestFolder()
