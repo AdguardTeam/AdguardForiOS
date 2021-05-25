@@ -232,6 +232,17 @@ class MigrationService: MigrationServiceProtocol {
             dnsProvidersMigratable.reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: resources)
             nativeProviders.reinitializeProviders()
         }
+        
+        /**
+        Migration:
+         In app version 4.2 (693) DNS-lib was updated
+         If user had custom quic:// URLs and DoQ sdns:// stamps in his server list,
+         they should be changed from `quic://example.org` to `quic://example.org:784`.
+         DoQ sdns:// stamps should also be patched to include port, if they are in list
+        */
+        if lastBuildVersion < 693, let dnsProvidersMigratable = dnsProvidersService as? DnsProvidersServiceMigratable {
+            dnsProvidersMigratable.changeQuicCustomServersPort()
+        }
     }
     
     // MARK: - Methods for migrations

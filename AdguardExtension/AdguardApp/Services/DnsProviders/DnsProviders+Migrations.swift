@@ -21,6 +21,7 @@ import Foundation
 protocol DnsProvidersServiceMigratable {
     func migrateActiveServerIfNeeded()
     func reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: AESharedResourcesProtocol)
+    func changeQuicCustomServersPort()
 }
 
 extension DnsProvidersService: DnsProvidersServiceMigratable {
@@ -86,6 +87,60 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
         setProviderIdForCurrentDnsServer()
     }
     
+    /*
+     Change a port for custom servers with the 'quic' schema to 784
+     New port is 8853. Now an address like quic://dns.adguard.com is transformed into quic://dns.adguard.com:8853.
+     So to force the use of the old port 784 specify it strictly - quic://dns.adguard.com:784.
+     
+     That means that if you have custom quic:// URLs and DoQ sdns:// stamps in your server list,
+     they (excluding AdGuard's) should be changed from `quic://example.org` to `quic://example.org:784`.
+     DoQ sdns:// stamps should also be patched to include port, if they are in list
+     */
+    func changeQuicCustomServersPort() {
+        DDLogInfo("Migrating custom DoQ servers, changing port to 784")
+        
+        let allCustomServers = customProviders.flatMap { $0.servers ?? [] }
+        DDLogDebug("All custom servers: \(allCustomServers.flatMap { $0.upstreams }.joined(separator: "; "))")
+        
+        let adguardDoqHosts = ["quic://dns.adguard.com", "quic://dns-family.adguard.com", "quic://dns-unfiltered.adguard.com"]
+        
+        for provider in customProviders {
+            guard provider.servers?.count == 1,
+                  let serverToMigrate = provider.servers?.first
+            else { continue }
+            
+            // Add port to DoQ server if needed
+            if serverToMigrate.dnsProtocol == .doq,
+               let upstream = serverToMigrate.upstreams.first,
+               !adguardDoqHosts.contains(upstream) {
+                
+                let newUpstream = addPortToUpstreamIfNeeded(upstream)
+                if newUpstream != upstream {
+                    serverToMigrate.upstreams = [newUpstream]
+                    vpnManager?.updateSettings(completion: nil)
+                }
+            }
+            // Process sdns link
+            else if serverToMigrate.dnsProtocol == .dnsCrypt,
+                    let sdnsUpstream = serverToMigrate.upstreams.first,
+                    let stamp = AGDnsStamp(string: sdnsUpstream, error: nil) {
+                
+                if stamp.proto == .AGSPT_DOQ && !stamp.providerName.contains(":") {
+                    let newUpstream = stamp.providerName + ":784"
+                    if newUpstream != stamp.providerName {
+                        
+                        stamp.providerName = newUpstream
+                        serverToMigrate.upstreams = [stamp.stringValue]
+                        vpnManager?.updateSettings(completion: nil)
+                    }
+                }
+            }
+            else {
+                continue
+            }
+        }
+    }
+    
     private func migrateCurrentDnsServerInUserDefaults(resources: AESharedResourcesProtocol) {
         DDLogInfo("Get Data with NSKeyedUnarchver and resave it with JSONEncoder for AEDefaultsActiveDnsServer")
         
@@ -139,5 +194,23 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
         activeDnsServer = currentServer
         
         DDLogInfo("Finished setting provider id for current DNS server")
+    }
+    
+    /*
+     Returns passed upstream if the port in upstream was stated or upstream is not DoQ
+     Returns upstream with 784 port otherwise
+     */
+    private func addPortToUpstreamIfNeeded(_ upstream: String) -> String {
+        guard let doqPrefix = DnsProtocol.prefixByProtocol[.doq], upstream.hasPrefix(doqPrefix) else {
+            return upstream
+        }
+        
+        let upstreamWithoutPrefix = String(upstream.dropFirst(doqPrefix.count))
+        
+        if upstreamWithoutPrefix.contains(":") {
+            return upstream
+        }
+        
+        return upstream + ":784"
     }
 }
