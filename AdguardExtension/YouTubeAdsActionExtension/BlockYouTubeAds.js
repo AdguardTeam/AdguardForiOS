@@ -258,9 +258,11 @@
                 return;
             }
             elements.forEach((el) => {
-                const parent = el.parentNode?.parentNode;
-                if (parent?.localName === 'ytd-rich-item-renderer') {
-                    parent.style.display = 'none';
+                if (el.parentNode && el.parentNode.parentNode) {
+                    const parent = el.parentNode.parentNode;
+                    if (parent.localName === 'ytd-rich-item-renderer') {
+                        parent.style.display = 'none';
+                    }
                 }
             });
         };
@@ -421,4 +423,3 @@
 
     finish(getMessage('success'));
 })();
-
