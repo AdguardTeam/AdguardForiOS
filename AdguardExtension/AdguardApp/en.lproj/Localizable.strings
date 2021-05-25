@@ -143,7 +143,7 @@
 "blacklist_text_format" = "You can add your own rules here.<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter here the domain names. AdGuard will not filter ads there, ignoring all other settings.";
+"whitelist_text" = "Enter here the domains you don't want AdGuard to filter. This list takes precedence over other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
