@@ -43,6 +43,17 @@ import Foundation
         }
     }
     
+    init(dnslibProto: AGStampProtoType) {
+        switch dnslibProto {
+        case .AGSPT_PLAIN: self = .dns
+        case .AGSPT_DOH: self = .doh
+        case .AGSPT_TLS: self = .dot
+        case .AGSPT_DNSCRYPT: self = .dnsCrypt
+        case .AGSPT_DOQ: self = .doq
+        @unknown default: self = .dns
+        }
+    }
+    
     static let protocolByString: [String: DnsProtocol] = [ "dns": .dns,
                                                            "dnscrypt": .dnsCrypt,
                                                            "doh": .doh,
