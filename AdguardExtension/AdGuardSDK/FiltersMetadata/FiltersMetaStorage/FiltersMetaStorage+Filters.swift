@@ -134,11 +134,12 @@ extension FiltersMetaStorageProtocol {
             if filterLocalization == nil && lang != FiltersMetaStorage.defaultDbLanguage {
                 filterLocalization = try getLocalizationForFilter(withId: dbFilter.filterId, forLanguage: FiltersMetaStorage.defaultDbLanguage)
             }
-            guard let _ = filterLocalization else { return nil }
+            
+            guard let localization = filterLocalization else { return nil }
             
             return ExtendedFiltersMeta.Meta(filterId: dbFilter.filterId,
-                                            name: filterLocalization?.name,
-                                            description: filterLocalization?.description,
+                                            name: localization.name,
+                                            description: localization.description,
                                             timeAdded: nil,
                                             homePage: dbFilter.homePage,
                                             updateFrequency: dbFilter.expires,

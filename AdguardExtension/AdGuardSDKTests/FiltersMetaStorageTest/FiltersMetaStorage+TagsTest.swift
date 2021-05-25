@@ -30,7 +30,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetAllTagsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let tags = try filtersStorage.getAllTags()
             XCTAssertFalse(tags.isEmpty)
@@ -46,7 +46,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let tags = try filtersStorage.getTagsForFilter(withId: 1)
             XCTAssertFalse(tags.isEmpty)
@@ -63,7 +63,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithNonExistingFilterId() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             var tags = try filtersStorage.getTagsForFilter(withId: 123456789)
             XCTAssertTrue(tags.isEmpty)

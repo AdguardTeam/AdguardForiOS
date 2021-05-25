@@ -37,7 +37,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllGroupsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let groups = try filtersStorage.getAllGroups()
             XCTAssertFalse(groups.isEmpty)
@@ -55,7 +55,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllLocalizedGroupsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
             XCTAssertFalse(groups.isEmpty)
@@ -75,7 +75,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllLocalizedGroupsWithNonExistingLanguage() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "123")
             XCTAssertTrue(groups.isEmpty)

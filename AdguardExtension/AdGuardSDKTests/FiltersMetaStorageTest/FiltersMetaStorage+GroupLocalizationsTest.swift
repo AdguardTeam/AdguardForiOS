@@ -30,7 +30,7 @@ class FiltersMetaStorage_GroupLocalizationsTest: XCTestCase {
     }
     
     func testGetLocalizationForGroupWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let localization = try filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
@@ -43,7 +43,7 @@ class FiltersMetaStorage_GroupLocalizationsTest: XCTestCase {
     }
     
     func testGetLocalizationForGroupWithNonExistingIdOrLanguage() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             var localization = try filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "foo")
             XCTAssertNil(localization)

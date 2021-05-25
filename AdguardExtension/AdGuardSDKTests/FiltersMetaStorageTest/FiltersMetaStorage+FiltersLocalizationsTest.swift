@@ -30,7 +30,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
     }
 
     func testGetLocalizationForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             var localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
@@ -38,8 +38,6 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
             XCTAssertFalse(localization!.name.isEmpty)
             XCTAssertNotNil(localization?.description)
             XCTAssertFalse(localization!.description.isEmpty)
-
-            let localizationToCompare = localization?.description
             
             localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "fr")
             XCTAssertNotNil(localization)
@@ -48,14 +46,13 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
             XCTAssertNotNil(localization?.description)
             XCTAssertFalse(localization!.description.isEmpty)
             
-            XCTAssertNotEqual(localization?.description, localizationToCompare)
         } catch {
             XCTFail("\(error)")
         }
     }
     
     func testGetLocalizationForFilterWithNonExistingIdOrLanguage() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "foo")
             XCTAssertNil(localization)

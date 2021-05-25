@@ -90,6 +90,9 @@ extension FiltersMetaStorageProtocol {
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
             
+            /*
+                If there is no localized group name we trying to get default english localization and if it is steel nil return nil
+             */
             var localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
                 localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name

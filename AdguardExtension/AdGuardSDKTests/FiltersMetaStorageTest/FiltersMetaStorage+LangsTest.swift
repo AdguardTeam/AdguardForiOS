@@ -34,7 +34,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let lang = try filtersStorage.getLangsForFilter(withId: 1)
             XCTAssertFalse(lang.isEmpty)
@@ -47,7 +47,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithDifferentLocalization() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let lang = try filtersStorage.getLangsForFilter(withId: 8)
             XCTAssertFalse(lang.isEmpty)
@@ -61,7 +61,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithNonExistingId() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             var lang = try filtersStorage.getLangsForFilter(withId: 123456789)
             XCTAssertTrue(lang.isEmpty)

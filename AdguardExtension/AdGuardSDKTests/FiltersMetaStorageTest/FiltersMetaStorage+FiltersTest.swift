@@ -37,7 +37,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
 
     func testGetAllFiltersWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             
             XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
@@ -71,7 +71,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testGetAllLocalizedFiltersWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let filters = try filtersStorage.getAllLocalizedFilters(forLanguage: "fr")
             XCTAssertFalse(filters.isEmpty)
@@ -104,7 +104,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testGetAllLocalizedFiltersWithNonExistingLanguage() {
-        guard let filtersStorage = filtersStorage else { return }
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let filters = try filtersStorage.getAllLocalizedFilters(forLanguage: "123")
             XCTAssertFalse(filters.isEmpty)

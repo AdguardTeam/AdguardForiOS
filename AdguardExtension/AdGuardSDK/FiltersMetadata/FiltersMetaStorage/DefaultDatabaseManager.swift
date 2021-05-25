@@ -87,8 +87,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     // MARK: - Public methods
     func updateDefaultDb() throws {
-        var isDirectory = ObjCBool(true)
-        if !fileManager.fileExists(atPath: dbContainerUrl.path, isDirectory: &isDirectory) {
+        if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(atPath: dbContainerUrl.path, withIntermediateDirectories: true, attributes: nil)
         }
         let dbFileUrl = try getDefaultDbUnzippedData()

@@ -32,8 +32,8 @@ final class FiltersMetaStorage: FiltersMetaStorageProtocol {
     
     // MARK: - Initialization
     
-    init(productionDbManager: ProductionDatabaseManagerProtocol, sqlDateFormat: String? = nil) {
+    init(productionDbManager: ProductionDatabaseManagerProtocol) {
         self.filtersDb = productionDbManager.filtersDb
-        dateFormatter.dateFormat = sqlDateFormat ?? "yyyy-MM-dd HH:mm:ss" //TODO: Fix global dateFormatter variable for SQLite.swift
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     }
 }
