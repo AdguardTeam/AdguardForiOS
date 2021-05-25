@@ -173,14 +173,16 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let agFilters = filters.compactMap { AGDnsFilterParams(id: Int($0.key), data: $0.value, inMemory: false) }
         
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
+        let defaultConfig = AGDnsProxyConfig.getDefault()!
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
-                                      handleDNSSuffixes: true,
-                                      userDNSSuffixes: nil,
+                                      fallbackDomains: defaultConfig.fallbackDomains,
+                                      detectSearchDomains: defaultConfig.detectSearchDomains,
                                       filters: agFilters,
                                       blockedResponseTtlSecs: blockedResponseTtlSecs,
                                       dns64Settings: dns64Settings,
                                       listeners: nil,
+                                      outboundProxy: defaultConfig.outboundProxy,
                                       ipv6Available: ipv6Available,
                                       blockIpv6: blockIpv6,
                                       blockingMode: blockingMode,
@@ -189,6 +191,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
                                       dnsCacheSize: 128,
                                       optimisticCache: false,
                                       enableDNSSECOK: false,
+                                      enableRetransmissionHandling: true,
                                       helperPath: nil)
 
         var error: NSError?

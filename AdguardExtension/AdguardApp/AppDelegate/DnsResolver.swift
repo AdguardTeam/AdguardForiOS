@@ -7,8 +7,8 @@ protocol DnsResolverProtocol {
 extension DnsResolverProtocol {
     static func resolve(upstream: String) -> DnsResolverResult {
         var error: NSError?
-                
-        let dnsStamp = AGDnsUtils.parseDnsStamp(withStampStr: upstream, error: &error)
+        
+        let dnsStamp = AGDnsStamp(string: upstream, error: &error)
         if let error = error {
             DDLogError("Error resolving DNS protocol; Error: \(error)")
             return (nil, nil)
