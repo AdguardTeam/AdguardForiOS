@@ -287,8 +287,8 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advanced blocking of YouTube ads" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDM-2d-bRK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="27" width="294" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="Blocking ads in YouTube" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDM-2d-bRK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="284" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -310,21 +310,37 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari extension that removes ads in YouTube" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-3f-FQj" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="37.5" width="284" height="33.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    </variation>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="9Kv-Zg-pb0" firstAttribute="centerY" secondItem="Wb6-dW-2ZE" secondAttribute="centerY" id="3LS-Wm-p3t"/>
-                                                <constraint firstItem="pYJ-AT-Gfy" firstAttribute="centerY" secondItem="kDM-2d-bRK" secondAttribute="centerY" id="5CH-e4-Mr7"/>
-                                                <constraint firstItem="9Kv-Zg-pb0" firstAttribute="leading" secondItem="kDM-2d-bRK" secondAttribute="trailing" constant="16" id="6NH-Xe-XuE">
+                                                <constraint firstAttribute="bottom" secondItem="Sry-3f-FQj" secondAttribute="bottom" constant="16" id="3A3-VS-lSq"/>
+                                                <constraint firstItem="Sry-3f-FQj" firstAttribute="leading" secondItem="kDM-2d-bRK" secondAttribute="leading" id="5ia-Qy-PTu"/>
+                                                <constraint firstItem="9Kv-Zg-pb0" firstAttribute="leading" secondItem="kDM-2d-bRK" secondAttribute="trailing" constant="24" id="6NH-Xe-XuE">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="kDM-2d-bRK" firstAttribute="centerY" secondItem="9Kv-Zg-pb0" secondAttribute="centerY" id="O9V-AK-09L"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="kDM-2d-bRK" secondAttribute="bottom" constant="16" id="WFj-Mw-3cF"/>
-                                                <constraint firstItem="kDM-2d-bRK" firstAttribute="top" secondItem="Wb6-dW-2ZE" secondAttribute="topMargin" constant="16" id="YtN-dt-2QC"/>
+                                                <constraint firstItem="pYJ-AT-Gfy" firstAttribute="top" secondItem="kDM-2d-bRK" secondAttribute="top" id="9XF-6v-z7U"/>
+                                                <constraint firstItem="Sry-3f-FQj" firstAttribute="top" secondItem="kDM-2d-bRK" secondAttribute="bottom" constant="2" id="Nsh-O8-d2J"/>
+                                                <constraint firstItem="9Kv-Zg-pb0" firstAttribute="centerY" secondItem="Wb6-dW-2ZE" secondAttribute="centerY" id="Xtk-rL-QE2"/>
                                                 <constraint firstItem="pYJ-AT-Gfy" firstAttribute="leading" secondItem="Wb6-dW-2ZE" secondAttribute="leading" constant="16" id="o82-gr-BQ7">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="Sry-3f-FQj" firstAttribute="trailing" secondItem="kDM-2d-bRK" secondAttribute="trailing" id="owp-eb-Mup"/>
+                                                <constraint firstItem="kDM-2d-bRK" firstAttribute="top" secondItem="Wb6-dW-2ZE" secondAttribute="top" constant="16" id="tED-sH-U1C">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="kDM-2d-bRK" firstAttribute="leading" secondItem="pYJ-AT-Gfy" secondAttribute="trailing" constant="16" id="tax-ck-gwB"/>
-                                                <constraint firstAttribute="trailing" secondItem="9Kv-Zg-pb0" secondAttribute="trailing" constant="24" id="xV7-iQ-ngb"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Kv-Zg-pb0" secondAttribute="trailing" constant="26" id="xV7-iQ-ngb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -460,6 +476,7 @@
                         <outletCollection property="themableLabels" destination="kDM-2d-bRK" collectionClass="NSMutableArray" id="onF-rZ-ksG"/>
                         <outletCollection property="themableLabels" destination="tKQ-Yn-fgL" collectionClass="NSMutableArray" id="TCs-QH-k0m"/>
                         <outletCollection property="themableLabels" destination="Hnw-bh-Bgh" collectionClass="NSMutableArray" id="2jz-LX-f4e"/>
+                        <outletCollection property="themableLabels" destination="Sry-3f-FQj" collectionClass="NSMutableArray" id="ct5-xW-9xu"/>
                         <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="WYM-YR-INH"/>
                     </connections>
                 </tableViewController>
