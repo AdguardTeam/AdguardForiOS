@@ -5676,7 +5676,7 @@
 				659886B31CF74DE9003ECD1C /* Embed App Extensions */,
 				D0D7E569243B077A001801A5 /* CopyFiles */,
 				D06E2F33253EE126008BBD2D /* Codesign frameworks */,
-				D09E28642542CA28002D6BC0 /* Remove setapp */,
+				D09E28642542CA28002D6BC0 /* Remove frameworks */,
 			);
 			buildRules = (
 			);
@@ -5742,7 +5742,7 @@
 				65F398591B7B689500ABCD39 /* Embed App Extensions */,
 				D0C940F323EAF8D6008B85EC /* CopyFiles */,
 				D02CF3CA25270C0400F6EF14 /* Codesign frameworks */,
-				D09E277F2541D525002D6BC0 /* Remove setapp */,
+				D09E277F2541D525002D6BC0 /* Remove frameworks */,
 			);
 			buildRules = (
 			);
@@ -6856,7 +6856,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# xcode 12 does not sign xcframeworks that are provided by Swift Package Manager\n# this script is warkaround for this issue\n# more details there https://pspdfkit.com/guides/ios/current/knowledge-base/library-not-found-swiftpm/\nfind \"${CODESIGNING_FOLDER_PATH}\" -name '*.framework' -print0 | while read -d $'\\0' framework \ndo \n    codesign --force --deep --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements --timestamp=none \"${framework}\" \ndone\n\n";
 		};
-		D09E277F2541D525002D6BC0 /* Remove setapp */ = {
+		D09E277F2541D525002D6BC0 /* Remove frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6865,16 +6865,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Remove setapp";
+			name = "Remove frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}\" -name \"Frameworks\" -type d -exec rm -rf \"{}\" \\; || true\n\n";
 		};
-		D09E28642542CA28002D6BC0 /* Remove setapp */ = {
+		D09E28642542CA28002D6BC0 /* Remove frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -6883,14 +6883,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Remove setapp";
+			name = "Remove frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}\" -name \"Frameworks\" -type d -exec rm -rf \"{}\" \\; || true\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -10807,6 +10807,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.YouTubeAdsActionExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -10841,6 +10842,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.YouTubeAdsActionExtension";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
