@@ -11,7 +11,7 @@
 "Cyn-cw-Zrm.text" = "Name:";
 
 /* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard funktioniert nicht auf den Webseiten aus dieser Liste";
+"Gg8-4u-qvU.text" = "AdGuard wird auf den Webseiten dieser Liste nicht ausgeführt";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filter";
@@ -24,9 +24,6 @@
 
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "ABBRECHEN";
-
-/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Dieses Modul sperrt Werbung und Tracker auf in Safari geöffneten Webseiten";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Anzahl von Regeln: ";
@@ -50,7 +47,7 @@
 "eAd-RZ-bHN.text" = "Geben Sie hier Ihre eigenen Filter-Listen ein.";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
-"f3z-Yh-zY2.text" = "Positivliste";
+"f3z-Yh-zY2.text" = "Freigabeliste";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
 "kCb-lJ-BLL.normalTitle" = "HINZUFÜGEN";

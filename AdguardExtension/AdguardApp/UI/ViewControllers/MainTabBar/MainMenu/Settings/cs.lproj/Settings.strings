@@ -19,8 +19,8 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "ULOŽIT";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Odstranit VPN profil";
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Smazat VPN profil";
 
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Bootstrap IP adresa";
@@ -59,13 +59,13 @@
 "H3Q-H6-YV0.text" = "Tuto možnost zapněte, pokud máte problémy s připojením k Internetu při spuštěném AdGuardu";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
-"IvJ-Oi-vGF.text" = "Nízkoúrovňové nastavení";
+"IvJ-Oi-vGF.text" = "Nízkoúrovňová nastavení";
 
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Bootstrap servery";
 
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "Toto odstraní Váš aktuální VPN profil a vypne DNS ochranu";
+/* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Toto smaže Váš aktuální VPN profil a vypne DNS ochranu";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Pokročilá nastavení";
@@ -158,7 +158,7 @@
 "rDk-OP-kAS.text" = "Odezva s nulovou IP adresou (0.0.0.0 pro A; :: pro AAAA)";
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
-"reQ-4X-84i.text" = "Nízkoúrovňové nastavení";
+"reQ-4X-84i.text" = "Nízkoúrovňová nastavení";
 
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "ULOŽIT";

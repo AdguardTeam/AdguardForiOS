@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Możesz tutaj dodać własne reguły.<br>Przeczytaj <a href=\"%@\">notatkę na temat składni reguły</a>";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Wpisz tutaj nazwy domen. AdGuard nie blokuje dostępu do tych domen, ignorując wszystkie inne ustawienia";
+"whitelist_text" = "Wpisz tutaj domeny, których nie chcesz, aby AdGuard filtrował. Ta lista ma pierwszeństwo przed innymi ustawieniami.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Wprowadź tutaj nazwy domen. AdGuard umożliwi filtrowanie w Safari tylko dla tych stron";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Aktualizowanie...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Dodaj regułę";
+"add_blacklist_rule_title" = "Dodaj nową regułę";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Wpisz domenę";
+"add_whitelist_domain_title" = "Dodaj domenę";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +284,13 @@
 "reset_title" = "Zresetuj";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Usuń";
+"delete_title" = "Usuń";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Usuń profil VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Czy na pewno chcesz usunąć swój profil VPN i wyłączyć ochronę DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Czy na pewno chcesz usunąć swój profil VPN i wyłączyć ochronę DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Wystąpił błąd";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ nie jest jeszcze obsługiwane przez iOS. Spróbuj dodać inny upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Zapisz i wybierz";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Zapisz";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Anuluj";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Usuń";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Dodaj niestandardowy serwer DNS";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Edytuj niestandardowy serwer DNS";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemowa lista blokowanych";
 
@@ -927,3 +945,18 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Odpowiedz, podając ręcznie ustawiony adres IP";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtry";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtry DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Ta opcja jest niekompatybilna z natywnym trybem DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Do konta Setapp została podłączona maksymalna liczba urządzeń.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Czy wiesz, że YouTube zmienił swoje algorytmy, aby wyświetlać więcej reklam? <br><br> Aby je zablokować, musisz: <br><br> 1. Otwórz youtube.com w przeglądarce Safari. <br><br> 2. Kliknij przycisk %@ Udostępnij. <br><br> 3. Kliknij „Blokuj reklamy YouTube (przez AdGuard)”.";

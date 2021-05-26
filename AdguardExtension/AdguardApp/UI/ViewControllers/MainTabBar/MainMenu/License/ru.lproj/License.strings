@@ -5,7 +5,7 @@
 "6P7-a5-VLL.text" = "Фильтры безопасности";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "Выход";
+"70b-CS-wqh.title" = "Выйти";
 
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
 "FLH-Qd-Atk.text" = "Вам доступны все Премиум-опции";
@@ -44,7 +44,7 @@
 "fwp-I7-Qtl.text" = "Позаботьтесь о ваших данных";
 
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
-"fxK-6y-LB6.text" = "Вход в систему";
+"fxK-6y-LB6.text" = "Вход в аккаунт";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
 "gLL-6o-GGa.text" = "DNS-защита";

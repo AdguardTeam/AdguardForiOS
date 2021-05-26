@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Ovdje možete dodati svoja pravila.<br>Pročitajte <a href=\"%@\">bilješku o sintaksi za pravila</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Ovdje unesite nazive domena. AdGuard neće blokirati pristup ovim stranicama i ignorirati će sve druge postavke.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Unesite nazive domena. AdGuard će omogućiti filtriranje u Safari za ove web stranice.";
 
@@ -284,13 +281,13 @@
 "reset_title" = "Poništi";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Ukloni";
+"delete_title" = "Ukloni";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Ukloni VPN profil";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Jeste li sigurni da želite ukloniti vaš VPN profil i onemogućiti DNS zaštitu?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Jeste li sigurni da želite ukloniti vaš VPN profil i onemogućiti DNS zaštitu?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Došlo je do pogreške";
@@ -649,6 +646,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ još ne podržava iOS. Pokušajte dodati različite upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Spremi i odaberi";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Spremi";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Poništi";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Ukloni";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Dodaj prilagođeni DNS poslužitelj";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Uredi prilagođeni DNS poslužitelj";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistemski popis nedopuštenih";
 
@@ -927,3 +942,9 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Uvijek vrati postavljenu prilagođenu IP adresu";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtri";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS Filtri";

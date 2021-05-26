@@ -23,13 +23,13 @@
 "safari_filters_loading_error" = "Filter können nicht in Safari geladen werden. Die letzten Änderungen konnten daher nicht übernommen werden.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Positivliste zu löschen, oder ändern Sie die verwendeten Filter.";
+"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Freigabeliste zu bereinigen, oder ändern Sie die verwendeten Filter.";
 
 /* NO Button caption in alert */
 "common_action_no" = "Nein";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Positivliste (invertiert)";
+"inverted_whitelist_title" = "Freigabeliste (invertiert)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Änderungen werden übernommen …";
@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird den Zugriff auf diese Domains ungeachtet aller anderen Einstellungen nicht sperren.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard aktiviert die Filterung in Safari nur für diese Webseiten.";
 
@@ -158,7 +155,7 @@
 "update_filter_start_message" = "Wird aktualisiert …";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Regel hinzufügen";
+"add_blacklist_rule_title" = "Neue Regel hinzufügen";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Domain hinzufügen";
@@ -284,13 +281,13 @@
 "reset_title" = "Zurücksetzen";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Entfernen";
+"delete_title" = "Löschen";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN-Profil entfernen";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Möchten Sie Ihr VPN-Profil wirklich entfernen und den DNS-Schutz deaktivieren?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Möchten Sie Ihr VPN-Profil wirklich löschen und den DNS-Schutz deaktivieren?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Ein Fehler ist aufgetreten";
@@ -401,13 +398,13 @@
 "wifi_data_description" = "DNS-Schutz im WLAN-Modus";
 
 /* (ListOfRulesModel) title for dns allowlist */
-"allowlist_title" = "Positivliste";
+"allowlist_title" = "Freigabeliste";
 
 /* (ListOfRulesModel) title safari Allowlist */
-"whitelist_title" = "Positivliste";
+"whitelist_title" = "Freigabeliste";
 
 /* (ListOfRulesModel) title for dns block list */
-"dns_blacklist_title" = "Blockliste";
+"dns_blacklist_title" = "Sperrliste";
 
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "Safari-Benutzerregeln";
@@ -428,13 +425,13 @@
 "disabled" = "Deaktiviert";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Aus Positivliste entfernen";
+"remove_from_whitelist" = "Aus Freigabeliste entfernen";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "Aus der Blockliste entfernen";
+"remove_from_blacklist" = "Aus Sperrliste entfernen";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Zur Positivliste hinzufügen";
+"add_to_whitelist" = "Zur Freigabeliste hinzufügen";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Zur Sperrliste hinzufügen";
@@ -602,16 +599,16 @@
 "dns_request_status_allowlisted" = "Zugelassen";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_whitelist" = "zur Positivliste hinzugefügt";
+"dns_request_user_status_added_to_whitelist" = "zur Freigabeliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "zur Blockliste hinzugefügt";
+"dns_request_user_status_added_to_blacklist" = "zu Sperrliste hinzugefügt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "aus Positivliste entfernt";
+"dns_request_user_status_removed_from_whitelist" = "aus Freigabeliste entfernt";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "aus Blockliste entfernt";
+"dns_request_user_status_removed_from_blacklist" = "aus Sperrliste entfernt";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
 "onboarding_first_step_text" = "Öffnen Sie die <b>Einstellungen</b>";
@@ -632,7 +629,7 @@
 "block_request" = "Anfrage sperren";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "Domain zur Positivliste hinzufügen";
+"whitelist_request" = "Domain zur Freigabeliste hinzufügen";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "Video-Anleitung";
@@ -649,11 +646,29 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ wird von iOS noch nicht unterstützt. Versuchen Sie einen anderen Upstream einzurichten.";
 
-/* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_blacklist" = "System-Blockliste";
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Speichern und auswählen";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Speichern";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Abbrechen";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Löschen";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Benutzerdefinierten DNS-Server hinzufügen";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Benutzerdefinierten DNS-Server bearbeiten";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
-"system_whitelist" = "System-Positivliste";
+"system_blacklist" = "System-Sperrliste";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "System-Freigabeliste";
 
 /* (DnsRequestDetailsController) "Details" title for section header */
 "tracker_details_header" = "Details";
@@ -927,3 +942,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Mit einer manuell festgelegten IP-Adresse antworten";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filter";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-Filter";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Diese Option ist nicht mit dem nativen DNS-Modus kompatibel";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Sie haben die maximale Anzahl von Geräten mit Ihrem Setapp-Konto verbunden.";

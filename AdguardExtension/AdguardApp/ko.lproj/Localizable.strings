@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "이곳에 당신의 사용자 정의 규칙을 추가하세요<br>규칙 문법에 대한<a href=\"%@\">내용을 읽어보세요</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 다른 모든 설정을 무시하고 이 도메인에 대한 액세스를 차단하지 않습니다.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서만 필터링을 활성화할 것입니다.";
 
@@ -161,7 +158,7 @@
 "add_blacklist_rule_title" = "규칙 추가";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "도메인을 입력하세요";
+"add_whitelist_domain_title" = "도메인 추가";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +281,13 @@
 "reset_title" = "초기화";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "제거";
+"delete_title" = "삭제";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN 프로필 제거";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "VPN 프로필을 제거하고 추적 보호를 비활성화 하시겠습니까?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "VPN 프로필을 제거하고 DNS 보호를 비활성화 하시겠습니까?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "오류가 발생했습니다";
@@ -649,6 +646,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@은 아직 iOS에서 지원되지 않습니다. 다른 업스트림을 추가해 보십시오.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "저장하고 선택";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "저장";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "취소";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "삭제";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "사용자 정의 DNS 서버 추가";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "사용자 정의 DNS 서버 수정";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "시스템 차단 목록";
 
@@ -927,3 +942,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "직접 설정한 IP 주소로 응답합니다";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "필터";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS 필터";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "이 설정은 기본 DNS 모드와 호환되지 않습니다.";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Setapp 계정에 연결할 수 있는 기기의 최대 개수를 초과했습니다.";

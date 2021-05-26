@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Zde můžete zadat vlastní pravidla.<br>Přečtěte si <a href=\"%@\">poznámku o syntaxi pravidla</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Zde zadejte názvy domén. AdGuard neblokuje přístup do těchto domén ignorováním všech ostatních nastavení.";
+"whitelist_text" = "Zde zadejte domény, které nemá AdGuard filtrovat. Tento seznam má přednost před jinými nastaveními.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Zde zadejte názvy domén. AdGuard povolí filtrování pouze těchto webových stránek v Safari.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Aktualizuji...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Přidat pravidlo";
+"add_blacklist_rule_title" = "Přidat nové pravidlo";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Zadejte doménu";
+"add_whitelist_domain_title" = "Přidat doménu";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -224,10 +224,10 @@
 "dns_crypt_protocol" = "DNSCrypt";
 
 /* DnsProviderDetailsController - dns over https protocol */
-"doh_protocol" = "DNS přes HTTPS";
+"doh_protocol" = "DNS skrze HTTPS";
 
 /* DnsProviderDetailsController - dns over https rotocol */
-"dot_protocol" = "DNS přes TLS";
+"dot_protocol" = "DNS skrze TLS";
 
 /* DnsProviderDetailsController - dns over quic rotocol */
 "doq_protocol" = "DNS skrze QUIC (experimentální)";
@@ -284,13 +284,13 @@
 "reset_title" = "Resetovat";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Odstranit";
+"delete_title" = "Smazat";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstranit VPN profil";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Opravdu chcete odebrat VPN profil a vypnout DNS ochranu?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Opravdu chcete smazat VPN profil a vypnout DNS ochranu?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Vyskytla se chyba";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ zatím není podporován systémem iOS. Zkuste přidat jiný upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Uložit a vybrat";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Uložit";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Zrušit";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Vymazat";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Přidat vlastní DNS server";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Editovat vlastní DNS server";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systémový seznam zakázaných";
 
@@ -927,3 +945,18 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Odezva s ručně nastavenou IP adresou";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtry";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS filtry";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Tato možnost není kompatibilní s nativním režimem DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "K Vašemu účtu Setapp jste připojili maximální počet zařízení.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Věděli jste, že služba YouTube změnila své algoritmy, aby Vám zobrazovala více reklam?<br><br>Nyní, abyste je mohli zablokovat, musíte:<br><br>1. Otevřít stránku youtube.com v prohlížeči Safari.<br><br>2. Klepnout na tlačítko %@ Sdílet<br><br>3. Klepnout na možnost \"Blokovat reklamy v YouTube (pomocí AdGuardu)\".";

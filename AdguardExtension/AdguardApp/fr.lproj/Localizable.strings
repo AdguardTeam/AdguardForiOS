@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Saisissez vos règles personnelles ici. <br>Lisez cette <a href=\"%@\">note sur la syntaxe des règles</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Saisissez le nom de domaine ici. AdGuard désactivera le filtrage dans Safari pour ces sites Web.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Entrez les noms de domaine ici. AdGuard activera le filtrage dans Safari pour ces sites Web uniquement.";
 
@@ -158,10 +155,10 @@
 "update_filter_start_message" = "Mise à jour...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Ajouter une règle";
+"add_blacklist_rule_title" = "Ajouter une nouvelle règle";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Saisir un domaine";
+"add_whitelist_domain_title" = "Ajouter un domaine";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +281,13 @@
 "reset_title" = "Réinitialiser";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Supprimer";
+"delete_title" = "Supprimer";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Supprimer le profil VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Êtes-vous sûr de vouloir supprimer votre profil VPN et désactiver la DNS protection?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Êtes-vous sûr(e) de vouloir supprimer votre profil VPN et désactiver la protection DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Une erreur est survenue";
@@ -649,6 +646,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ n'est pas encore pris en charge par iOS. Essayez d'en ajouter d'autres en amont.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Enregistrer et sélectionner";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Enregistrer";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Annuler";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Supprimer";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Ajouter un serveur DNS personnalisé";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Modifier le serveur DNS personnalisé";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Liste Noire du système";
 
@@ -764,7 +779,7 @@
 "encrypted_info_alert_message" = "Le nombre de requêtes DNS chiffrées. Vous devez utiliser un serveur DNS chiffré pour chiffrer votre trafic DNS.";
 
 /* (ActivityViewController) - Average time title */
-"average_info_alert_title" = "Temps moyen";
+"average_info_alert_title" = "Latence";
 
 /* (ActivityViewController) - Average time message */
 "average_info_alert_message" = "Temps moyen nécessaire pour traiter une demande DNS. Plus le serveur DNS que vous utilisez est rapide, plus il sera faible.";
@@ -927,3 +942,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Répondre avec une adresse IP définie manuellement";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtres";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtres DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Cette option est incompatible avec le mode DNS natif";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Vous avez connecté le nombre maximal d’appareils à votre compte Setapp.";
