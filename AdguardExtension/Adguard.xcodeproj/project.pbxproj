@@ -6872,7 +6872,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind ${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks -type d -maxdepth 0 -exec rm -rf {} \\;\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}\" -name \"Frameworks\" -type d -exec rm -rf \"{}\" \\; || true\n\n";
 		};
 		D09E28642542CA28002D6BC0 /* Remove frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6890,7 +6890,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind ${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/*.appex/Frameworks -type d -maxdepth 0 -exec rm -rf {} \\;\n";
+			shellScript = "# xcode 12 copies SPM binaryTargets to Frameworks (good) and PlugIns (bad) folders. This leads to errors when deploying to the AppStore.\n# this script is warkaround for this issue\n# remove Setapp from PlugIns folder\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/Setapp.framework\"\n\nrm -rf \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}/AGDnsProxy.framework\"\n\nfind \"${TARGET_BUILD_DIR}/${PLUGINS_FOLDER_PATH}\" -name \"Frameworks\" -type d -exec rm -rf \"{}\" \\; || true\n";
 		};
 		D0B542C62435C6A3002F0AEC /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
