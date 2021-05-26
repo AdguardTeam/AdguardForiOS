@@ -51,6 +51,13 @@
 		242F69F726540F6300B9DAD4 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69EA26540F6300B9DAD4 /* schema0.100.sql */; };
 		242F69F826540F6300B9DAD4 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69EB26540F6300B9DAD4 /* schema0.102.sql */; };
 		242F69F926540F6300B9DAD4 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 242F69EB26540F6300B9DAD4 /* schema0.102.sql */; };
+		2434A3E1265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E0265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift */; };
+		2434A3E42657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E32657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift */; };
+		2434A3E62657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E52657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift */; };
+		2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E72657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift */; };
+		2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */; };
+		2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */; };
+		2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -81,6 +88,7 @@
 		24441A422614CF34009555F3 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
 		24441A432614CF34009555F3 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
 		2445D18025FB519B0019AFBF /* BackgroundFetchPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2445D17F25FB519B0019AFBF /* BackgroundFetchPerformer.swift */; };
+		244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */; };
 		245464BF261F5F4100A96613 /* ActionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245464BE261F5F4100A96613 /* ActionWebReporter.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
 		247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
@@ -140,6 +148,7 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24B7FE112656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B7FE102656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift */; };
 		24BD325C2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD3292260346B300CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
@@ -3088,12 +3097,20 @@
 		242F69E926540F6200B9DAD4 /* schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.sql; sourceTree = "<group>"; };
 		242F69EA26540F6300B9DAD4 /* schema0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.100.sql; sourceTree = "<group>"; };
 		242F69EB26540F6300B9DAD4 /* schema0.102.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
+		2434A3E0265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+GroupsTest.swift"; sourceTree = "<group>"; };
+		2434A3E32657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+TagsTest.swift"; sourceTree = "<group>"; };
+		2434A3E52657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+LangsTest.swift"; sourceTree = "<group>"; };
+		2434A3E72657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+GroupLocalizationsTest.swift"; sourceTree = "<group>"; };
+		2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FiltersLocalizationsTest.swift"; sourceTree = "<group>"; };
+		2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FitlerRulesTest.swift"; sourceTree = "<group>"; };
+		2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorageTestProcessor.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
 		244339DD2581092900AB4F26 /* UpstreamsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpstreamsController.swift; sourceTree = "<group>"; };
 		244419832614C1BC009555F3 /* String+NSRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NSRange.swift"; sourceTree = "<group>"; };
 		2445D17F25FB519B0019AFBF /* BackgroundFetchPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchPerformer.swift; sourceTree = "<group>"; };
+		244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+UtilsTest.swift"; sourceTree = "<group>"; };
 		245464BE261F5F4100A96613 /* ActionWebReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWebReporter.swift; sourceTree = "<group>"; };
 		24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		247432DD261731C00025C7B8 /* UIAlerController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+Style.swift"; sourceTree = "<group>"; };
@@ -3115,6 +3132,7 @@
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
+		24B7FE102656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FiltersTest.swift"; sourceTree = "<group>"; };
 		24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchNotificationHandler.swift; sourceTree = "<group>"; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C0005126550A9000F46373 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
@@ -5279,8 +5297,16 @@
 		7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */ = {
 			isa = PBXGroup;
 			children = (
+				2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */,
 				7E1C3467265290F300A4490E /* DefaultDatabaseManagerTest.swift */,
 				24D59C572653C9CE00B92379 /* ProductionDatabaseManagerTest.swift */,
+				24B7FE102656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift */,
+				2434A3E0265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift */,
+				2434A3E32657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift */,
+				2434A3E52657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift */,
+				2434A3E72657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift */,
+				2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */,
+				2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */,
 			);
 			path = FiltersMetaStorageTest;
 			sourceTree = "<group>";
@@ -5536,6 +5562,7 @@
 				24C0005126550A9000F46373 /* default.db.zip */,
 				7EB3E23D264BEE6400C460FA /* FilterMetadataParserTest */,
 				7EB3E238264BEE4800C460FA /* AdGuardSDKTests-Bridging-Header.h */,
+				244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */,
 				7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */,
 			);
 			path = AdGuardSDKTests;
@@ -8823,17 +8850,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E1C34692652940400A4490E /* DefaultDatabaseManager.swift in Sources */,
+				2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */,
+				2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */,
 				7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */,
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
 				24D59C592654019300B92379 /* ProductionDatabaseManager.swift in Sources */,
+				2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */,
 				2422D3242652F92800C1FD5A /* Logger.swift in Sources */,
+				2434A3E42657A3CD001E5B72 /* FiltersMetaStorage+TagsTest.swift in Sources */,
 				7E69C5052656617C00EA9DBA /* FiltersMetaStorage.swift in Sources */,
 				7E69C50A2656617C00EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */,
 				7E1C3468265290F300A4490E /* DefaultDatabaseManagerTest.swift in Sources */,
 				7E69C5022656617C00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */,
+				2434A3E1265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift in Sources */,
+				2434A3E62657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift in Sources */,
 				7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
+				2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
@@ -8843,9 +8877,11 @@
 				7E69C5062656617C00EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
 				7E69C5032656617C00EA9DBA /* FiltersMetaStorage+Langs.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				24B7FE112656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift in Sources */,
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
 				7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
+				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */,
 			);

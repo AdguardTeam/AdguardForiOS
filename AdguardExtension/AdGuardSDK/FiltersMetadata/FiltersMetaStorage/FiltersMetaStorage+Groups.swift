@@ -72,8 +72,7 @@ extension FiltersMetaStorageProtocol {
     // Returns all groups from database
     func getAllGroups() throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
-        let query = FilterGroupsTable.table.select([])
-                                           .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
+        let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
@@ -86,13 +85,21 @@ extension FiltersMetaStorageProtocol {
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [ExtendedGroupMetaProtocol] {
         // Query: select * from filter_groups order by display_number, group_id
-        let query = FilterGroupsTable.table.select([])
-                                           .order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
+        let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
+        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
-            let localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang).name
-            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: localizedName, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
+            
+            /*
+                If there is no localized group name we trying to get default english localization and if it is steel nil return nil
+             */
+            var localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+            if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
+                localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+            }
+            guard let name = localizedName else { return nil }
+            
+            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: name, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
         return result

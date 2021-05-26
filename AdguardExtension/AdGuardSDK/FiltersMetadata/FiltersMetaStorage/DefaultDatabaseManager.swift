@@ -86,12 +86,10 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     }
     
     // MARK: - Public methods
-    
     func updateDefaultDb() throws {
         if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(atPath: dbContainerUrl.path, withIntermediateDirectories: true, attributes: nil)
         }
-        
         let dbFileUrl = try getDefaultDbUnzippedData()
         guard dbFileUrl != defaultDbFileUrl else { return }
         let _ = try fileManager.replaceItemAt(defaultDbFileUrl, withItemAt: dbFileUrl)

@@ -20,12 +20,13 @@ import Foundation
 import SQLite
 
 protocol FiltersMetaStorageProtocol: AnyObject {
+    static var defaultDbLanguage: String { get }
     var filtersDb: Connection { get }
 }
 
 final class FiltersMetaStorage: FiltersMetaStorageProtocol {
-    
     // MARK: - Public properties
+    static var defaultDbLanguage: String = "en"
     
     let filtersDb: Connection
     
@@ -33,5 +34,6 @@ final class FiltersMetaStorage: FiltersMetaStorageProtocol {
     
     init(productionDbManager: ProductionDatabaseManagerProtocol) {
         self.filtersDb = productionDbManager.filtersDb
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     }
 }

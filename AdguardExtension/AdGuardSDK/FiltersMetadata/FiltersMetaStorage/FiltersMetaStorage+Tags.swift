@@ -52,8 +52,7 @@ extension FiltersMetaStorageProtocol {
     // Returns all tags from database
     func getAllTags() throws -> [ExtendedFiltersMeta.Tag] {
         // Query: select * from filter_tags order by tag_id
-        let query = FilterTagsTable.table.select([])
-                                         .order(FilterTagsTable.tagId)
+        let query = FilterTagsTable.table.order(FilterTagsTable.tagId)
         
         let result: [ExtendedFiltersMeta.Tag] = try filtersDb.prepare(query).compactMap { tag in
             let dbTag = FilterTagsTable(dbTag: tag)
@@ -66,8 +65,7 @@ extension FiltersMetaStorageProtocol {
     // Returns array of tags for filter with specified id
     func getTagsForFilter(withId id: Int) throws -> [ExtendedFiltersMeta.Tag] {
         // Query: select * from filter_tags where filter_id = id order by tag_id
-        let query = FilterTagsTable.table.select([])
-                                         .filter(id == FilterTagsTable.filterId)
+        let query = FilterTagsTable.table.filter(id == FilterTagsTable.filterId)
                                          .order(FilterTagsTable.tagId)
         
         let result: [ExtendedFiltersMeta.Tag] = try filtersDb.prepare(query).compactMap { tag in
