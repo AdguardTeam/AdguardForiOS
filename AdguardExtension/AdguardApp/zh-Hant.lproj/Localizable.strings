@@ -143,7 +143,7 @@
 "blacklist_text_format" = "於此您可增加您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "於此輸入該域名。AdGuard 將不封鎖至這些忽略所有其它設定的網域之存取。";
+"whitelist_text" = "輸入被排除在過濾之外的網域。此清單優先於其它的設定。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "正在更新…";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "增加一項規則";
+"add_blacklist_rule_title" = "增加一項新規則";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "輸入一個網域";
+"add_whitelist_domain_title" = "增加一個網域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +284,13 @@
 "reset_title" = "重置";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "移除";
+"delete_title" = "刪除";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "移除 VPN 設定檔";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "您確定您想要移除您的 VPN 設定檔並禁用 DNS 防護嗎？";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "您確定您想要刪除您的 VPN 設定檔並禁用 DNS 防護嗎？";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "錯誤已發生";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試加入不同的上游。";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "儲存並選擇";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "儲存";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "取消";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "刪除";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "增加一個自訂的 DNS 伺服器";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "編輯自訂的 DNS 伺服器";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "系統封鎖清單";
 
@@ -906,7 +924,7 @@
 "low_level_bootstraps_placeholder" = "（若有的話）要被用於解析 DoH/DoT 主機名稱之完全的 DNS 伺服器清單";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "當已配置的伺服器為不可用時，將被使用之應變的 DNS 解析器。空白的字串表示使用系統 DNS 作為應變。字串 \"none\" 表示完全沒有應變。";
+"low_level_fallbacks_placeholder" = "當已配置的伺服器為不可用時，將被使用的應變 DNS 解析器。空白的字串表示使用系統 DNS 作為應變。字串 \"none\" 表示完全沒有應變。";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "自我啟動（Bootstrap）伺服器";
 
@@ -927,3 +945,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "以一組手動地被設定的 IP 位址回覆";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "過濾器";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS 過濾器";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "此選項與原生的 DNS 模式為不相容的";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "您已連結最大數量的裝置到您的 Setapp 帳戶。";

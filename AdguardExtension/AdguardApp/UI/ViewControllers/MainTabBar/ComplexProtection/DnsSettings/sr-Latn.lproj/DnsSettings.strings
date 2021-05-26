@@ -7,23 +7,11 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Ime";
 
-/* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Prilagodite DNS podešavanja";
-
-/* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// ili tls://";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
-"6e9-sP-YMb.normalTitle" = "Sačuvaj";
-
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
 "84p-U2-sd8.text" = "AdGuard neće blokirati domene sa ove liste";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
 "AOm-kV-l4z.text" = "AdGuard će blokirati domene sa ove liste";
-
-/* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
-"B2l-7z-M2N.normalTitle" = "Sačuvaj i izaberi";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
@@ -37,9 +25,6 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Dodaj filter";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Ovaj podprogram može da blokira domene praćenja i da šifruje vaš DNS saobraćaj";
-
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (experimentalno)";
 
@@ -51,9 +36,6 @@
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Sistemska bela lista";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
-"ZdD-yx-6ph.normalTitle" = "Otkaži";
 
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// ili tls://";
@@ -73,12 +55,6 @@
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Adresa DNS servera";
 
-/* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
-"e4h-eF-AOa.text" = "Ime Servera";
-
-/* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Prilagodi DNS postavke";
-
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
@@ -91,17 +67,8 @@
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Sistemska crna lista";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "Otkaži";
-
-/* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
-"mBR-7g-DjT.placeholder" = "Ime";
-
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Sajt";
-
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
-"oSP-2V-qCA.normalTitle" = "Izbriši";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "Blokiranje DNS zahteva";
@@ -121,17 +88,11 @@
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
 "qjN-LB-N3T.text" = "Ovaj podprogram može da blokira domene praćenja i da šifruje vaš DNS saobraćaj";
 
-/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "Adresa DNS servera";
-
 /* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
 "uCw-Mi-HiJ.title" = "Izaberi";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS filtriranje";
-
-/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
-"vJt-Jd-BI2.text" = "Izaberite protokol";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "Filteri i izuzeci";

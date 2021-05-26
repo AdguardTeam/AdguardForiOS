@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Itt tudja megadni az egyedi szabályait.<br>Olvassa el <a href=\"%@\">a szűrőszabályok dokumentációját</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Itt írja be a domain neveket. Az AdGuard nem fogja tiltani a hozzáférést ezekhez a domainekhez, figyelmen kívül hagyva az összes többi beállítást.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Ide írja be a domain neveket. Az AdGuard csak ezeken a webhelyeken engedélyezi a szűrést a Safari-ban.";
 
@@ -158,7 +155,7 @@
 "update_filter_start_message" = "Frissítés...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Szabály hozzáadása";
+"add_blacklist_rule_title" = "Új szabály hozzáadása";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Domain hozzáadása";
@@ -278,13 +275,13 @@
 "reset_title" = "Visszaállítás";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Eltávolítás";
+"delete_title" = "Törlés";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN profil eltávolítása";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Biztos benne, hogy eltávolítja a VPN profilt és kikapcsolja a DNS védelmet?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Biztos benne, hogy eltávolítja a VPN profilt és kikapcsolja a DNS védelmet?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Valamilyen hiba történt";
@@ -643,6 +640,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "Az iOS még nem támogatja a(z) %@ lehetőséget. Próbáljon meg másik upstream-et hozzáadni.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Mentés és kiválasztás";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Mentés";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Mégse";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Törlés";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Egyéni DNS szerver hozzáadása";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Egyéni DNS szerver módosítása";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Rendszer tiltólista";
 
@@ -921,3 +936,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Válaszoljon egy kézzel beállított IP-címmel";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Szűrők";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS szűrők";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Ez az opció nem kompatibilis a natív DNS móddal";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "A maximális számú eszközt csatlakoztatta a Setapp fiókjához.";

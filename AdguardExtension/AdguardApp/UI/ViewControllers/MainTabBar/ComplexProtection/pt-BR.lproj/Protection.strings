@@ -1,26 +1,38 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Proteção do Safari";
 
+/* Class = "UILabel"; text = "Advanced blocking of YouTube ads in Safari"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Bloqueio avançado de anúncios no YouTube no Safari";
+
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
+"Hnw-bh-Bgh.text" = "AdGuard VPN";
+
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
-"Xkp-BS-f97.text" = "Não instalado";
+/* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
+"XXP-EO-M4h.text" = "Bloquear anúncios no YouTube (por AdGuard)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Proteção de DNS";
 
+/* Class = "UILabel"; text = "Advanced blocking of YouTube ads"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "Bloqueio avançado de anúncios no YouTube";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratuito";
 
-/* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
-"lJO-ae-oJu.text" = "Um serviço VPN rápido e confiável que funcionará perfeitamente junto com o bloqueador de anúncios do AdGuard.";
+/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Trabalha junto com o bloqueador de anúncios do AdGuard";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Este módulo permite que você use um servidor DNS personalizado e melhore sua privacidade ao criptografar suas consultas de DNS.";
+/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Bloqueia anúncios e rastreadores no nível de domínio e criptografa suas dúvidas";
 
-/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Este módulo bloqueia anúncios e rastreadores em sites abertos no Safari. Você pode escolher entre diferentes listas de filtros ou adicionar o seu próprio filtro nas configurações abaixo";
+/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Não instalado";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Bloqueia anúncios e rastreadores em sites abertos no Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Proteção";

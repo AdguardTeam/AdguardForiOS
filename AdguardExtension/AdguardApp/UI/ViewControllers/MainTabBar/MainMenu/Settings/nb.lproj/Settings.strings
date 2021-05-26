@@ -16,9 +16,6 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "LAGRE";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Fjern VPN-profil";
-
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Innholdsblokkerere";
 
@@ -42,9 +39,6 @@
 
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
 "IvJ-Oi-vGF.text" = "Innstillinger med lavt nivå";
-
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "Dette vil fjerne din faktiske VPN-profil og skru av DNS-beskyttelse";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Avanserte innstillinger";

@@ -28,9 +28,6 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
 "Hbu-Bm-HWZ.text" = "Активність";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
-"KXe-VX-Rq9.normalTitle" = "СКАСУВАТИ";
-
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Назва домену:";
 
@@ -50,7 +47,7 @@
 "Xj3-X8-fnq.normalTitle" = "компаній";
 
 /* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
-"a0E-KM-oA3.text" = "AdGuard не може дивитися запити DNS у цьому режимі. Якщо ви хочете бачити DNS-активність вашого пристрою, використовуйте впровадження AdGuard.";
+"a0E-KM-oA3.text" = "AdGuard не може бачити DNS-запити в цьому режимі. Якщо ви хочете бачити DNS-активність вашого пристрою, використовуйте режим AdGuard.";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Фільтри безпеки, DNS-приватність, власні фільтри та ін.";

@@ -10,7 +10,7 @@
 /* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
 "jMW-e4-GbU.title" = "Anmelden";
 
-/* Class = "UIButton"; normalTitle = "Discuss AdGuard"; ObjectID = "oMX-oj-ZeJ"; */
+/* Class = "UIButton"; normalTitle = "More info"; ObjectID = "oMX-oj-ZeJ"; */
 "oMX-oj-ZeJ.normalTitle" = "Über AdGuard diskutieren";
 
 /* Class = "UIButton"; normalTitle = "EULA"; ObjectID = "uyB-mD-gtt"; */

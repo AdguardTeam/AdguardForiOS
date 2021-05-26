@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Puedes añadir tus propias reglas aquí.<br>Lea esta <a href=\"%@\">nota sobre la sintaxis de las reglas</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Ingresa los nombres de dominio aquí. AdGuard no bloqueará el acceso a estos dominios ignorando todas las demás configuraciones.";
+"whitelist_text" = "Ingresa aquí los dominios que no deseas que AdGuard filtre. Esta lista tiene prioridad sobre otras configuraciones.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Ingresa los nombres de dominio aquí. AdGuard habilitará el filtrado en Safari solo para estos sitios web.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Actualizando...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Añadir una regla";
+"add_blacklist_rule_title" = "Añadir nueva regla";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Ingresa un dominio";
+"add_whitelist_domain_title" = "Añadir un dominio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||ejemplo.org^";
@@ -284,13 +284,13 @@
 "reset_title" = "Restablecer";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Eliminar";
+"delete_title" = "Eliminar";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Eliminar perfil VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "¿Está seguro de que desea eliminar su perfil VPN y deshabilitar la protección DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "¿Está seguro de que desea eliminar su perfil VPN y deshabilitar la protección DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Se ha producido un error";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ aún no es compatible con iOS. Intenta añadir diferentes DNS de subida.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Guardar y seleccionar";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Guardar";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Cancelar";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Eliminar";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Añadir servidor DNS personalizado";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Editar servidor DNS personalizado";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de bloqueo del sistema";
 
@@ -927,3 +945,18 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Responde con una dirección IP establecida manualmente";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtros";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtros DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Esta opción no es compatible con el modo DNS nativo";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Has conectado el número máximo de dispositivos a tu cuenta de Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "¿Sabías que YouTube ha cambiado sus algoritmos para mostrar más anuncios?<br><br>Ahora, para bloquearlos necesitas:<br><br>1. Abre youtube.com en Safari.<br><br>2. Haz clic %@ en el botón Compartir.<br><br>3. Haz clic en \"Bloquear anuncios de YouTube (por AdGuard)\".";

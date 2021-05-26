@@ -91,20 +91,11 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "بروز رسانی...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "افزودن یک دستور";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "افزودن یک دامنه";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";

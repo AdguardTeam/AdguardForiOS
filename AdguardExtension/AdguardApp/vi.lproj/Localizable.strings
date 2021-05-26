@@ -139,9 +139,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Bạn có thể thêm quy tắc của bạn tại đây <br>Đọc <a href=\"%@\"> ghi chú này về cú pháp quy tắc</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ không chặn kết nối tới những tên miền này bất chấp các cài đặt khác.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ áp dụng lọc chỉ những trang web này trong Safari.";
 
@@ -275,13 +272,13 @@
 "reset_title" = "Đặt lại";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Xoá";
+"delete_title" = "Xoá";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Xoá hồ sơ VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Bạn có chắc muốn xoá hồ sơ VPN và tắt trình bảo vệ theo dõi?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Bạn có chắc muốn xoá hồ sơ VPN và tắt trình bảo vệ DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Có lỗi xảy ra";
@@ -640,6 +637,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ chưa được iOS hỗ trợ. Hãy thêm địa chỉ ngược dòng khác.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Lưu và chọn";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Lưu";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Huỷ";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Xoá";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Thêm một máy chủ DNS tùy chỉnh";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Chỉnh sửa máy chủ DNS tuỳ chỉnh";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Danh sách đen hệ thống";
 
@@ -918,3 +933,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Phản hồi với địa chỉ IP đã được tiết lập";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Bộ lọc";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Bộ lọc DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Tùy chọn này không tương thích với chế độ DNS gốc";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Bạn đã có tối đa số lượng thiết bị được kết nối hãy tới cài đặt tài khoản của bạn.";

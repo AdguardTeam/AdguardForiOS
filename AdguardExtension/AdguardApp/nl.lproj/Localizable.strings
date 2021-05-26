@@ -140,7 +140,7 @@
 "blacklist_text_format" = "Eigen regels kunnen hier toegevoegd worden<br>Lees deze <a href=\"%@\">informatie over de opbouw van regels</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter uitschakelen voor deze websites.";
+"whitelist_text" = "Voer hier de domeinnamen in waarvan je niet wil dat AdGuard ze filtert. Deze lijst gaat voor op andere instellingen.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter alleen inschakelen voor deze websites.";
@@ -155,7 +155,7 @@
 "update_filter_start_message" = "Bijwerken...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Regel toevoegen";
+"add_blacklist_rule_title" = "Een nieuwe regel toevoegen";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Domein toevoegen";
@@ -275,13 +275,13 @@
 "reset_title" = "Herstel";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Verwijderen";
+"delete_title" = "Verwijderen";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN-profiel verwijderen";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Het VPN-profiel daadwerkelijk verwijderen en de DNS bescherming uitschakelen?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Weet je zeker dat je jouw VPN-profiel wilt verwijderen en de DNS-bescherming wilt uitschakelen?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Er is een fout opgetreden";
@@ -640,6 +640,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ wordt nog niet ondersteund door iOS. Probeer andere upstream toe te voegen.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Bewaren en selecteren";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Bewaren";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Annuleren";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Verwijderen";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Aangepaste DNS-server toevoegen";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Aangepaste DNS-server bewerken";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systeem blokkeerlijst";
 
@@ -918,3 +936,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Reageren met een handmatig ingesteld IP-adres";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filters";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filters";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Deze optie is niet compatibel met de oorspronkelijke DNS-modus";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Je hebt het maximale aantal apparaten aan je account gekoppeld.";

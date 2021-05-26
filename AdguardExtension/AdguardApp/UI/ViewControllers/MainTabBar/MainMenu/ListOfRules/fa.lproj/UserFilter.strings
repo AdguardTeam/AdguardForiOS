@@ -10,12 +10,6 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "ويرايش";
 
-/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "حذف";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "لغو";
-
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "افزودن";
 

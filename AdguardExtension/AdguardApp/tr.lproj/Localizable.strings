@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Kendi kurallarınızı buraya ekleyebilirsiniz <a href=\"%@\">Kural söz dizimi hakkında </a> bu notu okuyun.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Alan adlarını buraya girin. AdGuard, diğer tüm ayarları göz ardı ederek bu alanlara erişimi engellemeyecek.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Alan adlarını buraya girin. AdGuard yalnızca bu web siteleri için Safari’de filtrelemeyi etkinleştirir.";
 
@@ -158,7 +155,7 @@
 "update_filter_start_message" = "Güncelleniyor...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Kural ekle";
+"add_blacklist_rule_title" = "Yeni kural ekle";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Alan adı ekle";
@@ -284,13 +281,13 @@
 "reset_title" = "Sıfırla";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Kaldır";
+"delete_title" = "Sil";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN profilini kaldır";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "VPN profilinizi kaldırmak ve DNS korumasını devre dışı bırakmak istediğinize emin misiniz?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "VPN profilinizi silmek ve DNS korumasını devre dışı bırakmak istediğinize emin misiniz?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Bir hata oluştu";
@@ -326,7 +323,7 @@
 "hostname_obtaining_error" = "Ana bilgisayar adı temin edilemedi. Sayfa henüz yüklenmemiş olabilir.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
-"assistant_launching_unable" = "Bu sitenin güvenlik politikası AdGuard Assistant'ı başlatmanıza izin vermiyor.";
+"assistant_launching_unable" = "Bu sitenin güvenlik politikası AdGuard Asistanı başlatmanıza izin vermiyor.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
 "support_error_safari_extension" = "Safari eylem eklentisi başlatılırken beklenmeyen bir hata oluştu. Bu tekrar olursa lütfen AdGuard Destek ile iletişime geçin.";
@@ -377,7 +374,7 @@
 "account_is_locked_error" = "Hesap geçici olarak kilitlenmiştir";
 
 /* (Confirm2faController) Invalid 2fa token on login */
-"invalid_2fa_code_error" = "Geçersiz 2FA simgesi";
+"invalid_2fa_code_error" = "Geçersiz 2FA kodu";
 
 /* (NetworkSettingsController) title for wifi exceptions */
 "wifi_exceptions_title" = "Wi-Fi istisnaları";
@@ -443,7 +440,7 @@
 "security_description" = "Kimlik avı sitelerinin ve diğer tehlikeli alan adlarının engellenmesine izin verin. Premium kullanıcılar tarafından kullanılabilir";
 
 /*(GroupsController) Custom filters description without premium  */
-"custom_description" = "Üçüncü parti filtreleri eklemeye izin verir. Premium kullanıcılar için kullanılabilir";
+"custom_description" = "Üçüncü taraf filtreleri eklemeye izin verir. Premium kullanıcılar için kullanılabilir";
 
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "Ses ve video oynatıcılar";
@@ -578,7 +575,7 @@
 "common_action_more" = "Daha fazla";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "Yinelenen bir filtre eklemeye çalıştınız. Bu filtre zaten listede.";
+"filter_exists" = "Yinelenen bir filtre eklemeye çalıştınız. Bu filtre zaten listede var.";
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ kural etkin";
@@ -648,6 +645,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ henüz iOS tarafından desteklenmiyor. Farklı üst kaynak eklemeyi deneyin.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Kaydet ve seç";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Kaydet";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "İptal";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Sil";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Özel bir DNS sunucusu ekle";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Özel DNS sunucusunu düzenle";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistem Engelleme Listesi";
@@ -927,3 +942,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "El ile ayarlanmış bir IP adresi ile yanıt verin";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtreler";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS Filtreleri";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Bu seçenek yerel DNS moduyla uyumlu değil";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Setapp hesabınıza maksimum sayıda cihaz bağladınız.";

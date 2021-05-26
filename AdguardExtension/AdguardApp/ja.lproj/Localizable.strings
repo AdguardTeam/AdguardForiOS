@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@万";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "ネイティブDNSはオンです。";
+"native_dns_working" = "ネイティブDNS動作中。";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "ネイティブDNSはオフです。";
+"native_dns_not_working" = "ネイティブDNSは動作していません。";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "ここでは独自のルールを入力し追加できます。<br>ルール構文に関する通知は<a href=\"%@\">こちら</a>でご覧になれます。";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "他の設定にかかわらず、こちらで入力したドメインへのアクセスをAdGuardはブロックしません。";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "ドメイン名を入力して、それだけで広告をブロック。";
 
@@ -158,10 +155,10 @@
 "update_filter_start_message" = "アップデート中…";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "ルールを追加";
+"add_blacklist_rule_title" = "ルールを追加する";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "ドメインを追加";
+"add_whitelist_domain_title" = "ドメインを追加する";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +281,13 @@
 "reset_title" = "リセット";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "除去する";
+"delete_title" = "削除する";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPNプロファイルの除去";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "VPNプロファイルを除去して「DNS通信を保護」をオフにしてもよろしいですか？";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "VPNプロファイルを削除して「DNS通信を保護」をオフにしてもよろしいですか？";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "エラーが発生しました。";
@@ -649,6 +646,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ はまだiOSでサポートされておりません。別のアップストリームの追加を試してください。";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "保存して選択";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "保存";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "キャンセル";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "削除";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "カスタムDNSサーバーを追加";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "カスタムDNSサーバーを編集";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "システム・ブラックリスト";
 
@@ -927,3 +942,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "手動で設定されたIPアドレスで応答します";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "フィルタ";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNSフィルタ";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "このオプションは、「ネイティブ」DNSモードと互換性がありません。";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Setappアカウントに最大数のデバイスを接続しています。";

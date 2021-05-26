@@ -121,17 +121,8 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Du kan legge til dine egne regler her.<br>Les dette <a href=\"%@\">notatet om regelsyntaksen</a> .";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Skriv inn domenenavnene her. AdGuard vil ikke blokkere tilgang til disse domenene, og hopper dermed over alle andre innstillinger.";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Oppdaterer…";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Legg til en oppføring";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Skriv inn et domene";
 
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Navnet på ditt Wi-Fi";
@@ -242,13 +233,10 @@
 "reset_title" = "Tilbakestill";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Slett";
+"delete_title" = "Slett";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Er du sikke på at du vil fjerne din VPN-profil og skru av DNS-beskyttelse?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "En feil oppstod";
@@ -559,6 +547,21 @@
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Ugyldig DNS-protokoll";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Lagre og velg";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Save";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Avbryt";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Slett";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Legg til en selvvalgt DNS-tjener";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemets blokkeringsliste";
 
@@ -771,3 +774,9 @@
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-adresse";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filtre";

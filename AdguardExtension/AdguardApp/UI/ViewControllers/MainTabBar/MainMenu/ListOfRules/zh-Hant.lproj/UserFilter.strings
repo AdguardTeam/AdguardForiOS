@@ -13,11 +13,8 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
 "HFf-Yp-hjB.normalTitle" = "選擇";
 
-/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "移除";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "取消";
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "刪除";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "增加";

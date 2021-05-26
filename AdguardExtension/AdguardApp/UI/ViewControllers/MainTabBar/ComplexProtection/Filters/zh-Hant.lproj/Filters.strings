@@ -28,9 +28,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "取消";
 
-/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "此模組封鎖在 Safari 中被打開的網站上之廣告和追蹤";
-
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "規則總數：";
 

@@ -142,9 +142,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Sem zadajte mená domén. AdGuard nebude blokovať prístup do týchto domén ignorovaním všetkých ostatných nastavení.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Sem zadajte názvy domén. AdGuard zapne filtráciu len na týchto webových stránkach v Safari";
 
@@ -158,10 +155,10 @@
 "update_filter_start_message" = "Aktualizácia...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Pridať pravidlo";
+"add_blacklist_rule_title" = "Pridať nové pravidlo";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Vložte doménu";
+"add_whitelist_domain_title" = "Pridať doménu";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +281,13 @@
 "reset_title" = "Vynulovať";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Odstrániť";
+"delete_title" = "Vymazať";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstrániť VPN profil";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Naozaj chcete odstrániť VPN profil a vypnúť DNS ochranu?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Naozaj chcete vymazať VPN profil a vypnúť DNS ochranu?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Vyskytla sa chyba";
@@ -649,6 +646,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ zatiaľ nie je podporovaný systémom iOS. Skúste pridať rôzne upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Uložiť a zvoliť";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Uložiť";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Zrušiť";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Vymazať";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Pridať vlastný DNS server";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Upraviť vlastný DNS server";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systémový zoznam blokovaní";
 
@@ -927,3 +942,18 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Odpovedať s manuálne nastavenou IP adresou";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS filtre";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Táto voľba je nekompatibilná s natívnym režimom DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "K Vášmu Setapp účtu ste pripojili maximálny počet zariadení.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku youtube.com v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";

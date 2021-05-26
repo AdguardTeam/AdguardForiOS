@@ -118,9 +118,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Увядзіце вашы ўласныя правілы тут<br>Прачытайце гэту <a href=\"%@\">нататку пра сінтаксіс правіл</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Увядзіце даменавыя імёны тут. AdGuard не будзе блакаваць доступ да гэтых даменаў, ігнаруючы астатнія налады.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Увядзіце даменавыя імёны тут. AdGuard уключыць фільтрацыю ў Safari толькі для гэтых сайтаў.";
 
@@ -132,12 +129,6 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Абнаўленне...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Дадаць правіла";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Дадаць дамен";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -250,14 +241,8 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Скінуць";
 
-/* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Выдаліць";
-
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Выдаліць VPN-профіль";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Вы ўпэўнены, што хочаце выдаліць VPN-профіль і адключыць абарону ад асочвання?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Адбылася памылка";

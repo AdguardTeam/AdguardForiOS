@@ -139,9 +139,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Tukaj lahko dodate lastna pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Tukaj vnesite imena domen. AdGuard ne bo onemogočil dostop do teh domen in bo prezrl vse druge nastavitve.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
 
@@ -155,10 +152,10 @@
 "update_filter_start_message" = "Posodabljanje...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Dodaj pravilo";
+"add_blacklist_rule_title" = "Dodaj novo pravilo";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Vnesi domeno";
+"add_whitelist_domain_title" = "Dodaj domeno";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||primer.org^";
@@ -281,13 +278,13 @@
 "reset_title" = "Ponastavi";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Odstrani";
+"delete_title" = "Izbriši";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstrani profil VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Ali ste prepričani, da želite odstraniti svoj profil VPN in onemogočiti zaščito DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Ali ste prepričani, da želite izbrisati svoj profil VPN in onemogočiti zaščito DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Prišlo je do napake";
@@ -646,6 +643,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "iOS še ne podpira %@. poskusite dodati drugačen tok.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Shrani in izberi";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Shrani";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Prekliči";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Izbriši";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Dodaj strežnik DNS po meri";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Uredi strežnik DNS po meri";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistemski seznam nedovoljenih";
 
@@ -924,3 +939,18 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Odgovori z ročno nastavljenim naslovom IP";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtri";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtri DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Ta možnost ni združljiva z izvornim načinom DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "V svoj račun Setapp ste povezali največje dovojeno število naprav.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>Odprite youtube.com v brskalniku Safari.<br><br>2. Kliknite %@ gumb za skupno rabo.<br><br>3. Kliknite \"Onemogoči oglase YouTube (z AdGuard)\".";

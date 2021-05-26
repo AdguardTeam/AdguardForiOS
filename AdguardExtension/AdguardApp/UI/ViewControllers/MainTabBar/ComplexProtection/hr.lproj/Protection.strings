@@ -4,23 +4,11 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "Xkp-BS-f97"; */
-"Xkp-BS-f97.text" = "Nije instalirano";
-
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS zaštita";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "besplatno";
-
-/* Class = "UILabel"; text = "A fast and reliable VPN service that will seamlessly work along with AdGuard ad blocker."; ObjectID = "lJO-ae-oJu"; */
-"lJO-ae-oJu.text" = "Brza i pouzdana VPN usluga koja će besprijekorno raditi zajedno s AdGuard blokerom oglasa.";
-
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Ovaj modul vam omogućuje upotrebu prilagođenih DNS poslužitelja i poboljšava vašu privatnost šifriranjem vaših DNS upita.";
-
-/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Ovaj modul blokira oglase i pratitelje na web stranicama otvorenim u Safari-u. Možete odabrati između različitih popisa filtara u postavkama AdGuarda";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Zaštita";

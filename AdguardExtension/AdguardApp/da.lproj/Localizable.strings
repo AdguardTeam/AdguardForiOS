@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Du kan tilføje egne tilpassede regler her<br>Læs dette <a href=\"%@\">notat om regelsyntaks</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Angiv domænenavne her. AdGuard blokerer ikke adgang til disse domæner og ignorerer alle øvrige indstillinger.";
+"whitelist_text" = "Domæner, som ikke skal annoncefiltreres af AdGuard, kan tilføjes hér. Denne liste har forrang over andre indstillinger.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Angiv domænenavnene her. AdGuard aktiverer kun filtrering i Safari for disse websteder.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Opdaterer...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Tilføj en regel";
+"add_blacklist_rule_title" = "Tilføj en ny regel";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Angiv et domæne";
+"add_whitelist_domain_title" = "Tilføj et domæne";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||eksempel.dk^";
@@ -284,13 +284,13 @@
 "reset_title" = "Nulstil";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Fjern";
+"delete_title" = "Slet";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Sikker på, at du vil fjerne din VPN-profil og deaktivere DNS-beskyttelse?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Sikker på, at du vil slette din VPN-profil og deaktivere DNS-beskyttelsen?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "En fejl opstod";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ understøttes ikke af iOS endnu. Prøv at tilføje en anden upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Gem og vælg";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Gem";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Afbryd";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Slet";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Tilføj en tilpasset DNS-server";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Redigere tilpasset DNS-server";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemsortliste";
 
@@ -927,3 +945,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Svar med en manuelt indstillet IP-adresse";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filtre";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Denne indstilling er inkompatibel med den indbygget DNS-tilstand";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Du har det maksimale antal enheder forbundet til din Setapp-konto.";

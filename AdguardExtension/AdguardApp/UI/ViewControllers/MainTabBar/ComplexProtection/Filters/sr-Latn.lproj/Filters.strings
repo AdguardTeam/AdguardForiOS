@@ -28,9 +28,6 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "Otkaži";
 
-/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Ovaj podprogram blokira reklame i sajtove koji su otvoreni u Safariju";
-
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Brojač pravila: ";
 
