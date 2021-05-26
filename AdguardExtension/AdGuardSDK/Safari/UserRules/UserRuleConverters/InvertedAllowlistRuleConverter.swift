@@ -49,4 +49,20 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
         
         return domain
     }
+    
+    /*
+     This function returns all converted rules separated by '|'
+     The result rule must start with '@@||*$document,domain='
+     So the result looks like: @@||*$document,domain=~domain1|~domain2|~domain3
+     If rules are empty the result rule will look like this: @@||*$document
+     */
+    static func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+        if rules.isEmpty {
+            return "@@||*$document"
+        } else {
+            let rulePrefix = "@@||*$document,domain="
+            let ruleFromRules = rules.map { convertDomainToRule($0.ruleText) }.joined(separator: "|")
+            return rulePrefix + ruleFromRules
+        }
+    }
 }

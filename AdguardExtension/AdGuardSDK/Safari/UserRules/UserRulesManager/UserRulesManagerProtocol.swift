@@ -20,34 +20,51 @@ import Foundation
 
 enum UserRulesStorageError: Error, CustomDebugStringConvertible {
     case ruleAlreadyExists(ruleString: String)
+    case rulesAlreadyExist(rulesStrings: [String])
     case ruleDoesNotExist(ruleString: String)
     
     var debugDescription: String {
         switch self {
         case .ruleAlreadyExists(let rule): return "Rule '\(rule)' already exists in rules list"
+        case .rulesAlreadyExist(rulesStrings: let rules): return "Rules '\(rules.joined(separator: ";"))' already exists in rules list"
         case .ruleDoesNotExist(let rule): return "Rule '\(rule)' doest not exist in rules list"
         }
     }
 }
 
-protocol UserRulesStorageProtocol: AnyObject {
-    associatedtype Rule: UserRuleProtocol
+protocol UserRulesManagerProtocol: AnyObject {
+    associatedtype Storage: UserRulesStorageProtocol
+    associatedtype Converter: UserRuleConverterProtocol
     
     /* String representation of all enabled rules */
     var rulesString: String { get }
     
     /* All UserRuleProtocol objects  */
-    var allRules: [Rule] { get }
+    var allRules: [UserRuleProtocol] { get }
     
-    /* Adds new rule to the user rule's list */
-    func add(rule: Rule) throws
+    /**
+     Adds new rule to the user rule's list
+     - Parameter rule: Rule object to add to storage
+     - Parameter override: If **true** and **rule** is already in the user rule's list than it  will be overriden with new one
+     
+     - Throws: **UserRulesStorageError.ruleAlreadyExists**
+                if **override** is false and **allRules** already contains **rule**
+     */
+    func add(rule: UserRuleProtocol, override: Bool) throws
     
-    /* Adds new rules to the user rule's list */
-    func add(rules: [Rule]) throws
+    /**
+     Adds new rules to the user rule's list
+     - Parameter rules: Rules object to add to storage
+     - Parameter override: If **true**, duplicated rules will be overriden with new ones
+     
+     - Throws: **UserRulesStorageError.rulesAlreadyExist**
+                if **override** is false and **allRules** already contains some rules from **rules**
+     */
+    func add(rules: [UserRuleProtocol], override: Bool) throws
     
     /* Modifies rule in the user rule's list */
-    func modifyRule(_ oldRuleDomain: String, _ newRule: Rule) throws
+    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws
     
     /* Removes rule from the user rule's list */
-    func removeRule(withDomain domain: String) throws
+    func removeRule(withText ruleText: String) throws
 }

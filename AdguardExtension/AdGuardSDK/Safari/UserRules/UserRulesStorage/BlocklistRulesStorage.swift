@@ -18,117 +18,42 @@
 
 import Foundation
 
-/* This class manages blocklist rules storage */
 final class BlocklistRulesStorage: UserRulesStorageProtocol {
-    typealias Rule = UserRule<BlocklistRuleConverter>
     
-    // MARK: - Public properties
-    
-    var rulesString: String { allRules.filter { $0.isEnabled }.map { $0.rule }.joined(separator: "/n") }
-    var allRules: [Rule] { allRulesAtomic.value }
-    
-    // MARK: - Private properties
-    
-    // Helper varible to make allRules thread safe
-    private var allRulesAtomic: Atomic<[Rule]>
-    
-    // UserDefaults storage
-    private let storage: UserDefaultsStorageProtocol
-    
-    // Queue for saving rules to storage
-    private let storageSaveQueue = DispatchQueue(label: "AdGuardSDK.BlocklistRulesStorage.storageSaveQueue", qos: .background)
-    
-    // Used to quickly check domain uniqueness
-    private var domainsSet: Atomic<Set<String>>
-    
-    // MARK: - Initialization
-    
-    init(storage: UserDefaultsStorageProtocol) {
-        self.storage = storage
-        self.allRulesAtomic = Atomic(storage.blocklistRules)
-        self.domainsSet = Atomic(Set(allRulesAtomic.value.map { $0.domain }))
-    }
-    
-    deinit {
-        storageSaveQueue.sync {
-            // Flushing the queue
+    var rules: [UserRuleProtocol] {
+        get {
+            return userDefaults.blocklistRules
+        }
+        set {
+            userDefaults.blocklistRules = newValue
         }
     }
     
-    // MARK: - Public methods
+    private let userDefaults: UserDefaultsStorageProtocol
     
-    func add(rule: Rule) throws {
-        guard !domainsSet.value.contains(rule.domain) else {
-            throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.domain)
-        }
-        
-        allRulesAtomic.modify { $0.append(rule) }
-        domainsSet.modify { $0.insert(rule.domain) }
-        
-        storageSaveQueue.async { [weak self] in
-            self?.storage.blocklistRules.append(rule)
-        }
-    }
-    
-    func add(rules: [Rule]) throws {
-        try rules.forEach { rule in
-            if !domainsSet.value.contains(rule.domain) {
-                try add(rule: rule)
-            }
-        }
-    }
-    
-    func modifyRule(_ oldRuleDomain: String, _ newRule: Rule) throws {
-        guard !domainsSet.value.contains(newRule.domain) else {
-            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.domain)
-        }
-        guard let ruleIndex = allRulesAtomic.value.firstIndex(where: { $0.domain == oldRuleDomain }) else {
-            throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleDomain)
-        }
-        
-        allRulesAtomic.modify { $0[ruleIndex] = newRule }
-        domainsSet.modify {
-            $0.remove(oldRuleDomain)
-            $0.insert(newRule.domain)
-        }
-        
-        storageSaveQueue.async { [weak self] in
-            self?.storage.blocklistRules[ruleIndex] = newRule
-        }
-    }
-    
-    func removeRule(withDomain domain: String) throws {
-        guard let ruleIndex = allRules.firstIndex(where: { $0.domain == domain }) else {
-            throw UserRulesStorageError.ruleDoesNotExist(ruleString: domain)
-        }
-        
-        allRulesAtomic.modify { $0.remove(at: ruleIndex) }
-        domainsSet.modify { $0.remove(domain) }
-        
-        storageSaveQueue.async { [weak self] in
-            self?.storage.blocklistRules.remove(at: ruleIndex)
-        }
+    init(userDefaults: UserDefaultsStorageProtocol) {
+        self.userDefaults = userDefaults
     }
 }
 
-// MARK: - ResourcesProtocol + blocklist rules storage
+// MARK: - UserDefaultsStorageProtocol + blocklist rules storage
 
 fileprivate extension UserDefaultsStorageProtocol {
     
     private var blocklistRulesKey: String { "AdGuardSDK.blocklistRulesKey" }
     
-    var blocklistRules: [UserRule<BlocklistRuleConverter>] {
+    var blocklistRules: [UserRuleProtocol] {
         get {
             if let savedRulesData = storage.data(forKey: blocklistRulesKey) {
                 let decoder = JSONDecoder()
-                let rules = try? decoder.decode([UserRule<BlocklistRuleConverter>].self, from: savedRulesData)
+                let rules = try? decoder.decode([UserRule].self, from: savedRulesData)
                 return rules ?? []
             }
             return []
         }
         set {
             let encoder = JSONEncoder()
-            if let rulesData = try? encoder.encode(newValue) {
+            if let rulesData = try? encoder.encode(newValue as! [UserRule]) {
                 storage.set(rulesData, forKey: blocklistRulesKey)
             } else {
                 storage.set(Date(), forKey: blocklistRulesKey)

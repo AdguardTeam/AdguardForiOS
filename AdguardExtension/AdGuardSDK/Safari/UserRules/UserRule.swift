@@ -19,28 +19,19 @@
 import Foundation
 
 protocol UserRuleProtocol: Codable {
-    associatedtype Converter: UserRuleConverterProtocol
-    
-    /* Domain is a string that user did enter in the rule field */
-    var domain: String { get set }
-    
-    /*
-     We create rule from domain by ourselves
-     If domain is already a rule than we won't modify it
-     */
-    var rule: String { get }
+    /* Rule is a string that user did enter in the rule field */
+    var ruleText: String { get }
     
     /* State of rule */
     var isEnabled: Bool { get set }
 }
 
-struct UserRule<Converter: UserRuleConverterProtocol>: UserRuleProtocol {
-    var domain: String
-    var rule: String { Converter.convertDomainToRule(domain) }
+struct UserRule: UserRuleProtocol {
+    var ruleText: String
     var isEnabled: Bool
     
-    init(domain: String, isEnabled: Bool = true) {
-        self.domain = domain
+    init(ruleText: String, isEnabled: Bool = true) {
+        self.ruleText = ruleText
         self.isEnabled = isEnabled
     }
 }

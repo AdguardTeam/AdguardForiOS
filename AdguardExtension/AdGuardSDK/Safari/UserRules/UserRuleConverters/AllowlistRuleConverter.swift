@@ -46,8 +46,8 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      If passed rule doesn't contain '@@||' or '^$document'
      the function will return rule without modifying it
      */
-    static func convertRuleToDomain(_ rule: String) -> String {
-        var domain = rule
+    static func convertRuleToDomain(_ ruleText: String) -> String {
+        var domain = ruleText
         
         if domain.hasPrefix(allowlistPrefix) {
             domain.removeFirst(allowlistPrefix.count)
@@ -58,5 +58,18 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
         }
         
         return domain
+    }
+    
+    /*
+     Returns all converted rules joined by new line
+     The result string looks like:
+     
+     @@||domain1^$document
+     @@||domain2^$document
+     @@||domain3^$document
+     */
+    static func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+        return rules.map { convertDomainToRule($0.ruleText) }
+                    .joined(separator: "/n")
     }
 }
