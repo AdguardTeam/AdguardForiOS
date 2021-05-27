@@ -531,6 +531,14 @@
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
 		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
+		7E69C5142657A4BD00EA9DBA /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5132657A4BD00EA9DBA /* UserRulesManagerProtocol.swift */; };
+		7E69C5172657BFED00EA9DBA /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5162657BFED00EA9DBA /* UserRule.swift */; };
+		7E69C5192657C1FE00EA9DBA /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5182657C1FE00EA9DBA /* UserRuleConverter.swift */; };
+		7E69C51B2657C76300EA9DBA /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51A2657C76300EA9DBA /* AllowlistRuleConverter.swift */; };
+		7E69C51D2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51C2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift */; };
+		7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51E2657C78E00EA9DBA /* BlocklistRuleConverter.swift */; };
+		7E69C5232657E16100EA9DBA /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5222657E16100EA9DBA /* UserRulesManager.swift */; };
+		7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
@@ -717,6 +725,10 @@
 		7EC6801F2548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680312548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680322548440200FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
+		7EC97C0D265E3A31005C950C /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0C265E3A31005C950C /* UserRulesStorage.swift */; };
+		7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */; };
+		7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
+		7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
 		7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA27B257E4AAD004DA0D3 /* Zip */; };
 		7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA28E257E4ACB004DA0D3 /* Zip */; };
 		7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA290257E4AD4004DA0D3 /* Zip */; };
@@ -3447,6 +3459,14 @@
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
+		7E69C5132657A4BD00EA9DBA /* UserRulesManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagerProtocol.swift; sourceTree = "<group>"; };
+		7E69C5162657BFED00EA9DBA /* UserRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRule.swift; sourceTree = "<group>"; };
+		7E69C5182657C1FE00EA9DBA /* UserRuleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleConverter.swift; sourceTree = "<group>"; };
+		7E69C51A2657C76300EA9DBA /* AllowlistRuleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowlistRuleConverter.swift; sourceTree = "<group>"; };
+		7E69C51C2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRuleConverter.swift; sourceTree = "<group>"; };
+		7E69C51E2657C78E00EA9DBA /* BlocklistRuleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRuleConverter.swift; sourceTree = "<group>"; };
+		7E69C5222657E16100EA9DBA /* UserRulesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManager.swift; sourceTree = "<group>"; };
+		7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
@@ -3666,6 +3686,10 @@
 		7EC67F6B2548301000FEEEE2 /* ChooseDnsImplementationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDnsImplementationController.swift; sourceTree = "<group>"; };
 		7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersService.swift; sourceTree = "<group>"; };
 		7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsImplementation.swift; sourceTree = "<group>"; };
+		7EC97C0C265E3A31005C950C /* UserRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesStorage.swift; sourceTree = "<group>"; };
+		7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowlistRulesStorage.swift; sourceTree = "<group>"; };
+		7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
+		7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -5246,6 +5270,37 @@
 			path = "Container's controllers";
 			sourceTree = "<group>";
 		};
+		7E69C5152657A4C400EA9DBA /* UserRules */ = {
+			isa = PBXGroup;
+			children = (
+				7E69C5162657BFED00EA9DBA /* UserRule.swift */,
+				7EC97C10265E459D005C950C /* UserRulesStorage */,
+				7E69C5212657E14300EA9DBA /* UserRulesManager */,
+				7E69C5202657C8DB00EA9DBA /* UserRuleConverters */,
+			);
+			path = UserRules;
+			sourceTree = "<group>";
+		};
+		7E69C5202657C8DB00EA9DBA /* UserRuleConverters */ = {
+			isa = PBXGroup;
+			children = (
+				7E69C5182657C1FE00EA9DBA /* UserRuleConverter.swift */,
+				7E69C51A2657C76300EA9DBA /* AllowlistRuleConverter.swift */,
+				7E69C51C2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift */,
+				7E69C51E2657C78E00EA9DBA /* BlocklistRuleConverter.swift */,
+			);
+			path = UserRuleConverters;
+			sourceTree = "<group>";
+		};
+		7E69C5212657E14300EA9DBA /* UserRulesManager */ = {
+			isa = PBXGroup;
+			children = (
+				7E69C5132657A4BD00EA9DBA /* UserRulesManagerProtocol.swift */,
+				7E69C5222657E16100EA9DBA /* UserRulesManager.swift */,
+			);
+			path = UserRulesManager;
+			sourceTree = "<group>";
+		};
 		7E6D962423E172D1006202C2 /* RequestDetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -5520,6 +5575,17 @@
 			path = NativeDnsService;
 			sourceTree = "<group>";
 		};
+		7EC97C10265E459D005C950C /* UserRulesStorage */ = {
+			isa = PBXGroup;
+			children = (
+				7EC97C0C265E3A31005C950C /* UserRulesStorage.swift */,
+				7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */,
+				7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */,
+				7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */,
+			);
+			path = UserRulesStorage;
+			sourceTree = "<group>";
+		};
 		7EC9A06B238815EA007EBB24 /* AddNewCustomFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -5772,6 +5838,7 @@
 			isa = PBXGroup;
 			children = (
 				D04B4A1D263ADACF00815F30 /* Resources.swift */,
+				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -5788,6 +5855,7 @@
 				D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */,
 				D07427F2232B97040019AAF4 /* SafariRule.swift */,
 				D093718A21B0414A004A24F1 /* SafariService.swift */,
+				7E69C5152657A4C400EA9DBA /* UserRules */,
 			);
 			path = Safari;
 			sourceTree = "<group>";
@@ -9697,6 +9765,7 @@
 				D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */,
 				D0BA7C6D2631B5810097029B /* RequestFactory-Common.swift in Sources */,
 				D031303E2639685100A5C1D5 /* NSDate+Utils.m in Sources */,
+				7E69C5172657BFED00EA9DBA /* UserRule.swift in Sources */,
 				7EB3E25A264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				D0BA7C262631B5540097029B /* RequestSenderProtocol.swift in Sources */,
 				D0BDB4212630651D007D9BC6 /* AESAntibanner.m in Sources */,
@@ -9714,22 +9783,31 @@
 				7EB3E258264D2AEF00C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
 				D0BA7D292631C1B20097029B /* ASDatabase.m in Sources */,
 				D0BDB41C2630651D007D9BC6 /* FilterInfo.swift in Sources */,
+				7E69C5232657E16100EA9DBA /* UserRulesManager.swift in Sources */,
 				D0BA7D532631C1F00097029B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0BA7C3D2631B5680097029B /* ParserProtocol.swift in Sources */,
 				D0BA7F29263318260097029B /* AEWhitelistDomainObject.m in Sources */,
 				D0BA80862636EC480097029B /* AEInvertedWhitelistDomainsObject.m in Sources */,
+				7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */,
+				7EC97C0D265E3A31005C950C /* UserRulesStorage.swift in Sources */,
+				7E69C5142657A4BD00EA9DBA /* UserRulesManagerProtocol.swift in Sources */,
 				D0BDB4182630651D007D9BC6 /* FiltersConverter.swift in Sources */,
 				D04B4A1E263ADACF00815F30 /* Resources.swift in Sources */,
 				D0BDB4192630651D007D9BC6 /* FiltersService.swift in Sources */,
 				D0BA7E6E263316E90097029B /* RulesProcessor.swift in Sources */,
 				D0BA7D5D2631C1F10097029B /* FMStatementQuotedRecogniser.m in Sources */,
+				7E69C5192657C1FE00EA9DBA /* UserRuleConverter.swift in Sources */,
 				D0BA7AEE2631A27B0097029B /* ACObject.m in Sources */,
 				7EB3E228264AB2E400C460FA /* CustomFilterMeta.swift in Sources */,
 				D0BA7C272631B5540097029B /* RequestSender.swift in Sources */,
+				7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */,
+				7E69C51D2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift in Sources */,
 				D0BDB41A2630651D007D9BC6 /* AffinityRulesParser.swift in Sources */,
+				7E69C51B2657C76300EA9DBA /* AllowlistRuleConverter.swift in Sources */,
 				D0BA7C6C2631B5810097029B /* RequestFactory.swift in Sources */,
 				D0BA812C263712C30097029B /* ACIOUtils.m in Sources */,
 				D0BA80C52636EE7D0097029B /* AASFilterSubscriptionParser.m in Sources */,
@@ -9746,6 +9824,8 @@
 				D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */,
 				D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */,
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
+				7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */,
+				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
 				D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */,
 				D0BDB6F526319F56007D9BC6 /* FilterDetailedInterface.swift in Sources */,
 				D0BA7D562631C1F10097029B /* FMDatabasePool.m in Sources */,
