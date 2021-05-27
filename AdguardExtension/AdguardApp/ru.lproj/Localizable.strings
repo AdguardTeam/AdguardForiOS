@@ -20,10 +20,10 @@
 "common_error_title" = "Ошибка";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Фильтры не загрузились в Safari, поэтому последние изменения были отменены.";
+"safari_filters_loading_error" = "Фильтры не загрузились в Safari, поэтому последние изменения не были применены.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Фильтры не загрузились в Safari. Попробуйте очистить свои правила и белый список, или измените набор используемых фильтров.";
+"load_to_safari_error" = "Фильтры не загрузились в Safari. Попробуйте очистить свои правила и белый список или измените набор используемых фильтров.";
 
 /* NO Button caption in alert */
 "common_action_no" = "НЕТ";
@@ -536,7 +536,7 @@
 "loading_filters" = "Загрузка фильтров...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Конвертация правил ...";
+"converting_rules" = "Конвертация правил...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Добавить свой фильтр";

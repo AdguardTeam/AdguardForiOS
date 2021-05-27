@@ -20,7 +20,7 @@
 "common_error_title" = "錯誤";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "過濾器無法被載進 Safari。因此，您最近的更改未被套用。";
+"safari_filters_loading_error" = "過濾器無法被載進 Safari，所以您最近的更改未被套用。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "過濾器無法被載進 Safari。嘗試清除您的規則和允許清單，或更改已使用的過濾器之集合。";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "向 <b>Safari</b> 輕觸並選擇<b>\"內容阻擋器\"</b>選單項目";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>打開所有的內容阻擋器</b>，然後返回至我們的應用程式！";
+"onboarding_third_step_text" = "<b>打開所有的內容阻擋器</b>，然後回到該應用程式！";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系統 DNS";

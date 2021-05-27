@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Hiba";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Nem lehetett betölteni a szűrőket a Safariba. Ezért a változások nem léptek életbe.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "A szűrőket nem sikerült betölteni a Safariba. Próbálja üríteni a szabályok és kivételek listáját, vagy módosítsa a felhasznált szűrőket.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NEM";
 
@@ -51,12 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10E";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Natív DNS működik";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Natív DNS nem működik";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Felhasználói szűrő";
@@ -118,14 +106,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Hiba történt a vásárlás visszaállítása közben.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "A vásárlás visszaállt! Aktiválta az AdGuard prémium verzióját az iOS számára.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nincs visszaállítható vásárlás";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "A vásárlás sikeresen befejeződött! Aktiválta az AdGuard prémium verzióját az iOS számára.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Hiba történt a vásárlás során.";
@@ -520,15 +502,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mindenkori";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "A tartalomblokkolók frissítve lesznek...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Szűrők betöltése...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "A szabályok konvertálódnak ...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Új egyéni szűrő";
 
@@ -609,9 +582,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Érintse meg a <b>Safari</b> ikonját és válassza a <b>\"Tartalomblokkolók\"</b> menüpontot";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Engedélyezze az összes tartalomblokkolót</b>, majd térjen vissza ebbe az appba!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Rendszer DNS";

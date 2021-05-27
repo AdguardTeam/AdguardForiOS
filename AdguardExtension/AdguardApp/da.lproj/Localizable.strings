@@ -20,10 +20,7 @@
 "common_error_title" = "Fejl";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer derfor ikke effektueret.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtre kan ikke indlæses i Safari. Prøv at rydde dine regler og Hvidliste eller ændre det sæt af filtre, der bruges.";
+"safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer er derfor ikke effektueret.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NEJ";
@@ -53,10 +50,10 @@
 "ten_thousands_unit" = "%@10 K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Indbyggede DNS i drift";
+"native_dns_working" = "Indbygget DNS i drift";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Indbyggede DNS ikke i drift";
+"native_dns_not_working" = "Indbygget DNS ikke i drift";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerregler";
@@ -143,7 +140,7 @@
 "blacklist_text_format" = "Du kan tilføje egne tilpassede regler her<br>Læs dette <a href=\"%@\">notat om regelsyntaks</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Domæner, som ikke skal annoncefiltreres af AdGuard, kan tilføjes hér. Denne liste har forrang over andre indstillinger.";
+"whitelist_text" = "Domæner, du ikke ønsker skal filtreres af AdGuard, kan tilføjes hér. Denne liste har forrang over andre indstillinger.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Angiv domænenavnene her. AdGuard aktiverer kun filtrering i Safari for disse websteder.";
@@ -323,7 +320,7 @@
 "content_blocker_disabled_format" = "Bemærk, at Indholdsblockeren er deaktiveret. Det betyder, at annoncer ikke filtreres uanset AdGuards indstillinger. Aktivér AdGuard Indholdsblocker i Safari-indstillingerne for at starte filtreringen.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Værtsnavnet blev ikke opnået. Måske er siden ikke blevet indlæst endnu.";
+"hostname_obtaining_error" = "Værtsnavnet ikke hentet. Siden er måske endnu ikke indlæst.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Webstedets sikkerhedspolitik tillader ikke AdGuard Assistent at starte.";

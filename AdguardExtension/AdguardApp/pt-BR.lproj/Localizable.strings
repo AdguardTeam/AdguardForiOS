@@ -20,10 +20,10 @@
 "common_error_title" = "Erro";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Não foi possível carregar os filtros no Safari. Portanto, as alterações recentes não foram aplicadas.";
+"safari_filters_loading_error" = "Não foi possível carregar os filtros no Safari, portanto, suas alterações recentes não foram aplicadas.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar as suas regras e a lista de permissões, ou alterar o conjunto de filtros utilizados.";
+"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar suas regras e lista de permissões ou altere o conjunto de filtros usados.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NÃO";
@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "DNS nativo está funcionando";
+"native_dns_working" = "DNS nativo está operando";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "DNS nativo não está funcionando";
+"native_dns_not_working" = "DNS nativo não está operando";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regras de usuário";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Insira suas regras personalizadas aqui.<br>Leia essa<a href=\"%@\">nota sobre a sintaxe de regras</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Digite aqui os domínios que você não deseja que o AdGuard filtre. Esta lista tem precedência sobre outras configurações.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Digite aqui os nomes de domínio. O AdGuard irá ativar a filtragem no Safari somente para estes sites.";

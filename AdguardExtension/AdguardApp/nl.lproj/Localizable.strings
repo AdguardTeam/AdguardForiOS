@@ -17,7 +17,7 @@
 "common_error_title" = "Fout";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. De recente wijzigingen zijn daarom niet toegepast.";
+"safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. Je recente wijzigingen zijn daarom niet toegepast.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filters kunnen niet in Safari ingelezen worden. Probeer de regels en de toestemmingslijst te wissen of pas de gebruikte filters aan.";
@@ -50,10 +50,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Oorspronkelijke DNS werkt";
+"native_dns_working" = "Oorspronkelijke DNS is actief";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Oorspronkelijke DNS werkt niet";
+"native_dns_not_working" = "Oorspronkelijke DNS is niet actief";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Gebruikersfilter";
@@ -521,10 +521,10 @@
 "chart_alltime" = "Totaal";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers worden bijgewerkt...";
+"loading_content_blockers" = "Inhoudblokkeerders worden bijgewerkt...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Filters inlezen...";
+"loading_filters" = "Filters laden...";
 
 /*(ContentBlockerService) notification about converting rules  */
 "converting_rules" = "Regels worden geconverteerd...";
@@ -611,7 +611,7 @@
 "onboarding_second_step_text" = "Tik op <b> Safari </b> en kies de <b> \"Content blockers\" </b> menu-item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b> Schakel alle content blockers in </b> en keer terug naar onze app!";
+"onboarding_third_step_text" = "<b>Alle inhoudblokkeerders inschakelen</b> en teruggaan naar de app!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Systeem DNS";

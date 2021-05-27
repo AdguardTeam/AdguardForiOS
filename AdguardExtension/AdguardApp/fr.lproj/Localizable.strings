@@ -20,7 +20,7 @@
 "common_error_title" = "Erreur ";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Les filtres ne peuvent pas être chargés dans Safari, par conséquent vos dernières modifications ne seront pas appliquées.";
+"safari_filters_loading_error" = "Les filtres ne peuvent pas être chargés dans Safari, par conséquent vos dernières modifications n'ont pas été appliquées.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Les filtres ne peuvent pas être chargés dans Safari. Essayez d'effacer vos règles et la liste Blanche, ou modifiez la série de filtres utilisée.";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Une erreur s'est produite lors de la tentative de restauration de l'achat.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "L'achat a été restauré! La version Premium d'AdGuard pour iOS a été activée.";
+"restore_success_message" = "L'achat a été restauré ! La version Premium d'AdGuard pour iOS a été activée.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Pas d'achats à renouveler";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "L'achat a été complété avec succès! La version Premium d'AdGuard pour iOS a été activée.";
+"purchase_success_message" = "L'achat a été complété ! La version Premium d'AdGuard pour iOS a été activée.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Une erreur s'est produite lors du traitement de votre achat.";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Saisissez vos règles personnelles ici. <br>Lisez cette <a href=\"%@\">note sur la syntaxe des règles</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Saisissez ici les noms de domaines que vous ne souhaitez pas filtrer avec AdGuard. Cette liste prend précédence sur les autres paramètres.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Entrez les noms de domaine ici. AdGuard activera le filtrage dans Safari pour ces sites Web uniquement.";
@@ -527,7 +530,7 @@
 "chart_alltime" = "Dès le début";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Les bloqueurs de contenu sont en cours de mise à jour ...";
+"loading_content_blockers" = "Mise à jour des bloqueurs de contenu en cours ...";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Chargement des filtres ...";
@@ -617,7 +620,7 @@
 "onboarding_second_step_text" = "Appuyez sur <b>Safari</b> et choisissez l'élément du menu <b>\"Bloqueurs de contenu\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Activez tous les bloqueurs de contenu</b> et revenez à notre application !";
+"onboarding_third_step_text" = "<b>Activez tous les bloqueurs de contenu</b> et revenez à l'application !";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS du système";

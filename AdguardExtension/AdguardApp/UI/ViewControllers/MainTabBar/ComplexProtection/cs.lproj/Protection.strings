@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Ochrana Safari";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads in Safari"; ObjectID = "AZY-QZ-8d9"; */
-"AZY-QZ-8d9.text" = "Pokročilé blokování YouTube reklam v prohlížeči Safari";
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Blokování YouTube reklam";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
@@ -10,14 +10,17 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "prémiová";
 
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Rozšíření Safari, které odstraňuje reklamy a zbytky reklam a vrací zpět automatické přehrávání na YouTube";
+
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Blokování reklam v YouTube (pomocí AdGuardu)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS ochrana";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads"; ObjectID = "kDM-2d-bRK"; */
-"kDM-2d-bRK.text" = "Pokročilé blokování reklam v YouTube";
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "Blokování YouTube reklam";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "zdarma";

@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Hata";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtreler Safari'ye yüklenemedi. Bu nedenle, son değişiklikler uygulanamadı.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtreler Safari'ye yüklenemedi. Kurallarınızı ve İzin verilenler listesini temizlemeye çalışın veya kullanılan filtre grubunu değiştirin.";
-
 /* NO Button caption in alert */
 "common_action_no" = "HAYIR";
 
@@ -51,12 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Yerel DNS çalışıyor";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Yerel DNS çalışmıyor";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Kullanıcı kuralları";
@@ -118,14 +106,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Satın alma işlemini geri yüklemeye çalışırken bir hata oluştu.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Satın alma işlemi geri yüklendi! iOS için AdGuard premium sürümü etkinleştirildi.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Geri yüklenecek satın alma yok";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Satın alma işlemi başarıyla tamamlandı! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Satın alma işleminiz gerçekleştirilirken bir hata oluştu.";
@@ -526,15 +508,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Bütün zamanlar";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "İçerik engelleyiciler güncelleniyor ...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Filtreler yükleniyor ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Kurallar dönüştürülüyor ...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Yeni özel filtre";
 
@@ -615,9 +588,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari'ye</b> dokunun ve <b>\"İçerik Engelleyiciler\"</b> menü öğesini seçin";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Tüm içerik engelleyicilerini açın</b> ve uygulamamıza geri dönün!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";

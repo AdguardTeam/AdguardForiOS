@@ -47,7 +47,7 @@
 "FzS-e3-CK1.text" = "暗黑";
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
-"GBd-dx-t46.text" = "这有多难搞？";
+"GBd-dx-t46.text" = "除非您知道自己在做什么，否则请不要更改它们";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
 "GFO-xu-Bir.text" = "AdGuard将要在日志文件中写入更多详细信息。除非您需要跟踪错误，否则请勿启用该功能";

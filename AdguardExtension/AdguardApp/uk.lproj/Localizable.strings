@@ -23,7 +23,7 @@
 "safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Тому ваші останні зміни не вдалось застосувати.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та Список дозволів або вимкніть деякі фільтри.";
+"load_to_safari_error" = "Неможливо завантажити фільтри в Safari. Спробуйте очистити свої правила та Список дозволів, або ж вимкніть деякі фільтри.";
 
 /* NO Button caption in alert */
 "common_action_no" = "НІ";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Тут ви можете додавати власні правила.<br>Ознайомтеся з <a href=\"%@\">примітками про синтаксис правил</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Вводьте тут назви доменів, якщо бажаєте, щоб AdGuard їх не фільтрував. Цей список буде застосовано, як пріоритетний.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Вводьте тут назви доменів. AdGuard увімкне фільтрування в Safari лише для цих вебсайтів.";
@@ -521,13 +524,13 @@
 "chart_alltime" = "За весь час";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Оновлення фільтрів блокування ...";
+"loading_content_blockers" = "Оновлення блокувальників вмісту...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Завантаження фільтрів ...";
+"loading_filters" = "Завантаження фільтрів...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Конвертування правил  ...";
+"converting_rules" = "Конвертація правил...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Новий власний фільтр";
@@ -611,7 +614,7 @@
 "onboarding_second_step_text" = "Торкніться <b>Safari</b> та оберіть елемент <b>«Блокувальники вмісту»</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Увімкніть всі блокувальники вмісту</b> й повертайтеся до нашої програми!";
+"onboarding_third_step_text" = "<b>Увімкніть усі блокувальники вмісту</b> та повертайтеся!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Системний DNS";

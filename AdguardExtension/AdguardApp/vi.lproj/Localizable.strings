@@ -16,12 +16,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Lỗi";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Bộ lọc không thể tải vào Safari. Vì vậy, những thay đổi gần đây của bạn không được áp dụng.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Bộ lọc không thể tải vào Safari. Hãy thử xóa các quy tắc của bạn và danh sách cho phép, hoặc thay đổi những bộ lọc đã dùng.";
-
 /* NO Button caption in alert */
 "common_action_no" = "Không";
 
@@ -48,12 +42,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "DNS gốc đang hoạt động";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "DNS gốc hiện không hoạt động";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Quy tắc người dùng";
@@ -115,14 +103,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Một lỗi đã xảy ra khi đang khôi phục lại mua sắm.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Mua sắm đã được khôi phục! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Không có mua sắm nào để khôi phục";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Mua sắm đã hoàn tất! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Đã xảy ra lỗi khi tiến hành thanh toán cho bạn.";
@@ -517,15 +499,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mọi lúc";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Trình chặn nội dung đang được cập nhật...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Đang mở bộ lọc ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Các quy tắc đang được chuyển đổi...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Bộ lọc tuỳ chỉnh mới";
 
@@ -606,9 +579,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Nhấn vào <b>Safari</b> và chọn <b> \"Bộ chặn thành phần\"</b> mục bảng chọn";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Mở tất cả bộ chặn thành phần</b> và trở lại với ứng dụng của chúng tôi!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS hệ thống";

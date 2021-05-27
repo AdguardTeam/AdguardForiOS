@@ -1,9 +1,6 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Zaščita Safarija";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads in Safari"; ObjectID = "AZY-QZ-8d9"; */
-"AZY-QZ-8d9.text" = "Napredno zaviranje oglasov YouTube v Safariju";
-
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
@@ -22,8 +19,14 @@
 /* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Deluje skupaj z zaviralcem oglasov AdGuard";
 
+/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Onemogoča oglase in sledilce na ravni domene in šifrira vaše poizvedbe";
+
 /* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Ni nameščen";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Onemogoča oglase in sledilce na spletnih straneh, odprtih v Safariju";
 
 /* Class = "UILabel"; text = "Done! Now you can watch YouTube without ads.\nNote that when you reload the page, you’ll need to follow the instructions again."; ObjectID = "wuB-Tv-hsa"; */
 "wuB-Tv-hsa.text" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\nUpoštevajte, da ko boste znova naložili stran, boste morali znova slediti navodilom.";

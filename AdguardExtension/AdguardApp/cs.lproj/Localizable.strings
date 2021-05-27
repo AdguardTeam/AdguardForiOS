@@ -20,7 +20,7 @@
 "common_error_title" = "Chyba";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtry nelze načíst do Safari. Proto nedošlo k použití nedávných změn.";
+"safari_filters_loading_error" = "Filtry nelze načíst do Safari, takže nedošlo k použití nedávných změn.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtry nelze načíst do Safari. Zkuste vymazat pravidla a seznam povolených nebo změnit sadu použitých filtrů.";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "Klepněte na <b>Safari</b> a vyberte položku nabídky <b>„Blokátory obsahu“</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Zapněte všechny blokátory obsahu</b> a vraťte se do naší aplikace!";
+"onboarding_third_step_text" = "<b>Zapněte všechny blokátory obsahu</b> a vraťte se do aplikace!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Systémový DNS";
@@ -957,6 +957,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "K Vašemu účtu Setapp jste připojili maximální počet zařízení.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Věděli jste, že služba YouTube změnila své algoritmy, aby Vám zobrazovala více reklam?<br><br>Nyní, abyste je mohli zablokovat, musíte:<br><br>1. Otevřít stránku youtube.com v prohlížeči Safari.<br><br>2. Klepnout na tlačítko %@ Sdílet<br><br>3. Klepnout na možnost \"Blokovat reklamy v YouTube (pomocí AdGuardu)\".";

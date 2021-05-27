@@ -20,10 +20,10 @@
 "common_error_title" = "错误";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "无法加载过滤器到 Safari。因此，无法应用您的最近更新。";
+"safari_filters_loading_error" = "无法将过滤器加载到 Safari。因此，无法应用您的最近更新。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "无法把过滤器加载到 Safari。请尝试清除您的规则和白名单或更改使用过滤器的设置。";
+"load_to_safari_error" = "无法将过滤器加载到 Safari。请尝试清除您的规则和白名单或更改已使用的过滤器列表。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "在试图恢复该购买时出现错误。";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "购买已经恢复！iOS 高级版的 AdGuard 已经被激活。";
+"restore_success_message" = "购买已恢复！适用于 iOS 的 Adguard 高级版已经被激活。";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "没有可以恢复的购买";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "该购买已经成功完成！ AdGuard for iOS 的高级版本已经启用.";
+"purchase_success_message" = "该购买已经成功完成！适用于 iOS 的 AdGuard 高级版已启用.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "在处理购买过程中发生错误。";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "输入您的自定义规则于此<br>阅读此<a href=\"%@\">注意事项以获规则语法</a>。";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "在此输入 AdGuard 不要过滤的域名。此列表优先于其他设置。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "在这里输入域名。AdGuard将仅在Safari中对这些网站进行过滤。";
@@ -527,13 +530,13 @@
 "chart_alltime" = "全时段";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "内容拦截器更新中…";
+"loading_content_blockers" = "内容拦截器更新中...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "过滤器加载中…";
+"loading_filters" = "过滤器加载中...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "规则已反转…";
+"converting_rules" = "规则已反转...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新建自定义过滤器";
@@ -617,7 +620,7 @@
 "onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>开启 所有内容拦截器</b>后返回AdGuard 应用！";
+"onboarding_third_step_text" = "<b>开启所有内容拦截器</b>后，返回应用程序！";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系统DNS";

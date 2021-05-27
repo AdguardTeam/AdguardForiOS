@@ -20,10 +20,10 @@
 "common_error_title" = "오류";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "필터를 사파리에 로드할 수 없습니다. 최근 변경 내용이 적용되지 않습니다.";
+"safari_filters_loading_error" = "Safari에 필터를 로드할 수 없으므로 최근 변경 사항이 적용되지 않았습니다.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Safari에 필터를 로드할 수 없습니다. 규칙과 허용 목록을 비우거나, 사용하는 필터를 변경하세요.";
+"load_to_safari_error" = "Safari에 필터를 로드할 수 없습니다. 규칙 및 허용 목록을 비우거나 사용된 필터를 변경하세요.";
 
 /* NO Button caption in alert */
 "common_action_no" = "아니요";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "구매 내역을 복구하던 중 오류가 발생하였습니다.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "구매 내역이 복구되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
+"restore_success_message" = "구매 내역이 복구되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화되었습니다.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "복구할 구매 내역이 없습니다";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "구매가 완료되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화 되었습니다.";
+"purchase_success_message" = "구매가 완료되었습니다! iOS용 AdGuard의 프리미엄 버전이 활성화되었습니다.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "구매 도중 오류가 발생하였습니다.";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "이곳에 당신의 사용자 정의 규칙을 추가하세요<br>규칙 문법에 대한<a href=\"%@\">내용을 읽어보세요</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "AdGuard가 필터링하지 않을 도메인을 입력하십시오. 이 목록은 다른 설정보다 우선합니다.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "도메인 명을 여기에 입력하세요. AdGuard는 Safari에서 이 웹사이트에서만 필터링을 활성화할 것입니다.";
@@ -527,7 +530,7 @@
 "chart_alltime" = "전체";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "콘텐츠 차단기 업데이트 중";
+"loading_content_blockers" = "콘텐츠 차단기 업데이트 중...";
 
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "필터 로딩 중...";
@@ -617,7 +620,7 @@
 "onboarding_second_step_text" = "<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "모든 <b>콘텐츠 차단기를 켭니다</b>";
+"onboarding_third_step_text" = "<b>모든 콘텐츠 차단기를 켜고</b> 앱으로 돌아갑니다.";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "시스템 DNS";

@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Chyba";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtre nie je možné načítať do Safari. Preto Vaše posledné zmeny nebudú použité.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtre sa nedajú načítať do Safari. Skúste vymazať Vaše pravidlá a zoznam povolení, alebo zmeňte nastavenia použitých filtrov.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NIE";
 
@@ -51,12 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Natívna DNS funguje";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Natívna DNS nefunguje";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Používateľský filter";
@@ -118,14 +106,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Pri pokuse o obnovu nákupu nastala chyba.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Nákup bol obnovený! Prémiová verzia AdGuard pre iOS bola aktivovaná.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nedajú sa obnoviť žiadne nákupy";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Nákup bol úspešne dokončený! Prémiová verzia programu AdGuard pre iOS bola aktivovaná.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Počas spracovania nákupu sa vyskytla chyba.";
@@ -526,15 +508,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Celé obdobie";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Blokovače obsahu sa aktualizujú ...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Načítavajú sa filtre ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Pravidlá sa konvertujú ...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nový vlastný filter";
 
@@ -615,9 +588,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Ťuknite na <b>Safari</b> a vyberte položku ponuky <b>\"Blokovače obsahu\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Zapnite všetky blokovače obsahu</b> a vráťte sa do našej aplikácie!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Systémové DNS";
@@ -954,6 +924,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "K Vášmu Setapp účtu ste pripojili maximálny počet zariadení.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku youtube.com v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
