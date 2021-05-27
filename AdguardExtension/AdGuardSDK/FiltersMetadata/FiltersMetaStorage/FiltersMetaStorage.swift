@@ -17,11 +17,23 @@
 */
 
 import Foundation
+import SQLite
 
-public typealias LogMessage = (_ message: String) -> Void
+protocol FiltersMetaStorageProtocol: AnyObject {
+    static var defaultDbLanguage: String { get }
+    var filtersDb: Connection { get }
+}
 
-public class Logger {
-    public static var logInfo: LogMessage = { _ in }
-    public static var logError: LogMessage = { _ in }
-    public static var logDebug: LogMessage = { _ in }
+final class FiltersMetaStorage: FiltersMetaStorageProtocol {
+    // MARK: - Public properties
+    static var defaultDbLanguage: String = "en"
+    
+    let filtersDb: Connection
+    
+    // MARK: - Initialization
+    
+    init(productionDbManager: ProductionDatabaseManagerProtocol) {
+        self.filtersDb = productionDbManager.filtersDb
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    }
 }

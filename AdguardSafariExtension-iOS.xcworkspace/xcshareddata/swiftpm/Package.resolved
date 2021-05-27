@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/airbnb/lottie-ios",
         "state": {
           "branch": null,
-          "revision": "b3c60ba1716baab6faeeb217d8ce1da336f92718",
-          "version": "3.2.1"
+          "revision": "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
+          "version": "3.2.3"
         }
       },
       {
@@ -44,6 +44,15 @@
           "branch": null,
           "revision": "6238b5a173c33337c4efc2029481d9209af4c39d",
           "version": "0.1.0"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
+          "version": "0.12.2"
         }
       },
       {

@@ -18,11 +18,23 @@
 
 import Foundation
 
+// MARK: - ExtendedFilterMetaProtocol
+
+protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
+    var filterId: Int { get }
+    var group: GroupMetaProtocol { get }
+    var displayNumber: Int { get }
+    var timeAdded: Date? { get }
+    var trustLevel: ExtendedFiltersMeta.TrustLevel { get }
+    var languages: [String] { get }
+    var tags: [ExtendedFiltersMeta.Tag] { get }
+}
+
 // MARK: - ExtendedFiltersMeta
 
 /* ExtendedFiltersMeta is an object representation of json from https://filters.adtidy.org/ios/filters.js */
 struct ExtendedFiltersMeta: Decodable {
-    let groups: [Group]
+    let groups: [GroupMetaProtocol]
     let tags: [Tag]
     let filters: [ExtendedFilterMetaProtocol]
     
@@ -36,30 +48,30 @@ struct ExtendedFiltersMeta: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.groups = try container.decode([Group].self, forKey: .groups)
-        self.tags = try container.decode([Tag].self, forKey: .tags)
         
+        // Decoding tags
+        var decodedTags: [Tag] = []
+        let tagsDecoder = try container.superDecoder(forKey: .tags)
+        var tagsContainer = try tagsDecoder.unkeyedContainer()
+        while !tagsContainer.isAtEnd {
+            let tagDecoder = try tagsContainer.superDecoder()
+            if let tag = try? Tag(from: tagDecoder) {
+                decodedTags.append(tag)
+            }
+        }
+        self.tags = decodedTags
+        
+        // Decoding filters
         var decodedFilters: [Meta] = []
         let filtersDecoder = try container.superDecoder(forKey: .filters)
         var filtersContainer = try filtersDecoder.unkeyedContainer()
         while !filtersContainer.isAtEnd {
             let filterDecoder = try filtersContainer.superDecoder()
-            let filter = try Meta(from: filterDecoder, tags: self.tags)
+            let filter = try Meta(from: filterDecoder, tags: self.tags, groups: self.groups)
             decodedFilters.append(filter)
         }
         self.filters = decodedFilters
     }
-}
-
-// MARK: - ExtendedFilterMetaProtocol
-
-protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
-    var filterId: Int { get }
-    var groupId: Int { get }
-    var displayNumber: Int { get }
-    var timeAdded: Date? { get }
-    var trustLevel: ExtendedFiltersMeta.TrustLevel { get }
-    var languages: [String] { get }
-    var tags: [ExtendedFiltersMeta.Tag] { get }
 }
 
 // MARK: - ExtendedFiltersMeta + Meta
@@ -73,7 +85,7 @@ extension ExtendedFiltersMeta {
         let homePage: String?
         let updateFrequency: Int?
         let displayNumber: Int
-        let groupId: Int
+        let group: GroupMetaProtocol
         let filterDownloadPage: String?
         let trustLevel: TrustLevel
         let version: String?
@@ -89,7 +101,7 @@ extension ExtendedFiltersMeta {
             case homePage = "homepage"
             case updateFrequency = "expires"
             case displayNumber
-            case groupId
+            case group = "groupId"
             case filterDownloadPage = "subscriptionUrl"
             case trustLevel
             case version
@@ -98,7 +110,11 @@ extension ExtendedFiltersMeta {
             case tags
         }
         
-        init(from decoder: Decoder, tags: [Tag]) throws {
+        init(from decoder: Decoder) throws {
+            try self.init(from: decoder, tags: [], groups: [])
+        }
+        
+        init(from decoder: Decoder, tags: [Tag], groups: [GroupMetaProtocol]) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             self.filterId = try container.decode(Int.self, forKey: .filterId)
@@ -107,11 +123,13 @@ extension ExtendedFiltersMeta {
             self.homePage = try container.decode(String.self, forKey: .homePage)
             self.updateFrequency = try container.decode(Int.self, forKey: .updateFrequency)
             self.displayNumber = try container.decode(Int.self, forKey: .displayNumber)
-            self.groupId = try container.decode(Int.self, forKey: .groupId)
             self.filterDownloadPage = try container.decode(String.self, forKey: .filterDownloadPage)
             self.trustLevel = try container.decode(TrustLevel.self, forKey: .trustLevel)
             self.version = try container.decode(String.self, forKey: .version)
             self.languages = try container.decode([String].self, forKey: .languages)
+            
+            let groupId = try container.decode(Int.self, forKey: .group)
+            self.group = groups.first(where: { $0.groupId == groupId })!
             
             let intTags = try container.decode([Int].self, forKey: .tags)
             self.tags = intTags.compactMap({ intTag in
@@ -126,6 +144,23 @@ extension ExtendedFiltersMeta {
         
             self.timeAdded = dateFormatter.date(from: timeAddedString)
             self.lastUpdateDate = dateFormatter.date(from: lastUpdateDateString)
+        }
+        
+        init(filterId: Int, name: String?, description: String?, timeAdded: Date?, homePage: String?, updateFrequency: Int?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag]) {
+            self.filterId = filterId
+            self.name = name
+            self.description = description
+            self.timeAdded = timeAdded
+            self.homePage = homePage
+            self.updateFrequency = updateFrequency
+            self.displayNumber = displayNumber
+            self.group = group
+            self.filterDownloadPage = filterDownloadPage
+            self.trustLevel = trustLevel
+            self.version = version
+            self.lastUpdateDate = lastUpdateDate
+            self.languages = languages
+            self.tags = tags
         }
     }
 }
@@ -143,7 +178,7 @@ extension ExtendedFiltersMeta {
 // MARK: - ExtendedFiltersMeta + Group
 
 extension ExtendedFiltersMeta {
-    struct Group: Decodable {
+    struct Group: Decodable, GroupMetaProtocol {
         let groupId: Int
         let groupName: String
         let displayNumber: Int
@@ -161,6 +196,18 @@ extension ExtendedFiltersMeta {
             case platform
             case problematic
             case obsolete
+            
+            init?(tagTypeId: Int) {
+                switch tagTypeId {
+                case 0: self = .purpose
+                case 1: self = .lang
+                case 2: self = .recommended
+                case 4: self = .platform
+                case 5: self = .problematic
+                case 6: self = .obsolete
+                default: return nil
+                }
+            }
         }
         
         let tagId: Int
@@ -186,7 +233,27 @@ extension ExtendedFiltersMeta {
             let keyword = try container.decode(String.self, forKey: .keyword)
             let tagParts = keyword.split(separator: ":").map { String($0) }
             self.tagName = tagParts.count == 2 ? tagParts[1] : tagParts[0]
-            self.tagType = TagType(rawValue: tagParts[0]) ?? .purpose
+            if let tagType = TagType(rawValue: tagParts[0]) {
+                self.tagType = tagType
+            } else {
+                throw NSError(domain: "unknown.tag.type", code: 1, userInfo: nil)
+            }
+        }
+        
+        init(tagId: Int, tagType: ExtendedFiltersMeta.Tag.TagType, tagName: String) {
+            self.tagId = tagId
+            self.tagType = tagType
+            self.tagName = tagName
+        }
+        
+        init?(tagId: Int, tagTypeId: Int, tagName: String) {
+            if let tagType = ExtendedFiltersMeta.Tag.TagType(tagTypeId: tagTypeId) {
+                self.tagType = tagType
+            } else {
+                return nil
+            }
+            self.tagId = tagId
+            self.tagName = tagName
         }
     }
 }
