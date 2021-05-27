@@ -339,7 +339,9 @@
                                                 <constraint firstItem="kDM-2d-bRK" firstAttribute="top" secondItem="Wb6-dW-2ZE" secondAttribute="top" constant="16" id="tED-sH-U1C">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="kDM-2d-bRK" firstAttribute="leading" secondItem="pYJ-AT-Gfy" secondAttribute="trailing" constant="16" id="tax-ck-gwB"/>
+                                                <constraint firstItem="kDM-2d-bRK" firstAttribute="leading" secondItem="pYJ-AT-Gfy" secondAttribute="trailing" constant="16" id="tax-ck-gwB">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="9Kv-Zg-pb0" secondAttribute="trailing" constant="26" id="xV7-iQ-ngb"/>
                                             </constraints>
                                         </tableViewCellContentView>
