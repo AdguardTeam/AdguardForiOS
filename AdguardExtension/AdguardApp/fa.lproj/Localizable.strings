@@ -19,9 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
-
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
 
@@ -67,14 +64,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "یک خطا حین بازگرداندن خرید رخ داده است.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "خرید بازگردانده شد! نسخه پریمیوم AdGuard for iOS فعال شد.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "خریدی برای بازگرداندن وجود ندارد";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "خرید با موفقیت کامل شد!نسخه پریمیوم AdGuard for iOS فعال شد.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "یک خطا حین پردازش خرید شما رخ داد.";

@@ -7,6 +7,9 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Reklamları, reklam artıklarını kaldıran ve YouTube'da otomatik oynatmayı geri getiren Safari eklentisi";
+
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "YouTube Reklamlarını Engelle (AdGuard tarafından)";
 

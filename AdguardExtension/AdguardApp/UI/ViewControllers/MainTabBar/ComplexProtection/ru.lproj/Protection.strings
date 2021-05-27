@@ -1,14 +1,44 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Защита Safari";
 
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Блокировка рекламы на YouTube";
+
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
+"Hnw-bh-Bgh.text" = "AdGuard VPN";
+
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "премиум";
+
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Расширение для Safari, которое блокирует рекламу и лишние элементы, оставшиеся после блокировки, и возвращает автовоспроизведение видео на YouTube";
+
+/* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
+"XXP-EO-M4h.text" = "Блокировать рекламу на YouTube (от AdGuard)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS-защита";
 
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "Блокировка рекламы на YouTube";
+
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "бесплатно";
+
+/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Работает вместе с блокировщиком рекламы AdGuard ";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Блокирует рекламу и трекеры на уровне домена и улучшает конфиденциальность, шифруя ваши DNS-запросы";
+
+/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Не установлен";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Блокирует рекламу и трекеры на сайтах, открытых в Safari";
+
+/* Class = "UILabel"; text = "Done! Now you can watch YouTube without ads.\nNote that when you reload the page, you’ll need to follow the instructions again."; ObjectID = "wuB-Tv-hsa"; */
+"wuB-Tv-hsa.text" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\nОбратите внимание, что при перезагрузке страницы вам нужно будет повторить шаги 1–3.";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Защита";

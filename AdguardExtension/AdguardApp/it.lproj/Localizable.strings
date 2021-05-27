@@ -20,7 +20,7 @@
 "common_error_title" = "Errore";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Di conseguenza, i tuoi cambiamenti recenti non sono stati applicati.";
+"safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Quindi, i suoi cambiamenti recenti non sono stati applicati.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "I filtri non possono essere caricati in Safari. Prova a rimuovere le tue regole e la Lista bianca, o cambia la lista dei filtri utilizzati.";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Si è verificato un errore durante il tentativo di ripristinare l'acquisto.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "L'acquisto è stato ripristinato! La versione premium di AdGuard per iOS è stata attivata.";
+"restore_success_message" = "L\'acquisto è stato ripristinato! La versione Premium di AdGuard per iOS è stata attivata.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nessun acquisto da ripristinare";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "L\'acquisto è stato completato correttamente! La versione premium di AdGuard per iOS è stata attivata.";
+"purchase_success_message" = "L\'acquisto è stato completato correttamente! La versione Premium di AdGuard per iOS è stata attivata.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Si è verificato un errore durante l'elaborazione dell'acquisto.";
@@ -957,6 +957,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Hai collegato il numero massimo di dispositivi al tuo profilo Setapp.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci<br><br>Ora, per bloccarli devi:<br><br>1. Accedere a youtube.com in Safari.<br><br> 2. Cliccare %@ sul pulsante Condividi.<br><br> 3. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";

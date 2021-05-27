@@ -20,10 +20,10 @@
 "common_error_title" = "Error";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
+"safari_filters_loading_error" = "Filters couldn't be loaded into Safari, so your recent changes were not applied.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the Allowlist, or change the set of used filters.";
+"load_to_safari_error" = "Filters couldn't be loaded into Safari. Try clearing your rules and Allowlist, or change the set of used filters.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Native DNS is working";
+"native_dns_working" = "Native DNS is operating";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Native DNS is not working";
+"native_dns_not_working" = "Native DNS is not operating";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "The purchase has been restored! The Premium version of AdGuard for iOS has been activated.";
+"restore_success_message" = "Purchase restored! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "No purchases to restore";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "The purchase has been successfully completed! The Premium version of AdGuard for iOS has been activated.";
+"purchase_success_message" = "Purchase successfully completed! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "An error occurred while processing your purchase.";
@@ -530,13 +530,13 @@
 "chart_alltime" = "All time";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers are being updated ...";
+"loading_content_blockers" = "Content blockers are being updated...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Loading filters ...";
+"loading_filters" = "Loading filters...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Rules are being converted  ...";
+"converting_rules" = "Rules are being converted...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "New custom filter";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>\"Content blockers\"</b> menu item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and come back to our app!";
+"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and return to the app!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
@@ -959,4 +959,4 @@
 "setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open youtube.com in Safari.<br><br>2. Click %@ the Share button.<br><br>3. Click \"Block YouTube Ads (by AdGuard)\".";
+"block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tap %@ Share.<br><br>3. Tap \"Block YouTube Ads (by AdGuard)\".";

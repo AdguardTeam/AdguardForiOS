@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Памылка";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Немагчыма загрузіць фільтры ў Safari. Таму апошнія змены не прыменены.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Немагчыма загрузіць фільтры ў Safari. Паспрабуйце ачысціць свае правілы ў белым спісе або змяніце набор фільтраў, якія выкарыстоўваюцца.";
-
 /* NO Button caption in alert */
 "common_action_no" = "НЕ";
 
@@ -94,14 +88,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Адбылася памылка пры спробе аднавіць куплю.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Купля адноўлена! Актывавана Прэміум-версія AdGuard для iOS.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Няма набыткаў для аднаўлення";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Купля паспяхова завершана! Актывавана Прэміум-версія AdGuard для iOS.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Адбылася памылка падчас апрацоўкі куплі.";
@@ -481,15 +469,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Увесь час";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Блакавальнікі кантэнту абнаўляюцца...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Загрузка фільтраў ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Канвертацыя правіл...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Дадаць свой фільтр";
 
@@ -570,9 +549,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Націсніце на <b>Safari</b> і выберыце падзел <b>\"Блакавальнікі кантэнту\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Уключыце ўсе блакавальнікі кантэнту</b> і вяртайцеся ў дадатак!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Сістэмны DNS";

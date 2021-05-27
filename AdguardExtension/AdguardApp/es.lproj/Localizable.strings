@@ -20,10 +20,10 @@
 "common_error_title" = "Error";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Los filtros no pueden ser cargados en Safari. Tus últimos cambios no se aplicaron.";
+"safari_filters_loading_error" = "Los filtros no pudieron cargarse en Safari, tus últimos cambios no se aplicaron.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Los filtros no se pueden cargar en Safari. Intenta borrar tus reglas y la lista de permitido, o cambia el conjunto de filtros usados.";
+"load_to_safari_error" = "Los filtros no pudieron cargarse en Safari. Intenta borrar tus reglas y la lista de permitido, o cambia el conjunto de filtros usados.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Se ha producido un error al intentar restaurar la compra.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "¡La compra ha sido restaurada! La versión premium de AdGuard para iOS ha sido activada.";
+"restore_success_message" = "¡Compra restaurada! La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "No se han encontrado compras para restaurar";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "¡La compra se ha completado correctamente! La versión premium de AdGuard para iOS ha sido activada.";
+"purchase_success_message" = "¡Compra completada correctamente! La versión premium de AdGuard para iOS ha sido activada.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Se ha producido un error al procesar tu compra.";
@@ -957,6 +957,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Has conectado el número máximo de dispositivos a tu cuenta de Setapp.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "¿Sabías que YouTube ha cambiado sus algoritmos para mostrar más anuncios?<br><br>Ahora, para bloquearlos necesitas:<br><br>1. Abre youtube.com en Safari.<br><br>2. Haz clic %@ en el botón Compartir.<br><br>3. Haz clic en \"Bloquear anuncios de YouTube (por AdGuard)\".";

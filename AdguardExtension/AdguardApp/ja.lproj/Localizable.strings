@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "エラー";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "フィルタをSafariに読み込ませることができません。 したがって、あなたの最近の変更は適用されませんでした。";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "フィルタをSafariに読み込みすることができません。ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりして解決するかをお試しください。";
-
 /* NO Button caption in alert */
 "common_action_no" = "いいえ";
 
@@ -51,12 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "ネイティブDNS動作中。";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "ネイティブDNSは動作していません。";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
@@ -118,14 +106,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "購入を復元中にエラーが発生しました。";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "購入が復元され、IOS版AdGuardのプレミアム版が有効になりました。";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "購入を復元できせん。";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "購入が完了し、プレミアム版が有効化されました。";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "購入中のエラーが発生しました。";
@@ -526,15 +508,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "全期間";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "コンテンツブロッカーが更新中…";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "フィルターを読み込み中...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "ルールが変換中...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新規カスタムフィルタ";
 
@@ -615,9 +588,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>コンテンツブロッカーのスイッチ</b>をすべてオンにしてください。";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "システムDNS";

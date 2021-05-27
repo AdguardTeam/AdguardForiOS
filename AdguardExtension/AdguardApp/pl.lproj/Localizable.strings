@@ -20,10 +20,10 @@
 "common_error_title" = "Błąd";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Nie można wczytać filtrów do przeglądarki Safari. Ostatnie zmiany nie zostały zapisane.";
+"safari_filters_loading_error" = "Nie można załadować filtrów do Safari, więc ostatnie zmiany nie zostały zastosowane.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtrów nie można załadować do Safari. Spróbuj wyczyścić swoje reguły i Listy dozwolonych lub zmień zestaw używanych filtrów.";
+"load_to_safari_error" = "Filtry nie mogą być ładowane do Safari. Spróbuj wyczyścić swoje reguły i listę dozwolonych lub zmień zestaw używanych filtrów.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NIE";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Wystąpił błąd podczas próby przywrócenia zakupu.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Zakup został przywrócony! Wersja Premium AdGuard na iOS została aktywowana.";
+"restore_success_message" = "Zakup przywrócony! Wersja Premium AdGuard dla iOS została aktywowana.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nie udało nam się wykryć żadnych zakupów do przywrócenia.";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Zakup został pomyślnie zakończony! Wersja Premium AdGuard na iOS została aktywowana.";
+"purchase_success_message" = "Zakup zakończony pomyślnie! Wersja Premium AdGuard dla iOS została aktywowana.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Wystąpił błąd podczas przetwarzania zakupu.";
@@ -530,13 +530,13 @@
 "chart_alltime" = "Od początku";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Blokery zawartości są aktualizowane ...";
+"loading_content_blockers" = "Blokery treści są aktualizowane...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Ładowanie filtrów ...";
+"loading_filters" = "Ładowanie filtrów...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Reguły są konwertowane ...";
+"converting_rules" = "Reguły są konwertowane...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nowy niestandardowy filtr";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "Stuknij w <b>Safari</b> i wybierz element menu <b>\"Blokowanie treści\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Włącz wszystkie blokery treści </b> i wróć do naszej aplikacji!";
+"onboarding_third_step_text" = "<b>Włącz wszystkie blokery treści</b> i wróć do aplikacji!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
@@ -957,6 +957,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Do konta Setapp została podłączona maksymalna liczba urządzeń.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Czy wiesz, że YouTube zmienił swoje algorytmy, aby wyświetlać więcej reklam? <br><br> Aby je zablokować, musisz: <br><br> 1. Otwórz youtube.com w przeglądarce Safari. <br><br> 2. Kliknij przycisk %@ Udostępnij. <br><br> 3. Kliknij „Blokuj reklamy YouTube (przez AdGuard)”.";

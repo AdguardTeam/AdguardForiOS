@@ -20,10 +20,10 @@
 "common_error_title" = "Fehler";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filter können nicht in Safari geladen werden. Die letzten Änderungen konnten daher nicht übernommen werden.";
+"safari_filters_loading_error" = "Filter können nicht in Safari geladen werden, die letzten Änderungen konnten daher nicht übernommen werden.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Freigabeliste zu bereinigen, oder ändern Sie die verwendeten Filter.";
+"load_to_safari_error" = "Filter können nicht in Safari geladen werden. Versuchen Sie bitte, Ihre Regeln und die Positivliste zu bereinigen, oder ändern Sie die verwendeten Filter.";
 
 /* NO Button caption in alert */
 "common_action_no" = "Nein";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Bei der Wiederherstellung Ihres Kaufs ist ein Fehler aufgetreten";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Ihr Kauf wurde wiederhergestellt! Die Premiumversion von AdGuard für iOS wurde aktiviert.";
+"restore_success_message" = "Dein Kauf wurde wiederhergestellt! Die Premiumversion von AdGuard für iOS wurde aktiviert.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Keine Einkäufe zum Wiederherstellen";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Ihr Kauf wurde erfolgreich abgeschlossen! Die Premiumversion von AdGuard für iOS wurde aktiviert.";
+"purchase_success_message" = "Dein Kauf wurde erfolgreich abgeschlossen! Die Premiumversion von AdGuard für iOS wurde aktiviert.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Bei der Verarbeitung Ihres Kaufs ist ein Fehler aufgetreten";
@@ -141,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Geben Sie die Domainnamen hier ein.  AdGuard wird dort keine Anzeigen filtern und alle anderen Einstellungen ignorieren.  ";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard aktiviert die Filterung in Safari nur für diese Webseiten.";

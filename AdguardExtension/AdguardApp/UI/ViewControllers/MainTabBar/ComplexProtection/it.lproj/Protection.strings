@@ -1,9 +1,6 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Protezione Safari";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads in Safari"; ObjectID = "AZY-QZ-8d9"; */
-"AZY-QZ-8d9.text" = "Blocco avanzato degli annunci YouTube in Safari";
-
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
@@ -15,9 +12,6 @@
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Protezione DNS";
-
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads"; ObjectID = "kDM-2d-bRK"; */
-"kDM-2d-bRK.text" = "Blocco avanzato degli annunci YouTube";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";

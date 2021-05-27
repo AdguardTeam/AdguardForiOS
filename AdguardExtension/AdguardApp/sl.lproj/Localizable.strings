@@ -17,7 +17,7 @@
 "common_error_title" = "Napaka";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "V Safariju ni mogoče naložiti filtrov. Zato nedavne spremembe niso bile uporabljene.";
+"safari_filters_loading_error" = "Filtrov ni mogoče naložiti v Safari, zato vaše nedavne spremembe niso bile uporabljene.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Ni mogoče naložiti filtrov v Safari. Poskusite počistiti svoja pravila in seznam dovoljenih ali spremenite nabor uporabljenih filtrov.";
@@ -138,6 +138,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Tukaj lahko dodate lastna pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Sem vnesite domene, za katere ne želite, da jih AdGuard filtrira. Ta seznam ima prednost pred drugimi nastavitvami.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
@@ -614,7 +617,7 @@
 "onboarding_second_step_text" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v našo aplikacijo!";
+"onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v aplikacijo!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistemski DNS";
@@ -951,6 +954,3 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "V svoj račun Setapp ste povezali največje dovojeno število naprav.";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
-"block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>Odprite youtube.com v brskalniku Safari.<br><br>2. Kliknite %@ gumb za skupno rabo.<br><br>3. Kliknite \"Onemogoči oglase YouTube (z AdGuard)\".";

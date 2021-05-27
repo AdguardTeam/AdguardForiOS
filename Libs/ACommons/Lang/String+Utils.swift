@@ -50,10 +50,10 @@ extension NSMutableAttributedString {
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
         
         guard let resultText = try? NSMutableAttributedString(
-            data: htmlData,
-            options: [.documentType: NSAttributedString.DocumentType.html,
-                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
-            documentAttributes: nil) else { return nil }
+                data: htmlData,
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
+                documentAttributes: nil) else { return nil }
         
         if let settings = attachmentSettings {
             

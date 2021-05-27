@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari protection";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads in Safari"; ObjectID = "AZY-QZ-8d9"; */
-"AZY-QZ-8d9.text" = "Advanced blocking of YouTube ads in Safari";
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "YouTube ad blocking";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
@@ -10,14 +10,17 @@
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube";
+
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Block YouTube Ads (by AdGuard)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS protection";
 
-/* Class = "UILabel"; text = "Advanced blocking of YouTube ads"; ObjectID = "kDM-2d-bRK"; */
-"kDM-2d-bRK.text" = "Advanced blocking of YouTube ads";
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "YouTube ad blocking";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "free";
