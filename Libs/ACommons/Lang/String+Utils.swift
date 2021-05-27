@@ -57,11 +57,8 @@ extension NSMutableAttributedString {
         
         if let settings = attachmentSettings {
             
-            var imageRange = resultText.mutableString.range(of: "%@")
-            resultText.insert(NSAttributedString(string: " "), at: imageRange.location - 1) // insert space before image
-            imageRange = resultText.mutableString.range(of: "%@")
+            let imageRange = resultText.mutableString.range(of: "%@")
             resultText.replaceCharacters(in: imageRange, with: "")
-            resultText.insert(NSAttributedString(string: " "), at: imageRange.location + 1) // insert space after image
             
             let attachment = NSTextAttachment()
             attachment.image = settings.image
