@@ -71,12 +71,13 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Initialization
     
     init(dbContainerUrl: URL) throws {
+        // We are trying to create directory if passed URL is not a valid directory
         if !dbContainerUrl.isDirectory {
             try fileManager.createDirectory(at: dbContainerUrl, withIntermediateDirectories: true, attributes: nil)
         }
         self.productionDbFileUrl = dbContainerUrl.appendingPathComponent(dbFile)
         self.dbContainerUrl = dbContainerUrl
-        self.defaultDatabaseManager = DefaultDatabaseManager(dbContainerUrl: dbContainerUrl)
+        self.defaultDatabaseManager = try DefaultDatabaseManager(dbContainerUrl: dbContainerUrl)
         
         // Check if adguard.db file exists
         let productionDbExists = fileManager.fileExists(atPath: productionDbFileUrl.path)

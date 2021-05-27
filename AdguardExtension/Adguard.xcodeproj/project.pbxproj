@@ -785,9 +785,7 @@
 		7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */; };
 		7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
 		7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
-		7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA27B257E4AAD004DA0D3 /* Zip */; };
-		7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA28E257E4ACB004DA0D3 /* Zip */; };
-		7ECAA291257E4AD4004DA0D3 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7ECAA290257E4AD4004DA0D3 /* Zip */; };
+		7EC97C16265FC04F005C950C /* FilterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FilterServiceNew.swift */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -2162,7 +2160,7 @@
 		D0BDB41A2630651D007D9BC6 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */; };
 		D0BDB41B2630651D007D9BC6 /* AESAntibanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BDB41C2630651D007D9BC6 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FC8260A21CA00703DB2 /* FilterInfo.swift */; };
-		D0BDB41D2630651D007D9BC6 /* FiltersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */; };
+		D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */; };
 		D0BDB41E2630651D007D9BC6 /* SafariFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A38025FA50D7008CEC80 /* SafariFilter.swift */; };
 		D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
 		D0BDB4212630651D007D9BC6 /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
@@ -3777,6 +3775,7 @@
 		7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
+		7EC97C15265FC04F005C950C /* FilterServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterServiceNew.swift; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -3947,7 +3946,7 @@
 		D0427C771F434129002FB018 /* APDnsServerAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerAddress.m; sourceTree = "<group>"; };
 		D044AF742183098A00CD9E06 /* AddRuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleController.swift; sourceTree = "<group>"; };
 		D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportRulesController.swift; sourceTree = "<group>"; };
-		D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersStorage.swift; sourceTree = "<group>"; };
+		D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFilesStorage.swift; sourceTree = "<group>"; };
 		D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersConverter.swift; sourceTree = "<group>"; };
 		D048A38025FA50D7008CEC80 /* SafariFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariFilter.swift; sourceTree = "<group>"; };
 		D04B4A1D263ADACF00815F30 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
@@ -5871,6 +5870,7 @@
 				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
 				D03E537321BA82BD00C62152 /* FiltersService.swift */,
 				D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */,
+				7EC97C15265FC04F005C950C /* FilterServiceNew.swift */,
 			);
 			path = ContentBlockers;
 			sourceTree = "<group>";
@@ -5943,12 +5943,12 @@
 			path = FiltersConvertation;
 			sourceTree = "<group>";
 		};
-		D09B63ED2624A68B00F60AF7 /* FiltersStorage */ = {
+		D09B63ED2624A68B00F60AF7 /* FilterFilesStorage */ = {
 			isa = PBXGroup;
 			children = (
-				D048A34A25FA4F9F008CEC80 /* FiltersStorage.swift */,
+				D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */,
 			);
-			path = FiltersStorage;
+			path = FilterFilesStorage;
 			sourceTree = "<group>";
 		};
 		D09CB60123ABB5BF008C9FF7 /* Onboarding */ = {
@@ -6017,7 +6017,7 @@
 				D0BA7B7C2631A8910097029B /* Resources */,
 				D0BDB622263075C6007D9BC6 /* Lang */,
 				D0BDB4C226306F56007D9BC6 /* Logger */,
-				D09B63ED2624A68B00F60AF7 /* FiltersStorage */,
+				D09B63ED2624A68B00F60AF7 /* FilterFilesStorage */,
 				D09B63EC2624A63700F60AF7 /* FiltersConvertation */,
 				D09B63EB2624A61E00F60AF7 /* FiltersMetadata */,
 				D033980224318C1900F6B9DE /* ContentBlockers */,
@@ -9986,6 +9986,7 @@
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
 				242CD70D265655F00010A2C0 /* URL+Utils.swift in Sources */,
 				7E69C4FF26554CE200EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
+				7EC97C16265FC04F005C950C /* FilterServiceNew.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
@@ -10023,7 +10024,7 @@
 				7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */,
 				D0BA7E6F263316E90097029B /* SafariRule.swift in Sources */,
 				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
-				D0BDB41D2630651D007D9BC6 /* FiltersStorage.swift in Sources */,
+				D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */,
 				D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */,
 				7E1C34762653CB5800A4490E /* GroupMetaProtocol.swift in Sources */,
 				D0BA7C552631B56D0097029B /* FiltersLocalizationsRequest.swift in Sources */,

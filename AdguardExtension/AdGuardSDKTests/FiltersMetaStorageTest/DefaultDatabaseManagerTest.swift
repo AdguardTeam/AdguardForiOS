@@ -21,7 +21,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testUpdateDefaultDbWithSuccess() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
@@ -37,7 +37,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testUpdateDefaultDbWithMultipleUpdates() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
@@ -58,7 +58,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testRemoveDefaultDbWithSuccess() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
@@ -78,7 +78,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testRemoveDefaultDbFailure() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
@@ -103,7 +103,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testRemoveDefaultDbWithFailureInRootFolder() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: rootDirectory)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: rootDirectory)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         do {
@@ -121,7 +121,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     }
     
     func testRemoveDefaultDbIfNotExistsFailure() {
-        let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+        let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
         XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
@@ -137,7 +137,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testDefaultDbFileExistsWithSuccess() {
         do {
-            let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+            let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
             XCTAssertFalse(manager.defaultDbFileExists)
             try manager.updateDefaultDb()
             XCTAssertTrue(manager.defaultDbFileExists)
@@ -148,7 +148,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testDefaultDbSchemaVersionWithSuccess() {
         do {
-            let manager = DefaultDatabaseManager(dbContainerUrl: workingUrl)
+            let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
             XCTAssertNil(manager.defaultDbSchemaVersion)
             try manager.updateDefaultDb()
             XCTAssertNotNil(manager.defaultDbSchemaVersion)

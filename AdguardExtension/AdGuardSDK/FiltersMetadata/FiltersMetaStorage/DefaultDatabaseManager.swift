@@ -80,7 +80,11 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
     
     // MARK: - Initialization
     
-    init(dbContainerUrl: URL) {
+    init(dbContainerUrl: URL) throws {
+        // We are trying to create directory if passed URL is not a valid directory
+        if !dbContainerUrl.isDirectory {
+            try fileManager.createDirectory(at: dbContainerUrl, withIntermediateDirectories: true, attributes: nil)
+        }
         self.defaultDbFileUrl = dbContainerUrl.appendingPathComponent(dbFile)
         self.dbContainerUrl = dbContainerUrl
     }
