@@ -50,15 +50,18 @@ extension NSMutableAttributedString {
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
         
         guard let resultText = try? NSMutableAttributedString(
-            data: htmlData,
-            options: [.documentType: NSAttributedString.DocumentType.html,
-                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
-            documentAttributes: nil) else { return nil }
+                data: htmlData,
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
+                documentAttributes: nil) else { return nil }
         
         if let settings = attachmentSettings {
             
-            let imageRange = resultText.mutableString.range(of: "%@")
+            var imageRange = resultText.mutableString.range(of: "%@")
+            resultText.insert(NSAttributedString(string: " "), at: imageRange.location - 1) // insert space before image
+            imageRange = resultText.mutableString.range(of: "%@")
             resultText.replaceCharacters(in: imageRange, with: "")
+            resultText.insert(NSAttributedString(string: " "), at: imageRange.location + 1) // insert space after image
             
             let attachment = NSTextAttachment()
             attachment.image = settings.image
