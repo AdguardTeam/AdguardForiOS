@@ -959,7 +959,7 @@
 "setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_safari" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">Safari</a><br><br>2. Open youtube.com<br><br>3. Tap %@ Share.<br><br> 4. Tap \"Block YouTube Ads (by AdGuard)\"";
+"block_youtube_ads_instructions_safari" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">Safari</a>.<br><br>2. Open youtube.com.<br><br>3. Tap %@ Share.<br><br> 4. Tap \"Block YouTube Ads (by AdGuard)\".";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tap %@ Share.<br><br>3. Tap \"Block YouTube Ads (by AdGuard)\".";
