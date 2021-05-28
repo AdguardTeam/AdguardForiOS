@@ -954,3 +954,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "V svoj račun Setapp ste povezali največje dovojeno število naprav.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>1. Odprite <a href=\"%@\">youtube.com</a> v Safariju.<br><br>2. Tapnite %@ Deli.<br><br>3. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";

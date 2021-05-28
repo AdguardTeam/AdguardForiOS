@@ -957,3 +957,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Hai collegato il numero massimo di dispositivi al tuo profilo Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci<br><br>Ora, per bloccarli devi:<br><br>1. Accedi a <a href=\"%@\">youtube.com</a> in Safari.<br><br> 2. Clicca %@ sul pulsante Condividi.<br><br> 3. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";

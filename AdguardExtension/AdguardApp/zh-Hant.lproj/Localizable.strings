@@ -957,3 +957,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "您已連結最大數量的裝置到您的 Setapp 帳戶。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "您知道 YouTube 已更改它的演算法以向您顯示更多的廣告嗎？<br><br>現在，為了封鎖它們，您需要：<br><br>1. 在 Safari 中打開 <a href=\"%@\">youtube.com</a>。<br><br>2. 輕觸 %@ 分享。<br><br>3. 輕觸\"封鎖 YouTube 廣告（由 AdGuard 製作）\"。";

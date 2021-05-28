@@ -948,3 +948,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Je hebt het maximale aantal apparaten aan je account gekoppeld.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Weet je dat YouTube zijn algoritmes gewijzigd heeft om je meer advertenties te tonen?<br><br>Wel, om ze te blokkeren moet je:<br><br>1. <a href=\"%@\">youtube.com</a> openen in Safari.<br><br>2. Klik %@ Delen knop.<br><br>3. Klik \"YouTube-advertenties blokkeren (door AdGuard)\".";

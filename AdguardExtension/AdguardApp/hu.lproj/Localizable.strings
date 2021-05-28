@@ -46,6 +46,12 @@
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10E";
 
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Natív DNS működik";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Natív DNS nem működik";
+
 /* (User Filter Screen) Title */
 "user_filter_title" = "Felhasználói szűrő";
 
@@ -502,6 +508,12 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mindenkori";
 
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Szűrők betöltése...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "A szabályok konvertálódnak ...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Új egyéni szűrő";
 
@@ -582,6 +594,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Érintse meg a <b>Safari</b> ikonját és válassza a <b>\"Tartalomblokkolók\"</b> menüpontot";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Engedélyezze az összes tartalomblokkolót</b>, majd térjen vissza ebbe az appba!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Rendszer DNS";

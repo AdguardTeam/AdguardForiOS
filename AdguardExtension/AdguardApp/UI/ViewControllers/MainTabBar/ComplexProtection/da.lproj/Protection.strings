@@ -1,17 +1,26 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari-beskyttelse";
 
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "YouTube-adblocking";
+
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
 /* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "Premium";
 
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Safari-udvidelse, der fjerner annoncer og -rester samt genintroducerer autoplay på YouTube";
+
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Blokér YouTube-annoncer (fra AdGuard)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS-beskyttelse";
+
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "YouTube-adblocking";
 
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";
