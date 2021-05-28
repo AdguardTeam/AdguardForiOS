@@ -73,14 +73,14 @@
         'zh-cn': {
             logo: '使用&nbsp;AdGuard',
             alreadyExecuted: '快捷指令已在运行',
-            wrongDomain: '快捷指令只能在 YouTube 上被启用。',
-            success: '现在您的 YouTube 没有广告！请注意：当您重新加载页面时，您需要重新启用快捷指令。',
+            wrongDomain: '快捷指令只能在 YouTube 上被启动。',
+            success: '现在您的 YouTube 没有广告！请注意，若您重新加载页面，您需要再次启动快捷指令。',
         },
         'zh-tw': {
-            logo: '使用&nbsp;AdGuard',
-            alreadyExecuted: '捷徑已在運行。',
-            wrongDomain: '捷徑只能在 YouTube 上被啟動。',
-            success: '現在您的 YouTube 沒有廣告！請注意：當您重新載入頁面時，您需要重新啟動捷徑。',
+            logo: '偕同&nbsp;AdGuard',
+            alreadyExecuted: '此捷徑已被執行。',
+            wrongDomain: '此捷徑應該只於 YouTube 上被啟動。',
+            success: '現在 YouTube 為無廣告的！請注意，若您重新載入該頁面，您需要再次執行此捷徑。',
         },
         ko: {
             logo: 'AdGuard&nbsp;사용',
@@ -125,7 +125,8 @@
     }
 
     if (window.location.hostname !== 'www.youtube.com'
-        && window.location.hostname !== 'm.youtube.com') {
+        && window.location.hostname !== 'm.youtube.com'
+        && window.location.hostname !== 'music.youtube.com') {
         finish(getMessage('wrongDomain'));
         return;
     }
@@ -362,10 +363,18 @@
                 return;
             }
 
+            // Here is what these styles do:
+            // 1. Change AG marker color depending on the page
+            // 2. Hide Sign-in button on m.youtube.com otherwise it does not look good
+            // It is still possible to sign in by clicking "three dots" button.
+            // 3. Hide the marker when the user is searching for something
+            // 4. On YT Music apply display:block to the logo element
             const style = document.createElement('style');
             style.innerHTML = `[data-mode="watch"] #${LOGO_ID} { color: #fff; }
 [data-mode="searching"] #${LOGO_ID}, [data-mode="search"] #${LOGO_ID} { display: none; }
-#${LOGO_ID} { white-space: nowrap; }`;
+#${LOGO_ID} { white-space: nowrap; }
+.mobile-topbar-header-sign-in-button { display: none; }
+.ytmusic-nav-bar#left-content #${LOGO_ID} { display: block; }`;
             document.head.appendChild(style);
         };
 
@@ -384,11 +393,17 @@
                     btn.parentNode.insertBefore(logo, btn.nextSibling);
                     addAdGuardLogoStyle();
                 }
-            } else {
+            } else if (window.location.hostname === 'www.youtube.com') {
                 const code = document.getElementById('country-code');
                 if (code) {
                     code.innerHTML = '';
                     code.appendChild(logo);
+                    addAdGuardLogoStyle();
+                }
+            } else if (window.location.hostname === 'music.youtube.com') {
+                const el = document.querySelector('.ytmusic-nav-bar#left-content');
+                if (el) {
+                    el.appendChild(logo);
                     addAdGuardLogoStyle();
                 }
             }
@@ -400,9 +415,6 @@
 
         // Applies CSS that hides YouTube ad elements
         hideElements(window.location.hostname);
-        if (window.location.hostname === 'm.youtube.com') {
-            hideElements('www.youtube.com');
-        }
 
         // Some changes should be re-evaluated on every page change
         addAdGuardLogo();

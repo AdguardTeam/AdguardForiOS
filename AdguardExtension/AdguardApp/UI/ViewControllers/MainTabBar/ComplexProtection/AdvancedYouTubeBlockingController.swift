@@ -23,6 +23,7 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     //MARK: - Outlests
     @IBOutlet weak var blockYouTubeView: UIView!
     @IBOutlet weak var mainTextView: UITextView!
+    @IBOutlet weak var doneTextView: UITextView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var contentView: UIView!
     
@@ -50,8 +51,13 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     
     private func setupMainText() {
         guard let image = UIImage(named: "share") else { return }
-        guard let url = URL(string: "https://youtube.com/")?.absoluteString else { return }
-        let text = String.localizedString("block_youtube_ads_instructions")
+        
+        let youtubeAppInstalled = UIApplication.youtubeAppInstalled()
+        
+        let urlText = youtubeAppInstalled ? "x-web-search://" : "https://youtube.com"
+        guard let url = URL(string: urlText)?.absoluteString else { return }
+        
+        let text = String.localizedString(youtubeAppInstalled ? "block_youtube_ads_instructions_safari" : "block_youtube_ads_instructions")
         let formattedText = String(format: text, url, "%@")
         let attachmentSetttings = NSMutableAttributedString.AttachmentSettings(image: image,
                                                      topEdge: 2.5,
@@ -62,6 +68,13 @@ final class AdvancedYouTubeBlockingController: UIViewController {
         let attributedText = NSMutableAttributedString.fromHtml(formattedText, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSetttings, textAlignment: .left)
         mainTextView.attributedText = attributedText
     }
+    
+    private func setupDoneTextView() {
+        let text = String.localizedString(UIApplication.youtubeAppInstalled() ? "block_youtube_ads_instructions_done_text_safari" : "block_youtube_ads_instructions_done_text")
+        let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
+        let attributedText = NSMutableAttributedString.fromHtml(text, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor)
+        doneTextView.attributedText = attributedText
+    }
 }
 
 extension AdvancedYouTubeBlockingController: ThemableProtocol {
@@ -70,6 +83,7 @@ extension AdvancedYouTubeBlockingController: ThemableProtocol {
         contentView.backgroundColor = themeService.backgroundColor
         themeService.setupLabels(themableLabels)
         setupMainText()
+        setupDoneTextView()
         setupShadow()
     }
 }

@@ -20,10 +20,10 @@
 "common_error_title" = "Error";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Los filtros no pudieron cargarse en Safari, tus últimos cambios no se aplicaron.";
+"safari_filters_loading_error" = "No se pudieron cargar los filtros en Safari, y tus últimos cambios no se aplicaron.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Los filtros no pudieron cargarse en Safari. Intenta borrar tus reglas y la lista de permitido, o cambia el conjunto de filtros usados.";
+"load_to_safari_error" = "No se pudieron cargar los filtros en Safari. Intenta borrar tus reglas y la lista de permitido, o cambia el conjunto de filtros usados.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "Pulse en <b>Safari</b> y elija el elemento del menú <b>\"Bloqueadores de contenido\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>¡Encienda todos los bloqueadores de contenido</b> y vuelve a nuestra aplicación!";
+"onboarding_third_step_text" = "<b>¡Enciende todos los bloqueadores de contenido</b> y vuelve a nuestra aplicación!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS del sistema";
@@ -957,3 +957,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Has conectado el número máximo de dispositivos a tu cuenta de Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "¿Sabías que YouTube ha cambiado sus algoritmos para mostrar más anuncios?<br><br>Ahora, para bloquearlos necesitas:<br><br>1. Abrir <a href=\"%@\">youtube.com</a> en Safari.<br><br>2. Tocar %@ en Compartir.<br><br>3. Tocar \"Bloquear anuncios de YouTube (por AdGuard)\".";

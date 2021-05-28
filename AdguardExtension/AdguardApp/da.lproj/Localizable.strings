@@ -22,6 +22,9 @@
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer er derfor ikke effektueret.";
 
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtre kunne ikke indlæses i Safari. Prøv at rydde dine regler og Hvidliste eller ændre det sæt af filtre, der bruges.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEJ";
 
@@ -954,3 +957,6 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Du har det maksimale antal enheder forbundet til din Setapp-konto.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+"block_youtube_ads_instructions" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
