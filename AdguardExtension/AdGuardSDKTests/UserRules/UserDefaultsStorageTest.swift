@@ -4,7 +4,7 @@ class UserDefaultsStorageTest: XCTestCase {
 
     var userDefaults: UserDefaultsStorageProtocol!
     
-    var allowlistRuleStorage: UserRulesStorageProtocol  {
+    var allowlistRuleStorage: UserRulesStorageProtocol {
         AllowlistRulesStorage(userDefaults: userDefaults)
     }
         
@@ -22,16 +22,9 @@ class UserDefaultsStorageTest: XCTestCase {
     
     override func setUpWithError() throws {
         userDefaults = UserDefaultsStorage(storage: UserDefaults(suiteName: "UserRulesStorage")!)
-    }
-    
-    override class func setUp() {
-        UserDefaults.standard.removePersistentDomain(forName: "UserRulesStorage")
-        UserDefaults.standard.synchronize()
-    }
-    
-    override class func tearDown() {
-        UserDefaults.standard.removePersistentDomain(forName: "UserRulesStorage")
-        UserDefaults.standard.synchronize()
+        allowlistRuleStorage.rules = []
+        invertedAllowlistRulesStorage.rules = []
+        blocklistRulesStorage.rules = []
     }
 
     func testAllowlistRuleStorageWithSuccess() {
@@ -45,7 +38,7 @@ class UserDefaultsStorageTest: XCTestCase {
     }
     
     func testResetAllowlistRuleStorage() {
-        XCTAssertFalse(allowlistRuleStorage.rules.isEmpty)
+        XCTAssert(allowlistRuleStorage.rules.isEmpty)
         allowlistRuleStorage.rules = userRules
         XCTAssertEqual(allowlistRuleStorage.rules.count, 3)
         allowlistRuleStorage.rules = []
@@ -63,7 +56,7 @@ class UserDefaultsStorageTest: XCTestCase {
     }
     
     func testResetInvertedAllowlistRulesStorage() {
-        XCTAssertFalse(invertedAllowlistRulesStorage.rules.isEmpty)
+        XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
         invertedAllowlistRulesStorage.rules = userRules
         XCTAssertEqual(invertedAllowlistRulesStorage.rules.count, 3)
         invertedAllowlistRulesStorage.rules = []
@@ -81,7 +74,7 @@ class UserDefaultsStorageTest: XCTestCase {
     }
     
     func testResetBlocklistRulesStorage() {
-        XCTAssertFalse(blocklistRulesStorage.rules.isEmpty)
+        XCTAssert(blocklistRulesStorage.rules.isEmpty)
         blocklistRulesStorage.rules = userRules
         XCTAssertEqual(blocklistRulesStorage.rules.count, 3)
         blocklistRulesStorage.rules = []
