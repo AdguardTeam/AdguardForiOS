@@ -70,7 +70,7 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     }
     
     private func setupDoneTextView() {
-        let text = String.localizedString(UIApplication.youtubeAppInstalled() ? "block_youtube_ads_instructions_done_text" : "block_youtube_ads_instructions_done_text")
+        let text = String.localizedString(UIApplication.youtubeAppInstalled() ? "block_youtube_ads_instructions_done_text_safari" : "block_youtube_ads_instructions_done_text")
         let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
         let attributedText = NSMutableAttributedString.fromHtml(text, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor)
         doneTextView.attributedText = attributedText
