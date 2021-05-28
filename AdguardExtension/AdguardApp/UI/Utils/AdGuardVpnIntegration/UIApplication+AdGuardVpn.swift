@@ -47,4 +47,9 @@ extension UIApplication {
             shared.open(appUrl)
         }
     }
+    
+    static func youtubeAppInstalled()->Bool {
+        let appUrl = URL(string: "youtube://")!
+        return shared.canOpenURL(appUrl)
+    }
 }

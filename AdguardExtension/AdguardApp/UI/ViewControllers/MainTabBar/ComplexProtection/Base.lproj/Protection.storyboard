@@ -566,36 +566,33 @@
                                                     <constraint firstAttribute="trailing" secondItem="yRg-Fe-A5t" secondAttribute="trailing" constant="12" id="owa-ck-cak"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuB-Tv-hsa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="24" y="210" width="366" height="57.5"/>
-                                                <string key="text">Done! Now you can watch YouTube without ads.
-Note that when you reload the page, you’ll need to follow the instructions again.</string>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="a4x-Ke-5pQ" userLabel="Done Text View">
+                                                <rect key="frame" x="24" y="181.5" width="366" height="35.5"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>
-                                            </label>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="wuB-Tv-hsa" firstAttribute="leading" secondItem="evM-3E-PdJ" secondAttribute="leading" id="230-v3-fi1"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="top" secondItem="Qh1-Xk-Ldn" secondAttribute="bottom" constant="20" id="AfC-J1-4VX"/>
                                             <constraint firstAttribute="trailing" secondItem="AZY-QZ-8d9" secondAttribute="trailing" constant="24" id="Gii-XM-hg7"/>
-                                            <constraint firstAttribute="bottom" secondItem="wuB-Tv-hsa" secondAttribute="bottom" constant="42" id="Ke7-cc-yiq"/>
+                                            <constraint firstItem="a4x-Ke-5pQ" firstAttribute="trailing" secondItem="evM-3E-PdJ" secondAttribute="trailing" id="JaR-mW-RUZ"/>
                                             <constraint firstAttribute="trailing" secondItem="Qh1-Xk-Ldn" secondAttribute="trailing" constant="24" id="QKy-eV-LDa"/>
                                             <constraint firstItem="AZY-QZ-8d9" firstAttribute="top" secondItem="qFd-Hd-Bhv" secondAttribute="top" constant="10" id="TNE-4E-Xus"/>
+                                            <constraint firstItem="a4x-Ke-5pQ" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="bottom" constant="20" id="TTP-uc-lfQ"/>
                                             <constraint firstItem="Qh1-Xk-Ldn" firstAttribute="top" secondItem="AZY-QZ-8d9" secondAttribute="bottom" constant="24" id="Tha-M8-Q7L"/>
+                                            <constraint firstAttribute="bottom" secondItem="a4x-Ke-5pQ" secondAttribute="bottom" constant="42" id="d4s-0D-5t0"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="trailing" secondItem="Qh1-Xk-Ldn" secondAttribute="trailing" id="eHC-V8-wyh"/>
+                                            <constraint firstItem="a4x-Ke-5pQ" firstAttribute="leading" secondItem="evM-3E-PdJ" secondAttribute="leading" id="gf6-xf-Lcm"/>
                                             <constraint firstItem="evM-3E-PdJ" firstAttribute="leading" secondItem="Qh1-Xk-Ldn" secondAttribute="leading" id="jO2-lw-cT4"/>
                                             <constraint firstItem="AZY-QZ-8d9" firstAttribute="leading" secondItem="qFd-Hd-Bhv" secondAttribute="leading" constant="24" id="pTe-Av-60j"/>
-                                            <constraint firstItem="wuB-Tv-hsa" firstAttribute="trailing" secondItem="evM-3E-PdJ" secondAttribute="trailing" id="sVB-q8-wer"/>
                                             <constraint firstItem="Qh1-Xk-Ldn" firstAttribute="leading" secondItem="qFd-Hd-Bhv" secondAttribute="leading" constant="24" id="yDe-DH-gyl"/>
-                                            <constraint firstItem="wuB-Tv-hsa" firstAttribute="top" secondItem="evM-3E-PdJ" secondAttribute="bottom" constant="20" id="yOB-GF-xkV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -610,6 +607,7 @@ Note that when you reload the page, you’ll need to follow the instructions aga
                                 <viewLayoutGuide key="frameLayoutGuide" id="m5p-6o-wsb"/>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="OJA-e0-NH8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="W0f-Zc-b7O" firstAttribute="leading" secondItem="ZNN-4X-abc" secondAttribute="leading" id="HtE-CM-pny"/>
@@ -622,9 +620,9 @@ Note that when you reload the page, you’ll need to follow the instructions aga
                     <connections>
                         <outlet property="blockYouTubeView" destination="evM-3E-PdJ" id="MLO-Un-x2S"/>
                         <outlet property="contentView" destination="qFd-Hd-Bhv" id="XLD-1G-gkU"/>
+                        <outlet property="doneTextView" destination="a4x-Ke-5pQ" id="1Zj-UQ-fIM"/>
                         <outlet property="mainTextView" destination="Qh1-Xk-Ldn" id="tvm-0g-NXp"/>
                         <outletCollection property="themableLabels" destination="AZY-QZ-8d9" collectionClass="NSMutableArray" id="ZGD-eW-JCp"/>
-                        <outletCollection property="themableLabels" destination="wuB-Tv-hsa" collectionClass="NSMutableArray" id="vgH-ib-91I"/>
                         <outletCollection property="themableLabels" destination="XXP-EO-M4h" collectionClass="NSMutableArray" id="X30-j0-E8K"/>
                     </connections>
                 </viewController>

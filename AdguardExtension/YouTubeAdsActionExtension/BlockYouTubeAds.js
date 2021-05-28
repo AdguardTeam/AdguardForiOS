@@ -73,8 +73,8 @@
         'zh-cn': {
             logo: '使用&nbsp;AdGuard',
             alreadyExecuted: '快捷指令已在运行',
-            wrongDomain: '快捷指令只能在 YouTube 上被启用。',
-            success: '现在您的 YouTube 没有广告！请注意：当您重新加载页面时，您需要重新启用快捷指令。',
+            wrongDomain: '快捷指令只能在 YouTube 上被启动。',
+            success: '现在您的 YouTube 没有广告！请注意，若您重新加载页面，您需要再次启动快捷指令。',
         },
         'zh-tw': {
             logo: '偕同&nbsp;AdGuard',
@@ -415,9 +415,6 @@
 
         // Applies CSS that hides YouTube ad elements
         hideElements(window.location.hostname);
-        if (window.location.hostname === 'm.youtube.com') {
-            hideElements('www.youtube.com');
-        }
 
         // Some changes should be re-evaluated on every page change
         addAdGuardLogo();

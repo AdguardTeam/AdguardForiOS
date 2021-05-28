@@ -958,5 +958,14 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">Safari</a><br><br>2. Open youtube.com<br><br>3. Tap %@ Share.<br><br> 4. Tap \"Block YouTube Ads (by AdGuard)\"";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tap %@ Share.<br><br>3. Tap \"Block YouTube Ads (by AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 3 and 4 again.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 2 and 3 again.</b>";
