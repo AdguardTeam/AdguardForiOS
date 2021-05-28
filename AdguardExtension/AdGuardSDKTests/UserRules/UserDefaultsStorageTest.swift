@@ -1,0 +1,90 @@
+import XCTest
+
+class UserDefaultsStorageTest: XCTestCase {
+
+    var userDefaults: UserDefaultsStorageProtocol!
+    
+    var allowlistRuleStorage: UserRulesStorageProtocol  {
+        AllowlistRulesStorage(userDefaults: userDefaults)
+    }
+        
+    var invertedAllowlistRulesStorage: UserRulesStorageProtocol {
+        InvertedAllowlistRulesStorage(userDefaults: userDefaults)
+    }
+    
+    var blocklistRulesStorage: UserRulesStorageProtocol {
+        BlocklistRulesStorage(userDefaults: userDefaults)
+    }
+    
+    let userRules = [UserRule(ruleText: "1", isEnabled: false),
+                     UserRule(ruleText: "2", isEnabled: true),
+                     UserRule(ruleText: "3", isEnabled: false)]
+    
+    override func setUpWithError() throws {
+        userDefaults = UserDefaultsStorage(storage: UserDefaults(suiteName: "UserRulesStorage")!)
+    }
+    
+    override class func setUp() {
+        UserDefaults.standard.removePersistentDomain(forName: "UserRulesStorage")
+        UserDefaults.standard.synchronize()
+    }
+    
+    override class func tearDown() {
+        UserDefaults.standard.removePersistentDomain(forName: "UserRulesStorage")
+        UserDefaults.standard.synchronize()
+    }
+
+    func testAllowlistRuleStorageWithSuccess() {
+        XCTAssert(allowlistRuleStorage.rules.isEmpty)
+        allowlistRuleStorage.rules = userRules
+        XCTAssertEqual(allowlistRuleStorage.rules.count, 3)
+        for (index,rule) in allowlistRuleStorage.rules.enumerated() {
+            XCTAssert(rule.ruleText == userRules[index].ruleText)
+            XCTAssert(rule.isEnabled == userRules[index].isEnabled)
+        }
+    }
+    
+    func testResetAllowlistRuleStorage() {
+        XCTAssertFalse(allowlistRuleStorage.rules.isEmpty)
+        allowlistRuleStorage.rules = userRules
+        XCTAssertEqual(allowlistRuleStorage.rules.count, 3)
+        allowlistRuleStorage.rules = []
+        XCTAssert(allowlistRuleStorage.rules.isEmpty)
+    }
+    
+    func testInvertedAllowlistRulesStorageWithSuccess() {
+        XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
+        invertedAllowlistRulesStorage.rules = userRules
+        XCTAssertEqual(invertedAllowlistRulesStorage.rules.count, 3)
+        for (index,rule) in invertedAllowlistRulesStorage.rules.enumerated() {
+            XCTAssert(rule.ruleText == userRules[index].ruleText)
+            XCTAssert(rule.isEnabled == userRules[index].isEnabled)
+        }
+    }
+    
+    func testResetInvertedAllowlistRulesStorage() {
+        XCTAssertFalse(invertedAllowlistRulesStorage.rules.isEmpty)
+        invertedAllowlistRulesStorage.rules = userRules
+        XCTAssertEqual(invertedAllowlistRulesStorage.rules.count, 3)
+        invertedAllowlistRulesStorage.rules = []
+        XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
+    }
+    
+    func testBlocklistRulesStorageWithSuccess() {
+        XCTAssert(blocklistRulesStorage.rules.isEmpty)
+        blocklistRulesStorage.rules = userRules
+        XCTAssertEqual(blocklistRulesStorage.rules.count, 3)
+        for (index,rule) in blocklistRulesStorage.rules.enumerated() {
+            XCTAssert(rule.ruleText == userRules[index].ruleText)
+            XCTAssert(rule.isEnabled == userRules[index].isEnabled)
+        }
+    }
+    
+    func testResetBlocklistRulesStorage() {
+        XCTAssertFalse(blocklistRulesStorage.rules.isEmpty)
+        blocklistRulesStorage.rules = userRules
+        XCTAssertEqual(blocklistRulesStorage.rules.count, 3)
+        blocklistRulesStorage.rules = []
+        XCTAssert(blocklistRulesStorage.rules.isEmpty)
+    }
+}

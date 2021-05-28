@@ -34,6 +34,19 @@
 		2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
+		243D4649265F7EBD003E0952 /* UserDefaultsStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243D4648265F7EBD003E0952 /* UserDefaultsStorageTest.swift */; };
+		243D464A265F7F6A003E0952 /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */; };
+		243D464B265F7F6D003E0952 /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0C265E3A31005C950C /* UserRulesStorage.swift */; };
+		243D464C265F7F70003E0952 /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5162657BFED00EA9DBA /* UserRule.swift */; };
+		243D464D265F7F76003E0952 /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
+		243D464E265F7F79003E0952 /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
+		243D464F265F7F7C003E0952 /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5132657A4BD00EA9DBA /* UserRulesManagerProtocol.swift */; };
+		243D4650265F7F7F003E0952 /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5222657E16100EA9DBA /* UserRulesManager.swift */; };
+		243D4651265F7F82003E0952 /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5182657C1FE00EA9DBA /* UserRuleConverter.swift */; };
+		243D4652265F7F85003E0952 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51A2657C76300EA9DBA /* AllowlistRuleConverter.swift */; };
+		243D4653265F7F87003E0952 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51C2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift */; };
+		243D4654265F7F8A003E0952 /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51E2657C78E00EA9DBA /* BlocklistRuleConverter.swift */; };
+		243D4655265F828A003E0952 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -123,6 +136,8 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24AE8547265F87EC00830936 /* UserRuleConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */; };
+		24AE8549265F966000830936 /* UserRulesManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE8548265F966000830936 /* UserRulesManagerTest.swift */; };
 		24BD325C2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD3292260346B300CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
@@ -3048,6 +3063,7 @@
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		243D4648265F7EBD003E0952 /* UserDefaultsStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageTest.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -3074,6 +3090,8 @@
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleConverterTest.swift; sourceTree = "<group>"; };
+		24AE8548265F966000830936 /* UserRulesManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagerTest.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchNotificationHandler.swift; sourceTree = "<group>"; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
@@ -4480,6 +4498,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		243D4646265F7E5D003E0952 /* UserRules */ = {
+			isa = PBXGroup;
+			children = (
+				243D4648265F7EBD003E0952 /* UserDefaultsStorageTest.swift */,
+				24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */,
+				24AE8548265F966000830936 /* UserRulesManagerTest.swift */,
+			);
+			path = UserRules;
+			sourceTree = "<group>";
+		};
 		244339CB2581085400AB4F26 /* LowLevelSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -5471,6 +5499,7 @@
 		7EB3E22E264BEDAA00C460FA /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				243D4646265F7E5D003E0952 /* UserRules */,
 				7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */,
 				7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */,
 				7EB3E23D264BEE6400C460FA /* FilterMetadataParserTest */,
@@ -8752,14 +8781,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				243D4652265F7F85003E0952 /* AllowlistRuleConverter.swift in Sources */,
+				243D4655265F828A003E0952 /* UserDefaultsStorage.swift in Sources */,
+				243D464C265F7F70003E0952 /* UserRule.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7EB3E23B264BEE5E00C460FA /* CustomFilterMeta.swift in Sources */,
+				243D464A265F7F6A003E0952 /* AllowlistRulesStorage.swift in Sources */,
+				24AE8547265F87EC00830936 /* UserRuleConverterTest.swift in Sources */,
+				243D4651265F7F82003E0952 /* UserRuleConverter.swift in Sources */,
+				243D464F265F7F7C003E0952 /* UserRulesManagerProtocol.swift in Sources */,
+				243D4650265F7F7F003E0952 /* UserRulesManager.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
+				243D4654265F7F8A003E0952 /* BlocklistRuleConverter.swift in Sources */,
+				24AE8549265F966000830936 /* UserRulesManagerTest.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				243D464B265F7F6D003E0952 /* UserRulesStorage.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
+				243D464E265F7F79003E0952 /* BlocklistRulesStorage.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				7EB3E23C264BEE5E00C460FA /* CustomFilterMetaParser.swift in Sources */,
+				243D4653265F7F87003E0952 /* InvertedAllowlistRuleConverter.swift in Sources */,
+				243D4649265F7EBD003E0952 /* UserDefaultsStorageTest.swift in Sources */,
+				243D464D265F7F76003E0952 /* InvertedAllowlistRulesStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
