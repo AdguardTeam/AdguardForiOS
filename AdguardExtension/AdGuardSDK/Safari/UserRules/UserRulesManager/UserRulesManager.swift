@@ -29,19 +29,19 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     var rulesString: String {
         rulesModificationQueue.sync {
-            let enabledRules = internalAllRules.filter { $0.isEnabled }
+            let enabledRules = _allRules.filter { $0.isEnabled }
             return Converter.convertRulesToString(enabledRules)
         }
     }
     
-    var allRules: [UserRuleProtocol] { rulesModificationQueue.sync { internalAllRules } }
+    var allRules: [UserRuleProtocol] { rulesModificationQueue.sync { _allRules } }
     
     // MARK: - Private properties
     
     // Serial queue to manage rules in one and only thread. This queue guarantees thread safety.
     private let rulesModificationQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesModificationQueue", qos: .userInitiated)
     
-    private var internalAllRules: [UserRuleProtocol]
+    private var _allRules: [UserRuleProtocol]
     
     // Used to quickly check domain uniqueness
     private var domainsSet: Set<String>
@@ -53,8 +53,8 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     init(userDefaults: UserDefaultsStorageProtocol) {
         self.storage = Storage(userDefaults: userDefaults)
-        self.internalAllRules = storage.rules
-        self.domainsSet = Set(internalAllRules.map { $0.ruleText })
+        self._allRules = storage.rules
+        self.domainsSet = Set(_allRules.map { $0.ruleText })
     }
     
     // MARK: - Public methods
@@ -74,7 +74,7 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
             }
             
             if existingRules.isEmpty {
-                internalAllRules.append(contentsOf: rules)
+                _allRules.append(contentsOf: rules)
                 domainsSet = Set<String>(rules.map { $0.ruleText })
                 self.storage.rules.append(contentsOf: rules)
             } else {
@@ -91,11 +91,11 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
                 throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
             }
             
-            guard let ruleIndex = internalAllRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
+            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
             }
             
-            internalAllRules[ruleIndex] = newRule
+            _allRules[ruleIndex] = newRule
             domainsSet.remove(oldRuleText)
             domainsSet.insert(newRule.ruleText)
             self.storage.rules[ruleIndex] = newRule
@@ -104,11 +104,11 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     func removeRule(withText ruleText: String) throws {
         try rulesModificationQueue.sync {
-            guard let ruleIndex = internalAllRules.firstIndex(where: { $0.ruleText == ruleText }) else {
+            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == ruleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: ruleText)
             }
             
-            internalAllRules.remove(at: ruleIndex)
+            _allRules.remove(at: ruleIndex)
             domainsSet.remove(ruleText)
             self.storage.rules.remove(at: ruleIndex)
         }
@@ -116,7 +116,7 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     func removeAllRules() {
         rulesModificationQueue.sync {
-            internalAllRules.removeAll()
+            _allRules.removeAll()
             domainsSet.removeAll()
             self.storage.rules.removeAll()
         }
@@ -130,11 +130,11 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
         }
         
         if ruleExists {
-            let ruleIndex = internalAllRules.firstIndex(where: { $0.ruleText == rule.ruleText })!
-            internalAllRules[ruleIndex] = rule
+            let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == rule.ruleText })!
+            _allRules[ruleIndex] = rule
             self.storage.rules[ruleIndex] = rule
         } else {
-            internalAllRules.append(rule)
+            _allRules.append(rule)
             domainsSet.insert(rule.ruleText)
             self.storage.rules.append(rule)
         }

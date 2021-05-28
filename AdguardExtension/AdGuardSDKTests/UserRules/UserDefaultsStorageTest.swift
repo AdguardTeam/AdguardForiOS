@@ -4,17 +4,17 @@ class UserDefaultsStorageTest: XCTestCase {
 
     var userDefaults: UserDefaultsStorageProtocol!
     
-    var allowlistRuleStorage: UserRulesStorageProtocol {
+    lazy var allowlistRuleStorage: UserRulesStorageProtocol = {
         AllowlistRulesStorage(userDefaults: userDefaults)
-    }
+    }()
         
-    var invertedAllowlistRulesStorage: UserRulesStorageProtocol {
+    lazy var invertedAllowlistRulesStorage: UserRulesStorageProtocol = {
         InvertedAllowlistRulesStorage(userDefaults: userDefaults)
-    }
+    }()
     
-    var blocklistRulesStorage: UserRulesStorageProtocol {
+    lazy var blocklistRulesStorage: UserRulesStorageProtocol  = {
         BlocklistRulesStorage(userDefaults: userDefaults)
-    }
+    }()
     
     let userRules = [UserRule(ruleText: "1", isEnabled: false),
                      UserRule(ruleText: "2", isEnabled: true),

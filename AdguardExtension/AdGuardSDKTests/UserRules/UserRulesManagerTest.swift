@@ -20,13 +20,8 @@ class UserRulesManagerTest: XCTestCase {
     }
     
     override func tearDown() {
-        allowlistRulesManager?.removeAllRules()
         allowlistRulesManager = nil
-        
-        invertedAllowlistRulesManager?.removeAllRules()
         invertedAllowlistRulesManager = nil
-        
-        blocklistRulesManager?.removeAllRules()
         blocklistRulesManager = nil
     }
     
@@ -45,10 +40,10 @@ class UserRulesManagerTest: XCTestCase {
         guard let allowlistRulesManager = allowlistRulesManager else { return }
         do {
             try testAddRule(userRuleManager: allowlistRulesManager)
-            try testAddRulse(userRuleManager: allowlistRulesManager)
+            try testAddRules(userRuleManager: allowlistRulesManager)
             try testModifyRule(userRuleManager: allowlistRulesManager)
             try testRemoveRules(userRuleManager: allowlistRulesManager)
-            try testRemoveAllRulse(userRuleManager: allowlistRulesManager)
+            try testRemoveAllRules(userRuleManager: allowlistRulesManager)
             testThreadSafty(userRuleManager: allowlistRulesManager)
         } catch {
             XCTFail("\(error)")
@@ -59,10 +54,10 @@ class UserRulesManagerTest: XCTestCase {
         guard let invertedAllowlistRulesManager = invertedAllowlistRulesManager else { return }
         do {
             try testAddRule(userRuleManager: invertedAllowlistRulesManager)
-            try testAddRulse(userRuleManager: invertedAllowlistRulesManager)
+            try testAddRules(userRuleManager: invertedAllowlistRulesManager)
             try testModifyRule(userRuleManager: invertedAllowlistRulesManager)
             try testRemoveRules(userRuleManager: invertedAllowlistRulesManager)
-            try testRemoveAllRulse(userRuleManager: invertedAllowlistRulesManager)
+            try testRemoveAllRules(userRuleManager: invertedAllowlistRulesManager)
             testThreadSafty(userRuleManager: invertedAllowlistRulesManager)
         } catch {
             XCTFail("\(error)")
@@ -73,10 +68,10 @@ class UserRulesManagerTest: XCTestCase {
         guard let blocklistRulesManager = blocklistRulesManager else { return }
         do {
             try testAddRule(userRuleManager: blocklistRulesManager)
-            try testAddRulse(userRuleManager: blocklistRulesManager)
+            try testAddRules(userRuleManager: blocklistRulesManager)
             try testModifyRule(userRuleManager: blocklistRulesManager)
             try testRemoveRules(userRuleManager: blocklistRulesManager)
-            try testRemoveAllRulse(userRuleManager: blocklistRulesManager)
+            try testRemoveAllRules(userRuleManager: blocklistRulesManager)
             testThreadSafty(userRuleManager: blocklistRulesManager)
         } catch {
             XCTFail("\(error)")
@@ -99,7 +94,7 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
     
-    private func testAddRulse<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testAddRules<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
@@ -147,7 +142,7 @@ class UserRulesManagerTest: XCTestCase {
     }
     
     
-    private func testRemoveAllRulse<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testRemoveAllRules<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         userRuleManager.removeAllRules()
