@@ -91,6 +91,9 @@ class DnsProvidersMigrationsTest: XCTestCase {
         
         group.wait()
         
+        let tiarServer = dnsProviders!.customProviders.first!.servers!.first!
+        dnsProviders!.activeDnsServer = DnsServerInfo(dnsProtocol: tiarServer.dnsProtocol, serverId: tiarServer.serverId, name: tiarServer.name, upstreams: tiarServer.upstreams, providerId: tiarServer.providerId)
+        
         XCTAssertEqual(dnsProviders!.customProviders.count, 5)
         
         let dnsProvidersMigratable = dnsProviders as! DnsProvidersServiceMigratable
@@ -110,6 +113,9 @@ class DnsProvidersMigrationsTest: XCTestCase {
         
         XCTAssertEqual(dnsProviders!.customProviders[4].name, "Test Provider 5")
         XCTAssertEqual(dnsProviders!.customProviders[4].servers![0].upstreams[0], "sdns://BAcAAAAAAAAAAAAQZG9oLnRpYXIuYXBwOjM4Mg" /*quic://doh.tiar.app:382*/)
+        
+        // charck active server migrated
+        XCTAssertEqual(dnsProviders!.activeDnsServer?.upstreams.first, "quic://doh.tiar.app:784")
         
         XCTAssert(vpnManager.updateCalled)
     }

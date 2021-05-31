@@ -117,6 +117,9 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                 let newUpstream = addPortToUpstreamIfNeeded(upstream)
                 if newUpstream != upstream {
                     serverToMigrate.upstreams = [newUpstream]
+                    if serverToMigrate.serverId == activeDnsServer?.serverId {
+                        activeDnsServer = serverToMigrate
+                    }
                     vpnManager?.updateSettings(completion: nil)
                 }
             }
@@ -131,6 +134,9 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                         
                         stamp.providerName = newUpstream
                         serverToMigrate.upstreams = [stamp.stringValue]
+                        if serverToMigrate.serverId == activeDnsServer?.serverId {
+                            activeDnsServer = serverToMigrate
+                        }
                         vpnManager?.updateSettings(completion: nil)
                     }
                 }
