@@ -103,7 +103,7 @@ class DnsProvidersMigrationsTest: XCTestCase {
         XCTAssertEqual(dnsProviders!.customProviders[0].servers![0].upstreams[0], "quic://doh.tiar.app:784")
         
         XCTAssertEqual(dnsProviders!.customProviders[1].name, "Test Provider 2")
-        XCTAssertEqual(dnsProviders!.customProviders[1].servers![0].upstreams[0], "quic://dns.adguard.com")
+        XCTAssertEqual(dnsProviders!.customProviders[1].servers![0].upstreams[0], "quic://dns.adguard.com:784")
         
         XCTAssertEqual(dnsProviders!.customProviders[2].name, "Test Provider 3")
         XCTAssertEqual(dnsProviders!.customProviders[2].servers![0].upstreams[0], "quic://doh.tiar.app:333")
