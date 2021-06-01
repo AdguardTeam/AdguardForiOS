@@ -23,7 +23,42 @@ class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
 
     var extensionContext: NSExtensionContext?
     
+    private lazy var notifications: UserNotificationServiceProtocol = { UserNotificationService() }()
+    
+    override init() {
+        super.init()
+        
+        let resources = AESharedResources()
+        
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+        let isDebugLogs = resources.isDebugLogs
+        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+    }
+    
     func beginRequest(with context: NSExtensionContext) {
-        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+        context.getCurrentPageHost { [weak self] host in
+            print(host)
+            self?.notifications.postNotification(title: "This shortcut is supposed to be launched only on YouTube.", body: "kek", userInfo: nil)
+        }
+        context.completeRequest(returningItems: [], completionHandler: nil)
+    }
+}
+
+extension NSExtensionContext {
+    func getCurrentPageHost(_ onHostRevealed: @escaping (_ host: String?) -> Void) {
+        guard let inputItem = self.inputItems.first as? NSExtensionItem,
+              let itemProvider = inputItem.attachments?.first,
+              itemProvider.hasItemConformingToTypeIdentifier("public.url")
+              else {
+            onHostRevealed(nil)
+            return
+        }
+        
+        itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { result, error in
+            let url = result as? URL
+            onHostRevealed(url?.host)
+        }
     }
 }
