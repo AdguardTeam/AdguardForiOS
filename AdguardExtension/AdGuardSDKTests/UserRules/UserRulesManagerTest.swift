@@ -37,7 +37,7 @@ class UserRulesManagerTest: XCTestCase {
                      UserRule(ruleText: "foo10")]
     
     func testAllowlistRulesManager() {
-        guard let allowlistRulesManager = allowlistRulesManager else { return }
+        guard let allowlistRulesManager = allowlistRulesManager else { return XCTFail() }
         do {
             try testAddRule(userRuleManager: allowlistRulesManager)
             try testAddRules(userRuleManager: allowlistRulesManager)
@@ -51,7 +51,7 @@ class UserRulesManagerTest: XCTestCase {
     }
     
     func testInvertedAllowlistRulesManager() {
-        guard let invertedAllowlistRulesManager = invertedAllowlistRulesManager else { return }
+        guard let invertedAllowlistRulesManager = invertedAllowlistRulesManager else { return XCTFail() }
         do {
             try testAddRule(userRuleManager: invertedAllowlistRulesManager)
             try testAddRules(userRuleManager: invertedAllowlistRulesManager)
@@ -65,7 +65,7 @@ class UserRulesManagerTest: XCTestCase {
     }
     
     func testBlockinglistRulesManager() {
-        guard let blocklistRulesManager = blocklistRulesManager else { return }
+        guard let blocklistRulesManager = blocklistRulesManager else { return XCTFail() }
         do {
             try testAddRule(userRuleManager: blocklistRulesManager)
             try testAddRules(userRuleManager: blocklistRulesManager)
