@@ -85,7 +85,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
         do {
             let tags = try filtersStorage.getTagsForFilter(withId: -123)
             XCTAssert(tags.isEmpty)
-            try filtersStorage.insertTagsForFilter(withId: -123, tags: testTags)
+            try filtersStorage.insertOrReplaceTagsForFilter(withId: -123, tags: testTags)
             let insertedTags = try filtersStorage.getTagsForFilter(withId: 1)
             XCTAssert(insertedTags.count > tags.count)
         } catch {
@@ -98,7 +98,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
         do {
             let tags = try filtersStorage.getTagsForFilter(withId: 1)
             XCTAssertFalse(tags.isEmpty)
-            try filtersStorage.insertTagsForFilter(withId: 1, tags: testTags)
+            try filtersStorage.insertOrReplaceTagsForFilter(withId: 1, tags: testTags)
             let insertedTags = try filtersStorage.getTagsForFilter(withId: 1)
             XCTAssertEqual(insertedTags.count, tags.count + 3)
             

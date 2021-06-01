@@ -64,13 +64,13 @@ class FiltersMetaStorage_GroupLocalizationsTest: XCTestCase {
         do {
             guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
             XCTAssertNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "foo"))
-            try filtersStorage.insertLocalizationForGroup(groupId: group.groupId, lang: "foo", name: "bar")
+            try filtersStorage.insertOrReplaceLocalizationForGroup(groupId: group.groupId, lang: "foo", name: "bar")
             var localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "foo")
             XCTAssertNotNil(localization)
             XCTAssertEqual(localization?.name, "bar")
             
             XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
-            try filtersStorage.insertLocalizationForGroup(groupId: group.groupId, lang: "en", name: "fooEn")
+            try filtersStorage.insertOrReplaceLocalizationForGroup(groupId: group.groupId, lang: "en", name: "fooEn")
             localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssertEqual(localization?.name, "fooEn")

@@ -61,7 +61,7 @@ extension FiltersMetaStorageProtocol {
     }
     
     //TODO: Remove this method if it would not be used
-    func insertLocalizationForGroup(groupId: Int, lang: String, name: String) throws {
+    func insertOrReplaceLocalizationForGroup(groupId: Int, lang: String, name: String) throws {
         // Query: INSERT OR REPLACE INTO filter_group_localization (group_id, lang, name)
         let query = FilterGroupLocalizationsTable.table.insert(or: .replace,
                                                                FilterGroupLocalizationsTable.groupId <- groupId,

@@ -79,7 +79,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
         do {
             let langs = try filtersStorage.getLangsForFilter(withId: -1)
             XCTAssert(langs.isEmpty)
-            try filtersStorage.insertLangsIntoFilter(langs: ["foo", "bar"], forFilterId: -1)
+            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo", "bar"], forFilterId: -1)
             let insertedLangs = try filtersStorage.getLangsForFilter(withId: -1)
             XCTAssertFalse(insertedLangs.isEmpty)
         } catch {
@@ -91,7 +91,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let langs = try filtersStorage.getLangsForFilter(withId: 1)
-            try filtersStorage.insertLangsIntoFilter(langs: ["foo", "bar"], forFilterId: 1)
+            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo", "bar"], forFilterId: 1)
             let insertedLangs = try filtersStorage.getLangsForFilter(withId: 1)
             XCTAssert(insertedLangs.count > langs.count)
             
@@ -155,7 +155,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     func testDeleteLangsWithSuccess() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
-            try filtersStorage.insertLangsIntoFilter(langs: ["foo#1", "foo#2"], forFilterId: 101)
+            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo#1", "foo#2"], forFilterId: 101)
             let inserted = try filtersStorage.getLangsForFilter(withId: 101)
             XCTAssertFalse(inserted.isEmpty)
             try filtersStorage.deleteLangsForFilter(withId: 101, langs: ["foo#1", "foo#2"])

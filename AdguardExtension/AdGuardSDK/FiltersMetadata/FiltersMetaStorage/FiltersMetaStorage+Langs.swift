@@ -55,13 +55,17 @@ extension FiltersMetaStorageProtocol {
         return result
     }
     
-    func insertLangsIntoFilter(langs: [String], forFilterId filterId: Int) throws {
+    func insertOrReplaceLangsIntoFilter(langs: [String], forFilterId filterId: Int) throws {
         for lang in langs {
-            let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- filterId, FilterLangsTable.lang <- lang)
-            // Query: INSERT OR REPLACE INTO filter_langs (filter_id, lang)
-            try filtersDb.run(query)
-            Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(filterId) and lang \(lang)")
+            try insertOrReplaceLangIntoFilter(lang: lang, forFilterId: filterId)
         }
+    }
+    
+    func insertOrReplaceLangIntoFilter(lang: String, forFilterId filterId: Int) throws {
+        let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- filterId, FilterLangsTable.lang <- lang)
+        // Query: INSERT OR REPLACE INTO filter_langs (filter_id, lang)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(filterId) and lang \(lang)")
     }
     
     //TODO: Remove this method if it would not be used

@@ -69,7 +69,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
         do {
             guard let filter = try filtersStorage.getAllFilters().first else { return XCTFail() }
             XCTAssertNil(try filtersStorage.getLocalizationForFilter(withId: filter.filterId, forLanguage: "foo"))
-            try filtersStorage.insertLocalizatonForFilter(withId: filter.filterId, forLanguage: "foo", filterLocalization: .init(name: "foo", description: "bar"))
+            try filtersStorage.insertOrReplaceLocalizatonForFilter(withId: filter.filterId, forLanguage: "foo", filterLocalization: .init(name: "foo", description: "bar"))
             var localization = try filtersStorage.getLocalizationForFilter(withId: filter.filterId, forLanguage: "foo")
             XCTAssertNotNil(localization)
             XCTAssert(localization?.name == "foo")
@@ -77,7 +77,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
             
             
             XCTAssertNotNil(try filtersStorage.getLocalizationForFilter(withId: filter.filterId, forLanguage: "en"))
-            try filtersStorage.insertLocalizatonForFilter(withId: filter.filterId, forLanguage: "en", filterLocalization: .init(name: "foo", description: "bar"))
+            try filtersStorage.insertOrReplaceLocalizatonForFilter(withId: filter.filterId, forLanguage: "en", filterLocalization: .init(name: "foo", description: "bar"))
             localization = try filtersStorage.getLocalizationForFilter(withId: filter.filterId, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssert(localization?.name == "foo")

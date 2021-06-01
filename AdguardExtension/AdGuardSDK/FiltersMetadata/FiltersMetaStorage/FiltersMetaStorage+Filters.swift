@@ -175,7 +175,7 @@ extension FiltersMetaStorageProtocol {
             if let _ = try filtersDb.pluck(selectQuery) {
                 try updateFilterWithMeta(meta: meta)
             } else {
-                try addFilter(meta: meta)
+                try insertOrReplaceFilterWith(meta: meta)
             }
         }
     }
@@ -185,12 +185,12 @@ extension FiltersMetaStorageProtocol {
         let query = FiltersTable.table.where(FiltersTable.filterId == meta.filterId).update(getSettersFrom(meta: meta))
         try filtersDb.run(query)
         try deleteAllLangsForFilter(withId: meta.filterId)
-        try insertLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
-        try insertTagsForFilter(withId: meta.filterId, tags: meta.tags)
+        try insertOrReplaceLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
+        try insertOrReplaceTagsForFilter(withId: meta.filterId, tags: meta.tags)
         Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(meta.filterId)")
     }
     
-    func addFilter(meta: ExtendedFilterMetaProtocol) throws {
+    func insertOrReplaceFilterWith(meta: ExtendedFilterMetaProtocol) throws {
         var setters = getSettersFrom(meta: meta)
         setters.append(FiltersTable.isEnabled <- false)
         setters.append(FiltersTable.editable <- meta.filterId == 0)  //filterId == 0 it is custom filter id

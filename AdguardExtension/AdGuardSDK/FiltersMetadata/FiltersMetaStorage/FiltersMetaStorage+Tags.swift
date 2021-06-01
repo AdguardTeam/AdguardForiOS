@@ -76,17 +76,20 @@ extension FiltersMetaStorageProtocol {
         return result
     }
     
-    func insertTagsForFilter(withId filterId: Int, tags: [ExtendedFiltersMeta.Tag]) throws {
-        
+    func insertOrReplaceTagsForFilter(withId filterId: Int, tags: [ExtendedFiltersMeta.Tag]) throws {
         for tag in tags {
-            // Query: INSERT OR REPLACE INTO filter_tags (filter_id, tag_id, type, name)
-            let query = FilterTagsTable.table.insert(or: .replace, FilterTagsTable.filterId <- filterId,
-                                                     FilterTagsTable.tagId <- tag.tagId,
-                                                     FilterTagsTable.type <- tag.tagTypeId,
-                                                     FilterTagsTable.name <- tag.tagName)
-            try filtersDb.run(query)
-            Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
+            try insertOrReplaceTagForFilter(withId: filterId, tag: tag)
         }
+    }
+    
+    func insertOrReplaceTagForFilter(withId filterId: Int, tag: ExtendedFiltersMeta.Tag) throws {
+        // Query: INSERT OR REPLACE INTO filter_tags (filter_id, tag_id, type, name)
+        let query = FilterTagsTable.table.insert(or: .replace, FilterTagsTable.filterId <- filterId,
+                                                 FilterTagsTable.tagId <- tag.tagId,
+                                                 FilterTagsTable.type <- tag.tagTypeId,
+                                                 FilterTagsTable.name <- tag.tagName)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
     }
     
     //TODO: Remove this method if it would not be used

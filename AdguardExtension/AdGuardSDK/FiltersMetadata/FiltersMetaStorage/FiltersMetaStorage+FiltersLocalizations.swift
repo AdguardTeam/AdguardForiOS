@@ -60,7 +60,7 @@ extension FiltersMetaStorageProtocol {
         return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
     }
     
-    func insertLocalizatonForFilter(withId id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
+    func insertOrReplaceLocalizatonForFilter(withId id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_localizations (filter_id, lang, name, description)
         
         let query = FilterLocalizationsTable.table
