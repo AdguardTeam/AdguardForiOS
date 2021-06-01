@@ -117,7 +117,8 @@ extension FiltersMetaStorageProtocol {
     func insertOrReplaceGroups(groups: [ExtendedGroupMetaProtocol]) throws {
         for group in groups {
             // Query: INSERT OR REPLACE INTO filter_groups (group_id, display_number, name, is_enabled)
-            let query = FilterGroupsTable.table.insert(FilterGroupsTable.groupId <- group.groupId,
+            let query = FilterGroupsTable.table.insert(or: .replace,
+                                                       FilterGroupsTable.groupId <- group.groupId,
                                                        FilterGroupsTable.name <- group.groupName,
                                                        FilterGroupsTable.displayNumber <- group.displayNumber,
                                                        FilterGroupsTable.isEnabled <- group.isEnabled)
