@@ -135,4 +135,14 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
             XCTFail("\(error)")
         }
     }
+    
+    func testUpdateEnabledFilterStateWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let filter = try filtersStorage.getAllFilters().first else { return XCTFail() }
+            try filtersStorage.updateEnabledFilterStateForFilter(withId: filter.filterId, enabled: true)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
 }
