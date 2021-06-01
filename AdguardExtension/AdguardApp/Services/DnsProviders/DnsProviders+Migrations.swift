@@ -102,8 +102,6 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
         let allCustomServers = customProviders.flatMap { $0.servers ?? [] }
         DDLogDebug("All custom servers: \(allCustomServers.flatMap { $0.upstreams }.joined(separator: "; "))")
         
-        let adguardDoqHosts = ["quic://dns.adguard.com", "quic://dns-family.adguard.com", "quic://dns-unfiltered.adguard.com"]
-        
         for provider in customProviders {
             guard provider.servers?.count == 1,
                   let serverToMigrate = provider.servers?.first
@@ -111,8 +109,7 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
             
             // Add port to DoQ server if needed
             if serverToMigrate.dnsProtocol == .doq,
-               let upstream = serverToMigrate.upstreams.first,
-               !adguardDoqHosts.contains(upstream) {
+               let upstream = serverToMigrate.upstreams.first {
                 
                 let newUpstream = addPortToUpstreamIfNeeded(upstream)
                 if newUpstream != upstream {
