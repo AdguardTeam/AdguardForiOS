@@ -38,8 +38,8 @@ class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
     }
     
     func beginRequest(with context: NSExtensionContext) {
-        context.getCurrentPageHost { [weak self] host in
-            print(host)
+        self.extensionContext = context
+        context.getJsScriptResult { [weak self] host in
             self?.notifications.postNotification(title: "This shortcut is supposed to be launched only on YouTube.", body: "kek", userInfo: nil)
         }
         context.completeRequest(returningItems: [], completionHandler: nil)
@@ -47,18 +47,17 @@ class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
 }
 
 extension NSExtensionContext {
-    func getCurrentPageHost(_ onHostRevealed: @escaping (_ host: String?) -> Void) {
+    func getJsScriptResult(_ onJsExecuted: @escaping (_ host: String?) -> Void) {
         guard let inputItem = self.inputItems.first as? NSExtensionItem,
               let itemProvider = inputItem.attachments?.first,
-              itemProvider.hasItemConformingToTypeIdentifier("public.url")
+              itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypePropertyList))
               else {
-            onHostRevealed(nil)
+            onJsExecuted(nil)
             return
         }
         
-        itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { result, error in
-            let url = result as? URL
-            onHostRevealed(url?.host)
+        itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { [weak self] results, error in
+            
         }
     }
 }

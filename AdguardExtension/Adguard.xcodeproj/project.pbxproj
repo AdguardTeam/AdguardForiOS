@@ -3437,6 +3437,8 @@
 		7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsImplementation.swift; sourceTree = "<group>"; };
 		7EC97C3E26663916005C950C /* SharedResources+DebugLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+DebugLogs.swift"; sourceTree = "<group>"; };
 		7EC97C59266639A8005C950C /* SharedResources+Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+Statistics.swift"; sourceTree = "<group>"; };
+		7EC97CA6266648F6005C950C /* YouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
+		7EC97CA726664939005C950C /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -4716,6 +4718,7 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
+				7EC97CA726664939005C950C /* ProYouTubeAdsActionExtension.entitlements */,
 				D093AA18253447940015351F /* setappPublicKey.pem */,
 				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
 				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
@@ -4994,6 +4997,7 @@
 		7E69C531265BA53400EA9DBA /* YouTubeAdsActionExtension */ = {
 			isa = PBXGroup;
 			children = (
+				7EC97CA6266648F6005C950C /* YouTubeAdsActionExtension.entitlements */,
 				7E69C56B265BC2B800EA9DBA /* BlockYouTubeAds.js */,
 				7E69C532265BA53400EA9DBA /* Media.xcassets */,
 				7E69C534265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift */,
@@ -10918,6 +10922,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = YouTubeAdsActionExtension/YouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10959,6 +10964,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = YouTubeAdsActionExtension/YouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10994,6 +11000,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ProYouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11035,6 +11042,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ProYouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
