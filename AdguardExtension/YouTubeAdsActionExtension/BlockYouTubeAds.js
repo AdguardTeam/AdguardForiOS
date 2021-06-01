@@ -15,24 +15,13 @@
  * along with AdGuard's Block YouTube Ads.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global Response, window, navigator, document, MutationObserver, completion */
+/* global Response, window, navigator, document, MutationObserver */
 
 /**
- * Note that Shortcut scripts are executed in their own context (window)
- * and we don't have direct access to the real page window.
- *
- * In order to overcome this, we add a "script" to the page which is
- * executed in the proper context. The script content is inside
- * the "pageScript" function.
+ * The function that implements all the logic.
+ * Returns the run status.
  */
-(() => {
-    // "completion" function is only defined if this script is launched as Shortcut
-    // in other cases we simply polyfill it.
-    let finish = (m) => { console.log(m); };
-    if (typeof completion !== 'undefined') {
-        finish = completion;
-    }
-
+function runBlockYoutube() {
     const locales = {
         en: {
             logo: 'with&nbsp;AdGuard',
@@ -94,6 +83,12 @@
             wrongDomain: '※このショートカットは、YouTubeでのみ適用されることを想定しています。',
             success: 'YouTubeが広告なしになりました！※YouTubeページを再読み込みした場合は、このショートカットを再度実行する必要がありますのでご注意ください。',
         },
+        uk: {
+            logo: 'з&nbsp;AdGuard',
+            alreadyExecuted: 'Ця швидка команда вже виконується.',
+            wrongDomain: 'Цю швидку команду слід запускати лише на YouTube.',
+            success: 'Тепер YouTube без реклами! Проте після перезавантаження сторінки необхідно знову запустити цю швидку команду.',
+        },
     };
 
     /**
@@ -120,19 +115,30 @@
     };
 
     if (document.getElementById('block-youtube-ads-logo')) {
-        finish(getMessage('alreadyExecuted'));
-        return;
+        return {
+            success: false,
+            status: 'alreadyExecuted',
+            message: getMessage('alreadyExecuted'),
+        };
     }
 
     if (window.location.hostname !== 'www.youtube.com'
         && window.location.hostname !== 'm.youtube.com'
         && window.location.hostname !== 'music.youtube.com') {
-        finish(getMessage('wrongDomain'));
-        return;
+        return {
+            success: false,
+            status: 'wrongDomain',
+            message: getMessage('wrongDomain'),
+        };
     }
 
     /**
-     * This function will be executed in the page context
+     * Note that Shortcut scripts are executed in their own context (window)
+     * and we don't have direct access to the real page window.
+     *
+     * In order to overcome this, we add a "script" to the page which is
+     * executed in the proper context. The script content is inside
+     * the "pageScript" function.
      */
     const pageScript = () => {
         const LOGO_ID = 'block-youtube-ads-logo';
@@ -433,5 +439,34 @@
     document.head.appendChild(script);
     document.head.removeChild(script);
 
-    finish(getMessage('success'));
-})();
+    return {
+        success: true,
+        status: 'success',
+        message: getMessage('success'),
+    };
+}
+
+// eslint-disable-next-line func-names
+const ExtensionJavaScriptClass = function () { };
+
+ExtensionJavaScriptClass.prototype = {
+    run: (arguments) => {
+        try {
+            const result = runBlockYoutube();
+            arguments.completionFunction(result);
+        } catch (ex) {
+            arguments.completionFunction({
+                success: false,
+                status: 'error',
+                message: ex.toString(),
+            });
+        }
+    },
+    finalize: () => {
+        // Do nothing
+        console.log('finalize called');
+    },
+};
+// The JavaScript file must contain a global object named "ExtensionPreprocessingJS".
+// eslint-disable-next-line no-unused-vars
+var ExtensionPreprocessingJS = new ExtensionJavaScriptClass();

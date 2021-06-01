@@ -29,6 +29,10 @@ class UserNotificationServiceMock: UserNotificationServiceProtocol {
         postNotificationWasCalled = true
     }
     
+    func postNotificationWithoutBadge(title: String, body: String?) {
+        
+    }
+    
     func postNotificationInForeground(body: String, title: String) {
         
     }

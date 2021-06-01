@@ -575,6 +575,12 @@
 		7E69C5DE265BE70D00EA9DBA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C532265BA53400EA9DBA /* Media.xcassets */; };
 		7E69C5DF265BE71B00EA9DBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E69C543265BA8E400EA9DBA /* InfoPlist.strings */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
+		7E732B89266678EE0058721C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		7E732B8A266678EF0058721C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		7E732B8B2666825D0058721C /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
+		7E732B8C2666825D0058721C /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
+		7E732B8D2666834E0058721C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		7E732B8F2666834F0058721C /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E77144D2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */; };
@@ -6617,6 +6623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E69C541265BA8E400EA9DBA /* InfoPlist.strings in Resources */,
+				7E732B8A266678EF0058721C /* Localizable.strings in Resources */,
 				7E69C56C265BC2B900EA9DBA /* BlockYouTubeAds.js in Resources */,
 				7E69C533265BA53400EA9DBA /* Media.xcassets in Resources */,
 			);
@@ -6627,6 +6634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E69C5DE265BE70D00EA9DBA /* Media.xcassets in Resources */,
+				7E732B89266678EE0058721C /* Localizable.strings in Resources */,
 				7E69C5DF265BE71B00EA9DBA /* InfoPlist.strings in Resources */,
 				7E69C5DC265BE6FC00EA9DBA /* BlockYouTubeAds.js in Resources */,
 			);
@@ -8305,7 +8313,9 @@
 				7E69C535265BA53400EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */,
 				7EC97C6926663D99005C950C /* NSDate+Utils.m in Sources */,
 				7EC97C8926663E97005C950C /* DDFileLogger.m in Sources */,
+				7E732B8B2666825D0058721C /* String+Utils.swift in Sources */,
 				7EC97C9226663F1E005C950C /* DDTTYLogger.m in Sources */,
+				7E732B8D2666834E0058721C /* UIColor+Utils.swift in Sources */,
 				7EC97C7426663DC8005C950C /* NSURL+Utils.m in Sources */,
 				7EC97C372666367D005C950C /* CocoaLumberjack.swift in Sources */,
 				7EC97C7D26663E5E005C950C /* ACLFileLocker.m in Sources */,
@@ -8335,7 +8345,9 @@
 				7E69C5DD265BE70700EA9DBA /* YouTubeAdsRequestHandler.swift in Sources */,
 				7EC97C6A26663D99005C950C /* NSDate+Utils.m in Sources */,
 				7EC97C8826663E96005C950C /* DDFileLogger.m in Sources */,
+				7E732B8C2666825D0058721C /* String+Utils.swift in Sources */,
 				7EC97C9126663F1E005C950C /* DDTTYLogger.m in Sources */,
+				7E732B8F2666834F0058721C /* UIColor+Utils.swift in Sources */,
 				7EC97C7326663DC7005C950C /* NSURL+Utils.m in Sources */,
 				7EC97C382666367D005C950C /* CocoaLumberjack.swift in Sources */,
 				7EC97C7E26663E5F005C950C /* ACLFileLocker.m in Sources */,

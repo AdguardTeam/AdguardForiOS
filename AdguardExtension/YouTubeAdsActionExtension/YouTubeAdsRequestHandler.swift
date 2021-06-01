@@ -19,6 +19,40 @@
 import UIKit
 import MobileCoreServices
 
+struct YouTubeAdsJsResult {
+    
+    enum Status: String {
+        case success
+        case wrongDomain
+        case alreadyExecuted
+        case error
+        
+        var title: String {
+            switch self {
+            case .success: return String.localizedString("youtube_script_success_title")
+            case .wrongDomain: return String.localizedString("youtube_script_wrong_domain_title")
+            case .alreadyExecuted: return String.localizedString("youtube_script_already_executed_title")
+            case .error: return String.localizedString("youtube_script_error_title")
+            }
+        }
+    }
+    
+    let successfullyExecuted: Bool
+    let status: Status
+    
+    init?(jsDict: [String: Any]) {
+        guard let successfullyExecuted = jsDict["success"] as? Bool,
+              let statusString = jsDict["status"] as? String,
+              let status = Status(rawValue: statusString)
+        else {
+            return nil
+        }
+        
+        self.successfullyExecuted = successfullyExecuted
+        self.status = status
+    }
+}
+
 class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
 
     var extensionContext: NSExtensionContext?
@@ -33,21 +67,23 @@ class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        DDLogInfo("(YouTubeAdsRequestHandler) Start with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
     
     func beginRequest(with context: NSExtensionContext) {
         self.extensionContext = context
-        context.getJsScriptResult { [weak self] host in
-            self?.notifications.postNotification(title: "This shortcut is supposed to be launched only on YouTube.", body: "kek", userInfo: nil)
+        context.getJsScriptResult { [weak self] result in
+            if let result = result {
+                self?.notifications.postNotificationWithoutBadge(title: result.status.title, body: nil)
+            }
+            context.completeRequest(returningItems: [], completionHandler: nil)
         }
-        context.completeRequest(returningItems: [], completionHandler: nil)
     }
 }
 
-extension NSExtensionContext {
-    func getJsScriptResult(_ onJsExecuted: @escaping (_ host: String?) -> Void) {
+fileprivate extension NSExtensionContext {
+    func getJsScriptResult(_ onJsExecuted: @escaping (_ jsResult: YouTubeAdsJsResult?) -> Void) {
         guard let inputItem = self.inputItems.first as? NSExtensionItem,
               let itemProvider = inputItem.attachments?.first,
               itemProvider.hasItemConformingToTypeIdentifier(String(kUTTypePropertyList))
@@ -56,8 +92,28 @@ extension NSExtensionContext {
             return
         }
         
-        itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { [weak self] results, error in
+        itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { results, error in
             
+            if let error = error {
+                DDLogError("(YouTubeAdsRequestHandler) Error: \(error)")
+                onJsExecuted(nil)
+                return
+            }
+            
+            guard let jsResultDict = results as? [String: Any] else {
+                DDLogError("(YouTubeAdsRequestHandler) Error - result dict incorrect. Results: \(results.debugDescription )")
+                onJsExecuted(nil)
+                return
+            }
+            
+            guard let youTubeAdsJsResultDict = jsResultDict[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
+                DDLogError("(YouTubeAdsRequestHandler) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
+                onJsExecuted(nil)
+                return
+            }
+    
+            let youTubeAdsJsResult = YouTubeAdsJsResult(jsDict: youTubeAdsJsResultDict)
+            onJsExecuted(youTubeAdsJsResult)
         }
     }
 }
