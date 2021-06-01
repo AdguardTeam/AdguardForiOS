@@ -982,4 +982,4 @@
 "youtube_script_already_executed_title" = "The extension has already been executed";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "Unknown error occured while removing YouTube ads";
+"youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";
