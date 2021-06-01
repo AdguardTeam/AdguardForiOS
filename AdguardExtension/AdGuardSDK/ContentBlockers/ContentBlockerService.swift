@@ -290,7 +290,7 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var agFilters = [AdGuardFilter]()
         
         for (group, filterIds) in filtersByGroup {
-            let filters = filtersStorage.getFilters(withIds: filterIds)
+            let filters = filtersStorage.getFiltersContentForFilters(withIds: filterIds)
             
             for (_, content) in filters {
                 agFilters.append(AdGuardFilter(text: content, group: group))

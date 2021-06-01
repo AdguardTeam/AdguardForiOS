@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterTagsTable; filter_tags table */
-fileprivate struct FilterTagsTable {
+struct FilterTagsTable {
     // Properties from table
     let filterId: Int
     let tagId: Int
@@ -50,28 +50,22 @@ fileprivate struct FilterTagsTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns all tags from database
-    func getAllTags() throws -> [ExtendedFiltersMeta.Tag] {
+    func getAllTags() throws -> [FilterTagsTable] {
         // Query: select * from filter_tags order by tag_id
         let query = FilterTagsTable.table.order(FilterTagsTable.tagId)
         
-        let result: [ExtendedFiltersMeta.Tag] = try filtersDb.prepare(query).compactMap { tag in
-            let dbTag = FilterTagsTable(dbTag: tag)
-            return ExtendedFiltersMeta.Tag(tagId: dbTag.tagId, tagTypeId: dbTag.type, tagName: dbTag.name)
-        }
+        let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
         Logger.logDebug("(FiltersMetaStorage) - allTags returning \(result.count) tags objects")
         return result
     }
     
     // Returns array of tags for filter with specified id
-    func getTagsForFilter(withId id: Int) throws -> [ExtendedFiltersMeta.Tag] {
+    func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
         // Query: select * from filter_tags where filter_id = id order by tag_id
         let query = FilterTagsTable.table.filter(id == FilterTagsTable.filterId)
                                          .order(FilterTagsTable.tagId)
         
-        let result: [ExtendedFiltersMeta.Tag] = try filtersDb.prepare(query).compactMap { tag in
-            let dbTag = FilterTagsTable(dbTag: tag)
-            return ExtendedFiltersMeta.Tag(tagId: dbTag.tagId, tagTypeId: dbTag.type, tagName: dbTag.name)
-        }
+        let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
         Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")
         return result
     }

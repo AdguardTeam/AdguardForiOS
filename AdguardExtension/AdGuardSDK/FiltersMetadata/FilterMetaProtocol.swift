@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FilterMetaProtocol: Decodable {
+protocol FilterMetaProtocol {
     var name: String? { get }
     var description: String? { get }
     var version: String? { get }

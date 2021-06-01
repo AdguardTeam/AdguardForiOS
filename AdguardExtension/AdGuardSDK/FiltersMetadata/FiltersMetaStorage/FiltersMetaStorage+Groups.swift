@@ -19,31 +19,11 @@
 import Foundation
 import SQLite
 
-// MARK: - ExtendedGroupMeta
-
-protocol ExtendedGroupMetaProtocol: GroupMetaProtocol {
-    var isEnabled: Bool { get }
-}
-
-struct ExtendedGroupMeta: ExtendedGroupMetaProtocol {
-    let groupId: Int
-    let groupName: String
-    let displayNumber: Int
-    var isEnabled: Bool
-
-    init(groupId: Int, groupName: String, displayNumber: Int, isEnabled: Bool) {
-        self.groupId = groupId
-        self.groupName = groupName
-        self.displayNumber = displayNumber
-        self.isEnabled = isEnabled
-    }
-}
-
 /* FilterGroupsTable; filter_groups table */
-fileprivate struct FilterGroupsTable {
+struct FilterGroupsTable {
     // Properties from table
     let groupId: Int
-    let name: String?
+    let name: String
     let displayNumber: Int
     let isEnabled: Bool
     
@@ -55,6 +35,14 @@ fileprivate struct FilterGroupsTable {
     static let name = Expression<String>("name")
     static let displayNumber = Expression<Int>("display_number")
     static let isEnabled = Expression<Bool>("is_enabled")
+    
+    // Localized initializer
+    init(dbGroup: Row, localizedName: String) {
+        self.groupId = dbGroup[FilterGroupsTable.groupId]
+        self.name = localizedName
+        self.displayNumber = dbGroup[FilterGroupsTable.displayNumber]
+        self.isEnabled = dbGroup[FilterGroupsTable.isEnabled]
+    }
     
     // Initializer from DB result
     init(dbGroup: Row) {
@@ -70,36 +58,30 @@ fileprivate struct FilterGroupsTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns all groups from database
-    func getAllGroups() throws -> [ExtendedGroupMetaProtocol] {
+    func getAllGroups() throws -> [FilterGroupsTable] {
         // Query: select * from filter_groups order by display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
-            let dbGroup = FilterGroupsTable(dbGroup: group)
-            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: dbGroup.name ?? "", displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
-        }
+        let result: [FilterGroupsTable] = try filtersDb.prepare(query).map { FilterGroupsTable(dbGroup: $0) }
         Logger.logDebug("(FiltersMetaStorage) - allGroups returning \(result.count) groups objects")
         return result
     }
     
     // Returns all groups with localization for specified language from database
-    func getAllLocalizedGroups(forLanguage lang: String) throws -> [ExtendedGroupMetaProtocol] {
+    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
         // Query: select * from filter_groups order by display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
-        let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
+        let result: [FilterGroupsTable] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
             
-            /*
-                If there is no localized group name we trying to get default english localization and if it is steel nil return nil
-             */
-            var localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+            /* If there is no localized group name we trying to get default english localization and if it is steel nil return nil */
+            var localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
-                localizedName = try getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
+                localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             }
-            guard let name = localizedName else { return nil }
             
-            return ExtendedGroupMeta(groupId: dbGroup.groupId, groupName: name, displayNumber: dbGroup.displayNumber, isEnabled: dbGroup.isEnabled)
+            return FilterGroupsTable(dbGroup: group, localizedName: localizedName ?? dbGroup.name)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
         return result

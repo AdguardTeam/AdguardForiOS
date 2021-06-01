@@ -18,10 +18,22 @@
 
 import Foundation
 
-protocol FilterServiceNewProtocol {
-    
-}
-
-final class FilterServiceNew {
-    
+extension SafariGroup {
+    enum GroupType: Int {
+        case ads = 1
+        case privacy = 2
+        case socialWidgets = 3
+        case annoyances = 4
+        case security = 5
+        case other = 6
+        case languageSpecific = 7
+        case custom = 101
+        
+        var proOnly: Bool {
+            switch self {
+            case .security, .custom: return true
+            default: return false
+            }
+        }
+    }
 }

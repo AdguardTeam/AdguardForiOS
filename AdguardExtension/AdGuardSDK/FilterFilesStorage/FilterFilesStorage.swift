@@ -35,12 +35,20 @@ public protocol FilterFilesStorageProtocol {
     func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void)
     
     /**
+     Returns filter file content by **filter id**
+     - Parameter id: Filter unique id
+     
+     - Returns: Filter file content if filter file exists, nil otherwise
+     */
+    func getFilterContentForFilter(withId id: Int) -> String?
+    
+    /**
      Returns filter files content by filters id-s
      - Parameter identifiers: Array of filter id-s whose content should be returned
      
      - Returns: A dictionary of existing filters files content by filter id-s
      */
-    func getFilters(withIds identifiers: [Int]) -> [Int: String]
+    func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int: String]
     
     /**
      Saves **content** of filter to the file of filter with specified **id**
@@ -86,24 +94,30 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
     
-    public func getFilters(withIds identifiers: [Int]) -> [Int : String] {
+    public func getFilterContentForFilter(withId id: Int) -> String? {
+        let fileUrl = fileUrlForFilter(withId: id)
+        
+        guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
+            Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
+            
+            // try to get presaved filter file
+            if  let presavedFilterFileUrl = defaultFileUrlForFilter(withId: id),
+                let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
+                Logger.logInfo("FiltersStorage return default filter for filter with id=\(id)")
+                return content
+            }
+            return nil
+        }
+        return content
+    }
+    
+    public func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
         var result: [Int: String] = [:]
         
         for id in identifiers {
-            let fileUrl = fileUrlForFilter(withId: id)
-            
-            guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-                Logger.logError("FiltersStorage getFilters error. Can not read filter with url: \(fileUrl)")
-                
-                // try to get presaved filter file
-                if  let presavedFilterFileUrl = defaultFileUrlForFilter(withId: id),
-                    let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
-                    Logger.logInfo("FiltersStorage return default filter for filter with id=\(id)")
-                    result[id] = content
-                }
-                continue
+            if let content = getFilterContentForFilter(withId: id) {
+                result[id] = content
             }
-            result[id] = content
         }
         return result
     }

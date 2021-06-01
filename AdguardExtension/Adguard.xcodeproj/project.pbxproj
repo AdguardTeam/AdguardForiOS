@@ -786,6 +786,15 @@
 		7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
 		7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
 		7EC97C16265FC04F005C950C /* FilterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FilterServiceNew.swift */; };
+		7EC97C19265FDB08005C950C /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C18265FDB08005C950C /* SafariGroup.swift */; };
+		7EC97C1B265FE28B005C950C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1A265FE28B005C950C /* Configuration.swift */; };
+		7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1A265FE28B005C950C /* Configuration.swift */; };
+		7EC97C1D265FEF85005C950C /* FilterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FilterServiceNew.swift */; };
+		7EC97C1E265FEF85005C950C /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C18265FDB08005C950C /* SafariGroup.swift */; };
+		7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */; };
+		7EC97C21265FF384005C950C /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */; };
+		7EC97C232660FDE1005C950C /* SafariGroup+GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C222660FDE1005C950C /* SafariGroup+GroupType.swift */; };
+		7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C222660FDE1005C950C /* SafariGroup+GroupType.swift */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -3776,6 +3785,10 @@
 		7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C15265FC04F005C950C /* FilterServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterServiceNew.swift; sourceTree = "<group>"; };
+		7EC97C18265FDB08005C950C /* SafariGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroup.swift; sourceTree = "<group>"; };
+		7EC97C1A265FE28B005C950C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariGroup+Filter.swift"; sourceTree = "<group>"; };
+		7EC97C222660FDE1005C950C /* SafariGroup+GroupType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariGroup+GroupType.swift"; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -5731,6 +5744,17 @@
 			path = UserRulesStorage;
 			sourceTree = "<group>";
 		};
+		7EC97C17265FDAE9005C950C /* FilterServiceNew */ = {
+			isa = PBXGroup;
+			children = (
+				7EC97C15265FC04F005C950C /* FilterServiceNew.swift */,
+				7EC97C18265FDB08005C950C /* SafariGroup.swift */,
+				7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */,
+				7EC97C222660FDE1005C950C /* SafariGroup+GroupType.swift */,
+			);
+			path = FilterServiceNew;
+			sourceTree = "<group>";
+		};
 		7EC9A06B238815EA007EBB24 /* AddNewCustomFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -5870,7 +5894,7 @@
 				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
 				D03E537321BA82BD00C62152 /* FiltersService.swift */,
 				D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */,
-				7EC97C15265FC04F005C950C /* FilterServiceNew.swift */,
+				7EC97C17265FDAE9005C950C /* FilterServiceNew */,
 			);
 			path = ContentBlockers;
 			sourceTree = "<group>";
@@ -6023,6 +6047,7 @@
 				D033980224318C1900F6B9DE /* ContentBlockers */,
 				D0BDB3F8263064FF007D9BC6 /* AdGuardSDK.h */,
 				D0BDB3F9263064FF007D9BC6 /* Info.plist */,
+				7EC97C1A265FE28B005C950C /* Configuration.swift */,
 			);
 			path = AdGuardSDK;
 			sourceTree = "<group>";
@@ -8923,6 +8948,7 @@
 				7E1C34692652940400A4490E /* DefaultDatabaseManager.swift in Sources */,
 				2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */,
 				2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */,
+				7EC97C1D265FEF85005C950C /* FilterServiceNew.swift in Sources */,
 				7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */,
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
@@ -8938,18 +8964,22 @@
 				2434A3E62657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift in Sources */,
 				7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
+				7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */,
 				2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */,
+				7EC97C1E265FEF85005C950C /* SafariGroup.swift in Sources */,
 				7E69C5042656617C00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */,
 				7E69C5062656617C00EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
 				7E69C5032656617C00EA9DBA /* FiltersMetaStorage+Langs.swift in Sources */,
+				7EC97C21265FF384005C950C /* SafariGroup+Filter.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
 				24B7FE112656778500FED2D7 /* FiltersMetaStorage+FiltersTest.swift in Sources */,
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
+				7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */,
 				7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
@@ -10014,6 +10044,7 @@
 				7E69C51B2657C76300EA9DBA /* AllowlistRuleConverter.swift in Sources */,
 				D0BA7C6C2631B5810097029B /* RequestFactory.swift in Sources */,
 				D0BA812C263712C30097029B /* ACIOUtils.m in Sources */,
+				7EC97C1B265FE28B005C950C /* Configuration.swift in Sources */,
 				D0BA80C52636EE7D0097029B /* AASFilterSubscriptionParser.m in Sources */,
 				D0BDB4172630651D007D9BC6 /* FiltersService+metadata.swift in Sources */,
 				D0BA7DB62631C2A20097029B /* NotificationService+Utils.swift in Sources */,
@@ -10022,6 +10053,7 @@
 				D0BA7C542631B56D0097029B /* FiltersMetadataRequest.swift in Sources */,
 				7E69C501265559CC00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */,
 				7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */,
+				7EC97C19265FDB08005C950C /* SafariGroup.swift in Sources */,
 				D0BA7E6F263316E90097029B /* SafariRule.swift in Sources */,
 				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */,
@@ -10033,8 +10065,10 @@
 				D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */,
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
 				7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */,
+				7EC97C232660FDE1005C950C /* SafariGroup+GroupType.swift in Sources */,
 				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
 				D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */,
+				7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */,
 				D0BDB6F526319F56007D9BC6 /* FilterDetailedInterface.swift in Sources */,
 				D0BA7D562631C1F10097029B /* FMDatabasePool.m in Sources */,
 				D0BA7D5E2631C1F10097029B /* FMDatabaseAdditions.m in Sources */,

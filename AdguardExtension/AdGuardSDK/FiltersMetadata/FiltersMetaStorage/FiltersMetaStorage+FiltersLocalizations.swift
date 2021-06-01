@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterLocalizationsTable; filter_localizations table */
-fileprivate struct FilterLocalizationsTable {
+struct FilterLocalizationsTable {
     // Properties from table
     let filterId: Int
     let lang: String?
@@ -50,13 +50,15 @@ fileprivate struct FilterLocalizationsTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns localized strings for specified filter and language
-    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> ExtendedFiltersMetaLocalizations.FilterLocalization? {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) -> FilterLocalizationsTable? {
         // Query: select * from filter_localizations where filter_id = id and lang = lang
         let query = FilterLocalizationsTable.table.filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
         
-        guard let dbFilterLocalization = try filtersDb.pluck(query) else { return nil }
+        guard let dbFilterLocalization = try? filtersDb.pluck(query) else {
+            return nil
+        }
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
         Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
-        return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
+        return filterLocalization
     }
 }

@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol GroupMetaProtocol: Decodable {
+protocol GroupMetaProtocol {
     var groupId: Int { get }
     var groupName: String { get }
     var displayNumber: Int { get }

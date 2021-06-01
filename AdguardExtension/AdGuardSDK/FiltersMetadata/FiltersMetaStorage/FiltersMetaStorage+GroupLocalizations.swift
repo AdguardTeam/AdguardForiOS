@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterGroupLocalizationsTable; filter_group_localization table */
-fileprivate struct FilterGroupLocalizationsTable {
+struct FilterGroupLocalizationsTable {
     // Properties from table
     let groupId: Int
     let lang: String
@@ -47,16 +47,16 @@ fileprivate struct FilterGroupLocalizationsTable {
 extension FiltersMetaStorageProtocol {
     
     // Returns localized strings for specified group and language
-    func getLocalizationForGroup(withId id: Int, forLanguage lang: String) throws -> ExtendedFiltersMetaLocalizations.GroupLocalization? {
+    func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable? {
         // Query: select * from filter_group_localization where group_id = id and lang = lang
         let query = FilterGroupLocalizationsTable.table.filter(FilterGroupLocalizationsTable.groupId == id && FilterGroupLocalizationsTable.lang == lang)
         
-        guard let dbGroulLocalization = try filtersDb.pluck(query) else {
+        guard let dbGroulLocalization = try? filtersDb.pluck(query) else {
             Logger.logDebug("(FiltersMetaStorage) - query result is nil for filter with id=\(id) for lang=\(lang)")
             return nil
         }
         let groupLocalization = FilterGroupLocalizationsTable(dbGroupLocalization: dbGroulLocalization)
-        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
-        return ExtendedFiltersMetaLocalizations.GroupLocalization(name: groupLocalization.name ?? "")
+        Logger.logDebug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
+        return groupLocalization
     }
 }
