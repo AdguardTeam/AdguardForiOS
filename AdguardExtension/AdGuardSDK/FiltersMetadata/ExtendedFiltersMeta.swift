@@ -214,7 +214,7 @@ extension ExtendedFiltersMeta {
         let tagType: TagType
         let tagName: String
         
-        var tagTypeIntValue: Int {
+        var tagTypeId: Int {
             switch tagType {
             case .purpose: return 0
             case .lang: return 1

@@ -82,22 +82,24 @@ extension FiltersMetaStorageProtocol {
             // Query: INSERT OR REPLACE INTO filter_tags (filter_id, tag_id, type, name)
             let query = FilterTagsTable.table.insert(or: .replace, FilterTagsTable.filterId <- filterId,
                                                      FilterTagsTable.tagId <- tag.tagId,
-                                                     FilterTagsTable.type <- tag.tagTypeIntValue,
+                                                     FilterTagsTable.type <- tag.tagTypeId,
                                                      FilterTagsTable.name <- tag.tagName)
             try filtersDb.run(query)
             Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
         }
     }
     
+    //TODO: Remove this method if it would not be used
     func updateTagsForFilter(withId filterId: Int, oldTag: ExtendedFiltersMeta.Tag, newTag: ExtendedFiltersMeta.Tag) throws {
         // Query: UPDATE filter_tags SET "tagId" = newTag.tagId, "type" = newTag.type, "name" = newTag.name WHERE filter_id = filterId AND tagId = oldTag.tagId
         let query = FilterTagsTable.table.where(FilterTagsTable.filterId == filterId && FilterTagsTable.tagId == oldTag.tagId)
-            .update(FilterTagsTable.type <- newTag.tagTypeIntValue,
+            .update(FilterTagsTable.type <- newTag.tagTypeId,
                     FilterTagsTable.name <- newTag.tagName)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Update old tag with tagId \(oldTag.tagId) and name \(oldTag.tagName) to new tagId  \(newTag.tagId) with name \(newTag.tagName)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteAllTagsForFilter(withId filterId: Int) throws {
         //Query: DELETE FROM filter_langs WHERE ("filter_id" = tag.filterId)
         let query = FilterTagsTable.table.where(FilterTagsTable.filterId == filterId).delete()
@@ -106,6 +108,7 @@ extension FiltersMetaStorageProtocol {
     }
     
     
+    //TODO: Remove this method if it would not be used
     func deleteTagsForFilter(withId filterId: Int, tags: [ExtendedFiltersMeta.Tag]) throws {
         for tag in tags {
             // Query: DELETE FROM filter_langs WHERE ("filter_id" = withId AND tagId = tag.tagId)

@@ -73,6 +73,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
     }
     
+    //TODO: Remove this method if it would not be used
     func updateLocalizationForFilter(with id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: UPDATE filter_localizations SET lang = lang, name = filterLocalization.name, description = filterLocalization.description
         let query = FilterLocalizationsTable.table
@@ -85,6 +86,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Update localization for filter with id=\(id) for lang=\(lang)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteAllLocalizationForFilter(with id: Int) throws {
         // Query: DELETE FOR filter_localizations WHERE filter_id = id
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
@@ -92,6 +94,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Delete localization for filter with id=\(id)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteLocalizationForFilter(with id: Int, forLanguage lang: String) throws {
         // Query: DELETE FOR filter_localizations WHERE filter_id = id AND lang = lang
         let qeury = FilterLocalizationsTable.table

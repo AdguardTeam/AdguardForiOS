@@ -58,12 +58,13 @@ extension FiltersMetaStorageProtocol {
     func insertLangsIntoFilter(langs: [String], forFilterId filterId: Int) throws {
         for lang in langs {
             let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- filterId, FilterLangsTable.lang <- lang)
-            // Query: INSERT INTO filter_langs (filter_id, lang)
+            // Query: INSERT OR REPLACE INTO filter_langs (filter_id, lang)
             try filtersDb.run(query)
             Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(filterId) and lang \(lang)")
         }
     }
     
+    //TODO: Remove this method if it would not be used
     func updateFiltersLang(oldLang: String, newLang: String, forFilterId filterId: Int) throws {
         let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId && FilterLangsTable.lang == oldLang).update(FilterLangsTable.lang <- newLang)
         // Query: UPDATE filter_langs SET "lang" = newLang WHERE ("filter_id = filterId" AND "lang" == oldLang)
@@ -71,6 +72,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) -  Update row with filterID \(filterId) and old lang \(oldLang) with new lang \(newLang)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteAllLangsForFilter(withId filterId: Int) throws {
         let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId).delete()
         // Query: DELETE FROM filter_langs WHERE ("filter_id" = fitlerId)
@@ -79,6 +81,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) -  row number \(rowId) deleted for filter with id=\(filterId)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteLangsForFilter(withId filterId: Int, langs: [String]) throws {
         for lang in langs {
             let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId && FilterLangsTable.lang == lang).delete()

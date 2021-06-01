@@ -101,7 +101,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
             XCTAssertFalse(groups.isEmpty)
             for group in groups {
-                try filtersStorage.updateEnabledGroupState(groupId: group.groupId, enabled: !group.isEnabled)
+                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
             }
             
             let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
@@ -122,7 +122,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")
             XCTAssert(groups.isEmpty)
             for group in groups {
-                try filtersStorage.updateEnabledGroupState(groupId: group.groupId, enabled: !group.isEnabled)
+                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
             }
             
             let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")

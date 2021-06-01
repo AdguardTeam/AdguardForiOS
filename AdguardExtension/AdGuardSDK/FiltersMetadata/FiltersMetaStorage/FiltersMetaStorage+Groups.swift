@@ -106,13 +106,14 @@ extension FiltersMetaStorageProtocol {
     }
     
     // Enables or disables a group with specified id
-    func updateEnabledGroupState(groupId: Int, enabled: Bool) throws {
+    func setGroup(withId id: Int, enabled: Bool) throws {
         // Query: UPDATE filter_groups SET is_enabled = enabled WHERE group_id = id
-        let query = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == groupId)
+        let query = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
         try filtersDb.run(query.update(FilterGroupsTable.isEnabled <- enabled))
-        Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(groupId) was set to enabled=\(enabled)")
+        Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
     }
     
+    //TODO: Remove this method if it would not be used
     func insertGroups(groups: [ExtendedGroupMetaProtocol]) throws {
         for group in groups {
             // Query: INSERT OR REPLACE INTO filter_groups (group_id, display_number, name, is_enabled)
@@ -125,6 +126,7 @@ extension FiltersMetaStorageProtocol {
         }
     }
     
+    //TODO: Remove this method if it would not be used
     func updateGroup(oldGroupId: Int, newGroup: ExtendedGroupMetaProtocol) throws {
         // Query: UPDATE filter_groups SET name = newGroup.groupName, display_number = newGroup.displayNumber, is_enabled = newGroup.isEnabled) WHERE group_id = oldGroupId
         let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == oldGroupId)
@@ -136,6 +138,7 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(newGroup.groupId)")
     }
     
+    //TODO: Remove this method if it would not be used
     func deleteGroup(groupId: Int) throws {
         // Query: DELETE FROM filter_groups WHERE grpoup_id = groupId
         let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == groupId).delete()

@@ -158,8 +158,8 @@ extension FiltersMetaStorageProtocol {
     }
     
     // Enables or disables a filter with specified id
-    func updateEnabledFilterStateForFilter(withId filterId: Int, enabled: Bool) throws {
-        let query = FiltersTable.table.where(FiltersTable.filterId == filterId).update(FiltersTable.isEnabled <- enabled)
+    func setFilter(withId id: Int, enabled: Bool) throws {
+        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.isEnabled <- enabled)
         //Query: UPDATE "filters" SET "is_enabled" = enabled WHERE ("filter_id" = filterId)
         let rowId = try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
@@ -173,16 +173,21 @@ extension FiltersMetaStorageProtocol {
             */
             let selectQuery = FiltersTable.table.where(FiltersTable.filterId == meta.filterId)
             if let _ = try filtersDb.pluck(selectQuery) {
-                // Query: UPDATE filters SET (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
-                let query = FiltersTable.table.where(FiltersTable.filterId == meta.filterId).update(getSettersFrom(meta: meta))
-                try filtersDb.run(query)
-                try deleteAllLangsForFilter(withId: meta.filterId)
-                try insertLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
-                try insertTagsForFilter(withId: meta.filterId, tags: meta.tags)
+                try updateFilterWithMeta(meta: meta)
             } else {
                 try addFilter(meta: meta)
             }
         }
+    }
+    
+    func updateFilterWithMeta(meta: ExtendedFilterMetaProtocol) throws {
+        // Query: UPDATE filters SET (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
+        let query = FiltersTable.table.where(FiltersTable.filterId == meta.filterId).update(getSettersFrom(meta: meta))
+        try filtersDb.run(query)
+        try deleteAllLangsForFilter(withId: meta.filterId)
+        try insertLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
+        try insertTagsForFilter(withId: meta.filterId, tags: meta.tags)
+        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(meta.filterId)")
     }
     
     func addFilter(meta: ExtendedFilterMetaProtocol) throws {
