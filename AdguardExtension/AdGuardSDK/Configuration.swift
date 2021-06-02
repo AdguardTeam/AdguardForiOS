@@ -19,13 +19,19 @@
 import Foundation
 
 protocol ConfigurationProtocol {
-    var currentLanguage: String { get set }
+    var currentLanguage: String { get set } // Language preferred by user
     
-    var proStatus: Bool { get set }
+    var proStatus: Bool { get set } // Shows if user has Premium app version
     
+    // Application user configuration
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnbaled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
+    
+    // Application information
+    var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
+    var appId: String { get set } // Application id for example "ios_pro" or "ios"
+    var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
 }
 
 final class Configuration: ConfigurationProtocol {
@@ -69,6 +75,33 @@ final class Configuration: ConfigurationProtocol {
     var allowlistIsInverted: Bool {
         get {
             return false
+        }
+        set {
+            
+        }
+    }
+    
+    var appProductVersion: String {
+        get {
+            return ""
+        }
+        set {
+            
+        }
+    }
+    
+    var appId: String {
+        get {
+            return ""
+        }
+        set {
+            
+        }
+    }
+    
+    var cid: String {
+        get {
+            return ""
         }
         set {
             
