@@ -67,7 +67,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     func updateAllFilters(forcibly: Bool) {
         groupsModificationQueue.async {
-            
+            NotificationCenter.default.filtersUpdateStarted()
         }
     }
     
@@ -129,13 +129,13 @@ fileprivate extension NSNotification.Name {
 
 fileprivate extension NotificationCenter {
     func filtersUpdateStarted() {
-        NotificationCenter.default.post(name: .filtersUpdateStarted, object: self, userInfo: nil)
+        self.post(name: .filtersUpdateStarted, object: self, userInfo: nil)
     }
 }
 
 public extension NotificationCenter {
     func filtersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
-        return Self.default.observe(name: .filtersUpdateStarted, object: nil, queue: queue) { _ in
+        return self.observe(name: .filtersUpdateStarted, object: nil, queue: queue) { _ in
             handler()
         }
     }
