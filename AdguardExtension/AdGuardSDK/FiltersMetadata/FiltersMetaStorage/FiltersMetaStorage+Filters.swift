@@ -105,7 +105,7 @@ extension FiltersMetaStorageProtocol {
         let query = FiltersTable.table.filter(FiltersTable.groupId == id).order(FiltersTable.displayNumber, FiltersTable.filterId)
         let dbFilters: [FiltersTable] = try filtersDb.prepare(query).map { dbFilter in
             let filter = FiltersTable(dbFilter: dbFilter)
-            let filterLocalization = getLocalizationForFilter(withId: filter.filterId, forLanguage: lang)
+            let filterLocalization = try getLocalizationForFilter(withId: filter.filterId, forLanguage: lang)
             let name = filterLocalization?.name ?? filter.name
             let description = filterLocalization?.description ?? filter.description
             return FiltersTable(dbFilter: dbFilter, localizedName: name, localizedDescription: description)
@@ -116,9 +116,84 @@ extension FiltersMetaStorageProtocol {
     
     // Enables or disables a filter with specified id
     func setFilter(withId id: Int, enabled: Bool) throws {
-        // Query: update filters set is_enabled = enabled where filter_id = id
-        let filter = FiltersTable.table.filter(FiltersTable.filterId == id)
-        try filtersDb.run(filter.update(FiltersTable.isEnabled <- enabled))
-        Logger.logDebug("(FiltersMetaStorage) - setFilter filter with id=\(id) was set to enabled=\(enabled)")
+        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.isEnabled <- enabled)
+        //Query: UPDATE "filters" SET "is_enabled" = enabled WHERE ("filter_id" = filterId)
+        let rowId = try filtersDb.run(query)
+        Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
+    }
+    
+    
+    func updateFiltersWithJSONMetas(metas: [ExtendedFilterMetaProtocol]) throws {
+        for meta in metas {
+            /* Check if filter exists
+             If true than update filters with new data otherwise create filter with new data
+            */
+            let selectQuery = FiltersTable.table.where(FiltersTable.filterId == meta.filterId)
+            if let _ = try filtersDb.pluck(selectQuery) {
+                try updateFilterWithMeta(meta: meta)
+            } else {
+                try insertOrReplaceFilterWith(meta: meta)
+            }
+        }
+    }
+    
+    func updateFilterWithMeta(meta: ExtendedFilterMetaProtocol) throws {
+        // Query: UPDATE filters SET (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
+        let query = FiltersTable.table.where(FiltersTable.filterId == meta.filterId).update(getSettersFrom(meta: meta))
+        try filtersDb.run(query)
+        try deleteAllLangsForFilter(withId: meta.filterId)
+        try insertOrReplaceLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
+        try insertOrReplaceTagsForFilter(withId: meta.filterId, tags: meta.tags)
+        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(meta.filterId)")
+    }
+    
+    func insertOrReplaceFilterWith(meta: ExtendedFilterMetaProtocol) throws {
+        var setters = getSettersFrom(meta: meta)
+        setters.append(FiltersTable.isEnabled <- false)
+        setters.append(FiltersTable.editable <- meta.filterId == 0)  //filterId == 0 it is custom filter id
+        setters.append(FiltersTable.removable <- meta.filterId != 0)
+        // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
+        let query = FiltersTable.table.insert(or: .replace, setters)
+        try filtersDb.run(query)
+        Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(meta.filterId)")
+    }
+    
+    private func getSettersFrom(meta: ExtendedFilterMetaProtocol) -> [Setter] {
+        var result = [Setter]()
+    
+        result.append(FiltersTable.filterId <- meta.filterId)
+        result.append(FiltersTable.groupId <- meta.group.groupId)
+        
+        if let version = meta.version {
+            result.append(FiltersTable.version <- version)
+        }
+        
+        result.append(FiltersTable.displayNumber <- meta.displayNumber)
+        
+        if let name = meta.name {
+            result.append(FiltersTable.name <- name)
+        }
+        
+        if let description = meta.description {
+            result.append(FiltersTable.description <- description)
+        }
+        
+        if let homePage = meta.homePage {
+            result.append(FiltersTable.homePage <- homePage)
+        }
+        
+        if let lastUpdateTime = meta.lastUpdateDate {
+            result.append(FiltersTable.lastUpdateTime <- lastUpdateTime)
+        }
+        
+        if let expires = meta.updateFrequency {
+            result.append(FiltersTable.expires <- expires)
+        }
+
+        if let subscriptionUrl = meta.filterDownloadPage {
+            result.append(FiltersTable.subscriptionUrl <- subscriptionUrl)
+        }
+        
+        return result
     }
 }
