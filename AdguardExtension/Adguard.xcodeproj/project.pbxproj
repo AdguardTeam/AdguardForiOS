@@ -3238,6 +3238,7 @@
 		7E69C56B265BC2B800EA9DBA /* BlockYouTubeAds.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = BlockYouTubeAds.js; sourceTree = "<group>"; };
 		7E69C5CD265BE6E100EA9DBA /* ProYouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
+		7E732B91266795720058721C /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
@@ -3444,7 +3445,6 @@
 		7EC97C3E26663916005C950C /* SharedResources+DebugLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+DebugLogs.swift"; sourceTree = "<group>"; };
 		7EC97C59266639A8005C950C /* SharedResources+Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+Statistics.swift"; sourceTree = "<group>"; };
 		7EC97CA6266648F6005C950C /* YouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
-		7EC97CA726664939005C950C /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -4284,6 +4284,7 @@
 				653153411CF9911800C92A73 /* AdguardPro.entitlements */,
 				D0D7E55A24376F24001801A5 /* ProTunnel.entitlements */,
 				D0D7E55924376F13001801A5 /* ProActionExtension.entitlements */,
+				7E732B91266795720058721C /* ProYouTubeAdsActionExtension.entitlements */,
 				D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */,
 				D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */,
 				D0B542CB2435C6A4002F0AEC /* ProBlockingExtensionGeneralInfo.plist */,
@@ -4724,7 +4725,6 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
-				7EC97CA726664939005C950C /* ProYouTubeAdsActionExtension.entitlements */,
 				D093AA18253447940015351F /* setappPublicKey.pem */,
 				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
 				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
@@ -10923,6 +10923,7 @@
 		};
 		7E69C53C265BA53400EA9DBA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = YouTubeAdsActionExtensionIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10965,6 +10966,7 @@
 		};
 		7E69C53D265BA53400EA9DBA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = YouTubeAdsActionExtensionIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11001,6 +11003,7 @@
 		};
 		7E69C5DA265BE6E100EA9DBA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = YouTubeAdsActionExtensionIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11012,7 +11015,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = ProYouTubeAdsActionExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProYouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11043,6 +11046,7 @@
 		};
 		7E69C5DB265BE6E100EA9DBA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = YouTubeAdsActionExtensionIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11054,7 +11058,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = ProYouTubeAdsActionExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProYouTubeAdsActionExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

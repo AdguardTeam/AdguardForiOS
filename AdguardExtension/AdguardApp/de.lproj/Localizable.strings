@@ -962,7 +962,7 @@
 "block_youtube_ads_instructions_safari" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Starten Sie <a href=\"%@\">Safari</a><br><br>2. Öffnen Sie youtube.com<br><br>3. Tippen Sie auf %@ Teilen.<br><br>4. Tippen Sie auf „Werbung in YouTube sperren (AdGuard)”.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
-"block_youtube_ads_instructions" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Öffnen Sie youtube.com in Safari.<br><br>2. Tippen Sie %@ auf Teilen.<br><br>3. Klicken Sie auf „Youtube-Werbung sperren (mit AdGuard)“.";
+"block_youtube_ads_instructions" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Öffnen Sie <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tippen Sie %@ auf Teilen.<br><br>3. Klicken Sie auf „Youtube-Werbung sperren (mit AdGuard)“.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
 "block_youtube_ads_instructions_done_text_safari" = "Fertig! Jetzt können Sie YouTube ohne Werbung ansehen.\n\nWenn die Erweiterung aktiviert ist, wird die Beschriftung \"mit AdGuard\" neben dem YouTube-Logo angezeigt.<br><br><b>Wenn Sie die Seite neu laden, müssen die Schritte 3 und 4 erneut ausgeführt werden.</b>";
