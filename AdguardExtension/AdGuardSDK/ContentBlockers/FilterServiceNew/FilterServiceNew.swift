@@ -66,8 +66,13 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     // MARK: - Public methods
     
     func updateAllFilters(forcibly: Bool) {
-        groupsModificationQueue.async {
+        groupsModificationQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            // Notify that filters started to update
             NotificationCenter.default.filtersUpdateStarted()
+            
+            
         }
     }
     
