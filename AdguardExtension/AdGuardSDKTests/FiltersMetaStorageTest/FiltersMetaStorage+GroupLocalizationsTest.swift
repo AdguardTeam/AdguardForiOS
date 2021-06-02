@@ -58,4 +58,70 @@ class FiltersMetaStorage_GroupLocalizationsTest: XCTestCase {
             XCTFail("\(error)")
         }
     }
+    
+    func testInsertLocalizationForGroupWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
+            XCTAssertNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "foo"))
+            try filtersStorage.insertOrReplaceLocalizationForGroup(groupId: group.groupId, lang: "foo", name: "bar")
+            var localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "foo")
+            XCTAssertNotNil(localization)
+            XCTAssertEqual(localization?.name, "bar")
+            
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
+            try filtersStorage.insertOrReplaceLocalizationForGroup(groupId: group.groupId, lang: "en", name: "fooEn")
+            localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en")
+            XCTAssertNotNil(localization)
+            XCTAssertEqual(localization?.name, "fooEn")
+               
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testUpdateLocalizationForGroup() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
+            var localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en")
+            XCTAssertNotNil(localization)
+            XCTAssert(localization?.name == group.groupName)
+            try filtersStorage.updateLocalizationForGroup(groupId: group.groupId, lang: "en", name: "foo")
+            localization = try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en")
+            XCTAssertNotNil(localization)
+            XCTAssert(localization?.name == "foo")
+
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDeleteAllLocalizationGroups() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "fr"))
+            try filtersStorage.deleteAllLocalizationForGroup(groupId: group.groupId)
+            XCTAssertNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
+            XCTAssertNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "fr"))
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDeleteLocalizationForGroups() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "fr"))
+            try filtersStorage.deleteLocalizationForGroup(groupId: group.groupId, lang: "en")
+            XCTAssertNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "en"))
+            XCTAssertNotNil(try filtersStorage.getLocalizationForGroup(withId: group.groupId, forLanguage: "fr"))
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
 }

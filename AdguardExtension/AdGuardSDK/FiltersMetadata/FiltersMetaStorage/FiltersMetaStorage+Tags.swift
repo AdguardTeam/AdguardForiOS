@@ -51,7 +51,7 @@ extension FiltersMetaStorageProtocol {
     
     // Returns all tags from database
     func getAllTags() throws -> [ExtendedFiltersMeta.Tag] {
-        // Query: select * from filter_tags order by tag_id
+        // Query: SELECT * FROM filter_tags OREDER BY tag_id
         let query = FilterTagsTable.table.order(FilterTagsTable.tagId)
         
         let result: [ExtendedFiltersMeta.Tag] = try filtersDb.prepare(query).compactMap { tag in
@@ -64,7 +64,7 @@ extension FiltersMetaStorageProtocol {
     
     // Returns array of tags for filter with specified id
     func getTagsForFilter(withId id: Int) throws -> [ExtendedFiltersMeta.Tag] {
-        // Query: select * from filter_tags where filter_id = id order by tag_id
+        // Query: SELECT * FROM filter_tags WHERE filter_id = id ORDER BY tag_id
         let query = FilterTagsTable.table.filter(id == FilterTagsTable.filterId)
                                          .order(FilterTagsTable.tagId)
         
@@ -74,5 +74,50 @@ extension FiltersMetaStorageProtocol {
         }
         Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")
         return result
+    }
+    
+    func insertOrReplaceTagsForFilter(withId filterId: Int, tags: [ExtendedFiltersMeta.Tag]) throws {
+        for tag in tags {
+            try insertOrReplaceTagForFilter(withId: filterId, tag: tag)
+        }
+    }
+    
+    func insertOrReplaceTagForFilter(withId filterId: Int, tag: ExtendedFiltersMeta.Tag) throws {
+        // Query: INSERT OR REPLACE INTO filter_tags (filter_id, tag_id, type, name)
+        let query = FilterTagsTable.table.insert(or: .replace, FilterTagsTable.filterId <- filterId,
+                                                 FilterTagsTable.tagId <- tag.tagId,
+                                                 FilterTagsTable.type <- tag.tagTypeId,
+                                                 FilterTagsTable.name <- tag.tagName)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
+    }
+    
+    //TODO: Remove this method if it would not be used
+    func updateTagsForFilter(withId filterId: Int, oldTag: ExtendedFiltersMeta.Tag, newTag: ExtendedFiltersMeta.Tag) throws {
+        // Query: UPDATE filter_tags SET "tagId" = newTag.tagId, "type" = newTag.type, "name" = newTag.name WHERE filter_id = filterId AND tagId = oldTag.tagId
+        let query = FilterTagsTable.table.where(FilterTagsTable.filterId == filterId && FilterTagsTable.tagId == oldTag.tagId)
+            .update(FilterTagsTable.type <- newTag.tagTypeId,
+                    FilterTagsTable.name <- newTag.tagName)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Update old tag with tagId \(oldTag.tagId) and name \(oldTag.tagName) to new tagId  \(newTag.tagId) with name \(newTag.tagName)")
+    }
+    
+    //TODO: Remove this method if it would not be used
+    func deleteAllTagsForFilter(withId filterId: Int) throws {
+        //Query: DELETE FROM filter_langs WHERE ("filter_id" = tag.filterId)
+        let query = FilterTagsTable.table.where(FilterTagsTable.filterId == filterId).delete()
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Delete tags for fitler with id = \(filterId)")
+    }
+    
+    
+    //TODO: Remove this method if it would not be used
+    func deleteTagsForFilter(withId filterId: Int, tags: [ExtendedFiltersMeta.Tag]) throws {
+        for tag in tags {
+            // Query: DELETE FROM filter_langs WHERE ("filter_id" = withId AND tagId = tag.tagId)
+            let query = FilterTagsTable.table.where(FilterTagsTable.filterId == filterId && FilterTagsTable.tagId == tag.tagId).delete()
+            try filtersDb.run(query)
+            Logger.logDebug("(FiltersMetaStorage) - Delete tags with tag Id = \(tag.tagId) for fitler with id = \(filterId)")
+        }
     }
 }

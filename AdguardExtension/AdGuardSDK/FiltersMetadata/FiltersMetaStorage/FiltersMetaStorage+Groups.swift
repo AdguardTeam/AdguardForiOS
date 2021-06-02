@@ -71,7 +71,7 @@ extension FiltersMetaStorageProtocol {
     
     // Returns all groups from database
     func getAllGroups() throws -> [ExtendedGroupMetaProtocol] {
-        // Query: select * from filter_groups order by display_number, group_id
+        // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).map { group in
@@ -84,7 +84,7 @@ extension FiltersMetaStorageProtocol {
     
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [ExtendedGroupMetaProtocol] {
-        // Query: select * from filter_groups order by display_number, group_id
+        // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
         
         let result: [ExtendedGroupMeta] = try filtersDb.prepare(query).compactMap { group in
@@ -107,9 +107,43 @@ extension FiltersMetaStorageProtocol {
     
     // Enables or disables a group with specified id
     func setGroup(withId id: Int, enabled: Bool) throws {
-        // Query: update filter_groups set is_enabled = enabled where group_id = id
-        let group = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
-        try filtersDb.run(group.update(FilterGroupsTable.isEnabled <- enabled))
+        // Query: UPDATE filter_groups SET is_enabled = enabled WHERE group_id = id
+        let query = FilterGroupsTable.table.filter(FilterGroupsTable.groupId == id)
+        try filtersDb.run(query.update(FilterGroupsTable.isEnabled <- enabled))
         Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
+    }
+    
+    //TODO: Remove this method if it would not be used
+    func insertOrReplaceGroups(groups: [ExtendedGroupMetaProtocol]) throws {
+        for group in groups {
+            // Query: INSERT OR REPLACE INTO filter_groups (group_id, display_number, name, is_enabled)
+            let query = FilterGroupsTable.table.insert(or: .replace,
+                                                       FilterGroupsTable.groupId <- group.groupId,
+                                                       FilterGroupsTable.name <- group.groupName,
+                                                       FilterGroupsTable.displayNumber <- group.displayNumber,
+                                                       FilterGroupsTable.isEnabled <- group.isEnabled)
+            try filtersDb.run(query)
+            Logger.logDebug("(FiltersMetaStorage) - Insert group with id=\(group.groupId)")
+        }
+    }
+    
+    //TODO: Remove this method if it would not be used
+    func updateGroup(oldGroupId: Int, newGroup: ExtendedGroupMetaProtocol) throws {
+        // Query: UPDATE filter_groups SET name = newGroup.groupName, display_number = newGroup.displayNumber, is_enabled = newGroup.isEnabled) WHERE group_id = oldGroupId
+        let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == oldGroupId)
+            .update(FilterGroupsTable.name <- newGroup.groupName,
+                    FilterGroupsTable.displayNumber <- newGroup.displayNumber,
+                    FilterGroupsTable.isEnabled <- newGroup.isEnabled)
+        
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(newGroup.groupId)")
+    }
+    
+    //TODO: Remove this method if it would not be used
+    func deleteGroup(groupId: Int) throws {
+        // Query: DELETE FROM filter_groups WHERE grpoup_id = groupId
+        let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == groupId).delete()
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Delete group with id=\(groupId)")
     }
 }

@@ -94,4 +94,68 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             XCTFail("\(error)")
         }
     }
+    
+    func testUpdateEnabledGroupState() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            XCTAssertFalse(groups.isEmpty)
+            for group in groups {
+                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
+            }
+            
+            let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            XCTAssertFalse(updatedGroups.isEmpty)
+            XCTAssertEqual(groups.count, updatedGroups.count)
+            for (index,_) in updatedGroups.enumerated() {
+                XCTAssertEqual(groups[index].isEnabled, !updatedGroups[index].isEnabled)
+            }
+            
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testUpdateEnabledGroupStateWithNonExistionGroup() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")
+            XCTAssert(groups.isEmpty)
+            for group in groups {
+                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
+            }
+            
+            let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")
+            XCTAssert(updatedGroups.isEmpty)
+            XCTAssertEqual(groups.count, updatedGroups.count)
+            
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDeleteGroupWithSuccess() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
+            try filtersStorage.deleteGroup(groupId: group.groupId)
+            let removed = try filtersStorage.getAllGroups().filter { $0.groupId == group.groupId }
+            XCTAssert(removed.isEmpty)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDeleteGroupWithNonExistingGroupId() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            let group = try filtersStorage.getAllGroups().filter { $0.groupId == -123 }
+            XCTAssert(group.isEmpty)
+            try filtersStorage.deleteGroup(groupId: -123)
+            let removed = try filtersStorage.getAllGroups().filter { $0.groupId == -123 }
+            XCTAssert(removed.isEmpty)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
 }
