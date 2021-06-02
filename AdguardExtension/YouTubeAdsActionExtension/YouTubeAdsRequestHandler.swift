@@ -75,9 +75,14 @@ class YouTubeAdsRequestHandler: NSObject, NSExtensionRequestHandling {
         self.extensionContext = context
         context.getJsScriptResult { [weak self] result in
             if let result = result {
-                self?.notifications.postNotificationWithoutBadge(title: result.status.title, body: nil)
+                self?.notifications.postNotificationWithoutBadge(title: result.status.title, body: nil, onNotificationSent: {
+                    DDLogInfo("(YouTubeAdsRequestHandler) js finished with result: \(result)")
+                    context.completeRequest(returningItems: [], completionHandler: nil)
+                })
+            } else {
+                DDLogInfo("(YouTubeAdsRequestHandler) js finished, result is nil")
+                context.completeRequest(returningItems: [], completionHandler: nil)
             }
-            context.completeRequest(returningItems: [], completionHandler: nil)
         }
     }
 }

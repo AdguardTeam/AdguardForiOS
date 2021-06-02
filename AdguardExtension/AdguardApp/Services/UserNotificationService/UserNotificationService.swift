@@ -40,7 +40,7 @@ protocol UserNotificationServiceProtocol {
     /**
      Posts notification without badge (red circle in the top right corner of app icon)
      */
-    func postNotificationWithoutBadge(title: String, body: String?)
+    func postNotificationWithoutBadge(title: String, body: String?, onNotificationSent: @escaping () -> Void)
     
     func removeNotifications()
     
@@ -78,17 +78,19 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         }
     }
     
-    func postNotificationWithoutBadge(title: String, body: String?) {
+    func postNotificationWithoutBadge(title: String, body: String?, onNotificationSent: @escaping () -> Void) {
         let center = UNUserNotificationCenter.current()
     
         center.getNotificationSettings { [weak self] settings in
             if settings.authorizationStatus != .authorized {
+                onNotificationSent()
                 return
             }
             
             if settings.alertSetting == .enabled {
                 self?.alertNotification(title: title, body: body, badge: nil, userInfo: nil)
             }
+            onNotificationSent()
         }
     }
     
@@ -153,7 +155,9 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         center.delegate = self
         
         center.add(request) { (error) in
-            if error != nil { DDLogError("(UserNotificationService) - alertNotification error : \(error!)") }
+            if let error = error {
+                DDLogError("(UserNotificationService) - alertNotification error : \(error)")
+            }
         }
     }
     
