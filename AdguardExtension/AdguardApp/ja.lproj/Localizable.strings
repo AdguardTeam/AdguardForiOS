@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "エラー";
 
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "フィルタをSafariに読み込ませることができず、最近の変更は適用されませんでした。";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "フィルタをSafariに読み込みすることができません。ルールとホワイトリストをクリアしたり、使用中のフィルタを変更したりして解決するかをお試しください。";
+
 /* NO Button caption in alert */
 "common_action_no" = "いいえ";
 
@@ -45,6 +51,12 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@万";
+
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "ネイティブDNS作動中";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "ネイティブDNSは動作していません。";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "ユーザーフィルタ";
@@ -106,8 +118,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "購入を復元中にエラーが発生しました。";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "ご購入が復元され、AdGuard for iOSのプレミアム版が有効になりました。";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "購入を復元できせん。";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "ご購入が完了し、プレミアム版が有効化されました。";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "購入中のエラーが発生しました。";
@@ -123,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "ここでは独自のルールを入力し追加できます。<br>ルール構文に関する通知は<a href=\"%@\">こちら</a>でご覧になれます。";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "広告ブロックしたくないドメイン（サイト）をここに入力してください。※このリストは他のどの設定よりも優先されます。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "ドメイン名を入力して、それだけで広告をブロック。";
@@ -508,6 +529,15 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "全期間";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "コンテンツブロッカーが更新中…";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "フィルターを読み込み中...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "ルールが変換中...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新規カスタムフィルタ";
 
@@ -588,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>コンテンツブロッカーのスイッチ</b>をすべて<b>オン</b>にして本アプリにお戻りください。";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "システムDNS";
@@ -924,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Setappアカウントに最大数のデバイスを接続しています。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "より多くの広告を表示するためにYouTubeがアルゴリズムを変えたことをご存知ですか？<br><br>その影響で、完全に広告をブロックするには以下を行なってください:<br><br>1. <a href=\"%@\">Safari</a>を開く<br><br>2. youtube.comを開く <br><br>3. 共有ボタン %@ をタップ<br><br>4. 「YouTube広告をブロック (AdGuard)」をタップ";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "より多くの広告を表示するためにYouTubeがアルゴリズムを変えたことをご存知ですか？<br><br>その影響で、完全に広告をブロックするには以下を行なってください:<br><br>1. Safariで<a href=\"%@\">youtube.com</a>を開く<br><br>2. 共有ボタン %@ をタップ<br><br>3. 「YouTube広告をブロック (AdGuard)」をタップ";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "完了！広告なしでYouTubeを閲覧いただけます。\n\nこの拡張機能が有効の時は、サイトのYouTubeロゴの横に「AdGuard作動中」と表示されます。<br><br><b>※YouTubeページを再読み込みした場合、ステップ3と4をもう一度行ってください。</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "完了！広告なしでYouTubeを閲覧いただけます。\n\nこの拡張機能が有効の時は、サイトのYouTubeロゴの横に「AdGuard作動中」と表示されます。<br><br><b>※YouTubeページを再読み込みした場合、ステップ2と3をもう一度行ってください。</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTubeが広告なしになりました！※YouTubeページを再読み込みした場合は、この拡張機能をSafari共有メニューから再度実行する必要があります。";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "この拡張機能はYouTubeのページで実行してください";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "この拡張機能は既に実行されています";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "YouTube広告削除中に不明なエラーが発生しました";

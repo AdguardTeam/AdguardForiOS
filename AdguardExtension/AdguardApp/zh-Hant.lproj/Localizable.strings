@@ -958,5 +958,28 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "您已連結最大數量的裝置到您的 Setapp 帳戶。";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "您知道 YouTube 已更改它的演算法以向您顯示更多的廣告嗎？<br><br>現在，為了封鎖它們，您需要：<br><br>1. 打開 <a href=\"%@\">Safari</a>。<br><br>2. 開啟 youtube.com。<br><br>3. 輕觸 %@ 分享。<br><br>4. 輕觸\"封鎖 YouTube 廣告（由 AdGuard 製作）\"。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "您知道 YouTube 已更改它的演算法以向您顯示更多的廣告嗎？<br><br>現在，為了封鎖它們，您需要：<br><br>1. 在 Safari 中打開 <a href=\"%@\">youtube.com</a>。<br><br>2. 輕觸 %@ 分享。<br><br>3. 輕觸\"封鎖 YouTube 廣告（由 AdGuard 製作）\"。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "完成！現在，您可觀看無廣告的 YouTube。\n\n當該延伸功能被啟用時，標題 “偕同 AdGuard” 緊鄰著 YouTube 商標被顯示。<br><br><b>若您重新載入該頁面，您將需要再次執行步驟 3 和 4。</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "完成！現在，您可觀看無廣告的 YouTube。\n\n當該延伸功能被啟用時，標題 “偕同 AdGuard” 緊鄰著 YouTube 商標被顯示。<br><br><b>若您重新載入該頁面，您將需要再次執行步驟 2 和 3。</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "現在 YouTube 為無廣告的！請注意，若您重新載入該頁面，您需要再次啟用此擴充功能";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "此擴充功能只於 YouTube 上被啟用";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "此擴充功能已被運作";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "移除 YouTube 的廣告時發生未知的錯誤";

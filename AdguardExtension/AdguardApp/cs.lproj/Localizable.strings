@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "K Vašemu účtu Setapp jste připojili maximální počet zařízení.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Věděli jste, že služba YouTube změnila své algoritmy, aby Vám zobrazovala více reklam?<br><br>Nyní, abyste je mohli zablokovat, musíte:<br><br>1. Otevřít <a href=\"%@\">Safari</a>.<br><br>2. Otevřít stránku youtube.com<br><br>3. Klepnout na tlačítko %@ Sdílet.<br><br> 4. Klepnout na možnost \"Blokovat reklamy v YouTube (pomocí AdGuardu)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Věděli jste, že služba YouTube změnila své algoritmy, aby Vám zobrazovala více reklam?<br><br>Nyní, abyste je mohli zablokovat, musíte:<br><br>1. Otevřít stránku <a href=\"%@\">youtube.com</a> v prohlížeči Safari.<br><br>2. Klepnout na tlačítko %@ Sdílet.<br><br>3. Klepnout na možnost \"Blokovat reklamy v YouTube (pomocí AdGuardu)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Hotovo! Nyní můžete sledovat YouTube bez reklam.\n\nPokud je rozšíření zapnuté, vedle loga YouTube se zobrazuje titulek „s AdGuardem“.<br><br><b>Pokud stránku obnovíte, budete muset znovu provést kroky 3 a 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Hotovo! Nyní můžete sledovat YouTube bez reklam.\n\nPokud je rozšíření zapnuté, vedle loga YouTube se zobrazuje titulek „s AdGuardem“.<br><br><b>Pokud stránku obnovíte, budete muset znovu provést kroky 2 a 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je nyní bez reklam! Upozorňujeme, že pokud znovu stránku obnovíte, musíte toto rozšíření spustit znovu";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Toto rozšíření má být spuštěno pouze v YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Rozšíření bylo již spuštěno";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Při odstraňování reklam v YouTube došlo k neznámé chybě";

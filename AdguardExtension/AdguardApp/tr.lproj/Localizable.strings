@@ -924,3 +924,17 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Setapp hesabınıza maksimum sayıda cihaz bağladınız.";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube artık reklamsız! Sayfayı yeniden yüklediğinizde bu eklentiyi tekrar çalıştırmanız gerektiğini lütfen unutmayın";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Bu eklentinin yalnızca YouTube'da başlatılması gerekiyor";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Eklenti zaten yürütüldü";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "YouTube reklamları kaldırılırken bilinmeyen bir hata oluştu";

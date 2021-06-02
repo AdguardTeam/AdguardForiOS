@@ -958,5 +958,28 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Hai collegato il numero massimo di dispositivi al tuo profilo Setapp.";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci?<br><br>Ora, per bloccarli devi:<br><br>1. Aprire <a href=\"%@\">Safari</a>.<br><br> 2. Accedere youtube.com.<br><br> 3. Cliccare sul pulsante %@ Condividi.<br><br> 4. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci<br><br>Ora, per bloccarli devi:<br><br>1. Accedi a <a href=\"%@\">youtube.com</a> in Safari.<br><br> 2. Clicca %@ sul pulsante Condividi.<br><br> 3. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Ecco fatto! Ora puoi guardare YouTube senza pubblicità.\n\nQuando l'estensione è abilitata, la legenda \"con AdGuard\" viene visualizzata accanto al logo di YouTube.<br><br><b>Se ricarichi la pagina, dovrai eseguire nuovamente i passi 3 e 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Ecco fatto! Ora puoi guardare YouTube senza pubblicità.\n\nQuando l'estensione è abilitata, la legenda \"con AdGuard\" viene visualizzata accanto al logo di YouTube.<br><br><b>Se ricarichi la pagina, dovrai eseguire nuovamente i passi 2 e 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube è ora privo di pubblicità! Tieni presente che dovrai eseguire nuovamente questa estensione se ricaricherai la pagina";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Questa estensione dovrebbe essere eseguita solo su YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "L\'estensione è già stata eseguita";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Si è verificato un errore sconosciuto durante la rimozione degli annunci YouTube";

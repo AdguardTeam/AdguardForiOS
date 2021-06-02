@@ -35,7 +35,7 @@
 "YIm-R8-cxj.text" = "封鎖網路釣魚、詐騙和加密貨幣劫持";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "用您的 AdGuard 帳戶或用已連結的社群網路登入";
+"ZuM-Nn-uXv.text" = "用您的 AdGuard 帳戶或社群網路登入";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "登入";

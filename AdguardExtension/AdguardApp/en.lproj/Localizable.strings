@@ -969,3 +969,17 @@
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
 "block_youtube_ads_instructions_done_text" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 2 and 3 again.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube is now ad-free! Please note that you need to run this extension again if you reload the page";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "This extension is intended to be run on YouTube only";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "The extension has already been executed";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";

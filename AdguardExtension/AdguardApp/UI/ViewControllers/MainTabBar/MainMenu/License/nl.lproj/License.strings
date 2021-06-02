@@ -35,7 +35,7 @@
 "YIm-R8-cxj.text" = "Blokkeer phishing, scams en crypto-jacking";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Log in met je AdGuard-account of met verbonden sociale netwerken";
+"ZuM-Nn-uXv.text" = "Log in met je AdGuard-account of met sociale netwerken";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "AANMELDEN";

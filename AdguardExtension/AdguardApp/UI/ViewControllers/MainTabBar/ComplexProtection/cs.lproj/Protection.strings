@@ -37,8 +37,5 @@
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Blokuje reklamy a slídiče na webových stránkách otevřených v prohlížeči Safari";
 
-/* Class = "UILabel"; text = "Done! Now you can watch YouTube without ads.\nNote that when you reload the page, you’ll need to follow the instructions again."; ObjectID = "wuB-Tv-hsa"; */
-"wuB-Tv-hsa.text" = "Hotovo! Nyní můžete sledovat YouTube bez reklam.\nUpozorňujeme, že při opětovném načtení stránky budete muset znovu postupovat podle pokynů.";
-
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Ochrana";
