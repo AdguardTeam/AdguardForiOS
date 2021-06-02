@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Sie haben die maximale Anzahl von Geräten mit Ihrem Setapp-Konto verbunden.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Starten Sie <a href=\"%@\">Safari</a><br><br>2. Öffnen Sie youtube.com<br><br>3. Tippen Sie auf %@ Teilen.<br><br>4. Tippen Sie auf „Werbung in YouTube sperren (AdGuard)”.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Wussten Sie, dass YouTube seine Algorithmen geändert hat, um Ihnen mehr Werbung zu zeigen?<br><br>Um diese zu sperren, gehen Sie wie folgt vor:<br><br>1. Öffnen Sie youtube.com in Safari.<br><br>2. Tippen Sie %@ auf Teilen.<br><br>3. Klicken Sie auf „Youtube-Werbung sperren (mit AdGuard)“.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Fertig! Jetzt können Sie YouTube ohne Werbung ansehen.\n\nWenn die Erweiterung aktiviert ist, wird die Beschriftung \"mit AdGuard\" neben dem YouTube-Logo angezeigt.<br><br><b>Wenn Sie die Seite neu laden, müssen die Schritte 3 und 4 erneut ausgeführt werden.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Fertig! Jetzt können Sie YouTube ohne Werbung ansehen.\n\nWenn die Erweiterung aktiviert ist, wird die Beschriftung \"mit AdGuard\" neben dem YouTube-Logo angezeigt.<br><br><b>Wenn Sie die Seite neu laden, müssen die Schritte 2 und 3 erneut ausgeführt werden.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube ist jetzt werbefrei! Bitte beachten Sie, dass Sie diese Erweiterung erneut ausführen müssen, sobald die Seite neu geladen wurde.";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Diese Erweiterung soll nur auf YouTube gestartet werden";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Die Erweiterung wurde bereits ausgeführt";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Beim Entfernen von Werbung auf YouTube ist ein unbekannter Fehler aufgetreten";

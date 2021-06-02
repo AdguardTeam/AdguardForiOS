@@ -958,5 +958,28 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Do konta Setapp została podłączona maksymalna liczba urządzeń.";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Czy wiesz, że YouTube zmienił swoje algorytmy, aby wyświetlać więcej reklam?<br><br>Aby je zablokować, musisz:<br><br>1. Otwórz<a href=\"%@\">Safari</a><br><br>2. Otwórz youtube.com<br><br>3. Dotknij %@ Udostępnij.<br><br> 4. Dotknij opcji „Blokuj reklamy YouTube (przez AdGuard)”.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Czy wiesz, że YouTube zmienił swoje algorytmy, aby wyświetlać więcej reklam?<br><br> Aby je zablokować, musisz:<br><br> 1. Otwórz<a href=\"%@\">youtube.com</a> w Safari.<br><br>2. Dotknij %@ Udostępnij.<br><br>3. Kliknij „Blokuj reklamy YouTube (przez AdGuard)”.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Gotowe! Teraz możesz oglądać YouTube bez reklam.\n\nGdy rozszerzenie jest włączone, obok logo YouTube wyświetlany jest napis \"z AdGuard\".<br><br><b>Jeśli ponownie załadujesz stronę, będziesz musiał ponownie wykonać kroki 3 i 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Gotowe! Teraz możesz oglądać YouTube bez reklam.\n\nGdy rozszerzenie jest włączone, obok logo YouTube wyświetlany jest napis \"z AdGuard\".<br><br><b>Jeśli ponownie załadujesz stronę, będziesz musiał ponownie wykonać kroki 2 i 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube jest teraz wolny od reklam! Pamiętaj, że musisz ponownie uruchomić to rozszerzenie, jeśli ponownie załadujesz stronę";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "To rozszerzenie ma zostać uruchomione tylko na YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Rozszerzenie zostało już wykonane";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Wystąpił nieznany błąd podczas usuwania reklam YouTube";

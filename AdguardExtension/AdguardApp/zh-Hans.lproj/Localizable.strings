@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "您连接至 Setapp 账号的设备数量已达到上限。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "您是否知道 YouTube 已更改其算法以向您展示更多广告？<br><br>现在，要阻止它们，您需要：<br><br>1. 打开 <a href=\"%@\">Safari</a>.<br><br>2. 访问 youtube.com.<br><br>3. 点击 %@ 分享.<br><br> 4. 点击 \"拦截 YouTube 的广告 (由 AdGuard 创建)\"。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "您听没听说过，YouTube 推出新的显示更多广告的算法？<br><br>现在为了拦截广告您需要：<br><br>1. 在 Safari 中打开<a href=\"%@\"> youtube.com</a>。<br><br>2. 点击 %@ “分享”按钮。<br><br>3. 点击“拦截 YouTube 广告（由 AdGuard 创建）”。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示“使用 AdGuard”标题。<br><br><b>如果您重新加载页面，则需要再次执行第 3 步和第 4 步。</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示标题“使用 AdGuard”。<br><br><b>如果您重新加载页面，则需要再次执行第 2 步和第 3 步。</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube 现在无广告！请注意，如果重新加载页面，则需要再次运行此扩展";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "此扩展应该仅在 YouTube 页面上启动";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "此扩展已被执行";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "删除 YouTube 广告时发生未知错误";

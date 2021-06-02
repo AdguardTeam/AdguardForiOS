@@ -25,8 +25,5 @@
 /* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nie je nainštalované";
 
-/* Class = "UILabel"; text = "Done! Now you can watch YouTube without ads.\nNote that when you reload the page, you’ll need to follow the instructions again."; ObjectID = "wuB-Tv-hsa"; */
-"wuB-Tv-hsa.text" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\nUpozorňujeme, že pri opätovnom načítaní stránky budete musieť znova postupovať podľa pokynov.";
-
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Ochrana";

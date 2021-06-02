@@ -924,3 +924,23 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "K Vášmu Setapp účtu ste pripojili maximálny počet zariadení.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nAk je rozšírenie zapnuté, vedľa loga YouTube sa zobrazuje titulok „s AdGuard“.<br><br><b>Ak stránku načítate znova, budete musieť znova vykonať kroky 3 a 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nAk je rozšírenie zapnuté, vedľa loga YouTube sa zobrazuje titulok „s AdGuard“.<br><br><b>Ak stránku načítate znova, budete musieť znova vykonať kroky 2 a 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je teraz bez reklám! Upozorňujeme, že ak znovu načítate stránku, musíte toto rozšírenie spustiť znova";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Toto rozšírenie by malo byť spustené iba v službe YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Rozšírenie už bolo spustené";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Pri odstraňovaní reklám YouTube sa vyskytla neznáma chyba";

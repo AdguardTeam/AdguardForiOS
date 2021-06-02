@@ -958,5 +958,28 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Du har det maksimale antal enheder forbundet til din Setapp-konto.";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Åbne youtube.com.<br><br>3. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Genindlæses siden, skal du udføre trin 3 og 4 igen.</b >";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Ved genindlæsning af siden, skal du udføre trin 2 og 3 igen.</b >";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube er nu annoncefrit! Bemærk, at denne udvidelse skal eksekveres igen, hvis siden genindlæses";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Denne udvidelse er beregnet til kun at blive eksekveret på YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Udvidelse er allerede eksekveret";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Unkendt fejl opstod under fjernelse af YouTube-annoncer";

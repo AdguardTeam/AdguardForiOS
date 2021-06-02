@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Setapp 계정에 연결할 수 있는 기기의 최대 개수를 초과했습니다.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "YouTube가 더 많은 광고를 보여 주기 위해 알고리즘을 바꾼 사실을 알고 계십니까? <br><br>이제 광고를 차단하려면 아래와 같이 해야 합니다.<br><br>1. <a href=\"%@\">Safari</a>를 실행합니다.<br><br>2. youtube.com을 엽니다.<br><br>3. 공유 버튼을 %@ 누릅니다.<br><br>4. '(AdGuard를 통해) YouTube 광고 차단'을 누릅니다.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "YouTube가 더 많은 광고를 보여 주기 위해 알고리즘을 바꾼 사실을 알고 계십니까? <br><br>이제 광고를 차단하려면 아래와 같이 해야 합니다.<br><br>1. Safari에서 <a href=\"%@\">youtube.com</a> 실행<br><br>2. 공유 버튼을 %@ 누릅니다.<br><br>3. '(AdGuard를 통해) YouTube 광고 차단'을 누릅니다.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "끝! 이제 광고없이 YouTube를 시청할 수 있습니다.\n\n확장 프로그램이 활성화되면, YouTube 로고 옆에 'AdGuard 사용'이 붙을 것입니다.<br><br><b>페이지를 새로 고치면 두 번째, 세 번째 단계를 다시 따라야 합니다.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "끝! 이제 광고없이 YouTube를 시청할 수 있습니다.\n\n확장 프로그램이 활성화되면, YouTube 로고 옆에 'AdGuard 사용'이 붙을 것입니다.<br><br><b>페이지를 새로 고치면 두 번째, 세 번째 단계를 다시 따라야 합니다.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "이제 YouTube의 광고도 차단됩니다! 페이지를 새로고칠 때마다 확장 프로그램을 실행해야 한다는 것을 기억하세요.";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "이 확장 프로그램은 YouTube 페이지에서만 실행하세요";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "확장 프로그램이 이미 실행되었습니다";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "YouTube 광고 제거 중 알 수 없는 오류가 발생했습니다";

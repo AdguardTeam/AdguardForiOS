@@ -44,7 +44,7 @@
 "EbM-k3-HW8.text" = "不兼容其它 VPN 应用";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
-"FzS-e3-CK1.text" = "暗黑";
+"FzS-e3-CK1.text" = "深色";
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "除非您知道自己在做什么，否则请不要更改它们";
@@ -146,7 +146,7 @@
 "nPj-OI-Pcb.text" = "内容拦截器";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
-"ocH-QT-NRZ.text" = "明亮";
+"ocH-QT-NRZ.text" = "浅色";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "为高级用户启用额外设置";

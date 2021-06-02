@@ -955,5 +955,14 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "V svoj račun Setapp ste povezali največje dovojeno število naprav.";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text */
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočite, morate:<br><br>1. Odprite <a href=\"%@\">Safari</a>.<br><br>2. Odprite youtube.com<br><br>Tapnite %@ Deli.<br><br>4. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>1. Odprite <a href=\"%@\">youtube.com</a> v Safariju.<br><br>2. Tapnite %@ Deli.<br><br>3. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 3. in 4. korak.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 2. in 3. korak.</b>";

@@ -750,6 +750,11 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Legg til DNS-brukerregler";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap-DNS-tjenere";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap-IP-adresse";
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Oppstrømsadresse";

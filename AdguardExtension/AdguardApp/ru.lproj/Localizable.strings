@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "Вы подключили максимальное количество устройств в аккаунте Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы?<br><br>Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">Safari</a>.<br><br>2. Откройте youtube.com.<br><br>3. Нажмите на %@ кнопку \"Поделиться\".<br><br> 4. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы? Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">youtube.com</a> в Safari.<br><br>2. Нажмите на %@ кнопку \"Поделиться\".<br><br>3. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\n\nКогда расширение включено, рядом с логотипом YouTube отображается надпись “with AdGuard”.<br><br><b>Если вы перезагрузите страницу, вам нужно будет повторить шаги 3 и 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\n\nКогда расширение включено, рядом с логотипом YouTube отображается надпись “with AdGuard”.<br><br><b>Если вы перезагрузите страницу, вам нужно будет повторить шаги 2 и 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "Теперь YouTube без рекламы! Обратите внимание, что вам нужно будет заново включить расширение, если вы перезагрузите страницу";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Это расширение предназначено для использования только на YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Это расширение уже выполнено";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "При удалении рекламы на YouTube произошла неизвестная ошибка";
