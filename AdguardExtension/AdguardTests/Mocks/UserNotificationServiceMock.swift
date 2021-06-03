@@ -29,7 +29,7 @@ class UserNotificationServiceMock: UserNotificationServiceProtocol {
         postNotificationWasCalled = true
     }
     
-    func postNotificationWithoutBadge(title: String, body: String?, onNotificationSent: @escaping () -> Void) {
+    func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void) {
         onNotificationSent()
     }
     
