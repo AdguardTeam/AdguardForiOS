@@ -22,10 +22,11 @@ protocol FiltersServiceNewProtocol {
     var groups: [SafariGroup] { get }
     
     /**
-     Checks update conditions for filters and updates them if needed
+     Checks update conditions for meta and updates them if needed
      - Parameter forcibly: ignores update conditions and immediately updates filters
+     - Parameter onFiltersUpdated: closure to handle update result **filtersWereUpdated** is true if some filters were updated
      */
-    func updateAllFilters(forcibly: Bool)
+    func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (_ filtersWereUpdated: Bool) -> Void)
 }
 
 final class FiltersServiceNew: FiltersServiceNewProtocol {
@@ -35,6 +36,9 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     var groups: [SafariGroup] { groupsModificationQueue.sync { _groups } }
     
     // MARK: - Private properties
+    
+    // Filters update period; We should check filters updates once per 6 hours
+    private static let updatePeriod: TimeInterval = 3600 * 6
     
     // Helper variable to make groups variable thread safe
     private var _groups: [SafariGroup] = []
@@ -46,7 +50,9 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     private let configuration: ConfigurationProtocol
     private let filterFilesStorage: FilterFilesStorageProtocol
     private let filtersMetaStorage: FiltersMetaStorageProtocol
+    private let userDefaultsStorage: UserDefaultsStorageProtocol
     private let metaParser: CustomFilterMetaParserProtocol
+    private let httpRequestService: HttpRequestServiceProtocol
     
     // MARK: - Initialization
     
@@ -54,25 +60,66 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         configuration: ConfigurationProtocol,
         filterFilesStorage: FilterFilesStorageProtocol,
         filtersMetaStorage: FiltersMetaStorageProtocol,
-        metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser()
+        userDefaultsStorage: UserDefaultsStorageProtocol,
+        metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
+        httpRequestService: HttpRequestServiceProtocol
     ) throws {
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
         self.filtersMetaStorage = filtersMetaStorage
+        self.userDefaultsStorage = userDefaultsStorage
         self.metaParser = metaParser
+        self.httpRequestService = httpRequestService
         self._groups = try getAllLocalizedGroups()
     }
     
     // MARK: - Public methods
     
-    func updateAllFilters(forcibly: Bool) {
+    func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (_ filtersWereUpdated: Bool) -> Void) {
         groupsModificationQueue.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                onFiltersUpdated(false)
+                return
+            }
+            
+            // Check update conditions
+            let now = Date()
+            if now.timeIntervalSince(self.userDefaultsStorage.lastFiltersUpdateCheckDate) < Self.updatePeriod && !forcibly {
+                onFiltersUpdated(false)
+                return
+            }
             
             // Notify that filters started to update
             NotificationCenter.default.filtersUpdateStarted()
             
+            // Update filters file content and filters meta
+            let group = DispatchGroup()
+            let allFilters = self._groups.flatMap { $0.filters }
+            allFilters.forEach { filter in
+                group.enter()
+                
+                // Update filter file
+                self.filterFilesStorage.updateFilter(withId: filter.filterId) { error in
+                    if let error = error {
+                        Logger.logError("(FiltersService) - updateAllFilters; Failed to download content of filter with id=\(filter.filterId); Error: \(error)")
+                    } else {
+                        Logger.logDebug("(FiltersService) - updateAllFilters; Successfully downloaded content of filter with id=\(filter.filterId)")
+                    }
+                    group.leave()
+                }
+            }
             
+            // Update filters metadata
+            group.enter()
+            self.updateMetadataForFilters() {
+                group.leave()
+            }
+            
+            // Wait while all updates are done
+            group.wait()
+            
+            // Notify that filters finished updating
+            NotificationCenter.default.filtersUpdateFinished()
         }
     }
     
@@ -124,23 +171,127 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             return nil
         }
     }
+    
+    /* Downloads filter metadata and metadata localizations and saves it to database */
+    private func updateMetadataForFilters(onFiltersMetaUpdated: @escaping () -> Void) {
+        let group = DispatchGroup()
+        
+        group.enter()
+        httpRequestService.loadFiltersMetadata(version: configuration.appProductVersion,
+                                               id: configuration.appId,
+                                               cid: configuration.cid,
+                                               lang: configuration.currentLanguage) { [weak self] filtersMeta in
+            if let meta = filtersMeta {
+                self?.save(filtersMeta: meta)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        httpRequestService.loadFiltersLocalizations { [weak self] filtersMetaLocalizations in
+            if let localizations = filtersMetaLocalizations {
+                self?.save(localizations: localizations)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) { onFiltersMetaUpdated() }
+    }
+    
+    /* Saves filters meta to database */
+    private func save(filtersMeta: ExtendedFiltersMeta) {
+        let groups = filtersMeta.groups
+        let filters = filtersMeta.filters
+        
+        do {
+            try filtersMetaStorage.updateAll(groups: groups)
+            try filtersMetaStorage.updateAll(filters: filters)
+            try filters.forEach {
+                try filtersMetaStorage.updateAll(tags: $0.tags, forFilterWithId: $0.filterId)
+                try filtersMetaStorage.updateAll(langs: $0.languages, forFilterWithId: $0.filterId)
+            }
+        } catch {
+            Logger.logError("(FiltersService) - save filtersMeta; Error saving to database: \(error)")
+        }
+    }
+    
+    /* Saves filters localizations to database */
+    private func save(localizations: ExtendedFiltersMetaLocalizations) {
+        
+        let groups = localizations.groups
+        let groupIds = groups.keys
+        
+        let filters = localizations.filters
+        let filterIds = filters.keys
+        
+        do {
+            for groupId in groupIds {
+                let localizationsByLangs = groups[groupId] ?? [:]
+                let langs = localizationsByLangs.keys
+                for lang in langs {
+                    let localization = localizationsByLangs[lang]!
+                    try filtersMetaStorage.updateLocalizationForGroup(withId: groupId, forLanguage: lang, localization: localization)
+                }
+            }
+            
+            for filterId in filterIds {
+                let localizationsByLangs = filters[filterId] ?? [:]
+                let langs = localizationsByLangs.keys
+                for lang in langs {
+                    let localization = localizationsByLangs[lang]!
+                    try filtersMetaStorage.updateLocalizatonForFilter(withId: filterId, forLanguage: lang, localization: localization)
+                }
+            }
+        } catch {
+            Logger.logError("(FiltersService) - save localizations; Error saving to database: \(error)")
+        }
+    }
+}
+
+// MARK: - Resources + FilterService variables
+
+fileprivate extension UserDefaultsStorageProtocol {
+    private var lastFiltersUpdateCheckDateKey: String { "AdGuardSDK.lastFiltersUpdateCheckDateKey" }
+    
+    var lastFiltersUpdateCheckDate: Date {
+        get {
+            if let date = storage.value(forKey: lastFiltersUpdateCheckDateKey) as? Date {
+                return date
+            }
+            return Date(timeIntervalSince1970: 0.0)
+        }
+        set {
+            storage.setValue(newValue, forKey: lastFiltersUpdateCheckDateKey)
+        }
+    }
 }
 
 // MARK: - NotificationCenter + FilterService events
 
 fileprivate extension NSNotification.Name {
-    static var filtersUpdateStarted: NSNotification.Name { .init(rawValue: "filtersUpdateStarted") }
+    static var filtersUpdateStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersUpdateStarted") }
+    static var filtersUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersUpdateFinished") }
 }
 
 fileprivate extension NotificationCenter {
     func filtersUpdateStarted() {
         self.post(name: .filtersUpdateStarted, object: self, userInfo: nil)
     }
+    
+    func filtersUpdateFinished() {
+        self.post(name: .filtersUpdateFinished, object: self, userInfo: nil)
+    }
 }
 
 public extension NotificationCenter {
     func filtersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
         return self.observe(name: .filtersUpdateStarted, object: nil, queue: queue) { _ in
+            handler()
+        }
+    }
+    
+    func filtersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+        return self.observe(name: .filtersUpdateFinished, object: nil, queue: queue) { _ in
             handler()
         }
     }

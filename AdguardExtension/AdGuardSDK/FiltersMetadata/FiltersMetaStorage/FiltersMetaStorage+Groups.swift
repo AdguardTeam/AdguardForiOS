@@ -57,16 +57,6 @@ struct FilterGroupsTable {
 
 extension FiltersMetaStorageProtocol {
     
-    // Returns all groups from database
-    func getAllGroups() throws -> [FilterGroupsTable] {
-        // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
-        let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
-        
-        let result: [FilterGroupsTable] = try filtersDb.prepare(query).map { FilterGroupsTable(dbGroup: $0) }
-        Logger.logDebug("(FiltersMetaStorage) - allGroups returning \(result.count) groups objects")
-        return result
-    }
-    
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
         // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
@@ -95,37 +85,31 @@ extension FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
     }
     
-    //TODO: Remove this method if it would not be used
-    func insertOrReplaceGroups(groups: [SafariGroupProtocol]) throws {
+    /*
+     Updates all passed groups.
+     Adds new groups if missing.
+     If there are some groups from database that are not present in passed list than they will be deleted
+     */
+    func updateAll(groups: [GroupMetaProtocol]) throws {
         for group in groups {
-            // Query: INSERT OR REPLACE INTO filter_groups (group_id, display_number, name, is_enabled)
-            let query = FilterGroupsTable.table.insert(or: .replace,
-                                                       FilterGroupsTable.groupId <- group.groupType.rawValue,
-                                                       FilterGroupsTable.name <- group.groupName,
-                                                       FilterGroupsTable.displayNumber <- group.displayNumber,
-                                                       FilterGroupsTable.isEnabled <- group.isEnabled)
-            try filtersDb.run(query)
-            Logger.logDebug("(FiltersMetaStorage) - Insert group with id=\(group.groupType.rawValue)")
+            try update(group: group)
         }
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func updateGroup(oldGroupId: Int, newGroup: SafariGroupProtocol) throws {
-        // Query: UPDATE filter_groups SET name = newGroup.groupName, display_number = newGroup.displayNumber, is_enabled = newGroup.isEnabled) WHERE group_id = oldGroupId
-        let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == oldGroupId)
-            .update(FilterGroupsTable.name <- newGroup.groupName,
-                    FilterGroupsTable.displayNumber <- newGroup.displayNumber,
-                    FilterGroupsTable.isEnabled <- newGroup.isEnabled)
         
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(newGroup.groupType.rawValue)")
+        // Remove groups
+        let groupIds = groups.map { $0.groupId }
+        let groupsToDelete = FilterGroupsTable.table.filter(!groupIds.contains(FilterGroupsTable.groupId))
+        let deletedRows = try filtersDb.run(groupsToDelete.delete())
+        Logger.logDebug("(FiltersMetaStorage) - updateAll groups; deleted \(deletedRows) rows")
     }
     
-    //TODO: Remove this method if it would not be used
-    func deleteGroup(groupId: Int) throws {
-        // Query: DELETE FROM filter_groups WHERE grpoup_id = groupId
-        let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == groupId).delete()
+    // Updates group metadata with passed one
+    func update(group: GroupMetaProtocol) throws {
+        // Query: UPDATE filter_groups SET name = group.groupName, display_number = group.displayNumber) WHERE group_id = group.groupId
+        let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == group.groupId)
+                                           .update(FilterGroupsTable.groupId <- group.groupId,
+                                                   FilterGroupsTable.name <- group.groupName,
+                                                   FilterGroupsTable.displayNumber <- group.displayNumber)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete group with id=\(groupId)")
+        Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
     }
 }

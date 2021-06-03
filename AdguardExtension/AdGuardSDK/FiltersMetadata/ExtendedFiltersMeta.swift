@@ -197,6 +197,17 @@ extension ExtendedFiltersMeta {
             case problematic
             case obsolete
             
+            var id: Int {
+                switch self {
+                case .purpose: return 0
+                case .lang: return 1
+                case .recommended: return 2
+                case .platform: return 4
+                case .problematic: return 5
+                case .obsolete: return 6
+                }
+            }
+            
             init?(tagTypeId: Int) {
                 switch tagTypeId {
                 case 0: self = .purpose
@@ -213,17 +224,6 @@ extension ExtendedFiltersMeta {
         let tagId: Int
         let tagType: TagType
         let tagName: String
-        
-        var tagTypeId: Int {
-            switch tagType {
-            case .purpose: return 0
-            case .lang: return 1
-            case .recommended: return 2
-            case .platform: return 4
-            case .problematic: return 5
-            case .obsolete: return 6
-            }
-        }
         
         enum CodingKeys: String, CodingKey {
             case tagId

@@ -60,44 +60,14 @@ extension FiltersMetaStorageProtocol {
         return groupLocalization
     }
     
-    //TODO: Remove this method if it would not be used
-    func insertOrReplaceLocalizationForGroup(groupId: Int, lang: String, name: String) throws {
+    // Updates localization for group. Adds new localization if missing.
+    func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_group_localization (group_id, lang, name)
         let query = FilterGroupLocalizationsTable.table.insert(or: .replace,
-                                                               FilterGroupLocalizationsTable.groupId <- groupId,
+                                                               FilterGroupLocalizationsTable.groupId <- id,
                                                                FilterGroupLocalizationsTable.lang <- lang,
-                                                               FilterGroupLocalizationsTable.name <- name)
+                                                               FilterGroupLocalizationsTable.name <- localization.name)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(groupId) lang=\(lang) and name=\(name)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func updateLocalizationForGroup(groupId: Int, lang: String, name: String) throws {
-        // Query: UPDATE filter_group_localization SET lang = lang, name = name WHERE group_id = groupdId
-        let query = FilterGroupLocalizationsTable.table
-            .where(FilterGroupLocalizationsTable.groupId == groupId &&
-                    FilterGroupLocalizationsTable.lang == lang)
-            .update(FilterGroupLocalizationsTable.lang <- lang,
-                    FilterGroupLocalizationsTable.name <- name)
-        
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Update group localization with id=\(groupId) lang=\(lang) and name=\(name)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteAllLocalizationForGroup(groupId: Int) throws {
-        // Query: DELETE FROM filter_group_localization WHERE group_id = groupId
-        let query = FilterGroupLocalizationsTable.table.where(FilterGroupLocalizationsTable.groupId == groupId).delete()
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete group localizations with id=\(groupId)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteLocalizationForGroup(groupId: Int, lang: String) throws {
-        // Query: DELTE FROM filter_group_localization WHERE group_id = groupId AND lang = lang
-        let query = FilterGroupLocalizationsTable.table.where(FilterGroupLocalizationsTable.groupId == groupId &&
-                                                                FilterGroupLocalizationsTable.lang == lang).delete()
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete group localization with group id=\(groupId) and lang=\(lang)")
+        Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
     }
 }

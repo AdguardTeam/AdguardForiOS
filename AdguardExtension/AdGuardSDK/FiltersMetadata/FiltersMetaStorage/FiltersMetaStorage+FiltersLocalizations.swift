@@ -62,47 +62,16 @@ extension FiltersMetaStorageProtocol {
         return filterLocalization
     }
     
-    func insertOrReplaceLocalizatonForFilter(withId id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
+    // Updates localization for filter. Adds new localization if missing.
+    func updateLocalizatonForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_localizations (filter_id, lang, name, description)
-        
         let query = FilterLocalizationsTable.table
-            .insert(or: .replace,
-                    FilterLocalizationsTable.filterId <- id,
-                    FilterLocalizationsTable.lang <- lang,
-                    FilterLocalizationsTable.name <- filterLocalization.name,
-                    FilterLocalizationsTable.description <- filterLocalization.description)
+                                            .insert(or: .replace,
+                                                    FilterLocalizationsTable.filterId <- id,
+                                                    FilterLocalizationsTable.lang <- lang,
+                                                    FilterLocalizationsTable.name <- localization.name,
+                                                    FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func updateLocalizationForFilter(with id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
-        // Query: UPDATE filter_localizations SET lang = lang, name = filterLocalization.name, description = filterLocalization.description
-        let query = FilterLocalizationsTable.table
-            .where(FilterLocalizationsTable.filterId == id &&
-                    FilterLocalizationsTable.lang == lang)
-            .update(FilterLocalizationsTable.lang <- lang,
-                    FilterLocalizationsTable.name <- filterLocalization.name,
-                    FilterLocalizationsTable.description <- filterLocalization.description)
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Update localization for filter with id=\(id) for lang=\(lang)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteAllLocalizationForFilter(with id: Int) throws {
-        // Query: DELETE FOR filter_localizations WHERE filter_id = id
-        let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete localization for filter with id=\(id)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteLocalizationForFilter(with id: Int, forLanguage lang: String) throws {
-        // Query: DELETE FOR filter_localizations WHERE filter_id = id AND lang = lang
-        let qeury = FilterLocalizationsTable.table
-            .where(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
-            .delete()
-        try filtersDb.run(qeury)
-        Logger.logDebug("(FiltersMetaStorage) - Delete localization for filter with id=\(id) for lang=\(lang)")
     }
 }

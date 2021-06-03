@@ -28,15 +28,15 @@ struct FiltersTable {
     let groupId: Int
     let isEnabled: Bool
     let version: String?
-    let lastUpdateTime: Date?
-    let lastCheckTime: Date?
+    let lastUpdateTime: Date? // TODO: - Looks like this property is useless
+    let lastCheckTime: Date? // TODO: - Looks like this property is useless
     let editable: Bool
     let displayNumber: Int
     let name: String
     let description: String
     let homePage: String?
     let removable: Bool
-    let expires: Int?
+    let expires: Int? // TODO: - Looks like this property is useless
     let subscriptionUrl: String?
     
     // Table name
@@ -95,6 +95,40 @@ struct FiltersTable {
     }
 }
 
+// MARK: - ExtendedFilterMetaProtocol + Setters
+
+fileprivate extension ExtendedFilterMetaProtocol {
+    func getDbSetters(isEnabled: Bool?) -> [Setter] {
+        var sttrs: [Setter] = [FiltersTable.filterId <- self.filterId,
+                               FiltersTable.groupId <- self.group.groupId,
+                               FiltersTable.displayNumber <- self.displayNumber]
+        
+        if let isEnabled = isEnabled {
+            sttrs.append(FiltersTable.isEnabled <- isEnabled)
+        }
+        if let version = self.version {
+            sttrs.append(FiltersTable.version <- version)
+        }
+        if let name =  self.name {
+            sttrs.append(FiltersTable.name <- name)
+        }
+        if let description = self.description {
+            sttrs.append(FiltersTable.description <- description)
+        }
+        if let homePage = self.homePage {
+            sttrs.append(FiltersTable.homePage <- homePage)
+        }
+        if let expires = self.updateFrequency {
+            sttrs.append(FiltersTable.expires <- expires)
+        }
+        if let subscriptionUrl = self.filterDownloadPage {
+            sttrs.append(FiltersTable.subscriptionUrl <- subscriptionUrl)
+        }
+        
+        return sttrs
+    }
+}
+
 // MARK: - FiltersMetaStorageProtocol + Filters methods
 
 extension FiltersMetaStorageProtocol {
@@ -122,78 +156,56 @@ extension FiltersMetaStorageProtocol {
         Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
     }
     
-    
-    func updateFiltersWithJSONMetas(metas: [ExtendedFilterMetaProtocol]) throws {
-        for meta in metas {
-            /* Check if filter exists
-             If true than update filters with new data otherwise create filter with new data
+    /*
+     Updates all passed filters.
+     Adds new filter if missing.
+     If there are some filters from database that are not present in passed list than they will be deleted
+     */
+    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws {
+        for filter in filters {
+            /*
+             Check if filter exists
+             If true than update filter with new data otherwise create it
             */
-            let selectQuery = FiltersTable.table.where(FiltersTable.filterId == meta.filterId)
+            let selectQuery = FiltersTable.table.where(FiltersTable.filterId == filter.filterId)
             if let _ = try filtersDb.pluck(selectQuery) {
-                try updateFilterWithMeta(meta: meta)
+                try update(filter: filter)
             } else {
-                try insertOrReplaceFilterWith(meta: meta)
+                try add(filter: filter)
             }
         }
+        
+        // Remove filters and associated data
+        let filterIds = filters.map { $0.filterId }
+        let filterIdsToDeleteQuery = FiltersTable.table.filter(!filterIds.contains(FiltersTable.filterId))
+        let filterIdsToDeleteResult = try filtersDb.prepare(filterIdsToDeleteQuery)
+        let filterIdsToDelete = filterIdsToDeleteResult.map { $0[FiltersTable.filterId] }
+        try deleteFilters(withIds: filterIdsToDelete)
     }
     
-    func updateFilterWithMeta(meta: ExtendedFilterMetaProtocol) throws {
+    // Updates filter with passed meta
+    func update(filter: ExtendedFilterMetaProtocol) throws {
         // Query: UPDATE filters SET (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
-        let query = FiltersTable.table.where(FiltersTable.filterId == meta.filterId).update(getSettersFrom(meta: meta))
+        let query = FiltersTable.table.where(FiltersTable.filterId == filter.filterId).update(filter.getDbSetters(isEnabled: nil))
         try filtersDb.run(query)
-        try deleteAllLangsForFilter(withId: meta.filterId)
-        try insertOrReplaceLangsIntoFilter(langs: meta.languages, forFilterId: meta.filterId)
-        try insertOrReplaceTagsForFilter(withId: meta.filterId, tags: meta.tags)
-        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(meta.filterId)")
+        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
     }
     
-    func insertOrReplaceFilterWith(meta: ExtendedFilterMetaProtocol) throws {
-        var setters = getSettersFrom(meta: meta)
-        setters.append(FiltersTable.isEnabled <- false)
-        setters.append(FiltersTable.editable <- meta.filterId == 0)  //filterId == 0 it is custom filter id
-        setters.append(FiltersTable.removable <- meta.filterId != 0)
+    // Creates filter with passed meta
+    func add(filter: ExtendedFilterMetaProtocol) throws {
         // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
-        let query = FiltersTable.table.insert(or: .replace, setters)
+        let query = FiltersTable.table.insert(or: .replace, filter.getDbSetters(isEnabled: true))
         try filtersDb.run(query)
-        Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(meta.filterId)")
+        Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
     }
     
-    private func getSettersFrom(meta: ExtendedFilterMetaProtocol) -> [Setter] {
-        var result = [Setter]()
-    
-        result.append(FiltersTable.filterId <- meta.filterId)
-        result.append(FiltersTable.groupId <- meta.group.groupId)
+    // Deletes filters and all data associated with it
+    func deleteFilters(withIds ids: [Int]) throws {
+        let filtersToDelete = FiltersTable.table.filter(ids.contains(FiltersTable.filterId))
+        let deletedRows = try filtersDb.run(filtersToDelete.delete())
+        Logger.logDebug("(FiltersMetaStorage) - deleteFilters; deleted \(deletedRows) filters")
         
-        if let version = meta.version {
-            result.append(FiltersTable.version <- version)
-        }
-        
-        result.append(FiltersTable.displayNumber <- meta.displayNumber)
-        
-        if let name = meta.name {
-            result.append(FiltersTable.name <- name)
-        }
-        
-        if let description = meta.description {
-            result.append(FiltersTable.description <- description)
-        }
-        
-        if let homePage = meta.homePage {
-            result.append(FiltersTable.homePage <- homePage)
-        }
-        
-        if let lastUpdateTime = meta.lastUpdateDate {
-            result.append(FiltersTable.lastUpdateTime <- lastUpdateTime)
-        }
-        
-        if let expires = meta.updateFrequency {
-            result.append(FiltersTable.expires <- expires)
-        }
-
-        if let subscriptionUrl = meta.filterDownloadPage {
-            result.append(FiltersTable.subscriptionUrl <- subscriptionUrl)
-        }
-        
-        return result
+        try deleteLangsForFilters(withIds: ids)
+        try deleteTagsForFilters(withIds: ids)
     }
 }

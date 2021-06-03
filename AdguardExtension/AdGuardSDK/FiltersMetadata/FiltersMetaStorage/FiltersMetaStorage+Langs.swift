@@ -55,42 +55,32 @@ extension FiltersMetaStorageProtocol {
         return result
     }
     
-    func insertOrReplaceLangsIntoFilter(langs: [String], forFilterId filterId: Int) throws {
+    /*
+     Updates all passed languages for filter.
+     Adds new languages if some are missing.
+     If there are some languages from database that are not present in passed list than they will be deleted
+     */
+    func updateAll(langs: [String], forFilterWithId id: Int) throws {
         for lang in langs {
-            try insertOrReplaceLangIntoFilter(lang: lang, forFilterId: filterId)
+            try update(lang: lang, forFilterWithId: id)
         }
+        let langsToDelete = FilterLangsTable.table.filter(FilterLangsTable.filterId == id && !langs.contains(FilterLangsTable.lang))
+        let deletedRows = try filtersDb.run(langsToDelete.delete())
+        Logger.logDebug("(FiltersMetaStorage) - updateAll langs; deleted \(deletedRows) rows")
     }
     
-    func insertOrReplaceLangIntoFilter(lang: String, forFilterId filterId: Int) throws {
-        let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- filterId, FilterLangsTable.lang <- lang)
+    // Updates passed language for filter. If language is missing adds it
+    func update(lang: String, forFilterWithId id: Int) throws {
+        let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- id, FilterLangsTable.lang <- lang)
         // Query: INSERT OR REPLACE INTO filter_langs (filter_id, lang)
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(filterId) and lang \(lang)")
+        Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(id) and lang \(lang)")
     }
     
-    //TODO: Remove this method if it would not be used
-    func updateFiltersLang(oldLang: String, newLang: String, forFilterId filterId: Int) throws {
-        let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId && FilterLangsTable.lang == oldLang).update(FilterLangsTable.lang <- newLang)
-        // Query: UPDATE filter_langs SET "lang" = newLang WHERE ("filter_id = filterId" AND "lang" == oldLang)
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) -  Update row with filterID \(filterId) and old lang \(oldLang) with new lang \(newLang)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteAllLangsForFilter(withId filterId: Int) throws {
-        let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId).delete()
-        // Query: DELETE FROM filter_langs WHERE ("filter_id" = fitlerId)
-
-        let rowId = try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) -  row number \(rowId) deleted for filter with id=\(filterId)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteLangsForFilter(withId filterId: Int, langs: [String]) throws {
-        for lang in langs {
-            let query = FilterLangsTable.table.where(FilterLangsTable.filterId == filterId && FilterLangsTable.lang == lang).delete()
-            let rowId = try filtersDb.run(query)
-            Logger.logDebug("(FiltersMetaStorage) -  row number \(rowId) deleted for filter with id=\(filterId) and lang = \(lang)")
-        }
+    // Deletes langs for filters with passed ids
+    func deleteLangsForFilters(withIds ids: [Int]) throws {
+        let langsToDelete = FiltersTable.table.filter(ids.contains(FilterLangsTable.filterId))
+        let deletedRows = try filtersDb.run(langsToDelete.delete())
+        Logger.logDebug("(FiltersMetaStorage) - deleteLangsForFilters; deleted \(deletedRows) filters")
     }
 }
