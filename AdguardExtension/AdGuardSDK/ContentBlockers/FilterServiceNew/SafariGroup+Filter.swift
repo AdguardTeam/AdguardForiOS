@@ -21,7 +21,7 @@ import Foundation
 protocol SafariFilterProtocol {
     var name: String? { get }
     var description: String? { get }
-    var isEnabled: Bool { get }
+    var isEnabled: Bool { get set }
     var version: String? { get }
     var lastUpdateDate: Date? { get }
     var updateFrequency: Int? { get }
