@@ -240,7 +240,7 @@ class MigrationService: MigrationServiceProtocol {
          they should be changed from `quic://example.org` to `quic://example.org:784`.
          DoQ sdns:// stamps should also be patched to include port, if they are in list
         */
-        if lastBuildVersion < 693, let dnsProvidersMigratable = dnsProvidersService as? DnsProvidersServiceMigratable {
+        if lastBuildVersion < 702, let dnsProvidersMigratable = dnsProvidersService as? DnsProvidersServiceMigratable {
             dnsProvidersMigratable.changeQuicCustomServersPort()
         }
     }
