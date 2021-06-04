@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
         "state": {
           "branch": null,
-          "revision": "ff0023de6088a43ed785339f7f686615513f1782",
-          "version": "1.5.40"
+          "revision": "82cc82cdc40c52d51999a066a83a730f60b34816",
+          "version": "1.5.44"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
         "state": {
           "branch": null,
-          "revision": "6562d613c0a753f5852af01a7ef5655d0dc9416f",
-          "version": "1.1.27"
+          "revision": "2f9769ccde79d84198f5dd163f37f0ee08cb0432",
+          "version": "1.1.28"
         }
       },
       {

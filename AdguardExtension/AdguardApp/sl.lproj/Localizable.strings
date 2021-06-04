@@ -966,3 +966,17 @@
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
 "block_youtube_ads_instructions_done_text" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 2. in 3. korak.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je zdaj brez oglasov! Če znova naložite stran, morate to razširitev znova zagnati";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Ta razširitev naj bi se izvajala samo v YouTubu";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Razširitev je že izvedena";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Med odstranjevanjem oglasov v YouTubu je prišlo do neznane napake";

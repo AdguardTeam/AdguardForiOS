@@ -973,13 +973,13 @@
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "現在 YouTube 為無廣告的！請注意，若您重新載入該頁面，您需要再次啟用此擴充功能";
+"youtube_script_success_title" = "現在 YouTube 為無廣告的！請注意，若您重新載入該頁面，您需要再次執行此延伸功能";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "此擴充功能只於 YouTube 上被啟用";
+"youtube_script_wrong_domain_title" = "此延伸功能被規劃僅於 YouTube 上被執行";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
-"youtube_script_already_executed_title" = "此擴充功能已被運作";
+"youtube_script_already_executed_title" = "此延伸功能已被執行";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "移除 YouTube 的廣告時發生未知的錯誤";
+"youtube_script_error_title" = "當移除 YouTube 廣告時，未知的錯誤發生了";
