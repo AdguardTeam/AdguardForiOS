@@ -133,6 +133,16 @@ fileprivate extension ExtendedFilterMetaProtocol {
 
 extension FiltersMetaStorageProtocol {
     
+    // Checks existing filter id and returns new unique id for custom filter
+    var nextCustomFilterId: Int {
+        // Query: SELECT max(filter_id) FROM filters
+        if let maxId = try? filtersDb.scalar(FiltersTable.table.select(FiltersTable.filterId.max)) {
+            return max(maxId, CustomFilterMeta.baseCustomFilterId) + 1
+        } else {
+            return CustomFilterMeta.baseCustomFilterId
+        }
+    }
+    
     // Returns all filters from database with localizations for specified group and language
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
         // Query: select * from filters where group_id = id order by display_number, filter_id
@@ -171,7 +181,7 @@ extension FiltersMetaStorageProtocol {
             if let _ = try filtersDb.pluck(selectQuery) {
                 try update(filter: filter)
             } else {
-                try add(filter: filter)
+                try add(filter: filter, enabled: true)
             }
         }
         
@@ -192,14 +202,19 @@ extension FiltersMetaStorageProtocol {
     }
     
     // Creates filter with passed meta
-    func add(filter: ExtendedFilterMetaProtocol) throws {
+    func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws {
         // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
-        let query = FiltersTable.table.insert(or: .replace, filter.getDbSetters(isEnabled: true))
+        let query = FiltersTable.table.insert(or: .replace, filter.getDbSetters(isEnabled: enabled))
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
     }
     
-    // Deletes filters and all data associated with it
+    // Deletes filter and all data associated with it
+    func deleteFilter(withId id: Int) throws {
+        try deleteFilters(withIds: [id])
+    }
+    
+    // Deletes filters and all data associated with them
     func deleteFilters(withIds ids: [Int]) throws {
         let filtersToDelete = FiltersTable.table.filter(ids.contains(FiltersTable.filterId))
         let deletedRows = try filtersDb.run(filtersToDelete.delete())

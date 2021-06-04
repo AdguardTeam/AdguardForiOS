@@ -162,6 +162,24 @@ extension ExtendedFiltersMeta {
             self.languages = languages
             self.tags = tags
         }
+        
+        // Initializer for custom filter
+        init(customFilterMeta: ExtendedCustomFilterMetaProtocol, filterId: Int, timeAdded: Date? = Date(), displayNumber: Int, group: GroupMetaProtocol) {
+            self.filterId = filterId
+            self.name = customFilterMeta.name
+            self.description = customFilterMeta.description
+            self.version = customFilterMeta.version
+            self.lastUpdateDate = customFilterMeta.lastUpdateDate
+            self.updateFrequency = customFilterMeta.updateFrequency
+            self.homePage = customFilterMeta.homePage
+            self.filterDownloadPage = customFilterMeta.filterDownloadPage
+            self.timeAdded = timeAdded
+            self.displayNumber = displayNumber
+            self.trustLevel = .full
+            self.languages = []
+            self.tags = []
+            self.group = group
+        }
     }
 }
 

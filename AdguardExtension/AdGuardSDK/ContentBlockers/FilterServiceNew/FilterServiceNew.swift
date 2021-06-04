@@ -42,9 +42,37 @@ protocol FiltersServiceNewProtocol {
      - Parameter enabled: new filter state
      */
     func setFilter(withId id: Int, _ groupId: Int, enabled: Bool)
+    
+    
+    // MARK: - Custom filters methods
+    
+    func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool) throws
+    
+    func deleteCustomFilter(withId id: Int) throws
+//
+//    func renameCustomFilter(withId id: Int, to name: String)
 }
 
+/*
+ This class is a proxy between filters, groups objects and SQLite database.
+ It is used to get or modify filters objects.
+ */
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// TODO: - Check if we need to use background tasks
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 final class FiltersServiceNew: FiltersServiceNewProtocol {
+    
+    enum FilterServiceError: Error, CustomDebugStringConvertible {
+        case invalidCustomFilterId(filterId: Int)
+        
+        var debugDescription: String {
+            switch self {
+            case .invalidCustomFilterId(let filterId): return "Custom filter id must be greater or equal than \(CustomFilterMeta.baseCustomFilterId), actual filter id=\(filterId)"
+            }
+        }
+    }
     
     // MARK: - Public properties
     
@@ -139,6 +167,10 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             NotificationCenter.default.filtersUpdateFinished()
         }
         
+        // Save filters update time if filters were successfully updated
+        if resultError != nil {
+            userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
+        }
         comletionGroup.notify(queue: .main) { onFiltersUpdated(resultError) }
     }
     
@@ -146,7 +178,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         groupsModificationQueue.sync {
             do {
                 try filtersMetaStorage.setGroup(withId: id, enabled: enabled)
-                let groupIndex = _groups.firstIndex(where: { $0.groupType.id == id })!
+                let groupIndex = _groups.firstIndex(where: { $0.groupId == id })!
                 _groups[groupIndex].isEnabled = enabled
                 Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) was successfully set to enabled=\(enabled)")
             } catch {
@@ -169,6 +201,38 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         }
     }
     
+    func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool) throws {
+        let filterId = filtersMetaStorage.nextCustomFilterId
+        let customGroup = groups.first(where: { $0.groupType == .custom })!
+        let filterToAdd = ExtendedFiltersMeta.Meta(customFilterMeta: customFilter, filterId: filterId, displayNumber: filterId, group: customGroup)
+        try filtersMetaStorage.add(filter: filterToAdd, enabled: enabled)
+        
+        groupsModificationQueue.sync {
+            let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
+            let safariFilter = SafariGroup.Filter(customFilter: customFilter, filterId: filterId, isEnabled: true, group: _groups[customGroupIndex], displayNumber: filterId)
+            _groups[customGroupIndex].filters.append(safariFilter)
+        }
+    }
+    
+    func deleteCustomFilter(withId id: Int) throws {
+        guard id >= CustomFilterMeta.baseCustomFilterId else {
+            throw FilterServiceError.invalidCustomFilterId(filterId: id)
+        }
+        try filtersMetaStorage.deleteFilter(withId: id)
+        
+        groupsModificationQueue.sync {
+            let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
+            _groups[customGroupIndex].filters.removeAll(where: { $0.filterId == id })
+        }
+    }
+    
+    func renameCustomFilter(withId id: Int, to name: String) throws {
+        guard id >= CustomFilterMeta.baseCustomFilterId else {
+            throw FilterServiceError.invalidCustomFilterId(filterId: id)
+        }
+        // TODO: - Add method to storage and continue here
+    }
+    
     // MARK: - Private methods
     
     /* Returns all groups froma database with filters and localizations */
@@ -188,9 +252,9 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     /* Returns filters meta for sprecified group */
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
-        let localizedFiltersMeta = try filtersMetaStorage.getLocalizedFiltersForGroup(withId: group.groupType.id, forLanguage: configuration.currentLanguage)
+        let localizedFiltersMeta = try filtersMetaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
         return try localizedFiltersMeta.map { dbFilter in
-            // TODO: - Maybe we should store filter meta in database
+            // TODO: - Maybe we should store rulesCount in database
             let meta = getMetaForFilter(withId: dbFilter.filterId)
             let languages = try filtersMetaStorage.getLangsForFilter(withId: dbFilter.filterId)
             let tags = try filtersMetaStorage.getTagsForFilter(withId: dbFilter.filterId)
@@ -199,7 +263,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
                                       rulesCount: meta?.rulesCount,
                                       languages: languages,
                                       tags: tags,
-                                      filterDownloadPage: meta?.filterDownloadPage)
+                                      filterDownloadPage: dbFilter.subscriptionUrl)
         }
     }
     
@@ -281,8 +345,12 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         let groups = filtersMeta.groups
         let filters = filtersMeta.filters
         
-        try filtersMetaStorage.updateAll(groups: groups)
-        try filtersMetaStorage.updateAll(filters: filters)
+        if !groups.isEmpty {
+            try filtersMetaStorage.updateAll(groups: groups)
+        }
+        if !filters.isEmpty {
+            try filtersMetaStorage.updateAll(filters: filters)
+        }
         try filters.forEach {
             try filtersMetaStorage.updateAll(tags: $0.tags, forFilterWithId: $0.filterId)
             try filtersMetaStorage.updateAll(langs: $0.languages, forFilterWithId: $0.filterId)

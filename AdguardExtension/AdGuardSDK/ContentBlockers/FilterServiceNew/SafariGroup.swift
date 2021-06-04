@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol SafariGroupProtocol {
+protocol SafariGroupProtocol: GroupMetaProtocol {
     var filters: [SafariFilterProtocol] { get }
     var isEnabled: Bool { get set }
     var groupType: SafariGroup.GroupType { get }
@@ -27,6 +27,7 @@ protocol SafariGroupProtocol {
 }
 
 struct SafariGroup: SafariGroupProtocol {
+    let groupId: Int
     var filters: [SafariFilterProtocol]
     var isEnabled: Bool
     let groupType: SafariGroup.GroupType
@@ -36,6 +37,7 @@ struct SafariGroup: SafariGroupProtocol {
     // MARK: Initialization
     
     init(filters: [SafariFilterProtocol], isEnabled: Bool, groupId: Int, groupName: String, displayNumber: Int) {
+        self.groupId = groupId
         self.filters = filters
         self.isEnabled = isEnabled
         self.groupType = GroupType(rawValue: groupId)!
@@ -44,6 +46,7 @@ struct SafariGroup: SafariGroupProtocol {
     }
     
     init(filters: [SafariFilterProtocol], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
+        self.groupId = groupType.id
         self.filters = filters
         self.isEnabled = isEnabled
         self.groupType = groupType
@@ -52,6 +55,7 @@ struct SafariGroup: SafariGroupProtocol {
     }
     
     init(dbGroup: FilterGroupsTable, filters: [SafariFilterProtocol]) {
+        self.groupId = dbGroup.groupId
         self.filters = filters
         self.isEnabled = dbGroup.isEnabled
         self.groupType = GroupType(rawValue: dbGroup.groupId)!

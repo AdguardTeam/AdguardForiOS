@@ -87,5 +87,22 @@ extension SafariGroup {
             self.filterDownloadPage = filterDownloadPage
             self.rulesCount = rulesCount
         }
+        
+        init(customFilter: ExtendedCustomFilterMetaProtocol, filterId: Int, isEnabled: Bool, group: SafariGroupProtocol, displayNumber: Int) {
+            self.name = customFilter.name
+            self.description = customFilter.description
+            self.filterId = filterId
+            self.isEnabled = isEnabled
+            self.version = customFilter.version
+            self.lastUpdateDate = customFilter.lastUpdateDate
+            self.updateFrequency = customFilter.updateFrequency
+            self.group = group
+            self.displayNumber = displayNumber
+            self.languages = []
+            self.tags = []
+            self.homePage = customFilter.homePage
+            self.filterDownloadPage = customFilter.filterDownloadPage
+            self.rulesCount = customFilter.rulesCount
+        }
     }
 }
