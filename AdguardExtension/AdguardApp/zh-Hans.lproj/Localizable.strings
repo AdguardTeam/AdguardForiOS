@@ -362,7 +362,7 @@
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\n保留所有版权。AdGuard.com";
 
 /* (AboutViewController) Logout title */
-"common_logout" = "注销";
+"common_logout" = "登出";
 
 /* (AboutViewController) Login title */
 "common_license" = "许可";

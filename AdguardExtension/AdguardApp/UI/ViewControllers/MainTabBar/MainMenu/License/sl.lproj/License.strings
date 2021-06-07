@@ -34,6 +34,9 @@
 /* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
 "YIm-R8-cxj.text" = "Zavira lažno predstavljanje, prevare in kripto rudarjenje";
 
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "Prijavite se s svojim AdGuard računom AdGuarda ali z družbenimi omrežji";
+
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "PRIJAVA";
 
