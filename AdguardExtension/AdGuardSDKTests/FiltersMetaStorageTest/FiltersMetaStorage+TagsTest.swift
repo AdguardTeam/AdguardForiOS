@@ -34,7 +34,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetAllTagsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let tags = try filtersStorage.getAllTags()
             XCTAssertFalse(tags.isEmpty)
@@ -50,7 +50,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let tags = try filtersStorage.getTagsForFilter(withId: 1)
             XCTAssertFalse(tags.isEmpty)
@@ -67,7 +67,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithNonExistingFilterId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var tags = try filtersStorage.getTagsForFilter(withId: 123456789)
             XCTAssertTrue(tags.isEmpty)
@@ -81,7 +81,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testUpdateAll() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var tags = try filtersStorage.getTagsForFilter(withId: 10000)
             XCTAssert(tags.isEmpty)
@@ -121,7 +121,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             XCTAssertFalse(try filtersStorage.getTagsForFilter(withId: 1).isEmpty)
             try filtersStorage.updateAll(tags: [], forFilterWithId: 1)
@@ -132,7 +132,7 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testDeleteTagsForFilters() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var tags1 = try filtersStorage.getTagsForFilter(withId: 1)
             var tags2 = try filtersStorage.getTagsForFilter(withId: 233)

@@ -47,7 +47,7 @@ struct FilterTagsTable {
 
 // MARK: - FiltersMetaStorageProtocol + Tags methods
 
-extension FiltersMetaStorageProtocol {
+extension FiltersMetaStorage {
     
     // Returns all tags from database
     func getAllTags() throws -> [FilterTagsTable] {

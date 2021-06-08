@@ -21,4 +21,8 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
     func saveFilter(withId id: Int, filterContent: String) throws {
         
     }
+    
+    func deleteFitler(withId id: Int) throws {
+        
+    }
 }

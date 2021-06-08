@@ -30,7 +30,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
     }
 
     func testGetLocalizationForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
@@ -52,7 +52,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
     }
     
     func testGetLocalizationForFilterWithNonExistingIdOrLanguage() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "foo")
             XCTAssertNil(localization)
@@ -65,14 +65,14 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
     }
     
     func testUpdateLocalizatonForFilter() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssertNotEqual(localization?.name, "foo")
             XCTAssertNotEqual(localization?.description, "bar")
             
-            try filtersStorage.updateLocalizatonForFilter(withId: 1, forLanguage: "en", localization: .init(name: "foo", description: "bar"))
+            try filtersStorage.updateLocalizationForFilter(withId: 1, forLanguage: "en", localization: .init(name: "foo", description: "bar"))
             
             localization = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
@@ -84,7 +84,7 @@ class FiltersMetaStorage_FiltersLocalizationsTest: XCTestCase {
     }
     
     func testDeleteAllLocalizationForFilters() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var lang1 = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "en")
             var lang2 = try filtersStorage.getLocalizationForFilter(withId: 1, forLanguage: "fr")

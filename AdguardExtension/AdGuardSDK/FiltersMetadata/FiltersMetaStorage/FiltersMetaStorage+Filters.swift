@@ -93,6 +93,24 @@ struct FiltersTable {
         self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
+    
+    // Default initializer
+    init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, lastCheckTime: Date?, editable: Bool, displayNumber: Int, name: String, description: String, homePage: String?, removable: Bool, expires: Int?, subscriptionUrl: String?) {
+        self.filterId = filterId
+        self.groupId = groupId
+        self.isEnabled = isEnabled
+        self.version = version
+        self.lastUpdateTime = lastUpdateTime
+        self.lastCheckTime = lastCheckTime
+        self.editable = editable
+        self.displayNumber = displayNumber
+        self.name = name
+        self.description = description
+        self.homePage = homePage
+        self.removable = removable
+        self.expires = expires
+        self.subscriptionUrl = subscriptionUrl
+    }
 }
 
 // MARK: - ExtendedFilterMetaProtocol + Setters
@@ -129,9 +147,7 @@ fileprivate extension ExtendedFilterMetaProtocol {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Filters methods
-
-extension FiltersMetaStorageProtocol {
+extension FiltersMetaStorage {
     
     // Checks existing filter id and returns new unique id for custom filter
     var nextCustomFilterId: Int {

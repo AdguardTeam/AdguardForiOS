@@ -47,7 +47,7 @@ struct FilterLocalizationsTable {
 
 // MARK: - FiltersMetaStorageProtocol + FiltersLocalizations methods
  
-extension FiltersMetaStorageProtocol {
+extension FiltersMetaStorage {
     
     // Returns localized strings for specified filter and language
     func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable? {
@@ -63,7 +63,7 @@ extension FiltersMetaStorageProtocol {
     }
     
     // Updates localization for filter. Adds new localization if missing.
-    func updateLocalizatonForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
+    func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_localizations (filter_id, lang, name, description)
         let query = FilterLocalizationsTable.table
                                             .insert(or: .replace,

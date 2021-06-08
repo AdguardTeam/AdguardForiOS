@@ -34,7 +34,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let lang = try filtersStorage.getLangsForFilter(withId: 1)
             XCTAssertFalse(lang.isEmpty)
@@ -47,7 +47,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithDifferentLocalization() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let lang = try filtersStorage.getLangsForFilter(withId: 8)
             XCTAssertFalse(lang.isEmpty)
@@ -61,7 +61,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testGetLangsForFilterWithNonExistingId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var lang = try filtersStorage.getLangsForFilter(withId: 123456789)
             XCTAssertTrue(lang.isEmpty)
@@ -75,7 +75,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testUpdateAll() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         let testLangs = ["en", "fr", "ru"]
         do {
             var lang = try filtersStorage.getLangsForFilter(withId: 123)
@@ -98,7 +98,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             XCTAssertFalse(try filtersStorage.getLangsForFilter(withId: 1).isEmpty)
             try filtersStorage.updateAll(langs: [], forFilterWithId: 1)
@@ -109,7 +109,7 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
     }
     
     func testDeleteLangsForFilterId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var lang1 = try filtersStorage.getLangsForFilter(withId: 1)
             var lang2 = try filtersStorage.getLangsForFilter(withId: 233)

@@ -51,11 +51,19 @@ struct FilterGroupsTable {
         self.displayNumber = dbGroup[FilterGroupsTable.displayNumber]
         self.isEnabled = dbGroup[FilterGroupsTable.isEnabled]
     }
+    
+    // Default initializer
+    init(groupId: Int, name: String, displayNumber: Int, isEnabled: Bool) {
+        self.groupId = groupId
+        self.name = name
+        self.displayNumber = displayNumber
+        self.isEnabled = isEnabled
+    }
 }
 
 // MARK: - FiltersMetaStorageProtocol + Groups methods
 
-extension FiltersMetaStorageProtocol {
+extension FiltersMetaStorage {
     
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {

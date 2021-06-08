@@ -75,7 +75,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
 
     func testGetAllFiltersWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var filters = try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en")
             XCTAssertFalse(filters.isEmpty)
@@ -126,7 +126,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testGetAllFiltersWithNonExistingLang() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let filters = try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "123")
             XCTAssertFalse(filters.isEmpty)
@@ -155,9 +155,9 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testSetGroup() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
-            guard let filter = try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en").first else { return XCTFail() }
+            let filter = (try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en").first)!
             let filterId = filter.filterId
             let oldValue = filter.isEnabled
             try filtersStorage.setFilter(withId: filterId, enabled: !filter.isEnabled)
@@ -169,7 +169,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
 
     func testUpdateAll() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             
             var filters = try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en")
@@ -242,7 +242,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testUpdateAllWithInserrtionNewFilters() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             XCTAssert(try filtersStorage.getLocalizedFiltersForGroup(withId: 123123123, forLanguage: "en").isEmpty)
             try filtersStorage.updateAll(filters: testFilters)
@@ -253,7 +253,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             XCTAssertFalse(try filtersStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en").isEmpty)
             try filtersStorage.updateAll(filters: [])
@@ -264,7 +264,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testDeleteFilters() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var filters = try filtersStorage.getLocalizedFiltersForGroup(withId: 7, forLanguage: "en").filter { $0.filterId == 1 || $0.filterId == 6 || $0.filterId == 7}
             
@@ -304,7 +304,7 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
     }
     
     func testRenameFilter() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var count = try productionDbManager?.filtersDb.scalar("SELECT count(*) FROM filters WHERE (\"filter_id\" = \"123123\")") as! Int64
             XCTAssertEqual(count, 0)

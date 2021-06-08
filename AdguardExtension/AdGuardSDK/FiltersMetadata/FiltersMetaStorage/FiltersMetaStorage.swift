@@ -19,9 +19,70 @@
 import Foundation
 import SQLite
 
-protocol FiltersMetaStorageProtocol: AnyObject {
+typealias FiltersMetaStorageMultiProtocol = FiltersMetaStorageProtocol_Filters &
+    FiltersMetaStorageProtocol_Groups &
+    FiltersMetaStorageProtocol_Tags &
+    FiltersMetaStorageProtocol_Tags &
+    FiltersMetaStorageProtocol_Langs &
+    FiltersMetaStorageProtocol_GroupLocalizations &
+    FiltersMetaStorageProtocol_FiltersLocalizations
+
+protocol FiltersMetaStorageProtocol: FiltersMetaStorageMultiProtocol, AnyObject {
     static var defaultDbLanguage: String { get }
     var filtersDb: Connection { get }
+}
+
+// MARK: - FiltersMetaStorageProtocol + Filters methods
+protocol FiltersMetaStorageProtocol_Filters {
+    var nextCustomFilterId: Int { get }
+    
+    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
+    func setFilter(withId id: Int, enabled: Bool) throws
+    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws
+    func update(filter: ExtendedFilterMetaProtocol) throws
+    func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws
+    func deleteFilter(withId id: Int) throws
+    func deleteFilters(withIds ids: [Int]) throws
+    func renameFilter(withId id: Int, name: String) throws
+}
+
+// MARK: - FiltersMetaStorageProtocol + Groups methods
+protocol FiltersMetaStorageProtocol_Groups {
+    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable]
+    func setGroup(withId id: Int, enabled: Bool) throws
+    func updateAll(groups: [GroupMetaProtocol]) throws
+    func update(group: GroupMetaProtocol) throws
+}
+
+// MARK: - FiltersMetaStorageProtocol + Tags methods
+protocol FiltersMetaStorageProtocol_Tags {
+    func getAllTags() throws -> [FilterTagsTable]
+    func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable]
+    func updateAll(tags: [ExtendedFiltersMeta.Tag], forFilterWithId id: Int) throws
+    func update(tag: ExtendedFiltersMeta.Tag, forFilterWithId id: Int) throws
+    func deleteTagsForFilters(withIds ids: [Int]) throws
+}
+
+// MARK: - FiltersMetaStorageProtocol + Langs methods
+protocol FiltersMetaStorageProtocol_Langs {
+    func getLangsForFilter(withId id: Int) throws -> [String]
+    func updateAll(langs: [String], forFilterWithId id: Int) throws
+    func update(lang: String, forFilterWithId id: Int) throws
+    func deleteLangsForFilters(withIds ids: [Int]) throws
+}
+
+// MARK: - FiltersMetaStorageProtocol + Group localizations methods
+protocol FiltersMetaStorageProtocol_GroupLocalizations {
+    func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable?
+    func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws
+}
+
+// MARK: - FiltersMetaStorageProtocol + Filters localizations methods
+protocol FiltersMetaStorageProtocol_FiltersLocalizations {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable?
+    func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
+    func deleteAllLocalizationForFilter(withId id: Int) throws
 }
 
 final class FiltersMetaStorage: FiltersMetaStorageProtocol {

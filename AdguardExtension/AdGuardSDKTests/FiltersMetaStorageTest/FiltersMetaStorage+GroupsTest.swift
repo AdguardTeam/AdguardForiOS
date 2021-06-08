@@ -37,7 +37,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
 
     func testGetAllLocalizedGroupsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
             XCTAssertFalse(groups.isEmpty)
@@ -69,7 +69,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
 
     func testGetAllLocalizedGroupsWithNonExistingLanguage() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "123")
             XCTAssertFalse(groups.isEmpty)
@@ -90,7 +90,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllLocalizedGroupsWithDefaultLocalization() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             let enLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
             var frLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
@@ -122,7 +122,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testSetGroup() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             guard let group = try filtersStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
             let oldValue = group.isEnabled
@@ -135,7 +135,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testUpdateAll() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
                 XCTAssertFalse(groups.isEmpty)
@@ -170,7 +170,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let filtersStorage = filtersStorage!
         do {
             XCTAssertFalse(try filtersStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
             try filtersStorage.updateAll(groups: [])

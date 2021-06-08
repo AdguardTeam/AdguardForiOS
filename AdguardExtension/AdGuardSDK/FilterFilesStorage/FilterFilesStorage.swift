@@ -58,6 +58,14 @@ public protocol FilterFilesStorageProtocol {
      - Throws: Some Foundation methods can throw while writing string to file
      */
     func saveFilter(withId id: Int, filterContent: String) throws
+    
+    /**
+     Delete  filter file with specified **id**
+     - Parameter id: Filter unique id where
+     
+     - Throws: Some Foundation methods can throw while removing file
+     */
+    func deleteFitler(withId id: Int) throws
 }
 
 /* This class manages filters text files */
@@ -125,6 +133,11 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
     public func saveFilter(withId id: Int, filterContent: String) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
+    }
+    
+    public func deleteFitler(withId id: Int) throws {
+        let filterFileUrl = fileUrlForFilter(withId: id)
+        try fileManager.removeItem(at: filterFileUrl)
     }
     
     // MARK: - Private methods
