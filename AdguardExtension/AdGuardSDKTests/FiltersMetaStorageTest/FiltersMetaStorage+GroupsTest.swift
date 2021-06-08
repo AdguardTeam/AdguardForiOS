@@ -15,9 +15,9 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
         filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
         
         setOfDefaultLocalizedGroups.removeAll()
-        let groups = try filtersStorage?.getAllGroups()
+        let groups = try filtersStorage?.getAllLocalizedGroups(forLanguage: "en")
         groups?.forEach {
-            setOfDefaultLocalizedGroups.insert($0.groupName)
+            setOfDefaultLocalizedGroups.insert($0.name)
         }
     }
     
@@ -35,59 +35,53 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
         FiltersMetaStorageTestProcessor.deleteTestFolder()
         FiltersMetaStorageTestProcessor.clearRootDirectory()
     }
-    
-    func testGetAllGroupsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let groups = try filtersStorage.getAllGroups()
-            XCTAssertFalse(groups.isEmpty)
-            groups.forEach {
-                XCTAssertNotNil($0.isEnabled)
-                XCTAssertNotNil($0.displayNumber)
-                XCTAssertNotNil($0.groupId)
-                XCTAssertNotNil($0.groupName)
-                XCTAssertFalse($0.groupName.isEmpty)
-            }
 
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
     func testGetAllLocalizedGroupsWithSuccess() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
-            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
             XCTAssertFalse(groups.isEmpty)
             groups.forEach {
                 XCTAssertNotNil($0.isEnabled)
                 XCTAssertNotNil($0.displayNumber)
                 XCTAssertNotNil($0.groupId)
-                XCTAssertNotNil($0.groupName)
-                XCTAssertFalse($0.groupName.isEmpty)
-                
-                XCTAssertFalse(setOfDefaultLocalizedGroups.contains($0.groupName))
+                XCTAssertNotNil($0.name)
+                XCTAssertFalse($0.name.isEmpty)
+
+                XCTAssert(setOfDefaultLocalizedGroups.contains($0.name))
+            }
+            
+            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            XCTAssertFalse(groups.isEmpty)
+            groups.forEach {
+                XCTAssertNotNil($0.isEnabled)
+                XCTAssertNotNil($0.displayNumber)
+                XCTAssertNotNil($0.groupId)
+                XCTAssertNotNil($0.name)
+                XCTAssertFalse($0.name.isEmpty)
+
+                XCTAssertFalse(setOfDefaultLocalizedGroups.contains($0.name))
             }
 
         } catch {
             XCTFail("\(error)")
         }
     }
-    
+
     func testGetAllLocalizedGroupsWithNonExistingLanguage() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
             let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "123")
-            XCTAssertTrue(groups.isEmpty)
+            XCTAssertFalse(groups.isEmpty)
             XCTAssertNotNil(groups)
             groups.forEach {
                 XCTAssertNotNil($0.isEnabled)
                 XCTAssertNotNil($0.displayNumber)
                 XCTAssertNotNil($0.groupId)
-                XCTAssertNotNil($0.groupName)
-                XCTAssertFalse($0.groupName.isEmpty)
-                
-                XCTAssertFalse(setOfDefaultLocalizedGroups.contains($0.groupName))
+                XCTAssertNotNil($0.name)
+                XCTAssertFalse($0.name.isEmpty)
+
+                XCTAssert(setOfDefaultLocalizedGroups.contains($0.name))
             }
 
         } catch {
@@ -95,65 +89,92 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
         }
     }
     
-    func testUpdateEnabledGroupState() {
+    func testGetAllLocalizedGroupsWithDefaultLocalization() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
-            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
-            XCTAssertFalse(groups.isEmpty)
-            for group in groups {
-                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
+            let enLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            var frLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            
+            enLocalization.forEach { enLocal in
+                XCTAssert(frLocalization.contains {
+                    $0.name != enLocal.name
+                })
             }
             
-            let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
-            XCTAssertFalse(updatedGroups.isEmpty)
-            XCTAssertEqual(groups.count, updatedGroups.count)
-            for (index,_) in updatedGroups.enumerated() {
-                XCTAssertEqual(groups[index].isEnabled, !updatedGroups[index].isEnabled)
-            }
+            XCTAssertFalse(frLocalization.isEmpty)
             
+            //Delete localization for language FR to test default localization from filter_group table data fetch
+            try productionDbManager?.filtersDb.run("DELETE FROM filter_group_localizations WHERE (\"lang\" = \"fr\")")
+            let count = try productionDbManager?.filtersDb.scalar("SELECT count(*) FROM filter_group_localizations WHERE (\"lang\" = \"fr\")") as! Int64
+            XCTAssertNotNil(count)
+            XCTAssert(count == 0)
+            
+            frLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            
+            enLocalization.forEach { enLocal in
+                XCTAssert(frLocalization.contains {
+                    $0.name == enLocal.name
+                })
+            }
         } catch {
             XCTFail("\(error)")
         }
     }
     
-    func testUpdateEnabledGroupStateWithNonExistionGroup() {
+    func testSetGroup() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
-            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")
-            XCTAssert(groups.isEmpty)
-            for group in groups {
-                try filtersStorage.setGroup(withId: group.groupId, enabled: !group.isEnabled)
+            guard let group = try filtersStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
+            let oldValue = group.isEnabled
+            try filtersStorage.setGroup(withId: 1, enabled: !group.isEnabled)
+            guard let group = try filtersStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
+            XCTAssertNotEqual(oldValue, group.isEnabled)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testUpdateAll() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+                XCTAssertFalse(groups.isEmpty)
+
+            
+            let modifiedGroups = groups.map {
+                ExtendedFiltersMeta.Group(groupId: $0.groupId, groupName: "foo1001", displayNumber: 123321)
             }
             
-            let updatedGroups = try filtersStorage.getAllLocalizedGroups(forLanguage: "foo")
-            XCTAssert(updatedGroups.isEmpty)
-            XCTAssertEqual(groups.count, updatedGroups.count)
+            try filtersStorage.updateAll(groups: modifiedGroups)
             
+            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            modifiedGroups.forEach{ modifiedGroup in
+                XCTAssert(groups.contains(where: {
+                    $0.groupId == modifiedGroup.groupId &&
+                    $0.displayNumber == 123321
+                }))
+            }
+            
+            let modifiedGroup = modifiedGroups.first!
+            try filtersStorage.updateAll(groups: [ExtendedFiltersMeta.Group(groupId: modifiedGroup.groupId, groupName: "foo", displayNumber: 333333)])
+            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            
+            XCTAssertEqual(groups.count, 1)
+            XCTAssert(groups.contains(where: {
+                $0.groupId == modifiedGroup.groupId &&
+                $0.displayNumber == 333333
+            }))
         } catch {
             XCTFail("\(error)")
         }
     }
     
-    func testDeleteGroupWithSuccess() {
+    func testUpdateAllWithEmptyValue() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
         do {
-            guard let group = try filtersStorage.getAllGroups().first else { return XCTFail() }
-            try filtersStorage.deleteGroup(groupId: group.groupId)
-            let removed = try filtersStorage.getAllGroups().filter { $0.groupId == group.groupId }
-            XCTAssert(removed.isEmpty)
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testDeleteGroupWithNonExistingGroupId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let group = try filtersStorage.getAllGroups().filter { $0.groupId == -123 }
-            XCTAssert(group.isEmpty)
-            try filtersStorage.deleteGroup(groupId: -123)
-            let removed = try filtersStorage.getAllGroups().filter { $0.groupId == -123 }
-            XCTAssert(removed.isEmpty)
+            XCTAssertFalse(try filtersStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
+            try filtersStorage.updateAll(groups: [])
+            XCTAssert(try filtersStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
         } catch {
             XCTFail("\(error)")
         }

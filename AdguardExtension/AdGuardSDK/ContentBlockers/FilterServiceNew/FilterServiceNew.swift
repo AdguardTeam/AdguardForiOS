@@ -49,8 +49,8 @@ protocol FiltersServiceNewProtocol {
     func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool) throws
     
     func deleteCustomFilter(withId id: Int) throws
-//
-//    func renameCustomFilter(withId id: Int, to name: String)
+
+    func renameCustomFilter(withId id: Int, to name: String) throws
 }
 
 /*
@@ -66,10 +66,12 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     enum FilterServiceError: Error, CustomDebugStringConvertible {
         case invalidCustomFilterId(filterId: Int)
+        case updatePeriodError
         
         var debugDescription: String {
             switch self {
             case .invalidCustomFilterId(let filterId): return "Custom filter id must be greater or equal than \(CustomFilterMeta.baseCustomFilterId), actual filter id=\(filterId)"
+            case .updatePeriodError: return "Last update date is less then minimum update period"
             }
         }
     }
@@ -130,6 +132,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             // Check update conditions
             let now = Date()
             if now.timeIntervalSince(self.userDefaultsStorage.lastFiltersUpdateCheckDate) < Self.updatePeriod && !forcibly {
+                onFiltersUpdated(FilterServiceError.updatePeriodError)
                 return
             }
             
@@ -178,9 +181,12 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         groupsModificationQueue.sync {
             do {
                 try filtersMetaStorage.setGroup(withId: id, enabled: enabled)
-                let groupIndex = _groups.firstIndex(where: { $0.groupId == id })!
-                _groups[groupIndex].isEnabled = enabled
-                Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) was successfully set to enabled=\(enabled)")
+                if let groupIndex = _groups.firstIndex(where: { $0.groupId == id }) {
+                    _groups[groupIndex].isEnabled = enabled
+                    Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) was successfully set to enabled=\(enabled)")
+                } else {
+                    Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) not exists")
+                }
             } catch {
                 Logger.logError("(FiltersService) - setGroup; Error setting group with id=\(id) to enabled=\(enabled): \(error)")
             }
@@ -191,10 +197,14 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         groupsModificationQueue.sync {
             do {
                 try filtersMetaStorage.setFilter(withId: id, enabled: enabled)
-                let groupIndex = _groups.firstIndex(where: { $0.groupType.id == groupId })!
-                let filterIndex = _groups[groupIndex].filters.firstIndex(where: { $0.filterId == id })!
-                _groups[groupIndex].filters[filterIndex].isEnabled = enabled
-                Logger.logDebug("(FiltersService) - setFilter; Filter id=\(id); group id=\(groupId) was successfully set to enabled=\(enabled)")
+                if let groupIndex = _groups.firstIndex(where: { $0.groupType.id == groupId })
+                   , let filterIndex = _groups[groupIndex].filters.firstIndex(where: { $0.filterId == id }) {
+                    _groups[groupIndex].filters[filterIndex].isEnabled = enabled
+                    Logger.logDebug("(FiltersService) - setFilter; Filter id=\(id); group id=\(groupId) was successfully set to enabled=\(enabled)")
+                } else {
+                    Logger.logDebug("(FiltersService) - setFilter; Filter id=\(id) or group id=\(groupId) not exists")
+                }
+
             } catch {
                 Logger.logError("(FiltersService) - setFilter; Error setting filtrer with id=\(id); group id=\(groupId) to enabled=\(enabled): \(error)")
             }
@@ -230,7 +240,28 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         guard id >= CustomFilterMeta.baseCustomFilterId else {
             throw FilterServiceError.invalidCustomFilterId(filterId: id)
         }
-        // TODO: - Add method to storage and continue here
+        try filtersMetaStorage.renameFilter(withId: id, name: name)
+        groupsModificationQueue.sync {
+            let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
+            let filterIndex = _groups[customGroupIndex].filters.firstIndex(where: { $0.filterId == id })!
+            let filter = _groups[customGroupIndex].filters[filterIndex]
+            let newFilter = SafariGroup.Filter(name: name,
+                                               description: filter.description,
+                                               isEnabled: filter.isEnabled,
+                                               filterId: filter.filterId,
+                                               version: filter.version,
+                                               lastUpdateDate: filter.lastUpdateDate,
+                                               updateFrequency: filter.updateFrequency,
+                                               group: filter.group,
+                                               displayNumber: filter.displayNumber,
+                                               languages: filter.languages,
+                                               tags: filter.tags,
+                                               homePage: filter.homePage,
+                                               filterDownloadPage: filter.filterDownloadPage,
+                                               rulesCount: filter.rulesCount)
+            
+            _groups[customGroupIndex].filters[filterIndex] = newFilter
+        }
     }
     
     // MARK: - Private methods

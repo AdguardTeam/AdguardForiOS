@@ -74,120 +74,75 @@ class FiltersMetaStorage_LangsTest: XCTestCase {
         }
     }
     
-    func testInsertLangsWithNonExistingFilterId() {
+    func testUpdateAll() {
         guard let filtersStorage = filtersStorage else { return XCTFail() }
+        let testLangs = ["en", "fr", "ru"]
         do {
-            let langs = try filtersStorage.getLangsForFilter(withId: -1)
-            XCTAssert(langs.isEmpty)
-            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo", "bar"], forFilterId: -1)
-            let insertedLangs = try filtersStorage.getLangsForFilter(withId: -1)
-            XCTAssertFalse(insertedLangs.isEmpty)
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testInsertLangsWithExistingFilterId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let langs = try filtersStorage.getLangsForFilter(withId: 1)
-            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo", "bar"], forFilterId: 1)
-            let insertedLangs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssert(insertedLangs.count > langs.count)
+            var lang = try filtersStorage.getLangsForFilter(withId: 123)
+            XCTAssert(lang.isEmpty)
             
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testUpdateLangsWithSucces() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let langs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertFalse(langs.isEmpty)
-            for (index, value) in langs.enumerated() {
-                try filtersStorage.updateFiltersLang(oldLang: value, newLang: "foo\(index)", forFilterId: 1)
-            }
-            let updatedLangs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertFalse(updatedLangs.isEmpty)
-            XCTAssertNotEqual(langs, updatedLangs)
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testUpdateLangsWithNonExistingRows() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            guard let lang = try filtersStorage.getLangsForFilter(withId: 1).first else { return XCTFail() }
-            XCTAssertNoThrow(try filtersStorage.updateFiltersLang(oldLang: lang, newLang: "bar", forFilterId: -1))
-            XCTAssertNoThrow(try filtersStorage.updateFiltersLang(oldLang: "foo", newLang: "bar", forFilterId: 1))
-            XCTAssertNoThrow(try filtersStorage.updateFiltersLang(oldLang: "foo", newLang: "bar", forFilterId: -1))
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testDeleteAllLangsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let langs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertFalse(langs.isEmpty)
-            try filtersStorage.deleteAllLangsForFilter(withId: 1)
-            let removedLangs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssert(removedLangs.isEmpty)
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testDeleteAllLangsFromNonExistingFilterId() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let nonExistingLangsFiletr = try filtersStorage.getLangsForFilter(withId: -123)
-            XCTAssert(nonExistingLangsFiletr.isEmpty)
-            XCTAssertNoThrow(try filtersStorage.deleteAllLangsForFilter(withId: -123))
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testDeleteLangsWithSuccess() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            try filtersStorage.insertOrReplaceLangsIntoFilter(langs: ["foo#1", "foo#2"], forFilterId: 101)
-            let inserted = try filtersStorage.getLangsForFilter(withId: 101)
-            XCTAssertFalse(inserted.isEmpty)
-            try filtersStorage.deleteLangsForFilter(withId: 101, langs: ["foo#1", "foo#2"])
-            let removed = try filtersStorage.getLangsForFilter(withId: 101)
-            XCTAssert(removed.isEmpty)
-        } catch {
-            XCTFail("\(error)")
-        }
-    }
-    
-    func testDeleteLangsWithNonExistingFitlerIdOrlangs() {
-        guard let filtersStorage = filtersStorage else { return XCTFail() }
-        do {
-            let inserted = try filtersStorage.getLangsForFilter(withId: 101)
-            XCTAssert(inserted.isEmpty)
-            try filtersStorage.deleteLangsForFilter(withId: 101, langs: ["foo#1", "foo#2"])
-            var removed = try filtersStorage.getLangsForFilter(withId: 101)
-            XCTAssert(removed.isEmpty)
+            try filtersStorage.updateAll(langs: testLangs, forFilterWithId: 123)
+            lang = try filtersStorage.getLangsForFilter(withId: 123)
+            XCTAssertFalse(lang.isEmpty)
+            testLangs.forEach { XCTAssert(lang.contains($0)) }
             
+            try filtersStorage.updateAll(langs: ["foo"], forFilterWithId: 123)
+            lang = try filtersStorage.getLangsForFilter(withId: 123)
+            XCTAssertFalse(lang.isEmpty)
+            testLangs.forEach { XCTAssertFalse(lang.contains($0)) }
+            XCTAssertEqual(lang.count, 1)
+            XCTAssert(lang.contains("foo"))
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testUpdateAllWithEmptyValue() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            XCTAssertFalse(try filtersStorage.getLangsForFilter(withId: 1).isEmpty)
+            try filtersStorage.updateAll(langs: [], forFilterWithId: 1)
+            XCTAssert(try filtersStorage.getLangsForFilter(withId: 1).isEmpty)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testDeleteLangsForFilterId() {
+        guard let filtersStorage = filtersStorage else { return XCTFail() }
+        do {
+            var lang1 = try filtersStorage.getLangsForFilter(withId: 1)
+            var lang2 = try filtersStorage.getLangsForFilter(withId: 233)
+            var lang3 = try filtersStorage.getLangsForFilter(withId: 249)
+            var lang4 = try filtersStorage.getLangsForFilter(withId: 214)
+
+            XCTAssertFalse(lang1.isEmpty)
+            XCTAssertFalse(lang2.isEmpty)
+            XCTAssertFalse(lang3.isEmpty)
+            XCTAssertFalse(lang4.isEmpty)
             
-            var langs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertFalse(langs.isEmpty)
-            try filtersStorage.deleteLangsForFilter(withId: 1, langs: ["foo#1", "foo#2"])
-            removed = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertEqual(langs, removed)
+            try filtersStorage.deleteLangsForFilters(withIds: [1])
             
-            langs = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertFalse(langs.isEmpty)
-            try filtersStorage.deleteLangsForFilter(withId: 1, langs: [])
-            removed = try filtersStorage.getLangsForFilter(withId: 1)
-            XCTAssertEqual(langs, removed)
+            lang1 = try filtersStorage.getLangsForFilter(withId: 1)
+            lang2 = try filtersStorage.getLangsForFilter(withId: 233)
+            lang3 = try filtersStorage.getLangsForFilter(withId: 249)
+            lang4 = try filtersStorage.getLangsForFilter(withId: 214)
             
+            XCTAssert(lang1.isEmpty)
+            XCTAssertFalse(lang2.isEmpty)
+            XCTAssertFalse(lang3.isEmpty)
+            XCTAssertFalse(lang4.isEmpty)
+            
+            try filtersStorage.deleteLangsForFilters(withIds: [233,249,214])
+            
+            lang2 = try filtersStorage.getLangsForFilter(withId: 233)
+            lang3 = try filtersStorage.getLangsForFilter(withId: 249)
+            lang4 = try filtersStorage.getLangsForFilter(withId: 214)
+            
+            XCTAssert(lang2.isEmpty)
+            XCTAssert(lang3.isEmpty)
+            XCTAssert(lang4.isEmpty)
+
         } catch {
             XCTFail("\(error)")
         }

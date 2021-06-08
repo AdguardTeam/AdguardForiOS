@@ -74,4 +74,17 @@ extension FiltersMetaStorageProtocol {
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
     }
+    
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
+        for id in ids {
+            try deleteAllLocalizationForFilter(withId: id)
+        }
+    }
+    
+    func deleteAllLocalizationForFilter(withId id: Int) throws {
+        // Query: DELETE FROM filter_localizations WHERE filter_id = id
+        let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
+    }
 }

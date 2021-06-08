@@ -65,7 +65,7 @@ extension FiltersMetaStorageProtocol {
         let result: [FilterGroupsTable] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
             
-            /* If there is no localized group name we trying to get default english localization and if it is steel nil return nil */
+            /* If there is no localized group name we trying to get default english localization and if it is steel nil set default localized name from filter_group row */
             var localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
                 localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
@@ -87,7 +87,6 @@ extension FiltersMetaStorageProtocol {
     
     /*
      Updates all passed groups.
-     Adds new groups if missing.
      If there are some groups from database that are not present in passed list than they will be deleted
      */
     func updateAll(groups: [GroupMetaProtocol]) throws {
@@ -106,8 +105,7 @@ extension FiltersMetaStorageProtocol {
     func update(group: GroupMetaProtocol) throws {
         // Query: UPDATE filter_groups SET name = group.groupName, display_number = group.displayNumber) WHERE group_id = group.groupId
         let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == group.groupId)
-                                           .update(FilterGroupsTable.groupId <- group.groupId,
-                                                   FilterGroupsTable.name <- group.groupName,
+                                           .update(FilterGroupsTable.name <- group.groupName,
                                                    FilterGroupsTable.displayNumber <- group.displayNumber)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")

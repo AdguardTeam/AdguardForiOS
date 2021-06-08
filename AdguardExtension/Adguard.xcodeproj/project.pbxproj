@@ -91,6 +91,10 @@
 		244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */; };
 		245464BF261F5F4100A96613 /* ActionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245464BE261F5F4100A96613 /* ActionWebReporter.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		246FF85C266A52100061FB2E /* FiltersServiceNewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF85B266A52100061FB2E /* FiltersServiceNewTest.swift */; };
+		246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */; };
+		246FF865266A537B0061FB2E /* UserDefaultsStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF864266A537B0061FB2E /* UserDefaultsStorageMock.swift */; };
+		246FF867266A54300061FB2E /* HttpRequestServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */; };
 		247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247432DF261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
@@ -130,6 +134,7 @@
 		247CB64F2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */; };
 		248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
+		2490DD2C266E7B4B00862EC6 /* SafariFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A38025FA50D7008CEC80 /* SafariFilter.swift */; };
 		249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249E10DA2600D187003A5FBD /* URLSchemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5042600A3220047974C /* URLSchemeParser.swift */; };
@@ -155,6 +160,23 @@
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24C0005226550A9000F46373 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 24C0005126550A9000F46373 /* default.db.zip */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
+		24D07CA126690CB00080C862 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */; };
+		24D07CA226690CB50080C862 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
+		24D07CA326690CDE0080C862 /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
+		24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
+		24D07CA626692F9F0080C862 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94523F2B64400F9A544 /* RequestSender.swift */; };
+		24D07CA726692FB00080C862 /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94623F2B64400F9A544 /* RequestSenderProtocol.swift */; };
+		24D07CA826692FBD0080C862 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
+		24D07CA926692FD40080C862 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */; };
+		24D07CAA2669300E0080C862 /* NetworkingService-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D34272612205B00213A5A /* NetworkingService-Common.swift */; };
+		24D07CAB2669302C0080C862 /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94723F2B64400F9A544 /* RequestFactory.swift */; };
+		24D07CAC266930670080C862 /* RequestFactory-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D345B261221C500213A5A /* RequestFactory-Common.swift */; };
+		24D07CAD266930790080C862 /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0985029260B53CD00703DB2 /* FiltersMetadataParser.swift */; };
+		24D07CAE266930880080C862 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0985014260B504F00703DB2 /* FiltersMetadataRequest.swift */; };
+		24D07CAF266930930080C862 /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D336C2611F4EC00213A5A /* FiltersLocalizationsParser.swift */; };
+		24D07CB02669309D0080C862 /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D33442611F43D00213A5A /* FiltersLocalizationsRequest.swift */; };
+		24D07CB1266930B80080C862 /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
+		24D07CB2266930C80080C862 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D59C572653C9CE00B92379 /* ProductionDatabaseManagerTest.swift */; };
 		24D59C592654019300B92379 /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C346A265296F700A4490E /* ProductionDatabaseManager.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
@@ -3135,6 +3157,10 @@
 		244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+UtilsTest.swift"; sourceTree = "<group>"; };
 		245464BE261F5F4100A96613 /* ActionWebReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionWebReporter.swift; sourceTree = "<group>"; };
 		24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		246FF85B266A52100061FB2E /* FiltersServiceNewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceNewTest.swift; sourceTree = "<group>"; };
+		246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFilesStorageMock.swift; sourceTree = "<group>"; };
+		246FF864266A537B0061FB2E /* UserDefaultsStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageMock.swift; sourceTree = "<group>"; };
+		246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestServiceMock.swift; sourceTree = "<group>"; };
 		247432DD261731C00025C7B8 /* UIAlerController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+Style.swift"; sourceTree = "<group>"; };
 		247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+CustomSchemeURLParserProtocol.swift"; sourceTree = "<group>"; };
 		247CB5042600A3220047974C /* URLSchemeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParser.swift; sourceTree = "<group>"; };
@@ -4613,6 +4639,24 @@
 			path = LowLevelSettings;
 			sourceTree = "<group>";
 		};
+		244726D7266E516600A358F0 /* FilterServiceTest */ = {
+			isa = PBXGroup;
+			children = (
+				246FF85B266A52100061FB2E /* FiltersServiceNewTest.swift */,
+			);
+			path = FilterServiceTest;
+			sourceTree = "<group>";
+		};
+		246FF85D266A52410061FB2E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */,
+				246FF864266A537B0061FB2E /* UserDefaultsStorageMock.swift */,
+				246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		247CB5792600B7C50047974C /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -5626,6 +5670,7 @@
 		7EB3E22E264BEDAA00C460FA /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				246FF85D266A52410061FB2E /* Mocks */,
 				7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */,
 				7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */,
 				7EB3E231264BEDAA00C460FA /* Info.plist */,
@@ -5633,6 +5678,7 @@
 				7EB3E23D264BEE6400C460FA /* FilterMetadataParserTest */,
 				7EB3E238264BEE4800C460FA /* AdGuardSDKTests-Bridging-Header.h */,
 				244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */,
+				244726D7266E516600A358F0 /* FilterServiceTest */,
 				7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */,
 			);
 			path = AdGuardSDKTests;
@@ -8947,11 +8993,15 @@
 			files = (
 				7E1C34692652940400A4490E /* DefaultDatabaseManager.swift in Sources */,
 				2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */,
+				24D07CA726692FB00080C862 /* RequestSenderProtocol.swift in Sources */,
 				2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */,
 				7EC97C1D265FEF85005C950C /* FilterServiceNew.swift in Sources */,
 				7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */,
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
+				24D07CB2266930C80080C862 /* CharacterSet+Utils.swift in Sources */,
+				24D07CAE266930880080C862 /* FiltersMetadataRequest.swift in Sources */,
+				24D07CA126690CB00080C862 /* FilterFilesStorage.swift in Sources */,
 				24D59C592654019300B92379 /* ProductionDatabaseManager.swift in Sources */,
 				2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */,
 				2422D3242652F92800C1FD5A /* Logger.swift in Sources */,
@@ -8959,21 +9009,34 @@
 				7E69C5052656617C00EA9DBA /* FiltersMetaStorage.swift in Sources */,
 				7E69C50A2656617C00EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */,
 				7E1C3468265290F300A4490E /* DefaultDatabaseManagerTest.swift in Sources */,
+				24D07CAB2669302C0080C862 /* RequestFactory.swift in Sources */,
+				246FF867266A54300061FB2E /* HttpRequestServiceMock.swift in Sources */,
 				7E69C5022656617C00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */,
+				24D07CAA2669300E0080C862 /* NetworkingService-Common.swift in Sources */,
 				2434A3E1265795C4001E5B72 /* FiltersMetaStorage+GroupsTest.swift in Sources */,
 				2434A3E62657A68D001E5B72 /* FiltersMetaStorage+LangsTest.swift in Sources */,
 				7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */,
+				24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */,
+				246FF865266A537B0061FB2E /* UserDefaultsStorageMock.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
 				7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */,
+				246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */,
 				2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */,
+				246FF85C266A52100061FB2E /* FiltersServiceNewTest.swift in Sources */,
+				24D07CA226690CB50080C862 /* UserDefaultsStorage.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
+				24D07CA926692FD40080C862 /* RequestProtocol.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
+				24D07CA826692FBD0080C862 /* ParserProtocol.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
+				2490DD2C266E7B4B00862EC6 /* SafariFilter.swift in Sources */,
 				242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */,
+				24D07CB1266930B80080C862 /* Dictionary+Utils.swift in Sources */,
 				7EC97C1E265FEF85005C950C /* SafariGroup.swift in Sources */,
 				7E69C5042656617C00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */,
 				7E69C5062656617C00EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
+				24D07CA626692F9F0080C862 /* RequestSender.swift in Sources */,
 				7E69C5032656617C00EA9DBA /* FiltersMetaStorage+Langs.swift in Sources */,
 				7EC97C21265FF384005C950C /* SafariGroup+Filter.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
@@ -8981,9 +9044,14 @@
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
 				7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */,
 				7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */,
+				24D07CB02669309D0080C862 /* FiltersLocalizationsRequest.swift in Sources */,
+				24D07CAC266930670080C862 /* RequestFactory-Common.swift in Sources */,
+				24D07CA326690CDE0080C862 /* NotificationService+Utils.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
+				24D07CAD266930790080C862 /* FiltersMetadataParser.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
+				24D07CAF266930930080C862 /* FiltersLocalizationsParser.swift in Sources */,
 				24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

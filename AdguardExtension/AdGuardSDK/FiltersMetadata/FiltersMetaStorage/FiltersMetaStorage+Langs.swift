@@ -79,7 +79,7 @@ extension FiltersMetaStorageProtocol {
     
     // Deletes langs for filters with passed ids
     func deleteLangsForFilters(withIds ids: [Int]) throws {
-        let langsToDelete = FiltersTable.table.filter(ids.contains(FilterLangsTable.filterId))
+        let langsToDelete = FilterLangsTable.table.filter(ids.contains(FilterLangsTable.filterId))
         let deletedRows = try filtersDb.run(langsToDelete.delete())
         Logger.logDebug("(FiltersMetaStorage) - deleteLangsForFilters; deleted \(deletedRows) filters")
     }

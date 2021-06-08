@@ -222,5 +222,13 @@ extension FiltersMetaStorageProtocol {
         
         try deleteLangsForFilters(withIds: ids)
         try deleteTagsForFilters(withIds: ids)
+        try deleteAllLocalizationForFilters(withIds: ids)
+    }
+    
+    func renameFilter(withId id: Int, name: String) throws {
+        // Query: UPDATE filters SET (name) WHERE filter_id = id
+        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.name <- name)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - renameCustomFilterName; updated name for filter with id \(id) with name \(name)")
     }
 }
