@@ -314,11 +314,17 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
             count = try productionDbManager?.filtersDb.scalar("SELECT count(*) FROM filters WHERE (\"filter_id\" = \"123123\")") as! Int64
             XCTAssertEqual(count, 1)
             
-            let customFilters = try filtersStorage.getLocalizedFiltersForGroup(withId: 101, forLanguage: "en")
+            var customFilters = try filtersStorage.getLocalizedFiltersForGroup(withId: 101, forLanguage: "en")
             XCTAssertFalse(customFilters.isEmpty)
             XCTAssertNotNil(customFilters.first(where: { $0.filterId == 123123 && $0.name == "Bar" }))
+            
+            try filtersStorage.renameFilter(withId: 123123, name: "Foo")
+            
+            customFilters = try filtersStorage.getLocalizedFiltersForGroup(withId: 101, forLanguage: "en")
+            XCTAssertFalse(customFilters.isEmpty)
+            XCTAssertNotNil(customFilters.first(where: { $0.filterId == 123123 && $0.name == "Foo" }))
         } catch {
             XCTFail("\(error)")
         }
     }
-}
+ }

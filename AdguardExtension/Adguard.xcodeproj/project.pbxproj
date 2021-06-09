@@ -58,6 +58,7 @@
 		2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */; };
 		2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */; };
 		2434A3EE2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */; };
+		2437265C2670D424003D8EA5 /* ConfigurationMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2437265B2670D424003D8EA5 /* ConfigurationMock.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -3150,6 +3151,7 @@
 		2434A3E92657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FiltersLocalizationsTest.swift"; sourceTree = "<group>"; };
 		2434A3EB2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersMetaStorage+FitlerRulesTest.swift"; sourceTree = "<group>"; };
 		2434A3ED2657C19C001E5B72 /* FiltersMetaStorageTestProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorageTestProcessor.swift; sourceTree = "<group>"; };
+		2437265B2670D424003D8EA5 /* ConfigurationMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationMock.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -4655,6 +4657,7 @@
 			isa = PBXGroup;
 			children = (
 				246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */,
+				2437265B2670D424003D8EA5 /* ConfigurationMock.swift */,
 				246FF864266A537B0061FB2E /* UserDefaultsStorageMock.swift */,
 				247150A3266F8F3C00A894E8 /* FiltersMetaStorageMock.swift */,
 				246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */,
@@ -9042,6 +9045,7 @@
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				24D07CA926692FD40080C862 /* RequestProtocol.swift in Sources */,
 				247150A2266F73E900A894E8 /* FilterFilesStorageTest.swift in Sources */,
+				2437265C2670D424003D8EA5 /* ConfigurationMock.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
 				24D07CA826692FBD0080C862 /* ParserProtocol.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,

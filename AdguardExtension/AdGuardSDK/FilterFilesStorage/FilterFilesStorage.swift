@@ -65,7 +65,7 @@ public protocol FilterFilesStorageProtocol {
      
      - Throws: Some Foundation methods can throw while removing file
      */
-    func deleteFitler(withId id: Int) throws
+    func deleteFilter(withId id: Int) throws
 }
 
 /* This class manages filters text files */
@@ -109,7 +109,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
             Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
             
             // try to get presaved filter file
-            if  let presavedFilterFileUrl = defaultFileUrlForFilter(withId: id),
+            if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
                 Logger.logInfo("FiltersStorage return default filter for filter with id=\(id)")
                 return content
@@ -135,7 +135,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
     }
     
-    public func deleteFitler(withId id: Int) throws {
+    public func deleteFilter(withId id: Int) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
     }
@@ -167,7 +167,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
         return filterFilesDirectoryUrl.appendingPathComponent("\(id).txt")
     }
     
-    private func defaultFileUrlForFilter(withId id: Int) -> URL? {
+    private func defaultFilteUrlForFilter(withId id: Int) -> URL? {
         return Bundle.main.url(forResource: "\(id)", withExtension: "txt")
     }
 }
