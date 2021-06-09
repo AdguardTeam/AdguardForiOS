@@ -27,6 +27,7 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     // MARK: - Public properties
     
+    // TODO: - Check if it is not useless
     var rulesString: String {
         rulesModificationQueue.sync {
             let enabledRules = allRulesAtomic.filter { $0.isEnabled }

@@ -18,6 +18,15 @@
 
 import Foundation
 
+// MARK: - FilterRule
+
+struct FilterRule {
+    let rule: String
+    let affinity: Affinity?
+}
+
+// MARK: - AffinityRulesParserProtocol
+
 protocol AffinityRulesParserProtocol {
     /* Converts array of rules strings to array of FilterRule-s with affinities */
     static func parse(strings: [String]) -> [FilterRule]

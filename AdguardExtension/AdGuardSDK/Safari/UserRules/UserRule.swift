@@ -34,8 +34,8 @@ public protocol UserRuleProtocol: Codable {
 }
 
 public struct UserRule: UserRuleProtocol {
-    var ruleText: String
-    var isEnabled: Bool
+    public var ruleText: String
+    public var isEnabled: Bool
     
     init(ruleText: String, isEnabled: Bool = true) {
         self.ruleText = ruleText
@@ -43,7 +43,7 @@ public struct UserRule: UserRuleProtocol {
     }
     
     public static func isValid(rule: String) -> Bool {
-        let trimmedRule = ruleText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedRule = rule.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedRule.count == 0 {
             return false
         }
