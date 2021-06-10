@@ -78,6 +78,7 @@ struct FiltersConverter: FiltersConverterProtocol {
         }
     }
     
+    // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [SafariFilter] {
         var resultFilters: [SafariFilter] = []
         let converter = ContentBlockerConverter()

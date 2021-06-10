@@ -513,6 +513,7 @@
 		7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E40799D231E7E8C007EFB26 /* CoreServices.framework */; };
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -830,6 +831,8 @@
 		7ED85C2A255D5ABD0085DDFD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		7ED85C3C255D5AFF0085DDFD /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EDF9A1B242BA5F30069DA23 /* ActivityStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */; };
+		7EE33407266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE33406266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift */; };
+		7EE33408266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE33406266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift */; };
 		7EE3427224D84A7600A8C0E6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */; };
 		7EE3427324D84A7600A8C0E6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */; };
 		7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */; };
@@ -3498,6 +3501,7 @@
 		7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConfiguration.swift; sourceTree = "<group>"; };
 		7E40799A231E7E4E007EFB26 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagersProvider.swift; sourceTree = "<group>"; };
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
@@ -3827,6 +3831,7 @@
 		7EDAC0A722F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/UserFilter.strings; sourceTree = "<group>"; };
 		7EDAC0A822F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		7EDAC0AB22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7EE33406266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceNew.swift; sourceTree = "<group>"; };
 		7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverterTest.swift; sourceTree = "<group>"; };
 		7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UtilsTest.swift"; sourceTree = "<group>"; };
@@ -5429,6 +5434,7 @@
 			isa = PBXGroup;
 			children = (
 				7E69C5162657BFED00EA9DBA /* UserRule.swift */,
+				7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */,
 				7EC97C10265E459D005C950C /* UserRulesStorage */,
 				7E69C5212657E14300EA9DBA /* UserRulesManager */,
 				7E69C5202657C8DB00EA9DBA /* UserRuleConverters */,
@@ -5891,6 +5897,7 @@
 			children = (
 				7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */,
 				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
+				7EE33406266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift */,
 				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
 				D03E537321BA82BD00C62152 /* FiltersService.swift */,
 				D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */,
@@ -8967,6 +8974,7 @@
 				7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */,
 				2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
+				7EE33408266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
@@ -10007,6 +10015,7 @@
 				D0BDB6CC26319E5C007D9BC6 /* ABECFilter.m in Sources */,
 				D0BA7C3E2631B5680097029B /* SuccessFailureParser.swift in Sources */,
 				D0BA7C102631B53B0097029B /* NetworkingService-Common.swift in Sources */,
+				7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */,
 				7E1C346D2653C57B00A4490E /* CustomFilterMeta.swift in Sources */,
 				D0BA7C562631B56D0097029B /* RequestProtocol.swift in Sources */,
 				D0BA7D632631C1F10097029B /* FMSQLStatementSplitter.m in Sources */,
@@ -10037,6 +10046,7 @@
 				D0BA7D5D2631C1F10097029B /* FMStatementQuotedRecogniser.m in Sources */,
 				7E69C5192657C1FE00EA9DBA /* UserRuleConverter.swift in Sources */,
 				D0BA7AEE2631A27B0097029B /* ACObject.m in Sources */,
+				7EE33407266FB5BE00B2AB59 /* ContentBlockerServiceNew.swift in Sources */,
 				D0BA7C272631B5540097029B /* RequestSender.swift in Sources */,
 				7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */,
 				7E69C51D2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift in Sources */,

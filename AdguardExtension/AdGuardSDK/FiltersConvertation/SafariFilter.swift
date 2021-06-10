@@ -3,44 +3,20 @@ import Foundation
 struct FilterFileContent {
     let text: String
     let lines: [String]
-    let group: AdGuardFilterGroup
+    let group: SafariGroup.GroupType
     
-    init(text: String, group: AdGuardFilterGroup) {
+    init(text: String, group: SafariGroup.GroupType) {
         self.text = text
         self.lines = text.components(separatedBy: .newlines)
         self.group = group
     }
 }
 
-enum AdGuardFilterGroup: Int {
-    case ads = 1
-    case privacy = 2
-    case socialWidgets = 3
-    case annoyances = 4
-    case security = 5
-    case other = 6
-    case languageSpecific = 7
-    case custom = 101
-    
-    var contentBlockerType: ContentBlockerType {
-        switch self {
-        case .ads: return .general
-        case .privacy: return .privacy
-        case .socialWidgets: return .socialWidgetsAndAnnoyances
-        case .annoyances: return .socialWidgetsAndAnnoyances
-        case .security: return .security
-        case .other: return .other
-        case .languageSpecific: return .general
-        case .custom: return .custom
-        }
-    }
-}
-
 @objc class AdGuardFilterGroupObjWrapper: NSObject{
-    @objc static let customGroupId = AdGuardFilterGroup.custom.rawValue
-    @objc static let enabledGroupIds: Set<Int> = [AdGuardFilterGroup.ads.rawValue,
-                                            AdGuardFilterGroup.privacy.rawValue,
-                                            AdGuardFilterGroup.languageSpecific.rawValue]
+    @objc static let customGroupId = SafariGroup.GroupType.custom.rawValue
+    @objc static let enabledGroupIds: Set<Int> = [SafariGroup.GroupType.ads.rawValue,
+                                                  SafariGroup.GroupType.privacy.rawValue,
+                                                  SafariGroup.GroupType.languageSpecific.rawValue]
 }
 
 struct SafariFilter {
