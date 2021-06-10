@@ -18,7 +18,7 @@
 
 import Foundation
 
-public protocol FilterFilesStorageProtocol {
+protocol FilterFilesStorageProtocol {
     /**
      Updates filter file with specified **id**
      - Parameter id: Filter unique id
@@ -61,7 +61,7 @@ public protocol FilterFilesStorageProtocol {
 }
 
 /* This class manages filters text files */
-public class FilterFilesStorage: FilterFilesStorageProtocol {
+final class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // MARK: - Private properties
     
@@ -75,7 +75,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // MARK: - Initialization
     
-    public init(filterFilesDirectoryUrl: URL) throws {
+    init(filterFilesDirectoryUrl: URL) throws {
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
             try fileManager.createDirectory(at: filterFilesDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
@@ -85,16 +85,16 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // MARK: - Public methods
     
-    public func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
+    func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
         let filterFileUrl = urlForFilter(withId: id)
         downloadFilter(withUrl: filterFileUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
     
-    public func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
+    func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
     
-    public func getFilterContentForFilter(withId id: Int) -> String? {
+    func getFilterContentForFilter(withId id: Int) -> String? {
         let fileUrl = fileUrlForFilter(withId: id)
         
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
@@ -111,7 +111,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
         return content
     }
     
-    public func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
+    func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
         var result: [Int: String] = [:]
         
         for id in identifiers {
@@ -122,7 +122,7 @@ public class FilterFilesStorage: FilterFilesStorageProtocol {
         return result
     }
     
-    public func saveFilter(withId id: Int, filterContent: String) throws {
+    func saveFilter(withId id: Int, filterContent: String) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
     }
