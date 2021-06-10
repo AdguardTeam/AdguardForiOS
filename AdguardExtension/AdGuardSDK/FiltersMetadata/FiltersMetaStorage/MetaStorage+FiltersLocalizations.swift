@@ -72,11 +72,11 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
     func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_localizations (filter_id, lang, name, description)
         let query = FilterLocalizationsTable.table
-                                            .insert(or: .replace,
-                                                    FilterLocalizationsTable.filterId <- id,
-                                                    FilterLocalizationsTable.lang <- lang,
-                                                    FilterLocalizationsTable.name <- localization.name,
-                                                    FilterLocalizationsTable.description <- localization.description)
+            .insert(or: .replace,
+                    FilterLocalizationsTable.filterId <- id,
+                    FilterLocalizationsTable.lang <- lang,
+                    FilterLocalizationsTable.name <- localization.name,
+                    FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
     }

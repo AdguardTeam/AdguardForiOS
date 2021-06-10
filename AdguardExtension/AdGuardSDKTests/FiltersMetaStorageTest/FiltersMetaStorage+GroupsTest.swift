@@ -135,8 +135,8 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     func testUpdateAll() {
         do {
             var groups = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
-                XCTAssertFalse(groups.isEmpty)
-
+            XCTAssertFalse(groups.isEmpty)
+            
             
             let modifiedGroups = groups.map {
                 ExtendedFiltersMeta.Group(groupId: $0.groupId, groupName: "foo1001", displayNumber: 123321)
@@ -148,7 +148,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             modifiedGroups.forEach{ modifiedGroup in
                 XCTAssert(groups.contains(where: {
                     $0.groupId == modifiedGroup.groupId &&
-                    $0.displayNumber == 123321
+                        $0.displayNumber == 123321
                 }))
             }
             
@@ -159,7 +159,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             XCTAssertEqual(groups.count, 1)
             XCTAssert(groups.contains(where: {
                 $0.groupId == modifiedGroup.groupId &&
-                $0.displayNumber == 333333
+                    $0.displayNumber == 333333
             }))
         } catch {
             XCTFail("\(error)")

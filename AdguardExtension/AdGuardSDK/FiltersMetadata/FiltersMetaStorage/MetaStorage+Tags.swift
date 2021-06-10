@@ -70,8 +70,9 @@ extension MetaStorage: TagsMetaStorageProtocol {
     // Returns array of tags for filter with specified id
     func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
         // Query: SELECT * FROM filter_tags WHERE filter_id = id ORDER BY tag_id
-        let query = FilterTagsTable.table.filter(id == FilterTagsTable.filterId)
-                                         .order(FilterTagsTable.tagId)
+        let query = FilterTagsTable.table
+            .filter(id == FilterTagsTable.filterId)
+            .order(FilterTagsTable.tagId)
         
         let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
         Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")

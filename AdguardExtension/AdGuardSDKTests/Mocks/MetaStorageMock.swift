@@ -305,19 +305,19 @@ class MetaStorageMock: MetaStorageProtocol {
                 groupId = 101
             }
             result.append(FiltersTable(filterId: filterId,
-                                        groupId: groupId,
-                                        isEnabled: false,
-                                        version: "",
-                                        lastUpdateTime: Date(),
-                                        lastCheckTime: Date(),
-                                        editable: false,
-                                        displayNumber: 0,
-                                        name: "",
-                                        description: "",
-                                        homePage: "",
-                                        removable: false,
-                                        expires: 0,
-                                        subscriptionUrl: downloadPage))
+                                       groupId: groupId,
+                                       isEnabled: false,
+                                       version: "",
+                                       lastUpdateTime: Date(),
+                                       lastCheckTime: Date(),
+                                       editable: false,
+                                       displayNumber: 0,
+                                       name: "",
+                                       description: "",
+                                       homePage: "",
+                                       removable: false,
+                                       expires: 0,
+                                       subscriptionUrl: downloadPage))
         }
         return result
     }

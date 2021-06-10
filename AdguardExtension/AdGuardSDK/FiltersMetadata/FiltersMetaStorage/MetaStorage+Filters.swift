@@ -206,7 +206,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
             /*
              Check if filter exists
              If true than update filter with new data otherwise create it
-            */
+             */
             let selectQuery = FiltersTable.table.where(FiltersTable.filterId == filter.filterId)
             if let _ = try filtersDb.pluck(selectQuery) {
                 try update(filter: filter)

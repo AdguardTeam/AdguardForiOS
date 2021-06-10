@@ -258,12 +258,12 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     func deleteCustomFilter(withId id: Int) throws {
         try groupsModificationQueue.sync {
-        guard id >= CustomFilterMeta.baseCustomFilterId else {
-            throw FilterServiceError.invalidCustomFilterId(filterId: id)
-        }
-        try metaStorage.deleteFilter(withId: id)
-        try filterFilesStorage.deleteFilter(withId: id)
-        
+            guard id >= CustomFilterMeta.baseCustomFilterId else {
+                throw FilterServiceError.invalidCustomFilterId(filterId: id)
+            }
+            try metaStorage.deleteFilter(withId: id)
+            try filterFilesStorage.deleteFilter(withId: id)
+            
             let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
             _groups[customGroupIndex].filters.removeAll(where: { $0.filterId == id })
         }
@@ -271,10 +271,10 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     func renameCustomFilter(withId id: Int, to name: String) throws {
         try groupsModificationQueue.sync {
-        guard id >= CustomFilterMeta.baseCustomFilterId else {
-            throw FilterServiceError.invalidCustomFilterId(filterId: id)
-        }
-        try metaStorage.renameFilter(withId: id, name: name)
+            guard id >= CustomFilterMeta.baseCustomFilterId else {
+                throw FilterServiceError.invalidCustomFilterId(filterId: id)
+            }
+            try metaStorage.renameFilter(withId: id, name: name)
             let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
             let filterIndex = _groups[customGroupIndex].filters.firstIndex(where: { $0.filterId == id })!
             let filter = _groups[customGroupIndex].filters[filterIndex]

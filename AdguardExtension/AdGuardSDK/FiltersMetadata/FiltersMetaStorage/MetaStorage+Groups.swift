@@ -119,8 +119,8 @@ extension MetaStorage: GroupsMetaStorageProtocol {
     func update(group: GroupMetaProtocol) throws {
         // Query: UPDATE filter_groups SET name = group.groupName, display_number = group.displayNumber) WHERE group_id = group.groupId
         let query = FilterGroupsTable.table.where(FilterGroupsTable.groupId == group.groupId)
-                                           .update(FilterGroupsTable.name <- group.groupName,
-                                                   FilterGroupsTable.displayNumber <- group.displayNumber)
+            .update(FilterGroupsTable.name <- group.groupName,
+                    FilterGroupsTable.displayNumber <- group.displayNumber)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
     }

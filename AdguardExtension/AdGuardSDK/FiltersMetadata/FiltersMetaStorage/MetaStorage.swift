@@ -46,16 +46,16 @@ final class MetaStorage: MetaStorageProtocol {
     }
     
     /*
-        We don't store custom group and localization in default DB.
-        If custom group not exists in production DB we should insert custom group with default localization
+     We don't store custom group and localization in default DB.
+     If custom group not exists in production DB we should insert custom group with default localization
      */
     
     private func insertCustomGroupIfNeeded() {
         do {
             //Query: SELECT count(*) FROM filters_group WHERE group_id = SafariGroup.GroupType.custom
             let count = try filtersDb
-                            .scalar(FilterGroupsTable.table.select(FilterGroupsTable.groupId.count)
-                                        .where(FilterGroupsTable.groupId == SafariGroup.GroupType.custom.rawValue))
+                .scalar(FilterGroupsTable.table.select(FilterGroupsTable.groupId.count)
+                            .where(FilterGroupsTable.groupId == SafariGroup.GroupType.custom.rawValue))
             if count > 0 { return }
             //Query: INSERT INTO filter_groups (\"group_id\", \"name\") VALUES (SafariGroup.GroupType.custom, \'Custom\')"
             let insertionQuery = FilterGroupsTable

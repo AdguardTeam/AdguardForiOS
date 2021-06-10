@@ -222,22 +222,22 @@ class FiltersMetaStorage_FiltersTest: XCTestCase {
             
             let modifiedFilter = modifiedFilters.first!
             try metaStorage.updateAll(filters: [ExtendedFiltersMeta.Meta(filterId: modifiedFilter.filterId,
-                                                                            name: "foo",
-                                                                            description: "bar",
-                                                                            timeAdded: nil,
-                                                                            homePage: "some",
-                                                                            updateFrequency: 1,
-                                                                            displayNumber: 2,
-                                                                            group: ExtendedFiltersMeta.Group(groupId: modifiedFilter.group.groupId, groupName: "123", displayNumber: 0),
-                                                                            filterDownloadPage: "some",
-                                                                            trustLevel: .full,
-                                                                            version: "123",
-                                                                            lastUpdateDate: nil,
-                                                                            languages: [],
-                                                                            tags: [])]
+                                                                         name: "foo",
+                                                                         description: "bar",
+                                                                         timeAdded: nil,
+                                                                         homePage: "some",
+                                                                         updateFrequency: 1,
+                                                                         displayNumber: 2,
+                                                                         group: ExtendedFiltersMeta.Group(groupId: modifiedFilter.group.groupId, groupName: "123", displayNumber: 0),
+                                                                         filterDownloadPage: "some",
+                                                                         trustLevel: .full,
+                                                                         version: "123",
+                                                                         lastUpdateDate: nil,
+                                                                         languages: [],
+                                                                         tags: [])]
             )
             filters = try metaStorage.getLocalizedFiltersForGroup(withId: 1, forLanguage: "en")
-
+            
             XCTAssertEqual(filters.count, 1)
             XCTAssert(filters.contains(where: {
                 $0.filterId == modifiedFilter.filterId &&

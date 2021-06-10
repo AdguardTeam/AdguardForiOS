@@ -88,8 +88,8 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
             testTags.forEach { testTag in
                 XCTAssert(tags.contains {
                     testTag.tagId == $0.tagId &&
-                    testTag.tagName == $0.name &&
-                    testTag.tagType.id == $0.type
+                        testTag.tagName == $0.name &&
+                        testTag.tagType.id == $0.type
                 })
             }
             
@@ -99,16 +99,16 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
             testTags.forEach { testTag in
                 XCTAssertFalse(tags.contains {
                     testTag.tagId == $0.tagId &&
-                    testTag.tagName == $0.name &&
-                    testTag.tagType.id == $0.type
+                        testTag.tagName == $0.name &&
+                        testTag.tagType.id == $0.type
                 })
             }
             XCTAssertEqual(tags.count, 1)
             XCTAssert(tags.contains {
                 $0.tagId == 4 &&
-                $0.name == "bar" &&
-                $0.type == ExtendedFiltersMeta.Tag.TagType.obsolete.id &&
-                $0.filterId == 10000
+                    $0.name == "bar" &&
+                    $0.type == ExtendedFiltersMeta.Tag.TagType.obsolete.id &&
+                    $0.filterId == 10000
             })
             
         } catch {
