@@ -28,6 +28,8 @@ protocol ContentBlockerServiceNewProtocol {
  */
 final class ContentBlockerServiceNew: ContentBlockerServiceNewProtocol {
     
+    // MARK: - ConvertionError
+    
     enum ConvertionError: Error, CustomDebugStringConvertible {
         case failedToConvertRules
         
@@ -38,11 +40,15 @@ final class ContentBlockerServiceNew: ContentBlockerServiceNewProtocol {
         }
     }
     
+    // MARK: - Services
+    
     private let configuration: ConfigurationProtocol
     private let filtersService: FiltersServiceNewProtocol
     private let filterFilesStorage: FilterFilesStorageProtocol
     private let userRulesManagersProvider: UserRulesManagersProviderProtocol
     private let filtersConverter: FiltersConverterProtocol
+    
+    // MARK: - Initialization
     
     init(configuration: ConfigurationProtocol,
          filtersService: FiltersServiceNewProtocol,
@@ -56,6 +62,8 @@ final class ContentBlockerServiceNew: ContentBlockerServiceNewProtocol {
         self.userRulesManagersProvider = userRulesManagersProvider
         self.filtersConverter = filtersConverter
     }
+    
+    // MARK: - Internal methods
     
     func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter] {
         // Get active filters info. It is an array of tuples [(filter id, group type)]
