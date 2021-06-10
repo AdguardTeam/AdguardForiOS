@@ -48,8 +48,8 @@ private struct FilterRulesTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Filter rules methods
+// MARK: - MetaStorage + Filter rules
 
-extension FiltersMetaStorageProtocol {
+extension MetaStorage {
     
 }

@@ -3,50 +3,50 @@ import SQLite
 
 class ProductionDatabaseManagerTest: XCTestCase {
 
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
 
     func testUpdateDatabaseSucceeded() {
         do {
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try productionDbManager.updateDatabaseIfNeeded()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             let versionTable = Table("version")
             let versionColumn = Expression<String>("schema_version")
-            let filtersDb = try Connection(FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
+            let filtersDb = try Connection(MetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
             XCTAssertNotNil(try filtersDb.pluck(versionTable)?.get(versionColumn))
         } catch {
             XCTFail("\(error)")
@@ -55,32 +55,32 @@ class ProductionDatabaseManagerTest: XCTestCase {
     
     func testUpdateDatabaseWithNewVersionSucceeded() {
         do {
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try setUpOldVersionProductionDb()
 
             let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try productionDbManager.updateDatabaseIfNeeded()
             
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             let versionTable = Table("version")
             let versionColumn = Expression<String>("schema_version")
-            let filtersDb = try Connection(FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
+            let filtersDb = try Connection(MetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
             let version = try filtersDb.pluck(versionTable)?.get(versionColumn)
             XCTAssertTrue(try exists(column: "affinity", inTable: "filter_rules", forDB: filtersDb))
             XCTAssertTrue(try exists(column: "subscriptionUrl", inTable: "filters", forDB: filtersDb))
@@ -92,15 +92,15 @@ class ProductionDatabaseManagerTest: XCTestCase {
     }
     
     func testDBExistsAfterInitialization() {
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         do {
             let _ = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
             
-            let pruductionDb = try Connection(FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
+            let pruductionDb = try Connection(MetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
             XCTAssertTrue(try exists(column: "schema_version", inTable: "version", forDB: pruductionDb))
             
             let versionTable = Table("version")
@@ -113,11 +113,11 @@ class ProductionDatabaseManagerTest: XCTestCase {
             let name = try pruductionDb.pluck(filterTagsTable)?.get(filterTagsColumn)
             XCTAssertNotNil(name)
             
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
         } catch {
             XCTFail("\(error)")
@@ -138,10 +138,10 @@ class ProductionDatabaseManagerTest: XCTestCase {
         
         try fileManager.createDirectory(at: workingUrl, withIntermediateDirectories: true, attributes: nil)
         
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
-        let pruductionDb = try Connection(FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+        let pruductionDb = try Connection(MetaStorageTestProcessor.adguardDbFileWorkingUrl.path)
         
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.adguardDbFileWorkingUrl.path))
         try applySchemeToDefaultDb(db: pruductionDb)
 
         

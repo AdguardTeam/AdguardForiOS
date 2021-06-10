@@ -2,44 +2,43 @@ import XCTest
 
 class FiltersMetaStorage_GroupsTest: XCTestCase {
 
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    var productionDbManager: ProductionDatabaseManager?
-    var filtersStorage: FiltersMetaStorage?
+    var productionDbManager: ProductionDatabaseManager!
+    var metaStorage: MetaStorage!
     var setOfDefaultLocalizedGroups: Set<String?> = Set()
     
     override func setUpWithError() throws {
         productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        metaStorage = MetaStorage(productionDbManager: productionDbManager!)
         
         setOfDefaultLocalizedGroups.removeAll()
-        let groups = try filtersStorage?.getAllLocalizedGroups(forLanguage: "en")
+        let groups = try metaStorage?.getAllLocalizedGroups(forLanguage: "en")
         groups?.forEach {
             setOfDefaultLocalizedGroups.insert($0.name)
         }
     }
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
 
     func testGetAllLocalizedGroupsWithSuccess() {
-        let filtersStorage = filtersStorage!
         do {
-            var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            var groups = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
             XCTAssertFalse(groups.isEmpty)
             groups.forEach {
                 XCTAssertNotNil($0.isEnabled)
@@ -51,7 +50,9 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
                 XCTAssert(setOfDefaultLocalizedGroups.contains($0.name))
             }
             
-            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            setOfDefaultLocalizedGroups.remove("Custom")
+            
+            groups = try metaStorage.getAllLocalizedGroups(forLanguage: "fr")
             XCTAssertFalse(groups.isEmpty)
             groups.forEach {
                 XCTAssertNotNil($0.isEnabled)
@@ -69,9 +70,8 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
 
     func testGetAllLocalizedGroupsWithNonExistingLanguage() {
-        let filtersStorage = filtersStorage!
         do {
-            let groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "123")
+            let groups = try metaStorage.getAllLocalizedGroups(forLanguage: "123")
             XCTAssertFalse(groups.isEmpty)
             XCTAssertNotNil(groups)
             groups.forEach {
@@ -90,10 +90,9 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testGetAllLocalizedGroupsWithDefaultLocalization() {
-        let filtersStorage = filtersStorage!
         do {
-            let enLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
-            var frLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            let enLocalization = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
+            var frLocalization = try metaStorage.getAllLocalizedGroups(forLanguage: "fr")
             
             enLocalization.forEach { enLocal in
                 XCTAssert(frLocalization.contains {
@@ -109,7 +108,7 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             XCTAssertNotNil(count)
             XCTAssert(count == 0)
             
-            frLocalization = try filtersStorage.getAllLocalizedGroups(forLanguage: "fr")
+            frLocalization = try metaStorage.getAllLocalizedGroups(forLanguage: "fr")
             
             enLocalization.forEach { enLocal in
                 XCTAssert(frLocalization.contains {
@@ -122,12 +121,11 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testSetGroup() {
-        let filtersStorage = filtersStorage!
         do {
-            guard let group = try filtersStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
+            guard let group = try metaStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
             let oldValue = group.isEnabled
-            try filtersStorage.setGroup(withId: 1, enabled: !group.isEnabled)
-            guard let group = try filtersStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
+            try metaStorage.setGroup(withId: 1, enabled: !group.isEnabled)
+            guard let group = try metaStorage.getAllLocalizedGroups(forLanguage: "en").first(where: { $0.groupId == 1 }) else { return XCTFail() }
             XCTAssertNotEqual(oldValue, group.isEnabled)
         } catch {
             XCTFail("\(error)")
@@ -135,9 +133,8 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testUpdateAll() {
-        let filtersStorage = filtersStorage!
         do {
-            var groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            var groups = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
                 XCTAssertFalse(groups.isEmpty)
 
             
@@ -145,9 +142,9 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
                 ExtendedFiltersMeta.Group(groupId: $0.groupId, groupName: "foo1001", displayNumber: 123321)
             }
             
-            try filtersStorage.updateAll(groups: modifiedGroups)
+            try metaStorage.updateAll(groups: modifiedGroups)
             
-            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            groups = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
             modifiedGroups.forEach{ modifiedGroup in
                 XCTAssert(groups.contains(where: {
                     $0.groupId == modifiedGroup.groupId &&
@@ -156,8 +153,8 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
             }
             
             let modifiedGroup = modifiedGroups.first!
-            try filtersStorage.updateAll(groups: [ExtendedFiltersMeta.Group(groupId: modifiedGroup.groupId, groupName: "foo", displayNumber: 333333)])
-            groups = try filtersStorage.getAllLocalizedGroups(forLanguage: "en")
+            try metaStorage.updateAll(groups: [ExtendedFiltersMeta.Group(groupId: modifiedGroup.groupId, groupName: "foo", displayNumber: 333333)])
+            groups = try metaStorage.getAllLocalizedGroups(forLanguage: "en")
             
             XCTAssertEqual(groups.count, 1)
             XCTAssert(groups.contains(where: {
@@ -170,11 +167,10 @@ class FiltersMetaStorage_GroupsTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        let filtersStorage = filtersStorage!
         do {
-            XCTAssertFalse(try filtersStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
-            try filtersStorage.updateAll(groups: [])
-            XCTAssert(try filtersStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
+            XCTAssertFalse(try metaStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
+            try metaStorage.updateAll(groups: [])
+            XCTAssert(try metaStorage.getAllLocalizedGroups(forLanguage: "en").isEmpty)
         } catch {
             XCTFail("\(error)")
         }

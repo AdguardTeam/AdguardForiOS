@@ -147,7 +147,21 @@ fileprivate extension ExtendedFilterMetaProtocol {
     }
 }
 
-extension FiltersMetaStorage {
+// MARK: - MetaStorage + Filters
+protocol FiltersMetaStorageProtocol {
+    var nextCustomFilterId: Int { get }
+    
+    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
+    func setFilter(withId id: Int, enabled: Bool) throws
+    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws
+    func update(filter: ExtendedFilterMetaProtocol) throws
+    func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws
+    func deleteFilter(withId id: Int) throws
+    func deleteFilters(withIds ids: [Int]) throws
+    func renameFilter(withId id: Int, name: String) throws
+}
+
+extension MetaStorage: FiltersMetaStorageProtocol {
     
     // Checks existing filter id and returns new unique id for custom filter
     var nextCustomFilterId: Int {

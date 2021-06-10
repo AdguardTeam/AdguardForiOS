@@ -39,9 +39,15 @@ fileprivate struct FilterLangsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Langs methods
+// MARK: - MetaStorage + Langs
+protocol LangsMetaStorageProtocol {
+    func getLangsForFilter(withId id: Int) throws -> [String]
+    func updateAll(langs: [String], forFilterWithId id: Int) throws
+    func update(lang: String, forFilterWithId id: Int) throws
+    func deleteLangsForFilters(withIds ids: [Int]) throws
+}
 
-extension FiltersMetaStorage {
+extension MetaStorage: LangsMetaStorageProtocol {
     // Returns array of languages for filter with specified id
     func getLangsForFilter(withId id: Int) throws -> [String] {
         // Query: SELECT * FROM filter_langs WHERE filter_id = id

@@ -45,9 +45,17 @@ struct FilterTagsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Tags methods
+// MARK: - MetaStorage + Tags
 
-extension FiltersMetaStorage {
+protocol TagsMetaStorageProtocol {
+    func getAllTags() throws -> [FilterTagsTable]
+    func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable]
+    func updateAll(tags: [ExtendedFiltersMeta.Tag], forFilterWithId id: Int) throws
+    func update(tag: ExtendedFiltersMeta.Tag, forFilterWithId id: Int) throws
+    func deleteTagsForFilters(withIds ids: [Int]) throws
+}
+
+extension MetaStorage: TagsMetaStorageProtocol {
     
     // Returns all tags from database
     func getAllTags() throws -> [FilterTagsTable] {

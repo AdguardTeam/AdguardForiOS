@@ -2,12 +2,12 @@ import XCTest
 
 class FiltersMetaStorage_TagsTest: XCTestCase {
 
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    var productionDbManager: ProductionDatabaseManager?
-    var filtersStorage: FiltersMetaStorage?
+    var productionDbManager: ProductionDatabaseManager!
+    var metaStorage: MetaStorage!
     
     let testTags = [ExtendedFiltersMeta.Tag(tagId: 100, tagType: .lang, tagName: "foo#101"),
                     ExtendedFiltersMeta.Tag(tagId: 101, tagType: .obsolete, tagName: "foo#102"),
@@ -15,28 +15,27 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     
     override func setUpWithError() throws {
         productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        metaStorage = MetaStorage(productionDbManager: productionDbManager!)
     }
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     func testGetAllTagsWithSuccess() {
-        let filtersStorage = filtersStorage!
         do {
-            let tags = try filtersStorage.getAllTags()
+            let tags = try metaStorage.getAllTags()
             XCTAssertFalse(tags.isEmpty)
             tags.forEach {
                 XCTAssertNotNil($0.tagId)
@@ -50,9 +49,8 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithSuccess() {
-        let filtersStorage = filtersStorage!
         do {
-            let tags = try filtersStorage.getTagsForFilter(withId: 1)
+            let tags = try metaStorage.getTagsForFilter(withId: 1)
             XCTAssertFalse(tags.isEmpty)
             tags.forEach {
                 XCTAssertNotNil($0.tagId)
@@ -67,12 +65,11 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testGetTagsForFilterWithNonExistingFilterId() {
-        let filtersStorage = filtersStorage!
         do {
-            var tags = try filtersStorage.getTagsForFilter(withId: 123456789)
+            var tags = try metaStorage.getTagsForFilter(withId: 123456789)
             XCTAssertTrue(tags.isEmpty)
             
-            tags = try filtersStorage.getTagsForFilter(withId: -123456789)
+            tags = try metaStorage.getTagsForFilter(withId: -123456789)
             XCTAssertTrue(tags.isEmpty)
             
         } catch {
@@ -81,13 +78,12 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testUpdateAll() {
-        let filtersStorage = filtersStorage!
         do {
-            var tags = try filtersStorage.getTagsForFilter(withId: 10000)
+            var tags = try metaStorage.getTagsForFilter(withId: 10000)
             XCTAssert(tags.isEmpty)
             
-            try filtersStorage.updateAll(tags: testTags, forFilterWithId: 10000)
-            tags = try filtersStorage.getTagsForFilter(withId: 10000)
+            try metaStorage.updateAll(tags: testTags, forFilterWithId: 10000)
+            tags = try metaStorage.getTagsForFilter(withId: 10000)
             XCTAssertFalse(tags.isEmpty)
             testTags.forEach { testTag in
                 XCTAssert(tags.contains {
@@ -97,8 +93,8 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
                 })
             }
             
-            try filtersStorage.updateAll(tags: [.init(tagId: 4, tagType: .obsolete, tagName: "bar")], forFilterWithId: 10000)
-            tags = try filtersStorage.getTagsForFilter(withId: 10000)
+            try metaStorage.updateAll(tags: [.init(tagId: 4, tagType: .obsolete, tagName: "bar")], forFilterWithId: 10000)
+            tags = try metaStorage.getTagsForFilter(withId: 10000)
             XCTAssertFalse(tags.isEmpty)
             testTags.forEach { testTag in
                 XCTAssertFalse(tags.contains {
@@ -121,46 +117,44 @@ class FiltersMetaStorage_TagsTest: XCTestCase {
     }
     
     func testUpdateAllWithEmptyValue() {
-        let filtersStorage = filtersStorage!
         do {
-            XCTAssertFalse(try filtersStorage.getTagsForFilter(withId: 1).isEmpty)
-            try filtersStorage.updateAll(tags: [], forFilterWithId: 1)
-            XCTAssert(try filtersStorage.getTagsForFilter(withId: 1).isEmpty)
+            XCTAssertFalse(try metaStorage.getTagsForFilter(withId: 1).isEmpty)
+            try metaStorage.updateAll(tags: [], forFilterWithId: 1)
+            XCTAssert(try metaStorage.getTagsForFilter(withId: 1).isEmpty)
         } catch {
             XCTFail("\(error)")
         }
     }
     
     func testDeleteTagsForFilters() {
-        let filtersStorage = filtersStorage!
         do {
-            var tags1 = try filtersStorage.getTagsForFilter(withId: 1)
-            var tags2 = try filtersStorage.getTagsForFilter(withId: 233)
-            var tags3 = try filtersStorage.getTagsForFilter(withId: 249)
-            var tags4 = try filtersStorage.getTagsForFilter(withId: 214)
+            var tags1 = try metaStorage.getTagsForFilter(withId: 1)
+            var tags2 = try metaStorage.getTagsForFilter(withId: 233)
+            var tags3 = try metaStorage.getTagsForFilter(withId: 249)
+            var tags4 = try metaStorage.getTagsForFilter(withId: 214)
 
             XCTAssertFalse(tags1.isEmpty)
             XCTAssertFalse(tags2.isEmpty)
             XCTAssertFalse(tags3.isEmpty)
             XCTAssertFalse(tags4.isEmpty)
             
-            try filtersStorage.deleteTagsForFilters(withIds: [1])
+            try metaStorage.deleteTagsForFilters(withIds: [1])
             
-            tags1 = try filtersStorage.getTagsForFilter(withId: 1)
-            tags2 = try filtersStorage.getTagsForFilter(withId: 233)
-            tags3 = try filtersStorage.getTagsForFilter(withId: 249)
-            tags4 = try filtersStorage.getTagsForFilter(withId: 214)
+            tags1 = try metaStorage.getTagsForFilter(withId: 1)
+            tags2 = try metaStorage.getTagsForFilter(withId: 233)
+            tags3 = try metaStorage.getTagsForFilter(withId: 249)
+            tags4 = try metaStorage.getTagsForFilter(withId: 214)
             
             XCTAssert(tags1.isEmpty)
             XCTAssertFalse(tags2.isEmpty)
             XCTAssertFalse(tags3.isEmpty)
             XCTAssertFalse(tags4.isEmpty)
             
-            try filtersStorage.deleteTagsForFilters(withIds: [233,249,214])
+            try metaStorage.deleteTagsForFilters(withIds: [233,249,214])
             
-            tags2 = try filtersStorage.getTagsForFilter(withId: 233)
-            tags3 = try filtersStorage.getTagsForFilter(withId: 249)
-            tags4 = try filtersStorage.getTagsForFilter(withId: 214)
+            tags2 = try metaStorage.getTagsForFilter(withId: 233)
+            tags3 = try metaStorage.getTagsForFilter(withId: 249)
+            tags4 = try metaStorage.getTagsForFilter(withId: 214)
             
             XCTAssert(tags2.isEmpty)
             XCTAssert(tags3.isEmpty)

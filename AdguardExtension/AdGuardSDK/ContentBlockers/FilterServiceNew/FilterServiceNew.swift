@@ -78,20 +78,20 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         case invalidCustomFilterId(filterId: Int)
         case updatePeriodError(lastUpdateTime: Int)
         case missedFilterDownloadPage(filterName: String)
-        case customFilterFileCreationError(error: Error)
+        case customFilterFileCreationError
         case setGroupError(groupId: Int)
         case setFilterError(filterId: Int)
-        case unknownError(error: Error?)
+        case unknownError
         
         var debugDescription: String {
             switch self {
             case .invalidCustomFilterId(let filterId): return "Custom filter id must be greater or equal than \(CustomFilterMeta.baseCustomFilterId), actual filter id=\(filterId)"
             case .updatePeriodError(let lastUpdateTime): return "Last update was \(lastUpdateTime) hours ago. Minimum update period is \(Int(FiltersServiceNew.updatePeriod / 3600)) hours"
             case .missedFilterDownloadPage(let filterName): return "Filter download page is missed for filter with name \(filterName)"
-            case .customFilterFileCreationError(let error): return " Custom filter file creation error: \(error)"
+            case .customFilterFileCreationError: return " Custom filter file creation error"
             case .setGroupError(let groupId): return "Error setting group with id=\(groupId)"
             case .setFilterError(let filterId): return "Error setting filtrer with id=\(filterId)"
-            case .unknownError(let error): return "Unknown error: \(String(describing: error))"
+            case .unknownError: return "Unknown error"
             }
         }
     }
@@ -114,7 +114,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     /* Services */
     private let configuration: ConfigurationProtocol
     private let filterFilesStorage: FilterFilesStorageProtocol
-    private let filtersMetaStorage: FiltersMetaStorageProtocol
+    private let metaStorage: MetaStorageProtocol
     private let userDefaultsStorage: UserDefaultsStorageProtocol
     private let metaParser: CustomFilterMetaParserProtocol
     private let httpRequestService: HttpRequestServiceProtocol
@@ -124,14 +124,14 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     init(
         configuration: ConfigurationProtocol,
         filterFilesStorage: FilterFilesStorageProtocol,
-        filtersMetaStorage: FiltersMetaStorageProtocol,
+        metaStorage: MetaStorageProtocol,
         userDefaultsStorage: UserDefaultsStorageProtocol,
         metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
         httpRequestService: HttpRequestServiceProtocol
     ) throws {
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
-        self.filtersMetaStorage = filtersMetaStorage
+        self.metaStorage = metaStorage
         self.userDefaultsStorage = userDefaultsStorage
         self.metaParser = metaParser
         self.httpRequestService = httpRequestService
@@ -146,14 +146,14 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         
         groupsModificationQueue.async(group: comletionGroup) { [weak self] in
             guard let self = self else {
-                onFiltersUpdated(FilterServiceError.unknownError(error: nil))
+                resultError = FilterServiceError.unknownError
                 return
             }
             
             // Check update conditions
             let now = Date().timeIntervalSince(self.userDefaultsStorage.lastFiltersUpdateCheckDate)
             if now < Self.updatePeriod && !forcibly {
-                onFiltersUpdated(FilterServiceError.updatePeriodError(lastUpdateTime: Int(now / 3600)))
+                resultError = FilterServiceError.updatePeriodError(lastUpdateTime: Int(now / 3600))
                 return
             }
             
@@ -205,7 +205,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     func setGroup(withId id: Int, enabled: Bool) throws {
         try groupsModificationQueue.sync {
             do {
-                try filtersMetaStorage.setGroup(withId: id, enabled: enabled)
+                try metaStorage.setGroup(withId: id, enabled: enabled)
                 if let groupIndex = _groups.firstIndex(where: { $0.groupId == id }) {
                     _groups[groupIndex].isEnabled = enabled
                     Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) was successfully set to enabled=\(enabled)")
@@ -222,7 +222,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     func setFilter(withId id: Int, _ groupId: Int, enabled: Bool) throws {
         try groupsModificationQueue.sync {
             do {
-                try filtersMetaStorage.setFilter(withId: id, enabled: enabled)
+                try metaStorage.setFilter(withId: id, enabled: enabled)
                 if let groupIndex = _groups.firstIndex(where: { $0.groupType.id == groupId })
                    , let filterIndex = _groups[groupIndex].filters.firstIndex(where: { $0.filterId == id }) {
                     _groups[groupIndex].filters[filterIndex].isEnabled = enabled
@@ -244,11 +244,11 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
                 throw FilterServiceError.missedFilterDownloadPage(filterName: customFilter.name ?? "nil")
             }
             
-            let filterId = filtersMetaStorage.nextCustomFilterId
+            let filterId = metaStorage.nextCustomFilterId
             let customGroup = _groups.first(where: { $0.groupType == .custom })!
             let filterToAdd = ExtendedFiltersMeta.Meta(customFilterMeta: customFilter, filterId: filterId, displayNumber: filterId, group: customGroup)
-            try filtersMetaStorage.add(filter: filterToAdd, enabled: enabled)
             try createCustomFilterFile(filterId: filterId, subscriptionUrl: subscriptionUrl)
+            try metaStorage.add(filter: filterToAdd, enabled: enabled)
             
             let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
             let safariFilter = SafariGroup.Filter(customFilter: customFilter, filterId: filterId, isEnabled: true, group: _groups[customGroupIndex], displayNumber: filterId)
@@ -261,7 +261,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         guard id >= CustomFilterMeta.baseCustomFilterId else {
             throw FilterServiceError.invalidCustomFilterId(filterId: id)
         }
-        try filtersMetaStorage.deleteFilter(withId: id)
+        try metaStorage.deleteFilter(withId: id)
         try filterFilesStorage.deleteFilter(withId: id)
         
             let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
@@ -274,7 +274,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         guard id >= CustomFilterMeta.baseCustomFilterId else {
             throw FilterServiceError.invalidCustomFilterId(filterId: id)
         }
-        try filtersMetaStorage.renameFilter(withId: id, name: name)
+        try metaStorage.renameFilter(withId: id, name: name)
             let customGroupIndex = _groups.firstIndex(where: { $0.groupType == .custom })!
             let filterIndex = _groups[customGroupIndex].filters.firstIndex(where: { $0.filterId == id })!
             let filter = _groups[customGroupIndex].filters[filterIndex]
@@ -301,7 +301,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     /* Returns all groups from database with filters and localizations */
     private func getAllLocalizedGroups() throws -> [SafariGroup] {
-        let localizedGroupsMeta = try filtersMetaStorage.getAllLocalizedGroups(forLanguage: configuration.currentLanguage)
+        let localizedGroupsMeta = try metaStorage.getAllLocalizedGroups(forLanguage: configuration.currentLanguage)
         return try localizedGroupsMeta.map { groupMeta in
             let group = SafariGroup(dbGroup: groupMeta, filters: [])
             let groupFilters = try getFilters(forGroup: group)
@@ -316,12 +316,12 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     
     /* Returns filters meta for sprecified group */
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
-        let localizedFiltersMeta = try filtersMetaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
+        let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
         return try localizedFiltersMeta.map { dbFilter in
             // TODO: - Maybe we should store rulesCount in database
             let meta = getMetaForFilter(withId: dbFilter.filterId)
-            let languages = try filtersMetaStorage.getLangsForFilter(withId: dbFilter.filterId)
-            let tags = try filtersMetaStorage.getTagsForFilter(withId: dbFilter.filterId)
+            let languages = try metaStorage.getLangsForFilter(withId: dbFilter.filterId)
+            let tags = try metaStorage.getTagsForFilter(withId: dbFilter.filterId)
             return SafariGroup.Filter(dbFilter: dbFilter,
                                       group: group,
                                       rulesCount: meta?.rulesCount,
@@ -410,14 +410,14 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         let filters = filtersMeta.filters
         
         if !groups.isEmpty {
-            try filtersMetaStorage.updateAll(groups: groups)
+            try metaStorage.updateAll(groups: groups)
         }
         if !filters.isEmpty {
-            try filtersMetaStorage.updateAll(filters: filters)
+            try metaStorage.updateAll(filters: filters)
         }
         try filters.forEach {
-            try filtersMetaStorage.updateAll(tags: $0.tags, forFilterWithId: $0.filterId)
-            try filtersMetaStorage.updateAll(langs: $0.languages, forFilterWithId: $0.filterId)
+            try metaStorage.updateAll(tags: $0.tags, forFilterWithId: $0.filterId)
+            try metaStorage.updateAll(langs: $0.languages, forFilterWithId: $0.filterId)
         }
     }
     
@@ -435,7 +435,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             let langs = localizationsByLangs.keys
             for lang in langs {
                 let localization = localizationsByLangs[lang]!
-                try filtersMetaStorage.updateLocalizationForGroup(withId: groupId, forLanguage: lang, localization: localization)
+                try metaStorage.updateLocalizationForGroup(withId: groupId, forLanguage: lang, localization: localization)
             }
         }
         
@@ -444,7 +444,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             let langs = localizationsByLangs.keys
             for lang in langs {
                 let localization = localizationsByLangs[lang]!
-                try filtersMetaStorage.updateLocalizationForFilter(withId: filterId, forLanguage: lang, localization: localization)
+                try metaStorage.updateLocalizationForFilter(withId: filterId, forLanguage: lang, localization: localization)
             }
         }
     }
@@ -460,8 +460,8 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             group.leave()
         }
         group.wait()
-        if let error  = resultError {
-            throw FilterServiceError.customFilterFileCreationError(error: error)
+        if resultError != nil {
+            throw FilterServiceError.customFilterFileCreationError
         }
         
         Logger.logError("(FiltersService) - createCustomFilterFile; updating file for filter with id = \(filterId) succeeded")

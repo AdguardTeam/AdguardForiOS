@@ -2,30 +2,30 @@ import XCTest
 
 class FiltersMetaStorage_FitlerRulesTest: XCTestCase {
     
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    var productionDbManager: ProductionDatabaseManager?
-    var filtersStorage: FiltersMetaStorage?
+    var productionDbManager: ProductionDatabaseManager!
+    var metaStorage: MetaStorage!
     
     override func setUpWithError() throws {
         productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        metaStorage = MetaStorage(productionDbManager: productionDbManager!)
     }
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
 }

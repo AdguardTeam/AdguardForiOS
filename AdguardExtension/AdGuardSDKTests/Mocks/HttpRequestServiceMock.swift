@@ -52,11 +52,9 @@ class RequestSenderMock: RequestSenderProtocol {
     var loadFiltersLocalizationsResult: Any?
     var loadFiltersMetadataResult: Any?
     var sendFeedbackResult: Any?
-    var sendCalled = false
     
     func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
         DispatchQueue(label: "").async { [unowned self] in
-            self.sendCalled = true
             if let typedResult = self.loadFiltersMetadataResult as? Parser.Model {
                 completionHandler(.success(typedResult))
             } else if let typedResult = self.loadFiltersLocalizationsResult as? Parser.Model {

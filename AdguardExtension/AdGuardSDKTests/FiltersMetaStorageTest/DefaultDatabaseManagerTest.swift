@@ -1,36 +1,36 @@
 import XCTest
 
 class DefaultDatabaseManagerTest: XCTestCase {
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     func testUpdateDefaultDbWithSuccess() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
 
         do {
             try manager.updateDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssert(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssert(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         } catch {
             XCTFail("\(error)")
         }
@@ -38,19 +38,19 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testUpdateDefaultDbWithMultipleUpdates() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         do {
             try manager.updateDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssert(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssert(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try manager.updateDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssert(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssert(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
 
         } catch {
             XCTFail()
@@ -59,19 +59,19 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testRemoveDefaultDbWithSuccess() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         do {
             try manager.updateDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try manager.removeDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         } catch {
             XCTFail()
         }
@@ -79,24 +79,24 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testRemoveDefaultDbFailure() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         do {
             try manager.updateDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
-            FiltersMetaStorageTestProcessor.deleteTestFolder()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            MetaStorageTestProcessor.deleteTestFolder()
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
             
             try manager.removeDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         } catch {
             XCTFail()
         }
@@ -104,16 +104,16 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testRemoveDefaultDbWithFailureInRootFolder() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: rootDirectory)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
         do {
             try manager.updateDefaultDb()
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
             
             try manager.removeDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
 
         } catch {
             XCTFail()
@@ -122,14 +122,14 @@ class DefaultDatabaseManagerTest: XCTestCase {
     
     func testRemoveDefaultDbIfNotExistsFailure() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+        XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+        XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         do {
             try manager.removeDefaultDb()
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileRootUrl.path))
-            XCTAssertTrue(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
-            XCTAssertFalse(fileManager.fileExists(atPath: FiltersMetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileRootUrl.path))
+            XCTAssertTrue(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbArchiveRootUrl.path))
+            XCTAssertFalse(fileManager.fileExists(atPath: MetaStorageTestProcessor.defaultDbFileWorkingUrl.path))
         } catch {
             XCTFail()
         }

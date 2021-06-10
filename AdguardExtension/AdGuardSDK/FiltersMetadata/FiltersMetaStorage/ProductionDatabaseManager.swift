@@ -114,8 +114,6 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
                 try updateProductionDb(toVersion: version)
             }
         }
-        // Insert custom group row for DB if it not exists
-        insertCustomGroupIfNeeded()
         
         // Remove default.db when update finished
         try defaultDatabaseManager.removeDefaultDb()
@@ -168,27 +166,5 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
             fromVersion += 0.001
         } while fromVersion < toVersion
         return result
-    }
-    
-    /*
-        We don't store custom group and localization in default DB.
-        If custom group not exists in production DB we should insert custom group with default localization
-     */
-    
-    private func insertCustomGroupIfNeeded() {
-        do {
-            //Query: SELECT count(*) FROM filters_group WHERE group_id = SafariGroup.GroupType.custom
-            let count = try filtersDb
-                            .scalar(FilterGroupsTable.table.select(FilterGroupsTable.groupId.count)
-                                        .where(FilterGroupsTable.groupId == SafariGroup.GroupType.custom.rawValue))
-            if count > 0 { return }
-            //Query: INSERT INTO filter_groups (\"group_id\", \"name\") VALUES (SafariGroup.GroupType.custom, \'Custom\')"
-            let insertionQuery = FilterGroupsTable
-                .table.insert(FilterGroupsTable.groupId <- SafariGroup.GroupType.custom.rawValue,
-                              FilterGroupsTable.name <- "Custom")
-            try filtersDb.run(insertionQuery)
-        } catch {
-            Logger.logError("Custom group insertion error: \(error)")
-        }
     }
 }

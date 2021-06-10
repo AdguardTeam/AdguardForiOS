@@ -2,64 +2,61 @@ import XCTest
 
 class FiltersMetaStorage_GroupLocalizationsTest: XCTestCase {
 
-    let rootDirectory = FiltersMetaStorageTestProcessor.rootDirectory
-    let workingUrl = FiltersMetaStorageTestProcessor.workingUrl
+    let rootDirectory = MetaStorageTestProcessor.rootDirectory
+    let workingUrl = MetaStorageTestProcessor.workingUrl
     let fileManager = FileManager.default
     
-    var productionDbManager: ProductionDatabaseManager?
-    var filtersStorage: FiltersMetaStorage?
+    var productionDbManager: ProductionDatabaseManager!
+    var metaStorage: MetaStorage!
     
     override func setUpWithError() throws {
         productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        filtersStorage = FiltersMetaStorage(productionDbManager: productionDbManager!)
+        metaStorage = MetaStorage(productionDbManager: productionDbManager!)
     }
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     func testGetLocalizationForGroupWithSuccess() {
-        let filtersStorage = filtersStorage!
-        let localization = filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
+        let localization = metaStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
         XCTAssertNotNil(localization)
         XCTAssertNotNil(localization?.name)
         XCTAssertFalse(localization!.name!.isEmpty)
     }
     
     func testGetLocalizationForGroupWithNonExistingIdOrLanguage() {
-        let filtersStorage = filtersStorage!
-        var localization = filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "foo")
+        var localization = metaStorage.getLocalizationForGroup(withId: 1, forLanguage: "foo")
         XCTAssertNil(localization)
         
-        localization = filtersStorage.getLocalizationForGroup(withId: -1, forLanguage: "en")
+        localization = metaStorage.getLocalizationForGroup(withId: -1, forLanguage: "en")
         XCTAssertNil(localization)
         
-        localization = filtersStorage.getLocalizationForGroup(withId: -1, forLanguage: "foo")
+        localization = metaStorage.getLocalizationForGroup(withId: -1, forLanguage: "foo")
         XCTAssertNil(localization)
     }
     
     func testUpdateLocalizationForGroup() {
-        let filtersStorage = filtersStorage!
         do {
-            var localization = filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
+            var localization = metaStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssertNotNil(localization?.name)
             XCTAssertFalse(localization!.name!.isEmpty)
 
-            try filtersStorage.updateLocalizationForGroup(withId: 1, forLanguage: "en", localization: .init(name: "foo"))
+            try metaStorage.updateLocalizationForGroup(withId: 1, forLanguage: "en", localization: .init(name: "foo"))
             
-            localization = filtersStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
+            localization = metaStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssertNotNil(localization?.name)
             XCTAssertEqual(localization!.name!, "foo")

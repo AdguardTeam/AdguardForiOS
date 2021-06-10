@@ -61,9 +61,15 @@ struct FilterGroupsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Groups methods
+// MARK: - MetaStorage + Groups
+protocol GroupsMetaStorageProtocol {
+    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable]
+    func setGroup(withId id: Int, enabled: Bool) throws
+    func updateAll(groups: [GroupMetaProtocol]) throws
+    func update(group: GroupMetaProtocol) throws
+}
 
-extension FiltersMetaStorage {
+extension MetaStorage: GroupsMetaStorageProtocol {
     
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
@@ -75,7 +81,7 @@ extension FiltersMetaStorage {
             
             /* If there is no localized group name we trying to get default english localization and if it is steel nil set default localized name from filter_group row */
             var localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
-            if localizedName == nil && lang != FiltersMetaStorage.defaultDbLanguage  {
+            if localizedName == nil && lang != MetaStorage.defaultDbLanguage  {
                 localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             }
             
