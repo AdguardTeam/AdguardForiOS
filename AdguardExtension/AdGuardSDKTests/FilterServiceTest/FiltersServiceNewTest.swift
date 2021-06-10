@@ -398,7 +398,7 @@ class FitlerServiceNewTest: XCTestCase {
         metaStorage.setGroupResult = .error(MetaStorageMockError.setGroupError)
         XCTAssertFalse(metaStorage.setGroupCalled)
         XCTAssertThrowsError(try filterService.setGroup(withId: 1, enabled: false), "") { error in
-            if case FiltersServiceNew.FilterServiceError.setGroupError(groupId: _) = error {
+            if case MetaStorageMockError.setGroupError = error {
                 XCTAssert(true)
             } else {
                 XCTFail()
@@ -429,7 +429,7 @@ class FitlerServiceNewTest: XCTestCase {
         metaStorage.setFilterResult = .error(MetaStorageMockError.setFilterError)
         XCTAssertFalse(metaStorage.setFilterCalled)
         XCTAssertThrowsError(try filterService.setFilter(withId: 1, 1, enabled: false), "") { error in
-            if case FiltersServiceNew.FilterServiceError.setFilterError(filterId: _) = error {
+            if case MetaStorageMockError.setFilterError = error {
                 XCTAssert(true)
             } else {
                 XCTFail()
