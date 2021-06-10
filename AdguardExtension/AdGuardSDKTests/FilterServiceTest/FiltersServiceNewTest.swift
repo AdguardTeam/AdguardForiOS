@@ -507,7 +507,7 @@ class FitlerServiceNewTest: XCTestCase {
         }
     }
     
-    func testAddCustomFilterWithCustomFilterFileCreationError() {
+    func testAddCustomFilterWithUpdateCustomFilterError() {
         let filterDownloadPage = "https://gitcdn.xyz/cdn/farrokhi/adblock-iran/4eb5c3eae9bb7593d98731e200233af27760874c/filter.txt"
         let filterId = metaStorage.nextCustomFilterId
         let customFilter = CustomFilterMeta(name: "Foo",
@@ -527,7 +527,7 @@ class FitlerServiceNewTest: XCTestCase {
         XCTAssert(filterFileStorage.customFilters.isEmpty)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
         XCTAssertThrowsError(try filterService.add(customFilter: customFilter, enabled: false), "") { error in
-            if case FiltersServiceNew.FilterServiceError.customFilterFileCreationError = error {
+            if case FilterFilesStorageMockError.updateCustomFilterError = error {
                 XCTAssertFalse(metaStorage.addFilterCalled)
                 XCTAssert(filterFileStorage.updateCustomFilterCalled)
                 XCTAssert(filterFileStorage.customFilters.isEmpty)

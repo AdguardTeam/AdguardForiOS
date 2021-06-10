@@ -78,7 +78,6 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         case invalidCustomFilterId(filterId: Int)
         case updatePeriodError(lastUpdateTime: Int)
         case missedFilterDownloadPage(filterName: String)
-        case customFilterFileCreationError
         case setGroupError(groupId: Int)
         case setFilterError(filterId: Int)
         case unknownError
@@ -88,7 +87,6 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             case .invalidCustomFilterId(let filterId): return "Custom filter id must be greater or equal than \(CustomFilterMeta.baseCustomFilterId), actual filter id=\(filterId)"
             case .updatePeriodError(let lastUpdateTime): return "Last update was \(lastUpdateTime) hours ago. Minimum update period is \(Int(FiltersServiceNew.updatePeriod / 3600)) hours"
             case .missedFilterDownloadPage(let filterName): return "Filter download page is missed for filter with name \(filterName)"
-            case .customFilterFileCreationError: return " Custom filter file creation error"
             case .setGroupError(let groupId): return "Error setting group with id=\(groupId)"
             case .setFilterError(let filterId): return "Error setting filtrer with id=\(filterId)"
             case .unknownError: return "Unknown error"
@@ -173,7 +171,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             
             // Update filters metadata
             group.enter()
-            self.updateMetadataForFilters() {
+            self.updateMetadataForFilters {
                 if let error = $0 {
                     resultError = error
                 }
@@ -460,8 +458,8 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             group.leave()
         }
         group.wait()
-        if resultError != nil {
-            throw FilterServiceError.customFilterFileCreationError
+        if let error = resultError {
+            throw error
         }
         
         Logger.logError("(FiltersService) - createCustomFilterFile; updating file for filter with id = \(filterId) succeeded")

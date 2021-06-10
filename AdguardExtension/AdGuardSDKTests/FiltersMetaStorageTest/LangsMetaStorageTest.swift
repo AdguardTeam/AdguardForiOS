@@ -1,6 +1,6 @@
 import XCTest
 
-class FiltersMetaStorage_LangsTest: XCTestCase {
+class LangsMetaStorageTest: XCTestCase {
 
     let rootDirectory = MetaStorageTestProcessor.rootDirectory
     let workingUrl = MetaStorageTestProcessor.workingUrl
