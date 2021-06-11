@@ -22,7 +22,10 @@ protocol ContentBlockersJSONStorageProtocol {
     /* Returns all content blocker JSONs that was able to get from storage */
     var allJsons: [ContentBlockersJSONStorage.ContentBlockerJSON] { get }
     
-    /* Saves JSON fules to storage */
+    /* Saves JSON file to storage */
+    func save(json: ContentBlockersJSONStorage.ContentBlockerJSON) throws
+    
+    /* Saves JSON files to storage */
     func save(cbJsons: [ContentBlockersJSONStorage.ContentBlockerJSON]) throws
     
     /* Loads JSON file from storage for specified content blocker type */
@@ -62,9 +65,14 @@ final class ContentBlockersJSONStorage: ContentBlockersJSONStorageProtocol {
     
     // MARK: - Internal methods
     
+    func save(json: ContentBlockerJSON) throws {
+        let urlToSave = urlForJson(withType: json.contentBlocker)
+        try json.json.write(to: urlToSave, atomically: true, encoding: .utf8)
+    }
+    
     func save(cbJsons: [ContentBlockerJSON]) throws {
         Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(cbJsons.count) jsons")
-        try cbJsons.forEach { try save(json: $0.json, for: $0.contentBlocker) }
+        try cbJsons.forEach { try save(json: $0) }
     }
     
     func getJson(for cbType: ContentBlockerType) throws -> ContentBlockerJSON {
@@ -74,11 +82,6 @@ final class ContentBlockersJSONStorage: ContentBlockersJSONStorageProtocol {
     }
     
     // MARK: - Private methods
-    
-    private func save(json: String, for cbType: ContentBlockerType) throws {
-        let urlToSave = urlForJson(withType: cbType)
-        try json.write(to: urlToSave, atomically: true, encoding: .utf8)
-    }
     
     private func urlForJson(withType cbType: ContentBlockerType) -> URL {
         return jsonStorageUrl.appendingPathComponent(cbType.fileName)
