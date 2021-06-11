@@ -350,7 +350,6 @@
 		65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
 		65EC9BD11BB9824C00F53F3B /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
 		65EC9BD31BB9824C00F53F3B /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
-		65EC9BE51BB9824C00F53F3B /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
 		65EC9C8D1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
 		65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */; };
@@ -516,7 +515,7 @@
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */; };
 		7E41F3E926722E3A00D68F61 /* ContentBlockersInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */; };
-		7E41F3EB26724D8D00D68F61 /* ContentBlockerServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EA26724D8D00D68F61 /* ContentBlockerServiceNew.swift */; };
+		7E41F3EB26724D8D00D68F61 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EA26724D8D00D68F61 /* ContentBlockerService.swift */; };
 		7E41F3EF2672587000D68F61 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
@@ -790,11 +789,11 @@
 		7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */; };
 		7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
 		7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
-		7EC97C16265FC04F005C950C /* FilterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FilterServiceNew.swift */; };
+		7EC97C16265FC04F005C950C /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FiltersService.swift */; };
 		7EC97C19265FDB08005C950C /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C18265FDB08005C950C /* SafariGroup.swift */; };
 		7EC97C1B265FE28B005C950C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1A265FE28B005C950C /* Configuration.swift */; };
 		7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1A265FE28B005C950C /* Configuration.swift */; };
-		7EC97C1D265FEF85005C950C /* FilterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FilterServiceNew.swift */; };
+		7EC97C1D265FEF85005C950C /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C15265FC04F005C950C /* FiltersService.swift */; };
 		7EC97C1E265FEF85005C950C /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C18265FDB08005C950C /* SafariGroup.swift */; };
 		7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */; };
 		7EC97C21265FF384005C950C /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */; };
@@ -835,8 +834,7 @@
 		7ED85C2A255D5ABD0085DDFD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		7ED85C3C255D5AFF0085DDFD /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EDF9A1B242BA5F30069DA23 /* ActivityStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */; };
-		7EE33407266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE33406266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift */; };
-		7EE33408266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE33406266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift */; };
+		7EE33407266FB5BE00B2AB59 /* FiltersConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE33406266FB5BE00B2AB59 /* FiltersConverterService.swift */; };
 		7EE3427224D84A7600A8C0E6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */; };
 		7EE3427324D84A7600A8C0E6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */; };
 		7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */; };
@@ -945,7 +943,6 @@
 		D02EFD091F7B9327006CDBD5 /* ABECServicesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D02EFD071F7B9327006CDBD5 /* ABECServicesParser.m */; };
 		D031303E2639685100A5C1D5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
 		D031303F2639685100A5C1D5 /* NSDate+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01EB1C6B7686000F00D7 /* NSDate+Utils.h */; };
-		D0313040263978AF00A5C1D5 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */; };
 		D0313041263978E900A5C1D5 /* ADLocales.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9A891BB9824C00F53F3B /* ADLocales.h */; };
 		D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8A1BB9824C00F53F3B /* ADLocales.m */; };
 		D03130432639796D00A5C1D5 /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
@@ -1118,7 +1115,6 @@
 		D04B4A152639A12900815F30 /* AdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D04B4A192639A12E00815F30 /* AdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */; };
 		D04B4A1A2639A12E00815F30 /* AdGuardSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D04B4A1E263ADACF00815F30 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B4A1D263ADACF00815F30 /* Resources.swift */; };
 		D04B4A1F263AF7CE00815F30 /* SharedResources+applicationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA7BBC2631A9160097029B /* SharedResources+applicationResources.swift */; };
 		D04B4A20263AF7CF00815F30 /* SharedResources+applicationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA7BBC2631A9160097029B /* SharedResources+applicationResources.swift */; };
 		D04B4A21263AF7CF00815F30 /* SharedResources+applicationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA7BBC2631A9160097029B /* SharedResources+applicationResources.swift */; };
@@ -2104,8 +2100,6 @@
 		D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */; };
 		D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA620F224A8547005CF278 /* GetProTableController.swift */; };
-		D0BA7AEE2631A27B0097029B /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BA7AEC2631A27B0097029B /* ACObject.m */; };
-		D0BA7AEF2631A27B0097029B /* ACObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BA7AED2631A27B0097029B /* ACObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7BE62631B5030097029B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBA725F918FA00A5A735 /* NetworkManager.swift */; };
 		D0BA7C102631B53B0097029B /* NetworkingService-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D34272612205B00213A5A /* NetworkingService-Common.swift */; };
 		D0BA7C112631B53B0097029B /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* NetworkingService.swift */; };
@@ -2120,12 +2114,8 @@
 		D0BA7C562631B56D0097029B /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */; };
 		D0BA7C6C2631B5810097029B /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94723F2B64400F9A544 /* RequestFactory.swift */; };
 		D0BA7C6D2631B5810097029B /* RequestFactory-Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D345B261221C500213A5A /* RequestFactory-Common.swift */; };
-		D0BA7C822631B5D90097029B /* ABECFilterParsers.h in Headers */ = {isa = PBXBuildFile; fileRef = 65E9E7B61BBD973200AE8DDF /* ABECFilterParsers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */; };
-		D0BA7CAC2631B6100097029B /* ASDFilterObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9A9A1BB9824C00F53F3B /* ASDFilterObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7CE92631C0C00097029B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
 		D0BA7CFE2631C0DC0097029B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
-		D0BA7D132631C12B0097029B /* AntibannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06DE02B2347769200A70D85 /* AntibannerController.swift */; };
 		D0BA7D282631C1B20097029B /* ASDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9A931BB9824C00F53F3B /* ASDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7D292631C1B20097029B /* ASDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A941BB9824C00F53F3B /* ASDatabase.m */; };
 		D0BA7D522631C1F00097029B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9AE71BB9824C00F53F3B /* FMResultSet.m */; };
@@ -2149,46 +2139,23 @@
 		D0BA7D642631C1F10097029B /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9AE61BB9824C00F53F3B /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7D652631C1F10097029B /* FMStatementKeywordRecogniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9AEB1BB9824C00F53F3B /* FMStatementKeywordRecogniser.h */; };
 		D0BA7DB62631C2A20097029B /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
-		D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
-		D0BA7E6E263316E90097029B /* RulesProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */; };
-		D0BA7E6F263316E90097029B /* SafariRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07427F2232B97040019AAF4 /* SafariRule.swift */; };
-		D0BA7E98263317530097029B /* NotEcapingJsonSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */; };
 		D0BA7EC12633177B0097029B /* NSStringPunycodeAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
-		D0BA7EFF263317DC0097029B /* AEFilterRuleSyntaxConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */; };
-		D0BA7F29263318260097029B /* AEWhitelistDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */; };
-		D0BA7F522633182F0097029B /* AEWhitelistDomainObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA80862636EC480097029B /* AEInvertedWhitelistDomainsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */; };
-		D0BA809B2636EC4F0097029B /* AEInvertedWhitelistDomainsObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA80C42636EE7D0097029B /* AASFilterSubscriptionParser.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BA80C52636EE7D0097029B /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D0BA812C263712C30097029B /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		D0BA812D263712C30097029B /* ACIOUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01B11C6B7686000F00D7 /* ACIOUtils.h */; };
 		D0BA8156263713580097029B /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
 		D0BA8157263713580097029B /* NSException+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01ED1C6B7686000F00D7 /* NSException+Utils.h */; };
-		D0BDB3FA263064FF007D9BC6 /* AdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = D0BDB3F8263064FF007D9BC6 /* AdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0BDB3FD263064FF007D9BC6 /* AdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */; };
 		D0BDB3FE263064FF007D9BC6 /* AdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D0BDB4172630651D007D9BC6 /* FiltersService+metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */; };
 		D0BDB4182630651D007D9BC6 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */; };
-		D0BDB4192630651D007D9BC6 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E537321BA82BD00C62152 /* FiltersService.swift */; };
 		D0BDB41A2630651D007D9BC6 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */; };
-		D0BDB41B2630651D007D9BC6 /* AESAntibanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BDB41C2630651D007D9BC6 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984FC8260A21CA00703DB2 /* FilterInfo.swift */; };
 		D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */; };
 		D0BDB41E2630651D007D9BC6 /* SafariFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A38025FA50D7008CEC80 /* SafariFilter.swift */; };
-		D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
-		D0BDB4212630651D007D9BC6 /* AESAntibanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */; };
 		D0BDB51326306FB8007D9BC6 /* ACLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01C11C6B7686000F00D7 /* ACLLogger.h */; };
 		D0BDB52826306FC1007D9BC6 /* ACLFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 655A01BB1C6B7686000F00D7 /* ACLFileLogger.h */; };
 		D0BDB5A326307092007D9BC6 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = D031A0A9219EFC99002C17D9 /* DDLegacyMacros.h */; };
 		D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDB5CC263071FC007D9BC6 /* Logger.swift */; };
 		D0BDB5F8263073C8007D9BC6 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D0BDB5F7263073C8007D9BC6 /* ContentBlockerConverter */; };
-		D0BDB68C26319DBC007D9BC6 /* ABECFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9A051BB9824C00F53F3B /* ABECFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0BDB68D26319DBC007D9BC6 /* ABECConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EC9A041BB9824C00F53F3B /* ABECConstants.h */; };
-		D0BDB6CC26319E5C007D9BC6 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
-		D0BDB6F526319F56007D9BC6 /* FilterDetailedInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */; };
 		D0BDDD25215A884D000C85F1 /* CustomFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */; };
 		D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */; };
 		D0C37EB422A66BBF0004337D /* DnsProxyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */; };
@@ -3186,8 +3153,6 @@
 		651F5E0A1E2563A400E22157 /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
 		651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		653153411CF9911800C92A73 /* AdguardPro.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AdguardPro.entitlements; sourceTree = "<group>"; };
-		653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlacklistDomainObject.h; sourceTree = "<group>"; };
-		653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObject.m; sourceTree = "<group>"; };
 		65423D941C89B72000DD1224 /* clean-script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		654367BC1BBAAEFE00D48B5F /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		654367BF1BBAAF7800D48B5F /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -3264,7 +3229,6 @@
 		658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringPunycodeAdditions.m; sourceTree = "<group>"; };
 		658E43A21E89231A008DAA59 /* AERDomainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERDomainFilter.h; sourceTree = "<group>"; };
 		658E43A31E89231A008DAA59 /* AERDomainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilter.m; sourceTree = "<group>"; };
-		658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
 		658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterTest.m; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -3285,15 +3249,11 @@
 		65B0070D1BCD6D2500844F2E /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65B007101BCD6D2600844F2E /* pl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		65B40D391BDE807400A9C595 /* stringUIResources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stringUIResources.plist; sourceTree = "<group>"; };
-		65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESAntibanner.h; sourceTree = "<group>"; };
-		65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESAntibanner.m; sourceTree = "<group>"; };
 		65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65C52B361B906105003AF42F /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65C52B3C1B906105003AF42F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		65C52B3E1B906105003AF42F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65C98AA21D3661B500E4B57D /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEWhitelistDomainObject.h; sourceTree = "<group>"; };
-		65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEWhitelistDomainObject.m; sourceTree = "<group>"; };
 		65CD517D1C43A9F9004669F2 /* ko */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65CD51811C43A9FB004669F2 /* ko */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65CD51821C43AA1A004669F2 /* tr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -3308,13 +3268,8 @@
 		65DAE6E31B8B76B60020BC3C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		65E5A0991B8632F600319AA3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABECFilterParsers.m; sourceTree = "<group>"; };
-		65E9E7B61BBD973200AE8DDF /* ABECFilterParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilterParsers.h; sourceTree = "<group>"; };
 		65EBC24F1BC2D25E00788D98 /* AEUILongLabelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUILongLabelViewCell.h; sourceTree = "<group>"; };
 		65EBC2501BC2D25E00788D98 /* AEUILongLabelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEUILongLabelViewCell.m; sourceTree = "<group>"; };
-		65EC9A041BB9824C00F53F3B /* ABECConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
-		65EC9A051BB9824C00F53F3B /* ABECFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		65EC9A061BB9824C00F53F3B /* ABECFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABECFilter.m; sourceTree = "<group>"; };
 		65EC9A071BB9824C00F53F3B /* ABECRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABECRequest.h; sourceTree = "<group>"; };
 		65EC9A081BB9824C00F53F3B /* ABECRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABECRequest.m; sourceTree = "<group>"; };
 		65EC9A891BB9824C00F53F3B /* ADLocales.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLocales.h; sourceTree = "<group>"; };
@@ -3326,8 +3281,6 @@
 		65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADProductInfo.m; sourceTree = "<group>"; };
 		65EC9A931BB9824C00F53F3B /* ASDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDatabase.h; sourceTree = "<group>"; };
 		65EC9A941BB9824C00F53F3B /* ASDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDatabase.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		65EC9A9A1BB9824C00F53F3B /* ASDFilterObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDFilterObjects.h; sourceTree = "<group>"; };
-		65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDFilterObjects.m; sourceTree = "<group>"; };
 		65EC9ADB1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FMDatabase+InMemoryOnDiskIO.h"; sourceTree = "<group>"; };
 		65EC9ADC1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FMDatabase+InMemoryOnDiskIO.m"; sourceTree = "<group>"; };
 		65EC9ADD1BB9824C00F53F3B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -3508,7 +3461,7 @@
 		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagersProvider.swift; sourceTree = "<group>"; };
 		7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorage.swift; sourceTree = "<group>"; };
-		7E41F3EA26724D8D00D68F61 /* ContentBlockerServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceNew.swift; sourceTree = "<group>"; };
+		7E41F3EA26724D8D00D68F61 /* ContentBlockerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerService.swift; sourceTree = "<group>"; };
 		7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersManager.swift; sourceTree = "<group>"; };
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
@@ -3741,7 +3694,6 @@
 		7E952FA523D601F200D89AE0 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		7E952FA723D601F300D89AE0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		7E952FA923D601F400D89AE0 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Onboarding.strings; sourceTree = "<group>"; };
-		7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
 		7E9C0BB825627B5500F1999D /* RateAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppController.swift; sourceTree = "<group>"; };
 		7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
@@ -3796,7 +3748,7 @@
 		7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedAllowlistRulesStorage.swift; sourceTree = "<group>"; };
 		7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocklistRulesStorage.swift; sourceTree = "<group>"; };
-		7EC97C15265FC04F005C950C /* FilterServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterServiceNew.swift; sourceTree = "<group>"; };
+		7EC97C15265FC04F005C950C /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
 		7EC97C18265FDB08005C950C /* SafariGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroup.swift; sourceTree = "<group>"; };
 		7EC97C1A265FE28B005C950C /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariGroup+Filter.swift"; sourceTree = "<group>"; };
@@ -3839,7 +3791,7 @@
 		7EDAC0A722F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/UserFilter.strings; sourceTree = "<group>"; };
 		7EDAC0A822F1DFCF00F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		7EDAC0AB22F1DFD000F3924D /* sl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sl; path = sl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7EE33406266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterServiceNew.swift; sourceTree = "<group>"; };
+		7EE33406266FB5BE00B2AB59 /* FiltersConverterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterService.swift; sourceTree = "<group>"; };
 		7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverterTest.swift; sourceTree = "<group>"; };
 		7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UtilsTest.swift"; sourceTree = "<group>"; };
@@ -3963,11 +3915,9 @@
 		D031A0C6219EFC99002C17D9 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
 		D031A0C7219EFC99002C17D9 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
 		D031A0C8219EFC99002C17D9 /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
-		D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotEcapingJsonSerialization.swift; sourceTree = "<group>"; };
 		D03398052431927200F6B9DE /* BackgroundFetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchState.swift; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
-		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
 		D0427C761F434129002FB018 /* APDnsServerAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsServerAddress.h; sourceTree = "<group>"; };
 		D0427C771F434129002FB018 /* APDnsServerAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APDnsServerAddress.m; sourceTree = "<group>"; };
 		D044AF742183098A00CD9E06 /* AddRuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRuleController.swift; sourceTree = "<group>"; };
@@ -3975,7 +3925,6 @@
 		D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFilesStorage.swift; sourceTree = "<group>"; };
 		D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersConverter.swift; sourceTree = "<group>"; };
 		D048A38025FA50D7008CEC80 /* SafariFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariFilter.swift; sourceTree = "<group>"; };
-		D04B4A1D263ADACF00815F30 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		D04B8CB32031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D04B8CB52031C8510028877C /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoMock.swift; sourceTree = "<group>"; };
@@ -3986,7 +3935,6 @@
 		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
 		D0667BCC22DC67430099C090 /* UserNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationService.swift; sourceTree = "<group>"; };
 		D067D8D42140020A00ECDE6D /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
-		D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerService.swift; sourceTree = "<group>"; };
 		D067D90B21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionPrivacy.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionAnnoyances.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionOther.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3994,13 +3942,11 @@
 		D067D9AC214693E200ECDE6D /* EmailSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInController.swift; sourceTree = "<group>"; };
 		D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongLabelCell.swift; sourceTree = "<group>"; };
 		D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsService.swift; sourceTree = "<group>"; };
-		D06DE02B2347769200A70D85 /* AntibannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerController.swift; sourceTree = "<group>"; };
 		D06E30AD253F3181008BBD2D /* providers_i18n.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = providers_i18n.json; sourceTree = "<group>"; };
 		D06E30E5253F323B008BBD2D /* DnsProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsProviders.swift; sourceTree = "<group>"; };
 		D06E30E6253F323B008BBD2D /* LocalizedDnsProviders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedDnsProviders.swift; sourceTree = "<group>"; };
 		D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VpnConfigurationStatus.swift; sourceTree = "<group>"; };
 		D0702B3E2188859D0051669A /* FileShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareService.swift; sourceTree = "<group>"; };
-		D07427F2232B97040019AAF4 /* SafariRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRule.swift; sourceTree = "<group>"; };
 		D077D5F0213974FC00D3D5B3 /* GetProController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProController.swift; sourceTree = "<group>"; };
 		D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		D07A164121678EA5008BB432 /* RoundrectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundrectView.swift; sourceTree = "<group>"; };
@@ -4055,14 +4001,11 @@
 		D09137D922E8559500A8F541 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/License.strings"; sourceTree = "<group>"; };
 		D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dns64Utils.swift; sourceTree = "<group>"; };
 		D093718721AEA770004A24F1 /* ContentBlockerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerTest.swift; sourceTree = "<group>"; };
-		D093718A21B0414A004A24F1 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
 		D093AA18253447940015351F /* setappPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setappPublicKey.pem; sourceTree = "<group>"; };
 		D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Confirm2FaController.swift; sourceTree = "<group>"; };
 		D096D9411F28C0D70081004D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
 		D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MigrationService+AntibannerMigration.swift"; sourceTree = "<group>"; };
-		D0984FC8260A21CA00703DB2 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
-		D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersService+metadata.swift"; sourceTree = "<group>"; };
 		D0985014260B504F00703DB2 /* FiltersMetadataRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetadataRequest.swift; sourceTree = "<group>"; };
 		D0985029260B53CD00703DB2 /* FiltersMetadataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetadataParser.swift; sourceTree = "<group>"; };
 		D099DADE228D812E007987F8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -4126,15 +4069,10 @@
 		D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActionExtension.xcassets; sourceTree = "<group>"; };
 		D0BA620F224A8547005CF278 /* GetProTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProTableController.swift; sourceTree = "<group>"; };
-		D0BA7AEC2631A27B0097029B /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
-		D0BA7AED2631A27B0097029B /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
 		D0BA7BBC2631A9160097029B /* SharedResources+applicationResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+applicationResources.swift"; sourceTree = "<group>"; };
 		D0BDB3F6263064FF007D9BC6 /* AdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0BDB3F8263064FF007D9BC6 /* AdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdGuardSDK.h; sourceTree = "<group>"; };
 		D0BDB3F9263064FF007D9BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0BDB5CC263071FC007D9BC6 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASFilterSubscriptionParser.h; sourceTree = "<group>"; };
-		D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASFilterSubscriptionParser.m; sourceTree = "<group>"; };
 		D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilterCell.swift; sourceTree = "<group>"; };
 		D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomFilterController.swift; sourceTree = "<group>"; };
 		D0C37EB322A66BBF0004337D /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
@@ -4289,7 +4227,6 @@
 		D0DB1B052148DB35006EB991 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationService+Utils.swift"; sourceTree = "<group>"; };
 		D0E84F0E242A32BF0000EEDB /* AEInvertedWhitelistDomainsObjectTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEInvertedWhitelistDomainsObjectTest.swift; sourceTree = "<group>"; };
-		D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesProcessor.swift; sourceTree = "<group>"; };
 		D0E8B165232939CA00476BC3 /* RulesProcessorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesProcessorTest.swift; sourceTree = "<group>"; };
 		D0EC86B223A772BF00EDF107 /* DnsFiltersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersServiceTest.swift; sourceTree = "<group>"; };
 		D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnManagerMock.swift; sourceTree = "<group>"; };
@@ -4299,8 +4236,6 @@
 		D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0EFBF5B22BA63B100D2D391 /* SharedResourcesMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResourcesMock.swift; sourceTree = "<group>"; };
 		D0EFBF5D22BB6BAC00D2D391 /* LoginResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseParser.swift; sourceTree = "<group>"; };
-		D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEInvertedWhitelistDomainsObject.h; sourceTree = "<group>"; };
-		D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEInvertedWhitelistDomainsObject.m; sourceTree = "<group>"; };
 		D0F7F0C72268946700592B1E /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		D0F7F0CB2268975100592B1E /* KeychainServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceTest.swift; sourceTree = "<group>"; };
 		D0F7F0CF22689CEC00592B1E /* LoginServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceTest.swift; sourceTree = "<group>"; };
@@ -5061,17 +4996,6 @@
 			path = ASDatabase;
 			sourceTree = "<group>";
 		};
-		65EC9A991BB9824C00F53F3B /* ASDModels */ = {
-			isa = PBXGroup;
-			children = (
-				65EC9A9A1BB9824C00F53F3B /* ASDFilterObjects.h */,
-				65EC9A9B1BB9824C00F53F3B /* ASDFilterObjects.m */,
-				D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */,
-				D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */,
-			);
-			path = ASDModels;
-			sourceTree = "<group>";
-		};
 		65EC9AD91BB9824C00F53F3B /* vendors */ = {
 			isa = PBXGroup;
 			children = (
@@ -5391,15 +5315,6 @@
 				7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */,
 			);
 			path = "List of rules models";
-			sourceTree = "<group>";
-		};
-		7E41F3ED2672585200D68F61 /* ContentBlockers */ = {
-			isa = PBXGroup;
-			children = (
-				7E41F3EA26724D8D00D68F61 /* ContentBlockerServiceNew.swift */,
-				7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */,
-			);
-			path = ContentBlockers;
 			sourceTree = "<group>";
 		};
 		7E49DBA722D88D9C00027E93 /* Swift UI */ = {
@@ -5767,15 +5682,15 @@
 			path = UserRulesStorage;
 			sourceTree = "<group>";
 		};
-		7EC97C17265FDAE9005C950C /* FilterServiceNew */ = {
+		7EC97C17265FDAE9005C950C /* FilterService */ = {
 			isa = PBXGroup;
 			children = (
-				7EC97C15265FC04F005C950C /* FilterServiceNew.swift */,
+				7EC97C15265FC04F005C950C /* FiltersService.swift */,
 				7EC97C18265FDB08005C950C /* SafariGroup.swift */,
 				7EC97C1F265FF25B005C950C /* SafariGroup+Filter.swift */,
 				7EC97C222660FDE1005C950C /* SafariGroup+GroupType.swift */,
 			);
-			path = FilterServiceNew;
+			path = FilterService;
 			sourceTree = "<group>";
 		};
 		7EC9A06B238815EA007EBB24 /* AddNewCustomFilter */ = {
@@ -5912,16 +5827,9 @@
 		D033980224318C1900F6B9DE /* ContentBlockers */ = {
 			isa = PBXGroup;
 			children = (
-				7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */,
-				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
-				7EE33406266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift */,
 				7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */,
-				7E1308972673601700D0D72A /* QuickAllowlistClipper.swift */,
-				7E41F3ED2672585200D68F61 /* ContentBlockers */,
-				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
-				D03E537321BA82BD00C62152 /* FiltersService.swift */,
-				D0984FFF260A279E00703DB2 /* FiltersService+metadata.swift */,
-				7EC97C17265FDAE9005C950C /* FilterServiceNew */,
+				7E41F3EA26724D8D00D68F61 /* ContentBlockerService.swift */,
+				7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */,
 			);
 			path = ContentBlockers;
 			sourceTree = "<group>";
@@ -5963,15 +5871,6 @@
 		D09B63EB2624A61E00F60AF7 /* FiltersMetadata */ = {
 			isa = PBXGroup;
 			children = (
-				65EC9A991BB9824C00F53F3B /* ASDModels */,
-				65E9E7B61BBD973200AE8DDF /* ABECFilterParsers.h */,
-				65E9E7B11BBD96DF00AE8DDF /* ABECFilterParsers.m */,
-				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
-				65C12EE51BD4D29F00FFC71C /* AESAntibanner.h */,
-				65C12EE61BD4D29F00FFC71C /* AESAntibanner.m */,
-				65EC9A051BB9824C00F53F3B /* ABECFilter.h */,
-				65EC9A061BB9824C00F53F3B /* ABECFilter.m */,
-				65EC9A041BB9824C00F53F3B /* ABECConstants.h */,
 				7E3D542C26526F1700169E37 /* FiltersMetaStorage */,
 				7EB3E25C264D2F0200C460FA /* CustomFilterMetaParser */,
 				7EB3E256264D2AEE00C460FA /* FilterMetaProtocol.swift */,
@@ -5985,21 +5884,13 @@
 		D09B63EC2624A63700F60AF7 /* FiltersConvertation */ = {
 			isa = PBXGroup;
 			children = (
-				D0F60DAF1F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.h */,
-				D0F60DB01F8B9AD3000AB5E0 /* AEInvertedWhitelistDomainsObject.m */,
+				7E1308972673601700D0D72A /* QuickAllowlistClipper.swift */,
+				7EE33406266FB5BE00B2AB59 /* FiltersConverterService.swift */,
 				D048A37F25FA50D7008CEC80 /* FiltersConverter.swift */,
 				D048A38025FA50D7008CEC80 /* SafariFilter.swift */,
 				D0EF33EA26086283000A55F0 /* AffinityRulesParser.swift */,
 			);
 			path = FiltersConvertation;
-			sourceTree = "<group>";
-		};
-		D09B63ED2624A68B00F60AF7 /* FilterFilesStorage */ = {
-			isa = PBXGroup;
-			children = (
-				D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */,
-			);
-			path = FilterFilesStorage;
 			sourceTree = "<group>";
 		};
 		D09CB60123ABB5BF008C9FF7 /* Onboarding */ = {
@@ -6033,46 +5924,19 @@
 			path = CsvParser;
 			sourceTree = "<group>";
 		};
-		D0BA7B7C2631A8910097029B /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D04B4A1D263ADACF00815F30 /* Resources.swift */,
-				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		D0BA7E5926330D9A0097029B /* Safari */ = {
-			isa = PBXGroup;
-			children = (
-				65CB60311D7488B7005A3C04 /* AEWhitelistDomainObject.h */,
-				65CB60321D7488B7005A3C04 /* AEWhitelistDomainObject.m */,
-				653B4CE51DA5001D00B1FF54 /* AEBlacklistDomainObject.h */,
-				653B4CE61DA5001D00B1FF54 /* AEBlacklistDomainObject.m */,
-				658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */,
-				D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */,
-				D0E8B1612327CA8C00476BC3 /* RulesProcessor.swift */,
-				D07427F2232B97040019AAF4 /* SafariRule.swift */,
-				D093718A21B0414A004A24F1 /* SafariService.swift */,
-				7E69C5152657A4C400EA9DBA /* UserRules */,
-			);
-			path = Safari;
-			sourceTree = "<group>";
-		};
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
+				D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */,
+				7EC97C17265FDAE9005C950C /* FilterService */,
+				7E69C5152657A4C400EA9DBA /* UserRules */,
 				242CD70B2656559C0010A2C0 /* Utils */,
 				242F69E426540F4F00B9DAD4 /* SQLScripts */,
-				D0BA7E5926330D9A0097029B /* Safari */,
-				D0BA7B7C2631A8910097029B /* Resources */,
-				D0BDB622263075C6007D9BC6 /* Lang */,
 				D0BDB4C226306F56007D9BC6 /* Logger */,
-				D09B63ED2624A68B00F60AF7 /* FilterFilesStorage */,
 				D09B63EC2624A63700F60AF7 /* FiltersConvertation */,
 				D09B63EB2624A61E00F60AF7 /* FiltersMetadata */,
 				D033980224318C1900F6B9DE /* ContentBlockers */,
-				D0BDB3F8263064FF007D9BC6 /* AdGuardSDK.h */,
 				D0BDB3F9263064FF007D9BC6 /* Info.plist */,
 				7EC97C1A265FE28B005C950C /* Configuration.swift */,
 			);
@@ -6085,15 +5949,6 @@
 				D0BDB5CC263071FC007D9BC6 /* Logger.swift */,
 			);
 			path = Logger;
-			sourceTree = "<group>";
-		};
-		D0BDB622263075C6007D9BC6 /* Lang */ = {
-			isa = PBXGroup;
-			children = (
-				D0BA7AED2631A27B0097029B /* ACObject.h */,
-				D0BA7AEC2631A27B0097029B /* ACObject.m */,
-			);
-			path = Lang;
 			sourceTree = "<group>";
 		};
 		D0C940F823ED5FF7008B85EC /* DnsProviders */ = {
@@ -6380,38 +6235,27 @@
 			files = (
 				D031303F2639685100A5C1D5 /* NSDate+Utils.h in Headers */,
 				D0BA7D652631C1F10097029B /* FMStatementKeywordRecogniser.h in Headers */,
-				D0BDB3FA263064FF007D9BC6 /* AdGuardSDK.h in Headers */,
 				D0CD6023263967540022D0C3 /* NSData+GZIP.h in Headers */,
 				D0BA7D5A2631C1F10097029B /* FMDatabase.h in Headers */,
-				D0BA80C42636EE7D0097029B /* AASFilterSubscriptionParser.h in Headers */,
 				D0313041263978E900A5C1D5 /* ADLocales.h in Headers */,
 				D0BA7D582631C1F10097029B /* FMDatabaseAdditions.h in Headers */,
 				D0BA7D542631C1F10097029B /* FMStatementQuotedRecogniser.h in Headers */,
 				D03130442639797D00A5C1D5 /* ACLang.h in Headers */,
 				D0BA7D602631C1F10097029B /* FMDB.h in Headers */,
-				D0BA7C822631B5D90097029B /* ABECFilterParsers.h in Headers */,
 				D0BA7D642631C1F10097029B /* FMResultSet.h in Headers */,
-				D0BA7F522633182F0097029B /* AEWhitelistDomainObject.h in Headers */,
-				D0BDB41B2630651D007D9BC6 /* AESAntibanner.h in Headers */,
 				D0BA7D572631C1F10097029B /* FMDatabaseQueue.h in Headers */,
-				D0BA7CAC2631B6100097029B /* ASDFilterObjects.h in Headers */,
 				D0BA7D552631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.h in Headers */,
 				D0BA7D5C2631C1F10097029B /* FMDatabasePool.h in Headers */,
 				D0BDB52826306FC1007D9BC6 /* ACLFileLogger.h in Headers */,
-				D0BA809B2636EC4F0097029B /* AEInvertedWhitelistDomainsObject.h in Headers */,
 				D0BA7EC12633177B0097029B /* NSStringPunycodeAdditions.h in Headers */,
-				D0BA7AEF2631A27B0097029B /* ACObject.h in Headers */,
 				D0BDB51326306FB8007D9BC6 /* ACLLogger.h in Headers */,
 				D0BA7D622631C1F10097029B /* FMSQLStatementSplitter.h in Headers */,
-				D0BDB68C26319DBC007D9BC6 /* ABECFilter.h in Headers */,
 				D0BA812D263712C30097029B /* ACIOUtils.h in Headers */,
-				D0BDB68D26319DBC007D9BC6 /* ABECConstants.h in Headers */,
 				D0450F90263C2A7800CA2110 /* NSString+Utils.h in Headers */,
 				D0BA7D592631C1F10097029B /* FMStatementTokenRecogniser.h in Headers */,
 				D0BDB5A326307092007D9BC6 /* DDLegacyMacros.h in Headers */,
 				D0BA8157263713580097029B /* NSException+Utils.h in Headers */,
 				D0BA7D282631C1B20097029B /* ASDatabase.h in Headers */,
-				D0BA7EFF263317DC0097029B /* AEFilterRuleSyntaxConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8638,7 +8482,6 @@
 				D07C58A3230C1FF5002CD427 /* LoginResponseParserTest.swift in Sources */,
 				7E5844DC23FD890700BAD052 /* UserNotificationService.swift in Sources */,
 				D04C2B77240FA18E009330A8 /* ComplexProtectionService.swift in Sources */,
-				65EC9BE51BB9824C00F53F3B /* ASDFilterObjects.m in Sources */,
 				D0D5949723AA3B570033CAF3 /* DnsLogRecordsServiceTest.swift in Sources */,
 				65EC9CAD1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */,
@@ -8975,7 +8818,7 @@
 				7E1C34692652940400A4490E /* DefaultDatabaseManager.swift in Sources */,
 				2434A3EA2657AA81001E5B72 /* FiltersMetaStorage+FiltersLocalizationsTest.swift in Sources */,
 				2434A3E82657A8D5001E5B72 /* FiltersMetaStorage+GroupLocalizationsTest.swift in Sources */,
-				7EC97C1D265FEF85005C950C /* FilterServiceNew.swift in Sources */,
+				7EC97C1D265FEF85005C950C /* FiltersService.swift in Sources */,
 				7E69C5072656617C00EA9DBA /* FiltersMetaStorage+Tags.swift in Sources */,
 				7E1C34712653C5CE00A4490E /* CustomFilterMeta.swift in Sources */,
 				7EB3E23A264BEE4800C460FA /* CustomFilterMetaParserTest.swift in Sources */,
@@ -8994,7 +8837,6 @@
 				7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */,
 				2434A3EC2657B36A001E5B72 /* FiltersMetaStorage+FitlerRulesTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
-				7EE33408266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
 				7E69C5092656617C00EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
@@ -10008,7 +9850,6 @@
 			files = (
 				D0BA7CE92631C0C00097029B /* Dictionary+Utils.swift in Sources */,
 				D03130432639796D00A5C1D5 /* ACNHttpUtils.m in Sources */,
-				D0313040263978AF00A5C1D5 /* ASDFilterObjects.m in Sources */,
 				7E41F3EF2672587000D68F61 /* ContentBlockersManager.swift in Sources */,
 				D0BA7C3C2631B5680097029B /* FiltersMetadataParser.swift in Sources */,
 				D0BA8156263713580097029B /* NSException+Utils.m in Sources */,
@@ -10017,7 +9858,6 @@
 				7E69C4FD26554CD200EA9DBA /* FiltersMetaStorage+GroupLocalizations.swift in Sources */,
 				D0BA7D612631C1F10097029B /* FMDatabase.m in Sources */,
 				D0450F91263C2AAE00CA2110 /* NSString+Utils.m in Sources */,
-				D0BA7E98263317530097029B /* NotEcapingJsonSerialization.swift in Sources */,
 				D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */,
 				7E69C4F526550C9300EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
 				7E69C4F726550C9F00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */,
@@ -10028,13 +9868,10 @@
 				7E69C5172657BFED00EA9DBA /* UserRule.swift in Sources */,
 				7EB3E25A264D2AEF00C460FA /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				D0BA7C262631B5540097029B /* RequestSenderProtocol.swift in Sources */,
-				D0BDB4212630651D007D9BC6 /* AESAntibanner.m in Sources */,
 				D0BA7C112631B53B0097029B /* NetworkingService.swift in Sources */,
 				D0BA7CFE2631C0DC0097029B /* CharacterSet+Utils.swift in Sources */,
 				D0BA7D522631C1F00097029B /* FMResultSet.m in Sources */,
-				D0BA7D132631C12B0097029B /* AntibannerController.swift in Sources */,
 				7E1C34742653C77000A4490E /* FiltersMetaStorage.swift in Sources */,
-				D0BDB6CC26319E5C007D9BC6 /* ABECFilter.m in Sources */,
 				D0BA7C3E2631B5680097029B /* SuccessFailureParser.swift in Sources */,
 				D0BA7C102631B53B0097029B /* NetworkingService-Common.swift in Sources */,
 				7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */,
@@ -10047,28 +9884,21 @@
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
 				242CD70D265655F00010A2C0 /* URL+Utils.swift in Sources */,
 				7E69C4FF26554CE200EA9DBA /* FiltersMetaStorage+FiltersLocalizations.swift in Sources */,
-				7EC97C16265FC04F005C950C /* FilterServiceNew.swift in Sources */,
+				7EC97C16265FC04F005C950C /* FiltersService.swift in Sources */,
 				D0BA7D5B2631C1F10097029B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */,
 				D0BA7EC22633177B0097029B /* NSStringPunycodeAdditions.m in Sources */,
 				D0BA7D292631C1B20097029B /* ASDatabase.m in Sources */,
-				D0BDB41C2630651D007D9BC6 /* FilterInfo.swift in Sources */,
 				7E69C5232657E16100EA9DBA /* UserRulesManager.swift in Sources */,
 				D0BA7D532631C1F00097029B /* FMStatementKeywordRecogniser.m in Sources */,
 				D0BA7C3D2631B5680097029B /* ParserProtocol.swift in Sources */,
-				D0BA7F29263318260097029B /* AEWhitelistDomainObject.m in Sources */,
-				D0BA80862636EC480097029B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */,
 				7EC97C0D265E3A31005C950C /* UserRulesStorage.swift in Sources */,
 				7E69C5142657A4BD00EA9DBA /* UserRulesManagerProtocol.swift in Sources */,
 				D0BDB4182630651D007D9BC6 /* FiltersConverter.swift in Sources */,
-				D04B4A1E263ADACF00815F30 /* Resources.swift in Sources */,
-				D0BDB4192630651D007D9BC6 /* FiltersService.swift in Sources */,
-				D0BA7E6E263316E90097029B /* RulesProcessor.swift in Sources */,
 				D0BA7D5D2631C1F10097029B /* FMStatementQuotedRecogniser.m in Sources */,
 				7E69C5192657C1FE00EA9DBA /* UserRuleConverter.swift in Sources */,
-				D0BA7AEE2631A27B0097029B /* ACObject.m in Sources */,
-				7EE33407266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift in Sources */,
+				7EE33407266FB5BE00B2AB59 /* FiltersConverterService.swift in Sources */,
 				D0BA7C272631B5540097029B /* RequestSender.swift in Sources */,
 				7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */,
 				7E69C51D2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift in Sources */,
@@ -10077,8 +9907,6 @@
 				D0BA7C6C2631B5810097029B /* RequestFactory.swift in Sources */,
 				D0BA812C263712C30097029B /* ACIOUtils.m in Sources */,
 				7EC97C1B265FE28B005C950C /* Configuration.swift in Sources */,
-				D0BA80C52636EE7D0097029B /* AASFilterSubscriptionParser.m in Sources */,
-				D0BDB4172630651D007D9BC6 /* FiltersService+metadata.swift in Sources */,
 				D0BA7DB62631C2A20097029B /* NotificationService+Utils.swift in Sources */,
 				7E1C346F2653C58000A4490E /* CustomFilterMetaParser.swift in Sources */,
 				7E1C346B265296F700A4490E /* ProductionDatabaseManager.swift in Sources */,
@@ -10086,24 +9914,18 @@
 				7E69C501265559CC00EA9DBA /* FiltersMetaStorage+FitlerRules.swift in Sources */,
 				7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */,
 				7EC97C19265FDB08005C950C /* SafariGroup.swift in Sources */,
-				D0BA7E6F263316E90097029B /* SafariRule.swift in Sources */,
-				D0BDB4202630651D007D9BC6 /* ContentBlockerService.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */,
 				D0313042263978ED00A5C1D5 /* ADLocales.m in Sources */,
 				7E1C34762653CB5800A4490E /* GroupMetaProtocol.swift in Sources */,
-				7E41F3EB26724D8D00D68F61 /* ContentBlockerServiceNew.swift in Sources */,
+				7E41F3EB26724D8D00D68F61 /* ContentBlockerService.swift in Sources */,
 				D0BA7C552631B56D0097029B /* FiltersLocalizationsRequest.swift in Sources */,
 				D0CD6022263967540022D0C3 /* NSData+GZIP.m in Sources */,
-				D0BA7C972631B5DE0097029B /* ABECFilterParsers.m in Sources */,
-				D0BA7F28263318260097029B /* AEBlacklistDomainObject.m in Sources */,
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
 				7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */,
 				7EC97C232660FDE1005C950C /* SafariGroup+GroupType.swift in Sources */,
 				7E1308982673601700D0D72A /* QuickAllowlistClipper.swift in Sources */,
 				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
-				D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */,
 				7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */,
-				D0BDB6F526319F56007D9BC6 /* FilterDetailedInterface.swift in Sources */,
 				D0BA7D562631C1F10097029B /* FMDatabasePool.m in Sources */,
 				D0BA7D5E2631C1F10097029B /* FMDatabaseAdditions.m in Sources */,
 			);

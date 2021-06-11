@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FiltersServiceNewProtocol {
+protocol FiltersServiceProtocol {
     var groups: [SafariGroup] { get }
     
     /**
@@ -49,20 +49,15 @@ protocol FiltersServiceNewProtocol {
     func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool) throws
     
     func deleteCustomFilter(withId id: Int) throws
-//
-//    func renameCustomFilter(withId id: Int, to name: String)
+
+    func renameCustomFilter(withId id: Int, to name: String) throws
 }
 
 /*
  This class is a proxy between filters, groups objects and SQLite database.
  It is used to get or modify filters objects.
  */
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// TODO: - Check if we need to use background tasks
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-final class FiltersServiceNew: FiltersServiceNewProtocol {
+final class FiltersService: FiltersServiceProtocol {
     
     enum FilterServiceError: Error, CustomDebugStringConvertible {
         case invalidCustomFilterId(filterId: Int)
@@ -386,7 +381,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
     }
 }
 
-// MARK: - Resources + FilterService variables
+// MARK: - UserDefaultsStorageProtocol + FilterService variables
 
 fileprivate extension UserDefaultsStorageProtocol {
     private var lastFiltersUpdateCheckDateKey: String { "AdGuardSDK.lastFiltersUpdateCheckDateKey" }

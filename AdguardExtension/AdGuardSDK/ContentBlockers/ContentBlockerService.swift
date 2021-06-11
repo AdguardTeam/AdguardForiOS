@@ -17,679 +17,176 @@
  */
 
 import Foundation
-@_implementationOnly import ContentBlockerConverter
 
-// MARK: - service protocol
-/**
- ContentBlockerService is responsible for the composition of safari content blocker rules files
- */
-public protocol ContentBlockerServiceProtocol {
-    /**
-     recompile all content blocker files and reloads it to safari
-    */
-    func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertWhitelist: Bool, completion:@escaping (Error?)->Void)
+protocol ContentBlockerServiceProtocol {
+    /* Returns every content blocker state */
+    var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
-    /**
-     validates rule text
-     It returns true if rule can be converted to safari content blocker rule by converter, false for unsupported rules
+    /*
+     Updates all content blockers
+     Returns error if it was occured during update
+     Returns nil if everything is fine
      */
-    func validateRule(_ ruleText: String)->Bool
+    func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void)
     
-    /**
-     Adds whitelist domain, modifies content blocking JSONs
-     and replaces these JSONs in shared resources asynchronously.
-     Method performs completionBlock when done on service working queue.
-     */
-    func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void)
-    
-    func whitelistRules()->[ASDFilterRule]
-    func invertedWhitelistRules()->[ASDFilterRule]
-    func setInvertedWhitelistRules(_ rules: [ASDFilterRule])
-    func setWhitelistRules(_ rules: [ASDFilterRule])
+    /* Returns state of the specified content blocker */
+    func getState(for cbType: ContentBlockerType) -> Bool
 }
 
-@objc
-public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
+/* This class is responsible for updating Safari content blockers */
+final class ContentBlockerService: ContentBlockerServiceProtocol {
+    // MARK: - Internal properties
     
-    var antibanner: AESAntibannerProtocol
-    
-    // MARK: - error constants
-    static let contentBlockerServiceErrorDomain = "ContentBlockerServiceErrorDomain"
-    static let contentBlockerConverterErrorCode = 1
-    static let contentBlockerDBErrorCode = 2
-    
-    // MARK: - private properties
-    private var safariService: SafariServiceProtocol
-    private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
-    private var filtersStorage: FilterFilesStorageProtocol
-    private var resources: ResourcesProtocol
-    
-    private let workQueue = DispatchQueue(label: "content_blocker")
-    
-    static let groupsByContentBlocker: [ContentBlockerType: [AdGuardFilterGroup]] =
-        [.general:                      [.ads, .languageSpecific],
-         .privacy:                      [.privacy],
-         .socialWidgetsAndAnnoyances:   [.socialWidgets, .annoyances],
-         .other:                        [.other],
-         .custom:                       [.custom],
-         .security:                     [.security]
-            ]
-    
-    // todo: return conversion result directly to caller
-//    static let defaultsCountKeyByBlocker: [ContentBlockerType: String] = [
-//        .general:                       AEDefaultsGeneralContentBlockerRulesCount,
-//        .privacy:                       AEDefaultsPrivacyContentBlockerRulesCount,
-//        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesCount,
-//        .other:                         AEDefaultsOtherContentBlockerRulesCount,
-//        .custom:                        AEDefaultsCustomContentBlockerRulesCount,
-//        .security:                      AEDefaultsSecurityContentBlockerRulesCount
-//    ]
-//
-//    static let defaultsOverLimitCountKeyByBlocker: [ContentBlockerType: String] = [
-//        .general:                       AEDefaultsGeneralContentBlockerRulesOverLimitCount,
-//        .privacy:                       AEDefaultsPrivacyContentBlockerRulesOverLimitCount,
-//        .socialWidgetsAndAnnoyances:    AEDefaultsSocialContentBlockerRulesOverLimitCount,
-//        .other:                         AEDefaultsOtherContentBlockerRulesOverLimitCount,
-//        .custom:                        AEDefaultsCustomContentBlockerRulesOverLimitCount,
-//        .security:                      AEDefaultsSecurityContentBlockerRulesOverLimitCount
-//    ]
-    
-    // MARK: - init
-    public init(resources: ResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FilterFilesStorageProtocol) {
-        self.resources = resources
-        self.safariService = safariService
-        self.antibanner = antibanner
-        self.filtersStorage = filtersStorage
-        super.init()
+    var allContentBlockersStates: [ContentBlockerType : Bool] {
+        var result: [ContentBlockerType : Bool] = [:]
+        ContentBlockerType.allCases.forEach { result[$0] = getState(for: $0) }
+        return result
     }
     
-    // MARK: - public methods
-    @objc
-    public func reloadJsons(backgroundUpdate: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertWhitelist: Bool, completion:@escaping (Error?)->Void) {
-        Logger.logInfo("(ContentBlockerService) reloadJsons")
-        
-#if !APP_EXTENSION
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-#endif
-        
-        workQueue.async { [weak self] in
-            guard let self = self else { return }
-            
-            let error = self.updateContentBlockers(background: backgroundUpdate, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertWhitelist)
-#if !APP_EXTENSION
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
-#endif
-            completion(error)
-            return            
+    // MARK: - Private properties
+    
+    // Queue for updating content blockers
+    private let updateQueue = DispatchQueue(label: "AdGuardSDK.ContentBlockerService.updateQueue", qos: .background)
+    
+    // Queue for invalidating content blocking JSON
+    private let invalidateQueue = DispatchQueue(label: "AdGuardSDK.ContentBlockerService.invalidateQueue", qos: .background)
+    
+    /* Services */
+    private let configuration: ConfigurationProtocol
+    private let jsonStorage: ContentBlockersInfoStorageProtocol
+    private let contentBlockersManager: ContentBlockersManagerProtocol
+    
+    // MARK: - Initialization
+    
+    init(configuration: ConfigurationProtocol,
+         jsonStorage: ContentBlockersInfoStorageProtocol,
+         contentBlockersManager: ContentBlockersManagerProtocol = ContentBlockersManager())
+    {
+        self.configuration = configuration
+        self.jsonStorage = jsonStorage
+        self.contentBlockersManager = contentBlockersManager
+    }
+    
+    // MARK: - Internal methods
+    
+    func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void) {
+        updateQueue.async { [weak self] in
+            NotificationCenter.default.contentBlockersUpdateStarted()
+            let updateError = self?.updateContentBlockersSync()
+            NotificationCenter.default.contentBlockersUpdateFinished()
+            onContentBlockersUpdated(updateError)
         }
     }
     
-    public func validateRule(_ ruleText: String) -> Bool {
-        
-        let trimmedRule = ruleText.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmedRule.count == 0 {
-            return false
-        }
-        
-        if  trimmedRule.contains(OLD_INJECT_RULES) ||
-            trimmedRule.contains(MASK_CONTENT_RULE) ||
-            trimmedRule.contains(MASK_CONTENT_EXCEPTION_RULE) ||
-            trimmedRule.contains(MASK_JS_RULE) ||
-            trimmedRule.contains(MASK_FILTER_UNSUPPORTED_RULE){
-            return false
-        }
-        
-        return true
-    }
-
-    // MARK: - whitelist operations
-    
-    /**
-     Adds whitelist domain, modifies content blocking JSONs
-     and replaces these JSONs in shared resources asynchronously.
-     Method performs completionBlock when done on service working queue.
-     */
-    public func addWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
-        
-        processWhitelistDomain(domain, enabled: true, completion: completion, processRules: {(rules) in
-            let rule = AEWhitelistDomainObject(domain: domain).rule
-            rule.isEnabled = NSNumber(booleanLiteral: true)
-            
-            return (rules + [rule], true)
-        }, processData: { [weak self] (jsonData, jsonRuleData, contentBlocker) in
-            guard let sSelf = self else { return Data() }
-            
-            //  todo: make oit another way
-//            let converted = sSelf.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-//            let limit = sSelf.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-//            let overlimit = converted == limit
-            let overlimit = false
-                
-            let (resultData, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: domain, enabled: true, jsonData: jsonData as Data, overlimit: overlimit)
-            
-            return resultData ?? Data()
-        })
-    }
-    
-    
-    
-    public func removeWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
-        
-        processWhitelistDomain(domain, enabled: false, completion: completion, processRules: {(rules) in
-            var found = false
-            let rule = AEWhitelistDomainObject(domain: domain).rule
-            let resultRules = rules.filter() { (testRule) in
-                if rule.isEqualRuleText(testRule) {
-                    found = true
-                    return false
-                }
-                return true
-            }
-            return (resultRules, found)
-        }, processData: { [weak self] (jsonData, domain, _) in
-            guard let sSelf = self else { return Data() }
-            
-            let (resultJsonData, _) = sSelf.rulesProcessor.removeWhitelistDomain(domain: domain, jsonData: jsonData)
-            
-            return resultJsonData ?? Data()
-        })
-    }
-    
-    public func replaceWhitelistDomain(_ domain: String, with newDomain: String, enabled: Bool, completion: @escaping (Error?)->Void) {
-        processWhitelistDomain(domain, enabled: enabled, completion: completion, processRules: {(rules) in
-            var found = false
-            let rule = AEWhitelistDomainObject(domain: domain).rule
-            let resultRules = rules.map() { (testRule)->ASDFilterRule in
-                if rule.isEqualRuleText(testRule) {
-                    found = true
-                    let newRule = AEWhitelistDomainObject(domain: newDomain).rule
-                    newRule.isEnabled = NSNumber(booleanLiteral: enabled)
-                    return newRule
-                }
-                return testRule
-            }
-            return (resultRules, found)
-        }, processData: { [weak self] (jsonData, ruleData, _) in
-            guard let sSelf = self else { return jsonData }
-            
-            let (removed, _) = sSelf.rulesProcessor.removeWhitelistDomain(domain: domain, jsonData: jsonData)
-            
-            let (result, _) = sSelf.rulesProcessor.addDomainToWhitelist(domain: newDomain, enabled: enabled, jsonData: removed ?? Data(), overlimit: false)
-            
-            return result ?? Data()
-        })
-    }
-    
-    public func whitelistRules() -> [ASDFilterRule] {
-        return resources.whitelistContentBlockingRules ?? []
-    }
-    
-    public func setWhitelistRules(_ rules: [ASDFilterRule]) {
-        resources.whitelistContentBlockingRules = rules
-    }
-    
-    // MARK: - inverted whitelist rules
-    
-    public func addInvertedWhitelistDomain(_ domain: String, completion: @escaping (Error?)->Void) {
-        
-        processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
-            var newRules = rules
-            newRules.append(ASDFilterRule(text: domain, enabled: true))
-            return (newRules, true)
-        }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
-            guard let self = self else { return Data() }
-            // todo:
-//            let converted = self.resources.sharedDefaults().integer(forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-//            let limit = self.resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules)
-//            let overlimit = converted == limit
-            let overlimit = false
-            
-            let (data, _) = self.rulesProcessor.addDomainToInvertedWhitelist(rule: domain, jsonData: jsonData, overlimit: overlimit)
-            
-            return data ?? Data()
-            
-        }) { (error) in
-            completion(error)
-        }
-    }
-    
-    public func removeInvertedWhitelistDomain(_ ruleToRemove: String, completion: @escaping (Error?)->Void) {
-    
-        processInvertedWhitelistDomain(processRules: { (rules) -> ([ASDFilterRule], Bool) in
-            let filteredDomains = rules.filter({ (rule) -> Bool in
-                return ruleToRemove != rule.ruleText
-            })
-            return(filteredDomains, true)
-        }, processData: { [weak self] (jsonData, contentBlocker) -> Data in
-            guard let sSelf = self else { return Data() }
-            
-            let (data, _) = sSelf.rulesProcessor.removeInvertedWhitelistDomain(rule: ruleToRemove, jsonData: jsonData)
-            
-            return data ?? Data()
-        }) { (error) in
-            completion(error)
-        }
-    }
-    
-    public func invertedWhitelistRules() -> [ASDFilterRule] {
-        let object = resources.invertedWhitelistContentBlockingObject
-        return object?.rules ?? []
-    }
-    
-    public func setInvertedWhitelistRules(_ rules: [ASDFilterRule]) {
-        resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: rules)
-    }
-    
-    // MARK: - private methods
-    
-    private func updateContentBlockers(background: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)->Error? {
-        
-        Logger.logInfo("(ContentBlockerService) updateContentBlockers")
-        let filtersByGroup = activeGroups()
-        
-        var agFilters = [AdGuardFilter]()
-        
-        for (group, filterIds) in filtersByGroup {
-            let filters = filtersStorage.getFiltersContentForFilters(withIds: filterIds)
-            
-            for (_, content) in filters {
-                agFilters.append(AdGuardFilter(text: content, group: group))
-            }
-        }
-        
-        return convertRulesAndInvalidateSafari(background: background, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertedWhitelist: invertedWhitelist, filters: agFilters)
-    }
-    
-    private func convertRulesAndInvalidateSafari(background: Bool, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool, filters: [AdGuardFilter])->Error? {
-        var resultError: Error?
-        let converter = FiltersConverter()
-        
-        if !protectionEnabled {
-            Logger.logInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
-            
-            for type in ContentBlockerType.allCases {
-                safariService.save(json: Data(), type: type)
-            }
-            return nil
-        }
-        
-        // get user rules
-        
-        let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
-        
-        // get whitelist rules
-        
-        var allowlistRules: [ASDFilterRule]?
-        
-        if whitelistEnabled {
-            if invertedWhitelist {
-                
-                if resources.invertedWhitelistContentBlockingObject == nil {
-                    resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: [])
-                }
-                
-                if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                    Logger.logInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
-                    allowlistRules = [invertedRule]
-                }
-            }
-            else {
-                if let whitelistRules = resources.whitelistContentBlockingRules {
-                    Logger.logInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
-                    allowlistRules = whitelistRules as? [ASDFilterRule]
-                }
-            }
-        }
-        
-        let allowlist = allowlistRules?.map { $0.ruleText }.joined(separator: "/n")
-        let blocklist = userRules.map { $0.ruleText }.joined(separator: "/n")
-        
-        let converted = converter.convertFilters(filters, allowlist: allowlist, blocklist: blocklist, invert: invertedWhitelist)
-        
+    func getState(for cbType: ContentBlockerType) -> Bool {
         let group = DispatchGroup()
-        for type in ContentBlockerType.allCases {
-            let filter = converted?.first { $0.type == type }
-            
-            let data: Data
-            if filter == nil {
-                data = Data()
+        let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        var isEnabled = false
+        group.enter()
+        contentBlockersManager.getStateOfContentBlocker(withId: cbBundleId) { result in
+            switch result {
+            case .success(let enabled):
+                isEnabled = enabled
+            case .error(let error):
+                Logger.logError("(ContentBlockerService) - getState; Failed to reveal CB state, suppose it is disabled; Error: \(error)")
             }
-            else {
-                data = (filter?.jsonString ?? "" ).data(using: .utf8) ?? Data()
-            }
-            
-            safariService.save(json: data, type: type)
+            group.leave()
+        }
+        group.wait()
+        return isEnabled
+    }
+    
+    // MARK: - Private methods
+    
+    /*
+     Updates all content blockers syncroniously.
+     Returns error if some content blockers were failed to be updated.
+     Returns nil if update successeded.
+     */
+    private func updateContentBlockersSync() -> Error? {
+        var resultError: Error?
+        let group = DispatchGroup()
+        
+        for cb in ContentBlockerType.allCases {
             group.enter()
-            safariService.invalidateBlockingJson(type: type) { (error) in
-                if error != nil {
-                    Logger.logError("Invalidate Saferi Error: \(error!)")
+            reloadContentBlocker(for: cb) { error in
+                if let error = error {
                     resultError = error
                 }
-                
                 group.leave()
             }
         }
         
         group.wait()
-        
         return resultError
     }
     
-    private func sortWithAffinityBlocks(filterRules: [ASDFilterRule], contentBlockerRules: inout [ASDFilterRule], rulesByAffinityBlocks: inout [ContentBlockerType: [ASDFilterRule]]) {
-        
-        for rule in filterRules {
-            if rule.affinity != nil {
-                
-                for type in ContentBlockerType.allCases {
-                    let affinity = affinityMaskByContentBlockerType[type]
-                    if (affinity != nil) {
-                        if (rule.affinity == 0 || Affinity(rawValue: UInt8(truncating: rule.affinity!)).contains(affinity!)) {
-                            if rulesByAffinityBlocks[type] == nil {
-                                rulesByAffinityBlocks[type] = [ASDFilterRule]()
-                            }
-                            rulesByAffinityBlocks[type]?.append(rule)
-                        }
+    // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
+    private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
+        invalidateQueue.async { [unowned self] in
+            let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+            
+            // Try to reload content blocker
+            contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { error in
+                if let error = error {
+                    Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(error)")
+                    // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
+                    if firstTry {
+                        reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
+                    } else {
+                        onContentBlockerReloaded(error)
                     }
                 }
-                
-            } else {
-                contentBlockerRules.append(rule)
+                else {
+                    onContentBlockerReloaded(nil)
+                }
             }
         }
     }
-    
-    private let affinityMaskByContentBlockerType: [ContentBlockerType: Affinity] =
-        [.general: Affinity.general,
-         .privacy: Affinity.privacy,
-         .socialWidgetsAndAnnoyances: Affinity.socialWidgetsAndAnnoyances,
-         .other: Affinity.other,
-         .custom: Affinity.custom,
-         .security: Affinity.security ]
-    
-    private func updateJson(blockerRules: [ASDFilterRule], forContentBlocker contentBlocker: ContentBlockerType, enabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool)->Error? {
-        Logger.logInfo("(ContentBlockerService) updateJson for contentBlocker \(contentBlocker) rulesCount: \(blockerRules.count)")
-        
-        let safariProtectionEnabled = enabled
-        
-        if safariProtectionEnabled{
-            return autoreleasepool {
-                var rules = blockerRules
-                
-                // add user rules
-                
-                let userRules = userFilterEnabled ? antibanner.activeRules(forFilter: ASDF_USER_FILTER_ID as NSNumber) : [ASDFilterRule]()
-                
-                
-                Logger.logInfo("(ContentBlockerService) updateJson append \(userRules.count) user rules")
-                
-                rules = userRules + rules
-                
-                // add whitelist rules
-                
-                let inverted = invertedWhitelist
-                
-                if whitelistEnabled {
-                    if inverted {
-                        
-                        if resources.invertedWhitelistContentBlockingObject == nil {
-                            resources.invertedWhitelistContentBlockingObject = AEInvertedWhitelistDomainsObject(rules: [])
-                        }
-                        
-                        if let invertedRule = resources.invertedWhitelistContentBlockingObject?.rule {
-                            Logger.logInfo("(ContentBlockerService) updateJson append inverted whitelist rule")
-                            rules.append(invertedRule)
-                        }
-                    }
-                    else {
-                        if let whitelistRules = resources.whitelistContentBlockingRules {
-                            Logger.logInfo("(ContentBlockerService) updateJson append \(whitelistRules.count) user rules")
-                            rules.append(contentsOf: whitelistRules as! [ASDFilterRule])
-                        }
-                    }
-                }
-                
-                var resultData = Data()
-                var resultError: Error?
-                if rules.count != 0 {
-                    Logger.logInfo("(ContentBlockerService) updateJson - convert \(rules.count) rules")
-                    let (jsonData, converted, overLimit, _, error) = convertRulesToJson(rules)
-                    // todo:
-//                    resources.sharedDefaults().set(overLimit, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-                    
-                    if jsonData != nil { resultData = jsonData! }
-//                    todo:
-//                    resources.sharedDefaults().set(converted, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-                    
-                    resultError = error
-                    if error != nil {
-                        Logger.logInfo("(ContentBlockerService) updateJson - error converting rules - \(error!.localizedDescription)")
-                    }
-                } else {
-                    Logger.logInfo("(ContentBlockerService) updateJson - no rules to convert")
-                    // todo:
-//                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsOverLimitCountKeyByBlocker[contentBlocker]!)
-//                    resources.sharedDefaults().set(0, forKey: ContentBlockerService.defaultsCountKeyByBlocker[contentBlocker]!)
-                }
-                
-                safariService.save(json: resultData, type: contentBlocker)
-                
-                return resultError
-            }
-        } else {
-            Logger.logInfo("(ContentBlockerService) updateJson safari protection is disabled. Save empty data instead of rules json")
-            safariService.save(json: Data(), type: contentBlocker)
-            return nil
-        }
-    }
+}
 
-    
-    /** returns map [groupId: [filterId]] */
-    private func activeGroups()->[AdGuardFilterGroup: [Int]] {
-        var filterByGroup = [AdGuardFilterGroup:[Int]]()
-        
-        let groupIDs = antibanner.activeGroupIDs()
-        
-        for groupID in groupIDs {
-            let filterIDs = antibanner.activeFilterIDs(byGroupID: groupID)
-            filterByGroup[AdGuardFilterGroup(rawValue: groupID.intValue) ?? .ads] = filterIDs.map { $0.intValue }
+// MARK: - ContentBlockerType + contentBlockerBundleId
+
+extension ContentBlockerType {
+    func contentBlockerBundleId(_ mainAppBundleId: String) -> String {
+        switch self {
+        case .general: return "\(mainAppBundleId).extension"
+        case .privacy: return "\(mainAppBundleId).extensionPrivacy"
+        case .socialWidgetsAndAnnoyances: return "\(mainAppBundleId).extensionAnnoyances"
+        case .other: return "\(mainAppBundleId).extensionOther"
+        case .custom: return "\(mainAppBundleId).extensionCustom"
+        case .security: return "\(mainAppBundleId).extensionSecurity"
         }
-        
-        return filterByGroup
+    }
+}
+
+// MARK: - NotificationCenter + Content blockers reload events
+
+fileprivate extension NSNotification.Name {
+    static var contentBlockersUpdateStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.contentBlockersUpdateStarted") }
+    static var contentBlockersUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.contentBlockersUpdateFinished") }
+}
+
+fileprivate extension NotificationCenter {
+    func contentBlockersUpdateStarted() {
+        self.post(name: .contentBlockersUpdateStarted, object: self, userInfo: nil)
     }
     
-    private func processWhitelistDomain(_ domain: String, enabled: Bool, completion: @escaping (Error?)->Void, processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ domain: String, _ contentBlocker: ContentBlockerType)->Data) {
-        
-        workQueue.async { [weak self] in
-            guard let sSelf = self else { return }
-            
-            var error: Error?
-            var modified = false
-            
-            var savedDatas:[ContentBlockerType: Data] = [:]
-            var savedRules:[ASDFilterRule] = []
-            
-            let rollback: ()->Void = {
-                for (_, obj) in savedDatas.enumerated() {
-                    sSelf.safariService.save(json: obj.value, type: obj.key)
-                    sSelf.resources.whitelistContentBlockingRules = savedRules as [ASDFilterRule]
-                }
-            }
-            
-            defer {
-            
-                if error != nil {
-                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                    rollback()
-                }
-                else if error == nil && modified {
-                    sSelf.safariService.invalidateBlockingJsons { (error) in
-                        sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                        
-                        if error != nil {
-                            rollback()
-                            sSelf.safariService.invalidateBlockingJsons { (error) in
-                            }
-                        }
-                    }
-                }
-                else {
-                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                }
-            }
-            
-            var whitelistRules = sSelf.resources.whitelistContentBlockingRules as? [ASDFilterRule] ?? []
-            savedRules = Array(whitelistRules)
-            var succeded = false
-            (whitelistRules, succeded) = processRules(whitelistRules)
-            
-            if !succeded {
-                // todo: use "support_unexpected_error" string in main app
-                error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                               code: ContentBlockerService.contentBlockerDBErrorCode)
-                return
-            }
-            
-            sSelf.resources.whitelistContentBlockingRules = whitelistRules as? [ASDFilterRule]
-            
-            // change all content blocker jsons
-            ContentBlockerType.allCases.forEach { (type) in
-                autoreleasepool {
-                    guard let data = sSelf.safariService.readJson(forType: type) else { return }
-                    savedDatas[type] = data
-                    let jsonData = processData(data, domain, type)
-                    
-                    sSelf.safariService.save(json: jsonData as Data, type: type)
-                }
-            }
-            
-            modified = true
-            return
+    func contentBlockersUpdateFinished() {
+        self.post(name: .contentBlockersUpdateFinished, object: self, userInfo: nil)
+    }
+}
+
+public extension NotificationCenter {
+    func contentBlockersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+        return self.observe(name: .contentBlockersUpdateStarted, object: nil, queue: queue) { _ in
+            handler()
         }
     }
     
-    private func processInvertedWhitelistDomain(processRules: @escaping(_ rules: [ASDFilterRule])->([ASDFilterRule], Bool), processData: @escaping(_ jsonData: Data, _ contentBlocker: ContentBlockerType)->Data, completion: @escaping (Error?)->Void) {
-        
-        workQueue.async { [weak self] in
-            guard let sSelf = self else { return }
-            
-            var error: Error?
-            var modified = false
-            
-            var savedDatas:[ContentBlockerType: Data] = [:]
-            let invertedObject = sSelf.resources.invertedWhitelistContentBlockingObject
-            
-            let rollback: ()->Void = {
-                for (_, obj) in savedDatas.enumerated() {
-                    sSelf.safariService.save(json: obj.value, type: obj.key)
-                    sSelf.resources.invertedWhitelistContentBlockingObject = invertedObject
-                }
-            }
-            
-            defer {
-                
-                if error != nil {
-                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                    rollback()
-                }
-                else if error == nil && modified {
-                    sSelf.safariService.invalidateBlockingJsons { (error) in
-                        sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                    }
-                }
-                else {
-                    sSelf.finishReloadingConetentBlocker(completion: completion, error: error)
-                }
-            }
-            
-            var rules = invertedObject?.rules ?? []
-        
-            var succeded = false
-            (rules, succeded) = processRules(rules)
-            
-            if !succeded {
-                // todo: use "support_unexpected_error" string in main app
-                error = NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                                code: ContentBlockerService.contentBlockerDBErrorCode)
-                return
-            }
-            
-            let newInvertedObject = AEInvertedWhitelistDomainsObject(rules: rules)
-        
-            sSelf.resources.invertedWhitelistContentBlockingObject = newInvertedObject
-            
-            // change all content blocker jsons
-            ContentBlockerType.allCases.forEach { (type) in
-                autoreleasepool {
-                    guard let data = sSelf.safariService.readJson(forType: type) else { return }
-                    savedDatas[type] = data
-                    
-                    let jsonData = processData(data, type)
-                    
-                    sSelf.safariService.save(json: jsonData, type: type)
-                }
-            }
-            
-            modified = true
-            return
+    func contentBlockersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+        return self.observe(name: .contentBlockersUpdateFinished, object: nil, queue: queue) { _ in
+            handler()
         }
-    }
-    
-    private func finishReloadingConetentBlocker(completion: ((Error?)->Void)?, error: Error?) {
-        workQueue.async {
-            if completion != nil {
-                self.workQueue.async {
-                    completion!(error)
-                }
-            }
-        }
-    }
-    
-    private func convertRulesToJson(_ rules: [ASDFilterRule])->(data: Data?, converted: Int, overlimit: Int, totalConverted: Int, error: Error?) {
-        
-        // todo: use "converting_rules" string in main app
-        // we must send only status key from framework
-//        NotificationCenter.default.post(name: NSNotification.Name.ShowStatusView, object: self)
-        
-        defer {
-            // todo:
-//            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-        }
-        
-        var overLimit = 0
-        var rulesData: Data?
-        
-        if rules.count == 0 {
-            return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
-        }
-        
-        // run converter
-        // todo:
-        let limit = 50000
-        
-        let converter = ContentBlockerConverter()
-        
-        let ruleStrings = rules.compactMap{ (rule) -> String? in
-            return rule.isEnabled.boolValue ? rule.ruleText : nil
-        }
-        
-        // Removed 'optimize' feature in 561 build
-        guard let conversionResult = converter.convertArray(rules: ruleStrings, limit: limit, optimize: false, advancedBlocking: false) else {
-            return (nil, 0, 0, 0, NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain, code: 0, userInfo: [:]))
-        }
-        
-        overLimit = conversionResult.totalConvertedCount - conversionResult.convertedCount
-        
-        rulesData = conversionResult.converted.data(using: .utf8)
-        
-        return (rulesData, conversionResult.convertedCount, overLimit, conversionResult.totalConvertedCount, nil)
-    }
-    
-    public func replaceUserFilter(_ rules: [ASDFilterRule])->Error? {
-        
-        let success = antibanner.import(rules, filterId: ASDF_USER_FILTER_ID as NSNumber)
-        
-        // todo: use "support_unexpected_error" in main app
-        return success ? nil : NSError(domain: ContentBlockerService.contentBlockerServiceErrorDomain,
-                       code: ContentBlockerService.contentBlockerDBErrorCode)
     }
 }

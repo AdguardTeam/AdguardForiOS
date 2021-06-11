@@ -12,13 +12,6 @@ struct FilterFileContent {
     }
 }
 
-@objc class AdGuardFilterGroupObjWrapper: NSObject{
-    @objc static let customGroupId = SafariGroup.GroupType.custom.rawValue
-    @objc static let enabledGroupIds: Set<Int> = [SafariGroup.GroupType.ads.rawValue,
-                                                  SafariGroup.GroupType.privacy.rawValue,
-                                                  SafariGroup.GroupType.languageSpecific.rawValue]
-}
-
 struct SafariFilter {
     let type: ContentBlockerType
     let jsonString: String
@@ -27,7 +20,7 @@ struct SafariFilter {
     let overlimit: Bool
 }
 
-public enum ContentBlockerType: Int, CaseIterable {
+public enum ContentBlockerType: Int, CaseIterable, Codable {
     case general
     case privacy
     case socialWidgetsAndAnnoyances

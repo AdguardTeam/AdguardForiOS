@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FiltersConverterServiceNewProtocol {
+protocol FiltersConverterServiceProtocol {
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
     func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter]
 }
@@ -26,7 +26,7 @@ protocol FiltersConverterServiceNewProtocol {
 /**
  This class is responsible for converting all enabled filters and user rules (blocklist / allowlist / inverted allowlist) to jsons objects
  */
-final class FiltersConverterServiceNew: FiltersConverterServiceNewProtocol {
+final class FiltersConverterService: FiltersConverterServiceProtocol {
     
     // MARK: - ConvertionError
     
@@ -43,7 +43,7 @@ final class FiltersConverterServiceNew: FiltersConverterServiceNewProtocol {
     // MARK: - Services
     
     private let configuration: ConfigurationProtocol
-    private let filtersService: FiltersServiceNewProtocol
+    private let filtersService: FiltersServiceProtocol
     private let filterFilesStorage: FilterFilesStorageProtocol
     private let userRulesManagersProvider: UserRulesManagersProviderProtocol
     private let filtersConverter: FiltersConverterProtocol
@@ -51,7 +51,7 @@ final class FiltersConverterServiceNew: FiltersConverterServiceNewProtocol {
     // MARK: - Initialization
     
     init(configuration: ConfigurationProtocol,
-         filtersService: FiltersServiceNewProtocol,
+         filtersService: FiltersServiceProtocol,
          filterFilesStorage: FilterFilesStorageProtocol,
          userRulesManagersProvider: UserRulesManagersProviderProtocol,
          filtersConverter: FiltersConverterProtocol = FiltersConverter())
