@@ -386,11 +386,20 @@ class FitlerServiceNewTest: XCTestCase {
             guard let group = filterService.groups.first(where: { $0.groupType == .ads }) else { return XCTFail() }
             XCTAssertNotEqual(oldValue, group.isEnabled)
             
-            try filterService.setGroup(withId: -123466, enabled: false)
             
             XCTAssert(metaStorage.setGroupCalled)
         } catch {
             XCTFail("\(error)")
+        }
+    }
+    
+    func testSetGroupWithNonExistingGroupId() {
+        XCTAssertThrowsError(try filterService.setGroup(withId: -123466, enabled: false), "") { error in
+            if case FiltersServiceNew.FilterServiceError.nonExistingGroupId(groupId: _) = error {
+                XCTAssert(true)
+            } else {
+                XCTFail()
+            }
         }
     }
     
@@ -419,9 +428,18 @@ class FitlerServiceNewTest: XCTestCase {
             XCTAssertNotEqual(oldValue, fitler.isEnabled)
             XCTAssert(metaStorage.setFilterCalled)
             
-            try filterService.setFilter(withId: -123123, -123123, enabled: false)
         } catch {
             XCTFail("\(error)")
+        }
+    }
+    
+    func testSetFilterWithNonExistingFilterId() {
+        XCTAssertThrowsError(try filterService.setFilter(withId: -123123, -123123, enabled: false), "") { error in
+            if case FiltersServiceNew.FilterServiceError.nonExistingFilterId(filterId: _) = error {
+                XCTAssert(true)
+            } else {
+                XCTFail()
+            }
         }
     }
     

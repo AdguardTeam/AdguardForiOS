@@ -78,6 +78,8 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
         case invalidCustomFilterId(filterId: Int)
         case updatePeriodError(lastUpdateTime: Int)
         case missedFilterDownloadPage(filterName: String)
+        case nonExistingGroupId(groupId: Int)
+        case nonExistingFilterId(filterId: Int)
         case unknownError
         
         var debugDescription: String {
@@ -85,6 +87,8 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
             case .invalidCustomFilterId(let filterId): return "Custom filter id must be greater or equal than \(CustomFilterMeta.baseCustomFilterId), actual filter id=\(filterId)"
             case .updatePeriodError(let lastUpdateTime): return "Last update was \(lastUpdateTime) hours ago. Minimum update period is \(Int(FiltersServiceNew.updatePeriod / 3600)) hours"
             case .missedFilterDownloadPage(let filterName): return "Filter download page is missed for filter with name \(filterName)"
+            case .nonExistingGroupId(groupId: let id): return "Group with id: \(id) not exists"
+            case .nonExistingFilterId(filterId: let id): return "Filter with id: \(id) not exists"
             case .unknownError: return "Unknown error"
             }
         }
@@ -206,6 +210,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
                     Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) was successfully set to enabled=\(enabled)")
                 } else {
                     Logger.logDebug("(FiltersService) - setGroup; Group with id=\(id) not exists")
+                    throw FilterServiceError.nonExistingGroupId(groupId: id)
                 }
             } catch {
                 Logger.logError("(FiltersService) - setGroup; Error setting group with id=\(id) to enabled=\(enabled): \(error)")
@@ -224,6 +229,7 @@ final class FiltersServiceNew: FiltersServiceNewProtocol {
                     Logger.logDebug("(FiltersService) - setFilter; Filter id=\(id); group id=\(groupId) was successfully set to enabled=\(enabled)")
                 } else {
                     Logger.logDebug("(FiltersService) - setFilter; Filter id=\(id) or group id=\(groupId) not exists")
+                    throw FilterServiceError.nonExistingFilterId(filterId: id)
                 }
 
             } catch {
