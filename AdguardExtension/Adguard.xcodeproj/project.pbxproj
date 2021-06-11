@@ -438,6 +438,7 @@
 		7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D4FE23EA9A7B0009108D /* whotracksme.json */; };
 		7E12D50123EA9AAF0009108D /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D50023EA9AAF0009108D /* adguard.json */; };
 		7E12D50523EAD2820009108D /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07A811023B4FBB500181E54 /* SharedResources.swift */; };
+		7E1308982673601700D0D72A /* QuickAllowlistClipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1308972673601700D0D72A /* QuickAllowlistClipper.swift */; };
 		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
 		7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */; };
 		7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */; };
@@ -514,7 +515,7 @@
 		7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E40799D231E7E8C007EFB26 /* CoreServices.framework */; };
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */; };
-		7E41F3E926722E3A00D68F61 /* ContentBlockersJSONStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E826722E3A00D68F61 /* ContentBlockersJSONStorage.swift */; };
+		7E41F3E926722E3A00D68F61 /* ContentBlockersInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */; };
 		7E41F3EB26724D8D00D68F61 /* ContentBlockerServiceNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EA26724D8D00D68F61 /* ContentBlockerServiceNew.swift */; };
 		7E41F3EF2672587000D68F61 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
@@ -3369,6 +3370,7 @@
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E12D4FE23EA9A7B0009108D /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
 		7E12D50023EA9AAF0009108D /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
+		7E1308972673601700D0D72A /* QuickAllowlistClipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAllowlistClipper.swift; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
 		7E15720722DF32E3007060D7 /* ContentBlockerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateCell.swift; sourceTree = "<group>"; };
 		7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentBlockerStateCell.xib; sourceTree = "<group>"; };
@@ -3505,7 +3507,7 @@
 		7E40799A231E7E4E007EFB26 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		7E41F3E626721D3500D68F61 /* UserRulesManagersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagersProvider.swift; sourceTree = "<group>"; };
-		7E41F3E826722E3A00D68F61 /* ContentBlockersJSONStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersJSONStorage.swift; sourceTree = "<group>"; };
+		7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorage.swift; sourceTree = "<group>"; };
 		7E41F3EA26724D8D00D68F61 /* ContentBlockerServiceNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceNew.swift; sourceTree = "<group>"; };
 		7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersManager.swift; sourceTree = "<group>"; };
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
@@ -5913,7 +5915,8 @@
 				7E9B37F52391761F00053972 /* FilterDetailedInterface.swift */,
 				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
 				7EE33406266FB5BE00B2AB59 /* FiltersConverterServiceNew.swift */,
-				7E41F3E826722E3A00D68F61 /* ContentBlockersJSONStorage.swift */,
+				7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */,
+				7E1308972673601700D0D72A /* QuickAllowlistClipper.swift */,
 				7E41F3ED2672585200D68F61 /* ContentBlockers */,
 				D0984FC8260A21CA00703DB2 /* FilterInfo.swift */,
 				D03E537321BA82BD00C62152 /* FiltersService.swift */,
@@ -10018,7 +10021,7 @@
 				D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */,
 				7E69C4F526550C9300EA9DBA /* FiltersMetaStorage+Filters.swift in Sources */,
 				7E69C4F726550C9F00EA9DBA /* FiltersMetaStorage+Groups.swift in Sources */,
-				7E41F3E926722E3A00D68F61 /* ContentBlockersJSONStorage.swift in Sources */,
+				7E41F3E926722E3A00D68F61 /* ContentBlockersInfoStorage.swift in Sources */,
 				D0BA7C6D2631B5810097029B /* RequestFactory-Common.swift in Sources */,
 				D031303E2639685100A5C1D5 /* NSDate+Utils.m in Sources */,
 				7E3D542E26526F3500169E37 /* DefaultDatabaseManager.swift in Sources */,
@@ -10096,6 +10099,7 @@
 				D0BA7D5F2631C1F10097029B /* FMDatabaseQueue.m in Sources */,
 				7E69C51F2657C78E00EA9DBA /* BlocklistRuleConverter.swift in Sources */,
 				7EC97C232660FDE1005C950C /* SafariGroup+GroupType.swift in Sources */,
+				7E1308982673601700D0D72A /* QuickAllowlistClipper.swift in Sources */,
 				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
 				D0BA7E3026330D8E0097029B /* SafariService.swift in Sources */,
 				7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */,

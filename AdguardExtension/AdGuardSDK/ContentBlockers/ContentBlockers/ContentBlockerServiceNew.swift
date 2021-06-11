@@ -53,13 +53,13 @@ final class ContentBlockerServiceNew: ContentBlockerServiceNewProtocol {
     
     /* Services */
     private let configuration: ConfigurationProtocol
-    private let jsonStorage: ContentBlockersJSONStorageProtocol
+    private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let contentBlockersManager: ContentBlockersManagerProtocol
     
     // MARK: - Initialization
     
     init(configuration: ConfigurationProtocol,
-         jsonStorage: ContentBlockersJSONStorageProtocol,
+         jsonStorage: ContentBlockersInfoStorageProtocol,
          contentBlockersManager: ContentBlockersManagerProtocol = ContentBlockersManager())
     {
         self.configuration = configuration

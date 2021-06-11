@@ -120,18 +120,20 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
         try rulesModificationQueue.sync {
-            guard !domainsSet.contains(newRule.ruleText) else {
-                throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
-            }
-            
             guard let ruleIndex = allRulesAtomic.firstIndex(where: { $0.ruleText == oldRuleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
             }
             
-            allRulesAtomic[ruleIndex] = newRule
-            domainsSet.remove(oldRuleText)
-            domainsSet.insert(newRule.ruleText)
+            guard allRulesAtomic[ruleIndex].ruleText != newRule.ruleText || allRulesAtomic[ruleIndex].isEnabled != newRule.isEnabled else {
+                throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
+            }
             
+            if allRulesAtomic[ruleIndex].ruleText != newRule.ruleText {
+                domainsSet.remove(oldRuleText)
+                domainsSet.insert(newRule.ruleText)
+            }
+            
+            allRulesAtomic[ruleIndex] = newRule
             rulesSavingToStorageQueue.async { [weak self] in
                 self?.storage.rules[ruleIndex] = newRule
             }
