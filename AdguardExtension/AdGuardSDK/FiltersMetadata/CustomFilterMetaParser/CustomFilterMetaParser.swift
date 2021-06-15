@@ -26,20 +26,24 @@ enum CustomFilterMetaParserError: Error {
 
 // MARK: - CustomFilterMetaParserType
 
-enum CustomFilterMetaParserType {
+public enum CustomFilterMetaParserType {
     case safari
     case system
 }
 
 // MARK: - CustomFilterMetaParserProtocol
 
-protocol CustomFilterMetaParserProtocol {
+public protocol CustomFilterMetaParserProtocol {
     /**
-     Parses filter's file content and converts content to FilterMetadata object
-     Parsing can differ for system and safary filters, specify the needed one with parserType
-     Throws an error if parsing fails
-     
+     Parses filter's file content and converts content to FilterMetadata object.
+     ~~~
      Filter example: https://easylist.to/easylist/easylist.txt
+     ~~~
+     
+     - Parameter filterFileContentString: File content as string
+     - Parameter parserType: Parsing can differ for **system** and **safary** filters
+     - Throws: Throws an error if parsing fails
+     - Returns: FilterMetadata object
      */
     func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol
 }
@@ -231,6 +235,27 @@ extension CustomFilterMetaParserProtocol {
             || contentBeginsWith.contains("<head")
     }
 }
+
+// MARK: - CustomFilterMetaParserProtocol + getMetaFromUrl
+
+public extension CustomFilterMetaParserProtocol {
+    /**
+     Gets filter's file content from url, parses it  and converts content to FilterMetadata object.
+     ~~~
+     Filter example: https://easylist.to/easylist/easylist.txt
+     ~~~
+     
+     - Parameter url: File's location url
+     - Parameter parserType: Parsing can differ for **system** and **safary** filters
+     - Throws: Throws an error if parsing or reading file fails
+     - Returns: FilterMetadata object
+     */
+    func getMetaFrom(url: URL, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol {
+        let filterContent = try String(contentsOf: url)
+        return try parse(filterContent, for: parserType)
+    }
+}
+
 
 // MARK: - FilterMetadataParser
 

@@ -61,7 +61,7 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
     // MARK: - private properties
     private var safariService: SafariServiceProtocol
     private var rulesProcessor: RulesProcessorProtocol = RulesProcessor()
-    private var filtersStorage: FiltersStorageProtocol
+    private var filtersStorage: FilterFilesStorageProtocol
     private var resources: ResourcesProtocol
     
     private let workQueue = DispatchQueue(label: "content_blocker")
@@ -95,7 +95,7 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
 //    ]
     
     // MARK: - init
-    public init(resources: ResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FiltersStorageProtocol) {
+    public init(resources: ResourcesProtocol, safariService: SafariServiceProtocol, antibanner: AESAntibannerProtocol, filtersStorage: FilterFilesStorageProtocol) {
         self.resources = resources
         self.safariService = safariService
         self.antibanner = antibanner
@@ -290,7 +290,7 @@ public class ContentBlockerService: NSObject, ContentBlockerServiceProtocol {
         var agFilters = [AdGuardFilter]()
         
         for (group, filterIds) in filtersByGroup {
-            let filters = filtersStorage.getFilters(identifiers: filterIds)
+            let filters = filtersStorage.getFiltersContentForFilters(withIds: filterIds)
             
             for (_, content) in filters {
                 agFilters.append(AdGuardFilter(text: content, group: group))

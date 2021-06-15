@@ -19,57 +19,16 @@
 
 import Foundation
 
-enum FilterTagType {
-    case purpose
-    case lang
-    case recommended
-    case reference
-    case platform
-    case problematic
-    case obsolete
-    case ios
+struct FiltersMetadataParser: ParserProtocol {
+    typealias Model = ExtendedFiltersMeta
     
-    private static let tagTypes:[String: FilterTagType] = [
-        "purpose": .purpose,
-        "lang": .lang,
-        "reference": .reference,
-        "recommended": .recommended,
-        "platform": .platform,
-        "problematic": .problematic,
-        "obsolete": .obsolete,
-        "ios": .ios];
-    
-    init? (_ key: String) {
-        guard let tag = FilterTagType.tagTypes[key]  else {
+    func parse(data: Data, response: URLResponse?) -> Model? {
+        guard let response = response as? HTTPURLResponse, response.statusCode != 200 else {
+            Logger.logError("(FiltersMetadataParser) bad response")
             return nil
         }
-        self = tag
-    }
-}
-
-struct FiltersMetadataParser: ParserProtocol {
-    typealias Model = ABECFilterClientMetadata
-    
-    func parse(data: Data, response: URLResponse?) -> FiltersMetadataParser.Model? {
-        if let response = response as? HTTPURLResponse {
-            if response.statusCode != 200 {
-                Logger.logError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
-                return nil
-            }
-            
-            let jsonParser = JSONMetadataParser()
-            guard jsonParser.parse(with: data) else {
-                Logger.logError("FiltersMetadataParser parse failed")
-                return nil
-            }
-            
-            let result = ABECFilterClientMetadata()
-            result.date = Date()
-            result.filters = jsonParser.filterMetadataList()
-            result.groups = jsonParser.groupList()
-            
-            return result
-        }
-        return nil
+        
+        let decoder = JSONDecoder()
+        return try? decoder.decode(ExtendedFiltersMeta.self, from: data)
     }
 }

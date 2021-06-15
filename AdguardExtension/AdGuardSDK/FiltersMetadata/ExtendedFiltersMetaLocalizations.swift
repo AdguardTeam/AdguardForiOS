@@ -24,7 +24,7 @@ import Foundation
 struct ExtendedFiltersMetaLocalizations: Decodable {
     let groups: [Int: [String: GroupLocalization]] // [groupId: [lang: GroupLocalization]]
     let tags: [Int: [String: TagLocalization]] // [tagId: [lang: GroupLocalization]]
-    let filters: [Int: [String: FilterLocalization]] // [filterId: [lang: GroupLocalization]]
+    let filters: [Int: [String: FilterLocalization]] // [filterId: [lang: FilterLocalization]]
 }
 
 // MARK: - ExtendedFiltersMetaLocalizations + FilterLocalization

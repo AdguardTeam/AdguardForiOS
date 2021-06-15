@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterLocalizationsTable; filter_localizations table */
-fileprivate struct FilterLocalizationsTable {
+struct FilterLocalizationsTable {
     // Properties from table
     let filterId: Int
     let lang: String?
@@ -45,62 +45,52 @@ fileprivate struct FilterLocalizationsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + FiltersLocalizations methods
+// MARK: - MetaStorage + FiltersLocalizations methods
+protocol FiltersLocalizationsMetaStorageProtocol {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable?
+    func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
+    func deleteAllLocalizationForFilter(withId id: Int) throws
+}
  
-extension FiltersMetaStorageProtocol {
+extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
     
     // Returns localized strings for specified filter and language
-    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> ExtendedFiltersMetaLocalizations.FilterLocalization? {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable? {
         // Query: SELECT * FROM filter_localizations WHERE filter_id = id AND lang = lang
         let query = FilterLocalizationsTable.table.filter(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
         
-        guard let dbFilterLocalization = try filtersDb.pluck(query) else { return nil }
+        guard let dbFilterLocalization = try? filtersDb.pluck(query) else {
+            return nil
+        }
         let filterLocalization = FilterLocalizationsTable(dbFilterLocalization: dbFilterLocalization)
         Logger.logDebug("(FiltersMetaStorage) - getLocalizationForFilter returning \(filterLocalization.name ?? "none") for filter with id=\(id) for lang=\(lang)")
-        return ExtendedFiltersMetaLocalizations.FilterLocalization(name: filterLocalization.name ?? "", description: filterLocalization.description ?? "")
+        return filterLocalization
     }
     
-    func insertOrReplaceLocalizatonForFilter(withId id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
+    // Updates localization for filter. Adds new localization if missing.
+    func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_localizations (filter_id, lang, name, description)
-        
         let query = FilterLocalizationsTable.table
-            .insert(or: .replace,
-                    FilterLocalizationsTable.filterId <- id,
-                    FilterLocalizationsTable.lang <- lang,
-                    FilterLocalizationsTable.name <- filterLocalization.name,
-                    FilterLocalizationsTable.description <- filterLocalization.description)
+                                            .insert(or: .replace,
+                                                    FilterLocalizationsTable.filterId <- id,
+                                                    FilterLocalizationsTable.lang <- lang,
+                                                    FilterLocalizationsTable.name <- localization.name,
+                                                    FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
     }
     
-    //TODO: Remove this method if it would not be used
-    func updateLocalizationForFilter(with id: Int, forLanguage lang: String, filterLocalization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
-        // Query: UPDATE filter_localizations SET lang = lang, name = filterLocalization.name, description = filterLocalization.description
-        let query = FilterLocalizationsTable.table
-            .where(FilterLocalizationsTable.filterId == id &&
-                    FilterLocalizationsTable.lang == lang)
-            .update(FilterLocalizationsTable.lang <- lang,
-                    FilterLocalizationsTable.name <- filterLocalization.name,
-                    FilterLocalizationsTable.description <- filterLocalization.description)
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Update localization for filter with id=\(id) for lang=\(lang)")
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
+        for id in ids {
+            try deleteAllLocalizationForFilter(withId: id)
+        }
     }
     
-    //TODO: Remove this method if it would not be used
-    func deleteAllLocalizationForFilter(with id: Int) throws {
-        // Query: DELETE FOR filter_localizations WHERE filter_id = id
+    func deleteAllLocalizationForFilter(withId id: Int) throws {
+        // Query: DELETE FROM filter_localizations WHERE filter_id = id
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
         try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Delete localization for filter with id=\(id)")
-    }
-    
-    //TODO: Remove this method if it would not be used
-    func deleteLocalizationForFilter(with id: Int, forLanguage lang: String) throws {
-        // Query: DELETE FOR filter_localizations WHERE filter_id = id AND lang = lang
-        let qeury = FilterLocalizationsTable.table
-            .where(FilterLocalizationsTable.filterId == id && FilterLocalizationsTable.lang == lang)
-            .delete()
-        try filtersDb.run(qeury)
-        Logger.logDebug("(FiltersMetaStorage) - Delete localization for filter with id=\(id) for lang=\(lang)")
+        Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
     }
 }
