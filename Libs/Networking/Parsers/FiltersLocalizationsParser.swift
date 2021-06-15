@@ -20,28 +20,15 @@
 import Foundation
 
 struct FiltersLocalizationsParser: ParserProtocol {
-    typealias Model = ABECFilterClientLocalization
+    typealias Model = ExtendedFiltersMetaLocalizations
     
-    func parse(data: Data, response: URLResponse?) -> FiltersLocalizationsParser.Model? {
-        if let response = response as? HTTPURLResponse {
-            if response.statusCode != 200 {
-                Logger.logError("FiltersMetadataParser load error. Status code: \(response.statusCode)")
-                return nil
-            }
-            
-            let jsonParser = JSONI18nParser()
-            guard jsonParser.parse(with: data) else {
-                Logger.logError("FiltersMetadataParser parse failed")
-                return nil
-            }
-            
-            let result = ABECFilterClientLocalization()
-            result.date = Date()
-            result.filters = jsonParser.filtersI18n()
-            result.groups = jsonParser.groupsI18n()
-            
-            return result
+    func parse(data: Data, response: URLResponse?) -> Model? {
+        guard let response = response as? HTTPURLResponse, response.statusCode != 200 else {
+            Logger.logError("(FiltersLocalizationsParser) bad response")
+            return nil
         }
-        return nil
+        
+        let decoder = JSONDecoder()
+        return try? decoder.decode(ExtendedFiltersMetaLocalizations.self, from: data)
     }
 }

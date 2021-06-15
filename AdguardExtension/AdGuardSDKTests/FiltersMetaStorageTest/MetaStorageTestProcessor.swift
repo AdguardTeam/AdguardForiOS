@@ -1,6 +1,6 @@
 import Foundation
 
-final class FiltersMetaStorageTestProcessor {
+final class MetaStorageTestProcessor {
     static let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
     static let workingUrl = Bundle(for: DefaultDatabaseManager.self).resourceURL!.appendingPathComponent("testFolder")
     

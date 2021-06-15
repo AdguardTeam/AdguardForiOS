@@ -162,6 +162,24 @@ extension ExtendedFiltersMeta {
             self.languages = languages
             self.tags = tags
         }
+        
+        // Initializer for custom filter
+        init(customFilterMeta: ExtendedCustomFilterMetaProtocol, filterId: Int, timeAdded: Date? = Date(), displayNumber: Int, group: GroupMetaProtocol) {
+            self.filterId = filterId
+            self.name = customFilterMeta.name
+            self.description = customFilterMeta.description
+            self.version = customFilterMeta.version
+            self.lastUpdateDate = customFilterMeta.lastUpdateDate
+            self.updateFrequency = customFilterMeta.updateFrequency
+            self.homePage = customFilterMeta.homePage
+            self.filterDownloadPage = customFilterMeta.filterDownloadPage
+            self.timeAdded = timeAdded
+            self.displayNumber = displayNumber
+            self.trustLevel = .full
+            self.languages = []
+            self.tags = []
+            self.group = group
+        }
     }
 }
 
@@ -197,6 +215,17 @@ extension ExtendedFiltersMeta {
             case problematic
             case obsolete
             
+            var id: Int {
+                switch self {
+                case .purpose: return 0
+                case .lang: return 1
+                case .recommended: return 2
+                case .platform: return 4
+                case .problematic: return 5
+                case .obsolete: return 6
+                }
+            }
+            
             init?(tagTypeId: Int) {
                 switch tagTypeId {
                 case 0: self = .purpose
@@ -213,17 +242,6 @@ extension ExtendedFiltersMeta {
         let tagId: Int
         let tagType: TagType
         let tagName: String
-        
-        var tagTypeId: Int {
-            switch tagType {
-            case .purpose: return 0
-            case .lang: return 1
-            case .recommended: return 2
-            case .platform: return 4
-            case .problematic: return 5
-            case .obsolete: return 6
-            }
-        }
         
         enum CodingKeys: String, CodingKey {
             case tagId

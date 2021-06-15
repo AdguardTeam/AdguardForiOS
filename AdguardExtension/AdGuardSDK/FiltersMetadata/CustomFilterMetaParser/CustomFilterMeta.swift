@@ -18,11 +18,15 @@
 
 import Foundation
 
-protocol ExtendedCustomFilterMetaProtocol: FilterMetaProtocol {
+public protocol ExtendedCustomFilterMetaProtocol: FilterMetaProtocol {
     var licensePage: String? { get }
     var issuesReportPage: String? { get }
     var communityPage: String? { get }
     var rulesCount: Int { get }
+}
+
+public extension ExtendedCustomFilterMetaProtocol {
+    static var baseCustomFilterId: Int { 100_000 }
 }
 
 struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {

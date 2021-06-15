@@ -78,7 +78,7 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
     var resources: ResourcesProtocol
     private let antibannerController: AntibannerControllerProtocol
     private var contentBlocker: ContentBlockerServiceProtocol
-    private var filtersStorage: FiltersStorageProtocol
+    private var filtersStorage: FilterFilesStorageProtocol
     
     let version: String
     let id: String
@@ -135,7 +135,7 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
     
     // MARK: - initialization
     
-    public init(resources: ResourcesProtocol, antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FiltersStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
+    public init(resources: ResourcesProtocol, antibannerController: AntibannerControllerProtocol, contentBlocker: ContentBlockerServiceProtocol, httpRequestService: HttpRequestServiceProtocol, filtersStorage: FilterFilesStorageProtocol, version: String, id: String, cid: String, lang: String, protectionEnabled: Bool, userFilterEnabled: Bool, whitelistEnabled: Bool, invertedWhitelist: Bool) {
         self.resources = resources
         self.contentBlocker = contentBlocker
         self.antibannerController = antibannerController
@@ -446,11 +446,11 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
                         Logger.logError("(FiltersService) error - can not get url from string: \(newFilter.subscriptionUrl ?? "nil")")
                         return
                     }
-                    self?.filtersStorage.updateCustomFilter(identifier: newFilter.filterId, subscriptionUrl: url) { (error) in
+                    self?.filtersStorage.updateCustomFilter(withId: newFilter.filterId, subscriptionUrl: url, onFilterUpdated: { error in
                         self?.contentBlocker.reloadJsons(backgroundUpdate: false, protectionEnabled: protectionEnabled, userFilterEnabled: userFilterEnabled, whitelistEnabled: whitelistEnabled, invertWhitelist: invertedWhitelist) { _ in
                             UIApplication.shared.endBackgroundTask(backgroundTaskID)
                         }
-                    }
+                    })
                 }
             }
         }
@@ -788,7 +788,7 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
         let group = DispatchGroup()
         for id in identifiers {
             group.enter()
-            filtersStorage.updateFilter(identifier: id) { (_) in
+            filtersStorage.updateFilter(withId: id) { _ in
                 group.leave()
             }
         }
@@ -799,7 +799,7 @@ public class FiltersService: NSObject, FiltersServiceProtocol {
         let group = DispatchGroup()
         for filter in filterUrls {
             group.enter()
-            filtersStorage.updateCustomFilter(identifier: filter.0, subscriptionUrl: filter.1) { (_) in
+            filtersStorage.updateCustomFilter(withId: filter.0, subscriptionUrl: filter.1) { _ in
                 group.leave()
             }
         }

@@ -48,8 +48,9 @@ private struct FilterRulesTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Filter rules methods
+//TODO: Remove this service if it would not be used
+// MARK: - MetaStorage + Filter rules
 
-extension FiltersMetaStorageProtocol {
+extension MetaStorage {
     
 }

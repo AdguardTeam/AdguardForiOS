@@ -18,12 +18,24 @@
 
 import Foundation
 
-public protocol FilterMetaProtocol {
-    var name: String? { get }
-    var description: String? { get }
-    var version: String? { get }
-    var lastUpdateDate: Date? { get }
-    var updateFrequency: Int? { get }
-    var homePage: String? { get }
-    var filterDownloadPage: String? { get }
+extension SafariGroup {
+    enum GroupType: Int {
+        case ads = 1
+        case privacy = 2
+        case socialWidgets = 3
+        case annoyances = 4
+        case security = 5
+        case other = 6
+        case languageSpecific = 7
+        case custom = 101
+        
+        var id: Int { self.rawValue }
+        
+        var proOnly: Bool {
+            switch self {
+            case .security, .custom: return true
+            default: return false
+            }
+        }
+    }
 }

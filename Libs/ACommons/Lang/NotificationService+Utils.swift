@@ -24,7 +24,7 @@ import Foundation
  We shoul do it because "block based observers via the -[NSNotificationCenter addObserver​ForName:​object:​queue:​usingBlock:] method still need to be un-registered"
  https://developer.apple.com/library/archive/releasenotes/Foundation/RN-FoundationOlderNotes/index.html#10_11NotificationCenter
  */
-final class NotificationToken: NSObject {
+public final class NotificationToken: NSObject {
     let notificationCenter: NotificationCenter
     let token: Any
 
