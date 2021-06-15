@@ -33,8 +33,8 @@ extension FiltersService {
             httpRequestService.loadFiltersMetadata(version: version, id: id, cid: cid, lang: lang) { [weak self] metadata in
                 if metadata != nil {
                     Logger.logInfo("FiltersService - metadata loaded successfull")
-                    self?.resources.filtersMetadataCache = metadata
-                    savedMeta = metadata
+//                    self?.resources.filtersMetadataCache = metadata
+//                    savedMeta = metadata
                 }
                 group.leave()
             }
@@ -72,8 +72,8 @@ extension FiltersService {
             httpRequestService.loadFiltersLocalizations { [weak self] i18n in
                 if i18n != nil {
                     Logger.logInfo("FiltersService - i18n loaded successfull")
-                    self?.resources.i18nCacheForFilterSubscription = i18n
-                    savedI18n = i18n
+//                    self?.resources.i18nCacheForFilterSubscription = i18n
+//                    savedI18n = i18n
                 }
                 group.leave()
             }

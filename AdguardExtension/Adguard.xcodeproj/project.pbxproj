@@ -156,6 +156,8 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24AE8547265F87EC00830936 /* UserRuleConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */; };
+		24AE8549265F966000830936 /* UserRulesManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE8548265F966000830936 /* UserRulesManagerTest.swift */; };
 		24B7FE112656778500FED2D7 /* FiltersMetaStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B7FE102656778500FED2D7 /* FiltersMetaStorageTest.swift */; };
 		24BD325C2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
 		24BD3292260346B300CC12F3 /* BackgroundFetchNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */; };
@@ -519,6 +521,17 @@
 		7E334029239036D500C39F62 /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		7E33402A23903A4000C39F62 /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
 		7E33402B23903B5300C39F62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		7E33D4B02678A8A600DD410B /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5162657BFED00EA9DBA /* UserRule.swift */; };
+		7E33D4B12678A8A900DD410B /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0C265E3A31005C950C /* UserRulesStorage.swift */; };
+		7E33D4B22678A8AC00DD410B /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C11265E70FD005C950C /* InvertedAllowlistRulesStorage.swift */; };
+		7E33D4B32678A8AE00DD410B /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C0E265E3C14005C950C /* AllowlistRulesStorage.swift */; };
+		7E33D4B42678A8B000DD410B /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC97C13265E710B005C950C /* BlocklistRulesStorage.swift */; };
+		7E33D4B52678A8B400DD410B /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5132657A4BD00EA9DBA /* UserRulesManagerProtocol.swift */; };
+		7E33D4B62678A8B700DD410B /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5222657E16100EA9DBA /* UserRulesManager.swift */; };
+		7E33D4B72678A8BA00DD410B /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5182657C1FE00EA9DBA /* UserRuleConverter.swift */; };
+		7E33D4B82678A8BE00DD410B /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51A2657C76300EA9DBA /* AllowlistRuleConverter.swift */; };
+		7E33D4B92678A8C100DD410B /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51C2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift */; };
+		7E33D4BA2678A8C400DD410B /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C51E2657C78E00EA9DBA /* BlocklistRuleConverter.swift */; };
 		7E3556D625DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */; };
 		7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3556D525DBEB7500CB2A8D /* UIViewController+Present.swift */; };
 		7E3556E925DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
@@ -3185,6 +3198,8 @@
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
+		24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleConverterTest.swift; sourceTree = "<group>"; };
+		24AE8548265F966000830936 /* UserRulesManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagerTest.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24B7FE102656778500FED2D7 /* FiltersMetaStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorageTest.swift; sourceTree = "<group>"; };
 		24BD325B2603445900CC12F3 /* BackgroundFetchNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchNotificationHandler.swift; sourceTree = "<group>"; };
@@ -4633,6 +4648,15 @@
 			path = SQLScripts;
 			sourceTree = "<group>";
 		};
+		243D4646265F7E5D003E0952 /* UserRules */ = {
+			isa = PBXGroup;
+			children = (
+				24AE8546265F87EC00830936 /* UserRuleConverterTest.swift */,
+				24AE8548265F966000830936 /* UserRulesManagerTest.swift */,
+			);
+			path = UserRules;
+			sourceTree = "<group>";
+		};
 		244339CB2581085400AB4F26 /* LowLevelSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -5686,6 +5710,7 @@
 		7EB3E22E264BEDAA00C460FA /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				243D4646265F7E5D003E0952 /* UserRules */,
 				246FF85D266A52410061FB2E /* Mocks */,
 				7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */,
 				7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */,
@@ -9019,6 +9044,7 @@
 				24D07CB2266930C80080C862 /* CharacterSet+Utils.swift in Sources */,
 				24D07CAE266930880080C862 /* FiltersMetadataRequest.swift in Sources */,
 				24D07CA126690CB00080C862 /* FilterFilesStorage.swift in Sources */,
+				7E33D4B52678A8B400DD410B /* UserRulesManagerProtocol.swift in Sources */,
 				24D59C592654019300B92379 /* ProductionDatabaseManager.swift in Sources */,
 				2434A3EE2657C19C001E5B72 /* MetaStorageTestProcessor.swift in Sources */,
 				2422D3242652F92800C1FD5A /* Logger.swift in Sources */,
@@ -9032,17 +9058,22 @@
 				24D07CAA2669300E0080C862 /* NetworkingService-Common.swift in Sources */,
 				2434A3E1265795C4001E5B72 /* GroupsMetaStorageTest.swift in Sources */,
 				2434A3E62657A68D001E5B72 /* LangsMetaStorageTest.swift in Sources */,
+				7E33D4B72678A8BA00DD410B /* UserRuleConverter.swift in Sources */,
 				7E1C34722653C5D200A4490E /* CustomFilterMetaParser.swift in Sources */,
 				24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */,
 				246FF865266A537B0061FB2E /* UserDefaultsStorageMock.swift in Sources */,
+				7E33D4B12678A8A900DD410B /* UserRulesStorage.swift in Sources */,
 				7EB3E25E264D34DF00C460FA /* ExtendedFiltersMetaTest.swift in Sources */,
 				7EC97C242660FDFF005C950C /* SafariGroup+GroupType.swift in Sources */,
+				7E33D4B92678A8C100DD410B /* InvertedAllowlistRuleConverter.swift in Sources */,
 				246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */,
 				2434A3EC2657B36A001E5B72 /* FitlerRulesMetaStorageTest.swift in Sources */,
 				246FF85C266A52100061FB2E /* FiltersServiceNewTest.swift in Sources */,
 				24D07CA226690CB50080C862 /* UserDefaultsStorage.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E1C34702653C5B600A4490E /* Logger.swift in Sources */,
+				7E69C5092656617C00EA9DBA /* MetaStorage+FiltersLocalizations.swift in Sources */,
+				24AE8547265F87EC00830936 /* UserRuleConverterTest.swift in Sources */,
 				24D07CA926692FD40080C862 /* RequestProtocol.swift in Sources */,
 				247150A2266F73E900A894E8 /* FilterFilesStorageTest.swift in Sources */,
 				2437265C2670D424003D8EA5 /* ConfigurationMock.swift in Sources */,
@@ -9051,6 +9082,13 @@
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				2490DD2C266E7B4B00862EC6 /* SafariFilter.swift in Sources */,
 				242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */,
+				7E69C5042656617C00EA9DBA /* MetaStorage+Groups.swift in Sources */,
+				7E69C5062656617C00EA9DBA /* MetaStorage+Filters.swift in Sources */,
+				7E33D4B32678A8AE00DD410B /* AllowlistRulesStorage.swift in Sources */,
+				7E33D4B42678A8B000DD410B /* BlocklistRulesStorage.swift in Sources */,
+				7E69C5032656617C00EA9DBA /* MetaStorage+Langs.swift in Sources */,
+				7E33D4B02678A8A600DD410B /* UserRule.swift in Sources */,
+				24AE8549265F966000830936 /* UserRulesManagerTest.swift in Sources */,
 				24D07CB1266930B80080C862 /* Dictionary+Utils.swift in Sources */,
 				7EC97C1E265FEF85005C950C /* SafariGroup.swift in Sources */,
 				7E69C5042656617C00EA9DBA /* MetaStorage+Groups.swift in Sources */,
@@ -9062,14 +9100,18 @@
 				24B7FE112656778500FED2D7 /* FiltersMetaStorageTest.swift in Sources */,
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
 				7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */,
+				7E33D4B82678A8BE00DD410B /* AllowlistRuleConverter.swift in Sources */,
 				7E69C5082656617C00EA9DBA /* ProductionDatabaseManager.swift in Sources */,
+				7E33D4B62678A8B700DD410B /* UserRulesManager.swift in Sources */,
 				247150A4266F8F3C00A894E8 /* MetaStorageMock.swift in Sources */,
 				24D07CB02669309D0080C862 /* FiltersLocalizationsRequest.swift in Sources */,
 				24D07CAC266930670080C862 /* RequestFactory-Common.swift in Sources */,
 				24D07CA326690CDE0080C862 /* NotificationService+Utils.swift in Sources */,
+				7E33D4BA2678A8C400DD410B /* BlocklistRuleConverter.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
 				24D07CAD266930790080C862 /* FiltersMetadataParser.swift in Sources */,
+				7E33D4B22678A8AC00DD410B /* InvertedAllowlistRulesStorage.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				24D07CAF266930930080C862 /* FiltersLocalizationsParser.swift in Sources */,
 				24D59C582653C9CE00B92379 /* ProductionDatabaseManagerTest.swift in Sources */,
