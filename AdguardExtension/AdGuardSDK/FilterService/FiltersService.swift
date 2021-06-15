@@ -247,7 +247,7 @@ final class FiltersService: FiltersServiceProtocol {
             else {
                 let error = FilterServiceError.missedFilterDownloadPage(filterName: customFilter.name ?? "nil")
                 Logger.logError("(FiltersService) - add custom filter; \(error)")
-                onFilterAdded(error)
+                DispatchQueue.main.async { onFilterAdded(error) }
                 return
             }
             
@@ -261,7 +261,7 @@ final class FiltersService: FiltersServiceProtocol {
             }
             catch {
                 Logger.logError("(FiltersService) - add custom filter; Errow while adding: \(error)")
-                onFilterAdded(error)
+                DispatchQueue.main.async { onFilterAdded(error) }
                 return
             }
             
@@ -274,6 +274,7 @@ final class FiltersService: FiltersServiceProtocol {
             self._groups[customGroupIndex].filters.append(safariFilter)
             
             Logger.logInfo("(FiltersService) - add customFilter; Custom filter with id = \(filterId) was successfully added")
+            DispatchQueue.main.async { onFilterAdded(nil) }
         }
     }
     

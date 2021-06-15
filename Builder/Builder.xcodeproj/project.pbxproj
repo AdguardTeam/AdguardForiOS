@@ -52,9 +52,7 @@
 		D0450FF02642EAEA00CA2110 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07D341326121FCF00213A5A /* CharacterSet+Utils.swift */; };
 		D0450FF12642EB0D00CA2110 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0450FB22642E9F400CA2110 /* Logger.swift */; };
 		D0450FF22642EB5A00CA2110 /* FiltersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0450FD02642E9F400CA2110 /* FiltersStorage.swift */; };
-		D0450FF32642EBB600CA2110 /* ASDFilterObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = D0450FC42642E9F400CA2110 /* ASDFilterObjects.m */; };
 		D0450FF42642EC1100CA2110 /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D0450FC62642E9F400CA2110 /* ABECFilter.m */; };
-		D0450FF62642ECC500CA2110 /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0450FD22642E9F400CA2110 /* ACObject.m */; };
 		D0450FF72642ED2300CA2110 /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04E01C6B7790000F00D7 /* ACLWildcard.m */; };
 		D0450FF82642ED4300CA2110 /* ABECFilterParsers.m in Sources */ = {isa = PBXBuildFile; fileRef = D0450FC02642E9F400CA2110 /* ABECFilterParsers.m */; };
 		D0450FF92642ED5500CA2110 /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A04C61C6B7790000F00D7 /* ACIOUtils.m */; };
@@ -194,24 +192,13 @@
 		65DAE6E01B8B69A10020BC3C /* clean-script.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		65DAE6E21B8B73E50020BC3C /* builder.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = builder.xcconfig; sourceTree = "<group>"; };
 		D031A18E219F0811002C17D9 /* DDLoggerNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoggerNames.m; sourceTree = "<group>"; };
-		D0450FB02642E9F400CA2110 /* AdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdGuardSDK.h; sourceTree = "<group>"; };
 		D0450FB22642E9F400CA2110 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		D0450FB42642E9F400CA2110 /* AEInvertedWhitelistDomainsObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEInvertedWhitelistDomainsObject.m; sourceTree = "<group>"; };
 		D0450FB52642E9F400CA2110 /* AffinityRulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
-		D0450FB62642E9F400CA2110 /* AEInvertedWhitelistDomainsObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEInvertedWhitelistDomainsObject.h; sourceTree = "<group>"; };
 		D0450FB72642E9F400CA2110 /* FiltersConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverter.swift; sourceTree = "<group>"; };
 		D0450FB82642E9F400CA2110 /* SafariFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariFilter.swift; sourceTree = "<group>"; };
 		D0450FBA2642E9F400CA2110 /* ABECFilterParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilterParsers.h; sourceTree = "<group>"; };
-		D0450FBB2642E9F400CA2110 /* AESAntibanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AESAntibanner.m; sourceTree = "<group>"; };
-		D0450FBC2642E9F400CA2110 /* ABECConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECConstants.h; sourceTree = "<group>"; };
-		D0450FBD2642E9F400CA2110 /* AntibannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerController.swift; sourceTree = "<group>"; };
 		D0450FBE2642E9F400CA2110 /* ABECFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
-		D0450FBF2642E9F400CA2110 /* AESAntibanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AESAntibanner.h; sourceTree = "<group>"; };
 		D0450FC02642E9F400CA2110 /* ABECFilterParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECFilterParsers.m; sourceTree = "<group>"; };
-		D0450FC22642E9F400CA2110 /* ASDFilterObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDFilterObjects.h; sourceTree = "<group>"; };
-		D0450FC32642E9F400CA2110 /* AASFilterSubscriptionParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AASFilterSubscriptionParser.m; sourceTree = "<group>"; };
-		D0450FC42642E9F400CA2110 /* ASDFilterObjects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDFilterObjects.m; sourceTree = "<group>"; };
-		D0450FC52642E9F400CA2110 /* AASFilterSubscriptionParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AASFilterSubscriptionParser.h; sourceTree = "<group>"; };
 		D0450FC62642E9F400CA2110 /* ABECFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECFilter.m; sourceTree = "<group>"; };
 		D0450FC82642E9F400CA2110 /* FilterDetailedInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailedInterface.swift; sourceTree = "<group>"; };
 		D0450FC92642E9F400CA2110 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
@@ -220,17 +207,6 @@
 		D0450FCC2642E9F400CA2110 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
 		D0450FCE2642E9F400CA2110 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		D0450FD02642E9F400CA2110 /* FiltersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersStorage.swift; sourceTree = "<group>"; };
-		D0450FD22642E9F400CA2110 /* ACObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
-		D0450FD32642E9F400CA2110 /* ACObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
-		D0450FD52642E9F400CA2110 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
-		D0450FD62642E9F400CA2110 /* AEWhitelistDomainObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEWhitelistDomainObject.h; sourceTree = "<group>"; };
-		D0450FD72642E9F400CA2110 /* AEBlacklistDomainObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEBlacklistDomainObject.m; sourceTree = "<group>"; };
-		D0450FD82642E9F400CA2110 /* NotEcapingJsonSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotEcapingJsonSerialization.swift; sourceTree = "<group>"; };
-		D0450FD92642E9F400CA2110 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
-		D0450FDA2642E9F400CA2110 /* AEWhitelistDomainObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEWhitelistDomainObject.m; sourceTree = "<group>"; };
-		D0450FDB2642E9F400CA2110 /* SafariRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRule.swift; sourceTree = "<group>"; };
-		D0450FDC2642E9F400CA2110 /* RulesProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesProcessor.swift; sourceTree = "<group>"; };
-		D0450FDD2642E9F400CA2110 /* AEBlacklistDomainObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEBlacklistDomainObject.h; sourceTree = "<group>"; };
 		D0450FDE2642E9F400CA2110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D067D8CD213EC8A900ECDE6D /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
@@ -585,15 +561,12 @@
 		D0450FAF2642E9F400CA2110 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D0450FB02642E9F400CA2110 /* AdGuardSDK.h */,
 				D0450FB12642E9F400CA2110 /* Logger */,
 				D0450FB32642E9F400CA2110 /* FiltersConvertation */,
 				D0450FB92642E9F400CA2110 /* FiltersMetadata */,
 				D0450FC72642E9F400CA2110 /* ContentBlockers */,
 				D0450FCD2642E9F400CA2110 /* Resources */,
 				D0450FCF2642E9F400CA2110 /* FiltersStorage */,
-				D0450FD12642E9F400CA2110 /* Lang */,
-				D0450FD42642E9F400CA2110 /* Safari */,
 				D0450FDE2642E9F400CA2110 /* Info.plist */,
 			);
 			name = AdGuardSDK;
@@ -611,9 +584,7 @@
 		D0450FB32642E9F400CA2110 /* FiltersConvertation */ = {
 			isa = PBXGroup;
 			children = (
-				D0450FB42642E9F400CA2110 /* AEInvertedWhitelistDomainsObject.m */,
 				D0450FB52642E9F400CA2110 /* AffinityRulesParser.swift */,
-				D0450FB62642E9F400CA2110 /* AEInvertedWhitelistDomainsObject.h */,
 				D0450FB72642E9F400CA2110 /* FiltersConverter.swift */,
 				D0450FB82642E9F400CA2110 /* SafariFilter.swift */,
 			);
@@ -624,27 +595,11 @@
 			isa = PBXGroup;
 			children = (
 				D0450FBA2642E9F400CA2110 /* ABECFilterParsers.h */,
-				D0450FBB2642E9F400CA2110 /* AESAntibanner.m */,
-				D0450FBC2642E9F400CA2110 /* ABECConstants.h */,
-				D0450FBD2642E9F400CA2110 /* AntibannerController.swift */,
 				D0450FBE2642E9F400CA2110 /* ABECFilter.h */,
-				D0450FBF2642E9F400CA2110 /* AESAntibanner.h */,
 				D0450FC02642E9F400CA2110 /* ABECFilterParsers.m */,
-				D0450FC12642E9F400CA2110 /* ASDModels */,
 				D0450FC62642E9F400CA2110 /* ABECFilter.m */,
 			);
 			path = FiltersMetadata;
-			sourceTree = "<group>";
-		};
-		D0450FC12642E9F400CA2110 /* ASDModels */ = {
-			isa = PBXGroup;
-			children = (
-				D0450FC22642E9F400CA2110 /* ASDFilterObjects.h */,
-				D0450FC32642E9F400CA2110 /* AASFilterSubscriptionParser.m */,
-				D0450FC42642E9F400CA2110 /* ASDFilterObjects.m */,
-				D0450FC52642E9F400CA2110 /* AASFilterSubscriptionParser.h */,
-			);
-			path = ASDModels;
 			sourceTree = "<group>";
 		};
 		D0450FC72642E9F400CA2110 /* ContentBlockers */ = {
@@ -673,31 +628,6 @@
 				D0450FD02642E9F400CA2110 /* FiltersStorage.swift */,
 			);
 			path = FiltersStorage;
-			sourceTree = "<group>";
-		};
-		D0450FD12642E9F400CA2110 /* Lang */ = {
-			isa = PBXGroup;
-			children = (
-				D0450FD22642E9F400CA2110 /* ACObject.m */,
-				D0450FD32642E9F400CA2110 /* ACObject.h */,
-			);
-			path = Lang;
-			sourceTree = "<group>";
-		};
-		D0450FD42642E9F400CA2110 /* Safari */ = {
-			isa = PBXGroup;
-			children = (
-				D0450FD52642E9F400CA2110 /* SafariService.swift */,
-				D0450FD62642E9F400CA2110 /* AEWhitelistDomainObject.h */,
-				D0450FD72642E9F400CA2110 /* AEBlacklistDomainObject.m */,
-				D0450FD82642E9F400CA2110 /* NotEcapingJsonSerialization.swift */,
-				D0450FD92642E9F400CA2110 /* AEFilterRuleSyntaxConstants.h */,
-				D0450FDA2642E9F400CA2110 /* AEWhitelistDomainObject.m */,
-				D0450FDB2642E9F400CA2110 /* SafariRule.swift */,
-				D0450FDC2642E9F400CA2110 /* RulesProcessor.swift */,
-				D0450FDD2642E9F400CA2110 /* AEBlacklistDomainObject.h */,
-			);
-			path = Safari;
 			sourceTree = "<group>";
 		};
 		D07D33B926121AF100213A5A /* Networking */ = {
@@ -872,7 +802,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6556117B1E5C499100F39A7C /* NSData+GZIP.m in Sources */,
-				D0450FF62642ECC500CA2110 /* ACObject.m in Sources */,
 				D0450FF72642ED2300CA2110 /* ACLWildcard.m in Sources */,
 				655A05A31C6B7790000F00D7 /* DDLog.m in Sources */,
 				D0450FE32642EABD00CA2110 /* NetworkingService.swift in Sources */,
@@ -891,7 +820,6 @@
 				D0450FF42642EC1100CA2110 /* ABECFilter.m in Sources */,
 				655A05D91C6B7790000F00D7 /* FMDatabasePool.m in Sources */,
 				D0450FFF2643E81A00CA2110 /* NSDate+Utils.m in Sources */,
-				D0450FF32642EBB600CA2110 /* ASDFilterObjects.m in Sources */,
 				655A05A01C6B7790000F00D7 /* DDAbstractDatabaseLogger.m in Sources */,
 				D0450FED2642EAC900CA2110 /* RequestSenderProtocol.swift in Sources */,
 				D0450FF02642EAEA00CA2110 /* CharacterSet+Utils.swift in Sources */,

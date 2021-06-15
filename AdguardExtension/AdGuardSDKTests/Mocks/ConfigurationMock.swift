@@ -13,6 +13,8 @@ class ConfigurationMock: ConfigurationProtocol {
     
     var appProductVersion: String = ""
     
+    var appBundleId: String = ""
+    
     var appId: String = ""
     
     var cid: String = ""

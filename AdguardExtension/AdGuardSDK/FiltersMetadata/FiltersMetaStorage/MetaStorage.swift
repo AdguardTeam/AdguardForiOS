@@ -19,12 +19,12 @@
 import Foundation
 import SQLite
 
-typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol&
-    GroupsMetaStorageProtocol &
-    TagsMetaStorageProtocol &
-    LangsMetaStorageProtocol &
-    GroupLocalizationsMetaStorageProtocol &
-    FiltersLocalizationsMetaStorageProtocol
+typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol
+                                & GroupsMetaStorageProtocol
+                                & TagsMetaStorageProtocol
+                                & LangsMetaStorageProtocol
+                                & GroupLocalizationsMetaStorageProtocol
+                                & FiltersLocalizationsMetaStorageProtocol
 
 protocol MetaStorageProtocol: MetaStorageTypeAlias, AnyObject {
     static var defaultDbLanguage: String { get }

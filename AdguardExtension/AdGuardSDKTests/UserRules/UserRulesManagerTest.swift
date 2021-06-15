@@ -169,9 +169,7 @@ class UserRulesManagerTest: XCTestCase {
                 
                 try userRuleManager.removeRule(withText: "2")
                 try userRuleManager.add(rule: UserRule(ruleText: "2", isEnabled: true), override: true)
-            } catch {
-                XCTFail("\(error)")
-            }
+            } catch {}
         }
         
         let thread2 = Thread {
@@ -181,9 +179,7 @@ class UserRulesManagerTest: XCTestCase {
                 try userRuleManager.add(rule: UserRule(ruleText: "6", isEnabled: true), override: true)
                 try userRuleManager.modifyRule("3", rule1)
                 try userRuleManager.removeRule(withText: "2")
-            } catch {
-                XCTFail("\(error)")
-            }
+            } catch {}
         }
         
         let thread3 = Thread {
@@ -193,9 +189,7 @@ class UserRulesManagerTest: XCTestCase {
                 try userRuleManager.add(rule: UserRule(ruleText: "9", isEnabled: true), override: true)
                 try userRuleManager.modifyRule("1", rule2)
                 try userRuleManager.removeRule(withText: "4")
-            } catch {
-                XCTFail("\(error)")
-            }
+            } catch {}
         }
         
         thread1.start()
