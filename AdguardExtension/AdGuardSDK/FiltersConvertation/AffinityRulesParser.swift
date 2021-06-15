@@ -95,27 +95,29 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
                 continue
             }
             
+            let trimmedLine = line.trimmingCharacters(in: .whitespaces)
+            
             // If line is empty just go on
-            if line.count == 0 {
+            if trimmedLine.count == 0 {
                 continue
             }
             
             // Affinity mask found
-            if line.hasPrefix(affinityPrefix) {
+            if trimmedLine.hasPrefix(affinityPrefix) {
                 affinityMask = parseContentBlockerTypes(from: line)
                 continue
             }
             // End of affinity mask found
-            else if line.hasSuffix(affinitySuffix) {
+            else if trimmedLine.hasSuffix(affinitySuffix) {
                 affinityMask = nil
                 continue
             }
             // Comment found
-            else if line.first == "!"{
+            else if trimmedLine.first == "!"{
                 continue
             }
             
-            let rule = FilterRule(rule: line, affinity: affinityMask)
+            let rule = FilterRule(rule: trimmedLine, affinity: affinityMask)
             rules.append(rule)
         }
         
@@ -123,7 +125,7 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
     }
     
     static func rule(_ rule: String, withAffinity affinity: Affinity?) -> String {
-        guard let affinity = affinity else {
+        guard let affinity = affinity, !rule.trimmingCharacters(in: .whitespaces).isEmpty else {
             return rule
         }
 

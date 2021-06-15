@@ -454,6 +454,9 @@
 		7E072A6F2678D52600695E85 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */; };
 		7E072A712678D54600695E85 /* UserDefaultsStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A702678D54600695E85 /* UserDefaultsStorageMock.swift */; };
 		7E072A722678D6DB00695E85 /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C346E2653C58000A4490E /* CustomFilterMetaParser.swift */; };
+		7E072A742678E4CD00695E85 /* FiltersConverterServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A732678E4CD00695E85 /* FiltersConverterServiceTest.swift */; };
+		7E072A772678E50900695E85 /* FiltersConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A762678E50900695E85 /* FiltersConverterTest.swift */; };
+		7E072A792678E52400695E85 /* AffinityRulesParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A782678E52400695E85 /* AffinityRulesParserTest.swift */; };
 		7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
@@ -3328,6 +3331,9 @@
 		7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AdguardBlockingExtensionSecurity.plist; sourceTree = "<group>"; };
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E072A702678D54600695E85 /* UserDefaultsStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageMock.swift; sourceTree = "<group>"; };
+		7E072A732678E4CD00695E85 /* FiltersConverterServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterServiceTest.swift; sourceTree = "<group>"; };
+		7E072A762678E50900695E85 /* FiltersConverterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterTest.swift; sourceTree = "<group>"; };
+		7E072A782678E52400695E85 /* AffinityRulesParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParserTest.swift; sourceTree = "<group>"; };
 		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
@@ -5252,6 +5258,16 @@
 			name = "Linked Frameworks/Libraries";
 			sourceTree = "<group>";
 		};
+		7E072A752678E4EF00695E85 /* FiltersConvertationTests */ = {
+			isa = PBXGroup;
+			children = (
+				7E072A732678E4CD00695E85 /* FiltersConverterServiceTest.swift */,
+				7E072A762678E50900695E85 /* FiltersConverterTest.swift */,
+				7E072A782678E52400695E85 /* AffinityRulesParserTest.swift */,
+			);
+			path = FiltersConvertationTests;
+			sourceTree = "<group>";
+		};
 		7E0B223D25DBB3D200AF88BB /* UpsellViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -5624,6 +5640,7 @@
 				247150A0266F73BF00A894E8 /* FilterFilesStorageTest */,
 				244726D7266E516600A358F0 /* FilterServiceTest */,
 				7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */,
+				7E072A752678E4EF00695E85 /* FiltersConvertationTests */,
 			);
 			path = AdGuardSDKTests;
 			sourceTree = "<group>";
@@ -8874,8 +8891,10 @@
 				24D07CAA2669300E0080C862 /* NetworkingService-Common.swift in Sources */,
 				2434A3E1265795C4001E5B72 /* GroupsMetaStorageTest.swift in Sources */,
 				2434A3E62657A68D001E5B72 /* LangsMetaStorageTest.swift in Sources */,
+				7E072A742678E4CD00695E85 /* FiltersConverterServiceTest.swift in Sources */,
 				7E33D4CD2678D19800DD410B /* UserRulesStorage.swift in Sources */,
 				7E33D4B72678A8BA00DD410B /* UserRuleConverter.swift in Sources */,
+				7E072A792678E52400695E85 /* AffinityRulesParserTest.swift in Sources */,
 				24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */,
 				246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */,
 				246FF85C266A52100061FB2E /* FiltersServiceTest.swift in Sources */,
@@ -8910,6 +8929,7 @@
 				24D07CA326690CDE0080C862 /* NotificationService+Utils.swift in Sources */,
 				7E33D4BA2678A8C400DD410B /* BlocklistRuleConverter.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
+				7E072A772678E50900695E85 /* FiltersConverterTest.swift in Sources */,
 				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
 				24D07CAD266930790080C862 /* FiltersMetadataParser.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
