@@ -5321,6 +5321,7 @@
 		7E3D5429264EA9D100169E37 /* FiltersMetaStorageTest */ = {
 			isa = PBXGroup;
 			children = (
+				24C0005126550A9000F46373 /* default.db.zip */,
 				2434A3ED2657C19C001E5B72 /* MetaStorageTestProcessor.swift */,
 				7E1C3467265290F300A4490E /* DefaultDatabaseManagerTest.swift */,
 				24D59C572653C9CE00B92379 /* ProductionDatabaseManagerTest.swift */,
@@ -5618,7 +5619,6 @@
 				7E3D541E264D781800169E37 /* ExtendedFiltersMetaLocalizationsTest */,
 				7EB3E25F264D34EF00C460FA /* ExtendedFiltersMetaTest */,
 				7EB3E231264BEDAA00C460FA /* Info.plist */,
-				24C0005126550A9000F46373 /* default.db.zip */,
 				7EB3E23D264BEE6400C460FA /* FilterMetadataParserTest */,
 				244F6A4B265D0729007F0888 /* URL+UtilsTest.swift */,
 				247150A0266F73BF00A894E8 /* FilterFilesStorageTest */,
