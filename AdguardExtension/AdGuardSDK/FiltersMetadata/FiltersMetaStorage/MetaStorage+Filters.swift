@@ -93,6 +93,24 @@ struct FiltersTable {
         self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
+    
+    // Default initializer
+    init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, lastCheckTime: Date?, editable: Bool, displayNumber: Int, name: String, description: String, homePage: String?, removable: Bool, expires: Int?, subscriptionUrl: String?) {
+        self.filterId = filterId
+        self.groupId = groupId
+        self.isEnabled = isEnabled
+        self.version = version
+        self.lastUpdateTime = lastUpdateTime
+        self.lastCheckTime = lastCheckTime
+        self.editable = editable
+        self.displayNumber = displayNumber
+        self.name = name
+        self.description = description
+        self.homePage = homePage
+        self.removable = removable
+        self.expires = expires
+        self.subscriptionUrl = subscriptionUrl
+    }
 }
 
 // MARK: - ExtendedFilterMetaProtocol + Setters
@@ -129,9 +147,21 @@ fileprivate extension ExtendedFilterMetaProtocol {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Filters methods
+// MARK: - MetaStorage + Filters
+protocol FiltersMetaStorageProtocol {
+    var nextCustomFilterId: Int { get }
+    
+    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
+    func setFilter(withId id: Int, enabled: Bool) throws
+    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws
+    func update(filter: ExtendedFilterMetaProtocol) throws
+    func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws
+    func deleteFilter(withId id: Int) throws
+    func deleteFilters(withIds ids: [Int]) throws
+    func renameFilter(withId id: Int, name: String) throws
+}
 
-extension FiltersMetaStorageProtocol {
+extension MetaStorage: FiltersMetaStorageProtocol {
     
     // Checks existing filter id and returns new unique id for custom filter
     var nextCustomFilterId: Int {
@@ -176,7 +206,7 @@ extension FiltersMetaStorageProtocol {
             /*
              Check if filter exists
              If true than update filter with new data otherwise create it
-            */
+             */
             let selectQuery = FiltersTable.table.where(FiltersTable.filterId == filter.filterId)
             if let _ = try filtersDb.pluck(selectQuery) {
                 try update(filter: filter)
@@ -222,5 +252,13 @@ extension FiltersMetaStorageProtocol {
         
         try deleteLangsForFilters(withIds: ids)
         try deleteTagsForFilters(withIds: ids)
+        try deleteAllLocalizationForFilters(withIds: ids)
+    }
+    
+    func renameFilter(withId id: Int, name: String) throws {
+        // Query: UPDATE filters SET (name) WHERE filter_id = id
+        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.name <- name)
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - renameCustomFilterName; updated name for filter with id \(id) with name \(name)")
     }
 }

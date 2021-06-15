@@ -58,6 +58,14 @@ protocol FilterFilesStorageProtocol {
      - Throws: Some Foundation methods can throw while writing string to file
      */
     func saveFilter(withId id: Int, filterContent: String) throws
+    
+    /**
+     Delete  filter file with specified **id**
+     - Parameter id: Filter unique id where
+     
+     - Throws: Some Foundation methods can throw while removing file
+     */
+    func deleteFilter(withId id: Int) throws
 }
 
 /* This class manages filters text files */
@@ -101,7 +109,7 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
             Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
             
             // try to get presaved filter file
-            if  let presavedFilterFileUrl = defaultFileUrlForFilter(withId: id),
+            if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
                 Logger.logInfo("FiltersStorage return default filter for filter with id=\(id)")
                 return content
@@ -125,6 +133,11 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
     func saveFilter(withId id: Int, filterContent: String) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
+    }
+    
+    public func deleteFilter(withId id: Int) throws {
+        let filterFileUrl = fileUrlForFilter(withId: id)
+        try fileManager.removeItem(at: filterFileUrl)
     }
     
     // MARK: - Private methods
@@ -154,7 +167,7 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
         return filterFilesDirectoryUrl.appendingPathComponent("\(id).txt")
     }
     
-    private func defaultFileUrlForFilter(withId id: Int) -> URL? {
+    private func defaultFilteUrlForFilter(withId id: Int) -> URL? {
         return Bundle.main.url(forResource: "\(id)", withExtension: "txt")
     }
 }

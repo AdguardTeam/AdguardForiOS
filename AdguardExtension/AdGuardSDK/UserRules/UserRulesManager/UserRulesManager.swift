@@ -30,23 +30,19 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     // TODO: - Check if it is not useless
     var rulesString: String {
         rulesModificationQueue.sync {
-            let enabledRules = allRulesAtomic.filter { $0.isEnabled }
+            let enabledRules = _allRules.filter { $0.isEnabled }
             return Converter.convertRulesToString(enabledRules)
         }
     }
     
-    var allRules: [UserRuleProtocol] { rulesModificationQueue.sync { allRulesAtomic } }
+    var allRules: [UserRuleProtocol] { rulesModificationQueue.sync { _allRules } }
     
     // MARK: - Private properties
     
-    // Serial queue to save rules to user defaults on background thread
-    private let rulesSavingToStorageQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesSavingToStorageQueue", qos: .background)
-    
     // Serial queue to manage rules in one and only thread. This queue guarantees thread safety.
-    private let rulesModificationQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesSavingToStorageQueue", qos: .userInitiated)
+    private let rulesModificationQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesModificationQueue", qos: .userInitiated)
     
-    // Helper varible to make allRules thread safe
-    private var allRulesAtomic: [UserRuleProtocol]
+    private var _allRules: [UserRuleProtocol]
     
     // Used to quickly check domain uniqueness
     private var domainsSet: Set<String>
@@ -58,41 +54,15 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     init(userDefaults: UserDefaultsStorageProtocol) {
         self.storage = Storage(userDefaults: userDefaults)
-        self.allRulesAtomic = storage.rules
-        self.domainsSet = Set(allRulesAtomic.map { $0.ruleText })
-    }
-    
-    deinit {
-        rulesSavingToStorageQueue.sync {
-            // Flushing the queue
-        }
+        self._allRules = storage.rules
+        self.domainsSet = Set(_allRules.map { $0.ruleText })
     }
     
     // MARK: - Public methods
     
     func add(rule: UserRuleProtocol, override: Bool) throws {
-        try rulesModificationQueue.sync {
-            
-            let ruleExists = domainsSet.contains(rule.ruleText)
-            if ruleExists && !override {
-                throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)
-            }
-            
-            if ruleExists {
-                let ruleIndex = allRulesAtomic.firstIndex(where: { $0.ruleText == rule.ruleText })!
-                allRulesAtomic[ruleIndex] = rule
-                
-                rulesSavingToStorageQueue.async { [weak self] in
-                    self?.storage.rules[ruleIndex] = rule
-                }
-            } else {
-                allRulesAtomic.append(rule)
-                domainsSet.insert(rule.ruleText)
-                
-                rulesSavingToStorageQueue.async { [weak self] in
-                    self?.storage.rules.append(rule)
-                }
-            }
+        try rulesModificationQueue.sync { [weak self] in
+            try self?.internalAdd(rule: rule, override: override)
         }
     }
     
@@ -105,14 +75,12 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
             }
             
             if existingRules.isEmpty {
-                allRulesAtomic.append(contentsOf: rules)
-                
-                rulesSavingToStorageQueue.async { [weak self] in
-                    self?.storage.rules.append(contentsOf: rules)
-                }
+                _allRules.append(contentsOf: rules)
+                domainsSet = Set<String>(rules.map { $0.ruleText })
+                self.storage.rules.append(contentsOf: rules)
             } else {
                 try rules.forEach {
-                    try add(rule: $0, override: override)
+                    try internalAdd(rule: $0, override: override)
                 }
             }
         }
@@ -120,38 +88,59 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     
     func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
         try rulesModificationQueue.sync {
-            guard let ruleIndex = allRulesAtomic.firstIndex(where: { $0.ruleText == oldRuleText }) else {
+            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
             }
             
-            guard allRulesAtomic[ruleIndex].ruleText != newRule.ruleText || allRulesAtomic[ruleIndex].isEnabled != newRule.isEnabled else {
+            guard _allRules[ruleIndex].ruleText != newRule.ruleText || _allRules[ruleIndex].isEnabled != newRule.isEnabled else {
                 throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
             }
             
-            if allRulesAtomic[ruleIndex].ruleText != newRule.ruleText {
+            if _allRules[ruleIndex].ruleText != newRule.ruleText {
                 domainsSet.remove(oldRuleText)
                 domainsSet.insert(newRule.ruleText)
             }
             
-            allRulesAtomic[ruleIndex] = newRule
-            rulesSavingToStorageQueue.async { [weak self] in
-                self?.storage.rules[ruleIndex] = newRule
-            }
+            _allRules[ruleIndex] = newRule
+            storage.rules[ruleIndex] = newRule
         }
     }
     
     func removeRule(withText ruleText: String) throws {
         try rulesModificationQueue.sync {
-            guard let ruleIndex = allRules.firstIndex(where: { $0.ruleText == ruleText }) else {
+            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == ruleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: ruleText)
             }
             
-            allRulesAtomic.remove(at: ruleIndex)
+            _allRules.remove(at: ruleIndex)
             domainsSet.remove(ruleText)
-            
-            rulesSavingToStorageQueue.async { [weak self] in
-                self?.storage.rules.remove(at: ruleIndex)
-            }
+            self.storage.rules.remove(at: ruleIndex)
+        }
+    }
+    
+    func removeAllRules() {
+        rulesModificationQueue.sync {
+            _allRules.removeAll()
+            domainsSet.removeAll()
+            self.storage.rules.removeAll()
+        }
+    }
+    
+    // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync
+    private func internalAdd(rule: UserRuleProtocol, override: Bool) throws {
+        let ruleExists = domainsSet.contains(rule.ruleText)
+        if ruleExists && !override {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)
+        }
+        
+        if ruleExists {
+            let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == rule.ruleText })!
+            _allRules[ruleIndex] = rule
+            self.storage.rules[ruleIndex] = rule
+        } else {
+            _allRules.append(rule)
+            domainsSet.insert(rule.ruleText)
+            self.storage.rules.append(rule)
         }
     }
 }

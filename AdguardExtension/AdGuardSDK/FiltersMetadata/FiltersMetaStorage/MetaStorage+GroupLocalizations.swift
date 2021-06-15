@@ -42,9 +42,13 @@ struct FilterGroupLocalizationsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + GroupLocalizations methods
+// MARK: - MetaStorage + GroupLocalizations
+protocol GroupLocalizationsMetaStorageProtocol {
+    func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable?
+    func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws
+}
 
-extension FiltersMetaStorageProtocol {
+extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
     
     // Returns localized strings for specified group and language
     func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable? {

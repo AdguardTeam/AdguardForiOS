@@ -67,4 +67,7 @@ protocol UserRulesManagerProtocol: AnyObject {
     
     /* Removes rule from the user rule's list */
     func removeRule(withText ruleText: String) throws
+    
+    /* Remove all rules from storage */
+    func removeAllRules()
 }

@@ -39,9 +39,15 @@ fileprivate struct FilterLangsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + Langs methods
+// MARK: - MetaStorage + Langs
+protocol LangsMetaStorageProtocol {
+    func getLangsForFilter(withId id: Int) throws -> [String]
+    func updateAll(langs: [String], forFilterWithId id: Int) throws
+    func update(lang: String, forFilterWithId id: Int) throws
+    func deleteLangsForFilters(withIds ids: [Int]) throws
+}
 
-extension FiltersMetaStorageProtocol {
+extension MetaStorage: LangsMetaStorageProtocol {
     // Returns array of languages for filter with specified id
     func getLangsForFilter(withId id: Int) throws -> [String] {
         // Query: SELECT * FROM filter_langs WHERE filter_id = id
@@ -79,7 +85,7 @@ extension FiltersMetaStorageProtocol {
     
     // Deletes langs for filters with passed ids
     func deleteLangsForFilters(withIds ids: [Int]) throws {
-        let langsToDelete = FiltersTable.table.filter(ids.contains(FilterLangsTable.filterId))
+        let langsToDelete = FilterLangsTable.table.filter(ids.contains(FilterLangsTable.filterId))
         let deletedRows = try filtersDb.run(langsToDelete.delete())
         Logger.logDebug("(FiltersMetaStorage) - deleteLangsForFilters; deleted \(deletedRows) filters")
     }

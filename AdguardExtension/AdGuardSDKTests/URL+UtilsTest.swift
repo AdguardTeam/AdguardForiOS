@@ -3,27 +3,27 @@ import XCTest
 class URL_UtilsTest: XCTestCase {
     
     override class func setUp() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override class func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     override func tearDown() {
-        FiltersMetaStorageTestProcessor.deleteTestFolder()
-        FiltersMetaStorageTestProcessor.clearRootDirectory()
+        MetaStorageTestProcessor.deleteTestFolder()
+        MetaStorageTestProcessor.clearRootDirectory()
     }
     
     func testValidDirectoryUrl() {
         do {
-            XCTAssertTrue(FiltersMetaStorageTestProcessor.rootDirectory.isDirectory)
-            XCTAssertFalse(FiltersMetaStorageTestProcessor.workingUrl.isDirectory)
-            try FileManager.default.createDirectory(at: FiltersMetaStorageTestProcessor.workingUrl, withIntermediateDirectories: false, attributes: nil)
+            XCTAssertTrue(MetaStorageTestProcessor.rootDirectory.isDirectory)
+            XCTAssertFalse(MetaStorageTestProcessor.workingUrl.isDirectory)
+            try FileManager.default.createDirectory(at: MetaStorageTestProcessor.workingUrl, withIntermediateDirectories: false, attributes: nil)
             
-            XCTAssertTrue(FiltersMetaStorageTestProcessor.workingUrl.isDirectory)
+            XCTAssertTrue(MetaStorageTestProcessor.workingUrl.isDirectory)
         } catch {
             XCTFail("\(error)")
         }
@@ -31,11 +31,11 @@ class URL_UtilsTest: XCTestCase {
     
     func testUnvalidDirectoryUrl() {
         do {
-            XCTAssertTrue(FiltersMetaStorageTestProcessor.rootDirectory.isDirectory)
-            XCTAssertFalse(FiltersMetaStorageTestProcessor.workingUrl.isDirectory)
-            let testFileUrl = FiltersMetaStorageTestProcessor.workingUrl.appendingPathComponent("testFile")
+            XCTAssertTrue(MetaStorageTestProcessor.rootDirectory.isDirectory)
+            XCTAssertFalse(MetaStorageTestProcessor.workingUrl.isDirectory)
+            let testFileUrl = MetaStorageTestProcessor.workingUrl.appendingPathComponent("testFile")
             
-            try FileManager.default.createDirectory(at: FiltersMetaStorageTestProcessor.workingUrl, withIntermediateDirectories: false, attributes: nil)
+            try FileManager.default.createDirectory(at: MetaStorageTestProcessor.workingUrl, withIntermediateDirectories: false, attributes: nil)
             
             XCTAssertFalse(testFileUrl.isDirectory)
             _ = FileManager.default.createFile(atPath: testFileUrl.path, contents: nil, attributes: nil)

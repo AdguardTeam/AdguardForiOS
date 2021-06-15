@@ -45,9 +45,15 @@ struct FilterLocalizationsTable {
     }
 }
 
-// MARK: - FiltersMetaStorageProtocol + FiltersLocalizations methods
+// MARK: - MetaStorage + FiltersLocalizations methods
+protocol FiltersLocalizationsMetaStorageProtocol {
+    func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable?
+    func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
+    func deleteAllLocalizationForFilter(withId id: Int) throws
+}
  
-extension FiltersMetaStorageProtocol {
+extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
     
     // Returns localized strings for specified filter and language
     func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable? {
@@ -73,5 +79,18 @@ extension FiltersMetaStorageProtocol {
                                                     FilterLocalizationsTable.description <- localization.description)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for filter with id=\(id) for lang=\(lang)")
+    }
+    
+    func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
+        for id in ids {
+            try deleteAllLocalizationForFilter(withId: id)
+        }
+    }
+    
+    func deleteAllLocalizationForFilter(withId id: Int) throws {
+        // Query: DELETE FROM filter_localizations WHERE filter_id = id
+        let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
+        try filtersDb.run(query)
+        Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
     }
 }
