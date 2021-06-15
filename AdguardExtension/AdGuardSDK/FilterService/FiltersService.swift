@@ -375,7 +375,7 @@ final class FiltersService: FiltersServiceProtocol {
             let langs = localizationsByLangs.keys
             for lang in langs {
                 let localization = localizationsByLangs[lang]!
-                try filtersMetaStorage.updateLocalizatonForFilter(withId: filterId, forLanguage: lang, localization: localization)
+                try filtersMetaStorage.updateLocalizationForFilter(withId: filterId, forLanguage: lang, localization: localization)
             }
         }
     }
