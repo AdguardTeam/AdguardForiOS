@@ -33,8 +33,6 @@ enum UserRulesStorageError: Error, CustomDebugStringConvertible {
 }
 
 protocol UserRulesManagerProtocol: AnyObject {
-    associatedtype Storage: UserRulesStorageProtocol
-    associatedtype Converter: UserRuleConverterProtocol
     
     /* String representation of all enabled rules */
     var rulesString: String { get }

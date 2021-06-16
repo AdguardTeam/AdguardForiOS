@@ -1,8 +1,25 @@
 import XCTest
+@_implementationOnly import ContentBlockerConverter
+
+final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
+    
+    var result: [ContentBlockerType: [String]] = [:]
+    
+    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
+        result[cbType] = rules
+        return nil
+    }
+}
 
 class FiltersConverterTest: XCTestCase {
     
-    let converter = FiltersConverter()
+    var converterMock: ContentBlockerConverterMock!
+    var converter: FiltersConverterProtocol!
+    
+    override func setUp() {
+        converterMock = ContentBlockerConverterMock()
+        converter = FiltersConverter(converter: converterMock)
+    }
     
     // MARK: - Parts of different filters to test
     
@@ -49,9 +66,9 @@ class FiltersConverterTest: XCTestCase {
         let blocklistRules = ["/adtwee/*", "ya.ru", "google.com"]
         let allowlistRules = ["mail.com"]
         
-        let sortedRules = converter.sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, nil)
+        let _ = converter.convert(filters: filters, blocklistRules: blocklistRules, allowlistRules: allowlistRules, invertedAllowlistRulesString: nil)
         
-        for (cbType, rules) in sortedRules {
+        for (cbType, rules) in converterMock.result {
             switch cbType {
             case .general:
                 XCTAssertEqual(rules.count, 9)
@@ -107,9 +124,9 @@ class FiltersConverterTest: XCTestCase {
     func testWithInvertedAllowlistRules() {
         let filters = [adGuardDutchFilter, webAnnoyancesUltralist]
         let invertedAllowlistRules = "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru"
-        let sortedRules = converter.sortRulesByContentBlockers(filters, nil, nil, invertedAllowlistRules)
+        let _ = converter.convert(filters: filters, blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: invertedAllowlistRules)
         
-        for (cbType, rules) in sortedRules {
+        for (cbType, rules) in converterMock.result {
             switch cbType {
             case .general:
                 XCTAssertEqual(rules.count, 3)

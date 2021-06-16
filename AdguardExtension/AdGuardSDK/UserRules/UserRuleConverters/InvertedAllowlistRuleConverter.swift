@@ -26,11 +26,11 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      This function converts domain to inverted allowlist rule ~domain
      If passed domain already contains '~' it won't be repeated
      */
-    static func convertDomainToRule(_ domain: String) -> String {
+    func convertDomainToRule(_ domain: String) -> String {
         var rule = domain
         
-        if !rule.hasPrefix(invertedAllowlistPrefix) {
-            rule = invertedAllowlistPrefix + rule
+        if !rule.hasPrefix(Self.invertedAllowlistPrefix) {
+            rule = Self.invertedAllowlistPrefix + rule
         }
         
         return rule
@@ -40,11 +40,11 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      This function converts rule with ~domain format to domain
      If passed rule doesn't contain '~' prefix the function will return rule without modifying it
      */
-    static func convertRuleToDomain(_ rule: String) -> String {
+    func convertRuleToDomain(_ rule: String) -> String {
         var domain = rule
         
-        if domain.hasPrefix(invertedAllowlistPrefix) {
-            domain.removeFirst(invertedAllowlistPrefix.count)
+        if domain.hasPrefix(Self.invertedAllowlistPrefix) {
+            domain.removeFirst(Self.invertedAllowlistPrefix.count)
         }
         
         return domain
@@ -56,7 +56,7 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      So the result looks like: @@||*$document,domain=~domain1|~domain2|~domain3
      If rules are empty the result rule will look like this: @@||*$document
      */
-    static func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
         if rules.isEmpty {
             return "@@||*$document"
         } else {

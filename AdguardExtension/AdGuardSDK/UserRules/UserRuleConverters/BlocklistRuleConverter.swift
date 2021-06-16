@@ -27,16 +27,16 @@ struct BlocklistRuleConverter: UserRuleConverterProtocol {
      we suppose that user provided the correct rule
      */
     
-    static func convertDomainToRule(_ domain: String) -> String {
+    func convertDomainToRule(_ domain: String) -> String {
         return domain
     }
     
-    static func convertRuleToDomain(_ rule: String) -> String {
+    func convertRuleToDomain(_ rule: String) -> String {
         return rule
     }
     
     /* Returns all converted rules joined by new line */
-    static func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
         return rules.map { $0.ruleText }
                     .joined(separator: "/n")
     }

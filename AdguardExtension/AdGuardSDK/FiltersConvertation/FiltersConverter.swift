@@ -1,6 +1,27 @@
 import Foundation
 @_implementationOnly import ContentBlockerConverter
 
+// MARK: - ContentBlockerConverterWrapper
+
+/*
+ This converter is a wrapper for ContentBlockerConverter responsible for converting rules to JSON files
+ We use it in order to be able to test code in FiltersConverter
+ cbType is used to differ conversion results because ConversionResult init is inaccessible
+ */
+protocol ContentBlockerConverterProtocol {
+    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult?
+}
+
+final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
+    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
+        let converter = ContentBlockerConverter()
+        let result = converter.convertArray(rules: rules, limit: limit, optimize: optimize, advancedBlocking: advancedBlocking)
+        return result
+    }
+}
+
+// MARK: - FiltersConverter
+
 protocol FiltersConverterProtocol {
     /**
      Creates **SafariFilter** objects from all available rules for each content blocker
@@ -16,17 +37,28 @@ protocol FiltersConverterProtocol {
 
 struct FiltersConverter: FiltersConverterProtocol {
 
+    private let converter: ContentBlockerConverterProtocol
+    
+    init(converter: ContentBlockerConverterProtocol = ContentBlockerConverterWrapper()) {
+        self.converter = converter
+    }
+    
+    // MARK: - Internal method
+    
     func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [SafariFilter]? {
         let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRulesString)
         let safariFilters = convert(filters: sortedRules)
         return safariFilters
     }
     
-    /* This function is out of FiltersConverterProtocol. It is used to test what we pass to ContentBlockerConverter */
+    // MARK: - private methods
+    
+    // Sorts all filters and rules by content blockers
     func sortRulesByContentBlockers(_ filters: [FilterFileContent],
                                     _ blocklistRules: [String]?,
                                     _ allowlistRules: [String]?,
-                                    _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]] {
+                                    _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]]
+    {
         var filterRules = parse(filters: filters)
         addUserRules(blocklistRules: blocklistRules,
                      allowlistRules: allowlistRules,
@@ -34,8 +66,6 @@ struct FiltersConverter: FiltersConverterProtocol {
                      filters: &filterRules)
         return filterRules
     }
-    
-    // MARK: - private methods
     
     // Returns rules sorted by content blockers
     private func parse(filters: [FilterFileContent]) -> [ContentBlockerType: [String]] {
@@ -77,7 +107,8 @@ struct FiltersConverter: FiltersConverterProtocol {
         
         // add allowlist rules
         if let allowlistRules = allowlistRules {
-            let properAllowlistRules = allowlistRules.map { AllowlistRuleConverter.convertDomainToRule($0) }
+            let converter = AllowlistRuleConverter()
+            let properAllowlistRules = allowlistRules.map { converter.convertDomainToRule($0) }
             filters.keys.forEach { filters[$0]?.append(contentsOf: properAllowlistRules) }
         }
         
@@ -90,10 +121,9 @@ struct FiltersConverter: FiltersConverterProtocol {
     // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [SafariFilter] {
         var resultFilters: [SafariFilter] = []
-        let converter = ContentBlockerConverter()
-        
+    
         for (cbType, rules) in filters {
-            guard let result = converter.convertArray(rules: rules, limit: 50000, optimize: false, advancedBlocking: false) else {
+            guard let result = converter.convertArray(rules: rules, limit: 50000, optimize: false, advancedBlocking: false, cbType: cbType) else {
                 Logger.logError("FiltersCoverter error - can not convert filter with type: \(cbType)")
                 continue
             }

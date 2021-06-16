@@ -27,15 +27,15 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      This function converts domain to allowlist rule @@||domain^$document
      If passed domain already contains '@@||' or '^$document' they won't be repeated
      */
-    static func convertDomainToRule(_ domain: String) -> String {
+    func convertDomainToRule(_ domain: String) -> String {
         var rule = domain
         
-        if !rule.hasPrefix(allowlistPrefix) {
-            rule = allowlistPrefix + rule
+        if !rule.hasPrefix(Self.allowlistPrefix) {
+            rule = Self.allowlistPrefix + rule
         }
         
-        if !rule.hasSuffix(allowlistSuffix) {
-            rule += allowlistSuffix
+        if !rule.hasSuffix(Self.allowlistSuffix) {
+            rule += Self.allowlistSuffix
         }
         
         return rule
@@ -46,15 +46,15 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      If passed rule doesn't contain '@@||' or '^$document'
      the function will return rule without modifying it
      */
-    static func convertRuleToDomain(_ ruleText: String) -> String {
+    func convertRuleToDomain(_ ruleText: String) -> String {
         var domain = ruleText
         
-        if domain.hasPrefix(allowlistPrefix) {
-            domain.removeFirst(allowlistPrefix.count)
+        if domain.hasPrefix(Self.allowlistPrefix) {
+            domain.removeFirst(Self.allowlistPrefix.count)
         }
         
-        if domain.hasSuffix(allowlistSuffix) {
-            domain.removeLast(allowlistSuffix.count)
+        if domain.hasSuffix(Self.allowlistSuffix) {
+            domain.removeLast(Self.allowlistSuffix.count)
         }
         
         return domain
@@ -68,7 +68,7 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      @@||domain2^$document
      @@||domain3^$document
      */
-    static func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
         return rules.map { convertDomainToRule($0.ruleText) }
                     .joined(separator: "/n")
     }

@@ -67,13 +67,14 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     
     func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter] {
         // Get active filters info. It is an array of tuples [(filter id, group type)]
-        let activeFiltersInfo = filtersService.groups.flatMap { $0.filters }
+        let activeFiltersInfo = filtersService.groups.filter { $0.isEnabled }
+                                                     .flatMap { $0.filters }
                                                      .filter { $0.isEnabled }
-                                                     .map { ($0.filterId, $0.group) }
+                                                     .map { ($0.filterId, $0.group.groupType) }
         // Get active filters file's text
         let filesContent: [FilterFileContent] = activeFiltersInfo.compactMap {
             if let filterFileString = filterFilesStorage.getFilterContentForFilter(withId: $0.0) {
-                return FilterFileContent(text: filterFileString, group: $0.1.groupType)
+                return FilterFileContent(text: filterFileString, group: $0.1)
             } else {
                 Logger.logError("(ContentBlockerService) - convertFiltersAndUserRulesToJsons; Received nil file content for filter with id=\($0.0)")
                 return nil

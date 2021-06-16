@@ -19,23 +19,29 @@
 import Foundation
 
 protocol UserRulesManagersProviderProtocol: AnyObject {
-    var blocklistRulesManager: UserRulesManager<BlocklistRulesStorage, BlocklistRuleConverter> { get }
-    var allowlistRulesManager: UserRulesManager<AllowlistRulesStorage, AllowlistRuleConverter> { get }
-    var invertedAllowlistRulesManager: UserRulesManager<InvertedAllowlistRulesStorage, InvertedAllowlistRuleConverter> { get }
+    var blocklistRulesManager: UserRulesManagerProtocol { get }
+    var allowlistRulesManager: UserRulesManagerProtocol { get }
+    var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
 final class UserRulesManagersProvider: UserRulesManagersProviderProtocol {
     
-    private(set) lazy var blocklistRulesManager: UserRulesManager<BlocklistRulesStorage, BlocklistRuleConverter> = {
-       return UserRulesManager(userDefaults: userDefaultsStorage)
+    private(set) lazy var blocklistRulesManager: UserRulesManagerProtocol = {
+        let storage = BlocklistRulesStorage(userDefaults: userDefaultsStorage)
+        let converter = BlocklistRuleConverter()
+        return UserRulesManager(storage: storage, converter: converter)
     }()
     
-    private(set) lazy var allowlistRulesManager: UserRulesManager<AllowlistRulesStorage, AllowlistRuleConverter> = {
-        return UserRulesManager(userDefaults: userDefaultsStorage)
+    private(set) lazy var allowlistRulesManager: UserRulesManagerProtocol = {
+        let storage = AllowlistRulesStorage(userDefaults: userDefaultsStorage)
+        let converter = AllowlistRuleConverter()
+        return UserRulesManager(storage: storage, converter: converter)
     }()
     
-    private(set) lazy var invertedAllowlistRulesManager: UserRulesManager<InvertedAllowlistRulesStorage, InvertedAllowlistRuleConverter> = {
-        return UserRulesManager(userDefaults: userDefaultsStorage)
+    private(set) lazy var invertedAllowlistRulesManager: UserRulesManagerProtocol = {
+        let storage = InvertedAllowlistRulesStorage(userDefaults: userDefaultsStorage)
+        let converter = InvertedAllowlistRuleConverter()
+        return UserRulesManager(storage: storage, converter: converter)
     }()
     
     private let userDefaultsStorage: UserDefaultsStorageProtocol

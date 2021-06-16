@@ -4,18 +4,20 @@ class UserRulesManagerTest: XCTestCase {
     
     var storage: UserDefaultsStorageProtocol = UserDefaultsStorage(storage: UserDefaults(suiteName: "UserRulesStorage")!)
     
-    var allowlistRulesManager: UserRulesManager<AllowlistRulesStorage, AllowlistRuleConverter>?
-    var invertedAllowlistRulesManager: UserRulesManager<InvertedAllowlistRulesStorage, InvertedAllowlistRuleConverter>?
-    var blocklistRulesManager: UserRulesManager<BlocklistRulesStorage, BlocklistRuleConverter>?
+    var allowlistRulesManager: UserRulesManagerProtocol?
+    var invertedAllowlistRulesManager: UserRulesManagerProtocol?
+    var blocklistRulesManager: UserRulesManagerProtocol?
     
     override func setUp() {
-        allowlistRulesManager = UserRulesManager<AllowlistRulesStorage, AllowlistRuleConverter>(userDefaults: storage)
+        let managerProvider = UserRulesManagersProvider(userDefaultsStorage: storage)
+            
+        allowlistRulesManager = managerProvider.allowlistRulesManager
         allowlistRulesManager?.removeAllRules()
         
-        invertedAllowlistRulesManager = UserRulesManager<InvertedAllowlistRulesStorage, InvertedAllowlistRuleConverter>(userDefaults: storage)
+        invertedAllowlistRulesManager = managerProvider.invertedAllowlistRulesManager
         invertedAllowlistRulesManager?.removeAllRules()
         
-        blocklistRulesManager = UserRulesManager<BlocklistRulesStorage, BlocklistRuleConverter>(userDefaults: storage)
+        blocklistRulesManager = managerProvider.blocklistRulesManager
         blocklistRulesManager?.removeAllRules()
     }
     
@@ -78,7 +80,7 @@ class UserRulesManagerTest: XCTestCase {
         }
     }
     
-    private func testAddRule<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testAddRule(userRuleManager: UserRulesManagerProtocol) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rule: UserRule(ruleText: "1", isEnabled: false), override: false)
@@ -94,7 +96,7 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
     
-    private func testAddRules<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testAddRules(userRuleManager: UserRulesManagerProtocol) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
@@ -109,7 +111,7 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
     
-    private func testModifyRule<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testModifyRule(userRuleManager: UserRulesManagerProtocol) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
@@ -127,7 +129,7 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
     
-    private func testRemoveRules<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testRemoveRules(userRuleManager: UserRulesManagerProtocol) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
@@ -142,7 +144,7 @@ class UserRulesManagerTest: XCTestCase {
     }
     
     
-    private func testRemoveAllRules<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) throws {
+    private func testRemoveAllRules(userRuleManager: UserRulesManagerProtocol) throws {
         
         XCTAssert(userRuleManager.allRules.isEmpty)
         userRuleManager.removeAllRules()
@@ -157,7 +159,7 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
     
-    private func testThreadSafty<UserRulesStorageProtocol, UserRuleConverterProtocol>(userRuleManager: UserRulesManager<UserRulesStorageProtocol, UserRuleConverterProtocol>) {
+    private func testThreadSafty(userRuleManager: UserRulesManagerProtocol) {
         let rule1 = UserRule(ruleText: "111", isEnabled: true)
         let rule2 = UserRule(ruleText: "222", isEnabled: true)
         

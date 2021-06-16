@@ -1,6 +1,6 @@
 import Foundation
 
-struct FilterFileContent {
+struct FilterFileContent: Equatable {
     let text: String
     let lines: [String]
     let group: SafariGroup.GroupType

@@ -23,7 +23,7 @@ import Foundation
  It can manage all types of user rules (allowlist / inverted allowlist / blocklist)
  To make it work you just need to pass appropriate storage and rules converter types
  */
-final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserRuleConverterProtocol>: UserRulesManagerProtocol {
+final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Public properties
     
@@ -31,7 +31,7 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     var rulesString: String {
         rulesModificationQueue.sync {
             let enabledRules = _allRules.filter { $0.isEnabled }
-            return Converter.convertRulesToString(enabledRules)
+            return converter.convertRulesToString(enabledRules)
         }
     }
     
@@ -48,12 +48,16 @@ final class UserRulesManager<Storage: UserRulesStorageProtocol, Converter: UserR
     private var domainsSet: Set<String>
     
     // Place where all rules are stored
-    private let storage: Storage
+    private let storage: UserRulesStorageProtocol
+    
+    // Rules converter Rule <-> Domain
+    private let converter: UserRuleConverterProtocol
     
     // MARK: - Initialization
     
-    init(userDefaults: UserDefaultsStorageProtocol) {
-        self.storage = Storage(userDefaults: userDefaults)
+    init(storage: UserRulesStorageProtocol, converter: UserRuleConverterProtocol) {
+        self.storage = storage
+        self.converter = converter
         self._allRules = storage.rules
         self.domainsSet = Set(_allRules.map { $0.ruleText })
     }
