@@ -2,6 +2,8 @@ import XCTest
 
 class FitlerServiceTest: XCTestCase {
     
+    let lastFiltersUpdateCheckDateKey = "AdGuardSDK.lastFiltersUpdateCheckDateKey"
+    
     var filterService: FiltersServiceProtocol!
     var metaStorage: MetaStorageMock!
     var filterFileStorage: FilterFilesStorageMock!
@@ -9,13 +11,13 @@ class FitlerServiceTest: XCTestCase {
     var userDefaultsStorage: UserDefaultsStorageMock!
     
     override class func setUp() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     override func setUpWithError() throws {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
         
         metaStorage = MetaStorageMock()
         filterFileStorage = FilterFilesStorageMock()
@@ -43,7 +45,7 @@ class FitlerServiceTest: XCTestCase {
         let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
             NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
 
-        let berforeUpdateDate = userDefaultsStorage.lastFiltersUpdateCheckDate
+        let berforeUpdateDate = Date()
         
         
         XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
@@ -63,7 +65,7 @@ class FitlerServiceTest: XCTestCase {
         })
         
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-        let afterUpdateDate = userDefaultsStorage.lastFiltersUpdateCheckDate
+        let afterUpdateDate = userDefaultsStorage.storage.value(forKey: lastFiltersUpdateCheckDateKey) as! Date
         XCTAssert(afterUpdateDate > berforeUpdateDate)
         
         XCTAssert(filterFileStorage.updateCustomFilterCalled)
@@ -84,7 +86,7 @@ class FitlerServiceTest: XCTestCase {
             NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
         filtersUpdateStartedExpectation.isInverted = true
         
-        userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
+        userDefaultsStorage.storage.setValue(Date(), forKey: lastFiltersUpdateCheckDateKey)
 
         
         XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)

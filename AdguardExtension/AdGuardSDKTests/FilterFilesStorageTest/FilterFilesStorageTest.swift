@@ -5,12 +5,12 @@ class FilterFilesStorageTest: XCTestCase {
     var jsonFiltersMeta: ExtendedFiltersMeta!
     
     override class func setUp() {
-        MetaStorageTestProcessor.deleteTestFolder()
+        TestsFileManager.deleteTestFolder()
     }
     
     override func setUpWithError() throws {
-        MetaStorageTestProcessor.deleteTestFolder()
-        filterFileStorage = try FilterFilesStorage(filterFilesDirectoryUrl: MetaStorageTestProcessor.workingUrl)
+        TestsFileManager.deleteTestFolder()
+        filterFileStorage = try FilterFilesStorage(filterFilesDirectoryUrl: TestsFileManager.workingUrl)
         
         let jsonUrl = Bundle(for: type(of: self)).url(forResource: "filters_test", withExtension: "json")!
         let jsonData = try! Data(contentsOf: jsonUrl)

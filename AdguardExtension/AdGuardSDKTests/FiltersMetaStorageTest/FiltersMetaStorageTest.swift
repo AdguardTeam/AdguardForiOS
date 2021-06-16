@@ -2,8 +2,8 @@ import XCTest
 
 class FiltersMetaStorageTest: XCTestCase {
     
-    let rootDirectory = MetaStorageTestProcessor.rootDirectory
-    let workingUrl = MetaStorageTestProcessor.workingUrl
+    let rootDirectory = TestsFileManager.rootDirectory
+    let workingUrl = TestsFileManager.workingUrl
     let fileManager = FileManager.default
     
     var productionDbManager: ProductionDatabaseManager!
@@ -60,23 +60,23 @@ class FiltersMetaStorageTest: XCTestCase {
     }
     
     override class func setUp() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     override class func tearDown() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     override func tearDown() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     func testCustomGroupExists() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
         
         productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
         try! productionDbManager?.updateDatabaseIfNeeded()

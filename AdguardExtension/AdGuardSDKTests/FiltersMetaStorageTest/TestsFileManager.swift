@@ -1,8 +1,8 @@
 import Foundation
 
-final class MetaStorageTestProcessor {
-    static let rootDirectory = Bundle(for: DefaultDatabaseManager.self).resourceURL!
-    static let workingUrl = Bundle(for: DefaultDatabaseManager.self).resourceURL!.appendingPathComponent("testFolder")
+final class TestsFileManager {
+    static let rootDirectory = Bundle(for: TestsFileManager.self).resourceURL!
+    static let workingUrl = Bundle(for: TestsFileManager.self).resourceURL!.appendingPathComponent("testFolder")
     
     static let defaultDbFileRootUrl = rootDirectory.appendingPathComponent(defaultDbFileName)
     static let adguardDbFileRootUrl = rootDirectory.appendingPathComponent(adguardDbFileName)

@@ -20,7 +20,7 @@ import Foundation
 
 protocol ContentBlockersInfoStorageProtocol {
     /* Returns all content blocker conversion results and JSONs urls */
-    var allCbInfo: [ContentBlockersInfoStorage.ConverterResult] { get }
+    var allCbInfo: [ContentBlockerType: ContentBlockersInfoStorage.ConverterResult] { get }
 
     /* Saves filters convertion info and JSON file to storage */
     func save(cbInfo: SafariFilter) throws
@@ -29,7 +29,7 @@ protocol ContentBlockersInfoStorageProtocol {
     func save(cbInfos: [SafariFilter]) throws
 
     /* Loads filters convertion result and JSON file url for specified content blocker type */
-    func getInfo(for cbType: ContentBlockerType) throws -> ContentBlockersInfoStorage.ConverterResult
+    func getInfo(for cbType: ContentBlockerType) -> ContentBlockersInfoStorage.ConverterResult?
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -37,7 +37,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         
     // MARK: - ConverterResult
     
-    struct ConverterResult: Codable {
+    struct ConverterResult: Codable, Equatable {
         let contentBlockerType: ContentBlockerType
         let totalRules: Int
         let totalConverted: Int
@@ -47,7 +47,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     // MARK: - Public properties
     
-    var allCbInfo: [ConverterResult] { userDefaultsStorage.allCbInfo }
+    var allCbInfo: [ContentBlockerType: ConverterResult] { userDefaultsStorage.allCbInfo }
     
     // MARK: - Private properties
     
@@ -75,14 +75,12 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         try cbInfo.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
         
         // Save filters convertion result
-        var allCbInfo = userDefaultsStorage.allCbInfo
-        let cbInfoIndex = allCbInfo.firstIndex(where: { $0.contentBlockerType == cbInfo.type })!
         let converterResult = ConverterResult(contentBlockerType: cbInfo.type,
                                               totalRules: cbInfo.totalRules,
                                               totalConverted: cbInfo.totalConverted,
                                               overlimit: cbInfo.overlimit,
                                               jsonUrl: urlToSave)
-        allCbInfo[cbInfoIndex] = converterResult
+        userDefaultsStorage.allCbInfo[cbInfo.type] = converterResult
         userDefaultsStorage.allCbInfo = allCbInfo
     }
     
@@ -91,9 +89,8 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         try cbInfos.forEach { try save(cbInfo: $0) }
     }
     
-    func getInfo(for cbType: ContentBlockerType) throws -> ConverterResult {
-        let allCbInfo = userDefaultsStorage.allCbInfo
-        return allCbInfo.first(where: { $0.contentBlockerType == cbType })!
+    func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
+        return userDefaultsStorage.allCbInfo[cbType]
     }
     
     // MARK: - Private methods
@@ -124,14 +121,14 @@ fileprivate extension UserDefaultsStorageProtocol {
     
     private var allCbInfoKey: String { "AdGuardSDK.allCbInfoKey" }
     
-    var allCbInfo: [ContentBlockersInfoStorage.ConverterResult] {
+    var allCbInfo: [ContentBlockerType: ContentBlockersInfoStorage.ConverterResult] {
         get {
             if let savedCbData = storage.data(forKey: allCbInfoKey) {
                 let decoder = JSONDecoder()
-                let cbInfo = try? decoder.decode([ContentBlockersInfoStorage.ConverterResult].self, from: savedCbData)
-                return cbInfo ?? []
+                let cbInfo = try? decoder.decode([ContentBlockerType: ContentBlockersInfoStorage.ConverterResult].self, from: savedCbData)
+                return cbInfo ?? [:]
             }
-            return []
+            return [:]
         }
         set {
             let encoder = JSONEncoder()

@@ -2,8 +2,8 @@ import XCTest
 
 class FiltersLocalizationsMetaStorageTest: XCTestCase {
 
-    let rootDirectory = MetaStorageTestProcessor.rootDirectory
-    let workingUrl = MetaStorageTestProcessor.workingUrl
+    let rootDirectory = TestsFileManager.rootDirectory
+    let workingUrl = TestsFileManager.workingUrl
     let fileManager = FileManager.default
     
     var productionDbManager: ProductionDatabaseManager!
@@ -15,18 +15,18 @@ class FiltersLocalizationsMetaStorageTest: XCTestCase {
     }
     
     override class func setUp() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     override class func tearDown() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
     
     override func tearDown() {
-        MetaStorageTestProcessor.deleteTestFolder()
-        MetaStorageTestProcessor.clearRootDirectory()
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
     }
 
     func testGetLocalizationForFilterWithSuccess() {
