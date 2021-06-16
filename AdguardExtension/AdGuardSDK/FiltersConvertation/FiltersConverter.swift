@@ -17,13 +17,22 @@ protocol FiltersConverterProtocol {
 struct FiltersConverter: FiltersConverterProtocol {
 
     func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [SafariFilter]? {
+        let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRulesString)
+        let safariFilters = convert(filters: sortedRules)
+        return safariFilters
+    }
+    
+    /* This function is out of FiltersConverterProtocol. It is used to test what we pass to ContentBlockerConverter */
+    func sortRulesByContentBlockers(_ filters: [FilterFileContent],
+                                    _ blocklistRules: [String]?,
+                                    _ allowlistRules: [String]?,
+                                    _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]] {
         var filterRules = parse(filters: filters)
         addUserRules(blocklistRules: blocklistRules,
                      allowlistRules: allowlistRules,
                      invertedAllowlistRulesString: invertedAllowlistRulesString,
                      filters: &filterRules)
-        let safariFilters = convert(filters: filterRules)
-        return safariFilters
+        return filterRules
     }
     
     // MARK: - private methods
@@ -94,18 +103,4 @@ struct FiltersConverter: FiltersConverterProtocol {
         }
         return resultFilters
     }
-}
-
-// MARK: - Affinity
-
-struct Affinity: OptionSet {
-    let rawValue: UInt8
-    
-    static let general = Affinity(rawValue: 1 << 0)
-    static let privacy = Affinity(rawValue: 1 << 1)
-    static let socialWidgetsAndAnnoyances = Affinity(rawValue: 1 << 2)
-    static let other = Affinity(rawValue: 1 << 3)
-    static let custom = Affinity(rawValue: 1 << 4)
-    static let security = Affinity(rawValue: 1 << 5)
-    static let all = Affinity([])
 }
