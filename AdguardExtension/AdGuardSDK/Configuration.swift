@@ -23,6 +23,8 @@ protocol ConfigurationProtocol {
     
     var proStatus: Bool { get set } // Shows if user has Premium app version
     
+    var safariProtectionEnabled: Bool { get set }
+    
     // Application user configuration
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnbaled: Bool { get set }
@@ -49,6 +51,15 @@ final class Configuration: ConfigurationProtocol {
     var proStatus: Bool {
         get {
             return false
+        }
+        set {
+            
+        }
+    }
+    
+    var safariProtectionEnabled: Bool {
+        get {
+            return true
         }
         set {
             

@@ -30,6 +30,12 @@ protocol ContentBlockersInfoStorageProtocol {
 
     /* Loads filters convertion result and JSON file url for specified content blocker type */
     func getInfo(for cbType: ContentBlockerType) -> ContentBlockersInfoStorage.ConverterResult?
+    
+    /**
+     Safari Content Blocker can return an error if we pass empty json
+     So we just pass json with empty rule to avoid this error
+     */
+    func getEmptyRuleJsonUrl() throws -> URL
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -91,6 +97,20 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
         return userDefaultsStorage.allCbInfo[cbType]
+    }
+    
+    func getEmptyRuleJsonUrl() throws -> URL {
+        let fm = FileManager.default
+        let emptyRuleJsonUrl = jsonStorageUrl.appendingPathComponent("empty_rule.json")
+        if fm.fileExists(atPath: emptyRuleJsonUrl.absoluteString) {
+            Logger.logDebug("(ContentBlockersJSONStorage) - getEmptyRuleJsonUrl; empty_rule.json exists returning it's URL")
+            return emptyRuleJsonUrl
+        } else {
+            Logger.logDebug("(ContentBlockersJSONStorage) - getEmptyRuleJsonUrl; empty_rule.json missing create it now")
+            let emptyRule = "[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]"
+            try emptyRule.write(to: emptyRuleJsonUrl, atomically: true, encoding: .utf8)
+            return emptyRuleJsonUrl
+        }
     }
     
     // MARK: - Private methods

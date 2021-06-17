@@ -463,6 +463,7 @@
 		7E072A83267A290C00695E85 /* ContentBlockersInfoStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A82267A290C00695E85 /* ContentBlockersInfoStorageTest.swift */; };
 		7E072A86267A293500695E85 /* ContentBlockerServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */; };
 		7E072A88267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */; };
+		7E072A8A267B580700695E85 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */; };
 		7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
@@ -3346,6 +3347,7 @@
 		7E072A82267A290C00695E85 /* ContentBlockersInfoStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorageTest.swift; sourceTree = "<group>"; };
 		7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceTest.swift; sourceTree = "<group>"; };
 		7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorageMock.swift; sourceTree = "<group>"; };
+		7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerJsonProvider.swift; sourceTree = "<group>"; };
 		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
@@ -5925,6 +5927,7 @@
 				7E41F3E826722E3A00D68F61 /* ContentBlockersInfoStorage.swift */,
 				7E41F3EA26724D8D00D68F61 /* ContentBlockerService.swift */,
 				7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */,
+				7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */,
 			);
 			path = ContentBlockers;
 			sourceTree = "<group>";
@@ -9980,6 +9983,7 @@
 				7E1C34742653C77000A4490E /* MetaStorage.swift in Sources */,
 				D0BA7C3E2631B5680097029B /* SuccessFailureParser.swift in Sources */,
 				D0BA7C102631B53B0097029B /* NetworkingService-Common.swift in Sources */,
+				7E072A8A267B580700695E85 /* ContentBlockerJsonProvider.swift in Sources */,
 				7E41F3E726721D3500D68F61 /* UserRulesManagersProvider.swift in Sources */,
 				7E1C346D2653C57B00A4490E /* CustomFilterMeta.swift in Sources */,
 				D0BA7C562631B56D0097029B /* RequestProtocol.swift in Sources */,

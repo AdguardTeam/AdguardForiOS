@@ -128,8 +128,8 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
             
             // Try to reload content blocker
             contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { error in
-                if let error = error {
-                    Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(error)")
+                if let userInfo = (error as NSError?)?.userInfo {
+                    Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
                     // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
                     if firstTry {
                         reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
