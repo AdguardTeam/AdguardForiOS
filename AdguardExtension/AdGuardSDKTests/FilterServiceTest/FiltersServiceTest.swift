@@ -43,10 +43,9 @@ class FitlerServiceTest: XCTestCase {
         let expectation = XCTestExpectation()
         let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
         let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
+            NSNotification.Name.init("AdGuardSDK.filtersUpdateStarted"))
 
         let berforeUpdateDate = Date()
-        
         
         XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
         XCTAssertFalse(filterFileStorage.updateFilterCalled)

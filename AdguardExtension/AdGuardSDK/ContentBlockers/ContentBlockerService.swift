@@ -178,13 +178,13 @@ fileprivate extension NotificationCenter {
 }
 
 public extension NotificationCenter {
-    func contentBlockersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+    func contentBlockersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = nil) -> NotificationToken {
         return self.observe(name: .contentBlockersUpdateStarted, object: nil, queue: queue) { _ in
             handler()
         }
     }
     
-    func contentBlockersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+    func contentBlockersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = nil) -> NotificationToken {
         return self.observe(name: .contentBlockersUpdateFinished, object: nil, queue: queue) { _ in
             handler()
         }

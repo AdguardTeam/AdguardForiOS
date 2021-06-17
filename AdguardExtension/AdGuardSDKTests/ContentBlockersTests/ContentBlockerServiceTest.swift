@@ -56,13 +56,17 @@ class ContentBlockerServiceTest: XCTestCase {
     func testUpdateContentBlockersWithSuccess() {
         XCTAssertEqual(manager.reloadContentBlockerCalledCount, 0)
         manager.reloadContentBlockerError = nil
-        
+
+        let contentBlockersUpdateStarted = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.contentBlockersUpdateStarted"))
+        let contentBlockersUpdateFinished = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.contentBlockersUpdateFinished"))
         let expectation = XCTestExpectation()
+
         contentBlockerService.updateContentBlockers { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+    
+        wait(for: [expectation, contentBlockersUpdateStarted, contentBlockersUpdateFinished], timeout: 0.5)
         
         XCTAssertEqual(manager.reloadContentBlockerCalledCount, 6)
     }
@@ -72,12 +76,14 @@ class ContentBlockerServiceTest: XCTestCase {
         let testError = NSError(domain: "test", code: 1, userInfo: nil)
         manager.reloadContentBlockerError = testError
         
+        let contentBlockersUpdateStarted = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.contentBlockersUpdateStarted"))
+        let contentBlockersUpdateFinished = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.contentBlockersUpdateFinished"))
         let expectation = XCTestExpectation()
         contentBlockerService.updateContentBlockers { error in
             XCTAssertEqual(testError, error! as NSError)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation, contentBlockersUpdateStarted, contentBlockersUpdateFinished], timeout: 0.5)
         
         // Try to reload every content blocker twice if error occured
         XCTAssertEqual(manager.reloadContentBlockerCalledCount, 12)

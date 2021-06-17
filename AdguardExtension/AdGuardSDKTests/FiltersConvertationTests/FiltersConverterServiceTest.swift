@@ -35,6 +35,8 @@ class FiltersConverterServiceTest: XCTestCase {
         filtersConverter.resultFilters = []
         let _ = try! converterService.convertFiltersAndUserRulesToJsons()
         
+        XCTAssertEqual(filtersConverter.convertCalledCount, 1)
+        
         let expectedFilters = [FilterFileContent(text: "testFilter_3", group: .socialWidgets)]
         XCTAssertEqual(expectedFilters, filtersConverter.passedFilters)
         XCTAssertEqual(["block_rule_1"], filtersConverter.passedBlocklistRules)
@@ -46,6 +48,7 @@ class FiltersConverterServiceTest: XCTestCase {
         
         XCTAssertThrowsError(try converterService.convertFiltersAndUserRulesToJsons()) { error in
             XCTAssertEqual(error as! FiltersConverterService.ConvertionError, .failedToConvertRules)
+            XCTAssertEqual(filtersConverter.convertCalledCount, 1)
         }
     }
     
