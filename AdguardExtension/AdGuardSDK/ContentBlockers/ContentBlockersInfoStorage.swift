@@ -107,6 +107,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
             return emptyRuleJsonUrl
         } else {
             Logger.logDebug("(ContentBlockersJSONStorage) - getEmptyRuleJsonUrl; empty_rule.json missing create it now")
+            // TODO: - It'll be in converter, remove it later
             let emptyRule = "[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]"
             try emptyRule.write(to: emptyRuleJsonUrl, atomically: true, encoding: .utf8)
             return emptyRuleJsonUrl

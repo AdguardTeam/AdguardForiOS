@@ -5,6 +5,8 @@ class ConfigurationMock: ConfigurationProtocol {
     
     var proStatus: Bool = false
     
+    var safariProtectionEnabled: Bool = false
+    
     var blocklistIsEnabled: Bool = false
     
     var allowlistIsEnbaled: Bool = false

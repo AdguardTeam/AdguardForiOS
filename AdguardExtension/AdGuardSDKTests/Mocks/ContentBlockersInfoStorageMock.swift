@@ -28,4 +28,14 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
         getInfoCalled = true
         return getInfoResult
     }
+    
+    var getEmptyRuleJsonUrlCalled = false
+    var getEmptyRuleJsonUrlResult: Result<URL> = .error(NSError(domain: "test", code: 1, userInfo: nil))
+    func getEmptyRuleJsonUrl() throws -> URL {
+        getEmptyRuleJsonUrlCalled = true
+        switch getEmptyRuleJsonUrlResult {
+        case .success(let url): return url
+        case .error(let error): throw error
+        }
+    }
 }

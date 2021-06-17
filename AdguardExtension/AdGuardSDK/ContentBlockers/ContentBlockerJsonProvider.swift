@@ -6,10 +6,10 @@ protocol ContentBlockerJsonProviderProtocol {
 
 final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
     
-    private let jsonStorage: ContentBlockersInfoStorage
+    private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let configuration: ConfigurationProtocol
     
-    init(jsonStorage: ContentBlockersInfoStorage, configuration: ConfigurationProtocol) {
+    init(jsonStorage: ContentBlockersInfoStorageProtocol, configuration: ConfigurationProtocol) {
         self.jsonStorage = jsonStorage
         self.configuration = configuration
     }

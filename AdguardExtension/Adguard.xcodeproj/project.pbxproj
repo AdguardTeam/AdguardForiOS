@@ -464,6 +464,8 @@
 		7E072A86267A293500695E85 /* ContentBlockerServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */; };
 		7E072A88267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */; };
 		7E072A8A267B580700695E85 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */; };
+		7E072A8C267B71DF00695E85 /* ContentBlockerJsonProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A8B267B71DF00695E85 /* ContentBlockerJsonProviderTest.swift */; };
+		7E072A8D267B730D00695E85 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */; };
 		7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
@@ -3348,6 +3350,7 @@
 		7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceTest.swift; sourceTree = "<group>"; };
 		7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorageMock.swift; sourceTree = "<group>"; };
 		7E072A89267B580700695E85 /* ContentBlockerJsonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerJsonProvider.swift; sourceTree = "<group>"; };
+		7E072A8B267B71DF00695E85 /* ContentBlockerJsonProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerJsonProviderTest.swift; sourceTree = "<group>"; };
 		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
@@ -5291,6 +5294,7 @@
 			children = (
 				7E072A82267A290C00695E85 /* ContentBlockersInfoStorageTest.swift */,
 				7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */,
+				7E072A8B267B71DF00695E85 /* ContentBlockerJsonProviderTest.swift */,
 			);
 			path = ContentBlockersTests;
 			sourceTree = "<group>";
@@ -8914,6 +8918,7 @@
 				2422D3242652F92800C1FD5A /* Logger.swift in Sources */,
 				2434A3E42657A3CD001E5B72 /* TagsMetaStorageTest.swift in Sources */,
 				7E69C5052656617C00EA9DBA /* MetaStorage.swift in Sources */,
+				7E072A8D267B730D00695E85 /* ContentBlockerJsonProvider.swift in Sources */,
 				7E69C50A2656617C00EA9DBA /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7E1C3468265290F300A4490E /* DefaultDatabaseManagerTest.swift in Sources */,
 				24D07CAB2669302C0080C862 /* RequestFactory.swift in Sources */,
@@ -8952,6 +8957,7 @@
 				7EC97C21265FF384005C950C /* SafariGroup+Filter.swift in Sources */,
 				24B7FE112656778500FED2D7 /* FiltersMetaStorageTest.swift in Sources */,
 				7E1C34772653CEDF00A4490E /* GroupMetaProtocol.swift in Sources */,
+				7E072A8C267B71DF00695E85 /* ContentBlockerJsonProviderTest.swift in Sources */,
 				7EC97C1C265FEF7D005C950C /* Configuration.swift in Sources */,
 				7E33D4B82678A8BE00DD410B /* AllowlistRuleConverter.swift in Sources */,
 				7E072A7B2679ED7100695E85 /* FiltersConverterMock.swift in Sources */,

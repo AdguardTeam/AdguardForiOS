@@ -77,6 +77,13 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         XCTAssertNil(info)
     }
     
+    func testGetEmptyRuleJsonUrl() {
+        let expectedRule = "[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]"
+        let resultRuleUrl = try! infoStorage.getEmptyRuleJsonUrl()
+        let resultRule = try! String(contentsOf: resultRuleUrl)
+        XCTAssertEqual(expectedRule, resultRule)
+    }
+    
     private func fillStorage() {
         XCTAssert(infoStorage.allCbInfo.isEmpty)
         
