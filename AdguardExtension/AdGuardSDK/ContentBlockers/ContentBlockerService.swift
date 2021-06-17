@@ -24,7 +24,7 @@ protocol ContentBlockerServiceProtocol {
     
     /*
      Updates all content blockers
-     Returns error if it was occured during update
+     Returns error if it occured during update
      Returns nil if everything is fine
      */
     func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void)

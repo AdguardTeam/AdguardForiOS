@@ -462,6 +462,7 @@
 		7E072A812679FE9500695E85 /* UserRulesManagersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A802679FE9500695E85 /* UserRulesManagersProviderMock.swift */; };
 		7E072A83267A290C00695E85 /* ContentBlockersInfoStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A82267A290C00695E85 /* ContentBlockersInfoStorageTest.swift */; };
 		7E072A86267A293500695E85 /* ContentBlockerServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */; };
+		7E072A88267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */; };
 		7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
@@ -3344,6 +3345,7 @@
 		7E072A802679FE9500695E85 /* UserRulesManagersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesManagersProviderMock.swift; sourceTree = "<group>"; };
 		7E072A82267A290C00695E85 /* ContentBlockersInfoStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorageTest.swift; sourceTree = "<group>"; };
 		7E072A85267A293500695E85 /* ContentBlockerServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerServiceTest.swift; sourceTree = "<group>"; };
+		7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersInfoStorageMock.swift; sourceTree = "<group>"; };
 		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
@@ -4616,6 +4618,7 @@
 				7E072A7A2679ED7100695E85 /* FiltersConverterMock.swift */,
 				7E072A7C2679EF8F00695E85 /* FiltersServiceMock.swift */,
 				7E072A802679FE9500695E85 /* UserRulesManagersProviderMock.swift */,
+				7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -8920,6 +8923,7 @@
 				7E072A812679FE9500695E85 /* UserRulesManagersProviderMock.swift in Sources */,
 				7E33D4CD2678D19800DD410B /* UserRulesStorage.swift in Sources */,
 				7E33D4B72678A8BA00DD410B /* UserRuleConverter.swift in Sources */,
+				7E072A88267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift in Sources */,
 				7E072A792678E52400695E85 /* AffinityRulesParserTest.swift in Sources */,
 				24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */,
 				246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */,
