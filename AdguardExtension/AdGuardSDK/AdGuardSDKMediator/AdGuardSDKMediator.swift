@@ -218,8 +218,6 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     private func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) {
         do {
             try block()
-            let convertedfilters = try converter.convertFiltersAndUserRulesToJsons()
-            try cbStorage.save(cbInfos: convertedfilters)
         }
         catch {
             Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error: \(error)")
@@ -232,6 +230,16 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */
     private func reloadContentBlockers(onCbReloaded: @escaping (_ error: Error?) -> Void) {
+        do {
+            let convertedfilters = try converter.convertFiltersAndUserRulesToJsons()
+            try cbStorage.save(cbInfos: convertedfilters)
+        }
+        catch {
+            Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+            onCbReloaded(error)
+            return
+        }
+        
         cbService.updateContentBlockers { [unowned self] error in
             if let error = error {
                 Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error: \(error)")
