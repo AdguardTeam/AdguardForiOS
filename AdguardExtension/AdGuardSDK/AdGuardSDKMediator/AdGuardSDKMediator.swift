@@ -104,20 +104,26 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     private let converter: FiltersConverterServiceProtocol
     private let cbStorage: ContentBlockersInfoStorage
     private let cbService: ContentBlockerServiceProtocol
+    private let userRulesManagersProvide: UserRulesManagersProviderProtocol
     
     // MARK: - Initialization
     
-    init(configuration: ConfigurationProtocol,
-         filters: FiltersServiceProtocol,
-         converter: FiltersConverterServiceProtocol,
-         cbStorage: ContentBlockersInfoStorage,
-         cbService: ContentBlockerServiceProtocol)
+    init(filterFilesDirectoryUrl: URL,
+         dbContainerUrl: URL,
+         userDefaults: UserDefaults,
+         jsonStorageUrl: URL) throws
     {
-        self.configuration = configuration
-        self.filters = filters
-        self.cbStorage = cbStorage
-        self.converter = converter
-        self.cbService = cbService
+        let services = try ServiceLocator(filterFilesDirectoryUrl: filterFilesDirectoryUrl,
+                                      dbContainerUrl: dbContainerUrl,
+                                      userDefaults: userDefaults,
+                                      jsonStorageUrl: jsonStorageUrl)
+        
+        self.configuration = services.configuration
+        self.filters = services.filters
+        self.converter = services.converter
+        self.cbStorage = services.cbStorage
+        self.cbService = services.cbService
+        self.userRulesManagersProvide = services.userRulesManagersProvider
     }
     
     // MARK: - Public methods
