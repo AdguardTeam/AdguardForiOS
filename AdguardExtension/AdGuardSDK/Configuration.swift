@@ -18,17 +18,18 @@
 
 import Foundation
 
+// MARK: - ConfigurationProtocol
+
 protocol ConfigurationProtocol {
     var currentLanguage: String { get set } // Language preferred by user
-    
     var proStatus: Bool { get set } // Shows if user has Premium app version
-    
     var safariProtectionEnabled: Bool { get set }
     
     // Application user configuration
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnbaled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
+    var updateOverWifiOnly: Bool { get set }
     
     // Application information
     var appBundleId: String { get set } // Application bundle identifier
@@ -37,95 +38,20 @@ protocol ConfigurationProtocol {
     var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
 }
 
+// MARK: - Configuration
+
 final class Configuration: ConfigurationProtocol {
+    var currentLanguage: String = "en"
+    var proStatus: Bool = false
+    var safariProtectionEnabled: Bool = false
     
-    var currentLanguage: String {
-        get {
-            return "en"
-        }
-        set {
-            
-        }
-    }
+    var blocklistIsEnabled: Bool = false
+    var allowlistIsEnbaled: Bool = false
+    var allowlistIsInverted: Bool = false
+    var updateOverWifiOnly: Bool = false
     
-    var proStatus: Bool {
-        get {
-            return false
-        }
-        set {
-            
-        }
-    }
-    
-    var safariProtectionEnabled: Bool {
-        get {
-            return true
-        }
-        set {
-            
-        }
-    }
-    
-    var blocklistIsEnabled: Bool {
-        get {
-            return false
-        }
-        set {
-            
-        }
-    }
-    
-    var allowlistIsEnbaled: Bool {
-        get {
-            return false
-        }
-        set {
-            
-        }
-    }
-    
-    var allowlistIsInverted: Bool {
-        get {
-            return false
-        }
-        set {
-            
-        }
-    }
-    
-    var appBundleId: String {
-        get {
-            return ""
-        }
-        set {
-            
-        }
-    }
-    
-    var appProductVersion: String {
-        get {
-            return ""
-        }
-        set {
-            
-        }
-    }
-    
-    var appId: String {
-        get {
-            return ""
-        }
-        set {
-            
-        }
-    }
-    
-    var cid: String {
-        get {
-            return ""
-        }
-        set {
-            
-        }
-    }
+    var appBundleId: String = ""
+    var appProductVersion: String = ""
+    var appId: String = ""
+    var cid: String = ""
 }

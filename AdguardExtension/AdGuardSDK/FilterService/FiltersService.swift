@@ -19,6 +19,9 @@
 import Foundation
 
 protocol FiltersServiceProtocol {
+    /**
+     Returns all Groups objects
+     */
     var groups: [SafariGroup] { get }
     
     /**
@@ -36,7 +39,7 @@ protocol FiltersServiceProtocol {
     func setGroup(withId id: Int, enabled: Bool) throws
   
     /**
-     Enables or disables filter by **filter id**
+     Enables or disables filter by **filter id** and **group id**
      - Parameter id: id of the filter that should be enabled/disabled
      - Parameter groupId: id of the group that filter belongs
      - Parameter enabled: new filter state
@@ -50,19 +53,22 @@ protocol FiltersServiceProtocol {
      Adds **customFilter**
      - Parameter customFilter: Meta data of filter
      - Parameter enabled: new filter state
+     - Parameter onFilterAdded: closure to handle error if exists
      */
     func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (_ error: Error?) -> Void)
     
     /**
-     Delte filter with **id**
+     Deletes filter with **id**
      - Parameter id: id of the filter that should be deleted
+     - throws: Can throw error if error occured while deleting filter
      */
     func deleteCustomFilter(withId id: Int) throws
 
     /**
-     Rename filter with **id** to **name**
+     Renames filter with **id** to **name**
      - Parameter id: id of the filter that should be deleted
      - Parameter name: new filter name
+     - throws: Can throw error if error occured while renaming filter
      */
     func renameCustomFilter(withId id: Int, to name: String) throws
 }

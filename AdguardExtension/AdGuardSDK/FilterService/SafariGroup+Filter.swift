@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol SafariFilterProtocol {
+public protocol SafariFilterProtocol {
     var name: String? { get }
     var description: String? { get }
     var isEnabled: Bool { get set }
@@ -35,22 +35,22 @@ protocol SafariFilterProtocol {
     var rulesCount: Int? { get }
 }
 
-extension SafariGroup {
+public extension SafariGroup {
     struct Filter: SafariFilterProtocol {
-        let name: String?
-        let description: String?
-        var isEnabled: Bool
-        let filterId: Int
-        let version: String?
-        let lastUpdateDate: Date?
-        let updateFrequency: Int?
-        let group: SafariGroupProtocol
-        let displayNumber: Int
-        let languages: [String]
-        let tags: [ExtendedFiltersMeta.Tag]
-        let homePage: String?
-        let filterDownloadPage: String?
-        let rulesCount: Int?
+        public let name: String?
+        public let description: String?
+        public var isEnabled: Bool
+        public let filterId: Int
+        public let version: String?
+        public let lastUpdateDate: Date?
+        public let updateFrequency: Int?
+        public let group: SafariGroupProtocol
+        public let displayNumber: Int
+        public let languages: [String]
+        public let tags: [ExtendedFiltersMeta.Tag]
+        public let homePage: String?
+        public let filterDownloadPage: String?
+        public let rulesCount: Int?
         
         // MARK: - Initialization
         

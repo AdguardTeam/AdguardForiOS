@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol SafariGroupProtocol: GroupMetaProtocol {
+public protocol SafariGroupProtocol: GroupMetaProtocol {
     var filters: [SafariFilterProtocol] { get }
     var isEnabled: Bool { get set }
     var groupType: SafariGroup.GroupType { get }
@@ -26,13 +26,13 @@ protocol SafariGroupProtocol: GroupMetaProtocol {
     var displayNumber: Int { get }
 }
 
-struct SafariGroup: SafariGroupProtocol {
-    let groupId: Int
-    var filters: [SafariFilterProtocol]
-    var isEnabled: Bool
-    let groupType: SafariGroup.GroupType
-    let groupName: String
-    let displayNumber: Int
+public struct SafariGroup: SafariGroupProtocol {
+    public let groupId: Int
+    public var filters: [SafariFilterProtocol]
+    public var isEnabled: Bool
+    public let groupType: SafariGroup.GroupType
+    public let groupName: String
+    public let displayNumber: Int
     
     // MARK: Initialization
     

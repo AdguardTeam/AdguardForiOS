@@ -505,6 +505,7 @@
 		7E21CBA925F918FA00A5A735 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBA725F918FA00A5A735 /* NetworkManager.swift */; };
 		7E21CBDE25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */; };
 		7E21CBDF25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */; };
+		7E22E4D0267C857A00798E51 /* AdGuardSDKMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E22E4CF267C857A00798E51 /* AdGuardSDKMediator.swift */; };
 		7E2522142408201700743648 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2522132408201700743648 /* Lottie */; };
 		7E2522162408207A00743648 /* OnboardingAnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2522152408207A00743648 /* OnboardingAnimationsController.swift */; };
 		7E25221A240821BF00743648 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
@@ -3376,6 +3377,7 @@
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
 		7E21CBA725F918FA00A5A735 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdGuardVpnOperatingMode.swift; sourceTree = "<group>"; };
+		7E22E4CF267C857A00798E51 /* AdGuardSDKMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdGuardSDKMediator.swift; sourceTree = "<group>"; };
 		7E2522152408207A00743648 /* OnboardingAnimationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAnimationsController.swift; sourceTree = "<group>"; };
 		7E252217240821BE00743648 /* safari_tracking_protection_step3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_tracking_protection_step3.json; sourceTree = "<group>"; };
 		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
@@ -5347,6 +5349,15 @@
 			path = AdGuardVpnIntegration;
 			sourceTree = "<group>";
 		};
+		7E22E4CE267C836300798E51 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
+				D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		7E31217024DC024E00642879 /* BottomAlertController */ = {
 			isa = PBXGroup;
 			children = (
@@ -6029,8 +6040,9 @@
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
-				7E69C5282657ED7900EA9DBA /* UserDefaultsStorage.swift */,
-				D048A34A25FA4F9F008CEC80 /* FilterFilesStorage.swift */,
+				7E22E4CF267C857A00798E51 /* AdGuardSDKMediator.swift */,
+				7EC97C1A265FE28B005C950C /* Configuration.swift */,
+				7E22E4CE267C836300798E51 /* Storage */,
 				7EC97C17265FDAE9005C950C /* FilterService */,
 				7E69C5152657A4C400EA9DBA /* UserRules */,
 				242CD70B2656559C0010A2C0 /* Utils */,
@@ -6040,7 +6052,6 @@
 				D09B63EB2624A61E00F60AF7 /* FiltersMetadata */,
 				D033980224318C1900F6B9DE /* ContentBlockers */,
 				D0BDB3F9263064FF007D9BC6 /* Info.plist */,
-				7EC97C1A265FE28B005C950C /* Configuration.swift */,
 			);
 			path = AdGuardSDK;
 			sourceTree = "<group>";
@@ -10003,6 +10014,7 @@
 				7EC97C14265E710B005C950C /* BlocklistRulesStorage.swift in Sources */,
 				7E69C5232657E16100EA9DBA /* UserRulesManager.swift in Sources */,
 				D0BA7C3D2631B5680097029B /* ParserProtocol.swift in Sources */,
+				7E22E4D0267C857A00798E51 /* AdGuardSDKMediator.swift in Sources */,
 				7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */,
 				7EC97C0D265E3A31005C950C /* UserRulesStorage.swift in Sources */,
 				7E69C5142657A4BD00EA9DBA /* UserRulesManagerProtocol.swift in Sources */,
