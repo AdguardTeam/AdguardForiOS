@@ -1,40 +1,41 @@
 import Foundation
 
-public struct AdGuardFilter {
+struct FilterFileContent: Equatable {
     let text: String
-    let group: AdGuardFilterGroup
+    let lines: [String]
+    let group: SafariGroup.GroupType
+    
+    init(text: String, group: SafariGroup.GroupType) {
+        self.text = text
+        self.lines = text.components(separatedBy: .newlines)
+        self.group = group
+    }
 }
 
-public enum AdGuardFilterGroup: Int {
-    case ads = 1
-    case privacy = 2
-    case socialWidgets = 3
-    case annoyances = 4
-    case security = 5
-    case other = 6
-    case languageSpecific = 7
-    case custom = 101
+struct SafariFilter {
+    let type: ContentBlockerType
+    let jsonString: String
+    let totalRules: Int
+    let totalConverted: Int
+    let overlimit: Bool
 }
 
-@objc class AdGuardFilterGroupObjWrapper: NSObject{
-    @objc static let customGroupId = AdGuardFilterGroup.custom.rawValue
-    @objc static let enabledGroupIds: Set<Int> = [AdGuardFilterGroup.ads.rawValue,
-                                            AdGuardFilterGroup.privacy.rawValue,
-                                            AdGuardFilterGroup.languageSpecific.rawValue]
-}
-
-public struct SafariFilter {
-    public let type: ContentBlockerType
-    public let jsonString: String?
-    public let totalRules: Int?
-    public let totalConverted: Int?
-}
-
-public enum ContentBlockerType: Int, CaseIterable {
+public enum ContentBlockerType: Int, CaseIterable, Codable {
     case general
     case privacy
     case socialWidgetsAndAnnoyances
     case other
     case custom
     case security
+    
+    var affinity: Affinity {
+        switch self {
+        case .general: return .general
+        case .privacy: return .privacy
+        case .socialWidgetsAndAnnoyances: return .socialWidgetsAndAnnoyances
+        case .other: return .other
+        case .custom: return .custom
+        case .security: return .security
+        }
+    }
 }

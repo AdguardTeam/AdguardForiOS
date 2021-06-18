@@ -18,96 +18,102 @@ class UserRuleConverterTest: XCTestCase {
                         UserRule(ruleText: "@@||example3.org^$document", isEnabled: false)]
 
     func testAllowlistRuleConverter() {
-        var rule = AllowlistRuleConverter.convertDomainToRule(exampleDomain)
+        let converter = AllowlistRuleConverter()
+        
+        var rule = converter.convertDomainToRule(exampleDomain)
         XCTAssertEqual(rule, prefix + exampleDomain + suffix)
         
-        rule = AllowlistRuleConverter.convertDomainToRule(prefix + exampleDomain)
+        rule = converter.convertDomainToRule(prefix + exampleDomain)
         XCTAssertEqual(rule, prefix + exampleDomain + suffix)
         
-        rule = AllowlistRuleConverter.convertDomainToRule(exampleDomain + suffix)
+        rule = converter.convertDomainToRule(exampleDomain + suffix)
         XCTAssertEqual(rule, prefix + exampleDomain + suffix)
         
-        rule = AllowlistRuleConverter.convertDomainToRule(prefix + exampleDomain + suffix)
+        rule = converter.convertDomainToRule(prefix + exampleDomain + suffix)
         XCTAssertEqual(rule, prefix + exampleDomain + suffix)
         
-        var domain = AllowlistRuleConverter.convertRuleToDomain(exampleRule)
+        var domain = converter.convertRuleToDomain(exampleRule)
         XCTAssertEqual(domain, exampleDomain)
         
-        domain = AllowlistRuleConverter.convertRuleToDomain(prefix + exampleDomain)
+        domain = converter.convertRuleToDomain(prefix + exampleDomain)
         XCTAssertEqual(domain, exampleDomain)
         
-        domain = AllowlistRuleConverter.convertRuleToDomain(exampleDomain + suffix)
+        domain = converter.convertRuleToDomain(exampleDomain + suffix)
         XCTAssertEqual(domain, exampleDomain)
         
-        domain = AllowlistRuleConverter.convertRuleToDomain(prefix + exampleDomain + suffix)
+        domain = converter.convertRuleToDomain(prefix + exampleDomain + suffix)
         XCTAssertEqual(domain, exampleDomain)
         
-        var domains = AllowlistRuleConverter.convertRulesToString(exampleRules)
+        var domains = converter.convertRulesToString(exampleRules)
         XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
         
-        domains = AllowlistRuleConverter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
+        domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
         XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
         
-        domains = AllowlistRuleConverter.convertRulesToString([])
+        domains = converter.convertRulesToString([])
         XCTAssertEqual(domains, "")
 
     }
     
     func testInvertedAllowlistConverter() {
-        var rule = InvertedAllowlistRuleConverter.convertDomainToRule(exampleDomain)
+        let converter = InvertedAllowlistRuleConverter()
+        
+        var rule = converter.convertDomainToRule(exampleDomain)
         XCTAssertEqual(rule, invertedAllowlistPrefix + exampleDomain)
         
-        rule = InvertedAllowlistRuleConverter.convertDomainToRule(invertedAllowlistPrefix + exampleDomain)
+        rule = converter.convertDomainToRule(invertedAllowlistPrefix + exampleDomain)
         XCTAssertEqual(rule, invertedAllowlistPrefix + exampleDomain)
         
-        var domain = InvertedAllowlistRuleConverter.convertRuleToDomain(exampleRule)
+        var domain = converter.convertRuleToDomain(exampleRule)
         XCTAssertEqual(domain, exampleRule)
         
-        domain = InvertedAllowlistRuleConverter.convertRuleToDomain(invertedAllowlistPrefix + exampleDomain)
+        domain = converter.convertRuleToDomain(invertedAllowlistPrefix + exampleDomain)
         XCTAssertEqual(domain, exampleDomain)
         
-        var domains = InvertedAllowlistRuleConverter.convertRulesToString(exampleRules)
+        var domains = converter.convertRulesToString(exampleRules)
         XCTAssertEqual(domains, "@@||*$document,domain=~@@||example1.org^$document|~@@||example2.org^$document|~@@||example3.org^$document")
         
-        domains = InvertedAllowlistRuleConverter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
+        domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
         XCTAssertEqual(domains, "@@||*$document,domain=~example1.org|~example2.org|~example3.org")
         
-        domains = InvertedAllowlistRuleConverter.convertRulesToString([])
+        domains = converter.convertRulesToString([])
         XCTAssertEqual(domains, "@@||*$document")
     }
     
     func testBlocklistRuleConverter() {
-        var rule = BlocklistRuleConverter.convertDomainToRule(exampleDomain)
+        let converter = BlocklistRuleConverter()
+        
+        var rule = converter.convertDomainToRule(exampleDomain)
         XCTAssertEqual(rule, exampleDomain)
         
-        rule = BlocklistRuleConverter.convertDomainToRule(prefix + exampleDomain)
+        rule = converter.convertDomainToRule(prefix + exampleDomain)
         XCTAssertEqual(rule, prefix + exampleDomain)
         
-        rule = BlocklistRuleConverter.convertDomainToRule(exampleDomain + suffix)
+        rule = converter.convertDomainToRule(exampleDomain + suffix)
         XCTAssertEqual(rule, exampleDomain + suffix)
         
-        rule = BlocklistRuleConverter.convertDomainToRule(prefix + exampleDomain + suffix)
+        rule = converter.convertDomainToRule(prefix + exampleDomain + suffix)
         XCTAssertEqual(rule, prefix + exampleDomain + suffix)
         
-        var domain = BlocklistRuleConverter.convertRuleToDomain(exampleRule)
+        var domain = converter.convertRuleToDomain(exampleRule)
         XCTAssertEqual(domain, exampleRule)
         
-        domain = BlocklistRuleConverter.convertRuleToDomain(prefix + exampleDomain)
+        domain = converter.convertRuleToDomain(prefix + exampleDomain)
         XCTAssertEqual(domain, prefix + exampleDomain)
         
-        domain = BlocklistRuleConverter.convertRuleToDomain(exampleDomain + suffix)
+        domain = converter.convertRuleToDomain(exampleDomain + suffix)
         XCTAssertEqual(domain, exampleDomain + suffix)
         
-        domain = BlocklistRuleConverter.convertRuleToDomain(prefix + exampleDomain + suffix)
+        domain = converter.convertRuleToDomain(prefix + exampleDomain + suffix)
         XCTAssertEqual(domain, prefix + exampleDomain + suffix)
         
-        var domains = BlocklistRuleConverter.convertRulesToString(exampleRules)
+        var domains = converter.convertRulesToString(exampleRules)
         XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
         
-        domains = BlocklistRuleConverter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
+        domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
         XCTAssertEqual(domains, "example1.org/nexample2.org/nexample3.org")
         
-        domains = BlocklistRuleConverter.convertRulesToString([])
+        domains = converter.convertRulesToString([])
         XCTAssertEqual(domains, "")
     }
 }

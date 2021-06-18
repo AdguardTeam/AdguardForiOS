@@ -23,12 +23,15 @@ protocol ConfigurationProtocol {
     
     var proStatus: Bool { get set } // Shows if user has Premium app version
     
+    var safariProtectionEnabled: Bool { get set }
+    
     // Application user configuration
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnbaled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
     
     // Application information
+    var appBundleId: String { get set } // Application bundle identifier
     var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
     var appId: String { get set } // Application id for example "ios_pro" or "ios"
     var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
@@ -48,6 +51,15 @@ final class Configuration: ConfigurationProtocol {
     var proStatus: Bool {
         get {
             return false
+        }
+        set {
+            
+        }
+    }
+    
+    var safariProtectionEnabled: Bool {
+        get {
+            return true
         }
         set {
             
@@ -75,6 +87,15 @@ final class Configuration: ConfigurationProtocol {
     var allowlistIsInverted: Bool {
         get {
             return false
+        }
+        set {
+            
+        }
+    }
+    
+    var appBundleId: String {
+        get {
+            return ""
         }
         set {
             

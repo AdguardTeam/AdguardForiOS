@@ -13,15 +13,9 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
     var updateCustomFilterResult: Result<FilterFilesStorageMockError?> = .success(nil)
     var deleteResult: Result<FilterFilesStorageMockError?> = .success(nil)
     
-    var updateFilterCalled = false
-    var updateCustomFilterCalled = false
-    var getFilterContentForFilterCalled = false
-    var getFiltersContentForFiltersCalled = false
-    var saveFilterCalled = false
-    var deleteFilterCalled = false
-    
     var customFilters: Set<Int> = Set()
     
+    var updateFilterCalled = false
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
         updateFilterCalled = true
         switch updateFilterResult {
@@ -30,6 +24,7 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
         }
     }
     
+    var updateCustomFilterCalled = false
     func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
         updateCustomFilterCalled = true
         switch updateCustomFilterResult {
@@ -40,20 +35,25 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
         }
     }
     
+    var getFilterContentForFilterCalled = false
+    var getFilterResultHandler: ((_ id: Int) -> String?)?
     func getFilterContentForFilter(withId id: Int) -> String? {
         getFilterContentForFilterCalled = true
-        return nil
+        return getFilterResultHandler?(id)
     }
     
+    var getFiltersContentForFiltersCalled = false
     func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
         getFiltersContentForFiltersCalled = true
         return [:]
     }
     
+    var saveFilterCalled = false
     func saveFilter(withId id: Int, filterContent: String) throws {
         saveFilterCalled = true
     }
     
+    var deleteFilterCalled = false
     func deleteFilter(withId id: Int) throws {
         deleteFilterCalled = true
         switch deleteResult {
