@@ -20,8 +20,8 @@ import Foundation
 
 // MARK: - ConfigurationProtocol
 
-protocol ConfigurationProtocol {
-    var currentLanguage: String { get set } // Language preferred by user
+public protocol ConfigurationProtocol {
+    var currentLanguage: String { get } // Language preferred by user
     var proStatus: Bool { get set } // Shows if user has Premium app version
     var safariProtectionEnabled: Bool { get set }
     
@@ -32,26 +32,26 @@ protocol ConfigurationProtocol {
     var updateOverWifiOnly: Bool { get set }
     
     // Application information
-    var appBundleId: String { get set } // Application bundle identifier
-    var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
-    var appId: String { get set } // Application id for example "ios_pro" or "ios"
-    var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
+    var appBundleId: String { get } // Application bundle identifier
+    var appProductVersion: String { get } // Application product version for example 4.1.1 for AdGuard
+    var appId: String { get } // Application id for example "ios_pro" or "ios"
+    var cid: String { get } // UIDevice.current.identifierForVendor?.uuidString should be passed
 }
 
 // MARK: - Configuration
 
-final class Configuration: ConfigurationProtocol {
-    var currentLanguage: String = "en"
-    var proStatus: Bool = false
-    var safariProtectionEnabled: Bool = false
+public struct Configuration: ConfigurationProtocol {
+    public let currentLanguage: String
     
-    var blocklistIsEnabled: Bool = false
-    var allowlistIsEnbaled: Bool = false
-    var allowlistIsInverted: Bool = false
-    var updateOverWifiOnly: Bool = false
+    public var proStatus: Bool
+    public var safariProtectionEnabled: Bool
+    public var blocklistIsEnabled: Bool
+    public var allowlistIsEnbaled: Bool
+    public var allowlistIsInverted: Bool
+    public var updateOverWifiOnly: Bool
     
-    var appBundleId: String = ""
-    var appProductVersion: String = ""
-    var appId: String = ""
-    var cid: String = ""
+    public let appBundleId: String
+    public let appProductVersion: String
+    public let appId: String
+    public let cid: String
 }

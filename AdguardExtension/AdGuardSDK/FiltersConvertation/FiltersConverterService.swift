@@ -66,11 +66,24 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     // MARK: - Internal methods
     
     func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter] {
+        // Run converter with empty data if Safari protection is disabled
+        guard configuration.safariProtectionEnabled else {
+            let emptySafatiFilters = filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)
+            return emptySafatiFilters ?? []
+        }
+        
         // Get active filters info. It is an array of tuples [(filter id, group type)]
-        let activeFiltersInfo = filtersService.groups.filter { $0.isEnabled }
-                                                     .flatMap { $0.filters }
-                                                     .filter { $0.isEnabled }
-                                                     .map { ($0.filterId, $0.group.groupType) }
+        let activeFiltersInfo = filtersService.groups.filter {
+            if configuration.proStatus {
+                return $0.isEnabled
+            } else {
+                return $0.isEnabled && !$0.groupType.proOnly
+            }
+        }
+        .flatMap { $0.filters }
+        .filter { $0.isEnabled }
+        .map { ($0.filterId, $0.group.groupType) }
+        
         // Get active filters file's text
         let filesContent: [FilterFileContent] = activeFiltersInfo.compactMap {
             if let filterFileString = filterFilesStorage.getFilterContentForFilter(withId: $0.0) {

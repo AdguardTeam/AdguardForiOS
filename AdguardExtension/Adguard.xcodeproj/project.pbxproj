@@ -586,6 +586,7 @@
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
 		7E45F98326808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */; };
 		7E45F98526808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */; };
+		7E45F9872680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -3506,6 +3507,7 @@
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
 		7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+Filters.swift"; sourceTree = "<group>"; };
 		7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+UserRules.swift"; sourceTree = "<group>"; };
+		7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+Configuration.swift"; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
@@ -5368,6 +5370,7 @@
 			isa = PBXGroup;
 			children = (
 				7E22E4CF267C857A00798E51 /* AdGuardSDKMediator.swift */,
+				7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */,
 				7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */,
 				7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */,
 				7EC97C1A265FE28B005C950C /* Configuration.swift */,
@@ -10040,6 +10043,7 @@
 				7E69C5192657C1FE00EA9DBA /* UserRuleConverter.swift in Sources */,
 				7EE33407266FB5BE00B2AB59 /* FiltersConverterService.swift in Sources */,
 				D0BA7C272631B5540097029B /* RequestSender.swift in Sources */,
+				7E45F9872680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift in Sources */,
 				7EC97C12265E70FD005C950C /* InvertedAllowlistRulesStorage.swift in Sources */,
 				7E69C51D2657C77F00EA9DBA /* InvertedAllowlistRuleConverter.swift in Sources */,
 				D0BDB41A2630651D007D9BC6 /* AffinityRulesParser.swift in Sources */,

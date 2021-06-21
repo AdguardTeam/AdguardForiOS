@@ -48,7 +48,7 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     let completionQueue = DispatchQueue.main
     
     /* Services */
-    let configuration: ConfigurationProtocol
+    var configuration: ConfigurationProtocol
     let filters: FiltersServiceProtocol
     let converter: FiltersConverterServiceProtocol
     let cbStorage: ContentBlockersInfoStorage
@@ -57,17 +57,19 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     
     // MARK: - Initialization
     
-    init(filterFilesDirectoryUrl: URL,
+    init(configuration: ConfigurationProtocol,
+         filterFilesDirectoryUrl: URL,
          dbContainerUrl: URL,
          userDefaults: UserDefaults,
          jsonStorageUrl: URL) throws
     {
-        let services = try ServiceLocator(filterFilesDirectoryUrl: filterFilesDirectoryUrl,
-                                      dbContainerUrl: dbContainerUrl,
-                                      userDefaults: userDefaults,
-                                      jsonStorageUrl: jsonStorageUrl)
+        let services = try ServiceLocator(configuration: configuration,
+                                          filterFilesDirectoryUrl: filterFilesDirectoryUrl,
+                                          dbContainerUrl: dbContainerUrl,
+                                          userDefaults: userDefaults,
+                                          jsonStorageUrl: jsonStorageUrl)
         
-        self.configuration = services.configuration
+        self.configuration = configuration
         self.filters = services.filters
         self.converter = services.converter
         self.cbStorage = services.cbStorage
@@ -84,7 +86,7 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
         }
         catch {
             Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error: \(error)")
-            workingQueue.async { onCbReloaded(error) }
+            onCbReloaded(error)
             return
         }
         
@@ -104,12 +106,7 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
         }
         
         cbService.updateContentBlockers { [unowned self] error in
-            if let error = error {
-                Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error: \(error)")
-            } else {
-                Logger.logInfo("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Successfully updated CBs")
-            }
-            workingQueue.async { onCbReloaded(error) }
+            workingQueue.sync { onCbReloaded(error) }
         }
     }
 }

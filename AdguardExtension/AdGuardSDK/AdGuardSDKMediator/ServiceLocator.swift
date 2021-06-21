@@ -36,7 +36,8 @@ final class ServiceLocator: ServiceLocatorProtocol {
     let filters: FiltersServiceProtocol
     let converter: FiltersConverterServiceProtocol
 
-    init(filterFilesDirectoryUrl: URL,
+    init(configuration: ConfigurationProtocol,
+         filterFilesDirectoryUrl: URL,
          dbContainerUrl: URL,
          userDefaults: UserDefaults,
          jsonStorageUrl: URL) throws
@@ -47,7 +48,7 @@ final class ServiceLocator: ServiceLocatorProtocol {
         let userDefaults = UserDefaultsStorage(storage: userDefaults)
         let httpRequests = HttpRequestService()
         
-        self.configuration = Configuration()
+        self.configuration = configuration
         
         self.userRulesManagersProvider = UserRulesManagersProvider(userDefaultsStorage: userDefaults)
         
