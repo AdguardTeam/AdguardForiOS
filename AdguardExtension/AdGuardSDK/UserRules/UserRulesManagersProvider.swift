@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol UserRulesManagersProviderProtocol: AnyObject {
+protocol UserRulesManagersProviderProtocol: ResetableProtocol, AnyObject {
     var blocklistRulesManager: UserRulesManagerProtocol { get }
     var allowlistRulesManager: UserRulesManagerProtocol { get }
     var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
@@ -48,5 +48,12 @@ final class UserRulesManagersProvider: UserRulesManagersProviderProtocol {
     
     init(userDefaultsStorage: UserDefaultsStorageProtocol) {
         self.userDefaultsStorage = userDefaultsStorage
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        blocklistRulesManager.reset { _ in }
+        allowlistRulesManager.reset { _ in }
+        invertedAllowlistRulesManager.reset { _ in }
+        onResetFinished(nil)
     }
 }

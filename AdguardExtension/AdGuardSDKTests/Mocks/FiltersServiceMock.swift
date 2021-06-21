@@ -52,4 +52,8 @@ final class FiltersServiceMock: FiltersServiceProtocol {
             throw error
         }
     }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
+    }
 }

@@ -35,7 +35,7 @@ class ContentBlockerJsonProviderTest: XCTestCase {
         configuration.safariProtectionEnabled = true
         
         jsonStorage.getEmptyRuleJsonUrlResult = .success(emptyRuleUrl)
-        jsonStorage.getInfoResult = ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
+        jsonStorage.getInfoResult = ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
         let url = try! jsonProvider.getJsonUrl(for: .privacy)
         XCTAssertEqual(url, testJsonResultUrl)
     }
@@ -49,7 +49,7 @@ class ContentBlockerJsonProviderTest: XCTestCase {
         configuration.safariProtectionEnabled = false
         
         jsonStorage.getEmptyRuleJsonUrlResult = .success(emptyRuleUrl)
-        jsonStorage.getInfoResult = ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
+        jsonStorage.getInfoResult = ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
         let url = try! jsonProvider.getJsonUrl(for: .privacy)
         XCTAssertEqual(url, emptyRuleUrl)
     }

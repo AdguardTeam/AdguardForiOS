@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - ConfigurationProtocol
 
-public protocol ConfigurationProtocol {
+public protocol ConfigurationProtocol: AnyObject {
     var currentLanguage: String { get } // Language preferred by user
     var proStatus: Bool { get set } // Shows if user has Premium app version
     var safariProtectionEnabled: Bool { get set }
@@ -36,11 +36,14 @@ public protocol ConfigurationProtocol {
     var appProductVersion: String { get } // Application product version for example 4.1.1 for AdGuard
     var appId: String { get } // Application id for example "ios_pro" or "ios"
     var cid: String { get } // UIDevice.current.identifierForVendor?.uuidString should be passed
+    
+    // New object created from self
+    var copy: Self { get }
 }
 
 // MARK: - Configuration
 
-public struct Configuration: ConfigurationProtocol {
+public final class Configuration: ConfigurationProtocol {
     public let currentLanguage: String
     
     public var proStatus: Bool
@@ -54,4 +57,32 @@ public struct Configuration: ConfigurationProtocol {
     public let appProductVersion: String
     public let appId: String
     public let cid: String
+    
+    public var copy: Configuration {
+        return Configuration(currentLanguage: currentLanguage,
+                             proStatus: proStatus,
+                             safariProtectionEnabled: safariProtectionEnabled,
+                             blocklistIsEnabled: blocklistIsEnabled,
+                             allowlistIsEnbaled: allowlistIsEnbaled,
+                             allowlistIsInverted: allowlistIsInverted,
+                             updateOverWifiOnly: updateOverWifiOnly,
+                             appBundleId: appBundleId,
+                             appProductVersion: appProductVersion,
+                             appId: appId,
+                             cid: cid)
+    }
+    
+    public init(currentLanguage: String, proStatus: Bool, safariProtectionEnabled: Bool, blocklistIsEnabled: Bool, allowlistIsEnbaled: Bool, allowlistIsInverted: Bool, updateOverWifiOnly: Bool, appBundleId: String, appProductVersion: String, appId: String, cid: String) {
+        self.currentLanguage = currentLanguage
+        self.proStatus = proStatus
+        self.safariProtectionEnabled = safariProtectionEnabled
+        self.blocklistIsEnabled = blocklistIsEnabled
+        self.allowlistIsEnbaled = allowlistIsEnbaled
+        self.allowlistIsInverted = allowlistIsInverted
+        self.updateOverWifiOnly = updateOverWifiOnly
+        self.appBundleId = appBundleId
+        self.appProductVersion = appProductVersion
+        self.appId = appId
+        self.cid = cid
+    }
 }

@@ -89,12 +89,12 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         
         let someUrl = TestsFileManager.workingUrl
         let someInfo = [
-            ContentBlockerType.general: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .general, totalRules: 10, totalConverted: 8, overlimit: false, jsonUrl: someUrl),
-            .custom: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .custom, totalRules: 20, totalConverted: 18, overlimit: true, jsonUrl: someUrl),
-            .other: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .other, totalRules: 140, totalConverted: 123, overlimit: false, jsonUrl: someUrl),
-            .privacy: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .privacy, totalRules: 440, totalConverted: 320, overlimit: true, jsonUrl: someUrl),
-            .security: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .security, totalRules: 23, totalConverted: 20, overlimit: false, jsonUrl: someUrl),
-            .socialWidgetsAndAnnoyances: ContentBlockersInfoStorage.ConverterResult(contentBlockerType: .socialWidgetsAndAnnoyances, totalRules: 89, totalConverted: 78, overlimit: false, jsonUrl: someUrl)
+            ContentBlockerType.general: ConverterResult(contentBlockerType: .general, totalRules: 10, totalConverted: 8, overlimit: false, jsonUrl: someUrl),
+            .custom: ConverterResult(contentBlockerType: .custom, totalRules: 20, totalConverted: 18, overlimit: true, jsonUrl: someUrl),
+            .other: ConverterResult(contentBlockerType: .other, totalRules: 140, totalConverted: 123, overlimit: false, jsonUrl: someUrl),
+            .privacy: ConverterResult(contentBlockerType: .privacy, totalRules: 440, totalConverted: 320, overlimit: true, jsonUrl: someUrl),
+            .security: ConverterResult(contentBlockerType: .security, totalRules: 23, totalConverted: 20, overlimit: false, jsonUrl: someUrl),
+            .socialWidgetsAndAnnoyances: ConverterResult(contentBlockerType: .socialWidgetsAndAnnoyances, totalRules: 89, totalConverted: 78, overlimit: false, jsonUrl: someUrl)
         ]
         let encoder = JSONEncoder()
         let cbInfoData = try! encoder.encode(someInfo)

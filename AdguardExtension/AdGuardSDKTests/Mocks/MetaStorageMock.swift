@@ -321,4 +321,8 @@ class MetaStorageMock: MetaStorageProtocol {
         }
         return result
     }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
+    }
 }

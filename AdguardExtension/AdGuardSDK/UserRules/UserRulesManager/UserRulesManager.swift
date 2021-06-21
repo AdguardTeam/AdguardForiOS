@@ -118,7 +118,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
             
             _allRules.remove(at: ruleIndex)
             domainsSet.remove(ruleText)
-            self.storage.rules.remove(at: ruleIndex)
+            storage.rules.remove(at: ruleIndex)
         }
     }
     
@@ -126,8 +126,13 @@ final class UserRulesManager: UserRulesManagerProtocol {
         rulesModificationQueue.sync {
             _allRules.removeAll()
             domainsSet.removeAll()
-            self.storage.rules.removeAll()
+            storage.rules.removeAll()
         }
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        removeAllRules()
+        onResetFinished(nil)
     }
     
     // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync

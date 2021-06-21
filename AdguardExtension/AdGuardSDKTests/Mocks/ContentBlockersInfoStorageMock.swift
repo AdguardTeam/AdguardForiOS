@@ -2,7 +2,7 @@ import Foundation
 
 final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     
-    var allCbInfo: [ContentBlockerType : ContentBlockersInfoStorage.ConverterResult] = [:]
+    var allCbInfo: [ContentBlockerType : ConverterResult] = [:]
     
     var saveCbInfoCalled = false
     var saveCbInfoError: Error?
@@ -23,8 +23,8 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     }
     
     var getInfoCalled = false
-    var getInfoResult: ContentBlockersInfoStorage.ConverterResult?
-    func getInfo(for cbType: ContentBlockerType) -> ContentBlockersInfoStorage.ConverterResult? {
+    var getInfoResult: ConverterResult?
+    func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
         getInfoCalled = true
         return getInfoResult
     }
@@ -37,5 +37,9 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
         case .success(let url): return url
         case .error(let error): throw error
         }
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
     }
 }

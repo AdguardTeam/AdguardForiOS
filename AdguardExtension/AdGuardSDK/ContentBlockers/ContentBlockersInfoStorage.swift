@@ -30,7 +30,7 @@ public struct ConverterResult: Codable, Equatable {
 
 // MARK: - ContentBlockersInfoStorage
 
-protocol ContentBlockersInfoStorageProtocol {
+protocol ContentBlockersInfoStorageProtocol: ResetableProtocol {
     /* Returns all content blocker conversion results and JSONs urls */
     var allCbInfo: [ContentBlockerType: ConverterResult] { get }
 
@@ -113,6 +113,26 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
             let emptyRule = "[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]"
             try emptyRule.write(to: emptyRuleJsonUrl, atomically: true, encoding: .utf8)
             return emptyRuleJsonUrl
+        }
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        do {
+            // Remove all converted JSON fils
+            try fileManager.removeItem(at: jsonStorageUrl)
+            
+            // Create directory
+            try fileManager.createDirectory(at: jsonStorageUrl, withIntermediateDirectories: true, attributes: nil)
+            
+            // Clear user defaults
+            userDefaultsStorage.allCbInfo = [:]
+            
+            Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
+            onResetFinished(nil)
+        }
+        catch {
+            Logger.logInfo("(ContentBlockersJSONStorage) - reset; Failed to delete directory with CBs JSONs with error: \(error)")
+            onResetFinished(error)
         }
     }
     

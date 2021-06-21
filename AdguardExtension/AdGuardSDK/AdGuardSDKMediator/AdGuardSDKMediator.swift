@@ -40,14 +40,26 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     let cbStorage: ContentBlockersInfoStorage
     let cbService: ContentBlockerServiceProtocol
     let userRulesManagersProvider: UserRulesManagersProviderProtocol
+    private let defaultConfiguration: ConfigurationProtocol
     
     // MARK: - Initialization
     
-    init(configuration: ConfigurationProtocol,
-         filterFilesDirectoryUrl: URL,
-         dbContainerUrl: URL,
-         userDefaults: UserDefaults,
-         jsonStorageUrl: URL) throws
+    /**
+     Mediator object that controls all SDK. Every call to SDK must go through this object
+     - Parameter configuration: Current application configuration
+     - Parameter defaultConfiguration: Сonfiguration that will replace the current one when resetting the settings, a copy of passed object will be made
+     - Parameter filterFilesDirectoryUrl: Directory URL where SDK should store filter files
+     - Parameter dbContainerUrl: Directory URL where db files should be located
+     - Parameter jsonStorageUrl: Directory URL where Content Blockers JSON files should be stored
+     - Parameter userDefaults: UserDefaults objects where SDK will store temporary variables
+     - Throws: Can throw an error if initialization of one of inner services fails
+     */
+    public init(configuration: ConfigurationProtocol,
+                defaultConfiguration: ConfigurationProtocol,
+                filterFilesDirectoryUrl: URL,
+                dbContainerUrl: URL,
+                jsonStorageUrl: URL,
+                userDefaults: UserDefaults) throws
     {
         let services = try ServiceLocator(configuration: configuration,
                                           filterFilesDirectoryUrl: filterFilesDirectoryUrl,
@@ -56,6 +68,7 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
                                           jsonStorageUrl: jsonStorageUrl)
         
         self.configuration = configuration
+        self.defaultConfiguration = defaultConfiguration.copy
         self.filters = services.filters
         self.converter = services.converter
         self.cbStorage = services.cbStorage
@@ -63,11 +76,77 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
         self.userRulesManagersProvider = services.userRulesManagersProvider
     }
     
+    // Initializer for tests
+    init(configuration: ConfigurationProtocol,
+         defaultConfiguration: ConfigurationProtocol,
+         filters: FiltersServiceProtocol,
+         converter: FiltersConverterServiceProtocol,
+         cbStorage: ContentBlockersInfoStorage,
+         cbService: ContentBlockerServiceProtocol,
+         userRulesManagersProvider: UserRulesManagersProviderProtocol)
+    {
+        self.configuration = configuration
+        self.defaultConfiguration = defaultConfiguration
+        self.filters = filters
+        self.converter = converter
+        self.cbStorage = cbStorage
+        self.cbService = cbService
+        self.userRulesManagersProvider = userRulesManagersProvider
+    }
+    
     // MARK: - Public method
     
     public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        workingQueue.async {
+        workingQueue.async { [unowned self] in
+            var resultErrors: [Error] = []
             
+            var filtersError: Error?
+            filters.reset { error in
+                filtersError = error
+            }
+            
+            if let filtersError = filtersError {
+                Logger.logError("(AdGuardSDKMediator) - reset; Error reseting filters service; Error: \(filtersError)")
+                resultErrors.append(filtersError)
+            } else {
+                Logger.logInfo("(AdGuardSDKMediator) - reset; Successfully reset filters service")
+            }
+            
+            var userRulesError: Error?
+            userRulesManagersProvider.reset { error in
+                userRulesError = error
+            }
+            
+            if let userRulesError = userRulesError {
+                Logger.logError("(AdGuardSDKMediator) - reset; Error reseting user rules service; Error: \(userRulesError)")
+                resultErrors.append(userRulesError)
+            } else {
+                Logger.logInfo("(AdGuardSDKMediator) - reset; Successfully reset user rules service")
+            }
+            
+            var cbStorageError: Error?
+            cbStorage.reset { error in
+                cbStorageError = error
+            }
+            
+            if let cbStorageError = cbStorageError {
+                Logger.logError("(AdGuardSDKMediator) - reset; Error reseting CB storage service; Error: \(cbStorageError)")
+                resultErrors.append(cbStorageError)
+            } else {
+                Logger.logInfo("(AdGuardSDKMediator) - reset; Successfully reset CB storage service")
+            }
+            
+            configuration = defaultConfiguration.copy
+            
+            reloadContentBlockers { error in
+                if let error = error {
+                    Logger.logError("(AdGuardSDKMediator) - reset; Error reloading CBs after reset; Error: \(error)")
+                    onResetFinished(error)
+                } else {
+                    Logger.logInfo("(AdGuardSDKMediator) - reset; Successfully reloaded CB after reset")
+                    onResetFinished(resultErrors.first) // Return any error if some occured
+                }
+            }
         }
     }
     

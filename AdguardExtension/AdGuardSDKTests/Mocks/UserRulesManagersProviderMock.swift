@@ -4,6 +4,10 @@ final class UserRulesManagersProviderMock: UserRulesManagersProviderProtocol {
     var blocklistRulesManager: UserRulesManagerProtocol = BlocklistRulesManagerMock()
     var allowlistRulesManager: UserRulesManagerProtocol = AllowlistRulesManagerMock()
     var invertedAllowlistRulesManager: UserRulesManagerProtocol = InvertedAllowlistRulesManagerMock()
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
+    }
 }
 
 final class BlocklistRulesManagerMock: UserRulesManagerProtocol {
@@ -50,6 +54,10 @@ final class BlocklistRulesManagerMock: UserRulesManagerProtocol {
     var removeAllRulesCalled = false
     func removeAllRules() {
         removeAllRulesCalled = true
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
     }
 }
 
@@ -98,6 +106,10 @@ final class AllowlistRulesManagerMock: UserRulesManagerProtocol {
     func removeAllRules() {
         removeAllRulesCalled = true
     }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
+    }
 }
 
 final class InvertedAllowlistRulesManagerMock: UserRulesManagerProtocol {
@@ -144,5 +156,9 @@ final class InvertedAllowlistRulesManagerMock: UserRulesManagerProtocol {
     var removeAllRulesCalled = false
     func removeAllRules() {
         removeAllRulesCalled = true
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
     }
 }

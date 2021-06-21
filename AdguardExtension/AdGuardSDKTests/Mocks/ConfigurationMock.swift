@@ -1,6 +1,6 @@
 import Foundation
 
-class ConfigurationMock: ConfigurationProtocol {
+final class ConfigurationMock: ConfigurationProtocol {
     var currentLanguage: String = "en"
     
     var proStatus: Bool = false
@@ -22,4 +22,6 @@ class ConfigurationMock: ConfigurationProtocol {
     var appId: String = ""
     
     var cid: String = ""
+    
+    var copy: ConfigurationMock { return ConfigurationMock() }
 }

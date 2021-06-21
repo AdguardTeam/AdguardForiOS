@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FiltersServiceProtocol {
+protocol FiltersServiceProtocol: ResetableProtocol {
     /**
      Returns all Groups objects
      */
@@ -113,6 +113,9 @@ final class FiltersService: FiltersServiceProtocol {
     
     // Queue to make groups thread safe
     private let groupsModificationQueue = DispatchQueue(label: "AdGuardSDK.FiltersService.groupsModificationQueue", qos: .utility)
+    
+    // Queue to call completion blocks
+    private let completionQueue = DispatchQueue.main
     
     /* Services */
     private let configuration: ConfigurationProtocol
@@ -267,7 +270,7 @@ final class FiltersService: FiltersServiceProtocol {
             }
             catch {
                 Logger.logError("(FiltersService) - add custom filter; Errow while adding: \(error)")
-                DispatchQueue.main.async { onFilterAdded(error) }
+                self.completionQueue.async { onFilterAdded(error) }
                 return
             }
             
@@ -280,7 +283,7 @@ final class FiltersService: FiltersServiceProtocol {
             self._groups[customGroupIndex].filters.append(safariFilter)
             
             Logger.logInfo("(FiltersService) - add customFilter; Custom filter with id = \(filterId) was successfully added")
-            DispatchQueue.main.async { onFilterAdded(nil) }
+            self.completionQueue.async { onFilterAdded(nil) }
         }
     }
     
@@ -328,6 +331,43 @@ final class FiltersService: FiltersServiceProtocol {
             
             _groups[customGroupIndex].filters[filterIndex] = newFilter
             Logger.logDebug("(FiltersService) - renameCustomFilter; Custom filter with id = \(id) was successfully renamed")
+        }
+    }
+    
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        groupsModificationQueue.sync {
+            
+            var metaStorageError: Error?
+            metaStorage.reset { error in
+                metaStorageError = error
+            }
+            
+            if let metaStorageError = metaStorageError {
+                completionQueue.async { onResetFinished(metaStorageError) }
+                return
+            }
+            
+            var filtersStorageError: Error?
+            filterFilesStorage.reset { error in
+                filtersStorageError = error
+            }
+            
+            if let filtersStorageError = filtersStorageError {
+                completionQueue.async { onResetFinished(filtersStorageError) }
+                return
+            }
+            
+            do {
+                _groups = try getAllLocalizedGroups()
+                userDefaultsStorage.lastFiltersUpdateCheckDate = Date(timeIntervalSince1970: 0.0)
+                
+                Logger.logInfo("((FiltersService) - reset; Successfully updated all groups")
+                completionQueue.async { onResetFinished(nil) }
+            }
+            catch {
+                Logger.logError("((FiltersService) - reset; Failed to update groups with error: \(error)")
+                completionQueue.async { onResetFinished(error) }
+            }
         }
     }
     

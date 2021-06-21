@@ -22,6 +22,7 @@ class FiltersConverterServiceTest: XCTestCase {
         filtersService.groups = getGroups()
         filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
         configuration.allowlistIsInverted = false
+        configuration.safariProtectionEnabled = true
         
         let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
         (managersProvider.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules
@@ -45,12 +46,15 @@ class FiltersConverterServiceTest: XCTestCase {
     
     func testConversionWithFailure() {
         filtersConverter.resultFilters = nil
+        configuration.safariProtectionEnabled = true
         
         XCTAssertThrowsError(try converterService.convertFiltersAndUserRulesToJsons()) { error in
             XCTAssertEqual(error as! FiltersConverterService.ConvertionError, .failedToConvertRules)
             XCTAssertEqual(filtersConverter.convertCalledCount, 1)
         }
     }
+    
+    // TODO: - Add more tests for premium groups and disabled safari protection
     
     private func getGroups() -> [SafariGroup] {
         var adsGroup = SafariGroup(filters: [], isEnabled: false, groupType: .ads, groupName: "ads", displayNumber: 1)
