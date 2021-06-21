@@ -43,7 +43,7 @@ protocol UserRulesManagerProtocol: AnyObject {
     /**
      Adds new rule to the user rule's list
      - Parameter rule: Rule object to add to storage
-     - Parameter override: If **true** and **rule** is already in the user rule's list than it  will be overriden with new one
+     - Parameter override: If **true** and **rule** is already in the user rule's list than it will be overriden with new one
      
      - Throws: **UserRulesStorageError.ruleAlreadyExists**
                 if **override** is false and **allRules** already contains **rule**

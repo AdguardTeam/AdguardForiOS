@@ -584,6 +584,8 @@
 		7E41F3EF2672587000D68F61 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
 		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
+		7E45F98326808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */; };
+		7E45F98526808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -3502,6 +3504,8 @@
 		7E41F3EA26724D8D00D68F61 /* ContentBlockerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerService.swift; sourceTree = "<group>"; };
 		7E41F3EE2672587000D68F61 /* ContentBlockersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockersManager.swift; sourceTree = "<group>"; };
 		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
+		7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+Filters.swift"; sourceTree = "<group>"; };
+		7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+UserRules.swift"; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
@@ -5364,6 +5368,8 @@
 			isa = PBXGroup;
 			children = (
 				7E22E4CF267C857A00798E51 /* AdGuardSDKMediator.swift */,
+				7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */,
+				7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */,
 				7EC97C1A265FE28B005C950C /* Configuration.swift */,
 				7E22E4D4267CC97C00798E51 /* ServiceLocator.swift */,
 			);
@@ -10027,6 +10033,7 @@
 				D0BA7C3D2631B5680097029B /* ParserProtocol.swift in Sources */,
 				7E22E4D0267C857A00798E51 /* AdGuardSDKMediator.swift in Sources */,
 				7EC97C0F265E3C14005C950C /* AllowlistRulesStorage.swift in Sources */,
+				7E45F98326808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift in Sources */,
 				7EC97C0D265E3A31005C950C /* UserRulesStorage.swift in Sources */,
 				7E69C5142657A4BD00EA9DBA /* UserRulesManagerProtocol.swift in Sources */,
 				D0BDB4182630651D007D9BC6 /* FiltersConverter.swift in Sources */,
@@ -10046,6 +10053,7 @@
 				7E69C501265559CC00EA9DBA /* MetaStorage+FitlerRules.swift in Sources */,
 				7EB3E259264D2AEF00C460FA /* FilterMetaProtocol.swift in Sources */,
 				7EC97C19265FDB08005C950C /* SafariGroup.swift in Sources */,
+				7E45F98526808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift in Sources */,
 				D0BDB41D2630651D007D9BC6 /* FilterFilesStorage.swift in Sources */,
 				7E22E4D5267CC97C00798E51 /* ServiceLocator.swift in Sources */,
 				7E1C34762653CB5800A4490E /* GroupMetaProtocol.swift in Sources */,

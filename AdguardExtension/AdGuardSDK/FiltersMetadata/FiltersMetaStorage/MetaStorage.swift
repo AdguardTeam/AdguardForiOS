@@ -28,7 +28,6 @@ typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol
 
 protocol MetaStorageProtocol: MetaStorageTypeAlias, AnyObject {
     static var defaultDbLanguage: String { get }
-    var filtersDb: Connection { get }
 }
 
 final class MetaStorage: MetaStorageProtocol {

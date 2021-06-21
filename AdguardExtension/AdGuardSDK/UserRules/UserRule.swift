@@ -18,6 +18,12 @@
 
 import Foundation
 
+public enum UserRuleType {
+    case blocklist
+    case allowlist
+    case invertedAllowlist
+}
+
 public protocol UserRuleProtocol: Codable {
     /* Rule is a string that user did enter in the rule field */
     var ruleText: String { get }

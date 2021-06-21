@@ -13,6 +13,8 @@ class ConfigurationMock: ConfigurationProtocol {
     
     var allowlistIsInverted: Bool = false
     
+    var updateOverWifiOnly: Bool = false
+    
     var appProductVersion: String = ""
     
     var appBundleId: String = ""
