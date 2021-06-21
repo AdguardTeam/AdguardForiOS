@@ -63,6 +63,13 @@ public protocol AdGuardSDKMediatorFiltersProtocol {
      - Parameter onFilterDeleted: closure to handle error if exists
      */
     func deleteCustomFilter(withId id: Int, _ onFilterDeleted: @escaping (_ error: Error?) -> Void)
+    
+    /**
+     Checks update conditions for meta and updates them if needed
+     - Parameter forcibly: ignores update conditions and immediately updates filters
+     - Parameter onFiltersUpdated: closure to handle update **error**
+     */
+    func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void)
 }
 
 extension AdGuardSDKMediator {
@@ -158,6 +165,32 @@ extension AdGuardSDKMediator {
         try workingQueue.sync { [unowned self] in
             Logger.logInfo("(AdGuardSDKMediator) - renameCustomFilter; Rename custom filter with id=\(id) to name=\(name)")
             try filters.renameCustomFilter(withId: id, to: name)
+        }
+    }
+    
+    public func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void) {
+        workingQueue.async { [unowned self] in
+            Logger.logInfo("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly)")
+            
+            filters.updateAllMeta(forcibly: forcibly) { error in
+                workingQueue.sync {
+                    
+                    if let error = error {
+                        Logger.logError("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly) failed with error: \(error)")
+                        completionQueue.async { onFiltersUpdated(error) }
+                        return
+                    }
+                    
+                    reloadContentBlockers { error in
+                        if let error = error {
+                            Logger.logError("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
+                        } else {
+                            Logger.logInfo("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
+                        }
+                        onFiltersUpdated(error)
+                    }
+                }
+            }
         }
     }
 }

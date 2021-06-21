@@ -587,6 +587,9 @@
 		7E45F98326808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */; };
 		7E45F98526808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */; };
 		7E45F9872680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */; };
+		7E45F9892680C50300BB9DF9 /* AdGuardSDKMediator+ContentBlockers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F9882680C50300BB9DF9 /* AdGuardSDKMediator+ContentBlockers.swift */; };
+		7E45F98B2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */; };
+		7E45F98C2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -3508,6 +3511,8 @@
 		7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+Filters.swift"; sourceTree = "<group>"; };
 		7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+UserRules.swift"; sourceTree = "<group>"; };
 		7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+Configuration.swift"; sourceTree = "<group>"; };
+		7E45F9882680C50300BB9DF9 /* AdGuardSDKMediator+ContentBlockers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AdGuardSDKMediator+ContentBlockers.swift"; sourceTree = "<group>"; };
+		7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetableProtocol.swift; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
@@ -5373,6 +5378,7 @@
 				7E45F9862680A5BA00BB9DF9 /* AdGuardSDKMediator+Configuration.swift */,
 				7E45F98226808B3D00BB9DF9 /* AdGuardSDKMediator+Filters.swift */,
 				7E45F98426808CFA00BB9DF9 /* AdGuardSDKMediator+UserRules.swift */,
+				7E45F9882680C50300BB9DF9 /* AdGuardSDKMediator+ContentBlockers.swift */,
 				7EC97C1A265FE28B005C950C /* Configuration.swift */,
 				7E22E4D4267CC97C00798E51 /* ServiceLocator.swift */,
 			);
@@ -6061,6 +6067,7 @@
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */,
 				7E22E4D3267CC87400798E51 /* AdGuardSDKMediator */,
 				7E22E4CE267C836300798E51 /* Storage */,
 				7EC97C17265FDAE9005C950C /* FilterService */,
@@ -8999,6 +9006,7 @@
 				24D07CB02669309D0080C862 /* FiltersLocalizationsRequest.swift in Sources */,
 				24D07CAC266930670080C862 /* RequestFactory-Common.swift in Sources */,
 				24D07CA326690CDE0080C862 /* NotificationService+Utils.swift in Sources */,
+				7E45F98C2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */,
 				7E33D4BA2678A8C400DD410B /* BlocklistRuleConverter.swift in Sources */,
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E072A772678E50900695E85 /* FiltersConverterTest.swift in Sources */,
@@ -10006,6 +10014,7 @@
 				7E69C4FB2655465F00EA9DBA /* MetaStorage+Langs.swift in Sources */,
 				D0BDB41E2630651D007D9BC6 /* SafariFilter.swift in Sources */,
 				7E69C4FD26554CD200EA9DBA /* MetaStorage+GroupLocalizations.swift in Sources */,
+				7E45F9892680C50300BB9DF9 /* AdGuardSDKMediator+ContentBlockers.swift in Sources */,
 				D0BDB5CD263071FC007D9BC6 /* Logger.swift in Sources */,
 				7E69C4F526550C9300EA9DBA /* MetaStorage+Filters.swift in Sources */,
 				7E69C4F726550C9F00EA9DBA /* MetaStorage+Groups.swift in Sources */,
@@ -10028,6 +10037,7 @@
 				7EB3E258264D2AEF00C460FA /* ExtendedFiltersMeta.swift in Sources */,
 				7E69C4F92655109600EA9DBA /* MetaStorage+Tags.swift in Sources */,
 				D0BA7C3F2631B5680097029B /* FiltersLocalizationsParser.swift in Sources */,
+				7E45F98B2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */,
 				242CD70D265655F00010A2C0 /* URL+Utils.swift in Sources */,
 				7E69C4FF26554CE200EA9DBA /* MetaStorage+FiltersLocalizations.swift in Sources */,
 				7EC97C16265FC04F005C950C /* FiltersService.swift in Sources */,

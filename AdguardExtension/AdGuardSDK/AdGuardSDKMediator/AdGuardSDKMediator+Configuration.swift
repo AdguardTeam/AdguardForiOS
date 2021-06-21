@@ -46,7 +46,7 @@ public protocol AdGuardSDKMediatorConfigurationProtocol {
     func update(allowlistIsInverted: Bool, onInvertionStateUpdated: @escaping (_ error: Error?) -> Void)
 }
 
-extension AdGuardSDKMediator: AdGuardSDKMediatorConfigurationProtocol {
+extension AdGuardSDKMediator {
     public var proStatus: Bool {
         return workingQueue.sync { return configuration.proStatus }
     }

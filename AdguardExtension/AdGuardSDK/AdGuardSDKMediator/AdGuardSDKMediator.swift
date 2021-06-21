@@ -20,24 +20,10 @@ import Foundation
 
 public typealias AdGuardSDKMediatorProtocol = AdGuardSDKMediatorFiltersProtocol
                                             & AdGuardSDKMediatorUserRulesProtocol
-
-
+                                            & AdGuardSDKMediatorConfigurationProtocol
+                                            & AdGuardSDKMediatorContentBlockersProtocol
+                                            & ResetableProtocol
     
-    // Enable / Disable safari protection
-    
-    // Enable / Disable (allowlist / blocklist)
-    
-    // Enable / Disable inverted allowlist
-    
-    // Update filters metadata / filters content
-    
-    // Content blockers state
-    
-    // Content blockers convertion result
-    
-    // reset to default state
-
-
 public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
     
     // MARK: - Internal variables
@@ -75,6 +61,14 @@ public final class AdGuardSDKMediator: AdGuardSDKMediatorProtocol {
         self.cbStorage = services.cbStorage
         self.cbService = services.cbService
         self.userRulesManagersProvider = services.userRulesManagersProvider
+    }
+    
+    // MARK: - Public method
+    
+    public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        workingQueue.async {
+            
+        }
     }
     
     // MARK: - Internal methods
