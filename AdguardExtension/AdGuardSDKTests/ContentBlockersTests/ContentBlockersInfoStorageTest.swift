@@ -19,7 +19,7 @@ class ContentBlockersInfoStorageTest: XCTestCase {
     func testSaveCbJsonWithEmptyStorage() {
         XCTAssert(infoStorage.allCbInfo.isEmpty)
         
-        let filter = SafariFilter(type: .general, jsonString: "some_json", totalRules: 20, totalConverted: 15, overlimit: false)
+        let filter = FiltersConverter.Result(type: .general, jsonString: "some_json", totalRules: 20, totalConverted: 15, overlimit: false)
         try! infoStorage.save(cbInfo: filter)
         
         XCTAssertEqual(infoStorage.allCbInfo.count, 1)
@@ -32,7 +32,7 @@ class ContentBlockersInfoStorageTest: XCTestCase {
     func testSaveCbJsonWithNonEmptyStorage() {
         fillStorage()
         
-        let filter = SafariFilter(type: .other, jsonString: "some_json", totalRules: 30, totalConverted: 25, overlimit: true)
+        let filter = FiltersConverter.Result(type: .other, jsonString: "some_json", totalRules: 30, totalConverted: 25, overlimit: true)
         try! infoStorage.save(cbInfo: filter)
         
         XCTAssertEqual(infoStorage.allCbInfo.count, 6)
@@ -45,8 +45,8 @@ class ContentBlockersInfoStorageTest: XCTestCase {
     func testSaveCbJsons() {
         fillStorage()
         
-        let filter1 = SafariFilter(type: .other, jsonString: "some_json", totalRules: 30, totalConverted: 25, overlimit: true)
-        let filter2 = SafariFilter(type: .general, jsonString: "some_json", totalRules: 20, totalConverted: 15, overlimit: false)
+        let filter1 = FiltersConverter.Result(type: .other, jsonString: "some_json", totalRules: 30, totalConverted: 25, overlimit: true)
+        let filter2 = FiltersConverter.Result(type: .general, jsonString: "some_json", totalRules: 20, totalConverted: 15, overlimit: false)
         try! infoStorage.save(cbInfos: [filter1, filter2])
         
         XCTAssertEqual(infoStorage.allCbInfo.count, 6)

@@ -6,7 +6,7 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     
     var saveCbInfoCalled = false
     var saveCbInfoError: Error?
-    func save(cbInfo: SafariFilter) throws {
+    func save(cbInfo: FiltersConverter.Result) throws {
         saveCbInfoCalled = true
         if let error = saveCbInfoError {
             throw error
@@ -15,7 +15,7 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     
     var saveCbInfosCalled = false
     var saveCbInfosError: Error?
-    func save(cbInfos: [SafariFilter]) throws {
+    func save(cbInfos: [FiltersConverter.Result]) throws {
         saveCbInfosCalled = true
         if let error = saveCbInfosError {
             throw error
