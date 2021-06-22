@@ -20,7 +20,7 @@ import Foundation
 
 protocol FiltersConverterServiceProtocol {
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
-    func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter]
+    func convertFiltersAndUserRulesToJsons() throws -> [FiltersConverter.Result]
 }
 
 /**
@@ -65,7 +65,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     
     // MARK: - Internal methods
     
-    func convertFiltersAndUserRulesToJsons() throws -> [SafariFilter] {
+    func convertFiltersAndUserRulesToJsons() throws -> [FiltersConverter.Result] {
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
             let emptySafatiFilters = filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)

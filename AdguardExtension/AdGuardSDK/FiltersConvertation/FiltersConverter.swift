@@ -32,11 +32,23 @@ protocol FiltersConverterProtocol {
      Note that one of **allowlistRules** and **invertedAllowlistRulesString** should be nil
      - Returns: ContentBlockerConverter result for each content blocker
      */
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [SafariFilter]?
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverter.Result]?
 }
 
 struct FiltersConverter: FiltersConverterProtocol {
 
+    // MARK: - Result
+    
+    /* This struct is used to represent Converted Lib result and return only usefull info */
+    struct Result {
+        let type: ContentBlockerType // Content blocker type the result is related with
+        let jsonString: String // String representation of converted JSON we receive from Converter Lib
+        let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
+        let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
+        let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
+    }
+    
+    private let contentBlockerRulesLimit = 50000
     private let converter: ContentBlockerConverterProtocol
     
     init(converter: ContentBlockerConverterProtocol = ContentBlockerConverterWrapper()) {
@@ -45,7 +57,7 @@ struct FiltersConverter: FiltersConverterProtocol {
     
     // MARK: - Internal method
     
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [SafariFilter]? {
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [Result]? {
         let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRulesString)
         let safariFilters = convert(filters: sortedRules)
         return safariFilters
@@ -119,16 +131,22 @@ struct FiltersConverter: FiltersConverterProtocol {
     }
     
     // Converts all rules to jsons
-    private func convert(filters: [ContentBlockerType: [String]]) -> [SafariFilter] {
-        var resultFilters: [SafariFilter] = []
+    private func convert(filters: [ContentBlockerType: [String]]) -> [Result] {
+        var resultFilters: [Result] = []
     
         for (cbType, rules) in filters {
-            guard let result = converter.convertArray(rules: rules, limit: 50000, optimize: false, advancedBlocking: false, cbType: cbType) else {
+            guard let result = converter.convertArray(rules: rules, limit: contentBlockerRulesLimit, optimize: false, advancedBlocking: false, cbType: cbType) else {
                 Logger.logError("FiltersCoverter error - can not convert filter with type: \(cbType)")
                 continue
             }
             Logger.logInfo("FiltersCoverter result: \(result.message)")
-            let safariFilter = SafariFilter(type: cbType, jsonString: result.converted, totalRules: result.totalConvertedCount, totalConverted: result.convertedCount, overlimit: result.overLimit)
+            
+            // Just take the info we need
+            let safariFilter = Result(type: cbType,
+                                      jsonString: result.converted,
+                                      totalRules: result.totalConvertedCount,
+                                      totalConverted: result.convertedCount,
+                                      overlimit: result.overLimit)
             resultFilters.append(safariFilter)
         }
         return resultFilters

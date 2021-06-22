@@ -20,12 +20,17 @@ import Foundation
 
 // MARK: - ConverterResult
 
+/**
+ This struct is used to represent the convertation result of Converter lib.
+ It is practically the same as **FiltersConverter.Result** but instead of storing JSON file string it stores JSON file URL.
+ It is more convenient to use URLs because Content Blockers are waiting JSON URL with converted rules.
+ */
 public struct ConverterResult: Codable, Equatable {
-    let contentBlockerType: ContentBlockerType
-    let totalRules: Int
-    let totalConverted: Int
-    let overlimit: Bool
-    let jsonUrl: URL
+    let contentBlockerType: ContentBlockerType // Content blocker type the result is related with
+    let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
+    let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
+    let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
+    let jsonUrl: URL // URL where JSON with converted rules is stored 
 }
 
 // MARK: - ContentBlockersInfoStorage
@@ -35,10 +40,10 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     var allCbInfo: [ContentBlockerType: ConverterResult] { get }
 
     /* Saves filters convertion info and JSON file to storage */
-    func save(cbInfo: SafariFilter) throws
+    func save(cbInfo: FiltersConverter.Result) throws
 
     /* Saves filters convertion info and JSON files to storage */
-    func save(cbInfos: [SafariFilter]) throws
+    func save(cbInfos: [FiltersConverter.Result]) throws
 
     /* Loads filters convertion result and JSON file url for specified content blocker type */
     func getInfo(for cbType: ContentBlockerType) -> ConverterResult?
@@ -78,7 +83,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     // MARK: - Internal methods
     
-    func save(cbInfo: SafariFilter) throws {
+    func save(cbInfo: FiltersConverter.Result) throws {
         let urlToSave = urlForJson(withType: cbInfo.type)
         try cbInfo.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
         
@@ -92,7 +97,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         userDefaultsStorage.allCbInfo = allCbInfo
     }
     
-    func save(cbInfos: [SafariFilter]) throws {
+    func save(cbInfos: [FiltersConverter.Result]) throws {
         Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(cbInfos.count) jsons")
         try cbInfos.forEach { try save(cbInfo: $0) }
     }

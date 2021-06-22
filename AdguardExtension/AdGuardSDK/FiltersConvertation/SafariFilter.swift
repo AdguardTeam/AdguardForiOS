@@ -12,14 +12,6 @@ struct FilterFileContent: Equatable {
     }
 }
 
-struct SafariFilter {
-    let type: ContentBlockerType
-    let jsonString: String
-    let totalRules: Int
-    let totalConverted: Int
-    let overlimit: Bool
-}
-
 public enum ContentBlockerType: Int, CaseIterable, Codable {
     case general
     case privacy

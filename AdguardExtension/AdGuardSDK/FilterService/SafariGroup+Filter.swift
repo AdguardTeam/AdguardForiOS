@@ -18,21 +18,25 @@
 
 import Foundation
 
+/**
+ All filters that we store have their own meta and rules
+ This object represents all filters information we're able to find
+ */
 public protocol SafariFilterProtocol {
-    var name: String? { get }
-    var description: String? { get }
-    var isEnabled: Bool { get set }
-    var version: String? { get }
-    var lastUpdateDate: Date? { get }
-    var updateFrequency: Int? { get }
-    var homePage: String? { get }
-    var filterDownloadPage: String? { get }
-    var filterId: Int { get }
-    var group: SafariGroupProtocol { get }
-    var displayNumber: Int { get }
-    var languages: [String] { get }
-    var tags: [ExtendedFiltersMeta.Tag] { get }
-    var rulesCount: Int? { get }
+    var name: String? { get } // Filter name
+    var description: String? { get } // Filter description
+    var isEnabled: Bool { get set } // Filter state. We won't use rules from disabled filters.
+    var version: String? { get } // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
+    var lastUpdateDate: Date? { get } // The last time the filter was updated
+    var updateFrequency: Int? { get } // The frequency with which we should update filters
+    var homePage: String? { get } // Filter's homepage. It's just a link to somewhere
+    var filterDownloadPage: String? { get } // The link we should download filter from
+    var filterId: Int { get } // Filter's unique identifier. It is different for every filter
+    var group: SafariGroupProtocol { get } // Group the filter is related to
+    var displayNumber: Int { get } // It's an order that filters will be displayed in. A filter with the lowest one will be dispalyed first
+    var languages: [String] { get } // Languages that filter is related to
+    var tags: [ExtendedFiltersMeta.Tag] { get } // Some tags that filters can be grouped by
+    var rulesCount: Int? { get } // Number of rules in the filter. But this variable is approximate. The very exact result will give the Converter Lib
 }
 
 public extension SafariGroup {
