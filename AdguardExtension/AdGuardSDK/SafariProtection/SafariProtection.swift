@@ -29,7 +29,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal variables
     
     // Serial queue to avoid races in services
-    let workingQueue = DispatchQueue(label: "AdGuardSDK.AdGuardSDKMediator.workingQueue")
+    let workingQueue = DispatchQueue(label: "AdGuardSDK.SafariProtection.workingQueue")
     // Queue to call completion handlers
     let completionQueue = DispatchQueue.main
     
@@ -97,31 +97,37 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Public method
     
     public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - reset start")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection) - reset; self is missing!")
+                onResetFinished(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection) - reset start")
             
             do {
-                try filters.reset()
-                Logger.logInfo("(AdGuardSDKMediator) - reset; filters service was reset")
+                try self.filters.reset()
+                Logger.logInfo("(SafariProtection) - reset; filters service was reset")
                 
-                try userRulesManagersProvider.reset()
-                Logger.logInfo("(AdGuardSDKMediator) - reset; user rules managers were reset")
+                try self.userRulesManagersProvider.reset()
+                Logger.logInfo("(SafariProtection) - reset; user rules managers were reset")
                 
-                try cbStorage.reset()
-                Logger.logInfo("(AdGuardSDKMediator) - reset; CB storage was reset")
+                try self.cbStorage.reset()
+                Logger.logInfo("(SafariProtection) - reset; CB storage was reset")
             } catch {
-                Logger.logError("(AdGuardSDKMediator) - reset; Error reseting one of the service; Error: \(error)")
+                Logger.logError("(SafariProtection) - reset; Error reseting one of the service; Error: \(error)")
                 onResetFinished(error)
                 return
             }
             
-            configuration = defaultConfiguration.copy
+            self.configuration = self.defaultConfiguration.copy
             
-            reloadContentBlockers { error in
+            self.reloadContentBlockers { error in
                 if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - reset; Error reloading CBs after reset; Error: \(error)")
+                    Logger.logError("(SafariProtection) - reset; Error reloading CBs after reset; Error: \(error)")
                 } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - reset; Successfully reloaded CB after reset")
+                    Logger.logInfo("(SafariProtection) - reset; Successfully reloaded CB after reset")
                 }
                 onResetFinished(error)
             }
@@ -136,7 +142,7 @@ public final class SafariProtection: SafariProtectionProtocol {
             try block()
         }
         catch {
-            Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error: \(error)")
+            Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error: \(error)")
             onCbReloaded(error)
             return
         }
@@ -151,13 +157,19 @@ public final class SafariProtection: SafariProtectionProtocol {
             try cbStorage.save(cbInfos: convertedfilters)
         }
         catch {
-            Logger.logError("(AdGuardSDKMediator) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+            Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
             onCbReloaded(error)
             return
         }
         
-        cbService.updateContentBlockers { [unowned self] error in
-            workingQueue.sync { onCbReloaded(error) }
+        cbService.updateContentBlockers { [weak self] error in
+            guard let self = self else {
+                Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
+                onCbReloaded(CommonError.missingSelf)
+                return
+            }
+            
+            self.workingQueue.sync { onCbReloaded(error) }
         }
     }
 }

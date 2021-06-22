@@ -590,6 +590,8 @@
 		7E45F9892680C50300BB9DF9 /* SafariProtection+ContentBlockers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F9882680C50300BB9DF9 /* SafariProtection+ContentBlockers.swift */; };
 		7E45F98B2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */; };
 		7E45F98C2680C90C00BB9DF9 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */; };
+		7E45F98E2681F1A500BB9DF9 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98D2681F1A500BB9DF9 /* CommonError.swift */; };
+		7E45F98F2681F1A500BB9DF9 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E45F98D2681F1A500BB9DF9 /* CommonError.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -3513,6 +3515,7 @@
 		7E45F9862680A5BA00BB9DF9 /* SafariProtection+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariProtection+Configuration.swift"; sourceTree = "<group>"; };
 		7E45F9882680C50300BB9DF9 /* SafariProtection+ContentBlockers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariProtection+ContentBlockers.swift"; sourceTree = "<group>"; };
 		7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetableProtocol.swift; sourceTree = "<group>"; };
+		7E45F98D2681F1A500BB9DF9 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBB322DCAF9500027E93 /* AEThemeModeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEThemeModeEnum.h; sourceTree = "<group>"; };
@@ -6067,6 +6070,7 @@
 		D0BDB3F7263064FF007D9BC6 /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
+				7E45F98D2681F1A500BB9DF9 /* CommonError.swift */,
 				7E45F98A2680C90C00BB9DF9 /* ResetableProtocol.swift */,
 				7E22E4D3267CC87400798E51 /* SafariProtection */,
 				7E22E4CE267C836300798E51 /* Storage */,
@@ -9011,6 +9015,7 @@
 				7EB3E25B264D2BC300C460FA /* FilterMetaProtocol.swift in Sources */,
 				7E072A772678E50900695E85 /* FiltersConverterTest.swift in Sources */,
 				244F6A4C265D0729007F0888 /* URL+UtilsTest.swift in Sources */,
+				7E45F98F2681F1A500BB9DF9 /* CommonError.swift in Sources */,
 				24D07CAD266930790080C862 /* FiltersMetadataParser.swift in Sources */,
 				7E3D541D264D77EF00169E37 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				24D07CAF266930930080C862 /* FiltersLocalizationsParser.swift in Sources */,
@@ -10077,6 +10082,7 @@
 				7EC97C232660FDE1005C950C /* SafariGroup+GroupType.swift in Sources */,
 				7E1308982673601700D0D72A /* QuickAllowlistClipper.swift in Sources */,
 				7E69C5292657ED7900EA9DBA /* UserDefaultsStorage.swift in Sources */,
+				7E45F98E2681F1A500BB9DF9 /* CommonError.swift in Sources */,
 				7EC97C20265FF25B005C950C /* SafariGroup+Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

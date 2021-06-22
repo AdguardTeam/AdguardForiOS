@@ -88,7 +88,7 @@ extension SafariProtection {
     
     public func rulesString(for type: UserRuleType) -> String {
         workingQueue.sync {
-            Logger.logInfo("(AdGuardSDKMediator) - rulesString; Returning rules string for type=\(type)")
+            Logger.logInfo("(SafariProtection+UserRules) - rulesString; Returning rules string for type=\(type)")
             let provider = getProvider(for: type)
             return provider.rulesString
         }
@@ -96,93 +96,154 @@ extension SafariProtection {
     
     public func allRules(for type: UserRuleType) -> [UserRuleProtocol] {
         workingQueue.sync {
-            Logger.logInfo("(AdGuardSDKMediator) - allRules; Returning all rules for type=\(type)")
+            Logger.logInfo("(SafariProtection+UserRules) - allRules; Returning all rules for type=\(type)")
             let provider = getProvider(for: type)
             return provider.allRules
         }
     }
     
     public func add(rule: UserRuleProtocol, for type: UserRuleType, override: Bool, onRuleAdded: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - addRule; Adding rule: \(rule); for type=\(type); override=\(override)")
-            let provider = getProvider(for: type)
-            executeBlockAndReloadCbs {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+UserRules) - addRule; self is missing!")
+                onRuleAdded(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+UserRules) - addRule; Adding rule: \(rule); for type=\(type); override=\(override)")
+            
+            let provider = self.getProvider(for: type)
+            self.executeBlockAndReloadCbs {
                 try provider.add(rule: rule, override: override)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - addRule; Error reloading CBs when adding rule: \(rule) for type=\(type), override=\(override); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - addRule; Successfully reloaded CBs after adding rule: \(rule) for type=\(type), override=\(override)")
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - addRule.onCbReloaded; self is missing!")
+                    onRuleAdded(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onRuleAdded(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - addRule; Error reloading CBs when adding rule: \(rule) for type=\(type), override=\(override); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - addRule; Successfully reloaded CBs after adding rule: \(rule) for type=\(type), override=\(override)")
+                }
+                self.completionQueue.async { onRuleAdded(error) }
             }
         }
     }
     
     public func add(rules: [UserRuleProtocol], for type: UserRuleType, override: Bool, onRulesAdded: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
-            let provider = getProvider(for: type)
-            executeBlockAndReloadCbs {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+UserRules) - addRules; self is missing!")
+                onRulesAdded(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+UserRules) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
+            let provider = self.getProvider(for: type)
+            self.executeBlockAndReloadCbs {
                 try provider.add(rules: rules, override: override)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - addRules; Error reloading CBs when adding \(rules.count) rules for type=\(type), override=\(override); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - addRules; Successfully reloaded CBs after adding \(rules.count) rules for type=\(type), override=\(override)")
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - addRules.onCbReloaded; self is missing!")
+                    onRulesAdded(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onRulesAdded(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - addRules; Error reloading CBs when adding \(rules.count) rules for type=\(type), override=\(override); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - addRules; Successfully reloaded CBs after adding \(rules.count) rules for type=\(type), override=\(override)")
+                }
+                self.completionQueue.async { onRulesAdded(error) }
             }
         }
     }
     
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol, for type: UserRuleType, onRuleModified: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - modifyRule; Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
-            let provider = getProvider(for: type)
-            executeBlockAndReloadCbs {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+UserRules) - modifyRule; self is missing!")
+                onRuleModified(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+UserRules) - modifyRule; Modifying old rule=\(oldRuleText) to new rule=\(newRule)")
+            let provider = self.getProvider(for: type)
+            self.executeBlockAndReloadCbs {
                 try provider.modifyRule(oldRuleText, newRule)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - modifyRule; Error reloading CBs when modifying rule=\(oldRuleText) to \(newRule) for type=\(type); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - modifyRule; Successfully reloaded CBs after modifying rule=\(oldRuleText) to \(newRule) for type=\(type)")
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - modifyRule.onCbReloaded; self is missing!")
+                    onRuleModified(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onRuleModified(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - modifyRule; Error reloading CBs when modifying rule=\(oldRuleText) to \(newRule) for type=\(type); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - modifyRule; Successfully reloaded CBs after modifying rule=\(oldRuleText) to \(newRule) for type=\(type)")
+                }
+                self.completionQueue.async { onRuleModified(error) }
             }
         }
     }
     
     public func removeRule(withText ruleText: String, for type: UserRuleType, onRuleRemoved: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - removeRule; Removing rule=\(ruleText) for type=\(type)")
-            let provider = getProvider(for: type)
-            executeBlockAndReloadCbs {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+UserRules) - removeRule; self is missing!")
+                onRuleRemoved(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+UserRules) - removeRule; Removing rule=\(ruleText) for type=\(type)")
+            let provider = self.getProvider(for: type)
+            self.executeBlockAndReloadCbs {
                 try provider.removeRule(withText: ruleText)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - removeRule; Error reloading CBs when removing rule=\(ruleText) for type=\(type); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - removeRule; Successfully reloaded CBs after removing rule=\(ruleText) for type=\(type)")
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - removeRule.onCbReloaded; self is missing!")
+                    onRuleRemoved(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onRuleRemoved(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - removeRule; Error reloading CBs when removing rule=\(ruleText) for type=\(type); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - removeRule; Successfully reloaded CBs after removing rule=\(ruleText) for type=\(type)")
+                }
+                self.completionQueue.async { onRuleRemoved(error) }
             }
         }
     }
     
     public func removeAllRules(for type: UserRuleType, onRulesRemoved: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - removeAllRules; Removing all rules for type=\(type)")
-            let provider = getProvider(for: type)
-            executeBlockAndReloadCbs {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+UserRules) - removeAllRules; self is missing!")
+                onRulesRemoved(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+UserRules) - removeAllRules; Removing all rules for type=\(type)")
+            let provider = self.getProvider(for: type)
+            self.executeBlockAndReloadCbs {
                 provider.removeAllRules()
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - removeAllRules; Error reloading CBs when removing all rules for type=\(type); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - removeAllRules; Successfully reloaded CBs after removing all rules for type=\(type)")
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; self is missing!")
+                    onRulesRemoved(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onRulesRemoved(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - removeAllRules; Error reloading CBs when removing all rules for type=\(type); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - removeAllRules; Successfully reloaded CBs after removing all rules for type=\(type)")
+                }
+                self.completionQueue.async { onRulesRemoved(error) }
             }
         }
     }

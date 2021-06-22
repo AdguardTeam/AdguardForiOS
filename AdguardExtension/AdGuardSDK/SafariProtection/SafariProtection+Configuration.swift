@@ -81,101 +81,165 @@ extension SafariProtection {
     }
     
     public func update(proStatus: Bool, onProStatusUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateProStatus; Updating proStatus from=\(configuration.proStatus) to=\(proStatus)")
-            guard configuration.proStatus != proStatus else {
-                completionQueue.async { onProStatusUpdated(nil) }
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Configuration) - update proStatus; self is missing!")
+                onProStatusUpdated(CommonError.missingSelf)
                 return
             }
             
-            configuration.proStatus = proStatus
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - updateProStatus; Error reloading CBs when updating proStatus; Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - updateProStatus; Successfully reloaded CBs after updating proStatus")
+            Logger.logInfo("(SafariProtection+Configuration) - updateProStatus; Updating proStatus from=\(self.configuration.proStatus) to=\(proStatus)")
+            
+            guard self.configuration.proStatus != proStatus else {
+                self.completionQueue.async { onProStatusUpdated(nil) }
+                return
+            }
+            
+            self.configuration.proStatus = proStatus
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.proStatus.reloadContentBlockers; self is missing!")
+                    onProStatusUpdated(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onProStatusUpdated(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateProStatus; Error reloading CBs when updating proStatus; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateProStatus; Successfully reloaded CBs after updating proStatus")
+                }
+                self.completionQueue.async { onProStatusUpdated(error) }
             }
         }
     }
     
     public func update(safariProtectionEnabled: Bool, onSafariProtectionStateUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateSafariProtection; Updating safariProtection from=\(configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
-            guard configuration.safariProtectionEnabled != safariProtectionEnabled else {
-                completionQueue.async { onSafariProtectionStateUpdated(nil) }
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Configuration) - update.safariProtection; self is missing!")
+                onSafariProtectionStateUpdated(CommonError.missingSelf)
                 return
             }
             
-            configuration.safariProtectionEnabled = safariProtectionEnabled
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - updateSafariProtection; Error reloading CBs when updating safariProtection; Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - updateSafariProtection; Successfully reloaded CBs after updating safariProtection")
+            Logger.logInfo("(SafariProtection+Configuration) - updateSafariProtection; Updating safariProtection from=\(self.configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
+            
+            guard self.configuration.safariProtectionEnabled != safariProtectionEnabled else {
+                self.completionQueue.async { onSafariProtectionStateUpdated(nil) }
+                return
+            }
+            
+            self.configuration.safariProtectionEnabled = safariProtectionEnabled
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.safariProtection.reloadContentBlockers; self is missing!")
+                    onSafariProtectionStateUpdated(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onSafariProtectionStateUpdated(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateSafariProtection; Error reloading CBs when updating safariProtection; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateSafariProtection; Successfully reloaded CBs after updating safariProtection")
+                }
+                self.completionQueue.async { onSafariProtectionStateUpdated(error) }
             }
         }
     }
     
     public func update(blocklistIsEnabled: Bool, onBlocklistStateUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateBlocklistIsEnabled; Updating blocklist state from=\(configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
-            guard configuration.blocklistIsEnabled != blocklistIsEnabled else {
-                completionQueue.async { onBlocklistStateUpdated(nil) }
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Configuration) - update.blocklistIsEnabled; self is missing!")
+                onBlocklistStateUpdated(CommonError.missingSelf)
                 return
             }
             
-            configuration.blocklistIsEnabled = blocklistIsEnabled
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - updateBlocklistIsEnabled; Error reloading CBs when updating blocklist state; Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - updateBlocklistIsEnabled; Successfully reloaded CBs after updating blocklist state")
+            Logger.logInfo("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Updating blocklist state from=\(self.configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
+            
+            guard self.configuration.blocklistIsEnabled != blocklistIsEnabled else {
+                self.completionQueue.async { onBlocklistStateUpdated(nil) }
+                return
+            }
+            
+            self.configuration.blocklistIsEnabled = blocklistIsEnabled
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.blocklistIsEnabled.reloadContentBlockers; self is missing!")
+                    onBlocklistStateUpdated(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onBlocklistStateUpdated(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Error reloading CBs when updating blocklist state; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Successfully reloaded CBs after updating blocklist state")
+                }
+                self.completionQueue.async { onBlocklistStateUpdated(error) }
             }
         }
     }
     
     public func update(allowlistIsEnbaled: Bool, onAllowlistStateUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateAllowlistIsEnbaled; Updating allowlist state from=\(configuration.allowlistIsEnbaled) to=\(allowlistIsEnbaled)")
-            guard configuration.allowlistIsEnbaled != allowlistIsEnbaled else {
-                completionQueue.async { onAllowlistStateUpdated(nil) }
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnbaled; self is missing!")
+                onAllowlistStateUpdated(CommonError.missingSelf)
                 return
             }
             
-            configuration.allowlistIsEnbaled = allowlistIsEnbaled
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist state; Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist state")
+            Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Updating allowlist state from=\(self.configuration.allowlistIsEnbaled) to=\(allowlistIsEnbaled)")
+            guard self.configuration.allowlistIsEnbaled != allowlistIsEnbaled else {
+                self.completionQueue.async { onAllowlistStateUpdated(nil) }
+                return
+            }
+            
+            self.configuration.allowlistIsEnbaled = allowlistIsEnbaled
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnbaled.reloadContentBlockers; self is missing!")
+                    onAllowlistStateUpdated(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onAllowlistStateUpdated(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist state; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist state")
+                }
+                self.completionQueue.async { onAllowlistStateUpdated(error) }
             }
         }
     }
     
     public func update(allowlistIsInverted: Bool, onInvertionStateUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateAllowlistIsInverted; Updating allowlist invertion state from=\(configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
-            guard configuration.allowlistIsInverted != allowlistIsInverted else {
-                completionQueue.async { onInvertionStateUpdated(nil) }
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Configuration) - update.allowlistIsInverted; self is missing!")
+                onInvertionStateUpdated(CommonError.missingSelf)
                 return
             }
             
-            configuration.allowlistIsInverted = allowlistIsInverted
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist invertion")
+            Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsInverted; Updating allowlist invertion state from=\(self.configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
+            
+            guard self.configuration.allowlistIsInverted != allowlistIsInverted else {
+                self.completionQueue.async { onInvertionStateUpdated(nil) }
+                return
+            }
+            
+            self.configuration.allowlistIsInverted = allowlistIsInverted
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.allowlistIsInverted.reloadContentBlockers; self is missing!")
+                    onInvertionStateUpdated(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onInvertionStateUpdated(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist invertion")
+                }
+                self.completionQueue.async { onInvertionStateUpdated(error) }
             }
         }
     }

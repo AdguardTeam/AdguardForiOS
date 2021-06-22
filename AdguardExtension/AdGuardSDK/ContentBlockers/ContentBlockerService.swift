@@ -123,16 +123,28 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
     
     // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
     private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
-        invalidateQueue.async { [unowned self] in
-            let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        invalidateQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(ContentBlockerService) - reloadContentBlocker; self is missing!")
+                onContentBlockerReloaded(CommonError.missingSelf)
+                return
+            }
+            
+            let cbBundleId = cbType.contentBlockerBundleId(self.configuration.appBundleId)
             
             // Try to reload content blocker
-            contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { error in
+            self.contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(ContentBlockerService) - reloadContentBlocker; сontentBlockersManager.reloadContentBlocker self is missing!")
+                    onContentBlockerReloaded(CommonError.missingSelf)
+                    return
+                }
+                
                 if let userInfo = (error as NSError?)?.userInfo {
                     Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
                     // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
                     if firstTry {
-                        reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
+                        self.reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
                     } else {
                         onContentBlockerReloaded(error)
                     }

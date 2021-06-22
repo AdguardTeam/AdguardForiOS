@@ -85,107 +85,172 @@ extension SafariProtection {
     // MARK: - Public methods
     
     public func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool, onGroupSet: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            executeBlockAndReloadCbs {
-                Logger.logInfo("(AdGuardSDKMediator) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
-                try filters.setGroup(withId: groupType.id, enabled: enabled)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - setGroup; Error reloading CBs when setting group with id=\(groupType.id) to enabled=\(enabled): \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - setGroup; Successfully reloaded CBs after setting group with id=\(groupType.id) to enabled=\(enabled)")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - setGroup; self is missing!")
+                onGroupSet(CommonError.missingSelf)
+                return
+            }
+            
+            self.executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
+                try self.filters.setGroup(withId: groupType.id, enabled: enabled)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
+                    onGroupSet(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onGroupSet(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - setGroup; Error reloading CBs when setting group with id=\(groupType.id) to enabled=\(enabled): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - setGroup; Successfully reloaded CBs after setting group with id=\(groupType.id) to enabled=\(enabled)")
+                }
+                self.completionQueue.async { onGroupSet(error) }
             }
         }
     }
     
     public func setFilter(withId id: Int, _ groupId: Int, enabled: Bool, _ onFilterSet: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            executeBlockAndReloadCbs {
-                Logger.logInfo("(AdGuardSDKMediator) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
-                try filters.setFilter(withId: id, groupId, enabled: enabled)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - setFilter; Error reloading CBs when setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled): \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - setFilter; Successfully reloaded CBs after setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - setFilter; self is missing!")
+                onFilterSet(CommonError.missingSelf)
+                return
+            }
+            
+            self.executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+                try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
+                    onFilterSet(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onFilterSet(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - setFilter; Error reloading CBs when setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - setFilter; Successfully reloaded CBs after setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+                }
+                self.completionQueue.async { onFilterSet(error) }
             }
         }
     }
     
     public func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - addCustomFilter; Add custom filter: \(customFilter)")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - addCustomFilter; self is missing!")
+                onFilterAdded(CommonError.missingSelf)
+                return
+            }
+            
+            Logger.logInfo("(SafariProtection+Filters) - addCustomFilter; Add custom filter: \(customFilter)")
             var addError: Error?
             let group = DispatchGroup()
             group.enter()
-            filters.add(customFilter: customFilter, enabled: enabled) { error in
+            self.filters.add(customFilter: customFilter, enabled: enabled) { error in
                 addError = error
                 group.leave()
             }
             group.wait()
             
             if let addError = addError {
-                Logger.logError("(AdGuardSDKMediator) - addCustomFilter; Error adding custom filter: \(customFilter) to storage, error: \(addError)")
-                completionQueue.async { onFilterAdded(addError) }
+                Logger.logError("(SafariProtection+Filters) - addCustomFilter; Error adding custom filter: \(customFilter) to storage, error: \(addError)")
+                self.completionQueue.async { onFilterAdded(addError) }
                 return
             }
             
-            reloadContentBlockers { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - addCustomFilter; Error reloading CBs when adding custom filter: \(customFilter); Error: \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - addCustomFilter; Successfully reloaded CBs after adding custom filter: \(customFilter)")
+            self.reloadContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - addCustomFilter.reloadContentBlockers; self is missing!")
+                    onFilterAdded(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onFilterAdded(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - addCustomFilter; Error reloading CBs when adding custom filter: \(customFilter); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - addCustomFilter; Successfully reloaded CBs after adding custom filter: \(customFilter)")
+                }
+                self.completionQueue.async { onFilterAdded(error) }
             }
         }
     }
     
     public func deleteCustomFilter(withId id: Int, _ onFilterDeleted: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            executeBlockAndReloadCbs {
-                Logger.logInfo("(AdGuardSDKMediator) - deleteCustomFilter; Delete custom filter with id=\(id)")
-                try filters.deleteCustomFilter(withId: id)
-            } onCbReloaded: { error in
-                if let error = error {
-                    Logger.logError("(AdGuardSDKMediator) - deleteCustomFilter; Error reloading CBs when deleting custom filter with id=\(id): \(error)")
-                } else {
-                    Logger.logInfo("(AdGuardSDKMediator) - deleteCustomFilter; Successfully reloaded CBs after deleting custom filter with id=\(id)")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - deleteCustomFilter; self is missing!")
+                onFilterDeleted(CommonError.missingSelf)
+                return
+            }
+            
+            self.executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Delete custom filter with id=\(id)")
+                try self.filters.deleteCustomFilter(withId: id)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")
+                    onFilterDeleted(CommonError.missingSelf)
+                    return
                 }
-                completionQueue.async { onFilterDeleted(error) }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - deleteCustomFilter; Error reloading CBs when deleting custom filter with id=\(id): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Successfully reloaded CBs after deleting custom filter with id=\(id)")
+                }
+                self.completionQueue.async { onFilterDeleted(error) }
             }
         }
     }
     
     public func renameCustomFilter(withId id: Int, to name: String) throws {
-        try workingQueue.sync { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - renameCustomFilter; Rename custom filter with id=\(id) to name=\(name)")
-            try filters.renameCustomFilter(withId: id, to: name)
+        try workingQueue.sync { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - renameCustomFilter; self is missing!")
+                throw CommonError.missingSelf
+            }
+            
+            Logger.logInfo("(SafariProtection+Filters) - renameCustomFilter; Rename custom filter with id=\(id) to name=\(name)")
+            try self.filters.renameCustomFilter(withId: id, to: name)
         }
     }
     
     public func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void) {
-        workingQueue.async { [unowned self] in
-            Logger.logInfo("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly)")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; self is missing!")
+                onFiltersUpdated(CommonError.missingSelf)
+                return
+            }
             
-            filters.updateAllMeta(forcibly: forcibly) { error in
-                workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly)")
+            
+            self.filters.updateAllMeta(forcibly: forcibly) { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.updateAllMeta; self is missing!")
+                    onFiltersUpdated(CommonError.missingSelf)
+                    return
+                }
+                
+                self.workingQueue.sync {
                     
                     if let error = error {
-                        Logger.logError("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly) failed with error: \(error)")
-                        completionQueue.async { onFiltersUpdated(error) }
+                        Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly) failed with error: \(error)")
+                        self.completionQueue.async { onFiltersUpdated(error) }
                         return
                     }
                     
-                    reloadContentBlockers { error in
+                    self.reloadContentBlockers { error in
                         if let error = error {
-                            Logger.logError("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
+                            Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
                         } else {
-                            Logger.logInfo("(AdGuardSDKMediator) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
+                            Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
                         }
                         onFiltersUpdated(error)
                     }
