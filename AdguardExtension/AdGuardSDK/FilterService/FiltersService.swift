@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FiltersServiceProtocol: ResetableProtocol {
+protocol FiltersServiceProtocol: ResetableSyncProtocol {
     /**
      Returns all Groups objects
      */
@@ -334,40 +334,16 @@ final class FiltersService: FiltersServiceProtocol {
         }
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        groupsModificationQueue.sync {
+    func reset() throws {
+        try groupsModificationQueue.sync {
+            Logger.logInfo("(FiltersService) - reset start")
             
-            var metaStorageError: Error?
-            metaStorage.reset { error in
-                metaStorageError = error
-            }
+            try metaStorage.reset()
+            try filterFilesStorage.reset()
+            _groups = try getAllLocalizedGroups()
+            userDefaultsStorage.lastFiltersUpdateCheckDate = Date(timeIntervalSince1970: 0.0)
             
-            if let metaStorageError = metaStorageError {
-                completionQueue.async { onResetFinished(metaStorageError) }
-                return
-            }
-            
-            var filtersStorageError: Error?
-            filterFilesStorage.reset { error in
-                filtersStorageError = error
-            }
-            
-            if let filtersStorageError = filtersStorageError {
-                completionQueue.async { onResetFinished(filtersStorageError) }
-                return
-            }
-            
-            do {
-                _groups = try getAllLocalizedGroups()
-                userDefaultsStorage.lastFiltersUpdateCheckDate = Date(timeIntervalSince1970: 0.0)
-                
-                Logger.logInfo("((FiltersService) - reset; Successfully updated all groups")
-                completionQueue.async { onResetFinished(nil) }
-            }
-            catch {
-                Logger.logError("((FiltersService) - reset; Failed to update groups with error: \(error)")
-                completionQueue.async { onResetFinished(error) }
-            }
+            Logger.logInfo("(FiltersService) - reset; Successfully reset all groups")
         }
     }
     

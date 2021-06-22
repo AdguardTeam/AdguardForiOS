@@ -26,7 +26,7 @@ typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol
                                 & GroupLocalizationsMetaStorageProtocol
                                 & FiltersLocalizationsMetaStorageProtocol
 
-protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableProtocol, AnyObject {
+protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyObject {
     static var defaultDbLanguage: String { get }
 }
 
@@ -51,17 +51,13 @@ final class MetaStorage: MetaStorageProtocol {
         insertCustomGroupIfNeeded()
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        productionDbManager.reset { [unowned self] error in
-            if let error = error {
-                Logger.logError("(MetaStorage) - reset; Failed to reset adguard.db with error: \(error)")
-                onResetFinished(error)
-            } else {
-                Logger.logError("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
-                filtersDb = productionDbManager.filtersDb
-                onResetFinished(nil)
-            }
-        }
+    func reset() throws {
+        Logger.logInfo("(MetaStorage) - reset start")
+        
+        try productionDbManager.reset()
+        filtersDb = productionDbManager.filtersDb
+        
+        Logger.logInfo("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
     }
     
     /*

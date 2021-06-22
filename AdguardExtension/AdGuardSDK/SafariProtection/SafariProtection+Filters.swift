@@ -18,7 +18,7 @@
 
 import Foundation
 
-public protocol AdGuardSDKMediatorFiltersProtocol {
+public protocol SafariProtectionFiltersProtocol {
     /**
      Returns all Groups objects
      */
@@ -72,7 +72,7 @@ public protocol AdGuardSDKMediatorFiltersProtocol {
     func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void)
 }
 
-extension AdGuardSDKMediator {
+extension SafariProtection {
     
     // MARK: - Public variables
     

@@ -130,9 +130,8 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+    func reset() throws {
         removeAllRules()
-        onResetFinished(nil)
     }
     
     // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync

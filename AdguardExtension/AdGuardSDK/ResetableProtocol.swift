@@ -18,6 +18,12 @@
 
 import Foundation
 
-public protocol ResetableProtocol {
+public protocol ResetableProtocol {}
+
+public protocol ResetableSyncProtocol: ResetableProtocol {
+    func reset() throws
+}
+
+public protocol ResetableAsyncProtocol: ResetableProtocol {
     func reset(_ onResetFinished: @escaping (_ error: Error?) -> Void)
 }

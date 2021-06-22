@@ -18,7 +18,7 @@
 
 import Foundation
 
-public protocol AdGuardSDKMediatorConfigurationProtocol {
+public protocol SafariProtectionConfigurationProtocol {
     // Application user configuration
     
     /* Shows if user has Premium app version */
@@ -46,7 +46,7 @@ public protocol AdGuardSDKMediatorConfigurationProtocol {
     func update(allowlistIsInverted: Bool, onInvertionStateUpdated: @escaping (_ error: Error?) -> Void)
 }
 
-extension AdGuardSDKMediator {
+extension SafariProtection {
     public var proStatus: Bool {
         return workingQueue.sync { return configuration.proStatus }
     }

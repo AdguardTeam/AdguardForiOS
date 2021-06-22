@@ -30,7 +30,7 @@ public struct ConverterResult: Codable, Equatable {
 
 // MARK: - ContentBlockersInfoStorage
 
-protocol ContentBlockersInfoStorageProtocol: ResetableProtocol {
+protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     /* Returns all content blocker conversion results and JSONs urls */
     var allCbInfo: [ContentBlockerType: ConverterResult] { get }
 
@@ -116,24 +116,19 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         }
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        do {
-            // Remove all converted JSON fils
-            try fileManager.removeItem(at: jsonStorageUrl)
-            
-            // Create directory
-            try fileManager.createDirectory(at: jsonStorageUrl, withIntermediateDirectories: true, attributes: nil)
-            
-            // Clear user defaults
-            userDefaultsStorage.allCbInfo = [:]
-            
-            Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
-            onResetFinished(nil)
-        }
-        catch {
-            Logger.logInfo("(ContentBlockersJSONStorage) - reset; Failed to delete directory with CBs JSONs with error: \(error)")
-            onResetFinished(error)
-        }
+    func reset() throws {
+        Logger.logInfo("(ContentBlockersJSONStorage) - reset start")
+        
+        // Remove all converted JSON fils
+        try fileManager.removeItem(at: jsonStorageUrl)
+        
+        // Create directory
+        try fileManager.createDirectory(at: jsonStorageUrl, withIntermediateDirectories: true, attributes: nil)
+        
+        // Clear user defaults
+        userDefaultsStorage.allCbInfo = [:]
+        
+        Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
     
     // MARK: - Private methods

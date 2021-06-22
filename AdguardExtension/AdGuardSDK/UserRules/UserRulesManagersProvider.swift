@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol UserRulesManagersProviderProtocol: ResetableProtocol, AnyObject {
+protocol UserRulesManagersProviderProtocol: ResetableSyncProtocol, AnyObject {
     var blocklistRulesManager: UserRulesManagerProtocol { get }
     var allowlistRulesManager: UserRulesManagerProtocol { get }
     var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
@@ -50,10 +50,13 @@ final class UserRulesManagersProvider: UserRulesManagersProviderProtocol {
         self.userDefaultsStorage = userDefaultsStorage
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        blocklistRulesManager.reset { _ in }
-        allowlistRulesManager.reset { _ in }
-        invertedAllowlistRulesManager.reset { _ in }
-        onResetFinished(nil)
+    func reset() throws {
+        Logger.logInfo("(UserRulesManagersProvider) - reset start")
+        
+        try blocklistRulesManager.reset()
+        try allowlistRulesManager.reset()
+        try invertedAllowlistRulesManager.reset()
+        
+        Logger.logInfo("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
     }
 }

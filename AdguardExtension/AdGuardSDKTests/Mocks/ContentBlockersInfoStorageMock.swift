@@ -39,7 +39,7 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
         }
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        onResetFinished(nil)
+    func reset() throws {
+        
     }
 }

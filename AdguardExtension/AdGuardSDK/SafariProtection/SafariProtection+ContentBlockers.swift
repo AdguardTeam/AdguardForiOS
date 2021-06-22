@@ -18,7 +18,7 @@
 
 import Foundation
 
-public protocol AdGuardSDKMediatorContentBlockersProtocol {
+public protocol SafariProtectionContentBlockersProtocol {
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
@@ -29,7 +29,7 @@ public protocol AdGuardSDKMediatorContentBlockersProtocol {
     func getState(for cbType: ContentBlockerType) -> Bool
 }
 
-extension AdGuardSDKMediator {
+extension SafariProtection {
     public var allContentBlockersStates: [ContentBlockerType : Bool] {
         return workingQueue.sync { return cbService.allContentBlockersStates }
     }

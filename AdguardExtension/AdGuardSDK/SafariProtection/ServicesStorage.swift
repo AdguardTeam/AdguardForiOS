@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol ServiceLocatorProtocol {
+protocol ServicesStorageProtocol {
     var configuration: ConfigurationProtocol { get }
     var userRulesManagersProvider: UserRulesManagersProviderProtocol { get }
     var cbStorage: ContentBlockersInfoStorage { get }
@@ -27,7 +27,7 @@ protocol ServiceLocatorProtocol {
     var converter: FiltersConverterServiceProtocol { get }
 }
 
-final class ServiceLocator: ServiceLocatorProtocol {
+final class ServicesStorage: ServicesStorageProtocol {
     
     let configuration: ConfigurationProtocol
     let userRulesManagersProvider: UserRulesManagersProviderProtocol

@@ -64,7 +64,7 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
         }
     }
     
-    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        onResetFinished(nil)
+    func reset() throws {
+        
     }
 }

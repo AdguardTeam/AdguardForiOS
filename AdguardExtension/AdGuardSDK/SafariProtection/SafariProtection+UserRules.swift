@@ -18,7 +18,7 @@
 
 import Foundation
 
-public protocol AdGuardSDKMediatorUserRulesProtocol {
+public protocol SafariProtectionUserRulesProtocol {
     /**
      Returns String representation of all enabled rules for specified rules type
      - Parameter type: User rule type (blocklist / allowlist / inverted allowlist)
@@ -82,7 +82,7 @@ public protocol AdGuardSDKMediatorUserRulesProtocol {
     func removeAllRules(for type: UserRuleType, onRulesRemoved: @escaping (_ error: Error?) -> Void)
 }
 
-extension AdGuardSDKMediator {
+extension SafariProtection {
     
     // MARK: - Public methods
     
