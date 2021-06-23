@@ -21,10 +21,12 @@ import Foundation
 
 public enum CommonError: Error, CustomDebugStringConvertible {
     case missingSelf
+    case missingData
     
     public var debugDescription: String {
         switch self {
         case .missingSelf: return "self object is nil"
+        case .missingData: return "The required data is missing"
         }
     }
 }

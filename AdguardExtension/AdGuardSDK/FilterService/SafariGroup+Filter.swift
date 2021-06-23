@@ -32,7 +32,7 @@ public protocol SafariFilterProtocol {
     var homePage: String? { get } // Filter's homepage. It's just a link to somewhere
     var filterDownloadPage: String? { get } // The link we should download filter from
     var filterId: Int { get } // Filter's unique identifier. It is different for every filter
-    var group: SafariGroupProtocol { get } // Group the filter is related to
+    var group: GroupMetaProtocol { get } // Group the filter is related to
     var displayNumber: Int { get } // It's an order that filters will be displayed in. A filter with the lowest one will be dispalyed first
     var languages: [String] { get } // Languages that filter is related to
     var tags: [ExtendedFiltersMeta.Tag] { get } // Some tags that filters can be grouped by
@@ -48,7 +48,7 @@ public extension SafariGroup {
         public let version: String?
         public let lastUpdateDate: Date?
         public let updateFrequency: Int?
-        public let group: SafariGroupProtocol
+        public let group: GroupMetaProtocol
         public let displayNumber: Int
         public let languages: [String]
         public let tags: [ExtendedFiltersMeta.Tag]
@@ -58,7 +58,7 @@ public extension SafariGroup {
         
         // MARK: - Initialization
         
-        init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: SafariGroupProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int?) {
+        init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int?) {
             self.name = name
             self.description = description
             self.isEnabled = isEnabled
@@ -75,7 +75,7 @@ public extension SafariGroup {
             self.rulesCount = rulesCount
         }
         
-        init(dbFilter: FiltersTable, group: SafariGroupProtocol, rulesCount: Int?, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
+        init(dbFilter: FiltersTable, group: GroupMetaProtocol, rulesCount: Int?, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
             self.name = dbFilter.name
             self.description = dbFilter.description
             self.isEnabled = dbFilter.isEnabled
@@ -92,7 +92,7 @@ public extension SafariGroup {
             self.rulesCount = rulesCount
         }
         
-        init(customFilter: ExtendedCustomFilterMetaProtocol, filterId: Int, isEnabled: Bool, group: SafariGroupProtocol, displayNumber: Int) {
+        init(customFilter: ExtendedCustomFilterMetaProtocol, filterId: Int, isEnabled: Bool, group: GroupMetaProtocol, displayNumber: Int) {
             self.name = customFilter.name
             self.description = customFilter.description
             self.filterId = filterId

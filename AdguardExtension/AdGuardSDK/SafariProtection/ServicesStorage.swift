@@ -20,6 +20,7 @@ import Foundation
 
 protocol ServicesStorageProtocol {
     var configuration: ConfigurationProtocol { get }
+    var userDefaults: UserDefaultsStorageProtocol { get }
     var userRulesManagersProvider: UserRulesManagersProviderProtocol { get }
     var cbStorage: ContentBlockersInfoStorage { get }
     var cbService: ContentBlockerServiceProtocol { get }
@@ -30,6 +31,7 @@ protocol ServicesStorageProtocol {
 final class ServicesStorage: ServicesStorageProtocol {
     
     let configuration: ConfigurationProtocol
+    let userDefaults: UserDefaultsStorageProtocol
     let userRulesManagersProvider: UserRulesManagersProviderProtocol
     let cbStorage: ContentBlockersInfoStorage
     let cbService: ContentBlockerServiceProtocol
@@ -45,15 +47,16 @@ final class ServicesStorage: ServicesStorageProtocol {
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: dbContainerUrl)
         let metaStorage = MetaStorage(productionDbManager: productionDbManager)
-        let userDefaults = UserDefaultsStorage(storage: userDefaults)
         let httpRequests = HttpRequestService()
+        
+        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
         
         self.configuration = configuration
         
-        self.userRulesManagersProvider = UserRulesManagersProvider(userDefaultsStorage: userDefaults)
+        self.userRulesManagersProvider = UserRulesManagersProvider(userDefaultsStorage: self.userDefaults)
         
         self.cbStorage = try ContentBlockersInfoStorage(jsonStorageUrl: jsonStorageUrl,
-                                                        userDefaultsStorage: userDefaults)
+                                                        userDefaultsStorage: self.userDefaults)
         
         self.cbService = ContentBlockerService(configuration: self.configuration,
                                                jsonStorage: self.cbStorage)
@@ -61,8 +64,8 @@ final class ServicesStorage: ServicesStorageProtocol {
         self.filters = try FiltersService(configuration: self.configuration,
                                           filterFilesStorage: filterFilesStorage,
                                           metaStorage: metaStorage,
-                                      userDefaultsStorage: userDefaults,
-                                      httpRequestService: httpRequests)
+                                          userDefaultsStorage: self.userDefaults,
+                                          httpRequestService: httpRequests)
         
         self.converter = FiltersConverterService(configuration: self.configuration,
                                                  filtersService: self.filters,

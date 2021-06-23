@@ -106,7 +106,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+UserRules) - addRule; self is missing!")
-                onRuleAdded(CommonError.missingSelf)
+                DispatchQueue.main.async { onRuleAdded(CommonError.missingSelf) }
                 return
             }
             
@@ -118,7 +118,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - addRule.onCbReloaded; self is missing!")
-                    onRuleAdded(CommonError.missingSelf)
+                    DispatchQueue.main.async { onRuleAdded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -136,7 +136,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+UserRules) - addRules; self is missing!")
-                onRulesAdded(CommonError.missingSelf)
+                DispatchQueue.main.async { onRulesAdded(CommonError.missingSelf) }
                 return
             }
             
@@ -147,7 +147,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - addRules.onCbReloaded; self is missing!")
-                    onRulesAdded(CommonError.missingSelf)
+                    DispatchQueue.main.async { onRulesAdded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -165,7 +165,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+UserRules) - modifyRule; self is missing!")
-                onRuleModified(CommonError.missingSelf)
+                DispatchQueue.main.async { onRuleModified(CommonError.missingSelf) }
                 return
             }
             
@@ -176,7 +176,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - modifyRule.onCbReloaded; self is missing!")
-                    onRuleModified(CommonError.missingSelf)
+                    DispatchQueue.main.async { onRuleModified(CommonError.missingSelf) }
                     return
                 }
                 
@@ -194,7 +194,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+UserRules) - removeRule; self is missing!")
-                onRuleRemoved(CommonError.missingSelf)
+                DispatchQueue.main.async { onRuleRemoved(CommonError.missingSelf) }
                 return
             }
             
@@ -205,7 +205,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeRule.onCbReloaded; self is missing!")
-                    onRuleRemoved(CommonError.missingSelf)
+                    DispatchQueue.main.async { onRuleRemoved(CommonError.missingSelf) }
                     return
                 }
                 
@@ -223,7 +223,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+UserRules) - removeAllRules; self is missing!")
-                onRulesRemoved(CommonError.missingSelf)
+                DispatchQueue.main.async { onRulesRemoved(CommonError.missingSelf) }
                 return
             }
             
@@ -234,7 +234,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; self is missing!")
-                    onRulesRemoved(CommonError.missingSelf)
+                    DispatchQueue.main.async { onRulesRemoved(CommonError.missingSelf) }
                     return
                 }
                 

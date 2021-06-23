@@ -69,7 +69,7 @@ public protocol SafariProtectionFiltersProtocol {
      - Parameter forcibly: ignores update conditions and immediately updates filters
      - Parameter onFiltersUpdated: closure to handle update **error**
      */
-    func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void)
+    func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void)
 }
 
 extension SafariProtection {
@@ -88,7 +88,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - setGroup; self is missing!")
-                onGroupSet(CommonError.missingSelf)
+                DispatchQueue.main.async { onGroupSet(CommonError.missingSelf) }
                 return
             }
             
@@ -98,7 +98,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
-                    onGroupSet(CommonError.missingSelf)
+                    DispatchQueue.main.async { onGroupSet(CommonError.missingSelf) }
                     return
                 }
                 
@@ -116,7 +116,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - setFilter; self is missing!")
-                onFilterSet(CommonError.missingSelf)
+                DispatchQueue.main.async { onFilterSet(CommonError.missingSelf) }
                 return
             }
             
@@ -126,7 +126,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
-                    onFilterSet(CommonError.missingSelf)
+                    DispatchQueue.main.async { onFilterSet(CommonError.missingSelf) }
                     return
                 }
                 
@@ -144,7 +144,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - addCustomFilter; self is missing!")
-                onFilterAdded(CommonError.missingSelf)
+                DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
                 return
             }
             
@@ -167,7 +167,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - addCustomFilter.reloadContentBlockers; self is missing!")
-                    onFilterAdded(CommonError.missingSelf)
+                    DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -185,7 +185,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - deleteCustomFilter; self is missing!")
-                onFilterDeleted(CommonError.missingSelf)
+                DispatchQueue.main.async { onFilterDeleted(CommonError.missingSelf) }
                 return
             }
             
@@ -195,7 +195,7 @@ extension SafariProtection {
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")
-                    onFilterDeleted(CommonError.missingSelf)
+                    DispatchQueue.main.async { onFilterDeleted(CommonError.missingSelf) }
                     return
                 }
                 
@@ -221,38 +221,46 @@ extension SafariProtection {
         }
     }
     
-    public func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Error?) -> Void) {
+    public func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; self is missing!")
-                onFiltersUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
                 return
             }
             
             Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly)")
             
-            self.filters.updateAllMeta(forcibly: forcibly) { [weak self] error in
+            self.filters.updateAllMeta(forcibly: forcibly) { [weak self] result in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.updateAllMeta; self is missing!")
-                    onFiltersUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
                     return
                 }
                 
                 self.workingQueue.sync {
                     
-                    if let error = error {
-                        Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly) failed with error: \(error)")
-                        self.completionQueue.async { onFiltersUpdated(error) }
-                        return
-                    }
-                    
-                    self.reloadContentBlockers { error in
+                    self.reloadContentBlockers { [weak self] error in
+                        guard let self = self else {
+                            Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.reloadContentBlockers; self is missing!")
+                            DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
+                            return
+                        }
+                        
                         if let error = error {
                             Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
+                            self.completionQueue.async { onFiltersUpdated(.error(error)) }
                         } else {
                             Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
                         }
-                        onFiltersUpdated(error)
+                        
+                        switch result {
+                        case .success(var filtersUpdateResult):
+                            filtersUpdateResult.error = error
+                            self.completionQueue.async { onFiltersUpdated(.success(filtersUpdateResult)) }
+                        case .error(let updateError):
+                            self.completionQueue.async { onFiltersUpdated(.error(updateError)) }
+                        }
                     }
                 }
             }

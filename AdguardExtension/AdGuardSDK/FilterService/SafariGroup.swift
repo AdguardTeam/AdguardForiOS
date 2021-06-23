@@ -27,8 +27,6 @@ public protocol SafariGroupProtocol: GroupMetaProtocol {
     var filters: [SafariFilterProtocol] { get } // Filters that belong to this group
     var isEnabled: Bool { get set } // State of the group. If group is disabled we won't use it's filters
     var groupType: SafariGroup.GroupType { get } // Type of the group. We use it when sending filters to the Content Blockers and some other operations
-    var groupName: String { get } // It's just a group name
-    var displayNumber: Int { get } // It's an order that groups will be displayed in. A group with the lowest one will be dispalyed first
 }
 
 public struct SafariGroup: SafariGroupProtocol {

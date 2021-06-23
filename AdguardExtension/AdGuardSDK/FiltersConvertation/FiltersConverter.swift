@@ -1,6 +1,20 @@
 import Foundation
 @_implementationOnly import ContentBlockerConverter
 
+// MARK: - FilterFileContent
+
+struct FilterFileContent: Equatable {
+    let text: String
+    let lines: [String]
+    let group: SafariGroup.GroupType
+    
+    init(text: String, group: SafariGroup.GroupType) {
+        self.text = text
+        self.lines = text.components(separatedBy: .newlines)
+        self.group = group
+    }
+}
+
 // MARK: - ContentBlockerConverterWrapper
 
 /*

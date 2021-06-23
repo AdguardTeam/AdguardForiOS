@@ -84,7 +84,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Configuration) - update proStatus; self is missing!")
-                onProStatusUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onProStatusUpdated(CommonError.missingSelf) }
                 return
             }
             
@@ -99,7 +99,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.proStatus.reloadContentBlockers; self is missing!")
-                    onProStatusUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onProStatusUpdated(CommonError.missingSelf) }
                     return
                 }
                 
@@ -117,7 +117,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Configuration) - update.safariProtection; self is missing!")
-                onSafariProtectionStateUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onSafariProtectionStateUpdated(CommonError.missingSelf) }
                 return
             }
             
@@ -132,7 +132,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.safariProtection.reloadContentBlockers; self is missing!")
-                    onSafariProtectionStateUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onSafariProtectionStateUpdated(CommonError.missingSelf) }
                     return
                 }
                 
@@ -150,7 +150,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Configuration) - update.blocklistIsEnabled; self is missing!")
-                onBlocklistStateUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onBlocklistStateUpdated(CommonError.missingSelf) }
                 return
             }
             
@@ -165,7 +165,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.blocklistIsEnabled.reloadContentBlockers; self is missing!")
-                    onBlocklistStateUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onBlocklistStateUpdated(CommonError.missingSelf) }
                     return
                 }
                 
@@ -183,7 +183,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnbaled; self is missing!")
-                onAllowlistStateUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onAllowlistStateUpdated(CommonError.missingSelf) }
                 return
             }
             
@@ -197,7 +197,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnbaled.reloadContentBlockers; self is missing!")
-                    onAllowlistStateUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onAllowlistStateUpdated(CommonError.missingSelf) }
                     return
                 }
                 
@@ -215,7 +215,7 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Configuration) - update.allowlistIsInverted; self is missing!")
-                onInvertionStateUpdated(CommonError.missingSelf)
+                DispatchQueue.main.async { onInvertionStateUpdated(CommonError.missingSelf) }
                 return
             }
             
@@ -230,7 +230,7 @@ extension SafariProtection {
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.allowlistIsInverted.reloadContentBlockers; self is missing!")
-                    onInvertionStateUpdated(CommonError.missingSelf)
+                    DispatchQueue.main.async { onInvertionStateUpdated(CommonError.missingSelf) }
                     return
                 }
                 

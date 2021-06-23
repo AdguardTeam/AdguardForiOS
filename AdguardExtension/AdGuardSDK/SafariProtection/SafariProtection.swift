@@ -35,6 +35,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     
     /* Services */
     var configuration: ConfigurationProtocol
+    let userDefaults: UserDefaultsStorageProtocol
     let filters: FiltersServiceProtocol
     let converter: FiltersConverterServiceProtocol
     let cbStorage: ContentBlockersInfoStorage
@@ -69,6 +70,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration.copy
+        self.userDefaults = services.userDefaults
         self.filters = services.filters
         self.converter = services.converter
         self.cbStorage = services.cbStorage
@@ -79,6 +81,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     // Initializer for tests
     init(configuration: ConfigurationProtocol,
          defaultConfiguration: ConfigurationProtocol,
+         userDefaults: UserDefaultsStorageProtocol,
          filters: FiltersServiceProtocol,
          converter: FiltersConverterServiceProtocol,
          cbStorage: ContentBlockersInfoStorage,
@@ -87,6 +90,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     {
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
+        self.userDefaults = userDefaults
         self.filters = filters
         self.converter = converter
         self.cbStorage = cbStorage
@@ -100,14 +104,21 @@ public final class SafariProtection: SafariProtectionProtocol {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection) - reset; self is missing!")
-                onResetFinished(CommonError.missingSelf)
+                DispatchQueue.main.async { onResetFinished(CommonError.missingSelf) }
                 return
             }
             
             Logger.logInfo("(SafariProtection) - reset start")
             
+            // Update filters meta; Ignore it's error and continue to reset
+            let group = DispatchGroup()
+            group.enter()
+            self.filters.reset { _ in
+                group.leave()
+            }
+            group.wait()
+            
             do {
-                try self.filters.reset()
                 Logger.logInfo("(SafariProtection) - reset; filters service was reset")
                 
                 try self.userRulesManagersProvider.reset()
@@ -117,7 +128,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 Logger.logInfo("(SafariProtection) - reset; CB storage was reset")
             } catch {
                 Logger.logError("(SafariProtection) - reset; Error reseting one of the service; Error: \(error)")
-                onResetFinished(error)
+                self.completionQueue.async { onResetFinished(error) }
                 return
             }
             
@@ -129,7 +140,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 } else {
                     Logger.logInfo("(SafariProtection) - reset; Successfully reloaded CB after reset")
                 }
-                onResetFinished(error)
+                self.completionQueue.async { onResetFinished(error) }
             }
         }
     }

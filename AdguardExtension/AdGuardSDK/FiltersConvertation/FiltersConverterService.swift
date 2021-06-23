@@ -82,7 +82,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         }
         .flatMap { $0.filters }
         .filter { $0.isEnabled }
-        .map { ($0.filterId, $0.group.groupType) }
+        .map { ($0.filterId, SafariGroup.GroupType(rawValue: $0.group.groupId)!) }
         
         // Get active filters file's text
         let filesContent: [FilterFileContent] = activeFiltersInfo.compactMap {
