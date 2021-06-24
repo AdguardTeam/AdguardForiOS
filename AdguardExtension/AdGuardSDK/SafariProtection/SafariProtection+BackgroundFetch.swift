@@ -20,11 +20,36 @@ import Foundation
 import UIKit.UIBackgroundConfiguration
 
 public protocol SafariProtectionBackgroundFetchProtocol {
+    /**
+     Updates filters while background fetch is active
+     The process of filters update while app is in the background is rather complex
+     We have 30 seconds to download all filters content, update filters and localizations and reload all content blockers
+     If that huge process of update is run at once there is a big chance to fail an update
+     If we fail an update the OS can ban our background fethces and we will be unable to update filters in background
+     To avoid this ban we've devided an update process into 3 sequential steps:
+     1. Update filters content, meta and localizations
+     2. Convert new filters to JSON files for Safari Content Blockers
+     3. Reload Safari Content Blockers with newely converted rules
+     With this approach, the chances of a successful background fetch increases
+     */
     func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void)
+    
+    /**
+     This method is neede to finish the update process that did start in the background
+     
+     For example:
+        The background update did complete 2 out of 3 steps.
+        To provide user with the latest data we should finish the update and complete the 3rd step
+     Note:
+        If background update did already finished successfully this method will do nothing
+     
+     The method should be called on the app start in **didFinishLaunchingWithOptions**
+     */
     func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void)
 }
 
-extension SafariProtection: SafariProtectionBackgroundFetchProtocol {
+/* Extension is used to update filters while main app is in the background */
+extension SafariProtection {
     
     fileprivate enum BackgroundFetchState: Int, CustomDebugStringConvertible {
         case loadAndSaveFilters
@@ -50,6 +75,8 @@ extension SafariProtection: SafariProtectionBackgroundFetchProtocol {
             userDefaults.currentBackgroundFetchState = newValue
         }
     }
+    
+    // MARK: - Public methods
     
     public func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
         Logger.logError("(SafariProtection+BackgroundFetch) - updateSafariProtectionInBackground; Start background fetch, current state = \(currentBackgroundFetchState)")
@@ -95,6 +122,7 @@ extension SafariProtection: SafariProtectionBackgroundFetchProtocol {
     
     // MARK: - Private methods
     
+    // 1st step of background update
     private func updateFilters(inBackground background: Bool, _ onFiltersUpdated: @escaping (_ result: UIBackgroundFetchResult, _ error: Error?) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - updateFiltersInBackground start; background=\(background)")
         
@@ -113,6 +141,7 @@ extension SafariProtection: SafariProtectionBackgroundFetchProtocol {
         }
     }
     
+    // 2nd step of background update
     private func convertFilters(inBackground background: Bool) -> (UIBackgroundFetchResult, Error?) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFiltersInBackground start; background=\(background)")
         
@@ -131,6 +160,7 @@ extension SafariProtection: SafariProtectionBackgroundFetchProtocol {
         }
     }
     
+    // 3rd step of background update
     private func reloadContentBlockers(inBackground background: Bool, _ onCbReloaded: @escaping (_ result: UIBackgroundFetchResult, _ error: Error?) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - reloadContentBlockersInBackground start")
         

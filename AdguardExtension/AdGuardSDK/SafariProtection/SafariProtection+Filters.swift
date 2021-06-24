@@ -72,6 +72,7 @@ public protocol SafariProtectionFiltersProtocol {
     func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void)
 }
 
+/* Extension is used to interact with filters and groups object and properly process operations with them */
 extension SafariProtection {
     
     // MARK: - Public variables

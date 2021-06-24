@@ -29,6 +29,7 @@ public protocol SafariProtectionContentBlockersProtocol {
     func getState(for cbType: ContentBlockerType) -> Bool
 }
 
+/* Extension is used get information about Safari Content Blockers and JSON files they use */
 extension SafariProtection {
     public var allContentBlockersStates: [ContentBlockerType : Bool] {
         return workingQueue.sync { return cbService.allContentBlockersStates }

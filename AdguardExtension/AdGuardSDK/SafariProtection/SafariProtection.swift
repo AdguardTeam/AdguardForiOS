@@ -22,6 +22,7 @@ public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
                                             & SafariProtectionConfigurationProtocol
                                             & SafariProtectionContentBlockersProtocol
+                                            & SafariProtectionBackgroundFetchProtocol
                                             & ResetableAsyncProtocol
     
 public final class SafariProtection: SafariProtectionProtocol {
@@ -100,6 +101,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     
     // MARK: - Public method
     
+    /* Resets all sdk to default configuration. Deletes all stored filters, filters meta ans user rules */
     public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {

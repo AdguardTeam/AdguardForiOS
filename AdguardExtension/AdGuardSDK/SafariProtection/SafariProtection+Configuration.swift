@@ -18,17 +18,23 @@
 
 import Foundation
 
+/*  Application user configuration */
 public protocol SafariProtectionConfigurationProtocol {
-    // Application user configuration
-    
+        
     /* Shows if user has Premium app version */
     var proStatus: Bool { get }
     
+    /* State of the whole Safari protection. If it is false nothing will be filtered */
     var safariProtectionEnabled: Bool { get }
+    
+    /* State of the list that is responsible for blocking rules. In UI it is called User rules */
     var blocklistIsEnabled: Bool { get }
+    
+    /* State of the list that is responsible for the rules that cancel blocklist rules actions */
     var allowlistIsEnbaled: Bool { get }
+    
+    /* Allowlist rules can be inverted. That means that blocklist rules will work on all sites except the sites from the inverted allowlist  */
     var allowlistIsInverted: Bool { get }
-    var updateOverWifiOnly: Bool { get set }
     
     /* Updates pro status in configuration and reloads content blockers */
     func update(proStatus: Bool, onProStatusUpdated: @escaping (_ error: Error?) -> Void)
@@ -46,6 +52,7 @@ public protocol SafariProtectionConfigurationProtocol {
     func update(allowlistIsInverted: Bool, onInvertionStateUpdated: @escaping (_ error: Error?) -> Void)
 }
 
+/* Extension is used to properly process all configuration changes */
 extension SafariProtection {
     public var proStatus: Bool {
         return workingQueue.sync { return configuration.proStatus }
