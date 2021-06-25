@@ -451,15 +451,14 @@ final class FiltersService: FiltersServiceProtocol {
                 try self.metaStorage.add(filter: filter, enabled: false)
                 try self.metaStorage.updateAll(tags: filter.tags, forFilterWithId: filter.filterId)
                 try self.metaStorage.updateAll(langs: filter.languages, forFilterWithId: filter.filterId)
-                Logger.logInfo("(FiltersService) - addFilter; Meta for filter with id=\(filter.filterId) was updated")
+                Logger.logInfo("(FiltersService) - addFilter; Filter with id=\(filter.filterId) was added")
+                onFilterAdded(nil)
             }
             catch {
                 Logger.logError("(FiltersService) - addFilter; Meta for filter with id=\(filter.filterId) wasn't updated. Error: \(error)")
                 onFilterAdded(error)
                 return
             }
-            
-            Logger.logInfo("(FiltersService) - addFilter; Filter with id=\(filter.filterId) was added")
         }
     }
     
@@ -470,7 +469,8 @@ final class FiltersService: FiltersServiceProtocol {
     private func add(filters: [ExtendedFilterMetaProtocol]) -> [Int] {
         Logger.logInfo("(FiltersService) - addFilters; Trying to add \(filters.count) filters")
         
-        var addedFiltersIds: [Int] = []
+        @Atomic var addedFiltersIds: [Int] = []
+        
         let group = DispatchGroup()
         for filter in filters {
             group.enter()
@@ -478,7 +478,7 @@ final class FiltersService: FiltersServiceProtocol {
                 if let error = error {
                     Logger.logError("(FiltersService) - addFilters; Filter with id=\(filter.filterId) wasn't added. Error: \(error)")
                 } else {
-                    addedFiltersIds.append(filter.filterId)
+                    _addedFiltersIds.mutate { $0.append(filter.filterId) }
                 }
                 group.leave()
             }
@@ -569,7 +569,7 @@ final class FiltersService: FiltersServiceProtocol {
         @Atomic var failedFilterIds: Set<Int> = []
         
         let group = DispatchGroup()
-        let allFilters = self.groupsAtomic.flatMap { $0.filters }
+        let allFilters = groupsAtomic.flatMap { $0.filters }
         allFilters.forEach { filter in
             group.enter()
             

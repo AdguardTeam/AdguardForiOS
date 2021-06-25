@@ -4,10 +4,10 @@ final class FiltersServiceMock: FiltersServiceProtocol {
     var groups: [SafariGroup] = []
     
     var updateAllMetaCalled = false
-    var updateAllMetaError: Error?
-    func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (Error?) -> Void) {
+    var updateAllMetaResult: Result<FiltersUpdateResult> = .error(NSError(domain: "test", code: 0, userInfo: nil))
+    func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (Result<FiltersUpdateResult>) -> Void) {
         updateAllMetaCalled = true
-        onFiltersUpdated(updateAllMetaError)
+        onFiltersUpdated(updateAllMetaResult)
     }
     
     var setGroupCalled = false
@@ -53,7 +53,7 @@ final class FiltersServiceMock: FiltersServiceProtocol {
         }
     }
     
-    func reset() throws {
-        
+    func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+        onResetFinished(nil)
     }
 }

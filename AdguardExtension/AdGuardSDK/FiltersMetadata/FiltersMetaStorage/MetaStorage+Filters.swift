@@ -22,7 +22,7 @@ import SQLite
 // MARK: - FiltersMetaStorageProtocol + Filters methods
 
 /* FiltersTable; filters table */
-struct FiltersTable {
+struct FiltersTable: Equatable {
     // Properties from table
     let filterId: Int
     let groupId: Int
@@ -223,7 +223,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
         guard currentFilterVersion != filter.version else { return false }
         
-        // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
+        // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
         let query = FiltersTable.table
                                 .where(FiltersTable.filterId == filter.filterId)
                                 .update(filter.updateSetters)

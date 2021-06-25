@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterGroupsTable; filter_groups table */
-struct FilterGroupsTable {
+struct FilterGroupsTable: Equatable {
     // Properties from table
     let groupId: Int
     let name: String

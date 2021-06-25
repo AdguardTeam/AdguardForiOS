@@ -93,7 +93,6 @@
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
 		246FF85C266A52100061FB2E /* FiltersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF85B266A52100061FB2E /* FiltersServiceTest.swift */; };
 		246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */; };
-		246FF867266A54300061FB2E /* HttpRequestServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */; };
 		247150A2266F73E900A894E8 /* FilterFilesStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247150A1266F73E900A894E8 /* FilterFilesStorageTest.swift */; };
 		247150A4266F8F3C00A894E8 /* MetaStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247150A3266F8F3C00A894E8 /* MetaStorageMock.swift */; };
 		247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
@@ -135,7 +134,6 @@
 		247CB64F2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */; };
 		248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
-		2490DD2C266E7B4B00862EC6 /* SafariFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D048A38025FA50D7008CEC80 /* SafariFilter.swift */; };
 		249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249E10DA2600D187003A5FBD /* URLSchemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5042600A3220047974C /* URLSchemeParser.swift */; };
@@ -660,6 +658,7 @@
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
 		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
 		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
+		7E61EA992685D9E600AACA14 /* RequestSenderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E61EA982685D9E600AACA14 /* RequestSenderMock.swift */; };
 		7E69C4F32655017400EA9DBA /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7E69C4F22655017400EA9DBA /* Zip */; };
 		7E69C4F526550C9300EA9DBA /* MetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4F426550C9300EA9DBA /* MetaStorage+Filters.swift */; };
 		7E69C4F726550C9F00EA9DBA /* MetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69C4F626550C9F00EA9DBA /* MetaStorage+Groups.swift */; };
@@ -3145,7 +3144,6 @@
 		24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		246FF85B266A52100061FB2E /* FiltersServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersServiceTest.swift; sourceTree = "<group>"; };
 		246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFilesStorageMock.swift; sourceTree = "<group>"; };
-		246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestServiceMock.swift; sourceTree = "<group>"; };
 		247150A1266F73E900A894E8 /* FilterFilesStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterFilesStorageTest.swift; sourceTree = "<group>"; };
 		247150A3266F8F3C00A894E8 /* MetaStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaStorageMock.swift; sourceTree = "<group>"; };
 		247432DD261731C00025C7B8 /* UIAlerController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+Style.swift"; sourceTree = "<group>"; };
@@ -3576,6 +3574,7 @@
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
 		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
 		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
+		7E61EA982685D9E600AACA14 /* RequestSenderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSenderMock.swift; sourceTree = "<group>"; };
 		7E69C4F426550C9300EA9DBA /* MetaStorage+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetaStorage+Filters.swift"; sourceTree = "<group>"; };
 		7E69C4F626550C9F00EA9DBA /* MetaStorage+Groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetaStorage+Groups.swift"; sourceTree = "<group>"; };
 		7E69C4F82655109600EA9DBA /* MetaStorage+Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetaStorage+Tags.swift"; sourceTree = "<group>"; };
@@ -4648,12 +4647,12 @@
 				246FF860266A52970061FB2E /* FilterFilesStorageMock.swift */,
 				2437265B2670D424003D8EA5 /* ConfigurationMock.swift */,
 				247150A3266F8F3C00A894E8 /* MetaStorageMock.swift */,
-				246FF866266A54300061FB2E /* HttpRequestServiceMock.swift */,
 				7E072A702678D54600695E85 /* UserDefaultsStorageMock.swift */,
 				7E072A7A2679ED7100695E85 /* FiltersConverterMock.swift */,
 				7E072A7C2679EF8F00695E85 /* FiltersServiceMock.swift */,
 				7E072A802679FE9500695E85 /* UserRulesManagersProviderMock.swift */,
 				7E072A87267A43AA00695E85 /* ContentBlockersInfoStorageMock.swift */,
+				7E61EA982685D9E600AACA14 /* RequestSenderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -8980,7 +8979,6 @@
 				7E69C50A2656617C00EA9DBA /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7E1C3468265290F300A4490E /* DefaultDatabaseManagerTest.swift in Sources */,
 				24D07CAB2669302C0080C862 /* RequestFactory.swift in Sources */,
-				246FF867266A54300061FB2E /* HttpRequestServiceMock.swift in Sources */,
 				7E69C5022656617C00EA9DBA /* MetaStorage+FitlerRules.swift in Sources */,
 				24D07CAA2669300E0080C862 /* NetworkingService-Common.swift in Sources */,
 				2434A3E1265795C4001E5B72 /* GroupsMetaStorageTest.swift in Sources */,
@@ -8993,6 +8991,7 @@
 				7E072A792678E52400695E85 /* AffinityRulesParserTest.swift in Sources */,
 				24D07CA526692EA30080C862 /* NetworkingService.swift in Sources */,
 				7E45F9922682167400BB9DF9 /* SafariProtection+BackgroundFetch.swift in Sources */,
+				7E61EA992685D9E600AACA14 /* RequestSenderMock.swift in Sources */,
 				246FF861266A52970061FB2E /* FilterFilesStorageMock.swift in Sources */,
 				246FF85C266A52100061FB2E /* FiltersServiceTest.swift in Sources */,
 				7EB3E262264D365700C460FA /* ExtendedFiltersMeta.swift in Sources */,
@@ -9003,7 +9002,6 @@
 				24D07CA826692FBD0080C862 /* ParserProtocol.swift in Sources */,
 				7E3D541C264D77EA00169E37 /* ExtendedFiltersMetaLocalizationsTest.swift in Sources */,
 				7E072A86267A293500695E85 /* ContentBlockerServiceTest.swift in Sources */,
-				2490DD2C266E7B4B00862EC6 /* SafariFilter.swift in Sources */,
 				242CD70E2656567D0010A2C0 /* URL+Utils.swift in Sources */,
 				7E33D4B32678A8AE00DD410B /* AllowlistRulesStorage.swift in Sources */,
 				7E33D4B42678A8B000DD410B /* BlocklistRulesStorage.swift in Sources */,

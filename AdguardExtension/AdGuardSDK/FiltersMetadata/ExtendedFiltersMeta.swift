@@ -72,6 +72,12 @@ public struct ExtendedFiltersMeta: Decodable {
         }
         self.filters = decodedFilters
     }
+    
+    init(groups: [GroupMetaProtocol], tags: [Tag], filters: [ExtendedFilterMetaProtocol]) {
+        self.groups = groups
+        self.tags = tags
+        self.filters = filters
+    }
 }
 
 // MARK: - ExtendedFiltersMeta + Meta
